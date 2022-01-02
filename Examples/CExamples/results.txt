@@ -1,0 +1,394 @@
+Tone = S, Period = 150 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = 0, Period = 100 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = S, Period = 150 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = 1, Period = 100 (ms), Magn. = -3.000000 (dB), Lin. Magn. = 11598.629758
+Tone = S, Period = 150 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = 2, Period = 100 (ms), Magn. = -6.000000 (dB), Lin. Magn. = 8211.201042
+Tone = S, Period = 150 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = 3, Period = 100 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = S, Period = 150 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = 4, Period = 100 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = S, Period = 150 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = 5, Period = 100 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = 6, Period = 100 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = 7, Period = 100 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = S, Period = 150 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = 8, Period = 100 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = S, Period = 150 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = 9, Period = 100 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = S, Period = 150 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = A, Period = 100 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = S, Period = 150 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = B, Period = 100 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = S, Period = 150 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = C, Period = 100 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = S, Period = 150 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = D, Period = 100 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = S, Period = 150 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = *, Period = 100 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = S, Period = 150 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = #, Period = 100 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+Tone = S, Period = 150 (ms), Magn. = 0.000000 (dB), Lin. Magn. = 16383.500000
+DTMF signal has been generated
+Please hit <CR> to decode . . .
+.WAV File Info.
+
+Sample rate        : 8000
+Number of samples  : 30800
+Number of channels : 1
+Word length        : 16
+Bytes per sample   : 2
+Data format        : 1
+
+
+.WAV file data. '.' indicates no tone present
+                '-' indicates signal present but not DTMF
+
+Keycode = 64, 40
+(Length 0)
+. Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 13, d
+(Length 11)
+0 Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 64, 40
+(Length 8)
+. Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 0, 0
+(Length 11)
+1 Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 64, 40
+(Length 9)
+. Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 16, 10
+(Length 10)
+- Keycode = 128, 80
+Keycode = 1, 1
+(Length 1)
+2 Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 64, 40
+(Length 8)
+. Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 2, 2
+(Length 11)
+3 Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 64, 40
+(Length 9)
+. Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 4, 4
+(Length 11)
+4 Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 16, 10
+(Length 8)
+- Keycode = 64, 40
+(Length 8)
+. Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 16, 10
+(Length 10)
+- Keycode = 128, 80
+Keycode = 5, 5
+(Length 1)
+5 Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 6, 6
+(Length 8)
+6 Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 8, 8
+(Length 7)
+7 Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 16, 10
+(Length 7)
+- Keycode = 64, 40
+(Length 7)
+. Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 9, 9
+(Length 11)
+8 Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 64, 40
+(Length 8)
+. Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 10, a
+(Length 11)
+9 Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 64, 40
+(Length 9)
+. Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 3, 3
+(Length 11)
+A Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 16, 10
+(Length 8)
+- Keycode = 64, 40
+(Length 8)
+. Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 16, 10
+(Length 10)
+- Keycode = 128, 80
+Keycode = 7, 7
+(Length 1)
+B Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 64, 40
+(Length 8)
+. Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 11, b
+(Length 11)
+C Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 16, 10
+(Length 8)
+- Keycode = 64, 40
+(Length 8)
+. Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 15, f
+(Length 11)
+D Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 64, 40
+(Length 8)
+. Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 16, 10
+(Length 11)
+- Keycode = 128, 80
+Keycode = 12, c
+(Length 1)
+* Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 64, 40
+(Length 7)
+. Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 14, e
+(Length 11)
+# Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 16, 10
+(Length 8)
+- Keycode = 64, 40
+(Length 8)
+. Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+Keycode = 128, 80
+
+
+
+DTMF signal peak magnitude = 32727.000000
+
+
+

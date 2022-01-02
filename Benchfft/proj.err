@@ -1,0 +1,13 @@
+Microsoft (R) C/C++ Optimizing Compiler Version 8.00c    
+Copyright (c) Microsoft Corp 1984-1993. All rights reserved.
+
+benchfft.c
+
+Microsoft (R) Segmented Executable Linker  Version 5.60.220 Sep  9 1994
+Copyright (C) Microsoft Corp 1984-1993.  All rights reserved.
+
+Object Modules [.obj]: benchfft.obj 
+Run File [benchfft.exe]: "benchfft.exe" /noi
+List File [nul.map]: NUL
+Libraries [.lib]: 
+Definitions File [nul.def]: ;

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="SigLibTest">
+</Property><Property Name="Solution File" Value="C:\siglib\Examples\C#Examples\Direct\SigLibTest.sln">
+</Property><Property Name="User Options File" Value="C:\siglib\Examples\C#Examples\Direct\SigLibTest.suo">
+</Property><Property Name="Date" Value="11 December 2009">
+</Property><Property Name="Time" Value="17:54">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="SigLibTest.sln" Description="File successfully backed up as C:\siglib\Examples\C#Examples\Direct\Backup\SigLibTest.sln">
+</Event><Event ErrorLevel="0" Project="" Source="SigLibTest.suo" Description="File successfully backed up as C:\siglib\Examples\C#Examples\Direct\Backup\SigLibTest.suo">
+</Event><Event ErrorLevel="0" Project="SigLibTest" Source="SigLibTest\SigLibTest.csproj" Description="Project file successfully backed up as C:\siglib\Examples\C#Examples\Direct\Backup\SigLibTest\SigLibTest.csproj">
+</Event><Event ErrorLevel="0" Project="SigLibTest" Source="SigLibTest\Program.cs" Description="File successfully backed up as C:\siglib\Examples\C#Examples\Direct\Backup\SigLibTest\Program.cs">
+</Event><Event ErrorLevel="0" Project="SigLibTest" Source="SigLibTest\Properties\AssemblyInfo.cs" Description="File successfully backed up as C:\siglib\Examples\C#Examples\Direct\Backup\SigLibTest\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="SigLibTest" Source="SigLibTest\SigLibTest.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="SigLibTest" Source="SigLibTest\SigLibTest.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="SigLibTest.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="SigLibTest.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="SigLibTest" Source="SigLibTest\SigLibTest.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

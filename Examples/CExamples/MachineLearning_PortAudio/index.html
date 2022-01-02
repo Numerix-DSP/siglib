@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><title>Machine Learning Example</title></head>
+<body style="background-color: rgb(255, 255, 255);">
+<div>
+<table border="0">
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://www.numerix-dsp.com" target="_blank"><img src="../../../WebResources/NumerixLogoSM.JPG" alt="Numerix Web Site" border="0" height="100" width="105"></a></td>
+      <td align="center">&nbsp;</td>
+      <td align="center">
+      <h3><font color="#0000ff" size="3">SigLib Machine Learning Example Programs</font></h3>
+      </td>
+      <td align="center">&nbsp;</td>
+      <td align="center"><a href="https://www.numerix-dsp.com/siglib.html" target="_blank"><img src="../../../WebResources/siglib.gif" alt="SigLib DSP Library Information" border="0" height="49" width="125"></a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+<p style="font-family: Arial;">The files in
+this folder provide examples for the SigLib Artificial Intelligence and Machine Learning functions
+that run in real-time, utilizing <a href="http://portaudio.com/" target="_blank">PortAudio</a> to handle the I/O.</font></p>
+
+<p style="font-family: Arial;">This example is tested on a Raspberry Pi, with a Seeed ReSpeaker 2-Mics Pi HAT.<br>
+The Pi HAT handles both the analog input and is also used to display the detected vibration mode using the onboard LED.<br>
+This code uses the default audio input so will work with any supported Operating System as long as there is a connected microphone.<br>
+</p>
+
+<p style="font-family: Arial;">The model is generated using the example in CExamples/MachingLearning and is
+    provided in the header file weightsFloatMotorMode1_MotorMode2.h<br>
+</p>
+
+  <table style="font-family: Arial;" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td><strong>Source Files&nbsp;</strong></td>
+        <td>&nbsp;</td>
+        <td><strong>Description</strong></td>
+      </tr>
+      <tr>
+        <td><a href="pa_ml.c">pa_ml.c</a>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>Performs inferencing detection of current vibration mode.</td>
+      </tr>
+      <tr>
+        <td><a href="weightsFloatMotorMode1_MotorMode2.h">weightsFloatMotorMode1_MotorMode2.h</a>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>Trained model weights file.</td>
+      </tr>
+      <tr>
+        <td><a href="rbr.sh">rbr.sh</a>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>Shell script for building and execuring the code.</td>
+      </tr>
+      <tr>
+        <td><a href="analog_io.c">analog_io.c</a>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>Analog input support file.</td>
+      </tr>
+      <tr>
+        <td><a href="mic_hat_led_driver.c">mic_hat_led_driver.c</a>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>Mic HAT interface file.</td>
+      </tr>
+   </tbody>
+  </table>
+<br>
+
+<p style="font-family: Arial;">Please also see the example in CExamples/MachineLearning for the offline training and inferencing programs.</p><br>
+
+<hr>
+<table style="font-family: Arial;" border="0" cellspacing="5">
+  <tbody>
+    <tr>
+      <td nowrap="nowrap" valign="top"><a name="contact"></a><font color="#0000ff" size="3"><strong>For further information, please contact :</strong></font><font color="#0000ff" size="2"><strong><br>
+      </strong></font><a href="mailto:numerix@numerix-dsp.com"><img src="../../../WebResources/email.gif" alt="Email Numerix" border="0" height="32" width="32"></a> Email : </font><a href="mailto:numerix@numerix-dsp.com">numerix@numerix-dsp.com
+      </font></a></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td valign="top">
+      <address> <br>
+      </font> </address>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p style="font-family: Arial;">Copyright &#169; 2022, Sigma Numerix Ltd. All rights reserved.<br>
+SigLib and Digital Filter Plus are trademarks of Sigma Numerix Ltd. All
+other trademarks acknowledged.<br>
+Sigma Numerix are continuously increasing the functionality of SigLib
+and reserve the right to alter the product at any time.</font></p>
+</body></html>

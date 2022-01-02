@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><title>Order Analysis Examplesx</title></head>
+
+<body bgcolor="#ffffff">
+<div>
+<table border="0">
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://www.numerix-dsp.com" target="_blank"><font face="Arial" size="2"><img src="../../../WebResources/NumerixLogoSM.JPG" alt="Numerix Web Site" border="0" height="100" width="105"></font></a></td>
+      <td align="center">&nbsp;</td>
+      <td align="center">
+      <h3><font color="#0000ff" face="Arial" size="3">SigLib Order Analysis Example Programs</font></h3>
+      </td>
+      <td align="center"><font size="2">&nbsp;
+      </font></td>
+      <td align="center"><a href="https://www.numerix-dsp.com/siglib.html" target="_blank"><font size="2"><img src="../../../WebResources/siglib.gif" alt="SigLib DSP Library Information" border="0" height="49" width="125"></font></a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<hr style="font-family: Arial;">
+<p style="font-family: Arial;"><font size="2">The
+files in
+this folder provide examples of how to use the order analysis functions</font><font size="2">.</font></p>
+
+<p style="font-family: Arial;"><font size="2">The
+input data
+sequence is taken
+from the files </font><font size="2">"Const.dat"
+</font><font size="2">"Variable.dat"
+</font><font size="2">this data
+is in 2 columns containing magnitude and machine speed (RPM).</font></p>
+
+<p style="font-family: Arial;"><font size="2">The
+batch
+files supplied work with the GCC and Microsoft
+Visual Studio compiler (32 and 64 bit versions supplied)
+however the example programs
+can be built
+using almost any 32 or 64 bit compiler.</font></p>
+
+<table style="font-family: Arial;" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td><strong>Filename&nbsp;</strong></td>
+      <td>&nbsp;</td>
+      <td><strong>Description</strong></td>
+    </tr>
+    <tr>
+      <td><a href="order.c"><font size="2">order.c</font></a><font size="2">&nbsp;</font></td>
+      <td>&nbsp;</td>
+      <td><font size="2">Source file for generating an order plot.</font></td>
+    </tr>
+    <tr>
+      <td><a href="waterfall.c"><font size="2">waterfall.c</font></a><font size="2">&nbsp;</font></td>
+      <td>&nbsp;</td>
+      <td><font size="2">Source file for generating a waterfall plot.</font></td>
+    </tr>
+    <tr>
+      <td><a href="Const.dat"><font size="2">Const.dat</font></a><font size="2">&nbsp;</font></td>
+      <td>&nbsp;</td>
+      <td><font size="2">Constant speed data file</font></td>
+    </tr>
+    <tr>
+      <td><small><a href="Variable.dat">Variable.dat</a></small></td>
+      <td><br>
+</td>
+      <td><small>Variable Speed data file</small></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+<tr>
+      <td colspan="3" rowspan="1"><small><span style="font-weight: bold;">GCC shell scripts for building and
+running test functions</span></small></td>
+    </tr>
+    <tr>
+      <td><small><a href="gb.sh">gb.sh</a></small></td>
+      <td><br>
+</td>
+      <td><font size="2">Batch file to build source file with SigLib using GCC</font></td>
+    </tr>
+    <tr>
+      <td><small><a href="gbrocd.sh">gbrocd.sh</a></small></td>
+      <td><br>
+</td>
+      <td><small>Order plots for constant speed data - dB scaling</small></td>
+    </tr>
+    <tr>
+      <td><small><a href="gbrocl.sh">gbrocl.sh</a></small></td>
+      <td><br>
+</td>
+      <td><small>Order plots for constant speed data&nbsp;- Linear scaling</small></td>
+    </tr>
+    <tr>
+      <td><small><a href="gbroVds.sh">gbroVds.sh</a></small></td>
+      <td><br>
+</td>
+      <td><small>Order plots for variable speed data&nbsp;- dB scaling against speed</small></td>
+    </tr>
+    <tr>
+      <td><small><a href="gbroVdt.sh">gbroVdt.sh</a></small></td>
+      <td><br>
+</td>
+      <td><small>Order plots for variable speed data&nbsp;- dB scaling&nbsp;against time</small></td>
+    </tr>
+    <tr>
+      <td><small><a href="gbroVS.sh">gbroVS.sh</a></small></td>
+      <td><br>
+</td>
+      <td><small>Spectrogram plot for variable speed data - dB scaling</small></td>
+    </tr>
+        <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+<tr>
+
+      <td colspan="3" rowspan="1"><small><span style="font-weight: bold;">Microsoft Batch files for building and
+running test functions</span></small></td>
+    </tr>
+    <tr>
+      <td><small><a href="mb.bat">mb.bat</a></small></td>
+      <td><br>
+</td>
+      <td><font size="2">Batch file to build source file with SigLib using Microsoft Compiler</font></td>
+    </tr>
+    <tr>
+      <td><small><a href="mbrocd.bat">mbrocd.bat</a></small></td>
+      <td><br>
+</td>
+
+      <td><small>Order plots for constant speed data - dB scaling</small></td>
+    </tr>
+    <tr>
+      <td><small><a href="mbrocl.bat">mbrocl.bat</a></small></td>
+      <td><br>
+</td>
+      <td><small>Order plots for constant speed data&nbsp;- Linear scaling</small></td>
+    </tr>
+    <tr>
+      <td><small><a href="mbroVds.bat">mbroVds.bat</a></small></td>
+      <td><br>
+</td>
+      <td><small>Order plots for variable speed data&nbsp;- dB scaling against speed</small></td>
+    </tr>
+    <tr>
+      <td><small><a href="mbroVdt.bat">mbroVdt.bat</a></small></td>
+      <td><br>
+</td>
+
+      <td><small>Order plots for variable speed data&nbsp;- dB scaling&nbsp;against time</small></td>
+    </tr>
+    <tr>
+      <td><small><a href="mbroVS.bat">mbroVS.bat</a></small></td>
+      <td><br>
+</td>
+      <td><small>Spectrogram plot for variable speed data - dB scaling</small></td>
+    </tr><tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr style="font-family: Arial;">
+<table style="font-family: Arial;" border="0" cellspacing="5">
+  <tbody>
+    <tr>
+      <td nowrap="nowrap" valign="top"><a name="contact"></a><font color="#0000ff" size="3"><strong>For further information, please contact :</strong></font><font color="#0000ff" size="2"><strong><br>
+      </strong></font><a href="mailto:numerix@numerix-dsp.com"><font size="2"><img src="../../../WebResources/email.gif" alt="Email Numerix" border="0" height="32" width="32"></font></a><font size="2"> Email : </font><a href="mailto:numerix@numerix-dsp.com"><font size="2">numerix@numerix-dsp.com
+      </font></a></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td valign="top"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><font face="Arial" size="2">Copyright &#169; 2022, Sigma Numerix Ltd. All rights reserved.<br>
+SigLib and Digital Filter Plus are trademarks of Sigma Numerix Ltd. All
+other trademarks acknowledged.<br>
+Sigma Numerix are continuously increasing the functionality of SigLib
+and reserve the right to alter the product at any time.</font></p>
+
+</body></html>

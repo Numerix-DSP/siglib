@@ -1,0 +1,49 @@
+.SYSTEM		Example_ADSP21060_Architecture;
+! Allocates:
+!         Internal 128 words of run-time header in memory bank 0
+!                  6K -128 words of initialization code in memory bank 0
+!                  10K of code in memory bank 0
+!                  40K of data in memory bank 0
+!                  32K of data in memory bank 1
+!                  16K of heap in memory bank 1
+!                  16K of stack in memory bank 1
+!
+!         External 16K of external code
+!                  16K of external data
+!
+!	Modified for SigLib, with more on-chip program space
+!	Lines : 27 and 30
+!	and internal memory C Heap space
+!
+
+.PROCESSOR = ADSP21060;
+
+!	128 48 bit words of internal code in bank 0
+.SEGMENT/RAM/BEGIN = 0x00020000 /END = 0x0002007f /PM		seg_rth;
+
+!	6K-128 48 bit words of initialization code in bank 0
+.SEGMENT/RAM/BEGIN = 0x00020080 /END = 0x000217ff /PM		seg_init;
+
+!	14K 48 bit words of internal code in bank 0
+.SEGMENT/RAM/BEGIN = 0x00021800 /END = 0x00024fff /PM		seg_pmco;
+
+!	36K 32 bit words of internal data in bank 0
+.SEGMENT/RAM/BEGIN = 0x00025000 /END = 0x0002ffff /PM		seg_pmda;
+
+!	32K 32 bit words of internal data in bank 1
+.SEGMENT/RAM/BEGIN = 0x00030000 /END = 0x00037fff /DM		seg_dmda;
+
+!	16K 32 bit words of internal heap in bank 1
+.SEGMENT/RAM/BEGIN = 0x00038000 /END = 0x0003bfff /DM /CHEAP	seg_heap;
+
+!	16K 32 bit words of internal stack in bank 1
+.SEGMENT/RAM/BEGIN = 0x0003c000 /END = 0x0003ffff /DM		seg_stak;
+
+
+!       16K 48 bit words of external code
+.SEGMENT/RAM/BEGIN = 0x00400000 /END = 0x00403fff /PM   	extcode; 
+
+!       16K 48 bit words of external code
+.SEGMENT/RAM/BEGIN = 0x00404000 /END = 0x0040ffff /DM   	extdata;
+
+.ENDSYS;

@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><title>Machine Learning Example</title></head>
+<body style="background-color: rgb(255, 255, 255);">
+<div>
+<table border="0">
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://www.numerix-dsp.com" target="_blank"><img src="../../../WebResources/NumerixLogoSM.JPG" alt="Numerix Web Site" border="0" height="100" width="105"></a></td>
+      <td align="center">&nbsp;</td>
+      <td align="center">
+      <h3><font color="#0000ff" size="3">SigLib Machine Learning Example Programs</font></h3>
+      </td>
+      <td align="center">&nbsp;</td>
+      <td align="center"><a href="https://www.numerix-dsp.com/siglib.html" target="_blank"><img src="../../../WebResources/siglib.gif" alt="SigLib DSP Library Information" border="0" height="49" width="125"></a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<br>
+<p style="font-family: Arial;">The files in
+this folder provide examples for the SigLib Artificial Intelligence and Machine Learning functions.
+The examples include programs to:<br>
+<blockquote>
+<ul class="simple" style="font-family: Arial;">
+<li>Pre-process audio from the time domain to the frequency domain and
+split this into training and validation sets.</li>
+<li>Train a 3 layer Neural Network using the training data from step 1.</li>
+<li>Validate the trained Neural Network by using the validation data from step 1.</li>
+</ul>
+</blockquote>
+</p>
+
+<p style="font-family: Arial;">The main SigLib functions implement two-layer convolutional neural networks:<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;SDA_TwoLayer2CategoryNetworkFit()<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;SDA_TwoLayer2CategoryNetworkPredict()<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;SDA_TwoLayerNCategoryNetworkFit()<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;SDA_TwoLayerNCategoryNetworkPredict()<br>
+</p>
+<p style="font-family: Arial;">The input data for the training and validation programs is provided in the folder "sourceData".
+These files are recorded at 16 kHz but the algorithms are independent of sample rate.
+The only requirement is that the training and validation data sets are recorded at the same sample rate.
+</p>
+
+<p style="font-family: Arial;">These eexamples are provided for the Microsoft Visual C/C++ and GCC compilers.
+For graphical result display they use Gnuplot/C, which is included in the SigLib download pachage.
+</p>
+
+  <table style="font-family: Arial;" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td><strong>Source Files&nbsp;</strong></td>
+        <td>&nbsp;</td>
+        <td><strong>Description</strong></td>
+      </tr>
+      <tr>
+        <td><a href="preprocess_wav.c">preprocess_wav.c</a>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>Performs time domain and frequency domain pre-processing of source .wav files</td>
+      </tr>
+      <tr>
+        <td><a href="network_train_multi_category.c">network_train_multi_category.c</a>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>Train the multi-category neural network</td>
+      </tr>
+      <tr>
+        <td><a href="network_validate_multi_category.c">network_validate_multi_category.c</a>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>Validate the multi-category neural network</td>
+      </tr>
+      <tr>
+        <td><a href="network_train_single_category.c">network_train_single_category.c</a>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>Train the single-category neural network</td>
+      </tr>
+      <tr>
+        <td><a href="network_validate_single_category.c">network_validate_single_category.c</a>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>Validate the single-category neural network</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td style="height: 30px;"><strong>Build Scripts&nbsp;</strong></td>
+      </tr>
+      <tr>
+        <td><a href="gbr_multi_category.sh">gbr_multi_category.sh</a>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>Shell script to build and run multi category training and validation, with GCC</td>
+      </tr>
+      <tr>
+        <td><a href="gbr_single_category.sh">gbr_single_category.sh</a>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>Shell script to build and run single category training and validation, with GCC</td>
+      </tr>
+      <tr>
+        <td><a href="gbr_single_category_all.sh">gbr_single_category_all.sh</a>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>Shell script to build and run single category training and validation, with additional scatter diagram, with GCC</td>
+      </tr>
+      <tr>
+        <td><a href="gbr_single_category_all_with_scatter_diagrams.sh">gbr_single_category_all_with_scatter_diagrams.sh</a>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>Shell script to build and run single category training and validation, with additional scatter diagram, with GCC</td>
+      </tr>
+      <tr>
+        <td><a href="mbr_multi_category.bat">mbr_multi_category.bat</a>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>Batch file to build and run multi category training and validation, with Microsoft Visual C/C++ compiler</td>
+      </tr>
+      <tr>
+        <td><a href="mbr_single_category.bat">mbr_single_category.bat</a>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>Batch file to build and run single category training and validation, with Microsoft Visual C/C++ compiler</td>
+      </tr>
+      <tr>
+        <td><a href="mbr_single_category_all_with_scatter_diagrams.bat">mbr_single_category_all_with_scatter_diagrams.bat</a>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>Batch file to build and run single category training and validation, with additional scatter diagram, with Microsoft Visual C/C++ compiler</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+
+<h2>Algorithm Details</h2>
+<p style="font-family: Arial;">The algorithm uses a 3 layer Neural Network, to classify acoustic signals
+and compare two signals to each other. The supplied programs demonstrate
+the following 4 operations:</p>
+<ul class="simple" style="font-family: Arial;">
+<li>preprocess_wav: Read in the source .wav files (from the &quot;Original&quot;
+folder) and perform 256 point FFT pre-processing. This program processes
+the data and writes it to the training and validation .csv files in the
+&quot;PreProcessed&quot; folder.</li>
+<li>The pre-processed training and validation files can now be combined to
+perform the required files for training and validation (Tdata.csv and
+Vdata.csv). This is performed in the top level script &quot;process&quot; (append
+the appropriate extension, .bat/.sh for Windows/Linux).</li>
+<li>network_train: Train the network with the waveforms supplied in
+Tdata.csv and generates the weight coefficient files and stores them in
+the &quot;WeightCoefficientsFiles&quot; folder. The weight coefficient files are
+stored in compressed binary format and C/C++ includable header file
+format.</li>
+<li>network_validate: This program uses Vdata.csv to classify the
+waveforms and, using the validation parameter in the spreadsheet it is
+possible to validate the success rate of the classification.</li>
+</ul>
+
+<h2>Validating The Results</h2>
+<p style="font-family: Arial;">When the examples are executed, the validation application will print
+progress and also the final model accuracy, for example:</p>
+<p style="font-family: 'Courier New', Courier, monospace;">
+Model accuracy: 100.00%
+</p>
+
+<h2>Audio Source Format</h2>
+<p style="font-family: Arial;">The audio sources are stored in mono 16 bit .wav files in the &quot;Original&quot;
+folder.</p>
+<p style="font-family: Arial;">The algorithms are currently optimized for 48 kHz sample rate.<br>
+New files can be added to this folder and the Linux script will
+automatically pre-process all the files when pre-processing is enabled.
+Under windows the new files will need to be added to the batch files
+process_all.bat or process_all_with_graph.bat.<br>
+The audio magnitude is not a critical parameter because the algorithm
+normalized the magnitudes prior to the Window and FFT operation. Each
+recording should be a minimum of about 5 minutes of recording, to allow
+sufficient audio for training and validation.</p>
+
+<h2>Provided Examples</h2>
+<p style="font-family: Arial;">The demonstration includes some pre-recorded .wav files (Motor1.wav to
+Motor4.wav), from a selection of A.C. Motors, for classifying the
+different vibration modes. These files include each mode recorded with
+the motor running at different speeds so that the classifier works
+across a range of motor speeds:</p>
+
+<h2>Using The Examples</h2>
+<p style="font-family: Arial;">To execute the Linux shell scripts, start with the following commands:</p>
+<blockquote>
+<ul class="simple" style="font-family: 'Courier New', Courier, monospace;">
+<li>./gbr_single_category.sh -C -p -g -s -m</li>
+<li>./gbr_multi_category.sh -C -p -g -s -m</li>
+</ul>
+</blockquote>
+<p style="font-family: Arial;">Note, the shell scripts and the executable programs all provide built
+in help, using the -h command line option.<br>
+All of the parameters can be adjusted to suit the desired application
+however great care must be taken with this because changing the configuration of the pre-processor or the
+neural network can break the system.
+</p>
+
+<h2>Appendix - Scatter Diagram Introduction</h2>
+<p style="font-family: Arial;">The following image shows a Scatter Diagram, where the x-axis represents
+the true output. Source #0 is the audio from Machine1 and source #1 is
+from a Machine2. The y-axis shows the activation, or confidence,
+that the network has correctly classified the sound.<br>
+The diagram is showing that even after a single training epoch, the
+Neural Network has a very high confidence of differentiating between the
+two machines, the decision boundary being at the 0.5 level, as
+highlighted by the blue line. This results in a Model accuracy of 100%.</p>
+<img alt="images/ScatterDiagram_2.png" class="align-left" src="images/ScatterDiagram_2.png" />
+
+<p style="font-family: Arial;">Please also see the example in CExamples/MachineLearning_PortAudio for a real-time example
+that uses PortAudio for the analog I/O.</p><br>
+
+<hr>
+<table style="font-family: Arial;" border="0" cellspacing="5">
+  <tbody>
+    <tr>
+      <td nowrap="nowrap" valign="top"><a name="contact"></a><font color="#0000ff" size="3"><strong>For further information, please contact :</strong></font><font color="#0000ff" size="2"><strong><br>
+      </strong></font><a href="mailto:numerix@numerix-dsp.com"><img src="../../../WebResources/email.gif" alt="Email Numerix" border="0" height="32" width="32"></a> Email : </font><a href="mailto:numerix@numerix-dsp.com">numerix@numerix-dsp.com
+      </font></a></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td valign="top">
+      <address> <br>
+      </font> </address>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p style="font-family: Arial;">Copyright © 2022, Sigma Numerix Ltd.<br>
+SigLib and Digital Filter Plus are trademarks of Sigma Numerix Ltd. All
+other trademarks acknowledged.<br>
+Sigma Numerix are continuously increasing the functionality of SigLib
+and reserve the right to alter the product at any time.</font></p>
+</body></html>

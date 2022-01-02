@@ -1,0 +1,585 @@
+# Microsoft eMbedded Visual Tools Project File - Name="ce_static_library_emulator" - Package Owner=<4>
+# Microsoft eMbedded Visual Tools Generated Build File, Format Version 6.02
+# ** DO NOT EDIT **
+
+# TARGTYPE "Win32 (WCE emulator) Static Library" 0xa604
+
+CFG=ce_static_library_emulator - Win32 (WCE emulator) Debug
+!MESSAGE This is not a valid makefile. To build this project using NMAKE,
+!MESSAGE use the Export Makefile command and run
+!MESSAGE 
+!MESSAGE NMAKE /f "ce_static_library_emulator.vcn".
+!MESSAGE 
+!MESSAGE You can specify a configuration when running NMAKE
+!MESSAGE by defining the macro CFG on the command line. For example:
+!MESSAGE 
+!MESSAGE NMAKE /f "ce_static_library_emulator.vcn" CFG="ce_static_library_emulator - Win32 (WCE emulator) Debug"
+!MESSAGE 
+!MESSAGE Possible choices for configuration are:
+!MESSAGE 
+!MESSAGE "ce_static_library_emulator - Win32 (WCE emulator) Release" (based on "Win32 (WCE emulator) Static Library")
+!MESSAGE "ce_static_library_emulator - Win32 (WCE emulator) Debug" (based on "Win32 (WCE emulator) Static Library")
+!MESSAGE 
+
+# Begin Project
+# PROP AllowPerConfigDependencies 0
+# PROP Scc_ProjName ""
+# PROP Scc_LocalPath ""
+# PROP ATL_Project 2
+CPP=cl.exe
+
+!IF  "$(CFG)" == "ce_static_library_emulator - Win32 (WCE emulator) Release"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 0
+# PROP BASE Output_Dir "emulatorRel"
+# PROP BASE Intermediate_Dir "emulatorRel"
+# PROP BASE CPU_ID "{32E52003-403E-442D-BE48-DE10F8C6131D}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "emulatorRel"
+# PROP Intermediate_Dir "emulatorRel"
+# PROP CPU_ID "{32E52003-403E-442D-BE48-DE10F8C6131D}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+# ADD BASE CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "_i386_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_X86_" /D "x86" /D "NDEBUG" /D "_LIB" /YX /Gs8192 /GF /O2 /c
+# ADD CPP /nologo /W3 /I "c:\siglib\include" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "_i386_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_X86_" /D "x86" /D "NDEBUG" /D "_LIB" /D SIGLIB_STATIC_LIB=1 /YX /Gs8192 /GF /O2 /c
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo
+# ADD LIB32 /nologo
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+
+!ELSEIF  "$(CFG)" == "ce_static_library_emulator - Win32 (WCE emulator) Debug"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 1
+# PROP BASE Output_Dir "emulatorDbg"
+# PROP BASE Intermediate_Dir "emulatorDbg"
+# PROP BASE CPU_ID "{32E52003-403E-442D-BE48-DE10F8C6131D}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Output_Dir "emulatorDbg"
+# PROP Intermediate_Dir "emulatorDbg"
+# PROP CPU_ID "{32E52003-403E-442D-BE48-DE10F8C6131D}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+# ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "_i386_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_X86_" /D "x86" /D "_LIB" /YX /Gs8192 /GF /c
+# ADD CPP /nologo /W3 /Zi /Od /I "c:\siglib\include" /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "_i386_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_X86_" /D "x86" /D "_LIB" /D SIGLIB_STATIC_LIB=1 /YX /Gs8192 /GF /c
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo
+# ADD LIB32 /nologo
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+
+!ENDIF 
+
+# Begin Target
+
+# Name "ce_static_library_emulator - Win32 (WCE emulator) Release"
+# Name "ce_static_library_emulator - Win32 (WCE emulator) Debug"
+# Begin Group "Source Files"
+
+# PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
+# Begin Source File
+
+SOURCE=..\adaptive.c
+DEP_CPP_ADAPT=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\arbfft.c
+DEP_CPP_ARBFF=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\chirpz.c
+DEP_CPP_CHIRP=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\comms.c
+DEP_CPP_COMMS=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\complex.c
+DEP_CPP_COMPL=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\complexa.c
+DEP_CPP_COMPLE=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\control.c
+DEP_CPP_CONTR=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\convolve.c
+DEP_CPP_CONVO=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\correlat.c
+DEP_CPP_CORRE=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\datatype.c
+DEP_CPP_DATAT=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\decint.c
+DEP_CPP_DECIN=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\delay.c
+DEP_CPP_DELAY=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\dsputil2.c
+DEP_CPP_DSPUT=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\dsputils.c
+DEP_CPP_DSPUTI=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\dtmf.c
+DEP_CPP_DTMF_=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\fdfilter.c
+DEP_CPP_FDFIL=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\ffourier.c
+DEP_CPP_FFOUR=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\filter.c
+DEP_CPP_FILTE=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\firfilt.c
+DEP_CPP_FIRFI=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\fourier.c
+DEP_CPP_FOURI=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\icoder.c
+DEP_CPP_ICODE=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\iirfilt.c
+DEP_CPP_IIRFI=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibic.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\image.c
+DEP_CPP_IMAGE=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\matrix.c
+DEP_CPP_MATRI=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\minmax.c
+DEP_CPP_MINMA=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\mod_a.c
+DEP_CPP_MOD_A=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\mod_d.c
+DEP_CPP_MOD_D=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\mux.c
+DEP_CPP_MUX_C=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\order.c
+# End Source File
+# Begin Source File
+
+SOURCE=..\prbs.c
+DEP_CPP_PRBS_=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\pspect.c
+DEP_CPP_PSPEC=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\regress.c
+DEP_CPP_REGRE=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\siggen.c
+DEP_CPP_SIGGE=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\siglib.c
+DEP_CPP_SIGLI=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\smath.c
+DEP_CPP_SMATH=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\speech.c
+DEP_CPP_SPEEC=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\stats.c
+DEP_CPP_STATS=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\timing.c
+DEP_CPP_TIMIN=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\trig.c
+DEP_CPP_TRIG_=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\viterbi.c
+DEP_CPP_VITER=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\window.c
+DEP_CPP_WINDO=\
+	"..\..\include\siglib.h"\
+	"..\..\include\siglibc.h"\
+	"..\..\include\siglibd.h"\
+	"..\..\include\siglibm.h"\
+	"..\..\include\siglibms.h"\
+	"..\..\include\siglibp.h"\
+	
+# End Source File
+# End Group
+# Begin Group "Header Files"
+
+# PROP Default_Filter "h;hpp;hxx;hm;inl"
+# Begin Source File
+
+SOURCE=..\..\include\siglib.h
+# End Source File
+# End Group
+# End Target
+# End Project

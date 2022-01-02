@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><title>Vibration Analysis Example</title></head>
+
+<body style="background-color: rgb(255, 255, 255);">
+<div>
+<table border="0">
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://www.numerix-dsp.com" target="_blank"><font size="2"><img src="../../../WebResources/NumerixLogoSM.JPG" alt="Numerix Web Site" border="0" height="100" width="105"></font></a></td>
+      <td align="center">&nbsp;</td>
+      <td align="center">
+      <h3><font color="#0000ff" size="3">SigLib Vibration Analysis Example Programs</font></h3>
+      </td>
+      <td align="center"><font size="2">&nbsp; </font></td>
+      <td align="center"><a href="https://www.numerix-dsp.com/siglib.html" target="_blank"><font size="2"><img src="../../../WebResources/siglib.gif" alt="SigLib DSP Library Information" border="0" height="49" width="125"></font></a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<hr style="font-family: Arial;"><span style="font-family: Arial;"><br>
+These examples are designed to process an acoustic recording of a
+high-speed machine. The recording was taken using a high quality
+microphone and the analog data was sampled at 48 kHz, 16 bit resolution.<br>
+<br>
+The examples are designed to work with GNUPlot
+(http://www.gnuplot.info).<br>
+<br>
+The spectrogram plot calculations use 1024 point FFTs, with 25% overlap.<br>
+<br>
+For order analysis we do not have a tachometer reference for the shaft
+speed so we can make an estimation from the frequency analysis of the
+output. Actually this gives the wrong speed because the fundamental is
+hidden in the noise but we can detect a harmonic that we can use for
+demonstration purposes. In order to acquire the harmonic we will need
+to delete the start up section of the wav file from sample 0 to
+(approximately) 684,968.<br>
+<br>
+The folder includes gnuplot scripts for plotting spectrograms in 2D
+(sgplot.gp) and 3D (sgplot.gp).<br>
+<br>
+<span style="font-weight: bold;">Files</span><br>
+<br>
+</span>
+<table style="font-family: Arial;" border="0" cellpadding="0" cellspacing="0">
+
+  <tbody>
+    <tr>
+      <td><strong>Filename&nbsp;</strong></td>
+      <td>&nbsp;</td>
+      <td><strong>Description</strong></td>
+    </tr>
+    <tr>
+      <td><a href="wavfwfall.c"><font size="2">wavfwfall.c</font></a><font size="2">&nbsp;</font></td>
+      <td>&nbsp;</td>
+      <td><font size="2">Source
+file for generating an spectrogram plot, with filtering.</font></td>
+    </tr>
+    <tr>
+      <td><a href="wavcepst.c"><font size="2">wavcepst.c</font></a><font size="2">&nbsp;</font></td>
+      <td>&nbsp;</td>
+      <td><font size="2">Source
+file for generating a cepstrum </font><font size="2">spectrogram</font><font size="2"> plot.</font></td>
+    </tr>
+    <tr>
+      <td><a href="wavorder.c"><font size="2">wavorder.c</font></a><font size="2"> <br>
+      </font></td>
+      <td>&nbsp;</td>
+      <td><font size="2">Source
+file for generating an order analysis plot.</font></td>
+    </tr>
+    <tr>
+      <td><a href="wavwfall.c"><font size="2">wavwfall.c</font></a><font size="2">&nbsp;</font></td>
+      <td>&nbsp;</td>
+      <td><font size="2">Source
+file for generating an </font><font size="2">spectrogram</font><font size="2"> plot.</font></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+<tr>
+      <td colspan="3" rowspan="1"><small><span style="font-weight: bold;">Linux shell scripts for building and
+running test functions</span></small></td>
+    </tr>
+    <tr>
+      <td><small><a href="gb.sh">gb.sh</a></small></td>
+      <td><br>
+      </td>
+      <td><font size="2">Shell script to build and run, using GCC under Linux</font></td>
+    </tr>
+    <tr>
+      <td><small><a href="gbr_wavfwfall.sh">gbr_wavfwfall.sh</a></small></td>
+      <td><br>
+      </td>
+      <td><small>Waterfall spectrogram with filtering<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td><small><a href="gbr_wavcepst.sh">gbr_wavcepst.sh</a></small></td>
+      <td><br>
+      </td>
+      <td><small>Cepstrum waterfall<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td><small><a href="gbr_wavorder.sh">gbr_wavorder.sh</a></small></td>
+      <td><br>
+      </td>
+      <td><small>Order Analysis<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td><small><a href="gbr_wavwfall.sh">gbr_wavwfalll.sh</a></small></td>
+      <td><br>
+      </td>
+      <td><small>Waterfall spectrogram</small><small> plot<br>
+      </small></td>
+    </tr>
+        <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+<tr>
+      <td colspan="3" rowspan="1"><small><span style="font-weight: bold;">Microsoft Batch files for building and
+running test functions</span></small></td>
+    </tr>
+    <tr>
+      <td><small><a href="mb.bat">mb.bat</a></small></td>
+      <td><br>
+      </td>
+      <td><font size="2">Batch file to build source file with SigLib, using Microsoft Compiler</font></td>
+    </tr>
+    <tr>
+      <td><small><a href="mbr_wavfwfall.bat">mbr_wavfwfall.bat</a></small></td>
+      <td><br>
+      </td>
+      <td><small>Waterfall spectrogram with filtering<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td><small><a href="mbr_wavcepst.bat">mbr_wavcepst.bat</a></small></td>
+      <td><br>
+      </td>
+      <td><small>Cepstrum waterfall<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td><small><a href="mbr_wavorder.bat">mbr_wavorder.bat</a></small></td>
+      <td><br>
+      </td>
+      <td><small>Order Analysis<br>
+      </small></td>
+    </tr>
+    <tr>
+      <td><small><a href="mbr_wavwfall.bat">mbr_wavwfalll.bat</a></small></td>
+      <td><br>
+      </td>
+      <td><small>Waterfall spectrogram</small><small> plot<br>
+      </small></td>
+    </tr><tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+<br style="font-family: Arial;">
+<span style="font-family: Arial;">The examples are executed by running the batch file and adding the name of the .wav file, without the .wav extension.</span><br style="font-family: Arial;">
+<span style="font-family: Arial;">For example, using the supplied machine.wav file you would use these commands :</span><br style="font-family: Arial;">
+<br style="font-family: Arial;">
+<span style="font-family: Courier New;">&gt; mbr_wavwfall machine<br>&gt; mbr_wavfwfall machine<br>
+&gt; mbr_wavorder machine<br>
+&gt; mbr_wavcepst machine<br>
+</span><br style="font-family: Arial;">
+<span style="font-family: Arial;">The results of these programs are
+stored in GNUPlot compatible file format. In order to analyze the files
+and display the results you might like to try the following sequence.<br>
+While this sequence is designed for execution in a Windows Command
+Window, the processing functions will recompile under any supported OS
+and the GNUPlot commands (in the batch files) will also work on any OS
+supported by GNUPlot.<br>
+<br>
+</span><span style="font-family: Arial;"></span><span style="font-family: Arial;"><br>
+<span style="font-weight: bold;">Notes on the order analysis example</span><br>
+<br>
+Without having a shaft speed input to the algorithm it is necessary to
+estimate it from the data. This is performed in the first part of the
+program by performing a peak following algorithm that tracks the first
+order peak. This information is used in the second part of the
+algorithm that performs the order analysis.<br>
+<br>
+<br>
+<br style="font-family: Arial;">
+</span>
+<hr style="font-family: Arial;">
+<table style="font-family: Arial;" border="0" cellspacing="5">
+
+  <tbody>
+    <tr>
+      <td nowrap="nowrap" valign="top"><a name="contact"></a><font color="#0000ff" size="3"><strong>For further
+information, please contact :</strong></font><font color="#0000ff" size="2"><strong><br>
+      </strong></font><a href="mailto:numerix@numerix-dsp.com"><font size="2"><img src="../../../WebResources/email.gif" alt="Email Numerix" border="0" height="32" width="32"></font></a><font size="2"> Email : </font><a href="mailto:numerix@numerix-dsp.com"><font size="2">numerix@numerix-dsp.com
+      </font></a></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td valign="top">
+      <address> <font size="2"><br>
+      </font> </address>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p style="font-family: Arial;"><font size="2">Copyright &#169; 2022, Sigma Numerix Ltd. All rights reserved.<br>
+SigLib and Digital Filter Plus are trademarks of Sigma Numerix Ltd. All
+other trademarks acknowledged.<br>
+Sigma Numerix are continuously increasing the functionality of SigLib
+and reserve the right to alter the product at any time.</font></p>
+
+</body></html>

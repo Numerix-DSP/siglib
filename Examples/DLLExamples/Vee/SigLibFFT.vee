@@ -1,0 +1,1786 @@
+(saveFormat "2.3")
+(date "Mon 14/Jul/2008 15:19:33 ")
+(veerev "6.01")
+(platform "PC")
+(execMode fast)
+(filterNAN 0)
+(workspaceStackingOrder M)
+(SaveCF no)
+(device 0 ROOTCONTEXT
+(properties
+(trigMode deg)
+(nextID 90)
+(popupTitleText "SigLib DLL FFT Demo")
+(popupMoveable 1)
+(deleteGlobals 0))
+(deviceList
+(device 0 START25)
+(device 1 REPEATUNTILBREAK
+(interface
+(output 1
+(name "Continuous")
+(lock name constraints))))
+(device 2 VFUNCTIONGENERATOR
+(properties
+(function Sine)
+(frequency 660.567)
+(amplitude 4.008)
+(dcOffset 0)
+(degRad Deg)
+(phaseShift 0)
+(interval 0.02)
+(numPoints 256)
+(errorOnAlias 0))
+(interface
+(input 1
+(name "Function")
+(tag "Function")
+(requires
+(datatype Text)
+(shape "Scalar"))
+(lock constraints)
+(optional yes)
+(array YES))
+(input 2
+(name "Frequency")
+(tag "Frequency")
+(requires
+(datatype Real)
+(shape "Scalar"))
+(lock constraints)
+(optional yes)
+(array YES))
+(input 3
+(name "Amplitude")
+(tag "Amplitude")
+(requires
+(datatype Real)
+(shape "Scalar"))
+(lock constraints)
+(optional yes)
+(array YES))
+(output 1
+(name "Func")
+(lock name constraints))))
+(device 3 YPLOT
+(properties
+(name "Waveform (Time)"))
+(interface
+(input 1
+(name "Trace1")
+(lock constraints)))
+(implementation
+(tracePin 1)
+(graphMode time)))
+(device 4 KNOB
+(properties
+(name "Frequency 1")
+(description2 1 "Frequency")
+(range 1 2000)
+(detents 0.001))
+(interface
+(output 1
+(name "Real")
+(lock name constraints)))
+(implementation
+(value Real
+(data  660.567))
+(initValue Real
+(data  0))))
+(device 6 ENUMCONSTANT
+(properties
+(name "Waveform 1 Type"))
+(interface
+(output 1
+(name "Enum")
+(lock name constraints))
+(output 2
+(name "Ordinal")
+(lock name constraints)))
+(implementation
+(value Enum
+(values
+("Sine" 0)
+("Cosine" 1)
+("Square" 2))
+(data  "Sine"))
+(initValue Text
+(data  "Sine"))))
+(device 7 IMPORT
+(properties
+(name "Import Library")
+(libType DLL)
+(libName "SigLib")
+(fileName "siglib.dll")
+(defnFileName "siglibv.h"))
+(implementation))
+(device 9 KNOB
+(properties
+(name "Magnitude 1")
+(range 0 10)
+(detents 0.001))
+(interface
+(output 1
+(name "Real")
+(lock name constraints)))
+(implementation
+(value Real
+(data  4.008))
+(initValue Real
+(data  0))))
+(device 14 TOWAVEFORM
+(interface
+(input 1
+(name "Array")
+(tag "Array")
+(requires
+(datatype Real))
+(lock name constraints))
+(output 1
+(name "Waveform")
+(tag "Wf")
+(lock name constraints)))
+(implementation
+(interval 0.02)))
+(device 16 CALL
+(properties
+(name "Call SigLib.SDA_Rfft")
+(callFunc "SigLib.SDA_Rfft")
+(parmMode rev30))
+(interface
+(input 1
+(name "SIGLIB_INOUT_PTR_DECL")
+(requires
+(datatype Real))
+(optional yes))
+(input 2
+(name "SIGLIB_INOUT_PTR_DECL")
+(requires
+(datatype Real))
+(optional yes))
+(input 3
+(name "SIGLIB_INPUT_PTR_DECL")
+(requires
+(datatype Real))
+(optional yes))
+(input 4
+(name "SIGLIB_INPUT_PTR_DECL")
+(requires
+(datatype Int32))
+(optional yes))
+(input 5
+(name "A")
+(requires
+(datatype Int32))
+(optional yes))
+(input 6
+(name "B")
+(requires
+(datatype Int32))
+(optional yes))
+(output 1
+(name "SIGLIB_INOUT_PTR_DECL")
+(lock name constraints)
+(optional yes))
+(output 2
+(name "SIGLIB_INOUT_PTR_DECL")
+(lock name constraints)
+(optional yes))
+(output 3
+(name "SIGLIB_INPUT_PTR_DECL")
+(lock name constraints)
+(optional yes))
+(output 4
+(name "SIGLIB_INPUT_PTR_DECL")
+(lock name constraints)
+(optional yes))))
+(device 19 YPLOT
+(properties
+(name "Waveform (Frequency)"))
+(interface
+(input 1
+(name "Trace1")
+(lock constraints)))
+(implementation
+(tracePin 1)
+(graphMode time)))
+(device 20 CONSTANT
+(properties
+(name "Log2 (FFT length)"))
+(interface
+(output 1
+(name "Int32")
+(lock name constraints)))
+(implementation
+(value Int32
+(data  8))
+(initValue Int32
+(data  0))))
+(device 21 TOWAVEFORM
+(interface
+(input 1
+(name "Array")
+(tag "Array")
+(requires
+(datatype Real))
+(lock name constraints))
+(output 1
+(name "Waveform")
+(tag "Wf")
+(lock name constraints)))
+(implementation
+(interval 0.02)))
+(device 25 CALL
+(properties
+(name "Call SigLib.SIF_Window")
+(callFunc "SigLib.SIF_Window")
+(parmMode rev30))
+(interface
+(input 1
+(name "SIGLIB_PTR_DECL")
+(requires
+(datatype Real))
+(optional yes))
+(input 2
+(name "Window_t")
+(requires
+(datatype Int32))
+(optional yes))
+(input 3
+(name "A")
+(requires
+(datatype Real))
+(optional yes))
+(input 4
+(name "C")
+(requires
+(datatype Int32))
+(optional yes))
+(output 1
+(name "Ret Value")
+(lock name constraints)
+(optional yes))
+(output 2
+(name "SIGLIB_PTR_DECL")
+(lock name constraints)
+(optional yes))))
+(device 26 ENUMCONSTANT
+(properties
+(name "Window Type")
+(description2 1 ""))
+(interface
+(output 1
+(name "Enum")
+(lock name constraints))
+(output 2
+(name "Ordinal")
+(lock name constraints)))
+(implementation
+(value Enum
+(values
+("Hanning" 0)
+("Hamming" 1)
+("Blackman" 2)
+("Bartlett" 3)
+("Triangle" 4)
+("Kaiser" 5)
+("Blackman Harris" 6)
+("Rectangle" 7))
+(data  "Hanning"))
+(initValue Text
+(data  "Hanning"))))
+(device 27 ALLOCATEARRAY
+(properties
+(name "Alloc Window Array"))
+(interface
+(output 1
+(name "Array")
+(tag "Array")))
+(implementation
+(numDims 1)
+(dimSizes "256")
+(type "Real")
+(initEnum "Lin Ramp")
+(initialValue
+(data  0))
+(from 1)
+(thru 10)))
+(device 29 CALL
+(properties
+(name "Call SigLib.SDA_Window")
+(callFunc "SigLib.SDA_Window")
+(parmMode rev30))
+(interface
+(input 1
+(name "B")
+(requires
+(datatype Real))
+(optional yes))
+(input 2
+(name "C")
+(requires
+(datatype Real))
+(optional yes))
+(input 3
+(name "D")
+(requires
+(datatype Real))
+(optional yes))
+(input 4
+(name "E")
+(requires
+(datatype Int32))
+(optional yes))
+(output 1
+(name "W")
+(lock name constraints)
+(optional yes))
+(output 2
+(name "X")
+(lock name constraints)
+(optional yes))
+(output 3
+(name "Y")
+(lock name constraints)
+(optional yes))))
+(device 32 CALL
+(properties
+(name "Call SigLib.SDA_Magnitude")
+(callFunc "SigLib.SDA_Magnitude")
+(parmMode rev30))
+(interface
+(input 1
+(name "SIGLIB_INPUT_PTR_DECL")
+(requires
+(datatype Real))
+(optional yes))
+(input 2
+(name "SIGLIB_INPUT_PTR_DECL")
+(requires
+(datatype Real))
+(optional yes))
+(input 3
+(name "SIGLIB_OUTPUT_PTR_DECL")
+(requires
+(datatype Real))
+(optional yes))
+(input 4
+(name "A")
+(requires
+(datatype Int32))
+(optional yes))
+(output 1
+(name "SIGLIB_INPUT_PTR_DECL")
+(lock name constraints)
+(optional yes))
+(output 2
+(name "SIGLIB_INPUT_PTR_DECL")
+(lock name constraints)
+(optional yes))
+(output 3
+(name "SIGLIB_OUTPUT_PTR_DECL")
+(lock name constraints)
+(optional yes))))
+(device 33 CALL
+(properties
+(name "Call SigLib.SDA_10Log10")
+(callFunc "SigLib.SDA_10Log10")
+(parmMode rev30))
+(interface
+(input 1
+(name "SIGLIB_INPUT_PTR_DECL")
+(requires
+(datatype Real))
+(optional yes))
+(input 2
+(name "SIGLIB_OUTPUT_PTR_DECL")
+(requires
+(datatype Real))
+(optional yes))
+(input 3
+(name "B")
+(requires
+(datatype Int32))
+(optional yes))
+(output 1
+(name "SIGLIB_INPUT_PTR_DECL")
+(lock name constraints)
+(optional yes))
+(output 2
+(name "SIGLIB_OUTPUT_PTR_DECL")
+(lock name constraints)
+(optional yes))))
+(device 34 CALL
+(properties
+(name "Call SigLib.SDA_Offset")
+(callFunc "SigLib.SDA_Offset")
+(parmMode rev30))
+(interface
+(input 1
+(name "SIGLIB_INPUT_PTR_DECL")
+(requires
+(datatype Real))
+(optional yes))
+(input 2
+(name "C")
+(requires
+(datatype Real))
+(optional yes))
+(input 3
+(name "SIGLIB_OUTPUT_PTR_DECL")
+(requires
+(datatype Real))
+(optional yes))
+(input 4
+(name "A")
+(requires
+(datatype Int32))
+(optional yes))
+(output 1
+(name "SIGLIB_INPUT_PTR_DECL")
+(lock name constraints)
+(optional yes))
+(output 2
+(name "SIGLIB_OUTPUT_PTR_DECL")
+(lock name constraints)
+(optional yes))))
+(device 36 VFUNCTIONGENERATOR
+(properties
+(function Cosine)
+(frequency 1331.534)
+(amplitude 2.799)
+(dcOffset 0)
+(degRad Deg)
+(phaseShift 0)
+(interval 0.02)
+(numPoints 256)
+(errorOnAlias 0))
+(interface
+(input 1
+(name "Function")
+(tag "Function")
+(requires
+(datatype Text)
+(shape "Scalar"))
+(lock constraints)
+(optional yes)
+(array YES))
+(input 2
+(name "Frequency")
+(tag "Frequency")
+(requires
+(datatype Real)
+(shape "Scalar"))
+(lock constraints)
+(optional yes)
+(array YES))
+(input 3
+(name "Amplitude")
+(tag "Amplitude")
+(requires
+(datatype Real)
+(shape "Scalar"))
+(lock constraints)
+(optional yes)
+(array YES))
+(output 1
+(name "Func")
+(lock name constraints))))
+(device 37 KNOB
+(properties
+(name "Magnitude 2")
+(range 0 10)
+(detents 0.001))
+(interface
+(output 1
+(name "Real")
+(lock name constraints)))
+(implementation
+(value Real
+(data  2.799))
+(initValue Real
+(data  0))))
+(device 38 KNOB
+(properties
+(name "Frequency 2")
+(description2 1 "Frequency")
+(range 1 2000)
+(detents 0.001))
+(interface
+(output 1
+(name "Real")
+(lock name constraints)))
+(implementation
+(value Real
+(data  1331.534))
+(initValue Real
+(data  0))))
+(device 39 ENUMCONSTANT
+(properties
+(name "Waveform 2 Type"))
+(interface
+(output 1
+(name "Enum")
+(lock name constraints))
+(output 2
+(name "Ordinal")
+(lock name constraints)))
+(implementation
+(value Enum
+(values
+("Sine" 0)
+("Cosine" 1)
+("Square" 2))
+(data  "Cosine"))
+(initValue Text
+(data  "Sine"))))
+(device 40 CALL
+(properties
+(name "Call SigLib.SDA_Add2")
+(callFunc "SigLib.SDA_Add2")
+(parmMode rev30))
+(interface
+(input 1
+(name "B")
+(requires
+(datatype Real))
+(optional yes))
+(input 2
+(name "C")
+(requires
+(datatype Real))
+(optional yes))
+(input 3
+(name "D")
+(requires
+(datatype Real))
+(optional yes))
+(input 4
+(name "E")
+(requires
+(datatype Int32))
+(optional yes))
+(output 1
+(name "W")
+(lock name constraints)
+(optional yes))
+(output 2
+(name "X")
+(lock name constraints)
+(optional yes))
+(output 3
+(name "Y")
+(lock name constraints)
+(optional yes))))
+(device 41 CALL
+(properties
+(name "Call SigLib.SDA_Add2")
+(callFunc "SigLib.SDA_Add2")
+(parmMode rev30))
+(interface
+(input 1
+(name "B")
+(requires
+(datatype Real))
+(optional yes))
+(input 2
+(name "C")
+(requires
+(datatype Real))
+(optional yes))
+(input 3
+(name "D")
+(requires
+(datatype Real))
+(optional yes))
+(input 4
+(name "E")
+(requires
+(datatype Int32))
+(optional yes))
+(output 1
+(name "W")
+(lock name constraints)
+(optional yes))
+(output 2
+(name "X")
+(lock name constraints)
+(optional yes))
+(output 3
+(name "Y")
+(lock name constraints)
+(optional yes))))
+(device 42 CALL
+(properties
+(name "Call SigLib.SDA_SignalGenerate")
+(callFunc "SigLib.SDA_SignalGenerate")
+(parmMode rev30))
+(interface
+(input 1
+(name "A")
+(requires
+(datatype Real))
+(optional yes))
+(input 2
+(name "signal_type")
+(requires
+(datatype Int32))
+(optional yes))
+(input 3
+(name "B")
+(requires
+(datatype Real))
+(optional yes))
+(input 4
+(name "signal_fill_mode")
+(requires
+(datatype Int32))
+(optional yes))
+(input 5
+(name "C")
+(requires
+(datatype Real))
+(optional yes))
+(input 6
+(name "F")
+(requires
+(datatype Real))
+(optional yes))
+(input 7
+(name "G")
+(requires
+(datatype Real))
+(optional yes))
+(input 8
+(name "H")
+(requires
+(datatype Real))
+(optional yes))
+(input 9
+(name "I")
+(requires
+(datatype Real))
+(optional yes))
+(input 10
+(name "J")
+(requires
+(datatype Real))
+(optional yes))
+(input 11
+(name "D")
+(requires
+(datatype Int32))
+(optional yes))
+(output 1
+(name "Ret Value")
+(lock name constraints)
+(optional yes))
+(output 2
+(name "Z")
+(lock name constraints)
+(optional yes))
+(output 3
+(name "W")
+(lock name constraints)
+(optional yes))
+(output 4
+(name "X")
+(lock name constraints)
+(optional yes))))
+(device 43 ENUMCONSTANT
+(properties
+(name "Signal Type")
+(description2 1 ""))
+(interface
+(output 1
+(name "Enum")
+(lock name constraints))
+(output 2
+(name "Ordinal")
+(lock name constraints)))
+(implementation
+(value Enum
+(values
+("Sine" 0)
+("Cosine" 1)
+("Uniform noise" 2)
+("Gaussian Noise" 3)
+("Linear Chirp" 4)
+("Logarithmic Chirp" 5)
+("Square" 6)
+("Triangle" 7)
+("Impulse" 8)
+("Impulse Stream" 9)
+("Step" 10)
+("PN Sequence" 11))
+(data  "Uniform noise"))
+(initValue Text
+(data  "Sine"))))
+(device 44 ENUMCONSTANT
+(properties
+(name "Signal Type")
+(description2 1 ""))
+(interface
+(output 1
+(name "Enum")
+(lock name constraints))
+(output 2
+(name "Ordinal")
+(lock name constraints)))
+(implementation
+(value Enum
+(values
+("SIG_FILL" 0)
+("SIG_ADD" 1))
+(data  "SIG_FILL"))
+(initValue Text
+(data  "SIG_FILL"))))
+(device 45 KNOB
+(properties
+(name "Noise Magnitude")
+(range 0 1)
+(detents 0.001))
+(interface
+(output 1
+(name "Real")
+(lock name constraints)))
+(implementation
+(value Real
+(data  0.082))
+(initValue Real
+(data  0))))
+(device 46 CONSTANT
+(properties
+(name "Real"))
+(interface
+(output 1
+(name "Real")
+(lock name constraints)))
+(implementation
+(value Real
+(data  -30))
+(initValue Real
+(data  0))))
+(device 47 CONSTANT
+(properties
+(name "Zero"))
+(interface
+(output 1
+(name "Real")
+(lock name constraints)))
+(implementation
+(value Real
+(data  0))
+(initValue Real
+(data  0))))
+(device 64 CALL
+(properties
+(name "Call SigLib.SDA_Clip")
+(callFunc "SigLib.SDA_Clip")
+(parmMode rev30))
+(interface
+(input 1
+(name "A")
+(requires
+(datatype Real))
+(optional yes))
+(input 2
+(name "B")
+(requires
+(datatype Real))
+(optional yes))
+(input 3
+(name "C")
+(requires
+(datatype Real))
+(optional yes))
+(input 4
+(name "F")
+(requires
+(datatype Int32))
+(optional yes))
+(input 5
+(name "D")
+(requires
+(datatype Int32))
+(optional yes))
+(output 1
+(name "Y")
+(lock name constraints)
+(optional yes))
+(output 2
+(name "Z")
+(lock name constraints)
+(optional yes))))
+(device 65 CONSTANT
+(properties
+(name "Clip Value (20)"))
+(interface
+(output 1
+(name "Real")
+(lock name constraints)))
+(implementation
+(value Real
+(data  10))
+(initValue Real
+(data  0))))
+(device 69 CONSTANT
+(properties
+(name "Clip Both"))
+(interface
+(output 1
+(name "Real")
+(lock name constraints)))
+(implementation
+(value Real
+(data  0))
+(initValue Real
+(data  0))))
+(device 71 ALLOCATEARRAY
+(properties
+(name "Alloc Temporary Array"))
+(interface
+(output 1
+(name "Array")
+(tag "Array")))
+(implementation
+(numDims 1)
+(dimSizes "256")
+(type "Real")
+(initEnum "Lin Ramp")
+(initialValue
+(data  0))
+(from 1)
+(thru 10)))
+(device 74 CONSTANT
+(properties
+(name "FFT length"))
+(interface
+(output 1
+(name "Int32")
+(lock name constraints)))
+(implementation
+(value Int32
+(data  256))
+(initValue Int32
+(data  0))))
+(device 75 CALL
+(properties
+(name "Call SigLib.SIF_Fft")
+(callFunc "SigLib.SIF_Fft")
+(parmMode rev30))
+(interface
+(input 1
+(name "SIGLIB_OUTPUT_PTR_DECL")
+(requires
+(datatype Real))
+(optional yes))
+(input 2
+(name "SIGLIB_OUTPUT_PTR_DECL")
+(requires
+(datatype Int32))
+(optional yes))
+(input 3
+(name "A")
+(requires
+(datatype Int32))
+(optional yes))
+(output 1
+(name "SIGLIB_OUTPUT_PTR_DECL")
+(lock name constraints)
+(optional yes))
+(output 2
+(name "SIGLIB_OUTPUT_PTR_DECL")
+(lock name constraints)
+(optional yes))))
+(device 77 ALLOCATEARRAY
+(properties
+(name "Alloc Twiddle Factor Array"))
+(interface
+(output 1
+(name "Array")
+(tag "Array")))
+(implementation
+(numDims 1)
+(dimSizes "192")
+(type "Real")
+(initEnum "Lin Ramp")
+(initialValue
+(data  0))
+(from 1)
+(thru 10)))
+(device 78 ALLOCATEARRAY
+(properties
+(name "Alloc Bit Reverse LUT"))
+(interface
+(output 1
+(name "Array")
+(tag "Array")))
+(implementation
+(numDims 1)
+(dimSizes "256")
+(type "Int32")
+(initEnum "Lin Ramp")
+(initialValue
+(data  0))
+(from 1)
+(thru 10)))
+(device 79 ALLOCATEARRAY
+(properties
+(name "Alloc Imaginary FFT Data Array"))
+(interface
+(output 1
+(name "Array")
+(tag "Array")))
+(implementation
+(numDims 1)
+(dimSizes "256")
+(type "Real")
+(initEnum "Lin Ramp")
+(initialValue
+(data  0))
+(from 1)
+(thru 10)))
+(device 89 CONSTANT
+(properties
+(name "Window Coeff"))
+(interface
+(output 1
+(name "Real64")
+(lock name constraints)))
+(implementation
+(value Real
+(data  0.94))
+(initValue Real
+(data  0))))
+(configuration
+(connect D15:0 D1:0)
+(connect D21:0 D2:0)
+(connect D5:1 D2:1)
+(connect D4:1 D2:2)
+(connect D7:1 D2:3)
+(connect D8:0 D3:0)
+(connect D8:1 D3:1)
+(connect D5:0 D4:0)
+(connect D13:0 D5:0)
+(connect D0:0 D6:0)
+(connect D4:0 D7:0)
+(connect D16:0 D8:0)
+(connect D16:2 D8:1)
+(connect D30:0 D9:0)
+(connect D16:2 D9:1)
+(connect D40:1 D9:2)
+(connect D37:1 D9:3)
+(connect D37:2 D9:4)
+(connect D36:1 D9:5)
+(connect D11:1 D9:6)
+(connect D12:0 D10:0)
+(connect D12:1 D10:1)
+(connect D3:0 D11:0)
+(connect D19:0 D12:0)
+(connect D19:2 D12:1)
+(connect D41:0 D13:0)
+(connect D15:1 D13:1)
+(connect D14:2 D13:2)
+(connect D41:1 D13:3)
+(connect D36:1 D13:4)
+(connect D1:1 D14:0)
+(connect D40:0 D15:0)
+(connect D32:0 D16:0)
+(connect D32:2 D16:1)
+(connect D35:1 D16:2)
+(connect D13:2 D16:3)
+(connect D36:1 D16:4)
+(connect D9:0 D17:0)
+(connect D9:1 D17:1)
+(connect D9:2 D17:2)
+(connect D35:1 D17:3)
+(connect D36:1 D17:4)
+(connect D17:0 D18:0)
+(connect D17:3 D18:1)
+(connect D35:1 D18:2)
+(connect D36:1 D18:3)
+(connect D18:0 D19:0)
+(connect D18:2 D19:1)
+(connect D30:1 D19:2)
+(connect D35:1 D19:3)
+(connect D36:1 D19:4)
+(connect D2:0 D20:0)
+(connect D23:1 D20:1)
+(connect D22:1 D20:2)
+(connect D21:1 D20:3)
+(connect D22:0 D21:0)
+(connect D23:0 D22:0)
+(connect D7:0 D23:0)
+(connect D26:0 D24:0)
+(connect D2:1 D24:1)
+(connect D20:1 D24:2)
+(connect D35:1 D24:3)
+(connect D36:1 D24:4)
+(connect D24:0 D25:0)
+(connect D24:3 D25:1)
+(connect D26:2 D25:2)
+(connect D35:1 D25:3)
+(connect D36:1 D25:4)
+(connect D31:0 D26:0)
+(connect D35:1 D26:1)
+(connect D27:2 D26:2)
+(connect D29:1 D26:3)
+(connect D28:2 D26:4)
+(connect D31:1 D26:5)
+(connect D31:1 D26:6)
+(connect D31:1 D26:7)
+(connect D31:1 D26:8)
+(connect D31:1 D26:9)
+(connect D31:1 D26:10)
+(connect D36:1 D26:11)
+(connect D20:0 D27:0)
+(connect D27:0 D28:0)
+(connect D28:0 D29:0)
+(connect D11:0 D30:0)
+(connect D29:0 D31:0)
+(connect D34:0 D32:0)
+(connect D25:3 D32:1)
+(connect D35:1 D32:2)
+(connect D33:1 D32:3)
+(connect D34:1 D32:4)
+(connect D36:1 D32:5)
+(connect D25:0 D33:0)
+(connect D33:0 D34:0)
+(connect D37:0 D35:0)
+(connect D6:0 D36:0)
+(connect D39:0 D37:0)
+(connect D38:1 D37:1)
+(connect D39:1 D37:2)
+(connect D36:1 D37:3)
+(connect D36:0 D38:0)
+(connect D38:0 D39:0)
+(connect D35:0 D40:0)
+(connect D14:0 D41:0))
+(ShowOnExecPanel))
+(contextCarrier
+(wndOrigin 2 2)
+(wndState res)
+(active panel)
+(panel
+(extent 789 459)
+(widget 0 detail
+(relativeOrigin 0 0)
+(title off)
+(borderStyle none)
+(extent 140 40))
+(widget 5 detail
+(relativeOrigin 0 40)
+(title on)
+(borderStyle flat)
+(extent 136 28)
+(format dropDown))
+(widget 7 detail
+(relativeOrigin 0 90)
+(title on)
+(borderStyle flat)
+(extent 136 138)
+(layout horizontal)
+(fastmode off))
+(widget 4 detail
+(relativeOrigin 0 250)
+(title on)
+(borderStyle flat)
+(extent 136 138)
+(layout horizontal)
+(fastmode off))
+(widget 23 detail
+(relativeOrigin 140 40)
+(title on)
+(borderStyle flat)
+(extent 136 28)
+(format dropDown))
+(widget 21 detail
+(relativeOrigin 140 90)
+(title on)
+(borderStyle flat)
+(extent 136 138)
+(layout horizontal)
+(fastmode off))
+(widget 22 detail
+(relativeOrigin 140 250)
+(title on)
+(borderStyle flat)
+(extent 136 138)
+(layout horizontal)
+(fastmode off))
+(widget 3 detail
+(relativeOrigin 420 0)
+(title on)
+(borderStyle flat)
+(extent 366 208)
+(displayMode 7)
+(graphType cartesian)
+(gridType grid)
+(scale 0
+(name "Mag")
+(domainName "Time")
+(Yspacing 10000)
+(Xspacing 10000)
+(pen 9)
+(show 1)
+(range -10 10 4 linear))
+(domain 0 0.02 4 linear)
+(trace 0 onScale 0
+(name "Trace1")
+(pen 4)
+(lineType 1)
+(pointType 0)))
+(widget 10 detail
+(relativeOrigin 420 229)
+(title on)
+(borderStyle flat)
+(extent 366 208)
+(displayMode 7)
+(graphType cartesian)
+(gridType grid)
+(scale 0
+(name "Mag")
+(domainName "Time")
+(Yspacing 10000)
+(Xspacing 10000)
+(pen 9)
+(show 1)
+(range -80 0 4 linear))
+(domain 0 0.02 4 linear)
+(trace 0 onScale 0
+(name "Trace1")
+(pen 4)
+(lineType 1)
+(pointType 0)))
+(widget 27 detail
+(relativeOrigin 280 40)
+(title on)
+(borderStyle flat)
+(extent 136 28)
+(format dropDown))
+(widget 29 detail
+(relativeOrigin 280 90)
+(title on)
+(borderStyle flat)
+(extent 136 138)
+(layout horizontal)
+(fastmode off))
+(widget 14 detail
+(relativeOrigin 280 360)
+(title on)
+(borderStyle flat)
+(extent 136 28)
+(format dropDown))
+(widget 33 detail
+(relativeOrigin 280 280)
+(title on)
+(borderStyle flat)
+(extent 136 28)
+(showFormat real)))
+(detail
+(extent 756 557)
+(anchorPt -1054 51)
+(configuration
+(devCarrierFor 0
+(active open)
+(icon)
+(open
+(extent 47 22))
+(title off)
+(pinCenter -280 0))
+(devCarrierFor 1
+(active icon)
+(icon
+(extent 74 52)
+(iconImage "loop.icn"))
+(open
+(extent 12 30))
+(terminals on)
+(pinCenter -10 160))
+(devCarrierFor 2
+(active icon)
+(icon
+(extent 115 51)
+(iconImage "virtual.icn"))
+(open
+(extent 174 180))
+(terminals on)
+(pinCenter 380 100))
+(devCarrierFor 3
+(active icon)
+(icon
+(extent 103 51)
+(iconImage "display.icn"))
+(open
+(extent 241 195)
+(displayMode 7)
+(graphType cartesian)
+(gridType grid)
+(scale 0
+(name "Mag")
+(domainName "Time")
+(Yspacing 10000)
+(Xspacing 10000)
+(pen 9)
+(show 1)
+(range -10 -7.557251908396947 4 linear))
+(domain 0.006853146853146854 0.006853146853146854 4 linear)
+(trace 0 onScale 0
+(name "Trace1")
+(pen 4)
+(lineType 1)
+(pointType 0)))
+(pinCenter 1160 290))
+(devCarrierFor 4
+(active icon)
+(icon
+(extent 73 15))
+(open
+(extent 130 146)
+(layout horizontal)
+(fastmode off))
+(pinCenter 200 110))
+(devCarrierFor 6
+(active icon)
+(icon
+(extent 103 25))
+(open
+(extent 150 25)
+(format dropDown))
+(pinCenter 200 60))
+(devCarrierFor 7
+(active icon)
+(icon
+(extent 82 15))
+(open
+(extent 252 113))
+(pinCenter -280 60))
+(devCarrierFor 9
+(active icon)
+(icon
+(extent 73 15))
+(open
+(extent 130 146)
+(layout horizontal)
+(fastmode off))
+(pinCenter 200 150))
+(devCarrierFor 14
+(active icon)
+(icon
+(extent 108 52)
+(iconImage "build.icn"))
+(open)
+(terminals on)
+(pinCenter 1160 210))
+(devCarrierFor 16
+(active icon)
+(icon
+(extent 123 65))
+(open
+(extent 196 142))
+(terminals on)
+(pinCenter 1420 100))
+(devCarrierFor 19
+(active open)
+(icon
+(extent 135 51)
+(iconImage "display.icn"))
+(open
+(extent 304 240)
+(displayMode 7)
+(graphType cartesian)
+(gridType grid)
+(scale 0
+(name "Mag")
+(domainName "Time")
+(Yspacing 10000)
+(Xspacing 10000)
+(pen 9)
+(show 1)
+(range -90 20 4 linear))
+(domain 0 0.02 4 linear)
+(trace 0 onScale 0
+(name "Trace1")
+(pen 4)
+(lineType 1)
+(pointType 0)))
+(pinCenter 1750 290))
+(devCarrierFor 20
+(active icon)
+(icon
+(extent 94 15))
+(open
+(extent 130 30)
+(showFormat int))
+(pinCenter 1160 370))
+(devCarrierFor 21
+(active icon)
+(icon
+(extent 108 52)
+(iconImage "build.icn"))
+(open
+(extent 128 31))
+(terminals on)
+(pinCenter 1750 80))
+(devCarrierFor 25
+(active icon)
+(icon
+(extent 145 45))
+(open
+(extent 155 107))
+(terminals on)
+(pinCenter -10 410))
+(devCarrierFor 26
+(active open)
+(icon
+(extent 93 0))
+(open
+(extent 129 25)
+(format dropDown))
+(pinCenter -10 250))
+(devCarrierFor 27
+(active icon)
+(icon
+(extent 113 15))
+(open
+(extent 126 115))
+(terminals on)
+(pinCenter -10 100))
+(devCarrierFor 29
+(active icon)
+(icon
+(extent 151 45))
+(open
+(extent 216 82))
+(terminals on)
+(pinCenter 1160 100))
+(devCarrierFor 32
+(active icon)
+(icon
+(extent 166 45))
+(open
+(extent 236 82))
+(terminals on)
+(pinCenter 1420 220))
+(devCarrierFor 33
+(active icon)
+(icon
+(extent 157 34))
+(open
+(extent 218 82))
+(terminals on)
+(pinCenter 1420 320))
+(devCarrierFor 34
+(active icon)
+(icon
+(extent 138 45))
+(open
+(extent 203 82))
+(terminals on)
+(pinCenter 1420 410))
+(devCarrierFor 36
+(active icon)
+(icon
+(extent 136 52)
+(iconImage "virtual.icn"))
+(open
+(extent 204 182))
+(terminals on)
+(pinCenter 380 280))
+(devCarrierFor 37
+(active icon)
+(icon
+(extent 85 16))
+(open
+(extent 130 146)
+(layout horizontal)
+(fastmode off))
+(pinCenter 200 340))
+(devCarrierFor 38
+(active icon)
+(icon
+(extent 88 16))
+(open
+(extent 130 146)
+(layout horizontal)
+(fastmode off))
+(pinCenter 200 300))
+(devCarrierFor 39
+(active icon)
+(icon
+(extent 103 25))
+(open
+(extent 159 25)
+(format dropDown))
+(pinCenter 200 250))
+(devCarrierFor 40
+(active icon)
+(icon
+(extent 134 45))
+(open
+(extent 199 82))
+(terminals on)
+(pinCenter 900 100))
+(devCarrierFor 41
+(active icon)
+(icon
+(extent 134 45))
+(open
+(extent 199 82))
+(terminals on)
+(pinCenter 900 250))
+(devCarrierFor 42
+(active icon)
+(icon
+(extent 198 114))
+(open
+(extent 143 222))
+(terminals on)
+(pinCenter 660 390))
+(devCarrierFor 43
+(active open)
+(icon
+(extent 70 25))
+(open
+(extent 136 25)
+(format dropDown))
+(pinCenter 660 90))
+(devCarrierFor 44
+(active open)
+(icon
+(extent 82 0))
+(open
+(extent 118 25)
+(format dropDown))
+(pinCenter 660 160))
+(devCarrierFor 45
+(active icon)
+(icon
+(extent 102 15))
+(open
+(extent 151 146)
+(layout horizontal)
+(fastmode off))
+(pinCenter 660 210))
+(devCarrierFor 46
+(active open)
+(icon)
+(open
+(extent 69 30)
+(showFormat real))
+(pinCenter 1160 440))
+(devCarrierFor 47
+(active icon)
+(icon
+(extent 29 15))
+(open
+(extent 69 30)
+(showFormat real))
+(pinCenter 660 290))
+(devCarrierFor 64
+(active icon)
+(icon
+(extent 127 54))
+(open
+(extent 192 102))
+(terminals on)
+(pinCenter 400 470))
+(devCarrierFor 65
+(active icon)
+(icon
+(extent 89 15))
+(open
+(extent 125 30)
+(showFormat real))
+(pinCenter 900 350))
+(devCarrierFor 69
+(active icon)
+(icon
+(extent 55 15))
+(open
+(extent 106 30)
+(showFormat real))
+(pinCenter 900 400))
+(devCarrierFor 71
+(active icon)
+(icon
+(extent 129 15))
+(open
+(extent 208 117))
+(terminals on)
+(pinCenter -10 20))
+(devCarrierFor 74
+(active icon)
+(icon
+(extent 51 15))
+(open
+(extent 87 30)
+(showFormat int))
+(pinCenter -280 100))
+(devCarrierFor 75
+(active icon)
+(icon
+(extent 111 34))
+(open
+(extent 196 82))
+(terminals on)
+(pinCenter -280 280))
+(devCarrierFor 77
+(active icon)
+(icon
+(extent 152 14))
+(open
+(extent 208 117))
+(terminals on)
+(pinCenter -280 160))
+(devCarrierFor 78
+(active icon)
+(icon
+(extent 129 15))
+(open
+(extent 190 113))
+(terminals on)
+(pinCenter -280 220))
+(devCarrierFor 79
+(active icon)
+(icon
+(extent 182 15))
+(open
+(extent 148 115))
+(terminals on)
+(pinCenter -10 60))
+(devCarrierFor 89
+(active open)
+(icon
+(extent 83 0))
+(open
+(extent 119 29)
+(showFormat real))
+(pinCenter -10 330))
+(connect D15:0 D1:0
+(points 2 -10 110 -10 131))
+(connect D21:0 D2:0
+(points 6 200 350 200 370 280 370 280 50 380 50 380 72))
+(connect D5:1 D2:1
+(points 4 254 50 270 50 270 90 320 90))
+(connect D4:1 D2:2
+(points 4 239 110 260 110 260 100 320 100))
+(connect D7:1 D2:3
+(points 4 239 150 270 150 270 110 320 110))
+(connect D8:0 D3:0
+(points 2 1160 238 1160 262))
+(connect D8:1 D3:1
+(points 8 1216 210 1240 210 1240 330 1220 330 1220 340 1090 340 1090 290 1106
+290))
+(connect D5:0 D4:0
+(points 2 200 75 200 100))
+(connect D13:0 D5:0
+(points 6 -10 435 -10 460 110 460 110 40 200 40 200 45))
+(connect D0:0 D6:0
+(points 2 -280 13 -280 50))
+(connect D4:0 D7:0
+(points 2 200 120 200 140))
+(connect D16:0 D8:0
+(points 2 1160 125 1160 181))
+(connect D16:2 D8:1
+(points 6 1238 100 1250 100 1250 150 1080 150 1080 210 1103 210))
+(connect D30:0 D9:0
+(points 6 1160 457 1160 480 1260 480 1260 50 1420 50 1420 65))
+(connect D16:2 D9:1
+(points 6 1238 100 1250 100 1250 130 1290 130 1290 70 1356 70))
+(connect D40:1 D9:2
+(points 6 83 60 100 60 100 30 1270 30 1270 80 1356 80))
+(connect D37:1 D9:3
+(points 6 -222 270 -190 270 -190 -30 1300 -30 1300 90 1356 90))
+(connect D37:2 D9:4
+(points 6 -222 290 -180 290 -180 -10 1280 -10 1280 100 1356 100))
+(connect D36:1 D9:5
+(points 10 -252 100 -220 100 -220 -20 770 -20 770 50 1250 50 1250 90 1270 90
+1270 110 1356 110))
+(connect D11:1 D9:6
+(points 4 1209 370 1270 370 1270 120 1356 120))
+(connect D12:0 D10:0
+(points 2 1750 108 1750 149))
+(connect D12:1 D10:1
+(points 6 1806 80 1830 80 1830 130 1580 130 1580 290 1595 290))
+(connect D3:0 D11:0
+(points 2 1160 318 1160 360))
+(connect D19:0 D12:0
+(points 6 1420 435 1420 460 1530 460 1530 30 1750 30 1750 51))
+(connect D19:2 D12:1
+(points 4 1491 420 1540 420 1540 80 1693 80))
+(connect D41:0 D13:0
+(points 2 -10 347 -10 385))
+(connect D15:1 D13:1
+(points 6 49 100 70 100 70 200 -110 200 -110 390 -85 390))
+(connect D14:2 D13:2
+(points 6 57 260 80 260 80 370 -100 370 -100 400 -85 400))
+(connect D41:1 D13:3
+(points 6 52 330 90 330 90 470 -100 470 -100 410 -85 410))
+(connect D36:1 D13:4
+(points 4 -252 100 -170 100 -170 420 -85 420))
+(connect D1:1 D14:0
+(points 5 29 160 50 160 50 210 -10 210 -10 217))
+(connect D40:0 D15:0
+(points 2 -10 70 -10 90))
+(connect D32:0 D16:0
+(points 10 400 499 400 510 410 510 410 420 460 420 460 300 480 300 480 10 1160
+10 1160 75))
+(connect D32:2 D16:1
+(points 6 466 490 480 490 480 480 1000 480 1000 80 1082 80))
+(connect D35:1 D16:2
+(points 6 57 20 760 20 760 40 990 40 990 90 1082 90))
+(connect D13:2 D16:3
+(points 6 65 420 470 420 470 310 1010 310 1010 100 1082 100))
+(connect D36:1 D16:4
+(points 8 -252 100 -220 100 -220 -20 770 -20 770 50 1050 50 1050 110 1082 110))
+(connect D9:0 D17:0
+(points 2 1420 135 1420 195))
+(connect D9:1 D17:1
+(points 6 1484 80 1510 80 1510 170 1320 170 1320 200 1334 200))
+(connect D9:2 D17:2
+(points 6 1484 90 1500 90 1500 160 1310 160 1310 210 1334 210))
+(connect D35:1 D17:3
+(points 14 57 20 760 20 760 100 800 100 800 270 810 270 810 300 970 300 970 340
+1230 340 1230 410 1300 410 1300 220 1334 220))
+(connect D36:1 D17:4
+(points 12 -252 100 -220 100 -220 -20 770 -20 770 50 1250 50 1250 90 1270 90
+1270 110 1280 110 1280 230 1334 230))
+(connect D17:0 D18:0
+(points 2 1420 245 1420 300))
+(connect D17:3 D18:1
+(points 6 1505 230 1520 230 1520 270 1320 270 1320 310 1339 310))
+(connect D35:1 D18:2
+(points 14 57 20 760 20 760 100 800 100 800 270 810 270 810 300 970 300 970 340
+1230 340 1230 410 1300 410 1300 320 1339 320))
+(connect D36:1 D18:3
+(points 14 -252 100 -220 100 -220 -20 770 -20 770 50 1250 50 1250 90 1270 90
+1270 110 1280 110 1280 230 1310 230 1310 330 1339 330))
+(connect D18:0 D19:0
+(points 2 1420 339 1420 385))
+(connect D18:2 D19:1
+(points 6 1501 330 1520 330 1520 360 1340 360 1340 390 1348 390))
+(connect D30:1 D19:2
+(points 4 1197 440 1310 440 1310 400 1348 400))
+(connect D35:1 D19:3
+(points 12 57 20 760 20 760 100 800 100 800 270 810 270 810 300 970 300 970 340
+1230 340 1230 410 1348 410))
+(connect D36:1 D19:4
+(points 16 -252 100 -220 100 -220 -20 770 -20 770 50 1250 50 1250 90 1270 90
+1270 110 1280 110 1280 230 1310 230 1310 330 1320 330 1320 420 1348 420))
+(connect D2:0 D20:0
+(points 2 380 128 380 251))
+(connect D23:1 D20:1
+(points 4 254 240 270 240 270 270 309 270))
+(connect D22:1 D20:2
+(points 4 246 300 270 300 270 280 309 280))
+(connect D21:1 D20:3
+(points 4 245 340 290 340 290 290 309 290))
+(connect D22:0 D21:0
+(points 2 200 310 200 329))
+(connect D23:0 D22:0
+(points 2 200 265 200 289))
+(connect D7:0 D23:0
+(points 2 200 160 200 235))
+(connect D26:0 D24:0
+(points 6 660 449 660 470 780 470 780 60 900 60 900 75))
+(connect D2:1 D24:1
+(points 6 440 100 460 100 460 40 750 40 750 80 830 80))
+(connect D20:1 D24:2
+(points 6 450 280 470 280 470 260 750 260 750 90 830 90))
+(connect D35:1 D24:3
+(points 4 57 20 760 20 760 100 830 100))
+(connect D36:1 D24:4
+(points 6 -252 100 -220 100 -220 -20 770 -20 770 110 830 110))
+(connect D24:0 D25:0
+(points 2 900 125 900 225))
+(connect D24:3 D25:1
+(points 6 969 110 990 110 990 150 820 150 820 230 830 230))
+(connect D26:2 D25:2
+(points 4 761 370 790 370 790 240 830 240))
+(connect D35:1 D25:3
+(points 6 57 20 760 20 760 100 800 100 800 250 830 250))
+(connect D36:1 D25:4
+(points 8 -252 100 -220 100 -220 -20 770 -20 770 110 810 110 810 260 830 260))
+(connect D31:0 D26:0
+(points 2 660 300 660 330))
+(connect D35:1 D26:1
+(points 4 57 20 530 20 530 340 558 340))
+(connect D27:2 D26:2
+(points 6 730 100 740 100 740 240 540 240 540 350 558 350))
+(connect D29:1 D26:3
+(points 6 713 210 730 210 730 250 520 250 520 360 558 360))
+(connect D28:2 D26:4
+(points 8 721 170 760 170 760 270 740 270 740 260 550 260 550 370 558 370))
+(connect D31:1 D26:5
+(points 6 677 290 800 290 800 480 540 480 540 380 558 380))
+(connect D31:1 D26:6
+(points 6 677 290 800 290 800 480 540 480 540 390 558 390))
+(connect D31:1 D26:7
+(points 6 677 290 800 290 800 480 540 480 540 400 558 400))
+(connect D31:1 D26:8
+(points 6 677 290 800 290 800 480 540 480 540 410 558 410))
+(connect D31:1 D26:9
+(points 6 677 290 800 290 800 480 540 480 540 420 558 420))
+(connect D31:1 D26:10
+(points 6 677 290 800 290 800 480 540 480 540 430 558 430))
+(connect D36:1 D26:11
+(points 10 -252 100 -170 100 -170 420 -110 420 -110 480 120 480 120 430 490 430
+490 440 558 440))
+(connect D20:0 D27:0
+(points 6 380 308 380 330 490 330 490 50 660 50 660 57))
+(connect D27:0 D28:0
+(points 2 660 105 660 127))
+(connect D28:0 D29:0
+(points 2 660 175 660 200))
+(connect D11:0 D30:0
+(points 2 1160 380 1160 404))
+(connect D29:0 D31:0
+(points 2 660 220 660 280))
+(connect D34:0 D32:0
+(points 10 900 410 900 460 650 460 650 470 530 470 530 450 480 450 480 430 400
+430 400 440))
+(connect D25:3 D32:1
+(points 10 969 260 990 260 990 470 810 470 810 490 520 490 520 410 310 410 310
+450 334 450))
+(connect D35:1 D32:2
+(points 4 57 20 130 20 130 460 334 460))
+(connect D33:1 D32:3
+(points 8 947 350 960 350 960 320 510 320 510 340 300 340 300 470 334 470))
+(connect D34:1 D32:4
+(points 12 930 400 950 400 950 430 820 430 820 280 730 280 730 270 500 270 500
+350 290 350 290 480 334 480))
+(connect D36:1 D32:5
+(points 8 -252 100 -170 100 -170 420 -110 420 -110 480 280 480 280 490 334 490))
+(connect D25:0 D33:0
+(points 2 900 275 900 340))
+(connect D33:0 D34:0
+(points 2 900 360 900 390))
+(connect D37:0 D35:0
+(points 6 -280 299 -280 320 -160 320 -160 0 -10 0 -10 10))
+(connect D6:0 D36:0
+(points 2 -280 70 -280 90))
+(connect D39:0 D37:0
+(points 2 -280 230 -280 260))
+(connect D38:1 D37:1
+(points 6 -202 160 -150 160 -150 330 -360 330 -360 270 -338 270))
+(connect D39:1 D37:2
+(points 6 -213 220 -200 220 -200 190 -370 190 -370 280 -338 280))
+(connect D36:1 D37:3
+(points 6 -252 100 -230 100 -230 130 -380 130 -380 290 -338 290))
+(connect D36:0 D38:0
+(points 2 -280 110 -280 150))
+(connect D38:0 D39:0
+(points 2 -280 169 -280 210))
+(connect D35:0 D40:0
+(points 2 -10 30 -10 50))
+(connect D14:0 D41:0
+(points 2 -10 265 -10 295)))
+(stackingOrder 4 7 23 22 21 0 20 29 28 27 3 8 24 25 16 32 10 17 11 6 36 38 39 35
+40 15 1 14 41 13 5 2 26 34 33 30 19 9 12 31 37 18))
+(numberFormats
+(realFormat standard)
+(realSigDigits 4)
+(realRadixSpec 4)
+(integerBase decimal))))

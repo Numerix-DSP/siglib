@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C++ Express 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "static_library", "static_library_64\static_library.vcxproj", "{62131A66-0DB3-45BB-9764-0CEFE5100E40}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dynamic_library", "dynamic_library_64\dynamic_library.vcxproj", "{2A992764-C3CD-45E3-9DF7-DE9432F5D8E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{62131A66-0DB3-45BB-9764-0CEFE5100E40}.Debug|x64.ActiveCfg = Debug|x64
+		{62131A66-0DB3-45BB-9764-0CEFE5100E40}.Debug|x64.Build.0 = Debug|x64
+		{62131A66-0DB3-45BB-9764-0CEFE5100E40}.Release|x64.ActiveCfg = Release|x64
+		{62131A66-0DB3-45BB-9764-0CEFE5100E40}.Release|x64.Build.0 = Release|x64
+		{2A992764-C3CD-45E3-9DF7-DE9432F5D8E6}.Debug|x64.ActiveCfg = Debug|x64
+		{2A992764-C3CD-45E3-9DF7-DE9432F5D8E6}.Debug|x64.Build.0 = Debug|x64
+		{2A992764-C3CD-45E3-9DF7-DE9432F5D8E6}.Release|x64.ActiveCfg = Release|x64
+		{2A992764-C3CD-45E3-9DF7-DE9432F5D8E6}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

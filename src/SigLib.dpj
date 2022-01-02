@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding='ISO-8859-1'?>
+<visualdsp-project schema="17" name="libsiglib" file="SigLib.dpj" version="1">
+	<!-- Project build target -->
+	<target>
+		<processor revision="Automatic">ADSP-21479</processor>
+		<extension>.dlb</extension>
+		<type>Library file</type>
+	</target>
+	<!-- Configurations -->
+	<configurations active="Release">
+		<configuration name="Debug">
+			<intermediate-dir>.\debug</intermediate-dir>
+			<output-dir>..\src</output-dir>
+			<changed-property-page-flags>0</changed-property-page-flags>
+			<tools>
+				<tool type="Compiler">
+					<option><![CDATA[|-Version>5.0|-O>0|-O1>0|-Ov>100|-ipa>0|-g>0|-no-annotate>0|-save-temps -path-output>0|-ED>0|-no-auto-attrs>0|-no-builtin>0|-no-extra-keywords>0|-enum-is-int>0|-no-fp-associative>0|-structs-do-not-overlap>1|-implicit-pointers>0|-eh >0|-rtti>0|-check-init-order>0|-ignore-std>1|-const-read-write>0|-const-strings>0|-no-multiline>1|-misra>0|-misra-strict>0|-misra-no-cross-module>0|-misra-no-runtime>0|-misra-testing>0|-misra-suppress-advisory>0|-no-std-inc>0|-double-size-32>1|-double-size-any>0|-swc>1|-no-simd>0|-section switch=seg_pmda>0|-no-shift-to-add>0|-pguide>0|NOSWITCH>0|-flags-compiler --diag_warning,implicit_func_decl>0|-warn-protos>1|-flags-compiler --diag_warning,call_not_inlined>0|-Wremarks>0|-w>0]]></option>
+				</tool>
+				<tool type="Assembler">
+					<option><![CDATA[|-Version>4.5|-v>0|-g>0|-l>0|-save-temps>0|-sp>0|-swc>1]]></option>
+				</tool>
+				<tool type="Linker">
+					<option><![CDATA[|-Version>5.0|-flags-link -t>0|-flags-link -S>0|-flags-link -s>0|-mem>0|-flags-link -warnonce>0|-map>0|-flags-link -xref>0|-flags-link -save-temps>0|-flags-link -ip>0|-flags-link -e>0|-flags-link -ev>0|-flags-link -MD__ADI_LIBEH__>0|-add-debug-libpaths>1|-swc>1]]></option>
+				</tool>
+				<tool type="Splitter">
+					<option><![CDATA[|-Version>5.0|-pm>1|-dm>0|-64>0|s>0|-ram>1|-norom>0|-f s3>1|-r> 8 8 32|-u>0|-o>SigLib]]></option>
+				</tool>
+				<tool type="Loader">
+					<option><![CDATA[|-Version>4.5|-bprom>1|-fHEX>1|-HostWidth8>1|-v>0|-nokernel>0|-p>0x0|UserKernel>0|-l>211xx\ldr\160_prom.dxe|-COMPRESSION>0|-COMPRESSIONOVERLAY>0|-RETAINSECONDSTAGEKERNEL>0|-COMPRESSWS>9]]></option>
+				</tool>
+				<tool type="Archiver">
+					<option><![CDATA[]]></option>
+				</tool>
+				<tool type="VdkGen">
+					<option><![CDATA[]]></option>
+				</tool>
+			</tools>
+		</configuration>
+		<configuration name="Release">
+			<intermediate-dir>.\21k</intermediate-dir>
+			<output-dir>..\lib\21k</output-dir>
+			<changed-property-page-flags>0</changed-property-page-flags>
+			<tools>
+				<tool type="Compiler">
+					<option><![CDATA[|-Version>5.0|-O>0|-O1>0|-Ov>100|-ipa>0|-g>0|-no-annotate>0|-save-temps -path-output>0|-ED>0|-no-auto-attrs>0|-no-builtin>0|-no-extra-keywords>0|-enum-is-int>0|-no-fp-associative>0|-structs-do-not-overlap>1|-implicit-pointers>0|-eh >0|-rtti>1|-check-init-order>0|-ignore-std>1|-const-read-write>0|-const-strings>0|-no-multiline>1|-misra>0|-misra-strict>0|-misra-no-cross-module>0|-misra-no-runtime>1|-misra-testing>1|-misra-suppress-advisory>0|-I>.,"C:\SigLib\include"|-no-std-inc>0|-double-size-32>1|-double-size-any>0|-swc>1|-no-simd>0|-section switch=seg_pmda>0|-no-shift-to-add>0|-pguide>0|NOSWITCH>0|-flags-compiler --diag_warning,implicit_func_decl>0|-warn-protos>1|-flags-compiler --diag_warning,call_not_inlined>0|-Wremarks>0|-w>0|AdditionalOptions>-c99]]></option>
+				</tool>
+				<tool type="Assembler">
+					<option><![CDATA[|-Version>4.5|-v>0|-g>0|-l>0|-save-temps>0|-sp>0|-swc>1]]></option>
+				</tool>
+				<tool type="Linker">
+					<option><![CDATA[|-Version>5.0|-flags-link -t>0|-flags-link -S>0|-flags-link -s>0|-mem>0|-flags-link -warnonce>0|-map>0|-flags-link -xref>0|-flags-link -save-temps>0|-flags-link -ip>1|-flags-link -e>1|-flags-link -ev>0|-flags-link -MD__ADI_LIBEH__>0|-add-debug-libpaths>0|-swc>1]]></option>
+				</tool>
+				<tool type="Splitter">
+					<option><![CDATA[|-Version>5.0|-pm>1|-dm>0|-64>0|s>0|-ram>1|-norom>0|-f s3>1|-r> 8 8 32|-u>0|-o>SigLib]]></option>
+				</tool>
+				<tool type="Loader">
+					<option><![CDATA[|-Version>4.5|-bprom>1|-fHEX>1|-HostWidth8>1|-v>0|-nokernel>0|-p>0x0|UserKernel>0|-COMPRESSION>0|-COMPRESSIONOVERLAY>0|-RETAINSECONDSTAGEKERNEL>0|-COMPRESSWS>9]]></option>
+				</tool>
+				<tool type="Archiver">
+					<option><![CDATA[]]></option>
+				</tool>
+				<tool type="VdkGen">
+					<option><![CDATA[]]></option>
+				</tool>
+			</tools>
+		</configuration>
+	</configurations>
+	<!-- Files under root directly -->
+	<files>
+		<file name=".\acoustic.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\Debug</intermediate-dir>
+					<output-dir>.\Debug</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\Release</intermediate-dir>
+					<output-dir>.\Release</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\adaptive.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\arbfft.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\chirpz.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\comms.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\complex.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\complexa.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\debug</intermediate-dir>
+					<output-dir>..\src</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\release</intermediate-dir>
+					<output-dir>..\src</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\control.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\convolve.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\correlate.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\Debug</intermediate-dir>
+					<output-dir>.\Debug</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\Release</intermediate-dir>
+					<output-dir>.\Release</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\datatype.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\Debug</intermediate-dir>
+					<output-dir>.\Debug</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\Release</intermediate-dir>
+					<output-dir>.\Release</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\decint.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\Debug</intermediate-dir>
+					<output-dir>.\Debug</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\Release</intermediate-dir>
+					<output-dir>.\Release</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\delay.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\Debug</intermediate-dir>
+					<output-dir>.\Debug</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\Release</intermediate-dir>
+					<output-dir>.\Release</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\dsputil2.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\dsputil3.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\Debug</intermediate-dir>
+					<output-dir>.\Debug</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\Release</intermediate-dir>
+					<output-dir>.\Release</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\dsputils.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\dtmf.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\fdfilter.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\ffourier.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\filter.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\firfilt.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\fourier.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\icoder.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\iirfilt.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\image.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\matrix.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\minmax.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\mod_a.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\mod_d.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\modem.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\Debug</intermediate-dir>
+					<output-dir>.\Debug</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\Release</intermediate-dir>
+					<output-dir>.\Release</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\mux.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\order.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\Debug</intermediate-dir>
+					<output-dir>.\Debug</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\Release</intermediate-dir>
+					<output-dir>.\Release</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\prbs.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\pspect.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\Debug</intermediate-dir>
+					<output-dir>.\Debug</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\Release</intermediate-dir>
+					<output-dir>.\Release</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\regress.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\siggen.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\siglib.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\smath.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\speech.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\Debug</intermediate-dir>
+					<output-dir>.\Debug</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\Release</intermediate-dir>
+					<output-dir>.\Release</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\stats.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\timing.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\trig.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\viterbi.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+		<file name=".\window.c">
+			<file-configurations>
+				<file-configuration name="Debug">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+				<file-configuration name="Release">
+					<excluded-flag value="no"/>
+					<build-with-flag value="project"/>
+					<intermediate-dir>.\21k</intermediate-dir>
+					<output-dir>..\lib\21k</output-dir>
+				</file-configuration>
+			</file-configurations>
+		</file>
+	</files>
+</visualdsp-project>

@@ -1,0 +1,65 @@
+Microsoft eMbedded Visual Tools Workspace File, Format Version 4.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "ce_dynamic_library"=.\ce_dynamic_library\ce_dynamic_library.vcp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "ce_dynamic_library_emulator"=.\ce_dynamic_library_emulator\ce_dynamic_library_emulator.vcp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "ce_static_library"=.\ce_static_library\ce_static_library.vcp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "ce_static_library_emulator"=.\ce_static_library_emulator\ce_static_library_emulator.vcp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+

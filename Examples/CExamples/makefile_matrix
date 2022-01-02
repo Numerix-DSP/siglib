@@ -1,0 +1,19 @@
+# Example makefile for SigLib example
+
+SIGLIB_CFLAGS = -I../include -I../gnuplot_c
+SIGLIB_LIBS = -L../lib/linux -lsiglib -L../gnuplot_c -lgnuplot_c
+
+PROGRAM=matrix
+
+G =         # debug option here
+CC = gcc    # compiler
+
+# target
+all: $(PROGRAM)
+$(PROGRAM) : $(PROGRAM).o
+	$(CC) -o $(PROGRAM) $(PROGRAM).o $(SIGLIB_LIBS) -lm
+$(PROGRAM).o : $(PROGRAM).c
+	$(CC) -c $(PROGRAM).c $(SIGLIB_CFLAGS)
+
+clean:
+	/bin/rm -f *.o $(PROGRAM)

@@ -1,0 +1,33 @@
+<?xml version="1.0" ?> 
+
+<!-- $Id: make.bkl,v 1.0 2005/05/11$ --> 
+
+<makefile>
+    
+    <!-- Additional include paths (include tag) -->
+
+    <set var="EXTRAINCLUDE"></set> 
+
+    <include file="../../wxWidgets-3.0.3/build/bakefiles/wxpresets/presets/wx.bkl" /> 
+
+    <exe id="demo" template="wx">
+        <app-type>gui</app-type> 
+        <debug-info>on</debug-info> 
+        <runtime-libs>static</runtime-libs> 
+
+        <include>
+            ../siglib/ngl
+        </include> 
+        <sources>
+            main.cpp
+            demo.cpp
+            dfgraph.cpp
+            dspgraph.cpp
+         </sources>
+
+         <wx-lib>adv</wx-lib> 
+         <wx-lib>net</wx-lib> 
+         <wx-lib>core</wx-lib> 
+         <wx-lib>base</wx-lib>
+    </exe>
+</makefile>

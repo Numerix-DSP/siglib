@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{62131A66-0DB3-45BB-9764-0CEFE5100E40}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>static_library</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>siglib</TargetName>
+    <OutDir>$(SolutionDir)$(Platform)\static_library\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <TargetName>siglib</TargetName>
+    <OutDir>$(SolutionDir)$(Platform)\static_library\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);SIGLIB_STATIC_LIB=1</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%SIGLIB_PATH%\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions);SIGLIB_STATIC_LIB=1;SIGLIB_STATIC_LIB=1</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%SIGLIB_PATH%\include</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\siglib.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\acoustic.c" />
+    <ClCompile Include="..\adaptive.c" />
+    <ClCompile Include="..\arbfft.c" />
+    <ClCompile Include="..\chirpz.c" />
+    <ClCompile Include="..\comms.c" />
+    <ClCompile Include="..\complex.c" />
+    <ClCompile Include="..\complexa.c" />
+    <ClCompile Include="..\control.c" />
+    <ClCompile Include="..\convolve.c" />
+    <ClCompile Include="..\correlate.c" />
+    <ClCompile Include="..\datatype.c" />
+    <ClCompile Include="..\decint.c" />
+    <ClCompile Include="..\delay.c" />
+    <ClCompile Include="..\dsputil2.c" />
+    <ClCompile Include="..\dsputil3.c" />
+    <ClCompile Include="..\dsputils.c" />
+    <ClCompile Include="..\dtmf.c" />
+    <ClCompile Include="..\fdfilter.c" />
+    <ClCompile Include="..\ffourier.c" />
+    <ClCompile Include="..\file_io.c" />
+    <ClCompile Include="..\filter.c" />
+    <ClCompile Include="..\firfilt.c" />
+    <ClCompile Include="..\fourier.c" />
+    <ClCompile Include="..\icoder.c" />
+    <ClCompile Include="..\iirfilt.c" />
+    <ClCompile Include="..\image.c" />
+    <ClCompile Include="..\machinelearning.c" />
+    <ClCompile Include="..\matrix.c" />
+    <ClCompile Include="..\minmax.c" />
+    <ClCompile Include="..\modem.c" />
+    <ClCompile Include="..\mod_a.c" />
+    <ClCompile Include="..\mod_d.c" />
+    <ClCompile Include="..\mux.c" />
+    <ClCompile Include="..\order.c" />
+    <ClCompile Include="..\prbs.c" />
+    <ClCompile Include="..\pspect.c" />
+    <ClCompile Include="..\regress.c" />
+    <ClCompile Include="..\siggen.c" />
+    <ClCompile Include="..\siglib.c" />
+    <ClCompile Include="..\smath.c" />
+    <ClCompile Include="..\speech.c" />
+    <ClCompile Include="..\stats.c" />
+    <ClCompile Include="..\timing.c" />
+    <ClCompile Include="..\trig.c" />
+    <ClCompile Include="..\viterbi.c" />
+    <ClCompile Include="..\window.c" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
