@@ -507,6 +507,10 @@ echo minmaxs
 pause
 minmaxs
 
+echo mixedFFT
+pause
+mixedFFT
+
 echo modcount
 pause
 modcount

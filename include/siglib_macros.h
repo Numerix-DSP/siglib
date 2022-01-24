@@ -169,6 +169,14 @@ Update history :
                             SIGLIB_ZERO, pPhase, pValue); \
         }
 
+#define SDA_Ones(Address, ArrayLength) { \
+        SDA_Fill (Address, SIGLIB_ONE, ArrayLength); \
+        }
+
+#define SDA_Zeros(Address, ArrayLength) { \
+        SDA_Fill (Address, SIGLIB_ZERO, ArrayLength); \
+        }
+
 
 // Complex numbers
 

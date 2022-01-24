@@ -125,10 +125,10 @@ int main(void)
               pRealData,                                    // Pointer to destination array
               INPUT_LENGTH);                                // Dataset length
                                                             // Perform DFT
-    SDA_Rft (pRealData,                                     // Pointer to real source array
-             pRealDataFT,                                   // Pointer to real destination array
-             pImagDataFT,                                   // Pointer to imaginary destination array
-             FT_SIZE);                                      // Dataset length
+    SDA_Rdft (pRealData,                                    // Pointer to real source array
+              pRealDataFT,                                  // Pointer to real destination array
+              pImagDataFT,                                  // Pointer to imaginary destination array
+              FT_SIZE);                                     // Dataset length
 
     SDA_Multiply (pRealDataFT,                              // Pointer to source array
                   SIGLIB_ONE / FFT_LENGTH,                  // Inverse FFT length

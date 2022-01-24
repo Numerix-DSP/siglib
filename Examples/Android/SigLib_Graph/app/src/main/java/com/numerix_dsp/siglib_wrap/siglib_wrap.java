@@ -250,20 +250,20 @@ public class siglib_wrap implements siglib_wrapConstants {
     siglib_wrapJNI.SDA_InstantFreq(SWIGTYPE_p_double.getCPtr(arg0), SWIGTYPE_p_double.getCPtr(arg1), SWIGTYPE_p_double.getCPtr(arg2), arg3);
   }
 
-  public static void SDA_Rft(SWIGTYPE_p_double arg0, SWIGTYPE_p_double arg1, SWIGTYPE_p_double arg2, int arg3) {
-    siglib_wrapJNI.SDA_Rft(SWIGTYPE_p_double.getCPtr(arg0), SWIGTYPE_p_double.getCPtr(arg1), SWIGTYPE_p_double.getCPtr(arg2), arg3);
+  public static void SDA_Rdft(SWIGTYPE_p_double arg0, SWIGTYPE_p_double arg1, SWIGTYPE_p_double arg2, int arg3) {
+    siglib_wrapJNI.SDA_Rdft(SWIGTYPE_p_double.getCPtr(arg0), SWIGTYPE_p_double.getCPtr(arg1), SWIGTYPE_p_double.getCPtr(arg2), arg3);
   }
 
-  public static void SDA_Rift(SWIGTYPE_p_double arg0, SWIGTYPE_p_double arg1, SWIGTYPE_p_double arg2, int arg3) {
-    siglib_wrapJNI.SDA_Rift(SWIGTYPE_p_double.getCPtr(arg0), SWIGTYPE_p_double.getCPtr(arg1), SWIGTYPE_p_double.getCPtr(arg2), arg3);
+  public static void SDA_Ridft(SWIGTYPE_p_double arg0, SWIGTYPE_p_double arg1, SWIGTYPE_p_double arg2, int arg3) {
+    siglib_wrapJNI.SDA_Ridft(SWIGTYPE_p_double.getCPtr(arg0), SWIGTYPE_p_double.getCPtr(arg1), SWIGTYPE_p_double.getCPtr(arg2), arg3);
   }
 
-  public static void SDA_Cft(SWIGTYPE_p_double arg0, SWIGTYPE_p_double arg1, SWIGTYPE_p_double arg2, SWIGTYPE_p_double arg3, int arg4) {
-    siglib_wrapJNI.SDA_Cft(SWIGTYPE_p_double.getCPtr(arg0), SWIGTYPE_p_double.getCPtr(arg1), SWIGTYPE_p_double.getCPtr(arg2), SWIGTYPE_p_double.getCPtr(arg3), arg4);
+  public static void SDA_Cdft(SWIGTYPE_p_double arg0, SWIGTYPE_p_double arg1, SWIGTYPE_p_double arg2, SWIGTYPE_p_double arg3, int arg4) {
+    siglib_wrapJNI.SDA_Cdft(SWIGTYPE_p_double.getCPtr(arg0), SWIGTYPE_p_double.getCPtr(arg1), SWIGTYPE_p_double.getCPtr(arg2), SWIGTYPE_p_double.getCPtr(arg3), arg4);
   }
 
-  public static void SDA_Cift(SWIGTYPE_p_double arg0, SWIGTYPE_p_double arg1, SWIGTYPE_p_double arg2, SWIGTYPE_p_double arg3, int arg4) {
-    siglib_wrapJNI.SDA_Cift(SWIGTYPE_p_double.getCPtr(arg0), SWIGTYPE_p_double.getCPtr(arg1), SWIGTYPE_p_double.getCPtr(arg2), SWIGTYPE_p_double.getCPtr(arg3), arg4);
+  public static void SDA_Cidft(SWIGTYPE_p_double arg0, SWIGTYPE_p_double arg1, SWIGTYPE_p_double arg2, SWIGTYPE_p_double arg3, int arg4) {
+    siglib_wrapJNI.SDA_Cidft(SWIGTYPE_p_double.getCPtr(arg0), SWIGTYPE_p_double.getCPtr(arg1), SWIGTYPE_p_double.getCPtr(arg2), SWIGTYPE_p_double.getCPtr(arg3), arg4);
   }
 
   public static void SDA_FftShift(SWIGTYPE_p_double arg0, SWIGTYPE_p_double arg1, int arg2) {

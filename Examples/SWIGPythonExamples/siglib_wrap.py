@@ -716,21 +716,21 @@ def SDA_InstantFreq(arg1, arg2, arg3, arg4):
     return _siglib_wrap.SDA_InstantFreq(arg1, arg2, arg3, arg4)
 SDA_InstantFreq = _siglib_wrap.SDA_InstantFreq
 
-def SDA_Rft(arg1, arg2, arg3, arg4):
-    return _siglib_wrap.SDA_Rft(arg1, arg2, arg3, arg4)
-SDA_Rft = _siglib_wrap.SDA_Rft
+def SDA_Rdft(arg1, arg2, arg3, arg4):
+    return _siglib_wrap.SDA_Rdft(arg1, arg2, arg3, arg4)
+SDA_Rdft = _siglib_wrap.SDA_Rdft
 
-def SDA_Rift(arg1, arg2, arg3, arg4):
-    return _siglib_wrap.SDA_Rift(arg1, arg2, arg3, arg4)
-SDA_Rift = _siglib_wrap.SDA_Rift
+def SDA_Ridft(arg1, arg2, arg3, arg4):
+    return _siglib_wrap.SDA_Ridft(arg1, arg2, arg3, arg4)
+SDA_Ridft = _siglib_wrap.SDA_Ridft
 
-def SDA_Cft(arg1, arg2, arg3, arg4, arg5):
-    return _siglib_wrap.SDA_Cft(arg1, arg2, arg3, arg4, arg5)
-SDA_Cft = _siglib_wrap.SDA_Cft
+def SDA_Cdft(arg1, arg2, arg3, arg4, arg5):
+    return _siglib_wrap.SDA_Cdft(arg1, arg2, arg3, arg4, arg5)
+SDA_Cdft = _siglib_wrap.SDA_Cdft
 
-def SDA_Cift(arg1, arg2, arg3, arg4, arg5):
-    return _siglib_wrap.SDA_Cift(arg1, arg2, arg3, arg4, arg5)
-SDA_Cift = _siglib_wrap.SDA_Cift
+def SDA_Cidft(arg1, arg2, arg3, arg4, arg5):
+    return _siglib_wrap.SDA_Cidft(arg1, arg2, arg3, arg4, arg5)
+SDA_Cidft = _siglib_wrap.SDA_Cidft
 
 def SDA_FftShift(arg1, arg2, arg3):
     return _siglib_wrap.SDA_FftShift(arg1, arg2, arg3)

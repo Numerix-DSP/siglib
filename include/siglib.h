@@ -44,7 +44,7 @@ Update history :
 #ifndef _HP_VEE         // The following functionality is not supported by VEE
 
 #define SIGLIB                          1                   // Indicates SigLib is being used
-#define SIGLIB_VERSION                  10.00               // Indicates SigLib version being used
+#define SIGLIB_VERSION                  10.10               // Indicates SigLib version being used
 #define SIGLIB_ENABLE_DEBUG_FPRINTF     0                   // Set to 1 to enable SUF_Debugfprintf functions in some siglib functions
 
 
@@ -353,6 +353,38 @@ void SIGLIB_FUNC_DECL SDA_Cfft42rBy1cr (SLData_t * SIGLIB_INPUT_PTR_DECL,   // P
     const SLArrayIndex_t,                                   // FFT length
     const SLArrayIndex_t);                                  // log2 FFT length
 
+void SIGLIB_FUNC_DECL SDS_Cfft2 (const SLData_t,    // Source sample real 1
+    const SLData_t,                 // Source sample imaginary 1
+    const SLData_t,                 // Source sample real 2
+    const SLData_t,                 // Source sample imaginary 2
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                     // Pointer to destination real 1
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                     // Pointer to destination imaginary 1
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                     // Pointer to destination real 2
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL);                    // Pointer to destination imaginary 2
+
+void SIGLIB_FUNC_DECL SDA_Cfft2 (const SLData_t * SIGLIB_INPUT_PTR_DECL,    // Pointer to real source array
+    const SLData_t * SIGLIB_INPUT_PTR_DECL,                 // Pointer to imaginary source array
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to real destination array
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL);                     // Pointer to imaginary destination array
+
+void SIGLIB_FUNC_DECL SDS_Cfft3 (const SLData_t,            // Source sample real 1
+    const SLData_t,                                         // Source sample imaginary 1
+    const SLData_t,                                         // Source sample real 2
+    const SLData_t,                                         // Source sample imaginary 2
+    const SLData_t,                                         // Source sample real 3
+    const SLData_t,                                         // Source sample imaginary 3
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination real 1
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination imaginary 1
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination real 2
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination imaginary 2
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination real 3
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL);                     // Pointer to destination imaginary 3
+
+void SIGLIB_FUNC_DECL SDA_Cfft3 (const SLData_t * SIGLIB_INPUT_PTR_DECL,    // Pointer to real source array
+    const SLData_t * SIGLIB_INPUT_PTR_DECL,                 // Pointer to imaginary source array
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to real destination array
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL);                     // Pointer to imaginary destination array
+
 
 // Generic Fourier Transform Functions - fourier.c
 
@@ -475,23 +507,23 @@ void SIGLIB_FUNC_DECL SDA_InstantFreq (const SLData_t * SIGLIB_INPUT_PTR_DECL,  
     SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination array
     const SLArrayIndex_t);                                  // Array length
 
-void SIGLIB_FUNC_DECL SDA_Rft (const SLData_t * SIGLIB_INPUT_PTR_DECL,  // Pointer to real source array
+void SIGLIB_FUNC_DECL SDA_Rdft (const SLData_t * SIGLIB_INPUT_PTR_DECL,  // Pointer to real source array
     SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to real destination array
     SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to imaginary destination array
     const SLArrayIndex_t);                                  // Transform size
 
-void SIGLIB_FUNC_DECL SDA_Rift (const SLData_t * SIGLIB_INPUT_PTR_DECL, // Pointer to real source array
+void SIGLIB_FUNC_DECL SDA_Ridft (const SLData_t * SIGLIB_INPUT_PTR_DECL, // Pointer to real source array
     SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to real destination array
     SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to imaginary destination array
     const SLArrayIndex_t);                                  // Transform size
 
-void SIGLIB_FUNC_DECL SDA_Cft (const SLData_t * SIGLIB_INPUT_PTR_DECL,  // Pointer to real source array
+void SIGLIB_FUNC_DECL SDA_Cdft (const SLData_t * SIGLIB_INPUT_PTR_DECL,  // Pointer to real source array
     const SLData_t * SIGLIB_INPUT_PTR_DECL,                 // Pointer to imaginary source array
     SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to real destination array
     SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to imaginary destination array
     const SLArrayIndex_t);                                  // Transform size
 
-void SIGLIB_FUNC_DECL SDA_Cift (const SLData_t * SIGLIB_INPUT_PTR_DECL, // Pointer to real source array
+void SIGLIB_FUNC_DECL SDA_Cidft (const SLData_t * SIGLIB_INPUT_PTR_DECL, // Pointer to real source array
     const SLData_t * SIGLIB_INPUT_PTR_DECL,                 // Pointer to imaginary source array
     SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to real destination array
     SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to imaginary destination array
@@ -6281,6 +6313,11 @@ void SIGLIB_FUNC_DECL SDA_ActivationTanHDerivative (const SLData_t * SIGLIB_INPU
 #define SDA_MinPos              SDA_MinIndex
 #define SDA_AbsMinPos           SDA_AbsMinIndex
 #define SDA_Offset              SDA_Add
+#define SDA_Rft                 SDA_Rdft
+#define SDA_Rift                SDA_Ridft
+#define SDA_Cft                 SDA_Cdft
+#define SDA_Cift                SDA_Cidft
+
 #define SIGLIB_COS_WAVE         SIGLIB_COSINE_WAVE
 
 #define SAI_FftSizeLog2         SAI_FftLengthLog2           // Returns the log2(FFT length) for a given FFT length

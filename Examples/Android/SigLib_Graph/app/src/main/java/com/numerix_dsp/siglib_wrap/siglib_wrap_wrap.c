@@ -3086,7 +3086,7 @@ SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_SDA_1Rft(JNIEnv *jenv,
   arg2 = *(SLData_t **)&jarg2;
   arg3 = *(SLData_t **)&jarg3;
   arg4 = (SLArrayIndex_t)jarg4;
-  SDA_Rft((double const *)arg1,arg2,arg3,arg4);
+  SDA_Rdft((double const *)arg1,arg2,arg3,arg4);
 }
 
 
@@ -3102,7 +3102,7 @@ SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_SDA_1Rift(JNIEnv *jenv
   arg2 = *(SLData_t **)&jarg2;
   arg3 = *(SLData_t **)&jarg3;
   arg4 = (SLArrayIndex_t)jarg4;
-  SDA_Rift((double const *)arg1,arg2,arg3,arg4);
+  SDA_Ridft((double const *)arg1,arg2,arg3,arg4);
 }
 
 
@@ -3120,7 +3120,7 @@ SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_SDA_1Cft(JNIEnv *jenv,
   arg3 = *(SLData_t **)&jarg3;
   arg4 = *(SLData_t **)&jarg4;
   arg5 = (SLArrayIndex_t)jarg5;
-  SDA_Cft((double const *)arg1,(double const *)arg2,arg3,arg4,arg5);
+  SDA_Cdft((double const *)arg1,(double const *)arg2,arg3,arg4,arg5);
 }
 
 
@@ -3138,7 +3138,7 @@ SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_SDA_1Cift(JNIEnv *jenv
   arg3 = *(SLData_t **)&jarg3;
   arg4 = *(SLData_t **)&jarg4;
   arg5 = (SLArrayIndex_t)jarg5;
-  SDA_Cift((double const *)arg1,(double const *)arg2,arg3,arg4,arg5);
+  SDA_Cidft((double const *)arg1,(double const *)arg2,arg3,arg4,arg5);
 }
 
 

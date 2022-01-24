@@ -1,9 +1,36 @@
 SigLib (Tm) Revision Update History File
 ========================================
 
+VERSION : 10.10
+RELEASE DATE : 24/01/2022
+_________________________
+
+Additional Processor / Compiler Support :
+    None.
+
+Additional Functionality :
+    Macros: SDA_Ones and SDA_Zeros, simplify the usef of SDA_Fill
+    SDS_Cdft2, SDA_Cdft2, SDS_Cdft3, SDA_Cdft3
+
+Bug Fixes :
+    None.
+
+Operational Changes :
+    Functions renamed (all #defined to maintain compatibility):
+        SDA_Rft         to SDA_Rdft
+        SDA_Rift        to SDA_Ridft
+        SDA_Cft         to SDA_Cdft
+        SDA_Cift        to SDA_Cidft
+
+Optimisation Changes :
+    None.
+
+Notes :
+
+
 
 VERSION : 10.00
-RELEASE DATE : xx/xx/xxx
+RELEASE DATE : 04/01/2022
 _________________________
 
 Additional Processor / Compiler Support :
@@ -915,7 +942,7 @@ THE FOLLOWING FUNCTIONS HAVE BEEN OPTIMISED TO REMOVE INTERNAL DIVISION OPERATIO
 	SDA_DtmfGenerate - The magnitude of the output signal from this function is now twice the size of the previous function.
 	SIF_FirOverlapAdd, SDA_FirOverlapAdd, SIF_FirOverlapSave, SDA_FirOverlapSave.
 	SDA_FdHilbert.
-	SDA_Rft and SDA_Rift.
+	SDA_Rdft and SDA_Ridft.
 	SDA_Qam16Demodulate and SDA_Qam16DemodulateDebug.
 	SDA_Mean and SDA_SubtractMean.
 	SIF_ArbFft, SDA_ArbRfft and SDA_ArbCfft.

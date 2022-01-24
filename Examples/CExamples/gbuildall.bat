@@ -131,6 +131,7 @@ call gb median
 call gb microscan
 call gb minmax
 call gb minmaxs
+call gb mixedFFT
 call gb modcount
 call gb modulate
 call gb modulo

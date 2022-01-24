@@ -94,10 +94,10 @@ int main(int argc, char *argv[])
                 pFFTCoeffs,                                 // Pointer to FFT coefficients
                 SIGLIB_BIT_REV_STANDARD,                    // Bit reverse mode flag / Pointer to bit reverse address table
                 &CZTorFFTSwitch,                            // Pointer to switch to indicate CZT or FFT
-                &FFTLength,                                   // Pointer to FFT length
-                &Log2FFTLength,                               // Pointer to Log 2 FFT length
-                &InverseFFTLength,                            // Pointer to the inverse FFT length
-                &InverseSampleLengthXFFTLength,               // Pointer to the inverse (Sample length * FFT length)
+                &FFTLength,                                 // Pointer to FFT length
+                &Log2FFTLength,                             // Pointer to Log 2 FFT length
+                &InverseFFTLength,                          // Pointer to the inverse FFT length
+                &InverseSampleLengthXFFTLength,             // Pointer to the inverse (Sample length * FFT length)
                 SAMPLE_LENGTH);                             // Dataset length
 
                                                             // Generate Hanning window table
@@ -149,17 +149,17 @@ int main(int argc, char *argv[])
                  pFFTCoeffs,                                // Pointer to FFT coefficients
                  SIGLIB_BIT_REV_STANDARD,                   // Bit reverse mode flag / Pointer to bit reverse address table
                  CZTorFFTSwitch,                            // Switch to indicate CZT or FFT
-                 FFTLength,                                   // FFT length
-                 Log2FFTLength,                               // Log 2 FFT length
-                 InverseFFTLength,                            // Inverse FFT length
-                 InverseSampleLengthXFFTLength,               // Inverse (Sample length * FFT length)
+                 FFTLength,                                 // FFT length
+                 Log2FFTLength,                             // Log 2 FFT length
+                 InverseFFTLength,                          // Inverse FFT length
+                 InverseSampleLengthXFFTLength,             // Inverse (Sample length * FFT length)
                  SAMPLE_LENGTH);                            // Arbitrary FFT length
 
                                                             // Perform DFT on copy
-    SDA_Rft (pWindowCoeffs,                                 // Pointer to source array
-             pRealDatac,                                    // Pointer to real destination array
-             pImagDatac,                                    // Pointer to imaginary destination array
-             SAMPLE_LENGTH);                                // Dataset length
+    SDA_Rdft (pWindowCoeffs,                                // Pointer to source array
+              pRealDatac,                                   // Pointer to real destination array
+              pImagDatac,                                   // Pointer to imaginary destination array
+              SAMPLE_LENGTH);                               // Dataset length
 
                                                             // Scale output of DFT
     SDA_Multiply (pRealDatac,                               // Pointer to source array

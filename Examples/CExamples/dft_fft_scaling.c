@@ -106,10 +106,10 @@ int main(void)
     }
 
                                                             // Perform DFT
-    SDA_Rft (pSrc,                                          // Pointer to real source array
-             pRealData,                                     // Pointer to real destination array
-             pImagData,                                     // Pointer to imaginary destination array
-             FFT_LENGTH);                                   // Transform size
+    SDA_Rdft (pSrc,                                         // Pointer to real source array
+              pRealData,                                    // Pointer to real destination array
+              pImagData,                                    // Pointer to imaginary destination array
+              FFT_LENGTH);                                  // Transform size
 
     gpc_plot_2d_dual_plot (h2DDualPlot,                     // Graph handle
                            "Frequency",                     // X-Axis label
@@ -210,7 +210,7 @@ int main(void)
     printf ("FFT(Source signal) :\n");
     SUF_PrintComplexArray (realData,                        // Real dataset
                            imagData,                        // Imaginary dataset
-                           SIMPLE_FFT_LENGTH);                               // Dataset length
+                           SIMPLE_FFT_LENGTH);              // Dataset length
     printf ("\n");
 
                                                             // Perform real FFT

@@ -131,6 +131,7 @@ call mb median
 call mb microscan
 call mb minmax
 call mb minmaxs
+call mb mixedFFT
 call mb modcount
 call mb modulate
 call mb modulo

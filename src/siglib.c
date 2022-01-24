@@ -153,19 +153,15 @@ void SIGLIB_FUNC_DECL SUF_PrintComplexArray (const SLData_t *pSrcReal,
     SLArrayIndex_t  i;
 
     for (i = 0; i < ArrayLength; i++) {
+        SUF_Printf ("[%ld] = ", (long)i);
+        if (*pSrcReal >= SIGLIB_ZERO) {
+            SUF_Printf (" ");
+        }
         if (*pSrcImag >= SIGLIB_ZERO) {
-            SUF_Printf ("[%ld] = ", (long)i);
-            if (*pSrcReal >= SIGLIB_ZERO) {
-                SUF_Printf (" ");
-            }
 //          SUF_Printf ("%le + j%le\n", (double)*pSrcReal++, (double)*pSrcImag++);
             SUF_Printf ("%1.6lf + j %1.6lf\n", (double)*pSrcReal++, (double)*pSrcImag++);
         }
         else {
-            SUF_Printf ("[%ld] = ", (long)i);
-            if (*pSrcReal >= SIGLIB_ZERO) {
-                SUF_Printf (" ");
-            }
 //          SUF_Printf ("%le - j%le\n", (double)*pSrcReal++, (double)-*pSrcImag++);
             SUF_Printf ("%1.6lf - j %1.6lf\n", (double)*pSrcReal++, (double)-*pSrcImag++);
         }

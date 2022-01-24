@@ -62,10 +62,10 @@ int main(void)
 //      CarrierSign *= SIGLIB_MINUS_ONE;            // Uncomment to modulate carrier sign
 
                             // Use a DFT in place of the FFT to save having to generate the coefficients etc.
-        SDA_Rift (pSrcReal,                         // Pointer to real source array
-                  pDstReal,                         // Pointer to real destination array
-                  pDstImag,                         // Pointer to imaginary destination array
-                  SYMBOL_LENGTH);                   // Transform size
+        SDA_Ridft (pSrcReal,                        // Pointer to real source array
+                   pDstReal,                        // Pointer to real destination array
+                   pDstImag,                        // Pointer to imaginary destination array
+                   SYMBOL_LENGTH);                  // Transform size
 
         gpc_plot_2d (h2DPlot,                       // Graph handle
                      pDstReal,                      // Dataset
@@ -104,18 +104,18 @@ int main(void)
         SDA_Clear (pDftReal, SYMBOL_LENGTH);        // Clear FFT source data arrays
         SDA_Clear (pDftImag, SYMBOL_LENGTH);
 
-        SDA_Cft (pSrcReal+FIRST_SUB_CARRIER,        // Pointer to real source array
-                 pSrcImag+FIRST_SUB_CARRIER,        // Pointer to imaginary source array
-                 pDftReal+FIRST_SUB_CARRIER,        // Pointer to real destination array
-                 pDftImag+FIRST_SUB_CARRIER,        // Pointer to imaginary destination array
-                 DFT_LENGTH);                       // Transform size
+        SDA_Cdft (pSrcReal+FIRST_SUB_CARRIER,       // Pointer to real source array
+                  pSrcImag+FIRST_SUB_CARRIER,       // Pointer to imaginary source array
+                  pDftReal+FIRST_SUB_CARRIER,       // Pointer to real destination array
+                  pDftImag+FIRST_SUB_CARRIER,       // Pointer to imaginary destination array
+                  DFT_LENGTH);                      // Transform size
 
                             // Use a DFT in place of the FFT to save having to generate the coefficients etc.
-        SDA_Cift (pDftReal,                         // Pointer to real source array
-                  pDftImag,                         // Pointer to imaginary source array
-                  pDstReal,                         // Pointer to real destination array
-                  pDstImag,                         // Pointer to imaginary destination array
-                  SYMBOL_LENGTH);                   // Transform size
+        SDA_Cidft (pDftReal,                        // Pointer to real source array
+                   pDftImag,                        // Pointer to imaginary source array
+                   pDstReal,                        // Pointer to real destination array
+                   pDstImag,                        // Pointer to imaginary destination array
+                   SYMBOL_LENGTH);                  // Transform size
 
         gpc_plot_2d (h2DPlot,                       // Graph handle
                      pDstReal,                      // Dataset

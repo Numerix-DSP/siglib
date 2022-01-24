@@ -500,12 +500,12 @@ Declare Sub SDA_InstantFreq Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByVal iData As Integer)
 
-Declare Sub SDA_Rft Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
+Declare Sub SDA_Rdft Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByVal iData As Integer)
 
-Declare Sub SDA_Rift Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
+Declare Sub SDA_Ridft Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByVal iData As Integer)

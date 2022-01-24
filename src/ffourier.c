@@ -1789,3 +1789,175 @@ void SIGLIB_FUNC_DECL SDA_Cfft42rBy1cr (SLData_t realData[],
 }       // End of SDA_Cfft42rBy1cr()
 
 
+/**/
+/********************************************************
+* Function: SDS_Cfft2
+*
+* Parameters:
+*   const SLData_t srcReal1,
+*   const SLData_t srcImag1,
+*   const SLData_t srcReal2,
+*   const SLData_t srcImag2,
+*   SLData_t *pDstReal1,
+*   SLData_t *pDstImag1,
+*   SLData_t *pDstReal2,
+*   SLData_t *pDstImag2,
+*
+* Return value:
+*   void
+*
+* Description:
+*   Perform a two point complex Discrete Fourier Transform.
+*
+********************************************************/
+
+void SIGLIB_FUNC_DECL SDS_Cfft2 (const SLData_t srcReal1,
+    const SLData_t srcImag1,
+    const SLData_t srcReal2,
+    const SLData_t srcImag2,
+    SLData_t *pDstReal1,
+    SLData_t *pDstImag1,
+    SLData_t *pDstReal2,
+    SLData_t *pDstImag2)
+
+{
+    *pDstReal1 = srcReal1 + srcReal2;
+    *pDstImag1 = srcImag1 + srcImag2;
+    *pDstReal2 = srcReal1 - srcReal2;
+    *pDstImag2 = srcImag1 - srcImag2;
+}       // End of SDS_Cfft2()
+
+
+/**/
+/********************************************************
+* Function: SDA_Cfft2
+*
+* Parameters:
+*   const SLData_t pSrcReal[],
+*   const SLData_t pSrcImag[],
+*   SLData_t pDstReal[],
+*   SLData_t pDstImag[],
+*
+* Return value:
+*   void
+*
+* Description:
+*   Perform a two point complex Discrete Fourier Transform.
+*
+********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_Cfft2 (const SLData_t pSrcReal[],
+    const SLData_t pSrcImag[],
+    SLData_t pDstReal[],
+    SLData_t pDstImag[])
+
+{
+    SLData_t sum_r = *pSrcReal + *(pSrcReal+1);
+    SLData_t sum_i = *pSrcImag + *(pSrcImag+1);
+    SLData_t dif_r = *pSrcReal - *(pSrcReal+1);
+    SLData_t dif_i = *pSrcImag - *(pSrcImag+1);
+    *pDstReal      = sum_r;
+    *pDstImag      = sum_i;
+    *(pDstReal+1)  = dif_r;
+    *(pDstImag+1)  = dif_i;
+
+}       // End of SDA_Cfft2()
+
+
+/**/
+/********************************************************
+* Function: SDS_Cfft3
+*
+* Parameters:
+*   const SLData_t srcReal1,
+*   const SLData_t srcImag1,
+*   const SLData_t srcReal2,
+*   const SLData_t srcImag2,
+*   const SLData_t srcReal3,
+*   const SLData_t srcImag3,
+*   SLData_t *pDstReal1,
+*   SLData_t *pDstImag1,
+*   SLData_t *pDstReal2,
+*   SLData_t *pDstImag2,
+*   SLData_t *pDstReal3,
+*   SLData_t *pDstImag3,
+*
+* Return value:
+*   void
+*
+* Description:
+*   Perform a three point complex Discrete Fourier Transform.
+*
+********************************************************/
+
+void SIGLIB_FUNC_DECL SDS_Cfft3 (const SLData_t srcReal1,
+    const SLData_t srcImag1,
+    const SLData_t srcReal2,
+    const SLData_t srcImag2,
+    const SLData_t srcReal3,
+    const SLData_t srcImag3,
+    SLData_t *pDstReal1,
+    SLData_t *pDstImag1,
+    SLData_t *pDstReal2,
+    SLData_t *pDstImag2,
+    SLData_t *pDstReal3,
+    SLData_t *pDstImag3)
+
+{
+    SLData_t tmp1_r = srcReal1;
+    SLData_t tmp1_i = srcImag1;
+    SLData_t tmp2_r = (srcReal2*SIGLIB_MINUS_HALF       - srcImag2*-SIGLIB_HALF_SQRT_THREE);
+    SLData_t tmp2_i = (srcReal2*-SIGLIB_HALF_SQRT_THREE + srcImag2*SIGLIB_MINUS_HALF);
+    SLData_t tmp3_r = (srcReal3*SIGLIB_MINUS_HALF       - srcImag3*SIGLIB_HALF_SQRT_THREE);
+    SLData_t tmp3_i = (srcReal3*SIGLIB_HALF_SQRT_THREE  + srcImag3*SIGLIB_MINUS_HALF);
+
+    *pDstReal1 = tmp1_r - (tmp2_r+tmp3_r) * SIGLIB_HALF - (tmp2_i-tmp3_i) * SIGLIB_HALF_SQRT_THREE;
+    *pDstImag1 = tmp1_i - (tmp2_i+tmp3_i) * SIGLIB_HALF + (tmp2_r-tmp3_r) * SIGLIB_HALF_SQRT_THREE;
+    *pDstReal2 = tmp1_r +  tmp2_r+tmp3_r;
+    *pDstImag2 = tmp1_i +  tmp2_i+tmp3_i;
+    *pDstReal3 = tmp1_r - (tmp2_r+tmp3_r) * SIGLIB_HALF + (tmp2_i-tmp3_i) * SIGLIB_HALF_SQRT_THREE;
+    *pDstImag3 = tmp1_i - (tmp2_i+tmp3_i) * SIGLIB_HALF - (tmp2_r-tmp3_r) * SIGLIB_HALF_SQRT_THREE;
+
+}       // End of SDS_Cfft3()
+
+
+/**/
+/********************************************************
+* Function: SDA_Cfft3
+*
+* Parameters:
+*   const SLData_t pSrcReal[],
+*   const SLData_t pSrcImag[],
+*   SLData_t pDstReal[],
+*   SLData_t pDstImag[],
+*
+* Return value:
+*   void
+*
+* Description:
+*   Perform a three point complex Discrete Fourier Transform.
+*
+********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_Cfft3 (const SLData_t pSrcReal[],
+    const SLData_t pSrcImag[],
+    SLData_t pDstReal[],
+    SLData_t pDstImag[])
+
+{
+    SLData_t tmp1_r = *pSrcReal;
+    SLData_t tmp1_i = *pSrcImag;
+    SLData_t tmp2_r = (*(pSrcReal+1)*SIGLIB_MINUS_HALF       - *(pSrcImag+1)*-SIGLIB_HALF_SQRT_THREE);
+    SLData_t tmp2_i = (*(pSrcReal+1)*-SIGLIB_HALF_SQRT_THREE + *(pSrcImag+1)*SIGLIB_MINUS_HALF);
+    SLData_t tmp3_r = (*(pSrcReal+2)*SIGLIB_MINUS_HALF       - *(pSrcImag+2)*SIGLIB_HALF_SQRT_THREE);
+    SLData_t tmp3_i = (*(pSrcReal+2)*SIGLIB_HALF_SQRT_THREE  + *(pSrcImag+2)*SIGLIB_MINUS_HALF);
+
+    *pDstReal     = tmp1_r - (tmp2_r+tmp3_r) * SIGLIB_HALF - (tmp2_i-tmp3_i) * SIGLIB_HALF_SQRT_THREE;
+    *pDstImag     = tmp1_i - (tmp2_i+tmp3_i) * SIGLIB_HALF + (tmp2_r-tmp3_r) * SIGLIB_HALF_SQRT_THREE;
+    *(pDstReal+1) = tmp1_r +  tmp2_r+tmp3_r;
+    *(pDstImag+1) = tmp1_i +  tmp2_i+tmp3_i;
+    *(pDstReal+2) = tmp1_r - (tmp2_r+tmp3_r) * SIGLIB_HALF + (tmp2_i-tmp3_i) * SIGLIB_HALF_SQRT_THREE;
+    *(pDstImag+2) = tmp1_i - (tmp2_i+tmp3_i) * SIGLIB_HALF - (tmp2_r-tmp3_r) * SIGLIB_HALF_SQRT_THREE;
+
+}       // End of SDA_Cfft3()
+

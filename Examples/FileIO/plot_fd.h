@@ -116,7 +116,7 @@ SLError_t plot_frequency_domain (SLData_t *pSrc,
                 DFTLength);                         // Window size
 
                                                     // Perform DFT
-    SDA_Rft (pFDPSrcReal,                           // Real source array pointer
+    SDA_Rdft (pFDPSrcReal,                           // Real source array pointer
              pFDPRealData,                          // Real destination array pointer
              pFDPImagData,                          // Imaginary destination array pointer
              DFTLength);                            // DFT length
@@ -275,7 +275,7 @@ SLError_t plot_complex_frequency_domain (SLData_t *pSrcReal,
                        DFTLength);                  // Window size
 
                                                     // Perform DFT
-    SDA_Cft (pFDPSrcReal,                           // Real source array pointer
+    SDA_Cdft (pFDPSrcReal,                           // Real source array pointer
              pFDPSrcImag,                           // Imaginary source array pointer
              pFDPRealData,                          // Real destination array pointer
              pFDPImagData,                          // Imaginary destination array pointer

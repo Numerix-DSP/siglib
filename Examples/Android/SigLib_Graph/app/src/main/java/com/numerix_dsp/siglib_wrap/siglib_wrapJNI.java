@@ -202,10 +202,10 @@ public class siglib_wrapJNI {
   public final static native void SIF_FdAnalytic(long jarg1, long jarg2, long jarg3, int jarg4);
   public final static native void SDA_FdAnalytic(long jarg1, long jarg2, long jarg3, long jarg4, long jarg5, double jarg6, int jarg7, int jarg8);
   public final static native void SDA_InstantFreq(long jarg1, long jarg2, long jarg3, int jarg4);
-  public final static native void SDA_Rft(long jarg1, long jarg2, long jarg3, int jarg4);
-  public final static native void SDA_Rift(long jarg1, long jarg2, long jarg3, int jarg4);
-  public final static native void SDA_Cft(long jarg1, long jarg2, long jarg3, long jarg4, int jarg5);
-  public final static native void SDA_Cift(long jarg1, long jarg2, long jarg3, long jarg4, int jarg5);
+  public final static native void SDA_Rdft(long jarg1, long jarg2, long jarg3, int jarg4);
+  public final static native void SDA_Ridft(long jarg1, long jarg2, long jarg3, int jarg4);
+  public final static native void SDA_Cdft(long jarg1, long jarg2, long jarg3, long jarg4, int jarg5);
+  public final static native void SDA_Cidft(long jarg1, long jarg2, long jarg3, long jarg4, int jarg5);
   public final static native void SDA_FftShift(long jarg1, long jarg2, int jarg3);
   public final static native void SDA_CfftShift(long jarg1, long jarg2, long jarg3, long jarg4, int jarg5);
   public final static native void SDA_FftExtend(long jarg1, long jarg2, int jarg3, int jarg4);

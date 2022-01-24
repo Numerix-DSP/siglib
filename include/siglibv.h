@@ -476,23 +476,23 @@ void _stdcall SDA_InstantFreq ( double * SIGLIB_INPUT_PTR_DECL,  // Leading phas
     double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination array
      long);                                  // Array length
 
-void _stdcall SDA_Rft ( double * SIGLIB_INPUT_PTR_DECL,  // Pointer to real source array
+void _stdcall SDA_Rdft ( double * SIGLIB_INPUT_PTR_DECL,  // Pointer to real source array
     double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to real destination array
     double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to imaginary destination array
      long);                                  // Transform size
 
-void _stdcall SDA_Rift ( double * SIGLIB_INPUT_PTR_DECL, // Pointer to real source array
+void _stdcall SDA_Ridft ( double * SIGLIB_INPUT_PTR_DECL, // Pointer to real source array
     double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to real destination array
     double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to imaginary destination array
      long);                                  // Transform size
 
-void _stdcall SDA_Cft ( double * SIGLIB_INPUT_PTR_DECL,  // Pointer to real source array
+void _stdcall SDA_Cdft ( double * SIGLIB_INPUT_PTR_DECL,  // Pointer to real source array
      double * SIGLIB_INPUT_PTR_DECL,                 // Pointer to imaginary source array
     double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to real destination array
     double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to imaginary destination array
      long);                                  // Transform size
 
-void _stdcall SDA_Cift ( double * SIGLIB_INPUT_PTR_DECL, // Pointer to real source array
+void _stdcall SDA_Cidft ( double * SIGLIB_INPUT_PTR_DECL, // Pointer to real source array
      double * SIGLIB_INPUT_PTR_DECL,                 // Pointer to imaginary source array
     double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to real destination array
     double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to imaginary destination array

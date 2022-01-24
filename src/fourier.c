@@ -792,32 +792,31 @@ void SIGLIB_FUNC_DECL SDA_InstantFreq (const SLData_t * SIGLIB_PTR_DECL pSLead,
 
 /**/
 /********************************************************
-* Function: SDA_Rft
+* Function: SDA_Rdft
 *
 * Parameters:
 *   const SLData_t pRealData[],
 *   SLData_t pDstReal[],
 *   SLData_t pDstImag[],
-*   const SLArrayIndex_t ft_size,
+*   const SLArrayIndex_t dft_size,
 *
 * Return value:
 *   void
 *
 * Description:
-*   Perform a real Fourier Transform on the supplied
-*   data.
+*   Perform a real Discrete Fourier Transform.
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Rft (const SLData_t pRealData[],
+void SIGLIB_FUNC_DECL SDA_Rdft (const SLData_t pRealData[],
     SLData_t pDstReal[],
     SLData_t pDstImag[],
-    const SLArrayIndex_t ft_size)
+    const SLArrayIndex_t dft_size)
 
 {
     SLArrayIndex_t i, j;
     SLData_t       real_sum, imag_sum;
-    SLData_t       InverseFTSize = SIGLIB_ONE / ft_size;
+    SLData_t       InverseFTSize = SIGLIB_ONE / dft_size;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                         // Defined by TI compiler
@@ -827,11 +826,11 @@ void SIGLIB_FUNC_DECL SDA_Rft (const SLData_t pRealData[],
 #endif
 #endif
 
-    for (i = 0; i < ft_size; i++) {
+    for (i = 0; i < dft_size; i++) {
         real_sum = SIGLIB_ZERO;
         imag_sum = SIGLIB_ZERO;
 
-        for (j = 0; j < ft_size; j++) {
+        for (j = 0; j < dft_size; j++) {
             real_sum += pRealData[j] * SDS_Cos (SIGLIB_TWO_PI * i * j * InverseFTSize);
             imag_sum += pRealData[j] * -SDS_Sin (SIGLIB_TWO_PI * i * j * InverseFTSize);
         }
@@ -839,36 +838,35 @@ void SIGLIB_FUNC_DECL SDA_Rft (const SLData_t pRealData[],
         pDstReal[i] = real_sum;
         pDstImag[i] = imag_sum;
     }
-}       // End of SDA_Rft()
+}       // End of SDA_Rdft()
 
 
 /********************************************************
-* Function: SDA_Rift
+* Function: SDA_Ridft
 *
 * Parameters:
 *   SLData_t const pRealData[],
 *   SLData_t pDstReal[],
 *   SLData_t pDstImag[],
-*   SLArrayIndex_t const ift_size,
+*   SLArrayIndex_t const idft_size,
 *
 * Return value:
 *   void
 *
 * Description:
-*   Perform a real Inverse Fourier Transform on the
-*   supplied data.
+*   Perform a real Inverse Discrete Fourier Transform.
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Rift (const SLData_t pRealData[],
+void SIGLIB_FUNC_DECL SDA_Ridft (const SLData_t pRealData[],
     SLData_t pDstReal[],
     SLData_t pDstImag[],
-    const SLArrayIndex_t ift_size)
+    const SLArrayIndex_t idft_size)
 
 {
     SLArrayIndex_t i, j;
     SLData_t       real_sum, imag_sum;
-    SLData_t       InverseFTSize = SIGLIB_ONE / ift_size;
+    SLData_t       InverseFTSize = SIGLIB_ONE / idft_size;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                         // Defined by TI compiler
@@ -878,51 +876,50 @@ void SIGLIB_FUNC_DECL SDA_Rift (const SLData_t pRealData[],
 #endif
 #endif
 
-    for (i = 0; i < ift_size; i++) {
+    for (i = 0; i < idft_size; i++) {
         real_sum = SIGLIB_ZERO;
         imag_sum = SIGLIB_ZERO;
 
-        for (j = 0; j < ift_size; j++) {
+        for (j = 0; j < idft_size; j++) {
             real_sum += pRealData[j] * SDS_Cos (SIGLIB_TWO_PI * i * j * InverseFTSize);
             imag_sum += pRealData[j] * SDS_Sin (SIGLIB_TWO_PI * i * j * InverseFTSize);
         }
         pDstReal[i] = real_sum * InverseFTSize;
         pDstImag[i] = imag_sum * InverseFTSize;
     }
-}       // End of SDA_Rift()
+}       // End of SDA_Ridft()
 
 
 /**/
 /********************************************************
-* Function: SDA_Cft
+* Function: SDA_Cdft
 *
 * Parameters:
 *   const SLData_t pSrcReal[],
 *   const SLData_t pSrcImag[],
 *   SLData_t pDstReal[],
 *   SLData_t pDstImag[],
-*   const SLArrayIndex_t ft_size,
+*   const SLArrayIndex_t dft_size,
 *
 * Return value:
 *   void
 *
 * Description:
-*   Perform a real Fourier Transform on the supplied
-*   data.
+*   Perform a complex Discrete Fourier Transform.
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Cft (const SLData_t pSrcReal[],
+void SIGLIB_FUNC_DECL SDA_Cdft (const SLData_t pSrcReal[],
     const SLData_t pSrcImag[],
     SLData_t pDstReal[],
     SLData_t pDstImag[],
-    const SLArrayIndex_t ft_size)
+    const SLArrayIndex_t dft_size)
 
 {
     SLArrayIndex_t i, j;
     SLData_t       real_sum, imag_sum;
     SLData_t       SinVal, CosVal;
-    SLData_t       InverseFTSize = SIGLIB_ONE / ft_size;
+    SLData_t       InverseFTSize = SIGLIB_ONE / dft_size;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                         // Defined by TI compiler
@@ -932,11 +929,11 @@ void SIGLIB_FUNC_DECL SDA_Cft (const SLData_t pSrcReal[],
 #endif
 #endif
 
-    for (i = 0; i < ft_size; i++) {
+    for (i = 0; i < dft_size; i++) {
         real_sum = SIGLIB_ZERO;
         imag_sum = SIGLIB_ZERO;
 
-        for (j = 0; j < ft_size; j++) {
+        for (j = 0; j < dft_size; j++) {
             SinVal = SDS_Sin (SIGLIB_TWO_PI * i * j * InverseFTSize);
             CosVal = SDS_Cos (SIGLIB_TWO_PI * i * j * InverseFTSize);
             real_sum += (pSrcReal[j] * CosVal) - (pSrcImag[j] * -SinVal);
@@ -946,39 +943,38 @@ void SIGLIB_FUNC_DECL SDA_Cft (const SLData_t pSrcReal[],
         pDstReal[i] = real_sum;
         pDstImag[i] = imag_sum;
     }
-}       // End of SDA_Cft()
+}       // End of SDA_Cdft()
 
 
 /********************************************************
-* Function: SDA_Cift
+* Function: SDA_Cidft
 *
 * Parameters:
 *   const SLData_t pSrcReal[],
 *   const SLData_t pSrcImag[],
 *   SLData_t pDstReal[],
 *   SLData_t pDstImag[],
-*   const SLArrayIndex_t ift_size,
+*   const SLArrayIndex_t idft_size,
 *
 * Return value:
 *   void
 *
 * Description:
-*   Perform a real Inverse Fourier Transform on the
-*   supplied data.
+*   Perform a complex Inverse Discrete Fourier Transform.
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Cift (const SLData_t pSrcReal[],
+void SIGLIB_FUNC_DECL SDA_Cidft (const SLData_t pSrcReal[],
     const SLData_t pSrcImag[],
     SLData_t pDstReal[],
     SLData_t pDstImag[],
-    const SLArrayIndex_t ift_size)
+    const SLArrayIndex_t idft_size)
 
 {
     SLArrayIndex_t i, j;
     SLData_t       real_sum, imag_sum;
     SLData_t       SinVal, CosVal;
-    SLData_t       InverseFTSize = SIGLIB_ONE / ift_size;
+    SLData_t       InverseFTSize = SIGLIB_ONE / idft_size;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                         // Defined by TI compiler
@@ -988,11 +984,11 @@ void SIGLIB_FUNC_DECL SDA_Cift (const SLData_t pSrcReal[],
 #endif
 #endif
 
-    for (i = 0; i < ift_size; i++) {
+    for (i = 0; i < idft_size; i++) {
         real_sum = SIGLIB_ZERO;
         imag_sum = SIGLIB_ZERO;
 
-        for (j = 0; j < ift_size; j++) {
+        for (j = 0; j < idft_size; j++) {
             SinVal = SDS_Sin (SIGLIB_TWO_PI * i * j * InverseFTSize);
             CosVal = SDS_Cos (SIGLIB_TWO_PI * i * j * InverseFTSize);
             real_sum += (pSrcReal[j] * CosVal) - (pSrcImag[j] * SinVal);
@@ -1001,7 +997,7 @@ void SIGLIB_FUNC_DECL SDA_Cift (const SLData_t pSrcReal[],
         pDstReal[i] = real_sum * InverseFTSize;
         pDstImag[i] = imag_sum * InverseFTSize;
     }
-}       // End of SDA_Cift()
+}       // End of SDA_Cidft()
 
 
 /**/

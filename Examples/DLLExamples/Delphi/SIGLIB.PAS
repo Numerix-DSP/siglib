@@ -497,26 +497,26 @@ var
                              const _4: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
 var
-  SDA_Rft: procedure(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
+  SDA_Rdft: procedure(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
                      var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                      var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                      const _4: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
 var
-  SDA_Rift: procedure(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
+  SDA_Ridft: procedure(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
                       var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                       var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                       const _4: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
 var
-  SDA_Cft: procedure(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
+  SDA_Cdft: procedure(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
                      const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
                      var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                      var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                      const _5: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
 var
-  SDA_Cift: procedure(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
+  SDA_Cidft: procedure(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
                       const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
                       var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                       var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
@@ -6201,21 +6201,21 @@ begin
   {$IFDEF WIN32}
     Assert(@SDA_InstantFreq <> nil);
   {$ENDIF}
-    @SDA_Rft := GetProcAddress(DLLHandle,'SDA_Rft');
+    @SDA_Rdft := GetProcAddress(DLLHandle,'SDA_Rdft');
   {$IFDEF WIN32}
-    Assert(@SDA_Rft <> nil);
+    Assert(@SDA_Rdft <> nil);
   {$ENDIF}
-    @SDA_Rift := GetProcAddress(DLLHandle,'SDA_Rift');
+    @SDA_Ridft := GetProcAddress(DLLHandle,'SDA_Ridft');
   {$IFDEF WIN32}
-    Assert(@SDA_Rift <> nil);
+    Assert(@SDA_Ridft <> nil);
   {$ENDIF}
-    @SDA_Cft := GetProcAddress(DLLHandle,'SDA_Cft');
+    @SDA_Cdft := GetProcAddress(DLLHandle,'SDA_Cdft');
   {$IFDEF WIN32}
-    Assert(@SDA_Cft <> nil);
+    Assert(@SDA_Cdft <> nil);
   {$ENDIF}
-    @SDA_Cift := GetProcAddress(DLLHandle,'SDA_Cift');
+    @SDA_Cidft := GetProcAddress(DLLHandle,'SDA_Cidft');
   {$IFDEF WIN32}
-    Assert(@SDA_Cift <> nil);
+    Assert(@SDA_Cidft <> nil);
   {$ENDIF}
     @SDA_FftShift := GetProcAddress(DLLHandle,'SDA_FftShift');
   {$IFDEF WIN32}

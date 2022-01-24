@@ -251,6 +251,9 @@ Update history :
 #define SIGLIB_DEGREES_TO_RADIANS   ((SLData_t)0.017453292519943295769236907684886)         // 2.pi / 360
 #define SIGLIB_RADIANS_TO_DEGREES   ((SLData_t)57.295779513082320876798154814105)           // 360 / 2.pi
 #define SIGLIB_EXP_MINUS_ONE        ((SLData_t)0.3678794411714423340242774429498240351677)  // e^-1
+#define SIGLIB_SQRT_THREE           ((SLData_t)1.7320508075688772935274463415059)           // sqrt(3)
+#define SIGLIB_HALF_SQRT_THREE      ((SLData_t)0.86602540378443864676372317075294)          // sqrt(3)/2
+
 
 #define SIGLIB_SPEED_OF_SOUND_IN_AIR_STP_MS ((SLData_t)343.2)                               // Speed of sound in air (m/s) - at standard temperature and pressure
 #define SIGLIB_SPEED_OF_SOUND_IN_AIR_0DC_MS ((SLData_t)343.2)                               // Speed of sound in air (m/s) - at zero degrees C
@@ -473,6 +476,9 @@ Update history :
 #define SIGLIB_INV_LOG10_OF_4       (1.6609640474436811739351597147447)                 // 1 / log10(4.0)
 #define SIGLIB_DEGREES_TO_RADIANS   (0.017453292519943295769236907684886)               // 2.pi / 360
 #define SIGLIB_RADIANS_TO_DEGREES   (57.295779513082320876798154814105)                 // 360 / 2.pi
+#define SIGLIB_EXP_MINUS_ONE        (0.3678794411714423340242774429498240351677)        // e^-1
+#define SIGLIB_SQRT_THREE           (1.7320508075688772935274463415059)                 // sqrt(3)
+#define SIGLIB_HALF_SQRT_THREE      (0.86602540378443864676372317075294)                // sqrt(3)/2
 
 #endif              // #if !defined (SWIG)
 

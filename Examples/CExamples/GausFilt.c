@@ -56,10 +56,10 @@ int main (void)
     printf ("\nGaussian Filter Coefficients\nPlease hit <Carriage Return> to continue . . ."); getchar();
 
                                                     // Perform DFT
-    SDA_Rft (pFilterTaps,                           // Pointer to real source array
-             pRealData,                             // Pointer to real destination array
-             pImagData,                             // Pointer to imaginary destination array
-             FOURIERT_LENGTH);                      // Transform size
+    SDA_Rdft (pFilterTaps,                          // Pointer to real source array
+              pRealData,                            // Pointer to real destination array
+              pImagData,                            // Pointer to imaginary destination array
+              FOURIERT_LENGTH);                     // Transform size
                                                     // Calculate real magnitude from complex
     SDA_Magnitude (pRealData,                       // Pointer to real source array
                    pImagData,                       // Pointer to imaginary source array
@@ -100,10 +100,10 @@ int main (void)
     printf ("\nGaussian Filter Coefficients - Bandwidth 0.15\nPlease hit <Carriage Return> to continue . . ."); getchar();
 
                                                     // Perform FT
-    SDA_Rft (pFilterTaps,                           // Pointer to real source array
-             pRealData,                             // Pointer to real destination array
-             pImagData,                             // Pointer to imaginary destination array
-             FILTER_LENGTH);                        // Transform size
+    SDA_Rdft (pFilterTaps,                          // Pointer to real source array
+              pRealData,                            // Pointer to real destination array
+              pImagData,                            // Pointer to imaginary destination array
+              FILTER_LENGTH);                       // Transform size
                                                     // Calculate real magnitude from complex
     SDA_Magnitude (pRealData,                       // Pointer to real source array
                    pImagData,                       // Pointer to imaginary source array
