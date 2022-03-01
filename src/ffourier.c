@@ -84,7 +84,7 @@ void SIGLIB_FUNC_DECL SIF_Fft (SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
 }       // End of SIF_Fft()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Rfft
 *
@@ -208,7 +208,7 @@ void SIGLIB_FUNC_DECL SDA_Rfft (SLData_t realData[],
 }       // End of SDA_Rfft()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Cfft
 *
@@ -303,7 +303,7 @@ void SIGLIB_FUNC_DECL SDA_Cfft (SLData_t realData[],
 }       // End of SDA_Cfft()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Cifft
 *
@@ -399,7 +399,7 @@ void SIGLIB_FUNC_DECL SDA_Cifft (SLData_t realData[],
 }       // End of SDA_Cifft()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_BitReverseReorder
 *
@@ -462,7 +462,7 @@ void SIGLIB_FUNC_DECL SDA_BitReverseReorder (const SLData_t Src[],
 }       // End of SDA_BitReverseReorder()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_IndexBitReverseReorder
 *
@@ -507,7 +507,7 @@ void SIGLIB_FUNC_DECL SDA_IndexBitReverseReorder (const SLArrayIndex_t Src[],
 }       // End of SDA_IndexBitReverseReorder()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FastBitReverseReorder
 *
@@ -543,7 +543,7 @@ void SIGLIB_FUNC_DECL SIF_FastBitReverseReorder (SLArrayIndex_t * SIGLIB_PTR_DEC
 }       // End of SIF_FastBitReverseReorder()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_RealRealCepstrum
 *
@@ -581,7 +581,7 @@ void SIGLIB_FUNC_DECL SDA_RealRealCepstrum (SLData_t * SIGLIB_INPUT_PTR_DECL pRe
 }       // End of SDA_RealRealCepstrum()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_RealComplexCepstrum
 *
@@ -619,7 +619,7 @@ void SIGLIB_FUNC_DECL SDA_RealComplexCepstrum (SLData_t * SIGLIB_INPUT_PTR_DECL 
 }       // End of SDA_RealComplexCepstrum()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ComplexComplexCepstrum
 *
@@ -660,7 +660,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexComplexCepstrum (SLData_t * SIGLIB_INPUT_PTR_DE
 }       // End of SDA_ComplexComplexCepstrum()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FftTone
 *
@@ -734,7 +734,7 @@ void SIGLIB_FUNC_DECL SDA_RfftTone (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_RfftTone()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Rfftr
 *
@@ -861,7 +861,7 @@ void SIGLIB_FUNC_DECL SDA_Rfftr (SLData_t realData[],
 }       // End of SDA_Rfftr()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_Fft4
 *
@@ -902,7 +902,7 @@ void SIGLIB_FUNC_DECL SIF_Fft4 (SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
 }       // End of SIF_Fft4()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Rfft4
 *
@@ -1060,7 +1060,7 @@ void SIGLIB_FUNC_DECL SDA_Rfft4 (SLData_t realData[],
 }       // End of SDA_Rfft4()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Cfft4
 *
@@ -1178,7 +1178,7 @@ void SIGLIB_FUNC_DECL SDA_Cfft4 (SLData_t realData[],
 }       // End of SDA_Cfft4()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_DigitReverseReorder4
 *
@@ -1221,7 +1221,7 @@ void SIGLIB_FUNC_DECL SDA_DigitReverseReorder4 (const SLData_t Src[],
 }       // End of SDA_DigitReverseReorder4()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_IndexDigitReverseReorder4
 *
@@ -1265,7 +1265,7 @@ void SIGLIB_FUNC_DECL SDA_IndexDigitReverseReorder4 (const SLArrayIndex_t Src[],
 }       // End of SDA_IndexDigitReverseReorder4()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FastDigitReverseReorder4
 *
@@ -1301,7 +1301,7 @@ void SIGLIB_FUNC_DECL SIF_FastDigitReverseReorder4 (SLArrayIndex_t * SIGLIB_PTR_
 }       // End of SIF_FastDigitReverseReorder4()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Cfft2rBy1c
 *
@@ -1419,7 +1419,7 @@ void SIGLIB_FUNC_DECL SDA_Cfft2rBy1c (SLData_t realData[],
 }       // End of SDA_Cfft2rBy1c()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Cfft2rBy1cr
 *
@@ -1533,7 +1533,7 @@ void SIGLIB_FUNC_DECL SDA_Cfft2rBy1cr (SLData_t realData[],
 }       // End of SDA_Cfft2rBy1cr()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Cfft42rBy1c
 *
@@ -1662,7 +1662,7 @@ void SIGLIB_FUNC_DECL SDA_Cfft42rBy1c (SLData_t realData[],
 }       // End of SDA_Cfft42rBy1c()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Cfft42rBy1cr
 *
@@ -1789,7 +1789,7 @@ void SIGLIB_FUNC_DECL SDA_Cfft42rBy1cr (SLData_t realData[],
 }       // End of SDA_Cfft42rBy1cr()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Cfft2
 *
@@ -1828,7 +1828,7 @@ void SIGLIB_FUNC_DECL SDS_Cfft2 (const SLData_t srcReal1,
 }       // End of SDS_Cfft2()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Cfft2
 *
@@ -1864,7 +1864,7 @@ void SIGLIB_FUNC_DECL SDA_Cfft2 (const SLData_t pSrcReal[],
 }       // End of SDA_Cfft2()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Cfft3
 *
@@ -1921,7 +1921,7 @@ void SIGLIB_FUNC_DECL SDS_Cfft3 (const SLData_t srcReal1,
 }       // End of SDS_Cfft3()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Cfft3
 *

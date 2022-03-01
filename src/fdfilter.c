@@ -89,7 +89,7 @@ void SIGLIB_FUNC_DECL SIF_FirOverlapAdd (const SLData_t * SIGLIB_PTR_DECL pTimeD
 }       // End of  SIF_FirOverlapAdd()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FirOverlapAdd
 *
@@ -146,7 +146,7 @@ void SIGLIB_FUNC_DECL SDA_FirOverlapAdd (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of  SDA_FirOverlapAdd()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FirOverlapSave
 *
@@ -192,7 +192,7 @@ void SIGLIB_FUNC_DECL SIF_FirOverlapSave (const SLData_t * SIGLIB_PTR_DECL pTime
 }       // End of  SIF_FirOverlapSave()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FirOverlapSave
 *
@@ -258,7 +258,7 @@ void SIGLIB_FUNC_DECL SDA_FirOverlapSave (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of  SDA_FirOverlapSave()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FftConvolvePre
 *
@@ -304,7 +304,7 @@ void SIGLIB_FUNC_DECL SIF_FftConvolvePre (const SLData_t * SIGLIB_PTR_DECL Coeff
 }
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FftConvolvePre
 *
@@ -360,7 +360,7 @@ void SIGLIB_FUNC_DECL SDA_FftConvolvePre (SLData_t * SIGLIB_PTR_DECL pRealData,
 }       // End of SDA_FftConvolvePre()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FftConvolveArb
 *
@@ -418,7 +418,7 @@ void SIGLIB_FUNC_DECL SDA_FftConvolveArb (SLData_t * SIGLIB_PTR_DECL pRealSrc1,
 }       // End of SDA_FftConvolveArb()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FftCorrelatePre
 *
@@ -465,7 +465,7 @@ void SIGLIB_FUNC_DECL SIF_FftCorrelatePre (const SLData_t * SIGLIB_PTR_DECL Coef
 }
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FftCorrelatePre
 *
@@ -523,7 +523,7 @@ void SIGLIB_FUNC_DECL SDA_FftCorrelatePre (SLData_t * SIGLIB_PTR_DECL pRealSrc1,
 }       // End of SDA_FftCorrelatePre()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FftCorrelateArb
 *

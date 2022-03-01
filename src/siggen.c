@@ -738,7 +738,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (SLData_t * SIGLIB_PTR_DECL pDst,
 }       // End of SDA_SignalGenerate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_SignalGenerate
 *
@@ -1379,7 +1379,7 @@ SLError_t SIGLIB_FUNC_DECL SDS_SignalGenerate (SLData_t * SIGLIB_PTR_DECL pDst,
 }       // End of SDS_SignalGenerate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_Resonator
 *
@@ -1416,7 +1416,7 @@ void SIGLIB_FUNC_DECL SIF_Resonator (SLData_t * SIGLIB_PTR_DECL pState,
 }       // End of SIF_Resonator()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Resonator
 *
@@ -1486,7 +1486,7 @@ void SIGLIB_FUNC_DECL SDA_Resonator (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Resonator()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_Resonator1
 *
@@ -1527,7 +1527,7 @@ void SIGLIB_FUNC_DECL SIF_Resonator1 (SLData_t * SIGLIB_PTR_DECL pState,
 }       // End of SIF_Resonator1()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Resonator1
 *
@@ -1613,7 +1613,7 @@ void SIGLIB_FUNC_DECL SDA_Resonator1 (SLData_t * SIGLIB_PTR_DECL pDst,
 
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Resonator1Add
 *
@@ -1708,7 +1708,7 @@ void SIGLIB_FUNC_DECL SDA_Resonator1Add (SLData_t * SIGLIB_PTR_DECL pDst,
 }       // End of SDA_Resonator1Add()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SignalGeneratePolarWhiteNoise
 *
@@ -1758,7 +1758,7 @@ void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarWhiteNoise (SLComplexRect_s * SIGLI
 
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_SignalGeneratePolarWhiteNoise
 *
@@ -1787,7 +1787,7 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_SignalGeneratePolarWhiteNoise (const SLData
 }           // End of SDS_SignalGeneratePolarWhiteNoise()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SignalGeneratePolarGaussianNoise
 *
@@ -1913,7 +1913,7 @@ void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarGaussianNoise (SLComplexRect_s * SI
 }           // End of SDA_SignalGeneratePolarGaussianNoise()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_SignalGeneratePolarGaussianNoise
 *
@@ -1981,7 +1981,7 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_SignalGeneratePolarGaussianNoise (const SLD
 }           // End of SDS_SignalGeneratePolarGaussianNoise()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SignalAddPolarJitterAndGaussianNoise
 *
@@ -2083,7 +2083,7 @@ void SIGLIB_FUNC_DECL SDA_SignalAddPolarJitterAndGaussianNoise (const SLComplexR
 }           // End of SDA_SignalAddPolarJitterAndGaussianNoise()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_SignalAddPolarJitterAndGaussianNoise
 *
@@ -2179,7 +2179,7 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_SignalAddPolarJitterAndGaussianNoise (const
 }           // End of SDS_SignalAddPolarJitterAndGaussianNoise()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Ramp()
 *
@@ -2212,7 +2212,7 @@ void SIGLIB_FUNC_DECL SDA_Ramp(SLData_t *pDst,
 }       // End of SDA_Ramp()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_RandomNumber()
 *

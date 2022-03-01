@@ -80,7 +80,7 @@ void SIGLIB_FUNC_DECL SDA_Sin (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Sin()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Cos
 *
@@ -118,7 +118,7 @@ void SIGLIB_FUNC_DECL SDA_Cos (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Cos()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Tan
 *
@@ -156,7 +156,7 @@ void SIGLIB_FUNC_DECL SDA_Tan (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Tan()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FastSin
 *
@@ -281,7 +281,7 @@ SLData_t  SIGLIB_FUNC_DECL SDS_FastSin (const SLData_t * SIGLIB_PTR_DECL pSineTa
 }       // End of SDS_FastSin()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FastCos
 *
@@ -406,7 +406,7 @@ SLData_t  SIGLIB_FUNC_DECL SDS_FastCos (const SLData_t * SIGLIB_PTR_DECL pCosine
 }       // End of SDS_FastCos()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FastSinCos
 *
@@ -541,7 +541,7 @@ void SIGLIB_FUNC_DECL SDS_FastSinCos (const SLData_t * SIGLIB_PTR_DECL pSineTabl
 }       // End of SDS_FastSinCos()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_QuickSin
 *
@@ -687,7 +687,7 @@ SLData_t  SIGLIB_FUNC_DECL SDS_QuickSin (const SLData_t Angle,
 }       // End of SDS_QuickSin()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_QuickCos
 *
@@ -831,7 +831,7 @@ SLData_t  SIGLIB_FUNC_DECL SDS_QuickCos (const SLData_t Angle,
 }       // End of SDS_QuickCos()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_QuickSinCos
 *
@@ -997,7 +997,7 @@ void SIGLIB_FUNC_DECL SDS_QuickSinCos (const SLData_t Angle,
 }       // End of SDS_QuickSinCos()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_QuickTan
 *
@@ -1143,7 +1143,7 @@ SLData_t  SIGLIB_FUNC_DECL SDS_QuickTan (const SLData_t Angle,
 }       // End of SDS_QuickTan()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Sinc
 *
@@ -1187,7 +1187,7 @@ void SIGLIB_FUNC_DECL SDA_Sinc (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Sinc()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Sinc
 *
@@ -1214,7 +1214,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Sinc (const SLData_t x)
 }       // End of SDS_Sinc()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_QuickSinc
 *

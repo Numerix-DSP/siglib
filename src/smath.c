@@ -102,7 +102,7 @@ void SIGLIB_FUNC_DECL SDA_Divide (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Divide()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Divide2
 *
@@ -161,7 +161,7 @@ void SIGLIB_FUNC_DECL SDA_Divide2 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }       // End of SDA_Divide2()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Multiply
 *
@@ -203,7 +203,7 @@ void SIGLIB_FUNC_DECL SDA_Multiply (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Multiply()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Multiply2
 *
@@ -246,7 +246,7 @@ void SIGLIB_FUNC_DECL SDA_Multiply2 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }       // End of SDA_Multiply2()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ComplexMultiply
 *
@@ -282,7 +282,7 @@ void SIGLIB_FUNC_DECL SDS_ComplexMultiply (const SLData_t Src1Real,
 }       // End of SDS_ComplexMultiply()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ComplexInverse
 *
@@ -322,7 +322,7 @@ void SIGLIB_FUNC_DECL SDS_ComplexInverse (const SLData_t DenominatorReal,
 }       // End of SDS_ComplexInverse()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ComplexInverse
 *
@@ -366,7 +366,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexInverse (const SLData_t *pDenominatorReal,
 }       // End of SDA_ComplexInverse()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ComplexDivide
 *
@@ -412,7 +412,7 @@ void SIGLIB_FUNC_DECL SDS_ComplexDivide (const SLData_t NumeratorReal,
 }       // End of SDS_ComplexDivide()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ComplexScalarMultiply
 *
@@ -463,7 +463,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexScalarMultiply (const SLData_t * SIGLIB_PTR_DEC
 }       // End of SDA_ComplexScalarMultiply()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ComplexMultiply2
 *
@@ -526,7 +526,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexMultiply2 (const SLData_t * SIGLIB_PTR_DECL pSr
 }       // End of SDA_ComplexMultiply2()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ComplexScalarDivide
 *
@@ -579,7 +579,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexScalarDivide (const SLData_t * SIGLIB_PTR_DECL 
 }       // End of SDA_ComplexScalarDivide()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ComplexDivide2
 *
@@ -621,7 +621,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexDivide2 (const SLData_t * SIGLIB_PTR_DECL pReal
 }       // End of SDA_ComplexDivide2()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_RealDotProduct
 *
@@ -665,7 +665,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_RealDotProduct (const SLData_t * SIGLIB_PTR_DECL p
 }       // End of SDA_RealDotProduct()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ComplexDotProduct
 *
@@ -720,7 +720,7 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDA_ComplexDotProduct (const SLData_t * SIGLIB_
 }       // End of SDA_ComplexDotProduct()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SumAndDifference
 *
@@ -766,7 +766,7 @@ void SIGLIB_FUNC_DECL SDA_SumAndDifference (const SLData_t * SIGLIB_PTR_DECL pSr
 }           // End of SDA_Add2()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Add2
 *
@@ -808,7 +808,7 @@ void SIGLIB_FUNC_DECL SDA_Add2 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }           // End of SDA_Add2()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Add3
 *
@@ -853,7 +853,7 @@ void SIGLIB_FUNC_DECL SDA_Add3 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }           // End of SDA_Add3()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Add4
 *
@@ -901,7 +901,7 @@ void SIGLIB_FUNC_DECL SDA_Add4 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }           // End of SDA_Add4()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Add5
 *
@@ -952,7 +952,7 @@ void SIGLIB_FUNC_DECL SDA_Add5 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }           // End of SDA_Add5()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_WeightedSum
 *
@@ -995,7 +995,7 @@ void SIGLIB_FUNC_DECL SDA_WeightedSum (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }       // End of SDA_WeightedSum()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Subtract2
 *
@@ -1038,7 +1038,7 @@ void SIGLIB_FUNC_DECL SDA_Subtract2 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }           // End of SDA_Subtract2()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Add
 *
@@ -1080,7 +1080,7 @@ void SIGLIB_FUNC_DECL SDA_Add (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Add()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_PositiveOffset
 *
@@ -1114,7 +1114,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PositiveOffset (const SLData_t * SIGLIB_PTR_DECL p
 }       // End of SDA_PositiveOffset()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_NegativeOffset
 *
@@ -1148,7 +1148,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_NegativeOffset (const SLData_t * SIGLIB_PTR_DECL p
 }       // End of SDA_NegativeOffset()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Negate
 *
@@ -1188,7 +1188,7 @@ void SIGLIB_FUNC_DECL SDA_Negate (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Negate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Inverse
 *
@@ -1228,7 +1228,7 @@ void SIGLIB_FUNC_DECL SDA_Inverse (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Inverse()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Square
 *
@@ -1269,7 +1269,7 @@ void SIGLIB_FUNC_DECL SDA_Square (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Square()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Sqrt
 *
@@ -1309,7 +1309,7 @@ void SIGLIB_FUNC_DECL SDA_Sqrt (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Sqrt()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Difference
 *
@@ -1355,7 +1355,7 @@ void SIGLIB_FUNC_DECL SDA_Difference (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }       // End of SDA_Difference()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SumOfDifferences
 *
@@ -1401,7 +1401,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_SumOfDifferences (const SLData_t * SIGLIB_PTR_DECL
 }       // End of SDA_SumOfDifferences()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Roots()
 *
@@ -1439,7 +1439,7 @@ SLError_t SIGLIB_FUNC_DECL SDS_Roots (const SLData_t a,
 }       // End of SDS_Roots()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Factorial()
 *
@@ -1474,7 +1474,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Factorial (const SLData_t Input)
 }       // End of SDS_Factorial()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Permutations()
 *
@@ -1502,7 +1502,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Permutations (const SLData_t n, const SLData_t k)
 }       // End of SDS_Permutations()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Combinations()
 *
@@ -1529,7 +1529,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Combinations (const SLData_t n, const SLData_t k)
 }       // End of SDS_Combinations()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_OverlapAndAddLinear()
 *
@@ -1661,7 +1661,7 @@ void SIGLIB_FUNC_DECL SDA_OverlapAndAddLinearWithClip (const SLData_t * SIGLIB_P
 }       // End of SDA_OverlapAndAddLinearWithClip()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_OverlapAndAddArbitrary()
 *
@@ -1704,7 +1704,7 @@ void SIGLIB_FUNC_DECL SDA_OverlapAndAddArbitrary (const SLData_t * SIGLIB_PTR_DE
 }       // End of SDA_OverlapAndAddArbitrary()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_OverlapAndAddArbitraryWithClip()
 *
@@ -1760,7 +1760,7 @@ void SIGLIB_FUNC_DECL SDA_OverlapAndAddArbitraryWithClip (const SLData_t * SIGLI
 }       // End of SDA_OverlapAndAddArbitraryWithClip()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_DegreesToRadians()
 *
@@ -1782,7 +1782,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_DegreesToRadians (const SLData_t Degrees)
 }       // End of SDS_DegreesToRadians()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_DegreesToRadians()
 *
@@ -1821,7 +1821,7 @@ void SIGLIB_FUNC_DECL SDA_DegreesToRadians (const SLData_t * SIGLIB_PTR_DECL pSr
 }       // End of SDA_DegreesToRadians()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_RadiansToDegrees()
 *
@@ -1843,7 +1843,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_RadiansToDegrees (const SLData_t Degrees)
 }       // End of SDS_RadiansToDegrees()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_RadiansToDegrees()
 *
@@ -1882,7 +1882,7 @@ void SIGLIB_FUNC_DECL SDA_RadiansToDegrees (const SLData_t * SIGLIB_PTR_DECL pSr
 }       // End of SDA_RadiansToDegrees()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_DetectNAN
 *
@@ -1913,7 +1913,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_DetectNAN (const SLData_t x)
 }       // End of SDS_DetectNAN()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_DetectNAN
 *

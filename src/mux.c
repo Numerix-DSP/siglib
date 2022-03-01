@@ -97,7 +97,7 @@ void SIGLIB_FUNC_DECL SDA_Multiplex (const SLData_t * SIGLIB_PTR_DECL p_SrcMuxAr
 }       // End of SDA_Multiplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Demultiplex
 *
@@ -144,7 +144,7 @@ void SIGLIB_FUNC_DECL SDA_Demultiplex (const SLData_t * SIGLIB_PTR_DECL p_SrcMux
 }       // End of SDA_Demultiplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Mux2
 *
@@ -190,7 +190,7 @@ void SIGLIB_FUNC_DECL SDA_Mux2 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }           // End of SDA_Mux2()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Demux2
 *
@@ -236,7 +236,7 @@ void SIGLIB_FUNC_DECL SDA_Demux2 (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }           // End of SDA_Demux2()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Mux3
 *
@@ -288,7 +288,7 @@ void SIGLIB_FUNC_DECL SDA_Mux3 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Demux3
 *
@@ -339,7 +339,7 @@ void SIGLIB_FUNC_DECL SDA_Demux3 (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }           // End of SDA_Demux3()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Mux4
 *
@@ -395,7 +395,7 @@ void SIGLIB_FUNC_DECL SDA_Mux4 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }           // End of SDA_Mux4()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Demux4
 *
@@ -451,7 +451,7 @@ void SIGLIB_FUNC_DECL SDA_Demux4 (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }           // End of SDA_Demux4()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Mux5
 *
@@ -512,7 +512,7 @@ void SIGLIB_FUNC_DECL SDA_Mux5 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }           // End of SDA_Mux5()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Demux5
 *
@@ -573,7 +573,7 @@ void SIGLIB_FUNC_DECL SDA_Demux5 (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }           // End of SDA_Demux5()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Mux6
 *
@@ -639,7 +639,7 @@ void SIGLIB_FUNC_DECL SDA_Mux6 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }           // End of SDA_Mux6()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Demux6
 *
@@ -705,7 +705,7 @@ void SIGLIB_FUNC_DECL SDA_Demux6 (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }           // End of SDA_Demux6()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Mux7
 *
@@ -776,7 +776,7 @@ void SIGLIB_FUNC_DECL SDA_Mux7 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }           // End of SDA_Mux7()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Demux7
 *
@@ -847,7 +847,7 @@ void SIGLIB_FUNC_DECL SDA_Demux7 (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }           // End of SDA_Demux7()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Mux8
 *
@@ -923,7 +923,7 @@ void SIGLIB_FUNC_DECL SDA_Mux8 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }           // End of SDA_Mux8()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Demux8
 *

@@ -202,6 +202,7 @@ double _stdcall SUF_SiglibVersion (void);
 
 
 
+
                                                             // Parameter description
 
 // Fast Fourier Transform Functions - ffourier.c
@@ -353,6 +354,38 @@ void _stdcall SDA_Cfft42rBy1cr (double * SIGLIB_INPUT_PTR_DECL,   // Pointer to 
      long * SIGLIB_INPUT_PTR_DECL,           // Bit reverse mode flag / Pointer to bit reverse address table
      long,                                   // FFT length
      long);                                  // log2 FFT length
+
+void _stdcall SDS_Cfft2 ( double,    // Source sample real 1
+     double,                 // Source sample imaginary 1
+     double,                 // Source sample real 2
+     double,                 // Source sample imaginary 2
+    double * SIGLIB_OUTPUT_PTR_DECL,                     // Pointer to destination real 1
+    double * SIGLIB_OUTPUT_PTR_DECL,                     // Pointer to destination imaginary 1
+    double * SIGLIB_OUTPUT_PTR_DECL,                     // Pointer to destination real 2
+    double * SIGLIB_OUTPUT_PTR_DECL);                    // Pointer to destination imaginary 2
+
+void _stdcall SDA_Cfft2 ( double * SIGLIB_INPUT_PTR_DECL,    // Pointer to real source array
+     double * SIGLIB_INPUT_PTR_DECL,                 // Pointer to imaginary source array
+    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to real destination array
+    double * SIGLIB_OUTPUT_PTR_DECL);                     // Pointer to imaginary destination array
+
+void _stdcall SDS_Cfft3 ( double,            // Source sample real 1
+     double,                                         // Source sample imaginary 1
+     double,                                         // Source sample real 2
+     double,                                         // Source sample imaginary 2
+     double,                                         // Source sample real 3
+     double,                                         // Source sample imaginary 3
+    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination real 1
+    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination imaginary 1
+    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination real 2
+    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination imaginary 2
+    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination real 3
+    double * SIGLIB_OUTPUT_PTR_DECL);                     // Pointer to destination imaginary 3
+
+void _stdcall SDA_Cfft3 ( double * SIGLIB_INPUT_PTR_DECL,    // Pointer to real source array
+     double * SIGLIB_INPUT_PTR_DECL,                 // Pointer to imaginary source array
+    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to real destination array
+    double * SIGLIB_OUTPUT_PTR_DECL);                     // Pointer to imaginary destination array
 
 
 // Generic Fourier Transform Functions - fourier.c
@@ -2957,7 +2990,7 @@ long _stdcall SDS_CostasQamDemodulate ( double,    // Source data sample
      long);                                  // ELG output synchronization delay length
 
 
-#line 2942 "siglib.h"
+#line 2975 "siglib.h"
 long _stdcall SDS_CostasQamDemodulateDebug ( double,   // Source data sample
     double *,                                             // Pointer to real destination symbol point
     double *,                                             // Pointer to imaginary destination symbol point
@@ -3086,7 +3119,7 @@ long _stdcall SDA_CostasQamDemodulateDebug ( double * SIGLIB_INPUT_PTR_DECL,   /
     double *,                                             // Pointer to debug real filter output
     double *,                                             // Pointer to debug imaginary filter output
     double *);                                            // Pointer to debug ELG trigger output
-#line 3071 "siglib.h"
+#line 3104 "siglib.h"
 
 void _stdcall SIF_QpskModulate (double * SIGLIB_OUTPUT_PTR_DECL,      // Carrier table pointer
      double,                                         // Carrier phase increment per sample (radians / 2Ï€)
@@ -6291,7 +6324,12 @@ void _stdcall SDA_ActivationTanHDerivative ( double * SIGLIB_INPUT_PTR_DECL,   /
 
 
 
+
+
+
+
+
                                     // End of SigLib DSP function section
 
-#line 6278 "siglib.h"
+#line 6316 "siglib.h"
 

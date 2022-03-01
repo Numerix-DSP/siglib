@@ -1,6 +1,29 @@
 SigLib (Tm) Revision Update History File
 ========================================
 
+VERSION : 10.11
+RELEASE DATE : 01/03/2022
+_________________________
+
+Additional Processor / Compiler Support :
+    None.
+
+Additional Functionality :
+    SUF_SigCountSamplesInFile
+
+Bug Fixes :
+    None.
+
+Operational Changes :
+    SDA_TwoLayer2CategoryNetworkPredict and SDA_TwoLayerNCategoryNetworkPredict now return prediction and probability.
+
+Optimisation Changes :
+    None.
+
+Notes :
+
+
+
 VERSION : 10.10
 RELEASE DATE : 24/01/2022
 _________________________

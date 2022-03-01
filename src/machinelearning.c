@@ -45,7 +45,7 @@ Description : DSP basic math functions, for SigLib DSP library.
 #endif
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_TwoLayer2CategoryNetworkFit
 *
@@ -187,7 +187,7 @@ void SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryNetworkFit (const SLData_t *pTraining
 }       // End of SDA_TwoLayer2CategoryNetworkFit()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_TwoLayer2CategoryNetworkPredict
 *
@@ -206,14 +206,14 @@ void SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryNetworkFit (const SLData_t *pTraining
 *   const SLArrayIndex_t)           - numberOfLayer1Nodes
 *
 * Return value:
-*   Predicted category
+*   Predicted category and associated probability
 *
 * Description:
 *   Use the model to predict the category of the data
 *
 ********************************************************/
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryNetworkPredict (const SLData_t *pData,
+SLNeuralNetworkPrediction_s SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryNetworkPredict (const SLData_t *pData,
     const SLData_t *pLayer1Weights,
     const SLData_t *pLayer2Weights,
     SLData_t *pLayer1PostActivation,
@@ -273,21 +273,24 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryNetworkPredict (const SLDat
             break;
     }
 
-    SLArrayIndex_t predictedCategory;
+    SLNeuralNetworkPrediction_s prediction;
     if (layer2PostActivation > classificationThreshold) {
-        predictedCategory = SIGLIB_AI_ONE;
+        prediction.predictedCategory = SIGLIB_AI_ONE;
     }
     else {
-        predictedCategory = SIGLIB_AI_ZERO;
+        prediction.predictedCategory = SIGLIB_AI_ZERO;
     }
 
-    *pLayer2Activation =  layer2PostActivation;              // Used for visualization
+                                                            // Search for category with max activation level
+    prediction.probability = layer2PostActivation;
 
-    return (predictedCategory);
+    *pLayer2Activation =  layer2PostActivation;             // Used for visualization
+
+    return (prediction);
 }       // End of SDA_TwoLayer2CategoryNetworkPredict()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_TwoLayerNCategoryNetworkFit
 *
@@ -441,7 +444,7 @@ void SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryNetworkFit (const SLData_t *pTraining
 }       // End of SDA_TwoLayerNCategoryNetworkFit()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_TwoLayerNCategoryNetworkPredict
 *
@@ -460,14 +463,14 @@ void SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryNetworkFit (const SLData_t *pTraining
 *   const SLArrayIndex_t)           - numberOfCategories
 *
 * Return value:
-*   Predicted category
+*   Predicted category and associated probability
 *
 * Description:
 *   Use the model to predict the category of the data
 *
 ********************************************************/
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryNetworkPredict (const SLData_t *pData,
+SLNeuralNetworkPrediction_s SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryNetworkPredict (const SLData_t *pData,
     const SLData_t *pLayer1Weights,
     const SLData_t *pLayer2Weights,
     SLData_t *pLayer1PostActivation,
@@ -531,14 +534,16 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryNetworkPredict (const SLDat
 
     }
 
+    SLNeuralNetworkPrediction_s prediction;
                                                             // Search for category with max activation level
-    SLArrayIndex_t maxActivationIndex = SDA_MaxIndex (pLayer2PostActivation, numberOfCategories);
+    prediction.predictedCategory = SDA_MaxIndex (pLayer2PostActivation, numberOfCategories);
+    prediction.probability = pLayer2PostActivation[prediction.predictedCategory];
 
-    return (maxActivationIndex);                            // Category encoding: 0 to N-1
+    return (prediction);                                    // Category encoding: 0 to N-1
 }       // End of SDA_TwoLayerNCategoryNetworkPredict()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ActivationReLU
 *
@@ -563,7 +568,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationReLU (const SLData_t x)
 }       // End of SDS_ActivationReLU()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ActivationReLU
 *
@@ -597,7 +602,7 @@ void SIGLIB_FUNC_DECL SDA_ActivationReLU (const SLData_t *pSrc,
 }       // End of SDA_ActivationReLU()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ActivationReLUDerivative
 *
@@ -622,7 +627,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationReLUDerivative (const SLData_t x)
 }       // End of SDS_ActivationReLUDerivative()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ActivationReLUDerivative
 *
@@ -656,7 +661,7 @@ void SIGLIB_FUNC_DECL SDA_ActivationReLUDerivative (const SLData_t *pSrc,
 }       // End of SDA_ActivationReLUDerivative()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ActivationLeakyReLU
 *
@@ -682,7 +687,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationLeakyReLU (const SLData_t x,
 }       // End of SDS_ActivationLeakyReLU()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ActivationLeakyReLU
 *
@@ -717,7 +722,7 @@ void SIGLIB_FUNC_DECL SDA_ActivationLeakyReLU (const SLData_t *pSrc,
 }       // End of SDA_ActivationLeakyReLU()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ActivationLeakyReLUDerivative
 *
@@ -743,7 +748,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationLeakyReLUDerivative (const SLData_t x,
 }       // End of SDS_ActivationLeakyReLUDerivative()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ActivationLeakyReLUDerivative
 *
@@ -778,7 +783,7 @@ void SIGLIB_FUNC_DECL SDA_ActivationLeakyReLUDerivative (const SLData_t *pSrc,
 }       // End of SDA_ActivationLeakyReLUDerivative()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ActivationLogistic
 *
@@ -799,7 +804,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationLogistic (const SLData_t x)
 }       // End of SDS_ActivationLogistic()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ActivationLogistic
 *
@@ -828,7 +833,7 @@ void SIGLIB_FUNC_DECL SDA_ActivationLogistic (const SLData_t *pSrc,
 }       // End of SDA_ActivationLogistic()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ActivationLogisticDerivative
 *
@@ -849,7 +854,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationLogisticDerivative (const SLData_t x)
 }       // End of SDS_ActivationLogisticDerivative()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ActivationLogisticDerivative
 *
@@ -878,7 +883,7 @@ void SIGLIB_FUNC_DECL SDA_ActivationLogisticDerivative (const SLData_t *pSrc,
 }       // End of SDA_ActivationLogisticDerivative()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ActivationTanH
 *
@@ -900,7 +905,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationTanH (const SLData_t x)
 }       // End of SDS_ActivationTanH()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ActivationTanH
 *
@@ -929,7 +934,7 @@ void SIGLIB_FUNC_DECL SDA_ActivationTanH (const SLData_t *pSrc,
 }       // End of SDA_ActivationTanH()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ActivationTanHDerivative
 *
@@ -952,7 +957,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationTanHDerivative (const SLData_t x)
 }       // End of SDS_ActivationTanHDerivative()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ActivationTanHDerivative
 *

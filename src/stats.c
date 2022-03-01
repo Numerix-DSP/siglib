@@ -83,7 +83,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_Sum (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Sum()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_AbsSum
 *
@@ -135,7 +135,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_AbsSum (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_AbsSum()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SumOfSquares
 *
@@ -178,7 +178,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_SumOfSquares (const SLData_t * SIGLIB_PTR_DECL pSr
 }       // End of SDA_SumOfSquares()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Mean
 *
@@ -221,7 +221,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_Mean (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Mean()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_AbsMean
 *
@@ -272,7 +272,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_AbsMean (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_AbsMean()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SubtractMean
 *
@@ -331,7 +331,7 @@ void SIGLIB_FUNC_DECL SDA_SubtractMean (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_SubtractMean()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SubtractMax
 *
@@ -379,7 +379,7 @@ void SIGLIB_FUNC_DECL SDA_SubtractMax (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_SubtractMax()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SampleSd
 *
@@ -424,7 +424,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_SampleSd (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_SampleSd()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_PopulationSd
 *
@@ -468,7 +468,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PopulationSd (const SLData_t * SIGLIB_PTR_DECL pSr
 }       // End of SDA_PopulationSd()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_UnbiasedVariance
 *
@@ -497,7 +497,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_UnbiasedVariance (const SLData_t * SIGLIB_PTR_DECL
 }       // End of SDA_UnbiasedVariance()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Median
 *

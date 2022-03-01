@@ -47,7 +47,7 @@ static SLData_t         SincLUT [SINC_LUT_LENGTH];
 
 int main (int argc, char *argv[])
 {
-    SLArrayIndex_t  SampleCount;
+    SLArrayIndex_t  sampleCount;
     FILE            *fpInputFile;
     FILE            *fpOutputFile;
     SLArrayIndex_t  i;
@@ -158,7 +158,7 @@ int main (int argc, char *argv[])
     fprintf (fpOutputFile, "# 3D plot for %s\n\n", WavFilename);
     fprintf (fpOutputFile, "# Time\t\tOrder\t\tMagnitude\n\n");
 
-    while ((SampleCount = SUF_WavReadData (pDataArray, fpInputFile, wavInfo, SAMPLE_LENGTH)) == SAMPLE_LENGTH) {
+    while ((sampleCount = SUF_WavReadData (pDataArray, fpInputFile, wavInfo, SAMPLE_LENGTH)) == SAMPLE_LENGTH) {
                               // Apply the overlap to the data
         while (SDA_CopyWithOverlap (pDataArray,             // Pointer to source array
                                     pFDPRealData,           // Pointer to destination array
@@ -222,7 +222,7 @@ SUF_Debugfprintf ("%s : Frame Number = %d, PeakArray[FrameNumber] = %d\n", __FUN
     SIF_CopyWithOverlap (&OverlapSrcArrayIndex);    // Reset the copy with overlap
 
 
-    while ((SampleCount = SUF_WavReadData (pDataArray, fpInputFile, wavInfo, SAMPLE_LENGTH)) == SAMPLE_LENGTH) {
+    while ((sampleCount = SUF_WavReadData (pDataArray, fpInputFile, wavInfo, SAMPLE_LENGTH)) == SAMPLE_LENGTH) {
                                 // Apply the overlap to the data
         while (SDA_CopyWithOverlap (pDataArray,         // Pointer to source array
                                     pFDPRealData,       // Pointer to destination array

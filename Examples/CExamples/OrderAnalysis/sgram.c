@@ -36,7 +36,7 @@ int main (int argc, char *argv[])
 {
     h_GPC_Plot      *hSpectrogram;                              // Plot object
 
-    SLArrayIndex_t  SampleCount;
+    SLArrayIndex_t  sampleCount;
     FILE            *fpInputFile;
     SLArrayIndex_t  FrameNumber = 0;
     SLArrayIndex_t  OverlapSrcArrayIndex;
@@ -83,7 +83,7 @@ int main (int argc, char *argv[])
              FFT_LENGTH);                           // FFT length
 
     if (argc != 2) {
-        printf ("\nUsage error  :\nspecgram filename\n\n");
+        printf ("\nUsage error  :\nsgram filename\n\n");
         exit(-1);                                   // Exit - usage error
     }
 
@@ -114,7 +114,7 @@ int main (int argc, char *argv[])
     }
 
 
-    while ((SampleCount =
+    while ((sampleCount =
                 read_vibration_data (pDataArray,
                                      fpInputFile,
                                      &Speed,

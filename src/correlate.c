@@ -167,7 +167,7 @@ void SIGLIB_FUNC_DECL SDA_CorrelateLinear (const SLData_t * SIGLIB_PTR_DECL pSrc
 }       // End of SDA_CorrelateLinear()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_CorrelatePartial()
 *
@@ -233,7 +233,7 @@ void SIGLIB_FUNC_DECL SDA_CorrelatePartial (const SLData_t * SIGLIB_PTR_DECL pSr
 }       // End of SDA_CorrelatePartial()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_CorrelateCircular()
 *
@@ -293,7 +293,7 @@ void SIGLIB_FUNC_DECL SDA_CorrelateCircular (const SLData_t * SIGLIB_PTR_DECL pS
 }       // End of SDA_CorrelateCircular()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Covariance()
 *
@@ -364,7 +364,7 @@ void SIGLIB_FUNC_DECL SDA_Covariance (SLData_t * SIGLIB_PTR_DECL pSrc1,
 }       // End of SDA_Covariance()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_CovariancePartial()
 *
@@ -433,7 +433,7 @@ void SIGLIB_FUNC_DECL SDA_CovariancePartial (SLData_t * SIGLIB_PTR_DECL pSrc1,
 }       // End of SDA_CovariancePartial()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_CorrelateLinearReturnPeak()
 *

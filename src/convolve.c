@@ -126,7 +126,7 @@ void SIGLIB_FUNC_DECL SDA_ConvolveLinear (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_ConvolveLinear()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ConvolvePartial()
 *
@@ -179,7 +179,7 @@ void SIGLIB_FUNC_DECL SDA_ConvolvePartial (const SLData_t * SIGLIB_PTR_DECL pSrc
 }       // End of SDA_ConvolvePartial()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ConvolveCircular()
 *
@@ -242,7 +242,7 @@ void SIGLIB_FUNC_DECL SDA_ConvolveCircular (const SLData_t * SIGLIB_PTR_DECL pSr
 
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ConvolveLinearComplex()
 *
@@ -337,7 +337,7 @@ void SIGLIB_FUNC_DECL SDA_ConvolveLinearComplex (const SLData_t * SIGLIB_PTR_DEC
 }       // End of SDA_ConvolveLinearComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ConvolvePartialComplex()
 *
@@ -393,7 +393,7 @@ void SIGLIB_FUNC_DECL SDA_ConvolvePartialComplex (const SLData_t * SIGLIB_PTR_DE
 }       // End of SDA_ConvolvePartialComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ConvolveCircularComplex()
 *
@@ -458,7 +458,7 @@ void SIGLIB_FUNC_DECL SDA_ConvolveCircularComplex (const SLData_t * SIGLIB_PTR_D
 }       // End of SDA_ConvolveCircularComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FftDeconvolution()
 *
@@ -520,7 +520,7 @@ void SIGLIB_FUNC_DECL SDA_FftDeconvolution (SLData_t * SIGLIB_PTR_DECL pSrcReal,
 }       // End of SDA_FftDeconvolution()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FftDeconvolutionPre()
 *
@@ -574,7 +574,7 @@ void SIGLIB_FUNC_DECL SIF_FftDeconvolutionPre (const SLData_t * SIGLIB_PTR_DECL 
 }       // End of SIF_FftDeconvolutionPre()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FftDeconvolutionPre()
 *

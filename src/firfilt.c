@@ -80,7 +80,7 @@ void SIGLIB_FUNC_DECL SIF_Fir (SLData_t * SIGLIB_PTR_DECL pState,
 }       // End of SIF_Fir()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Fir
 *
@@ -136,7 +136,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Fir (const SLData_t Src,
 }       // End of SDS_Fir()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Fir
 *
@@ -200,7 +200,7 @@ void SIGLIB_FUNC_DECL SDA_Fir (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Fir()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_FirAddSample
 *
@@ -244,7 +244,7 @@ void SIGLIB_FUNC_DECL SDS_FirAddSample (const SLData_t Src,
 }       // End of SDS_FirAddSample()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FirAddSamples
 *
@@ -297,7 +297,7 @@ void SIGLIB_FUNC_DECL SDA_FirAddSamples (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_FirAddSamples()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_Comb
 *
@@ -339,7 +339,7 @@ void SIGLIB_FUNC_DECL SIF_Comb (SLData_t * SIGLIB_PTR_DECL pState,
 }       // End of SIF_Comb()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Comb
 *
@@ -383,7 +383,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Comb (const SLData_t Src,
 }       // End of SDS_Comb()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Comb
 *
@@ -449,7 +449,7 @@ void SIGLIB_FUNC_DECL SDA_Comb (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Comb()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FirComplex
 *
@@ -485,7 +485,7 @@ void SIGLIB_FUNC_DECL SIF_FirComplex (SLData_t * SIGLIB_PTR_DECL pRealState,
 }       // End of SIF_FirComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_FirComplex
 *
@@ -550,7 +550,7 @@ void SIGLIB_FUNC_DECL SDS_FirComplex (const SLData_t RealSrc,
 }       // End of SDS_FirComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FirComplex
 *
@@ -617,7 +617,7 @@ void SIGLIB_FUNC_DECL SDA_FirComplex (const SLData_t * SIGLIB_PTR_DECL pRealSrc,
 }       // End of SDA_FirComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FirWithStore
 *
@@ -652,7 +652,7 @@ void SIGLIB_FUNC_DECL SIF_FirWithStore (SLData_t * SIGLIB_PTR_DECL pState,
 }       // End of SIF_FirWithStore()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_FirWithStore
 *
@@ -703,7 +703,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_FirWithStore (const SLData_t Src,
 }       // End of SDS_FirWithStore()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FirWithStore
 *
@@ -760,7 +760,7 @@ void SIGLIB_FUNC_DECL SDA_FirWithStore (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_FirWithStore()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FirComplexWithStore
 *
@@ -792,7 +792,7 @@ void SIGLIB_FUNC_DECL SIF_FirComplexWithStore (SLData_t * SIGLIB_PTR_DECL pRealS
 }       // End of SIF_FirComplexWithStore()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_FirComplexWithStore
 *
@@ -854,7 +854,7 @@ void SIGLIB_FUNC_DECL SDS_FirComplexWithStore (const SLData_t SrcReal,
 }       // End of SDS_FirComplexWithStore()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FirComplexWithStore
 *
@@ -919,7 +919,7 @@ void SIGLIB_FUNC_DECL SDA_FirComplexWithStore (const SLData_t * SIGLIB_PTR_DECL 
 }       // End of SDA_FirComplexWithStore()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_FirWithStoreAddSample
 *
@@ -957,7 +957,7 @@ void SIGLIB_FUNC_DECL SDS_FirWithStoreAddSample (const SLData_t Src,
 }       // End of SDS_FirWithStoreAddSample()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FirWithStoreAddSamples
 *
@@ -1002,7 +1002,7 @@ void SIGLIB_FUNC_DECL SDA_FirWithStoreAddSamples (const SLData_t * SIGLIB_PTR_DE
 
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FirExtendedArray
 *
@@ -1048,7 +1048,7 @@ void SIGLIB_FUNC_DECL SIF_FirExtendedArray (SLData_t * SIGLIB_PTR_DECL pState,
 }       // End of SIF_FirExtendedArray()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_FirExtendedArray
 *
@@ -1107,7 +1107,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_FirExtendedArray (const SLData_t Src,
 }       // End of SDS_FirExtendedArray()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FirExtendedArray
 *
@@ -1174,7 +1174,7 @@ void SIGLIB_FUNC_DECL SDA_FirExtendedArray (const SLData_t * SIGLIB_PTR_DECL pSr
 }       // End of SDA_FirExtendedArray()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FirComplexExtendedArray
 *
@@ -1225,7 +1225,7 @@ void SIGLIB_FUNC_DECL SIF_FirComplexExtendedArray (SLData_t * SIGLIB_PTR_DECL pR
 }       // End of SIF_FirComplexExtendedArray()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_FirComplexExtendedArray
 *
@@ -1300,7 +1300,7 @@ void SIGLIB_FUNC_DECL SDS_FirComplexExtendedArray (const SLData_t SrcReal,
 }       // End of SDS_FirComplexExtendedArray()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FirComplexExtendedArray
 *
@@ -1382,7 +1382,7 @@ void SIGLIB_FUNC_DECL SDA_FirComplexExtendedArray (const SLData_t * SIGLIB_PTR_D
 
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_FirExtendedArrayAddSample
 *
@@ -1430,7 +1430,7 @@ void SIGLIB_FUNC_DECL SDS_FirExtendedArrayAddSample (const SLData_t Src,
 }       // End of SDS_FirExtendedArrayAddSample()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FirExtendedArrayAddSamples
 *
@@ -1483,7 +1483,7 @@ void SIGLIB_FUNC_DECL SDA_FirExtendedArrayAddSamples (const SLData_t * SIGLIB_PT
 }       // End of SDA_FirExtendedArrayAddSamples()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FirLowPassFilter
 *
@@ -1564,7 +1564,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_FirLowPassFilter (SLData_t * SIGLIB_PTR_DECL pCoe
 }       // End of SIF_FirLowPassFilter()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FirHighPassFilter
 *
@@ -1651,7 +1651,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_FirHighPassFilter (SLData_t * SIGLIB_PTR_DECL pCo
 }       // End of SIF_FirHighPassFilter()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FirBandPassFilter
 *
@@ -1756,7 +1756,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_FirBandPassFilter (SLData_t * SIGLIB_PTR_DECL pCo
 }       // End of SIF_FirBandPassFilter()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FirLowPassFilterWindow
 *
@@ -1803,7 +1803,7 @@ void SIGLIB_FUNC_DECL SIF_FirLowPassFilterWindow (SLData_t * SIGLIB_PTR_DECL pCo
 }       // End of SIF_FirLowPassFilterWindow()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FirHighPassFilterWindow
 *
@@ -1854,7 +1854,7 @@ void SIGLIB_FUNC_DECL SIF_FirHighPassFilterWindow (SLData_t * SIGLIB_PTR_DECL pC
 }       // End of SIF_FirHighPassFilterWindow()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FirBandPassFilterWindow
 *
@@ -1910,7 +1910,7 @@ void SIGLIB_FUNC_DECL SIF_FirBandPassFilterWindow (SLData_t * SIGLIB_PTR_DECL pC
 }       // End of SIF_FirBandPassFilterWindow()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SUF_FirKaiserApproximation
 *
@@ -1966,7 +1966,7 @@ SLFixData_t SIGLIB_FUNC_DECL SUF_FirKaiserApproximation (SLData_t Fpass,
 }       // End of SUF_FirKaiserApproximation()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FirMatchedFilter
 *
@@ -1993,7 +1993,7 @@ void SIGLIB_FUNC_DECL SIF_FirMatchedFilter (SLData_t * SIGLIB_PTR_DECL pMatchedF
 }       // End of SIF_FirMatchedFilter()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FirFilterInverseCoherentGain
 *
@@ -2036,7 +2036,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_FirFilterInverseCoherentGain (const SLData_t * SIG
 }       // End of SDA_FirFilterInverseCoherentGain()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_TappedDelayLine
 *
@@ -2064,7 +2064,7 @@ void SIGLIB_FUNC_DECL SIF_TappedDelayLine (SLData_t * SIGLIB_PTR_DECL pDelay,
 }       // End of SIF_TappedDelayLine()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_TappedDelayLine
 *
@@ -2125,7 +2125,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_TappedDelayLine (const SLData_t Src,
 }       // End of SDS_TappedDelayLine()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_TappedDelayLine
 *
@@ -2199,7 +2199,7 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLine (const SLData_t * SIGLIB_PTR_DECL pSrc
 }       // End of SDA_TappedDelayLine()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_TappedDelayLineComplex
 *
@@ -2230,7 +2230,7 @@ void SIGLIB_FUNC_DECL SIF_TappedDelayLineComplex (SLData_t * SIGLIB_PTR_DECL pDe
 }       // End of SIF_TappedDelayLineComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_TappedDelayLineComplex
 *
@@ -2311,7 +2311,7 @@ void SIGLIB_FUNC_DECL SDS_TappedDelayLineComplex (const SLData_t SrcReal,
 }       // End of SDS_TappedDelayLineComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_TappedDelayLineComplex
 *
@@ -2403,7 +2403,7 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLineComplex (const SLData_t * SIGLIB_PTR_DE
 }       // End of SDA_TappedDelayLineComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_TappedDelayLineIQ
 *
@@ -2434,7 +2434,7 @@ void SIGLIB_FUNC_DECL SIF_TappedDelayLineIQ (SLData_t * SIGLIB_PTR_DECL pDelayRe
 }       // End of SIF_TappedDelayLineIQ()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_TappedDelayLineIQ
 *
@@ -2510,7 +2510,7 @@ void SIGLIB_FUNC_DECL SDS_TappedDelayLineIQ (const SLData_t SrcReal,
 }       // End of SDS_TappedDelayLineIQ()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_TappedDelayLineIQ
 *
@@ -2597,7 +2597,7 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLineIQ (const SLData_t * SIGLIB_PTR_DECL pS
 }       // End of SDA_TappedDelayLineIQ()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FirPolyPhaseGenerate
 *

@@ -86,14 +86,14 @@ typedef struct {                    // Microphone configuration
     SLData_t gain;                                          // Gain (linear)
 } SLMicrophone_s;
 
-typedef struct {                    // Microphone configuration
+typedef struct {                    // Microphone configuration - 16 bit
     SLInt16_t xPos;                                         // X location (Meters)
     SLInt16_t yPos;                                         // Y location (Meters)
     SLInt16_t delay;                                        // Delay (seconds)
     SLInt16_t gain;                                         // Gain (linear)
 } SLMicrophone16_s;
 
-typedef struct {                    // Microphone configuration
+typedef struct {                    // Microphone configuration - 32 bit
     SLInt32_t xPos;                                         // X location (Meters)
     SLInt32_t yPos;                                         // Y location (Meters)
     SLInt32_t delay;                                        // Delay (seconds)
@@ -108,6 +108,12 @@ typedef struct {                    // Structure for reading and writing .wav fi
     SLInt32_t BytesPerSample;                               // Bytes Per Sample
     SLInt32_t DataFormat;                                   // Data Format
 } SLWavFileInfo_s;
+
+typedef struct {                    // Neural network predicted category and probability
+    SLArrayIndex_t predictedCategory;
+    SLData_t probability;
+} SLNeuralNetworkPrediction_s;
+
 
             // SigLib enumerated data types
 enum SLWindow_t {                                           // Window types

@@ -92,7 +92,7 @@ int main (void)
 {
     FILE            *fpi, *fpo;
     int             InputChar;
-    int             TotalSampleCount = 0;
+    int             totalSampleCount = 0;
 
     pCarrierTable = SUF_QPSKCarrierArrayAllocate (CARRIER_SINE_TABLE_SIZE); // Allocate arrays
 
@@ -151,11 +151,11 @@ int main (void)
 
     GaussianNoisePhase = SIGLIB_ZERO;
 
-    inject_noise (fpo); TotalSampleCount += NOISE_LENGTH;  // Inject noise into the output, if required
+    inject_noise (fpo); totalSampleCount += NOISE_LENGTH;  // Inject noise into the output, if required
 
     while ((InputChar = getc (fpi)) != EOF) {       // Get first bit
         if (InputChar == '\n') {
-            inject_noise (fpo); TotalSampleCount += NOISE_LENGTH;   // Inject noise into the output, if required
+            inject_noise (fpo); totalSampleCount += NOISE_LENGTH;   // Inject noise into the output, if required
         }
         else {
             if (InputChar == '1') {                 // Convert di-bit pair from input file
@@ -167,18 +167,18 @@ int main (void)
 
             if ((InputChar = getc (fpi)) == EOF) {  // Get second bit
                                                     // No second bit so exiting
-                inject_noise (fpo); TotalSampleCount += NOISE_LENGTH;   // Inject noise into the output, if required
+                inject_noise (fpo); totalSampleCount += NOISE_LENGTH;   // Inject noise into the output, if required
 
 #if DISPLAY_TIME_DOMAIN
                 gpc_close (h2DPlot);
 #endif
                 SUF_MemoryFree (pCarrierTable);             // Free memory
 
-                wavInfo.NumberOfSamples = TotalSampleCount; // Set total data length
+                wavInfo.NumberOfSamples = totalSampleCount; // Set total data length
                 rewind (fpo);                               // Rewind pointer to start of file
                 SUF_WavWriteHeader (fpo, wavInfo);            // Overwrite the header information
 
-                printf ("Total Tx Sample Count = %d\n", TotalSampleCount);
+                printf ("Total Tx Sample Count = %d\n", totalSampleCount);
 
                 fclose (fpi);
                 fclose (fpo);
@@ -186,7 +186,7 @@ int main (void)
             }
 
             if (InputChar == '\n') {
-                inject_noise (fpo); TotalSampleCount += NOISE_LENGTH;   // Inject noise into the output, if required
+                inject_noise (fpo); totalSampleCount += NOISE_LENGTH;   // Inject noise into the output, if required
             }
 
             else {
@@ -225,7 +225,7 @@ int main (void)
                          SYMBOL_LENGTH);                    // Dataset length
 
                 SUF_WavWriteData (OutputArray, fpo, wavInfo, SYMBOL_LENGTH);
-                TotalSampleCount += SYMBOL_LENGTH;
+                totalSampleCount += SYMBOL_LENGTH;
 
 #if DISPLAY_TIME_DOMAIN
                 gpc_plot_2d (h2DPlot,                       // Graph handle
@@ -243,14 +243,14 @@ int main (void)
         }
     }
 
-    inject_noise (fpo); TotalSampleCount += NOISE_LENGTH;   // Inject noise into the output, if required
+    inject_noise (fpo); totalSampleCount += NOISE_LENGTH;   // Inject noise into the output, if required
 
 #if DISPLAY_TIME_DOMAIN
     gpc_close (h2DPlot);
 #endif
     SUF_MemoryFree (pCarrierTable);                 // Free memory
 
-    wavInfo.NumberOfSamples = TotalSampleCount;     // Set total data length
+    wavInfo.NumberOfSamples = totalSampleCount;     // Set total data length
     SUF_WavWriteHeader (fpo, wavInfo);                // Overwrite the header information
 
     fclose (fpi);                                   // Close files

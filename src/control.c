@@ -87,7 +87,7 @@ void SIGLIB_FUNC_DECL SDS_Pid (const SLData_t Kp,
 }           // End of SDS_Pid()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Pwm
 *

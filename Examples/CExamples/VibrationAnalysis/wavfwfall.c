@@ -52,7 +52,7 @@ static SLData_t     *pFilterState;
 
 int main (int argc, char *argv[])
 {
-    SLArrayIndex_t  SampleCount;
+    SLArrayIndex_t  sampleCount;
     FILE            *fpInputFile;
     FILE            *fpOutputFile;
     SLArrayIndex_t  i;
@@ -134,7 +134,7 @@ int main (int argc, char *argv[])
     fprintf (fpOutputFile, "# 3D plot for %s\n\n", WavFilename);
     fprintf (fpOutputFile, "# Time\t\tFrequency\tMagnitude\n\n");
 
-    while ((SampleCount = SUF_WavReadData (pDataArray, fpInputFile, wavInfo, SAMPLE_LENGTH)) == SAMPLE_LENGTH) {
+    while ((sampleCount = SUF_WavReadData (pDataArray, fpInputFile, wavInfo, SAMPLE_LENGTH)) == SAMPLE_LENGTH) {
                                                     // Apply high pass iir filter before overlapping the data
         SDA_Iir (pDataArray,                        // Pointer to source array
                  pDataArray,                        // Pointer to destination array

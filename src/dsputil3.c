@@ -41,7 +41,7 @@ Description : DSP utility functions, for SigLib DSP library.
 
 #include <siglib.h>                                         // Include SigLib header file
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_DeGlitch
 *
@@ -68,7 +68,7 @@ void SIGLIB_FUNC_DECL SIF_DeGlitch (SLArrayIndex_t *pOutOfRangeCount,
 }       // End of SIF_DeGlitch()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_DeGlitch
 *
@@ -176,7 +176,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_DeGlitch (SLData_t Src,
 }       // End of SDS_DeGlitch()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_DeGlitch
 *
@@ -292,7 +292,7 @@ void SIGLIB_FUNC_DECL SDA_DeGlitch (SLData_t * SIGLIB_PTR_DECL pSrc,
 
 }       // End of SDA_DeGlitch()
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_RemoveDuplicates
 *
@@ -347,7 +347,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_RemoveDuplicates (const SLData_t * SIGLIB_PT
 }       // End of SDA_RemoveDuplicates()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FindAllDuplicates
 *
@@ -393,7 +393,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindAllDuplicates (const SLData_t * SIGLIB_P
 }       // End of SDA_FindAllDuplicates()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FindFirstDuplicates
 *
@@ -457,7 +457,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindFirstDuplicates (const SLData_t * SIGLIB
 
 }       // End of SDA_FindFirstDuplicates()
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FindSortAllDuplicates
 *
@@ -508,7 +508,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindSortAllDuplicates (const SLData_t * SIGL
 }       // End of SDA_FindSortAllDuplicates()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FindSortFirstDuplicates
 *
@@ -576,7 +576,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindSortFirstDuplicates (const SLData_t * SI
 }       // End of SDA_FindSortFirstDuplicates()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Shuffle
 *
@@ -619,7 +619,7 @@ void SIGLIB_FUNC_DECL SDA_Shuffle (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Shuffle()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_InsertSample
 *
@@ -662,7 +662,7 @@ void SIGLIB_FUNC_DECL SDA_InsertSample (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_InsertSample()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_InsertArray
 *
@@ -710,7 +710,7 @@ void SIGLIB_FUNC_DECL SDA_InsertArray (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_InsertArray()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ExtractSample
 *
@@ -753,7 +753,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExtractSample (const SLData_t * SIGLIB_PTR_DECL pS
 }       // End of SDA_ExtractSample()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ExtractArray
 *

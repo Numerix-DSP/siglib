@@ -90,7 +90,7 @@ void SIGLIB_FUNC_DECL SDA_Rotate (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Rotate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Reverse
 *
@@ -144,7 +144,7 @@ void SIGLIB_FUNC_DECL SDA_Reverse (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Reverse()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Scale
 *
@@ -197,7 +197,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_Scale (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Scale()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_MeanSquare
 *
@@ -243,7 +243,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_MeanSquare (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }           // End of SDA_MeanSquare()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_MeanSquareError
 *
@@ -292,7 +292,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_MeanSquareError (const SLData_t * SIGLIB_PTR_DECL 
 }       // End of SDA_MeanSquareError()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_RootMeanSquare
 *
@@ -339,7 +339,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_RootMeanSquare (const SLData_t * SIGLIB_PTR_DECL p
 }           // End of SDA_RootMeanSquare()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Magnitude
 *
@@ -385,7 +385,7 @@ void SIGLIB_FUNC_DECL SDA_Magnitude (const SLData_t * SIGLIB_PTR_DECL pSrcReal,
 }       // End of SDA_Magnitude()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_MagnitudeSquared
 *
@@ -431,7 +431,7 @@ void SIGLIB_FUNC_DECL SDA_MagnitudeSquared (const SLData_t * SIGLIB_PTR_DECL pSr
 }       // End of SDA_MagnitudeSquared()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Magnitude
 *
@@ -456,7 +456,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Magnitude (const SLData_t RealSrc,
 }       // End of SDS_Magnitude()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_MagnitudeSquared
 *
@@ -481,7 +481,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_MagnitudeSquared (const SLData_t RealSrc,
 }       // End of SDS_MagnitudeSquared()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Phase
 *
@@ -510,7 +510,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Phase (const SLData_t RealSrc,
 }       // End of SDS_Phase()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_PhaseWrapped
 *
@@ -553,7 +553,7 @@ void SIGLIB_FUNC_DECL SDA_PhaseWrapped (const SLData_t * SIGLIB_PTR_DECL pSrcRea
 }       // End of SDA_PhaseWrapped()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_PhaseUnWrapped
 *
@@ -599,7 +599,7 @@ void SIGLIB_FUNC_DECL SDA_PhaseUnWrapped (const SLData_t * SIGLIB_PTR_DECL pSrcR
 }       // End of SDA_PhaseUnWrapped()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_MagnitudeAndPhaseWrapped
 *
@@ -645,7 +645,7 @@ void SIGLIB_FUNC_DECL SDA_MagnitudeAndPhaseWrapped (const SLData_t * SIGLIB_PTR_
 }       // End of SDA_MagnitudeAndPhaseWrapped()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_MagnitudeAndPhaseUnWrapped
 *
@@ -695,7 +695,7 @@ void SIGLIB_FUNC_DECL SDA_MagnitudeAndPhaseUnWrapped (const SLData_t * SIGLIB_PT
 }       // End of SDA_MagnitudeAndPhaseUnWrapped()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_MagnitudeSquaredAndPhaseWrapped
 *
@@ -742,7 +742,7 @@ void SIGLIB_FUNC_DECL SDA_MagnitudeSquaredAndPhaseWrapped (const SLData_t * SIGL
 }       // End of SDA_MagnitudeSquaredAndPhaseWrapped()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_MagnitudeSquaredAndPhaseUnWrapped
 *
@@ -793,7 +793,7 @@ void SIGLIB_FUNC_DECL SDA_MagnitudeSquaredAndPhaseUnWrapped (const SLData_t * SI
 }       // End of SDA_MagnitudeSquaredAndPhaseUnWrapped()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_PhaseWrap
 *
@@ -841,7 +841,7 @@ void SIGLIB_FUNC_DECL SDA_PhaseWrap (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_PhaseWrap()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_PhaseUnWrap
 *
@@ -897,7 +897,7 @@ void SIGLIB_FUNC_DECL SDA_PhaseUnWrap (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_PhaseUnWrap()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Log2
 *
@@ -931,7 +931,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Log2 (const SLData_t Src)
 }       // End of SDS_Log2()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Log2
 *
@@ -992,7 +992,7 @@ void SIGLIB_FUNC_DECL SDA_Log2 (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Log2()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_LogN
 *
@@ -1026,7 +1026,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_LogN (const SLData_t Src,
 }       // End of SDS_LogN()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_LogN
 *
@@ -1088,7 +1088,7 @@ void SIGLIB_FUNC_DECL SDA_LogN (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_LogN()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_LogDistribution
 *
@@ -1124,7 +1124,7 @@ void SIGLIB_FUNC_DECL SDA_LogDistribution (SLData_t * SIGLIB_PTR_DECL pDst,
 }       // End of SDA_LogDistribution()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Copy
 *
@@ -1165,7 +1165,7 @@ void SIGLIB_FUNC_DECL SDA_Copy (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Copy()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_CopyWithStride
 *
@@ -1209,7 +1209,7 @@ void SIGLIB_FUNC_DECL SDA_CopyWithStride (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_CopyWithStride()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_CopyWithOverlap
 *
@@ -1332,7 +1332,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CopyWithOverlap (const SLData_t * SIGLIB_PTR
 }       // End of SDA_CopyWithOverlap()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_CopyWithIndex
 *
@@ -1416,7 +1416,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CopyWithIndex (const SLData_t * SIGLIB_PTR_D
 }       // End of SDA_CopyWithIndex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_20Log10
 *
@@ -1463,7 +1463,7 @@ void SIGLIB_FUNC_DECL SDA_20Log10 (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_20Log10()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_10Log10
 *
@@ -1509,7 +1509,7 @@ void SIGLIB_FUNC_DECL SDA_10Log10 (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_10Log10()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_LogMagnitude
 *
@@ -1555,7 +1555,7 @@ void SIGLIB_FUNC_DECL SDA_LogMagnitude (const SLData_t * SIGLIB_PTR_DECL pSrcRea
 }       // End of SDA_LogMagnitude()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_LogMagnitudeAndPhaseWrapped
 *
@@ -1606,7 +1606,7 @@ void SIGLIB_FUNC_DECL SDA_LogMagnitudeAndPhaseWrapped (const SLData_t * SIGLIB_P
 }       // End of SDA_LogMagnitudeAndPhaseWrapped()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_LogMagnitudeAndPhaseUnWrapped
 *
@@ -1661,7 +1661,7 @@ void SIGLIB_FUNC_DECL SDA_LogMagnitudeAndPhaseUnWrapped (const SLData_t * SIGLIB
 }       // End of SDA_LogMagnitudeAndPhaseUnWrapped()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Lengthen
 *
@@ -1712,7 +1712,7 @@ void SIGLIB_FUNC_DECL SDA_Lengthen (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Lengthen()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Shorten
 *
@@ -1753,7 +1753,7 @@ void SIGLIB_FUNC_DECL SDA_Shorten (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Shorten()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_ReSize
 *
@@ -1776,7 +1776,7 @@ void SIGLIB_FUNC_DECL SIF_ReSize (SLArrayIndex_t *pStateLength)
 }       // End of SIF_ReSize()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ReSize
 *
@@ -1886,7 +1886,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ReSize (const SLData_t * SIGLIB_PTR_DECL pSr
 }       // End of SDA_ReSize()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ReSizeInput
 *
@@ -1937,7 +1937,7 @@ void SIGLIB_FUNC_DECL SDA_ReSizeInput (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_ReSizeInput()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ReSizeOutput
 *
@@ -2007,7 +2007,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ReSizeOutput (SLData_t * SIGLIB_PTR_DECL pDs
 }       // End of SDA_ReSizeOutput()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Fill
 *
@@ -2046,7 +2046,7 @@ void SIGLIB_FUNC_DECL SDA_Fill (SLData_t * SIGLIB_PTR_DECL pDst,
 }       // End of SDA_Fill()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Clear
 *
@@ -2083,7 +2083,7 @@ void SIGLIB_FUNC_DECL SDA_Clear (SLData_t * SIGLIB_PTR_DECL  pDst,
 }       // End of SDA_Clear()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Histogram
 *
@@ -2147,7 +2147,7 @@ void SIGLIB_FUNC_DECL SDA_Histogram (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Histogram()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_HistogramCumulative
 *
@@ -2217,7 +2217,7 @@ void SIGLIB_FUNC_DECL SDA_HistogramCumulative (const SLData_t * SIGLIB_PTR_DECL 
 }       // End of SDA_HistogramCumulative()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_HistogramExtended
 *
@@ -2281,7 +2281,7 @@ void SIGLIB_FUNC_DECL SDA_HistogramExtended (const SLData_t * SIGLIB_PTR_DECL pS
 }       // End of SDA_HistogramExtended()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_HistogramExtendedCumulative
 *
@@ -2351,7 +2351,7 @@ void SIGLIB_FUNC_DECL SDA_HistogramExtendedCumulative (const SLData_t * SIGLIB_P
 }       // End of SDA_HistogramExtendedCumulative()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_Histogram
 *
@@ -2388,7 +2388,7 @@ void SIGLIB_FUNC_DECL SIF_Histogram (SLData_t * SIGLIB_PTR_DECL pHistArray,
 }       // End of SIF_Histogram()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_HistogramEqualize
 *
@@ -2433,7 +2433,7 @@ void SIGLIB_FUNC_DECL SDA_HistogramEqualize (const SLData_t * SIGLIB_PTR_DECL pS
 }       // End of SDA_HistogramEqualize()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Quantize
 *
@@ -2486,7 +2486,7 @@ void SIGLIB_FUNC_DECL SDA_Quantize (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Quantize()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Quantize
 *
@@ -2520,7 +2520,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Quantize (const SLData_t src,
 }       // End of SDS_Quantize()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Quantize_N
 *
@@ -2558,7 +2558,7 @@ void SIGLIB_FUNC_DECL SDA_Quantize_N (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Quantize_N()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Quantise_N
 *
@@ -2582,7 +2582,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Quantise_N (const SLData_t src,
 }       /* End of SDS_Quantise_N() */
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Abs
 *
@@ -2634,7 +2634,7 @@ void SIGLIB_FUNC_DECL SDA_Abs (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Abs()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_PeakValueToBits
 *
@@ -2662,7 +2662,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_PeakValueToBits (SLData_t PeakValue,
 }       // End of SDS_PeakValueToBits()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_BitsToPeakValue
 *
@@ -2690,7 +2690,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_BitsToPeakValue (SLData_t NumberOfBits,
 }       // End of SDS_BitsToPeakValue()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_LinearTodBm
 *
@@ -2718,7 +2718,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_LinearTodBm (const SLData_t Linear,
 }       // End of SDS_LinearTodBm()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_LinearTodBm
 *
@@ -2775,7 +2775,7 @@ void SIGLIB_FUNC_DECL SDA_LinearTodBm (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_LinearTodBm()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_dBmToLinear
 *
@@ -2798,7 +2798,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_dBmToLinear (const SLData_t dBm,
 }       // End of SDS_dBmToLinear()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_dBmToLinear
 *
@@ -2841,7 +2841,7 @@ void SIGLIB_FUNC_DECL SDA_dBmToLinear (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_dBmToLinear()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Compare
 *
@@ -2886,7 +2886,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Compare (const SLData_t Src1,
 }       // End of SDS_Compare()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Compare
 *
@@ -2947,7 +2947,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Compare (const SLData_t * SIGLIB_PTR_DECL pSrc1
 }       // End of SDA_Compare()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_CompareComplex
 *
@@ -3007,7 +3007,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_CompareComplex (const SLData_t SrcReal1,
 }       // End of SDS_CompareComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_CompareComplex
 *
@@ -3086,7 +3086,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_CompareComplex (const SLData_t * SIGLIB_PTR_DEC
 }       // End of SDA_CompareComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Int
 *
@@ -3109,7 +3109,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Int (const SLData_t Src)
 }       // End of SDS_Int()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Frac
 *
@@ -3132,7 +3132,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Frac (const SLData_t Src)
 }       // End of SDS_Frac()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_AbsFrac
 *
@@ -3160,7 +3160,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_AbsFrac (const SLData_t Src)
 }       // End of SDS_AbsFrac()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Int
 *
@@ -3199,7 +3199,7 @@ void SIGLIB_FUNC_DECL SDA_Int (const SLData_t * SIGLIB_PTR_DECL pSrc,
 
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Frac
 *
@@ -3237,7 +3237,7 @@ void SIGLIB_FUNC_DECL SDA_Frac (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Frac()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_AbsFrac
 *
@@ -3283,7 +3283,7 @@ void SIGLIB_FUNC_DECL SDA_AbsFrac (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_AbsFrac()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SetMin
 *
@@ -3316,7 +3316,7 @@ void SIGLIB_FUNC_DECL SDA_SetMin (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_SetMin()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SetMax
 *
@@ -3349,7 +3349,7 @@ void SIGLIB_FUNC_DECL SDA_SetMax (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_SetMax()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SetRange
 *
@@ -3386,7 +3386,7 @@ void SIGLIB_FUNC_DECL SDA_SetRange (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_SetRange()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SetMean
 *

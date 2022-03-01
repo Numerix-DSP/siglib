@@ -77,7 +77,7 @@ void SIGLIB_FUNC_DECL SIF_FixedDelay (SLData_t * SIGLIB_PTR_DECL pState,
 }       // End of SIF_FixedDelay()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_FixedDelay
 *
@@ -120,7 +120,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_FixedDelay (const SLData_t Src,
 }       // End of SDS_FixedDelay()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FixedDelay
 *
@@ -212,7 +212,7 @@ void SIGLIB_FUNC_DECL SIF_FixedDelayComplex (SLData_t * SIGLIB_PTR_DECL pRealSta
 }       // End of SIF_FixedDelayComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_FixedDelayComplex
 *
@@ -263,7 +263,7 @@ void SIGLIB_FUNC_DECL SDS_FixedDelayComplex (const SLData_t RealSrc,
 }       // End of SDS_FixedDelayComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FixedDelayComplex
 *
@@ -325,7 +325,7 @@ void SIGLIB_FUNC_DECL SDA_FixedDelayComplex (const SLData_t * SIGLIB_PTR_DECL pS
 }       // End of SDA_FixedDelayComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ShortFixedDelay
 *
@@ -439,7 +439,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_VariableDelay (SLData_t * SIGLIB_PTR_DECL pDelayA
 }       // End of SIF_VariableDelay()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_VariableDelay
 *
@@ -498,7 +498,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_VariableDelay (const SLData_t InputValue,
 }       // End of SDS_VariableDelay()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_VariableDelay
 *
@@ -619,7 +619,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_VariableDelayComplex (SLData_t * SIGLIB_PTR_DECL 
 }       // End of SIF_VariableDelayComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_VariableDelayComplex
 *
@@ -685,7 +685,7 @@ void SIGLIB_FUNC_DECL SDS_VariableDelayComplex (const SLData_t RealInputValue,
 }       // End of SDS_VariableDelayComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_VariableDelayComplex
 *
@@ -758,7 +758,7 @@ void SIGLIB_FUNC_DECL SDA_VariableDelayComplex (const SLData_t * SIGLIB_PTR_DECL
 }       // End of SDA_VariableDelayComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SUF_IncreaseVariableDelay
 *
@@ -799,7 +799,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_IncreaseVariableDelay (SLArrayIndex_t *pOutp
 }       // End of SUF_IncreaseVariableDelay()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SUF_DecreaseVariableDelay
 *

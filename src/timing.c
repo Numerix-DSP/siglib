@@ -98,7 +98,7 @@ void SIGLIB_FUNC_DECL SIF_PhaseLockedLoop (SLData_t *pVCOPhase,
 }       // End of SIF_PhaseLockedLoop()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_PhaseLockedLoop
 *
@@ -163,7 +163,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_PhaseLockedLoop (const SLData_t Src,
 }       // End of SDS_PhaseLockedLoop()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_PhaseLockedLoop
 *
@@ -234,7 +234,7 @@ void SIGLIB_FUNC_DECL SDA_PhaseLockedLoop (const SLData_t * SIGLIB_PTR_DECL pSrc
 }       // End of SDA_PhaseLockedLoop()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_CostasLoop
 *
@@ -292,7 +292,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_CostasLoop (SLData_t *pCostasLpVCOPhase,
 
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_CostasLoop
 *
@@ -411,7 +411,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_CostasLoop (const SLData_t Src,
 }       // End of SDS_CostasLoop()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_CostasLoop
 *
@@ -539,7 +539,7 @@ void SIGLIB_FUNC_DECL SDA_CostasLoop (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_CostasLoop()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SRF_CostasLoop
 *
@@ -581,7 +581,7 @@ void SIGLIB_FUNC_DECL SRF_CostasLoop (SLData_t *pCostasLpVCOPhase,
 }       // End of SRF_CostasLoop()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_180DegreePhaseDetect
 *
@@ -734,7 +734,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_180DegreePhaseDetect (const SLData_t * SIGLI
 }       // End of SDA_180DegreePhaseDetect()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_TriggerReverberator
 *
@@ -942,7 +942,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_TriggerReverberator (const SLData_t Src,
 }       // End of SDS_TriggerReverberator()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_TriggerSelector
 *
@@ -1394,7 +1394,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_EarlyLateGate (const SLData_t Src,
 
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_EarlyLateGateSquarePulse
 *

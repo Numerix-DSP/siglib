@@ -95,7 +95,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_BitErrorRate (const SLChar_t *pSrc1,
 }       // End of SDA_BitErrorRate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Interleave
 *
@@ -141,7 +141,7 @@ void SIGLIB_FUNC_DECL SDA_Interleave (const SLData_t pSrc[],
 }       // End of SDA_Interleave()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Deinterleave
 *
@@ -187,7 +187,7 @@ void SIGLIB_FUNC_DECL SDA_Deinterleave (const SLData_t pSrc[],
 }       // End of SDA_Deinterleave()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SCV_EuclideanDistance
 *
@@ -214,7 +214,7 @@ SLData_t SIGLIB_FUNC_DECL SCV_EuclideanDistance (const SLComplexRect_s SrcVector
 }       // End of SCV_EuclideanDistance()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SCV_EuclideanDistanceSquared
 *
@@ -242,7 +242,7 @@ SLData_t SIGLIB_FUNC_DECL SCV_EuclideanDistanceSquared (const SLComplexRect_s Sr
 }       // End of SCV_EuclideanDistanceSquared()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SCA_EuclideanDistance
 *
@@ -278,7 +278,7 @@ void SIGLIB_FUNC_DECL SCA_EuclideanDistance (const SLComplexRect_s * SIGLIB_INPU
 }       // End of SCA_EuclideanDistance()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SCA_EuclideanDistanceSquared
 *
@@ -314,7 +314,7 @@ void SIGLIB_FUNC_DECL SCA_EuclideanDistanceSquared (const SLComplexRect_s * SIGL
 }       // End of SCA_EuclideanDistanceSquared()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_EuclideanDistance
 *
@@ -345,7 +345,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_EuclideanDistance (const SLData_t src1x,
 }       // End of SDS_EuclideanDistance()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_EuclideanDistanceSquared
 *
@@ -376,7 +376,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_EuclideanDistanceSquared (const SLData_t src1x,
 }       // End of SDS_EuclideanDistanceSquared()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_EuclideanDistance
 *
@@ -414,7 +414,7 @@ void SIGLIB_FUNC_DECL SDA_EuclideanDistance (const SLData_t * SIGLIB_INPUT_PTR_D
 }       // End of SDA_EuclideanDistance()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_EuclideanDistanceSquared
 *
@@ -452,7 +452,7 @@ void SIGLIB_FUNC_DECL SDA_EuclideanDistanceSquared (const SLData_t * SIGLIB_INPU
 }       // End of SDA_EuclideanDistanceSquared()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ManchesterEncode
 *
@@ -479,7 +479,7 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ManchesterEncode (const SLChar_t Input)
 }       // End of SDS_ManchesterEncode()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ManchesterDecode
 *
@@ -509,7 +509,7 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ManchesterDecode (const SLChar_t Input)
 }       // End of SDS_ManchesterDecode()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ManchesterEncodeByte
 *
@@ -542,7 +542,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ManchesterEncodeByte (const SLChar_t Input)
 }       // End of SDS_ManchesterEncodeByte()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ManchesterDecodeByte
 *
@@ -575,7 +575,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ManchesterDecodeByte (const SLFixData_t Input)
 }       // End of SDS_ManchesterDecodeByte()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_DetectNumericalWordSequence
 *
@@ -658,7 +658,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_DetectNumericalWordSequence (SLFixData_t InputW
 }       // End of SDS_DetectNumericalWordSequence()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_DetectNumericalBitSequence
 *
@@ -737,7 +737,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_DetectNumericalBitSequence (SLFixData_t Inpu
 }       // End of SDS_DetectNumericalBitSequence()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_DetectCharacterSequence
 *
@@ -809,7 +809,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_DetectCharacterSequence (SLChar_t InputCharacte
 }       // End of SDS_DetectCharacterSequence()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ErrorVector
 *
@@ -840,7 +840,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_ErrorVector (const SLComplexRect_s IdealPoint,
 }       // End of SDS_ErrorVector()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ErrorVectorMagnitudePercent
 *
@@ -873,7 +873,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_ErrorVectorMagnitudePercent (const SLComplexRect_s
 }       // End of SDS_ErrorVectorMagnitudePercent()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ErrorVectorMagnitudeDecibels
 *
@@ -912,7 +912,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_ErrorVectorMagnitudeDecibels (const SLComplexRect_
 }       // End of SDS_ErrorVectorMagnitudeDecibels()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ReverseDiBits()
 *
@@ -936,7 +936,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ReverseDiBits (const SLFixData_t Src)
 }       // End of SDS_ReverseDiBits()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_QpskBitErrorCount
 *

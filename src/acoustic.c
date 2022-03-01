@@ -41,7 +41,7 @@ Description : Acoustic signal processing functions, for SigLib DSP library.
 
 #include <siglib.h>                                         // Include SigLib header file
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_LinearMicrophoneArrayBeamPattern
 *
@@ -104,7 +104,7 @@ void SIGLIB_FUNC_DECL SDA_LinearMicrophoneArrayBeamPattern (const SLFixData_t nu
 }       /* End of SDA_LinearMicrophoneArrayBeamPattern() */
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_LinearMicrophoneArrayBeamPatternLinear
 *
@@ -164,7 +164,7 @@ void SIGLIB_FUNC_DECL SDA_LinearMicrophoneArrayBeamPatternLinear (const SLFixDat
 }       /* End of SDA_LinearMicrophoneArrayBeamPatternLinear() */
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_MicrophoneArrayCalculateDelays
 *
@@ -214,7 +214,7 @@ void SIGLIB_FUNC_DECL SDA_MicrophoneArrayCalculateDelays (const SLFixData_t numM
 }       /* End of SDA_MicrophoneArrayCalculateDelays() */
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_MicrophoneArrayBeamPattern
 *
@@ -292,7 +292,7 @@ void SIGLIB_FUNC_DECL SDA_MicrophoneArrayBeamPattern (const SLFixData_t numMics,
 }       /* End of SDA_MicrophoneArrayBeamPattern() */
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_MicrophoneArrayBeamPatternLinear
 *
@@ -367,7 +367,7 @@ void SIGLIB_FUNC_DECL SDA_MicrophoneArrayBeamPatternLinear (const SLFixData_t nu
 }       /* End of SDA_MicrophoneArrayBeamPatternLinear() */
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_MicrophoneArrayBeamPatternLinear
 *

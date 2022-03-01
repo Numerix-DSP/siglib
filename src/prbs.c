@@ -109,7 +109,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Scrambler1417 (const SLFixData_t Source,
 }       // End of SDS_Scrambler1417()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Descrambler1417
 *
@@ -173,7 +173,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Descrambler1417 (const SLFixData_t Source,
 }       // End of SDS_Descrambler1417()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Scrambler1417WithInversion
 *
@@ -268,7 +268,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Scrambler1417WithInversion (const SLFixData_t S
 }       // End of SDS_Scrambler1417WithInversion()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Descrambler1417WithInversion
 *
@@ -361,7 +361,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Descrambler1417WithInversion (const SLFixData_t
 }       // End of SDS_Descrambler1417WithInversion()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Scrambler1823
 *
@@ -428,7 +428,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Scrambler1823 (const SLFixData_t Source,
 }       // End of SDS_Scrambler1823()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Descrambler1823
 *
@@ -492,7 +492,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Descrambler1823 (const SLFixData_t Source,
 }       // End of SDS_Descrambler1823()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Scrambler523
 *
@@ -558,7 +558,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Scrambler523 (const SLFixData_t Source,
 }       // End of SDS_Scrambler523()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Descrambler523
 *
@@ -622,7 +622,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Descrambler523 (const SLFixData_t Source,
 }       // End of SDS_Descrambler523()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ScramblerDescramblerPN9
 *
@@ -673,7 +673,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblerPN9 (const SLFixData_t Sour
 }       // End of SDS_ScramblerDescramblerPN9()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_SequenceGeneratorPN9
 *
@@ -716,7 +716,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorPN9 (SLUInt32_t * SIGLIB_PTR_D
 }       // End of SDS_SequenceGeneratorPN9()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ScramblerDescramblerPN15
 *
@@ -767,7 +767,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblerPN15 (const SLFixData_t Sou
 }       // End of SDS_ScramblerDescramblerPN15()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_SequenceGeneratorPN15
 *
@@ -810,7 +810,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorPN15 (SLUInt32_t * SIGLIB_PTR_
 }       // End of SDS_SequenceGeneratorPN15()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ScramblerDescramblergCRC24
 *
@@ -854,7 +854,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblergCRC24 (const SLFixData_t S
 }       // End of SDS_ScramblerDescramblergCRC24()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_SequenceGeneratorgCRC24
 *
@@ -890,7 +890,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorgCRC24 (SLUInt32_t * SIGLIB_PT
 }       // End of SDS_SequenceGeneratorgCRC24()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ScramblerDescramblergCRC16
 *
@@ -934,7 +934,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblergCRC16 (const SLFixData_t S
 }       // End of SDS_ScramblerDescramblergCRC16()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_SequenceGeneratorgCRC16
 *
@@ -970,7 +970,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorgCRC16 (SLUInt32_t * SIGLIB_PT
 }       // End of SDS_SequenceGeneratorgCRC16()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ScramblerDescramblergCRC12
 *
@@ -1014,7 +1014,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblergCRC12 (const SLFixData_t S
 }       // End of SDS_ScramblerDescramblergCRC12()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_SequenceGeneratorgCRC12
 *
@@ -1050,7 +1050,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorgCRC12 (SLUInt32_t * SIGLIB_PT
 }       // End of SDS_SequenceGeneratorgCRC12()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ScramblerDescramblergCRC8
 *
@@ -1094,7 +1094,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblergCRC8 (const SLFixData_t So
 }       // End of SDS_ScramblerDescramblergCRC8()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_SequenceGeneratorgCRC8
 *
@@ -1130,7 +1130,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorgCRC8 (SLUInt32_t * SIGLIB_PTR
 }       // End of SDS_SequenceGeneratorgCRC8()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_LongCodeGenerator3GPPDL
 *
@@ -1187,7 +1187,7 @@ void SIGLIB_FUNC_DECL SDS_LongCodeGenerator3GPPDL (SLComplexRect_s * SIGLIB_PTR_
 
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_LongCodeGenerator3GPPUL
 *

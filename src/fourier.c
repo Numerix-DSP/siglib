@@ -42,7 +42,7 @@ Description : SigLib DSP library Generic Fourier Transform routines.
 #include <siglib.h>                                         // Include SigLib header file
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_ZoomFft
 *
@@ -321,7 +321,7 @@ void SIGLIB_FUNC_DECL SDA_ZoomFft (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_ZoomFft()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_ZoomFftSimple
 *
@@ -530,7 +530,7 @@ void SIGLIB_FUNC_DECL SDA_ZoomFftSimple (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_ZoomFftSimple()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FdHilbert
 *
@@ -650,7 +650,7 @@ void SIGLIB_FUNC_DECL SDA_FdHilbert (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }           // End of SDA_FdHilbert()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FdAnalytic
 *
@@ -738,7 +738,7 @@ void SIGLIB_FUNC_DECL SDA_FdAnalytic (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }           // End of SDA_FdAnalytic()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_InstantFreq
 *
@@ -790,7 +790,7 @@ void SIGLIB_FUNC_DECL SDA_InstantFreq (const SLData_t * SIGLIB_PTR_DECL pSLead,
 }       // End of SDA_InstantFreq()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Rdft
 *
@@ -890,7 +890,7 @@ void SIGLIB_FUNC_DECL SDA_Ridft (const SLData_t pRealData[],
 }       // End of SDA_Ridft()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Cdft
 *
@@ -1000,7 +1000,7 @@ void SIGLIB_FUNC_DECL SDA_Cidft (const SLData_t pSrcReal[],
 }       // End of SDA_Cidft()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FftShift
 *
@@ -1048,7 +1048,7 @@ void SIGLIB_FUNC_DECL SDA_FftShift (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_FftShift()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_CfftShift
 *
@@ -1114,7 +1114,7 @@ void SIGLIB_FUNC_DECL SDA_CfftShift (const SLData_t * SIGLIB_PTR_DECL pSrcReal,
 }       // End of SDA_CfftShift()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FftExtend
 *
@@ -1150,7 +1150,7 @@ void SIGLIB_FUNC_DECL SDA_FftExtend (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_FftExtend()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_CfftExtend
 *
@@ -1231,7 +1231,7 @@ void SIGLIB_FUNC_DECL SIF_DctII (SLData_t * SIGLIB_PTR_DECL pCosAnglesLUT,
 }       // End of SIF_DctII()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_DctII
 *
@@ -1304,7 +1304,7 @@ void SIGLIB_FUNC_DECL SIF_DctIIOrthogonal (SLData_t *pSqrtHalf,
 }       // End of SIF_DctIIOrthogonal()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_DctIIOrthogonal
 *

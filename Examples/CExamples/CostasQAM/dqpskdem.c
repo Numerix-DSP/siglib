@@ -283,7 +283,7 @@ int main (int argc, char **argv)
     SLData_t        ImagMagn;
 
 #if DEBUG_LOG_FILE
-    SLArrayIndex_t  SampleCount = -(DECIMATION_RATIO*SAMPLE_LENGTH);    // Count number of samples read from wav file
+    SLArrayIndex_t  sampleCount = -(DECIMATION_RATIO*SAMPLE_LENGTH);    // Count number of samples read from wav file
 #endif
 
 #if DISPLAY_CONSTELLATION
@@ -476,7 +476,7 @@ SUF_Debugfprintf ("Returned from SIF_RootRaisedCosineFilter\n");
                                                     // Main data processing loop
     while ((ProcessSampleLength = (SLArrayIndex_t)SUF_WavReadData (pInput, pInputWavFile, wavInfo, DECIMATION_RATIO*SAMPLE_LENGTH)) != 0) {   // Successively read arrays of 128 samples*/
 #if DEBUG_LOG_FILE
-    SampleCount += ProcessSampleLength;             // Increment SampleCount by number of samples to process
+    sampleCount += ProcessSampleLength;             // Increment sampleCount by number of samples to process
 //    SUF_DebugPrintArray (pInput, ProcessSampleLength);          // Print array contents
 #endif
 
@@ -531,7 +531,7 @@ SUF_Debugfprintf ("Returned from SIF_RootRaisedCosineFilter\n");
                                                         // If we have finished demodulating a block of data then reset system
         if (FirstNonZeroSampleIndex == SIGLIB_SIGNAL_NOT_PRESENT) { // If signal is not over threshold
 #if DEBUG_LOG_FILE
-    SUF_Debugfprintf ("NoData : SampleCount = %d\n", SampleCount);
+    SUF_Debugfprintf ("NoData : sampleCount = %d\n", sampleCount);
 #endif
             if (DemodulatorState == DEMODULATING_DATA) {    // If we have finished demodulating a block of data then reset system
 #if DEBUG_LOG_FILE
@@ -580,7 +580,7 @@ SUF_Debugfprintf ("Returned from SIF_RootRaisedCosineFilter\n");
 
         else {                                              // Signal is over threshold
 #if DEBUG_LOG_FILE
-    SUF_Debugfprintf ("GotData : SampleCount = %d\n", SampleCount);
+    SUF_Debugfprintf ("GotData : sampleCount = %d\n", sampleCount);
 #endif
 
             DemodulatorState = DEMODULATING_DATA;           // Indicate state is demodulating data

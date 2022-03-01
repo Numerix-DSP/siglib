@@ -72,7 +72,7 @@ void SIGLIB_FUNC_DECL SIF_Iir (SLData_t * SIGLIB_PTR_DECL pState,
 }       // End of SIF_Iir()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Iir
 *
@@ -122,7 +122,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Iir (const SLData_t Source,
 }       // End of SDS_Iir()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Iir
 *
@@ -187,7 +187,7 @@ void SIGLIB_FUNC_DECL SDA_Iir (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Iir()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_IirMac
 *
@@ -238,7 +238,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_IirMac (const SLData_t Source,
 }       // End of SDS_IirMac()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_IirMac
 *
@@ -304,7 +304,7 @@ void SIGLIB_FUNC_DECL SDA_IirMac (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_IirMac()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_IirOrderN
 *
@@ -338,7 +338,7 @@ void SIGLIB_FUNC_DECL SIF_IirOrderN (SLData_t * SIGLIB_PTR_DECL pState,
 }       // End of SIF_IirOrderN()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_IirOrderN
 *
@@ -398,7 +398,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_IirOrderN (const SLData_t Source,
 }       // End of SDS_IirOrderN()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_IirOrderN
 *
@@ -469,7 +469,7 @@ void SIGLIB_FUNC_DECL SDA_IirOrderN (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_IirOrderN()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_IirNc
 *
@@ -503,7 +503,7 @@ void SIGLIB_FUNC_DECL SIF_IirNc (SLData_t * SIGLIB_PTR_DECL pState1,
 }       // End of SIF_IirNc()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_IirNc
 *
@@ -545,7 +545,7 @@ void SIGLIB_FUNC_DECL SDA_IirNc (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_IirNc()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_BilinearTransform
 *
@@ -617,7 +617,7 @@ void SIGLIB_FUNC_DECL SDA_BilinearTransform (const SLComplexRect_s * SIGLIB_PTR_
 }       // End of SDA_BilinearTransform
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_PreWarp
 *
@@ -641,7 +641,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_PreWarp (const SLData_t DesiredFrequency,
 }       // End of SDS_PreWarp()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_MatchedZTransform
 *
@@ -686,7 +686,7 @@ void SIGLIB_FUNC_DECL SDA_MatchedZTransform (const SLComplexRect_s * SIGLIB_PTR_
 }       // End of SDA_MatchedZTransform()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_IirZplaneToCoeffs
 *
@@ -787,7 +787,7 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneToCoeffs (const SLComplexRect_s * SIGLIB_PTR_
 }       // End of SDA_IirZplaneToCoeffs
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_IirZplanePolarToCoeffs
 *
@@ -878,7 +878,7 @@ void SIGLIB_FUNC_DECL SDA_IirZplanePolarToCoeffs (const SLComplexPolar_s * SIGLI
 }       // End of SDA_IirZplanePolarToCoeffs
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_IirZplaneLpfToLpf
 *
@@ -939,7 +939,7 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToLpf (const SLComplexRect_s * SIGLIB_PTR_
 }       // End of SDA_IirZplaneLpfToLpf
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_IirZplaneLpfToHpf
 *
@@ -994,7 +994,7 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToHpf (const SLComplexRect_s * SIGLIB_PTR_
 }       // End of SDA_IirZplaneLpfToHpf
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_IirZplaneLpfToBpf
 *
@@ -1078,7 +1078,7 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToBpf (const SLComplexRect_s * SIGLIB_PTR_
 }       // End of SDA_IirZplaneLpfToBpf
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_IirZplaneLpfToBsf
 *
@@ -1163,7 +1163,7 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToBsf (const SLComplexRect_s * SIGLIB_PTR_
 }       // End of SDA_IirZplaneLpfToBsf
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_IirModifyFilterGain
 *
@@ -1245,7 +1245,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_IirModifyFilterGain (const SLData_t * SIGLIB_PTR_D
 }       // End of SDA_IirModifyFilterGain
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_IirLowPassFilter
 *
@@ -1284,7 +1284,7 @@ void SIGLIB_FUNC_DECL SIF_IirLowPassFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
 }       // End of SIF_IirLowPassFilter()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_IirHighPassFilter
 *
@@ -1323,7 +1323,7 @@ void SIGLIB_FUNC_DECL SIF_IirHighPassFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
 }       // End of SIF_IirHighPassFilter()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_IirAllPassFilter
 *
@@ -1362,7 +1362,7 @@ void SIGLIB_FUNC_DECL SIF_IirAllPassFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
 }       // End of SIF_IirAllPassFilter()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_IirBandPassFilter
 *
@@ -1402,7 +1402,7 @@ void SIGLIB_FUNC_DECL SIF_IirBandPassFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
 }       // End of SIF_IirBandPassFilter()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_IirNotchFilter
 *
@@ -1441,7 +1441,7 @@ void SIGLIB_FUNC_DECL SIF_IirNotchFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
 }       // End of SIF_IirNotchFilter()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_IirPeakingFilter
 *
@@ -1482,7 +1482,7 @@ void SIGLIB_FUNC_DECL SIF_IirPeakingFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
 }       // End of SIF_IirPeakingFilter()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_IirLowShelfFilter
 *
@@ -1524,7 +1524,7 @@ void SIGLIB_FUNC_DECL SIF_IirLowShelfFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
 }       // End of SIF_IirLowShelfFilter()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_IirHighShelfFilter
 *
@@ -1566,7 +1566,7 @@ void SIGLIB_FUNC_DECL SIF_IirHighShelfFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs
 }       // End of SIF_IirHighShelfFilter()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_IirRemoveDC
 *
@@ -1601,7 +1601,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_IirRemoveDC (SLData_t Src,
 }
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_IirRemoveDC
 *
@@ -1649,7 +1649,7 @@ void SIGLIB_FUNC_DECL SDA_IirRemoveDC (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_OnePole
 *
@@ -1670,7 +1670,7 @@ void SIGLIB_FUNC_DECL SIF_OnePole (SLData_t *State)
 }           // End of SIF_OnePole()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_OnePole
 *
@@ -1696,7 +1696,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePole (const SLData_t Src,
 }           // End of SDS_OnePole()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_OnePole
 *
@@ -1743,7 +1743,7 @@ void SIGLIB_FUNC_DECL SDA_OnePole (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }           // End of SDA_OnePole()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_OnePoleNormalized
 *
@@ -1769,7 +1769,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePoleNormalized (const SLData_t Src,
 }           // End of SDS_OnePoleNormalized()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_OnePoleNormalized
 *
@@ -1815,7 +1815,7 @@ void SIGLIB_FUNC_DECL SDA_OnePoleNormalized (const SLData_t * SIGLIB_PTR_DECL pS
 }           // End of SDA_OnePoleNormalized()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_OnePolePerSample
 *
@@ -1851,7 +1851,7 @@ void SIGLIB_FUNC_DECL SDA_OnePolePerSample (const SLData_t * SIGLIB_PTR_DECL pSr
 }       // End of SDA_OnePolePerSample()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_OnePoleHighPass
 *
@@ -1872,7 +1872,7 @@ void SIGLIB_FUNC_DECL SIF_OnePoleHighPass (SLData_t *State)
 }           // End of SIF_OnePoleHighPass()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_OnePoleHighPass
 *
@@ -1898,7 +1898,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePoleHighPass (const SLData_t Src,
 }           // End of SDS_OnePoleHighPass()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_OnePoleHighPass
 *
@@ -1945,7 +1945,7 @@ void SIGLIB_FUNC_DECL SDA_OnePoleHighPass (const SLData_t * SIGLIB_PTR_DECL pSrc
 }           // End of SDA_OnePoleHighPass()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_OnePoleHighPassNormalized
 *
@@ -1971,7 +1971,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePoleHighPassNormalized (const SLData_t Src,
 }           // End of SDS_OnePoleHighPassNormalized()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_OnePoleHighPassNormalized
 *
@@ -2017,7 +2017,7 @@ void SIGLIB_FUNC_DECL SDA_OnePoleHighPassNormalized (const SLData_t * SIGLIB_PTR
 }           // End of SDA_OnePoleHighPassNormalized()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_OnePoleHighPassPerSample
 *
@@ -2053,7 +2053,7 @@ void SIGLIB_FUNC_DECL SDA_OnePoleHighPassPerSample (const SLData_t * SIGLIB_PTR_
 }       // End of SDA_OnePoleHighPassPerSample()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_OnePoleTimeConstantToFilterCoeff
 *
@@ -2080,7 +2080,7 @@ SLData_t SDS_OnePoleTimeConstantToFilterCoeff (const SLData_t periodMs,
 }       // SDS_OnePoleTimeConstantToFilterCoeff
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_OnePoleCutOffFrequencyToFilterCoeff
 *
@@ -2107,7 +2107,7 @@ SLData_t SDS_OnePoleCutOffFrequencyToFilterCoeff (const SLData_t cutOffFreq,
 }       // SDS_OnePoleCutOffFrequencyToFilterCoeff
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_OnePoleHighPassCutOffFrequencyToFilterCoeff
 *
@@ -2134,7 +2134,7 @@ SLData_t SDS_OnePoleHighPassCutOffFrequencyToFilterCoeff (const SLData_t cutOffF
 }       // SDS_OnePoleHighPassCutOffFrequencyToFilterCoeff
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_AllPole
 *
@@ -2168,7 +2168,7 @@ void SIGLIB_FUNC_DECL SIF_AllPole (SLData_t * SIGLIB_PTR_DECL pState,
 }       // End of SIF_AllPole()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_AllPole
 *
@@ -2225,7 +2225,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_AllPole (const SLData_t Source,
 }       // End of SDS_AllPole()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_AllPole
 *
@@ -2294,7 +2294,7 @@ void SIGLIB_FUNC_DECL SDA_AllPole (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_AllPole()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ZDomainCoefficientReorg
 *
@@ -2335,7 +2335,7 @@ void SIGLIB_FUNC_DECL SDA_ZDomainCoefficientReorg (const SLData_t * SIGLIB_PTR_D
 }       // End of SDA_ZDomainCoefficientReorg()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_IirNotchFilter2
 *
@@ -2384,7 +2384,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_IirNotchFilter2 (SLData_t * SIGLIB_PTR_DECL pIIRC
 }       // End of SIF_IirNotchFilter2
 
 
-/**/
+/**/
 #include <siglib_iir_constants.h>               // Include SigLib IIR filter normalized coefficient header file
 /********************************************************
 * Function: SIF_IirNormalizedCoefficients
@@ -2442,7 +2442,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_IirNormalizedCoefficients (SLData_t * SIGLIB_PTR_
 }       // End of SIF_IirNormalizedCoefficients()
 
 
-/**/
+/**/
 #include <siglib_iir_constants.h>               // Include SigLib IIR filter normalized coefficient header file
 /********************************************************
 * Function: SIF_IirNormalizedSPlaneCoefficients
@@ -2501,7 +2501,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_IirNormalizedSPlaneCoefficients (SLComplexRect_s 
 }       // End of SIF_IirNormalizedSPlaneCoefficients()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_TranslateSPlaneCutOffFrequency
 *
@@ -2535,7 +2535,7 @@ void SIGLIB_FUNC_DECL SDA_TranslateSPlaneCutOffFrequency (const SLComplexRect_s 
 }       // End of SDA_TranslateSPlaneCutOffFrequency()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_IirLpLpShift
 *
@@ -2646,7 +2646,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_IirLpLpShift (const SLData_t * SIGLIB_PTR_DECL Src
 }       // End of SDA_IirLpLpShift
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_IirLpHpShift
 *
@@ -2793,7 +2793,7 @@ void SIGLIB_FUNC_DECL SIF_Iir2PoleLpf (SLData_t * SIGLIB_PTR_DECL pState,
 }       // End of SIF_Iir2PoleLpf()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Iir2Pole
 *
@@ -2828,7 +2828,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Iir2Pole (const SLData_t Source,
 }       // End of SDS_Iir2Pole()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Iir2Pole
 *
@@ -2877,7 +2877,7 @@ void SIGLIB_FUNC_DECL SDA_Iir2Pole (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Iir2Pole()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_IirNegateAlphaCoeffs
 *

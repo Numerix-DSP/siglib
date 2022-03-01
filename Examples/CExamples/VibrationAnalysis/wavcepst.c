@@ -25,7 +25,7 @@ static SLWavFileInfo_s  wavInfo;
 
 int main (int argc, char *argv[])
 {
-    SLArrayIndex_t  SampleCount;
+    SLArrayIndex_t  sampleCount;
     FILE            *fpInputFile;
     FILE            *fpOutputFile;
     SLArrayIndex_t  i;
@@ -104,7 +104,7 @@ int main (int argc, char *argv[])
     fprintf (fpOutputFile, "# 3D plot for %s\n\n", WavFilename);
     fprintf (fpOutputFile, "# Time\t\tQuefrency\tMagnitude\n\n");
 
-    while ((SampleCount = SUF_WavReadData (pDataArray, fpInputFile, wavInfo, SAMPLE_LENGTH)) == SAMPLE_LENGTH) {
+    while ((sampleCount = SUF_WavReadData (pDataArray, fpInputFile, wavInfo, SAMPLE_LENGTH)) == SAMPLE_LENGTH) {
                              // Apply the overlap to the data
         while (SDA_CopyWithOverlap (pDataArray,             // Pointer to source array
                                     pFDPRealData,           // Pointer to destination array

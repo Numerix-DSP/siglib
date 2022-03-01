@@ -1,6 +1,6 @@
 /**************************************************************************
 File Name               : siglib.h      | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.11         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 13/09/1992
 Options   :                             | Latest Update : 09/01/2022
@@ -44,7 +44,7 @@ Update history :
 #ifndef _HP_VEE         // The following functionality is not supported by VEE
 
 #define SIGLIB                          1                   // Indicates SigLib is being used
-#define SIGLIB_VERSION                  10.10               // Indicates SigLib version being used
+#define SIGLIB_VERSION                  10.11               // Indicates SigLib version being used
 #define SIGLIB_ENABLE_DEBUG_FPRINTF     0                   // Set to 1 to enable SUF_Debugfprintf functions in some siglib functions
 
 
@@ -152,7 +152,8 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_DatWriteHeader (FILE *, const SLData_t);
 SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigReadData (SLData_t SIGLIB_OUTPUT_PTR_DECL *, FILE *, const SLArrayIndex_t);                         // Functions for reading and writing .sig files
 SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigWriteData (const SLData_t SIGLIB_INPUT_PTR_DECL *, FILE *, const SLArrayIndex_t);
 SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigReadFile (SLData_t SIGLIB_OUTPUT_PTR_DECL *, const char *);
-SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigWriteFile (const SLData_t SIGLIB_INPUT_PTR_DECL *, char *, const SLArrayIndex_t);
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigWriteFile (const SLData_t SIGLIB_INPUT_PTR_DECL *, const char *, const SLArrayIndex_t);
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigCountSamplesInFile (const char *);
 SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadData (SLData_t SIGLIB_OUTPUT_PTR_DECL *, FILE *, const SLWavFileInfo_s, const SLArrayIndex_t);  // Functions for reading and writing .wav files
 void SIGLIB_FUNC_DECL SUF_WavWriteData (const SLData_t SIGLIB_INPUT_PTR_DECL *, FILE *, const SLWavFileInfo_s, const SLArrayIndex_t);
 short SIGLIB_FUNC_DECL SUF_WavReadWord (FILE *);
@@ -6211,7 +6212,7 @@ void SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryNetworkFit (const SLData_t * SIGLIB_I
     const SLArrayIndex_t,                                   // Input array length
     const SLArrayIndex_t);                                  // Layer 1 length
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryNetworkPredict (const SLData_t * SIGLIB_INPUT_PTR_DECL,    // Pointer to data to classify
+SLNeuralNetworkPrediction_s SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryNetworkPredict (const SLData_t * SIGLIB_INPUT_PTR_DECL,   // Pointer to data to classify
     const SLData_t * SIGLIB_INPUT_PTR_DECL,                 // Pointer to layer 1 weights
     const SLData_t * SIGLIB_INPUT_PTR_DECL,                 // Pointer to layer 2 weights
     SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 1 post activation
@@ -6241,7 +6242,7 @@ void SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryNetworkFit (const SLData_t * SIGLIB_I
     const SLArrayIndex_t,                                   // Layer 1 length
     const SLArrayIndex_t);                                  // Number of categories
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryNetworkPredict (const SLData_t * SIGLIB_INPUT_PTR_DECL,    // Pointer to data to classify
+SLNeuralNetworkPrediction_s SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryNetworkPredict (const SLData_t * SIGLIB_INPUT_PTR_DECL,   // Pointer to data to classify
     const SLData_t * SIGLIB_INPUT_PTR_DECL,                 // Pointer to layer 1 weights
     const SLData_t * SIGLIB_INPUT_PTR_DECL,                 // Pointer to layer 2 weights
     SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 1 post activation

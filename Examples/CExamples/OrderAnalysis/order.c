@@ -62,7 +62,7 @@ int main (int argc, char *argv[])
     h_GPC_Plot      *hAverageSpectrumGraph;
     h_GPC_Plot      *hOrdergram;
 
-    SLArrayIndex_t  SampleCount;
+    SLArrayIndex_t  sampleCount;
     FILE            *fpInputFile;
     SLArrayIndex_t  i, j;
     SLArrayIndex_t  FrameNumber = SIGLIB_AI_ZERO;   // Number of frames processed
@@ -223,7 +223,7 @@ int main (int argc, char *argv[])
 // Debug
 //SUF_Debugfprintf ("Starting order analysis\n");
 
-    while ((SampleCount =
+    while ((sampleCount =
                 read_vibration_data (pInputData,
                                      fpInputFile,
                                      &Speed,

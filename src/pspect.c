@@ -74,7 +74,7 @@ void SIGLIB_FUNC_DECL SIF_FastAutoCrossPowerSpectrum (SLData_t * SIGLIB_PTR_DECL
 }       // End of SIF_FastAutoCrossPowerSpectrum()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FastAutoPowerSpectrum
 *
@@ -127,7 +127,7 @@ void SIGLIB_FUNC_DECL SDA_FastAutoPowerSpectrum (SLData_t * SIGLIB_PTR_DECL pRea
 }       // End of SDA_FastAutoPowerSpectrum()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FastCrossPowerSpectrum
 *
@@ -191,7 +191,7 @@ void SIGLIB_FUNC_DECL SDA_FastCrossPowerSpectrum (SLData_t * SIGLIB_PTR_DECL pRe
 }       // End of SDA_FastCrossPowerSpectrum()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_ArbAutoCrossPowerSpectrum
 *
@@ -266,7 +266,7 @@ void SIGLIB_FUNC_DECL SIF_ArbAutoCrossPowerSpectrum (SLData_t * SIGLIB_PTR_DECL 
 }       // End of SIF_ArbAutoCrossPowerSpectrum()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ArbAutoPowerSpectrum
 *
@@ -363,7 +363,7 @@ void SIGLIB_FUNC_DECL SDA_ArbAutoPowerSpectrum (SLData_t * SIGLIB_PTR_DECL pReal
 }       // End of SDA_ArbAutoPowerSpectrum()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ArbCrossPowerSpectrum
 *
@@ -553,7 +553,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_WelchPowerSpectrum (SLArrayIndex_t *pOverlapSrcIn
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 #endif
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_WelchRealPowerSpectrum
 *
@@ -638,7 +638,7 @@ void SIGLIB_FUNC_DECL SDA_WelchRealPowerSpectrum (const SLData_t * SIGLIB_PTR_DE
 }       // End of SDA_WelchRealPowerSpectrum()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_WelchComplexPowerSpectrum
 *
@@ -736,7 +736,7 @@ void SIGLIB_FUNC_DECL SDA_WelchComplexPowerSpectrum (const SLData_t * SIGLIB_PTR
 #pragma GCC diagnostic pop
 #endif
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_MagnitudeSquaredCoherence
 *

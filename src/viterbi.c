@@ -100,7 +100,7 @@ SLUInt16_t SIGLIB_FUNC_DECL SDS_ConvEncoderK3 (SLChar_t Input,
 }       // End of SDS_ConvEncoderK3()
 
 
-/**/
+/**/
                                                 // Receiver ideal levels [OriginalState][TransitionNumber][BitNumber]
 const SLData_t siglib_numerix_K3RxIdealSymbol[SIGLIB_VITK3_NUMBER_OF_STATES][SIGLIB_VITK3_TRANSITIONS_PER_STATE][SIGLIB_VITK3_NUMBER_OF_INPUT_CODES] =
 {
@@ -359,7 +359,7 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderK3 (SLData_t *pSrc,
 }       // End of SDS_ViterbiDecoderK3()
 
 
-/**/
+/**/
 
                                                 // V32 Transmitter differential encoder [CurrentInput][Prev.Input]*/
 const SLArrayIndex_t siglib_numerix_V32TxDifferentialEncoder[4][4] =

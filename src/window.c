@@ -313,7 +313,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_TableTopWindow (SLData_t * SIGLIB_PTR_DECL pWindo
 }       // End of SIF_TableTopWindow()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Window
 *
@@ -356,7 +356,7 @@ void SIGLIB_FUNC_DECL SDA_Window (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Window()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ComplexWindow
 *
@@ -412,7 +412,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexWindow (const SLData_t * SIGLIB_PTR_DECL pSrcRe
 }       // End of SDA_ComplexWindow()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_WindowInverseCoherentGain
 *
@@ -454,7 +454,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_WindowInverseCoherentGain (const SLData_t * SIGLIB
 }       // End of SDA_WindowInverseCoherentGain()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_WindowEquivalentNoiseBandwidth
 *
@@ -480,7 +480,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_WindowEquivalentNoiseBandwidth (const SLData_t * S
 }       // End of SDA_WindowEquivalentNoiseBandwidth()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_WindowProcessingGain
 *
@@ -506,7 +506,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_WindowProcessingGain (const SLData_t * SIGLIB_PTR_
 }       // End of SDA_WindowProcessingGain()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_I0Bessel
 *

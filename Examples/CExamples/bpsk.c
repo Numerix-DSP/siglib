@@ -47,7 +47,7 @@ static char             *RxStringPtr;
 static SLData_t         *pData, *pCarrierTable;
 
 static SLData_t         TxCarrierPhase;
-static SLData_t         SampleCount;
+static SLData_t         sampleCount;
 
 
 #define COSTAS_LP_LPF_LENGTH            17          // Costas loop LP LPF FIR filter length
@@ -144,7 +144,7 @@ int main(void)
 
     SIF_BpskModulate (pCarrierTable,                        // Carrier table pointer
                       (CARRIER_TABLE_FREQ / SAMPLE_RATE),   // Carrier phase increment per sample (radians / 2π)
-                      &SampleCount,                         // Transmitter sample count - tracks samples
+                      &sampleCount,                         // Transmitter sample count - tracks samples
                       CARRIER_SINE_TABLE_SIZE);             // Carrier sine table size
 
     SIF_BpskDemodulate (&CostasLpVCOPhase,              // VCO phase

@@ -148,7 +148,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_CostasQamDemodulate (SLData_t *pCostasLpVCOPhase,
 }       // End of SIF_CostasQamDemodulate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_CostasQamDemodulate
 *
@@ -356,7 +356,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_CostasQamDemodulate (const SLData_t Src,
 }       // End of SDS_CostasQamDemodulate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_CostasQamDemodulateDebug
 *
@@ -556,7 +556,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_CostasQamDemodulateDebug (const SLData_t Src
 #endif      // End of !((_TMS320C30) || (_TMS320C40))
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_CostasQamDemodulate
 *
@@ -776,7 +776,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulate (const SLData_t * SIGLIB
 #endif      // End of !((_TMS320C30) || (_TMS320C40))
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_CostasQamDemodulateDebug
 *
@@ -983,7 +983,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulateDebug (const SLData_t * S
 #endif      // End of !((_TMS320C30) || (_TMS320C40))
 
 
-/**/
+/**/
 // QPSK functions
 
 // Definition of constelation space
@@ -1629,7 +1629,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_QpskDifferentialDecode (const SLFixData_t Mappe
 }       // End of SDA_QpskDifferentialDecode()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FskModulate
 *
@@ -1660,7 +1660,7 @@ void SIGLIB_FUNC_DECL SIF_FskModulate (SLData_t * SIGLIB_PTR_DECL pCarrierTable,
 }       // End of SIF_FskModulate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FskModulateByte
 *
@@ -1732,7 +1732,7 @@ void SIGLIB_FUNC_DECL SDA_FskModulateByte (SLFixData_t TxByte,
 }       // End of SDA_FskModulateByte()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FskDemodulateByte
 *
@@ -1812,7 +1812,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_FskDemodulateByte (const SLData_t * SIGLIB_PTR_
 }       // End of SDA_FskDemodulateByte()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_CpfskModulateByte
 *
@@ -1881,7 +1881,7 @@ void SIGLIB_FUNC_DECL SDA_CpfskModulateByte (SLFixData_t TxByte,
 }       // End of SDA_CpfskModulateByte()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FskModulate
 *
@@ -1952,7 +1952,7 @@ void SIGLIB_FUNC_DECL SDA_FskModulate (SLFixData_t TxBit,
 }       // End of SDA_FskModulate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FskDemodulate
 *
@@ -2027,7 +2027,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_FskDemodulate (const SLData_t * SIGLIB_PTR_DECL
 }       // End of SDA_FskDemodulate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_CpfskModulate
 *
@@ -2768,7 +2768,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Qam16DifferentialDecode (const SLFixData_t Mapp
 }       // End of SDA_Qam16DifferentialDecode()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_BpskModulate
 *
@@ -2803,7 +2803,7 @@ void SIGLIB_FUNC_DECL SIF_BpskModulate (SLData_t * SIGLIB_PTR_DECL pCarrierTable
 }       // End of SIF_BpskModulate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_BpskModulate
 *
@@ -2862,7 +2862,7 @@ void SIGLIB_FUNC_DECL SDA_BpskModulate (SLFixData_t TxBit,
 }       // End of SDA_BpskModulate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_BpskModulateByte
 *
@@ -2921,7 +2921,7 @@ void SIGLIB_FUNC_DECL SDA_BpskModulateByte (SLFixData_t TxByte,
 }       // End of SDA_BpskModulateByte()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_BpskDemodulate
 *
@@ -2977,7 +2977,7 @@ void SIGLIB_FUNC_DECL SIF_BpskDemodulate (SLData_t *pCostasLpVCOPhase,
 }       // End of SIF_BpskDemodulate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_BpskDemodulate
 *
@@ -3101,7 +3101,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_BpskDemodulate (const SLData_t * SIGLIB_PTR_DEC
 }       // End of SDA_BpskDemodulate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_BpskDemodulateDebug
 *
@@ -3230,7 +3230,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_BpskDemodulateDebug (const SLData_t * SIGLIB_PT
 }       // End of SDA_BpskDemodulateDebug()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_DpskModulate
 *
@@ -3267,7 +3267,7 @@ void SIGLIB_FUNC_DECL SIF_DpskModulate (SLData_t * SIGLIB_PTR_DECL pCarrierTable
 }       // End of SIF_DpskModulate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_DpskModulate
 *
@@ -3325,7 +3325,7 @@ void SIGLIB_FUNC_DECL SDA_DpskModulate (SLFixData_t TxBit,
 }       // End of SDA_DpskModulate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_DpskModulateByte
 *
@@ -3385,7 +3385,7 @@ void SIGLIB_FUNC_DECL SDA_DpskModulateByte (SLFixData_t TxByte,
 }       // End of SDA_DpskModulateByte()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_DpskDemodulate
 *
@@ -3443,7 +3443,7 @@ void SIGLIB_FUNC_DECL SIF_DpskDemodulate (SLData_t *pCostasLpVCOPhase,
 }       // End of SIF_DpskDemodulate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_DpskDemodulate
 *
@@ -3570,7 +3570,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_DpskDemodulate (const SLData_t * SIGLIB_PTR_DEC
 }       // End of SDA_DpskDemodulate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_DpskDemodulateDebug
 *
@@ -3702,7 +3702,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_DpskDemodulateDebug (const SLData_t * SIGLIB_PT
 
 
 
-/**/
+/**/
 // Look-up-table to encode phase difference between previous symbol
 // and current symbol acording to the following table :
 // Dibit      Phase change
@@ -3944,7 +3944,7 @@ void SIGLIB_FUNC_DECL SDA_PiByFourDQpskModulate (const SLFixData_t TxDiBit,
 }       // End of SDA_PiByFourDQpskModulate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ChannelizationCode
 *
@@ -3989,7 +3989,7 @@ void SIGLIB_FUNC_DECL SDS_ChannelizationCode (SLData_t  ChannelizationCode[],
 }           // End of SDS_ChannelizationCode()
 
 
-/**/
+/**/
 // Definition of constelation space
 //
 //        |
@@ -4064,7 +4064,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexQPSKSpread (const SLFixData_t TxDiBit,
 }           // End of SDA_ComplexQPSKSpread()
 
 
-/**/
+/**/
     // Receiver constellation
 const SLFixData_t siglib_numerix_QPSKDeSpreadRxConstellation[] =
 {

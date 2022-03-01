@@ -177,7 +177,7 @@ SLData_t  SIGLIB_FUNC_DECL SDS_AmplitudeModulate (const SLData_t Src,
 }       // End of SDS_AmplitudeModulate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_AmplitudeModulate2
 *
@@ -317,7 +317,7 @@ SLData_t  SIGLIB_FUNC_DECL SDS_AmplitudeModulate2 (const SLData_t Src,
 }       // End of SDS_AmplitudeModulate2()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_ComplexShift
 *
@@ -379,7 +379,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_ComplexShift (SLData_t * SIGLIB_PTR_DECL pRealCom
 }       // End of SIF_ComplexShift()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ComplexShift
 *
@@ -511,7 +511,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexShift (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_ComplexShift()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FrequencyModulate
 *
@@ -540,7 +540,7 @@ void SIGLIB_FUNC_DECL SIF_FrequencyModulate (SLData_t *pCarrierPhase,
 }       // End of SIF_FrequencyModulate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_FrequencyModulate
 *
@@ -579,7 +579,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_FrequencyModulate (const SLData_t Src,
 }       // End of SDS_FrequencyModulate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FrequencyModulate
 *
@@ -638,7 +638,7 @@ void SIGLIB_FUNC_DECL SDA_FrequencyModulate (const SLData_t * SIGLIB_PTR_DECL pS
 }       // End of SDA_FrequencyModulate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FrequencyDemodulate
 *
@@ -698,7 +698,7 @@ void SIGLIB_FUNC_DECL SDA_FrequencyDemodulate (const SLData_t * SIGLIB_PTR_DECL 
 }       // End of SDA_FrequencyDemodulate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_FrequencyModulateComplex
 *
@@ -726,7 +726,7 @@ void SIGLIB_FUNC_DECL SIF_FrequencyModulateComplex (SLData_t *pCarrierPhase,
 }       // End of SIF_FrequencyModulateComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_FrequencyModulateComplex
 *
@@ -770,7 +770,7 @@ void SIGLIB_FUNC_DECL SDS_FrequencyModulateComplex (const SLData_t Src,
 }       // End of SDS_FrequencyModulateComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FrequencyModulateComplex
 *
@@ -834,7 +834,7 @@ void SIGLIB_FUNC_DECL SDA_FrequencyModulateComplex (const SLData_t * SIGLIB_PTR_
 }       // End of SDA_FrequencyModulateComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_DeltaModulate
 *
@@ -889,7 +889,7 @@ void SIGLIB_FUNC_DECL SDA_DeltaModulate (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_DeltaModulate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_DeltaDemodulate
 *
@@ -940,7 +940,7 @@ void SIGLIB_FUNC_DECL SDA_DeltaDemodulate (const SLData_t * SIGLIB_PTR_DECL pSrc
 }       // SDA_DeltaDemodulate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_DeltaModulate2
 *

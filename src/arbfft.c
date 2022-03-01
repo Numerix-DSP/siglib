@@ -114,7 +114,7 @@ void SIGLIB_FUNC_DECL SIF_FftArb (SLData_t * SIGLIB_PTR_DECL pAWNr,
 }       // End of SIF_FftArb()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SUF_FftArbAllocLength
 *
@@ -153,7 +153,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_FftArbAllocLength (const SLArrayIndex_t Samp
 }       // End of SUF_FftArbAllocLength()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_RfftArb
 *
@@ -241,7 +241,7 @@ void SIGLIB_FUNC_DECL SDA_RfftArb (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_RfftArb()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_CfftArb
 *
@@ -331,7 +331,7 @@ void SIGLIB_FUNC_DECL SDA_CfftArb (const SLData_t * SIGLIB_PTR_DECL pSrcReal,
 }       // End of SDA_CfftArb()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_CifftArb
 *

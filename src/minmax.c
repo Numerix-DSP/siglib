@@ -85,7 +85,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_Max (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Max()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_AbsMax
 *
@@ -139,7 +139,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_AbsMax (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_AbsMax()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Min
 *
@@ -181,7 +181,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_Min (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Min()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_AbsMin
 *
@@ -239,7 +239,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_AbsMin (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_AbsMin()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Middle
 *
@@ -264,7 +264,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_Middle (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Middle()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Range
 *
@@ -311,7 +311,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_Range (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Range()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_MaxIndex
 *
@@ -353,7 +353,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_MaxIndex (const SLData_t * SIGLIB_PTR_DECL p
 }       // End of SDA_MaxIndex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_AbsMaxIndex
 *
@@ -416,7 +416,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AbsMaxIndex (const SLData_t * SIGLIB_PTR_DEC
 }       // End of SDA_AbsMaxIndex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_MinIndex
 *
@@ -458,7 +458,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_MinIndex (const SLData_t * SIGLIB_PTR_DECL p
 }       // End of SDA_MinIndex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_AbsMinIndex
 *
@@ -521,7 +521,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AbsMinIndex (const SLData_t * SIGLIB_PTR_DEC
 }       // End of SDA_AbsMinIndex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Max
 *
@@ -551,7 +551,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Max (const SLData_t Src1,
 }       // End of SDS_Max()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_AbsMax
 *
@@ -598,7 +598,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_AbsMax (const SLData_t Src1,
 }       // End of SDS_AbsMax()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Min
 *
@@ -628,7 +628,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Min (const SLData_t Src1,
 }       // End of SDS_Min()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_AbsMin
 *
@@ -659,7 +659,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_AbsMin (const SLData_t Src1,
 }       // End of SDS_AbsMin()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_LocalMax
 *
@@ -711,7 +711,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LocalMax (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_LocalMax()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_LocalAbsMax
 *
@@ -771,7 +771,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LocalAbsMax (const SLData_t * SIGLIB_PTR_DECL pSrc
 }       // End of SDA_LocalAbsMax()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_LocalMin
 *
@@ -823,7 +823,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LocalMin (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_LocalMin()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_LocalAbsMin
 *
@@ -883,7 +883,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LocalAbsMin (const SLData_t * SIGLIB_PTR_DECL pSrc
 }       // End of SDA_LocalAbsMin()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Max2
 *
@@ -942,7 +942,7 @@ void SIGLIB_FUNC_DECL SDA_Max2 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }       // End of SDA_Max2()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_AbsMax2
 *
@@ -1013,7 +1013,7 @@ void SIGLIB_FUNC_DECL SDA_AbsMax2 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }       // End of SDA_AbsMax2()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SignedAbsMax2
 *
@@ -1085,7 +1085,7 @@ void SIGLIB_FUNC_DECL SDA_SignedAbsMax2 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }       // End of SDA_SignedAbsMax2()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Min2
 *
@@ -1144,7 +1144,7 @@ void SIGLIB_FUNC_DECL SDA_Min2 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }       // End of SDA_Min2()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_AbsMin2
 *
@@ -1215,7 +1215,7 @@ void SIGLIB_FUNC_DECL SDA_AbsMin2 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }       // End of SDA_AbsMin2()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SignedAbsMin2
 *
@@ -1287,7 +1287,7 @@ void SIGLIB_FUNC_DECL SDA_SignedAbsMin2 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }       // End of SDA_SignedAbsMin2()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_PeakHold
 *
@@ -1335,7 +1335,7 @@ void SIGLIB_FUNC_DECL SDA_PeakHold (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_PeakHold()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_PeakHoldPerSample
 *
@@ -1377,7 +1377,7 @@ void SIGLIB_FUNC_DECL SDA_PeakHoldPerSample (const SLData_t * SIGLIB_PTR_DECL pS
 }       // End of SDA_PeakHoldPerSample()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_DetectFirstPeakOverThreshold
 *
@@ -1424,7 +1424,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_DetectFirstPeakOverThreshold (const SLData_t
 }       // End of SDA_DetectFirstPeakOverThreshold()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Round()
 *
@@ -1494,7 +1494,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Round (const SLData_t input,
 }       // End of SDS_Round()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Round
 *
@@ -1532,7 +1532,7 @@ void SIGLIB_FUNC_DECL SDA_Round (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Round()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Clip
 *
@@ -1614,7 +1614,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Clip (const SLData_t src,
 }       // End of SDS_Clip
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Clip
 *
@@ -1718,7 +1718,7 @@ void SIGLIB_FUNC_DECL SDA_Clip (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Clip
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Threshold
 *
@@ -1764,7 +1764,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Threshold (const SLData_t src,
 }       // End of SDS_Threshold()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Threshold
 *
@@ -1827,7 +1827,7 @@ void SIGLIB_FUNC_DECL SDA_Threshold (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Threshold()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_SoftThreshold
 *
@@ -1863,7 +1863,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_SoftThreshold (const SLData_t src,
 }       // End of SDS_SoftThreshold()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SoftThreshold
 *
@@ -1915,7 +1915,7 @@ void SIGLIB_FUNC_DECL SDA_SoftThreshold (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_SoftThreshold()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ThresholdAndClamp
 *
@@ -1969,7 +1969,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_ThresholdAndClamp (const SLData_t src,
 }       // End of SDS_ThresholdAndClamp()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ThresholdAndClamp
 *
@@ -2041,7 +2041,7 @@ void SIGLIB_FUNC_DECL SDA_ThresholdAndClamp (const SLData_t * SIGLIB_PTR_DECL pS
 }       // End of SDA_ThresholdAndClamp()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Clamp
 *
@@ -2091,7 +2091,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Clamp (const SLData_t src,
 }       // End of SDS_Clamp()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Clamp
 *
@@ -2160,7 +2160,7 @@ void SIGLIB_FUNC_DECL SDA_Clamp (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Clamp()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_TestOverThreshold
 *
@@ -2199,7 +2199,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_TestOverThreshold (const SLData_t * SIGLIB_P
 }       // End of SDA_TestOverThreshold()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_TestAbsOverThreshold
 *
@@ -2241,7 +2241,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_TestAbsOverThreshold (const SLData_t * SIGLI
 }       // End of SDA_TestAbsOverThreshold()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SelectMax
 *
@@ -2287,7 +2287,7 @@ void SIGLIB_FUNC_DECL SDA_SelectMax (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }       // End of SDA_SelectMax()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SelectMin
 *
@@ -2333,7 +2333,7 @@ void SIGLIB_FUNC_DECL SDA_SelectMin (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 }       // End of SDA_SelectMin()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SelectMagnitudeSquaredMax
 *
@@ -2394,7 +2394,7 @@ void SIGLIB_FUNC_DECL SDA_SelectMagnitudeSquaredMax (const SLData_t * SIGLIB_PTR
 }       // End of SDA_SelectMagnitudeSquaredMax()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SelectMagnitudeSquaredMin
 *
@@ -2455,7 +2455,7 @@ void SIGLIB_FUNC_DECL SDA_SelectMagnitudeSquaredMin (const SLData_t * SIGLIB_PTR
 }       // End of SDA_SelectMagnitudeSquaredMin()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_SetMinValue
 *
@@ -2490,7 +2490,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_SetMinValue (const SLData_t src,
 }       // End of SDS_SetMinValue()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SetMinValue
 *
@@ -2541,7 +2541,7 @@ void SIGLIB_FUNC_DECL SDA_SetMinValue (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_SetMinValue()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_PeakToAverageRatio
 *
@@ -2589,7 +2589,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAverageRatio (const SLData_t * SIGLIB_PTR_DE
 }       // End of SDA_PeakToAverageRatio()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_PeakToAveragePowerRatio
 *
@@ -2634,7 +2634,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAveragePowerRatio (const SLData_t * SIGLIB_P
 }       // End of SDA_PeakToAveragePowerRatio()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_PeakToAveragePowerRatioDB
 *
@@ -2679,7 +2679,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAveragePowerRatioDB (const SLData_t * SIGLIB
 }       // End of SDA_PeakToAveragePowerRatioDB()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_PeakToAverageRatioComplex
 *
@@ -2728,7 +2728,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAverageRatioComplex (const SLData_t * SIGLIB
 }       // End of SDA_PeakToAverageRatioComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_PeakToAveragePowerRatioComplex
 *
@@ -2777,7 +2777,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAveragePowerRatioComplex (const SLData_t * S
 }       // End of SDA_PeakToAveragePowerRatioComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_PeakToAveragePowerRatioComplexDB
 *
@@ -2826,7 +2826,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAveragePowerRatioComplexDB (const SLData_t *
 }       // End of SDA_PeakToAveragePowerRatioComplexDB()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_MovePeakTowardsDeadBand
 *
@@ -2887,7 +2887,7 @@ void SIGLIB_FUNC_DECL SDA_MovePeakTowardsDeadBand (const SLData_t * SIGLIB_PTR_D
 }       // End of SDA_MovePeakTowardsDeadBand()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_Envelope
 *
@@ -2997,7 +2997,7 @@ void SIGLIB_FUNC_DECL SDA_Envelope (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Envelope()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_EnvelopeRMS
 *
@@ -3110,7 +3110,7 @@ void SIGLIB_FUNC_DECL SDA_EnvelopeRMS (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_EnvelopeRMS()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_EnvelopeHilbert
 *
@@ -3295,7 +3295,7 @@ void SIGLIB_FUNC_DECL SDA_EnvelopeHilbert (const SLData_t * SIGLIB_PTR_DECL pSrc
 }       // End of SDA_EnvelopeHilbert()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_InterpolateThreePointQuadraticVertexMagnitude
 *
@@ -3324,7 +3324,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_InterpolateThreePointQuadraticVertexMagnitude (con
     return (y0 - (T2*T2 / (SIGLIB_FOUR * T1)));
 }       // End of SDS_InterpolateThreePointQuadraticVertexMagnitude()
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_InterpolateThreePointQuadraticVertexLocation
 *
@@ -3352,7 +3352,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_InterpolateThreePointQuadraticVertexLocation (cons
     return (-T2 / (SIGLIB_TWO * T1));
 }       // End of SDS_InterpolateThreePointQuadraticVertexLocation()
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_InterpolateArbitraryThreePointQuadraticVertexMagnitude
 *
@@ -3389,7 +3389,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_InterpolateArbitraryThreePointQuadraticVertexMagni
     return (T3 - T2*T2 / (SIGLIB_FOUR * T1));
 }       // End of SDS_InterpolateArbitraryThreePointQuadraticVertexMagnitude()
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_InterpolateArbitraryThreePointQuadraticVertexLocation
 *
@@ -3425,7 +3425,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_InterpolateArbitraryThreePointQuadraticVertexLocat
     return (-T2 / (SIGLIB_TWO * T1));
 }       // End of SDS_InterpolateArbitraryThreePointQuadraticVertexLocation()
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_InterpolateThreePointQuadraticVertexMagnitude
 *
@@ -3454,7 +3454,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateThreePointQuadraticVertexMagnitude (con
     return (y0 - (T2*T2 / (SIGLIB_FOUR * T1)));
 }       // End of SDA_InterpolateThreePointQuadraticVertexMagnitude()
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_InterpolateThreePointQuadraticVertexLocation
 *
@@ -3484,7 +3484,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateThreePointQuadraticVertexLocation (cons
     return (-T2 / (SIGLIB_TWO * T1));
 }       // End of SDA_InterpolateThreePointQuadraticVertexLocation()
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_InterpolateArbitraryThreePointQuadraticVertexMagnitude
 *
@@ -3530,7 +3530,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateArbitraryThreePointQuadraticVertexMagni
 }       // End of SDA_InterpolateArbitraryThreePointQuadraticVertexMagnitude()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_InterpolateArbitraryThreePointQuadraticVertexLocation
 *
@@ -3577,7 +3577,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateArbitraryThreePointQuadraticVertexLocat
 }       // End of SDA_InterpolateArbitraryThreePointQuadraticVertexLocation()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_InterpolateArbitraryThreePointQuadraticPeakVertexMagnitude
 *
@@ -3623,7 +3623,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateArbitraryThreePointQuadraticPeakVertexM
 }       // End of SDA_InterpolateArbitraryThreePointQuadraticPeakVertexMagnitude()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_InterpolateArbitraryThreePointQuadraticPeakVertexLocation
 *
@@ -3670,7 +3670,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateArbitraryThreePointQuadraticPeakVertexL
 }       // End of SDA_InterpolateArbitraryThreePointQuadraticPeakVertexLocation()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FirstMinVertex
 *
@@ -3701,7 +3701,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_FirstMinVertex (const SLData_t * SIGLIB_PTR_DECL p
 }       // End of SDA_FirstMinVertex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FirstMinVertexPos
 *
@@ -3733,7 +3733,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FirstMinVertexPos (const SLData_t * SIGLIB_P
     return (i-1);
 }       // SDA_FirstMinVertexPos
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FirstMaxVertex
 *
@@ -3764,7 +3764,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_FirstMaxVertex (const SLData_t * SIGLIB_PTR_DECL p
 }       // End of SDA_FirstMaxVertex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FirstMaxVertexPos
 *
@@ -3797,7 +3797,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FirstMaxVertexPos (const SLData_t * SIGLIB_P
 }       // End of SDA_FirstMaxVertexPos
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_NLargest
 *
@@ -3855,7 +3855,7 @@ void SIGLIB_FUNC_DECL SDA_NLargest (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_NLargest
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_NSmallest
 *

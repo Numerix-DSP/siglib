@@ -16,7 +16,7 @@ int main( int argc, char **argv )
         RequiredDelay = 2000;
     }
     else {
-        RequiredDelay = (int)atol(argv[1]);
+        RequiredDelay = atol(argv[1]);
     }
 
     printf ("Waiting for delay = %d (ms)\n\n", (int)RequiredDelay);

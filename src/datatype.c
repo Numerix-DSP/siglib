@@ -83,7 +83,7 @@ void SIGLIB_FUNC_DECL SDA_SigLibDataToFix (const SLData_t * SIGLIB_PTR_DECL pSrc
 }       // End of SDA_SigLibDataToFix()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_FixToSigLibData()
 *
@@ -124,7 +124,7 @@ void SIGLIB_FUNC_DECL SDA_FixToSigLibData (const SLFixData_t * SIGLIB_PTR_DECL p
 }       // End of SDA_FixToSigLibData()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SigLibDataToImageData()
 *
@@ -166,7 +166,7 @@ void SIGLIB_FUNC_DECL SDA_SigLibDataToImageData (const SLData_t * SIGLIB_PTR_DEC
 }       // End of SDA_SigLibDataToImageData()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_ImageDataToSigLibData()
 *
@@ -207,7 +207,7 @@ void SIGLIB_FUNC_DECL SDA_ImageDataToSigLibData (const SLImageData_t * SIGLIB_PT
 }       // End of SDA_ImageDataToSigLibData()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SigLibDataToFix16
 *
@@ -242,7 +242,7 @@ void SIGLIB_FUNC_DECL SDA_SigLibDataToFix16 (const SLData_t * SIGLIB_PTR_DECL pS
 }       // End of SDA_SigLibDataToFix16()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Fix16ToSigLibData
 *
@@ -277,7 +277,7 @@ void SIGLIB_FUNC_DECL SDA_Fix16ToSigLibData (const SLInt16_t * SIGLIB_PTR_DECL p
 }       // End of SDA_Fix16ToSigLibData()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SigLibDataToFix32
 *
@@ -312,7 +312,7 @@ void SIGLIB_FUNC_DECL SDA_SigLibDataToFix32 (const SLData_t * SIGLIB_PTR_DECL pS
 }       // End of SDA_SigLibDataToFix32()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Fix32ToSigLibData
 *
@@ -347,7 +347,7 @@ void SIGLIB_FUNC_DECL SDA_Fix32ToSigLibData (const SLInt32_t * SIGLIB_PTR_DECL p
 }       // End of SDA_Fix32ToSigLibData()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_SigLibDataToQFormatInteger
 *
@@ -383,7 +383,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_SigLibDataToQFormatInteger (const SLData_t x,
     return ((SLFixData_t)(y & mask));
 }
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_QFormatIntegerToSigLibData
 *
@@ -407,7 +407,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_QFormatIntegerToSigLibData (const SLFixData_t x,
 }
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SigLibDataToQFormatInteger
 *
@@ -452,7 +452,7 @@ void SIGLIB_FUNC_DECL SDA_SigLibDataToQFormatInteger (const SLData_t * SIGLIB_PT
 }
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_QFormatIntegerToSigLibData
 *

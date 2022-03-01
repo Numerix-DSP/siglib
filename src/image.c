@@ -767,7 +767,7 @@ SLImageData_t SIGLIB_FUNC_DECL SIM_Max (const SLImageData_t SIGLIB_HUGE_DECL *pS
 }       // End of SIM_Max()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIM_Min
 *

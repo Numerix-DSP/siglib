@@ -18,7 +18,7 @@ int main (void)
 
 {
     SLStatus_t  KeyCode;
-    SLFixData_t SampleCount;
+    SLFixData_t sampleCount;
     SLStatus_t  PreviousKeyCode = SIGLIB_NO_DTMF_SIGNAL;    // Initialise to no DTMF key detected
     SLFixData_t KeyCodeLength = 0;                          // Length of key code stream
     SLFixData_t KeyCodeRegistered = SIGLIB_FALSE;           // A key code has not been registered
@@ -45,7 +45,7 @@ int main (void)
     SIF_DtmfDetect (((SLData_t)wavFileInfo.SampleRate),     // Sample rate
                     DTMF_SAMPLE_LENGTH);                    // Array length
 
-    while ((SampleCount =
+    while ((sampleCount =
         (SLFixData_t)SUF_WavReadData (pData, fpInputFile, wavFileInfo, DTMF_SAMPLE_LENGTH)) == DTMF_SAMPLE_LENGTH) {
 
         KeyCode =

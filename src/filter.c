@@ -41,7 +41,7 @@ Description : SigLib DSP library generic filter routines.
 
 #include <siglib.h>                                         // Include SigLib header file
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Integrate
 *
@@ -99,7 +99,7 @@ void SIGLIB_FUNC_DECL SDA_Integrate (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Integrate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Differentiate
 *
@@ -153,7 +153,7 @@ void SIGLIB_FUNC_DECL SDA_Differentiate (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_Differentiate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_LeakyIntegrator
 *
@@ -174,7 +174,7 @@ void SIGLIB_FUNC_DECL SIF_LeakyIntegrator (SLData_t *pState)
 }       // End of SIF_LeakyIntegrator()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_LeakyIntegrator1
 *
@@ -218,7 +218,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_LeakyIntegrator1 (const SLData_t Src,
 }       // End of SDS_LeakyIntegrator1()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_LeakyIntegrator2
 *
@@ -263,7 +263,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_LeakyIntegrator2 (const SLData_t Src,
 }       // End of SDS_LeakyIntegrator2()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_HilbertTransformer
 *
@@ -303,7 +303,7 @@ void SIGLIB_FUNC_DECL SIF_HilbertTransformer (SLData_t * SIGLIB_PTR_DECL pCoeffs
 }       // End of SIF_HilbertTransformer()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_GoertzelFilter
 *
@@ -336,7 +336,7 @@ SLData_t SIGLIB_FUNC_DECL SIF_GoertzelFilter (SLData_t * SIGLIB_PTR_DECL pState,
 }       // End of SIF_GoertzelFilter()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_GoertzelFilter
 *
@@ -389,7 +389,7 @@ void SIGLIB_FUNC_DECL SDA_GoertzelFilter (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }       // End of SDA_GoertzelFilter()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_GoertzelFilter
 *
@@ -427,7 +427,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_GoertzelFilter (const SLData_t Src,
 }       // End of SDS_GoertzelFilter()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_GoertzelDetect
 *
@@ -455,7 +455,7 @@ SLData_t SIGLIB_FUNC_DECL SIF_GoertzelDetect (const SLData_t Freq,
 }       // End of SIF_GoertzelDetect()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_GoertzelDetect
 *
@@ -506,7 +506,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_GoertzelDetect (const SLData_t * SIGLIB_PTR_DECL p
 }       // End of SDA_GoertzelDetect()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_GoertzelDetectComplex
 *
@@ -539,7 +539,7 @@ SLComplexRect_s SIGLIB_FUNC_DECL SIF_GoertzelDetectComplex (const SLData_t Freq,
 }       // End of SIF_GoertzelDetectComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_GoertzelDetectComplex
 *
@@ -601,7 +601,7 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDA_GoertzelDetectComplex (const SLData_t * SIG
 }       // End of SDA_GoertzelDetectComplex()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_GaussianFilter
 *
@@ -637,7 +637,7 @@ void SIGLIB_FUNC_DECL SIF_GaussianFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
 }       // End of SIF_GaussianFilter()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_GaussianFilter2
 *
@@ -674,7 +674,7 @@ void SIGLIB_FUNC_DECL SIF_GaussianFilter2 (SLData_t * SIGLIB_PTR_DECL pCoeffs,
 }       // End of SIF_GaussianFilter2()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_RaisedCosineFilter
 *
@@ -735,7 +735,7 @@ void SIGLIB_FUNC_DECL SIF_RaisedCosineFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs
 }       // End of SIF_RaisedCosineFilter()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_RootRaisedCosineFilter
 *
@@ -801,7 +801,7 @@ void SIGLIB_FUNC_DECL SIF_RootRaisedCosineFilter (SLData_t * SIGLIB_PTR_DECL pCo
 }       // End of SIF_RootRaisedCosineFilter()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ZTransform
 *
@@ -876,7 +876,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_ZTransform (const SLComplexRect_s Location,
 
 }       // End of SDS_ZTransform()
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_ZTransformDB
 *
@@ -952,7 +952,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_ZTransformDB (const SLComplexRect_s Location,
 }       // End of SDS_ZTransformDB()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SUF_EstimateBPFilterLength
 *
@@ -1003,7 +1003,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_EstimateBPFilterLength (const SLData_t Sampl
 }       // End of SUF_EstimateBPFilterLength()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SUF_EstimateBPFilterError
 *
@@ -1049,7 +1049,7 @@ void SIGLIB_FUNC_DECL SUF_EstimateBPFilterError (const SLData_t SampleRate,
 
 }       // End of SUF_EstimateBPFilterError()
 
-/**/
+/**/
 /********************************************************
 * Function: SUF_FrequenciesToOctaves
 *
@@ -1088,7 +1088,7 @@ SLData_t SIGLIB_FUNC_DECL SUF_FrequenciesToOctaves (const SLData_t Fl,
     }
 }       // End of SUF_FrequenciesToOctaves
 
-/**/
+/**/
 /********************************************************
 * Function: SUF_FrequenciesToCentreFreqHz
 *
@@ -1127,7 +1127,7 @@ SLData_t SIGLIB_FUNC_DECL SUF_FrequenciesToCentreFreqHz (const SLData_t Fl,
     }
 }       // End of SUF_FrequenciesToCentreFreqHz
 
-/**/
+/**/
 /********************************************************
 * Function: SUF_FrequenciesToQFactor
 *
@@ -1165,7 +1165,7 @@ SLData_t SIGLIB_FUNC_DECL SUF_FrequenciesToQFactor (const SLData_t Fl,
     }
 }       // End of SUF_FrequenciesToQFactor
 
-/**/
+/**/
 /********************************************************
 * Function: SUF_BandwidthToQFactor
 *
@@ -1190,7 +1190,7 @@ SLData_t SIGLIB_FUNC_DECL SUF_BandwidthToQFactor (const SLData_t BW)
     }
 }       // End of SUF_BandwidthToQFactor
 
-/**/
+/**/
 /********************************************************
 * Function: SUF_QFactorToBandwidth
 *

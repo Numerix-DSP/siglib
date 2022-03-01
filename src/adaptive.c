@@ -81,7 +81,7 @@ void SIGLIB_FUNC_DECL SIF_Lms (SLData_t * SIGLIB_PTR_DECL pStateArray,
 }       // End of SIF_Lms()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDS_Lms
 *
@@ -135,7 +135,7 @@ SLData_t    SIGLIB_FUNC_DECL SDS_Lms (const SLData_t InputSample,
 }       // End of SDS_Lms()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_LmsUpdate
 *
@@ -211,7 +211,7 @@ void SIGLIB_FUNC_DECL SDA_LmsUpdate (const SLData_t * SIGLIB_PTR_DECL pStateArra
 }       // End of SDA_LmsUpdate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_LeakyLmsUpdate
 *
@@ -290,7 +290,7 @@ void SIGLIB_FUNC_DECL SDA_LeakyLmsUpdate (const SLData_t * SIGLIB_PTR_DECL pStat
 }       // End of SDA_LeakyLmsUpdate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_NormalizedLmsUpdate
 *
@@ -375,7 +375,7 @@ void SIGLIB_FUNC_DECL SDA_NormalizedLmsUpdate (const SLData_t * SIGLIB_PTR_DECL 
 }       // End of SDA_NormalizedLmsUpdate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SignErrorLmsUpdate
 *
@@ -454,7 +454,7 @@ void SIGLIB_FUNC_DECL SDA_SignErrorLmsUpdate (const SLData_t * SIGLIB_PTR_DECL p
 }       // End of SDA_SignErrorLmsUpdate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SignDataLmsUpdate
 *
@@ -536,7 +536,7 @@ void SIGLIB_FUNC_DECL SDA_SignDataLmsUpdate (const SLData_t * SIGLIB_PTR_DECL pS
 }       // End of SDA_SignDataLmsUpdate()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SignSignLmsUpdate
 *

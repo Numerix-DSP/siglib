@@ -103,7 +103,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExtractOrder (const SLData_t * SIGLIB_PTR_DECL pSr
 }       // End of SDA_ExtractOrder()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SumLevel
 *
@@ -161,7 +161,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_SumLevel (const SLData_t * SIGLIB_PTR_DECL pSrc,
 
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_SumLevelWholeSpectrum
 *
@@ -232,7 +232,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_SumLevelWholeSpectrum(const SLData_t * SIGLIB_PTR_
 
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_OrderAnalysis
 *
@@ -307,7 +307,7 @@ void SIGLIB_FUNC_DECL SIF_OrderAnalysis (SLData_t * SIGLIB_PTR_DECL pSincLUT,
 }       // End of SIF_OrderAnalysis()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_OrderAnalysis
 *

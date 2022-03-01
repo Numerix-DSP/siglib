@@ -214,7 +214,7 @@ int main (int argc, char *argv[])
                NUM_CATEGORIES*NUM_CATEGORIES);              // Array length
 
     for (SLArrayIndex_t validationSequenceNumber = 0; validationSequenceNumber < nRows; validationSequenceNumber++) {
-        SLArrayIndex_t predictedCategory =
+        SLNeuralNetworkPrediction_s prediction =
             SDA_TwoLayerNCategoryNetworkPredict (pValidationData+(validationSequenceNumber*NETWORK_INPUT_SAMPLE_LENGTH),    // Pointer to data to validate
                                                  (SLData_t *)layer1Weights,                                                 // Pointer to layer #1 weights
                                                  (SLData_t *)layer2Weights,                                                 // Pointer to layer #2 weights
@@ -229,14 +229,14 @@ int main (int argc, char *argv[])
                                                  NUM_CATEGORIES);                                                           // Number of output categories
 
         totalClassificationCount++;
-        if (predictedCategory == pCategoricalValue[validationSequenceNumber]) {   // If correct detection then increment counter
+        if (prediction.predictedCategory == pCategoricalValue[validationSequenceNumber]) {   // If correct detection then increment counter
             correctClassificationCount++;
         }
         else {                                                  // If result incorrect
             incorrectClassificationCount++;
         }
 
-        confusionMatrix[pCategoricalValue[validationSequenceNumber]][predictedCategory] = confusionMatrix[(SLArrayIndex_t)pCategoricalValue[validationSequenceNumber]][predictedCategory] + SIGLIB_ONE;
+        confusionMatrix[pCategoricalValue[validationSequenceNumber]][prediction.predictedCategory] = confusionMatrix[(SLArrayIndex_t)pCategoricalValue[validationSequenceNumber]][prediction.predictedCategory] + SIGLIB_ONE;
     }
 
     printf ("\n%s, %s, %s, %s\n\n", filename0, filename1, filename2, filename3);

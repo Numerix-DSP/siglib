@@ -911,7 +911,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigReadFile (SLData_t * SIGLIB_PTR_DECL BPtr
 ********************************************************/
 
 SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigWriteFile (const SLData_t * SIGLIB_PTR_DECL BPtr,
-    char *fileName,
+    const char *fileName,
     const SLArrayIndex_t arrayLength)
 {
     FILE *p_ioFile;
@@ -926,6 +926,47 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigWriteFile (const SLData_t * SIGLIB_PTR_DE
 
     return (arrayLength);
 }       // End of SUF_SigWriteFile()
+
+
+
+/**/
+/********************************************************
+* Function: SUF_SigCountSamplesInFile
+*
+* Parameters:
+*   const char *fileName,   - File name
+*   const SLArrayIndex_t arrayLength
+*
+* Return value:
+*   SLArrayIndex_t          - Number of samples in file, -1 for file open error
+*
+* Description: Return the number of samples in a .sig file
+*
+********************************************************/
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigCountSamplesInFile (const char *fileName)
+
+{
+    FILE            *p_ioFile;
+    int             ch;
+    SLArrayIndex_t  lineCount = 0;                          // The last line will always be blank
+
+    if (NULL == (p_ioFile = fopen(fileName, "rb"))) {
+        return (-1);
+    }
+
+    ch = getc(p_ioFile);
+    while ((ch = getc(p_ioFile)) != EOF) {                  // Count # newlines in a file
+        if (ch == '\n') {
+            lineCount++;
+        }
+    }
+
+    fclose (p_ioFile);
+
+    return (lineCount);
+}       // End of SUF_SigCountSamplesInFile()
+
 
 
 // Local functions

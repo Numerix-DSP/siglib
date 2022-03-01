@@ -108,12 +108,12 @@ int main (int argc, char *argv[])
     SLData_t        validationMax = -10000.;
     SLData_t        validationMin = 10000.;
 
-    SLData_t        maxLevel_WindowData = SIGLIB_ZERO;
-    SLData_t        maxLevel_FFTData = SIGLIB_ZERO;
-    SLData_t        minLevel_InputFrameData = 32767.0;
-    SLData_t        maxLevel_InputFrameData = SIGLIB_ZERO;
-    SLData_t        minLevel_OnePolePerSampleData = 32767.0;
-    SLData_t        maxLevel_OnePolePerSampleData = SIGLIB_ZERO;
+    SLData_t        absMaxLevel_WindowData = SIGLIB_ZERO;   // Variables for storing absolute maximum levels for debug
+    SLData_t        absMaxLevel_FFTData = SIGLIB_ZERO;
+    SLData_t        absMinLevel_InputFrameData = 32767.0;
+    SLData_t        absMaxLevel_InputFrameData = SIGLIB_ZERO;
+    SLData_t        absMinLevel_OnePolePerSampleData = 32767.0;
+    SLData_t        absMaxLevel_OnePolePerSampleData = SIGLIB_ZERO;
 
     SLArrayIndex_t  firstNonZeroLevel = FFT_LENGTH;         // Variables for tracking start and end of non-zero'd FFT output
     SLArrayIndex_t  lastNonZeroLevel = 0;
@@ -318,11 +318,11 @@ int main (int argc, char *argv[])
 
             if (debugFlag == 1) {                           // Get abs max value and minimum abs max value, for debug
                 SLData_t absMaxLevel = SDA_AbsMax(pRealData, FFT_LENGTH);
-                if (absMaxLevel < minLevel_InputFrameData) {
-                    minLevel_InputFrameData = absMaxLevel;
+                if (absMaxLevel < absMinLevel_InputFrameData) {
+                    absMinLevel_InputFrameData = absMaxLevel;
                 }
-                if (absMaxLevel > maxLevel_InputFrameData) {
-                    maxLevel_InputFrameData = absMaxLevel;
+                if (absMaxLevel > absMaxLevel_InputFrameData) {
+                    absMaxLevel_InputFrameData = absMaxLevel;
                 }
             }
 
@@ -373,8 +373,8 @@ int main (int argc, char *argv[])
 
                 if (debugFlag == 1) {                       // Get abs max value, for debug
                     SLData_t absMaxLevel = SDA_AbsMax(pRealData, FFT_LENGTH);
-                    if (absMaxLevel > maxLevel_WindowData) {
-                        maxLevel_WindowData = absMaxLevel;
+                    if (absMaxLevel > absMaxLevel_WindowData) {
+                        absMaxLevel_WindowData = absMaxLevel;
                     }
                 }
                                                             // Perform FFT
@@ -441,8 +441,8 @@ int main (int argc, char *argv[])
 
                 if (debugFlag == 1) {                       // Get abs max value, for debug
                     SLData_t absMaxLevel = SDA_AbsMax(pRealDataShortened, networkInputSampleLength);
-                    if (absMaxLevel > maxLevel_FFTData) {
-                        maxLevel_FFTData = absMaxLevel;
+                    if (absMaxLevel > absMaxLevel_FFTData) {
+                        absMaxLevel_FFTData = absMaxLevel;
                     }
                 }
 
@@ -454,11 +454,11 @@ int main (int argc, char *argv[])
 
                 if (debugFlag == 1) {                       // Get abs max value, for debug
                     SLData_t absMaxLevel = SDA_AbsMax(pRealDataShortened, networkInputSampleLength);
-                    if (absMaxLevel < minLevel_OnePolePerSampleData) {
-                        minLevel_OnePolePerSampleData = absMaxLevel;
+                    if (absMaxLevel < absMinLevel_OnePolePerSampleData) {
+                        absMinLevel_OnePolePerSampleData = absMaxLevel;
                     }
-                    if (absMaxLevel > maxLevel_OnePolePerSampleData) {
-                        maxLevel_OnePolePerSampleData = absMaxLevel;
+                    if (absMaxLevel > absMaxLevel_OnePolePerSampleData) {
+                        absMaxLevel_OnePolePerSampleData = absMaxLevel;
                     }
                 }
 
@@ -554,12 +554,12 @@ int main (int argc, char *argv[])
     } while (copyIndexLength == FFT_LENGTH);
 
     if (debugFlag == 1) {                                   // Print debug information
-        printf ("Levels: Input data absMax min         : %lf\n", minLevel_InputFrameData);
-        printf ("Levels: Input data absMax max         : %lf\n", maxLevel_InputFrameData);
-        printf ("Levels: Window(): abs max             : %lf\n", maxLevel_WindowData);
-        printf ("Levels: FFT abs max                   : %lf\n", maxLevel_FFTData);
-        printf ("Levels: One-pole per sample absMax min: %lf\n", minLevel_OnePolePerSampleData);
-        printf ("Levels: One-pole per sample absMax max: %lf\n", maxLevel_OnePolePerSampleData);
+        printf ("Levels: Input data absMax min         : %lf\n", absMinLevel_InputFrameData);
+        printf ("Levels: Input data absMax max         : %lf\n", absMaxLevel_InputFrameData);
+        printf ("Levels: Window(): abs max             : %lf\n", absMaxLevel_WindowData);
+        printf ("Levels: FFT abs max                   : %lf\n", absMaxLevel_FFTData);
+        printf ("Levels: One-pole per sample absMax min: %lf\n", absMinLevel_OnePolePerSampleData);
+        printf ("Levels: One-pole per sample absMax max: %lf\n", absMaxLevel_OnePolePerSampleData);
         printf ("\n");
         printf ("Levels: First non zero index          : %d\n", firstNonZeroLevel);
         printf ("Levels: Last non zero index           : %d\n", lastNonZeroLevel);

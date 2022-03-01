@@ -28,7 +28,7 @@ void main (void)
 {
     SLFixData_t Finished = 0;
     SLFixData_t KeyCode;
-    SLFixData_t SampleCount;
+    SLFixData_t sampleCount;
     SLFixData_t PreviousKeyCode = SIGLIB_NO_DTMF_SIGNAL;        // Initialise to no DTMF key detected
     SLFixData_t KeyCodeLength = 0;                              // Length of key code stream
     SLFixData_t KeyCodeRegistered = SIGLIB_FALSE;               // A key code has not been registered
@@ -55,7 +55,7 @@ void main (void)
 
     SIF_DtmfDetect (((SLData_t)wavInfo.SampleRate), SAMPLE_LENGTH);
 
-    while ((SampleCount = SUF_WavReadData (pData, fpInputFile, wavInfo, SAMPLE_LENGTH)) == SAMPLE_LENGTH) {
+    while ((sampleCount = SUF_WavReadData (pData, fpInputFile, wavInfo, SAMPLE_LENGTH)) == SAMPLE_LENGTH) {
         KeyCode = SDA_DtmfDetectAndValidate (pData, 1000.0,
                     &PreviousKeyCode, &KeyCodeLength, &KeyCodeRegistered, SAMPLE_LENGTH);
 

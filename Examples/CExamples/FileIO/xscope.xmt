@@ -1,0 +1,30 @@
+<XtEvents>
+<XtEventTypes>
+<XtEventType Id="0" Type="2" Name="Sinusoid" Units="ps" UserType="2" UserUnits="magnitude"/>
+<XtEventType Id="255" Type="1" Name="Missing Data" Units="ps" UserType="0" UserUnits="None"/>
+</XtEventTypes>
+<XtEventColors>
+<XtEventColor Id="0" R="148" G="0" B="211" KeyText="None"/>
+<XtEventColor Id="255" R="255" G="0" B="0" KeyText="None"/>
+</XtEventColors>
+<XtGlobalStart MilliSecs="1471430767726"/>
+<TotalXtEvents Number="0"/>
+<XtEventRecords>
+<Record Type="0" Color="0" Start="0" End="0" User="0"/>
+<Record Type="0" Color="0" Start="1000380000" End="1000380000" User="11863283"/>
+<Record Type="0" Color="0" Start="2000760000" End="2000760000" User="16777215"/>
+<Record Type="0" Color="0" Start="3001140000" End="3001140000" User="11863283"/>
+<Record Type="0" Color="0" Start="4001520000" End="4001520000" User="0"/>
+<Record Type="0" Color="0" Start="5001900000" End="5001900000" User="-11863283"/>
+<Record Type="0" Color="0" Start="6002280000" End="6002280000" User="-16777215"/>
+<Record Type="0" Color="0" Start="7002660000" End="7002660000" User="-11863283"/>
+<Record Type="0" Color="0" Start="8003040000" End="8003040000" User="0"/>
+<Record Type="0" Color="0" Start="9003420000" End="9003420000" User="11863283"/>
+<Record Type="0" Color="0" Start="10003800000" End="10003800000" User="16777215"/>
+<Record Type="0" Color="0" Start="11004180000" End="11004180000" User="11863283"/>
+<Record Type="0" Color="0" Start="12004560000" End="12004560000" User="0"/>
+<Record Type="0" Color="0" Start="13004940000" End="13004940000" User="-11863283"/>
+<Record Type="0" Color="0" Start="14005320000" End="14005320000" User="-16777215"/>
+<Record Type="0" Color="0" Start="15005700000" End="15005700000" User="-11863283"/>
+</XtEventRecords>
+</XtEvents>

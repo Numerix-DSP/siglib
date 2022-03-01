@@ -111,7 +111,7 @@ void SIGLIB_FUNC_DECL SDA_PreEmphasisFilter (SLData_t * SIGLIB_PTR_DECL pSrc,
 }
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_DeEmphasisFilter
 *
@@ -178,7 +178,7 @@ void SIGLIB_FUNC_DECL SDA_DeEmphasisFilter (SLData_t * SIGLIB_PTR_DECL pSrc,
 }
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_AdpcmEncoder
 *
@@ -259,7 +259,7 @@ void SIGLIB_FUNC_DECL SDA_AdpcmEncoder (const SLData_t * SIGLIB_PTR_DECL pSrc,
 }
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_AdpcmEncoderDebug
 *
@@ -350,7 +350,7 @@ void SIGLIB_FUNC_DECL SDA_AdpcmEncoderDebug (const SLData_t * SIGLIB_PTR_DECL pS
 }
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_AdpcmDecoder
 *

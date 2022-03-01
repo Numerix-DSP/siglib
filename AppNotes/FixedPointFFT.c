@@ -607,7 +607,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_Window16 (SLInt16_t * SIGLIB_PTR_DECL pWindowCoef
 }       // End of SDA_Window16()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Window16
 *
@@ -712,7 +712,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_Window32 (SLInt32_t * SIGLIB_PTR_DECL pWindowCoef
 }       // End of SDA_Window32()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SDA_Window32
 *

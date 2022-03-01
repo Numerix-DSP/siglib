@@ -157,7 +157,7 @@ void SIGLIB_FUNC_DECL SIF_Czt (SLData_t * SIGLIB_PTR_DECL pAWNr,
 }       // End of SIF_Czt()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_Awn
 *
@@ -217,7 +217,7 @@ void SIGLIB_FUNC_DECL SIF_Awn (SLData_t * SIGLIB_PTR_DECL pAWNr,
 }       // End of SIF_Awn()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_Vl
 *
@@ -307,7 +307,7 @@ void SIGLIB_FUNC_DECL SIF_Vl (SLData_t * SIGLIB_PTR_DECL pvLr,
 }       // End of SIF_Vl()
 
 
-/**/
+/**/
 /********************************************************
 * Function: SIF_Wm
 *
