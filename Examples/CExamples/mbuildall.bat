@@ -177,7 +177,6 @@ call mb rotate
 call mb round
 call mb sc-ofdm
 call mb sequence
-call mb sgram
 call mb shuffle
 call mb sig_gen
 call mb sig_gen_s
@@ -186,6 +185,7 @@ call mb sinpower
 call mb sinx_x
 call mb sort
 call mb spec_inv
+call mb spectrogram
 call mb SpeedOfSoundInAir
 call mb stats
 call mb sortswap

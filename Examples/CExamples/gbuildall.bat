@@ -177,7 +177,6 @@ call gb rotate
 call gb round
 call gb sc-ofdm
 call gb sequence
-call gb sgram
 call gb shuffle
 call gb sig_gen
 call gb sig_gen_s
@@ -186,6 +185,7 @@ call gb sinpower
 call gb sinx_x
 call gb sort
 call gb spec_inv
+call gb spectrogram
 call gb SpeedOfSoundInAir
 call gb stats
 call gb sortswap

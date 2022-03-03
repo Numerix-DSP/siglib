@@ -1,14 +1,14 @@
-// SigLib - Program to read .dat file and generate a waterfall diagram
+// SigLib - Program to read .dat file and generate a spectrogram
 // Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
 
 // Include files
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <siglib_host_utils.h>                                  // Optionally includes conio.h and time.h subset functions
+#include <siglib_host_utils.h>                              // Optionally includes conio.h and time.h subset functions
 #include <math.h>
-#include <siglib.h>                                             // SigLib DSP library
-#include <gnuplot_c.h>                                          // Gnuplot/C
+#include <siglib.h>                                         // SigLib DSP library
+#include <gnuplot_c.h>                                      // Gnuplot/C
 #include "readdat.h"
 
 // Define constants
@@ -20,10 +20,10 @@
 
 #define GRAPH_X_AXIS_LENGTH     950
 
-#define SAMPLE_RATE             10162.                          // Sample rate of data in vibration data file
-#define NUMBER_OF_SAMPLES       101547                          // Number of samples in vibration data file
+#define SAMPLE_RATE             10162.                      // Sample rate of data in vibration data file
+#define NUMBER_OF_SAMPLES       101547                      // Number of samples in vibration data file
 
-#define DB_SCALE                (1e5)                           // Scaling for dB
+#define DB_SCALE                (1e5)                       // Scaling for dB
 
 // Declare global variables and arrays
 static SLData_t     *pDataArray, *pFDPRealData, *pFDPImagData, *pFDPResults;
@@ -34,7 +34,7 @@ static char         Filename[80];
 
 int main (int argc, char *argv[])
 {
-    h_GPC_Plot      *hSpectrogram;                              // Plot object
+    h_GPC_Plot      *hSpectrogram;                          // Plot object
 
     SLArrayIndex_t  sampleCount;
     FILE            *fpInputFile;
@@ -64,27 +64,27 @@ int main (int argc, char *argv[])
 
     SampleRate = SAMPLE_RATE;
 
-    SIF_CopyWithOverlap (&OverlapSrcArrayIndex);    // Pointer to source array index
+    SIF_CopyWithOverlap (&OverlapSrcArrayIndex);        // Pointer to source array index
 
-                                                    // Generate window table
-    SIF_Window (pWindowCoeffs,                      // Window coefficients pointer
-                SIGLIB_BLACKMAN_HARRIS,             // Window type
-                SIGLIB_ZERO,                        // Window coefficient
-                FFT_LENGTH);                        // Window length
+                                                        // Generate window table
+    SIF_Window (pWindowCoeffs,                          // Window coefficients pointer
+                SIGLIB_BLACKMAN_HARRIS,                 // Window type
+                SIGLIB_ZERO,                            // Window coefficient
+                FFT_LENGTH);                            // Window length
 
-                                                    // Calculate window inverse coherent gain
+                                                        // Calculate window inverse coherent gain
     WindowInverseCoherentGain =
         SDA_WindowInverseCoherentGain(pWindowCoeffs,    // Source array pointer
                                       FFT_LENGTH);      // Window size
 
-                                                    // Initialise FFT
-    SIF_Fft (pFDPFFTCoeffs,                         // Pointer to FFT coefficients
-             SIGLIB_BIT_REV_STANDARD,               // Bit reverse mode flag / Pointer to bit reverse address table
-             FFT_LENGTH);                           // FFT length
+                                                        // Initialise FFT
+    SIF_Fft (pFDPFFTCoeffs,                             // Pointer to FFT coefficients
+             SIGLIB_BIT_REV_STANDARD,                   // Bit reverse mode flag / Pointer to bit reverse address table
+             FFT_LENGTH);                               // FFT length
 
     if (argc != 2) {
         printf ("\nUsage error  :\nsgram filename\n\n");
-        exit(-1);                                   // Exit - usage error
+        exit(-1);                                       // Exit - usage error
     }
 
     strcpy (Filename, argv[1]);
@@ -98,7 +98,7 @@ int main (int argc, char *argv[])
 
     hSpectrogram =                                      // Initialize plot
         gpc_init_spectrogram ("Machine Spectrogram",    // Plot title
-                              "Time",                   // X-Axis label
+                              "Time (s)",               // X-Axis label
                               "Frequency",              // Y-Axis label
                               GRAPH_X_AXIS_LENGTH,      // X-axis length
                               RESULT_LENGTH,            // Y-axis length
@@ -122,7 +122,7 @@ int main (int argc, char *argv[])
                     == SAMPLE_LENGTH) {
 //      printf ("Speed = %lf, Data = %lf\n", Speed, *pDataArray);
 
-                                                    // Apply the overlap to the data
+                                                            // Apply the overlap to the data
         while (SDA_CopyWithOverlap (pDataArray,             // Pointer to source array
                                     pFDPRealData,           // Pointer to destination array
                                     pOverlapArray,          // Pointer to overlap array
@@ -135,47 +135,47 @@ int main (int argc, char *argv[])
 //SUF_Debugfprintf ("\nFN = %d\n", FrameNumber);
 //SUF_DebugPrintArray (pDataArray, SAMPLE_LENGTH);
 
-                                                    // Apply window to real data
-            SDA_Window (pFDPRealData,               // Source array pointer
-                        pFDPRealData,               // Destination array pointer
-                        pWindowCoeffs,              // Window array pointer
-                        FFT_LENGTH);                // Window size
-                                                    // Perform FFT
-            SDA_Rfft (pFDPRealData,                 // Real array pointer
-                      pFDPImagData,                 // Pointer to imaginary array
-                      pFDPFFTCoeffs,                // Pointer to FFT coefficients
-                      SIGLIB_BIT_REV_STANDARD,      // Bit reverse mode flag / Pointer to bit reverse address table
-                      FFT_LENGTH,                   // FFT length
-                      LOG2_FFT_LENGTH);             // log2 FFT length
+                                                            // Apply window to real data
+            SDA_Window (pFDPRealData,                       // Source array pointer
+                        pFDPRealData,                       // Destination array pointer
+                        pWindowCoeffs,                      // Window array pointer
+                        FFT_LENGTH);                        // Window size
+                                                            // Perform FFT
+            SDA_Rfft (pFDPRealData,                         // Real array pointer
+                      pFDPImagData,                         // Pointer to imaginary array
+                      pFDPFFTCoeffs,                        // Pointer to FFT coefficients
+                      SIGLIB_BIT_REV_STANDARD,              // Bit reverse mode flag / Pointer to bit reverse address table
+                      FFT_LENGTH,                           // FFT length
+                      LOG2_FFT_LENGTH);                     // log2 FFT length
 
-                                                    // Normalize FFT scaling value
-            SDA_ComplexScalarMultiply (pFDPRealData,    // Pointer to real source array
-                                       pFDPImagData,    // Pointer to imaginary source array
+                                                            // Normalize FFT scaling value
+            SDA_ComplexScalarMultiply (pFDPRealData,        // Pointer to real source array
+                                       pFDPImagData,        // Pointer to imaginary source array
                                        (DB_SCALE * SIGLIB_TWO * WindowInverseCoherentGain)/((SLData_t)FFT_LENGTH),  // Multiplier
-                                       pFDPRealData,    // Pointer to real destination array
-                                       pFDPImagData,    // Pointer to imaginary destination array
-                                       FFT_LENGTH);     // Dataset lengths
+                                       pFDPRealData,        // Pointer to real destination array
+                                       pFDPImagData,        // Pointer to imaginary destination array
+                                       FFT_LENGTH);         // Dataset lengths
 
-                                                    // Calc real power fm complex
-            SDA_LogMagnitude (pFDPRealData,         // Pointer to real source array
-                              pFDPImagData,         // Pointer to imaginary source array
-                              pFDPResults,          // Pointer to log magnitude destination array
-                              RESULT_LENGTH);       // Dataset length
-                                                    // Clip off noise
-            SDA_Add (pFDPResults,                   // Pointer to source array
-                     -50.0,                         // Offset
-                     pFDPResults,                   // Pointer to destination array
-                     RESULT_LENGTH);                // Dataset length
+                                                            // Calc real power fm complex
+            SDA_LogMagnitude (pFDPRealData,                 // Pointer to real source array
+                              pFDPImagData,                 // Pointer to imaginary source array
+                              pFDPResults,                  // Pointer to log magnitude destination array
+                              RESULT_LENGTH);               // Dataset length
+                                                            // Clip off noise
+            SDA_Add (pFDPResults,                           // Pointer to source array
+                     -50.0,                                 // Offset
+                     pFDPResults,                           // Pointer to destination array
+                     RESULT_LENGTH);                        // Dataset length
 
-            SDA_Clip (pFDPResults,                  // Source array address
-                      pFDPResults,                  // Destination array address
-                      SIGLIB_ZERO,                  // Value to clip signal to
-                      SIGLIB_CLIP_BELOW,            // Clip type
-                      RESULT_LENGTH);               // Dataset length
+            SDA_Clip (pFDPResults,                          // Source array address
+                      pFDPResults,                          // Destination array address
+                      SIGLIB_ZERO,                          // Value to clip signal to
+                      SIGLIB_CLIP_BELOW,                    // Clip type
+                      RESULT_LENGTH);                       // Dataset length
 
                                                                                 // Plot results
             gpc_plot_spectrogram (hSpectrogram,                                 // Graph handle
-                                  pFDPResults,                                  // Dataset
+                                  pFDPResults,                                  // Data array
                                   "Spectrogram Plot",                           // Dataset title
                                   SIGLIB_ZERO,                                  // Minimum X value
                                   ((double)NUMBER_OF_SAMPLES) / SAMPLE_RATE);   // Maximum X value
@@ -191,18 +191,18 @@ int main (int argc, char *argv[])
                           SIGLIB_ZERO,                                  // Minimum X value
                           ((double)NUMBER_OF_SAMPLES) / SAMPLE_RATE);   // Maximum X value
 
+    fclose (fpInputFile);                                   // Close files
+
     printf ("\nHit <Carriage Return> to continue ....\n"); getchar(); // Wait for <Carriage Return>
     gpc_close (hSpectrogram);
 
-    fclose (fpInputFile);                           // Close files
-
-    free (pDataArray);                              // Free memory
-    free (pOverlapArray);
-    free (pWindowCoeffs);
-    free (pFDPRealData);
-    free (pFDPImagData);
-    free (pFDPResults);
-    free (pFDPFFTCoeffs);
+    SUF_MemoryFree (pDataArray);                            // Free memory
+    SUF_MemoryFree (pOverlapArray);
+    SUF_MemoryFree (pWindowCoeffs);
+    SUF_MemoryFree (pFDPRealData);
+    SUF_MemoryFree (pFDPImagData);
+    SUF_MemoryFree (pFDPResults);
+    SUF_MemoryFree (pFDPFFTCoeffs);
 
     exit(0);
 }

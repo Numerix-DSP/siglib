@@ -1,4 +1,4 @@
-// SigLib - Example to read a data file and display as a spectrogram.
+// SigLib - Example to read a .sig data file and display as a spectrogram.
 // The time domain arrays are overlapped by the amount specified in the
 // overlap parameter.
 // Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
@@ -30,8 +30,8 @@ int main (int argc, char **argv)
     char            filename[80];
 
     if (argc != 9) {
-        printf ("Usage   : sgram <InputFile> 1/2<D> <# FFTs> <FFT Length> <overlap(samples)> <scale> <offset> <Sample Rate>\n");
-        printf ("Example : sgram quick.sig 2 150 512 256 0.06 -6 8000\n\n");
+        printf ("Usage   : spectrogram <InputFile> 1/2<D> <# FFTs> <FFT Length> <overlap(samples)> <scale> <offset> <Sample Rate>\n");
+        printf ("Example : spectrogram quick.sig 2 150 512 256 0.06 -6 8000\n\n");
 
         strcpy (filename, "quick.sig");
         dimensions   = 2;

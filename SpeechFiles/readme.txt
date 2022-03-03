@@ -20,18 +20,18 @@ The .wav files were recorded using Audacity : http://audacity.sourceforge.net/.
 
 EXAMPLE
 
-Convert the "QuickBrownFox.wav" speech file to .sig format using wavtosig, as follows :
+The .wav file was converted to .sig format using the wav2sig example in the
+Examples/FileIO folder.
 
-wavtosig quickb~1
+To display the .sig file using spectrogram from the Examples/CExamples folder,
+as follows :
 
-Display the .sig file using sgram from the examples folder as follows :
-
-sgram quickb~1.sig 2 512 74 0.000015 0
-
-
+    spectrogram quick.sig 2 150 512 256 0.06 -6 8000
 
 
-SigLib and Digital Filter Plus are trademarks of Numerix Ltd. all other
+
+
+SigLib and Digital Filter Plus are trademarks of Sigma Numerix Ltd. all other
 trademarks acknowledged.
 
 
@@ -41,4 +41,4 @@ Numerix Ltd.,
 Email: support@numerix-dsp.com
 WWW  : https:\\www.numerix-dsp.com
 
-(C) Copyright 2000 Numerix Ltd. All rights reserved.
+(C) Copyright 2000 Sigma Numerix Ltd. All rights reserved.

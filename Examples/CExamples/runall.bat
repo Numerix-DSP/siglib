@@ -691,10 +691,6 @@ echo sequence
 pause
 sequence
 
-echo sgram
-pause
-sgram
-
 echo shuffle
 pause
 shuffle
@@ -726,6 +722,10 @@ sort
 echo spec_inv
 pause
 spec_inv
+
+echo spectrogram
+pause
+spectrogram
 
 echo SpeedOfSoundInAir
 pause
