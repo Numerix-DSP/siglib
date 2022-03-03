@@ -5,15 +5,12 @@
 
 // Include files
 #include <stdio.h>
-#include <siglib_host_utils.h>                      // Optionally includes conio.h and time.h subset functions
+#include <siglib_host_utils.h>                              // Optionally includes conio.h and time.h subset functions
 #include <string.h>
-#include <siglib.h>                                 // SigLib DSP library
-#include <gnuplot_c.h>                              // Gnuplot/C
+#include <siglib.h>                                         // SigLib DSP library
+#include <gnuplot_c.h>                                      // Gnuplot/C
 
 // Define constants
-#define FFT_LENGTH              512
-#define LOG2_FFT_LENGTH         SAI_FftLengthLog2(FFT_LENGTH)   // Log2 FFT length,
-#define HALF_FFT_LENGTH         (FFT_LENGTH >> 1)
 
 // Declare global variables and arrays
 static SLData_t  *pInputData, *pProcessData, *pOverlapData, *pImagData, *pResults, *pWindowCoeffs, *pFFTCoeffs;
@@ -21,25 +18,26 @@ static SLData_t  *pInputData, *pProcessData, *pOverlapData, *pImagData, *pResult
 
 int main (int argc, char **argv)
 {
-    h_GPC_Plot      *hSpectrogram;                  // Plot objects
+    h_GPC_Plot      *hSpectrogram;                          // Plot objects
 
-    SLArrayIndex_t  OverlapSrcArrayIndex;
+    SLArrayIndex_t  overlapSrcArrayIndex;
     static FILE     *fpInputFile;
-    SLFixData_t     i, NumberOfFFTs;
-    SLArrayIndex_t  Overlap;
+    SLFixData_t     i, numberOfFFTs, fftLength;
+    SLArrayIndex_t  overlap;
     SLData_t        scale, offset, sampleRate;
     int             firstPlot = 1;
     int             dimensions;
     char            filename[80];
 
-    if (argc != 8) {
-        printf ("Usage   : sgram <InputFile> 1/2<D> <# FFTs> <overlap(samples)> <scale> <offset> <Sample Rate>\n");
-        printf ("Example : sgram quick.sig 2 140 256 0.06 -6 8000\n\n");
+    if (argc != 9) {
+        printf ("Usage   : sgram <InputFile> 1/2<D> <# FFTs> <FFT Length> <overlap(samples)> <scale> <offset> <Sample Rate>\n");
+        printf ("Example : sgram quick.sig 2 150 512 256 0.06 -6 8000\n\n");
 
         strcpy (filename, "quick.sig");
         dimensions   = 2;
-        NumberOfFFTs = 140;
-        Overlap      = 256;
+        numberOfFFTs = 150;
+        fftLength    = 512;
+        overlap      = 256;
         scale        = 0.06;
         offset       = -6.;
         sampleRate   = 8000.;
@@ -47,11 +45,12 @@ int main (int argc, char **argv)
     else {
         strcpy (filename, argv[1]);
         dimensions   = atoi(argv[2]);
-        NumberOfFFTs = (SLFixData_t)atoi(argv[3]);
-        Overlap      = (SLArrayIndex_t)atoi(argv[4]);
-        scale        = (SLData_t)atof(argv[5]);
-        offset       = (SLData_t)atof(argv[6]);
-        sampleRate   = (SLData_t)atof(argv[7]);
+        numberOfFFTs = (SLFixData_t)atoi(argv[3]);
+        fftLength    = (SLFixData_t)atoi(argv[4]);
+        overlap      = (SLArrayIndex_t)atoi(argv[5]);
+        scale        = (SLData_t)atof(argv[6]);
+        offset       = (SLData_t)atof(argv[7]);
+        sampleRate   = (SLData_t)atof(argv[8]);
     }
 
 
@@ -60,22 +59,25 @@ int main (int argc, char **argv)
         exit(0);
     }
 
-    pProcessData = SUF_VectorArrayAllocate (FFT_LENGTH);
-    pOverlapData = SUF_VectorArrayAllocate (Overlap);
-    pInputData = SUF_VectorArrayAllocate (FFT_LENGTH);
-    pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-    pWindowCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH);
-    pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
-    pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+    SLFixData_t log2FftLength = SAI_FftLengthLog2(fftLength);
+    SLFixData_t HalfFftLength = (fftLength >> 1);
+
+    pProcessData = SUF_VectorArrayAllocate (fftLength);
+    pOverlapData = SUF_VectorArrayAllocate (overlap);
+    pInputData = SUF_VectorArrayAllocate (fftLength);
+    pImagData = SUF_VectorArrayAllocate (fftLength);
+    pWindowCoeffs = SUF_VectorArrayAllocate (fftLength);
+    pResults = SUF_VectorArrayAllocate (fftLength);
+    pFFTCoeffs = SUF_FftCoefficientAllocate (fftLength);
 
     if (dimensions == 1) {
-        hSpectrogram =                              // Initialize plot
-            gpc_init_2d ("Spectrum",                // Plot title
-                         "Frequency",               // X-Axis label
-                         "Magnitude",               // Y-Axis label
-                         GPC_AUTO_SCALE,            // Scaling mode
-                         GPC_SIGNED,                // Sign mode
-                         GPC_KEY_ENABLE);           // Legend / key mode
+        hSpectrogram =                                      // Initialize plot
+            gpc_init_2d ("Spectrum",                        // Plot title
+                         "Frequency",                       // X-Axis label
+                         "Magnitude",                       // Y-Axis label
+                         GPC_AUTO_SCALE,                    // Scaling mode
+                         GPC_SIGNED,                        // Sign mode
+                         GPC_KEY_ENABLE);                   // Legend / key mode
         if (NULL == hSpectrogram) {
             printf ("\nPlot creation failure.\n");
             exit(-1);
@@ -84,10 +86,10 @@ int main (int argc, char **argv)
     else {
         hSpectrogram =                                      // Initialize plot
             gpc_init_spectrogram ("Spectrogram",            // Plot title
-                                  "Time",                   // X-Axis label
+                                  "Time (s)",               // X-Axis label
                                   "Frequency",              // Y-Axis label
-                                  (int)NumberOfFFTs,        // X-axis length
-                                  HALF_FFT_LENGTH,          // Y-axis length
+                                  (int)numberOfFFTs,        // X-axis length
+                                  HalfFftLength,            // Y-axis length
                                   0.0,                      // Minimum Y value
                                   sampleRate / SIGLIB_TWO,  // Maximum Y value
                                   0.0,                      // Minimum Z value
@@ -100,101 +102,101 @@ int main (int argc, char **argv)
         }
     }
 
-                                                    // Initialise FFT
-    SIF_Fft (pFFTCoeffs,                            // Pointer to FFT coefficients
-             SIGLIB_BIT_REV_STANDARD,               // Bit reverse mode flag / Pointer to bit reverse address table
-             FFT_LENGTH);                           // FFT length
-                                                    // Generate Hanning window table
-    SIF_Window (pWindowCoeffs,                      // Pointer to window oefficient
-                SIGLIB_HANNING,                     // Window type
-                SIGLIB_ZERO,                        // Window coefficient
-                FFT_LENGTH);                        // Window length
+                                                            // Initialise FFT
+    SIF_Fft (pFFTCoeffs,                                    // Pointer to FFT coefficients
+             SIGLIB_BIT_REV_STANDARD,                       // Bit reverse mode flag / Pointer to bit reverse address table
+             fftLength);                                    // FFT length
+                                                            // Generate Hanning window table
+    SIF_Window (pWindowCoeffs,                              // Pointer to window oefficient
+                SIGLIB_HANNING,                             // Window type
+                SIGLIB_ZERO,                                // Window coefficient
+                fftLength);                                 // Window length
 
-    SIF_CopyWithOverlap (&OverlapSrcArrayIndex);    // Pointer to source array index
+    SIF_CopyWithOverlap (&overlapSrcArrayIndex);            // Pointer to source array index
 
     i = 0;
 
 
-    while ((SUF_SigReadData (pInputData, fpInputFile, FFT_LENGTH) != 0) && !_kbhit()) {
+    while ((SUF_SigReadData (pInputData, fpInputFile, fftLength) != 0) && !_kbhit()) {
                                                             // Apply the overlap to the data
         while (SDA_CopyWithOverlap (pInputData,             // Pointer to source array
                                     pProcessData,           // Pointer to destination array
                                     pOverlapData,           // Pointer to overlap array
-                                    &OverlapSrcArrayIndex,  // Pointer to source array index
-                                    FFT_LENGTH,             // Source dataset length
-                                    Overlap,                // Overlap length
-                                    FFT_LENGTH) <           // Destination dataset length
-                                        FFT_LENGTH) {
+                                    &overlapSrcArrayIndex,  // Pointer to source array index
+                                    fftLength,              // Source dataset length
+                                    overlap,                // Overlap length
+                                    fftLength) <            // Destination dataset length
+                                        fftLength) {
             i++;
 
-            if (i > NumberOfFFTs)                   // Check that we are not going to overflow the graph area
+            if (i > numberOfFFTs)                           // Check that we are not going to overflow the graph area
                 break;
 
-                                                    // Apply window to real data
-            SDA_Window (pProcessData,               // Pointer to source array
-                        pProcessData,               // Pointer to destination array
-                        pWindowCoeffs,              // Pointer to window coefficients
-                        FFT_LENGTH);                // Window length
+                                                            // Apply window to real data
+            SDA_Window (pProcessData,                       // Pointer to source array
+                        pProcessData,                       // Pointer to destination array
+                        pWindowCoeffs,                      // Pointer to window coefficients
+                        fftLength);                         // Window length
 
-                                                    // Perform real FFT
-            SDA_Rfft (pProcessData,                 // Pointer to real array
-                      pImagData,                    // Pointer to imaginary array
-                      pFFTCoeffs,                   // Pointer to FFT coefficients
-                      SIGLIB_BIT_REV_STANDARD,      // Bit reverse mode flag / Pointer to bit reverse address table - NOT USED
-                      FFT_LENGTH,                   // FFT length
-                      LOG2_FFT_LENGTH);             // log2 FFT length
+                                                            // Perform real FFT
+            SDA_Rfft (pProcessData,                         // Pointer to real array
+                      pImagData,                            // Pointer to imaginary array
+                      pFFTCoeffs,                           // Pointer to FFT coefficients
+                      SIGLIB_BIT_REV_STANDARD,              // Bit reverse mode flag / Pointer to bit reverse address table - NOT USED
+                      fftLength,                            // FFT length
+                      log2FftLength);                       // log2 FFT length
 
-                                                    // Calculate real magnitude from complex
-            SDA_LogMagnitude (pProcessData,         // Pointer to real source array
-                              pImagData,            // Pointer to imaginary source array
-                              pResults,             // Pointer to magnitude destination array
-                              FFT_LENGTH);          // Dataset length
-            SDA_Multiply (pResults,                 // Pointer to source array
-                          scale,                    // Multiplier
-                          pResults,                 // Pointer to destination array
-                          FFT_LENGTH);              // Dataset length
-            SDA_Add (pResults,                      // Pointer to source array
-                     offset,                        // D.C. offset
-                     pResults,                      // Pointer to destination array
-                     FFT_LENGTH);                   // Dataset length
+                                                            // Calculate real magnitude from complex
+            SDA_LogMagnitude (pProcessData,                 // Pointer to real source array
+                              pImagData,                    // Pointer to imaginary source array
+                              pResults,                     // Pointer to magnitude destination array
+                              fftLength);                   // Dataset length
+            SDA_Multiply (pResults,                         // Pointer to source array
+                          scale,                            // Multiplier
+                          pResults,                         // Pointer to destination array
+                          fftLength);                       // Dataset length
+            SDA_Add (pResults,                              // Pointer to source array
+                     offset,                                // D.C. offset
+                     pResults,                              // Pointer to destination array
+                     fftLength);                            // Dataset length
 
             if (dimensions == 1) {
                 if (firstPlot == 1)
-                    gpc_plot_2d (hSpectrogram,          // Graph handle
-                                 pResults,              // Dataset
-                                 HALF_FFT_LENGTH,       // Dataset length
-                                 "Frequency",           // Dataset title
-                                 SIGLIB_ZERO,           // Minimum X value
-                                 ((sampleRate * (double)(HALF_FFT_LENGTH - 1)) / ((double)FFT_LENGTH)), // Maximum X value
-                                 "lines",               // Graph type
-                                 "magenta",             // Colour
-                                 GPC_NEW);              // New graph
+                    gpc_plot_2d (hSpectrogram,              // Graph handle
+                                 pResults,                  // Dataset
+                                 HalfFftLength,             // Dataset length
+                                 "Frequency",               // Dataset title
+                                 SIGLIB_ZERO,               // Minimum X value
+                                 ((sampleRate * (double)(HalfFftLength - 1)) / ((double)fftLength)), // Maximum X value
+                                 "lines",                   // Graph type
+                                 "magenta",                 // Colour
+                                 GPC_NEW);                  // New graph
                 else
-                    gpc_plot_2d (hSpectrogram,          // Graph handle
-                                 pResults,              // Dataset
-                                 HALF_FFT_LENGTH,       // Dataset length
-                                 "Frequency",           // Dataset title
-                                 SIGLIB_ZERO,           // Minimum X value
-                                 ((sampleRate * (double)(HALF_FFT_LENGTH - 1)) / ((double)FFT_LENGTH)), // Maximum X value
-                                 "lines",               // Graph type
-                                 "magenta",             // Colour
-                                 GPC_ADD);              // New graph
+                    gpc_plot_2d (hSpectrogram,              // Graph handle
+                                 pResults,                  // Dataset
+                                 HalfFftLength,             // Dataset length
+                                 "Frequency",               // Dataset title
+                                 SIGLIB_ZERO,               // Minimum X value
+                                 ((sampleRate * (double)(HalfFftLength - 1)) / ((double)fftLength)), // Maximum X value
+                                 "lines",                   // Graph type
+                                 "magenta",                 // Colour
+                                 GPC_ADD);                  // New graph
             }
             else {
                 gpc_plot_spectrogram (hSpectrogram,         // Graph handle
                                       pResults,             // Dataset
                                       "Spectrogram Plot",   // Dataset title
                                       SIGLIB_ZERO,          // Minimum X value
-                                      ((((double)(FFT_LENGTH - Overlap * NumberOfFFTs)) - 1.) / sampleRate)); // Maximum X value
+                                      ((((double)((fftLength - overlap) * numberOfFFTs)) - 1.) / sampleRate)); // Maximum X value
             }
         }
     }
     if (dimensions == 2) {
-        gpc_plot_spectrogram (hSpectrogram,         // Graph handle
-                              GPC_END_PLOT,         // Data array
-                              "Spectrogram Plot",   // Dataset title
-                              SIGLIB_ZERO,          // Minimum X value
-                              ((((double)(FFT_LENGTH - Overlap * NumberOfFFTs)) - 1.) / sampleRate)); // Maximum X value
+        gpc_plot_spectrogram (hSpectrogram,                 // Graph handle
+                              GPC_END_PLOT,                 // Data array
+                              "Spectrogram Plot",           // Dataset title
+                              SIGLIB_ZERO,                  // Minimum X value
+                              ((((double)((fftLength - overlap) * numberOfFFTs)) - 1.) / sampleRate)); // Maximum X value
     }
 
     fclose (fpInputFile);
@@ -202,7 +204,7 @@ int main (int argc, char **argv)
     printf ("\nHit <Carriage Return> to continue ....\n"); getchar(); // Wait for <Carriage Return>
     gpc_close (hSpectrogram);
 
-    SUF_MemoryFree (pProcessData);                  // Free memory
+    SUF_MemoryFree (pProcessData);                          // Free memory
     SUF_MemoryFree (pOverlapData);
     SUF_MemoryFree (pInputData);
     SUF_MemoryFree (pImagData);

@@ -20,6 +20,10 @@
     #define NETWORK_HIDDEN_LAYER_NODES      5
 #endif
 
+#ifndef PREDICTION_THRESHOLD
+    #define PREDICTION_THRESHOLD            0.8
+#endif
+
 #ifndef INPUT_SCALING_FACTOR
     #define INPUT_SCALING_FACTOR            (SIGLIB_ONE/1000.)  // Scaling factor used to avoid numerical overflow in the exponent function
 #endif
@@ -180,7 +184,9 @@ int main (int argc, char *argv[])
         printf ("layer2Weights Max: %lf\n\n", SDA_Max((SLData_t *)layer2Weights, NUM_CATEGORIES*NETWORK_HIDDEN_LAYER_NODES));
     }
 
-    SLArrayIndex_t totalClassificationCount = SIGLIB_AI_ZERO;
+    SLArrayIndex_t totalFrameCount = SIGLIB_AI_ZERO;
+    SLArrayIndex_t classifiedFrameCount = SIGLIB_AI_ZERO;
+    SLArrayIndex_t unclassifiedFrameCount = SIGLIB_AI_ZERO;
 
     for (SLArrayIndex_t classificationSequenceNumber = 0; classificationSequenceNumber < nRows; classificationSequenceNumber++) {
         SLNeuralNetworkPrediction_s prediction =
@@ -197,9 +203,21 @@ int main (int argc, char *argv[])
                                                  NETWORK_HIDDEN_LAYER_NODES,                                                // Hidden layer length
                                                  NUM_CATEGORIES);                                                           // Number of output categories
 
-        totalClassificationCount++;
-        printf ("Frame Number %d, Classification: %d, Probability: %lf\n", totalClassificationCount, prediction.predictedCategory, prediction.probability);
+        totalFrameCount++;
+
+        if (PREDICTION_THRESHOLD < prediction.probability) {
+            printf ("Classified  : Classification: %d, Probability: %lf\n", prediction.predictedCategory, prediction.probability);
+            classifiedFrameCount++;
+        }
+        else {
+            printf ("Unclassified: Probability: %lf\n", prediction.probability);
+            unclassifiedFrameCount++;
+        }
     }
+
+    printf ("\n\nTotal Frame Count        : %d\n", totalFrameCount);
+    printf ("Classified Frame Count   : %d, %d%%\n", classifiedFrameCount, classifiedFrameCount*100/totalFrameCount);
+    printf ("Unclassified Frame Count : %d, %d%%\n\n", unclassifiedFrameCount, unclassifiedFrameCount*100/totalFrameCount);
 
     SUF_MemoryFree (pLayer1PostActivation);                 // Free memory
     SUF_MemoryFree (pLayer2PostActivation);
