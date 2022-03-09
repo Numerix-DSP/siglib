@@ -3,10 +3,10 @@
 
 // Include files
 #include <stdio.h>
-#include <siglib.h>                                 // SigLib DSP library
-#include <gnuplot_c.h>                              // Gnuplot/C
+#include <siglib.h>                                         // SigLib DSP library
+#include <gnuplot_c.h>                                      // Gnuplot/C
 
-#define ARRAY_OR_SAMPLE     0                       // Set to '1' for array mode, '0' for per-sample
+#define ARRAY_OR_SAMPLE     0                               // Set to '1' for array mode, '0' for per-sample
 
 // Define constants
 #define FILTER_LENGTH   64
@@ -29,8 +29,8 @@ static const SLData_t    pFilterTaps[FILTER_LENGTH] = {
 };
 
 
-static SLData_t         *pFilterState;              // Filter state array
-static SLData_t         *pFilterProcCoeffs;         // Filter processing coefficients array
+static SLData_t         *pFilterState;                      // Filter state array
+static SLData_t         *pFilterProcCoeffs;                 // Filter processing coefficients array
 static SLArrayIndex_t   FilterIndex;
 static SLData_t         *pSrc, *pDst;
 static SLData_t         SinePhase;
@@ -38,7 +38,7 @@ static SLData_t         SinePhase;
 
 int main(void)
 {
-    h_GPC_Plot  *h2DPlot;                           // Plot object
+    h_GPC_Plot  *h2DPlot;                                   // Plot object
 
     pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
     pDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
@@ -46,106 +46,111 @@ int main(void)
     pFilterState = SUF_FirExtendedArrayAllocate (FILTER_LENGTH);
     pFilterProcCoeffs = SUF_FirExtendedArrayAllocate (FILTER_LENGTH);
 
-    h2DPlot =                                       // Initialize plot
-        gpc_init_2d ("FIR Filter",                  // Plot title
-                     "Impulse Response",            // X-Axis label
-                     "Magnitude",                   // Y-Axis label
-                     GPC_AUTO_SCALE,                // Scaling mode
-                     GPC_SIGNED,                    // Sign mode
-                     GPC_KEY_ENABLE);               // Legend / key mode
+    if ((NULL == pSrc) || (NULL == pDst) || (NULL == pFilterState) || (NULL == pFilterProcCoeffs)) {
+        printf ("Memory allocation error in main()\n");
+        exit(-1);
+    }
+
+    h2DPlot =                                               // Initialize plot
+        gpc_init_2d ("FIR Filter",                          // Plot title
+                     "Impulse Response",                    // X-Axis label
+                     "Magnitude",                           // Y-Axis label
+                     GPC_AUTO_SCALE,                        // Scaling mode
+                     GPC_SIGNED,                            // Sign mode
+                     GPC_KEY_ENABLE);                       // Legend / key mode
     if (NULL == h2DPlot) {
         printf ("\nPlot creation failure.\n");
         exit(-1);
     }
 
-    SIF_FirExtendedArray (pFilterState,             // Pointer to filter state array
-                          pFilterTaps,              // Filter coefficients
-                          pFilterProcCoeffs,        // Filter processing coefficients array
-                          &FilterIndex,             // Pointer to filter index register
-                          FILTER_LENGTH);           // Filter length
+    SIF_FirExtendedArray (pFilterState,                     // Pointer to filter state array
+                          pFilterTaps,                      // Filter coefficients
+                          pFilterProcCoeffs,                // Filter processing coefficients array
+                          &FilterIndex,                     // Pointer to filter index register
+                          FILTER_LENGTH);                   // Filter length
 
     SinePhase = SIGLIB_ZERO;
 
                 // Generate a noisy sinewave
-    SDA_SignalGenerate (pSrc,                       // Pointer to destination array
-                        SIGLIB_SINE_WAVE,           // Signal type - Sine wave
-                        SIGLIB_HALF,                // Signal peak level
-                        SIGLIB_FILL,                // Fill (overwrite) or add to existing array contents
-                        0.01,                       // Signal frequency
-                        SIGLIB_ZERO,                // D.C. Offset
-                        SIGLIB_ZERO,                // Unused
-                        SIGLIB_ZERO,                // Signal end value - Unused
-                        &SinePhase,                 // Signal phase - maintained across array boundaries
-                        SIGLIB_NULL_DATA_PTR,       // Unused
-                        SAMPLE_LENGTH);             // Output dataset length
+    SDA_SignalGenerate (pSrc,                               // Pointer to destination array
+                        SIGLIB_SINE_WAVE,                   // Signal type - Sine wave
+                        SIGLIB_HALF,                        // Signal peak level
+                        SIGLIB_FILL,                        // Fill (overwrite) or add to existing array contents
+                        0.01,                               // Signal frequency
+                        SIGLIB_ZERO,                        // D.C. Offset
+                        SIGLIB_ZERO,                        // Unused
+                        SIGLIB_ZERO,                        // Signal end value - Unused
+                        &SinePhase,                         // Signal phase - maintained across array boundaries
+                        SIGLIB_NULL_DATA_PTR,               // Unused
+                        SAMPLE_LENGTH);                     // Output dataset length
 
-    SDA_SignalGenerate (pSrc,                       // Pointer to destination array
-                        SIGLIB_WHITE_NOISE,         // Signal type - random white noise
-                        0.2,                        // Signal peak level
-                        SIGLIB_ADD,                 // Fill (overwrite) or add to existing array contents
-                        SIGLIB_ZERO,                // Signal frequency - Unused
-                        SIGLIB_ZERO,                // D.C. Offset
-                        SIGLIB_ZERO,                // Unused
-                        SIGLIB_ZERO,                // Signal end value - Unused
-                        SIGLIB_NULL_DATA_PTR,       // Unused
-                        SIGLIB_NULL_DATA_PTR,       // Unused
-                        SAMPLE_LENGTH);             // Output dataset length
+    SDA_SignalGenerate (pSrc,                               // Pointer to destination array
+                        SIGLIB_WHITE_NOISE,                 // Signal type - random white noise
+                        0.2,                                // Signal peak level
+                        SIGLIB_ADD,                         // Fill (overwrite) or add to existing array contents
+                        SIGLIB_ZERO,                        // Signal frequency - Unused
+                        SIGLIB_ZERO,                        // D.C. Offset
+                        SIGLIB_ZERO,                        // Unused
+                        SIGLIB_ZERO,                        // Signal end value - Unused
+                        SIGLIB_NULL_DATA_PTR,               // Unused
+                        SIGLIB_NULL_DATA_PTR,               // Unused
+                        SAMPLE_LENGTH);                     // Output dataset length
 
             // Apply fir filter and store filtered data
 #if ARRAY_OR_SAMPLE
             // Perform two iterations to test for continuity
-    SDA_FirExtendedArray (pSrc,                     // Pointer to input array to be filtered
-                          pDst,                     // Pointer to filtered output array
-                          pFilterState,             // Pointer to filter state array
-                          pFilterProcCoeffs,        // Pointer to filter coefficients
-                          &FilterIndex,             // Pointer to filter index register
-                          FILTER_LENGTH,            // Filter length
-                          SAMPLE_LENGTH/2);         // Output dataset length
-    SDA_FirExtendedArray (pSrc+SAMPLE_LENGTH/2,     // Pointer to input array to be filtered
-                          pDst+SAMPLE_LENGTH/2,     // Pointer to filtered output array
-                          pFilterState,             // Pointer to filter state array
-                          pFilterProcCoeffs,        // Pointer to filter coefficients
-                          &FilterIndex,             // Pointer to filter index register
-                          FILTER_LENGTH,            // Filter length
-                          SAMPLE_LENGTH/2);         // Output dataset length
+    SDA_FirExtendedArray (pSrc,                             // Pointer to input array to be filtered
+                          pDst,                             // Pointer to filtered output array
+                          pFilterState,                     // Pointer to filter state array
+                          pFilterProcCoeffs,                // Pointer to filter coefficients
+                          &FilterIndex,                     // Pointer to filter index register
+                          FILTER_LENGTH,                    // Filter length
+                          SAMPLE_LENGTH/2);                 // Output dataset length
+    SDA_FirExtendedArray (pSrc+SAMPLE_LENGTH/2,             // Pointer to input array to be filtered
+                          pDst+SAMPLE_LENGTH/2,             // Pointer to filtered output array
+                          pFilterState,                     // Pointer to filter state array
+                          pFilterProcCoeffs,                // Pointer to filter coefficients
+                          &FilterIndex,                     // Pointer to filter index register
+                          FILTER_LENGTH,                    // Filter length
+                          SAMPLE_LENGTH/2);                 // Output dataset length
 #else
     for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
         *pDst++ =
-            SDS_FirExtendedArray (*pSrc++,              // Input data sample to be filtered
-                                  pFilterState,         // Pointer to filter state array
-                                  pFilterProcCoeffs,    // Pointer to filter coefficients
-                                  &FilterIndex,         // Pointer to filter index register
-                                  FILTER_LENGTH);       // Filter length
+            SDS_FirExtendedArray (*pSrc++,                  // Input data sample to be filtered
+                                  pFilterState,             // Pointer to filter state array
+                                  pFilterProcCoeffs,        // Pointer to filter coefficients
+                                  &FilterIndex,             // Pointer to filter index register
+                                  FILTER_LENGTH);           // Filter length
     }
     pSrc -= SAMPLE_LENGTH;
     pDst -= SAMPLE_LENGTH;
 #endif
 
-    gpc_plot_2d (h2DPlot,                           // Graph handle
-                 pSrc,                              // Dataset
-                 SAMPLE_LENGTH,                     // Dataset length
-                 "Unfiltered Signal",               // Dataset title
-                 SIGLIB_ZERO,                       // Minimum X value
-                 (double)(SAMPLE_LENGTH - 1),       // Maximum X value
-                 "lines",                           // Graph type
-                 "blue",                            // Colour
-                 GPC_NEW);                          // New graph
+    gpc_plot_2d (h2DPlot,                                   // Graph handle
+                 pSrc,                                      // Dataset
+                 SAMPLE_LENGTH,                             // Dataset length
+                 "Unfiltered Signal",                       // Dataset title
+                 SIGLIB_ZERO,                               // Minimum X value
+                 (double)(SAMPLE_LENGTH - 1),               // Maximum X value
+                 "lines",                                   // Graph type
+                 "blue",                                    // Colour
+                 GPC_NEW);                                  // New graph
 
-    gpc_plot_2d (h2DPlot,                           // Graph handle
-                 pDst,                              // Dataset
-                 SAMPLE_LENGTH,                     // Dataset length
-                 "Filtered Signal",                 // Dataset title
-                 SIGLIB_ZERO,                       // Minimum X value
-                 (double)(SAMPLE_LENGTH - 1),       // Maximum X value
-                 "lines",                           // Graph type
-                 "red",                             // Colour
-                 GPC_ADD);                          // New graph
+    gpc_plot_2d (h2DPlot,                                   // Graph handle
+                 pDst,                                      // Dataset
+                 SAMPLE_LENGTH,                             // Dataset length
+                 "Filtered Signal",                         // Dataset title
+                 SIGLIB_ZERO,                               // Minimum X value
+                 (double)(SAMPLE_LENGTH - 1),               // Maximum X value
+                 "lines",                                   // Graph type
+                 "red",                                     // Colour
+                 GPC_ADD);                                  // New graph
     printf ("\nOriginal And Filtered Signals\n");
 
     printf ("\nHit <Carriage Return> to continue ....\n"); getchar(); // Wait for <Carriage Return>
     gpc_close (h2DPlot);
 
-    SUF_MemoryFree (pSrc);                         // Free memory
+    SUF_MemoryFree (pSrc);                                  // Free memory
     SUF_MemoryFree (pDst);
 
     exit(0);

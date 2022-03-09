@@ -4,9 +4,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <siglib_host_utils.h>                      // Optionally includes conio.h and time.h subset functions
+#include <siglib_host_utils.h>                              // Optionally includes conio.h and time.h subset functions
 #include <math.h>
-#include <siglib.h>                                 // SigLib DSP library
+#include <siglib.h>                                         // SigLib DSP library
 
 #define SAMPLE_LENGTH           1024
 #define FFT_LENGTH              SAMPLE_LENGTH
@@ -51,28 +51,28 @@ int main (int argc, char *argv[])
         exit(0);
     }
 
-    SIF_CopyWithOverlap (&OverlapSrcArrayIndex);    // Pointer to source array index
+    SIF_CopyWithOverlap (&OverlapSrcArrayIndex);            // Pointer to source array index
                             // Generate window table
-    SIF_Window (pWindowCoeffs,                      // Window coefficients pointer
-                SIGLIB_BLACKMAN_HARRIS,             // Window type
-                SIGLIB_ZERO,                        // Window coefficient
-                FFT_LENGTH);                        // Window length
+    SIF_Window (pWindowCoeffs,                              // Window coefficients pointer
+                SIGLIB_BLACKMAN_HARRIS,                     // Window type
+                SIGLIB_ZERO,                                // Window coefficient
+                FFT_LENGTH);                                // Window length
 
                             // Calculate window inverse coherent gain
     WindowInverseCoherentGain =
-      SDA_WindowInverseCoherentGain(pWindowCoeffs,  // Source array pointer
-                                    FFT_LENGTH);    // Window size
+      SDA_WindowInverseCoherentGain(pWindowCoeffs,          // Source array pointer
+                                    FFT_LENGTH);            // Window size
 
     printf ("WindowInverseCoherentGain = %lf\n", WindowInverseCoherentGain);
 
                             // Initialise FFT
-    SIF_Fft (pFDPFFTCoeffs,                         // Pointer to FFT coefficients
-             SIGLIB_BIT_REV_STANDARD,               // Bit reverse mode flag / Pointer to bit reverse address table
-             FFT_LENGTH);                           // FFT length
+    SIF_Fft (pFDPFFTCoeffs,                                 // Pointer to FFT coefficients
+             SIGLIB_BIT_REV_STANDARD,                       // Bit reverse mode flag / Pointer to bit reverse address table
+             FFT_LENGTH);                                   // FFT length
 
     if (argc != 2) {
         printf ("\nUsage error  :\nwavcepst filename (no extension)\n\n");
-        exit(-1);                                   // Exit - usage error
+        exit(-1);                                           // Exit - usage error
     }
 
     strcpy (WavFilename, argv[1]);
@@ -91,7 +91,7 @@ int main (int argc, char *argv[])
     }
 
     wavInfo = SUF_WavReadHeader (fpInputFile);
-    if (wavInfo.NumberOfChannels != 1) {                // Check how many channels
+    if (wavInfo.NumberOfChannels != 1) {                    // Check how many channels
         printf ("Number of channels in %s = %d\n", WavFilename, wavInfo.NumberOfChannels);
         printf ("This app requires a mono .wav file\n");
         exit(-1);
@@ -114,45 +114,45 @@ int main (int argc, char *argv[])
                                     OVERLAP_LENGTH,         // Overlap length
                                     SAMPLE_LENGTH) <        // Destination array length
                                       SAMPLE_LENGTH) {
-                                                        // Apply window to real data
-            SDA_Window (pFDPRealData,                   // Source array pointer
-                        pFDPRealData,                   // Destination array pointer
-                        pWindowCoeffs,                  // Window array pointer
-                        FFT_LENGTH);                    // Window size
+                                                            // Apply window to real data
+            SDA_Window (pFDPRealData,                       // Source array pointer
+                        pFDPRealData,                       // Destination array pointer
+                        pWindowCoeffs,                      // Window array pointer
+                        FFT_LENGTH);                        // Window size
 
                                 // Normalize window gain
-            SDA_Multiply (pFDPRealData,                 // Pointer to source array
-                          WindowInverseCoherentGain,    // Multiplier
-                          pFDPRealData,                 // Pointer to destination array
-                          FFT_LENGTH);                  // Array length
+            SDA_Multiply (pFDPRealData,                     // Pointer to source array
+                          WindowInverseCoherentGain,        // Multiplier
+                          pFDPRealData,                     // Pointer to destination array
+                          FFT_LENGTH);                      // Array length
 
                                 // Perform real cepstrum
-            SDA_RealComplexCepstrum (pFDPRealData,        // Real input array pointer
-                                     pFDPMagn,            // Pointer to real destination array
-                                     pFDPPhase,           // Pointer to imaginary destination array
-                                     pFDPFFTCoeffs,       // Pointer to FFT coefficients
-                                     SIGLIB_BIT_REV_STANDARD,     // Bit reverse mode flag / Pointer to bit reverse address table
-                                     FFT_LENGTH,          // FFT length
-                                     LOG2_FFT_LENGTH);    // Log2 FFT length
+            SDA_RealComplexCepstrum (pFDPRealData,              // Real input array pointer
+                                     pFDPMagn,                  // Pointer to real destination array
+                                     pFDPPhase,                 // Pointer to imaginary destination array
+                                     pFDPFFTCoeffs,             // Pointer to FFT coefficients
+                                     SIGLIB_BIT_REV_STANDARD,   // Bit reverse mode flag / Pointer to bit reverse address table
+                                     FFT_LENGTH,                // FFT length
+                                     LOG2_FFT_LENGTH);          // Log2 FFT length
 
-            *(pFDPMagn+0) = SIGLIB_ZERO;            // Remove D.C. Component
+            *(pFDPMagn+0) = SIGLIB_ZERO;                    // Remove D.C. Component
             *(pFDPMagn+1) = SIGLIB_ZERO;
 
-            // SDA_LogMagnitude (pFDPMagn,             // Pointer to real source array
-                              // pFDPPhase,            // Pointer to imaginary source array
-                              // pFDPMagn,             // Pointer to log magnitude destination array
-                              // pFDPMagn);            // Array length
+            // SDA_LogMagnitude (pFDPMagn,                     // Pointer to real source array
+                              // pFDPPhase,                    // Pointer to imaginary source array
+                              // pFDPMagn,                     // Pointer to log magnitude destination array
+                              // pFDPMagn);                    // Array length
                                 // // Clip off noise
-            // SDA_Add (pFDPMagn,                      // Pointer to source array
-                     // -50.0,                         // Offset
-                     // pFDPMagn,                      // Pointer to destination array
-                     // RESULT_LENGTH);                // Array length
+            // SDA_Add (pFDPMagn,                              // Pointer to source array
+                     // -50.0,                                 // Offset
+                     // pFDPMagn,                              // Pointer to destination array
+                     // RESULT_LENGTH);                        // Array length
 
-            SDA_Clip (pFDPMagn,                     // Source array address
-                      pFDPMagn,                     // Destination array address
-                      SIGLIB_ZERO,                  // Value to clip signal to
-                      SIGLIB_CLIP_BELOW,            // Clip type
-                      RESULT_LENGTH);               // Array length
+            SDA_Clip (pFDPMagn,                             // Source array address
+                      pFDPMagn,                             // Destination array address
+                      SIGLIB_ZERO,                          // Value to clip signal to
+                      SIGLIB_CLIP_BELOW,                    // Clip type
+                      RESULT_LENGTH);                       // Array length
 
                 // Store data to GNUPlot file - Frequency in KHz
             for (i = 0; i < RESULT_LENGTH; i++) {
@@ -167,10 +167,10 @@ int main (int argc, char *argv[])
         }
     }
 
-    fclose (fpInputFile);                           // Close files
+    fclose (fpInputFile);                                   // Close files
     fclose (fpOutputFile);
 
-    free (pDataArray);                              // Free memory
+    free (pDataArray);                                      // Free memory
     free (pOverlapArray);
     free (pWindowCoeffs);
     free (pFDPRealData);

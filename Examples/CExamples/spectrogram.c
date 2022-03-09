@@ -28,6 +28,7 @@ int main (int argc, char **argv)
     int             firstPlot = 1;
     int             dimensions;
     char            filename[80];
+    char            plotTitle[120];
 
     if (argc != 9) {
         printf ("Usage   : spectrogram <InputFile> 1/2<D> <# FFTs> <FFT Length> <overlap(samples)> <scale> <offset> <Sample Rate>\n");
@@ -71,8 +72,10 @@ int main (int argc, char **argv)
     pFFTCoeffs = SUF_FftCoefficientAllocate (fftLength);
 
     if (dimensions == 1) {
-        hSpectrogram =                                      // Initialize plot
-            gpc_init_2d ("Spectrum",                        // Plot title
+        strcpy (plotTitle, "Spectrum: ");
+        strcat (plotTitle, filename);
+         hSpectrogram =                                     // Initialize plot
+            gpc_init_2d (plotTitle,                         // Plot title
                          "Frequency",                       // X-Axis label
                          "Magnitude",                       // Y-Axis label
                          GPC_AUTO_SCALE,                    // Scaling mode
@@ -84,8 +87,10 @@ int main (int argc, char **argv)
         }
     }
     else {
+        strcpy (plotTitle, "Spectrogram: ");
+        strcat (plotTitle, filename);
         hSpectrogram =                                      // Initialize plot
-            gpc_init_spectrogram ("Spectrogram",            // Plot title
+            gpc_init_spectrogram (plotTitle,                // Plot title
                                   "Time (s)",               // X-Axis label
                                   "Frequency",              // Y-Axis label
                                   (int)numberOfFFTs,        // X-axis length
@@ -95,7 +100,7 @@ int main (int argc, char **argv)
                                   0.0,                      // Minimum Z value
                                   1.0,                      // Maximum Z value
                                   GPC_COLOUR,               // Colour mode
-                                  GPC_KEY_ENABLE);          // Legend / key mode
+                                  GPC_KEY_DISABLE);         // Legend / key mode
         if (NULL == hSpectrogram) {
             printf ("\nPlot creation failure.\n");
             exit(-1);

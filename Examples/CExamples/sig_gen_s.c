@@ -739,6 +739,7 @@ int main (void)
 
 
     GaussPhase = SIGLIB_ZERO;
+    GaussValue = SIGLIB_ZERO;
     for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
         SDS_SignalGenerate (pRealData+i,                    // Output sample pointer
                             SIGLIB_GAUSSIAN_NOISE,          // Signal type - Gaussian noise

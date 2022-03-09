@@ -80,6 +80,11 @@ int main(void)
     pResults = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
     pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
+    if ((NULL == pSrc1) || (NULL == pSrc2) || (NULL == pImagData) || (NULL == pResults) || (NULL == pFFTCoeffs)) {
+        printf ("Memory allocation error in main()\n");
+        exit(-1);
+    }
+
                                                             // Initialise FFT
     SIF_Fft (pFFTCoeffs,                                    // Pointer to FFT coefficients
              SIGLIB_BIT_REV_STANDARD,                       // Bit reverse mode flag / Pointer to bit reverse address table

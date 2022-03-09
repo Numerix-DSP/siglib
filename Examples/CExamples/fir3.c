@@ -86,6 +86,11 @@ int main(void)
     pPhase = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
     pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
+    if ((NULL == pReal) || (NULL == pImag) || (NULL == pMagnitude) || (NULL == pPhase) || (NULL == pFFTCoeffs)) {
+        printf ("Memory allocation error in main()\n");
+        exit(-1);
+    }
+
     h2DPlot =                                               // Initialize plot
         gpc_init_2d ("FIR Filter And Group Delay",          // Plot title
                      "Impulse Response / Frequency",        // X-Axis label

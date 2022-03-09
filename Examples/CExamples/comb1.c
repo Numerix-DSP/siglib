@@ -77,15 +77,21 @@ int main(void)
     printf ("\nComb filter length => %d\n", combFilterLength);
     getchar();                                              // Clear keyboard buffer
 
-    pImagData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-    pMagnitude = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-    pPhase = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
     pSrc1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
     pSrc2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
     pSrc3 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+    pImagData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+    pMagnitude = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+    pPhase = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
     pCombFilterStateArray1 = SUF_VectorArrayAllocate (combFilterLength);
     pCombFilterStateArray2 = SUF_VectorArrayAllocate (combFilterLength);
     pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+
+    if ((NULL == pSrc1) || (NULL == pSrc2) || (NULL == pSrc3) || (NULL == pImagData) || (NULL == pMagnitude) ||
+        (NULL == pPhase) || (NULL == pCombFilterStateArray1) || (NULL == pCombFilterStateArray2) || (NULL == pFFTCoeffs)) {
+        printf ("Memory allocation error in main()\n");
+        exit(-1);
+    }
 
                                                             // Initialise FFT
     SIF_Fft (pFFTCoeffs,                                    // Pointer to FFT coefficients

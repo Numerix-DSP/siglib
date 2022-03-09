@@ -123,7 +123,7 @@ call mb LeakyInt
 call mb lin_dbm
 call mb lms
 call mb manchest
-call mb MatchFil
+call mb MatchedFilter
 call mb math
 call mb matrix
 call mb matrix2
@@ -159,6 +159,7 @@ call mb prbs
 call mb preemp
 call mb pre-warp
 call mb psd
+call mb PulseRemoval
 call mb pwm
 call mb qam16
 call mb qpsk

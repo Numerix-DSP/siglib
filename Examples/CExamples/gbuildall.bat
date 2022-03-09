@@ -123,7 +123,7 @@ call gb LeakyInt
 call gb lin_dbm
 call gb lms
 call gb manchest
-call gb MatchFil
+call gb MatchedFilter
 call gb math
 call gb matrix
 call gb matrix2
@@ -159,6 +159,7 @@ call gb prbs
 call gb preemp
 call gb pre-warp
 call gb psd
+call gb PulseRemoval
 call gb pwm
 call gb qam16
 call gb qpsk

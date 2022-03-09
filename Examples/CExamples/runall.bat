@@ -475,9 +475,9 @@ echo manchest
 pause
 manchest
 
-echo MatchFil
+echo MatchedFilter
 pause
-MatchFil
+MatchedFilter
 
 echo math
 pause
@@ -618,6 +618,10 @@ pre-warp
 echo psd
 pause
 psd
+
+echo PulseRemoval
+pause
+PulseRemoval
 
 echo pwm
 pause

@@ -42,6 +42,11 @@ int main(void)
     pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
     pDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
+    if ((NULL == pSrc) || (NULL == pDst)) {
+        printf ("Memory allocation error in main()\n");
+        exit(-1);
+    }
+
     h2DPlot =                                               // Initialize plot
         gpc_init_2d ("FIR Filter",                          // Plot title
                      "Impulse Response",                    // X-Axis label

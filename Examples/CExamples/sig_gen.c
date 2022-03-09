@@ -715,6 +715,7 @@ int main (void)
 
 
     GaussPhase = SIGLIB_ZERO;
+    GaussValue = SIGLIB_ZERO;
     SDA_SignalGenerate (pRealData,                          // Output array pointer
                         SIGLIB_GAUSSIAN_NOISE,              // Signal type - Gaussian noise
                         SIGLIB_ZERO,                        // Signal peak level - Unused
