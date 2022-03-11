@@ -49,7 +49,7 @@ Calls Microsoft conio.h or implements subset of conio.h functions not implemente
 
 #else                                               // If compiler not MSVC then include the function subset
 
-// This kbhit() copied from : http://cboard.cprogramming.com/linux-programming/51531-faq-cached-input-mygetch.html#post357655
+// This kbhit() modified from Morgan McGuire's code here: https://www.flipcode.com/archives/_kbhit_for_Linux.shtml
 
 #include <stdio.h>
 #include <termios.h>
@@ -57,24 +57,30 @@ Calls Microsoft conio.h or implements subset of conio.h functions not implemente
 #include <sys/select.h>
 #include <sys/types.h>
 #include <sys/time.h>
+#include <sys/socket.h>
+#include <sys/ioctl.h>
 
 #define _kbhit kbhit
 
 int kbhit (void);
 
-int kbhit (void)
-{
-  struct timeval tv;
-  fd_set rdfs;
+int kbhit() {
+    static const int STDIN = 0;
+    static int initialized = 0;
 
-  tv.tv_sec = 0;
-  tv.tv_usec = 0;
+    if (! initialized) {
+        // Use termios to turn off line buffering
+        struct termios term;
+        tcgetattr(STDIN, &term);
+        term.c_lflag &= ~ICANON;
+        tcsetattr(STDIN, TCSANOW, &term);
+        setbuf(stdin, NULL);
+        initialized = 1;
+    }
 
-  FD_ZERO(&rdfs);
-  FD_SET (STDIN_FILENO, &rdfs);
-
-  select(STDIN_FILENO+1, &rdfs, NULL, NULL, &tv);
-  return FD_ISSET(STDIN_FILENO, &rdfs);
+    int bytesWaiting;
+    ioctl(STDIN, FIONREAD, &bytesWaiting);
+    return bytesWaiting;
 }
 
 // These functions copied from here : http://stackoverflow.com/questions/3276546/how-to-implement-getch-function-of-c-in-linux
