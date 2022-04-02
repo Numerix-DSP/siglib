@@ -1,30 +1,38 @@
-(saveFormat "2.3")
-(date "Mon 14/Jul/2008 15:19:33 ")
-(veerev "6.01")
+(saveFormat "7.0")
+(date "Fri 01/Apr/2022 17:29:20 ")
+(veerev "9.33.1811.0201")
 (platform "PC")
 (execMode fast)
+(prefExecMode fast)
 (filterNAN 0)
 (workspaceStackingOrder M)
 (SaveCF no)
 (device 0 ROOTCONTEXT
 (properties
+(variableName Main)
+(variableScope glob)
 (trigMode deg)
-(nextID 90)
+(nextID 91)
 (popupTitleText "SigLib DLL FFT Demo")
 (popupMoveable 1)
 (deleteGlobals 0))
 (deviceList
-(device 0 START25)
+(device 0 START25
+(properties
+(variableScope cont)))
 (device 1 REPEATUNTILBREAK
+(properties
+(variableScope cont))
 (interface
 (output 1
 (name "Continuous")
 (lock name constraints))))
 (device 2 VFUNCTIONGENERATOR
 (properties
+(variableScope cont)
 (function Sine)
 (frequency 660.567)
-(amplitude 4.008)
+(amplitude 3.686)
 (dcOffset 0)
 (degRad Deg)
 (phaseShift 0)
@@ -40,7 +48,7 @@
 (shape "Scalar"))
 (lock constraints)
 (optional yes)
-(array YES))
+(buffer YES))
 (input 2
 (name "Frequency")
 (tag "Frequency")
@@ -49,7 +57,7 @@
 (shape "Scalar"))
 (lock constraints)
 (optional yes)
-(array YES))
+(buffer YES))
 (input 3
 (name "Amplitude")
 (tag "Amplitude")
@@ -58,13 +66,14 @@
 (shape "Scalar"))
 (lock constraints)
 (optional yes)
-(array YES))
+(buffer YES))
 (output 1
 (name "Func")
 (lock name constraints))))
 (device 3 YPLOT
 (properties
-(name "Waveform (Time)"))
+(name "Waveform (Time)")
+(variableScope cont))
 (interface
 (input 1
 (name "Trace1")
@@ -76,6 +85,8 @@
 (properties
 (name "Frequency 1")
 (description2 1 "Frequency")
+(variableScope cont)
+(enableEditing 1)
 (range 1 2000)
 (detents 0.001))
 (interface
@@ -89,7 +100,9 @@
 (data  0))))
 (device 6 ENUMCONSTANT
 (properties
-(name "Waveform 1 Type"))
+(name "Waveform 1 Type")
+(variableScope cont)
+(enableEditing 1))
 (interface
 (output 1
 (name "Enum")
@@ -109,6 +122,7 @@
 (device 7 IMPORT
 (properties
 (name "Import Library")
+(variableScope cont)
 (libType DLL)
 (libName "SigLib")
 (fileName "siglib.dll")
@@ -117,6 +131,8 @@
 (device 9 KNOB
 (properties
 (name "Magnitude 1")
+(variableScope cont)
+(enableEditing 1)
 (range 0 10)
 (detents 0.001))
 (interface
@@ -125,10 +141,12 @@
 (lock name constraints)))
 (implementation
 (value Real
-(data  4.008))
+(data  3.686))
 (initValue Real
 (data  0))))
 (device 14 TOWAVEFORM
+(properties
+(variableScope cont))
 (interface
 (input 1
 (name "Array")
@@ -145,6 +163,7 @@
 (device 16 CALL
 (properties
 (name "Call SigLib.SDA_Rfft")
+(variableScope cont)
 (callFunc "SigLib.SDA_Rfft")
 (parmMode rev30))
 (interface
@@ -196,7 +215,8 @@
 (optional yes))))
 (device 19 YPLOT
 (properties
-(name "Waveform (Frequency)"))
+(name "Waveform (Frequency)")
+(variableScope cont))
 (interface
 (input 1
 (name "Trace1")
@@ -206,7 +226,9 @@
 (graphMode time)))
 (device 20 CONSTANT
 (properties
-(name "Log2 (FFT length)"))
+(name "Log2 (FFT Size)")
+(variableScope cont)
+(enableEditing 1))
 (interface
 (output 1
 (name "Int32")
@@ -217,6 +239,8 @@
 (initValue Int32
 (data  0))))
 (device 21 TOWAVEFORM
+(properties
+(variableScope cont))
 (interface
 (input 1
 (name "Array")
@@ -233,6 +257,7 @@
 (device 25 CALL
 (properties
 (name "Call SigLib.SIF_Window")
+(variableScope cont)
 (callFunc "SigLib.SIF_Window")
 (parmMode rev30))
 (interface
@@ -267,7 +292,8 @@
 (device 26 ENUMCONSTANT
 (properties
 (name "Window Type")
-(description2 1 ""))
+(variableScope cont)
+(enableEditing 1))
 (interface
 (output 1
 (name "Enum")
@@ -291,7 +317,8 @@
 (data  "Hanning"))))
 (device 27 ALLOCATEARRAY
 (properties
-(name "Alloc Window Array"))
+(name "Alloc Window Array")
+(variableScope cont))
 (interface
 (output 1
 (name "Array")
@@ -308,6 +335,7 @@
 (device 29 CALL
 (properties
 (name "Call SigLib.SDA_Window")
+(variableScope cont)
 (callFunc "SigLib.SDA_Window")
 (parmMode rev30))
 (interface
@@ -346,6 +374,7 @@
 (device 32 CALL
 (properties
 (name "Call SigLib.SDA_Magnitude")
+(variableScope cont)
 (callFunc "SigLib.SDA_Magnitude")
 (parmMode rev30))
 (interface
@@ -383,8 +412,9 @@
 (optional yes))))
 (device 33 CALL
 (properties
-(name "Call SigLib.SDA_10Log10")
-(callFunc "SigLib.SDA_10Log10")
+(name "Call SigLib.SDA_10log10")
+(variableScope cont)
+(callFunc "SigLib.SDA_10log10")
 (parmMode rev30))
 (interface
 (input 1
@@ -398,7 +428,7 @@
 (datatype Real))
 (optional yes))
 (input 3
-(name "B")
+(name "A")
 (requires
 (datatype Int32))
 (optional yes))
@@ -412,8 +442,9 @@
 (optional yes))))
 (device 34 CALL
 (properties
-(name "Call SigLib.SDA_Offset")
-(callFunc "SigLib.SDA_Offset")
+(name "Call SigLib.SDA_Add")
+(variableScope cont)
+(callFunc "SigLib.SDA_Add")
 (parmMode rev30))
 (interface
 (input 1
@@ -446,9 +477,10 @@
 (optional yes))))
 (device 36 VFUNCTIONGENERATOR
 (properties
+(variableScope cont)
 (function Cosine)
 (frequency 1331.534)
-(amplitude 2.799)
+(amplitude 2.12)
 (dcOffset 0)
 (degRad Deg)
 (phaseShift 0)
@@ -464,7 +496,7 @@
 (shape "Scalar"))
 (lock constraints)
 (optional yes)
-(array YES))
+(buffer YES))
 (input 2
 (name "Frequency")
 (tag "Frequency")
@@ -473,7 +505,7 @@
 (shape "Scalar"))
 (lock constraints)
 (optional yes)
-(array YES))
+(buffer YES))
 (input 3
 (name "Amplitude")
 (tag "Amplitude")
@@ -482,13 +514,15 @@
 (shape "Scalar"))
 (lock constraints)
 (optional yes)
-(array YES))
+(buffer YES))
 (output 1
 (name "Func")
 (lock name constraints))))
 (device 37 KNOB
 (properties
 (name "Magnitude 2")
+(variableScope cont)
+(enableEditing 1)
 (range 0 10)
 (detents 0.001))
 (interface
@@ -497,13 +531,15 @@
 (lock name constraints)))
 (implementation
 (value Real
-(data  2.799))
+(data  2.12))
 (initValue Real
 (data  0))))
 (device 38 KNOB
 (properties
 (name "Frequency 2")
 (description2 1 "Frequency")
+(variableScope cont)
+(enableEditing 1)
 (range 1 2000)
 (detents 0.001))
 (interface
@@ -517,7 +553,9 @@
 (data  0))))
 (device 39 ENUMCONSTANT
 (properties
-(name "Waveform 2 Type"))
+(name "Waveform 2 Type")
+(variableScope cont)
+(enableEditing 1))
 (interface
 (output 1
 (name "Enum")
@@ -537,6 +575,7 @@
 (device 40 CALL
 (properties
 (name "Call SigLib.SDA_Add2")
+(variableScope cont)
 (callFunc "SigLib.SDA_Add2")
 (parmMode rev30))
 (interface
@@ -575,6 +614,7 @@
 (device 41 CALL
 (properties
 (name "Call SigLib.SDA_Add2")
+(variableScope cont)
 (callFunc "SigLib.SDA_Add2")
 (parmMode rev30))
 (interface
@@ -613,6 +653,7 @@
 (device 42 CALL
 (properties
 (name "Call SigLib.SDA_SignalGenerate")
+(variableScope cont)
 (callFunc "SigLib.SDA_SignalGenerate")
 (parmMode rev30))
 (interface
@@ -690,7 +731,8 @@
 (device 43 ENUMCONSTANT
 (properties
 (name "Signal Type")
-(description2 1 ""))
+(variableScope cont)
+(enableEditing 1))
 (interface
 (output 1
 (name "Enum")
@@ -719,7 +761,8 @@
 (device 44 ENUMCONSTANT
 (properties
 (name "Signal Type")
-(description2 1 ""))
+(variableScope cont)
+(enableEditing 1))
 (interface
 (output 1
 (name "Enum")
@@ -738,6 +781,8 @@
 (device 45 KNOB
 (properties
 (name "Noise Magnitude")
+(variableScope cont)
+(enableEditing 1)
 (range 0 1)
 (detents 0.001))
 (interface
@@ -751,7 +796,9 @@
 (data  0))))
 (device 46 CONSTANT
 (properties
-(name "Real"))
+(name "Real")
+(variableScope cont)
+(enableEditing 1))
 (interface
 (output 1
 (name "Real")
@@ -763,7 +810,9 @@
 (data  0))))
 (device 47 CONSTANT
 (properties
-(name "Zero"))
+(name "Zero")
+(variableScope cont)
+(enableEditing 1))
 (interface
 (output 1
 (name "Real")
@@ -776,6 +825,7 @@
 (device 64 CALL
 (properties
 (name "Call SigLib.SDA_Clip")
+(variableScope cont)
 (callFunc "SigLib.SDA_Clip")
 (parmMode rev30))
 (interface
@@ -814,7 +864,9 @@
 (optional yes))))
 (device 65 CONSTANT
 (properties
-(name "Clip Value (20)"))
+(name "Clip Value (20)")
+(variableScope cont)
+(enableEditing 1))
 (interface
 (output 1
 (name "Real")
@@ -826,7 +878,9 @@
 (data  0))))
 (device 69 CONSTANT
 (properties
-(name "Clip Both"))
+(name "Clip Both")
+(variableScope cont)
+(enableEditing 1))
 (interface
 (output 1
 (name "Real")
@@ -838,7 +892,8 @@
 (data  0))))
 (device 71 ALLOCATEARRAY
 (properties
-(name "Alloc Temporary Array"))
+(name "Alloc Temporary Array")
+(variableScope cont))
 (interface
 (output 1
 (name "Array")
@@ -854,7 +909,9 @@
 (thru 10)))
 (device 74 CONSTANT
 (properties
-(name "FFT length"))
+(name "FFT Size")
+(variableScope cont)
+(enableEditing 1))
 (interface
 (output 1
 (name "Int32")
@@ -867,6 +924,7 @@
 (device 75 CALL
 (properties
 (name "Call SigLib.SIF_Fft")
+(variableScope cont)
 (callFunc "SigLib.SIF_Fft")
 (parmMode rev30))
 (interface
@@ -895,7 +953,8 @@
 (optional yes))))
 (device 77 ALLOCATEARRAY
 (properties
-(name "Alloc Twiddle Factor Array"))
+(name "Alloc Twiddle Factor Array")
+(variableScope cont))
 (interface
 (output 1
 (name "Array")
@@ -911,7 +970,8 @@
 (thru 10)))
 (device 78 ALLOCATEARRAY
 (properties
-(name "Alloc Bit Reverse LUT"))
+(name "Alloc Bit Reverse LUT")
+(variableScope cont))
 (interface
 (output 1
 (name "Array")
@@ -927,7 +987,8 @@
 (thru 10)))
 (device 79 ALLOCATEARRAY
 (properties
-(name "Alloc Imaginary FFT Data Array"))
+(name "Alloc Imaginary FFT Data Array")
+(variableScope cont))
 (interface
 (output 1
 (name "Array")
@@ -943,7 +1004,9 @@
 (thru 10)))
 (device 89 CONSTANT
 (properties
-(name "Window Coeff"))
+(name "Window Coeff")
+(variableScope cont)
+(enableEditing 1))
 (interface
 (output 1
 (name "Real64")
@@ -1059,59 +1122,100 @@
 (connect D14:0 D41:0))
 (ShowOnExecPanel))
 (contextCarrier
-(wndOrigin 2 2)
+(wndOrigin 2 3)
 (wndState res)
-(active panel)
+(active detail)
 (panel
 (extent 789 459)
+(drawGrid "off")
 (widget 0 detail
 (relativeOrigin 0 0)
+(bg "Light Blue Gray")
+(fg "Black")
+(PID 0)
 (title off)
+(tabIndex 0)
 (borderStyle none)
 (extent 140 40))
 (widget 5 detail
 (relativeOrigin 0 40)
+(bg "Light Blue Gray")
+(fg "Black")
+(PID 1)
 (title on)
+(titleBg "Light Blue Gray")
+(tabIndex 2)
 (borderStyle flat)
 (extent 136 28)
 (format dropDown))
 (widget 7 detail
 (relativeOrigin 0 90)
+(bg "Light Blue Gray")
+(fg "Black")
+(PID 2)
 (title on)
+(titleBg "Light Blue Gray")
+(tabIndex 5)
 (borderStyle flat)
 (extent 136 138)
 (layout horizontal)
 (fastmode off))
 (widget 4 detail
 (relativeOrigin 0 250)
+(bg "Light Blue Gray")
+(fg "Black")
+(PID 3)
 (title on)
+(titleBg "Light Blue Gray")
+(tabIndex 8)
 (borderStyle flat)
 (extent 136 138)
 (layout horizontal)
 (fastmode off))
 (widget 23 detail
 (relativeOrigin 140 40)
+(bg "Light Blue Gray")
+(fg "Black")
+(PID 4)
 (title on)
+(titleBg "Light Blue Gray")
+(tabIndex 3)
 (borderStyle flat)
 (extent 136 28)
 (format dropDown))
 (widget 21 detail
 (relativeOrigin 140 90)
+(bg "Light Blue Gray")
+(fg "Black")
+(PID 5)
 (title on)
+(titleBg "Light Blue Gray")
+(tabIndex 6)
 (borderStyle flat)
 (extent 136 138)
 (layout horizontal)
 (fastmode off))
 (widget 22 detail
 (relativeOrigin 140 250)
+(bg "Light Blue Gray")
+(fg "Black")
+(PID 6)
 (title on)
+(titleBg "Light Blue Gray")
+(tabIndex 9)
 (borderStyle flat)
 (extent 136 138)
 (layout horizontal)
 (fastmode off))
 (widget 3 detail
 (relativeOrigin 420 0)
+(bg "Light Blue Gray")
+(fg "Black")
+(PID 7)
 (title on)
+(titleBg "Light Blue Gray")
+(tabStop off)
+(tabIndex 1)
 (borderStyle flat)
 (extent 366 208)
 (displayMode 7)
@@ -1122,18 +1226,24 @@
 (domainName "Time")
 (Yspacing 10000)
 (Xspacing 10000)
-(pen 9)
+(scaleColor "Dark Gray")
 (show 1)
 (range -10 10 4 linear))
 (domain 0 0.02 4 linear)
 (trace 0 onScale 0
 (name "Trace1")
-(pen 4)
-(lineType 1)
+(traceColor "Yellow")
+(lineType 12)
 (pointType 0)))
 (widget 10 detail
 (relativeOrigin 420 229)
+(bg "Light Blue Gray")
+(fg "Black")
+(PID 8)
 (title on)
+(titleBg "Light Blue Gray")
+(tabStop off)
+(tabIndex 10)
 (borderStyle flat)
 (extent 366 208)
 (displayMode 7)
@@ -1144,43 +1254,63 @@
 (domainName "Time")
 (Yspacing 10000)
 (Xspacing 10000)
-(pen 9)
+(scaleColor "Dark Gray")
 (show 1)
 (range -80 0 4 linear))
 (domain 0 0.02 4 linear)
 (trace 0 onScale 0
 (name "Trace1")
-(pen 4)
-(lineType 1)
+(traceColor "Yellow")
+(lineType 12)
 (pointType 0)))
 (widget 27 detail
 (relativeOrigin 280 40)
+(bg "Light Blue Gray")
+(fg "Black")
+(PID 9)
 (title on)
+(titleBg "Light Blue Gray")
+(tabIndex 4)
 (borderStyle flat)
 (extent 136 28)
 (format dropDown))
 (widget 29 detail
 (relativeOrigin 280 90)
+(bg "Light Blue Gray")
+(fg "Black")
+(PID 10)
 (title on)
+(titleBg "Light Blue Gray")
+(tabIndex 7)
 (borderStyle flat)
 (extent 136 138)
 (layout horizontal)
 (fastmode off))
 (widget 14 detail
 (relativeOrigin 280 360)
+(bg "Light Blue Gray")
+(fg "Black")
+(PID 11)
 (title on)
+(titleBg "Light Blue Gray")
+(tabIndex 12)
 (borderStyle flat)
 (extent 136 28)
 (format dropDown))
 (widget 33 detail
 (relativeOrigin 280 280)
+(bg "Light Blue Gray")
+(PID 12)
 (title on)
+(titleBg "Light Blue Gray")
+(tabIndex 11)
 (borderStyle flat)
 (extent 136 28)
-(showFormat real)))
+(showFormat real))
+(panelBg "Light Blue Gray"))
 (detail
-(extent 756 557)
-(anchorPt -1054 51)
+(extent 1020 504)
+(anchorPt -823 -39)
 (configuration
 (devCarrierFor 0
 (active open)
@@ -1222,14 +1352,14 @@
 (domainName "Time")
 (Yspacing 10000)
 (Xspacing 10000)
-(pen 9)
+(scaleColor "Dark Gray")
 (show 1)
 (range -10 -7.557251908396947 4 linear))
 (domain 0.006853146853146854 0.006853146853146854 4 linear)
 (trace 0 onScale 0
 (name "Trace1")
-(pen 4)
-(lineType 1)
+(traceColor "Yellow")
+(lineType 12)
 (pointType 0)))
 (pinCenter 1160 290))
 (devCarrierFor 4
@@ -1296,14 +1426,14 @@
 (domainName "Time")
 (Yspacing 10000)
 (Xspacing 10000)
-(pen 9)
+(scaleColor "Dark Gray")
 (show 1)
 (range -90 20 4 linear))
 (domain 0 0.02 4 linear)
 (trace 0 onScale 0
 (name "Trace1")
-(pen 4)
-(lineType 1)
+(traceColor "Yellow")
+(lineType 12)
 (pointType 0)))
 (pinCenter 1750 290))
 (devCarrierFor 20
@@ -1366,7 +1496,7 @@
 (devCarrierFor 33
 (active icon)
 (icon
-(extent 157 34))
+(extent 152 34))
 (open
 (extent 218 82))
 (terminals on)
@@ -1374,7 +1504,7 @@
 (devCarrierFor 34
 (active icon)
 (icon
-(extent 138 45))
+(extent 126 45))
 (open
 (extent 203 82))
 (terminals on)
@@ -1561,22 +1691,21 @@
 (connect D15:0 D1:0
 (points 2 -10 110 -10 131))
 (connect D21:0 D2:0
-(points 6 200 350 200 370 280 370 280 50 380 50 380 72))
+(points 6 200 350 200 370 480 370 480 50 380 50 380 72))
 (connect D5:1 D2:1
 (points 4 254 50 270 50 270 90 320 90))
 (connect D4:1 D2:2
-(points 4 239 110 260 110 260 100 320 100))
+(points 4 239 110 250 110 250 100 320 100))
 (connect D7:1 D2:3
-(points 4 239 150 270 150 270 110 320 110))
+(points 4 239 150 260 150 260 110 320 110))
 (connect D8:0 D3:0
 (points 2 1160 238 1160 262))
 (connect D8:1 D3:1
-(points 8 1216 210 1240 210 1240 330 1220 330 1220 340 1090 340 1090 290 1106
-290))
+(points 6 1216 210 1240 210 1240 160 1080 160 1080 290 1106 290))
 (connect D5:0 D4:0
 (points 2 200 75 200 100))
 (connect D13:0 D5:0
-(points 6 -10 435 -10 460 110 460 110 40 200 40 200 45))
+(points 6 -10 435 -10 460 100 460 100 30 200 30 200 45))
 (connect D0:0 D6:0
 (points 2 -280 13 -280 50))
 (connect D4:0 D7:0
@@ -1584,91 +1713,88 @@
 (connect D16:0 D8:0
 (points 2 1160 125 1160 181))
 (connect D16:2 D8:1
-(points 6 1238 100 1250 100 1250 150 1080 150 1080 210 1103 210))
+(points 6 1238 100 1260 100 1260 150 1070 150 1070 210 1103 210))
 (connect D30:0 D9:0
-(points 6 1160 457 1160 480 1260 480 1260 50 1420 50 1420 65))
+(points 6 1160 457 1160 480 1290 480 1290 50 1420 50 1420 65))
 (connect D16:2 D9:1
-(points 6 1238 100 1250 100 1250 130 1290 130 1290 70 1356 70))
+(points 4 1238 100 1270 100 1270 70 1356 70))
 (connect D40:1 D9:2
-(points 6 83 60 100 60 100 30 1270 30 1270 80 1356 80))
+(points 6 83 60 90 60 90 -30 1300 -30 1300 80 1356 80))
 (connect D37:1 D9:3
-(points 6 -222 270 -190 270 -190 -30 1300 -30 1300 90 1356 90))
+(points 6 -222 270 -150 270 -150 -10 1260 -10 1260 90 1356 90))
 (connect D37:2 D9:4
-(points 6 -222 290 -180 290 -180 -10 1280 -10 1280 100 1356 100))
+(points 6 -222 290 -170 290 -170 -40 1310 -40 1310 100 1356 100))
 (connect D36:1 D9:5
-(points 10 -252 100 -220 100 -220 -20 770 -20 770 50 1250 50 1250 90 1270 90
-1270 110 1356 110))
+(points 6 -252 100 -220 100 -220 -20 1280 -20 1280 110 1356 110))
 (connect D11:1 D9:6
-(points 4 1209 370 1270 370 1270 120 1356 120))
+(points 4 1209 370 1280 370 1280 120 1356 120))
 (connect D12:0 D10:0
 (points 2 1750 108 1750 149))
 (connect D12:1 D10:1
-(points 6 1806 80 1830 80 1830 130 1580 130 1580 290 1595 290))
+(points 6 1806 80 1820 80 1820 90 1580 90 1580 290 1595 290))
 (connect D3:0 D11:0
 (points 2 1160 318 1160 360))
 (connect D19:0 D12:0
-(points 6 1420 435 1420 460 1530 460 1530 30 1750 30 1750 51))
+(points 6 1420 435 1420 460 1540 460 1540 30 1750 30 1750 51))
 (connect D19:2 D12:1
-(points 4 1491 420 1540 420 1540 80 1693 80))
+(points 4 1485 420 1530 420 1530 80 1693 80))
 (connect D41:0 D13:0
 (points 2 -10 347 -10 385))
 (connect D15:1 D13:1
-(points 6 49 100 70 100 70 200 -110 200 -110 390 -85 390))
+(points 6 49 100 80 100 80 370 -90 370 -90 390 -85 390))
 (connect D14:2 D13:2
-(points 6 57 260 80 260 80 370 -100 370 -100 400 -85 400))
+(points 6 57 260 70 260 70 290 -110 290 -110 400 -85 400))
 (connect D41:1 D13:3
-(points 6 52 330 90 330 90 470 -100 470 -100 410 -85 410))
+(points 6 52 330 70 330 70 360 -100 360 -100 410 -85 410))
 (connect D36:1 D13:4
-(points 4 -252 100 -170 100 -170 420 -85 420))
+(points 4 -252 100 -160 100 -160 420 -85 420))
 (connect D1:1 D14:0
-(points 5 29 160 50 160 50 210 -10 210 -10 217))
+(points 5 29 160 50 160 50 200 -10 200 -10 217))
 (connect D40:0 D15:0
 (points 2 -10 70 -10 90))
 (connect D32:0 D16:0
-(points 10 400 499 400 510 410 510 410 420 460 420 460 300 480 300 480 10 1160
-10 1160 75))
+(points 6 400 499 400 520 1000 520 1000 60 1160 60 1160 75))
 (connect D32:2 D16:1
-(points 6 466 490 480 490 480 480 1000 480 1000 80 1082 80))
+(points 4 466 490 1020 490 1020 80 1082 80))
 (connect D35:1 D16:2
-(points 6 57 20 760 20 760 40 990 40 990 90 1082 90))
+(points 6 57 20 760 20 760 50 990 50 990 90 1082 90))
 (connect D13:2 D16:3
-(points 6 65 420 470 420 470 310 1010 310 1010 100 1082 100))
+(points 6 65 420 90 420 90 530 1030 530 1030 100 1082 100))
 (connect D36:1 D16:4
-(points 8 -252 100 -220 100 -220 -20 770 -20 770 50 1050 50 1050 110 1082 110))
+(points 8 -252 100 -220 100 -220 -20 800 -20 800 40 1010 40 1010 110 1082 110))
 (connect D9:0 D17:0
 (points 2 1420 135 1420 195))
 (connect D9:1 D17:1
-(points 6 1484 80 1510 80 1510 170 1320 170 1320 200 1334 200))
+(points 6 1484 80 1500 80 1500 160 1320 160 1320 200 1334 200))
 (connect D9:2 D17:2
-(points 6 1484 90 1500 90 1500 160 1310 160 1310 210 1334 210))
+(points 6 1484 90 1510 90 1510 170 1310 170 1310 210 1334 210))
 (connect D35:1 D17:3
-(points 14 57 20 760 20 760 100 800 100 800 270 810 270 810 300 970 300 970 340
-1230 340 1230 410 1300 410 1300 220 1334 220))
+(points 8 57 20 760 20 760 50 1250 50 1250 110 1270 110 1270 220 1334 220))
 (connect D36:1 D17:4
-(points 12 -252 100 -220 100 -220 -20 770 -20 770 50 1250 50 1250 90 1270 90
-1270 110 1280 110 1280 230 1334 230))
+(points 14 -252 100 -160 100 -160 420 -100 420 -100 470 110 470 110 420 490 420
+490 440 530 440 530 500 1300 500 1300 230 1334 230))
 (connect D17:0 D18:0
 (points 2 1420 245 1420 300))
 (connect D17:3 D18:1
-(points 6 1505 230 1520 230 1520 270 1320 270 1320 310 1339 310))
+(points 6 1505 230 1520 230 1520 270 1330 270 1330 310 1341 310))
 (connect D35:1 D18:2
-(points 14 57 20 760 20 760 100 800 100 800 270 810 270 810 300 970 300 970 340
-1230 340 1230 410 1300 410 1300 320 1339 320))
+(points 10 57 20 760 20 760 50 1250 50 1250 110 1270 110 1270 220 1310 220 1310
+320 1341 320))
 (connect D36:1 D18:3
-(points 14 -252 100 -220 100 -220 -20 770 -20 770 50 1250 50 1250 90 1270 90
-1270 110 1280 110 1280 230 1310 230 1310 330 1339 330))
+(points 14 -252 100 -160 100 -160 420 -100 420 -100 470 110 470 110 420 490 420
+490 440 530 440 530 500 1300 500 1300 330 1341 330))
 (connect D18:0 D19:0
 (points 2 1420 339 1420 385))
 (connect D18:2 D19:1
-(points 6 1501 330 1520 330 1520 360 1340 360 1340 390 1348 390))
+(points 6 1498 330 1520 330 1520 360 1340 360 1340 390 1354 390))
 (connect D30:1 D19:2
-(points 4 1197 440 1310 440 1310 400 1348 400))
+(points 4 1197 440 1220 440 1220 400 1354 400))
 (connect D35:1 D19:3
-(points 12 57 20 760 20 760 100 800 100 800 270 810 270 810 300 970 300 970 340
-1230 340 1230 410 1348 410))
+(points 10 57 20 760 20 760 50 1250 50 1250 110 1270 110 1270 220 1310 220 1310
+410 1354 410))
 (connect D36:1 D19:4
-(points 16 -252 100 -220 100 -220 -20 770 -20 770 50 1250 50 1250 90 1270 90
-1270 110 1280 110 1280 230 1310 230 1310 330 1320 330 1320 420 1348 420))
+(points 14 -252 100 -160 100 -160 420 -100 420 -100 470 110 470 110 420 490 420
+490 440 530 440 530 500 1300 500 1300 420 1354 420))
 (connect D2:0 D20:0
 (points 2 380 128 380 251))
 (connect D23:1 D20:1
@@ -1676,7 +1802,7 @@
 (connect D22:1 D20:2
 (points 4 246 300 270 300 270 280 309 280))
 (connect D21:1 D20:3
-(points 4 245 340 290 340 290 290 309 290))
+(points 4 245 340 280 340 280 290 309 290))
 (connect D22:0 D21:0
 (points 2 200 310 200 329))
 (connect D23:0 D22:0
@@ -1692,7 +1818,7 @@
 (connect D35:1 D24:3
 (points 4 57 20 760 20 760 100 830 100))
 (connect D36:1 D24:4
-(points 6 -252 100 -220 100 -220 -20 770 -20 770 110 830 110))
+(points 6 -252 100 -220 100 -220 -20 800 -20 800 110 830 110))
 (connect D24:0 D25:0
 (points 2 900 125 900 225))
 (connect D24:3 D25:1
@@ -1700,9 +1826,9 @@
 (connect D26:2 D25:2
 (points 4 761 370 790 370 790 240 830 240))
 (connect D35:1 D25:3
-(points 6 57 20 760 20 760 100 800 100 800 250 830 250))
+(points 8 57 20 760 20 760 100 790 100 790 120 800 120 800 250 830 250))
 (connect D36:1 D25:4
-(points 8 -252 100 -220 100 -220 -20 770 -20 770 110 810 110 810 260 830 260))
+(points 8 -252 100 -220 100 -220 -20 800 -20 800 110 810 110 810 260 830 260))
 (connect D31:0 D26:0
 (points 2 660 300 660 330))
 (connect D35:1 D26:1
@@ -1712,21 +1838,21 @@
 (connect D29:1 D26:3
 (points 6 713 210 730 210 730 250 520 250 520 360 558 360))
 (connect D28:2 D26:4
-(points 8 721 170 760 170 760 270 740 270 740 260 550 260 550 370 558 370))
+(points 6 721 170 730 170 730 190 510 190 510 370 558 370))
 (connect D31:1 D26:5
-(points 6 677 290 800 290 800 480 540 480 540 380 558 380))
+(points 6 677 290 690 290 690 270 500 270 500 380 558 380))
 (connect D31:1 D26:6
-(points 6 677 290 800 290 800 480 540 480 540 390 558 390))
+(points 8 677 290 690 290 690 270 500 270 500 380 530 380 530 390 558 390))
 (connect D31:1 D26:7
-(points 6 677 290 800 290 800 480 540 480 540 400 558 400))
+(points 8 677 290 690 290 690 270 500 270 500 380 530 380 530 400 558 400))
 (connect D31:1 D26:8
-(points 6 677 290 800 290 800 480 540 480 540 410 558 410))
+(points 8 677 290 690 290 690 270 500 270 500 380 530 380 530 410 558 410))
 (connect D31:1 D26:9
-(points 6 677 290 800 290 800 480 540 480 540 420 558 420))
+(points 8 677 290 690 290 690 270 500 270 500 380 530 380 530 420 558 420))
 (connect D31:1 D26:10
-(points 6 677 290 800 290 800 480 540 480 540 430 558 430))
+(points 8 677 290 690 290 690 270 500 270 500 380 530 380 530 430 558 430))
 (connect D36:1 D26:11
-(points 10 -252 100 -170 100 -170 420 -110 420 -110 480 120 480 120 430 490 430
+(points 10 -252 100 -160 100 -160 420 -100 420 -100 470 110 470 110 420 490 420
 490 440 558 440))
 (connect D20:0 D27:0
 (points 6 380 308 380 330 490 330 490 50 660 50 660 57))
@@ -1739,34 +1865,31 @@
 (connect D29:0 D31:0
 (points 2 660 220 660 280))
 (connect D34:0 D32:0
-(points 10 900 410 900 460 650 460 650 470 530 470 530 450 480 450 480 430 400
-430 400 440))
+(points 8 900 410 900 480 540 480 540 450 480 450 480 420 400 420 400 440))
 (connect D25:3 D32:1
-(points 10 969 260 990 260 990 470 810 470 810 490 520 490 520 410 310 410 310
-450 334 450))
+(points 6 969 260 990 260 990 530 310 530 310 450 334 450))
 (connect D35:1 D32:2
 (points 4 57 20 130 20 130 460 334 460))
 (connect D33:1 D32:3
-(points 8 947 350 960 350 960 320 510 320 510 340 300 340 300 470 334 470))
+(points 6 947 350 970 350 970 540 300 540 300 470 334 470))
 (connect D34:1 D32:4
-(points 12 930 400 950 400 950 430 820 430 820 280 730 280 730 270 500 270 500
-350 290 350 290 480 334 480))
+(points 6 930 400 950 400 950 530 320 530 320 480 334 480))
 (connect D36:1 D32:5
-(points 8 -252 100 -170 100 -170 420 -110 420 -110 480 280 480 280 490 334 490))
+(points 8 -252 100 -160 100 -160 420 -100 420 -100 470 120 470 120 490 334 490))
 (connect D25:0 D33:0
 (points 2 900 275 900 340))
 (connect D33:0 D34:0
 (points 2 900 360 900 390))
 (connect D37:0 D35:0
-(points 6 -280 299 -280 320 -160 320 -160 0 -10 0 -10 10))
+(points 6 -280 299 -280 320 -140 320 -140 0 -10 0 -10 10))
 (connect D6:0 D36:0
 (points 2 -280 70 -280 90))
 (connect D39:0 D37:0
 (points 2 -280 230 -280 260))
 (connect D38:1 D37:1
-(points 6 -202 160 -150 160 -150 330 -360 330 -360 270 -338 270))
+(points 6 -202 160 -180 160 -180 250 -350 250 -350 270 -338 270))
 (connect D39:1 D37:2
-(points 6 -213 220 -200 220 -200 190 -370 190 -370 280 -338 280))
+(points 6 -213 220 -190 220 -190 190 -370 190 -370 280 -338 280))
 (connect D36:1 D37:3
 (points 6 -252 100 -230 100 -230 130 -380 130 -380 290 -338 290))
 (connect D36:0 D38:0
@@ -1777,8 +1900,8 @@
 (points 2 -10 30 -10 50))
 (connect D14:0 D41:0
 (points 2 -10 265 -10 295)))
-(stackingOrder 4 7 23 22 21 0 20 29 28 27 3 8 24 25 16 32 10 17 11 6 36 38 39 35
-40 15 1 14 41 13 5 2 26 34 33 30 19 9 12 31 37 18))
+(stackingOrder 4 7 23 22 21 0 20 29 28 27 3 8 24 25 16 32 10 11 6 36 38 39 35 40
+15 1 14 41 13 5 2 26 34 33 30 9 12 31 37 17 18 19))
 (numberFormats
 (realFormat standard)
 (realSigDigits 4)

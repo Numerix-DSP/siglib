@@ -694,7 +694,7 @@ public class siglib_wrapJNI {
   public final static native void SDA_Add5(long jarg1, long jarg2, long jarg3, long jarg4, long jarg5, long jarg6, int jarg7);
   public final static native void SDA_WeightedSum(long jarg1, long jarg2, long jarg3, double jarg4, int jarg5);
   public final static native void SDA_Subtract2(long jarg1, long jarg2, long jarg3, int jarg4);
-  public final static native void SDA_Offset(long jarg1, double jarg2, long jarg3, int jarg4);
+  public final static native void SDA_Add(long jarg1, double jarg2, long jarg3, int jarg4);
   public final static native double SDA_PositiveOffset(long jarg1, long jarg2, int jarg3);
   public final static native double SDA_NegativeOffset(long jarg1, long jarg2, int jarg3);
   public final static native void SDA_Negate(long jarg1, long jarg2, int jarg3);

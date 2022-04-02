@@ -2755,9 +2755,9 @@ def SDA_Subtract2(arg1, arg2, arg3, arg4):
     return _siglib_wrap.SDA_Subtract2(arg1, arg2, arg3, arg4)
 SDA_Subtract2 = _siglib_wrap.SDA_Subtract2
 
-def SDA_Offset(arg1, arg2, arg3, arg4):
-    return _siglib_wrap.SDA_Offset(arg1, arg2, arg3, arg4)
-SDA_Offset = _siglib_wrap.SDA_Offset
+def SDA_Add(arg1, arg2, arg3, arg4):
+    return _siglib_wrap.SDA_Add(arg1, arg2, arg3, arg4)
+SDA_Add = _siglib_wrap.SDA_Add
 
 def SDA_PositiveOffset(arg1, arg2, arg3):
     return _siglib_wrap.SDA_PositiveOffset(arg1, arg2, arg3)

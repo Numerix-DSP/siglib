@@ -4047,7 +4047,7 @@ var
                            const _4: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
 var
-  SDA_Offset: procedure(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
+  SDA_Add: procedure(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
                         const _2: SLDATA_T;
                         var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                         const _4: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
@@ -7825,9 +7825,9 @@ begin
   {$IFDEF WIN32}
     Assert(@SDA_Subtract2 <> nil);
   {$ENDIF}
-    @SDA_Offset := GetProcAddress(DLLHandle,'SDA_Offset');
+    @SDA_Add := GetProcAddress(DLLHandle,'SDA_Add');
   {$IFDEF WIN32}
-    Assert(@SDA_Offset <> nil);
+    Assert(@SDA_Add <> nil);
   {$ENDIF}
     @SDA_PositiveOffset := GetProcAddress(DLLHandle,'SDA_PositiveOffset');
   {$IFDEF WIN32}

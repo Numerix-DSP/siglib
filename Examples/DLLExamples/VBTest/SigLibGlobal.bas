@@ -3354,7 +3354,7 @@ Declare Sub SDA_Subtract2 Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByVal iData As Long)
 
-Declare Sub SDA_Offset Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
+Declare Sub SDA_Add Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByVal fData As Double, _
         ByRef fpBuffer As Double, _
         ByVal iData As Long)

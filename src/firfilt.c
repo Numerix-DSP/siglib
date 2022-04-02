@@ -2604,7 +2604,7 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLineIQ (const SLData_t * SIGLIB_PTR_DECL pS
 * Parameters:
 *   const SLData_t * SIGLIB_PTR_DECL pSrcFIRCoeffs, - Input FIR coefficient pointer
 *   SLData_t * SIGLIB_PTR_DECL pDstFIRCoeffs,       - Output poly-phase coefficient pointer
-*   SLData_t ** SIGLIB_PTR_DECL pCoeffPtrs,         - Output filter coefficient pointers
+*   SLData_t * SIGLIB_PTR_DECL pCoeffPtrs,          - Output filter coefficient pointers
 *   SLArrayIndex_t * SIGLIB_PTR_DECL pPolyPhaseFilterLengths,      - Output filter lengths
 *   const SLArrayIndex_t NumberOfPhases             - Number of output filter phases
 *   const SLArrayIndex_t FilterLength               - Input filter length

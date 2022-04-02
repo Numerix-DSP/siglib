@@ -2218,8 +2218,8 @@ public class siglib_wrap implements siglib_wrapConstants {
     siglib_wrapJNI.SDA_Subtract2(SWIGTYPE_p_double.getCPtr(arg0), SWIGTYPE_p_double.getCPtr(arg1), SWIGTYPE_p_double.getCPtr(arg2), arg3);
   }
 
-  public static void SDA_Offset(SWIGTYPE_p_double arg0, double arg1, SWIGTYPE_p_double arg2, int arg3) {
-    siglib_wrapJNI.SDA_Offset(SWIGTYPE_p_double.getCPtr(arg0), arg1, SWIGTYPE_p_double.getCPtr(arg2), arg3);
+  public static void SDA_Add(SWIGTYPE_p_double arg0, double arg1, SWIGTYPE_p_double arg2, int arg3) {
+    siglib_wrapJNI.SDA_Add(SWIGTYPE_p_double.getCPtr(arg0), arg1, SWIGTYPE_p_double.getCPtr(arg2), arg3);
   }
 
   public static double SDA_PositiveOffset(SWIGTYPE_p_double arg0, SWIGTYPE_p_double arg1, int arg2) {

@@ -1332,13 +1332,14 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLineIQ (const SLData_t * SIGLIB_INPUT_PTR_D
     const SLArrayIndex_t,                                   // State array length
     const SLArrayIndex_t);                                  // Array length
 
+#ifndef _HP_VEE         // The following functionality is not supported by VEE
 void SIGLIB_FUNC_DECL SIF_FirPolyPhaseGenerate (const SLData_t * SIGLIB_INPUT_PTR_DECL, // Input FIR coefficient pointer
     SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Output poly-phase coefficient pointer
     SLData_t ** SIGLIB_OUTPUT_PTR_DECL,                     // Output filter coefficient pointers
     SLArrayIndex_t * SIGLIB_OUTPUT_PTR_DECL,                // Output filter lengths
     const SLArrayIndex_t,                                   // Number of output filter phases
     const SLArrayIndex_t);                                  // Input filter length
-
+#endif          // End of #ifndef _HP_VEE
 
 // Filtering functions - iirfilt.c
 
@@ -1800,6 +1801,7 @@ void SIGLIB_FUNC_DECL SDA_LinearMicrophoneArrayBeamPatternLinear (const SLFixDat
     const SLData_t,                                         // Calculation end angle (Degrees)
     const SLFixData_t);                                     // Number of angles to calculate
 
+#ifndef _HP_VEE         // The following functionality is not supported by VEE
 void SIGLIB_FUNC_DECL SDA_MicrophoneArrayCalculateDelays (const SLFixData_t, // Number of microphones
     SLMicrophone_s * SIGLIB_INOUT_PTR_DECL,                 // Microphone configuration
     const SLData_t);                                        // Angle to steer beam
@@ -1825,6 +1827,7 @@ void SIGLIB_FUNC_DECL SDA_MicrophoneArrayBeamPatternLinear (const SLFixData_t, /
     const SLData_t,                                         // Calculation end angle (Degrees)
     const SLFixData_t,                                      // Number of angles to calculate
     const SLData_t);                                        // Sample rate
+#endif          // End of #ifndef _HP_VEE
 
 SLData_t SIGLIB_FUNC_DECL SDS_TemperatureToSpeedOfSoundInAir (const SLData_t);  // Temperature
 
@@ -6197,6 +6200,7 @@ void SIGLIB_FUNC_DECL SMX_ExtractCategoricalColumn (const SLData_t * SIGLIB_INPU
 
 // Machine Learning functions - machinelearning.c
 
+#ifndef _HP_VEE         // The following functionality is not supported by VEE
 void SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryNetworkFit (const SLData_t * SIGLIB_INPUT_PTR_DECL,  // Pointer to training data
     const SLArrayIndex_t * SIGLIB_INPUT_PTR_DECL,           // Pointer to categorical data
     SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 1 weights
@@ -6306,6 +6310,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationTanHDerivative (const SLData_t);  // Sou
 void SIGLIB_FUNC_DECL SDA_ActivationTanHDerivative (const SLData_t * SIGLIB_INPUT_PTR_DECL,   // Pointer to source array
     SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination array
     const SLArrayIndex_t);                                  // Array length
+#endif          // End of #ifndef _HP_VEE
 
 
 // Deprecated functionality - these may be removed in a later version

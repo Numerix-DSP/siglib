@@ -1,7 +1,7 @@
 #line 1 "siglib.h"
 /**************************************************************************
 File Name               : siglib.h      | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.11         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 13/09/1992
 Options   :                             | Latest Update : 09/01/2022
@@ -1333,12 +1333,13 @@ void _stdcall SDA_TappedDelayLineIQ ( double * SIGLIB_INPUT_PTR_DECL,    // Poin
      long,                                   // State array length
      long);                                  // Array length
 
-void _stdcall SIF_FirPolyPhaseGenerate ( double * SIGLIB_INPUT_PTR_DECL, // Input FIR coefficient pointer
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Output poly-phase coefficient pointer
-    double ** SIGLIB_OUTPUT_PTR_DECL,                     // Output filter coefficient pointers
-    long * SIGLIB_OUTPUT_PTR_DECL,                // Output filter lengths
-     long,                                   // Number of output filter phases
-     long);                                  // Input filter length
+
+
+
+
+
+
+
 
 
 // Filtering functions - iirfilt.c
@@ -1801,31 +1802,33 @@ void _stdcall SDA_LinearMicrophoneArrayBeamPatternLinear ( long,  // Number of m
      double,                                         // Calculation end angle (Degrees)
      long);                                     // Number of angles to calculate
 
-void _stdcall SDA_MicrophoneArrayCalculateDelays ( long, // Number of microphones
-    SLMicrophone_s * SIGLIB_INOUT_PTR_DECL,                 // Microphone configuration
-     double);                                        // Angle to steer beam
 
-void _stdcall SDA_MicrophoneArrayBeamPattern ( long, // Number of microphones
-     SLMicrophone_s * SIGLIB_INPUT_PTR_DECL,           // Microphone configuration
-     double,                                         // Source signal frequency
-     double,                                         // Source signal radius from centre of microphone array
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to response angles array
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to response gain array
-     double,                                         // Calculation start angle (Degrees)
-     double,                                         // Calculation end angle (Degrees)
-     long,                                      // Number of angles to calculate
-     double);                                        // Sample rate
 
-void _stdcall SDA_MicrophoneArrayBeamPatternLinear ( long, // Number of microphones
-     SLMicrophone_s * SIGLIB_INPUT_PTR_DECL,           // Microphone configuration
-     double,                                         // Source signal frequency
-     double,                                         // Source signal radius from centre of microphone array
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to response angles array
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to response gain array
-     double,                                         // Calculation start angle (Degrees)
-     double,                                         // Calculation end angle (Degrees)
-     long,                                      // Number of angles to calculate
-     double);                                        // Sample rate
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 double _stdcall SDS_TemperatureToSpeedOfSoundInAir ( double);  // Temperature
 
@@ -2990,7 +2993,7 @@ long _stdcall SDS_CostasQamDemodulate ( double,    // Source data sample
      long);                                  // ELG output synchronization delay length
 
 
-#line 2975 "siglib.h"
+#line 2978 "siglib.h"
 long _stdcall SDS_CostasQamDemodulateDebug ( double,   // Source data sample
     double *,                                             // Pointer to real destination symbol point
     double *,                                             // Pointer to imaginary destination symbol point
@@ -3119,7 +3122,7 @@ long _stdcall SDA_CostasQamDemodulateDebug ( double * SIGLIB_INPUT_PTR_DECL,   /
     double *,                                             // Pointer to debug real filter output
     double *,                                             // Pointer to debug imaginary filter output
     double *);                                            // Pointer to debug ELG trigger output
-#line 3104 "siglib.h"
+#line 3107 "siglib.h"
 
 void _stdcall SIF_QpskModulate (double * SIGLIB_OUTPUT_PTR_DECL,      // Carrier table pointer
      double,                                         // Carrier phase increment per sample (radians / 2Ï€)
@@ -6198,115 +6201,117 @@ void _stdcall SMX_ExtractCategoricalColumn ( double * SIGLIB_INPUT_PTR_DECL, // 
 
 // Machine Learning functions - machinelearning.c
 
-void _stdcall SDA_TwoLayer2CategoryNetworkFit ( double * SIGLIB_INPUT_PTR_DECL,  // Pointer to training data
-     long * SIGLIB_INPUT_PTR_DECL,           // Pointer to categorical data
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 1 weights
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 2 weights
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 1 pre activation
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 1 post activation
-     int SLActivationType_t,                          // Layer 1 activation type
-     double,                                         // Layer 1 activation alpha
-     int SLActivationType_t,                          // Layer 2 activation type
-     double,                                         // Layer 2 activation alpha
-     double,                                         // Learning rate
-     long,                                   // Number of training sequences
-     long,                                   // Input array length
-     long);                                  // Layer 1 length
 
-long _stdcall SDA_TwoLayer2CategoryNetworkPredict ( double * SIGLIB_INPUT_PTR_DECL,    // Pointer to data to classify
-     double * SIGLIB_INPUT_PTR_DECL,                 // Pointer to layer 1 weights
-     double * SIGLIB_INPUT_PTR_DECL,                 // Pointer to layer 2 weights
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 1 post activation
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to output activation
-     int SLActivationType_t,                          // Layer 1 activation type
-     double,                                         // Layer 1 activation alpha
-     int SLActivationType_t,                          // Layer 2 activation type
-     double,                                         // Layer 2 activation alpha
-     double,                                         // Classification threshold
-     long,                                   // Input array length
-     long);                                  // Layer 1 length
 
-void _stdcall SDA_TwoLayerNCategoryNetworkFit ( double * SIGLIB_INPUT_PTR_DECL,  // Pointer to training data
-     long * SIGLIB_INPUT_PTR_DECL,           // Pointer to categorical data
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 1 weights
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 2 weights
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 1 pre activation
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 1 post activation
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 2 post activation
-     int SLActivationType_t,                          // Layer 1 activation type
-     double,                                         // Layer 1 activation alpha
-     int SLActivationType_t,                          // Layer 2 activation type
-     double,                                         // Layer 2 activation alpha
-     double,                                         // Learning rate
-     long,                                   // Number of training sequences
-     long,                                   // Input array length
-     long,                                   // Layer 1 length
-     long);                                  // Number of categories
 
-long _stdcall SDA_TwoLayerNCategoryNetworkPredict ( double * SIGLIB_INPUT_PTR_DECL,    // Pointer to data to classify
-     double * SIGLIB_INPUT_PTR_DECL,                 // Pointer to layer 1 weights
-     double * SIGLIB_INPUT_PTR_DECL,                 // Pointer to layer 2 weights
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 1 post activation
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 2 post activation
-     int SLActivationType_t,                          // Layer 1 activation type
-     double,                                         // Layer 1 activation alpha
-     int SLActivationType_t,                          // Layer 2 activation type
-     double,                                         // Layer 2 activation alpha
-     long,                                   // Input array length
-     long,                                   // Layer 1 length
-     long);                                  // Number of categories
 
-double _stdcall SDS_ActivationReLU ( double);  // Source sample
 
-void _stdcall SDA_ActivationReLU ( double * SIGLIB_INPUT_PTR_DECL,   // Pointer to source array
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination array
-     long);                                  // Array length
 
-double _stdcall SDS_ActivationReLUDerivative ( double);  // Source sample
 
-void _stdcall SDA_ActivationReLUDerivative ( double * SIGLIB_INPUT_PTR_DECL, // Pointer to source array
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination array
-     long);                                  // Array length
 
-double _stdcall SDS_ActivationLeakyReLU ( double,  // Source sample
-     double);                                        // Activation function alpha value
 
-void _stdcall SDA_ActivationLeakyReLU ( double * SIGLIB_INPUT_PTR_DECL,  // Pointer to source array
-     double,                                         // Activation function alpha value
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination array
-     long);                                  // Array length
 
-double _stdcall SDS_ActivationLeakyReLUDerivative ( double,  // Source sample
-     double);                                        // Activation function alpha value
 
-void _stdcall SDA_ActivationLeakyReLUDerivative ( double * SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
-     double,                                         // Activation function alpha value
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination array
-     long);                                  // Array length
 
-double _stdcall SDS_ActivationLogistic ( double);  // Source sample
 
-void _stdcall SDA_ActivationLogistic ( double * SIGLIB_INPUT_PTR_DECL,   // Pointer to source array
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination array
-     long);                                  // Array length
 
-double _stdcall SDS_ActivationLogisticDerivative ( double);  // Source sample
 
-void _stdcall SDA_ActivationLogisticDerivative ( double * SIGLIB_INPUT_PTR_DECL, // Pointer to source array
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination array
-     long);                                  // Array length
 
-double _stdcall SDS_ActivationTanH ( double);  // Source sample
 
-void _stdcall SDA_ActivationTanH ( double * SIGLIB_INPUT_PTR_DECL,   // Pointer to source array
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination array
-     long);                                  // Array length
 
-double _stdcall SDS_ActivationTanHDerivative ( double);  // Source sample
 
-void _stdcall SDA_ActivationTanHDerivative ( double * SIGLIB_INPUT_PTR_DECL,   // Pointer to source array
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination array
-     long);                                  // Array length
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // Deprecated functionality - these may be removed in a later version
@@ -6331,5 +6336,5 @@ void _stdcall SDA_ActivationTanHDerivative ( double * SIGLIB_INPUT_PTR_DECL,   /
 
                                     // End of SigLib DSP function section
 
-#line 6316 "siglib.h"
+#line 6321 "siglib.h"
 

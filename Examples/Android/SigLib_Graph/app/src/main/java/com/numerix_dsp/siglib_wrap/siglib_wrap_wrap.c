@@ -14218,7 +14218,7 @@ SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_SDA_1Offset(JNIEnv *je
   arg2 = (SLData_t)jarg2;
   arg3 = *(SLData_t **)&jarg3;
   arg4 = (SLArrayIndex_t)jarg4;
-  SDA_Offset((double const *)arg1,arg2,arg3,arg4);
+  SDA_Add((double const *)arg1,arg2,arg3,arg4);
 }
 
 
