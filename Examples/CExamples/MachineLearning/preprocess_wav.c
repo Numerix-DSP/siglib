@@ -29,12 +29,12 @@
 #endif
 
 #ifndef REAL_ONLY_FFT_OUTPUT
-    #define REAL_ONLY_FFT_OUTPUT            0               // Set to '1' to calculate real only FFT output, '0' for standard complex output
+    #define REAL_ONLY_FFT_OUTPUT            1               // Set to '1' to calculate real only FFT output, '0' for standard complex output
                                                             // This allows simulation of a real-only FFT output, that saves approximately 10% of MIPS
 #endif
 
 #ifndef LINEAR_FFT_MAGNITUDE
-    #define LINEAR_FFT_MAGNITUDE            0               // Set to '1' to calculate linear FFT magnitude, '0' for log magnitude
+    #define LINEAR_FFT_MAGNITUDE            1               // Set to '1' to calculate linear FFT magnitude, '0' for log magnitude (dB)
 #endif
 
 #if (QUANTIZE_TIME_DOMAIN_NUM_BITS)                         // Time domain quantization
@@ -74,6 +74,7 @@ static char             inputFilename[512];
 static char             inputBaseFilename[256];
 static char             trainingFilename[512];
 static char             validationFilename[512];
+static char             predictionFilename[512];
 
 static SLWavFileInfo_s  wavInfo;
 
@@ -87,7 +88,8 @@ SLData_t                dataAugmentationRandomGainMaximum = 12.;    // Default: 
 SLArrayIndex_t          windowZeroEdgeLength = 16;                  // Default: number of window function edge values to set to 0.
 SLArrayIndex_t          numLargestFrequencyMagnitudes = 8;          // Default: number of largest frequency domain results to keep, remainder set to 0.
 SLData_t                onePoleFilterAlpha = 0.9;                   // Default: one-pole filter alpha - set to 0. to disable feedback
-SLData_t                inputThresholdLevel = 100.;                // Default: output threshold level
+SLData_t                inputThresholdLevel = 100.;                 // Default: output threshold level
+SLArrayIndex_t          PredictionModeSwitch = 0;                   // Set to '1' for prediction mode, '0' for training/validation mode
 SLArrayIndex_t          debugFlag = 0;
 
 void parse_command_line (int argc, char *argv[]);
@@ -95,10 +97,11 @@ void show_help (void);
 
 int main (int argc, char *argv[])
 {
-    FILE            *pInputFile, *pTrainingFile, *pValidationFile;
+    FILE            *pInputFile, *pTrainingFile, *pValidationFile, *pPredictionFile;
     SLArrayIndex_t  numberOfFramesProcessed = 0;
     SLArrayIndex_t  trainingFileCount = 0;
     SLArrayIndex_t  validationFileCount = 0;
+    SLArrayIndex_t  predictionFileCount = 0;
     SLArrayIndex_t  trainingOrValidaionSwitch = 0;
     SLArrayIndex_t  copyIndexLength = 0;
     SLArrayIndex_t  overlapSrcArrayIndex;
@@ -107,6 +110,8 @@ int main (int argc, char *argv[])
     SLData_t        trainingMin = 10000.;
     SLData_t        validationMax = -10000.;
     SLData_t        validationMin = 10000.;
+    SLData_t        predictionMax = -10000.;
+    SLData_t        predictionMin = 10000.;
 
     SLData_t        absMaxLevel_WindowData = SIGLIB_ZERO;   // Variables for storing absolute maximum levels for debug
     SLData_t        absMaxLevel_FFTData = SIGLIB_ZERO;
@@ -142,10 +147,12 @@ int main (int argc, char *argv[])
         exit(0);
     }
 
-    if (-1 == (categoricalValue)) {
-        printf ("Usage error: categorical value\n");
-        show_help();
-        exit(0);
+    if (0 == PredictionModeSwitch) {                        // Check categorical value specified
+        if (-1 == (categoricalValue)) {
+            printf ("Usage error: categorical value\n");
+            show_help();
+            exit(0);
+        }
     }
 
     if ((dataAugmentationStride <= 0) || (dataAugmentationStride > FFT_LENGTH)) {   // Default: No data augmentation (no source frame overlap)
@@ -163,8 +170,18 @@ int main (int argc, char *argv[])
 
     printf ("\nPre-processing The Data ...\n");
     printf ("Source file                                            : %s\n", inputFilename);
-    printf ("Categorical Value                                      : %d\n", categoricalValue);
+    printf ("Categorical value                                      : %d\n", categoricalValue);
     printf ("FFT length                                             : %d\n", FFT_LENGTH);
+#if LINEAR_FFT_MAGNITUDE
+    printf ("Linear/Logarithmic frequency magnitude flag            : LINEAR\n");
+#else
+    printf ("Linear/Logarithmic frequency magnitude flag            : LOGARITHMIC (dB)\n");
+#endif
+#if (REAL_ONLY_FFT_OUTPUT)
+    printf ("Real/Complexy FFT output flag                          : REAL\n");
+#else
+    printf ("Real/Complexy FFT output flag                          : COMPLEX\n");
+#endif
     printf ("Neural network input stage nodes                       : %d\n", networkInputSampleLength);
     printf ("FFT start bin for Neural Network input                 : %d\n", networkFftStartBin);
     printf ("Data augmentation copy stride length                   : %d\n", dataAugmentationStride);
@@ -191,16 +208,6 @@ int main (int argc, char *argv[])
 #else
     printf ("D.C. removal in time domain                            : DISABLED\n");
 #endif
-#if (REAL_ONLY_FFT_OUTPUT)
-    printf ("Real only FFT output\n");
-#else
-    printf ("Standard complex FFT output\n");
-#endif
-#if (LINEAR_FFT_MAGNITUDE)
-    printf ("Linear FFT Magnitude\n");
-#else
-    printf ("Log (dB) FFT Magnitude\n");
-#endif
     printf ("\n");
 
 
@@ -224,34 +231,44 @@ int main (int argc, char *argv[])
 
     strcpy (trainingFilename, "TrainingDataSet.csv");
     strcpy (validationFilename, "ValidationDataSet.csv");
+    strcpy (predictionFilename, "PredictionDataSet.csv");
 
     // printf ("wp: trainingFilename = %s\n", trainingFilename);
     // printf ("wp: validationFilename = %s\n", validationFilename);
 
-                                                            // Category '0' should always be created first
-                                                            // then the training and validation files are opened
-                                                            // to write mode.
-                                                            // Subsequent categories are opened in append mode
-    if (categoricalValue == 0) {
-        if ((pTrainingFile = fopen(trainingFilename, "w")) == NULL) {   // Open spreadsheets in write mode
-            printf ("Error opening training spreadsheet: %s\n", trainingFilename);
-            exit(-1);
-        }
+    if (1 == PredictionModeSwitch) {
 
-        if ((pValidationFile = fopen(validationFilename, "w")) == NULL) {
-            printf ("Error opening validation spreadsheet: %s\n", validationFilename);
+        if ((pPredictionFile = fopen(predictionFilename, "w")) == NULL) {   // Open spreadsheets in write mode
+            printf ("Error opening prediction spreadsheet: %s\n", predictionFilename);
             exit(-1);
         }
     }
     else {
-        if ((pTrainingFile = fopen(trainingFilename, "a")) == NULL) {   // Open spreadsheets in append mode
-            printf ("Error opening training spreadsheet: %s\n", trainingFilename);
-            exit(-1);
-        }
+                                                                // Category '0' should always be created first
+                                                                // then the training and validation files are opened
+                                                                // to write mode.
+                                                                // Subsequent categories are opened in append mode
+        if (categoricalValue == 0) {
+            if ((pTrainingFile = fopen(trainingFilename, "w")) == NULL) {   // Open spreadsheets in write mode
+                printf ("Error opening training spreadsheet: %s\n", trainingFilename);
+                exit(-1);
+            }
 
-        if ((pValidationFile = fopen(validationFilename, "a")) == NULL) {
-            printf ("Error opening validation spreadsheet: %s\n", validationFilename);
-            exit(-1);
+            if ((pValidationFile = fopen(validationFilename, "w")) == NULL) {
+                printf ("Error opening validation spreadsheet: %s\n", validationFilename);
+                exit(-1);
+            }
+        }
+        else {
+            if ((pTrainingFile = fopen(trainingFilename, "a")) == NULL) {   // Open spreadsheets in append mode
+                printf ("Error opening training spreadsheet: %s\n", trainingFilename);
+                exit(-1);
+            }
+
+            if ((pValidationFile = fopen(validationFilename, "a")) == NULL) {
+                printf ("Error opening validation spreadsheet: %s\n", validationFilename);
+                exit(-1);
+            }
         }
     }
 
@@ -509,44 +526,63 @@ int main (int argc, char *argv[])
                     }
                 }
 
-                                                            // Store results in training or validation spreadsheet
-                if (trainingOrValidaionSwitch < TRAINING_TO_VALIDATION_RATIO) {
-                    for (int i = 0; i < networkInputSampleLength; i++) {    // Write to training spreadsheet
-                        fprintf (pTrainingFile, "%lf,", pRealDataShortened[i]);
+                if (1 == PredictionModeSwitch) {
+                    for (int i = 0; i < networkInputSampleLength-1; i++) {    // Write to prediction spreadsheet
+                        fprintf (pPredictionFile, "%.8le,", pRealDataShortened[i]);
                     }
-                    fprintf (pTrainingFile, "%d\n", categoricalValue);
+                    fprintf (pPredictionFile, "%.8le\n", pRealDataShortened[networkInputSampleLength-1]);
 
                     SLData_t max_min = SDA_Min (pRealDataShortened, networkInputSampleLength);
                     if (max_min < trainingMin) {
-                        trainingMin = max_min;
+                        predictionMin = max_min;
                     }
                     max_min = SDA_Max (pRealDataShortened, networkInputSampleLength);
                     if (max_min > trainingMax) {
-                        trainingMax = max_min;
+                        predictionMax = max_min;
                     }
 
-                    trainingOrValidaionSwitch++;
-
-                    trainingFileCount++;
+                    predictionFileCount++;
                 }
                 else {
-                    for (int i = 0; i < networkInputSampleLength; i++) {    // Write to validation spreadsheet
-                        fprintf (pValidationFile, "%lf,", pRealDataShortened[i]);
-                    }
-                    fprintf (pValidationFile, "%d\n", categoricalValue);
+                                                            // Store results in training or validation spreadsheet
+                    if (trainingOrValidaionSwitch < TRAINING_TO_VALIDATION_RATIO) {
+                        for (int i = 0; i < networkInputSampleLength; i++) {    // Write to training spreadsheet
+                            fprintf (pTrainingFile, "%.8le,", pRealDataShortened[i]);
+                        }
+                        fprintf (pTrainingFile, "%d\n", categoricalValue);
 
-                    SLData_t max_min = SDA_Min (pRealDataShortened, networkInputSampleLength);
-                    if (max_min < validationMin) {
-                        validationMin = max_min;
-                    }
-                    max_min = SDA_Max (pRealDataShortened, networkInputSampleLength);
-                    if (max_min > validationMax) {
-                        validationMax = max_min;
-                    }
+                        SLData_t max_min = SDA_Min (pRealDataShortened, networkInputSampleLength);
+                        if (max_min < trainingMin) {
+                            trainingMin = max_min;
+                        }
+                        max_min = SDA_Max (pRealDataShortened, networkInputSampleLength);
+                        if (max_min > trainingMax) {
+                            trainingMax = max_min;
+                        }
 
-                    trainingOrValidaionSwitch = 0;          // Reset switch
+                        trainingOrValidaionSwitch++;
 
-                    validationFileCount++;
+                        trainingFileCount++;
+                    }
+                    else {
+                        for (int i = 0; i < networkInputSampleLength; i++) {    // Write to validation spreadsheet
+                            fprintf (pValidationFile, "%.8le,", pRealDataShortened[i]);
+                        }
+                        fprintf (pValidationFile, "%d\n", categoricalValue);
+
+                        SLData_t max_min = SDA_Min (pRealDataShortened, networkInputSampleLength);
+                        if (max_min < validationMin) {
+                            validationMin = max_min;
+                        }
+                        max_min = SDA_Max (pRealDataShortened, networkInputSampleLength);
+                        if (max_min > validationMax) {
+                            validationMax = max_min;
+                        }
+
+                        trainingOrValidaionSwitch = 0;          // Reset switch
+
+                        validationFileCount++;
+                    }
                 }
             }
             numberOfFramesProcessed++;
@@ -567,17 +603,28 @@ int main (int argc, char *argv[])
     }
 
     printf ("Number of frames processed            : %d\n", numberOfFramesProcessed);
-    printf ("Total number of frames stored         : %d\n", trainingFileCount+validationFileCount);
-    printf ("Number of training frames stored      : %d\n", trainingFileCount);
-    printf ("    Training Minimum                  : %lf\n", trainingMin);
-    printf ("    Training Maximum                  : %lf\n", trainingMax);
-    printf ("Number of validation frames stored    : %d\n", validationFileCount);
-    printf ("    Validation Minimum                : %lf\n", validationMin);
-    printf ("    Validation Maximum                : %lf\n", validationMax);
+    printf ("Total number of frames stored         : %d\n", trainingFileCount+validationFileCount+predictionFileCount);
+    if (1 == PredictionModeSwitch) {
+        printf ("    Prediction minimum output level   : %lf\n", predictionMin);
+        printf ("    Prediction maximum output level   : %lf\n", predictionMax);
+    }
+    else {
+        printf ("Number of training frames stored      : %d\n", trainingFileCount);
+        printf ("    Training minimum output level     : %lf\n", trainingMin);
+        printf ("    Training maximum output level     : %lf\n", trainingMax);
+        printf ("Number of validation frames stored    : %d\n", validationFileCount);
+        printf ("    Validation minimum output level   : %lf\n", validationMin);
+        printf ("    Validation maximum output level   : %lf\n", validationMax);
+    }
 
-    fclose (pInputFile);                                    // Close the files
-    fclose (pTrainingFile);
-    fclose (pValidationFile);
+    if (1 == PredictionModeSwitch) {                    // Close the files
+        fclose (pPredictionFile);
+    }
+    else {
+        fclose (pInputFile);
+        fclose (pTrainingFile);
+        fclose (pValidationFile);
+    }
 
     free (pRealData);                                       // Free memory
     free (pImagData);
@@ -586,7 +633,7 @@ int main (int argc, char *argv[])
     free (pFFTOutputOnePoleState);
     free (pLargest);
 
-    return (trainingFileCount+validationFileCount);
+    return (trainingFileCount+validationFileCount+predictionFileCount);
 }
 
 
@@ -660,6 +707,11 @@ void parse_command_line (int argc, char *argv[])
                     printf ("Debug information = True\n");
                     break;
 
+                case 'P':
+                    PredictionModeSwitch = 1;
+                    printf ("Prediction/Classification mode = True\n");
+                    break;
+
                 case 'h':
                     show_help();
                     exit(0);
@@ -698,6 +750,7 @@ void show_help (void)
     printf ("\t-N num               Number of largest frequency domain magnitudes to store, remainder set to 0. (Optional)\n");
     printf ("\t-t threshold_level   Input threshold level. Frames with an absolute maximum level below the threshold will not be processed. (Optional)\n");
     printf ("\t-o alpha             One-pole filter feedback alpha. Set to 0. to disable feedback (Optional)\n");
+    printf ("\t-P                   Enable Prediction mode. Without this the app will work in Training/Validation mode\n");
     printf ("\t-d                   Display debug information\n");
     printf ("\t-h                   Help\n");
 

@@ -1,4 +1,4 @@
-// SigLib Neural Network Verification Program
+// SigLib Neural Network Classification Prediction Program
 // Copyright (c) 2022 Sigma Numerix Ltd.
 
 // Include files
@@ -14,14 +14,14 @@
 
 // Define constants
 #ifndef NETWORK_INPUT_SAMPLE_LENGTH
-    #define NETWORK_INPUT_SAMPLE_LENGTH     128
+    #define NETWORK_INPUT_SAMPLE_LENGTH     120
 #endif
 #ifndef NETWORK_HIDDEN_LAYER_NODES
-    #define NETWORK_HIDDEN_LAYER_NODES      5
+    #define NETWORK_HIDDEN_LAYER_NODES      20
 #endif
 
-#ifndef PREDICTION_THRESHOLD
-    #define PREDICTION_THRESHOLD            0.8
+#ifndef DEFAULT_PREDICTION_THRESHOLD
+    #define DEFAULT_PREDICTION_THRESHOLD    0.8
 #endif
 
 #ifndef INPUT_SCALING_FACTOR
@@ -32,15 +32,20 @@
 
 // Declare global variables and arrays
 static SLData_t         *pLayer1PostActivation, *pLayer2PostActivation;
-static SLArrayIndex_t   *pCategoricalValue;
 
 static char             filenameWeights[2400];
+static char             filenameWeightsParameter[2000];
+
+static SLArrayIndex_t   predictionThresholdLevel = DEFAULT_PREDICTION_THRESHOLD;
+static SLArrayIndex_t   predictionCountStore[NUM_CATEGORIES];
+static SLArrayIndex_t   correctCategoricalValue = -1;
+static SLArrayIndex_t   correctClassificationCount = 0;
 
 static SLData_t layer1Weights[NETWORK_HIDDEN_LAYER_NODES][NETWORK_INPUT_SAMPLE_LENGTH]; // Declare weights for two transition paths
 static SLData_t layer2Weights[NUM_CATEGORIES][NETWORK_HIDDEN_LAYER_NODES];
 
 #ifndef HIDDEN_LAYER_ACTIVATION_TYPE
-    #define HIDDEN_LAYER_ACTIVATION_TYPE            SIGLIB_ACTIVATION_TYPE_LOGISTIC // Activation type
+    #define HIDDEN_LAYER_ACTIVATION_TYPE            SIGLIB_ACTIVATION_TYPE_RELU     // Activation type
     #define HIDDEN_LAYER_ACTIVATION_ALPHA           SIGLIB_ZERO     // Alpha value not required in this mode
 #else
     #if (HIDDEN_LAYER_ACTIVATION_TYPE == 2)
@@ -84,9 +89,14 @@ int main (int argc, char *argv[])
         exit(-1);
     }
 
+    filenameWeightsParameter[0] = 0;
     parse_command_line (argc, argv);                        //  Parse command line options
+    if (filenameWeightsParameter[0] == 0) {
+        printf("Neural network weights filename not specified\n\n");
+        exit(0);
+    }
 
-    printf ("\nClassifying The Data ...\n");
+    printf ("\nPredicting the classification of The Data ...\n");
     printf ("    Number of input layer nodes  : %d\n", NETWORK_INPUT_SAMPLE_LENGTH);
     printf ("    Number of hidden layer nodes : %d\n", NETWORK_HIDDEN_LAYER_NODES);
     printf ("    Hidden Layer Activation Type : ");
@@ -108,60 +118,46 @@ int main (int argc, char *argv[])
     else if (OUTPUT_LAYER_ACTIVATION_TYPE == SIGLIB_ACTIVATION_TYPE_TANH)
         printf ("TanH\n\n");
 
+    for (SLArrayIndex_t i = 0; i < NUM_CATEGORIES; i++) {   // Clear prediction count store
+        predictionCountStore[i] = 0;
+    }
 
-    // Load classification data
+    // Load Prediction data
     SLArrayIndex_t nRows, nCols;
-    SLData_t *pClassificationData = NULL;                   // Pointer only - memory will be allocated in SUF_CsvReadMatrix()
-    SUF_CsvReadMatrix (&pClassificationData, "TrainingDataSet.csv", SIGLIB_FIRST_ROW_KEEP, &nRows, &nCols);
+    SLData_t *pPredictionData = NULL;                       // Pointer only - memory will be allocated in SUF_CsvReadMatrix()
+    SUF_CsvReadMatrix (&pPredictionData, "PredictionDataSet.csv", SIGLIB_FIRST_ROW_KEEP, &nRows, &nCols);
 
-    if ((nRows == 0) || (NULL == pClassificationData)) {
-        printf ("\n\nSUF_CsvReadMatrix (TrainingDataSet.csv) failure!.\n\n");
+    if ((nRows == 0) || (NULL == pPredictionData)) {
+        printf ("\n\nSUF_CsvReadMatrix (PredictionDataSet.csv) failure!.\n\n");
         exit(-1);
     }
 
-    if ((nCols-1) != NETWORK_INPUT_SAMPLE_LENGTH) {
-        printf ("Error - Classification sequences must be %d samples long\n", NETWORK_INPUT_SAMPLE_LENGTH);
+    if (nCols != NETWORK_INPUT_SAMPLE_LENGTH) {
+        printf ("Error - Classification prediction sequences must be %d samples long\n", NETWORK_INPUT_SAMPLE_LENGTH);
         printf ("        Provided sequence was %d samples long\n", nCols);
         exit(-1);
     }
 
     if (debugFlag == 1) {
-        printf ("nCols-1 = NETWORK_INPUT_SAMPLE_LENGTH = %d\n", NETWORK_INPUT_SAMPLE_LENGTH);
+        printf ("nCols = NETWORK_INPUT_SAMPLE_LENGTH = %d\n", NETWORK_INPUT_SAMPLE_LENGTH);
 
-        printf ("Number of classification sequences:   %d\n", nRows);
-        printf ("Classification Data\n");
-        SUF_PrintMatrix (pClassificationData, nRows, NETWORK_INPUT_SAMPLE_LENGTH);
+        printf ("Number of prediction sequences:   %d\n", nRows);
+        printf ("Prediction Data\n");
+        SUF_PrintMatrix (pPredictionData, nRows, NETWORK_INPUT_SAMPLE_LENGTH);
     }
 
-    pCategoricalValue = SUF_IndexArrayAllocate(nRows);      // Allocate the categorical value array
-    if (NULL == pCategoricalValue) {
-        printf ("\n\nMemory allocation failed (pCategoricalValue)\n\n");
-        exit(-1);
-    }
-
-    SMX_ExtractCategoricalColumn (pClassificationData,      // Pointer to source matrix
-                                  pCategoricalValue,        // Pointer to destination array
-                                  nRows,                    // Number of rows in matrix
-                                  nCols);                   // Number of columns in matrix
-    SMX_DeleteOldColumn (pClassificationData,               // Pointer to source matrix
-                         pClassificationData,               // Pointer to destination matrix
-                         nCols-1,                           // Column number to delete
-                         nRows,                             // Number of rows in matrix
-                         nCols);                            // Number of columns in matrix
-
-    nCols--;                                                // We have removed the categorical value column
 
                                                             // Scale all samples to avoid overflow in exponent function
-    SDA_Multiply (pClassificationData,                      // Pointer to source array
+    SDA_Multiply (pPredictionData,                          // Pointer to source array
                   INPUT_SCALING_FACTOR,                     // Scalar value
-                  pClassificationData,                      // Pointer to destination array
+                  pPredictionData,                          // Pointer to destination array
                   nRows*nCols);                             // Array length
 
 
 #if defined (_MSC_VER)                                      // Defined by Microsoft compilers
-    sprintf (filenameWeights, "weightCoefficientsFiles\\weightsMachine1_Machine2_Machine3_Machine4.dat");
+    sprintf (filenameWeights, "weightCoefficientsFiles\\%s", filenameWeightsParameter);
 #else
-    sprintf (filenameWeights, "weightCoefficientsFiles/weightsMachine1_Machine2_Machine3_Machine4.dat");
+    sprintf (filenameWeights, "weightCoefficientsFiles/%s", filenameWeightsParameter);
 #endif
 
     int numItems =
@@ -186,11 +182,10 @@ int main (int argc, char *argv[])
 
     SLArrayIndex_t totalFrameCount = SIGLIB_AI_ZERO;
     SLArrayIndex_t classifiedFrameCount = SIGLIB_AI_ZERO;
-    SLArrayIndex_t unclassifiedFrameCount = SIGLIB_AI_ZERO;
 
-    for (SLArrayIndex_t classificationSequenceNumber = 0; classificationSequenceNumber < nRows; classificationSequenceNumber++) {
+    for (SLArrayIndex_t predictionSequenceNumber = 0; predictionSequenceNumber < nRows; predictionSequenceNumber++) {
         SLNeuralNetworkPrediction_s prediction =
-            SDA_TwoLayerNCategoryNetworkPredict (pClassificationData+(classificationSequenceNumber*NETWORK_INPUT_SAMPLE_LENGTH),    // Pointer to data to classify
+            SDA_TwoLayerNCategoryNetworkPredict (pPredictionData+(predictionSequenceNumber*NETWORK_INPUT_SAMPLE_LENGTH),    // Pointer to data to predict
                                                  (SLData_t *)layer1Weights,                                                 // Pointer to layer #1 weights
                                                  (SLData_t *)layer2Weights,                                                 // Pointer to layer #2 weights
                                                  pLayer1PostActivation,                                                     // Pointer to post activation for hidden layer
@@ -205,24 +200,37 @@ int main (int argc, char *argv[])
 
         totalFrameCount++;
 
-        if (PREDICTION_THRESHOLD < prediction.probability) {
-            printf ("Classified  : Classification: %d, Probability: %lf\n", prediction.predictedCategory, prediction.probability);
+        if (predictionThresholdLevel < prediction.probability) {
+            // printf ("Classified  : Classification: %d, Probability: %lf\n", prediction.predictedCategory, prediction.probability);
             classifiedFrameCount++;
-        }
-        else {
-            printf ("Unclassified: Probability: %lf\n", prediction.probability);
-            unclassifiedFrameCount++;
+
+            predictionCountStore[prediction.predictedCategory] = predictionCountStore[prediction.predictedCategory] + 1;
+
+            if (prediction.predictedCategory == correctCategoricalValue) {
+                correctClassificationCount++;
+            }
         }
     }
 
-    printf ("\n\nTotal Frame Count        : %d\n", totalFrameCount);
-    printf ("Classified Frame Count   : %d, %d%%\n", classifiedFrameCount, classifiedFrameCount*100/totalFrameCount);
-    printf ("Unclassified Frame Count : %d, %d%%\n\n", unclassifiedFrameCount, unclassifiedFrameCount*100/totalFrameCount);
+    printf ("\n\nTotal Frame Count                : %d\n", totalFrameCount);
+    printf ("Classified Frame Count           : %d, %d%%\n", classifiedFrameCount, classifiedFrameCount*100/totalFrameCount);
+    printf ("Unclassified Frame Count         : %d, %d%%\n\n", totalFrameCount-classifiedFrameCount, (totalFrameCount-classifiedFrameCount)*100/totalFrameCount);
+
+    printf("Categorical Predictions:\n");
+    for (SLArrayIndex_t i = 0; i < NUM_CATEGORIES; i++) {
+        printf ("\tCategory: %d, Count: %d\n", i, predictionCountStore[i]);
+    }
+    printf("\n");
+
+    if (-1 != correctCategoricalValue) {
+        printf ("Correct classification count     : %d\n", correctClassificationCount);
+        printf ("Incorrect classification count   : %d\n", classifiedFrameCount-correctClassificationCount);
+        printf ("Accuracy                         : %.2lf %%\n", (SLData_t)correctClassificationCount * SIGLIB_ONE_HUNDRED / (SLData_t)totalFrameCount);
+    }
 
     SUF_MemoryFree (pLayer1PostActivation);                 // Free memory
     SUF_MemoryFree (pLayer2PostActivation);
-    SUF_MemoryFree (pClassificationData);
-    SUF_MemoryFree (pCategoricalValue);
+    SUF_MemoryFree (pPredictionData);
 
     exit(0);
 }
@@ -234,6 +242,21 @@ void parse_command_line (int argc, char *argv[])
     for (int argNum = 1; argNum < argc; argNum++) {
         if (*(argv[argNum]) == '-') {
             switch (*(argv[argNum]+1)) {                    // Get command letter
+                case 'w':
+                    strcpy (filenameWeightsParameter, argv[argNum+1]);
+                    argNum++;
+                    break;
+
+                case 'c':
+                    correctCategoricalValue = atoi(argv[argNum+1]);
+                    argNum++;
+                    break;
+
+                case 'T':
+                    predictionThresholdLevel = atof(argv[argNum+1]);
+                    argNum++;
+                    break;
+
                 case 'd':
                     debugFlag = 1;
                     printf ("Debug information = True\n");
@@ -264,7 +287,10 @@ void show_help (void)
 
 {
     printf ("Usage:\n");
-    printf ("network_classify_multi_category [params]\n");
+    printf ("network_predict_multi_category [params]\n");
+    printf ("\t-w filename          Neural Network weights file name (Required)\n");
+    printf ("\t-c category_number   Category number being searched for (Optional). If included then classifications with this number will be recorded as correct.\n");
+    printf ("\t-T threshold_level   Prediction threshold level. Levels below this will be ignored.\n");
     printf ("\t-d                   Display debug information\n");
     printf ("\t-h                   Help\n");
 }

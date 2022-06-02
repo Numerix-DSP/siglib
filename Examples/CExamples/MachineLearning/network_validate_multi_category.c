@@ -45,7 +45,7 @@ static SLData_t layer1Weights[NETWORK_HIDDEN_LAYER_NODES][NETWORK_INPUT_SAMPLE_L
 static SLData_t layer2Weights[NUM_CATEGORIES][NETWORK_HIDDEN_LAYER_NODES];
 
 #ifndef HIDDEN_LAYER_ACTIVATION_TYPE
-    #define HIDDEN_LAYER_ACTIVATION_TYPE            SIGLIB_ACTIVATION_TYPE_LOGISTIC // Activation type
+    #define HIDDEN_LAYER_ACTIVATION_TYPE            SIGLIB_ACTIVATION_TYPE_RELU     // Activation type
     #define HIDDEN_LAYER_ACTIVATION_ALPHA           SIGLIB_ZERO     // Alpha value not required in this mode
 #else
     #if (HIDDEN_LAYER_ACTIVATION_TYPE == 2)

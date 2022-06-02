@@ -9,7 +9,8 @@ compileFlag=0                       # Use -C option to compile source files
 preProcessDataFlag=0                # Use -p option to enable pre-processing
 windowZeroEdgeLength=16             # Number of samples at each end of window function set to zero
 fftLength=256                       # FFT lengh
-linearFrequencyMagnigudeFlag=1      # Calculate linear frequency magnigude rather than dB
+linearFrequencyMagnigudeFlag=1      # Set to '1' to calculate linear FFT magnitude, '0' for log magnitude (dB)
+realOnlyFFTOutput=1                 # Set to '1' to calculate real only FFT output, '0' for standard complex output
 networkInputSampleLength=120        # Number of neural network input layer nodes
 networkFftStartBin=2                # Set to non-zero value to ignore D.C. FFT bins
 dataAugmentationStride=32           # dataAugmentationStride=0 is equivalent to stride length == networkInputSampleLength then No overlap of frames = no data augmentation
@@ -44,7 +45,7 @@ InputFile_1="Machine2"
 InputFile_2="Machine3"
 InputFile_3="Machine4"
 
-while getopts 0:1:2:3:b:Cpdmsgl:w:F:t:n:x:a:e:r:H:q:N:C:o:h flag
+while getopts 0:1:2:3:b:Cpdmsgl:w:F:L:R:t:n:x:a:e:r:H:q:N:C:o:h flag
 do
     case "${flag}" in
         0) InputFile_0=${OPTARG};;
@@ -56,6 +57,8 @@ do
         x) dataAugmentationRandomGainMax=${OPTARG};;
         w) windowZeroEdgeLength=${OPTARG};;
         F) fftLength=${OPTARG};;
+        L) linearFrequencyMagnigudeFlag=${OPTARG};;
+        R) realOnlyFFTOutput=${OPTARG};;
         t) inputThresholdLevel=${OPTARG};;
         b) networkFftStartBin=${OPTARG};;
         C) compileFlag=1;;
@@ -91,7 +94,8 @@ echo "dataAugmentationRandomGainFlag : 0"
 fi
 echo "windowZeroEdgeLength           : $windowZeroEdgeLength"
 echo "fftLength                      : $fftLength"
-echo "Linear Frequency Magnitude Flag: $linearFrequencyMagnigudeFlag"
+echo "linearFrequencyMagnigudeFlag   : $linearFrequencyMagnigudeFlag"
+echo "realOnlyFFTOutput              : $realOnlyFFTOutput"
 echo "networkFftStartBin             : $networkFftStartBin"
 echo "networkInputSampleLength       : $networkInputSampleLength"
 echo "inputThresholdLevel            : $inputThresholdLevel"
@@ -120,6 +124,8 @@ if [ $helpFlag == 1 ]; then
     echo "    -a stride:            Data augmentation stride (Default=$dataAugmentationStride)"
     echo "    -w Num:               Set the num values at the edge of the window frame to zero (Default=$windowZeroEdgeLength)"
     echo "    -F length:            FFT length (Default=$fftLength)"
+    echo "    -L {0/1}:             Linear FFT magnitude flag - '1' for Linear, '0' for Logarithmic"
+    echo "    -R {0/1}:             Real FFT output flag - '1' for Real, '0' for Complex"
     echo "    -b bin_number:        FFT start bin for Neural Network input (Default=$networkFftStartBin)"
     echo "    -l number_of_nodes:   Neural Network input sample length (Default=$networkInputSampleLength)"
     echo "    -g:                   Data augmentation random gain enable (Default=disabled)"
@@ -153,7 +159,7 @@ if [ "$preProcessDataFlag" == 1 ]; then                     # If pre-processing 
             rm -f preprocess_wav
         fi
                                                             # Build the .wav pre-processing file
-        gcc preprocess_wav.c -O3 -Wall -DREAL_ONLY_FFT_OUTPUT=1 -DLINEAR_FFT_MAGNITUDE=$linearFrequencyMagnigudeFlag -DFFT_LENGTH=$fftLength -DQUANTIZE_TIME_DOMAIN_NUM_BITS=$quantizationTimeDomainBits -DQUANTIZE_FREQUENCY_DOMAIN_NUM_BITS=$quantizationFrequencyDomainBits -Wno-main -Wno-unused-value -std=gnu17 -l siglib -l gnuplot_c -o preprocess_wav -lm
+        gcc preprocess_wav.c -O3 -Wall -DREAL_ONLY_FFT_OUTPUT=$realOnlyFFTOutput -DLINEAR_FFT_MAGNITUDE=$linearFrequencyMagnigudeFlag -DFFT_LENGTH=$fftLength -DQUANTIZE_TIME_DOMAIN_NUM_BITS=$quantizationTimeDomainBits -DQUANTIZE_FREQUENCY_DOMAIN_NUM_BITS=$quantizationFrequencyDomainBits -Wno-main -Wno-unused-value -std=gnu17 -l siglib -l gnuplot_c -o preprocess_wav -lm
     fi
 
     if [ -f preprocess_wav ]; then

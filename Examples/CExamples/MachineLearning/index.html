@@ -70,6 +70,11 @@ For graphical result display they use Gnuplot/C, which is included in the SigLib
         <td>Validate the multi-category neural network</td>
       </tr>
       <tr>
+        <td><a href="network_validate_multi_category.c">network_predict_multi_category.c</a>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>Predict the classification of the supplied data using the multi-category neural network</td>
+      </tr>
+      <tr>
         <td><a href="network_train_single_category.c">network_train_single_category.c</a>&nbsp;</td>
         <td>&nbsp;</td>
         <td>Train the single-category neural network</td>
@@ -89,6 +94,11 @@ For graphical result display they use Gnuplot/C, which is included in the SigLib
         <td><a href="gbr_multi_category.sh">gbr_multi_category.sh</a>&nbsp;</td>
         <td>&nbsp;</td>
         <td>Shell script to build and run multi category training and validation, with GCC</td>
+      </tr>
+      <tr>
+        <td><a href="gbr_multi_category.sh">gbr_multi_category_predict.sh</a>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>Shell script to build and run multi category training and validation, with GCC, then run prediction on the input files</td>
       </tr>
       <tr>
         <td><a href="gbr_single_category.sh">gbr_single_category.sh</a>&nbsp;</td>
@@ -136,17 +146,21 @@ folder) and perform 256 point FFT pre-processing. This program processes
 the data and writes it to the training and validation .csv files in the
 &quot;PreProcessed&quot; folder.</li>
 <li>The pre-processed training and validation files can now be combined to
-perform the required files for training and validation (Tdata.csv and
-Vdata.csv). This is performed in the top level script &quot;process&quot; (append
+perform the required files for training, validation or prediction
+(TrainingDataSet.csv, ValidationDataSet.csv or PredictionDataSet.csv).
+This is performed in the top level script &quot;process&quot; (append
 the appropriate extension, .bat/.sh for Windows/Linux).</li>
 <li>network_train: Train the network with the waveforms supplied in
-Tdata.csv and generates the weight coefficient files and stores them in
+TrainingDataSet.csv and generates the weight coefficient files and stores them in
 the &quot;WeightCoefficientsFiles&quot; folder. The weight coefficient files are
 stored in compressed binary format and C/C++ includable header file
 format.</li>
-<li>network_validate: This program uses Vdata.csv to classify the
-waveforms and, using the validation parameter in the spreadsheet it is
+<li>network_validate: This program uses ValidationDataSet.csv to classify the
+waveforms and, using the class parameter in the spreadsheet it is
 possible to validate the success rate of the classification.</li>
+<li>network_predict: This program uses PredictionDataSet.csv to classify the
+waveforms and, using the optional command line class parameter to validate
+the success rate of the prediction.</li>
 </ul>
 
 <h2>Validating The Results</h2>
