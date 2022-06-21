@@ -48,7 +48,7 @@ int main(void)
 
     h2DPlot =                                               // Initialize plot
         gpc_init_2d ("FIR Filter",                          // Plot title
-                     "Impulse Response",                    // X-Axis label
+                     "Time / Frequency",                    // X-Axis label
                      "Magnitude",                           // Y-Axis label
                      GPC_AUTO_SCALE,                        // Scaling mode
                      GPC_SIGNED,                            // Sign mode

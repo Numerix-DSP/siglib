@@ -7,8 +7,8 @@
 
 // Include files
 #include <stdio.h>
-#include <siglib.h>                                 // SigLib DSP library
-#include <gnuplot_c.h>                              // Gnuplot/C
+#include <siglib.h>                                         // SigLib DSP library
+#include <gnuplot_c.h>                                      // Gnuplot/C
 
 // Define constants
 #define SAMPLE_LENGTH           512
@@ -26,9 +26,9 @@
 #define C_END_FREQ              SIGLIB_ZERO
 #define C_RATE                  -0.005
 
-#define IIR_FILTER_STAGES       3       // Number of 2nd-order filter stages
+#define IIR_FILTER_STAGES       3                           // Number of 2nd-order filter stages
 
-#define SINE_TABLE_SIZE         1024    // Look up table for fast sine calculation
+#define SINE_TABLE_SIZE         1024                        // Look up table for fast sine calculation
 
 // Declare global variables and arrays
 
@@ -101,15 +101,15 @@ static SLData_t     *pRealData, *pImagData, *pWindowCoeffs, *pFFTCoeffs, *pTempD
 
 static SLArrayIndex_t   FIRFilterIndex;
 
-static SLData_t     *pLookUpTable;                  // For fast cosine lookup
+static SLData_t     *pLookUpTable;                          // For fast cosine lookup
 static SLData_t     CarrierPhase;
 
 
 int main(void)
 {
-    h_GPC_Plot  *h2DPlot;                           // Plot object
+    h_GPC_Plot  *h2DPlot;                                   // Plot object
 
-                                                    // Allocate memory
+                                                            // Allocate memory
     pPNSequence = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
     pChirpData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
     pDelay = SUF_VectorArrayAllocate (FIR_FILTER_GROUP_DELAY);
@@ -130,263 +130,263 @@ int main(void)
 
     PnsCurrentValue = SIGLIB_ZERO;
 
-    h2DPlot =                                       // Initialize plot
-        gpc_init_2d ("Microscan Spectrum Analyzer",   // Plot title
-                     "Time",                        // X-Axis label
-                     "Magnitude",                   // Y-Axis label
-                     GPC_AUTO_SCALE,                // Scaling mode
-                     GPC_SIGNED,                    // Sign mode
-                     GPC_KEY_ENABLE);               // Legend / key mode
+    h2DPlot =                                               // Initialize plot
+        gpc_init_2d ("Microscan Spectrum Analyzer",         // Plot title
+                     "Time",                                // X-Axis label
+                     "Magnitude",                           // Y-Axis label
+                     GPC_AUTO_SCALE,                        // Scaling mode
+                     GPC_SIGNED,                            // Sign mode
+                     GPC_KEY_ENABLE);                       // Legend / key mode
     if (NULL == h2DPlot) {
         printf ("\nPlot creation failure.\n");
         exit(-1);
     }
 
 
-    SIF_Iir (pIIRFilterState,                       // Pointer to filter state array
-             IIR_FILTER_STAGES);                    // Number of second order stages
-    SIF_Fir (pFIRFilterState,                       // Pointer to filter state array
-             &FIRFilterIndex,                       // Pointer to filter index register
-             FIR_FILTER_LENGTH);                    // Filter length
-                                                    // Initialize FM modulator
-    SIF_FrequencyModulate (&CarrierPhase,           // Pointer to carrier phase
-                           pLookUpTable,            // Pointer to LUT array
-                           SINE_TABLE_SIZE);        // Table length
+    SIF_Iir (pIIRFilterState,                               // Pointer to filter state array
+             IIR_FILTER_STAGES);                            // Number of second order stages
+    SIF_Fir (pFIRFilterState,                               // Pointer to filter state array
+             &FIRFilterIndex,                               // Pointer to filter index register
+             FIR_FILTER_LENGTH);                            // Filter length
+                                                            // Initialize FM modulator
+    SIF_FrequencyModulate (&CarrierPhase,                   // Pointer to carrier phase
+                           pLookUpTable,                    // Pointer to LUT array
+                           SINE_TABLE_SIZE);                // Table length
 
-                                                    // Initialise FFT
-    SIF_Fft (pFFTCoeffs,                            // Pointer to FFT coefficients
-             SIGLIB_BIT_REV_STANDARD,               // Bit reverse mode flag / Pointer to bit reverse address table
-             FFT_LENGTH);                           // FFT length
-                                                    // Generate Hanning window table
-    SIF_Window (pWindowCoeffs,                      // Pointer to window oefficient
-                SIGLIB_HANNING,                     // Window type
-                SIGLIB_ZERO,                        // Window coefficient
-                FFT_LENGTH);                        // Window length
+                                                            // Initialise FFT
+    SIF_Fft (pFFTCoeffs,                                    // Pointer to FFT coefficients
+             SIGLIB_BIT_REV_STANDARD,                       // Bit reverse mode flag / Pointer to bit reverse address table
+             FFT_LENGTH);                                   // FFT length
+                                                            // Generate Hanning window table
+    SIF_Window (pWindowCoeffs,                              // Pointer to window oefficient
+                SIGLIB_HANNING,                             // Window type
+                SIGLIB_ZERO,                                // Window coefficient
+                FFT_LENGTH);                                // Window length
 
 
-    SDA_SignalGenerate (pChirpData,                 // Pointer to destination array
-                        SIGLIB_CHIRP_LIN,           // Signal type - Chirp with linear frequency ramp
-                        SIGLIB_ONE,                 // Signal peak level
-                        SIGLIB_FILL,                // Fill (overwrite) or add to existing array contents
-                        C_START_FREQ,               // Signal lower frequency
-                        SIGLIB_ZERO,                // D.C. Offset
-                        C_RATE,                     // Frequency change per sample period
-                        C_END_FREQ,                 // Signal upper frequency
-                        &ChirpPhase,                // Chirp phase - used for next iteration
-                        &ChirpValue,                // Chirp current value - used for next iteration
-                        SAMPLE_LENGTH);             // Output dataset length
+    SDA_SignalGenerate (pChirpData,                         // Pointer to destination array
+                        SIGLIB_CHIRP_LIN,                   // Signal type - Chirp with linear frequency ramp
+                        SIGLIB_ONE,                         // Signal peak level
+                        SIGLIB_FILL,                        // Fill (overwrite) or add to existing array contents
+                        C_START_FREQ,                       // Signal lower frequency
+                        SIGLIB_ZERO,                        // D.C. Offset
+                        C_RATE,                             // Frequency change per sample period
+                        C_END_FREQ,                         // Signal upper frequency
+                        &ChirpPhase,                        // Chirp phase - used for next iteration
+                        &ChirpValue,                        // Chirp current value - used for next iteration
+                        SAMPLE_LENGTH);                     // Output dataset length
 
-    SIF_FixedDelay (pDelay,                         // Pointer to delay state array
-                    SIGLIB_NULL_ARRAY_INDEX_PTR,    // Pointer to delay state index
-                    FIR_FILTER_GROUP_DELAY);        // Delay length
-    SDA_ShortFixedDelay (pChirpData,                // Pointer to source array
-                         pDisplayArray,             // Pointer to destination array
-                         pDelay,                    // Pointer to temporary delayed array
-                         pTempDelay,                // Temporary destination array pointer
-                         FIR_FILTER_GROUP_DELAY,    // Sample delay count
-                         SAMPLE_LENGTH);            // Dataset length
-    SDA_Polynomial (pDisplayArray,                  // Pointer to source array
-                    pDisplayArray,                  // Pointer to destination array
-                    0.75,                           // x^0 coefficient
-                    SIGLIB_QUARTER,                 // x^1 coefficient
-                    0,                              // x^2 coefficient
-                    0,                              // x^3 coefficient
-                    0,                              // x^4 coefficient
-                    0,                              // x^5 coefficient
-                    SAMPLE_LENGTH);                 // Dataset length
+    SIF_FixedDelay (pDelay,                                 // Pointer to delay state array
+                    SIGLIB_NULL_ARRAY_INDEX_PTR,            // Pointer to delay state index
+                    FIR_FILTER_GROUP_DELAY);                // Delay length
+    SDA_ShortFixedDelay (pChirpData,                        // Pointer to source array
+                         pDisplayArray,                     // Pointer to destination array
+                         pDelay,                            // Pointer to temporary delayed array
+                         pTempDelay,                        // Temporary destination array pointer
+                         FIR_FILTER_GROUP_DELAY,            // Sample delay count
+                         SAMPLE_LENGTH);                    // Dataset length
+    SDA_Polynomial (pDisplayArray,                          // Pointer to source array
+                    pDisplayArray,                          // Pointer to destination array
+                    0.75,                                   // x^0 coefficient
+                    SIGLIB_QUARTER,                         // x^1 coefficient
+                    0,                                      // x^2 coefficient
+                    0,                                      // x^3 coefficient
+                    0,                                      // x^4 coefficient
+                    0,                                      // x^5 coefficient
+                    SAMPLE_LENGTH);                         // Dataset length
 
-    gpc_plot_2d (h2DPlot,                           // Graph handle
-                 pDisplayArray,                     // Dataset
-                 SAMPLE_LENGTH,                     // Dataset length
-                 "Chirp signal",                    // Dataset title
-                 SIGLIB_ZERO,                       // Minimum X value
-                 (double)(SAMPLE_LENGTH - 1),       // Maximum X value
-                 "lines",                           // Graph type
-                 "blue",                            // Colour
-                 GPC_NEW);                          // New graph
+    gpc_plot_2d (h2DPlot,                                   // Graph handle
+                 pDisplayArray,                             // Dataset
+                 SAMPLE_LENGTH,                             // Dataset length
+                 "Chirp signal",                            // Dataset title
+                 SIGLIB_ZERO,                               // Minimum X value
+                 (double)(SAMPLE_LENGTH - 1),               // Maximum X value
+                 "lines",                                   // Graph type
+                 "blue",                                    // Colour
+                 GPC_NEW);                                  // New graph
     printf ("\nChirp signal");
 
-    SDA_SignalGenerate (pPNSequence,                // Pointer to destination array
-                        SIGLIB_IMPULSE_STREAM,      // Signal type - Impulse stream
-                        SIGLIB_HALF,                // Signal peak level
-                        SIGLIB_FILL,                // Fill (overwrite) or add to existing array contents
-                        BAUD_RATE,                  // Signal frequency
-                        SIGLIB_ZERO,                // D.C. Offset
-                        SIGLIB_ZERO,                // Unused
-                        SIGLIB_ZERO,                // Signal end value - Unused
-                        &ImpulsePhase,              // Signal phase - maintained across array boundaries
-                        SIGLIB_NULL_DATA_PTR,       // Unused
-                        SAMPLE_LENGTH);             // Output dataset length
+    SDA_SignalGenerate (pPNSequence,                        // Pointer to destination array
+                        SIGLIB_IMPULSE_STREAM,              // Signal type - Impulse stream
+                        SIGLIB_HALF,                        // Signal peak level
+                        SIGLIB_FILL,                        // Fill (overwrite) or add to existing array contents
+                        BAUD_RATE,                          // Signal frequency
+                        SIGLIB_ZERO,                        // D.C. Offset
+                        SIGLIB_ZERO,                        // Unused
+                        SIGLIB_ZERO,                        // Signal end value - Unused
+                        &ImpulsePhase,                      // Signal phase - maintained across array boundaries
+                        SIGLIB_NULL_DATA_PTR,               // Unused
+                        SAMPLE_LENGTH);                     // Output dataset length
 
-    SIF_FixedDelay (pDelay,                         // Pointer to delay state array
-                    SIGLIB_NULL_ARRAY_INDEX_PTR,    // Pointer to delay state index
-                    FIR_FILTER_GROUP_DELAY);        // Delay length
-    SDA_ShortFixedDelay (pPNSequence,               // Pointer to source array
-                         pDisplayArray,             // Pointer to destination array
-                         pDelay,                    // Pointer to temporary delayed array
-                         pTempDelay,                // Temporary destination array pointer
-                         FIR_FILTER_GROUP_DELAY,    // Sample delay count
-                         SAMPLE_LENGTH);            // Dataset length
-    gpc_plot_2d (h2DPlot,                           // Graph handle
-                 pDisplayArray,                     // Dataset
-                 SAMPLE_LENGTH,                     // Dataset length
-                 "Time reference signal",           // Dataset title
-                 SIGLIB_ZERO,                       // Minimum X value
-                 (double)(SAMPLE_LENGTH - 1),       // Maximum X value
-                 "lines",                           // Graph type
-                 "red",                             // Colour
-                 GPC_ADD);                          // New graph
+    SIF_FixedDelay (pDelay,                                 // Pointer to delay state array
+                    SIGLIB_NULL_ARRAY_INDEX_PTR,            // Pointer to delay state index
+                    FIR_FILTER_GROUP_DELAY);                // Delay length
+    SDA_ShortFixedDelay (pPNSequence,                       // Pointer to source array
+                         pDisplayArray,                     // Pointer to destination array
+                         pDelay,                            // Pointer to temporary delayed array
+                         pTempDelay,                        // Temporary destination array pointer
+                         FIR_FILTER_GROUP_DELAY,            // Sample delay count
+                         SAMPLE_LENGTH);                    // Dataset length
+    gpc_plot_2d (h2DPlot,                                   // Graph handle
+                 pDisplayArray,                             // Dataset
+                 SAMPLE_LENGTH,                             // Dataset length
+                 "Time reference signal",                   // Dataset title
+                 SIGLIB_ZERO,                               // Minimum X value
+                 (double)(SAMPLE_LENGTH - 1),               // Maximum X value
+                 "lines",                                   // Graph type
+                 "red",                                     // Colour
+                 GPC_ADD);                                  // New graph
     printf ("\nTime reference signal");
 
-                                                    // Generate the PN source
-    SDA_SignalGenerate (pPNSequence,                // Pointer to destination array
-                        SIGLIB_PN_SEQUENCE,         // Signal type - Pseudo random number sequence
-                        SIGLIB_TWO,                 // Signal magnitude range
-                        SIGLIB_FILL,                // Fill (overwrite) or add to existing array contents
-                        BAUD_RATE,                  // Signal frequency
-                        SIGLIB_MINUS_ONE,           // Signal minimum level
-                        SIGLIB_FOUR,                // Number of discrete levels in PN sequence
-                        SIGLIB_ZERO,                // Signal end value - Unused
-                        &PnsPhase,                  // PRN phase - used for next iteration
-                        &PnsCurrentValue,           // PRN current value - used for next iteration
-                        SAMPLE_LENGTH);             // Output dataset length
+                                                            // Generate the PN source
+    SDA_SignalGenerate (pPNSequence,                        // Pointer to destination array
+                        SIGLIB_PN_SEQUENCE,                 // Signal type - Pseudo random number sequence
+                        SIGLIB_TWO,                         // Signal magnitude range
+                        SIGLIB_FILL,                        // Fill (overwrite) or add to existing array contents
+                        BAUD_RATE,                          // Signal frequency
+                        SIGLIB_MINUS_ONE,                   // Signal minimum level
+                        SIGLIB_FOUR,                        // Number of discrete levels in PN sequence
+                        SIGLIB_ZERO,                        // Signal end value - Unused
+                        &PnsPhase,                          // PRN phase - used for next iteration
+                        &PnsCurrentValue,                   // PRN current value - used for next iteration
+                        SAMPLE_LENGTH);                     // Output dataset length
 
-    SIF_FixedDelay (pDelay,                         // Pointer to delay state array
-                    SIGLIB_NULL_ARRAY_INDEX_PTR,    // Pointer to delay state index
-                    FIR_FILTER_GROUP_DELAY);        // Delay length
-    SDA_ShortFixedDelay (pPNSequence,               // Pointer to source array
-                         pDisplayArray,             // Pointer to destination array
-                         pDelay,                    // Pointer to temporary delayed array
-                         pTempDelay,                // Temporary destination array pointer
-                         FIR_FILTER_GROUP_DELAY,    // Sample delay count
-                         SAMPLE_LENGTH);            // Dataset length
-    gpc_plot_2d (h2DPlot,                           // Graph handle
-                 pDisplayArray,                     // Dataset
-                 SAMPLE_LENGTH,                     // Dataset length
-                 "PN sequence",                     // Dataset title
-                 SIGLIB_ZERO,                       // Minimum X value
-                 (double)(SAMPLE_LENGTH - 1),       // Maximum X value
-                 "lines",                           // Graph type
-                 "green",                           // Colour
-                 GPC_ADD);                          // New graph
+    SIF_FixedDelay (pDelay,                                 // Pointer to delay state array
+                    SIGLIB_NULL_ARRAY_INDEX_PTR,            // Pointer to delay state index
+                    FIR_FILTER_GROUP_DELAY);                // Delay length
+    SDA_ShortFixedDelay (pPNSequence,                       // Pointer to source array
+                         pDisplayArray,                     // Pointer to destination array
+                         pDelay,                            // Pointer to temporary delayed array
+                         pTempDelay,                        // Temporary destination array pointer
+                         FIR_FILTER_GROUP_DELAY,            // Sample delay count
+                         SAMPLE_LENGTH);                    // Dataset length
+    gpc_plot_2d (h2DPlot,                                   // Graph handle
+                 pDisplayArray,                             // Dataset
+                 SAMPLE_LENGTH,                             // Dataset length
+                 "PN sequence",                             // Dataset title
+                 SIGLIB_ZERO,                               // Minimum X value
+                 (double)(SAMPLE_LENGTH - 1),               // Maximum X value
+                 "lines",                                   // Graph type
+                 "green",                                   // Colour
+                 GPC_ADD);                                  // New graph
     printf ("\nPN sequence");
 
-                                                    // Frequency modulate the PN signal
-    SDA_FrequencyModulate (pPNSequence,             // Modulating signal source pointer
-                           pPNSequence,             // Modulated signal destination pointer
-                           CARRIER_FREQ,            // Carrier frequency
-                           MOD_INDEX,               // Modulation index
-                           &CarrierPhase,           // Pointer to carrier phase
-                           pLookUpTable,            // Fast cosine look up table
-                           SINE_TABLE_SIZE,         // Look up table size
-                           SAMPLE_LENGTH);          // Dataset length
+                                                            // Frequency modulate the PN signal
+    SDA_FrequencyModulate (pPNSequence,                     // Modulating signal source pointer
+                           pPNSequence,                     // Modulated signal destination pointer
+                           CARRIER_FREQ,                    // Carrier frequency
+                           MOD_INDEX,                       // Modulation index
+                           &CarrierPhase,                   // Pointer to carrier phase
+                           pLookUpTable,                    // Fast cosine look up table
+                           SINE_TABLE_SIZE,                 // Look up table size
+                           SAMPLE_LENGTH);                  // Dataset length
 
-    SIF_FixedDelay (pDelay,                         // Pointer to delay state array
-                    SIGLIB_NULL_ARRAY_INDEX_PTR,    // Pointer to delay state index
-                    FIR_FILTER_GROUP_DELAY);        // Delay length
-    SDA_ShortFixedDelay (pPNSequence,               // Pointer to source array
-                         pDisplayArray,             // Pointer to destination array
-                         pDelay,                    // Pointer to temporary delayed array
-                         pTempDelay,                // Temporary destination array pointer
-                         FIR_FILTER_GROUP_DELAY,    // Sample delay count
-                         SAMPLE_LENGTH);            // Dataset length
-    SDA_Polynomial (pDisplayArray,                  // Pointer to source array
-                    pDisplayArray,                  // Pointer to destination array
-                    SIGLIB_MINUS_HALF,              // x^0 coefficient
-                    SIGLIB_QUARTER,                 // x^1 coefficient
-                    0,                              // x^2 coefficient
-                    0,                              // x^3 coefficient
-                    0,                              // x^4 coefficient
-                    0,                              // x^5 coefficient
-                    SAMPLE_LENGTH);                 // Dataset length
+    SIF_FixedDelay (pDelay,                                 // Pointer to delay state array
+                    SIGLIB_NULL_ARRAY_INDEX_PTR,            // Pointer to delay state index
+                    FIR_FILTER_GROUP_DELAY);                // Delay length
+    SDA_ShortFixedDelay (pPNSequence,                       // Pointer to source array
+                         pDisplayArray,                     // Pointer to destination array
+                         pDelay,                            // Pointer to temporary delayed array
+                         pTempDelay,                        // Temporary destination array pointer
+                         FIR_FILTER_GROUP_DELAY,            // Sample delay count
+                         SAMPLE_LENGTH);                    // Dataset length
+    SDA_Polynomial (pDisplayArray,                          // Pointer to source array
+                    pDisplayArray,                          // Pointer to destination array
+                    SIGLIB_MINUS_HALF,                      // x^0 coefficient
+                    SIGLIB_QUARTER,                         // x^1 coefficient
+                    0,                                      // x^2 coefficient
+                    0,                                      // x^3 coefficient
+                    0,                                      // x^4 coefficient
+                    0,                                      // x^5 coefficient
+                    SAMPLE_LENGTH);                         // Dataset length
 
-    gpc_plot_2d (h2DPlot,                           // Graph handle
-                 pDisplayArray,                     // Dataset
-                 SAMPLE_LENGTH,                     // Dataset length
-                 "Modulated sequence",              // Dataset title
-                 SIGLIB_ZERO,                       // Minimum X value
-                 (double)(SAMPLE_LENGTH - 1),       // Maximum X value
-                 "lines",                           // Graph type
-                 "medium-blue",                     // Colour
-                 GPC_ADD);                          // New graph
+    gpc_plot_2d (h2DPlot,                                   // Graph handle
+                 pDisplayArray,                             // Dataset
+                 SAMPLE_LENGTH,                             // Dataset length
+                 "Modulated sequence",                      // Dataset title
+                 SIGLIB_ZERO,                               // Minimum X value
+                 (double)(SAMPLE_LENGTH - 1),               // Maximum X value
+                 "lines",                                   // Graph type
+                 "medium-blue",                             // Colour
+                 GPC_ADD);                                  // New graph
     printf ("\nModulated sequence");
 
-                                                    // Window modulated data
-    SDA_Window (pPNSequence,                        // Pointer to source array
-                pRealData,                          // Pointer to destination array
-                pWindowCoeffs,                      // Pointer to window coefficients
-                WINDOW_LENGTH);                     // Window length
+                                                            // Window modulated data
+    SDA_Window (pPNSequence,                                // Pointer to source array
+                pRealData,                                  // Pointer to destination array
+                pWindowCoeffs,                              // Pointer to window coefficients
+                WINDOW_LENGTH);                             // Window length
 
-                                                    // Perform real FFT
-    SDA_Rfft (pRealData,                            // Pointer to real array
-              pImagData,                            // Pointer to imaginary array
-              pFFTCoeffs,                           // Pointer to FFT coefficients
-              SIGLIB_BIT_REV_STANDARD,              // Bit reverse mode flag / Pointer to bit reverse address table
-              FFT_LENGTH,                               // FFT length
-              LOG2_FFT_LENGTH);                     // log2 FFT length
+                                                            // Perform real FFT
+    SDA_Rfft (pRealData,                                    // Pointer to real array
+              pImagData,                                    // Pointer to imaginary array
+              pFFTCoeffs,                                   // Pointer to FFT coefficients
+              SIGLIB_BIT_REV_STANDARD,                      // Bit reverse mode flag / Pointer to bit reverse address table
+              FFT_LENGTH,                                       // FFT length
+              LOG2_FFT_LENGTH);                             // log2 FFT length
 
-                                                    // Calculate real power from complex
-    SDA_LogMagnitude (pRealData,                    // Pointer to real source array
-                      pImagData,                    // Pointer to imaginary source array
-                      pWindowCoeffs,                // Pointer to log magnitude destination array
-                      FFT_LENGTH);                  // Dataset length
+                                                            // Calculate real power from complex
+    SDA_LogMagnitude (pRealData,                            // Pointer to real source array
+                      pImagData,                            // Pointer to imaginary source array
+                      pWindowCoeffs,                        // Pointer to log magnitude destination array
+                      FFT_LENGTH);                          // Dataset length
 
-                                                    // Mix with a chirp
-    SDA_Multiply2 (pPNSequence,                     // Pointer to source array 2
-                   pChirpData,                      // Pointer to source array 1
-                   pPNSequence,                     // Pointer to destination array
-                   SAMPLE_LENGTH);                  // Dataset length
+                                                            // Mix with a chirp
+    SDA_Multiply2 (pPNSequence,                             // Pointer to source array 2
+                   pChirpData,                              // Pointer to source array 1
+                   pPNSequence,                             // Pointer to destination array
+                   SAMPLE_LENGTH);                          // Dataset length
 
-                                                    // Matched filter
-    SDA_Fir (pPNSequence,                           // Input array to be filtered
-             pPNSequence,                           // Filtered output array
-             pFIRFilterState,                       // Pointer to filter state array
-             pFIRFilterTaps,                        // Pointer to filter coefficients
-             &FIRFilterIndex,                       // Pointer to filter index register
-             FIR_FILTER_LENGTH,                     // Filter length
-             SAMPLE_LENGTH);                        // Dataset length
+                                                            // Matched filter
+    SDA_Fir (pPNSequence,                                   // Input array to be filtered
+             pPNSequence,                                   // Filtered output array
+             pFIRFilterState,                               // Pointer to filter state array
+             pFIRFilterTaps,                                // Pointer to filter coefficients
+             &FIRFilterIndex,                               // Pointer to filter index register
+             FIR_FILTER_LENGTH,                             // Filter length
+             SAMPLE_LENGTH);                                // Dataset length
 
-                                                    // Square law detector
-    SDA_Power (pPNSequence,                         // Pointer to source array
-               pPNSequence,                         // Pointer to destination array
-               2,                                   // Power to raise input by
-               SAMPLE_LENGTH);                      // Dataset length
+                                                            // Square law detector
+    SDA_Power (pPNSequence,                                 // Pointer to source array
+               pPNSequence,                                 // Pointer to destination array
+               2,                                           // Power to raise input by
+               SAMPLE_LENGTH);                              // Dataset length
 
-                                                    // Filter demodulated signals
-    SDA_Iir (pPNSequence,                           // Input array to be filtered
-             pPNSequence,                           // Filtered output array
-             pIIRFilterState,                       // Pointer to filter state array
-             pIIRFilterTaps,                        // Pointer to filter coefficients array
-             IIR_FILTER_STAGES,                     // Number of stages
-             SAMPLE_LENGTH);                        // Dataset length
+                                                            // Filter demodulated signals
+    SDA_Iir (pPNSequence,                                   // Input array to be filtered
+             pPNSequence,                                   // Filtered output array
+             pIIRFilterState,                               // Pointer to filter state array
+             pIIRFilterTaps,                                // Pointer to filter coefficients array
+             IIR_FILTER_STAGES,                             // Number of stages
+             SAMPLE_LENGTH);                                // Dataset length
 
-    gpc_plot_2d (h2DPlot,                           // Graph handle
-                 pPNSequence,                       // Dataset
-                 SAMPLE_LENGTH,                     // Dataset length
-                 "Decoded signal",                  // Dataset title
-                 SIGLIB_ZERO,                       // Minimum X value
-                 (double)(SAMPLE_LENGTH - 1),       // Maximum X value
-                 "lines",                           // Graph type
-                 "orange",                          // Colour
-                 GPC_ADD);                          // New graph
+    gpc_plot_2d (h2DPlot,                                   // Graph handle
+                 pPNSequence,                               // Dataset
+                 SAMPLE_LENGTH,                             // Dataset length
+                 "Decoded signal",                          // Dataset title
+                 SIGLIB_ZERO,                               // Minimum X value
+                 (double)(SAMPLE_LENGTH - 1),               // Maximum X value
+                 "lines",                                   // Graph type
+                 "orange",                                  // Colour
+                 GPC_ADD);                                  // New graph
     printf ("\nDecoded signal\nPlease hit <Carriage Return> to continue . . ."); getchar();
 
 
-    gpc_plot_2d (h2DPlot,                           // Graph handle
-                 pWindowCoeffs,                     // Dataset
-                 SAMPLE_LENGTH,                     // Dataset length
-                 "Spectrum",                        // Dataset title
-                 SIGLIB_ZERO,                       // Minimum X value
-                 (double)(SAMPLE_LENGTH - 1),       // Maximum X value
-                 "lines",                           // Graph type
-                 "orange",                          // Colour
-                 GPC_NEW);                          // New graph
+    gpc_plot_2d (h2DPlot,                                   // Graph handle
+                 pWindowCoeffs,                             // Dataset
+                 SAMPLE_LENGTH,                             // Dataset length
+                 "Spectrum",                                // Dataset title
+                 SIGLIB_ZERO,                               // Minimum X value
+                 (double)(SAMPLE_LENGTH - 1),               // Maximum X value
+                 "lines",                                   // Graph type
+                 "orange",                                  // Colour
+                 GPC_NEW);                                  // New graph
     printf ("\nSpectrum");
 
     printf ("\nHit <Carriage Return> to continue ....\n"); getchar(); // Wait for <Carriage Return>
     gpc_close (h2DPlot);
 
-    SUF_MemoryFree (pPNSequence);                   // Free memory
+    SUF_MemoryFree (pPNSequence);                           // Free memory
     SUF_MemoryFree (pChirpData);
     SUF_MemoryFree (pDelay);
     SUF_MemoryFree (pDisplayArray);

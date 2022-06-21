@@ -36,7 +36,7 @@ static SLData_t         *pLayer1PostActivation, *pLayer2PostActivation;
 static char             filenameWeights[2400];
 static char             filenameWeightsParameter[2000];
 
-static SLArrayIndex_t   predictionThresholdLevel = DEFAULT_PREDICTION_THRESHOLD;
+static SLData_t         predictionThresholdLevel = DEFAULT_PREDICTION_THRESHOLD;
 static SLArrayIndex_t   predictionCountStore[NUM_CATEGORIES];
 static SLArrayIndex_t   correctCategoricalValue = -1;
 static SLArrayIndex_t   correctClassificationCount = 0;

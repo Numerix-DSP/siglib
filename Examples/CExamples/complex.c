@@ -3,7 +3,7 @@
 
 // Include files
 #include <stdio.h>
-#include <siglib.h>                                 // SigLib DSP library
+#include <siglib.h>                                         // SigLib DSP library
 
 
 int main (void)
@@ -17,8 +17,7 @@ int main (void)
     SLData_t            ResultReal, ResultImag;
 
     printf ("\nPolar vector\n");
-                            // Create a polar number from magnitude and phase
-    P1 = SCV_Polar (0.9, (30. * SIGLIB_TWO_PI) / 360.);
+    P1 = SCV_Polar (0.9, (30. * SIGLIB_TWO_PI) / 360.);     // Create a polar number from magnitude and phase
     SUF_PrintPolar (P1);
 
     printf ("\nPolar vector converted to complex\n");
@@ -26,8 +25,7 @@ int main (void)
     SUF_PrintRectangular (C1);
 
     printf ("\nComplex vector\n");
-                            // Create a rectangular number from real and imaginary components
-    C2 = SCV_Rectangular (3.4, -5.6);
+    C2 = SCV_Rectangular (3.4, -5.6);                       // Create a rectangular number from real and imaginary components
     SUF_PrintRectangular (C2);
 
     printf ("\nComplex vector equate\n");
@@ -36,8 +34,7 @@ int main (void)
 
 
     printf ("\nComplex vector inversion types 1 and 2\n");
-                            // Create a rectangular number from real and imaginary components
-    C2 = SCV_Rectangular (3.4, -5.6);
+    C2 = SCV_Rectangular (3.4, -5.6);                       // Create a rectangular number from real and imaginary components
     C3 = SCV_Inverse (C1);
     SUF_PrintRectangular (C3);
 

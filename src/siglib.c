@@ -202,53 +202,53 @@ void SIGLIB_FUNC_DECL SUF_PrintMatrix (const SLData_t *pSrc,
         SUF_Printf (" [%lf %lf %lf ... %lf %lf %lf]\n", (double)*(pSrc+((nRows-2)*nCols)+0), (double)*(pSrc+((nRows-2)*nCols)+1), (double)*(pSrc+((nRows-2)*nCols)+2), (double)*(pSrc+((nRows-2)*nCols)+nCols-3), (double)*(pSrc+((nRows-2)*nCols)+nCols-2), (double)*(pSrc+((nRows-2)*nCols)+nCols-1));
         SUF_Printf (" [%lf %lf %lf ... %lf %lf %lf]\n", (double)*(pSrc+((nRows-1)*nCols)+0), (double)*(pSrc+((nRows-1)*nCols)+1), (double)*(pSrc+((nRows-1)*nCols)+2), (double)*(pSrc+((nRows-1)*nCols)+nCols-3), (double)*(pSrc+((nRows-1)*nCols)+nCols-2), (double)*(pSrc+((nRows-1)*nCols)+nCols-1));
     }
-    else if ((nRows < 6) && (nCols > 6)) {
+    else if ((nRows <= 6) && (nCols > 6)) {
         for (SLArrayIndex_t rc = 0; rc < nRows; rc++) {
             SUF_Printf (" [%lf %lf %lf ... %lf %lf %lf]\n", (double)*(pSrc+(rc*nCols)+0), (double)*(pSrc+(rc*nCols)+1), (double)*(pSrc+(rc*nCols)+2), (double)*(pSrc+(rc*nCols)+nCols-3), (double)*(pSrc+(rc*nCols)+nCols-2), (double)*(pSrc+(rc*nCols)+nCols-1));
         }
     }
-    else if ((nRows > 6) && (nCols < 6)) {
+    else if ((nRows > 6) && ((nCols-1) <= 6)) {
         SUF_Printf (" [");
-        for (SLArrayIndex_t j = 0; j < nCols; j++) {
+        for (SLArrayIndex_t j = 0; j < (nCols-1); j++) {
             SUF_Printf ("%lf, ", (double)*(pSrc+(0*nCols)+j));
         }
-        SUF_Printf ("]\n");
+        SUF_Printf ("%lf]\n", (double)*(pSrc+(0*nCols)+nCols-1));
         SUF_Printf (" [");
-        for (SLArrayIndex_t j = 0; j < nCols; j++) {
+        for (SLArrayIndex_t j = 0; j < (nCols-1); j++) {
             SUF_Printf ("%lf, ", (double)*(pSrc+(1*nCols)+j));
         }
-        SUF_Printf ("]\n");
+        SUF_Printf ("%lf]\n", (double)*(pSrc+(1*nCols)+(nCols-1)));
         SUF_Printf (" [");
-        for (SLArrayIndex_t j = 0; j < nCols; j++) {
+        for (SLArrayIndex_t j = 0; j < (nCols-1); j++) {
             SUF_Printf ("%lf, ", (double)*(pSrc+(2*nCols)+j));
         }
-        SUF_Printf ("]\n");
+        SUF_Printf ("%lf]\n", (double)*(pSrc+(2*nCols)+(nCols-1)));
 
         SUF_Printf (" ...\n");
 
         SUF_Printf (" [");
-        for (SLArrayIndex_t j = 0; j < nCols; j++) {
+        for (SLArrayIndex_t j = 0; j < (nCols-1); j++) {
             SUF_Printf ("%lf, ", (double)*(pSrc+((nRows-3)*nCols)+j));
         }
-        SUF_Printf ("]\n");
+        SUF_Printf ("%lf]\n", (double)*(pSrc+((nRows-3)*nCols)+(nCols-1)));
         SUF_Printf (" [");
-        for (SLArrayIndex_t j = 0; j < nCols; j++) {
+        for (SLArrayIndex_t j = 0; j < (nCols-1); j++) {
             SUF_Printf ("%lf, ", (double)*(pSrc+((nRows-2)*nCols)+j));
         }
-        SUF_Printf ("]\n");
+        SUF_Printf ("%lf]\n", (double)*(pSrc+((nRows-2)*nCols)+(nCols-1)));
         SUF_Printf (" [");
-        for (SLArrayIndex_t j = 0; j < nCols; j++) {
+        for (SLArrayIndex_t j = 0; j < (nCols-1); j++) {
             SUF_Printf ("%lf, ", (double)*(pSrc+((nRows-1)*nCols)+j));
         }
-        SUF_Printf ("]\n");
+        SUF_Printf ("%lf]\n", (double)*(pSrc+((nRows-1)*nCols)+(nCols-1)));
     }
     else {
         for (SLArrayIndex_t i = 0; i < nRows; i++) {
             SUF_Printf (" [");
-            for (SLArrayIndex_t j = 0; j < nCols; j++) {
-                SUF_Printf ("%lf ", (double)*pSrc++);
+            for (SLArrayIndex_t j = 0; j < (nCols-1); j++) {
+                SUF_Printf ("%lf, ", (double)*pSrc++);
             }
-            SUF_Printf ("]\n");
+            SUF_Printf ("%lf]\n", (double)*pSrc++);
         }
     }
     SUF_Printf ("\n");

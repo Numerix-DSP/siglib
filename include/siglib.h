@@ -44,7 +44,7 @@ Update history :
 #ifndef _HP_VEE         // The following functionality is not supported by VEE
 
 #define SIGLIB                          1                   // Indicates SigLib is being used
-#define SIGLIB_VERSION                  10.11               // Indicates SigLib version being used
+#define SIGLIB_VERSION                  10.14               // Indicates SigLib version being used
 #define SIGLIB_ENABLE_DEBUG_FPRINTF     0                   // Set to 1 to enable SUF_Debugfprintf functions in some siglib functions
 
 
@@ -145,6 +145,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvWriteData (const SLData_t SIGLIB_INPUT_PT
 SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadFile (SLData_t SIGLIB_OUTPUT_PTR_DECL *, const char *, const SLData_t, const SLArrayIndex_t, const SLArrayIndex_t);         // Functions for reading and writing .csv files
 SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvWriteFile (const SLData_t SIGLIB_INPUT_PTR_DECL *, const char *, const SLData_t, const SLArrayIndex_t, const SLArrayIndex_t, const SLArrayIndex_t);
 SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadMatrix (SLData_t SIGLIB_OUTPUT_PTR_DECL **, const char *, const enum SLFileReadFirstRowFlag_t, SLArrayIndex_t *, SLArrayIndex_t *);
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvWriteMatrix (const SLData_t *, const char *, const SLArrayIndex_t, const SLArrayIndex_t);
 SLArrayIndex_t SIGLIB_FUNC_DECL SUF_DatReadData (SLData_t SIGLIB_OUTPUT_PTR_DECL *, FILE *, const SLArrayIndex_t);                         // Functions for reading and writing .dat files
 SLArrayIndex_t SIGLIB_FUNC_DECL SUF_DatWriteData (const SLData_t SIGLIB_INPUT_PTR_DECL *, FILE *, const SLData_t, const SLArrayIndex_t, const SLArrayIndex_t);
 SLData_t SIGLIB_FUNC_DECL SUF_DatReadHeader (FILE *);
@@ -1341,6 +1342,9 @@ void SIGLIB_FUNC_DECL SIF_FirPolyPhaseGenerate (const SLData_t * SIGLIB_INPUT_PT
     const SLArrayIndex_t);                                  // Input filter length
 #endif          // End of #ifndef _HP_VEE
 
+void SIGLIB_FUNC_DECL SIF_FirZeroNotchFilter (SLData_t * SIGLIB_OUTPUT_PTR_DECL,    // Coefficients array
+    const SLData_t);                                        // Notch centre frequency normalized to Fs = 1 Hz
+
 // Filtering functions - iirfilt.c
 
 void SIGLIB_FUNC_DECL SIF_Iir (SLData_t * SIGLIB_OUTPUT_PTR_DECL,   // Pointer to filter state array
@@ -1388,14 +1392,12 @@ void SIGLIB_FUNC_DECL SDA_IirOrderN (const SLData_t * SIGLIB_INPUT_PTR_DECL,    
     const SLArrayIndex_t,                                   // Filter Order
     const SLArrayIndex_t);                                  // Array length
 
-void SIGLIB_FUNC_DECL SIF_IirNc (SLData_t * SIGLIB_OUTPUT_PTR_DECL, // Pointer to filter 1 state array
-    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to filter 2 state array
+void SIGLIB_FUNC_DECL SIF_IirNc (SLData_t * SIGLIB_OUTPUT_PTR_DECL, // Pointer to filter state array
     const SLArrayIndex_t);                                  // Source array length
 
 void SIGLIB_FUNC_DECL SDA_IirNc (const SLData_t * SIGLIB_INPUT_PTR_DECL,    // Input array to be filtered
     SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination array
-    SLData_t * SIGLIB_INOUT_PTR_DECL,                       // Pointer to filter 1 state array
-    SLData_t * SIGLIB_INOUT_PTR_DECL,                       // Pointer to filter 2 state array
+    SLData_t * SIGLIB_INOUT_PTR_DECL,                       // Pointer to filter state array
     const SLData_t * SIGLIB_INPUT_PTR_DECL,                 // Pointer to filter coefficients
     const SLArrayIndex_t,                                   // Number of stages
     const SLArrayIndex_t);                                  // Source array length

@@ -203,6 +203,7 @@ double _stdcall SUF_SiglibVersion (void);
 
 
 
+
                                                             // Parameter description
 
 // Fast Fourier Transform Functions - ffourier.c
@@ -1342,6 +1343,9 @@ void _stdcall SDA_TappedDelayLineIQ ( double * SIGLIB_INPUT_PTR_DECL,    // Poin
 
 
 
+void _stdcall SIF_FirZeroNotchFilter (double * SIGLIB_OUTPUT_PTR_DECL,    // Coefficients array
+     double);                                        // Notch centre frequency normalized to Fs = 1 Hz
+
 // Filtering functions - iirfilt.c
 
 void _stdcall SIF_Iir (double * SIGLIB_OUTPUT_PTR_DECL,   // Pointer to filter state array
@@ -1389,14 +1393,12 @@ void _stdcall SDA_IirOrderN ( double * SIGLIB_INPUT_PTR_DECL,    // Pointer to i
      long,                                   // Filter Order
      long);                                  // Array length
 
-void _stdcall SIF_IirNc (double * SIGLIB_OUTPUT_PTR_DECL, // Pointer to filter 1 state array
-    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to filter 2 state array
+void _stdcall SIF_IirNc (double * SIGLIB_OUTPUT_PTR_DECL, // Pointer to filter state array
      long);                                  // Source array length
 
 void _stdcall SDA_IirNc ( double * SIGLIB_INPUT_PTR_DECL,    // Input array to be filtered
     double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination array
-    double * SIGLIB_INOUT_PTR_DECL,                       // Pointer to filter 1 state array
-    double * SIGLIB_INOUT_PTR_DECL,                       // Pointer to filter 2 state array
+    double * SIGLIB_INOUT_PTR_DECL,                       // Pointer to filter state array
      double * SIGLIB_INPUT_PTR_DECL,                 // Pointer to filter coefficients
      long,                                   // Number of stages
      long);                                  // Source array length
@@ -2993,7 +2995,7 @@ long _stdcall SDS_CostasQamDemodulate ( double,    // Source data sample
      long);                                  // ELG output synchronization delay length
 
 
-#line 2978 "siglib.h"
+#line 2980 "siglib.h"
 long _stdcall SDS_CostasQamDemodulateDebug ( double,   // Source data sample
     double *,                                             // Pointer to real destination symbol point
     double *,                                             // Pointer to imaginary destination symbol point
@@ -3122,7 +3124,7 @@ long _stdcall SDA_CostasQamDemodulateDebug ( double * SIGLIB_INPUT_PTR_DECL,   /
     double *,                                             // Pointer to debug real filter output
     double *,                                             // Pointer to debug imaginary filter output
     double *);                                            // Pointer to debug ELG trigger output
-#line 3107 "siglib.h"
+#line 3109 "siglib.h"
 
 void _stdcall SIF_QpskModulate (double * SIGLIB_OUTPUT_PTR_DECL,      // Carrier table pointer
      double,                                         // Carrier phase increment per sample (radians / 2Ï€)
@@ -6336,5 +6338,5 @@ void _stdcall SMX_ExtractCategoricalColumn ( double * SIGLIB_INPUT_PTR_DECL, // 
 
                                     // End of SigLib DSP function section
 
-#line 6321 "siglib.h"
+#line 6323 "siglib.h"
 

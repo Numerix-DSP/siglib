@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
         exit(0);
     }
 
-    FFTLength = SUF_FftArbAllocLength (SAMPLE_LENGTH);  // Calculate the required FFT length
+    FFTLength = SUF_FftArbAllocLength (SAMPLE_LENGTH);      // Calculate the required FFT length
 
     printf ("Calculated FFT length for arbitrary FFT = %d\n", FFTLength);
 

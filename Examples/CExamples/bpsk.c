@@ -13,15 +13,15 @@
 
 // Include files
 #include <stdio.h>
-#include <siglib.h>                                 // SigLib DSP library
-#include <gnuplot_c.h>                              // Gnuplot/C
+#include <siglib.h>                                         // SigLib DSP library
+#include <gnuplot_c.h>                                      // Gnuplot/C
 #include <dpchar.h>
 
 // Define constants
-#define DISPLAY_GRAPHICS                1           // Set to '1' to display graphics
-#define DISPLAY_FILTER_OUTPUT           0           // Set to '1' to display the output of the demodulator filter
-#define TX_BIT_MODE_ENABLED             0           // Set to '1' to process Tx bits, '0' for bytes
-#define DEBUG_LOG_FILE                  0           // Set to '1' to enable logging to debug.log
+#define DISPLAY_GRAPHICS                1                   // Set to '1' to display graphics
+#define DISPLAY_FILTER_OUTPUT           0                   // Set to '1' to display the output of the demodulator filter
+#define TX_BIT_MODE_ENABLED             0                   // Set to '1' to process Tx bits, '0' for bytes
+#define DEBUG_LOG_FILE                  0                   // Set to '1' to enable logging to debug.log
 
 #define SAMPLE_LENGTH                   512
 #define NUMBER_OF_LOOPS                 8
@@ -30,9 +30,9 @@
 #define BAUD_RATE                       600.0
 #define CARRIER_FREQ                    1200.0
 
-#define SYMBOL_LENGTH                   16          // Number of samples per symbol - SAMPLE_RATE / BAUD_RATE
-#define MAX_RX_STRING_LENGTH            80          // Maximum length of an Rx string
-#define CARRIER_TABLE_FREQ              100.        // Frequency of sine wave in table
+#define SYMBOL_LENGTH                   16                  // Number of samples per symbol - SAMPLE_RATE / BAUD_RATE
+#define MAX_RX_STRING_LENGTH            80                  // Maximum length of an Rx string
+#define CARRIER_TABLE_FREQ              100.                // Frequency of sine wave in table
 #define CARRIER_SINE_TABLE_SIZE         ((SLArrayIndex_t)(SAMPLE_RATE / CARRIER_TABLE_FREQ))    // Number of samples in each of cos and sine table
 
 // Declare global variables and arrays
@@ -50,25 +50,25 @@ static SLData_t         TxCarrierPhase;
 static SLData_t         sampleCount;
 
 
-#define COSTAS_LP_LPF_LENGTH            17          // Costas loop LP LPF FIR filter length
-#define VCO_MODULATION_INDEX            0.005       // Modulation index
+#define COSTAS_LP_LPF_LENGTH            17                  // Costas loop LP LPF FIR filter length
+#define VCO_MODULATION_INDEX            0.005               // Modulation index
 
-#define LOOP_FILTER_ALPHA               0.9         // Feedback coeff for one-pole loop filter
+#define LOOP_FILTER_ALPHA               0.9                 // Feedback coeff for one-pole loop filter
 
-#define VCO_SINE_TABLE_SIZE             1024        // Look up table for fast sine calculation
+#define VCO_SINE_TABLE_SIZE             1024                // Look up table for fast sine calculation
 
 static SLData_t         *pCostasLpLPFCoeffs, *pCostasLpLPF1State, *pCostasLpLPF2State;  // Costas loop loop filter coefficient pointer
 
-static SLArrayIndex_t   CostasLpLPF1Index;          // Costas loop inphase LPF filter index
-static SLArrayIndex_t   CostasLpLPF2Index;          // Costas loop quadrature phase LPF filter index
-static SLData_t         CostasLpVCOPhase;           // Costas loop VCO phase
-static SLData_t         CostasLpState;              // Costas loop feedback state for next iteration
+static SLArrayIndex_t   CostasLpLPF1Index;                  // Costas loop inphase LPF filter index
+static SLArrayIndex_t   CostasLpLPF2Index;                  // Costas loop quadrature phase LPF filter index
+static SLData_t         CostasLpVCOPhase;                   // Costas loop VCO phase
+static SLData_t         CostasLpState;                      // Costas loop feedback state for next iteration
 
-static SLData_t         CostasLpLoopFilterState;    // Costas loop loop filter feedback coeff
-static SLData_t         *pVCOLookUpTable;           // VCO cosine look-up-table pointer
+static SLData_t         CostasLpLoopFilterState;            // Costas loop loop filter feedback coeff
+static SLData_t         *pVCOLookUpTable;                   // VCO cosine look-up-table pointer
 
-static SLArrayIndex_t   RxSampleClock;              // Used to keep track of the samples and symbols
-static SLData_t         RxSampleSum;                // Used to keep decide which bit was Tx'd
+static SLArrayIndex_t   RxSampleClock;                      // Used to keep track of the samples and symbols
+static SLData_t         RxSampleSum;                        // Used to keep decide which bit was Tx'd
 
 #if DISPLAY_FILTER_OUTPUT
 static SLData_t         *pFilterOutput;
@@ -78,7 +78,7 @@ static SLData_t         *pFilterOutput;
 int main(void)
 {
 #if (DISPLAY_FILTER_OUTPUT) || (DISPLAY_GRAPHICS)
-    h_GPC_Plot  *h2DPlot;                           // Plot object
+    h_GPC_Plot  *h2DPlot;                                   // Plot object
 #endif
 
 #if DISPLAY_GRAPHICS
@@ -91,7 +91,7 @@ int main(void)
     SLArrayIndex_t  TxBitIndex;
 #endif
     SLFixData_t     DemodulatedBit;
-    SLArrayIndex_t  RxBitIndex = 7;                 // Initialise bit count for correct synchronization
+    SLArrayIndex_t  RxBitIndex = 7;                         // Initialise bit count for correct synchronization
 
 #if DEBUG_LOG_FILE
     SUF_ClearDebugfprintf();
@@ -120,8 +120,8 @@ int main(void)
 
 #if DISPLAY_FILTER_OUTPUT
     pFilterOutput = SUF_VectorArrayAllocate (SAMPLE_LENGTH);    // Array for displaying output of LPF
-    SDA_Clear (pFilterOutput,                       // Pointer to destination array
-               SAMPLE_LENGTH);                      // Dataset length
+    SDA_Clear (pFilterOutput,                               // Pointer to destination array
+               SAMPLE_LENGTH);                              // Dataset length
 #endif
 
 
@@ -129,13 +129,13 @@ int main(void)
     RxStringPtr = RxString;
 
 #if (DISPLAY_FILTER_OUTPUT) || (DISPLAY_GRAPHICS)
-    h2DPlot =                                         // Initialize plot
-        gpc_init_2d ("Binary Phase Shift Keying",     // Plot title
-                     "Time",                          // X-Axis label
-                     "Magnitude",                     // Y-Axis label
-                     GPC_AUTO_SCALE,                  // Scaling mode
-                     GPC_SIGNED,                      // Sign mode
-                     GPC_KEY_ENABLE);                 // Legend / key mode
+    h2DPlot =                                               // Initialize plot
+        gpc_init_2d ("Binary Phase Shift Keying",           // Plot title
+                     "Time",                                // X-Axis label
+                     "Magnitude",                           // Y-Axis label
+                     GPC_AUTO_SCALE,                        // Scaling mode
+                     GPC_SIGNED,                            // Sign mode
+                     GPC_KEY_ENABLE);                       // Legend / key mode
     if (NULL == h2DPlot) {
         printf ("\nPlot creation failure.\n");
         exit(-1);
@@ -147,22 +147,22 @@ int main(void)
                       &sampleCount,                         // Transmitter sample count - tracks samples
                       CARRIER_SINE_TABLE_SIZE);             // Carrier sine table size
 
-    SIF_BpskDemodulate (&CostasLpVCOPhase,              // VCO phase
-                        pVCOLookUpTable,                // VCO look up table
-                        VCO_SINE_TABLE_SIZE,            // VCO look up table size
-                        CARRIER_FREQ / SAMPLE_RATE,     // Carrier phase increment per sample (radians / 2π)
-                        pCostasLpLPF1State,             // Pointer to loop filter 1 state
-                        &CostasLpLPF1Index,             // Pointer to loop filter 1 index
-                        pCostasLpLPF2State,             // Pointer to loop filter 2 state
-                        &CostasLpLPF2Index,             // Pointer to loop filter 2 index
-                        pCostasLpLPFCoeffs,             // Pointer to loop filter coefficients
-                        COSTAS_LP_LPF_LENGTH,           // Loop filter length
-                        &CostasLpLoopFilterState,       // Pointer to loop filter state
-                        &CostasLpState,                 // Pointer to delayed sample
-                        &RxSampleClock,                 // Pointer to Rx sample clock
-                        &RxSampleSum);                  // Pointer to Rx sample sum - used to decide which bit was Tx'd
+    SIF_BpskDemodulate (&CostasLpVCOPhase,                  // VCO phase
+                        pVCOLookUpTable,                    // VCO look up table
+                        VCO_SINE_TABLE_SIZE,                // VCO look up table size
+                        CARRIER_FREQ / SAMPLE_RATE,         // Carrier phase increment per sample (radians / 2π)
+                        pCostasLpLPF1State,                 // Pointer to loop filter 1 state
+                        &CostasLpLPF1Index,                 // Pointer to loop filter 1 index
+                        pCostasLpLPF2State,                 // Pointer to loop filter 2 state
+                        &CostasLpLPF2Index,                 // Pointer to loop filter 2 index
+                        pCostasLpLPFCoeffs,                 // Pointer to loop filter coefficients
+                        COSTAS_LP_LPF_LENGTH,               // Loop filter length
+                        &CostasLpLoopFilterState,           // Pointer to loop filter state
+                        &CostasLpState,                     // Pointer to delayed sample
+                        &RxSampleClock,                     // Pointer to Rx sample clock
+                        &RxSampleSum);                      // Pointer to Rx sample sum - used to decide which bit was Tx'd
 
-    TxCarrierPhase = SIGLIB_ZERO;           // Initialise BPSK transmitter phase
+    TxCarrierPhase = SIGLIB_ZERO;                           // Initialise BPSK transmitter phase
     // The phase of the transmitter can be rotated by changing this value
 
     // Clear demodulated data input array - This is important because we are going to be ORing in the received bits
@@ -182,7 +182,7 @@ int main(void)
                                   CARRIER_FREQ / CARRIER_TABLE_FREQ,        // Carrier table increment
                                   CARRIER_SINE_TABLE_SIZE);                 // Carrier sine table size
             }
-            TxStringPtr++;                          // Increment string pointer
+            TxStringPtr++;                                  // Increment string pointer
 
 #else
             SDA_BpskModulateByte (*TxStringPtr++,                       // Modulating byte
@@ -196,15 +196,15 @@ int main(void)
         }
 
 #if DISPLAY_GRAPHICS
-        gpc_plot_2d (h2DPlot,                    // Graph handle
-                     pData,                      // Dataset
-                     SAMPLE_LENGTH,              // Dataset length
-                     "Modulated Signal",         // Dataset title
+        gpc_plot_2d (h2DPlot,                               // Graph handle
+                     pData,                                 // Dataset
+                     SAMPLE_LENGTH,                         // Dataset length
+                     "Modulated Signal",                    // Dataset title
                      ((double)SAMPLE_LENGTH / SAMPLE_RATE) * (double)LoopCount,                // Minimum X value
                      (((double)SAMPLE_LENGTH / SAMPLE_RATE) * (double)LoopCount) + ((double)(SAMPLE_LENGTH - 1) / SAMPLE_RATE), // Maximum X value
-                     "lines",                    // Graph type
-                     "blue",                     // Colour
-                     GPC_NEW);                   // New graph
+                     "lines",                               // Graph type
+                     "blue",                                // Colour
+                     GPC_NEW);                              // New graph
         TimeIndex += (SLData_t)SAMPLE_LENGTH / SAMPLE_RATE;
         printf ("\nModulated Signal\nPlease hit <Carriage Return> to continue . . ."); getchar();
 #endif
@@ -234,15 +234,15 @@ int main(void)
                                              SYMBOL_LENGTH,                     // Samples per symbol
                                              pFilterOutput);                    // Pointer to filter output data
 
-                gpc_plot_2d (h2DPlot,                    // Graph handle
-                             pFilterOutput,              // Dataset
-                             SAMPLE_LENGTH,              // Dataset length
-                             "Filter Output",            // Dataset title
+                gpc_plot_2d (h2DPlot,                       // Graph handle
+                             pFilterOutput,                 // Dataset
+                             SAMPLE_LENGTH,                 // Dataset length
+                             "Filter Output",               // Dataset title
                              ((double)SAMPLE_LENGTH / SAMPLE_RATE) * (double)LoopCount,                // Minimum X value
                              (((double)SAMPLE_LENGTH / SAMPLE_RATE) * (double)LoopCount) + ((double)(SAMPLE_LENGTH - 1) / SAMPLE_RATE), // Maximum X value
-                             "lines",                    // Graph type
-                             "blue",                     // Colour
-                             GPC_NEW);                   // New graph
+                             "lines",                       // Graph type
+                             "blue",                        // Colour
+                             GPC_NEW);                      // New graph
                 printf ("\nFilter Output\nPlease hit <Carriage Return> to continue . . ."); getchar();
 #else
                 DemodulatedBit =
@@ -283,7 +283,7 @@ int main(void)
     }
 #endif
 
-    *RxStringPtr = 0;                               // Terminate string for printf
+    *RxStringPtr = 0;                                       // Terminate string for printf
     // Print received string - Note the first two characters received are not
     // from the required string due to receiver filter initialization
     printf ("BPSK received string : %s\n", RxString+2);
@@ -294,7 +294,7 @@ int main(void)
 #endif
 
 
-    SUF_MemoryFree (pData);                         // Free memory
+    SUF_MemoryFree (pData);                                 // Free memory
     SUF_MemoryFree (pCarrierTable);
     SUF_MemoryFree (pCostasLpLPFCoeffs);
     SUF_MemoryFree (pCostasLpLPF1State);

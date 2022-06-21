@@ -474,8 +474,7 @@ void SIGLIB_FUNC_DECL SDA_IirOrderN (const SLData_t * SIGLIB_PTR_DECL pSrc,
 * Function: SIF_IirNc
 *
 * Parameters:
-*   SLData_t * SIGLIB_PTR_DECL pState1,
-*   SLData_t * SIGLIB_PTR_DECL pState2,
+*   SLData_t * SIGLIB_PTR_DECL pState
 *   const SLArrayIndex_t NumberOfBiquads
 *   const SLArrayIndex_t SampleLength
 *
@@ -487,8 +486,7 @@ void SIGLIB_FUNC_DECL SDA_IirOrderN (const SLData_t * SIGLIB_PTR_DECL pSrc,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_IirNc (SLData_t * SIGLIB_PTR_DECL pState1,
-    SLData_t * SIGLIB_PTR_DECL pState2,
+void SIGLIB_FUNC_DECL SIF_IirNc (SLData_t * SIGLIB_PTR_DECL pState,
     const SLArrayIndex_t NumberOfBiquads)
 
 {
@@ -496,8 +494,7 @@ void SIGLIB_FUNC_DECL SIF_IirNc (SLData_t * SIGLIB_PTR_DECL pState1,
 
         // Initialise the filter state array to 0
     for (i = 0; i < (NumberOfBiquads * SIGLIB_IIR_DELAY_SIZE); i++) {
-        *pState1++ = SIGLIB_ZERO;
-        *pState2++ = SIGLIB_ZERO;
+        *pState++ = SIGLIB_ZERO;
     }
 
 }       // End of SIF_IirNc()
@@ -510,8 +507,7 @@ void SIGLIB_FUNC_DECL SIF_IirNc (SLData_t * SIGLIB_PTR_DECL pState1,
 * Parameters:
 *   const SLData_t pSrc,
 *   SLData_t pDst,
-*   SLData_t * SIGLIB_PTR_DECL pState1,
-*   SLData_t * SIGLIB_PTR_DECL pState2,
+*   SLData_t * SIGLIB_PTR_DECL pState,
 *   const SLData_t * SIGLIB_PTR_DECL pCoeffs,
 *   const SLArrayIndex_t NumberOfBiquads,
 *   const SLArrayIndex_t SampleLength
@@ -527,18 +523,17 @@ void SIGLIB_FUNC_DECL SIF_IirNc (SLData_t * SIGLIB_PTR_DECL pState1,
 
 void SIGLIB_FUNC_DECL SDA_IirNc (const SLData_t * SIGLIB_PTR_DECL pSrc,
     SLData_t * SIGLIB_PTR_DECL pDst,
-    SLData_t * SIGLIB_PTR_DECL pDelay1,
-    SLData_t * SIGLIB_PTR_DECL pDelay2,
+    SLData_t * SIGLIB_PTR_DECL pState,
     const SLData_t * SIGLIB_PTR_DECL pCoeffs,
     const SLArrayIndex_t NumberOfBiquads,
     const SLArrayIndex_t SampleLength)
 
 {
-    SDA_Iir (pSrc, pDst, pDelay1, pCoeffs, NumberOfBiquads, SampleLength);  // Apply IIR filter
+    SDA_Iir (pSrc, pDst, pState, pCoeffs, NumberOfBiquads, SampleLength);   // Apply IIR filter
 
     SDA_Reverse (pDst, pDst, SampleLength);                                 // Reverse time sequence
 
-    SDA_Iir (pDst, pDst, pDelay2, pCoeffs, NumberOfBiquads, SampleLength);  // Apply IIR filter
+    SDA_Iir (pDst, pDst, pState, pCoeffs, NumberOfBiquads, SampleLength);   // Apply IIR filter
 
     SDA_Reverse (pDst, pDst, SampleLength);                                 // Reverse time sequence
 

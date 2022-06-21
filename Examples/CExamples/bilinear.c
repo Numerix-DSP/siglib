@@ -301,7 +301,7 @@ int main (void)
                  PLOT_LENGTH,                               // Dataset length
                  "Frequency response",                      // Dataset title
                  SIGLIB_ZERO,                               // Minimum X value
-                 (SAMPLE_RATE / 2.) * ((double)(PLOT_LENGTH - 1)) / ((double)PLOT_LENGTH),  // Maximum X value
+                 (SAMPLE_RATE / SIGLIB_TWO),                // Maximum X value
                  "lines",                                   // Graph type
                  "magenta",                                 // Colour
                  GPC_NEW);                                  // New graph

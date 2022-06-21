@@ -546,7 +546,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvWriteFile (const SLData_t * SIGLIB_PTR_DE
     fclose(p_ioFile);
     return (i);
 
-}       // End of SUF_CsvWritFile()
+}       // End of SUF_CsvWriteFile()
 
 
 /**/
@@ -555,14 +555,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvWriteFile (const SLData_t * SIGLIB_PTR_DE
 *
 * Parameters:
 *   SLData_t *BPtr,                 - Output Data array pointer
-*   FILE *p_ioFile,                     - File pointer
+*   FILE *p_ioFile,                 - File pointer
 *   enum SLFileReadFirstRowFlag_t   - firstRowFlag (Keep or ignore)
-    SLArrayIndex_t *nRows,           - Number of rows
-    SLArrayIndex_t *nCols)           - Number of columns
+*   SLArrayIndex_t *nRows,          - Number of rows
+*   SLArrayIndex_t *nCols)          - Number of columns
 *
 * Return value:
-*   SLArrayIndex_t  Number of rows read
-*   Returns sampleCount = 0 on error
+*   SLArrayIndex_t  Number of samples read
+*   Returns 0 on error
 *
 * Description: Read a matrix from a .csv file.
 *   Calculates the geometry for the array
@@ -643,8 +643,57 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadMatrix (SLData_t ** SIGLIB_PTR_DECL B
     fclose(p_ioFile);
     *nCols = colcount;
     *nRows = rowcount;
-    return(rowcount);
+    return(colcount * rowcount);
 }       // End of SUF_CsvReadMatrix()
+
+
+/**/
+/********************************************************
+* Function: SUF_CsvWriteMatrix
+*
+* Parameters:
+*   SLData_t *BPtr,                 - Source data array pointer
+*   FILE *p_ioFile,                 - File pointer
+*   SLArrayIndex_t *nRows,          - Number of rows
+*   SLArrayIndex_t *nCols)          - Number of columns
+*
+* Return value:
+*   SLArrayIndex_t  Number of samples written
+*   Returns 0 on error
+*
+* Description: Read a matrix from a .csv file.
+*   Calculates the geometry for the array
+*   Allocates the memory for the array
+*
+********************************************************/
+
+SLArrayIndex_t SUF_CsvWriteMatrix (const SLData_t *BPtr,
+    const char *fname,
+    const SLArrayIndex_t nRows,
+    const SLArrayIndex_t nCols)
+
+{
+    SLArrayIndex_t  count = 0;
+    FILE            *p_ioFile;
+
+    p_ioFile = fopen (fname, "w");
+    if (NULL == p_ioFile) {
+        return(-1);
+    }
+
+    for (SLArrayIndex_t i = 0; i < nRows; i++) {
+        for (SLArrayIndex_t j = 0; j < nCols-1; j++) {
+            fprintf (p_ioFile, "%lf,", *(BPtr+(i*nCols)+j));
+            count++;
+        }
+        fprintf (p_ioFile, "%lf\n", *(BPtr+(i*nCols)+(nCols-1)));
+        count++;
+    }
+
+    fclose(p_ioFile);
+    return (count);
+
+}       // End of SUF_CsvWriteMatrix()
 
 
 /**/

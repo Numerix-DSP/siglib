@@ -331,6 +331,10 @@ echo firdesnw
 pause
 firdesnw
 
+echo firnotch
+pause
+firnotch
+
 echo FracInt
 pause
 FracInt
@@ -410,6 +414,10 @@ iir2PoleLPF
 echo IIR-Gain
 pause
 IIR-Gain
+
+echo iirNonCausal
+pause
+iirNonCausal
 
 echo iirnotch
 pause
@@ -542,10 +550,6 @@ msDelay
 echo multiplx
 pause
 multiplx
-
-echo NonCaus
-pause
-NonCaus
 
 echo Offset
 pause

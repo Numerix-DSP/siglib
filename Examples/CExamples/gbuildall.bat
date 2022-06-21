@@ -87,6 +87,7 @@ call gb firComplexExtendedArray
 call gb firadds
 call gb firdesn
 call gb firdesnw
+call gb firnotch
 call gb FracInt
 call gb FreqMod1
 call gb FreqMod2
@@ -107,6 +108,7 @@ call gb iir_mac
 call gb iir2
 call gb iir2PoleLPF
 call gb IIR-Gain
+call gb iirNonCausal
 call gb iirnotch
 call gb iirshft1
 call gb iirshft2
@@ -140,7 +142,6 @@ call gb mrate
 call gb MSCoher
 call gb msDelay
 call gb multiplx
-call gb NonCaus
 call gb Offset
 call gb OnePole
 call gb OnePoleCutOffFrequency

@@ -254,7 +254,7 @@ int main (void)
             DstComplex2x2[2].real, DstComplex2x2[2].imag, DstComplex2x2[3].real, DstComplex2x2[3].imag);
 
 
-    SUF_MemoryFree (pMatrixa);                      // Free memory
+    SUF_MemoryFree (pMatrixa);                              // Free memory
     SUF_MemoryFree (pMatrixb);
     SUF_MemoryFree (pMatrixc);
     SUF_MemoryFree (pMatrixd);

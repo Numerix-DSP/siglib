@@ -2604,7 +2604,7 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLineIQ (const SLData_t * SIGLIB_PTR_DECL pS
 * Parameters:
 *   const SLData_t * SIGLIB_PTR_DECL pSrcFIRCoeffs, - Input FIR coefficient pointer
 *   SLData_t * SIGLIB_PTR_DECL pDstFIRCoeffs,       - Output poly-phase coefficient pointer
-*   SLData_t * SIGLIB_PTR_DECL pCoeffPtrs,          - Output filter coefficient pointers
+*   SLData_t ** SIGLIB_PTR_DECL pCoeffPtrs,         - Output filter coefficient pointers
 *   SLArrayIndex_t * SIGLIB_PTR_DECL pPolyPhaseFilterLengths,      - Output filter lengths
 *   const SLArrayIndex_t NumberOfPhases             - Number of output filter phases
 *   const SLArrayIndex_t FilterLength               - Input filter length
@@ -2651,4 +2651,29 @@ void SIGLIB_FUNC_DECL SIF_FirPolyPhaseGenerate (const SLData_t * SIGLIB_PTR_DECL
     }
 }           // End of SIF_FirPolyPhaseGenerate()
 
+
+/**/
+/********************************************************
+* Function: SIF_FirZeroNotchFilter
+*
+* Parameters:
+*   SLData_t * SIGLIB_PTR_DECL pDstFIRCoeffs,       - Output coefficient pointer
+*   const SLData_t centreFrequency               - Notch centre frequency normalized to Fs = 1 Hz
+*
+* Return value:
+*   void
+*
+* Description:
+*   Convert FIR filter into separate poly-phase filter phases
+*
+********************************************************/
+
+void SIGLIB_FUNC_DECL SIF_FirZeroNotchFilter (SLData_t * SIGLIB_PTR_DECL pDstFIRCoeffs,  // Coefficients array
+    const SLData_t centreFrequency)      // Notch centre frequency normalized to Fs = 1 Hz
+
+{
+    *pDstFIRCoeffs     = SIGLIB_ONE;
+    *(pDstFIRCoeffs+1) = SIGLIB_MINUS_TWO * SDS_Cos (SIGLIB_TWO_PI * centreFrequency);
+    *(pDstFIRCoeffs+2) = SIGLIB_ONE;
+}
 
