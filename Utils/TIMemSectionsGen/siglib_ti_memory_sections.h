@@ -11,9 +11,8 @@ This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
 
 SigLib is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
+it under the terms of the GNU General Public License V2, as
+published by the Free Software Foundation.
 
 SigLib is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of

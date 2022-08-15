@@ -10,7 +10,7 @@
 #include <siglib.h>                                         // SigLib DSP library
 
 // Define constants
-#define TEST_SINE               1                           // Set to '1' to test sine, '0' to test cosine
+#define TEST_COSINE             1                           // Set to '1' to test cosine, '0' to test sine
 #define EXTENDED_DATA           1                           // Set to '1' to use extended dataset, '0' otherwise
 
 #define FFT_LENGTH              16
@@ -84,11 +84,11 @@ int main(void)
                         SIGLIB_NULL_DATA_PTR ,              // Unused
                         FFT_LENGTH);                        // Output dataset length
 #else
-#if TEST_SINE
-    printf("Single cycle of sinewave\n");
+#if TEST_COSINE
+    printf("Single cycle of cosine wave\n");
     SourcePhase = SIGLIB_ZERO;                              // Generate signal 1
     SDA_SignalGenerate (pRealData1,                         // Pointer to destination array
-                        SIGLIB_SINE_WAVE,                   // Signal type - Sine wave
+                        SIGLIB_COSINE_WAVE,                 // Signal type - Sine wave
                         SIGLIB_ONE,                         // Signal peak level
                         SIGLIB_FILL,                        // Fill (overwrite) or add to existing array contents
                         SIGLIB_ONE/FFT_LENGTH,              // Signal frequency
@@ -101,7 +101,7 @@ int main(void)
 
     SourcePhase = SIGLIB_ZERO;                              // Generate signal 2
     SDA_SignalGenerate (pRealData2,                         // Pointer to destination array
-                        SIGLIB_SINE_WAVE,                   // Signal type - Sine wave
+                        SIGLIB_COSINE_WAVE,                 // Signal type - Sine wave
                         SIGLIB_ONE,                         // Signal peak level
                         SIGLIB_FILL,                        // Fill (overwrite) or add to existing array contents
                         SIGLIB_ONE/FFT_LENGTH,              // Signal frequency
@@ -112,10 +112,10 @@ int main(void)
                         SIGLIB_NULL_DATA_PTR ,              // Unused
                         FFT_LENGTH);                        // Output dataset length
 #else
-    printf("Single cycle of cosinewave\n");
+    printf("Single cycle of sine wave\n");
     SourcePhase = SIGLIB_ZERO;                              // Generate signal 1
     SDA_SignalGenerate (pRealData1,                         // Pointer to destination array
-                        SIGLIB_COSINE_WAVE,                 // Signal type - Sine wave
+                        SIGLIB_SINE_WAVE,                   // Signal type - Sine wave
                         SIGLIB_ONE,                         // Signal peak level
                         SIGLIB_FILL,                        // Fill (overwrite) or add to existing array contents
                         SIGLIB_ONE/FFT_LENGTH,              // Signal frequency
@@ -128,7 +128,7 @@ int main(void)
 
     SourcePhase = SIGLIB_ZERO;                              // Generate signal 2
     SDA_SignalGenerate (pRealData2,                         // Pointer to destination array
-                        SIGLIB_COSINE_WAVE,                 // Signal type - Sine wave
+                        SIGLIB_SINE_WAVE,                   // Signal type - Sine wave
                         SIGLIB_ONE,                         // Signal peak level
                         SIGLIB_FILL,                        // Fill (overwrite) or add to existing array contents
                         SIGLIB_ONE/FFT_LENGTH,              // Signal frequency
