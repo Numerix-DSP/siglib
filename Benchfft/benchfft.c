@@ -633,8 +633,8 @@ void SDA_Rfft (SLData_t realData[],
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
 #pragma DATA_ALIGN(realData, 8);            // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(imagData, 8);            // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pFFTCoeffs, 8);          // Align arrays on 64 bit double word boundary for LDDW
+#pragma DATA_ALIGN(imagData, 8);
+#pragma DATA_ALIGN(pFFTCoeffs, 8);
 #endif
 #endif
 

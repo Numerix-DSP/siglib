@@ -634,8 +634,8 @@ void SIGLIB_FUNC_DECL SDA_Window16 (const SLInt16_t * SIGLIB_PTR_DECL pSrc,
     SLArrayIndex_t i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                     // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 4);            // Align arrays on 64 bit double word boundary for LDDW
+#ifdef _TMS320C6700                         // Defined by TI compiler
+#pragma DATA_ALIGN(pSrc, 4);                // Align arrays on 64 bit double word boundary for LDDW
 #pragma DATA_ALIGN(pDst, 4);
 #pragma DATA_ALIGN(pWindowCoeffs, 4);
 #endif
@@ -739,8 +739,8 @@ void SIGLIB_FUNC_DECL SDA_Window32 (const SLInt32_t * SIGLIB_PTR_DECL pSrc,
     SLArrayIndex_t i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                     // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);            // Align arrays on 64 bit double word boundary for LDDW
+#ifdef _TMS320C6700                         // Defined by TI compiler
+#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
 #pragma DATA_ALIGN(pDst, 8);
 #pragma DATA_ALIGN(pWindowCoeffs, 8);
 #endif
