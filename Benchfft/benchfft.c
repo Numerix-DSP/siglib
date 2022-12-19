@@ -84,12 +84,7 @@ clock_t clock() {
 typedef double          SLData_t;       // Declare data types
 typedef long            SLFixData_t;    // Declare index types
 
-#elif defined (_TMS320C40) || defined (_TMS320C30)  // Is the compiler TI
-#define SINGLE_FFT      1               // Should we do one FFT or ten thousand ?
-typedef float           SLData_t;       // Declare data types
-typedef long            SLFixData_t;    // Declare index types
-
-#elif defined (_TMS320C6700) || defined (_TMS320C6200) || defined (_TMS320C6400)    // Is the compiler TI
+#elif defined (_TMS320C6400)            // Is the compiler TI
 #include <stdio.h>
 #include <time.h>
 #define SINGLE_FFT      1               // Should we do one FFT or ten thousand ?
@@ -347,7 +342,7 @@ int main(void)
 #endif
 
 
-#if defined (_MSC_VER) || defined (__unix) || defined (__WATCOMC__)
+#if defined (_MSC_VER) || defined (__unix)
     stop = clock();
     printf("Execution time = %le seconds for a %d point real FFT\n",
             (((float)(stop - start - overhead)) / ((float)(((long)CLOCKS_PER_SEC) * (100 * ((long)FFT_LOOP_SIZE))))), FFT_SIZE);
@@ -636,7 +631,7 @@ void SDA_Rfft (SLData_t realData[],
     SLData_t       RealTemp, ImagTemp, Cos, Sin;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
+#ifdef __TMS320C6X__                        // Defined by TI compiler
 #pragma DATA_ALIGN(realData, 8);            // Align arrays on 64 bit double word boundary for LDDW
 #pragma DATA_ALIGN(imagData, 8);            // Align arrays on 64 bit double word boundary for LDDW
 #pragma DATA_ALIGN(pFFTCoeffs, 8);          // Align arrays on 64 bit double word boundary for LDDW

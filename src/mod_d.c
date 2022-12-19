@@ -10,25 +10,7 @@ Support for SigLib is available via Email : support@numerix-dsp.com
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
 
-SigLib is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-SigLib is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
-
-This sofware is also available with a commercial license, for use in
-proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
-https://www.numerix-dsp.com
-support@.numerix-dsp.com
+__SIGLIB_LICENSE__
 
 Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
 ---------------------------------------------------------------------------
@@ -1141,8 +1123,8 @@ void SIGLIB_FUNC_DECL SDA_QpskModulate (const SLFixData_t TxDiBit,
     SLArrayIndex_t i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pDst, 8);                // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -1344,8 +1326,8 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_QpskDemodulate (const SLData_t * SIGLIB_PTR_DEC
     SLFixData_t    RxDiBit = SIGLIB_AI_ZERO;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -1464,8 +1446,8 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_QpskDemodulateDebug (const SLData_t * SIGLIB_PT
     SLFixData_t    RxDiBit = SIGLIB_AI_ZERO;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -1699,8 +1681,8 @@ void SIGLIB_FUNC_DECL SDA_FskModulateByte (SLFixData_t TxByte,
     SLData_t       LocalLevelZeroCarrierPhase = *LevelZeroCarrierPhase;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pDst, 8);                // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -1768,10 +1750,10 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_FskDemodulateByte (const SLData_t * SIGLIB_PTR_
     SLData_t       LevelOnePeak, LevelZeroPeak;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pLevelOneFilter, 8);
-#pragma DATA_ALIGN(pLevelZeroFilter, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pLevelOneFilter % 8 == 0);
+_nassert((int) pLevelZeroFilter % 8 == 0);
 #endif
 #endif
 
@@ -1848,8 +1830,8 @@ void SIGLIB_FUNC_DECL SDA_CpfskModulateByte (SLFixData_t TxByte,
     SLData_t       Phase, PhaseDelta;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pDst, 8);                // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -1922,8 +1904,8 @@ void SIGLIB_FUNC_DECL SDA_FskModulate (SLFixData_t TxBit,
     SLData_t       LocalLevelZeroCarrierPhase = *LevelZeroCarrierPhase;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pDst, 8);                // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -1987,10 +1969,10 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_FskDemodulate (const SLData_t * SIGLIB_PTR_DECL
     SLData_t        LevelOnePeak, LevelZeroPeak;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pLevelOneFilter, 8);
-#pragma DATA_ALIGN(pLevelZeroFilter, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pLevelOneFilter % 8 == 0);
+_nassert((int) pLevelZeroFilter % 8 == 0);
 #endif
 #endif
 
@@ -2065,8 +2047,8 @@ void SIGLIB_FUNC_DECL SDA_CpfskModulate (SLFixData_t TxBit,
     SLData_t       Phase, PhaseDelta;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pDst, 8);                // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -2269,8 +2251,8 @@ void SIGLIB_FUNC_DECL SDA_Qam16Modulate (const SLFixData_t TxNibble,
     SLArrayIndex_t i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pDst, 8);                // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -2463,8 +2445,8 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Qam16Demodulate (const SLData_t * SIGLIB_PTR_DE
     SLFixData_t    RxNibble = SIGLIB_AI_ZERO;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -2587,8 +2569,8 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Qam16DemodulateDebug (const SLData_t * SIGLIB_P
     SLFixData_t    RxNibble = SIGLIB_AI_ZERO;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -2838,8 +2820,8 @@ void SIGLIB_FUNC_DECL SDA_BpskModulate (SLFixData_t TxBit,
     SLData_t       LocalCarrierPhase = *pCarrierPhase;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pDst, 8);                // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -2894,8 +2876,8 @@ void SIGLIB_FUNC_DECL SDA_BpskModulateByte (SLFixData_t TxByte,
     SLData_t       LocalCarrierPhase = *pCarrierPhase;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pDst, 8);                // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -3036,11 +3018,11 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_BpskDemodulate (const SLData_t * SIGLIB_PTR_DEC
     SLData_t        RealVCOOutput, ImagVCOOutput;           // Local VCO output
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pCostasLpLPF1State, 8);  // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pCostasLpLPF2State, 8);
-#pragma DATA_ALIGN(pCostasLpLPFCoeffs, 8);
-#pragma DATA_ALIGN(pCostasLoopVCOLookUpTable, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pCostasLpLPF1State % 8 == 0);  // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pCostasLpLPF2State % 8 == 0);
+_nassert((int) pCostasLpLPFCoeffs % 8 == 0);
+_nassert((int) pCostasLoopVCOLookUpTable % 8 == 0);
 #endif
 #endif
 
@@ -3163,11 +3145,11 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_BpskDemodulateDebug (const SLData_t * SIGLIB_PT
     SLData_t        RealVCOOutput, ImagVCOOutput;           // Local VCO output
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pCostasLpLPF1State, 8);  // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pCostasLpLPF2State, 8);
-#pragma DATA_ALIGN(pCostasLpLPFCoeffs, 8);
-#pragma DATA_ALIGN(pCostasLoopVCOLookUpTable, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pCostasLpLPF1State % 8 == 0);  // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pCostasLpLPF2State % 8 == 0);
+_nassert((int) pCostasLpLPFCoeffs % 8 == 0);
+_nassert((int) pCostasLoopVCOLookUpTable % 8 == 0);
 #endif
 #endif
 
@@ -3302,8 +3284,8 @@ void SIGLIB_FUNC_DECL SDA_DpskModulate (SLFixData_t TxBit,
     SLData_t       LocalpCarrierPhase = *pCarrierPhase;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pDst, 8);                // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -3359,8 +3341,8 @@ void SIGLIB_FUNC_DECL SDA_DpskModulateByte (SLFixData_t TxByte,
     SLData_t       LocalpCarrierPhase = *pCarrierPhase;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pDst, 8);                // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -3504,11 +3486,11 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_DpskDemodulate (const SLData_t * SIGLIB_PTR_DEC
     SLData_t        RealVCOOutput, ImagVCOOutput;           // Local VCO output
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pCostasLpLPF1State, 8);  // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pCostasLpLPF2State, 8);
-#pragma DATA_ALIGN(pCostasLpLPFCoeffs, 8);
-#pragma DATA_ALIGN(pCostasLoopVCOLookUpTable, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pCostasLpLPF1State % 8 == 0);  // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pCostasLpLPF2State % 8 == 0);
+_nassert((int) pCostasLpLPFCoeffs % 8 == 0);
+_nassert((int) pCostasLoopVCOLookUpTable % 8 == 0);
 #endif
 #endif
 
@@ -3633,11 +3615,11 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_DpskDemodulateDebug (const SLData_t * SIGLIB_PT
     SLData_t        RealVCOOutput, ImagVCOOutput;           // Local VCO output
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pCostasLpLPF1State, 8);  // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pCostasLpLPF2State, 8);
-#pragma DATA_ALIGN(pCostasLpLPFCoeffs, 8);
-#pragma DATA_ALIGN(pCostasLoopVCOLookUpTable, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pCostasLpLPF1State % 8 == 0);  // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pCostasLpLPF2State % 8 == 0);
+_nassert((int) pCostasLpLPFCoeffs % 8 == 0);
+_nassert((int) pCostasLoopVCOLookUpTable % 8 == 0);
 #endif
 #endif
 
@@ -3880,8 +3862,8 @@ void SIGLIB_FUNC_DECL SDA_PiByFourDQpskModulate (const SLFixData_t TxDiBit,
     SLArrayIndex_t          OutputSymbol;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pDst, 8);                // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 

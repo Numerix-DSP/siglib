@@ -10,24 +10,7 @@ Support for SigLib is available via EMail : support@numerix-dsp.com
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
 
-SigLib is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License V2, as
-published by the Free Software Foundation.
-
-SigLib is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
-
-This sofware is also available with a commercial license, for use in
-proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
-https://www.numerix-dsp.com
-support@.numerix-dsp.com
+__SIGLIB_LICENSE__
 
 Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
 ---------------------------------------------------------------------------
@@ -43,7 +26,7 @@ Update history :
 #ifndef _HP_VEE         // The following functionality is not supported by VEE
 
 #define SIGLIB                          1                   // Indicates SigLib is being used
-#define SIGLIB_VERSION                  10.14               // Indicates SigLib version being used
+#define SIGLIB_VERSION                  10.20               // Indicates SigLib version being used
 #define SIGLIB_ENABLE_DEBUG_FPRINTF     0                   // Set to 1 to enable SUF_Debugfprintf functions in some siglib functions
 
 
@@ -1581,6 +1564,12 @@ void SIGLIB_FUNC_DECL SDA_OnePoleHighPassNormalized (const SLData_t * SIGLIB_INP
     SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination array
     const SLData_t,                                         // Filter alpha
     SLData_t *,                                             // Filter state
+    const SLArrayIndex_t);                                  // Array length
+
+void SIGLIB_FUNC_DECL SDA_OnePoleHighPassPerSample (const SLData_t * SIGLIB_INPUT_PTR_DECL,    // Pointer to input data
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination array
+    SLData_t * SIGLIB_INOUT_PTR_DECL,                       // Pointer to state array
+    const SLData_t,                                         // Filter alpha
     const SLArrayIndex_t);                                  // Array length
 
 SLData_t SDS_OnePoleTimeConstantToFilterCoeff (const SLData_t,  // Attack / decay time period (ms)

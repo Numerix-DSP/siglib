@@ -11,9 +11,9 @@ windowZeroEdgeLength=16             # Number of samples at each end of window fu
 fftLength=256                       # FFT lengh
 linearFrequencyMagnigudeFlag=1      # Set to '1' to calculate linear FFT magnitude, '0' for log magnitude (dB)
 realOnlyFFTOutput=1                 # Set to '1' to calculate real only FFT output, '0' for standard complex output
-networkInputSampleLength=120        # Number of neural network input layer nodes
+networkInputLayerNodes=120          # Number of neural network input layer nodes
 networkFftStartBin=2                # Set to non-zero value to ignore D.C. FFT bins
-dataAugmentationStride=32           # dataAugmentationStride=0 is equivalent to stride length == networkInputSampleLength then No overlap of frames = no data augmentation
+dataAugmentationStride=32           # dataAugmentationStride=0 is equivalent to stride length == networkInputLayerNodes then No overlap of frames = no data augmentation
 dataAugmentationRandomGainFlag=0    # Data augmentation random gain enable flag
 dataAugmentationRandomGainMin=-12.  # Data augmentation maximum attenuation (dB)
 dataAugmentationRandomGainMax=12.   # Data augmentation maximum gain (dB)
@@ -45,7 +45,7 @@ InputFile_1="Machine2"
 InputFile_2="Machine3"
 InputFile_3="Machine4"
 
-while getopts 0:1:2:3:b:Cpdmsgl:w:F:L:R:t:n:x:a:e:r:H:q:N:C:o:h flag
+while getopts 0:1:2:3:b:Cpdmsgi:w:F:L:R:t:n:x:a:e:r:H:q:N:o:h flag
 do
     case "${flag}" in
         0) InputFile_0=${OPTARG};;
@@ -66,7 +66,7 @@ do
         d) debugFlag=1;;
         m) confusionMatrixFlag=1;;
         s) scatterDiagramFlag=1;;
-        l) networkInputSampleLength=${OPTARG};;
+        i) networkInputLayerNodes=${OPTARG};;
         a) dataAugmentationStride=${OPTARG};;
         r) learningRate=${OPTARG};;
         e) epochCount=${OPTARG};;
@@ -97,7 +97,7 @@ echo "fftLength                      : $fftLength"
 echo "linearFrequencyMagnigudeFlag   : $linearFrequencyMagnigudeFlag"
 echo "realOnlyFFTOutput              : $realOnlyFFTOutput"
 echo "networkFftStartBin             : $networkFftStartBin"
-echo "networkInputSampleLength       : $networkInputSampleLength"
+echo "networkInputLayerNodes       : $networkInputLayerNodes"
 echo "inputThresholdLevel            : $inputThresholdLevel"
 echo "epochCount                     : $epochCount"
 echo "learningRate                   : $learningRate"
@@ -114,32 +114,32 @@ echo "scatterDiagramFlag             : $scatterDiagramFlag"
 if [ $helpFlag == 1 ]; then
     echo " "
     echo "gbr_multi_category.sh"
-    echo "    -h:                   This help screen"
-    echo "    -0 filename:          File index #0"
-    echo "    -1 filename:          File index #1"
-    echo "    -2 filename:          File index #2"
-    echo "    -3 filename:          File index #3"
-    echo "    -C:                   Compile the source files"
-    echo "    -p:                   Pre-process the original recordings, otherwise use cached .csv data"
-    echo "    -a stride:            Data augmentation stride (Default=$dataAugmentationStride)"
-    echo "    -w Num:               Set the num values at the edge of the window frame to zero (Default=$windowZeroEdgeLength)"
-    echo "    -F length:            FFT length (Default=$fftLength)"
-    echo "    -L {0/1}:             Linear FFT magnitude flag - '1' for Linear, '0' for Logarithmic"
-    echo "    -R {0/1}:             Real FFT output flag - '1' for Real, '0' for Complex"
-    echo "    -b bin_number:        FFT start bin for Neural Network input (Default=$networkFftStartBin)"
-    echo "    -l number_of_nodes:   Neural Network input sample length (Default=$networkInputSampleLength)"
-    echo "    -g:                   Data augmentation random gain enable (Default=disabled)"
-    echo "    -n min_gain:          Data augmentation random gain minimum (Default=$dataAugmentationRandomGainMin)"
-    echo "    -x max_gain:          Data augmentation random gain maximum (Default=$dataAugmentationRandomGainMax)"
-    echo "    -t threshold_level:   Input threshold level. Frames with an absolute maximum level below the threshold will not be processed (Default=$inputThresholdLevel)"
-    echo "    -e count:             Epoch count (Default=$epochCount)"
-    echo "    -r rate:              Learning rate (Default=$learningRate)"
-    echo "    -H Num:               Number of hidden layer nodes (Default=$networkHiddenLayerNodes)"
-    echo "    -q Num:               Number of bits of quantization in weights binary file (Default=$quantizationNeuralNetworkBits)"
-    echo "    -N Num:               Number of largest magnitudes to maintain, other values are set to 0 (Default=$numLargestFrequencyMagnitudes)"
-    echo "    -o alpha:             One-pole filter feedback alpha (Default=$onePoleFilterAlpha)"
-    echo "    -s:                   Enable scatter diagram"
-    echo "    -m:                   Enable confusion matrix diagram"
+    echo "    -h:                       This help screen"
+    echo "    -0 filename:              File index #0"
+    echo "    -1 filename:              File index #1"
+    echo "    -2 filename:              File index #2"
+    echo "    -3 filename:              File index #3"
+    echo "    -C:                       Compile the source files"
+    echo "    -p:                       Pre-process the original recordings, otherwise use cached .csv data"
+    echo "    -a stride:                Data augmentation stride (Default=$dataAugmentationStride)"
+    echo "    -w Num:                   Set the num values at the edge of the window frame to zero (Default=$windowZeroEdgeLength)"
+    echo "    -F length:                FFT length (Default=$fftLength)"
+    echo "    -L {0/1}:                 Linear FFT magnitude flag - '1' for Linear, '0' for Logarithmic"
+    echo "    -R {0/1}:                 Real FFT output flag - '1' for Real, '0' for Complex"
+    echo "    -b bin_number:            FFT start bin for Neural Network input (Default=$networkFftStartBin)"
+    echo "    -i number_of_input_nodes: Neural Network input sample length (Default=$networkInputLayerNodes)"
+    echo "    -g:                       Data augmentation random gain enable (Default=disabled)"
+    echo "    -n min_gain:              Data augmentation random gain minimum (Default=$dataAugmentationRandomGainMin)"
+    echo "    -x max_gain:              Data augmentation random gain maximum (Default=$dataAugmentationRandomGainMax)"
+    echo "    -t threshold_level:       Input threshold level. Frames with an absolute maximum level below the threshold will not be processed (Default=$inputThresholdLevel)"
+    echo "    -e count:                 Epoch count (Default=$epochCount)"
+    echo "    -r rate:                  Learning rate (Default=$learningRate)"
+    echo "    -H Num:                   Number of hidden layer nodes (Default=$networkHiddenLayerNodes)"
+    echo "    -q Num:                   Number of bits of quantization in weights binary file (Default=$quantizationNeuralNetworkBits)"
+    echo "    -N Num:                   Number of largest magnitudes to maintain, other values are set to 0 (Default=$numLargestFrequencyMagnitudes)"
+    echo "    -o alpha:                 One-pole filter feedback alpha (Default=$onePoleFilterAlpha)"
+    echo "    -s:                       Enable scatter diagram"
+    echo "    -m:                       Enable confusion matrix diagram"
     echo " "
     echo "Try: ./gbr_multi_category.sh -C -p -g -s -m"
     exit
@@ -165,37 +165,37 @@ if [ "$preProcessDataFlag" == 1 ]; then                     # If pre-processing 
     if [ -f preprocess_wav ]; then
         if [ $debugFlag == 1 ]; then
             if [ $dataAugmentationRandomGainFlag == 1 ]; then
-                ./preprocess_wav -d -f $InputFile_0 -c 0 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -l $networkInputSampleLength -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha -g -n $dataAugmentationRandomGainMin -x $dataAugmentationRandomGainMax
-                ./preprocess_wav -d -f $InputFile_1 -c 1 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -l $networkInputSampleLength -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha -g -n $dataAugmentationRandomGainMin -x $dataAugmentationRandomGainMax
-                ./preprocess_wav -d -f $InputFile_2 -c 2 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -l $networkInputSampleLength -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha -g -n $dataAugmentationRandomGainMin -x $dataAugmentationRandomGainMax
-                ./preprocess_wav -d -f $InputFile_3 -c 3 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -l $networkInputSampleLength -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha -g -n $dataAugmentationRandomGainMin -x $dataAugmentationRandomGainMax
+                ./preprocess_wav -d -f $InputFile_0 -c 0 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -i $networkInputLayerNodes -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha -g -n $dataAugmentationRandomGainMin -x $dataAugmentationRandomGainMax
+                ./preprocess_wav -d -f $InputFile_1 -c 1 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -i $networkInputLayerNodes -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha -g -n $dataAugmentationRandomGainMin -x $dataAugmentationRandomGainMax
+                ./preprocess_wav -d -f $InputFile_2 -c 2 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -i $networkInputLayerNodes -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha -g -n $dataAugmentationRandomGainMin -x $dataAugmentationRandomGainMax
+                ./preprocess_wav -d -f $InputFile_3 -c 3 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -i $networkInputLayerNodes -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha -g -n $dataAugmentationRandomGainMin -x $dataAugmentationRandomGainMax
             else
-                ./preprocess_wav -d -f $InputFile_0 -c 0 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -l $networkInputSampleLength -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha
-                ./preprocess_wav -d -f $InputFile_1 -c 1 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -l $networkInputSampleLength -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha
-                ./preprocess_wav -d -f $InputFile_2 -c 2 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -l $networkInputSampleLength -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha
-                ./preprocess_wav -d -f $InputFile_3 -c 3 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -l $networkInputSampleLength -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha
+                ./preprocess_wav -d -f $InputFile_0 -c 0 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -i $networkInputLayerNodes -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha
+                ./preprocess_wav -d -f $InputFile_1 -c 1 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -i $networkInputLayerNodes -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha
+                ./preprocess_wav -d -f $InputFile_2 -c 2 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -i $networkInputLayerNodes -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha
+                ./preprocess_wav -d -f $InputFile_3 -c 3 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -i $networkInputLayerNodes -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha
             fi
         else
             if [ $dataAugmentationRandomGainFlag == 1 ]; then
-                ./preprocess_wav -f $InputFile_0 -c 0 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -l $networkInputSampleLength -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha -g -n $dataAugmentationRandomGainMin -x $dataAugmentationRandomGainMax
-                ./preprocess_wav -f $InputFile_1 -c 1 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -l $networkInputSampleLength -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha -g -n $dataAugmentationRandomGainMin -x $dataAugmentationRandomGainMax
-                ./preprocess_wav -f $InputFile_2 -c 2 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -l $networkInputSampleLength -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha -g -n $dataAugmentationRandomGainMin -x $dataAugmentationRandomGainMax
-                ./preprocess_wav -f $InputFile_3 -c 3 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -l $networkInputSampleLength -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha -g -n $dataAugmentationRandomGainMin -x $dataAugmentationRandomGainMax
+                ./preprocess_wav -f $InputFile_0 -c 0 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -i $networkInputLayerNodes -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha -g -n $dataAugmentationRandomGainMin -x $dataAugmentationRandomGainMax
+                ./preprocess_wav -f $InputFile_1 -c 1 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -i $networkInputLayerNodes -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha -g -n $dataAugmentationRandomGainMin -x $dataAugmentationRandomGainMax
+                ./preprocess_wav -f $InputFile_2 -c 2 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -i $networkInputLayerNodes -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha -g -n $dataAugmentationRandomGainMin -x $dataAugmentationRandomGainMax
+                ./preprocess_wav -f $InputFile_3 -c 3 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -i $networkInputLayerNodes -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha -g -n $dataAugmentationRandomGainMin -x $dataAugmentationRandomGainMax
             else
-                ./preprocess_wav -f $InputFile_0 -c 0 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -l $networkInputSampleLength -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha
-                ./preprocess_wav -f $InputFile_1 -c 1 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -l $networkInputSampleLength -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha
-                ./preprocess_wav -f $InputFile_2 -c 2 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -l $networkInputSampleLength -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha
-                ./preprocess_wav -f $InputFile_3 -c 3 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -l $networkInputSampleLength -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha
+                ./preprocess_wav -f $InputFile_0 -c 0 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -i $networkInputLayerNodes -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha
+                ./preprocess_wav -f $InputFile_1 -c 1 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -i $networkInputLayerNodes -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha
+                ./preprocess_wav -f $InputFile_2 -c 2 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -i $networkInputLayerNodes -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha
+                ./preprocess_wav -f $InputFile_3 -c 3 -s $dataAugmentationStride -w $windowZeroEdgeLength -b $networkFftStartBin -i $networkInputLayerNodes -N $numLargestFrequencyMagnitudes -o $onePoleFilterAlpha
             fi
         fi
         rm -f trainLength_*.txt
-        touch trainLength_$networkInputSampleLength.txt
+        touch trainLength_$networkInputLayerNodes.txt
     else            # Exit if preprocess_wav not compiled
         echo "ERROR! preprocess_wav not compiled"
         exit
     fi
 else
-    if [ ! -f trainLength_$networkInputSampleLength.txt ]; then
+    if [ ! -f trainLength_$networkInputLayerNodes.txt ]; then
         echo " "
         echo "Pre-processed data not of desired length !!"
         echo "Re-run gbr_multi_category.sh with -p option and the desired sample length."
@@ -220,7 +220,7 @@ if [ $compileFlag == 1 ]; then                              # If compilation is 
     if [ -f network_train_multi_category ]; then
         rm -f network_train_multi_category
     fi
-    gcc network_train_multi_category.c -O3 -Wall -DNETWORK_INPUT_SAMPLE_LENGTH=$networkInputSampleLength -DINPUT_SCALING_FACTOR=$networkInputScalingFactor -DNETWORK_HIDDEN_LAYER_NODES=$networkHiddenLayerNodes -DHIDDEN_LAYER_ACTIVATION_TYPE=$hiddenLayerActivation -DOUTPUT_LAYER_ACTIVATION_TYPE=$outputLayerActivation -Wno-main -Wno-unused-value -std=gnu17 -l siglib -l gnuplot_c -o network_train_multi_category -lm
+    gcc network_train_multi_category.c -O3 -Wall -DNETWORK_INPUT_SAMPLE_LENGTH=$networkInputLayerNodes -DINPUT_SCALING_FACTOR=$networkInputScalingFactor -DNETWORK_HIDDEN_LAYER_NODES=$networkHiddenLayerNodes -DHIDDEN_LAYER_ACTIVATION_TYPE=$hiddenLayerActivation -DOUTPUT_LAYER_ACTIVATION_TYPE=$outputLayerActivation -Wno-main -Wno-unused-value -std=gnu17 -l siglib -l gnuplot_c -o network_train_multi_category -lm
 fi
 if [ -f network_train_multi_category ]; then
     if [ "$debugFlag" == 1 ]; then                          # debugFlag" == 1
@@ -239,7 +239,7 @@ if [ $compileFlag == 1 ]; then                              # If compilation is 
     if [ -f network_validate_multi_category ]; then
         rm -f network_validate_multi_category
     fi
-    gcc network_validate_multi_category.c -O3 -Wall -DNETWORK_INPUT_SAMPLE_LENGTH=$networkInputSampleLength -DINPUT_SCALING_FACTOR=$networkInputScalingFactor -DNETWORK_HIDDEN_LAYER_NODES=$networkHiddenLayerNodes -DHIDDEN_LAYER_ACTIVATION_TYPE=$hiddenLayerActivation -DOUTPUT_LAYER_ACTIVATION_TYPE=$outputLayerActivation -Wno-main -Wno-unused-value -std=gnu17 -l siglib -l gnuplot_c -o network_validate_multi_category -lm
+    gcc network_validate_multi_category.c -O3 -Wall -DNETWORK_INPUT_SAMPLE_LENGTH=$networkInputLayerNodes -DINPUT_SCALING_FACTOR=$networkInputScalingFactor -DNETWORK_HIDDEN_LAYER_NODES=$networkHiddenLayerNodes -DHIDDEN_LAYER_ACTIVATION_TYPE=$hiddenLayerActivation -DOUTPUT_LAYER_ACTIVATION_TYPE=$outputLayerActivation -Wno-main -Wno-unused-value -std=gnu17 -l siglib -l gnuplot_c -o network_validate_multi_category -lm
 fi
 if [ -f network_validate_multi_category ]; then
     if [ "$debugFlag" == 1 ] && [ "$confusionMatrixFlag" == 1 ]; then       # Debug && ConfusionMatrix

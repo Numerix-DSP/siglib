@@ -33,7 +33,7 @@ call gb cornu_s
 call gb correlate1
 call gb correlate2
 call gb correlate3
-call gb costasl
+call gb costasLoop
 call gb covar
 call gb datatype
 call gb dbpsk

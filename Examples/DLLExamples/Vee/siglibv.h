@@ -11,24 +11,7 @@ Support for SigLib is available via EMail : support@numerix-dsp.com
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
 
-SigLib is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License V2, as
-published by the Free Software Foundation.
-
-SigLib is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
-
-This sofware is also available with a commercial license, for use in
-proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
-https://www.numerix-dsp.com
-support@.numerix-dsp.com
+__SIGLIB_LICENSE__
 
 Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
 ---------------------------------------------------------------------------
@@ -1584,6 +1567,12 @@ void _stdcall SDA_OnePoleHighPassNormalized ( double * SIGLIB_INPUT_PTR_DECL,   
     double *,                                             // Filter state
      long);                                  // Array length
 
+void _stdcall SDA_OnePoleHighPassPerSample ( double * SIGLIB_INPUT_PTR_DECL,    // Pointer to input data
+    double * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to destination array
+    double * SIGLIB_INOUT_PTR_DECL,                       // Pointer to state array
+     double,                                         // Filter alpha
+     long);                                  // Array length
+
 double SDS_OnePoleTimeConstantToFilterCoeff ( double,  // Attack / decay time period (ms)
      double);                                        // Sample rate
 
@@ -2994,7 +2983,7 @@ long _stdcall SDS_CostasQamDemodulate ( double,    // Source data sample
      long);                                  // ELG output synchronization delay length
 
 
-#line 2980 "siglib.h"
+#line 2986 "siglib.h"
 long _stdcall SDS_CostasQamDemodulateDebug ( double,   // Source data sample
     double *,                                             // Pointer to real destination symbol point
     double *,                                             // Pointer to imaginary destination symbol point
@@ -3123,7 +3112,7 @@ long _stdcall SDA_CostasQamDemodulateDebug ( double * SIGLIB_INPUT_PTR_DECL,   /
     double *,                                             // Pointer to debug real filter output
     double *,                                             // Pointer to debug imaginary filter output
     double *);                                            // Pointer to debug ELG trigger output
-#line 3109 "siglib.h"
+#line 3115 "siglib.h"
 
 void _stdcall SIF_QpskModulate (double * SIGLIB_OUTPUT_PTR_DECL,      // Carrier table pointer
      double,                                         // Carrier phase increment per sample (radians / 2Ï€)
@@ -6337,5 +6326,5 @@ void _stdcall SMX_ExtractCategoricalColumn ( double * SIGLIB_INPUT_PTR_DECL, // 
 
                                     // End of SigLib DSP function section
 
-#line 6323 "siglib.h"
+#line 6329 "siglib.h"
 

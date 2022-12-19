@@ -7,7 +7,7 @@ LIB1=siglib
 SC100_DIR=C:/sc100/sw_tools/bin/
 
 # object file list which makes up the library
-OBJS1=
+OBJS1=
 
 
 USER_CFLAGS= -c -O1 -I%SIGLIB_PATH%\include

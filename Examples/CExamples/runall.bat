@@ -123,9 +123,9 @@ echo correlate3
 pause
 correlate3
 
-echo costasl
+echo costasLoop
 pause
-costasl
+costasLoop
 
 echo covar
 pause

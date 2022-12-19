@@ -10,25 +10,7 @@ Support for SigLib is available via EMail : support@numerix-dsp.com
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
 
-SigLib is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-SigLib is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
-
-This sofware is also available with a commercial license, for use in
-proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
-https://www.numerix-dsp.com
-support@.numerix-dsp.com
+__SIGLIB_LICENSE__
 
 Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
 ---------------------------------------------------------------------------
@@ -252,150 +234,14 @@ typedef long clock_t;
         // End of #if defined (_MSC_VER)
 
 
-#elif defined (_TMS320C30) || (_TMS320C40)            // Defined by TI compiler
-                            // Function declaration - Not used by this compiler but do not remove
-#define SIGLIB_FUNC_DECL
-                            // Pointer declaration - Not used by this compiler but do not remove
-#define SIGLIB_PTR_DECL
-        // This section defines the base data types for each compiler / processor combination
-        // These types should not generally be used within the library or application code base
-typedef char                        SLInt8_t;                   // Signed 8 bit integer values
-typedef unsigned char               SLUInt8_t;                  // Unsigned 8 bit integer values
-typedef short                       SLInt16_t;                  // Signed 16 bit integer values
-typedef unsigned short              SLUInt16_t;                 // Unsigned 16 bit integer values
-typedef int                         SLInt32_t;                  // Signed 32 bit integer values
-typedef unsigned int                SLUInt32_t;                 // Unsigned 32 bit integer values
-typedef long                        SLInt64_t;                  // Signed 64 bit integer values - not supported by this compiler
-typedef unsigned long               SLUInt64_t;                 // Unsigned 64 bit integer values - not supported by this compiler
-typedef float                       SLFloat32_t;                // 32 bit floating point values
-typedef double                      SLFloat64_t;                // 64 bit floating point values
-
-#ifndef SIGLIB_FIX_DATA_SHORT
-#define SIGLIB_FIX_DATA_SHORT       1                           // SigLib fixed point data is short
-#endif
-#ifndef SIGLIB_DATA_SHORT
-#define SIGLIB_DATA_SHORT           0                           // SigLib data is not short
-#endif
-#ifndef SIGLIB_DATA_LONG
-#define SIGLIB_DATA_LONG            0                           // SigLib data is not long
-#endif
-#ifndef SIGLIB_DATA_FLOAT
-#define SIGLIB_DATA_FLOAT           1                           // SigLib data is float
-#endif
-#ifndef SIGLIB_INDEX_SHORT
-#define SIGLIB_INDEX_SHORT          1                           // SigLib array index is short
-#endif
-#ifndef SIGLIB_INDEX_INT
-#define SIGLIB_INDEX_INT            0                           // SigLib array index is NOT int
-#endif
-
-                            // Arrays > 64K need do not need to be declared huge
-#define SIGLIB_HUGE_DECL
-#define SIGLIB_HUGE_ARRAYS          0
-#ifndef SIGLIB_ARRAY_OR_PTR
-  #define SIGLIB_ARRAY_OR_PTR       SIGLIB_POINTER_ACCESS       // Use pointers for memory accesses
-#endif
-#define SIGLIB_ARRAYS_ALIGNED       0                           // Functionality currently only supported by TMS320C6000 compiler
-
-#define SIGLIB_FILE_IO_SUPPORTED    1                           // File I/O is supported for Debugfprintf functions
-#define SIGLIB_CONSOLE_IO_SUPPORTED 1                           // Console I/O is supported for printf functions
-
-#define SUF_MemoryAllocate(a)       malloc((size_t)(a))         // Define host memory allocation functions
-#define SUF_MemoryFree(a)           free(a)
-
-#define SUF_Printf                  printf                      // Define stdio functions
-#define SUF_Fopen                   fopen
-#define SUF_Fclose                  fclose
-#define SUF_Fprintf                 fprintf
-
-                                                // Define standard math operators
-                                                // Floating point functions
-#define SDS_Sin(a)                  ((SLData_t)sin((double)a))
-#define SDS_Cos(a)                  ((SLData_t)cos((double)a))
-#define SDS_Tan(a)                  ((SLData_t)tan((double)a))
-#define SDS_Asin(a)                 ((SLData_t)asin((double)a))
-#define SDS_Acos(a)                 ((SLData_t)acos((double)a))
-#define SDS_Atan(a)                 ((SLData_t)atan((double)a))
-#define SDS_Atan2(a,b)              ((SLData_t)atan2((double)a,(double)b))
-#define SDS_Sinh(a)                 ((SLData_t)sinh((double)a))
-#define SDS_Cosh(a)                 ((SLData_t)cosh((double)a))
-#define SDS_Tanh(a)                 ((SLData_t)tanh((double)a))
-#define SDS_Sqrt(a)                 ((SLData_t)sqrt((double)a))
-#define SDS_Log(a)                  ((SLData_t)log((double)a))
-#define SDS_Log10(a)                ((SLData_t)log10((double)a))
-#define SDS_10Log10(a)              (SIGLIB_TEN * (SLData_t)log10((double)a))
-#define SDS_20Log10(a)              (SIGLIB_TWENTY * (SLData_t)log10((double)a))
-#define SDS_Abs(a)                  ((SLData_t)fabs((double)a))
-#define SDS_Exp(a)                  ((SLData_t)exp((double)a))
-#define SDS_Pow(a,b)                ((SLData_t)pow((double)a,(double)b))
-#define SDS_Floor(a)                ((SLData_t)floor((double)a))
-#define SDS_Ceil(a)                 ((SLData_t)ceil((double)a))
-#define SDS_Fmod(a,b)               ((SLData_t)fmod((double)a,(double)b))
-#define SDS_Nearest(a)              SDS_Round(a,SIGLIB_ROUND_TO_NEAREST)
-
-                                                // 16 bit fixed point functions
-#define SDS_Sin16(a)                ((SLInt16_t)(((SLData_t)SIGLIB_SHORT_WORD_MAX) * sin((double)a)))
-#define SDS_Cos16(a)                ((SLInt16_t)(((SLData_t)SIGLIB_SHORT_WORD_MAX) * cos((double)a)))
-#define SDS_Tan16(a)                ((SLInt16_t)(((SLData_t)SIGLIB_SHORT_WORD_MAX) * tan((double)a)))
-#define SDS_Asin16(a)               ((SLInt16_t)(((SLData_t)SIGLIB_SHORT_WORD_MAX) * asin((double)a)))
-#define SDS_Acos16(a)               ((SLInt16_t)(((SLData_t)SIGLIB_SHORT_WORD_MAX) * acos((double)a)))
-#define SDS_Atan16(a)               ((SLInt16_t)(((SLData_t)SIGLIB_SHORT_WORD_MAX) * atan((double)a)))
-#define SDS_Atan216(a,b)            ((SLInt16_t)(((SLData_t)SIGLIB_SHORT_WORD_MAX) * atan2((double)a,(double)b)))
-#define SDS_Sinh16(a)               ((SLInt16_t)(((SLData_t)SIGLIB_SHORT_WORD_MAX) * sinh((double)a)))
-#define SDS_Cosh16(a)               ((SLInt16_t)(((SLData_t)SIGLIB_SHORT_WORD_MAX) * cosh((double)a)))
-#define SDS_Tanh16(a)               ((SLInt16_t)(((SLData_t)SIGLIB_SHORT_WORD_MAX) * tanh((double)a)))
-#define SDS_Sqrt16(a)               (((a) == ((SLInt16_t)0)) ? (a) : (((SLInt16_t)sqrt((double)a))))
-#define SDS_Log16(a)                (((a) == ((SLInt16_t)0)) ? (a) : (((SLInt16_t)log((double)a))))
-#define SDS_Log1016(a)              (((a) == ((SLInt16_t)0)) ? (a) : (((SLInt16_t)log10((double)a))))
-#define SDS_10Log1016(a)            (((a) == ((SLInt16_t)0)) ? (a) : ((SIGLIB_TEN * (SLInt16_t)log10((double)a))))
-#define SDS_20Log1016(a)            (((a) == ((SLInt16_t)0)) ? (a) : ((SIGLIB_TWENTY * (SLInt16_t)log10((double)a))))
-#define SDS_Abs16(a)                ((SLInt16_t)abs((SLInt16_t)a))
-#define SDS_Exp16(a)                ((SLInt16_t)(((SLData_t)SIGLIB_SHORT_WORD_MAX) * exp((double)a)))
-#define SDS_Pow16(a,b)              ((SLInt16_t)pow((double)a,(double)b))
-#define SDS_Floor16(a)              ((SLInt16_t)floor((double)a))
-#define SDS_Ceil16(a)               ((SLInt16_t)ceil((double)a))
-#define SDS_Fmod16(a,b)             ((SLInt16_t)fmod((double)a,(double)b))
-#define SDS_Nearest(a)              SDS_Round(a,SIGLIB_ROUND_TO_NEAREST)
-
-                                                // 32 bit fixed point functions
-#define SDS_Sin32(a)                ((SLInt32_t)(((SLData_t)SIGLIB_SHORT_WORD_MAX) * sin((double)a)))
-#define SDS_Cos32(a)                ((SLInt32_t)(((SLData_t)SIGLIB_SHORT_WORD_MAX) * cos((double)a)))
-#define SDS_Tan32(a)                ((SLInt32_t)(((SLData_t)SIGLIB_SHORT_WORD_MAX) * tan((double)a)))
-#define SDS_Asin32(a)               ((SLInt32_t)(((SLData_t)SIGLIB_SHORT_WORD_MAX) * asin((double)a)))
-#define SDS_Acos32(a)               ((SLInt32_t)(((SLData_t)SIGLIB_SHORT_WORD_MAX) * acos((double)a)))
-#define SDS_Atan32(a)               ((SLInt32_t)(((SLData_t)SIGLIB_SHORT_WORD_MAX) * atan((double)a)))
-#define SDS_Atan232(a,b)            ((SLInt32_t)(((SLData_t)SIGLIB_SHORT_WORD_MAX) * atan2((double)a,(double)b)))
-#define SDS_Sinh32(a)               ((SLInt32_t)(((SLData_t)SIGLIB_SHORT_WORD_MAX) * sinh((double)a)))
-#define SDS_Cosh32(a)               ((SLInt32_t)(((SLData_t)SIGLIB_SHORT_WORD_MAX) * cosh((double)a)))
-#define SDS_Tanh32(a)               ((SLInt32_t)(((SLData_t)SIGLIB_SHORT_WORD_MAX) * tanh((double)a)))
-#define SDS_Sqrt32(a)               (((a) == ((SLInt32_t)0)) ? (a) : (((SLInt32_t)sqrt((double)a))))
-#define SDS_Log32(a)                (((a) == ((SLInt32_t)0)) ? (a) : (((SLInt32_t)log((double)a))))
-#define SDS_Log1032(a)              (((a) == ((SLInt32_t)0)) ? (a) : (((SLInt32_t)log10((double)a))))
-#define SDS_10Log1032(a)            (((a) == ((SLInt32_t)0)) ? (a) : (SIGLIB_TEN * ((SLInt32_t)log10((double)a))))
-#define SDS_20Log1032(a)            (((a) == ((SLInt32_t)0)) ? (a) : (SIGLIB_TWENTY * ((SLInt32_t)log10((double)a))))
-#define SDS_Abs32(a)                ((SLInt32_t)labs((SLInt32_t)a))
-#define SDS_Exp32(a)                ((SLInt32_t)(((SLData_t)SIGLIB_SHORT_WORD_MAX) * exp((double)a)))
-#define SDS_Pow32(a,b)              ((SLInt32_t)pow((double)a,(double)b))
-#define SDS_Floor32(a)              ((SLInt32_t)floor((double)a))
-#define SDS_Ceil32(a)               ((SLInt32_t)ceil((double)a))
-#define SDS_Fmod32(a,b)             ((SLInt32_t)fmod((double)a,(double)b))
-#define SDS_Nearest(a)              SDS_Round(a,SIGLIB_ROUND_TO_NEAREST)
-
-#ifndef SL_RANDOMIZE
-#define SL_RANDOMIZE                0           // For functions that use rand(), do not randomize data at start - this requires the time functions to be implemented
-#endif
-
-        // End of #if defined (_TMS320C30) || (_TMS320C40)
-
-
-#elif defined (_TMS320C6700) || defined (_TMS320C6200)            // Defined by TI compiler
+#elif defined (__TMS320C6X__)                                   // Defined by TI compiler
 
 #include <siglib_ti_memory_sections.h>          // declare the memory sections for the SigLib functions
 
                             // Function declaration - Not used by this compiler but do not remove
 #define SIGLIB_FUNC_DECL
                             // Pointer declaration - enable restrict keyword
-#define SIGLIB_PTR_DECL             restrict
+#define SIGLIB_PTR_DECL
         // This section defines the base data types for each compiler / processor combination
         // These types should not generally be used within the library or application code base
 typedef char                        SLInt8_t;                   // Signed 8 bit integer values
@@ -436,7 +282,7 @@ typedef double                      SLFloat64_t;                // 64 bit floati
 #ifndef SIGLIB_ARRAY_OR_PTR
   #define SIGLIB_ARRAY_OR_PTR       SIGLIB_ARRAY_ACCESS         // Use arrays for memory accesses
 #endif
-#define SIGLIB_ARRAYS_ALIGNED       0                           // Functionality currently only supported by TMS320C6000 compiler
+#define SIGLIB_ARRAYS_ALIGNED       1                           // Functionality currently only supported by TMS320C6000 compiler
 
 #define SIGLIB_FILE_IO_SUPPORTED    1                           // File I/O is supported for Debugfprintf functions
 #define SIGLIB_CONSOLE_IO_SUPPORTED 1                           // Console I/O is supported for printf functions
@@ -525,7 +371,7 @@ typedef double                      SLFloat64_t;                // 64 bit floati
 #define SL_RANDOMIZE                0           // For functions that use rand(), do not randomize data at start - this requires the time functions to be implemented
 #endif
 
-        // End of #if defined (_TMS320C6700)
+        // End of #if defined (__TMS320C6X__)
 
 
 #elif defined (__ADSP21000__) || defined (__ADSPTS__)           // Defined by ADI VisualDSP++ compiler
@@ -1354,8 +1200,8 @@ typedef double                      SLFloat64_t;                // 64 bit floati
         // End of #if defined (__unix) || (__GNUC__)
 
 
-                            // _DIAB_TOOL, _CH_ and __WATCOMC__ are defined by the appropriate compilers
-#elif defined (_DIAB_TOOL) || defined (_CH_) || defined (__WATCOMC__)
+                            // _DIAB_TOOL, _CH_ are defined by the appropriate compilers
+#elif defined (_DIAB_TOOL) || defined (_CH_)
                             // Function declaration - Not used by this compiler but do not remove
 #define SIGLIB_FUNC_DECL
                             // Pointer declaration - Not used by this compiler but do not remove
@@ -1484,7 +1330,7 @@ typedef double                      SLFloat64_t;                // 64 bit floati
 #define SDS_Fmod32(a,b)             ((SLInt32_t)fmod((double)a,(double)b))
 #define SDS_Nearest(a)              SDS_Round(a,SIGLIB_ROUND_TO_NEAREST)
 
-        // End of #if defined (_DIAB_TOOL) || (_CH_) || (__WATCOMC__)
+        // End of #if defined (_DIAB_TOOL) || (_CH_)
 
 
 #else                       // Catch all for other compilers - Also used by SWIG

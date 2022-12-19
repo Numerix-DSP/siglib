@@ -10,25 +10,7 @@ Support for SigLib is available via Email : support@numerix-dsp.com
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
 
-SigLib is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-SigLib is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
-
-This sofware is also available with a commercial license, for use in
-proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
-https://www.numerix-dsp.com
-support@.numerix-dsp.com
+__SIGLIB_LICENSE__
 
 Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
 ---------------------------------------------------------------------------
@@ -71,9 +53,9 @@ void SIGLIB_FUNC_DECL SDA_RealSpectralInverse (const SLData_t * SIGLIB_PTR_DECL 
     SLArrayIndex_t  i, j;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pDst, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 
@@ -118,11 +100,11 @@ void SIGLIB_FUNC_DECL SDA_ComplexSpectralInverse (const SLData_t * SIGLIB_PTR_DE
     SLArrayIndex_t  i, j;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrcReal, 8);            // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pSrcImag, 8);
-#pragma DATA_ALIGN(pRealDst, 8);
-#pragma DATA_ALIGN(pImagDst, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrcReal % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrcImag % 8 == 0);
+_nassert((int) pRealDst % 8 == 0);
+_nassert((int) pImagDst % 8 == 0);
 #endif
 #endif
 
@@ -178,11 +160,11 @@ void SIGLIB_FUNC_DECL SDA_FdInterpolate (const SLData_t * SIGLIB_PTR_DECL pSrcRe
     SLData_t                SumImag = SIGLIB_ZERO;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrcReal, 8);            // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pSrcImag, 8);
-#pragma DATA_ALIGN(pRealDst, 8);
-#pragma DATA_ALIGN(pImagDst, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrcReal % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrcImag % 8 == 0);
+_nassert((int) pRealDst % 8 == 0);
+_nassert((int) pImagDst % 8 == 0);
 #endif
 #endif
 
@@ -307,11 +289,11 @@ void SIGLIB_FUNC_DECL SDA_FdInterpolate2 (const SLData_t * SIGLIB_PTR_DECL pSrcR
     SLArrayIndex_t i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrcReal, 8);            // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pSrcImag, 8);
-#pragma DATA_ALIGN(pRealDst, 8);
-#pragma DATA_ALIGN(pImagDst, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrcReal % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrcImag % 8 == 0);
+_nassert((int) pRealDst % 8 == 0);
+_nassert((int) pImagDst % 8 == 0);
 #endif
 #endif
 
@@ -380,8 +362,8 @@ SLData_t SIGLIB_FUNC_DECL SDS_TdPitchShift (const SLData_t Sample,
     SLData_t           OutputSample;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pShiftArray, 8);         // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pShiftArray % 8 == 0);       // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -452,10 +434,10 @@ void SIGLIB_FUNC_DECL SDA_TdPitchShift (const SLData_t * SIGLIB_PTR_DECL pSrc,
     SLArrayIndex_t     i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pShiftArray, 8);         // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pSrc, 8);
-#pragma DATA_ALIGN(pDst, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pShiftArray % 8 == 0);       // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc % 8 == 0);
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 
@@ -526,8 +508,8 @@ SLData_t SIGLIB_FUNC_DECL SDS_EchoGenerate (const SLData_t Sample,
     SLData_t        OutputSample;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(EchoArray, 8);           // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) EchoArray % 8 == 0);           // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -594,9 +576,9 @@ void SIGLIB_FUNC_DECL SDA_Power (const SLData_t * SIGLIB_PTR_DECL pSrc,
     SLArrayIndex_t i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pDst, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 
@@ -680,9 +662,9 @@ void SIGLIB_FUNC_DECL SDA_Polynomial (const SLData_t * SIGLIB_PTR_DECL pSrc,
     SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pDst, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 
@@ -776,9 +758,9 @@ void SIGLIB_FUNC_DECL SDA_Modulo (const SLData_t * SIGLIB_PTR_DECL pSrc,
     SLData_t       Tmp;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pDst, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 
@@ -873,9 +855,9 @@ void SIGLIB_FUNC_DECL SDA_AgcPeak (const SLData_t * SIGLIB_PTR_DECL pSrc,
     SLData_t        LocalSensitivity = SIGLIB_ONE;      // Local sensitivity, used to optimise code
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pDst, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 
@@ -1019,8 +1001,8 @@ void SIGLIB_FUNC_DECL SDA_AgcMeanAbs (const SLData_t * SIGLIB_PTR_DECL pSrc,
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                 // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                        // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pDst, 8);
+_nassert((int) pSrc % 8 == 0);                        // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 
@@ -1171,8 +1153,8 @@ void SIGLIB_FUNC_DECL SDA_AgcMeanSquared (const SLData_t * SIGLIB_PTR_DECL pSrc,
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                 // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                        // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pDst, 8);
+_nassert((int) pSrc % 8 == 0);                        // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 
@@ -1240,9 +1222,9 @@ void SIGLIB_FUNC_DECL SDA_GroupDelay (const SLData_t * SIGLIB_PTR_DECL pSrc,
     SLData_t       LocalPreviousPhase, New, TInput;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pDst, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 
@@ -1306,9 +1288,9 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_ZeroCrossingDetect (const SLData_t * SIGLIB_PTR
     SLData_t       ITmp;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pDst, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 
@@ -1468,9 +1450,8 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FirstZeroCrossingLocation (const SLData_t * 
     SLData_t       ITmp;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pDst, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -1548,8 +1529,8 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_ZeroCrossingCount (const SLData_t * SIGLIB_PTR_
     SLData_t       ITmp;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -1630,9 +1611,9 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_LevelCrossingDetect (const SLData_t * SIGLIB_PT
     SLData_t       ITmp;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pDst, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 
@@ -1799,9 +1780,8 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FirstLevelCrossingLocation (const SLData_t *
     SLData_t       ITmp;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pDst, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -1881,8 +1861,8 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_LevelCrossingCount (const SLData_t * SIGLIB_PTR
     SLData_t       ITmp;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -1966,9 +1946,9 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_Trigger (const SLData_t * SIGLIB_PTR_DECL pS
     SLArrayIndex_t     ZXi = 0;                    // Register to store location of zero
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pDst, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pPrevSign % 8 == 0);
 #endif
 #endif
 
@@ -2097,9 +2077,9 @@ void SIGLIB_FUNC_DECL SDA_SortMinToMax (const SLData_t pSrc[],
 
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pDst, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 
@@ -2143,9 +2123,9 @@ void SIGLIB_FUNC_DECL SDA_SortMaxToMin (const SLData_t pSrc[],
 
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pDst, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 
@@ -2194,11 +2174,11 @@ void SIGLIB_FUNC_DECL SDA_SortMinToMax2 (const SLData_t pSrc1[],
 
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc1, 8);               // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pSrc2, 8);
-#pragma DATA_ALIGN(pDst1, 8);
-#pragma DATA_ALIGN(pDst2, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc1 % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc2 % 8 == 0);
+_nassert((int) pDst1 % 8 == 0);
+_nassert((int) pDst2 % 8 == 0);
 #endif
 #endif
 
@@ -2255,11 +2235,11 @@ void SIGLIB_FUNC_DECL SDA_SortMaxToMin2 (const SLData_t pSrc1[],
 
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc1, 8);               // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pSrc2, 8);
-#pragma DATA_ALIGN(pDst1, 8);
-#pragma DATA_ALIGN(pDst2, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc1 % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc2 % 8 == 0);
+_nassert((int) pDst1 % 8 == 0);
+_nassert((int) pDst2 % 8 == 0);
 #endif
 #endif
 
@@ -2315,10 +2295,9 @@ void SIGLIB_FUNC_DECL SDA_SortIndexed (const SLData_t pSrc[],
 
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pIndex, 8);
-#pragma DATA_ALIGN(pDst, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 
@@ -2487,9 +2466,9 @@ void SIGLIB_FUNC_DECL SDA_Sign (const SLData_t * SIGLIB_PTR_DECL pSrc,
     SLArrayIndex_t i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);                // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pDst, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 
@@ -2533,9 +2512,9 @@ void SIGLIB_FUNC_DECL SDA_Swap (SLData_t * SIGLIB_PTR_DECL pSrc1,
     SLArrayIndex_t i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc1, 8);               // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pSrc2, 8);
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrc1 % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc2 % 8 == 0);
 #endif
 #endif
 

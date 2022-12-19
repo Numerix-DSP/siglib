@@ -33,7 +33,7 @@ call mb cornu_s
 call mb correlate1
 call mb correlate2
 call mb correlate3
-call mb costasl
+call mb costasLoop
 call mb covar
 call mb datatype
 call mb dbpsk

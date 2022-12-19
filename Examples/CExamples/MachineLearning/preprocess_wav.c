@@ -79,7 +79,7 @@ static char             predictionFilename[512];
 static SLWavFileInfo_s  wavInfo;
 
 SLArrayIndex_t          networkFftStartBin = DEFAULT_NETWORK_FFT_START_BIN;             // Default: FFT start bin
-SLArrayIndex_t          networkInputSampleLength = DEFAULT_NETWORK_INPUT_SAMPLE_LENGTH; // Default: Neural Network input nodes
+SLArrayIndex_t          networkInputLayerNodes = DEFAULT_NETWORK_INPUT_SAMPLE_LENGTH; // Default: Neural Network input nodes
 SLArrayIndex_t          categoricalValue = -1;
 SLArrayIndex_t          dataAugmentationStride = FFT_LENGTH;        // Default: No data augmentation source frame overlap
 SLArrayIndex_t          dataAugmentationRandomGainEnable = 0;       // Default: No data augmentation random gain
@@ -89,7 +89,7 @@ SLArrayIndex_t          windowZeroEdgeLength = 16;                  // Default: 
 SLArrayIndex_t          numLargestFrequencyMagnitudes = 8;          // Default: number of largest frequency domain results to keep, remainder set to 0.
 SLData_t                onePoleFilterAlpha = 0.9;                   // Default: one-pole filter alpha - set to 0. to disable feedback
 SLData_t                inputThresholdLevel = 100.;                 // Default: output threshold level
-SLArrayIndex_t          PredictionModeSwitch = 0;                   // Set to '1' for prediction mode, '0' for training/validation mode
+SLArrayIndex_t          predictionModeSwitch = 0;                   // Set to '1' for prediction mode, '0' for training/validation mode
 SLArrayIndex_t          debugFlag = 0;
 
 void parse_command_line (int argc, char *argv[]);
@@ -147,7 +147,7 @@ int main (int argc, char *argv[])
         exit(0);
     }
 
-    if (0 == PredictionModeSwitch) {                        // Check categorical value specified
+    if (0 == predictionModeSwitch) {                        // Check categorical value specified
         if (-1 == (categoricalValue)) {
             printf ("Usage error: categorical value\n");
             show_help();
@@ -182,7 +182,7 @@ int main (int argc, char *argv[])
 #else
     printf ("Real/Complexy FFT output flag                          : COMPLEX\n");
 #endif
-    printf ("Neural network input stage nodes                       : %d\n", networkInputSampleLength);
+    printf ("Neural network input stage nodes                       : %d\n", networkInputLayerNodes);
     printf ("FFT start bin for Neural Network input                 : %d\n", networkFftStartBin);
     printf ("Data augmentation copy stride length                   : %d\n", dataAugmentationStride);
     if (dataAugmentationRandomGainEnable == 1) {                     // Data augmentation by applying random gain to input data
@@ -216,10 +216,10 @@ int main (int argc, char *argv[])
     SLData_t    *pImagDataShortened = pImagData + networkFftStartBin;
 #endif
 
-    if ((networkInputSampleLength+networkFftStartBin) > FFT_LENGTH) {   // Check length parameters
+    if ((networkInputLayerNodes+networkFftStartBin) > FFT_LENGTH) {   // Check length parameters
         printf ("Error ! FFT start bin for Neural Network input plus the neural network input stage nodes must be less than the FFT length");
         printf ("\tnetworkFftStartBin:       %d", networkFftStartBin);
-        printf ("\tnetworkInputSampleLength: %d", networkInputSampleLength);
+        printf ("\tnetworkInputLayerNodes:   %d", networkInputLayerNodes);
         printf ("\tFFT_LENGTH:               %d", FFT_LENGTH);
         exit(-1);
     }
@@ -236,7 +236,7 @@ int main (int argc, char *argv[])
     // printf ("wp: trainingFilename = %s\n", trainingFilename);
     // printf ("wp: validationFilename = %s\n", validationFilename);
 
-    if (1 == PredictionModeSwitch) {
+    if (1 == predictionModeSwitch) {
 
         if ((pPredictionFile = fopen(predictionFilename, "w")) == NULL) {   // Open spreadsheets in write mode
             printf ("Error opening prediction spreadsheet: %s\n", predictionFilename);
@@ -300,7 +300,7 @@ int main (int argc, char *argv[])
              FFT_LENGTH);                                   // FFT length
 
     SDA_Clear (pFFTOutputOnePoleState,                      // Pointer to array
-               networkInputSampleLength);                   // Array length
+               networkInputLayerNodes);                     // Array length
 
 
     if (dataAugmentationRandomGainEnable == 1) {            // Data augmentation by applying random gain to input data
@@ -408,15 +408,15 @@ int main (int argc, char *argv[])
                 SDA_Multiply (pRealDataShortened,           // Source array pointer
                               SIGLIB_ONE/FFT_LENGTH,        // Scalar multiply
                               pRealDataShortened,           // Destination array pointer
-                              networkInputSampleLength);    // Array length
+                              networkInputLayerNodes);      // Array length
 
                 SDA_Abs (pRealDataShortened,                // Pointer to source array
                          pRealDataShortened,                // Pointer to destination array
-                         networkInputSampleLength);         // Array length
+                         networkInputLayerNodes);           // Array length
 #else
                 SDA_20Log10 (pRealDataShortened,            // Pointer to real source array
                              pRealDataShortened,            // Pointer to log magnitude destination array
-                             networkInputSampleLength);     // Array length
+                             networkInputLayerNodes);       // Array length
 #endif
 #else       // !REAL_ONLY_FFT_OUTPUT
                 SDA_Rfft (pRealData,                        // Pointer to real array
@@ -431,33 +431,33 @@ int main (int argc, char *argv[])
                 SDA_Multiply (pRealDataShortened,           // Source array pointer
                               SIGLIB_ONE/FFT_LENGTH,        // Scalar multiply
                               pRealDataShortened,           // Destination array pointer
-                              networkInputSampleLength);    // Array length
+                              networkInputLayerNodes);      // Array length
                                                             // Normalize FFT output magnitude
                 SDA_Multiply (pImagDataShortened,           // Source array pointer
                               SIGLIB_ONE/FFT_LENGTH,        // Scalar multiply
                               pImagDataShortened,           // Destination array pointer
-                              networkInputSampleLength);    // Array length
+                              networkInputLayerNodes);      // Array length
 
                 SDA_Abs (pRealDataShortened,                // Pointer to source array
                          pRealDataShortened,                // Pointer to destination array
-                         networkInputSampleLength);         // Array length
+                         networkInputLayerNodes);           // Array length
                 SDA_Abs (pImagDataShortened,                // Pointer to source array
                          pImagDataShortened,                // Pointer to destination array
-                         networkInputSampleLength);         // Array length
+                         networkInputLayerNodes);           // Array length
                 SDA_Add2 (pRealDataShortened,               // Pointer to source array
                           pImagDataShortened,               // Pointer to source array
                           pRealDataShortened,               // Pointer to destination array
-                          networkInputSampleLength);        // Array length
+                          networkInputLayerNodes);          // Array length
 #else
                 SDA_LogMagnitude (pRealDataShortened,       // Pointer to real source array
                                   pImagDataShortened,       // Pointer to imaginary source array
                                   pRealDataShortened,       // Pointer to log magnitude destination array
-                                  networkInputSampleLength);// Array length
+                                  networkInputLayerNodes);  // Array length
 #endif
 #endif
 
                 if (debugFlag == 1) {                       // Get abs max value, for debug
-                    SLData_t absMaxLevel = SDA_AbsMax(pRealDataShortened, networkInputSampleLength);
+                    SLData_t absMaxLevel = SDA_AbsMax(pRealDataShortened, networkInputLayerNodes);
                     if (absMaxLevel > absMaxLevel_FFTData) {
                         absMaxLevel_FFTData = absMaxLevel;
                     }
@@ -467,10 +467,10 @@ int main (int argc, char *argv[])
                                       pRealDataShortened,           // Filtered output array
                                       pFFTOutputOnePoleState,       // State array
                                       onePoleFilterAlpha,           // Feedback alpha
-                                      networkInputSampleLength);    // Array lengths
+                                      networkInputLayerNodes);    // Array lengths
 
                 if (debugFlag == 1) {                       // Get abs max value, for debug
-                    SLData_t absMaxLevel = SDA_AbsMax(pRealDataShortened, networkInputSampleLength);
+                    SLData_t absMaxLevel = SDA_AbsMax(pRealDataShortened, networkInputLayerNodes);
                     if (absMaxLevel < absMinLevel_OnePolePerSampleData) {
                         absMinLevel_OnePolePerSampleData = absMaxLevel;
                     }
@@ -482,14 +482,14 @@ int main (int argc, char *argv[])
                 SDA_Multiply (pRealDataShortened,           // Source array pointer
                               OUTPUT_GAIN,                  // Scalar multiply
                               pRealDataShortened,           // Destination array pointer
-                              networkInputSampleLength);    // Array length
+                              networkInputLayerNodes);      // Array length
 
 #if (QUANTIZE_FREQUENCY_DOMAIN_NUM_BITS)
                 SDA_Quantize (pRealDataShortened,                   // Pointer to source array
                               pRealDataShortened,                   // Pointer to destination array
                               QUANTIZE_FREQUENCY_DOMAIN_NUM_BITS,   // Quantisation number of bits
                               QUANTIZE_FREQUENCY_DOMAIN_PEAK,       // Peak input value
-                              networkInputSampleLength);            // Array length
+                              networkInputLayerNodes);              // Array length
 #endif
 
                                     // Only use first N largest values in FFT results array
@@ -498,7 +498,7 @@ int main (int argc, char *argv[])
                 if (numLargestFrequencyMagnitudes > 0) {
                     SDA_NLargest (pRealDataShortened,               // Pointer to source array
                                   pLargest,                         // Pointer to destination array
-                                  networkInputSampleLength,         // Source array length
+                                  networkInputLayerNodes,           // Source array length
                                   numLargestFrequencyMagnitudes);   // Number of values to find
 
                                                                                 // Set remainder of samples to zero
@@ -506,12 +506,12 @@ int main (int argc, char *argv[])
                                    pRealDataShortened,                          // Pointer to destination array
                                    pLargest[numLargestFrequencyMagnitudes-1],   // Threshold level
                                    SIGLIB_SINGLE_SIDED_THOLD,                   // Threshold type
-                                   networkInputSampleLength);                   // Source array length
+                                   networkInputLayerNodes);                     // Source array length
                 }
 
                 if (debugFlag == 1) {
                     SLArrayIndex_t i = 0;                   // Get indices of first and last non-zero levels
-                    for (; i < networkInputSampleLength; i++) {
+                    for (; i < networkInputLayerNodes; i++) {
                         if (pRealDataShortened[i] != SIGLIB_ZERO) {
                             if (i < firstNonZeroLevel) {
                                 firstNonZeroLevel = i;
@@ -519,24 +519,24 @@ int main (int argc, char *argv[])
                             break;
                         }
                     }
-                    for (; i < networkInputSampleLength; i++) {
+                    for (; i < networkInputLayerNodes; i++) {
                         if (pRealDataShortened[i] != SIGLIB_ZERO) {
                             lastNonZeroLevel = i;
                         }
                     }
                 }
 
-                if (1 == PredictionModeSwitch) {
-                    for (int i = 0; i < networkInputSampleLength-1; i++) {    // Write to prediction spreadsheet
+                if (1 == predictionModeSwitch) {
+                    for (int i = 0; i < networkInputLayerNodes-1; i++) {    // Write to prediction spreadsheet
                         fprintf (pPredictionFile, "%.8le,", pRealDataShortened[i]);
                     }
-                    fprintf (pPredictionFile, "%.8le\n", pRealDataShortened[networkInputSampleLength-1]);
+                    fprintf (pPredictionFile, "%.8le\n", pRealDataShortened[networkInputLayerNodes-1]);
 
-                    SLData_t max_min = SDA_Min (pRealDataShortened, networkInputSampleLength);
+                    SLData_t max_min = SDA_Min (pRealDataShortened, networkInputLayerNodes);
                     if (max_min < trainingMin) {
                         predictionMin = max_min;
                     }
-                    max_min = SDA_Max (pRealDataShortened, networkInputSampleLength);
+                    max_min = SDA_Max (pRealDataShortened, networkInputLayerNodes);
                     if (max_min > trainingMax) {
                         predictionMax = max_min;
                     }
@@ -546,16 +546,16 @@ int main (int argc, char *argv[])
                 else {
                                                             // Store results in training or validation spreadsheet
                     if (trainingOrValidaionSwitch < TRAINING_TO_VALIDATION_RATIO) {
-                        for (int i = 0; i < networkInputSampleLength; i++) {    // Write to training spreadsheet
+                        for (int i = 0; i < networkInputLayerNodes; i++) {  // Write to training spreadsheet
                             fprintf (pTrainingFile, "%.8le,", pRealDataShortened[i]);
                         }
                         fprintf (pTrainingFile, "%d\n", categoricalValue);
 
-                        SLData_t max_min = SDA_Min (pRealDataShortened, networkInputSampleLength);
+                        SLData_t max_min = SDA_Min (pRealDataShortened, networkInputLayerNodes);
                         if (max_min < trainingMin) {
                             trainingMin = max_min;
                         }
-                        max_min = SDA_Max (pRealDataShortened, networkInputSampleLength);
+                        max_min = SDA_Max (pRealDataShortened, networkInputLayerNodes);
                         if (max_min > trainingMax) {
                             trainingMax = max_min;
                         }
@@ -565,16 +565,16 @@ int main (int argc, char *argv[])
                         trainingFileCount++;
                     }
                     else {
-                        for (int i = 0; i < networkInputSampleLength; i++) {    // Write to validation spreadsheet
+                        for (int i = 0; i < networkInputLayerNodes; i++) {  // Write to validation spreadsheet
                             fprintf (pValidationFile, "%.8le,", pRealDataShortened[i]);
                         }
                         fprintf (pValidationFile, "%d\n", categoricalValue);
 
-                        SLData_t max_min = SDA_Min (pRealDataShortened, networkInputSampleLength);
+                        SLData_t max_min = SDA_Min (pRealDataShortened, networkInputLayerNodes);
                         if (max_min < validationMin) {
                             validationMin = max_min;
                         }
-                        max_min = SDA_Max (pRealDataShortened, networkInputSampleLength);
+                        max_min = SDA_Max (pRealDataShortened, networkInputLayerNodes);
                         if (max_min > validationMax) {
                             validationMax = max_min;
                         }
@@ -604,7 +604,7 @@ int main (int argc, char *argv[])
 
     printf ("Number of frames processed            : %d\n", numberOfFramesProcessed);
     printf ("Total number of frames stored         : %d\n", trainingFileCount+validationFileCount+predictionFileCount);
-    if (1 == PredictionModeSwitch) {
+    if (1 == predictionModeSwitch) {
         printf ("    Prediction minimum output level   : %lf\n", predictionMin);
         printf ("    Prediction maximum output level   : %lf\n", predictionMax);
     }
@@ -617,7 +617,8 @@ int main (int argc, char *argv[])
         printf ("    Validation maximum output level   : %lf\n", validationMax);
     }
 
-    if (1 == PredictionModeSwitch) {                    // Close the files
+    if (1 == predictionModeSwitch) {                    // Close the files
+        fclose (pInputFile);
         fclose (pPredictionFile);
     }
     else {
@@ -682,8 +683,8 @@ void parse_command_line (int argc, char *argv[])
                     argNum++;
                     break;
 
-                case 'l':
-                    networkInputSampleLength = atoi(argv[argNum+1]);
+                case 'i':
+                    networkInputLayerNodes = atoi(argv[argNum+1]);
                     argNum++;
                     break;
 
@@ -708,7 +709,7 @@ void parse_command_line (int argc, char *argv[])
                     break;
 
                 case 'P':
-                    PredictionModeSwitch = 1;
+                    predictionModeSwitch = 1;
                     printf ("Prediction/Classification mode = True\n");
                     break;
 
@@ -738,21 +739,21 @@ void show_help (void)
 {
     printf ("Usage:\n");
     printf ("preprocess_wav [params]\n");
-    printf ("\t-f filename          File name (Required)\n");
-    printf ("\t-c category_number   Category number (Required)\n");
-    printf ("\t-s Stride_length     Data augmentation stride length (Optional)\n");
-    printf ("\t-w num               Set the num values at the edge of the window frame to zero (Optional)\n");
-    printf ("\t-g                   Enable data augmentation random gain (Optional)\n");
-    printf ("\t-n minimum_gain      Minimum gain (dB) (Optional)\n");
-    printf ("\t-x maximum_gain      Maximum gain (dB) (Optional)\n");
-    printf ("\t-b bin_number:       FFT start bin for Neural Network input. This allows the NN to ignore the D.C. bins. (Optional)(Default=3)\n");
-    printf ("\t-l number_of_nodes:  Neural Network input sample length. (Optional)(Default=120)\n");
-    printf ("\t-N num               Number of largest frequency domain magnitudes to store, remainder set to 0. (Optional)\n");
-    printf ("\t-t threshold_level   Input threshold level. Frames with an absolute maximum level below the threshold will not be processed. (Optional)\n");
-    printf ("\t-o alpha             One-pole filter feedback alpha. Set to 0. to disable feedback (Optional)\n");
-    printf ("\t-P                   Enable Prediction mode. Without this the app will work in Training/Validation mode\n");
-    printf ("\t-d                   Display debug information\n");
-    printf ("\t-h                   Help\n");
+    printf ("\t-f filename               File name (Required)\n");
+    printf ("\t-c category_number        Category number (Required)\n");
+    printf ("\t-s Stride_length          Data augmentation stride length (Optional)\n");
+    printf ("\t-w num                    Set the num values at the edge of the window frame to zero (Optional)\n");
+    printf ("\t-g                        Enable data augmentation random gain (Optional)\n");
+    printf ("\t-n minimum_gain           Minimum gain (dB) (Optional)\n");
+    printf ("\t-x maximum_gain           Maximum gain (dB) (Optional)\n");
+    printf ("\t-b bin_number:            FFT start bin for Neural Network input. This allows the NN to ignore the D.C. bins. (Optional)(Default=3)\n");
+    printf ("\t-i number_of_input_nodes: Neural Network input sample length. (Optional)(Default=120)\n");
+    printf ("\t-N num                    Number of largest frequency domain magnitudes to store, remainder set to 0. (Optional)\n");
+    printf ("\t-t threshold_level        Input threshold level. Frames with an absolute maximum level below the threshold will not be processed. (Optional)\n");
+    printf ("\t-o alpha                  One-pole filter feedback alpha. Set to 0. to disable feedback (Optional)\n");
+    printf ("\t-P                        Enable Prediction mode. Without this the app will work in Training/Validation mode\n");
+    printf ("\t-d                        Display debug information\n");
+    printf ("\t-h                        Help\n");
 
     printf ("Input file format supported is .wav. The filename should be the basename without the .wav extension\n");
     printf ("The categorical value is used to place the processed files into the provided category\n");

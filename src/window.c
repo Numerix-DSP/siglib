@@ -10,25 +10,7 @@ Support for SigLib is available via Email : support@numerix-dsp.com
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
 
-SigLib is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-SigLib is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
-
-This sofware is also available with a commercial license, for use in
-proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
-https://www.numerix-dsp.com
-support@.numerix-dsp.com
+__SIGLIB_LICENSE__
 
 Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
 ---------------------------------------------------------------------------
@@ -339,9 +321,9 @@ void SIGLIB_FUNC_DECL SDA_Window (const SLData_t * SIGLIB_PTR_DECL pSrc,
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                     // Defined by TI compiler
-#pragma DATA_ALIGN(pSrc, 8);            // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pDst, 8);            // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pWindowCoeffs, 8);   // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pDst % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pWindowCoeffs % 8 == 0);   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -389,13 +371,13 @@ void SIGLIB_FUNC_DECL SDA_ComplexWindow (const SLData_t * SIGLIB_PTR_DECL pSrcRe
     SLArrayIndex_t i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pSrcReal, 8);            // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pSrcImag, 8);            // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pRealDst, 8);            // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pImagDst, 8);            // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pRealWindowCoeffs, 8);   // Align arrays on 64 bit double word boundary for LDDW
-#pragma DATA_ALIGN(pImagWindowCoeffs, 8);   // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pSrcReal % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrcImag % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pRealDst % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pImagDst % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pRealWindowCoeffs % 8 == 0);   // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pImagWindowCoeffs % 8 == 0);   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -436,8 +418,8 @@ SLData_t SIGLIB_FUNC_DECL SDA_WindowInverseCoherentGain (const SLData_t * SIGLIB
     SLData_t       Sum = SIGLIB_ZERO;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                         // Defined by TI compiler
-#pragma DATA_ALIGN(pWindowCoeffs, 8);       // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                        // Defined by TI compiler
+_nassert((int) pWindowCoeffs % 8 == 0);       // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 

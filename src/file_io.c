@@ -10,25 +10,7 @@ Support for SigLib is available via Email : support@numerix-dsp.com
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
 
-SigLib is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-SigLib is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
-
-This sofware is also available with a commercial license, for use in
-proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
-https://www.numerix-dsp.com
-support@.numerix-dsp.com
+__SIGLIB_LICENSE__
 
 Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
 ---------------------------------------------------------------------------
@@ -75,10 +57,9 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_BinReadData (SLData_t * SIGLIB_PTR_DECL BPtr
     SLArrayIndex_t      sampleCount;
     char                s2c_buffer[8];
     u_SLData_t_char_t   s2c;
-    SLArrayIndex_t      num_read;
 
     for (sampleCount = 0; sampleCount < arrayLength; sampleCount++) {
-        if ((num_read  = (SLArrayIndex_t)fread (s2c_buffer, 1, sizeof(SLData_t), p_ioFile)) != sizeof(SLData_t)) {
+        if ((SLArrayIndex_t)fread (s2c_buffer, 1, sizeof(SLData_t), p_ioFile) != sizeof(SLData_t)) {
             break;
         }
 
@@ -184,9 +165,8 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_BinReadFile (SLData_t * SIGLIB_PTR_DECL BPtr
 
     char s2c_buffer[8];
     u_SLData_t_char_t s2c;
-    SLArrayIndex_t num_read;
 
-    while ((num_read  = (SLArrayIndex_t)fread (s2c_buffer, 1, sizeof(SLData_t), p_ioFile)) == sizeof(SLData_t)) {
+    while ((SLArrayIndex_t)fread (s2c_buffer, 1, sizeof(SLData_t), p_ioFile) == sizeof(SLData_t)) {
         if ((endianMode == 'b') || (endianMode == 'B')) {
             for (SLArrayIndex_t i = 0; i < (SLArrayIndex_t)sizeof(SLData_t); i++) {
                 s2c.c[i] = s2c_buffer[sizeof(SLData_t)-1 -i];
@@ -578,7 +558,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadMatrix (SLData_t ** SIGLIB_PTR_DECL B
 
 {
     FILE    *p_ioFile;
-	char    *token;
 	char    line[32768];                                    // Maximum line length 32768 characters
 	char    *lineptr = line;
 
@@ -591,7 +570,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadMatrix (SLData_t ** SIGLIB_PTR_DECL B
     if (NULL == fgets(line, sizeof(line), p_ioFile)) {
         return 0;
     }
-    while (NULL != (token = strtok(lineptr, ","))) {
+    while (NULL != strtok(lineptr, ",")) {
         lineptr = NULL;
         colcount++;
     }

@@ -1,6 +1,28 @@
 SigLib (Tm) Revision Update History File
 ========================================
 
+VERSION : 10.20
+RELEASE DATE : 19/12/2022
+_________________________
+
+Additional Processor / Compiler Support :
+    Updated TI C6x support.
+
+Additional Functionality :
+    None.
+
+Bug Fixes :
+    None.
+
+Operational Changes :
+    None.
+
+Optimisation Changes :
+    None.
+
+Notes :
+
+
 VERSION : 10.14
 RELEASE DATE : 21/06/2022
 _________________________

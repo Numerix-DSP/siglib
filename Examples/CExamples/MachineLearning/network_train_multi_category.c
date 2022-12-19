@@ -27,9 +27,9 @@
 #define NUM_LAYERS                          2               // Number of layers
 #define NUM_CATEGORIES                      4               // Number of output categories
 
-#define DEFAULT_LEARNING_RATE               0.1             // Learning rate can be specified on the command line with '-l' option
+#define DEFAULT_LEARNING_RATE               0.1             // Learning rate can be specified on the command line with '-r' option
 #define DEFAULT_EPOCH_COUNT                 20              // Epoch count can be specified on the command line with '-e' option
-#define DEFAULT_QUANTIZATION_BITS           8              // Number of quantization bits for weights can be specified on the command line with '-q' option
+#define DEFAULT_QUANTIZATION_BITS           8               // Number of quantization bits for weights can be specified on the command line with '-q' option
 
 
 // Declare global variables and arrays

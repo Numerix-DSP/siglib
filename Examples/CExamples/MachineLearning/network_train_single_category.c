@@ -26,7 +26,7 @@
 
 #define NUM_LAYERS                          2               // Number of layers
 
-#define DEFAULT_LEARNING_RATE               .1              // Learning rate can be specified on the command line with '-l' option
+#define DEFAULT_LEARNING_RATE               .1              // Learning rate can be specified on the command line with '-r' option
 #define DEFAULT_EPOCH_COUNT                 5               // Epoch count can be specified on the command line with '-e' option
 #define DEFAULT_QUANTIZATION_BITS           7               // Number of quantization bits for weights can be specified on the command line with '-q' option
 
