@@ -60,8 +60,8 @@ void SIGLIB_FUNC_DECL SDA_ConvolveLinear (const SLData_t * SIGLIB_PTR_DECL pSrc,
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
 _nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pImpulseResponse % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pImpulseResponse % 8 == 0);
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 
@@ -142,8 +142,8 @@ void SIGLIB_FUNC_DECL SDA_ConvolvePartial (const SLData_t * SIGLIB_PTR_DECL pSrc
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
 _nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pImpulseResponse % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pImpulseResponse % 8 == 0);
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 
@@ -186,14 +186,14 @@ void SIGLIB_FUNC_DECL SDA_ConvolveCircular (const SLData_t * SIGLIB_PTR_DECL pSr
 
 {
     SLArrayIndex_t i, j;
-    SLArrayIndex_t ao = 0;                 // a offset into pSrc
+    SLArrayIndex_t ao = 0;                  // a offset into pSrc
     SLData_t       SumProd;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
 _nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pImpulseResponse % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pImpulseResponse % 8 == 0);
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 

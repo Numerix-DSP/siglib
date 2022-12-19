@@ -3015,11 +3015,11 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_BpskDemodulate (const SLData_t * SIGLIB_PTR_DEC
     SLArrayIndex_t  i;
     SLFixData_t     ReturnValue = SIGLIB_FIX_ZERO;
     SLData_t        RealTmp, ImagTmp;                   // Temporary data processing variables - one for each path
-    SLData_t        RealVCOOutput, ImagVCOOutput;           // Local VCO output
+    SLData_t        RealVCOOutput, ImagVCOOutput;       // Local VCO output
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pCostasLpLPF1State % 8 == 0);  // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                            // Defined by TI compiler
+_nassert((int) pCostasLpLPF1State % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pCostasLpLPF2State % 8 == 0);
 _nassert((int) pCostasLpLPFCoeffs % 8 == 0);
 _nassert((int) pCostasLoopVCOLookUpTable % 8 == 0);
@@ -3142,11 +3142,11 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_BpskDemodulateDebug (const SLData_t * SIGLIB_PT
     SLArrayIndex_t  i;
     SLFixData_t     ReturnValue = SIGLIB_FIX_ZERO;
     SLData_t        RealTmp, ImagTmp;                   // Temporary data processing variables - one for each path
-    SLData_t        RealVCOOutput, ImagVCOOutput;           // Local VCO output
+    SLData_t        RealVCOOutput, ImagVCOOutput;       // Local VCO output
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pCostasLpLPF1State % 8 == 0);  // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                            // Defined by TI compiler
+_nassert((int) pCostasLpLPF1State % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pCostasLpLPF2State % 8 == 0);
 _nassert((int) pCostasLpLPFCoeffs % 8 == 0);
 _nassert((int) pCostasLoopVCOLookUpTable % 8 == 0);
@@ -3483,11 +3483,11 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_DpskDemodulate (const SLData_t * SIGLIB_PTR_DEC
     SLArrayIndex_t  i;
     SLFixData_t     ReturnValue = SIGLIB_AI_ZERO;
     SLData_t        RealTmp, ImagTmp;                   // Temporary data processing variables - one for each path
-    SLData_t        RealVCOOutput, ImagVCOOutput;           // Local VCO output
+    SLData_t        RealVCOOutput, ImagVCOOutput;       // Local VCO output
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pCostasLpLPF1State % 8 == 0);  // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                            // Defined by TI compiler
+_nassert((int) pCostasLpLPF1State % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pCostasLpLPF2State % 8 == 0);
 _nassert((int) pCostasLpLPFCoeffs % 8 == 0);
 _nassert((int) pCostasLoopVCOLookUpTable % 8 == 0);
@@ -3612,11 +3612,11 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_DpskDemodulateDebug (const SLData_t * SIGLIB_PT
     SLArrayIndex_t  i;
     SLFixData_t     ReturnValue = SIGLIB_FIX_ZERO;
     SLData_t        RealTmp, ImagTmp;                   // Temporary data processing variables - one for each path
-    SLData_t        RealVCOOutput, ImagVCOOutput;           // Local VCO output
+    SLData_t        RealVCOOutput, ImagVCOOutput;       // Local VCO output
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pCostasLpLPF1State % 8 == 0);  // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                            // Defined by TI compiler
+_nassert((int) pCostasLpLPF1State % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pCostasLpLPF2State % 8 == 0);
 _nassert((int) pCostasLpLPFCoeffs % 8 == 0);
 _nassert((int) pCostasLoopVCOLookUpTable % 8 == 0);
@@ -3857,9 +3857,9 @@ void SIGLIB_FUNC_DECL SDA_PiByFourDQpskModulate (const SLFixData_t TxDiBit,
     SLArrayIndex_t *pPrevOutputSymbol)
 
 {
-    SLData_t       ISample, QSample;       // Data samples
+    SLData_t       ISample, QSample;        // Data samples
     SLArrayIndex_t i;
-    SLArrayIndex_t          OutputSymbol;
+    SLArrayIndex_t  OutputSymbol;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler

@@ -98,8 +98,8 @@ void SIGLIB_FUNC_DECL SDA_Rfft (SLData_t realData[],
     const SLData_t  *pFFTCosineCoeffs = pFFTCoeffs + (SLArrayIndex_t)((SLUFixData_t)fftLength >> 2U);
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                                         // Defined by TI compiler
-_nassert((int) realData % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
+#ifdef _TMS320C6700                         // Defined by TI compiler
+_nassert((int) realData % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) imagData % 8 == 0);
 _nassert((int) pFFTCoeffs % 8 == 0);
 #endif
@@ -222,8 +222,8 @@ void SIGLIB_FUNC_DECL SDA_Cfft (SLData_t realData[],
     const SLData_t  *pFFTCosineCoeffs = pFFTCoeffs + (SLArrayIndex_t)((SLUFixData_t)fftLength >> 2U);
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                                         // Defined by TI compiler
-_nassert((int) realData % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
+#ifdef _TMS320C6700                         // Defined by TI compiler
+_nassert((int) realData % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) imagData % 8 == 0);
 _nassert((int) pFFTCoeffs % 8 == 0);
 #endif
@@ -318,8 +318,8 @@ void SIGLIB_FUNC_DECL SDA_Cifft (SLData_t realData[],
     const SLData_t  *pFFTCosineCoeffs = pFFTCoeffs + (SLArrayIndex_t)((SLUFixData_t)fftLength >> 2U);
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                                         // Defined by TI compiler
-_nassert((int) realData % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
+#ifdef _TMS320C6700                         // Defined by TI compiler
+_nassert((int) realData % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) imagData % 8 == 0);
 _nassert((int) pFFTCoeffs % 8 == 0);
 #endif
@@ -757,7 +757,7 @@ void SIGLIB_FUNC_DECL SDA_Rfftr (SLData_t realData[],
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) realData % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) realData % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) imagData % 8 == 0);
 _nassert((int) pDCTCoeffs % 8 == 0);
 #endif
@@ -916,8 +916,8 @@ void SIGLIB_FUNC_DECL SDA_Rfft4 (SLData_t realData[],
     const SLData_t  *pFFTCosineCoeffs = pFFTCoeffs + (SLArrayIndex_t)((SLUFixData_t)fftLength >> 2U);
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                                         // Defined by TI compiler
-_nassert((int) realData % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
+#ifdef _TMS320C6700                         // Defined by TI compiler
+_nassert((int) realData % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) imagData % 8 == 0);
 _nassert((int) pFFTCoeffs % 8 == 0);
 #endif
@@ -1074,8 +1074,8 @@ void SIGLIB_FUNC_DECL SDA_Cfft4 (SLData_t realData[],
     const SLData_t  *pFFTCosineCoeffs = pFFTCoeffs + (SLArrayIndex_t)((SLUFixData_t)fftLength >> 2U);
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                                         // Defined by TI compiler
-_nassert((int) realData % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
+#ifdef _TMS320C6700                         // Defined by TI compiler
+_nassert((int) realData % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) imagData % 8 == 0);
 _nassert((int) pFFTCoeffs % 8 == 0);
 #endif
@@ -1324,8 +1324,8 @@ void SIGLIB_FUNC_DECL SDA_Cfft2rBy1c (SLData_t realData[],
     const SLData_t  *pFFTCosineCoeffs = pFFTCoeffs + (SLArrayIndex_t)((SLUFixData_t)fftLength >> 2U);
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                                         // Defined by TI compiler
-_nassert((int) realData % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
+#ifdef _TMS320C6700                         // Defined by TI compiler
+_nassert((int) realData % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) imagData % 8 == 0);
 _nassert((int) pFFTCoeffs % 8 == 0);
 #endif
@@ -1443,8 +1443,8 @@ void SIGLIB_FUNC_DECL SDA_Cfft2rBy1cr (SLData_t realData[],
     const SLData_t  *pFFTCosineCoeffs = pFFTCoeffs + (SLArrayIndex_t)((SLUFixData_t)fftLength >> 2U);
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                                         // Defined by TI compiler
-_nassert((int) realData % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
+#ifdef _TMS320C6700                         // Defined by TI compiler
+_nassert((int) realData % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) imagData % 8 == 0);
 _nassert((int) pFFTCoeffs % 8 == 0);
 #endif

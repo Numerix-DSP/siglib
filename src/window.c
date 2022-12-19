@@ -320,10 +320,10 @@ void SIGLIB_FUNC_DECL SDA_Window (const SLData_t * SIGLIB_PTR_DECL pSrc,
 
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                     // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pWindowCoeffs % 8 == 0);   // Align arrays on 64 bit double word boundary for LDDW
+#ifdef _TMS320C6700                         // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pDst % 8 == 0);
+_nassert((int) pWindowCoeffs % 8 == 0);
 #endif
 #endif
 
@@ -372,12 +372,12 @@ void SIGLIB_FUNC_DECL SDA_ComplexWindow (const SLData_t * SIGLIB_PTR_DECL pSrcRe
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcReal % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrcImag % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pRealDst % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pImagDst % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pRealWindowCoeffs % 8 == 0);   // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pImagWindowCoeffs % 8 == 0);   // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrcReal % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrcImag % 8 == 0);
+_nassert((int) pRealDst % 8 == 0);
+_nassert((int) pImagDst % 8 == 0);
+_nassert((int) pRealWindowCoeffs % 8 == 0);
+_nassert((int) pImagWindowCoeffs % 8 == 0);
 #endif
 #endif
 
@@ -419,7 +419,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_WindowInverseCoherentGain (const SLData_t * SIGLIB
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pWindowCoeffs % 8 == 0);       // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pWindowCoeffs % 8 == 0);     // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 

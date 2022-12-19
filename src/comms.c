@@ -55,7 +55,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_BitErrorRate (const SLChar_t *pSrc1,
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrc2 % 8 == 0);
 #endif
 #endif

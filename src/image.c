@@ -84,8 +84,8 @@ void SIGLIB_FUNC_DECL SIM_Fft2d (const SLImageData_t SIGLIB_HUGE_DECL *pSrc,
     SLData_t                        *pLocalImagArray = pImagArray;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                     // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+#ifdef _TMS320C6700                         // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pDst % 8 == 0);
 #endif
 #endif
@@ -247,8 +247,8 @@ void SIGLIB_FUNC_DECL SIM_Conv3x3 (const SLImageData_t SIGLIB_HUGE_DECL *pSrc,
     const SLImageData_t SIGLIB_HUGE_DECL *line1p, SIGLIB_HUGE_DECL *line2p, SIGLIB_HUGE_DECL *line3p;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                     // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+#ifdef _TMS320C6700                         // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pDst % 8 == 0);
 _nassert((int) pCoeffs % 8 == 0);
 #endif

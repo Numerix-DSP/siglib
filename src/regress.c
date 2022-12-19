@@ -59,8 +59,8 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraConstantCoeff (const SLData_t * SIGLIB_PTR_DE
     SLData_t        SumX, SumY;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                     // Defined by TI compiler
-_nassert((int) pSrcX % 8 == 0);           // Align arrays on 64 bit double word boundary for LDDW
+#ifdef _TMS320C6700                         // Defined by TI compiler
+_nassert((int) pSrcX % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrcY % 8 == 0);
 #endif
 #endif
@@ -120,8 +120,8 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraRegressionCoeff (const SLData_t * SIGLIB_PTR_
     SLData_t        SumXY, SumX, SumY, SumXSquared;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                     // Defined by TI compiler
-_nassert((int) pSrcX % 8 == 0);           // Align arrays on 64 bit double word boundary for LDDW
+#ifdef _TMS320C6700                         // Defined by TI compiler
+_nassert((int) pSrcX % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrcY % 8 == 0);
 #endif
 #endif
@@ -183,8 +183,8 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraCorrelationCoeff (const SLData_t * SIGLIB_PTR
     SLData_t        SumXY, SumX, SumY, SumXSquared, SumYSquared;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                     // Defined by TI compiler
-_nassert((int) pSrcX % 8 == 0);           // Align arrays on 64 bit double word boundary for LDDW
+#ifdef _TMS320C6700                         // Defined by TI compiler
+_nassert((int) pSrcX % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrcY % 8 == 0);
 #endif
 #endif
@@ -316,7 +316,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograConstantCoeff (const SLData_t * SIGLIB_PTR_DE
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcX % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrcX % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrcY % 8 == 0);
 #endif
 #endif
@@ -377,7 +377,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograRegressionCoeff (const SLData_t * SIGLIB_PTR_
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcX % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrcX % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrcY % 8 == 0);
 #endif
 #endif
@@ -440,7 +440,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograCorrelationCoeff (const SLData_t * SIGLIB_PTR
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcX % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrcX % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrcY % 8 == 0);
 #endif
 #endif
@@ -572,7 +572,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraConstantCoeff (const SLData_t * SIGLIB_PTR_DE
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcX % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrcX % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrcY % 8 == 0);
 #endif
 #endif
@@ -633,7 +633,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraRegressionCoeff (const SLData_t * SIGLIB_PTR_
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcX % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrcX % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrcY % 8 == 0);
 #endif
 #endif
@@ -696,7 +696,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraCorrelationCoeff (const SLData_t * SIGLIB_PTR
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcX % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrcX % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrcY % 8 == 0);
 #endif
 #endif
@@ -828,7 +828,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraConstantCoeff (const SLData_t * SIGLIB_PTR_DE
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcX % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrcX % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrcY % 8 == 0);
 #endif
 #endif
@@ -889,7 +889,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraRegressionCoeff (const SLData_t * SIGLIB_PTR_
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcX % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrcX % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrcY % 8 == 0);
 #endif
 #endif
@@ -952,7 +952,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraCorrelationCoeff (const SLData_t * SIGLIB_PTR
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcX % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrcX % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrcY % 8 == 0);
 #endif
 #endif

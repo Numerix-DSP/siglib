@@ -123,7 +123,7 @@ void SIGLIB_FUNC_DECL SMX_Multiply (const SLData_t * SIGLIB_PTR_DECL p_SrcMatrix
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) p_SrcMatrix1 % 8 == 0);        // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) p_SrcMatrix1 % 8 == 0);      // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) p_SrcMatrix2 % 8 == 0);
 _nassert((int) p_DstMatrix % 8 == 0);
 #endif

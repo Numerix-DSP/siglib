@@ -397,7 +397,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_GoertzelFilter (const SLData_t Src,
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pState % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pState % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -814,7 +814,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_ZTransform (const SLComplexRect_s Location,
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pNumerator % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pNumerator % 8 == 0);        // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pDenominator % 8 == 0);
 #endif
 #endif
@@ -889,7 +889,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_ZTransformDB (const SLComplexRect_s Location,
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pNumerator % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pNumerator % 8 == 0);        // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pDenominator % 8 == 0);
 #endif
 #endif

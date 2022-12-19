@@ -87,8 +87,8 @@ void SIGLIB_FUNC_DECL SIM_Dct8x8 (const SLData_t * SIGLIB_PTR_DECL pSrc,
     const SLData_t *pSrcTmp;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                 // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);        // Align arrays on 64 bit double word boundary for LDDW
+#ifdef _TMS320C6700                         // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pDst % 8 == 0);
 #endif
 #endif
@@ -146,8 +146,8 @@ void SIGLIB_FUNC_DECL SIM_Idct8x8 (const SLData_t * SIGLIB_PTR_DECL pSrc,
     const SLData_t *pSrcTmp;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                 // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);        // Align arrays on 64 bit double word boundary for LDDW
+#ifdef _TMS320C6700                         // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pDst % 8 == 0);
 #endif
 #endif
@@ -214,8 +214,8 @@ void SIGLIB_FUNC_DECL SIM_ZigZagScan (const SLData_t * SIGLIB_PTR_DECL pSrc,
     const SLData_t *SourceStart;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                 // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);        // Align arrays on 64 bit double word boundary for LDDW
+#ifdef _TMS320C6700                         // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pDst % 8 == 0);
 #endif
 #endif
@@ -304,8 +304,8 @@ void SIGLIB_FUNC_DECL SIM_ZigZagDescan (const SLData_t * SIGLIB_PTR_DECL pSrc,
     SLData_t       *DestStart;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                 // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);        // Align arrays on 64 bit double word boundary for LDDW
+#ifdef _TMS320C6700                         // Defined by TI compiler
+_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pDst % 8 == 0);
 #endif
 #endif

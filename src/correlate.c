@@ -61,14 +61,14 @@ void SIGLIB_FUNC_DECL SDA_CorrelateLinear (const SLData_t * SIGLIB_PTR_DECL pSrc
     SLArrayIndex_t          LenShortest, LenLongest;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                     // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);           // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);           // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+#ifdef _TMS320C6700                         // Defined by TI compiler
+_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc2 % 8 == 0);
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 
-    if (Length1 <= Length2) {           // Calculate which is shortest and which is longest array
+    if (Length1 <= Length2) {               // Calculate which is shortest and which is longest array
         p_Shortest = pSrc1;
         p_Longest = pSrc2;
         LenShortest = Length1;
@@ -184,9 +184,9 @@ void SIGLIB_FUNC_DECL SDA_CorrelatePartial (const SLData_t * SIGLIB_PTR_DECL pSr
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc2 % 8 == 0);
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 
@@ -243,15 +243,15 @@ void SIGLIB_FUNC_DECL SDA_CorrelateCircular (const SLData_t * SIGLIB_PTR_DECL pS
 
 {
     SLArrayIndex_t i, j;
-    SLArrayIndex_t ao = 0;         // a offset
-    SLArrayIndex_t bo = 1;         // b offset
+    SLArrayIndex_t ao = 0;                  // a offset
+    SLArrayIndex_t bo = 1;                  // b offset
     SLData_t       SumProd;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc2 % 8 == 0);
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 
@@ -314,9 +314,9 @@ void SIGLIB_FUNC_DECL SDA_Covariance (SLData_t * SIGLIB_PTR_DECL pSrc1,
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc2 % 8 == 0);
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 
@@ -383,9 +383,9 @@ void SIGLIB_FUNC_DECL SDA_CovariancePartial (SLData_t * SIGLIB_PTR_DECL pSrc1,
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc1 % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc1 % 8 == 0);
+_nassert((int) pDst % 8 == 0);
 #endif
 #endif
 
@@ -463,13 +463,13 @@ void SIGLIB_FUNC_DECL SDA_CorrelateLinearReturnPeak (const SLData_t * SIGLIB_PTR
 
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                     // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);           // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);           // Align arrays on 64 bit double word boundary for LDDW
+#ifdef _TMS320C6700                         // Defined by TI compiler
+_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc2 % 8 == 0);
 #endif
 #endif
 
-    if (Length1 <= Length2) {           // Calculate which is shortest and which is longest array
+    if (Length1 <= Length2) {               // Calculate which is shortest and which is longest array
         p_Shortest = pSrc1;
         p_Longest = pSrc2;
         LenShortest = Length1;

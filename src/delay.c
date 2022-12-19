@@ -87,7 +87,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_FixedDelay (const SLData_t Src,
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pState % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pState % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -228,7 +228,7 @@ void SIGLIB_FUNC_DECL SDS_FixedDelayComplex (const SLData_t RealSrc,
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pRealState % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pRealState % 8 == 0);        // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pImagState % 8 == 0);
 #endif
 #endif
@@ -457,8 +457,8 @@ SLData_t SIGLIB_FUNC_DECL SDS_VariableDelay (const SLData_t InputValue,
     SLArrayIndex_t LocalIndex = *pInputIndex;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                     // Defined by TI compiler
-_nassert((int) pDelayArray % 8 == 0);     // Align arrays on 64 bit double word boundary for LDDW
+#ifdef _TMS320C6700                         // Defined by TI compiler
+_nassert((int) pDelayArray % 8 == 0);       // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 

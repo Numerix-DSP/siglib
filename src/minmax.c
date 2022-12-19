@@ -894,7 +894,7 @@ void SIGLIB_FUNC_DECL SDA_Max2 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrc2 % 8 == 0);
 _nassert((int) pDst % 8 == 0);
 #endif
@@ -953,7 +953,7 @@ void SIGLIB_FUNC_DECL SDA_AbsMax2 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrc2 % 8 == 0);
 _nassert((int) pDst % 8 == 0);
 #endif
@@ -1025,7 +1025,7 @@ void SIGLIB_FUNC_DECL SDA_SignedAbsMax2 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrc2 % 8 == 0);
 _nassert((int) pDst % 8 == 0);
 #endif
@@ -1096,7 +1096,7 @@ void SIGLIB_FUNC_DECL SDA_Min2 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrc2 % 8 == 0);
 _nassert((int) pDst % 8 == 0);
 #endif
@@ -1155,7 +1155,7 @@ void SIGLIB_FUNC_DECL SDA_AbsMin2 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrc2 % 8 == 0);
 _nassert((int) pDst % 8 == 0);
 #endif
@@ -1227,7 +1227,7 @@ void SIGLIB_FUNC_DECL SDA_SignedAbsMin2 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrc2 % 8 == 0);
 _nassert((int) pDst % 8 == 0);
 #endif
@@ -2250,7 +2250,7 @@ void SIGLIB_FUNC_DECL SDA_SelectMax (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrc2 % 8 == 0);
 _nassert((int) pDst % 8 == 0);
 #endif
@@ -2296,7 +2296,7 @@ void SIGLIB_FUNC_DECL SDA_SelectMin (const SLData_t * SIGLIB_PTR_DECL pSrc1,
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrc2 % 8 == 0);
 _nassert((int) pDst % 8 == 0);
 #endif
@@ -2348,7 +2348,7 @@ void SIGLIB_FUNC_DECL SDA_SelectMagnitudeSquaredMax (const SLData_t * SIGLIB_PTR
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcReal1 % 8 == 0);           // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrcReal1 % 8 == 0);         // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrcImag1 % 8 == 0);
 _nassert((int) pSrcReal2 % 8 == 0);
 _nassert((int) pSrcImag2 % 8 == 0);
@@ -2409,7 +2409,7 @@ void SIGLIB_FUNC_DECL SDA_SelectMagnitudeSquaredMin (const SLData_t * SIGLIB_PTR
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcReal1 % 8 == 0);           // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrcReal1 % 8 == 0);         // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrcImag1 % 8 == 0);
 _nassert((int) pSrcReal2 % 8 == 0);
 _nassert((int) pSrcImag2 % 8 == 0);
@@ -2689,7 +2689,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAverageRatioComplex (const SLData_t * SIGLIB
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcReal % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrcReal % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrcImag % 8 == 0);
 #endif
 #endif
@@ -2738,7 +2738,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAveragePowerRatioComplex (const SLData_t * S
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcReal % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrcReal % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrcImag % 8 == 0);
 #endif
 #endif
@@ -2787,7 +2787,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAveragePowerRatioComplexDB (const SLData_t *
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcReal % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrcReal % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrcImag % 8 == 0);
 #endif
 #endif

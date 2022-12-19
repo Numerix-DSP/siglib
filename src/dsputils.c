@@ -254,7 +254,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_MeanSquareError (const SLData_t * SIGLIB_PTR_DECL 
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrc2 % 8 == 0);
 #endif
 #endif
@@ -349,7 +349,7 @@ void SIGLIB_FUNC_DECL SDA_Magnitude (const SLData_t * SIGLIB_PTR_DECL pSrcReal,
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcReal % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrcReal % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrcImag % 8 == 0);
 _nassert((int) pDst % 8 == 0);
 #endif
@@ -395,7 +395,7 @@ void SIGLIB_FUNC_DECL SDA_MagnitudeSquared (const SLData_t * SIGLIB_PTR_DECL pSr
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcReal % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrcReal % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrcImag % 8 == 0);
 _nassert((int) pDst % 8 == 0);
 #endif
@@ -2356,7 +2356,7 @@ void SIGLIB_FUNC_DECL SIF_Histogram (SLData_t * SIGLIB_PTR_DECL pHistArray,
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pHistArray % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pHistArray % 8 == 0);        // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
@@ -2902,7 +2902,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Compare (const SLData_t * SIGLIB_PTR_DECL pSrc1
 
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);               // Align arrays on 64 bit double word boundary for LDDW
+_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
 _nassert((int) pSrc2 % 8 == 0);
 #endif
 #endif
