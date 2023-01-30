@@ -22,6 +22,9 @@
 //        n * PI        (    2   )
 //
 // and h(0) = 0, for n = 0
+//
+// The hilbert transformer coefficients are windowed by the Kaiser
+// window to minimize truncation effects
 
 // Include files
 #include <stdio.h>
@@ -33,13 +36,14 @@
 #define FFT_LENGTH              SAMPLE_LENGTH
 #define LOG2_FFT_LENGTH         SAI_FftLengthLog2(FFT_LENGTH)   // Log2 FFT length,
 
-#define FILTER_LENGTH           31
+#define FILTER_LENGTH           63                          // Hilbert filter length - ensure (N+1)/4 is an integer
 #define FILTER_GROUP_DELAY      (FILTER_LENGTH >> 1)        // Filter group delay - Note : C array indexing
 
 // Declare global variables and arrays
 static SLData_t         SinePhase;
 static SLData_t         *pImagData, *pMagnitude, *pDelay, *pFFTCoeffs, *pTempDelay;
 static SLData_t         *pFilterTaps, *pFilterTapsStart, *pFilterState;
+static SLData_t         *pWindowCoeffs;
 static SLArrayIndex_t   FilterIndex;
 static SLData_t         *pSrc1, *pSrc2;
 
@@ -63,6 +67,7 @@ int main(void)
 
     pFilterTaps = SUF_VectorArrayAllocate (FILTER_LENGTH);
     pFilterState = SUF_VectorArrayAllocate (FILTER_LENGTH);
+    pWindowCoeffs = SUF_VectorArrayAllocate (FILTER_LENGTH);
     pSrc1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
     pSrc2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
     pImagData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
@@ -73,7 +78,7 @@ int main(void)
 
     pFilterTapsStart = pFilterTaps;
 
-    if ((NULL == pFilterTaps) || (NULL == pFilterState) || (NULL == pSrc1) ||
+    if ((NULL == pFilterTaps) || (NULL == pFilterState) || (NULL == pWindowCoeffs) || (NULL == pSrc1) ||
         (NULL == pSrc2) || (NULL == pImagData) || (NULL == pMagnitude) ||
         (NULL == pFFTCoeffs) || (NULL == pDelay) || (NULL == pTempDelay)) {
 
@@ -84,6 +89,33 @@ int main(void)
                                                             // Initialise Hilbert transformer coefficients
     SIF_HilbertTransformer (pFilterTaps,                    // Pointer to filter coefficients
                             FILTER_LENGTH);                 // Filter length
+                                                            // Generate window table
+    SIF_Window (pWindowCoeffs,                              // Pointer to window oefficient
+                SIGLIB_KAISER,                              // Window type
+                SIGLIB_SIX,                                 // Window coefficient
+                FILTER_LENGTH);                             // Window length
+    SDA_Window (pFilterTaps,                                // Pointer to filter coefficients
+                pFilterTaps,                                // Pointer to filter coefficients
+                pWindowCoeffs,                              // Pointer to window oefficient
+                FILTER_LENGTH);                             // Window length
+    SLData_t windowInverseCoherentGain = SDA_WindowInverseCoherentGain (pWindowCoeffs, FILTER_LENGTH);
+    SDA_Multiply (pFilterTaps,                              // Pointer to filter coefficients
+                  windowInverseCoherentGain,                // Scaling factor
+                  pFilterTaps,                              // Pointer to filter coefficients
+                  FILTER_LENGTH);                           // Window length
+
+    gpc_plot_2d (h2DPlot,                                   // Graph handle
+                 pFilterTaps,                               // Dataset
+                 FILTER_LENGTH,                             // Dataset length
+                 "Hilbert Transform Filter Coefficients",   // Dataset title
+                 SIGLIB_ZERO,                               // Minimum X value
+                 (double)(FILTER_LENGTH - 1),               // Maximum X value
+                 "lines",                                   // Graph type
+                 "magenta",                                 // Colour
+                 GPC_NEW);                                  // New graph
+    printf ("\nHilbert Transform Filter Coefficients\nPlease hit <Carriage Return> to continue . . ."); getchar();
+
+
                                                             // Initialise FIR filter for Hilbert transformer
     SIF_Fir (pFilterState,                                  // Pointer to filter state array
              &FilterIndex,                                  // Pointer to filter index register
@@ -239,6 +271,7 @@ int main(void)
 
     SUF_MemoryFree (pFilterTaps);                           // Free memory
     SUF_MemoryFree (pFilterState);
+    SUF_MemoryFree (pWindowCoeffs);
     SUF_MemoryFree (pSrc1);
     SUF_MemoryFree (pSrc2);
     SUF_MemoryFree (pImagData);

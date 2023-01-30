@@ -543,6 +543,608 @@ SLNeuralNetworkPrediction_s SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryNetworkPredict
 
 /**/
 /********************************************************
+* Function: SDA_TwoLayer2CategoryWithBiasesNetworkFit
+*
+* Parameters:
+*   const SLData_t *,               - pTrainingData
+*   const SLArrayIndex_t *,         - pCategoricalValue
+*   SLData_t *,                     - pLayer1Weights
+*   SLData_t *,                     - pLayer1Biases
+*   SLData_t *,                     - pLayer2Weights
+*   SLData_t *,                     - pLayer2Biases
+*   SLData_t *,                     - pLayer1PreActivation
+*   SLData_t *,                     - pLayer1BiasPreActivation
+*   SLData_t *,                     - pLayer1PostActivation
+*   const enum SLActivationType_t   - layer1ActivationType
+*   const SLData_t,                 - layer1ActivationAlpha
+*   const enum SLActivationType_t   - layer2ActivationType
+*   const SLData_t,                 - layer2ActivationAlpha
+*   const SLData_t,                 - learningRate
+*   const SLArrayIndex_t,           - numberOfTrainingSequences
+*   const SLArrayIndex_t,           - numberOfInputNodes
+*   const SLArrayIndex_t)           - numberOfLayer1Nodes
+*
+* Return value:
+*   void
+*
+* Description:
+*   Fit the 2 category model to the data
+*   This network uses both weights and biases in all nodes.
+*
+********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryWithBiasesNetworkFit (const SLData_t *pTrainingData,
+    const SLArrayIndex_t *pCategoricalValue,
+    SLData_t *pLayer1Weights,
+    SLData_t *pLayer1Biases,
+    SLData_t *pLayer2Weights,
+    SLData_t *pLayer2Biases,
+    SLData_t *pLayer1PreActivation,
+    SLData_t *pLayer1PostActivation,
+    const enum SLActivationType_t layer1ActivationType,
+    const SLData_t layer1ActivationAlpha,
+    const enum SLActivationType_t layer2ActivationType,
+    const SLData_t layer2ActivationAlpha,
+    const SLData_t learningRate,
+    const SLArrayIndex_t numberOfTrainingSequences,
+    const SLArrayIndex_t numberOfInputNodes,
+    const SLArrayIndex_t numberOfLayer1Nodes)
+
+{
+                                                            // Forward propagation
+    for (SLArrayIndex_t trainingSequenceNumber = 0; trainingSequenceNumber < numberOfTrainingSequences; trainingSequenceNumber++) {
+        for (SLArrayIndex_t layer1Node = 0; layer1Node < numberOfLayer1Nodes; layer1Node++) {
+            pLayer1PreActivation[layer1Node] =
+                SDA_RealDotProduct (pTrainingData+(trainingSequenceNumber*numberOfInputNodes),  // Source vector 1 pointer
+                                    pLayer1Weights+(layer1Node*numberOfInputNodes),             // Source vector 2 pointer
+                                    numberOfInputNodes) +                                       // Vector lengths
+                pLayer1Biases[layer1Node];
+
+            switch  (layer1ActivationType) {                // Choose required activation function
+                case SIGLIB_ACTIVATION_TYPE_LEAKY_RELU:
+                    *(pLayer1PostActivation+layer1Node) = SDS_ActivationLeakyReLU (pLayer1PreActivation[layer1Node], layer1ActivationAlpha);
+                    break;
+                case SIGLIB_ACTIVATION_TYPE_LOGISTIC:
+                    *(pLayer1PostActivation+layer1Node) = SDS_ActivationLogistic (pLayer1PreActivation[layer1Node]);
+                    break;
+                case SIGLIB_ACTIVATION_TYPE_TANH:
+                    *(pLayer1PostActivation+layer1Node) = SDS_ActivationTanH (pLayer1PreActivation[layer1Node]);
+                    break;
+                case SIGLIB_ACTIVATION_TYPE_RELU:
+                default:
+                    *(pLayer1PostActivation+layer1Node) = SDS_ActivationReLU (pLayer1PreActivation[layer1Node]);
+                    break;
+            }
+        }
+
+        SLData_t  layer2PreActivation =
+            SDA_RealDotProduct (pLayer1PostActivation,      // Source vector 1 pointer
+                                pLayer2Weights,             // Source vector 2 pointer
+                                numberOfLayer1Nodes) +      // Vector lengths
+                pLayer2Biases[0];
+
+        SLData_t  layer2PostActivation;
+        switch  (layer2ActivationType) {                    // Choose required activation function
+            case SIGLIB_ACTIVATION_TYPE_LEAKY_RELU:
+                 layer2PostActivation = SDS_ActivationLeakyReLU (layer2PreActivation, layer2ActivationAlpha);
+                break;
+            case SIGLIB_ACTIVATION_TYPE_LOGISTIC:
+                 layer2PostActivation = SDS_ActivationLogistic (layer2PreActivation);
+                break;
+            case SIGLIB_ACTIVATION_TYPE_TANH:
+                 layer2PostActivation = SDS_ActivationTanH (layer2PreActivation);
+                break;
+            case SIGLIB_ACTIVATION_TYPE_RELU:
+            default:
+                 layer2PostActivation = SDS_ActivationReLU (layer2PreActivation);
+                break;
+        }
+
+        SLData_t layer2Error = (SLData_t)pCategoricalValue[trainingSequenceNumber] - layer2PostActivation;
+
+                                                            // Backward propagation
+        for (SLArrayIndex_t layer1Node = 0; layer1Node < numberOfLayer1Nodes; layer1Node++) {
+            SLData_t layer1Error;
+            switch  (layer2ActivationType) {                // Choose required activation derivative function
+                case SIGLIB_ACTIVATION_TYPE_LEAKY_RELU:
+                    layer1Error = layer2Error * SDS_ActivationLeakyReLUDerivative (layer2PreActivation, layer2ActivationAlpha);
+                    break;
+                case SIGLIB_ACTIVATION_TYPE_LOGISTIC:
+                    layer1Error = layer2Error * SDS_ActivationLogisticDerivative (layer2PreActivation);
+                    break;
+                case SIGLIB_ACTIVATION_TYPE_TANH:
+                    layer1Error = layer2Error * SDS_ActivationTanHDerivative (layer2PreActivation);
+                    break;
+                case SIGLIB_ACTIVATION_TYPE_RELU:
+                default:
+                    layer1Error = layer2Error * SDS_ActivationReLUDerivative (layer2PreActivation);
+                    break;
+            }
+
+            SLData_t  layer2Gradient = layer1Error * *(pLayer1PostActivation+layer1Node);
+
+            for (SLArrayIndex_t inputLayerNode = 0; inputLayerNode < numberOfInputNodes; inputLayerNode++) {
+                SLData_t trainingDataSample = pTrainingData[(trainingSequenceNumber*numberOfInputNodes)+inputLayerNode];
+                SLData_t  layer1Gradient;
+                switch  (layer1ActivationType) {            // Choose required activation derivative function
+                    case SIGLIB_ACTIVATION_TYPE_LEAKY_RELU:
+                         layer1Gradient = layer1Error * *(pLayer2Weights+layer1Node) * trainingDataSample * SDS_ActivationLeakyReLUDerivative (pLayer1PreActivation[layer1Node], layer1ActivationAlpha);
+                        break;
+                    case SIGLIB_ACTIVATION_TYPE_LOGISTIC:
+                         layer1Gradient = layer1Error * *(pLayer2Weights+layer1Node) * trainingDataSample * SDS_ActivationLogisticDerivative (pLayer1PreActivation[layer1Node]);
+                        break;
+                    case SIGLIB_ACTIVATION_TYPE_TANH:
+                         layer1Gradient = layer1Error * *(pLayer2Weights+layer1Node) * trainingDataSample * SDS_ActivationTanHDerivative (pLayer1PreActivation[layer1Node]);
+                        break;
+                    case SIGLIB_ACTIVATION_TYPE_RELU:
+                    default:
+                         layer1Gradient = layer1Error * *(pLayer2Weights+layer1Node) * trainingDataSample * SDS_ActivationReLUDerivative (pLayer1PreActivation[layer1Node]);
+                        break;
+                }
+
+                *(pLayer1Weights+(layer1Node*numberOfInputNodes)+inputLayerNode) += learningRate * layer1Gradient;
+            }
+//##
+            SLData_t  layer1Gradient;
+            switch  (layer1ActivationType) {        // Choose required activation derivative function
+                case SIGLIB_ACTIVATION_TYPE_LEAKY_RELU:
+                    layer1Gradient = layer1Error * pLayer2Weights[layer1Node] * SDS_ActivationLeakyReLUDerivative (pLayer1PreActivation[layer1Node], layer1ActivationAlpha);
+                    break;
+                case SIGLIB_ACTIVATION_TYPE_LOGISTIC:
+                    layer1Gradient = layer1Error * pLayer2Weights[layer1Node] * SDS_ActivationLogisticDerivative (pLayer1PreActivation[layer1Node]);
+                    break;
+                case SIGLIB_ACTIVATION_TYPE_TANH:
+                    layer1Gradient = layer1Error * pLayer2Weights[layer1Node] * SDS_ActivationTanHDerivative (pLayer1PreActivation[layer1Node]);
+                    break;
+                case SIGLIB_ACTIVATION_TYPE_RELU:
+                default:
+                    layer1Gradient = layer1Error * pLayer2Weights[layer1Node] * SDS_ActivationReLUDerivative (pLayer1PreActivation[layer1Node]);
+                     break;
+            }
+            *(pLayer1Biases+layer1Node) += learningRate * layer1Gradient;
+            *(pLayer2Weights+layer1Node) += learningRate * layer2Gradient;
+        }
+//##
+        SLData_t layer2Gradient;
+        switch  (layer2ActivationType) {            // Choose required activation derivative function
+            case SIGLIB_ACTIVATION_TYPE_LEAKY_RELU:
+                layer2Gradient = layer2Error * SDS_ActivationLeakyReLUDerivative (layer2PreActivation, layer2ActivationAlpha);
+                break;
+            case SIGLIB_ACTIVATION_TYPE_LOGISTIC:
+                layer2Gradient = layer2Error * SDS_ActivationLogisticDerivative (layer2PreActivation);
+                break;
+            case SIGLIB_ACTIVATION_TYPE_TANH:
+                layer2Gradient = layer2Error * SDS_ActivationTanHDerivative (layer2PreActivation);
+                break;
+            case SIGLIB_ACTIVATION_TYPE_RELU:
+            default:
+                layer2Gradient = layer2Error * SDS_ActivationReLUDerivative (layer2PreActivation);
+                break;
+        }
+
+        *pLayer1Biases += learningRate * layer2Gradient;
+
+    }
+}       // End of SDA_TwoLayer2CategoryWithBiasesNetworkFit()
+
+
+/**/
+/********************************************************
+* Function: SDA_TwoLayer2CategoryWithBiasesNetworkPredict
+*
+* Parameters:
+*   const SLData_t *,               - pData
+*   const SLData_t *,               - pLayer1Weights
+*   const SLData_t *,               - pLayer1Biases
+*   const SLData_t *,               - pLayer2Weights
+*   const SLData_t *,               - pLayer2Biases
+*   SLData_t *,                     - pLayer1PostActivation
+*   SLData_t *,                     - pLayer2Activation
+*   const enum SLActivationType_t   - layer1ActivationType
+*   const SLData_t,                 - layer1ActivationAlpha
+*   const enum SLActivationType_t   - layer2ActivationType
+*   const SLData_t,                 - layer2ActivationAlpha
+*   const SLData_t,                 - classificationThreshold
+*   const SLArrayIndex_t,           - numberOfInputNodes
+*   const SLArrayIndex_t)           - numberOfLayer1Nodes
+*
+* Return value:
+*   Predicted category and associated probability
+*
+* Description:
+*   Use the model to predict the category of the data
+*   This network uses both weights and biases in all nodes.
+*
+********************************************************/
+
+SLNeuralNetworkPrediction_s SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryWithBiasesNetworkPredict (const SLData_t *pData,
+    const SLData_t *pLayer1Weights,
+    const SLData_t *pLayer1Biases,
+    const SLData_t *pLayer2Weights,
+    const SLData_t *pLayer2Biases,
+    SLData_t *pLayer1PostActivation,
+    SLData_t *pLayer2Activation,
+    const enum SLActivationType_t layer1ActivationType,
+    const SLData_t layer1ActivationAlpha,
+    const enum SLActivationType_t layer2ActivationType,
+    const SLData_t layer2ActivationAlpha,
+    const SLData_t classificationThreshold,
+    const SLArrayIndex_t numberOfInputNodes,
+    const SLArrayIndex_t numberOfLayer1Nodes)
+
+{
+                                                            // Forward propagation
+    for (SLArrayIndex_t layer1Node = 0; layer1Node < numberOfLayer1Nodes; layer1Node++) {
+        SLData_t layer1PreActivation =
+            SDA_RealDotProduct (pData,                                          // Source vector 1 pointer
+                                pLayer1Weights+(layer1Node*numberOfInputNodes), // Source vector 2 pointer
+                                numberOfInputNodes) +                           // Vector lengths
+            pLayer1Biases[layer1Node];
+
+        switch  (layer1ActivationType) {                    // Choose required activation function
+            case SIGLIB_ACTIVATION_TYPE_LEAKY_RELU:
+                *(pLayer1PostActivation+layer1Node) = SDS_ActivationLeakyReLU (layer1PreActivation, layer1ActivationAlpha);
+                break;
+            case SIGLIB_ACTIVATION_TYPE_LOGISTIC:
+                *(pLayer1PostActivation+layer1Node) = SDS_ActivationLogistic (layer1PreActivation);
+                break;
+            case SIGLIB_ACTIVATION_TYPE_TANH:
+                *(pLayer1PostActivation+layer1Node) = SDS_ActivationTanH (layer1PreActivation);
+                break;
+            case SIGLIB_ACTIVATION_TYPE_RELU:
+            default:
+                *(pLayer1PostActivation+layer1Node) = SDS_ActivationReLU (layer1PreActivation);
+                break;
+        }
+    }
+
+    SLData_t  layer2PreActivation =
+        SDA_RealDotProduct (pLayer1PostActivation,          // Source vector 1 pointer
+                            pLayer2Weights,                 // Source vector 2 pointer
+                            numberOfLayer1Nodes) +          // Vector lengths
+        pLayer2Biases[0];
+
+    SLData_t  layer2PostActivation;
+    switch  (layer2ActivationType) {                        // Choose required activation function
+        case SIGLIB_ACTIVATION_TYPE_LEAKY_RELU:
+             layer2PostActivation = SDS_ActivationLeakyReLU (layer2PreActivation, layer2ActivationAlpha);
+            break;
+        case SIGLIB_ACTIVATION_TYPE_LOGISTIC:
+             layer2PostActivation = SDS_ActivationLogistic (layer2PreActivation);
+            break;
+        case SIGLIB_ACTIVATION_TYPE_TANH:
+             layer2PostActivation = SDS_ActivationTanH (layer2PreActivation);
+            break;
+        case SIGLIB_ACTIVATION_TYPE_RELU:
+        default:
+             layer2PostActivation = SDS_ActivationReLU (layer2PreActivation);
+            break;
+    }
+
+    SLNeuralNetworkPrediction_s prediction;
+    if (layer2PostActivation > classificationThreshold) {
+        prediction.predictedCategory = SIGLIB_AI_ONE;
+    }
+    else {
+        prediction.predictedCategory = SIGLIB_AI_ZERO;
+    }
+
+                                                            // Search for category with max activation level
+    prediction.probability = layer2PostActivation;
+
+    *pLayer2Activation =  layer2PostActivation;             // Used for visualization
+
+    return (prediction);
+}       // End of SDA_TwoLayer2CategoryWithBiasesNetworkPredict()
+
+
+/**/
+/********************************************************
+* Function: SDA_TwoLayerNCategoryWithBiasesNetworkFit
+*
+* Parameters:
+*   const SLData_t *,               - pTrainingData
+*   const SLArrayIndex_t *,         - pCategoricalValue
+*   SLData_t *,                     - pLayer1Weights
+*   SLData_t *,                     - pLayer1Biases
+*   SLData_t *,                     - pLayer2Weights
+*   SLData_t *,                     - pLayer2Biases
+*   SLData_t *,                     - pLayer1PreActivation
+*   SLData_t *,                     - pLayer1PostActivation
+*   const enum SLActivationType_t   - layer1ActivationType
+*   const SLData_t,                 - layer1ActivationAlpha
+*   const enum SLActivationType_t   - layer2ActivationType
+*   const SLData_t,                 - layer2ActivationAlpha
+*   const SLData_t,                 - learningRate
+*   const SLArrayIndex_t,           - numberOfTrainingSequences
+*   const SLArrayIndex_t,           - numberOfInputNodes
+*   const SLArrayIndex_t)           - numberOfLayer1Nodes
+*
+* Return value:
+*   void
+*
+* Description:
+*   Fit the N category model to the data
+*   This network uses both weights and biases in all nodes.
+*
+********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryWithBiasesNetworkFit (const SLData_t *pTrainingData,
+    const SLArrayIndex_t *pCategoricalValues,
+    SLData_t *pLayer1Weights,
+    SLData_t *pLayer1Biases,
+    SLData_t *pLayer2Weights,
+    SLData_t *pLayer2Biases,
+    SLData_t *pLayer1PreActivation,
+    SLData_t *pLayer1PostActivation,
+    SLData_t *pLayer2PostActivation,
+    const enum SLActivationType_t layer1ActivationType,
+    const SLData_t layer1ActivationAlpha,
+    const enum SLActivationType_t layer2ActivationType,
+    const SLData_t layer2ActivationAlpha,
+    const SLData_t learningRate,
+    const SLArrayIndex_t numberOfTrainingSequences,
+    const SLArrayIndex_t numberOfInputNodes,
+    const SLArrayIndex_t numberOfLayer1Nodes,
+    const SLArrayIndex_t numberOfCategories)
+
+{
+                                                            // Forward propagation
+    for (SLArrayIndex_t trainingSequenceNumber = 0; trainingSequenceNumber < numberOfTrainingSequences; trainingSequenceNumber++) {
+        SLData_t  layer2PreActivation;
+
+        for (SLArrayIndex_t layer1Node = 0; layer1Node < numberOfLayer1Nodes; layer1Node++) {
+            pLayer1PreActivation[layer1Node] =
+                SDA_RealDotProduct (pTrainingData+(trainingSequenceNumber*numberOfInputNodes),  // Source vector 1 pointer
+                                    pLayer1Weights+(layer1Node*numberOfInputNodes),             // Source vector 2 pointer
+                                    numberOfInputNodes) +                                       // Vector lengths
+                pLayer1Biases[layer1Node];
+
+            switch  (layer1ActivationType) {                // Choose required activation function
+                case SIGLIB_ACTIVATION_TYPE_LEAKY_RELU:
+                    *(pLayer1PostActivation+layer1Node) = SDS_ActivationLeakyReLU (pLayer1PreActivation[layer1Node], layer1ActivationAlpha);
+                    break;
+                case SIGLIB_ACTIVATION_TYPE_LOGISTIC:
+                    *(pLayer1PostActivation+layer1Node) = SDS_ActivationLogistic (pLayer1PreActivation[layer1Node]);
+                    break;
+                case SIGLIB_ACTIVATION_TYPE_TANH:
+                    *(pLayer1PostActivation+layer1Node) = SDS_ActivationTanH (pLayer1PreActivation[layer1Node]);
+                    break;
+                case SIGLIB_ACTIVATION_TYPE_RELU:
+                default:
+                    *(pLayer1PostActivation+layer1Node) = SDS_ActivationReLU (pLayer1PreActivation[layer1Node]);
+                    break;
+            }
+        }
+
+        for (SLArrayIndex_t layer2Node = 0; layer2Node < numberOfCategories; layer2Node++) {
+            layer2PreActivation =
+                SDA_RealDotProduct (pLayer1PostActivation,                              // Source vector 1 pointer
+                                    pLayer2Weights+(layer2Node*numberOfLayer1Nodes),    // Source vector 2 pointer
+                                    numberOfLayer1Nodes) +                              // Vector lengths
+                pLayer2Biases[layer2Node];
+
+            switch  (layer2ActivationType) {                // Choose required activation function
+                case SIGLIB_ACTIVATION_TYPE_LEAKY_RELU:
+                    *(pLayer2PostActivation+layer2Node) = SDS_ActivationLeakyReLU (layer2PreActivation, layer2ActivationAlpha);
+                    break;
+                case SIGLIB_ACTIVATION_TYPE_LOGISTIC:
+                    *(pLayer2PostActivation+layer2Node) = SDS_ActivationLogistic (layer2PreActivation);
+                    break;
+                case SIGLIB_ACTIVATION_TYPE_TANH:
+                    *(pLayer2PostActivation+layer2Node) = SDS_ActivationTanH (layer2PreActivation);
+                    break;
+                case SIGLIB_ACTIVATION_TYPE_RELU:
+                default:
+                   *(pLayer2PostActivation+layer2Node) = SDS_ActivationReLU (layer2PreActivation);
+                    break;
+            }
+        }
+
+        SLData_t layer2Error;
+                                                            // Backward propagation
+        for (SLArrayIndex_t layer2Node = 0; layer2Node < numberOfCategories; layer2Node++) {
+            if (layer2Node == pCategoricalValues[trainingSequenceNumber]) {
+                layer2Error = SIGLIB_ONE - *(pLayer2PostActivation+layer2Node);
+            }
+            else {
+                layer2Error = -*(pLayer2PostActivation+layer2Node);
+            }
+
+            for (SLArrayIndex_t layer1Node = 0; layer1Node < numberOfLayer1Nodes; layer1Node++) {
+                SLData_t layer1Error;
+                switch  (layer2ActivationType) {            // Choose required activation derivative function
+                    case SIGLIB_ACTIVATION_TYPE_LEAKY_RELU:
+                        layer1Error = layer2Error * SDS_ActivationLeakyReLUDerivative (layer2PreActivation, layer2ActivationAlpha);
+                        break;
+                    case SIGLIB_ACTIVATION_TYPE_LOGISTIC:
+                        layer1Error = layer2Error * SDS_ActivationLogisticDerivative (layer2PreActivation);
+                        break;
+                    case SIGLIB_ACTIVATION_TYPE_TANH:
+                        layer1Error = layer2Error * SDS_ActivationTanHDerivative (layer2PreActivation);
+                        break;
+                    case SIGLIB_ACTIVATION_TYPE_RELU:
+                    default:
+                        layer1Error = layer2Error * SDS_ActivationReLUDerivative (layer2PreActivation);
+                        break;
+                }
+
+                SLData_t  layer2Gradient = layer1Error * *(pLayer1PostActivation+layer1Node);
+
+                for (SLArrayIndex_t inputLayerNode = 0; inputLayerNode < numberOfInputNodes; inputLayerNode++) {
+                    SLData_t trainingDataSample = pTrainingData[(trainingSequenceNumber*numberOfInputNodes)+inputLayerNode];
+                    SLData_t  layer1Gradient;
+                    switch  (layer1ActivationType) {        // Choose required activation derivative function
+                        case SIGLIB_ACTIVATION_TYPE_LEAKY_RELU:
+                            layer1Gradient = layer1Error * pLayer2Weights[(layer2Node*numberOfLayer1Nodes)+layer1Node] * trainingDataSample * SDS_ActivationLeakyReLUDerivative (pLayer1PreActivation[layer1Node], layer1ActivationAlpha);
+                            break;
+                        case SIGLIB_ACTIVATION_TYPE_LOGISTIC:
+                            layer1Gradient = layer1Error * pLayer2Weights[(layer2Node*numberOfLayer1Nodes)+layer1Node] * trainingDataSample * SDS_ActivationLogisticDerivative (pLayer1PreActivation[layer1Node]);
+                            break;
+                        case SIGLIB_ACTIVATION_TYPE_TANH:
+                            layer1Gradient = layer1Error * pLayer2Weights[(layer2Node*numberOfLayer1Nodes)+layer1Node] * trainingDataSample * SDS_ActivationTanHDerivative (pLayer1PreActivation[layer1Node]);
+                            break;
+                        case SIGLIB_ACTIVATION_TYPE_RELU:
+                        default:
+                            layer1Gradient = layer1Error * pLayer2Weights[(layer2Node*numberOfLayer1Nodes)+layer1Node] * trainingDataSample * SDS_ActivationReLUDerivative (pLayer1PreActivation[layer1Node]);
+                            break;
+                    }
+
+                    *(pLayer1Weights+(layer1Node*numberOfInputNodes)+inputLayerNode) += learningRate * layer1Gradient;
+                }
+
+
+                SLData_t  layer1Gradient;
+                switch  (layer1ActivationType) {        // Choose required activation derivative function
+                    case SIGLIB_ACTIVATION_TYPE_LEAKY_RELU:
+                        layer1Gradient = layer1Error * pLayer2Weights[(layer2Node*numberOfLayer1Nodes)+layer1Node] * SDS_ActivationLeakyReLUDerivative (pLayer1PreActivation[layer1Node], layer1ActivationAlpha);
+                        break;
+                    case SIGLIB_ACTIVATION_TYPE_LOGISTIC:
+                        layer1Gradient = layer1Error * pLayer2Weights[(layer2Node*numberOfLayer1Nodes)+layer1Node] * SDS_ActivationLogisticDerivative (pLayer1PreActivation[layer1Node]);
+                        break;
+                    case SIGLIB_ACTIVATION_TYPE_TANH:
+                        layer1Gradient = layer1Error * pLayer2Weights[(layer2Node*numberOfLayer1Nodes)+layer1Node] * SDS_ActivationTanHDerivative (pLayer1PreActivation[layer1Node]);
+                        break;
+                    case SIGLIB_ACTIVATION_TYPE_RELU:
+                    default:
+                        layer1Gradient = layer1Error * pLayer2Weights[(layer2Node*numberOfLayer1Nodes)+layer1Node] * SDS_ActivationReLUDerivative (pLayer1PreActivation[layer1Node]);
+                        break;
+                }
+                *(pLayer1Biases+layer1Node) += learningRate * layer1Gradient;
+
+                *(pLayer2Weights+(layer2Node*numberOfLayer1Nodes)+layer1Node) += learningRate * layer2Gradient;
+            }
+
+            SLData_t layer2Gradient;
+            switch  (layer2ActivationType) {            // Choose required activation derivative function
+                case SIGLIB_ACTIVATION_TYPE_LEAKY_RELU:
+                    layer2Gradient = layer2Error * SDS_ActivationLeakyReLUDerivative (layer2PreActivation, layer2ActivationAlpha);
+                    break;
+                case SIGLIB_ACTIVATION_TYPE_LOGISTIC:
+                    layer2Gradient = layer2Error * SDS_ActivationLogisticDerivative (layer2PreActivation);
+                    break;
+                case SIGLIB_ACTIVATION_TYPE_TANH:
+                    layer2Gradient = layer2Error * SDS_ActivationTanHDerivative (layer2PreActivation);
+                    break;
+                case SIGLIB_ACTIVATION_TYPE_RELU:
+                default:
+                    layer2Gradient = layer2Error * SDS_ActivationReLUDerivative (layer2PreActivation);
+                    break;
+            }
+
+            *pLayer1Biases += learningRate * layer2Gradient;
+        }
+    }
+}       // End of SDA_TwoLayerNCategoryWithBiasesNetworkFit()
+
+
+/**/
+/********************************************************
+* Function: SDA_TwoLayerNCategoryWithBiasesNetworkPredict
+*
+* Parameters:
+*   const SLData_t *,               - pData
+*   const SLData_t *,               - pLayer1Weights
+*   const SLData_t *,               - pLayer1Biases
+*   const SLData_t *,               - pLayer2Weights
+*   const SLData_t *,               - pLayer2Biases
+*   SLData_t *,                     - pLayer1PostActivation
+*   SLData_t *,                     - pLayer2PostActivation
+*   const enum SLActivationType_t   - layer1ActivationType
+*   const SLData_t,                 - layer1ActivationAlpha
+*   const enum SLActivationType_t   - layer2ActivationType
+*   const SLData_t,                 - layer2ActivationAlpha
+*   const SLArrayIndex_t,           - numberOfInputNodes
+*   const SLArrayIndex_t,           - numberOfLayer1Nodes
+*   const SLArrayIndex_t)           - numberOfCategories
+*
+* Return value:
+*   Predicted category and associated probability
+*
+* Description:
+*   Use the model to predict the category of the data
+*   This network uses both weights and biases in all nodes.
+*
+********************************************************/
+
+SLNeuralNetworkPrediction_s SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryWithBiasesNetworkPredict (const SLData_t *pData,
+    const SLData_t *pLayer1Weights,
+    const SLData_t *pLayer1Biases,
+    const SLData_t *pLayer2Weights,
+    const SLData_t *pLayer2Biases,
+    SLData_t *pLayer1PostActivation,
+    SLData_t *pLayer2PostActivation,
+    const enum SLActivationType_t layer1ActivationType,
+    const SLData_t layer1ActivationAlpha,
+    const enum SLActivationType_t layer2ActivationType,
+    const SLData_t layer2ActivationAlpha,
+    const SLArrayIndex_t numberOfInputNodes,
+    const SLArrayIndex_t numberOfLayer1Nodes,
+    const SLArrayIndex_t numberOfCategories)
+
+{
+                                                            // Forward propagation
+                                                            // First layer
+    for (SLArrayIndex_t layer1Node = 0; layer1Node < numberOfLayer1Nodes; layer1Node++) {
+        SLData_t layer1PreActivation =
+            SDA_RealDotProduct (pData,                                          // Source vector 1 pointer
+                                pLayer1Weights+(layer1Node*numberOfInputNodes), // Source vector 2 pointer
+                                numberOfInputNodes) +                           // Vector lengths
+            pLayer1Biases[layer1Node];
+        switch  (layer1ActivationType) {                    // Choose required activation function
+            case SIGLIB_ACTIVATION_TYPE_LEAKY_RELU:
+                *(pLayer1PostActivation+layer1Node) = SDS_ActivationLeakyReLU (layer1PreActivation, layer1ActivationAlpha);
+                break;
+            case SIGLIB_ACTIVATION_TYPE_LOGISTIC:
+                *(pLayer1PostActivation+layer1Node) = SDS_ActivationLogistic (layer1PreActivation);
+                break;
+            case SIGLIB_ACTIVATION_TYPE_TANH:
+                *(pLayer1PostActivation+layer1Node) = SDS_ActivationTanH (layer1PreActivation);
+                break;
+            case SIGLIB_ACTIVATION_TYPE_RELU:
+            default:
+                *(pLayer1PostActivation+layer1Node) = SDS_ActivationReLU (layer1PreActivation);
+                break;
+        }
+    }
+
+                                                            // Second layer
+    for (SLArrayIndex_t layer2Node = 0; layer2Node < numberOfCategories; layer2Node++) {
+        SLData_t  layer2PreActivation =
+            SDA_RealDotProduct (pLayer1PostActivation,                              // Source vector 1 pointer
+                                pLayer2Weights+(layer2Node*numberOfLayer1Nodes),    // Source vector 2 pointer
+                                numberOfLayer1Nodes) +                              // Vector lengths
+            pLayer2Biases[layer2Node];
+
+        switch  (layer2ActivationType) {                    // Choose required activation function
+            case SIGLIB_ACTIVATION_TYPE_LEAKY_RELU:
+                *(pLayer2PostActivation+layer2Node) = SDS_ActivationLeakyReLU (layer2PreActivation, layer2ActivationAlpha);
+                break;
+            case SIGLIB_ACTIVATION_TYPE_LOGISTIC:
+                *(pLayer2PostActivation+layer2Node) = SDS_ActivationLogistic (layer2PreActivation);
+                break;
+            case SIGLIB_ACTIVATION_TYPE_TANH:
+                *(pLayer2PostActivation+layer2Node) = SDS_ActivationTanH (layer2PreActivation);
+                break;
+            case SIGLIB_ACTIVATION_TYPE_RELU:
+            default:
+                *(pLayer2PostActivation+layer2Node) = SDS_ActivationReLU (layer2PreActivation);
+                break;
+        }
+
+    }
+
+    SLNeuralNetworkPrediction_s prediction;
+                                                            // Search for category with max activation level
+    prediction.predictedCategory = SDA_MaxIndex (pLayer2PostActivation, numberOfCategories);
+    prediction.probability = pLayer2PostActivation[prediction.predictedCategory];
+
+    return (prediction);                                    // Category encoding: 0 to N-1
+}       // End of SDA_TwoLayerNCategoryWithBiasesNetworkPredict()
+
+
+/**/
+/********************************************************
 * Function: SDS_ActivationReLU
 *
 * Parameters:

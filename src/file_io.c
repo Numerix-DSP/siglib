@@ -1936,30 +1936,30 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_XmtReadData (SLData_t * SIGLIB_PTR_DECL BPtr
 *   const char *            - filename
 *   const SLData_t *        - layer1Weights
 *   const SLData_t *        - layer2Weights
-*   const SLArrayIndex_t    - layer1WeightsLength
-*   const SLArrayIndex_t    - layer2WeightsLength
+*   const SLArrayIndex_t    - numLayer1Weights
+*   const SLArrayIndex_t    - numLayer2Weights
 *   const SLArrayIndex_t)   - numLayers
 *
 * Return value:
 *   SLArrayIndex_t - Number of weights written
 *
 * Description: Write neural network weights to a C
-*   headeer file, as 8 bit words.
+*   header file, as 8 bit words.
 *
 ********************************************************/
 
 SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsIntegerCFile (const char * filenameWeights,
     const SLData_t *layer1Weights,
     const SLData_t *layer2Weights,
-    const SLArrayIndex_t layer1WeightsLength,
-    const SLArrayIndex_t layer2WeightsLength,
+    const SLArrayIndex_t numLayer1Weights,
+    const SLArrayIndex_t numLayer2Weights,
     const SLArrayIndex_t numLayers)
 
 {
     SLArrayIndex_t weightsWriteCount = 0;
 
-    SLData_t layer1WeightsAbsMax = SDS_Ceil(SDA_AbsMax(layer1Weights, layer1WeightsLength));
-    SLData_t layer2WeightsAbsMax = SDS_Ceil(SDA_AbsMax(layer2Weights, layer2WeightsLength));
+    SLData_t layer1WeightsAbsMax = SDS_Ceil(SDA_AbsMax(layer1Weights, numLayer1Weights));
+    SLData_t layer2WeightsAbsMax = SDS_Ceil(SDA_AbsMax(layer2Weights, numLayer2Weights));
 
     FILE * p_ioFile = fopen(filenameWeights, "w");
     if (NULL == p_ioFile) {
@@ -1968,14 +1968,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsIntegerCFile (const char * filen
 
     fprintf (p_ioFile, "// Weights File\n\n");
     fprintf (p_ioFile, "#define NUMBER_OF_LAYERS %ld\n", (long)numLayers);
-    fprintf (p_ioFile, "#define LAYER_1_WEIGHTS_LENGTH %ld\n", (long)layer1WeightsLength);
-    fprintf (p_ioFile, "#define LAYER_2_WEIGHTS_LENGTH %ld\n\n", (long)layer2WeightsLength);
+    fprintf (p_ioFile, "#define LAYER_1_WEIGHTS_LENGTH %ld\n", (long)numLayer1Weights);
+    fprintf (p_ioFile, "#define LAYER_2_WEIGHTS_LENGTH %ld\n\n", (long)numLayer2Weights);
 
     fprintf (p_ioFile, "#define LAYER_1_WEIGHTS_ABS_MAX %ld\n", (long)layer1WeightsAbsMax);
     fprintf (p_ioFile, "#define LAYER_2_WEIGHTS_ABS_MAX %ld\n\n", (long)layer2WeightsAbsMax);
 
     fprintf (p_ioFile, "char mlpWeightsLayer1[] = {\n");
-    for (SLArrayIndex_t i = 0; i < layer1WeightsLength; i++) {
+    for (SLArrayIndex_t i = 0; i < numLayer1Weights; i++) {
         char ch = (char)((*(layer1Weights+i) * ((SLData_t)SIGLIB_INT8_MAX)) / layer1WeightsAbsMax);
         fprintf (p_ioFile, "\t%d,\n", ch);
         weightsWriteCount++;
@@ -1983,7 +1983,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsIntegerCFile (const char * filen
     fprintf (p_ioFile, "};\n\n");
 
     fprintf (p_ioFile, "char mlpWeightsLayer2[] = {\n");
-    for (SLArrayIndex_t i = 0; i < layer2WeightsLength; i++) {
+    for (SLArrayIndex_t i = 0; i < numLayer2Weights; i++) {
         char ch = (char)((layer2Weights[i] * ((SLData_t)SIGLIB_INT8_MAX)) / layer2WeightsAbsMax);
         fprintf (p_ioFile, "\t%d,\n", ch);
         weightsWriteCount++;
@@ -2004,8 +2004,8 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsIntegerCFile (const char * filen
 *   const char *            - filename
 *   const SLData_t *        - layer1Weights
 *   const SLData_t *        - layer2Weights
-*   const SLArrayIndex_t    - layer1WeightsLength
-*   const SLArrayIndex_t    - layer2WeightsLength
+*   const SLArrayIndex_t    - numLayer1Weights
+*   const SLArrayIndex_t    - numLayer2Weights
 *   const SLArrayIndex_t)   - numLayers
 *
 * Return value:
@@ -2019,15 +2019,15 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsIntegerCFile (const char * filen
 SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsFloatCFile (const char *filenameWeights,
     const SLData_t *layer1Weights,
     const SLData_t *layer2Weights,
-    const SLArrayIndex_t layer1WeightsLength,
-    const SLArrayIndex_t layer2WeightsLength,
+    const SLArrayIndex_t numLayer1Weights,
+    const SLArrayIndex_t numLayer2Weights,
     const SLArrayIndex_t numLayers)
 
 {
     SLArrayIndex_t weightsWriteCount = 0;
 
-    SLData_t layer1WeightsAbsMax = SDS_Ceil(SDA_AbsMax(layer1Weights, layer1WeightsLength));
-    SLData_t layer2WeightsAbsMax = SDS_Ceil(SDA_AbsMax(layer2Weights, layer2WeightsLength));
+    SLData_t layer1WeightsAbsMax = SDS_Ceil(SDA_AbsMax(layer1Weights, numLayer1Weights));
+    SLData_t layer2WeightsAbsMax = SDS_Ceil(SDA_AbsMax(layer2Weights, numLayer2Weights));
 
     FILE * p_ioFile = fopen(filenameWeights, "w");
     if (NULL == p_ioFile) {
@@ -2036,21 +2036,21 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsFloatCFile (const char *filename
 
     fprintf (p_ioFile, "// MLP Weights File\n\n");
     fprintf (p_ioFile, "#define NUMBER_OF_LAYERS %ld\n", (long)numLayers);
-    fprintf (p_ioFile, "#define LAYER_1_WEIGHTS_LENGTH %ld\n", (long)layer1WeightsLength);
-    fprintf (p_ioFile, "#define LAYER_2_WEIGHTS_LENGTH %ld\n\n", (long)layer2WeightsLength);
+    fprintf (p_ioFile, "#define LAYER_1_WEIGHTS_LENGTH %ld\n", (long)numLayer1Weights);
+    fprintf (p_ioFile, "#define LAYER_2_WEIGHTS_LENGTH %ld\n\n", (long)numLayer2Weights);
 
     fprintf (p_ioFile, "#define LAYER_1_WEIGHTS_ABS_MAX %1.10le\n", (double)layer1WeightsAbsMax);
     fprintf (p_ioFile, "#define LAYER_2_WEIGHTS_ABS_MAX %1.10le\n\n", (double)layer2WeightsAbsMax);
 
     fprintf (p_ioFile, "double mlpWeightsLayer1[] = {\n");
-    for (SLArrayIndex_t i = 0; i < layer1WeightsLength; i++) {
+    for (SLArrayIndex_t i = 0; i < numLayer1Weights; i++) {
         fprintf (p_ioFile, "\t%1.10le,\n", *(layer1Weights+i));
         weightsWriteCount++;
     }
     fprintf (p_ioFile, "};\n\n");
 
     fprintf (p_ioFile, "double mlpWeightsLayer2[] = {\n");
-    for (SLArrayIndex_t i = 0; i < layer2WeightsLength; i++) {
+    for (SLArrayIndex_t i = 0; i < numLayer2Weights; i++) {
         fprintf (p_ioFile, "\t%1.10le,\n", layer2Weights[i]);
         weightsWriteCount++;
     }
@@ -2070,8 +2070,8 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsFloatCFile (const char *filename
 *   const char *            - filename
 *   const SLData_t *        - layer1Weights
 *   const SLData_t *        - layer2Weights
-*   const SLArrayIndex_t    - layer1WeightsLength
-*   const SLArrayIndex_t    - layer2WeightsLength
+*   const SLArrayIndex_t    - numLayer1Weights
+*   const SLArrayIndex_t    - numLayer2Weights
 *   const SLArrayIndex_t    - numLayers
 *   const SLArrayIndex_t    - numBits
 *
@@ -2093,8 +2093,8 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsFloatCFile (const char *filename
 SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsBinaryFile (const char *filenameWeights,
     const SLData_t *layer1Weights,
     const SLData_t *layer2Weights,
-    const SLArrayIndex_t layer1WeightsLength,
-    const SLArrayIndex_t layer2WeightsLength,
+    const SLArrayIndex_t numLayer1Weights,
+    const SLArrayIndex_t numLayer2Weights,
     const SLArrayIndex_t numLayers,
     const SLArrayIndex_t numBits)
 
@@ -2103,8 +2103,8 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsBinaryFile (const char *filename
 
     SLData_t fixMax = SDS_Pow(SIGLIB_TWO, numBits-1) - SIGLIB_ONE;
 
-    SLData_t layer1WeightsAbsMax = SDS_Ceil(SDA_AbsMax(layer1Weights, layer1WeightsLength));
-    SLData_t layer2WeightsAbsMax = SDS_Ceil(SDA_AbsMax(layer2Weights, layer2WeightsLength));
+    SLData_t layer1WeightsAbsMax = SDS_Ceil(SDA_AbsMax(layer1Weights, numLayer1Weights));
+    SLData_t layer2WeightsAbsMax = SDS_Ceil(SDA_AbsMax(layer2Weights, numLayer2Weights));
 
     FILE * p_ioFile = fopen(filenameWeights, "wb");
     if (NULL == p_ioFile) {
@@ -2124,13 +2124,13 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsBinaryFile (const char *filename
         fclose (p_ioFile);
         return (-3);
     }
-    fData = layer1WeightsLength;                            // Number of layer 1 weights
+    fData = numLayer1Weights;                               // Number of layer 1 weights
     numItems = fwrite(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);
     if (numItems != 1) {
         fclose (p_ioFile);
         return (-5);
     }
-    fData = layer2WeightsLength;                            // Number of layer 2 weights
+    fData = numLayer2Weights;                               // Number of layer 2 weights
     numItems = fwrite(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);
     if (numItems != 1) {
         fclose (p_ioFile);
@@ -2154,7 +2154,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsBinaryFile (const char *filename
     }
 
     if (numBits <= 8) {
-        for (SLArrayIndex_t i = 0; i < layer1WeightsLength; i++) {
+        for (SLArrayIndex_t i = 0; i < numLayer1Weights; i++) {
             SLInt8_t outWord = (SLInt8_t)((*(layer1Weights+i) * fixMax) / layer1WeightsAbsMax);
             size_t numItems = fwrite(&outWord, sizeof(SLInt8_t), 1, p_ioFile);
             if (numItems != 1) {
@@ -2163,7 +2163,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsBinaryFile (const char *filename
             }
             weightsWriteCount++;
         }
-        for (SLArrayIndex_t i = 0; i < layer2WeightsLength; i++) {
+        for (SLArrayIndex_t i = 0; i < numLayer2Weights; i++) {
             SLInt8_t outWord = (SLInt8_t)((layer2Weights[i] * fixMax) / layer2WeightsAbsMax);
             size_t numItems = fwrite(&outWord, sizeof(SLInt8_t), 1, p_ioFile);
             if (numItems != 1) {
@@ -2174,7 +2174,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsBinaryFile (const char *filename
         }
     }
     else if (numBits <= 16) {
-        for (SLArrayIndex_t i = 0; i < layer1WeightsLength; i++) {
+        for (SLArrayIndex_t i = 0; i < numLayer1Weights; i++) {
             SLInt16_t outWord = (SLInt16_t)((*(layer1Weights+i) * fixMax) / layer1WeightsAbsMax);
             size_t numItems = fwrite(&outWord, sizeof(SLInt16_t), 1, p_ioFile);
             if (numItems != 1) {
@@ -2183,7 +2183,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsBinaryFile (const char *filename
             }
             weightsWriteCount++;
         }
-        for (SLArrayIndex_t i = 0; i < layer2WeightsLength; i++) {
+        for (SLArrayIndex_t i = 0; i < numLayer2Weights; i++) {
             SLInt16_t outWord = (SLInt16_t)((layer2Weights[i] * fixMax) / layer2WeightsAbsMax);
             size_t numItems = fwrite(&outWord, sizeof(SLInt16_t), 1, p_ioFile);
             if (numItems != 1) {
@@ -2194,7 +2194,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsBinaryFile (const char *filename
         }
     }
     else {              // Between 17 and 32 bits
-        for (SLArrayIndex_t i = 0; i < layer1WeightsLength; i++) {
+        for (SLArrayIndex_t i = 0; i < numLayer1Weights; i++) {
             SLInt32_t outWord = (SLInt32_t)((*(layer1Weights+i) * fixMax) / layer1WeightsAbsMax);
             size_t numItems = fwrite(&outWord, sizeof(SLInt32_t), 1, p_ioFile);
             if (numItems != 1) {
@@ -2203,7 +2203,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsBinaryFile (const char *filename
             }
             weightsWriteCount++;
         }
-        for (SLArrayIndex_t i = 0; i < layer2WeightsLength; i++) {
+        for (SLArrayIndex_t i = 0; i < numLayer2Weights; i++) {
             SLInt32_t outWord = (SLInt32_t)((layer2Weights[i] * fixMax) / layer2WeightsAbsMax);
             size_t numItems = fwrite(&outWord, sizeof(SLInt32_t), 1, p_ioFile);
             if (numItems != 1) {
@@ -2276,13 +2276,13 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_ReadWeightsBinaryFile (const char *filenameW
         fclose (p_ioFile);
         return (-5);
     }
-    SLArrayIndex_t layer1WeightsLength = fData;
+    SLArrayIndex_t numLayer1Weights = fData;
     numItems = fread(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);          // Number of layer 2 weights
     if (numItems != 1) {
         fclose (p_ioFile);
         return (-6);
     }
-    SLArrayIndex_t layer2WeightsLength = fData;
+    SLArrayIndex_t numLayer2Weights = fData;
     numItems = fread(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);          // ceil(AbsMax) level of layer 1 weights
     if (numItems != 1) {
         fclose (p_ioFile);
@@ -2299,7 +2299,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_ReadWeightsBinaryFile (const char *filenameW
     SLData_t fixMax = SDS_Pow(SIGLIB_TWO, numBits-1) - SIGLIB_ONE;
 
     if (numBits <= 8) {
-        for (SLArrayIndex_t i = 0; i < layer1WeightsLength; i++) {
+        for (SLArrayIndex_t i = 0; i < numLayer1Weights; i++) {
             SLInt8_t inWord;
             size_t numItems = fread(&inWord, sizeof(SLInt8_t), 1, p_ioFile);
             if (numItems != 1) {
@@ -2309,7 +2309,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_ReadWeightsBinaryFile (const char *filenameW
             *(layer1Weights+i) = (((SLData_t)inWord) * layer1WeightsAbsMax) / fixMax;
             weightsReadCount++;
         }
-        for (SLArrayIndex_t i = 0; i < layer2WeightsLength; i++) {
+        for (SLArrayIndex_t i = 0; i < numLayer2Weights; i++) {
             SLInt8_t inWord;
             size_t numItems = fread(&inWord, sizeof(SLInt8_t), 1, p_ioFile);
             if (numItems != 1) {
@@ -2321,7 +2321,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_ReadWeightsBinaryFile (const char *filenameW
         }
     }
     else if (numBits <= 16) {
-        for (SLArrayIndex_t i = 0; i < layer1WeightsLength; i++) {
+        for (SLArrayIndex_t i = 0; i < numLayer1Weights; i++) {
             SLInt16_t inWord;
             size_t numItems = fread(&inWord, sizeof(SLInt16_t), 1, p_ioFile);
             if (numItems != 1) {
@@ -2331,7 +2331,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_ReadWeightsBinaryFile (const char *filenameW
             *(layer1Weights+i) = (((SLData_t)inWord) * layer1WeightsAbsMax) / fixMax;
             weightsReadCount++;
         }
-        for (SLArrayIndex_t i = 0; i < layer2WeightsLength; i++) {
+        for (SLArrayIndex_t i = 0; i < numLayer2Weights; i++) {
             SLInt16_t inWord;
             size_t numItems = fread(&inWord, sizeof(SLInt16_t), 1, p_ioFile);
             if (numItems != 1) {
@@ -2343,7 +2343,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_ReadWeightsBinaryFile (const char *filenameW
         }
     }
     else {              // Between 17 and 32 bits
-        for (SLArrayIndex_t i = 0; i < layer1WeightsLength; i++) {
+        for (SLArrayIndex_t i = 0; i < numLayer1Weights; i++) {
             SLInt32_t inWord;
             size_t numItems = fread(&inWord, sizeof(SLInt32_t), 1, p_ioFile);
             if (numItems != 1) {
@@ -2353,7 +2353,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_ReadWeightsBinaryFile (const char *filenameW
             *(layer1Weights+i) = (((SLData_t)inWord) * layer1WeightsAbsMax) / fixMax;
             weightsReadCount++;
         }
-        for (SLArrayIndex_t i = 0; i < layer2WeightsLength; i++) {
+        for (SLArrayIndex_t i = 0; i < numLayer2Weights; i++) {
             SLInt32_t inWord;
             size_t numItems = fread(&inWord, sizeof(SLInt32_t), 1, p_ioFile);
             if (numItems != 1) {
@@ -2369,6 +2369,688 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_ReadWeightsBinaryFile (const char *filenameW
 
     return (weightsReadCount);
 }       // End of SUF_ReadWeightsBinaryFile()
+
+
+
+/**/
+/********************************************************
+* Function: SUF_WriteWeightsWithBiasesIntegerCFile
+*
+* Parameters:
+*   const char *            - filename
+*   const SLData_t *        - layer1Weights
+*   const SLData_t *        - layer1Biases
+*   const SLData_t *        - layer2Weights
+*   const SLData_t *        - layer2Biases
+*   const SLArrayIndex_t    - numInputNodes
+*   const SLArrayIndex_t    - numHiddenLayerNodes
+*   const SLArrayIndex_t    - numOutputCategories
+*
+* Return value:
+*   SLArrayIndex_t - Number of weights and biases written
+*
+* Description: Write neural network weights to a C
+*   header file, as 8 bit words.
+*
+********************************************************/
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsWithBiasesIntegerCFile (const char * filenameWeights,
+    const SLData_t *layer1Weights,
+    const SLData_t *layer1Biases,
+    const SLData_t *layer2Weights,
+    const SLData_t *layer2Biases,
+    const SLArrayIndex_t numInputNodes,
+    const SLArrayIndex_t numHiddenLayerNodes,
+    const SLArrayIndex_t numOutputCategories)
+
+{
+    SLArrayIndex_t numLayer1Weights = numInputNodes * numHiddenLayerNodes;
+    SLArrayIndex_t numLayer1Biases  = numHiddenLayerNodes;
+    SLArrayIndex_t numLayer2Weights = numHiddenLayerNodes * numOutputCategories;
+    SLArrayIndex_t numLayer2Biases  = numOutputCategories;
+
+    SLArrayIndex_t weightsWriteCount = 0;
+
+
+    SLData_t layer1WeightsAbsMax = SDS_Ceil(SDA_AbsMax(layer1Weights, numLayer1Weights));
+    SLData_t layer2WeightsAbsMax = SDS_Ceil(SDA_AbsMax(layer2Weights, numLayer2Weights));
+    SLData_t layer1BiasesAbsMax = SDS_Ceil(SDA_AbsMax(layer1Biases, numLayer1Biases));
+    SLData_t layer2BiasesAbsMax = SDS_Ceil(SDA_AbsMax(layer2Biases, numLayer2Biases));
+
+    FILE * p_ioFile = fopen(filenameWeights, "w");
+    if (NULL == p_ioFile) {
+        return (weightsWriteCount);
+    }
+
+    fprintf (p_ioFile, "// Weights File\n\n");
+    fprintf (p_ioFile, "#define NUMBER_OF_LAYERS 2\n\n");
+    fprintf (p_ioFile, "#define LAYER_1_WEIGHTS_LENGTH %ld\n",   (long)numLayer1Weights);
+    fprintf (p_ioFile, "#define LAYER_1_BIASES_LENGTH  %ld\n",   (long)numLayer1Biases);
+    fprintf (p_ioFile, "#define LAYER_2_WEIGHTS_LENGTH %ld\n",   (long)numLayer2Weights);
+    fprintf (p_ioFile, "#define LAYER_2_BIASES_LENGTH  %ld\n\n", (long)numLayer2Biases);
+
+    fprintf (p_ioFile, "#define LAYER_1_WEIGHTS_ABS_MAX %ld\n",   (long)layer1WeightsAbsMax);
+    fprintf (p_ioFile, "#define LAYER_1_BIASES_ABS_MAX  %ld\n",   (long)layer1BiasesAbsMax);
+    fprintf (p_ioFile, "#define LAYER_2_WEIGHTS_ABS_MAX %ld\n",   (long)layer2WeightsAbsMax);
+    fprintf (p_ioFile, "#define LAYER_2_BIASES_ABS_MAX  %ld\n\n", (long)layer2BiasesAbsMax);
+
+    fprintf (p_ioFile, "char mlpWeightsLayer1[] = {\n");
+    for (SLArrayIndex_t i = 0; i < numLayer1Weights; i++) {
+        char ch = (char)((*(layer1Weights+i) * ((SLData_t)SIGLIB_INT8_MAX)) / layer1WeightsAbsMax);
+        fprintf (p_ioFile, "\t%d,\n", ch);
+        weightsWriteCount++;
+    }
+    fprintf (p_ioFile, "};\n\n");
+
+    fprintf (p_ioFile, "char mlpBiasesLayer1[] = {\n");
+    for (SLArrayIndex_t i = 0; i < numLayer1Biases; i++) {
+        char ch = (char)((*(layer1Biases+i) * ((SLData_t)SIGLIB_INT8_MAX)) / layer1BiasesAbsMax);
+        fprintf (p_ioFile, "\t%d,\n", ch);
+        weightsWriteCount++;
+    }
+    fprintf (p_ioFile, "};\n\n");
+
+    fprintf (p_ioFile, "char mlpWeightsLayer2[] = {\n");
+    for (SLArrayIndex_t i = 0; i < numLayer2Weights; i++) {
+        char ch = (char)((layer2Weights[i] * ((SLData_t)SIGLIB_INT8_MAX)) / layer2WeightsAbsMax);
+        fprintf (p_ioFile, "\t%d,\n", ch);
+        weightsWriteCount++;
+    }
+
+    fprintf (p_ioFile, "char mlpBiasesLayer2[] = {\n");
+    for (SLArrayIndex_t i = 0; i < numLayer2Biases; i++) {
+        char ch = (char)((layer2Biases[i] * ((SLData_t)SIGLIB_INT8_MAX)) / layer2BiasesAbsMax);
+        fprintf (p_ioFile, "\t%d,\n", ch);
+        weightsWriteCount++;
+    }
+
+    fprintf (p_ioFile, "};\n\n");
+    fclose (p_ioFile);
+
+    return (weightsWriteCount);
+}       // End of SUF_WriteWeightsWithBiasesIntegerCFile()
+
+
+
+/**/
+/********************************************************
+* Function: SUF_WriteWeightsWithBiasesFloatCFile
+*
+* Parameters:
+*   const char *            - filename
+*   const SLData_t *        - layer1Weights
+*   const SLData_t *        - layer1Biases
+*   const SLData_t *        - layer2Weights
+*   const SLData_t *        - layer2Biases
+*   const SLArrayIndex_t    - numInputNodes
+*   const SLArrayIndex_t    - numHiddenLayerNodes
+*   const SLArrayIndex_t    - numOutputCategories
+*
+* Return value:
+*   SLArrayIndex_t - Number of weights and biases written
+*
+* Description: Write neural network weights to a C
+*   header file, as floating point numbers.
+*
+********************************************************/
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsWithBiasesFloatCFile (const char *filenameWeights,
+    const SLData_t *layer1Weights,
+    const SLData_t *layer1Biases,
+    const SLData_t *layer2Weights,
+    const SLData_t *layer2Biases,
+    const SLArrayIndex_t numInputNodes,
+    const SLArrayIndex_t numHiddenLayerNodes,
+    const SLArrayIndex_t numOutputCategories)
+
+{
+    SLArrayIndex_t numLayer1Weights = numInputNodes * numHiddenLayerNodes;
+    SLArrayIndex_t numLayer1Biases  = numHiddenLayerNodes;
+    SLArrayIndex_t numLayer2Weights = numHiddenLayerNodes * numOutputCategories;
+    SLArrayIndex_t numLayer2Biases  = numOutputCategories;
+
+    SLArrayIndex_t weightsWriteCount = 0;
+
+    SLData_t layer1WeightsAbsMax = SDS_Ceil(SDA_AbsMax(layer1Weights, numLayer1Weights));
+    SLData_t layer2WeightsAbsMax = SDS_Ceil(SDA_AbsMax(layer2Weights, numLayer2Weights));
+    SLData_t layer1BiasesAbsMax = SDS_Ceil(SDA_AbsMax(layer1Biases, numLayer1Biases));
+    SLData_t layer2BiasesAbsMax = SDS_Ceil(SDA_AbsMax(layer2Biases, numLayer2Biases));
+
+    FILE * p_ioFile = fopen(filenameWeights, "w");
+    if (NULL == p_ioFile) {
+        return (weightsWriteCount);
+    }
+
+    fprintf (p_ioFile, "// Weights File\n\n");
+    fprintf (p_ioFile, "#define NUMBER_OF_LAYERS 2\n\n");
+    fprintf (p_ioFile, "#define LAYER_1_WEIGHTS_LENGTH %ld\n",   (long)numLayer1Weights);
+    fprintf (p_ioFile, "#define LAYER_1_BIASES_LENGTH  %ld\n",   (long)numLayer1Biases);
+    fprintf (p_ioFile, "#define LAYER_2_WEIGHTS_LENGTH %ld\n",   (long)numLayer2Weights);
+    fprintf (p_ioFile, "#define LAYER_2_BIASES_LENGTH  %ld\n\n", (long)numLayer2Biases);
+
+    fprintf (p_ioFile, "#define LAYER_1_WEIGHTS_ABS_MAX %1.10le\n",   (double)layer1WeightsAbsMax);
+    fprintf (p_ioFile, "#define LAYER_1_BIASES_ABS_MAX  %1.10le\n",   (double)layer1BiasesAbsMax);
+    fprintf (p_ioFile, "#define LAYER_2_WEIGHTS_ABS_MAX %1.10le\n",   (double)layer2WeightsAbsMax);
+    fprintf (p_ioFile, "#define LAYER_2_BIASES_ABS_MAX  %1.10le\n\n", (double)layer2BiasesAbsMax);
+
+    fprintf (p_ioFile, "double mlpWeightsLayer1[] = {\n");
+    for (SLArrayIndex_t i = 0; i < numLayer1Weights; i++) {
+        fprintf (p_ioFile, "\t%1.10le,\n", *(layer1Weights+i));
+        weightsWriteCount++;
+    }
+    fprintf (p_ioFile, "};\n\n");
+
+    fprintf (p_ioFile, "double mlpBiasesLayer1[] = {\n");
+    for (SLArrayIndex_t i = 0; i < numLayer1Biases; i++) {
+        fprintf (p_ioFile, "\t%1.10le,\n", *(layer1Biases+i));
+        weightsWriteCount++;
+    }
+    fprintf (p_ioFile, "};\n\n");
+
+    fprintf (p_ioFile, "double mlpWeightsLayer2[] = {\n");
+    for (SLArrayIndex_t i = 0; i < numLayer2Weights; i++) {
+        fprintf (p_ioFile, "\t%1.10le,\n", layer2Weights[i]);
+        weightsWriteCount++;
+    }
+
+    fprintf (p_ioFile, "double mlpBiasesLayer2[] = {\n");
+    for (SLArrayIndex_t i = 0; i < numLayer2Biases; i++) {
+        fprintf (p_ioFile, "\t%1.10le,\n", layer2Biases[i]);
+        weightsWriteCount++;
+    }
+
+    fprintf (p_ioFile, "};\n\n");
+    fclose (p_ioFile);
+
+    return (weightsWriteCount);
+}       // End of SUF_WriteWeightsWithBiasesFloatCFile()
+
+
+
+/**/
+/********************************************************
+* Function: SUF_WriteWeightsWithBiasesBinaryFile
+*
+* Parameters:
+*   const char *            - filename
+*   const SLData_t *        - layer1Weights
+*   const SLData_t *        - layer1Biases
+*   const SLData_t *        - layer2Weights
+*   const SLData_t *        - layer2Biases
+*   const SLArrayIndex_t    - numInputNodes
+*   const SLArrayIndex_t    - numHiddenLayerNodes
+*   const SLArrayIndex_t    - numOutputCategories
+*   const SLArrayIndex_t    - numBits
+*
+* Return value:
+*   SLArrayIndex_t - Number of weights written
+*
+* Description: Write neural network weights to a binary
+*   file, as N bit words.
+*
+********************************************************/
+
+// Binary file format
+// +--------+--------+---------+---+---------+-----------+---+-----------+
+// | Number | Number | Max Of  | . | Max Of  |   Layer   | . |   Layer   |
+// |  Of    |  Of    | Layer 1 | . | Layer N |     1     | . |     N     |
+// | Layers | Q Bits | Weights | . | Weights |  Weights  | . |  Weights  |
+// +--------+--------+---------+---+---------+-----------+---+-----------+
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsWithBiasesBinaryFile (const char *filenameWeights,
+    const SLData_t *layer1Weights,
+    const SLData_t *layer1Biases,
+    const SLData_t *layer2Weights,
+    const SLData_t *layer2Biases,
+    const SLArrayIndex_t numInputNodes,
+    const SLArrayIndex_t numHiddenLayerNodes,
+    const SLArrayIndex_t numOutputCategories,
+    const SLArrayIndex_t numBits)
+
+{
+    SLArrayIndex_t numLayer1Weights = numInputNodes * numHiddenLayerNodes;
+    SLArrayIndex_t numLayer1Biases  = numHiddenLayerNodes;
+    SLArrayIndex_t numLayer2Weights = numHiddenLayerNodes * numOutputCategories;
+    SLArrayIndex_t numLayer2Biases  = numOutputCategories;
+
+    SLArrayIndex_t  weightsWriteCount = 0;
+
+    SLData_t fixMax = SDS_Pow(SIGLIB_TWO, numBits-1) - SIGLIB_ONE;
+
+    SLData_t layer1WeightsAbsMax = SDS_Ceil(SDA_AbsMax(layer1Weights, numLayer1Weights));
+    SLData_t layer2WeightsAbsMax = SDS_Ceil(SDA_AbsMax(layer2Weights, numLayer2Weights));
+    SLData_t layer1BiasesAbsMax = SDS_Ceil(SDA_AbsMax(layer1Biases, numLayer1Biases));
+    SLData_t layer2BiasesAbsMax = SDS_Ceil(SDA_AbsMax(layer2Biases, numLayer2Biases));
+
+    FILE * p_ioFile = fopen(filenameWeights, "wb");
+    if (NULL == p_ioFile) {
+        return (weightsWriteCount);
+    }
+
+    // Write header
+    SLArrayIndex_t  fData = 2;                              // # Layers
+    size_t numItems = fwrite(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);
+    if (numItems != 1) {
+        fclose (p_ioFile);
+        return (-1);
+    }
+    fData = numBits;                                        // # Bits
+    numItems = fwrite(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);
+    if (numItems != 1) {
+        fclose (p_ioFile);
+        return (-3);
+    }
+    fData = numLayer1Weights;                               // Number of layer 1 weights
+    numItems = fwrite(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);
+    if (numItems != 1) {
+        fclose (p_ioFile);
+        return (-5);
+    }
+    fData = numLayer1Biases;                                // Number of layer 1 biases
+    numItems = fwrite(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);
+    if (numItems != 1) {
+        fclose (p_ioFile);
+        return (-5);
+    }
+    fData = numLayer2Weights;                               // Number of layer 2 weights
+    numItems = fwrite(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);
+    if (numItems != 1) {
+        fclose (p_ioFile);
+        return (-6);
+    }
+    fData = numLayer2Biases;                                // Number of layer 2 biases
+    numItems = fwrite(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);
+    if (numItems != 1) {
+        fclose (p_ioFile);
+        return (-5);
+    }
+    fData = (SLArrayIndex_t)layer1WeightsAbsMax;            // ceil(AbsMax) level of layer 1 weights
+    numItems = fwrite(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);
+    if (numItems != 1) {
+        fclose (p_ioFile);
+        return (-7);
+    }
+    fData = (SLArrayIndex_t)layer1BiasesAbsMax;             // ceil(AbsMax) level of layer 1 biases
+    numItems = fwrite(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);
+    if (numItems != 1) {
+        fclose (p_ioFile);
+        return (-7);
+    }
+    fData = (SLArrayIndex_t)layer2WeightsAbsMax;            // ceil(AbsMax) level of layer 2 weights
+    numItems = fwrite(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);
+    if (numItems != 1) {
+        fclose (p_ioFile);
+        return (-8);
+    }
+    fData = (SLArrayIndex_t)layer2BiasesAbsMax;             // ceil(AbsMax) level of layer 2 biases
+    numItems = fwrite(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);
+    if (numItems != 1) {
+        fclose (p_ioFile);
+        return (-7);
+    }
+
+    if ((numBits <= 0) || (numBits > 32)) {                 // Check we have a valid quantization
+       return (-9);
+    }
+
+    if (numBits <= 8) {
+        for (SLArrayIndex_t i = 0; i < numLayer1Weights; i++) {
+            SLInt8_t outWord = (SLInt8_t)((*(layer1Weights+i) * fixMax) / layer1WeightsAbsMax);
+            size_t numItems = fwrite(&outWord, sizeof(SLInt8_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-10);
+            }
+            weightsWriteCount++;
+        }
+        for (SLArrayIndex_t i = 0; i < numLayer1Biases; i++) {
+            SLInt8_t outWord = (SLInt8_t)((*(layer1Biases+i) * fixMax) / layer1BiasesAbsMax);
+            size_t numItems = fwrite(&outWord, sizeof(SLInt8_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-10);
+            }
+            weightsWriteCount++;
+        }
+        for (SLArrayIndex_t i = 0; i < numLayer2Weights; i++) {
+            SLInt8_t outWord = (SLInt8_t)((layer2Weights[i] * fixMax) / layer2WeightsAbsMax);
+            size_t numItems = fwrite(&outWord, sizeof(SLInt8_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-11);
+            }
+            weightsWriteCount++;
+        }
+        for (SLArrayIndex_t i = 0; i < numLayer2Biases; i++) {
+            SLInt8_t outWord = (SLInt8_t)((*(layer2Biases+i) * fixMax) / layer2BiasesAbsMax);
+            size_t numItems = fwrite(&outWord, sizeof(SLInt8_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-10);
+            }
+            weightsWriteCount++;
+        }
+    }
+    else if (numBits <= 16) {
+        for (SLArrayIndex_t i = 0; i < numLayer1Weights; i++) {
+            SLInt16_t outWord = (SLInt16_t)((*(layer1Weights+i) * fixMax) / layer1WeightsAbsMax);
+            size_t numItems = fwrite(&outWord, sizeof(SLInt16_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-12);
+            }
+            weightsWriteCount++;
+        }
+        for (SLArrayIndex_t i = 0; i < numLayer1Biases; i++) {
+            SLInt16_t outWord = (SLInt16_t)((*(layer1Biases+i) * fixMax) / layer1BiasesAbsMax);
+            size_t numItems = fwrite(&outWord, sizeof(SLInt16_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-12);
+            }
+            weightsWriteCount++;
+        }
+        for (SLArrayIndex_t i = 0; i < numLayer2Weights; i++) {
+            SLInt16_t outWord = (SLInt16_t)((layer2Weights[i] * fixMax) / layer2WeightsAbsMax);
+            size_t numItems = fwrite(&outWord, sizeof(SLInt16_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-13);
+            }
+            weightsWriteCount++;
+        }
+        for (SLArrayIndex_t i = 0; i < numLayer2Biases; i++) {
+            SLInt16_t outWord = (SLInt16_t)((*(layer2Biases+i) * fixMax) / layer2BiasesAbsMax);
+            size_t numItems = fwrite(&outWord, sizeof(SLInt16_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-12);
+            }
+            weightsWriteCount++;
+        }
+    }
+    else {              // Between 17 and 32 bits
+        for (SLArrayIndex_t i = 0; i < numLayer1Weights; i++) {
+            SLInt32_t outWord = (SLInt32_t)((*(layer1Weights+i) * fixMax) / layer1WeightsAbsMax);
+            size_t numItems = fwrite(&outWord, sizeof(SLInt32_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-14);
+            }
+            weightsWriteCount++;
+        }
+        for (SLArrayIndex_t i = 0; i < numLayer1Biases; i++) {
+            SLInt32_t outWord = (SLInt32_t)((*(layer1Biases+i) * fixMax) / layer1BiasesAbsMax);
+            size_t numItems = fwrite(&outWord, sizeof(SLInt32_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-14);
+            }
+            weightsWriteCount++;
+        }
+        for (SLArrayIndex_t i = 0; i < numLayer2Weights; i++) {
+            SLInt32_t outWord = (SLInt32_t)((layer2Weights[i] * fixMax) / layer2WeightsAbsMax);
+            size_t numItems = fwrite(&outWord, sizeof(SLInt32_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-15);
+            }
+            weightsWriteCount++;
+        }
+        for (SLArrayIndex_t i = 0; i < numLayer2Biases; i++) {
+            SLInt32_t outWord = (SLInt32_t)((*(layer2Biases+i) * fixMax) / layer2BiasesAbsMax);
+            size_t numItems = fwrite(&outWord, sizeof(SLInt32_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-14);
+            }
+            weightsWriteCount++;
+        }
+    }
+
+    fclose (p_ioFile);
+
+    return (weightsWriteCount);
+}       // End of SUF_WriteWeightsWithBiasesBinaryFile()
+
+
+/**/
+/********************************************************
+* Function: SUF_ReadWeightsWithBiasesBinaryFile
+*
+* Parameters:
+*   const char *            - filename
+*   SLData_t *              - layer1Weights
+*   SLData_t *              - layer1Biases
+*   SLData_t *              - layer2Weights
+*   SLData_t *)             - layer2Biases
+*
+* Return value:
+*   SLArrayIndex_t - Number of weights and biases read
+*
+* Description: Read neural network weights and biases from
+*   a binary file, as 32 bit words.
+*
+********************************************************/
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_ReadWeightsWithBiasesBinaryFile (const char *filenameWeights,
+    SLData_t *layer1Weights,
+    SLData_t *layer1Biases,
+    SLData_t *layer2Weights,
+    SLData_t *layer2Biases)
+
+{
+    SLArrayIndex_t  weightsReadCount = 0;
+    SLArrayIndex_t  fData;
+
+    FILE * p_ioFile = fopen(filenameWeights, "rb");
+    if (NULL == p_ioFile) {
+        return (weightsReadCount);
+    }
+
+    // Read header
+    size_t numItems = fread(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);   // # Layers
+    if (numItems != 1) {
+        fclose (p_ioFile);
+        return (-1);
+    }
+    SLArrayIndex_t numLayers = fData;
+    if (numLayers != 2) {
+        fclose (p_ioFile);
+        return (-2);
+    }
+    numItems = fread(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);          // # Bits
+    if (numItems != 1) {
+        fclose (p_ioFile);
+        return (-3);
+    }
+    SLArrayIndex_t numBits = fData;
+    if ((numBits <= 0) || (numBits > 32)) {
+        fclose (p_ioFile);
+        return (-4);
+    }
+    numItems = fread(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);          // Number of layer 1 weights
+    if (numItems != 1) {
+        fclose (p_ioFile);
+        return (-5);
+    }
+    SLArrayIndex_t numLayer1Weights = fData;
+    numItems = fread(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);          // Number of layer 1 biases
+    if (numItems != 1) {
+        fclose (p_ioFile);
+        return (-5);
+    }
+    SLArrayIndex_t numLayer1Biases = fData;
+    numItems = fread(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);          // Number of layer 2 weights
+    if (numItems != 1) {
+        fclose (p_ioFile);
+        return (-6);
+    }
+    SLArrayIndex_t numLayer2Weights = fData;
+    numItems = fread(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);          // Number of layer 2 biases
+    if (numItems != 1) {
+        fclose (p_ioFile);
+        return (-5);
+    }
+    SLArrayIndex_t numLayer2Biases = fData;
+    numItems = fread(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);          // ceil(AbsMax) level of layer 1 weights
+    if (numItems != 1) {
+        fclose (p_ioFile);
+        return (-7);
+    }
+    SLData_t layer1WeightsAbsMax = (SLData_t)fData;
+    numItems = fread(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);          // ceil(AbsMax) level of layer 1 biases
+    if (numItems != 1) {
+        fclose (p_ioFile);
+        return (-7);
+    }
+    SLData_t layer1BiasesAbsMax = (SLData_t)fData;
+    numItems = fread(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);          // ceil(AbsMax) level of layer 2 weights
+    if (numItems != 1) {
+        fclose (p_ioFile);
+        return (-8);
+    }
+    SLData_t layer2WeightsAbsMax = (SLData_t)fData;
+    numItems = fread(&fData, sizeof(SLArrayIndex_t), 1, p_ioFile);          // ceil(AbsMax) level of layer 2 biases
+    if (numItems != 1) {
+        fclose (p_ioFile);
+        return (-7);
+    }
+    SLData_t layer2BiasesAbsMax = (SLData_t)fData;
+
+    SLData_t fixMax = SDS_Pow(SIGLIB_TWO, numBits-1) - SIGLIB_ONE;
+
+    if (numBits <= 8) {
+        for (SLArrayIndex_t i = 0; i < numLayer1Weights; i++) {
+            SLInt8_t inWord;
+            size_t numItems = fread(&inWord, sizeof(SLInt8_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-9);
+            }
+            *(layer1Weights+i) = (((SLData_t)inWord) * layer1WeightsAbsMax) / fixMax;
+            weightsReadCount++;
+        }
+        for (SLArrayIndex_t i = 0; i < numLayer1Biases; i++) {
+            SLInt8_t inWord;
+            size_t numItems = fread(&inWord, sizeof(SLInt8_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-9);
+            }
+            *(layer1Biases+i) = (((SLData_t)inWord) * layer1BiasesAbsMax) / fixMax;
+            weightsReadCount++;
+        }
+        for (SLArrayIndex_t i = 0; i < numLayer2Weights; i++) {
+            SLInt8_t inWord;
+            size_t numItems = fread(&inWord, sizeof(SLInt8_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-10);
+            }
+            layer2Weights[i] = (((SLData_t)inWord) * layer2WeightsAbsMax) / fixMax;
+            weightsReadCount++;
+        }
+        for (SLArrayIndex_t i = 0; i < numLayer2Biases; i++) {
+            SLInt8_t inWord;
+            size_t numItems = fread(&inWord, sizeof(SLInt8_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-9);
+            }
+            *(layer2Biases+i) = (((SLData_t)inWord) * layer2BiasesAbsMax) / fixMax;
+            weightsReadCount++;
+        }
+    }
+    else if (numBits <= 16) {
+        for (SLArrayIndex_t i = 0; i < numLayer1Weights; i++) {
+            SLInt16_t inWord;
+            size_t numItems = fread(&inWord, sizeof(SLInt16_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-11);
+            }
+            *(layer1Weights+i) = (((SLData_t)inWord) * layer1WeightsAbsMax) / fixMax;
+            weightsReadCount++;
+        }
+        for (SLArrayIndex_t i = 0; i < numLayer1Biases; i++) {
+            SLInt16_t inWord;
+            size_t numItems = fread(&inWord, sizeof(SLInt16_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-11);
+            }
+            *(layer1Biases+i) = (((SLData_t)inWord) * layer1BiasesAbsMax) / fixMax;
+            weightsReadCount++;
+        }
+        for (SLArrayIndex_t i = 0; i < numLayer2Weights; i++) {
+            SLInt16_t inWord;
+            size_t numItems = fread(&inWord, sizeof(SLInt16_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-12);
+            }
+            layer2Weights[i] = (((SLData_t)inWord) * layer2WeightsAbsMax) / fixMax;
+            weightsReadCount++;
+        }
+        for (SLArrayIndex_t i = 0; i < numLayer2Biases; i++) {
+            SLInt16_t inWord;
+            size_t numItems = fread(&inWord, sizeof(SLInt16_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-11);
+            }
+            *(layer2Biases+i) = (((SLData_t)inWord) * layer2BiasesAbsMax) / fixMax;
+            weightsReadCount++;
+        }
+    }
+    else {              // Between 17 and 32 bits
+        for (SLArrayIndex_t i = 0; i < numLayer1Weights; i++) {
+            SLInt32_t inWord;
+            size_t numItems = fread(&inWord, sizeof(SLInt32_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-13);
+            }
+            *(layer1Weights+i) = (((SLData_t)inWord) * layer1WeightsAbsMax) / fixMax;
+            weightsReadCount++;
+        }
+        for (SLArrayIndex_t i = 0; i < numLayer1Biases; i++) {
+            SLInt32_t inWord;
+            size_t numItems = fread(&inWord, sizeof(SLInt32_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-13);
+            }
+            *(layer1Biases+i) = (((SLData_t)inWord) * layer1BiasesAbsMax) / fixMax;
+            weightsReadCount++;
+        }
+        for (SLArrayIndex_t i = 0; i < numLayer2Weights; i++) {
+            SLInt32_t inWord;
+            size_t numItems = fread(&inWord, sizeof(SLInt32_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-14);
+            }
+            layer2Weights[i] = (((SLData_t)inWord) * layer2WeightsAbsMax) / fixMax;
+            weightsReadCount++;
+        }
+        for (SLArrayIndex_t i = 0; i < numLayer2Biases; i++) {
+            SLInt32_t inWord;
+            size_t numItems = fread(&inWord, sizeof(SLInt32_t), 1, p_ioFile);
+            if (numItems != 1) {
+                fclose (p_ioFile);
+                return (-13);
+            }
+            *(layer2Biases+i) = (((SLData_t)inWord) * layer2BiasesAbsMax) / fixMax;
+            weightsReadCount++;
+        }
+    }
+
+    fclose (p_ioFile);
+
+    return (weightsReadCount);
+}       // End of SUF_ReadWeightsWithBiasesBinaryFile()
 
 
 #endif  // SIGLIB_FILE_IO_SUPPORTED

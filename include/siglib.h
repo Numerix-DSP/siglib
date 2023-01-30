@@ -1,6 +1,6 @@
 /**************************************************************************
 File Name               : siglib.h      | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.11         |
+Siglib Library Version  : 10.30         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 13/09/1992
 Options   :                             | Latest Update : 09/01/2022
@@ -43,7 +43,7 @@ Update history :
 #ifndef _HP_VEE         // The following functionality is not supported by VEE
 
 #define SIGLIB                          1                   // Indicates SigLib is being used
-#define SIGLIB_VERSION                  10.20               // Indicates SigLib version being used
+#define SIGLIB_VERSION                  10.30               // Indicates SigLib version being used
 #define SIGLIB_ENABLE_DEBUG_FPRINTF     0                   // Set to 1 to enable SUF_Debugfprintf functions in some siglib functions
 
 
@@ -195,6 +195,40 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsBinaryFile (const char *,   // F
 SLArrayIndex_t SIGLIB_FUNC_DECL SUF_ReadWeightsBinaryFile (const char *,    // File name
     SLData_t SIGLIB_OUTPUT_PTR_DECL *,                      // Layer 1 weights
     SLData_t SIGLIB_OUTPUT_PTR_DECL *);                     // Layer 2 weights
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsWithBiasesIntegerCFile (const char *,   // File name
+    const SLData_t SIGLIB_INPUT_PTR_DECL*,                  // Layer 1 weights
+    const SLData_t SIGLIB_INPUT_PTR_DECL*,                  // Layer 1 biases
+    const SLData_t SIGLIB_INPUT_PTR_DECL*,                  // Layer 2 weights
+    const SLData_t SIGLIB_INPUT_PTR_DECL*,                  // Layer 2 biases
+    const SLArrayIndex_t,                                   // Number of input nodes
+    const SLArrayIndex_t,                                   // Number of hidden layer nodes
+    const SLArrayIndex_t);                                  // Number of output categories
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsWithBiasesFloatCFile (const char *,     // File name
+    const SLData_t SIGLIB_INPUT_PTR_DECL*,                  // Layer 1 weights
+    const SLData_t SIGLIB_INPUT_PTR_DECL*,                  // Layer 2 weights
+    const SLData_t SIGLIB_INPUT_PTR_DECL*,                  // Layer 1 biases
+    const SLData_t SIGLIB_INPUT_PTR_DECL*,                  // Layer 2 biases
+    const SLArrayIndex_t,                                   // Number of input nodes
+    const SLArrayIndex_t,                                   // Number of hidden layer nodes
+    const SLArrayIndex_t);                                  // Number of output categories
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsWithBiasesBinaryFile (const char *,     // File name
+    const SLData_t SIGLIB_INPUT_PTR_DECL*,                  // Layer 1 weights
+    const SLData_t SIGLIB_INPUT_PTR_DECL*,                  // Layer 2 weights
+    const SLData_t SIGLIB_INPUT_PTR_DECL*,                  // Layer 1 biases
+    const SLData_t SIGLIB_INPUT_PTR_DECL*,                  // Layer 2 biases
+    const SLArrayIndex_t,                                   // Number of input nodes
+    const SLArrayIndex_t,                                   // Number of hidden layer nodes
+    const SLArrayIndex_t,                                   // Number of output categories
+    const SLArrayIndex_t);                                  // Number quantization bits
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_ReadWeightsWithBiasesBinaryFile (const char *,      // File name
+    SLData_t SIGLIB_OUTPUT_PTR_DECL *,                      // Layer 1 weights
+    SLData_t SIGLIB_OUTPUT_PTR_DECL *,                      // Layer 1 biases
+    SLData_t SIGLIB_OUTPUT_PTR_DECL *,                      // Layer 2 weights
+    SLData_t SIGLIB_OUTPUT_PTR_DECL *);                     // Layer 2 biases
 #endif
 
 #ifdef CLOCKS_PER_SEC
@@ -6256,6 +6290,72 @@ void SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryNetworkFit (const SLData_t * SIGLIB_I
 SLNeuralNetworkPrediction_s SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryNetworkPredict (const SLData_t * SIGLIB_INPUT_PTR_DECL,   // Pointer to data to classify
     const SLData_t * SIGLIB_INPUT_PTR_DECL,                 // Pointer to layer 1 weights
     const SLData_t * SIGLIB_INPUT_PTR_DECL,                 // Pointer to layer 2 weights
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 1 post activation
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 2 post activation
+    const enum SLActivationType_t,                          // Layer 1 activation type
+    const SLData_t,                                         // Layer 1 activation alpha
+    const enum SLActivationType_t,                          // Layer 2 activation type
+    const SLData_t,                                         // Layer 2 activation alpha
+    const SLArrayIndex_t,                                   // Input array length
+    const SLArrayIndex_t,                                   // Layer 1 length
+    const SLArrayIndex_t);                                  // Number of categories
+
+void SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryWithBiasesNetworkFit (const SLData_t * SIGLIB_INPUT_PTR_DECL,  // Pointer to training data
+    const SLArrayIndex_t * SIGLIB_INPUT_PTR_DECL,           // Pointer to categorical data
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 1 weights
+    SLData_t * SIGLIB_INPUT_PTR_DECL,                       // Pointer to layer 1 biases
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 2 weights
+    SLData_t * SIGLIB_INPUT_PTR_DECL,                       // Pointer to layer 2 biases
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 1 pre activation
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 1 post activation
+    const enum SLActivationType_t,                          // Layer 1 activation type
+    const SLData_t,                                         // Layer 1 activation alpha
+    const enum SLActivationType_t,                          // Layer 2 activation type
+    const SLData_t,                                         // Layer 2 activation alpha
+    const SLData_t,                                         // Learning rate
+    const SLArrayIndex_t,                                   // Number of training sequences
+    const SLArrayIndex_t,                                   // Input array length
+    const SLArrayIndex_t);                                  // Layer 1 length
+
+SLNeuralNetworkPrediction_s SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryWithBiasesNetworkPredict (const SLData_t * SIGLIB_INPUT_PTR_DECL,   // Pointer to data to classify
+    const SLData_t * SIGLIB_INPUT_PTR_DECL,                 // Pointer to layer 1 weights
+    const SLData_t * SIGLIB_INPUT_PTR_DECL,                 // Pointer to layer 1 biases
+    const SLData_t * SIGLIB_INPUT_PTR_DECL,                 // Pointer to layer 2 weights
+    const SLData_t * SIGLIB_INPUT_PTR_DECL,                 // Pointer to layer 2 biases
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 1 post activation
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to output activation
+    const enum SLActivationType_t,                          // Layer 1 activation type
+    const SLData_t,                                         // Layer 1 activation alpha
+    const enum SLActivationType_t,                          // Layer 2 activation type
+    const SLData_t,                                         // Layer 2 activation alpha
+    const SLData_t,                                         // Classification threshold
+    const SLArrayIndex_t,                                   // Input array length
+    const SLArrayIndex_t);                                  // Layer 1 length
+
+void SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryWithBiasesNetworkFit (const SLData_t * SIGLIB_INPUT_PTR_DECL,  // Pointer to training data
+    const SLArrayIndex_t * SIGLIB_INPUT_PTR_DECL,           // Pointer to categorical data
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 1 weights
+    SLData_t * SIGLIB_INPUT_PTR_DECL,                       // Pointer to layer 1 biases
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 2 weights
+    SLData_t * SIGLIB_INPUT_PTR_DECL,                       // Pointer to layer 2 biases
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 1 pre activation
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 1 post activation
+    SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 2 post activation
+    const enum SLActivationType_t,                          // Layer 1 activation type
+    const SLData_t,                                         // Layer 1 activation alpha
+    const enum SLActivationType_t,                          // Layer 2 activation type
+    const SLData_t,                                         // Layer 2 activation alpha
+    const SLData_t,                                         // Learning rate
+    const SLArrayIndex_t,                                   // Number of training sequences
+    const SLArrayIndex_t,                                   // Input array length
+    const SLArrayIndex_t,                                   // Layer 1 length
+    const SLArrayIndex_t);                                  // Number of categories
+
+SLNeuralNetworkPrediction_s SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryWithBiasesNetworkPredict (const SLData_t * SIGLIB_INPUT_PTR_DECL,   // Pointer to data to classify
+    const SLData_t * SIGLIB_INPUT_PTR_DECL,                 // Pointer to layer 1 weights
+    const SLData_t * SIGLIB_INPUT_PTR_DECL,                 // Pointer to layer 1 biases
+    const SLData_t * SIGLIB_INPUT_PTR_DECL,                 // Pointer to layer 2 weights
+    const SLData_t * SIGLIB_INPUT_PTR_DECL,                 // Pointer to layer 2 biases
     SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 1 post activation
     SLData_t * SIGLIB_OUTPUT_PTR_DECL,                      // Pointer to layer 2 post activation
     const enum SLActivationType_t,                          // Layer 1 activation type

@@ -1,6 +1,31 @@
 SigLib (Tm) Revision Update History File
 ========================================
 
+VERSION : 10.30
+RELEASE DATE : 19/12/2022
+_________________________
+
+Additional Processor / Compiler Support :
+    None.
+
+Additional Functionality :
+    SDA_TwoLayer2CategoryWithBiasesNetworkFit, SDA_TwoLayer2CategoryWithBiasesNetworkPredict,
+    SDA_TwoLayerNCategoryWithBiasesNetworkFit, SDA_TwoLayerNCategoryWithBiasesNetworkPredict.
+    SUF_WriteWeightsWithBiasesIntegerCFile, SUF_WriteWeightsWithBiasesFloatCFile,
+    SUF_WriteWeightsWithBiasesBinaryFile, SUF_ReadWeightsWithBiasesBinaryFile
+
+Bug Fixes :
+    None.
+
+Operational Changes :
+    None.
+
+Optimisation Changes :
+    None.
+
+Notes :
+
+
 VERSION : 10.20
 RELEASE DATE : 19/12/2022
 _________________________
