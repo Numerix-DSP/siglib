@@ -7,7 +7,7 @@
 // Define application constants
 
 #define FFT_LENGTH              512
-#define LOG2_FFT_LENGTH         SAI_FftLengthLog2(FFT_LENGTH)   // Log2 FFT length,
+#define LOG2_FFT_LENGTH         SAI_FftLengthLog2(FFT_LENGTH)       // Log2 FFT length,
 
 
 // Menu constants
@@ -59,121 +59,169 @@
 
 // SLTestApp class definitions
 
-class CSLTestApp : public CWinApp
-{
+class           CSLTestApp:public CWinApp {
 public:
-    virtual BOOL    InitInstance();
-    BOOL            OnIdle(LONG lCount);
+  virtual BOOL InitInstance (
+    );
+  BOOL            OnIdle (
+  LONG lCount);
 };
 
 
 
 // Status window
 
-class CWinStatus : public CWnd
-{
+class           CWinStatus:public CWnd {
 public:
-    CWinStatus();
-    void            SetMessage (const char *Message);
-    afx_msg void    OnPaint();
-    DECLARE_MESSAGE_MAP()
-
+  CWinStatus (
+    );
+  void            SetMessage (
+  const char *Message);
+  afx_msg void    OnPaint (
+    );
+                  DECLARE_MESSAGE_MAP (
+    )
 private:
-    char Buffer [80];
+  char            Buffer[80];
 };
 
 
 
 // Buffer handling class
 
-class CBuffer : public CWnd     // Derive from CWnd for windows fuctions eg clipboard
+class           CBuffer:public CWnd                                 // Derive from CWnd for windows fuctions eg clipboard
 {
 public:
-    CBuffer();
-    void        Create();
-    HANDLE      GetHandle() const;
-    void        SetHandle(HANDLE hBuffer);
-    void        PutSample(int nIndex, double sample) const;
-    double      GetSample(int nIndex) const;
-    void        SetSize (UINT size);
-    UINT        GetSize();
-    double      GetMax();
+  CBuffer (
+    );
+  void            Create (
+    );
+  HANDLE          GetHandle (
+    ) const;
+  void            SetHandle (
+  HANDLE hBuffer);
+  void            PutSample (
+  int nIndex,
+  double sample) const;
+  double          GetSample (
+  int nIndex) const;
+  void            SetSize (
+  UINT size);
+  UINT            GetSize (
+    );
+  double          GetMax (
+    );
 
-                // Clipboard operations
-    BOOL        Undo();
-    void        Clear();
-    void        Copy();
-    void        Cut();
-    void        Paste();
+// Clipboard operations
+  BOOL            Undo (
+    );
+  void            Clear (
+    );
+  void            Copy (
+    );
+  void            Cut (
+    );
+  void            Paste (
+    );
 
 private:
-    UINT        BufSize;
-    HANDLE      HBuf;
+                  UINT BufSize;
+  HANDLE          HBuf;
 };
 
 
 
 // Graph window
 
-class CWinGraph : public CWnd
-{
+class           CWinGraph:public CWnd {
 public:
-    CWinGraph();
-    afx_msg int     OnCreate (LPCREATESTRUCT lpCreateStruct);
-    afx_msg void    OnClose();
-    afx_msg void    OnExit();
-    afx_msg void    OnLButtonDown (UINT nFlags, CPoint point);
-    afx_msg void    OnPaint();
-    afx_msg void    OnMouseMove (UINT nFlags, CPoint point);
-    afx_msg void    OnSize (UINT nType, int cx, int cy);
-    afx_msg BOOL    OnEraseBkgnd (CDC *pDC);
-    int             Status;         // Graph status
-    void            SetGraph (int S);
-    DECLARE_MESSAGE_MAP()
-
+  CWinGraph (
+    );
+  afx_msg int     OnCreate (
+  LPCREATESTRUCT lpCreateStruct);
+  afx_msg void    OnClose (
+    );
+  afx_msg void    OnExit (
+    );
+  afx_msg void    OnLButtonDown (
+  UINT nFlags,
+  CPoint point);
+  afx_msg void    OnPaint (
+    );
+  afx_msg void    OnMouseMove (
+  UINT nFlags,
+  CPoint point);
+  afx_msg void    OnSize (
+  UINT nType,
+  int cx,
+  int cy);
+  afx_msg BOOL    OnEraseBkgnd (
+  CDC * pDC);
+  int             Status;                                           // Graph status
+  void            SetGraph (
+  int S);
+                  DECLARE_MESSAGE_MAP (
+    )
 private:
-    CPen            Plot1Pen;
-    CPen            ErasePen;
-    CPen            GraticulePen;
-    HCURSOR         HGCursor;
-    HLOCAL          HDOldDataMem;           // Int type data array
-    int             FirstGraph;
+                  CPen Plot1Pen;
+  CPen            ErasePen;
+  CPen            GraticulePen;
+  HCURSOR         HGCursor;
+  HLOCAL          HDOldDataMem;                                     // Int type data array
+  int             FirstGraph;
 };
 
 
 // Main window
 
-class CSLTestWindow : public CFrameWnd
-{
+class           CSLTestWindow:public CFrameWnd {
 public:
-            // User defined functions
-    CSLTestWindow();
-    HCURSOR         GetHCursor();
-    afx_msg void    CSLTestWindow::OnGenerateSine();
-    afx_msg void    CSLTestWindow::OnGenerateTriangle();
-    afx_msg void    CSLTestWindow::OnGenerateSquare();
-    afx_msg void    CSLTestWindow::OnFFTSignal();
-    afx_msg void    CSLTestWindow::OnGetSigLibDLLVersion();
+// User defined functions
+  CSLTestWindow (
+    );
+  HCURSOR         GetHCursor (
+    );
+  afx_msg void    CSLTestWindow::OnGenerateSine (
+    );
+  afx_msg void    CSLTestWindow::OnGenerateTriangle (
+    );
+  afx_msg void    CSLTestWindow::OnGenerateSquare (
+    );
+  afx_msg void    CSLTestWindow::OnFFTSignal (
+    );
+  afx_msg void    CSLTestWindow::OnGetSigLibDLLVersion (
+    );
 
-            // Redefined MFC functions
-    afx_msg void    OnExit();
-    afx_msg void    OnAbout();
-    afx_msg void    OnContents();
-    afx_msg void    OnPaint();
-    afx_msg int     OnCreate (LPCREATESTRUCT lpCreateStruct);
-    afx_msg void    OnSize (UINT nType, int cx, int cy);
-    afx_msg void    OnSysColorChange();
-    afx_msg LONG    OnDropFiles (UINT wParam, LONG lParam);
-    DECLARE_MESSAGE_MAP()
-
+// Redefined MFC functions
+  afx_msg void    OnExit (
+    );
+  afx_msg void    OnAbout (
+    );
+  afx_msg void    OnContents (
+    );
+  afx_msg void    OnPaint (
+    );
+  afx_msg int     OnCreate (
+  LPCREATESTRUCT lpCreateStruct);
+  afx_msg void    OnSize (
+  UINT nType,
+  int cx,
+  int cy);
+  afx_msg void    OnSysColorChange (
+    );
+  afx_msg LONG    OnDropFiles (
+  UINT wParam,
+  LONG lParam);
+                  DECLARE_MESSAGE_MAP (
+    )
 private:
-    CWinStatus      WinStatus;
-    CWinGraph       WinGraph;
-    CFont           Font;
+                  CWinStatus WinStatus;
+  CWinGraph       WinGraph;
+  CFont           Font;
 
-    UINT            DLLLoaded;
-    HCURSOR         HGCursor;
-    int             CharHeight;
-    void            UpdateTitle();
+  UINT            DLLLoaded;
+  HCURSOR         HGCursor;
+  int             CharHeight;
+  void            UpdateTitle (
+    );
 };
-

@@ -11,74 +11,71 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <ctype.h>
-#include <siglib.h>                                 // SigLib DSP library
+#include <siglib.h>                                                 // SigLib DSP library
 
 // Declare constants
 #define SAMPLE_LENGTH           102
 
 // Declare global variables and arrays
-SLData_t        *pData;             // Data arrays
-SLData_t        *pDTMFDetectState;
+SLData_t       *pData;                                              // Data arrays
+SLData_t       *pDTMFDetectState;
 SLWavFileInfo_s wavInfo;
 
-void    main(void);
+void            main (
+  void);
 
-void main (void)
-
+void main (
+  void)
 {
-    SLFixData_t Finished = 0;
-    SLFixData_t KeyCode;
-    SLFixData_t sampleCount;
-    SLFixData_t PreviousKeyCode = SIGLIB_NO_DTMF_SIGNAL;        // Initialise to no DTMF key detected
-    SLFixData_t KeyCodeLength = 0;                              // Length of key code stream
-    SLFixData_t KeyCodeRegistered = SIGLIB_FALSE;               // A key code has not been registered
-    FILE        *fpInputFile;
+  SLFixData_t     Finished = 0;
+  SLFixData_t     KeyCode;
+  SLFixData_t     sampleCount;
+  SLFixData_t     PreviousKeyCode = SIGLIB_NO_DTMF_SIGNAL;          // Initialise to no DTMF key detected
+  SLFixData_t     KeyCodeLength = 0;                                // Length of key code stream
+  SLFixData_t     KeyCodeRegistered = SIGLIB_FALSE;                 // A key code has not been registered
+  FILE           *fpInputFile;
 
-    pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-    pDTMFDetectState = SUF_VectorArrayAllocate (SIGLIB_GOERTZEL_DELAY_LENGTH);
+  pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  pDTMFDetectState = SUF_VectorArrayAllocate (SIGLIB_GOERTZEL_DELAY_LENGTH);
 
 
-    if ((fpInputFile = fopen ("tones.wav", "rb")) == NULL) {    // Note this file is binary
-        printf ("Error opening input .WAV file\n");
-        exit(-1);
+  if ((fpInputFile = fopen ("tones.wav", "rb")) == NULL) {          // Note this file is binary
+    printf ("Error opening input .WAV file\n");
+    exit (-1);
+  }
+
+  wavInfo = SUF_WavReadHeader (fpInputFile);
+  if (wavInfo.NumberOfChannels != 1) {                              // Check how many channels
+    printf ("Number of channels in tones.wav = %d\n", wavInfo.NumberOfChannels);
+    printf ("This app requires a mono .wav file\n");
+    exit (-1);
+  }
+
+  SUF_WavDisplayInfo (wavInfo);
+  printf ("\n.WAV file data. '.' indicates no tone present\n\n");
+
+  SIF_DtmfDetect (((SLData_t) wavInfo.SampleRate), SAMPLE_LENGTH);
+
+  while ((sampleCount = SUF_WavReadData (pData, fpInputFile, wavInfo, SAMPLE_LENGTH)) == SAMPLE_LENGTH) {
+    KeyCode = SDA_DtmfDetectAndValidate (pData, 1000.0, &PreviousKeyCode, &KeyCodeLength, &KeyCodeRegistered, SAMPLE_LENGTH);
+
+    if (KeyCode == SIGLIB_NO_SIGNAL_PRESENT) {
+      printf (". ");
     }
 
-    wavInfo = SUF_WavReadHeader (fpInputFile);
-    if (wavInfo.NumberOfChannels != 1) {                        // Check how many channels
-        printf ("Number of channels in tones.wav = %d\n", wavInfo.NumberOfChannels);
-        printf ("This app requires a mono .wav file\n");
-        exit(-1);
+    else if (KeyCode == SIGLIB_NO_DTMF_SIGNAL) {
+      printf ("x ");
     }
 
-    SUF_WavDisplayInfo (wavInfo);
-    printf ("\n.WAV file data. '.' indicates no tone present\n\n");
-
-    SIF_DtmfDetect (((SLData_t)wavInfo.SampleRate), SAMPLE_LENGTH);
-
-    while ((sampleCount = SUF_WavReadData (pData, fpInputFile, wavInfo, SAMPLE_LENGTH)) == SAMPLE_LENGTH) {
-        KeyCode = SDA_DtmfDetectAndValidate (pData, 1000.0,
-                    &PreviousKeyCode, &KeyCodeLength, &KeyCodeRegistered, SAMPLE_LENGTH);
-
-        if (KeyCode == SIGLIB_NO_SIGNAL_PRESENT) {
-            printf (". ");
-        }
-
-        else if (KeyCode == SIGLIB_NO_DTMF_SIGNAL) {
-            printf ("x ");
-        }
-
-        else if (KeyCode != SIGLIB_DTMF_CONTINUATION) {
-            printf ("%c ", SUF_KeyCodeToAscii (KeyCode));
-        }
+    else if (KeyCode != SIGLIB_DTMF_CONTINUATION) {
+      printf ("%c ", SUF_KeyCodeToAscii (KeyCode));
     }
+  }
 
-    printf ("\n\n\n");
+  printf ("\n\n\n");
 
-    fclose (fpInputFile);
+  fclose (fpInputFile);
 
-    SUF_MemoryFree (pData);         // Free memory
-    SUF_MemoryFree (pDTMFDetectState);
+  SUF_MemoryFree (pData);                                           // Free memory
+  SUF_MemoryFree (pDTMFDetectState);
 }
-
-
-

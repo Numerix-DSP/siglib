@@ -1,3 +1,4 @@
+
 /**************************************************************************
 File Name               : COMPLEXA.C    | Author        : JOHN EDWARDS
 Siglib Library Version  : 10.00         |
@@ -37,12 +38,13 @@ Description : Complex number routines for SigLib DSP library.
 
 ****************************************************************************/
 
-#define SIGLIB_SRC_FILE_COMPLEX_ARRAY   1                   // Defines the source file that this code is being used in
+#define SIGLIB_SRC_FILE_COMPLEX_ARRAY   1                           // Defines the source file that this code is being used in
 
-#include <siglib.h>                                         // Include SigLib header file
+#include <siglib.h>                                                 // Include SigLib header file
 
 
 /**/
+
 /********************************************************
 * Function: SDA_CreateComplexRect()
 *
@@ -60,36 +62,37 @@ Description : Complex number routines for SigLib DSP library.
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_CreateComplexRect (const SLData_t * SIGLIB_PTR_DECL pSrcReal,
-    const SLData_t * SIGLIB_PTR_DECL pSrcImag,
-    SLComplexRect_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_CreateComplexRect (
+  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcReal % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrcImag % 8 == 0);
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrcReal % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrcImag % 8 == 0);
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i].real = pSrcReal[i];
-        pDst[i].imag = pSrcImag[i];
+  for (i = 0; i < ArrayLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i].real = pSrcReal[i];
+    pDst[i].imag = pSrcImag[i];
 #else
-        pDst->real = *pSrcReal++;
-        pDst++->imag = *pSrcImag++;
+    pDst->real = *pSrcReal++;
+    pDst++->imag = *pSrcImag++;
 #endif
-    }
+  }
 
-}       // End of SDA_CreateComplexRect()
+}                                                                   // End of SDA_CreateComplexRect()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_CreateComplexPolar()
 *
@@ -107,37 +110,38 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_CreateComplexPolar (const SLData_t * SIGLIB_PTR_DECL pSrcMagn,
-    const SLData_t * SIGLIB_PTR_DECL pSrcPhase,
-    SLComplexPolar_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_CreateComplexPolar (
+  const SLData_t * SIGLIB_PTR_DECL pSrcMagn,
+  const SLData_t * SIGLIB_PTR_DECL pSrcPhase,
+  SLComplexPolar_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcMagn % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrcPhase % 8 == 0);
-_nassert((int) pDst % 8 == 0);
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrcMagn % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrcPhase % 8 == 0);
+  _nassert ((int) pDst % 8 == 0);
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i].magn = pSrcMagn[i];
-        pDst[i].angle = pSrcPhase[i];
+  for (i = 0; i < ArrayLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i].magn = pSrcMagn[i];
+    pDst[i].angle = pSrcPhase[i];
 #else
-        pDst->magn = *pSrcMagn++;
-        pDst++->angle = *pSrcPhase++;
+    pDst->magn = *pSrcMagn++;
+    pDst++->angle = *pSrcPhase++;
 #endif
-    }
+  }
 
-}       // End of SDA_CreateComplexPolar()
+}                                                                   // End of SDA_CreateComplexPolar()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ExtractComplexRect()
 *
@@ -155,35 +159,36 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ExtractComplexRect (const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDstReal,
-    SLData_t * SIGLIB_PTR_DECL pDstImag,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ExtractComplexRect (
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDstReal,
+  SLData_t * SIGLIB_PTR_DECL pDstImag,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDstReal % 8 == 0);
-_nassert((int) pDstImag % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDstReal % 8 == 0);
+  _nassert ((int) pDstImag % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDstReal[i] = pSrc[i].real;
-        pDstImag[i] = pSrc[i].imag;
+  for (i = 0; i < ArrayLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDstReal[i] = pSrc[i].real;
+    pDstImag[i] = pSrc[i].imag;
 #else
-        *pDstReal++ = pSrc->real;
-        *pDstImag++ = pSrc++->imag;
+    *pDstReal++ = pSrc->real;
+    *pDstImag++ = pSrc++->imag;
 #endif
-    }
-}       // End of SDA_ExtractComplexRect()
+  }
+}                                                                   // End of SDA_ExtractComplexRect()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ExtractComplexPolar()
 *
@@ -201,36 +206,37 @@ _nassert((int) pDstImag % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ExtractComplexPolar (const SLComplexPolar_s * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDstMagn,
-    SLData_t * SIGLIB_PTR_DECL pDstPhase,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ExtractComplexPolar (
+  const SLComplexPolar_s * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDstMagn,
+  SLData_t * SIGLIB_PTR_DECL pDstPhase,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDstMagn % 8 == 0);
-_nassert((int) pDstPhase % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDstMagn % 8 == 0);
+  _nassert ((int) pDstPhase % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDstMagn[i] = pSrc[i].magn;
-        pDstPhase[i] = pSrc[i].angle;
+  for (i = 0; i < ArrayLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDstMagn[i] = pSrc[i].magn;
+    pDstPhase[i] = pSrc[i].angle;
 #else
-        *pDstMagn++ = pSrc->magn;
-        *pDstPhase++ = pSrc++->angle;
+    *pDstMagn++ = pSrc->magn;
+    *pDstPhase++ = pSrc++->angle;
 #endif
-    }
+  }
 
-}       // End of SDA_ExtractComplexPolar()
+}                                                                   // End of SDA_ExtractComplexPolar()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ClearComplexRect()
 *
@@ -246,32 +252,33 @@ _nassert((int) pDstPhase % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ClearComplexRect (SLComplexRect_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ClearComplexRect (
+  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pDst % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i].real = SIGLIB_ZERO;
-        pDst[i].imag = SIGLIB_ZERO;
+  for (i = 0; i < ArrayLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i].real = SIGLIB_ZERO;
+    pDst[i].imag = SIGLIB_ZERO;
 #else
-        pDst->real = SIGLIB_ZERO;
-        pDst++->imag = SIGLIB_ZERO;
+    pDst->real = SIGLIB_ZERO;
+    pDst++->imag = SIGLIB_ZERO;
 #endif
-    }
+  }
 
-}       // End of SDA_ClearComplexRect()
+}                                                                   // End of SDA_ClearComplexRect()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ClearComplexPolar()
 *
@@ -287,32 +294,33 @@ _nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double wor
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ClearComplexPolar (SLComplexPolar_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ClearComplexPolar (
+  SLComplexPolar_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pDst % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i].magn = SIGLIB_ZERO;
-        pDst[i].angle = SIGLIB_ZERO;
+  for (i = 0; i < ArrayLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i].magn = SIGLIB_ZERO;
+    pDst[i].angle = SIGLIB_ZERO;
 #else
-        pDst->magn = SIGLIB_ZERO;
-        pDst++->angle = SIGLIB_ZERO;
+    pDst->magn = SIGLIB_ZERO;
+    pDst++->angle = SIGLIB_ZERO;
 #endif
-    }
+  }
 
-}       // End of SDA_ClearComplexPolar()
+}                                                                   // End of SDA_ClearComplexPolar()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_FillComplexRect()
 *
@@ -329,31 +337,32 @@ _nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double wor
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_FillComplexRect (SLComplexRect_s * SIGLIB_PTR_DECL pDst,
-    const SLComplexRect_s FillValue,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_FillComplexRect (
+  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+  const SLComplexRect_s FillValue,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pDst % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = FillValue;
+  for (i = 0; i < ArrayLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = FillValue;
 #else
-        *pDst++ = FillValue;
+    *pDst++ = FillValue;
 #endif
-    }
+  }
 
-}       // End of SDA_FillComplexRect()
+}                                                                   // End of SDA_FillComplexRect()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_FillComplexPolar()
 *
@@ -370,31 +379,32 @@ _nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double wor
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_FillComplexPolar (SLComplexPolar_s * SIGLIB_PTR_DECL pDst,
-    const SLComplexPolar_s FillValue,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_FillComplexPolar (
+  SLComplexPolar_s * SIGLIB_PTR_DECL pDst,
+  const SLComplexPolar_s FillValue,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pDst % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = FillValue;
+  for (i = 0; i < ArrayLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = FillValue;
 #else
-        *pDst++ = FillValue;
+    *pDst++ = FillValue;
 #endif
-    }
+  }
 
-}       // End of SDA_FillComplexPolar()
+}                                                                   // End of SDA_FillComplexPolar()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexRectangularToPolar
 *
@@ -411,39 +421,38 @@ _nassert((int) pDst % 8 == 0);              // Align arrays on 64 bit double wor
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexRectangularToPolar (const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
-    SLComplexPolar_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexRectangularToPolar (
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+  SLComplexPolar_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        pDst->magn = SDS_Sqrt (pSrc->real * pSrc->real + pSrc->imag * pSrc->imag);
-                                                                // Check for close to origin
-        if ((pSrc->real < SIGLIB_MIN_THRESHOLD) &&
-            (pSrc->real > -SIGLIB_MIN_THRESHOLD) &&
-            (pSrc->imag < SIGLIB_MIN_THRESHOLD) &&
-            (pSrc->imag > -SIGLIB_MIN_THRESHOLD)) {
+  for (i = 0; i < ArrayLength; i++) {
+    pDst->magn = SDS_Sqrt (pSrc->real * pSrc->real + pSrc->imag * pSrc->imag);
+// Check for close to origin
+    if ((pSrc->real < SIGLIB_MIN_THRESHOLD) &&
+        (pSrc->real > -SIGLIB_MIN_THRESHOLD) && (pSrc->imag < SIGLIB_MIN_THRESHOLD) && (pSrc->imag > -SIGLIB_MIN_THRESHOLD)) {
 
-            pDst++->angle = SIGLIB_ZERO;
-        }
-        else {
-            pDst++->angle = SDS_Atan2 (pSrc->imag, pSrc->real);
-        }
-        pSrc++;
+      pDst++->angle = SIGLIB_ZERO;
     }
-}       // End of SDA_ComplexRectangularToPolar()
+    else {
+      pDst++->angle = SDS_Atan2 (pSrc->imag, pSrc->real);
+    }
+    pSrc++;
+  }
+}                                                                   // End of SDA_ComplexRectangularToPolar()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexPolarToRectangular
 *
@@ -460,29 +469,30 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexPolarToRectangular (const SLComplexPolar_s * SIGLIB_PTR_DECL pSrc,
-    SLComplexRect_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexPolarToRectangular (
+  const SLComplexPolar_s * SIGLIB_PTR_DECL pSrc,
+  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        pDst->real = pSrc->magn * SDS_Cos (pSrc->angle);
-        pDst++->imag = pSrc->magn * SDS_Sin (pSrc->angle);
-        pSrc++;
-    }
-}       // End of SDA_ComplexPolarToRectangular()
+  for (i = 0; i < ArrayLength; i++) {
+    pDst->real = pSrc->magn * SDS_Cos (pSrc->angle);
+    pDst++->imag = pSrc->magn * SDS_Sin (pSrc->angle);
+    pSrc++;
+  }
+}                                                                   // End of SDA_ComplexPolarToRectangular()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_RectangularToPolar
 *
@@ -501,45 +511,44 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_RectangularToPolar (const SLData_t * SIGLIB_PTR_DECL pSrcReal,
-    const SLData_t * SIGLIB_PTR_DECL pSrcImag,
-    SLData_t * SIGLIB_PTR_DECL pDstMagn,
-    SLData_t * SIGLIB_PTR_DECL pDstPhase,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_RectangularToPolar (
+  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+  SLData_t * SIGLIB_PTR_DECL pDstMagn,
+  SLData_t * SIGLIB_PTR_DECL pDstPhase,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcReal % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrcImag % 8 == 0);
-_nassert((int) pDstMagn % 8 == 0);
-_nassert((int) pDstPhase % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrcReal % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrcImag % 8 == 0);
+  _nassert ((int) pDstMagn % 8 == 0);
+  _nassert ((int) pDstPhase % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        *pDstMagn++ = SDS_Sqrt (*pSrcReal * *pSrcReal + *pSrcImag * *pSrcImag);
-                                                                // Check for close to origin
-        if ((*pSrcReal < SIGLIB_MIN_THRESHOLD) &&
-            (*pSrcReal > -SIGLIB_MIN_THRESHOLD) &&
-            (*pSrcImag < SIGLIB_MIN_THRESHOLD) &&
-            (*pSrcImag > -SIGLIB_MIN_THRESHOLD)) {
+  for (i = 0; i < ArrayLength; i++) {
+    *pDstMagn++ = SDS_Sqrt (*pSrcReal * *pSrcReal + *pSrcImag * *pSrcImag);
+// Check for close to origin
+    if ((*pSrcReal < SIGLIB_MIN_THRESHOLD) &&
+        (*pSrcReal > -SIGLIB_MIN_THRESHOLD) && (*pSrcImag < SIGLIB_MIN_THRESHOLD) && (*pSrcImag > -SIGLIB_MIN_THRESHOLD)) {
 
-            *pDstPhase++ = SIGLIB_ZERO;
-        }
-        else {
-            *pDstPhase++ = SDS_Atan2 (*pSrcImag, *pSrcReal);
-        }
-
-        pSrcReal++;
-        pSrcImag++;
+      *pDstPhase++ = SIGLIB_ZERO;
     }
-}       // End of SDA_RectangularToPolar()
+    else {
+      *pDstPhase++ = SDS_Atan2 (*pSrcImag, *pSrcReal);
+    }
+
+    pSrcReal++;
+    pSrcImag++;
+  }
+}                                                                   // End of SDA_RectangularToPolar()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_PolarToRectangular
 *
@@ -558,32 +567,33 @@ _nassert((int) pDstPhase % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_PolarToRectangular (const SLData_t * SIGLIB_PTR_DECL pSrcMagn,
-    const SLData_t * SIGLIB_PTR_DECL pSrcPhase,
-    SLData_t * SIGLIB_PTR_DECL pDstReal,
-    SLData_t * SIGLIB_PTR_DECL pDstImag,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_PolarToRectangular (
+  const SLData_t * SIGLIB_PTR_DECL pSrcMagn,
+  const SLData_t * SIGLIB_PTR_DECL pSrcPhase,
+  SLData_t * SIGLIB_PTR_DECL pDstReal,
+  SLData_t * SIGLIB_PTR_DECL pDstImag,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcMagn % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrcPhase % 8 == 0);
-_nassert((int) pDstReal % 8 == 0);
-_nassert((int) pDstImag % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrcMagn % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrcPhase % 8 == 0);
+  _nassert ((int) pDstReal % 8 == 0);
+  _nassert ((int) pDstImag % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        *pDstReal++ = *pSrcMagn * SDS_Cos (*pSrcPhase);
-        *pDstImag++ = *pSrcMagn++ * SDS_Sin (*pSrcPhase++);
-    }
-}       // End of SDA_PolarToRectangular()
+  for (i = 0; i < ArrayLength; i++) {
+    *pDstReal++ = *pSrcMagn * SDS_Cos (*pSrcPhase);
+    *pDstImag++ = *pSrcMagn++ * SDS_Sin (*pSrcPhase++);
+  }
+}                                                                   // End of SDA_PolarToRectangular()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexRectSqrt
 *
@@ -600,35 +610,36 @@ _nassert((int) pDstImag % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexRectSqrt (const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
-    SLComplexRect_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexRectSqrt (
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
-    SLComplexRect_s         IVect;
-    SLComplexPolar_s        PVect;
+  SLArrayIndex_t  i;
+  SLComplexRect_s IVect;
+  SLComplexPolar_s PVect;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        IVect = *pSrc++;
-        PVect = SCV_RectangularToPolar (IVect);
+  for (i = 0; i < ArrayLength; i++) {
+    IVect = *pSrc++;
+    PVect = SCV_RectangularToPolar (IVect);
 
-        PVect.magn = SDS_Sqrt (PVect.magn);
-        PVect.angle = SIGLIB_HALF * PVect.angle;
+    PVect.magn = SDS_Sqrt (PVect.magn);
+    PVect.angle = SIGLIB_HALF * PVect.angle;
 
-        *pDst++ = SCV_PolarToRectangular (PVect);
-    }
-}       // End of SDA_ComplexRectSqrt()
+    *pDst++ = SCV_PolarToRectangular (PVect);
+  }
+}                                                                   // End of SDA_ComplexRectSqrt()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexRectInverse
 *
@@ -645,42 +656,43 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexRectInverse (const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
-    SLComplexRect_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexRectInverse (
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
-    SLComplexRect_s         IVect;
-    SLData_t                Denominator;
+  SLArrayIndex_t  i;
+  SLComplexRect_s IVect;
+  SLData_t        Denominator;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        IVect = *pSrc++;
-        Denominator = SIGLIB_ONE / (IVect.real * IVect.real + IVect.imag * IVect.imag);
+  for (i = 0; i < ArrayLength; i++) {
+    IVect = *pSrc++;
+    Denominator = SIGLIB_ONE / (IVect.real * IVect.real + IVect.imag * IVect.imag);
 
-        if (Denominator == SIGLIB_ZERO) {               // Check for divide by zero
-            pDst->real = SIGLIB_ONE;
-            pDst->imag = SIGLIB_ZERO;
-        }
-
-        else {
-            pDst->real =  IVect.real * Denominator;
-            pDst->imag = -IVect.imag * Denominator;
-        }
-
-        pDst++;
+    if (Denominator == SIGLIB_ZERO) {                               // Check for divide by zero
+      pDst->real = SIGLIB_ONE;
+      pDst->imag = SIGLIB_ZERO;
     }
-}       // End of SDA_ComplexRectInverse()
+
+    else {
+      pDst->real = IVect.real * Denominator;
+      pDst->imag = -IVect.imag * Denominator;
+    }
+
+    pDst++;
+  }
+}                                                                   // End of SDA_ComplexRectInverse()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexRectConjugate
 *
@@ -697,30 +709,31 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexRectConjugate (const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
-    SLComplexRect_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexRectConjugate (
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
-    SLComplexRect_s         IVect;
+  SLArrayIndex_t  i;
+  SLComplexRect_s IVect;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        IVect = *pSrc++;
-        IVect.imag *= SIGLIB_MINUS_ONE;
-        *pDst++ = IVect;
-    }
-}       // End of SDA_ComplexRectConjugate()
+  for (i = 0; i < ArrayLength; i++) {
+    IVect = *pSrc++;
+    IVect.imag *= SIGLIB_MINUS_ONE;
+    *pDst++ = IVect;
+  }
+}                                                                   // End of SDA_ComplexRectConjugate()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexRectMagnitude
 *
@@ -737,29 +750,30 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexRectMagnitude (const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexRectMagnitude (
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
-    SLComplexRect_s         IVect;
+  SLArrayIndex_t  i;
+  SLComplexRect_s IVect;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        IVect = *pSrc++;
-        *pDst++ = SDS_Sqrt (IVect.real * IVect.real + IVect.imag * IVect.imag);
-    }
-}       // End of SDA_ComplexRectMagnitude()
+  for (i = 0; i < ArrayLength; i++) {
+    IVect = *pSrc++;
+    *pDst++ = SDS_Sqrt (IVect.real * IVect.real + IVect.imag * IVect.imag);
+  }
+}                                                                   // End of SDA_ComplexRectMagnitude()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexRectMagnitudeSquared
 *
@@ -776,29 +790,30 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexRectMagnitudeSquared (const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexRectMagnitudeSquared (
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
-    SLComplexRect_s         IVect;
+  SLArrayIndex_t  i;
+  SLComplexRect_s IVect;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        IVect = *pSrc++;
-        *pDst++ = IVect.real * IVect.real + IVect.imag * IVect.imag;
-    }
-}       // End of SDA_ComplexRectMagnitudeSquared()
+  for (i = 0; i < ArrayLength; i++) {
+    IVect = *pSrc++;
+    *pDst++ = IVect.real * IVect.real + IVect.imag * IVect.imag;
+  }
+}                                                                   // End of SDA_ComplexRectMagnitudeSquared()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexRectPhase
 *
@@ -815,29 +830,30 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexRectPhase (const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexRectPhase (
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
-    SLComplexRect_s         IVect;
+  SLArrayIndex_t  i;
+  SLComplexRect_s IVect;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        IVect = *pSrc++;
-        *pDst++ = SDS_Atan2(IVect.imag, IVect.real);
-    }
-}       // End of SDA_ComplexRectPhase()
+  for (i = 0; i < ArrayLength; i++) {
+    IVect = *pSrc++;
+    *pDst++ = SDS_Atan2 (IVect.imag, IVect.real);
+  }
+}                                                                   // End of SDA_ComplexRectPhase()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexRectMultiply
 *
@@ -855,34 +871,35 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexRectMultiply (const SLComplexRect_s * SIGLIB_PTR_DECL pSrc1,
-    const SLComplexRect_s * SIGLIB_PTR_DECL pSrc2,
-    SLComplexRect_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexRectMultiply (
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc1,
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc2,
+  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
-    SLComplexRect_s         IVect1, IVect2, OVect;
+  SLArrayIndex_t  i;
+  SLComplexRect_s IVect1, IVect2, OVect;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc2 % 8 == 0);
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        IVect1 = *pSrc1++;
-        IVect2 = *pSrc2++;
-        OVect.real = IVect1.real*IVect2.real - IVect1.imag*IVect2.imag;
-        OVect.imag = IVect1.real*IVect2.imag + IVect1.imag*IVect2.real;
-        *pDst++ = OVect;
-    }
-}       // End of SDA_ComplexRectMultiply()
+  for (i = 0; i < ArrayLength; i++) {
+    IVect1 = *pSrc1++;
+    IVect2 = *pSrc2++;
+    OVect.real = IVect1.real * IVect2.real - IVect1.imag * IVect2.imag;
+    OVect.imag = IVect1.real * IVect2.imag + IVect1.imag * IVect2.real;
+    *pDst++ = OVect;
+  }
+}                                                                   // End of SDA_ComplexRectMultiply()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexRectDivide
 *
@@ -900,49 +917,50 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexRectDivide (const SLComplexRect_s * SIGLIB_PTR_DECL pSrc1,
-    const SLComplexRect_s * SIGLIB_PTR_DECL pSrc2,
-    SLComplexRect_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexRectDivide (
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc1,
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc2,
+  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
-    SLComplexRect_s         Numerator, Divisor, OVect, Result;
-    SLData_t                Denominator;
+  SLArrayIndex_t  i;
+  SLComplexRect_s Numerator, Divisor, OVect, Result;
+  SLData_t        Denominator;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc2 % 8 == 0);
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        Numerator = *pSrc1++;
-        Divisor = *pSrc2++;
-        Denominator = SIGLIB_ONE / (Divisor.real * Divisor.real + Divisor.imag * Divisor.imag);
+  for (i = 0; i < ArrayLength; i++) {
+    Numerator = *pSrc1++;
+    Divisor = *pSrc2++;
+    Denominator = SIGLIB_ONE / (Divisor.real * Divisor.real + Divisor.imag * Divisor.imag);
 
-        if (Denominator == SIGLIB_ZERO) {               // Check for divide by zero
-            Result.real = SIGLIB_ONE;
-            Result.imag = SIGLIB_ZERO;
-        }
-
-        else {
-                                                        // Negate the divisor
-            OVect.real =  Divisor.real * Denominator;
-            OVect.imag = -Divisor.imag * Denominator;
-
-                                                        // Multiply numerator by divisor
-            Result.real = Numerator.real * OVect.real - Numerator.imag * OVect.imag;
-            Result.imag = Numerator.real * OVect.imag + Numerator.imag * OVect.real;
-        }
-        *pDst++ = Result;
+    if (Denominator == SIGLIB_ZERO) {                               // Check for divide by zero
+      Result.real = SIGLIB_ONE;
+      Result.imag = SIGLIB_ZERO;
     }
-}       // End of SDA_ComplexRectDivide()
+
+    else {
+// Negate the divisor
+      OVect.real = Divisor.real * Denominator;
+      OVect.imag = -Divisor.imag * Denominator;
+
+// Multiply numerator by divisor
+      Result.real = Numerator.real * OVect.real - Numerator.imag * OVect.imag;
+      Result.imag = Numerator.real * OVect.imag + Numerator.imag * OVect.real;
+    }
+    *pDst++ = Result;
+  }
+}                                                                   // End of SDA_ComplexRectDivide()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexRectAdd
 *
@@ -960,34 +978,35 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexRectAdd (const SLComplexRect_s * SIGLIB_PTR_DECL pSrc1,
-    const SLComplexRect_s * SIGLIB_PTR_DECL pSrc2,
-    SLComplexRect_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexRectAdd (
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc1,
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc2,
+  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
-    SLComplexRect_s         IVect1, IVect2, OVect;
+  SLArrayIndex_t  i;
+  SLComplexRect_s IVect1, IVect2, OVect;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc2 % 8 == 0);
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        IVect1 = *pSrc1++;
-        IVect2 = *pSrc2++;
-        OVect.real = IVect1.real + IVect2.real;
-        OVect.imag = IVect1.imag + IVect2.imag;
-        *pDst++ = OVect;
-    }
-}       // End of SDA_ComplexRectAdd()
+  for (i = 0; i < ArrayLength; i++) {
+    IVect1 = *pSrc1++;
+    IVect2 = *pSrc2++;
+    OVect.real = IVect1.real + IVect2.real;
+    OVect.imag = IVect1.imag + IVect2.imag;
+    *pDst++ = OVect;
+  }
+}                                                                   // End of SDA_ComplexRectAdd()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexRectSubtract
 *
@@ -1005,34 +1024,35 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexRectSubtract (const SLComplexRect_s * SIGLIB_PTR_DECL pSrc1,
-    const SLComplexRect_s * SIGLIB_PTR_DECL pSrc2,
-    SLComplexRect_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexRectSubtract (
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc1,
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc2,
+  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
-    SLComplexRect_s         IVect1, IVect2, OVect;
+  SLArrayIndex_t  i;
+  SLComplexRect_s IVect1, IVect2, OVect;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc2 % 8 == 0);
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        IVect1 = *pSrc1++;
-        IVect2 = *pSrc2++;
-        OVect.real = IVect1.real - IVect2.real;
-        OVect.imag = IVect1.imag - IVect2.imag;
-        *pDst++ = OVect;
-    }
-}       // End of SDA_ComplexRectSubtract()
+  for (i = 0; i < ArrayLength; i++) {
+    IVect1 = *pSrc1++;
+    IVect2 = *pSrc2++;
+    OVect.real = IVect1.real - IVect2.real;
+    OVect.imag = IVect1.imag - IVect2.imag;
+    *pDst++ = OVect;
+  }
+}                                                                   // End of SDA_ComplexRectSubtract()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexRectLog
 *
@@ -1049,31 +1069,32 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexRectLog (const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
-    SLComplexRect_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexRectLog (
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
-    SLComplexRect_s         IVect, OVect;
+  SLArrayIndex_t  i;
+  SLComplexRect_s IVect, OVect;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        IVect = *pSrc++;
-        OVect.real = SIGLIB_HALF * SDS_Log (IVect.real * IVect.real + IVect.imag * IVect.imag);
-        OVect.imag = SDS_Atan2 (IVect.imag, IVect.real);
-        *pDst++ = OVect;
-    }
-}       // End of SDA_ComplexRectLog()
+  for (i = 0; i < ArrayLength; i++) {
+    IVect = *pSrc++;
+    OVect.real = SIGLIB_HALF * SDS_Log (IVect.real * IVect.real + IVect.imag * IVect.imag);
+    OVect.imag = SDS_Atan2 (IVect.imag, IVect.real);
+    *pDst++ = OVect;
+  }
+}                                                                   // End of SDA_ComplexRectLog()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexRectExp
 *
@@ -1090,34 +1111,35 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexRectExp (const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
-    SLComplexRect_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexRectExp (
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
-    SLComplexRect_s         IVect, OVect;
-    SLData_t                FTmp;
+  SLArrayIndex_t  i;
+  SLComplexRect_s IVect, OVect;
+  SLData_t        FTmp;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        IVect = *pSrc++;
-        FTmp = SDS_Exp ( IVect.real);
-        OVect.imag = FTmp * SDS_Sin (IVect.imag);
-        OVect.real = FTmp * SDS_Cos (IVect.imag);
-        *pDst++ = OVect;
-    }
+  for (i = 0; i < ArrayLength; i++) {
+    IVect = *pSrc++;
+    FTmp = SDS_Exp (IVect.real);
+    OVect.imag = FTmp * SDS_Sin (IVect.imag);
+    OVect.real = FTmp * SDS_Cos (IVect.imag);
+    *pDst++ = OVect;
+  }
 
-}       // End of SDA_ComplexRectExp()
+}                                                                   // End of SDA_ComplexRectExp()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexRectExpj
 *
@@ -1134,28 +1156,29 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexRectExpj (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLComplexRect_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexRectExpj (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        *pDst++ = SCV_Rectangular (SDS_Cos (*pSrc), SDS_Sin (*pSrc));
-        pSrc++;
-    }
-}       // End of SDA_ComplexRectExpj()
+  for (i = 0; i < ArrayLength; i++) {
+    *pDst++ = SCV_Rectangular (SDS_Cos (*pSrc), SDS_Sin (*pSrc));
+    pSrc++;
+  }
+}                                                                   // End of SDA_ComplexRectExpj()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexRectPow
 *
@@ -1173,46 +1196,46 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexRectPow (const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
-    SLComplexRect_s * SIGLIB_PTR_DECL pDst,
-    const SLData_t Power,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexRectPow (
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+  const SLData_t Power,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
-    SLComplexRect_s         IVect, OVect;
-    SLData_t                Magn, Angle;
+  SLArrayIndex_t  i;
+  SLComplexRect_s IVect, OVect;
+  SLData_t        Magn, Angle;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        IVect = *pSrc++;
-        if (((IVect.real < SIGLIB_MIN_THRESHOLD) && // Check for close to zero
-            (IVect.real > -SIGLIB_MIN_THRESHOLD)) &&
-            ((IVect.imag < SIGLIB_MIN_THRESHOLD) && // Check for close to zero
-            (IVect.imag > -SIGLIB_MIN_THRESHOLD))) {
+  for (i = 0; i < ArrayLength; i++) {
+    IVect = *pSrc++;
+    if (((IVect.real < SIGLIB_MIN_THRESHOLD) &&                     // Check for close to zero
+         (IVect.real > -SIGLIB_MIN_THRESHOLD)) && ((IVect.imag < SIGLIB_MIN_THRESHOLD) && // Check for close to zero
+                                                   (IVect.imag > -SIGLIB_MIN_THRESHOLD))) {
 
-            OVect.real = SIGLIB_ZERO;
-            OVect.imag = SIGLIB_ZERO;
-            *pDst++ = OVect;
-        }
-        else {
-            Magn = SDS_Exp (Power * SDS_Log (SDS_Sqrt (IVect.real * IVect.real + IVect.imag * IVect.imag)));
-            Angle = SDS_Atan2 (IVect.imag, IVect.real);
-            OVect.real = Magn * SDS_Cos (Power * Angle);
-            OVect.imag = Magn * SDS_Sin (Power * Angle);
-            *pDst++ = OVect;
-        }
+      OVect.real = SIGLIB_ZERO;
+      OVect.imag = SIGLIB_ZERO;
+      *pDst++ = OVect;
     }
-}       // End of SDA_ComplexRectPow()
+    else {
+      Magn = SDS_Exp (Power * SDS_Log (SDS_Sqrt (IVect.real * IVect.real + IVect.imag * IVect.imag)));
+      Angle = SDS_Atan2 (IVect.imag, IVect.real);
+      OVect.real = Magn * SDS_Cos (Power * Angle);
+      OVect.imag = Magn * SDS_Sin (Power * Angle);
+      *pDst++ = OVect;
+    }
+  }
+}                                                                   // End of SDA_ComplexRectPow()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexRectAddScalar
 *
@@ -1230,32 +1253,33 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexRectAddScalar (const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
-    const SLData_t Scalar,
-    SLComplexRect_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexRectAddScalar (
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+  const SLData_t Scalar,
+  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
-    SLComplexRect_s         IVect, OVect;
+  SLArrayIndex_t  i;
+  SLComplexRect_s IVect, OVect;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        IVect = *pSrc++;
-        OVect.real = IVect.real + Scalar;
-        OVect.imag = IVect.imag;
-        *pDst++ = OVect;
-    }
-}       // End of SDA_ComplexRectAddScalar()
+  for (i = 0; i < ArrayLength; i++) {
+    IVect = *pSrc++;
+    OVect.real = IVect.real + Scalar;
+    OVect.imag = IVect.imag;
+    *pDst++ = OVect;
+  }
+}                                                                   // End of SDA_ComplexRectAddScalar()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexRectSubtractScalar
 *
@@ -1273,32 +1297,33 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexRectSubtractScalar (const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
-    const SLData_t Scalar,
-    SLComplexRect_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexRectSubtractScalar (
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+  const SLData_t Scalar,
+  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
-    SLComplexRect_s         IVect, OVect;
+  SLArrayIndex_t  i;
+  SLComplexRect_s IVect, OVect;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        IVect = *pSrc++;
-        OVect.real = IVect.real - Scalar;
-        OVect.imag = IVect.imag;
-        *pDst++ = OVect;
-    }
-}       // End of SDA_ComplexRectSubtractScalar()
+  for (i = 0; i < ArrayLength; i++) {
+    IVect = *pSrc++;
+    OVect.real = IVect.real - Scalar;
+    OVect.imag = IVect.imag;
+    *pDst++ = OVect;
+  }
+}                                                                   // End of SDA_ComplexRectSubtractScalar()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexRectMultiplyScalar
 *
@@ -1316,32 +1341,33 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexRectMultiplyScalar (const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
-    const SLData_t Scalar,
-    SLComplexRect_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexRectMultiplyScalar (
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+  const SLData_t Scalar,
+  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
-    SLComplexRect_s         IVect, OVect;
+  SLArrayIndex_t  i;
+  SLComplexRect_s IVect, OVect;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        IVect = *pSrc++;
-        OVect.real = IVect.real * Scalar;
-        OVect.imag = IVect.imag * Scalar;
-        *pDst++ = OVect;
-    }
-}       // End of SDA_ComplexRectMultiplyScalar()
+  for (i = 0; i < ArrayLength; i++) {
+    IVect = *pSrc++;
+    OVect.real = IVect.real * Scalar;
+    OVect.imag = IVect.imag * Scalar;
+    *pDst++ = OVect;
+  }
+}                                                                   // End of SDA_ComplexRectMultiplyScalar()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexRectDivideScalar
 *
@@ -1359,33 +1385,34 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexRectDivideScalar (const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
-    const SLData_t Scalar,
-    SLComplexRect_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexRectDivideScalar (
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+  const SLData_t Scalar,
+  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
-    SLComplexRect_s         IVect, OVect;
-    SLData_t                InvDivisor = SIGLIB_ONE / Scalar;
+  SLArrayIndex_t  i;
+  SLComplexRect_s IVect, OVect;
+  SLData_t        InvDivisor = SIGLIB_ONE / Scalar;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        IVect = *pSrc++;
-        OVect.real = IVect.real * InvDivisor;
-        OVect.imag = IVect.imag * InvDivisor;
-        *pDst++ = OVect;
-    }
-}       // End of SDA_ComplexRectDivideScalar()
+  for (i = 0; i < ArrayLength; i++) {
+    IVect = *pSrc++;
+    OVect.real = IVect.real * InvDivisor;
+    OVect.imag = IVect.imag * InvDivisor;
+    *pDst++ = OVect;
+  }
+}                                                                   // End of SDA_ComplexRectDivideScalar()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexScalarSubtractRect
 *
@@ -1403,32 +1430,33 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexScalarSubtractRect (const SLData_t Scalar,
-    const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
-    SLComplexRect_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexScalarSubtractRect (
+  const SLData_t Scalar,
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
-    SLComplexRect_s         IVect, OVect;
+  SLArrayIndex_t  i;
+  SLComplexRect_s IVect, OVect;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < ArrayLength; i++) {
-        IVect = *pSrc++;
-        OVect.real = Scalar - IVect.real;
-        OVect.imag = -IVect.imag;
-        *pDst++ = OVect;
-    }
-}       // End of SDA_ComplexScalarSubtractRect()
+  for (i = 0; i < ArrayLength; i++) {
+    IVect = *pSrc++;
+    OVect.real = Scalar - IVect.real;
+    OVect.imag = -IVect.imag;
+    *pDst++ = OVect;
+  }
+}                                                                   // End of SDA_ComplexScalarSubtractRect()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexRectLinearInterpolate
 *
@@ -1447,35 +1475,39 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexRectLinearInterpolate (const SLComplexRect_s rPoint1,
-    const SLComplexRect_s rPoint2,
-    SLComplexRect_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t NumberOfInterpolatedPoints)
-
+void SIGLIB_FUNC_DECL SDA_ComplexRectLinearInterpolate (
+  const SLComplexRect_s rPoint1,
+  const SLComplexRect_s rPoint2,
+  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t NumberOfInterpolatedPoints)
 {
-    SLArrayIndex_t      i;
-    SLComplexRect_s     Step, PreviousPoint;
+  SLArrayIndex_t  i;
+  SLComplexRect_s Step, PreviousPoint;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    Step = SCV_VectorDivideScalar (SCV_Subtract (rPoint2, rPoint1), (NumberOfInterpolatedPoints+1));
+  Step = SCV_VectorDivideScalar (SCV_Subtract (rPoint2, rPoint1), (NumberOfInterpolatedPoints + 1));
 
-    PreviousPoint = rPoint1;
-    pDst->real = PreviousPoint.real;    pDst++->imag = PreviousPoint.imag;
-    for (i = 0; i < NumberOfInterpolatedPoints; i++) {
-        PreviousPoint = SCV_Add (PreviousPoint, Step);
-        pDst->real = PreviousPoint.real;    pDst++->imag = PreviousPoint.imag;
-    }
-    pDst->real = rPoint2.real;  pDst++->imag = rPoint2.imag;
+  PreviousPoint = rPoint1;
+  pDst->real = PreviousPoint.real;
+  pDst++->imag = PreviousPoint.imag;
+  for (i = 0; i < NumberOfInterpolatedPoints; i++) {
+    PreviousPoint = SCV_Add (PreviousPoint, Step);
+    pDst->real = PreviousPoint.real;
+    pDst++->imag = PreviousPoint.imag;
+  }
+  pDst->real = rPoint2.real;
+  pDst++->imag = rPoint2.imag;
 
-}           // End of SDA_ComplexRectLinearInterpolate()
+}                                                                   // End of SDA_ComplexRectLinearInterpolate()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexPolarLinearInterpolate
 *
@@ -1494,36 +1526,35 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexPolarLinearInterpolate (const SLComplexPolar_s Point1,
-    const SLComplexPolar_s Point2,
-    SLComplexPolar_s * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t NumberOfInterpolatedPoints)
-
+void SIGLIB_FUNC_DECL SDA_ComplexPolarLinearInterpolate (
+  const SLComplexPolar_s Point1,
+  const SLComplexPolar_s Point2,
+  SLComplexPolar_s * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t NumberOfInterpolatedPoints)
 {
-    SLArrayIndex_t      i;
-    SLData_t            rStep, AStep, APrevious, rPrevious;
+  SLArrayIndex_t  i;
+  SLData_t        rStep, AStep, APrevious, rPrevious;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    rStep = (Point2.magn - Point1.magn) / (NumberOfInterpolatedPoints+1);
-    AStep = (Point2.angle - Point1.angle) / (NumberOfInterpolatedPoints+1);
+  rStep = (Point2.magn - Point1.magn) / (NumberOfInterpolatedPoints + 1);
+  AStep = (Point2.angle - Point1.angle) / (NumberOfInterpolatedPoints + 1);
 
-    rPrevious = Point1.magn;
-    APrevious = Point1.angle;
+  rPrevious = Point1.magn;
+  APrevious = Point1.angle;
+  pDst->magn = rPrevious;
+  pDst++->angle = APrevious;
+  for (i = 0; i < NumberOfInterpolatedPoints; i++) {
+    rPrevious += rStep;
+    APrevious += AStep;
     pDst->magn = rPrevious;
     pDst++->angle = APrevious;
-    for (i = 0; i < NumberOfInterpolatedPoints; i++) {
-        rPrevious += rStep;
-        APrevious += AStep;
-        pDst->magn = rPrevious;
-        pDst++->angle = APrevious;
-    }
-    pDst->magn = Point2.magn;
-    pDst++->angle = Point2.angle;
+  }
+  pDst->magn = Point2.magn;
+  pDst++->angle = Point2.angle;
 
-}           // End of SDA_ComplexPolarLinearInterpolate()
-
+}                                                                   // End of SDA_ComplexPolarLinearInterpolate()

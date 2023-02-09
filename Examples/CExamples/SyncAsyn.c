@@ -3,7 +3,7 @@
 
 // Include files
 #include <stdio.h>
-#include <siglib.h>                                 // SigLib DSP library
+#include <siglib.h>                                                 // SigLib DSP library
 #include "dpchar.h"
 
 // Define constants
@@ -45,129 +45,125 @@ static const unsigned char SyncSequence[] = "Hello World - abcdefghijklmnopqrstu
 static unsigned char AsyncSequence[80];
 static unsigned char ReSyncSequence[80];
 
-static SLArrayIndex_t  StopBitRemoveCounter;
+static SLArrayIndex_t StopBitRemoveCounter;
 
 
-int main (void)
+int main (
+  void)
 {
-    SLArrayIndex_t  NumberOfBytesConverted;
-    SLArrayIndex_t  i;
-    SLArrayIndex_t  ParityErrorFlag;
-    SLArrayIndex_t  NumberOfAsyncBitsPerByte =
-                        SUF_AsyncCharacterLength (NUMBER_OF_ASYNCH_BITS_PER_BYTE,   // Number of bits in the data word
-                                                  ASYNCH_PARITY_TYPE,               // Parity type
-                                                  NUMBER_OF_ASYNCH_STOP_BITS);      // Number of stop bits
+  SLArrayIndex_t  NumberOfBytesConverted;
+  SLArrayIndex_t  i;
+  SLArrayIndex_t  ParityErrorFlag;
+  SLArrayIndex_t  NumberOfAsyncBitsPerByte = SUF_AsyncCharacterLength (NUMBER_OF_ASYNCH_BITS_PER_BYTE,  // Number of bits in the data word
+                                                                       ASYNCH_PARITY_TYPE,  // Parity type
+                                                                       NUMBER_OF_ASYNCH_STOP_BITS); // Number of stop bits
 
-    SUF_ClearDebugfprintf();
+  SUF_ClearDebugfprintf ();
 
-    printf ("Number of bits per character = %d\n", (int)NUMBER_OF_ASYNCH_BITS_PER_BYTE);
-    printf ("Number of stop bits per character = %d\n", (int)NUMBER_OF_ASYNCH_STOP_BITS);
-    SUF_Debugfprintf ("Number of bits per character = %d\n", (int)NUMBER_OF_ASYNCH_BITS_PER_BYTE);
-    SUF_Debugfprintf ("Number of stop bits per character = %d\n", (int)NUMBER_OF_ASYNCH_STOP_BITS);
+  printf ("Number of bits per character = %d\n", (int) NUMBER_OF_ASYNCH_BITS_PER_BYTE);
+  printf ("Number of stop bits per character = %d\n", (int) NUMBER_OF_ASYNCH_STOP_BITS);
+  SUF_Debugfprintf ("Number of bits per character = %d\n", (int) NUMBER_OF_ASYNCH_BITS_PER_BYTE);
+  SUF_Debugfprintf ("Number of stop bits per character = %d\n", (int) NUMBER_OF_ASYNCH_STOP_BITS);
 #if (ASYNCH_PARITY_TYPE == SIGLIB_NO_PARITY)
-    printf ("No parity\n");
-    SUF_Debugfprintf ("No parity\n");
+  printf ("No parity\n");
+  SUF_Debugfprintf ("No parity\n");
 #elif (ASYNCH_PARITY_TYPE == SIGLIB_EVEN_PARITY)
-    printf ("Even parity\n");
-    SUF_Debugfprintf ("Even parity\n");
+  printf ("Even parity\n");
+  SUF_Debugfprintf ("Even parity\n");
 #elif (ASYNCH_PARITY_TYPE == SIGLIB_ODD_PARITY)
-    printf ("Odd parity\n");
-    SUF_Debugfprintf ("Odd parity\n");
+  printf ("Odd parity\n");
+  SUF_Debugfprintf ("Odd parity\n");
 #endif
-    printf ("Number of asynchronous bits per character = %d\n\n", (int)NumberOfAsyncBitsPerByte);
-    SUF_Debugfprintf ("Number of asynchronous bits per character = %d\n\n", (int)NumberOfAsyncBitsPerByte);
+  printf ("Number of asynchronous bits per character = %d\n\n", (int) NumberOfAsyncBitsPerByte);
+  SUF_Debugfprintf ("Number of asynchronous bits per character = %d\n\n", (int) NumberOfAsyncBitsPerByte);
 
-    // Test with a bunch of 1111s at the start before the sequence
+// Test with a bunch of 1111s at the start before the sequence
 
-    NumberOfBytesConverted =
-        SDA_SyncToAsyncConverter (SyncSequence,                     // Pointer to source data
-                                  AsyncSequence,                    // Pointer to destination data
-                                  NUMBER_OF_ASYNCH_BITS_PER_BYTE,   // Number of bits in the data word
-                                  ASYNCH_PARITY_TYPE,               // Parity type
-                                  NUMBER_OF_ASYNCH_STOP_BITS,       // Number of stop bits
-                                  NUMBER_OF_SAMPLES);               // Source array length
+  NumberOfBytesConverted = SDA_SyncToAsyncConverter (SyncSequence,  // Pointer to source data
+                                                     AsyncSequence, // Pointer to destination data
+                                                     NUMBER_OF_ASYNCH_BITS_PER_BYTE,  // Number of bits in the data word
+                                                     ASYNCH_PARITY_TYPE,  // Parity type
+                                                     NUMBER_OF_ASYNCH_STOP_BITS,  // Number of stop bits
+                                                     NUMBER_OF_SAMPLES);  // Source array length
 
-    printf ("SDA_SyncToAsyncConverter - number of bytes converted = %d\n", NumberOfBytesConverted);
+  printf ("SDA_SyncToAsyncConverter - number of bytes converted = %d\n", NumberOfBytesConverted);
 
-    for (i = 0; i < NumberOfBytesConverted; i++) {
-        SUF_Debugfprintf ("AsyncSequence[%d]", i);
-        dpchar (AsyncSequence[i]);
-    }
+  for (i = 0; i < NumberOfBytesConverted; i++) {
+    SUF_Debugfprintf ("AsyncSequence[%d]", i);
+    dpchar (AsyncSequence[i]);
+  }
 
 // If the sequence "0x00, 0x01, 0x02 ..." is used then the next line can be uncommented to test
 // Parity error checking. This will convert the 3rd character from 0x03 to 0x07
 // This works with 8 data bits, 1 stop bit and both even and odd parity
 //  AsyncSequence[4] = 0x1d;
 
-    NumberOfBytesConverted =
-        SDA_AsyncToSyncConverter (AsyncSequence,                    // Pointer to source data
-                                  ReSyncSequence,                   // Pointer to destination data
-                                  NUMBER_OF_ASYNCH_BITS_PER_BYTE,   // Number of bits in the data word
-                                  ASYNCH_PARITY_TYPE,               // Parity type
-                                  &ParityErrorFlag,                 // Number of stop bits
-                                  NumberOfBytesConverted);          // Source array length
+  NumberOfBytesConverted = SDA_AsyncToSyncConverter (AsyncSequence, // Pointer to source data
+                                                     ReSyncSequence,  // Pointer to destination data
+                                                     NUMBER_OF_ASYNCH_BITS_PER_BYTE,  // Number of bits in the data word
+                                                     ASYNCH_PARITY_TYPE,  // Parity type
+                                                     &ParityErrorFlag,  // Number of stop bits
+                                                     NumberOfBytesConverted); // Source array length
 
-    printf ("SDA_AsyncToSyncConverter - number of bytes converted = %d\n", NumberOfBytesConverted);
-    printf ("SDA_AsyncToSyncConverter - ParityErrorFlag = %d\n", ParityErrorFlag);
+  printf ("SDA_AsyncToSyncConverter - number of bytes converted = %d\n", NumberOfBytesConverted);
+  printf ("SDA_AsyncToSyncConverter - ParityErrorFlag = %d\n", ParityErrorFlag);
 
-    SUF_Debugfprintf ("\n", i);
+  SUF_Debugfprintf ("\n", i);
 
-    for (i = 0; i < NumberOfBytesConverted; i++) {
-        SUF_Debugfprintf ("ReSyncSequence[%d]", i);
-        dpchar (ReSyncSequence[i]);
-    }
+  for (i = 0; i < NumberOfBytesConverted; i++) {
+    SUF_Debugfprintf ("ReSyncSequence[%d]", i);
+    dpchar (ReSyncSequence[i]);
+  }
 
-    ReSyncSequence[NumberOfBytesConverted] = '\0';                  // Add trailing NULL to end of string
-    printf ("ReAsync string = %s\n", ReSyncSequence);
-
-
-    SUF_Debugfprintf ("\n", i);
-
-    for (i = 0; i < 20; i++) {
-        SUF_Debugfprintf ("Input to stop bit remove[%d]", i);
-        dpchar (ReSyncSequence[i]);
-    }
-
-    SIF_AsyncAddRemoveStopBits (&StopBitRemoveCounter);             // Pointer to stop bits removed counter
-
-    NumberOfBytesConverted =
-        SDA_AsyncRemoveStopBits (ReSyncSequence,                    // Pointer to source data
-                                 AsyncSequence,                     // Pointer to destination data
-                                 NUMBER_OF_ASYNCH_BITS_PER_BYTE,    // Number of bits in the data word
-                                 ASYNCH_PARITY_TYPE,                // Parity type
-                                 4,                                 // Ratio of stop bits removed
-                                 &StopBitRemoveCounter,             // Pointer to stop bits removed counter
-                                 20);                               // Source array length
-
-    printf ("SDA_AsyncRemoveStopBits - number of bytes converted = %d\n", NumberOfBytesConverted);
-
-    SUF_Debugfprintf ("\n", i);
-
-    for (i = 0; i < NumberOfBytesConverted; i++) {
-        SUF_Debugfprintf ("Stop bit removed sequence[%d]", i);
-        dpchar (AsyncSequence[i]);
-    }
+  ReSyncSequence[NumberOfBytesConverted] = '\0';                    // Add trailing NULL to end of string
+  printf ("ReAsync string = %s\n", ReSyncSequence);
 
 
-    SIF_AsyncAddRemoveStopBits (&StopBitRemoveCounter);         // Pointer to stop bits added counter
+  SUF_Debugfprintf ("\n", i);
 
-    NumberOfBytesConverted =
-        SDA_AsyncAddStopBits (AsyncSequence,                    // Pointer to source data
-                              ReSyncSequence,                   // Pointer to destination data
-                              NUMBER_OF_ASYNCH_BITS_PER_BYTE,   // Number of bits in the data word
-                              ASYNCH_PARITY_TYPE,               // Parity type
-                              3,                                // Ratio of stop bits added
-                              &StopBitRemoveCounter,            // Pointer to stop bits added counter
-                              20);                              // Source array length
+  for (i = 0; i < 20; i++) {
+    SUF_Debugfprintf ("Input to stop bit remove[%d]", i);
+    dpchar (ReSyncSequence[i]);
+  }
 
-    printf ("SDA_AsyncAddStopBits - number of bytes converted = %d\n", NumberOfBytesConverted);
+  SIF_AsyncAddRemoveStopBits (&StopBitRemoveCounter);               // Pointer to stop bits removed counter
 
-    SUF_Debugfprintf ("\n", i);
+  NumberOfBytesConverted = SDA_AsyncRemoveStopBits (ReSyncSequence, // Pointer to source data
+                                                    AsyncSequence,  // Pointer to destination data
+                                                    NUMBER_OF_ASYNCH_BITS_PER_BYTE, // Number of bits in the data word
+                                                    ASYNCH_PARITY_TYPE, // Parity type
+                                                    4,              // Ratio of stop bits removed
+                                                    &StopBitRemoveCounter,  // Pointer to stop bits removed counter
+                                                    20);            // Source array length
 
-    for (i = 0; i < NumberOfBytesConverted; i++) {
-        SUF_Debugfprintf ("Stop bit added sequence[%d]", i);
-        dpchar (ReSyncSequence[i]);
-    }
+  printf ("SDA_AsyncRemoveStopBits - number of bytes converted = %d\n", NumberOfBytesConverted);
 
-    exit(0);
+  SUF_Debugfprintf ("\n", i);
+
+  for (i = 0; i < NumberOfBytesConverted; i++) {
+    SUF_Debugfprintf ("Stop bit removed sequence[%d]", i);
+    dpchar (AsyncSequence[i]);
+  }
+
+
+  SIF_AsyncAddRemoveStopBits (&StopBitRemoveCounter);               // Pointer to stop bits added counter
+
+  NumberOfBytesConverted = SDA_AsyncAddStopBits (AsyncSequence,     // Pointer to source data
+                                                 ReSyncSequence,    // Pointer to destination data
+                                                 NUMBER_OF_ASYNCH_BITS_PER_BYTE,  // Number of bits in the data word
+                                                 ASYNCH_PARITY_TYPE,  // Parity type
+                                                 3,                 // Ratio of stop bits added
+                                                 &StopBitRemoveCounter, // Pointer to stop bits added counter
+                                                 20);               // Source array length
+
+  printf ("SDA_AsyncAddStopBits - number of bytes converted = %d\n", NumberOfBytesConverted);
+
+  SUF_Debugfprintf ("\n", i);
+
+  for (i = 0; i < NumberOfBytesConverted; i++) {
+    SUF_Debugfprintf ("Stop bit added sequence[%d]", i);
+    dpchar (ReSyncSequence[i]);
+  }
+
+  exit (0);
 }

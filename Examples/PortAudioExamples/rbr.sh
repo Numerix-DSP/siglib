@@ -11,5 +11,5 @@ rm -f "$executable_filename"                                     # Remove the ex
 
 if [ -f $executable_filename ]
 then
-    ./$executable_filename $2 $3 $4 $5 $6 $7 $8 $9 $10
+  ./$executable_filename $2 $3 $4 $5 $6 $7 $8 $9 $10
 fi

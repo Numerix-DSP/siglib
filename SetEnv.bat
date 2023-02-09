@@ -15,7 +15,7 @@ rem The SigLib graphical examples use gnuplot, which can be downloaded from here
 set PATH=C:\Program Files\gnuplot\bin;%PATH%
 
 rem SigLib Environment Variables
-set PATH=%PATH%;%SIGLIB_PATH%\Utils;%SIGLIB_PATH%\Examples\FileIO
+set PATH=%PATH%;%SIGLIB_PATH%\utils;%SIGLIB_PATH%\Examples\FileIO
 
 rem Microsoft Visual C/C++ SigLib Environment Variables
 set INCLUDE=%INCLUDE%;%SIGLIB_PATH%\include;c:\portaudio_v19\include

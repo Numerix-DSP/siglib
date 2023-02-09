@@ -1,3 +1,4 @@
+
 /**************************************************************************
 File Name               : SIGLIBCH.H    | Author        : JOHN EDWARDS
 Siglib Library Version  : 10.00         |
@@ -84,4 +85,3 @@ Description : Ch header file for SigLib DSP library
 #pragma import </siglib/src/trig.c>
 #pragma import </siglib/src/viterbi.c>
 #pragma import </siglib/src/window.c>
-

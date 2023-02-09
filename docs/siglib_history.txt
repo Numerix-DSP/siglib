@@ -1,27 +1,49 @@
 SigLib (Tm) Revision Update History File
 ========================================
 
+VERSION : 10.31
+RELEASE DATE : 09/02/2023
+_________________________
+
+Additional Processor / Compiler Support :
+  None.
+
+Additional Functionality :
+  None.
+
+Bug Fixes :
+  None.
+
+Operational Changes :
+  None.
+
+Optimisation Changes :
+  None.
+
+Notes :
+  Code re-indented for 2 character indent
+
 VERSION : 10.30
 RELEASE DATE : 19/12/2022
 _________________________
 
 Additional Processor / Compiler Support :
-    None.
+  None.
 
 Additional Functionality :
-    SDA_TwoLayer2CategoryWithBiasesNetworkFit, SDA_TwoLayer2CategoryWithBiasesNetworkPredict,
-    SDA_TwoLayerNCategoryWithBiasesNetworkFit, SDA_TwoLayerNCategoryWithBiasesNetworkPredict.
-    SUF_WriteWeightsWithBiasesIntegerCFile, SUF_WriteWeightsWithBiasesFloatCFile,
-    SUF_WriteWeightsWithBiasesBinaryFile, SUF_ReadWeightsWithBiasesBinaryFile
+  SDA_TwoLayer2CategoryWithBiasesNetworkFit, SDA_TwoLayer2CategoryWithBiasesNetworkPredict,
+  SDA_TwoLayerNCategoryWithBiasesNetworkFit, SDA_TwoLayerNCategoryWithBiasesNetworkPredict.
+  SUF_WriteWeightsWithBiasesIntegerCFile, SUF_WriteWeightsWithBiasesFloatCFile,
+  SUF_WriteWeightsWithBiasesBinaryFile, SUF_ReadWeightsWithBiasesBinaryFile
 
 Bug Fixes :
-    None.
+  None.
 
 Operational Changes :
-    None.
+  None.
 
 Optimisation Changes :
-    None.
+  None.
 
 Notes :
 
@@ -31,19 +53,19 @@ RELEASE DATE : 19/12/2022
 _________________________
 
 Additional Processor / Compiler Support :
-    Updated TI C6x support.
+  Updated TI C6x support.
 
 Additional Functionality :
-    None.
+  None.
 
 Bug Fixes :
-    None.
+  None.
 
 Operational Changes :
-    None.
+  None.
 
 Optimisation Changes :
-    None.
+  None.
 
 Notes :
 
@@ -53,19 +75,19 @@ RELEASE DATE : 21/06/2022
 _________________________
 
 Additional Processor / Compiler Support :
-    None.
+  None.
 
 Additional Functionality :
-    SIF_FirZeroNotchFilter()
+  SIF_FirZeroNotchFilter()
 
 Bug Fixes :
-    None.
+  None.
 
 Operational Changes :
-    None.
+  None.
 
 Optimisation Changes :
-    None.
+  None.
 
 Notes :
 
@@ -75,19 +97,19 @@ RELEASE DATE : 02/05/2022
 _________________________
 
 Additional Processor / Compiler Support :
-    None.
+  None.
 
 Additional Functionality :
-    None
+  None
 
 Bug Fixes :
-    None.
+  None.
 
 Operational Changes :
-    SDA_IirNc tidied up.
+  SDA_IirNc tidied up.
 
 Optimisation Changes :
-    None.
+  None.
 
 Notes :
 
@@ -97,19 +119,19 @@ RELEASE DATE : 01/03/2022
 _________________________
 
 Additional Processor / Compiler Support :
-    None.
+  None.
 
 Additional Functionality :
-    SUF_CsvWriteMatrix
+  SUF_CsvWriteMatrix
 
 Bug Fixes :
-    None.
+  None.
 
 Operational Changes :
-    SUF_CsvReadMatrix and SUF_PrintMatrix tidied up.
+  SUF_CsvReadMatrix and SUF_PrintMatrix tidied up.
 
 Optimisation Changes :
-    None.
+  None.
 
 Notes :
 
@@ -119,19 +141,19 @@ RELEASE DATE : 01/03/2022
 _________________________
 
 Additional Processor / Compiler Support :
-    None.
+  None.
 
 Additional Functionality :
-    SUF_SigCountSamplesInFile
+  SUF_SigCountSamplesInFile
 
 Bug Fixes :
-    None.
+  None.
 
 Operational Changes :
-    SDA_TwoLayer2CategoryNetworkPredict and SDA_TwoLayerNCategoryNetworkPredict now return prediction and probability.
+  SDA_TwoLayer2CategoryNetworkPredict and SDA_TwoLayerNCategoryNetworkPredict now return prediction and probability.
 
 Optimisation Changes :
-    None.
+  None.
 
 Notes :
 
@@ -141,24 +163,24 @@ RELEASE DATE : 24/01/2022
 _________________________
 
 Additional Processor / Compiler Support :
-    None.
+  None.
 
 Additional Functionality :
-    Macros: SDA_Ones and SDA_Zeros, simplify the usef of SDA_Fill
-    SDS_Cdft2, SDA_Cdft2, SDS_Cdft3, SDA_Cdft3
+  Macros: SDA_Ones and SDA_Zeros, simplify the usef of SDA_Fill
+  SDS_Cdft2, SDA_Cdft2, SDS_Cdft3, SDA_Cdft3
 
 Bug Fixes :
-    None.
+  None.
 
 Operational Changes :
-    Functions renamed (all #defined to maintain compatibility):
-        SDA_Rft         to SDA_Rdft
-        SDA_Rift        to SDA_Ridft
-        SDA_Cft         to SDA_Cdft
-        SDA_Cift        to SDA_Cidft
+  Functions renamed (all #defined to maintain compatibility):
+    SDA_Rft     to SDA_Rdft
+    SDA_Rift    to SDA_Ridft
+    SDA_Cft     to SDA_Cdft
+    SDA_Cift    to SDA_Cidft
 
 Optimisation Changes :
-    None.
+  None.
 
 Notes :
 
@@ -169,62 +191,62 @@ RELEASE DATE : 04/01/2022
 _________________________
 
 Additional Processor / Compiler Support :
-    MacOS - arm64 support added, x86 deprecated (x86_64 still supported)
+  MacOS - arm64 support added, x86 deprecated (x86_64 still supported)
 
 Additional Functionality :
-    Raspberry Pi real-time machine learning example added.
-    Machine learning examples now support DCT for pre-processing, with no loss of performance
-    SDA_Rfftr
-    SDS_InterpolateQuadratic1D, SDS_InterpolateQuadraticBSpline1D and SDS_InterpolateQuadraticLagrange1D
-    SIF_DctII, SDA_DctII, SIF_DctIIOrthogonal, SDA_DctIIOrthogonal
-    SIGLIB_GENERALIZED_COSINE window type added
-    SUF_ReadWeightsBinaryFile and SUF_ReadWeightsBinaryFile now support variable word length quantization
-    SDA_SetMin, SDA_SetMax
-    SUF_CsvReadFile and SUF_CsvWriteFile
-    SDA_NLargest, SDA_NSmallest
-    SDA_WindowEquivalentNoiseBandwidth, SDA_WindowProcessingGain
-    New Radix 4 FFT functions
-        SIF_Fft4, SDA_Rfft4, SDA_Cfft4, SDA_DigitReverseReorder4
-        SAI_FftSizeLog4, SAI_Log4, SIGLIB_INV_LOG10_OF_4, SUF_FftCoefficientAllocate4
-        SDA_IndexDigitReverseReorder4, SIF_FastDigitReverseReorder4
-    FFT Functions to handle two real FFTs with one complex:
-        SDA_Cfft2rBy1c, SDA_Cfft2rBy1cr, SDA_Cfft42rBy1c, SDA_Cfft42rBy1cr
-    SDA_SumAndDifference
-    SDS_Clip and SDA_Clip add new option: SIGLIB_CLIP_BOTH_BELOW
-    SDA_InsertSample, SDA_ExtractSample, SDA_InsertArray, SDA_ExtractArray
-    SUF_BinReadFile, SUF_BinWriteFile
+  Raspberry Pi real-time machine learning example added.
+  Machine learning examples now support DCT for pre-processing, with no loss of performance
+  SDA_Rfftr
+  SDS_InterpolateQuadratic1D, SDS_InterpolateQuadraticBSpline1D and SDS_InterpolateQuadraticLagrange1D
+  SIF_DctII, SDA_DctII, SIF_DctIIOrthogonal, SDA_DctIIOrthogonal
+  SIGLIB_GENERALIZED_COSINE window type added
+  SUF_ReadWeightsBinaryFile and SUF_ReadWeightsBinaryFile now support variable word length quantization
+  SDA_SetMin, SDA_SetMax
+  SUF_CsvReadFile and SUF_CsvWriteFile
+  SDA_NLargest, SDA_NSmallest
+  SDA_WindowEquivalentNoiseBandwidth, SDA_WindowProcessingGain
+  New Radix 4 FFT functions
+    SIF_Fft4, SDA_Rfft4, SDA_Cfft4, SDA_DigitReverseReorder4
+    SAI_FftSizeLog4, SAI_Log4, SIGLIB_INV_LOG10_OF_4, SUF_FftCoefficientAllocate4
+    SDA_IndexDigitReverseReorder4, SIF_FastDigitReverseReorder4
+  FFT Functions to handle two real FFTs with one complex:
+    SDA_Cfft2rBy1c, SDA_Cfft2rBy1cr, SDA_Cfft42rBy1c, SDA_Cfft42rBy1cr
+  SDA_SumAndDifference
+  SDS_Clip and SDA_Clip add new option: SIGLIB_CLIP_BOTH_BELOW
+  SDA_InsertSample, SDA_ExtractSample, SDA_InsertArray, SDA_ExtractArray
+  SUF_BinReadFile, SUF_BinWriteFile
 
 Bug Fixes :
-    None.
+  None.
 
 Operational Changes :
-    Signal generators SIGLIB_COS_WAVE now changed to SIGLIB_COSINE_WAVE (SIGLIB_COS_WAVE #defined to maintain compatibility)
-    FFT function bit reverse addressing is now handled via a function call parameter, rather than #define build options.
-    SIF_FirPolyPhaseGenerate() tidied up.
-    Functions renamed:
-        SDA_InterpolateLinear1 to SDA_InterpolateLinear1D, SDA_InterpolateLinear2 to SDA_InterpolateLinear2D,
-        SIF_InterpolateSinc1 to SIF_InterpolateSinc1D, SIF_InterpolateWindowedSinc1 to SIF_InterpolateWindowedSinc1D,
-        SDA_InterpolateSinc1 to SDA_InterpolateSinc1D
-        SIGLIB_BMAN_HARRIS changed to SIGLIB_BLACKMAN_HARRIS    (SIGLIB_BMAN_HARRIS #defined to maintain compatibility)
-    SUF_CsvReadData and SUF_CsvWriteData - additional parameter for number of columns
-    SDS_InterpolateLinear1D and SDA_InterpolateLinear1D tidied up
-    Functions renamed (all #defined to maintain compatibility):
-        SDA_MaxPos      to SDA_MaxIndex
-        SDA_AbsMaxPos   to SDA_AbsMaxIndex
-        SDA_MinPos      to SDA_MinIndex
-        SDA_AbsMinPos   to SDA_AbsMinIndex
-        SDA_Offset      to SDA_Add
-        SAI_FftSizeLog2 to SAI_FftLengthLog2
-        SAI_FftSizeLog4 to SAI_FftLengthLog4
-    TI xDAIS API support deprecated
+  Signal generators SIGLIB_COS_WAVE now changed to SIGLIB_COSINE_WAVE (SIGLIB_COS_WAVE #defined to maintain compatibility)
+  FFT function bit reverse addressing is now handled via a function call parameter, rather than #define build options.
+  SIF_FirPolyPhaseGenerate() tidied up.
+  Functions renamed:
+    SDA_InterpolateLinear1 to SDA_InterpolateLinear1D, SDA_InterpolateLinear2 to SDA_InterpolateLinear2D,
+    SIF_InterpolateSinc1 to SIF_InterpolateSinc1D, SIF_InterpolateWindowedSinc1 to SIF_InterpolateWindowedSinc1D,
+    SDA_InterpolateSinc1 to SDA_InterpolateSinc1D
+    SIGLIB_BMAN_HARRIS changed to SIGLIB_BLACKMAN_HARRIS  (SIGLIB_BMAN_HARRIS #defined to maintain compatibility)
+  SUF_CsvReadData and SUF_CsvWriteData - additional parameter for number of columns
+  SDS_InterpolateLinear1D and SDA_InterpolateLinear1D tidied up
+  Functions renamed (all #defined to maintain compatibility):
+    SDA_MaxPos    to SDA_MaxIndex
+    SDA_AbsMaxPos   to SDA_AbsMaxIndex
+    SDA_MinPos    to SDA_MinIndex
+    SDA_AbsMinPos   to SDA_AbsMinIndex
+    SDA_Offset    to SDA_Add
+    SAI_FftSizeLog2 to SAI_FftLengthLog2
+    SAI_FftSizeLog4 to SAI_FftLengthLog4
+  TI xDAIS API support deprecated
 
 Optimisation Changes :
-    FFT functions updated to use optimization capabilities of modern compilers
+  FFT functions updated to use optimization capabilities of modern compilers
 
 Notes :
-    Tidied up Machine Learning example code
-    Tidied up SIF_Window and SIF_TableTopWindow
-    Improved file I/O error reporting in file_io.c
+  Tidied up Machine Learning example code
+  Tidied up SIF_Window and SIF_TableTopWindow
+  Improved file I/O error reporting in file_io.c
 
 
 
@@ -233,23 +255,23 @@ RELEASE DATE : 05/01/2021
 _________________________
 
 Additional Processor / Compiler Support :
-    NXP LPC series.
+  NXP LPC series.
 
 Additional Functionality :
-    None.
+  None.
 
 Bug Fixes :
-    None.
+  None.
 
 Operational Changes :
-    SUF_WriteWeightsBinaryFile return value changed to SLArrayIndex_t
-    siglib.c and file_io.c now fprints %ld for SLArrayIndex_t
+  SUF_WriteWeightsBinaryFile return value changed to SLArrayIndex_t
+  siglib.c and file_io.c now fprints %ld for SLArrayIndex_t
 
 Optimisation Changes :
-    None.
+  None.
 
 Notes :
-    None.
+  None.
 
 
 
@@ -258,91 +280,91 @@ RELEASE DATE : 21/12/2020
 _________________________
 
 Additional Processor / Compiler Support :
-    Extended ARM Cortex support
+  Extended ARM Cortex support
 
 Additional Functionality :
-    SDA_Shuffle, SMX_ShuffleColumns, SMX_ShuffleRows
-    SDA_LinearMicrophoneArrayBeamPatternLinear and SDA_MicrophoneArrayBeamPatternLinear
-    SDA_Multiplex and SDA_Demultiplex
-    SDA_Mux6, SDA_Demux6, SDA_Mux7, SDA_Demux7, SDA_Mux8 and SDA_Demux8
-    SDA_FirstMinVertex, SDA_FirstMinVertexPos, SDA_FirstMaxVertex, SDA_FirstMaxVertexPos
-    SUF_FrequenciesToOctaves, SUF_FrequenciesToCentreFreqHz, SUF_FrequenciesToQFactor,
-    SUF_BandwidthToQFactor and SUF_QFactorToBandwidth
-    SDS_Nearest, SDS_Clip, SDS_Threshold, SDS_SoftThreshold, SDS_ThresholdAndClamp, SDS_Clamp, SDS_SetMinValue
-    SDA_InterpolateArbitraryThreePointQuadraticPeakVertexMagnitude and SDA_InterpolateArbitraryThreePointQuadraticPeakVertexLocation
-    SDA_Ramp, SDA_SortMinToMax2, SDA_SortMaxToMin2 and SDA_SortIndexed
-    SMX_DeleteOldColumn modified to work in-place
-    SDA_Log2, SDS_LogN, SDA_LogN, SDA_LogDistribution
-    SDA_SubtractMax
-    SIF_OnePoleHighPass, SDS_OnePoleHighPass, SDA_OnePoleHighPass, SDS_OnePoleHighPassNormalized, SDA_OnePoleHighPassNormalized and
-        SDA_OnePoleHighPassPerSample, SDS_OnePoleHighPassCutOffFrequencyToFilterCoeff
-    SIF_FftDeconvolutionPre, SDA_FftDeconvolutionPre
-    SDA_ComplexInverse
+  SDA_Shuffle, SMX_ShuffleColumns, SMX_ShuffleRows
+  SDA_LinearMicrophoneArrayBeamPatternLinear and SDA_MicrophoneArrayBeamPatternLinear
+  SDA_Multiplex and SDA_Demultiplex
+  SDA_Mux6, SDA_Demux6, SDA_Mux7, SDA_Demux7, SDA_Mux8 and SDA_Demux8
+  SDA_FirstMinVertex, SDA_FirstMinVertexPos, SDA_FirstMaxVertex, SDA_FirstMaxVertexPos
+  SUF_FrequenciesToOctaves, SUF_FrequenciesToCentreFreqHz, SUF_FrequenciesToQFactor,
+  SUF_BandwidthToQFactor and SUF_QFactorToBandwidth
+  SDS_Nearest, SDS_Clip, SDS_Threshold, SDS_SoftThreshold, SDS_ThresholdAndClamp, SDS_Clamp, SDS_SetMinValue
+  SDA_InterpolateArbitraryThreePointQuadraticPeakVertexMagnitude and SDA_InterpolateArbitraryThreePointQuadraticPeakVertexLocation
+  SDA_Ramp, SDA_SortMinToMax2, SDA_SortMaxToMin2 and SDA_SortIndexed
+  SMX_DeleteOldColumn modified to work in-place
+  SDA_Log2, SDS_LogN, SDA_LogN, SDA_LogDistribution
+  SDA_SubtractMax
+  SIF_OnePoleHighPass, SDS_OnePoleHighPass, SDA_OnePoleHighPass, SDS_OnePoleHighPassNormalized, SDA_OnePoleHighPassNormalized and
+    SDA_OnePoleHighPassPerSample, SDS_OnePoleHighPassCutOffFrequencyToFilterCoeff
+  SIF_FftDeconvolutionPre, SDA_FftDeconvolutionPre
+  SDA_ComplexInverse
 	SDA_MicrophoneArrayBeamPatternLinear
-    SIF_CopyWithIndex and SDA_CopyWithIndex
-    SUF_PrintHigher, SUF_PrintLower, SUF_DebugPrintHigher, SUF_DebugPrintLower
-    SMX_ExtractCategoricalColumn
-    SDS_DetectNAN and SDA_DetectNAN
-    SUF_PrintFixedPointArray, SUF_DebugPrintFixedPointArray
-    SUF_BinReadData, SUF_BinWriteData, SUF_CsvReadData, SUF_CsvWriteData
-    SUF_DatReadData, SUF_DatWriteData, SUF_DatReadHeader, SUF_DatWriteHeader
-    SUF_SigReadData, SUF_SigWriteData, SUF_SigReadFile, SUF_SigWriteFile
-    SUF_XmtReadData
-    SUF_WavReadData, SUF_WavWriteData, SUF_WavReadWord, SUF_WavReadInt, SUF_WavWriteWord, SUF_WavWriteInt
-    SUF_WavReadHeader, SUF_WavWriteHeader, SUF_WavDisplayInfo, SUF_WavSetInfo, SUF_WavFileLength, SUF_WavReadFile
-    SUF_WavWriteFile, SUF_WavWriteFileScaled
-    SUF_CsvReadMatrix
-    SDA_TwoLayer2CategoryNetworkFit, SDA_TwoLayer2CategoryNetworkPredict, SDA_TwoLayerNCategoryNetworkFit, SDA_TwoLayerNCategoryNetworkPredict
-    SDS_ActivationReLU, SDA_ActivationReLU, SDS_ActivationReLUDerivative, SDA_ActivationReLUDerivative
-    SDS_ActivationLeakyReLU, SDA_ActivationLeakyReLU, SDS_ActivationLeakyReLUDerivative, SDA_ActivationLeakyReLUDerivative
-    SDS_ActivationLogistic, SDA_ActivationLogistic, SDS_ActivationLogisticDerivative, SDA_ActivationLogisticDerivative
-    SDS_ActivationTanH, SDA_ActivationTanH, SDS_ActivationTanHDerivative, SDA_ActivationTanHDerivative
-    SUF_WriteWeightsIntegerCFile, SUF_WriteWeightsFloatCFile, SUF_WriteWeightsBinaryFile, SUF_ReadWeightsBinaryFile
-    SDS_EuclideanDistance, SDS_EuclideanDistanceSquared, SDA_EuclideanDistance, SDA_EuclideanDistanceSquared,
-        SCA_EuclideanDistance and SCA_EuclideanDistanceSquared
+  SIF_CopyWithIndex and SDA_CopyWithIndex
+  SUF_PrintHigher, SUF_PrintLower, SUF_DebugPrintHigher, SUF_DebugPrintLower
+  SMX_ExtractCategoricalColumn
+  SDS_DetectNAN and SDA_DetectNAN
+  SUF_PrintFixedPointArray, SUF_DebugPrintFixedPointArray
+  SUF_BinReadData, SUF_BinWriteData, SUF_CsvReadData, SUF_CsvWriteData
+  SUF_DatReadData, SUF_DatWriteData, SUF_DatReadHeader, SUF_DatWriteHeader
+  SUF_SigReadData, SUF_SigWriteData, SUF_SigReadFile, SUF_SigWriteFile
+  SUF_XmtReadData
+  SUF_WavReadData, SUF_WavWriteData, SUF_WavReadWord, SUF_WavReadInt, SUF_WavWriteWord, SUF_WavWriteInt
+  SUF_WavReadHeader, SUF_WavWriteHeader, SUF_WavDisplayInfo, SUF_WavSetInfo, SUF_WavFileLength, SUF_WavReadFile
+  SUF_WavWriteFile, SUF_WavWriteFileScaled
+  SUF_CsvReadMatrix
+  SDA_TwoLayer2CategoryNetworkFit, SDA_TwoLayer2CategoryNetworkPredict, SDA_TwoLayerNCategoryNetworkFit, SDA_TwoLayerNCategoryNetworkPredict
+  SDS_ActivationReLU, SDA_ActivationReLU, SDS_ActivationReLUDerivative, SDA_ActivationReLUDerivative
+  SDS_ActivationLeakyReLU, SDA_ActivationLeakyReLU, SDS_ActivationLeakyReLUDerivative, SDA_ActivationLeakyReLUDerivative
+  SDS_ActivationLogistic, SDA_ActivationLogistic, SDS_ActivationLogisticDerivative, SDA_ActivationLogisticDerivative
+  SDS_ActivationTanH, SDA_ActivationTanH, SDS_ActivationTanHDerivative, SDA_ActivationTanHDerivative
+  SUF_WriteWeightsIntegerCFile, SUF_WriteWeightsFloatCFile, SUF_WriteWeightsBinaryFile, SUF_ReadWeightsBinaryFile
+  SDS_EuclideanDistance, SDS_EuclideanDistanceSquared, SDA_EuclideanDistance, SDA_EuclideanDistanceSquared,
+    SCA_EuclideanDistance and SCA_EuclideanDistanceSquared
 
 Bug Fixes :
-    SDA_Quantize_N
-    Tidied up limit cases for atan2 function : e.g. SDS_Phase
-    SDA_Subtract macro - incorrect parameter negation
-    Updated digital comms initialization function comments. Carrier Frequncy is Carrier phase increment per sample (radians / 2π)
+  SDA_Quantize_N
+  Tidied up limit cases for atan2 function : e.g. SDS_Phase
+  SDA_Subtract macro - incorrect parameter negation
+  Updated digital comms initialization function comments. Carrier Frequncy is Carrier phase increment per sample (radians / 2π)
 
 Operational Changes :
-    Microsoft secure fopen_s used with MSVC
-    SIGLIB_10LOG10_MIN replaced with SIGLIB_DB_MIN
-    SDA_InterpolateArbitraryThreePointQuadraticVertexMagnitude and SDA_InterpolateArbitraryThreePointQuadraticVertexLocation - Tidied up array limits tests
-    32 bit Linux binary support deprecated. Binaries can still be built from source code.
-    SDA_Deconvolution renamed to SDA_FftDeconvolution and parameter list changed
-    Function Name Tidy Up:
-        SDA_ComplexSqrt to SDA_ComplexRectSqrt
-        SDA_ComplexInverse to SDA_ComplexRectInverse
-        SDA_ComplexConjugate to SDA_ComplexRectConjugate
-        SDA_ComplexMagnitude to SDA_ComplexRectMagnitude
-        SDA_ComplexMagnitudeSquared to SDA_ComplexRectMagnitudeSquared
-        SDA_ComplexPhase to SDA_ComplexRectPhase
-        SDA_ComplexMultiply to SDA_ComplexRectMultiply
-        SDA_ComplexDivide to SDA_ComplexRectDivide
-        SDA_ComplexAdd to SDA_ComplexRectAdd
-        SDA_ComplexSubtract to SDA_ComplexRectSubtract
-        SDA_ComplexLog to SDA_ComplexRectLog
-        SDA_ComplexExp to SDA_ComplexRectExp
-        SDA_ComplexExpj to SDA_ComplexRectExpj
-        SDA_ComplexPow to SDA_ComplexRectPow
-        SDA_ComplexVectorAddScalar to SDA_ComplexRectAddScalar
-        SDA_ComplexVectorSubtractScalar to SDA_ComplexRectSubtractScalar
-        SDA_ComplexVectorMultiplyScalar to SDA_ComplexRectMultiplyScalar
-        SDA_ComplexVectorDivideScalar to SDA_ComplexRectDivideScalar
-        SDA_ComplexScalarSubtractVector to SDA_ComplexScalarSubtractRect
-        SDA_ComplexRectangularLinearInterpolate to SDA_ComplexRectLinearInterpolate
-    Numerix Host Library is no longer required to use the exampled. All of that functionality is now part of the standard SigLib library.
-    SDS_EuclideanDistance renamed to SCV_EuclideanDistance
+  Microsoft secure fopen_s used with MSVC
+  SIGLIB_10LOG10_MIN replaced with SIGLIB_DB_MIN
+  SDA_InterpolateArbitraryThreePointQuadraticVertexMagnitude and SDA_InterpolateArbitraryThreePointQuadraticVertexLocation - Tidied up array limits tests
+  32 bit Linux binary support deprecated. Binaries can still be built from source code.
+  SDA_Deconvolution renamed to SDA_FftDeconvolution and parameter list changed
+  Function Name Tidy Up:
+    SDA_ComplexSqrt to SDA_ComplexRectSqrt
+    SDA_ComplexInverse to SDA_ComplexRectInverse
+    SDA_ComplexConjugate to SDA_ComplexRectConjugate
+    SDA_ComplexMagnitude to SDA_ComplexRectMagnitude
+    SDA_ComplexMagnitudeSquared to SDA_ComplexRectMagnitudeSquared
+    SDA_ComplexPhase to SDA_ComplexRectPhase
+    SDA_ComplexMultiply to SDA_ComplexRectMultiply
+    SDA_ComplexDivide to SDA_ComplexRectDivide
+    SDA_ComplexAdd to SDA_ComplexRectAdd
+    SDA_ComplexSubtract to SDA_ComplexRectSubtract
+    SDA_ComplexLog to SDA_ComplexRectLog
+    SDA_ComplexExp to SDA_ComplexRectExp
+    SDA_ComplexExpj to SDA_ComplexRectExpj
+    SDA_ComplexPow to SDA_ComplexRectPow
+    SDA_ComplexVectorAddScalar to SDA_ComplexRectAddScalar
+    SDA_ComplexVectorSubtractScalar to SDA_ComplexRectSubtractScalar
+    SDA_ComplexVectorMultiplyScalar to SDA_ComplexRectMultiplyScalar
+    SDA_ComplexVectorDivideScalar to SDA_ComplexRectDivideScalar
+    SDA_ComplexScalarSubtractVector to SDA_ComplexScalarSubtractRect
+    SDA_ComplexRectangularLinearInterpolate to SDA_ComplexRectLinearInterpolate
+  Numerix Host Library is no longer required to use the exampled. All of that functionality is now part of the standard SigLib library.
+  SDS_EuclideanDistance renamed to SCV_EuclideanDistance
 
 Optimisation Changes :
-    SDA_PeakToAverageRatio, SDA_PeakToAveragePowerRatio, SDA_PeakToAveragePowerRatioDB, SDA_PeakToAverageRatioComplex
-    SDA_PeakToAveragePowerRatioComplex and SDA_PeakToAveragePowerRatioComplexDB
+  SDA_PeakToAverageRatio, SDA_PeakToAveragePowerRatio, SDA_PeakToAveragePowerRatioDB, SDA_PeakToAverageRatioComplex
+  SDA_PeakToAveragePowerRatioComplex and SDA_PeakToAveragePowerRatioComplexDB
 
 Notes :
-    Complete analysis and tidy up using clang-tidy
+  Complete analysis and tidy up using clang-tidy
 
 
 VERSION : 8.62
@@ -350,25 +372,25 @@ RELEASE DATE : 08/07/2018
 _________________________
 
 Additional Processor / Compiler Support :
-    None
+  None
 
 Additional Functionality :
-    SDS_InterpolateThreePointQuadraticVertexMagnitude, SDS_InterpolateThreePointQuadraticVertexLocation, SDS_InterpolateArbitraryThreePointQuadraticVertexMagnitude and
-    SDS_InterpolateArbitraryThreePointQuadraticVertexLocation
-    SDA_InterpolateThreePointQuadraticVertexMagnitude, SDA_InterpolateThreePointQuadraticVertexLocation, SDA_InterpolateArbitraryThreePointQuadraticVertexMagnitude and
-    SDA_InterpolateArbitraryThreePointQuadraticVertexLocation
+  SDS_InterpolateThreePointQuadraticVertexMagnitude, SDS_InterpolateThreePointQuadraticVertexLocation, SDS_InterpolateArbitraryThreePointQuadraticVertexMagnitude and
+  SDS_InterpolateArbitraryThreePointQuadraticVertexLocation
+  SDA_InterpolateThreePointQuadraticVertexMagnitude, SDA_InterpolateThreePointQuadraticVertexLocation, SDA_InterpolateArbitraryThreePointQuadraticVertexMagnitude and
+  SDA_InterpolateArbitraryThreePointQuadraticVertexLocation
 
 Bug Fixes :
-    None
+  None
 
 Operational Changes :
-    SDS_EnvelopeHilbert and SDA_EnvelopeHilbert tidied up
+  SDS_EnvelopeHilbert and SDA_EnvelopeHilbert tidied up
 
 Optimisation Changes :
-    None
+  None
 
 Notes :
-    None
+  None
 
 
 VERSION : 8.61
@@ -376,61 +398,61 @@ RELEASE DATE : 19/03/2018
 _________________________
 
 Additional Processor / Compiler Support :
-    Android
+  Android
 
 Additional Functionality :
-    None
+  None
 
 Bug Fixes :
-    None
+  None
 
 Operational Changes :
-    Tidied up use of -Wmaybe-uninitialized
-    Function name cleanup
-        SIF_IirNotchFilter changed to SIF_IirNotchFilter2
+  Tidied up use of -Wmaybe-uninitialized
+  Function name cleanup
+    SIF_IirNotchFilter changed to SIF_IirNotchFilter2
 
-        SIF_LowPassFirFilter changed to SIF_FirLowPassFilter
-        SIF_HighPassFirFilter changed to SIF_FirHighPassFilter
-        SIF_BandPassFirFilter changed to SIF_FirBandPassFilter
-        SIF_LowPassFirFilterWindow changed to SIF_FirLowPassFilterWindow
-        SIF_HighPassFirFilterWindow changed to SIF_FirHighPassFilterWindow
-        SIF_BandPassFirFilterWindow changed to SIF_FirBandPassFilterWindow
-        SUF_KaiserApproximation changed to SUF_FirKaiserApproximation
-        SIF_MatchedFirFilter to SIF_FirMatchedFilter
+    SIF_LowPassFirFilter changed to SIF_FirLowPassFilter
+    SIF_HighPassFirFilter changed to SIF_FirHighPassFilter
+    SIF_BandPassFirFilter changed to SIF_FirBandPassFilter
+    SIF_LowPassFirFilterWindow changed to SIF_FirLowPassFilterWindow
+    SIF_HighPassFirFilterWindow changed to SIF_FirHighPassFilterWindow
+    SIF_BandPassFirFilterWindow changed to SIF_FirBandPassFilterWindow
+    SUF_KaiserApproximation changed to SUF_FirKaiserApproximation
+    SIF_MatchedFirFilter to SIF_FirMatchedFilter
 
-        SIF_OrderNIir changed to SIF_IirOrder
-        SDS_OrderNIir changed to SDS_IirOrder
-        SDA_OrderNIir changed to SDA_IirOrder
-        SIF_NcIir changed to SIF_IirNc
-        SDA_NcIir changed to SDA_IirNc
+    SIF_OrderNIir changed to SIF_IirOrder
+    SDS_OrderNIir changed to SDS_IirOrder
+    SDA_OrderNIir changed to SDA_IirOrder
+    SIF_NcIir changed to SIF_IirNc
+    SDA_NcIir changed to SDA_IirNc
 
-        SDA_ModifyIirFilterGain changed to SDA_IirModifyFilterGain
-        SIF_LowPassIirFilter changed to SIF_IirLowPassFilter
-        SIF_HighPassIirFilter changed to SIF_IirHighPassFilter
-        SIF_AllPassIirFilter changed to SIF_IirAllPassFilter
-        SIF_BandPassIirFilter changed to SIF_IirBandPassFilter
-        SIF_NotchIirFilter changed to SIF_IirNotchFilter
-        SIF_PeakingIirFilter changed to SIF_IirPeakingFilter
-        SIF_LowShelfIirFilter changed to SIF_IirLowShelfFilter
-        SIF_HighShelfIirFilter changed to SIF_IirHighShelfFilter
+    SDA_ModifyIirFilterGain changed to SDA_IirModifyFilterGain
+    SIF_LowPassIirFilter changed to SIF_IirLowPassFilter
+    SIF_HighPassIirFilter changed to SIF_IirHighPassFilter
+    SIF_AllPassIirFilter changed to SIF_IirAllPassFilter
+    SIF_BandPassIirFilter changed to SIF_IirBandPassFilter
+    SIF_NotchIirFilter changed to SIF_IirNotchFilter
+    SIF_PeakingIirFilter changed to SIF_IirPeakingFilter
+    SIF_LowShelfIirFilter changed to SIF_IirLowShelfFilter
+    SIF_HighShelfIirFilter changed to SIF_IirHighShelfFilter
 
-        SDS_RemoveDC changed to SDS_IirRemoveDC
-        SDA_RemoveDC changed to SDA_IirRemoveDC
+    SDS_RemoveDC changed to SDS_IirRemoveDC
+    SDA_RemoveDC changed to SDA_IirRemoveDC
 
-        SDS_TimeConstantToOnePoleFilterCoeff changed to SDS_OnePoleTimeConstantToFilterCoeff
-        SDS_CutOffFrequencyToOnePoleFilterCoeff changed to SDS_OnePoleCutOffFrequencyToFilterCoeff
+    SDS_TimeConstantToOnePoleFilterCoeff changed to SDS_OnePoleTimeConstantToFilterCoeff
+    SDS_CutOffFrequencyToOnePoleFilterCoeff changed to SDS_OnePoleCutOffFrequencyToFilterCoeff
 
-        SIF_ArbFft to SIF_FftArb
-        SUF_ArbFftAllocLength to SUF_FftArbAllocLength
-        SDA_ArbRfft to SDA_RfftArb
-        SDA_ArbCfft to SDA_CfftArb
-        SDA_ArbCifft to SDA_CifftArb
+    SIF_ArbFft to SIF_FftArb
+    SUF_ArbFftAllocLength to SUF_FftArbAllocLength
+    SDA_ArbRfft to SDA_RfftArb
+    SDA_ArbCfft to SDA_CfftArb
+    SDA_ArbCifft to SDA_CifftArb
 
 Optimisation Changes :
-    None
+  None
 
 Notes :
-    None
+  None
 
 
 VERSION : 8.60
@@ -438,67 +460,67 @@ RELEASE DATE : 07.01.2018
 _________________________
 
 Additional Processor / Compiler Support :
-    None
+  None
 
 Additional Functionality :
-    SDA_RemoveDuplicates, SDA_FindAllDuplicates, SDA_FindFirstDuplicates, SDA_FindSortAllDuplicates, SDA_FindSortFirstDuplicates.
-    SDA_SignedAbsMax, SDA_SignedAbsMin.
-    SDA_ConvolveLinearComplex, SDA_ConvolvePartialComplex, SDA_ConvolveCircularComplex
-    Envelope Detector Examples moved to library :
-        SIF_Envelope, SDS_Envelope and SDA_Envelope
-        SIF_EnvelopeRMS, SDS_EnvelopeRMS and SDA_EnvelopeRMS
-        SIF_EnvelopeHilbert, SDS_EnvelopeHilbert and SDA_EnvelopeHilbert
-    SDA_IirNegateAlphaCoeffs
-    SDS_IirMac, SDA_IirMac - Use MAC rather than MSUB instructions - MSUB is not supported in all processor architectures
-    SDS_FirComplex
-    SDS_TimeConstantToOnePoleFilterCoeff, SDS_CutOffFrequencyToOnePoleFilterCoeff
-    SDA_LinearTodBm and SDA_dBmToLinear
-    SDS_Quantize, SDA_Quantize_N, SDS_Quantize_N
-    SDA_LinearMicrophoneArrayBeamPattern, SDA_MicrophoneArrayCalculateDelays and SDA_MicrophoneArrayBeamPattern
-    SIF_FirWithStore, SDS_FirWithStore, SDA_FirWithStore
-    SIF_FirComplexWithStore, SDS_FirComplexWithStore, SDA_FirComplexWithStore
-    SDS_FirWithStoreAddSample, SDA_FirWithStoreAddSamples
-    SIF_FirExtendedArray, SDS_FirExtendedArray, SDA_FirExtendedArray
-    SIF_FirComplexExtendedArray, SDS_FirComplexExtendedArray, SDA_FirComplexExtendedArray
-    SDS_FirExtendedArrayAddSample, SDA_FirExtendedArrayAddSamples
-    SIF_FirPolyPhaseGenerate
-    SIM_Max, SIM_Min
-    SDA_Align
-    SDA_CorrelateLinearReturnPeak
-    SDA_SigLibDataToImageData, SDA_ImageDataToSigLibData
-    SDA_FftExtend, SDA_CfftExtend
+  SDA_RemoveDuplicates, SDA_FindAllDuplicates, SDA_FindFirstDuplicates, SDA_FindSortAllDuplicates, SDA_FindSortFirstDuplicates.
+  SDA_SignedAbsMax, SDA_SignedAbsMin.
+  SDA_ConvolveLinearComplex, SDA_ConvolvePartialComplex, SDA_ConvolveCircularComplex
+  Envelope Detector Examples moved to library :
+    SIF_Envelope, SDS_Envelope and SDA_Envelope
+    SIF_EnvelopeRMS, SDS_EnvelopeRMS and SDA_EnvelopeRMS
+    SIF_EnvelopeHilbert, SDS_EnvelopeHilbert and SDA_EnvelopeHilbert
+  SDA_IirNegateAlphaCoeffs
+  SDS_IirMac, SDA_IirMac - Use MAC rather than MSUB instructions - MSUB is not supported in all processor architectures
+  SDS_FirComplex
+  SDS_TimeConstantToOnePoleFilterCoeff, SDS_CutOffFrequencyToOnePoleFilterCoeff
+  SDA_LinearTodBm and SDA_dBmToLinear
+  SDS_Quantize, SDA_Quantize_N, SDS_Quantize_N
+  SDA_LinearMicrophoneArrayBeamPattern, SDA_MicrophoneArrayCalculateDelays and SDA_MicrophoneArrayBeamPattern
+  SIF_FirWithStore, SDS_FirWithStore, SDA_FirWithStore
+  SIF_FirComplexWithStore, SDS_FirComplexWithStore, SDA_FirComplexWithStore
+  SDS_FirWithStoreAddSample, SDA_FirWithStoreAddSamples
+  SIF_FirExtendedArray, SDS_FirExtendedArray, SDA_FirExtendedArray
+  SIF_FirComplexExtendedArray, SDS_FirComplexExtendedArray, SDA_FirComplexExtendedArray
+  SDS_FirExtendedArrayAddSample, SDA_FirExtendedArrayAddSamples
+  SIF_FirPolyPhaseGenerate
+  SIM_Max, SIM_Min
+  SDA_Align
+  SDA_CorrelateLinearReturnPeak
+  SDA_SigLibDataToImageData, SDA_ImageDataToSigLibData
+  SDA_FftExtend, SDA_CfftExtend
 
 Bug Fixes :
-    SIF_TableTopWindow - fix for odd length windows
-    Fixes for odd length FIR filter design coefficient indices :
-        SIF_LowPassFirFilter, SIF_HighPassFirFilter, SIF_BandPassFirFilter
-        SIF_LowPassFirFilterWindow, SIF_HighPassFirFilterWindow, SIF_BandPassFirFilterWindow
+  SIF_TableTopWindow - fix for odd length windows
+  Fixes for odd length FIR filter design coefficient indices :
+    SIF_LowPassFirFilter, SIF_HighPassFirFilter, SIF_BandPassFirFilter
+    SIF_LowPassFirFilterWindow, SIF_HighPassFirFilterWindow, SIF_BandPassFirFilterWindow
 
 Operational Changes :
-    Added more Portaudio / Analog I/O examples
-        const declaration tidy up
-    All Sinc and ResampleSinc functions tidied up
-    DLL examples tidied up
-    limits.h support improved
-    gcc support improved
-    QPSK examples tidied up
-    Header filenames extended :
-        siglibc.h  -> siglib_constants.h
-        siglibd.h  -> siglib_types.h
-        siglibic.h -> siglib_iir_constants.h
-        siglibm.h  -> siglib_macros.h
-        siglibms.h -> siglib_memory_sections.h
-        siglibp.h  -> siglib_processors.h
-    siglib_processors.h now uses stdint.h where supported by compiler
-    correlat.c filename changed to correlate.c
-    SDA_CorrelateLinear and SDA_CorrelateLinearPartial tidied up
-    sconio.h renamed to siglib_host_utils.h and time.h functions added.
+  Added more Portaudio / Analog I/O examples
+    const declaration tidy up
+  All Sinc and ResampleSinc functions tidied up
+  DLL examples tidied up
+  limits.h support improved
+  gcc support improved
+  QPSK examples tidied up
+  Header filenames extended :
+    siglibc.h  -> siglib_constants.h
+    siglibd.h  -> siglib_types.h
+    siglibic.h -> siglib_iir_constants.h
+    siglibm.h  -> siglib_macros.h
+    siglibms.h -> siglib_memory_sections.h
+    siglibp.h  -> siglib_processors.h
+  siglib_processors.h now uses stdint.h where supported by compiler
+  correlat.c filename changed to correlate.c
+  SDA_CorrelateLinear and SDA_CorrelateLinearPartial tidied up
+  sconio.h renamed to siglib_host_utils.h and time.h functions added.
 
 Optimisation Changes :
-    SDS_AbsMax changed to remove macros
+  SDS_AbsMax changed to remove macros
 
 Notes :
-    None
+  None
 
 
 VERSION : 8.53
@@ -506,27 +528,27 @@ RELEASE DATE : 30.12.2014
 _________________________
 
 Additional Processor / Compiler Support :
-    MACOS X
+  MACOS X
 
 Additional Functionality :
-    Added SDS_QFormatIntegerToSigLibData and SDS_SigLibDataToQFormatInteger
-    Added SDA_QFormatIntegerToSigLibData and SDA_SigLibDataToQFormatInteger
-    SIGLIB_DATA_WORD_LENGTH and SIGLIB_ARRAY_INDEX_WORD_LENGTH macros added to verify the wordlengths
+  Added SDS_QFormatIntegerToSigLibData and SDS_SigLibDataToQFormatInteger
+  Added SDA_QFormatIntegerToSigLibData and SDA_SigLibDataToQFormatInteger
+  SIGLIB_DATA_WORD_LENGTH and SIGLIB_ARRAY_INDEX_WORD_LENGTH macros added to verify the wordlengths
 
 Bug Fixes :
-    SDA_CostasQamDemodulate and SDA_CostasQamDemodulateDebug - decode logic bug fixed
+  SDA_CostasQamDemodulate and SDA_CostasQamDemodulateDebug - decode logic bug fixed
 
 Operational Changes :
-    SDS_EchoGenerate modified to remove some compiler warnings
-    siglib.c modifications to printing angles for compatibility with more compilers
-    SDS_Compare and SDS_CompareComplex - removed unused parameters
-    SDA_ZoomFft and SDA_ZoomFftSimple - modified to remove some compiler warnings
+  SDS_EchoGenerate modified to remove some compiler warnings
+  siglib.c modifications to printing angles for compatibility with more compilers
+  SDS_Compare and SDS_CompareComplex - removed unused parameters
+  SDA_ZoomFft and SDA_ZoomFftSimple - modified to remove some compiler warnings
 
 Optimisation Changes :
-    None
+  None
 
 Notes :
-    None
+  None
 
 
 VERSION : 8.52
@@ -534,24 +556,24 @@ RELEASE DATE : 18.01.2014
 _________________________
 
 Additional Processor / Compiler Support :
-    XMOS XS1
-    64 bit Intel X64 support (Visual Studio 2010) - siglib64.lib
+  XMOS XS1
+  64 bit Intel X64 support (Visual Studio 2010) - siglib64.lib
 
 Additional Functionality :
-    Python support via SWIG
+  Python support via SWIG
 
 Bug Fixes :
-    None
+  None
 
 Operational Changes :
-    Examples tidied up and Gnuplot/C support added.
-        SIM_Median3x3 modified to remove compiler warnings
+  Examples tidied up and Gnuplot/C support added.
+    SIM_Median3x3 modified to remove compiler warnings
 
 Optimisation Changes :
-    SDA_ComplexShift - code tidy up and optimization
+  SDA_ComplexShift - code tidy up and optimization
 
 Notes :
-    None
+  None
 
 
 VERSION : 8.51
@@ -559,38 +581,38 @@ RELEASE DATE : 1.9.2012
 _______________________
 
 Additional Processor / Compiler Support :
-    Microsoft Visual Studio 10.0
+  Microsoft Visual Studio 10.0
 
 Additional Functionality :
-    SUF_StrError
-    SLAccData_t added for future functionality
-    SUF_DebugPrintInfo, SUF_DebugPrintLine and SUF_DebugPrintTime
-    SDA_HistogramCumulative, SDA_HistogramExtended, SDA_HistogramExtendedCumulative
-    SDS_Compare and SDS_CompareComplex
+  SUF_StrError
+  SLAccData_t added for future functionality
+  SUF_DebugPrintInfo, SUF_DebugPrintLine and SUF_DebugPrintTime
+  SDA_HistogramCumulative, SDA_HistogramExtended, SDA_HistogramExtendedCumulative
+  SDS_Compare and SDS_CompareComplex
 
 Bug Fixes :
-    SDS_SignalGenerateGaussianNoise and SDA_SignalGenerateGaussianNoise parameter errors fixed.
-    SIF_FftConvolvePre, SDA_FftConvolvePre and SDA_FftConvolveArb
-    SIF_FftCorrelatePre, SDA_FftCorrelatePre and SDA_FftCorrelateArb
-    SDA_Histogram offset scaling problems
-    SDA_ZoomFft error in I/Q path processing
+  SDS_SignalGenerateGaussianNoise and SDA_SignalGenerateGaussianNoise parameter errors fixed.
+  SIF_FftConvolvePre, SDA_FftConvolvePre and SDA_FftConvolveArb
+  SIF_FftCorrelatePre, SDA_FftCorrelatePre and SDA_FftCorrelateArb
+  SDA_Histogram offset scaling problems
+  SDA_ZoomFft error in I/Q path processing
 
 Operational Changes :
-    SDA_Histogram change to data range limit handling
-    SDA_SigLibDataToFix, SDA_SigLibDataToFix32 and SDA_SigLibDataToFix16 use SDS_RoundToNearest to avoid floating point to fixed point issues.
-    The following constant declarations have changed :
-        SIGLIB_DATA_VERY_SMALL to SIGLIB_MIN
-        SIGLIB_10LOG10_OF_DATA_VERY_SMALL to SIGLIB_10LOG10_MIN
-        SIGLIB_AI_... to SIGLIB_FIX_....
-        SIGLIB_AI_MAX to SIGLIB_FIX_MAX
-        SIGLIB_AI_WORD_LENGTH to SIGLIB_FIX_WORD_LENGTH
-        SIGLIB_DATA_CLOSE_TO_ZERO to SIGLIB_MIN_THRESHOLD
+  SDA_Histogram change to data range limit handling
+  SDA_SigLibDataToFix, SDA_SigLibDataToFix32 and SDA_SigLibDataToFix16 use SDS_RoundToNearest to avoid floating point to fixed point issues.
+  The following constant declarations have changed :
+    SIGLIB_DATA_VERY_SMALL to SIGLIB_MIN
+    SIGLIB_10LOG10_OF_DATA_VERY_SMALL to SIGLIB_10LOG10_MIN
+    SIGLIB_AI_... to SIGLIB_FIX_....
+    SIGLIB_AI_MAX to SIGLIB_FIX_MAX
+    SIGLIB_AI_WORD_LENGTH to SIGLIB_FIX_WORD_LENGTH
+    SIGLIB_DATA_CLOSE_TO_ZERO to SIGLIB_MIN_THRESHOLD
 
 Optimisation Changes :
-    None
+  None
 
 Notes :
-    None
+  None
 
 
 
@@ -602,63 +624,63 @@ Additional Processor / Compiler Support :
   None
 
 Additional Functionality :
-    SIF_BandPassFirFilterWindow, SIF_LowPassFirFilterWindow and SIF_HighPassFirFilterWindow
-    C# example updated to support Microsoft C# 2008
-    SIF_GoertzelDetect, SIF_GoertzelDetectComplex
-    SUF_EstimateBPFilterLength
-    SDA_Max2, SDA_AbsMax2, SDA_Min2, SDA_AbsMin2
-    SIF_Resonator1
-    SDS_Int, SDS_Frac, SDS_AbsFrac, SDA_Int, SDA_Frac, SDA_AbsFrac
-    SDA_SetRange, SDA_SetMean
-    SUF_MSDelay
-    SIF_DeGlitch, SDS_DeGlitch, SDA_DeGlitch
-    SUF_EstimateBPFilterLength and SUF_EstimateBPFilterError
-    SDS_GoertzelFilter
-    SUF_IndexModuloIncrement and SUF_IndexModuloDeccrement
+  SIF_BandPassFirFilterWindow, SIF_LowPassFirFilterWindow and SIF_HighPassFirFilterWindow
+  C# example updated to support Microsoft C# 2008
+  SIF_GoertzelDetect, SIF_GoertzelDetectComplex
+  SUF_EstimateBPFilterLength
+  SDA_Max2, SDA_AbsMax2, SDA_Min2, SDA_AbsMin2
+  SIF_Resonator1
+  SDS_Int, SDS_Frac, SDS_AbsFrac, SDA_Int, SDA_Frac, SDA_AbsFrac
+  SDA_SetRange, SDA_SetMean
+  SUF_MSDelay
+  SIF_DeGlitch, SDS_DeGlitch, SDA_DeGlitch
+  SUF_EstimateBPFilterLength and SUF_EstimateBPFilterError
+  SDS_GoertzelFilter
+  SUF_IndexModuloIncrement and SUF_IndexModuloDeccrement
 
 Bug Fixes :
-    SDA_ReSizeOutput - pointer update bug fixed
-    SDA_TdPitchShift - pDst pointer update bug fixed
-    SDA_Resonator, SDA_Resonator1 and SDA_Resonator1Add - Removed pDst pointer update bug introduced in V8.40
+  SDA_ReSizeOutput - pointer update bug fixed
+  SDA_TdPitchShift - pDst pointer update bug fixed
+  SDA_Resonator, SDA_Resonator1 and SDA_Resonator1Add - Removed pDst pointer update bug introduced in V8.40
 
 Operational Changes :
-    SIF_GoertzelFilterComplex function name changed to SIF_GoertzelDetectComplex
-    SIF_Delay function name changed to SIF_FixedDelay
-    SDS_Delay function name changed to SDS_FixedDelay
-    SDA_Delay function name changed to SDA_FixedDelay
-    SIF_DelayComplex function name changed to SIF_FixedDelayComplex
-    SDS_DelayComplex function name changed to SDS_FixedDelayComplex
-    SDA_DelayComplex function name changed to SDA_FixedDelayComplex
-    SDA_ShortDelay function name changed to SDA_ShortFixedDelay
-    SIF_FifoDelay function name changed to SIF_VariableDelay
-    SDS_FifoDelay function name changed to SDS_VariableDelay
-    SDA_FifoDelay function name changed to SDA_VariableDelay
-    SIF_FifoDelayComplex function name changed to SIF_VariableDelayComplex
-    SDS_FifoDelayComplex function name changed to SDS_VariableDelayComplex
-    SDA_FifoDelayComplex function name changed to SDA_VariableDelayComplex
-    SUF_IncreaseFifoDelay function name changed to SUF_IncreaseVariableDelay
-    SUF_DecreaseFifoDelay function name changed to SUF_DecreaseVariableDelay
-    Function parameters and internal data types in the following functions have been modified to allow correct handling of mixing short and long integer types.
-        SMX_Inverse and SMX_LuDecompose
-        SDA_QpskModulate, SDA_Qam16Modulate, SDA_Qam16Demodulate, SDA_Qam16DemodulateDebug
-        SDA_DpskModulate, SDA_DpskDemodulateDebug, SDA_BpskDemodulate, SDA_BpskDemodulateDebug
-        SDA_ComplexQPSKSpread, SDA_ComplexQPSKDeSpread, SDA_PiByFourDQpskModulate, SIF_ComplexShift
-        SDA_MovePeakTowardsDeadBand, SDA_ZoomFft
-        SDA_Interpolate, SDA_FilterAndDecimate, SDA_InterpolateAndFilter, SDA_ResampleLinear
-        SIF_VariableDelay, SIF_VariableDelayComplex
-        SDA_SignalGenerate, SDS_SignalGenerate
-        SIF_ViterbiDecoderV32 and SDS_ViterbiDecoderV32
+  SIF_GoertzelFilterComplex function name changed to SIF_GoertzelDetectComplex
+  SIF_Delay function name changed to SIF_FixedDelay
+  SDS_Delay function name changed to SDS_FixedDelay
+  SDA_Delay function name changed to SDA_FixedDelay
+  SIF_DelayComplex function name changed to SIF_FixedDelayComplex
+  SDS_DelayComplex function name changed to SDS_FixedDelayComplex
+  SDA_DelayComplex function name changed to SDA_FixedDelayComplex
+  SDA_ShortDelay function name changed to SDA_ShortFixedDelay
+  SIF_FifoDelay function name changed to SIF_VariableDelay
+  SDS_FifoDelay function name changed to SDS_VariableDelay
+  SDA_FifoDelay function name changed to SDA_VariableDelay
+  SIF_FifoDelayComplex function name changed to SIF_VariableDelayComplex
+  SDS_FifoDelayComplex function name changed to SDS_VariableDelayComplex
+  SDA_FifoDelayComplex function name changed to SDA_VariableDelayComplex
+  SUF_IncreaseFifoDelay function name changed to SUF_IncreaseVariableDelay
+  SUF_DecreaseFifoDelay function name changed to SUF_DecreaseVariableDelay
+  Function parameters and internal data types in the following functions have been modified to allow correct handling of mixing short and long integer types.
+    SMX_Inverse and SMX_LuDecompose
+    SDA_QpskModulate, SDA_Qam16Modulate, SDA_Qam16Demodulate, SDA_Qam16DemodulateDebug
+    SDA_DpskModulate, SDA_DpskDemodulateDebug, SDA_BpskDemodulate, SDA_BpskDemodulateDebug
+    SDA_ComplexQPSKSpread, SDA_ComplexQPSKDeSpread, SDA_PiByFourDQpskModulate, SIF_ComplexShift
+    SDA_MovePeakTowardsDeadBand, SDA_ZoomFft
+    SDA_Interpolate, SDA_FilterAndDecimate, SDA_InterpolateAndFilter, SDA_ResampleLinear
+    SIF_VariableDelay, SIF_VariableDelayComplex
+    SDA_SignalGenerate, SDS_SignalGenerate
+    SIF_ViterbiDecoderV32 and SDS_ViterbiDecoderV32
 
 
 Optimisation Changes :
-    SDA_GoertzelDetect and SDA_GoertzelDetectComplex - Note function parameter lists have changed.
-    SIF_DtmfDetect, SDA_DtmfDetect and SDA_DtmfDetectAndValidate - Note function parameter lists have changed.
-    SDA_Resonator, SDA_Resonator1 and SDA_Resonator1Add - use local variables for state arrays.
-    SIGLIB_TRIANGLE and SIGLIB_BARTLETT window types now split into :
-        SIGLIB_BARTLETT_TRIANGLE_ZERO_END_POINTS and SIGLIB_BARTLETT_TRIANGLE_NON_ZERO_END_POINTS
+  SDA_GoertzelDetect and SDA_GoertzelDetectComplex - Note function parameter lists have changed.
+  SIF_DtmfDetect, SDA_DtmfDetect and SDA_DtmfDetectAndValidate - Note function parameter lists have changed.
+  SDA_Resonator, SDA_Resonator1 and SDA_Resonator1Add - use local variables for state arrays.
+  SIGLIB_TRIANGLE and SIGLIB_BARTLETT window types now split into :
+    SIGLIB_BARTLETT_TRIANGLE_ZERO_END_POINTS and SIGLIB_BARTLETT_TRIANGLE_NON_ZERO_END_POINTS
 
 Notes :
-    None
+  None
 
 
 VERSION : 8.42
@@ -668,33 +690,33 @@ ________________________
 Additional Processor / Compiler Support :
 
 Additional Functionality :
-    Cft and Cift functions added
-    SUF_PrintArray, SUF_PrintComplexArray, SUF_PrintMatrix, SUF_PrintPolar, SUF_PrintRectangular, SUF_PrintIIRCoefficients, SUF_DebugPrintComplexArray
-    SIF_TappedDelayLine, SDS_TappedDelayLine, SDA_TappedDelayLine, SIF_TappedDelayLineComplex,
-        SDS_TappedDelayLineComplex, SDA_TappedDelayLineComplex, SIF_TappedDelayLineIQ, SDS_TappedDelayLineIQ,
-        SDA_TappedDelayLineIQ
-    SDA_ZeroCrossingCount, SDA_LevelCrossingDetect, SDS_LevelCrossingDetect, SDA_FirstLevelCrossingLocation, SDA_LevelCrossingCount
-    SDS_10Log10, SDS_20Log10
-    SDS_ZTransform, SDS_ZTransformDB
-    SDA_PeakToAveragePowerRatio, SDA_PeakToAveragePowerRatioDB, SDA_PeakToAverageRatioComplex, SDA_PeakToAveragePowerRatioComplex, SDA_PeakToAveragePowerRatioComplexDB.
+  Cft and Cift functions added
+  SUF_PrintArray, SUF_PrintComplexArray, SUF_PrintMatrix, SUF_PrintPolar, SUF_PrintRectangular, SUF_PrintIIRCoefficients, SUF_DebugPrintComplexArray
+  SIF_TappedDelayLine, SDS_TappedDelayLine, SDA_TappedDelayLine, SIF_TappedDelayLineComplex,
+    SDS_TappedDelayLineComplex, SDA_TappedDelayLineComplex, SIF_TappedDelayLineIQ, SDS_TappedDelayLineIQ,
+    SDA_TappedDelayLineIQ
+  SDA_ZeroCrossingCount, SDA_LevelCrossingDetect, SDS_LevelCrossingDetect, SDA_FirstLevelCrossingLocation, SDA_LevelCrossingCount
+  SDS_10Log10, SDS_20Log10
+  SDS_ZTransform, SDS_ZTransformDB
+  SDA_PeakToAveragePowerRatio, SDA_PeakToAveragePowerRatioDB, SDA_PeakToAverageRatioComplex, SDA_PeakToAveragePowerRatioComplex, SDA_PeakToAveragePowerRatioComplexDB.
 
 Bug Fixes :
-    None
+  None
 
 Operational Changes :
-    Scaling on dft function
-    SDA_FirstZeroCrossingPos changed to SDA_FirstZeroCrossingLocation
-    SIGLIB_POSITIVE_ZERO_CROSS changed to SIGLIB_POSITIVE_LEVEL_CROSS
-    SIGLIB_NEGATIVE_ZERO_CROSS changed to SIGLIB_NEGATIVE_LEVEL_CROSS
-    SIGLIB_ALL_ZERO_CROSS changed to SIGLIB_ALL_LEVEL_CROSS
-    SLZeroCrossingMode_t changed to SLLevelCrossingMode_t
-    SIGLIB_ZERO_CROSSING_NOT_DETECTED changed to SIGLIB_LEVEL_CROSSING_NOT_DETECTED
+  Scaling on dft function
+  SDA_FirstZeroCrossingPos changed to SDA_FirstZeroCrossingLocation
+  SIGLIB_POSITIVE_ZERO_CROSS changed to SIGLIB_POSITIVE_LEVEL_CROSS
+  SIGLIB_NEGATIVE_ZERO_CROSS changed to SIGLIB_NEGATIVE_LEVEL_CROSS
+  SIGLIB_ALL_ZERO_CROSS changed to SIGLIB_ALL_LEVEL_CROSS
+  SLZeroCrossingMode_t changed to SLLevelCrossingMode_t
+  SIGLIB_ZERO_CROSSING_NOT_DETECTED changed to SIGLIB_LEVEL_CROSSING_NOT_DETECTED
 
 Optimisation Changes :
-    Dft functions optimized
+  Dft functions optimized
 
 Notes :
-    None
+  None
 
 
 VERSION : 8.41
@@ -704,19 +726,19 @@ _______________________
 Additional Processor / Compiler Support :
 
 Additional Functionality :
-    None
+  None
 
 Bug Fixes :
-    SDA_Median - corrected for even array lengths
+  SDA_Median - corrected for even array lengths
 
 Operational Changes :
-    None
+  None
 
 Optimisation Changes :
-    None
+  None
 
 Notes :
-    None
+  None
 
 
 VERSION : 8.40
@@ -726,45 +748,45 @@ _______________________
 Additional Processor / Compiler Support :
 
 Additional Functionality :
-    SDS_SignalGenerate
-    Macros - SDA_SignalGenerateWhiteNoise, SDS_SignalGenerateWhiteNoise,
-        SDA_SignalGenerateGaussianNoise, SDS_SignalGenerateGaussianNoise.
-        SDA_SignalGeneratePolarWhiteNoise, SDS_SignalGeneratePolarWhiteNoise,
-        SDA_SignalGeneratePolarGaussianNoise and SDS_SignalGeneratePolarGaussianNoise.
-    SDS_ScramblerDescramblergCRC24, SDS_SequenceGeneratorgCRC24, SDS_ScramblerDescramblergCRC16,
-    SDS_SequenceGeneratorgCRC16, SDS_ScramblerDescramblergCRC12, SDS_SequenceGeneratorgCRC12,
-    SDS_ScramblerDescramblergCRC8 , SDS_SequenceGeneratorgCRC8
-    SDS_ChannelizationCode
-    SDA_ComplexSqrt, SDA_ComplexInverse, SDA_ComplexConjugate, SDA_ComplexMagnitude,
-    SDA_ComplexMagnitudeSquared, SDA_ComplexPhase, SDA_ComplexMultiply, SDA_ComplexDivide,
-    SDA_ComplexAdd, SDA_ComplexSubtract, SDA_ComplexLog, SDA_ComplexExp, SDA_ComplexExpj, SDA_ComplexPow,
-    SDA_ComplexVectorAddScalar, SDA_ComplexVectorSubtractScalar, SDA_ComplexVectorMultiplyScalar,
-    SDA_ComplexVectorDivideScalar, SDA_ComplexScalarSubtractVector.
-    SDS_LongCodeGenerator3GPPDL, SDS_LongCodeGenerator3GPPUL.
-    SDA_ComplexQPSKSpread, SDA_ComplexQPSKDeSpread.
-    SDA_SignalAddPolarJitterAndGaussianNoise, SDS_SignalAddPolarJitterAndGaussianNoise
-    SCV_Copy, SCV_Compare, SCV_CopyMacro
-    SDS_ReverseDiBits
-    SDS_QpskBitErrorCount, SDS_BitErrorRate
-    SIF_Iir2PoleLpf, SDS_Iir2Pole, SDA_Iir2Pole
-    SDA_ComplexRectangularLinearInterpolate, SDA_ComplexPolarLinearInterpolate
+  SDS_SignalGenerate
+  Macros - SDA_SignalGenerateWhiteNoise, SDS_SignalGenerateWhiteNoise,
+    SDA_SignalGenerateGaussianNoise, SDS_SignalGenerateGaussianNoise.
+    SDA_SignalGeneratePolarWhiteNoise, SDS_SignalGeneratePolarWhiteNoise,
+    SDA_SignalGeneratePolarGaussianNoise and SDS_SignalGeneratePolarGaussianNoise.
+  SDS_ScramblerDescramblergCRC24, SDS_SequenceGeneratorgCRC24, SDS_ScramblerDescramblergCRC16,
+  SDS_SequenceGeneratorgCRC16, SDS_ScramblerDescramblergCRC12, SDS_SequenceGeneratorgCRC12,
+  SDS_ScramblerDescramblergCRC8 , SDS_SequenceGeneratorgCRC8
+  SDS_ChannelizationCode
+  SDA_ComplexSqrt, SDA_ComplexInverse, SDA_ComplexConjugate, SDA_ComplexMagnitude,
+  SDA_ComplexMagnitudeSquared, SDA_ComplexPhase, SDA_ComplexMultiply, SDA_ComplexDivide,
+  SDA_ComplexAdd, SDA_ComplexSubtract, SDA_ComplexLog, SDA_ComplexExp, SDA_ComplexExpj, SDA_ComplexPow,
+  SDA_ComplexVectorAddScalar, SDA_ComplexVectorSubtractScalar, SDA_ComplexVectorMultiplyScalar,
+  SDA_ComplexVectorDivideScalar, SDA_ComplexScalarSubtractVector.
+  SDS_LongCodeGenerator3GPPDL, SDS_LongCodeGenerator3GPPUL.
+  SDA_ComplexQPSKSpread, SDA_ComplexQPSKDeSpread.
+  SDA_SignalAddPolarJitterAndGaussianNoise, SDS_SignalAddPolarJitterAndGaussianNoise
+  SCV_Copy, SCV_Compare, SCV_CopyMacro
+  SDS_ReverseDiBits
+  SDS_QpskBitErrorCount, SDS_BitErrorRate
+  SIF_Iir2PoleLpf, SDS_Iir2Pole, SDA_Iir2Pole
+  SDA_ComplexRectangularLinearInterpolate, SDA_ComplexPolarLinearInterpolate
 
 Bug Fixes :
-    None
+  None
 
 Operational Changes :
-    SCV_RectangularToPolar, SDA_ComplexRectangularToPolar and SDA_RectangularToPolar changes to origin handling.
-    The following functions have been modified to remove static variables :
-        SIF_QpskModulate, SDA_QpskModulate, SIF_QpskDemodulate, SDA_QpskDemodulate
-        SDA_QpskDemodulateDebug, SIF_Qam16Modulate, SDA_Qam16Modulate
-        SIF_Qam16Demodulate, SDA_Qam16Demodulate, SDA_Qam16DemodulateDebug
-        SIF_PiByFourDQpskModulate, SDA_PiByFourDQpskModulate
+  SCV_RectangularToPolar, SDA_ComplexRectangularToPolar and SDA_RectangularToPolar changes to origin handling.
+  The following functions have been modified to remove static variables :
+    SIF_QpskModulate, SDA_QpskModulate, SIF_QpskDemodulate, SDA_QpskDemodulate
+    SDA_QpskDemodulateDebug, SIF_Qam16Modulate, SDA_Qam16Modulate
+    SIF_Qam16Demodulate, SDA_Qam16Demodulate, SDA_Qam16DemodulateDebug
+    SIF_PiByFourDQpskModulate, SDA_PiByFourDQpskModulate
 
 Optimisation Changes :
-    None
+  None
 
 Notes :
-    None
+  None
 
 
 VERSION : 8.30
@@ -774,21 +796,21 @@ _______________________
 Additional Processor / Compiler Support :
 
 Additional Functionality :
-    SDA_SignalGenerateKronekerDeltaFunction macro
-    SDA_Find and SDA_FindValue
+  SDA_SignalGenerateKronekerDeltaFunction macro
+  SDA_Find and SDA_FindValue
 
 Bug Fixes :
-    None
+  None
 
 Operational Changes :
-    #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_POINTER_ACCESS) modifications for some functions using array accesses.
-    SDA_WelchRealPowerSpectrum and SDA_WelchComplexPowerSpectrum modified to generate linear results rather than dB.
+  #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_POINTER_ACCESS) modifications for some functions using array accesses.
+  SDA_WelchRealPowerSpectrum and SDA_WelchComplexPowerSpectrum modified to generate linear results rather than dB.
 
 Optimisation Changes :
-    None
+  None
 
 Notes :
-    None
+  None
 
 VERSION : 8.20
 RELEASE DATE : Pre-release June 2008
@@ -2046,7 +2068,7 @@ Operational Changes :
 	buffer_clip changed.
 	Zoom FFT added.
 
-                1.51
+        1.51
 17-02-93		V1.51 released.
 	Added Windows graphical front end
 	Added functionality for multi rate filtering.
@@ -2055,7 +2077,7 @@ Operational Changes :
 	3d graphs added.
 	Added file output function.
 
-                1.50
+        1.50
 28-10-92		V1.50 released (First public Release).
 	clear_graph and disp_buf_line added. FFT, now
 	has correct twiddle factors. Added 10log10

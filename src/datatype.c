@@ -1,3 +1,4 @@
+
 /**************************************************************************
 File Name               : DATATYPE.C    | Author        : JOHN EDWARDS
 Siglib Library Version  : 10.00         |
@@ -36,11 +37,12 @@ Description : Functions to convert between different data types.
 
 ****************************************************************************/
 
-#define SIGLIB_SRC_FILE_DATATYPE    1                       // Defines the source file that this code is being used in
+#define SIGLIB_SRC_FILE_DATATYPE    1                               // Defines the source file that this code is being used in
 
-#include <siglib.h>                                         // Include SigLib header file
+#include <siglib.h>                                                 // Include SigLib header file
 
 /**/
+
 /********************************************************
 * Function: SDA_SigLibDataToFix()
 *
@@ -57,32 +59,33 @@ Description : Functions to convert between different data types.
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_SigLibDataToFix (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLFixData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_SigLibDataToFix (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLFixData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t SampleLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = (SLFixData_t)SDS_RoundToNearest(pSrc[i]);
+  for (i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = (SLFixData_t) SDS_RoundToNearest (pSrc[i]);
 #else
-        *pDst++ = (SLFixData_t)SDS_RoundToNearest(*pSrc++);
+    *pDst++ = (SLFixData_t) SDS_RoundToNearest (*pSrc++);
 #endif
-    }
+  }
 
-}       // End of SDA_SigLibDataToFix()
+}                                                                   // End of SDA_SigLibDataToFix()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_FixToSigLibData()
 *
@@ -99,31 +102,32 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_FixToSigLibData (const SLFixData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_FixToSigLibData (
+  const SLFixData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t SampleLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = (SLData_t) pSrc[i];
+  for (i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = (SLData_t) pSrc[i];
 #else
-        *pDst++ = (SLData_t) *pSrc++;
+    *pDst++ = (SLData_t) * pSrc++;
 #endif
-    }
-}       // End of SDA_FixToSigLibData()
+  }
+}                                                                   // End of SDA_FixToSigLibData()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_SigLibDataToImageData()
 *
@@ -140,32 +144,33 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_SigLibDataToImageData (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLImageData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_SigLibDataToImageData (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLImageData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t SampleLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = (SLImageData_t)SDS_RoundToNearest(pSrc[i]);
+  for (i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = (SLImageData_t) SDS_RoundToNearest (pSrc[i]);
 #else
-        *pDst++ = (SLImageData_t)SDS_RoundToNearest(*pSrc++);
+    *pDst++ = (SLImageData_t) SDS_RoundToNearest (*pSrc++);
 #endif
-    }
+  }
 
-}       // End of SDA_SigLibDataToImageData()
+}                                                                   // End of SDA_SigLibDataToImageData()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ImageDataToSigLibData()
 *
@@ -182,31 +187,32 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ImageDataToSigLibData (const SLImageData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_ImageDataToSigLibData (
+  const SLImageData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t SampleLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = (SLData_t) pSrc[i];
+  for (i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = (SLData_t) pSrc[i];
 #else
-        *pDst++ = (SLData_t) *pSrc++;
+    *pDst++ = (SLData_t) * pSrc++;
 #endif
-    }
-}       // End of SDA_ImageDataToSigLibData()
+  }
+}                                                                   // End of SDA_ImageDataToSigLibData()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_SigLibDataToFix16
 *
@@ -223,25 +229,26 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_SigLibDataToFix16 (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLInt16_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_SigLibDataToFix16 (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLInt16_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
-    for (i = 0; i < ArrayLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = (SLInt16_t)SDS_RoundToNearest(pSrc[i]);
+  for (i = 0; i < ArrayLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = (SLInt16_t) SDS_RoundToNearest (pSrc[i]);
 #else
-        *pDst++ = (SLInt16_t)SDS_RoundToNearest(*pSrc++);
+    *pDst++ = (SLInt16_t) SDS_RoundToNearest (*pSrc++);
 #endif
-    }
+  }
 
-}       // End of SDA_SigLibDataToFix16()
+}                                                                   // End of SDA_SigLibDataToFix16()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Fix16ToSigLibData
 *
@@ -258,25 +265,26 @@ void SIGLIB_FUNC_DECL SDA_SigLibDataToFix16 (const SLData_t * SIGLIB_PTR_DECL pS
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Fix16ToSigLibData (const SLInt16_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_Fix16ToSigLibData (
+  const SLInt16_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
-    for (i = 0; i < ArrayLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = (SLData_t)pSrc[i];
+  for (i = 0; i < ArrayLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = (SLData_t) pSrc[i];
 #else
-        *pDst++ = (SLData_t)*pSrc++;
+    *pDst++ = (SLData_t) * pSrc++;
 #endif
-    }
+  }
 
-}       // End of SDA_Fix16ToSigLibData()
+}                                                                   // End of SDA_Fix16ToSigLibData()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_SigLibDataToFix32
 *
@@ -293,25 +301,26 @@ void SIGLIB_FUNC_DECL SDA_Fix16ToSigLibData (const SLInt16_t * SIGLIB_PTR_DECL p
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_SigLibDataToFix32 (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLInt32_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_SigLibDataToFix32 (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLInt32_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
-    for (i = 0; i < ArrayLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = (SLInt32_t)SDS_RoundToNearest(pSrc[i]);
+  for (i = 0; i < ArrayLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = (SLInt32_t) SDS_RoundToNearest (pSrc[i]);
 #else
-        *pDst++ = (SLInt32_t)SDS_RoundToNearest(*pSrc++);
+    *pDst++ = (SLInt32_t) SDS_RoundToNearest (*pSrc++);
 #endif
-    }
+  }
 
-}       // End of SDA_SigLibDataToFix32()
+}                                                                   // End of SDA_SigLibDataToFix32()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Fix32ToSigLibData
 *
@@ -328,25 +337,26 @@ void SIGLIB_FUNC_DECL SDA_SigLibDataToFix32 (const SLData_t * SIGLIB_PTR_DECL pS
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Fix32ToSigLibData (const SLInt32_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_Fix32ToSigLibData (
+  const SLInt32_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
-    for (i = 0; i < ArrayLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = (SLData_t)pSrc[i];
+  for (i = 0; i < ArrayLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = (SLData_t) pSrc[i];
 #else
-        *pDst++ = (SLData_t)*pSrc++;
+    *pDst++ = (SLData_t) * pSrc++;
 #endif
-    }
+  }
 
-}       // End of SDA_Fix32ToSigLibData()
+}                                                                   // End of SDA_Fix32ToSigLibData()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_SigLibDataToQFormatInteger
 *
@@ -363,26 +373,27 @@ void SIGLIB_FUNC_DECL SDA_Fix32ToSigLibData (const SLInt32_t * SIGLIB_PTR_DECL p
 *
 ********************************************************/
 
-SLFixData_t SIGLIB_FUNC_DECL SDS_SigLibDataToQFormatInteger (const SLData_t x,
-    const SLFixData_t m,
-    const SLFixData_t n)
-
+SLFixData_t SIGLIB_FUNC_DECL SDS_SigLibDataToQFormatInteger (
+  const SLData_t x,
+  const SLFixData_t m,
+  const SLFixData_t n)
 {
-    SLFixData_t     i;
-    SLUFixData_t    y;
-    SLUFixData_t    mask = 0;
+  SLFixData_t     i;
+  SLUFixData_t    y;
+  SLUFixData_t    mask = 0;
 
-    y = (SLUFixData_t)(x * ((SLData_t)(1U << (SLUFixData_t)n)));    // Generate the integer number in m.n format
+  y = (SLUFixData_t) (x * ((SLData_t) (1U << (SLUFixData_t) n)));   // Generate the integer number in m.n format
 
-    for (i = 0; i < (m+n); i++) {       // Calculate the mask to ensure we return the correct number of valid bits
-        mask = (mask << 1U) + 1;
-    }
-    // printf ("Mask = 0x%llx\n", mask);
+  for (i = 0; i < (m + n); i++) {                                   // Calculate the mask to ensure we return the correct number of valid bits
+    mask = (mask << 1U) + 1;
+  }
+// printf ("Mask = 0x%llx\n", mask);
 
-    return ((SLFixData_t)(y & mask));
+  return ((SLFixData_t) (y & mask));
 }
 
 /**/
+
 /********************************************************
 * Function: SDS_QFormatIntegerToSigLibData
 *
@@ -398,15 +409,16 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_SigLibDataToQFormatInteger (const SLData_t x,
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_QFormatIntegerToSigLibData (const SLFixData_t x,
-    const SLFixData_t n)
-
+SLData_t SIGLIB_FUNC_DECL SDS_QFormatIntegerToSigLibData (
+  const SLFixData_t x,
+  const SLFixData_t n)
 {
-    return (((SLData_t)x) / ((SLData_t)(1U << (SLUFixData_t)n)));
+  return (((SLData_t) x) / ((SLData_t) (1U << (SLUFixData_t) n)));
 }
 
 
 /**/
+
 /********************************************************
 * Function: SDA_SigLibDataToQFormatInteger
 *
@@ -425,33 +437,34 @@ SLData_t SIGLIB_FUNC_DECL SDS_QFormatIntegerToSigLibData (const SLFixData_t x,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_SigLibDataToQFormatInteger (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLFixData_t * SIGLIB_PTR_DECL pDst,
-    const SLFixData_t m,
-    const SLFixData_t n,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_SigLibDataToQFormatInteger (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLFixData_t * SIGLIB_PTR_DECL pDst,
+  const SLFixData_t m,
+  const SLFixData_t n,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
-    SLUFixData_t   y;
-    SLUFixData_t   mask = 0;
+  SLArrayIndex_t  i;
+  SLUFixData_t    y;
+  SLUFixData_t    mask = 0;
 
-    for (i = 0; i < (m+n); i++) {     // Calculate the mask to ensure we return the correct number of valid bits
-        mask = (mask << 1U) + 1U;
-    }
+  for (i = 0; i < (m + n); i++) {                                   // Calculate the mask to ensure we return the correct number of valid bits
+    mask = (mask << 1U) + 1U;
+  }
 
-    for (i = 0; i < ArrayLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        y = (SLUFixData_t)(pSrc[i] * ((SLData_t)(1U << (SLUFixData_t)n)));          // Generate the integer number in m.n format
+  for (i = 0; i < ArrayLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    y = (SLUFixData_t) (pSrc[i] * ((SLData_t) (1U << (SLUFixData_t) n))); // Generate the integer number in m.n format
 #else
-        y = (SLUFixData_t)(*pSrc++ * ((SLData_t)(1U << (SLUFixData_t)n)));          // Generate the integer number in m.n format
+    y = (SLUFixData_t) (*pSrc++ * ((SLData_t) (1U << (SLUFixData_t) n))); // Generate the integer number in m.n format
 #endif
-        pDst[i] = y & mask;
-    }
+    pDst[i] = y & mask;
+  }
 }
 
 
 /**/
+
 /********************************************************
 * Function: SDA_QFormatIntegerToSigLibData
 *
@@ -469,20 +482,19 @@ void SIGLIB_FUNC_DECL SDA_SigLibDataToQFormatInteger (const SLData_t * SIGLIB_PT
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_QFormatIntegerToSigLibData (const SLFixData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLFixData_t n,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_QFormatIntegerToSigLibData (
+  const SLFixData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLFixData_t n,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
-    for (i = 0; i < ArrayLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = ((SLData_t)pSrc[i]) / ((SLData_t)(1U << (SLUFixData_t)n));
+  for (i = 0; i < ArrayLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = ((SLData_t) pSrc[i]) / ((SLData_t) (1U << (SLUFixData_t) n));
 #else
-        *pDst++ = ((SLData_t)*pSrc++) / ((SLData_t)(1U << (SLUFixData_t)n));
+    *pDst++ = ((SLData_t) * pSrc++) / ((SLData_t) (1U << (SLUFixData_t) n));
 #endif
-    }
+  }
 }
-

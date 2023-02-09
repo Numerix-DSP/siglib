@@ -1,3 +1,4 @@
+
 /**************************************************************************
 File Name               : IIRFILT.C     | Author        : JOHN EDWARDS
 Siglib Library Version  : 10.00         |
@@ -36,12 +37,13 @@ Description : SigLib DSP library IIR filter routines.
 
 ****************************************************************************/
 
-#define SIGLIB_SRC_FILE_IIRFILT 1                           // Defines the source file that this code is being used in
+#define SIGLIB_SRC_FILE_IIRFILT 1                                   // Defines the source file that this code is being used in
 
-#include <siglib.h>                                         // Include SigLib header file
+#include <siglib.h>                                                 // Include SigLib header file
 
 
 /**/
+
 /********************************************************
 * Function: SIF_Iir
 *
@@ -57,21 +59,22 @@ Description : SigLib DSP library IIR filter routines.
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_Iir (SLData_t * SIGLIB_PTR_DECL pState,
-    const SLArrayIndex_t NumberOfBiquads)
-
+void SIGLIB_FUNC_DECL SIF_Iir (
+  SLData_t * SIGLIB_PTR_DECL pState,
+  const SLArrayIndex_t NumberOfBiquads)
 {
-    SLArrayIndex_t  i;
+  SLArrayIndex_t  i;
 
-        // Initialise the filter state array to 0
-    for (i = 0; i < (NumberOfBiquads * SIGLIB_IIR_DELAY_SIZE); i++) {
-        *pState++ = SIGLIB_ZERO;
-    }
+// Initialise the filter state array to 0
+  for (i = 0; i < (NumberOfBiquads * SIGLIB_IIR_DELAY_SIZE); i++) {
+    *pState++ = SIGLIB_ZERO;
+  }
 
-}       // End of SIF_Iir()
+}                                                                   // End of SIF_Iir()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_Iir
 *
@@ -91,37 +94,36 @@ void SIGLIB_FUNC_DECL SIF_Iir (SLData_t * SIGLIB_PTR_DECL pState,
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_Iir (const SLData_t Source,
-    SLData_t * SIGLIB_PTR_DECL pState,
-    const SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    const SLArrayIndex_t NumberOfBiquads)
-
+SLData_t SIGLIB_FUNC_DECL SDS_Iir (
+  const SLData_t Source,
+  SLData_t * SIGLIB_PTR_DECL pState,
+  const SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLArrayIndex_t NumberOfBiquads)
 {
-    SLData_t       FeedbackSumOfProducts;
-    SLArrayIndex_t i;
-    SLData_t       TempInputData;
+  SLData_t        FeedbackSumOfProducts;
+  SLArrayIndex_t  i;
+  SLData_t        TempInputData;
 
-    TempInputData = Source;
+  TempInputData = Source;
 
-    for (i = 0; i < NumberOfBiquads; i++) {
-        FeedbackSumOfProducts = TempInputData - (*(pCoeffs+3) * *pState) - (*(pCoeffs+4) * *(pState+1));    // Feedback
-        TempInputData = (*pCoeffs * FeedbackSumOfProducts) +
-                         (*(pCoeffs + 1) * *pState) +
-                         (*(pCoeffs + 2) * *(pState+1));    // Feedforward and save result for next time round
+  for (i = 0; i < NumberOfBiquads; i++) {
+    FeedbackSumOfProducts = TempInputData - (*(pCoeffs + 3) * *pState) - (*(pCoeffs + 4) * *(pState + 1));  // Feedback
+    TempInputData = (*pCoeffs * FeedbackSumOfProducts) + (*(pCoeffs + 1) * *pState) + (*(pCoeffs + 2) * *(pState + 1)); // Feedforward and save result for next time round
 
-        *(pState+1) = *pState;                  // Move delayed samples
-        *pState = FeedbackSumOfProducts;
+    *(pState + 1) = *pState;                                        // Move delayed samples
+    *pState = FeedbackSumOfProducts;
 
-        pState += SIGLIB_IIR_DELAY_SIZE;        // Increment array pointers
-        pCoeffs += SIGLIB_IIR_COEFFS_PER_BIQUAD;
-    }
+    pState += SIGLIB_IIR_DELAY_SIZE;                                // Increment array pointers
+    pCoeffs += SIGLIB_IIR_COEFFS_PER_BIQUAD;
+  }
 
-    return (TempInputData);                     // Save output
+  return (TempInputData);                                           // Save output
 
-}       // End of SDS_Iir()
+}                                                                   // End of SDS_Iir()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Iir
 *
@@ -143,50 +145,49 @@ SLData_t SIGLIB_FUNC_DECL SDS_Iir (const SLData_t Source,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Iir (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    SLData_t * SIGLIB_PTR_DECL pState,
-    const SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    const SLArrayIndex_t NumberOfBiquads,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_Iir (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  SLData_t * SIGLIB_PTR_DECL pState,
+  const SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLArrayIndex_t NumberOfBiquads,
+  const SLArrayIndex_t SampleLength)
 {
-    SLData_t       FeedbackSumOfProducts, TempInputData;
-    SLArrayIndex_t i, j;
+  SLData_t        FeedbackSumOfProducts, TempInputData;
+  SLArrayIndex_t  i, j;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
-_nassert((int) pState % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
+  _nassert ((int) pState % 8 == 0);
 #endif
 #endif
 
-    for (j = 0; j < SampleLength; j++) {
-        TempInputData = *pSrc++;
+  for (j = 0; j < SampleLength; j++) {
+    TempInputData = *pSrc++;
 
-        for (i = 0; i < NumberOfBiquads; i++) {
-            FeedbackSumOfProducts = TempInputData - (*(pCoeffs+3) * *pState) - (*(pCoeffs+4) * *(pState+1));    // Feedback
-            TempInputData = (*pCoeffs * FeedbackSumOfProducts) +
-                             (*(pCoeffs + 1) * *pState) +
-                             (*(pCoeffs + 2) * *(pState+1));    // Feedforward
+    for (i = 0; i < NumberOfBiquads; i++) {
+      FeedbackSumOfProducts = TempInputData - (*(pCoeffs + 3) * *pState) - (*(pCoeffs + 4) * *(pState + 1));  // Feedback
+      TempInputData = (*pCoeffs * FeedbackSumOfProducts) + (*(pCoeffs + 1) * *pState) + (*(pCoeffs + 2) * *(pState + 1)); // Feedforward
 
-            *(pState+1) = *pState;                  // Move delayed samples
-            *pState = FeedbackSumOfProducts;
+      *(pState + 1) = *pState;                                      // Move delayed samples
+      *pState = FeedbackSumOfProducts;
 
-            pState += SIGLIB_IIR_DELAY_SIZE;        // Increment array pointers
-            pCoeffs += SIGLIB_IIR_COEFFS_PER_BIQUAD;
-        }
-
-        pState -= (SIGLIB_IIR_DELAY_SIZE * NumberOfBiquads); // Reset array pointers
-        pCoeffs -= (SIGLIB_IIR_COEFFS_PER_BIQUAD * NumberOfBiquads);
-        *pDst++ = TempInputData;
+      pState += SIGLIB_IIR_DELAY_SIZE;                              // Increment array pointers
+      pCoeffs += SIGLIB_IIR_COEFFS_PER_BIQUAD;
     }
 
-}       // End of SDA_Iir()
+    pState -= (SIGLIB_IIR_DELAY_SIZE * NumberOfBiquads);            // Reset array pointers
+    pCoeffs -= (SIGLIB_IIR_COEFFS_PER_BIQUAD * NumberOfBiquads);
+    *pDst++ = TempInputData;
+  }
+
+}                                                                   // End of SDA_Iir()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_IirMac
 *
@@ -207,37 +208,36 @@ _nassert((int) pState % 8 == 0);
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_IirMac (const SLData_t Source,
-    SLData_t * SIGLIB_PTR_DECL pState,
-    const SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    const SLArrayIndex_t NumberOfBiquads)
-
+SLData_t SIGLIB_FUNC_DECL SDS_IirMac (
+  const SLData_t Source,
+  SLData_t * SIGLIB_PTR_DECL pState,
+  const SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLArrayIndex_t NumberOfBiquads)
 {
-    SLData_t       FeedbackSumOfProducts;
-    SLArrayIndex_t i;
-    SLData_t       TempInputData;
+  SLData_t        FeedbackSumOfProducts;
+  SLArrayIndex_t  i;
+  SLData_t        TempInputData;
 
-    TempInputData = Source;
+  TempInputData = Source;
 
-    for (i = 0; i < NumberOfBiquads; i++) {
-        FeedbackSumOfProducts = TempInputData + (*(pCoeffs+3) * *pState) + (*(pCoeffs+4) * *(pState+1));    // Feedback
-        TempInputData = (*pCoeffs * FeedbackSumOfProducts) +
-                         (*(pCoeffs + 1) * *pState) +
-                         (*(pCoeffs + 2) * *(pState+1));    // Feedforward and save result for next time round
+  for (i = 0; i < NumberOfBiquads; i++) {
+    FeedbackSumOfProducts = TempInputData + (*(pCoeffs + 3) * *pState) + (*(pCoeffs + 4) * *(pState + 1));  // Feedback
+    TempInputData = (*pCoeffs * FeedbackSumOfProducts) + (*(pCoeffs + 1) * *pState) + (*(pCoeffs + 2) * *(pState + 1)); // Feedforward and save result for next time round
 
-        *(pState+1) = *pState;                  // Move delayed samples
-        *pState = FeedbackSumOfProducts;
+    *(pState + 1) = *pState;                                        // Move delayed samples
+    *pState = FeedbackSumOfProducts;
 
-        pState += SIGLIB_IIR_DELAY_SIZE;        // Increment array pointers
-        pCoeffs += SIGLIB_IIR_COEFFS_PER_BIQUAD;
-    }
+    pState += SIGLIB_IIR_DELAY_SIZE;                                // Increment array pointers
+    pCoeffs += SIGLIB_IIR_COEFFS_PER_BIQUAD;
+  }
 
-    return (TempInputData);                     // Save output
+  return (TempInputData);                                           // Save output
 
-}       // End of SDS_IirMac()
+}                                                                   // End of SDS_IirMac()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_IirMac
 *
@@ -260,50 +260,49 @@ SLData_t SIGLIB_FUNC_DECL SDS_IirMac (const SLData_t Source,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_IirMac (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    SLData_t * SIGLIB_PTR_DECL pState,
-    const SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    const SLArrayIndex_t NumberOfBiquads,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_IirMac (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  SLData_t * SIGLIB_PTR_DECL pState,
+  const SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLArrayIndex_t NumberOfBiquads,
+  const SLArrayIndex_t SampleLength)
 {
-    SLData_t       FeedbackSumOfProducts, TempInputData;
-    SLArrayIndex_t i, j;
+  SLData_t        FeedbackSumOfProducts, TempInputData;
+  SLArrayIndex_t  i, j;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
-_nassert((int) pState % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
+  _nassert ((int) pState % 8 == 0);
 #endif
 #endif
 
-    for (j = 0; j < SampleLength; j++) {
-        TempInputData = *pSrc++;
+  for (j = 0; j < SampleLength; j++) {
+    TempInputData = *pSrc++;
 
-        for (i = 0; i < NumberOfBiquads; i++) {
-            FeedbackSumOfProducts = TempInputData + (*(pCoeffs+3) * *pState) + (*(pCoeffs+4) * *(pState+1));    // Feedback
-            TempInputData = (*pCoeffs * FeedbackSumOfProducts) +
-                             (*(pCoeffs + 1) * *pState) +
-                             (*(pCoeffs + 2) * *(pState+1));    // Feedforward
+    for (i = 0; i < NumberOfBiquads; i++) {
+      FeedbackSumOfProducts = TempInputData + (*(pCoeffs + 3) * *pState) + (*(pCoeffs + 4) * *(pState + 1));  // Feedback
+      TempInputData = (*pCoeffs * FeedbackSumOfProducts) + (*(pCoeffs + 1) * *pState) + (*(pCoeffs + 2) * *(pState + 1)); // Feedforward
 
-            *(pState+1) = *pState;                  // Move delayed samples
-            *pState = FeedbackSumOfProducts;
+      *(pState + 1) = *pState;                                      // Move delayed samples
+      *pState = FeedbackSumOfProducts;
 
-            pState += SIGLIB_IIR_DELAY_SIZE;        // Increment array pointers
-            pCoeffs += SIGLIB_IIR_COEFFS_PER_BIQUAD;
-        }
-
-        pState -= (SIGLIB_IIR_DELAY_SIZE * NumberOfBiquads); // Reset array pointers
-        pCoeffs -= (SIGLIB_IIR_COEFFS_PER_BIQUAD * NumberOfBiquads);
-        *pDst++ = TempInputData;
+      pState += SIGLIB_IIR_DELAY_SIZE;                              // Increment array pointers
+      pCoeffs += SIGLIB_IIR_COEFFS_PER_BIQUAD;
     }
 
-}       // End of SDA_IirMac()
+    pState -= (SIGLIB_IIR_DELAY_SIZE * NumberOfBiquads);            // Reset array pointers
+    pCoeffs -= (SIGLIB_IIR_COEFFS_PER_BIQUAD * NumberOfBiquads);
+    *pDst++ = TempInputData;
+  }
+
+}                                                                   // End of SDA_IirMac()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_IirOrderN
 *
@@ -320,24 +319,25 @@ _nassert((int) pState % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_IirOrderN (SLData_t * SIGLIB_PTR_DECL pState,
-    SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
-    const SLArrayIndex_t FilterOrder)
-
+void SIGLIB_FUNC_DECL SIF_IirOrderN (
+  SLData_t * SIGLIB_PTR_DECL pState,
+  SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
+  const SLArrayIndex_t FilterOrder)
 {
-    SLArrayIndex_t  i;
+  SLArrayIndex_t  i;
 
-        // Initialise the filter state array to 0
-    for (i = 0; i < FilterOrder; i++) {
-        *pState++ = SIGLIB_ZERO;
-    }
+// Initialise the filter state array to 0
+  for (i = 0; i < FilterOrder; i++) {
+    *pState++ = SIGLIB_ZERO;
+  }
 
-    *pFilterIndex = 0;              // Set state array offset
+  *pFilterIndex = 0;                                                // Set state array offset
 
-}       // End of SIF_IirOrderN()
+}                                                                   // End of SIF_IirOrderN()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_IirOrderN
 *
@@ -356,48 +356,49 @@ void SIGLIB_FUNC_DECL SIF_IirOrderN (SLData_t * SIGLIB_PTR_DECL pState,
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_IirOrderN (const SLData_t Source,
-    SLData_t * SIGLIB_PTR_DECL pState,
-    const SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
-    const SLArrayIndex_t FilterOrder)
-
+SLData_t SIGLIB_FUNC_DECL SDS_IirOrderN (
+  const SLData_t Source,
+  SLData_t * SIGLIB_PTR_DECL pState,
+  const SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
+  const SLArrayIndex_t FilterOrder)
 {
-    SLData_t       FeedBackwardSumOfProducts, FeedForwardSumOfProducts;
-    SLData_t       Result;
-    SLArrayIndex_t i;
-    SLArrayIndex_t LocalFilterIndex = *pFilterIndex;
+  SLData_t        FeedBackwardSumOfProducts, FeedForwardSumOfProducts;
+  SLData_t        Result;
+  SLArrayIndex_t  i;
+  SLArrayIndex_t  LocalFilterIndex = *pFilterIndex;
 
-    FeedBackwardSumOfProducts = SIGLIB_ZERO;                // Don't calculate 0th feedback term
-    FeedForwardSumOfProducts = SIGLIB_ZERO;
+  FeedBackwardSumOfProducts = SIGLIB_ZERO;                          // Don't calculate 0th feedback term
+  FeedForwardSumOfProducts = SIGLIB_ZERO;
 
-    for (i = 1; i <= FilterOrder; i++) {
-        FeedForwardSumOfProducts += *(pCoeffs + i) * *(pState + LocalFilterIndex);  // Feedforward
-        FeedBackwardSumOfProducts -= *(pCoeffs + i + FilterOrder) * *(pState + LocalFilterIndex);       // Feedback
+  for (i = 1; i <= FilterOrder; i++) {
+    FeedForwardSumOfProducts += *(pCoeffs + i) * *(pState + LocalFilterIndex);  // Feedforward
+    FeedBackwardSumOfProducts -= *(pCoeffs + i + FilterOrder) * *(pState + LocalFilterIndex); // Feedback
 
-        LocalFilterIndex++;                             // Increment state array offset
-        if (LocalFilterIndex >= FilterOrder) {
-            LocalFilterIndex = 0;
-        }
+    LocalFilterIndex++;                                             // Increment state array offset
+    if (LocalFilterIndex >= FilterOrder) {
+      LocalFilterIndex = 0;
     }
+  }
 
-    LocalFilterIndex--;                                 // Decrement state array offset
-    if (LocalFilterIndex < 0) {
-        LocalFilterIndex += FilterOrder;
-    }
+  LocalFilterIndex--;                                               // Decrement state array offset
+  if (LocalFilterIndex < 0) {
+    LocalFilterIndex += FilterOrder;
+  }
 
-    *(pState + LocalFilterIndex) = FeedBackwardSumOfProducts + Source;      // Sum input to feedback
+  *(pState + LocalFilterIndex) = FeedBackwardSumOfProducts + Source;  // Sum input to feedback
 
-    Result = (*pCoeffs * (*(pState + LocalFilterIndex))) + FeedForwardSumOfProducts;    // Calculate output - 0th Feedforward
+  Result = (*pCoeffs * (*(pState + LocalFilterIndex))) + FeedForwardSumOfProducts;  // Calculate output - 0th Feedforward
 
-    *pFilterIndex = LocalFilterIndex;                       // Save filter index for next iteration
+  *pFilterIndex = LocalFilterIndex;                                 // Save filter index for next iteration
 
-    return (Result);
+  return (Result);
 
-}       // End of SDS_IirOrderN()
+}                                                                   // End of SDS_IirOrderN()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_IirOrderN
 *
@@ -418,58 +419,59 @@ SLData_t SIGLIB_FUNC_DECL SDS_IirOrderN (const SLData_t Source,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_IirOrderN (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    SLData_t * SIGLIB_PTR_DECL pState,
-    const SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
-    const SLArrayIndex_t FilterOrder,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_IirOrderN (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  SLData_t * SIGLIB_PTR_DECL pState,
+  const SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
+  const SLArrayIndex_t FilterOrder,
+  const SLArrayIndex_t SampleLength)
 {
-    SLData_t       FeedBackwardSumOfProducts, FeedForwardSumOfProducts;
-    SLArrayIndex_t i, j;
-    SLArrayIndex_t LocalFilterIndex = *pFilterIndex;
+  SLData_t        FeedBackwardSumOfProducts, FeedForwardSumOfProducts;
+  SLArrayIndex_t  i, j;
+  SLArrayIndex_t  LocalFilterIndex = *pFilterIndex;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
-_nassert((int) pState % 8 == 0);
-_nassert((int) pCoeffs % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
+  _nassert ((int) pState % 8 == 0);
+  _nassert ((int) pCoeffs % 8 == 0);
 #endif
 #endif
 
-    for (j = 0; j < SampleLength; j++) {
-        FeedBackwardSumOfProducts = SIGLIB_ZERO;            // Don't calculate 0th feedback term
-        FeedForwardSumOfProducts = SIGLIB_ZERO;
+  for (j = 0; j < SampleLength; j++) {
+    FeedBackwardSumOfProducts = SIGLIB_ZERO;                        // Don't calculate 0th feedback term
+    FeedForwardSumOfProducts = SIGLIB_ZERO;
 
-        for (i = 1; i <= FilterOrder; i++) {
-            FeedForwardSumOfProducts += *(pCoeffs + i) * *(pState + LocalFilterIndex);  // Feedforward
-            FeedBackwardSumOfProducts -= *(pCoeffs + i + FilterOrder) * *(pState + LocalFilterIndex);       // Feedback
+    for (i = 1; i <= FilterOrder; i++) {
+      FeedForwardSumOfProducts += *(pCoeffs + i) * *(pState + LocalFilterIndex);  // Feedforward
+      FeedBackwardSumOfProducts -= *(pCoeffs + i + FilterOrder) * *(pState + LocalFilterIndex); // Feedback
 
-            LocalFilterIndex++;                             // Increment state array offset
-            if (LocalFilterIndex >= FilterOrder) {
-                LocalFilterIndex = 0;
-            }
-        }
-
-        LocalFilterIndex--;                                 // Decrement state array offset
-        if (LocalFilterIndex < 0) {
-            LocalFilterIndex += FilterOrder;
-        }
-
-        *(pState + LocalFilterIndex) = FeedBackwardSumOfProducts + *pSrc++;     // Sum input to feedback
-
-        *pDst++ = (*pCoeffs * (*(pState + LocalFilterIndex))) + FeedForwardSumOfProducts;   // Calculate output - 0th Feedforward
+      LocalFilterIndex++;                                           // Increment state array offset
+      if (LocalFilterIndex >= FilterOrder) {
+        LocalFilterIndex = 0;
+      }
     }
 
-    *pFilterIndex = LocalFilterIndex;                       // Save filter index for next iteration
+    LocalFilterIndex--;                                             // Decrement state array offset
+    if (LocalFilterIndex < 0) {
+      LocalFilterIndex += FilterOrder;
+    }
 
-}       // End of SDA_IirOrderN()
+    *(pState + LocalFilterIndex) = FeedBackwardSumOfProducts + *pSrc++; // Sum input to feedback
+
+    *pDst++ = (*pCoeffs * (*(pState + LocalFilterIndex))) + FeedForwardSumOfProducts; // Calculate output - 0th Feedforward
+  }
+
+  *pFilterIndex = LocalFilterIndex;                                 // Save filter index for next iteration
+
+}                                                                   // End of SDA_IirOrderN()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_IirNc
 *
@@ -486,21 +488,22 @@ _nassert((int) pCoeffs % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_IirNc (SLData_t * SIGLIB_PTR_DECL pState,
-    const SLArrayIndex_t NumberOfBiquads)
-
+void SIGLIB_FUNC_DECL SIF_IirNc (
+  SLData_t * SIGLIB_PTR_DECL pState,
+  const SLArrayIndex_t NumberOfBiquads)
 {
-    SLArrayIndex_t  i;
+  SLArrayIndex_t  i;
 
-        // Initialise the filter state array to 0
-    for (i = 0; i < (NumberOfBiquads * SIGLIB_IIR_DELAY_SIZE); i++) {
-        *pState++ = SIGLIB_ZERO;
-    }
+// Initialise the filter state array to 0
+  for (i = 0; i < (NumberOfBiquads * SIGLIB_IIR_DELAY_SIZE); i++) {
+    *pState++ = SIGLIB_ZERO;
+  }
 
-}       // End of SIF_IirNc()
+}                                                                   // End of SIF_IirNc()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_IirNc
 *
@@ -521,26 +524,27 @@ void SIGLIB_FUNC_DECL SIF_IirNc (SLData_t * SIGLIB_PTR_DECL pState,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_IirNc (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    SLData_t * SIGLIB_PTR_DECL pState,
-    const SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    const SLArrayIndex_t NumberOfBiquads,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_IirNc (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  SLData_t * SIGLIB_PTR_DECL pState,
+  const SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLArrayIndex_t NumberOfBiquads,
+  const SLArrayIndex_t SampleLength)
 {
-    SDA_Iir (pSrc, pDst, pState, pCoeffs, NumberOfBiquads, SampleLength);   // Apply IIR filter
+  SDA_Iir (pSrc, pDst, pState, pCoeffs, NumberOfBiquads, SampleLength); // Apply IIR filter
 
-    SDA_Reverse (pDst, pDst, SampleLength);                                 // Reverse time sequence
+  SDA_Reverse (pDst, pDst, SampleLength);                           // Reverse time sequence
 
-    SDA_Iir (pDst, pDst, pState, pCoeffs, NumberOfBiquads, SampleLength);   // Apply IIR filter
+  SDA_Iir (pDst, pDst, pState, pCoeffs, NumberOfBiquads, SampleLength); // Apply IIR filter
 
-    SDA_Reverse (pDst, pDst, SampleLength);                                 // Reverse time sequence
+  SDA_Reverse (pDst, pDst, SampleLength);                           // Reverse time sequence
 
-}       // End of SDA_IirNc()
+}                                                                   // End of SDA_IirNc()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_BilinearTransform
 *
@@ -566,53 +570,54 @@ void SIGLIB_FUNC_DECL SDA_IirNc (const SLData_t * SIGLIB_PTR_DECL pSrc,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_BilinearTransform (const SLComplexRect_s * SIGLIB_PTR_DECL SPlaneZeros,
-    const SLComplexRect_s * SIGLIB_PTR_DECL SPlanePoles,
-    SLComplexRect_s * SIGLIB_PTR_DECL ZPlaneZeros,
-    SLComplexRect_s * SIGLIB_PTR_DECL ZPlanePoles,
-    const SLData_t SampleRate,
-    const SLData_t PreWarpFreq,
-    const SLArrayIndex_t PreWarpSwitch,
-    const SLArrayIndex_t NumberOfZeros,
-    const SLArrayIndex_t NumberOfPoles)
-
+void SIGLIB_FUNC_DECL SDA_BilinearTransform (
+  const SLComplexRect_s * SIGLIB_PTR_DECL SPlaneZeros,
+  const SLComplexRect_s * SIGLIB_PTR_DECL SPlanePoles,
+  SLComplexRect_s * SIGLIB_PTR_DECL ZPlaneZeros,
+  SLComplexRect_s * SIGLIB_PTR_DECL ZPlanePoles,
+  const SLData_t SampleRate,
+  const SLData_t PreWarpFreq,
+  const SLArrayIndex_t PreWarpSwitch,
+  const SLArrayIndex_t NumberOfZeros,
+  const SLArrayIndex_t NumberOfPoles)
 {
-    SLData_t        Ohmega;
-    SLArrayIndex_t  i;
+  SLData_t        Ohmega;
+  SLArrayIndex_t  i;
 
-                    // Pre-warp frequencies
-    if (PreWarpSwitch == SIGLIB_ON) {           // Pre-warping is selected
-        Ohmega = (SIGLIB_TWO_PI * PreWarpFreq) / SDS_Tan ((SIGLIB_PI * PreWarpFreq) / SampleRate);
+// Pre-warp frequencies
+  if (PreWarpSwitch == SIGLIB_ON) {                                 // Pre-warping is selected
+    Ohmega = (SIGLIB_TWO_PI * PreWarpFreq) / SDS_Tan ((SIGLIB_PI * PreWarpFreq) / SampleRate);
+  }
+
+  else {                                                            // Pre-warping is not selected
+    Ohmega = SIGLIB_TWO * SampleRate;
+  }
+
+// Bilinear transform - z = (1 + s.Td/2) / (1 - s.Td/2)
+  for (i = 0; i < NumberOfZeros; i++) {
+    *ZPlaneZeros++ = SCV_Divide (SCV_VectorAddScalar (SCV_VectorDivideScalar (*SPlaneZeros, Ohmega), SIGLIB_ONE),
+                                 SCV_ScalarSubtractVector (SIGLIB_ONE, SCV_VectorDivideScalar (*SPlaneZeros, Ohmega)));
+    SPlaneZeros++;
+  }
+
+  for (i = 0; i < NumberOfPoles; i++) {
+    *ZPlanePoles++ = SCV_Divide (SCV_VectorAddScalar (SCV_VectorDivideScalar (*SPlanePoles, Ohmega), SIGLIB_ONE),
+                                 SCV_ScalarSubtractVector (SIGLIB_ONE, SCV_VectorDivideScalar (*SPlanePoles, Ohmega)));
+    SPlanePoles++;
+  }
+
+  if (NumberOfZeros < NumberOfPoles) {                              // If number of s-plane zeros < number of poles,
+// additional zeros placed at origin
+    for (i = NumberOfZeros; i < NumberOfPoles; i++) {
+      *(ZPlaneZeros + i) = SCV_Rectangular (SIGLIB_ZERO, SIGLIB_ZERO);
     }
+  }
 
-    else {                                      // Pre-warping is not selected
-        Ohmega = SIGLIB_TWO * SampleRate;
-    }
-
-                    // Bilinear transform - z = (1 + s.Td/2) / (1 - s.Td/2)
-    for (i = 0; i < NumberOfZeros; i++) {
-        *ZPlaneZeros++ = SCV_Divide (SCV_VectorAddScalar ( SCV_VectorDivideScalar(*SPlaneZeros, Ohmega), SIGLIB_ONE),
-                    SCV_ScalarSubtractVector (SIGLIB_ONE, SCV_VectorDivideScalar (*SPlaneZeros, Ohmega)));
-        SPlaneZeros++;
-    }
-
-    for (i = 0; i < NumberOfPoles; i++) {
-        *ZPlanePoles++ = SCV_Divide (SCV_VectorAddScalar ( SCV_VectorDivideScalar(*SPlanePoles, Ohmega), SIGLIB_ONE),
-                    SCV_ScalarSubtractVector (SIGLIB_ONE, SCV_VectorDivideScalar (*SPlanePoles, Ohmega)));
-        SPlanePoles++;
-    }
-
-    if (NumberOfZeros < NumberOfPoles) {            // If number of s-plane zeros < number of poles,
-                                                    // additional zeros placed at origin
-        for (i = NumberOfZeros; i < NumberOfPoles; i++) {
-            *(ZPlaneZeros+i) = SCV_Rectangular (SIGLIB_ZERO, SIGLIB_ZERO);
-        }
-    }
-
-}       // End of SDA_BilinearTransform
+}                                                                   // End of SDA_BilinearTransform
 
 
 /**/
+
 /********************************************************
 * Function: SDS_PreWarp
 *
@@ -628,15 +633,16 @@ void SIGLIB_FUNC_DECL SDA_BilinearTransform (const SLComplexRect_s * SIGLIB_PTR_
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_PreWarp (const SLData_t DesiredFrequency,
-    const SLData_t SampleRate)
-
+SLData_t SIGLIB_FUNC_DECL SDS_PreWarp (
+  const SLData_t DesiredFrequency,
+  const SLData_t SampleRate)
 {
-    return ((SampleRate / SIGLIB_PI) * SDS_Tan ((DesiredFrequency * SIGLIB_PI) / SampleRate));
-}       // End of SDS_PreWarp()
+  return ((SampleRate / SIGLIB_PI) * SDS_Tan ((DesiredFrequency * SIGLIB_PI) / SampleRate));
+}                                                                   // End of SDS_PreWarp()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_MatchedZTransform
 *
@@ -659,29 +665,30 @@ SLData_t SIGLIB_FUNC_DECL SDS_PreWarp (const SLData_t DesiredFrequency,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_MatchedZTransform (const SLComplexRect_s * SIGLIB_PTR_DECL pSPlaneZeros,
-    const SLComplexRect_s * SIGLIB_PTR_DECL pSPlanePoles,
-    SLComplexRect_s * SIGLIB_PTR_DECL pzPlaneZeros,
-    SLComplexRect_s * SIGLIB_PTR_DECL pzPlanePoles,
-    const SLData_t SampleRate,
-    const SLArrayIndex_t NumberOfZeros,
-    const SLArrayIndex_t NumberOfPoles)
-
+void SIGLIB_FUNC_DECL SDA_MatchedZTransform (
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSPlaneZeros,
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSPlanePoles,
+  SLComplexRect_s * SIGLIB_PTR_DECL pzPlaneZeros,
+  SLComplexRect_s * SIGLIB_PTR_DECL pzPlanePoles,
+  const SLData_t SampleRate,
+  const SLArrayIndex_t NumberOfZeros,
+  const SLArrayIndex_t NumberOfPoles)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
-    for (i = 0; i < NumberOfPoles; i++) {
-        pzPlanePoles[i] = SCV_Exp (SCV_VectorMultiplyScalar (pSPlanePoles[i], SIGLIB_ONE / SampleRate));
-    }
+  for (i = 0; i < NumberOfPoles; i++) {
+    pzPlanePoles[i] = SCV_Exp (SCV_VectorMultiplyScalar (pSPlanePoles[i], SIGLIB_ONE / SampleRate));
+  }
 
-    for (i = 0; i < NumberOfZeros; i++) {
-        pzPlaneZeros[i] = SCV_Exp (SCV_VectorMultiplyScalar (pSPlaneZeros[i], SIGLIB_ONE / SampleRate));
-    }
+  for (i = 0; i < NumberOfZeros; i++) {
+    pzPlaneZeros[i] = SCV_Exp (SCV_VectorMultiplyScalar (pSPlaneZeros[i], SIGLIB_ONE / SampleRate));
+  }
 
-}       // End of SDA_MatchedZTransform()
+}                                                                   // End of SDA_MatchedZTransform()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_IirZplaneToCoeffs
 *
@@ -711,78 +718,71 @@ void SIGLIB_FUNC_DECL SDA_MatchedZTransform (const SLComplexRect_s * SIGLIB_PTR_
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_IirZplaneToCoeffs (const SLComplexRect_s * SIGLIB_PTR_DECL ZPlaneZeros,
-    const SLComplexRect_s * SIGLIB_PTR_DECL ZPlanePoles,
-    SLData_t * SIGLIB_PTR_DECL pIIRCoeffs,
-    const SLArrayIndex_t NumberOfZeros,
-    const SLArrayIndex_t NumberOfPoles)
-
+void SIGLIB_FUNC_DECL SDA_IirZplaneToCoeffs (
+  const SLComplexRect_s * SIGLIB_PTR_DECL ZPlaneZeros,
+  const SLComplexRect_s * SIGLIB_PTR_DECL ZPlanePoles,
+  SLData_t * SIGLIB_PTR_DECL pIIRCoeffs,
+  const SLArrayIndex_t NumberOfZeros,
+  const SLArrayIndex_t NumberOfPoles)
 {
-    SLArrayIndex_t  i;
+  SLArrayIndex_t  i;
 
-    if (NumberOfZeros == NumberOfPoles) {       // Number of zeros equals number of poles
-        for (i = 0; i < NumberOfZeros; i++) {
-            *pIIRCoeffs++ = SIGLIB_ONE;                                                 // b0,k
-            *pIIRCoeffs++ = SIGLIB_MINUS_TWO * SCV_Real(*ZPlaneZeros);                  // b1,k
-            *pIIRCoeffs++ = (SCV_Real(*ZPlaneZeros)*SCV_Real(*ZPlaneZeros))+
-                            (SCV_Imaginary(*ZPlaneZeros)*SCV_Imaginary(*ZPlaneZeros));  // b2,k
-            *pIIRCoeffs++ = - (SIGLIB_TWO * SCV_Real(*ZPlanePoles));                    // a1,k
-            *pIIRCoeffs++ = (SCV_Real(*ZPlanePoles)*SCV_Real(*ZPlanePoles))+
-                            (SCV_Imaginary(*ZPlanePoles)*SCV_Imaginary(*ZPlanePoles));  // a2,k
-            ZPlaneZeros++;              // Update pointers
-            ZPlanePoles++;
-        }
+  if (NumberOfZeros == NumberOfPoles) {                             // Number of zeros equals number of poles
+    for (i = 0; i < NumberOfZeros; i++) {
+      *pIIRCoeffs++ = SIGLIB_ONE;                                   // b0,k
+      *pIIRCoeffs++ = SIGLIB_MINUS_TWO * SCV_Real (*ZPlaneZeros);   // b1,k
+      *pIIRCoeffs++ = (SCV_Real (*ZPlaneZeros) * SCV_Real (*ZPlaneZeros)) + (SCV_Imaginary (*ZPlaneZeros) * SCV_Imaginary (*ZPlaneZeros));  // b2,k
+      *pIIRCoeffs++ = -(SIGLIB_TWO * SCV_Real (*ZPlanePoles));      // a1,k
+      *pIIRCoeffs++ = (SCV_Real (*ZPlanePoles) * SCV_Real (*ZPlanePoles)) + (SCV_Imaginary (*ZPlanePoles) * SCV_Imaginary (*ZPlanePoles));  // a2,k
+      ZPlaneZeros++;                                                // Update pointers
+      ZPlanePoles++;
     }
-    else if (NumberOfZeros > NumberOfPoles) {   // Number of zeros greater than number of poles
-        for (i = 0; i < NumberOfPoles; i++) {   // Calculate biquads with poles and zeros
-            *pIIRCoeffs++ = SIGLIB_ONE;                                                 // b0,k
-            *pIIRCoeffs++ = SIGLIB_MINUS_TWO * SCV_Real(*ZPlaneZeros);                  // b1,k
-            *pIIRCoeffs++ = (SCV_Real(*ZPlaneZeros)*SCV_Real(*ZPlaneZeros))+
-                            (SCV_Imaginary(*ZPlaneZeros)*SCV_Imaginary(*ZPlaneZeros));  // b2,k
-            *pIIRCoeffs++ = - (SIGLIB_TWO * SCV_Real(*ZPlanePoles));                    // a1,k
-            *pIIRCoeffs++ = (SCV_Real(*ZPlanePoles)*SCV_Real(*ZPlanePoles))+
-                            (SCV_Imaginary(*ZPlanePoles)*SCV_Imaginary(*ZPlanePoles));  // a2,k
-            ZPlaneZeros++;              // Update pointers
-            ZPlanePoles++;
-        }
-        for (i = NumberOfPoles; i < NumberOfZeros; i++) {   // Calculate biquads with only zeros
-            *pIIRCoeffs++ = SIGLIB_ONE;                                                 // b0,k
-            *pIIRCoeffs++ = SIGLIB_MINUS_TWO * SCV_Real(*ZPlaneZeros);                  // b1,k
-            *pIIRCoeffs++ = (SCV_Real(*ZPlaneZeros)*SCV_Real(*ZPlaneZeros))+
-                            (SCV_Imaginary(*ZPlaneZeros)*SCV_Imaginary(*ZPlaneZeros));  // b2,k
-            *pIIRCoeffs++ = SIGLIB_ZERO;                                                // a1,k
-            *pIIRCoeffs++ = SIGLIB_ZERO;                                                // a2,k
-            ZPlaneZeros++;              // Update pointers
-        }
+  }
+  else if (NumberOfZeros > NumberOfPoles) {                         // Number of zeros greater than number of poles
+    for (i = 0; i < NumberOfPoles; i++) {                           // Calculate biquads with poles and zeros
+      *pIIRCoeffs++ = SIGLIB_ONE;                                   // b0,k
+      *pIIRCoeffs++ = SIGLIB_MINUS_TWO * SCV_Real (*ZPlaneZeros);   // b1,k
+      *pIIRCoeffs++ = (SCV_Real (*ZPlaneZeros) * SCV_Real (*ZPlaneZeros)) + (SCV_Imaginary (*ZPlaneZeros) * SCV_Imaginary (*ZPlaneZeros));  // b2,k
+      *pIIRCoeffs++ = -(SIGLIB_TWO * SCV_Real (*ZPlanePoles));      // a1,k
+      *pIIRCoeffs++ = (SCV_Real (*ZPlanePoles) * SCV_Real (*ZPlanePoles)) + (SCV_Imaginary (*ZPlanePoles) * SCV_Imaginary (*ZPlanePoles));  // a2,k
+      ZPlaneZeros++;                                                // Update pointers
+      ZPlanePoles++;
     }
+    for (i = NumberOfPoles; i < NumberOfZeros; i++) {               // Calculate biquads with only zeros
+      *pIIRCoeffs++ = SIGLIB_ONE;                                   // b0,k
+      *pIIRCoeffs++ = SIGLIB_MINUS_TWO * SCV_Real (*ZPlaneZeros);   // b1,k
+      *pIIRCoeffs++ = (SCV_Real (*ZPlaneZeros) * SCV_Real (*ZPlaneZeros)) + (SCV_Imaginary (*ZPlaneZeros) * SCV_Imaginary (*ZPlaneZeros));  // b2,k
+      *pIIRCoeffs++ = SIGLIB_ZERO;                                  // a1,k
+      *pIIRCoeffs++ = SIGLIB_ZERO;                                  // a2,k
+      ZPlaneZeros++;                                                // Update pointers
+    }
+  }
 
-    else {                                      // Number of zeros less than number of poles
-        for (i = 0; i < NumberOfZeros; i++) {   // Calculate biquads with poles and zeros
-            *pIIRCoeffs++ = SIGLIB_ONE;                                                 // b0,k
-            *pIIRCoeffs++ = SIGLIB_MINUS_TWO * SCV_Real(*ZPlaneZeros);                  // b1,k
-            *pIIRCoeffs++ = (SCV_Real(*ZPlaneZeros)*SCV_Real(*ZPlaneZeros))+
-                            (SCV_Imaginary(*ZPlaneZeros)*SCV_Imaginary(*ZPlaneZeros));  // b2,k
-            *pIIRCoeffs++ = - (SIGLIB_TWO * SCV_Real(*ZPlanePoles));                    // a1,k
-            *pIIRCoeffs++ = (SCV_Real(*ZPlanePoles)*SCV_Real(*ZPlanePoles))+
-                            (SCV_Imaginary(*ZPlanePoles)*SCV_Imaginary(*ZPlanePoles));  // a2,k
-            ZPlaneZeros++;              // Update pointers
-            ZPlanePoles++;
-        }
-        for (i = NumberOfZeros; i < NumberOfPoles; i++) {   // Calculate biquads with only poles
-            *pIIRCoeffs++ = SIGLIB_ONE;                                                 // b0,k
-            *pIIRCoeffs++ = SIGLIB_ZERO;                                                // b1,k
-            *pIIRCoeffs++ = SIGLIB_ZERO;                                                // b2,k
-            *pIIRCoeffs++ = - (SIGLIB_TWO * SCV_Real(*ZPlanePoles));                    // a1,k
-            *pIIRCoeffs++ = (SCV_Real(*ZPlanePoles)*SCV_Real(*ZPlanePoles))+
-                            (SCV_Imaginary(*ZPlanePoles)*SCV_Imaginary(*ZPlanePoles));  // a2,k
-            ZPlanePoles++;              // Update pointers
-        }
+  else {                                                            // Number of zeros less than number of poles
+    for (i = 0; i < NumberOfZeros; i++) {                           // Calculate biquads with poles and zeros
+      *pIIRCoeffs++ = SIGLIB_ONE;                                   // b0,k
+      *pIIRCoeffs++ = SIGLIB_MINUS_TWO * SCV_Real (*ZPlaneZeros);   // b1,k
+      *pIIRCoeffs++ = (SCV_Real (*ZPlaneZeros) * SCV_Real (*ZPlaneZeros)) + (SCV_Imaginary (*ZPlaneZeros) * SCV_Imaginary (*ZPlaneZeros));  // b2,k
+      *pIIRCoeffs++ = -(SIGLIB_TWO * SCV_Real (*ZPlanePoles));      // a1,k
+      *pIIRCoeffs++ = (SCV_Real (*ZPlanePoles) * SCV_Real (*ZPlanePoles)) + (SCV_Imaginary (*ZPlanePoles) * SCV_Imaginary (*ZPlanePoles));  // a2,k
+      ZPlaneZeros++;                                                // Update pointers
+      ZPlanePoles++;
     }
+    for (i = NumberOfZeros; i < NumberOfPoles; i++) {               // Calculate biquads with only poles
+      *pIIRCoeffs++ = SIGLIB_ONE;                                   // b0,k
+      *pIIRCoeffs++ = SIGLIB_ZERO;                                  // b1,k
+      *pIIRCoeffs++ = SIGLIB_ZERO;                                  // b2,k
+      *pIIRCoeffs++ = -(SIGLIB_TWO * SCV_Real (*ZPlanePoles));      // a1,k
+      *pIIRCoeffs++ = (SCV_Real (*ZPlanePoles) * SCV_Real (*ZPlanePoles)) + (SCV_Imaginary (*ZPlanePoles) * SCV_Imaginary (*ZPlanePoles));  // a2,k
+      ZPlanePoles++;                                                // Update pointers
+    }
+  }
 
-}       // End of SDA_IirZplaneToCoeffs
+}                                                                   // End of SDA_IirZplaneToCoeffs
 
 
 /**/
+
 /********************************************************
 * Function: SDA_IirZplanePolarToCoeffs
 *
@@ -812,68 +812,63 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneToCoeffs (const SLComplexRect_s * SIGLIB_PTR_
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_IirZplanePolarToCoeffs (const SLComplexPolar_s * SIGLIB_PTR_DECL ZPlaneZeros,
-    const SLComplexPolar_s * SIGLIB_PTR_DECL ZPlanePoles,
-    SLData_t * SIGLIB_PTR_DECL pIIRCoeffs,
-    const SLArrayIndex_t NumberOfZeros,
-    const SLArrayIndex_t NumberOfPoles)
-
+void SIGLIB_FUNC_DECL SDA_IirZplanePolarToCoeffs (
+  const SLComplexPolar_s * SIGLIB_PTR_DECL ZPlaneZeros,
+  const SLComplexPolar_s * SIGLIB_PTR_DECL ZPlanePoles,
+  SLData_t * SIGLIB_PTR_DECL pIIRCoeffs,
+  const SLArrayIndex_t NumberOfZeros,
+  const SLArrayIndex_t NumberOfPoles)
 {
-    SLArrayIndex_t  i;
+  SLArrayIndex_t  i;
 
-    if (NumberOfZeros == NumberOfPoles) {       // Number of zeros equals number of poles
-        for (i = 0; i < NumberOfZeros; i++) {
-            *pIIRCoeffs++ = SIGLIB_ONE;                                             // b0,k
-            *pIIRCoeffs++ = SIGLIB_MINUS_TWO * ZPlaneZeros[i].magn * SDS_Cos (ZPlaneZeros[i].angle);    // b1,k
-            *pIIRCoeffs++ = ZPlaneZeros[i].magn * ZPlaneZeros[i].magn;              // b2,k
-            *pIIRCoeffs++ = - (SIGLIB_TWO * ZPlanePoles[i].magn * SDS_Cos (ZPlanePoles[i].angle));      // b1,k
-            *pIIRCoeffs++ = ZPlanePoles[i].magn * ZPlanePoles[i].magn;              // a2,k
-        }
+  if (NumberOfZeros == NumberOfPoles) {                             // Number of zeros equals number of poles
+    for (i = 0; i < NumberOfZeros; i++) {
+      *pIIRCoeffs++ = SIGLIB_ONE;                                   // b0,k
+      *pIIRCoeffs++ = SIGLIB_MINUS_TWO * ZPlaneZeros[i].magn * SDS_Cos (ZPlaneZeros[i].angle);  // b1,k
+      *pIIRCoeffs++ = ZPlaneZeros[i].magn * ZPlaneZeros[i].magn;    // b2,k
+      *pIIRCoeffs++ = -(SIGLIB_TWO * ZPlanePoles[i].magn * SDS_Cos (ZPlanePoles[i].angle)); // b1,k
+      *pIIRCoeffs++ = ZPlanePoles[i].magn * ZPlanePoles[i].magn;    // a2,k
     }
+  }
 
-    else if (NumberOfZeros > NumberOfPoles) {   // Number of zeros greater than number of poles
-        for (i = 0; i < NumberOfPoles; i++) {   // Calculate biquads with poles and zeros
-            *pIIRCoeffs++ = SIGLIB_ONE;                                             // b0,k
-            *pIIRCoeffs++ = SIGLIB_MINUS_TWO * ZPlaneZeros[i].magn * SDS_Cos (ZPlaneZeros[i].angle);    // b1,k
-            *pIIRCoeffs++ = (ZPlaneZeros[i].magn * SDS_Cos (ZPlaneZeros[i].angle)*ZPlaneZeros[i].magn * SDS_Cos (ZPlaneZeros[i].angle))+
-                            (ZPlaneZeros[i].magn * SDS_Sin (ZPlaneZeros[i].angle)*ZPlaneZeros[i].magn * SDS_Sin (ZPlaneZeros[i].angle));    // b2,k
-            *pIIRCoeffs++ = - (SIGLIB_TWO * ZPlanePoles[i].magn * SDS_Cos (ZPlanePoles[i].angle));      // a1,k
-            *pIIRCoeffs++ = (ZPlanePoles[i].magn * SDS_Cos (ZPlanePoles[i].angle)*ZPlanePoles[i].magn * SDS_Cos (ZPlanePoles[i].angle))+
-                            (ZPlanePoles[i].magn * SDS_Sin (ZPlanePoles[i].angle)*ZPlanePoles[i].magn * SDS_Sin (ZPlanePoles[i].angle));    // a2,k
-        }
-        for (i = NumberOfPoles; i < NumberOfZeros; i++) {   // Calculate biquads with only zeros
-            *pIIRCoeffs++ = SIGLIB_ONE;                                             // b0,k
-            *pIIRCoeffs++ = SIGLIB_MINUS_TWO * ZPlaneZeros[i].magn * SDS_Cos (ZPlaneZeros[i].angle);    // b1,k
-            *pIIRCoeffs++ = (ZPlaneZeros[i].magn * SDS_Cos (ZPlaneZeros[i].angle)*ZPlaneZeros[i].magn * SDS_Cos (ZPlaneZeros[i].angle))+
-                            (ZPlaneZeros[i].magn * SDS_Sin (ZPlaneZeros[i].angle)*ZPlaneZeros[i].magn * SDS_Sin (ZPlaneZeros[i].angle));    // b2,k
-            *pIIRCoeffs++ = SIGLIB_ZERO;                                            // a1,k
-            *pIIRCoeffs++ = SIGLIB_ZERO;                                            // a2,k
-        }
+  else if (NumberOfZeros > NumberOfPoles) {                         // Number of zeros greater than number of poles
+    for (i = 0; i < NumberOfPoles; i++) {                           // Calculate biquads with poles and zeros
+      *pIIRCoeffs++ = SIGLIB_ONE;                                   // b0,k
+      *pIIRCoeffs++ = SIGLIB_MINUS_TWO * ZPlaneZeros[i].magn * SDS_Cos (ZPlaneZeros[i].angle);  // b1,k
+      *pIIRCoeffs++ = (ZPlaneZeros[i].magn * SDS_Cos (ZPlaneZeros[i].angle) * ZPlaneZeros[i].magn * SDS_Cos (ZPlaneZeros[i].angle)) + (ZPlaneZeros[i].magn * SDS_Sin (ZPlaneZeros[i].angle) * ZPlaneZeros[i].magn * SDS_Sin (ZPlaneZeros[i].angle));  // b2,k
+      *pIIRCoeffs++ = -(SIGLIB_TWO * ZPlanePoles[i].magn * SDS_Cos (ZPlanePoles[i].angle)); // a1,k
+      *pIIRCoeffs++ = (ZPlanePoles[i].magn * SDS_Cos (ZPlanePoles[i].angle) * ZPlanePoles[i].magn * SDS_Cos (ZPlanePoles[i].angle)) + (ZPlanePoles[i].magn * SDS_Sin (ZPlanePoles[i].angle) * ZPlanePoles[i].magn * SDS_Sin (ZPlanePoles[i].angle));  // a2,k
     }
+    for (i = NumberOfPoles; i < NumberOfZeros; i++) {               // Calculate biquads with only zeros
+      *pIIRCoeffs++ = SIGLIB_ONE;                                   // b0,k
+      *pIIRCoeffs++ = SIGLIB_MINUS_TWO * ZPlaneZeros[i].magn * SDS_Cos (ZPlaneZeros[i].angle);  // b1,k
+      *pIIRCoeffs++ = (ZPlaneZeros[i].magn * SDS_Cos (ZPlaneZeros[i].angle) * ZPlaneZeros[i].magn * SDS_Cos (ZPlaneZeros[i].angle)) + (ZPlaneZeros[i].magn * SDS_Sin (ZPlaneZeros[i].angle) * ZPlaneZeros[i].magn * SDS_Sin (ZPlaneZeros[i].angle));  // b2,k
+      *pIIRCoeffs++ = SIGLIB_ZERO;                                  // a1,k
+      *pIIRCoeffs++ = SIGLIB_ZERO;                                  // a2,k
+    }
+  }
 
-    else {                                      // Number of zeros less than number of poles
-        for (i = 0; i < NumberOfZeros; i++) {   // Calculate biquads with poles and zeros
-            *pIIRCoeffs++ = SIGLIB_ONE;                                             // b0,k
-            *pIIRCoeffs++ = SIGLIB_MINUS_TWO * ZPlaneZeros[i].magn * SDS_Cos (ZPlaneZeros[i].angle);    // b1,k
-            *pIIRCoeffs++ = (ZPlaneZeros[i].magn * SDS_Cos (ZPlaneZeros[i].angle)*ZPlaneZeros[i].magn * SDS_Cos (ZPlaneZeros[i].angle))+
-                            (ZPlaneZeros[i].magn * SDS_Sin (ZPlaneZeros[i].angle)*ZPlaneZeros[i].magn * SDS_Sin (ZPlaneZeros[i].angle));    // b2,k
-            *pIIRCoeffs++ = - (SIGLIB_TWO * ZPlanePoles[i].magn * SDS_Cos (ZPlanePoles[i].angle));      // a1,k
-            *pIIRCoeffs++ = (ZPlanePoles[i].magn * SDS_Cos (ZPlanePoles[i].angle)*ZPlanePoles[i].magn * SDS_Cos (ZPlanePoles[i].angle))+
-                            (ZPlanePoles[i].magn * SDS_Sin (ZPlanePoles[i].angle)*ZPlanePoles[i].magn * SDS_Sin (ZPlanePoles[i].angle));    // a2,k
-        }
-        for (i = NumberOfZeros; i < NumberOfPoles; i++) {   // Calculate biquads with only poles
-            *pIIRCoeffs++ = SIGLIB_ONE;                                             // b0,k
-            *pIIRCoeffs++ = SIGLIB_ZERO;                                            // b1,k
-            *pIIRCoeffs++ = SIGLIB_ZERO;                                            // b2,k
-            *pIIRCoeffs++ = - (SIGLIB_TWO * ZPlanePoles[i].magn * SDS_Cos (ZPlanePoles[i].angle));      // a1,k
-            *pIIRCoeffs++ = (ZPlanePoles[i].magn * SDS_Cos (ZPlanePoles[i].angle)*ZPlanePoles[i].magn * SDS_Cos (ZPlanePoles[i].angle))+
-                            (ZPlanePoles[i].magn * SDS_Sin (ZPlanePoles[i].angle)*ZPlanePoles[i].magn * SDS_Sin (ZPlanePoles[i].angle));    // a2,k
-        }
+  else {                                                            // Number of zeros less than number of poles
+    for (i = 0; i < NumberOfZeros; i++) {                           // Calculate biquads with poles and zeros
+      *pIIRCoeffs++ = SIGLIB_ONE;                                   // b0,k
+      *pIIRCoeffs++ = SIGLIB_MINUS_TWO * ZPlaneZeros[i].magn * SDS_Cos (ZPlaneZeros[i].angle);  // b1,k
+      *pIIRCoeffs++ = (ZPlaneZeros[i].magn * SDS_Cos (ZPlaneZeros[i].angle) * ZPlaneZeros[i].magn * SDS_Cos (ZPlaneZeros[i].angle)) + (ZPlaneZeros[i].magn * SDS_Sin (ZPlaneZeros[i].angle) * ZPlaneZeros[i].magn * SDS_Sin (ZPlaneZeros[i].angle));  // b2,k
+      *pIIRCoeffs++ = -(SIGLIB_TWO * ZPlanePoles[i].magn * SDS_Cos (ZPlanePoles[i].angle)); // a1,k
+      *pIIRCoeffs++ = (ZPlanePoles[i].magn * SDS_Cos (ZPlanePoles[i].angle) * ZPlanePoles[i].magn * SDS_Cos (ZPlanePoles[i].angle)) + (ZPlanePoles[i].magn * SDS_Sin (ZPlanePoles[i].angle) * ZPlanePoles[i].magn * SDS_Sin (ZPlanePoles[i].angle));  // a2,k
     }
-}       // End of SDA_IirZplanePolarToCoeffs
+    for (i = NumberOfZeros; i < NumberOfPoles; i++) {               // Calculate biquads with only poles
+      *pIIRCoeffs++ = SIGLIB_ONE;                                   // b0,k
+      *pIIRCoeffs++ = SIGLIB_ZERO;                                  // b1,k
+      *pIIRCoeffs++ = SIGLIB_ZERO;                                  // b2,k
+      *pIIRCoeffs++ = -(SIGLIB_TWO * ZPlanePoles[i].magn * SDS_Cos (ZPlanePoles[i].angle)); // a1,k
+      *pIIRCoeffs++ = (ZPlanePoles[i].magn * SDS_Cos (ZPlanePoles[i].angle) * ZPlanePoles[i].magn * SDS_Cos (ZPlanePoles[i].angle)) + (ZPlanePoles[i].magn * SDS_Sin (ZPlanePoles[i].angle) * ZPlanePoles[i].magn * SDS_Sin (ZPlanePoles[i].angle));  // a2,k
+    }
+  }
+}                                                                   // End of SDA_IirZplanePolarToCoeffs
 
 
 /**/
+
 /********************************************************
 * Function: SDA_IirZplaneLpfToLpf
 *
@@ -897,44 +892,44 @@ void SIGLIB_FUNC_DECL SDA_IirZplanePolarToCoeffs (const SLComplexPolar_s * SIGLI
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToLpf (const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlaneZeros,
-    const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlanePoles,
-    SLComplexRect_s * SIGLIB_PTR_DECL DstZPlaneZeros,
-    SLComplexRect_s * SIGLIB_PTR_DECL DstZPlanePoles,
-    const SLData_t Frequency1,
-    const SLData_t Frequency2,
-    const SLData_t SampleRate,
-    const SLArrayIndex_t NumberOfZeros,
-    const SLArrayIndex_t NumberOfPoles)
-
+void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToLpf (
+  const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlaneZeros,
+  const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlanePoles,
+  SLComplexRect_s * SIGLIB_PTR_DECL DstZPlaneZeros,
+  SLComplexRect_s * SIGLIB_PTR_DECL DstZPlanePoles,
+  const SLData_t Frequency1,
+  const SLData_t Frequency2,
+  const SLData_t SampleRate,
+  const SLArrayIndex_t NumberOfZeros,
+  const SLArrayIndex_t NumberOfPoles)
 {
-    SLArrayIndex_t  i;
-    SLData_t        Alpha;
+  SLArrayIndex_t  i;
+  SLData_t        Alpha;
 
-    Alpha = SDS_Sin (SIGLIB_PI * (Frequency1 - Frequency2) / SampleRate) /
-                SDS_Sin (SIGLIB_PI * (Frequency1 + Frequency2) / SampleRate);
+  Alpha = SDS_Sin (SIGLIB_PI * (Frequency1 - Frequency2) / SampleRate) / SDS_Sin (SIGLIB_PI * (Frequency1 + Frequency2) / SampleRate);
 
-                    // Frequency transform -    Z^-1 => (z^-1 - a) / (1 - a.z^-1)
-                    // This is the result after transformation.
-                    // To do the transform, the function is :
-                    //     replace z^-1 with (z^-1 + a) / (1 + a.z^-1)
-                    // Reference : Oppenheim and Schafer, Discrete Time Signal Processing, 1989, pp434
+// Frequency transform -    Z^-1 => (z^-1 - a) / (1 - a.z^-1)
+// This is the result after transformation.
+// To do the transform, the function is :
+//     replace z^-1 with (z^-1 + a) / (1 + a.z^-1)
+// Reference : Oppenheim and Schafer, Discrete Time Signal Processing, 1989, pp434
 
-    for (i = 0; i < NumberOfZeros; i++) {
-        *DstZPlaneZeros++ = SCV_Divide (SCV_VectorSubtractScalar (*SrcZPlaneZeros, Alpha),
-                    SCV_ScalarSubtractVector (SIGLIB_ONE, SCV_VectorMultiplyScalar (*SrcZPlaneZeros, Alpha)));
-        SrcZPlaneZeros++;
-    }
+  for (i = 0; i < NumberOfZeros; i++) {
+    *DstZPlaneZeros++ = SCV_Divide (SCV_VectorSubtractScalar (*SrcZPlaneZeros, Alpha),
+                                    SCV_ScalarSubtractVector (SIGLIB_ONE, SCV_VectorMultiplyScalar (*SrcZPlaneZeros, Alpha)));
+    SrcZPlaneZeros++;
+  }
 
-    for (i = 0; i < NumberOfPoles; i++) {
-        *DstZPlanePoles++ = SCV_Divide (SCV_VectorSubtractScalar (*SrcZPlanePoles, Alpha),
-                    SCV_ScalarSubtractVector (SIGLIB_ONE, SCV_VectorMultiplyScalar (*SrcZPlanePoles, Alpha)));
-        SrcZPlanePoles++;
-    }
-}       // End of SDA_IirZplaneLpfToLpf
+  for (i = 0; i < NumberOfPoles; i++) {
+    *DstZPlanePoles++ = SCV_Divide (SCV_VectorSubtractScalar (*SrcZPlanePoles, Alpha),
+                                    SCV_ScalarSubtractVector (SIGLIB_ONE, SCV_VectorMultiplyScalar (*SrcZPlanePoles, Alpha)));
+    SrcZPlanePoles++;
+  }
+}                                                                   // End of SDA_IirZplaneLpfToLpf
 
 
 /**/
+
 /********************************************************
 * Function: SDA_IirZplaneLpfToHpf
 *
@@ -957,39 +952,41 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToLpf (const SLComplexRect_s * SIGLIB_PTR_
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToHpf (const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlaneZeros,
-    const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlanePoles,
-    SLComplexRect_s * SIGLIB_PTR_DECL DstZPlaneZeros,
-    SLComplexRect_s * SIGLIB_PTR_DECL DstZPlanePoles,
-    const SLData_t Frequency1,
-    const SLData_t Frequency2,
-    const SLData_t SampleRate,
-    const SLArrayIndex_t NumberOfZeros,
-    const SLArrayIndex_t NumberOfPoles)
-
+void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToHpf (
+  const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlaneZeros,
+  const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlanePoles,
+  SLComplexRect_s * SIGLIB_PTR_DECL DstZPlaneZeros,
+  SLComplexRect_s * SIGLIB_PTR_DECL DstZPlanePoles,
+  const SLData_t Frequency1,
+  const SLData_t Frequency2,
+  const SLData_t SampleRate,
+  const SLArrayIndex_t NumberOfZeros,
+  const SLArrayIndex_t NumberOfPoles)
 {
-    SLArrayIndex_t  i;
-    SLData_t        Alpha;
+  SLArrayIndex_t  i;
+  SLData_t        Alpha;
 
-    Alpha = - SDS_Cos (SIGLIB_PI * (Frequency1 + Frequency2) / SampleRate) /
-                SDS_Cos (SIGLIB_PI * (Frequency1 - Frequency2) / SampleRate);
+  Alpha = -SDS_Cos (SIGLIB_PI * (Frequency1 + Frequency2) / SampleRate) / SDS_Cos (SIGLIB_PI * (Frequency1 - Frequency2) / SampleRate);
 
-                    // Frequency transform -    z^-1 => -(a + z^-1) / (1 + a.z^-1)
-    for (i = 0; i < NumberOfZeros; i++) {
-        *DstZPlaneZeros++ = SCV_VectorMultiplyScalar (SCV_Divide (SCV_VectorAddScalar (*SrcZPlaneZeros, Alpha),
-                    SCV_VectorAddScalar (SCV_VectorMultiplyScalar (*SrcZPlaneZeros, Alpha), SIGLIB_ONE)), SIGLIB_MINUS_ONE);
-        SrcZPlaneZeros++;
-    }
+// Frequency transform -    z^-1 => -(a + z^-1) / (1 + a.z^-1)
+  for (i = 0; i < NumberOfZeros; i++) {
+    *DstZPlaneZeros++ = SCV_VectorMultiplyScalar (SCV_Divide (SCV_VectorAddScalar (*SrcZPlaneZeros, Alpha),
+                                                              SCV_VectorAddScalar (SCV_VectorMultiplyScalar (*SrcZPlaneZeros, Alpha), SIGLIB_ONE)),
+                                                  SIGLIB_MINUS_ONE);
+    SrcZPlaneZeros++;
+  }
 
-    for (i = 0; i < NumberOfPoles; i++) {
-        *DstZPlanePoles++ = SCV_VectorMultiplyScalar (SCV_Divide (SCV_VectorAddScalar (*SrcZPlanePoles, Alpha),
-                    SCV_VectorAddScalar (SCV_VectorMultiplyScalar (*SrcZPlanePoles, Alpha), SIGLIB_ONE)), SIGLIB_MINUS_ONE);
-        SrcZPlanePoles++;
-    }
-}       // End of SDA_IirZplaneLpfToHpf
+  for (i = 0; i < NumberOfPoles; i++) {
+    *DstZPlanePoles++ = SCV_VectorMultiplyScalar (SCV_Divide (SCV_VectorAddScalar (*SrcZPlanePoles, Alpha),
+                                                              SCV_VectorAddScalar (SCV_VectorMultiplyScalar (*SrcZPlanePoles, Alpha), SIGLIB_ONE)),
+                                                  SIGLIB_MINUS_ONE);
+    SrcZPlanePoles++;
+  }
+}                                                                   // End of SDA_IirZplaneLpfToHpf
 
 
 /**/
+
 /********************************************************
 * Function: SDA_IirZplaneLpfToBpf
 *
@@ -1016,64 +1013,63 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToHpf (const SLComplexRect_s * SIGLIB_PTR_
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToBpf (const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlaneZeros,
-    const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlanePoles,
-    SLComplexRect_s * SIGLIB_PTR_DECL DstZPlaneZeros,
-    SLComplexRect_s * SIGLIB_PTR_DECL DstZPlanePoles,
-    const SLData_t Frequency1,
-    const SLData_t FrequencyP1,
-    const SLData_t FrequencyP2,
-    const SLData_t SampleRate,
-    const SLArrayIndex_t NumberOfZeros,
-    const SLArrayIndex_t NumberOfPoles)
-
+void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToBpf (
+  const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlaneZeros,
+  const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlanePoles,
+  SLComplexRect_s * SIGLIB_PTR_DECL DstZPlaneZeros,
+  SLComplexRect_s * SIGLIB_PTR_DECL DstZPlanePoles,
+  const SLData_t Frequency1,
+  const SLData_t FrequencyP1,
+  const SLData_t FrequencyP2,
+  const SLData_t SampleRate,
+  const SLArrayIndex_t NumberOfZeros,
+  const SLArrayIndex_t NumberOfPoles)
 {
-    SLArrayIndex_t  i;
-    SLData_t        Alpha, K, A1, A2;
-    SLComplexRect_s X, Y, Z;
+  SLArrayIndex_t  i;
+  SLData_t        Alpha, K, A1, A2;
+  SLComplexRect_s X, Y, Z;
 
-    Alpha = SDS_Cos (SIGLIB_PI * (FrequencyP2 + FrequencyP1) / SampleRate) /
-                SDS_Cos (SIGLIB_PI * (FrequencyP2 - FrequencyP1) / SampleRate);
+  Alpha = SDS_Cos (SIGLIB_PI * (FrequencyP2 + FrequencyP1) / SampleRate) / SDS_Cos (SIGLIB_PI * (FrequencyP2 - FrequencyP1) / SampleRate);
 
-    K = (SIGLIB_ONE / SDS_Tan (SIGLIB_PI * (FrequencyP2 - FrequencyP1) / SampleRate)) *
-                SDS_Tan (SIGLIB_PI * Frequency1 / SampleRate);
+  K = (SIGLIB_ONE / SDS_Tan (SIGLIB_PI * (FrequencyP2 - FrequencyP1) / SampleRate)) * SDS_Tan (SIGLIB_PI * Frequency1 / SampleRate);
 
-    A1 = (2 * Alpha * K) / (K + 1);
-    A2 = (K - 1) / (K + 1);
+  A1 = (2 * Alpha * K) / (K + 1);
+  A2 = (K - 1) / (K + 1);
 
-                    // Frequency transform -    z^-1 => (z^-1 - a) / (1 - a.z^-1)
-                    // z^-1 = X +/- (Y / Z)
-    for (i = 0; i < NumberOfZeros; i++) {
-        X = SCV_VectorAddScalar (SCV_VectorMultiplyScalar (*SrcZPlaneZeros, A1), A1);
-        Y = SCV_Sqrt (SCV_Subtract (
-                SCV_Pow (SCV_VectorAddScalar (SCV_VectorMultiplyScalar (*SrcZPlaneZeros, A1), A1), SIGLIB_TWO),
-                SCV_VectorMultiplyScalar (SCV_Multiply (SCV_VectorAddScalar (SCV_VectorMultiplyScalar (*SrcZPlaneZeros, A2), SIGLIB_ONE),
-                    SCV_VectorAddScalar (*SrcZPlaneZeros, A2)), SIGLIB_FOUR) ));
-        Z = SCV_VectorMultiplyScalar (SCV_VectorAddScalar (SCV_VectorMultiplyScalar (*SrcZPlaneZeros, A2), SIGLIB_ONE), SIGLIB_TWO);
+// Frequency transform -    z^-1 => (z^-1 - a) / (1 - a.z^-1)
+// z^-1 = X +/- (Y / Z)
+  for (i = 0; i < NumberOfZeros; i++) {
+    X = SCV_VectorAddScalar (SCV_VectorMultiplyScalar (*SrcZPlaneZeros, A1), A1);
+    Y = SCV_Sqrt (SCV_Subtract (SCV_Pow (SCV_VectorAddScalar (SCV_VectorMultiplyScalar (*SrcZPlaneZeros, A1), A1), SIGLIB_TWO),
+                                SCV_VectorMultiplyScalar (SCV_Multiply
+                                                          (SCV_VectorAddScalar (SCV_VectorMultiplyScalar (*SrcZPlaneZeros, A2), SIGLIB_ONE),
+                                                           SCV_VectorAddScalar (*SrcZPlaneZeros, A2)), SIGLIB_FOUR)));
+    Z = SCV_VectorMultiplyScalar (SCV_VectorAddScalar (SCV_VectorMultiplyScalar (*SrcZPlaneZeros, A2), SIGLIB_ONE), SIGLIB_TWO);
 
-        *DstZPlaneZeros++ = SCV_Divide (SCV_Add (X, Y), Z);
-        *DstZPlaneZeros++ = SCV_Divide (SCV_Subtract (X, Y), Z);
+    *DstZPlaneZeros++ = SCV_Divide (SCV_Add (X, Y), Z);
+    *DstZPlaneZeros++ = SCV_Divide (SCV_Subtract (X, Y), Z);
 
-        SrcZPlaneZeros++;
-    }
+    SrcZPlaneZeros++;
+  }
 
-    for (i = 0; i < NumberOfPoles; i++) {
-        X = SCV_VectorAddScalar (SCV_VectorMultiplyScalar (*SrcZPlanePoles, A1), A1);
-        Y = SCV_Sqrt (SCV_Subtract (
-                SCV_Pow (SCV_VectorAddScalar (SCV_VectorMultiplyScalar (*SrcZPlanePoles, A1), A1), SIGLIB_TWO),
-                SCV_VectorMultiplyScalar (SCV_Multiply (SCV_VectorAddScalar (SCV_VectorMultiplyScalar (*SrcZPlanePoles, A2), SIGLIB_ONE),
-                    SCV_VectorAddScalar (*SrcZPlanePoles, A2)), SIGLIB_FOUR) ));
-        Z = SCV_VectorMultiplyScalar (SCV_VectorAddScalar (SCV_VectorMultiplyScalar (*SrcZPlanePoles, A2), SIGLIB_ONE), SIGLIB_TWO);
+  for (i = 0; i < NumberOfPoles; i++) {
+    X = SCV_VectorAddScalar (SCV_VectorMultiplyScalar (*SrcZPlanePoles, A1), A1);
+    Y = SCV_Sqrt (SCV_Subtract (SCV_Pow (SCV_VectorAddScalar (SCV_VectorMultiplyScalar (*SrcZPlanePoles, A1), A1), SIGLIB_TWO),
+                                SCV_VectorMultiplyScalar (SCV_Multiply
+                                                          (SCV_VectorAddScalar (SCV_VectorMultiplyScalar (*SrcZPlanePoles, A2), SIGLIB_ONE),
+                                                           SCV_VectorAddScalar (*SrcZPlanePoles, A2)), SIGLIB_FOUR)));
+    Z = SCV_VectorMultiplyScalar (SCV_VectorAddScalar (SCV_VectorMultiplyScalar (*SrcZPlanePoles, A2), SIGLIB_ONE), SIGLIB_TWO);
 
-        *DstZPlanePoles++ = SCV_Divide (SCV_Add (X, Y), Z);
-        *DstZPlanePoles++ = SCV_Divide (SCV_Subtract (X, Y), Z);
+    *DstZPlanePoles++ = SCV_Divide (SCV_Add (X, Y), Z);
+    *DstZPlanePoles++ = SCV_Divide (SCV_Subtract (X, Y), Z);
 
-        SrcZPlanePoles++;
-    }
-}       // End of SDA_IirZplaneLpfToBpf
+    SrcZPlanePoles++;
+  }
+}                                                                   // End of SDA_IirZplaneLpfToBpf
 
 
 /**/
+
 /********************************************************
 * Function: SDA_IirZplaneLpfToBsf
 *
@@ -1100,65 +1096,64 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToBpf (const SLComplexRect_s * SIGLIB_PTR_
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToBsf (const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlaneZeros,
-    const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlanePoles,
-    SLComplexRect_s * SIGLIB_PTR_DECL DstZPlaneZeros,
-    SLComplexRect_s * SIGLIB_PTR_DECL DstZPlanePoles,
-    const SLData_t Frequency1,
-    const SLData_t FrequencyP1,
-    const SLData_t FrequencyP2,
-    const SLData_t SampleRate,
-    const SLArrayIndex_t NumberOfZeros,
-    const SLArrayIndex_t NumberOfPoles)
-
+void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToBsf (
+  const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlaneZeros,
+  const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlanePoles,
+  SLComplexRect_s * SIGLIB_PTR_DECL DstZPlaneZeros,
+  SLComplexRect_s * SIGLIB_PTR_DECL DstZPlanePoles,
+  const SLData_t Frequency1,
+  const SLData_t FrequencyP1,
+  const SLData_t FrequencyP2,
+  const SLData_t SampleRate,
+  const SLArrayIndex_t NumberOfZeros,
+  const SLArrayIndex_t NumberOfPoles)
 {
-    SLArrayIndex_t  i;
-    SLData_t        Alpha, K, A1, A2;
-    SLComplexRect_s X, Y, Z;
+  SLArrayIndex_t  i;
+  SLData_t        Alpha, K, A1, A2;
+  SLComplexRect_s X, Y, Z;
 
-    Alpha = SDS_Cos (SIGLIB_PI * (FrequencyP2 + FrequencyP1) / SampleRate) /
-                SDS_Cos (SIGLIB_PI * (FrequencyP2 - FrequencyP1) / SampleRate);
+  Alpha = SDS_Cos (SIGLIB_PI * (FrequencyP2 + FrequencyP1) / SampleRate) / SDS_Cos (SIGLIB_PI * (FrequencyP2 - FrequencyP1) / SampleRate);
 
-    K = SDS_Tan (SIGLIB_PI * (FrequencyP2 - FrequencyP1) / SampleRate) *
-                SDS_Tan (SIGLIB_PI * Frequency1 / SampleRate);
+  K = SDS_Tan (SIGLIB_PI * (FrequencyP2 - FrequencyP1) / SampleRate) * SDS_Tan (SIGLIB_PI * Frequency1 / SampleRate);
 
-    A1 = (2 * Alpha) / (1 + K);
-    A2 = (1 - K) / (1 + K);
+  A1 = (2 * Alpha) / (1 + K);
+  A2 = (1 - K) / (1 + K);
 
-                    // Frequency transform -    z^-1 => (z^-1 - a) / (1 - a.z^-1)
-                    // Ax^2 + Bx + C = 0 => x = -B +/- sqrt (B^2 - 4AC) / 2A
-                    // z^-1 = X +/- (Y / Z)
-    for (i = 0; i < NumberOfZeros; i++) {
-        X = SCV_VectorSubtractScalar (SCV_VectorMultiplyScalar (*SrcZPlaneZeros, A1), A1);
-        Y = SCV_Sqrt (SCV_Subtract (
-                SCV_Pow (SCV_ScalarSubtractVector (A1, SCV_VectorMultiplyScalar (*SrcZPlaneZeros, A1)), SIGLIB_TWO),
-                SCV_VectorMultiplyScalar (SCV_Multiply (SCV_VectorSubtractScalar (SCV_VectorMultiplyScalar (*SrcZPlaneZeros, A2), SIGLIB_ONE),
-                    SCV_VectorSubtractScalar (*SrcZPlaneZeros, A2)), SIGLIB_FOUR) ));
-        Z = SCV_VectorMultiplyScalar (SCV_VectorSubtractScalar (SCV_VectorMultiplyScalar (*SrcZPlaneZeros, A2), SIGLIB_ONE), SIGLIB_TWO);
+// Frequency transform -    z^-1 => (z^-1 - a) / (1 - a.z^-1)
+// Ax^2 + Bx + C = 0 => x = -B +/- sqrt (B^2 - 4AC) / 2A
+// z^-1 = X +/- (Y / Z)
+  for (i = 0; i < NumberOfZeros; i++) {
+    X = SCV_VectorSubtractScalar (SCV_VectorMultiplyScalar (*SrcZPlaneZeros, A1), A1);
+    Y = SCV_Sqrt (SCV_Subtract (SCV_Pow (SCV_ScalarSubtractVector (A1, SCV_VectorMultiplyScalar (*SrcZPlaneZeros, A1)), SIGLIB_TWO),
+                                SCV_VectorMultiplyScalar (SCV_Multiply
+                                                          (SCV_VectorSubtractScalar (SCV_VectorMultiplyScalar (*SrcZPlaneZeros, A2), SIGLIB_ONE),
+                                                           SCV_VectorSubtractScalar (*SrcZPlaneZeros, A2)), SIGLIB_FOUR)));
+    Z = SCV_VectorMultiplyScalar (SCV_VectorSubtractScalar (SCV_VectorMultiplyScalar (*SrcZPlaneZeros, A2), SIGLIB_ONE), SIGLIB_TWO);
 
-        *DstZPlaneZeros++ = SCV_Divide (SCV_Add (X, Y), Z);
-        *DstZPlaneZeros++ = SCV_Divide (SCV_Subtract (X, Y), Z);
+    *DstZPlaneZeros++ = SCV_Divide (SCV_Add (X, Y), Z);
+    *DstZPlaneZeros++ = SCV_Divide (SCV_Subtract (X, Y), Z);
 
-        SrcZPlaneZeros++;
-    }
+    SrcZPlaneZeros++;
+  }
 
-    for (i = 0; i < NumberOfPoles; i++) {
-        X = SCV_VectorSubtractScalar (SCV_VectorMultiplyScalar (*SrcZPlanePoles, A1), A1);
-        Y = SCV_Sqrt (SCV_Subtract (
-                SCV_Pow (SCV_ScalarSubtractVector (A1, SCV_VectorMultiplyScalar (*SrcZPlanePoles, A1)), SIGLIB_TWO),
-                SCV_VectorMultiplyScalar (SCV_Multiply (SCV_VectorSubtractScalar (SCV_VectorMultiplyScalar (*SrcZPlanePoles, A2), SIGLIB_ONE),
-                    SCV_VectorSubtractScalar (*SrcZPlanePoles, A2)), SIGLIB_FOUR) ));
-        Z = SCV_VectorMultiplyScalar (SCV_VectorSubtractScalar (SCV_VectorMultiplyScalar (*SrcZPlanePoles, A2), SIGLIB_ONE), SIGLIB_TWO);
+  for (i = 0; i < NumberOfPoles; i++) {
+    X = SCV_VectorSubtractScalar (SCV_VectorMultiplyScalar (*SrcZPlanePoles, A1), A1);
+    Y = SCV_Sqrt (SCV_Subtract (SCV_Pow (SCV_ScalarSubtractVector (A1, SCV_VectorMultiplyScalar (*SrcZPlanePoles, A1)), SIGLIB_TWO),
+                                SCV_VectorMultiplyScalar (SCV_Multiply
+                                                          (SCV_VectorSubtractScalar (SCV_VectorMultiplyScalar (*SrcZPlanePoles, A2), SIGLIB_ONE),
+                                                           SCV_VectorSubtractScalar (*SrcZPlanePoles, A2)), SIGLIB_FOUR)));
+    Z = SCV_VectorMultiplyScalar (SCV_VectorSubtractScalar (SCV_VectorMultiplyScalar (*SrcZPlanePoles, A2), SIGLIB_ONE), SIGLIB_TWO);
 
-        *DstZPlanePoles++ = SCV_Divide (SCV_Add (X, Y), Z);
-        *DstZPlanePoles++ = SCV_Divide (SCV_Subtract (X, Y), Z);
+    *DstZPlanePoles++ = SCV_Divide (SCV_Add (X, Y), Z);
+    *DstZPlanePoles++ = SCV_Divide (SCV_Subtract (X, Y), Z);
 
-        SrcZPlanePoles++;
-    }
-}       // End of SDA_IirZplaneLpfToBsf
+    SrcZPlanePoles++;
+  }
+}                                                                   // End of SDA_IirZplaneLpfToBsf
 
 
 /**/
+
 /********************************************************
 * Function: SDA_IirModifyFilterGain
 *
@@ -1182,65 +1177,66 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToBsf (const SLComplexRect_s * SIGLIB_PTR_
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDA_IirModifyFilterGain (const SLData_t * SIGLIB_PTR_DECL pSrcIIRCoeffs,
-    SLData_t * SIGLIB_PTR_DECL pDstIIRCoeffs,
-    const SLData_t CentreFreq,
-    const SLData_t NewFilterGain,
-    const SLArrayIndex_t NumberOfBiquads)
-
+SLData_t SIGLIB_FUNC_DECL SDA_IirModifyFilterGain (
+  const SLData_t * SIGLIB_PTR_DECL pSrcIIRCoeffs,
+  SLData_t * SIGLIB_PTR_DECL pDstIIRCoeffs,
+  const SLData_t CentreFreq,
+  const SLData_t NewFilterGain,
+  const SLArrayIndex_t NumberOfBiquads)
 {
-    SLArrayIndex_t  i;
-    SLData_t        ScalingFactor;
-    SLComplexRect_s ZToMinusOne = SCV_Inverse (SCV_PolarToRectangular (SCV_Polar (SIGLIB_ONE, SIGLIB_TWO_PI * CentreFreq)));
-    SLComplexRect_s a0, a1, a2, b0, b1, b2;
-    SLComplexRect_s a1TimesZToMinusOne, a2TimesZToMinusTwo, b1TimesZToMinusOne, b2TimesZToMinusTwo;
-    SLComplexRect_s Numerator, Denominator, c_ScalingFactor;
-    SLData_t        OriginalFilterGain = SIGLIB_ONE;            // Keep track of original gain
+  SLArrayIndex_t  i;
+  SLData_t        ScalingFactor;
+  SLComplexRect_s ZToMinusOne = SCV_Inverse (SCV_PolarToRectangular (SCV_Polar (SIGLIB_ONE, SIGLIB_TWO_PI * CentreFreq)));
+  SLComplexRect_s a0, a1, a2, b0, b1, b2;
+  SLComplexRect_s a1TimesZToMinusOne, a2TimesZToMinusTwo, b1TimesZToMinusOne, b2TimesZToMinusTwo;
+  SLComplexRect_s Numerator, Denominator, c_ScalingFactor;
+  SLData_t        OriginalFilterGain = SIGLIB_ONE;                  // Keep track of original gain
 
-    for (i = 0; i < NumberOfBiquads; i++) {
-        b0 = SCV_Rectangular (*(pSrcIIRCoeffs+0 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)), SIGLIB_ZERO);
-        b1 = SCV_Rectangular (*(pSrcIIRCoeffs+1 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)), SIGLIB_ZERO);
-        b2 = SCV_Rectangular (*(pSrcIIRCoeffs+2 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)), SIGLIB_ZERO);
-        a0 = SCV_Rectangular (SIGLIB_ONE, SIGLIB_ZERO);
-        a1 = SCV_Rectangular (*(pSrcIIRCoeffs+3 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)), SIGLIB_ZERO);
-        a2 = SCV_Rectangular (*(pSrcIIRCoeffs+4 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)), SIGLIB_ZERO);
+  for (i = 0; i < NumberOfBiquads; i++) {
+    b0 = SCV_Rectangular (*(pSrcIIRCoeffs + 0 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)), SIGLIB_ZERO);
+    b1 = SCV_Rectangular (*(pSrcIIRCoeffs + 1 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)), SIGLIB_ZERO);
+    b2 = SCV_Rectangular (*(pSrcIIRCoeffs + 2 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)), SIGLIB_ZERO);
+    a0 = SCV_Rectangular (SIGLIB_ONE, SIGLIB_ZERO);
+    a1 = SCV_Rectangular (*(pSrcIIRCoeffs + 3 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)), SIGLIB_ZERO);
+    a2 = SCV_Rectangular (*(pSrcIIRCoeffs + 4 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)), SIGLIB_ZERO);
 
-        a1TimesZToMinusOne = SCV_Multiply (b1, ZToMinusOne);
-        a2TimesZToMinusTwo = SCV_Multiply (b2, SCV_Multiply (ZToMinusOne, ZToMinusOne));
-        b1TimesZToMinusOne = SCV_Multiply (a1, ZToMinusOne);
-        b2TimesZToMinusTwo = SCV_Multiply (a2, SCV_Multiply (ZToMinusOne, ZToMinusOne));
+    a1TimesZToMinusOne = SCV_Multiply (b1, ZToMinusOne);
+    a2TimesZToMinusTwo = SCV_Multiply (b2, SCV_Multiply (ZToMinusOne, ZToMinusOne));
+    b1TimesZToMinusOne = SCV_Multiply (a1, ZToMinusOne);
+    b2TimesZToMinusTwo = SCV_Multiply (a2, SCV_Multiply (ZToMinusOne, ZToMinusOne));
 
-        Numerator = SCV_Add (b0, SCV_Add (a1TimesZToMinusOne, a2TimesZToMinusTwo));
-        Denominator = SCV_Add (a0, SCV_Add (b1TimesZToMinusOne, b2TimesZToMinusTwo));
+    Numerator = SCV_Add (b0, SCV_Add (a1TimesZToMinusOne, a2TimesZToMinusTwo));
+    Denominator = SCV_Add (a0, SCV_Add (b1TimesZToMinusOne, b2TimesZToMinusTwo));
 
-        c_ScalingFactor = SCV_Inverse (SCV_Divide (Numerator, Denominator));
+    c_ScalingFactor = SCV_Inverse (SCV_Divide (Numerator, Denominator));
 
-        ScalingFactor = SCV_Magnitude (c_ScalingFactor);
+    ScalingFactor = SCV_Magnitude (c_ScalingFactor);
 
 //      SUF_Debugfprintf ("SDA_IirModifyFilterGain: c_ScalingFactor[%d] = %lf + j%lf = %lf\n", i, c_ScalingFactor.real, c_ScalingFactor.imag, ScalingFactor);
 
 
-        OriginalFilterGain /= ScalingFactor;            // Keep track of original gain
+    OriginalFilterGain /= ScalingFactor;                            // Keep track of original gain
 
-                                    // Scale coefficients to gain of 1.0
-        *(pDstIIRCoeffs + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)) = *(pSrcIIRCoeffs + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)) * ScalingFactor;
-        *(pDstIIRCoeffs+1 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)) = *(pSrcIIRCoeffs+1 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)) * ScalingFactor;
-        *(pDstIIRCoeffs+2 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)) = *(pSrcIIRCoeffs+2 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)) * ScalingFactor;
-        *(pDstIIRCoeffs+3 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)) = *(pSrcIIRCoeffs+3 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD));
-        *(pDstIIRCoeffs+4 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)) = *(pSrcIIRCoeffs+4 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD));
-    }
+// Scale coefficients to gain of 1.0
+    *(pDstIIRCoeffs + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)) = *(pSrcIIRCoeffs + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)) * ScalingFactor;
+    *(pDstIIRCoeffs + 1 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)) = *(pSrcIIRCoeffs + 1 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)) * ScalingFactor;
+    *(pDstIIRCoeffs + 2 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)) = *(pSrcIIRCoeffs + 2 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)) * ScalingFactor;
+    *(pDstIIRCoeffs + 3 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)) = *(pSrcIIRCoeffs + 3 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD));
+    *(pDstIIRCoeffs + 4 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)) = *(pSrcIIRCoeffs + 4 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD));
+  }
 
-                                    // Scale first biquad to reequired gain
-    *(pDstIIRCoeffs) *= NewFilterGain;
-    *(pDstIIRCoeffs+1) *= NewFilterGain;
-    *(pDstIIRCoeffs+2) *= NewFilterGain;
+// Scale first biquad to reequired gain
+  *(pDstIIRCoeffs) *= NewFilterGain;
+  *(pDstIIRCoeffs + 1) *= NewFilterGain;
+  *(pDstIIRCoeffs + 2) *= NewFilterGain;
 
-    return (OriginalFilterGain);                        // Return original filter gain
+  return (OriginalFilterGain);                                      // Return original filter gain
 
-}       // End of SDA_IirModifyFilterGain
+}                                                                   // End of SDA_IirModifyFilterGain
 
 
 /**/
+
 /********************************************************
 * Function: SIF_IirLowPassFilter
 *
@@ -1258,28 +1254,30 @@ SLData_t SIGLIB_FUNC_DECL SDA_IirModifyFilterGain (const SLData_t * SIGLIB_PTR_D
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_IirLowPassFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    const SLData_t CutoffFrequency,
-    const SLData_t FilterQ)
+void SIGLIB_FUNC_DECL SIF_IirLowPassFilter (
+  SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLData_t CutoffFrequency,
+  const SLData_t FilterQ)
 {
-                        // Pre-compute the common factors
-    SLData_t w0    = SIGLIB_TWO * SIGLIB_PI * CutoffFrequency;
-    SLData_t alpha = SDS_Sin (w0) / (SIGLIB_TWO * FilterQ);
-    SLData_t cosw0 = SDS_Cos (w0);
+// Pre-compute the common factors
+  SLData_t        w0 = SIGLIB_TWO * SIGLIB_PI * CutoffFrequency;
+  SLData_t        alpha = SDS_Sin (w0) / (SIGLIB_TWO * FilterQ);
+  SLData_t        cosw0 = SDS_Cos (w0);
 
-    SLData_t a0 = SIGLIB_ONE + alpha;
-    SLData_t b0_2_overA0 = ((SIGLIB_ONE - cosw0) / SIGLIB_TWO) / a0;
+  SLData_t        a0 = SIGLIB_ONE + alpha;
+  SLData_t        b0_2_overA0 = ((SIGLIB_ONE - cosw0) / SIGLIB_TWO) / a0;
 
-                        // Compute the coefficients
-    *pCoeffs     = b0_2_overA0;
-    *(pCoeffs+1) = (SIGLIB_ONE - cosw0) / a0;
-    *(pCoeffs+2) = b0_2_overA0;
-    *(pCoeffs+3) = (SIGLIB_MINUS_TWO * cosw0) / a0;
-    *(pCoeffs+4) = (SIGLIB_ONE - alpha) / a0;
-}       // End of SIF_IirLowPassFilter()
+// Compute the coefficients
+  *pCoeffs = b0_2_overA0;
+  *(pCoeffs + 1) = (SIGLIB_ONE - cosw0) / a0;
+  *(pCoeffs + 2) = b0_2_overA0;
+  *(pCoeffs + 3) = (SIGLIB_MINUS_TWO * cosw0) / a0;
+  *(pCoeffs + 4) = (SIGLIB_ONE - alpha) / a0;
+}                                                                   // End of SIF_IirLowPassFilter()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_IirHighPassFilter
 *
@@ -1297,28 +1295,30 @@ void SIGLIB_FUNC_DECL SIF_IirLowPassFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_IirHighPassFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    const SLData_t CutoffFrequency,
-    const SLData_t FilterQ)
+void SIGLIB_FUNC_DECL SIF_IirHighPassFilter (
+  SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLData_t CutoffFrequency,
+  const SLData_t FilterQ)
 {
-                        // Pre-compute the common factors
-    SLData_t w0    = SIGLIB_TWO * SIGLIB_PI * CutoffFrequency;
-    SLData_t alpha = SDS_Sin (w0) / (SIGLIB_TWO * FilterQ);
-    SLData_t cosw0 = SDS_Cos (w0);
+// Pre-compute the common factors
+  SLData_t        w0 = SIGLIB_TWO * SIGLIB_PI * CutoffFrequency;
+  SLData_t        alpha = SDS_Sin (w0) / (SIGLIB_TWO * FilterQ);
+  SLData_t        cosw0 = SDS_Cos (w0);
 
-    SLData_t a0 = SIGLIB_ONE + alpha;
-    SLData_t b0_2_overA0 = ((SIGLIB_ONE + cosw0) / SIGLIB_TWO) / a0;
+  SLData_t        a0 = SIGLIB_ONE + alpha;
+  SLData_t        b0_2_overA0 = ((SIGLIB_ONE + cosw0) / SIGLIB_TWO) / a0;
 
-                        // Compute the coefficients
-    *pCoeffs     = b0_2_overA0;
-    *(pCoeffs+1) = (-(SIGLIB_ONE + cosw0)) / a0;
-    *(pCoeffs+2) = b0_2_overA0;
-    *(pCoeffs+3) = (SIGLIB_MINUS_TWO * cosw0) / a0;
-    *(pCoeffs+4) = (SIGLIB_ONE - alpha) / a0;
-}       // End of SIF_IirHighPassFilter()
+// Compute the coefficients
+  *pCoeffs = b0_2_overA0;
+  *(pCoeffs + 1) = (-(SIGLIB_ONE + cosw0)) / a0;
+  *(pCoeffs + 2) = b0_2_overA0;
+  *(pCoeffs + 3) = (SIGLIB_MINUS_TWO * cosw0) / a0;
+  *(pCoeffs + 4) = (SIGLIB_ONE - alpha) / a0;
+}                                                                   // End of SIF_IirHighPassFilter()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_IirAllPassFilter
 *
@@ -1336,28 +1336,30 @@ void SIGLIB_FUNC_DECL SIF_IirHighPassFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_IirAllPassFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    const SLData_t CutoffFrequency,
-    const SLData_t FilterQ)
+void SIGLIB_FUNC_DECL SIF_IirAllPassFilter (
+  SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLData_t CutoffFrequency,
+  const SLData_t FilterQ)
 {
-                        // Pre-compute the common factors
-    SLData_t w0    = SIGLIB_TWO * SIGLIB_PI * CutoffFrequency;
-    SLData_t alpha = SDS_Sin (w0) / (SIGLIB_TWO * FilterQ);
-    SLData_t cosw0 = SDS_Cos (w0);
+// Pre-compute the common factors
+  SLData_t        w0 = SIGLIB_TWO * SIGLIB_PI * CutoffFrequency;
+  SLData_t        alpha = SDS_Sin (w0) / (SIGLIB_TWO * FilterQ);
+  SLData_t        cosw0 = SDS_Cos (w0);
 
-    SLData_t a0 =  SIGLIB_ONE + alpha;
-    SLData_t b0_2_overA0 =  (SIGLIB_ONE - alpha) / a0;
+  SLData_t        a0 = SIGLIB_ONE + alpha;
+  SLData_t        b0_2_overA0 = (SIGLIB_ONE - alpha) / a0;
 
-                        // Compute the coefficients
-    *pCoeffs     = b0_2_overA0;
-    *(pCoeffs+1) = (SIGLIB_MINUS_TWO * cosw0) / a0;
-    *(pCoeffs+2) = b0_2_overA0;
-    *(pCoeffs+3) = (SIGLIB_MINUS_TWO * cosw0) / a0;
-    *(pCoeffs+4) = (SIGLIB_ONE - alpha) / a0;
-}       // End of SIF_IirAllPassFilter()
+// Compute the coefficients
+  *pCoeffs = b0_2_overA0;
+  *(pCoeffs + 1) = (SIGLIB_MINUS_TWO * cosw0) / a0;
+  *(pCoeffs + 2) = b0_2_overA0;
+  *(pCoeffs + 3) = (SIGLIB_MINUS_TWO * cosw0) / a0;
+  *(pCoeffs + 4) = (SIGLIB_ONE - alpha) / a0;
+}                                                                   // End of SIF_IirAllPassFilter()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_IirBandPassFilter
 *
@@ -1375,29 +1377,31 @@ void SIGLIB_FUNC_DECL SIF_IirAllPassFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_IirBandPassFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    const SLData_t CutoffFrequency1,
-    const SLData_t CutoffFrequency2)
+void SIGLIB_FUNC_DECL SIF_IirBandPassFilter (
+  SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLData_t CutoffFrequency1,
+  const SLData_t CutoffFrequency2)
 {
-                        // Pre-compute the common factors
-    SLData_t w0    = SIGLIB_TWO * SIGLIB_PI * CutoffFrequency1;
-    SLData_t bw    = CutoffFrequency2 - CutoffFrequency1;
-    SLData_t sinw0 = SDS_Sin (w0);
-    SLData_t alpha = sinw0 * SDS_Sinh ((SDS_Log (SIGLIB_TWO)) / SIGLIB_TWO * bw * w0/sinw0);
+// Pre-compute the common factors
+  SLData_t        w0 = SIGLIB_TWO * SIGLIB_PI * CutoffFrequency1;
+  SLData_t        bw = CutoffFrequency2 - CutoffFrequency1;
+  SLData_t        sinw0 = SDS_Sin (w0);
+  SLData_t        alpha = sinw0 * SDS_Sinh ((SDS_Log (SIGLIB_TWO)) / SIGLIB_TWO * bw * w0 / sinw0);
 
-    SLData_t a0 =  SIGLIB_ONE + alpha;
-    SLData_t b0_2_overA0 =  (sinw0 / SIGLIB_TWO) / a0;
+  SLData_t        a0 = SIGLIB_ONE + alpha;
+  SLData_t        b0_2_overA0 = (sinw0 / SIGLIB_TWO) / a0;
 
-                        // Compute the coefficients
-    *pCoeffs     = b0_2_overA0;
-    *(pCoeffs+1) = SIGLIB_ZERO;
-    *(pCoeffs+2) = -b0_2_overA0;
-    *(pCoeffs+3) = (SIGLIB_MINUS_TWO * SDS_Cos (w0)) / a0;
-    *(pCoeffs+4) = (SIGLIB_ONE - alpha) / a0;
-}       // End of SIF_IirBandPassFilter()
+// Compute the coefficients
+  *pCoeffs = b0_2_overA0;
+  *(pCoeffs + 1) = SIGLIB_ZERO;
+  *(pCoeffs + 2) = -b0_2_overA0;
+  *(pCoeffs + 3) = (SIGLIB_MINUS_TWO * SDS_Cos (w0)) / a0;
+  *(pCoeffs + 4) = (SIGLIB_ONE - alpha) / a0;
+}                                                                   // End of SIF_IirBandPassFilter()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_IirNotchFilter
 *
@@ -1415,28 +1419,30 @@ void SIGLIB_FUNC_DECL SIF_IirBandPassFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_IirNotchFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    const SLData_t CutoffFrequency,
-    const SLData_t FilterQ)
+void SIGLIB_FUNC_DECL SIF_IirNotchFilter (
+  SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLData_t CutoffFrequency,
+  const SLData_t FilterQ)
 {
-                        // Pre-compute the common factors
-    SLData_t w0    = SIGLIB_TWO * SIGLIB_PI * CutoffFrequency;
-    SLData_t alpha = SDS_Sin (w0) / (SIGLIB_TWO * FilterQ);
-    SLData_t cosw0 = SDS_Cos (w0);
+// Pre-compute the common factors
+  SLData_t        w0 = SIGLIB_TWO * SIGLIB_PI * CutoffFrequency;
+  SLData_t        alpha = SDS_Sin (w0) / (SIGLIB_TWO * FilterQ);
+  SLData_t        cosw0 = SDS_Cos (w0);
 
-    SLData_t a0 = SIGLIB_ONE + alpha;
-    SLData_t b0_2_overA0 = SIGLIB_ONE / a0;
+  SLData_t        a0 = SIGLIB_ONE + alpha;
+  SLData_t        b0_2_overA0 = SIGLIB_ONE / a0;
 
-                        // Compute the coefficients
-    *pCoeffs     = b0_2_overA0;
-    *(pCoeffs+1) = (SIGLIB_MINUS_TWO * cosw0) / a0;
-    *(pCoeffs+2) = b0_2_overA0;
-    *(pCoeffs+3) = (SIGLIB_MINUS_TWO * cosw0) / a0;
-    *(pCoeffs+4) = (SIGLIB_ONE - alpha) / a0;
-}       // End of SIF_IirNotchFilter()
+// Compute the coefficients
+  *pCoeffs = b0_2_overA0;
+  *(pCoeffs + 1) = (SIGLIB_MINUS_TWO * cosw0) / a0;
+  *(pCoeffs + 2) = b0_2_overA0;
+  *(pCoeffs + 3) = (SIGLIB_MINUS_TWO * cosw0) / a0;
+  *(pCoeffs + 4) = (SIGLIB_ONE - alpha) / a0;
+}                                                                   // End of SIF_IirNotchFilter()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_IirPeakingFilter
 *
@@ -1455,29 +1461,31 @@ void SIGLIB_FUNC_DECL SIF_IirNotchFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_IirPeakingFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    const SLData_t CutoffFrequency,
-    const SLData_t FilterQ,
-    const SLData_t Gain_dB)
+void SIGLIB_FUNC_DECL SIF_IirPeakingFilter (
+  SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLData_t CutoffFrequency,
+  const SLData_t FilterQ,
+  const SLData_t Gain_dB)
 {
-                        // Pre-compute the common factors
-    SLData_t A  = SDS_Sqrt (SDS_Pow (SIGLIB_TEN, (Gain_dB / 20.0)));
-    SLData_t w0 = SIGLIB_TWO * SIGLIB_PI * CutoffFrequency;
-    SLData_t alpha = SDS_Sin (w0) / (SIGLIB_TWO * FilterQ);
-    SLData_t cosw0 = SDS_Cos (w0);
+// Pre-compute the common factors
+  SLData_t        A = SDS_Sqrt (SDS_Pow (SIGLIB_TEN, (Gain_dB / 20.0)));
+  SLData_t        w0 = SIGLIB_TWO * SIGLIB_PI * CutoffFrequency;
+  SLData_t        alpha = SDS_Sin (w0) / (SIGLIB_TWO * FilterQ);
+  SLData_t        cosw0 = SDS_Cos (w0);
 
-    SLData_t a0 = SIGLIB_ONE + alpha / A;
+  SLData_t        a0 = SIGLIB_ONE + alpha / A;
 
-                        // Compute the coefficients
-    *pCoeffs     = (SIGLIB_ONE + alpha * A) / a0;
-    *(pCoeffs+1) = (SIGLIB_MINUS_TWO * cosw0) / a0;
-    *(pCoeffs+2) = (SIGLIB_ONE - alpha * A) / a0;
-    *(pCoeffs+3) = (SIGLIB_MINUS_TWO * cosw0) / a0;
-    *(pCoeffs+4) = (SIGLIB_ONE - alpha / A) / a0;
-}       // End of SIF_IirPeakingFilter()
+// Compute the coefficients
+  *pCoeffs = (SIGLIB_ONE + alpha * A) / a0;
+  *(pCoeffs + 1) = (SIGLIB_MINUS_TWO * cosw0) / a0;
+  *(pCoeffs + 2) = (SIGLIB_ONE - alpha * A) / a0;
+  *(pCoeffs + 3) = (SIGLIB_MINUS_TWO * cosw0) / a0;
+  *(pCoeffs + 4) = (SIGLIB_ONE - alpha / A) / a0;
+}                                                                   // End of SIF_IirPeakingFilter()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_IirLowShelfFilter
 *
@@ -1496,30 +1504,32 @@ void SIGLIB_FUNC_DECL SIF_IirPeakingFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_IirLowShelfFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    const SLData_t CutoffFrequency,
-    const SLData_t FilterQ,
-    const SLData_t ShelfGain_dB)
+void SIGLIB_FUNC_DECL SIF_IirLowShelfFilter (
+  SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLData_t CutoffFrequency,
+  const SLData_t FilterQ,
+  const SLData_t ShelfGain_dB)
 {
-                        // Pre-compute the common factors
-    SLData_t A  = SDS_Pow (SIGLIB_TEN, (ShelfGain_dB / 40.0));
-    SLData_t w0 = SIGLIB_TWO * SIGLIB_PI * CutoffFrequency;
-    SLData_t alpha = SDS_Sin (w0) / SIGLIB_TWO * SDS_Sqrt ((A + SIGLIB_ONE / A) * (SIGLIB_ONE / FilterQ - SIGLIB_ONE) + SIGLIB_TWO);
-    SLData_t cosw0 = SDS_Cos (w0);
-    SLData_t sqrtA = SDS_Sqrt (A);
+// Pre-compute the common factors
+  SLData_t        A = SDS_Pow (SIGLIB_TEN, (ShelfGain_dB / 40.0));
+  SLData_t        w0 = SIGLIB_TWO * SIGLIB_PI * CutoffFrequency;
+  SLData_t        alpha = SDS_Sin (w0) / SIGLIB_TWO * SDS_Sqrt ((A + SIGLIB_ONE / A) * (SIGLIB_ONE / FilterQ - SIGLIB_ONE) + SIGLIB_TWO);
+  SLData_t        cosw0 = SDS_Cos (w0);
+  SLData_t        sqrtA = SDS_Sqrt (A);
 
-    SLData_t a0 = (A+SIGLIB_ONE) + (A-SIGLIB_ONE)*cosw0 + SIGLIB_TWO*sqrtA*alpha;
+  SLData_t        a0 = (A + SIGLIB_ONE) + (A - SIGLIB_ONE) * cosw0 + SIGLIB_TWO * sqrtA * alpha;
 
-                        // Compute the coefficients
-    *pCoeffs     = (A * ( (A + SIGLIB_ONE) - (A - SIGLIB_ONE)*cosw0 + SIGLIB_TWO*sqrtA*alpha)) / a0;
-    *(pCoeffs+1) = (SIGLIB_TWO * A * ( (A - SIGLIB_ONE) - (A+SIGLIB_ONE)*cosw0)) / a0;
-    *(pCoeffs+2) = (A * ( (A + SIGLIB_ONE) - (A - SIGLIB_ONE)*cosw0 - SIGLIB_TWO*sqrtA*alpha)) / a0;
-    *(pCoeffs+3) = (SIGLIB_MINUS_TWO * ( (A - SIGLIB_ONE) + (A+SIGLIB_ONE)*cosw0)) / a0;
-    *(pCoeffs+4) = ((A + SIGLIB_ONE) + (A - SIGLIB_ONE)*cosw0 - SIGLIB_TWO*sqrtA*alpha) / a0;
-}       // End of SIF_IirLowShelfFilter()
+// Compute the coefficients
+  *pCoeffs = (A * ((A + SIGLIB_ONE) - (A - SIGLIB_ONE) * cosw0 + SIGLIB_TWO * sqrtA * alpha)) / a0;
+  *(pCoeffs + 1) = (SIGLIB_TWO * A * ((A - SIGLIB_ONE) - (A + SIGLIB_ONE) * cosw0)) / a0;
+  *(pCoeffs + 2) = (A * ((A + SIGLIB_ONE) - (A - SIGLIB_ONE) * cosw0 - SIGLIB_TWO * sqrtA * alpha)) / a0;
+  *(pCoeffs + 3) = (SIGLIB_MINUS_TWO * ((A - SIGLIB_ONE) + (A + SIGLIB_ONE) * cosw0)) / a0;
+  *(pCoeffs + 4) = ((A + SIGLIB_ONE) + (A - SIGLIB_ONE) * cosw0 - SIGLIB_TWO * sqrtA * alpha) / a0;
+}                                                                   // End of SIF_IirLowShelfFilter()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_IirHighShelfFilter
 *
@@ -1538,30 +1548,32 @@ void SIGLIB_FUNC_DECL SIF_IirLowShelfFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_IirHighShelfFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    const SLData_t CutoffFrequency,
-    const SLData_t FilterQ,
-    const SLData_t ShelfGain_dB)
+void SIGLIB_FUNC_DECL SIF_IirHighShelfFilter (
+  SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLData_t CutoffFrequency,
+  const SLData_t FilterQ,
+  const SLData_t ShelfGain_dB)
 {
-                        // Pre-compute the common factors
-    SLData_t A  = SDS_Pow (SIGLIB_TEN, (ShelfGain_dB / 40.0));
-    SLData_t w0 = SIGLIB_TWO * SIGLIB_PI * CutoffFrequency;
-    SLData_t alpha = SDS_Sin (w0) / SIGLIB_TWO * SDS_Sqrt ((A + SIGLIB_ONE / A)*(SIGLIB_ONE / FilterQ - SIGLIB_ONE) + SIGLIB_TWO);
-    SLData_t cosw0 = SDS_Cos (w0);
-    SLData_t sqrtA = SDS_Sqrt (A);
+// Pre-compute the common factors
+  SLData_t        A = SDS_Pow (SIGLIB_TEN, (ShelfGain_dB / 40.0));
+  SLData_t        w0 = SIGLIB_TWO * SIGLIB_PI * CutoffFrequency;
+  SLData_t        alpha = SDS_Sin (w0) / SIGLIB_TWO * SDS_Sqrt ((A + SIGLIB_ONE / A) * (SIGLIB_ONE / FilterQ - SIGLIB_ONE) + SIGLIB_TWO);
+  SLData_t        cosw0 = SDS_Cos (w0);
+  SLData_t        sqrtA = SDS_Sqrt (A);
 
-    SLData_t a0 =          (A+SIGLIB_ONE) - (A-SIGLIB_ONE)*cosw0 + SIGLIB_TWO*sqrtA*alpha;
+  SLData_t        a0 = (A + SIGLIB_ONE) - (A - SIGLIB_ONE) * cosw0 + SIGLIB_TWO * sqrtA * alpha;
 
-                        // Compute the coefficients
-    *pCoeffs     = (A * ((A+SIGLIB_ONE) + (A - SIGLIB_ONE)*cosw0 + SIGLIB_TWO*sqrtA*alpha)) / a0;
-    *(pCoeffs+1) = (SIGLIB_MINUS_TWO*A * ( (A - SIGLIB_ONE) + (A + SIGLIB_ONE)*cosw0)) / a0;
-    *(pCoeffs+2) = (A * ((A + SIGLIB_ONE) + (A - SIGLIB_ONE)*cosw0 - SIGLIB_TWO*sqrtA*alpha)) / a0;
-    *(pCoeffs+3) = (SIGLIB_TWO * ((A - SIGLIB_ONE) - (A + SIGLIB_ONE)*cosw0)) / a0;
-    *(pCoeffs+4) = ((A + SIGLIB_ONE) - (A - SIGLIB_ONE)*cosw0 - SIGLIB_TWO*sqrtA*alpha) / a0;
-}       // End of SIF_IirHighShelfFilter()
+// Compute the coefficients
+  *pCoeffs = (A * ((A + SIGLIB_ONE) + (A - SIGLIB_ONE) * cosw0 + SIGLIB_TWO * sqrtA * alpha)) / a0;
+  *(pCoeffs + 1) = (SIGLIB_MINUS_TWO * A * ((A - SIGLIB_ONE) + (A + SIGLIB_ONE) * cosw0)) / a0;
+  *(pCoeffs + 2) = (A * ((A + SIGLIB_ONE) + (A - SIGLIB_ONE) * cosw0 - SIGLIB_TWO * sqrtA * alpha)) / a0;
+  *(pCoeffs + 3) = (SIGLIB_TWO * ((A - SIGLIB_ONE) - (A + SIGLIB_ONE) * cosw0)) / a0;
+  *(pCoeffs + 4) = ((A + SIGLIB_ONE) - (A - SIGLIB_ONE) * cosw0 - SIGLIB_TWO * sqrtA * alpha) / a0;
+}                                                                   // End of SIF_IirHighShelfFilter()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_IirRemoveDC
 *
@@ -1580,23 +1592,24 @@ void SIGLIB_FUNC_DECL SIF_IirHighShelfFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_IirRemoveDC (SLData_t Src,
-    SLData_t * SIGLIB_PTR_DECL p_PreviousInput,
-    SLData_t * SIGLIB_PTR_DECL p_PreviousOutput,
-    const SLData_t convergenceRate)
-
+SLData_t SIGLIB_FUNC_DECL SDS_IirRemoveDC (
+  SLData_t Src,
+  SLData_t * SIGLIB_PTR_DECL p_PreviousInput,
+  SLData_t * SIGLIB_PTR_DECL p_PreviousOutput,
+  const SLData_t convergenceRate)
 {
-    SLData_t Dst;
+  SLData_t        Dst;
 
-    Dst = (convergenceRate * *p_PreviousOutput) + (Src - *p_PreviousInput);
-    *p_PreviousInput = Src;
-    *p_PreviousOutput = Dst;
+  Dst = (convergenceRate * *p_PreviousOutput) + (Src - *p_PreviousInput);
+  *p_PreviousInput = Src;
+  *p_PreviousOutput = Dst;
 
-    return (Dst);
+  return (Dst);
 }
 
 
 /**/
+
 /********************************************************
 * Function: SDA_IirRemoveDC
 *
@@ -1616,35 +1629,36 @@ SLData_t SIGLIB_FUNC_DECL SDS_IirRemoveDC (SLData_t Src,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_IirRemoveDC (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    SLData_t * SIGLIB_PTR_DECL p_PreviousInput,
-    SLData_t * SIGLIB_PTR_DECL p_PreviousOutput,
-    const SLData_t convergenceRate,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_IirRemoveDC (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  SLData_t * SIGLIB_PTR_DECL p_PreviousInput,
+  SLData_t * SIGLIB_PTR_DECL p_PreviousOutput,
+  const SLData_t convergenceRate,
+  const SLArrayIndex_t SampleLength)
 {
-    SLData_t       Src, Dst;
-    SLArrayIndex_t i;
+  SLData_t        Src, Dst;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < SampleLength; i++) {
-        Src = *pSrc++;
-        Dst = (convergenceRate * *p_PreviousOutput) + (Src - *p_PreviousInput);
-        *pDst++ = Dst;
-        *p_PreviousInput = Src;
-        *p_PreviousOutput = Dst;
-    }
+  for (i = 0; i < SampleLength; i++) {
+    Src = *pSrc++;
+    Dst = (convergenceRate * *p_PreviousOutput) + (Src - *p_PreviousInput);
+    *pDst++ = Dst;
+    *p_PreviousInput = Src;
+    *p_PreviousOutput = Dst;
+  }
 }
 
 
 /**/
+
 /********************************************************
 * Function: SIF_OnePole
 *
@@ -1658,14 +1672,15 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_OnePole (SLData_t *State)
-
+void SIGLIB_FUNC_DECL SIF_OnePole (
+  SLData_t * State)
 {
-    *State = SIGLIB_ZERO;
-}           // End of SIF_OnePole()
+  *State = SIGLIB_ZERO;
+}                                                                   // End of SIF_OnePole()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_OnePole
 *
@@ -1681,17 +1696,18 @@ void SIGLIB_FUNC_DECL SIF_OnePole (SLData_t *State)
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_OnePole (const SLData_t Src,
-    const SLData_t onePoleCoeff,
-    SLData_t *State)
-
+SLData_t SIGLIB_FUNC_DECL SDS_OnePole (
+  const SLData_t Src,
+  const SLData_t onePoleCoeff,
+  SLData_t * State)
 {
-    (*State) = Src + ((*State) * onePoleCoeff);
-    return (*State);
-}           // End of SDS_OnePole()
+  (*State) = Src + ((*State) * onePoleCoeff);
+  return (*State);
+}                                                                   // End of SDS_OnePole()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_OnePole
 *
@@ -1710,35 +1726,36 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePole (const SLData_t Src,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_OnePole (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLData_t onePoleCoeff,
-    SLData_t *State,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_OnePole (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLData_t onePoleCoeff,
+  SLData_t * State,
+  const SLArrayIndex_t SampleLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        *State = pSrc[i] + ((*State) * onePoleCoeff);
-        pDst[i] = *State;
+  for (i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    *State = pSrc[i] + ((*State) * onePoleCoeff);
+    pDst[i] = *State;
 #else
-        *State = (*pSrc++) + ((*State) * onePoleCoeff);
-        *pDst++ = *State;
+    *State = (*pSrc++) + ((*State) * onePoleCoeff);
+    *pDst++ = *State;
 #endif
-    }
-}           // End of SDA_OnePole()
+  }
+}                                                                   // End of SDA_OnePole()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_OnePoleNormalized
 *
@@ -1754,17 +1771,18 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_OnePoleNormalized (const SLData_t Src,
-    const SLData_t onePoleCoeff,
-    SLData_t *State)
-
+SLData_t SIGLIB_FUNC_DECL SDS_OnePoleNormalized (
+  const SLData_t Src,
+  const SLData_t onePoleCoeff,
+  SLData_t * State)
 {
-    (*State) = ((SIGLIB_ONE - onePoleCoeff) * Src) + ((*State) * onePoleCoeff);
-    return (*State);
-}           // End of SDS_OnePoleNormalized()
+  (*State) = ((SIGLIB_ONE - onePoleCoeff) * Src) + ((*State) * onePoleCoeff);
+  return (*State);
+}                                                                   // End of SDS_OnePoleNormalized()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_OnePoleNormalized
 *
@@ -1782,35 +1800,36 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePoleNormalized (const SLData_t Src,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_OnePoleNormalized (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLData_t onePoleCoeff,
-    SLData_t *State,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_OnePoleNormalized (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLData_t onePoleCoeff,
+  SLData_t * State,
+  const SLArrayIndex_t SampleLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        *State = ((SIGLIB_ONE - onePoleCoeff) * pSrc[i]) - ((*State) * onePoleCoeff);
-        pDst[i] = *State;
+  for (i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    *State = ((SIGLIB_ONE - onePoleCoeff) * pSrc[i]) - ((*State) * onePoleCoeff);
+    pDst[i] = *State;
 #else
-        *State = ((SIGLIB_ONE - onePoleCoeff) * (*pSrc++)) + ((*State) * onePoleCoeff);
-        *pDst++ = *State;
+    *State = ((SIGLIB_ONE - onePoleCoeff) * (*pSrc++)) + ((*State) * onePoleCoeff);
+    *pDst++ = *State;
 #endif
-    }
-}           // End of SDA_OnePoleNormalized()
+  }
+}                                                                   // End of SDA_OnePoleNormalized()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_OnePolePerSample
 *
@@ -1830,23 +1849,24 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_OnePolePerSample (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    SLData_t * SIGLIB_PTR_DECL pDelay,
-    const SLData_t onePoleCoeff,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_OnePolePerSample (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  SLData_t * SIGLIB_PTR_DECL pDelay,
+  const SLData_t onePoleCoeff,
+  const SLArrayIndex_t SampleLength)
 {
-    SDA_Multiply (pDelay, onePoleCoeff, pDelay, SampleLength);  // Decay feedback data
+  SDA_Multiply (pDelay, onePoleCoeff, pDelay, SampleLength);        // Decay feedback data
 
-    SDA_Add2 (pSrc, pDelay, pDelay, SampleLength);              // Add feedback and new source
+  SDA_Add2 (pSrc, pDelay, pDelay, SampleLength);                    // Add feedback and new source
 
-    SDA_Multiply (pDelay, (SIGLIB_ONE - onePoleCoeff), pDst, SampleLength);    // Scale output
+  SDA_Multiply (pDelay, (SIGLIB_ONE - onePoleCoeff), pDst, SampleLength); // Scale output
 
-}       // End of SDA_OnePolePerSample()
+}                                                                   // End of SDA_OnePolePerSample()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_OnePoleHighPass
 *
@@ -1860,14 +1880,15 @@ void SIGLIB_FUNC_DECL SDA_OnePolePerSample (const SLData_t * SIGLIB_PTR_DECL pSr
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_OnePoleHighPass (SLData_t *State)
-
+void SIGLIB_FUNC_DECL SIF_OnePoleHighPass (
+  SLData_t * State)
 {
-    *State = SIGLIB_ZERO;
-}           // End of SIF_OnePoleHighPass()
+  *State = SIGLIB_ZERO;
+}                                                                   // End of SIF_OnePoleHighPass()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_OnePoleHighPass
 *
@@ -1883,17 +1904,18 @@ void SIGLIB_FUNC_DECL SIF_OnePoleHighPass (SLData_t *State)
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_OnePoleHighPass (const SLData_t Src,
-    const SLData_t onePoleCoeff,
-    SLData_t *State)
-
+SLData_t SIGLIB_FUNC_DECL SDS_OnePoleHighPass (
+  const SLData_t Src,
+  const SLData_t onePoleCoeff,
+  SLData_t * State)
 {
-    (*State) = Src + ((*State) * onePoleCoeff);
-    return (*State);
-}           // End of SDS_OnePoleHighPass()
+  (*State) = Src + ((*State) * onePoleCoeff);
+  return (*State);
+}                                                                   // End of SDS_OnePoleHighPass()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_OnePoleHighPass
 *
@@ -1912,35 +1934,36 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePoleHighPass (const SLData_t Src,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_OnePoleHighPass (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLData_t onePoleCoeff,
-    SLData_t *State,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_OnePoleHighPass (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLData_t onePoleCoeff,
+  SLData_t * State,
+  const SLArrayIndex_t SampleLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        *State = pSrc[i] + ((*State) * onePoleCoeff);
-        pDst[i] = *State;
+  for (i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    *State = pSrc[i] + ((*State) * onePoleCoeff);
+    pDst[i] = *State;
 #else
-        *State = (*pSrc++) + ((*State) * onePoleCoeff);
-        *pDst++ = *State;
+    *State = (*pSrc++) + ((*State) * onePoleCoeff);
+    *pDst++ = *State;
 #endif
-    }
-}           // End of SDA_OnePoleHighPass()
+  }
+}                                                                   // End of SDA_OnePoleHighPass()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_OnePoleHighPassNormalized
 *
@@ -1956,17 +1979,18 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_OnePoleHighPassNormalized (const SLData_t Src,
-    const SLData_t onePoleCoeff,
-    SLData_t *State)
-
+SLData_t SIGLIB_FUNC_DECL SDS_OnePoleHighPassNormalized (
+  const SLData_t Src,
+  const SLData_t onePoleCoeff,
+  SLData_t * State)
 {
-    (*State) = ((SIGLIB_ONE + onePoleCoeff) * Src) + ((*State) * onePoleCoeff);
-    return (*State);
-}           // End of SDS_OnePoleHighPassNormalized()
+  (*State) = ((SIGLIB_ONE + onePoleCoeff) * Src) + ((*State) * onePoleCoeff);
+  return (*State);
+}                                                                   // End of SDS_OnePoleHighPassNormalized()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_OnePoleHighPassNormalized
 *
@@ -1984,35 +2008,36 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePoleHighPassNormalized (const SLData_t Src,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_OnePoleHighPassNormalized (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLData_t onePoleCoeff,
-    SLData_t *State,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_OnePoleHighPassNormalized (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLData_t onePoleCoeff,
+  SLData_t * State,
+  const SLArrayIndex_t SampleLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        *State = ((SIGLIB_ONE + onePoleCoeff) * pSrc[i]) + ((*State) * onePoleCoeff);
-        pDst[i] = *State;
+  for (i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    *State = ((SIGLIB_ONE + onePoleCoeff) * pSrc[i]) + ((*State) * onePoleCoeff);
+    pDst[i] = *State;
 #else
-        *State = ((SIGLIB_ONE + onePoleCoeff) * (*pSrc++)) + ((*State) * onePoleCoeff);
-        *pDst++ = *State;
+    *State = ((SIGLIB_ONE + onePoleCoeff) * (*pSrc++)) + ((*State) * onePoleCoeff);
+    *pDst++ = *State;
 #endif
-    }
-}           // End of SDA_OnePoleHighPassNormalized()
+  }
+}                                                                   // End of SDA_OnePoleHighPassNormalized()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_OnePoleHighPassPerSample
 *
@@ -2032,23 +2057,24 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_OnePoleHighPassPerSample (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    SLData_t * SIGLIB_PTR_DECL pDelay,
-    const SLData_t onePoleCoeff,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_OnePoleHighPassPerSample (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  SLData_t * SIGLIB_PTR_DECL pDelay,
+  const SLData_t onePoleCoeff,
+  const SLArrayIndex_t SampleLength)
 {
-    SDA_Multiply (pDelay, onePoleCoeff, pDelay, SampleLength);  // Decay feedback data
+  SDA_Multiply (pDelay, onePoleCoeff, pDelay, SampleLength);        // Decay feedback data
 
-    SDA_Add2 (pSrc, pDelay, pDelay, SampleLength);              // Add feedback and new source
+  SDA_Add2 (pSrc, pDelay, pDelay, SampleLength);                    // Add feedback and new source
 
-    SDA_Multiply (pDelay, (SIGLIB_ONE + onePoleCoeff), pDst, SampleLength);    // Scale output
+  SDA_Multiply (pDelay, (SIGLIB_ONE + onePoleCoeff), pDst, SampleLength); // Scale output
 
-}       // End of SDA_OnePoleHighPassPerSample()
+}                                                                   // End of SDA_OnePoleHighPassPerSample()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_OnePoleTimeConstantToFilterCoeff
 *
@@ -2068,14 +2094,16 @@ void SIGLIB_FUNC_DECL SDA_OnePoleHighPassPerSample (const SLData_t * SIGLIB_PTR_
 *
 ********************************************************/
 
-SLData_t SDS_OnePoleTimeConstantToFilterCoeff (const SLData_t periodMs,
-    const SLData_t sampleRate)
+SLData_t SDS_OnePoleTimeConstantToFilterCoeff (
+  const SLData_t periodMs,
+  const SLData_t sampleRate)
 {
-    return (SDS_Exp (-SIGLIB_EXP_MINUS_ONE / (periodMs  * 0.001 * sampleRate)));
-}       // SDS_OnePoleTimeConstantToFilterCoeff
+  return (SDS_Exp (-SIGLIB_EXP_MINUS_ONE / (periodMs * 0.001 * sampleRate)));
+}                                                                   // SDS_OnePoleTimeConstantToFilterCoeff
 
 
 /**/
+
 /********************************************************
 * Function: SDS_OnePoleCutOffFrequencyToFilterCoeff
 *
@@ -2095,14 +2123,16 @@ SLData_t SDS_OnePoleTimeConstantToFilterCoeff (const SLData_t periodMs,
 *
 ********************************************************/
 
-SLData_t SDS_OnePoleCutOffFrequencyToFilterCoeff (const SLData_t cutOffFreq,
-    const SLData_t sampleRate)
+SLData_t SDS_OnePoleCutOffFrequencyToFilterCoeff (
+  const SLData_t cutOffFreq,
+  const SLData_t sampleRate)
 {
-    return (SDS_Exp (-SIGLIB_TWO_PI * (cutOffFreq  / sampleRate)));
-}       // SDS_OnePoleCutOffFrequencyToFilterCoeff
+  return (SDS_Exp (-SIGLIB_TWO_PI * (cutOffFreq / sampleRate)));
+}                                                                   // SDS_OnePoleCutOffFrequencyToFilterCoeff
 
 
 /**/
+
 /********************************************************
 * Function: SDS_OnePoleHighPassCutOffFrequencyToFilterCoeff
 *
@@ -2122,14 +2152,16 @@ SLData_t SDS_OnePoleCutOffFrequencyToFilterCoeff (const SLData_t cutOffFreq,
 *
 ********************************************************/
 
-SLData_t SDS_OnePoleHighPassCutOffFrequencyToFilterCoeff (const SLData_t cutOffFreq,
-    const SLData_t sampleRate)
+SLData_t SDS_OnePoleHighPassCutOffFrequencyToFilterCoeff (
+  const SLData_t cutOffFreq,
+  const SLData_t sampleRate)
 {
-    return (-SDS_Exp (-SIGLIB_TWO_PI * (SIGLIB_HALF - (cutOffFreq  / sampleRate))));
-}       // SDS_OnePoleHighPassCutOffFrequencyToFilterCoeff
+  return (-SDS_Exp (-SIGLIB_TWO_PI * (SIGLIB_HALF - (cutOffFreq / sampleRate))));
+}                                                                   // SDS_OnePoleHighPassCutOffFrequencyToFilterCoeff
 
 
 /**/
+
 /********************************************************
 * Function: SIF_AllPole
 *
@@ -2146,24 +2178,25 @@ SLData_t SDS_OnePoleHighPassCutOffFrequencyToFilterCoeff (const SLData_t cutOffF
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_AllPole (SLData_t * SIGLIB_PTR_DECL pState,
-    SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
-    const SLArrayIndex_t NumberOfPoles)
-
+void SIGLIB_FUNC_DECL SIF_AllPole (
+  SLData_t * SIGLIB_PTR_DECL pState,
+  SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
+  const SLArrayIndex_t NumberOfPoles)
 {
-    SLArrayIndex_t  i;
+  SLArrayIndex_t  i;
 
-        // Initialise the filter state array to 0
-    for (i = 0; i < NumberOfPoles; i++) {
-        *pState++ = SIGLIB_ZERO;
-    }
+// Initialise the filter state array to 0
+  for (i = 0; i < NumberOfPoles; i++) {
+    *pState++ = SIGLIB_ZERO;
+  }
 
-    *pFilterIndex = 0;              // Set state array offset
+  *pFilterIndex = 0;                                                // Set state array offset
 
-}       // End of SIF_AllPole()
+}                                                                   // End of SIF_AllPole()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_AllPole
 *
@@ -2182,45 +2215,46 @@ void SIGLIB_FUNC_DECL SIF_AllPole (SLData_t * SIGLIB_PTR_DECL pState,
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_AllPole (const SLData_t Source,
-    SLData_t * SIGLIB_PTR_DECL pState,
-    const SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
-    const SLArrayIndex_t FilterOrder)
-
+SLData_t SIGLIB_FUNC_DECL SDS_AllPole (
+  const SLData_t Source,
+  SLData_t * SIGLIB_PTR_DECL pState,
+  const SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
+  const SLArrayIndex_t FilterOrder)
 {
-    SLData_t       FeedBackwardSumOfProducts, Result;
-    SLArrayIndex_t i;
-    SLArrayIndex_t LocalFilterIndex = *pFilterIndex;
+  SLData_t        FeedBackwardSumOfProducts, Result;
+  SLArrayIndex_t  i;
+  SLArrayIndex_t  LocalFilterIndex = *pFilterIndex;
 
-    FeedBackwardSumOfProducts = SIGLIB_ZERO;                // Don't calculate 0th feedback term
+  FeedBackwardSumOfProducts = SIGLIB_ZERO;                          // Don't calculate 0th feedback term
 
-    for (i = 0; i < FilterOrder; i++) {
-        FeedBackwardSumOfProducts += *(pCoeffs + i) * *(pState + LocalFilterIndex);     // Feedback
+  for (i = 0; i < FilterOrder; i++) {
+    FeedBackwardSumOfProducts += *(pCoeffs + i) * *(pState + LocalFilterIndex); // Feedback
 
-        LocalFilterIndex++;                             // Increment state array offset
-        if (LocalFilterIndex >= FilterOrder) {
-            LocalFilterIndex = 0;
-        }
+    LocalFilterIndex++;                                             // Increment state array offset
+    if (LocalFilterIndex >= FilterOrder) {
+      LocalFilterIndex = 0;
     }
+  }
 
-    LocalFilterIndex--;                                 // Decrement state array offset
-    if (LocalFilterIndex < 0) {
-        LocalFilterIndex += FilterOrder;
-    }
+  LocalFilterIndex--;                                               // Decrement state array offset
+  if (LocalFilterIndex < 0) {
+    LocalFilterIndex += FilterOrder;
+  }
 
-    *(pState + LocalFilterIndex) = FeedBackwardSumOfProducts + Source;      // Sum input to feedback
+  *(pState + LocalFilterIndex) = FeedBackwardSumOfProducts + Source;  // Sum input to feedback
 
-    Result = *(pState + LocalFilterIndex);              // Calculate output
+  Result = *(pState + LocalFilterIndex);                            // Calculate output
 
-    *pFilterIndex = LocalFilterIndex;                   // Save filter index for next iteration
+  *pFilterIndex = LocalFilterIndex;                                 // Save filter index for next iteration
 
-    return (Result);
+  return (Result);
 
-}       // End of SDS_AllPole()
+}                                                                   // End of SDS_AllPole()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_AllPole
 *
@@ -2241,56 +2275,57 @@ SLData_t SIGLIB_FUNC_DECL SDS_AllPole (const SLData_t Source,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_AllPole (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    SLData_t * SIGLIB_PTR_DECL pState,
-    const SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
-    const SLArrayIndex_t FilterOrder,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_AllPole (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  SLData_t * SIGLIB_PTR_DECL pState,
+  const SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
+  const SLArrayIndex_t FilterOrder,
+  const SLArrayIndex_t SampleLength)
 {
-    SLData_t       FeedBackwardSumOfProducts;
-    SLArrayIndex_t i, j;
-    SLArrayIndex_t LocalFilterIndex = *pFilterIndex;
+  SLData_t        FeedBackwardSumOfProducts;
+  SLArrayIndex_t  i, j;
+  SLArrayIndex_t  LocalFilterIndex = *pFilterIndex;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
-_nassert((int) pState % 8 == 0);
-_nassert((int) pCoeffs % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
+  _nassert ((int) pState % 8 == 0);
+  _nassert ((int) pCoeffs % 8 == 0);
 #endif
 #endif
 
-    for (j = 0; j < SampleLength; j++) {
-        FeedBackwardSumOfProducts = SIGLIB_ZERO;            // Don't calculate 0th feedback term
+  for (j = 0; j < SampleLength; j++) {
+    FeedBackwardSumOfProducts = SIGLIB_ZERO;                        // Don't calculate 0th feedback term
 
-        for (i = 0; i < FilterOrder; i++) {
-            FeedBackwardSumOfProducts += *(pCoeffs + i) * *(pState + LocalFilterIndex);     // Feedback
+    for (i = 0; i < FilterOrder; i++) {
+      FeedBackwardSumOfProducts += *(pCoeffs + i) * *(pState + LocalFilterIndex); // Feedback
 
-            LocalFilterIndex++;                             // Increment state array offset
-            if (LocalFilterIndex >= FilterOrder) {
-                LocalFilterIndex = 0;
-            }
-        }
-
-        LocalFilterIndex--;                                 // Decrement state array offset
-        if (LocalFilterIndex < 0) {
-            LocalFilterIndex += FilterOrder;
-        }
-
-        *(pState + LocalFilterIndex) = FeedBackwardSumOfProducts + *pSrc++;     // Sum input to feedback
-
-        *pDst++ = *(pState + LocalFilterIndex);             // Calculate output
+      LocalFilterIndex++;                                           // Increment state array offset
+      if (LocalFilterIndex >= FilterOrder) {
+        LocalFilterIndex = 0;
+      }
     }
 
-    *pFilterIndex = LocalFilterIndex;                       // Save filter index for next iteration
+    LocalFilterIndex--;                                             // Decrement state array offset
+    if (LocalFilterIndex < 0) {
+      LocalFilterIndex += FilterOrder;
+    }
 
-}       // End of SDA_AllPole()
+    *(pState + LocalFilterIndex) = FeedBackwardSumOfProducts + *pSrc++; // Sum input to feedback
+
+    *pDst++ = *(pState + LocalFilterIndex);                         // Calculate output
+  }
+
+  *pFilterIndex = LocalFilterIndex;                                 // Save filter index for next iteration
+
+}                                                                   // End of SDA_AllPole()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ZDomainCoefficientReorg
 *
@@ -2312,26 +2347,26 @@ _nassert((int) pCoeffs % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ZDomainCoefficientReorg (const SLData_t * SIGLIB_PTR_DECL pSrcZDomainCoeffArray,
-    SLComplexRect_s * SIGLIB_PTR_DECL pZPlanePoles,
-    SLComplexRect_s * SIGLIB_PTR_DECL pZPlaneZeros,
-    const SLArrayIndex_t FilterOrder)
-
+void SIGLIB_FUNC_DECL SDA_ZDomainCoefficientReorg (
+  const SLData_t * SIGLIB_PTR_DECL pSrcZDomainCoeffArray,
+  SLComplexRect_s * SIGLIB_PTR_DECL pZPlanePoles,
+  SLComplexRect_s * SIGLIB_PTR_DECL pZPlaneZeros,
+  const SLArrayIndex_t FilterOrder)
 {
-    SLArrayIndex_t  i, j;
+  SLArrayIndex_t  i, j;
 
-    for (i = 0, j = 0; i < FilterOrder; i++) {
-        pZPlanePoles[i] = SCV_PolarToRectangular (
-            SCV_Polar (pSrcZDomainCoeffArray [j], pSrcZDomainCoeffArray [j+1] * SIGLIB_TWO_PI_OVER_THREE_SIXTY));
-        pZPlaneZeros[i] = SCV_PolarToRectangular (
-            SCV_Polar (pSrcZDomainCoeffArray [j+2], pSrcZDomainCoeffArray [j+3] * SIGLIB_TWO_PI_OVER_THREE_SIXTY));
+  for (i = 0, j = 0; i < FilterOrder; i++) {
+    pZPlanePoles[i] = SCV_PolarToRectangular (SCV_Polar (pSrcZDomainCoeffArray[j], pSrcZDomainCoeffArray[j + 1] * SIGLIB_TWO_PI_OVER_THREE_SIXTY));
+    pZPlaneZeros[i] =
+      SCV_PolarToRectangular (SCV_Polar (pSrcZDomainCoeffArray[j + 2], pSrcZDomainCoeffArray[j + 3] * SIGLIB_TWO_PI_OVER_THREE_SIXTY));
 
-        j += 4;
-    }
-}       // End of SDA_ZDomainCoefficientReorg()
+    j += 4;
+  }
+}                                                                   // End of SDA_ZDomainCoefficientReorg()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_IirNotchFilter2
 *
@@ -2349,39 +2384,40 @@ void SIGLIB_FUNC_DECL SDA_ZDomainCoefficientReorg (const SLData_t * SIGLIB_PTR_D
 *
 ********************************************************/
 
-SLError_t SIGLIB_FUNC_DECL SIF_IirNotchFilter2 (SLData_t * SIGLIB_PTR_DECL pIIRCoeffs,
-    const SLData_t NotchFrequency,
-    const SLData_t PoleMagnitude,
-    const SLArrayIndex_t FilterOrder)
-
+SLError_t SIGLIB_FUNC_DECL SIF_IirNotchFilter2 (
+  SLData_t * SIGLIB_PTR_DECL pIIRCoeffs,
+  const SLData_t NotchFrequency,
+  const SLData_t PoleMagnitude,
+  const SLArrayIndex_t FilterOrder)
 {
-    SLArrayIndex_t  i;
-    SLArrayIndex_t  NumberOfIIRBiquads = (SLArrayIndex_t)((SLUFixData_t)FilterOrder >> 1U);
+  SLArrayIndex_t  i;
+  SLArrayIndex_t  NumberOfIIRBiquads = (SLArrayIndex_t) ((SLUFixData_t) FilterOrder >> 1U);
 
-                                            // Declare these as static so that they are located on the heap
-                                            // this will avoid the potential for stack overflow
-    static SLComplexPolar_s ZPlaneZeros [SIGLIB_IIR_MAX_NOTCH_BIQUADS];
-    static SLComplexPolar_s ZPlanePoles [SIGLIB_IIR_MAX_NOTCH_BIQUADS];
+// Declare these as static so that they are located on the heap
+// this will avoid the potential for stack overflow
+  static SLComplexPolar_s ZPlaneZeros[SIGLIB_IIR_MAX_NOTCH_BIQUADS];
+  static SLComplexPolar_s ZPlanePoles[SIGLIB_IIR_MAX_NOTCH_BIQUADS];
 
-    if (NumberOfIIRBiquads > SIGLIB_IIR_MAX_NOTCH_BIQUADS) {
-        return (SIGLIB_PARAMETER_ERROR);
-    }
+  if (NumberOfIIRBiquads > SIGLIB_IIR_MAX_NOTCH_BIQUADS) {
+    return (SIGLIB_PARAMETER_ERROR);
+  }
 
-    for (i = 0; i < NumberOfIIRBiquads; i++) {
-        ZPlaneZeros[i].angle = NotchFrequency * SIGLIB_TWO_PI;
-        ZPlaneZeros[i].magn = SIGLIB_ONE;
-        ZPlanePoles[i].angle = NotchFrequency * SIGLIB_TWO_PI;
-        ZPlanePoles[i].magn = PoleMagnitude;
-    }
+  for (i = 0; i < NumberOfIIRBiquads; i++) {
+    ZPlaneZeros[i].angle = NotchFrequency * SIGLIB_TWO_PI;
+    ZPlaneZeros[i].magn = SIGLIB_ONE;
+    ZPlanePoles[i].angle = NotchFrequency * SIGLIB_TWO_PI;
+    ZPlanePoles[i].magn = PoleMagnitude;
+  }
 
-    SDA_IirZplanePolarToCoeffs (ZPlaneZeros, ZPlanePoles, pIIRCoeffs, NumberOfIIRBiquads, NumberOfIIRBiquads);
+  SDA_IirZplanePolarToCoeffs (ZPlaneZeros, ZPlanePoles, pIIRCoeffs, NumberOfIIRBiquads, NumberOfIIRBiquads);
 
-    return (SIGLIB_NO_ERROR);
-}       // End of SIF_IirNotchFilter2
+  return (SIGLIB_NO_ERROR);
+}                                                                   // End of SIF_IirNotchFilter2
 
 
 /**/
-#include <siglib_iir_constants.h>               // Include SigLib IIR filter normalized coefficient header file
+#include <siglib_iir_constants.h>                                   // Include SigLib IIR filter normalized coefficient header file
+
 /********************************************************
 * Function: SIF_IirNormalizedCoefficients
 *
@@ -2399,47 +2435,48 @@ SLError_t SIGLIB_FUNC_DECL SIF_IirNotchFilter2 (SLData_t * SIGLIB_PTR_DECL pIIRC
 *
 ********************************************************/
 
-SLError_t SIGLIB_FUNC_DECL SIF_IirNormalizedCoefficients (SLData_t * SIGLIB_PTR_DECL pIIRCoeffs,
-    enum SLIIRNormalizedCoeffs_t FilterType,
-    const SLArrayIndex_t FilterOrder)
-
+SLError_t SIGLIB_FUNC_DECL SIF_IirNormalizedCoefficients (
+  SLData_t * SIGLIB_PTR_DECL pIIRCoeffs,
+  enum SLIIRNormalizedCoeffs_t FilterType,
+  const SLArrayIndex_t FilterOrder)
 {
-    SLArrayIndex_t  i;
-    SLData_t        *pFilterCoeffs;
+  SLArrayIndex_t  i;
+  SLData_t       *pFilterCoeffs;
 
-    if ((FilterOrder < SIGLIB_AI_ZERO) ||               // Verify that the filter order is valid
-        (FilterOrder > SIGLIB_MAX_NORMALIZED_IIR_FILTER_ORDER)) {
-        return (SIGLIB_PARAMETER_ERROR);
+  if ((FilterOrder < SIGLIB_AI_ZERO) ||                             // Verify that the filter order is valid
+      (FilterOrder > SIGLIB_MAX_NORMALIZED_IIR_FILTER_ORDER)) {
+    return (SIGLIB_PARAMETER_ERROR);
+  }
+
+  if (FilterType == SIGLIB_BUTTERWORTH_IIR_NORM_COEFFS) {
+    pFilterCoeffs = siglib_numerix_pIIRButterworthFilters[FilterOrder]; // Get the start of the coeff array
+
+// Copy the coefficients
+    for (i = 0; i < ((SLArrayIndex_t) (((SLUFixData_t) FilterOrder + 1U) >> 1U) * SIGLIB_IIR_COEFFS_PER_BIQUAD); i++) {
+      pIIRCoeffs[i] = *(pFilterCoeffs + i);
     }
+  }
 
-    if (FilterType == SIGLIB_BUTTERWORTH_IIR_NORM_COEFFS) {
-        pFilterCoeffs = siglib_numerix_pIIRButterworthFilters[FilterOrder]; // Get the start of the coeff array
+  else if (FilterType == SIGLIB_BESSEL_IIR_NORM_COEFFS) {
+    pFilterCoeffs = siglib_numerix_pIIRBesselFilters[FilterOrder];  // Get the start of the coeff array
 
-                                                            // Copy the coefficients
-        for (i = 0; i < ((SLArrayIndex_t)(((SLUFixData_t)FilterOrder + 1U) >> 1U) * SIGLIB_IIR_COEFFS_PER_BIQUAD); i++) {
-            pIIRCoeffs[i] = *(pFilterCoeffs+i);
-        }
+// Copy the coefficients
+    for (i = 0; i < ((SLArrayIndex_t) (((SLUFixData_t) FilterOrder + 1U) >> 1U) * SIGLIB_IIR_COEFFS_PER_BIQUAD); i++) {
+      pIIRCoeffs[i] = *(pFilterCoeffs + i);
     }
+  }
 
-    else if (FilterType == SIGLIB_BESSEL_IIR_NORM_COEFFS) {
-        pFilterCoeffs = siglib_numerix_pIIRBesselFilters[FilterOrder];  // Get the start of the coeff array
+  else {
+    return (SIGLIB_PARAMETER_ERROR);
+  }
 
-                                                            // Copy the coefficients
-        for (i = 0; i < ((SLArrayIndex_t)(((SLUFixData_t)FilterOrder + 1U) >> 1U) * SIGLIB_IIR_COEFFS_PER_BIQUAD); i++) {
-            pIIRCoeffs[i] = *(pFilterCoeffs+i);
-        }
-    }
-
-    else {
-        return (SIGLIB_PARAMETER_ERROR);
-    }
-
-    return (SIGLIB_NO_ERROR);
-}       // End of SIF_IirNormalizedCoefficients()
+  return (SIGLIB_NO_ERROR);
+}                                                                   // End of SIF_IirNormalizedCoefficients()
 
 
 /**/
-#include <siglib_iir_constants.h>               // Include SigLib IIR filter normalized coefficient header file
+#include <siglib_iir_constants.h>                                   // Include SigLib IIR filter normalized coefficient header file
+
 /********************************************************
 * Function: SIF_IirNormalizedSPlaneCoefficients
 *
@@ -2457,47 +2494,48 @@ SLError_t SIGLIB_FUNC_DECL SIF_IirNormalizedCoefficients (SLData_t * SIGLIB_PTR_
 *
 ********************************************************/
 
-SLError_t SIGLIB_FUNC_DECL SIF_IirNormalizedSPlaneCoefficients (SLComplexRect_s * SIGLIB_PTR_DECL pIIRPoles,
-    enum SLIIRNormalizedCoeffs_t FilterType,
-    const SLArrayIndex_t FilterOrder)
-
+SLError_t SIGLIB_FUNC_DECL SIF_IirNormalizedSPlaneCoefficients (
+  SLComplexRect_s * SIGLIB_PTR_DECL pIIRPoles,
+  enum SLIIRNormalizedCoeffs_t FilterType,
+  const SLArrayIndex_t FilterOrder)
 {
-    SLArrayIndex_t  i;
-    SLComplexRect_s *pFilterCoeffs;
+  SLArrayIndex_t  i;
+  SLComplexRect_s *pFilterCoeffs;
 
-    if ((FilterOrder < SIGLIB_AI_ZERO) ||               // Verify that the filter order is valid
-        (FilterOrder > SIGLIB_MAX_NORMALIZED_IIR_FILTER_ORDER)) {
+  if ((FilterOrder < SIGLIB_AI_ZERO) ||                             // Verify that the filter order is valid
+      (FilterOrder > SIGLIB_MAX_NORMALIZED_IIR_FILTER_ORDER)) {
 
-        return (SIGLIB_PARAMETER_ERROR);
+    return (SIGLIB_PARAMETER_ERROR);
+  }
+
+  if (FilterType == SIGLIB_BUTTERWORTH_IIR_NORM_COEFFS) {
+    pFilterCoeffs = siglib_numerix_pSPlaneButterworthFilters[FilterOrder];  // Get the start of the coeff array
+
+// Copy the coefficients
+    for (i = 0; i < (SLArrayIndex_t) (((SLUFixData_t) FilterOrder + 1U) >> 1U); i++) {
+      pIIRPoles[i] = *(pFilterCoeffs + i);
     }
+  }
 
-    if (FilterType == SIGLIB_BUTTERWORTH_IIR_NORM_COEFFS) {
-        pFilterCoeffs = siglib_numerix_pSPlaneButterworthFilters[FilterOrder];  // Get the start of the coeff array
+  else if (FilterType == SIGLIB_BESSEL_IIR_NORM_COEFFS) {
+    pFilterCoeffs = siglib_numerix_pSPlaneBesselFilters[FilterOrder]; // Get the start of the coeff array
 
-                                                            // Copy the coefficients
-        for (i = 0; i < (SLArrayIndex_t)(((SLUFixData_t)FilterOrder + 1U) >> 1U); i++) {
-            pIIRPoles[i] = *(pFilterCoeffs+i);
-        }
+// Copy the coefficients
+    for (i = 0; i < (SLArrayIndex_t) (((SLUFixData_t) FilterOrder + 1U) >> 1U); i++) {
+      pIIRPoles[i] = *(pFilterCoeffs + i);
     }
+  }
 
-    else if (FilterType == SIGLIB_BESSEL_IIR_NORM_COEFFS) {
-        pFilterCoeffs = siglib_numerix_pSPlaneBesselFilters[FilterOrder];   // Get the start of the coeff array
+  else {
+    return (SIGLIB_PARAMETER_ERROR);
+  }
 
-                                                            // Copy the coefficients
-        for (i = 0; i < (SLArrayIndex_t)(((SLUFixData_t)FilterOrder + 1U) >> 1U); i++) {
-            pIIRPoles[i] = *(pFilterCoeffs+i);
-        }
-    }
-
-    else {
-        return (SIGLIB_PARAMETER_ERROR);
-    }
-
-    return (SIGLIB_NO_ERROR);
-}       // End of SIF_IirNormalizedSPlaneCoefficients()
+  return (SIGLIB_NO_ERROR);
+}                                                                   // End of SIF_IirNormalizedSPlaneCoefficients()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_TranslateSPlaneCutOffFrequency
 *
@@ -2517,21 +2555,22 @@ SLError_t SIGLIB_FUNC_DECL SIF_IirNormalizedSPlaneCoefficients (SLComplexRect_s 
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_TranslateSPlaneCutOffFrequency (const SLComplexRect_s * SIGLIB_PTR_DECL pSrcSPlanePZs,
-    SLComplexRect_s * SIGLIB_PTR_DECL pDstSPlanePZs,
-    const SLData_t NewCutOffFrequency,
-    const SLArrayIndex_t FilterOrder)
-
+void SIGLIB_FUNC_DECL SDA_TranslateSPlaneCutOffFrequency (
+  const SLComplexRect_s * SIGLIB_PTR_DECL pSrcSPlanePZs,
+  SLComplexRect_s * SIGLIB_PTR_DECL pDstSPlanePZs,
+  const SLData_t NewCutOffFrequency,
+  const SLArrayIndex_t FilterOrder)
 {
-    SLArrayIndex_t  i;
+  SLArrayIndex_t  i;
 
-    for (i = 0; i < FilterOrder; i++) {
-        pDstSPlanePZs[i] = SCV_VectorMultiplyScalar (pSrcSPlanePZs[i], (NewCutOffFrequency / SIGLIB_TWO_PI));
-    }
-}       // End of SDA_TranslateSPlaneCutOffFrequency()
+  for (i = 0; i < FilterOrder; i++) {
+    pDstSPlanePZs[i] = SCV_VectorMultiplyScalar (pSrcSPlanePZs[i], (NewCutOffFrequency / SIGLIB_TWO_PI));
+  }
+}                                                                   // End of SDA_TranslateSPlaneCutOffFrequency()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_IirLpLpShift
 *
@@ -2556,93 +2595,92 @@ void SIGLIB_FUNC_DECL SDA_TranslateSPlaneCutOffFrequency (const SLComplexRect_s 
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDA_IirLpLpShift (const SLData_t * SIGLIB_PTR_DECL SrcCoeffs,
-    SLData_t * SIGLIB_PTR_DECL DstCoeffs,
-    const SLData_t Frequency1,
-    const SLData_t Frequency2,
-    const SLData_t SampleRate,
-    const SLArrayIndex_t NumberOfBiquads)
-
+SLData_t SIGLIB_FUNC_DECL SDA_IirLpLpShift (
+  const SLData_t * SIGLIB_PTR_DECL SrcCoeffs,
+  SLData_t * SIGLIB_PTR_DECL DstCoeffs,
+  const SLData_t Frequency1,
+  const SLData_t Frequency2,
+  const SLData_t SampleRate,
+  const SLArrayIndex_t NumberOfBiquads)
 {
-    SLData_t        Alpha;
-    SLData_t        Scale = SIGLIB_ONE;
-    SLArrayIndex_t  i;
+  SLData_t        Alpha;
+  SLData_t        Scale = SIGLIB_ONE;
+  SLArrayIndex_t  i;
 
-    Alpha = - SDS_Sin (SIGLIB_PI * (Frequency1 - Frequency2) / SampleRate) /
-              SDS_Sin (SIGLIB_PI * (Frequency1 + Frequency2) / SampleRate);
+  Alpha = -SDS_Sin (SIGLIB_PI * (Frequency1 - Frequency2) / SampleRate) / SDS_Sin (SIGLIB_PI * (Frequency1 + Frequency2) / SampleRate);
 
 //  printf ("Alpha = %lf\n", Alpha);*/
 
-    for (i = 0; i < NumberOfBiquads; i++) {
-                                // Calculate poles
-        if ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] < SIGLIB_MIN_THRESHOLD) &&   // Check for close to zero
-            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] > -SIGLIB_MIN_THRESHOLD)) {
+  for (i = 0; i < NumberOfBiquads; i++) {
+// Calculate poles
+    if ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] < SIGLIB_MIN_THRESHOLD) && // Check for close to zero
+        (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] > -SIGLIB_MIN_THRESHOLD)) {
 
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] = - (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] + Alpha);
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] = SIGLIB_ZERO;
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] *= SIGLIB_ONE /
-                            (- (SIGLIB_ONE + (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha)));
-            Scale *= SIGLIB_ONE / (- (SIGLIB_ONE + (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha)));
-        }
-
-        else {
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] = - (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] +
-                            (SIGLIB_TWO * Alpha) +
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha * Alpha) +
-                            (SIGLIB_TWO * Alpha * SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4]));
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] = - ((Alpha * Alpha) +
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha) +
-                            SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4]);
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] *= SIGLIB_ONE / (- (SIGLIB_ONE +
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha) +
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] * Alpha * Alpha)));
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] *= SIGLIB_ONE / (- (SIGLIB_ONE +
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha) +
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] * Alpha * Alpha)));
-            Scale *= SIGLIB_ONE / (- (SIGLIB_ONE + (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha) +
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] * Alpha * Alpha)));
-        }
-
-                                // Calculate zeros
-        if ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] < SIGLIB_MIN_THRESHOLD) &&   // Check for close to zero
-            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] > -SIGLIB_MIN_THRESHOLD)) {
-
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] = - (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] +
-                            (Alpha * SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0]));
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] = SIGLIB_ZERO;
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] = SIGLIB_ONE;
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] *= SIGLIB_ONE / (- (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] +
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha)));
-            Scale *= (- (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] +
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha)));
-        }
-
-        else {
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] = - (SrcCoeffs[1] +
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] * SIGLIB_TWO * Alpha) +
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha * Alpha) +
-                            (SIGLIB_TWO * Alpha * SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2]));
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] = - ((Alpha * Alpha * SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0]) +
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha) +
-                            SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2]);
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] = SIGLIB_ONE;
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] *= SIGLIB_ONE / (- (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] +
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha) +
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] * Alpha * Alpha)));
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] *= SIGLIB_ONE / (- (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] +
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha) +
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] * Alpha * Alpha)));
-            Scale *= (- (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] +
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha) +
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] * Alpha * Alpha)));
-        }
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] = -(SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] + Alpha);
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] = SIGLIB_ZERO;
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] *= SIGLIB_ONE /
+        (-(SIGLIB_ONE + (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha)));
+      Scale *= SIGLIB_ONE / (-(SIGLIB_ONE + (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha)));
     }
 
-    return (Scale);
-}       // End of SDA_IirLpLpShift
+    else {
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] = -(SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] +
+                                                            (SIGLIB_TWO * Alpha) +
+                                                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha * Alpha) +
+                                                            (SIGLIB_TWO * Alpha * SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4]));
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] = -((Alpha * Alpha) +
+                                                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha) +
+                                                            SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4]);
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] *= SIGLIB_ONE / (-(SIGLIB_ONE +
+                                                                           (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha) +
+                                                                           (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] * Alpha * Alpha)));
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] *= SIGLIB_ONE / (-(SIGLIB_ONE +
+                                                                           (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha) +
+                                                                           (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] * Alpha * Alpha)));
+      Scale *= SIGLIB_ONE / (-(SIGLIB_ONE + (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha) +
+                               (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] * Alpha * Alpha)));
+    }
+
+// Calculate zeros
+    if ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] < SIGLIB_MIN_THRESHOLD) && // Check for close to zero
+        (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] > -SIGLIB_MIN_THRESHOLD)) {
+
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] = -(SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] +
+                                                            (Alpha * SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0]));
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] = SIGLIB_ZERO;
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] = SIGLIB_ONE;
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] *= SIGLIB_ONE / (-(SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] +
+                                                                           (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha)));
+      Scale *= (-(SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] + (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha)));
+    }
+
+    else {
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] = -(SrcCoeffs[1] +
+                                                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] * SIGLIB_TWO * Alpha) +
+                                                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha * Alpha) +
+                                                            (SIGLIB_TWO * Alpha * SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2]));
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] = -((Alpha * Alpha * SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0]) +
+                                                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha) +
+                                                            SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2]);
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] = SIGLIB_ONE;
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] *= SIGLIB_ONE / (-(SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] +
+                                                                           (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha) +
+                                                                           (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] * Alpha * Alpha)));
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] *= SIGLIB_ONE / (-(SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] +
+                                                                           (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha) +
+                                                                           (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] * Alpha * Alpha)));
+      Scale *= (-(SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] +
+                  (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha) +
+                  (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] * Alpha * Alpha)));
+    }
+  }
+
+  return (Scale);
+}                                                                   // End of SDA_IirLpLpShift
 
 
 /**/
+
 /********************************************************
 * Function: SDA_IirLpHpShift
 *
@@ -2667,96 +2705,88 @@ SLData_t SIGLIB_FUNC_DECL SDA_IirLpLpShift (const SLData_t * SIGLIB_PTR_DECL Src
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDA_IirLpHpShift (const SLData_t * SIGLIB_PTR_DECL SrcCoeffs,
-    SLData_t * SIGLIB_PTR_DECL DstCoeffs,
-    const SLData_t Frequency1,
-    const SLData_t Frequency2,
-    const SLData_t SampleRate,
-    const SLArrayIndex_t NumberOfBiquads)
-
+SLData_t SIGLIB_FUNC_DECL SDA_IirLpHpShift (
+  const SLData_t * SIGLIB_PTR_DECL SrcCoeffs,
+  SLData_t * SIGLIB_PTR_DECL DstCoeffs,
+  const SLData_t Frequency1,
+  const SLData_t Frequency2,
+  const SLData_t SampleRate,
+  const SLArrayIndex_t NumberOfBiquads)
 {
-    SLData_t        Alpha;
-    SLData_t        Scale = SIGLIB_ONE;
-    SLArrayIndex_t  i;
+  SLData_t        Alpha;
+  SLData_t        Scale = SIGLIB_ONE;
+  SLArrayIndex_t  i;
 
-    Alpha = - SDS_Cos (SIGLIB_PI * (Frequency1 + Frequency2) / SampleRate) /
-                SDS_Cos (SIGLIB_PI * (Frequency1 - Frequency2) / SampleRate);
+  Alpha = -SDS_Cos (SIGLIB_PI * (Frequency1 + Frequency2) / SampleRate) / SDS_Cos (SIGLIB_PI * (Frequency1 - Frequency2) / SampleRate);
 
 //  printf ("Alpha = %lf\n", Alpha);*/
 
 
-    for (i = 0; i < NumberOfBiquads; i++) {
-                                // Calculate poles
-        if ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] < SIGLIB_MIN_THRESHOLD) &&   // Check for close to zero
-            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] > -SIGLIB_MIN_THRESHOLD)) {
+  for (i = 0; i < NumberOfBiquads; i++) {
+// Calculate poles
+    if ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] < SIGLIB_MIN_THRESHOLD) && // Check for close to zero
+        (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] > -SIGLIB_MIN_THRESHOLD)) {
 
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] = SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] - Alpha;
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] = SIGLIB_ZERO;
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] *= SIGLIB_ONE /
-                            ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha) - SIGLIB_ONE);
-            Scale *= SIGLIB_ONE / ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha) - SIGLIB_ONE);
-        }
-
-        else {
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] = SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] -
-                            (SIGLIB_TWO * Alpha) + (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha * Alpha) -
-                            (SIGLIB_TWO * Alpha * SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4]);
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] = (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha) -
-                            (Alpha * Alpha) -
-                            SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4];
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] *= SIGLIB_ONE /
-                            ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha) -
-                            SIGLIB_ONE - (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] * Alpha * Alpha));
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] *= SIGLIB_ONE /
-                            ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha) -
-                            SIGLIB_ONE - (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] * Alpha * Alpha));
-            Scale *= SIGLIB_ONE / ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha) -
-                            SIGLIB_ONE - (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] * Alpha * Alpha));
-        }
-
-                                // Calculate zeros
-        if ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] < SIGLIB_MIN_THRESHOLD) &&   // Check for close to zero
-            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] > -SIGLIB_MIN_THRESHOLD)) {
-
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] = SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] -
-                            (Alpha * SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0]);
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] = SIGLIB_ZERO;
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] = SIGLIB_ONE;
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] *= SIGLIB_ONE /
-                            ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha) -
-                            SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0]);
-            Scale *= (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha) -
-                            SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0];
-        }
-
-        else {
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] = SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] -
-                            (SIGLIB_TWO * Alpha * SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0]) +
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha * Alpha) -
-                            (SIGLIB_TWO * Alpha * SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2]);
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] = (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha) -
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] * Alpha * Alpha) -
-                            SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2];
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] = SIGLIB_ONE;
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] *= SIGLIB_ONE /
-                            ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha) -
-                            SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] -
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] * Alpha * Alpha));
-            DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] *= SIGLIB_ONE /
-                            ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha) -
-                            SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] -
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] * Alpha * Alpha));
-            Scale *= (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha) -
-                            SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] -
-                            (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] * Alpha * Alpha);
-        }
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] = SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] - Alpha;
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] = SIGLIB_ZERO;
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] *= SIGLIB_ONE / ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha) - SIGLIB_ONE);
+      Scale *= SIGLIB_ONE / ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha) - SIGLIB_ONE);
     }
 
-    return (Scale);
-}       // End of SDA_IirLpHpShift
+    else {
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] = SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] -
+        (SIGLIB_TWO * Alpha) + (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha * Alpha) -
+        (SIGLIB_TWO * Alpha * SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4]);
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] = (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha) -
+        (Alpha * Alpha) - SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4];
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] *= SIGLIB_ONE /
+        ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha) -
+         SIGLIB_ONE - (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] * Alpha * Alpha));
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] *= SIGLIB_ONE /
+        ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha) -
+         SIGLIB_ONE - (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] * Alpha * Alpha));
+      Scale *= SIGLIB_ONE / ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3] * Alpha) -
+                             SIGLIB_ONE - (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4] * Alpha * Alpha));
+    }
+
+// Calculate zeros
+    if ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] < SIGLIB_MIN_THRESHOLD) && // Check for close to zero
+        (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] > -SIGLIB_MIN_THRESHOLD)) {
+
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] = SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] -
+        (Alpha * SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0]);
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] = SIGLIB_ZERO;
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] = SIGLIB_ONE;
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] *= SIGLIB_ONE /
+        ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha) - SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0]);
+      Scale *= (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha) - SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0];
+    }
+
+    else {
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] = SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] -
+        (SIGLIB_TWO * Alpha * SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0]) +
+        (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha * Alpha) -
+        (SIGLIB_TWO * Alpha * SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2]);
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] = (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha) -
+        (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] * Alpha * Alpha) - SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2];
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] = SIGLIB_ONE;
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] *= SIGLIB_ONE /
+        ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha) -
+         SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] - (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] * Alpha * Alpha));
+      DstCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] *= SIGLIB_ONE /
+        ((SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha) -
+         SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] - (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] * Alpha * Alpha));
+      Scale *= (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1] * Alpha) -
+        SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0] - (SrcCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2] * Alpha * Alpha);
+    }
+  }
+
+  return (Scale);
+}                                                                   // End of SDA_IirLpHpShift
 
 
 /**/
+
 /********************************************************
 * Function: SIF_Iir2PoleLpf
 *
@@ -2774,22 +2804,23 @@ SLData_t SIGLIB_FUNC_DECL SDA_IirLpHpShift (const SLData_t * SIGLIB_PTR_DECL Src
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_Iir2PoleLpf (SLData_t * SIGLIB_PTR_DECL pState,
-    SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    const SLData_t CutOffFrequency,
-    const SLData_t Radius)
-
+void SIGLIB_FUNC_DECL SIF_Iir2PoleLpf (
+  SLData_t * SIGLIB_PTR_DECL pState,
+  SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLData_t CutOffFrequency,
+  const SLData_t Radius)
 {
-    *pCoeffs = SIGLIB_TWO * Radius * SDS_Cos (SIGLIB_TWO_PI * CutOffFrequency);
-    *(pCoeffs+1) = -(Radius * Radius);
+  *pCoeffs = SIGLIB_TWO * Radius * SDS_Cos (SIGLIB_TWO_PI * CutOffFrequency);
+  *(pCoeffs + 1) = -(Radius * Radius);
 
-    *pState = SIGLIB_ZERO;
-    *(pState + 1) = SIGLIB_ZERO;
+  *pState = SIGLIB_ZERO;
+  *(pState + 1) = SIGLIB_ZERO;
 
-}       // End of SIF_Iir2PoleLpf()
+}                                                                   // End of SIF_Iir2PoleLpf()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_Iir2Pole
 *
@@ -2808,23 +2839,24 @@ void SIGLIB_FUNC_DECL SIF_Iir2PoleLpf (SLData_t * SIGLIB_PTR_DECL pState,
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_Iir2Pole (const SLData_t Source,
-    SLData_t * SIGLIB_PTR_DECL pState,
-    const SLData_t * SIGLIB_PTR_DECL pCoeffs)
-
+SLData_t SIGLIB_FUNC_DECL SDS_Iir2Pole (
+  const SLData_t Source,
+  SLData_t * SIGLIB_PTR_DECL pState,
+  const SLData_t * SIGLIB_PTR_DECL pCoeffs)
 {
-    SLData_t       FeedbackSumOfProducts;
+  SLData_t        FeedbackSumOfProducts;
 
-    FeedbackSumOfProducts = Source + (*pCoeffs * *pState) + (*(pCoeffs+1) * *(pState+1));   // Feedback
-    *(pState+1) = *pState;                      // Move delayed samples
-    *pState = FeedbackSumOfProducts;
+  FeedbackSumOfProducts = Source + (*pCoeffs * *pState) + (*(pCoeffs + 1) * *(pState + 1)); // Feedback
+  *(pState + 1) = *pState;                                          // Move delayed samples
+  *pState = FeedbackSumOfProducts;
 
-    return (FeedbackSumOfProducts);             // Save output
+  return (FeedbackSumOfProducts);                                   // Save output
 
-}       // End of SDS_Iir2Pole()
+}                                                                   // End of SDS_Iir2Pole()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Iir2Pole
 *
@@ -2845,35 +2877,36 @@ SLData_t SIGLIB_FUNC_DECL SDS_Iir2Pole (const SLData_t Source,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Iir2Pole (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    SLData_t * SIGLIB_PTR_DECL pState,
-    const SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_Iir2Pole (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  SLData_t * SIGLIB_PTR_DECL pState,
+  const SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLArrayIndex_t SampleLength)
 {
-    SLData_t       FeedbackSumOfProducts;
-    SLArrayIndex_t j;
+  SLData_t        FeedbackSumOfProducts;
+  SLArrayIndex_t  j;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
-_nassert((int) pState % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
+  _nassert ((int) pState % 8 == 0);
 #endif
 #endif
 
-    for (j = 0; j < SampleLength; j++) {
-        FeedbackSumOfProducts = *pSrc++ + (*pCoeffs * *pState) + (*(pCoeffs+1) * *(pState+1));  // Feedback
-        *pDst++ = FeedbackSumOfProducts;
-        *(pState+1) = *pState;                  // Move delayed samples
-        *pState = FeedbackSumOfProducts;
-    }
+  for (j = 0; j < SampleLength; j++) {
+    FeedbackSumOfProducts = *pSrc++ + (*pCoeffs * *pState) + (*(pCoeffs + 1) * *(pState + 1));  // Feedback
+    *pDst++ = FeedbackSumOfProducts;
+    *(pState + 1) = *pState;                                        // Move delayed samples
+    *pState = FeedbackSumOfProducts;
+  }
 
-}       // End of SDA_Iir2Pole()
+}                                                                   // End of SDA_Iir2Pole()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_IirNegateAlphaCoeffs
 *
@@ -2891,19 +2924,17 @@ _nassert((int) pState % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_IirNegateAlphaCoeffs (const SLData_t * SIGLIB_PTR_DECL pSrcCoeffs,
-    SLData_t * SIGLIB_PTR_DECL pDstCoeffs,
-    const SLArrayIndex_t NumberOfBiquads)
-
+void SIGLIB_FUNC_DECL SDA_IirNegateAlphaCoeffs (
+  const SLData_t * SIGLIB_PTR_DECL pSrcCoeffs,
+  SLData_t * SIGLIB_PTR_DECL pDstCoeffs,
+  const SLArrayIndex_t NumberOfBiquads)
 {
-    for (SLArrayIndex_t i = 0; i < NumberOfBiquads; i++) {
-        *pDstCoeffs++ = *pSrcCoeffs++;
-        *pDstCoeffs++ = *pSrcCoeffs++;
-        *pDstCoeffs++ = *pSrcCoeffs++;
-        *pDstCoeffs++ = -*pSrcCoeffs++;             // Negate feedback coefficients
-        *pDstCoeffs++ = -*pSrcCoeffs++;
-    }
+  for (SLArrayIndex_t i = 0; i < NumberOfBiquads; i++) {
+    *pDstCoeffs++ = *pSrcCoeffs++;
+    *pDstCoeffs++ = *pSrcCoeffs++;
+    *pDstCoeffs++ = *pSrcCoeffs++;
+    *pDstCoeffs++ = -*pSrcCoeffs++;                                 // Negate feedback coefficients
+    *pDstCoeffs++ = -*pSrcCoeffs++;
+  }
 
-}       // End of SDA_IirNegateAlphaCoeffs()
-
-
+}                                                                   // End of SDA_IirNegateAlphaCoeffs()

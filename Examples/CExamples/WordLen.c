@@ -3,11 +3,11 @@
 
 // Include files
 #include <stdio.h>
-#include <siglib.h>                                 // SigLib DSP library
+#include <siglib.h>                                                 // SigLib DSP library
 #include "dpchar.h"
 
 // Define constants
-#define ENABLE_DEBUG_LOG        0       // Set to '1' to enable debug logging and '0' to disable
+#define ENABLE_DEBUG_LOG        0                                   // Set to '1' to enable debug logging and '0' to disable
 
 #define NUMBER_OF_SAMPLES       40
 #define LONG_WORD_LENGTH        8
@@ -43,66 +43,65 @@ const unsigned char InputSequence[] = "Hello World - abcdefghijklmnopqrstuvwxyz0
 //  };
 
 
-static unsigned char    OutputSequence[160];
-static unsigned char    RegeneratedSequence[80];
+static unsigned char OutputSequence[160];
+static unsigned char RegeneratedSequence[80];
 
 
-int main (void)
+int main (
+  void)
 {
-    SLArrayIndex_t  NumberOfBytesConverted;
-    SLArrayIndex_t  i;
-    SLFixData_t     ValidationCheckFlag = 0;
+  SLArrayIndex_t  NumberOfBytesConverted;
+  SLArrayIndex_t  i;
+  SLFixData_t     ValidationCheckFlag = 0;
 
 #if ENABLE_DEBUG_LOG
-    SUF_ClearDebugfprintf();
+  SUF_ClearDebugfprintf ();
 #endif
 
-    NumberOfBytesConverted =
-        SDA_DecreaseWordLength (InputSequence,      // Pointer to source data
-                                OutputSequence,     // Pointer to destination data
-                                LONG_WORD_LENGTH,   // Input word length
-                                SHORT_WORD_LENGTH,  // Output word length
-                                NUMBER_OF_SAMPLES); // Source array length
+  NumberOfBytesConverted = SDA_DecreaseWordLength (InputSequence,   // Pointer to source data
+                                                   OutputSequence,  // Pointer to destination data
+                                                   LONG_WORD_LENGTH,  // Input word length
+                                                   SHORT_WORD_LENGTH, // Output word length
+                                                   NUMBER_OF_SAMPLES);  // Source array length
 
-    printf ("SDA_DecreaseWordLength - number of bytes converted = %d\n", NumberOfBytesConverted);
+  printf ("SDA_DecreaseWordLength - number of bytes converted = %d\n", NumberOfBytesConverted);
 
 #if ENABLE_DEBUG_LOG
-    for (i = 0; i < NumberOfBytesConverted; i++) {
-        SUF_Debugfprintf ("OutputSequence[%d]", i);
-        dpchar (OutputSequence[i]);
-    }
+  for (i = 0; i < NumberOfBytesConverted; i++) {
+    SUF_Debugfprintf ("OutputSequence[%d]", i);
+    dpchar (OutputSequence[i]);
+  }
 #endif
 
-    NumberOfBytesConverted =
-        SDA_IncreaseWordLength (OutputSequence,             // Pointer to source data
-                                RegeneratedSequence,        // Pointer to destination data
-                                SHORT_WORD_LENGTH,          // Input word length
-                                LONG_WORD_LENGTH,           // Output word length
-                                NumberOfBytesConverted);    // Source array length
+  NumberOfBytesConverted = SDA_IncreaseWordLength (OutputSequence,  // Pointer to source data
+                                                   RegeneratedSequence, // Pointer to destination data
+                                                   SHORT_WORD_LENGTH, // Input word length
+                                                   LONG_WORD_LENGTH,  // Output word length
+                                                   NumberOfBytesConverted); // Source array length
 
-    printf ("SDA_IncreaseWordLength - number of bytes converted = %d\n", NumberOfBytesConverted);
+  printf ("SDA_IncreaseWordLength - number of bytes converted = %d\n", NumberOfBytesConverted);
 
 #if ENABLE_DEBUG_LOG
-    SUF_Debugfprintf ("\n", i);
-    for (i = 0; i < NumberOfBytesConverted; i++) {
-        SUF_Debugfprintf ("RegeneratedSequence[%d]", i);
-        dpchar (RegeneratedSequence[i]);
-    }
+  SUF_Debugfprintf ("\n", i);
+  for (i = 0; i < NumberOfBytesConverted; i++) {
+    SUF_Debugfprintf ("RegeneratedSequence[%d]", i);
+    dpchar (RegeneratedSequence[i]);
+  }
 #endif
 
-    RegeneratedSequence[NumberOfBytesConverted] = '\0';     // Add trailing NULL to end of string
-    printf ("ReAsync string = %s\n", RegeneratedSequence);
+  RegeneratedSequence[NumberOfBytesConverted] = '\0';               // Add trailing NULL to end of string
+  printf ("ReAsync string = %s\n", RegeneratedSequence);
 
-    for (i = 0; i < NUMBER_OF_SAMPLES; i++) {
-        if (RegeneratedSequence[i] != InputSequence[i]) {
-            printf ("RegeneratedSequence[%d] (%x) != InputSequence[%d] (%x)\n", i, RegeneratedSequence[i], i, InputSequence[i]);
-            ValidationCheckFlag = 1;
-        }
+  for (i = 0; i < NUMBER_OF_SAMPLES; i++) {
+    if (RegeneratedSequence[i] != InputSequence[i]) {
+      printf ("RegeneratedSequence[%d] (%x) != InputSequence[%d] (%x)\n", i, RegeneratedSequence[i], i, InputSequence[i]);
+      ValidationCheckFlag = 1;
     }
+  }
 
-    if (ValidationCheckFlag == 0) {
-        printf ("\n\nThe output sequence was correct\n\n");
-    }
+  if (ValidationCheckFlag == 0) {
+    printf ("\n\nThe output sequence was correct\n\n");
+  }
 
-    exit(0);
+  exit (0);
 }

@@ -1,3 +1,4 @@
+
 /**************************************************************************
 File Name               : FIRFILT.C     | Author        : JOHN EDWARDS
 Siglib Library Version  : 10.00         |
@@ -36,11 +37,12 @@ Description : SigLib DSP library FIR filter routines.
 
 ****************************************************************************/
 
-#define SIGLIB_SRC_FILE_FIRFILT 1                           // Defines the source file that this code is being used in
+#define SIGLIB_SRC_FILE_FIRFILT 1                                   // Defines the source file that this code is being used in
 
-#include <siglib.h>                                         // Include SigLib header file
+#include <siglib.h>                                                 // Include SigLib header file
 
 /**/
+
 /********************************************************
 * Function: SIF_Fir
 *
@@ -56,30 +58,31 @@ Description : SigLib DSP library FIR filter routines.
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_Fir (SLData_t * SIGLIB_PTR_DECL pState,
-    SLArrayIndex_t *pFilterIndex,
-    const SLArrayIndex_t FilterLength)
-
+void SIGLIB_FUNC_DECL SIF_Fir (
+  SLData_t * SIGLIB_PTR_DECL pState,
+  SLArrayIndex_t * pFilterIndex,
+  const SLArrayIndex_t FilterLength)
 {
-    SLArrayIndex_t  i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pState % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pState % 8 == 0);                                 // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-        // Initialise the filter state array to 0
-    for (i = 0; i < FilterLength; i++) {
-        *pState++ = SIGLIB_ZERO;
-    }
+// Initialise the filter state array to 0
+  for (i = 0; i < FilterLength; i++) {
+    *pState++ = SIGLIB_ZERO;
+  }
 
-    *pFilterIndex = SIGLIB_AI_ZERO;             // Initilaise filter index
+  *pFilterIndex = SIGLIB_AI_ZERO;                                   // Initilaise filter index
 
-}       // End of SIF_Fir()
+}                                                                   // End of SIF_Fir()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_Fir
 *
@@ -97,44 +100,45 @@ _nassert((int) pState % 8 == 0);            // Align arrays on 64 bit double wor
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_Fir (const SLData_t Src,
-    SLData_t pState[],
-    const SLData_t pCoeffs[],
-    SLArrayIndex_t *pFilterIndex,
-    const SLArrayIndex_t FilterLength)
-
+SLData_t SIGLIB_FUNC_DECL SDS_Fir (
+  const SLData_t Src,
+  SLData_t pState[],
+  const SLData_t pCoeffs[],
+  SLArrayIndex_t * pFilterIndex,
+  const SLArrayIndex_t FilterLength)
 {
-    SLData_t       sum;
-    SLArrayIndex_t i, j;
+  SLData_t        sum;
+  SLArrayIndex_t  i, j;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pState % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pCoeffs % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pState % 8 == 0);                                 // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pCoeffs % 8 == 0);
 #endif
 #endif
 
-    pState[*pFilterIndex] = Src;            // Save input data in state array
+  pState[*pFilterIndex] = Src;                                      // Save input data in state array
 
-    j = (*pFilterIndex) - 1;                // De-rotate initial filter index
+  j = (*pFilterIndex) - 1;                                          // De-rotate initial filter index
 
-    sum = SIGLIB_ZERO;                      // Pre-initialise sum
+  sum = SIGLIB_ZERO;                                                // Pre-initialise sum
 
-    for (i = 0; i < FilterLength; i++) {
-        if (++j == FilterLength) {          // Test for end of array
-            j = 0;                          // Circular array
-        }
-
-        sum += pCoeffs[i] * pState[j];      // Convolve data
+  for (i = 0; i < FilterLength; i++) {
+    if (++j == FilterLength) {                                      // Test for end of array
+      j = 0;                                                        // Circular array
     }
-    *pFilterIndex = j;                      // Store index for next iteration
 
-    return sum;
+    sum += pCoeffs[i] * pState[j];                                  // Convolve data
+  }
+  *pFilterIndex = j;                                                // Store index for next iteration
 
-}       // End of SDS_Fir()
+  return sum;
+
+}                                                                   // End of SDS_Fir()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Fir
 *
@@ -154,51 +158,52 @@ _nassert((int) pCoeffs % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Fir (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t pDst[],
-    SLData_t pState[],
-    const SLData_t pCoeffs[],
-    SLArrayIndex_t *pFilterIndex,
-    const SLArrayIndex_t FilterLength,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_Fir (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t pDst[],
+  SLData_t pState[],
+  const SLData_t pCoeffs[],
+  SLArrayIndex_t * pFilterIndex,
+  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t SampleLength)
 {
-    SLData_t       sum;
-    SLArrayIndex_t i, j, k;
+  SLData_t        sum;
+  SLArrayIndex_t  i, j, k;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
-_nassert((int) pState % 8 == 0);
-_nassert((int) pCoeffs % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
+  _nassert ((int) pState % 8 == 0);
+  _nassert ((int) pCoeffs % 8 == 0);
 #endif
 #endif
 
-    j = *pFilterIndex;                      // Initialise local filter index
+  j = *pFilterIndex;                                                // Initialise local filter index
 
-    for (k = 0; k < SampleLength; k++) {
-        pState [j] = *pSrc++;
+  for (k = 0; k < SampleLength; k++) {
+    pState[j] = *pSrc++;
 
-        j--;                                // De-rotate filter index
+    j--;                                                            // De-rotate filter index
 
-        sum = SIGLIB_ZERO;                  // Pre-initialise sum
+    sum = SIGLIB_ZERO;                                              // Pre-initialise sum
 
-        for (i = 0; i < FilterLength; i++) {
-            if (++j == FilterLength) {      // Test for end of array
-                j = 0;                      // Circular array
-            }
+    for (i = 0; i < FilterLength; i++) {
+      if (++j == FilterLength) {                                    // Test for end of array
+        j = 0;                                                      // Circular array
+      }
 
-            sum += (pCoeffs[i] * pState[j]);    // Convolve data
-        }
-        *pDst++ = sum;
+      sum += (pCoeffs[i] * pState[j]);                              // Convolve data
     }
-    *pFilterIndex = j;                      // Store index for next iteration
+    *pDst++ = sum;
+  }
+  *pFilterIndex = j;                                                // Store index for next iteration
 
-}       // End of SDA_Fir()
+}                                                                   // End of SDA_Fir()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_FirAddSample
 *
@@ -215,34 +220,35 @@ _nassert((int) pCoeffs % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDS_FirAddSample (const SLData_t Src,
-    SLData_t pState[],
-    SLArrayIndex_t *pFilterIndex,
-    const SLArrayIndex_t FilterLength)
-
+void SIGLIB_FUNC_DECL SDS_FirAddSample (
+  const SLData_t Src,
+  SLData_t pState[],
+  SLArrayIndex_t * pFilterIndex,
+  const SLArrayIndex_t FilterLength)
 {
-    SLArrayIndex_t j;
+  SLArrayIndex_t  j;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pState % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pState % 8 == 0);                                 // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-    pState[*pFilterIndex] = Src;
+  pState[*pFilterIndex] = Src;
 
-    j = --(*pFilterIndex);
+  j = --(*pFilterIndex);
 
-    if (j < 0) {
-        j = (FilterLength - 1);
-    }
+  if (j < 0) {
+    j = (FilterLength - 1);
+  }
 
-    *pFilterIndex = j;
+  *pFilterIndex = j;
 
-}       // End of SDS_FirAddSample()
+}                                                                   // End of SDS_FirAddSample()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_FirAddSamples
 *
@@ -261,41 +267,42 @@ _nassert((int) pState % 8 == 0);            // Align arrays on 64 bit double wor
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_FirAddSamples (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t pState[],
-    SLArrayIndex_t *pFilterIndex,
-    const SLArrayIndex_t FilterLength,
-    const SLArrayIndex_t InputArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_FirAddSamples (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t pState[],
+  SLArrayIndex_t * pFilterIndex,
+  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t InputArrayLength)
 {
-    SLArrayIndex_t i, j;
-    SLArrayIndex_t LocalFilterIndex = *pFilterIndex;
+  SLArrayIndex_t  i, j;
+  SLArrayIndex_t  LocalFilterIndex = *pFilterIndex;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pState % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pState % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < InputArrayLength; i++) {
-        pState[LocalFilterIndex] = *pSrc++;
+  for (i = 0; i < InputArrayLength; i++) {
+    pState[LocalFilterIndex] = *pSrc++;
 
-        j = --(LocalFilterIndex);
+    j = --(LocalFilterIndex);
 
-        if (j < 0) {
-            j = (FilterLength - 1);
-        }
-
-        LocalFilterIndex = j;
+    if (j < 0) {
+      j = (FilterLength - 1);
     }
 
-    *pFilterIndex = LocalFilterIndex;
+    LocalFilterIndex = j;
+  }
 
-}       // End of SDA_FirAddSamples()
+  *pFilterIndex = LocalFilterIndex;
+
+}                                                                   // End of SDA_FirAddSamples()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_Comb
 *
@@ -312,32 +319,33 @@ _nassert((int) pState % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_Comb (SLData_t * SIGLIB_PTR_DECL pState,
-    SLArrayIndex_t *pFilterIndex,
-    SLData_t *pFilterSum,
-    const SLArrayIndex_t FilterLength)
-
+void SIGLIB_FUNC_DECL SIF_Comb (
+  SLData_t * SIGLIB_PTR_DECL pState,
+  SLArrayIndex_t * pFilterIndex,
+  SLData_t * pFilterSum,
+  const SLArrayIndex_t FilterLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pState % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pState % 8 == 0);                                 // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-                // Clear comb filter arrays
-    for (i = 0; i < FilterLength; i++) {
-        *pState++ = SIGLIB_ZERO;
-    }
+// Clear comb filter arrays
+  for (i = 0; i < FilterLength; i++) {
+    *pState++ = SIGLIB_ZERO;
+  }
 
-    *pFilterIndex = SIGLIB_AI_ZERO;
-    *pFilterSum = SIGLIB_ZERO;
+  *pFilterIndex = SIGLIB_AI_ZERO;
+  *pFilterSum = SIGLIB_ZERO;
 
-}       // End of SIF_Comb()
+}                                                                   // End of SIF_Comb()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_Comb
 *
@@ -356,32 +364,33 @@ _nassert((int) pState % 8 == 0);            // Align arrays on 64 bit double wor
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_Comb (const SLData_t Src,
-    SLData_t * SIGLIB_PTR_DECL pState,
-    SLArrayIndex_t *pFilterIndex,
-    SLData_t *pFilterSum,
-    const SLArrayIndex_t FilterLength)
-
+SLData_t SIGLIB_FUNC_DECL SDS_Comb (
+  const SLData_t Src,
+  SLData_t * SIGLIB_PTR_DECL pState,
+  SLArrayIndex_t * pFilterIndex,
+  SLData_t * pFilterSum,
+  const SLArrayIndex_t FilterLength)
 {
-    SLArrayIndex_t LocalStateArrayIndex;
+  SLArrayIndex_t  LocalStateArrayIndex;
 
-    LocalStateArrayIndex = *pFilterIndex;
-    *pFilterSum = *pFilterSum - pState[LocalStateArrayIndex] + Src; // Add in new sample and subtract old one
-    pState[LocalStateArrayIndex] = Src;
+  LocalStateArrayIndex = *pFilterIndex;
+  *pFilterSum = *pFilterSum - pState[LocalStateArrayIndex] + Src;   // Add in new sample and subtract old one
+  pState[LocalStateArrayIndex] = Src;
 
-    LocalStateArrayIndex ++;                            // Circular increment state array index
-    if (LocalStateArrayIndex >= FilterLength) {
-        LocalStateArrayIndex = 0;
-    }
+  LocalStateArrayIndex++;                                           // Circular increment state array index
+  if (LocalStateArrayIndex >= FilterLength) {
+    LocalStateArrayIndex = 0;
+  }
 
-    *pFilterIndex = LocalStateArrayIndex;
+  *pFilterIndex = LocalStateArrayIndex;
 
-    return (*pFilterSum);
+  return (*pFilterSum);
 
-}       // End of SDS_Comb()
+}                                                                   // End of SDS_Comb()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Comb
 *
@@ -402,52 +411,53 @@ SLData_t SIGLIB_FUNC_DECL SDS_Comb (const SLData_t Src,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Comb (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    SLData_t * SIGLIB_PTR_DECL pState,
-    SLArrayIndex_t *pFilterIndex,
-    SLData_t *pFilterSum,
-    const SLArrayIndex_t FilterLength,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_Comb (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  SLData_t * SIGLIB_PTR_DECL pState,
+  SLArrayIndex_t * pFilterIndex,
+  SLData_t * pFilterSum,
+  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t SampleLength)
 {
-    SLArrayIndex_t LocalStateArrayIndex;
-    SLData_t       LocalFilterSum;
-    SLData_t       LocalInput;
-    SLArrayIndex_t i;
+  SLArrayIndex_t  LocalStateArrayIndex;
+  SLData_t        LocalFilterSum;
+  SLData_t        LocalInput;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
-_nassert((int) pState % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
+  _nassert ((int) pState % 8 == 0);
 #endif
 #endif
 
-    LocalStateArrayIndex = *pFilterIndex;
-    LocalFilterSum = *pFilterSum;
+  LocalStateArrayIndex = *pFilterIndex;
+  LocalFilterSum = *pFilterSum;
 
-    for (i = 0; i < SampleLength; i++) {
-        LocalInput = *pSrc++;
+  for (i = 0; i < SampleLength; i++) {
+    LocalInput = *pSrc++;
 
-        LocalFilterSum = LocalFilterSum - pState[LocalStateArrayIndex] + LocalInput;    // Add in new sample and subtract old one
-        pState[LocalStateArrayIndex] = LocalInput;
+    LocalFilterSum = LocalFilterSum - pState[LocalStateArrayIndex] + LocalInput;  // Add in new sample and subtract old one
+    pState[LocalStateArrayIndex] = LocalInput;
 
-        LocalStateArrayIndex ++;                        // Circular increment state array index
-        if (LocalStateArrayIndex >= FilterLength) {
-            LocalStateArrayIndex = 0;
-        }
-
-        *pDst++ = LocalFilterSum;
+    LocalStateArrayIndex++;                                         // Circular increment state array index
+    if (LocalStateArrayIndex >= FilterLength) {
+      LocalStateArrayIndex = 0;
     }
 
-    *pFilterSum = LocalFilterSum;
-    *pFilterIndex = LocalStateArrayIndex;
+    *pDst++ = LocalFilterSum;
+  }
 
-}       // End of SDA_Comb()
+  *pFilterSum = LocalFilterSum;
+  *pFilterIndex = LocalStateArrayIndex;
+
+}                                                                   // End of SDA_Comb()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_FirComplex
 *
@@ -464,26 +474,27 @@ _nassert((int) pState % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_FirComplex (SLData_t * SIGLIB_PTR_DECL pRealState,
-    SLData_t * SIGLIB_PTR_DECL pImagState,
-    SLArrayIndex_t *pFilterIndex,
-    const SLArrayIndex_t FilterLength)
-
+void SIGLIB_FUNC_DECL SIF_FirComplex (
+  SLData_t * SIGLIB_PTR_DECL pRealState,
+  SLData_t * SIGLIB_PTR_DECL pImagState,
+  SLArrayIndex_t * pFilterIndex,
+  const SLArrayIndex_t FilterLength)
 {
-    SLArrayIndex_t  i;
+  SLArrayIndex_t  i;
 
-        // Initialise the filter state array to 0
-    for (i = 0; i < FilterLength; i++) {
-        *pRealState++ = SIGLIB_ZERO;
-        *pImagState++ = SIGLIB_ZERO;
-    }
+// Initialise the filter state array to 0
+  for (i = 0; i < FilterLength; i++) {
+    *pRealState++ = SIGLIB_ZERO;
+    *pImagState++ = SIGLIB_ZERO;
+  }
 
-    *pFilterIndex = SIGLIB_AI_ZERO;             // Initilaise filter index
+  *pFilterIndex = SIGLIB_AI_ZERO;                                   // Initilaise filter index
 
-}       // End of SIF_FirComplex()
+}                                                                   // End of SIF_FirComplex()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_FirComplex
 *
@@ -507,48 +518,49 @@ void SIGLIB_FUNC_DECL SIF_FirComplex (SLData_t * SIGLIB_PTR_DECL pRealState,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDS_FirComplex (const SLData_t RealSrc,
-    const SLData_t ImagSrc,
-    SLData_t * SIGLIB_PTR_DECL pRealDst,
-    SLData_t * SIGLIB_PTR_DECL pImagDst,
-    SLData_t * SIGLIB_PTR_DECL pRealState,
-    SLData_t * SIGLIB_PTR_DECL pImagState,
-    const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
-    const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
-    SLArrayIndex_t *pFilterIndex,
-    const SLArrayIndex_t FilterLength)
-
+void SIGLIB_FUNC_DECL SDS_FirComplex (
+  const SLData_t RealSrc,
+  const SLData_t ImagSrc,
+  SLData_t * SIGLIB_PTR_DECL pRealDst,
+  SLData_t * SIGLIB_PTR_DECL pImagDst,
+  SLData_t * SIGLIB_PTR_DECL pRealState,
+  SLData_t * SIGLIB_PTR_DECL pImagState,
+  const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
+  const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
+  SLArrayIndex_t * pFilterIndex,
+  const SLArrayIndex_t FilterLength)
 {
-    SLData_t       RealSum, ImagSum;
-    SLArrayIndex_t i, j;
+  SLData_t        RealSum, ImagSum;
+  SLArrayIndex_t  i, j;
 
-    j = *pFilterIndex;                      // Initialise local filter index
+  j = *pFilterIndex;                                                // Initialise local filter index
 
-    pRealState [j] = RealSrc;
-    pImagState [j] = ImagSrc;
+  pRealState[j] = RealSrc;
+  pImagState[j] = ImagSrc;
 
-    j--;                                    // De-rotate filter index
+  j--;                                                              // De-rotate filter index
 
-    RealSum = SIGLIB_ZERO;                  // Pre-initialise sums
-    ImagSum = SIGLIB_ZERO;
+  RealSum = SIGLIB_ZERO;                                            // Pre-initialise sums
+  ImagSum = SIGLIB_ZERO;
 
-    for (i = 0; i < FilterLength; i++) {
-        if (++j == FilterLength) {          // Test for end of array
-            j = 0;                          // Circular array
-        }
-                                            // Convolve data
-        RealSum += (pRealCoeffs[i] * pRealState[j]) - (pImagCoeffs[i] * pImagState[j]);
-        ImagSum += (pRealCoeffs[i] * pImagState[j]) + (pImagCoeffs[i] * pRealState[j]);
+  for (i = 0; i < FilterLength; i++) {
+    if (++j == FilterLength) {                                      // Test for end of array
+      j = 0;                                                        // Circular array
     }
-    *pRealDst = RealSum;
-    *pImagDst = ImagSum;
+// Convolve data
+    RealSum += (pRealCoeffs[i] * pRealState[j]) - (pImagCoeffs[i] * pImagState[j]);
+    ImagSum += (pRealCoeffs[i] * pImagState[j]) + (pImagCoeffs[i] * pRealState[j]);
+  }
+  *pRealDst = RealSum;
+  *pImagDst = ImagSum;
 
-    *pFilterIndex = j;                      // Store index for next iteration
+  *pFilterIndex = j;                                                // Store index for next iteration
 
-}       // End of SDS_FirComplex()
+}                                                                   // End of SDS_FirComplex()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_FirComplex
 *
@@ -572,50 +584,51 @@ void SIGLIB_FUNC_DECL SDS_FirComplex (const SLData_t RealSrc,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_FirComplex (const SLData_t * SIGLIB_PTR_DECL pRealSrc,
-    const SLData_t * SIGLIB_PTR_DECL pImagSrc,
-    SLData_t * SIGLIB_PTR_DECL pRealDst,
-    SLData_t * SIGLIB_PTR_DECL pImagDst,
-    SLData_t * SIGLIB_PTR_DECL pRealState,
-    SLData_t * SIGLIB_PTR_DECL pImagState,
-    const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
-    const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
-    SLArrayIndex_t *pFilterIndex,
-    const SLArrayIndex_t FilterLength,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_FirComplex (
+  const SLData_t * SIGLIB_PTR_DECL pRealSrc,
+  const SLData_t * SIGLIB_PTR_DECL pImagSrc,
+  SLData_t * SIGLIB_PTR_DECL pRealDst,
+  SLData_t * SIGLIB_PTR_DECL pImagDst,
+  SLData_t * SIGLIB_PTR_DECL pRealState,
+  SLData_t * SIGLIB_PTR_DECL pImagState,
+  const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
+  const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
+  SLArrayIndex_t * pFilterIndex,
+  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t SampleLength)
 {
-    SLData_t       RealSum, ImagSum;
-    SLArrayIndex_t i, j, k;
+  SLData_t        RealSum, ImagSum;
+  SLArrayIndex_t  i, j, k;
 
-    j = *pFilterIndex;                      // Initialise local filter index
+  j = *pFilterIndex;                                                // Initialise local filter index
 
-    for (k = 0; k < SampleLength; k++) {
-        pRealState [j] = *pRealSrc++;
-        pImagState [j] = *pImagSrc++;
+  for (k = 0; k < SampleLength; k++) {
+    pRealState[j] = *pRealSrc++;
+    pImagState[j] = *pImagSrc++;
 
-        j--;                                // De-rotate filter index
+    j--;                                                            // De-rotate filter index
 
-        RealSum = SIGLIB_ZERO;              // Pre-initialise sums
-        ImagSum = SIGLIB_ZERO;
+    RealSum = SIGLIB_ZERO;                                          // Pre-initialise sums
+    ImagSum = SIGLIB_ZERO;
 
-        for (i = 0; i < FilterLength; i++) {
-            if (++j == FilterLength) {      // Test for end of array
-                j = 0;                      // Circular array
-            }
-                                            // Convolve data
-            RealSum += (pRealCoeffs[i] * pRealState[j]) - (pImagCoeffs[i] * pImagState[j]);
-            ImagSum += (pRealCoeffs[i] * pImagState[j]) + (pImagCoeffs[i] * pRealState[j]);
-        }
-        *pRealDst++ = RealSum;
-        *pImagDst++ = ImagSum;
+    for (i = 0; i < FilterLength; i++) {
+      if (++j == FilterLength) {                                    // Test for end of array
+        j = 0;                                                      // Circular array
+      }
+// Convolve data
+      RealSum += (pRealCoeffs[i] * pRealState[j]) - (pImagCoeffs[i] * pImagState[j]);
+      ImagSum += (pRealCoeffs[i] * pImagState[j]) + (pImagCoeffs[i] * pRealState[j]);
     }
-    *pFilterIndex = j;                      // Store index for next iteration
+    *pRealDst++ = RealSum;
+    *pImagDst++ = ImagSum;
+  }
+  *pFilterIndex = j;                                                // Store index for next iteration
 
-}       // End of SDA_FirComplex()
+}                                                                   // End of SDA_FirComplex()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_FirWithStore
 *
@@ -630,27 +643,28 @@ void SIGLIB_FUNC_DECL SDA_FirComplex (const SLData_t * SIGLIB_PTR_DECL pRealSrc,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_FirWithStore (SLData_t * SIGLIB_PTR_DECL pState,
-    const SLArrayIndex_t FilterLength)
-
+void SIGLIB_FUNC_DECL SIF_FirWithStore (
+  SLData_t * SIGLIB_PTR_DECL pState,
+  const SLArrayIndex_t FilterLength)
 {
-    SLArrayIndex_t  i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pState % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pState % 8 == 0);                                 // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-        // Initialise the filter state array to 0
-    for (i = 0; i < FilterLength; i++) {
-        *pState++ = SIGLIB_ZERO;
-    }
+// Initialise the filter state array to 0
+  for (i = 0; i < FilterLength; i++) {
+    *pState++ = SIGLIB_ZERO;
+  }
 
-}       // End of SIF_FirWithStore()
+}                                                                   // End of SIF_FirWithStore()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_FirWithStore
 *
@@ -667,40 +681,41 @@ _nassert((int) pState % 8 == 0);            // Align arrays on 64 bit double wor
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_FirWithStore (const SLData_t Src,
-    SLData_t pState[],
-    const SLData_t pCoeffs[],
-    const SLArrayIndex_t FilterLength)
-
+SLData_t SIGLIB_FUNC_DECL SDS_FirWithStore (
+  const SLData_t Src,
+  SLData_t pState[],
+  const SLData_t pCoeffs[],
+  const SLArrayIndex_t FilterLength)
 {
-    SLData_t       sum;
-    SLArrayIndex_t i;
+  SLData_t        sum;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pState % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pCoeffs % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pState % 8 == 0);                                 // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pCoeffs % 8 == 0);
 #endif
 #endif
 
-    pState[0] = Src;                        // Save input data in state array
+  pState[0] = Src;                                                  // Save input data in state array
 
-    sum = SIGLIB_ZERO;                      // Pre-initialise sum
+  sum = SIGLIB_ZERO;                                                // Pre-initialise sum
 
-    for (i = (FilterLength - 1); i > 0 ; i--) {
-        sum += pCoeffs[i] * pState[i];      // Convolve data
-        pState[i] = pState[i - 1];          // Shift state array data
-    }
+  for (i = (FilterLength - 1); i > 0; i--) {
+    sum += pCoeffs[i] * pState[i];                                  // Convolve data
+    pState[i] = pState[i - 1];                                      // Shift state array data
+  }
 
-                                            // Final MAC
-    sum += pCoeffs[0] * pState[0];          // Convolve data
+// Final MAC
+  sum += pCoeffs[0] * pState[0];                                    // Convolve data
 
-    return sum;
+  return sum;
 
-}       // End of SDS_FirWithStore()
+}                                                                   // End of SDS_FirWithStore()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_FirWithStore
 *
@@ -719,45 +734,46 @@ _nassert((int) pCoeffs % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_FirWithStore (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t pDst[],
-    SLData_t pState[],
-    const SLData_t pCoeffs[],
-    const SLArrayIndex_t FilterLength,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_FirWithStore (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t pDst[],
+  SLData_t pState[],
+  const SLData_t pCoeffs[],
+  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t SampleLength)
 {
-    SLData_t       sum;
-    SLArrayIndex_t i, k;
+  SLData_t        sum;
+  SLArrayIndex_t  i, k;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
-_nassert((int) pState % 8 == 0);
-_nassert((int) pCoeffs % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
+  _nassert ((int) pState % 8 == 0);
+  _nassert ((int) pCoeffs % 8 == 0);
 #endif
 #endif
 
-    for (k = 0; k < SampleLength; k++) {
-        pState [0] = *pSrc++;
+  for (k = 0; k < SampleLength; k++) {
+    pState[0] = *pSrc++;
 
-        sum = SIGLIB_ZERO;                  // Pre-initialise sum
+    sum = SIGLIB_ZERO;                                              // Pre-initialise sum
 
-        for (i = (FilterLength - 1); i > 0 ; i--) {
-            sum += pCoeffs[i] * pState[i];  // Convolve data
-            pState[i] = pState[i - 1];      // Shift state array data
-        }
-
-                                            // Final MAC
-        sum += pCoeffs[0] * pState[0];      // Convolve data
-        *pDst++ = sum;
+    for (i = (FilterLength - 1); i > 0; i--) {
+      sum += pCoeffs[i] * pState[i];                                // Convolve data
+      pState[i] = pState[i - 1];                                    // Shift state array data
     }
 
-}       // End of SDA_FirWithStore()
+// Final MAC
+    sum += pCoeffs[0] * pState[0];                                  // Convolve data
+    *pDst++ = sum;
+  }
+
+}                                                                   // End of SDA_FirWithStore()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_FirComplexWithStore
 *
@@ -773,23 +789,24 @@ _nassert((int) pCoeffs % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_FirComplexWithStore (SLData_t * SIGLIB_PTR_DECL pRealState,
-    SLData_t * SIGLIB_PTR_DECL pImagState,
-    const SLArrayIndex_t FilterLength)
-
+void SIGLIB_FUNC_DECL SIF_FirComplexWithStore (
+  SLData_t * SIGLIB_PTR_DECL pRealState,
+  SLData_t * SIGLIB_PTR_DECL pImagState,
+  const SLArrayIndex_t FilterLength)
 {
-    SLArrayIndex_t  i;
+  SLArrayIndex_t  i;
 
-        // Initialise the filter state array to 0
-    for (i = 0; i < FilterLength; i++) {
-        *pRealState++ = SIGLIB_ZERO;
-        *pImagState++ = SIGLIB_ZERO;
-    }
+// Initialise the filter state array to 0
+  for (i = 0; i < FilterLength; i++) {
+    *pRealState++ = SIGLIB_ZERO;
+    *pImagState++ = SIGLIB_ZERO;
+  }
 
-}       // End of SIF_FirComplexWithStore()
+}                                                                   // End of SIF_FirComplexWithStore()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_FirComplexWithStore
 *
@@ -812,46 +829,47 @@ void SIGLIB_FUNC_DECL SIF_FirComplexWithStore (SLData_t * SIGLIB_PTR_DECL pRealS
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDS_FirComplexWithStore (const SLData_t SrcReal,
-    const SLData_t SrcImag,
-    SLData_t * SIGLIB_PTR_DECL pRealDst,
-    SLData_t * SIGLIB_PTR_DECL pImagDst,
-    SLData_t * SIGLIB_PTR_DECL pRealState,
-    SLData_t * SIGLIB_PTR_DECL pImagState,
-    const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
-    const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
-    const SLArrayIndex_t FilterLength)
-
+void SIGLIB_FUNC_DECL SDS_FirComplexWithStore (
+  const SLData_t SrcReal,
+  const SLData_t SrcImag,
+  SLData_t * SIGLIB_PTR_DECL pRealDst,
+  SLData_t * SIGLIB_PTR_DECL pImagDst,
+  SLData_t * SIGLIB_PTR_DECL pRealState,
+  SLData_t * SIGLIB_PTR_DECL pImagState,
+  const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
+  const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
+  const SLArrayIndex_t FilterLength)
 {
-    SLData_t       RealSum, ImagSum;
-    SLArrayIndex_t i;
+  SLData_t        RealSum, ImagSum;
+  SLArrayIndex_t  i;
 
-    pRealState [0] = SrcReal;
-    pImagState [0] = SrcImag;
+  pRealState[0] = SrcReal;
+  pImagState[0] = SrcImag;
 
-    RealSum = SIGLIB_ZERO;                  // Pre-initialise sums
-    ImagSum = SIGLIB_ZERO;
+  RealSum = SIGLIB_ZERO;                                            // Pre-initialise sums
+  ImagSum = SIGLIB_ZERO;
 
-    for (i = (FilterLength - 1); i > 0 ; i--) {
-                                            // Convolve data
-        RealSum += (pRealCoeffs[i] * pRealState[i]) - (pImagCoeffs[i] * pImagState[i]);
-        ImagSum += (pRealCoeffs[i] * pImagState[i]) + (pImagCoeffs[i] * pRealState[i]);
-                                            // Shift state array data
-        pRealState[i] = pRealState[i - 1];
-        pImagState[i] = pImagState[i - 1];
-    }
-                                            // Final MAC
-                                            // Convolve data
-    RealSum += (pRealCoeffs[0] * pRealState[0]) - (pImagCoeffs[0] * pImagState[0]);
-    ImagSum += (pRealCoeffs[0] * pImagState[0]) + (pImagCoeffs[0] * pRealState[0]);
+  for (i = (FilterLength - 1); i > 0; i--) {
+// Convolve data
+    RealSum += (pRealCoeffs[i] * pRealState[i]) - (pImagCoeffs[i] * pImagState[i]);
+    ImagSum += (pRealCoeffs[i] * pImagState[i]) + (pImagCoeffs[i] * pRealState[i]);
+// Shift state array data
+    pRealState[i] = pRealState[i - 1];
+    pImagState[i] = pImagState[i - 1];
+  }
+// Final MAC
+// Convolve data
+  RealSum += (pRealCoeffs[0] * pRealState[0]) - (pImagCoeffs[0] * pImagState[0]);
+  ImagSum += (pRealCoeffs[0] * pImagState[0]) + (pImagCoeffs[0] * pRealState[0]);
 
-    *pRealDst = RealSum;
-    *pImagDst = ImagSum;
+  *pRealDst = RealSum;
+  *pImagDst = ImagSum;
 
-}       // End of SDS_FirComplexWithStore()
+}                                                                   // End of SDS_FirComplexWithStore()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_FirComplexWithStore
 *
@@ -874,49 +892,50 @@ void SIGLIB_FUNC_DECL SDS_FirComplexWithStore (const SLData_t SrcReal,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_FirComplexWithStore (const SLData_t * SIGLIB_PTR_DECL pSrcReal,
-    const SLData_t * SIGLIB_PTR_DECL pSrcImag,
-    SLData_t * SIGLIB_PTR_DECL pRealDst,
-    SLData_t * SIGLIB_PTR_DECL pImagDst,
-    SLData_t * SIGLIB_PTR_DECL pRealState,
-    SLData_t * SIGLIB_PTR_DECL pImagState,
-    const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
-    const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
-    const SLArrayIndex_t FilterLength,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_FirComplexWithStore (
+  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+  SLData_t * SIGLIB_PTR_DECL pRealDst,
+  SLData_t * SIGLIB_PTR_DECL pImagDst,
+  SLData_t * SIGLIB_PTR_DECL pRealState,
+  SLData_t * SIGLIB_PTR_DECL pImagState,
+  const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
+  const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
+  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t SampleLength)
 {
-    SLData_t       RealSum, ImagSum;
-    SLArrayIndex_t i, k;
+  SLData_t        RealSum, ImagSum;
+  SLArrayIndex_t  i, k;
 
-    for (k = 0; k < SampleLength; k++) {
-        pRealState [0] = *pSrcReal++;
-        pImagState [0] = *pSrcImag++;
+  for (k = 0; k < SampleLength; k++) {
+    pRealState[0] = *pSrcReal++;
+    pImagState[0] = *pSrcImag++;
 
-        RealSum = SIGLIB_ZERO;              // Pre-initialise sums
-        ImagSum = SIGLIB_ZERO;
+    RealSum = SIGLIB_ZERO;                                          // Pre-initialise sums
+    ImagSum = SIGLIB_ZERO;
 
-        for (i = (FilterLength - 1); i > 0 ; i--) {
-                                            // Convolve data
-            RealSum += (pRealCoeffs[i] * pRealState[i]) - (pImagCoeffs[i] * pImagState[i]);
-            ImagSum += (pRealCoeffs[i] * pImagState[i]) + (pImagCoeffs[i] * pRealState[i]);
-                                            // Shift state array data
-            pRealState[i] = pRealState[i - 1];
-            pImagState[i] = pImagState[i - 1];
-        }
-                                            // Final MAC
-                                            // Convolve data
-        RealSum += (pRealCoeffs[0] * pRealState[0]) - (pImagCoeffs[0] * pImagState[0]);
-        ImagSum += (pRealCoeffs[0] * pImagState[0]) + (pImagCoeffs[0] * pRealState[0]);
-
-        *pRealDst++ = RealSum;
-        *pImagDst++ = ImagSum;
+    for (i = (FilterLength - 1); i > 0; i--) {
+// Convolve data
+      RealSum += (pRealCoeffs[i] * pRealState[i]) - (pImagCoeffs[i] * pImagState[i]);
+      ImagSum += (pRealCoeffs[i] * pImagState[i]) + (pImagCoeffs[i] * pRealState[i]);
+// Shift state array data
+      pRealState[i] = pRealState[i - 1];
+      pImagState[i] = pImagState[i - 1];
     }
+// Final MAC
+// Convolve data
+    RealSum += (pRealCoeffs[0] * pRealState[0]) - (pImagCoeffs[0] * pImagState[0]);
+    ImagSum += (pRealCoeffs[0] * pImagState[0]) + (pImagCoeffs[0] * pRealState[0]);
 
-}       // End of SDA_FirComplexWithStore()
+    *pRealDst++ = RealSum;
+    *pImagDst++ = ImagSum;
+  }
+
+}                                                                   // End of SDA_FirComplexWithStore()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_FirWithStoreAddSample
 *
@@ -932,29 +951,30 @@ void SIGLIB_FUNC_DECL SDA_FirComplexWithStore (const SLData_t * SIGLIB_PTR_DECL 
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDS_FirWithStoreAddSample (const SLData_t Src,
-    SLData_t pState[],
-    const SLArrayIndex_t FilterLength)
-
+void SIGLIB_FUNC_DECL SDS_FirWithStoreAddSample (
+  const SLData_t Src,
+  SLData_t pState[],
+  const SLArrayIndex_t FilterLength)
 {
-    SLArrayIndex_t i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pState % 8 == 0);            // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pState % 8 == 0);                                 // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-    for (i = (FilterLength - 1); i > 1 ; i--) {
-        pState[i] = pState[i - 1];          // Shift state array data
-    }
+  for (i = (FilterLength - 1); i > 1; i--) {
+    pState[i] = pState[i - 1];                                      // Shift state array data
+  }
 
-    pState[1] = Src;
+  pState[1] = Src;
 
-}       // End of SDS_FirWithStoreAddSample()
+}                                                                   // End of SDS_FirWithStoreAddSample()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_FirWithStoreAddSamples
 *
@@ -972,34 +992,35 @@ _nassert((int) pState % 8 == 0);            // Align arrays on 64 bit double wor
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_FirWithStoreAddSamples (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t pState[],
-    const SLArrayIndex_t FilterLength,
-    const SLArrayIndex_t InputArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_FirWithStoreAddSamples (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t pState[],
+  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t InputArrayLength)
 {
-    SLArrayIndex_t i, k;
+  SLArrayIndex_t  i, k;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pState % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pState % 8 == 0);
 #endif
 #endif
 
-    for (k = 0; k < InputArrayLength; k++) {
-        pState [0] = *pSrc++;
+  for (k = 0; k < InputArrayLength; k++) {
+    pState[0] = *pSrc++;
 
-        for (i = (FilterLength - 1); i > 0 ; i--) {
-            pState[i] = pState[i - 1];      // Shift state array data
-        }
+    for (i = (FilterLength - 1); i > 0; i--) {
+      pState[i] = pState[i - 1];                                    // Shift state array data
     }
+  }
 
-}       // End of SDA_FirWithStoreAddSamples()
+}                                                                   // End of SDA_FirWithStoreAddSamples()
 
 
 
 /**/
+
 /********************************************************
 * Function: SIF_FirExtendedArray
 *
@@ -1017,35 +1038,36 @@ _nassert((int) pState % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_FirExtendedArray (SLData_t * SIGLIB_PTR_DECL pState,
-    const SLData_t * SIGLIB_PTR_DECL pFilterTaps,
-    SLData_t * SIGLIB_PTR_DECL pFilterProcCoeffs,
-    SLArrayIndex_t *pFilterIndex,
-    const SLArrayIndex_t FilterLength)
-
+void SIGLIB_FUNC_DECL SIF_FirExtendedArray (
+  SLData_t * SIGLIB_PTR_DECL pState,
+  const SLData_t * SIGLIB_PTR_DECL pFilterTaps,
+  SLData_t * SIGLIB_PTR_DECL pFilterProcCoeffs,
+  SLArrayIndex_t * pFilterIndex,
+  const SLArrayIndex_t FilterLength)
 {
-    SLArrayIndex_t  i;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pState % 8 == 0);              // Align arrays on 64 bit SLData_t word boundary for LDDW
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pState % 8 == 0);                                 // Align arrays on 64 bit SLData_t word boundary for LDDW
 #endif
 #endif
 
-        // Initialise the filter state array to 0 and copy the coefficient array
-    for (i = 0; i < FilterLength; i++) {
-        pFilterProcCoeffs[i] = pFilterTaps[i];
-        pFilterProcCoeffs[i+FilterLength] = pFilterTaps[i];
-        pState[i] = SIGLIB_ZERO;
-        pState[i+FilterLength] = SIGLIB_ZERO;
-    }
+// Initialise the filter state array to 0 and copy the coefficient array
+  for (i = 0; i < FilterLength; i++) {
+    pFilterProcCoeffs[i] = pFilterTaps[i];
+    pFilterProcCoeffs[i + FilterLength] = pFilterTaps[i];
+    pState[i] = SIGLIB_ZERO;
+    pState[i + FilterLength] = SIGLIB_ZERO;
+  }
 
-    *pFilterIndex = SIGLIB_AI_ZERO;             // Initilaise filter index
+  *pFilterIndex = SIGLIB_AI_ZERO;                                   // Initilaise filter index
 
-}       // End of SIF_FirExtendedArray()
+}                                                                   // End of SIF_FirExtendedArray()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_FirExtendedArray
 *
@@ -1063,48 +1085,49 @@ _nassert((int) pState % 8 == 0);              // Align arrays on 64 bit SLData_t
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_FirExtendedArray (const SLData_t Src,
-    SLData_t *pState,
-    const SLData_t *pCoeffs,
-    SLArrayIndex_t *pFilterIndex,
-    const SLArrayIndex_t FilterLength)
-
+SLData_t SIGLIB_FUNC_DECL SDS_FirExtendedArray (
+  const SLData_t Src,
+  SLData_t * pState,
+  const SLData_t * pCoeffs,
+  SLArrayIndex_t * pFilterIndex,
+  const SLArrayIndex_t FilterLength)
 {
-    SLData_t           sum;
-    SLArrayIndex_t     i, j;
-    SLArrayIndex_t     localFilterIndex = *pFilterIndex;
+  SLData_t        sum;
+  SLArrayIndex_t  i, j;
+  SLArrayIndex_t  localFilterIndex = *pFilterIndex;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                                 // Defined by TI compiler
-_nassert((int) pState % 8 == 0);                      // Align arrays on 64 bit SLData_t word boundary for LDDW
-_nassert((int) pCoeffs % 8 == 0);
+#ifdef _TMS320C6700                                                 // Defined by TI compiler
+  _nassert ((int) pState % 8 == 0);                                 // Align arrays on 64 bit SLData_t word boundary for LDDW
+  _nassert ((int) pCoeffs % 8 == 0);
 #endif
 #endif
 
-    j = FilterLength - localFilterIndex - 1;        // Initialize local state array offset
+  j = FilterLength - localFilterIndex - 1;                          // Initialize local state array offset
 
-    pState[j] = Src;                                // Save input data in state array
-    pState[j + FilterLength] = Src;
+  pState[j] = Src;                                                  // Save input data in state array
+  pState[j + FilterLength] = Src;
 
-    sum = SIGLIB_ZERO;                              // Pre-initialise sum
+  sum = SIGLIB_ZERO;                                                // Pre-initialise sum
 
-    for (i = 0; i < FilterLength; i++, j++) {
-        sum += pCoeffs[i] * pState[j];              // Convolve data
-    }
+  for (i = 0; i < FilterLength; i++, j++) {
+    sum += pCoeffs[i] * pState[j];                                  // Convolve data
+  }
 
-    localFilterIndex++;                             // Update and manage local filter index
-    if (localFilterIndex == FilterLength) {
-        localFilterIndex = 0;
-    }
+  localFilterIndex++;                                               // Update and manage local filter index
+  if (localFilterIndex == FilterLength) {
+    localFilterIndex = 0;
+  }
 
-    *pFilterIndex = localFilterIndex;               // Store index for next iteration
+  *pFilterIndex = localFilterIndex;                                 // Store index for next iteration
 
-    return sum;
+  return sum;
 
-}       // End of SDS_FirExtendedArray()
+}                                                                   // End of SDS_FirExtendedArray()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_FirExtendedArray
 *
@@ -1124,54 +1147,55 @@ _nassert((int) pCoeffs % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_FirExtendedArray (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t pDst[],
-    SLData_t pState[],
-    const SLData_t pCoeffs[],
-    SLArrayIndex_t *pFilterIndex,
-    const SLArrayIndex_t FilterLength,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_FirExtendedArray (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t pDst[],
+  SLData_t pState[],
+  const SLData_t pCoeffs[],
+  SLArrayIndex_t * pFilterIndex,
+  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t SampleLength)
 {
-    SLData_t           sum;
-    SLArrayIndex_t     i, j, k;
-    SLArrayIndex_t     localFilterIndex = *pFilterIndex;
+  SLData_t        sum;
+  SLArrayIndex_t  i, j, k;
+  SLArrayIndex_t  localFilterIndex = *pFilterIndex;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);                // Align arrays on 64 bit SLData_t word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
-_nassert((int) pState % 8 == 0);
-_nassert((int) pCoeffs % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit SLData_t word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
+  _nassert ((int) pState % 8 == 0);
+  _nassert ((int) pCoeffs % 8 == 0);
 #endif
 #endif
 
-    for (k = 0; k < SampleLength; k++) {
-        j = FilterLength - localFilterIndex - 1;        // Initialize local state array offset
+  for (k = 0; k < SampleLength; k++) {
+    j = FilterLength - localFilterIndex - 1;                        // Initialize local state array offset
 
-        pState[j] = *pSrc;                              // Save input data in state array
-        pState[j + FilterLength] = *pSrc++;
+    pState[j] = *pSrc;                                              // Save input data in state array
+    pState[j + FilterLength] = *pSrc++;
 
-        sum = SIGLIB_ZERO;                              // Pre-initialise sum
+    sum = SIGLIB_ZERO;                                              // Pre-initialise sum
 
-        for (i = 0; i < FilterLength; i++, j++) {
-            sum += pCoeffs[i] * pState[j];              // Convolve data
-        }
-
-        localFilterIndex++;                             // Update and manage local filter index
-        if (localFilterIndex == FilterLength) {
-            localFilterIndex = 0;
-        }
-
-        *pDst++ = sum;
+    for (i = 0; i < FilterLength; i++, j++) {
+      sum += pCoeffs[i] * pState[j];                                // Convolve data
     }
 
-    *pFilterIndex = localFilterIndex;                   // Store index for next iteration
+    localFilterIndex++;                                             // Update and manage local filter index
+    if (localFilterIndex == FilterLength) {
+      localFilterIndex = 0;
+    }
 
-}       // End of SDA_FirExtendedArray()
+    *pDst++ = sum;
+  }
+
+  *pFilterIndex = localFilterIndex;                                 // Store index for next iteration
+
+}                                                                   // End of SDA_FirExtendedArray()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_FirComplexExtendedArray
 *
@@ -1192,37 +1216,38 @@ _nassert((int) pCoeffs % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_FirComplexExtendedArray (SLData_t * SIGLIB_PTR_DECL pRealState,
-    SLData_t * SIGLIB_PTR_DECL pImagState,
-    const SLData_t * SIGLIB_PTR_DECL pRealFilterTaps,
-    const SLData_t * SIGLIB_PTR_DECL pImagFilterTaps,
-    SLData_t * SIGLIB_PTR_DECL pRealFilterProcCoeffs,
-    SLData_t * SIGLIB_PTR_DECL pImagFilterProcCoeffs,
-    SLArrayIndex_t *pFilterIndex,
-    const SLArrayIndex_t FilterLength)
-
+void SIGLIB_FUNC_DECL SIF_FirComplexExtendedArray (
+  SLData_t * SIGLIB_PTR_DECL pRealState,
+  SLData_t * SIGLIB_PTR_DECL pImagState,
+  const SLData_t * SIGLIB_PTR_DECL pRealFilterTaps,
+  const SLData_t * SIGLIB_PTR_DECL pImagFilterTaps,
+  SLData_t * SIGLIB_PTR_DECL pRealFilterProcCoeffs,
+  SLData_t * SIGLIB_PTR_DECL pImagFilterProcCoeffs,
+  SLArrayIndex_t * pFilterIndex,
+  const SLArrayIndex_t FilterLength)
 {
-    SLArrayIndex_t  i;
+  SLArrayIndex_t  i;
 
-        // Initialise the filter state array to 0
-    for (i = 0; i < FilterLength; i++) {
-        pRealFilterProcCoeffs[i] = pRealFilterTaps[i];
-        pRealFilterProcCoeffs[i+FilterLength] = pRealFilterTaps[i];
-        pImagFilterProcCoeffs[i] = pImagFilterTaps[i];
-        pImagFilterProcCoeffs[i+FilterLength] = pImagFilterTaps[i];
+// Initialise the filter state array to 0
+  for (i = 0; i < FilterLength; i++) {
+    pRealFilterProcCoeffs[i] = pRealFilterTaps[i];
+    pRealFilterProcCoeffs[i + FilterLength] = pRealFilterTaps[i];
+    pImagFilterProcCoeffs[i] = pImagFilterTaps[i];
+    pImagFilterProcCoeffs[i + FilterLength] = pImagFilterTaps[i];
 
-        pRealState[i] = SIGLIB_ZERO;
-        pRealState[i+FilterLength] = SIGLIB_ZERO;
-        pImagState[i] = SIGLIB_ZERO;
-        pImagState[i+FilterLength] = SIGLIB_ZERO;
-    }
+    pRealState[i] = SIGLIB_ZERO;
+    pRealState[i + FilterLength] = SIGLIB_ZERO;
+    pImagState[i] = SIGLIB_ZERO;
+    pImagState[i + FilterLength] = SIGLIB_ZERO;
+  }
 
-    *pFilterIndex = SIGLIB_AI_ZERO;             // Initilaise filter index
+  *pFilterIndex = SIGLIB_AI_ZERO;                                   // Initilaise filter index
 
-}       // End of SIF_FirComplexExtendedArray()
+}                                                                   // End of SIF_FirComplexExtendedArray()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_FirComplexExtendedArray
 *
@@ -1246,62 +1271,63 @@ void SIGLIB_FUNC_DECL SIF_FirComplexExtendedArray (SLData_t * SIGLIB_PTR_DECL pR
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDS_FirComplexExtendedArray (const SLData_t SrcReal,
-    const SLData_t SrcImag,
-    SLData_t * SIGLIB_PTR_DECL pRealDst,
-    SLData_t * SIGLIB_PTR_DECL pImagDst,
-    SLData_t * SIGLIB_PTR_DECL pRealState,
-    SLData_t * SIGLIB_PTR_DECL pImagState,
-    const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
-    const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
-    SLArrayIndex_t *pFilterIndex,
-    const SLArrayIndex_t FilterLength)
-
+void SIGLIB_FUNC_DECL SDS_FirComplexExtendedArray (
+  const SLData_t SrcReal,
+  const SLData_t SrcImag,
+  SLData_t * SIGLIB_PTR_DECL pRealDst,
+  SLData_t * SIGLIB_PTR_DECL pImagDst,
+  SLData_t * SIGLIB_PTR_DECL pRealState,
+  SLData_t * SIGLIB_PTR_DECL pImagState,
+  const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
+  const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
+  SLArrayIndex_t * pFilterIndex,
+  const SLArrayIndex_t FilterLength)
 {
-    SLData_t           RealSum, ImagSum;
-    SLArrayIndex_t     i, j;
-    SLArrayIndex_t     localFilterIndex = *pFilterIndex;
+  SLData_t        RealSum, ImagSum;
+  SLArrayIndex_t  i, j;
+  SLArrayIndex_t  localFilterIndex = *pFilterIndex;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                                 // Defined by TI compiler
-_nassert((int) pRealDst % 8 == 0);                  // Align arrays on 64 bit SLData_t word boundary for LDDW
-_nassert((int) pImagDst % 8 == 0);
-_nassert((int) pRealState % 8 == 0);
-_nassert((int) pImagState % 8 == 0);
-_nassert((int) pRealCoeffs % 8 == 0);
-_nassert((int) pImagCoeffs % 8 == 0);
+#ifdef _TMS320C6700                                                 // Defined by TI compiler
+  _nassert ((int) pRealDst % 8 == 0);                               // Align arrays on 64 bit SLData_t word boundary for LDDW
+  _nassert ((int) pImagDst % 8 == 0);
+  _nassert ((int) pRealState % 8 == 0);
+  _nassert ((int) pImagState % 8 == 0);
+  _nassert ((int) pRealCoeffs % 8 == 0);
+  _nassert ((int) pImagCoeffs % 8 == 0);
 #endif
 #endif
 
-    j = FilterLength - localFilterIndex - 1;        // Initialize local state array offset
+  j = FilterLength - localFilterIndex - 1;                          // Initialize local state array offset
 
-    pRealState [j] = SrcReal;
-    pImagState [j] = SrcImag;
-    pRealState[j + FilterLength] = SrcReal;
-    pImagState[j + FilterLength] = SrcImag;
+  pRealState[j] = SrcReal;
+  pImagState[j] = SrcImag;
+  pRealState[j + FilterLength] = SrcReal;
+  pImagState[j + FilterLength] = SrcImag;
 
-    RealSum = SIGLIB_ZERO;                          // Pre-initialise sums
-    ImagSum = SIGLIB_ZERO;
+  RealSum = SIGLIB_ZERO;                                            // Pre-initialise sums
+  ImagSum = SIGLIB_ZERO;
 
-    for (i = 0; i < FilterLength; i++, j++) {
-                                                    // Convolve data
-        RealSum += (pRealCoeffs[i] * pRealState[j]) - (pImagCoeffs[i] * pImagState[j]);
-        ImagSum += (pRealCoeffs[i] * pImagState[j]) + (pImagCoeffs[i] * pRealState[j]);
-    }
-    *pRealDst = RealSum;
-    *pImagDst = ImagSum;
+  for (i = 0; i < FilterLength; i++, j++) {
+// Convolve data
+    RealSum += (pRealCoeffs[i] * pRealState[j]) - (pImagCoeffs[i] * pImagState[j]);
+    ImagSum += (pRealCoeffs[i] * pImagState[j]) + (pImagCoeffs[i] * pRealState[j]);
+  }
+  *pRealDst = RealSum;
+  *pImagDst = ImagSum;
 
-    localFilterIndex++;                             // Update and manage local filter index
-    if (localFilterIndex == FilterLength) {
-        localFilterIndex = 0;
-    }
+  localFilterIndex++;                                               // Update and manage local filter index
+  if (localFilterIndex == FilterLength) {
+    localFilterIndex = 0;
+  }
 
-    *pFilterIndex = localFilterIndex;               // Store index for next iteration
+  *pFilterIndex = localFilterIndex;                                 // Store index for next iteration
 
-}       // End of SDS_FirComplexExtendedArray()
+}                                                                   // End of SDS_FirComplexExtendedArray()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_FirComplexExtendedArray
 *
@@ -1325,69 +1351,70 @@ _nassert((int) pImagCoeffs % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_FirComplexExtendedArray (const SLData_t * SIGLIB_PTR_DECL pRealSrc,
-    const SLData_t * SIGLIB_PTR_DECL pImagSrc,
-    SLData_t * SIGLIB_PTR_DECL pRealDst,
-    SLData_t * SIGLIB_PTR_DECL pImagDst,
-    SLData_t * SIGLIB_PTR_DECL pRealState,
-    SLData_t * SIGLIB_PTR_DECL pImagState,
-    const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
-    const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
-    SLArrayIndex_t *pFilterIndex,
-    const SLArrayIndex_t FilterLength,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_FirComplexExtendedArray (
+  const SLData_t * SIGLIB_PTR_DECL pRealSrc,
+  const SLData_t * SIGLIB_PTR_DECL pImagSrc,
+  SLData_t * SIGLIB_PTR_DECL pRealDst,
+  SLData_t * SIGLIB_PTR_DECL pImagDst,
+  SLData_t * SIGLIB_PTR_DECL pRealState,
+  SLData_t * SIGLIB_PTR_DECL pImagState,
+  const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
+  const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
+  SLArrayIndex_t * pFilterIndex,
+  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t SampleLength)
 {
-    SLData_t           RealSum, ImagSum;
-    SLArrayIndex_t     i, j, k;
-    SLArrayIndex_t     localFilterIndex = *pFilterIndex;
+  SLData_t        RealSum, ImagSum;
+  SLArrayIndex_t  i, j, k;
+  SLArrayIndex_t  localFilterIndex = *pFilterIndex;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pRealSrc % 8 == 0);          // Align arrays on 64 bit SLData_t word boundary for LDDW
-_nassert((int) pImagSrc % 8 == 0);
-_nassert((int) pRealDst % 8 == 0);
-_nassert((int) pImagDst % 8 == 0);
-_nassert((int) pRealState % 8 == 0);
-_nassert((int) pImagState % 8 == 0);
-_nassert((int) pRealCoeffs % 8 == 0);
-_nassert((int) pImagCoeffs % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pRealSrc % 8 == 0);                               // Align arrays on 64 bit SLData_t word boundary for LDDW
+  _nassert ((int) pImagSrc % 8 == 0);
+  _nassert ((int) pRealDst % 8 == 0);
+  _nassert ((int) pImagDst % 8 == 0);
+  _nassert ((int) pRealState % 8 == 0);
+  _nassert ((int) pImagState % 8 == 0);
+  _nassert ((int) pRealCoeffs % 8 == 0);
+  _nassert ((int) pImagCoeffs % 8 == 0);
 #endif
 #endif
 
-    for (k = 0; k < SampleLength; k++) {
-        j = FilterLength - localFilterIndex - 1;        // Initialize local state array offset
+  for (k = 0; k < SampleLength; k++) {
+    j = FilterLength - localFilterIndex - 1;                        // Initialize local state array offset
 
-        pRealState[j] = *pRealSrc;                      // Save input data in state array
-        pRealState[j + FilterLength] = *pRealSrc++;
+    pRealState[j] = *pRealSrc;                                      // Save input data in state array
+    pRealState[j + FilterLength] = *pRealSrc++;
 
-        pImagState[j] = *pImagSrc;                      // Save input data in state array
-        pImagState[j + FilterLength] = *pImagSrc++;
+    pImagState[j] = *pImagSrc;                                      // Save input data in state array
+    pImagState[j + FilterLength] = *pImagSrc++;
 
-        RealSum = SIGLIB_ZERO;                          // Pre-initialise sums
-        ImagSum = SIGLIB_ZERO;
+    RealSum = SIGLIB_ZERO;                                          // Pre-initialise sums
+    ImagSum = SIGLIB_ZERO;
 
-        for (i = 0; i < FilterLength; i++, j++) {
-            RealSum += (pRealCoeffs[i] * pRealState[j]) - (pImagCoeffs[i] * pImagState[j]);
-            ImagSum += (pRealCoeffs[i] * pImagState[j]) + (pImagCoeffs[i] * pRealState[j]);
-        }
-
-        localFilterIndex++;                             // Update and manage local filter index
-        if (localFilterIndex == FilterLength) {
-            localFilterIndex = 0;
-        }
-
-        *pRealDst++ = RealSum;
-        *pImagDst++ = ImagSum;
+    for (i = 0; i < FilterLength; i++, j++) {
+      RealSum += (pRealCoeffs[i] * pRealState[j]) - (pImagCoeffs[i] * pImagState[j]);
+      ImagSum += (pRealCoeffs[i] * pImagState[j]) + (pImagCoeffs[i] * pRealState[j]);
     }
-        *pFilterIndex = localFilterIndex;               // Store index for next iteration
 
-}       // End of SDA_FirComplexExtendedArray()
+    localFilterIndex++;                                             // Update and manage local filter index
+    if (localFilterIndex == FilterLength) {
+      localFilterIndex = 0;
+    }
+
+    *pRealDst++ = RealSum;
+    *pImagDst++ = ImagSum;
+  }
+  *pFilterIndex = localFilterIndex;                                 // Store index for next iteration
+
+}                                                                   // End of SDA_FirComplexExtendedArray()
 
 
 
 
 /**/
+
 /********************************************************
 * Function: SDS_FirExtendedArrayAddSample
 *
@@ -1404,37 +1431,38 @@ _nassert((int) pImagCoeffs % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDS_FirExtendedArrayAddSample (const SLData_t Src,
-    SLData_t *pState,
-    SLArrayIndex_t *pFilterIndex,
-    const SLArrayIndex_t FilterLength)
-
+void SIGLIB_FUNC_DECL SDS_FirExtendedArrayAddSample (
+  const SLData_t Src,
+  SLData_t * pState,
+  SLArrayIndex_t * pFilterIndex,
+  const SLArrayIndex_t FilterLength)
 {
-    SLArrayIndex_t     j;
-    SLArrayIndex_t     localFilterIndex = *pFilterIndex;
+  SLArrayIndex_t  j;
+  SLArrayIndex_t  localFilterIndex = *pFilterIndex;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                                 // Defined by TI compiler
-_nassert((int) pState % 8 == 0);                    // Align arrays on 64 bit SLData_t word boundary for LDDW
+#ifdef _TMS320C6700                                                 // Defined by TI compiler
+  _nassert ((int) pState % 8 == 0);                                 // Align arrays on 64 bit SLData_t word boundary for LDDW
 #endif
 #endif
 
-    j = FilterLength - localFilterIndex - 1;        // Initialize local state array offset
+  j = FilterLength - localFilterIndex - 1;                          // Initialize local state array offset
 
-    pState[j] = Src;                                // Save input data in state array
-    pState[j + FilterLength] = Src;
+  pState[j] = Src;                                                  // Save input data in state array
+  pState[j + FilterLength] = Src;
 
-    localFilterIndex++;                             // Update and manage local filter index
-    if (localFilterIndex == FilterLength) {
-        localFilterIndex = 0;
-    }
+  localFilterIndex++;                                               // Update and manage local filter index
+  if (localFilterIndex == FilterLength) {
+    localFilterIndex = 0;
+  }
 
-    *pFilterIndex = localFilterIndex;               // Store index for next iteration
+  *pFilterIndex = localFilterIndex;                                 // Store index for next iteration
 
-}       // End of SDS_FirExtendedArrayAddSample()
+}                                                                   // End of SDS_FirExtendedArrayAddSample()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_FirExtendedArrayAddSamples
 *
@@ -1452,41 +1480,42 @@ _nassert((int) pState % 8 == 0);                    // Align arrays on 64 bit SL
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_FirExtendedArrayAddSamples (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t pState[],
-    SLArrayIndex_t *pFilterIndex,
-    const SLArrayIndex_t FilterLength,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_FirExtendedArrayAddSamples (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t pState[],
+  SLArrayIndex_t * pFilterIndex,
+  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t SampleLength)
 {
-    SLArrayIndex_t     j, k;
-    SLArrayIndex_t     localFilterIndex = *pFilterIndex;
+  SLArrayIndex_t  j, k;
+  SLArrayIndex_t  localFilterIndex = *pFilterIndex;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit SLData_t word boundary for LDDW
-_nassert((int) pState % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit SLData_t word boundary for LDDW
+  _nassert ((int) pState % 8 == 0);
 #endif
 #endif
 
-    for (k = 0; k < SampleLength; k++) {
-        j = FilterLength - localFilterIndex - 1;        // Initialize local state array offset
+  for (k = 0; k < SampleLength; k++) {
+    j = FilterLength - localFilterIndex - 1;                        // Initialize local state array offset
 
-        pState[j] = *pSrc;                              // Save input data in state array
-        pState[j + FilterLength] = *pSrc++;
+    pState[j] = *pSrc;                                              // Save input data in state array
+    pState[j + FilterLength] = *pSrc++;
 
-        localFilterIndex++;                             // Update and manage local filter index
-        if (localFilterIndex == FilterLength) {
-            localFilterIndex = 0;
-        }
+    localFilterIndex++;                                             // Update and manage local filter index
+    if (localFilterIndex == FilterLength) {
+      localFilterIndex = 0;
     }
+  }
 
-    *pFilterIndex = localFilterIndex;                   // Store index for next iteration
+  *pFilterIndex = localFilterIndex;                                 // Store index for next iteration
 
-}       // End of SDA_FirExtendedArrayAddSamples()
+}                                                                   // End of SDA_FirExtendedArrayAddSamples()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_FirLowPassFilter
 *
@@ -1506,68 +1535,67 @@ _nassert((int) pState % 8 == 0);
 *
 ********************************************************/
 
-SLError_t SIGLIB_FUNC_DECL SIF_FirLowPassFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    const SLData_t CutOffFrequency,
-    const enum SLWindow_t WindowType,
-    const SLArrayIndex_t FilterLength)
-
+SLError_t SIGLIB_FUNC_DECL SIF_FirLowPassFilter (
+  SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLData_t CutOffFrequency,
+  const enum SLWindow_t WindowType,
+  const SLArrayIndex_t FilterLength)
 {
-    SLArrayIndex_t  i;
-    SLData_t        *pWindow;
-    SLArrayIndex_t  HalfFilterLength;
-    SLError_t       ErrorCode = SIGLIB_NO_ERROR;
+  SLArrayIndex_t  i;
+  SLData_t       *pWindow;
+  SLArrayIndex_t  HalfFilterLength;
+  SLError_t       ErrorCode = SIGLIB_NO_ERROR;
 
-    pWindow = SUF_VectorArrayAllocate (FilterLength);               // Allocate temporary array
+  pWindow = SUF_VectorArrayAllocate (FilterLength);                 // Allocate temporary array
 
-    if (NULL == pWindow) {
-        return (SIGLIB_MEM_ALLOC_ERROR);
-    }
+  if (NULL == pWindow) {
+    return (SIGLIB_MEM_ALLOC_ERROR);
+  }
 
-    HalfFilterLength = (SLArrayIndex_t)((SLUFixData_t)FilterLength >> 1U);  // Calculate half the filter length
+  HalfFilterLength = (SLArrayIndex_t) ((SLUFixData_t) FilterLength >> 1U);  // Calculate half the filter length
 
 
 #if COMMENT
-    pCoeffs [HalfFilterLength] = SIGLIB_TWO * CutOffFrequency;      // Calculate the center coeff.
+  pCoeffs[HalfFilterLength] = SIGLIB_TWO * CutOffFrequency;         // Calculate the center coeff.
 
-    for (i = 1; i <= HalfFilterLength; i++) {                       // Calculate remaining coefficients
-                                                                    // Calculate upper half of coeffs
-        pCoeffs [HalfFilterLength + i] = (SDS_Sin (SIGLIB_TWO_PI * CutOffFrequency * ((SLData_t)i))) /
-                                        (SIGLIB_PI * ((SLData_t)i));
-        pCoeffs [HalfFilterLength - i] = pCoeffs [HalfFilterLength + i];    // Copy to lower half
-    }
+  for (i = 1; i <= HalfFilterLength; i++) {                         // Calculate remaining coefficients
+// Calculate upper half of coeffs
+    pCoeffs[HalfFilterLength + i] = (SDS_Sin (SIGLIB_TWO_PI * CutOffFrequency * ((SLData_t) i))) / (SIGLIB_PI * ((SLData_t) i));
+    pCoeffs[HalfFilterLength - i] = pCoeffs[HalfFilterLength + i];  // Copy to lower half
+  }
 #endif
 
 
-    for (i = 1; i <= HalfFilterLength; i++) {
-        pCoeffs [HalfFilterLength - i] = (SDS_Sin (SIGLIB_TWO_PI * CutOffFrequency * ((SLData_t)i))) /
-                                        (SIGLIB_PI * ((SLData_t)i));
-    }
+  for (i = 1; i <= HalfFilterLength; i++) {
+    pCoeffs[HalfFilterLength - i] = (SDS_Sin (SIGLIB_TWO_PI * CutOffFrequency * ((SLData_t) i))) / (SIGLIB_PI * ((SLData_t) i));
+  }
 
-    for (i = 0; i < HalfFilterLength; i++) {                    // Copy upper half of coeffs
-        pCoeffs [FilterLength - 1 - i] =  pCoeffs [i];
-    }
+  for (i = 0; i < HalfFilterLength; i++) {                          // Copy upper half of coeffs
+    pCoeffs[FilterLength - 1 - i] = pCoeffs[i];
+  }
 
-    if ((SLUFixData_t)FilterLength & 0x1U) {                    // Calculate the center coeff.
-        pCoeffs [HalfFilterLength] = SIGLIB_TWO * CutOffFrequency;
-    }
+  if ((SLUFixData_t) FilterLength & 0x1U) {                         // Calculate the center coeff.
+    pCoeffs[HalfFilterLength] = SIGLIB_TWO * CutOffFrequency;
+  }
 
-    ErrorCode = SIF_Window (pWindow, WindowType, SIGLIB_SIX, FilterLength); // Generate window table
-    if (ErrorCode != SIGLIB_NO_ERROR) {
-        return(ErrorCode);
-    }
+  ErrorCode = SIF_Window (pWindow, WindowType, SIGLIB_SIX, FilterLength); // Generate window table
+  if (ErrorCode != SIGLIB_NO_ERROR) {
+    return (ErrorCode);
+  }
 
-    for (i = 0; i < FilterLength; i++) {                        // Multiply coeffs by window
-        *(pCoeffs+i) *= *(pWindow+i);
-    }
+  for (i = 0; i < FilterLength; i++) {                              // Multiply coeffs by window
+    *(pCoeffs + i) *= *(pWindow + i);
+  }
 
-    SUF_MemoryFree (pWindow);                                   // Free temporary array
+  SUF_MemoryFree (pWindow);                                         // Free temporary array
 
-    return (SIGLIB_NO_ERROR);
+  return (SIGLIB_NO_ERROR);
 
-}       // End of SIF_FirLowPassFilter()
+}                                                                   // End of SIF_FirLowPassFilter()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_FirHighPassFilter
 *
@@ -1587,74 +1615,73 @@ SLError_t SIGLIB_FUNC_DECL SIF_FirLowPassFilter (SLData_t * SIGLIB_PTR_DECL pCoe
 *
 ********************************************************/
 
-SLError_t SIGLIB_FUNC_DECL SIF_FirHighPassFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    const SLData_t CutOffFrequency,
-    const enum SLWindow_t WindowType,
-    const SLArrayIndex_t FilterLength)
-
+SLError_t SIGLIB_FUNC_DECL SIF_FirHighPassFilter (
+  SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLData_t CutOffFrequency,
+  const enum SLWindow_t WindowType,
+  const SLArrayIndex_t FilterLength)
 {
-    SLArrayIndex_t  i;
-    SLData_t        *pWindow;
-    SLArrayIndex_t  HalfFilterLength;
-    SLError_t       ErrorCode = SIGLIB_NO_ERROR;
+  SLArrayIndex_t  i;
+  SLData_t       *pWindow;
+  SLArrayIndex_t  HalfFilterLength;
+  SLError_t       ErrorCode = SIGLIB_NO_ERROR;
 
-    pWindow = SUF_VectorArrayAllocate (FilterLength);           // Allocate temporary array
+  pWindow = SUF_VectorArrayAllocate (FilterLength);                 // Allocate temporary array
 
-    if (NULL == pWindow) {
-        return (SIGLIB_MEM_ALLOC_ERROR);
-    }
+  if (NULL == pWindow) {
+    return (SIGLIB_MEM_ALLOC_ERROR);
+  }
 
-    HalfFilterLength = (SLArrayIndex_t)((SLUFixData_t)FilterLength >> 1U);  // Calculate half the filter length
+  HalfFilterLength = (SLArrayIndex_t) ((SLUFixData_t) FilterLength >> 1U);  // Calculate half the filter length
 
 #if COMMENT
-    pCoeffs [HalfFilterLength] = SIGLIB_TWO * (((SLData_t)0.5) - CutOffFrequency);      // Calculate the center coeff.
+  pCoeffs[HalfFilterLength] = SIGLIB_TWO * (((SLData_t) 0.5) - CutOffFrequency);  // Calculate the center coeff.
 
-    for (i = 1; i <= HalfFilterLength; i++)                     // Calculate remaining coefficients
-    {
-                                                                // Calculate upper half of coeffs
-        pCoeffs [HalfFilterLength + i] = (SDS_Sin (SIGLIB_TWO_PI * (0.5 - CutOffFrequency) * ((SLData_t)i))) /
-                                        (SIGLIB_PI * ((SLData_t)i));
-        pCoeffs [HalfFilterLength - i] = pCoeffs [HalfFilterLength + i];    // Copy to lower half
-    }
+  for (i = 1; i <= HalfFilterLength; i++)                           // Calculate remaining coefficients
+  {
+// Calculate upper half of coeffs
+    pCoeffs[HalfFilterLength + i] = (SDS_Sin (SIGLIB_TWO_PI * (0.5 - CutOffFrequency) * ((SLData_t) i))) / (SIGLIB_PI * ((SLData_t) i));
+    pCoeffs[HalfFilterLength - i] = pCoeffs[HalfFilterLength + i];  // Copy to lower half
+  }
 #endif
 
-    for (i = 0; i < HalfFilterLength; i++) {                    // Calculate lower half of coeffs
-        pCoeffs [HalfFilterLength - i] = (SDS_Sin (SIGLIB_TWO_PI * (0.5 - CutOffFrequency) * ((SLData_t)i))) /
-                                        (SIGLIB_PI * ((SLData_t)i));
-    }
+  for (i = 0; i < HalfFilterLength; i++) {                          // Calculate lower half of coeffs
+    pCoeffs[HalfFilterLength - i] = (SDS_Sin (SIGLIB_TWO_PI * (0.5 - CutOffFrequency) * ((SLData_t) i))) / (SIGLIB_PI * ((SLData_t) i));
+  }
 
-    for (i = 0; i < HalfFilterLength; i++) {                    // Copy upper half of coeffs
-        pCoeffs [FilterLength - 1 - i] =  pCoeffs [i];
-    }
+  for (i = 0; i < HalfFilterLength; i++) {                          // Copy upper half of coeffs
+    pCoeffs[FilterLength - 1 - i] = pCoeffs[i];
+  }
 
-    if ((SLUFixData_t)FilterLength & 0x1U) {                    // Calculate the center coeff.
-        pCoeffs [HalfFilterLength] = SIGLIB_TWO * (((SLData_t)0.5) - CutOffFrequency);
-    }
-
+  if ((SLUFixData_t) FilterLength & 0x1U) {                         // Calculate the center coeff.
+    pCoeffs[HalfFilterLength] = SIGLIB_TWO * (((SLData_t) 0.5) - CutOffFrequency);
+  }
 
 
 
-    ErrorCode = SIF_Window (pWindow, WindowType, SIGLIB_SIX, FilterLength);     // Generate window table
-    if (ErrorCode != SIGLIB_NO_ERROR) {
-        return(ErrorCode);
-    }
 
-    for (i = 0; i < FilterLength; i++) {                        // Multiply coeffs by window
-        pCoeffs [i] *= pWindow [i];
-    }
+  ErrorCode = SIF_Window (pWindow, WindowType, SIGLIB_SIX, FilterLength); // Generate window table
+  if (ErrorCode != SIGLIB_NO_ERROR) {
+    return (ErrorCode);
+  }
 
-    for (i = 0; i < FilterLength; i+=2) {                       // Move centre freq. to Nyquist point
-        pCoeffs [i] *= SIGLIB_MINUS_ONE;
-    }
+  for (i = 0; i < FilterLength; i++) {                              // Multiply coeffs by window
+    pCoeffs[i] *= pWindow[i];
+  }
 
-    SUF_MemoryFree (pWindow);                                   // Free temporary array
+  for (i = 0; i < FilterLength; i += 2) {                           // Move centre freq. to Nyquist point
+    pCoeffs[i] *= SIGLIB_MINUS_ONE;
+  }
 
-    return (SIGLIB_NO_ERROR);
+  SUF_MemoryFree (pWindow);                                         // Free temporary array
 
-}       // End of SIF_FirHighPassFilter()
+  return (SIGLIB_NO_ERROR);
+
+}                                                                   // End of SIF_FirHighPassFilter()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_FirBandPassFilter
 *
@@ -1674,92 +1701,91 @@ SLError_t SIGLIB_FUNC_DECL SIF_FirHighPassFilter (SLData_t * SIGLIB_PTR_DECL pCo
 *
 ********************************************************/
 
-SLError_t SIGLIB_FUNC_DECL SIF_FirBandPassFilter (SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    const SLData_t CenterFrequency,
-    const SLData_t Bandwidth,
-    const enum SLWindow_t WindowType,
-    const SLArrayIndex_t FilterLength)
-
+SLError_t SIGLIB_FUNC_DECL SIF_FirBandPassFilter (
+  SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLData_t CenterFrequency,
+  const SLData_t Bandwidth,
+  const enum SLWindow_t WindowType,
+  const SLArrayIndex_t FilterLength)
 {
-    SLArrayIndex_t  i;
-    SLData_t        *pWindow;
-    SLArrayIndex_t  HalfFilterLength;
-    SLError_t       ErrorCode = SIGLIB_NO_ERROR;
+  SLArrayIndex_t  i;
+  SLData_t       *pWindow;
+  SLArrayIndex_t  HalfFilterLength;
+  SLError_t       ErrorCode = SIGLIB_NO_ERROR;
 
-    pWindow = SUF_VectorArrayAllocate (FilterLength);           // Allocate temporary array
+  pWindow = SUF_VectorArrayAllocate (FilterLength);                 // Allocate temporary array
 
-    if (NULL == pWindow) {                                      // Check memory allocated correctly
-        return (SIGLIB_MEM_ALLOC_ERROR);
-    }
+  if (NULL == pWindow) {                                            // Check memory allocated correctly
+    return (SIGLIB_MEM_ALLOC_ERROR);
+  }
 
-    HalfFilterLength = (SLArrayIndex_t)((SLUFixData_t)FilterLength >> 1U);  // Calculate half the filter length
+  HalfFilterLength = (SLArrayIndex_t) ((SLUFixData_t) FilterLength >> 1U);  // Calculate half the filter length
 
 #if COMMENT
-    pCoeffs [HalfFilterLength] = SIGLIB_TWO * (Bandwidth / SIGLIB_TWO);     // Calculate the center coeff.
+  pCoeffs[HalfFilterLength] = SIGLIB_TWO * (Bandwidth / SIGLIB_TWO);  // Calculate the center coeff.
 
-    for (i = 1; i <= HalfFilterLength; i++) {                   // Calculate remaining coefficients
-                                                                // Calculate upper half of coeffs
-        pCoeffs [HalfFilterLength + i] = (SDS_Sin (SIGLIB_TWO_PI * (Bandwidth / SIGLIB_TWO) * ((SLData_t)i))) /
-                                        (SIGLIB_PI * ((SLData_t)i));
-        pCoeffs [HalfFilterLength - i] = pCoeffs [HalfFilterLength + i];    // Copy to lower half
-    }
+  for (i = 1; i <= HalfFilterLength; i++) {                         // Calculate remaining coefficients
+// Calculate upper half of coeffs
+    pCoeffs[HalfFilterLength + i] = (SDS_Sin (SIGLIB_TWO_PI * (Bandwidth / SIGLIB_TWO) * ((SLData_t) i))) / (SIGLIB_PI * ((SLData_t) i));
+    pCoeffs[HalfFilterLength - i] = pCoeffs[HalfFilterLength + i];  // Copy to lower half
+  }
 #endif
 
-    for (i = 0; i < HalfFilterLength; i++) {                    // Calculate lower half of coeffs
-        pCoeffs [HalfFilterLength - i] = (SDS_Sin (SIGLIB_TWO_PI * (Bandwidth / SIGLIB_TWO) * ((SLData_t)i))) /
-                                        (SIGLIB_PI * ((SLData_t)i));
-    }
+  for (i = 0; i < HalfFilterLength; i++) {                          // Calculate lower half of coeffs
+    pCoeffs[HalfFilterLength - i] = (SDS_Sin (SIGLIB_TWO_PI * (Bandwidth / SIGLIB_TWO) * ((SLData_t) i))) / (SIGLIB_PI * ((SLData_t) i));
+  }
 
-    for (i = 0; i < HalfFilterLength; i++) {                    // Copy upper half of coeffs
-        pCoeffs [FilterLength - 1 - i] =  pCoeffs [i];
-    }
+  for (i = 0; i < HalfFilterLength; i++) {                          // Copy upper half of coeffs
+    pCoeffs[FilterLength - 1 - i] = pCoeffs[i];
+  }
 
-    if ((SLUFixData_t)FilterLength & 0x1U) {                    // Calculate the center coeff.
-        pCoeffs [HalfFilterLength] = SIGLIB_TWO * (Bandwidth / SIGLIB_TWO);
-    }
+  if ((SLUFixData_t) FilterLength & 0x1U) {                         // Calculate the center coeff.
+    pCoeffs[HalfFilterLength] = SIGLIB_TWO * (Bandwidth / SIGLIB_TWO);
+  }
 
 
 //  SUF_Debugfprintf ("Bandpass Sin coefficients :\n");
 //  SUF_DebugPrintArray (pCoeffs, FilterLength);
 
 #if COMMENT
-    for (i = 1; i <= HalfFilterLength; i++) {                   // Shift center frequency
-        pCoeffs [HalfFilterLength + i] *= (SDS_Cos (SIGLIB_TWO_PI * CenterFrequency * ((SLData_t)i)));
-        pCoeffs [HalfFilterLength - i] *= (SDS_Cos (SIGLIB_TWO_PI * CenterFrequency * ((SLData_t)i)));
-    }
+  for (i = 1; i <= HalfFilterLength; i++) {                         // Shift center frequency
+    pCoeffs[HalfFilterLength + i] *= (SDS_Cos (SIGLIB_TWO_PI * CenterFrequency * ((SLData_t) i)));
+    pCoeffs[HalfFilterLength - i] *= (SDS_Cos (SIGLIB_TWO_PI * CenterFrequency * ((SLData_t) i)));
+  }
 #endif
 
-                                                                // Shift center frequency
-    if ((SLUFixData_t)FilterLength & 0x1U) {                    // Odd number of coefficients
-        for (i = 1; i < HalfFilterLength; i++) {
-            pCoeffs [HalfFilterLength + 1 + i] *= (SDS_Cos (SIGLIB_TWO_PI * CenterFrequency * ((SLData_t)i)));
-            pCoeffs [HalfFilterLength + 1 - i] *= (SDS_Cos (SIGLIB_TWO_PI * CenterFrequency * ((SLData_t)i)));
-        }
+// Shift center frequency
+  if ((SLUFixData_t) FilterLength & 0x1U) {                         // Odd number of coefficients
+    for (i = 1; i < HalfFilterLength; i++) {
+      pCoeffs[HalfFilterLength + 1 + i] *= (SDS_Cos (SIGLIB_TWO_PI * CenterFrequency * ((SLData_t) i)));
+      pCoeffs[HalfFilterLength + 1 - i] *= (SDS_Cos (SIGLIB_TWO_PI * CenterFrequency * ((SLData_t) i)));
     }
-    else {                                                      // Even number of coefficients
-        for (i = 0; i < HalfFilterLength; i++) {
-            pCoeffs [HalfFilterLength + i] *= (SDS_Cos (SIGLIB_TWO_PI * CenterFrequency * (((SLData_t)i) + 0.5)));
-            pCoeffs [HalfFilterLength - i] *= (SDS_Cos (SIGLIB_TWO_PI * CenterFrequency * (((SLData_t)i) + 0.5)));
-        }
+  }
+  else {                                                            // Even number of coefficients
+    for (i = 0; i < HalfFilterLength; i++) {
+      pCoeffs[HalfFilterLength + i] *= (SDS_Cos (SIGLIB_TWO_PI * CenterFrequency * (((SLData_t) i) + 0.5)));
+      pCoeffs[HalfFilterLength - i] *= (SDS_Cos (SIGLIB_TWO_PI * CenterFrequency * (((SLData_t) i) + 0.5)));
     }
+  }
 
-    ErrorCode = SIF_Window (pWindow, WindowType, SIGLIB_SIX, FilterLength); // Generate window table
-    if (ErrorCode != SIGLIB_NO_ERROR) {
-        return(ErrorCode);
-    }
+  ErrorCode = SIF_Window (pWindow, WindowType, SIGLIB_SIX, FilterLength); // Generate window table
+  if (ErrorCode != SIGLIB_NO_ERROR) {
+    return (ErrorCode);
+  }
 
-    for (i = 0; i < FilterLength; i++) {                        // Multiply coeffs by window
-        *(pCoeffs+i) *= *(pWindow+i);
-    }
+  for (i = 0; i < FilterLength; i++) {                              // Multiply coeffs by window
+    *(pCoeffs + i) *= *(pWindow + i);
+  }
 
-    SUF_MemoryFree (pWindow);                                   // Free temporary array
+  SUF_MemoryFree (pWindow);                                         // Free temporary array
 
-    return (SIGLIB_NO_ERROR);
+  return (SIGLIB_NO_ERROR);
 
-}       // End of SIF_FirBandPassFilter()
+}                                                                   // End of SIF_FirBandPassFilter()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_FirLowPassFilterWindow
 *
@@ -1779,34 +1805,34 @@ SLError_t SIGLIB_FUNC_DECL SIF_FirBandPassFilter (SLData_t * SIGLIB_PTR_DECL pCo
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_FirLowPassFilterWindow (SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    const SLData_t CutOffFrequency,
-    const SLData_t * SIGLIB_PTR_DECL pWindow,
-    const SLArrayIndex_t FilterLength)
-
+void SIGLIB_FUNC_DECL SIF_FirLowPassFilterWindow (
+  SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLData_t CutOffFrequency,
+  const SLData_t * SIGLIB_PTR_DECL pWindow,
+  const SLArrayIndex_t FilterLength)
 {
-    SLArrayIndex_t  i;
-    SLArrayIndex_t  HalfFilterLength;
+  SLArrayIndex_t  i;
+  SLArrayIndex_t  HalfFilterLength;
 
-    HalfFilterLength = (SLArrayIndex_t)((SLUFixData_t)FilterLength >> 1U);  // Calculate half the filter length
+  HalfFilterLength = (SLArrayIndex_t) ((SLUFixData_t) FilterLength >> 1U);  // Calculate half the filter length
 
-    pCoeffs [HalfFilterLength] = SIGLIB_TWO * CutOffFrequency;      // Calculate the center coeff.
+  pCoeffs[HalfFilterLength] = SIGLIB_TWO * CutOffFrequency;         // Calculate the center coeff.
 
-    for (i = 1; i <= HalfFilterLength; i++) {                       // Calculate remaining coefficients
-                                                                    // Calculate upper half of coeffs
-        pCoeffs [HalfFilterLength + i] = (SDS_Sin (SIGLIB_TWO_PI * CutOffFrequency * ((SLData_t)i))) /
-                                        (SIGLIB_PI * ((SLData_t)i));
-        pCoeffs [HalfFilterLength - i] = pCoeffs [HalfFilterLength + i];    // Copy to lower half
-    }
+  for (i = 1; i <= HalfFilterLength; i++) {                         // Calculate remaining coefficients
+// Calculate upper half of coeffs
+    pCoeffs[HalfFilterLength + i] = (SDS_Sin (SIGLIB_TWO_PI * CutOffFrequency * ((SLData_t) i))) / (SIGLIB_PI * ((SLData_t) i));
+    pCoeffs[HalfFilterLength - i] = pCoeffs[HalfFilterLength + i];  // Copy to lower half
+  }
 
-    for (i = 0; i < FilterLength; i++) {                            // Multiply coeffs by window
-        *(pCoeffs+i) *= *(pWindow+i);
-    }
+  for (i = 0; i < FilterLength; i++) {                              // Multiply coeffs by window
+    *(pCoeffs + i) *= *(pWindow + i);
+  }
 
-}       // End of SIF_FirLowPassFilterWindow()
+}                                                                   // End of SIF_FirLowPassFilterWindow()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_FirHighPassFilterWindow
 *
@@ -1826,38 +1852,38 @@ void SIGLIB_FUNC_DECL SIF_FirLowPassFilterWindow (SLData_t * SIGLIB_PTR_DECL pCo
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_FirHighPassFilterWindow (SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    const SLData_t CutOffFrequency,
-    const SLData_t * SIGLIB_PTR_DECL pWindow,
-    const SLArrayIndex_t FilterLength)
-
+void SIGLIB_FUNC_DECL SIF_FirHighPassFilterWindow (
+  SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLData_t CutOffFrequency,
+  const SLData_t * SIGLIB_PTR_DECL pWindow,
+  const SLArrayIndex_t FilterLength)
 {
-    SLArrayIndex_t  i;
-    SLArrayIndex_t  HalfFilterLength;
+  SLArrayIndex_t  i;
+  SLArrayIndex_t  HalfFilterLength;
 
-    HalfFilterLength = (SLArrayIndex_t)((SLUFixData_t)FilterLength >> 1U);  // Calculate half the filter length
+  HalfFilterLength = (SLArrayIndex_t) ((SLUFixData_t) FilterLength >> 1U);  // Calculate half the filter length
 
-    pCoeffs [HalfFilterLength] = SIGLIB_TWO * (((SLData_t)0.5) - CutOffFrequency);      // Calculate the center coeff.
+  pCoeffs[HalfFilterLength] = SIGLIB_TWO * (((SLData_t) 0.5) - CutOffFrequency);  // Calculate the center coeff.
 
-    for (i = 1; i <= HalfFilterLength; i++) {                       // Calculate remaining coefficients
-                                                                    // Calculate upper half of coeffs
-        pCoeffs [HalfFilterLength + i] = (SDS_Sin (SIGLIB_TWO_PI * (0.5 - CutOffFrequency) * ((SLData_t)i))) /
-                                        (SIGLIB_PI * ((SLData_t)i));
-        pCoeffs [HalfFilterLength - i] = pCoeffs [HalfFilterLength + i];    // Copy to lower half
-    }
+  for (i = 1; i <= HalfFilterLength; i++) {                         // Calculate remaining coefficients
+// Calculate upper half of coeffs
+    pCoeffs[HalfFilterLength + i] = (SDS_Sin (SIGLIB_TWO_PI * (0.5 - CutOffFrequency) * ((SLData_t) i))) / (SIGLIB_PI * ((SLData_t) i));
+    pCoeffs[HalfFilterLength - i] = pCoeffs[HalfFilterLength + i];  // Copy to lower half
+  }
 
-    for (i = 0; i < FilterLength; i++) {                            // Multiply coeffs by window
-        *(pCoeffs+i) *= *(pWindow+i);
-    }
+  for (i = 0; i < FilterLength; i++) {                              // Multiply coeffs by window
+    *(pCoeffs + i) *= *(pWindow + i);
+  }
 
-    for (i = 0; i < FilterLength; i+=2) {                           // Move centre freq. to Nyquist point
-        pCoeffs [i] *= SIGLIB_MINUS_ONE;
-    }
+  for (i = 0; i < FilterLength; i += 2) {                           // Move centre freq. to Nyquist point
+    pCoeffs[i] *= SIGLIB_MINUS_ONE;
+  }
 
-}       // End of SIF_FirHighPassFilterWindow()
+}                                                                   // End of SIF_FirHighPassFilterWindow()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_FirBandPassFilterWindow
 *
@@ -1877,43 +1903,43 @@ void SIGLIB_FUNC_DECL SIF_FirHighPassFilterWindow (SLData_t * SIGLIB_PTR_DECL pC
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_FirBandPassFilterWindow (SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    const SLData_t CenterFrequency,
-    const SLData_t Bandwidth,
-    const SLData_t * SIGLIB_PTR_DECL pWindow,
-    const SLArrayIndex_t FilterLength)
-
+void SIGLIB_FUNC_DECL SIF_FirBandPassFilterWindow (
+  SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLData_t CenterFrequency,
+  const SLData_t Bandwidth,
+  const SLData_t * SIGLIB_PTR_DECL pWindow,
+  const SLArrayIndex_t FilterLength)
 {
-    SLArrayIndex_t  i;
-    SLArrayIndex_t  HalfFilterLength;
+  SLArrayIndex_t  i;
+  SLArrayIndex_t  HalfFilterLength;
 
-    HalfFilterLength = (SLArrayIndex_t)((SLUFixData_t)FilterLength >> 1U);  // Calculate half the filter length
+  HalfFilterLength = (SLArrayIndex_t) ((SLUFixData_t) FilterLength >> 1U);  // Calculate half the filter length
 
-    pCoeffs [HalfFilterLength] = SIGLIB_TWO * (Bandwidth / SIGLIB_TWO);     // Calculate the center coeff.
+  pCoeffs[HalfFilterLength] = SIGLIB_TWO * (Bandwidth / SIGLIB_TWO);  // Calculate the center coeff.
 
-    for (i = 1; i <= HalfFilterLength; i++) {                   // Calculate remaining coefficients
-                                                                // Calculate upper half of coeffs
-        pCoeffs [HalfFilterLength + i] = (SDS_Sin (SIGLIB_TWO_PI * (Bandwidth / SIGLIB_TWO) * ((SLData_t)i))) /
-                                        (SIGLIB_PI * ((SLData_t)i));
-        pCoeffs [HalfFilterLength - i] = pCoeffs [HalfFilterLength + i];    // Copy to lower half
-    }
+  for (i = 1; i <= HalfFilterLength; i++) {                         // Calculate remaining coefficients
+// Calculate upper half of coeffs
+    pCoeffs[HalfFilterLength + i] = (SDS_Sin (SIGLIB_TWO_PI * (Bandwidth / SIGLIB_TWO) * ((SLData_t) i))) / (SIGLIB_PI * ((SLData_t) i));
+    pCoeffs[HalfFilterLength - i] = pCoeffs[HalfFilterLength + i];  // Copy to lower half
+  }
 
 //  SUF_Debugfprintf ("Bandpass Sin coefficients :\n");
 //  SUF_DebugPrintArray (pCoeffs, FilterLength);
 
-    for (i = 1; i <= HalfFilterLength; i++) {                   // Shift center frequency
-        pCoeffs [HalfFilterLength + i] *= (SDS_Cos (SIGLIB_TWO_PI * CenterFrequency * ((SLData_t)i)));
-        pCoeffs [HalfFilterLength - i] *= (SDS_Cos (SIGLIB_TWO_PI * CenterFrequency * ((SLData_t)i)));
-    }
+  for (i = 1; i <= HalfFilterLength; i++) {                         // Shift center frequency
+    pCoeffs[HalfFilterLength + i] *= (SDS_Cos (SIGLIB_TWO_PI * CenterFrequency * ((SLData_t) i)));
+    pCoeffs[HalfFilterLength - i] *= (SDS_Cos (SIGLIB_TWO_PI * CenterFrequency * ((SLData_t) i)));
+  }
 
-    for (i = 0; i < FilterLength; i++) {                        // Multiply coeffs by window
-        *(pCoeffs+i) *= *(pWindow+i);
-    }
+  for (i = 0; i < FilterLength; i++) {                              // Multiply coeffs by window
+    *(pCoeffs + i) *= *(pWindow + i);
+  }
 
-}       // End of SIF_FirBandPassFilterWindow()
+}                                                                   // End of SIF_FirBandPassFilterWindow()
 
 
 /**/
+
 /********************************************************
 * Function: SUF_FirKaiserApproximation
 *
@@ -1942,34 +1968,35 @@ void SIGLIB_FUNC_DECL SIF_FirBandPassFilterWindow (SLData_t * SIGLIB_PTR_DECL pC
 *
 ********************************************************/
 
-SLFixData_t SIGLIB_FUNC_DECL SUF_FirKaiserApproximation (SLData_t Fpass,
-        SLData_t Fstop,
-        SLData_t Apass,
-        SLData_t Astop,
-        SLData_t SampleRate)
-
+SLFixData_t SIGLIB_FUNC_DECL SUF_FirKaiserApproximation (
+  SLData_t Fpass,
+  SLData_t Fstop,
+  SLData_t Apass,
+  SLData_t Astop,
+  SLData_t SampleRate)
 {
-                        // APass and AStop are attenuations in dB
-    SLData_t Delta1 = SIGLIB_ONE - SDS_Pow (SIGLIB_TEN, -Apass / ((SLData_t)40.0));
-    SLData_t Delta2 = SDS_Pow (SIGLIB_TEN, -Astop * SDS_Sign(Astop) / ((SLData_t)20.0));    // SDS_Sign(Astop) accounts for +ve and -ve stop band attenuation
-    SLData_t DeltaF;
+// APass and AStop are attenuations in dB
+  SLData_t        Delta1 = SIGLIB_ONE - SDS_Pow (SIGLIB_TEN, -Apass / ((SLData_t) 40.0));
+  SLData_t        Delta2 = SDS_Pow (SIGLIB_TEN, -Astop * SDS_Sign (Astop) / ((SLData_t) 20.0)); // SDS_Sign(Astop) accounts for +ve and -ve stop band attenuation
+  SLData_t        DeltaF;
 
-                        // Transition bandwidth
-    if (Fstop >= Fpass) {
-        DeltaF = (Fstop - Fpass) / SampleRate;
-    }
-    else {
-        DeltaF = (Fpass - Fstop) / SampleRate;
-    }
+// Transition bandwidth
+  if (Fstop >= Fpass) {
+    DeltaF = (Fstop - Fpass) / SampleRate;
+  }
+  else {
+    DeltaF = (Fpass - Fstop) / SampleRate;
+  }
 
 
-    return ((SLFixData_t)((((((SLData_t)-10.0) * SDS_Log10 (Delta1 * Delta2)) - ((SLData_t)13.0)) /
-                (((SLData_t)14.6) * DeltaF)) + SIGLIB_ONE + SIGLIB_HALF));
+  return ((SLFixData_t) ((((((SLData_t) - 10.0) * SDS_Log10 (Delta1 * Delta2)) - ((SLData_t) 13.0)) /
+                          (((SLData_t) 14.6) * DeltaF)) + SIGLIB_ONE + SIGLIB_HALF));
 
-}       // End of SUF_FirKaiserApproximation()
+}                                                                   // End of SUF_FirKaiserApproximation()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_FirMatchedFilter
 *
@@ -1987,16 +2014,17 @@ SLFixData_t SIGLIB_FUNC_DECL SUF_FirKaiserApproximation (SLData_t Fpass,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_FirMatchedFilter (SLData_t * SIGLIB_PTR_DECL pMatchedFilterSignal,
-    SLData_t * SIGLIB_PTR_DECL pCoeffs,
-    const SLArrayIndex_t FilterLength)
-
+void SIGLIB_FUNC_DECL SIF_FirMatchedFilter (
+  SLData_t * SIGLIB_PTR_DECL pMatchedFilterSignal,
+  SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLArrayIndex_t FilterLength)
 {
-    SDA_Reverse (pMatchedFilterSignal, pCoeffs, FilterLength);  // Generate the matched filter impulse response
-}       // End of SIF_FirMatchedFilter()
+  SDA_Reverse (pMatchedFilterSignal, pCoeffs, FilterLength);        // Generate the matched filter impulse response
+}                                                                   // End of SIF_FirMatchedFilter()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_FirFilterInverseCoherentGain
 *
@@ -2013,33 +2041,34 @@ void SIGLIB_FUNC_DECL SIF_FirMatchedFilter (SLData_t * SIGLIB_PTR_DECL pMatchedF
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDA_FirFilterInverseCoherentGain (const SLData_t * SIGLIB_PTR_DECL pFilterCoeffs,
-    const SLArrayIndex_t FilterLength)
-
+SLData_t SIGLIB_FUNC_DECL SDA_FirFilterInverseCoherentGain (
+  const SLData_t * SIGLIB_PTR_DECL pFilterCoeffs,
+  const SLArrayIndex_t FilterLength)
 {
-    SLArrayIndex_t i;
-    SLData_t       Sum = SIGLIB_ZERO;
+  SLArrayIndex_t  i;
+  SLData_t        Sum = SIGLIB_ZERO;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pFilterCoeffs % 8 == 0);     // Align arrays on 64 bit double word boundary for LDDW
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pFilterCoeffs % 8 == 0);                          // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-    for (i = 0; i < FilterLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        Sum += pFilterCoeffs[i];
+  for (i = 0; i < FilterLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    Sum += pFilterCoeffs[i];
 #else
-        Sum += *pFilterCoeffs++;
+    Sum += *pFilterCoeffs++;
 #endif
-    }
+  }
 
-    return (SIGLIB_ONE / Sum);
+  return (SIGLIB_ONE / Sum);
 
-}       // End of SDA_FirFilterInverseCoherentGain()
+}                                                                   // End of SDA_FirFilterInverseCoherentGain()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_TappedDelayLine
 *
@@ -2056,18 +2085,19 @@ _nassert((int) pFilterCoeffs % 8 == 0);     // Align arrays on 64 bit double wor
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_TappedDelayLine (SLData_t * SIGLIB_PTR_DECL pDelay,
-    SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
-    const SLArrayIndex_t DelayArrayLength)
-
+void SIGLIB_FUNC_DECL SIF_TappedDelayLine (
+  SLData_t * SIGLIB_PTR_DECL pDelay,
+  SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
+  const SLArrayIndex_t DelayArrayLength)
 {
-    SDA_Clear (pDelay, DelayArrayLength);           // Clear data arrays
-    *pDelayIndex = (SLArrayIndex_t)0;               // Initialize delay index
+  SDA_Clear (pDelay, DelayArrayLength);                             // Clear data arrays
+  *pDelayIndex = (SLArrayIndex_t) 0;                                // Initialize delay index
 
-}       // End of SIF_TappedDelayLine()
+}                                                                   // End of SIF_TappedDelayLine()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_TappedDelayLine
 *
@@ -2088,47 +2118,48 @@ void SIGLIB_FUNC_DECL SIF_TappedDelayLine (SLData_t * SIGLIB_PTR_DECL pDelay,
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_TappedDelayLine (const SLData_t Src,
-    SLData_t * SIGLIB_PTR_DECL pDelay,
-    SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
-    const SLArrayIndex_t * SIGLIB_PTR_DECL pTapsLocns,
-    const SLData_t * SIGLIB_PTR_DECL pTapGains,
-    const SLArrayIndex_t NumberOfTaps,
-    const SLArrayIndex_t DelayArrayLength)
-
+SLData_t SIGLIB_FUNC_DECL SDS_TappedDelayLine (
+  const SLData_t Src,
+  SLData_t * SIGLIB_PTR_DECL pDelay,
+  SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
+  const SLArrayIndex_t * SIGLIB_PTR_DECL pTapsLocns,
+  const SLData_t * SIGLIB_PTR_DECL pTapGains,
+  const SLArrayIndex_t NumberOfTaps,
+  const SLArrayIndex_t DelayArrayLength)
 {
-    SLArrayIndex_t  i;
-    SLArrayIndex_t  LocalDelayIndex;
-    SLArrayIndex_t  StateArrayOffset;
-    SLData_t        SumOfProducts;
+  SLArrayIndex_t  i;
+  SLArrayIndex_t  LocalDelayIndex;
+  SLArrayIndex_t  StateArrayOffset;
+  SLData_t        SumOfProducts;
 
-    LocalDelayIndex = *pDelayIndex;
+  LocalDelayIndex = *pDelayIndex;
 
-    *(pDelay + LocalDelayIndex) = Src;              // Add data into array
+  *(pDelay + LocalDelayIndex) = Src;                                // Add data into array
 
-    SumOfProducts = SIGLIB_ZERO;
+  SumOfProducts = SIGLIB_ZERO;
 
-    for (i = 0; i < NumberOfTaps; i++) {
-        StateArrayOffset = LocalDelayIndex - pTapsLocns [i];
-        if (StateArrayOffset < ((SLArrayIndex_t)0)) {   // Ensure state array wrap around
-            StateArrayOffset += DelayArrayLength;
-        }
-        SumOfProducts += *(pDelay + StateArrayOffset) * pTapGains [i];  // Multiply data by tap
+  for (i = 0; i < NumberOfTaps; i++) {
+    StateArrayOffset = LocalDelayIndex - pTapsLocns[i];
+    if (StateArrayOffset < ((SLArrayIndex_t) 0)) {                  // Ensure state array wrap around
+      StateArrayOffset += DelayArrayLength;
     }
+    SumOfProducts += *(pDelay + StateArrayOffset) * pTapGains[i];   // Multiply data by tap
+  }
 
-    LocalDelayIndex++;                              // Increment pointer
-    if (LocalDelayIndex >= DelayArrayLength) {      // Ensure state array wrap around
-        LocalDelayIndex -= DelayArrayLength;
-    }
+  LocalDelayIndex++;                                                // Increment pointer
+  if (LocalDelayIndex >= DelayArrayLength) {                        // Ensure state array wrap around
+    LocalDelayIndex -= DelayArrayLength;
+  }
 
-    *pDelayIndex = LocalDelayIndex;
+  *pDelayIndex = LocalDelayIndex;
 
-    return (SumOfProducts);                         // Return sum of products
+  return (SumOfProducts);                                           // Return sum of products
 
-}       // End of SDS_TappedDelayLine()
+}                                                                   // End of SDS_TappedDelayLine()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_TappedDelayLine
 *
@@ -2151,58 +2182,59 @@ SLData_t SIGLIB_FUNC_DECL SDS_TappedDelayLine (const SLData_t Src,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_TappedDelayLine (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    SLData_t * SIGLIB_PTR_DECL pDelay,
-    SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
-    const SLArrayIndex_t * SIGLIB_PTR_DECL pTapsLocns,
-    const SLData_t * SIGLIB_PTR_DECL pTapGains,
-    const SLArrayIndex_t NumberOfTaps,
-    const SLArrayIndex_t DelayArrayLength,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_TappedDelayLine (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  SLData_t * SIGLIB_PTR_DECL pDelay,
+  SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
+  const SLArrayIndex_t * SIGLIB_PTR_DECL pTapsLocns,
+  const SLData_t * SIGLIB_PTR_DECL pTapGains,
+  const SLArrayIndex_t NumberOfTaps,
+  const SLArrayIndex_t DelayArrayLength,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t  i, j;
-    SLArrayIndex_t  LocalDelayIndex;
-    SLArrayIndex_t  StateArrayOffset;
-    SLData_t        SumOfProducts;
+  SLArrayIndex_t  i, j;
+  SLArrayIndex_t  LocalDelayIndex;
+  SLArrayIndex_t  StateArrayOffset;
+  SLData_t        SumOfProducts;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    LocalDelayIndex = *pDelayIndex;
+  LocalDelayIndex = *pDelayIndex;
 
-    for (j = 0; j < ArrayLength; j++) {
-        *(pDelay + LocalDelayIndex) = *pSrc++;      // Add data into array
+  for (j = 0; j < ArrayLength; j++) {
+    *(pDelay + LocalDelayIndex) = *pSrc++;                          // Add data into array
 
-        SumOfProducts = SIGLIB_ZERO;
+    SumOfProducts = SIGLIB_ZERO;
 
-        for (i = 0; i < NumberOfTaps; i++) {
-            StateArrayOffset = LocalDelayIndex - pTapsLocns [i];
-            if (StateArrayOffset < ((SLArrayIndex_t)0)) {   // Ensure state array wrap around
-                StateArrayOffset += DelayArrayLength;
-            }
-            SumOfProducts += *(pDelay + StateArrayOffset) * pTapGains [i];  // Multiply data by tap
-        }
-
-        LocalDelayIndex++;                              // Increment pointer
-        if (LocalDelayIndex >= DelayArrayLength) {      // Ensure state array wrap around
-            LocalDelayIndex -= DelayArrayLength;
-        }
-
-        *pDst++ = SumOfProducts;            // Write out result data
+    for (i = 0; i < NumberOfTaps; i++) {
+      StateArrayOffset = LocalDelayIndex - pTapsLocns[i];
+      if (StateArrayOffset < ((SLArrayIndex_t) 0)) {                // Ensure state array wrap around
+        StateArrayOffset += DelayArrayLength;
+      }
+      SumOfProducts += *(pDelay + StateArrayOffset) * pTapGains[i]; // Multiply data by tap
     }
 
-    *pDelayIndex = LocalDelayIndex;
+    LocalDelayIndex++;                                              // Increment pointer
+    if (LocalDelayIndex >= DelayArrayLength) {                      // Ensure state array wrap around
+      LocalDelayIndex -= DelayArrayLength;
+    }
 
-}       // End of SDA_TappedDelayLine()
+    *pDst++ = SumOfProducts;                                        // Write out result data
+  }
+
+  *pDelayIndex = LocalDelayIndex;
+
+}                                                                   // End of SDA_TappedDelayLine()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_TappedDelayLineComplex
 *
@@ -2220,20 +2252,21 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_TappedDelayLineComplex (SLData_t * SIGLIB_PTR_DECL pDelayReal,
-    SLData_t * SIGLIB_PTR_DECL pDelayImag,
-    SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
-    const SLArrayIndex_t DelayArrayLength)
-
+void SIGLIB_FUNC_DECL SIF_TappedDelayLineComplex (
+  SLData_t * SIGLIB_PTR_DECL pDelayReal,
+  SLData_t * SIGLIB_PTR_DECL pDelayImag,
+  SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
+  const SLArrayIndex_t DelayArrayLength)
 {
-    SDA_Clear (pDelayReal, DelayArrayLength);       // Clear data arrays
-    SDA_Clear (pDelayImag, DelayArrayLength);       // Clear data arrays
-    *pDelayIndex = (SLArrayIndex_t)0;               // Initialize delay index
+  SDA_Clear (pDelayReal, DelayArrayLength);                         // Clear data arrays
+  SDA_Clear (pDelayImag, DelayArrayLength);                         // Clear data arrays
+  *pDelayIndex = (SLArrayIndex_t) 0;                                // Initialize delay index
 
-}       // End of SIF_TappedDelayLineComplex()
+}                                                                   // End of SIF_TappedDelayLineComplex()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_TappedDelayLineComplex
 *
@@ -2259,62 +2292,63 @@ void SIGLIB_FUNC_DECL SIF_TappedDelayLineComplex (SLData_t * SIGLIB_PTR_DECL pDe
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDS_TappedDelayLineComplex (const SLData_t SrcReal,
-    const SLData_t SrcImag,
-    SLData_t * pDstReal,
-    SLData_t * pDstImag,
-    SLData_t * SIGLIB_PTR_DECL pDelayReal,
-    SLData_t * SIGLIB_PTR_DECL pDelayImag,
-    SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
-    const SLArrayIndex_t * SIGLIB_PTR_DECL pTapsLocns,
-    const SLData_t * SIGLIB_PTR_DECL pTapGainsReal,
-    const SLData_t * SIGLIB_PTR_DECL pTapGainsImag,
-    const SLArrayIndex_t NumberOfTaps,
-    const SLArrayIndex_t DelayArrayLength)
-
+void SIGLIB_FUNC_DECL SDS_TappedDelayLineComplex (
+  const SLData_t SrcReal,
+  const SLData_t SrcImag,
+  SLData_t * pDstReal,
+  SLData_t * pDstImag,
+  SLData_t * SIGLIB_PTR_DECL pDelayReal,
+  SLData_t * SIGLIB_PTR_DECL pDelayImag,
+  SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
+  const SLArrayIndex_t * SIGLIB_PTR_DECL pTapsLocns,
+  const SLData_t * SIGLIB_PTR_DECL pTapGainsReal,
+  const SLData_t * SIGLIB_PTR_DECL pTapGainsImag,
+  const SLArrayIndex_t NumberOfTaps,
+  const SLArrayIndex_t DelayArrayLength)
 {
-    SLArrayIndex_t  i;
-    SLArrayIndex_t  LocalDelayIndex;
-    SLArrayIndex_t  StateArrayOffset;
-    SLData_t        SumOfProductsReal;
-    SLData_t        SumOfProductsImag;
-    SLData_t        a, b, c, d;
+  SLArrayIndex_t  i;
+  SLArrayIndex_t  LocalDelayIndex;
+  SLArrayIndex_t  StateArrayOffset;
+  SLData_t        SumOfProductsReal;
+  SLData_t        SumOfProductsImag;
+  SLData_t        a, b, c, d;
 
-    LocalDelayIndex = *pDelayIndex;
+  LocalDelayIndex = *pDelayIndex;
 
-    *(pDelayReal + LocalDelayIndex) = SrcReal;          // Add data into array
-    *(pDelayImag + LocalDelayIndex) = SrcImag;
+  *(pDelayReal + LocalDelayIndex) = SrcReal;                        // Add data into array
+  *(pDelayImag + LocalDelayIndex) = SrcImag;
 
-    SumOfProductsReal = SIGLIB_ZERO;
-    SumOfProductsImag = SIGLIB_ZERO;
+  SumOfProductsReal = SIGLIB_ZERO;
+  SumOfProductsImag = SIGLIB_ZERO;
 
-    for (i = 0; i < NumberOfTaps; i++) {
-        StateArrayOffset = LocalDelayIndex - pTapsLocns [i];
-        if (StateArrayOffset < ((SLArrayIndex_t)0)) {   // Ensure state array wrap around
-            StateArrayOffset += DelayArrayLength;
-        }
-        a = *(pDelayReal + StateArrayOffset);
-        b = *(pDelayImag + StateArrayOffset);
-        c = pTapGainsReal [i];
-        d = pTapGainsImag [i];
-        SumOfProductsReal += (a * c) - (b * d);     // Complex multiply data by tap
-        SumOfProductsImag += (a * d) + (b * c);
+  for (i = 0; i < NumberOfTaps; i++) {
+    StateArrayOffset = LocalDelayIndex - pTapsLocns[i];
+    if (StateArrayOffset < ((SLArrayIndex_t) 0)) {                  // Ensure state array wrap around
+      StateArrayOffset += DelayArrayLength;
     }
+    a = *(pDelayReal + StateArrayOffset);
+    b = *(pDelayImag + StateArrayOffset);
+    c = pTapGainsReal[i];
+    d = pTapGainsImag[i];
+    SumOfProductsReal += (a * c) - (b * d);                         // Complex multiply data by tap
+    SumOfProductsImag += (a * d) + (b * c);
+  }
 
-    LocalDelayIndex++;                              // Increment pointer
-    if (LocalDelayIndex >= DelayArrayLength) {      // Ensure state array wrap around
-        LocalDelayIndex -= DelayArrayLength;
-    }
+  LocalDelayIndex++;                                                // Increment pointer
+  if (LocalDelayIndex >= DelayArrayLength) {                        // Ensure state array wrap around
+    LocalDelayIndex -= DelayArrayLength;
+  }
 
-    *pDelayIndex = LocalDelayIndex;
+  *pDelayIndex = LocalDelayIndex;
 
-    *pDstReal = SumOfProductsReal;          // Write out result data
-    *pDstImag = SumOfProductsImag;
+  *pDstReal = SumOfProductsReal;                                    // Write out result data
+  *pDstImag = SumOfProductsImag;
 
-}       // End of SDS_TappedDelayLineComplex()
+}                                                                   // End of SDS_TappedDelayLineComplex()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_TappedDelayLineComplex
 *
@@ -2341,78 +2375,79 @@ void SIGLIB_FUNC_DECL SDS_TappedDelayLineComplex (const SLData_t SrcReal,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_TappedDelayLineComplex (const SLData_t * SIGLIB_PTR_DECL pSrcReal,
-    const SLData_t * SIGLIB_PTR_DECL pSrcImag,
-    SLData_t * SIGLIB_PTR_DECL pDstReal,
-    SLData_t * SIGLIB_PTR_DECL pDstImag,
-    SLData_t * SIGLIB_PTR_DECL pDelayReal,
-    SLData_t * SIGLIB_PTR_DECL pDelayImag,
-    SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
-    const SLArrayIndex_t * SIGLIB_PTR_DECL pTapsLocns,
-    const SLData_t * SIGLIB_PTR_DECL pTapGainsReal,
-    const SLData_t * SIGLIB_PTR_DECL pTapGainsImag,
-    const SLArrayIndex_t NumberOfTaps,
-    const SLArrayIndex_t DelayArrayLength,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_TappedDelayLineComplex (
+  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+  SLData_t * SIGLIB_PTR_DECL pDstReal,
+  SLData_t * SIGLIB_PTR_DECL pDstImag,
+  SLData_t * SIGLIB_PTR_DECL pDelayReal,
+  SLData_t * SIGLIB_PTR_DECL pDelayImag,
+  SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
+  const SLArrayIndex_t * SIGLIB_PTR_DECL pTapsLocns,
+  const SLData_t * SIGLIB_PTR_DECL pTapGainsReal,
+  const SLData_t * SIGLIB_PTR_DECL pTapGainsImag,
+  const SLArrayIndex_t NumberOfTaps,
+  const SLArrayIndex_t DelayArrayLength,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t  i, j;
-    SLArrayIndex_t  LocalDelayIndex;
-    SLArrayIndex_t  StateArrayOffset;
-    SLData_t        SumOfProductsReal;
-    SLData_t        SumOfProductsImag;
-    SLData_t        a, b, c, d;
+  SLArrayIndex_t  i, j;
+  SLArrayIndex_t  LocalDelayIndex;
+  SLArrayIndex_t  StateArrayOffset;
+  SLData_t        SumOfProductsReal;
+  SLData_t        SumOfProductsImag;
+  SLData_t        a, b, c, d;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcReal % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrcImag % 8 == 0);
-_nassert((int) pDstReal % 8 == 0);
-_nassert((int) pDstImag % 8 == 0);
-_nassert((int) pDelayReal % 8 == 0);
-_nassert((int) pDelayImag % 8 == 0);
-_nassert((int) pTapGainsReal % 8 == 0);
-_nassert((int) pTapGainsImag % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrcReal % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrcImag % 8 == 0);
+  _nassert ((int) pDstReal % 8 == 0);
+  _nassert ((int) pDstImag % 8 == 0);
+  _nassert ((int) pDelayReal % 8 == 0);
+  _nassert ((int) pDelayImag % 8 == 0);
+  _nassert ((int) pTapGainsReal % 8 == 0);
+  _nassert ((int) pTapGainsImag % 8 == 0);
 #endif
 #endif
 
-    LocalDelayIndex = *pDelayIndex;
+  LocalDelayIndex = *pDelayIndex;
 
-    for (j = 0; j < ArrayLength; j++) {
-        *(pDelayReal + LocalDelayIndex) = *pSrcReal++;  // Add data into array
-        *(pDelayImag + LocalDelayIndex) = *pSrcImag++;
+  for (j = 0; j < ArrayLength; j++) {
+    *(pDelayReal + LocalDelayIndex) = *pSrcReal++;                  // Add data into array
+    *(pDelayImag + LocalDelayIndex) = *pSrcImag++;
 
-        SumOfProductsReal = SIGLIB_ZERO;
-        SumOfProductsImag = SIGLIB_ZERO;
+    SumOfProductsReal = SIGLIB_ZERO;
+    SumOfProductsImag = SIGLIB_ZERO;
 
-        for (i = 0; i < NumberOfTaps; i++) {
-            StateArrayOffset = LocalDelayIndex - pTapsLocns [i];
-            if (StateArrayOffset < ((SLArrayIndex_t)0)) {   // Ensure state array wrap around
-                StateArrayOffset += DelayArrayLength;
-            }
-            a = *(pDelayReal + StateArrayOffset);
-            b = *(pDelayImag + StateArrayOffset);
-            c = pTapGainsReal [i];
-            d = pTapGainsImag [i];
-            SumOfProductsReal += (a * c) - (b * d);     // Complex multiply data by tap
-            SumOfProductsImag += (a * d) + (b * c);
-        }
-
-        LocalDelayIndex++;                              // Increment pointer
-        if (LocalDelayIndex >= DelayArrayLength) {      // Ensure state array wrap around
-            LocalDelayIndex -= DelayArrayLength;
-        }
-
-        *pDstReal++ = SumOfProductsReal;            // Write out result data
-        *pDstImag++ = SumOfProductsImag;
+    for (i = 0; i < NumberOfTaps; i++) {
+      StateArrayOffset = LocalDelayIndex - pTapsLocns[i];
+      if (StateArrayOffset < ((SLArrayIndex_t) 0)) {                // Ensure state array wrap around
+        StateArrayOffset += DelayArrayLength;
+      }
+      a = *(pDelayReal + StateArrayOffset);
+      b = *(pDelayImag + StateArrayOffset);
+      c = pTapGainsReal[i];
+      d = pTapGainsImag[i];
+      SumOfProductsReal += (a * c) - (b * d);                       // Complex multiply data by tap
+      SumOfProductsImag += (a * d) + (b * c);
     }
 
-    *pDelayIndex = LocalDelayIndex;
+    LocalDelayIndex++;                                              // Increment pointer
+    if (LocalDelayIndex >= DelayArrayLength) {                      // Ensure state array wrap around
+      LocalDelayIndex -= DelayArrayLength;
+    }
 
-}       // End of SDA_TappedDelayLineComplex()
+    *pDstReal++ = SumOfProductsReal;                                // Write out result data
+    *pDstImag++ = SumOfProductsImag;
+  }
+
+  *pDelayIndex = LocalDelayIndex;
+
+}                                                                   // End of SDA_TappedDelayLineComplex()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_TappedDelayLineIQ
 *
@@ -2430,20 +2465,21 @@ _nassert((int) pTapGainsImag % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_TappedDelayLineIQ (SLData_t * SIGLIB_PTR_DECL pDelayReal,
-    SLData_t * SIGLIB_PTR_DECL pDelayImag,
-    SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
-    const SLArrayIndex_t DelayArrayLength)
-
+void SIGLIB_FUNC_DECL SIF_TappedDelayLineIQ (
+  SLData_t * SIGLIB_PTR_DECL pDelayReal,
+  SLData_t * SIGLIB_PTR_DECL pDelayImag,
+  SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
+  const SLArrayIndex_t DelayArrayLength)
 {
-    SDA_Clear (pDelayReal, DelayArrayLength);       // Clear data arrays
-    SDA_Clear (pDelayImag, DelayArrayLength);       // Clear data arrays
-    *pDelayIndex = (SLArrayIndex_t)0;               // Initialize delay index
+  SDA_Clear (pDelayReal, DelayArrayLength);                         // Clear data arrays
+  SDA_Clear (pDelayImag, DelayArrayLength);                         // Clear data arrays
+  *pDelayIndex = (SLArrayIndex_t) 0;                                // Initialize delay index
 
-}       // End of SIF_TappedDelayLineIQ()
+}                                                                   // End of SIF_TappedDelayLineIQ()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_TappedDelayLineIQ
 *
@@ -2469,57 +2505,58 @@ void SIGLIB_FUNC_DECL SIF_TappedDelayLineIQ (SLData_t * SIGLIB_PTR_DECL pDelayRe
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDS_TappedDelayLineIQ (const SLData_t SrcReal,
-    const SLData_t SrcImag,
-    SLData_t * pDstReal,
-    SLData_t * pDstImag,
-    SLData_t * SIGLIB_PTR_DECL pDelayReal,
-    SLData_t * SIGLIB_PTR_DECL pDelayImag,
-    SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
-    const SLArrayIndex_t * SIGLIB_PTR_DECL pTapsLocns,
-    const SLData_t * SIGLIB_PTR_DECL pTapGainsReal,
-    const SLData_t * SIGLIB_PTR_DECL pTapGainsImag,
-    const SLArrayIndex_t NumberOfTaps,
-    const SLArrayIndex_t DelayArrayLength)
-
+void SIGLIB_FUNC_DECL SDS_TappedDelayLineIQ (
+  const SLData_t SrcReal,
+  const SLData_t SrcImag,
+  SLData_t * pDstReal,
+  SLData_t * pDstImag,
+  SLData_t * SIGLIB_PTR_DECL pDelayReal,
+  SLData_t * SIGLIB_PTR_DECL pDelayImag,
+  SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
+  const SLArrayIndex_t * SIGLIB_PTR_DECL pTapsLocns,
+  const SLData_t * SIGLIB_PTR_DECL pTapGainsReal,
+  const SLData_t * SIGLIB_PTR_DECL pTapGainsImag,
+  const SLArrayIndex_t NumberOfTaps,
+  const SLArrayIndex_t DelayArrayLength)
 {
-    SLArrayIndex_t  i;
-    SLArrayIndex_t  LocalDelayIndex;
-    SLArrayIndex_t  StateArrayOffset;
-    SLData_t        SumOfProductsReal;
-    SLData_t        SumOfProductsImag;
+  SLArrayIndex_t  i;
+  SLArrayIndex_t  LocalDelayIndex;
+  SLArrayIndex_t  StateArrayOffset;
+  SLData_t        SumOfProductsReal;
+  SLData_t        SumOfProductsImag;
 
-    LocalDelayIndex = *pDelayIndex;
+  LocalDelayIndex = *pDelayIndex;
 
-    *(pDelayReal + LocalDelayIndex) = SrcReal;          // Add data into array
-    *(pDelayImag + LocalDelayIndex) = SrcImag;
+  *(pDelayReal + LocalDelayIndex) = SrcReal;                        // Add data into array
+  *(pDelayImag + LocalDelayIndex) = SrcImag;
 
-    SumOfProductsReal = SIGLIB_ZERO;
-    SumOfProductsImag = SIGLIB_ZERO;
+  SumOfProductsReal = SIGLIB_ZERO;
+  SumOfProductsImag = SIGLIB_ZERO;
 
-    for (i = 0; i < NumberOfTaps; i++) {
-        StateArrayOffset = LocalDelayIndex - pTapsLocns [i];
-        if (StateArrayOffset < ((SLArrayIndex_t)0)) {   // Ensure state array wrap around
-            StateArrayOffset += DelayArrayLength;
-        }
-        SumOfProductsReal += *(pDelayReal + StateArrayOffset) * pTapGainsReal [i];  // Multiply data by tap
-        SumOfProductsImag += *(pDelayImag + StateArrayOffset) * pTapGainsImag [i];  // Multiply data by tap
+  for (i = 0; i < NumberOfTaps; i++) {
+    StateArrayOffset = LocalDelayIndex - pTapsLocns[i];
+    if (StateArrayOffset < ((SLArrayIndex_t) 0)) {                  // Ensure state array wrap around
+      StateArrayOffset += DelayArrayLength;
     }
+    SumOfProductsReal += *(pDelayReal + StateArrayOffset) * pTapGainsReal[i]; // Multiply data by tap
+    SumOfProductsImag += *(pDelayImag + StateArrayOffset) * pTapGainsImag[i]; // Multiply data by tap
+  }
 
-    LocalDelayIndex++;                              // Increment pointer
-    if (LocalDelayIndex >= DelayArrayLength) {      // Ensure state array wrap around
-        LocalDelayIndex -= DelayArrayLength;
-    }
+  LocalDelayIndex++;                                                // Increment pointer
+  if (LocalDelayIndex >= DelayArrayLength) {                        // Ensure state array wrap around
+    LocalDelayIndex -= DelayArrayLength;
+  }
 
-    *pDelayIndex = LocalDelayIndex;
+  *pDelayIndex = LocalDelayIndex;
 
-    *pDstReal = SumOfProductsReal;          // Write out result data
-    *pDstImag = SumOfProductsImag;
+  *pDstReal = SumOfProductsReal;                                    // Write out result data
+  *pDstImag = SumOfProductsImag;
 
-}       // End of SDS_TappedDelayLineIQ()
+}                                                                   // End of SDS_TappedDelayLineIQ()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_TappedDelayLineIQ
 *
@@ -2546,73 +2583,74 @@ void SIGLIB_FUNC_DECL SDS_TappedDelayLineIQ (const SLData_t SrcReal,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_TappedDelayLineIQ (const SLData_t * SIGLIB_PTR_DECL pSrcReal,
-    const SLData_t * SIGLIB_PTR_DECL pSrcImag,
-    SLData_t * SIGLIB_PTR_DECL pDstReal,
-    SLData_t * SIGLIB_PTR_DECL pDstImag,
-    SLData_t * SIGLIB_PTR_DECL pDelayReal,
-    SLData_t * SIGLIB_PTR_DECL pDelayImag,
-    SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
-    const SLArrayIndex_t * SIGLIB_PTR_DECL pTapsLocns,
-    const SLData_t * SIGLIB_PTR_DECL pTapGainsReal,
-    const SLData_t * SIGLIB_PTR_DECL pTapGainsImag,
-    const SLArrayIndex_t NumberOfTaps,
-    const SLArrayIndex_t DelayArrayLength,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_TappedDelayLineIQ (
+  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+  SLData_t * SIGLIB_PTR_DECL pDstReal,
+  SLData_t * SIGLIB_PTR_DECL pDstImag,
+  SLData_t * SIGLIB_PTR_DECL pDelayReal,
+  SLData_t * SIGLIB_PTR_DECL pDelayImag,
+  SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
+  const SLArrayIndex_t * SIGLIB_PTR_DECL pTapsLocns,
+  const SLData_t * SIGLIB_PTR_DECL pTapGainsReal,
+  const SLData_t * SIGLIB_PTR_DECL pTapGainsImag,
+  const SLArrayIndex_t NumberOfTaps,
+  const SLArrayIndex_t DelayArrayLength,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLArrayIndex_t  i, j;
-    SLArrayIndex_t  LocalDelayIndex;
-    SLArrayIndex_t  StateArrayOffset;
-    SLData_t        SumOfProductsReal;
-    SLData_t        SumOfProductsImag;
+  SLArrayIndex_t  i, j;
+  SLArrayIndex_t  LocalDelayIndex;
+  SLArrayIndex_t  StateArrayOffset;
+  SLData_t        SumOfProductsReal;
+  SLData_t        SumOfProductsImag;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcReal % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrcImag % 8 == 0);
-_nassert((int) pDstReal % 8 == 0);
-_nassert((int) pDstImag % 8 == 0);
-_nassert((int) pDelayReal % 8 == 0);
-_nassert((int) pDelayImag % 8 == 0);
-_nassert((int) pTapGainsReal % 8 == 0);
-_nassert((int) pTapGainsImag % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrcReal % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrcImag % 8 == 0);
+  _nassert ((int) pDstReal % 8 == 0);
+  _nassert ((int) pDstImag % 8 == 0);
+  _nassert ((int) pDelayReal % 8 == 0);
+  _nassert ((int) pDelayImag % 8 == 0);
+  _nassert ((int) pTapGainsReal % 8 == 0);
+  _nassert ((int) pTapGainsImag % 8 == 0);
 #endif
 #endif
 
-    LocalDelayIndex = *pDelayIndex;
+  LocalDelayIndex = *pDelayIndex;
 
-    for (j = 0; j < ArrayLength; j++) {
-        *(pDelayReal + LocalDelayIndex) = *pSrcReal++;  // Add data into array
-        *(pDelayImag + LocalDelayIndex) = *pSrcImag++;
+  for (j = 0; j < ArrayLength; j++) {
+    *(pDelayReal + LocalDelayIndex) = *pSrcReal++;                  // Add data into array
+    *(pDelayImag + LocalDelayIndex) = *pSrcImag++;
 
-        SumOfProductsReal = SIGLIB_ZERO;
-        SumOfProductsImag = SIGLIB_ZERO;
+    SumOfProductsReal = SIGLIB_ZERO;
+    SumOfProductsImag = SIGLIB_ZERO;
 
-        for (i = 0; i < NumberOfTaps; i++) {
-            StateArrayOffset = LocalDelayIndex - pTapsLocns [i];
-            if (StateArrayOffset < ((SLArrayIndex_t)0)) {   // Ensure state array wrap around
-                StateArrayOffset += DelayArrayLength;
-            }
-            SumOfProductsReal += *(pDelayReal + StateArrayOffset) * pTapGainsReal [i];  // Multiply data by tap
-            SumOfProductsImag += *(pDelayImag + StateArrayOffset) * pTapGainsImag [i];  // Multiply data by tap
-        }
-
-        LocalDelayIndex++;                              // Increment pointer
-        if (LocalDelayIndex >= DelayArrayLength) {      // Ensure state array wrap around
-            LocalDelayIndex -= DelayArrayLength;
-        }
-
-        *pDstReal++ = SumOfProductsReal;            // Write out result data
-        *pDstImag++ = SumOfProductsImag;
+    for (i = 0; i < NumberOfTaps; i++) {
+      StateArrayOffset = LocalDelayIndex - pTapsLocns[i];
+      if (StateArrayOffset < ((SLArrayIndex_t) 0)) {                // Ensure state array wrap around
+        StateArrayOffset += DelayArrayLength;
+      }
+      SumOfProductsReal += *(pDelayReal + StateArrayOffset) * pTapGainsReal[i]; // Multiply data by tap
+      SumOfProductsImag += *(pDelayImag + StateArrayOffset) * pTapGainsImag[i]; // Multiply data by tap
     }
 
-    *pDelayIndex = LocalDelayIndex;
+    LocalDelayIndex++;                                              // Increment pointer
+    if (LocalDelayIndex >= DelayArrayLength) {                      // Ensure state array wrap around
+      LocalDelayIndex -= DelayArrayLength;
+    }
 
-}       // End of SDA_TappedDelayLineIQ()
+    *pDstReal++ = SumOfProductsReal;                                // Write out result data
+    *pDstImag++ = SumOfProductsImag;
+  }
+
+  *pDelayIndex = LocalDelayIndex;
+
+}                                                                   // End of SDA_TappedDelayLineIQ()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_FirPolyPhaseGenerate
 *
@@ -2632,42 +2670,43 @@ _nassert((int) pTapGainsImag % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_FirPolyPhaseGenerate (const SLData_t * SIGLIB_PTR_DECL pSrcFIRCoeffs,
-    SLData_t * SIGLIB_PTR_DECL pDstFIRCoeffs,
-    SLData_t ** SIGLIB_PTR_DECL pPPCoeffPtrs,
-    SLArrayIndex_t * SIGLIB_PTR_DECL pPolyPhaseFilterLengths,
-    const SLArrayIndex_t NumberOfPhases,
-    const SLArrayIndex_t FIRFilterLength)
-
+void SIGLIB_FUNC_DECL SIF_FirPolyPhaseGenerate (
+  const SLData_t * SIGLIB_PTR_DECL pSrcFIRCoeffs,
+  SLData_t * SIGLIB_PTR_DECL pDstFIRCoeffs,
+  SLData_t ** SIGLIB_PTR_DECL pPPCoeffPtrs,
+  SLArrayIndex_t * SIGLIB_PTR_DECL pPolyPhaseFilterLengths,
+  const SLArrayIndex_t NumberOfPhases,
+  const SLArrayIndex_t FIRFilterLength)
 {
-                                                        // Calculate and save the lengths of each phase
-    for (SLArrayIndex_t i = SIGLIB_AI_ZERO, phaseNumber = SIGLIB_AI_ZERO; i < FIRFilterLength; i++) {
-        *(pPolyPhaseFilterLengths+phaseNumber) = *(pPolyPhaseFilterLengths+phaseNumber) + 1;        // Increment the length of this phase
-        phaseNumber++;
-        phaseNumber %= NumberOfPhases;
+// Calculate and save the lengths of each phase
+  for (SLArrayIndex_t i = SIGLIB_AI_ZERO, phaseNumber = SIGLIB_AI_ZERO; i < FIRFilterLength; i++) {
+    *(pPolyPhaseFilterLengths + phaseNumber) = *(pPolyPhaseFilterLengths + phaseNumber) + 1;  // Increment the length of this phase
+    phaseNumber++;
+    phaseNumber %= NumberOfPhases;
+  }
+
+// Calculate and save the offset to the start of each phase bank
+  pPPCoeffPtrs[0] = pDstFIRCoeffs;
+  for (SLArrayIndex_t i = 1; i < NumberOfPhases; i++) {
+    pPPCoeffPtrs[i] = pPPCoeffPtrs[i - 1] + *(pPolyPhaseFilterLengths + i - 1);
+  }
+
+// Copy the coefficients to the PolyPhase filter array
+  for (SLArrayIndex_t i = SIGLIB_AI_ZERO, phaseNumber = SIGLIB_AI_ZERO, numPhaseCoeffs = SIGLIB_AI_ZERO; i < FIRFilterLength; i++) {
+    *(pPPCoeffPtrs[phaseNumber] + numPhaseCoeffs) = pSrcFIRCoeffs[i];
+
+    phaseNumber++;
+    phaseNumber %= NumberOfPhases;
+
+    if (phaseNumber == SIGLIB_AI_ZERO) {
+      numPhaseCoeffs++;                                             // Increment the number of coefficients in the phase
     }
-
-                                                        // Calculate and save the offset to the start of each phase bank
-    pPPCoeffPtrs[0] = pDstFIRCoeffs;
-    for (SLArrayIndex_t i = 1; i < NumberOfPhases; i++) {
-        pPPCoeffPtrs[i] = pPPCoeffPtrs[i-1] + *(pPolyPhaseFilterLengths+i-1);
-    }
-
-                                                        // Copy the coefficients to the PolyPhase filter array
-    for (SLArrayIndex_t i = SIGLIB_AI_ZERO, phaseNumber = SIGLIB_AI_ZERO, numPhaseCoeffs = SIGLIB_AI_ZERO; i < FIRFilterLength; i++) {
-        *(pPPCoeffPtrs[phaseNumber]+numPhaseCoeffs) = pSrcFIRCoeffs [i];
-
-        phaseNumber++;
-        phaseNumber %= NumberOfPhases;
-
-        if (phaseNumber == SIGLIB_AI_ZERO) {
-            numPhaseCoeffs++;                           // Increment the number of coefficients in the phase
-        }
-    }
-}           // End of SIF_FirPolyPhaseGenerate()
+  }
+}                                                                   // End of SIF_FirPolyPhaseGenerate()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_FirZeroNotchFilter
 *
@@ -2683,12 +2722,11 @@ void SIGLIB_FUNC_DECL SIF_FirPolyPhaseGenerate (const SLData_t * SIGLIB_PTR_DECL
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_FirZeroNotchFilter (SLData_t * SIGLIB_PTR_DECL pDstFIRCoeffs,  // Coefficients array
-    const SLData_t centreFrequency)      // Notch centre frequency normalized to Fs = 1 Hz
-
+void SIGLIB_FUNC_DECL SIF_FirZeroNotchFilter (
+  SLData_t * SIGLIB_PTR_DECL pDstFIRCoeffs,                         // Coefficients array
+  const SLData_t centreFrequency)                                   // Notch centre frequency normalized to Fs = 1 Hz
 {
-    *pDstFIRCoeffs     = SIGLIB_ONE;
-    *(pDstFIRCoeffs+1) = SIGLIB_MINUS_TWO * SDS_Cos (SIGLIB_TWO_PI * centreFrequency);
-    *(pDstFIRCoeffs+2) = SIGLIB_ONE;
+  *pDstFIRCoeffs = SIGLIB_ONE;
+  *(pDstFIRCoeffs + 1) = SIGLIB_MINUS_TWO * SDS_Cos (SIGLIB_TWO_PI * centreFrequency);
+  *(pDstFIRCoeffs + 2) = SIGLIB_ONE;
 }
-

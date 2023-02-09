@@ -7,9 +7,9 @@ rm -f *.gpdt
 ./gb.sh wavorder
 rm -f *.obj
 if [ -f wavorder ]; then
-    ./wavorder $1
-    if [ -f sc.gpdt ]; then
-        gnuplot sgplot.gp
-    fi
+  ./wavorder $1
+  if [ -f sc.gpdt ]; then
+    gnuplot sgplot.gp
+  fi
 fi
 rm -f *.gpdt

@@ -1,3 +1,4 @@
+
 /**************************************************************************
 File Name               : SMATH.C       | Author        : JOHN EDWARDS
 Siglib Library Version  : 10.00         |
@@ -36,12 +37,13 @@ Description : DSP basic math functions, for SigLib DSP library.
 
 ****************************************************************************/
 
-#define SIGLIB_SRC_FILE_SMATH   1                           // Defines the source file that this code is being used in
+#define SIGLIB_SRC_FILE_SMATH   1                                   // Defines the source file that this code is being used in
 
-#include <siglib.h>                                         // Include SigLib header file
+#include <siglib.h>                                                 // Include SigLib header file
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Divide
 *
@@ -59,49 +61,50 @@ Description : DSP basic math functions, for SigLib DSP library.
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Divide (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    const SLData_t Divisor,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_Divide (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  const SLData_t Divisor,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t SampleLength)
 {
-    SLData_t       LocalMultiplier;
+  SLData_t        LocalMultiplier;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    if ((Divisor < SIGLIB_MIN_THRESHOLD) &&     // Check for close to zero
-        (Divisor > -SIGLIB_MIN_THRESHOLD))  {   // Prevent against divide by zero
+  if ((Divisor < SIGLIB_MIN_THRESHOLD) &&                           // Check for close to zero
+      (Divisor > -SIGLIB_MIN_THRESHOLD)) {                          // Prevent against divide by zero
 
-        if ((*pSrc < SIGLIB_MIN_THRESHOLD) &&   // Check for close to zero
-            (*pSrc > -SIGLIB_MIN_THRESHOLD)) {  // 0.0 / 0.0
+    if ((*pSrc < SIGLIB_MIN_THRESHOLD) &&                           // Check for close to zero
+        (*pSrc > -SIGLIB_MIN_THRESHOLD)) {                          // 0.0 / 0.0
 
-            *pDst++ = SIGLIB_ONE;
-        }
-        else {
-            *pDst++ = SIGLIB_MAX;
-        }
+      *pDst++ = SIGLIB_ONE;
     }
+    else {
+      *pDst++ = SIGLIB_MAX;
+    }
+  }
 
-    else {                                  // Not divide by zero
-        LocalMultiplier = SIGLIB_ONE / Divisor;
-        for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-            pDst[i] = pSrc[i] * LocalMultiplier;
+  else {                                                            // Not divide by zero
+    LocalMultiplier = SIGLIB_ONE / Divisor;
+    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+      pDst[i] = pSrc[i] * LocalMultiplier;
 #else
-            *pDst++ = *pSrc++ * LocalMultiplier;
+      *pDst++ = *pSrc++ * LocalMultiplier;
 #endif
-        }
     }
+  }
 
-}       // End of SDA_Divide()
+}                                                                   // End of SDA_Divide()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Divide2
 *
@@ -120,47 +123,48 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Divide2 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
-    const SLData_t * SIGLIB_PTR_DECL pSrc2,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_Divide2 (
+  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t SampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc2 % 8 == 0);
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-        if ((*pSrc2 < SIGLIB_MIN_THRESHOLD) &&      // Check for close to zero
-            (*pSrc2 > -SIGLIB_MIN_THRESHOLD)) {     // Prevent against divide by zero
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+    if ((*pSrc2 < SIGLIB_MIN_THRESHOLD) &&                          // Check for close to zero
+        (*pSrc2 > -SIGLIB_MIN_THRESHOLD)) {                         // Prevent against divide by zero
 
-            if ((*pSrc1 < SIGLIB_MIN_THRESHOLD) &&  // Check for close to zero
-                (*pSrc1 > -SIGLIB_MIN_THRESHOLD)) { // 0.0 / 0.0
+      if ((*pSrc1 < SIGLIB_MIN_THRESHOLD) &&                        // Check for close to zero
+          (*pSrc1 > -SIGLIB_MIN_THRESHOLD)) {                       // 0.0 / 0.0
 
-                *pDst++ = SIGLIB_ONE;
-                pSrc1++;
-                pSrc2++;
-            }
-            else {
-                *pDst++ = SIGLIB_MAX;
-                pSrc1++;
-                pSrc2++;
-            }
-        }
-
-        else {
-            *pDst++ = *pSrc1++ / *pSrc2++;
-        }
+        *pDst++ = SIGLIB_ONE;
+        pSrc1++;
+        pSrc2++;
+      }
+      else {
+        *pDst++ = SIGLIB_MAX;
+        pSrc1++;
+        pSrc2++;
+      }
     }
 
-}       // End of SDA_Divide2()
+    else {
+      *pDst++ = *pSrc1++ / *pSrc2++;
+    }
+  }
+
+}                                                                   // End of SDA_Divide2()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Multiply
 *
@@ -178,31 +182,32 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Multiply (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    const SLData_t Multiplier,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_Multiply (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  const SLData_t Multiplier,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t SampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = pSrc[i] * Multiplier;
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = pSrc[i] * Multiplier;
 #else
-        *pDst++ = *pSrc++ * Multiplier;
+    *pDst++ = *pSrc++ * Multiplier;
 #endif
-    }
+  }
 
-}       // End of SDA_Multiply()
+}                                                                   // End of SDA_Multiply()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Multiply2
 *
@@ -220,32 +225,33 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Multiply2 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
-    const SLData_t * SIGLIB_PTR_DECL pSrc2,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_Multiply2 (
+  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t SampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc2 % 8 == 0);
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = pSrc1[i] * pSrc2[i];
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = pSrc1[i] * pSrc2[i];
 #else
-        *pDst++ = *pSrc1++ * *pSrc2++;
+    *pDst++ = *pSrc1++ * *pSrc2++;
 #endif
-    }
+  }
 
-}       // End of SDA_Multiply2()
+}                                                                   // End of SDA_Multiply2()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_ComplexMultiply
 *
@@ -268,20 +274,21 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDS_ComplexMultiply (const SLData_t Src1Real,
-    const SLData_t Src1Imag,
-    const SLData_t Src2Real,
-    const SLData_t Src2Imag,
-    SLData_t *pResultReal,
-    SLData_t *pResultImag)
-
+void SIGLIB_FUNC_DECL SDS_ComplexMultiply (
+  const SLData_t Src1Real,
+  const SLData_t Src1Imag,
+  const SLData_t Src2Real,
+  const SLData_t Src2Imag,
+  SLData_t * pResultReal,
+  SLData_t * pResultImag)
 {
-    *pResultReal = Src1Real * Src2Real - Src1Imag * Src2Imag;
-    *pResultImag = Src1Real * Src2Imag + Src1Imag * Src2Real;
-}       // End of SDS_ComplexMultiply()
+  *pResultReal = Src1Real * Src2Real - Src1Imag * Src2Imag;
+  *pResultImag = Src1Real * Src2Imag + Src1Imag * Src2Real;
+}                                                                   // End of SDS_ComplexMultiply()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_ComplexInverse
 *
@@ -301,27 +308,28 @@ void SIGLIB_FUNC_DECL SDS_ComplexMultiply (const SLData_t Src1Real,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDS_ComplexInverse (const SLData_t DenominatorReal,
-    const SLData_t DenominatorImag,
-    SLData_t *pResultReal,
-    SLData_t *pResultImag)
-
+void SIGLIB_FUNC_DECL SDS_ComplexInverse (
+  const SLData_t DenominatorReal,
+  const SLData_t DenominatorImag,
+  SLData_t * pResultReal,
+  SLData_t * pResultImag)
 {
-    SLData_t    InverseDenominator = SIGLIB_ONE / ((DenominatorReal * DenominatorReal) + (DenominatorImag * DenominatorImag));
+  SLData_t        InverseDenominator = SIGLIB_ONE / ((DenominatorReal * DenominatorReal) + (DenominatorImag * DenominatorImag));
 
-    if (InverseDenominator == SIGLIB_ZERO) {            // Check for divide by zero
-        *pResultReal = SIGLIB_ONE;
-        *pResultImag = SIGLIB_ZERO;
-    }
+  if (InverseDenominator == SIGLIB_ZERO) {                          // Check for divide by zero
+    *pResultReal = SIGLIB_ONE;
+    *pResultImag = SIGLIB_ZERO;
+  }
 
-    else {
-        *pResultReal = DenominatorReal * InverseDenominator;
-        *pResultImag = (-DenominatorImag) * InverseDenominator;
-    }
-}       // End of SDS_ComplexInverse()
+  else {
+    *pResultReal = DenominatorReal * InverseDenominator;
+    *pResultImag = (-DenominatorImag) * InverseDenominator;
+  }
+}                                                                   // End of SDS_ComplexInverse()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexInverse
 *
@@ -342,30 +350,31 @@ void SIGLIB_FUNC_DECL SDS_ComplexInverse (const SLData_t DenominatorReal,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexInverse (const SLData_t *pDenominatorReal,
-    const SLData_t *pDenominatorImag,
-    SLData_t *pResultReal,
-    SLData_t *pResultImag,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexInverse (
+  const SLData_t * pDenominatorReal,
+  const SLData_t * pDenominatorImag,
+  SLData_t * pResultReal,
+  SLData_t * pResultImag,
+  const SLArrayIndex_t SampleLength)
 {
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-        SLData_t    InverseDenominator = SIGLIB_ONE / ((pDenominatorReal[i] * pDenominatorReal[i]) + (pDenominatorImag[i] * pDenominatorImag[i]));
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+    SLData_t        InverseDenominator = SIGLIB_ONE / ((pDenominatorReal[i] * pDenominatorReal[i]) + (pDenominatorImag[i] * pDenominatorImag[i]));
 
-        if (InverseDenominator == SIGLIB_ZERO) {            // Check for divide by zero
-            *pResultReal = SIGLIB_ONE;
-            *pResultImag = SIGLIB_ZERO;
-        }
-
-        else {
-            *pResultReal = pDenominatorReal[i] * InverseDenominator;
-            *pResultImag = (-pDenominatorImag[i]) * InverseDenominator;
-        }
+    if (InverseDenominator == SIGLIB_ZERO) {                        // Check for divide by zero
+      *pResultReal = SIGLIB_ONE;
+      *pResultImag = SIGLIB_ZERO;
     }
-}       // End of SDA_ComplexInverse()
+
+    else {
+      *pResultReal = pDenominatorReal[i] * InverseDenominator;
+      *pResultImag = (-pDenominatorImag[i]) * InverseDenominator;
+    }
+  }
+}                                                                   // End of SDA_ComplexInverse()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_ComplexDivide
 *
@@ -389,29 +398,30 @@ void SIGLIB_FUNC_DECL SDA_ComplexInverse (const SLData_t *pDenominatorReal,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDS_ComplexDivide (const SLData_t NumeratorReal,
-    const SLData_t NumeratorImag,
-    const SLData_t DenominatorReal,
-    const SLData_t DenominatorImag,
-    SLData_t *pResultReal,
-    SLData_t *pResultImag)
-
+void SIGLIB_FUNC_DECL SDS_ComplexDivide (
+  const SLData_t NumeratorReal,
+  const SLData_t NumeratorImag,
+  const SLData_t DenominatorReal,
+  const SLData_t DenominatorImag,
+  SLData_t * pResultReal,
+  SLData_t * pResultImag)
 {
-    SLData_t    InverseDenominator = SIGLIB_ONE / ((DenominatorReal * DenominatorReal) + (DenominatorImag * DenominatorImag));
+  SLData_t        InverseDenominator = SIGLIB_ONE / ((DenominatorReal * DenominatorReal) + (DenominatorImag * DenominatorImag));
 
-    if (InverseDenominator == SIGLIB_ZERO) {        // Check for divide by zero
-        *pResultReal = SIGLIB_ONE;
-        *pResultImag = SIGLIB_ZERO;
-    }
+  if (InverseDenominator == SIGLIB_ZERO) {                          // Check for divide by zero
+    *pResultReal = SIGLIB_ONE;
+    *pResultImag = SIGLIB_ZERO;
+  }
 
-    else {
-        *pResultReal = ((NumeratorReal * DenominatorReal) - (NumeratorImag * DenominatorImag)) * InverseDenominator;
-        *pResultImag = ((NumeratorImag * DenominatorReal) + (NumeratorReal * DenominatorImag)) * InverseDenominator;
-    }
-}       // End of SDS_ComplexDivide()
+  else {
+    *pResultReal = ((NumeratorReal * DenominatorReal) - (NumeratorImag * DenominatorImag)) * InverseDenominator;
+    *pResultImag = ((NumeratorImag * DenominatorReal) + (NumeratorReal * DenominatorImag)) * InverseDenominator;
+  }
+}                                                                   // End of SDS_ComplexDivide()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexScalarMultiply
 *
@@ -432,37 +442,38 @@ void SIGLIB_FUNC_DECL SDS_ComplexDivide (const SLData_t NumeratorReal,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexScalarMultiply (const SLData_t * SIGLIB_PTR_DECL pSrcReal,
-    const SLData_t * SIGLIB_PTR_DECL pSrcImag,
-    const SLData_t Scalar,
-    SLData_t * SIGLIB_PTR_DECL pDstReal,
-    SLData_t * SIGLIB_PTR_DECL pDstImag,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexScalarMultiply (
+  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+  const SLData_t Scalar,
+  SLData_t * SIGLIB_PTR_DECL pDstReal,
+  SLData_t * SIGLIB_PTR_DECL pDstImag,
+  const SLArrayIndex_t SampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcReal % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrcImag % 8 == 0);
-_nassert((int) pDstReal % 8 == 0);
-_nassert((int) pDstImag % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrcReal % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrcImag % 8 == 0);
+  _nassert ((int) pDstReal % 8 == 0);
+  _nassert ((int) pDstImag % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDstReal[i] = pSrcReal[i] * Scalar;
-        pDstImag[i] = pSrcImag[i] * Scalar;
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDstReal[i] = pSrcReal[i] * Scalar;
+    pDstImag[i] = pSrcImag[i] * Scalar;
 #else
-        *pDstReal++ = *pSrcReal++ * Scalar;
-        *pDstImag++ = *pSrcImag++ * Scalar;
+    *pDstReal++ = *pSrcReal++ * Scalar;
+    *pDstImag++ = *pSrcImag++ * Scalar;
 #endif
-    }
+  }
 
-}       // End of SDA_ComplexScalarMultiply()
+}                                                                   // End of SDA_ComplexScalarMultiply()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexMultiply2
 *
@@ -486,46 +497,47 @@ _nassert((int) pDstImag % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexMultiply2 (const SLData_t * SIGLIB_PTR_DECL pSrc1Real,
-    const SLData_t * SIGLIB_PTR_DECL pSrc1Imag,
-    const SLData_t * SIGLIB_PTR_DECL pSrc2Real,
-    const SLData_t * SIGLIB_PTR_DECL pSrc2Imag,
-    SLData_t * SIGLIB_PTR_DECL pDstReal,
-    SLData_t * SIGLIB_PTR_DECL pDstImag,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexMultiply2 (
+  const SLData_t * SIGLIB_PTR_DECL pSrc1Real,
+  const SLData_t * SIGLIB_PTR_DECL pSrc1Imag,
+  const SLData_t * SIGLIB_PTR_DECL pSrc2Real,
+  const SLData_t * SIGLIB_PTR_DECL pSrc2Imag,
+  SLData_t * SIGLIB_PTR_DECL pDstReal,
+  SLData_t * SIGLIB_PTR_DECL pDstImag,
+  const SLArrayIndex_t SampleLength)
 {
-    SLData_t       TempReal, TempImag;
+  SLData_t        TempReal, TempImag;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1Real % 8 == 0);         // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc1Imag % 8 == 0);
-_nassert((int) pSrc2Real % 8 == 0);
-_nassert((int) pSrc2Imag % 8 == 0);
-_nassert((int) pDstReal % 8 == 0);
-_nassert((int) pDstImag % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc1Real % 8 == 0);                              // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc1Imag % 8 == 0);
+  _nassert ((int) pSrc2Real % 8 == 0);
+  _nassert ((int) pSrc2Imag % 8 == 0);
+  _nassert ((int) pDstReal % 8 == 0);
+  _nassert ((int) pDstImag % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        TempReal = (pSrc1Real[i] * pSrc2Real[i]) - (pSrc1Imag[i] * pSrc2Imag[i]);
-        TempImag = (pSrc1Real[i] * pSrc2Imag[i]) + (pSrc1Imag[i] * pSrc2Real[i]);
-        pDstReal[i] = TempReal;
-        pDstImag[i] = TempImag;
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    TempReal = (pSrc1Real[i] * pSrc2Real[i]) - (pSrc1Imag[i] * pSrc2Imag[i]);
+    TempImag = (pSrc1Real[i] * pSrc2Imag[i]) + (pSrc1Imag[i] * pSrc2Real[i]);
+    pDstReal[i] = TempReal;
+    pDstImag[i] = TempImag;
 #else
-        TempReal = (*pSrc1Real * *pSrc2Real) - (*pSrc1Imag * *pSrc2Imag);
-        TempImag = (*pSrc1Real++ * *pSrc2Imag++) + (*pSrc1Imag++ * *pSrc2Real++);
-        *pDstReal++ = TempReal;
-        *pDstImag++ = TempImag;
+    TempReal = (*pSrc1Real * *pSrc2Real) - (*pSrc1Imag * *pSrc2Imag);
+    TempImag = (*pSrc1Real++ * *pSrc2Imag++) + (*pSrc1Imag++ * *pSrc2Real++);
+    *pDstReal++ = TempReal;
+    *pDstImag++ = TempImag;
 #endif
-    }
+  }
 
-}       // End of SDA_ComplexMultiply2()
+}                                                                   // End of SDA_ComplexMultiply2()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexScalarDivide
 *
@@ -546,39 +558,40 @@ _nassert((int) pDstImag % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexScalarDivide (const SLData_t * SIGLIB_PTR_DECL pSrcReal,
-    const SLData_t * SIGLIB_PTR_DECL pSrcImag,
-    const SLData_t Scalar,
-    SLData_t * SIGLIB_PTR_DECL pDstReal,
-    SLData_t * SIGLIB_PTR_DECL pDstImag,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexScalarDivide (
+  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+  const SLData_t Scalar,
+  SLData_t * SIGLIB_PTR_DECL pDstReal,
+  SLData_t * SIGLIB_PTR_DECL pDstImag,
+  const SLArrayIndex_t SampleLength)
 {
-    SLData_t       Multiplier = (SIGLIB_ONE / Scalar);
+  SLData_t        Multiplier = (SIGLIB_ONE / Scalar);
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrcReal % 8 == 0);          // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrcImag % 8 == 0);
-_nassert((int) pDstReal % 8 == 0);
-_nassert((int) pDstImag % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrcReal % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrcImag % 8 == 0);
+  _nassert ((int) pDstReal % 8 == 0);
+  _nassert ((int) pDstImag % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDstReal[i] = pSrcReal[i] * Multiplier;
-        pDstImag[i] = pSrcImag[i] * Multiplier;
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDstReal[i] = pSrcReal[i] * Multiplier;
+    pDstImag[i] = pSrcImag[i] * Multiplier;
 #else
-        *pDstReal++ = *pSrcReal++ * Multiplier;
-        *pDstImag++ = *pSrcImag++ * Multiplier;
+    *pDstReal++ = *pSrcReal++ * Multiplier;
+    *pDstImag++ = *pSrcImag++ * Multiplier;
 #endif
-    }
+  }
 
-}       // End of SDA_ComplexScalarDivide()
+}                                                                   // End of SDA_ComplexScalarDivide()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexDivide2
 *
@@ -599,28 +612,29 @@ _nassert((int) pDstImag % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ComplexDivide2 (const SLData_t * SIGLIB_PTR_DECL pRealNum1,
-    const SLData_t * SIGLIB_PTR_DECL pImagNum1,
-    const SLData_t * SIGLIB_PTR_DECL pRealDen2,
-    const SLData_t * SIGLIB_PTR_DECL pImagDen2,
-    SLData_t * SIGLIB_PTR_DECL pRealDst,
-    SLData_t * SIGLIB_PTR_DECL pImagDst,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_ComplexDivide2 (
+  const SLData_t * SIGLIB_PTR_DECL pRealNum1,
+  const SLData_t * SIGLIB_PTR_DECL pImagNum1,
+  const SLData_t * SIGLIB_PTR_DECL pRealDen2,
+  const SLData_t * SIGLIB_PTR_DECL pImagDen2,
+  SLData_t * SIGLIB_PTR_DECL pRealDst,
+  SLData_t * SIGLIB_PTR_DECL pImagDst,
+  const SLArrayIndex_t SampleLength)
 {
-    SLComplexRect_s         ComplexTmp1, ComplexTmp2;
+  SLComplexRect_s ComplexTmp1, ComplexTmp2;
 
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-        ComplexTmp1 = SCV_Rectangular (*pRealNum1++, *pImagNum1++);
-        ComplexTmp2 = SCV_Rectangular (*pRealDen2++, *pImagDen2++);
-        ComplexTmp1 =  SCV_Divide (ComplexTmp1, ComplexTmp2);
-        *pRealDst++ = ComplexTmp1.real;
-        *pImagDst++ = ComplexTmp1.imag;
-    }
-}       // End of SDA_ComplexDivide2()
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+    ComplexTmp1 = SCV_Rectangular (*pRealNum1++, *pImagNum1++);
+    ComplexTmp2 = SCV_Rectangular (*pRealDen2++, *pImagDen2++);
+    ComplexTmp1 = SCV_Divide (ComplexTmp1, ComplexTmp2);
+    *pRealDst++ = ComplexTmp1.real;
+    *pImagDst++ = ComplexTmp1.imag;
+  }
+}                                                                   // End of SDA_ComplexDivide2()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_RealDotProduct
 *
@@ -637,34 +651,35 @@ void SIGLIB_FUNC_DECL SDA_ComplexDivide2 (const SLData_t * SIGLIB_PTR_DECL pReal
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDA_RealDotProduct (const SLData_t * SIGLIB_PTR_DECL pSrc1,
-    const SLData_t * SIGLIB_PTR_DECL pSrc2,
-    const SLArrayIndex_t VectorLength)
-
+SLData_t SIGLIB_FUNC_DECL SDA_RealDotProduct (
+  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+  const SLArrayIndex_t VectorLength)
 {
-    SLData_t       DotProduct = SIGLIB_ZERO;
+  SLData_t        DotProduct = SIGLIB_ZERO;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc2 % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < VectorLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        DotProduct += pSrc1[i] * pSrc2[i];
+  for (SLArrayIndex_t i = 0; i < VectorLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    DotProduct += pSrc1[i] * pSrc2[i];
 #else
-        DotProduct += *pSrc1++ * *pSrc2++;
+    DotProduct += *pSrc1++ * *pSrc2++;
 #endif
-    }
+  }
 
-    return DotProduct;
+  return DotProduct;
 
-}       // End of SDA_RealDotProduct()
+}                                                                   // End of SDA_RealDotProduct()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ComplexDotProduct
 *
@@ -683,43 +698,44 @@ _nassert((int) pSrc2 % 8 == 0);
 *
 ********************************************************/
 
-SLComplexRect_s SIGLIB_FUNC_DECL SDA_ComplexDotProduct (const SLData_t * SIGLIB_PTR_DECL pSrc1Real,
-    const SLData_t * SIGLIB_PTR_DECL pSrc1Imag,
-    const SLData_t * SIGLIB_PTR_DECL pSrc2Real,
-    const SLData_t * SIGLIB_PTR_DECL pSrc2Imag,
-    const SLArrayIndex_t VectorLength)
-
+SLComplexRect_s SIGLIB_FUNC_DECL SDA_ComplexDotProduct (
+  const SLData_t * SIGLIB_PTR_DECL pSrc1Real,
+  const SLData_t * SIGLIB_PTR_DECL pSrc1Imag,
+  const SLData_t * SIGLIB_PTR_DECL pSrc2Real,
+  const SLData_t * SIGLIB_PTR_DECL pSrc2Imag,
+  const SLArrayIndex_t VectorLength)
 {
-    SLComplexRect_s         DotProduct;
+  SLComplexRect_s DotProduct;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1Real % 8 == 0);         // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc1Imag % 8 == 0);
-_nassert((int) pSrc2Real % 8 == 0);
-_nassert((int) pSrc2Imag % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc1Real % 8 == 0);                              // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc1Imag % 8 == 0);
+  _nassert ((int) pSrc2Real % 8 == 0);
+  _nassert ((int) pSrc2Imag % 8 == 0);
 #endif
 #endif
 
-    DotProduct.real = SIGLIB_ZERO;
-    DotProduct.imag = SIGLIB_ZERO;
+  DotProduct.real = SIGLIB_ZERO;
+  DotProduct.imag = SIGLIB_ZERO;
 
-    for (SLArrayIndex_t i = 0; i < VectorLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        DotProduct.real += (pSrc1Real[i] * pSrc2Real[i]) + (pSrc1Imag[i] * pSrc2Imag[i]);
-        DotProduct.imag += (pSrc1Imag[i] * pSrc2Real[i]) - (pSrc1Real[i] * pSrc2Imag[i]);
+  for (SLArrayIndex_t i = 0; i < VectorLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    DotProduct.real += (pSrc1Real[i] * pSrc2Real[i]) + (pSrc1Imag[i] * pSrc2Imag[i]);
+    DotProduct.imag += (pSrc1Imag[i] * pSrc2Real[i]) - (pSrc1Real[i] * pSrc2Imag[i]);
 #else
-        DotProduct.real += (*pSrc1Real * *pSrc2Real) + (*pSrc1Imag * *pSrc2Imag);
-        DotProduct.imag += (*pSrc1Imag++ * *pSrc2Real++) - (*pSrc1Real++ * *pSrc2Imag++);
+    DotProduct.real += (*pSrc1Real * *pSrc2Real) + (*pSrc1Imag * *pSrc2Imag);
+    DotProduct.imag += (*pSrc1Imag++ * *pSrc2Real++) - (*pSrc1Real++ * *pSrc2Imag++);
 #endif
-    }
+  }
 
-    return (DotProduct);
+  return (DotProduct);
 
-}       // End of SDA_ComplexDotProduct()
+}                                                                   // End of SDA_ComplexDotProduct()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_SumAndDifference
 *
@@ -738,35 +754,36 @@ _nassert((int) pSrc2Imag % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_SumAndDifference (const SLData_t * SIGLIB_PTR_DECL pSrc1,
-    const SLData_t * SIGLIB_PTR_DECL pSrc2,
-    SLData_t * SIGLIB_PTR_DECL pSum,
-    SLData_t * SIGLIB_PTR_DECL pDiff,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_SumAndDifference (
+  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+  SLData_t * SIGLIB_PTR_DECL pSum,
+  SLData_t * SIGLIB_PTR_DECL pDiff,
+  const SLArrayIndex_t SampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);
-_nassert((int) pSum % 8 == 0);
-_nassert((int) pDiff % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc2 % 8 == 0);
+  _nassert ((int) pSum % 8 == 0);
+  _nassert ((int) pDiff % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pSum[i] = pSrc1[i] + pSrc2[i];
-        pDiff[i] = pSrc1[i] - pSrc2[i];
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pSum[i] = pSrc1[i] + pSrc2[i];
+    pDiff[i] = pSrc1[i] - pSrc2[i];
 #else
-        *(pSum++) = *(pSrc1) + *(pSrc2);
-        *(pDiff++) = *(pSrc1++) - *(pSrc2++);
+    *(pSum++) = *(pSrc1) + *(pSrc2);
+    *(pDiff++) = *(pSrc1++) - *(pSrc2++);
 #endif
-    }
-}           // End of SDA_Add2()
+  }
+}                                                                   // End of SDA_Add2()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Add2
 *
@@ -784,31 +801,32 @@ _nassert((int) pDiff % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Add2 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
-    const SLData_t * SIGLIB_PTR_DECL pSrc2,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_Add2 (
+  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t SampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc2 % 8 == 0);
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = pSrc1[i] + pSrc2[i];
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = pSrc1[i] + pSrc2[i];
 #else
-        *(pDst++) = *(pSrc1++) + *(pSrc2++);
+    *(pDst++) = *(pSrc1++) + *(pSrc2++);
 #endif
-    }
-}           // End of SDA_Add2()
+  }
+}                                                                   // End of SDA_Add2()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Add3
 *
@@ -827,33 +845,34 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Add3 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
-    const SLData_t * SIGLIB_PTR_DECL pSrc2,
-    const SLData_t * SIGLIB_PTR_DECL pSrc3,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_Add3 (
+  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+  const SLData_t * SIGLIB_PTR_DECL pSrc3,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t SampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);
-_nassert((int) pSrc3 % 8 == 0);
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc2 % 8 == 0);
+  _nassert ((int) pSrc3 % 8 == 0);
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = pSrc1[i] + pSrc2[i] + pSrc3[i];
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = pSrc1[i] + pSrc2[i] + pSrc3[i];
 #else
-        *(pDst++) = *(pSrc1++) + *(pSrc2++) + *(pSrc3++);
+    *(pDst++) = *(pSrc1++) + *(pSrc2++) + *(pSrc3++);
 #endif
-    }
-}           // End of SDA_Add3()
+  }
+}                                                                   // End of SDA_Add3()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Add4
 *
@@ -873,35 +892,36 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Add4 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
-    const SLData_t * SIGLIB_PTR_DECL pSrc2,
-    const SLData_t * SIGLIB_PTR_DECL pSrc3,
-    const SLData_t * SIGLIB_PTR_DECL pSrc4,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_Add4 (
+  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+  const SLData_t * SIGLIB_PTR_DECL pSrc3,
+  const SLData_t * SIGLIB_PTR_DECL pSrc4,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t SampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);
-_nassert((int) pSrc3 % 8 == 0);
-_nassert((int) pSrc4 % 8 == 0);
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc2 % 8 == 0);
+  _nassert ((int) pSrc3 % 8 == 0);
+  _nassert ((int) pSrc4 % 8 == 0);
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = pSrc1[i] + pSrc2[i] + pSrc3[i] + pSrc4[i];
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = pSrc1[i] + pSrc2[i] + pSrc3[i] + pSrc4[i];
 #else
-        *(pDst++) = *(pSrc1++) + *(pSrc2++) + *(pSrc3++) + *(pSrc4++);
+    *(pDst++) = *(pSrc1++) + *(pSrc2++) + *(pSrc3++) + *(pSrc4++);
 #endif
-    }
-}           // End of SDA_Add4()
+  }
+}                                                                   // End of SDA_Add4()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Add5
 *
@@ -922,37 +942,38 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Add5 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
-    const SLData_t * SIGLIB_PTR_DECL pSrc2,
-    const SLData_t * SIGLIB_PTR_DECL pSrc3,
-    const SLData_t * SIGLIB_PTR_DECL pSrc4,
-    const SLData_t * SIGLIB_PTR_DECL pSrc5,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_Add5 (
+  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+  const SLData_t * SIGLIB_PTR_DECL pSrc3,
+  const SLData_t * SIGLIB_PTR_DECL pSrc4,
+  const SLData_t * SIGLIB_PTR_DECL pSrc5,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t SampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);
-_nassert((int) pSrc3 % 8 == 0);
-_nassert((int) pSrc4 % 8 == 0);
-_nassert((int) pSrc5 % 8 == 0);
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc2 % 8 == 0);
+  _nassert ((int) pSrc3 % 8 == 0);
+  _nassert ((int) pSrc4 % 8 == 0);
+  _nassert ((int) pSrc5 % 8 == 0);
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = pSrc1[i] + pSrc2[i] + pSrc3[i] + pSrc4[i] + pSrc5[i];
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = pSrc1[i] + pSrc2[i] + pSrc3[i] + pSrc4[i] + pSrc5[i];
 #else
-        *(pDst++) = *(pSrc1++) + *(pSrc2++) + *(pSrc3++) + *(pSrc4++) + *(pSrc5++);
+    *(pDst++) = *(pSrc1++) + *(pSrc2++) + *(pSrc3++) + *(pSrc4++) + *(pSrc5++);
 #endif
-    }
-}           // End of SDA_Add5()
+  }
+}                                                                   // End of SDA_Add5()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_WeightedSum
 *
@@ -970,32 +991,33 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_WeightedSum (const SLData_t * SIGLIB_PTR_DECL pSrc1,
-    const SLData_t * SIGLIB_PTR_DECL pSrc2,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLData_t Weight,
-    const SLArrayIndex_t VectorLength)
-
+void SIGLIB_FUNC_DECL SDA_WeightedSum (
+  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLData_t Weight,
+  const SLArrayIndex_t VectorLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc2 % 8 == 0);
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < VectorLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = (Weight * pSrc1[i]) + pSrc2[i];
+  for (SLArrayIndex_t i = 0; i < VectorLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = (Weight * pSrc1[i]) + pSrc2[i];
 #else
-        *pDst++ = (Weight * (*pSrc1++)) + (*pSrc2++);
+    *pDst++ = (Weight * (*pSrc1++)) + (*pSrc2++);
 #endif
-    }
-}       // End of SDA_WeightedSum()
+  }
+}                                                                   // End of SDA_WeightedSum()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Subtract2
 *
@@ -1014,31 +1036,32 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Subtract2 (const SLData_t * SIGLIB_PTR_DECL pSrc1,
-    const SLData_t * SIGLIB_PTR_DECL pSrc2,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_Subtract2 (
+  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t SampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc2 % 8 == 0);
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = pSrc1[i] - pSrc2[i];
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = pSrc1[i] - pSrc2[i];
 #else
-        *pDst++ = *pSrc1++ - *pSrc2++;
+    *pDst++ = *pSrc1++ - *pSrc2++;
 #endif
-    }
-}           // End of SDA_Subtract2()
+  }
+}                                                                   // End of SDA_Subtract2()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Add
 *
@@ -1056,31 +1079,32 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Add (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    const SLData_t Offset,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_Add (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  const SLData_t Offset,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t SampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = pSrc[i] + Offset;
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = pSrc[i] + Offset;
 #else
-        *pDst++ = *pSrc++ + Offset;
+    *pDst++ = *pSrc++ + Offset;
 #endif
-    }
+  }
 
-}       // End of SDA_Add()
+}                                                                   // End of SDA_Add()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_PositiveOffset
 *
@@ -1100,21 +1124,22 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDA_PositiveOffset (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+SLData_t SIGLIB_FUNC_DECL SDA_PositiveOffset (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLData_t    MinimumValue;
+  SLData_t        MinimumValue;
 
-    MinimumValue = SDA_Min (pSrc, ArrayLength);
-    SDA_Add (pSrc, -MinimumValue, pDst, ArrayLength);
+  MinimumValue = SDA_Min (pSrc, ArrayLength);
+  SDA_Add (pSrc, -MinimumValue, pDst, ArrayLength);
 
-    return (MinimumValue);
-}       // End of SDA_PositiveOffset()
+  return (MinimumValue);
+}                                                                   // End of SDA_PositiveOffset()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_NegativeOffset
 *
@@ -1134,21 +1159,22 @@ SLData_t SIGLIB_FUNC_DECL SDA_PositiveOffset (const SLData_t * SIGLIB_PTR_DECL p
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDA_NegativeOffset (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+SLData_t SIGLIB_FUNC_DECL SDA_NegativeOffset (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLData_t    MaximumValue;
+  SLData_t        MaximumValue;
 
-    MaximumValue = SDA_Max (pSrc, ArrayLength);
-    SDA_Add (pSrc, -MaximumValue, pDst, ArrayLength);
+  MaximumValue = SDA_Max (pSrc, ArrayLength);
+  SDA_Add (pSrc, -MaximumValue, pDst, ArrayLength);
 
-    return (MaximumValue);
-}       // End of SDA_NegativeOffset()
+  return (MaximumValue);
+}                                                                   // End of SDA_NegativeOffset()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Negate
 *
@@ -1165,30 +1191,31 @@ SLData_t SIGLIB_FUNC_DECL SDA_NegativeOffset (const SLData_t * SIGLIB_PTR_DECL p
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Negate (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_Negate (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t SampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = -pSrc[i];
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = -pSrc[i];
 #else
-        *pDst++ = -(*pSrc++);
+    *pDst++ = -(*pSrc++);
 #endif
-    }
+  }
 
-}       // End of SDA_Negate()
+}                                                                   // End of SDA_Negate()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Inverse
 *
@@ -1205,30 +1232,31 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Inverse (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_Inverse (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t SampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = SIGLIB_ONE / pSrc[i];
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = SIGLIB_ONE / pSrc[i];
 #else
-        *pDst++ = SIGLIB_ONE / *pSrc++;
+    *pDst++ = SIGLIB_ONE / *pSrc++;
 #endif
-    }
+  }
 
-}       // End of SDA_Inverse()
+}                                                                   // End of SDA_Inverse()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Square
 *
@@ -1245,31 +1273,32 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Square (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_Square (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t SampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = pSrc[i] * pSrc[i];
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = pSrc[i] * pSrc[i];
 #else
-        *pDst++ = (*pSrc) * (*pSrc);
-        pSrc++;
+    *pDst++ = (*pSrc) * (*pSrc);
+    pSrc++;
 #endif
-    }
+  }
 
-}       // End of SDA_Square()
+}                                                                   // End of SDA_Square()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Sqrt
 *
@@ -1286,30 +1315,31 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Sqrt (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_Sqrt (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t SampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = SDS_Sqrt (pSrc[i]);
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = SDS_Sqrt (pSrc[i]);
 #else
-        *pDst++ = SDS_Sqrt (*pSrc++);
+    *pDst++ = SDS_Sqrt (*pSrc++);
 #endif
-    }
+  }
 
-}       // End of SDA_Sqrt()
+}                                                                   // End of SDA_Sqrt()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Difference
 *
@@ -1328,34 +1358,35 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Difference (const SLData_t * SIGLIB_PTR_DECL pSrc1,
-    const SLData_t * SIGLIB_PTR_DECL pSrc2,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_Difference (
+  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t SampleLength)
 {
-    SLData_t       Difference;
+  SLData_t        Difference;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc2 % 8 == 0);
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-        Difference = *pSrc1++ - *pSrc2++;
-        if (Difference < SIGLIB_ZERO) {
-            Difference = -Difference;
-        }
-
-        *pDst++ = Difference;
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+    Difference = *pSrc1++ - *pSrc2++;
+    if (Difference < SIGLIB_ZERO) {
+      Difference = -Difference;
     }
-}       // End of SDA_Difference()
+
+    *pDst++ = Difference;
+  }
+}                                                                   // End of SDA_Difference()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_SumOfDifferences
 *
@@ -1373,35 +1404,36 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDA_SumOfDifferences (const SLData_t * SIGLIB_PTR_DECL pSrc1,
-    const SLData_t * SIGLIB_PTR_DECL pSrc2,
-    const SLArrayIndex_t SampleLength)
-
+SLData_t SIGLIB_FUNC_DECL SDA_SumOfDifferences (
+  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+  const SLArrayIndex_t SampleLength)
 {
-    SLData_t       Sum = SIGLIB_ZERO;
-    SLData_t       Difference;
+  SLData_t        Sum = SIGLIB_ZERO;
+  SLData_t        Difference;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc2 % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-        Difference = *pSrc1++ - *pSrc2++;
-        if (Difference < SIGLIB_ZERO) {
-            Difference = -Difference;
-        }
-
-        Sum += Difference;
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+    Difference = *pSrc1++ - *pSrc2++;
+    if (Difference < SIGLIB_ZERO) {
+      Difference = -Difference;
     }
 
-    return (Sum);
-}       // End of SDA_SumOfDifferences()
+    Sum += Difference;
+  }
+
+  return (Sum);
+}                                                                   // End of SDA_SumOfDifferences()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_Roots()
 *
@@ -1421,25 +1453,26 @@ _nassert((int) pSrc2 % 8 == 0);
 *
 ********************************************************/
 
-SLError_t SIGLIB_FUNC_DECL SDS_Roots (const SLData_t a,
-    const SLData_t b,
-    const SLData_t c,
-    SLData_t *Root1,
-    SLData_t *Root2)
-
+SLError_t SIGLIB_FUNC_DECL SDS_Roots (
+  const SLData_t a,
+  const SLData_t b,
+  const SLData_t c,
+  SLData_t * Root1,
+  SLData_t * Root2)
 {
-    if (((b * b) - (SIGLIB_FOUR * a * c)) < SIGLIB_ZERO) {
-        return (SIGLIB_DOMAIN_ERROR);
-    }
+  if (((b * b) - (SIGLIB_FOUR * a * c)) < SIGLIB_ZERO) {
+    return (SIGLIB_DOMAIN_ERROR);
+  }
 
-    *Root1 = (- b + SDS_Sqrt ((b * b) - (SIGLIB_FOUR * a * c))) / (SIGLIB_TWO * a);
-    *Root2 = (- b - SDS_Sqrt ((b * b) - (SIGLIB_FOUR * a * c))) / (SIGLIB_TWO * a);
+  *Root1 = (-b + SDS_Sqrt ((b * b) - (SIGLIB_FOUR * a * c))) / (SIGLIB_TWO * a);
+  *Root2 = (-b - SDS_Sqrt ((b * b) - (SIGLIB_FOUR * a * c))) / (SIGLIB_TWO * a);
 
-    return (SIGLIB_NO_ERROR);
-}       // End of SDS_Roots()
+  return (SIGLIB_NO_ERROR);
+}                                                                   // End of SDS_Roots()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_Factorial()
 *
@@ -1453,28 +1486,29 @@ SLError_t SIGLIB_FUNC_DECL SDS_Roots (const SLData_t a,
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_Factorial (const SLData_t Input)
-
+SLData_t SIGLIB_FUNC_DECL SDS_Factorial (
+  const SLData_t Input)
 {
-    SLData_t   i = SIGLIB_TWO;
-    SLData_t   Factorial = SIGLIB_ONE;
+  SLData_t        i = SIGLIB_TWO;
+  SLData_t        Factorial = SIGLIB_ONE;
 
-    if (Input < SIGLIB_ZERO) {
-        return (SIGLIB_ZERO);
-    }
-    else if ((Input == SIGLIB_ZERO) || (Input == SIGLIB_ONE)) {
-        return (SIGLIB_ONE);
-    }
-    while (i <= (Input + SIGLIB_MIN_THRESHOLD)) {   // Ensure that input doesn't round down
-        Factorial *= i;
-        i++;
-    }
+  if (Input < SIGLIB_ZERO) {
+    return (SIGLIB_ZERO);
+  }
+  else if ((Input == SIGLIB_ZERO) || (Input == SIGLIB_ONE)) {
+    return (SIGLIB_ONE);
+  }
+  while (i <= (Input + SIGLIB_MIN_THRESHOLD)) {                     // Ensure that input doesn't round down
+    Factorial *= i;
+    i++;
+  }
 
-    return (Factorial);
-}       // End of SDS_Factorial()
+  return (Factorial);
+}                                                                   // End of SDS_Factorial()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_Permutations()
 *
@@ -1495,14 +1529,16 @@ SLData_t SIGLIB_FUNC_DECL SDS_Factorial (const SLData_t Input)
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_Permutations (const SLData_t n, const SLData_t k)
-
+SLData_t SIGLIB_FUNC_DECL SDS_Permutations (
+  const SLData_t n,
+  const SLData_t k)
 {
-    return (SDS_Factorial (n) / SDS_Factorial (n - k));
-}       // End of SDS_Permutations()
+  return (SDS_Factorial (n) / SDS_Factorial (n - k));
+}                                                                   // End of SDS_Permutations()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_Combinations()
 *
@@ -1522,14 +1558,16 @@ SLData_t SIGLIB_FUNC_DECL SDS_Permutations (const SLData_t n, const SLData_t k)
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_Combinations (const SLData_t n, const SLData_t k)
-
+SLData_t SIGLIB_FUNC_DECL SDS_Combinations (
+  const SLData_t n,
+  const SLData_t k)
 {
-    return (SDS_Factorial (n) / (SDS_Factorial (n - k) * SDS_Factorial (k)));
-}       // End of SDS_Combinations()
+  return (SDS_Factorial (n) / (SDS_Factorial (n - k) * SDS_Factorial (k)));
+}                                                                   // End of SDS_Combinations()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_OverlapAndAddLinear()
 *
@@ -1545,15 +1583,16 @@ SLData_t SIGLIB_FUNC_DECL SDS_Combinations (const SLData_t n, const SLData_t k)
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_OverlapAndAddLinear (SLData_t * SIGLIB_PTR_DECL pIncrement,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SIF_OverlapAndAddLinear (
+  SLData_t * SIGLIB_PTR_DECL pIncrement,
+  const SLArrayIndex_t ArrayLength)
 {
-    *pIncrement = (SIGLIB_ONE / ((SLData_t)ArrayLength));
-}       // End of SIF_OverlapAndAddLinear()
+  *pIncrement = (SIGLIB_ONE / ((SLData_t) ArrayLength));
+}                                                                   // End of SIF_OverlapAndAddLinear()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_OverlapAndAddLinear
 *
@@ -1574,34 +1613,35 @@ void SIGLIB_FUNC_DECL SIF_OverlapAndAddLinear (SLData_t * SIGLIB_PTR_DECL pIncre
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_OverlapAndAddLinear (const SLData_t * SIGLIB_PTR_DECL pSrc1,
-    const SLData_t * SIGLIB_PTR_DECL pSrc2,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLData_t Increment,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_OverlapAndAddLinear (
+  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLData_t Increment,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLData_t        Src1ScaleFactor = SIGLIB_ONE - Increment;
-    SLData_t        Src2ScaleFactor = Increment;
+  SLData_t        Src1ScaleFactor = SIGLIB_ONE - Increment;
+  SLData_t        Src2ScaleFactor = Increment;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc2 % 8 == 0);
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
-        pDst[i] = (pSrc1[i] * Src1ScaleFactor) + (pSrc2[i] * Src2ScaleFactor);
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
+    pDst[i] = (pSrc1[i] * Src1ScaleFactor) + (pSrc2[i] * Src2ScaleFactor);
 
-        Src1ScaleFactor -= Increment;
-        Src2ScaleFactor += Increment;
-    }
-}       // End of SDA_OverlapAndAddLinear()
+    Src1ScaleFactor -= Increment;
+    Src2ScaleFactor += Increment;
+  }
+}                                                                   // End of SDA_OverlapAndAddLinear()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_OverlapAndAddLinearWithClip
 *
@@ -1625,43 +1665,44 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_OverlapAndAddLinearWithClip (const SLData_t * SIGLIB_PTR_DECL pSrc1,
-    const SLData_t * SIGLIB_PTR_DECL pSrc2,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLData_t Threshold,
-    const SLData_t Increment,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_OverlapAndAddLinearWithClip (
+  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLData_t Threshold,
+  const SLData_t Increment,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLData_t    Src1ScaleFactor = SIGLIB_ONE - Increment;
-    SLData_t    Src2ScaleFactor = Increment;
-    SLData_t    Tmp;
+  SLData_t        Src1ScaleFactor = SIGLIB_ONE - Increment;
+  SLData_t        Src2ScaleFactor = Increment;
+  SLData_t        Tmp;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc2 % 8 == 0);
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
-        Tmp = (pSrc1[i] * Src1ScaleFactor) + (pSrc2[i] * Src2ScaleFactor);
-        if (Tmp > Threshold) {
-            Tmp = Threshold;
-        }
-        else if (Tmp < -Threshold) {
-            Tmp = -Threshold;
-        }
-        pDst[i] = Tmp;
-
-        Src1ScaleFactor -= Increment;
-        Src2ScaleFactor += Increment;
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
+    Tmp = (pSrc1[i] * Src1ScaleFactor) + (pSrc2[i] * Src2ScaleFactor);
+    if (Tmp > Threshold) {
+      Tmp = Threshold;
     }
-}       // End of SDA_OverlapAndAddLinearWithClip()
+    else if (Tmp < -Threshold) {
+      Tmp = -Threshold;
+    }
+    pDst[i] = Tmp;
+
+    Src1ScaleFactor -= Increment;
+    Src2ScaleFactor += Increment;
+  }
+}                                                                   // End of SDA_OverlapAndAddLinearWithClip()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_OverlapAndAddArbitrary()
 *
@@ -1682,29 +1723,30 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_OverlapAndAddArbitrary (const SLData_t * SIGLIB_PTR_DECL pSrc1,
-    const SLData_t * SIGLIB_PTR_DECL pSrc2,
-    const SLData_t * SIGLIB_PTR_DECL pWin,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_OverlapAndAddArbitrary (
+  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+  const SLData_t * SIGLIB_PTR_DECL pWin,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);
-_nassert((int) pWin % 8 == 0);
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc2 % 8 == 0);
+  _nassert ((int) pWin % 8 == 0);
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
-        pDst[i] = (pSrc1[i] * pWin[i]) + (pSrc2[i] * pWin[(ArrayLength-1)-i]);
-    }
-}       // End of SDA_OverlapAndAddArbitrary()
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
+    pDst[i] = (pSrc1[i] * pWin[i]) + (pSrc2[i] * pWin[(ArrayLength - 1) - i]);
+  }
+}                                                                   // End of SDA_OverlapAndAddArbitrary()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_OverlapAndAddArbitraryWithClip()
 *
@@ -1728,39 +1770,40 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_OverlapAndAddArbitraryWithClip (const SLData_t * SIGLIB_PTR_DECL pSrc1,
-    const SLData_t * SIGLIB_PTR_DECL pSrc2,
-    const SLData_t * SIGLIB_PTR_DECL pWin,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLData_t Threshold,
-    const SLArrayIndex_t ArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_OverlapAndAddArbitraryWithClip (
+  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+  const SLData_t * SIGLIB_PTR_DECL pWin,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLData_t Threshold,
+  const SLArrayIndex_t ArrayLength)
 {
-    SLData_t   Tmp;
+  SLData_t        Tmp;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc1 % 8 == 0);             // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pSrc2 % 8 == 0);
-_nassert((int) pWin % 8 == 0);
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc2 % 8 == 0);
+  _nassert ((int) pWin % 8 == 0);
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
-        Tmp = (pSrc1[i] * pWin[i]) + (pSrc2[i] * pWin[(ArrayLength-1)-i]);
-        if (Tmp > Threshold) {
-            Tmp = Threshold;
-        }
-        else if (Tmp < -Threshold) {
-            Tmp = -Threshold;
-        }
-        pDst[i] = Tmp;
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
+    Tmp = (pSrc1[i] * pWin[i]) + (pSrc2[i] * pWin[(ArrayLength - 1) - i]);
+    if (Tmp > Threshold) {
+      Tmp = Threshold;
     }
-}       // End of SDA_OverlapAndAddArbitraryWithClip()
+    else if (Tmp < -Threshold) {
+      Tmp = -Threshold;
+    }
+    pDst[i] = Tmp;
+  }
+}                                                                   // End of SDA_OverlapAndAddArbitraryWithClip()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_DegreesToRadians()
 *
@@ -1775,14 +1818,15 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_DegreesToRadians (const SLData_t Degrees)
-
+SLData_t SIGLIB_FUNC_DECL SDS_DegreesToRadians (
+  const SLData_t Degrees)
 {
-    return (Degrees * SIGLIB_DEGREES_TO_RADIANS);
-}       // End of SDS_DegreesToRadians()
+  return (Degrees * SIGLIB_DEGREES_TO_RADIANS);
+}                                                                   // End of SDS_DegreesToRadians()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_DegreesToRadians()
 *
@@ -1799,29 +1843,30 @@ SLData_t SIGLIB_FUNC_DECL SDS_DegreesToRadians (const SLData_t Degrees)
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_DegreesToRadians (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_DegreesToRadians (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t SampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = pSrc[i] * SIGLIB_DEGREES_TO_RADIANS;
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = pSrc[i] * SIGLIB_DEGREES_TO_RADIANS;
 #else
-        *pDst++ = *pSrc++ * SIGLIB_DEGREES_TO_RADIANS;
+    *pDst++ = *pSrc++ * SIGLIB_DEGREES_TO_RADIANS;
 #endif
-    }
-}       // End of SDA_DegreesToRadians()
+  }
+}                                                                   // End of SDA_DegreesToRadians()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_RadiansToDegrees()
 *
@@ -1836,14 +1881,15 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_RadiansToDegrees (const SLData_t Degrees)
-
+SLData_t SIGLIB_FUNC_DECL SDS_RadiansToDegrees (
+  const SLData_t Degrees)
 {
-    return (Degrees * SIGLIB_RADIANS_TO_DEGREES);
-}       // End of SDS_RadiansToDegrees()
+  return (Degrees * SIGLIB_RADIANS_TO_DEGREES);
+}                                                                   // End of SDS_RadiansToDegrees()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_RadiansToDegrees()
 *
@@ -1860,29 +1906,30 @@ SLData_t SIGLIB_FUNC_DECL SDS_RadiansToDegrees (const SLData_t Degrees)
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_RadiansToDegrees (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_RadiansToDegrees (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t SampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index or pointer access modes
-        pDst[i] = pSrc[i] * SIGLIB_RADIANS_TO_DEGREES;
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = pSrc[i] * SIGLIB_RADIANS_TO_DEGREES;
 #else
-        *pDst++ = *pSrc++ * SIGLIB_RADIANS_TO_DEGREES;
+    *pDst++ = *pSrc++ * SIGLIB_RADIANS_TO_DEGREES;
 #endif
-    }
-}       // End of SDA_RadiansToDegrees()
+  }
+}                                                                   // End of SDA_RadiansToDegrees()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_DetectNAN
 *
@@ -1902,18 +1949,19 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SDS_DetectNAN (const SLData_t x)
-
+SLArrayIndex_t SIGLIB_FUNC_DECL SDS_DetectNAN (
+  const SLData_t x)
 {
-    if (isfinite (x) == 0) {
-        return (0);
-    }
+  if (isfinite (x) == 0) {
+    return (0);
+  }
 
-    return (-1);
-}       // End of SDS_DetectNAN()
+  return (-1);
+}                                                                   // End of SDS_DetectNAN()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_DetectNAN
 *
@@ -1933,16 +1981,15 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_DetectNAN (const SLData_t x)
 *
 ********************************************************/
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SDA_DetectNAN (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    const SLArrayIndex_t arrayLength)
-
+SLArrayIndex_t SIGLIB_FUNC_DECL SDA_DetectNAN (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  const SLArrayIndex_t arrayLength)
 {
-    for (SLArrayIndex_t  i = 0; i < arrayLength; i++) {
-        if (isfinite (*pSrc++) == 0) {                      // Value is NaN
-            return (i);
-        }
+  for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
+    if (isfinite (*pSrc++) == 0) {                                  // Value is NaN
+      return (i);
     }
+  }
 
-    return (-1);                                            // Value is NOT NaN
-}       // End of SDA_DetectNAN()
-
+  return (-1);                                                      // Value is NOT NaN
+}                                                                   // End of SDA_DetectNAN()

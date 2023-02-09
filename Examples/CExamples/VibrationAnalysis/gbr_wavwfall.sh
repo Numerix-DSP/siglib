@@ -7,10 +7,10 @@ rm -f *.gpdt
 ./gb.sh wavwfall
 rm -f *.obj
 if [ -f wavwfall ]; then
-    ./wavwfall $1
-    if [ -f sc.gpdt ]; then
-        gnuplot sgplot.gp
-    fi
+  ./wavwfall $1
+  if [ -f sc.gpdt ]; then
+    gnuplot sgplot.gp
+  fi
 fi
 rm -f *.gpdt
 

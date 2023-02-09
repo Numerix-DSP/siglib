@@ -1,3 +1,4 @@
+
 /**************************************************************************
 File Name               : SPEECH.C      | Author        : JOHN EDWARDS
 Siglib Library Version  : 10.00         |
@@ -36,12 +37,13 @@ Description : Speech processing functions for SigLib DSP library.
 
 ****************************************************************************/
 
-#define SIGLIB_SRC_FILE_SPEECH  1                           // Defines the source file that this code is being used in
+#define SIGLIB_SRC_FILE_SPEECH  1                                   // Defines the source file that this code is being used in
 
-#include <siglib.h>                                         // Include SigLib header file
+#include <siglib.h>                                                 // Include SigLib header file
 
 
 /**/
+
 /********************************************************
 * Function: SIF_PreEmphasisFilter
 *
@@ -56,14 +58,15 @@ Description : Speech processing functions for SigLib DSP library.
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_PreEmphasisFilter (SLData_t *pState)
-
+void SIGLIB_FUNC_DECL SIF_PreEmphasisFilter (
+  SLData_t * pState)
 {
-    *pState = SIGLIB_ZERO;
+  *pState = SIGLIB_ZERO;
 }
 
 
 /**/
+
 /********************************************************
 * Function: SDA_PreEmphasisFilter
 *
@@ -82,35 +85,36 @@ void SIGLIB_FUNC_DECL SIF_PreEmphasisFilter (SLData_t *pState)
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_PreEmphasisFilter (SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLData_t Coefficient,
-    SLData_t *pState,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_PreEmphasisFilter (
+  SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLData_t Coefficient,
+  SLData_t * pState,
+  const SLArrayIndex_t SampleLength)
 {
-    SLData_t   LocalState = *pState;
-    SLData_t   InputValue;
-    SLArrayIndex_t      i;
+  SLData_t        LocalState = *pState;
+  SLData_t        InputValue;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < SampleLength; i++) {                    // Calculate pre-emphasis filter
-        InputValue = *pSrc++;
-        *pDst++ = InputValue - (LocalState * Coefficient);
-        LocalState = InputValue;
-    }
+  for (i = 0; i < SampleLength; i++) {                              // Calculate pre-emphasis filter
+    InputValue = *pSrc++;
+    *pDst++ = InputValue - (LocalState * Coefficient);
+    LocalState = InputValue;
+  }
 
-    *pState = LocalState;                                   // Save state for next iteration
+  *pState = LocalState;                                             // Save state for next iteration
 }
 
 
 /**/
+
 /********************************************************
 * Function: SIF_DeEmphasisFilter
 *
@@ -125,14 +129,15 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_DeEmphasisFilter (SLData_t *pState)
-
+void SIGLIB_FUNC_DECL SIF_DeEmphasisFilter (
+  SLData_t * pState)
 {
-    *pState = SIGLIB_ZERO;
+  *pState = SIGLIB_ZERO;
 }
 
 
 /**/
+
 /********************************************************
 * Function: SDA_DeEmphasisFilter
 *
@@ -151,33 +156,34 @@ void SIGLIB_FUNC_DECL SIF_DeEmphasisFilter (SLData_t *pState)
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_DeEmphasisFilter (SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLData_t Coefficient,
-    SLData_t *pState,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_DeEmphasisFilter (
+  SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLData_t Coefficient,
+  SLData_t * pState,
+  const SLArrayIndex_t SampleLength)
 {
-    SLData_t   LocalState = *pState;
-    SLArrayIndex_t      i;
+  SLData_t        LocalState = *pState;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    for (i = 0; i < SampleLength; i++) {
-        *pDst = *pSrc++ + (LocalState * Coefficient);
-        LocalState = *pDst++;
-    }
+  for (i = 0; i < SampleLength; i++) {
+    *pDst = *pSrc++ + (LocalState * Coefficient);
+    LocalState = *pDst++;
+  }
 
-    *pState = LocalState;                                   // Save state for next iteration
+  *pState = LocalState;                                             // Save state for next iteration
 }
 
 
 /**/
+
 /********************************************************
 * Function: SDA_AdpcmEncoder
 *
@@ -206,59 +212,60 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_AdpcmEncoder (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t FrameSize)
-
+void SIGLIB_FUNC_DECL SDA_AdpcmEncoder (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t FrameSize)
 {
-    SLData_t   LocalEstimate;
-    SLData_t            StepIncrement = SIGLIB_ONE;
-    SLData_t            LocalPreviousInput = SIGLIB_ZERO;
-    SLData_t            LocalInput;
-    SLArrayIndex_t      i;
+  SLData_t        LocalEstimate;
+  SLData_t        StepIncrement = SIGLIB_ONE;
+  SLData_t        LocalPreviousInput = SIGLIB_ZERO;
+  SLData_t        LocalInput;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    LocalEstimate = *pSrc++;                                    // Local estimate = first sample
-    *pDst++ = LocalEstimate;                                    // Save the first input sample into the destination frame
+  LocalEstimate = *pSrc++;                                          // Local estimate = first sample
+  *pDst++ = LocalEstimate;                                          // Save the first input sample into the destination frame
 
-    for (i = 0; i < (FrameSize - 1); i++) {
-        LocalInput = *pSrc++;
+  for (i = 0; i < (FrameSize - 1); i++) {
+    LocalInput = *pSrc++;
 
-        if (LocalEstimate < LocalPreviousInput) {               // The estimate is less than the previous input value
-            LocalEstimate += StepIncrement;                     // Increment the local estimate by the step size
+    if (LocalEstimate < LocalPreviousInput) {                       // The estimate is less than the previous input value
+      LocalEstimate += StepIncrement;                               // Increment the local estimate by the step size
 
-            if (LocalEstimate >= LocalInput) {                  // The estimate is greater than the input sample
-                StepIncrement = ADPCM_DEFAULT_STEP_SIZE;
-                *pDst++ = SIGLIB_ZERO;
-            }
-            else {                                              // The estimate is <= the input sample
-                StepIncrement *= SIGLIB_TWO;
-                *pDst++ = SIGLIB_ONE;
-            }
-        }
-        else {                                                  // The estimate is >= the previous input value
-            LocalEstimate -= StepIncrement;                     // Decrement the local estimate by the step size
-            if (LocalEstimate <= LocalInput) {                  // The estimate is less than the input sample
-                StepIncrement = ADPCM_DEFAULT_STEP_SIZE;
-                *pDst++ = SIGLIB_ZERO;
-            }
-            else {                                              // The estimate is >= the input sample
-                StepIncrement *= SIGLIB_TWO;
-                *pDst++ = SIGLIB_ONE;
-            }
-        }
-        LocalPreviousInput = LocalInput;
+      if (LocalEstimate >= LocalInput) {                            // The estimate is greater than the input sample
+        StepIncrement = ADPCM_DEFAULT_STEP_SIZE;
+        *pDst++ = SIGLIB_ZERO;
+      }
+      else {                                                        // The estimate is <= the input sample
+        StepIncrement *= SIGLIB_TWO;
+        *pDst++ = SIGLIB_ONE;
+      }
     }
+    else {                                                          // The estimate is >= the previous input value
+      LocalEstimate -= StepIncrement;                               // Decrement the local estimate by the step size
+      if (LocalEstimate <= LocalInput) {                            // The estimate is less than the input sample
+        StepIncrement = ADPCM_DEFAULT_STEP_SIZE;
+        *pDst++ = SIGLIB_ZERO;
+      }
+      else {                                                        // The estimate is >= the input sample
+        StepIncrement *= SIGLIB_TWO;
+        *pDst++ = SIGLIB_ONE;
+      }
+    }
+    LocalPreviousInput = LocalInput;
+  }
 }
 
 
 /**/
+
 /********************************************************
 * Function: SDA_AdpcmEncoderDebug
 *
@@ -292,64 +299,65 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_AdpcmEncoderDebug (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    SLData_t * SIGLIB_PTR_DECL pEstimate,
-    const SLArrayIndex_t FrameSize)
-
+void SIGLIB_FUNC_DECL SDA_AdpcmEncoderDebug (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  SLData_t * SIGLIB_PTR_DECL pEstimate,
+  const SLArrayIndex_t FrameSize)
 {
-    SLData_t   LocalEstimate;
-    SLData_t            StepIncrement = SIGLIB_ONE;
-    SLData_t            LocalPreviousInput = SIGLIB_ZERO;
-    SLData_t            LocalInput;
-    SLArrayIndex_t      i;
+  SLData_t        LocalEstimate;
+  SLData_t        StepIncrement = SIGLIB_ONE;
+  SLData_t        LocalPreviousInput = SIGLIB_ZERO;
+  SLData_t        LocalInput;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pEstimate % 8 == 0);
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pEstimate % 8 == 0);
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    LocalEstimate = *pSrc++;                                    // Local estimate = first sample
-    *pDst++ = LocalEstimate;                                    // Save the first input sample into the destination frame
+  LocalEstimate = *pSrc++;                                          // Local estimate = first sample
+  *pDst++ = LocalEstimate;                                          // Save the first input sample into the destination frame
 
-    *pEstimate = LocalEstimate;                                 // Save debug output
+  *pEstimate = LocalEstimate;                                       // Save debug output
 
-    for (i = 0; i < (FrameSize - 1); i++) {
-        LocalInput = *pSrc++;
+  for (i = 0; i < (FrameSize - 1); i++) {
+    LocalInput = *pSrc++;
 
-        if (LocalEstimate < LocalPreviousInput) {               // The estimate is less than the previous input value
-            LocalEstimate += StepIncrement;                     // Increment the local estimate by the step size
+    if (LocalEstimate < LocalPreviousInput) {                       // The estimate is less than the previous input value
+      LocalEstimate += StepIncrement;                               // Increment the local estimate by the step size
 
-            if (LocalEstimate >= LocalInput) {                  // The estimate is greater than the input sample
-                StepIncrement = ADPCM_DEFAULT_STEP_SIZE;
-                *pDst++ = SIGLIB_ZERO;
-            }
-            else {                                              // The estimate is <= the input sample
-                StepIncrement *= SIGLIB_TWO;
-                *pDst++ = SIGLIB_ONE;
-            }
-        }
-        else {                                                  // The estimate is >= the previous input value
-            LocalEstimate -= StepIncrement;                     // Decrement the local estimate by the step size
-            if (LocalEstimate <= LocalInput) {                  // The estimate is less than the input sample
-                StepIncrement = ADPCM_DEFAULT_STEP_SIZE;
-                *pDst++ = SIGLIB_ZERO;
-            }
-            else {                                              // The estimate is >= the input sample
-                StepIncrement *= SIGLIB_TWO;
-                *pDst++ = SIGLIB_ONE;
-            }
-        }
-        *(pEstimate+i+1) = LocalEstimate;               // Save debug output
-        LocalPreviousInput = LocalInput;
+      if (LocalEstimate >= LocalInput) {                            // The estimate is greater than the input sample
+        StepIncrement = ADPCM_DEFAULT_STEP_SIZE;
+        *pDst++ = SIGLIB_ZERO;
+      }
+      else {                                                        // The estimate is <= the input sample
+        StepIncrement *= SIGLIB_TWO;
+        *pDst++ = SIGLIB_ONE;
+      }
     }
+    else {                                                          // The estimate is >= the previous input value
+      LocalEstimate -= StepIncrement;                               // Decrement the local estimate by the step size
+      if (LocalEstimate <= LocalInput) {                            // The estimate is less than the input sample
+        StepIncrement = ADPCM_DEFAULT_STEP_SIZE;
+        *pDst++ = SIGLIB_ZERO;
+      }
+      else {                                                        // The estimate is >= the input sample
+        StepIncrement *= SIGLIB_TWO;
+        *pDst++ = SIGLIB_ONE;
+      }
+    }
+    *(pEstimate + i + 1) = LocalEstimate;                           // Save debug output
+    LocalPreviousInput = LocalInput;
+  }
 }
 
 
 /**/
+
 /********************************************************
 * Function: SDA_AdpcmDecoder
 *
@@ -378,44 +386,43 @@ _nassert((int) pDst % 8 == 0);
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_AdpcmDecoder (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLArrayIndex_t FrameSize)
-
+void SIGLIB_FUNC_DECL SDA_AdpcmDecoder (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t FrameSize)
 {
-    SLData_t   LocalEstimate;
-    SLData_t            StepIncrement = SIGLIB_ONE;
-    SLData_t            LocalSign;
-    SLArrayIndex_t      i;
+  SLData_t        LocalEstimate;
+  SLData_t        StepIncrement = SIGLIB_ONE;
+  SLData_t        LocalSign;
+  SLArrayIndex_t  i;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                        // Defined by TI compiler
-_nassert((int) pSrc % 8 == 0);              // Align arrays on 64 bit double word boundary for LDDW
-_nassert((int) pDst % 8 == 0);
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
 
-    LocalEstimate = *pSrc++;                                    // Local estimate = first sample
-    *pDst++ = LocalEstimate;                                    // Save the first input sample into the destination frame
+  LocalEstimate = *pSrc++;                                          // Local estimate = first sample
+  *pDst++ = LocalEstimate;                                          // Save the first input sample into the destination frame
 
-    if (LocalEstimate >= SIGLIB_ZERO) {                         // Initialise the increment / decrement value
-        LocalSign = SIGLIB_MINUS_ONE;
-    }
-    else {
-        LocalSign = SIGLIB_ONE;
-    }
+  if (LocalEstimate >= SIGLIB_ZERO) {                               // Initialise the increment / decrement value
+    LocalSign = SIGLIB_MINUS_ONE;
+  }
+  else {
+    LocalSign = SIGLIB_ONE;
+  }
 
-    for (i = 0; i < (FrameSize - 1); i++) {
-        LocalEstimate += (LocalSign * StepIncrement);
+  for (i = 0; i < (FrameSize - 1); i++) {
+    LocalEstimate += (LocalSign * StepIncrement);
 
-        if (*pSrc++ == SIGLIB_ONE) {                            // Input == 1 so double step for next iteration
-            StepIncrement *= SIGLIB_TWO;
-        }
-        else {                                                  // Input == 0 so reset step for next iteration  and negate sign of integration
-            StepIncrement = ADPCM_DEFAULT_STEP_SIZE;
-            LocalSign *= SIGLIB_MINUS_ONE;
-        }
-        *pDst++ = LocalEstimate;
+    if (*pSrc++ == SIGLIB_ONE) {                                    // Input == 1 so double step for next iteration
+      StepIncrement *= SIGLIB_TWO;
     }
+    else {                                                          // Input == 0 so reset step for next iteration  and negate sign of integration
+      StepIncrement = ADPCM_DEFAULT_STEP_SIZE;
+      LocalSign *= SIGLIB_MINUS_ONE;
+    }
+    *pDst++ = LocalEstimate;
+  }
 }
-

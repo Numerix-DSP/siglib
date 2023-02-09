@@ -6,11 +6,11 @@ cd %SIGLIB_PATH%
 
 cd include
 
-REM call ..\Utils\DelphiGen.bat
+REM call ..\utils\DelphiGen.bat
 
-call ..\Utils\VeeGen.bat
+call ..\utils\VeeGen.bat
 
-cd ..\Utils\DLLGen
+cd ..\utils\DLLGen
 call DefGenerate.bat
 
 cd ..\TIMemSectionsGen

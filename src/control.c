@@ -1,3 +1,4 @@
+
 /**************************************************************************
 File Name               : CONTROL.C     | Author        : JOHN EDWARDS
 Siglib Library Version  : 10.00         |
@@ -36,12 +37,13 @@ Description : Control function file for SigLib DSP library
 
 ****************************************************************************/
 
-#define SIGLIB_SRC_FILE_CONTROL 1                           // Defines the source file that this code is being used in
+#define SIGLIB_SRC_FILE_CONTROL 1                                   // Defines the source file that this code is being used in
 
-#include <siglib.h>                                         // Include SigLib header file
+#include <siglib.h>                                                 // Include SigLib header file
 
 
 /**/
+
 /********************************************************
 * Function: SDS_Pid
 *
@@ -60,33 +62,34 @@ Description : Control function file for SigLib DSP library
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDS_Pid (const SLData_t Kp,
-    const SLData_t Ki,
-    const SLData_t Kd,
-    const SLData_t Error,
-    SLData_t * SIGLIB_PTR_DECL Control,
-    SLData_t * SIGLIB_PTR_DECL PrevError,
-    SLData_t * SIGLIB_PTR_DECL PrevErrorDot)
-
+void SIGLIB_FUNC_DECL SDS_Pid (
+  const SLData_t Kp,
+  const SLData_t Ki,
+  const SLData_t Kd,
+  const SLData_t Error,
+  SLData_t * SIGLIB_PTR_DECL Control,
+  SLData_t * SIGLIB_PTR_DECL PrevError,
+  SLData_t * SIGLIB_PTR_DECL PrevErrorDot)
 {
-    SLData_t   ErrorDot;
-    SLData_t   ErrorDoubleDot;
-    SLData_t   ControlDot;
+  SLData_t        ErrorDot;
+  SLData_t        ErrorDoubleDot;
+  SLData_t        ControlDot;
 
-    ErrorDot = (Error - *PrevError);                // Differentiate the error
-    ErrorDoubleDot = (ErrorDot - *PrevErrorDot);
+  ErrorDot = (Error - *PrevError);                                  // Differentiate the error
+  ErrorDoubleDot = (ErrorDot - *PrevErrorDot);
 
-                                                    // Calculate the control differential
-    ControlDot = (Ki * Error) + (Kp * ErrorDot) + (Kd * ErrorDoubleDot);
-    *PrevError = Error;
-    *PrevErrorDot = ErrorDot;
+// Calculate the control differential
+  ControlDot = (Ki * Error) + (Kp * ErrorDot) + (Kd * ErrorDoubleDot);
+  *PrevError = Error;
+  *PrevErrorDot = ErrorDot;
 
-    (*Control) += (ControlDot);                     // Calculate the new control value
+  (*Control) += (ControlDot);                                       // Calculate the new control value
 
-}           // End of SDS_Pid()
+}                                                                   // End of SDS_Pid()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Pwm
 *
@@ -105,26 +108,25 @@ void SIGLIB_FUNC_DECL SDS_Pid (const SLData_t Kp,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Pwm (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    SLData_t * SIGLIB_PTR_DECL pRamp,
-    SLData_t * SIGLIB_PTR_DECL pRampPhase,
-    const SLData_t PRF,
-    const SLArrayIndex_t SampleLength)
-
+void SIGLIB_FUNC_DECL SDA_Pwm (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  SLData_t * SIGLIB_PTR_DECL pRamp,
+  SLData_t * SIGLIB_PTR_DECL pRampPhase,
+  const SLData_t PRF,
+  const SLArrayIndex_t SampleLength)
 {
-                                                    // Generate ramp
-    SDA_SignalGenerate (pRamp, SIGLIB_TRIANGLE_WAVE, SIGLIB_HALF, SIGLIB_FILL, PRF, SIGLIB_HALF,
-                    SIGLIB_ONE, SIGLIB_ZERO, pRampPhase, SIGLIB_NULL_DATA_PTR, SampleLength);
+// Generate ramp
+  SDA_SignalGenerate (pRamp, SIGLIB_TRIANGLE_WAVE, SIGLIB_HALF, SIGLIB_FILL, PRF, SIGLIB_HALF,
+                      SIGLIB_ONE, SIGLIB_ZERO, pRampPhase, SIGLIB_NULL_DATA_PTR, SampleLength);
 
-                                                    // Subtract ramp from signal
-    SDA_Subtract2 (pSrc, pRamp, pDst, SampleLength);
+// Subtract ramp from signal
+  SDA_Subtract2 (pSrc, pRamp, pDst, SampleLength);
 
-                                                    // Threshold difference
-    SDA_Threshold (pDst, pDst, SIGLIB_ZERO, SIGLIB_SINGLE_SIDED_THOLD, SampleLength);
+// Threshold difference
+  SDA_Threshold (pDst, pDst, SIGLIB_ZERO, SIGLIB_SINGLE_SIDED_THOLD, SampleLength);
 
-                                                    // Clamp threshold - if signal > 0 then set to 1
-    SDA_Clamp (pDst, pDst, SIGLIB_ZERO, SIGLIB_ONE, SIGLIB_SINGLE_SIDED_THOLD, SampleLength);
+// Clamp threshold - if signal > 0 then set to 1
+  SDA_Clamp (pDst, pDst, SIGLIB_ZERO, SIGLIB_ONE, SIGLIB_SINGLE_SIDED_THOLD, SampleLength);
 
-}           // End of SDA_Pwm()
-
+}                                                                   // End of SDA_Pwm()

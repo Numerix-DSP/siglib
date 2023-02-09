@@ -1,3 +1,4 @@
+
 /**************************************************************************
 File Name               : DECINT.C      | Author        : JOHN EDWARDS
 Siglib Library Version  : 10.00         |
@@ -36,14 +37,15 @@ Description : SigLib DSP library decimation and interpolation routines.
 
 ****************************************************************************/
 
-#define SIGLIB_SRC_FILE_DECINT  1                           // Defines the source file that this code is being used in
+#define SIGLIB_SRC_FILE_DECINT  1                                   // Defines the source file that this code is being used in
 
-#define DEBUG_ENABLE            0                           // Seto to '1' to enable debug printing, '0' to disable
+#define DEBUG_ENABLE            0                                   // Seto to '1' to enable debug printing, '0' to disable
 
-#include <siglib.h>                                         // Include SigLib header file
+#include <siglib.h>                                                 // Include SigLib header file
 
 
 /**/
+
 /********************************************************
 * Function: SIF_Decimate
 *
@@ -56,15 +58,16 @@ Description : SigLib DSP library decimation and interpolation routines.
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_Decimate (SLArrayIndex_t * SIGLIB_PTR_DECL pDecimationIndex)
-
+void SIGLIB_FUNC_DECL SIF_Decimate (
+  SLArrayIndex_t * SIGLIB_PTR_DECL pDecimationIndex)
 {
-    *pDecimationIndex = SIGLIB_AI_ZERO;
+  *pDecimationIndex = SIGLIB_AI_ZERO;
 
-}       // End of SIF_Decimate()
+}                                                                   // End of SIF_Decimate()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Decimate
 *
@@ -93,25 +96,26 @@ void SIGLIB_FUNC_DECL SIF_Decimate (SLArrayIndex_t * SIGLIB_PTR_DECL pDecimation
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Decimate (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLFixData_t DecimationRatio,
-    SLArrayIndex_t *pSrcArrayIndex,
-    const SLArrayIndex_t SrcArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_Decimate (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLFixData_t DecimationRatio,
+  SLArrayIndex_t * pSrcArrayIndex,
+  const SLArrayIndex_t SrcArrayLength)
 {
-    SLArrayIndex_t LocalSrcArrayIndex = *pSrcArrayIndex;
+  SLArrayIndex_t  LocalSrcArrayIndex = *pSrcArrayIndex;
 
-    do {
-        *pDst++ = *(pSrc + LocalSrcArrayIndex);
-    } while ((LocalSrcArrayIndex += (SLArrayIndex_t)DecimationRatio) < SrcArrayLength);
+  do {
+    *pDst++ = *(pSrc + LocalSrcArrayIndex);
+  } while ((LocalSrcArrayIndex += (SLArrayIndex_t) DecimationRatio) < SrcArrayLength);
 
-    *pSrcArrayIndex = LocalSrcArrayIndex - SrcArrayLength;
+  *pSrcArrayIndex = LocalSrcArrayIndex - SrcArrayLength;
 
-}       // End of SDA_Decimate()
+}                                                                   // End of SDA_Decimate()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_Interpolate
 *
@@ -124,15 +128,16 @@ void SIGLIB_FUNC_DECL SDA_Decimate (const SLData_t * SIGLIB_PTR_DECL pSrc,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_Interpolate (SLArrayIndex_t * SIGLIB_PTR_DECL pInterpolationIndex)
-
+void SIGLIB_FUNC_DECL SIF_Interpolate (
+  SLArrayIndex_t * SIGLIB_PTR_DECL pInterpolationIndex)
 {
-    *pInterpolationIndex = SIGLIB_AI_ZERO;
+  *pInterpolationIndex = SIGLIB_AI_ZERO;
 
-}       // End of SIF_Interpolate()
+}                                                                   // End of SIF_Interpolate()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_Interpolate
 *
@@ -164,31 +169,32 @@ void SIGLIB_FUNC_DECL SIF_Interpolate (SLArrayIndex_t * SIGLIB_PTR_DECL pInterpo
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Interpolate (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLFixData_t InterpolationRatio,
-    SLArrayIndex_t *pDstArrayIndex,
-    const SLArrayIndex_t DstArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_Interpolate (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLFixData_t InterpolationRatio,
+  SLArrayIndex_t * pDstArrayIndex,
+  const SLArrayIndex_t DstArrayLength)
 {
-    SLArrayIndex_t LocalDstArrayIndex = *pDstArrayIndex;
-    SLArrayIndex_t i;
+  SLArrayIndex_t  LocalDstArrayIndex = *pDstArrayIndex;
+  SLArrayIndex_t  i;
 
-    for (i = 0; i < DstArrayLength; i++) {                  // Clear destination array
-        *pDst++ = SIGLIB_ZERO;
-    }
-    pDst -= DstArrayLength;                                 // Reset destination array pointer
+  for (i = 0; i < DstArrayLength; i++) {                            // Clear destination array
+    *pDst++ = SIGLIB_ZERO;
+  }
+  pDst -= DstArrayLength;                                           // Reset destination array pointer
 
-    do {
-        *(pDst + LocalDstArrayIndex) = *pSrc++;
-    } while ((LocalDstArrayIndex += (SLArrayIndex_t)InterpolationRatio) < DstArrayLength);
+  do {
+    *(pDst + LocalDstArrayIndex) = *pSrc++;
+  } while ((LocalDstArrayIndex += (SLArrayIndex_t) InterpolationRatio) < DstArrayLength);
 
-    *pDstArrayIndex = LocalDstArrayIndex - DstArrayLength;
+  *pDstArrayIndex = LocalDstArrayIndex - DstArrayLength;
 
-}       // End of SDA_Interpolate()
+}                                                                   // End of SDA_Interpolate()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_FilterAndDecimate
 *
@@ -204,22 +210,23 @@ void SIGLIB_FUNC_DECL SDA_Interpolate (const SLData_t * SIGLIB_PTR_DECL pSrc,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_FilterAndDecimate (SLData_t * SIGLIB_PTR_DECL pState,
-    SLArrayIndex_t * SIGLIB_PTR_DECL pDecimationIndex,
-    SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
-    const SLArrayIndex_t FilterLength)
-
+void SIGLIB_FUNC_DECL SIF_FilterAndDecimate (
+  SLData_t * SIGLIB_PTR_DECL pState,
+  SLArrayIndex_t * SIGLIB_PTR_DECL pDecimationIndex,
+  SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
+  const SLArrayIndex_t FilterLength)
 {
 
-    SIF_Fir (pState, pFilterIndex, FilterLength);
+  SIF_Fir (pState, pFilterIndex, FilterLength);
 
-    *pDecimationIndex = SIGLIB_AI_ZERO;
-    *pFilterIndex = SIGLIB_AI_ZERO;
+  *pDecimationIndex = SIGLIB_AI_ZERO;
+  *pFilterIndex = SIGLIB_AI_ZERO;
 
-}       // End of SIF_FilterAndDecimate()
+}                                                                   // End of SIF_FilterAndDecimate()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_FilterAndDecimate
 *
@@ -251,34 +258,35 @@ void SIGLIB_FUNC_DECL SIF_FilterAndDecimate (SLData_t * SIGLIB_PTR_DECL pState,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_FilterAndDecimate (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLFixData_t DecimationRatio,
-    SLArrayIndex_t *pSrcArrayIndex,
-    SLData_t pState[],
-    const SLData_t pCoeffs[],
-    SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
-    const SLArrayIndex_t FilterLength,
-    const SLArrayIndex_t SrcArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_FilterAndDecimate (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLFixData_t DecimationRatio,
+  SLArrayIndex_t * pSrcArrayIndex,
+  SLData_t pState[],
+  const SLData_t pCoeffs[],
+  SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
+  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t SrcArrayLength)
 {
-    SLArrayIndex_t LocalSrcArrayIndex = *pSrcArrayIndex;
-    SLData_t                *pDstInputPointer = pDst;
+  SLArrayIndex_t  LocalSrcArrayIndex = *pSrcArrayIndex;
+  SLData_t       *pDstInputPointer = pDst;
 
-                                                            // Filter the input signal
-    SDA_Fir (pSrc, pDst, pState, pCoeffs, pFilterIndex, FilterLength, SrcArrayLength);
+// Filter the input signal
+  SDA_Fir (pSrc, pDst, pState, pCoeffs, pFilterIndex, FilterLength, SrcArrayLength);
 
-                                                            // Decimate the filtered signal
-    do {
-        *pDst++ = *(pDstInputPointer + LocalSrcArrayIndex);
-    } while ((LocalSrcArrayIndex += (SLArrayIndex_t)DecimationRatio) < SrcArrayLength);
+// Decimate the filtered signal
+  do {
+    *pDst++ = *(pDstInputPointer + LocalSrcArrayIndex);
+  } while ((LocalSrcArrayIndex += (SLArrayIndex_t) DecimationRatio) < SrcArrayLength);
 
-    *pSrcArrayIndex = LocalSrcArrayIndex - SrcArrayLength;
+  *pSrcArrayIndex = LocalSrcArrayIndex - SrcArrayLength;
 
-}       // End of SDA_FilterAndDecimate()
+}                                                                   // End of SDA_FilterAndDecimate()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_InterpolateAndFilter
 *
@@ -294,22 +302,23 @@ void SIGLIB_FUNC_DECL SDA_FilterAndDecimate (const SLData_t * SIGLIB_PTR_DECL pS
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_InterpolateAndFilter (SLData_t * SIGLIB_PTR_DECL pState,
-    SLArrayIndex_t * SIGLIB_PTR_DECL pInterpolationIndex,
-    SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
-    const SLArrayIndex_t FilterLength)
-
+void SIGLIB_FUNC_DECL SIF_InterpolateAndFilter (
+  SLData_t * SIGLIB_PTR_DECL pState,
+  SLArrayIndex_t * SIGLIB_PTR_DECL pInterpolationIndex,
+  SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
+  const SLArrayIndex_t FilterLength)
 {
 
-    SIF_Fir (pState, pFilterIndex, FilterLength);
+  SIF_Fir (pState, pFilterIndex, FilterLength);
 
-    *pInterpolationIndex = SIGLIB_AI_ZERO;
-    *pFilterIndex = SIGLIB_AI_ZERO;
+  *pInterpolationIndex = SIGLIB_AI_ZERO;
+  *pFilterIndex = SIGLIB_AI_ZERO;
 
-}       // End of SIF_InterpolateAndFilter()
+}                                                                   // End of SIF_InterpolateAndFilter()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_InterpolateAndFilter
 *
@@ -344,39 +353,40 @@ void SIGLIB_FUNC_DECL SIF_InterpolateAndFilter (SLData_t * SIGLIB_PTR_DECL pStat
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_InterpolateAndFilter (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLFixData_t InterpolationRatio,
-    SLArrayIndex_t *pDstArrayIndex,
-    SLData_t pState[],
-    const SLData_t pCoeffs[],
-    SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
-    const SLArrayIndex_t FilterLength,
-    const SLArrayIndex_t DstArrayLength)
-
+void SIGLIB_FUNC_DECL SDA_InterpolateAndFilter (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLFixData_t InterpolationRatio,
+  SLArrayIndex_t * pDstArrayIndex,
+  SLData_t pState[],
+  const SLData_t pCoeffs[],
+  SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
+  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t DstArrayLength)
 {
-    SLArrayIndex_t LocalDstArrayIndex = *pDstArrayIndex;
-    SLArrayIndex_t i;
+  SLArrayIndex_t  LocalDstArrayIndex = *pDstArrayIndex;
+  SLArrayIndex_t  i;
 
-    for (i = 0; i < DstArrayLength; i++) {                  // Clear destination array
-        *pDst++ = SIGLIB_ZERO;
-    }
-    pDst -= DstArrayLength;                                 // Reset destination array pointer
+  for (i = 0; i < DstArrayLength; i++) {                            // Clear destination array
+    *pDst++ = SIGLIB_ZERO;
+  }
+  pDst -= DstArrayLength;                                           // Reset destination array pointer
 
-                                                            // Interpolate the input signal
-    do {
-        *(pDst + LocalDstArrayIndex) = *pSrc++;
-    } while ((LocalDstArrayIndex += (SLArrayIndex_t)InterpolationRatio) < DstArrayLength);
+// Interpolate the input signal
+  do {
+    *(pDst + LocalDstArrayIndex) = *pSrc++;
+  } while ((LocalDstArrayIndex += (SLArrayIndex_t) InterpolationRatio) < DstArrayLength);
 
-    *pDstArrayIndex = LocalDstArrayIndex - DstArrayLength;
+  *pDstArrayIndex = LocalDstArrayIndex - DstArrayLength;
 
-                                                            // Filter the interpolated signal
-    SDA_Fir (pDst, pDst, pState, pCoeffs, pFilterIndex, FilterLength, DstArrayLength);
+// Filter the interpolated signal
+  SDA_Fir (pDst, pDst, pState, pCoeffs, pFilterIndex, FilterLength, DstArrayLength);
 
-}       // End of SDA_InterpolateAndFilter()
+}                                                                   // End of SDA_InterpolateAndFilter()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ResampleLinear
 *
@@ -402,35 +412,36 @@ void SIGLIB_FUNC_DECL SDA_InterpolateAndFilter (const SLData_t * SIGLIB_PTR_DECL
 *
 ********************************************************/
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleLinear (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLData_t NewSamplePeriod,
-    const SLArrayIndex_t SampleLength)
-
+SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleLinear (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLData_t NewSamplePeriod,
+  const SLArrayIndex_t SampleLength)
 {
-    SLArrayIndex_t  FixedPointXIndex;
-    SLArrayIndex_t  OutputSampleCount = SIGLIB_AI_ZERO;
-    SLData_t        xIndex = NewSamplePeriod;
-    SLData_t        y0, y1;
+  SLArrayIndex_t  FixedPointXIndex;
+  SLArrayIndex_t  OutputSampleCount = SIGLIB_AI_ZERO;
+  SLData_t        xIndex = NewSamplePeriod;
+  SLData_t        y0, y1;
 
-    *pDst++ = *pSrc;                                        // Output first sample
+  *pDst++ = *pSrc;                                                  // Output first sample
+  OutputSampleCount++;
+
+  do {
+    FixedPointXIndex = (SLArrayIndex_t) (xIndex + SIGLIB_MIN_THRESHOLD);  // Calculate x index
+    y0 = pSrc[FixedPointXIndex];                                    // Get y values
+    y1 = pSrc[FixedPointXIndex + 1];
+    *pDst++ = y0 + ((xIndex - (SLData_t) FixedPointXIndex) * (y1 - y0));
+
     OutputSampleCount++;
+    xIndex += NewSamplePeriod;
+  } while (SAI_RoundDown (xIndex) < SampleLength);
 
-    do {
-        FixedPointXIndex = (SLArrayIndex_t)(xIndex + SIGLIB_MIN_THRESHOLD);   // Calculate x index
-        y0 = pSrc[FixedPointXIndex];                        // Get y values
-        y1 = pSrc[FixedPointXIndex+1];
-        *pDst++ = y0 + ((xIndex-(SLData_t)FixedPointXIndex) * (y1 - y0));
-
-        OutputSampleCount++;
-        xIndex += NewSamplePeriod;
-    } while (SAI_RoundDown (xIndex) < SampleLength);
-
-    return (OutputSampleCount);
-}       // End of SDA_ResampleLinear()
+  return (OutputSampleCount);
+}                                                                   // End of SDA_ResampleLinear()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ResampleLinearNSamples
 *
@@ -460,43 +471,44 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleLinear (const SLData_t * SIGLIB_PTR_
 *
 ********************************************************/
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleLinearNSamples (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLData_t NewSamplePeriod,
-    const SLArrayIndex_t SampleLength,
-    const SLArrayIndex_t OutputLength)
-
+SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleLinearNSamples (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLData_t NewSamplePeriod,
+  const SLArrayIndex_t SampleLength,
+  const SLArrayIndex_t OutputLength)
 {
-    SLArrayIndex_t  FixedPointXIndex;
-    SLArrayIndex_t  OutputSampleCount = SIGLIB_AI_ZERO;
-    SLData_t        xIndex = NewSamplePeriod;
-    SLData_t        y0, y1;
+  SLArrayIndex_t  FixedPointXIndex;
+  SLArrayIndex_t  OutputSampleCount = SIGLIB_AI_ZERO;
+  SLData_t        xIndex = NewSamplePeriod;
+  SLData_t        y0, y1;
 
-    *pDst++ = *pSrc;                                        // Output first sample
+  *pDst++ = *pSrc;                                                  // Output first sample
+  OutputSampleCount++;
+
+  do {
+    FixedPointXIndex = (SLArrayIndex_t) (xIndex + SIGLIB_MIN_THRESHOLD);  // Calculate x index
+    y0 = pSrc[FixedPointXIndex];                                    // Get y values
+    y1 = pSrc[FixedPointXIndex + 1];
+    *pDst++ = y0 + ((xIndex - (SLData_t) FixedPointXIndex) * (y1 - y0));
+
     OutputSampleCount++;
-
-    do {
-        FixedPointXIndex = (SLArrayIndex_t)(xIndex + SIGLIB_MIN_THRESHOLD);   // Calculate x index
-        y0 = pSrc[FixedPointXIndex];                        // Get y values
-        y1 = pSrc[FixedPointXIndex+1];
-        *pDst++ = y0 + ((xIndex-(SLData_t)FixedPointXIndex) * (y1 - y0));
-
-        OutputSampleCount++;
-        xIndex += NewSamplePeriod;
-    } while ((SAI_RoundDown (xIndex) < SampleLength) && (OutputSampleCount < OutputLength));
+    xIndex += NewSamplePeriod;
+  } while ((SAI_RoundDown (xIndex) < SampleLength) && (OutputSampleCount < OutputLength));
 
 // Debug
 //SUF_Debugfprintf ("%s : OutputSampleCount = %d\n", __FUNCTION__, OutputSampleCount);
 
-    if (OutputSampleCount < OutputLength) {                 // Zero pad the array
-        SDA_Clear (pDst,     OutputLength - OutputSampleCount);
-    }
+  if (OutputSampleCount < OutputLength) {                           // Zero pad the array
+    SDA_Clear (pDst, OutputLength - OutputSampleCount);
+  }
 
-    return (OutputSampleCount);
-}       // End of SDA_ResampleLinearNSamples()
+  return (OutputSampleCount);
+}                                                                   // End of SDA_ResampleLinearNSamples()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_InterpolateLinear1D
 *
@@ -516,29 +528,30 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleLinearNSamples (const SLData_t * SIG
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDA_InterpolateLinear1D (const SLData_t * SIGLIB_PTR_DECL pYData,
-    const SLData_t x,
-    const SLArrayIndex_t SampleLength)
-
+SLData_t SIGLIB_FUNC_DECL SDA_InterpolateLinear1D (
+  const SLData_t * SIGLIB_PTR_DECL pYData,
+  const SLData_t x,
+  const SLArrayIndex_t SampleLength)
 {
-    SLData_t        x0, y0, y1;
-    SLArrayIndex_t  i = SAI_RoundDown (x);
+  SLData_t        x0, y0, y1;
+  SLArrayIndex_t  i = SAI_RoundDown (x);
 
-    if (i >= SampleLength) {                                // Make sure we do not overflow the input array
-        return (SIGLIB_ZERO);
-    }
+  if (i >= SampleLength) {                                          // Make sure we do not overflow the input array
+    return (SIGLIB_ZERO);
+  }
 
-    x0 = (SLData_t)(i);                                     // Get x values
-    // x1 - x0 = 1.
-    y0 = pYData[i];                                         // Get y values
-    y1 = pYData[i+1];
+  x0 = (SLData_t) (i);                                              // Get x values
+// x1 - x0 = 1.
+  y0 = pYData[i];                                                   // Get y values
+  y1 = pYData[i + 1];
 
-    return (y0 + ((x-x0) * (y1 - y0)));
+  return (y0 + ((x - x0) * (y1 - y0)));
 
-}       // End of SDA_InterpolateLinear1D()
+}                                                                   // End of SDA_InterpolateLinear1D()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_InterpolateLinear2D
 *
@@ -558,31 +571,32 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateLinear1D (const SLData_t * SIGLIB_PTR_D
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDA_InterpolateLinear2D (const SLData_t * SIGLIB_PTR_DECL pXData,
-    const SLData_t * SIGLIB_PTR_DECL pYData,
-    const SLData_t x,
-    const SLArrayIndex_t SampleLength)
-
+SLData_t SIGLIB_FUNC_DECL SDA_InterpolateLinear2D (
+  const SLData_t * SIGLIB_PTR_DECL pXData,
+  const SLData_t * SIGLIB_PTR_DECL pYData,
+  const SLData_t x,
+  const SLArrayIndex_t SampleLength)
 {
-    SLData_t        x0, x1, y0, y1;
+  SLData_t        x0, x1, y0, y1;
 
-    SLArrayIndex_t  i = SAI_RoundUp (x);
+  SLArrayIndex_t  i = SAI_RoundUp (x);
 
-    if (i >= SampleLength) {                                // Make sure we do not overflow the input array
-        return (SIGLIB_ZERO);
-    }
+  if (i >= SampleLength) {                                          // Make sure we do not overflow the input array
+    return (SIGLIB_ZERO);
+  }
 
-    x0 = pXData[i-1];                                       // Get x values
-    x1 = pXData[i];
-    y0 = pYData[i-1];                                       // Get y values
-    y1 = pYData[i];
+  x0 = pXData[i - 1];                                               // Get x values
+  x1 = pXData[i];
+  y0 = pYData[i - 1];                                               // Get y values
+  y1 = pYData[i];
 
-    return (y0 + ((x-x0) * ((y1 - y0)/(x1-x0))));
+  return (y0 + ((x - x0) * ((y1 - y0) / (x1 - x0))));
 
-}       // End of SDA_InterpolateLinear2D()
+}                                                                   // End of SDA_InterpolateLinear2D()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_ResampleSinc
 *
@@ -601,27 +615,28 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateLinear2D (const SLData_t * SIGLIB_PTR_D
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_ResampleSinc (SLData_t *pSincLUT,
-    SLData_t *pPhaseGain,
-    const SLArrayIndex_t NumberOfAdjacentSamples,
-    const SLArrayIndex_t SincTableLength)
-
+void SIGLIB_FUNC_DECL SIF_ResampleSinc (
+  SLData_t * pSincLUT,
+  SLData_t * pPhaseGain,
+  const SLArrayIndex_t NumberOfAdjacentSamples,
+  const SLArrayIndex_t SincTableLength)
 {
-    SLArrayIndex_t  i;
-    SLData_t        localPhaseGain;
+  SLArrayIndex_t  i;
+  SLData_t        localPhaseGain;
 
-    localPhaseGain = (((SLData_t)(NumberOfAdjacentSamples + 1)) / ((SLData_t)(SincTableLength - 1)));   // Calculate phase increment through lookup table
+  localPhaseGain = (((SLData_t) (NumberOfAdjacentSamples + 1)) / ((SLData_t) (SincTableLength - 1))); // Calculate phase increment through lookup table
 
-    for (i = 0; i < SincTableLength; i++) {
-        *pSincLUT++ = SDS_Sinc (localPhaseGain * i);
-    }
+  for (i = 0; i < SincTableLength; i++) {
+    *pSincLUT++ = SDS_Sinc (localPhaseGain * i);
+  }
 
-    *pPhaseGain = SIGLIB_ONE / localPhaseGain;              // Invert for use in the quick functions
+  *pPhaseGain = SIGLIB_ONE / localPhaseGain;                        // Invert for use in the quick functions
 
-}       // End of SIF_ResampleSinc()
+}                                                                   // End of SIF_ResampleSinc()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_ResampleWindowedSinc
 *
@@ -643,35 +658,36 @@ void SIGLIB_FUNC_DECL SIF_ResampleSinc (SLData_t *pSincLUT,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_ResampleWindowedSinc (SLData_t *pSincLUT,
-    SLData_t *pPhaseGain,
-    const SLArrayIndex_t NumberOfAdjacentSamples,
-    SLData_t * SIGLIB_PTR_DECL pWindowCoeffs,
-    const enum SLWindow_t WindowType,
-    const SLData_t Coeff,
-    const SLArrayIndex_t SincTableLength)
-
+void SIGLIB_FUNC_DECL SIF_ResampleWindowedSinc (
+  SLData_t * pSincLUT,
+  SLData_t * pPhaseGain,
+  const SLArrayIndex_t NumberOfAdjacentSamples,
+  SLData_t * SIGLIB_PTR_DECL pWindowCoeffs,
+  const enum SLWindow_t WindowType,
+  const SLData_t Coeff,
+  const SLArrayIndex_t SincTableLength)
 {
-    SLArrayIndex_t  i;
-    SLData_t        localPhaseGain;
+  SLArrayIndex_t  i;
+  SLData_t        localPhaseGain;
 
-    localPhaseGain = (((SLData_t)(NumberOfAdjacentSamples + 1)) / ((SLData_t)(SincTableLength - 1)));   // Calculate phase increment through lookup table
+  localPhaseGain = (((SLData_t) (NumberOfAdjacentSamples + 1)) / ((SLData_t) (SincTableLength - 1))); // Calculate phase increment through lookup table
 
-    for (i = 0; i < SincTableLength; i++) {
-        *pSincLUT++ = SDS_Sinc (localPhaseGain * i);
-    }
+  for (i = 0; i < SincTableLength; i++) {
+    *pSincLUT++ = SDS_Sinc (localPhaseGain * i);
+  }
 
-    *pPhaseGain = SIGLIB_ONE / localPhaseGain;              // Invert for use in the quick functions
+  *pPhaseGain = SIGLIB_ONE / localPhaseGain;                        // Invert for use in the quick functions
 
-    pSincLUT -= SincTableLength;                            // Reset look up table pointer
+  pSincLUT -= SincTableLength;                                      // Reset look up table pointer
 
-    SIF_Window (pWindowCoeffs, WindowType, Coeff, SincTableLength);     // Initialize window table
-    SDA_Multiply2 (pSincLUT, pWindowCoeffs, pSincLUT, SincTableLength); // Cross multiply sinc data with window table
+  SIF_Window (pWindowCoeffs, WindowType, Coeff, SincTableLength);   // Initialize window table
+  SDA_Multiply2 (pSincLUT, pWindowCoeffs, pSincLUT, SincTableLength); // Cross multiply sinc data with window table
 
-}       // End of SIF_ResampleWindowedSinc()
+}                                                                   // End of SIF_ResampleWindowedSinc()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ResampleSinc
 *
@@ -700,66 +716,68 @@ void SIGLIB_FUNC_DECL SIF_ResampleWindowedSinc (SLData_t *pSincLUT,
 *
 ********************************************************/
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSinc (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLData_t * SIGLIB_PTR_DECL pSincLUT,
-    const SLData_t LookUpTablePhaseGain,
-    const SLData_t NewSamplePeriod,
-    const SLArrayIndex_t NumberOfAdjacentSamples,
-    const SLArrayIndex_t SampleLength)
-
+SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSinc (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLData_t * SIGLIB_PTR_DECL pSincLUT,
+  const SLData_t LookUpTablePhaseGain,
+  const SLData_t NewSamplePeriod,
+  const SLArrayIndex_t NumberOfAdjacentSamples,
+  const SLArrayIndex_t SampleLength)
 {
-    SLArrayIndex_t  i;
-    SLArrayIndex_t  OutputSampleCount = SIGLIB_AI_ZERO;
-    SLData_t        y = SIGLIB_ZERO;
-    SLArrayIndex_t  StartIndex, EndIndex;
-    SLData_t        xIndex = SIGLIB_ZERO;
-    SLArrayIndex_t  xIndexFixedPoint = SIGLIB_AI_ZERO;      // Start from first index in source array
+  SLArrayIndex_t  i;
+  SLArrayIndex_t  OutputSampleCount = SIGLIB_AI_ZERO;
+  SLData_t        y = SIGLIB_ZERO;
+  SLArrayIndex_t  StartIndex, EndIndex;
+  SLData_t        xIndex = SIGLIB_ZERO;
+  SLArrayIndex_t  xIndexFixedPoint = SIGLIB_AI_ZERO;                // Start from first index in source array
 
-    do {                                                    // For upsampling we need to calculate every sample in x0 to x1
-        xIndexFixedPoint = SAI_RoundDown (xIndex);
-
-#if DEBUG_ENABLE
-      SUF_Debugfprintf ("%s : xIndex = %lf, xIndexFixedPoint = %d\n", __FUNCTION__, xIndex, xIndexFixedPoint);
-#endif
-        StartIndex = xIndexFixedPoint - (NumberOfAdjacentSamples - SIGLIB_AI_ONE);   // Calculate start index for sinc calculation
-        if (StartIndex < SIGLIB_AI_ZERO) {
-            StartIndex = SIGLIB_AI_ZERO;
-        }
-
-        EndIndex = xIndexFixedPoint + NumberOfAdjacentSamples + SIGLIB_AI_ONE;   // Calculate end index
-        if (EndIndex > SampleLength) {
-            EndIndex = SampleLength;
-        }
+  do {                                                              // For upsampling we need to calculate every sample in x0 to x1
+    xIndexFixedPoint = SAI_RoundDown (xIndex);
 
 #if DEBUG_ENABLE
-      SUF_Debugfprintf ("%s : xIndex = %lf, StartIndex = %d, EndIndex = %d\n", __FUNCTION__, xIndex, StartIndex, EndIndex);
+    SUF_Debugfprintf ("%s : xIndex = %lf, xIndexFixedPoint = %d\n", __FUNCTION__, xIndex, xIndexFixedPoint);
 #endif
+    StartIndex = xIndexFixedPoint - (NumberOfAdjacentSamples - SIGLIB_AI_ONE);  // Calculate start index for sinc calculation
+    if (StartIndex < SIGLIB_AI_ZERO) {
+      StartIndex = SIGLIB_AI_ZERO;
+    }
 
-        y = SIGLIB_ZERO;                                    // Reset sinc sum
-        for (i = StartIndex; i < EndIndex; i++) {   // Calculate sinc interpolation
+    EndIndex = xIndexFixedPoint + NumberOfAdjacentSamples + SIGLIB_AI_ONE;  // Calculate end index
+    if (EndIndex > SampleLength) {
+      EndIndex = SampleLength;
+    }
+
 #if DEBUG_ENABLE
-      SUF_Debugfprintf ("%s : i = %d, (xIndex - i) = %lf, SDS_QuickSinc(src) = %lf\n", __FUNCTION__, i, (xIndex - ((SLData_t)i)), (xIndex - ((SLData_t)i)));
+    SUF_Debugfprintf ("%s : xIndex = %lf, StartIndex = %d, EndIndex = %d\n", __FUNCTION__, xIndex, StartIndex, EndIndex);
 #endif
-            y += pSrc[i] * SDS_QuickSinc ((xIndex - ((SLData_t)i)),   // Source 'x' value
-                                          pSincLUT,                   // Pointer to Sinc look up table
-                                          LookUpTablePhaseGain);      // Phase gain
-        }
-        *pDst++ = y;                                        // Save sinc value
+
+    y = SIGLIB_ZERO;                                                // Reset sinc sum
+    for (i = StartIndex; i < EndIndex; i++) {                       // Calculate sinc interpolation
 #if DEBUG_ENABLE
-      SUF_Debugfprintf ("%s : y = %lf\n", __FUNCTION__, y);
+      SUF_Debugfprintf ("%s : i = %d, (xIndex - i) = %lf, SDS_QuickSinc(src) = %lf\n", __FUNCTION__, i, (xIndex - ((SLData_t) i)),
+                        (xIndex - ((SLData_t) i)));
+#endif
+      y += pSrc[i] * SDS_QuickSinc ((xIndex - ((SLData_t) i)),      // Source 'x' value
+                                    pSincLUT,                       // Pointer to Sinc look up table
+                                    LookUpTablePhaseGain);          // Phase gain
+    }
+    *pDst++ = y;                                                    // Save sinc value
+#if DEBUG_ENABLE
+    SUF_Debugfprintf ("%s : y = %lf\n", __FUNCTION__, y);
 #endif
 
-        OutputSampleCount++;
-        xIndex += NewSamplePeriod;
+    OutputSampleCount++;
+    xIndex += NewSamplePeriod;
 
-    } while (SAI_RoundDown (xIndex) < SampleLength);
+  } while (SAI_RoundDown (xIndex) < SampleLength);
 
-    return (OutputSampleCount);
-}       // End of SDA_ResampleSinc()
+  return (OutputSampleCount);
+}                                                                   // End of SDA_ResampleSinc()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ResampleSincNSamples
 *
@@ -792,64 +810,65 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSinc (const SLData_t * SIGLIB_PTR_DE
 *
 ********************************************************/
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSincNSamples (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    const SLData_t * SIGLIB_PTR_DECL pSincLUT,
-    const SLData_t LookUpTablePhaseGain,
-    const SLData_t NewSamplePeriod,
-    const SLArrayIndex_t NumberOfAdjacentSamples,
-    const SLArrayIndex_t SampleLength,
-    const SLArrayIndex_t OutputLength)
-
+SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSincNSamples (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLData_t * SIGLIB_PTR_DECL pSincLUT,
+  const SLData_t LookUpTablePhaseGain,
+  const SLData_t NewSamplePeriod,
+  const SLArrayIndex_t NumberOfAdjacentSamples,
+  const SLArrayIndex_t SampleLength,
+  const SLArrayIndex_t OutputLength)
 {
-    SLArrayIndex_t  i;
-    SLArrayIndex_t  OutputSampleCount = SIGLIB_AI_ZERO;
-    SLData_t        y = SIGLIB_ZERO;
-    SLArrayIndex_t  StartIndex, EndIndex;
-    SLData_t        xIndex = SIGLIB_ZERO;
-    SLArrayIndex_t  xIndexFixedPoint = SIGLIB_AI_ZERO;      // Start from first index in source array
+  SLArrayIndex_t  i;
+  SLArrayIndex_t  OutputSampleCount = SIGLIB_AI_ZERO;
+  SLData_t        y = SIGLIB_ZERO;
+  SLArrayIndex_t  StartIndex, EndIndex;
+  SLData_t        xIndex = SIGLIB_ZERO;
+  SLArrayIndex_t  xIndexFixedPoint = SIGLIB_AI_ZERO;                // Start from first index in source array
 
-    do {                                                    // For upsampling we need to calculate every sample in x0 to x1
-        xIndexFixedPoint = SAI_RoundDown (xIndex);
+  do {                                                              // For upsampling we need to calculate every sample in x0 to x1
+    xIndexFixedPoint = SAI_RoundDown (xIndex);
 
 //  SUF_Debugfprintf ("%s : xIndexFixedPoint = %d\n", __FUNCTION__, xIndexFixedPoint);
 
-        StartIndex = xIndexFixedPoint - (NumberOfAdjacentSamples - SIGLIB_AI_ONE);   // Calculate start index for sinc calculation
-        if (StartIndex < SIGLIB_AI_ZERO) {
-            StartIndex = SIGLIB_AI_ZERO;
-        }
+    StartIndex = xIndexFixedPoint - (NumberOfAdjacentSamples - SIGLIB_AI_ONE);  // Calculate start index for sinc calculation
+    if (StartIndex < SIGLIB_AI_ZERO) {
+      StartIndex = SIGLIB_AI_ZERO;
+    }
 
-        EndIndex = xIndexFixedPoint + NumberOfAdjacentSamples + SIGLIB_AI_ONE;   // Calculate end index
-        if (EndIndex > SampleLength) {
-            EndIndex = SampleLength;
-        }
+    EndIndex = xIndexFixedPoint + NumberOfAdjacentSamples + SIGLIB_AI_ONE;  // Calculate end index
+    if (EndIndex > SampleLength) {
+      EndIndex = SampleLength;
+    }
 
 //      SUF_Debugfprintf ("%s : xIndex = %lf, StartIndex = %d, EndIndex = %d\n", __FUNCTION__, xIndex, StartIndex, EndIndex);
 
-        y = SIGLIB_ZERO;                                    // Reset sinc sum
-        for (i = StartIndex; i < EndIndex; i++) {           // Calculate sinc interpolation
+    y = SIGLIB_ZERO;                                                // Reset sinc sum
+    for (i = StartIndex; i < EndIndex; i++) {                       // Calculate sinc interpolation
 //      SUF_Debugfprintf ("%s : i = %d, (xIndex - i) = %lf\n", __FUNCTION__, i, (xIndex - ((SLData_t)i)));
-            y += pSrc[i] * SDS_QuickSinc (xIndex - ((SLData_t)i),     // Source 'x' value
-                                          pSincLUT,                   // Pointer to Sinc look up table
-                                          LookUpTablePhaseGain);      // Phase gain
-        }
-        *pDst++ = y;                                        // Save sinc value
+      y += pSrc[i] * SDS_QuickSinc (xIndex - ((SLData_t) i),        // Source 'x' value
+                                    pSincLUT,                       // Pointer to Sinc look up table
+                                    LookUpTablePhaseGain);          // Phase gain
+    }
+    *pDst++ = y;                                                    // Save sinc value
 //      SUF_Debugfprintf ("%s : y = %lf\n", __FUNCTION__, y);
 
-        OutputSampleCount++;
-        xIndex += NewSamplePeriod;
+    OutputSampleCount++;
+    xIndex += NewSamplePeriod;
 
-    } while ((SAI_RoundDown (xIndex) < SampleLength) && (OutputSampleCount < OutputLength));
+  } while ((SAI_RoundDown (xIndex) < SampleLength) && (OutputSampleCount < OutputLength));
 
-    if (OutputSampleCount < OutputLength) {                 // Zero pad the array
-        SDA_Clear (pDst,     OutputLength - OutputSampleCount);
-    }
+  if (OutputSampleCount < OutputLength) {                           // Zero pad the array
+    SDA_Clear (pDst, OutputLength - OutputSampleCount);
+  }
 
-    return (OutputSampleCount);
-}       // End of SDA_ResampleSincNSamples()
+  return (OutputSampleCount);
+}                                                                   // End of SDA_ResampleSincNSamples()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_InterpolateSinc1D
 *
@@ -867,27 +886,28 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSincNSamples (const SLData_t * SIGLI
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_InterpolateSinc1D (SLData_t *pSincLUT,
-    SLData_t *pPhaseGain,
-    const SLArrayIndex_t NumberOfAdjacentSamples,
-    const SLArrayIndex_t SincTableLength)
-
+void SIGLIB_FUNC_DECL SIF_InterpolateSinc1D (
+  SLData_t * pSincLUT,
+  SLData_t * pPhaseGain,
+  const SLArrayIndex_t NumberOfAdjacentSamples,
+  const SLArrayIndex_t SincTableLength)
 {
-    SLArrayIndex_t  i;
-    SLData_t        localPhaseGain;
+  SLArrayIndex_t  i;
+  SLData_t        localPhaseGain;
 
-    localPhaseGain = (((SLData_t)(NumberOfAdjacentSamples + 1)) / ((SLData_t)(SincTableLength - 1)));   // Calculate phase increment through lookup table
+  localPhaseGain = (((SLData_t) (NumberOfAdjacentSamples + 1)) / ((SLData_t) (SincTableLength - 1))); // Calculate phase increment through lookup table
 
-    for (i = 0; i < SincTableLength; i++) {
-        *pSincLUT++ = SDS_Sinc (localPhaseGain * i);
-    }
+  for (i = 0; i < SincTableLength; i++) {
+    *pSincLUT++ = SDS_Sinc (localPhaseGain * i);
+  }
 
-    *pPhaseGain = SIGLIB_ONE / localPhaseGain;              // Invert for use in the quick functions
+  *pPhaseGain = SIGLIB_ONE / localPhaseGain;                        // Invert for use in the quick functions
 
-}       // End of SIF_InterpolateSinc1D()
+}                                                                   // End of SIF_InterpolateSinc1D()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_InterpolateWindowedSinc1D
 *
@@ -908,35 +928,36 @@ void SIGLIB_FUNC_DECL SIF_InterpolateSinc1D (SLData_t *pSincLUT,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_InterpolateWindowedSinc1D (SLData_t *pSincLUT,
-    SLData_t *pPhaseGain,
-    const SLArrayIndex_t NumberOfAdjacentSamples,
-    SLData_t * SIGLIB_PTR_DECL pWindowCoeffs,
-    const enum SLWindow_t WindowType,
-    const SLData_t Coeff,
-    const SLArrayIndex_t SincTableLength)
-
+void SIGLIB_FUNC_DECL SIF_InterpolateWindowedSinc1D (
+  SLData_t * pSincLUT,
+  SLData_t * pPhaseGain,
+  const SLArrayIndex_t NumberOfAdjacentSamples,
+  SLData_t * SIGLIB_PTR_DECL pWindowCoeffs,
+  const enum SLWindow_t WindowType,
+  const SLData_t Coeff,
+  const SLArrayIndex_t SincTableLength)
 {
-    SLArrayIndex_t  i;
-    SLData_t        localPhaseGain;
+  SLArrayIndex_t  i;
+  SLData_t        localPhaseGain;
 
-    localPhaseGain = (((SLData_t)(NumberOfAdjacentSamples + 1)) / ((SLData_t)(SincTableLength - 1)));   // Calculate phase increment through lookup table
+  localPhaseGain = (((SLData_t) (NumberOfAdjacentSamples + 1)) / ((SLData_t) (SincTableLength - 1))); // Calculate phase increment through lookup table
 
-    for (i = 0; i < SincTableLength; i++) {
-        *pSincLUT++ = SDS_Sinc (localPhaseGain * i);
-    }
+  for (i = 0; i < SincTableLength; i++) {
+    *pSincLUT++ = SDS_Sinc (localPhaseGain * i);
+  }
 
-    *pPhaseGain = SIGLIB_ONE / localPhaseGain;              // Invert for use in the quick functions
+  *pPhaseGain = SIGLIB_ONE / localPhaseGain;                        // Invert for use in the quick functions
 
-    pSincLUT -= SincTableLength;                            // Reset look up table pointer
+  pSincLUT -= SincTableLength;                                      // Reset look up table pointer
 
-    SIF_Window (pWindowCoeffs, WindowType, Coeff, SincTableLength);     // Initialize window table
-    SDA_Multiply2 (pSincLUT, pWindowCoeffs, pSincLUT, SincTableLength); // Cross multiply sinc data with window table
+  SIF_Window (pWindowCoeffs, WindowType, Coeff, SincTableLength);   // Initialize window table
+  SDA_Multiply2 (pSincLUT, pWindowCoeffs, pSincLUT, SincTableLength); // Cross multiply sinc data with window table
 
-}       // End of SIF_InterpolateWindowedSinc1D()
+}                                                                   // End of SIF_InterpolateWindowedSinc1D()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_InterpolateSinc1D
 *
@@ -959,45 +980,46 @@ void SIGLIB_FUNC_DECL SIF_InterpolateWindowedSinc1D (SLData_t *pSincLUT,
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDA_InterpolateSinc1D (const SLData_t * SIGLIB_PTR_DECL pData,
-    const SLData_t x,
-    SLData_t * SIGLIB_PTR_DECL pSincLUT,
-    const SLData_t LookUpTablePhaseGain,
-    const SLArrayIndex_t NumberOfAdjacentSamples,
-    const SLArrayIndex_t SampleLength)
-
+SLData_t SIGLIB_FUNC_DECL SDA_InterpolateSinc1D (
+  const SLData_t * SIGLIB_PTR_DECL pData,
+  const SLData_t x,
+  SLData_t * SIGLIB_PTR_DECL pSincLUT,
+  const SLData_t LookUpTablePhaseGain,
+  const SLArrayIndex_t NumberOfAdjacentSamples,
+  const SLArrayIndex_t SampleLength)
 {
-    SLArrayIndex_t  i, StartIndex, EndIndex;
-    SLArrayIndex_t  xIndexFixedPoint = (SLArrayIndex_t)(x + SIGLIB_MIN_THRESHOLD);
-    SLData_t        y = SIGLIB_ZERO;
+  SLArrayIndex_t  i, StartIndex, EndIndex;
+  SLArrayIndex_t  xIndexFixedPoint = (SLArrayIndex_t) (x + SIGLIB_MIN_THRESHOLD);
+  SLData_t        y = SIGLIB_ZERO;
 
-    if ((xIndexFixedPoint < SIGLIB_AI_ZERO) || (xIndexFixedPoint >= SampleLength)) {  // Return zero if we have overflowed the array
-        return (SIGLIB_ZERO);
-    }
+  if ((xIndexFixedPoint < SIGLIB_AI_ZERO) || (xIndexFixedPoint >= SampleLength)) {  // Return zero if we have overflowed the array
+    return (SIGLIB_ZERO);
+  }
 
-    StartIndex = xIndexFixedPoint - (NumberOfAdjacentSamples - SIGLIB_AI_ONE);   // Calculate start index for sinc calculation
-    if (StartIndex < SIGLIB_AI_ZERO) {
-        StartIndex = SIGLIB_AI_ZERO;
-    }
+  StartIndex = xIndexFixedPoint - (NumberOfAdjacentSamples - SIGLIB_AI_ONE);  // Calculate start index for sinc calculation
+  if (StartIndex < SIGLIB_AI_ZERO) {
+    StartIndex = SIGLIB_AI_ZERO;
+  }
 
-    EndIndex = xIndexFixedPoint + NumberOfAdjacentSamples + SIGLIB_AI_ONE;   // Calculate end index
-    if (EndIndex > SampleLength) {
-        EndIndex = SampleLength;
-    }
+  EndIndex = xIndexFixedPoint + NumberOfAdjacentSamples + SIGLIB_AI_ONE;  // Calculate end index
+  if (EndIndex > SampleLength) {
+    EndIndex = SampleLength;
+  }
 
 //  SUF_Debugfprintf ("%s : StartIndex = %d, EndIndex = %d\n", __FUNCTION__, StartIndex, EndIndex);
 
-    for (i = StartIndex; i < EndIndex; i++) {               // Calculate sinc interpolation
+  for (i = StartIndex; i < EndIndex; i++) {                         // Calculate sinc interpolation
 //  SUF_Debugfprintf ("%s : i = %d, (x - i) = %lf\n", __FUNCTION__, i, (x - ((SLData_t)i)));
-        y += pData[i] * SDS_QuickSinc ((x - ((SLData_t)i)), pSincLUT, LookUpTablePhaseGain);
-    }
+    y += pData[i] * SDS_QuickSinc ((x - ((SLData_t) i)), pSincLUT, LookUpTablePhaseGain);
+  }
 //  SUF_Debugfprintf ("%s : y = %lf\n", __FUNCTION__, y);
 
-    return (y);
+  return (y);
 }
 
 
 /**/
+
 /********************************************************
 * Function: SIF_ResampleLinearContiguous
 *
@@ -1013,16 +1035,17 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateSinc1D (const SLData_t * SIGLIB_PTR_DEC
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_ResampleLinearContiguous (SLData_t *pPreviousXValue,
-    SLData_t *pPreviousYValue)
-
+void SIGLIB_FUNC_DECL SIF_ResampleLinearContiguous (
+  SLData_t * pPreviousXValue,
+  SLData_t * pPreviousYValue)
 {
-    *pPreviousXValue = SIGLIB_ZERO;
-    *pPreviousYValue = SIGLIB_ZERO;
-}       // End of SIF_ResampleLinearContiguous()
+  *pPreviousXValue = SIGLIB_ZERO;
+  *pPreviousYValue = SIGLIB_ZERO;
+}                                                                   // End of SIF_ResampleLinearContiguous()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ResampleLinearContiguous
 *
@@ -1051,56 +1074,57 @@ void SIGLIB_FUNC_DECL SIF_ResampleLinearContiguous (SLData_t *pPreviousXValue,
 *
 ********************************************************/
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleLinearContiguous (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    SLData_t *pPreviousXValue,
-    SLData_t *pPreviousYValue,
-    const SLData_t NewSamplePeriod,
-    const SLArrayIndex_t SampleLength)
-
+SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleLinearContiguous (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  SLData_t * pPreviousXValue,
+  SLData_t * pPreviousYValue,
+  const SLData_t NewSamplePeriod,
+  const SLArrayIndex_t SampleLength)
 {
-    SLArrayIndex_t  FixedPointXIndex;
-    SLArrayIndex_t  OutputSampleCount = SIGLIB_AI_ZERO;
-    SLData_t        xIndex;
-    SLData_t        y0, y1;
+  SLArrayIndex_t  FixedPointXIndex;
+  SLArrayIndex_t  OutputSampleCount = SIGLIB_AI_ZERO;
+  SLData_t        xIndex;
+  SLData_t        y0, y1;
 
-    if (*pPreviousXValue == SIGLIB_ZERO) {                  // This is the first time the function has been called
-        *pDst++ = *pSrc;                                    // Output first sample
-        OutputSampleCount++;
-        xIndex = NewSamplePeriod;                           // Update XIndex
-    }
-    else {                                                  // Calculate the resampling for the overlaps
-        xIndex = *pPreviousXValue;
+  if (*pPreviousXValue == SIGLIB_ZERO) {                            // This is the first time the function has been called
+    *pDst++ = *pSrc;                                                // Output first sample
+    OutputSampleCount++;
+    xIndex = NewSamplePeriod;                                       // Update XIndex
+  }
+  else {                                                            // Calculate the resampling for the overlaps
+    xIndex = *pPreviousXValue;
 
-            // Calculate overlapped samples - maybe more than one when oversampling
-        do {
-            y0 = *pPreviousYValue;                          // Get y values
-            y1 = pSrc[0];
-            *pDst++ = y0 + ((xIndex + SIGLIB_ONE) * (y1 - y0));
-
-            OutputSampleCount++;
-            xIndex += NewSamplePeriod;
-        } while (((SLArrayIndex_t)(xIndex + SIGLIB_MIN_THRESHOLD)) < SIGLIB_AI_ZERO);
-    }
-
+// Calculate overlapped samples - maybe more than one when oversampling
     do {
-        FixedPointXIndex = (SLArrayIndex_t)(xIndex + SIGLIB_MIN_THRESHOLD);     // Calculate x index
-        y0 = pSrc[FixedPointXIndex];                        // Get y values
-        y1 = pSrc[FixedPointXIndex+1];
-        *pDst++ = y0 + ((xIndex-(SLData_t)FixedPointXIndex) * (y1 - y0));
+      y0 = *pPreviousYValue;                                        // Get y values
+      y1 = pSrc[0];
+      *pDst++ = y0 + ((xIndex + SIGLIB_ONE) * (y1 - y0));
 
-        OutputSampleCount++;
-        xIndex += NewSamplePeriod;
-    } while (((SLArrayIndex_t)(xIndex + SIGLIB_MIN_THRESHOLD)) < SampleLength);
+      OutputSampleCount++;
+      xIndex += NewSamplePeriod;
+    } while (((SLArrayIndex_t) (xIndex + SIGLIB_MIN_THRESHOLD)) < SIGLIB_AI_ZERO);
+  }
 
-    *pPreviousXValue = xIndex - (SLData_t)SampleLength;     // Save X value for next iteration
-    *pPreviousYValue = pSrc[SampleLength - SIGLIB_AI_ONE];  // Save Y value for next iteration
+  do {
+    FixedPointXIndex = (SLArrayIndex_t) (xIndex + SIGLIB_MIN_THRESHOLD);  // Calculate x index
+    y0 = pSrc[FixedPointXIndex];                                    // Get y values
+    y1 = pSrc[FixedPointXIndex + 1];
+    *pDst++ = y0 + ((xIndex - (SLData_t) FixedPointXIndex) * (y1 - y0));
 
-    return (OutputSampleCount);
-}       // End of SDA_ResampleLinearContiguous()
+    OutputSampleCount++;
+    xIndex += NewSamplePeriod;
+  } while (((SLArrayIndex_t) (xIndex + SIGLIB_MIN_THRESHOLD)) < SampleLength);
+
+  *pPreviousXValue = xIndex - (SLData_t) SampleLength;              // Save X value for next iteration
+  *pPreviousYValue = pSrc[SampleLength - SIGLIB_AI_ONE];            // Save Y value for next iteration
+
+  return (OutputSampleCount);
+}                                                                   // End of SDA_ResampleLinearContiguous()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_ResampleSincContiguous
 *
@@ -1121,34 +1145,35 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleLinearContiguous (const SLData_t * S
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_ResampleSincContiguous (SLData_t *pPreviousXValue,
-    SLData_t *pSincLUT,
-    SLData_t *pXDataTable,
-    SLData_t *pPhaseGain,
-    const SLArrayIndex_t NumberOfAdjacentSamples,
-    const SLArrayIndex_t SincTableLength)
-
+void SIGLIB_FUNC_DECL SIF_ResampleSincContiguous (
+  SLData_t * pPreviousXValue,
+  SLData_t * pSincLUT,
+  SLData_t * pXDataTable,
+  SLData_t * pPhaseGain,
+  const SLArrayIndex_t NumberOfAdjacentSamples,
+  const SLArrayIndex_t SincTableLength)
 {
-    SLArrayIndex_t     i;
-    SLData_t        localPhaseGain;
+  SLArrayIndex_t  i;
+  SLData_t        localPhaseGain;
 
-    *pPreviousXValue = (SIGLIB_TWO * (SLData_t)NumberOfAdjacentSamples) - SIGLIB_ONE;       // There were no previous samples
+  *pPreviousXValue = (SIGLIB_TWO * (SLData_t) NumberOfAdjacentSamples) - SIGLIB_ONE;  // There were no previous samples
 
-    localPhaseGain = (((SLData_t)(NumberOfAdjacentSamples + 1)) / ((SLData_t)(SincTableLength - 1)));   // Calculate phase increment through lookup table
+  localPhaseGain = (((SLData_t) (NumberOfAdjacentSamples + 1)) / ((SLData_t) (SincTableLength - 1))); // Calculate phase increment through lookup table
 
-    for (i = 0; i < SincTableLength; i++) {
-        *pSincLUT++ = SDS_Sinc (localPhaseGain * i);
-    }
+  for (i = 0; i < SincTableLength; i++) {
+    *pSincLUT++ = SDS_Sinc (localPhaseGain * i);
+  }
 
-    *pPhaseGain = SIGLIB_ONE / localPhaseGain;              // Invert for use in the quick functions
+  *pPhaseGain = SIGLIB_ONE / localPhaseGain;                        // Invert for use in the quick functions
 
-    for (i = 0; i < (SIGLIB_AI_FOUR*NumberOfAdjacentSamples); i++) {    // Clear out the X data table
-        *pXDataTable++ = SIGLIB_ZERO;
-    }
-}       // End of SIF_ResampleSincContiguous()
+  for (i = 0; i < (SIGLIB_AI_FOUR * NumberOfAdjacentSamples); i++) {  // Clear out the X data table
+    *pXDataTable++ = SIGLIB_ZERO;
+  }
+}                                                                   // End of SIF_ResampleSincContiguous()
 
 
 /**/
+
 /********************************************************
 * Function: SIF_ResampleWindowedSincContiguous
 *
@@ -1172,42 +1197,43 @@ void SIGLIB_FUNC_DECL SIF_ResampleSincContiguous (SLData_t *pPreviousXValue,
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_ResampleWindowedSincContiguous (SLData_t *pPreviousXValue,
-    SLData_t *pSincLUT,
-    SLData_t *pXDataTable,
-    SLData_t *pPhaseGain,
-    const SLArrayIndex_t NumberOfAdjacentSamples,
-    SLData_t * SIGLIB_PTR_DECL pWindowCoeffs,
-    const enum SLWindow_t WindowType,
-    const SLData_t Coeff,
-    const SLArrayIndex_t SincTableLength)
-
+void SIGLIB_FUNC_DECL SIF_ResampleWindowedSincContiguous (
+  SLData_t * pPreviousXValue,
+  SLData_t * pSincLUT,
+  SLData_t * pXDataTable,
+  SLData_t * pPhaseGain,
+  const SLArrayIndex_t NumberOfAdjacentSamples,
+  SLData_t * SIGLIB_PTR_DECL pWindowCoeffs,
+  const enum SLWindow_t WindowType,
+  const SLData_t Coeff,
+  const SLArrayIndex_t SincTableLength)
 {
-    SLArrayIndex_t     i;
-    SLData_t        localPhaseGain;
+  SLArrayIndex_t  i;
+  SLData_t        localPhaseGain;
 
-    *pPreviousXValue = (SIGLIB_TWO * (SLData_t)NumberOfAdjacentSamples) - SIGLIB_ONE;       // There were no previous samples
+  *pPreviousXValue = (SIGLIB_TWO * (SLData_t) NumberOfAdjacentSamples) - SIGLIB_ONE;  // There were no previous samples
 
-    localPhaseGain = (((SLData_t)(NumberOfAdjacentSamples + 1)) / ((SLData_t)(SincTableLength - 1)));   // Calculate phase increment through lookup table
+  localPhaseGain = (((SLData_t) (NumberOfAdjacentSamples + 1)) / ((SLData_t) (SincTableLength - 1))); // Calculate phase increment through lookup table
 
-    for (i = 0; i < SincTableLength; i++) {
-        *pSincLUT++ = SDS_Sinc (localPhaseGain * i);
-    }
+  for (i = 0; i < SincTableLength; i++) {
+    *pSincLUT++ = SDS_Sinc (localPhaseGain * i);
+  }
 
-    *pPhaseGain = SIGLIB_ONE / localPhaseGain;              // Invert for use in the quick functions
+  *pPhaseGain = SIGLIB_ONE / localPhaseGain;                        // Invert for use in the quick functions
 
-    pSincLUT -= SincTableLength;                            // Reset look up table pointer
+  pSincLUT -= SincTableLength;                                      // Reset look up table pointer
 
-    SIF_Window (pWindowCoeffs, WindowType, Coeff, SincTableLength);     // Initialize window table
-    SDA_Multiply2 (pSincLUT, pWindowCoeffs, pSincLUT, SincTableLength); // Cross multiply sinc data with window table
+  SIF_Window (pWindowCoeffs, WindowType, Coeff, SincTableLength);   // Initialize window table
+  SDA_Multiply2 (pSincLUT, pWindowCoeffs, pSincLUT, SincTableLength); // Cross multiply sinc data with window table
 
-    for (i = 0; i < (SIGLIB_AI_FOUR*NumberOfAdjacentSamples); i++) {    // Clear out the X data table
-        *pXDataTable++ = SIGLIB_ZERO;
-    }
-}       // End of SIF_ResampleWindowedSincContiguous()
+  for (i = 0; i < (SIGLIB_AI_FOUR * NumberOfAdjacentSamples); i++) {  // Clear out the X data table
+    *pXDataTable++ = SIGLIB_ZERO;
+  }
+}                                                                   // End of SIF_ResampleWindowedSincContiguous()
 
 
 /**/
+
 /********************************************************
 * Function: SDA_ResampleSincContiguous
 *
@@ -1239,97 +1265,98 @@ void SIGLIB_FUNC_DECL SIF_ResampleWindowedSincContiguous (SLData_t *pPreviousXVa
 *
 ********************************************************/
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSincContiguous (const SLData_t * SIGLIB_PTR_DECL pSrc,
-    SLData_t * SIGLIB_PTR_DECL pDst,
-    SLData_t *pPreviousXValue,
-    SLData_t * SIGLIB_PTR_DECL pSincLUT,
-    SLData_t * SIGLIB_PTR_DECL pXDataTable,
-    const SLData_t LookUpTablePhaseGain,
-    const SLData_t NewSamplePeriod,
-    const SLArrayIndex_t NumberOfAdjacentSamples,
-    const SLArrayIndex_t SampleLength)
-
+SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSincContiguous (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  SLData_t * pPreviousXValue,
+  SLData_t * SIGLIB_PTR_DECL pSincLUT,
+  SLData_t * SIGLIB_PTR_DECL pXDataTable,
+  const SLData_t LookUpTablePhaseGain,
+  const SLData_t NewSamplePeriod,
+  const SLArrayIndex_t NumberOfAdjacentSamples,
+  const SLArrayIndex_t SampleLength)
 {
-    SLArrayIndex_t  i;
-    SLArrayIndex_t  OutputSampleCount = SIGLIB_AI_ZERO;
-    SLData_t        y = SIGLIB_ZERO;
-    SLArrayIndex_t  StartIndex, EndIndex;
-    SLData_t        xIndex;
-    SLArrayIndex_t  xIndexFixedPoint = SIGLIB_AI_ZERO;      // Start from first index in source array
+  SLArrayIndex_t  i;
+  SLArrayIndex_t  OutputSampleCount = SIGLIB_AI_ZERO;
+  SLData_t        y = SIGLIB_ZERO;
+  SLArrayIndex_t  StartIndex, EndIndex;
+  SLData_t        xIndex;
+  SLArrayIndex_t  xIndexFixedPoint = SIGLIB_AI_ZERO;                // Start from first index in source array
 
-    xIndex = *pPreviousXValue;
+  xIndex = *pPreviousXValue;
 //  SUF_Debugfprintf ("%s : xIndex = %lf\n", __FUNCTION__, xIndex);
 
-    for (i = 0; i < (SIGLIB_AI_TWO * NumberOfAdjacentSamples) + SIGLIB_AI_ONE; i++) {
-        pXDataTable[i + (SIGLIB_AI_TWO * NumberOfAdjacentSamples) - SIGLIB_AI_ONE] = pSrc[i];
-    }
+  for (i = 0; i < (SIGLIB_AI_TWO * NumberOfAdjacentSamples) + SIGLIB_AI_ONE; i++) {
+    pXDataTable[i + (SIGLIB_AI_TWO * NumberOfAdjacentSamples) - SIGLIB_AI_ONE] = pSrc[i];
+  }
 
 //  SUF_DebugPrintArray (SDA_ResampleSincContiguous : pXDataTable, (SIGLIB_AI_FOUR * NumberOfAdjacentSamples));
 
-                                                            // Pre-calculate first sidelobes
-    do {                                                    // For upsampling we need to calculate every sample in x0 to x1
-        xIndexFixedPoint = SAI_RoundDown (xIndex);
+// Pre-calculate first sidelobes
+  do {                                                              // For upsampling we need to calculate every sample in x0 to x1
+    xIndexFixedPoint = SAI_RoundDown (xIndex);
 
 //      SUF_Debugfprintf ("%s : xIndexFixedPoint = %d\n", __FUNCTION__, xIndexFixedPoint);
-        StartIndex = xIndexFixedPoint - (NumberOfAdjacentSamples - SIGLIB_AI_ONE);  // Calculate start index for sinc calculation
-        EndIndex = xIndexFixedPoint + NumberOfAdjacentSamples + SIGLIB_AI_ONE;      // Calculate end index
+    StartIndex = xIndexFixedPoint - (NumberOfAdjacentSamples - SIGLIB_AI_ONE);  // Calculate start index for sinc calculation
+    EndIndex = xIndexFixedPoint + NumberOfAdjacentSamples + SIGLIB_AI_ONE;  // Calculate end index
 //      SUF_Debugfprintf ("%s : xIndex = %lf, StartIndex = %d, EndIndex = %d\n", __FUNCTION__, xIndex, StartIndex, EndIndex);
 
-        y = SIGLIB_ZERO;                                    // Reset sinc sum
-        for (i = StartIndex; i < EndIndex; i++) {           // Calculate sinc interpolation
-            y += pXDataTable[i] * SDS_QuickSinc ((xIndex - ((SLData_t)i)),    // Source 'x' value
-                                                  pSincLUT,                   // Pointer to Sinc look up table
-                                                  LookUpTablePhaseGain);      // Phase gain
-        }
-        *pDst++ = y;                                        // Save sinc value
-        OutputSampleCount++;
-        xIndex += NewSamplePeriod;
+    y = SIGLIB_ZERO;                                                // Reset sinc sum
+    for (i = StartIndex; i < EndIndex; i++) {                       // Calculate sinc interpolation
+      y += pXDataTable[i] * SDS_QuickSinc ((xIndex - ((SLData_t) i)), // Source 'x' value
+                                           pSincLUT,                // Pointer to Sinc look up table
+                                           LookUpTablePhaseGain);   // Phase gain
+    }
+    *pDst++ = y;                                                    // Save sinc value
+    OutputSampleCount++;
+    xIndex += NewSamplePeriod;
 
 //          SUF_Debugfprintf ("%s : y = %lf\n", __FUNCTION__, y);
 
-    } while (SAI_RoundDown (xIndex) < (SIGLIB_AI_THREE * NumberOfAdjacentSamples));
+  } while (SAI_RoundDown (xIndex) < (SIGLIB_AI_THREE * NumberOfAdjacentSamples));
 
 //  SUF_Debugfprintf ("%s : Done first stage\n", __FUNCTION__);
 
-    xIndex -= (SLData_t)(NumberOfAdjacentSamples + SIGLIB_AI_ONE);  // Move index from overlap array to data array
+  xIndex -= (SLData_t) (NumberOfAdjacentSamples + SIGLIB_AI_ONE);   // Move index from overlap array to data array
 
-    do {                                                    // For upsampling we need to calculate every sample in x0 to x1
-        xIndexFixedPoint = SAI_RoundDown (xIndex);
+  do {                                                              // For upsampling we need to calculate every sample in x0 to x1
+    xIndexFixedPoint = SAI_RoundDown (xIndex);
 //      SUF_Debugfprintf ("%s : xIndexFixedPoint = %d\n", __FUNCTION__, xIndexFixedPoint);
 
-        StartIndex = xIndexFixedPoint - (NumberOfAdjacentSamples - SIGLIB_AI_ONE);   // Calculate start index for sinc calculation
-        EndIndex = xIndexFixedPoint + NumberOfAdjacentSamples + SIGLIB_AI_ONE;   // Calculate end index
+    StartIndex = xIndexFixedPoint - (NumberOfAdjacentSamples - SIGLIB_AI_ONE);  // Calculate start index for sinc calculation
+    EndIndex = xIndexFixedPoint + NumberOfAdjacentSamples + SIGLIB_AI_ONE;  // Calculate end index
 
 //      SUF_Debugfprintf ("%s : xIndex = %lf, StartIndex = %d, EndIndex = %d\n", __FUNCTION__, xIndex, StartIndex, EndIndex);
 
-        y = SIGLIB_ZERO;                                    // Reset sinc sum
-        for (i = StartIndex; i < EndIndex; i++) {           // Calculate sinc interpolation
+    y = SIGLIB_ZERO;                                                // Reset sinc sum
+    for (i = StartIndex; i < EndIndex; i++) {                       // Calculate sinc interpolation
 //      SUF_Debugfprintf ("%s : i = %d, (xIndex - i) = %lf\n", __FUNCTION__, i, (xIndex - ((SLData_t)i)));
-            y += pSrc[i] * SDS_QuickSinc ((xIndex - ((SLData_t)i)),   // Source 'x' value
-                                          pSincLUT,                   // Pointer to Sinc look up table
-                                          LookUpTablePhaseGain);      // Phase gain
-        }
-        *pDst++ = y;                                        // Save sinc value
+      y += pSrc[i] * SDS_QuickSinc ((xIndex - ((SLData_t) i)),      // Source 'x' value
+                                    pSincLUT,                       // Pointer to Sinc look up table
+                                    LookUpTablePhaseGain);          // Phase gain
+    }
+    *pDst++ = y;                                                    // Save sinc value
 //      SUF_Debugfprintf ("%s : y = %lf\n", __FUNCTION__, y);
 
-        OutputSampleCount++;
-        xIndex += NewSamplePeriod;
+    OutputSampleCount++;
+    xIndex += NewSamplePeriod;
 
-    } while (SAI_RoundDown (xIndex) < (SampleLength - NumberOfAdjacentSamples));
+  } while (SAI_RoundDown (xIndex) < (SampleLength - NumberOfAdjacentSamples));
 
-                                                            // Save overlapping X data for sinc calculation on next iteration
-    for (i = 0; i < (SIGLIB_AI_TWO * NumberOfAdjacentSamples); i++) {
-        pXDataTable[i] = pSrc[((SampleLength - NumberOfAdjacentSamples) - SIGLIB_AI_ONE) + i];
-    }
+// Save overlapping X data for sinc calculation on next iteration
+  for (i = 0; i < (SIGLIB_AI_TWO * NumberOfAdjacentSamples); i++) {
+    pXDataTable[i] = pSrc[((SampleLength - NumberOfAdjacentSamples) - SIGLIB_AI_ONE) + i];
+  }
 
-                                                            // Save X index for next iteration
-    *pPreviousXValue = (xIndex - (SampleLength - (SIGLIB_AI_TWO * NumberOfAdjacentSamples))) - SIGLIB_AI_ONE;
+// Save X index for next iteration
+  *pPreviousXValue = (xIndex - (SampleLength - (SIGLIB_AI_TWO * NumberOfAdjacentSamples))) - SIGLIB_AI_ONE;
 
-    return (OutputSampleCount);
-}       // End of SDA_ResampleSincContiguous()
+  return (OutputSampleCount);
+}                                                                   // End of SDA_ResampleSincContiguous()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_InterpolateQuadratic1D
 *
@@ -1350,20 +1377,21 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSincContiguous (const SLData_t * SIG
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_InterpolateQuadratic1D (const SLData_t inputY0,
-    const SLData_t inputY1,
-    const SLData_t inputY2,
-    const SLData_t deltaX)
-
+SLData_t SIGLIB_FUNC_DECL SDS_InterpolateQuadratic1D (
+  const SLData_t inputY0,
+  const SLData_t inputY1,
+  const SLData_t inputY2,
+  const SLData_t deltaX)
 {
-    SLData_t deltaY1 = SIGLIB_HALF*(inputY2-inputY0);
-    SLData_t deltaY2 = inputY0+inputY2-(SIGLIB_TWO * inputY1);
+  SLData_t        deltaY1 = SIGLIB_HALF * (inputY2 - inputY0);
+  SLData_t        deltaY2 = inputY0 + inputY2 - (SIGLIB_TWO * inputY1);
 
-    return (inputY1 + (deltaX*(deltaY1+(SIGLIB_HALF*deltaX*deltaY2))));
-}       // End of SDS_InterpolateQuadratic1D()
+  return (inputY1 + (deltaX * (deltaY1 + (SIGLIB_HALF * deltaX * deltaY2))));
+}                                                                   // End of SDS_InterpolateQuadratic1D()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_InterpolateQuadraticBSpline1D
 *
@@ -1384,21 +1412,22 @@ SLData_t SIGLIB_FUNC_DECL SDS_InterpolateQuadratic1D (const SLData_t inputY0,
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_InterpolateQuadraticBSpline1D (const SLData_t inputY0,
-    const SLData_t inputY1,
-    const SLData_t inputY2,
-    const SLData_t deltaX)
-
+SLData_t SIGLIB_FUNC_DECL SDS_InterpolateQuadraticBSpline1D (
+  const SLData_t inputY0,
+  const SLData_t inputY1,
+  const SLData_t inputY2,
+  const SLData_t deltaX)
 {
-    SLData_t h0 = SIGLIB_HALF*(deltaX*deltaX);
-    SLData_t h1 = (-(deltaX*deltaX)) + deltaX + SIGLIB_HALF;
-    SLData_t h2 = SIGLIB_HALF*((SIGLIB_ONE - deltaX)*(SIGLIB_ONE - deltaX));
+  SLData_t        h0 = SIGLIB_HALF * (deltaX * deltaX);
+  SLData_t        h1 = (-(deltaX * deltaX)) + deltaX + SIGLIB_HALF;
+  SLData_t        h2 = SIGLIB_HALF * ((SIGLIB_ONE - deltaX) * (SIGLIB_ONE - deltaX));
 
-    return ((inputY0*h2) + (inputY1*+h1) + (inputY2*h0));
-}       // End of SDS_InterpolateQuadraticBSpline1D()
+  return ((inputY0 * h2) + (inputY1 * +h1) + (inputY2 * h0));
+}                                                                   // End of SDS_InterpolateQuadraticBSpline1D()
 
 
 /**/
+
 /********************************************************
 * Function: SDS_InterpolateQuadraticLagrange1D
 *
@@ -1419,17 +1448,15 @@ SLData_t SIGLIB_FUNC_DECL SDS_InterpolateQuadraticBSpline1D (const SLData_t inpu
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_InterpolateQuadraticLagrange1D (const SLData_t inputY0,
-    const SLData_t inputY1,
-    const SLData_t inputY2,
-    const SLData_t deltaX)
-
+SLData_t SIGLIB_FUNC_DECL SDS_InterpolateQuadraticLagrange1D (
+  const SLData_t inputY0,
+  const SLData_t inputY1,
+  const SLData_t inputY2,
+  const SLData_t deltaX)
 {
-    SLData_t h0 = SIGLIB_HALF * deltaX * (deltaX + SIGLIB_ONE);
-    SLData_t h1 = -(deltaX + SIGLIB_ONE) * (deltaX - SIGLIB_ONE);
-    SLData_t h2 = SIGLIB_HALF * (deltaX - SIGLIB_ONE) * deltaX;
+  SLData_t        h0 = SIGLIB_HALF * deltaX * (deltaX + SIGLIB_ONE);
+  SLData_t        h1 = -(deltaX + SIGLIB_ONE) * (deltaX - SIGLIB_ONE);
+  SLData_t        h2 = SIGLIB_HALF * (deltaX - SIGLIB_ONE) * deltaX;
 
-    return ((inputY0*h2) + (inputY1*+h1) + (inputY2*h0));
-}       // End of SDS_InterpolateQuadraticLagrange1D()
-
-
+  return ((inputY0 * h2) + (inputY1 * +h1) + (inputY2 * h0));
+}                                                                   // End of SDS_InterpolateQuadraticLagrange1D()

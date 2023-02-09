@@ -1,3 +1,4 @@
+
 /**************************************************************************
 File Name               : COMPLEX.C     | Author        : JOHN EDWARDS
 Siglib Library Version  : 10.00         |
@@ -36,12 +37,13 @@ Description : Complex number routines for SigLib DSP library.
 
 ****************************************************************************/
 
-#define SIGLIB_SRC_FILE_COMPLEX 1                           // Defines the source file that this code is being used in
+#define SIGLIB_SRC_FILE_COMPLEX 1                                   // Defines the source file that this code is being used in
 
-#include <siglib.h>                                         // Include SigLib header file
+#include <siglib.h>                                                 // Include SigLib header file
 
 
 /**/
+
 /********************************************************
 * Function: SCV_Polar()
 *
@@ -56,21 +58,22 @@ Description : Complex number routines for SigLib DSP library.
 *
 ********************************************************/
 
-SLComplexPolar_s SIGLIB_FUNC_DECL SCV_Polar (const SLData_t IM,
-    const SLData_t IA)
-
+SLComplexPolar_s SIGLIB_FUNC_DECL SCV_Polar (
+  const SLData_t IM,
+  const SLData_t IA)
 {
-    SLComplexPolar_s    Polar;
+  SLComplexPolar_s Polar;
 
-    Polar.magn = IM;
-    Polar.angle = IA;
+  Polar.magn = IM;
+  Polar.angle = IA;
 
-    return (Polar);
+  return (Polar);
 
-}       // End of SCV_Polar()
+}                                                                   // End of SCV_Polar()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_Rectangular()
 *
@@ -85,21 +88,22 @@ SLComplexPolar_s SIGLIB_FUNC_DECL SCV_Polar (const SLData_t IM,
 *
 ********************************************************/
 
-SLComplexRect_s SIGLIB_FUNC_DECL SCV_Rectangular (const SLData_t IR,
-    const SLData_t II)
-
+SLComplexRect_s SIGLIB_FUNC_DECL SCV_Rectangular (
+  const SLData_t IR,
+  const SLData_t II)
 {
-    SLComplexRect_s Rect;
+  SLComplexRect_s Rect;
 
-    Rect.real = IR;
-    Rect.imag = II;
+  Rect.real = IR;
+  Rect.imag = II;
 
-    return (Rect);
+  return (Rect);
 
-}       // End of SCV_Rectangular()
+}                                                                   // End of SCV_Rectangular()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_PolarToRectangular()
 *
@@ -113,20 +117,21 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Rectangular (const SLData_t IR,
 *
 ********************************************************/
 
-SLComplexRect_s SIGLIB_FUNC_DECL SCV_PolarToRectangular (const SLComplexPolar_s Polar)
-
+SLComplexRect_s SIGLIB_FUNC_DECL SCV_PolarToRectangular (
+  const SLComplexPolar_s Polar)
 {
-    SLComplexRect_s Rect;
+  SLComplexRect_s Rect;
 
-    Rect.real = Polar.magn * SDS_Cos (Polar.angle);
-    Rect.imag = Polar.magn * SDS_Sin (Polar.angle);
+  Rect.real = Polar.magn * SDS_Cos (Polar.angle);
+  Rect.imag = Polar.magn * SDS_Sin (Polar.angle);
 
-    return (Rect);
+  return (Rect);
 
-}       // End of SCV_PolarToRectangular()
+}                                                                   // End of SCV_PolarToRectangular()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_RectangularToPolar()
 *
@@ -140,29 +145,28 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_PolarToRectangular (const SLComplexPolar_s 
 *
 ********************************************************/
 
-SLComplexPolar_s SIGLIB_FUNC_DECL SCV_RectangularToPolar (const SLComplexRect_s Rect)
-
+SLComplexPolar_s SIGLIB_FUNC_DECL SCV_RectangularToPolar (
+  const SLComplexRect_s Rect)
 {
-    SLComplexPolar_s    Polar;
+  SLComplexPolar_s Polar;
 
-    Polar.magn = SDS_Sqrt (Rect.real * Rect.real + Rect.imag * Rect.imag);
+  Polar.magn = SDS_Sqrt (Rect.real * Rect.real + Rect.imag * Rect.imag);
 
-    if ((Rect.real < SIGLIB_MIN_THRESHOLD) && (Rect.real > -SIGLIB_MIN_THRESHOLD) &&
-        (Rect.imag < SIGLIB_MIN_THRESHOLD) && (Rect.imag > -SIGLIB_MIN_THRESHOLD))
-    {
-        Polar.angle = SIGLIB_ZERO;
-    }
-    else
-    {
-        Polar.angle = SDS_Atan2 (Rect.imag, Rect.real);
-    }
+  if ((Rect.real < SIGLIB_MIN_THRESHOLD) && (Rect.real > -SIGLIB_MIN_THRESHOLD) &&
+      (Rect.imag < SIGLIB_MIN_THRESHOLD) && (Rect.imag > -SIGLIB_MIN_THRESHOLD)) {
+    Polar.angle = SIGLIB_ZERO;
+  }
+  else {
+    Polar.angle = SDS_Atan2 (Rect.imag, Rect.real);
+  }
 
-    return (Polar);
+  return (Polar);
 
-}       // End of SCV_RectangularToPolar()
+}                                                                   // End of SCV_RectangularToPolar()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_Sqrt()
 *
@@ -178,22 +182,23 @@ SLComplexPolar_s SIGLIB_FUNC_DECL SCV_RectangularToPolar (const SLComplexRect_s 
 *
 ********************************************************/
 
-SLComplexRect_s SIGLIB_FUNC_DECL SCV_Sqrt (const SLComplexRect_s IVect)
-
+SLComplexRect_s SIGLIB_FUNC_DECL SCV_Sqrt (
+  const SLComplexRect_s IVect)
 {
-    SLComplexPolar_s    OVect;
+  SLComplexPolar_s OVect;
 
-    OVect = SCV_RectangularToPolar (IVect);
+  OVect = SCV_RectangularToPolar (IVect);
 
-    OVect.magn = SDS_Sqrt (OVect.magn);
-    OVect.angle = SIGLIB_HALF * OVect.angle;
+  OVect.magn = SDS_Sqrt (OVect.magn);
+  OVect.angle = SIGLIB_HALF * OVect.angle;
 
-    return (SCV_PolarToRectangular (OVect));
+  return (SCV_PolarToRectangular (OVect));
 
-}       // End of SCV_Sqrt()
+}                                                                   // End of SCV_Sqrt()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_Inverse()
 *
@@ -208,28 +213,29 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Sqrt (const SLComplexRect_s IVect)
 *
 ********************************************************/
 
-SLComplexRect_s SIGLIB_FUNC_DECL SCV_Inverse (const SLComplexRect_s IVect)
-
+SLComplexRect_s SIGLIB_FUNC_DECL SCV_Inverse (
+  const SLComplexRect_s IVect)
 {
-    SLComplexRect_s Result;
-    SLData_t        Denominator = SIGLIB_ONE / (IVect.real * IVect.real + IVect.imag * IVect.imag);
+  SLComplexRect_s Result;
+  SLData_t        Denominator = SIGLIB_ONE / (IVect.real * IVect.real + IVect.imag * IVect.imag);
 
-    if (Denominator == SIGLIB_ZERO) {               // Check for divide by zero
-        Result.real = SIGLIB_ONE;
-        Result.imag = SIGLIB_ZERO;
-    }
+  if (Denominator == SIGLIB_ZERO) {                                 // Check for divide by zero
+    Result.real = SIGLIB_ONE;
+    Result.imag = SIGLIB_ZERO;
+  }
 
-    else {
-        Result.real =  IVect.real * Denominator;
-        Result.imag = -IVect.imag * Denominator;
-    }
+  else {
+    Result.real = IVect.real * Denominator;
+    Result.imag = -IVect.imag * Denominator;
+  }
 
-    return (Result);
+  return (Result);
 
-}       // End of SCV_Inverse()
+}                                                                   // End of SCV_Inverse()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_Conjugate()
 *
@@ -244,20 +250,21 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Inverse (const SLComplexRect_s IVect)
 *
 ********************************************************/
 
-SLComplexRect_s SIGLIB_FUNC_DECL SCV_Conjugate (const SLComplexRect_s IVect)
-
+SLComplexRect_s SIGLIB_FUNC_DECL SCV_Conjugate (
+  const SLComplexRect_s IVect)
 {
-    SLComplexRect_s OVectVect;
+  SLComplexRect_s OVectVect;
 
-    OVectVect = IVect;
-    OVectVect.imag *= SIGLIB_MINUS_ONE;
+  OVectVect = IVect;
+  OVectVect.imag *= SIGLIB_MINUS_ONE;
 
-    return (OVectVect);
+  return (OVectVect);
 
-}       // End of SCV_Conjugate()
+}                                                                   // End of SCV_Conjugate()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_Magnitude()
 *
@@ -272,15 +279,16 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Conjugate (const SLComplexRect_s IVect)
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SCV_Magnitude (const SLComplexRect_s IVect)
-
+SLData_t SIGLIB_FUNC_DECL SCV_Magnitude (
+  const SLComplexRect_s IVect)
 {
-    return (SDS_Sqrt (IVect.real * IVect.real + IVect.imag * IVect.imag));
+  return (SDS_Sqrt (IVect.real * IVect.real + IVect.imag * IVect.imag));
 
-}       // End of SCV_Magnitude()
+}                                                                   // End of SCV_Magnitude()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_MagnitudeSquared()
 *
@@ -295,15 +303,16 @@ SLData_t SIGLIB_FUNC_DECL SCV_Magnitude (const SLComplexRect_s IVect)
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SCV_MagnitudeSquared (const SLComplexRect_s IVect)
-
+SLData_t SIGLIB_FUNC_DECL SCV_MagnitudeSquared (
+  const SLComplexRect_s IVect)
 {
-    return (IVect.real * IVect.real + IVect.imag * IVect.imag);
+  return (IVect.real * IVect.real + IVect.imag * IVect.imag);
 
-}       // End of SCV_MagnitudeSquared()
+}                                                                   // End of SCV_MagnitudeSquared()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_Phase()
 *
@@ -318,15 +327,16 @@ SLData_t SIGLIB_FUNC_DECL SCV_MagnitudeSquared (const SLComplexRect_s IVect)
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SCV_Phase (const SLComplexRect_s IVect)
-
+SLData_t SIGLIB_FUNC_DECL SCV_Phase (
+  const SLComplexRect_s IVect)
 {
-    return (SDS_Atan2(IVect.imag, IVect.real));
+  return (SDS_Atan2 (IVect.imag, IVect.real));
 
-}       // End of SCV_Phase()
+}                                                                   // End of SCV_Phase()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_Multiply()
 *
@@ -341,21 +351,22 @@ SLData_t SIGLIB_FUNC_DECL SCV_Phase (const SLComplexRect_s IVect)
 *
 ********************************************************/
 
-SLComplexRect_s SIGLIB_FUNC_DECL SCV_Multiply (const SLComplexRect_s IVect1,
-    const SLComplexRect_s IVect2)
-
+SLComplexRect_s SIGLIB_FUNC_DECL SCV_Multiply (
+  const SLComplexRect_s IVect1,
+  const SLComplexRect_s IVect2)
 {
-    SLComplexRect_s OVect;
+  SLComplexRect_s OVect;
 
-    OVect.real = IVect1.real*IVect2.real - IVect1.imag*IVect2.imag;
-    OVect.imag = IVect1.real*IVect2.imag + IVect1.imag*IVect2.real;
+  OVect.real = IVect1.real * IVect2.real - IVect1.imag * IVect2.imag;
+  OVect.imag = IVect1.real * IVect2.imag + IVect1.imag * IVect2.real;
 
-    return (OVect);
+  return (OVect);
 
-}       // End of SCV_Multiply()
+}                                                                   // End of SCV_Multiply()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_Divide()
 *
@@ -371,34 +382,35 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Multiply (const SLComplexRect_s IVect1,
 *
 ********************************************************/
 
-SLComplexRect_s SIGLIB_FUNC_DECL SCV_Divide (const SLComplexRect_s Numerator,
-    const SLComplexRect_s Divisor)
-
+SLComplexRect_s SIGLIB_FUNC_DECL SCV_Divide (
+  const SLComplexRect_s Numerator,
+  const SLComplexRect_s Divisor)
 {
-    SLComplexRect_s OVect, Result;
-    SLData_t        Denominator = SIGLIB_ONE / (Divisor.real * Divisor.real + Divisor.imag * Divisor.imag);
+  SLComplexRect_s OVect, Result;
+  SLData_t        Denominator = SIGLIB_ONE / (Divisor.real * Divisor.real + Divisor.imag * Divisor.imag);
 
-    if (Denominator == SIGLIB_ZERO) {               // Check for divide by zero
-        Result.real = SIGLIB_ONE;
-        Result.imag = SIGLIB_ZERO;
-    }
+  if (Denominator == SIGLIB_ZERO) {                                 // Check for divide by zero
+    Result.real = SIGLIB_ONE;
+    Result.imag = SIGLIB_ZERO;
+  }
 
-    else {
-                                                    // Negate the divisor
-        OVect.real =  Divisor.real * Denominator;
-        OVect.imag = -Divisor.imag * Denominator;
+  else {
+// Negate the divisor
+    OVect.real = Divisor.real * Denominator;
+    OVect.imag = -Divisor.imag * Denominator;
 
-                                                    // Multiply numerator by divisor
-        Result.real = Numerator.real * OVect.real - Numerator.imag * OVect.imag;
-        Result.imag = Numerator.real * OVect.imag + Numerator.imag * OVect.real;
-    }
+// Multiply numerator by divisor
+    Result.real = Numerator.real * OVect.real - Numerator.imag * OVect.imag;
+    Result.imag = Numerator.real * OVect.imag + Numerator.imag * OVect.real;
+  }
 
-    return (Result);
+  return (Result);
 
-}       // End of SCV_Divide()
+}                                                                   // End of SCV_Divide()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_Add()
 *
@@ -413,21 +425,22 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Divide (const SLComplexRect_s Numerator,
 *
 ********************************************************/
 
-SLComplexRect_s SIGLIB_FUNC_DECL SCV_Add (const SLComplexRect_s IVect1,
-    const SLComplexRect_s IVect2)
-
+SLComplexRect_s SIGLIB_FUNC_DECL SCV_Add (
+  const SLComplexRect_s IVect1,
+  const SLComplexRect_s IVect2)
 {
-    SLComplexRect_s OVect;
+  SLComplexRect_s OVect;
 
-    OVect.real = IVect1.real + IVect2.real;
-    OVect.imag = IVect1.imag + IVect2.imag;
+  OVect.real = IVect1.real + IVect2.real;
+  OVect.imag = IVect1.imag + IVect2.imag;
 
-    return (OVect);
+  return (OVect);
 
-}       // End of SCV_Add()
+}                                                                   // End of SCV_Add()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_Subtract()
 *
@@ -442,21 +455,22 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Add (const SLComplexRect_s IVect1,
 *
 ********************************************************/
 
-SLComplexRect_s SIGLIB_FUNC_DECL SCV_Subtract (const SLComplexRect_s IVect1,
-    const SLComplexRect_s IVect2)
-
+SLComplexRect_s SIGLIB_FUNC_DECL SCV_Subtract (
+  const SLComplexRect_s IVect1,
+  const SLComplexRect_s IVect2)
 {
-    SLComplexRect_s OVect;
+  SLComplexRect_s OVect;
 
-    OVect.real = IVect1.real - IVect2.real;
-    OVect.imag = IVect1.imag - IVect2.imag;
+  OVect.real = IVect1.real - IVect2.real;
+  OVect.imag = IVect1.imag - IVect2.imag;
 
-    return (OVect);
+  return (OVect);
 
-}       // End of SCV_Subtract()
+}                                                                   // End of SCV_Subtract()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_Log()
 *
@@ -470,20 +484,21 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Subtract (const SLComplexRect_s IVect1,
 *
 ********************************************************/
 
-SLComplexRect_s SIGLIB_FUNC_DECL SCV_Log (const SLComplexRect_s IVect)
-
+SLComplexRect_s SIGLIB_FUNC_DECL SCV_Log (
+  const SLComplexRect_s IVect)
 {
-    SLComplexRect_s OVect;
+  SLComplexRect_s OVect;
 
-    OVect.real = SIGLIB_HALF * SDS_Log (IVect.real * IVect.real + IVect.imag * IVect.imag);
-    OVect.imag = SDS_Atan2 (IVect.imag, IVect.real);
+  OVect.real = SIGLIB_HALF * SDS_Log (IVect.real * IVect.real + IVect.imag * IVect.imag);
+  OVect.imag = SDS_Atan2 (IVect.imag, IVect.real);
 
-    return (OVect);
+  return (OVect);
 
-}       // End of SCV_Log()
+}                                                                   // End of SCV_Log()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_Exp()
 *
@@ -497,21 +512,22 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Log (const SLComplexRect_s IVect)
 *
 ********************************************************/
 
-SLComplexRect_s SIGLIB_FUNC_DECL SCV_Exp (const SLComplexRect_s IVect)
-
+SLComplexRect_s SIGLIB_FUNC_DECL SCV_Exp (
+  const SLComplexRect_s IVect)
 {
-    SLComplexRect_s OVect;
-    SLData_t        FTmp;
+  SLComplexRect_s OVect;
+  SLData_t        FTmp;
 
-    FTmp = SDS_Exp ( IVect.real);
-    OVect.imag = FTmp * SDS_Sin (IVect.imag);
-    OVect.real = FTmp * SDS_Cos (IVect.imag);
+  FTmp = SDS_Exp (IVect.real);
+  OVect.imag = FTmp * SDS_Sin (IVect.imag);
+  OVect.real = FTmp * SDS_Cos (IVect.imag);
 
-    return (OVect);
-}       // End of SCV_Exp()
+  return (OVect);
+}                                                                   // End of SCV_Exp()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_Expj()
 *
@@ -525,16 +541,17 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Exp (const SLComplexRect_s IVect)
 *
 ********************************************************/
 
-SLComplexRect_s SIGLIB_FUNC_DECL SCV_Expj (const SLData_t Theta)
-
+SLComplexRect_s SIGLIB_FUNC_DECL SCV_Expj (
+  const SLData_t Theta)
 {
 
-    return SCV_Rectangular (SDS_Cos (Theta), SDS_Sin (Theta));
+  return SCV_Rectangular (SDS_Cos (Theta), SDS_Sin (Theta));
 
-}       // End of SCV_Expj()
+}                                                                   // End of SCV_Expj()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_Pow()
 *
@@ -549,34 +566,34 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Expj (const SLData_t Theta)
 *
 ********************************************************/
 
-SLComplexRect_s SIGLIB_FUNC_DECL SCV_Pow (const SLComplexRect_s IVect,
-    const SLData_t Power)
-
+SLComplexRect_s SIGLIB_FUNC_DECL SCV_Pow (
+  const SLComplexRect_s IVect,
+  const SLData_t Power)
 {
-    SLData_t        Magn, Angle;
-    SLComplexRect_s OVect;
+  SLData_t        Magn, Angle;
+  SLComplexRect_s OVect;
 
-    if (((IVect.real < SIGLIB_MIN_THRESHOLD) && // Check for close to zero
-        (IVect.real > -SIGLIB_MIN_THRESHOLD)) &&
-        ((IVect.imag < SIGLIB_MIN_THRESHOLD) && // Check for close to zero
-        (IVect.imag > -SIGLIB_MIN_THRESHOLD))) {
+  if (((IVect.real < SIGLIB_MIN_THRESHOLD) &&                       // Check for close to zero
+       (IVect.real > -SIGLIB_MIN_THRESHOLD)) && ((IVect.imag < SIGLIB_MIN_THRESHOLD) && // Check for close to zero
+                                                 (IVect.imag > -SIGLIB_MIN_THRESHOLD))) {
 
-        OVect.real = SIGLIB_ZERO;
-        OVect.imag = SIGLIB_ZERO;
-        return (OVect);
-    }
-
-    Magn = SDS_Exp (Power * SDS_Log (SDS_Sqrt (IVect.real * IVect.real + IVect.imag * IVect.imag)));
-    Angle = SDS_Atan2 (IVect.imag, IVect.real);
-    OVect.real = Magn * SDS_Cos (Power * Angle);
-    OVect.imag = Magn * SDS_Sin (Power * Angle);
-
+    OVect.real = SIGLIB_ZERO;
+    OVect.imag = SIGLIB_ZERO;
     return (OVect);
+  }
 
-}       // End of SCV_Pow()
+  Magn = SDS_Exp (Power * SDS_Log (SDS_Sqrt (IVect.real * IVect.real + IVect.imag * IVect.imag)));
+  Angle = SDS_Atan2 (IVect.imag, IVect.real);
+  OVect.real = Magn * SDS_Cos (Power * Angle);
+  OVect.imag = Magn * SDS_Sin (Power * Angle);
+
+  return (OVect);
+
+}                                                                   // End of SCV_Pow()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_VectorAddScalar()
 *
@@ -592,21 +609,22 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Pow (const SLComplexRect_s IVect,
 *
 ********************************************************/
 
-SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorAddScalar (const SLComplexRect_s IVect,
-    const SLData_t Scalar)
-
+SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorAddScalar (
+  const SLComplexRect_s IVect,
+  const SLData_t Scalar)
 {
-    SLComplexRect_s OVect;
+  SLComplexRect_s OVect;
 
-    OVect.real = IVect.real + Scalar;
-    OVect.imag = IVect.imag;
+  OVect.real = IVect.real + Scalar;
+  OVect.imag = IVect.imag;
 
-    return (OVect);
+  return (OVect);
 
-}       // End of SCV_VectorAddScalar()
+}                                                                   // End of SCV_VectorAddScalar()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_VectorSubtractScalar()
 *
@@ -622,21 +640,22 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorAddScalar (const SLComplexRect_s IVec
 *
 ********************************************************/
 
-SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorSubtractScalar (const SLComplexRect_s IVect,
-    const SLData_t Scalar)
-
+SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorSubtractScalar (
+  const SLComplexRect_s IVect,
+  const SLData_t Scalar)
 {
-    SLComplexRect_s OVect;
+  SLComplexRect_s OVect;
 
-    OVect.real = IVect.real - Scalar;
-    OVect.imag = IVect.imag;
+  OVect.real = IVect.real - Scalar;
+  OVect.imag = IVect.imag;
 
-    return (OVect);
+  return (OVect);
 
-}       // End of SCV_VectorSubtractScalar()
+}                                                                   // End of SCV_VectorSubtractScalar()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_VectorMultiplyScalar()
 *
@@ -652,21 +671,22 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorSubtractScalar (const SLComplexRect_s
 *
 ********************************************************/
 
-SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorMultiplyScalar (const SLComplexRect_s IVect,
-    const SLData_t Scalar)
-
+SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorMultiplyScalar (
+  const SLComplexRect_s IVect,
+  const SLData_t Scalar)
 {
-    SLComplexRect_s OVect;
+  SLComplexRect_s OVect;
 
-    OVect.real = IVect.real * Scalar;
-    OVect.imag = IVect.imag * Scalar;
+  OVect.real = IVect.real * Scalar;
+  OVect.imag = IVect.imag * Scalar;
 
-    return (OVect);
+  return (OVect);
 
-}       // End of SCV_VectorMultiplyScalar()
+}                                                                   // End of SCV_VectorMultiplyScalar()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_VectorDivideScalar()
 *
@@ -682,21 +702,22 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorMultiplyScalar (const SLComplexRect_s
 *
 ********************************************************/
 
-SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorDivideScalar (const SLComplexRect_s IVect,
-    const SLData_t Scalar)
-
+SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorDivideScalar (
+  const SLComplexRect_s IVect,
+  const SLData_t Scalar)
 {
-    SLComplexRect_s OVect;
+  SLComplexRect_s OVect;
 
-    OVect.real = IVect.real / Scalar;
-    OVect.imag = IVect.imag / Scalar;
+  OVect.real = IVect.real / Scalar;
+  OVect.imag = IVect.imag / Scalar;
 
-    return (OVect);
+  return (OVect);
 
-}       // End of SCV_VectorDivideScalar()
+}                                                                   // End of SCV_VectorDivideScalar()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_ScalarSubtractVector()
 *
@@ -712,21 +733,22 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorDivideScalar (const SLComplexRect_s I
 *
 ********************************************************/
 
-SLComplexRect_s SIGLIB_FUNC_DECL SCV_ScalarSubtractVector (const SLData_t Scalar,
-    const SLComplexRect_s IVect)
-
+SLComplexRect_s SIGLIB_FUNC_DECL SCV_ScalarSubtractVector (
+  const SLData_t Scalar,
+  const SLComplexRect_s IVect)
 {
-    SLComplexRect_s OVect;
+  SLComplexRect_s OVect;
 
-    OVect.real = Scalar - IVect.real;
-    OVect.imag = -IVect.imag;
+  OVect.real = Scalar - IVect.real;
+  OVect.imag = -IVect.imag;
 
-    return (OVect);
+  return (OVect);
 
-}       // End of SCV_ScalarSubtractVector()
+}                                                                   // End of SCV_ScalarSubtractVector()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_Roots()
 *
@@ -745,25 +767,26 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_ScalarSubtractVector (const SLData_t Scalar
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SCV_Roots (const SLComplexRect_s a,
-    const SLComplexRect_s b,
-    const SLComplexRect_s c,
-    SLComplexRect_s *Root1,
-    SLComplexRect_s *Root2)
-
+void SIGLIB_FUNC_DECL SCV_Roots (
+  const SLComplexRect_s a,
+  const SLComplexRect_s b,
+  const SLComplexRect_s c,
+  SLComplexRect_s * Root1,
+  SLComplexRect_s * Root2)
 {
-    *Root1 = SCV_Divide (SCV_Add (SCV_VectorMultiplyScalar (b, -1.0),
-        SCV_Sqrt (SCV_Subtract (SCV_Multiply (b, b), SCV_VectorMultiplyScalar (SCV_Multiply (a, c), SIGLIB_FOUR)))),
-        SCV_VectorMultiplyScalar (a, SIGLIB_TWO));
+  *Root1 = SCV_Divide (SCV_Add (SCV_VectorMultiplyScalar (b, -1.0),
+                                SCV_Sqrt (SCV_Subtract (SCV_Multiply (b, b), SCV_VectorMultiplyScalar (SCV_Multiply (a, c), SIGLIB_FOUR)))),
+                       SCV_VectorMultiplyScalar (a, SIGLIB_TWO));
 
-    *Root2 = SCV_Divide (SCV_Subtract (SCV_VectorMultiplyScalar (b, -1.0),
-        SCV_Sqrt (SCV_Subtract (SCV_Multiply (b, b), SCV_VectorMultiplyScalar (SCV_Multiply (a, c), SIGLIB_FOUR)))),
-        SCV_VectorMultiplyScalar (a, SIGLIB_TWO));
+  *Root2 = SCV_Divide (SCV_Subtract (SCV_VectorMultiplyScalar (b, -1.0),
+                                     SCV_Sqrt (SCV_Subtract (SCV_Multiply (b, b), SCV_VectorMultiplyScalar (SCV_Multiply (a, c), SIGLIB_FOUR)))),
+                       SCV_VectorMultiplyScalar (a, SIGLIB_TWO));
 
-}       // End of SCV_Roots()
+}                                                                   // End of SCV_Roots()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_Copy()
 *
@@ -777,15 +800,16 @@ void SIGLIB_FUNC_DECL SCV_Roots (const SLComplexRect_s a,
 *
 ********************************************************/
 
-SLComplexRect_s SIGLIB_FUNC_DECL SCV_Copy (const SLComplexRect_s IVect)
-
+SLComplexRect_s SIGLIB_FUNC_DECL SCV_Copy (
+  const SLComplexRect_s IVect)
 {
-    return (IVect);
+  return (IVect);
 
-}       // End of SCV_Copy()
+}                                                                   // End of SCV_Copy()
 
 
 /**/
+
 /********************************************************
 * Function: SCV_Compare()
 *
@@ -801,17 +825,15 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Copy (const SLComplexRect_s IVect)
 *
 ********************************************************/
 
-enum SLCompareType_t SIGLIB_FUNC_DECL SCV_Compare (const SLComplexRect_s IVect1,
-    const SLComplexRect_s IVect2)
-
+enum SLCompareType_t SIGLIB_FUNC_DECL SCV_Compare (
+  const SLComplexRect_s IVect1,
+  const SLComplexRect_s IVect2)
 {
 
-    if ((IVect1.real == IVect2.real) && (IVect1.imag == IVect2.imag)) {
-        return (SIGLIB_EQUAL);
-    }
+  if ((IVect1.real == IVect2.real) && (IVect1.imag == IVect2.imag)) {
+    return (SIGLIB_EQUAL);
+  }
 
-    return (SIGLIB_NOT_EQUAL);
+  return (SIGLIB_NOT_EQUAL);
 
-}       // End of SCV_Compare()
-
-
+}                                                                   // End of SCV_Compare()

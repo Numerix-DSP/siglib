@@ -4,28 +4,28 @@
 
 // Include files
 #include <stdio.h>
-#include <siglib.h>                                         // SigLib DSP library
-#include <gnuplot_c.h>                                      // Gnuplot/C
+#include <siglib.h>                                                 // SigLib DSP library
+#include <gnuplot_c.h>                                              // Gnuplot/C
 
 // Define constants
-#define SOURCE_LENGTH           10                          // Input sample length
-#define DST_ARRAY_LENGTH        60                          // Output sample length - allow for growth
+#define SOURCE_LENGTH           10                                  // Input sample length
+#define DST_ARRAY_LENGTH        60                                  // Output sample length - allow for growth
 #define NEW_DOWN_SAMPLE_PERIOD  1.2
 #define NEW_UP_SAMPLE_PERIOD    0.6
 
 
 // Declare global variables and arrays
-static const SLData_t    SrcDataArray [] =
-{
-    1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0,
-    11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 19.0, 20.0,
-    21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0, 28.0, 29.0, 30.0
+static const SLData_t SrcDataArray[] = {
+  1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0,
+  11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 19.0, 20.0,
+  21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0, 28.0, 29.0, 30.0
 };
-static const SLData_t   *pSrc;
-static SLData_t         *pDst;
 
-static SLData_t         PreviousXValue;                     // Used to maintain continuity across array boundaries
-static SLData_t         PreviousYValue;
+static const SLData_t *pSrc;
+static SLData_t *pDst;
+
+static SLData_t PreviousXValue;                                     // Used to maintain continuity across array boundaries
+static SLData_t PreviousYValue;
 
                                                             // Sinc interpolation down sample results - length 25*/
 // static const SLData_t   DownSampleResults [] = {
@@ -50,301 +50,302 @@ static SLData_t         PreviousYValue;
 // };
 
                                                             // Parameters for quick sinc look up table
-#define NUMBER_OF_ADJ_SAMPLES   2                           // Number of adjacent samples
+#define NUMBER_OF_ADJ_SAMPLES   2                                   // Number of adjacent samples
 #define SINC_LUT_LENGTH         1001
-static SLData_t     SincLookUpTablePhaseGain;
-static SLData_t     SincLUT [SINC_LUT_LENGTH];
-static SLData_t     SincXData [SIGLIB_AI_FOUR*NUMBER_OF_ADJ_SAMPLES];
+static SLData_t SincLookUpTablePhaseGain;
+static SLData_t SincLUT[SINC_LUT_LENGTH];
+static SLData_t SincXData[SIGLIB_AI_FOUR * NUMBER_OF_ADJ_SAMPLES];
 
 
-int main(void)
+int main (
+  void)
 {
-    h_GPC_Plot  *h2DPlot;                                   // Plot object
+  h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-    SLArrayIndex_t  ResultSampleLength;
+  SLArrayIndex_t  ResultSampleLength;
 
-                                                            // Allocate arrays
-    pDst = SUF_VectorArrayAllocate (DST_ARRAY_LENGTH);
+// Allocate arrays
+  pDst = SUF_VectorArrayAllocate (DST_ARRAY_LENGTH);
 
-    if (NULL == pDst) {
+  if (NULL == pDst) {
 
-        printf ("\n\nMemory allocation failed\n\n");
-        exit(0);
-    }
+    printf ("\n\nMemory allocation failed\n\n");
+    exit (0);
+  }
 
-    SUF_ClearDebugfprintf();
+  SUF_ClearDebugfprintf ();
 
-    h2DPlot =                                               // Initialize plot
-        gpc_init_2d ("Contiguous Resampling",               // Plot title
-                     "Time",                                // X-Axis label
-                     "Magnitude",                           // Y-Axis label
-                     GPC_AUTO_SCALE,                        // Scaling mode
-                     GPC_SIGNED,                            // Sign mode
-                     GPC_KEY_ENABLE);                       // Legend / key mode
-    if (NULL == h2DPlot) {
-        printf ("\nPlot creation failure.\n");
-        exit(-1);
-    }
+  h2DPlot =                                                         // Initialize plot
+    gpc_init_2d ("Contiguous Resampling",                           // Plot title
+                 "Time",                                            // X-Axis label
+                 "Magnitude",                                       // Y-Axis label
+                 GPC_AUTO_SCALE,                                    // Scaling mode
+                 GPC_SIGNED,                                        // Sign mode
+                 GPC_KEY_ENABLE);                                   // Legend / key mode
+  if (NULL == h2DPlot) {
+    printf ("\nPlot creation failure.\n");
+    exit (-1);
+  }
 
-    pSrc = SrcDataArray;                                    // Initialize Dataset pointer
-
-
-                                        // Down sampling
-                                                            // Initialise linear re-sampling function
-    SIF_ResampleLinearContiguous (&PreviousXValue,          // Previous x value
-                                  &PreviousYValue);         // Previous sample
-
-    ResultSampleLength =
-        SDA_ResampleLinearContiguous (pSrc,                             // Pointer to source array
-                                      pDst,                             // Pointer to destination array
-                                      &PreviousXValue,                  // Previous x value
-                                      &PreviousYValue,                  // Previous sample
-                                      NEW_DOWN_SAMPLE_PERIOD,           // New sample period
-                                      SOURCE_LENGTH);                   // Input dataset length
-
-    gpc_plot_2d (h2DPlot,                                               // Graph handle
-                 pDst,                                                  // Dataset
-                 ResultSampleLength,                                    // Dataset length
-                 "Down sampled waveform - using linear interpolation",  // Dataset title
-                 SIGLIB_ZERO,                                           // Minimum X value
-                 (double)(ResultSampleLength - 1),                      // Maximum X value
-                 "lines",                                               // Graph type
-                 "blue",                                                // Colour
-                 GPC_NEW);                                              // New graph
-    printf ("\nDown sampled waveform - using linear interpolation\nPlease hit <Carriage Return> to continue . . ."); getchar();
-
-    ResultSampleLength =
-        SDA_ResampleLinearContiguous (pSrc+SOURCE_LENGTH,               // Pointer to source array
-                                      pDst,                             // Pointer to destination array
-                                      &PreviousXValue,                  // Previous x value
-                                      &PreviousYValue,                  // Previous sample
-                                      NEW_DOWN_SAMPLE_PERIOD,           // New sample period
-                                      SOURCE_LENGTH);                   // Input dataset length
-
-    gpc_plot_2d (h2DPlot,                                               // Graph handle
-                 pDst,                                                  // Dataset
-                 ResultSampleLength,                                    // Dataset length
-                 "Down sampled waveform - using linear interpolation",  // Dataset title
-                 SIGLIB_ZERO,                                           // Minimum X value
-                 (double)(ResultSampleLength - 1),                      // Maximum X value
-                 "lines",                                               // Graph type
-                 "blue",                                                // Colour
-                 GPC_NEW);                                              // New graph
-    printf ("\nDown sampled waveform - using linear interpolation\nPlease hit <Carriage Return> to continue . . ."); getchar();
-
-                                        // Up sampling
-                                                                        // Initialise linear re-sampling function
-    SIF_ResampleLinearContiguous (&PreviousXValue,                      // Previous x value
-                                  &PreviousYValue);                     // Previous sample
-
-    ResultSampleLength =
-        SDA_ResampleLinearContiguous (pSrc,                             // Pointer to source array
-                                      pDst,                             // Pointer to destination array
-                                      &PreviousXValue,                  // Previous x value
-                                      &PreviousYValue,                  // Previous sample
-                                      NEW_UP_SAMPLE_PERIOD,             // New sample period
-                                      SOURCE_LENGTH);                   // Input dataset length
-
-    gpc_plot_2d (h2DPlot,                                               // Graph handle
-                 pDst,                                                  // Dataset
-                 ResultSampleLength,                                    // Dataset length
-                 "Up sampled waveform - using linear interpolation",    // Dataset title
-                 SIGLIB_ZERO,                                           // Minimum X value
-                 (double)(ResultSampleLength - 1),                      // Maximum X value
-                 "lines",                                               // Graph type
-                 "blue",                                                // Colour
-                 GPC_NEW);                                              // New graph
-    printf ("\nUp sampled waveform - using linear interpolation\nPlease hit <Carriage Return> to continue . . ."); getchar();
-
-    ResultSampleLength =
-        SDA_ResampleLinearContiguous (pSrc+SOURCE_LENGTH,               // Pointer to source array
-                                      pDst,                             // Pointer to destination array
-                                      &PreviousXValue,                  // Previous x value
-                                      &PreviousYValue,                  // Previous sample
-                                      NEW_UP_SAMPLE_PERIOD,             // New sample period
-                                      SOURCE_LENGTH);                   // Input dataset length
-
-    gpc_plot_2d (h2DPlot,                                               // Graph handle
-                 pDst,                                                  // Dataset
-                 ResultSampleLength,                                    // Dataset length
-                 "Up sampled waveform - using linear interpolation",    // Dataset title
-                 SIGLIB_ZERO,                                           // Minimum X value
-                 (double)(ResultSampleLength - 1),                      // Maximum X value
-                 "lines",                                               // Graph type
-                 "blue",                                                // Colour
-                 GPC_NEW);                                              // New graph
-    printf ("\nUp sampled waveform - using linear interpolation\nPlease hit <Carriage Return> to continue . . ."); getchar();
+  pSrc = SrcDataArray;                                              // Initialize Dataset pointer
 
 
-                            // Down sampling
-                                                                        // Initialise sinc re-sampling function
-    SIF_ResampleSincContiguous (&PreviousXValue,                        // Previous x value
-                                SincLUT,                                // Pointer to sinc LUT array
-                                SincXData,                              // X data history look up table
-                                &SincLookUpTablePhaseGain,              // Pointer to phase gain
-                                NUMBER_OF_ADJ_SAMPLES,                  // Number of adjacent samples
-                                SINC_LUT_LENGTH);                       // Look up table length
+// Down sampling
+// Initialise linear re-sampling function
+  SIF_ResampleLinearContiguous (&PreviousXValue,                    // Previous x value
+                                &PreviousYValue);                   // Previous sample
 
-    ResultSampleLength =
-        SDA_ResampleSincContiguous (pSrc,                               // Pointer to source array
-                                    pDst,                               // Pointer to destination array
-                                    &PreviousXValue,                    // Previous x value
-                                    SincLUT,                            // Pointer to LUT array
-                                    SincXData,                          // X data history look up table
-                                    SincLookUpTablePhaseGain,           // Look up table phase gain
-                                    NEW_DOWN_SAMPLE_PERIOD,             // New sample period
-                                    NUMBER_OF_ADJ_SAMPLES,              // Number of adjacent samples
-                                    SOURCE_LENGTH);                     // Source dataset length
+  ResultSampleLength = SDA_ResampleLinearContiguous (pSrc,          // Pointer to source array
+                                                     pDst,          // Pointer to destination array
+                                                     &PreviousXValue, // Previous x value
+                                                     &PreviousYValue, // Previous sample
+                                                     NEW_DOWN_SAMPLE_PERIOD,  // New sample period
+                                                     SOURCE_LENGTH);  // Input dataset length
+
+  gpc_plot_2d (h2DPlot,                                             // Graph handle
+               pDst,                                                // Dataset
+               ResultSampleLength,                                  // Dataset length
+               "Down sampled waveform - using linear interpolation",  // Dataset title
+               SIGLIB_ZERO,                                         // Minimum X value
+               (double) (ResultSampleLength - 1),                   // Maximum X value
+               "lines",                                             // Graph type
+               "blue",                                              // Colour
+               GPC_NEW);                                            // New graph
+  printf ("\nDown sampled waveform - using linear interpolation\nPlease hit <Carriage Return> to continue . . .");
+  getchar ();
+
+  ResultSampleLength = SDA_ResampleLinearContiguous (pSrc + SOURCE_LENGTH,  // Pointer to source array
+                                                     pDst,          // Pointer to destination array
+                                                     &PreviousXValue, // Previous x value
+                                                     &PreviousYValue, // Previous sample
+                                                     NEW_DOWN_SAMPLE_PERIOD,  // New sample period
+                                                     SOURCE_LENGTH);  // Input dataset length
+
+  gpc_plot_2d (h2DPlot,                                             // Graph handle
+               pDst,                                                // Dataset
+               ResultSampleLength,                                  // Dataset length
+               "Down sampled waveform - using linear interpolation",  // Dataset title
+               SIGLIB_ZERO,                                         // Minimum X value
+               (double) (ResultSampleLength - 1),                   // Maximum X value
+               "lines",                                             // Graph type
+               "blue",                                              // Colour
+               GPC_NEW);                                            // New graph
+  printf ("\nDown sampled waveform - using linear interpolation\nPlease hit <Carriage Return> to continue . . .");
+  getchar ();
+
+// Up sampling
+// Initialise linear re-sampling function
+  SIF_ResampleLinearContiguous (&PreviousXValue,                    // Previous x value
+                                &PreviousYValue);                   // Previous sample
+
+  ResultSampleLength = SDA_ResampleLinearContiguous (pSrc,          // Pointer to source array
+                                                     pDst,          // Pointer to destination array
+                                                     &PreviousXValue, // Previous x value
+                                                     &PreviousYValue, // Previous sample
+                                                     NEW_UP_SAMPLE_PERIOD,  // New sample period
+                                                     SOURCE_LENGTH);  // Input dataset length
+
+  gpc_plot_2d (h2DPlot,                                             // Graph handle
+               pDst,                                                // Dataset
+               ResultSampleLength,                                  // Dataset length
+               "Up sampled waveform - using linear interpolation",  // Dataset title
+               SIGLIB_ZERO,                                         // Minimum X value
+               (double) (ResultSampleLength - 1),                   // Maximum X value
+               "lines",                                             // Graph type
+               "blue",                                              // Colour
+               GPC_NEW);                                            // New graph
+  printf ("\nUp sampled waveform - using linear interpolation\nPlease hit <Carriage Return> to continue . . .");
+  getchar ();
+
+  ResultSampleLength = SDA_ResampleLinearContiguous (pSrc + SOURCE_LENGTH,  // Pointer to source array
+                                                     pDst,          // Pointer to destination array
+                                                     &PreviousXValue, // Previous x value
+                                                     &PreviousYValue, // Previous sample
+                                                     NEW_UP_SAMPLE_PERIOD,  // New sample period
+                                                     SOURCE_LENGTH);  // Input dataset length
+
+  gpc_plot_2d (h2DPlot,                                             // Graph handle
+               pDst,                                                // Dataset
+               ResultSampleLength,                                  // Dataset length
+               "Up sampled waveform - using linear interpolation",  // Dataset title
+               SIGLIB_ZERO,                                         // Minimum X value
+               (double) (ResultSampleLength - 1),                   // Maximum X value
+               "lines",                                             // Graph type
+               "blue",                                              // Colour
+               GPC_NEW);                                            // New graph
+  printf ("\nUp sampled waveform - using linear interpolation\nPlease hit <Carriage Return> to continue . . .");
+  getchar ();
+
+
+// Down sampling
+// Initialise sinc re-sampling function
+  SIF_ResampleSincContiguous (&PreviousXValue,                      // Previous x value
+                              SincLUT,                              // Pointer to sinc LUT array
+                              SincXData,                            // X data history look up table
+                              &SincLookUpTablePhaseGain,            // Pointer to phase gain
+                              NUMBER_OF_ADJ_SAMPLES,                // Number of adjacent samples
+                              SINC_LUT_LENGTH);                     // Look up table length
+
+  ResultSampleLength = SDA_ResampleSincContiguous (pSrc,            // Pointer to source array
+                                                   pDst,            // Pointer to destination array
+                                                   &PreviousXValue, // Previous x value
+                                                   SincLUT,         // Pointer to LUT array
+                                                   SincXData,       // X data history look up table
+                                                   SincLookUpTablePhaseGain,  // Look up table phase gain
+                                                   NEW_DOWN_SAMPLE_PERIOD,  // New sample period
+                                                   NUMBER_OF_ADJ_SAMPLES, // Number of adjacent samples
+                                                   SOURCE_LENGTH);  // Source dataset length
 
 //    SUF_Debugfprintf ("Down sample results\n");
 //    SUF_DebugPrintArray (pDst,     ResultSampleLength);
 
-    gpc_plot_2d (h2DPlot,                                               // Graph handle
-                 pDst,                                                  // Dataset
-                 ResultSampleLength,                                    // Dataset length
-                 "Down sampled waveform - using sinc interpolation",    // Dataset title
-                 SIGLIB_ZERO,                                           // Minimum X value
-                 (double)(ResultSampleLength - 1),                      // Maximum X value
-                 "lines",                                               // Graph type
-                 "blue",                                                // Colour
-                 GPC_NEW);                                              // New graph
-    printf ("\nDown sampled waveform - using sinc interpolation\nPlease hit <Carriage Return> to continue . . ."); getchar();
+  gpc_plot_2d (h2DPlot,                                             // Graph handle
+               pDst,                                                // Dataset
+               ResultSampleLength,                                  // Dataset length
+               "Down sampled waveform - using sinc interpolation",  // Dataset title
+               SIGLIB_ZERO,                                         // Minimum X value
+               (double) (ResultSampleLength - 1),                   // Maximum X value
+               "lines",                                             // Graph type
+               "blue",                                              // Colour
+               GPC_NEW);                                            // New graph
+  printf ("\nDown sampled waveform - using sinc interpolation\nPlease hit <Carriage Return> to continue . . .");
+  getchar ();
 
-    ResultSampleLength =
-        SDA_ResampleSincContiguous (pSrc+SOURCE_LENGTH,                 // Pointer to source array
-                                    pDst,                               // Pointer to destination array
-                                    &PreviousXValue,                    // Previous x value
-                                    SincLUT,                            // Pointer to LUT array
-                                    SincXData,                          // X data history look up table
-                                    SincLookUpTablePhaseGain,           // Look up table phase gain
-                                    NEW_DOWN_SAMPLE_PERIOD,             // New sample period
-                                    NUMBER_OF_ADJ_SAMPLES,              // Number of adjacent samples
-                                    SOURCE_LENGTH);                     // Source dataset length
-
-//    SUF_DebugPrintArray (pDst,     ResultSampleLength);
-
-    gpc_plot_2d (h2DPlot,                                               // Graph handle
-                 pDst,                                                  // Dataset
-                 ResultSampleLength,                                    // Dataset length
-                 "Down sampled waveform - using sinc interpolation",    // Dataset title
-                 SIGLIB_ZERO,                                           // Minimum X value
-                 (double)(ResultSampleLength - 1),                      // Maximum X value
-                 "lines",                                               // Graph type
-                 "blue",                                                // Colour
-                 GPC_NEW);                                              // New graph
-    printf ("\nDown sampled waveform - using sinc interpolation\nPlease hit <Carriage Return> to continue . . ."); getchar();
-
-    ResultSampleLength =
-        SDA_ResampleSincContiguous (pSrc+(2*SOURCE_LENGTH),             // Pointer to source array
-                                    pDst,                               // Pointer to destination array
-                                    &PreviousXValue,                    // Previous x value
-                                    SincLUT,                            // Pointer to LUT array
-                                    SincXData,                          // X data history look up table
-                                    SincLookUpTablePhaseGain,           // Look up table phase gain
-                                    NEW_DOWN_SAMPLE_PERIOD,             // New sample period
-                                    NUMBER_OF_ADJ_SAMPLES,              // Number of adjacent samples
-                                    SOURCE_LENGTH);                     // Source dataset length
+  ResultSampleLength = SDA_ResampleSincContiguous (pSrc + SOURCE_LENGTH,  // Pointer to source array
+                                                   pDst,            // Pointer to destination array
+                                                   &PreviousXValue, // Previous x value
+                                                   SincLUT,         // Pointer to LUT array
+                                                   SincXData,       // X data history look up table
+                                                   SincLookUpTablePhaseGain,  // Look up table phase gain
+                                                   NEW_DOWN_SAMPLE_PERIOD,  // New sample period
+                                                   NUMBER_OF_ADJ_SAMPLES, // Number of adjacent samples
+                                                   SOURCE_LENGTH);  // Source dataset length
 
 //    SUF_DebugPrintArray (pDst,     ResultSampleLength);
 
-    gpc_plot_2d (h2DPlot,                                               // Graph handle
-                 pDst,                                                  // Dataset
-                 ResultSampleLength,                                    // Dataset length
-                 "Down sampled waveform - using sinc interpolation",    // Dataset title
-                 SIGLIB_ZERO,                                           // Minimum X value
-                 (double)(ResultSampleLength - 1),                      // Maximum X value
-                 "lines",                                               // Graph type
-                 "blue",                                                // Colour
-                 GPC_NEW);                                              // New graph
-    printf ("\nDown sampled waveform - using sinc interpolation\nPlease hit <Carriage Return> to continue . . ."); getchar();
+  gpc_plot_2d (h2DPlot,                                             // Graph handle
+               pDst,                                                // Dataset
+               ResultSampleLength,                                  // Dataset length
+               "Down sampled waveform - using sinc interpolation",  // Dataset title
+               SIGLIB_ZERO,                                         // Minimum X value
+               (double) (ResultSampleLength - 1),                   // Maximum X value
+               "lines",                                             // Graph type
+               "blue",                                              // Colour
+               GPC_NEW);                                            // New graph
+  printf ("\nDown sampled waveform - using sinc interpolation\nPlease hit <Carriage Return> to continue . . .");
+  getchar ();
+
+  ResultSampleLength = SDA_ResampleSincContiguous (pSrc + (2 * SOURCE_LENGTH),  // Pointer to source array
+                                                   pDst,            // Pointer to destination array
+                                                   &PreviousXValue, // Previous x value
+                                                   SincLUT,         // Pointer to LUT array
+                                                   SincXData,       // X data history look up table
+                                                   SincLookUpTablePhaseGain,  // Look up table phase gain
+                                                   NEW_DOWN_SAMPLE_PERIOD,  // New sample period
+                                                   NUMBER_OF_ADJ_SAMPLES, // Number of adjacent samples
+                                                   SOURCE_LENGTH);  // Source dataset length
+
+//    SUF_DebugPrintArray (pDst,     ResultSampleLength);
+
+  gpc_plot_2d (h2DPlot,                                             // Graph handle
+               pDst,                                                // Dataset
+               ResultSampleLength,                                  // Dataset length
+               "Down sampled waveform - using sinc interpolation",  // Dataset title
+               SIGLIB_ZERO,                                         // Minimum X value
+               (double) (ResultSampleLength - 1),                   // Maximum X value
+               "lines",                                             // Graph type
+               "blue",                                              // Colour
+               GPC_NEW);                                            // New graph
+  printf ("\nDown sampled waveform - using sinc interpolation\nPlease hit <Carriage Return> to continue . . .");
+  getchar ();
 
 
-                            // Up sampling
-                                                                        // Initialise sinc re-sampling function
-    SIF_ResampleSincContiguous (&PreviousXValue,                        // Previous x value
-                                SincLUT,                                // Pointer to sinc LUT array
-                                SincXData,                              // X data history look up table
-                                &SincLookUpTablePhaseGain,              // Pointer to phase gain
-                                NUMBER_OF_ADJ_SAMPLES,                  // Number of adjacent samples
-                                SINC_LUT_LENGTH);                       // Look up table length
+// Up sampling
+// Initialise sinc re-sampling function
+  SIF_ResampleSincContiguous (&PreviousXValue,                      // Previous x value
+                              SincLUT,                              // Pointer to sinc LUT array
+                              SincXData,                            // X data history look up table
+                              &SincLookUpTablePhaseGain,            // Pointer to phase gain
+                              NUMBER_OF_ADJ_SAMPLES,                // Number of adjacent samples
+                              SINC_LUT_LENGTH);                     // Look up table length
 
-    ResultSampleLength =
-        SDA_ResampleSincContiguous (pSrc,                               // Pointer to source array
-                                    pDst,                               // Pointer to destination array
-                                    &PreviousXValue,                    // Previous x value
-                                    SincLUT,                            // Pointer to LUT array
-                                    SincXData,                          // X data history look up table
-                                    SincLookUpTablePhaseGain,           // Look up table phase gain
-                                    NEW_UP_SAMPLE_PERIOD,               // New sample period
-                                    NUMBER_OF_ADJ_SAMPLES,              // Number of adjacent samples
-                                    SOURCE_LENGTH);                     // Source dataset length
+  ResultSampleLength = SDA_ResampleSincContiguous (pSrc,            // Pointer to source array
+                                                   pDst,            // Pointer to destination array
+                                                   &PreviousXValue, // Previous x value
+                                                   SincLUT,         // Pointer to LUT array
+                                                   SincXData,       // X data history look up table
+                                                   SincLookUpTablePhaseGain,  // Look up table phase gain
+                                                   NEW_UP_SAMPLE_PERIOD,  // New sample period
+                                                   NUMBER_OF_ADJ_SAMPLES, // Number of adjacent samples
+                                                   SOURCE_LENGTH);  // Source dataset length
 
 //    SUF_Debugfprintf ("Up sample results\n");
 //    SUF_DebugPrintArray (pDst,     ResultSampleLength);
 
-    gpc_plot_2d (h2DPlot,                                               // Graph handle
-                 pDst,                                                  // Dataset
-                 ResultSampleLength,                                    // Dataset length
-                 "Up sampled waveform - using sinc interpolation",      // Dataset title
-                 SIGLIB_ZERO,                                           // Minimum X value
-                 (double)(ResultSampleLength - 1),                      // Maximum X value
-                 "lines",                                               // Graph type
-                 "blue",                                                // Colour
-                 GPC_NEW);                                              // New graph
-    printf ("\nUp sampled waveform - using sinc interpolation\nPlease hit <Carriage Return> to continue . . ."); getchar();
+  gpc_plot_2d (h2DPlot,                                             // Graph handle
+               pDst,                                                // Dataset
+               ResultSampleLength,                                  // Dataset length
+               "Up sampled waveform - using sinc interpolation",    // Dataset title
+               SIGLIB_ZERO,                                         // Minimum X value
+               (double) (ResultSampleLength - 1),                   // Maximum X value
+               "lines",                                             // Graph type
+               "blue",                                              // Colour
+               GPC_NEW);                                            // New graph
+  printf ("\nUp sampled waveform - using sinc interpolation\nPlease hit <Carriage Return> to continue . . .");
+  getchar ();
 
-    ResultSampleLength =
-        SDA_ResampleSincContiguous (pSrc+SOURCE_LENGTH,                 // Pointer to source array
-                                    pDst,                               // Pointer to destination array
-                                    &PreviousXValue,                    // Previous x value
-                                    SincLUT,                            // Pointer to LUT array
-                                    SincXData,                          // X data history look up table
-                                    SincLookUpTablePhaseGain,           // Look up table phase gain
-                                    NEW_UP_SAMPLE_PERIOD,               // New sample period
-                                    NUMBER_OF_ADJ_SAMPLES,              // Number of adjacent samples
-                                    SOURCE_LENGTH);                     // Source dataset length
-
-//    SUF_DebugPrintArray (pDst,     ResultSampleLength);
-
-    gpc_plot_2d (h2DPlot,                                               // Graph handle
-                 pDst,                                                  // Dataset
-                 ResultSampleLength,                                    // Dataset length
-                 "Up sampled waveform - using sinc interpolation",      // Dataset title
-                 SIGLIB_ZERO,                                           // Minimum X value
-                 (double)(ResultSampleLength - 1),                      // Maximum X value
-                 "lines",                                               // Graph type
-                 "blue",                                                // Colour
-                 GPC_NEW);                                              // New graph
-    printf ("\nUp sampled waveform - using sinc interpolation\nPlease hit <Carriage Return> to continue . . ."); getchar();
-
-    ResultSampleLength =
-        SDA_ResampleSincContiguous (pSrc+(2*SOURCE_LENGTH),             // Pointer to source array
-                                    pDst,                               // Pointer to destination array
-                                    &PreviousXValue,                    // Previous x value
-                                    SincLUT,                            // Pointer to LUT array
-                                    SincXData,                          // X data history look up table
-                                    SincLookUpTablePhaseGain,           // Look up table phase gain
-                                    NEW_UP_SAMPLE_PERIOD,               // New sample period
-                                    NUMBER_OF_ADJ_SAMPLES,              // Number of adjacent samples
-                                    SOURCE_LENGTH);                     // Source dataset length
+  ResultSampleLength = SDA_ResampleSincContiguous (pSrc + SOURCE_LENGTH,  // Pointer to source array
+                                                   pDst,            // Pointer to destination array
+                                                   &PreviousXValue, // Previous x value
+                                                   SincLUT,         // Pointer to LUT array
+                                                   SincXData,       // X data history look up table
+                                                   SincLookUpTablePhaseGain,  // Look up table phase gain
+                                                   NEW_UP_SAMPLE_PERIOD,  // New sample period
+                                                   NUMBER_OF_ADJ_SAMPLES, // Number of adjacent samples
+                                                   SOURCE_LENGTH);  // Source dataset length
 
 //    SUF_DebugPrintArray (pDst,     ResultSampleLength);
 
-    gpc_plot_2d (h2DPlot,                                               // Graph handle
-                 pDst,                                                  // Dataset
-                 ResultSampleLength,                                    // Dataset length
-                 "Up sampled waveform - using sinc interpolation",      // Dataset title
-                 SIGLIB_ZERO,                                           // Minimum X value
-                 (double)(ResultSampleLength - 1),                      // Maximum X value
-                 "lines",                                               // Graph type
-                 "blue",                                                // Colour
-                 GPC_NEW);                                              // New graph
-    printf ("\nUp sampled waveform - using sinc interpolation\n");
+  gpc_plot_2d (h2DPlot,                                             // Graph handle
+               pDst,                                                // Dataset
+               ResultSampleLength,                                  // Dataset length
+               "Up sampled waveform - using sinc interpolation",    // Dataset title
+               SIGLIB_ZERO,                                         // Minimum X value
+               (double) (ResultSampleLength - 1),                   // Maximum X value
+               "lines",                                             // Graph type
+               "blue",                                              // Colour
+               GPC_NEW);                                            // New graph
+  printf ("\nUp sampled waveform - using sinc interpolation\nPlease hit <Carriage Return> to continue . . .");
+  getchar ();
 
-    printf ("\nHit <Carriage Return> to continue ....\n"); getchar();  // Wait for <Carriage Return>
-    gpc_close (h2DPlot);
+  ResultSampleLength = SDA_ResampleSincContiguous (pSrc + (2 * SOURCE_LENGTH),  // Pointer to source array
+                                                   pDst,            // Pointer to destination array
+                                                   &PreviousXValue, // Previous x value
+                                                   SincLUT,         // Pointer to LUT array
+                                                   SincXData,       // X data history look up table
+                                                   SincLookUpTablePhaseGain,  // Look up table phase gain
+                                                   NEW_UP_SAMPLE_PERIOD,  // New sample period
+                                                   NUMBER_OF_ADJ_SAMPLES, // Number of adjacent samples
+                                                   SOURCE_LENGTH);  // Source dataset length
 
-    SUF_MemoryFree (pDst);                                // Free memory
+//    SUF_DebugPrintArray (pDst,     ResultSampleLength);
 
-    exit(0);
+  gpc_plot_2d (h2DPlot,                                             // Graph handle
+               pDst,                                                // Dataset
+               ResultSampleLength,                                  // Dataset length
+               "Up sampled waveform - using sinc interpolation",    // Dataset title
+               SIGLIB_ZERO,                                         // Minimum X value
+               (double) (ResultSampleLength - 1),                   // Maximum X value
+               "lines",                                             // Graph type
+               "blue",                                              // Colour
+               GPC_NEW);                                            // New graph
+  printf ("\nUp sampled waveform - using sinc interpolation\n");
+
+  printf ("\nHit <Carriage Return> to continue ....\n");
+  getchar ();                                                       // Wait for <Carriage Return>
+  gpc_close (h2DPlot);
+
+  SUF_MemoryFree (pDst);                                            // Free memory
+
+  exit (0);
 }
