@@ -3,7 +3,7 @@
 #
 # Do not make changes to this file unless you know what you are doing--modify
 # the SWIG interface file instead.
-# Copyright (c) 2022 Sigma Numerix Ltd.
+# Copyright (c) 2023 Alpha Numerix
 
 from sys import version_info as _swig_python_version_info
 if _swig_python_version_info >= (2, 7, 0):

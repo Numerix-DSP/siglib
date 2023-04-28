@@ -2,7 +2,7 @@
 // This program required the Numerix Host Library, which is available from :
 // https://www.numerix-dsp.com/files
 // This project was generated automatically in Visual Studio it is a command line applicaiton
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 #include "stdafx.h"
@@ -89,7 +89,7 @@ int _tmain (
 
 
 /*
-   Test number 1 
+   Test number 1
  */
   printf ("\nTest number 1\n\n");
   for (i = 0; i < SOURCE_LENGTH; i++)
@@ -122,7 +122,7 @@ int _tmain (
 
 
 /*
-   Test number 2 
+   Test number 2
  */
   printf ("\nTest number 2\n\n");
   for (i = 0; i < SOURCE_LENGTH; i++) {
@@ -156,7 +156,7 @@ int _tmain (
 
 
 /*
-   Test number 3 
+   Test number 3
  */
   printf ("\nTest number 3\n\n");
   for (i = 0; i < SOURCE_LENGTH; i++) {

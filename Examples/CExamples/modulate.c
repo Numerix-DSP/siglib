@@ -5,7 +5,7 @@
 // this is high pass filtered to remove the lower side band and
 // this is then shifted back down to baseband, where the signal is
 // low pass filtered to remove any out of band signals.
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

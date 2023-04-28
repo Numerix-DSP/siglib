@@ -1,6 +1,6 @@
 // .SIG to .WAV file conversion program
 // Use when the signal data magnitude is +/- 1.0 and the .wav magnitude is +/- 32767.0
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 #include <stdio.h>
 #include <stdlib.h>

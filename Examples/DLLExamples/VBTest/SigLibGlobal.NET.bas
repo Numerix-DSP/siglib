@@ -17,7 +17,7 @@ Option Explicit
 'END USER LICENSE AGREEMENT.
 'DELETION OF ANY INFORMATION IN THIS HEADER IS IN VIOLATION OF YOUR LICENSE.
 '
-'Copyright (C) 1992 to 2018 Sigma Numerix Ltd.
+'Copyright (C) 1992 to 2018 Alpha Numerix
 '-------------------------------------------------------------------------
 'Description : Visual Basic Global definitions file for SigLib DSP DLL
 '

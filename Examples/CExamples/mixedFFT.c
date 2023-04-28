@@ -1,5 +1,5 @@
 // SigLib Mixed Radix FFT Example
-// Copyright (C) 2020 Sigma Numerix Ltd. All rights reserved.
+// Copyright (C) 2020 Alpha Numerix All rights reserved.
 
 // This example supports a standard radix-2 FFT, followed by a mixed radix output
 // The Final stage can be implemented in one of two ways (through the #define TRANSPOSE_PARTIAL_RESULT)

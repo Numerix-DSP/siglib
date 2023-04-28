@@ -1,5 +1,5 @@
 // SigLib BPSK Example
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Sigma Numerix Ltd. All rights reserved.
 
 // Simulating :
 // 600 bps
@@ -20,8 +20,8 @@
 // Define constants
 #define DISPLAY_GRAPHICS                1                           // Set to '1' to display graphics
 #define DISPLAY_FILTER_OUTPUT           0                           // Set to '1' to display the output of the demodulator filter
-#define TX_BIT_MODE_ENABLED             0                           // Set to '1' to process Tx bits, '0' for bytes
-#define DEBUG_LOG_FILE                  0                           // Set to '1' to enable logging to debug.log
+#define TX_BIT_MODE_ENABLED             1                           // Set to '1' to process Tx bits, '0' for bytes
+#define DEBUG_LOG_FILE                  1                           // Set to '1' to enable logging to log file
 
 #define SAMPLE_LENGTH                   512
 #define NUMBER_OF_LOOPS                 8
@@ -34,11 +34,11 @@
 #define MAX_RX_STRING_LENGTH            80                          // Maximum length of an Rx string
 #define CARRIER_TABLE_FREQ              100.                        // Frequency of sine wave in table
 #define CARRIER_SINE_TABLE_SIZE         ((SLArrayIndex_t)(SAMPLE_RATE / CARRIER_TABLE_FREQ))  // Number of samples in each of cos and sine table
+#define RX_STARTUP_DELAY                1                           // Rxr startup delay (# symbols) to allow correct synchronization with transmitter
+#define RX_BIT_COUNT_START              0                           // Starting phase of Rx bit count
 
 // Declare global variables and arrays
-static const char TxString[] = "dHello World - abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-// The 'd' at the start is a dummy character that is not received while the filters are initialized
-
+static const char TxString[] = "Hello World - abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 static char     RxString[MAX_RX_STRING_LENGTH];
 
 static const char *TxStringPtr;
@@ -47,7 +47,7 @@ static char    *RxStringPtr;
 static SLData_t *pData, *pCarrierTable;
 
 static SLData_t TxCarrierPhase;
-static SLData_t sampleCount;
+static SLData_t TxSampleCount;
 
 
 #define COSTAS_LP_LPF_LENGTH            17                          // Costas loop LP LPF FIR filter length
@@ -91,8 +91,10 @@ int main (
 #if TX_BIT_MODE_ENABLED
   SLArrayIndex_t  TxBitIndex;
 #endif
-  SLFixData_t     DemodulatedBit;
-  SLArrayIndex_t  RxBitIndex = 7;                                   // Initialise bit count for correct synchronization
+  SLArrayIndex_t  RxStartUpDelayCount = 0;                          // Rx startup delay count
+  SLFixData_t     RxDemodulatedBit;
+  SLArrayIndex_t  RxBitIndex = RX_BIT_COUNT_START;                  // Initialise bit count for correct synchronization
+  char            RxCharTmpVariable = 0;
 
 #if DEBUG_LOG_FILE
   SUF_ClearDebugfprintf ();
@@ -144,7 +146,7 @@ int main (
 
   SIF_BpskModulate (pCarrierTable,                                  // Carrier table pointer
                     (CARRIER_TABLE_FREQ / SAMPLE_RATE),             // Carrier phase increment per sample (radians / 2π)
-                    &sampleCount,                                   // Transmitter sample count - tracks samples
+                    &TxSampleCount,                                 // Transmitter sample count - tracks samples
                     CARRIER_SINE_TABLE_SIZE);                       // Carrier sine table size
 
   SIF_BpskDemodulate (&CostasLpVCOPhase,                            // VCO phase
@@ -164,11 +166,6 @@ int main (
 
   TxCarrierPhase = SIGLIB_ZERO;                                     // Initialise BPSK transmitter phase
 // The phase of the transmitter can be rotated by changing this value
-
-// Clear demodulated data input array - This is important because we are going to be ORing in the received bits
-  for (i = 0; i < MAX_RX_STRING_LENGTH; i++) {
-    RxString[i] = 0;
-  }
 
   for (LoopCount = 0; LoopCount < NUMBER_OF_LOOPS; LoopCount++) {
     for (i = 0; i < SAMPLE_LENGTH; i += (SIGLIB_BYTE_LENGTH * SYMBOL_LENGTH)) {
@@ -214,25 +211,25 @@ int main (
     for (i = 0; i < SAMPLE_LENGTH; i += (SIGLIB_BYTE_LENGTH * SYMBOL_LENGTH)) {
       for (j = 0; j < SIGLIB_BYTE_LENGTH; j++) {
 #if DISPLAY_FILTER_OUTPUT
-        DemodulatedBit = SDA_BpskDemodulateDebug (pData + i + (j * SYMBOL_LENGTH),  // Source array
-                                                  &CostasLpVCOPhase,  // VCO phase
-                                                  VCO_MODULATION_INDEX, // VCO modulation index
-                                                  pVCOLookUpTable,  // VCO look up table
-                                                  VCO_SINE_TABLE_SIZE,  // VCO look up table size
-                                                  CARRIER_FREQ / SAMPLE_RATE, // Carrier frequency
-                                                  pCostasLpLPF1State, // Pointer to loop filter 1 state
-                                                  &CostasLpLPF1Index, // Pointer to loop filter 1 index
-                                                  pCostasLpLPF2State, // Pointer to loop filter 2 state
-                                                  &CostasLpLPF2Index, // Pointer to loop filter 2 index
-                                                  pCostasLpLPFCoeffs, // Pointer to loop filter coefficients
-                                                  COSTAS_LP_LPF_LENGTH, // Loop filter length
-                                                  &CostasLpLoopFilterState, // Pointer to loop filter state
-                                                  LOOP_FILTER_ALPHA,  // Loop filter coefficient
-                                                  &CostasLpState,   // Pointer to delayed sample
-                                                  &RxSampleClock,   // Pointer to receive sample clock
-                                                  &RxSampleSum,     // Pointer to Rx sample sum - used to decide which bit was Tx'd
-                                                  SYMBOL_LENGTH,    // Samples per symbol
-                                                  pFilterOutput);   // Pointer to filter output data
+        RxDemodulatedBit = SDA_BpskDemodulateDebug (pData + i + (j * SYMBOL_LENGTH),  // Source array
+                                                    &CostasLpVCOPhase,  // VCO phase
+                                                    VCO_MODULATION_INDEX, // VCO modulation index
+                                                    pVCOLookUpTable,  // VCO look up table
+                                                    VCO_SINE_TABLE_SIZE,  // VCO look up table size
+                                                    CARRIER_FREQ / SAMPLE_RATE, // Carrier frequency
+                                                    pCostasLpLPF1State, // Pointer to loop filter 1 state
+                                                    &CostasLpLPF1Index, // Pointer to loop filter 1 index
+                                                    pCostasLpLPF2State, // Pointer to loop filter 2 state
+                                                    &CostasLpLPF2Index, // Pointer to loop filter 2 index
+                                                    pCostasLpLPFCoeffs, // Pointer to loop filter coefficients
+                                                    COSTAS_LP_LPF_LENGTH, // Loop filter length
+                                                    &CostasLpLoopFilterState, // Pointer to loop filter state
+                                                    LOOP_FILTER_ALPHA,  // Loop filter coefficient
+                                                    &CostasLpState, // Pointer to delayed sample
+                                                    &RxSampleClock, // Pointer to receive sample clock
+                                                    &RxSampleSum,   // Pointer to Rx sample sum - used to decide which bit was Tx'd
+                                                    SYMBOL_LENGTH,  // Samples per symbol
+                                                    pFilterOutput); // Pointer to filter output data
 
         gpc_plot_2d (h2DPlot,                                       // Graph handle
                      pFilterOutput,                                 // Dataset
@@ -246,37 +243,43 @@ int main (
         printf ("\nFilter Output\nPlease hit <Carriage Return> to continue . . .");
         getchar ();
 #else
-        DemodulatedBit = SDA_BpskDemodulate (pData + i + (j * SYMBOL_LENGTH), // Source array
-                                             &CostasLpVCOPhase,     // VCO phase
-                                             VCO_MODULATION_INDEX,  // VCO modulation index
-                                             pVCOLookUpTable,       // VCO look up table
-                                             VCO_SINE_TABLE_SIZE,   // VCO look up table size
-                                             CARRIER_FREQ / SAMPLE_RATE,  // Carrier frequency
-                                             pCostasLpLPF1State,    // Pointer to loop filter 1 state
-                                             &CostasLpLPF1Index,    // Pointer to loop filter 1 index
-                                             pCostasLpLPF2State,    // Pointer to loop filter 2 state
-                                             &CostasLpLPF2Index,    // Pointer to loop filter 2 index
-                                             pCostasLpLPFCoeffs,    // Pointer to loop filter coefficients
-                                             COSTAS_LP_LPF_LENGTH,  // Loop filter length
-                                             &CostasLpLoopFilterState,  // Pointer to loop filter state
-                                             LOOP_FILTER_ALPHA,     // Loop filter coefficient
-                                             &CostasLpState,        // Pointer to delayed sample
-                                             &RxSampleClock,        // Pointer to receive sample clock
-                                             &RxSampleSum,          // Pointer to Rx sample sum - used to decide which bit was Tx'd
-                                             SYMBOL_LENGTH);        // Samples per symbol
+        RxDemodulatedBit = SDA_BpskDemodulate (pData + i + (j * SYMBOL_LENGTH), // Source array
+                                               &CostasLpVCOPhase,   // VCO phase
+                                               VCO_MODULATION_INDEX,  // VCO modulation index
+                                               pVCOLookUpTable,     // VCO look up table
+                                               VCO_SINE_TABLE_SIZE, // VCO look up table size
+                                               CARRIER_FREQ / SAMPLE_RATE,  // Carrier frequency
+                                               pCostasLpLPF1State,  // Pointer to loop filter 1 state
+                                               &CostasLpLPF1Index,  // Pointer to loop filter 1 index
+                                               pCostasLpLPF2State,  // Pointer to loop filter 2 state
+                                               &CostasLpLPF2Index,  // Pointer to loop filter 2 index
+                                               pCostasLpLPFCoeffs,  // Pointer to loop filter coefficients
+                                               COSTAS_LP_LPF_LENGTH,  // Loop filter length
+                                               &CostasLpLoopFilterState,  // Pointer to loop filter state
+                                               LOOP_FILTER_ALPHA,   // Loop filter coefficient
+                                               &CostasLpState,      // Pointer to delayed sample
+                                               &RxSampleClock,      // Pointer to receive sample clock
+                                               &RxSampleSum,        // Pointer to Rx sample sum - used to decide which bit was Tx'd
+                                               SYMBOL_LENGTH);      // Samples per symbol
 #endif
 
-        *RxStringPtr |= (((char) DemodulatedBit) << RxBitIndex);
-        RxBitIndex++;
-        if (RxBitIndex >= SIGLIB_BYTE_LENGTH) {
-          RxBitIndex = SIGLIB_AI_ZERO;
-          *RxStringPtr++;
+        if (RxStartUpDelayCount < RX_STARTUP_DELAY) {               // Flush pipeline before saving data
+          RxStartUpDelayCount++;
+        }
+        else {
+          RxCharTmpVariable |= (((char) RxDemodulatedBit) << RxBitIndex);
+          RxBitIndex++;
+          if (RxBitIndex >= SIGLIB_BYTE_LENGTH) {
+            RxBitIndex = SIGLIB_AI_ZERO;
+            *RxStringPtr++ = RxCharTmpVariable;
+            RxCharTmpVariable = 0;
+          }
         }
       }
     }
   }
 
-#if DEBUG_LOG_FILE || DISPLAY_FILTER_OUTPUT
+#if DEBUG_LOG_FILE
   for (i = 0; i < 20; i++) {
     SUF_Debugfprintf ("RxString[%d]", i);
     dpchar (RxString[i]);
@@ -284,9 +287,7 @@ int main (
 #endif
 
   *RxStringPtr = 0;                                                 // Terminate string for printf
-// Print received string - Note the first two characters received are not
-// from the required string due to receiver filter initialization
-  printf ("BPSK received string : %s\n", RxString + 2);
+  printf ("BPSK Received string: %s\n", RxString);                  // Print received string
 
 #if DISPLAY_GRAPHICS
   printf ("\nHit <Carriage Return> to continue ....\n");

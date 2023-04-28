@@ -5,7 +5,7 @@
 // of 16 and performs a window'd complex FFT. This example also
 // uses the spectrum reversal option to produce the correct
 // output orientation.
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

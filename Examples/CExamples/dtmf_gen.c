@@ -1,5 +1,5 @@
 // SigLib - DTMF Generation Example
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Freq. (Hz) 1209 1336 1477 1633
 //     697     1     2    3    A

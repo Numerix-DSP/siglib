@@ -6,7 +6,7 @@
 // the desired sample rate should be normalised to (2.0 . PI).
 // The SDA_IirModifyFilterGain function is used to normalise the gain.
 // The example modifies the Fc from 1.0 radian to 2.0 radians.
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -19,7 +19,7 @@
 #define FILTER_TYPE             SIGLIB_BESSEL_IIR_NORM_COEFFS
 
 #define PLOT_RESULTS            1                                   // Set to 1 to plot pResults as well as print them
-#define DEBUG_FPRINTF           1                                   // Set to 1 to write the results to debug.log
+#define DEBUG_FPRINTF           1                                   // Set to 1 to write the results to log file
 
 
 #define SAMPLE_LENGTH           512

@@ -1,5 +1,5 @@
 // .WAV file function test program
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 #include <stdio.h>
 #include <stdlib.h>

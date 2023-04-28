@@ -14,7 +14,7 @@
     <ProjectGuid>{62131A66-0DB3-45BB-9764-0CEFE5100E40}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>static_library</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -42,11 +42,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>siglib</TargetName>
-    <OutDir>$(SolutionDir)$(Platform)\static_library\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TargetName>siglib</TargetName>
-    <OutDir>$(SolutionDir)$(Platform)\static_library\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -54,7 +52,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);SIGLIB_STATIC_LIB=1</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);SIGLIB_STATIC_LIB=1;SIGLIB_STATIC_LIB=1;SIGLIB_STATIC_LIB=1</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>%SIGLIB_PATH%\include</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>

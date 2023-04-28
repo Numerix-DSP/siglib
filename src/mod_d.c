@@ -30,7 +30,7 @@ Please contact Sigma Numerix Ltd. for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+Copyright (c) 2023 Alpha Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Digital modulation / demodulation routines, for SigLib DSP library.
 
@@ -942,9 +942,9 @@ const SLComplexRect_s siglib_numerix_QPSKTxConstellation[] = {
 };
 
 
-    // Receiver constellation - this is redundant for this mapping but allows flexibility
+    // Receiver constellation map
 const SLFixData_t siglib_numerix_QPSKRxConstellation[] = {
-  0x3, 0x2, 0x1, 0x0,
+  0x1, 0x3, 0x0, 0x2,
 };
 
 /********************************************************
@@ -952,17 +952,17 @@ const SLFixData_t siglib_numerix_QPSKRxConstellation[] = {
 *
 * Parameters:
 *   const SLData_t                  Sample rate
-*   SLData_t * SIGLIB_PTR_DECL ,    Carrier table pointer
+*   SLData_t * SIGLIB_PTR_DECL,     Carrier table pointer
 *   const SLData_t,                 Carrier phase increment per sample (radians / 2π)
 *   const SLArrayIndex_t,           Sine table length
-*   SLData_t * SIGLIB_PTR_DECL ,    Carrier phase pointer
-*   SLArrayIndex_t * SIGLIB_PTR_DECL ,  Sample clock pointer
-*   SLComplexRect_s * SIGLIB_PTR_DECL , Magnitude pointer
-*   SLData_t * SIGLIB_PTR_DECL ,    RRCF Tx I delay pointer
-*   SLArrayIndex_t * SIGLIB_PTR_DECL ,  RRCF Tx I Filter Index pointer
-*   SLData_t * SIGLIB_PTR_DECL ,    RRCF Tx Q delay pointer
+*   SLData_t * SIGLIB_PTR_DECL,     Carrier phase pointer
+*   SLArrayIndex_t * SIGLIB_PTR_DECL,  Sample clock pointer
+*   SLComplexRect_s * SIGLIB_PTR_DECL, Magnitude pointer
+*   SLData_t * SIGLIB_PTR_DECL,     RRCF Tx I delay pointer
+*   SLArrayIndex_t * SIGLIB_PTR_DECL,  RRCF Tx I Filter Index pointer
+*   SLData_t * SIGLIB_PTR_DECL,     RRCF Tx Q delay pointer
 *   SLArrayIndex_t * SIGLIB_PTR_DECL ,  RRCF Tx Q Filter Index pointer
-*   SLData_t * SIGLIB_PTR_DECL ,    RRCF Coeffs pointer
+*   SLData_t * SIGLIB_PTR_DECL,     RRCF Coeffs pointer
 *   const SLData_t,                 RRCF Period
 *   const SLData_t,                 RRCF Roll off
 *   const SLArrayIndex_t,           RRCF size
@@ -1030,16 +1030,16 @@ void SIGLIB_FUNC_DECL SIF_QpskModulate (
 *   SLData_t * SIGLIB_PTR_DECL          Destination data array pointer
 *   const SLData_t * SIGLIB_PTR_DECL    Carrier table pointer
 *   const SLArrayIndex_t,               Sine table length
-*   SLData_t * SIGLIB_PTR_DECL ,        Carrier phase pointer
-*   SLArrayIndex_t * SIGLIB_PTR_DECL ,  Sample clock pointer
-*   SLComplexRect_s * SIGLIB_PTR_DECL ,     Magnitude pointer
+*   SLData_t * SIGLIB_PTR_DECL,         Carrier phase pointer
+*   SLArrayIndex_t * SIGLIB_PTR_DECL,   Sample clock pointer
+*   SLComplexRect_s * SIGLIB_PTR_DECL,  Magnitude pointer
 *   const SLArrayIndex_t,               Carrier table increment
 *   const SLArrayIndex_t,               Samples per symbol
-*   SLData_t * SIGLIB_PTR_DECL ,        RRCF Tx I delay pointer
-*   SLArrayIndex_t * SIGLIB_PTR_DECL ,  RRCF Tx I Filter Index pointer
-*   SLData_t * SIGLIB_PTR_DECL ,        RRCF Tx Q delay pointer
-*   SLArrayIndex_t * SIGLIB_PTR_DECL ,  RRCF Tx Q Filter Index pointer
-*   SLData_t * SIGLIB_PTR_DECL ,        RRCF Coeffs pointer
+*   SLData_t * SIGLIB_PTR_DECL,         RRCF Tx I delay pointer
+*   SLArrayIndex_t * SIGLIB_PTR_DECL,   RRCF Tx I Filter Index pointer
+*   SLData_t * SIGLIB_PTR_DECL,         RRCF Tx Q delay pointer
+*   SLArrayIndex_t * SIGLIB_PTR_DECL,   RRCF Tx Q Filter Index pointer
+*   SLData_t * SIGLIB_PTR_DECL,         RRCF Coeffs pointer
 *   const SLArrayIndex_t,               RRCF size
 *   const SLArrayIndex_t                RRCF enable / disable switch
 *
@@ -1324,9 +1324,8 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_QpskDemodulate (
         pMagn->imag = SIGLIB_ZERO;
       }
 
-      RxDiBit =
-        siglib_numerix_QPSKRxConstellation[(SLArrayIndex_t)
-                                           ((((SLUFixData_t) pMagn->real) + (((SLUFixData_t) pMagn->imag) << 1U)) & SIGLIB_UFIX_THREE)];
+      RxDiBit = siglib_numerix_QPSKRxConstellation[(SLArrayIndex_t)
+                                                   ((((SLUFixData_t) pMagn->real) + (((SLUFixData_t) pMagn->imag) << 1U)) & SIGLIB_UFIX_THREE)];
 
       pMagn->real = SIGLIB_ZERO;                                    // Reset running sum values
       pMagn->imag = SIGLIB_ZERO;
@@ -1352,20 +1351,20 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_QpskDemodulate (
 *   SLData_t * SIGLIB_PTR_DECL          Source data pointer
 *   const SLData_t * SIGLIB_PTR_DECL    Carrier table pointer
 *   const SLArrayIndex_t,               Sine table length
-*   SLData_t * SIGLIB_PTR_DECL ,        Carrier phase pointer
+*   SLData_t * SIGLIB_PTR_DECL,         Carrier phase pointer
 *   SLArrayIndex_t *,                   Sample clock pointer
-*   SLComplexRect_s * SIGLIB_PTR_DECL ,     Magnitude pointer
+*   SLComplexRect_s * SIGLIB_PTR_DECL,  Magnitude pointer
 *   const SLArrayIndex_t,               Carrier table increment
 *   const SLArrayIndex_t,               Samples per symbol
-*   SLData_t * SIGLIB_PTR_DECL ,        RRCF Rx I delay pointer
-*   SLArrayIndex_t * SIGLIB_PTR_DECL ,  RRCF Rx I Filter Index pointer
-*   SLData_t * SIGLIB_PTR_DECL ,        RRCF Rx Q delay pointer
-*   SLArrayIndex_t * SIGLIB_PTR_DECL ,  RRCF Rx Q Filter Index pointer
-*   SLData_t * SIGLIB_PTR_DECL ,        RRCF Coeffs pointer
+*   SLData_t * SIGLIB_PTR_DECL,         RRCF Rx I delay pointer
+*   SLArrayIndex_t * SIGLIB_PTR_DECL,   RRCF Rx I Filter Index pointer
+*   SLData_t * SIGLIB_PTR_DECL,         RRCF Rx Q delay pointer
+*   SLArrayIndex_t * SIGLIB_PTR_DECL,   RRCF Rx Q Filter Index pointer
+*   SLData_t * SIGLIB_PTR_DECL,         RRCF Coeffs pointer
 *   const SLArrayIndex_t,               RRCF size
 *   const SLArrayIndex_t,               RRCF enable / disable switch
-*   SLData_t * SIGLIB_PTR_DECL ,        Eye samples pointer
-*   SLComplexRect_s * SIGLIB_PTR_DECL , Constellation points pointer
+*   SLData_t * SIGLIB_PTR_DECL,         Eye samples pointer
+*   SLComplexRect_s * SIGLIB_PTR_DECL,  Constellation points pointer
 *
 * Return value:
 *   SLFixData_t     - Received di-bit
@@ -1461,9 +1460,8 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_QpskDemodulateDebug (
 //SUF_Debugfprintf ("RxDiBit:pMagn->real = %lf\n", pMagn->real);
 //SUF_Debugfprintf ("RxDiBit:pMagn->imag = %lf\n", pMagn->imag);
 
-      RxDiBit =
-        siglib_numerix_QPSKRxConstellation[(SLArrayIndex_t)
-                                           ((((SLUFixData_t) pMagn->real) + (((SLUFixData_t) pMagn->imag) << 1U)) & SIGLIB_UFIX_THREE)];
+      RxDiBit = siglib_numerix_QPSKRxConstellation[(SLArrayIndex_t)
+                                                   ((((SLUFixData_t) pMagn->real) + (((SLUFixData_t) pMagn->imag) << 1U)) & SIGLIB_UFIX_THREE)];
 
       pMagn->real = SIGLIB_ZERO;                                    // Reset running sum values
       pMagn->imag = SIGLIB_ZERO;
@@ -1481,6 +1479,13 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_QpskDemodulateDebug (
 
 
 // QPSK phase change
+//
+// Quadrants :
+//
+//     Q1  |  Q0
+//     ____|____
+//         |
+//     Q2  |  Q3
 //
 //     00 +90°
 //     01 +0°
@@ -1514,7 +1519,7 @@ const SLFixData_t siglib_numerix_QPSKRxMapping[] = {
 /**/
 
 /********************************************************
-* Function: SDA_QpskDifferentialEncode
+* Function: SDS_QpskDifferentialEncode
 *
 * Parameters:
 *   const SLFixData_t   TxDiBit,
@@ -1529,23 +1534,24 @@ const SLFixData_t siglib_numerix_QPSKRxMapping[] = {
 *
 ********************************************************/
 
-SLFixData_t SIGLIB_FUNC_DECL SDA_QpskDifferentialEncode (
+SLFixData_t SIGLIB_FUNC_DECL SDS_QpskDifferentialEncode (
   const SLFixData_t TxDiBit,
   SLFixData_t * SIGLIB_PTR_DECL PreviousQuadrant)
 {
-  SLFixData_t     Quadrant = siglib_numerix_QPSKTxMapping[(SLArrayIndex_t) (((SLUFixData_t) TxDiBit & 0x03U) << 2U) + *PreviousQuadrant];
+  SLFixData_t     Quadrant =
+    siglib_numerix_QPSKTxMapping[(SLArrayIndex_t) (((SLUFixData_t) TxDiBit & SIGLIB_QPSK_BIT_MASK) << 2U) + *PreviousQuadrant];
 
   *PreviousQuadrant = Quadrant;                                     // Save current quadrant for next iteration
 
   return (Quadrant);
 
-}                                                                   // End of SDA_QpskDifferentialEncode()
+}                                                                   // End of SDS_QpskDifferentialEncode()
 
 
 /**/
 
 /********************************************************
-* Function: SDA_QpskDifferentialDecode
+* Function: SDS_QpskDifferentialDecode
 *
 * Parameters:
 *   const SLFixData_t   MappedDiBit,
@@ -1560,17 +1566,126 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_QpskDifferentialEncode (
 *
 ********************************************************/
 
-SLFixData_t SIGLIB_FUNC_DECL SDA_QpskDifferentialDecode (
+SLFixData_t SIGLIB_FUNC_DECL SDS_QpskDifferentialDecode (
   const SLFixData_t MappedDiBit,
   SLFixData_t * SIGLIB_PTR_DECL PreviousDiBit)
 {
-  SLFixData_t     Output = siglib_numerix_QPSKRxMapping[(SLArrayIndex_t) (((SLUFixData_t) MappedDiBit & 0x03U) << 2U) + *PreviousDiBit];
+  SLFixData_t     Output =
+    siglib_numerix_QPSKRxMapping[(SLArrayIndex_t) (((SLUFixData_t) MappedDiBit & SIGLIB_QPSK_BIT_MASK) << 2U) + *PreviousDiBit];
 
-  *PreviousDiBit = (SLFixData_t) ((SLUFixData_t) MappedDiBit & 0x03U);  // Save current di-bit for next iteration
+  *PreviousDiBit = (SLFixData_t) ((SLUFixData_t) MappedDiBit & SIGLIB_QPSK_BIT_MASK); // Save current di-bit for next iteration
 
   return (Output);
 
-}                                                                   // End of SDA_QpskDifferentialDecode()
+}                                                                   // End of SDS_QpskDifferentialDecode()
+
+
+/**/
+
+/********************************************************
+* Function: SIF_DifferentialEncoder
+*
+* Parameters:
+*   SLArrayIndex_t * SIGLIB_PTR_DECL pEncodeTable,
+*   SLArrayIndex_t * SIGLIB_PTR_DECL pDecodeTable,
+*   const SLFixData_t wordLength)
+*
+* Return value:
+*   SLFixData_t         MappedDiBit
+*
+* Description:
+*   Initialize the differential encoder and decoder
+*   look-up-tables for the following function:
+*     y[n] = (x[n] - x[n-1]) % M
+*     Tx  (Previous Word + ((Current Word & bitMask) << Word Length))
+*     Rx  (Previous Word + ((Received Word & bitMask) << Word Length))
+*
+********************************************************/
+
+void SIGLIB_FUNC_DECL SIF_DifferentialEncoder (
+  SLArrayIndex_t * SIGLIB_PTR_DECL pEncodeTable,
+  SLArrayIndex_t * SIGLIB_PTR_DECL pDecodeTable,
+  const SLFixData_t wordLength)
+{
+  SLFixData_t     numValues = (1 << wordLength);
+  SLFixData_t     bitMask = ((1 << wordLength) - 1);
+
+  for (SLArrayIndex_t src_index = 0; src_index < numValues; src_index++) {
+    for (SLArrayIndex_t prev_index = 0; prev_index < numValues; prev_index++) {
+      SLFixData_t     diff = (src_index - prev_index) & bitMask;
+      *(pEncodeTable + (src_index * numValues) + prev_index) = diff;
+      *(pDecodeTable + (diff * numValues) + prev_index) = src_index;
+    }
+  }
+}                                                                   // End of SIF_DifferentialEncoder()
+
+
+/**/
+
+/********************************************************
+* Function: SDS_QpskDifferentialEncode
+*
+* Parameters:
+*   const SLFixData_t srcWord,
+*   SLFixData_t * SIGLIB_PTR_DECL pEncodeTable,
+*   const SLFixData_t wordLength,
+*   const SLFixData_t bitMask,
+*   SLFixData_t * SIGLIB_PTR_DECL pPreviousWord)
+*
+* Return value:
+*   SLFixData_t         MappedDiBit
+*
+* Description:
+*   This function differentially encodes the data
+*   according to the mapping in the supplied look-up-table.
+*
+********************************************************/
+
+SLFixData_t SIGLIB_FUNC_DECL SDS_DifferentialEncode (
+  const SLFixData_t srcWord,
+  SLFixData_t * SIGLIB_PTR_DECL pEncodeTable,
+  const SLFixData_t wordLength,
+  const SLFixData_t bitMask,
+  SLFixData_t * SIGLIB_PTR_DECL pPreviousWord)
+{
+  SLFixData_t     Word = pEncodeTable[(SLArrayIndex_t) (((SLUFixData_t) srcWord & bitMask) << wordLength) + *pPreviousWord];
+  *pPreviousWord = Word;                                            // Save current word for next iteration
+  return (Word);
+}                                                                   // End of SDS_DifferentialEncode()
+
+
+/**/
+
+/********************************************************
+* Function: SDS_QpskDifferentialDecode
+*
+* Parameters:
+*   const SLFixData_t srcWord,
+*   SLFixData_t * SIGLIB_PTR_DECL pEncodeTable,
+*   const SLFixData_t wordLength,
+*   const SLFixData_t bitMask,
+*   SLFixData_t * SIGLIB_PTR_DECL pPreviousWord)
+*
+* Return value:
+*   SLFixData_t RxDiBit
+*
+* Description:
+*   This function differentially decodes the data
+*   according to the mapping in the supplied look-up-table.
+*
+********************************************************/
+
+SLFixData_t SIGLIB_FUNC_DECL SDS_DifferentialDecode (
+  const SLFixData_t srcWord,
+  SLFixData_t * SIGLIB_PTR_DECL pEncodeTable,
+  const SLFixData_t wordLength,
+  const SLFixData_t bitMask,
+  SLFixData_t * SIGLIB_PTR_DECL pPreviousWord)
+{
+  SLFixData_t     Word = pEncodeTable[(SLArrayIndex_t) (((SLUFixData_t) srcWord & bitMask) << wordLength) + *pPreviousWord];
+  *pPreviousWord = srcWord;                                         // Save previous word for next iteration
+  return (Word);
+}                                                                   // End of SDS_DifferentialEncode()
 
 
 /**/
@@ -1580,7 +1695,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_QpskDifferentialDecode (
 *
 * Parameters:
 *   const SLData_t * SIGLIB_PTR_DECL ,  Carrier table pointer
-    const SLData_t,                     Carrier phase increment per sample (radians / 2π)
+*   const SLData_t,                     Carrier phase increment per sample (radians / 2π)
 *   const SLArrayIndex_t)               Sine table length
 *
 * Return value:
@@ -2073,7 +2188,7 @@ const SLComplexRect_s siglib_numerix_QAM16TxConstellation[] = {
 };
 
 
-    // Receiver constellation - this is redundant for this mapping but allows flexibility
+    // Receiver constellation map
 const SLChar_t  siglib_numerix_QAM16RxConstellation[] = {
 // First line
   0x0, 0x1, 0x2, 0x3,
@@ -2460,10 +2575,10 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Qam16Demodulate (
         pMagn->imag = SIGLIB_THREE;
       }
 // Read constellation point and convert to data
-      RxNibble =
-        siglib_numerix_QAM16RxConstellation[(SLFixData_t)
-                                            ((SLUFixData_t)
-                                             (((SLFixData_t) pMagn->real) + ((12) - (SLFixData_t) (((SLUFixData_t) pMagn->imag) << 2U))) & 0x0fU)];
+      RxNibble = siglib_numerix_QAM16RxConstellation[(SLFixData_t)
+                                                     ((SLUFixData_t)
+                                                      (((SLFixData_t) pMagn->real) +
+                                                       ((12) - (SLFixData_t) (((SLUFixData_t) pMagn->imag) << 2U))) & 0x0fU)];
 
       pMagn->real = SIGLIB_ZERO;                                    // Reset running sum values
       pMagn->imag = SIGLIB_ZERO;
@@ -2594,10 +2709,10 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Qam16DemodulateDebug (
         pMagn->imag = SIGLIB_THREE;
       }
 // Read constellation point and convert to data
-      RxNibble =
-        siglib_numerix_QAM16RxConstellation[(SLFixData_t)
-                                            ((SLUFixData_t)
-                                             (((SLFixData_t) pMagn->real) + ((12) - (SLFixData_t) (((SLUFixData_t) pMagn->imag) << 2U))) & 0x0fU)];
+      RxNibble = siglib_numerix_QAM16RxConstellation[(SLFixData_t)
+                                                     ((SLUFixData_t)
+                                                      (((SLFixData_t) pMagn->real) +
+                                                       ((12) - (SLFixData_t) (((SLUFixData_t) pMagn->imag) << 2U))) & 0x0fU)];
 
       pMagn->real = SIGLIB_ZERO;                                    // Reset running sum values
       pMagn->imag = SIGLIB_ZERO;
@@ -2615,12 +2730,12 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Qam16DemodulateDebug (
 
 
 
-// QAM16 quadrants :
+// Quadrants :
 //
-//    Q2  |  Q1
+//    Q1  |  Q0
 //    ____|____
 //        |
-//    Q3  |  Q4
+//    Q2  |  Q3
 
 // REMEMBER THAT THE BIT ORDER IS REVERSED TO NORMAL ORDERING IN A BYTE
 
@@ -2681,9 +2796,10 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Qam16DifferentialEncode (
   SLFixData_t     Quadrant;
 
 // Differential phase encoding
-  Quadrant =
-    (SLFixData_t) ((SLUFixData_t) (*PreviousQuadrant + siglib_numerix_QAM16TxQuadrantChange[(SLArrayIndex_t) ((SLUFixData_t) TxNibble & 0x03U)]) &
-                   0x03U);
+  Quadrant = (SLFixData_t) ((SLUFixData_t)
+                            (*PreviousQuadrant +
+                             siglib_numerix_QAM16TxQuadrantChange[(SLArrayIndex_t) ((SLUFixData_t) TxNibble & SIGLIB_QPSK_BIT_MASK)]) &
+                            SIGLIB_QPSK_BIT_MASK);
   *PreviousQuadrant = Quadrant;                                     // Save current quadrant for next iteration
 
 // Map application constellation to generic SigLib constellation
@@ -2720,10 +2836,10 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Qam16DifferentialDecode (
   Offset = (SLUFixData_t) siglib_numerix_QAM16RxMapping[MappedNibble];
   Output =
     (SLFixData_t) (siglib_numerix_QAM16RxQuadrantChange
-                   [(SLArrayIndex_t) (((SLUFixData_t) * PreviousQuadrant << 2U) + (SLArrayIndex_t) (Offset & 0x03U))] +
+                   [(SLArrayIndex_t) (((SLUFixData_t) * PreviousQuadrant << 2U) + (SLArrayIndex_t) (Offset & SIGLIB_QPSK_BIT_MASK))] +
                    (SLFixData_t) (Offset & 0x0cU));
 
-  *PreviousQuadrant = (SLFixData_t) (Offset & 0x03U);               // Save current quadrant for next iteration
+  *PreviousQuadrant = (SLFixData_t) (Offset & SIGLIB_QPSK_BIT_MASK);  // Save current quadrant for next iteration
 
   return (Output);
 
@@ -3805,7 +3921,7 @@ void SIGLIB_FUNC_DECL SDA_PiByFourDQpskModulate (
 // Look up I and Q signal magnitudes
         OutputSymbol =
           siglib_numerix_PiBy4DQPSKTxDiffEncTable[(SLArrayIndex_t) ((SLUFixData_t) * pPrevOutputSymbol << 2U) +
-                                                  (SLArrayIndex_t) ((SLUFixData_t) TxDiBit & 0x03U)];
+                                                  (SLArrayIndex_t) ((SLUFixData_t) TxDiBit & SIGLIB_QPSK_BIT_MASK)];
         pMagn->real = siglib_numerix_PiBy4DQPSKTxModulationIQTable[OutputSymbol].real;
         pMagn->imag = siglib_numerix_PiBy4DQPSKTxModulationIQTable[OutputSymbol].imag;
         *pPrevOutputSymbol = OutputSymbol;
@@ -3831,7 +3947,7 @@ void SIGLIB_FUNC_DECL SDA_PiByFourDQpskModulate (
 // Look up I and Q signal magnitudes
         OutputSymbol =
           siglib_numerix_PiBy4DQPSKTxDiffEncTable[(SLArrayIndex_t) ((SLUFixData_t) * pPrevOutputSymbol << 2U) +
-                                                  (SLArrayIndex_t) ((SLUFixData_t) TxDiBit & 0x03U)];
+                                                  (SLArrayIndex_t) ((SLUFixData_t) TxDiBit & SIGLIB_QPSK_BIT_MASK)];
         pMagn->real = siglib_numerix_PiBy4DQPSKTxModulationIQTable[OutputSymbol].real;
         pMagn->imag = siglib_numerix_PiBy4DQPSKTxModulationIQTable[OutputSymbol].imag;
         *pPrevOutputSymbol = OutputSymbol;
@@ -3892,7 +4008,7 @@ void SIGLIB_FUNC_DECL SDS_ChannelizationCode (
   ChannelizationCode[0] = SIGLIB_ONE;
 
   for (i = 0; i < Log2SF; i++) {
-    if ((SLArrayIndex_t) (((SLUFixData_t) CodeIndex >> (SLUFixData_t) ((Log2SF - i) - 1U)) & 0x1U) == 0) {
+    if ((SLArrayIndex_t) (((SLUFixData_t) CodeIndex >> (SLUFixData_t) ((Log2SF - i) - 1U)) & SIGLIB_BPSK_BIT_MASK) == 0) {
       SignModifier = SIGLIB_ONE;
     }
     else {

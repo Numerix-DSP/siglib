@@ -1,5 +1,5 @@
 // SigLib Envelope Detection Using One Pole Filter Example
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

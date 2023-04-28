@@ -1,5 +1,5 @@
 // SigLib Comb Filter Example
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // This program demonstrates the impulse and frequency response of four
 // different arrangents of comb filter. The flow diagrams for each are :

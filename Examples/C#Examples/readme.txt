@@ -1,7 +1,7 @@
 
 
 
-                                SigLib™
+                                SigLibï¿½
 
                        Signal Processing Library
                           C# Example Functions
@@ -28,12 +28,12 @@ further information.
 
 Visual C# Express 2008 can be downloaded from www.microsoft.com/express/vcsharp/.
 
-SigLib is a trademark of Sigma Numerix Ltd. all other trademarks acknowledged.
+SigLib is a trademark of Alpha Numerix all other trademarks acknowledged.
 
 
 For additional information, please contact :
 
-Sigma Numerix Ltd.,
+Alpha Numerix,
 Email: info@numerix-dsp.com
 WWW  : https:\\www.numerix-dsp.com
 

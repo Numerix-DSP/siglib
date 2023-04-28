@@ -30,7 +30,7 @@ Please contact Sigma Numerix Ltd. for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+Copyright (c) 2023 Alpha Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Header file for SigLib DSP library
 
@@ -44,8 +44,9 @@ Update history :
 #ifndef _HP_VEE                                                     // The following functionality is not supported by VEE
 
 #define SIGLIB                          1                           // Indicates SigLib is being used
-#define SIGLIB_VERSION                  10.31                       // Indicates SigLib version being used
-#define SIGLIB_ENABLE_DEBUG_FPRINTF     0                           // Set to 1 to enable SUF_Debugfprintf functions in some siglib functions
+#define SIGLIB_VERSION                  10.40                       // Indicates SigLib version being used
+#define SIGLIB_ENABLE_DEBUG_FPRINTF     0                           // Set to 1 to enable SUF_Debugfprintf functions in some SigLib functions
+#define SIGLIB_LOG_FILE                 "siglib_debug.log"          // Filename for SigLib logging functions
 
 
 #ifndef SWIG
@@ -156,6 +157,13 @@ extern          "C" {
   const SLData_t *,
   const SLData_t *,
   const SLArrayIndex_t);
+  SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplex (
+  const SLData_t real,
+  const SLData_t imag);
+  SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexRect (
+  const SLComplexRect_s Rect);
+  SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexPolar (
+  const SLComplexPolar_s Polar);
   SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintMatrix (
   const SLData_t *,
   const SLArrayIndex_t,
@@ -3790,13 +3798,32 @@ extern          "C" {
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Eye samples pointer
   SLComplexRect_s * SIGLIB_OUTPUT_PTR_DECL);                        // Constellation points pointer
 
-  SLFixData_t SIGLIB_FUNC_DECL SDA_QpskDifferentialEncode (
+  SLFixData_t SIGLIB_FUNC_DECL SDS_QpskDifferentialEncode (
   const SLFixData_t,                                                // Tx di-bit
   SLFixData_t *);                                                   // Previous Tx quadrant pointer
 
-  SLFixData_t SIGLIB_FUNC_DECL SDA_QpskDifferentialDecode (
+  SLFixData_t SIGLIB_FUNC_DECL SDS_QpskDifferentialDecode (
   const SLFixData_t,                                                // Mapped Rx di-bit
   SLFixData_t *);                                                   // Previous Rx di-bit pointer
+
+  void SIGLIB_FUNC_DECL SIF_DifferentialEncoder (
+  SLArrayIndex_t * SIGLIB_PTR_DECL,                                 // Pointer to encoder look-up-table
+  SLArrayIndex_t * SIGLIB_PTR_DECL,                                 // Pointer to decoder look-up-table
+  const SLFixData_t);                                               // Word length to encode / decode
+
+  SLFixData_t SIGLIB_FUNC_DECL SDS_DifferentialEncode (
+  const SLFixData_t,                                                // Source word to encode
+  SLFixData_t * SIGLIB_PTR_DECL,                                    // Encoder / decoder table
+  const SLFixData_t,                                                // Word length to encode / decode
+  const SLFixData_t,                                                // Bit mask for given word length
+  SLFixData_t * SIGLIB_PTR_DECL);                                   // Previously encoded word
+
+  SLFixData_t SIGLIB_FUNC_DECL SDS_DifferentialDecode (
+  const SLFixData_t,                                                // Source word to encode
+  SLFixData_t * SIGLIB_PTR_DECL,                                    // Encoder / decoder table
+  const SLFixData_t,                                                // Word length to encode / decode
+  const SLFixData_t,                                                // Bit mask for given word length
+  SLFixData_t * SIGLIB_PTR_DECL);                                   // Previously decoded word
 
   void SIGLIB_FUNC_DECL SIF_FskModulate (
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Carrier sinusoid table

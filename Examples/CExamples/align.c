@@ -1,6 +1,6 @@
 // SigLib - array alignment and display program
 // The datasets are aligned using correlation
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 #include <stdio.h>
 #include <string.h>

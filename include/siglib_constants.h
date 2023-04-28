@@ -30,7 +30,7 @@ Please contact Sigma Numerix Ltd. for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+Copyright (c) 2023 Alpha Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Constants header file for SigLib DSP library
 
@@ -240,6 +240,7 @@ Update history :
 #define SIGLIB_INV_SIXTEEN          (SIGLIB_ONE / SIGLIB_SIXTEEN)   // 1.0 / 16
 #define SIGLIB_SQRT_TWO             ((SLData_t)1.414213562373095048801688724209698078569) // (sqrt (2.0))
 #define SIGLIB_INV_SQRT_TWO         (SIGLIB_ONE / SIGLIB_SQRT_TWO)  // 1.0 / sqrt (2.0)
+#define SIGLIB_SQRT_TWO_DIV_TWO     SIGLIB_INV_SQRT_TWO             // (sqrt (2.0) / 2.0)
 #define SIGLIB_INV_SQRT_TWO_PI      ((SLData_t)0.398942280401432677939946059934382) // (1.0 / sqrt (TWO_PI))
 #define SIGLIB_SQRT_HALF_LN2        ((SLData_t)0.58870501125773734550578466322985)  // sqrt (ln(2) / 2)
 #define SIGLIB_LN2                  ((SLData_t)0.693147180559945309417232121458177) // ln(2)
@@ -359,25 +360,26 @@ Update history :
 #define SIGLIB_UFIX_TEN             ((SLUFixData_t)10)
 
                             // Standard DTMF frequencies
-            // DTMF low frequencies
+                            // DTMF low frequencies
 #define SIGLIB_DTMF_LF_0            ((SLData_t)697.0)
 #define SIGLIB_DTMF_LF_1            ((SLData_t)770.0)
 #define SIGLIB_DTMF_LF_2            ((SLData_t)852.0)
 #define SIGLIB_DTMF_LF_3            ((SLData_t)941.0)
 
-            // DTMF low frequencies
+                            // DTMF high frequencies
 #define SIGLIB_DTMF_HF_0            ((SLData_t)1209.0)
 #define SIGLIB_DTMF_HF_1            ((SLData_t)1336.0)
 #define SIGLIB_DTMF_HF_2            ((SLData_t)1477.0)
 #define SIGLIB_DTMF_HF_3            ((SLData_t)1633.0)
 
 
+                            // DTMF low frequencies
 #define SIGLIB_DTMF_DETECT_LF_0     ((SLData_t)706.0)
 #define SIGLIB_DTMF_DETECT_LF_1     ((SLData_t)784.0)
 #define SIGLIB_DTMF_DETECT_LF_2     ((SLData_t)863.0)
 #define SIGLIB_DTMF_DETECT_LF_3     ((SLData_t)941.0)
 
-            // DTMF low frequencies
+                            // DTMF low frequencies
 #define SIGLIB_DTMF_DETECT_HF_0     ((SLData_t)1176.0)
 #define SIGLIB_DTMF_DETECT_HF_1     ((SLData_t)1333.0)
 #define SIGLIB_DTMF_DETECT_HF_2     ((SLData_t)1490.0)
@@ -385,29 +387,47 @@ Update history :
 
 
                             // DTMF frequencies normalised to 1.0 Hz sample rate
-            // DTMF low frequencies
+                            // DTMF low frequencies
 #define SIGLIB_DTMF_LF_0_NORM       (SIGLIB_DTMF_LF_0 * siglib_numerix_InverseDTMFSampleRate)
 #define SIGLIB_DTMF_LF_1_NORM       (SIGLIB_DTMF_LF_1 * siglib_numerix_InverseDTMFSampleRate)
 #define SIGLIB_DTMF_LF_2_NORM       (SIGLIB_DTMF_LF_2 * siglib_numerix_InverseDTMFSampleRate)
 #define SIGLIB_DTMF_LF_3_NORM       (SIGLIB_DTMF_LF_3 * siglib_numerix_InverseDTMFSampleRate)
 
-            // DTMF low frequencies
+                            // DTMF high frequencies
 #define SIGLIB_DTMF_HF_0_NORM       (SIGLIB_DTMF_HF_0 * siglib_numerix_InverseDTMFSampleRate)
 #define SIGLIB_DTMF_HF_1_NORM       (SIGLIB_DTMF_HF_1 * siglib_numerix_InverseDTMFSampleRate)
 #define SIGLIB_DTMF_HF_2_NORM       (SIGLIB_DTMF_HF_2 * siglib_numerix_InverseDTMFSampleRate)
 #define SIGLIB_DTMF_HF_3_NORM       (SIGLIB_DTMF_HF_3 * siglib_numerix_InverseDTMFSampleRate)
 
-            // DTMF low frequencies
+                            // DTMF low frequencies
 #define SIGLIB_DTMF_DETECT_LF_0_NORM    (SIGLIB_DTMF_DETECT_LF_0 * siglib_numerix_InverseDTMFSampleRate)
 #define SIGLIB_DTMF_DETECT_LF_1_NORM    (SIGLIB_DTMF_DETECT_LF_1 * siglib_numerix_InverseDTMFSampleRate)
 #define SIGLIB_DTMF_DETECT_LF_2_NORM    (SIGLIB_DTMF_DETECT_LF_2 * siglib_numerix_InverseDTMFSampleRate)
 #define SIGLIB_DTMF_DETECT_LF_3_NORM    (SIGLIB_DTMF_DETECT_LF_3 * siglib_numerix_InverseDTMFSampleRate)
 
-            // DTMF low frequencies
+                            // DTMF high frequencies
 #define SIGLIB_DTMF_DETECT_HF_0_NORM    (SIGLIB_DTMF_DETECT_HF_0 * siglib_numerix_InverseDTMFSampleRate)
 #define SIGLIB_DTMF_DETECT_HF_1_NORM    (SIGLIB_DTMF_DETECT_HF_1 * siglib_numerix_InverseDTMFSampleRate)
 #define SIGLIB_DTMF_DETECT_HF_2_NORM    (SIGLIB_DTMF_DETECT_HF_2 * siglib_numerix_InverseDTMFSampleRate)
 #define SIGLIB_DTMF_DETECT_HF_3_NORM    (SIGLIB_DTMF_DETECT_HF_3 * siglib_numerix_InverseDTMFSampleRate)
+
+                            // Digital modulation constants
+#define SIGLIB_BPSK_BITS_PER_SYMBOL     1U                          // 1 bit per symbol
+#define SIGLIB_BPSK_NUMBER_OF_PHASES    (1<<SIGLIB_BPSK_BITS_PER_SYMBOL)  // 2 phases
+#define SIGLIB_BPSK_BIT_MASK            ((1<<SIGLIB_BPSK_BITS_PER_SYMBOL) - 1)  // Bit mask
+
+#define SIGLIB_QPSK_BITS_PER_SYMBOL     2U                          // 2 bits per symbol
+#define SIGLIB_QPSK_NUMBER_OF_PHASES    (1<<SIGLIB_QPSK_BITS_PER_SYMBOL)  // 4 phases
+#define SIGLIB_QPSK_BIT_MASK            ((1<<SIGLIB_QPSK_BITS_PER_SYMBOL) - 1)  // Bit mask
+
+#define SIGLIB_OPSK_BITS_PER_SYMBOL     3U                          // 3 bits per symbol
+#define SIGLIB_OPSK_NUMBER_OF_PHASES    (1<<SIGLIB_OPSK_BITS_PER_SYMBOL)  // 8 phases
+#define SIGLIB_OPSK_BIT_MASK            ((1<<SIGLIB_OPSK_BITS_PER_SYMBOL) - 1)  // Bit mask
+
+#define SIGLIB_QAM16_BITS_PER_SYMBOL    4U                          // 4 bits per symbol
+#define SIGLIB_QAM16_NUMBER_OF_PHASES   (1<<SIGLIB_QAM16_BITS_PER_SYMBOL) // 16 phases
+#define SIGLIB_QAM16_BIT_MASK           ((1<<SIGLIB_QAM16_BITS_PER_SYMBOL) - 1) // Bit mask
+
 
                             // QAM constants
 #define SIGLIB_QAM16_PEAK_NORM      ((SLData_t)8.0)                 // Peak magnitude of perfect constellation
@@ -416,8 +436,8 @@ Update history :
 
                             // QPSK constants
 #define SIGLIB_QPSK_PEAK_NORM       ((SLData_t)8.0)                 // Peak magnitude of perfect constellation
-#define SIGLIB_QPSK_OFFSET          ((SLData_t)10.0)                // 8 * 5 * 0.25 - 8 is peak*/
-#define SIGLIB_QPSK_SCALE           ((SLData_t)0.1875)              // 3 * 0.5 * 0.125 - 8 is peak*/
+#define SIGLIB_QPSK_DEMOD_OFFSET    SIGLIB_TEN                      // 8 * 5 * 0.25 - 8 is peak
+#define SIGLIB_QPSK_DEMOD_SCALE     ((SLData_t)0.1875)              // 3 * 0.5 * 0.125 - 8 is peak
 
                             // Histogram constants
 #define SIGLIB_HISTOGRAM_AUTOSCALE  ((SLData_t)0.0)                 // Auto scale the histogram or cumulative histogram
@@ -466,6 +486,7 @@ Update history :
 #define SIGLIB_INV_SIXTEEN          (SIGLIB_ONE / SIGLIB_SIXTEEN)   // 1.0 / 16
 #define SIGLIB_SQRT_TWO             (1.414213562373095048801688724209698078569) // (sqrt (2.0))
 #define SIGLIB_INV_SQRT_TWO         (SIGLIB_ONE / SIGLIB_SQRT_TWO)  // 1.0 / sqrt (2.0)
+#define SIGLIB_SQRT_TWO_DIV_TWO     SIGLIB_INV_SQRT_TWO             // (sqrt (2.0) / 2.0)
 #define SIGLIB_INV_SQRT_TWO_PI      (0.398942280401432677939946059934382) // (1.0 / sqrt (TWO_PI))
 #define SIGLIB_SQRT_HALF_LN2        (0.58870501125773734550578466322985)  // sqrt (ln(2) / 2)
 #define SIGLIB_LN2                  (0.693147180559945309417232121458177) // ln(2)

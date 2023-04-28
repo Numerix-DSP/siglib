@@ -30,7 +30,7 @@ Please contact Sigma Numerix Ltd. for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+Copyright (c) 2023 Alpha Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Macro definitions header file for SigLib DSP library
 
@@ -211,10 +211,12 @@ Update history :
 #define SUF_ComplexFMArrayAllocate(a)           ((SLData_t *)SUF_MemoryAllocate(((5 * ((size_t)a)) >> 2) * sizeof (SLData_t)))  // QAM carrier array
 #define SUF_QamCarrierArrayAllocate(a)          ((SLData_t *)SUF_MemoryAllocate(((5 * ((size_t)a)) >> 2) * sizeof (SLData_t)))  // QAM carrier array
 #define SUF_QPSKCarrierArrayAllocate(a)         ((SLData_t *)SUF_MemoryAllocate(((5 * ((size_t)a)) >> 2) * sizeof (SLData_t)))  // QPSK carrier array
+#define SUF_OPSKCarrierArrayAllocate(a)         ((SLData_t *)SUF_MemoryAllocate(((5 * ((size_t)a)) >> 2) * sizeof (SLData_t)))  // QPSK carrier array
 #define SUF_OrderAnalysisArrayAllocate(a)       ((SLData_t *)SUF_MemoryAllocate((2 * ((size_t)a)) * sizeof (SLData_t))) // IIR filter state array
 #define SUF_ComplexRectArrayAllocate(a)         ((SLComplexRect_s *)SUF_MemoryAllocate(((size_t)a) * sizeof (SLComplexRect_s))) // Rectangular complex variable array
 #define SUF_ComplexPolarArrayAllocate(a)        ((SLComplexPolar_s *)SUF_MemoryAllocate(((size_t)a) * sizeof (SLComplexPolar_s))) // Polar complex variable array
 #define SUF_MicrophoneArrayAllocate(a)          ((SLMicrophone_s *)SUF_MemoryAllocate(((size_t)a) * sizeof (SLMicrophone_s))) // Microphone array
+#define SUF_DifferentialEncoderArrayAllocate(a) ((SLArrayIndex_t *)SUF_MemoryAllocate(((size_t)((1<<a)*(1<<a))) * sizeof (SLFixData_t)))  // Differential encoder / decoder look-up-table
 
 #define SUF_VectorArrayAllocate16(a)            ((SLInt16_t *)SUF_MemoryAllocate(((size_t)a) * sizeof (SLInt16_t))) // Vector array
 #define SUF_FftCoefficientAllocate16(a)         ((SLInt16_t *)SUF_MemoryAllocate(((3 * ((size_t)a)) >> 2) * sizeof (SLInt16_t)))  // FFT twiddle factor coefficient array
@@ -229,10 +231,12 @@ Update history :
 #define SUF_QuickSinCosArrayAllocate16(a)       ((SLInt16_t *)SUF_MemoryAllocate(((5 * ((size_t)a)) >> 2) * sizeof (SLInt16_t)))  // QAM carrier array
 #define SUF_QamCarrierArrayAllocate16(a)        ((SLInt16_t *)SUF_MemoryAllocate(((5 * ((size_t)a)) >> 2) * sizeof (SLInt16_t)))  // QAM carrier array
 #define SUF_QPSKCarrierArrayAllocate16(a)       ((SLInt16_t *)SUF_MemoryAllocate(((5 * ((size_t)a)) >> 2) * sizeof (SLInt16_t)))  // QPSK carrier array
+#define SUF_OPSKCarrierArrayAllocate16(a)       ((SLInt16_t *)SUF_MemoryAllocate(((5 * ((size_t)a)) >> 2) * sizeof (SLInt16_t)))  // QPSK carrier array
 #define SUF_OrderAnalysisArrayAllocate16(a)     ((SLInt16_t *)SUF_MemoryAllocate((2 * ((size_t)a)) * sizeof (SLInt16_t))) // IIR filter state array
 #define SUF_ComplexRectArrayAllocate16(a)       ((SLComplexRect16_s *)SUF_MemoryAllocate(((size_t)a) * sizeof (SLComplexRect16_s))) // Rectangular complex variable array
 #define SUF_ComplexPolarArrayAllocate16(a)      ((SLComplexPolar16_s *)SUF_MemoryAllocate(((size_t)a) * sizeof (SLComplexPolar16_s))) // Polar complex variable array
 #define SUF_MicrophoneArrayAllocate16(a)        ((SLMicrophone16_s *)SUF_MemoryAllocate(((size_t)a) * sizeof (SLMicrophone16_s))) // Microphone array
+#define SUF_DifferentialEncoderArrayAllocate16(a) ((SLArrayIndex_t *)SUF_MemoryAllocate(((size_t)((1<<a)*(1<<a))) * sizeof (SLInt16_t)))  // Differential encoder / decoder look-up-table
 
 #define SUF_VectorArrayAllocate32(a)            ((SLInt32_t *)SUF_MemoryAllocate(((size_t)a) * sizeof (SLInt32_t))) // Vector array
 #define SUF_FftCoefficientAllocate32(a)         ((SLInt32_t *)SUF_MemoryAllocate(((3 * ((size_t)a)) >> 2) * sizeof (SLInt32_t)))  // FFT twiddle factor coefficient array
@@ -247,10 +251,12 @@ Update history :
 #define SUF_QuickSinCosArrayAllocate32(a)       ((SLInt32_t *)SUF_MemoryAllocate(((5 * ((size_t)a)) >> 2) * sizeof (SLInt32_t)))  // QAM carrier array
 #define SUF_QamCarrierArrayAllocate32(a)        ((SLInt32_t *)SUF_MemoryAllocate(((5 * ((size_t)a)) >> 2) * sizeof (SLInt32_t)))  // QAM carrier array
 #define SUF_QPSKCarrierArrayAllocate32(a)       ((SLInt32_t *)SUF_MemoryAllocate(((5 * ((size_t)a)) >> 2) * sizeof (SLInt32_t)))  // QPSK carrier array
+#define SUF_OPSKCarrierArrayAllocate32(a)       ((SLInt32_t *)SUF_MemoryAllocate(((5 * ((size_t)a)) >> 2) * sizeof (SLInt32_t)))  // QPSK carrier array
 #define SUF_OrderAnalysisArrayAllocate32(a)     ((SLInt32_t *)SUF_MemoryAllocate((2 * ((size_t)a)) * sizeof (SLInt32_t))) // IIR filter state array
 #define SUF_ComplexRectArrayAllocate32(a)       ((SLComplexRect32_s *)SUF_MemoryAllocate(((size_t)a) * sizeof (SLComplexRect32_s))) // Rectangular complex variable array
 #define SUF_ComplexPolarArrayAllocate32(a)      ((SLComplexPolar32_s *)SUF_MemoryAllocate(((size_t)a) * sizeof (SLComplexPolar32_s))) // Polar complex variable array
 #define SUF_MicrophoneArrayAllocate32(a)        ((SLMicrophone32_s *)SUF_MemoryAllocate(((size_t)a) * sizeof (SLMicrophone32_s))) // Microphone array
+#define SUF_DifferentialEncoderArrayAllocate32(a) ((SLArrayIndex_t *)SUF_MemoryAllocate(((size_t)((1<<a)*(1<<a))) * sizeof (SLInt32_t)))  // Differential encoder / decoder look-up-table
 
 #define SUF_IndexArrayAllocate(a)               ((SLArrayIndex_t *)SUF_MemoryAllocate(((size_t)a) * sizeof (SLArrayIndex_t))) // Index array
 #define SUF_FixDataArrayAllocate(a)             ((SLArrayIndex_t *)SUF_MemoryAllocate(((size_t)a) * sizeof (SLFixData_t)))  // Fixed point data array

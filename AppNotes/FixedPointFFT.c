@@ -3,13 +3,13 @@
 File Name  : FixedPointFFT.C            | Author  : JOHN EDWARDS
 ----------------------------------------+----------------------------------
 Compiler :   Various                    | Start Date    : 01/11/05
-Copyright (c) 2022 Numerix Ltd.         | Latest Update : 05/11/05
+Copyright (c) 2023 Alpha Numerix        | Latest Update : 05/11/05
 ---------------------------------------------------------------------------
 Description  : SigLib fixed point FFT test program.
 
 DELETION OF ANY INFORMATION IN THIS HEADER IS IN VIOLATION OF YOUR LICENSE.
 
-Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 Notes :
 This program includes two fixed point implementations of the SigLib FFT
@@ -48,7 +48,7 @@ magnitude 4096 then the result will have two peaks of magnitude :
 
 #define SHORT_FFT           1                                       // Set to 1 for short FFT
 #define ENABLE_WINDOWING    1                                       // Set to 1 enable windowing
-#define DEBUG               0                                       // Set to 1 to write to debug.log
+#define DEBUG               0                                       // Set to 1 to write to the log file
 
 #define FFT_SIZE            ((SLArrayIndex_t)1024)
 #define LOG_FFT_SIZE        ((SLArrayIndex_t)10)

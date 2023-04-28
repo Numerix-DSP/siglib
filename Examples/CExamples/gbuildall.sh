@@ -49,6 +49,7 @@
 ./gb.sh dfplusi
 ./gb.sh dft
 ./gb.sh dft_fft_scaling
+./gb.sh differential_encoding
 ./gb.sh dotprod
 ./gb.sh dtmf
 ./gb.sh dtmf_gen
@@ -164,7 +165,7 @@
 ./gb.sh pwm
 ./gb.sh qam16
 ./gb.sh qpsk
-./gb.sh qpsk2
+./gb.sh qpsk_CostasQam
 ./gb.sh quantize
 ./gb.sh rcf
 ./gb.sh regress

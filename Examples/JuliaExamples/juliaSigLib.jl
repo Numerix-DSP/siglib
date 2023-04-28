@@ -1,5 +1,5 @@
 # SigLib Julia Example Program
-# Copyright (C) 2020 Sigma Numerix Ltd.
+# Copyright (C) 2020 Alpha Numerix
 
 A = [3.4, 1.8, -2.8, 6.4]
 

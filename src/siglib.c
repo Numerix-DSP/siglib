@@ -30,7 +30,7 @@ Please contact Sigma Numerix Ltd. for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+Copyright (c) 2023 Alpha Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Siglib utility files.
 
@@ -368,7 +368,7 @@ void SIGLIB_FUNC_DECL SUF_PrintIIRCoefficients (
 * Return value:
 *   void
 *
-* Description: Prints an incrementing value to debug.log
+* Description: Prints an incrementing value to log file
 *   This function is useful for counting how many
 *   instances of an event occur.
 *
@@ -465,9 +465,9 @@ SLError_t SIGLIB_FUNC_DECL SUF_ClearDebugfprintf (
 {
   FILE           *fp_LogFile;
 #if SIGLIB_FILE_OPEN_SECURE
-  SUF_Fopen (&fp_LogFile, "debug.log", "w");
+  SUF_Fopen (&fp_LogFile, SIGLIB_LOG_FILE, "w");
 #else
-  fp_LogFile = SUF_Fopen ("debug.log", "w");
+  fp_LogFile = SUF_Fopen (SIGLIB_LOG_FILE, "w");
 #endif
   if (NULL == fp_LogFile) {
     return (SIGLIB_FILE_ERROR);
@@ -501,9 +501,9 @@ SLError_t SIGLIB_FUNC_DECL SUF_Debugfprintf (
 
   FILE           *fp_LogFile;
 #if SIGLIB_FILE_OPEN_SECURE
-  SUF_Fopen (&fp_LogFile, "debug.log", "a");
+  SUF_Fopen (&fp_LogFile, SIGLIB_LOG_FILE, "a");
 #else
-  fp_LogFile = SUF_Fopen ("debug.log", "a");
+  fp_LogFile = SUF_Fopen (SIGLIB_LOG_FILE, "a");
 #endif
   if (NULL == fp_LogFile) {
     return (SIGLIB_FILE_ERROR);
@@ -540,9 +540,9 @@ SLError_t SIGLIB_FUNC_DECL SUF_Debugvfprintf (
 {
   FILE           *fp_LogFile;
 #if SIGLIB_FILE_OPEN_SECURE
-  SUF_Fopen (&fp_LogFile, "debug.log", "a");
+  SUF_Fopen (&fp_LogFile, SIGLIB_LOG_FILE, "a");
 #else
-  fp_LogFile = SUF_Fopen ("debug.log", "a");
+  fp_LogFile = SUF_Fopen (SIGLIB_LOG_FILE, "a");
 #endif
   if (NULL == fp_LogFile) {
     return (SIGLIB_FILE_ERROR);
@@ -580,17 +580,17 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintArray (
 
   FILE           *fp_LogFile;
 #if SIGLIB_FILE_OPEN_SECURE
-  SUF_Fopen (&fp_LogFile, "debug.log", "a");
+  SUF_Fopen (&fp_LogFile, SIGLIB_LOG_FILE, "a");
 #else
-  fp_LogFile = SUF_Fopen ("debug.log", "a");
+  fp_LogFile = SUF_Fopen (SIGLIB_LOG_FILE, "a");
 #endif
   if (NULL == fp_LogFile) {
     return (SIGLIB_FILE_ERROR);
   }
 
   for (i = 0; i < ArrayLength; i++) {
-//      fprintf (fp_LogFile, "[%ld] = %le\n", (long)i, (double)*pSrc++);
-    fprintf (fp_LogFile, "[%ld] = %1.6lf\n", (long) i, (double) *pSrc++);
+//      SUF_Fprintf (fp_LogFile, "[%ld] = %le\n", (long)i, (double)*pSrc++);
+    SUF_Fprintf (fp_LogFile, "[%ld] = %1.6lf\n", (long) i, (double) *pSrc++);
   }
   SUF_Fprintf (fp_LogFile, "\n");
   SUF_Fclose (fp_LogFile);
@@ -623,16 +623,16 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintFixedPointArray (
 
   FILE           *fp_LogFile;
 #if SIGLIB_FILE_OPEN_SECURE
-  SUF_Fopen (&fp_LogFile, "debug.log", "a");
+  SUF_Fopen (&fp_LogFile, SIGLIB_LOG_FILE, "a");
 #else
-  fp_LogFile = SUF_Fopen ("debug.log", "a");
+  fp_LogFile = SUF_Fopen (SIGLIB_LOG_FILE, "a");
 #endif
   if (NULL == fp_LogFile) {
     return (SIGLIB_FILE_ERROR);
   }
 
   for (i = 0; i < ArrayLength; i++) {
-    fprintf (fp_LogFile, "[%ld] = %ld\n", (long) i, (long) *pSrc++);
+    SUF_Fprintf (fp_LogFile, "[%ld] = %ld\n", (long) i, (long) *pSrc++);
   }
   SUF_Fprintf (fp_LogFile, "\n");
   SUF_Fclose (fp_LogFile);
@@ -667,9 +667,9 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexArray (
 
   FILE           *fp_LogFile;
 #if SIGLIB_FILE_OPEN_SECURE
-  SUF_Fopen (&fp_LogFile, "debug.log", "a");
+  SUF_Fopen (&fp_LogFile, SIGLIB_LOG_FILE, "a");
 #else
-  fp_LogFile = SUF_Fopen ("debug.log", "a");
+  fp_LogFile = SUF_Fopen (SIGLIB_LOG_FILE, "a");
 #endif
   if (NULL == fp_LogFile) {
     return (SIGLIB_FILE_ERROR);
@@ -679,18 +679,18 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexArray (
     if (*pSrcImag >= SIGLIB_ZERO) {
       SUF_Fprintf (fp_LogFile, "[%ld] = ", (long) i);
       if (*pSrcReal >= SIGLIB_ZERO) {
-        fprintf (fp_LogFile, " ");
+        SUF_Fprintf (fp_LogFile, " ");
       }
 //          SUF_Fprintf (fp_LogFile, "%le + j%le\n", (double)*pSrcReal++, (double)*pSrcImag++);
-      SUF_Fprintf (fp_LogFile, "%1.6lf + j %1.6lf\n", (double) *pSrcReal++, (double) *pSrcImag++);
+      SUF_Fprintf (fp_LogFile, "%1.6lf + j%1.6lf\n", (double) *pSrcReal++, (double) *pSrcImag++);
     }
     else {
       SUF_Fprintf (fp_LogFile, "[%ld] = ", (long) i);
       if (*pSrcReal >= SIGLIB_ZERO) {
-        fprintf (fp_LogFile, " ");
+        SUF_Fprintf (fp_LogFile, " ");
       }
 //          SUF_Fprintf (fp_LogFile, "%le - j%le\n", (double)*pSrcReal++, (double)-*pSrcImag++);
-      SUF_Fprintf (fp_LogFile, "%1.6lf - j %1.6lf\n", (double) *pSrcReal++, (double) -*pSrcImag++);
+      SUF_Fprintf (fp_LogFile, "%1.6lf - j%1.6lf\n", (double) *pSrcReal++, (double) -*pSrcImag++);
     }
   }
   SUF_Fprintf (fp_LogFile, "\n");
@@ -699,6 +699,155 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexArray (
   return (SIGLIB_NO_ERROR);
 
 }                                                                   // End of SUF_DebugPrintComplexArray()
+
+
+/**/
+
+/********************************************************
+* Function: SUF_DebugPrintComplex
+*
+* Parameters:
+*   const SLData_t real,       - Real data value
+*   const SLData_t imag,       - Imag data value
+*
+* Return value:
+*   Error code
+*
+* Description: Prints a complex rectangular value to the debug file.
+*
+********************************************************/
+
+SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplex (
+  const SLData_t real,
+  const SLData_t imag)
+{
+  FILE           *fp_LogFile;
+#if SIGLIB_FILE_OPEN_SECURE
+  SUF_Fopen (&fp_LogFile, SIGLIB_LOG_FILE, "a");
+#else
+  fp_LogFile = SUF_Fopen (SIGLIB_LOG_FILE, "a");
+#endif
+  if (NULL == fp_LogFile) {
+    return (SIGLIB_FILE_ERROR);
+  }
+
+  if (imag >= SIGLIB_ZERO) {
+    if (real >= SIGLIB_ZERO) {
+      SUF_Fprintf (fp_LogFile, " ");
+    }
+//          SUF_Fprintf (fp_LogFile, "%le + j%le\n", (double)real, (double)imag);
+    SUF_Fprintf (fp_LogFile, "%1.6lf + j%1.6lf\n", (double) real, (double) imag);
+  }
+  else {
+    if (real >= SIGLIB_ZERO) {
+      SUF_Fprintf (fp_LogFile, " ");
+    }
+//          SUF_Fprintf (fp_LogFile, "%le - j%le\n", (double)real, (double)-imag);
+    SUF_Fprintf (fp_LogFile, "%1.6lf - j%1.6lf\n", (double) real, (double) -imag);
+  }
+  SUF_Fclose (fp_LogFile);
+
+  return (SIGLIB_NO_ERROR);
+
+}                                                                   // End of SUF_DebugPrintComplex()
+
+
+/**/
+
+/********************************************************
+* Function: SUF_DebugPrintComplexRect
+*
+* Parameters:
+*   const SLComplexRect_s     Rectangular value
+*
+* Return value:
+*   Error code
+*
+* Description: Prints a complex rectangular value to the debug file.
+*
+********************************************************/
+
+SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexRect (
+  const SLComplexRect_s Rect)
+{
+  FILE           *fp_LogFile;
+#if SIGLIB_FILE_OPEN_SECURE
+  SUF_Fopen (&fp_LogFile, SIGLIB_LOG_FILE, "a");
+#else
+  fp_LogFile = SUF_Fopen (SIGLIB_LOG_FILE, "a");
+#endif
+  if (NULL == fp_LogFile) {
+    return (SIGLIB_FILE_ERROR);
+  }
+
+  if (Rect.imag >= SIGLIB_ZERO) {
+    if (Rect.real >= SIGLIB_ZERO) {
+      SUF_Fprintf (fp_LogFile, " ");
+    }
+//          SUF_Fprintf (fp_LogFile, "%le + j%le\n", (double)Rect.real, (double)Rect.imag);
+    SUF_Fprintf (fp_LogFile, "%1.6lf + j%1.6lf\n", (double) Rect.real, (double) Rect.imag);
+  }
+  else {
+    if (Rect.real >= SIGLIB_ZERO) {
+      SUF_Fprintf (fp_LogFile, " ");
+    }
+//          SUF_Fprintf (fp_LogFile, "%le - j%le\n", (double)Rect.real, (double)-Rect.imag);
+    SUF_Fprintf (fp_LogFile, "%1.6lf - j%1.6lf\n", (double) Rect.real, (double) -Rect.imag);
+  }
+  SUF_Fclose (fp_LogFile);
+
+  return (SIGLIB_NO_ERROR);
+
+}                                                                   // End of SUF_DebugPrintComplexRect()
+
+
+/**/
+
+/********************************************************
+* Function: SUF_DebugPrintComplexPolar
+*
+* Parameters:
+*   const SLComplexPolar_s      Polar value
+*
+* Return value:
+*   Error code
+*
+* Description: Prints a complex polar value to the debug file.
+*
+********************************************************/
+
+SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexPolar (
+  const SLComplexPolar_s Polar)
+{
+  FILE           *fp_LogFile;
+#if SIGLIB_FILE_OPEN_SECURE
+  SUF_Fopen (&fp_LogFile, SIGLIB_LOG_FILE, "a");
+#else
+  fp_LogFile = SUF_Fopen (SIGLIB_LOG_FILE, "a");
+#endif
+  if (NULL == fp_LogFile) {
+    return (SIGLIB_FILE_ERROR);
+  }
+
+  if (Polar.angle >= SIGLIB_ZERO) {
+    if (Polar.magn >= SIGLIB_ZERO) {
+      SUF_Fprintf (fp_LogFile, " ");
+    }
+//          SUF_Fprintf (fp_LogFile, "%le + j%le\n", (double)Polar.magn, (double)Polar.angle);
+    SUF_Fprintf (fp_LogFile, "%1.6lf + j%1.6lf\n", (double) Polar.magn, (double) Polar.angle);
+  }
+  else {
+    if (Polar.magn >= SIGLIB_ZERO) {
+      SUF_Fprintf (fp_LogFile, " ");
+    }
+//          SUF_Fprintf (fp_LogFile, "%le - j%le\n", (double)Polar.magn, (double)-Polar.angle);
+    SUF_Fprintf (fp_LogFile, "%1.6lf - j%1.6lf\n", (double) Polar.magn, (double) -Polar.angle);
+  }
+  SUF_Fclose (fp_LogFile);
+
+  return (SIGLIB_NO_ERROR);
+
+}                                                                   // End of SUF_DebugPrintComplexPolar()
 
 
 /**/
@@ -726,9 +875,9 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintMatrix (
 {
   FILE           *fp_LogFile;
 #if SIGLIB_FILE_OPEN_SECURE
-  SUF_Fopen (&fp_LogFile, "debug.log", "a");
+  SUF_Fopen (&fp_LogFile, SIGLIB_LOG_FILE, "a");
 #else
-  fp_LogFile = SUF_Fopen ("debug.log", "a");
+  fp_LogFile = SUF_Fopen (SIGLIB_LOG_FILE, "a");
 #endif
   if (NULL == fp_LogFile) {
     return (SIGLIB_FILE_ERROR);
@@ -839,9 +988,9 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintPolar (
 
   FILE           *fp_LogFile;
 #if SIGLIB_FILE_OPEN_SECURE
-  SUF_Fopen (&fp_LogFile, "debug.log", "a");
+  SUF_Fopen (&fp_LogFile, SIGLIB_LOG_FILE, "a");
 #else
-  fp_LogFile = SUF_Fopen ("debug.log", "a");
+  fp_LogFile = SUF_Fopen (SIGLIB_LOG_FILE, "a");
 #endif
   if (NULL == fp_LogFile) {
     return (SIGLIB_FILE_ERROR);
@@ -878,9 +1027,9 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintRectangular (
 
   FILE           *fp_LogFile;
 #if SIGLIB_FILE_OPEN_SECURE
-  SUF_Fopen (&fp_LogFile, "debug.log", "a");
+  SUF_Fopen (&fp_LogFile, SIGLIB_LOG_FILE, "a");
 #else
-  fp_LogFile = SUF_Fopen ("debug.log", "a");
+  fp_LogFile = SUF_Fopen (SIGLIB_LOG_FILE, "a");
 #endif
   if (NULL == fp_LogFile) {
     return (SIGLIB_FILE_ERROR);
@@ -918,9 +1067,9 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintIIRCoefficients (
 
   FILE           *fp_LogFile;
 #if SIGLIB_FILE_OPEN_SECURE
-  SUF_Fopen (&fp_LogFile, "debug.log", "a");
+  SUF_Fopen (&fp_LogFile, SIGLIB_LOG_FILE, "a");
 #else
-  fp_LogFile = SUF_Fopen ("debug.log", "a");
+  fp_LogFile = SUF_Fopen (SIGLIB_LOG_FILE, "a");
 #endif
   if (NULL == fp_LogFile) {
     return (SIGLIB_FILE_ERROR);
@@ -949,7 +1098,7 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintIIRCoefficients (
 * Return value:
 *   Error code
 *
-* Description: Prints an incrementing value to debug.log
+* Description: Prints an incrementing value to log file
 *   This function is useful for counting how many
 *   instances of an event occur.
 *
@@ -962,9 +1111,9 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintCount (
 
   FILE           *fp_LogFile;
 #if SIGLIB_FILE_OPEN_SECURE
-  SUF_Fopen (&fp_LogFile, "debug.log", "a");
+  SUF_Fopen (&fp_LogFile, SIGLIB_LOG_FILE, "a");
 #else
-  fp_LogFile = SUF_Fopen ("debug.log", "a");
+  fp_LogFile = SUF_Fopen (SIGLIB_LOG_FILE, "a");
 #endif
   if (NULL == fp_LogFile) {
     return (SIGLIB_FILE_ERROR);
@@ -988,7 +1137,7 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintCount (
 *   Error code
 *
 * Description: If the source is larger than the
-*   threshold then print the string to debug.log. This
+*   threshold then print the string to the log file. This
 *   function is useful for detecting data anomolies.
 *
 ********************************************************/
@@ -1001,9 +1150,9 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintHigher (
   if (src > threshold) {
     FILE           *fp_LogFile;
 #if SIGLIB_FILE_OPEN_SECURE
-    SUF_Fopen (&fp_LogFile, "debug.log", "a");
+    SUF_Fopen (&fp_LogFile, SIGLIB_LOG_FILE, "a");
 #else
-    fp_LogFile = SUF_Fopen ("debug.log", "a");
+    fp_LogFile = SUF_Fopen (SIGLIB_LOG_FILE, "a");
 #endif
     if (NULL == fp_LogFile) {
       return (SIGLIB_FILE_ERROR);
@@ -1030,7 +1179,7 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintHigher (
 *   Error code
 *
 * Description: If the source is less than the
-*   threshold then print the string to debug.log. This
+*   threshold then print the string to the log file. This
 *   function is useful for detecting data anomolies.
 *
 ********************************************************/
@@ -1044,9 +1193,9 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintLower (
 
     FILE           *fp_LogFile;
 #if SIGLIB_FILE_OPEN_SECURE
-    SUF_Fopen (&fp_LogFile, "debug.log", "a");
+    SUF_Fopen (&fp_LogFile, SIGLIB_LOG_FILE, "a");
 #else
-    fp_LogFile = SUF_Fopen ("debug.log", "a");
+    fp_LogFile = SUF_Fopen (SIGLIB_LOG_FILE, "a");
 #endif
     if (NULL == fp_LogFile) {
       return (SIGLIB_FILE_ERROR);

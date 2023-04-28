@@ -1,5 +1,5 @@
 // Takes functionList.txt and creates siglib_ti_memory_sections.h
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 
@@ -50,7 +50,7 @@ Please contact Sigma Numerix Ltd. for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 \r\n\
-Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.\r\n\
+Copyright (c) 2023 Alpha Numerix All rights reserved.\r\n\
 ---------------------------------------------------------------------------\r\n\
 Description : SigLib function memory section definition file for TI compilers\r\n\
     This file includes a memory section definition line for each function in\r\n\
@@ -88,7 +88,7 @@ int main (
   int             i;
 
   printf
-    ("\r\nTIMemSectionsGen.exe - siglib_ti_memory_sections.h file generation utility (C)  V2.00. Copyright (C) Sigma Numerix Ltd. 2017. All rights reserved.\r\n");
+    ("\r\nTIMemSectionsGen.exe - siglib_ti_memory_sections.h file generation utility (C)  V2.00. Copyright (C) Alpha Numerix 2017. All rights reserved.\r\n");
 
   if ((IFPtr = fopen ("functionList.txt", "rb")) == NULL) {
     printf ("Can not open input data file %s\r\n", "siglib.dg");

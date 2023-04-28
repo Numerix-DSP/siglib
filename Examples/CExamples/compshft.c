@@ -2,7 +2,7 @@
 //  Simulated sample rate = 10 KHz
 //  Input signal frequency = 100 Hz
 //  Modulation frequency = 1 KHz
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

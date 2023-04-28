@@ -271,7 +271,7 @@ static void longArray_setitem (
 
         /*
            Make sure SIGLIB_SWIG_SWITCH is defined so that the function declaration is a "C" style,
-           not a SWIG style. This is important for handling function pointers 
+           not a SWIG style. This is important for handling function pointers
          */
 #define	SIGLIB_SWIG_SWITCH	1
 
@@ -384,7 +384,8 @@ extern          "C" {
                    *(
   double **)     &jresult = result;
                     return jresult;
-  } SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_delete_1doubleArray (
+  }
+  SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_delete_1doubleArray (
   JNIEnv * jenv,
   jclass jcls,
   jlong jarg1) {
@@ -14243,7 +14244,7 @@ extern          "C" {
     (void) jcls;
     arg1 = (SLFixData_t) jarg1;
     arg2 = *(SLFixData_t **) & jarg2;
-    result = (SLFixData_t) SDA_QpskDifferentialEncode (arg1, arg2);
+    result = (SLFixData_t) SDS_QpskDifferentialEncode (arg1, arg2);
     jresult = (jint) result;
     return jresult;
   }
@@ -14263,7 +14264,7 @@ extern          "C" {
     (void) jcls;
     arg1 = (SLFixData_t) jarg1;
     arg2 = *(SLFixData_t **) & jarg2;
-    result = (SLFixData_t) SDA_QpskDifferentialDecode (arg1, arg2);
+    result = (SLFixData_t) SDS_QpskDifferentialDecode (arg1, arg2);
     jresult = (jint) result;
     return jresult;
   }

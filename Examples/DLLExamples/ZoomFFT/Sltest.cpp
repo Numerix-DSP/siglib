@@ -1,5 +1,5 @@
 // SLTest.CPP SigLib DLL Test program
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 #include <afxwin.h>
@@ -359,15 +359,22 @@ afx_msg void CSLTestWindow::OnZoomFFTSignal (
 
 
 /*
-   Perform Zoom FFT 
+   Perform Zoom FFT
  */
   SDA_ZoomFftSimple (SignalBufferPtr, FreqRBufferPtr, FreqIBufferPtr, CombFilter1Ptr, &CombFilter1Sum, CombFilter2Ptr, &CombFilter2Sum, &CombFilterPhase, SineTablePtr, &SineTablePhase, CARRIER_FREQUENCY, DECIMATION_FILTER_LENGTH, SINE_BUF_SIZE, DECIMATE_RATIO, FFTCoeffPtr, SIGLIB_NULL_ARRAY_INDEX_PTR, SOURCE_BUF_SIZE, FFT_LENGTH, ((SLArrayIndex_t) (SDS_Log2 (FFT_LENGTH) + SIGLIB_MIN_THRESHOLD)) // Log2 FFT length, and avoid quantization issues);
                      SDA_Magnitude (FreqRBufferPtr, FreqIBufferPtr, SignalBufferPtr, FFT_LENGTH); /* Calc real power fm complex */
                      SDA_FftShift (SignalBufferPtr, SignalBufferPtr, FFT_LENGTH); /* Calc real power fm complex */
                      ::LocalUnlock (HSignalBuffer);                 // Unlock the sample arrays
-                     ::LocalUnlock (HFreqRBuffer);::LocalUnlock (HFreqIBuffer);::LocalUnlock (HCombFilter1Buffer);::LocalUnlock (HCombFilter2Buffer);::LocalUnlock (HSineTableBuffer);::LocalUnlock (HFFTCoeffBuffer); WinGraph.SendMessage (WM_PAINT); // Only update graph, not surround
+                     ::LocalUnlock (HFreqRBuffer);
+                     ::LocalUnlock (HFreqIBuffer);
+                     ::LocalUnlock (HCombFilter1Buffer);
+                     ::LocalUnlock (HCombFilter2Buffer);
+                     ::LocalUnlock (HSineTableBuffer);
+                     ::LocalUnlock (HFFTCoeffBuffer);
+                     WinGraph.SendMessage (WM_PAINT);               // Only update graph, not surround
                      sprintf (StatusMessage, "Buffer Size : %d samples, Max : %lf", Signal.GetSize (), Signal.GetMax ());
-                     WinStatus.SetMessage (StatusMessage);}
+                     WinStatus.SetMessage (StatusMessage);
+                     }
 
 
 
@@ -377,14 +384,16 @@ afx_msg void CSLTestWindow::OnZoomFFTSignal (
                      afx_msg void CSLTestWindow::OnGetSigLibDLLVersion () {
                      char StatusMessage[40];
                      sprintf (StatusMessage, "SigLib DLL Version : %lf", SUF_SiglibVersion ());
-                     MessageBox (StatusMessage, "SigLib DLL Version", MB_OK | MB_ICONEXCLAMATION);}
+                     MessageBox (StatusMessage, "SigLib DLL Version", MB_OK | MB_ICONEXCLAMATION);
+                     }
 
 
 
 
                      HCURSOR CSLTestWindow::GetHCursor () {
 
-                     return (HGCursor);}
+                     return (HGCursor);
+                     }
 
 
 

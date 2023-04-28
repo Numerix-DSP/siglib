@@ -1,5 +1,5 @@
 // SigLib Pulse Removal Example
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // This example generates a simulated pulse on a noisy signal
 // It then uses an FIR filter as a moving correlator to detect the pulse location

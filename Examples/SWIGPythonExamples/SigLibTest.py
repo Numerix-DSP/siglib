@@ -1,5 +1,5 @@
 # SigLib Python example program
-# Copyright (c) 2022 Sigma Numerix Ltd.
+# Copyright (c) 2023 Alpha Numerix
 
 import siglib_wrap
 

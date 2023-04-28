@@ -9,7 +9,7 @@ Options   :                             | Latest Update : 02/01/99
 
 Description :   Convert FIR filter coefficients to poly-phase
 
-Copyright (C) 1999 Sigma Numerix Ltd. All rights reserved.
+Copyright (C) 1999 Alpha Numerix All rights reserved.
 ****************************************************************************/
 
 
@@ -41,7 +41,7 @@ int main (
 {
 
   printf ("Polyphase filter generator.\n\n");
-  printf ("Copyright (C) 1999 Sigma Numerix Ltd. All rights reserved. http:\\\\www.numerix-dsp.com\n\n");
+  printf ("Copyright (C) 1999 Alpha Numerix All rights reserved. http:\\\\www.numerix-dsp.com\n\n");
 
   if (argc != 2) {
     printf ("Syntax: genpp <Number of filter banks>\n");
@@ -101,7 +101,7 @@ int main (
     fprintf (OutFPtr, "SLData_t   filter_%d_taps[FILTER_LENGTH_%d] = {\r\n", (i + 1), (i + 1));
 
 /*
-   For all entries except the last insert comma at end 
+   For all entries except the last insert comma at end
  */
     for (j = 0; j < (FilterLen - 1); j++) {
       fprintf (OutFPtr, "\t%.10le,\r\n", TPtr[j]);

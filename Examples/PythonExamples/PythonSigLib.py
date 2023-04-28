@@ -1,5 +1,5 @@
 # SigLib Python Example Program
-# Copyright (c) 2022 Sigma Numerix Ltd.
+# Copyright (c) 2023 Alpha Numerix
 
 import ctypes
 import numpy as np

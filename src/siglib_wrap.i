@@ -14,7 +14,7 @@ THIS FILE MAY ONLY BE USED IN ACCORDANCE WITH THE TERMS OF THE NUMERIX LTD.
 END USER LICENSE AGREEMENT.
 DELETION OF ANY INFORMATION IN THIS HEADER IS IN VIOLATION OF YOUR LICENSE.
 
-Copyright (c) 2022 Sigma Numerix Ltd.
+Copyright (c) 2023 Alpha Numerix
 ---------------------------------------------------------------------------
 Description : SWIG header file for SigLib DSP library
 

@@ -1,3 +1,4 @@
+
 /**************************************************************************
 File Name               : siglib_ti_memory_sections.h   | Author : JOHN EDWARDS
 Siglib Library Version  : 10.00                         |
@@ -29,7 +30,7 @@ Please contact Sigma Numerix Ltd. for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+Copyright (c) 2023 Alpha Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : SigLib function memory section definition file for TI compilers
     This file includes a memory section definition line for each function in
@@ -43,8 +44,8 @@ Description : SigLib function memory section definition file for TI compilers
 #ifndef     _SIGLIB_MEMORY_SECTIONS_H
 #define     _SIGLIB_MEMORY_SECTIONS_H
 
-#ifdef _TMS320C6X           // Defined by TI compiler
-#ifndef __cplusplus         // These macros don't work in C++, you need to locate them adjacent to the function
+#ifdef _TMS320C6X                                                   // Defined by TI compiler
+#ifndef __cplusplus                                                 // These macros don't work in C++, you need to locate them adjacent to the function
 
 #pragma CODE_SECTION(SDA_LinearMicrophoneArrayBeamPattern, ".text")
 #pragma CODE_SECTION(SDA_LinearMicrophoneArrayBeamPatternLinear, ".text")
@@ -797,15 +798,18 @@ Description : SigLib function memory section definition file for TI compilers
 #pragma CODE_SECTION(SDA_Qam16Modulate, ".text")
 #pragma CODE_SECTION(SDA_QpskDemodulate, ".text")
 #pragma CODE_SECTION(SDA_QpskDemodulateDebug, ".text")
-#pragma CODE_SECTION(SDA_QpskDifferentialDecode, ".text")
-#pragma CODE_SECTION(SDA_QpskDifferentialEncode, ".text")
 #pragma CODE_SECTION(SDA_QpskModulate, ".text")
 #pragma CODE_SECTION(SDS_ChannelizationCode, ".text")
 #pragma CODE_SECTION(SDS_CostasQamDemodulate, ".text")
 #pragma CODE_SECTION(SDS_CostasQamDemodulateDebug, ".text")
+#pragma CODE_SECTION(SDS_DifferentialDecode, ".text")
+#pragma CODE_SECTION(SDS_DifferentialEncode, ".text")
+#pragma CODE_SECTION(SDS_QpskDifferentialDecode, ".text")
+#pragma CODE_SECTION(SDS_QpskDifferentialEncode, ".text")
 #pragma CODE_SECTION(SIF_BpskDemodulate, ".text")
 #pragma CODE_SECTION(SIF_BpskModulate, ".text")
 #pragma CODE_SECTION(SIF_CostasQamDemodulate, ".text")
+#pragma CODE_SECTION(SIF_DifferentialEncoder, ".text")
 #pragma CODE_SECTION(SIF_DpskDemodulate, ".text")
 #pragma CODE_SECTION(SIF_DpskModulate, ".text")
 #pragma CODE_SECTION(SIF_FskModulate, ".text")
@@ -917,7 +921,10 @@ Description : SigLib function memory section definition file for TI compilers
 #pragma CODE_SECTION(SIF_Resonator1, ".text")
 #pragma CODE_SECTION(SUF_ClearDebugfprintf, ".text")
 #pragma CODE_SECTION(SUF_DebugPrintArray, ".text")
+#pragma CODE_SECTION(SUF_DebugPrintComplex, ".text")
 #pragma CODE_SECTION(SUF_DebugPrintComplexArray, ".text")
+#pragma CODE_SECTION(SUF_DebugPrintComplexPolar, ".text")
+#pragma CODE_SECTION(SUF_DebugPrintComplexRect, ".text")
 #pragma CODE_SECTION(SUF_DebugPrintCount, ".text")
 #pragma CODE_SECTION(SUF_DebugPrintFixedPointArray, ".text")
 #pragma CODE_SECTION(SUF_DebugPrintHigher, ".text")
@@ -1069,13 +1076,12 @@ Description : SigLib function memory section definition file for TI compilers
 #pragma CODE_SECTION(SIF_TableTopWindow, ".text")
 #pragma CODE_SECTION(SIF_Window, ".text")
 
-#endif                      // End of #ifndef __cplusplus
+#endif                                                              // End of #ifndef __cplusplus
 
-#endif                      // End of #ifdef _TMS320C6X - Defined by TI compiler
+#endif                                                              // End of #ifdef _TMS320C6X - Defined by TI compiler
 
-#endif                      // End of #if _SIGLIB_MEMORY_SECTIONS_H
+#endif                                                              // End of #if _SIGLIB_MEMORY_SECTIONS_H
 
-#endif                      // End of #if SIGLIB
+#endif                                                              // End of #if SIGLIB
 
 // End of siglib_memory_sections.h
-

@@ -187,6 +187,10 @@ echo dft_fft_scaling
 pause
 dft_fft_scaling
 
+echo differential_encoding
+pause
+differential_encoding
+
 echo dotprod
 pause
 dotprod
@@ -639,9 +643,9 @@ echo qpsk
 pause
 qpsk
 
-echo qpsk2
+echo qpsk_CostasQam
 pause
-qpsk2
+qpsk_CostasQam
 
 echo quantize
 pause

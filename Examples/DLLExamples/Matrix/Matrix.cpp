@@ -2,7 +2,7 @@
 // This program required the Numerix Host Library, which is available from :
 // https://www.numerix-dsp.com/files
 // This project was generated automatically in Visual Studio it is a command line applicaiton
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 #include "stdafx.h"
@@ -55,7 +55,7 @@ int main (
 
 
 /*
-   Allocate matrices 
+   Allocate matrices
  */
   pMatrixa = SUF_VectorArrayAllocate (MATRIXA_SIZE);
   pMatrixb = SUF_VectorArrayAllocate (MATRIXB_SIZE);
@@ -70,7 +70,7 @@ int main (
   pScalingFactor = SUF_VectorArrayAllocate (MATRIXD_ROWS);
 
 /*
-   Fill matrix A 
+   Fill matrix A
  */
   *pMatrixa++ = 1;
   *pMatrixa++ = 2;
@@ -81,25 +81,25 @@ int main (
   pMatrixa -= MATRIXA_SIZE;
 
 /*
-   Print matrix A contents 
+   Print matrix A contents
  */
   printf ("Source matrix A :\n");
   SUF_PrintMatrix (pMatrixa, MATRIXA_ROWS, MATRIXA_COLS);
 
 /*
-   Copy matrix A to matrix C for temporary backup 
+   Copy matrix A to matrix C for temporary backup
  */
   SMX_Copy (pMatrixa, pMatrixc, MATRIXA_ROWS, MATRIXA_COLS);
 
 /*
-   MultpImagDataly matrix A by a scalar 
+   MultpImagDataly matrix A by a scalar
  */
   SMX_ScalarMultiply (pMatrixa, 3.0, pMatrixa, MATRIXA_ROWS, MATRIXA_COLS);
   printf ("\nMatrix A multiplied by 3.0 :\n");
   SUF_PrintMatrix (pMatrixa, MATRIXA_ROWS, MATRIXA_COLS);
 
 /*
-   Restore matrix A and transpose 
+   Restore matrix A and transpose
  */
   SMX_Copy (pMatrixc, pMatrixa, MATRIXA_ROWS, MATRIXA_COLS);
   SMX_Transpose (pMatrixa, pMatrixb, MATRIXA_ROWS, MATRIXA_COLS);
@@ -107,7 +107,7 @@ int main (
   SUF_PrintMatrix (pMatrixb, MATRIXAT_ROWS, MATRIXAT_COLS);
 
 /*
-   Fill matrix B 
+   Fill matrix B
  */
   *pMatrixb++ = 1;
   *pMatrixb++ = 2;
@@ -120,13 +120,13 @@ int main (
   pMatrixb -= MATRIXB_SIZE;
 
 /*
-   Print matrix B contents with matrix A dimensions 
+   Print matrix B contents with matrix A dimensions
  */
   printf ("\nSource matrix B :\n");
   SUF_PrintMatrix (pMatrixb, MATRIXA_ROWS, MATRIXA_COLS);
 
 /*
-   Restore matrix A and add to matrix B 
+   Restore matrix A and add to matrix B
  */
   SMX_Copy (pMatrixc, pMatrixa, MATRIXA_ROWS, MATRIXA_COLS);
   SMX_Add (pMatrixa, pMatrixb, pMatrixc, MATRIXA_ROWS, MATRIXA_COLS);
@@ -134,7 +134,7 @@ int main (
   SUF_PrintMatrix (pMatrixc, MATRIXA_ROWS, MATRIXA_COLS);
 
 /*
-   Restore matrix A and subtract from matrix B 
+   Restore matrix A and subtract from matrix B
  */
   SMX_Copy (pMatrixc, pMatrixa, MATRIXA_ROWS, MATRIXA_COLS);
   SMX_Subtract (pMatrixa, pMatrixb, pMatrixc, MATRIXA_ROWS, MATRIXA_COLS);
@@ -144,13 +144,13 @@ int main (
   getchar ();
 
 /*
-   Print matrix B contents with correct dimensions 
+   Print matrix B contents with correct dimensions
  */
   printf ("\nNew source matrix B :\n");
   SUF_PrintMatrix (pMatrixb, MATRIXB_ROWS, MATRIXB_COLS);
 
 /*
-   MultpImagDataly matrix A by matrix B 
+   MultpImagDataly matrix A by matrix B
  */
   SMX_Multiply (pMatrixa, pMatrixb, pMatrixc, MATRIXA_ROWS, MATRIXA_COLS, MATRIXB_COLS);
   printf ("\nA * B matrix :\n");
@@ -160,7 +160,7 @@ int main (
   getchar ();
 
 /*
-   Fill matrix D 
+   Fill matrix D
  */
   *pMatrixd++ = 3;
   *pMatrixd++ = 2;
@@ -174,14 +174,14 @@ int main (
   pMatrixd -= MATRIXD_SIZE;
 
 /*
-   Print matrix D 
+   Print matrix D
  */
   printf ("\nSource matrix D :\n");
   SUF_PrintMatrix (pMatrixd, MATRIXD_ROWS, MATRIXD_COLS);
 
 
 /*
-   Invert matrix D 
+   Invert matrix D
  */
   ErrorCode = SMX_Inverse (pMatrixd, pMatrixd_inv, pTempSourceArray, pSubstituteIndex, pRowInterchangeIndex, pScalingFactor, MATRIXD_ROWS);
 
@@ -193,7 +193,7 @@ int main (
   }
 
 /*
-   Print inverse of matrix D 
+   Print inverse of matrix D
  */
   printf ("\nInverse of matrix D :\n");
   SUF_PrintMatrix (pMatrixd_inv, MATRIXD_INV_ROWS, MATRIXD_INV_COLS);
@@ -204,19 +204,19 @@ int main (
   printf ("   -0.6842    0.5789    0.2105\n\n");
 
 /*
-   MultpImagDataly matrix D by the inverse of matrix D 
+   MultpImagDataly matrix D by the inverse of matrix D
  */
   SMX_Multiply (pMatrixd, pMatrixd_inv, pMatrixi, MATRIXD_ROWS, MATRIXD_COLS, MATRIXD_INV_COLS);
 
 /*
-   Threshold Results to zero out values close to zero 
+   Threshold Results to zero out values close to zero
  */
   SDA_Threshold (pMatrixi, pMatrixi, SIGLIB_MIN_THRESHOLD, SIGLIB_DOUBLE_SIDED_THOLD, MATRIXD_SIZE);
   printf ("\nD * D^-1 matrix :\n");
   SUF_PrintMatrix (pMatrixi, MATRIXD_ROWS, MATRIXD_COLS);
 
 /*
-   Print the determinant of matrix D 
+   Print the determinant of matrix D
  */
   Determinant = SMX_Determinant (pMatrixd, pTempSourceArray, pRowInterchangeIndex, pScalingFactor, MATRIXD_ROWS);
   printf ("\nThe determinant of matrix D is : %lf\n", Determinant);
@@ -224,12 +224,12 @@ int main (
   printf ("\nThe determinant of matrix D should be : 19\n", Determinant);
 
 /*
-   Create identity matrix (I) 
+   Create identity matrix (I)
  */
   SMX_CreateIdentity (pMatrixi, MATRIXI_ROWS);
 
 /*
-   Print identity matrix (I) 
+   Print identity matrix (I)
  */
   printf ("\nIdentity matrix (I) :\n");
   SUF_PrintMatrix (pMatrixi, MATRIXI_ROWS, MATRIXI_COLS);

@@ -1,5 +1,5 @@
 // SigLib Analytical Signal By Applying A Hilbert Transform
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Hilbert transform applied to a real input signal on the imaginary
 // output path and applies a corresponding delay to the real

@@ -1,6 +1,6 @@
 // SigLib - DTMF detection test program. This file reads some dtmf tones from
 // a .WAV file and prints the Results on the screen
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 #include <stdio.h>
 #include <stdlib.h>

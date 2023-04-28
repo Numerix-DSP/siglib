@@ -4,7 +4,7 @@
 //      Baud rate - 600 Baud
 //      Sample rate - 9600 Hz
 //      Carrier freq. - 2400 Hz
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Sigma Numerix Ltd. All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -14,14 +14,15 @@
 
 // Define constants
 #define RRCF_ENABLE                     1                           // Root raised cosine filter on Tx and Rx
+#define DIFFERENTIAL_ENCODING_ENABLE    1                           // Differential encoding / decoding
 
-                    // Select one of the following three
+                    // Select one of the following display modes
 #define DISPLAY_TIME_DOMAIN             0                           // Time domain output
 #define DISPLAY_FREQ_DOMAIN             0                           // Frequency domain output
 #define DISPLAY_EYE_DIAGRAM             0                           // Eye diagram output
+#define DISPLAY_CONSTELLATION           1                           // Display the constellation diagram
 
-                    // The following can be displayed in conjunction with the above
-#define DISPLAY_CONSTELLATION           0                           // Display the constellation diagram
+
 #define NUMBER_OF_LOOPS                 3                           // Number of loops
 
             // Basic application definitions
@@ -34,21 +35,19 @@
 
 #define PREAMBLE_LENGTH                 32                          // Preamble length
 
-#define SYMBOLS_PER_BYTE                2                           // Number of symbols per byte
-
 #if RRCF_ENABLE
 #define RX_STRING_NIBBLE_COUNT_START    1                           // Starting phase of Rx string nibble count
                                                             // allows for group delay of RRC filter
 #define RRCF_PERIOD                     (SAMPLE_RATE / BAUD_RATE)   // RRCF Period
 #define RRCF_ROLL_OFF                   0.75                        // Root raised cosine filter roll off factor
 #define RRCF_LENGTH                     81                          // Root raised cosine filter length
-#define TX_RX_PIPELINE_LENGTH           3                           // Length of processing delay
+#define RX_STARTUP_DELAY                3                           // Rxr startup delay (# symbols) to allow correct synchronization with transmitter
 #else
 #define RX_STRING_NIBBLE_COUNT_START    0                           // Starting phase of Rx string nibble count
 #define RRCF_PERIOD                     SIGLIB_ZERO                 // Dummy value - RRCF Period
 #define RRCF_ROLL_OFF                   SIGLIB_ZERO                 // Dummy value - Root raised cosine filter roll off factor
 #define RRCF_LENGTH                     1                           // Dummy value - Root raised cosine filter length
-#define TX_RX_PIPELINE_LENGTH           0                           // Length of processing delay
+#define RX_STARTUP_DELAY                0                           // Rxr startup delay (# symbols) to allow correct synchronization with transmitter
 #endif
 
 
@@ -64,11 +63,9 @@
 #define CARRIER_SINE_TABLE_SIZE         ((SLFixData_t)(SAMPLE_RATE / CARRIER_TABLE_FREQ)) // Number of samples in each of cos and sine table
 #define CARRIER_TABLE_INCREMENT         ((SLFixData_t)(CARRIER_FREQ / CARRIER_TABLE_FREQ))  // Carrier frequency
 
-#define EYE_DIAGRAM_SIZE                (2 * SYMBOL_LENGTH)         // Size of eye diagram graph
-                                                            // Two complete symbol periods
+#define EYE_DIAGRAM_SIZE                (2 * SYMBOL_LENGTH)         // Size of eye diagram graph - Two complete symbol periods
 
 #define MAX_CONSTELLATION_POINTS        256                         // Maximum number of constellation points
-                                                            // Remember 2 symbols per character
 
 
 // Declare global variables and arrays
@@ -135,9 +132,11 @@ int main (
   SLFixData_t     LoopCount;
   SLFixData_t     TxTmpVariable = 0;                                // Temporary variable used in txr
   SLFixData_t     RxTmpVariable = 0;                                // Temporary variable used in rxr
-  SLFixData_t     ReceivedWordCount = 0;                            // Tx Rx pipeline count
+  SLFixData_t     RxStartUpDelayCount = 0;                          // Tx Rx pipeline count
+#if (DIFFERENTIAL_ENCODING_ENABLE)
   SLFixData_t     PreviousTxNibble = 0;                             // Differential encoding variables
   SLFixData_t     PreviousRxNibble = 0;
+#endif
 #if (DISPLAY_EYE_DIAGRAM || DISPLAY_CONSTELLATION)
   SLFixData_t     ConstellationRxSymbolCount = 0;                   // Constellation Rx symbol count debug variable
 #endif
@@ -230,8 +229,11 @@ int main (
       TxStringNibbleCount = 0;
     }
 
+#if (DIFFERENTIAL_ENCODING_ENABLE)
     TxNibble = SDA_Qam16DifferentialEncode (TxNibble,               // Tx nibble
                                             &PreviousTxNibble);     // Previous Tx nibble pointer
+#endif
+
     SDA_Qam16Modulate (TxNibble,                                    // Source data nibble
                        ModulatedSignal + (i * SYMBOL_LENGTH),       // Destination array
                        pCarrierTable,                               // Carrier table pointer
@@ -264,8 +266,12 @@ int main (
                                     RRCFCoeffs,                     // RRCF Coefficients pointer
                                     RRCF_LENGTH,                    // RRCF size
                                     RRCF_ENABLE);                   // RRCF enable / disable switch
+
+#if (DIFFERENTIAL_ENCODING_ENABLE)
     RxNibble = SDA_Qam16DifferentialDecode (RxNibble,               // Mapped Rx nibble
                                             &PreviousRxNibble);     // Previous Rx nibble pointer
+#endif
+
     if (!RxStringNibbleCount) {
       RxTmpVariable = (char) (RxNibble & 0x0f);                     // LS Nibble
       RxStringNibbleCount = 1;
@@ -296,8 +302,10 @@ int main (
         TxStringNibbleCount = 0;
       }
 
+#if (DIFFERENTIAL_ENCODING_ENABLE)
       TxNibble = SDA_Qam16DifferentialEncode (TxNibble,             // Tx nibble
                                               &PreviousTxNibble);   // Previous Tx nibble pointer
+#endif
 
       SDA_Qam16Modulate (TxNibble,                                  // Source data nibble
                          ModulatedSignal + (i * SYMBOL_LENGTH),     // Destination array
@@ -403,8 +411,11 @@ int main (
                                       RRCF_ENABLE);                 // RRCF enable / disable switch
 #endif
 
+#if (DIFFERENTIAL_ENCODING_ENABLE)
       RxNibble = SDA_Qam16DifferentialDecode (RxNibble,             // Mapped Rx nibble
                                               &PreviousRxNibble);   // Previous Rx nibble pointer
+#endif
+
       if (!RxStringNibbleCount) {                                   // Keep track of Rx nibbles
         RxTmpVariable = (char) (RxNibble & 0x0f);                   // LS Nibble
         RxStringNibbleCount = 1;
@@ -412,11 +423,12 @@ int main (
       else {
         RxTmpVariable |= ((RxNibble << 4) & 0xf0);                  // MS Nibble
         RxStringNibbleCount = 0;
-        if (ReceivedWordCount++ < TX_RX_PIPELINE_LENGTH) {
+        if (RxStartUpDelayCount < RX_STARTUP_DELAY) {
           RxTmpVariable = SDS_Descrambler1417WithInversion (RxTmpVariable,  // Source character
                                                             &RxShiftRegister, // Shift register
                                                             &RxOnesBitCount,  // Ones bit counter
                                                             &RxBitInversionFlag); // Bit inversion flag
+          RxStartUpDelayCount++;
         }
         else {
           RxString[RxStringIndex++] = (char) SDS_Descrambler1417WithInversion (RxTmpVariable, // Source character
@@ -462,22 +474,25 @@ int main (
                  "blue",                                            // Colour
                  GPC_NEW);                                          // New graph
   }
-  printf ("Hit <Carriage Return> to continue ...");
-  getchar ();
 #endif
 
   RxString[RxStringIndex] = 0;                                      // Terminate string for printf
-  printf ("Received string:%s\n", RxString);
+  printf ("Received string: %s\n", RxString);
 
   printf ("Bit Error Rate = %lf\n", SDA_BitErrorRate ((SLChar_t *) TxString,  // Source 1 pointer
                                                       (SLChar_t *) RxString,  // Source 2 pointer
-                                                      SIGLIB_ONE / ((((SAMPLE_LENGTH / (SYMBOL_LENGTH * SYMBOLS_PER_BYTE)) * NUMBER_OF_LOOPS) - TX_RX_PIPELINE_LENGTH) * SIGLIB_BYTE_LENGTH), // Inverse of number of bits
-                                                      ((SAMPLE_LENGTH / (SYMBOL_LENGTH * SYMBOLS_PER_BYTE)) * NUMBER_OF_LOOPS) - TX_RX_PIPELINE_LENGTH)); // Dataset length
+                                                      SIGLIB_ONE / (SLData_t) ((RxStringIndex - 1) * SIGLIB_BYTE_LENGTH), // Inverse of number of bits
+                                                      RxStringIndex - 1));  // Dataset length (ignore last character)
 
-#if DISPLAY_TIME_DOMAIN || DISPLAY_FREQ_DOMAIN || DISPLAY_EYE_DIAGRAM
+#if DISPLAY_TIME_DOMAIN || DISPLAY_FREQ_DOMAIN || DISPLAY_EYE_DIAGRAM || DISPLAY_CONSTELLATION
   printf ("\nHit <Carriage Return> to continue ....\n");
   getchar ();                                                       // Wait for <Carriage Return>
+#endif
+#if DISPLAY_TIME_DOMAIN || DISPLAY_FREQ_DOMAIN || DISPLAY_EYE_DIAGRAM
   gpc_close (h2DPlot);
+#endif
+#if DISPLAY_CONSTELLATION
+  gpc_close (hConstellationDiagram);
 #endif
 
   SUF_MemoryFree (pCarrierTable);                                   // Free memory

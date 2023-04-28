@@ -1,5 +1,5 @@
 # SigLib Perl Example Program
-# Copyright (C) 2020 Sigma Numerix Ltd.
+# Copyright (C) 2020 Alpha Numerix
 
 use siglib_wrap;
 

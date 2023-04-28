@@ -1,5 +1,5 @@
 // SigLib Debug Examples
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -14,24 +14,15 @@ int main (
 {
 
   SUF_ClearDebugfprintf ();                                         // Clear the debug.log file
-
   SUF_DebugPrintInfo ();                                            // Print the SigLib version number to the debug file
-
   SUF_DebugPrintLine ();                                            // Print the current line number to the debug file
-
   SUF_DebugPrintTime ();                                            // Print the current time to the debug file
-
   SUF_Debugfprintf ("\nAn array of data :\n");                      // Print a text string to the debug file
-
   SUF_DebugPrintArray (pArray, 10);                                 // Print the data array to the debug file
-
   SUF_Debugfprintf ("\nA matrix of data :\n");                      // Print a text string to the debug file
-
   SUF_DebugPrintMatrix (pArray, 2, 5);                              // Print the 2D matrix to the debug file
 
-  printf ("The debug information has been written to the file : debug.log\n");
-  printf ("Here are the contents of debug.log :\n\n");
-  system ("more debug.log");
+  printf ("The debug information has been written to the SigLib logging file: %s\n", SIGLIB_LOG_FILE);
 
   exit (0);
 }

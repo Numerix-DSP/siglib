@@ -5,9 +5,9 @@
 //     Carrier freq. - 2400 Hz
 //
 // To see how to apply a scrambler to the sequence
-// (e.g. polynomial : 1 + x-14 + x-17 used in the ITU-T
+// (e.g. polynomial: 1 + x-14 + x-17 used in the ITU-T
 // recommendations), please refer to example tstqam16.c.
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Sigma Numerix Ltd. All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -18,6 +18,7 @@
 
 // Define constants
 #define RRCF_ENABLE                     1                           // Root raised cosine filter on Tx and Rx
+#define DIFFERENTIAL_ENCODING_ENABLE    1                           // Differential encoding / decoding
 
 #define TX_ALPHABET                     1                           // Set to '1' to Tx the alphabet or '0' to Tx 0xFFs
 #define DEBUG_LOG_FILE                  1                           // Set to '1' to enable logging to debug.log
@@ -26,7 +27,6 @@
 #define DISPLAY_FREQ_DOMAIN             0                           // Set to '1' to display the frequency domain output
 #define DISPLAY_EYE_DIAGRAM             0                           // Set to '1' to display the eye diagram output
 #define DISPLAY_TRIGGER                 0                           // Set to '1' to display the trigger and the delayed costas loop LPF outputs
-                    // The following can be displayed in conjunction with the above
 #define DISPLAY_CONSTELLATION           0                           // Set to '1' to display the constellation diagram
 
 
@@ -42,21 +42,28 @@
 #define SYMBOL_LENGTH                   16                          // Symbol Period = SAMPLE_RATE / SYMBOL_RATE
 #define CARRIER_CYCLE_LENGTH            4                           // Carrier Period = SAMPLE_RATE / CARRIER_FREQ
 
-#define SYMBOLS_PER_BYTE                4                           // Number of symbols per byte
-
 #if RRCF_ENABLE
-#define RX_STRING_DIBIT_COUNT_START     2                           // Starting phase of Rx string di-bit count
-                                                            // allows for group delay of RRC filter
 #define RRCF_PERIOD                     SYMBOL_LENGTH               // RRCF Period
 #define RRCF_ROLL_OFF                   0.75                        // Root raised cosine filter roll off factor
 #define RRCF_LENGTH                     81                          // Root raised cosine filter length
-#define TX_RX_PIPELINE_LENGTH           2                           // Length of processing delay
+#if DIFFERENTIAL_ENCODING_ENABLE
+#define TX_STARTUP_PREFILL              6                           // Txr startup pre-fill (# symbols) to allow correct synchronization with receiver
+#define RX_STARTUP_DELAY                5                           // Rxr startup delay (# symbols) to allow correct synchronization with transmitter
 #else
-#define RX_STRING_DIBIT_COUNT_START     2                           // Starting phase of Rx string di-bit count
+#define TX_STARTUP_PREFILL              8                           // Txr startup pre-fill (# symbols) to allow correct synchronization with receiver
+#define RX_STARTUP_DELAY                7                           // Rxr startup delay (# symbols) to allow correct synchronization with transmitter
+#endif
+#else
 #define RRCF_PERIOD                     SIGLIB_ZERO                 // Dummy value - RRCF Period
 #define RRCF_ROLL_OFF                   SIGLIB_ZERO                 // Dummy value - Root raised cosine filter roll off factor
 #define RRCF_LENGTH                     1                           // Dummy value - Root raised cosine filter length
-#define TX_RX_PIPELINE_LENGTH           1                           // Length of processing delay
+#if DIFFERENTIAL_ENCODING_ENABLE
+#define TX_STARTUP_PREFILL              5                           // Txr startup pre-fill (# symbols) to allow correct synchronization with receiver
+#define RX_STARTUP_DELAY                4                           // Rxr startup delay (# symbols) to allow correct synchronization with transmitter
+#else
+#define TX_STARTUP_PREFILL              4                           // Txr startup pre-fill (# symbols) to allow correct synchronization with receiver
+#define RX_STARTUP_DELAY                3                           // Rxr startup delay (# symbols) to allow correct synchronization with transmitter
+#endif
 #endif
 
 #define GAUS_NOISE_VARIANCE             SIGLIB_ZERO                 // Injected noise parameters
@@ -70,23 +77,15 @@
 #define TX_CARRIER_TABLE_SIZE           ((SLArrayIndex_t)(SAMPLE_RATE / TX_CARRIER_TABLE_FREQ)) // Number of samples in each of cos and sine table
 #define TX_CARRIER_TABLE_INCREMENT      ((SLArrayIndex_t)(CARRIER_FREQ / TX_CARRIER_TABLE_FREQ))  // Carrier frequency
 
-#define EYE_DIAGRAM_SIZE                (2 * SYMBOL_LENGTH)         // Size of eye diagram graph
-                                                            // Two complete symbol periods
+#define EYE_DIAGRAM_SIZE                (2 * SYMBOL_LENGTH)         // Size of eye diagram graph - Two complete symbol periods
 
 #define MAX_CONSTELLATION_POINTS        40                          // Maximum number of constellation points
-                                                            // Remember 4 symbols per character
 
 // Declare global variables and arrays
 
 #if TX_ALPHABET
                                         // Transmit string.
-                                        // The 'd' (or 'dd' for the RRCF option) at the start are dummy
-                                        // characters that are not received while the filters are initialized
-#if RRCF_ENABLE
-static const char TxString[] = "ddHello World - abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-#else
-static const char TxString[] = "dHello World - abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-#endif
+static const char TxString[] = "Hello World - abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 #else
 static const unsigned char TxString[] = {
   0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
@@ -123,10 +122,9 @@ static SLData_t GaussianNoisePhase, GaussianNoiseValue;             // Variables
 
                                                             // Variable and arrays for Costas QAM demodulator output
 static SLData_t pRealOutput[MAX_CONSTELLATION_POINTS], pImagOutput[MAX_CONSTELLATION_POINTS];
-static SLData_t ConstellationI, ConstellationQ;
 
                             // Costas loop data
-                        // Note : Costas loop LPF lengths are chosen so that there
+                        // Note: Costas loop LPF lengths are chosen so that there
                         // are at least two full cycles and an odd number - for an integer group delay
 #define COSTAS_LP_LPF_LENGTH            (((SLArrayIndex_t)(2.0*CARRIER_CYCLE_LENGTH)) | 0x1)  // Costas loop LP LPF FIR filter length
 #define COSTAS_LP_VCO_MODULATION_INDEX  0.00005                     // Modulation index
@@ -144,7 +142,6 @@ static SLData_t *pCostasLpVCOLookUpTable;                           // VCO cosin
 static SLData_t CostasLpVCOPhase;                                   // Costas loop VCO phase
 
                             // Early-late gate symbol synchronizer data
-
 #define ELG_EARLY_GATE_DELAY_LENGTH     (SYMBOL_LENGTH >> 1)
 #define ELG_LOOP_FILTER_LENGTH          ((3 * SYMBOL_LENGTH) + 1)
 #define ELG_LOOP_FILTER_FC              (SYMBOL_RATE / SIGLIB_TWO)
@@ -173,9 +170,7 @@ static SLData_t pELGRealOutputSynchDelay[ELG_SYNCH_DELAY_ARRAY_LENGTH]; // ELG o
 static SLData_t pELGImagOutputSynchDelay[ELG_SYNCH_DELAY_ARRAY_LENGTH]; // ELG output imag synchronization delay
 static SLArrayIndex_t ELGOutputSynchDelayIndex;
 
-
-    // Receiver constellation - this is redundant for this mapping but allows flexibility
-extern SLFixData_t siglib_numerix_QPSKRxConstellation[];
+extern SLFixData_t siglib_numerix_QPSKRxConstellation[];            // Receiver constellation map
 
                             // Debug arrays
 #if DISPLAY_CONSTELLATION
@@ -205,18 +200,21 @@ int main (
   SLError_t       SigLibErrorCode;
   SLArrayIndex_t  i;
   SLArrayIndex_t  TxStringIndex = 0;
-  SLArrayIndex_t  TxStringDiBitCount = 0;
+  SLArrayIndex_t  TxSourceWordPhase = 0;
   SLFixData_t     TxDiBit;
+  SLArrayIndex_t  TxPreFillSymbolCount = 0;                         // Tx pipeline pre-fill
   SLArrayIndex_t  RxStringIndex = 0;
-  SLArrayIndex_t  RxStringDiBitCount = RX_STRING_DIBIT_COUNT_START;
+  SLArrayIndex_t  RxSourceWordPhase = 0;
   SLFixData_t     RxDiBit;
+  SLArrayIndex_t  RxSymbolCount;                                    // Count of the number of received symbols
+  SLArrayIndex_t  RxStartUpDelayCount = 0;                          // Rx startup delay count
   SLArrayIndex_t  LoopCount;
   char            TxCharTmpVariable = 0;                            // Temporary variables - char type
-  char            RxCharTmpVariable = 0;
-  SLArrayIndex_t  ReceivedWordCount = 0;                            // Tx Rx pipeline count
+  char            RxCharTmpVariable = 0;                            // Temporary variable for building received char
+#if (DIFFERENTIAL_ENCODING_ENABLE)
   SLFixData_t     PreviousTxDiBit = 0;                              // Differential encoding variables
   SLFixData_t     PreviousRxDiBit = 0;
-  SLArrayIndex_t  RxSymbolCount;                                    // Count of the number of output symbols
+#endif
 #if (DISPLAY_EYE_DIAGRAM)
   int             FirstEyeDiagramFlag = 1;
 #endif
@@ -345,24 +343,36 @@ int main (
 // Main data processing loop
   for (LoopCount = 0; LoopCount < NUMBER_OF_LOOPS; LoopCount++) {
     for (i = 0; i < SYMBOLS_PER_LOOP; i++) {                        // Modulate new symbol
-      if (!TxStringDiBitCount) {                                    // Keep track of Tx di-bits
-        TxCharTmpVariable = TxString[TxStringIndex++];
-        TxDiBit = (SLArrayIndex_t) TxCharTmpVariable & 0x3;
-        TxStringDiBitCount++;
+      if (TxPreFillSymbolCount < TX_STARTUP_PREFILL) {              // Pre-fill the TxRx pipeline the pre-fill symbol is created prior to the modulate function
+// In order to lock the TED we must use a signal that changes phase every symbol period
+        TxDiBit = (2 * TxPreFillSymbolCount) & SIGLIB_QPSK_BIT_MASK;
+        TxPreFillSymbolCount++;
       }
       else {
-        TxCharTmpVariable >>= 2;
-        TxDiBit = (SLArrayIndex_t) TxCharTmpVariable & 0x3;
-        if (++TxStringDiBitCount == 4)
-          TxStringDiBitCount = 0;
+        if (!TxSourceWordPhase) {                                   // Keep track of Tx di-bits
+          TxCharTmpVariable = TxString[TxStringIndex++];
+          TxDiBit = (SLArrayIndex_t) TxCharTmpVariable & SIGLIB_QPSK_BIT_MASK;
+          TxSourceWordPhase++;
+        }
+        else {
+          TxCharTmpVariable >>= 2;
+          TxDiBit = (SLArrayIndex_t) TxCharTmpVariable & SIGLIB_QPSK_BIT_MASK;
+          if (++TxSourceWordPhase == 4)
+            TxSourceWordPhase = 0;
+        }
+#if (DIFFERENTIAL_ENCODING_ENABLE)
+#if DEBUG_LOG_FILE
+        SUF_Debugfprintf ("TxDiBit: 0x%x\n", (int) TxDiBit);
+#endif
+
+        TxDiBit = SDS_QpskDifferentialEncode (TxDiBit,              // Tx di-bit
+                                              &PreviousTxDiBit);    // Previous Tx quadrant pointer
+#endif
       }
 
 #if DEBUG_LOG_FILE
-      SUF_Debugfprintf ("Tx - Input dibit = 0x%x\n", (int) TxDiBit);
+      SUF_Debugfprintf ("Tx Modulate DiBit: 0x%x\n", (int) TxDiBit);
 #endif
-
-      TxDiBit = SDA_QpskDifferentialEncode (TxDiBit,                // Tx di-bit
-                                            &PreviousTxDiBit);      // Previous Tx quadrant pointer
 
       SDA_QpskModulate (TxDiBit,                                    // Source data di-bit
                         ModulatedSignal + (i * SYMBOL_LENGTH),      // Destination array
@@ -512,6 +522,10 @@ int main (
                                              SAMPLE_LENGTH);        // Source dataset length
 #endif
 
+#if DEBUG_LOG_FILE
+    SUF_Debugfprintf ("RxSymbolCount: %d\n", RxSymbolCount);
+#endif
+
 #if DISPLAY_TRIGGER
     gpc_plot_2d (h2DPlot,                                           // Graph handle
                  DebugRealFilterOutput,                             // Dataset
@@ -574,11 +588,11 @@ int main (
     }
 #endif
 
-    for (i = 0; i < RxSymbolCount; i++) {                           // Decode the receive bits
-      ConstellationI = pRealOutput[i];
-      ConstellationQ = pImagOutput[i];
-
+    for (i = 0; i < RxSymbolCount; i++) {                           // Decode the receive symbols
 // Decode constellation
+      SLData_t        ConstellationI = pRealOutput[i];
+      SLData_t        ConstellationQ = pImagOutput[i];
+
       if (ConstellationI > SIGLIB_ZERO) {
         ConstellationI = SIGLIB_ONE;
       }
@@ -594,26 +608,36 @@ int main (
       }
 
       RxDiBit =
-        siglib_numerix_QPSKRxConstellation[(((SLArrayIndex_t) ConstellationI) + (((SLArrayIndex_t) ConstellationQ) << 1)) & ((SLArrayIndex_t) 0x03)];
+        siglib_numerix_QPSKRxConstellation[(((SLArrayIndex_t) ConstellationI) +
+                                            (((SLArrayIndex_t) ConstellationQ) << 1)) & ((SLArrayIndex_t) SIGLIB_QPSK_BIT_MASK)];
 
-      RxDiBit = SDA_QpskDifferentialDecode (RxDiBit,                // Mapped Rx di-bit
-                                            &PreviousRxDiBit);      // Previous Rx di-bit pointer
-
+#if (DIFFERENTIAL_ENCODING_ENABLE)
 #if DEBUG_LOG_FILE
-      SUF_Debugfprintf ("RxDiBit = 0x%x\n", (int) RxDiBit);
+      SUF_Debugfprintf ("Rx Demodulate DiBit: 0x%x\n", (int) RxDiBit);
 #endif
 
-      if (!RxStringDiBitCount) {                                    // Keep track of Rx di-bits
-        RxCharTmpVariable = (char) (RxDiBit & ((SLArrayIndex_t) 0x03)); // LS di-bit
-        RxStringDiBitCount++;
+      RxDiBit = SDS_QpskDifferentialDecode (RxDiBit,                // Mapped Rx di-bit
+                                            &PreviousRxDiBit);      // Previous Rx di-bit pointer
+#endif
+
+#if DEBUG_LOG_FILE
+      SUF_Debugfprintf ("RxDiBit: 0x%x\n", (int) RxDiBit);
+#endif
+
+      if (RxStartUpDelayCount < RX_STARTUP_DELAY) {                 // Flush pipeline before saving data
+        RxStartUpDelayCount++;
       }
       else {
-        RxCharTmpVariable |= (char) ((RxDiBit & ((SLArrayIndex_t) 0x03)) << (RxStringDiBitCount * ((SLArrayIndex_t) 2))); // Remaining di-bits
-        if (++RxStringDiBitCount == 4) {
-          if (++ReceivedWordCount > TX_RX_PIPELINE_LENGTH) {        // Flush pipeline before saving data
+        if (!RxSourceWordPhase) {                                   // Keep track of Rx di-bits
+          RxCharTmpVariable = (char) (RxDiBit & ((SLArrayIndex_t) SIGLIB_QPSK_BIT_MASK)); // LS di-bit
+          RxSourceWordPhase++;
+        }
+        else {
+          RxCharTmpVariable |= (char) ((RxDiBit & ((SLArrayIndex_t) SIGLIB_QPSK_BIT_MASK)) << (RxSourceWordPhase * ((SLArrayIndex_t) 2)));  // Remaining di-bits
+          if (++RxSourceWordPhase == 4) {
             RxString[RxStringIndex++] = (char) RxCharTmpVariable;
+            RxSourceWordPhase = 0;
           }
-          RxStringDiBitCount = 0;
         }
       }
     }
@@ -671,10 +695,10 @@ int main (
   printf ("Eye diagram\n");
 #endif
 
-  printf ("\nReceived string length = %d\n", (int) RxStringIndex);
+  printf ("\nReceived string length: %d\n", (int) RxStringIndex);
 #if TX_ALPHABET
   RxString[RxStringIndex] = 0;                                      // Terminate string for printf
-  printf ("Received string:%s", RxString);
+  printf ("Received string: %s", RxString);
 #else
   for (i = 0; i < RxStringIndex; i++) {
     printf ("0x%x, ", (int) RxString[i]);
@@ -688,15 +712,21 @@ int main (
   }
 #endif
 
-  printf ("\nBit Error Rate = %lf\n", SDA_BitErrorRate ((SLChar_t *) (TxString + 1),  // Source 1 pointer
-                                                        (SLChar_t *) RxString,  // Source 2 pointer
-                                                        SIGLIB_ONE / (RxStringIndex * SIGLIB_BYTE_LENGTH),  // Inverse of number of bits
-                                                        RxStringIndex));  // Dataset length
+  printf ("\n");
+  printf ("Bit Error Rate = %lf\n", SDA_BitErrorRate ((SLChar_t *) TxString,  // Source 1 pointer
+                                                      (SLChar_t *) RxString,  // Source 2 pointer
+                                                      SIGLIB_ONE / (SLData_t) ((RxStringIndex - 1) * SIGLIB_BYTE_LENGTH), // Inverse of number of bits
+                                                      RxStringIndex - 1));  // Dataset length (ignore last character)
 
-#if DISPLAY_TIME_DOMAIN || DISPLAY_FREQ_DOMAIN || DISPLAY_EYE_DIAGRAM
+#if DISPLAY_TIME_DOMAIN || DISPLAY_FREQ_DOMAIN || DISPLAY_EYE_DIAGRAM || DISPLAY_CONSTELLATION
   printf ("\nHit <Carriage Return> to continue ....\n");
   getchar ();                                                       // Wait for <Carriage Return>
+#endif
+#if DISPLAY_TIME_DOMAIN || DISPLAY_FREQ_DOMAIN || DISPLAY_EYE_DIAGRAM
   gpc_close (h2DPlot);
+#endif
+#if DISPLAY_CONSTELLATION
+  gpc_close (hConstellationDiagram);
 #endif
 
 

@@ -7,7 +7,7 @@
 // filter with Fc = 0.05 Hz and Fs = 1 Hz and
 // the source filter with Fc = 100 Hz and Fs = 10000 Hz is identical to a
 // filter with Fc = 0.01 Hz and Fs = 1 Hz.
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

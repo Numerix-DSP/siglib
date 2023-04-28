@@ -1,5 +1,5 @@
 // SigLib Chirp z-Transform Example
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // The chirp z-transform algorithm is shown in the following diagram :
 //                 _____

@@ -30,7 +30,7 @@ Please contact Sigma Numerix Ltd. for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+Copyright (c) 2023 Alpha Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Communications timing detection routines, for SigLib DSP library.
 
@@ -389,21 +389,21 @@ const SLArrayIndex_t siglib_numerix_V32TxConvolutionalEncoderNextState[SIGLIB_VI
 const SLComplexRect_s siglib_numerix_V32ConstellationMap[SIGLIB_VITV32_NUMBER_OF_CONSTELLATION_POINTS] = {
   { ((SLData_t) - 4.0), ((SLData_t) 1.0) }, { ((SLData_t) - 3.0), ((SLData_t) - 2.0) }, { ((SLData_t) - 2.0), ((SLData_t) 3.0) }, { ((SLData_t) 1.0),
                                                                                                                                    ((SLData_t) 4.0)
-                                                                                                                                   },
+                                                                                                                                    },
   { ((SLData_t) 4.0), ((SLData_t) - 1.0) }, { ((SLData_t) 3.0), ((SLData_t) 2.0) }, { ((SLData_t) 2.0), ((SLData_t) - 3.0) }, { ((SLData_t) - 1.0),
                                                                                                                                ((SLData_t) - 4.0) },
   { ((SLData_t) 0.0), ((SLData_t) 1.0) }, { ((SLData_t) - 3.0), ((SLData_t) 2.0) }, { ((SLData_t) 2.0), ((SLData_t) 3.0) }, { ((SLData_t) 1.0),
                                                                                                                              ((SLData_t) 0.0) },
   { ((SLData_t) 0.0), ((SLData_t) - 1.0) }, { ((SLData_t) 3.0), ((SLData_t) - 2.0) }, { ((SLData_t) - 2.0), ((SLData_t) - 3.0) },
-    { ((SLData_t) - 1.0), ((SLData_t) 0.0) },
+  { ((SLData_t) - 1.0), ((SLData_t) 0.0) },
   { ((SLData_t) 0.0), ((SLData_t) - 3.0) }, { ((SLData_t) 1.0), ((SLData_t) - 2.0) }, { ((SLData_t) - 2.0), ((SLData_t) - 1.0) },
-    { ((SLData_t) - 3.0), ((SLData_t) 0.0) },
+  { ((SLData_t) - 3.0), ((SLData_t) 0.0) },
   { ((SLData_t) 0.0), ((SLData_t) 3.0) }, { ((SLData_t) - 1.0), ((SLData_t) 2.0) }, { ((SLData_t) 2.0), ((SLData_t) 1.0) }, { ((SLData_t) 3.0),
                                                                                                                              ((SLData_t) 0.0) },
   { ((SLData_t) 4.0), ((SLData_t) 1.0) }, { ((SLData_t) 1.0), ((SLData_t) 2.0) }, { ((SLData_t) 2.0), ((SLData_t) - 1.0) }, { ((SLData_t) 1.0),
                                                                                                                              ((SLData_t) - 4.0) },
   { ((SLData_t) - 4.0), ((SLData_t) - 1.0) }, { ((SLData_t) - 1.0), ((SLData_t) - 2.0) }, { ((SLData_t) - 2.0), ((SLData_t) 1.0) },
-    { ((SLData_t) - 1.0), ((SLData_t) 4.0) }
+  { ((SLData_t) - 1.0), ((SLData_t) 4.0) }
 };
 
 
@@ -465,16 +465,16 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_ConvEncoderV32 (
   SLComplexRect_s EncodedWord;
 
 // Differentially encode the 2 LSBs
-  DiffEncOutput =
-    siglib_numerix_V32TxDifferentialEncoder[(SLArrayIndex_t) ((SLUFixData_t) SrcNibble & 0x3U)][(SLArrayIndex_t)
-                                                                                                ((SLUFixData_t) * pDiffEncState & 0x3U)];
+  DiffEncOutput = siglib_numerix_V32TxDifferentialEncoder[(SLArrayIndex_t) ((SLUFixData_t) SrcNibble & 0x3U)][(SLArrayIndex_t)
+                                                                                                              ((SLUFixData_t) *
+                                                                                                               pDiffEncState & 0x3U)];
 
   *pDiffEncState = DiffEncOutput;                                   // Save output for next iteration
 
-  ConvEncoderOutput =
-    (SLArrayIndex_t) ((SLUFixData_t)
-                      siglib_numerix_V32TxConvolutionalEncoderOutput[*pEncoderState][(SLArrayIndex_t) ((SLUFixData_t) DiffEncOutput & 0x3U)] |
-                      (((SLUFixData_t) SrcNibble & 0x0CU) << 1U));
+  ConvEncoderOutput = (SLArrayIndex_t) ((SLUFixData_t)
+                                        siglib_numerix_V32TxConvolutionalEncoderOutput[*pEncoderState][(SLArrayIndex_t)
+                                                                                                       ((SLUFixData_t) DiffEncOutput & 0x3U)] |
+                                        (((SLUFixData_t) SrcNibble & 0x0CU) << 1U));
   *pEncoderState = siglib_numerix_V32TxConvolutionalEncoderNextState[*pEncoderState][(SLArrayIndex_t) ((SLUFixData_t) DiffEncOutput & 0x3U)];
 
   EncodedWord = siglib_numerix_V32ConstellationMap[ConvEncoderOutput];  // Map convolutional encoder output to V32 constellation

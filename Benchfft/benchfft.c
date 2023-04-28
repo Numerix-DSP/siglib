@@ -14,7 +14,7 @@ benchmark results.
 
 This file uses DOS format end of line characters.
 
-Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 Support for SigLib is available via EMail : support@numerix.co.uk
 For further information about the SigLib library please refer to the
@@ -123,9 +123,9 @@ SLData_t        RealTestResults[] = {
 SLData_t        ImagTestResults[] = {
   ((SLData_t) 0.000000e+000), ((SLData_t) 3.270638e-001), ((SLData_t) 8.288667e-001), ((SLData_t) 2.288190e+000), ((SLData_t) - 1.365461e+001),
   ((SLData_t) - 2.024335e+000), ((SLData_t) - 1.126322e+000), ((SLData_t) - 7.755554e-001), ((SLData_t) - 5.791250e-001),
-    ((SLData_t) - 4.480799e-001),
+  ((SLData_t) - 4.480799e-001),
   ((SLData_t) - 3.508550e-001), ((SLData_t) - 2.732627e-001), ((SLData_t) - 2.078686e-001), ((SLData_t) - 1.503050e-001),
-    ((SLData_t) - 9.774349e-002),
+  ((SLData_t) - 9.774349e-002),
   ((SLData_t) - 4.817074e-002), ((SLData_t) 0.000000e+000), ((SLData_t) 4.817074e-002), ((SLData_t) 9.774349e-002), ((SLData_t) 1.503050e-001),
   ((SLData_t) 2.078686e-001), ((SLData_t) 2.732627e-001), ((SLData_t) 3.508550e-001), ((SLData_t) 4.480799e-001), ((SLData_t) 5.791250e-001),
   ((SLData_t) 7.755554e-001), ((SLData_t) 1.126322e+000), ((SLData_t) 2.024335e+000), ((SLData_t) 1.365461e+001), ((SLData_t) - 2.288190e+000),

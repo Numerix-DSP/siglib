@@ -2,7 +2,7 @@
 // This program filters a signal in the time domain and then in
 // the frequency domain using the overlap-add and overlap-save
 // techniques
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

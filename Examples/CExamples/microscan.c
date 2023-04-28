@@ -3,7 +3,7 @@
 // reference signal indicates the frequency of the signal being
 // analysed. It is important that the chirp and the FM modulation
 // rate are synchronised.
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

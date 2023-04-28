@@ -7,7 +7,7 @@
 // DFT only operates on the DFT length, not the entire array
 // Time Domain Plots :
 // These functions generate simple time domain plots.
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 #include "string.h"
 #include <gnuplot_c.h>                                              // Gnuplot/C

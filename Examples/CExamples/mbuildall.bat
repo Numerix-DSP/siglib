@@ -49,6 +49,7 @@ call mb DeltMod2
 call mb dfplusi
 call mb dft
 call mb dft_fft_scaling
+call mb differential_encoding
 call mb dotprod
 call mb dtmf
 call mb dtmf_gen
@@ -164,7 +165,7 @@ call mb PulseRemoval
 call mb pwm
 call mb qam16
 call mb qpsk
-call mb qpsk2
+call mb qpsk_CostasQam
 call mb quantize
 call mb rcf
 call mb regress

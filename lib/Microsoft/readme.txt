@@ -29,7 +29,7 @@ For the full license agreement, please refer to the document
 "license.txt".
 
 
-Digital Filter Plus and SigLib are trademarks of Sigma Numerix Ltd. all
+Digital Filter Plus and SigLib are trademarks of Alpha Numerix all
 other trademarks acknowledged.
 
 

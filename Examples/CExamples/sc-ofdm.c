@@ -3,7 +3,7 @@
 // Sub-carriers filled = 3 to 7
 // LTE Symbol period = 15 kHz = 66.7 us
 //     Requires radix 2, 3 and 5 DFTs
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

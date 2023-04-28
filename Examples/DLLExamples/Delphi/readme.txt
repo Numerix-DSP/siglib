@@ -1,7 +1,7 @@
 
 
 
-                                SigLib™
+                                SigLibï¿½
 
                        Signal Processing Library
                           Delphi Support Files
@@ -21,12 +21,12 @@ Please read the appropriate section of the SigLib reference manual for
 further information.
 
 
-SigLib is a trademark of Sigma Numerix Ltd. all other trademarks acknowledged.
+SigLib is a trademark of Alpha Numerix all other trademarks acknowledged.
 
 
 For additional information, please contact :
 
-Sigma Numerix Ltd.,
+Alpha Numerix,
 Email: info@numerix-dsp.com
 WWW  : https:\\www.numerix-dsp.com
 

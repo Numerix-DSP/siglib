@@ -2,7 +2,7 @@
 // Sort2 : sort one array and reflect the changes in a second array
 // IndexedSort : Use a second input array to specify the output order of the source array
 
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

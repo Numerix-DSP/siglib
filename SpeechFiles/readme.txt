@@ -31,7 +31,7 @@ as follows :
 
 
 
-SigLib and Digital Filter Plus are trademarks of Sigma Numerix Ltd. all other
+SigLib and Digital Filter Plus are trademarks of Alpha Numerix all other
 trademarks acknowledged.
 
 
@@ -41,4 +41,4 @@ Numerix Ltd.,
 Email: support@numerix-dsp.com
 WWW  : https:\\www.numerix-dsp.com
 
-(C) Copyright 2000 Sigma Numerix Ltd. All rights reserved.
+(C) Copyright 2000 Alpha Numerix All rights reserved.

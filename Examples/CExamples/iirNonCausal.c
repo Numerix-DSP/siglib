@@ -3,7 +3,7 @@
 // technique uses time reversal of the data stream to give zero phase distortion.
 // The results are compared with the causal filter.
 // This is equivalent to the filtfilt function in Matlab and Python
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

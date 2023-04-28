@@ -10,7 +10,7 @@ These files have been included to assist with your use of SigLib.
 
 
 
-SigLib and Digital Filter Plus are trademarks of Sigma Numerix Ltd. all other
+SigLib and Digital Filter Plus are trademarks of Alpha Numerix all other
 trademarks acknowledged.
 
 
@@ -20,4 +20,4 @@ Numerix Ltd.,
 Email: support@numerix-dsp.com
 WWW  : https:\\www.numerix-dsp.com
 
-Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+Copyright (c) 2023 Alpha Numerix All rights reserved.

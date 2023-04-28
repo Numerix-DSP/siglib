@@ -1,5 +1,5 @@
 // SigLib Multi-Rate Filter Example
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // This demonstration shows how to translate a set of FIR filter
 // coefficients into a poly-phase filter bank and use the

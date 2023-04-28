@@ -1,5 +1,5 @@
-// SigLib example for V.26b using pi/4 Differential Quadrature Phase Shift keying (DQPSK) demodulation
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// SigLib example for V.26b using pi/4 Differential Quadrature Phase Shift Keying (DQPSK) demodulation
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 //     Data rate - 2400 bps
 //     Baud rate - 1200 Baud
@@ -29,7 +29,7 @@
 #include "Rx_FIR.h"                                                 // Demodulator pre-filter to reduce the out-of-band noise.
 
 // Define constants
-                                        // Select either or both of these for logging to 'debug.log'
+                                        // Select either or both of these for logging to log file
 #define DEBUG_LOG_FILE                  0                           // Set to '1' to enable logging
 #define DEBUG_DIBITS_TO_LOG_FILE        0                           // Set to '1' to enable logging of the output dibits
 

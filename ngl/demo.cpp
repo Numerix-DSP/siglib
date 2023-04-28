@@ -1,6 +1,6 @@
 // Numerix Graphics Library
 // Demo App
-// Copyright (c) 2022, Sigma Numerix Ltd, All rights reserved.
+// Copyright (c) 2022, Alpha Numerix, All rights reserved.
 
 // Include files
 // For compilers that support precompilation, includes "wx/wx.h".

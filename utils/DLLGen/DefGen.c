@@ -1,5 +1,5 @@
 // .DEF file generator. Takes functionList.txt and creates siglib.def
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 
@@ -50,7 +50,7 @@ Please contact Sigma Numerix Ltd. for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 ;\r\n\
-;Copyright (C) 1992 to 2022 Sigma Numerix Ltd. All rights reserved.\r\n\
+;Copyright (C) 2023 Alpha Numerix All rights reserved.\r\n\
 ;---------------------------------------------------------------------------\r\n\
 ;Description : DLL function definition file for SigLib DSP library\r\n\
 ;\r\n\
@@ -73,7 +73,7 @@ int main (
   int             Index = 2;
   int             i;
 
-  printf ("\r\nDefGen.exe - siglib.def file generation utility (C)  V2.00. Copyright (C) Sigma Numerix Ltd. 2017. All rights reserved.\r\n");
+  printf ("\r\nDefGen.exe - siglib.def file generation utility (C)  V2.00. Copyright (C) Alpha Numerix 2017. All rights reserved.\r\n");
 
   if ((IFPtr = fopen ("functionList.txt", "rb")) == NULL) {
     printf ("Can not open input data file %s\r\n", "siglib.dg");

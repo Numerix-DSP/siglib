@@ -1,5 +1,5 @@
 // SigLib Simple FFT Example
-// Copyright (C) 2020 Sigma Numerix Ltd. All rights reserved.
+// Copyright (C) 2020 Alpha Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

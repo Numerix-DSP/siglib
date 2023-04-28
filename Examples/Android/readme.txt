@@ -1,7 +1,7 @@
 
 
 
-                                SigLib™
+                                SigLibï¿½
 
                        Signal Processing Library
                        Android Example Functions
@@ -20,12 +20,12 @@ further information.
 
 Android Studio can be downloaded from https://developer.android.com/studio/index.html.
 
-SigLib is a trademark of Sigma Numerix Ltd. all other trademarks acknowledged.
+SigLib is a trademark of Alpha Numerix all other trademarks acknowledged.
 
 
 For additional information, please contact :
 
-Sigma Numerix Ltd.,
+Alpha Numerix,
 Email: info@numerix-dsp.com
 WWW  : https:\\www.numerix-dsp.com
 

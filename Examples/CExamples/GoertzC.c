@@ -4,7 +4,7 @@
 // the power of individual tones. A typical example is DTMF tone detection.
 // The Goertzel algorithm must be called separately for every frequency
 // that needs to be detected.
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

@@ -1,9 +1,9 @@
-// SigLib example for pi/4 Differential Quadrature Phase Shift keying (DQPSK) modulation
+// SigLib example for pi/4 Differential Quadrature Phase Shift Keying (DQPSK) modulation
 //     Data rate - 2400 bps
 //     Baud rate - 1200 Baud
 //     Sample rate - 48000 Hz
 //     Carrier freq. - 1800 Hz
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -17,7 +17,7 @@
 
                     // Select one of the following three
 #define DISPLAY_TIME_DOMAIN             0                           // Time domain output
-#define DEBUG_LOG_FILE                  0                           // Set to '1' to enable logging to debug.log
+#define DEBUG_LOG_FILE                  0                           // Set to '1' to enable logging to log file
 
                     // Basic application definitions
 // #define SAMPLE_LENGTH                   512                 // Number of samples in array

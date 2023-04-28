@@ -1,5 +1,5 @@
 // SigLib - Example for calculating the best filter lengths for detecting DTMF frequencies
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

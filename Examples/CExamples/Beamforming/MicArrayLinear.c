@@ -1,5 +1,5 @@
 // SigLib linear microphone array beam pattern calculator (Microphone Polar Diversity Response)
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 #include <stdio.h>
 #include <math.h>

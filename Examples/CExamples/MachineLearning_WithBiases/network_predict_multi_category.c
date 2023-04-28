@@ -1,5 +1,5 @@
 // SigLib Neural Network Classification Prediction Program
-// Copyright (c) 2022 Sigma Numerix Ltd.
+// Copyright (c) 2023 Alpha Numerix
 
 // Include files
 #include <stdio.h>

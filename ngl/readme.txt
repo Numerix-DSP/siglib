@@ -89,8 +89,8 @@ trademarks acknowledged.
 
 For additional information, please contact :
 
-Sigma Numerix Ltd.,
+Alpha Numerix,
 Email : support@numerix-dsp.com
 WWW : http:\\www.numerix-dsp.com
 
-(C) Copyright 2002-2020 Sigma Numerix Ltd. All rights reserved.
+(C) Copyright 2002-2020 Alpha Numerix All rights reserved.

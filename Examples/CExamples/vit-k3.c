@@ -1,5 +1,5 @@
 // SigLib K = 3 (7,5), Rate 1/2 Convolutional Encoder  / Viterbi Decoder Example
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

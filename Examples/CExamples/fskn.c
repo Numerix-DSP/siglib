@@ -3,7 +3,7 @@
 // This Example simulates a sample rate of 8 KHz i.e. 6.667 samples per symbol.
 //     Uses the bit oriented FSK functions, which allow the independent tracking of the bits
 //     in the data stream.
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 #include <siglib.h>                                                 // SigLib DSP library

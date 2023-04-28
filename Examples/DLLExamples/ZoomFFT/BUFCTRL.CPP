@@ -1,7 +1,7 @@
 // BufCtrl.CPP for SigLib DLL Test program
 // Copyright (C) Numerix Ltd. 1995
 // Buffer handling class, based on CWnd
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // Include files
 #include <afxwin.h>

@@ -1,5 +1,5 @@
 // SigLib Auto-spectrum And Cross-spectrum Example
-// Copyright (c) 2022 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 // This program tests four options :
 //     SIF_FastAutoPowerSpectrum / SDA_FastAutoPowerSpectrum - Auto-spectrum functions
