@@ -1,5 +1,5 @@
 // STChild.CPP: Child window member functions for SigLib DLL test program
-// Copyright (C) Numerix Ltd. 1995. All rights reserved.
+// Copyright (C) Alpha Numerix 1995. All rights reserved.
 
 /* Include files */
 #include <afxwin.h>
@@ -102,7 +102,7 @@ afx_msg void CWinGraph::OnPaint()
         BufferPtr = (double *)::LocalLock (HBuffer);
         OldDataBufferPtr = (int *)::LocalLock (HDOldDataMem);
 
-        XStep = ((double)Width) / ((double)(BufferSize - 1));
+        XStep = ((double)Width) / ((double)(BufferSize-1));
         YStep = ((double)Height) / ((double)2.0);
         YZero = Rect.bottom / 2;
 

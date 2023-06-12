@@ -414,19 +414,19 @@ Update history :
                             // Digital modulation constants
 #define SIGLIB_BPSK_BITS_PER_SYMBOL     1U                          // 1 bit per symbol
 #define SIGLIB_BPSK_NUMBER_OF_PHASES    (1<<SIGLIB_BPSK_BITS_PER_SYMBOL)  // 2 phases
-#define SIGLIB_BPSK_BIT_MASK            ((1<<SIGLIB_BPSK_BITS_PER_SYMBOL) - 1)  // Bit mask
+#define SIGLIB_BPSK_BIT_MASK            ((1<<SIGLIB_BPSK_BITS_PER_SYMBOL)-1)  // Bit mask
 
 #define SIGLIB_QPSK_BITS_PER_SYMBOL     2U                          // 2 bits per symbol
 #define SIGLIB_QPSK_NUMBER_OF_PHASES    (1<<SIGLIB_QPSK_BITS_PER_SYMBOL)  // 4 phases
-#define SIGLIB_QPSK_BIT_MASK            ((1<<SIGLIB_QPSK_BITS_PER_SYMBOL) - 1)  // Bit mask
+#define SIGLIB_QPSK_BIT_MASK            ((1<<SIGLIB_QPSK_BITS_PER_SYMBOL)-1)  // Bit mask
 
 #define SIGLIB_OPSK_BITS_PER_SYMBOL     3U                          // 3 bits per symbol
 #define SIGLIB_OPSK_NUMBER_OF_PHASES    (1<<SIGLIB_OPSK_BITS_PER_SYMBOL)  // 8 phases
-#define SIGLIB_OPSK_BIT_MASK            ((1<<SIGLIB_OPSK_BITS_PER_SYMBOL) - 1)  // Bit mask
+#define SIGLIB_OPSK_BIT_MASK            ((1<<SIGLIB_OPSK_BITS_PER_SYMBOL)-1)  // Bit mask
 
 #define SIGLIB_QAM16_BITS_PER_SYMBOL    4U                          // 4 bits per symbol
 #define SIGLIB_QAM16_NUMBER_OF_PHASES   (1<<SIGLIB_QAM16_BITS_PER_SYMBOL) // 16 phases
-#define SIGLIB_QAM16_BIT_MASK           ((1<<SIGLIB_QAM16_BITS_PER_SYMBOL) - 1) // Bit mask
+#define SIGLIB_QAM16_BIT_MASK           ((1<<SIGLIB_QAM16_BITS_PER_SYMBOL)-1) // Bit mask
 
 
                             // QAM constants

@@ -55,7 +55,7 @@ static const SLData_t Src2[] = {                                    // Input dat
     // };
 #endif
                                                             // Result dataset length
-#define RESULT_LENGTH           (INPUT_1_LENGTH + INPUT_2_LENGTH - 1)
+#define RESULT_LENGTH           (INPUT_1_LENGTH + INPUT_2_LENGTH-1)
 
 // Declare global variables and arrays
 static SLData_t Dst[RESULT_LENGTH];

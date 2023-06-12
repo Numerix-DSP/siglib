@@ -6,7 +6,7 @@
 
 #define SAMPLE_LENGTH     10
 #define X_MIN             0.0                                       // Minimum X value
-#define X_MAX             ((double)(SAMPLE_LENGTH - 1))             // Maximum X value
+#define X_MAX             ((double)(SAMPLE_LENGTH-1))               // Maximum X value
 
 h_GPC_Plot     *h2DPlot1, *h2DPlot2;                                // Declare plot object
 

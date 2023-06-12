@@ -37,16 +37,16 @@ Description : SigLib function memory section definition file for TI compilers
     the library.
     Each function can be located in a separate section of memory.
 
-****************************************************************************/
-
+****************************************************************************/  
+  
 #if SIGLIB
-
+  
 #ifndef     _SIGLIB_MEMORY_SECTIONS_H
 #define     _SIGLIB_MEMORY_SECTIONS_H
-
+  
 #ifdef _TMS320C6X                                                   // Defined by TI compiler
 #ifndef __cplusplus                                                 // These macros don't work in C++, you need to locate them adjacent to the function
-
+  
 #pragma CODE_SECTION(SDA_LinearMicrophoneArrayBeamPattern, ".text")
 #pragma CODE_SECTION(SDA_LinearMicrophoneArrayBeamPatternLinear, ".text")
 #pragma CODE_SECTION(SDA_MicrophoneArrayBeamPattern, ".text")
@@ -307,7 +307,6 @@ Description : SigLib function memory section definition file for TI compilers
 #pragma CODE_SECTION(SDA_HistogramExtendedCumulative, ".text")
 #pragma CODE_SECTION(SDA_Int, ".text")
 #pragma CODE_SECTION(SDA_Lengthen, ".text")
-#pragma CODE_SECTION(SDA_LinearTodBm, ".text")
 #pragma CODE_SECTION(SDA_Log2, ".text")
 #pragma CODE_SECTION(SDA_LogDistribution, ".text")
 #pragma CODE_SECTION(SDA_LogMagnitude, ".text")
@@ -326,6 +325,7 @@ Description : SigLib function memory section definition file for TI compilers
 #pragma CODE_SECTION(SDA_PhaseUnWrapped, ".text")
 #pragma CODE_SECTION(SDA_PhaseWrap, ".text")
 #pragma CODE_SECTION(SDA_PhaseWrapped, ".text")
+#pragma CODE_SECTION(SDA_PowerTodB, ".text")
 #pragma CODE_SECTION(SDA_Quantize, ".text")
 #pragma CODE_SECTION(SDA_Quantize_N, ".text")
 #pragma CODE_SECTION(SDA_ReSize, ".text")
@@ -340,23 +340,31 @@ Description : SigLib function memory section definition file for TI compilers
 #pragma CODE_SECTION(SDA_SetMin, ".text")
 #pragma CODE_SECTION(SDA_SetRange, ".text")
 #pragma CODE_SECTION(SDA_Shorten, ".text")
-#pragma CODE_SECTION(SDA_dBmToLinear, ".text")
+#pragma CODE_SECTION(SDA_VoltageTodB, ".text")
+#pragma CODE_SECTION(SDA_VoltageTodBm, ".text")
+#pragma CODE_SECTION(SDA_dBToPower, ".text")
+#pragma CODE_SECTION(SDA_dBToVoltage, ".text")
+#pragma CODE_SECTION(SDA_dBmToVoltage, ".text")
 #pragma CODE_SECTION(SDS_AbsFrac, ".text")
 #pragma CODE_SECTION(SDS_BitsToPeakValue, ".text")
 #pragma CODE_SECTION(SDS_Compare, ".text")
 #pragma CODE_SECTION(SDS_CompareComplex, ".text")
 #pragma CODE_SECTION(SDS_Frac, ".text")
 #pragma CODE_SECTION(SDS_Int, ".text")
-#pragma CODE_SECTION(SDS_LinearTodBm, ".text")
 #pragma CODE_SECTION(SDS_Log2, ".text")
 #pragma CODE_SECTION(SDS_LogN, ".text")
 #pragma CODE_SECTION(SDS_Magnitude, ".text")
 #pragma CODE_SECTION(SDS_MagnitudeSquared, ".text")
 #pragma CODE_SECTION(SDS_PeakValueToBits, ".text")
 #pragma CODE_SECTION(SDS_Phase, ".text")
+#pragma CODE_SECTION(SDS_PowerTodB, ".text")
 #pragma CODE_SECTION(SDS_Quantise_N, ".text")
 #pragma CODE_SECTION(SDS_Quantize, ".text")
-#pragma CODE_SECTION(SDS_dBmToLinear, ".text")
+#pragma CODE_SECTION(SDS_VoltageTodB, ".text")
+#pragma CODE_SECTION(SDS_VoltageTodBm, ".text")
+#pragma CODE_SECTION(SDS_dBToPower, ".text")
+#pragma CODE_SECTION(SDS_dBToVoltage, ".text")
+#pragma CODE_SECTION(SDS_dBmToVoltage, ".text")
 #pragma CODE_SECTION(SIF_CopyWithIndex, ".text")
 #pragma CODE_SECTION(SIF_CopyWithOverlap, ".text")
 #pragma CODE_SECTION(SIF_Histogram, ".text")
@@ -419,6 +427,10 @@ Description : SigLib function memory section definition file for TI compilers
 #pragma CODE_SECTION(SUF_DatReadHeader, ".text")
 #pragma CODE_SECTION(SUF_DatWriteData, ".text")
 #pragma CODE_SECTION(SUF_DatWriteHeader, ".text")
+#pragma CODE_SECTION(SUF_PCMReadData, ".text")
+#pragma CODE_SECTION(SUF_PCMReadFile, ".text")
+#pragma CODE_SECTION(SUF_PCMWriteData, ".text")
+#pragma CODE_SECTION(SUF_PCMWriteFile, ".text")
 #pragma CODE_SECTION(SUF_ReadWeightsBinaryFile, ".text")
 #pragma CODE_SECTION(SUF_ReadWeightsWithBiasesBinaryFile, ".text")
 #pragma CODE_SECTION(SUF_SigCountSamplesInFile, ".text")
@@ -1075,13 +1087,14 @@ Description : SigLib function memory section definition file for TI compilers
 #pragma CODE_SECTION(SDS_I0Bessel, ".text")
 #pragma CODE_SECTION(SIF_TableTopWindow, ".text")
 #pragma CODE_SECTION(SIF_Window, ".text")
-
+  
 #endif                                                              // End of #ifndef __cplusplus
-
+  
 #endif                                                              // End of #ifdef _TMS320C6X - Defined by TI compiler
-
+  
 #endif                                                              // End of #if _SIGLIB_MEMORY_SECTIONS_H
-
+  
 #endif                                                              // End of #if SIGLIB
-
+  
 // End of siglib_memory_sections.h
+  

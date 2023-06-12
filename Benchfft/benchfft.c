@@ -18,13 +18,13 @@ Copyright (c) 2023 Alpha Numerix All rights reserved.
 
 Support for SigLib is available via EMail : support@numerix.co.uk
 For further information about the SigLib library please refer to the
-Numerix Ltd Web site at : https://www.numerix-dsp.com
+Alpha Numerix Web site at : https://www.numerix-dsp.com
 
 THIS FILE MUST NOT BE DISTRIBUTED OR PASSED TO A THIRD PARTY, WITHOUT THE
-EXPRESS PRIOR PERMISSION OF NUMERIX LTD.
+EXPRESS PRIOR PERMISSION OF ALPHA NUMERIX.
 
 NONE OF THE SOURCE CODE CONTAINED IN THIS FILE MAY BE USED IN ANY
-COMMERCIAL APPLICATION, WITHOUT THE EXPRESS PRIOR PERMISSION OF NUMERIX LTD.
+COMMERCIAL APPLICATION, WITHOUT THE EXPRESS PRIOR PERMISSION OF ALPHA NUMERIX.
 For commercial applications, please contact Numerix for a full development
 license.
 
@@ -33,7 +33,7 @@ benchmarks quoted by Numerix will positively reflect the performance
 of all processors.
 
 All benchmarks quoted as a result of using this program must acknowledge
-Numerix Ltd. as the author and results must be communicated to Numerix,
+Alpha Numerix. as the author and results must be communicated to Numerix,
 prior to divulgance to any third party.
 
 For the TMS320C4x, TMS320C3x, ADSP21x6x, StarCore and LSI Logic processors

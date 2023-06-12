@@ -12,14 +12,11 @@ A = np.array([3.4, 1.8, -2.8, 6.4])
 B = np.zeros((A.size), dtype=np.double)
 
 if _platform.system() == "Linux":
- lib = ctypes.cdll.LoadLibrary('./siglib.so')
+  lib = ctypes.cdll.LoadLibrary('../../lib/linux/siglib.so.1.0')
 elif _platform.system() == "Darwin":
- lib = ctypes.cdll.LoadLibrary('./siglib.dylib')
+  lib = ctypes.cdll.LoadLibrary('../../lib/macos_x86_64/siglib.dylib')
 elif _platform.system() == "Windows":
-  if _platform.machine().endswith('64'):
-    lib = ctypes.cdll.LoadLibrary('.\siglib.dll')
-  else:
-    lib = ctypes.cdll.LoadLibrary('.\siglib.dll')
+  lib = ctypes.cdll.LoadLibrary('../../lib/Microsoft/Release/siglib.dll')
 
 SDA_AbsMax = lib.SDA_AbsMax
 SDA_AbsMax.restype = ctypes.c_double

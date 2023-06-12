@@ -14,7 +14,7 @@
 //       | AWNr, AWNi                                 | wM
 //
 // The input vector length is 150 samples, the output vector length is 100 samples
-// and the FFTs are 256 points, which must be >> (input + output lengths - 1).
+// and the FFTs are 256 points, which must be >> (input + output lengths-1).
 // The input data files have been sampled at 10 KHz.
 // In some applications a pre-window can assist the analysis e.g. Hanning.
 //

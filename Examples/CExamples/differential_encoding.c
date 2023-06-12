@@ -9,7 +9,7 @@
 
 #define BITS_PER_SYMBOL 8
 #define NUM_VALUES      (1<<BITS_PER_SYMBOL)
-#define BIT_MASK        ((1<<BITS_PER_SYMBOL) - 1)
+#define BIT_MASK        ((1<<BITS_PER_SYMBOL)-1)
 
 char            TxString[] = "Hello World - abcdefghijklmnopqrstuvwxyz0123456789ABCDEFG";
 char            RxString[80];

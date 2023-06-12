@@ -259,6 +259,11 @@ enum SLCompareType_t {                                              // Compare t
   SIGLIB_EQUAL
 };
 
+enum SLEndianType_t {                                               // Endian type
+  SIGLIB_LITTLE_ENDIAN,
+  SIGLIB_BIG_ENDIAN
+};
+
 enum SLDeGlitchMode_t {                                             // Data de-glitch modes
   SIGLIB_DEGLITCH_ABOVE = 1,
   SIGLIB_DEGLITCH_BOTH = 0,

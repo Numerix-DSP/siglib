@@ -34,11 +34,11 @@
 #endif
 
 #define MIN_LEVEL_DBFS                  -70.                        // Minimum level below which we will not perform classification
-#define MIN_LEVEL_LINEAR                (SDS_dBmToLinear(MIN_LEVEL_DBFS, 32767.)) // Minimum level dB linear
+#define MIN_LEVEL_LINEAR                (SDS_dBmToVoltage(MIN_LEVEL_DBFS, 32767.))  // Minimum level dB linear
 
 
 #define PEAK_LEVEL_DBFS                 -13.                        // Peak level dB FS
-#define PEAK_LEVEL_LINEAR               (SDS_dBmToLinear(PEAK_LEVEL_DBFS, 32767.))  // Peak level dB linear
+#define PEAK_LEVEL_LINEAR               (SDS_dBmToVoltage(PEAK_LEVEL_DBFS, 32767.)) // Peak level dB linear
 
 #define ACTIVATION_TYPE                 SIGLIB_ACTIVATION_TYPE_LOGISTIC // ACTIVATION_TYPE == ACTIVATION_TYPE_RELU
 #define ACTIVATION_ALPHA                SIGLIB_ZERO                 // Leaky ReLU alpha value - Not used

@@ -46,7 +46,7 @@ static void transfer (
 // Pixel frame
 // Three 1's, Five brightness bits, 8 bits each : B : G : R
 // Max brightness: 31, RGB: 255
-// On 
+// On
   uint8_t         rx[PIXEL_BUFFER_SIZE] = { 0, };
   struct spi_ioc_transfer tr = {
     .tx_buf = (unsigned long) pixelBuffer,

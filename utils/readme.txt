@@ -16,7 +16,7 @@ trademarks acknowledged.
 
 For additional information, please contact :
 
-Numerix Ltd.,
+Alpha Numerix
 Email: support@numerix-dsp.com
 WWW  : https:\\www.numerix-dsp.com
 

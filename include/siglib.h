@@ -1,10 +1,10 @@
 
 /**************************************************************************
 File Name               : siglib.h      | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.30         |
+Siglib Library Version  : 10.41         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 13/09/1992
-Options   :                             | Latest Update : 09/01/2022
+Options   :                             | Latest Update : 06/06/2023
 ---------------------------------------------------------------------------
 Support for SigLib is available via EMail : support@numerix-dsp.com
 
@@ -44,7 +44,7 @@ Update history :
 #ifndef _HP_VEE                                                     // The following functionality is not supported by VEE
 
 #define SIGLIB                          1                           // Indicates SigLib is being used
-#define SIGLIB_VERSION                  10.40                       // Indicates SigLib version being used
+#define SIGLIB_VERSION                  10.41                       // Indicates SigLib version being used
 #define SIGLIB_ENABLE_DEBUG_FPRINTF     0                           // Set to 1 to enable SUF_Debugfprintf functions in some SigLib functions
 #define SIGLIB_LOG_FILE                 "siglib_debug.log"          // Filename for SigLib logging functions
 
@@ -195,29 +195,62 @@ extern          "C" {
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_BinReadData (
   SLData_t SIGLIB_OUTPUT_PTR_DECL *,
   FILE *,
-  const char,
+  const enum SLEndianType_t,
   const SLArrayIndex_t);                                            // Functions for reading and writing .bin files
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_BinWriteData (
   const SLData_t SIGLIB_INPUT_PTR_DECL *,
   FILE *,
-  const char,
+  const enum SLEndianType_t,
   const SLArrayIndex_t);
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_BinReadFile (
   SLData_t SIGLIB_OUTPUT_PTR_DECL *,
   const char *,
-  const char,
+  const enum SLEndianType_t,
   const SLArrayIndex_t);
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_BinWriteFile (
   const SLData_t SIGLIB_INPUT_PTR_DECL *,
   const char *,
-  const char,
+  const enum SLEndianType_t,
   const SLArrayIndex_t);
+
+  SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMReadData (
+  SLData_t * SIGLIB_PTR_DECL BPtr,
+  FILE * p_ioFile,
+  const enum SLEndianType_t endianMode,
+  const SLArrayIndex_t wordLength,
+  const SLArrayIndex_t arrayLength);                                // Functions for reading and writing .pcm files
+
+  SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMWriteData (
+  const SLData_t * SIGLIB_PTR_DECL BPtr,
+  FILE * p_ioFile,
+  const enum SLEndianType_t endianMode,
+  const SLArrayIndex_t wordLength,
+  const SLArrayIndex_t arrayLength);
+
+  SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMReadFile (
+  SLData_t * SIGLIB_PTR_DECL BPtr,
+  const char *filename,
+  const enum SLEndianType_t endianMode,
+  const SLArrayIndex_t wordLength,
+  const SLArrayIndex_t arrayLength);
+
+  SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMWriteFile (
+  const SLData_t * SIGLIB_PTR_DECL BPtr,
+  const char *filename,
+  const enum SLEndianType_t endianMode,
+  const char wordLength,
+  const SLArrayIndex_t arrayLength);
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadData (
   SLData_t SIGLIB_OUTPUT_PTR_DECL *,
   FILE *,
   const SLData_t,
   const SLArrayIndex_t,
   const SLArrayIndex_t);                                            // Functions for reading and writing .csv files
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvWriteData (
   const SLData_t SIGLIB_INPUT_PTR_DECL *,
   FILE *,
@@ -225,12 +258,14 @@ extern          "C" {
   const SLArrayIndex_t,
   const SLArrayIndex_t,
   const SLArrayIndex_t);
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadFile (
   SLData_t SIGLIB_OUTPUT_PTR_DECL *,
   const char *,
   const SLData_t,
   const SLArrayIndex_t,
-  const SLArrayIndex_t);                                            // Functions for reading and writing .csv files
+  const SLArrayIndex_t);
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvWriteFile (
   const SLData_t SIGLIB_INPUT_PTR_DECL *,
   const char *,
@@ -238,76 +273,97 @@ extern          "C" {
   const SLArrayIndex_t,
   const SLArrayIndex_t,
   const SLArrayIndex_t);
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadMatrix (
   SLData_t SIGLIB_OUTPUT_PTR_DECL **,
   const char *,
   const enum SLFileReadFirstRowFlag_t,
   SLArrayIndex_t *,
-  SLArrayIndex_t *);
+  SLArrayIndex_t *);                                                // Functions for reading and writing matrices files
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvWriteMatrix (
   const SLData_t *,
   const char *,
   const SLArrayIndex_t,
   const SLArrayIndex_t);
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_DatReadData (
   SLData_t SIGLIB_OUTPUT_PTR_DECL *,
   FILE *,
   const SLArrayIndex_t);                                            // Functions for reading and writing .dat files
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_DatWriteData (
   const SLData_t SIGLIB_INPUT_PTR_DECL *,
   FILE *,
   const SLData_t,
   const SLArrayIndex_t,
   const SLArrayIndex_t);
+
   SLData_t SIGLIB_FUNC_DECL SUF_DatReadHeader (
   FILE *);
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_DatWriteHeader (
   FILE *,
   const SLData_t);
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigReadData (
   SLData_t SIGLIB_OUTPUT_PTR_DECL *,
   FILE *,
   const SLArrayIndex_t);                                            // Functions for reading and writing .sig files
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigWriteData (
   const SLData_t SIGLIB_INPUT_PTR_DECL *,
   FILE *,
   const SLArrayIndex_t);
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigReadFile (
   SLData_t SIGLIB_OUTPUT_PTR_DECL *,
   const char *);
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigWriteFile (
   const SLData_t SIGLIB_INPUT_PTR_DECL *,
   const char *,
   const SLArrayIndex_t);
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigCountSamplesInFile (
   const char *);
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadData (
   SLData_t SIGLIB_OUTPUT_PTR_DECL *,
   FILE *,
   const SLWavFileInfo_s,
   const SLArrayIndex_t);                                            // Functions for reading and writing .wav files
+
   void SIGLIB_FUNC_DECL SUF_WavWriteData (
   const SLData_t SIGLIB_INPUT_PTR_DECL *,
   FILE *,
   const SLWavFileInfo_s,
   const SLArrayIndex_t);
+
   short SIGLIB_FUNC_DECL SUF_WavReadWord (
   FILE *);
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadInt (
   FILE *);
+
   void SIGLIB_FUNC_DECL SUF_WavWriteWord (
   const short,
   FILE *);
+
   void SIGLIB_FUNC_DECL SUF_WavWriteInt (
   const SLArrayIndex_t,
   FILE *);
+
   SLWavFileInfo_s SIGLIB_FUNC_DECL SUF_WavReadHeader (
   FILE *);
+
   void SIGLIB_FUNC_DECL SUF_WavWriteHeader (
   FILE *,
   const SLWavFileInfo_s);
+
   void SIGLIB_FUNC_DECL SUF_WavDisplayInfo (
   const SLWavFileInfo_s);
+
   SLWavFileInfo_s SIGLIB_FUNC_DECL SUF_WavSetInfo (
   const SLArrayIndex_t,
   const SLArrayIndex_t,
@@ -315,21 +371,26 @@ extern          "C" {
   const short,
   const short,
   const short);
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavFileLength (
   const char *);
+
   SLWavFileInfo_s SIGLIB_FUNC_DECL SUF_WavReadFile (
   SLData_t SIGLIB_OUTPUT_PTR_DECL *,
   const char *);
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavWriteFile (
   const SLData_t SIGLIB_INPUT_PTR_DECL *,
   const char *,
   const SLWavFileInfo_s,
   const SLArrayIndex_t);
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavWriteFileScaled (
   const SLData_t SIGLIB_INPUT_PTR_DECL *,
   const char *,
   const SLWavFileInfo_s,
   const SLArrayIndex_t);
+
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_XmtReadData (
   SLData_t *,
   FILE *,
@@ -5820,24 +5881,56 @@ extern          "C" {
   SLData_t,                                                         // Number of bits
   enum SLSignalSign_t);                                             // Sign type of the signal
 
-  SLData_t SIGLIB_FUNC_DECL SDS_LinearTodBm (
-  const SLData_t,                                                   // Linear value
+  SLData_t SIGLIB_FUNC_DECL SDS_VoltageTodBm (
+  const SLData_t,                                                   // Linear power value
   const SLData_t);                                                  // Zero dBm Level
 
-  void SIGLIB_FUNC_DECL SDA_LinearTodBm (
+  void SIGLIB_FUNC_DECL SDA_VoltageTodBm (
   const SLData_t * SIGLIB_PTR_DECL,                                 // Pointer to source array
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination array
   const SLData_t,                                                   // Zero dBm level
   const SLArrayIndex_t);                                            // Array lengths
 
-  SLData_t SIGLIB_FUNC_DECL SDS_dBmToLinear (
-  const SLData_t,                                                   // dBm value
+  SLData_t SIGLIB_FUNC_DECL SDS_dBmToVoltage (
+  const SLData_t,                                                   // dBm powervalue
   const SLData_t);                                                  // Zero dBm Level
 
-  void SIGLIB_FUNC_DECL SDA_dBmToLinear (
+  void SIGLIB_FUNC_DECL SDA_dBmToVoltage (
   const SLData_t * SIGLIB_PTR_DECL,                                 // Pointer to source array
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination array
   const SLData_t,                                                   // Zero dBm level
+  const SLArrayIndex_t);                                            // Array lengths
+
+  SLData_t SIGLIB_FUNC_DECL SDS_VoltageTodB (
+  const SLData_t);                                                  // Linear voltage value
+
+  void SIGLIB_FUNC_DECL SDA_VoltageTodB (
+  const SLData_t * SIGLIB_PTR_DECL,                                 // Pointer to source array
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination array
+  const SLArrayIndex_t);                                            // Array lengths
+
+  SLData_t SIGLIB_FUNC_DECL SDS_dBToVoltage (
+  const SLData_t);                                                  // dB value
+
+  void SIGLIB_FUNC_DECL SDA_dBToVoltage (
+  const SLData_t * SIGLIB_PTR_DECL,                                 // Pointer to source array
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination array
+  const SLArrayIndex_t);                                            // Array lengths
+
+  SLData_t SIGLIB_FUNC_DECL SDS_PowerTodB (
+  const SLData_t);                                                  // Linear power value
+
+  void SIGLIB_FUNC_DECL SDA_PowerTodB (
+  const SLData_t * SIGLIB_PTR_DECL,                                 // Pointer to source array
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination array
+  const SLArrayIndex_t);                                            // Array lengths
+
+  SLData_t SIGLIB_FUNC_DECL SDS_dBToPower (
+  const SLData_t);                                                  // dB value
+
+  void SIGLIB_FUNC_DECL SDA_dBToPower (
+  const SLData_t * SIGLIB_PTR_DECL,                                 // Pointer to source array
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination array
   const SLArrayIndex_t);                                            // Array lengths
 
   SLFixData_t SIGLIB_FUNC_DECL SDS_Compare (

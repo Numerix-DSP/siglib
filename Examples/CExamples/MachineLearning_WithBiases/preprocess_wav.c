@@ -355,8 +355,8 @@ int main (
 
       if (dataAugmentationRandomGainEnable == 1) {                  // Data augmentation by applying random gain to input data
         SLData_t        randomGain = SDS_RandomNumber (dataAugmentationRandomGainMinimum, dataAugmentationRandomGainMaximum);
-        randomGain = SDS_dBmToLinear (randomGain,                   // dBm input value
-                                      SIGLIB_ONE);                  // Zero dBm level
+        randomGain = SDS_dBmToVoltage (randomGain,                  // dBm input value
+                                       SIGLIB_ONE);                 // Zero dBm level
 // printf("Random gain: %lf\n", randomGain);
         SDA_Multiply (pRealData,                                    // Source array pointer
                       randomGain,                                   // Scalar multiply

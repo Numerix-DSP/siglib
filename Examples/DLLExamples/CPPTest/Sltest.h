@@ -1,6 +1,6 @@
 // SLTEST.H Header file for SigLib DLL test project
 
-// Copyright (C) Numerix Ltd. 2000. All rights reserved.
+// Copyright (C) Alpha Numerix 2000. All rights reserved.
 
 // Symbolic definition of constants
 

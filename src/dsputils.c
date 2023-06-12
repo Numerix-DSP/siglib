@@ -2748,20 +2748,20 @@ SLData_t SIGLIB_FUNC_DECL SDS_BitsToPeakValue (
 /**/
 
 /********************************************************
-* Function: SDS_LinearTodBm
+* Function: SDS_VoltageTodBm
 *
 * Parameters:
 *   const SLData_t  Linear,
 *   const SLData_t  ZerodBmLevel
 *
 * Return value:
-*   void
+*   dBm value
 *
 * Description: Convert the linear value to dBm
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_LinearTodBm (
+SLData_t SIGLIB_FUNC_DECL SDS_VoltageTodBm (
   const SLData_t Linear,
   const SLData_t ZerodBmLevel)
 {
@@ -2771,13 +2771,13 @@ SLData_t SIGLIB_FUNC_DECL SDS_LinearTodBm (
   else {
     return (SIGLIB_TWENTY * SDS_Log10 (Linear / ZerodBmLevel));
   }
-}                                                                   // End of SDS_LinearTodBm()
+}                                                                   // End of SDS_VoltageTodBm()
 
 
 /**/
 
 /********************************************************
-* Function: SDA_LinearTodBm
+* Function: SDA_VoltageTodBm
 *
 * Parameters:
 *   const SLData_t * SIGLIB_PTR_DECL pSrc,
@@ -2793,7 +2793,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_LinearTodBm (
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_LinearTodBm (
+void SIGLIB_FUNC_DECL SDA_VoltageTodBm (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLData_t ZerodBmLevel,
@@ -2829,37 +2829,37 @@ void SIGLIB_FUNC_DECL SDA_LinearTodBm (
     }
 #endif
   }
-}                                                                   // End of SDA_LinearTodBm()
+}                                                                   // End of SDA_VoltageTodBm()
 
 
 /**/
 
 /********************************************************
-* Function: SDS_dBmToLinear
+* Function: SDS_dBmToVoltage
 *
 * Parameters:
 *   const SLData_t  dBm,
 *   const SLData_t  ZerodBmLevel
 *
 * Return value:
-*   void
+*   Linear value
 *
 * Description: Convert the dBm value to linear
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_dBmToLinear (
+SLData_t SIGLIB_FUNC_DECL SDS_dBmToVoltage (
   const SLData_t dBm,
   const SLData_t ZerodBmLevel)
 {
   return (ZerodBmLevel * SDS_Pow (SIGLIB_TEN, (dBm / SIGLIB_TWENTY)));
-}                                                                   // End of SDS_dBmToLinear()
+}                                                                   // End of SDS_dBmToVoltage()
 
 
 /**/
 
 /********************************************************
-* Function: SDA_dBmToLinear
+* Function: SDA_dBmToVoltage
 *
 * Parameters:
 *   const SLData_t * SIGLIB_PTR_DECL pSrc,
@@ -2875,7 +2875,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_dBmToLinear (
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_dBmToLinear (
+void SIGLIB_FUNC_DECL SDA_dBmToVoltage (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLData_t ZerodBmLevel,
@@ -2897,7 +2897,263 @@ void SIGLIB_FUNC_DECL SDA_dBmToLinear (
     *pDst++ = ZerodBmLevel * SDS_Pow (SIGLIB_TEN, (*pSrc++ / SIGLIB_TWENTY));
 #endif
   }
-}                                                                   // End of SDA_dBmToLinear()
+}                                                                   // End of SDA_dBmToVoltage()
+
+
+/**/
+
+/********************************************************
+* Function: SDS_VoltageTodB
+*
+* Parameters:
+*   const SLData_t  Linear voltage,
+*
+* Return value:
+*   dB value
+*
+* Description: Convert the linear voltage gain to dB
+*
+********************************************************/
+
+SLData_t SDS_VoltageTodB (
+  SLData_t linearGain)
+{
+  return (SIGLIB_TWENTY * SDS_Log10 (linearGain));
+}                                                                   // End of SDS_VoltageTodB()
+
+
+/**/
+
+/********************************************************
+* Function: SDA_VoltageTodB
+*
+* Parameters:
+*   const SLData_t * SIGLIB_PTR_DECL pSrc,
+*   SLData_t * SIGLIB_PTR_DECL pDst,
+*   const SLArrayIndex_t size
+*
+* Return value:
+*   void
+*
+* Description:
+*   Convert the linear voltage gains to dB
+*
+********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_VoltageTodB (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
+{
+  SLArrayIndex_t  i;
+
+#if (SIGLIB_ARRAYS_ALIGNED)
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
+#endif
+#endif
+
+  for (i = 0; i < ArrayLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = SIGLIB_TWENTY * SDS_Log10 (pSrc[i]);
+#else                                                               // Pointer access mode
+    *pDst++ = SIGLIB_TWENTY * SDS_Log10 (*pSrc++);
+#endif
+  }
+}                                                                   // End of SDA_VoltageTodB()
+
+
+/**/
+
+/********************************************************
+* Function: SDS_dBToVoltage
+*
+* Parameters:
+*   const SLData_t  dB,
+*
+* Return value:
+*   Linear voltage
+*
+* Description: Convert the dB gain to linear voltage
+*
+********************************************************/
+
+SLData_t SDS_dBToVoltage (
+  SLData_t dBm)
+{
+  return (SDS_Pow (SIGLIB_TEN, dBm / SIGLIB_TWENTY));
+}                                                                   // End of SDS_dBToVoltage()
+
+
+/**/
+
+/********************************************************
+* Function: SDA_dBToVoltage
+*
+* Parameters:
+*   const SLData_t * SIGLIB_PTR_DECL pSrc,
+*   SLData_t * SIGLIB_PTR_DECL pDst,
+*   const SLArrayIndex_t size
+*
+* Return value:
+*   void
+*
+* Description:
+*   Convert the dB gains to linear voltage
+*
+********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_dBToVoltage (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
+{
+  SLArrayIndex_t  i;
+
+#if (SIGLIB_ARRAYS_ALIGNED)
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
+#endif
+#endif
+
+  for (i = 0; i < ArrayLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = SDS_Pow (SIGLIB_TEN, pSrc[i] / SIGLIB_TWENTY);
+#else                                                               // Pointer access mode
+    *pDst++ = SDS_Pow (SIGLIB_TEN, *pSrc++ / SIGLIB_TWENTY);
+#endif
+  }
+}                                                                   // End of SDA_dBToVoltage()
+
+
+/**/
+
+/********************************************************
+* Function: SDS_PowerTodB
+*
+* Parameters:
+*   const SLData_t  Linear power,
+*
+* Return value:
+*   dB value
+*
+* Description: Convert the linear power gain to dB
+*
+********************************************************/
+
+SLData_t SDS_PowerTodB (
+  SLData_t linearGain)
+{
+  return (SIGLIB_TEN * SDS_Log10 (linearGain));
+}                                                                   // End of SDS_PowerTodB()
+
+
+/**/
+
+/********************************************************
+* Function: SDA_PowerTodB
+*
+* Parameters:
+*   const SLData_t * SIGLIB_PTR_DECL pSrc,
+*   SLData_t * SIGLIB_PTR_DECL pDst,
+*   const SLArrayIndex_t size
+*
+* Return value:
+*   void
+*
+* Description:
+*   Convert the linear power gains to dB
+*
+********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_PowerTodB (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
+{
+  SLArrayIndex_t  i;
+
+#if (SIGLIB_ARRAYS_ALIGNED)
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
+#endif
+#endif
+
+  for (i = 0; i < ArrayLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = SIGLIB_TEN * SDS_Log10 (pSrc[i]);
+#else                                                               // Pointer access mode
+    *pDst++ = SIGLIB_TEN * SDS_Log10 (*pSrc++);
+#endif
+  }
+}                                                                   // End of SDA_PowerTodB()
+
+
+/**/
+
+/********************************************************
+* Function: SDS_dBToPower
+*
+* Parameters:
+*   const SLData_t  dB,
+*
+* Return value:
+*   Linear power
+*
+* Description: Convert the dB gain to linear power
+*
+********************************************************/
+
+SLData_t SDS_dBToPower (
+  SLData_t dBm)
+{
+  return (SDS_Pow (SIGLIB_TEN, dBm / SIGLIB_TEN));
+}                                                                   // End of SDS_dBToPower()
+
+
+/**/
+
+/********************************************************
+* Function: SDA_dBToPower
+*
+* Parameters:
+*   const SLData_t * SIGLIB_PTR_DECL pSrc,
+*   SLData_t * SIGLIB_PTR_DECL pDst,
+*   const SLArrayIndex_t size
+*
+* Return value:
+*   void
+*
+* Description:
+*   Convert the dB gains to linear power
+*
+********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_dBToPower (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t ArrayLength)
+{
+  SLArrayIndex_t  i;
+
+#if (SIGLIB_ARRAYS_ALIGNED)
+#ifdef __TMS320C6X__                                                // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
+#endif
+#endif
+
+  for (i = 0; i < ArrayLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
+    pDst[i] = SDS_Pow (SIGLIB_TEN, pSrc[i] / SIGLIB_TEN);
+#else                                                               // Pointer access mode
+    *pDst++ = SDS_Pow (SIGLIB_TEN, *pSrc++ / SIGLIB_TEN);
+#endif
+  }
+}                                                                   // End of SDA_dBToPower()
 
 
 /**/

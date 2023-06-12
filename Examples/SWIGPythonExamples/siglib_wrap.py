@@ -3044,21 +3044,21 @@ def SDS_BitsToPeakValue(arg1, arg2):
     return _siglib_wrap.SDS_BitsToPeakValue(arg1, arg2)
 SDS_BitsToPeakValue = _siglib_wrap.SDS_BitsToPeakValue
 
-def SDS_LinearTodBm(arg1, arg2):
-    return _siglib_wrap.SDS_LinearTodBm(arg1, arg2)
-SDS_LinearTodBm = _siglib_wrap.SDS_LinearTodBm
+def SDS_VoltageTodBm(arg1, arg2):
+    return _siglib_wrap.SDS_VoltageTodBm(arg1, arg2)
+SDS_VoltageTodBm = _siglib_wrap.SDS_VoltageTodBm
 
-def SDA_LinearTodBm(arg1, arg2, arg3, arg4):
-    return _siglib_wrap.SDA_LinearTodBm(arg1, arg2, arg3, arg4)
-SDA_LinearTodBm = _siglib_wrap.SDA_LinearTodBm
+def SDA_VoltageTodBm(arg1, arg2, arg3, arg4):
+    return _siglib_wrap.SDA_VoltageTodBm(arg1, arg2, arg3, arg4)
+SDA_VoltageTodBm = _siglib_wrap.SDA_VoltageTodBm
 
-def SDS_dBmToLinear(arg1, arg2):
-    return _siglib_wrap.SDS_dBmToLinear(arg1, arg2)
-SDS_dBmToLinear = _siglib_wrap.SDS_dBmToLinear
+def SDS_dBmToVoltage(arg1, arg2):
+    return _siglib_wrap.SDS_dBmToVoltage(arg1, arg2)
+SDS_dBmToVoltage = _siglib_wrap.SDS_dBmToVoltage
 
-def SDA_dBmToLinear(arg1, arg2, arg3, arg4):
-    return _siglib_wrap.SDA_dBmToLinear(arg1, arg2, arg3, arg4)
-SDA_dBmToLinear = _siglib_wrap.SDA_dBmToLinear
+def SDA_dBmToVoltage(arg1, arg2, arg3, arg4):
+    return _siglib_wrap.SDA_dBmToVoltage(arg1, arg2, arg3, arg4)
+SDA_dBmToVoltage = _siglib_wrap.SDA_dBmToVoltage
 
 def SDS_Compare(arg1, arg2, arg3):
     return _siglib_wrap.SDS_Compare(arg1, arg2, arg3)

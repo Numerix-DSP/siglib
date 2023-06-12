@@ -384,8 +384,7 @@ extern          "C" {
                    *(
   double **)     &jresult = result;
                     return jresult;
-  }
-  SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_delete_1doubleArray (
+  } SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_delete_1doubleArray (
   JNIEnv * jenv,
   jclass jcls,
   jlong jarg1) {
@@ -20908,7 +20907,7 @@ extern          "C" {
     (void) jcls;
     arg1 = (SLData_t) jarg1;
     arg2 = (SLData_t) jarg2;
-    result = (SLData_t) SDS_LinearTodBm (arg1, arg2);
+    result = (SLData_t) SDS_VoltageTodBm (arg1, arg2);
     jresult = (jdouble) result;
     return jresult;
   }
@@ -20932,7 +20931,7 @@ extern          "C" {
     arg2 = *(SLData_t **) & jarg2;
     arg3 = (SLData_t) jarg3;
     arg4 = (SLArrayIndex_t) jarg4;
-    SDA_LinearTodBm ((double const *) arg1, arg2, arg3, arg4);
+    SDA_VoltageTodBm ((double const *) arg1, arg2, arg3, arg4);
   }
 
 
@@ -20950,7 +20949,7 @@ extern          "C" {
     (void) jcls;
     arg1 = (SLData_t) jarg1;
     arg2 = (SLData_t) jarg2;
-    result = (SLData_t) SDS_dBmToLinear (arg1, arg2);
+    result = (SLData_t) SDS_dBmToVoltage (arg1, arg2);
     jresult = (jdouble) result;
     return jresult;
   }
@@ -20974,7 +20973,7 @@ extern          "C" {
     arg2 = *(SLData_t **) & jarg2;
     arg3 = (SLData_t) jarg3;
     arg4 = (SLArrayIndex_t) jarg4;
-    SDA_dBmToLinear ((double const *) arg1, arg2, arg3, arg4);
+    SDA_dBmToVoltage ((double const *) arg1, arg2, arg3, arg4);
   }
 
 

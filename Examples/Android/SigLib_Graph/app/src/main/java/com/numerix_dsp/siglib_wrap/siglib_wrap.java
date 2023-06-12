@@ -2506,20 +2506,20 @@ public class siglib_wrap implements siglib_wrapConstants {
     return siglib_wrapJNI.SDS_BitsToPeakValue(arg0, arg1.swigValue());
   }
 
-  public static double SDS_LinearTodBm(double arg0, double arg1) {
-    return siglib_wrapJNI.SDS_LinearTodBm(arg0, arg1);
+  public static double SDS_VoltageTodBm(double arg0, double arg1) {
+    return siglib_wrapJNI.SDS_VoltageTodBm(arg0, arg1);
   }
 
-  public static void SDA_LinearTodBm(SWIGTYPE_p_double arg0, SWIGTYPE_p_double arg1, double arg2, int arg3) {
-    siglib_wrapJNI.SDA_LinearTodBm(SWIGTYPE_p_double.getCPtr(arg0), SWIGTYPE_p_double.getCPtr(arg1), arg2, arg3);
+  public static void SDA_VoltageTodBm(SWIGTYPE_p_double arg0, SWIGTYPE_p_double arg1, double arg2, int arg3) {
+    siglib_wrapJNI.SDA_VoltageTodBm(SWIGTYPE_p_double.getCPtr(arg0), SWIGTYPE_p_double.getCPtr(arg1), arg2, arg3);
   }
 
-  public static double SDS_dBmToLinear(double arg0, double arg1) {
-    return siglib_wrapJNI.SDS_dBmToLinear(arg0, arg1);
+  public static double SDS_dBmToVoltage(double arg0, double arg1) {
+    return siglib_wrapJNI.SDS_dBmToVoltage(arg0, arg1);
   }
 
-  public static void SDA_dBmToLinear(SWIGTYPE_p_double arg0, SWIGTYPE_p_double arg1, double arg2, int arg3) {
-    siglib_wrapJNI.SDA_dBmToLinear(SWIGTYPE_p_double.getCPtr(arg0), SWIGTYPE_p_double.getCPtr(arg1), arg2, arg3);
+  public static void SDA_dBmToVoltage(SWIGTYPE_p_double arg0, SWIGTYPE_p_double arg1, double arg2, int arg3) {
+    siglib_wrapJNI.SDA_dBmToVoltage(SWIGTYPE_p_double.getCPtr(arg0), SWIGTYPE_p_double.getCPtr(arg1), arg2, arg3);
   }
 
   public static int SDS_Compare(double arg0, double arg1, double arg2) {

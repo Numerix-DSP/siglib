@@ -766,10 +766,10 @@ public class siglib_wrapJNI {
   public final static native void SDA_Abs(long jarg1, long jarg2, int jarg3);
   public final static native double SDS_PeakValueToBits(double jarg1, int jarg2);
   public final static native double SDS_BitsToPeakValue(double jarg1, int jarg2);
-  public final static native double SDS_LinearTodBm(double jarg1, double jarg2);
-  public final static native void SDA_LinearTodBm(long jarg1, long jarg2, double jarg3, int jarg4);
-  public final static native double SDS_dBmToLinear(double jarg1, double jarg2);
-  public final static native void SDA_dBmToLinear(long jarg1, long jarg2, double jarg3, int jarg4);
+  public final static native double SDS_VoltageTodBm(double jarg1, double jarg2);
+  public final static native void SDA_VoltageTodBm(long jarg1, long jarg2, double jarg3, int jarg4);
+  public final static native double SDS_dBmToVoltage(double jarg1, double jarg2);
+  public final static native void SDA_dBmToVoltage(long jarg1, long jarg2, double jarg3, int jarg4);
   public final static native int SDS_Compare(double jarg1, double jarg2, double jarg3);
   public final static native int SDA_Compare(long jarg1, long jarg2, double jarg3, int jarg4);
   public final static native int SDS_CompareComplex(double jarg1, double jarg2, double jarg3, double jarg4, double jarg5);

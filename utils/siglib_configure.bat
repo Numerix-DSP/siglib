@@ -2,6 +2,8 @@
 
 rem Configures SigLib header files and MSVC .def files
 
+z:
+
 cd %SIGLIB_PATH%
 
 cd include

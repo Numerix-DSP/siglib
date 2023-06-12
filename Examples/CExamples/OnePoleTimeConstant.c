@@ -63,10 +63,10 @@ int main (
                &OnePoleFilterState,                                 // Filter state
                SAMPLE_LENGTH);                                      // Dataset length
 
-  SDA_LinearTodBm (pDst,                                            // Pointer to source array
-                   pDst,                                            // Pointer to destination array
-                   SIGLIB_ONE,                                      // Zero dBm level
-                   SAMPLE_LENGTH);                                  // Dataset length
+  SDA_VoltageTodBm (pDst,                                           // Pointer to source array
+                    pDst,                                           // Pointer to destination array
+                    SIGLIB_ONE,                                     // Zero dBm level
+                    SAMPLE_LENGTH);                                 // Dataset length
 
   gpc_plot_2d (h2DPlot,                                             // Graph handle
                pDst,                                                // Dataset

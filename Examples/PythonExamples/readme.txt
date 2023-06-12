@@ -1,7 +1,7 @@
 
 
 
-                                SigLib�
+                                SigLib™
 
                        Signal Processing Library
                         Python Example Functions
@@ -13,8 +13,9 @@
 INTRODUCTION
 
 The files in this folder provide examples for accessing SigLib source
-files from Python via the ctypes API. They have been tested with Anaconda
-64 bit Python under Windows and Linux.
+files from Python and Python Notebooks via the ctypes API.
+They have been tested with Anaconda 64 bit Python under Linux, Windows
+and OSX.
 
 
 
@@ -31,4 +32,4 @@ Alpha Numerix,
 Email: info@numerix-dsp.com
 WWW  : https:\\www.numerix-dsp.com
 
-Copyright (c) 2022 Numerix Ltd. All rights reserved.
+Copyright (c) 2023 Alpha Numerix. All rights reserved.

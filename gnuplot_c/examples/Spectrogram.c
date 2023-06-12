@@ -11,7 +11,7 @@
 #define Y_AXIS_LENGTH     10
 
 #define X_MIN             0.0                                       // Minimum X value
-#define X_MAX             ((double)(X_AXIS_LENGTH - 1))             // Maximum X value
+#define X_MAX             ((double)(X_AXIS_LENGTH-1))               // Maximum X value
 #define Y_MIN             0.0                                       // Minimum Y value
 #define Y_MAX             0.45                                      // Maximum Y value
 

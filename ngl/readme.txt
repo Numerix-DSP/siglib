@@ -72,18 +72,18 @@ directories are included in the compiler; library and include paths.
 
 
 
-Numerix Ltd. hopes you will find this product useful, if so then please
+Alpha Numerix hopes you will find this product useful, if so then please
 tell others otherwise if you have any comments or suggestions then
 please tell us.
 
 
 LICENSE
 
-This software is free for use in any application but Numerix Ltd does
+This software is free for use in any application but Alpha Numerix does
 not provide any warranty or support.
 
 
-Digital Filter Plus, DFPlus and SigLib are trademarks of Numerix Ltd. all other
+Digital Filter Plus, DFPlus and SigLib are trademarks of Alpha Numerix all other
 trademarks acknowledged.
 
 

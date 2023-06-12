@@ -12,7 +12,7 @@
 
 // Declare global variables and arrays
 SLData_t        inputData[SAMPLE_LENGTH];                           // Data array pointers
-SLData_t        srcData[SAMPLE_LENGTH] = { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19 };
+SLData_t        srcData[SAMPLE_LENGTH] = { -10, -11, -12, -13, -14, 15, 16, 17, 18, 19 };
 
 int main (
   void)
@@ -27,8 +27,8 @@ int main (
     exit (-1);
   }
 
-  SUF_BinWriteData (srcData, fpOutputFile, 'l', IO_LENGTH);         // Write successive blocks of data
-  SUF_BinWriteData (srcData + IO_LENGTH, fpOutputFile, 'l', IO_LENGTH);
+  SUF_BinWriteData (srcData, fpOutputFile, SIGLIB_LITTLE_ENDIAN, IO_LENGTH);  // Write successive blocks of data
+  SUF_BinWriteData (srcData + IO_LENGTH, fpOutputFile, SIGLIB_LITTLE_ENDIAN, IO_LENGTH);
   fclose (fpOutputFile);
 
   printf ("Opening and reading from test.bin file\n");
@@ -38,7 +38,7 @@ int main (
     exit (-1);
   }
 
-  while ((sampleCount = SUF_BinReadData (inputData, fpInputFile, 'l', IO_LENGTH)) == IO_LENGTH) {
+  while ((sampleCount = SUF_BinReadData (inputData, fpInputFile, SIGLIB_LITTLE_ENDIAN, IO_LENGTH)) == IO_LENGTH) {
     for (SLArrayIndex_t i = 0; i < sampleCount; i++) {
       printf ("%lf, \n", inputData[i]);
     }

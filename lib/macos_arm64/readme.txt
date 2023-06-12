@@ -29,4 +29,4 @@ For additional information, please contact :
 Email: support@numerix-dsp.com
 WWW  : https:\\www.numerix-dsp.com
 
-Copyright (C) 2017 Numerix Ltd.
+Copyright (C) 2017 Alpha Numerix

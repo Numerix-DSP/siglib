@@ -3622,10 +3622,10 @@ Declare Function SDS_PeakValueToBits Lib "SIGLIB.DLL" (ByVal fData As Double, _
 Declare Function SDS_BitsToPeakValue Lib "SIGLIB.DLL" (ByVal fData As Double, _
         ByVal iType As Long) As Double
 
-Declare Function SDS_LinearTodBm Lib "SIGLIB.DLL" (ByVal fData As Double, _
+Declare Function SDS_VoltageTodBm Lib "SIGLIB.DLL" (ByVal fData As Double, _
 		ByVal fData As Double) As Double
 
-Declare Function SDS_dBmToLinear Lib "SIGLIB.DLL" (ByVal fData As Double, _
+Declare Function SDS_dBmToVoltage Lib "SIGLIB.DLL" (ByVal fData As Double, _
 		ByVal fData As Double) As Double
 
 Declare Function SDA_Compare Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _

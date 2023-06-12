@@ -37,7 +37,7 @@ static const SLData_t impulse[] = {                                 // Impulse r
 };
 #endif
 
-#define RESULT_LENGTH   (INPUT_LENGTH + IMPULSE_LENGTH - 1)         // Result dataset length
+#define RESULT_LENGTH   (INPUT_LENGTH + IMPULSE_LENGTH-1)           // Result dataset length
 
 // Declare global variables and arrays
 static SLData_t dest[RESULT_LENGTH];

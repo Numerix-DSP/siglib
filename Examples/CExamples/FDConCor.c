@@ -13,7 +13,7 @@
 #define INPUT_2_LENGTH          20                                  // Input dataset length 2
 
                                                             // Result dataset length
-#define RESULT_LENGTH           (DATA_LENGTH + FILTER_LENGTH - 1)
+#define RESULT_LENGTH           (DATA_LENGTH + FILTER_LENGTH-1)
 #define FFT_LENGTH              64
 #define LOG2_FFT_LENGTH         SAI_FftLengthLog2(FFT_LENGTH)       // Log2 FFT length,
 #define INV_FFT_LENGTH          (SIGLIB_ONE / ((SLData_t)FFT_LENGTH))

@@ -75,7 +75,7 @@ int main (
                     SAMPLE_RATE);                                   // Sample rate
 
   while (read_dtmf_key (&Tone, &Period, &Magnitude) == 0) {         // While there are key codes
-    LinearDTMFMagnitude = SDS_dBmToLinear (Magnitude, (SLData_t) 32767.0) / SIGLIB_TWO; // Note divide by two necessary for SDA_DtmfGenerate()
+    LinearDTMFMagnitude = SDS_dBmToVoltage (Magnitude, (SLData_t) 32767.0) / SIGLIB_TWO;  // Note divide by two necessary for SDA_DtmfGenerate()
     printf ("Tone = %c, Period = %d (ms), Magn. = %lf (dB), Lin. Magn. = %lf\n", Tone, Period, Magnitude, LinearDTMFMagnitude);
 
     if (Tone == 'S') {

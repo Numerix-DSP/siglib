@@ -101,8 +101,8 @@ int main (
 
 
 // Print results - dBm relative to 0 dB = FSD on a 16 bit ADC
-  printf ("Tone frequency = %2.2lf, Magnitude = %2.2lf (dB)\n\n", ((((SLData_t) ToneFFTBin) * SAMPLE_RATE) / ((SLData_t) FFT_LENGTH)), SDS_LinearTodBm (ToneMagnitude,  // Linear value
-                                                                                                                                                        32768.0));  // Zero dBm Level
+  printf ("Tone frequency = %2.2lf, Magnitude = %2.2lf (dB)\n\n", ((((SLData_t) ToneFFTBin) * SAMPLE_RATE) / ((SLData_t) FFT_LENGTH)), SDS_VoltageTodBm (ToneMagnitude, // Linear value
+                                                                                                                                                         32768.0)); // Zero dBm Level
 
   printf ("\nHit <Carriage Return> to continue ....\n");
   getchar ();                                                       // Wait for <Carriage Return>

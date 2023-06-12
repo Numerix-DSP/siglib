@@ -170,10 +170,10 @@ int main (
                       NETWORK_HIDDEN_LAYER_NODES);                  // Dataset length
 
 // Save and/or restore random initial weight values to ensure multiple runs are consistent
-//    SUF_BinWriteFile ((SLData_t *)layer1Weights, "rand_data1.bin", 'l', NETWORK_HIDDEN_LAYER_NODES*NETWORK_INPUT_SAMPLE_LENGTH);
-//    SUF_BinReadFile  ((SLData_t *)layer1Weights, "rand_data1.bin", 'l', NETWORK_HIDDEN_LAYER_NODES*NETWORK_INPUT_SAMPLE_LENGTH);
-//    SUF_BinWriteFile ((SLData_t *)layer2Weights, "rand_data2.bin", 'l', NETWORK_HIDDEN_LAYER_NODES);
-//    SUF_BinReadFile  ((SLData_t *)layer2Weights, "rand_data2.bin", 'l', NETWORK_HIDDEN_LAYER_NODES);
+//    SUF_BinWriteFile ((SLData_t *)layer1Weights, "rand_data1.bin", SIGLIB_LITTLE_ENDIAN, NETWORK_HIDDEN_LAYER_NODES*NETWORK_INPUT_SAMPLE_LENGTH);
+//    SUF_BinReadFile  ((SLData_t *)layer1Weights, "rand_data1.bin", SIGLIB_LITTLE_ENDIAN, NETWORK_HIDDEN_LAYER_NODES*NETWORK_INPUT_SAMPLE_LENGTH);
+//    SUF_BinWriteFile ((SLData_t *)layer2Weights, "rand_data2.bin", SIGLIB_LITTLE_ENDIAN, NETWORK_HIDDEN_LAYER_NODES);
+//    SUF_BinReadFile  ((SLData_t *)layer2Weights, "rand_data2.bin", SIGLIB_LITTLE_ENDIAN, NETWORK_HIDDEN_LAYER_NODES);
 
   if (debugFlag == 1) {
     printf ("Initial layer1Weights Min: %lf\n", SDA_Min ((SLData_t *) layer1Weights, NETWORK_HIDDEN_LAYER_NODES * NETWORK_INPUT_SAMPLE_LENGTH));  // Max and min values

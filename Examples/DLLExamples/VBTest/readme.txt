@@ -1,3 +1,5 @@
+
+
                               SigLib™
 
                      Signal Processing Library
@@ -50,4 +52,4 @@ Alpha Numerix,
 Email: support@numerix-dsp.com
 WWW  : https:\\www.numerix-dsp.com
 
-Copyright (c) 2022 Numerix Ltd. All rights reserved.
+Copyright (c) 2023 Alpha Numerix. All rights reserved.

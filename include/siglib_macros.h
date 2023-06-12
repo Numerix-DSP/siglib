@@ -66,8 +66,8 @@ Update history :
 #define SAI_RoundToNearest(a)   ((SLArrayIndex_t)(((SLData_t)a)+SIGLIB_HALF-SIGLIB_EPSILON))  // Round to nearest fixed point number
 #define SAI_Odd(a)              (SAI_RoundToNearest((SLData_t)a) & ((SLArrayIndex_t)1)) // Returns 1 if a is odd, 0 otherwise
 #define SAI_Even(a)             (1-SAI_RoundToNearest((SLData_t)a)) & ((SLArrayIndex_t)1))  // Returns 1 if a is even, 0 otherwise
-// #define SAI_PowerOfTwo(a)       ((((SLArrayIndex_t)a) & (((SLArrayIndex_t)a) - 1)) ? ((SLArrayIndex_t)0) : ((SLArrayIndex_t)1)) // Returns 1 if a is a power of two, 0 otherwise
-#define SAI_PowerOfTwo(a)       ((((SLUFixData_t)a) & (((SLUFixData_t)a) - 1)) ? ((SLArrayIndex_t)0) : ((SLArrayIndex_t)1)) // Returns 1 if a is a power of two, 0 otherwise
+// #define SAI_PowerOfTwo(a)       ((((SLArrayIndex_t)a) & (((SLArrayIndex_t)a)-1)) ? ((SLArrayIndex_t)0) : ((SLArrayIndex_t)1)) // Returns 1 if a is a power of two, 0 otherwise
+#define SAI_PowerOfTwo(a)       ((((SLUFixData_t)a) & (((SLUFixData_t)a)-1)) ? ((SLArrayIndex_t)0) : ((SLArrayIndex_t)1)) // Returns 1 if a is a power of two, 0 otherwise
 #define SAI_Absolute(a)         (((a) > SIGLIB_ZERO) ? (SAI_RoundToNearest((SLData_t)a)) : (-(SAI_RoundToNearest((SLData_t)a))))  // Returns the absolute value of a
 #define SAI_Sign(a)             (((a) >= SIGLIB_ZERO) ? SIGLIB_POSITIVE : SIGLIB_NEGATIVE)  // Returns the sign of a
 #define SAI_Log2(a)             (SAI_RoundToNearest(SDS_Log10((SLData_t)a) * SIGLIB_INV_LOG10_OF_2))  // Returns the nearest integer log2(n)

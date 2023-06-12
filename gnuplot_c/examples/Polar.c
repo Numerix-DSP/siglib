@@ -6,7 +6,7 @@
 
 #define NUM_ANGLES      7
 #define X_MIN           0.0                                         // Minimum X value
-#define X_MAX           ((double)(SAMPLE_LENGTH - 1))               // Maximum X value
+#define X_MAX           ((double)(SAMPLE_LENGTH-1))                 // Maximum X value
 
 #define GAIN_MIN        -80.                                        // Gain min
 #define GAIN_MAX        10.                                         // Gain max

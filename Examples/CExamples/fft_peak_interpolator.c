@@ -13,7 +13,7 @@
 #define SOURCE_MAGN         SIGLIB_ONE
 #define FREQ_START          0.013671875                             // Bin 7
 #define FREQ_END            0.017578125                             // Bin 9
-#define FREQ_INC            (FREQ_END - FREQ_START) / (NUM_FREQS - 1) // Frequency increment
+#define FREQ_INC            (FREQ_END - FREQ_START) / (NUM_FREQS-1) // Frequency increment
 
 // Define constants
 #define FFT_LENGTH          512

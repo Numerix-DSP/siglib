@@ -1,6 +1,6 @@
 // Numerix Graphics Library
 // Demo App
-// Copyright (c) 2022, Alpha Numerix, All rights reserved.
+// Copyright (c) 2023 Alpha Numerix, All rights reserved.
 
 // Include files
 // For compilers that support precompilation, includes "wx/wx.h".
@@ -146,7 +146,7 @@ mainFrame::~mainFrame ()
 void mainFrame::OnAbout (
   wxCommandEvent & WXUNUSED (event))
 {
-  wxMessageBox (_T ("Numerix Graphics Library Demo V1.20 (C) 2007, Numerix Ltd"),
+  wxMessageBox (_T ("Numerix Graphics Library Demo V1.20 (C) 2007, Alpha Numerix"),
                 _T ("About Numerix Graphics Library Demo"), wxOK | wxICON_INFORMATION, NULL);
 }
 

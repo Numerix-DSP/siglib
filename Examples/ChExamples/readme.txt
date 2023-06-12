@@ -1,7 +1,7 @@
 
 
 
-                                SigLib�
+                                SigLib™
 
                        Signal Processing Library
                           Ch Example Functions
@@ -28,4 +28,4 @@ Alpha Numerix,
 Email: info@numerix-dsp.com
 WWW  : https:\\www.numerix-dsp.com
 
-Copyright (c) 2022 Numerix Ltd. All rights reserved.
+Copyright (c) 2023 Alpha Numerix. All rights reserved.

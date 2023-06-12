@@ -10,7 +10,7 @@
 #define INPUT_LENGTH                27                              // Input dataset length
 #define IMPULSE_LENGTH              10                              // Impulse response dataset length
                                                             // Result dataset length
-#define CONVOLVED_SEQUENCE_LENGTH   (INPUT_LENGTH + IMPULSE_LENGTH - 1)
+#define CONVOLVED_SEQUENCE_LENGTH   (INPUT_LENGTH + IMPULSE_LENGTH-1)
 
 #define FFT_LENGTH                  128
 #define LOG2_FFT_LENGTH             SAI_FftLengthLog2(FFT_LENGTH)   // Log2 FFT length,
@@ -166,7 +166,7 @@ int main (
 //              FFT_LENGTH,                                // Dataset length
 //              "Real Result",                             // Dataset title
 //              SIGLIB_ZERO,                               // Minimum X value
-//              (double)(FFT_LENGTH - 1),                  // Maximum X value
+//              (double)(FFT_LENGTH-1),                  // Maximum X value
 //              "lines",                                   // Graph type
 //              "blue",                                    // Colour
 //              GPC_NEW);                                  // New graph
@@ -176,7 +176,7 @@ int main (
 //              FFT_LENGTH,                                // Dataset length
 //              "Imaginary Result",                        // Dataset title
 //              SIGLIB_ZERO,                               // Minimum X value
-//              (double)(FFT_LENGTH - 1),                  // Maximum X value
+//              (double)(FFT_LENGTH-1),                  // Maximum X value
 //              "lines",                                   // Graph type
 //              "red",                                     // Colour
 //              GPC_ADD);                                  // New graph

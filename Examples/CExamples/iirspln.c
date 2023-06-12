@@ -36,7 +36,6 @@
 #define FILTER_COEFF_ARRAY_LENGTH   (IIR_FILTER_STAGES * SIGLIB_IIR_COEFFS_PER_BIQUAD)  // Number of filter coefficients
 
 // Declare global variables and arrays
-
 #if PLOT_RESULTS
 static SLData_t *pFilterState, *pIIRCoeffs;
 static SLData_t *pSrc, *pRealData, *pImagData, *pResults, *pFFTCoeffs;

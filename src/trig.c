@@ -1269,7 +1269,7 @@ void SIGLIB_FUNC_DECL SIF_QuickSinc (
   SLArrayIndex_t  i;
   SLData_t        localPhaseGain;
 
-//    localPhaseGain = ((MaxXValue + 1.) / ((SLData_t)(TableLength - 1)));   // Calculate phase increment through lookup table
+//    localPhaseGain = ((MaxXValue + 1.) / ((SLData_t)(TableLength-1)));   // Calculate phase increment through lookup table
 
   localPhaseGain = (MaxXValue / TableLength);                       // Calculate phase increment through lookup table
 

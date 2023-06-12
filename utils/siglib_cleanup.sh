@@ -38,7 +38,9 @@ rm -f -r *.lst
 rm -f -r *.map
 rm -f -r *.manifest
 rm -f -r *.ncb
-rm -f -r *.o
+# rm -f -r *.o
+# rm -f src/obj/gcc/*.o
+find . -name *.o -delete
 rm -f -r *.o.d
 rm -f -r *.obj
 rm -f -r *.opt
@@ -70,7 +72,6 @@ rm -f -r Examples/*.dot
 rm -f -r Examples/*.elf
 rm -f -r Examples/*.exe
 rm -f -r Examples/*.log
-# rm -f -r Examples/CExamples/*.
 rm -f -r gnuplot_c/*.exe
 
 rm -f Examples/CExamples/Speech/aligned_1.wav
