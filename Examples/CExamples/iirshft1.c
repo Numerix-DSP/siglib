@@ -14,7 +14,7 @@
 // to be specified but the SDA_IirModifyFilterGain function uses a
 // normalised sample rate of 1.0 Hz.
 // The example modifies the Fc from 1.0 radian to 2.0 radians.
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -55,9 +55,6 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
   SLData_t        Scale;
-#if (PLOT_RESULTS == 0)
-  SLArrayIndex_t  i;
-#endif
 
 #if PLOT_RESULTS
 // Allocate memory
@@ -180,7 +177,7 @@ int main (
 
   printf ("Scaling Factor = %lf\n\n", Scale);
 #if (PLOT_RESULTS == 0)
-  for (i = 0; i < IIR_FILTER_STAGES; i++) {
+  for (SLArrayIndex_t i = 0; i < IIR_FILTER_STAGES; i++) {
     printf ("Modified LPF Coeffs - Biquad %d = %lf, %lf, %lf, %lf, %lf\n", (short) i, ModifiedCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0],
             ModifiedCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1], ModifiedCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2],
             ModifiedCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3], ModifiedCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4]);
@@ -269,7 +266,7 @@ int main (
 
   printf ("Scaling Factor = %lf\n\n", Scale);
 #if (PLOT_RESULTS == 0)
-  for (i = 0; i < IIR_FILTER_STAGES; i++) {
+  for (SLArrayIndex_t i = 0; i < IIR_FILTER_STAGES; i++) {
     printf ("Modified HPF Coeffs - Biquad %d = %lf, %lf, %lf, %lf, %lf\n", (short) i, ModifiedCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0],
             ModifiedCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1], ModifiedCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2],
             ModifiedCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3], ModifiedCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4]);

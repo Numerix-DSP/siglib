@@ -2,7 +2,7 @@
 // This program required the Numerix Host Library, which is available from :
 // https://www.numerix-dsp.com/files
 // This project was generated automatically in Visual Studio it is a command line applicaiton
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include "stdafx.h"
@@ -82,8 +82,6 @@ int _tmain (
   int argc,
   _TCHAR * argv[])
 {
-  int             i;
-
   pHistogram = SUF_VectorArrayAllocate (HISTOGRAM_LENGTH1);         /* Allocate arrays to the maximum histogram length */
   pHistogramCumul = SUF_VectorArrayAllocate (HISTOGRAM_LENGTH1);
 
@@ -92,8 +90,9 @@ int _tmain (
    Test number 1
  */
   printf ("\nTest number 1\n\n");
-  for (i = 0; i < SOURCE_LENGTH; i++)
+  for (SLArrayIndex_t i = 0; i < SOURCE_LENGTH; i++) {
     printf ("SourceData[%d] = %lf\n", i, SourceData1[i]);
+  }
 
   SIF_Histogram (pHistogram,                                        /* Histogram array pointer */
                  HISTOGRAM_LENGTH1);                                /* Histogram array length */
@@ -116,7 +115,7 @@ int _tmain (
                            HISTOGRAM_LENGTH1);                      /* Output (histogram) array length */
 
   printf ("\n-Histogram-\t\t\t-Cumulative Histogram-\n");
-  for (i = 0; i < HISTOGRAM_LENGTH1; i++) {
+  for (SLArrayIndex_t i = 0; i < HISTOGRAM_LENGTH1; i++) {
     printf ("pHistogram[%d] = %lf\tpHistogramCumul[%d] = %lf\n", i, pHistogram[i], i, pHistogramCumul[i]);
   }
 
@@ -125,7 +124,7 @@ int _tmain (
    Test number 2
  */
   printf ("\nTest number 2\n\n");
-  for (i = 0; i < SOURCE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SOURCE_LENGTH; i++) {
     printf ("SourceData[%d] = %lf\n", i, SourceData2[i]);
   }
 
@@ -150,7 +149,7 @@ int _tmain (
                                    HISTOGRAM_LENGTH2);              /* Output (histogram) array length */
 
   printf ("\n-Histogram-\t\t\t-Cumulative Histogram-\n");
-  for (i = 0; i < HISTOGRAM_LENGTH2; i++) {
+  for (SLArrayIndex_t i = 0; i < HISTOGRAM_LENGTH2; i++) {
     printf ("pHistogram[%d] = %lf\tpHistogramCumul[%d] = %lf\n", i, pHistogram[i], i, pHistogramCumul[i]);
   }
 
@@ -159,7 +158,7 @@ int _tmain (
    Test number 3
  */
   printf ("\nTest number 3\n\n");
-  for (i = 0; i < SOURCE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SOURCE_LENGTH; i++) {
     printf ("SourceData[%d] = %lf\n", i, SourceData3[i]);
   }
 
@@ -184,7 +183,7 @@ int _tmain (
                                    HISTOGRAM_LENGTH3);              /* Output (histogram) array length */
 
   printf ("\n-Histogram-\t\t\t-Cumulative Histogram-\n");
-  for (i = 0; i < HISTOGRAM_LENGTH3; i++) {
+  for (SLArrayIndex_t i = 0; i < HISTOGRAM_LENGTH3; i++) {
     printf ("pHistogram[%d] = %lf\tpHistogramCumul[%d] = %lf\n", i, pHistogram[i], i, pHistogramCumul[i]);
   }
 

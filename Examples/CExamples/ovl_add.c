@@ -1,5 +1,5 @@
 // SigLib - Overlap And Add Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -20,7 +20,6 @@ static SLData_t Window[WINDOW_LENGTH];                              // Declare t
 int main (
   void)
 {
-  SLArrayIndex_t  i;
   SLData_t        Increment;
 // Generate Hanning window table
   SIF_Window (Window,                                               // Pointer to window oefficient
@@ -38,7 +37,7 @@ int main (
                            ARRAY_LENGTH);                           // Array length
 
   printf ("Linear overlap and add operation\n");
-  for (i = 0; i < ARRAY_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < ARRAY_LENGTH; i++) {
     printf ("Dst[%d] = %lf\n", i, Dst[i]);
   }
 
@@ -50,7 +49,7 @@ int main (
                                       SIGLIB_TEN,                   // Threshold limiting value
                                       ARRAY_LENGTH);                // Array length
 
-  for (i = 0; i < ARRAY_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < ARRAY_LENGTH; i++) {
     printf ("Dst[%d] = %lf\n", i, Dst[i]);
   }
 

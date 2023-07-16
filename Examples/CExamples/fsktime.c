@@ -9,7 +9,7 @@
 // level detected and when the threshold is crossed, the index is recorded minus the filter
 // delay. For display pupRealDataoses the location is set in the detection array so that it can be
 // superimposed on the FSK data.
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -22,7 +22,7 @@
 #define TX_BIT_MODE_ENABLED             0                           // Set to '1' to process Tx bits, '0' for bytes
 #define SAMPLE_LENGTH                   128
 #define FFT_LENGTH                      512
-#define SAMPLE_RATE                     8000.
+#define SAMPLE_RATE_HZ                  8000.
 #define BAUD_RATE                       1200.
 
 #define MAX_SYMBOL_LENGTH               7                           // Maximum number of samples per symbol
@@ -31,7 +31,7 @@
 
 #define DETECTION_THRESHOLD             SIGLIB_HALF                 // Magnitude threshold for timing detection
 
-#define CARRIER_SINE_TABLE_SIZE         ((SLArrayIndex_t)(SAMPLE_RATE / CARRIER_TABLE_FREQ))  // Number of samples in each of cos and sine table
+#define CARRIER_SINE_TABLE_SIZE         ((SLArrayIndex_t)(SAMPLE_RATE_HZ / CARRIER_TABLE_FREQ)) // Number of samples in each of cos and sine table
                                                             // Must be an integer number of cycles
 
 #define DETECT_FILTER_LENGTH            ((SLArrayIndex_t)((2 * MAX_SYMBOL_LENGTH) + 1)) // Detection filter length
@@ -76,7 +76,6 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  SLArrayIndex_t  i;
   SLArrayIndex_t  TxBitIndex;
   SLData_t        LevelZeroFreqDotP, LevelOneFreqDotP;
   SLArrayIndex_t  Index = 0;
@@ -92,13 +91,13 @@ int main (
 // Generate the filter coeffs on the fly - this
 // makes them dependent on the application sample rate
   SIF_FirBandPassFilter (pRxLevelOneBPFilter,                       // Filter coeffs array
-                         CARRIER_FREQ_ONE / SAMPLE_RATE,            // Filter center frequency
-                         FILTER_BANDWIDTH / SAMPLE_RATE,            // Filter bandwidth
+                         CARRIER_FREQ_ONE / SAMPLE_RATE_HZ,         // Filter center frequency
+                         FILTER_BANDWIDTH / SAMPLE_RATE_HZ,         // Filter bandwidth
                          SIGLIB_HANNING,                            // Window type
                          DETECT_FILTER_LENGTH);                     // Filter length
   SIF_FirBandPassFilter (pRxLevelZeroBPFilter,                      // Filter coeffs array
-                         CARRIER_FREQ_ZERO / SAMPLE_RATE,           // Filter center frequency
-                         FILTER_BANDWIDTH / SAMPLE_RATE,            // Filter bandwidth
+                         CARRIER_FREQ_ZERO / SAMPLE_RATE_HZ,        // Filter center frequency
+                         FILTER_BANDWIDTH / SAMPLE_RATE_HZ,         // Filter bandwidth
                          SIGLIB_HANNING,                            // Window type
                          DETECT_FILTER_LENGTH);                     // Filter length
 
@@ -139,7 +138,7 @@ int main (
                DETECT_FILTER_LENGTH,                                // Dataset length
                "1300 Filter Coefficients",                          // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "magenta",                                           // Colour
                GPC_NEW);                                            // New graph
@@ -148,7 +147,7 @@ int main (
                DETECT_FILTER_LENGTH,                                // Dataset length
                "2100 Filter Coefficients",                          // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_ADD);                                            // New graph
@@ -167,7 +166,7 @@ int main (
   TxStringPtr = TxString;
 
   SIF_FskModulate (pCarrierTable,                                   // Carrier sinusoid table
-                   (CARRIER_TABLE_FREQ / SAMPLE_RATE),              // Carrier phase increment per sample (radians / 2π)
+                   (CARRIER_TABLE_FREQ / SAMPLE_RATE_HZ),           // Carrier phase increment per sample (radians / 2π)
                    CARRIER_SINE_TABLE_SIZE);                        // Sine table size
 
 
@@ -178,7 +177,7 @@ int main (
 
   TxBitIndex = SIGLIB_AI_ZERO;                                      // Initialise the bit index in the byte
 
-  for (i = DELAY_BEFORE_DATA; i < SAMPLE_LENGTH;) {
+  for (SLArrayIndex_t i = DELAY_BEFORE_DATA; i < SAMPLE_LENGTH;) {
 // Calculate the number of samples per symbol for the current bit
     TxSamplesPerSymbol = SamplesPerSymbolTable[TxSamplesPerSymbolTableOffset];
     if (++TxSamplesPerSymbolTableOffset == SamplesPerSymbolTableLength) {
@@ -208,7 +207,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "Modulated data",                                    // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "magenta",                                           // Colour
                GPC_NEW);                                            // New graph
@@ -219,7 +218,7 @@ int main (
 // Filter data - but do not want to overrun array
 // and threshold output
 
-  for (i = 0; i < SAMPLE_LENGTH - 30; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH - 30; i++) {
     LevelZeroFreqDotP = SDA_RealDotProduct (pData + i,              // Pointer to source vector 1
                                             pRxLevelZeroBPFilter,   // Pointer to source vector 2
                                             DETECT_FILTER_LENGTH);  // Vector length
@@ -254,7 +253,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "FSK detection",                                     // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_ADD);                                            // New graph

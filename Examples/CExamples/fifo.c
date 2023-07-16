@@ -1,5 +1,5 @@
 // SigLib FIFO Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -37,7 +37,6 @@ static SLData_t *pRealDelayArray, *pImagDelayArray, *pRealDst, *pImagDst;
 int main (
   void)
 {
-  SLArrayIndex_t  i;
   SLArrayIndex_t  InputIndex, OutputIndex;
   SLData_t        pRealInput, pRealOutput;
   SLData_t        pImagInput, pImagOutput;
@@ -128,7 +127,7 @@ int main (
 
   printf ("\nSDA_VariableDelay\n");
 
-  for (i = 0; i < 20; i++) {
+  for (SLArrayIndex_t i = 0; i < 20; i++) {
     printf ("Input = %1.1lf, Output = %1.1lf\n", pSrcReal[i], pRealDst[i]);
   }
 
@@ -372,7 +371,7 @@ int main (
 
   printf ("\nSDA_VariableDelayComplex\n");
 
-  for (i = 0; i < 20; i++) {
+  for (SLArrayIndex_t i = 0; i < 20; i++) {
     printf ("Input = (Real) %1.1lf, (Imag) %1.1lf, Output = (Real) %1.1lf, (Imag) %1.1lf\n", pSrcReal[i], pSrcImag[i], pRealDst[i], pImagDst[i]);
   }
 

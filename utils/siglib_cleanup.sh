@@ -14,6 +14,7 @@ find . -type f -name "*.c" -print0 | xargs -0 -n 1 -P 4 dos2unix
 find . -type f -name "*.cpp" -print0 | xargs -0 -n 1 -P 4 dos2unix
 find . -type f -name "*.h" -print0 | xargs -0 -n 1 -P 4 dos2unix
 find . -type f -name "*.html" -print0 | xargs -0 -n 1 -P 4 dos2unix
+find . -type f -name "*.py" -print0 | xargs -0 -n 1 -P 4 dos2unix
 find . -type f -name "*.sh" -print0 | xargs -0 -n 1 -P 4 dos2unix
 find . -type f -name "*.txt" -print0 | xargs -0 -n 1 -P 4 dos2unix
 
@@ -23,6 +24,8 @@ rm -f -r *.browse
 rm -f -r *.cache
 rm -f -r *.cout
 rm -f -r *.dot
+rm -f -r *.elf
+rm -f -r *.exe
 rm -f -r *.gpdt
 rm -f -r *.gprof
 rm -f -r *.idb
@@ -67,36 +70,6 @@ rm -f src/*.java
 rm -f src/siglib_wrap_wrap.c
 rm -f -r src/.vs/*.VC.db
 rm -f -r src/.vs/*.VC.db-wal
-rm -f -r src/SplitFiles/*.*
-rm -f -r Examples/*.dot
-rm -f -r Examples/*.elf
-rm -f -r Examples/*.exe
-rm -f -r Examples/*.log
-rm -f -r gnuplot_c/*.exe
-
-rm -f Examples/CExamples/Speech/aligned_1.wav
-rm -f Examples/CExamples/Speech/aligned_2.wav
-
-rm -f Examples/CExamples/MachineLearning/*.csv
-rm -f Examples/CExamples/MachineLearning_WithBiases/*.csv
-rm -f Examples/CExamples/MachineLearning/weightCoefficientsFiles/*
-rm -f Examples/CExamples/MachineLearning_WithBiases/weightCoefficientsFiles/*
-
-# Executables
-rm -f Examples/CExamples/MachineLearning/preprocess_wav
-rm -f Examples/CExamples/MachineLearning/network_train_multi_category
-rm -f Examples/CExamples/MachineLearning/network_train_single_category
-rm -f Examples/CExamples/MachineLearning/network_validate_multi_category
-rm -f Examples/CExamples/MachineLearning/network_validate_single_category
-rm -f Examples/CExamples/MachineLearning/network_validate_single_category
-
-rm -f Examples/CExamples/MachineLearning_WithBiases/preprocess_wav
-rm -f Examples/CExamples/MachineLearning_WithBiases/network_train_multi_category
-rm -f Examples/CExamples/MachineLearning_WithBiases/network_train_single_category
-rm -f Examples/CExamples/MachineLearning_WithBiases/network_validate_multi_category
-rm -f Examples/CExamples/MachineLearning_WithBiases/network_validate_single_category
-rm -f Examples/CExamples/MachineLearning_WithBiases/network_validate_single_category
-
 rm -rf src/dynamic_library_64/x64/*
 rm -rf src/static_library_64/x64/*
 rm -rf src/x64/*
@@ -104,41 +77,52 @@ rm -rf src/x64/*
 popd
 
 # Delete all executables
-pushd Examples/CExamples
+pushd $SIGLIB_PATH/Examples/CExamples
 $SIGLIB_PATH/utils/clean_executables.sh
 popd
 
-pushd Examples/CExamples/Align/
+pushd $SIGLIB_PATH/Examples/CExamples/AGC/
+rm -f Kipling_If_48kHz_Attenuated_processed.wav
+rm -f Kipling_If_48kHz_Attenuated_stereo.wav
 $SIGLIB_PATH/utils/clean_executables.sh
 popd
-pushd Examples/CExamples/Beamforming/
+pushd $SIGLIB_PATH/Examples/CExamples/Align/
+rm -f aligned_1.wav
+rm -f aligned_2.wav
 $SIGLIB_PATH/utils/clean_executables.sh
 popd
-pushd Examples/CExamples/CostasQAM_PiByFourDQpsk/
+pushd $SIGLIB_PATH/Examples/CExamples/Beamforming/
 $SIGLIB_PATH/utils/clean_executables.sh
 popd
-pushd Examples/CExamples/FileIO/
+pushd $SIGLIB_PATH/Examples/CExamples/CostasQAM_PiByFourDQpsk/
 $SIGLIB_PATH/utils/clean_executables.sh
 popd
-pushd Examples/CExamples/ImageExamples/
+pushd $SIGLIB_PATH/Examples/CExamples/FileIO/
 $SIGLIB_PATH/utils/clean_executables.sh
 popd
-pushd Examples/CExamples/MachineLearning/
+pushd $SIGLIB_PATH/Examples/CExamples/ImageExamples/
 $SIGLIB_PATH/utils/clean_executables.sh
 popd
-pushd Examples/CExamples/MachineLearning_PortAudio/
+pushd $SIGLIB_PATH/Examples/CExamples/MachineLearning/
+rm -f *.csv
+rm -f weightCoefficientsFiles/*
 $SIGLIB_PATH/utils/clean_executables.sh
 popd
-pushd Examples/CExamples/MachineLearning_WithBiases/
+pushd $SIGLIB_PATH/Examples/CExamples/MachineLearning_PortAudio/
 $SIGLIB_PATH/utils/clean_executables.sh
 popd
-pushd Examples/CExamples/OrderAnalysis/
+pushd $SIGLIB_PATH/Examples/CExamples/MachineLearning_WithBiases/
+rm -f *.csv
+rm -f weightCoefficientsFiles/*
 $SIGLIB_PATH/utils/clean_executables.sh
 popd
-pushd Examples/CExamples/ToneLevels/
+pushd $SIGLIB_PATH/Examples/CExamples/OrderAnalysis/
 $SIGLIB_PATH/utils/clean_executables.sh
 popd
-pushd Examples/CExamples/VibrationAnalysis/
+pushd $SIGLIB_PATH/Examples/CExamples/ToneLevels/
+$SIGLIB_PATH/utils/clean_executables.sh
+popd
+pushd $SIGLIB_PATH/Examples/CExamples/VibrationAnalysis/
 $SIGLIB_PATH/utils/clean_executables.sh
 popd
 

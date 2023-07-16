@@ -5,7 +5,7 @@
 // this is high pass filtered to remove the lower side band and
 // this is then shifted back down to baseband, where the signal is
 // low pass filtered to remove any out of band signals.
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -67,7 +67,6 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  SLFixData_t     i;
   SLFixData_t     cos_mod1_index;                                   // Size of the 1st stage modulator lookup table
 
   SLData_t        alpha, freq_shift, omega;
@@ -165,7 +164,7 @@ int main (
   omega = SIGLIB_ZERO;                                              // omega is the increasing radian value for
 // the 2nd modulation stage
 
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
 // perform the first stage modulation to move baseband
 // signal around MOD_1_FREQ
     working_data = COS_MOD1[cos_mod1_index++] * *(pSource + i);

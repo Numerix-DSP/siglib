@@ -8,7 +8,7 @@
 //      4 Mic Circular (Diamond) + centre, 0.043 mic radius
 //      4 Mic Linear, 0.10 separation
 //      4 Mic Linear, 0.033 separation
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 #include <stdio.h>
 #include <math.h>
@@ -33,7 +33,7 @@
 
 #define SRC_RADIUS_M        5.                                      // For far-field, source must be > 5* Mic Array Dimension
 
-#define SAMPLE_RATE         16000.                                  // Sample rate, used for quantizing the delay calucuations
+#define SAMPLE_RATE_HZ      16000.                                  // Sample rate, used for quantizing the delay calucuations
 
 
 static SLData_t responseAngles[NUM_ANGLES];                         // Beam angles (Degrees)
@@ -170,7 +170,7 @@ int main (
                                     START_ANGLE,                    // Calculation start angle
                                     END_ANGLE,                      // Calculation end angle
                                     NUM_ANGLES,                     // Number of angles to calculate
-                                    SAMPLE_RATE);                   // Sample rate
+                                    SAMPLE_RATE_HZ);                // Sample rate
 #else
     SDA_MicrophoneArrayBeamPatternLinear (NUM_MICROPHONES,          // Number of microphones
                                           micDetails,               // Microphone details
@@ -181,7 +181,7 @@ int main (
                                           START_ANGLE,              // Calculation start angle
                                           END_ANGLE,                // Calculation end angle
                                           NUM_ANGLES,               // Number of angles to calculate
-                                          SAMPLE_RATE);             // Sample rate
+                                          SAMPLE_RATE_HZ);          // Sample rate
 #endif
 
     gpc_plot_polar (hPolarPlot,                                     // Graph handle
@@ -204,7 +204,7 @@ int main (
                                     START_ANGLE,                    // Calculation start angle
                                     END_ANGLE,                      // Calculation end angle
                                     NUM_ANGLES,                     // Number of angles to calculate
-                                    SAMPLE_RATE);                   // Sample rate
+                                    SAMPLE_RATE_HZ);                // Sample rate
 #else
     SDA_MicrophoneArrayBeamPatternLinear (NUM_MICROPHONES,          // Number of microphones
                                           micDetails,               // Microphone details
@@ -215,7 +215,7 @@ int main (
                                           START_ANGLE,              // Calculation start angle
                                           END_ANGLE,                // Calculation end angle
                                           NUM_ANGLES,               // Number of angles to calculate
-                                          SAMPLE_RATE);             // Sample rate
+                                          SAMPLE_RATE_HZ);          // Sample rate
 #endif
 
     gpc_plot_polar (hPolarPlot,                                     // Graph handle
@@ -238,7 +238,7 @@ int main (
                                     START_ANGLE,                    // Calculation start angle
                                     END_ANGLE,                      // Calculation end angle
                                     NUM_ANGLES,                     // Number of angles to calculate
-                                    SAMPLE_RATE);                   // Sample rate
+                                    SAMPLE_RATE_HZ);                // Sample rate
 #else
     SDA_MicrophoneArrayBeamPatternLinear (NUM_MICROPHONES,          // Number of microphones
                                           micDetails,               // Microphone details
@@ -249,7 +249,7 @@ int main (
                                           START_ANGLE,              // Calculation start angle
                                           END_ANGLE,                // Calculation end angle
                                           NUM_ANGLES,               // Number of angles to calculate
-                                          SAMPLE_RATE);             // Sample rate
+                                          SAMPLE_RATE_HZ);          // Sample rate
 #endif
 
     gpc_plot_polar (hPolarPlot,                                     // Graph handle
@@ -272,7 +272,7 @@ int main (
                                     START_ANGLE,                    // Calculation start angle
                                     END_ANGLE,                      // Calculation end angle
                                     NUM_ANGLES,                     // Number of angles to calculate
-                                    SAMPLE_RATE);                   // Sample rate
+                                    SAMPLE_RATE_HZ);                // Sample rate
 #else
     SDA_MicrophoneArrayBeamPatternLinear (NUM_MICROPHONES,          // Number of microphones
                                           micDetails,               // Microphone details
@@ -283,7 +283,7 @@ int main (
                                           START_ANGLE,              // Calculation start angle
                                           END_ANGLE,                // Calculation end angle
                                           NUM_ANGLES,               // Number of angles to calculate
-                                          SAMPLE_RATE);             // Sample rate
+                                          SAMPLE_RATE_HZ);          // Sample rate
 #endif
 
     gpc_plot_polar (hPolarPlot,                                     // Graph handle
@@ -306,7 +306,7 @@ int main (
                                     START_ANGLE,                    // Calculation start angle
                                     END_ANGLE,                      // Calculation end angle
                                     NUM_ANGLES,                     // Number of angles to calculate
-                                    SAMPLE_RATE);                   // Sample rate
+                                    SAMPLE_RATE_HZ);                // Sample rate
 #else
     SDA_MicrophoneArrayBeamPatternLinear (NUM_MICROPHONES,          // Number of microphones
                                           micDetails,               // Microphone details
@@ -317,7 +317,7 @@ int main (
                                           START_ANGLE,              // Calculation start angle
                                           END_ANGLE,                // Calculation end angle
                                           NUM_ANGLES,               // Number of angles to calculate
-                                          SAMPLE_RATE);             // Sample rate
+                                          SAMPLE_RATE_HZ);          // Sample rate
 #endif
 
     gpc_plot_polar (hPolarPlot,                                     // Graph handle

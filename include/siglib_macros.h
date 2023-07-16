@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : siglib_macros.h   | Author    : JOHN EDWARDS
-Siglib Library Version  : 10.00             |
+Siglib Library Version  : 10.50             |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 22/01/2000
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Macro definitions header file for SigLib DSP library
 
@@ -91,6 +91,13 @@ Update history :
 #define SDS_Square(a)           ((SLData_t)((a) * (a)))
 #define SDS_Asinh(a)            ((SLData_t)SDS_Log ((a) + SDS_Sqrt ((a) * (a) + SIGLIB_ONE)))
 #define SDS_Log2Macro(a)        (SDS_Log10(a) * SIGLIB_INV_LOG10_OF_2)
+
+#define SDS_VoltageTodBmMacro(Linear,ZerodBmLevel)  (SIGLIB_TWENTY * SDS_Log10 (Linear / ZerodBmLevel)) // Converts the linear voltage to dBm
+#define SDS_dBmToVoltageMacro(dBm,ZerodBmLevel)     (ZerodBmLevel * SDS_Pow (SIGLIB_TEN, (dBm / SIGLIB_TWENTY)))  // Converts dBm to linear voltage
+#define SDS_VoltageTodBMacro(linearGain)            (SIGLIB_TWENTY * SDS_Log10 (linearGain))  // Converts the linear voltage gain to dBm
+#define SDS_dBToVoltageMacro(dB)                    (SDS_Pow (SIGLIB_TEN, dB / SIGLIB_TWENTY))  // Converts the dB gain to linear voltage
+#define SDS_PowerTodBMacro(linearGain)              (SIGLIB_TEN * SDS_Log10 (linearGain)) // Converts the linear power gain to dBm
+#define SDS_dBToPowerMacro(dBm)                     (SDS_Pow (SIGLIB_TEN, dBm / SIGLIB_TEN))  // Converts the dB gain to linear power
 
 #define SDS_Swap(a,b)           {SLData_t SIGLIB_Tmp = (SLData_t)a; a = b; b = SIGLIB_Tmp; }
 #define SDS_Swap16(a,b)         {SLInt16_t SIGLIB_Tmp = (SLInt16_t)a; a = b; b = SIGLIB_Tmp; }

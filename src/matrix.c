@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : MATRIX.C      | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 08/10/1994
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Matrix manipulation routines, for SigLib DSP library.
 
@@ -40,7 +40,6 @@ Description : Matrix manipulation routines, for SigLib DSP library.
 #define SIGLIB_SRC_FILE_MATRIX  1                                   // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
 
 /**/
 
@@ -70,10 +69,6 @@ void SIGLIB_FUNC_DECL SMX_Transpose (
   const SLArrayIndex_t Rows,
   const SLArrayIndex_t Columns)
 {
-  SLArrayIndex_t  i, j;
-  SLData_t        Temp;
-  SLArrayIndex_t  iRowIndex, jRowIndex;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMatrix % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
@@ -82,11 +77,11 @@ void SIGLIB_FUNC_DECL SMX_Transpose (
 #endif
 
   if (p_SrcMatrix == p_DstMatrix) {                                 // Inplace transpose - must be square
-    iRowIndex = 0;
-    for (i = 0; i < Rows; i++) {
-      jRowIndex = iRowIndex;
-      for (j = i; j < Rows; j++) {
-        Temp = *(p_SrcMatrix + i + jRowIndex);
+    SLArrayIndex_t  iRowIndex = 0;
+    for (SLArrayIndex_t i = 0; i < Rows; i++) {
+      SLArrayIndex_t  jRowIndex = iRowIndex;
+      for (SLArrayIndex_t j = i; j < Rows; j++) {
+        SLData_t        Temp = *(p_SrcMatrix + i + jRowIndex);
         *(p_DstMatrix + i + jRowIndex) = *(p_SrcMatrix + j + iRowIndex);
         *(p_DstMatrix + j + iRowIndex) = Temp;
         jRowIndex += Rows;
@@ -96,8 +91,8 @@ void SIGLIB_FUNC_DECL SMX_Transpose (
   }
 
   else {                                                            // Not in-place transform
-    for (i = 0; i < Rows; i++) {
-      for (j = 0; j < Columns; j++) {
+    for (SLArrayIndex_t i = 0; i < Rows; i++) {
+      for (SLArrayIndex_t j = 0; j < Columns; j++) {
         *p_DstMatrix = *p_SrcMatrix++;
         p_DstMatrix += Rows;
       }
@@ -139,8 +134,6 @@ void SIGLIB_FUNC_DECL SMX_Multiply (
   const SLArrayIndex_t Columns1,
   const SLArrayIndex_t Columns2)
 {
-  SLArrayIndex_t  i, j, k;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMatrix1 % 8 == 0);                           // Align arrays on 64 bit double word boundary for LDDW
@@ -149,11 +142,11 @@ void SIGLIB_FUNC_DECL SMX_Multiply (
 #endif
 #endif
 
-  for (i = 0; i < Rows1; i++) {
-    for (j = 0; j < Columns2; j++) {
+  for (SLArrayIndex_t i = 0; i < Rows1; i++) {
+    for (SLArrayIndex_t j = 0; j < Columns2; j++) {
       *p_DstMatrix = (*p_SrcMatrix1++) * (*p_SrcMatrix2);
       p_SrcMatrix2 += Columns2;
-      for (k = 1; k < Columns1; k++) {
+      for (SLArrayIndex_t k = 1; k < Columns1; k++) {
         *p_DstMatrix += (*p_SrcMatrix1++) * (*p_SrcMatrix2);
         p_SrcMatrix2 += Columns2;
       }
@@ -189,8 +182,6 @@ void SIGLIB_FUNC_DECL SMX_CreateIdentity (
   SLData_t * SIGLIB_PTR_DECL p_DstMatrix,
   const SLArrayIndex_t RowsAndCols)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_DstMatrix % 8 == 0);
@@ -199,7 +190,7 @@ void SIGLIB_FUNC_DECL SMX_CreateIdentity (
 
   SDA_Clear (p_DstMatrix, (SLArrayIndex_t) (RowsAndCols * RowsAndCols));
 
-  for (i = 0; i < RowsAndCols; i++) {
+  for (SLArrayIndex_t i = 0; i < RowsAndCols; i++) {
     *p_DstMatrix = SIGLIB_ONE;
     p_DstMatrix += (RowsAndCols + 1);
   }
@@ -283,7 +274,6 @@ SLError_t SIGLIB_FUNC_DECL SMX_ComplexInverse2x2 (
   SLComplexRect_s * SIGLIB_OUTPUT_PTR_DECL pDstMatrix)
 {
   SLComplexRect_s Det_InvDet;
-  SLData_t        InverseDenominator;
 
 // Calculate the determinat :
 // determinat = (*(pSrcMatrix+0) * *(pSrcMatrix+3)) - (*(pSrcMatrix+1) * *(pSrcMatrix+2));
@@ -301,7 +291,7 @@ SLError_t SIGLIB_FUNC_DECL SMX_ComplexInverse2x2 (
   }
 
 // Invert the determinant
-  InverseDenominator = SIGLIB_ONE / ((Det_InvDet.real * Det_InvDet.real) + (Det_InvDet.imag * Det_InvDet.imag));
+  SLData_t        InverseDenominator = SIGLIB_ONE / ((Det_InvDet.real * Det_InvDet.real) + (Det_InvDet.imag * Det_InvDet.imag));
   Det_InvDet.real = Det_InvDet.real * InverseDenominator;
   Det_InvDet.imag = (-Det_InvDet.imag) * InverseDenominator;
 
@@ -357,16 +347,14 @@ SLError_t SIGLIB_FUNC_DECL SMX_Inverse (
   SLData_t * SIGLIB_PTR_DECL pScalingFactor,
   const SLArrayIndex_t RowsAndCols)
 {
-  SLError_t       ErrorCode;
-  SLArrayIndex_t  i;
-
   SMX_Copy (p_SrcMatrix, pTempSourceArray, RowsAndCols, RowsAndCols); // Copy source data to working array
 
+  SLError_t       ErrorCode;
   if ((ErrorCode = SMX_LuDecompose (pTempSourceArray, pRowInterchangeIndex, pScalingFactor, RowsAndCols)) != SIGLIB_NO_ERROR) { // LU decomposition
     return (ErrorCode);                                             // Error state indicates singular matrix
   }
 
-  for (i = 0; i < RowsAndCols; i++) {                               // Calculate the inverse of the input on per-column basis
+  for (SLArrayIndex_t i = 0; i < RowsAndCols; i++) {                // Calculate the inverse of the input on per-column basis
     SDA_Clear (pSubstituteIndex, RowsAndCols);                      // Set a '1' in appropriate row
     *(pSubstituteIndex + i) = SIGLIB_ONE;
     SMX_LuSolve (pTempSourceArray, pSubstituteIndex, pRowInterchangeIndex, RowsAndCols);  // Back substitute column
@@ -412,9 +400,9 @@ SLError_t SIGLIB_FUNC_DECL SMX_LuDecompose (
   const SLArrayIndex_t RowsAndCols)
 {
   SLData_t        AbsMaxValue, Sum;
-  SLArrayIndex_t  i, j, k, LargestPivotElement;
+  SLArrayIndex_t  LargestPivotElement;
 
-  for (i = 0; i < RowsAndCols; i++) {                               // Find the maximum pivot element in each row
+  for (SLArrayIndex_t i = 0; i < RowsAndCols; i++) {                // Find the maximum pivot element in each row
     AbsMaxValue = SDA_AbsMax (p_SrcMatrix + (i * RowsAndCols), RowsAndCols);
 
     if ((AbsMaxValue < SIGLIB_MIN_THRESHOLD) &&                     // Check for close to zero
@@ -428,11 +416,11 @@ SLError_t SIGLIB_FUNC_DECL SMX_LuDecompose (
   pScalingFactor -= RowsAndCols;                                    // Reset pointer
 
 // Perform Crout's algorithm
-  for (k = 0; k < RowsAndCols; k++) {                               // Iterate down diagonal of source matrix
-    for (i = 0; i <= k; i++) {                                      // Perform first summation term
+  for (SLArrayIndex_t k = 0; k < RowsAndCols; k++) {                // Iterate down diagonal of source matrix
+    for (SLArrayIndex_t i = 0; i <= k; i++) {                       // Perform first summation term
 // Down kth col., for lower triangular matrix
       Sum = *(p_SrcMatrix + (i * RowsAndCols) + k);                 // Including Akk
-      for (j = 0; j < i; j++) {
+      for (SLArrayIndex_t j = 0; j < i; j++) {
         Sum -= *(p_SrcMatrix + (i * RowsAndCols) + j) * *(p_SrcMatrix + (j * RowsAndCols) + k);
       }
       *(p_SrcMatrix + (i * RowsAndCols) + k) = Sum;
@@ -447,10 +435,10 @@ SLError_t SIGLIB_FUNC_DECL SMX_LuDecompose (
       AbsMaxValue = -Sum;
     }
 
-    for (j = k + 1; j < RowsAndCols; j++) {                         // Perform second summation term
+    for (SLArrayIndex_t j = k + 1; j < RowsAndCols; j++) {          // Perform second summation term
 // Along kth row, for upper triangular matrix
       Sum = *(p_SrcMatrix + (j * RowsAndCols) + k);
-      for (i = 0; i < k; i++) {
+      for (SLArrayIndex_t i = 0; i < k; i++) {
         Sum -= *(p_SrcMatrix + (j * RowsAndCols) + i) * *(p_SrcMatrix + (i * RowsAndCols) + k);
       }
 
@@ -486,7 +474,7 @@ SLError_t SIGLIB_FUNC_DECL SMX_LuDecompose (
 
 // Perform division along row but not Akk
     Sum = SIGLIB_ONE / *(p_SrcMatrix + (k * RowsAndCols) + k);      // Remove divide from inner loop
-    for (i = k + 1; i < RowsAndCols; i++) {                         // Reuse variable "Sum"
+    for (SLArrayIndex_t i = k + 1; i < RowsAndCols; i++) {          // Reuse variable "Sum"
 
       *(p_SrcMatrix + (i * RowsAndCols) + k) *= Sum;
     }
@@ -525,28 +513,25 @@ void SIGLIB_FUNC_DECL SMX_LuSolve (
   const SLArrayIndex_t * SIGLIB_PTR_DECL pRowInterchangeIndex,
   const SLArrayIndex_t RowsAndCols)
 {
-  SLArrayIndex_t  i, j;
-  SLData_t        Sum;
+  for (SLArrayIndex_t i = 0; i < RowsAndCols; i++) {                // Forward substitution and interchange
 
-  for (i = 0; i < RowsAndCols; i++) {                               // Forward substitution and interchange
-
-    j = *pRowInterchangeIndex++;                                    // Interchange inverse (input) matrix
-    Sum = *(pInverseArray + i);                                     // Use "Sum" as temporary variable
+    SLArrayIndex_t  j = *pRowInterchangeIndex++;                    // Interchange inverse (input) matrix
+    SLData_t        Sum = *(pInverseArray + i);                     // Use "Sum" as temporary variable
     *(pInverseArray + i) = *(pInverseArray + j);
     *(pInverseArray + j) = Sum;
 
     Sum = *((pInverseArray + i));                                   // Forward substitution
-    for (j = 0; j < i; j++) {
+    for (SLArrayIndex_t j = 0; j < i; j++) {
       Sum = Sum - *(pLUArray + (i * RowsAndCols) + j) * *(pInverseArray + j);
     }
     *(pInverseArray + i) = Sum;
   }
 
-  i = RowsAndCols - 1;                                              // Backward substitution
+  SLArrayIndex_t  i = RowsAndCols - 1;                              // Backward substitution
   *((pInverseArray + i)) = *(pInverseArray + i) / *(pLUArray + (i * RowsAndCols) + i);
-  for (i = RowsAndCols - 2; i >= 0; i--) {
-    Sum = *((pInverseArray + i));
-    for (j = i + 1; j < RowsAndCols; j++) {
+  for (SLArrayIndex_t i = RowsAndCols - 2; i >= 0; i--) {
+    SLData_t        Sum = *((pInverseArray + i));
+    for (SLArrayIndex_t j = i + 1; j < RowsAndCols; j++) {
       Sum = Sum - *(pLUArray + (i * RowsAndCols) + j) * *(pInverseArray + j);
     }
 
@@ -621,18 +606,15 @@ SLData_t SIGLIB_FUNC_DECL SMX_LuDeterminant (
   const SLArrayIndex_t * SIGLIB_PTR_DECL pRowInterchangeIndex,
   const SLArrayIndex_t RowsAndCols)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Determinant;
+  SLData_t        Determinant = SIGLIB_ONE;
 
-  Determinant = SIGLIB_ONE;
-
-  for (i = 0; i < RowsAndCols; i++) {                               // Sign of determinant changes for each row swap
+  for (SLArrayIndex_t i = 0; i < RowsAndCols; i++) {                // Sign of determinant changes for each row swap
     if (i != *pRowInterchangeIndex++) {
       Determinant *= SIGLIB_MINUS_ONE;
     }
   }
 
-  for (i = 0; i < RowsAndCols; i++) {                               // Determinant is product of diagonal elements of LU decomposition
+  for (SLArrayIndex_t i = 0; i < RowsAndCols; i++) {                // Determinant is product of diagonal elements of LU decomposition
     Determinant *= *(pLUArray + (i * RowsAndCols) + i);
   }
 
@@ -667,8 +649,6 @@ void SIGLIB_FUNC_DECL SMX_RotateClockwise (
   const SLArrayIndex_t InputRows,
   const SLArrayIndex_t InputColumns)
 {
-  SLArrayIndex_t  i, j;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMatrix % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
@@ -676,8 +656,8 @@ void SIGLIB_FUNC_DECL SMX_RotateClockwise (
 #endif
 #endif
 
-  for (i = 0; i < InputRows; i++) {
-    for (j = 0; j < InputColumns; j++) {
+  for (SLArrayIndex_t i = 0; i < InputRows; i++) {
+    for (SLArrayIndex_t j = 0; j < InputColumns; j++) {
       *(p_DstMatrix + (InputRows - 1 - i) + (j * InputRows)) = *(p_SrcMatrix + j + (i * InputColumns));
     }
   }
@@ -711,8 +691,6 @@ void SIGLIB_FUNC_DECL SMX_RotateAntiClockwise (
   const SLArrayIndex_t InputRows,
   const SLArrayIndex_t InputColumns)
 {
-  SLArrayIndex_t  i, j;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMatrix % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
@@ -720,8 +698,8 @@ void SIGLIB_FUNC_DECL SMX_RotateAntiClockwise (
 #endif
 #endif
 
-  for (i = 0; i < InputRows; i++) {
-    for (j = 0; j < InputColumns; j++) {
+  for (SLArrayIndex_t i = 0; i < InputRows; i++) {
+    for (SLArrayIndex_t j = 0; j < InputColumns; j++) {
       *(p_DstMatrix + i + ((InputColumns - 1 - j) * InputRows)) = *(p_SrcMatrix + j + (i * InputColumns));
     }
   }
@@ -755,11 +733,6 @@ void SIGLIB_FUNC_DECL SMX_Reflect (
   const SLArrayIndex_t Rows,
   const SLArrayIndex_t Columns)
 {
-  SLArrayIndex_t  i, j;
-  SLArrayIndex_t  HalfRowWidth = (SLArrayIndex_t) ((SLUFixData_t) Columns >> 1U);
-  SLArrayIndex_t  CurrentRowStart = 0;
-  SLData_t        Temp;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMatrix % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
@@ -767,9 +740,12 @@ void SIGLIB_FUNC_DECL SMX_Reflect (
 #endif
 #endif
 
-  for (i = 0; i < Rows; i++) {
-    for (j = 0; j < HalfRowWidth; j++) {
-      Temp = *(p_SrcMatrix + CurrentRowStart + j);
+  SLArrayIndex_t  HalfRowWidth = (SLArrayIndex_t) ((SLUFixData_t) Columns >> 1U);
+  SLArrayIndex_t  CurrentRowStart = 0;
+
+  for (SLArrayIndex_t i = 0; i < Rows; i++) {
+    for (SLArrayIndex_t j = 0; j < HalfRowWidth; j++) {
+      SLData_t        Temp = *(p_SrcMatrix + CurrentRowStart + j);
       *(p_DstMatrix + CurrentRowStart + j) = *(p_SrcMatrix + CurrentRowStart + Columns - j - 1);
       *(p_DstMatrix + CurrentRowStart + Columns - j - 1) = Temp;
     }
@@ -805,11 +781,6 @@ void SIGLIB_FUNC_DECL SMX_Flip (
   const SLArrayIndex_t Rows,
   const SLArrayIndex_t Columns)
 {
-  SLArrayIndex_t  i, j;
-  SLArrayIndex_t  HalfColumnHeight = (SLArrayIndex_t) ((SLUFixData_t) Rows >> 1U);
-  SLData_t        Temp;
-  SLArrayIndex_t  CurrentColumnStart = 0;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMatrix % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
@@ -817,9 +788,12 @@ void SIGLIB_FUNC_DECL SMX_Flip (
 #endif
 #endif
 
-  for (i = 0; i < Columns; i++) {
-    for (j = 0; j < HalfColumnHeight; j++) {
-      Temp = *(p_SrcMatrix + CurrentColumnStart + (j * Columns));
+  SLArrayIndex_t  HalfColumnHeight = (SLArrayIndex_t) ((SLUFixData_t) Rows >> 1U);
+  SLArrayIndex_t  CurrentColumnStart = 0;
+
+  for (SLArrayIndex_t i = 0; i < Columns; i++) {
+    for (SLArrayIndex_t j = 0; j < HalfColumnHeight; j++) {
+      SLData_t        Temp = *(p_SrcMatrix + CurrentColumnStart + (j * Columns));
       *(p_DstMatrix + CurrentColumnStart + (j * Columns)) = *(p_SrcMatrix + CurrentColumnStart + ((Rows - j - 1) * Columns));
       *(p_DstMatrix + CurrentColumnStart + ((Rows - j - 1) * Columns)) = Temp;
     }
@@ -860,8 +834,6 @@ void SIGLIB_FUNC_DECL SMX_InsertRow (
   const SLArrayIndex_t Rows,
   const SLArrayIndex_t Columns)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMatrix % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
@@ -876,7 +848,7 @@ void SIGLIB_FUNC_DECL SMX_InsertRow (
 
   p_DstMatrix += (RowNumber * Columns);
 
-  for (i = 0; i < Columns; i++) {
+  for (SLArrayIndex_t i = 0; i < Columns; i++) {
     *p_DstMatrix++ = *p_SrcRow++;
   }
 }                                                                   // End of SMX_InsertRow()
@@ -910,8 +882,6 @@ void SIGLIB_FUNC_DECL SMX_ExtractRow (
   const SLArrayIndex_t RowNumber,
   const SLArrayIndex_t Columns)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMatrix % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
@@ -921,7 +891,7 @@ void SIGLIB_FUNC_DECL SMX_ExtractRow (
 
   p_SrcMatrix += (RowNumber * Columns);
 
-  for (i = 0; i < Columns; i++) {
+  for (SLArrayIndex_t i = 0; i < Columns; i++) {
     *p_DstMatrix++ = *p_SrcMatrix++;
   }
 }                                                                   // End of SMX_ExtractRow()
@@ -959,9 +929,6 @@ void SIGLIB_FUNC_DECL SMX_InsertColumn (
   const SLArrayIndex_t Rows,
   const SLArrayIndex_t Columns)
 {
-  SLArrayIndex_t  i;
-  SLArrayIndex_t  Offset;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMatrix % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
@@ -974,9 +941,9 @@ void SIGLIB_FUNC_DECL SMX_InsertColumn (
     SDA_Copy (p_SrcMatrix, p_DstMatrix, (SLArrayIndex_t) (Columns * Rows)); // Copy src data to dest
   }
 
-  Offset = ColumnNumber;
+  SLArrayIndex_t  Offset = ColumnNumber;
 
-  for (i = 0; i < Rows; i++) {
+  for (SLArrayIndex_t i = 0; i < Rows; i++) {
     *(p_DstMatrix + Offset) = *p_SrcColumn++;
     Offset += Columns;
   }
@@ -1013,9 +980,6 @@ void SIGLIB_FUNC_DECL SMX_ExtractColumn (
   const SLArrayIndex_t Rows,
   const SLArrayIndex_t Columns)
 {
-  SLArrayIndex_t  i;
-  SLArrayIndex_t  Offset;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMatrix % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
@@ -1023,9 +987,9 @@ void SIGLIB_FUNC_DECL SMX_ExtractColumn (
 #endif
 #endif
 
-  Offset = ColumnNumber;
+  SLArrayIndex_t  Offset = ColumnNumber;
 
-  for (i = 0; i < Rows; i++) {
+  for (SLArrayIndex_t i = 0; i < Rows; i++) {
     *p_DstMatrix++ = *(p_SrcMatrix + Offset);
     Offset += Columns;
   }
@@ -1066,8 +1030,6 @@ void SIGLIB_FUNC_DECL SMX_InsertNewRow (
   const SLArrayIndex_t Rows,
   const SLArrayIndex_t Columns)
 {
-  SLArrayIndex_t  i, j;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMatrix % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
@@ -1076,16 +1038,17 @@ void SIGLIB_FUNC_DECL SMX_InsertNewRow (
 #endif
 #endif
 
+  SLArrayIndex_t  i;
   for (i = 0; i < NewRowNumber; i++) {                              // Copy data before row being inserted
-    for (j = 0; j < Columns; j++) {
+    for (SLArrayIndex_t j = 0; j < Columns; j++) {
       *(p_DstMatrix + j + (i * Columns)) = *(p_SrcMatrix + j + (i * Columns));
     }
   }
-  for (j = 0; j < Columns; j++) {                                   // Add in new row
+  for (SLArrayIndex_t j = 0; j < Columns; j++) {                    // Add in new row
     *(p_DstMatrix + j + (i * Columns)) = *(p_NewMatrix + j);
   }
-  for (i = NewRowNumber; i < Rows; i++) {                           // Copy data after row being inserted
-    for (j = 0; j < Columns; j++) {
+  for (SLArrayIndex_t i = NewRowNumber; i < Rows; i++) {            // Copy data after row being inserted
+    for (SLArrayIndex_t j = 0; j < Columns; j++) {
       *(p_DstMatrix + j + ((i + 1) * Columns)) = *(p_SrcMatrix + j + (i * Columns));
     }
   }
@@ -1123,8 +1086,6 @@ void SIGLIB_FUNC_DECL SMX_DeleteOldRow (
   const SLArrayIndex_t Rows,
   const SLArrayIndex_t Columns)
 {
-  SLArrayIndex_t  i, j;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMatrix % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
@@ -1132,13 +1093,13 @@ void SIGLIB_FUNC_DECL SMX_DeleteOldRow (
 #endif
 #endif
 
-  for (i = 0; i < (OldRowNumber - 1); i++) {                        // Copy data before row being deleted
-    for (j = 0; j < Columns; j++) {
+  for (SLArrayIndex_t i = 0; i < (OldRowNumber - 1); i++) {         // Copy data before row being deleted
+    for (SLArrayIndex_t j = 0; j < Columns; j++) {
       *(p_DstMatrix + j + (i * Columns)) = *(p_SrcMatrix + j + (i * Columns));
     }
   }
-  for (i = OldRowNumber; i < Rows; i++) {                           // Copy data after row being deleted
-    for (j = 0; j < Columns; j++) {
+  for (SLArrayIndex_t i = OldRowNumber; i < Rows; i++) {            // Copy data after row being deleted
+    for (SLArrayIndex_t j = 0; j < Columns; j++) {
       *(p_DstMatrix + j + (i * Columns)) = *(p_SrcMatrix + j + ((i + 1) * Columns));
     }
   }
@@ -1179,8 +1140,6 @@ void SIGLIB_FUNC_DECL SMX_InsertNewColumn (
   const SLArrayIndex_t Rows,
   const SLArrayIndex_t Columns)
 {
-  SLArrayIndex_t  i, j;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMatrix % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
@@ -1189,16 +1148,17 @@ void SIGLIB_FUNC_DECL SMX_InsertNewColumn (
 #endif
 #endif
 
+  SLArrayIndex_t  i;
   for (i = 0; i < NewColumnNumber; i++) {                           // Copy data before column being inserted
-    for (j = 0; j < Rows; j++) {
+    for (SLArrayIndex_t j = 0; j < Rows; j++) {
       *(p_DstMatrix + i + (j * (Columns + 1))) = *(p_SrcMatrix + i + (j * Columns));
     }
   }
-  for (j = 0; j < Rows; j++) {                                      // Add in new column
+  for (SLArrayIndex_t j = 0; j < Rows; j++) {                       // Add in new column
     *(p_DstMatrix + NewColumnNumber + (j * (Columns + 1))) = *(p_NewMatrix + j);
   }
-  for (i = NewColumnNumber; i < Columns; i++) {                     // Copy data after column being inserted
-    for (j = 0; j < Rows; j++) {
+  for (SLArrayIndex_t i = NewColumnNumber; i < Columns; i++) {      // Copy data after column being inserted
+    for (SLArrayIndex_t j = 0; j < Rows; j++) {
       *(p_DstMatrix + (i + 1) + (j * (Columns + 1))) = *(p_SrcMatrix + i + (j * Columns));
     }
   }
@@ -1236,8 +1196,6 @@ void SIGLIB_FUNC_DECL SMX_DeleteOldColumn (
   const SLArrayIndex_t Rows,
   const SLArrayIndex_t Columns)
 {
-  SLArrayIndex_t  i, j;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMatrix % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
@@ -1245,14 +1203,14 @@ void SIGLIB_FUNC_DECL SMX_DeleteOldColumn (
 #endif
 #endif
 
-  for (i = 0; i < OldColumnNumber; i++) {                           // Copy to first deletion
+  for (SLArrayIndex_t i = 0; i < OldColumnNumber; i++) {            // Copy to first deletion
 // printf("pre:  %d\n", i);
     *p_DstMatrix++ = *p_SrcMatrix++;
   }
   p_SrcMatrix++;
 
-  for (i = 0; i < Rows - 1; i++) {                                  // Copy upto last deletion
-    for (j = 0; j < Columns - 1; j++) {
+  for (SLArrayIndex_t i = 0; i < Rows - 1; i++) {                   // Copy upto last deletion
+    for (SLArrayIndex_t j = 0; j < Columns - 1; j++) {
 // printf("mid:  i: %d, j: %d\n", i, j);
 // printf("mid:  i_index: %d, o_index: %d\n", i+(j*Columns), (i-1)+(j*(Columns-1)));
       *p_DstMatrix++ = *p_SrcMatrix++;
@@ -1260,7 +1218,7 @@ void SIGLIB_FUNC_DECL SMX_DeleteOldColumn (
     p_SrcMatrix++;
   }
 
-  for (i = OldColumnNumber + 1; i < Columns; i++) {                 // Copy after last deletion
+  for (SLArrayIndex_t i = OldColumnNumber + 1; i < Columns; i++) {  // Copy after last deletion
 // printf("post: %d\n", i);
     *p_DstMatrix++ = *p_SrcMatrix++;
   }
@@ -1305,8 +1263,6 @@ void SIGLIB_FUNC_DECL SMX_InsertRegion (
   const SLArrayIndex_t MatrixRows,
   const SLArrayIndex_t MatrixColumns)
 {
-  SLArrayIndex_t  i, j;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMatrix % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
@@ -1321,8 +1277,8 @@ void SIGLIB_FUNC_DECL SMX_InsertRegion (
 
   p_DstMatrix += InsertColumn_j + (InsertRow_i * MatrixColumns);
 
-  for (i = 0; i < RegionRows; i++) {
-    for (j = 0; j < RegionColsumns; j++) {
+  for (SLArrayIndex_t i = 0; i < RegionRows; i++) {
+    for (SLArrayIndex_t j = 0; j < RegionColsumns; j++) {
       *p_DstMatrix++ = *p_SrcRegion++;
     }
     p_DstMatrix += (MatrixColumns - RegionColsumns);
@@ -1363,8 +1319,6 @@ void SIGLIB_FUNC_DECL SMX_ExtractRegion (
   const SLArrayIndex_t RegionColsumns,
   const SLArrayIndex_t MatrixColumns)
 {
-  SLArrayIndex_t  i, j;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMatrix % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
@@ -1374,8 +1328,8 @@ void SIGLIB_FUNC_DECL SMX_ExtractRegion (
 
   p_SrcMatrix += ExtractColumn_j + (ExtractRow_i * MatrixColumns);
 
-  for (i = 0; i < RegionRows; i++) {
-    for (j = 0; j < RegionColsumns; j++) {
+  for (SLArrayIndex_t i = 0; i < RegionRows; i++) {
+    for (SLArrayIndex_t j = 0; j < RegionColsumns; j++) {
       *p_DstRegion++ = *p_SrcMatrix++;
     }
     p_SrcMatrix += (MatrixColumns - RegionColsumns);
@@ -1411,9 +1365,6 @@ void SIGLIB_FUNC_DECL SMX_InsertDiagonal (
   SLData_t * SIGLIB_PTR_DECL p_DstMatrix,
   const SLArrayIndex_t Dimension)
 {
-  SLArrayIndex_t  i;
-  SLArrayIndex_t  OutputOffset = 0;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMatrix % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
@@ -1426,7 +1377,8 @@ void SIGLIB_FUNC_DECL SMX_InsertDiagonal (
     SDA_Copy (p_SrcMatrix, p_DstMatrix, (SLArrayIndex_t) (Dimension * Dimension));  // Copy src data to dest
   }
 
-  for (i = 0; i < Dimension; i++) {
+  SLArrayIndex_t  OutputOffset = 0;
+  for (SLArrayIndex_t i = 0; i < Dimension; i++) {
     *(p_DstMatrix + OutputOffset) = *p_SrcDiagonal++;
     OutputOffset += (Dimension + 1);
   }
@@ -1457,9 +1409,6 @@ void SIGLIB_FUNC_DECL SMX_ExtractDiagonal (
   SLData_t * SIGLIB_PTR_DECL p_DstMatrix,
   const SLArrayIndex_t Dimension)
 {
-  SLArrayIndex_t  i;
-  SLArrayIndex_t  InputOffset = 0;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMatrix % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
@@ -1467,7 +1416,8 @@ void SIGLIB_FUNC_DECL SMX_ExtractDiagonal (
 #endif
 #endif
 
-  for (i = 0; i < Dimension; i++) {
+  SLArrayIndex_t  InputOffset = 0;
+  for (SLArrayIndex_t i = 0; i < Dimension; i++) {
     *p_DstMatrix++ = *(p_SrcMatrix + InputOffset);
     InputOffset += (Dimension + 1);
   }
@@ -1504,11 +1454,6 @@ void SIGLIB_FUNC_DECL SMX_SwapRows (
   const SLArrayIndex_t Rows,
   const SLArrayIndex_t Columns)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Temp;
-  SLArrayIndex_t  RowNumber1Offset = RowNumber1 * Columns;
-  SLArrayIndex_t  RowNumber2Offset = RowNumber2 * Columns;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMatrix % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
@@ -1520,8 +1465,11 @@ void SIGLIB_FUNC_DECL SMX_SwapRows (
     SDA_Copy (p_SrcMatrix, p_DstMatrix, (SLArrayIndex_t) (Columns * Rows)); // Copy src data to dest
   }
 
-  for (i = 0; i < Columns; i++) {
-    Temp = *(p_SrcMatrix + i + RowNumber1Offset);
+  SLArrayIndex_t  RowNumber1Offset = RowNumber1 * Columns;
+  SLArrayIndex_t  RowNumber2Offset = RowNumber2 * Columns;
+
+  for (SLArrayIndex_t i = 0; i < Columns; i++) {
+    SLData_t        Temp = *(p_SrcMatrix + i + RowNumber1Offset);
     *(p_DstMatrix + i + RowNumber1Offset) = *(p_DstMatrix + i + RowNumber2Offset);
     *(p_DstMatrix + i + RowNumber2Offset) = Temp;
   }
@@ -1558,10 +1506,6 @@ void SIGLIB_FUNC_DECL SMX_SwapColumns (
   const SLArrayIndex_t Rows,
   const SLArrayIndex_t Columns)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Temp;
-  SLArrayIndex_t  Offset = 0;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMatrix % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
@@ -1573,8 +1517,9 @@ void SIGLIB_FUNC_DECL SMX_SwapColumns (
     SDA_Copy (p_SrcMatrix, p_DstMatrix, (SLArrayIndex_t) (Columns * Rows)); // Copy src data to dest
   }
 
-  for (i = 0; i < Rows; i++) {
-    Temp = *(p_SrcMatrix + ColumnNumber1 + Offset);
+  SLArrayIndex_t  Offset = 0;
+  for (SLArrayIndex_t i = 0; i < Rows; i++) {
+    SLData_t        Temp = *(p_SrcMatrix + ColumnNumber1 + Offset);
     *(p_DstMatrix + ColumnNumber1 + Offset) = *(p_SrcMatrix + ColumnNumber2 + Offset);
     *(p_DstMatrix + ColumnNumber2 + Offset) = Temp;
     Offset += Columns;
@@ -1609,11 +1554,6 @@ void SIGLIB_FUNC_DECL SMX_Sum (
   const SLArrayIndex_t Rows,
   const SLArrayIndex_t Columns)
 {
-  SLArrayIndex_t  i, j;
-  SLArrayIndex_t  BaseOffset = 0;
-  SLArrayIndex_t  Offset;
-  SLData_t        Sum;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMatrix % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
@@ -1621,11 +1561,12 @@ void SIGLIB_FUNC_DECL SMX_Sum (
 #endif
 #endif
 
-  for (i = 0; i < Columns; i++) {
-    Sum = SIGLIB_ZERO;
-    Offset = BaseOffset;
+  SLArrayIndex_t  BaseOffset = 0;
+  for (SLArrayIndex_t i = 0; i < Columns; i++) {
+    SLData_t        Sum = SIGLIB_ZERO;
+    SLArrayIndex_t  Offset = BaseOffset;
     BaseOffset++;                                                   // Increment base offset
-    for (j = 0; j < Rows; j++) {
+    for (SLArrayIndex_t j = 0; j < Rows; j++) {
       Sum += *(p_SrcMatrix + Offset);
       Offset += Columns;                                            // Increment offset onto next row
     }
@@ -1773,9 +1714,6 @@ void SIGLIB_FUNC_DECL SMX_ExtractCategoricalColumn (
   const SLArrayIndex_t Rows,
   const SLArrayIndex_t Columns)
 {
-  SLArrayIndex_t  i;
-  SLArrayIndex_t  Offset;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMatrix % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
@@ -1783,9 +1721,9 @@ void SIGLIB_FUNC_DECL SMX_ExtractCategoricalColumn (
 #endif
 #endif
 
-  Offset = Columns - 1;
+  SLArrayIndex_t  Offset = Columns - 1;
 
-  for (i = 0; i < Rows; i++) {
+  for (SLArrayIndex_t i = 0; i < Rows; i++) {
     *p_DstMatrix++ = (SLArrayIndex_t) * (p_SrcMatrix + Offset);
     Offset += Columns;
   }

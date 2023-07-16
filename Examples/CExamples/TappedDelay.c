@@ -1,5 +1,5 @@
 // SigLib Scalar multi-path / tapped delay line example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -41,7 +41,6 @@ static SLData_t DstDataImag[SAMPLE_LENGTH];
 int main (
   void)
 {
-  SLFixData_t     i;
   SLData_t        MultiPathOutput;
   SLData_t        MultiPathOutputReal, MultiPathOutputImag;
 
@@ -63,10 +62,9 @@ int main (
                                          NUMBER_OF_TAPS,            // Number of multi-path fingers
                                          MAX_DELAY_LENGTH);         // Maximum multi-path delay length
 
-  i = (SLFixData_t) 0;
-  printf ("Input[%d] = %lf - Output = %lf\n", i, 1.0, MultiPathOutput);
+  printf ("Input[%d] = %lf - Output = %lf\n", 0, 1.0, MultiPathOutput);
 
-  for (i = 1; i < 17; i++) {
+  for (SLFixData_t i = 1; i < 17; i++) {
 // Apply multi-path delay
     MultiPathOutput = SDS_TappedDelayLine (SIGLIB_ZERO,             // Input sample
                                            pStateArray,             // Pointer to multi-path delay array
@@ -89,9 +87,9 @@ int main (
                                          MAX_DELAY_LENGTH);         // Maximum multi-path delay length
 
 //  printf ("Input[%d] = %lf - Output = %lf - NextIndex = %d\n", i, 0.0, MultiPathOutput, StateArrayIndex);
-  printf ("Input[%d] = %lf - Output = %lf\n", i, 1.0, MultiPathOutput);
+  printf ("Input[%d] = %lf - Output = %lf\n", 17, 1.0, MultiPathOutput);
 
-  for (i = 18; i < 25; i++) {
+  for (SLFixData_t i = 18; i < 25; i++) {
 // Apply multi-path delay
     MultiPathOutput = SDS_TappedDelayLine (SIGLIB_ZERO,             // Input sample
                                            pStateArray,             // Pointer to multi-path delay array
@@ -123,7 +121,7 @@ int main (
                        MAX_DELAY_LENGTH,                            // Maximum multi-path delay length
                        SAMPLE_LENGTH);                              // Array length
 
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLFixData_t i = 0; i < SAMPLE_LENGTH; i++) {
     printf ("Input[%d] = %lf - Output = %lf\n", i, SrcData[i], DstData[i]);
   }
 
@@ -150,10 +148,9 @@ int main (
                               NUMBER_OF_TAPS,                       // Number of multi-path fingers
                               MAX_DELAY_LENGTH);                    // Maximum multi-path delay length
 
-  i = (SLFixData_t) 0;
-  printf ("Input[%d] = %lf + j%lf - Output = %lf + j%lf\n", i, 1.0, 0.0, MultiPathOutputReal, MultiPathOutputImag);
+  printf ("Input[%d] = %lf + j%lf - Output = %lf + j%lf\n", 0, 1.0, 0.0, MultiPathOutputReal, MultiPathOutputImag);
 
-  for (i = 1; i < 17; i++) {
+  for (SLFixData_t i = 1; i < 17; i++) {
 // Apply multi-path delay
     SDS_TappedDelayLineComplex (SIGLIB_ZERO,                        // Real input sample
                                 SIGLIB_ZERO,                        // Imag input sample
@@ -184,10 +181,9 @@ int main (
                               NUMBER_OF_TAPS,                       // Number of multi-path fingers
                               MAX_DELAY_LENGTH);                    // Maximum multi-path delay length
 
-  i = (SLFixData_t) 0;
-  printf ("Input[%d] = %lf + j%lf - Output = %lf + j%lf\n", i, 0.0, 0.0, MultiPathOutputReal, MultiPathOutputImag);
+  printf ("Input[%d] = %lf + j%lf - Output = %lf + j%lf\n", 0, 0.0, 0.0, MultiPathOutputReal, MultiPathOutputImag);
 
-  for (i = 18; i < 25; i++) {
+  for (SLFixData_t i = 18; i < 25; i++) {
 // Apply multi-path delay
     SDS_TappedDelayLineComplex (SIGLIB_ZERO,                        // Real input sample
                                 SIGLIB_ZERO,                        // Imag input sample
@@ -228,7 +224,7 @@ int main (
                               MAX_DELAY_LENGTH,                     // Maximum multi-path delay length
                               SAMPLE_LENGTH);                       // Array length
 
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLFixData_t i = 0; i < SAMPLE_LENGTH; i++) {
     printf ("Input[%d] = %lf + j%lf - Output = %lf + j%lf\n", i, SrcDataReal[i], SrcDataImag[i], DstDataReal[i], DstDataImag[i]);
   }
 
@@ -256,10 +252,9 @@ int main (
                          NUMBER_OF_TAPS,                            // Number of multi-path fingers
                          MAX_DELAY_LENGTH);                         // Maximum multi-path delay length
 
-  i = (SLFixData_t) 0;
-  printf ("Input[%d] = %lf + j%lf - Output = %lf + j%lf\n", i, 1.0, 0.0, MultiPathOutputReal, MultiPathOutputImag);
+  printf ("Input[%d] = %lf + j%lf - Output = %lf + j%lf\n", 0, 1.0, 0.0, MultiPathOutputReal, MultiPathOutputImag);
 
-  for (i = 1; i < 17; i++) {
+  for (SLFixData_t i = 1; i < 17; i++) {
 // Apply multi-path delay
     SDS_TappedDelayLineIQ (SIGLIB_ZERO,                             // Real input sample
                            SIGLIB_ZERO,                             // Imag input sample
@@ -290,10 +285,9 @@ int main (
                          NUMBER_OF_TAPS,                            // Number of multi-path fingers
                          MAX_DELAY_LENGTH);                         // Maximum multi-path delay length
 
-  i = (SLFixData_t) 0;
-  printf ("Input[%d] = %lf + j%lf - Output = %lf + j%lf\n", i, 0.0, 0.0, MultiPathOutputReal, MultiPathOutputImag);
+  printf ("Input[%d] = %lf + j%lf - Output = %lf + j%lf\n", 0, 0.0, 0.0, MultiPathOutputReal, MultiPathOutputImag);
 
-  for (i = 18; i < 25; i++) {
+  for (SLFixData_t i = 18; i < 25; i++) {
 // Apply multi-path delay
     SDS_TappedDelayLineIQ (SIGLIB_ZERO,                             // Real input sample
                            SIGLIB_ZERO,                             // Imag input sample
@@ -334,7 +328,7 @@ int main (
                          MAX_DELAY_LENGTH,                          // Maximum multi-path delay length
                          SAMPLE_LENGTH);                            // Array length
 
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLFixData_t i = 0; i < SAMPLE_LENGTH; i++) {
     printf ("Input[%d] = %lf + j%lf - Output = %lf + j%lf\n", i, SrcDataReal[i], SrcDataImag[i], DstDataReal[i], DstDataImag[i]);
   }
 

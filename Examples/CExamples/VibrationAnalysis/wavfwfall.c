@@ -1,5 +1,5 @@
 // SigLib - .WAV file waterfall generation program, with filtering
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 #include <stdio.h>
 #include <string.h>
@@ -56,7 +56,6 @@ int main (
   SLArrayIndex_t  sampleCount;
   FILE           *fpInputFile;
   FILE           *fpOutputFile;
-  SLArrayIndex_t  i;
   SLArrayIndex_t  FrameNumber = 0;
   SLArrayIndex_t  OverlapSrcArrayIndex;
   SLData_t        SampleRate;
@@ -186,7 +185,7 @@ int main (
                 RESULT_LENGTH);                                     // Array length
 
 // Store data to GNUPlot file - Frequency in KHz
-      for (i = 0; i < RESULT_LENGTH; i++) {
+      for (SLArrayIndex_t i = 0; i < RESULT_LENGTH; i++) {
         fprintf (fpOutputFile, "%lf\t%lf\t%lf\n",
                  ((SLData_t) FrameNumber) * (((SLData_t) (SAMPLE_LENGTH - OVERLAP_LENGTH)) / SampleRate),
                  (((SLData_t) i) * (SampleRate / ((SLData_t) FFT_LENGTH)) / 1000.0), *(pFDPResults + i));

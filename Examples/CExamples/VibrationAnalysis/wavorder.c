@@ -1,5 +1,5 @@
 // SigLib - .WAV file order analysis generation program
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 #include <stdio.h>
 #include <string.h>
@@ -52,7 +52,6 @@ int main (
   SLArrayIndex_t  sampleCount;
   FILE           *fpInputFile;
   FILE           *fpOutputFile;
-  SLArrayIndex_t  i;
   SLArrayIndex_t  FrameNumber = SIGLIB_AI_ZERO;                     // Number of frames processed
   SLArrayIndex_t  OverlapSrcArrayIndex;
   SLData_t        SampleRate;
@@ -310,7 +309,7 @@ int main (
 
 // Store data to GNUPlot file - 3 columns are :
 // Time in seconds, Frequency in KHz, Order magnitude
-      for (i = 0; i < RESULT_LENGTH; i++) {
+      for (SLArrayIndex_t i = 0; i < RESULT_LENGTH; i++) {
         fprintf (fpOutputFile, "%lf\t%lf\t%lf\n",
                  ((SLData_t) FrameNumber) * (((SLData_t) (SAMPLE_LENGTH - OVERLAP_LENGTH)) / SampleRate),
                  ((((SLData_t) i) * (SampleRate / ((SLData_t) FFT_LENGTH))) / 1000.0), *(pFDPResults + i));
@@ -332,7 +331,7 @@ int main (
                 pAverageArray,                                      // Pointer to destination array
                 RESULT_LENGTH);                                     // Array length
 
-  for (i = 0; i < RESULT_LENGTH; i++) {                             // Store data to GNUPlot file
+  for (SLArrayIndex_t i = 0; i < RESULT_LENGTH; i++) {              // Store data to GNUPlot file
     fprintf (fpOutputFile, "%lf\t%lf\n", (((SLData_t) i) * (SampleRate / ((SLData_t) FFT_LENGTH)) / 1000.0), *(pAverageArray + i));
   }
   fprintf (fpOutputFile, "\n");

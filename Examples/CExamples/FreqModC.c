@@ -1,6 +1,6 @@
 // SigLib Complex Frequency Modulation Example
 // The complex modulator independently modulates the quadrature sine and cosine carriers
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -24,10 +24,6 @@ int main (
   void)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
-
-#if PER_SAMPLE
-  SLArrayIndex_t  i;
-#endif
 
 // Allocate memory
   pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
@@ -86,7 +82,7 @@ int main (
   getchar ();
 
 #if PER_SAMPLE
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     SDS_FrequencyModulateComplex (*(pSrc + i),                      // Modulating signal source pointer
                                   pRealDst + i,                     // Modulated signal destination pointer
                                   pImagDst + i,                     // Modulated signal destination pointer

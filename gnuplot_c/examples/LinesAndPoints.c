@@ -20,8 +20,6 @@ double          Array[SAMPLE_LENGTH];
 int main (
   )
 {
-  int             i, j;
-
   h2DPlot1 =                                                        // Initialize plot
     gpc_init_2d ("Data plot",                                       // Plot title
                  "Time",                                            // X-Axis label
@@ -50,9 +48,8 @@ int main (
     exit (-1);
   }
 
-  for (j = 0; j < SAMPLE_LENGTH; j++) {                             // Plot a number of arrays
-    for (i = 0; i < SAMPLE_LENGTH; i++)                             // Fill the array
-    {
+  for (int j = 0; j < SAMPLE_LENGTH; j++) {                         // Plot a number of arrays
+    for (int i = 0; i < SAMPLE_LENGTH; i++) {                       // Fill the array
       Array[i] = i + j;
     }
 
@@ -81,7 +78,7 @@ int main (
                    GPC_ADD);                                        // Add plot
     }
 
-    for (i = 0; i < SAMPLE_LENGTH; i++) {                           // Fill the array
+    for (int i = 0; i < SAMPLE_LENGTH; i++) {                       // Fill the array
       Array[i] = -(i + j);
     }
 

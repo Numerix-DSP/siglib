@@ -1,5 +1,5 @@
 // SigLib - Example for calculating the best filter lengths for detecting DTMF frequencies
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -9,7 +9,7 @@
 // Define constants
 #define DISPLAY_GRAPHICS        1                                   // Set to '1' to display graphics
 
-#define SAMPLE_RATE             8000.
+#define SAMPLE_RATE_HZ          8000.
 #define START_LENGTH            50
 #define END_LENGTH              120
 #define NUMBER_OF_ESTIMATES     71
@@ -41,50 +41,58 @@ int main (
 
 #endif
 
-  printf ("est (8k, %lf, 60, 20) = %d\n\n", SIGLIB_DTMF_LF_0, SUF_EstimateBPFilterLength (SAMPLE_RATE, SIGLIB_DTMF_LF_0, START_LENGTH, END_LENGTH));
-  printf ("est (8k, %lf, 60, 20) = %d\n\n", SIGLIB_DTMF_LF_1, SUF_EstimateBPFilterLength (SAMPLE_RATE, SIGLIB_DTMF_LF_1, START_LENGTH, END_LENGTH));
-  printf ("est (8k, %lf, 60, 20) = %d\n\n", SIGLIB_DTMF_LF_2, SUF_EstimateBPFilterLength (SAMPLE_RATE, SIGLIB_DTMF_LF_2, START_LENGTH, END_LENGTH));
-  printf ("est (8k, %lf, 60, 20) = %d\n\n", SIGLIB_DTMF_LF_3, SUF_EstimateBPFilterLength (SAMPLE_RATE, SIGLIB_DTMF_LF_3, START_LENGTH, END_LENGTH));
+  printf ("est (8k, %lf, 60, 20) = %d\n\n", SIGLIB_DTMF_LF_0,
+          SUF_EstimateBPFilterLength (SAMPLE_RATE_HZ, SIGLIB_DTMF_LF_0, START_LENGTH, END_LENGTH));
+  printf ("est (8k, %lf, 60, 20) = %d\n\n", SIGLIB_DTMF_LF_1,
+          SUF_EstimateBPFilterLength (SAMPLE_RATE_HZ, SIGLIB_DTMF_LF_1, START_LENGTH, END_LENGTH));
+  printf ("est (8k, %lf, 60, 20) = %d\n\n", SIGLIB_DTMF_LF_2,
+          SUF_EstimateBPFilterLength (SAMPLE_RATE_HZ, SIGLIB_DTMF_LF_2, START_LENGTH, END_LENGTH));
+  printf ("est (8k, %lf, 60, 20) = %d\n\n", SIGLIB_DTMF_LF_3,
+          SUF_EstimateBPFilterLength (SAMPLE_RATE_HZ, SIGLIB_DTMF_LF_3, START_LENGTH, END_LENGTH));
 
-  printf ("est (8k, %lf, 60, 20) = %d\n\n", SIGLIB_DTMF_HF_0, SUF_EstimateBPFilterLength (SAMPLE_RATE, SIGLIB_DTMF_HF_0, START_LENGTH, END_LENGTH));
-  printf ("est (8k, %lf, 60, 20) = %d\n\n", SIGLIB_DTMF_HF_1, SUF_EstimateBPFilterLength (SAMPLE_RATE, SIGLIB_DTMF_HF_1, START_LENGTH, END_LENGTH));
-  printf ("est (8k, %lf, 60, 20) = %d\n\n", SIGLIB_DTMF_HF_2, SUF_EstimateBPFilterLength (SAMPLE_RATE, SIGLIB_DTMF_HF_2, START_LENGTH, END_LENGTH));
-  printf ("est (8k, %lf, 60, 20) = %d\n\n", SIGLIB_DTMF_HF_3, SUF_EstimateBPFilterLength (SAMPLE_RATE, SIGLIB_DTMF_HF_3, START_LENGTH, END_LENGTH));
+  printf ("est (8k, %lf, 60, 20) = %d\n\n", SIGLIB_DTMF_HF_0,
+          SUF_EstimateBPFilterLength (SAMPLE_RATE_HZ, SIGLIB_DTMF_HF_0, START_LENGTH, END_LENGTH));
+  printf ("est (8k, %lf, 60, 20) = %d\n\n", SIGLIB_DTMF_HF_1,
+          SUF_EstimateBPFilterLength (SAMPLE_RATE_HZ, SIGLIB_DTMF_HF_1, START_LENGTH, END_LENGTH));
+  printf ("est (8k, %lf, 60, 20) = %d\n\n", SIGLIB_DTMF_HF_2,
+          SUF_EstimateBPFilterLength (SAMPLE_RATE_HZ, SIGLIB_DTMF_HF_2, START_LENGTH, END_LENGTH));
+  printf ("est (8k, %lf, 60, 20) = %d\n\n", SIGLIB_DTMF_HF_3,
+          SUF_EstimateBPFilterLength (SAMPLE_RATE_HZ, SIGLIB_DTMF_HF_3, START_LENGTH, END_LENGTH));
 
   SDA_Clear (ErrorSum, NUMBER_OF_ESTIMATES);                        // Initialize Sum, Max and Min arrays
   SDA_Clear (ErrorMax, NUMBER_OF_ESTIMATES);
   SDA_Fill (ErrorMin, SIGLIB_ONE, NUMBER_OF_ESTIMATES);
 
-  SUF_EstimateBPFilterError (SAMPLE_RATE, SIGLIB_DTMF_LF_0, START_LENGTH, END_LENGTH, Error);
+  SUF_EstimateBPFilterError (SAMPLE_RATE_HZ, SIGLIB_DTMF_LF_0, START_LENGTH, END_LENGTH, Error);
   SDA_Add2 (Error, ErrorSum, ErrorSum, NUMBER_OF_ESTIMATES);
   SDA_Max2 (Error, ErrorMax, ErrorMax, NUMBER_OF_ESTIMATES);
   SDA_Min2 (Error, ErrorMin, ErrorMin, NUMBER_OF_ESTIMATES);
-  SUF_EstimateBPFilterError (SAMPLE_RATE, SIGLIB_DTMF_LF_1, START_LENGTH, END_LENGTH, Error);
+  SUF_EstimateBPFilterError (SAMPLE_RATE_HZ, SIGLIB_DTMF_LF_1, START_LENGTH, END_LENGTH, Error);
   SDA_Add2 (Error, ErrorSum, ErrorSum, NUMBER_OF_ESTIMATES);
   SDA_Max2 (Error, ErrorMax, ErrorMax, NUMBER_OF_ESTIMATES);
   SDA_Min2 (Error, ErrorMin, ErrorMin, NUMBER_OF_ESTIMATES);
-  SUF_EstimateBPFilterError (SAMPLE_RATE, SIGLIB_DTMF_LF_2, START_LENGTH, END_LENGTH, Error);
+  SUF_EstimateBPFilterError (SAMPLE_RATE_HZ, SIGLIB_DTMF_LF_2, START_LENGTH, END_LENGTH, Error);
   SDA_Add2 (Error, ErrorSum, ErrorSum, NUMBER_OF_ESTIMATES);
   SDA_Max2 (Error, ErrorMax, ErrorMax, NUMBER_OF_ESTIMATES);
   SDA_Min2 (Error, ErrorMin, ErrorMin, NUMBER_OF_ESTIMATES);
-  SUF_EstimateBPFilterError (SAMPLE_RATE, SIGLIB_DTMF_LF_3, START_LENGTH, END_LENGTH, Error);
+  SUF_EstimateBPFilterError (SAMPLE_RATE_HZ, SIGLIB_DTMF_LF_3, START_LENGTH, END_LENGTH, Error);
   SDA_Add2 (Error, ErrorSum, ErrorSum, NUMBER_OF_ESTIMATES);
   SDA_Max2 (Error, ErrorMax, ErrorMax, NUMBER_OF_ESTIMATES);
   SDA_Min2 (Error, ErrorMin, ErrorMin, NUMBER_OF_ESTIMATES);
 
-  SUF_EstimateBPFilterError (SAMPLE_RATE, SIGLIB_DTMF_HF_0, START_LENGTH, END_LENGTH, Error);
+  SUF_EstimateBPFilterError (SAMPLE_RATE_HZ, SIGLIB_DTMF_HF_0, START_LENGTH, END_LENGTH, Error);
   SDA_Add2 (Error, ErrorSum, ErrorSum, NUMBER_OF_ESTIMATES);
   SDA_Max2 (Error, ErrorMax, ErrorMax, NUMBER_OF_ESTIMATES);
   SDA_Min2 (Error, ErrorMin, ErrorMin, NUMBER_OF_ESTIMATES);
-  SUF_EstimateBPFilterError (SAMPLE_RATE, SIGLIB_DTMF_HF_1, START_LENGTH, END_LENGTH, Error);
+  SUF_EstimateBPFilterError (SAMPLE_RATE_HZ, SIGLIB_DTMF_HF_1, START_LENGTH, END_LENGTH, Error);
   SDA_Add2 (Error, ErrorSum, ErrorSum, NUMBER_OF_ESTIMATES);
   SDA_Max2 (Error, ErrorMax, ErrorMax, NUMBER_OF_ESTIMATES);
   SDA_Min2 (Error, ErrorMin, ErrorMin, NUMBER_OF_ESTIMATES);
-  SUF_EstimateBPFilterError (SAMPLE_RATE, SIGLIB_DTMF_HF_2, START_LENGTH, END_LENGTH, Error);
+  SUF_EstimateBPFilterError (SAMPLE_RATE_HZ, SIGLIB_DTMF_HF_2, START_LENGTH, END_LENGTH, Error);
   SDA_Add2 (Error, ErrorSum, ErrorSum, NUMBER_OF_ESTIMATES);
   SDA_Max2 (Error, ErrorMax, ErrorMax, NUMBER_OF_ESTIMATES);
   SDA_Min2 (Error, ErrorMin, ErrorMin, NUMBER_OF_ESTIMATES);
-  SUF_EstimateBPFilterError (SAMPLE_RATE, SIGLIB_DTMF_HF_3, START_LENGTH, END_LENGTH, Error);
+  SUF_EstimateBPFilterError (SAMPLE_RATE_HZ, SIGLIB_DTMF_HF_3, START_LENGTH, END_LENGTH, Error);
   SDA_Add2 (Error, ErrorSum, ErrorSum, NUMBER_OF_ESTIMATES);
   SDA_Max2 (Error, ErrorMax, ErrorMax, NUMBER_OF_ESTIMATES);
   SDA_Min2 (Error, ErrorMin, ErrorMin, NUMBER_OF_ESTIMATES);

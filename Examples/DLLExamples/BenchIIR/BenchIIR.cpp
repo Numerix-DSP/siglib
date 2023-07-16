@@ -1,5 +1,5 @@
 // BenchIIR.cpp : Defines the entry point for the console application.
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 #include "stdafx.h"
 
@@ -57,8 +57,6 @@ void            main (
 void main (
   void)
 {
-  int             i;
-
 #if _MSC_VER
   struct _timeb   Start, End;
 #elif _TMS320C6200 || _TMS320C6700
@@ -93,7 +91,7 @@ void main (
 #if SINGLE_IIR                                                      // Should we do one IIR or ten thousand ?
   SDA_Iir (pSrc, pDst, DATA_LENGTH, LOG_DATA_LENGTH);
 #else
-  for (i = 0; i < 10000; i++) {                                     // Perform 10,000,000 samples to optimise granularity of timers
+  for (int i = 0; i < 10000; i++) {                                 // Perform 10,000,000 samples to optimise granularity of timers
     SDA_Iir (pSrc, pDst, pFilterState, pIIRCoeffs, FILTER_STAGES, DATA_LENGTH);
   }
 #endif

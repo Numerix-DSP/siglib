@@ -1,5 +1,5 @@
 // SigLib Amplitude Modulation / Demodulation Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -8,9 +8,9 @@
 #include "plot_fd/plot_fd.h"                                        // Frequency domain plots
 
 // Define constants
-#define SAMPLE_RATE             10000.
+#define SAMPLE_RATE_HZ          10000.
 #define CARRIER_FREQUENCY       2500.
-#define CARRIER_TABLE_LENGTH    ((SLArrayIndex_t)(SAMPLE_RATE / CARRIER_FREQUENCY))
+#define CARRIER_TABLE_LENGTH    ((SLArrayIndex_t)(SAMPLE_RATE_HZ / CARRIER_FREQUENCY))
 
 #define PRE_FILTER_LENGTH       14
 #define LPF_FILTER_LENGTH       27
@@ -49,7 +49,7 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
   pInput = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pCarrierTable = SUF_AmCarrierArrayAllocate (CARRIER_FREQUENCY, SAMPLE_RATE);
+  pCarrierTable = SUF_AmCarrierArrayAllocate (CARRIER_FREQUENCY, SAMPLE_RATE_HZ);
   modulated = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
   demodulated = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
@@ -109,7 +109,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "Source Signal",                                     // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -133,7 +133,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "Modulated Signal",                                  // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -169,7 +169,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "Demodulated Signal",                                // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph

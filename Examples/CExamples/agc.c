@@ -1,5 +1,5 @@
 // SigLib Automatic Gain Control Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -14,14 +14,14 @@
 #define AGC_ATTACK_SENSITIVITY      1.004                           // Sensitivity of attack gain adjustment
 #define AGC_DECAY_SENSITIVITY       0.996                           // Sensitivity of decay gain adjustment
 #define AGC_SUB_ARRAY_LEN           32                              // Sub dataset length
-#define AGC_MEAN_LEN                32                              // Mean length
+#define AGC_MEAN_LENGTH                32                           // Mean length
 
 // Declare global variables and arrays
 static SLData_t *pSrc, *pDst;
 static SLData_t SinePhase;
 static SLData_t AGCGain, AGCMax;
 
-static SLData_t MeanState[AGC_MEAN_LEN];
+static SLData_t MeanState[AGC_MEAN_LENGTH];
 static SLArrayIndex_t MeanStateIndex;
 static SLData_t MeanSum;
 static SLData_t DesiredMeanScaled;
@@ -111,7 +111,7 @@ int main (
                   &ThresholdScaled,                                 // Pointer to threshold mean level
                   AGC_OUTPUT_LEVEL,                                 // Desired level of AGC output
                   AGC_ADJUST_THRESHOLD,                             // Threshold for update of AGC
-                  AGC_MEAN_LEN);                                    // Length of moving average
+                  AGC_MEAN_LENGTH);                                 // Length of moving average
 
   gpc_plot_2d (h2DPlot,                                             // Graph handle
                pSrc,                                                // Dataset
@@ -133,7 +133,7 @@ int main (
                   &MeanStateIndex,                                  // Moving average state array index
                   &MeanSum,                                         // Pointer to moving average sum
                   &AGCGain,                                         // Pointer to AGC gain
-                  AGC_MEAN_LEN,                                     // Length of moving average state array
+                  AGC_MEAN_LENGTH,                                  // Length of moving average state array
                   SAMPLE_LENGTH);                                   // Length of input array
 
   gpc_plot_2d (h2DPlot,                                             // Graph handle
@@ -157,7 +157,7 @@ int main (
                       &ThresholdScaled,                             // Pointer to threshold mean squared level
                       AGC_OUTPUT_LEVEL,                             // Desired level of AGC output
                       AGC_ADJUST_THRESHOLD,                         // Threshold for update of AGC
-                      AGC_MEAN_LEN);                                // Length of moving average
+                      AGC_MEAN_LENGTH);                             // Length of moving average
 
   gpc_plot_2d (h2DPlot,                                             // Graph handle
                pSrc,                                                // Dataset
@@ -179,7 +179,7 @@ int main (
                       &MeanStateIndex,                              // Moving average state array index
                       &MeanSum,                                     // Pointer to moving average sum
                       &AGCGain,                                     // Pointer to AGC gain
-                      AGC_MEAN_LEN,                                 // Length of moving average state array
+                      AGC_MEAN_LENGTH,                              // Length of moving average state array
                       SAMPLE_LENGTH);                               // Length of input array
 
   gpc_plot_2d (h2DPlot,                                             // Graph handle

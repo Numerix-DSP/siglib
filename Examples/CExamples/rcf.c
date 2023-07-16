@@ -1,5 +1,5 @@
 // SigLib Raised Cosine Filter Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -9,15 +9,15 @@
 // Define constants
 #if COMMENT
 #define FILTER_LENGTH           321
-#define SAMPLE_RATE             9600.
+#define SAMPLE_RATE_HZ          9600.
 #define SYMBOL_RATE             600.
-#define SYMBOL_PERIOD           (SAMPLE_RATE / SYMBOL_RATE)
+#define SYMBOL_PERIOD           (SAMPLE_RATE_HZ / SYMBOL_RATE)
 #define RCF_ALPHA               SIGLIB_QUARTER
 #endif
 #define FILTER_LENGTH           121
-#define SAMPLE_RATE             48000.
+#define SAMPLE_RATE_HZ          48000.
 #define SYMBOL_RATE             1200.
-#define SYMBOL_PERIOD           (SAMPLE_RATE / SYMBOL_RATE)
+#define SYMBOL_PERIOD           (SAMPLE_RATE_HZ / SYMBOL_RATE)
 #define RCF_ALPHA               0.42
 
 #define FFT_LENGTH              512
@@ -72,7 +72,7 @@ int main (
                FILTER_LENGTH,                                       // Dataset length
                "Raised Cosine Filter",                              // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (FILTER_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (FILTER_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -87,7 +87,7 @@ int main (
                FILTER_LENGTH,                                       // Dataset length
                "Square Root Raised Cosine Filter",                  // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (FILTER_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (FILTER_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "red",                                               // Colour
                GPC_ADD);                                            // New graph
@@ -127,8 +127,8 @@ int main (
                pResults,                                            // Dataset
                FFT_LENGTH,                                          // Dataset length
                "Spectrum Of Raised Cosine Filter",                  // Dataset title
-               -(SAMPLE_RATE / SIGLIB_TWO),                         // Minimum X value
-               ((SAMPLE_RATE * (double) ((FFT_LENGTH >> 1) - 1)) / (double) (FFT_LENGTH)),  // Maximum X value
+               -(SAMPLE_RATE_HZ / SIGLIB_TWO),                      // Minimum X value
+               ((SAMPLE_RATE_HZ * (double) ((FFT_LENGTH >> 1) - 1)) / (double) (FFT_LENGTH)), // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -159,8 +159,8 @@ int main (
                pResults,                                            // Dataset
                FFT_LENGTH,                                          // Dataset length
                "Spectrum Of Square Root Raised Cosine Filter",      // Dataset title
-               -(SAMPLE_RATE / SIGLIB_TWO),                         // Minimum X value
-               ((SAMPLE_RATE * (double) ((FFT_LENGTH >> 1) - 1)) / (double) (FFT_LENGTH)),  // Maximum X value
+               -(SAMPLE_RATE_HZ / SIGLIB_TWO),                      // Minimum X value
+               ((SAMPLE_RATE_HZ * (double) ((FFT_LENGTH >> 1) - 1)) / (double) (FFT_LENGTH)), // Maximum X value
                "lines",                                             // Graph type
                "red",                                               // Colour
                GPC_ADD);                                            // New graph

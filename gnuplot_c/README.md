@@ -75,6 +75,6 @@ LICENSE
 
 This software is released under the terms of the MIT License. For full details see "Gnuplot_C Users Guide.pdf"
 
-This software has been written by Alpha Numerix and placed in the public domain.
+This software has been written by Delta Numerix and placed in the public domain.
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.

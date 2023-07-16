@@ -20,7 +20,6 @@ const ComplexRect_s ConjugateZeros[] = { { -0.1, 0.0 }, { -0.2, 0.3 }, { -0.4, 0
 int main (
   )
 {
-  int             i, j;
   ComplexRect_s   CMult;                                            // Complex multiplier
 
   CMult.real = 1.0;
@@ -38,8 +37,8 @@ int main (
     exit (-1);
   }
 
-  for (j = 0; j < XY_LENGTH; j++) {                                 // Plot a number of arrays
-    for (i = 0; i < XY_LENGTH; i++) {                               // Fill the array
+  for (int j = 0; j < XY_LENGTH; j++) {                             // Plot a number of arrays
+    for (int i = 0; i < XY_LENGTH; i++) {                           // Fill the array
       CArray[i].real = (i + j) * .1 * CMult.real;
       CArray[i].imag = -(i + j) * .1 * CMult.imag;
     }

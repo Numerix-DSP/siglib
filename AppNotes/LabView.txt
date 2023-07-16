@@ -14,14 +14,14 @@ SigLib functions do not do anything specific that should preclude their use with
 
 
 
-DFPlus and SigLib are trademarks of Alpha Numerix all other
+DFPlus and SigLib are trademarks of Delta Numerix all other
 trademarks acknowledged.
 
 
 For additional information, please contact :
 
-Alpha Numerix
+Delta Numerix
 Email: support@numerix-dsp.com
 WWW  : https:\\www.numerix-dsp.com
 
-Copyright (C) 2004 Alpha Numerix All rights reserved.
+Copyright (C) 2004 Delta Numerix All rights reserved.

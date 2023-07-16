@@ -2,7 +2,7 @@
 // This program filters a signal in the time domain and then in
 // the frequency domain using the overlap-add and overlap-save
 // techniques
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -49,9 +49,6 @@ int main (
   void)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
-
-  SLArrayIndex_t  i;
-  SLData_t        MSE;
 
 // Allocate memory
   pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH + FFT_LENGTH);      // Allow for overlap - overlap and save
@@ -169,7 +166,7 @@ int main (
                      FILTER_LENGTH);                                // Filter length
 
 // Apply frequency domain (overlap and add) FIR filter
-  for (i = 0; i < SAMPLE_LENGTH; i += TIME_DOMAIN_DATA_LENGTH) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i += TIME_DOMAIN_DATA_LENGTH) {
     SDA_FirOverlapAdd (pSrc + i,                                    // Source data pointer
                        pFDFilt + i,                                 // Destination data pointer
                        RealFreqDomainCoeffs,                        // Real Freq Domain Coefficients pointer
@@ -185,10 +182,10 @@ int main (
                        TIME_DOMAIN_DATA_LENGTH);                    // Dataset length
   }
 // Calculate mean square error
-  MSE = SDA_MeanSquareError (pTDFilt,                               // Pointer to source array 1
-                             pFDFilt,                               // Pointer to source array 2
-                             INVERSE_SAMPLE_LENGTH,                 // Inverse of the dataset length
-                             SAMPLE_LENGTH);                        // Dataset length
+  SLData_t        MSE = SDA_MeanSquareError (pTDFilt,               // Pointer to source array 1
+                                             pFDFilt,               // Pointer to source array 2
+                                             INVERSE_SAMPLE_LENGTH, // Inverse of the dataset length
+                                             SAMPLE_LENGTH);        // Dataset length
 
   gpc_plot_2d (h2DPlot,                                             // Graph handle
                pFDFilt,                                             // Dataset
@@ -215,7 +212,7 @@ int main (
                       FILTER_LENGTH);                               // Filter length
 
 // Apply frequency domain (overlap and add) FIR filter
-  for (i = 0; i < SAMPLE_LENGTH; i += TIME_DOMAIN_DATA_LENGTH) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i += TIME_DOMAIN_DATA_LENGTH) {
     SDA_FirOverlapSave (pSrc + i,                                   // Source data pointer
                         pFDFilt + i,                                // Destination data pointer
                         RealFreqDomainCoeffs,                       // Real Freq Domain Coefficients pointer

@@ -120,7 +120,7 @@ int main (
     printf ("--------------------------------------- device #%d\n", i);
 
 /*
-   Mark global and API specific default devices 
+   Mark global and API specific default devices
  */
     defaultDisplayed = 0;
     if (i == Pa_GetDefaultInputDevice ()) {
@@ -149,7 +149,7 @@ int main (
       printf (" ]\n");
 
 /*
-   print device info fields 
+   print device info fields
  */
     printf ("Name                        = %s\n", deviceInfo->name);
     printf ("Host API                    = %s\n", Pa_GetHostApiInfo (deviceInfo->hostApi)->name);
@@ -185,7 +185,7 @@ int main (
     printf ("Default sample rate         = %8.2f\n", deviceInfo->defaultSampleRate);
 
 /*
-   poll for standard sample rates 
+   poll for standard sample rates
  */
     inputParameters.device = i;
     inputParameters.channelCount = deviceInfo->maxInputChannels;

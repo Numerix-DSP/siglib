@@ -1,5 +1,5 @@
 // SigLib - Polynomial Expansion Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -17,9 +17,7 @@ static SLData_t Dst[DATA_LENGTH];
 int main (
   void)
 {
-  SLFixData_t     i;
-
-  for (i = 0; i < DATA_LENGTH; i++) {
+  for (SLFixData_t i = 0; i < DATA_LENGTH; i++) {
     printf ("Src = %lf\n", Src[i]);
   }
   printf ("\n");
@@ -36,7 +34,7 @@ int main (
 
   printf ("Polynomial = 1 + 2*X + (3 * X^2) + (4 * X^3) + (5 * X^4) + (6 * X^5)\n\n");
 
-  for (i = 0; i < DATA_LENGTH; i++) {
+  for (SLFixData_t i = 0; i < DATA_LENGTH; i++) {
     printf ("Result = %lf\n", Dst[i]);
   }
   printf ("\n\n");

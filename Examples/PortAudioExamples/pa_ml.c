@@ -1,5 +1,5 @@
 // SigLib PortAudio Example Program
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 #include <stdio.h>
 #include <math.h>
@@ -16,7 +16,7 @@
 #include "weightsFloatMotorMode1_MotorMode2.h"                      // Neural network weights
 
 
-#define SAMPLE_RATE                     16000                       // SAMPLE_RATE
+#define SAMPLE_RATE_HZ                  16000                       // SAMPLE_RATE_HZ
 
 #define NETWORK_INPUT_SAMPLE_LENGTH     128
 #define NETWORK_HIDDEN_LAYER_NODES      25
@@ -289,7 +289,7 @@ int main (
 
 
 
-  Error = analog_open (SAMPLE_RATE, analog_isr);                    // Open the analog interface
+  Error = analog_open (SAMPLE_RATE_HZ, analog_isr);                 // Open the analog interface
   if (Error == -1)
     return 1;
 

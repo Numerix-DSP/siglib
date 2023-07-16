@@ -1,6 +1,6 @@
 // Numerix Graphics Library
 // Top level graph functions
-// Copyright (c) 2022, Alpha Numerix, All rights reserved.
+// Copyright (c) 2022, Delta Numerix, All rights reserved.
 
 /*
     wxWindows program main functions

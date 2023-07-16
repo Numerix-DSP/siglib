@@ -1,5 +1,5 @@
 // SigLib z-transform Example - plots the z-transform of an FIR or IIR filter
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -66,7 +66,6 @@ int main (
   h_GPC_Plot     *hImage;                                           // Plot object
   SLData_t        RealPoint, ImagPoint;
   SLFixData_t     RealIndex, ImagIndex;
-  SLArrayIndex_t  i;
 
   pZTransform = SUF_VectorArrayAllocate (ZT_SIZE);                  // Allocate memory
   pImage = (SLImageData_t *) malloc ((size_t) (ZT_SIZE * sizeof (SLImageData_t)));
@@ -116,12 +115,12 @@ int main (
              ZT_SIZE);                                              // Dataset length
 
 // Plot the Axes and unit circle
-  for (i = 0; i < ZT_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < ZT_LENGTH; i++) {
     *(pZTransform + i + (ZT_LENGTH * (ZT_LENGTH >> 1))) = 255.0;
     *(pZTransform + (i * ZT_LENGTH) + (ZT_LENGTH >> 1)) = 255.0;
   }
 
-  for (i = 0; i < UNIT_CIRCLE_POINTS; i++) {
+  for (SLArrayIndex_t i = 0; i < UNIT_CIRCLE_POINTS; i++) {
     SLComplexRect_s UnitCircle;
     UnitCircle =
       SCV_PolarToRectangular (SCV_Polar
@@ -132,7 +131,7 @@ int main (
   }
 
 // Convert floating point data to image for display
-  for (i = 0; i < ZT_SIZE; i++) {
+  for (SLArrayIndex_t i = 0; i < ZT_SIZE; i++) {
     *(pImage + i) = (SLImageData_t) * (pZTransform + i);
   }
 

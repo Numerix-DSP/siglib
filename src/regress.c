@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : REGRESS.C     | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 29/12/1993
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : SigLib DSP library regression analysis routines.
 
@@ -40,7 +40,6 @@ Description : SigLib DSP library regression analysis routines.
 #define SIGLIB_SRC_FILE_REGRESS 1                                   // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
 
 /**/
 
@@ -74,9 +73,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraConstantCoeff (
   const SLData_t * SIGLIB_PTR_DECL pSrcY,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        SumX, SumY;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) pSrcX % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -84,12 +80,12 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraConstantCoeff (
 #endif
 #endif
 
-  SumX = *pSrcX;
-  SumY = *pSrcY;
+  SLData_t        SumX = *pSrcX;
+  SLData_t        SumY = *pSrcY;
   pSrcX++;
   pSrcY++;
 
-  for (i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
     SumX += *pSrcX;
     SumY += *pSrcY;
     pSrcX++;
@@ -100,7 +96,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraConstantCoeff (
   pSrcY -= SampleLength;
 
   return ((SumY - (SDA_LinraRegressionCoeff (pSrcX, pSrcY, SampleLength) * SumX)) / SampleLength);
-
 }                                                                   // End of SDA_LinraConstantCoeff()
 
 
@@ -136,9 +131,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraRegressionCoeff (
   const SLData_t * SIGLIB_PTR_DECL pSrcY,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        SumXY, SumX, SumY, SumXSquared;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) pSrcX % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -146,14 +138,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraRegressionCoeff (
 #endif
 #endif
 
-  SumXY = (*pSrcX) * (*pSrcY);
-  SumX = *pSrcX;
-  SumY = *pSrcY;
-  SumXSquared = (*pSrcX) * (*pSrcX);
+  SLData_t        SumXY = (*pSrcX) * (*pSrcY);
+  SLData_t        SumX = *pSrcX;
+  SLData_t        SumY = *pSrcY;
+  SLData_t        SumXSquared = (*pSrcX) * (*pSrcX);
   pSrcX++;
   pSrcY++;
 
-  for (i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
     SumXY += (*pSrcX) * (*pSrcY);
     SumX += *pSrcX;
     SumY += *pSrcY;
@@ -163,7 +155,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraRegressionCoeff (
   }
 
   return (((SampleLength * SumXY) - (SumX * SumY)) / ((SampleLength * SumXSquared) - (SumX * SumX)));
-
 }                                                                   // End of SDA_LinraRegressionCoeff()
 
 
@@ -199,9 +190,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraCorrelationCoeff (
   const SLData_t * SIGLIB_PTR_DECL pSrcY,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        SumXY, SumX, SumY, SumXSquared, SumYSquared;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) pSrcX % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -209,15 +197,15 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraCorrelationCoeff (
 #endif
 #endif
 
-  SumXY = (*pSrcX) * (*pSrcY);
-  SumX = *pSrcX;
-  SumY = *pSrcY;
-  SumXSquared = (*pSrcX) * (*pSrcX);
-  SumYSquared = (*pSrcY) * (*pSrcY);
+  SLData_t        SumXY = (*pSrcX) * (*pSrcY);
+  SLData_t        SumX = *pSrcX;
+  SLData_t        SumY = *pSrcY;
+  SLData_t        SumXSquared = (*pSrcX) * (*pSrcX);
+  SLData_t        SumYSquared = (*pSrcY) * (*pSrcY);
   pSrcX++;
   pSrcY++;
 
-  for (i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
     SumXY += (*pSrcX) * (*pSrcY);
     SumX += *pSrcX;
     SumY += *pSrcY;
@@ -229,7 +217,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraCorrelationCoeff (
 
   return (((SampleLength * SumXY) - (SumX * SumY)) /
           SDS_Sqrt (((SampleLength * SumXSquared) - (SumX * SumX)) * ((SampleLength * SumYSquared) - (SumY * SumY))));
-
 }                                                                   // End of SDA_LinraRegressionCoeff()
 
 
@@ -262,7 +249,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraEstimateX (
   const SLArrayIndex_t SampleLength)
 {
   return ((YVal - SDA_LinraConstantCoeff (pSrcX, pSrcY, SampleLength)) / SDA_LinraRegressionCoeff (pSrcX, pSrcY, SampleLength));
-
 }                                                                   // End of SDA_LinraEstimateX()
 
 
@@ -295,7 +281,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraEstimateY (
   const SLArrayIndex_t SampleLength)
 {
   return ((XVal * SDA_LinraRegressionCoeff (pSrcX, pSrcY, SampleLength)) + SDA_LinraConstantCoeff (pSrcX, pSrcY, SampleLength));
-
 }                                                                   // End of SDA_LinraEstimateY()
 
 
@@ -331,9 +316,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograConstantCoeff (
   const SLData_t * SIGLIB_PTR_DECL pSrcY,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        SumX, SumY;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrcX % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -341,12 +323,12 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograConstantCoeff (
 #endif
 #endif
 
-  SumX = SDS_Log (*pSrcX);
-  SumY = *pSrcY;
+  SLData_t        SumX = SDS_Log (*pSrcX);
+  SLData_t        SumY = *pSrcY;
   pSrcX++;
   pSrcY++;
 
-  for (i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
     SumX += SDS_Log (*pSrcX);
     SumY += *pSrcY;
     pSrcX++;
@@ -357,7 +339,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograConstantCoeff (
   pSrcY -= SampleLength;
 
   return ((SumY - (SDA_LograRegressionCoeff (pSrcX, pSrcY, SampleLength) * SumX)) / SampleLength);
-
 }                                                                   // End of SDA_LograConstantCoeff()
 
 
@@ -393,9 +374,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograRegressionCoeff (
   const SLData_t * SIGLIB_PTR_DECL pSrcY,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        SumXY, SumX, SumY, SumXSquared;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrcX % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -403,14 +381,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograRegressionCoeff (
 #endif
 #endif
 
-  SumXY = SDS_Log (*pSrcX) * (*pSrcY);
-  SumX = SDS_Log (*pSrcX);
-  SumY = *pSrcY;
-  SumXSquared = SDS_Log (*pSrcX) * SDS_Log (*pSrcX);
+  SLData_t        SumXY = SDS_Log (*pSrcX) * (*pSrcY);
+  SLData_t        SumX = SDS_Log (*pSrcX);
+  SLData_t        SumY = *pSrcY;
+  SLData_t        SumXSquared = SDS_Log (*pSrcX) * SDS_Log (*pSrcX);
   pSrcX++;
   pSrcY++;
 
-  for (i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
     SumXY += SDS_Log (*pSrcX) * (*pSrcY);
     SumX += SDS_Log (*pSrcX);
     SumY += *pSrcY;
@@ -420,7 +398,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograRegressionCoeff (
   }
 
   return (((SampleLength * SumXY) - (SumX * SumY)) / ((SampleLength * SumXSquared) - (SumX * SumX)));
-
 }                                                                   // End of SDA_LograRegressionCoeff()
 
 
@@ -456,9 +433,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograCorrelationCoeff (
   const SLData_t * SIGLIB_PTR_DECL pSrcY,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        SumXY, SumX, SumY, SumXSquared, SumYSquared;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrcX % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -466,15 +440,15 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograCorrelationCoeff (
 #endif
 #endif
 
-  SumXY = SDS_Log (*pSrcX) * (*pSrcY);
-  SumX = SDS_Log (*pSrcX);
-  SumY = *pSrcY;
-  SumXSquared = SDS_Log (*pSrcX) * SDS_Log (*pSrcX);
-  SumYSquared = (*pSrcY) * (*pSrcY);
+  SLData_t        SumXY = SDS_Log (*pSrcX) * (*pSrcY);
+  SLData_t        SumX = SDS_Log (*pSrcX);
+  SLData_t        SumY = *pSrcY;
+  SLData_t        SumXSquared = SDS_Log (*pSrcX) * SDS_Log (*pSrcX);
+  SLData_t        SumYSquared = (*pSrcY) * (*pSrcY);
   pSrcX++;
   pSrcY++;
 
-  for (i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
     SumXY += SDS_Log (*pSrcX) * (*pSrcY);
     SumX += SDS_Log (*pSrcX);
     SumY += *pSrcY;
@@ -486,7 +460,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograCorrelationCoeff (
 
   return (((SampleLength * SumXY) - (SumX * SumY)) /
           SDS_Sqrt (((SampleLength * SumXSquared) - (SumX * SumX)) * ((SampleLength * SumYSquared) - (SumY * SumY))));
-
 }                                                                   // End of SDA_LograRegressionCoeff()
 
 
@@ -519,7 +492,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograEstimateX (
   const SLArrayIndex_t SampleLength)
 {
   return (SDS_Exp ((YVal - SDA_LograConstantCoeff (pSrcX, pSrcY, SampleLength)) / SDA_LograRegressionCoeff (pSrcX, pSrcY, SampleLength)));
-
 }                                                                   // End of SDA_LograEstimateX()
 
 
@@ -552,7 +524,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograEstimateY (
   const SLArrayIndex_t SampleLength)
 {
   return ((SDS_Log (XVal) * SDA_LograRegressionCoeff (pSrcX, pSrcY, SampleLength)) + SDA_LograConstantCoeff (pSrcX, pSrcY, SampleLength));
-
 }                                                                   // End of SDA_LograEstimateY()
 
 
@@ -588,9 +559,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraConstantCoeff (
   const SLData_t * SIGLIB_PTR_DECL pSrcY,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        SumX, SumY;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrcX % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -598,12 +566,12 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraConstantCoeff (
 #endif
 #endif
 
-  SumX = *pSrcX;
-  SumY = SDS_Log (*pSrcY);
+  SLData_t        SumX = *pSrcX;
+  SLData_t        SumY = SDS_Log (*pSrcY);
   pSrcX++;
   pSrcY++;
 
-  for (i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
     SumX += *pSrcX;
     SumY += SDS_Log (*pSrcY);
     pSrcX++;
@@ -614,7 +582,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraConstantCoeff (
   pSrcY -= SampleLength;
 
   return ((SumY - (SDA_ExpraRegressionCoeff (pSrcX, pSrcY, SampleLength) * SumX)) / SampleLength);
-
 }                                                                   // End of SDA_ExpraConstantCoeff()
 
 
@@ -650,9 +617,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraRegressionCoeff (
   const SLData_t * SIGLIB_PTR_DECL pSrcY,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        SumXY, SumX, SumY, SumXSquared;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrcX % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -660,14 +624,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraRegressionCoeff (
 #endif
 #endif
 
-  SumXY = (*pSrcX) * SDS_Log (*pSrcY);
-  SumX = *pSrcX;
-  SumY = SDS_Log (*pSrcY);
-  SumXSquared = (*pSrcX) * (*pSrcX);
+  SLData_t        SumXY = (*pSrcX) * SDS_Log (*pSrcY);
+  SLData_t        SumX = *pSrcX;
+  SLData_t        SumY = SDS_Log (*pSrcY);
+  SLData_t        SumXSquared = (*pSrcX) * (*pSrcX);
   pSrcX++;
   pSrcY++;
 
-  for (i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
     SumXY += (*pSrcX) * SDS_Log (*pSrcY);
     SumX += *pSrcX;
     SumY += SDS_Log (*pSrcY);
@@ -677,7 +641,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraRegressionCoeff (
   }
 
   return (((SampleLength * SumXY) - (SumX * SumY)) / ((SampleLength * SumXSquared) - (SumX * SumX)));
-
 }                                                                   // End of SDA_ExpraRegressionCoeff()
 
 
@@ -713,9 +676,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraCorrelationCoeff (
   const SLData_t * SIGLIB_PTR_DECL pSrcY,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        SumXY, SumX, SumY, SumXSquared, SumYSquared;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrcX % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -723,15 +683,15 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraCorrelationCoeff (
 #endif
 #endif
 
-  SumXY = (*pSrcX) * SDS_Log (*pSrcY);
-  SumX = *pSrcX;
-  SumY = SDS_Log (*pSrcY);
-  SumXSquared = (*pSrcX) * (*pSrcX);
-  SumYSquared = SDS_Log (*pSrcY) * SDS_Log (*pSrcY);
+  SLData_t        SumXY = (*pSrcX) * SDS_Log (*pSrcY);
+  SLData_t        SumX = *pSrcX;
+  SLData_t        SumY = SDS_Log (*pSrcY);
+  SLData_t        SumXSquared = (*pSrcX) * (*pSrcX);
+  SLData_t        SumYSquared = SDS_Log (*pSrcY) * SDS_Log (*pSrcY);
   pSrcX++;
   pSrcY++;
 
-  for (i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
     SumXY += (*pSrcX) * SDS_Log (*pSrcY);
     SumX += *pSrcX;
     SumY += SDS_Log (*pSrcY);
@@ -743,7 +703,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraCorrelationCoeff (
 
   return (((SampleLength * SumXY) - (SumX * SumY)) /
           SDS_Sqrt (((SampleLength * SumXSquared) - (SumX * SumX)) * ((SampleLength * SumYSquared) - (SumY * SumY))));
-
 }                                                                   // End of SDA_ExpraRegressionCoeff()
 
 
@@ -776,7 +735,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraEstimateX (
   const SLArrayIndex_t SampleLength)
 {
   return ((SDS_Log (YVal) - SDA_ExpraConstantCoeff (pSrcX, pSrcY, SampleLength)) / SDA_ExpraRegressionCoeff (pSrcX, pSrcY, SampleLength));
-
 }                                                                   // End of SDA_ExpraEstimateX()
 
 
@@ -809,7 +767,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraEstimateY (
   const SLArrayIndex_t SampleLength)
 {
   return (SDS_Exp ((XVal * SDA_ExpraRegressionCoeff (pSrcX, pSrcY, SampleLength)) + SDA_ExpraConstantCoeff (pSrcX, pSrcY, SampleLength)));
-
 }                                                                   // End of SDA_ExpraEstimateY()
 
 
@@ -845,9 +802,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraConstantCoeff (
   const SLData_t * SIGLIB_PTR_DECL pSrcY,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        SumX, SumY;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrcX % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -855,12 +809,12 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraConstantCoeff (
 #endif
 #endif
 
-  SumX = SDS_Log (*pSrcX);
-  SumY = SDS_Log (*pSrcY);
+  SLData_t        SumX = SDS_Log (*pSrcX);
+  SLData_t        SumY = SDS_Log (*pSrcY);
   pSrcX++;
   pSrcY++;
 
-  for (i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
     SumX += SDS_Log (*pSrcX);
     SumY += SDS_Log (*pSrcY);
     pSrcX++;
@@ -871,7 +825,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraConstantCoeff (
   pSrcY -= SampleLength;
 
   return ((SumY - (SDA_PowraRegressionCoeff (pSrcX, pSrcY, SampleLength) * SumX)) / SampleLength);
-
 }                                                                   // End of SDA_PowraConstantCoeff()
 
 
@@ -907,9 +860,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraRegressionCoeff (
   const SLData_t * SIGLIB_PTR_DECL pSrcY,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        SumXY, SumX, SumY, SumXSquared;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrcX % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -917,14 +867,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraRegressionCoeff (
 #endif
 #endif
 
-  SumXY = SDS_Log (*pSrcX) * SDS_Log (*pSrcY);
-  SumX = SDS_Log (*pSrcX);
-  SumY = SDS_Log (*pSrcY);
-  SumXSquared = SDS_Log (*pSrcX) * SDS_Log (*pSrcX);
+  SLData_t        SumXY = SDS_Log (*pSrcX) * SDS_Log (*pSrcY);
+  SLData_t        SumX = SDS_Log (*pSrcX);
+  SLData_t        SumY = SDS_Log (*pSrcY);
+  SLData_t        SumXSquared = SDS_Log (*pSrcX) * SDS_Log (*pSrcX);
   pSrcX++;
   pSrcY++;
 
-  for (i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
     SumXY += SDS_Log (*pSrcX) * SDS_Log (*pSrcY);
     SumX += SDS_Log (*pSrcX);
     SumY += SDS_Log (*pSrcY);
@@ -934,7 +884,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraRegressionCoeff (
   }
 
   return (((SampleLength * SumXY) - (SumX * SumY)) / ((SampleLength * SumXSquared) - (SumX * SumX)));
-
 }                                                                   // End of SDA_PowraRegressionCoeff()
 
 
@@ -970,9 +919,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraCorrelationCoeff (
   const SLData_t * SIGLIB_PTR_DECL pSrcY,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        SumXY, SumX, SumY, SumXSquared, SumYSquared;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrcX % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -980,15 +926,15 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraCorrelationCoeff (
 #endif
 #endif
 
-  SumXY = SDS_Log (*pSrcX) * SDS_Log (*pSrcY);
-  SumX = SDS_Log (*pSrcX);
-  SumY = SDS_Log (*pSrcY);
-  SumXSquared = SDS_Log (*pSrcX) * SDS_Log (*pSrcX);
-  SumYSquared = SDS_Log (*pSrcY) * SDS_Log (*pSrcY);
+  SLData_t        SumXY = SDS_Log (*pSrcX) * SDS_Log (*pSrcY);
+  SLData_t        SumX = SDS_Log (*pSrcX);
+  SLData_t        SumY = SDS_Log (*pSrcY);
+  SLData_t        SumXSquared = SDS_Log (*pSrcX) * SDS_Log (*pSrcX);
+  SLData_t        SumYSquared = SDS_Log (*pSrcY) * SDS_Log (*pSrcY);
   pSrcX++;
   pSrcY++;
 
-  for (i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
     SumXY += SDS_Log (*pSrcX) * SDS_Log (*pSrcY);
     SumX += SDS_Log (*pSrcX);
     SumY += SDS_Log (*pSrcY);
@@ -1000,7 +946,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraCorrelationCoeff (
 
   return (((SampleLength * SumXY) - (SumX * SumY)) /
           SDS_Sqrt (((SampleLength * SumXSquared) - (SumX * SumX)) * ((SampleLength * SumYSquared) - (SumY * SumY))));
-
 }                                                                   // End of SDA_PowraRegressionCoeff()
 
 
@@ -1033,7 +978,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraEstimateX (
   const SLArrayIndex_t SampleLength)
 {
   return (SDS_Exp ((SDS_Log (YVal) - SDA_PowraConstantCoeff (pSrcX, pSrcY, SampleLength)) / SDA_PowraRegressionCoeff (pSrcX, pSrcY, SampleLength)));
-
 }                                                                   // End of SDA_PowraEstimateX()
 
 
@@ -1066,7 +1010,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraEstimateY (
   const SLArrayIndex_t SampleLength)
 {
   return (SDS_Exp ((SDS_Log (XVal) * SDA_PowraRegressionCoeff (pSrcX, pSrcY, SampleLength)) + SDA_PowraConstantCoeff (pSrcX, pSrcY, SampleLength)));
-
 }                                                                   // End of SDA_PowraEstimateY()
 
 
@@ -1106,10 +1049,6 @@ void SIGLIB_FUNC_DECL SDA_Detrend (
   SLData_t * SIGLIB_PTR_DECL pRamp,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  const SLData_t *pSrcStart;
-  SLData_t        M, C;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -1118,21 +1057,20 @@ void SIGLIB_FUNC_DECL SDA_Detrend (
 #endif
 #endif
 
-  pSrcStart = pSrc;
+  const SLData_t *pSrcStart = pSrc;
 
-  for (i = 0; i < SampleLength; i++) {                              // Fill index array with ramp
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {               // Fill index array with ramp
     *(pRamp + i) = (SLData_t) i;
   }
 
 // Calculate constant and regression coefficient
-  M = SDA_LinraRegressionCoeff (pRamp, pSrcStart, SampleLength);
-  C = SDA_LinraConstantCoeff (pRamp, pSrcStart, SampleLength);
+  SLData_t        M = SDA_LinraRegressionCoeff (pRamp, pSrcStart, SampleLength);
+  SLData_t        C = SDA_LinraConstantCoeff (pRamp, pSrcStart, SampleLength);
 
 // Detrend the signal by removing the estimate from the original
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
     *pDst++ = *pSrc++ - (M * ((SLData_t) i) + C);
   }
-
 }                                                                   // End of SDA_Detrend()
 
 
@@ -1171,10 +1109,6 @@ void SIGLIB_FUNC_DECL SDA_ExtractTrend (
   SLData_t * SIGLIB_PTR_DECL pRamp,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  const SLData_t *pSrcStart;
-  SLData_t        M, C;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -1183,19 +1117,18 @@ void SIGLIB_FUNC_DECL SDA_ExtractTrend (
 #endif
 #endif
 
-  pSrcStart = pSrc;
+  const SLData_t *pSrcStart = pSrc;
 
-  for (i = 0; i < SampleLength; i++) {                              // Fill index array with ramp
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {               // Fill index array with ramp
     *(pRamp + i) = (SLData_t) i;
   }
 
 // Calculate constant and regression coefficient
-  M = SDA_LinraRegressionCoeff (pRamp, pSrcStart, SampleLength);
-  C = SDA_LinraConstantCoeff (pRamp, pSrcStart, SampleLength);
+  SLData_t        M = SDA_LinraRegressionCoeff (pRamp, pSrcStart, SampleLength);
+  SLData_t        C = SDA_LinraConstantCoeff (pRamp, pSrcStart, SampleLength);
 
 // Write the trend line of the original
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
     *pDst++ = M * ((SLData_t) i) + C;
   }
-
 }                                                                   // End of SDA_ExtractTrend()

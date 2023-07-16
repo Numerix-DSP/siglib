@@ -1,5 +1,5 @@
 // SigLib image coding example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -68,12 +68,10 @@ int main (
   void)
 {
   h_GPC_Plot     *hImage;                                           // Declare image object
-  int             i;
 
   pDctResults = SUF_VectorArrayAllocate (IMAGE_SIZE);
   pZZSResults = SUF_VectorArrayAllocate (IMAGE_SIZE);
   pQuantizeResults = SUF_VectorArrayAllocate (IMAGE_SIZE);
-
 
   SIF_Dct8x8 ();
 
@@ -90,9 +88,8 @@ int main (
     exit (-1);
   }
 
-
   SDA_Scale (source_data, source_data, NUMBER_OF_DCT_DATA_CODES, IMAGE_SIZE);
-  for (i = 0; i < IMAGE_SIZE; i++) {
+  for (SLArrayIndex_t i = 0; i < IMAGE_SIZE; i++) {
     pImageArray[i] = (SLImageData_t) source_data[i];
   }
   gpc_plot_image (hImage,                                           // Graph handle
@@ -111,7 +108,7 @@ int main (
 
 
   SDA_Scale (pZZSResults, pZZSResults, NUMBER_OF_DCT_DATA_CODES, IMAGE_SIZE);
-  for (i = 0; i < IMAGE_SIZE; i++) {
+  for (SLArrayIndex_t i = 0; i < IMAGE_SIZE; i++) {
     pImageArray[i] = (SLImageData_t) pZZSResults[i];
   }
   gpc_plot_image (hImage,                                           // Graph handle
@@ -132,8 +129,7 @@ int main (
             IMAGE_SIZE);                                            // Dataset length
 #endif
 
-
-  for (i = 0; i < IMAGE_SIZE; i++) {
+  for (SLArrayIndex_t i = 0; i < IMAGE_SIZE; i++) {
     pImageArray[i] = (SLImageData_t) pQuantizeResults[i];
   }
 
@@ -151,7 +147,7 @@ int main (
                source_data);                                        // Pointer to destination sub image
 
 
-  for (i = 0; i < IMAGE_SIZE; i++) {
+  for (SLArrayIndex_t i = 0; i < IMAGE_SIZE; i++) {
     pImageArray[i] = (SLImageData_t) source_data[i];
   }
   gpc_plot_image (hImage,                                           // Graph handle

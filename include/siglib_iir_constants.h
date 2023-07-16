@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : siglib_iir_constants.h | Author : JOHN EDWARDS
-Siglib Library Version  : 10.00                  |
+Siglib Library Version  : 10.50                  |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 14/05/2006
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : IIR filter frequency normalized coefficients :
     Fc = 1 radian and normalised sample rate 2PI radians

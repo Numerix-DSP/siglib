@@ -1,5 +1,5 @@
 // Siglib Word Length Increase / Decrease Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -51,7 +51,6 @@ int main (
   void)
 {
   SLArrayIndex_t  NumberOfBytesConverted;
-  SLArrayIndex_t  i;
   SLFixData_t     ValidationCheckFlag = 0;
 
 #if ENABLE_DEBUG_LOG
@@ -67,7 +66,7 @@ int main (
   printf ("SDA_DecreaseWordLength - number of bytes converted = %d\n", NumberOfBytesConverted);
 
 #if ENABLE_DEBUG_LOG
-  for (i = 0; i < NumberOfBytesConverted; i++) {
+  for (SLArrayIndex_t i = 0; i < NumberOfBytesConverted; i++) {
     SUF_Debugfprintf ("OutputSequence[%d]", i);
     dpchar (OutputSequence[i]);
   }
@@ -83,7 +82,7 @@ int main (
 
 #if ENABLE_DEBUG_LOG
   SUF_Debugfprintf ("\n", i);
-  for (i = 0; i < NumberOfBytesConverted; i++) {
+  for (SLArrayIndex_t i = 0; i < NumberOfBytesConverted; i++) {
     SUF_Debugfprintf ("RegeneratedSequence[%d]", i);
     dpchar (RegeneratedSequence[i]);
   }
@@ -92,7 +91,7 @@ int main (
   RegeneratedSequence[NumberOfBytesConverted] = '\0';               // Add trailing NULL to end of string
   printf ("ReAsync string = %s\n", RegeneratedSequence);
 
-  for (i = 0; i < NUMBER_OF_SAMPLES; i++) {
+  for (SLArrayIndex_t i = 0; i < NUMBER_OF_SAMPLES; i++) {
     if (RegeneratedSequence[i] != InputSequence[i]) {
       printf ("RegeneratedSequence[%d] (%x) != InputSequence[%d] (%x)\n", i, RegeneratedSequence[i], i, InputSequence[i]);
       ValidationCheckFlag = 1;

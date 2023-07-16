@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : WINDOW.C      | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 13/09/1992
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Windowing routines for SigLib DSP library.
 
@@ -390,8 +390,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexWindow (
   const SLData_t * SIGLIB_PTR_DECL pImagWindowCoeffs,
   const SLArrayIndex_t windowLength)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrcReal % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
@@ -403,7 +401,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexWindow (
 #endif
 #endif
 
-  for (i = 0; i < windowLength; i++) {
+  for (SLArrayIndex_t i = 0; i < windowLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pRealDst[i] = pSrcReal[i] * pRealWindowCoeffs[i];
     pImagDst[i] = pSrcImag[i] * pImagWindowCoeffs[i];

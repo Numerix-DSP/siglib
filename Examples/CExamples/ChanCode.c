@@ -1,5 +1,5 @@
 // SigLib channelization code generation test program
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -18,7 +18,6 @@ int main (
 {
   SLArrayIndex_t  SpreadingFactor;
   SLArrayIndex_t  CodeIndex;
-  SLArrayIndex_t  i;
 
   if (argc != 3) {
     printf ("useage  : ChanCode SpreadingFactor CodeIndex\n");
@@ -46,7 +45,7 @@ int main (
                           CodeIndex);                               // Channelization code index
 
   printf ("Channelization codes : ");
-  for (i = 0; i < SpreadingFactor; i++) {
+  for (SLArrayIndex_t i = 0; i < SpreadingFactor; i++) {
     printf ("%d, ", (int) ChannelizationCode[i]);
   }
   printf ("\n\n");

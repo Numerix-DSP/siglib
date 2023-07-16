@@ -1,5 +1,5 @@
 // SigLib Regression Analysis Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -22,10 +22,8 @@ static const SLData_t exp_datay[DATA_LENGTH] = { 2.70, 3.64, 4.92, 6.64, 8.96 };
 int main (
   void)
 {
-  SLFixData_t     i;
-
   printf ("Linear Regression analysis\n\n");
-  for (i = 0; i < DATA_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < DATA_LENGTH; i++) {
     printf ("X Data = %lf,\tY Data = %lf\n", lin_datax[i], lin_datay[i]);
   }
   printf ("\n");
@@ -53,7 +51,7 @@ int main (
   getchar ();
 
   printf ("Logarithmic Regression analysis\n\n");
-  for (i = 0; i < DATA_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < DATA_LENGTH; i++) {
     printf ("X Data = %lf,\tY Data = %lf\n", log_datax[i], log_datay[i]);
   }
   printf ("\n");
@@ -81,7 +79,7 @@ int main (
   getchar ();
 
   printf ("Power Regression analysis\n\n");
-  for (i = 0; i < DATA_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < DATA_LENGTH; i++) {
     printf ("X Data = %lf,\tY Data = %lf\n", pow_datax[i], pow_datay[i]);
   }
   printf ("\n");
@@ -109,7 +107,7 @@ int main (
   getchar ();
 
   printf ("Exponential Regression analysis\n\n");
-  for (i = 0; i < DATA_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < DATA_LENGTH; i++) {
     printf ("X Data = %lf,\tY Data = %lf\n", exp_datax[i], exp_datay[i]);
   }
   printf ("\n");

@@ -1,5 +1,5 @@
 // SigLib WCDMA based Spreading & Scrambling modulation test program
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -51,7 +51,6 @@ int main (
 #endif
 
   SLFixData_t     DataInByte = SIGLIB_FIX_ZERO;
-  SLArrayIndex_t  LoopCount;
 
   SLUInt32_t      TxShiftRegister;                                  // Shift registers - Must be at least 17 bits long
 
@@ -116,13 +115,13 @@ int main (
   TxShiftRegister = 1;                                              // Seed the shift registers
 
 #if DEBUG
-  for (i = 0; i < SPREADING_FACTOR; i++) {
+  for (SLArrayIndex_t i = 0; i < SPREADING_FACTOR; i++) {
     printf ("Scram   : i = %lf, q = %lf\n", ScramblingCode[i].real, ScramblingCode[i].imag);
     printf ("DeScram : i = %lf, q = %lf\n", DescramblingCode[i].imag, DescramblingCode[i].imag);
   }
 #endif
 
-  for (LoopCount = 0; LoopCount < NumberOfIterations; LoopCount++) {
+  for (SLArrayIndex_t LoopCount = 0; LoopCount < NumberOfIterations; LoopCount++) {
     if ((LoopCount % 4) == 0) {                                     // Should we generate the next PN sequence bits
       DataInByte = SDS_SequenceGeneratorPN9 (&TxShiftRegister);     // Shift register
       DataInBits = DataInByte & 0x3;

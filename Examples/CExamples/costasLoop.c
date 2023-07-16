@@ -1,5 +1,5 @@
 // SigLib Costas Loop Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -12,7 +12,7 @@
 
 #define SAMPLE_LENGTH                   512
 
-#define SAMPLE_RATE                     48000.                      // Sample rate
+#define SAMPLE_RATE_HZ                  48000.                      // Sample rate
 #define CARRIER_FREQUENCY               300.                        // Carrier frequency
 
 #define FEEDBACK_MODE   SIGLIB_COSTAS_LOOP_MULTIPLY_LOOP            // Feedback mode
@@ -21,7 +21,7 @@
 
                         // Note : Costas loop LPFs - lengths are chosen so that there
                         // are at least two full cycles and an odd number - for an integer group delay
-#define COSTAS_LP_LPF_LENGTH            (((SLFixData_t)((SAMPLE_RATE / CARRIER_FREQUENCY) * SIGLIB_TWO)) | 0x1) // Costas loop LP LPF FIR filter length
+#define COSTAS_LP_LPF_LENGTH            (((SLFixData_t)((SAMPLE_RATE_HZ / CARRIER_FREQUENCY) * SIGLIB_TWO)) | 0x1)  // Costas loop LP LPF FIR filter length
 #define COSTAS_LP_LPF_CUTOFF_FREQUENCY  100.0                       // LPF cut-off frequency
 #define COSTAS_LP_VCO_MODULATION_INDEX  0.005                       // Modulation index
 #define COSTAS_LP_LOOP_FILTER_ALPHA     0.9                         // Feedback coeff for one-pole loop filter
@@ -49,10 +49,6 @@ int main (
 
   SLData_t        TimeIndex = SIGLIB_ZERO;
 
-#if PER_SAMPLE
-  SLArrayIndex_t  i;
-#endif
-
   printf ("\n\nSigLib Costas Loop Example\n");
 
   pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
@@ -64,7 +60,7 @@ int main (
   SIF_CostasLoop (&CostasLpVCOPhase,                                // VCO phase
                   pCostasLpVCOLookUpTable,                          // VCO look up table
                   COSTAS_LP_VCO_SINE_TABLE_SIZE,                    // VCO look up table size
-                  COSTAS_LP_LPF_CUTOFF_FREQUENCY / SAMPLE_RATE,     // Low-pass filter cut-off frequency
+                  COSTAS_LP_LPF_CUTOFF_FREQUENCY / SAMPLE_RATE_HZ,  // Low-pass filter cut-off frequency
                   pCostasLpLPF1State,                               // Pointer to loop filter 1 state
                   &CostasLpLPF1Index,                               // Pointer to loop filter 1 index
                   pCostasLpLPF2State,                               // Pointer to loop filter 2 state
@@ -93,7 +89,7 @@ int main (
                         SIGLIB_SINE_WAVE,                           // Signal type - Sine wave
                         SIGLIB_ONE,                                 // Signal peak level
                         SIGLIB_FILL,                                // Fill (overwrite) or add to existing array contents
-                        CARRIER_FREQUENCY / SAMPLE_RATE,            // Signal frequency
+                        CARRIER_FREQUENCY / SAMPLE_RATE_HZ,         // Signal frequency
                         SIGLIB_ZERO,                                // D.C. Offset
                         SIGLIB_ZERO,                                // Unused
                         SIGLIB_ZERO,                                // Signal end value - Unused
@@ -106,19 +102,19 @@ int main (
                  SAMPLE_LENGTH,                                     // Dataset length
                  "Original Sine Wave",                              // Dataset title
                  TimeIndex,                                         // Minimum X value
-                 TimeIndex + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                 TimeIndex + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ), // Maximum X value
                  "lines",                                           // Graph type
                  "magenta",                                         // Colour
                  GPC_NEW);                                          // New graph
 
 #if PER_SAMPLE
-    for (i = 0; i < SAMPLE_LENGTH; i++) {
+    for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
       *(pData + i) = SDS_CostasLoop (*(pData + i),                  // Source data sample
                                      &CostasLpVCOPhase,             // VCO phase
                                      COSTAS_LP_VCO_MODULATION_INDEX,  // VCO modulation index
                                      pCostasLpVCOLookUpTable,       // VCO look up table
                                      COSTAS_LP_VCO_SINE_TABLE_SIZE, // VCO look up table size
-                                     CARRIER_FREQUENCY / SAMPLE_RATE, // Carrier frequency
+                                     CARRIER_FREQUENCY / SAMPLE_RATE_HZ,  // Carrier frequency
                                      pCostasLpLPF1State,            // Pointer to loop filter 1 state
                                      &CostasLpLPF1Index,            // Pointer to loop filter 1 index
                                      pCostasLpLPF2State,            // Pointer to loop filter 2 state
@@ -137,7 +133,7 @@ int main (
                     COSTAS_LP_VCO_MODULATION_INDEX,                 // VCO modulation index
                     pCostasLpVCOLookUpTable,                        // VCO look up table
                     COSTAS_LP_VCO_SINE_TABLE_SIZE,                  // VCO look up table size
-                    CARRIER_FREQUENCY / SAMPLE_RATE,                // Carrier frequency
+                    CARRIER_FREQUENCY / SAMPLE_RATE_HZ,             // Carrier frequency
                     pCostasLpLPF1State,                             // Pointer to loop filter 1 state
                     &CostasLpLPF1Index,                             // Pointer to loop filter 1 index
                     pCostasLpLPF2State,                             // Pointer to loop filter 2 state
@@ -156,11 +152,11 @@ int main (
                  SAMPLE_LENGTH,                                     // Dataset length
                  "Costas Loop Output",                              // Dataset title
                  TimeIndex,                                         // Minimum X value
-                 TimeIndex + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                 TimeIndex + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ), // Maximum X value
                  "lines",                                           // Graph type
                  "blue",                                            // Colour
                  GPC_ADD);                                          // New graph
-    TimeIndex += (SLData_t) SAMPLE_LENGTH / SAMPLE_RATE;
+    TimeIndex += (SLData_t) SAMPLE_LENGTH / SAMPLE_RATE_HZ;
 
     printf ("Hit 'x' to exit or <Carriage Return> to continue\n");
 

@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : FOURIER.C     | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 13/09/1992
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : SigLib DSP library Generic Fourier Transform routines.
 
@@ -40,7 +40,6 @@ Description : SigLib DSP library Generic Fourier Transform routines.
 #define SIGLIB_SRC_FILE_FOURIER 1                                   // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
 
 /**/
 
@@ -119,7 +118,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_ZoomFft (
   SIF_Fft (pFFTCoeffs, pBitReverseAddressTable, FFTLength);         // Initialise the FFT sine and cosine tables
 
   return (ErrorCode);
-
 }                                                                   // End of SIF_ZoomFft()
 
 
@@ -222,16 +220,6 @@ void SIGLIB_FUNC_DECL SDA_ZoomFft (
   const SLArrayIndex_t FFTLength,
   const SLArrayIndex_t Log2Size)
 {
-  SLArrayIndex_t  i;
-  SLArrayIndex_t  DecimateCounter = 1;
-  SLData_t        RealLocalSum = *RealCombFilterSum;
-  SLData_t        ImagLocalSum = *ImagCombFilterSum;
-  SLData_t       *realp;
-  SLData_t       *imagp;
-  SLData_t        Sample, Tmp;
-  const SLData_t *pLocalSineTable, *pLocalCosineTable, *pLocalSineTableEnd;
-  SLData_t       *pLocalRealCombFilter, *pLocalImagCombFilter, *pLocalRealCombFilterEnd;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -239,28 +227,30 @@ void SIGLIB_FUNC_DECL SDA_ZoomFft (
   _nassert ((int) pImagData % 8 == 0);
 #endif
 #endif
+  SLData_t       *realp = pRealData;                                // Initialize local array pointers
+  SLData_t       *imagp = pImagData;
 
-  realp = pRealData;                                                // Initialize local array pointers
-  imagp = pImagData;
-
-  pLocalSineTableEnd = pSineTable + SineTableSize;
-
-  pLocalSineTable = pSineTable + *SineTablePhase;                   // Set up local pointers to mix sinusoid tables
-  pLocalCosineTable = pLocalSineTable + (SLArrayIndex_t) ((SLUFixData_t) SineTableSize >> 2U);
+  const SLData_t *pLocalSineTable = pSineTable + *SineTablePhase;   // Set up local pointers to mix sinusoid tables
+  const SLData_t *pLocalCosineTable = pLocalSineTable + (SLArrayIndex_t) ((SLUFixData_t) SineTableSize >> 2U);
+  const SLData_t *pLocalSineTableEnd = pSineTable + SineTableSize;
   if (pLocalCosineTable >= pLocalSineTableEnd) {                    // Ensure no overlap
     pLocalCosineTable -= SineTableSize;
   }
 
-  pLocalRealCombFilter = pRealCombFilter + *CombFilterPhase;        // Set up local pointers to comb filter state arrays
-  pLocalImagCombFilter = pImagCombFilter + *CombFilterPhase;
-  pLocalRealCombFilterEnd = pRealCombFilter + CombFilterLength;
+  SLData_t       *pLocalRealCombFilter = pRealCombFilter + *CombFilterPhase;  // Set up local pointers to comb filter state arrays
+  SLData_t       *pLocalImagCombFilter = pImagCombFilter + *CombFilterPhase;
+  SLData_t       *pLocalRealCombFilterEnd = pRealCombFilter + CombFilterLength;
 
+  SLData_t        RealLocalSum = *RealCombFilterSum;
+  SLData_t        ImagLocalSum = *ImagCombFilterSum;
 
-  for (i = 0; i < InputArrayLength; i++) {
-    Sample = *pSrc++;
+  SLArrayIndex_t  DecimateCounter = 1;
+
+  for (SLArrayIndex_t i = 0; i < InputArrayLength; i++) {
+    SLData_t        Sample = *pSrc++;
 
 // Calculate real data path
-    Tmp = Sample * *pLocalCosineTable;                              // Multiply input data by complex exponential
+    SLData_t        Tmp = Sample * *pLocalCosineTable;              // Multiply input data by complex exponential
 
     pLocalCosineTable += (SLArrayIndex_t) (MixFrequency * (SLData_t) SineTableSize);  // Increment cosine table pointer
     if (pLocalCosineTable >= pLocalSineTableEnd) {                  // Circular array
@@ -367,7 +357,6 @@ void SIGLIB_FUNC_DECL SIF_ZoomFftSimple (
                     pSineTable, SineTablePhase, FilterLength, SineTableLength);
 
   SIF_Fft (pFFTCoeffs, pBitReverseAddressTable, FFTLength);         // Initialise the FFT sine and cosine tables
-
 }                                                                   // End of SIF_ZoomFftSimple()
 
 
@@ -446,16 +435,6 @@ void SIGLIB_FUNC_DECL SDA_ZoomFftSimple (
   const SLArrayIndex_t FFTLength,
   const SLArrayIndex_t Log2Size)
 {
-  SLArrayIndex_t  i;
-  SLArrayIndex_t  decimate_counter = 1;
-  SLData_t        LocalSum1 = *CombFilter1Sum;
-  SLData_t        LocalSum2 = *CombFilter2Sum;
-  SLData_t       *realp;
-  SLData_t       *imagp;
-  SLData_t        Sample, Tmp;
-  const SLData_t *pLocalSineTable, *pLocalCosineTable, *pLocalSineTableEnd;
-  SLData_t       *pLocalCombFilter1, *pLocalCombFilter2, *pLocalCombFilter1End;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -464,27 +443,30 @@ void SIGLIB_FUNC_DECL SDA_ZoomFftSimple (
 #endif
 #endif
 
-  realp = RealData;                                                 // Set Data array pointers
-  imagp = ImagData;
+  SLData_t       *realp = RealData;                                 // Set Data array pointers
+  SLData_t       *imagp = ImagData;
 
-  pLocalSineTableEnd = pSineTable + SineTableSize;
-
-  pLocalSineTable = pSineTable + *SineTablePhase;                   // Set up local pointers to mix sinusoid tables
-  pLocalCosineTable = pLocalSineTable + (SLArrayIndex_t) ((SLUFixData_t) SineTableSize >> 2U);
+  const SLData_t *pLocalSineTable = pSineTable + *SineTablePhase;   // Set up local pointers to mix sinusoid tables
+  const SLData_t *pLocalCosineTable = pLocalSineTable + (SLArrayIndex_t) ((SLUFixData_t) SineTableSize >> 2U);
+  const SLData_t *pLocalSineTableEnd = pSineTable + SineTableSize;
   if (pLocalCosineTable >= pLocalSineTableEnd) {                    // Ensure no overlap
     pLocalCosineTable -= SineTableSize;
   }
 
-  pLocalCombFilter1 = pCombFilter1 + *CombFilterPhase;              // Set up local pointers to comb filter state arrays
-  pLocalCombFilter2 = pCombFilter2 + *CombFilterPhase;
-  pLocalCombFilter1End = pCombFilter1 + FilterLength;
+  SLData_t       *pLocalCombFilter1 = pCombFilter1 + *CombFilterPhase;  // Set up local pointers to comb filter state arrays
+  SLData_t       *pLocalCombFilter2 = pCombFilter2 + *CombFilterPhase;
+  SLData_t       *pLocalCombFilter1End = pCombFilter1 + FilterLength;
 
+  SLData_t        LocalSum1 = *CombFilter1Sum;
+  SLData_t        LocalSum2 = *CombFilter2Sum;
 
-  for (i = 0; i < InputArrayLength; i++) {
-    Sample = *pSrc++;
+  SLArrayIndex_t  decimate_counter = 1;
+
+  for (SLArrayIndex_t i = 0; i < InputArrayLength; i++) {
+    SLData_t        Sample = *pSrc++;
 
 // Calculate real data path
-    Tmp = Sample * *pLocalCosineTable;                              // Multiply input data by complex exponential
+    SLData_t        Tmp = Sample * *pLocalCosineTable;              // Multiply input data by complex exponential
 
     pLocalCosineTable += (SLArrayIndex_t) (MixFrequency * (SLData_t) SineTableSize);  // Increment cosine table pointer
     if (pLocalCosineTable >= pLocalSineTableEnd) {                  // Circular array
@@ -528,7 +510,6 @@ void SIGLIB_FUNC_DECL SDA_ZoomFftSimple (
 
 // Perform a complex FFT on the shifted data
   SDA_Cfft (RealData, ImagData, pFFTCoeffs, pBitReverseAddressTable, FFTLength, Log2Size);
-
 }                                                                   // End of SDA_ZoomFftSimple()
 
 
@@ -558,7 +539,6 @@ void SIGLIB_FUNC_DECL SIF_FdHilbert (
   SLData_t * pInverseFFTLength,
   const SLArrayIndex_t FFTLength)
 {
-
   SIF_Fft (pFFTCoeffs, pBitReverseAddressTable, FFTLength);         // Initialise the FFT sine and cosine tables
 
   *pInverseFFTLength = SIGLIB_ONE / FFTLength;
@@ -602,10 +582,6 @@ void SIGLIB_FUNC_DECL SDA_FdHilbert (
   const SLArrayIndex_t FFTLength,
   const SLArrayIndex_t Log2FFTLength)
 {
-  SLArrayIndex_t  StepCounter, i;
-  SLData_t       *pLocalRealDst, *pLocalImagDst;
-  SLData_t        Tmp;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -618,22 +594,21 @@ void SIGLIB_FUNC_DECL SDA_FdHilbert (
 
   SDA_Rfft (pDstReal, pDstImag, pFFTCoeffs, pBitReverseAddressTable, FFTLength, Log2FFTLength); // Convert to the frequency domain
 
-  pLocalRealDst = pDstReal;
-  pLocalImagDst = pDstImag;
+  SLData_t       *pLocalRealDst = pDstReal;
+  SLData_t       *pLocalImagDst = pDstImag;
 
-  for (i = 0; i < FFTLength; i++) {                                 // Scale freqeuncy domain results
+  for (SLArrayIndex_t i = 0; i < FFTLength; i++) {                  // Scale freqeuncy domain results
     *pLocalRealDst++ *= InverseFFTLength;
     *pLocalImagDst++ *= InverseFFTLength;
   }
 
-  StepCounter = (SLArrayIndex_t) ((SLUFixData_t) FFTLength >> 1U) - 1;
+  SLArrayIndex_t  StepCounter = (SLArrayIndex_t) ((SLUFixData_t) FFTLength >> 1U) - 1;
 
   pLocalRealDst = pDstReal + 1;                                     // Skip first data point
   pLocalImagDst = pDstImag + 1;
 
-
-  for (i = 0; i < StepCounter; i++) {                               // Rotate 1st half, [mult By (0.0,-1.0)]
-    Tmp = *pLocalRealDst;
+  for (SLArrayIndex_t i = 0; i < StepCounter; i++) {                // Rotate 1st half, [mult By (0.0,-1.0)]
+    SLData_t        Tmp = *pLocalRealDst;
     *pLocalRealDst++ = *pLocalImagDst;
     *pLocalImagDst++ = -Tmp;
   }
@@ -642,15 +617,13 @@ void SIGLIB_FUNC_DECL SDA_FdHilbert (
   pLocalRealDst = pDstReal + StepCounter;
   pLocalImagDst = pDstImag + StepCounter;
 
-
-  for (i = StepCounter; i < FFTLength; i++) {                       // Rotate 2nd half, [divide by (0.0,-1.0)]
-    Tmp = *pLocalImagDst;
+  for (SLArrayIndex_t i = StepCounter; i < FFTLength; i++) {        // Rotate 2nd half, [divide by (0.0,-1.0)]
+    SLData_t        Tmp = *pLocalImagDst;
     *pLocalImagDst++ = *pLocalRealDst;
     *pLocalRealDst++ = -Tmp;
   }
 
   SDA_Cifft (pDstReal, pDstImag, pFFTCoeffs, pBitReverseAddressTable, FFTLength, Log2FFTLength);  // Convert to time domain
-
 }                                                                   // End of SDA_FdHilbert()
 
 
@@ -680,7 +653,6 @@ void SIGLIB_FUNC_DECL SIF_FdAnalytic (
   SLData_t * pInverseFFTLength,
   const SLArrayIndex_t FFTLength)
 {
-
   SIF_Fft (pFFTCoeffs, pBitReverseAddressTable, FFTLength);         // Initialise the FFT sine and cosine tables
 
   *pInverseFFTLength = SIGLIB_ONE / FFTLength;
@@ -774,9 +746,6 @@ void SIGLIB_FUNC_DECL SDA_InstantFreq (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        k1, k2;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSLead % 8 == 0);                                 // Align arrays on 64 bit double word boundary for LDDW
@@ -785,15 +754,14 @@ void SIGLIB_FUNC_DECL SDA_InstantFreq (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength - 1; i++) {
-    k1 = *pSLead * *(pSLag + 1) - *(pSLead + 1) * *pSLag;
-    k2 = *pSLead * *(pSLead + 1) + *pSLag * *(pSLag + 1);
+  for (SLArrayIndex_t i = 0; i < SampleLength - 1; i++) {
+    SLData_t        k1 = *pSLead * *(pSLag + 1) - *(pSLead + 1) * *pSLag;
+    SLData_t        k2 = *pSLead * *(pSLead + 1) + *pSLag * *(pSLag + 1);
     *pDst++ = SIGLIB_INV_TWO_PI * SDS_Atan2 (k1, k2);
     pSLead++;
     pSLag++;
   }
   *pDst = *(pDst - 1);
-
 }                                                                   // End of SDA_InstantFreq()
 
 
@@ -822,10 +790,6 @@ void SIGLIB_FUNC_DECL SDA_Rdft (
   SLData_t pDstImag[],
   const SLArrayIndex_t dft_size)
 {
-  SLArrayIndex_t  i, j;
-  SLData_t        real_sum, imag_sum;
-  SLData_t        InverseFTSize = SIGLIB_ONE / dft_size;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pRealData % 8 == 0);                              // Align arrays on 64 bit double word boundary for LDDW
@@ -834,11 +798,13 @@ void SIGLIB_FUNC_DECL SDA_Rdft (
 #endif
 #endif
 
-  for (i = 0; i < dft_size; i++) {
-    real_sum = SIGLIB_ZERO;
-    imag_sum = SIGLIB_ZERO;
+  SLData_t        InverseFTSize = SIGLIB_ONE / dft_size;
 
-    for (j = 0; j < dft_size; j++) {
+  for (SLArrayIndex_t i = 0; i < dft_size; i++) {
+    SLData_t        real_sum = SIGLIB_ZERO;
+    SLData_t        imag_sum = SIGLIB_ZERO;
+
+    for (SLArrayIndex_t j = 0; j < dft_size; j++) {
       real_sum += pRealData[j] * SDS_Cos (SIGLIB_TWO_PI * i * j * InverseFTSize);
       imag_sum += pRealData[j] * -SDS_Sin (SIGLIB_TWO_PI * i * j * InverseFTSize);
     }
@@ -872,10 +838,6 @@ void SIGLIB_FUNC_DECL SDA_Ridft (
   SLData_t pDstImag[],
   const SLArrayIndex_t idft_size)
 {
-  SLArrayIndex_t  i, j;
-  SLData_t        real_sum, imag_sum;
-  SLData_t        InverseFTSize = SIGLIB_ONE / idft_size;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pRealData % 8 == 0);                              // Align arrays on 64 bit double word boundary for LDDW
@@ -884,11 +846,13 @@ void SIGLIB_FUNC_DECL SDA_Ridft (
 #endif
 #endif
 
-  for (i = 0; i < idft_size; i++) {
-    real_sum = SIGLIB_ZERO;
-    imag_sum = SIGLIB_ZERO;
+  SLData_t        InverseFTSize = SIGLIB_ONE / idft_size;
 
-    for (j = 0; j < idft_size; j++) {
+  for (SLArrayIndex_t i = 0; i < idft_size; i++) {
+    SLData_t        real_sum = SIGLIB_ZERO;
+    SLData_t        imag_sum = SIGLIB_ZERO;
+
+    for (SLArrayIndex_t j = 0; j < idft_size; j++) {
       real_sum += pRealData[j] * SDS_Cos (SIGLIB_TWO_PI * i * j * InverseFTSize);
       imag_sum += pRealData[j] * SDS_Sin (SIGLIB_TWO_PI * i * j * InverseFTSize);
     }
@@ -925,11 +889,6 @@ void SIGLIB_FUNC_DECL SDA_Cdft (
   SLData_t pDstImag[],
   const SLArrayIndex_t dft_size)
 {
-  SLArrayIndex_t  i, j;
-  SLData_t        real_sum, imag_sum;
-  SLData_t        SinVal, CosVal;
-  SLData_t        InverseFTSize = SIGLIB_ONE / dft_size;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrcReal % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
@@ -938,13 +897,15 @@ void SIGLIB_FUNC_DECL SDA_Cdft (
 #endif
 #endif
 
-  for (i = 0; i < dft_size; i++) {
-    real_sum = SIGLIB_ZERO;
-    imag_sum = SIGLIB_ZERO;
+  SLData_t        InverseFTSize = SIGLIB_ONE / dft_size;
 
-    for (j = 0; j < dft_size; j++) {
-      SinVal = SDS_Sin (SIGLIB_TWO_PI * i * j * InverseFTSize);
-      CosVal = SDS_Cos (SIGLIB_TWO_PI * i * j * InverseFTSize);
+  for (SLArrayIndex_t i = 0; i < dft_size; i++) {
+    SLData_t        real_sum = SIGLIB_ZERO;
+    SLData_t        imag_sum = SIGLIB_ZERO;
+
+    for (SLArrayIndex_t j = 0; j < dft_size; j++) {
+      SLData_t        SinVal = SDS_Sin (SIGLIB_TWO_PI * i * j * InverseFTSize);
+      SLData_t        CosVal = SDS_Cos (SIGLIB_TWO_PI * i * j * InverseFTSize);
       real_sum += (pSrcReal[j] * CosVal) - (pSrcImag[j] * -SinVal);
       imag_sum += (pSrcReal[j] * -SinVal) + (pSrcImag[j] * CosVal);
     }
@@ -980,11 +941,6 @@ void SIGLIB_FUNC_DECL SDA_Cidft (
   SLData_t pDstImag[],
   const SLArrayIndex_t idft_size)
 {
-  SLArrayIndex_t  i, j;
-  SLData_t        real_sum, imag_sum;
-  SLData_t        SinVal, CosVal;
-  SLData_t        InverseFTSize = SIGLIB_ONE / idft_size;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrcReal % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
@@ -993,13 +949,15 @@ void SIGLIB_FUNC_DECL SDA_Cidft (
 #endif
 #endif
 
-  for (i = 0; i < idft_size; i++) {
-    real_sum = SIGLIB_ZERO;
-    imag_sum = SIGLIB_ZERO;
+  SLData_t        InverseFTSize = SIGLIB_ONE / idft_size;
 
-    for (j = 0; j < idft_size; j++) {
-      SinVal = SDS_Sin (SIGLIB_TWO_PI * i * j * InverseFTSize);
-      CosVal = SDS_Cos (SIGLIB_TWO_PI * i * j * InverseFTSize);
+  for (SLArrayIndex_t i = 0; i < idft_size; i++) {
+    SLData_t        real_sum = SIGLIB_ZERO;
+    SLData_t        imag_sum = SIGLIB_ZERO;
+
+    for (SLArrayIndex_t j = 0; j < idft_size; j++) {
+      SLData_t        SinVal = SDS_Sin (SIGLIB_TWO_PI * i * j * InverseFTSize);
+      SLData_t        CosVal = SDS_Cos (SIGLIB_TWO_PI * i * j * InverseFTSize);
       real_sum += (pSrcReal[j] * CosVal) - (pSrcImag[j] * SinVal);
       imag_sum += (pSrcReal[j] * SinVal) + (pSrcImag[j] * CosVal);
     }
@@ -1032,12 +990,6 @@ void SIGLIB_FUNC_DECL SDA_FftShift (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLArrayIndex_t  half_size = (SLArrayIndex_t) ((SLUFixData_t) SampleLength >> 1U);
-  SLData_t        tmp;
-  const SLData_t *LpSrc, *HpSrc;
-  SLData_t       *LpDst, *HpDst;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -1045,13 +997,15 @@ void SIGLIB_FUNC_DECL SDA_FftShift (
 #endif
 #endif
 
-  LpSrc = pSrc;                                                     // Init. Low and high segment pointers
-  HpSrc = pSrc + half_size;
-  LpDst = pDst;
-  HpDst = pDst + half_size;
+  SLArrayIndex_t  half_size = (SLArrayIndex_t) ((SLUFixData_t) SampleLength >> 1U);
 
-  for (i = 0; i < half_size; i++) {                                 // Shift data
-    tmp = *LpSrc++;
+  const SLData_t *LpSrc = pSrc;                                     // Init. Low and high segment pointers
+  const SLData_t *HpSrc = pSrc + half_size;
+  SLData_t       *LpDst = pDst;
+  SLData_t       *HpDst = pDst + half_size;
+
+  for (SLArrayIndex_t i = 0; i < half_size; i++) {                  // Shift data
+    SLData_t        tmp = *LpSrc++;
     *LpDst++ = *HpSrc++;
     *HpDst++ = tmp;
   }
@@ -1085,12 +1039,6 @@ void SIGLIB_FUNC_DECL SDA_CfftShift (
   SLData_t * SIGLIB_PTR_DECL pDstImag,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLArrayIndex_t  half_size = (SLArrayIndex_t) ((SLUFixData_t) SampleLength >> 1U);
-  SLData_t        tmp;
-  const SLData_t *LpSrc, *HpSrc;
-  SLData_t       *LpDst, *HpDst;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrcReal % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
@@ -1100,13 +1048,15 @@ void SIGLIB_FUNC_DECL SDA_CfftShift (
 #endif
 #endif
 
-  LpSrc = pSrcReal;                                                 // Init. Low and high segment pointers
-  HpSrc = pSrcReal + half_size;
-  LpDst = pDstReal;
-  HpDst = pDstReal + half_size;
+  SLArrayIndex_t  half_size = (SLArrayIndex_t) ((SLUFixData_t) SampleLength >> 1U);
 
-  for (i = 0; i < half_size; i++) {                                 // Shift real data
-    tmp = *LpSrc++;
+  const SLData_t *LpSrc = pSrcReal;                                 // Init. Low and high segment pointers
+  const SLData_t *HpSrc = pSrcReal + half_size;
+  SLData_t       *LpDst = pDstReal;
+  SLData_t       *HpDst = pDstReal + half_size;
+
+  for (SLArrayIndex_t i = 0; i < half_size; i++) {                  // Shift real data
+    SLData_t        tmp = *LpSrc++;
     *LpDst++ = *HpSrc++;
     *HpDst++ = tmp;
   }
@@ -1117,8 +1067,8 @@ void SIGLIB_FUNC_DECL SDA_CfftShift (
   LpDst = pDstImag;
   HpDst = pDstImag + half_size;
 
-  for (i = 0; i < half_size; i++) {                                 // Shift imaginary data
-    tmp = *LpSrc++;
+  for (SLArrayIndex_t i = 0; i < half_size; i++) {                  // Shift imaginary data
+    SLData_t        tmp = *LpSrc++;
     *LpDst++ = *HpSrc++;
     *HpDst++ = tmp;
   }
@@ -1270,10 +1220,8 @@ void SIGLIB_FUNC_DECL SDA_DctII (
   const SLData_t * SIGLIB_PTR_DECL pCosAnglesLUT,
   SLArrayIndex_t dctLength)
 {
-  SLData_t        sum = SIGLIB_ZERO;
-
   for (SLArrayIndex_t k = 0; k < dctLength; k++) {
-    sum = SIGLIB_ZERO;
+    SLData_t        sum = SIGLIB_ZERO;
     for (SLArrayIndex_t n = 0; n < dctLength; n++) {
       sum += pTime[n] * *(pCosAnglesLUT + k + (n * dctLength));
     }

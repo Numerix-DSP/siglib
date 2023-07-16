@@ -1,6 +1,6 @@
 // SigLib PortAudio FFT Example Program
 // This example stores the peaks of a number of FFT output frames and plots the final peak dataset
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 #include <stdio.h>
 #include <math.h>
@@ -9,7 +9,7 @@
 #include <gnuplot_c.h>                                              // Gnuplot/C
 #include <siglib_host_utils.h>                                      // Optionally includes conio.h and time.h subset functions
 
-#define SAMPLE_RATE             48000
+#define SAMPLE_RATE_HZ          48000
 
 
 #define SAMPLE_LENGTH           1024
@@ -106,7 +106,7 @@ void processAudio (
                  HALF_FFT_LENGTH,                                   // Dataset length
                  "FFT of ADC Input Data",                           // Dataset title
                  SIGLIB_ZERO,                                       // Minimum X value
-                 (double) (SAMPLE_RATE / (SIGLIB_TWO * 1000.)),     // Maximum X value
+                 (double) (SAMPLE_RATE_HZ / (SIGLIB_TWO * 1000.)),  // Maximum X value
                  "lines",                                           // Graph type
                  "blue",                                            // Colour
                  GPC_NEW);                                          // New graph
@@ -164,7 +164,7 @@ int main (
            SIGLIB_BIT_REV_STANDARD,                                 // Bit reverse mode flag / Pointer to bit reverse address table
            FFT_LENGTH);                                             // FFT length
 
-  Error = analog_open (SAMPLE_RATE, analog_isr);                    // Open the analog interface
+  Error = analog_open (SAMPLE_RATE_HZ, analog_isr);                 // Open the analog interface
   if (Error == -1)
     return 1;
 

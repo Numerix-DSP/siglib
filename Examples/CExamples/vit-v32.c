@@ -1,5 +1,5 @@
 // SigLib V.32 Convolutional Encoder / Viterbi Decoder Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -31,9 +31,6 @@ static SLFixData_t VitDecDoTraceBackFlag;                           // Flag is s
 int main (
   void)
 {
-  SLFixData_t     i;
-  int             ch;
-  char            ViterbiOutput;
 // These variables must be initiailised to Zero
   SLArrayIndex_t  TxDiffEncState = 0;                               // Differential encoder state
   SLArrayIndex_t  TxEncoderState = 0;                               // Convolutional encoder state
@@ -54,7 +51,7 @@ int main (
 
   while (!ExitFlag) {
     if (_kbhit ()) {
-      ch = (SLFixData_t) _getch ();
+      int             ch = (SLFixData_t) _getch ();
       if (ch == '+') {
         Noise += 0.1;
       }
@@ -69,7 +66,7 @@ int main (
       }
     }
 
-    for (i = 0; i < INPUT_STRING_LENGTH; i++) {
+    for (SLFixData_t i = 0; i < INPUT_STRING_LENGTH; i++) {
 // Convolutionally encode the input LS nibble
       ChannelData[0] = SDS_ConvEncoderV32 ((char) (InputString[i] & 0x0f),  // Input nibble
                                            &TxDiffEncState,         // Previous input for differential encoder
@@ -92,14 +89,14 @@ int main (
 
 
 // Now put the received vector into the Viterbi decoder
-      ViterbiOutput = (char) SDS_ViterbiDecoderV32 (ChannelData[0], // Source channel data
-                                                    VitDecAccumulatedErrorTable,  // Accumulated error array
-                                                    (SLArrayIndex_t *) VitDecSurvivorStateHistoryTable, // Survivor state history table
-                                                    &VitDecSurvivorStateHistoryOffset,  // Offset into state history array - this is used as a circular pointer
-                                                    (SLArrayIndex_t *) MinQ4Q3, // Q4Q3 History table
-                                                    &RxDiffDecState,  // Previous output for differential decoder
-                                                    &VitDecDoTraceBackFlag, // Flag is set to SIGLIB_TRUE when we are in trace back mode
-                                                    TRACE_BACK_DEPTH);  // Trace back depth
+      char            ViterbiOutput = (char) SDS_ViterbiDecoderV32 (ChannelData[0], // Source channel data
+                                                                    VitDecAccumulatedErrorTable,  // Accumulated error array
+                                                                    (SLArrayIndex_t *) VitDecSurvivorStateHistoryTable, // Survivor state history table
+                                                                    &VitDecSurvivorStateHistoryOffset,  // Offset into state history array - this is used as a circular pointer
+                                                                    (SLArrayIndex_t *) MinQ4Q3, // Q4Q3 History table
+                                                                    &RxDiffDecState,  // Previous output for differential decoder
+                                                                    &VitDecDoTraceBackFlag, // Flag is set to SIGLIB_TRUE when we are in trace back mode
+                                                                    TRACE_BACK_DEPTH);  // Trace back depth
 
       ViterbiOutput |= ((char) SDS_ViterbiDecoderV32 (ChannelData[1], // Source channel data
                                                       VitDecAccumulatedErrorTable,  // Accumulated error array

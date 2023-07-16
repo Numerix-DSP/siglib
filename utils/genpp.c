@@ -9,7 +9,7 @@ Options   :                             | Latest Update : 02/01/99
 
 Description :   Convert FIR filter coefficients to poly-phase
 
-Copyright (C) 1999 Alpha Numerix All rights reserved.
+Copyright (C) 1999 Delta Numerix All rights reserved.
 ****************************************************************************/
 
 
@@ -24,11 +24,6 @@ Copyright (C) 1999 Alpha Numerix All rights reserved.
 #define SAMPLE_SIZE     1024
 
 
-int             NBanks, j, i, InputOffset, FilterLen, InputLength;
-SLData_t       *TPtr, *IPtr;
-FILE           *InFPtr, *OutFPtr;
-
-
 SLArrayIndex_t  filter_array_from_disk (
   SLData_t * bp,
   FILE * fp,
@@ -39,9 +34,12 @@ int main (
   int argc,
   char **argv)
 {
+  int             InputOffset, FilterLen, InputLength;
+  SLData_t       *TPtr, *IPtr;
+  FILE           *InFPtr, *OutFPtr;
 
   printf ("Polyphase filter generator.\n\n");
-  printf ("Copyright (C) 1999 Alpha Numerix All rights reserved. http:\\\\www.numerix-dsp.com\n\n");
+  printf ("Copyright (C) 1999 Delta Numerix All rights reserved. http:\\\\www.numerix-dsp.com\n\n");
 
   if (argc != 2) {
     printf ("Syntax: genpp <Number of filter banks>\n");
@@ -71,20 +69,20 @@ int main (
   if (!InputLength) {
     printf ("Can not read from FILTER.DAT\n");
     fcloseall ();
-    free (IPtr);                                                    /* Free memory */
+    free (IPtr);                                                    // Free memory
     exit (0);
   }
 
 
-  NBanks = atoi (argv[1]);
+  int             NBanks = atoi (argv[1]);
 
-  fprintf (OutFPtr, "/* Polyphase coefficients for 11 stage filter */\r\n\r\n\r\n");
+  fprintf (OutFPtr, "// Polyphase coefficients for 11 stage filter\r\n\r\n\r\n");
 
 
   fprintf (OutFPtr, "#define\tNUMBER_OF_FILTER_BANKS\t%d\r\n", NBanks);
   fprintf (OutFPtr, "#define\tTOTAL_NUMBER_OF_COEFFS\t%d\r\n\r\n\r\n", InputLength);
 
-  for (i = 0; i < NBanks; i++) {
+  for (SLArrayIndex_t i = 0; i < NBanks; i++) {
     InputOffset = i;
     FilterLen = 0;
     do {
@@ -96,25 +94,19 @@ int main (
     while (InputOffset < InputLength);
 
     fprintf (OutFPtr, "#define\tFILTER_LENGTH_%d\t%d\r\n\r\n", (i + 1), FilterLen);
-
-
     fprintf (OutFPtr, "SLData_t   filter_%d_taps[FILTER_LENGTH_%d] = {\r\n", (i + 1), (i + 1));
 
-/*
-   For all entries except the last insert comma at end
- */
-    for (j = 0; j < (FilterLen - 1); j++) {
+    for (SLArrayIndex_t j = 0; j < (FilterLen - 1); j++) {          // For all entries except the last insert comma at end
       fprintf (OutFPtr, "\t%.10le,\r\n", TPtr[j]);
     }
     fprintf (OutFPtr, "\t%.10le\r\n", TPtr[j]);
-
     fprintf (OutFPtr, "\t};\r\n\r\n\r\n");
   }
 
   printf ("\nFilter converted successfully\n\n");
 
   fcloseall ();
-  free (IPtr);                                                      /* Free memory */
+  free (IPtr);                                                      // Free memory
 
   exit (0);
 }

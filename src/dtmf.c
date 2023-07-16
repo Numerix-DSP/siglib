@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : DTMF.C        | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 08/05/2099
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : DSP maths utility functions, for SigLib DSP library.
 
@@ -43,7 +43,6 @@ Description : DSP maths utility functions, for SigLib DSP library.
 // Global variables
 SLData_t        siglib_numerix_GoertzelCoeffL0, siglib_numerix_GoertzelCoeffL1, siglib_numerix_GoertzelCoeffL2, siglib_numerix_GoertzelCoeffL3;
 SLData_t        siglib_numerix_GoertzelCoeffH0, siglib_numerix_GoertzelCoeffH1, siglib_numerix_GoertzelCoeffH2, siglib_numerix_GoertzelCoeffH3;
-
 
 /**/
 
@@ -82,14 +81,13 @@ void SIGLIB_FUNC_DECL SIF_DtmfGenerate (
   SIF_Resonator (Tmp, SIGLIB_DTMF_HF_2_NORM, &pDTMFGenCoeff[12], &pDTMFGenCoeff[13]);
   SIF_Resonator (Tmp, SIGLIB_DTMF_HF_3_NORM, &pDTMFGenCoeff[14], &pDTMFGenCoeff[15]);
 
-#if SIGLIB_ENABLE_DEBUG_FPRINTF
+#if SIGLIB_ENABLE_DEBUG_LOGGING
   {
     for (SLArrayIndex_t i = 0; i < 16; i++) {
       SUF_Debugfprintf ("pDTMFGenCoeff[%d] = %lf\n", (int) i, pDTMFGenCoeff[i]);
     }
   }
 #endif
-
 }                                                                   // End of SIF_DtmfGenerate()
 
 
@@ -119,8 +117,6 @@ SLError_t SIGLIB_FUNC_DECL SDA_DtmfGenerate (
   const SLData_t * SIGLIB_PTR_DECL pDTMFGenCoeff,
   const SLArrayIndex_t SampleLength)
 {
-  SLData_t        ResonatorDelay[SIGLIB_RESONATOR_DELAY_LENGTH];
-  SLFixData_t     FirstTimeFlag;
   SLData_t        CosCoeffLowF, SinCoeffLowF, CosCoeffHighF, SinCoeffHighF;
 
   switch (KeyCode) {
@@ -230,7 +226,8 @@ SLError_t SIGLIB_FUNC_DECL SDA_DtmfGenerate (
 // Add the signals for the two tones
 // Note :- The signals are individually scaled by a factor of 2.0 to avoid overflow
 
-  FirstTimeFlag = SIGLIB_TRUE;
+  SLFixData_t     FirstTimeFlag = SIGLIB_TRUE;
+  SLData_t        ResonatorDelay[SIGLIB_RESONATOR_DELAY_LENGTH];
   SDA_Clear (ResonatorDelay, SIGLIB_RESONATOR_DELAY_LENGTH);
   SDA_Resonator1 (pDst, HalfMagnitude, ResonatorDelay, &FirstTimeFlag, CosCoeffLowF, SinCoeffLowF, SampleLength);
 
@@ -239,7 +236,6 @@ SLError_t SIGLIB_FUNC_DECL SDA_DtmfGenerate (
   SDA_Resonator1Add (pDst, HalfMagnitude, ResonatorDelay, &FirstTimeFlag, CosCoeffHighF, SinCoeffHighF, SampleLength);
 
   return (SIGLIB_NO_ERROR);
-
 }                                                                   // End of SDA_DtmfGenerate()
 
 
@@ -279,7 +275,7 @@ void SIGLIB_FUNC_DECL SIF_DtmfDetect (
   siglib_numerix_GoertzelCoeffH3 = SIF_GoertzelDetect (SIGLIB_DTMF_DETECT_HF_3_NORM, SampleLength);
 
 
-#if SIGLIB_ENABLE_DEBUG_FPRINTF
+#if SIGLIB_ENABLE_DEBUG_LOGGING
   SUF_Debugfprintf ("siglib_numerix_GoertzelCoeffL0.real = %lf, .imag = %lf\n", siglib_numerix_GoertzelCoeffL0.real,
                     siglib_numerix_GoertzelCoeffL0.imag);
   SUF_Debugfprintf ("siglib_numerix_GoertzelCoeffL1.real = %lf, .imag = %lf\n", siglib_numerix_GoertzelCoeffL1.real,
@@ -298,7 +294,6 @@ void SIGLIB_FUNC_DECL SIF_DtmfDetect (
   SUF_Debugfprintf ("siglib_numerix_GoertzelCoeffH3.real = %lf, .imag = %lf\n", siglib_numerix_GoertzelCoeffH3.real,
                     siglib_numerix_GoertzelCoeffH3.imag);
 #endif
-
 }                                                                   // End of SIF_DtmfDetect()
 
 
@@ -322,26 +317,21 @@ SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetect (
   SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t SampleLength)
 {
-  SLStatus_t      KeyCode;
-  SLData_t        LowFreqMagn0, LowFreqMagn1, LowFreqMagn2, LowFreqMagn3;
-  SLData_t        HighFreqMagn0, HighFreqMagn1, HighFreqMagn2, HighFreqMagn3;
-  SLData_t        ThirdLowFilterOutputSum, ThirdHighFilterOutputSum;
-
 // Detect the individual frequency components - absolute magnitudes squared
-  LowFreqMagn0 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffL0, SampleLength);
-  LowFreqMagn1 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffL1, SampleLength);
-  LowFreqMagn2 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffL2, SampleLength);
-  LowFreqMagn3 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffL3, SampleLength);
+  SLData_t        LowFreqMagn0 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffL0, SampleLength);
+  SLData_t        LowFreqMagn1 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffL1, SampleLength);
+  SLData_t        LowFreqMagn2 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffL2, SampleLength);
+  SLData_t        LowFreqMagn3 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffL3, SampleLength);
 
-  HighFreqMagn0 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffH0, SampleLength);
-  HighFreqMagn1 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffH1, SampleLength);
-  HighFreqMagn2 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffH2, SampleLength);
-  HighFreqMagn3 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffH3, SampleLength);
+  SLData_t        HighFreqMagn0 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffH0, SampleLength);
+  SLData_t        HighFreqMagn1 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffH1, SampleLength);
+  SLData_t        HighFreqMagn2 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffH2, SampleLength);
+  SLData_t        HighFreqMagn3 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffH3, SampleLength);
 
 
 // Get total signal energy out of all filters / 2
-  ThirdLowFilterOutputSum = (LowFreqMagn0 + LowFreqMagn1 + LowFreqMagn2 + LowFreqMagn3) * SIGLIB_THIRD;
-  ThirdHighFilterOutputSum = (HighFreqMagn0 + HighFreqMagn1 + HighFreqMagn2 + HighFreqMagn3) * SIGLIB_THIRD;
+  SLData_t        ThirdLowFilterOutputSum = (LowFreqMagn0 + LowFreqMagn1 + LowFreqMagn2 + LowFreqMagn3) * SIGLIB_THIRD;
+  SLData_t        ThirdHighFilterOutputSum = (HighFreqMagn0 + HighFreqMagn1 + HighFreqMagn2 + HighFreqMagn3) * SIGLIB_THIRD;
 
   if ((ThirdHighFilterOutputSum + ThirdLowFilterOutputSum) < SIGLIB_MIN_THRESHOLD) {  // Check that the signal is above the noise floor
     return (SIGLIB_NO_DTMF_SIGNAL);                                 // Signal does not contain DTMF codes
@@ -354,6 +344,7 @@ SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetect (
   }
 
 
+  SLStatus_t      KeyCode;
 #define ROBUST_DECODE               1                               // Robust decode ensures that more than half the high or low
 // frequency band energy is within the frequency being detected
 // the less robust version just looks for the signal with the
@@ -440,7 +431,6 @@ SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetect (
 #endif
 
   return (KeyCode);
-
 }                                                                   // End of SDA_DtmfDetect()
 
 
@@ -474,9 +464,6 @@ SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetectAndValidate (
   const SLArrayIndex_t SampleLength)
 {
   SLStatus_t      KeyCode;
-  SLData_t        LowFreqMagn0, LowFreqMagn1, LowFreqMagn2, LowFreqMagn3;
-  SLData_t        HighFreqMagn0, HighFreqMagn1, HighFreqMagn2, HighFreqMagn3;
-  SLData_t        ThirdLowFilterOutputSum, ThirdHighFilterOutputSum;
 
   if (SDA_TestAbsOverThreshold (pSrc, Threshold, SampleLength) == -1) { // Test if signal over threshold
     if (*PreviousKeyCode != SIGLIB_NO_SIGNAL_PRESENT) {             // Output "no signal" code
@@ -494,7 +481,7 @@ SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetectAndValidate (
 
   else {                                                            // Only detect signal if over threshold
 
-#if SIGLIB_ENABLE_DEBUG_FPRINTF
+#if SIGLIB_ENABLE_DEBUG_LOGGING
     SUF_Debugfprintf ("GoertzelDetect L0 = %lf\n", SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffL0, SampleLength));
     SUF_Debugfprintf ("GoertzelDetect L1 = %lf\n", SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffL1, SampleLength));
     SUF_Debugfprintf ("GoertzelDetect L2 = %lf\n", SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffL2, SampleLength));
@@ -507,20 +494,20 @@ SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetectAndValidate (
 #endif
 
 // Detect the individual frequency components - absolute magnitudes squared
-    LowFreqMagn0 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffL0, SampleLength);
-    LowFreqMagn1 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffL1, SampleLength);
-    LowFreqMagn2 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffL2, SampleLength);
-    LowFreqMagn3 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffL3, SampleLength);
+    SLData_t        LowFreqMagn0 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffL0, SampleLength);
+    SLData_t        LowFreqMagn1 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffL1, SampleLength);
+    SLData_t        LowFreqMagn2 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffL2, SampleLength);
+    SLData_t        LowFreqMagn3 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffL3, SampleLength);
 
-    HighFreqMagn0 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffH0, SampleLength);
-    HighFreqMagn1 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffH1, SampleLength);
-    HighFreqMagn2 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffH2, SampleLength);
-    HighFreqMagn3 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffH3, SampleLength);
+    SLData_t        HighFreqMagn0 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffH0, SampleLength);
+    SLData_t        HighFreqMagn1 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffH1, SampleLength);
+    SLData_t        HighFreqMagn2 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffH2, SampleLength);
+    SLData_t        HighFreqMagn3 = SDA_GoertzelDetect (pSrc, siglib_numerix_GoertzelCoeffH3, SampleLength);
 
 
 // Get total signal energy out of all filters / 2
-    ThirdLowFilterOutputSum = (LowFreqMagn0 + LowFreqMagn1 + LowFreqMagn2 + LowFreqMagn3) * SIGLIB_THIRD;
-    ThirdHighFilterOutputSum = (HighFreqMagn0 + HighFreqMagn1 + HighFreqMagn2 + HighFreqMagn3) * SIGLIB_THIRD;
+    SLData_t        ThirdLowFilterOutputSum = (LowFreqMagn0 + LowFreqMagn1 + LowFreqMagn2 + LowFreqMagn3) * SIGLIB_THIRD;
+    SLData_t        ThirdHighFilterOutputSum = (HighFreqMagn0 + HighFreqMagn1 + HighFreqMagn2 + HighFreqMagn3) * SIGLIB_THIRD;
 
 //  SUF_Debugfprintf ("LFM0 = %lf, LFM1 = %lf, LFM2 = %lf, LFM3 = %lf\nHFM0 = %lf, HFM1 = %lf, HFM2 = %lf, HFM3 = %lf\n",
 //      LowFreqMagn0, LowFreqMagn1, LowFreqMagn2, LowFreqMagn3, HighFreqMagn0, HighFreqMagn1, HighFreqMagn2, HighFreqMagn3);
@@ -575,7 +562,6 @@ SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetectAndValidate (
           KeyCode += SIGLIB_NO_DTMF_SIGNAL;                         // Signal does not contain DTMF codes
         }
       }
-
 #else                                                               // Start of non-robust decode mode
       {                                                             // Start of local definition of TestLargestMagn variable
         SLData_t        TestLargestMagn;
@@ -615,7 +601,6 @@ SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetectAndValidate (
         KeyCode += KeyCodeAdd;                                      // Add the keycode for the high and low frequencies
 
       }                                                             // End of local definition of TestLargestMagn variable
-
 #endif
     }                                                               // End of only calculate if signal contains DTMF codes
 
@@ -655,7 +640,6 @@ SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetectAndValidate (
   }                                                                 // End of check signal magnitude
 
   return (KeyCode);
-
 }                                                                   // End of SDA_DtmfDetectAndValidate()
 
 
@@ -737,7 +721,6 @@ SLFixData_t SIGLIB_FUNC_DECL SUF_AsciiToKeyCode (
   }
 
   return (KeyCode);
-
 }                                                                   // End of SUF_AsciiToKeyCode()
 
 
@@ -818,5 +801,4 @@ SLFixData_t SIGLIB_FUNC_DECL SUF_KeyCodeToAscii (
   }
 
   return (Key);
-
 }                                                                   // End of SUF_KeyCodeToAscii()

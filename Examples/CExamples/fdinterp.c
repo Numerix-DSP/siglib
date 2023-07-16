@@ -1,12 +1,16 @@
 // SigLib Frequency Domain Pitch Shifting Example by interpolation, using a sine wave
 // This algorithm benefits from using overlapping windows, in general,
 // the greater the overlap, the better the performance. ie. the lower the distortion.
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
 #include <siglib.h>                                                 // SigLib DSP library
 #include <gnuplot_c.h>                                              // Gnuplot/C
+
+#if defined (_MSC_VER)                                              // Defined by Microsoft compilers
+#pragma warning(disable: 4127)                                      // Remove conditional expression is constant warning from plain C
+#endif
 
 // Define constants
 #define DEBUG           1
@@ -38,8 +42,6 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  SLArrayIndex_t  i, j;
-
 // Allocate enough space for largest FFT
   pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH2);
 
@@ -66,7 +68,7 @@ int main (
 // If shifting up, generate a low frequency,
 // if shifting down generate a high frequency
 // note : i and j are dummy variables to stop compiler warnings
-  if ((i = RATIO_UP) > (j = RATIO_DOWN)) {
+  if (RATIO_UP > RATIO_DOWN) {
     SDA_SignalGenerate (pRealInput,                                 // Pointer to destination array
                         SIGLIB_SINE_WAVE,                           // Signal type - Sine wave
                         0.9,                                        // Signal peak level
@@ -93,7 +95,7 @@ int main (
                         LEN);                                       // Output dataset length
   }
 
-  for (i = 0; i < LEN; i += (FFT_LENGTH / 2)) {
+  for (SLArrayIndex_t i = 0; i < LEN; i += (FFT_LENGTH / 2)) {
 // Copy input data
     SDA_Copy (pRealInput + i,                                       // Pointer to source array
               RealTime,                                             // Pointer to destination array
@@ -173,7 +175,7 @@ int main (
                FFT_LENGTH,                                          // FFT length
                LOG2_FFT_LENGTH);                                    // log2 FFT length
 
-    for (j = 0; j < FFT_LENGTH / 2; j++) {
+    for (SLArrayIndex_t j = 0; j < FFT_LENGTH / 2; j++) {
       pRealOutput[i + j] = RealNew[j] / FFT_LENGTH;
       pImagOutput[i + j] = ImagNew[j] / FFT_LENGTH;
     }

@@ -1,5 +1,5 @@
 // SigLib - DTMF Generation Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Freq. (Hz) 1209 1336 1477 1633
 //     697     1     2    3    A
@@ -14,8 +14,8 @@
 
 // Define constants
 #define MAX_SAMPLE_LENGTH       4000
-#define SAMPLE_RATE             8000.
-#define SAMPLES_PER_MS          ((SLArrayIndex_t)(SAMPLE_RATE / 1000.0))
+#define SAMPLE_RATE_HZ          8000.
+#define SAMPLES_PER_MS          ((SLArrayIndex_t)(SAMPLE_RATE_HZ / 1000.0))
 #define DETECTION_THRESHOLD     1000.
 
 #define DTMF_SAMPLE_LENGTH      102
@@ -72,7 +72,7 @@ int main (
   SUF_WavWriteHeader (fpOutputFile, wavFileInfo);
 
   SIF_DtmfGenerate (pDTMFGenCoeffs,                                 // Generator coefficient look up table pointer
-                    SAMPLE_RATE);                                   // Sample rate
+                    SAMPLE_RATE_HZ);                                // Sample rate
 
   while (read_dtmf_key (&Tone, &Period, &Magnitude) == 0) {         // While there are key codes
     LinearDTMFMagnitude = SDS_dBmToVoltage (Magnitude, (SLData_t) 32767.0) / SIGLIB_TWO;  // Note divide by two necessary for SDA_DtmfGenerate()

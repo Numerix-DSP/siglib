@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : PRBS.C        | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 15/11/1992
 Options   :                             | Latest Update : 17/11/2022
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : PRBS Scrambler / descrambler routines, for SigLib DSP library.
 
@@ -40,7 +40,6 @@ Description : PRBS Scrambler / descrambler routines, for SigLib DSP library.
 #define SIGLIB_SRC_FILE_PRBS    1                                   // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
 
 /**/
 
@@ -79,34 +78,24 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Scrambler1417 (
   const SLFixData_t Source,
   SLUInt32_t * SIGLIB_PTR_DECL pShiftRegister)
 {
-  SLUInt32_t      ITmp, OTmp;
-  SLUInt32_t      OTmp1;
-  SLUInt32_t      i;
-  SLUInt32_t      SRTmp;
+  SLUInt32_t      SRTmp = *pShiftRegister;
+  SLUInt32_t      ITmp = Source;
+  SLUInt32_t      OTmp = 0U;                                        // Clear output register
 
-  SRTmp = *pShiftRegister;
-
-  ITmp = Source;
-  OTmp = 0U;                                                        // Clear output register
-
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {                        // Process each bit in the word
+  for (SLUInt32_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {             // Process each bit in the word
     SRTmp <<= 1U;                                                   // Shift state register up by 1
-    OTmp1 = (ITmp & 0x1U);                                          // Bit 0
+    SLUInt32_t      OTmp1 = (ITmp & 0x1U);                          // Bit 0
     ITmp >>= 1U;                                                    // Shift input along
     OTmp1 += SRTmp >> 14U;                                          // Bit 14
     OTmp1 += SRTmp >> 17U;                                          // Bit 17
     OTmp1 &= 0x1U;
 
     SRTmp |= OTmp1;                                                 // Add in new bit to state register
-
     OTmp |= OTmp1 << i;                                             // Write output shifted up
   }
 
   *pShiftRegister = SRTmp;
-
   return ((SLFixData_t) OTmp);
-
-
 }                                                                   // End of SDS_Scrambler1417()
 
 
@@ -147,21 +136,15 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Descrambler1417 (
   const SLFixData_t Source,
   SLUInt32_t * SIGLIB_PTR_DECL pShiftRegister)
 {
-  SLUInt32_t      ITmp, OTmp;
-  SLUInt32_t      OTmp1;
-  SLUInt32_t      i;
-  SLUInt32_t      SRTmp;
+  SLUInt32_t      SRTmp = *pShiftRegister;
+  SLUInt32_t      ITmp = Source;
+  SLUInt32_t      OTmp = 0U;                                        // Clear output register
 
-  SRTmp = *pShiftRegister;
-
-  ITmp = Source;
-  OTmp = 0U;                                                        // Clear output register
-
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {                        // Process each bit in the word
+  for (SLUInt32_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {             // Process each bit in the word
     SRTmp <<= 1U;                                                   // Shift register up by 1
     SRTmp |= ITmp & 0x1U;
     ITmp >>= 1U;
-    OTmp1 = SRTmp;                                                  // Bit 0
+    SLUInt32_t      OTmp1 = SRTmp;                                  // Bit 0
     OTmp1 += SRTmp >> 14U;                                          // Bit 14
     OTmp1 += SRTmp >> 17U;                                          // Bit 17
 
@@ -169,9 +152,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Descrambler1417 (
   }
 
   *pShiftRegister = SRTmp;
-
   return ((SLFixData_t) OTmp);
-
 }                                                                   // End of SDS_Descrambler1417()
 
 
@@ -222,19 +203,13 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Scrambler1417WithInversion (
   SLFixData_t * SIGLIB_PTR_DECL pOnesBitCount,
   SLFixData_t * SIGLIB_PTR_DECL pBitInversionFlag)
 {
-  SLUInt32_t      ITmp, OTmp;
-  SLUInt32_t      OTmp1;
-  SLUInt32_t      i;
-  SLUInt32_t      SRTmp;
+  SLUInt32_t      SRTmp = *pShiftRegister;
+  SLUInt32_t      ITmp = Source;
+  SLUInt32_t      OTmp = 0U;                                        // Clear output register
 
-  SRTmp = *pShiftRegister;
-
-  ITmp = Source;
-  OTmp = 0U;                                                        // Clear output register
-
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {                        // Process each bit in the word
+  for (SLUInt32_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {             // Process each bit in the word
     SRTmp <<= 1U;                                                   // Shift state register up by 1
-    OTmp1 = (ITmp & 0x1U);                                          // Bit 0
+    SLUInt32_t      OTmp1 = (ITmp & 0x1U);                          // Bit 0
 
     if (*pBitInversionFlag) {
       OTmp1 ^= 0x1U;                                                // If ones bit count > 64 then invert input
@@ -259,15 +234,11 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Scrambler1417WithInversion (
     }
 
     SRTmp |= OTmp1;                                                 // Add in new bit to state register
-
     OTmp |= OTmp1 << i;                                             // Write output shifted up
   }
 
   *pShiftRegister = SRTmp;
-
   return ((SLFixData_t) OTmp);
-
-
 }                                                                   // End of SDS_Scrambler1417WithInversion()
 
 
@@ -318,21 +289,15 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Descrambler1417WithInversion (
   SLFixData_t * SIGLIB_PTR_DECL pOnesBitCount,
   SLFixData_t * SIGLIB_PTR_DECL pBitInversionFlag)
 {
-  SLUInt32_t      ITmp, OTmp;
-  SLUInt32_t      OTmp1;
-  SLUInt32_t      i;
-  SLUInt32_t      SRTmp;
+  SLUInt32_t      SRTmp = *pShiftRegister;
+  SLUInt32_t      ITmp = Source;
+  SLUInt32_t      OTmp = 0U;                                        // Clear output register
 
-  SRTmp = *pShiftRegister;
-
-  ITmp = Source;
-  OTmp = 0U;                                                        // Clear output register
-
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {                        // Process each bit in the word
+  for (SLUInt32_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {             // Process each bit in the word
     SRTmp <<= 1U;                                                   // Shift register up by 1
     SRTmp |= ITmp & 0x1U;
 
-    OTmp1 = SRTmp;                                                  // Bit 0
+    SLUInt32_t      OTmp1 = SRTmp;                                  // Bit 0
     OTmp1 += SRTmp >> 14U;                                          // Bit 14
     OTmp1 += SRTmp >> 17U;                                          // Bit 17
 
@@ -359,9 +324,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Descrambler1417WithInversion (
   }
 
   *pShiftRegister = SRTmp;
-
   return ((SLFixData_t) OTmp);
-
 }                                                                   // End of SDS_Descrambler1417WithInversion()
 
 
@@ -402,19 +365,13 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Scrambler1823 (
   const SLFixData_t Source,
   SLUInt32_t * SIGLIB_PTR_DECL pShiftRegister)
 {
-  SLUInt32_t      ITmp, OTmp;
-  SLUInt32_t      OTmp1;
-  SLUInt32_t      i;
-  SLUInt32_t      SRTmp;
+  SLUInt32_t      SRTmp = *pShiftRegister;
+  SLUInt32_t      ITmp = Source;
+  SLUInt32_t      OTmp = 0U;                                        // Clear output register
 
-  SRTmp = *pShiftRegister;
-
-  ITmp = Source;
-  OTmp = 0U;                                                        // Clear output register
-
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {                        // Process each bit in the word
+  for (SLUInt32_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {             // Process each bit in the word
     SRTmp <<= 1U;                                                   // Shift state register up by 1
-    OTmp1 = (ITmp & 0x1U);                                          // Bit 0
+    SLUInt32_t      OTmp1 = (ITmp & 0x1U);                          // Bit 0
     ITmp >>= 1U;                                                    // Shift input along
     OTmp1 += SRTmp >> 18U;                                          // Bit 18
     OTmp1 += SRTmp >> 23U;                                          // Bit 23
@@ -426,10 +383,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Scrambler1823 (
   }
 
   *pShiftRegister = SRTmp;
-
   return ((SLFixData_t) OTmp);
-
-
 }                                                                   // End of SDS_Scrambler1823()
 
 
@@ -470,21 +424,15 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Descrambler1823 (
   const SLFixData_t Source,
   SLUInt32_t * SIGLIB_PTR_DECL pShiftRegister)
 {
-  SLUInt32_t      ITmp, OTmp;
-  SLUInt32_t      OTmp1;
-  SLUInt32_t      i;
-  SLUInt32_t      SRTmp;
+  SLUInt32_t      SRTmp = *pShiftRegister;
+  SLUInt32_t      ITmp = Source;
+  SLUInt32_t      OTmp = 0U;                                        // Clear output register
 
-  SRTmp = *pShiftRegister;
-
-  ITmp = Source;
-  OTmp = 0U;                                                        // Clear output register
-
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {                        // Process each bit in the word
+  for (SLUInt32_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {             // Process each bit in the word
     SRTmp <<= 1U;                                                   // Shift register up by 1
     SRTmp |= ITmp & 0x1U;
     ITmp >>= 1U;
-    OTmp1 = SRTmp;                                                  // Bit 0
+    SLUInt32_t      OTmp1 = SRTmp;                                  // Bit 0
     OTmp1 += SRTmp >> 18U;                                          // Bit 18
     OTmp1 += SRTmp >> 23U;                                          // Bit 23
 
@@ -492,9 +440,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Descrambler1823 (
   }
 
   *pShiftRegister = SRTmp;
-
   return ((SLFixData_t) OTmp);
-
 }                                                                   // End of SDS_Descrambler1823()
 
 
@@ -535,33 +481,24 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Scrambler523 (
   const SLFixData_t Source,
   SLUInt32_t * SIGLIB_PTR_DECL pShiftRegister)
 {
-  SLUInt32_t      ITmp, OTmp;
-  SLUInt32_t      OTmp1;
-  SLUInt32_t      i;
-  SLUInt32_t      SRTmp;
+  SLUInt32_t      SRTmp = *pShiftRegister;
+  SLUInt32_t      ITmp = Source;
+  SLUInt32_t      OTmp = 0U;                                        // Clear output register
 
-  SRTmp = *pShiftRegister;
-
-  ITmp = Source;
-  OTmp = 0U;                                                        // Clear output register
-
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {                        // Process each bit in the word
+  for (SLUInt32_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {             // Process each bit in the word
     SRTmp <<= 1U;                                                   // Shift state register up by 1
-    OTmp1 = (ITmp & 0x1U);                                          // Bit 0
+    SLUInt32_t      OTmp1 = (ITmp & 0x1U);                          // Bit 0
     ITmp >>= 1U;                                                    // Shift input along
     OTmp1 += SRTmp >> 5U;                                           // Bit 5
     OTmp1 += SRTmp >> 23U;                                          // Bit 23
     OTmp1 &= 0x1U;
 
     SRTmp |= OTmp1;                                                 // Add in new bit to state register
-
     OTmp |= OTmp1 << i;                                             // Write output shifted up
   }
 
   *pShiftRegister = SRTmp;
-
   return ((SLFixData_t) OTmp);
-
 }                                                                   // End of SDS_Scrambler523()
 
 
@@ -602,21 +539,15 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Descrambler523 (
   const SLFixData_t Source,
   SLUInt32_t * SIGLIB_PTR_DECL pShiftRegister)
 {
-  SLUInt32_t      ITmp, OTmp;
-  SLUInt32_t      OTmp1;
-  SLUInt32_t      i;
-  SLUInt32_t      SRTmp;
+  SLUInt32_t      SRTmp = *pShiftRegister;
+  SLUInt32_t      ITmp = Source;
+  SLUInt32_t      OTmp = 0U;                                        // Clear output register
 
-  SRTmp = *pShiftRegister;
-
-  ITmp = Source;
-  OTmp = 0U;                                                        // Clear output register
-
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {                        // Process each bit in the word
+  for (SLUInt32_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {             // Process each bit in the word
     SRTmp <<= 1U;                                                   // Shift register up by 1
     SRTmp |= ITmp & 0x1U;
     ITmp >>= 1U;
-    OTmp1 = SRTmp;                                                  // Bit 0
+    SLUInt32_t      OTmp1 = SRTmp;                                  // Bit 0
     OTmp1 += SRTmp >> 5U;                                           // Bit 5
     OTmp1 += SRTmp >> 23U;                                          // Bit 23
 
@@ -624,9 +555,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Descrambler523 (
   }
 
   *pShiftRegister = SRTmp;
-
   return ((SLFixData_t) OTmp);
-
 }                                                                   // End of SDS_Descrambler523()
 
 
@@ -666,13 +595,10 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblerPN9 (
   const SLFixData_t Source,
   SLUInt32_t * SIGLIB_PTR_DECL pShiftRegister)
 {
-  SLUInt32_t      OTmp, SRTmp;                                      // Local values for - output and shift register
-  SLUInt32_t      i;
+  SLUInt32_t      SRTmp = *pShiftRegister;
+  SLUInt32_t      OTmp = 0U;                                        // Clear output register
 
-  SRTmp = *pShiftRegister;
-  OTmp = 0U;                                                        // Clear output register
-
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {                        // Process each bit in the word
+  for (SLUInt32_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {             // Process each bit in the word
     OTmp |= (SRTmp & 0x1U) << i;                                    // Write new output value
     SRTmp |= ((SRTmp ^ (SRTmp >> 4U)) & 0x1U) << 9U;                // Caclulate feedback
     SRTmp >>= 1U;                                                   // Shift state register
@@ -710,13 +636,10 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblerPN9 (
 SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorPN9 (
   SLUInt32_t * SIGLIB_PTR_DECL pShiftRegister)
 {
-  SLUInt32_t      OTmp, SRTmp;                                      // Local values for - output and shift register
-  SLUInt32_t      i;
+  SLUInt32_t      SRTmp = *pShiftRegister;
+  SLUInt32_t      OTmp = 0U;                                        // Clear output register
 
-  SRTmp = *pShiftRegister;
-  OTmp = 0U;                                                        // Clear output register
-
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {                        // Process each bit in the word
+  for (SLUInt32_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {             // Process each bit in the word
     OTmp |= (SRTmp & 0x1U) << i;                                    // Write new output value
     SRTmp |= ((SRTmp ^ (SRTmp >> 4U)) & 0x1U) << 9U;                // Caclulate feedback
     SRTmp >>= 1U;                                                   // Shift state register
@@ -762,13 +685,10 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblerPN15 (
   const SLFixData_t Source,
   SLUInt32_t * SIGLIB_PTR_DECL pShiftRegister)
 {
-  SLUInt32_t      OTmp, SRTmp;                                      // Local values for - output and shift register
-  SLUInt32_t      i;
+  SLUInt32_t      SRTmp = *pShiftRegister;
+  SLUInt32_t      OTmp = 0U;                                        // Clear output register
 
-  SRTmp = *pShiftRegister;
-  OTmp = 0U;                                                        // Clear output register
-
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {                        // Process each bit in the word
+  for (SLUInt32_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {             // Process each bit in the word
     OTmp |= (SRTmp & 0x1U) << i;                                    // Write new output value
     SRTmp |= ((SRTmp ^ (SRTmp >> 14U)) & 0x1U) << 15U;              // Caclulate feedback
     SRTmp >>= 1U;                                                   // Shift state register
@@ -806,13 +726,10 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblerPN15 (
 SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorPN15 (
   SLUInt32_t * SIGLIB_PTR_DECL pShiftRegister)
 {
-  SLUInt32_t      OTmp, SRTmp;                                      // Local values for - output and shift register
-  SLUInt32_t      i;
+  SLUInt32_t      SRTmp = *pShiftRegister;
+  SLUInt32_t      OTmp = 0U;                                        // Clear output register
 
-  SRTmp = *pShiftRegister;
-  OTmp = 0U;                                                        // Clear output register
-
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {                        // Process each bit in the word
+  for (SLUInt32_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {             // Process each bit in the word
     OTmp |= (SRTmp & 0x1U) << i;                                    // Write new output value
     SRTmp |= ((SRTmp ^ (SRTmp >> 14U)) & 0x1U) << 15U;              // Caclulate feedback
     SRTmp >>= 1U;                                                   // Shift state register
@@ -851,13 +768,10 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblergCRC24 (
   const SLFixData_t Source,
   SLUInt32_t * SIGLIB_PTR_DECL pShiftRegister)
 {
-  SLUInt32_t      OTmp, SRTmp;                                      // Local values for - output and shift register
-  SLUInt32_t      i;
+  SLUInt32_t      SRTmp = *pShiftRegister;
+  SLUInt32_t      OTmp = 0U;                                        // Clear output register
 
-  SRTmp = *pShiftRegister;
-  OTmp = 0U;                                                        // Clear output register
-
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {                        // Process each bit in the word
+  for (SLUInt32_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {             // Process each bit in the word
     OTmp |= (SRTmp & 0x1U) << i;                                    // Write new output value
     SRTmp |= ((SRTmp ^ (SRTmp >> 1U) ^ (SRTmp >> 5U) ^ (SRTmp >> 6U) ^ (SRTmp >> 23U)) & 0x1U) << 24U;  // Caclulate feedback
     SRTmp >>= 1U;                                                   // Shift state register
@@ -888,13 +802,10 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblergCRC24 (
 SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorgCRC24 (
   SLUInt32_t * SIGLIB_PTR_DECL pShiftRegister)
 {
-  SLUInt32_t      OTmp, SRTmp;                                      // Local values for - output and shift register
-  SLUInt32_t      i;
+  SLUInt32_t      SRTmp = *pShiftRegister;
+  SLUInt32_t      OTmp = 0U;                                        // Clear output register
 
-  SRTmp = *pShiftRegister;
-  OTmp = 0U;                                                        // Clear output register
-
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {                        // Process each bit in the word
+  for (SLUInt32_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {             // Process each bit in the word
     OTmp |= (SRTmp & 0x1U) << i;                                    // Write new output value
     SRTmp |= ((SRTmp ^ (SRTmp >> 1U) ^ (SRTmp >> 5U) ^ (SRTmp >> 6U) ^ (SRTmp >> 23U)) & 0x1U) << 24U;  // Caclulate feedback
     SRTmp >>= 1U;                                                   // Shift state register
@@ -933,13 +844,10 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblergCRC16 (
   const SLFixData_t Source,
   SLUInt32_t * SIGLIB_PTR_DECL pShiftRegister)
 {
-  SLUInt32_t      OTmp, SRTmp;                                      // Local values for - output and shift register
-  SLUInt32_t      i;
+  SLUInt32_t      SRTmp = *pShiftRegister;
+  SLUInt32_t      OTmp = 0U;                                        // Clear output register
 
-  SRTmp = *pShiftRegister;
-  OTmp = 0U;                                                        // Clear output register
-
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {                        // Process each bit in the word
+  for (SLUInt32_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {             // Process each bit in the word
     OTmp |= (SRTmp & 0x1U) << i;                                    // Write new output value
     SRTmp |= ((SRTmp ^ (SRTmp >> 12U) ^ (SRTmp >> 5U)) & 0x1U) << 16U;  // Caclulate feedback
     SRTmp >>= 1U;                                                   // Shift state register
@@ -970,13 +878,10 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblergCRC16 (
 SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorgCRC16 (
   SLUInt32_t * SIGLIB_PTR_DECL pShiftRegister)
 {
-  SLUInt32_t      OTmp, SRTmp;                                      // Local values for - output and shift register
-  SLUInt32_t      i;
+  SLUInt32_t      SRTmp = *pShiftRegister;
+  SLUInt32_t      OTmp = 0U;                                        // Clear output register
 
-  SRTmp = *pShiftRegister;
-  OTmp = 0U;                                                        // Clear output register
-
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {                        // Process each bit in the word
+  for (SLUInt32_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {             // Process each bit in the word
     OTmp |= (SRTmp & 0x1U) << i;                                    // Write new output value
     SRTmp |= ((SRTmp ^ (SRTmp >> 12U) ^ (SRTmp >> 5U)) & 0x1U) << 16U;  // Caclulate feedback
     SRTmp >>= 1U;                                                   // Shift state register
@@ -1015,13 +920,10 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblergCRC12 (
   const SLFixData_t Source,
   SLUInt32_t * SIGLIB_PTR_DECL pShiftRegister)
 {
-  SLUInt32_t      OTmp, SRTmp;                                      // Local values for - output and shift register
-  SLUInt32_t      i;
+  SLUInt32_t      SRTmp = *pShiftRegister;
+  SLUInt32_t      OTmp = 0U;                                        // Clear output register
 
-  SRTmp = *pShiftRegister;
-  OTmp = 0U;                                                        // Clear output register
-
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {                        // Process each bit in the word
+  for (SLUInt32_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {             // Process each bit in the word
     OTmp |= (SRTmp & 0x1U) << i;                                    // Write new output value
     SRTmp |= ((SRTmp ^ (SRTmp >> 11U) ^ (SRTmp >> 3U) ^ (SRTmp >> 2U) ^ (SRTmp >> 1U)) & 0x1U) << 12U;  // Caclulate feedback
     SRTmp >>= 1U;                                                   // Shift state register
@@ -1052,13 +954,10 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblergCRC12 (
 SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorgCRC12 (
   SLUInt32_t * SIGLIB_PTR_DECL pShiftRegister)
 {
-  SLUInt32_t      OTmp, SRTmp;                                      // Local values for - output and shift register
-  SLUInt32_t      i;
+  SLUInt32_t      SRTmp = *pShiftRegister;
+  SLUInt32_t      OTmp = 0U;                                        // Clear output register
 
-  SRTmp = *pShiftRegister;
-  OTmp = 0U;                                                        // Clear output register
-
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {                        // Process each bit in the word
+  for (SLUInt32_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {             // Process each bit in the word
     OTmp |= (SRTmp & 0x1U) << i;                                    // Write new output value
     SRTmp |= ((SRTmp ^ (SRTmp >> 11U) ^ (SRTmp >> 3U) ^ (SRTmp >> 2U) ^ (SRTmp >> 1U)) & 0x1U) << 12U;  // Caclulate feedback
     SRTmp >>= 1U;                                                   // Shift state register
@@ -1097,13 +996,10 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblergCRC8 (
   const SLFixData_t Source,
   SLUInt32_t * SIGLIB_PTR_DECL pShiftRegister)
 {
-  SLUInt32_t      OTmp, SRTmp;                                      // Local values for - output and shift register
-  SLUInt32_t      i;
+  SLUInt32_t      SRTmp = *pShiftRegister;
+  SLUInt32_t      OTmp = 0U;                                        // Clear output register
 
-  SRTmp = *pShiftRegister;
-  OTmp = 0U;                                                        // Clear output register
-
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {                        // Process each bit in the word
+  for (SLUInt32_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {             // Process each bit in the word
     OTmp |= (SRTmp & 0x1U) << i;                                    // Write new output value
     SRTmp |= ((SRTmp ^ (SRTmp >> 7U) ^ (SRTmp >> 4U) ^ (SRTmp >> 3U) ^ (SRTmp >> 1U)) & 0x1U) << 8U;  // Caclulate feedback
     SRTmp >>= 1U;                                                   // Shift state register
@@ -1134,13 +1030,10 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblergCRC8 (
 SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorgCRC8 (
   SLUInt32_t * SIGLIB_PTR_DECL pShiftRegister)
 {
-  SLUInt32_t      OTmp, SRTmp;                                      // Local values for - output and shift register
-  SLUInt32_t      i;
+  SLUInt32_t      SRTmp = *pShiftRegister;
+  SLUInt32_t      OTmp = 0U;                                        // Clear output register
 
-  SRTmp = *pShiftRegister;
-  OTmp = 0U;                                                        // Clear output register
-
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {                        // Process each bit in the word
+  for (SLUInt32_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {             // Process each bit in the word
     OTmp |= (SRTmp & 0x1U) << i;                                    // Write new output value
     SRTmp |= ((SRTmp ^ (SRTmp >> 7U) ^ (SRTmp >> 4U) ^ (SRTmp >> 3U) ^ (SRTmp >> 1U)) & 0x1U) << 8U;  // Caclulate feedback
     SRTmp >>= 1U;                                                   // Shift state register
@@ -1182,15 +1075,12 @@ void SIGLIB_FUNC_DECL SDS_LongCodeGenerator3GPPDL (
   SLUInt32_t * SIGLIB_PTR_DECL pYShiftRegister,
   const SLArrayIndex_t NumberOfSamples)
 {
-  SLUInt32_t      FXTmp, FYTmp, SRXTmp, SRYTmp;                     // Local values for - output and shift registers
-  SLArrayIndex_t  i;
+  SLUInt32_t      SRXTmp = *pXShiftRegister;
+  SLUInt32_t      SRYTmp = *pYShiftRegister;
 
-  SRXTmp = *pXShiftRegister;
-  SRYTmp = *pYShiftRegister;
-
-  for (i = 0; i < NumberOfSamples; i++) {                           // Process each bit in the word
-    FXTmp = (SRXTmp >> 15U) ^ (SRXTmp >> 6U) ^ (SRXTmp >> 4U);      // Caclulate feedforward
-    FYTmp = (SRYTmp >> 15U) ^ (SRYTmp >> 14U) ^ (SRYTmp >> 13U) ^ (SRYTmp >> 12U) ^ (SRYTmp >> 11U) ^
+  for (SLArrayIndex_t i = 0; i < NumberOfSamples; i++) {            // Process each bit in the word
+    SLUInt32_t      FXTmp = (SRXTmp >> 15U) ^ (SRXTmp >> 6U) ^ (SRXTmp >> 4U);  // Caclulate feedforward
+    SLUInt32_t      FYTmp = (SRYTmp >> 15U) ^ (SRYTmp >> 14U) ^ (SRYTmp >> 13U) ^ (SRYTmp >> 12U) ^ (SRYTmp >> 11U) ^
       (SRYTmp >> 10U) ^ (SRYTmp >> 9U) ^ (SRYTmp >> 8U) ^ (SRYTmp >> 6U) ^ (SRYTmp >> 5U);
 
     pDst->real = (-(((SLData_t) ((SRXTmp ^ SRYTmp) & 0x1U))) * SIGLIB_TWO) + SIGLIB_ONE;  // Write new output value
@@ -1203,9 +1093,7 @@ void SIGLIB_FUNC_DECL SDS_LongCodeGenerator3GPPDL (
   }
   *pXShiftRegister = SRXTmp;
   *pYShiftRegister = SRYTmp;
-
 }                                                                   // End of SDS_LongCodeGenerator3GPPDL()
-
 
 
 /**/
@@ -1240,15 +1128,12 @@ void SIGLIB_FUNC_DECL SDS_LongCodeGenerator3GPPUL (
   SLUInt32_t * SIGLIB_PTR_DECL pYShiftRegister,
   const SLArrayIndex_t NumberOfSamples)
 {
-  SLUInt32_t      FXTmp, FYTmp, SRXTmp, SRYTmp;                     // Local values for - output and shift registers
-  SLArrayIndex_t  i;
+  SLUInt32_t      SRXTmp = *pXShiftRegister;
+  SLUInt32_t      SRYTmp = *pYShiftRegister;
 
-  SRXTmp = *pXShiftRegister;
-  SRYTmp = *pYShiftRegister;
-
-  for (i = 0; i < NumberOfSamples; i++) {                           // Process each bit in the word
-    FXTmp = (SRXTmp >> 18U) ^ (SRXTmp >> 7U) ^ (SRXTmp >> 4U);      // Caclulate feedforward
-    FYTmp = (SRYTmp >> 17U) ^ (SRYTmp >> 6U) ^ (SRYTmp >> 4U);
+  for (SLArrayIndex_t i = 0; i < NumberOfSamples; i++) {            // Process each bit in the word
+    SLUInt32_t      FXTmp = (SRXTmp >> 18U) ^ (SRXTmp >> 7U) ^ (SRXTmp >> 4U);  // Caclulate feedforward
+    SLUInt32_t      FYTmp = (SRYTmp >> 17U) ^ (SRYTmp >> 6U) ^ (SRYTmp >> 4U);
 
     pDst->real = (-(((SLData_t) ((SRXTmp ^ SRYTmp) & 0x1U))) * SIGLIB_TWO) + SIGLIB_ONE;  // Write new output value
     pDst->imag = (-(((SLData_t) ((FXTmp ^ FYTmp) & 0x1U))) * SIGLIB_TWO) + SIGLIB_ONE;
@@ -1260,5 +1145,4 @@ void SIGLIB_FUNC_DECL SDS_LongCodeGenerator3GPPUL (
   }
   *pXShiftRegister = SRXTmp;
   *pYShiftRegister = SRYTmp;
-
 }                                                                   // End of SDS_LongCodeGenerator3GPPUL()

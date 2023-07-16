@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><title>Signal Automatic Gain Control Example</title></head>
+<body bgcolor="#ffffff">
+<div>
+<table border="0">
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://www.numerix-dsp.com" target="_blank"><font face="Arial" size="2"><img src="../../../WebResources/NumerixLogoSM.JPG" alt="Numerix Web Site" border="0" height="100" width="105"></font></a></td>
+      <td align="center">&nbsp;</td>
+      <td align="center">
+      <h3><font color="#0000ff" face="Arial" size="3">SigLib Automatic Gain Control Example Program</font></h3>
+      </td>
+      <td align="center"><font size="2">&nbsp;
+      </font></td>
+      <td align="center"><a href="https://www.numerix-dsp.com/siglib.html" target="_blank"><font size="2"><img src="../../../WebResources/siglib.gif" alt="SigLib DSP Library Information" border="0" height="49" width="125"></font></a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<hr>
+<p style="font-family: Arial;"><font size="2">The files in this folder provide examples of how to use the Automatic Gain Control functions.<br>
+This program uses the envelope tracking AGC algorithm which is recommended for applications such as speech.<br>
+</font></p>
+
+<p style="font-family: Arial;"><font size="2">Rudyard Kipling If source Librivox Version 10, Martin Clifton: <a href="https://librivox.org/if-by-rudyard-kipling/" target="_blank">https://librivox.org/if-by-rudyard-kipling/</a></font></p>
+
+<p style="font-family: Arial;"><font size="2">The batch files supplied work with the GCC and Microsoft
+Visual Studio compiler (32 and 64 bit versions supplied) however the example programs can be built
+using almost any 32 or 64 bit compiler.</font></p>
+
+<table style="font-family: Arial;" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td><strong>Filename&nbsp;</strong></td>
+      <td>&nbsp;</td>
+      <td><strong>Description</strong></td>
+    </tr>
+    <tr>
+      <td><a target="_blank" href="wav_process_envelope.c"><font size="2">wav_process_envelope.c</font></a><font size="2">&nbsp;</font></td>
+      <td>&nbsp;</td>
+      <td><font size="2">Automatic Gain Control.</font></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p style="font-family: Arial;"><font size="2">
+<strong>Executing The Example<br><br></strong>
+The following command processes the supplied .wav file under Linux:<br>
+./process_wav_agc_envelope.sh Kipling_If_48kHz_Attenuated.wav<br>
+<br>
+process_wav_agc_envelope.sh plays out the processed audio file using aplay.<br>
+<br>
+This folder also includes a python script, plot_debug_log.py that can plot the internal parameters of
+the algorithm, provided that SIGLIB_ENABLE_DEBUG_LOGGING is set to '1' when SigLib is rebuilt.<br>
+This file is executed as follows:<br>
+python plot_debug_log.py siglib_debug.log<br>
+This file requires the following Python libraries to be installed: numpy, pandas, matplotlib and sys.<br>
+</font></p>
+
+<hr>
+<table style="font-family: Arial;" border="0" cellspacing="5">
+  <tbody>
+    <tr>
+      <td nowrap="nowrap" valign="top"><a name="contact"></a><font color="#0000ff" size="3"><strong>For further information, please contact :</strong></font><font color="#0000ff" size="2"><strong><br>
+      </strong></font><a href="mailto:numerix@numerix-dsp.com"><font size="2"><img src="../../../WebResources/email.gif" alt="Email Numerix" border="0" height="32" width="32"></font></a><font size="2"> Email : </font><a href="mailto:numerix@numerix-dsp.com"><font size="2">numerix@numerix-dsp.com
+      </font></a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><font face="Arial" size="2">Copyright &#169; 2023, Delta Numerix All rights reserved.<br>
+SigLib and Digital Filter Plus are trademarks of Delta Numerix All
+other trademarks acknowledged.<br>
+Delta Numerix are continuously increasing the functionality of SigLib
+and reserve the right to alter the product at any time.</font></p>
+
+</body></html>

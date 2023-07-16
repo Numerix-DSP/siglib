@@ -1,5 +1,5 @@
 // SigLib - .WAV file function read and display program
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 #include <stdio.h>
 #include <string.h>
@@ -49,8 +49,8 @@ int main (
   SUF_WavDisplayInfo (wavInfo);
 
   pDataArray = SUF_VectorArrayAllocate (wavInfo.NumberOfChannels * wavInfo.NumberOfSamples);
-  pCh0 = SUF_VectorArrayAllocate (wavInfo.NumberOfChannels);
-  pCh1 = SUF_VectorArrayAllocate (wavInfo.NumberOfChannels);
+  pCh0 = SUF_VectorArrayAllocate (wavInfo.NumberOfSamples);
+  pCh1 = SUF_VectorArrayAllocate (wavInfo.NumberOfSamples);
 
   if ((NULL == pDataArray) || (NULL == pCh0) || (NULL == pCh1)) {
     printf ("\n\nMemory allocation failed\n\n");
@@ -61,16 +61,12 @@ int main (
     gpc_init_2d ("Plot wave",                                       // Plot title
                  "Time",                                            // X-Axis label
                  "Magnitude",                                       // Y-Axis label
-                 GPC_AUTO_SCALE,                                    // Scaling mode
+                 SDS_Pow (SIGLIB_TWO, wavInfo.WordLength - 1),      // Scaling mode
                  GPC_SIGNED,                                        // Sign mode
                  GPC_KEY_ENABLE);                                   // Legend / key mode
   if (NULL == h2DPlot) {
     printf ("\nPlot creation failure.\n");
     exit (-1);
-  }
-
-  if (wavInfo.NumberOfSamples > 20000) {                            // Limit to 20,000 points
-    wavInfo.NumberOfSamples = 20000;
   }
 
   if ((sampleCount =
@@ -90,7 +86,7 @@ int main (
                  (double) SIGLIB_ZERO,                              // Minimum X value
                  (double) (sampleCount - 1) / (double) wavInfo.SampleRate,  // Maximum X value
                  "lines",                                           // Graph type
-                 "magenta",                                         // Colour
+                 "red",                                             // Colour
                  GPC_NEW);                                          // New graph
 
     gpc_plot_2d (h2DPlot,                                           // Graph handle

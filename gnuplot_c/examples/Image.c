@@ -19,7 +19,6 @@ int main (
 {
   FILE           *fp;
   h_GPC_Plot     *hImage;                                           // Plot object
-  int             i;
 
   hImage =                                                          // Initialize plot
     gpc_init_image ("Image",                                        // Plot title
@@ -40,7 +39,7 @@ int main (
     exit (10);
   }
 
-  for (i = 0; i < IMAGE_Y_DIMENSION; i++) {                         // Read image and convert from unsigned char to unsigned int
+  for (int i = 0; i < IMAGE_Y_DIMENSION; i++) {                     // Read image and convert from unsigned char to unsigned int
     fread (imageLine, sizeof (unsigned char), IMAGE_X_DIMENSION, fp);
     for (int j = 0; j < IMAGE_X_DIMENSION; j++)
       image[(i * IMAGE_X_DIMENSION) + j] = (unsigned int) imageLine[j];

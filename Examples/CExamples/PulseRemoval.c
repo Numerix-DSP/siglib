@@ -1,5 +1,5 @@
 // SigLib Pulse Removal Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // This example generates a simulated pulse on a noisy signal
 // It then uses an FIR filter as a moving correlator to detect the pulse location
@@ -16,7 +16,7 @@
 #define PLOT_PULSE_ENABLE           0                               // Set to '1' to plot the simulated pulse, '0' otherwise
 
 // Define constants
-#define SAMPLE_RATE                 1000                            // 1 kHz
+#define SAMPLE_RATE_HZ              1000                            // 1 kHz
 #define SAMPLE_LENGTH_SEC           10                              // 10 seconds
 
 #define DC_LEVEL                    20.                             // Input signal D.C. level
@@ -39,10 +39,10 @@
 #define LPF_ONE_POLE_COEFF          .9                              // One-pole filter coefficient for low-pass filter
 
 
-#define STEP_START_POSITION         (STEP_START_POSITION_SEC*SAMPLE_RATE) // Length in samples
-#define PULSE_LENGTH                (PULSE_LENGTH_SEC*SAMPLE_RATE)  // Length in samples
-#define PULSE_START_POSITION        (PULSE_START_POSITION_SEC*SAMPLE_RATE)  // Length in samples
-#define SAMPLE_LENGTH               (SAMPLE_LENGTH_SEC*SAMPLE_RATE) // Length in samples
+#define STEP_START_POSITION         (STEP_START_POSITION_SEC*SAMPLE_RATE_HZ)  // Length in samples
+#define PULSE_LENGTH                (PULSE_LENGTH_SEC*SAMPLE_RATE_HZ) // Length in samples
+#define PULSE_START_POSITION        (PULSE_START_POSITION_SEC*SAMPLE_RATE_HZ) // Length in samples
+#define SAMPLE_LENGTH               (SAMPLE_LENGTH_SEC*SAMPLE_RATE_HZ)  // Length in samples
 #define CORRELATOR_LENGTH           PULSE_LENGTH
 
 

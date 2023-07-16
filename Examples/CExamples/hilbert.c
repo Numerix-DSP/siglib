@@ -1,5 +1,5 @@
 // SigLib Hilbert Transform Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -24,8 +24,6 @@ int main (
   void)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
-
-  SLArrayIndex_t  i;
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Hilbert Transform",                               // Plot title
@@ -107,7 +105,7 @@ int main (
 // Delay input signal
 //  SDA_FixedDelay (pSrc, pDelayed, pDelayState, &DelayIndex, DELAY_LENGTH, SAMPLE_LENGTH);
 
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     *(pDelayed + i) = SDS_FixedDelay (*(pSrc + i),                  // Input data sample
                                       pDelayState,                  // Pointer to delay state array
                                       &DelayIndex,                  // Pointer to delay state index

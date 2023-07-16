@@ -1,5 +1,5 @@
 // SLTest.CPP SigLib DLL Test program
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <afxwin.h>
@@ -365,9 +365,16 @@ afx_msg void CSLTestWindow::OnZoomFFTSignal (
                      SDA_Magnitude (FreqRBufferPtr, FreqIBufferPtr, SignalBufferPtr, FFT_LENGTH); /* Calc real power fm complex */
                      SDA_FftShift (SignalBufferPtr, SignalBufferPtr, FFT_LENGTH); /* Calc real power fm complex */
                      ::LocalUnlock (HSignalBuffer);                 // Unlock the sample arrays
-                     ::LocalUnlock (HFreqRBuffer);::LocalUnlock (HFreqIBuffer);::LocalUnlock (HCombFilter1Buffer);::LocalUnlock (HCombFilter2Buffer);::LocalUnlock (HSineTableBuffer);::LocalUnlock (HFFTCoeffBuffer); WinGraph.SendMessage (WM_PAINT); // Only update graph, not surround
+                     ::LocalUnlock (HFreqRBuffer);
+                     ::LocalUnlock (HFreqIBuffer);
+                     ::LocalUnlock (HCombFilter1Buffer);
+                     ::LocalUnlock (HCombFilter2Buffer);
+                     ::LocalUnlock (HSineTableBuffer);
+                     ::LocalUnlock (HFFTCoeffBuffer);
+                     WinGraph.SendMessage (WM_PAINT);               // Only update graph, not surround
                      sprintf (StatusMessage, "Buffer Size : %d samples, Max : %lf", Signal.GetSize (), Signal.GetMax ());
-                     WinStatus.SetMessage (StatusMessage);}
+                     WinStatus.SetMessage (StatusMessage);
+                     }
 
 
 
@@ -377,14 +384,16 @@ afx_msg void CSLTestWindow::OnZoomFFTSignal (
                      afx_msg void CSLTestWindow::OnGetSigLibDLLVersion () {
                      char StatusMessage[40];
                      sprintf (StatusMessage, "SigLib DLL Version : %lf", SUF_SiglibVersion ());
-                     MessageBox (StatusMessage, "SigLib DLL Version", MB_OK | MB_ICONEXCLAMATION);}
+                     MessageBox (StatusMessage, "SigLib DLL Version", MB_OK | MB_ICONEXCLAMATION);
+                     }
 
 
 
 
                      HCURSOR CSLTestWindow::GetHCursor () {
 
-                     return (HGCursor);}
+                     return (HGCursor);
+                     }
 
 
 

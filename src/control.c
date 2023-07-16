@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : CONTROL.C     | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 24/10/1993
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Control function file for SigLib DSP library
 
@@ -40,7 +40,6 @@ Description : Control function file for SigLib DSP library
 #define SIGLIB_SRC_FILE_CONTROL 1                                   // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
 
 /**/
 
@@ -71,20 +70,15 @@ void SIGLIB_FUNC_DECL SDS_Pid (
   SLData_t * SIGLIB_PTR_DECL PrevError,
   SLData_t * SIGLIB_PTR_DECL PrevErrorDot)
 {
-  SLData_t        ErrorDot;
-  SLData_t        ErrorDoubleDot;
-  SLData_t        ControlDot;
-
-  ErrorDot = (Error - *PrevError);                                  // Differentiate the error
-  ErrorDoubleDot = (ErrorDot - *PrevErrorDot);
+  SLData_t        ErrorDot = (Error - *PrevError);                  // Differentiate the error
+  SLData_t        ErrorDoubleDot = (ErrorDot - *PrevErrorDot);
 
 // Calculate the control differential
-  ControlDot = (Ki * Error) + (Kp * ErrorDot) + (Kd * ErrorDoubleDot);
+  SLData_t        ControlDot = (Ki * Error) + (Kp * ErrorDot) + (Kd * ErrorDoubleDot);
   *PrevError = Error;
   *PrevErrorDot = ErrorDot;
 
   (*Control) += (ControlDot);                                       // Calculate the new control value
-
 }                                                                   // End of SDS_Pid()
 
 
@@ -128,5 +122,4 @@ void SIGLIB_FUNC_DECL SDA_Pwm (
 
 // Clamp threshold - if signal > 0 then set to 1
   SDA_Clamp (pDst, pDst, SIGLIB_ZERO, SIGLIB_ONE, SIGLIB_SINGLE_SIDED_THOLD, SampleLength);
-
 }                                                                   // End of SDA_Pwm()

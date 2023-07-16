@@ -1,6 +1,6 @@
 // SigLib - Program to read vibration data file and generate an order analysis
 // This program re-orders the data into an ordergram
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -66,7 +66,6 @@ int main (
 
   SLArrayIndex_t  sampleCount;
   FILE           *fpInputFile;
-  SLArrayIndex_t  i, j;
   SLArrayIndex_t  FrameNumber = SIGLIB_AI_ZERO;                     // Number of frames processed
   SLArrayIndex_t  OverlapSrcArrayIndex;
   SLArrayIndex_t  LogMagnitudeFlag, XAxisTimeFlag;
@@ -290,10 +289,10 @@ int main (
 //SUF_Debugfprintf ("Max frame number = %d\n", FrameNumber);
 //SUF_Debugfprintf ("Plotting orders\n");
 // Plotting orders
-  for (i = 0; i < NUMBER_OF_ORDERS; i++) {
+  for (SLArrayIndex_t i = 0; i < NUMBER_OF_ORDERS; i++) {
     if (XAxisTimeFlag == SIGLIB_TRUE) {                             // Display time on x-axis
       SLData_t        PlotArray[500];
-      for (j = 0; j < FrameNumber; j++) {                           // Write out results for each order in turn
+      for (SLArrayIndex_t j = 0; j < FrameNumber; j++) {            // Write out results for each order in turn
 // Time (s), Order magnitude
         PlotArray[j] = *(pOrderArray + (j * NUMBER_OF_ORDERS) + i);
       }
@@ -322,7 +321,7 @@ int main (
     }
     else {                                                          // Display speed on x-axis
       SLData_t        PlotArray[500];
-      for (j = 0; j < FrameNumber; j++) {                           // Write out results for each order in turn
+      for (SLArrayIndex_t j = 0; j < FrameNumber; j++) {            // Write out results for each order in turn
 // Speed (rpm), Order magnitude
         PlotArray[j] = *(pOrderArray + (j * NUMBER_OF_ORDERS) + i);
       }
@@ -440,7 +439,7 @@ int main (
 //SUF_Debugfprintf ("Calculating spectrum average\n");
 
   printf ("Spectrum average\n");
-  for (i = 1; i <= NUMBER_OF_ORDERS; i++) {                         // Extract the required orders from the results
+  for (SLArrayIndex_t i = 1; i <= NUMBER_OF_ORDERS; i++) {          // Extract the required orders from the results
     printf ("Order %d = %lf\n", BASE_ORDER * i, SDA_ExtractOrder (pOrderMagnitudeResults, // Pointer to source array
                                                                   BASE_ORDER * i, // Order to extract
                                                                   ORDER_NUMBER_OF_ADJ_SAMPLES,  // Number of samples to search either side of centre

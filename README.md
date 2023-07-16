@@ -65,18 +65,18 @@ The easiest way to navigate the folders is to use the provided html files, start
 ## License
 
 SigLib is free for educational and personal use, all other use cases require a developer's license,
-which is available from: [Alpha Numerix](https://numerix-dsp.com).
+which is available from: [Delta Numerix](https://numerix-dsp.com).
 
 [SigLib Licensing Details](./license.html).
 
-Alpha Numerix are specialists in writing and supporting Signal Processing and Machine Learning
+Delta Numerix are specialists in writing and supporting Signal Processing and Machine Learning
 applications.
 
 To inquire about our services, contact us at numerix@numerix-dsp.com.
 
-Copyright ©; 2022, Alpha Numerix All rights reserved.
-SigLib and Digital Filter Plus are trademarks of Alpha Numerix All
+Copyright ©; 2022, Delta Numerix All rights reserved.
+SigLib and Digital Filter Plus are trademarks of Delta Numerix All
 other trademarks acknowledged.
 
-Alpha Numerix are continuously increasing the functionality of SigLib
+Delta Numerix are continuously increasing the functionality of SigLib
 and reserve the right to alter the product at any time.

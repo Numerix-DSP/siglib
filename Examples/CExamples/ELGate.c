@@ -1,5 +1,5 @@
 // SigLib - Early-Late Gate Timing Detector Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // The early late gate synchronizer outputs a continuous stream of zeros except where it detects a pulse,
 // when it generates a single one pulse.
@@ -33,12 +33,12 @@
 #define SAMPLE_LENGTH           512
 #define START_DELAY             15                                  // Arbitrary delay to test synchronizer
 
-#define SAMPLE_RATE             8000.                               // Characteristics of PRBS
+#define SAMPLE_RATE_HZ          8000.                               // Characteristics of PRBS
 //#define SYMBOL_RATE             1000.                       // 8 samples per symbol
 #define SYMBOL_RATE             400.                                // 20 samples per symbol
 //#define SYMBOL_RATE             200.                        // 40 samples per symbol
 
-#define SYMBOL_LENGTH           ((SLFixData_t)(SAMPLE_RATE / SYMBOL_RATE))
+#define SYMBOL_LENGTH           ((SLFixData_t)(SAMPLE_RATE_HZ / SYMBOL_RATE))
 
 #define GAUS_NOISE_VARIANCE     SIGLIB_FOUR
 #define GAUS_NOISE_OFFSET       SIGLIB_ZERO
@@ -100,10 +100,6 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
   SLError_t       SigLibErrorCode;
-#if PROCESS_ARRAY
-#else
-  SLArrayIndex_t  i;
-#endif
 
   pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
   pDelayedSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
@@ -160,7 +156,7 @@ int main (
                                                   pELGLoopFilterCoeffs, // Pointer to loop filter coefficients
                                                   &ELGLoopFilterIndex,  // Pointer to loop filter index
                                                   ELG_LOOP_FILTER_LENGTH, // Loop filter length
-                                                  ELG_LOOP_FILTER_FC / SAMPLE_RATE, // Loop filter cut-off / centre frequency
+                                                  ELG_LOOP_FILTER_FC / SAMPLE_RATE_HZ,  // Loop filter cut-off / centre frequency
                                                   &ELGPulseDetectorThresholdFlag, // Pointer to pulse detector threshold flag
                                                   &ELGZeroCrossingPreviousSample, // Pointer to zero crossing previous sample
                                                   &ELGTriggerCount, // Pointer to trigger counter
@@ -186,7 +182,7 @@ int main (
                                        pELGLoopFilterCoeffs,        // Pointer to loop filter coefficients
                                        &ELGLoopFilterIndex,         // Pointer to loop filter index
                                        ELG_LOOP_FILTER_LENGTH,      // Loop filter length
-                                       ELG_LOOP_FILTER_FC / SAMPLE_RATE,  // Loop filter cut-off / centre frequency
+                                       ELG_LOOP_FILTER_FC / SAMPLE_RATE_HZ, // Loop filter cut-off / centre frequency
                                        &ELGPulseDetectorThresholdFlag,  // Pointer to pulse detector threshold flag
                                        &ELGZeroCrossingPreviousSample,  // Pointer to zero crossing previous sample
                                        &ELGTriggerCount,            // Pointer to trigger counter
@@ -228,7 +224,7 @@ int main (
                       SIGLIB_PN_SEQUENCE,                           // Signal type - Pseudo random number sequence
                       SIGLIB_TWO,                                   // Signal magnitude range
                       SIGLIB_FILL,                                  // Fill (overwrite) or add to existing array contents
-                      SYMBOL_RATE / SAMPLE_RATE,                    // Signal frequency
+                      SYMBOL_RATE / SAMPLE_RATE_HZ,                 // Signal frequency
                       SIGLIB_ZERO,                                  // Signal minimum level
                       SIGLIB_TWO,                                   // Number of discrete levels in PN sequence
                       SIGLIB_ZERO,                                  // Signal end value - Unused
@@ -241,7 +237,7 @@ int main (
                       SIGLIB_PN_SEQUENCE,                           // Signal type - Pseudo random number sequence
                       SIGLIB_TWO,                                   // Signal magnitude range
                       SIGLIB_FILL,                                  // Fill (overwrite) or add to existing array contents
-                      SYMBOL_RATE / SAMPLE_RATE,                    // Signal frequency
+                      SYMBOL_RATE / SAMPLE_RATE_HZ,                 // Signal frequency
                       SIGLIB_MINUS_ONE,                             // Signal minimum level
                       SIGLIB_TWO,                                   // Number of discrete levels in PN sequence
                       SIGLIB_ZERO,                                  // Signal end value - Unused
@@ -253,7 +249,7 @@ int main (
                       SIGLIB_PN_SEQUENCE,                           // Signal type - Pseudo random number sequence
                       SIGLIB_TWO,                                   // Signal magnitude range
                       SIGLIB_FILL,                                  // Fill (overwrite) or add to existing array contents
-                      SYMBOL_RATE / SAMPLE_RATE,                    // Signal frequency
+                      SYMBOL_RATE / SAMPLE_RATE_HZ,                 // Signal frequency
                       SIGLIB_MINUS_ONE,                             // Signal minimum level
                       SIGLIB_FOUR,                                  // Number of discrete levels in PN sequence
                       SIGLIB_ZERO,                                  // Signal end value - Unused
@@ -267,7 +263,7 @@ int main (
                       SIGLIB_SQUARE_WAVE,                           // Signal type - Square wave
                       SIGLIB_ONE,                                   // Signal peak level
                       SIGLIB_FILL,                                  // Fill (overwrite) or add to existing array contents
-                      (SYMBOL_RATE / SAMPLE_RATE) / SIGLIB_TWO,     // Signal frequency
+                      (SYMBOL_RATE / SAMPLE_RATE_HZ) / SIGLIB_TWO,  // Signal frequency
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_HALF,                                  // Duty cycle
                       SIGLIB_ZERO,                                  // Signal end value - Unused
@@ -297,7 +293,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "Source Sequence",                                   // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -424,7 +420,7 @@ int main (
 #endif
 #endif
 #else
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
 #if SQUARE_PULSE
     pTriggerOutput[i] = SDS_EarlyLateGateSquarePulse (pSrc[i],      // Source data value
                                                       pELGMatchedFilterState, // Pointer to matched filter state array
@@ -487,7 +483,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "Delayed Source Signal",                             // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -497,7 +493,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "Timing Output",                                     // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "red",                                               // Colour
                GPC_ADD);                                            // New graph

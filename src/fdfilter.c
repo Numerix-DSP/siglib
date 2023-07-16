@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : FDFILTER.C    | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 23/10/1999
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : SigLib DSP library frequency domain FIR filter, convolution
 and correlation functions.
@@ -40,7 +40,6 @@ and correlation functions.
 #define SIGLIB_SRC_FILE_FDFILTER    1                               // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
 
 /**/
 
@@ -85,7 +84,6 @@ void SIGLIB_FUNC_DECL SIF_FirOverlapAdd (
   SDA_Rfft (pRealFreqDomainCoeffs, pImagFreqDomainCoeffs, pFFTCoeffs, pBitReverseAddressTable, FFTLength, Log10FFTLength);  // Perform FFT
 
   *pInverseFFTLength = SIGLIB_ONE / FFTLength;
-
 }                                                                   // End of  SIF_FirOverlapAdd()
 
 
@@ -142,7 +140,6 @@ void SIGLIB_FUNC_DECL SDA_FirOverlapAdd (
   SDA_Add2 (pDst, pOverlapArray, pDst, (SLArrayIndex_t) (FilterLength - 1));  // Add overlap
 
   SDA_Copy (pDst + DataLength, pOverlapArray, (SLArrayIndex_t) (FilterLength - 1)); // Copy remainder of output for next iteration
-
 }                                                                   // End of  SDA_FirOverlapAdd()
 
 
@@ -253,7 +250,6 @@ void SIGLIB_FUNC_DECL SDA_FirOverlapSave (
 
   SDA_Copy (pSrc + DataLength - (FilterLength - 1), pOverlapArray + FFTLength - DataLength - (FilterLength - 1), (SLArrayIndex_t) (FilterLength - 1));  // Copy and shift overlap from input array for next iteration
   SDA_Clear (pOverlapArray, (SLArrayIndex_t) (FFTLength - DataLength - (FilterLength - 1)));  // Clear start of overlap array
-
 }                                                                   // End of  SDA_FirOverlapSave()
 
 
@@ -290,7 +286,6 @@ void SIGLIB_FUNC_DECL SIF_FftConvolvePre (
   const SLArrayIndex_t FFTLength,
   const SLArrayIndex_t Log2FFTLength)
 {
-
 // Initialise FFT
   SIF_Fft (pFFTCoeffs,                                              // Pointer to FFT coefficients
            pBitReverseAddressTable,                                 // Bit reverse mode flag / Pointer to bit reverse address table
@@ -300,7 +295,6 @@ void SIGLIB_FUNC_DECL SIF_FftConvolvePre (
   SDA_Copy (Coeffs, pRealCoeffs, FilterSize);
   SDA_Clear (pRealCoeffs + FilterSize, (SLArrayIndex_t) (FFTLength - FilterSize));
   SDA_Rfft (pRealCoeffs, pImagCoeffs, pFFTCoeffs, pBitReverseAddressTable, FFTLength, Log2FFTLength); // Coefficients FFT
-
 }
 
 
@@ -356,7 +350,6 @@ void SIGLIB_FUNC_DECL SDA_FftConvolvePre (
   SDA_Cifft (pRealData, pImagData, pFFTCoeffs, pBitReverseAddressTable, FFTLength, Log2FFTLength);  // IFFT
 
   SDA_Multiply (pRealData, InvFFTLength, pConvResults, SrcLength + CoeffsLength - 1); // Scale and copy output results
-
 }                                                                   // End of SDA_FftConvolvePre()
 
 
@@ -414,7 +407,6 @@ void SIGLIB_FUNC_DECL SDA_FftConvolveArb (
   SDA_Cifft (pRealSrc1, pImagSrc1, pFFTCoeffs, pBitReverseAddressTable, FFTLength, Log2FFTLength);  // IFFT
 
   SDA_Multiply (pRealSrc1, InvFFTLength, pConvResults, Src1Length + Src2Length - 1);  // Scale and copy output results
-
 }                                                                   // End of SDA_FftConvolveArb()
 
 
@@ -462,7 +454,6 @@ void SIGLIB_FUNC_DECL SIF_FftCorrelatePre (
   SDA_Clear (pRealSrc2 + FilterSize, (SLArrayIndex_t) (FFTLength - FilterSize));
   SDA_Rfft (pRealSrc2, pImagSrc2, pFFTCoeffs, pBitReverseAddressTable, FFTLength, Log2FFTLength); // Coefficients FFT
   SDA_Negate (pImagSrc2, pImagSrc2, FFTLength);                     // Conjugate input 2
-
 }
 
 
@@ -520,7 +511,6 @@ void SIGLIB_FUNC_DECL SDA_FftCorrelatePre (
   SDA_Rotate (pRealSrc1, pImagSrc1, Src2Length - SIGLIB_AI_ONE, FFTLength); // Rotate correlation results
 
   SDA_Multiply (pImagSrc1, InvFFTLength, pCorrResults, Src1Length + Src2Length - 1);  // Scale and copy output results
-
 }                                                                   // End of SDA_FftCorrelatePre()
 
 
@@ -582,5 +572,4 @@ void SIGLIB_FUNC_DECL SDA_FftCorrelateArb (
   SDA_Rotate (pRealSrc1, pImagSrc1, Src2Length - SIGLIB_AI_ONE, FFTLength); // Rotate correlation results
 
   SDA_Multiply (pImagSrc1, InvFFTLength, pCorrResults, Src1Length + Src2Length - 1);  // Scale and copy output results
-
 }                                                                   // End of SDA_FftCorrelateArb()

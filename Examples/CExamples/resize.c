@@ -1,5 +1,5 @@
 // SigLib Array Resizing Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -26,7 +26,6 @@ int main (
 {
   SLArrayIndex_t  ResultSampleLength;
   SLArrayIndex_t  ReSizeStateLength;
-  SLArrayIndex_t  i;
 
 // Allocate arrays
   pDst = SUF_VectorArrayAllocate (DST_ARRAY_LENGTH);
@@ -37,7 +36,7 @@ int main (
 // Initialize SDA_ReSize function
   SIF_ReSize (&ReSizeStateLength);                                  // Pointer to state array length
 
-  for (i = 0; i < 6; i++) {
+  for (SLArrayIndex_t i = 0; i < 6; i++) {
     ResultSampleLength = SDA_ReSize (SrcDataArray + (i * 7),        // Pointer to source array
                                      pDst,                          // Pointer to destination array
                                      pReSizeState,                  // Pointer to state array
@@ -98,7 +97,7 @@ int main (
 // Initialize SDA_ReSize function
   SIF_ReSize (&ReSizeStateLength);                                  // Pointer to state array length
 
-  for (i = 0; i < 2; i++) {
+  for (SLArrayIndex_t i = 0; i < 2; i++) {
     SDA_ReSizeInput (SrcDataArray + (16 * i),                       // Pointer to source array
                      pReSizeState,                                  // Pointer to state array
                      &ReSizeStateLength,                            // Pointer to state array length

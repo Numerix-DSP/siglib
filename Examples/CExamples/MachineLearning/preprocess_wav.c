@@ -1,5 +1,5 @@
 // SigLib - .wav file function read and pre-process program
-// Copyright (c) 2023 Alpha Numerix
+// Copyright (c) 2023 Delta Numerix
 
 // Include files
 #include <stdio.h>

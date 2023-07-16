@@ -1,5 +1,5 @@
 // SigLib Delay Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -7,7 +7,7 @@
 
 // Define constants
 #define DELAY_LENGTH    5
-#define SAMPLE_LENGTH   20
+#define SAMPLE_LENGTH   40
 
 // Declare global variables and arrays
 static const SLData_t RealSrcArray[] = {
@@ -30,17 +30,16 @@ static SLData_t *pRealDelayArray, *pImagDelayArray, *pRealDst, *pImagDst;
 int main (
   void)
 {
-  SLArrayIndex_t  i;
   SLArrayIndex_t  DelayIndex;
-  SLData_t        pRealInput, pRealOutput;
-  SLData_t        pImagInput, pImagOutput;
+  SLData_t        realInput, realOutput;
+  SLData_t        imagInput, imagOutput;
   const SLData_t *pSrcReal = RealSrcArray;
   const SLData_t *pSrcImag = ImagSrcArray;
 
   pRealDelayArray = SUF_VectorArrayAllocate (DELAY_LENGTH);
   pImagDelayArray = SUF_VectorArrayAllocate (DELAY_LENGTH);
-  pRealDst = SUF_VectorArrayAllocate (40);
-  pImagDst = SUF_VectorArrayAllocate (40);
+  pRealDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  pImagDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
 // Initialise the delay
   SIF_FixedDelay (pRealDelayArray,                                  // Pointer to delay state array
@@ -48,46 +47,48 @@ int main (
                   DELAY_LENGTH);                                    // Delay length
 
   printf ("SDS_FixedDelay\n");
-  pRealInput = *pSrcReal++;
-  pRealOutput = SDS_FixedDelay (pRealInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input = %1.1lf, Output = %1.1lf\n", pRealInput, pRealOutput);
-  pRealInput = *pSrcReal++;
-  pRealOutput = SDS_FixedDelay (pRealInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input = %1.1lf, Output = %1.1lf\n", pRealInput, pRealOutput);
-  pRealInput = *pSrcReal++;
-  pRealOutput = SDS_FixedDelay (pRealInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input = %1.1lf, Output = %1.1lf\n", pRealInput, pRealOutput);
-  pRealInput = *pSrcReal++;
-  pRealOutput = SDS_FixedDelay (pRealInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input = %1.1lf, Output = %1.1lf\n", pRealInput, pRealOutput);
-  pRealInput = *pSrcReal++;
-  pRealOutput = SDS_FixedDelay (pRealInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input = %1.1lf, Output = %1.1lf\n", pRealInput, pRealOutput);
-  pRealInput = *pSrcReal++;
-  pRealOutput = SDS_FixedDelay (pRealInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input = %1.1lf, Output = %1.1lf\n", pRealInput, pRealOutput);
-  pRealInput = *pSrcReal++;
-  pRealOutput = SDS_FixedDelay (pRealInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input = %1.1lf, Output = %1.1lf\n", pRealInput, pRealOutput);
-  pRealInput = *pSrcReal++;
-  pRealOutput = SDS_FixedDelay (pRealInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input = %1.1lf, Output = %1.1lf\n", pRealInput, pRealOutput);
-  pRealInput = *pSrcReal++;
-  pRealOutput = SDS_FixedDelay (pRealInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input = %1.1lf, Output = %1.1lf\n", pRealInput, pRealOutput);
-  pRealInput = *pSrcReal++;
-  pRealOutput = SDS_FixedDelay (pRealInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input = %1.1lf, Output = %1.1lf\n", pRealInput, pRealOutput);
-  pRealInput = *pSrcReal++;
-  pRealOutput = SDS_FixedDelay (pRealInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input = %1.1lf, Output = %1.1lf\n", pRealInput, pRealOutput);
-  pRealInput = *pSrcReal++;
-  pRealOutput = SDS_FixedDelay (pRealInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input = %1.1lf, Output = %1.1lf\n", pRealInput, pRealOutput);
-  pRealInput = *pSrcReal++;
-  pRealOutput = SDS_FixedDelay (pRealInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input = %1.1lf, Output = %1.1lf\n", pRealInput, pRealOutput);
+  realInput = *pSrcReal++;
+  realOutput = SDS_FixedDelay (realInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input = %1.1lf, Output = %1.1lf\n", realInput, realOutput);
+  realInput = *pSrcReal++;
+  realOutput = SDS_FixedDelay (realInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input = %1.1lf, Output = %1.1lf\n", realInput, realOutput);
+  realInput = *pSrcReal++;
+  realOutput = SDS_FixedDelay (realInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input = %1.1lf, Output = %1.1lf\n", realInput, realOutput);
+  realInput = *pSrcReal++;
+  realOutput = SDS_FixedDelay (realInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input = %1.1lf, Output = %1.1lf\n", realInput, realOutput);
+  realInput = *pSrcReal++;
+  realOutput = SDS_FixedDelay (realInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input = %1.1lf, Output = %1.1lf\n", realInput, realOutput);
+  realInput = *pSrcReal++;
+  realOutput = SDS_FixedDelay (realInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input = %1.1lf, Output = %1.1lf\n", realInput, realOutput);
+  realInput = *pSrcReal++;
+  realOutput = SDS_FixedDelay (realInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input = %1.1lf, Output = %1.1lf\n", realInput, realOutput);
+  realInput = *pSrcReal++;
+  realOutput = SDS_FixedDelay (realInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input = %1.1lf, Output = %1.1lf\n", realInput, realOutput);
+  realInput = *pSrcReal++;
+  realOutput = SDS_FixedDelay (realInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input = %1.1lf, Output = %1.1lf\n", realInput, realOutput);
+  realInput = *pSrcReal++;
+  realOutput = SDS_FixedDelay (realInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input = %1.1lf, Output = %1.1lf\n", realInput, realOutput);
+  realInput = *pSrcReal++;
+  realOutput = SDS_FixedDelay (realInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input = %1.1lf, Output = %1.1lf\n", realInput, realOutput);
+  realInput = *pSrcReal++;
+  realOutput = SDS_FixedDelay (realInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input = %1.1lf, Output = %1.1lf\n", realInput, realOutput);
+  realInput = *pSrcReal++;
+  realOutput = SDS_FixedDelay (realInput, pRealDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input = %1.1lf, Output = %1.1lf\n", realInput, realOutput);
 
+
+  pSrcReal = RealSrcArray;                                          // Reset real src array pointer
 
 // Initialise the delay
   SIF_FixedDelay (pRealDelayArray,                                  // Pointer to delay state array
@@ -103,14 +104,12 @@ int main (
 
   printf ("\nSDA_FixedDelay\n");
 
-  for (i = 0; i < 20; i++) {
-    printf ("Input = %1.1lf, Output = %1.1lf\n", *pSrcReal++, *pRealDst++);
+  for (SLArrayIndex_t i = 0; i < 20; i++) {
+    printf ("Input = %1.1lf, Output = %1.1lf\n", pSrcReal[i], pRealDst[i]);
   }
 
   printf ("\nHit carriage return to continue . . .\n");
   getchar ();
-
-  pSrcReal = RealSrcArray;                                          // Reset real src array pointer
 
 // Initialise the delay
   SIF_FixedDelayComplex (pRealDelayArray,                           // Pointer to real delay state array
@@ -119,60 +118,62 @@ int main (
                          DELAY_LENGTH);                             // Delay length
 
   printf ("SDS_FixedDelayComplex\n");
-  pRealInput = *pSrcReal++;
-  pImagInput = *pSrcImag++;
-  SDS_FixedDelayComplex (pRealInput, pImagInput, &pRealOutput, &pImagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", pRealInput, pImagInput, pRealOutput, pImagOutput);
-  pRealInput = *pSrcReal++;
-  pImagInput = *pSrcImag++;
-  SDS_FixedDelayComplex (pRealInput, pImagInput, &pRealOutput, &pImagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", pRealInput, pImagInput, pRealOutput, pImagOutput);
-  pRealInput = *pSrcReal++;
-  pImagInput = *pSrcImag++;
-  SDS_FixedDelayComplex (pRealInput, pImagInput, &pRealOutput, &pImagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", pRealInput, pImagInput, pRealOutput, pImagOutput);
-  pRealInput = *pSrcReal++;
-  pImagInput = *pSrcImag++;
-  SDS_FixedDelayComplex (pRealInput, pImagInput, &pRealOutput, &pImagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", pRealInput, pImagInput, pRealOutput, pImagOutput);
-  pRealInput = *pSrcReal++;
-  pImagInput = *pSrcImag++;
-  SDS_FixedDelayComplex (pRealInput, pImagInput, &pRealOutput, &pImagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", pRealInput, pImagInput, pRealOutput, pImagOutput);
-  pRealInput = *pSrcReal++;
-  pImagInput = *pSrcImag++;
-  SDS_FixedDelayComplex (pRealInput, pImagInput, &pRealOutput, &pImagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", pRealInput, pImagInput, pRealOutput, pImagOutput);
-  pRealInput = *pSrcReal++;
-  pImagInput = *pSrcImag++;
-  SDS_FixedDelayComplex (pRealInput, pImagInput, &pRealOutput, &pImagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", pRealInput, pImagInput, pRealOutput, pImagOutput);
-  pRealInput = *pSrcReal++;
-  pImagInput = *pSrcImag++;
-  SDS_FixedDelayComplex (pRealInput, pImagInput, &pRealOutput, &pImagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", pRealInput, pImagInput, pRealOutput, pImagOutput);
-  pRealInput = *pSrcReal++;
-  pImagInput = *pSrcImag++;
-  SDS_FixedDelayComplex (pRealInput, pImagInput, &pRealOutput, &pImagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", pRealInput, pImagInput, pRealOutput, pImagOutput);
-  pRealInput = *pSrcReal++;
-  pImagInput = *pSrcImag++;
-  SDS_FixedDelayComplex (pRealInput, pImagInput, &pRealOutput, &pImagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", pRealInput, pImagInput, pRealOutput, pImagOutput);
-  pRealInput = *pSrcReal++;
-  pImagInput = *pSrcImag++;
-  SDS_FixedDelayComplex (pRealInput, pImagInput, &pRealOutput, &pImagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", pRealInput, pImagInput, pRealOutput, pImagOutput);
-  pRealInput = *pSrcReal++;
-  pImagInput = *pSrcImag++;
-  SDS_FixedDelayComplex (pRealInput, pImagInput, &pRealOutput, &pImagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", pRealInput, pImagInput, pRealOutput, pImagOutput);
-  pRealInput = *pSrcReal++;
-  pImagInput = *pSrcImag++;
-  SDS_FixedDelayComplex (pRealInput, pImagInput, &pRealOutput, &pImagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
-  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", pRealInput, pImagInput, pRealOutput, pImagOutput);
+  realInput = *pSrcReal++;
+  imagInput = *pSrcImag++;
+  SDS_FixedDelayComplex (realInput, imagInput, &realOutput, &imagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", realInput, imagInput, realOutput, imagOutput);
+  realInput = *pSrcReal++;
+  imagInput = *pSrcImag++;
+  SDS_FixedDelayComplex (realInput, imagInput, &realOutput, &imagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", realInput, imagInput, realOutput, imagOutput);
+  realInput = *pSrcReal++;
+  imagInput = *pSrcImag++;
+  SDS_FixedDelayComplex (realInput, imagInput, &realOutput, &imagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", realInput, imagInput, realOutput, imagOutput);
+  realInput = *pSrcReal++;
+  imagInput = *pSrcImag++;
+  SDS_FixedDelayComplex (realInput, imagInput, &realOutput, &imagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", realInput, imagInput, realOutput, imagOutput);
+  realInput = *pSrcReal++;
+  imagInput = *pSrcImag++;
+  SDS_FixedDelayComplex (realInput, imagInput, &realOutput, &imagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", realInput, imagInput, realOutput, imagOutput);
+  realInput = *pSrcReal++;
+  imagInput = *pSrcImag++;
+  SDS_FixedDelayComplex (realInput, imagInput, &realOutput, &imagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", realInput, imagInput, realOutput, imagOutput);
+  realInput = *pSrcReal++;
+  imagInput = *pSrcImag++;
+  SDS_FixedDelayComplex (realInput, imagInput, &realOutput, &imagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", realInput, imagInput, realOutput, imagOutput);
+  realInput = *pSrcReal++;
+  imagInput = *pSrcImag++;
+  SDS_FixedDelayComplex (realInput, imagInput, &realOutput, &imagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", realInput, imagInput, realOutput, imagOutput);
+  realInput = *pSrcReal++;
+  imagInput = *pSrcImag++;
+  SDS_FixedDelayComplex (realInput, imagInput, &realOutput, &imagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", realInput, imagInput, realOutput, imagOutput);
+  realInput = *pSrcReal++;
+  imagInput = *pSrcImag++;
+  SDS_FixedDelayComplex (realInput, imagInput, &realOutput, &imagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", realInput, imagInput, realOutput, imagOutput);
+  realInput = *pSrcReal++;
+  imagInput = *pSrcImag++;
+  SDS_FixedDelayComplex (realInput, imagInput, &realOutput, &imagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", realInput, imagInput, realOutput, imagOutput);
+  realInput = *pSrcReal++;
+  imagInput = *pSrcImag++;
+  SDS_FixedDelayComplex (realInput, imagInput, &realOutput, &imagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", realInput, imagInput, realOutput, imagOutput);
+  realInput = *pSrcReal++;
+  imagInput = *pSrcImag++;
+  SDS_FixedDelayComplex (realInput, imagInput, &realOutput, &imagOutput, pRealDelayArray, pImagDelayArray, &DelayIndex, DELAY_LENGTH);
+  printf ("Input (Real) = %1.1lf, (Imag) = %1.1lf, Output (Real) = %1.1lf, (Imag) = %1.1lf\n", realInput, imagInput, realOutput, imagOutput);
 
 
+  pSrcReal = RealSrcArray;                                          // Reset real src array pointer
+  pSrcImag = ImagSrcArray;                                          // Reset imaginary src array pointer
 // Initialise the delay
   SIF_FixedDelayComplex (pRealDelayArray,                           // Pointer to real delay state array
                          pImagDelayArray,                           // Pointer to imaginary delay state array
@@ -191,8 +192,8 @@ int main (
 
   printf ("\nSDA_FixedDelayComplex\n");
 
-  for (i = 0; i < 20; i++) {
-    printf ("Input = (Real) %1.1lf, (Imag) %1.1lf, Output = (Real) %1.1lf, (Imag) %1.1lf\n", *pSrcReal++, *pSrcImag++, *pRealDst++, *pImagDst++);
+  for (SLArrayIndex_t i = 0; i < 20; i++) {
+    printf ("Input = (Real) %1.1lf, (Imag) %1.1lf, Output = (Real) %1.1lf, (Imag) %1.1lf\n", pSrcReal[i], pSrcImag[i], pRealDst[i], pImagDst[i]);
   }
 
 

@@ -1,5 +1,5 @@
 // SigLib Chirp z-Transform Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // The chirp z-transform algorithm is shown in the following diagram :
 //                 _____
@@ -29,7 +29,7 @@
 
 // Define constants
 #define DEBUG                   0                                   // Set to 0 for no debug
-#define SAMPLE_RATE             10000.                              // 10 KHz
+#define SAMPLE_RATE_HZ          10000.                              // 10 KHz
 #define INPUT_LENGTH            150                                 // Input dataset length
 #define OUTPUT_LENGTH           100
 #define FFT_LENGTH              256
@@ -78,7 +78,6 @@ int main (
 
   pResults = SUF_VectorArrayAllocate (OUTPUT_LENGTH);
   pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
-
 
   if ((NULL == pInput) || (NULL == pRealData) || (NULL == pImagData) ||
       (NULL == pAWNr) || (NULL == pAWNi) || (NULL == pvLr) || (NULL == pvLi) ||
@@ -158,7 +157,7 @@ int main (
   getchar ();                                                       // Clear the CR in the pipeline
 
 // Calculate A0 values
-  ContourStart = SCV_Polar (Radius, (StartFreq / SAMPLE_RATE) * SIGLIB_TWO_PI);
+  ContourStart = SCV_Polar (Radius, (StartFreq / SAMPLE_RATE_HZ) * SIGLIB_TWO_PI);
   temp = SCV_PolarToRectangular (ContourStart);
   A_1 = SCV_Inverse (temp);
 
@@ -166,8 +165,8 @@ int main (
   deltaomega = (EndFreq - StartFreq) / ((SLData_t) OUTPUT_LENGTH - SIGLIB_ONE);
   deltasigma = Decay;
 
-  phinc = SIGLIB_TWO * (-SIGLIB_PI) * deltaomega / SAMPLE_RATE;
-  w1inc = SDS_Exp (SIGLIB_TWO * SIGLIB_PI * deltasigma / SAMPLE_RATE);
+  phinc = SIGLIB_TWO * (-SIGLIB_PI) * deltaomega / SAMPLE_RATE_HZ;
+  w1inc = SDS_Exp (SIGLIB_TWO * SIGLIB_PI * deltasigma / SAMPLE_RATE_HZ);
   w2inc = SDS_Sqrt (w1inc);
 
 
@@ -248,7 +247,7 @@ int main (
                INPUT_LENGTH,                                        // Dataset length
                "Source Signal",                                     // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               (((double) INPUT_LENGTH - 1) / SAMPLE_RATE),         // Maximum X value
+               (((double) INPUT_LENGTH - 1) / SAMPLE_RATE_HZ),      // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -341,8 +340,6 @@ int main (
   printf ("\nHit <Carriage Return> to continue ....\n");
   getchar ();                                                       // Wait for <Carriage Return>
   gpc_close (h2DPlot);
-
-  fclose (fpInputFile);                                             // Close input file
 
   SUF_MemoryFree (pInput);                                          // Free memory
   SUF_MemoryFree (pRealData);

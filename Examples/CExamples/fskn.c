@@ -3,7 +3,7 @@
 // This Example simulates a sample rate of 8 KHz i.e. 6.667 samples per symbol.
 //     Uses the bit oriented FSK functions, which allow the independent tracking of the bits
 //     in the data stream.
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <siglib.h>                                                 // SigLib DSP library
@@ -18,14 +18,14 @@
 #define SAMPLE_LENGTH                   512
 #define NUMBER_OF_LOOPS                 4
 
-#define SAMPLE_RATE                     8000.
+#define SAMPLE_RATE_HZ                  8000.
 #define BAUD_RATE                       1200.
 
 #define MAX_SYMBOL_LENGTH               7                           // Maximum number of samples per symbol
 
 #define MAX_RX_STRING_LENGTH            80                          // Maximum length of an Rx string
 
-#define CARRIER_SINE_TABLE_SIZE         ((SLArrayIndex_t)(SAMPLE_RATE / CARRIER_TABLE_FREQ))  // Number of samples in each of cos and sine table
+#define CARRIER_SINE_TABLE_SIZE         ((SLArrayIndex_t)(SAMPLE_RATE_HZ / CARRIER_TABLE_FREQ)) // Number of samples in each of cos and sine table
                                                             // Must be an integer number of cycles
 
 #define RX_FILTER_LENGTH                ((2 * MAX_SYMBOL_LENGTH) + 1) // Rx Filter length
@@ -73,8 +73,6 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
   SLData_t        TimeIndex = SIGLIB_ZERO;
-
-  SLArrayIndex_t  i;
   SLFixData_t     LoopCount;
   SLFixData_t     TxBitIndex, RxBitIndex;
   SLData_t        FilterGain;
@@ -87,13 +85,13 @@ int main (
 // Generate the filter coeffs on the fly - this
 // makes them dependent on the application sample rate
   SIF_FirBandPassFilter (pRxLevelOneBPFilter,                       // Filter coeffs array
-                         CARRIER_FREQ_ONE / SAMPLE_RATE,            // Filter center frequency
-                         FILTER_BANDWIDTH / SAMPLE_RATE,            // Filter bandwidth
+                         CARRIER_FREQ_ONE / SAMPLE_RATE_HZ,         // Filter center frequency
+                         FILTER_BANDWIDTH / SAMPLE_RATE_HZ,         // Filter bandwidth
                          SIGLIB_HANNING,                            // Window type
                          RX_FILTER_LENGTH);                         // Filter length
   SIF_FirBandPassFilter (pRxLevelZeroBPFilter,                      // Filter coeffs array
-                         CARRIER_FREQ_ZERO / SAMPLE_RATE,           // Filter center frequency
-                         FILTER_BANDWIDTH / SAMPLE_RATE,            // Filter bandwidth
+                         CARRIER_FREQ_ZERO / SAMPLE_RATE_HZ,        // Filter center frequency
+                         FILTER_BANDWIDTH / SAMPLE_RATE_HZ,         // Filter bandwidth
                          SIGLIB_HANNING,                            // Window type
                          RX_FILTER_LENGTH);                         // Filter length
 
@@ -113,7 +111,7 @@ int main (
 
 
   SIF_FskModulate (pCarrierTable,                                   // Carrier sinusoid table
-                   (CARRIER_TABLE_FREQ / SAMPLE_RATE),              // Carrier phase increment per sample (radians / 2π)
+                   (CARRIER_TABLE_FREQ / SAMPLE_RATE_HZ),           // Carrier phase increment per sample (radians / 2π)
                    CARRIER_SINE_TABLE_SIZE);                        // Sine table size
 
 #if DISPLAY_INIT_GRAPHICS
@@ -134,7 +132,7 @@ int main (
                CARRIER_SINE_TABLE_SIZE,                             // Dataset length
                "Carrier Signal",                                    // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -146,7 +144,7 @@ int main (
                RX_FILTER_LENGTH,                                    // Dataset length
                "1300 Filter Coefficients",                          // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -155,7 +153,7 @@ int main (
                RX_FILTER_LENGTH,                                    // Dataset length
                "1300 Filter Coefficients",                          // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "red",                                               // Colour
                GPC_ADD);                                            // New graph
@@ -179,12 +177,12 @@ int main (
 // Clear receive string space
 // This is important because we are going to
 // be ORing in the received bit
-  for (i = 0; i < MAX_RX_STRING_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < MAX_RX_STRING_LENGTH; i++) {
     RxString[i] = 0;
   }
 
   for (LoopCount = 0; LoopCount < NUMBER_OF_LOOPS; LoopCount++) {
-    for (i = 0; i < SAMPLE_LENGTH;) {
+    for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH;) {
 // Calculate the nmber of samples per symbol for the current bit
       TxSamplesPerSymbol = SamplesPerSymbolTable[TxSamplesPerSymbolTableOffset];
       if (++TxSamplesPerSymbolTableOffset == SamplesPerSymbolTableLength) {
@@ -209,17 +207,17 @@ int main (
                  SAMPLE_LENGTH,                                     // Dataset length
                  "Modulated Signal",                                // Dataset title
                  TimeIndex,                                         // Minimum X value
-                 TimeIndex + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                 TimeIndex + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ), // Maximum X value
                  "lines",                                           // Graph type
                  "blue",                                            // Colour
                  GPC_NEW);                                          // New graph
-    TimeIndex += (SLData_t) SAMPLE_LENGTH / SAMPLE_RATE;
+    TimeIndex += (SLData_t) SAMPLE_LENGTH / SAMPLE_RATE_HZ;
     printf ("\nModulated Signal\nPlease hit <Carriage Return> to continue . . .");
     getchar ();
 #endif
 
 
-    for (i = 0; i < SAMPLE_LENGTH;) {
+    for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH;) {
 // Calculate the nmber of samples per symbol for the current bit
       RxSamplesPerSymbol = SamplesPerSymbolTable[RxSamplesPerSymbolTableOffset];
       if (++RxSamplesPerSymbolTableOffset == SamplesPerSymbolTableLength) {
@@ -266,12 +264,12 @@ int main (
 // Clear receive string space
 // This is important because we are going to
 // be ORing in the received bit
-  for (i = 0; i < MAX_RX_STRING_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < MAX_RX_STRING_LENGTH; i++) {
     RxString[i] = 0;
   }
 
   for (LoopCount = 0; LoopCount < NUMBER_OF_LOOPS; LoopCount++) {
-    for (i = 0; i < SAMPLE_LENGTH;) {
+    for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH;) {
 // Calculate the nmber of samples per symbol for the current bit
       TxSamplesPerSymbol = SamplesPerSymbolTable[TxSamplesPerSymbolTableOffset];
       if (++TxSamplesPerSymbolTableOffset == SamplesPerSymbolTableLength) {
@@ -301,16 +299,16 @@ int main (
                  SAMPLE_LENGTH,                                     // Dataset length
                  "Modulated Signal",                                // Dataset title
                  TimeIndex,                                         // Minimum X value
-                 TimeIndex + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                 TimeIndex + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ), // Maximum X value
                  "lines",                                           // Graph type
                  "blue",                                            // Colour
                  GPC_NEW);                                          // New graph
-    TimeIndex += (SLData_t) SAMPLE_LENGTH / SAMPLE_RATE;
+    TimeIndex += (SLData_t) SAMPLE_LENGTH / SAMPLE_RATE_HZ;
     printf ("\nModulated Signal\nPlease hit <Carriage Return> to continue . . .");
     getchar ();
 #endif
 
-    for (i = 0; i < SAMPLE_LENGTH;) {
+    for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH;) {
 // Calculate the nmber of samples per symbol for the current bit
       RxSamplesPerSymbol = SamplesPerSymbolTable[RxSamplesPerSymbolTableOffset];
       if (++RxSamplesPerSymbolTableOffset == SamplesPerSymbolTableLength) {

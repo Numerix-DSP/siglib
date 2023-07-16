@@ -1,5 +1,5 @@
 // SigLib - FIR Filter Design By The Window Method
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 //   +------+        +-------+        +--------+        +---------+
 //   | Freq |_______\| 128Pt |_______\| Array  |_______\| Hamming |
@@ -47,8 +47,6 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  SLArrayIndex_t  i;
-
 #if FILTER_NOISE
   time_t          ltime;
   time (&ltime);
@@ -90,7 +88,7 @@ int main (
 
 // Generate filter frequency response
 #if RAISED_COS                                                      // Raised cosine low pass filter
-  for (i = 0; i < FILTER_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < FILTER_LENGTH; i++) {
     *(pFilterCoeffs + i) = SIGLIB_HALF * (SIGLIB_ONE + SDS_Cos (SIGLIB_TWO * SIGLIB_PI * ((SLData_t) (i)) / ((SLData_t) (FILTER_LENGTH))));
   }
 
@@ -100,11 +98,11 @@ int main (
 
   *pFilterCoeffs = SIGLIB_ONE;                                      // Central frequency domain coefficient
 
-  for (i = 0; i < FILTER_LENGTH / 4; i++) {
+  for (SLArrayIndex_t i = 0; i < FILTER_LENGTH / 4; i++) {
     *(pFilterCoeffs + i + 1) = SIGLIB_ONE;
   }
 
-  for (i = 0; i < FILTER_LENGTH / 4; i++) {
+  for (SLArrayIndex_t i = 0; i < FILTER_LENGTH / 4; i++) {
     *(pFilterCoeffs + FILTER_LENGTH - i - 1) = SIGLIB_ONE;
   }
 #endif
@@ -190,7 +188,7 @@ int main (
            &FilterIndex,                                            // Pointer to filter index register
            FILTER_LENGTH);                                          // Filter length
 
-  for (i = 0; i < FFT_LENGTH; i++) {                                // Filter data
+  for (SLArrayIndex_t i = 0; i < FFT_LENGTH; i++) {                 // Filter data
 #if FILTER_NOISE
 // Generate a noisy signal to filter
     SrcData = (((SLData_t) rand ()) - 16383.) / 16384.;

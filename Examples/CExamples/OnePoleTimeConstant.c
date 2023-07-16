@@ -1,5 +1,5 @@
 // SigLib One-pole filer for given attack/decay rate example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -11,7 +11,7 @@
 #define ATTACK_DECAY_RATE   10.
 
 #define SAMPLE_LENGTH       1000
-#define SAMPLE_RATE         10000.
+#define SAMPLE_RATE_HZ      10000.
 
 // Declare global variables and arrays
 static SLData_t *pSrc, *pDst;
@@ -21,7 +21,7 @@ int main (
   void)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
-  SLData_t        OnePoleCoeff;
+  SLData_t        onePoleCoefficient;
   SLData_t        OnePoleFilterState;
 
 // Allocate memory
@@ -52,14 +52,14 @@ int main (
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
-  OnePoleCoeff = SDS_OnePoleTimeConstantToFilterCoeff (ATTACK_DECAY_RATE, // Attack / decay rate (ms)
-                                                       SAMPLE_RATE);  // Sample rate
+  onePoleCoefficient = SDS_OnePoleTimeConstantToFilterCoeff (ATTACK_DECAY_RATE, // Attack / decay rate (ms)
+                                                             SAMPLE_RATE_HZ); // Sample rate
 
   SIF_OnePole (&OnePoleFilterState);                                // Filter state
 
   SDA_OnePole (pSrc,                                                // Source data array pointer
                pDst,                                                // Destination data array pointer
-               OnePoleCoeff,                                        // Filter coefficient
+               onePoleCoefficient,                                  // Filter coefficient
                &OnePoleFilterState,                                 // Filter state
                SAMPLE_LENGTH);                                      // Dataset length
 
@@ -73,7 +73,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "Impulse Response (dB)",                             // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               (double) ((SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               (double) ((SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph

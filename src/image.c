@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : IMAGE.C       | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 13/09/1992
 Options   :                             | Latest Update : 17/11/2022
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Siglib library image processing routines.
 
@@ -45,14 +45,12 @@ Description : Siglib library image processing routines.
 
 #define LOCAL_DEBUG             0                                   // Debug mode - local debug switch. Set to '1' to enable debug
 
-
 // Include files
 #include <siglib.h>
 
 #ifdef _MSC_VER                                                     // Is the compiler Microsoft
 #include <malloc.h>
 #endif
-
 
 // Define constants
 #define SIGLIB_SOBEL_CLIP_LEVEL     (5*16)                          // Sobel filter clipping level
@@ -67,7 +65,7 @@ Description : Siglib library image processing routines.
 *   const SLImageData_t *pSrc,
 *   SLImageData_t *pDst,
 *   const SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
-*   SLImageData_t SIGLIB_HUGE_DECL *pImagImage,
+*   SLImageData_t *pImagImage,
 *   SLData_t * SIGLIB_PTR_DECL pRealArray,
 *   SLData_t * SIGLIB_PTR_DECL pImagArray,
 *   const SLData_t InvDimension,
@@ -85,10 +83,10 @@ Description : Siglib library image processing routines.
 ********************************************************/
 
 void SIGLIB_FUNC_DECL SIM_Fft2d (
-  const SLImageData_t SIGLIB_HUGE_DECL * pSrc,
-  SLImageData_t SIGLIB_HUGE_DECL * pDst,
+  const SLImageData_t * pSrc,
+  SLImageData_t * pDst,
   const SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
-  SLImageData_t SIGLIB_HUGE_DECL * pImagImage,
+  SLImageData_t * pImagImage,
   SLData_t * SIGLIB_PTR_DECL pRealArray,
   SLData_t * SIGLIB_PTR_DECL pImagArray,
   const SLData_t InvDimension,
@@ -96,12 +94,6 @@ void SIGLIB_FUNC_DECL SIM_Fft2d (
   const SLArrayIndex_t Dimension,
   const SLArrayIndex_t LogDimension)
 {
-  SLArrayIndex_t  i, j;
-  SLImageData_t SIGLIB_HUGE_DECL *pLocalDst = pDst;
-  SLImageData_t SIGLIB_HUGE_DECL *pLocalImagImage = pImagImage;
-  SLData_t       *pLocalRealArray = pRealArray;
-  SLData_t       *pLocalImagArray = pImagArray;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -113,10 +105,15 @@ void SIGLIB_FUNC_DECL SIM_Fft2d (
   SUF_ClearDebugfprintf ();
 #endif
 
+  SLImageData_t  *pLocalDst = pDst;
+  SLImageData_t  *pLocalImagImage = pImagImage;
+  SLData_t       *pLocalRealArray = pRealArray;
+  SLData_t       *pLocalImagArray = pImagArray;
+
 // Perform real FFTs along rows
-  for (j = 0; j < Dimension; j++) {
+  for (SLArrayIndex_t j = 0; j < Dimension; j++) {
 // Read line
-    for (i = 0; i < Dimension; i++) {
+    for (SLArrayIndex_t i = 0; i < Dimension; i++) {
       *pLocalRealArray++ = (SLData_t) (*pSrc++);
     }
     pLocalRealArray = pRealArray;                                   // Reset Data array pointers
@@ -142,14 +139,13 @@ void SIGLIB_FUNC_DECL SIM_Fft2d (
               SIGLIB_CLIP_BELOW,                                    // Clip type
               Dimension);                                           // Dataset length
 
-
 #if LOCAL_DEBUG                                                     // Debug - print out the intermediate results so that we can ensure that there is no overflow
     SUF_Debugfprintf ("First stage, j = %d, real max = %lf\n", (int) j, SDA_Max (pRealArray, Dimension));
     SUF_Debugfprintf ("First stage, j = %d, imag max = %lf\n", (int) j, SDA_Max (pImagArray, Dimension));
 #endif
 
 // Write line
-    for (i = 0; i < Dimension; i++) {
+    for (SLArrayIndex_t i = 0; i < Dimension; i++) {
       *pLocalDst++ = (SLImageData_t) * pLocalRealArray++;
       *pLocalImagImage++ = (SLImageData_t) * pLocalImagArray++;
     }
@@ -159,11 +155,11 @@ void SIGLIB_FUNC_DECL SIM_Fft2d (
   }
 
 // Perform complex FFTs down columns
-  for (j = 0; j < Dimension; j++) {
+  for (SLArrayIndex_t j = 0; j < Dimension; j++) {
 // Read columns
     pLocalDst = pDst + j;                                           // Get to top of columns
     pLocalImagImage = pImagImage + j;
-    for (i = 0; i < Dimension; i++) {
+    for (SLArrayIndex_t i = 0; i < Dimension; i++) {
       *pLocalRealArray++ = (SLData_t) (*pLocalDst);
       *pLocalImagArray++ = (SLData_t) (*pLocalImagImage);
       pLocalDst += Dimension;
@@ -191,7 +187,6 @@ void SIGLIB_FUNC_DECL SIM_Fft2d (
               SIGLIB_CLIP_BELOW,                                    // Clip type
               Dimension);                                           // Dataset length
 
-
 #if LOCAL_DEBUG                                                     // Debug - print out the intermediate results so that we can ensure that there is no overflow
     SUF_Debugfprintf ("Second stage, j = %d, real max = %lf, real min = %lf\n", (int) j, SDA_Max (pRealArray, Dimension),
                       SDA_Min (pRealArray, Dimension));
@@ -199,7 +194,7 @@ void SIGLIB_FUNC_DECL SIM_Fft2d (
 
 // Write column
     pLocalDst = pDst + j;                                           // Get to top of columns
-    for (i = 0; i < Dimension; i++) {
+    for (SLArrayIndex_t i = 0; i < Dimension; i++) {
       *pLocalDst = (SLImageData_t) (*pLocalRealArray++);
       pLocalDst += Dimension;
     }
@@ -257,16 +252,12 @@ void SIGLIB_FUNC_DECL SIF_Fft2d (
 ********************************************************/
 
 void SIGLIB_FUNC_DECL SIM_Conv3x3 (
-  const SLImageData_t SIGLIB_HUGE_DECL * pSrc,
-  SLImageData_t SIGLIB_HUGE_DECL * pDst,
+  const SLImageData_t * pSrc,
+  SLImageData_t * pDst,
   const SLData_t * SIGLIB_PTR_DECL pCoeffs,
   const SLArrayIndex_t line_length,
   const SLArrayIndex_t column_length)
 {
-  SLArrayIndex_t  i, j;
-  SLData_t        sum;
-  const SLImageData_t SIGLIB_HUGE_DECL *line1p, SIGLIB_HUGE_DECL * line2p, SIGLIB_HUGE_DECL * line3p;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -275,22 +266,22 @@ void SIGLIB_FUNC_DECL SIM_Conv3x3 (
 #endif
 #endif
 
-  line1p = pSrc;
-  line2p = pSrc + (line_length * sizeof (SLImageData_t));
-  line3p = line2p + (line_length * sizeof (SLImageData_t));
+  const SLImageData_t *line1p = pSrc;
+  const SLImageData_t *line2p = pSrc + (line_length * sizeof (SLImageData_t));
+  const SLImageData_t *line3p = line2p + (line_length * sizeof (SLImageData_t));
 
 // Clear first line
-  for (i = 0; i < line_length; i++) {
+  for (SLArrayIndex_t i = 0; i < line_length; i++) {
     *pDst++ = 0;
   }
 
-  for (i = 0; i < (column_length - 2); i++) {
+  for (SLArrayIndex_t i = 0; i < (column_length - 2); i++) {
     *pDst++ = 0;                                                    // Clear first column
 
-    for (j = 0; j < (line_length - 2); j++) {
+    for (SLArrayIndex_t j = 0; j < (line_length - 2); j++) {
 // At end of each block, reset line
 // pointers for next block
-      sum = (((SLData_t) * line1p++) * (*pCoeffs++));
+      SLData_t        sum = (((SLData_t) * line1p++) * (*pCoeffs++));
       sum += (((SLData_t) * line1p++) * (*pCoeffs++));
       sum += (((SLData_t) * line1p--) * (*pCoeffs++));
 
@@ -314,7 +305,7 @@ void SIGLIB_FUNC_DECL SIM_Conv3x3 (
     line3p += 2;
   }
 
-  for (i = 0; i < line_length; i++) {                               // Clear last line
+  for (SLArrayIndex_t i = 0; i < line_length; i++) {                // Clear last line
     *pDst++ = 0;
   }
 
@@ -341,15 +332,11 @@ void SIGLIB_FUNC_DECL SIM_Conv3x3 (
 ********************************************************/
 
 void SIGLIB_FUNC_DECL SIM_Sobel3x3 (
-  const SLImageData_t SIGLIB_HUGE_DECL * pSrc,
-  SLImageData_t SIGLIB_HUGE_DECL * pDst,
+  const SLImageData_t * pSrc,
+  SLImageData_t * pDst,
   const SLArrayIndex_t line_length,
   const SLArrayIndex_t column_length)
 {
-  SLArrayIndex_t  i, j;
-  SLData_t        SumX, SumY;
-  const SLImageData_t SIGLIB_HUGE_DECL *line1p, SIGLIB_HUGE_DECL * line2p, SIGLIB_HUGE_DECL * line3p;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -357,23 +344,23 @@ void SIGLIB_FUNC_DECL SIM_Sobel3x3 (
 #endif
 #endif
 
-  line1p = pSrc;
-  line2p = pSrc + (line_length * sizeof (SLImageData_t));
-  line3p = line2p + (line_length * sizeof (SLImageData_t));
+  const SLImageData_t *line1p = pSrc;
+  const SLImageData_t *line2p = pSrc + (line_length * sizeof (SLImageData_t));
+  const SLImageData_t *line3p = line2p + (line_length * sizeof (SLImageData_t));
 
 // Clear first line
-  for (i = 0; i < line_length; i++) {
+  for (SLArrayIndex_t i = 0; i < line_length; i++) {
     *pDst++ = 0;
   }
 
-  for (i = 0; i < (column_length - 2); i++) {
+  for (SLArrayIndex_t i = 0; i < (column_length - 2); i++) {
     *pDst++ = 0;                                                    // Clear first column
 
-    for (j = 0; j < (line_length - 2); j++) {
+    for (SLArrayIndex_t j = 0; j < (line_length - 2); j++) {
 // At end of each block, reset line
 // pointers for next block
-      SumY = ((SLData_t) (*line1p++) * SIGLIB_MINUS_ONE);
-      SumX = SumY;
+      SLData_t        SumY = ((SLData_t) (*line1p++) * SIGLIB_MINUS_ONE);
+      SLData_t        SumX = SumY;
 
       SumY += ((SLData_t) (*line1p++) * SIGLIB_MINUS_TWO);
 
@@ -420,7 +407,7 @@ void SIGLIB_FUNC_DECL SIM_Sobel3x3 (
     line3p += 2;
   }
 
-  for (i = 0; i < line_length; i++) {                               // Clear last line
+  for (SLArrayIndex_t i = 0; i < line_length; i++) {                // Clear last line
     *pDst++ = 0;
   }
 }                                                                   // End of SIM_Sobel3x3()
@@ -446,15 +433,11 @@ void SIGLIB_FUNC_DECL SIM_Sobel3x3 (
 ********************************************************/
 
 void SIGLIB_FUNC_DECL SIM_SobelVertical3x3 (
-  const SLImageData_t SIGLIB_HUGE_DECL * pSrc,
-  SLImageData_t SIGLIB_HUGE_DECL * pDst,
+  const SLImageData_t * pSrc,
+  SLImageData_t * pDst,
   const SLArrayIndex_t line_length,
   const SLArrayIndex_t column_length)
 {
-  SLArrayIndex_t  i, j;
-  SLData_t        Sum;
-  const SLImageData_t SIGLIB_HUGE_DECL *line1p, SIGLIB_HUGE_DECL * line2p, SIGLIB_HUGE_DECL * line3p;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -462,22 +445,22 @@ void SIGLIB_FUNC_DECL SIM_SobelVertical3x3 (
 #endif
 #endif
 
-  line1p = pSrc;
-  line2p = pSrc + (line_length * sizeof (SLImageData_t));
-  line3p = pSrc + 2 * (line_length * sizeof (SLImageData_t));
+  const SLImageData_t *line1p = pSrc;
+  const SLImageData_t *line2p = pSrc + (line_length * sizeof (SLImageData_t));
+  const SLImageData_t *line3p = pSrc + 2 * (line_length * sizeof (SLImageData_t));
 
 
-  for (i = 0; i < line_length; i++) {                               // Clear first line
+  for (SLArrayIndex_t i = 0; i < line_length; i++) {                // Clear first line
     *pDst++ = 0;
   }
 
-  for (i = 0; i < (column_length - 2); i++) {
+  for (SLArrayIndex_t i = 0; i < (column_length - 2); i++) {
     *pDst++ = 0;                                                    // Clear first column
 
-    for (j = 0; j < (line_length - 2); j++) {
+    for (SLArrayIndex_t j = 0; j < (line_length - 2); j++) {
 // At end of each block, reset line
 // pointers for next block
-      Sum = ((SLData_t) (*line1p++) * SIGLIB_MINUS_ONE);
+      SLData_t        Sum = ((SLData_t) (*line1p++) * SIGLIB_MINUS_ONE);
       line1p++;
       Sum += (SLData_t) (*line1p--);
 
@@ -511,7 +494,7 @@ void SIGLIB_FUNC_DECL SIM_SobelVertical3x3 (
     line3p += 2;
   }
 
-  for (i = 0; i < line_length; i++) {                               // Clear last line
+  for (SLArrayIndex_t i = 0; i < line_length; i++) {                // Clear last line
     *pDst++ = 0;
   }
 }                                                                   // End of SIM_SobelVertical3x3()
@@ -537,15 +520,11 @@ void SIGLIB_FUNC_DECL SIM_SobelVertical3x3 (
 ********************************************************/
 
 void SIGLIB_FUNC_DECL SIM_SobelHorizontal3x3 (
-  const SLImageData_t SIGLIB_HUGE_DECL * pSrc,
-  SLImageData_t SIGLIB_HUGE_DECL * pDst,
+  const SLImageData_t * pSrc,
+  SLImageData_t * pDst,
   const SLArrayIndex_t line_length,
   const SLArrayIndex_t column_length)
 {
-  SLArrayIndex_t  i, j;
-  SLData_t        Sum;
-  const SLImageData_t SIGLIB_HUGE_DECL *line1p, SIGLIB_HUGE_DECL * line3p;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -553,20 +532,20 @@ void SIGLIB_FUNC_DECL SIM_SobelHorizontal3x3 (
 #endif
 #endif
 
-  line1p = pSrc;
-  line3p = pSrc + 2 * (line_length * sizeof (SLImageData_t));
+  const SLImageData_t *line1p = pSrc;
+  const SLImageData_t *line3p = pSrc + 2 * (line_length * sizeof (SLImageData_t));
 
-  for (i = 0; i < line_length; i++) {                               // Clear first line
+  for (SLArrayIndex_t i = 0; i < line_length; i++) {                // Clear first line
     *pDst++ = 0;
   }
 
-  for (i = 0; i < (column_length - 2); i++) {
+  for (SLArrayIndex_t i = 0; i < (column_length - 2); i++) {
     *pDst++ = 0;                                                    // Clear first column
 
-    for (j = 0; j < (line_length - 2); j++) {
+    for (SLArrayIndex_t j = 0; j < (line_length - 2); j++) {
 // At end of each block, reset line
 // pointers for next block
-      Sum = ((SLData_t) (*line1p++) * SIGLIB_MINUS_ONE);
+      SLData_t        Sum = ((SLData_t) (*line1p++) * SIGLIB_MINUS_ONE);
       Sum += ((SLData_t) (*line1p++) * SIGLIB_MINUS_TWO);
       Sum += ((SLData_t) (*line1p--) * SIGLIB_MINUS_ONE);
 
@@ -595,7 +574,7 @@ void SIGLIB_FUNC_DECL SIM_SobelHorizontal3x3 (
     line3p += 2;
   }
 
-  for (i = 0; i < line_length; i++) {                               // Clear last line
+  for (SLArrayIndex_t i = 0; i < line_length; i++) {                // Clear last line
     *pDst++ = 0;
   }
 }                                                                   // End of SIM_SobelHorizontal3x3()
@@ -621,15 +600,11 @@ void SIGLIB_FUNC_DECL SIM_SobelHorizontal3x3 (
 ********************************************************/
 
 void SIGLIB_FUNC_DECL SIM_Median3x3 (
-  const SLImageData_t SIGLIB_HUGE_DECL * pSrc,
-  SLImageData_t SIGLIB_HUGE_DECL * pDst,
+  const SLImageData_t * pSrc,
+  SLImageData_t * pDst,
   const SLArrayIndex_t line_length,
   const SLArrayIndex_t column_length)
 {
-  SLArrayIndex_t  i, j;
-  const SLImageData_t SIGLIB_HUGE_DECL *line1p, SIGLIB_HUGE_DECL * line2p, SIGLIB_HUGE_DECL * line3p;
-  SLImageData_t   p1, p2, p3, p4, p5, p6;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -637,25 +612,25 @@ void SIGLIB_FUNC_DECL SIM_Median3x3 (
 #endif
 #endif
 
-  line1p = pSrc;
-  line2p = pSrc + (line_length * sizeof (SLImageData_t));
-  line3p = line2p + (line_length * sizeof (SLImageData_t));
+  const SLImageData_t *line1p = pSrc;
+  const SLImageData_t *line2p = pSrc + (line_length * sizeof (SLImageData_t));
+  const SLImageData_t *line3p = line2p + (line_length * sizeof (SLImageData_t));
 
-  for (i = 0; i < line_length; i++) {                               // Clear first line
+  for (SLArrayIndex_t i = 0; i < line_length; i++) {                // Clear first line
     *pDst++ = 0;
   }
 
-  for (i = 0; i < (column_length - 2); i++) {
+  for (SLArrayIndex_t i = 0; i < (column_length - 2); i++) {
     *pDst++ = 0;                                                    // Clear first column
 
-    for (j = 0; j < (line_length - 2); j++) {
-      p1 = *line1p++;
-      p2 = *line1p++;
-      p3 = *line1p--;
+    for (SLArrayIndex_t j = 0; j < (line_length - 2); j++) {
+      SLImageData_t   p1 = *line1p++;
+      SLImageData_t   p2 = *line1p++;
+      SLImageData_t   p3 = *line1p--;
 
-      p4 = *line2p++;
-      p5 = *line2p++;
-      p6 = *line2p--;
+      SLImageData_t   p4 = *line2p++;
+      SLImageData_t   p5 = *line2p++;
+      SLImageData_t   p6 = *line2p--;
 
       SDS_Sort6ImageData (p1, p2, p3, p4, p5, p6);
 
@@ -678,7 +653,7 @@ void SIGLIB_FUNC_DECL SIM_Median3x3 (
     line3p += 2;
   }
 
-  for (i = 0; i < line_length; i++) {                               // Clear last line
+  for (SLArrayIndex_t i = 0; i < line_length; i++) {                // Clear last line
     *pDst++ = 0;
   }
 }                                                                   // End of SIM_Median3x3()
@@ -746,7 +721,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_ConvCoefficients3x3 (
   }
 
   return (SIGLIB_NO_ERROR);
-
 }                                                                   // End of SIF_ConvCoefficients3x3()
 
 
@@ -768,21 +742,18 @@ SLError_t SIGLIB_FUNC_DECL SIF_ConvCoefficients3x3 (
 ********************************************************/
 
 SLImageData_t SIGLIB_FUNC_DECL SIM_Max (
-  const SLImageData_t SIGLIB_HUGE_DECL * pSrc,
+  const SLImageData_t * pSrc,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i;
-  SLImageData_t   max;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  max = *pSrc++;                                                    // Initial value
+  SLImageData_t   max = *pSrc++;                                    // Initial value
 
-  for (i = 1; i < ArrayLength; i++) {
+  for (SLArrayIndex_t i = 1; i < ArrayLength; i++) {
     if (*pSrc > max) {
       max = *pSrc;
     }
@@ -790,7 +761,6 @@ SLImageData_t SIGLIB_FUNC_DECL SIM_Max (
   }
 
   return (max);
-
 }                                                                   // End of SIM_Max()
 
 
@@ -812,21 +782,18 @@ SLImageData_t SIGLIB_FUNC_DECL SIM_Max (
 ********************************************************/
 
 SLImageData_t SIGLIB_FUNC_DECL SIM_Min (
-  const SLImageData_t SIGLIB_HUGE_DECL * pSrc,
+  const SLImageData_t * pSrc,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i;
-  SLImageData_t   min;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  min = *pSrc++;                                                    // Initial value
+  SLImageData_t   min = *pSrc++;                                    // Initial value
 
-  for (i = 1; i < ArrayLength; i++) {
+  for (SLArrayIndex_t i = 1; i < ArrayLength; i++) {
     if (*pSrc < min) {
       min = *pSrc;
     }
@@ -834,5 +801,4 @@ SLImageData_t SIGLIB_FUNC_DECL SIM_Min (
   }
 
   return (min);
-
 }                                                                   // End of SIM_Min()

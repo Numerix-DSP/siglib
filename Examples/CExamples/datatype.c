@@ -1,5 +1,5 @@
 // SigLib Datatype conversion example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -18,8 +18,6 @@ static SLFixData_t fixDataArrayDst[ARRAY_LENGTH];
 int main (
   void)
 {
-  SLArrayIndex_t  i;
-
   printf ("\nThis example demonstrates the functions for converting from fixed point numbers to floating point\n");
   printf ("and vice versa.\n\n");
   printf ("For run-time performance reasons these functions do not verify the validity of the data word lengths.\n");
@@ -35,7 +33,7 @@ int main (
                        fixDataArrayDst,                             // Pointer to destination array
                        ARRAY_LENGTH);                               // Array length
 
-  for (i = 0; i < ARRAY_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < ARRAY_LENGTH; i++) {
     printf ("SDA_SigLibDataToFix : %lf = %d\n", dataArraySrc[i], fixDataArrayDst[i]);
   }
   printf ("\n");
@@ -44,7 +42,7 @@ int main (
                        dataArrayDst,                                // Pointer to destination array
                        ARRAY_LENGTH);                               // Array length
 
-  for (i = 0; i < ARRAY_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < ARRAY_LENGTH; i++) {
     printf ("SDA_FixToSigLibData : %d = %lf\n", fixDataArraySrc[i], dataArrayDst[i]);
   }
   printf ("\n");
@@ -68,7 +66,7 @@ int main (
                                   24,                               // n
                                   ARRAY_LENGTH);                    // Array length
 
-  for (i = 0; i < ARRAY_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < ARRAY_LENGTH; i++) {
     printf ("SDA_SigLibDataToQFormatInteger : %lf = %x\n", dataArraySrc[i], fixDataArrayDst[i]);
   }
   printf ("\n");
@@ -78,7 +76,7 @@ int main (
                                   24,                               // n
                                   ARRAY_LENGTH);                    // Array length
 
-  for (i = 0; i < ARRAY_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < ARRAY_LENGTH; i++) {
     printf ("SDA_QFormatIntegerToSigLibData : %x = %lf\n", qFormatDataArraySrc[i], dataArrayDst[i]);
   }
   printf ("\n");

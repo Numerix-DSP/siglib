@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : siglib.h      | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.41         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 13/09/1992
 Options   :                             | Latest Update : 06/06/2023
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Header file for SigLib DSP library
 
@@ -44,8 +44,10 @@ Update history :
 #ifndef _HP_VEE                                                     // The following functionality is not supported by VEE
 
 #define SIGLIB                          1                           // Indicates SigLib is being used
-#define SIGLIB_VERSION                  10.41                       // Indicates SigLib version being used
-#define SIGLIB_ENABLE_DEBUG_FPRINTF     0                           // Set to 1 to enable SUF_Debugfprintf functions in some SigLib functions
+#define SIGLIB_VERSION                  10.51                       // Indicates SigLib version being used
+#ifndef SIGLIB_ENABLE_DEBUG_LOGGING
+#define SIGLIB_ENABLE_DEBUG_LOGGING   0                             // Set to 1 to enable SUF_Debugfprintf functions in some SigLib functions
+#endif
 #define SIGLIB_LOG_FILE                 "siglib_debug.log"          // Filename for SigLib logging functions
 
 
@@ -91,8 +93,6 @@ Update history :
 #define SLInt64_t               long long
 #define SLChar_t                int
 #define SIGLIB_FUNC_DECL        _stdcall
-#define SIGLIB_HUGE_ARRAYS      0
-#define SIGLIB_HUGE_DECL
 
 #endif                                                              // End of #ifndef _HP_VEE
 
@@ -217,32 +217,32 @@ extern          "C" {
   const SLArrayIndex_t);
 
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMReadData (
-  SLData_t * SIGLIB_PTR_DECL BPtr,
-  FILE * p_ioFile,
-  const enum SLEndianType_t endianMode,
-  const SLArrayIndex_t wordLength,
-  const SLArrayIndex_t arrayLength);                                // Functions for reading and writing .pcm files
+  SLData_t SIGLIB_OUTPUT_PTR_DECL *,
+  FILE *,
+  const enum SLEndianType_t,
+  const SLArrayIndex_t,
+  const SLArrayIndex_t);                                            // Functions for reading and writing .pcm files
 
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMWriteData (
-  const SLData_t * SIGLIB_PTR_DECL BPtr,
-  FILE * p_ioFile,
-  const enum SLEndianType_t endianMode,
-  const SLArrayIndex_t wordLength,
-  const SLArrayIndex_t arrayLength);
+  const SLData_t SIGLIB_INPUT_PTR_DECL *,
+  FILE *,
+  const enum SLEndianType_t,
+  const SLArrayIndex_t,
+  const SLArrayIndex_t);
 
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMReadFile (
-  SLData_t * SIGLIB_PTR_DECL BPtr,
-  const char *filename,
-  const enum SLEndianType_t endianMode,
-  const SLArrayIndex_t wordLength,
-  const SLArrayIndex_t arrayLength);
+  SLData_t SIGLIB_OUTPUT_PTR_DECL *,
+  const char *,
+  const enum SLEndianType_t,
+  const SLArrayIndex_t,
+  const SLArrayIndex_t);
 
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMWriteFile (
-  const SLData_t * SIGLIB_PTR_DECL BPtr,
-  const char *filename,
-  const enum SLEndianType_t endianMode,
+  const SLData_t SIGLIB_INPUT_PTR_DECL *,
+  const char *,
+  const enum SLEndianType_t,
   const char wordLength,
-  const SLArrayIndex_t arrayLength);
+  const SLArrayIndex_t);
 
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadData (
   SLData_t SIGLIB_OUTPUT_PTR_DECL *,
@@ -1280,7 +1280,7 @@ extern          "C" {
   const SLData_t,                                                   // Contour decay rate
   const SLData_t,                                                   // Contour start frequency
   const SLData_t,                                                   // Contour end frequency
-  const SLData_t,                                                   // System sample rate
+  const SLData_t,                                                   // Sample rate (Hz)
   const SLArrayIndex_t,                                             // Source array lengths
   const SLArrayIndex_t,                                             // Destination array lengths
   const SLArrayIndex_t,                                             // FFT length
@@ -1626,7 +1626,7 @@ extern          "C" {
   SLData_t,                                                         // Stop-band cut off frequency
   SLData_t,                                                         // Pass-band ripple
   SLData_t,                                                         // Stop-band attenuation
-  SLData_t);                                                        // Sample rate
+  SLData_t);                                                        // Sample rate (Hz)
 
   void SIGLIB_FUNC_DECL SIF_FirMatchedFilter (
   SLData_t * SIGLIB_INPUT_PTR_DECL,                                 // Source signal
@@ -1820,7 +1820,7 @@ extern          "C" {
   const SLComplexRect_s * SIGLIB_INPUT_PTR_DECL,                    // S-plane poles
   SLComplexRect_s * SIGLIB_OUTPUT_PTR_DECL,                         // Z-plane zeros
   SLComplexRect_s * SIGLIB_OUTPUT_PTR_DECL,                         // Z-plane poles
-  const SLData_t,                                                   // Sample rate
+  const SLData_t,                                                   // Sample rate (Hz)
   const SLData_t,                                                   // Pre-warp frequency
   const SLArrayIndex_t,                                             // Pre-warp switch
   const SLArrayIndex_t,                                             // Number of zeros
@@ -1828,14 +1828,14 @@ extern          "C" {
 
   SLData_t SIGLIB_FUNC_DECL SDS_PreWarp (
   const SLData_t,                                                   // Desired frequency
-  const SLData_t);                                                  // Sample rate
+  const SLData_t);                                                  // Sample rate (Hz)
 
   void SIGLIB_FUNC_DECL SDA_MatchedZTransform (
   const SLComplexRect_s * SIGLIB_INPUT_PTR_DECL,                    // S-plane zeros
   const SLComplexRect_s * SIGLIB_INPUT_PTR_DECL,                    // S-plane poles
   SLComplexRect_s * SIGLIB_OUTPUT_PTR_DECL,                         // Z-plane zeros
   SLComplexRect_s * SIGLIB_OUTPUT_PTR_DECL,                         // Z-plane poles
-  const SLData_t,                                                   // Sample rate
+  const SLData_t,                                                   // Sample rate (Hz)
   const SLArrayIndex_t,                                             // Number of zeros
   const SLArrayIndex_t);                                            // Number of poles
 
@@ -1860,7 +1860,7 @@ extern          "C" {
   SLComplexRect_s * SIGLIB_OUTPUT_PTR_DECL,                         // Destination Z-plane poles
   const SLData_t,                                                   // Source cut-off frequency
   const SLData_t,                                                   // Destination cut-off frequency
-  const SLData_t,                                                   // System sample rate
+  const SLData_t,                                                   // Sample rate (Hz)
   const SLArrayIndex_t,                                             // Number of zeros in input and output
   const SLArrayIndex_t);                                            // Number of poles in input and output
 
@@ -1871,7 +1871,7 @@ extern          "C" {
   SLComplexRect_s * SIGLIB_OUTPUT_PTR_DECL,                         // Destination Z-plane poles
   const SLData_t,                                                   // Source cut-off frequency
   const SLData_t,                                                   // Destination cut-off frequency
-  const SLData_t,                                                   // System sample rate
+  const SLData_t,                                                   // Sample rate (Hz)
   const SLArrayIndex_t,                                             // Number of zeros in input and output
   const SLArrayIndex_t);                                            // Number of poles in input and output
 
@@ -1883,7 +1883,7 @@ extern          "C" {
   const SLData_t,                                                   // Source cut-off frequency
   const SLData_t,                                                   // Destination lower cut-off frequency
   const SLData_t,                                                   // Destination upper cut-off frequency
-  const SLData_t,                                                   // System sample rate
+  const SLData_t,                                                   // Sample rate (Hz)
   const SLArrayIndex_t,                                             // Number of zeros in input and output
   const SLArrayIndex_t);                                            // Number of poles in input and output
 
@@ -1895,7 +1895,7 @@ extern          "C" {
   const SLData_t,                                                   // Source cut-off frequency
   const SLData_t,                                                   // Destination lower cut-off frequency
   const SLData_t,                                                   // Destination upper cut-off frequency
-  const SLData_t,                                                   // System sample rate
+  const SLData_t,                                                   // Sample rate (Hz)
   const SLArrayIndex_t,                                             // Number of zeros in input and output
   const SLArrayIndex_t);                                            // Number of poles in input and output
 
@@ -1992,6 +1992,18 @@ extern          "C" {
   SLData_t *,                                                       // Filter state
   const SLArrayIndex_t);                                            // Array length
 
+  SLData_t SIGLIB_FUNC_DECL SDS_OnePoleEWMA (
+  const SLData_t,                                                   // Input data
+  const SLData_t,                                                   // Filter alpha
+  SLData_t *);                                                      // Filter state
+
+  void SIGLIB_FUNC_DECL SDA_OnePoleEWMA (
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to input data
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination array
+  const SLData_t,                                                   // Filter alpha
+  SLData_t *,                                                       // Filter state
+  const SLArrayIndex_t);                                            // Array length
+
   void SIGLIB_FUNC_DECL SDA_OnePolePerSample (
   const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to input data
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination array
@@ -2035,15 +2047,15 @@ extern          "C" {
 
   SLData_t        SDS_OnePoleTimeConstantToFilterCoeff (
   const SLData_t,                                                   // Attack / decay time period (ms)
-  const SLData_t);                                                  // Sample rate
+  const SLData_t);                                                  // Sample rate (Hz)
 
   SLData_t        SDS_OnePoleCutOffFrequencyToFilterCoeff (
   const SLData_t,                                                   // Cut-off frequency
-  const SLData_t);                                                  // Sample rate
+  const SLData_t);                                                  // Sample rate (Hz)
 
   SLData_t        SDS_OnePoleHighPassCutOffFrequencyToFilterCoeff (
   const SLData_t,                                                   // Cut-off frequency
-  const SLData_t);                                                  // Sample rate
+  const SLData_t);                                                  // Sample rate (Hz)
 
   void SIGLIB_FUNC_DECL SIF_AllPole (
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to state array
@@ -2099,7 +2111,7 @@ extern          "C" {
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Destination coefficients
   const SLData_t,                                                   // Frequency # 1
   const SLData_t,                                                   // Frequency # 2
-  const SLData_t,                                                   // Sample rate
+  const SLData_t,                                                   // Sample rate (Hz)
   const SLArrayIndex_t);                                            // Number of biquads
 
   SLData_t SIGLIB_FUNC_DECL SDA_IirLpHpShift (
@@ -2107,7 +2119,7 @@ extern          "C" {
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Destination coefficients
   const SLData_t,                                                   // Frequency # 1
   const SLData_t,                                                   // Frequency # 2
-  const SLData_t,                                                   // Sample rate
+  const SLData_t,                                                   // Sample rate (Hz)
   const SLArrayIndex_t);                                            // Number of biquads
 
   void SIGLIB_FUNC_DECL SIF_Iir2PoleLpf (
@@ -2244,13 +2256,13 @@ extern          "C" {
   const SLArrayIndex_t);                                            // Number of denominator coefficients
 
   SLArrayIndex_t SIGLIB_FUNC_DECL SUF_EstimateBPFilterLength (
-  const SLData_t,                                                   // Sample rate
+  const SLData_t,                                                   // Sample rate (Hz)
   const SLData_t,                                                   // Centre frequency
   const SLArrayIndex_t,                                             // Minimum filter length
   const SLArrayIndex_t);                                            // Maximum filter length
 
   void SIGLIB_FUNC_DECL SUF_EstimateBPFilterError (
-  const SLData_t,                                                   // Sample rate
+  const SLData_t,                                                   // Sample rate (Hz)
   const SLData_t,                                                   // Centre frequency
   const SLArrayIndex_t,                                             // Minimum filter length
   const SLArrayIndex_t,                                             // Maximum filter length
@@ -2313,7 +2325,7 @@ extern          "C" {
   const SLData_t,                                                   // Calculation start angle (Degrees)
   const SLData_t,                                                   // Calculation end angle (Degrees)
   const SLFixData_t,                                                // Number of angles to calculate
-  const SLData_t);                                                  // Sample rate
+  const SLData_t);                                                  // Sample rate (Hz)
 
   void SIGLIB_FUNC_DECL SDA_MicrophoneArrayBeamPatternLinear (
   const SLFixData_t,                                                // Number of microphones
@@ -2325,7 +2337,7 @@ extern          "C" {
   const SLData_t,                                                   // Calculation start angle (Degrees)
   const SLData_t,                                                   // Calculation end angle (Degrees)
   const SLFixData_t,                                                // Number of angles to calculate
-  const SLData_t);                                                  // Sample rate
+  const SLData_t);                                                  // Sample rate (Hz)
 #endif                                                              // End of #ifndef _HP_VEE
 
   SLData_t SIGLIB_FUNC_DECL SDS_TemperatureToSpeedOfSoundInAir (
@@ -2669,10 +2681,10 @@ extern          "C" {
 // Image processing functions - image.c
 
   void SIGLIB_FUNC_DECL SIM_Fft2d (
-  const SLImageData_t SIGLIB_HUGE_DECL * SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
-  SLImageData_t SIGLIB_HUGE_DECL * SIGLIB_OUTPUT_PTR_DECL,          // Pointer to destination array
+  const SLImageData_t * SIGLIB_INPUT_PTR_DECL,                      // Pointer to source array
+  SLImageData_t * SIGLIB_OUTPUT_PTR_DECL,                           // Pointer to destination array
   const SLData_t * SIGLIB_OUTPUT_PTR_DECL,                          // Pointer to FFT coefficients
-  SLImageData_t SIGLIB_HUGE_DECL * SIGLIB_OUTPUT_PTR_DECL,          // Pointer to FFT calculation array
+  SLImageData_t * SIGLIB_OUTPUT_PTR_DECL,                           // Pointer to FFT calculation array
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to real FFT calculation array
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to imaginary FFT calculation array
   const SLData_t,                                                   // 1.0 / Dimension - used for FFT scaling
@@ -2686,33 +2698,33 @@ extern          "C" {
   const SLArrayIndex_t);                                            // FFT length
 
   void SIGLIB_FUNC_DECL SIM_Conv3x3 (
-  const SLImageData_t SIGLIB_HUGE_DECL * SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
-  SLImageData_t SIGLIB_HUGE_DECL * SIGLIB_OUTPUT_PTR_DECL,          // Pointer to destination array
+  const SLImageData_t * SIGLIB_INPUT_PTR_DECL,                      // Pointer to source array
+  SLImageData_t * SIGLIB_OUTPUT_PTR_DECL,                           // Pointer to destination array
   const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to coefficients array
   const SLArrayIndex_t,                                             // Line length
   const SLArrayIndex_t);                                            // Column length
 
   void SIGLIB_FUNC_DECL SIM_Sobel3x3 (
-  const SLImageData_t SIGLIB_HUGE_DECL * SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
-  SLImageData_t SIGLIB_HUGE_DECL * SIGLIB_OUTPUT_PTR_DECL,          // Pointer to destination array
+  const SLImageData_t * SIGLIB_INPUT_PTR_DECL,                      // Pointer to source array
+  SLImageData_t * SIGLIB_OUTPUT_PTR_DECL,                           // Pointer to destination array
   const SLArrayIndex_t,                                             // Line length
   const SLArrayIndex_t);                                            // Column length
 
   void SIGLIB_FUNC_DECL SIM_SobelVertical3x3 (
-  const SLImageData_t SIGLIB_HUGE_DECL * SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
-  SLImageData_t SIGLIB_HUGE_DECL * SIGLIB_OUTPUT_PTR_DECL,          // Pointer to destination array
+  const SLImageData_t * SIGLIB_INPUT_PTR_DECL,                      // Pointer to source array
+  SLImageData_t * SIGLIB_OUTPUT_PTR_DECL,                           // Pointer to destination array
   const SLArrayIndex_t,                                             // Line length
   const SLArrayIndex_t);                                            // Column length
 
   void SIGLIB_FUNC_DECL SIM_SobelHorizontal3x3 (
-  const SLImageData_t SIGLIB_HUGE_DECL * SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
-  SLImageData_t SIGLIB_HUGE_DECL * SIGLIB_OUTPUT_PTR_DECL,          // Pointer to destination array
+  const SLImageData_t * SIGLIB_INPUT_PTR_DECL,                      // Pointer to source array
+  SLImageData_t * SIGLIB_OUTPUT_PTR_DECL,                           // Pointer to destination array
   const SLArrayIndex_t,                                             // Line length
   const SLArrayIndex_t);                                            // Column length
 
   void SIGLIB_FUNC_DECL SIM_Median3x3 (
-  const SLImageData_t SIGLIB_HUGE_DECL * SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
-  SLImageData_t SIGLIB_HUGE_DECL * SIGLIB_OUTPUT_PTR_DECL,          // Pointer to destination array
+  const SLImageData_t * SIGLIB_INPUT_PTR_DECL,                      // Pointer to source array
+  SLImageData_t * SIGLIB_OUTPUT_PTR_DECL,                           // Pointer to destination array
   const SLArrayIndex_t,                                             // Line length
   const SLArrayIndex_t);                                            // Column length
 
@@ -2721,11 +2733,11 @@ extern          "C" {
   enum SL3x3Coeffs_t);                                              // Filter type
 
   SLImageData_t SIGLIB_FUNC_DECL SIM_Max (
-  const SLImageData_t SIGLIB_HUGE_DECL * SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
+  const SLImageData_t * SIGLIB_INPUT_PTR_DECL,                      // Pointer to source array
   const SLArrayIndex_t);                                            // Array length
 
   SLImageData_t SIGLIB_FUNC_DECL SIM_Min (
-  const SLImageData_t SIGLIB_HUGE_DECL * SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
+  const SLImageData_t * SIGLIB_INPUT_PTR_DECL,                      // Pointer to source array
   const SLArrayIndex_t);                                            // Array length
 
 
@@ -3868,23 +3880,23 @@ extern          "C" {
   SLFixData_t *);                                                   // Previous Rx di-bit pointer
 
   void SIGLIB_FUNC_DECL SIF_DifferentialEncoder (
-  SLArrayIndex_t * SIGLIB_PTR_DECL,                                 // Pointer to encoder look-up-table
-  SLArrayIndex_t * SIGLIB_PTR_DECL,                                 // Pointer to decoder look-up-table
+  SLArrayIndex_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to encoder look-up-table
+  SLArrayIndex_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to decoder look-up-table
   const SLFixData_t);                                               // Word length to encode / decode
 
   SLFixData_t SIGLIB_FUNC_DECL SDS_DifferentialEncode (
   const SLFixData_t,                                                // Source word to encode
-  SLFixData_t * SIGLIB_PTR_DECL,                                    // Encoder / decoder table
+  SLFixData_t * SIGLIB_INPUT_PTR_DECL,                              // Encoder / decoder table
   const SLFixData_t,                                                // Word length to encode / decode
   const SLFixData_t,                                                // Bit mask for given word length
-  SLFixData_t * SIGLIB_PTR_DECL);                                   // Previously encoded word
+  SLFixData_t * SIGLIB_INOUT_PTR_DECL);                             // Previously encoded word
 
   SLFixData_t SIGLIB_FUNC_DECL SDS_DifferentialDecode (
   const SLFixData_t,                                                // Source word to encode
-  SLFixData_t * SIGLIB_PTR_DECL,                                    // Encoder / decoder table
+  SLFixData_t * SIGLIB_INPUT_PTR_DECL,                              // Encoder / decoder table
   const SLFixData_t,                                                // Word length to encode / decode
   const SLFixData_t,                                                // Bit mask for given word length
-  SLFixData_t * SIGLIB_PTR_DECL);                                   // Previously decoded word
+  SLFixData_t * SIGLIB_INOUT_PTR_DECL);                             // Previously decoded word
 
   void SIGLIB_FUNC_DECL SIF_FskModulate (
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Carrier sinusoid table
@@ -4776,7 +4788,7 @@ extern          "C" {
 
   void SIGLIB_FUNC_DECL SIF_DtmfGenerate (
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Generator coefficient look up table pointer
-  const SLData_t);                                                  // Sample rate
+  const SLData_t);                                                  // Sample rate (Hz)
 
   SLError_t SIGLIB_FUNC_DECL SDA_DtmfGenerate (
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Destination array pointer
@@ -4786,7 +4798,7 @@ extern          "C" {
   const SLArrayIndex_t);                                            // Array length
 
   void SIGLIB_FUNC_DECL SIF_DtmfDetect (
-  const SLData_t,                                                   // Sample rate
+  const SLData_t,                                                   // Sample rate (Hz)
   const SLArrayIndex_t);                                            // Array length
 
   SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetect (
@@ -5140,54 +5152,54 @@ extern          "C" {
   const SLArrayIndex_t);                                            // Array length
 
   void SIGLIB_FUNC_DECL SIF_Envelope (
-  SLData_t * SIGLIB_PTR_DECL);                                      // Pointer to filter state variable
+  SLData_t * SIGLIB_INOUT_PTR_DECL);                                // Pointer to filter state variable
 
   SLData_t SIGLIB_FUNC_DECL SDS_Envelope (
   const SLData_t,                                                   // Source sample
   const SLData_t,                                                   // Attack coefficient
   const SLData_t,                                                   // Decay coefficient
-  SLData_t * SIGLIB_PTR_DECL);                                      // Pointer to filter state variable
+  SLData_t * SIGLIB_INOUT_PTR_DECL);                                // Pointer to filter state variable
 
   void SIGLIB_FUNC_DECL SDA_Envelope (
-  const SLData_t * SIGLIB_PTR_DECL,                                 // Pointer to source array
-  SLData_t * SIGLIB_PTR_DECL,                                       // Pointer to destination array
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to source array
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination array
   const SLData_t,                                                   // Attack coefficient
   const SLData_t,                                                   // Decay coefficient
-  SLData_t * SIGLIB_PTR_DECL,                                       // Pointer to filter state variable
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // Pointer to filter state variable
   const SLArrayIndex_t);                                            // Input array length
 
   void SIGLIB_FUNC_DECL SIF_EnvelopeRMS (
-  SLData_t * SIGLIB_PTR_DECL);                                      // Pointer to filter state variable
+  SLData_t * SIGLIB_INPUT_PTR_DECL);                                // Pointer to filter state variable
 
   SLData_t SIGLIB_FUNC_DECL SDS_EnvelopeRMS (
   const SLData_t,                                                   // Source sample
   const SLData_t,                                                   // Attack coefficient
   const SLData_t,                                                   // Decay coefficient
-  SLData_t * SIGLIB_PTR_DECL);                                      // Pointer to filter state variable
+  SLData_t * SIGLIB_INPUT_PTR_DECL);                                // Pointer to filter state variable
 
   void SIGLIB_FUNC_DECL SDA_EnvelopeRMS (
-  const SLData_t * SIGLIB_PTR_DECL,                                 // Pointer to source array
-  SLData_t * SIGLIB_PTR_DECL,                                       // Pointer to destination array
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to source array
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination array
   const SLData_t,                                                   // Attack coefficient
   const SLData_t,                                                   // Decay coefficient
-  SLData_t * SIGLIB_PTR_DECL,                                       // Pointer to filter state variable
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // Pointer to filter state variable
   const SLArrayIndex_t);                                            // Input array length
 
   void SIGLIB_FUNC_DECL SIF_EnvelopeHilbert (
-  SLData_t * SIGLIB_PTR_DECL,                                       // Pointer to Hilbert transform filter coefficient array
-  SLData_t * SIGLIB_PTR_DECL,                                       // Pointer to filter state array
+  SLData_t * SIGLIB_INPUT_PTR_DECL,                                 // Pointer to Hilbert transform filter coefficient array
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // Pointer to filter state array
   SLArrayIndex_t *,                                                 // Pointer to filter index
-  SLData_t * SIGLIB_PTR_DECL,                                       // Pointer to filter delay compensator array
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // Pointer to filter delay compensator array
   const SLArrayIndex_t,                                             // Filter length
   const SLArrayIndex_t,                                             // Filter group delay
   SLData_t *);                                                      // Pointer to one-pole state variable
 
   SLData_t SIGLIB_FUNC_DECL SDS_EnvelopeHilbert (
   const SLData_t,                                                   // Source sample
-  const SLData_t * SIGLIB_PTR_DECL,                                 // Pointer to Hilbert transform filter coefficient array
-  SLData_t * SIGLIB_PTR_DECL,                                       // Pointer to filter state array
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to Hilbert transform filter coefficient array
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // Pointer to filter state array
   SLArrayIndex_t *,                                                 // Pointer to filter index
-  SLData_t * SIGLIB_PTR_DECL,                                       // Pointer to filter delay compensator array
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // Pointer to filter delay compensator array
   SLArrayIndex_t *,                                                 // Pointer to delay index
   const SLArrayIndex_t,                                             // Filter length
   const SLArrayIndex_t,                                             // Filter group delay
@@ -5195,14 +5207,14 @@ extern          "C" {
   SLData_t *);                                                      // Pointer to one-pole state variable
 
   void SIGLIB_FUNC_DECL SDA_EnvelopeHilbert (
-  const SLData_t * SIGLIB_PTR_DECL,                                 // Pointer to source array
-  SLData_t * SIGLIB_PTR_DECL,                                       // Pointer to destination array
-  const SLData_t * SIGLIB_PTR_DECL,                                 // Pointer to Hilbert transform filter coefficient array
-  SLData_t * SIGLIB_PTR_DECL,                                       // Pointer to filter state array
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to source array
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination array
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to Hilbert transform filter coefficient array
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // Pointer to filter state array
   SLArrayIndex_t *,                                                 // Pointer to filter index
-  SLData_t * SIGLIB_PTR_DECL,                                       // Pointer to temporary analytical signal array
-  SLData_t * SIGLIB_PTR_DECL,                                       // Pointer to filter delay compensator array
-  SLData_t * SIGLIB_PTR_DECL,                                       // Pointer to temporary delay array
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // Pointer to temporary analytical signal array
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // Pointer to filter delay compensator array
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // Pointer to temporary delay array
   const SLArrayIndex_t,                                             // Filter length
   const SLArrayIndex_t,                                             // Filter group delay
   const SLData_t,                                                   // One pole filter coefficient
@@ -5886,7 +5898,7 @@ extern          "C" {
   const SLData_t);                                                  // Zero dBm Level
 
   void SIGLIB_FUNC_DECL SDA_VoltageTodBm (
-  const SLData_t * SIGLIB_PTR_DECL,                                 // Pointer to source array
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to source array
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination array
   const SLData_t,                                                   // Zero dBm level
   const SLArrayIndex_t);                                            // Array lengths
@@ -5896,7 +5908,7 @@ extern          "C" {
   const SLData_t);                                                  // Zero dBm Level
 
   void SIGLIB_FUNC_DECL SDA_dBmToVoltage (
-  const SLData_t * SIGLIB_PTR_DECL,                                 // Pointer to source array
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to source array
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination array
   const SLData_t,                                                   // Zero dBm level
   const SLArrayIndex_t);                                            // Array lengths
@@ -5905,7 +5917,7 @@ extern          "C" {
   const SLData_t);                                                  // Linear voltage value
 
   void SIGLIB_FUNC_DECL SDA_VoltageTodB (
-  const SLData_t * SIGLIB_PTR_DECL,                                 // Pointer to source array
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to source array
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination array
   const SLArrayIndex_t);                                            // Array lengths
 
@@ -5913,7 +5925,7 @@ extern          "C" {
   const SLData_t);                                                  // dB value
 
   void SIGLIB_FUNC_DECL SDA_dBToVoltage (
-  const SLData_t * SIGLIB_PTR_DECL,                                 // Pointer to source array
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to source array
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination array
   const SLArrayIndex_t);                                            // Array lengths
 
@@ -5921,7 +5933,7 @@ extern          "C" {
   const SLData_t);                                                  // Linear power value
 
   void SIGLIB_FUNC_DECL SDA_PowerTodB (
-  const SLData_t * SIGLIB_PTR_DECL,                                 // Pointer to source array
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to source array
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination array
   const SLArrayIndex_t);                                            // Array lengths
 
@@ -5929,7 +5941,7 @@ extern          "C" {
   const SLData_t);                                                  // dB value
 
   void SIGLIB_FUNC_DECL SDA_dBToPower (
-  const SLData_t * SIGLIB_PTR_DECL,                                 // Pointer to source array
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to source array
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination array
   const SLArrayIndex_t);                                            // Array lengths
 
@@ -6143,7 +6155,7 @@ extern          "C" {
   SLData_t *,                                                       // Pointer to moving average sum
   SLData_t *,                                                       // Pointer to AGC gain
   const SLArrayIndex_t,                                             // Length of moving average state array
-  const SLArrayIndex_t);                                            // Length of input array
+  const SLArrayIndex_t);                                            // Array length
 
   void SIGLIB_FUNC_DECL SIF_AgcMeanSquared (
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Moving average state array
@@ -6168,7 +6180,70 @@ extern          "C" {
   SLData_t *,                                                       // Pointer to moving average sum
   SLData_t *,                                                       // Pointer to AGC gain
   const SLArrayIndex_t,                                             // Length of moving average state array
-  const SLArrayIndex_t);                                            // Length of input array
+  const SLArrayIndex_t);                                            // Array length
+
+  void SIGLIB_FUNC_DECL SIF_AgcEnvelopeDetector (
+  const SLData_t,                                                   // Envelope detector time constant
+  const SLData_t,                                                   // Sample rate
+  SLData_t *,                                                       // Pointer to One-pole filter state variable
+  SLData_t *,                                                       // Pointer to One-pole filter coefficient
+  SLData_t *);                                                      // Pointer to AGC gain variable
+
+  SLData_t SIGLIB_FUNC_DECL SDS_AgcEnvelopeDetector (
+  const SLData_t,                                                   // Source sample
+  const SLData_t,                                                   // AGC desired output level
+  const SLData_t,                                                   // AGC minimum threshold below which no gain control occurs
+  const SLData_t,                                                   // AGC slow attack sensitivity
+  const SLData_t,                                                   // AGC slow decay sensitivity
+  const SLData_t,                                                   // AGC fast attack sensitivity
+  const SLData_t,                                                   // AGC fast decay sensitivity
+  SLData_t *,                                                       // Pointer to One-pole filter state variable
+  const SLData_t,                                                   // One-pole filter coefficient
+  SLData_t *,                                                       // Pointer to AGC gain variable
+  const SLData_t,                                                   // AGC maximum gain value
+  const SLData_t);                                                  // AGC maximum attenuation value
+
+  void SIGLIB_FUNC_DECL SDA_AgcEnvelopeDetector (
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to source array
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination array
+  const SLData_t,                                                   // AGC desired output level
+  const SLData_t,                                                   // AGC minimum threshold below which no gain control occurs
+  const SLData_t,                                                   // AGC slow attack sensitivity
+  const SLData_t,                                                   // AGC slow decay sensitivity
+  const SLData_t,                                                   // AGC fast attack sensitivity
+  const SLData_t,                                                   // AGC fast decay sensitivity
+  SLData_t *,                                                       // Pointer to One-pole filter state variable
+  const SLData_t,                                                   // One-pole filter coefficient
+  SLData_t *,                                                       // Pointer to AGC gain variable
+  const SLData_t,                                                   // AGC maximum gain value
+  const SLData_t,                                                   // AGC maximum attenuation value
+  const SLArrayIndex_t);                                            // Array length
+
+  void SIGLIB_FUNC_DECL SIF_Drc (
+  const SLData_t,                                                   // Envelope detector time constant
+  const SLData_t,                                                   // Sample rate
+  SLData_t *,                                                       // Pointer to envelope follower One-pole filter state variable
+  SLData_t *);                                                      // Pointer to envelope follower One-pole filter coefficient
+
+  SLData_t SIGLIB_FUNC_DECL SDS_Drc (
+  const SLData_t,                                                   // Input sample
+  SLData_t *,                                                       // Pointer to envelope follower state variable
+  const SLData_t,                                                   // Envelope follower one-pole filter coefficient
+  const SLData_t,                                                   // Envelope follower threshold to enable DRC functionality
+  const SLDrcLevelGainTable *,                                      // Pointer to Thresholds/Gains table
+  const SLArrayIndex_t,                                             // Number of knees
+  const SLData_t);                                                  // Makeup gain
+
+  void SIGLIB_FUNC_DECL SDA_Drc (
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to source array
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination array
+  SLData_t *,                                                       // Pointer to envelope follower state variable
+  const SLData_t,                                                   // Envelope follower one-pole filter coefficient
+  const SLData_t,                                                   // Envelope follower threshold to enable DRC functionality
+  const SLDrcLevelGainTable *,                                      // Pointer to Thresholds/Gains table
+  const SLArrayIndex_t,                                             // Number of knees
+  const SLData_t,                                                   // Makeup gain
+  const SLArrayIndex_t);                                            // Array length
 
   void SIGLIB_FUNC_DECL SDA_GroupDelay (
   const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to source array
@@ -6517,7 +6592,7 @@ extern          "C" {
   const SLArrayIndex_t,                                             // Number of adjacent samples to search
   const SLData_t,                                                   // First order frequency
   const SLArrayIndex_t,                                             // FFT length
-  const SLData_t,                                                   // Sample period = 1/(Sample rate)
+  const SLData_t,                                                   // Sample period = 1/(Sample rate (Hz))
   const SLArrayIndex_t);                                            // Input array length
 
   SLData_t SIGLIB_FUNC_DECL SDA_SumLevel (

@@ -1,5 +1,5 @@
 // SigLib Echo / Reverb Generation Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -24,7 +24,6 @@ int main (
   void)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
-  SLFixData_t     i;
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Echo / Reverb Generation",                        // Plot title
@@ -52,7 +51,7 @@ int main (
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     pDst[i] = SDS_EchoGenerate (pSrc[i],                            // Sample
                                 EchoArray,                          // Pointer to echo state array
                                 &EchoArrayOffset,                   // Echo array data input location
@@ -101,7 +100,7 @@ int main (
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     pDst[i] = SDS_EchoGenerate (pSrc[i],                            // Sample
                                 EchoArray,                          // Pointer to echo state array
                                 &EchoArrayOffset,                   // Echo array data input location

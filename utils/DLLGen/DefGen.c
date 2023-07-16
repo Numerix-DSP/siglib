@@ -1,5 +1,5 @@
 // .DEF file generator. Takes functionList.txt and creates siglib.def
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 
@@ -21,10 +21,10 @@ char            InputString[100];
 
 char            header[] = (";**************************************************************************\r\n\
 ;File Name              : SIGLIB.DEF    | Author        : JOHN EDWARDS\r\n\
-;Siglib Library version : 10.00         | Modifications :\r\n\
+;Siglib Library version : 10.50         | Modifications :\r\n\
 ;-------------------------------------- +----------------------------------\r\n\
 ;Compiler : Microsoft Visual C++        | Start Date    : 16/11/1995\r\n\
-;                                       | Latest Update : 17/11/2020\r\n\
+;                                       | Latest Update : 17/06/2023\r\n\
 ;--------------------------------------------------------------------------\r\n\
 ;Support for SigLib is available via Email : support@numerix-dsp.com\r\n\
 ;\r\n\
@@ -46,11 +46,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 ;\r\n\
-;Copyright (C) 2023 Alpha Numerix All rights reserved.\r\n\
+;Copyright (C) 2023 Delta Numerix All rights reserved.\r\n\
 ;---------------------------------------------------------------------------\r\n\
 ;Description : DLL function definition file for SigLib DSP library\r\n\
 ;\r\n\
@@ -63,17 +63,12 @@ DESCRIPTION \"SigLib DLL Library\"\r\n\r\n\
 EXPORTS\r\n\r\n");
 
 
-int             main (
-  void);
-
-
 int main (
   void)
 {
   int             Index = 2;
-  int             i;
 
-  printf ("\r\nDefGen.exe - siglib.def file generation utility (C)  V2.00. Copyright (C) Alpha Numerix 2017. All rights reserved.\r\n");
+  printf ("\r\nDefGen.exe - siglib.def file generation utility (C)  V2.00. Copyright (C) Delta Numerix 2017. All rights reserved.\r\n");
 
   if ((IFPtr = fopen ("functionList.txt", "rb")) == NULL) {
     printf ("Can not open input data file %s\r\n", "siglib.dg");
@@ -86,7 +81,7 @@ int main (
     exit (-1);
   }
 
-  for (i = 0; i < (int) strlen (header); i++) {
+  for (int i = 0; i < (int) strlen (header); i++) {
     putc (header[i], OFPtr);                                        // Output header
   }
 
@@ -102,5 +97,4 @@ int main (
   fclose (OFPtr);
 
   return (0);
-
 }

@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Modem utility functions for SigLib DSP library.
 
@@ -40,7 +40,6 @@ Description : Modem utility functions for SigLib DSP library.
 #define SIGLIB_SRC_FILE_MODEM   1                                   // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
 
 /**/
 
@@ -73,7 +72,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_AsyncCharacterLength (
     OutputCharLength++;
   }
   return (OutputCharLength);
-}
+}                                                                   // End of SUF_AsyncCharacterLength()
 
 
 /**/
@@ -117,7 +116,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_SyncToAsyncConverter (
   const SLArrayIndex_t NumberOfStopBits,
   const SLArrayIndex_t ArrayLength)
 {
-  SLUFixData_t    i, j;
   SLArrayIndex_t  NumberOfOutputSequenceBits = NumberOfDataBits + 1 + NumberOfStopBits;
   SLUFixData_t    OutputWordCount = SIGLIB_AI_ZERO;
   SLUFixData_t    DstBitIndex = SIGLIB_UFIX_ZERO;
@@ -129,7 +127,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_SyncToAsyncConverter (
 
   *pDst = SIGLIB_AI_ZERO;                                           // Clear the first destination byte
 
-  for (i = 0; i < (SLUFixData_t) ArrayLength; i++) {
+  for (SLUFixData_t i = 0; i < (SLUFixData_t) ArrayLength; i++) {
     ParityCount = SIGLIB_AI_ZERO;                                   // Reset parity for each character
 
     DstBitIndex++;                                                  // Start bit is '0'
@@ -139,7 +137,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_SyncToAsyncConverter (
       OutputWordCount++;
     }
 
-    for (j = 0; j < (SLUFixData_t) NumberOfDataBits; j++) {
+    for (SLUFixData_t j = 0; j < (SLUFixData_t) NumberOfDataBits; j++) {
       if (((SLUFixData_t) * pSrc) & (SIGLIB_UFIX_ONE << j)) {
         *pDst = (SLUInt8_t) (((SLUFixData_t) * pDst) + ((SIGLIB_UFIX_ONE) << DstBitIndex));
         ParityCount++;
@@ -184,7 +182,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_SyncToAsyncConverter (
     }
 
 
-    for (j = 0; j < (SLUFixData_t) NumberOfStopBits; j++) {         // Add on stop bits
+    for (SLUFixData_t j = 0; j < (SLUFixData_t) NumberOfStopBits; j++) {  // Add on stop bits
       *pDst = (SLUInt8_t) (((SLUFixData_t) * pDst) + (SIGLIB_UFIX_ONE << DstBitIndex));
 
       DstBitIndex++;                                                // Increment output bit index
@@ -200,14 +198,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_SyncToAsyncConverter (
 
 // Pad the end of the last byte with 1111s
   if (DstBitIndex != SIGLIB_BYTE_LENGTH) {
-    for (j = DstBitIndex; j < (SLUFixData_t) SIGLIB_BYTE_LENGTH; j++) {
+    for (SLUFixData_t j = DstBitIndex; j < (SLUFixData_t) SIGLIB_BYTE_LENGTH; j++) {
       *pDst = (SLUInt8_t) (((SLUFixData_t) * pDst) + ((SIGLIB_UFIX_ONE) << j));
     }
     OutputWordCount++;                                              // Log the last output character in the sequence
   }
 
   return (OutputWordCount);
-}
+}                                                                   // End of SDA_SyncToAsyncConverter()
 
 
 /**/
@@ -252,7 +250,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AsyncToSyncConverter (
   SLArrayIndex_t * pParityErrorFlag,
   const SLArrayIndex_t ArrayLength)
 {
-  SLUFixData_t    i, j;
   SLUFixData_t    DstBitIndex = SIGLIB_UFIX_ZERO;
   SLArrayIndex_t  StartBitFoundFlag = SIGLIB_AI_ZERO;
   SLUFixData_t    OutputWordCount = SIGLIB_UFIX_ZERO;
@@ -262,8 +259,8 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AsyncToSyncConverter (
 
   *pDst = SIGLIB_AI_ZERO;                                           // Clear the first destination byte
 
-  for (i = 0; i < (SLUFixData_t) ArrayLength; i++) {
-    for (j = 0; j < (SLArrayIndex_t) SIGLIB_BYTE_LENGTH; j++) {     // For each bit in the input byte
+  for (SLUFixData_t i = 0; i < (SLUFixData_t) ArrayLength; i++) {
+    for (SLUFixData_t j = 0; j < (SLArrayIndex_t) SIGLIB_BYTE_LENGTH; j++) {  // For each bit in the input byte
       if (StartBitFoundFlag == SIGLIB_AI_ZERO) {                    // Look for start bit == 0*/
         if ((((SLUFixData_t) * pSrc) & ((SIGLIB_UFIX_ONE) << j)) == SIGLIB_UFIX_ZERO) { // Look for start bit
           StartBitFoundFlag = SIGLIB_AI_ONE;
@@ -319,7 +316,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AsyncToSyncConverter (
   }
 
   return (OutputWordCount);
-}
+}                                                                   // End of SDA_AsyncToSyncConverter()
 
 /**/
 
@@ -343,7 +340,7 @@ void SIGLIB_FUNC_DECL SIF_AsyncAddRemoveStopBits (
   SLArrayIndex_t * pRemoveCount)
 {
   *pRemoveCount = SIGLIB_AI_ZERO;
-}
+}                                                                   // End of SIF_AsyncAddRemoveStopBits()
 
 
 /**/
@@ -385,7 +382,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AsyncRemoveStopBits (
   SLArrayIndex_t * pRemoveCount,
   const SLArrayIndex_t ArrayLength)
 {
-  SLUFixData_t    i, j;
   SLUFixData_t    DstBitIndex = SIGLIB_UFIX_ZERO;
   SLArrayIndex_t  StartBitFoundFlag = SIGLIB_AI_ZERO;
   SLUFixData_t    OutputWordCount = SIGLIB_UFIX_ZERO;
@@ -398,8 +394,8 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AsyncRemoveStopBits (
     NumberOfBitsToCopy = NumberOfDataBits + 1;
   }
 
-  for (i = 0; i < (SLUFixData_t) ArrayLength; i++) {
-    for (j = 0; j < (SLArrayIndex_t) SIGLIB_BYTE_LENGTH; j++) {     // For each bit in the input byte
+  for (SLUFixData_t i = 0; i < (SLUFixData_t) ArrayLength; i++) {
+    for (SLUFixData_t j = 0; j < (SLArrayIndex_t) SIGLIB_BYTE_LENGTH; j++) {  // For each bit in the input byte
       if (StartBitFoundFlag == SIGLIB_AI_ZERO) {                    // Look for start bit == 0*/
 // If we don't have a start bit we have a stop bit
         if (((SLUFixData_t) * pSrc) & ((SIGLIB_UFIX_ONE) << j)) {
@@ -454,7 +450,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AsyncRemoveStopBits (
   }
 
   return (OutputWordCount);
-}
+}                                                                   // End of SDA_AsyncRemoveStopBits()
 
 
 /**/
@@ -505,7 +501,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AsyncAddStopBits (
   SLArrayIndex_t * pAddCount,
   const SLArrayIndex_t ArrayLength)
 {
-  SLUFixData_t    i, j;
   SLUFixData_t    DstBitIndex = SIGLIB_UFIX_ZERO;
   SLArrayIndex_t  StartBitFoundFlag = SIGLIB_AI_ZERO;
   SLArrayIndex_t  StopBitFoundFlag = SIGLIB_AI_ZERO;
@@ -519,8 +514,8 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AsyncAddStopBits (
     NumberOfBitsToCopy = NumberOfDataBits + 1;
   }
 
-  for (i = 0; i < (SLUFixData_t) ArrayLength; i++) {
-    for (j = 0; j < (SLArrayIndex_t) SIGLIB_BYTE_LENGTH; j++) {     // For each bit in the input byte
+  for (SLUFixData_t i = 0; i < (SLUFixData_t) ArrayLength; i++) {
+    for (SLUFixData_t j = 0; j < (SLArrayIndex_t) SIGLIB_BYTE_LENGTH; j++) {  // For each bit in the input byte
       if (StartBitFoundFlag == SIGLIB_AI_ZERO) {                    // Look for start bit == 0*/
 // If we don't have a start bit we have a stop bit
         if (((SLUFixData_t) * pSrc) & ((SIGLIB_UFIX_ONE) << j)) {
@@ -594,7 +589,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AsyncAddStopBits (
   }
 
   return (OutputWordCount);
-}
+}                                                                   // End of SDA_AsyncAddStopBits()
 
 
 /**/
@@ -634,19 +629,18 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_DecreaseWordLength (
   const SLArrayIndex_t OutputWordLength,
   const SLArrayIndex_t ArrayLength)
 {
-  SLUFixData_t    i;
   SLUFixData_t    InputStartIndex = SIGLIB_UFIX_ZERO;
   SLUFixData_t    OutputStartIndex = SIGLIB_UFIX_ZERO;
   SLUFixData_t    BuildChar;                                        // This is used to build up the output word
   SLUFixData_t    OutputBitMask = SIGLIB_UFIX_ZERO;
   SLUFixData_t    OutputWordCount = SIGLIB_UFIX_ZERO;
 
-  for (i = 0; i < (SLUFixData_t) OutputWordLength; i++) {           // Create output bit mask
+  for (SLUFixData_t i = 0; i < (SLUFixData_t) OutputWordLength; i++) {  // Create output bit mask
     OutputBitMask += (SIGLIB_UFIX_ONE << i);
   }
 
 
-  for (i = 0; i < (SLUFixData_t) ArrayLength;) {
+  for (SLUFixData_t i = 0; i < (SLUFixData_t) ArrayLength;) {
     if ((InputWordLength - InputStartIndex) > (SLUFixData_t) OutputWordLength) {
       *pDst++ = (SLUInt8_t) ((((SLUFixData_t) * pSrc) >> InputStartIndex) & OutputBitMask); // Put input bits into output word
       InputStartIndex += OutputWordLength;
@@ -679,7 +673,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_DecreaseWordLength (
   }
 
   return (OutputWordCount);
-}
+}                                                                   // End of SDA_DecreaseWordLength()
 
 
 /**/
@@ -719,7 +713,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_IncreaseWordLength (
   const SLArrayIndex_t OutputWordLength,
   const SLArrayIndex_t ArrayLength)
 {
-  SLUFixData_t    i;
   SLUFixData_t    InputStartIndex = SIGLIB_UFIX_ZERO;
   SLUFixData_t    OutputStartIndex = SIGLIB_UFIX_ZERO;
   SLUFixData_t    BuildChar = SIGLIB_UFIX_ZERO;                     // This is used to build up the output word
@@ -727,15 +720,15 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_IncreaseWordLength (
   SLUFixData_t    InputBitMask = SIGLIB_UFIX_ZERO;
   SLUFixData_t    OutputBitMask = SIGLIB_UFIX_ZERO;
 
-  for (i = 0; i < (SLUFixData_t) InputWordLength; i++) {            // Create input bit mask
+  for (SLUFixData_t i = 0; i < (SLUFixData_t) InputWordLength; i++) { // Create input bit mask
     InputBitMask += (SIGLIB_UFIX_ONE << i);
   }
 
-  for (i = 0; i < (SLUFixData_t) OutputWordLength; i++) {           // Create output bit mask
+  for (SLUFixData_t i = 0; i < (SLUFixData_t) OutputWordLength; i++) {  // Create output bit mask
     OutputBitMask += (SIGLIB_UFIX_ONE << i);
   }
 
-  for (i = 0; i < (SLUFixData_t) ArrayLength;) {
+  for (SLUFixData_t i = 0; i < (SLUFixData_t) ArrayLength;) {
     if ((OutputWordLength - OutputStartIndex) > (SLUFixData_t) InputWordLength) {
       BuildChar += (((SLUFixData_t) * pSrc) & InputBitMask) << OutputStartIndex;  // Put input bits into output word
       i++;                                                          // Increment input word counter
@@ -769,4 +762,4 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_IncreaseWordLength (
   }
 
   return (OutputWordCount);
-}
+}                                                                   // End of SDA_IncreaseWordLength()

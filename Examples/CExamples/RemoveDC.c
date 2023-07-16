@@ -1,5 +1,5 @@
 // SigLib - D.C. Removal Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -21,9 +21,6 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-#if SAMPLE_MODE
-  SLArrayIndex_t  i;
-#endif
   SLData_t        PreviousInput = SIGLIB_ZERO;
   SLData_t        PreviousOutput = SIGLIB_ZERO;
 
@@ -74,7 +71,7 @@ int main (
 
 // Remove DC offset
 #if SAMPLE_MODE
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     *pDst++ = SDS_IirRemoveDC (*pSrc++,                             // Input sample
                                &PrevInputSample,                    // Previous input sample
                                &PrevOutputSample,                   // Previous output sample

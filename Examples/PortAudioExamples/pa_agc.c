@@ -1,5 +1,5 @@
 // Single channel SigLib AGC example that works with PortAudio
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -8,7 +8,7 @@
 #include <siglib.h>
 
 // Define constants
-#define SAMPLE_RATE            (44100)
+#define SAMPLE_RATE_HZ         (44100)
 #define FRAMES_PER_CALLBACK     64
 
 #define FIXED_POINT_IO          0                                   // Set to 1 for fixed point and 0 for float
@@ -77,7 +77,6 @@ static int AGCCallback (
   int             inDone = 0;
   int             outDone = 0;
   AGCConfig_t    *config = (AGCConfig_t *) userData;
-  SLUInt16_t      i;
 
 // This may get called with NULL inputBuffer during initial setup.
   if (NULL == inputBuffer)
@@ -87,7 +86,7 @@ static int AGCCallback (
 
   out = ((OUTPUT_SAMPLE **) outputBuffer)[0];
 
-  for (i = 0; i < framesPerBuffer; i++)                             // Read input
+  for (SLUInt16_t i = 0; i < framesPerBuffer; i++)                  // Read input
     pSrc[i] = (SLData_t) * in++;
 
 // Process data
@@ -106,7 +105,7 @@ static int AGCCallback (
   Peak = SDA_AbsMax (pSrc,                                          // Pointer to source array
                      FRAMES_PER_CALLBACK);                          // Array length
 
-  for (i = 0; i < framesPerBuffer; i++)                             // Write output
+  for (SLUInt16_t i = 0; i < framesPerBuffer; i++)                  // Write output
     *out++ = (INPUT_SAMPLE) pDst[i];
 
   return 0;
@@ -171,7 +170,7 @@ int main (
   outputParameters.suggestedLatency = Pa_GetDeviceInfo (outputParameters.device)->defaultLowOutputLatency;
   outputParameters.hostApiSpecificStreamInfo = NULL;
 
-  err = Pa_OpenStream (&stream, &inputParameters, &outputParameters, SAMPLE_RATE, config->framesPerCallback,  // frames per array
+  err = Pa_OpenStream (&stream, &inputParameters, &outputParameters, SAMPLE_RATE_HZ, config->framesPerCallback, // frames per array
                        paClipOff,                                   // we won't output out of range samples so don't bother clipping them
                        AGCCallback, config);
   if (err != paNoError) {

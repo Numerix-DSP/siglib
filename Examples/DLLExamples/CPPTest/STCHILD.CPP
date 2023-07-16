@@ -1,5 +1,5 @@
 // STChild.CPP: Child window member functions for SigLib DLL test program
-// Copyright (C) Alpha Numerix 2000. All rights reserved.
+// Copyright (C) Delta Numerix 2000. All rights reserved.
 
 /* Include files */
 #include <afxwin.h>
@@ -69,7 +69,6 @@ afx_msg void CWinGraph::OnPaint()
     CClientDC       ClientDC (this);
 
     RECT            Rect;
-    UINT            i;
     double          *BufferPtr;
     double          Max;
     UINT            BufferSize;
@@ -83,8 +82,7 @@ afx_msg void CWinGraph::OnPaint()
 
     GetClientRect (&Rect);
 
-    if (FirstGraph)
-    {
+    if (FirstGraph) {
         PaintDC.SelectStockObject (BLACK_BRUSH);            // Black background
         PaintDC.Rectangle (&Rect);
     }
@@ -94,8 +92,7 @@ afx_msg void CWinGraph::OnPaint()
     Width = Rect.right - Rect.left;
 
                         // If signal array contains data, draw graph
-    if ((BufferSize = Signal.GetSize()) != 0)
-    {
+    if ((BufferSize = Signal.GetSize()) != 0) {
         Max = Signal.GetMax();                              // Get the maximum value
         HBuffer = Signal.GetHandle();
 
@@ -106,13 +103,10 @@ afx_msg void CWinGraph::OnPaint()
         YStep = ((double)Height) / ((double)2.0);
         YZero = Rect.bottom / 2;
 
-        if (Max)            // != 0
-        {
+        if (Max) {          // != 0
             YPos = YZero - (int)((*BufferPtr++ * YStep) / Max);
-            for (i = 0; i < (BufferSize-1);)                // -1 for i++ in loop
-            {                                               // Remove old graph
-                if (!FirstGraph)
-                {
+            for (UINT i = 0; i < (BufferSize-1);) {              // -1 for i++ in loop
+                if (!FirstGraph) {
                     ClientDC.SelectObject (&ErasePen);      // Get the pen to erase the previous line
                     ClientDC.MoveTo ((Rect.left + (UINT)(((double)i) * XStep)), *OldDataBufferPtr);
                     *OldDataBufferPtr++ = YPos;
@@ -127,8 +121,7 @@ afx_msg void CWinGraph::OnPaint()
                 ClientDC.LineTo ((Rect.left + (UINT)(((double)i) * XStep)), YPos);
             }
         }
-        else                                                // Data is all zero
-        {
+        else {                                              // Data is all zero
             ClientDC.MoveTo (Rect.left, YZero);
             ClientDC.LineTo (Rect.right, YZero);
         }
@@ -139,8 +132,7 @@ afx_msg void CWinGraph::OnPaint()
 
 
     ClientDC.SelectObject (&GraticulePen);                  // Get the pen to draw the axes
-    for (i = 1; i < 10; i++)
-    {
+    for (UINTi = 1; i < 10; i++) {
         ClientDC.MoveTo (Rect.left, Rect.top + (i * Height / 10));
         ClientDC.LineTo (Rect.right, Rect.top + (i * Height / 10));
 

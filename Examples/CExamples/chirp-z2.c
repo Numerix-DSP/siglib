@@ -1,5 +1,5 @@
 // SigLib Chirp z-Transform Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // The chirp z-transform algorithm is shown in the following diagram :
 //                 _____
@@ -32,7 +32,7 @@
 
 // Define constants
 #define DEBUG                   0                                   // Set to 0 for no debug
-#define SAMPLE_RATE             10000.                              // 10 KHz
+#define SAMPLE_RATE_HZ          10000.                              // 10 KHz
 #define INPUT_LENGTH            64                                  // Input dataset length
 #define OUTPUT_LENGTH           128
 #define FFT_LENGTH              256
@@ -148,18 +148,18 @@ int main (
   Radius = SIGLIB_ONE;
   Decay = SIGLIB_ZERO;
   StartFreq = SIGLIB_ZERO;
-  EndFreq = SAMPLE_RATE;
+  EndFreq = SAMPLE_RATE_HZ;
 
 
 // Calculate A0 values
 // Create a polar number from magnitude and angle
-  ContourStart = SCV_Polar (Radius, (SIGLIB_TWO_PI * StartFreq) / SAMPLE_RATE);
+  ContourStart = SCV_Polar (Radius, (SIGLIB_TWO_PI * StartFreq) / SAMPLE_RATE_HZ);
   A_1 = SCV_Inverse (SCV_PolarToRectangular (ContourStart));
 
 // Calculate W0 values - W^(N^2/2)
-  phinc = (-SIGLIB_TWO_PI * (EndFreq - StartFreq)) / (((SLData_t) OUTPUT_LENGTH) * SAMPLE_RATE);
+  phinc = (-SIGLIB_TWO_PI * (EndFreq - StartFreq)) / (((SLData_t) OUTPUT_LENGTH) * SAMPLE_RATE_HZ);
 
-  w1inc = SDS_Exp ((SIGLIB_PI * Decay) / SAMPLE_RATE);
+  w1inc = SDS_Exp ((SIGLIB_PI * Decay) / SAMPLE_RATE_HZ);
   w2inc = SDS_Sqrt (w1inc);
 
 
@@ -303,7 +303,7 @@ int main (
                OUTPUT_LENGTH,                                       // Dataset length
                "Chirp z-Transform Real Result",                     // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((SAMPLE_RATE * (double) (FFT_LENGTH - 1)) / (double) (FFT_LENGTH)), // Maximum X value
+               ((SAMPLE_RATE_HZ * (double) (FFT_LENGTH - 1)) / (double) (FFT_LENGTH)),  // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -313,7 +313,7 @@ int main (
                OUTPUT_LENGTH,                                       // Dataset length
                "Fourier Transform Real Result",                     // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((SAMPLE_RATE * (double) (FFT_LENGTH - 1)) / (double) (FFT_LENGTH)), // Maximum X value
+               ((SAMPLE_RATE_HZ * (double) (FFT_LENGTH - 1)) / (double) (FFT_LENGTH)),  // Maximum X value
                "lines",                                             // Graph type
                "red",                                               // Colour
                GPC_ADD);                                            // New graph
@@ -326,7 +326,7 @@ int main (
                OUTPUT_LENGTH,                                       // Dataset length
                "Chirp z-Transform Imaginary Result",                // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((SAMPLE_RATE * (double) (FFT_LENGTH - 1)) / (double) (FFT_LENGTH)), // Maximum X value
+               ((SAMPLE_RATE_HZ * (double) (FFT_LENGTH - 1)) / (double) (FFT_LENGTH)),  // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -336,7 +336,7 @@ int main (
                OUTPUT_LENGTH,                                       // Dataset length
                "Fourier Transform Imaginary Result",                // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((SAMPLE_RATE * (double) (FFT_LENGTH - 1)) / (double) (FFT_LENGTH)), // Maximum X value
+               ((SAMPLE_RATE_HZ * (double) (FFT_LENGTH - 1)) / (double) (FFT_LENGTH)),  // Maximum X value
                "lines",                                             // Graph type
                "red",                                               // Colour
                GPC_ADD);                                            // New graph

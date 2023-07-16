@@ -1,5 +1,5 @@
 // SigLib Time Domain Pitch Shifting Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -31,8 +31,6 @@ int main (
   void)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
-
-  SLFixData_t     i;
 
   ShiftArrayOffsetIn = 0;
   ShiftArrayOffsetOut = SIGLIB_ZERO;
@@ -71,7 +69,7 @@ int main (
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     pRealOutput[i] = SDS_TdPitchShift (pRealInput[i],               // Sample
                                        ShiftArray,                  // Pointer to pitch shift array
                                        &ShiftArrayOffsetIn,         // Input array offset

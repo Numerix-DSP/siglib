@@ -2,11 +2,8 @@
 
 # Shell script for building and executing application with GCC
 
-executable_filename=${1%%.*}
-# echo $executable_filename
+./gb.sh alignwavs
 
-./gb.sh $executable_filename
-
-if [ -f $executable_filename ]; then
-  ./$executable_filename $2 $3
+if [ -f alignwavs ]; then
+  ./alignwavs Kipling_If_16kHz_Short.wav Kipling_If_16kHz_PlusDelayAndNoise_Short.wav
 fi

@@ -3,13 +3,13 @@
 File Name  : FixedPointFFT.C            | Author  : JOHN EDWARDS
 ----------------------------------------+----------------------------------
 Compiler :   Various                    | Start Date    : 01/11/05
-Copyright (c) 2023 Alpha Numerix        | Latest Update : 05/11/05
+Copyright (c) 2023 Delta Numerix        | Latest Update : 05/11/05
 ---------------------------------------------------------------------------
 Description  : SigLib fixed point FFT test program.
 
 DELETION OF ANY INFORMATION IN THIS HEADER IS IN VIOLATION OF YOUR LICENSE.
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 
 Notes :
 This program includes two fixed point implementations of the SigLib FFT
@@ -160,7 +160,6 @@ int main (
   SLError_t       SigLibError = SIGLIB_NO_ERROR;
 
 #if DEBUG
-  SLInt16_t       i;
   SUF_ClearDebugfprintf ();
 #endif
 
@@ -193,10 +192,10 @@ int main (
 #endif
 #if DEBUG
 #if ENABLE_WINDOWING
-  for (i = 0; i < FFT_SIZE; i++)
+  for (SLArrayIndex_t i = 0; i < FFT_SIZE; i++)
     SUF_Debugfprintf ("Window : %d;  = %d\n", i, pWindowCoeffs[i]);
 #endif
-  for (i = 0; i < FFT_SIZE; i++)
+  for (SLArrayIndex_t i = 0; i < FFT_SIZE; i++)
     SUF_Debugfprintf ("Source : %d; Real = %d, Imag = %d\n", i, pRealData[i], 0);
 #endif
 
@@ -204,7 +203,7 @@ int main (
 
 #if DEBUG
   SUF_Debugfprintf ("FFT Results\n");
-  for (i = 0; i < FFT_SIZE; i++)
+  for (SLArrayIndex_t i = 0; i < FFT_SIZE; i++)
     SUF_Debugfprintf ("Index : %d; Real = %d, Imag = %d\n", i, pRealData[i], pImagData[i]);
 #endif
 
@@ -227,10 +226,10 @@ int main (
 #endif
 #if DEBUG
 #if ENABLE_WINDOWING
-  for (i = 0; i < FFT_SIZE; i++)
+  for (SLArrayIndex_t i = 0; i < FFT_SIZE; i++)
     SUF_Debugfprintf ("Window : %d;  = %d\n", i, pWindowCoeffs[i]);
 #endif
-  for (i = 0; i < FFT_SIZE; i++)
+  for (SLArrayIndex_t i = 0; i < FFT_SIZE; i++)
     SUF_Debugfprintf ("Source : %d; Real = %d, Imag = %d\n", i, pRealData[i], 0);
 #endif
 
@@ -238,7 +237,7 @@ int main (
 
 #if DEBUG
   SUF_Debugfprintf ("FFT Results\n");
-  for (i = 0; i < FFT_SIZE; i++)
+  for (SLArrayIndex_t i = 0; i < FFT_SIZE; i++)
     SUF_Debugfprintf ("Index : %d; Real = %d, Imag = %d\n", i, pRealData[i], pImagData[i]);
 #endif
 
@@ -282,7 +281,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_Fft16 (
   SLArrayIndex_t  i;
 
 // Generate Sine and Cos tables
-  for (i = 0; i < ((((SLArrayIndex_t) 3) * FFTLength) / ((SLArrayIndex_t) 4)); i++) {
+  for (SLArrayIndex_t i = 0; i < ((((SLArrayIndex_t) 3) * FFTLength) / ((SLArrayIndex_t) 4)); i++) {
     *pFFTCoeffs++ = (SLInt16_t) (SIGLIB_SHORT_WORD_MAX * sin (((double) i) * (2.0 * SIGLIB_PI / FFTLength)));
   }
 
@@ -429,7 +428,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_Fft32 (
   SLArrayIndex_t  i;
 
 // Generate Sine and Cos tables
-  for (i = 0; i < ((((SLArrayIndex_t) 3) * FFTLength) / ((SLArrayIndex_t) 4)); i++) {
+  for (SLArrayIndex_t i = 0; i < ((((SLArrayIndex_t) 3) * FFTLength) / ((SLArrayIndex_t) 4)); i++) {
     *pFFTCoeffs++ = (SLInt16_t) (SIGLIB_SHORT_WORD_MAX * sin (((double) i) * (2.0 * SIGLIB_PI / FFTLength)));
   }
 
@@ -645,7 +644,7 @@ void SIGLIB_FUNC_DECL SDA_Window16 (
 #endif
 #endif
 
-  for (i = 0; i < WindowLength; i++) {
+  for (SLArrayIndex_t i = 0; i < WindowLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)
     *pDst++ = (SLInt16_t) ((((SLInt32_t) pSrc[i]) * ((SLInt32_t) pWindowCoeffs[i])) SIGLIB_FIX_MPY_SHIFT);
 #else
@@ -750,7 +749,7 @@ void SIGLIB_FUNC_DECL SDA_Window32 (
 #endif
 #endif
 
-  for (i = 0; i < WindowLength; i++) {
+  for (SLArrayIndex_t i = 0; i < WindowLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)
     pDst[i] = (pSrc[i] * pWindowCoeffs[i]) SIGLIB_FIX_MPY_SHIFT;
 #else
@@ -786,7 +785,7 @@ void SIGLIB_FUNC_DECL SUF_Fix16ToSigLibData (
 {
   SLArrayIndex_t  i;
 
-  for (i = 0; i < ArrayLength; i++) {
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst[i] = (SLData_t) pSrc[i];
 #else
@@ -822,7 +821,7 @@ void SIGLIB_FUNC_DECL SUF_SigLibDataToFix16 (
 {
   SLArrayIndex_t  i;
 
-  for (i = 0; i < ArrayLength; i++) {
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst[i] = (SLInt16_t) pSrc[i];
 #else
@@ -858,7 +857,7 @@ void SIGLIB_FUNC_DECL SUF_Fix32ToSigLibData (
 {
   SLArrayIndex_t  i;
 
-  for (i = 0; i < ArrayLength; i++) {
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst[i] = (SLData_t) pSrc[i];
 #else
@@ -894,7 +893,7 @@ void SIGLIB_FUNC_DECL SUF_SigLibDataToFix32 (
 {
   SLArrayIndex_t  i;
 
-  for (i = 0; i < ArrayLength; i++) {
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst[i] = (SLInt32_t) pSrc[i];
 #else

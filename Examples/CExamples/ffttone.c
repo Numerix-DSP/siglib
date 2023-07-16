@@ -1,5 +1,5 @@
 // SigLib FFT Tone Detector Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -12,7 +12,7 @@
 #define FFT_LENGTH          SAMPLE_LENGTH
 #define LOG2_FFT_LENGTH     SAI_FftLengthLog2(FFT_LENGTH)           // Log2 FFT length,
 
-#define SAMPLE_RATE         10000.
+#define SAMPLE_RATE_HZ      10000.
 #define SIGNAL_FREQUENCY    2000.
 
 // Declare global variables and arrays
@@ -59,7 +59,7 @@ int main (
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
                       SIGLIB_FILL,                                  // Fill (overwrite) or add to existing array contents
-                      SIGNAL_FREQUENCY / SAMPLE_RATE,               // Signal frequency
+                      SIGNAL_FREQUENCY / SAMPLE_RATE_HZ,            // Signal frequency
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
@@ -72,7 +72,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "Source signal",                                     // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "magenta",                                           // Colour
                GPC_NEW);                                            // New graph
@@ -101,8 +101,8 @@ int main (
 
 
 // Print results - dBm relative to 0 dB = FSD on a 16 bit ADC
-  printf ("Tone frequency = %2.2lf, Magnitude = %2.2lf (dB)\n\n", ((((SLData_t) ToneFFTBin) * SAMPLE_RATE) / ((SLData_t) FFT_LENGTH)), SDS_VoltageTodBm (ToneMagnitude, // Linear value
-                                                                                                                                                         32768.0)); // Zero dBm Level
+  printf ("Tone frequency = %2.2lf, Magnitude = %2.2lf (dB)\n\n", ((((SLData_t) ToneFFTBin) * SAMPLE_RATE_HZ) / ((SLData_t) FFT_LENGTH)), SDS_VoltageTodBm (ToneMagnitude,  // Linear value
+                                                                                                                                                            32768.0));  // Zero dBm Level
 
   printf ("\nHit <Carriage Return> to continue ....\n");
   getchar ();                                                       // Wait for <Carriage Return>

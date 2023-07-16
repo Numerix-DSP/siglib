@@ -1,5 +1,5 @@
 // SigLib - bin2wav file function convert and display program
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 #include <stdio.h>
 #include <string.h>
@@ -12,7 +12,7 @@
 
 //#define SAMPLE_LENGTH       160000
 #define SAMPLE_LENGTH       20000
-#define SAMPLE_RATE         ((double)16000.)
+#define SAMPLE_RATE_HZ      ((double)16000.)
 
 double         *pDataArray;
 char            inputFileName[256];

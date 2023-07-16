@@ -1,5 +1,5 @@
 // SigLib - Move Peak Towards Dead Band Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -26,10 +26,8 @@ static SLData_t pDst[10];
 int main (
   void)
 {
-  SLFixData_t     i;
-
   printf ("\nSource Array 1\n");
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     printf ("%1.1lf, ", *(pSrc1 + i));
   }
   printf ("\n");
@@ -38,7 +36,7 @@ int main (
                                DEAD_BAND_LOW_POINT,                 // Dead-band low-point
                                DEAD_BAND_HIGH_POINT,                // Dead-band high-point
                                SAMPLE_LENGTH);                      // Array length
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     printf ("%1.1lf, ", *(pDst + i));
   }
   printf ("\n");
@@ -47,7 +45,7 @@ int main (
                                DEAD_BAND_LOW_POINT,                 // Dead-band low-point
                                DEAD_BAND_HIGH_POINT,                // Dead-band high-point
                                SAMPLE_LENGTH);                      // Array length
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     printf ("%1.1lf, ", *(pDst + i));
   }
   printf ("\n");
@@ -56,7 +54,7 @@ int main (
                                DEAD_BAND_LOW_POINT,                 // Dead-band low-point
                                DEAD_BAND_HIGH_POINT,                // Dead-band high-point
                                SAMPLE_LENGTH);                      // Array length
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     printf ("%1.1lf, ", *(pDst + i));
   }
   printf ("\n");
@@ -65,13 +63,13 @@ int main (
                                DEAD_BAND_LOW_POINT,                 // Dead-band low-point
                                DEAD_BAND_HIGH_POINT,                // Dead-band high-point
                                SAMPLE_LENGTH);                      // Array length
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     printf ("%1.1lf, ", *(pDst + i));
   }
   printf ("\n");
 
   printf ("\nSource Array 2\n");
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     printf ("%1.1lf, ", *(pSrc2 + i));
   }
   printf ("\n");
@@ -80,7 +78,7 @@ int main (
                                DEAD_BAND_LOW_POINT,                 // Dead-band low-point
                                DEAD_BAND_HIGH_POINT,                // Dead-band high-point
                                SAMPLE_LENGTH);                      // Array length
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     printf ("%1.1lf, ", *(pDst + i));
   }
   printf ("\n");
@@ -89,7 +87,7 @@ int main (
                                DEAD_BAND_LOW_POINT,                 // Dead-band low-point
                                DEAD_BAND_HIGH_POINT,                // Dead-band high-point
                                SAMPLE_LENGTH);                      // Array length
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     printf ("%1.1lf, ", *(pDst + i));
   }
   printf ("\n");
@@ -98,7 +96,7 @@ int main (
                                DEAD_BAND_LOW_POINT,                 // Dead-band low-point
                                DEAD_BAND_HIGH_POINT,                // Dead-band high-point
                                SAMPLE_LENGTH);                      // Array length
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     printf ("%1.1lf, ", *(pDst + i));
   }
   printf ("\n");
@@ -107,7 +105,7 @@ int main (
                                DEAD_BAND_LOW_POINT,                 // Dead-band low-point
                                DEAD_BAND_HIGH_POINT,                // Dead-band high-point
                                SAMPLE_LENGTH);                      // Array length
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     printf ("%1.1lf, ", *(pDst + i));
   }
   printf ("\n");

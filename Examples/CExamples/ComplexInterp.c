@@ -1,5 +1,5 @@
 // SigLib complex interpolation test program
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -15,7 +15,6 @@ int main (
   SLComplexRect_s rInterpolationPoints[10];
   SLComplexRect_s rPoint1, rPoint2;
   SLComplexPolar_s pInterpolationPoints[10];
-  SLArrayIndex_t  i;
 
   hXYGraph =                                                        // Initialize plot
     gpc_init_xy ("XY Diagram",                                      // Plot title
@@ -37,7 +36,7 @@ int main (
                                     rInterpolationPoints,           // Destination array
                                     3);                             // Number of interpolated points
 
-  for (i = 0; i < 5; i++) {
+  for (SLArrayIndex_t i = 0; i < 5; i++) {
     printf ("[%d] = %lf +j %lf\n", i, rInterpolationPoints[i].real, rInterpolationPoints[i].imag);
   }
   printf ("\n");
@@ -56,7 +55,7 @@ int main (
                                     rPoint2,                        // Interpolation end point
                                     rInterpolationPoints,           // Destination array
                                     4);                             // Number of interpolated points
-  for (i = 0; i < 6; i++) {
+  for (SLArrayIndex_t i = 0; i < 6; i++) {
     printf ("[%d] = %lf +j %lf\n", i, rInterpolationPoints[i].real, rInterpolationPoints[i].imag);
   }
   printf ("\n");
@@ -76,7 +75,7 @@ int main (
                                     rInterpolationPoints,           // Destination array
                                     2);                             // Number of interpolated points
 
-  for (i = 0; i < 4; i++) {
+  for (SLArrayIndex_t i = 0; i < 4; i++) {
     printf ("[%d] = %lf +j %lf\n", i, rInterpolationPoints[i].real, rInterpolationPoints[i].imag);
   }
   printf ("\n");
@@ -101,7 +100,7 @@ int main (
                                  rInterpolationPoints,              // Output complex data pointer
                                  5);                                // Dataset length
 
-  for (i = 0; i < 5; i++) {
+  for (SLArrayIndex_t i = 0; i < 5; i++) {
     printf ("[%d] = %lf +j %lf\n", i, rInterpolationPoints[i].real, rInterpolationPoints[i].imag);
   }
   printf ("\n");
@@ -124,7 +123,7 @@ int main (
                                  rInterpolationPoints,              // Output complex data pointer
                                  6);                                // Dataset length
 
-  for (i = 0; i < 6; i++) {
+  for (SLArrayIndex_t i = 0; i < 6; i++) {
     printf ("[%d] = %lf +j %lf\n", i, rInterpolationPoints[i].real, rInterpolationPoints[i].imag);
   }
   printf ("\n");
@@ -147,7 +146,7 @@ int main (
                                  rInterpolationPoints,              // Output complex data pointer
                                  4);                                // Dataset length
 
-  for (i = 0; i < 4; i++) {
+  for (SLArrayIndex_t i = 0; i < 4; i++) {
     printf ("[%d] = %lf +j %lf\n", i, rInterpolationPoints[i].real, rInterpolationPoints[i].imag);
   }
   printf ("\n");

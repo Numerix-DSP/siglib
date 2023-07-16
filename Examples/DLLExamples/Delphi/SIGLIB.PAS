@@ -23,7 +23,7 @@ uses
 
 {+//************************************************************************* }
 {-File Name : SIGLIB.H | Author : JOHN EDWARDS }
-{-Siglib Library Version : 9.00 | }
+{-Siglib Library Version  : 10.50 | }
 {-----------------------------------------+---------------------------------- }
 {-Compiler : Independent | Start Date : 13/09/1992 }
 {-Options : | Latest Update : 17/11/2020 }
@@ -37,7 +37,7 @@ uses
 {-END USER LICENSE AGREEMENT. }
 {-DELETION OF ANY INFORMATION IN THIS HEADER IS IN VIOLATION OF YOUR LICENSE. }
 
-{-Copyright (C) 1992 to 2020 Alpha Numerix }
+{-Copyright (C) 1992 to 2020 Delta Numerix }
 {---------------------------------------------------------------------------- }
 {-Description : Header file for SigLib DSP library }
 
@@ -55,7 +55,7 @@ const
 const
   SIGLIB_VERSION = 9.00; {// Indicates SigLib version being used}
 const
-  SIGLIB_ENABLE_DEBUG_FPRINTF = 0; {// Set to 1 to enable SUF_Debugfprintf functions in some siglib functions}
+  SIGLIB_ENABLE_DEBUG_LOGGING = 0; {// Set to 1 to enable SUF_Debugfprintf functions in some siglib functions}
 
 
 {$IFNDEF SWIG}

@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : MOD_D.C       | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 15/11/1992
 Options   :                             | Latest Update : 17/11/2022
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Digital modulation / demodulation routines, for SigLib DSP library.
 
@@ -40,9 +40,6 @@ Description : Digital modulation / demodulation routines, for SigLib DSP library
 #define SIGLIB_SRC_FILE_MOD_D   1                                   // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
-#define DEBUG_LOG_FILE          0                                   // Set to '1' to enable logging
-
 
 /**/
 
@@ -247,7 +244,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_CostasQamDemodulate (
   SLData_t        ELGTriggerOutput;
   SLData_t        RealDelayedOutput, ImagDelayedOutput;
 
-#if DEBUG_LOG_FILE
+#if SIGLIB_ENABLE_DEBUG_LOGGING
   SUF_Debugfprintf
     ("CostasQamDemodulate : CostasLoopLoopSample = %lf, CarrierFreq = %lf, CostasLpVCOModulationIndex = %lf, CostasLpVCOPhase = %lf\n",
      *pCostasLoopLoopSample, CarrierFreq, CostasLpVCOModulationIndex, *pCostasLpVCOPhase);
@@ -259,7 +256,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_CostasQamDemodulate (
                                 &ImagVCOOutput,
                                 CarrierFreq, CostasLpVCOModulationIndex, pCostasLpVCOPhase, pCostasLoopVCOLookUpTable, CostasLoopVCOLookUpTableSize);
 
-#if DEBUG_LOG_FILE
+#if SIGLIB_ENABLE_DEBUG_LOGGING
   SUF_Debugfprintf ("CostasQamDemodulate : Src = %lf, CostasLoopLoopSample = %lf, RealVCOOutput = %lf, ImagVCOOutput = %lf\n", Src,
                     *pCostasLoopLoopSample, RealVCOOutput, ImagVCOOutput);
 #endif
@@ -268,7 +265,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_CostasQamDemodulate (
   RealTmp = Src * RealVCOOutput;                                    // Real data path
   ImagTmp = Src * ImagVCOOutput;                                    // Imaginary data path
 
-#if DEBUG_LOG_FILE
+#if SIGLIB_ENABLE_DEBUG_LOGGING
   SUF_Debugfprintf ("CostasQamDemodulate : Pre Filter : RealTmp = %lf, ImagTmp = %lf\n", RealTmp, ImagTmp);
 #endif
 
@@ -278,7 +275,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_CostasQamDemodulate (
 // Filter imaginary data path
   ImagTmp = SDS_Fir (ImagTmp, pCostasLpLPF2State, pCostasLpLPFCoeffs, pCostasLpLPF2Index, CostasLpLPFLength);
 
-#if DEBUG_LOG_FILE
+#if SIGLIB_ENABLE_DEBUG_LOGGING
   SUF_Debugfprintf ("CostasQamDemodulate : Post Filter : RealTmp = %lf, ImagTmp = %lf\n", RealTmp, ImagTmp);
 #endif
 
@@ -308,7 +305,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_CostasQamDemodulate (
     *pCostasLoopLoopSample = ImagTmp * RealTmp;                     // Multiply the real and imaginary paths for Costas loop
   }
 
-#if DEBUG_LOG_FILE
+#if SIGLIB_ENABLE_DEBUG_LOGGING
 // SUF_Debugfprintf ("CostasQamDemodulate : CostasLoopLoopSample = %lf\n", *pCostasLoopLoopSample);
 #endif
 
@@ -621,7 +618,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulate (
   const SLArrayIndex_t ELGOutputSynchDelayLength,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
   SLData_t        ImagTmp, RealTmp;                                 // Temporary data processing variables - one for each path
   SLData_t        RealVCOOutput, ImagVCOOutput;                     // Local VCO output
   SLArrayIndex_t  IQOutputCount = SIGLIB_AI_ZERO;
@@ -629,8 +625,8 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulate (
   SLData_t        RealDelayedOutput, ImagDelayedOutput;
   SLData_t        LocalCostasLoopLoopSample = *pCostasLoopLoopSample;
 
-  for (i = 0; i < SampleLength; i++) {
-#if DEBUG_LOG_FILE
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+#if SIGLIB_ENABLE_DEBUG_LOGGING
     SUF_Debugfprintf
       ("CostasQamDemodulate : CostasLoopLoopSample = %lf, CarrierFreq = %lf, CostasLpVCOModulationIndex = %lf, CostasLpVCOPhase = %lf\n",
        LocalCostasLoopLoopSample, CarrierFreq, CostasLpVCOModulationIndex, *pCostasLpVCOPhase);
@@ -643,7 +639,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulate (
                                   CarrierFreq,
                                   CostasLpVCOModulationIndex, pCostasLpVCOPhase, pCostasLoopVCOLookUpTable, CostasLoopVCOLookUpTableSize);
 
-#if DEBUG_LOG_FILE
+#if SIGLIB_ENABLE_DEBUG_LOGGING
     SUF_Debugfprintf ("CostasQamDemodulate : Src = %lf, CostasLoopLoopSample = %lf, RealVCOOutput = %lf, ImagVCOOutput = %lf\n", *pSrc,
                       LocalCostasLoopLoopSample, RealVCOOutput, ImagVCOOutput);
 #endif
@@ -652,7 +648,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulate (
     RealTmp = *pSrc * RealVCOOutput;                                // Real data path
     ImagTmp = *pSrc++ * ImagVCOOutput;                              // Imaginary data path
 
-#if DEBUG_LOG_FILE
+#if SIGLIB_ENABLE_DEBUG_LOGGING
     SUF_Debugfprintf ("CostasQamDemodulate : Pre Filter : RealTmp = %lf, ImagTmp = %lf\n", RealTmp, ImagTmp);
 #endif
 
@@ -662,7 +658,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulate (
 // Filter imaginary data path
     ImagTmp = SDS_Fir (ImagTmp, pCostasLpLPF2State, pCostasLpLPFCoeffs, pCostasLpLPF2Index, CostasLpLPFLength);
 
-#if DEBUG_LOG_FILE
+#if SIGLIB_ENABLE_DEBUG_LOGGING
     SUF_Debugfprintf ("CostasQamDemodulate : Post Filter : RealTmp = %lf, ImagTmp = %lf\n", RealTmp, ImagTmp);
 #endif
 
@@ -692,7 +688,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulate (
       LocalCostasLoopLoopSample = ImagTmp * RealTmp;                // Multiply the real and imaginary paths for Costas loop
     }
 
-#if DEBUG_LOG_FILE
+#if SIGLIB_ENABLE_DEBUG_LOGGING
     SUF_Debugfprintf ("CostasQamDemodulate : CostasLoopLoopSample = %lf\n", LocalCostasLoopLoopSample);
 #endif
 
@@ -724,7 +720,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulate (
   *pCostasLoopLoopSample = LocalCostasLoopLoopSample;               // Save loop sample for next iteration
 
   return (IQOutputCount);                                           // Return number of IQ symbols demodulated
-
 }                                                                   // End of SDA_CostasQamDemodulate()
 #endif                                                              // End of !((_TMS320C30) || (_TMS320C40))
 
@@ -831,7 +826,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulateDebug (
   SLData_t * pDebugImagFilterOutput,
   SLData_t * pDebugELGTriggerOutput)
 {
-  SLArrayIndex_t  i;
   SLData_t        ImagTmp, RealTmp;                                 // Temporary data processing variables - one for each path
   SLData_t        RealVCOOutput, ImagVCOOutput;                     // Local VCO output
   SLArrayIndex_t  IQOutputCount = SIGLIB_AI_ZERO;
@@ -839,7 +833,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulateDebug (
   SLData_t        RealDelayedOutput, ImagDelayedOutput;
   SLData_t        LocalCostasLoopLoopSample = *pCostasLoopLoopSample;
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 // Use the frequency modulator as a voltage controlled oscillator
 // Input is saved feedback sample from previous iteration
     SDS_FrequencyModulateComplex (LocalCostasLoopLoopSample,
@@ -915,7 +909,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulateDebug (
   *pCostasLoopLoopSample = LocalCostasLoopLoopSample;               // Save loop sample for next iteration
 
   return (IQOutputCount);                                           // Return number of IQ symbols demodulated
-
 }                                                                   // End of SDA_CostasQamDemodulateDebug()
 #endif                                                              // End of !((_TMS320C30) || (_TMS320C40))
 
@@ -1016,7 +1009,6 @@ void SIGLIB_FUNC_DECL SIF_QpskModulate (
     SIF_Fir (pRRCFTxIStateArray, pRRCFTxIFilterIndex, RRCFSize);
     SIF_Fir (pRRCFTxQStateArray, pRRCFTxQFilterIndex, RRCFSize);
   }
-
 }                                                                   // End of SIF_QpskModulate()
 
 
@@ -1075,15 +1067,13 @@ void SIGLIB_FUNC_DECL SDA_QpskModulate (
   const SLArrayIndex_t RRCFSwitch)
 {
   SLData_t        ISample, QSample;                                 // Data samples
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pDst % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  for (i = 0; i < SamplesPerSymbol; i++) {
+  for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
     if (RRCFSwitch == SIGLIB_ENABLE) {
       if (*pSampleClock == SIGLIB_AI_ZERO) {                        // Keep track of sample clock
 // Convert data value to constellation point
@@ -1279,7 +1269,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_QpskDemodulate (
   const SLArrayIndex_t RRCFSwitch)
 {
   SLData_t        ISample, QSample;                                 // Data samples
-  SLArrayIndex_t  i;
   SLFixData_t     RxDiBit = SIGLIB_AI_ZERO;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
@@ -1288,7 +1277,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_QpskDemodulate (
 #endif
 #endif
 
-  for (i = 0; i < SamplesPerSymbol; i++) {
+  for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
 // Demodulate the I and Q carriers
     ISample = pSrc[i] * pCarrierTable[((SLArrayIndex_t) * pCarrierPhase) + (SLArrayIndex_t) ((SLUFixData_t) CarrierTableSize >> 2U)];
     QSample = pSrc[i] * pCarrierTable[(SLArrayIndex_t) * pCarrierPhase];
@@ -1338,7 +1327,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_QpskDemodulate (
   }
 
   return (RxDiBit);
-
 }                                                                   // End of SDA_QpskDemodulate()
 
 
@@ -1401,7 +1389,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_QpskDemodulateDebug (
   SLComplexRect_s * SIGLIB_PTR_DECL pConstellationPoints)
 {
   SLData_t        ISample, QSample;                                 // Data samples
-  SLArrayIndex_t  i;
   SLFixData_t     RxDiBit = SIGLIB_AI_ZERO;
 
 #if (SIGLIB_ARRAYS_ALIGNED)
@@ -1410,7 +1397,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_QpskDemodulateDebug (
 #endif
 #endif
 
-  for (i = 0; i < SamplesPerSymbol; i++) {
+  for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
 // Demodulate the I and Q carriers
     ISample = pSrc[i] * pCarrierTable[((SLArrayIndex_t) * pCarrierPhase) + (SLArrayIndex_t) ((SLUFixData_t) CarrierTableSize >> 2U)];
     QSample = pSrc[i] * pCarrierTable[(SLArrayIndex_t) * pCarrierPhase];
@@ -1474,7 +1461,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_QpskDemodulateDebug (
   }
 
   return (RxDiBit);
-
 }                                                                   // End of SDA_QpskDemodulateDebug()
 
 
@@ -1754,18 +1740,17 @@ void SIGLIB_FUNC_DECL SDA_FskModulateByte (
   const SLFixData_t SamplesPerSymbol,
   const SLArrayIndex_t SineTableLength)
 {
-  SLArrayIndex_t  i, j;
-  SLData_t        LocalLevelOneCarrierPhase = *LevelOneCarrierPhase;
-  SLData_t        LocalLevelZeroCarrierPhase = *LevelZeroCarrierPhase;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pDst % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  for (j = 0; j < SIGLIB_BYTE_LENGTH; j++) {                        // For each bit in the sample byte
-    for (i = 0; i < SamplesPerSymbol; i++) {
+  SLData_t        LocalLevelOneCarrierPhase = *LevelOneCarrierPhase;
+  SLData_t        LocalLevelZeroCarrierPhase = *LevelZeroCarrierPhase;
+
+  for (SLArrayIndex_t j = 0; j < SIGLIB_BYTE_LENGTH; j++) {         // For each bit in the sample byte
+    for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
       if ((SLUFixData_t) TxByte & SIGLIB_UFIX_ONE) {                // Bit is '1'
         *pDst++ = *(pCarrierTable + (SLArrayIndex_t) LocalLevelOneCarrierPhase);
       }
@@ -1788,7 +1773,6 @@ void SIGLIB_FUNC_DECL SDA_FskModulateByte (
 
   *LevelZeroCarrierPhase = LocalLevelZeroCarrierPhase;
   *LevelOneCarrierPhase = LocalLevelOneCarrierPhase;
-
 }                                                                   // End of SDA_FskModulateByte()
 
 
@@ -1823,11 +1807,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_FskDemodulateByte (
   const SLArrayIndex_t FilterLength,
   const SLFixData_t SamplesPerSymbol)
 {
-  SLArrayIndex_t  i, j, k;
-  SLFixData_t     RxByte = SIGLIB_FIX_ZERO;
-  SLData_t        LevelOneSum, LevelZeroSum;
-  SLData_t        LevelOnePeak, LevelZeroPeak;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -1836,14 +1815,18 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_FskDemodulateByte (
 #endif
 #endif
 
-  for (k = 0; k < SIGLIB_BYTE_LENGTH; k++) {                        // For each bit in the sample byte
+  SLFixData_t     RxByte = SIGLIB_FIX_ZERO;
+  SLData_t        LevelOneSum, LevelZeroSum;
+  SLData_t        LevelOnePeak, LevelZeroPeak;
+
+  for (SLArrayIndex_t k = 0; k < SIGLIB_BYTE_LENGTH; k++) {         // For each bit in the sample byte
     LevelOnePeak = SIGLIB_ZERO;                                     // Reset peak values
     LevelZeroPeak = SIGLIB_ZERO;
 
-    for (j = 0; j < (FilterLength - SamplesPerSymbol); j++) {
+    for (SLArrayIndex_t j = 0; j < (FilterLength - SamplesPerSymbol); j++) {
       LevelOneSum = SIGLIB_ZERO;                                    // Reset running sum values
       LevelZeroSum = SIGLIB_ZERO;
-      for (i = 0; i < SamplesPerSymbol; i++) {
+      for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
 // Filter the source data
         LevelOneSum += pSrc[i] * pLevelOneFilter[j + i];
         LevelZeroSum += pSrc[i] * pLevelZeroFilter[j + i];
@@ -1869,7 +1852,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_FskDemodulateByte (
   }
 
   return (RxByte);
-
 }                                                                   // End of SDA_FskDemodulateByte()
 
 
@@ -1906,18 +1888,17 @@ void SIGLIB_FUNC_DECL SDA_CpfskModulateByte (
   const SLFixData_t SamplesPerSymbol,
   const SLArrayIndex_t SineTableLength)
 {
-  SLArrayIndex_t  i, j;
-  SLData_t        Phase, PhaseDelta;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pDst % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
+  SLData_t        Phase, PhaseDelta;
+
   Phase = *PhaseOffset;
 
-  for (j = 0; j < SIGLIB_BYTE_LENGTH; j++) {                        // For each bit in the sample byte
+  for (SLArrayIndex_t j = 0; j < SIGLIB_BYTE_LENGTH; j++) {         // For each bit in the sample byte
     if ((SLUFixData_t) TxByte & SIGLIB_UFIX_ONE) {                  // Bit is '1'
       PhaseDelta = LevelOneCarrierPhaseDelta;
     }
@@ -1925,7 +1906,7 @@ void SIGLIB_FUNC_DECL SDA_CpfskModulateByte (
       PhaseDelta = LevelZeroCarrierPhaseDelta;
     }
 
-    for (i = 0; i < SamplesPerSymbol; i++) {
+    for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
       Phase += PhaseDelta;                                          // Increment carrier phase
 
       if (Phase >= SineTableLength) {
@@ -1938,7 +1919,6 @@ void SIGLIB_FUNC_DECL SDA_CpfskModulateByte (
   }
 
   *PhaseOffset = Phase;
-
 }                                                                   // End of SDA_CpfskModulateByte()
 
 
@@ -1979,17 +1959,16 @@ void SIGLIB_FUNC_DECL SDA_FskModulate (
   const SLFixData_t SamplesPerSymbol,
   const SLArrayIndex_t SineTableLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        LocalLevelOneCarrierPhase = *LevelOneCarrierPhase;
-  SLData_t        LocalLevelZeroCarrierPhase = *LevelZeroCarrierPhase;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pDst % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  for (i = 0; i < SamplesPerSymbol; i++) {
+  SLData_t        LocalLevelOneCarrierPhase = *LevelOneCarrierPhase;
+  SLData_t        LocalLevelZeroCarrierPhase = *LevelZeroCarrierPhase;
+
+  for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
     if ((SLUFixData_t) TxBit & SIGLIB_UFIX_ONE) {                   // Bit is '1'
       *pDst++ = *(pCarrierTable + (SLArrayIndex_t) LocalLevelOneCarrierPhase);
     }
@@ -2010,7 +1989,6 @@ void SIGLIB_FUNC_DECL SDA_FskModulate (
 
   *LevelZeroCarrierPhase = LocalLevelZeroCarrierPhase;
   *LevelOneCarrierPhase = LocalLevelOneCarrierPhase;
-
 }                                                                   // End of SDA_FskModulate()
 
 
@@ -2045,10 +2023,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_FskDemodulate (
   const SLArrayIndex_t FilterLength,
   const SLFixData_t SamplesPerSymbol)
 {
-  SLArrayIndex_t  i, j;
-  SLData_t        LevelOneSum, LevelZeroSum;
-  SLData_t        LevelOnePeak, LevelZeroPeak;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -2057,13 +2031,16 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_FskDemodulate (
 #endif
 #endif
 
+  SLData_t        LevelOneSum, LevelZeroSum;
+  SLData_t        LevelOnePeak, LevelZeroPeak;
+
   LevelOnePeak = SIGLIB_ZERO;                                       // Reset peak values
   LevelZeroPeak = SIGLIB_ZERO;
 
-  for (j = 0; j < (FilterLength - SamplesPerSymbol); j++) {
+  for (SLArrayIndex_t j = 0; j < (FilterLength - SamplesPerSymbol); j++) {
     LevelOneSum = SIGLIB_ZERO;                                      // Reset running sum values
     LevelZeroSum = SIGLIB_ZERO;
-    for (i = 0; i < SamplesPerSymbol; i++) {
+    for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
 // Filter the source data
       LevelOneSum += pSrc[i] * pLevelOneFilter[j + i];
       LevelZeroSum += pSrc[i] * pLevelZeroFilter[j + i];
@@ -2086,7 +2063,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_FskDemodulate (
   }
 
   return (SIGLIB_FIX_ZERO);
-
 }                                                                   // End of SDA_FskDemodulate()
 
 
@@ -2125,14 +2101,13 @@ void SIGLIB_FUNC_DECL SDA_CpfskModulate (
   const SLFixData_t SamplesPerSymbol,
   const SLArrayIndex_t SineTableLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Phase, PhaseDelta;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pDst % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
+
+  SLData_t        Phase, PhaseDelta;
 
   Phase = *PhaseOffset;
 
@@ -2143,7 +2118,7 @@ void SIGLIB_FUNC_DECL SDA_CpfskModulate (
     PhaseDelta = LevelZeroCarrierPhaseDelta;
   }
 
-  for (i = 0; i < SamplesPerSymbol; i++) {
+  for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
     Phase += PhaseDelta;                                            // Increment carrier phase
 
     if (Phase >= SineTableLength) {
@@ -2330,16 +2305,15 @@ void SIGLIB_FUNC_DECL SDA_Qam16Modulate (
   const SLArrayIndex_t RRCFSize,
   const SLArrayIndex_t RRCFSwitch)
 {
-  SLData_t        ISample, QSample;                                 // Data samples
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pDst % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  for (i = 0; i < SamplesPerSymbol; i++) {
+  SLData_t        ISample, QSample;                                 // Data samples
+
+  for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
     if (RRCFSwitch == SIGLIB_ENABLE) {
       if (*pSampleClock == SIGLIB_AI_ZERO) {                        // Keep track of sample clock
 // Convert data value to constellation point
@@ -2388,7 +2362,6 @@ void SIGLIB_FUNC_DECL SDA_Qam16Modulate (
     if (*pCarrierPhase >= CarrierTableSize) {                       // Maintain phase within array bounds
       *pCarrierPhase -= CarrierTableSize;
     }
-
   }
 }                                                                   // End of SDA_Qam16Modulate()
 
@@ -2525,17 +2498,16 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Qam16Demodulate (
   const SLArrayIndex_t RRCFSize,
   const SLArrayIndex_t RRCFSwitch)
 {
-  SLData_t        ISample, QSample;                                 // Data samples
-  SLArrayIndex_t  i;
-  SLFixData_t     RxNibble = SIGLIB_AI_ZERO;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  for (i = 0; i < SamplesPerSymbol; i++) {
+  SLData_t        ISample, QSample;                                 // Data samples
+  SLFixData_t     RxNibble = SIGLIB_AI_ZERO;
+
+  for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
 // Demodulate the I and Q carriers
     ISample = pSrc[i] * pCarrierTable[((SLArrayIndex_t) * pCarrierPhase) + (SLArrayIndex_t) ((SLUFixData_t) CarrierTableSize >> 2U)];
     QSample = pSrc[i] * pCarrierTable[(SLArrayIndex_t) * pCarrierPhase];
@@ -2591,7 +2563,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Qam16Demodulate (
   }
 
   return (RxNibble);
-
 }                                                                   // End of SDA_Qam16Demodulate()
 
 
@@ -2653,17 +2624,16 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Qam16DemodulateDebug (
   SLData_t * SIGLIB_PTR_DECL pEyeSamples,
   SLComplexRect_s * SIGLIB_PTR_DECL pConstellationPoints)
 {
-  SLData_t        ISample, QSample;                                 // Data samples
-  SLArrayIndex_t  i;
-  SLFixData_t     RxNibble = SIGLIB_AI_ZERO;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  for (i = 0; i < SamplesPerSymbol; i++) {
+  SLData_t        ISample, QSample;                                 // Data samples
+  SLFixData_t     RxNibble = SIGLIB_AI_ZERO;
+
+  for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
 // Demodulate the I and Q carriers
     ISample = pSrc[i] * pCarrierTable[((SLArrayIndex_t) * pCarrierPhase) + (SLArrayIndex_t) ((SLUFixData_t) CarrierTableSize >> 2U)];
     QSample = pSrc[i] * pCarrierTable[(SLArrayIndex_t) * pCarrierPhase];
@@ -2725,7 +2695,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Qam16DemodulateDebug (
   }
 
   return (RxNibble);
-
 }                                                                   // End of SDA_Qam16DemodulateDebug()
 
 
@@ -2804,7 +2773,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Qam16DifferentialEncode (
 
 // Map application constellation to generic SigLib constellation
   return (siglib_numerix_QAM16TxMapping[(SLArrayIndex_t) ((SLUFixData_t) TxNibble & 0x0cU) + Quadrant]);
-
 }                                                                   // End of SDA_Qam16DifferentialEncode()
 
 
@@ -2842,7 +2810,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Qam16DifferentialDecode (
   *PreviousQuadrant = (SLFixData_t) (Offset & SIGLIB_QPSK_BIT_MASK);  // Save current quadrant for next iteration
 
   return (Output);
-
 }                                                                   // End of SDA_Qam16DifferentialDecode()
 
 
@@ -2877,7 +2844,6 @@ void SIGLIB_FUNC_DECL SIF_BpskModulate (
                       CarrierPhaseIncrement, SIGLIB_ZERO, SIGLIB_ZERO, SIGLIB_ZERO, &SinPhase, SIGLIB_NULL_DATA_PTR, SineTableLength);
 
   *pSampleCount = SIGLIB_ZERO;
-
 }                                                                   // End of SIF_BpskModulate()
 
 
@@ -2913,16 +2879,15 @@ void SIGLIB_FUNC_DECL SDA_BpskModulate (
   const SLData_t CarrierPhaseDelta,
   const SLArrayIndex_t SineTableLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        LocalCarrierPhase = *pCarrierPhase;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pDst % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  for (i = 0; i < SamplesPerSymbol; i++) {
+  SLData_t        LocalCarrierPhase = *pCarrierPhase;
+
+  for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
     if ((SLUFixData_t) TxBit & SIGLIB_UFIX_ONE) {                   // Bit is '1'
       *pDst++ = *(pCarrierTable + ((SLArrayIndex_t) LocalCarrierPhase));
     }
@@ -2937,7 +2902,6 @@ void SIGLIB_FUNC_DECL SDA_BpskModulate (
   }
 
   *pCarrierPhase = LocalCarrierPhase;
-
 }                                                                   // End of SDA_BpskModulate()
 
 
@@ -2970,17 +2934,16 @@ void SIGLIB_FUNC_DECL SDA_BpskModulateByte (
   const SLData_t CarrierPhaseDelta,
   const SLArrayIndex_t SineTableLength)
 {
-  SLArrayIndex_t  i, j;
-  SLData_t        LocalCarrierPhase = *pCarrierPhase;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pDst % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  for (j = 0; j < SIGLIB_BYTE_LENGTH; j++) {                        // For each bit in the sample byte
-    for (i = 0; i < SamplesPerSymbol; i++) {
+  SLData_t        LocalCarrierPhase = *pCarrierPhase;
+
+  for (SLArrayIndex_t j = 0; j < SIGLIB_BYTE_LENGTH; j++) {         // For each bit in the sample byte
+    for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
       if ((SLUFixData_t) TxByte & SIGLIB_UFIX_ONE) {                // Bit is '1'
         *pDst++ = *(pCarrierTable + ((SLArrayIndex_t) LocalCarrierPhase));
       }
@@ -2997,7 +2960,6 @@ void SIGLIB_FUNC_DECL SDA_BpskModulateByte (
   }
 
   *pCarrierPhase = LocalCarrierPhase;
-
 }                                                                   // End of SDA_BpskModulateByte()
 
 
@@ -3053,7 +3015,6 @@ void SIGLIB_FUNC_DECL SIF_BpskDemodulate (
 //  *pRxSampleClock = SIGLIB_AI_ZERO;           // Initialise Rx sample clock
   *pRxSampleClock = SIGLIB_AI_ONE;                                  // Initialise Rx sample clock
   *pSampleSum = SIGLIB_ZERO;                                        // Initialise Rx sample sum
-
 }                                                                   // End of SIF_BpskDemodulate()
 
 
@@ -3111,11 +3072,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_BpskDemodulate (
   SLData_t * pSampleSum,
   const SLFixData_t SamplesPerSymbol)
 {
-  SLArrayIndex_t  i;
-  SLFixData_t     ReturnValue = SIGLIB_FIX_ZERO;
-  SLData_t        RealTmp, ImagTmp;                                 // Temporary data processing variables - one for each path
-  SLData_t        RealVCOOutput, ImagVCOOutput;                     // Local VCO output
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pCostasLpLPF1State % 8 == 0);                     // Align arrays on 64 bit double word boundary for LDDW
@@ -3125,7 +3081,11 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_BpskDemodulate (
 #endif
 #endif
 
-  for (i = 0; i < SamplesPerSymbol; i++) {
+  SLFixData_t     ReturnValue = SIGLIB_FIX_ZERO;
+  SLData_t        RealTmp, ImagTmp;                                 // Temporary data processing variables - one for each path
+  SLData_t        RealVCOOutput, ImagVCOOutput;                     // Local VCO output
+
+  for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
 // Use the frequency modulator as a voltage controlled oscillator
 // Input is saved feedback sample from previous iteration
     SDS_FrequencyModulateComplex (*pSample,
@@ -3162,7 +3122,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_BpskDemodulate (
   }
 
   return (ReturnValue);
-
 }                                                                   // End of SDA_BpskDemodulate()
 
 
@@ -3223,11 +3182,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_BpskDemodulateDebug (
   const SLFixData_t SamplesPerSymbol,
   SLData_t * SIGLIB_PTR_DECL pFilterOutput)
 {
-  SLArrayIndex_t  i;
-  SLFixData_t     ReturnValue = SIGLIB_FIX_ZERO;
-  SLData_t        RealTmp, ImagTmp;                                 // Temporary data processing variables - one for each path
-  SLData_t        RealVCOOutput, ImagVCOOutput;                     // Local VCO output
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pCostasLpLPF1State % 8 == 0);                     // Align arrays on 64 bit double word boundary for LDDW
@@ -3237,7 +3191,11 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_BpskDemodulateDebug (
 #endif
 #endif
 
-  for (i = 0; i < SamplesPerSymbol; i++) {
+  SLFixData_t     ReturnValue = SIGLIB_FIX_ZERO;
+  SLData_t        RealTmp, ImagTmp;                                 // Temporary data processing variables - one for each path
+  SLData_t        RealVCOOutput, ImagVCOOutput;                     // Local VCO output
+
+  for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
 // Use the frequency modulator as a voltage controlled oscillator
 // Input is saved feedback sample from previous iteration
     SDS_FrequencyModulateComplex (*pSample,
@@ -3276,7 +3234,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_BpskDemodulateDebug (
   }
 
   return (ReturnValue);
-
 }                                                                   // End of SDA_BpskDemodulateDebug()
 
 
@@ -3349,20 +3306,19 @@ void SIGLIB_FUNC_DECL SDA_DpskModulate (
   const SLArrayIndex_t SineTableLength,
   SLData_t * pModulationPhase)
 {
-  SLArrayIndex_t  i;
-  SLData_t        LocalpCarrierPhase = *pCarrierPhase;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pDst % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
+  SLData_t        LocalpCarrierPhase = *pCarrierPhase;
+
   if (((SLUFixData_t) TxBit & SIGLIB_UFIX_ONE) == 0U) {             // Change phase if bit is '0'
     *pModulationPhase *= SIGLIB_MINUS_ONE;
   }
 
-  for (i = 0; i < SamplesPerSymbol; i++) {
+  for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
     *pDst++ = *pModulationPhase * *(pCarrierTable + ((SLArrayIndex_t) LocalpCarrierPhase));
 
     LocalpCarrierPhase += pCarrierPhaseDelta;
@@ -3372,7 +3328,6 @@ void SIGLIB_FUNC_DECL SDA_DpskModulate (
   }
 
   *pCarrierPhase = LocalpCarrierPhase;
-
 }                                                                   // End of SDA_DpskModulate()
 
 
@@ -3407,21 +3362,20 @@ void SIGLIB_FUNC_DECL SDA_DpskModulateByte (
   const SLArrayIndex_t SineTableLength,
   SLData_t * pModulationPhase)
 {
-  SLArrayIndex_t  i, j;
-  SLData_t        LocalpCarrierPhase = *pCarrierPhase;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pDst % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  for (j = 0; j < SIGLIB_BYTE_LENGTH; j++) {                        // For each bit in the sample byte
+  SLData_t        LocalpCarrierPhase = *pCarrierPhase;
+
+  for (SLArrayIndex_t j = 0; j < SIGLIB_BYTE_LENGTH; j++) {         // For each bit in the sample byte
     if (((SLUFixData_t) TxByte & SIGLIB_UFIX_ONE) == 0) {           // Change phase if bit is '0'
       *pModulationPhase *= SIGLIB_MINUS_ONE;
     }
 
-    for (i = 0; i < SamplesPerSymbol; i++) {
+    for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
       *pDst++ = *pModulationPhase * *(pCarrierTable + ((SLArrayIndex_t) LocalpCarrierPhase));
 
       LocalpCarrierPhase += pCarrierPhaseDelta;
@@ -3433,7 +3387,6 @@ void SIGLIB_FUNC_DECL SDA_DpskModulateByte (
   }
 
   *pCarrierPhase = LocalpCarrierPhase;
-
 }                                                                   // End of SDA_DpskModulateByte()
 
 
@@ -3491,7 +3444,6 @@ void SIGLIB_FUNC_DECL SIF_DpskDemodulate (
   *pRxSampleClock = SIGLIB_AI_ZERO;                                 // Initialise Rx sample clock
   *pSampleSum = SIGLIB_ZERO;                                        // Initialise Rx sample sum
   *pPreviousSum = SIGLIB_ZERO;                                      // Initialise the Rx previous sample sum
-
 }                                                                   // End of SIF_DpskDemodulate()
 
 
@@ -3551,11 +3503,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_DpskDemodulate (
   const SLFixData_t SamplesPerSymbol,
   SLData_t * pPreviousSum)
 {
-  SLArrayIndex_t  i;
-  SLFixData_t     ReturnValue = SIGLIB_AI_ZERO;
-  SLData_t        RealTmp, ImagTmp;                                 // Temporary data processing variables - one for each path
-  SLData_t        RealVCOOutput, ImagVCOOutput;                     // Local VCO output
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pCostasLpLPF1State % 8 == 0);                     // Align arrays on 64 bit double word boundary for LDDW
@@ -3565,7 +3512,11 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_DpskDemodulate (
 #endif
 #endif
 
-  for (i = 0; i < SamplesPerSymbol; i++) {
+  SLFixData_t     ReturnValue = SIGLIB_AI_ZERO;
+  SLData_t        RealTmp, ImagTmp;                                 // Temporary data processing variables - one for each path
+  SLData_t        RealVCOOutput, ImagVCOOutput;                     // Local VCO output
+
+  for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
 // Use the frequency modulator as a voltage controlled oscillator
 // Input is saved feedback sample from previous iteration
     SDS_FrequencyModulateComplex (*pSample,
@@ -3606,7 +3557,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_DpskDemodulate (
   }
 
   return (ReturnValue);
-
 }                                                                   // End of SDA_DpskDemodulate()
 
 
@@ -3668,11 +3618,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_DpskDemodulateDebug (
   SLData_t * pPreviousSum,
   SLData_t * SIGLIB_PTR_DECL pFilterOutput)
 {
-  SLArrayIndex_t  i;
-  SLFixData_t     ReturnValue = SIGLIB_FIX_ZERO;
-  SLData_t        RealTmp, ImagTmp;                                 // Temporary data processing variables - one for each path
-  SLData_t        RealVCOOutput, ImagVCOOutput;                     // Local VCO output
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pCostasLpLPF1State % 8 == 0);                     // Align arrays on 64 bit double word boundary for LDDW
@@ -3682,7 +3627,11 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_DpskDemodulateDebug (
 #endif
 #endif
 
-  for (i = 0; i < SamplesPerSymbol; i++) {
+  SLFixData_t     ReturnValue = SIGLIB_FIX_ZERO;
+  SLData_t        RealTmp, ImagTmp;                                 // Temporary data processing variables - one for each path
+  SLData_t        RealVCOOutput, ImagVCOOutput;                     // Local VCO output
+
+  for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
 // Use the frequency modulator as a voltage controlled oscillator
 // Input is saved feedback sample from previous iteration
     SDS_FrequencyModulateComplex (*pSample,
@@ -3725,7 +3674,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_DpskDemodulateDebug (
   }
 
   return (ReturnValue);
-
 }                                                                   // End of SDA_DpskDemodulateDebug()
 
 
@@ -3843,7 +3791,6 @@ void SIGLIB_FUNC_DECL SIF_PiByFourDQpskModulate (
   }
 
   *pPrevOutputSymbol = SIGLIB_AI_ZERO;                              // Reset the previous output symbol
-
 }                                                                   // End of SIF_PiByFourDQpskModulate()
 
 
@@ -3903,18 +3850,17 @@ void SIGLIB_FUNC_DECL SDA_PiByFourDQpskModulate (
   const SLArrayIndex_t RRCFSwitch,
   SLArrayIndex_t * pPrevOutputSymbol)
 {
-  SLData_t        ISample, QSample;                                 // Data samples
-  SLArrayIndex_t  i;
-  SLArrayIndex_t  OutputSymbol;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pDst % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
+  SLData_t        ISample, QSample;                                 // Data samples
+  SLArrayIndex_t  OutputSymbol;
+
 // Calculate the new output symbol
-  for (i = 0; i < SamplesPerSymbol; i++) {
+  for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
     if (RRCFSwitch == SIGLIB_ENABLE) {
       if (*pSampleClock == SIGLIB_AI_ZERO) {                        // Keep track of sample clock
 // Convert data value to constellation point
@@ -4000,21 +3946,20 @@ void SIGLIB_FUNC_DECL SDS_ChannelizationCode (
   const SLArrayIndex_t SpreadingFactor,
   const SLArrayIndex_t CodeIndex)
 {
-  SLArrayIndex_t  i, j;
   SLData_t        SignModifier;
   SLArrayIndex_t  SegmentSize = SIGLIB_AI_ONE;
   SLArrayIndex_t  Log2SF = (SLArrayIndex_t) (SDS_Log2 (((SLData_t) SpreadingFactor) + 0.1));
 
   ChannelizationCode[0] = SIGLIB_ONE;
 
-  for (i = 0; i < Log2SF; i++) {
+  for (SLArrayIndex_t i = 0; i < Log2SF; i++) {
     if ((SLArrayIndex_t) (((SLUFixData_t) CodeIndex >> (SLUFixData_t) ((Log2SF - i) - 1U)) & SIGLIB_BPSK_BIT_MASK) == 0) {
       SignModifier = SIGLIB_ONE;
     }
     else {
       SignModifier = SIGLIB_MINUS_ONE;
     }
-    for (j = 0; j < SegmentSize; j++) {
+    for (SLArrayIndex_t j = 0; j < SegmentSize; j++) {
       ChannelizationCode[j + SegmentSize] = ChannelizationCode[j] * SignModifier;
     }
     SegmentSize <<= 1;                                              // How many codes are we calculating ?
@@ -4073,19 +4018,18 @@ void SIGLIB_FUNC_DECL SDA_ComplexQPSKSpread (
   const SLComplexRect_s * SIGLIB_PTR_DECL ScramblingCode,
   const SLArrayIndex_t SpreadingFactor)
 {
-  SLArrayIndex_t  i;
   SLData_t        ChannelizedWeightedI, ChannelizedWeightedQ;
   SLData_t        IMagn, QMagn;                                     // I and Q signal magnitudes
 
   IMagn = siglib_numerix_QPSKSpreadTxConstellation[(SLArrayIndex_t) ((SLUFixData_t) TxDiBit & SIGLIB_UFIX_THREE)].real; // Look up I and Q signal magnitudes
   QMagn = siglib_numerix_QPSKSpreadTxConstellation[(SLArrayIndex_t) ((SLUFixData_t) TxDiBit & SIGLIB_UFIX_THREE)].imag;
 
-#if DEBUG_LOG_FILE
+#if SIGLIB_ENABLE_DEBUG_LOGGING
 // SUF_Debugfprintf ("****Bi = %d, DD = %lf +j %lf\n", (int)TxDiBit, IMagn, QMagn);
 #endif
 
 // Apply channelization code, spread to chip rate and apply weight
-  for (i = 0; i < SpreadingFactor; i++) {
+  for (SLArrayIndex_t i = 0; i < SpreadingFactor; i++) {
     ChannelizedWeightedI = (IMagn * ChannelizationCodeI[i]) * WeightI;
     ChannelizedWeightedQ = (QMagn * ChannelizationCodeQ[i]) * WeightQ;
 
@@ -4138,7 +4082,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_ComplexQPSKDeSpread (
 {
   SLComplexRect_s DataDemod;
   SLFixData_t     DataBits;
-  SLArrayIndex_t  i;
   SLData_t        ChannelizedWeightedI, ChannelizedWeightedQ;
   SLData_t        SLD_SpreadingFactor = (SLData_t) SpreadingFactor;
 
@@ -4148,7 +4091,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_ComplexQPSKDeSpread (
   DataDemod.imag = SIGLIB_ZERO;
 
 // DeScrambling
-  for (i = 0; i < SpreadingFactor; i++) {
+  for (SLArrayIndex_t i = 0; i < SpreadingFactor; i++) {
     ChannelizedWeightedI = pSrc[i].real * DescramblingCode[i].real - pSrc[i].imag * DescramblingCode[i].imag;
     ChannelizedWeightedQ = pSrc[i].real * DescramblingCode[i].imag + pSrc[i].imag * DescramblingCode[i].real;
 

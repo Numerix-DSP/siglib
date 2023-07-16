@@ -1,5 +1,5 @@
 // SigLib Manchester Encoding Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -9,7 +9,6 @@
 int main (
   void)
 {
-  SLFixData_t     i;
   SLChar_t        Input = 0x63;
   SLFixData_t     EncOutput = 0;
   SLFixData_t     DecOutput = 0;
@@ -17,7 +16,7 @@ int main (
   printf ("SigLib Manchester encoding Example\n");
   printf ("Input = 0x%x, correct encoded output should be 0x695a\n", Input);
 
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {
+  for (SLFixData_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {
     EncOutput += (SLFixData_t) SDS_ManchesterEncode ((SLChar_t) ((Input >> i) & 0x1)) << (i * 2);
     DecOutput += (SLChar_t) ((SLFixData_t) SDS_ManchesterDecode ((SLChar_t) ((EncOutput >> (i * 2)) & 0x3)) << i);
   }

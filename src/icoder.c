@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : ICODER.C      | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 09/10/1994
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Image coding routines, for SigLib DSP library.
 
@@ -41,15 +41,12 @@ Description : Image coding routines, for SigLib DSP library.
 
 #include <siglib.h>                                                 // Include SigLib header file
 
-
 // Define constants
 #define DCT_SIZE            8
-
 
 // Define global variables
 
 static SLData_t siglib_numerix_DCTCosineTable[DCT_SIZE][DCT_SIZE];  // DCT cosine array
-
 
 /**/
 
@@ -70,10 +67,8 @@ static SLData_t siglib_numerix_DCTCosineTable[DCT_SIZE][DCT_SIZE];  // DCT cosin
 void SIGLIB_FUNC_DECL SIF_Dct8x8 (
   void)
 {
-  SLInt16_t       i, j;
-
-  for (j = 0; j < DCT_SIZE; j++) {                                  // Calculate cosine table coefficients
-    for (i = 0; i < DCT_SIZE; i++) {
+  for (SLInt16_t j = 0; j < DCT_SIZE; j++) {                        // Calculate cosine table coefficients
+    for (SLInt16_t i = 0; i < DCT_SIZE; i++) {
       siglib_numerix_DCTCosineTable[i][j] = SDS_Cos (SIGLIB_PI * ((SLData_t) (2 * i + 1)) * ((SLData_t) j) * SIGLIB_INV_SIXTEEN);
     }
   }
@@ -102,10 +97,6 @@ void SIGLIB_FUNC_DECL SIM_Dct8x8 (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   SLData_t * SIGLIB_PTR_DECL pDst)
 {
-  SLInt16_t       x, y, u, v;
-  SLData_t        Sum;
-  const SLData_t *pSrcTmp;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -113,15 +104,15 @@ void SIGLIB_FUNC_DECL SIM_Dct8x8 (
 #endif
 #endif
 
-  pSrcTmp = pSrc;
+  const SLData_t *pSrcTmp = pSrc;
 
-  for (v = 0; v < DCT_SIZE; v++) {                                  // Calculate the DCT
-    for (u = 0; u < DCT_SIZE; u++) {
-      Sum = SIGLIB_ZERO;
+  for (SLInt16_t v = 0; v < DCT_SIZE; v++) {                        // Calculate the DCT
+    for (SLInt16_t u = 0; u < DCT_SIZE; u++) {
+      SLData_t        Sum = SIGLIB_ZERO;
       pSrc = pSrcTmp;
 
-      for (y = 0; y < DCT_SIZE; y++) {
-        for (x = 0; x < DCT_SIZE; x++) {
+      for (SLInt16_t y = 0; y < DCT_SIZE; y++) {
+        for (SLInt16_t x = 0; x < DCT_SIZE; x++) {
           Sum += *pSrc++ * siglib_numerix_DCTCosineTable[x][u] * siglib_numerix_DCTCosineTable[y][v];
         }
       }
@@ -162,10 +153,6 @@ void SIGLIB_FUNC_DECL SIM_Idct8x8 (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   SLData_t * SIGLIB_PTR_DECL pDst)
 {
-  SLInt16_t       x, y, u, v;
-  SLData_t        Sum, Tmp;
-  const SLData_t *pSrcTmp;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -173,16 +160,16 @@ void SIGLIB_FUNC_DECL SIM_Idct8x8 (
 #endif
 #endif
 
-  pSrcTmp = pSrc;
+  const SLData_t *pSrcTmp = pSrc;
 
-  for (y = 0; y < DCT_SIZE; y++) {                                  // Calculate the inverse DCT
-    for (x = 0; x < DCT_SIZE; x++) {
-      Sum = SIGLIB_ZERO;
+  for (SLInt16_t y = 0; y < DCT_SIZE; y++) {                        // Calculate the inverse DCT
+    for (SLInt16_t x = 0; x < DCT_SIZE; x++) {
+      SLData_t        Sum = SIGLIB_ZERO;
       pSrc = pSrcTmp;
 
-      for (v = 0; v < DCT_SIZE; v++) {
-        for (u = 0; u < DCT_SIZE; u++) {
-          Tmp = *pSrc++ * siglib_numerix_DCTCosineTable[x][u] * siglib_numerix_DCTCosineTable[y][v];
+      for (SLInt16_t v = 0; v < DCT_SIZE; v++) {
+        for (SLInt16_t u = 0; u < DCT_SIZE; u++) {
+          SLData_t        Tmp = *pSrc++ * siglib_numerix_DCTCosineTable[x][u] * siglib_numerix_DCTCosineTable[y][v];
 
           if (u == 0) {
             Tmp *= SIGLIB_INV_SQRT_TWO;
@@ -231,10 +218,6 @@ void SIGLIB_FUNC_DECL SIM_ZigZagScan (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t Length)
 {
-  SLArrayIndex_t  i, inc, array_size;
-  SLUFixData_t    test;
-  const SLData_t *SourceStart;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -242,12 +225,12 @@ void SIGLIB_FUNC_DECL SIM_ZigZagScan (
 #endif
 #endif
 
-  SourceStart = pSrc;                                               // Initialise local variables
-  array_size = (Length * Length);
-  inc = -(Length - 1);
-  test = (SLUFixData_t) (Length - 1);
+  const SLData_t *SourceStart = pSrc;                               // Initialise local variables
+  SLArrayIndex_t  array_size = (Length * Length);
+  SLArrayIndex_t  inc = -(Length - 1);
+  SLUFixData_t    test = (SLUFixData_t) (Length - 1);
 
-  for (i = 1; i < array_size; i++) {
+  for (SLArrayIndex_t i = 1; i < array_size; i++) {
     *pDst++ = *pSrc;
 // Horizontal zig-zagging
 // Top row
@@ -322,10 +305,6 @@ void SIGLIB_FUNC_DECL SIM_ZigZagDescan (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t Length)
 {
-  SLArrayIndex_t  i, inc, array_size;
-  SLUFixData_t    test;
-  SLData_t       *DestStart;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -333,12 +312,12 @@ void SIGLIB_FUNC_DECL SIM_ZigZagDescan (
 #endif
 #endif
 
-  DestStart = pDst;                                                 // Initialise local variables
-  array_size = (Length * Length);
-  inc = -(Length - 1);
-  test = (SLUFixData_t) (Length - 1);
+  SLData_t       *DestStart = pDst;                                 // Initialise local variables
+  SLArrayIndex_t  array_size = (Length * Length);
+  SLArrayIndex_t  inc = -(Length - 1);
+  SLUFixData_t    test = (SLUFixData_t) (Length - 1);
 
-  for (i = 1; i < array_size; i++) {
+  for (SLArrayIndex_t i = 1; i < array_size; i++) {
     *pDst = *pSrc++;
 // Horizontal zig-zagging
 // Top row

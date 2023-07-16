@@ -1,5 +1,5 @@
 // SigLib IIR Filter Gain Adjustment Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -9,7 +9,7 @@
 // Define constants
 #define FILTER_STAGES           4                                   // Number of 2nd-order filter stages
 #define CENTRE_FREQUENCY        105.                                // Centre frequency for filter
-#define SAMPLE_RATE             2000.                               // Sample rate
+#define SAMPLE_RATE_HZ          2000.                               // Sample rate
 #define NEW_IIR_GAIN            SIGLIB_ONE                          // New IIR filter gain
 #define IMPULSE_RESPONSE_LENGTH 1024
 #define FFT_LENGTH              IMPULSE_RESPONSE_LENGTH
@@ -38,7 +38,6 @@ int main (
   void)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
-  SLFixData_t     i;
 
 // Allocate memory
   pNewIIRCoeffs = SUF_IirCoefficientAllocate (FILTER_STAGES);
@@ -100,7 +99,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Impulse Response",                                  // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE),          // Maximum X value
+               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE_HZ),       // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -126,7 +125,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Frequency Response",                                // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (PLOT_LENGTH - 1) / (SAMPLE_RATE / ((double) FFT_LENGTH))),  // Maximum X value
+               ((double) (PLOT_LENGTH - 1) / (SAMPLE_RATE_HZ / ((double) FFT_LENGTH))), // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -137,7 +136,7 @@ int main (
 // Normalize the IIR filter gain
   SDA_IirModifyFilterGain (pIIRCoeffs,                              // Pointer to source IIR filter coefficients
                            pNewIIRCoeffs,                           // Pointer to modified IIR filter coefficients
-                           CENTRE_FREQUENCY / SAMPLE_RATE,          // Centre frequency normalised to 1 Hz
+                           CENTRE_FREQUENCY / SAMPLE_RATE_HZ,       // Centre frequency normalised to 1 Hz
                            SIGLIB_ONE,                              // Desired gain
                            FILTER_STAGES);                          // Number of biquads
 
@@ -170,7 +169,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Impulse Response",                                  // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE),          // Maximum X value
+               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE_HZ),       // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -196,7 +195,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Frequency Response",                                // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (PLOT_LENGTH - 1) / (SAMPLE_RATE / ((double) FFT_LENGTH))),  // Maximum X value
+               ((double) (PLOT_LENGTH - 1) / (SAMPLE_RATE_HZ / ((double) FFT_LENGTH))), // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -204,7 +203,7 @@ int main (
 
 
   printf ("New IIR filter coefficients\n\n");
-  for (i = 0; i < FILTER_STAGES; i++) {                             // Print out new coefficients
+  for (SLFixData_t i = 0; i < FILTER_STAGES; i++) {                 // Print out new coefficients
     printf ("%.20le, ", *(pNewIIRCoeffs + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)));
     printf ("%.20le,\n", *(pNewIIRCoeffs + 1 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)));
     printf ("%.20le,\n", *(pNewIIRCoeffs + 2 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)));

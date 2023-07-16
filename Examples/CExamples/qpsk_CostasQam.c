@@ -7,7 +7,7 @@
 // To see how to apply a scrambler to the sequence
 // (e.g. polynomial: 1 + x-14 + x-17 used in the ITU-T
 // recommendations), please refer to example tstqam16.c.
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -35,12 +35,12 @@
             // Basic application definitions
 #define SAMPLE_LENGTH                   512                         // Number of samples in array
 
-#define SAMPLE_RATE                     9600.                       // Sample rate
+#define SAMPLE_RATE_HZ                  9600.                       // Sample rate
 #define SYMBOL_RATE                     600.                        // Baud rate
 #define CARRIER_FREQ                    2400.                       // Frequency of carrier signal - a multiple of the sine table frequency
 
-#define SYMBOL_LENGTH                   16                          // Symbol Period = SAMPLE_RATE / SYMBOL_RATE
-#define CARRIER_CYCLE_LENGTH            4                           // Carrier Period = SAMPLE_RATE / CARRIER_FREQ
+#define SYMBOL_LENGTH                   16                          // Symbol Period = SAMPLE_RATE_HZ / SYMBOL_RATE
+#define CARRIER_CYCLE_LENGTH            4                           // Carrier Period = SAMPLE_RATE_HZ / CARRIER_FREQ
 
 #if RRCF_ENABLE
 #define RRCF_PERIOD                     SYMBOL_LENGTH               // RRCF Period
@@ -74,7 +74,7 @@
 #define SYMBOLS_PER_LOOP                ((SLArrayIndex_t)(SAMPLE_LENGTH / SYMBOL_LENGTH)) // Number of symbols per loop for graph
 
 #define TX_CARRIER_TABLE_FREQ           100.                        // Frequency of sine wave in table
-#define TX_CARRIER_TABLE_SIZE           ((SLArrayIndex_t)(SAMPLE_RATE / TX_CARRIER_TABLE_FREQ)) // Number of samples in each of cos and sine table
+#define TX_CARRIER_TABLE_SIZE           ((SLArrayIndex_t)(SAMPLE_RATE_HZ / TX_CARRIER_TABLE_FREQ))  // Number of samples in each of cos and sine table
 #define TX_CARRIER_TABLE_INCREMENT      ((SLArrayIndex_t)(CARRIER_FREQ / TX_CARRIER_TABLE_FREQ))  // Carrier frequency
 
 #define EYE_DIAGRAM_SIZE                (2 * SYMBOL_LENGTH)         // Size of eye diagram graph - Two complete symbol periods
@@ -198,7 +198,6 @@ int main (
 #endif
 
   SLError_t       SigLibErrorCode;
-  SLArrayIndex_t  i;
   SLArrayIndex_t  TxStringIndex = 0;
   SLArrayIndex_t  TxSourceWordPhase = 0;
   SLFixData_t     TxDiBit;
@@ -224,7 +223,7 @@ int main (
 
 #if DEBUG_LOG_FILE
   SUF_ClearDebugfprintf ();
-  for (i = 0; i < 20; i++) {
+  for (SLArrayIndex_t i = 0; i < 20; i++) {
     SUF_Debugfprintf ("TxString[%d]", i);
     dpchar (TxString[i]);
   }
@@ -285,7 +284,7 @@ int main (
 
 // Initialise QPSK functions
   SIF_QpskModulate (pTxCarrierTable,                                // Carrier table pointer
-                    TX_CARRIER_TABLE_FREQ / SAMPLE_RATE,            // Carrier phase increment per sample (radians / 2π)
+                    TX_CARRIER_TABLE_FREQ / SAMPLE_RATE_HZ,         // Carrier phase increment per sample (radians / 2π)
                     TX_CARRIER_TABLE_SIZE,                          // Carrier sine table size
                     &TxCarrierPhase,                                // Carrier phase pointer
                     &TxSampleClock,                                 // Sample clock pointer
@@ -304,7 +303,7 @@ int main (
   SigLibErrorCode = SIF_CostasQamDemodulate (&CostasLpVCOPhase,     // VCO phase
                                              pCostasLpVCOLookUpTable, // VCO look up table
                                              COSTAS_LP_VCO_TABLE_SIZE,  // VCO look up table size
-                                             SYMBOL_RATE / SAMPLE_RATE, // Low-pass filter cut-off frequency
+                                             SYMBOL_RATE / SAMPLE_RATE_HZ,  // Low-pass filter cut-off frequency
                                              pCostasLpLPF1State,    // Pointer to loop filter 1 state
                                              &CostasLpLPF1Index,    // Pointer to loop filter 1 index
                                              pCostasLpLPF2State,    // Pointer to loop filter 2 state
@@ -323,7 +322,7 @@ int main (
                                              pELGLoopFilterCoeffs,  // Pointer to loop filter coefficients
                                              &ELGLoopFilterIndex,   // Pointer to loop filter index
                                              ELG_LOOP_FILTER_LENGTH,  // Loop filter length
-                                             ELG_LOOP_FILTER_FC / SAMPLE_RATE,  // Loop filter cut-off / centre frequency
+                                             ELG_LOOP_FILTER_FC / SAMPLE_RATE_HZ, // Loop filter cut-off / centre frequency
                                              &ELGPulseDetectorThresholdFlag,  // Pointer to pulse detector threshold flag
                                              &ELGZeroCrossingPreviousSample,  // Pointer to zero crossing previous sample
                                              &ELGTriggerCount,      // Pointer to trigger counter
@@ -342,7 +341,7 @@ int main (
 
 // Main data processing loop
   for (LoopCount = 0; LoopCount < NUMBER_OF_LOOPS; LoopCount++) {
-    for (i = 0; i < SYMBOLS_PER_LOOP; i++) {                        // Modulate new symbol
+    for (SLArrayIndex_t i = 0; i < SYMBOLS_PER_LOOP; i++) {         // Modulate new symbol
       if (TxPreFillSymbolCount < TX_STARTUP_PREFILL) {              // Pre-fill the TxRx pipeline the pre-fill symbol is created prior to the modulate function
 // In order to lock the TED we must use a signal that changes phase every symbol period
         TxDiBit = (2 * TxPreFillSymbolCount) & SIGLIB_QPSK_BIT_MASK;
@@ -397,12 +396,12 @@ int main (
                  ModulatedSignal,                                   // Dataset
                  SAMPLE_LENGTH,                                     // Dataset length
                  "Modulated Signal",                                // Dataset title
-                 ((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount, // Minimum X value
-                 (((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                 ((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount,  // Minimum X value
+                 (((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),  // Maximum X value
                  "lines",                                           // Graph type
                  "blue",                                            // Colour
                  GPC_NEW);                                          // New graph
-    TimeIndex += (SLData_t) SAMPLE_LENGTH / SAMPLE_RATE;
+    TimeIndex += (SLData_t) SAMPLE_LENGTH / SAMPLE_RATE_HZ;
     printf ("\nModulated Signal\nPlease hit <Carriage Return> to continue . . .");
     getchar ();
 #endif
@@ -443,7 +442,7 @@ int main (
                                                   COSTAS_LP_VCO_MODULATION_INDEX, // VCO modulation index
                                                   pCostasLpVCOLookUpTable,  // VCO look up table
                                                   COSTAS_LP_VCO_TABLE_SIZE, // VCO look up table size
-                                                  CARRIER_FREQ / SAMPLE_RATE, // Carrier frequency
+                                                  CARRIER_FREQ / SAMPLE_RATE_HZ,  // Carrier frequency
                                                   pCostasLpLPF1State, // Pointer to loop filter 1 state
                                                   &CostasLpLPF1Index, // Pointer to loop filter 1 index
                                                   pCostasLpLPF2State, // Pointer to loop filter 2 state
@@ -487,7 +486,7 @@ int main (
                                              COSTAS_LP_VCO_MODULATION_INDEX,  // VCO modulation index
                                              pCostasLpVCOLookUpTable, // VCO look up table
                                              COSTAS_LP_VCO_TABLE_SIZE,  // VCO look up table size
-                                             CARRIER_FREQ / SAMPLE_RATE,  // Carrier frequency
+                                             CARRIER_FREQ / SAMPLE_RATE_HZ, // Carrier frequency
                                              pCostasLpLPF1State,    // Pointer to loop filter 1 state
                                              &CostasLpLPF1Index,    // Pointer to loop filter 1 index
                                              pCostasLpLPF2State,    // Pointer to loop filter 2 state
@@ -531,8 +530,8 @@ int main (
                  DebugRealFilterOutput,                             // Dataset
                  SAMPLE_LENGTH,                                     // Dataset length
                  "Real Filter Output",                              // Dataset title
-                 ((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount, // Minimum X value
-                 (((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                 ((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount,  // Minimum X value
+                 (((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),  // Maximum X value
                  "lines",                                           // Graph type
                  "blue",                                            // Colour
                  GPC_NEW);                                          // New graph
@@ -541,8 +540,8 @@ int main (
                  DebugImagFilterOutput,                             // Dataset
                  SAMPLE_LENGTH,                                     // Dataset length
                  "Imaginary Filter Output",                         // Dataset title
-                 ((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount, // Minimum X value
-                 (((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                 ((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount,  // Minimum X value
+                 (((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),  // Maximum X value
                  "lines",                                           // Graph type
                  "red",                                             // Colour
                  GPC_ADD);                                          // New graph
@@ -551,8 +550,8 @@ int main (
                  DebugELGTriggerOutput,                             // Dataset
                  SAMPLE_LENGTH,                                     // Dataset length
                  "Early-Late-Gate Trigger",                         // Dataset title
-                 ((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount, // Minimum X value
-                 (((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                 ((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount,  // Minimum X value
+                 (((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),  // Maximum X value
                  "lines",                                           // Graph type
                  "green",                                           // Colour
                  GPC_ADD);                                          // New graph
@@ -588,7 +587,7 @@ int main (
     }
 #endif
 
-    for (i = 0; i < RxSymbolCount; i++) {                           // Decode the receive symbols
+    for (SLArrayIndex_t i = 0; i < RxSymbolCount; i++) {            // Decode the receive symbols
 // Decode constellation
       SLData_t        ConstellationI = pRealOutput[i];
       SLData_t        ConstellationQ = pImagOutput[i];
@@ -644,14 +643,14 @@ int main (
 
 
 #if DISPLAY_EYE_DIAGRAM
-    for (i = 0; i < SAMPLE_LENGTH; i += EYE_DIAGRAM_SIZE) {
+    for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i += EYE_DIAGRAM_SIZE) {
       if (FirstEyeDiagramFlag == 1) {
         gpc_plot_2d (h2DPlot,                                       // Graph handle
                      DebugRealFilterOutput + i,                     // Dataset
                      EYE_DIAGRAM_SIZE,                              // Dataset length
                      "Real data",                                   // Dataset title
-                     ((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount, // Minimum X value
-                     (((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                     ((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount,  // Minimum X value
+                     (((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),  // Maximum X value
                      "lines",                                       // Graph type
                      "blue",                                        // Colour
                      GPC_NEW);                                      // New graph
@@ -659,8 +658,8 @@ int main (
                      DebugImagFilterOutput + i,                     // Dataset
                      EYE_DIAGRAM_SIZE,                              // Dataset length
                      "Imaginary data",                              // Dataset title
-                     ((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount, // Minimum X value
-                     (((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                     ((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount,  // Minimum X value
+                     (((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),  // Maximum X value
                      "lines",                                       // Graph type
                      "red",                                         // Colour
                      GPC_NEW);                                      // New graph
@@ -671,8 +670,8 @@ int main (
                      DebugRealFilterOutput + i,                     // Dataset
                      EYE_DIAGRAM_SIZE,                              // Dataset length
                      "Real data",                                   // Dataset title
-                     ((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount, // Minimum X value
-                     (((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                     ((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount,  // Minimum X value
+                     (((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),  // Maximum X value
                      "lines",                                       // Graph type
                      "blue",                                        // Colour
                      GPC_ADD);                                      // New graph
@@ -680,8 +679,8 @@ int main (
                      DebugImagFilterOutput + i,                     // Dataset
                      EYE_DIAGRAM_SIZE,                              // Dataset length
                      "Imaginary data",                              // Dataset title
-                     ((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount, // Minimum X value
-                     (((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                     ((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount,  // Minimum X value
+                     (((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),  // Maximum X value
                      "lines",                                       // Graph type
                      "red",                                         // Colour
                      GPC_ADD);                                      // New graph
@@ -700,13 +699,13 @@ int main (
   RxString[RxStringIndex] = 0;                                      // Terminate string for printf
   printf ("Received string: %s", RxString);
 #else
-  for (i = 0; i < RxStringIndex; i++) {
+  for (SLArrayIndex_t i = 0; i < RxStringIndex; i++) {
     printf ("0x%x, ", (int) RxString[i]);
   }
 #endif
 
 #if DEBUG_LOG_FILE
-  for (i = 0; i < RxStringIndex; i++) {
+  for (SLArrayIndex_t i = 0; i < RxStringIndex; i++) {
     SUF_Debugfprintf ("RxString[%d]", i);
     dpchar (RxString[i]);
   }

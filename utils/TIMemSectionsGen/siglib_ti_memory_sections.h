@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : siglib_ti_memory_sections.h   | Author : JOHN EDWARDS
-Siglib Library Version  : 10.00                         |
+Siglib Library Version  : 10.50                         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 27/12/1999
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : SigLib function memory section definition file for TI compilers
     This file includes a memory section definition line for each function in
@@ -228,11 +228,13 @@ Description : SigLib function memory section definition file for TI compilers
 #pragma CODE_SECTION(SIF_VariableDelayComplex, ".text")
 #pragma CODE_SECTION(SUF_DecreaseVariableDelay, ".text")
 #pragma CODE_SECTION(SUF_IncreaseVariableDelay, ".text")
+#pragma CODE_SECTION(SDA_AgcEnvelopeDetector, ".text")
 #pragma CODE_SECTION(SDA_AgcMeanAbs, ".text")
 #pragma CODE_SECTION(SDA_AgcMeanSquared, ".text")
 #pragma CODE_SECTION(SDA_AgcPeak, ".text")
 #pragma CODE_SECTION(SDA_ClearLocation, ".text")
 #pragma CODE_SECTION(SDA_ComplexSpectralInverse, ".text")
+#pragma CODE_SECTION(SDA_Drc, ".text")
 #pragma CODE_SECTION(SDA_FdInterpolate, ".text")
 #pragma CODE_SECTION(SDA_FdInterpolate2, ".text")
 #pragma CODE_SECTION(SDA_Find, ".text")
@@ -258,18 +260,22 @@ Description : SigLib function memory section definition file for TI compilers
 #pragma CODE_SECTION(SDA_Trigger, ".text")
 #pragma CODE_SECTION(SDA_ZeroCrossingCount, ".text")
 #pragma CODE_SECTION(SDA_ZeroCrossingDetect, ".text")
+#pragma CODE_SECTION(SDS_AgcEnvelopeDetector, ".text")
 #pragma CODE_SECTION(SDS_CountLeadingOneBits, ".text")
 #pragma CODE_SECTION(SDS_CountLeadingZeroBits, ".text")
 #pragma CODE_SECTION(SDS_CountOneBits, ".text")
 #pragma CODE_SECTION(SDS_CountZeroBits, ".text")
+#pragma CODE_SECTION(SDS_Drc, ".text")
 #pragma CODE_SECTION(SDS_EchoGenerate, ".text")
 #pragma CODE_SECTION(SDS_LevelCrossingDetect, ".text")
 #pragma CODE_SECTION(SDS_Modulo, ".text")
 #pragma CODE_SECTION(SDS_Polynomial, ".text")
 #pragma CODE_SECTION(SDS_TdPitchShift, ".text")
 #pragma CODE_SECTION(SDS_ZeroCrossingDetect, ".text")
+#pragma CODE_SECTION(SIF_AgcEnvelopeDetector, ".text")
 #pragma CODE_SECTION(SIF_AgcMeanAbs, ".text")
 #pragma CODE_SECTION(SIF_AgcMeanSquared, ".text")
+#pragma CODE_SECTION(SIF_Drc, ".text")
 #pragma CODE_SECTION(SUF_IndexModuloDecrement, ".text")
 #pragma CODE_SECTION(SUF_IndexModuloIncrement, ".text")
 #pragma CODE_SECTION(SUF_ModuloDecrement, ".text")
@@ -582,6 +588,7 @@ Description : SigLib function memory section definition file for TI compilers
 #pragma CODE_SECTION(SDA_IirZplaneToCoeffs, ".text")
 #pragma CODE_SECTION(SDA_MatchedZTransform, ".text")
 #pragma CODE_SECTION(SDA_OnePole, ".text")
+#pragma CODE_SECTION(SDA_OnePoleEWMA, ".text")
 #pragma CODE_SECTION(SDA_OnePoleHighPass, ".text")
 #pragma CODE_SECTION(SDA_OnePoleHighPassNormalized, ".text")
 #pragma CODE_SECTION(SDA_OnePoleHighPassPerSample, ".text")
@@ -597,6 +604,7 @@ Description : SigLib function memory section definition file for TI compilers
 #pragma CODE_SECTION(SDS_IirRemoveDC, ".text")
 #pragma CODE_SECTION(SDS_OnePole, ".text")
 #pragma CODE_SECTION(SDS_OnePoleCutOffFrequencyToFilterCoeff, ".text")
+#pragma CODE_SECTION(SDS_OnePoleEWMA, ".text")
 #pragma CODE_SECTION(SDS_OnePoleHighPass, ".text")
 #pragma CODE_SECTION(SDS_OnePoleHighPassCutOffFrequencyToFilterCoeff, ".text")
 #pragma CODE_SECTION(SDS_OnePoleHighPassNormalized, ".text")

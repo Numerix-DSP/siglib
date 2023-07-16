@@ -1,5 +1,5 @@
 // SigLib Comb Filter Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -21,15 +21,13 @@ static SLData_t DstArray[SAMPLE_LENGTH];
 int main (
   void)
 {
-  SLFixData_t     i;
-
   SIF_Comb (combFilterStateArray,                                   // Pointer to filter delay state array
             &combFilterIndex,                                       // Pointer to filter index register
             &combFilterSum,                                         // Pointer to filter sum register
             COMB_FILTER_LENGTH);                                    // Filter length
 
 // Apply comb filter and store filtered data
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     DstArray[i] = SDS_Comb (SourceArray[i],                         // Input data sample to be filtered
                             combFilterStateArray,                   // Pointer to filter state array
                             &combFilterIndex,                       // Pointer to filter index register

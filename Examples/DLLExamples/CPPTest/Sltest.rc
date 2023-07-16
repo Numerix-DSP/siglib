@@ -104,7 +104,7 @@ BEGIN
     CTEXT           "SLTest",-1,0,5,144,8
     CTEXT           "SigLib 32 Bit DLL Test Utility",-1,0,14,144,8
     CTEXT           "Version 2.00",-1,0,23,144,8
-    CTEXT           "Copyright © Alpha Numerix 2000.",-1,0,36,144,8
+    CTEXT           "Copyright ï¿½Delta Numerixx 2000.",-1,0,36,144,8
     DEFPUSHBUTTON   "OK",IDOK,56,53,32,14,WS_GROUP
 END
 

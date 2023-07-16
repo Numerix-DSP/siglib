@@ -28,13 +28,13 @@ further information.
 
 Visual C# Express 2008 can be downloaded from www.microsoft.com/express/vcsharp/.
 
-SigLib is a trademark of Alpha Numerix all other trademarks acknowledged.
+SigLib is a trademark of Delta Numerix all other trademarks acknowledged.
 
 
 For additional information, please contact :
 
-Alpha Numerix,
+Delta Numerix,
 Email: info@numerix-dsp.com
 WWW  : https:\\www.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix. All rights reserved.
+Copyright (c) 2023 Delta Numerix. All rights reserved.

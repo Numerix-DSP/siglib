@@ -1,5 +1,5 @@
 // Siglib Sequence Detection Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -43,8 +43,6 @@ static const SLChar_t ArbCharSrcSequence[] = "abcdefghijklmnopqrstuvwxyz";
 int main (
   void)
 {
-  SLArrayIndex_t  i;
-
 #if ENABLE_DEBUG_LOG
   SUF_ClearDebugfprintf ();
 #endif
@@ -55,7 +53,7 @@ int main (
                                   &NumSynchState,                   // Detector state variable
                                   NUMERICAL_SYNCH_SEQ_LEN);         // Synchronization sequence length
 
-  for (i = 0; i < NUMERICAL_SRC_SEQ_LEN; i++) {
+  for (SLArrayIndex_t i = 0; i < NUMERICAL_SRC_SEQ_LEN; i++) {
     if (SDS_DetectNumericalBitSequence (NumSrcSequence[i],          // Input word
                                         NumSynchSequence,           // Synchronization sequence
                                         SynchSequenceBitMask,       // Synchronization sequence bit mask
@@ -75,7 +73,7 @@ int main (
 
   printf ("Bit mask = %x\n", (int) NumWordSynchBitMask);
 
-  for (i = 0; i < NUMERICAL_SRC_SEQ_LEN; i++) {
+  for (SLArrayIndex_t i = 0; i < NUMERICAL_SRC_SEQ_LEN; i++) {
     if (SDS_DetectNumericalWordSequence (NumSrcSequence[i],         // Input word
                                          NumWordSynchSequence,      // Synchronization sequence
                                          NumWordSynchBitMask,       // Input bit mask
@@ -91,7 +89,7 @@ int main (
   SIF_DetectCharacterSequence (CharSynchState,                      // Detector state array
                                CHARACTER_SYNCH_SEQ_LENGTH);         // Synchronization sequence length
 
-  for (i = 0; i < CHARACTER_SRC_SEQ_LEN; i++) {
+  for (SLArrayIndex_t i = 0; i < CHARACTER_SRC_SEQ_LEN; i++) {
     if (SDS_DetectCharacterSequence (CharSrcSequence[i],            // Input character
                                      CharSyncSequence,              // Synchronization sequence
                                      CharSynchState,                // Detector state array
@@ -106,7 +104,7 @@ int main (
   SIF_DetectCharacterSequence (CharSynchState,                      // Detector state array
                                CHARACTER_SYNCH_SEQ_LENGTH);         // Synchronization sequence length
 
-  for (i = 0; i < CHARACTER_SRC_SEQ_LEN; i++) {
+  for (SLArrayIndex_t i = 0; i < CHARACTER_SRC_SEQ_LEN; i++) {
     if (SDS_DetectCharacterSequence (ArbCharSrcSequence[i],         // Input character
                                      ArbCharSyncSequence,           // Synchronization sequence
                                      CharSynchState,                // Detector state array

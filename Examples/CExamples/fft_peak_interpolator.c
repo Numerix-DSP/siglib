@@ -1,7 +1,7 @@
 // SigLib FFT peak estimator using quadratic interpolation
 // This example plots the error for a range of input frequencies
 // Max gain error percentage = 4.519154, max frequency error percentage = 0.596755
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

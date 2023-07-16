@@ -1,5 +1,5 @@
 // SigLib - .WAV file function read and display program
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 #include <stdio.h>
 #include <string.h>
@@ -29,7 +29,7 @@ int main (
 
   SLArrayIndex_t  sampleCount;
   FILE           *fpInputFile;
-  SLData_t        OnePoleCoeff;
+  SLData_t        onePoleCoefficient;
 
   SLData_t        OnePoleFilterState = SIGLIB_ZERO;
 
@@ -93,8 +93,8 @@ int main (
                        FILTER_GROUP_DELAY,                          // Filter group delay
                        &envOnePoleFilterState);                     // Pointer to one-pole state variable
 
-  OnePoleCoeff = SDS_OnePoleTimeConstantToFilterCoeff (1.,          // Attack / decay rate (ms)
-                                                       wavInfo.SampleRate); // Sample rate
+  onePoleCoefficient = SDS_OnePoleTimeConstantToFilterCoeff (1.,    // Attack / decay rate (ms)
+                                                             wavInfo.SampleRate); // Sample rate
 
   sampleCount = SUF_WavReadData (pDataArray, fpInputFile, wavInfo, wavInfo.NumberOfSamples);
 
@@ -111,7 +111,7 @@ int main (
                          pEnvTempDelay,                             // Pointer to temporary delay array
                          FILTER_LENGTH,                             // Filter length
                          FILTER_GROUP_DELAY,                        // Filter group delay
-                         OnePoleCoeff,                              // One pole filter coefficient
+                         onePoleCoefficient,                        // One pole filter coefficient
                          &OnePoleFilterState,                       // Pointer to one-pole state variable
                          sampleCount);                              // Dataset length
 

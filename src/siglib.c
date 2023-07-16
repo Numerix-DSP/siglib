@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : SIGLIB.C      | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 03/02/1995
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Siglib utility files.
 
@@ -40,7 +40,6 @@ Description : Siglib utility files.
 #define SIGLIB_SRC_FILE_SIGLIB  1                                   // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
 
 /**/
 
@@ -91,14 +90,11 @@ void SIGLIB_FUNC_DECL SUF_PrintArray (
   const SLData_t * pSrc,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i;
-
-  for (i = 0; i < ArrayLength; i++) {
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
 //      SUF_Printf ("[%d] = %le\n", (int)i, (double)*pSrc++);
     SUF_Printf ("[%ld] = %1.6lf\n", (long) i, (double) *pSrc++);
   }
   SUF_Printf ("\n");
-
 }                                                                   // End of SUF_PrintArray()
 
 
@@ -122,13 +118,10 @@ void SIGLIB_FUNC_DECL SUF_PrintFixedPointArray (
   const SLArrayIndex_t * pSrc,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i;
-
-  for (i = 0; i < ArrayLength; i++) {
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
     SUF_Printf ("[%ld] = %ld\n", (long) i, (long) *pSrc++);
   }
   SUF_Printf ("\n");
-
 }                                                                   // End of SUF_PrintFixedPointArray()
 
 
@@ -154,9 +147,7 @@ void SIGLIB_FUNC_DECL SUF_PrintComplexArray (
   const SLData_t * pSrcImag,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i;
-
-  for (i = 0; i < ArrayLength; i++) {
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
     SUF_Printf ("[%ld] = ", (long) i);
     if (*pSrcReal >= SIGLIB_ZERO) {
       SUF_Printf (" ");
@@ -171,7 +162,6 @@ void SIGLIB_FUNC_DECL SUF_PrintComplexArray (
     }
   }
   SUF_Printf ("\n");
-
 }                                                                   // End of SUF_PrintComplexArray()
 
 
@@ -271,7 +261,6 @@ void SIGLIB_FUNC_DECL SUF_PrintMatrix (
     }
   }
   SUF_Printf ("\n");
-
 }                                                                   // End of SUF_PrintMatrix()
 
 
@@ -297,7 +286,6 @@ void SIGLIB_FUNC_DECL SUF_PrintPolar (
 
   SUF_Printf ("||%le, <%lec (%le rad)  =  %le + j%le\n", (double) Src.magn, (double) Src.angle, (double) SDS_DegreesToRadians (Src.angle),
               (double) Rect.real, (double) Rect.imag);
-
 }                                                                   // End of SUF_PrintPolar()
 
 
@@ -323,7 +311,6 @@ void SIGLIB_FUNC_DECL SUF_PrintRectangular (
 
   SUF_Printf ("%le + j%le  =  ||%le, <%lec (%le rad)\n", (double) Src.real, (double) Src.imag, (double) Polar.magn, (double) Polar.angle,
               (double) SDS_RadiansToDegrees (Polar.angle));
-
 }                                                                   // End of SUF_PrintRectangular()
 
 
@@ -346,15 +333,12 @@ void SIGLIB_FUNC_DECL SUF_PrintIIRCoefficients (
   const SLData_t * pIIRCoeffs,
   SLArrayIndex_t NumberOfBiquads)
 {
-  SLArrayIndex_t  i;
-
-  for (i = 0; i < NumberOfBiquads; i++) {
+  for (SLArrayIndex_t i = 0; i < NumberOfBiquads; i++) {
     SUF_Printf ("%le, %le, %le, %le, %le\n", (double) *(pIIRCoeffs + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)),
                 (double) *(pIIRCoeffs + 1 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)), (double) *(pIIRCoeffs + 2 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)),
                 (double) *(pIIRCoeffs + 3 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)), (double) *(pIIRCoeffs + 4 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)));
   }
   SUF_Printf ("\n");
-
 }                                                                   // End of SUF_PrintIIRCoefficients()
 
 /**/
@@ -378,7 +362,6 @@ void SIGLIB_FUNC_DECL SUF_PrintCount (
   const char *String)
 {
   static SLFixData_t Count = 0;
-
   SUF_Printf ("%s : SigLib Count = %ld\n", String, (long) Count++);
 }                                                                   // End of SUF_PrintCount()
 
@@ -549,9 +532,7 @@ SLError_t SIGLIB_FUNC_DECL SUF_Debugvfprintf (
   }
 
   vfprintf (fp_LogFile, format, ap);
-
   SUF_Fclose (fp_LogFile);
-
   return (SIGLIB_NO_ERROR);
 }                                                                   // End of SUF_Debugvfprintf()
 
@@ -576,8 +557,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintArray (
   const SLData_t * pSrc,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i;
-
   FILE           *fp_LogFile;
 #if SIGLIB_FILE_OPEN_SECURE
   SUF_Fopen (&fp_LogFile, SIGLIB_LOG_FILE, "a");
@@ -588,7 +567,7 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintArray (
     return (SIGLIB_FILE_ERROR);
   }
 
-  for (i = 0; i < ArrayLength; i++) {
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
 //      SUF_Fprintf (fp_LogFile, "[%ld] = %le\n", (long)i, (double)*pSrc++);
     SUF_Fprintf (fp_LogFile, "[%ld] = %1.6lf\n", (long) i, (double) *pSrc++);
   }
@@ -619,8 +598,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintFixedPointArray (
   const SLArrayIndex_t * pSrc,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i;
-
   FILE           *fp_LogFile;
 #if SIGLIB_FILE_OPEN_SECURE
   SUF_Fopen (&fp_LogFile, SIGLIB_LOG_FILE, "a");
@@ -631,7 +608,7 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintFixedPointArray (
     return (SIGLIB_FILE_ERROR);
   }
 
-  for (i = 0; i < ArrayLength; i++) {
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
     SUF_Fprintf (fp_LogFile, "[%ld] = %ld\n", (long) i, (long) *pSrc++);
   }
   SUF_Fprintf (fp_LogFile, "\n");
@@ -663,8 +640,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexArray (
   const SLData_t * pSrcImag,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i;
-
   FILE           *fp_LogFile;
 #if SIGLIB_FILE_OPEN_SECURE
   SUF_Fopen (&fp_LogFile, SIGLIB_LOG_FILE, "a");
@@ -675,7 +650,7 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexArray (
     return (SIGLIB_FILE_ERROR);
   }
 
-  for (i = 0; i < ArrayLength; i++) {
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
     if (*pSrcImag >= SIGLIB_ZERO) {
       SUF_Fprintf (fp_LogFile, "[%ld] = ", (long) i);
       if (*pSrcReal >= SIGLIB_ZERO) {
@@ -697,7 +672,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexArray (
   SUF_Fclose (fp_LogFile);
 
   return (SIGLIB_NO_ERROR);
-
 }                                                                   // End of SUF_DebugPrintComplexArray()
 
 
@@ -748,7 +722,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplex (
   SUF_Fclose (fp_LogFile);
 
   return (SIGLIB_NO_ERROR);
-
 }                                                                   // End of SUF_DebugPrintComplex()
 
 
@@ -797,7 +770,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexRect (
   SUF_Fclose (fp_LogFile);
 
   return (SIGLIB_NO_ERROR);
-
 }                                                                   // End of SUF_DebugPrintComplexRect()
 
 
@@ -846,7 +818,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexPolar (
   SUF_Fclose (fp_LogFile);
 
   return (SIGLIB_NO_ERROR);
-
 }                                                                   // End of SUF_DebugPrintComplexPolar()
 
 
@@ -962,7 +933,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintMatrix (
   SUF_Fclose (fp_LogFile);
 
   return (SIGLIB_NO_ERROR);
-
 }                                                                   // End of SUF_DebugPrintMatrix()
 
 
@@ -1001,7 +971,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintPolar (
   SUF_Fclose (fp_LogFile);
 
   return (SIGLIB_NO_ERROR);
-
 }                                                                   // End of SUF_DebugPrintPolar()
 
 
@@ -1040,7 +1009,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintRectangular (
   SUF_Fclose (fp_LogFile);
 
   return (SIGLIB_NO_ERROR);
-
 }                                                                   // End of SUF_DebugPrintRectangular()
 
 
@@ -1063,8 +1031,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintIIRCoefficients (
   const SLData_t * pIIRCoeffs,
   SLArrayIndex_t NumberOfBiquads)
 {
-  SLArrayIndex_t  i;
-
   FILE           *fp_LogFile;
 #if SIGLIB_FILE_OPEN_SECURE
   SUF_Fopen (&fp_LogFile, SIGLIB_LOG_FILE, "a");
@@ -1075,7 +1041,7 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintIIRCoefficients (
     return (SIGLIB_FILE_ERROR);
   }
 
-  for (i = 0; i < NumberOfBiquads; i++) {
+  for (SLArrayIndex_t i = 0; i < NumberOfBiquads; i++) {
     SUF_Fprintf (fp_LogFile, "%le, %le, %le, %le, %le\n", (double) *(pIIRCoeffs + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)),
                  (double) *(pIIRCoeffs + 1 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)), (double) *(pIIRCoeffs + 2 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)),
                  (double) *(pIIRCoeffs + 3 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)), (double) *(pIIRCoeffs + 4 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)));
@@ -1084,7 +1050,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintIIRCoefficients (
   SUF_Fclose (fp_LogFile);
 
   return (SIGLIB_NO_ERROR);
-
 }                                                                   // End of SUF_DebugPrintIIRCoefficients()
 
 /**/
@@ -1236,7 +1201,6 @@ void SIGLIB_FUNC_DECL SUF_MSDelay (
 //  printf ("CLOCKS_PER_SEC = %d\n", CLOCKS_PER_SEC);
 
   RequiredDelay = (Delay * CLOCKS_PER_SEC) / (clock_t) 1000;        // Convert CLOCKS_PER_SECOND to ms
-
   startTime = clock ();
 
   do {
@@ -1245,7 +1209,6 @@ void SIGLIB_FUNC_DECL SUF_MSDelay (
   } while (elapsedTime < RequiredDelay);
 
 //  printf ("Execution time = %d milliseconds\n", (long)elapsedTime);
-
 }                                                                   // End of SUF_MSDelay()
 #endif
 

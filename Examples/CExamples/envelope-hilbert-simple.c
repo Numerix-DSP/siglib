@@ -2,7 +2,7 @@
 // This example works for simple sinusoidal signals however a filter
 // based solution maybe required for real-time applications.
 // See example envelope-hilbert.c
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

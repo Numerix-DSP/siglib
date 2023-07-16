@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : DSPUTIL3.C    | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 07/04/2010
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : DSP utility functions, for SigLib DSP library.
 
@@ -65,7 +65,6 @@ void SIGLIB_FUNC_DECL SIF_DeGlitch (
 {
   *pOutOfRangeCount = ((SLArrayIndex_t) 0);
   *pGlitchLevelHoldover = InitialGlitchLevelHoldover;
-
 }                                                                   // End of SIF_DeGlitch()
 
 
@@ -97,13 +96,12 @@ SLData_t SIGLIB_FUNC_DECL SDS_DeGlitch (
   const SLData_t GlitchLevelThreshold,
   SLData_t * pGlitchLevelHoldover)
 {
-  SLArrayIndex_t  OutOfRangeCount;
-  SLData_t        InputSample, OutputSample;
+  SLData_t        OutputSample;
 
-  OutOfRangeCount = *pOutOfRangeCount;
+  SLArrayIndex_t  OutOfRangeCount = *pOutOfRangeCount;
 
   if (DeGlitchMode == SIGLIB_DEGLITCH_ABOVE) {
-    InputSample = Src;
+    SLData_t        InputSample = Src;
 
     if (InputSample > GlitchLevelThreshold) {
       OutOfRangeCount++;
@@ -121,7 +119,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_DeGlitch (
     }
   }
   else if (DeGlitchMode == SIGLIB_DEGLITCH_BOTH) {
-    InputSample = Src;
+    SLData_t        InputSample = Src;
 
     if ((InputSample > GlitchLevelThreshold) && (*pGlitchLevelHoldover < GlitchLevelThreshold)) {
       OutOfRangeCount++;
@@ -153,7 +151,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_DeGlitch (
     }
   }
   else {                                                            // if (DeGlitchMode == SIGLIB_DEGLITCH_BELOW
-    InputSample = Src;
+    SLData_t        InputSample = Src;
 
     if (InputSample < GlitchLevelThreshold) {
       OutOfRangeCount++;
@@ -174,7 +172,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_DeGlitch (
   *pOutOfRangeCount = OutOfRangeCount;
 
   return (OutputSample);
-
 }                                                                   // End of SDS_DeGlitch()
 
 
@@ -210,15 +207,11 @@ void SIGLIB_FUNC_DECL SDA_DeGlitch (
   SLData_t * pGlitchLevelHoldover,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLArrayIndex_t  OutOfRangeCount;
-  SLData_t        InputSample;
-
-  OutOfRangeCount = *pOutOfRangeCount;
+  SLArrayIndex_t  OutOfRangeCount = *pOutOfRangeCount;
 
   if (DeGlitchMode == SIGLIB_DEGLITCH_ABOVE) {
-    for (i = 0; i < SampleLength; i++) {
-      InputSample = *pSrc++;
+    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+      SLData_t        InputSample = *pSrc++;
 
       if (InputSample > GlitchLevelThreshold) {
         OutOfRangeCount++;
@@ -237,8 +230,8 @@ void SIGLIB_FUNC_DECL SDA_DeGlitch (
     }
   }
   else if (DeGlitchMode == SIGLIB_DEGLITCH_BOTH) {
-    for (i = 0; i < SampleLength; i++) {
-      InputSample = *pSrc++;
+    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+      SLData_t        InputSample = *pSrc++;
 
       if ((InputSample > GlitchLevelThreshold) && (*pGlitchLevelHoldover < GlitchLevelThreshold)) {
         OutOfRangeCount++;
@@ -271,8 +264,8 @@ void SIGLIB_FUNC_DECL SDA_DeGlitch (
     }
   }
   else {                                                            // if (DeGlitchMode == SIGLIB_DEGLITCH_BELOW
-    for (i = 0; i < SampleLength; i++) {
-      InputSample = *pSrc++;
+    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+      SLData_t        InputSample = *pSrc++;
 
       if (InputSample < GlitchLevelThreshold) {
         OutOfRangeCount++;
@@ -292,7 +285,6 @@ void SIGLIB_FUNC_DECL SDA_DeGlitch (
   }
 
   *pOutOfRangeCount = OutOfRangeCount;
-
 }                                                                   // End of SDA_DeGlitch()
 
 /**/
@@ -320,21 +312,15 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_RemoveDuplicates (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i, j, k;
-
-  SLArrayIndex_t  DstLength;
-  SLData_t        Src;
-
   SDA_Copy (pSrc, pDst, ArrayLength);                               // Copy data to destination and process it there
 
-  DstLength = ArrayLength;                                          // Initialize result data set length
-
-  i = 0;
+  SLArrayIndex_t  DstLength = ArrayLength;                          // Initialize result data set length
+  SLArrayIndex_t  i = 0;
   do {
-    Src = *(pDst + i);                                              // Copy current value
-    for (j = (i + 1); j < DstLength;) {                             // NOTE - don't increment j here - only if sample doesn't match !
+    SLData_t        Src = *(pDst + i);                              // Copy current value
+    for (SLArrayIndex_t j = (i + 1); j < DstLength;) {              // NOTE - don't increment j here - only if sample doesn't match !
       if (*(pDst + j) == Src) {                                     // If we have found a duplicate
-        for (k = j; k < DstLength; k++) {                           // Shuffle up samples
+        for (SLArrayIndex_t k = j; k < DstLength; k++) {            // Shuffle up samples
           *(pDst + k) = *(pDst + k + 1);                            // Copy to output
         }
         DstLength--;                                                // Reduce the length of input array to allow for removed duplicate
@@ -347,7 +333,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_RemoveDuplicates (
   } while (i <= DstLength);
 
   return (DstLength);
-
 }                                                                   // End of SDA_RemoveDuplicates()
 
 
@@ -379,13 +364,11 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindAllDuplicates (
   const SLArrayIndex_t ArrayLength1,
   const SLArrayIndex_t ArrayLength2)
 {
-  SLArrayIndex_t  i, j;
   SLArrayIndex_t  NumDuplicates = (SLArrayIndex_t) 0;
-  SLData_t        Src;
 
-  for (i = 0; i < ArrayLength1; i++) {                              // Search all contents of first array
-    Src = *pSrc1++;
-    for (j = 0; j < ArrayLength2; j++) {                            // Compare with all elements of second array
+  for (SLArrayIndex_t i = 0; i < ArrayLength1; i++) {               // Search all contents of first array
+    SLData_t        Src = *pSrc1++;
+    for (SLArrayIndex_t j = 0; j < ArrayLength2; j++) {             // Compare with all elements of second array
       if (*(pSrc2 + j) == Src) {
         *pDst++ = Src;                                              // Copy to output
         NumDuplicates++;
@@ -394,7 +377,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindAllDuplicates (
     }
   }
   return (NumDuplicates);
-
 }                                                                   // End of SDA_FindAllDuplicates()
 
 
@@ -427,13 +409,11 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindFirstDuplicates (
   const SLArrayIndex_t ArrayLength1,
   const SLArrayIndex_t ArrayLength2)
 {
-  SLArrayIndex_t  i, j, k;
   SLArrayIndex_t  NumDuplicates = (SLArrayIndex_t) 0;
-  SLData_t        Src;
 
-  for (i = 0; i < ArrayLength1; i++) {                              // Search all contents of first array
-    Src = *pSrc1++;
-    for (j = 0; j < ArrayLength2; j++) {                            // Compare with all elements of second array
+  for (SLArrayIndex_t i = 0; i < ArrayLength1; i++) {               // Search all contents of first array
+    SLData_t        Src = *pSrc1++;
+    for (SLArrayIndex_t j = 0; j < ArrayLength2; j++) {             // Compare with all elements of second array
       if (*(pSrc2 + j) == Src) {
         *pDst++ = Src;                                              // Copy to output
         NumDuplicates++;
@@ -444,11 +424,11 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindFirstDuplicates (
   pDst -= NumDuplicates;                                            // Reset destination array pointer
 
 // Remove duplicates
-  for (i = 0; i < NumDuplicates; i++) {
-    Src = *(pDst + i);                                              // Copy current value
-    for (j = (i + 1); j < NumDuplicates;) {                         // NOTE - don't increment j here - only if sample doesn't match !
+  for (SLArrayIndex_t i = 0; i < NumDuplicates; i++) {
+    SLData_t        Src = *(pDst + i);                              // Copy current value
+    for (SLArrayIndex_t j = (i + 1); j < NumDuplicates;) {          // NOTE - don't increment j here - only if sample doesn't match !
       if (*(pDst + j) == Src) {
-        for (k = j; k < NumDuplicates; k++) {                       // Shuffle up samples
+        for (SLArrayIndex_t k = j; k < NumDuplicates; k++) {        // Shuffle up samples
           *(pDst + k) = *(pDst + k + 1);                            // Copy to output
         }
         NumDuplicates--;                                            // Reduce the length of input array to allow for removed duplicate
@@ -460,7 +440,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindFirstDuplicates (
   }
 
   return (NumDuplicates);
-
 }                                                                   // End of SDA_FindFirstDuplicates()
 
 /**/
@@ -492,13 +471,11 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindSortAllDuplicates (
   const SLArrayIndex_t ArrayLength1,
   const SLArrayIndex_t ArrayLength2)
 {
-  SLArrayIndex_t  i, j;
   SLArrayIndex_t  NumDuplicates = (SLArrayIndex_t) 0;
-  SLData_t        Src;
 
-  for (i = 0; i < ArrayLength1; i++) {                              // Search all contents of first array
-    Src = *pSrc1++;
-    for (j = 0; j < ArrayLength2; j++) {                            // Compare with all elements of second array
+  for (SLArrayIndex_t i = 0; i < ArrayLength1; i++) {               // Search all contents of first array
+    SLData_t        Src = *pSrc1++;
+    for (SLArrayIndex_t j = 0; j < ArrayLength2; j++) {             // Compare with all elements of second array
       if (*(pSrc2 + j) == Src) {
         *pDst++ = Src;                                              // Copy to output
         NumDuplicates++;
@@ -511,7 +488,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindSortAllDuplicates (
   SDA_SortMinToMax (pDst, pDst, NumDuplicates);                     // Sort the results
 
   return (NumDuplicates);
-
 }                                                                   // End of SDA_FindSortAllDuplicates()
 
 
@@ -545,13 +521,11 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindSortFirstDuplicates (
   const SLArrayIndex_t ArrayLength1,
   const SLArrayIndex_t ArrayLength2)
 {
-  SLArrayIndex_t  i, j, k;
   SLArrayIndex_t  NumDuplicates = (SLArrayIndex_t) 0;
-  SLData_t        Src;
 
-  for (i = 0; i < ArrayLength1; i++) {                              // Search all contents of first array
-    Src = *pSrc1++;
-    for (j = 0; j < ArrayLength2; j++) {                            // Compare with all elements of second array
+  for (SLArrayIndex_t i = 0; i < ArrayLength1; i++) {               // Search all contents of first array
+    SLData_t        Src = *pSrc1++;
+    for (SLArrayIndex_t j = 0; j < ArrayLength2; j++) {             // Compare with all elements of second array
       if (*(pSrc2 + j) == Src) {
         *pDst++ = Src;                                              // Copy to output
         NumDuplicates++;
@@ -562,11 +536,11 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindSortFirstDuplicates (
   pDst -= NumDuplicates;                                            // Reset destination array pointer
 
 // Remove duplicates
-  for (i = 0; i < NumDuplicates; i++) {
-    Src = *(pDst + i);                                              // Copy current value
-    for (j = (i + 1); j < NumDuplicates;) {                         // NOTE - don't increment j here - only if sample doesn't match !
+  for (SLArrayIndex_t i = 0; i < NumDuplicates; i++) {
+    SLData_t        Src = *(pDst + i);                              // Copy current value
+    for (SLArrayIndex_t j = (i + 1); j < NumDuplicates;) {          // NOTE - don't increment j here - only if sample doesn't match !
       if (*(pDst + j) == Src) {
-        for (k = j; k < NumDuplicates; k++) {                       // Shuffle up samples
+        for (SLArrayIndex_t k = j; k < NumDuplicates; k++) {        // Shuffle up samples
           *(pDst + k) = *(pDst + k + 1);                            // Copy to output
         }
         NumDuplicates--;                                            // Reduce the length of input array to allow for removed duplicate
@@ -580,7 +554,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindSortFirstDuplicates (
   SDA_SortMinToMax (pDst, pDst, NumDuplicates);                     // Sort the results
 
   return (NumDuplicates);
-
 }                                                                   // End of SDA_FindSortFirstDuplicates()
 
 
@@ -668,7 +641,6 @@ void SIGLIB_FUNC_DECL SDA_InsertSample (
   }
 
   pDst[newSampleLocation] = newSample;
-
 }                                                                   // End of SDA_InsertSample()
 
 
@@ -717,7 +689,6 @@ void SIGLIB_FUNC_DECL SDA_InsertArray (
   for (SLArrayIndex_t i = 0; i < newSampleArrayLength; i++) {
     pDst[newSampleLocation + i] = pNewSamples[i];
   }
-
 }                                                                   // End of SDA_InsertArray()
 
 
@@ -761,7 +732,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExtractSample (
   }
 
   return (extractedSample);
-
 }                                                                   // End of SDA_ExtractSample()
 
 
@@ -811,5 +781,4 @@ void SIGLIB_FUNC_DECL SDA_ExtractArray (
   for (SLArrayIndex_t i = extractedSampleLocation; i < arrayLength - extractedSampleArrayLength; i++) {
     pDst[i] = pSrc[i + extractedSampleArrayLength];
   }
-
 }                                                                   // End of SDA_ExtractArray()

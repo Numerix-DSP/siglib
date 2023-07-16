@@ -1,6 +1,6 @@
 // Bilinear Transform IIR Filter Design Example.
 // Generates a low pass filter and transforms the frequency
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -16,7 +16,7 @@
 #define TRANSFORM_L_P           1                                   // Low pass to band pass transformation
 #define TRANSFORM_L_S           1                                   // Low pass to band stop transformation
 
-#define SAMPLE_RATE             SIGLIB_ONE                          // Normalized to 1.0 Hz for convenience
+#define SAMPLE_RATE_HZ          SIGLIB_ONE                          // Normalized to 1.0 Hz for convenience
 #define PREWARP_MATCH_FREQUENCY 0.2                                 // Low pass filter cut-off frequency
 #define NUMBER_OF_ZEROS         5
 #define NUMBER_OF_POLES         5
@@ -56,9 +56,6 @@ int main (
   h_GPC_Plot     *hTDPlot;                                          // Plot objects
   h_GPC_Plot     *hFDPlot;
   h_GPC_Plot     *hPZPlot;
-#if PRINT_RESULTS
-  int             i;
-#endif
 
 // Allocate memory
 // Need twice number of poles and zeros for BPFs and BSFs
@@ -91,12 +88,12 @@ int main (
 
 #if PRINT_RESULTS
   printf ("\nComplex s-plane zeros\n");                             // Print s-plane poles and zeros
-  for (i = 0; i < NUMBER_OF_ZEROS; i++) {
+  for (SLArrayIndex_t i = 0; i < NUMBER_OF_ZEROS; i++) {
     SUF_PrintRectangular (SPlaneZeros[i]);
   }
 
   printf ("\nComplex s-plane poles\n");
-  for (i = 0; i < NUMBER_OF_POLES; i++) {
+  for (SLArrayIndex_t i = 0; i < NUMBER_OF_POLES; i++) {
     SUF_PrintRectangular (SPlanePoles[i]);
   }
 #endif
@@ -107,7 +104,7 @@ int main (
                          SPlanePoles,                               // S-plane poles
                          ZPlaneZeros,                               // Z-plane zeros
                          ZPlanePoles,                               // Z-plane poles
-                         SAMPLE_RATE,                               // Sample rate
+                         SAMPLE_RATE_HZ,                            // Sample rate
                          PREWARP_MATCH_FREQUENCY,                   // Pre-warp frequency
                          SIGLIB_ON,                                 // Pre-warp switch
                          NUMBER_OF_ZEROS,                           // Number of zeros
@@ -115,12 +112,12 @@ int main (
 
 #if PRINT_RESULTS
   printf ("\nComplex z-plane zeros\n");                             // Print z-plane poles and zeros
-  for (i = 0; i < NUMBER_OF_ZEROS; i++) {
+  for (SLArrayIndex_t i = 0; i < NUMBER_OF_ZEROS; i++) {
     SUF_PrintRectangular (ZPlaneZeros[i]);
   }
 
   printf ("\nComplex z-plane poles\n");
-  for (i = 0; i < NUMBER_OF_POLES; i++) {
+  for (SLArrayIndex_t i = 0; i < NUMBER_OF_POLES; i++) {
     SUF_PrintRectangular (ZPlanePoles[i]);
   }
 #endif
@@ -159,7 +156,7 @@ int main (
 #if PRINT_RESULTS
   printf ("\nIIR filter coefficients\n");                           // Print filter coefficients
   printf ("b(0), b(1), b(2), a(1), a(2)\n");
-  for (i = 0; i < NUMBER_OF_ZEROS; i++) {
+  for (SLArrayIndex_t i = 0; i < NUMBER_OF_ZEROS; i++) {
     SUF_PrintIIRCoefficients (pIIRCoeffs + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD), 1);
   }
 #endif
@@ -222,7 +219,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Impulse Response",                                  // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE),          // Maximum X value
+               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE_HZ),       // Maximum X value
                "lines",                                             // Graph type
                "magenta",                                           // Colour
                GPC_NEW);                                            // New graph
@@ -247,7 +244,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Frequency Response",                                // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               (SAMPLE_RATE / SIGLIB_TWO),                          // Maximum X value
+               (SAMPLE_RATE_HZ / SIGLIB_TWO),                       // Maximum X value
                "lines",                                             // Graph type
                "magenta",                                           // Colour
                GPC_NEW);                                            // New graph
@@ -265,18 +262,18 @@ int main (
                          TransformedZPlanePoles,                    // Destination Z-plane poles
                          PREWARP_MATCH_FREQUENCY,                   // Source cut-off frequency
                          LPF_TO_LPF_NEW_FC,                         // Destination cut-off frequency
-                         SAMPLE_RATE,                               // System sample rate
+                         SAMPLE_RATE_HZ,                            // System sample rate
                          NUMBER_OF_ZEROS,                           // Number of zeros in input and output
                          NUMBER_OF_POLES);                          // Number of poles in input and output
 
 #if PRINT_RESULTS
   printf ("\nTransformed complex z-plane zeros\n");                 // Print z-plane poles and zeros
-  for (i = 0; i < NUMBER_OF_ZEROS; i++) {
+  for (SLArrayIndex_t i = 0; i < NUMBER_OF_ZEROS; i++) {
     SUF_PrintRectangular (TransformedZPlaneZeros[i]);
   }
 
   printf ("\nTransformed complex z-plane poles\n");
-  for (i = 0; i < NUMBER_OF_POLES; i++) {
+  for (SLArrayIndex_t i = 0; i < NUMBER_OF_POLES; i++) {
     SUF_PrintRectangular (TransformedZPlanePoles[i]);
   }
 #endif
@@ -306,7 +303,7 @@ int main (
 #if PRINT_RESULTS
   printf ("\nIIR filter coefficients\n");                           // Print filter coefficients
   printf ("b(0), b(1), b(2), a(1), a(2)\n");
-  for (i = 0; i < NUMBER_OF_ZEROS; i++) {
+  for (SLArrayIndex_t i = 0; i < NUMBER_OF_ZEROS; i++) {
     SUF_PrintIIRCoefficients (pIIRCoeffs + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD), 1);
   }
 #endif
@@ -341,7 +338,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Transformed Impulse Response",                      // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE),          // Maximum X value
+               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE_HZ),       // Maximum X value
                "lines",                                             // Graph type
                "magenta",                                           // Colour
                GPC_NEW);                                            // New graph
@@ -372,7 +369,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Original Frequency Response",                       // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               (SAMPLE_RATE / SIGLIB_TWO),                          // Maximum X value
+               (SAMPLE_RATE_HZ / SIGLIB_TWO),                       // Maximum X value
                "lines",                                             // Graph type
                "magenta",                                           // Colour
                GPC_NEW);                                            // New graph
@@ -381,7 +378,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Transformed Frequency Response",                    // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               (SAMPLE_RATE / SIGLIB_TWO),                          // Maximum X value
+               (SAMPLE_RATE_HZ / SIGLIB_TWO),                       // Maximum X value
                "lines",                                             // Graph type
                "red",                                               // Colour
                GPC_ADD);                                            // New graph
@@ -399,18 +396,18 @@ int main (
                          TransformedZPlanePoles,                    // Destination Z-plane poles
                          PREWARP_MATCH_FREQUENCY,                   // Source cut-off frequency
                          LPF_TO_LPF_NEW_FC,                         // Destination cut-off frequency
-                         SAMPLE_RATE,                               // System sample rate
+                         SAMPLE_RATE_HZ,                            // System sample rate
                          NUMBER_OF_ZEROS,                           // Number of zeros in input and output
                          NUMBER_OF_POLES);                          // Number of poles in input and output
 
 #if PRINT_RESULTS
   printf ("\nTransformed complex z-plane zeros\n");                 // Print z-plane poles and zeros
-  for (i = 0; i < NUMBER_OF_ZEROS; i++) {
+  for (SLArrayIndex_t i = 0; i < NUMBER_OF_ZEROS; i++) {
     SUF_PrintRectangular (TransformedZPlaneZeros[i]);
   }
 
   printf ("\nTransformed complex z-plane poles\n");
-  for (i = 0; i < NUMBER_OF_POLES; i++) {
+  for (SLArrayIndex_t i = 0; i < NUMBER_OF_POLES; i++) {
     SUF_PrintRectangular (TransformedZPlanePoles[i]);
   }
 #endif
@@ -440,7 +437,7 @@ int main (
 #if PRINT_RESULTS
   printf ("\nIIR filter coefficients\n");                           // Print filter coefficients
   printf ("b(0), b(1), b(2), a(1), a(2)\n");
-  for (i = 0; i < NUMBER_OF_ZEROS; i++) {
+  for (SLArrayIndex_t i = 0; i < NUMBER_OF_ZEROS; i++) {
     SUF_PrintIIRCoefficients (pIIRCoeffs + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD), 1);
   }
 #endif
@@ -475,7 +472,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Transformed Impulse Response",                      // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE),          // Maximum X value
+               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE_HZ),       // Maximum X value
                "lines",                                             // Graph type
                "magenta",                                           // Colour
                GPC_NEW);                                            // New graph
@@ -502,7 +499,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "nTransformed Frequency Response",                   // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               (SAMPLE_RATE / SIGLIB_TWO),                          // Maximum X value
+               (SAMPLE_RATE_HZ / SIGLIB_TWO),                       // Maximum X value
                "lines",                                             // Graph type
                "magenta",                                           // Colour
                GPC_NEW);                                            // New graph
@@ -521,18 +518,18 @@ int main (
                          PREWARP_MATCH_FREQUENCY,                   // Source cut-off frequency
                          LPF_TO_BPF_NEW_FC1,                        // Destination lower cut-off frequency
                          LPF_TO_BPF_NEW_FC2,                        // Destination upper cut-off frequency
-                         SAMPLE_RATE,                               // System sample rate
+                         SAMPLE_RATE_HZ,                            // System sample rate
                          NUMBER_OF_ZEROS,                           // Number of zeros in input and output
                          NUMBER_OF_POLES);                          // Number of poles in input and output
 
 #if PRINT_RESULTS
   printf ("\nTransformed complex z-plane zeros\n");                 // Print z-plane poles and zeros
-  for (i = 0; i < 2 * NUMBER_OF_ZEROS; i++) {
+  for (SLArrayIndex_t i = 0; i < 2 * NUMBER_OF_ZEROS; i++) {
     SUF_PrintRectangular (TransformedZPlaneZeros[i]);
   }
 
   printf ("\nTransformed complex z-plane poles\n");
-  for (i = 0; i < 2 * NUMBER_OF_POLES; i++) {
+  for (SLArrayIndex_t i = 0; i < 2 * NUMBER_OF_POLES; i++) {
     SUF_PrintRectangular (TransformedZPlanePoles[i]);
   }
 #endif
@@ -562,7 +559,7 @@ int main (
 #if PRINT_RESULTS
   printf ("\nIIR filter coefficients\n");                           // Print filter coefficients
   printf ("b(0), b(1), b(2), a(1), a(2)\n");
-  for (i = 0; i < 2 * NUMBER_OF_ZEROS; i++) {
+  for (SLArrayIndex_t i = 0; i < 2 * NUMBER_OF_ZEROS; i++) {
     SUF_PrintIIRCoefficients (pIIRCoeffs + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD), 1);
   }
 #endif
@@ -597,7 +594,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Transformed Impulse Response",                      // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE),          // Maximum X value
+               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE_HZ),       // Maximum X value
                "lines",                                             // Graph type
                "magenta",                                           // Colour
                GPC_NEW);                                            // New graph
@@ -624,7 +621,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Transformed Frequency Response",                    // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               (SAMPLE_RATE / SIGLIB_TWO),                          // Maximum X value
+               (SAMPLE_RATE_HZ / SIGLIB_TWO),                       // Maximum X value
                "lines",                                             // Graph type
                "magenta",                                           // Colour
                GPC_NEW);                                            // New graph
@@ -643,18 +640,18 @@ int main (
                          PREWARP_MATCH_FREQUENCY,                   // Source cut-off frequency
                          LPF_TO_BPF_NEW_FC1,                        // Destination lower cut-off frequency
                          LPF_TO_BPF_NEW_FC2,                        // Destination upper cut-off frequency
-                         SAMPLE_RATE,                               // System sample rate
+                         SAMPLE_RATE_HZ,                            // System sample rate
                          NUMBER_OF_ZEROS,                           // Number of zeros in input and output
                          NUMBER_OF_POLES);                          // Number of poles in input and output
 
 #if PRINT_RESULTS
   printf ("\nTransformed complex z-plane zeros\n");                 // Print z-plane poles and zeros
-  for (i = 0; i < 2 * NUMBER_OF_ZEROS; i++) {
+  for (SLArrayIndex_t i = 0; i < 2 * NUMBER_OF_ZEROS; i++) {
     SUF_PrintRectangular (TransformedZPlaneZeros[i]);
   }
 
   printf ("\nTransformed complex z-plane poles\n");
-  for (i = 0; i < 2 * NUMBER_OF_POLES; i++) {
+  for (SLArrayIndex_t i = 0; i < 2 * NUMBER_OF_POLES; i++) {
     SUF_PrintRectangular (TransformedZPlanePoles[i]);
   }
 #endif
@@ -684,7 +681,7 @@ int main (
 #if PRINT_RESULTS
   printf ("\nIIR filter coefficients\n");                           // Print filter coefficients
   printf ("b(0), b(1), b(2), a(1), a(2)\n");
-  for (i = 0; i < 2 * NUMBER_OF_ZEROS; i++) {
+  for (SLArrayIndex_t i = 0; i < 2 * NUMBER_OF_ZEROS; i++) {
     SUF_PrintIIRCoefficients (pIIRCoeffs + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD), 1);
   }
 #endif
@@ -719,7 +716,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Transformed Impulse Response",                      // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE),          // Maximum X value
+               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE_HZ),       // Maximum X value
                "lines",                                             // Graph type
                "magenta",                                           // Colour
                GPC_NEW);                                            // New graph
@@ -745,7 +742,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Transformed Frequency Response",                    // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               (SAMPLE_RATE / SIGLIB_TWO),                          // Maximum X value
+               (SAMPLE_RATE_HZ / SIGLIB_TWO),                       // Maximum X value
                "lines",                                             // Graph type
                "magenta",                                           // Colour
                GPC_NEW);                                            // New graph
@@ -761,7 +758,7 @@ int main (
 
   printf ("\nNegated IIR filter coefficients\n");                   // Print filter coefficients
   printf ("b(0), b(1), b(2), a(1), a(2)\n");
-  for (i = 0; i < 2 * NUMBER_OF_ZEROS; i++) {
+  for (SLArrayIndex_t i = 0; i < 2 * NUMBER_OF_ZEROS; i++) {
     SUF_PrintIIRCoefficients (pIIRCoeffs + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD), 1);
   }
 

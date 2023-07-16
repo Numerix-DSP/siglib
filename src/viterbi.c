@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : VITERBI.C     | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 07/05/2001
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Communications timing detection routines, for SigLib DSP library.
 
@@ -40,7 +40,6 @@ Description : Communications timing detection routines, for SigLib DSP library.
 #define SIGLIB_SRC_FILE_VITERBI 1                                   // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
 
                                                 // Operational conditional compilation
 #define K3_NORMALISE_ERROR              0                           // Set to 1 to normalise the error accumulation to avoid overflow
@@ -83,9 +82,7 @@ SLUInt16_t SIGLIB_FUNC_DECL SDS_ConvEncoderK3 (
   SLChar_t Input,
   SLArrayIndex_t * pHistory)
 {
-  SLUInt16_t      Output;
-
-  Output = siglib_numerix_K3TxConvEncMap[(SLArrayIndex_t) ((((SLUFixData_t) Input & 0x01U) << 2U) | (SLUFixData_t) * pHistory)];
+  SLUInt16_t      Output = siglib_numerix_K3TxConvEncMap[(SLArrayIndex_t) ((((SLUFixData_t) Input & 0x01U) << 2U) | (SLUFixData_t) * pHistory)];
   Output |= siglib_numerix_K3TxConvEncMap[(SLArrayIndex_t) ((((SLUFixData_t) Input & 0x03U) << 1U) | ((SLUFixData_t) * pHistory >> 1U))] << 2U;
   Output |= siglib_numerix_K3TxConvEncMap[(SLArrayIndex_t) ((SLUFixData_t) Input & 0x07U)] << 4U;
   Output |= siglib_numerix_K3TxConvEncMap[(SLArrayIndex_t) (((SLUFixData_t) Input & 0x0eU) >> 1U)] << 6U;
@@ -156,10 +153,8 @@ void SIGLIB_FUNC_DECL SIF_ViterbiDecoderK3 (
   SLFixData_t * pDoTraceBackFlag,
   const SLArrayIndex_t TraceBackDepth)
 {
-  SLArrayIndex_t  i, j;
-
-  for (i = 0; i < SIGLIB_VITK3_NUMBER_OF_STATES; i++) {
-    for (j = 0; j <= TraceBackDepth; j++) {                         // Clear survivor state history table
+  for (SLArrayIndex_t i = 0; i < SIGLIB_VITK3_NUMBER_OF_STATES; i++) {
+    for (SLArrayIndex_t j = 0; j <= TraceBackDepth; j++) {          // Clear survivor state history table
       *(pSurvivorStateHistoryTable + (j * SIGLIB_VITK3_NUMBER_OF_STATES) + i) = 0;
     }
 
@@ -171,7 +166,6 @@ void SIGLIB_FUNC_DECL SIF_ViterbiDecoderK3 (
   *pDecodedByte = 0;                                                // Clear byte for storing decoded bits
   *pSurvivorStateHistoryOffset = 0;                                 // Initialise offset into state history array
   *pDoTraceBackFlag = SIGLIB_FALSE;                                 // Flag will be set to SIGLIB_TRUE when we are in trace back mode
-
 }                                                                   // End of SIF_ViterbiDecoderK3()
 
 
@@ -208,8 +202,6 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderK3 (
   SLFixData_t * DoTraceBackFlag,
   const SLArrayIndex_t TraceBackDepth)
 {
-  SLArrayIndex_t  i, j;
-  SLArrayIndex_t  InputBitCount;                                    // Count number of bits
   SLChar_t        OutputByte = 0;                                   // Stores the completed character for output
   SLChar_t        DecodedBit = 0;                                   // Decoded bit
   SLData_t        LocalAccumulatedErrorTable[SIGLIB_VITK3_NUMBER_OF_STATES];  // Local error accumulation table
@@ -231,12 +223,12 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderK3 (
 // compare - accumulated errors
 // select - transition with smallest error
 
-  for (InputBitCount = 0; InputBitCount < SIGLIB_BYTE_LENGTH; InputBitCount++) {
+  for (SLArrayIndex_t InputBitCount = 0; InputBitCount < SIGLIB_BYTE_LENGTH; InputBitCount++) {
     CurrentInput0 = *pSrc++;                                        // Get first input sample of pair
     CurrentInput1 = *pSrc++;                                        // Get second input sample of pair
 
 
-    for (i = 0; i < SIGLIB_VITK3_NUMBER_OF_STATES; i++) {           // Fill temporary error accumulation table with SIGLIB_MAX
+    for (SLArrayIndex_t i = 0; i < SIGLIB_VITK3_NUMBER_OF_STATES; i++) {  // Fill temporary error accumulation table with SIGLIB_MAX
       LocalAccumulatedErrorTable[i] = SIGLIB_MAX;
     }
 
@@ -249,9 +241,9 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderK3 (
     }
 
 // For each original state we need to accumulate errors for all transitions
-    for (i = 0; i < SIGLIB_VITK3_NUMBER_OF_STATES; i++) {
+    for (SLArrayIndex_t i = 0; i < SIGLIB_VITK3_NUMBER_OF_STATES; i++) {
 // Over all convolutional encoder outputs
-      for (j = 0; j < SIGLIB_VITK3_TRANSITIONS_PER_STATE; j++) {
+      for (SLArrayIndex_t j = 0; j < SIGLIB_VITK3_TRANSITIONS_PER_STATE; j++) {
 // Calculate the error (Euclidean distance) per channel symbol,
 //   Sum for all channel symbols in convolutional encoder output.
 //   Add error from both received bits
@@ -271,7 +263,7 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderK3 (
     }
 
 // Copy the local accumulated errors to the persistent array for next iteration
-    for (i = 0; i < SIGLIB_VITK3_NUMBER_OF_STATES; i++) {
+    for (SLArrayIndex_t i = 0; i < SIGLIB_VITK3_NUMBER_OF_STATES; i++) {
       AccumulatedErrorTable[i] = LocalAccumulatedErrorTable[i];
     }
 
@@ -294,12 +286,11 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderK3 (
 // trace back through table to get state transition
 // return bit for appropriate transition
 
-
     if (*DoTraceBackFlag == SIGLIB_TRUE) {                          // If history table has been filled we can start trace back
       MinimumError = AccumulatedErrorTable[0];                      // Find the state with the minimum accumulated error
       MinimumErrorState = 0;
 
-      for (i = 1; i < SIGLIB_VITK3_NUMBER_OF_STATES; i++) {
+      for (SLArrayIndex_t i = 1; i < SIGLIB_VITK3_NUMBER_OF_STATES; i++) {
         if (AccumulatedErrorTable[i] < MinimumError) {
           MinimumError = AccumulatedErrorTable[i];                  // Store the minimum error
           MinimumErrorState = i;                                    // Select state
@@ -311,14 +302,14 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderK3 (
 #endif
 
 #if K3_NORMALISE_ERROR
-      for (i = 0; i < SIGLIB_VITK3_NUMBER_OF_STATES; i++) {         // Normalize the accumulated errors to avoid overflow
+      for (SLArrayIndex_t i = 0; i < SIGLIB_VITK3_NUMBER_OF_STATES; i++) {  // Normalize the accumulated errors to avoid overflow
         AccumulatedErrorTable[i] = AccumulatedErrorTable[i] - MinimumError;
       }
 #endif
 
 // Trace back through the survivor state history
 // table to obtain original state
-      for (i = 0; i < TraceBackDepth; i++) {
+      for (SLArrayIndex_t i = 0; i < TraceBackDepth; i++) {
         StateHistoryTraceBackIndex = (*SurvivorStateHistoryOffset - i);
         if (StateHistoryTraceBackIndex < 0) {
           StateHistoryTraceBackIndex += (TraceBackDepth + 1);
@@ -340,7 +331,6 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderK3 (
               NextMinErrorState, DecodedBit);
 #endif
 
-
       *DecodedByte = (SLChar_t) ((SLUFixData_t) * DecodedByte | (SLUFixData_t) DecodedBit << (SLUFixData_t) * pOutputBitCount); // Add decoded bit into output word
 
       if (++(*pOutputBitCount) >= SIGLIB_BYTE_LENGTH) {             // When one byte has been written, need to prepare to write next
@@ -348,13 +338,9 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderK3 (
         OutputByte = *DecodedByte;                                  // Save word to output
         *DecodedByte = 0;                                           // Clear decoded word
       }
-
     }                                                               // End of do trace back section
-
   }                                                                 // End of InputBitCount loop
-
   return (OutputByte);
-
 }                                                                   // End of SDS_ViterbiDecoderK3()
 
 
@@ -460,31 +446,29 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_ConvEncoderV32 (
   SLArrayIndex_t * pDiffEncState,                                   // Differential encoder state
   SLArrayIndex_t * pEncoderState)                                   // Convolutional encoder state variable
 {
-  SLArrayIndex_t  DiffEncOutput;                                    // Differentially encoded input
-  SLArrayIndex_t  ConvEncoderOutput;                                // 4 MSBs of convolutional encoder output are unmodified
-  SLComplexRect_s EncodedWord;
-
 // Differentially encode the 2 LSBs
-  DiffEncOutput = siglib_numerix_V32TxDifferentialEncoder[(SLArrayIndex_t) ((SLUFixData_t) SrcNibble & 0x3U)][(SLArrayIndex_t)
-                                                                                                              ((SLUFixData_t) *
-                                                                                                               pDiffEncState & 0x3U)];
+  SLArrayIndex_t  DiffEncOutput = siglib_numerix_V32TxDifferentialEncoder[(SLArrayIndex_t) ((SLUFixData_t) SrcNibble & 0x3U)][(SLArrayIndex_t)
+                                                                                                                              ((SLUFixData_t) *
+                                                                                                                               pDiffEncState &
+                                                                                                                               0x3U)];
 
   *pDiffEncState = DiffEncOutput;                                   // Save output for next iteration
 
-  ConvEncoderOutput = (SLArrayIndex_t) ((SLUFixData_t)
-                                        siglib_numerix_V32TxConvolutionalEncoderOutput[*pEncoderState][(SLArrayIndex_t)
-                                                                                                       ((SLUFixData_t) DiffEncOutput & 0x3U)] |
-                                        (((SLUFixData_t) SrcNibble & 0x0CU) << 1U));
+  SLArrayIndex_t  ConvEncoderOutput = (SLArrayIndex_t) ((SLUFixData_t)
+                                                        siglib_numerix_V32TxConvolutionalEncoderOutput[*pEncoderState][(SLArrayIndex_t)
+                                                                                                                       ((SLUFixData_t) DiffEncOutput
+                                                                                                                        & 0x3U)] | (((SLUFixData_t)
+                                                                                                                                     SrcNibble &
+                                                                                                                                     0x0CU) << 1U));
   *pEncoderState = siglib_numerix_V32TxConvolutionalEncoderNextState[*pEncoderState][(SLArrayIndex_t) ((SLUFixData_t) DiffEncOutput & 0x3U)];
 
-  EncodedWord = siglib_numerix_V32ConstellationMap[ConvEncoderOutput];  // Map convolutional encoder output to V32 constellation
+  SLComplexRect_s EncodedWord = siglib_numerix_V32ConstellationMap[ConvEncoderOutput];  // Map convolutional encoder output to V32 constellation
 
 #if (V32_DEBUG_CONV_ENC && LOCAL_DEBUG)
   printf ("ConvEncoderOutput O/P= 0x%lx, EncodedWord = %.2lf +j%.2lf\n", ConvEncoderOutput, EncodedWord.real, EncodedWord.imag);
 #endif
 
   return (EncodedWord);
-
 }                                                                   // End of SDS_ConvEncoderV32()
 
 
@@ -515,10 +499,8 @@ void SIGLIB_FUNC_DECL SIF_ViterbiDecoderV32 (
   SLFixData_t * pDoTraceBackFlag,
   const SLArrayIndex_t TraceBackDepth)
 {
-  SLArrayIndex_t  i, j;
-
-  for (i = 0; i < SIGLIB_VITV32_NUMBER_OF_STATES; i++) {
-    for (j = 0; j <= TraceBackDepth; j++) {                         // Clear survivor state history table
+  for (SLArrayIndex_t i = 0; i < SIGLIB_VITV32_NUMBER_OF_STATES; i++) {
+    for (SLArrayIndex_t j = 0; j <= TraceBackDepth; j++) {          // Clear survivor state history table
       *(pSurvivorStateHistoryTable + (j * SIGLIB_VITV32_NUMBER_OF_STATES) + i) = 0;
     }
 
@@ -528,7 +510,6 @@ void SIGLIB_FUNC_DECL SIF_ViterbiDecoderV32 (
 
   *pSurvivorStateHistoryOffset = 0;                                 // Initialise offset into state history array
   *pDoTraceBackFlag = SIGLIB_FALSE;                                 // Flag will be set to SIGLIB_TRUE when we are in trace back mode
-
 }                                                                   // End of SIF_ViterbiDecoderV32()
 
 
@@ -567,7 +548,6 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderV32 (
   SLFixData_t * pDoTraceBackFlag,
   const SLArrayIndex_t TraceBackDepth)
 {
-  SLUFixData_t    i, j;
   SLChar_t        DecodedNibble = 0;                                // Stores the completed nibble for output
   SLData_t        pLocalAccumulatedErrorTable[SIGLIB_VITV32_NUMBER_OF_STATES];  // Local error accumulation table
   SLData_t        EuclideanDistance;                                // Calculated Euclidean distance for transition
@@ -592,7 +572,7 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderV32 (
 // compare - accumulated errors
 // select - transition with smallest error
 
-  for (i = 0; i < SIGLIB_VITV32_NUMBER_OF_STATES; i++) {            // Fill temporary error accumulation table with SIGLIB_MAX
+  for (SLUFixData_t i = 0; i < SIGLIB_VITV32_NUMBER_OF_STATES; i++) { // Fill temporary error accumulation table with SIGLIB_MAX
     pLocalAccumulatedErrorTable[i] = SIGLIB_MAX;
   }
 
@@ -605,11 +585,11 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderV32 (
   }
 
 // For each path state we need to calculate which sub-state is closest
-  for (i = 0; i < SIGLIB_VITV32_NUMBER_OF_PATH_STATES; i++) {
+  for (SLUFixData_t i = 0; i < SIGLIB_VITV32_NUMBER_OF_PATH_STATES; i++) {
     pMinPathStateError[i] = SIGLIB_MAX;                             // Fill temporary error accumulation table with SIGLIB_MAX
 
 // Over all sub-states
-    for (j = 0; j < SIGLIB_VITV32_SUB_STATES_PER_PATH_STATE; j++) {
+    for (SLUFixData_t j = 0; j < SIGLIB_VITV32_SUB_STATES_PER_PATH_STATE; j++) {
 // Calculate the error (Euclidean distance) per channel symbol,
 // Sum for all channel symbols in convolutional encoder output.
 // Do not perform square root operation because it is inefficient
@@ -640,9 +620,9 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderV32 (
           *(pQ4Q3HistoryTable + (*pSurvivorStateHistoryOffset * SIGLIB_VITV32_NUMBER_OF_PATH_STATES) + 7));
 #endif
 // For each original state we need to accumulate errors for all transitions
-  for (i = 0; i < SIGLIB_VITV32_NUMBER_OF_STATES; i++) {
+  for (SLUFixData_t i = 0; i < SIGLIB_VITV32_NUMBER_OF_STATES; i++) {
 // Over all convolutional encoder outputs
-    for (j = 0; j < SIGLIB_VITV32_TRANSITIONS_PER_STATE; j++) {
+    for (SLUFixData_t j = 0; j < SIGLIB_VITV32_TRANSITIONS_PER_STATE; j++) {
       PathState = (j << 1U) + (i & 0x1U);                           // Calculate the path state number
 
 // Accumulate errors along the paths from original state to new one and
@@ -656,7 +636,7 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderV32 (
     }
   }
 
-  for (i = 0; i < SIGLIB_VITV32_NUMBER_OF_STATES; i++) {            // Copy local accumulated errors to the persistent array for next iteration
+  for (SLUFixData_t i = 0; i < SIGLIB_VITV32_NUMBER_OF_STATES; i++) { // Copy local accumulated errors to the persistent array for next iteration
     pAccumulatedErrorTable[i] = pLocalAccumulatedErrorTable[i];
   }
 
@@ -680,12 +660,11 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderV32 (
 // trace back through table to get state transition
 // return bit for appropriate transition
 
-
   if (*pDoTraceBackFlag == SIGLIB_TRUE) {                           // If history table has been filled we can start trace back
     MinimumError = pAccumulatedErrorTable[0];                       // Find the state with the minimum accumulated error
     MinimumErrorState = 0;
 
-    for (i = 1; i < SIGLIB_VITV32_NUMBER_OF_STATES; i++) {
+    for (SLUFixData_t i = 1; i < SIGLIB_VITV32_NUMBER_OF_STATES; i++) {
       if (pAccumulatedErrorTable[i] < MinimumError) {
         MinimumError = pAccumulatedErrorTable[i];                   // Store the minimum error
         MinimumErrorState = i;                                      // Select state
@@ -697,13 +676,13 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderV32 (
 #endif
 
 #if V32_NORMALISE_ERROR
-    for (i = 0; i < SIGLIB_VITV32_NUMBER_OF_STATES; i++) {          // Normalize the accumulated errors to avoid overflow
+    for (SLArrayIndex_t i = 0; i < SIGLIB_VITV32_NUMBER_OF_STATES; i++) { // Normalize the accumulated errors to avoid overflow
       pAccumulatedErrorTable[i] = pAccumulatedErrorTable[i] - MinimumError;
     }
 #endif
 // Trace back through the survivor state history
 // table to obtain original state
-    for (i = 0; i < (SLUFixData_t) TraceBackDepth; i++) {
+    for (SLUFixData_t i = 0; i < (SLUFixData_t) TraceBackDepth; i++) {
       StateHistoryTraceBackIndex = (*pSurvivorStateHistoryOffset - i);
       if (StateHistoryTraceBackIndex < 0) {
         StateHistoryTraceBackIndex += (TraceBackDepth + 1);
@@ -735,7 +714,5 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderV32 (
 #endif
 
   }                                                                 // End of do trace back section
-
   return (DecodedNibble);
-
 }                                                                   // End of SDS_ViterbiDecoderV32()

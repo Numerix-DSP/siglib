@@ -1,6 +1,6 @@
 // Numerix Graphics Library
 // Demo App
-// Copyright (c) 2023 Alpha Numerix, All rights reserved.
+// Copyright (c) 2023 Delta Numerix, All rights reserved.
 
 // Include files
 // For compilers that support precompilation, includes "wx/wx.h".
@@ -109,8 +109,7 @@ mainFrame::mainFrame (const wxString & Title,
 
 // Allocate and clear memory for graph
   pData = (double *) malloc (GRAPH_WIDTH * sizeof (double));
-  int             i;
-  for (i = 0; i < GRAPH_WIDTH; i++) {
+  for (int i = 0; i < GRAPH_WIDTH; i++) {
     *(pData + i) = 0.0;
   }
 
@@ -146,7 +145,7 @@ mainFrame::~mainFrame ()
 void mainFrame::OnAbout (
   wxCommandEvent & WXUNUSED (event))
 {
-  wxMessageBox (_T ("Numerix Graphics Library Demo V1.20 (C) 2007, Alpha Numerix"),
+  wxMessageBox (_T ("Numerix Graphics Library Demo V1.20 (C) 2007, Delta Numerix"),
                 _T ("About Numerix Graphics Library Demo"), wxOK | wxICON_INFORMATION, NULL);
 }
 

@@ -1,5 +1,5 @@
 // SigLib 180 Degree Phase Reversal Detector Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -8,7 +8,7 @@
 
 // Define constants
 #define SAMPLE_LENGTH   256
-#define SAMPLE_RATE     8000.
+#define SAMPLE_RATE_HZ  8000.
 #define FILTER_LENGTH   7                                           // 180 degree phase detector filter length
 #define CARRIER_FREQ    2100.                                       // Carrier frequency
 
@@ -64,7 +64,7 @@ int main (
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
                       SIGLIB_FILL,                                  // Fill (overwrite) or add to existing array contents
-                      CARRIER_FREQ / SAMPLE_RATE,                   // Signal frequency
+                      CARRIER_FREQ / SAMPLE_RATE_HZ,                // Signal frequency
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
@@ -77,7 +77,7 @@ int main (
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
                       SIGLIB_FILL,                                  // Fill (overwrite) or add to existing array contents
-                      CARRIER_FREQ / SAMPLE_RATE,                   // Signal frequency
+                      CARRIER_FREQ / SAMPLE_RATE_HZ,                // Signal frequency
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
@@ -90,7 +90,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "Source Signal",                                     // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               (SAMPLE_RATE / 2.) * ((double) (SAMPLE_LENGTH - 1)) / (double) SAMPLE_LENGTH,  // Maximum X value
+               (SAMPLE_RATE_HZ / 2.) * ((double) (SAMPLE_LENGTH - 1)) / (double) SAMPLE_LENGTH, // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -98,7 +98,7 @@ int main (
   SIF_180DegreePhaseDetect (&CosineTablePhase,                      // Fast cosine look up table phase
                             pFastCosineLookUpTable,                 // Pointer to fast cosine look up table
                             SINE_TABLE_SIZE,                        // Fast cosine look up table size
-                            CARRIER_FREQ / SAMPLE_RATE,             // Carrier frequency
+                            CARRIER_FREQ / SAMPLE_RATE_HZ,          // Carrier frequency
                             pFilterState,                           // Pointer to filter state array
                             pFilterCoeffs,                          // Pointer to filter coefficients
                             &FilterIndex,                           // Pointer to filter index
@@ -110,7 +110,7 @@ int main (
                                                   &CosineTablePhase,  // Fast cosine look up table phase
                                                   pFastCosineLookUpTable, // Pointer to fast cosine look up table
                                                   SINE_TABLE_SIZE,  // Fast cosine look up table size
-                                                  CARRIER_FREQ / SAMPLE_RATE, // Carrier frequency
+                                                  CARRIER_FREQ / SAMPLE_RATE_HZ,  // Carrier frequency
                                                   pFilterState,     // Pointer to filter state array
                                                   pFilterCoeffs,    // Pointer to filter coefficients
                                                   &FilterIndex,     // Pointer to filter index
@@ -124,7 +124,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "Phase Detector Output",                             // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               (SAMPLE_RATE / 2.) * ((double) (SAMPLE_LENGTH - 1)) / (double) SAMPLE_LENGTH,  // Maximum X value
+               (SAMPLE_RATE_HZ / 2.) * ((double) (SAMPLE_LENGTH - 1)) / (double) SAMPLE_LENGTH, // Maximum X value
                "lines",                                             // Graph type
                "red",                                               // Colour
                GPC_ADD);                                            // New graph

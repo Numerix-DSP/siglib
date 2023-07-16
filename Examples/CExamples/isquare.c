@@ -1,6 +1,6 @@
 // SigLib Frequency Domain Pitch Shifting Example
 // by interpolation, using a square wave.
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // This algorithm benefits from using overlapping windows, in general,
 // the greater the overlap, the better the performance. ie. the lower
@@ -39,8 +39,6 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  SLFixData_t     i;
-
 // Allocate array for largest FFT
   pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH2);
 
@@ -75,7 +73,7 @@ int main (
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       INPUT_LEN);                                   // Output dataset length
 
-  for (i = 0; i < LEN; i += (FFT_LENGTH / 2)) {
+  for (SLArrayIndex_t i = 0; i < LEN; i += (FFT_LENGTH / 2)) {
 // Copy input data
     SDA_Copy (pRealInput + i,                                       // Pointer to source array
               pRealTime,                                            // Pointer to destination array

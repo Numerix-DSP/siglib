@@ -1,5 +1,5 @@
 // SigLib Peak To Average Ratio Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -15,9 +15,7 @@ static SLData_t RealArray[ARRAY_LENGTH], ImagArray[ARRAY_LENGTH];
 int main (
   void)
 {
-  SLArrayIndex_t  i;
-
-  for (i = 0; i < ARRAY_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < ARRAY_LENGTH; i++) {
     RealArray[i] = (SLData_t) i;
     ImagArray[i] = (SLData_t) i;
   }

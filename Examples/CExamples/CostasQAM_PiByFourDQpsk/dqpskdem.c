@@ -1,5 +1,5 @@
 // SigLib example for V.26b using pi/4 Differential Quadrature Phase Shift Keying (DQPSK) demodulation
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 //     Data rate - 2400 bps
 //     Baud rate - 1200 Baud
@@ -61,16 +61,16 @@
 #define SAMPLE_LENGTH                   512                         // Number of samples in array
 
 #if ENABLE_DECIMATE
-#define SAMPLE_RATE                     12000.                      // Processing sample rate
+#define SAMPLE_RATE_HZ                  12000.                      // Processing sample rate
 #else
-#define SAMPLE_RATE                     48000.                      // Processing sample rate
+#define SAMPLE_RATE_HZ                  48000.                      // Processing sample rate
 #endif
 
 #define SYMBOL_RATE                     1200.                       // Symbol rate
 #define CARRIER_FREQ                    1800.                       // Frequency of carrier signal - a multpImagDatale of the sine table frequency
 
-#define SYMBOL_LENGTH                   ((SLArrayIndex_t)(SAMPLE_RATE / SYMBOL_RATE)) // Number of samples per symbol
-#define CARRIER_CYCLE_LENGTH            ((SLArrayIndex_t)(SAMPLE_RATE / CARRIER_FREQ))  // Carrier Period
+#define SYMBOL_LENGTH                   ((SLArrayIndex_t)(SAMPLE_RATE_HZ / SYMBOL_RATE))  // Number of samples per symbol
+#define CARRIER_CYCLE_LENGTH            ((SLArrayIndex_t)(SAMPLE_RATE_HZ / CARRIER_FREQ)) // Carrier Period
 
 #define EYE_DIAGRAM_SIZE                (((SLArrayIndex_t)2) * SYMBOL_LENGTH) // Size of eye diagram graph - Two complete symbol periods
 
@@ -264,7 +264,6 @@ int main (
   h_GPC_Plot     *hConstellationDiagram;                            // Declare constellation diagram graph object
 #endif
   SLError_t       SigLibErrorCode;
-  SLArrayIndex_t  i, j;
   SLFixData_t     RxDiBit;
   SLArrayIndex_t  FirstNonZeroSampleIndex;                          // First non zero sample - used in silence threshold detection
   SLArrayIndex_t  ProcessSampleLength;                              // Length of data set to process
@@ -416,7 +415,7 @@ int main (
   SigLibErrorCode = SIF_CostasQamDemodulate (&CostasLpVCOPhase,     // VCO phase
                                              pCostasLpVCOLookUpTable, // VCO look up table
                                              COSTAS_LP_VCO_TABLE_SIZE,  // VCO look up table size
-                                             SYMBOL_RATE / SAMPLE_RATE, // Low-pass filter cut-off frequency
+                                             SYMBOL_RATE / SAMPLE_RATE_HZ,  // Low-pass filter cut-off frequency
                                              pCostasLpLPF1State,    // Pointer to loop filter 1 state
                                              &CostasLpLPF1Index,    // Pointer to loop filter 1 index
                                              pCostasLpLPF2State,    // Pointer to loop filter 2 state
@@ -435,7 +434,7 @@ int main (
                                              pELGLoopFilterCoeffs,  // Pointer to loop filter coefficients
                                              &ELGLoopFilterIndex,   // Pointer to loop filter index
                                              ELG_LOOP_FILTER_LENGTH,  // Loop filter length
-                                             ELG_LOOP_FILTER_FC / SAMPLE_RATE,  // Loop filter cut-off / centre frequency
+                                             ELG_LOOP_FILTER_FC / SAMPLE_RATE_HZ, // Loop filter cut-off / centre frequency
                                              &ELGPulseDetectorThresholdFlag,  // Pointer to pulse detector threshold flag
                                              &ELGZeroCrossingPreviousSample,  // Pointer to zero crossing previous sample
                                              &ELGTriggerCount,      // Pointer to trigger counter
@@ -483,7 +482,7 @@ int main (
     ProcessSampleLength /= DECIMATION_RATIO;                        // Set the new sample length
 
 // Pre filter the data to select the pass-band only
-    for (i = 0; i < ProcessSampleLength; i++) {                     // Decimate the input data stream
+    for (SLArrayIndex_t i = 0; i < ProcessSampleLength; i++) {      // Decimate the input data stream
 // Pre-filter the data
       pData[i] = SDS_Fir (*(pInput + (i * DECIMATION_RATIO)),       // Input data sample to be filtered
                           RxPreFilterState,                         // Pointer to filter state array
@@ -491,7 +490,7 @@ int main (
                           &RxPreFilterIndex,                        // Pointer to filter index register
                           RX_PRE_FILTER_LENGTH);                    // Filter length
 
-      for (j = 1; j < DECIMATION_RATIO; j++) {                      // Add new samples into filter state array
+      for (SLArrayIndex_t j = 1; j < DECIMATION_RATIO; j++) {       // Add new samples into filter state array
         SDS_FirAddSample (*(pInput + (i * DECIMATION_RATIO) + j),   // Input sample to add to delay line
                           RxPreFilterState,                         // Pointer to filter state array
                           &RxPreFilterIndex,                        // Pointer to filter index register
@@ -619,7 +618,7 @@ int main (
 
 // Implement the Costas loop QAM demodulator
 #if PER_SAMPLE
-      for (i = 0; i < ProcessSampleLength; i++) {
+      for (SLArrayIndex_t i = 0; i < ProcessSampleLength; i++) {
 #if DISPLAY_EYE_DIAGRAM
         RxSymbolCount = SDS_CostasQamDemodulateDebug (*(pData + i), // Source data sample
                                                       &RealMagn,    // Pointer to real destination symbol point
@@ -628,7 +627,7 @@ int main (
                                                       CostasLoopVCOModulationIndex, // VCO modulation index
                                                       pCostasLpVCOLookUpTable,  // VCO look up table
                                                       COSTAS_LP_VCO_TABLE_SIZE, // VCO look up table size
-                                                      CARRIER_FREQ / SAMPLE_RATE, // Carrier frequency
+                                                      CARRIER_FREQ / SAMPLE_RATE_HZ,  // Carrier frequency
                                                       pCostasLpLPF1State, // Pointer to loop filter 1 state
                                                       &CostasLpLPF1Index, // Pointer to loop filter 1 index
                                                       pCostasLpLPF2State, // Pointer to loop filter 2 state
@@ -672,7 +671,7 @@ int main (
                                                  CostasLoopVCOModulationIndex,  // VCO modulation index
                                                  pCostasLpVCOLookUpTable, // VCO look up table
                                                  COSTAS_LP_VCO_TABLE_SIZE,  // VCO look up table size
-                                                 CARRIER_FREQ / SAMPLE_RATE,  // Carrier frequency
+                                                 CARRIER_FREQ / SAMPLE_RATE_HZ, // Carrier frequency
                                                  pCostasLpLPF1State,  // Pointer to loop filter 1 state
                                                  &CostasLpLPF1Index,  // Pointer to loop filter 1 index
                                                  pCostasLpLPF2State,  // Pointer to loop filter 2 state
@@ -721,7 +720,7 @@ int main (
           }
 #endif
 
-          for (j = 0; j < CONSTELLATION_POINTS; j++) {              // Calculate the errors from the ideal points
+          for (SLArrayIndex_t j = 0; j < CONSTELLATION_POINTS; j++) { // Calculate the errors from the ideal points
             SLData_t        RealError = (IdealConstellationPoints[j].real - RealMagn);
             SLData_t        ImagError = (IdealConstellationPoints[j].imag - ImagMagn);
             ConstellationPointErrors[j] = (RealError * RealError) + (ImagError * ImagError);
@@ -786,7 +785,7 @@ int main (
                                                     CostasLoopVCOModulationIndex, // VCO modulation index
                                                     pCostasLpVCOLookUpTable,  // VCO look up table
                                                     COSTAS_LP_VCO_TABLE_SIZE, // VCO look up table size
-                                                    CARRIER_FREQ / SAMPLE_RATE, // Carrier frequency
+                                                    CARRIER_FREQ / SAMPLE_RATE_HZ,  // Carrier frequency
                                                     pCostasLpLPF1State, // Pointer to loop filter 1 state
                                                     &CostasLpLPF1Index, // Pointer to loop filter 1 index
                                                     pCostasLpLPF2State, // Pointer to loop filter 2 state
@@ -830,7 +829,7 @@ int main (
                                                CostasLoopVCOModulationIndex,  // VCO modulation index
                                                pCostasLpVCOLookUpTable, // VCO look up table
                                                COSTAS_LP_VCO_TABLE_SIZE,  // VCO look up table size
-                                               CARRIER_FREQ / SAMPLE_RATE,  // Carrier frequency
+                                               CARRIER_FREQ / SAMPLE_RATE_HZ, // Carrier frequency
                                                pCostasLpLPF1State,  // Pointer to loop filter 1 state
                                                &CostasLpLPF1Index,  // Pointer to loop filter 1 index
                                                pCostasLpLPF2State,  // Pointer to loop filter 2 state
@@ -866,7 +865,7 @@ int main (
 #endif
 
 // Decode the receive bits
-      for (i = 0; i < RxSymbolCount; i++) {                         // For all constellation diagram points
+      for (SLArrayIndex_t i = 0; i < RxSymbolCount; i++) {          // For all constellation diagram points
         RealMagn = pRealOutput[i];                                  // Copy to local registers
         ImagMagn = pImagOutput[i];
 
@@ -885,7 +884,7 @@ int main (
           }
 #endif
 
-          for (j = 0; j < CONSTELLATION_POINTS; j++) {              // Calculate the errors from the ideal points
+          for (SLArrayIndex_t j = 0; j < CONSTELLATION_POINTS; j++) { // Calculate the errors from the ideal points
             SLData_t        RealError = (IdealConstellationPoints[j].real - RealMagn);
             SLData_t        ImagError = (IdealConstellationPoints[j].imag - ImagMagn);
             ConstellationPointErrors[j] = (RealError * RealError) + (ImagError * ImagError);
@@ -943,7 +942,7 @@ int main (
 
 #if DISPLAY_EYE_DIAGRAM
       if (FirstNonZeroSampleIndex != SIGLIB_SIGNAL_NOT_PRESENT) {
-        for (i = 0; i < (10 * EYE_DIAGRAM_SIZE); i += EYE_DIAGRAM_SIZE) {
+        for (SLArrayIndex_t i = 0; i < (10 * EYE_DIAGRAM_SIZE); i += EYE_DIAGRAM_SIZE) {
           if (i == 0) {
             gpc_plot_2d (hEyeDiagram,                               // Graph handle
                          DebugRealFilterOutput + i,                 // Dataset

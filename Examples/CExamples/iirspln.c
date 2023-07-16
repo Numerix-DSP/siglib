@@ -6,7 +6,7 @@
 // the desired sample rate should be normalised to (2.0 . PI).
 // The SDA_IirModifyFilterGain function is used to normalise the gain.
 // The example modifies the Fc from 1.0 radian to 2.0 radians.
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -28,7 +28,7 @@
 #define FFT_LENGTH              1024
 #define LOG2_FFT_LENGTH         SAI_FftLengthLog2(FFT_LENGTH)       // Log2 FFT length,
 
-#define SAMPLE_RATE             SIGLIB_TWO_PI
+#define SAMPLE_RATE_HZ          SIGLIB_TWO_PI
 #define PREWARP_MATCH_FREQUENCY SIGLIB_ONE
 
 #define FILTER_ORDER            4                                   // Filter length
@@ -60,9 +60,6 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
   SLData_t        Scale;
-#if (PLOT_RESULTS == 0) || (DEBUG_FPRINTF == 1)
-  SLArrayIndex_t  i;
-#endif
 
 #if PLOT_RESULTS
 // Allocate memory
@@ -125,7 +122,7 @@ int main (
 
 #if DEBUG_FPRINTF
   SUF_Debugfprintf ("\nNormalized complex S-plane poles\n");
-  for (i = 0; i < IIR_FILTER_STAGES; i++) {
+  for (SLArrayIndex_t i = 0; i < IIR_FILTER_STAGES; i++) {
     SUF_DebugPrintRectangular (SPlanePoles[i]);
   }
   SUF_Debugfprintf ("\n");
@@ -133,12 +130,12 @@ int main (
 
 // Pre-warp the desired cut-off frequency and
 // translate the cut-off frequency of the filter
-  SDA_TranslateSPlaneCutOffFrequency (SPlaneNormalizedPoles, SPlanePoles, SDS_PreWarp (PREWARP_MATCH_FREQUENCY, SAMPLE_RATE) * SAMPLE_RATE,
+  SDA_TranslateSPlaneCutOffFrequency (SPlaneNormalizedPoles, SPlanePoles, SDS_PreWarp (PREWARP_MATCH_FREQUENCY, SAMPLE_RATE_HZ) * SAMPLE_RATE_HZ,
                                       IIR_FILTER_STAGES);
 
 #if DEBUG_FPRINTF
   SUF_Debugfprintf ("\nTranslated complex S-plane poles\n");
-  for (i = 0; i < IIR_FILTER_STAGES; i++) {
+  for (SLArrayIndex_t i = 0; i < IIR_FILTER_STAGES; i++) {
     SUF_DebugPrintRectangular (SPlanePoles[i]);
   }
   SUF_Debugfprintf ("\n");
@@ -162,11 +159,11 @@ int main (
 
 #if DEBUG_FPRINTF
   SUF_Debugfprintf ("\nComplex z-plane zeros\n");
-  for (i = 0; i < IIR_FILTER_STAGES; i++) {
+  for (SLArrayIndex_t i = 0; i < IIR_FILTER_STAGES; i++) {
     SUF_DebugPrintRectangular (ZPlaneZeros[i]);
   }
   SUF_Debugfprintf ("\nComplex z-plane poles\n");
-  for (i = 0; i < IIR_FILTER_STAGES; i++) {
+  for (SLArrayIndex_t i = 0; i < IIR_FILTER_STAGES; i++) {
     SUF_DebugPrintRectangular (ZPlanePoles[i]);
   }
   SUF_Debugfprintf ("\n");
@@ -198,7 +195,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Source - Impulse Response",                         // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -225,7 +222,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Original Frequency Response",                       // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE),          // Maximum X value
+               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE_HZ),       // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -236,7 +233,8 @@ int main (
 
 // Pre-warp the desired cut-off frequency and
 // translate the cut-off frequency of the filter
-  SDA_TranslateSPlaneCutOffFrequency (SPlaneNormalizedPoles, SPlanePoles, SDS_PreWarp (SIGLIB_TWO, SAMPLE_RATE) * SAMPLE_RATE, IIR_FILTER_STAGES);
+  SDA_TranslateSPlaneCutOffFrequency (SPlaneNormalizedPoles, SPlanePoles, SDS_PreWarp (SIGLIB_TWO, SAMPLE_RATE_HZ) * SAMPLE_RATE_HZ,
+                                      IIR_FILTER_STAGES);
 
 // Convert s-plane poles and zeros to z-plane
 // using the bilinear transform
@@ -269,7 +267,7 @@ int main (
                            IIR_FILTER_STAGES);                      // Number of biquads
 
 #if (PLOT_RESULTS == 0)
-  for (i = 0; i < IIR_FILTER_STAGES; i++) {
+  for (SLArrayIndex_t i = 0; i < IIR_FILTER_STAGES; i++) {
     printf ("Modified LPF Coeffs - Biquad %d = %lf, %lf, %lf, %lf, %lf\n", (short) i, ModifiedCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0],
             ModifiedCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1], ModifiedCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2],
             ModifiedCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3], ModifiedCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4]);
@@ -308,7 +306,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Destination - Impulse Response",                    // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -335,7 +333,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Frequency Response - LP to LP - 1.0 to 2.0",        // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE),          // Maximum X value
+               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE_HZ),       // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -348,7 +346,8 @@ int main (
 
 // Pre-warp the desired cut-off frequency and
 // translate the cut-off frequency of the filter
-  SDA_TranslateSPlaneCutOffFrequency (SPlaneNormalizedPoles, SPlanePoles, SDS_PreWarp (SIGLIB_TWO, SAMPLE_RATE) * SAMPLE_RATE, IIR_FILTER_STAGES);
+  SDA_TranslateSPlaneCutOffFrequency (SPlaneNormalizedPoles, SPlanePoles, SDS_PreWarp (SIGLIB_TWO, SAMPLE_RATE_HZ) * SAMPLE_RATE_HZ,
+                                      IIR_FILTER_STAGES);
 
 // Convert s-plane poles and zeros to z-plane
 // using the bilinear transform
@@ -389,7 +388,7 @@ int main (
                            IIR_FILTER_STAGES);                      // Number of biquads
 
 #if (PLOT_RESULTS == 0)
-  for (i = 0; i < IIR_FILTER_STAGES; i++) {
+  for (SLArrayIndex_t i = 0; i < IIR_FILTER_STAGES; i++) {
     printf ("Modified HPF Coeffs - Biquad %d = %lf, %lf, %lf, %lf, %lf\n", (short) i, ModifiedCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 0],
             ModifiedCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 1], ModifiedCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 2],
             ModifiedCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 3], ModifiedCoeffs[(SIGLIB_IIR_COEFFS_PER_BIQUAD * i) + 4]);
@@ -429,7 +428,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Destination - Impulse Response",                    // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -456,7 +455,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Frequency Response - LP to HP - 1.0 to 2.0",        // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE),          // Maximum X value
+               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE_HZ),       // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph

@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : siglib_processors.h   | Author : JOHN EDWARDS
-Siglib Library Version  : 10.00                 |
+Siglib Library Version  : 10.50                 |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 22/01/2000
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Processor specific header file for SigLib DSP library
 
@@ -56,7 +56,7 @@ Update history :
 #define SIGLIB_PTR_DECL
 
 #ifndef SIGLIB_ARRAY_OR_PTR
-#define SIGLIB_ARRAY_OR_PTR       SIGLIB_POINTER_ACCESS             // Use pointers for memory accesses
+#define SIGLIB_ARRAY_OR_PTR         SIGLIB_POINTER_ACCESS           // Use pointers for memory accesses
 #endif
 #define SIGLIB_ARRAYS_ALIGNED       0                               // Functionality currently only supported by TMS320C6000 compiler
 
@@ -97,6 +97,11 @@ typedef double  SLFloat64_t;                                        // 64 bit fl
 #define SIGLIB_INDEX_INT        0                                   // SigLib array index is NOT int
 #endif
 
+#ifndef SIGLIB_ARRAY_OR_PTR
+#define SIGLIB_ARRAY_OR_PTR         SIGLIB_POINTER_ACCESS           // Use pointers for memory accesses
+#endif
+#define SIGLIB_ARRAYS_ALIGNED       0                               // Functionality currently only supported by TMS320C6000 compiler
+
 #define SUF_Printf              printf                              // Define stdio functions
 #define SUF_Fopen               fopen
 #define SUF_Fclose              fclose
@@ -121,6 +126,11 @@ typedef double  SLFloat64_t;                                        // 64 bit fl
 #ifndef SIGLIB_INDEX_INT
 #define SIGLIB_INDEX_INT        0                                   // SigLib array index is NOT int
 #endif
+
+#ifndef SIGLIB_ARRAY_OR_PTR
+#define SIGLIB_ARRAY_OR_PTR         SIGLIB_POINTER_ACCESS           // Use pointers for memory accesses
+#endif
+#define SIGLIB_ARRAYS_ALIGNED       0                               // Functionality currently only supported by TMS320C6000 compiler
 
 #define SUF_Printf              printf                              // Define stdio functions
 #define SUF_Fopen               fopen_s
@@ -212,10 +222,6 @@ typedef double  SLFloat64_t;                                        // 64 bit fl
                             // Function declaration - Not used by this compiler but do not remove
 #define SIGLIB_FUNC_DECL
 
-                            // Arrays > 64K need to be declared huge - used for image processing functions
-#define SIGLIB_HUGE_DECL            huge
-#define SIGLIB_HUGE_ARRAYS          1
-
 #ifndef SL_RANDOMIZE
 #define SL_RANDOMIZE                0                               // For functions that use rand(), do not randomize data at start - this requires the time functions to be implemented
 #endif
@@ -235,9 +241,6 @@ typedef double  SLFloat64_t;                                        // 64 bit fl
 //#define SIGLIB_FUNC_DECL            __declspec(dllimport) __stdcall // DLL import function - used in Application
 #endif
 #endif
-                            // Arrays > 64K need do not need to be declared huge
-#define SIGLIB_HUGE_DECL
-#define SIGLIB_HUGE_ARRAYS          0                               // Arrays > 64K DO NOT need to be declared huge
 
 #ifndef SL_RANDOMIZE
 #define SL_RANDOMIZE                1                               // For functions that use rand(), randomize data at start - set this to zero to use the system default seed
@@ -294,11 +297,8 @@ typedef double  SLFloat64_t;                                        // 64 bit fl
 #define SIGLIB_INDEX_INT            0                               // SigLib array index is NOT int
 #endif
 
-                            // Arrays > 64K need do not need to be declared huge
-#define SIGLIB_HUGE_DECL
-#define SIGLIB_HUGE_ARRAYS          0
 #ifndef SIGLIB_ARRAY_OR_PTR
-#define SIGLIB_ARRAY_OR_PTR       SIGLIB_ARRAY_ACCESS               // Use arrays for memory accesses
+#define SIGLIB_ARRAY_OR_PTR         SIGLIB_ARRAY_ACCESS             // Use arrays for memory accesses
 #endif
 #define SIGLIB_ARRAYS_ALIGNED       1                               // Functionality currently only supported by TMS320C6000 compiler
 
@@ -430,11 +430,8 @@ typedef double  SLFloat64_t;                                        // 64 bit fl
 #define SIGLIB_INDEX_INT            0                               // SigLib array index is NOT int
 #endif
 
-                            // Arrays > 64K need do not need to be declared huge
-#define SIGLIB_HUGE_DECL
-#define SIGLIB_HUGE_ARRAYS          0
 #ifndef SIGLIB_ARRAY_OR_PTR
-#define SIGLIB_ARRAY_OR_PTR       SIGLIB_POINTER_ACCESS             // Use pointers for memory accesses
+#define SIGLIB_ARRAY_OR_PTR         SIGLIB_POINTER_ACCESS           // Use pointers for memory accesses
 #endif
 #define SIGLIB_ARRAYS_ALIGNED       0                               // Functionality currently only supported by TMS320C6000 compiler
 
@@ -568,11 +565,8 @@ typedef double  SLFloat64_t;                                        // 64 bit fl
 #define SIGLIB_INDEX_INT            0                               // SigLib array index is NOT int
 #endif
 
-                            // Arrays > 64K need do not need to be declared huge
-#define SIGLIB_HUGE_DECL
-#define SIGLIB_HUGE_ARRAYS          0
 #ifndef SIGLIB_ARRAY_OR_PTR
-#define SIGLIB_ARRAY_OR_PTR       SIGLIB_POINTER_ACCESS             // Use pointers for memory accesses
+#define SIGLIB_ARRAY_OR_PTR         SIGLIB_POINTER_ACCESS           // Use pointers for memory accesses
 #endif
 #define SIGLIB_ARRAYS_ALIGNED       0                               // Functionality currently only supported by TMS320C6000 compiler
 
@@ -705,11 +699,8 @@ typedef double  SLFloat64_t;                                        // 64 bit fl
 #define SIGLIB_INDEX_INT            0                               // SigLib array index is NOT int
 #endif
 
-                            // Arrays > 64K need do not need to be declared huge
-#define SIGLIB_HUGE_DECL
-#define SIGLIB_HUGE_ARRAYS          0
 #ifndef SIGLIB_ARRAY_OR_PTR
-#define SIGLIB_ARRAY_OR_PTR       SIGLIB_POINTER_ACCESS             // Use pointers for memory accesses
+#define SIGLIB_ARRAY_OR_PTR         SIGLIB_POINTER_ACCESS           // Use pointers for memory accesses
 #endif
 #define SIGLIB_ARRAYS_ALIGNED       0                               // Functionality currently only supported by TMS320C6000 compiler
 
@@ -842,11 +833,8 @@ typedef double  SLFloat64_t;                                        // 64 bit fl
 #define SIGLIB_INDEX_INT            0                               // SigLib array index is NOT int
 #endif
 
-                            // Arrays > 64K need do not need to be declared huge
-#define SIGLIB_HUGE_DECL
-#define SIGLIB_HUGE_ARRAYS          0
 #ifndef SIGLIB_ARRAY_OR_PTR
-#define SIGLIB_ARRAY_OR_PTR       SIGLIB_POINTER_ACCESS             // Use pointers for memory accesses
+#define SIGLIB_ARRAY_OR_PTR         SIGLIB_POINTER_ACCESS           // Use pointers for memory accesses
 #endif
 #define SIGLIB_ARRAYS_ALIGNED       0                               // Functionality currently only supported by TMS320C6000 compiler
 
@@ -979,11 +967,8 @@ typedef double  SLFloat64_t;                                        // 64 bit fl
 #define SIGLIB_INDEX_INT            0                               // SigLib array index is NOT int
 #endif
 
-                            // Arrays > 64K need do not need to be declared huge
-#define SIGLIB_HUGE_DECL
-#define SIGLIB_HUGE_ARRAYS          0
 #ifndef SIGLIB_ARRAY_OR_PTR
-#define SIGLIB_ARRAY_OR_PTR       SIGLIB_POINTER_ACCESS             // Use pointers for memory accesses
+#define SIGLIB_ARRAY_OR_PTR         SIGLIB_POINTER_ACCESS           // Use pointers for memory accesses
 #endif
 #define SIGLIB_ARRAYS_ALIGNED       0                               // Functionality currently only supported by TMS320C6000 compiler
 
@@ -1118,11 +1103,8 @@ typedef double  SLFloat64_t;                                        // 64 bit fl
 #define SIGLIB_INDEX_INT            0                               // SigLib array index is NOT int
 #endif
 
-                            // Arrays > 64K need do not need to be declared huge
-#define SIGLIB_HUGE_DECL
-#define SIGLIB_HUGE_ARRAYS          0
 #ifndef SIGLIB_ARRAY_OR_PTR
-#define SIGLIB_ARRAY_OR_PTR       SIGLIB_POINTER_ACCESS             // Use pointers for memory accesses
+#define SIGLIB_ARRAY_OR_PTR         SIGLIB_POINTER_ACCESS           // Use pointers for memory accesses
 #endif
 #define SIGLIB_ARRAYS_ALIGNED       0                               // Functionality currently only supported by TMS320C6000 compiler
 
@@ -1256,11 +1238,8 @@ typedef double  SLFloat64_t;                                        // 64 bit fl
 #define SIGLIB_INDEX_INT            0                               // SigLib array index is NOT int
 #endif
 
-                            // Arrays > 64K need do not need to be declared huge
-#define SIGLIB_HUGE_DECL
-#define SIGLIB_HUGE_ARRAYS          0
 #ifndef SIGLIB_ARRAY_OR_PTR
-#define SIGLIB_ARRAY_OR_PTR       SIGLIB_POINTER_ACCESS             // Use pointers for memory accesses
+#define SIGLIB_ARRAY_OR_PTR         SIGLIB_POINTER_ACCESS           // Use pointers for memory accesses
 #endif
 #define SIGLIB_ARRAYS_ALIGNED       0                               // Functionality currently only supported by TMS320C6000 compiler
 
@@ -1389,11 +1368,8 @@ typedef double  SLFloat64_t;                                        // 64 bit fl
 #define SIGLIB_INDEX_INT            0                               // SigLib array index is NOT int
 #endif
 
-                            // Arrays > 64K need do not need to be declared huge
-#define SIGLIB_HUGE_DECL
-#define SIGLIB_HUGE_ARRAYS          0
 #ifndef SIGLIB_ARRAY_OR_PTR
-#define SIGLIB_ARRAY_OR_PTR       SIGLIB_POINTER_ACCESS             // Use pointers for memory accesses
+#define SIGLIB_ARRAY_OR_PTR         SIGLIB_POINTER_ACCESS           // Use pointers for memory accesses
 #endif
 #define SIGLIB_ARRAYS_ALIGNED       0                               // Functionality currently only supported by TMS320C6000 compiler
 

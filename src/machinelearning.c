@@ -1,7 +1,7 @@
 
 /******************************************************************************
 File Name               : machinelearning.c | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00             |
+Siglib Library Version  : 10.50             |
 --------------------------------------------+----------------------------------
 Compiler  : Independent                     | Start Date    : 25/05/2022
 Options   :                                 | Latest Update : 07/12/2022
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : DSP basic math functions, for SigLib DSP library.
 
@@ -43,7 +43,6 @@ Description : DSP basic math functions, for SigLib DSP library.
 #if __GNUC__
 #pragma GCC diagnostic ignored "-Wunused-result"
 #endif
-
 
 /**/
 
@@ -542,7 +541,6 @@ SLNeuralNetworkPrediction_s SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryNetworkPredict
         *(pLayer2PostActivation + layer2Node) = SDS_ActivationReLU (layer2PreActivation);
         break;
     }
-
   }
 
   SLNeuralNetworkPrediction_s prediction;
@@ -743,7 +741,6 @@ void SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryWithBiasesNetworkFit (
     }
 
     *pLayer1Biases += learningRate * layer2Gradient;
-
   }
 }                                                                   // End of SDA_TwoLayer2CategoryWithBiasesNetworkFit()
 
@@ -1165,7 +1162,6 @@ SLNeuralNetworkPrediction_s SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryWithBiasesNetw
         *(pLayer2PostActivation + layer2Node) = SDS_ActivationReLU (layer2PreActivation);
         break;
     }
-
   }
 
   SLNeuralNetworkPrediction_s prediction;

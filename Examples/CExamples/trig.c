@@ -1,5 +1,5 @@
 // SigLib Fast Sin, Cos And Sincos Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -7,7 +7,7 @@
 #include <gnuplot_c.h>                                              // Gnuplot/C
 
 // Define constants
-#define SAMPLE_RATE                 10000.
+#define SAMPLE_RATE_HZ              10000.
 #define CARRIER_FREQUENCY           500.
 #define CARRIER_TABLE_LENGTH        1000
 #define SAMPLE_LENGTH               32
@@ -28,8 +28,6 @@ int main (
   void)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
-
-  SLArrayIndex_t  i;
 
   pSinOutput = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
   pCosOutput = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
@@ -176,7 +174,7 @@ int main (
   SDA_FastSin (pSinCosLUT,                                          // Sine table pointer
                pSinOutput,                                          // Sine wave destination pointer
                &LookUpTablePhase,                                   // Sine table phase
-               CARRIER_FREQUENCY / SAMPLE_RATE,                     // Sine wave frequency
+               CARRIER_FREQUENCY / SAMPLE_RATE_HZ,                  // Sine wave frequency
                CARRIER_TABLE_LENGTH,                                // Sine wave look up table length
                SAMPLE_LENGTH);                                      // Dataset length
 
@@ -185,7 +183,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "Sine Wave",                                         // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -194,10 +192,10 @@ int main (
 
 // Generate sinusoid
   LookUpTablePhase = SIGLIB_ZERO;
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     *(pSinOutput + i) = SDS_FastSin (pSinCosLUT,                    // Sine table pointer
                                      &LookUpTablePhase,             // Sine table phase
-                                     CARRIER_FREQUENCY / SAMPLE_RATE, // Sine wave frequency
+                                     CARRIER_FREQUENCY / SAMPLE_RATE_HZ,  // Sine wave frequency
                                      CARRIER_TABLE_LENGTH);         // Sine wave look up table length
   }
 
@@ -206,7 +204,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "Sine Wave",                                         // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -222,7 +220,7 @@ int main (
   SDA_FastCos (pSinCosLUT,                                          // Cosine table pointer
                pCosOutput,                                          // Cosine wave destination pointer
                &LookUpTablePhase,                                   // Cosine table phase
-               CARRIER_FREQUENCY / SAMPLE_RATE,                     // Cosine wave frequency
+               CARRIER_FREQUENCY / SAMPLE_RATE_HZ,                  // Cosine wave frequency
                CARRIER_TABLE_LENGTH,                                // Cosine wave look up table length
                SAMPLE_LENGTH);                                      // Dataset length
 
@@ -231,7 +229,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "Cosine Wave",                                       // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -240,10 +238,10 @@ int main (
 
 // Generate fast cosine
   LookUpTablePhase = SIGLIB_ZERO;
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     *(pCosOutput + i) = SDS_FastCos (pSinCosLUT,                    // Cosine table pointer
                                      &LookUpTablePhase,             // Cosine table phase
-                                     CARRIER_FREQUENCY / SAMPLE_RATE, // Cosine wave frequency
+                                     CARRIER_FREQUENCY / SAMPLE_RATE_HZ,  // Cosine wave frequency
                                      CARRIER_TABLE_LENGTH);         // Cosine wave look up table length
   }
 
@@ -252,7 +250,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "Cosine Wave",                                       // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -269,7 +267,7 @@ int main (
                   pSinOutput,                                       // Sine wave destination pointer
                   pCosOutput,                                       // Cosine wave destination pointer
                   &LookUpTablePhase,                                // Sine table phase
-                  CARRIER_FREQUENCY / SAMPLE_RATE,                  // Sine wave frequency
+                  CARRIER_FREQUENCY / SAMPLE_RATE_HZ,               // Sine wave frequency
                   CARRIER_TABLE_LENGTH,                             // Sine wave period
                   SAMPLE_LENGTH);                                   // Dataset length
 
@@ -278,7 +276,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "Sine Wave",                                         // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -288,7 +286,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "Cosine Wave",                                       // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "red",                                               // Colour
                GPC_ADD);                                            // New graph
@@ -297,12 +295,12 @@ int main (
 
 // Generate sinusoid and cosinusoid
   LookUpTablePhase = SIGLIB_ZERO;
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     SDS_FastSinCos (pSinCosLUT,                                     // Sine table pointer
                     pSinOutput + i,                                 // Sine wave destination pointer
                     pCosOutput + i,                                 // Cosine wave destination pointer
                     &LookUpTablePhase,                              // Sine table phase
-                    CARRIER_FREQUENCY / SAMPLE_RATE,                // Sine wave frequency
+                    CARRIER_FREQUENCY / SAMPLE_RATE_HZ,             // Sine wave frequency
                     CARRIER_TABLE_LENGTH);                          // Sine wave period
   }
 
@@ -311,7 +309,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "Sine Wave",                                         // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -321,7 +319,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "Cosine Wave",                                       // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "red",                                               // Colour
                GPC_ADD);                                            // New graph

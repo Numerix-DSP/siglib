@@ -1,5 +1,5 @@
 // SigLib Copy With Overlap Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -32,14 +32,13 @@ static SLData_t OverlapArray[OVERLAP_LENGTH];
 int main (
   void)
 {
-  SLArrayIndex_t  i;
   SLArrayIndex_t  overlapSrcArrayIndex;
   SLArrayIndex_t  copyIndexLength;
 
   printf ("Perform 60%% overlap copy between short sections of larger arrays ...");
   SIF_CopyWithOverlap (&overlapSrcArrayIndex);                      // Pointer to source array index
 
-  for (i = 0; i < 4; i++) {
+  for (SLArrayIndex_t i = 0; i < 4; i++) {
     SDA_CopyWithOverlap (SrcArray0,                                 // Pointer to source array
                          DstArray,                                  // Pointer to destination array
                          OverlapArray,                              // Pointer to overlap array
@@ -63,7 +62,7 @@ int main (
     SUF_PrintArray (DstArray, DST_ARRAY_LENGTH);
   }
 
-  for (i = 0; i < 4; i++) {
+  for (SLArrayIndex_t i = 0; i < 4; i++) {
     SDA_CopyWithOverlap (SrcArray1,                                 // Pointer to source array
                          DstArray,                                  // Pointer to destination array
                          OverlapArray,                              // Pointer to overlap array
@@ -84,7 +83,7 @@ int main (
 
   SIF_CopyWithOverlap (&overlapSrcArrayIndex);                      // Pointer to source array index
 
-  for (i = 0; i < 5; i++) {
+  for (SLArrayIndex_t i = 0; i < 5; i++) {
     while (SDA_CopyWithOverlap (ArrayPtrs[i],                       // Pointer to source array
                                 DstArray,                           // Pointer to destination array
                                 OverlapArray,                       // Pointer to overlap array

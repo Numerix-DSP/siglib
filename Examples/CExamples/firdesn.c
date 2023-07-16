@@ -1,5 +1,5 @@
 // SigLib FIR Filter Design Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -11,7 +11,7 @@
 #define FILTER_LENGTH       128
 #define FFT_LENGTH          512
 
-#define SAMPLE_RATE         8000.
+#define SAMPLE_RATE_HZ      8000.
 
 // Declare global arrays and variables
 static SLData_t pLPFilterCoeffs[FILTER_LENGTH];
@@ -60,16 +60,16 @@ int main (
            &HPFilterIndex,                                          // Pointer to filter index register
            FILTER_LENGTH);                                          // Filter length
   SIF_FirLowPassFilter (pLPFilterCoeffs,                            // Filter coeffs array
-                        3000. / SAMPLE_RATE,                        // Filter cut off frequency
+                        3000. / SAMPLE_RATE_HZ,                     // Filter cut off frequency
                         SIGLIB_HANNING,                             // Window type
                         FILTER_LENGTH);                             // Filter length
   SIF_FirHighPassFilter (pHPFilterCoeffs,                           // Filter coeffs array
-                         1000. / SAMPLE_RATE,                       // Filter cut off frequency
+                         1000. / SAMPLE_RATE_HZ,                    // Filter cut off frequency
                          SIGLIB_HANNING,                            // Window type
                          FILTER_LENGTH);                            // Filter length
   SIF_FirBandPassFilter (pBPFilterCoeffs,                           // Filter coeffs array
-                         1600. / SAMPLE_RATE,                       // Filter center frequency
-                         2000. / SAMPLE_RATE,                       // Filter bandwidth
+                         1600. / SAMPLE_RATE_HZ,                    // Filter center frequency
+                         2000. / SAMPLE_RATE_HZ,                    // Filter bandwidth
                          SIGLIB_HANNING,                            // Window type
                          FILTER_LENGTH);                            // Filter length
 //    printf("\nFilter length = %d\n", FILTER_LENGTH);
@@ -84,16 +84,16 @@ int main (
 //                    FILTER_LENGTH);                         // Filter length
 //
 //    SIF_FirLowPassFilter (pLPFilterCoeffs,                  // Filter coeffs array
-//                          3000. / SAMPLE_RATE,              // Filter cut off frequency
+//                          3000. / SAMPLE_RATE_HZ,              // Filter cut off frequency
 //                          SIGLIB_HANNING,                   // Window type
 //                          FILTER_LENGTH+1);                 // Filter length
 //    SIF_FirHighPassFilter (pHPFilterCoeffs,                 // Filter coeffs array
-//                           1000. / SAMPLE_RATE,             // Filter cut off frequency
+//                           1000. / SAMPLE_RATE_HZ,             // Filter cut off frequency
 //                           SIGLIB_HANNING,                  // Window type
 //                           FILTER_LENGTH+1);                // Filter length
 //    SIF_FirBandPassFilter (pBPFilterCoeffs,                 // Filter coeffs array
-//                           1600. / SAMPLE_RATE,             // Filter center frequency
-//                           2000. / SAMPLE_RATE,             // Filter bandwidth
+//                           1600. / SAMPLE_RATE_HZ,             // Filter center frequency
+//                           2000. / SAMPLE_RATE_HZ,             // Filter bandwidth
 //                           SIGLIB_HANNING,                  // Window type
 //                           FILTER_LENGTH+1);                // Filter length
 //

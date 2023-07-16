@@ -1,5 +1,5 @@
 // SigLib One-pole Filter Example, with cut-off frequency
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -15,7 +15,7 @@
 
 // Declare global variables and arrays
 static SLData_t *pRealData, *pImagData, *pResults, *pSrc1, *pSrc2, *pFFTCoeffs;
-static SLData_t Fc, OnePoleCoeff, OnePoleHighPassCoeff, OnePoleFilterState, OnePoleHighPassFilterState, SinePhase;
+static SLData_t Fc, onePoleCoefficient, OnePoleHighPassCoeff, OnePoleFilterState, OnePoleHighPassFilterState;
 
 
 int main (
@@ -34,9 +34,9 @@ int main (
     Fc = (SLData_t) atof (argv[1]);
   }
 
-  OnePoleCoeff = SDS_OnePoleCutOffFrequencyToFilterCoeff (Fc,       // Cut-off frequency (Hz)
-                                                          SIGLIB_ONE);  // Sample rate
-  printf ("One-pole filter coefficient: %lf\n", OnePoleCoeff);
+  onePoleCoefficient = SDS_OnePoleCutOffFrequencyToFilterCoeff (Fc, // Cut-off frequency (Hz)
+                                                                SIGLIB_ONE);  // Sample rate
+  printf ("One-pole filter coefficient: %lf\n", onePoleCoefficient);
 
   OnePoleHighPassCoeff = SDS_OnePoleHighPassCutOffFrequencyToFilterCoeff (Fc, // Cut-off frequency (Hz)
                                                                           SIGLIB_ONE);  // Sample rate
@@ -83,7 +83,7 @@ int main (
 
   SDA_OnePoleNormalized (pSrc1,                                     // Source data array pointer
                          pRealData,                                 // Destination data array pointer
-                         OnePoleCoeff,                              // Filter coefficient
+                         onePoleCoefficient,                        // Filter coefficient
                          &OnePoleFilterState,                       // Filter state
                          SAMPLE_LENGTH);                            // Dataset length
 
@@ -136,7 +136,7 @@ int main (
 
   SDA_OnePoleNormalized (pSrc1,                                     // Source data array pointer
                          pRealData,                                 // Destination data array pointer
-                         OnePoleCoeff,                              // Filter coefficient
+                         onePoleCoefficient,                        // Filter coefficient
                          &OnePoleFilterState,                       // Filter state
                          SAMPLE_LENGTH);                            // Dataset length
 

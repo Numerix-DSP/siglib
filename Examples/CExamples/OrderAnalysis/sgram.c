@@ -1,5 +1,5 @@
 // SigLib - Program to read .dat file and generate a spectrogram
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -20,7 +20,7 @@
 
 #define GRAPH_X_AXIS_LENGTH     950
 
-#define SAMPLE_RATE             10162.                              // Sample rate of data in vibration data file
+#define SAMPLE_RATE_HZ          10162.                              // Sample rate of data in vibration data file
 #define NUMBER_OF_SAMPLES       101547                              // Number of samples in vibration data file
 
 #define DB_SCALE                (1e5)                               // Scaling for dB
@@ -63,7 +63,7 @@ int main (
     exit (0);
   }
 
-  SampleRate = SAMPLE_RATE;
+  SampleRate = SAMPLE_RATE_HZ;
 
   SIF_CopyWithOverlap (&OverlapSrcArrayIndex);                      // Pointer to source array index
 
@@ -174,7 +174,7 @@ int main (
                             pFDPResults,                            // Data array
                             "Spectrogram Plot",                     // Dataset title
                             SIGLIB_ZERO,                            // Minimum X value
-                            ((double) NUMBER_OF_SAMPLES) / SAMPLE_RATE);  // Maximum X value
+                            ((double) NUMBER_OF_SAMPLES) / SAMPLE_RATE_HZ); // Maximum X value
 
       FrameNumber++;
     }
@@ -185,7 +185,7 @@ int main (
                         GPC_END_PLOT,                               // Dataset
                         "Spectrogram Plot",                         // Dataset title
                         SIGLIB_ZERO,                                // Minimum X value
-                        ((double) NUMBER_OF_SAMPLES) / SAMPLE_RATE);  // Maximum X value
+                        ((double) NUMBER_OF_SAMPLES) / SAMPLE_RATE_HZ); // Maximum X value
 
   fclose (fpInputFile);                                             // Close files
 

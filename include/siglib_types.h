@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : siglib_types.h    | Author    : JOHN EDWARDS
-Siglib Library Version  : 10.00             |
+Siglib Library Version  : 10.50             |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 22/01/2000
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Structure and enumerated type definitions header file for
         SigLib DSP library
@@ -113,6 +113,11 @@ typedef struct {                                                    // Neural ne
   SLArrayIndex_t  predictedCategory;
   SLData_t        probability;
 } SLNeuralNetworkPrediction_s;
+
+typedef struct {                                                    // Dynamic range compressor thresholds/gains
+  SLData_t        level;
+  SLData_t        gain;
+} SLDrcLevelGainTable;
 
 
             // SigLib enumerated data types

@@ -1,5 +1,5 @@
 // SigLib Neural Network Verification Program
-// Copyright (c) 2023 Alpha Numerix
+// Copyright (c) 2023 Delta Numerix
 
 // Include files
 #include <stdio.h>

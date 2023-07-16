@@ -1,5 +1,5 @@
 // SigLib PN-9 and PN-15 Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -18,8 +18,6 @@ static SLUInt32_t TxShiftRegister, RxShiftRegister;                 // Must be a
 int main (
   void)
 {
-  SLFixData_t     i, Tmp;
-
 #if TEST_SEQUENCE_LENGTH
   SLFixData_t     SequenceLength;
 
@@ -53,9 +51,9 @@ int main (
 
   TxShiftRegister = 0;                                              // Clear shift registers
   RxShiftRegister = 0;
-  for (i = 0; i < 70; i++) {
-    Tmp = SDS_ScramblerDescramblerPN9 (TxString[i],                 // Source character
-                                       &TxShiftRegister);           // Shift register
+  for (SLFixData_t i = 0; i < 70; i++) {
+    SLFixData_t     Tmp = SDS_ScramblerDescramblerPN9 (TxString[i], // Source character
+                                                       &TxShiftRegister); // Shift register
     RxString[i] = (char) SDS_ScramblerDescramblerPN9 (Tmp,          // Source character
                                                       &RxShiftRegister);  // Shift register
   }
@@ -64,9 +62,9 @@ int main (
 
   TxShiftRegister = 0;                                              // Clear shift registers
   RxShiftRegister = 0;
-  for (i = 0; i < 70; i++) {
-    Tmp = SDS_ScramblerDescramblerPN15 (TxString[i],                // Source character
-                                        &TxShiftRegister);          // Shift register
+  for (SLFixData_t i = 0; i < 70; i++) {
+    SLFixData_t     Tmp = SDS_ScramblerDescramblerPN15 (TxString[i],  // Source character
+                                                        &TxShiftRegister);  // Shift register
     RxString[i] = (char) SDS_ScramblerDescramblerPN15 (Tmp,         // Source character
                                                        &RxShiftRegister); // Shift register
   }

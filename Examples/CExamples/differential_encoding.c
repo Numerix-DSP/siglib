@@ -1,11 +1,15 @@
 
 // SigLib example for testing differential encoder
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
 #include <string.h>
 #include <siglib.h>
+
+#if defined (_MSC_VER)                                              // Defined by Microsoft compilers
+#pragma warning(disable: 4127)                                      // Remove conditional expression is constant warning from plain C
+#endif
 
 #define BITS_PER_SYMBOL 8
 #define NUM_VALUES      (1<<BITS_PER_SYMBOL)
@@ -22,9 +26,6 @@ int main (
   )
 {
 
-  SLFixData_t     PreviousTxWord = 0;
-  SLFixData_t     PreviousRxWord = 0;
-
   pDifferentialEncoderMap = SUF_DifferentialEncoderArrayAllocate (BITS_PER_SYMBOL);
   pDifferentialDecoderMap = SUF_DifferentialEncoderArrayAllocate (BITS_PER_SYMBOL);
 
@@ -34,8 +35,8 @@ int main (
 
   if (BITS_PER_SYMBOL <= 4) {                                       // Only print smaller tables otherwise the tables are too big
 // Print encoder table
-    for (int src_index = 0; src_index < NUM_VALUES; src_index++) {
-      for (int prev_index = 0; prev_index < NUM_VALUES; prev_index++) {
+    for (SLArrayIndex_t src_index = 0; src_index < NUM_VALUES; src_index++) {
+      for (SLArrayIndex_t prev_index = 0; prev_index < NUM_VALUES; prev_index++) {
         printf ("0x%x, ", *(pDifferentialEncoderMap + (src_index * NUM_VALUES) + prev_index));
       }
       printf ("\n");
@@ -44,8 +45,8 @@ int main (
 
 
 // Print decoder table
-    for (int src_index = 0; src_index < NUM_VALUES; src_index++) {
-      for (int prev_index = 0; prev_index < NUM_VALUES; prev_index++) {
+    for (SLArrayIndex_t src_index = 0; src_index < NUM_VALUES; src_index++) {
+      for (SLArrayIndex_t prev_index = 0; prev_index < NUM_VALUES; prev_index++) {
         printf ("0x%x, ", *(pDifferentialDecoderMap + (src_index * NUM_VALUES) + prev_index));
       }
       printf ("\n");
@@ -54,7 +55,10 @@ int main (
   }
 
 
-  int             i;
+  SLFixData_t     PreviousTxWord = 0;
+  SLFixData_t     PreviousRxWord = 0;
+
+  SLArrayIndex_t  i;
   for (i = 0; i < strlen (TxString); i++) {
     SLFixData_t     encoded = SDS_DifferentialEncode ((SLFixData_t) TxString[i],  // Word to encode
                                                       pDifferentialEncoderMap,  // Encoder LUT
@@ -74,7 +78,7 @@ int main (
     printf ("RxString: %s\n", RxString);
   }
   else {
-    for (i = 0; i < strlen (TxString); i++) {
+    for (SLArrayIndex_t i = 0; i < strlen (TxString); i++) {
       printf ("Tx'd: %d, Rx'd: %d\n", TxString[i] & BIT_MASK, RxString[i]);
     }
   }

@@ -1,6 +1,6 @@
 @echo off
 
-rem Batch file for building and executing the helicopter examples
+rem Batch file for building and executing the machine examples
 rem This build uses the static library, release model
 
 del wavwfall.exe

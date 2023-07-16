@@ -72,25 +72,25 @@ directories are included in the compiler; library and include paths.
 
 
 
-Alpha Numerix hopes you will find this product useful, if so then please
+Delta Numerix hopes you will find this product useful, if so then please
 tell others otherwise if you have any comments or suggestions then
 please tell us.
 
 
 LICENSE
 
-This software is free for use in any application but Alpha Numerix does
+This software is free for use in any application but Delta Numerix does
 not provide any warranty or support.
 
 
-Digital Filter Plus, DFPlus and SigLib are trademarks of Alpha Numerix all other
+Digital Filter Plus, DFPlus and SigLib are trademarks of Delta Numerix all other
 trademarks acknowledged.
 
 
 For additional information, please contact :
 
-Alpha Numerix,
+Delta Numerix,
 Email : support@numerix-dsp.com
 WWW : http:\\www.numerix-dsp.com
 
-(C) Copyright 2002-2020 Alpha Numerix All rights reserved.
+(C) Copyright 2002-2020 Delta Numerix All rights reserved.

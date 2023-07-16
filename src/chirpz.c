@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : CHIRPZ.C      | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 16/07/1994
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Chirp z-Transform routines, for SigLib DSP library.
 
@@ -187,7 +187,6 @@ void SIGLIB_FUNC_DECL SIF_Awn (
   const SLComplexRect_s W12,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
   SLComplexRect_s C, D, Temp;
 
   C.real = SIGLIB_ONE;
@@ -199,7 +198,7 @@ void SIGLIB_FUNC_DECL SIF_Awn (
   D.real = (W12.real * A_1.real) - (W12.imag * A_1.imag);
   D.imag = (W12.real * A_1.imag) + (W12.imag * A_1.real);
 
-  for (i = 1; i < SampleLength; i++) {                              // Iterate complex chirp (sin & cos)
+  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {               // Iterate complex chirp (sin & cos)
     Temp.real = (C.real * D.real) - (C.imag * D.imag);
     Temp.imag = (C.real * D.imag) + (C.imag * D.real);
 
@@ -215,7 +214,6 @@ void SIGLIB_FUNC_DECL SIF_Awn (
     D.real = Temp.real;
     D.imag = Temp.imag;
   }
-
 }                                                                   // End of SIF_Awn()
 
 
@@ -250,7 +248,6 @@ void SIGLIB_FUNC_DECL SIF_Vl (
   const SLArrayIndex_t OutLen,
   const SLArrayIndex_t FFTLen)
 {
-  SLArrayIndex_t  i;
   SLComplexRect_s C, D, Temp;
 
   SDA_Clear (pvLr, FFTLen);                                         // Clear output array
@@ -265,7 +262,7 @@ void SIGLIB_FUNC_DECL SIF_Vl (
   D.real = W_12.real;
   D.imag = W_12.imag;
 
-  for (i = 1; i < OutLen; i++) {                                    // Iterate complex chirp (sin & cos)
+  for (SLArrayIndex_t i = 1; i < OutLen; i++) {                     // Iterate complex chirp (sin & cos)
     Temp.real = (C.real * D.real) - (C.imag * D.imag);
     Temp.imag = (C.real * D.imag) + (C.imag * D.real);
 
@@ -291,7 +288,7 @@ void SIGLIB_FUNC_DECL SIF_Vl (
   D.real = W_12.real;
   D.imag = W_12.imag;
 
-  for (i = 0; i < InLen; i++) {                                     // Iterate complex chirp (sin & cos)
+  for (SLArrayIndex_t i = 0; i < InLen; i++) {                      // Iterate complex chirp (sin & cos)
     Temp.real = (C.real * D.real) - (C.imag * D.imag);
     Temp.imag = (C.real * D.imag) + (C.imag * D.real);
 
@@ -337,7 +334,6 @@ void SIGLIB_FUNC_DECL SIF_Wm (
   const SLComplexRect_s W12,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
   SLComplexRect_s C, D, Temp;
 
   C.real = SIGLIB_ONE;
@@ -349,7 +345,7 @@ void SIGLIB_FUNC_DECL SIF_Wm (
   D.real = W12.real;
   D.imag = W12.imag;
 
-  for (i = 1; i < SampleLength; i++) {                              // Iterate complex chirp (sin & cos)
+  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {               // Iterate complex chirp (sin & cos)
     Temp.real = (C.real * D.real) - (C.imag * D.imag);
     Temp.imag = (C.real * D.imag) + (C.imag * D.real);
 

@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : PSPECT.C      | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 06/04/2004
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Power spectrum analysis functions.
 
@@ -40,7 +40,6 @@ Description : Power spectrum analysis functions.
 #define SIGLIB_SRC_FILE_PSPECT  1                                   // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
 
 /**/
 
@@ -71,7 +70,6 @@ void SIGLIB_FUNC_DECL SIF_FastAutoCrossPowerSpectrum (
   *InverseFFTLength = SIGLIB_ONE / ((SLData_t) FFTLength);
 
   SIF_Fft (pFFTCoeffs, pBitReverseAddressTable, FFTLength);
-
 }                                                                   // End of SIF_FastAutoCrossPowerSpectrum()
 
 
@@ -125,7 +123,6 @@ void SIGLIB_FUNC_DECL SDA_FastAutoPowerSpectrum (
 
 // Calculate the auto power spectrum
   SDA_MagnitudeSquared (pRealData, pImagData, pRealData, ResultLength); // Calculate the magnitude squared
-
 }                                                                   // End of SDA_FastAutoPowerSpectrum()
 
 
@@ -190,7 +187,6 @@ void SIGLIB_FUNC_DECL SDA_FastCrossPowerSpectrum (
 
 // Calculate the cross power spectrum
   SDA_ComplexMultiply2 (pRealData1, pImagData1, pRealData2, pImagData2, pRealData1, pImagData1, ResultLength);
-
 }                                                                   // End of SDA_FastCrossPowerSpectrum()
 
 
@@ -239,10 +235,8 @@ void SIGLIB_FUNC_DECL SIF_ArbAutoCrossPowerSpectrum (
   SLData_t * pInverseSampleLengthXFFTLength,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  IntLog2Size;
-
 // Calculate log2 sample length & round down
-  IntLog2Size = (SLArrayIndex_t) ((SDS_Log2 ((SLData_t) SampleLength)) + SIGLIB_EPSILON);
+  SLArrayIndex_t  IntLog2Size = (SLArrayIndex_t) ((SDS_Log2 ((SLData_t) SampleLength)) + SIGLIB_EPSILON);
 
 // Test to see if we can use the pure FFT
 // i.e. the length is an integer power of two
@@ -265,7 +259,6 @@ void SIGLIB_FUNC_DECL SIF_ArbAutoCrossPowerSpectrum (
 
   *InverseFFTLength = SIGLIB_ONE / ((SLData_t) * pFFTLength);
   *pInverseSampleLengthXFFTLength = SIGLIB_ONE / (((SLData_t) SampleLength) * ((SLData_t) * pFFTLength));
-
 }                                                                   // End of SIF_ArbAutoCrossPowerSpectrum()
 
 
@@ -493,7 +486,6 @@ void SIGLIB_FUNC_DECL SDA_ArbCrossPowerSpectrum (
 
 // Calculate the cross power spectrum
   SDA_ComplexMultiply2 (pRealData1, pImagData1, pRealData2, pImagData2, pRealData1, pImagData1, ResultLength);
-
 }                                                                   // End of SDA_ArbCrossPowerSpectrum()
 
 
@@ -550,7 +542,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_WelchPowerSpectrum (
 
   SIF_Fft (pFFTCoeffs, pBitReverseAddressTable, FFTLength);
   return (SIGLIB_NO_ERROR);
-
 }                                                                   // End of SIF_WelchPowerSpectrum()
 
 
@@ -619,12 +610,11 @@ void SIGLIB_FUNC_DECL SDA_WelchRealPowerSpectrum (
   const SLData_t InverseNumberOfArraysAveraged,
   const SLArrayIndex_t SourceArrayLength)
 {
-  SLArrayIndex_t  i;
   SLArrayIndex_t  ResultLength = ((SLArrayIndex_t) ((SLUFixData_t) FFTLength >> SIGLIB_UFIX_ONE) + SIGLIB_AI_ONE);  // Calculate the length of the result array
 
   SDA_Clear (pDst, ResultLength);                                   // Clear result accumulator array
 
-  for (i = 0; i < NumberOfArraysAveraged; i++) {
+  for (SLArrayIndex_t i = 0; i < NumberOfArraysAveraged; i++) {
     SDA_CopyWithOverlap (pSrcReal, pRealData, pOverlap, pOverlapSrcIndex, SourceArrayLength, OverlapSize, FFTLength);
 
     SDA_Window (pRealData, pRealData, pWindowCoeffs, FFTLength);    // Apply window to real data
@@ -641,7 +631,6 @@ void SIGLIB_FUNC_DECL SDA_WelchRealPowerSpectrum (
   *pDst *= SIGLIB_HALF;                                             // Scale D.C. value appropriately
 
   SDA_Multiply (pDst, SIGLIB_TWO * InverseNumberOfArraysAveraged, pDst, ResultLength);  // Perform single sided PSD and average scaling
-
 }                                                                   // End of SDA_WelchRealPowerSpectrum()
 
 
@@ -710,13 +699,12 @@ void SIGLIB_FUNC_DECL SDA_WelchComplexPowerSpectrum (
   const SLData_t InverseNumberOfArraysAveraged,
   const SLArrayIndex_t SourceArrayLength)
 {
-  SLArrayIndex_t  i;
   SLArrayIndex_t  ImagOverlapSrcIndex = *pOverlapSrcIndex;
   SLArrayIndex_t  ResultLength = ((SLArrayIndex_t) ((SLUFixData_t) FFTLength >> SIGLIB_UFIX_ONE) + SIGLIB_AI_ONE);  // Calculate the length of the result array
 
   SDA_Clear (pDst, ResultLength);                                   // Clear result accumulator array
 
-  for (i = 0; i < NumberOfArraysAveraged; i++) {
+  for (SLArrayIndex_t i = 0; i < NumberOfArraysAveraged; i++) {
     SDA_CopyWithOverlap (pSrcReal, pRealData, pRealOverlap, pOverlapSrcIndex, SourceArrayLength, OverlapSize, FFTLength);
     SDA_CopyWithOverlap (pSrcImag, pImagData, pImagOverlap, &ImagOverlapSrcIndex, SourceArrayLength, OverlapSize, FFTLength);
 
@@ -735,7 +723,6 @@ void SIGLIB_FUNC_DECL SDA_WelchComplexPowerSpectrum (
   *pDst *= SIGLIB_HALF;                                             // Scale D.C. value appropriately
 
   SDA_Multiply (pDst, SIGLIB_TWO * InverseNumberOfArraysAveraged, pDst, ResultLength);  // Perform single sided PSD and average scaling
-
 }                                                                   // End of SDA_WelchComplexPowerSpectrum()
 
 #if defined (__GNUC__)
@@ -771,7 +758,6 @@ void SIGLIB_FUNC_DECL SIF_MagnitudeSquaredCoherence (
   *InverseFFTLength = SIGLIB_ONE / ((SLData_t) FFTLength);
 
   SIF_Fft (pFFTCoeffs, pBitReverseAddressTable, FFTLength);
-
 }                                                                   // End of SIF_MagnitudeSquaredCoherence()
 
 

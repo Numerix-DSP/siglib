@@ -1,5 +1,5 @@
 // SigLib - Trigger Reverberator Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -44,11 +44,9 @@ static SLFixData_t TriggerUpdatedFlag;
 int main (
   void)
 {
-  SLArrayIndex_t  i, j;
-
   printf ("Input sequence :\n");
-  for (i = 0; i < 20; i++) {
-    for (j = 0; j < 10; j++) {
+  for (SLArrayIndex_t i = 0; i < 20; i++) {
+    for (SLArrayIndex_t j = 0; j < 10; j++) {
       printf ("%1.1lf, ", TriggerInput[j + (i * 10)]);
     }
     printf ("\n");
@@ -67,8 +65,8 @@ int main (
                            SAMPLE_LENGTH);                          // Length of trigger sequences
 
   printf ("Output sequence :\n");
-  for (i = 0; i < 20; i++) {
-    for (j = 0; j < 10; j++) {
+  for (SLArrayIndex_t i = 0; i < 20; i++) {
+    for (SLArrayIndex_t j = 0; j < 10; j++) {
       printf ("%1.1lf, ", TriggerOutput[j + (i * 10)]);
     }
     printf ("\n");

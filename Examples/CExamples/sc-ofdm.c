@@ -3,7 +3,7 @@
 // Sub-carriers filled = 3 to 7
 // LTE Symbol period = 15 kHz = 66.7 us
 //     Requires radix 2, 3 and 5 DFTs
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -25,7 +25,6 @@ int main (
   void)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
-  SLFixData_t     i;
   SLData_t        CarrierSign;
 
   pSrcReal = SUF_VectorArrayAllocate (SYMBOL_LENGTH);               // Allocate memory
@@ -56,7 +55,7 @@ int main (
   CarrierSign = SIGLIB_ONE;
 
 // Create sub-carriers
-  for (i = 0; i < DFT_LENGTH; i++) {
+  for (SLFixData_t i = 0; i < DFT_LENGTH; i++) {
     printf ("\nNumber of sub-carriers = %d\n", i + 1);
 
     *(pSrcReal + FIRST_SUB_CARRIER + i) = CarrierSign;              // Modulate carrier

@@ -3,7 +3,7 @@
 
 /**************************************************************************
 File Name               : siglib.h      | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.41         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 13/09/1992
 Options   :                             | Latest Update : 06/06/2023
@@ -28,11 +28,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Header file for SigLib DSP library
 
@@ -780,7 +780,7 @@ double _stdcall SUF_SiglibVersion (
   double,                                                           // Contour decay rate
   double,                                                           // Contour start frequency
   double,                                                           // Contour end frequency
-  double,                                                           // System sample rate
+  double,                                                           // Sample rate (Hz)
   long,                                                             // Source array lengths
   long,                                                             // Destination array lengths
   long,                                                             // FFT length
@@ -1049,7 +1049,7 @@ double _stdcall SUF_SiglibVersion (
   double,                                                           // Stop-band cut off frequency
   double,                                                           // Pass-band ripple
   double,                                                           // Stop-band attenuation
-  double);                                                          // Sample rate
+  double);                                                          // Sample rate (Hz)
 void _stdcall  SIF_FirMatchedFilter (
    double *SIGLIB_INPUT_PTR_DECL,                                  // Source signal
   double *SIGLIB_OUTPUT_PTR_DECL,                                   // Output matched filter coefficients
@@ -1279,6 +1279,16 @@ double _stdcall SUF_SiglibVersion (
   double,                                                           // Filter alpha
   double *,                                                         // Filter state
   long);                                                            // Array length
+double _stdcall SDS_OnePoleEWMA (
+   double,                                                         // Input data
+  double,                                                           // Filter alpha
+  double *);                                                        // Filter state
+void _stdcall  SDA_OnePoleEWMA (
+   double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to input data
+  double *SIGLIB_OUTPUT_PTR_DECL,                                   // Pointer to destination array
+  double,                                                           // Filter alpha
+  double *,                                                         // Filter state
+  long);                                                            // Array length
 void _stdcall  SDA_OnePolePerSample (
    double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to input data
   double *SIGLIB_OUTPUT_PTR_DECL,                                   // Pointer to destination array
@@ -1315,13 +1325,13 @@ double _stdcall SUF_SiglibVersion (
   long);                                                            // Array length
 double         SDS_OnePoleTimeConstantToFilterCoeff (
    double,                                                         // Attack / decay time period (ms)
-  double);                                                          // Sample rate
+  double);                                                          // Sample rate (Hz)
 double         SDS_OnePoleCutOffFrequencyToFilterCoeff (
    double,                                                         // Cut-off frequency
-  double);                                                          // Sample rate
+  double);                                                          // Sample rate (Hz)
 double         SDS_OnePoleHighPassCutOffFrequencyToFilterCoeff (
    double,                                                         // Cut-off frequency
-  double);                                                          // Sample rate
+  double);                                                          // Sample rate (Hz)
 void _stdcall  SIF_AllPole (
    double *SIGLIB_OUTPUT_PTR_DECL,                                 // Pointer to state array
   long *,                                                           // Pointer to filter index
@@ -1368,14 +1378,14 @@ double _stdcall SUF_SiglibVersion (
   double *SIGLIB_OUTPUT_PTR_DECL,                                   // Destination coefficients
   double,                                                           // Frequency # 1
   double,                                                           // Frequency # 2
-  double,                                                           // Sample rate
+  double,                                                           // Sample rate (Hz)
   long);                                                            // Number of biquads
 double _stdcall SDA_IirLpHpShift (
    double *SIGLIB_INPUT_PTR_DECL,                                  // Source coefficients
   double *SIGLIB_OUTPUT_PTR_DECL,                                   // Destination coefficients
   double,                                                           // Frequency # 1
   double,                                                           // Frequency # 2
-  double,                                                           // Sample rate
+  double,                                                           // Sample rate (Hz)
   long);                                                            // Number of biquads
 void _stdcall  SIF_Iir2PoleLpf (
    double *SIGLIB_OUTPUT_PTR_DECL,                                 // Pointer to filter state array
@@ -1477,12 +1487,12 @@ double _stdcall SUF_SiglibVersion (
   long,                                                             // Number of numerator coefficients
   long);                                                            // Number of denominator coefficients
 long _stdcall  SUF_EstimateBPFilterLength (
-   double,                                                         // Sample rate
+   double,                                                         // Sample rate (Hz)
   double,                                                           // Centre frequency
   long,                                                             // Minimum filter length
   long);                                                            // Maximum filter length
 void _stdcall  SUF_EstimateBPFilterError (
-   double,                                                         // Sample rate
+   double,                                                         // Sample rate (Hz)
   double,                                                           // Centre frequency
   long,                                                             // Minimum filter length
   long,                                                             // Maximum filter length
@@ -2674,7 +2684,7 @@ double _stdcall SUF_SiglibVersion (
   long *,                                                           // Pointer to ELG synchronization delay index
   long);                                                            // ELG output synchronization delay length
  
-#line 3624 "siglib.h"
+#line 3636 "siglib.h"
 long _stdcall   SDS_CostasQamDemodulateDebug (
    double,                                                         // Source data sample
   double *,                                                         // Pointer to real destination symbol point
@@ -2804,7 +2814,7 @@ long _stdcall   SDS_CostasQamDemodulateDebug (
   double *,                                                         // Pointer to debug real filter output
   double *,                                                         // Pointer to debug imaginary filter output
   double *);                                                        // Pointer to debug ELG trigger output
-#line 3756 "siglib.h"
+#line 3768 "siglib.h"
 void _stdcall  SIF_QpskModulate (
    double *SIGLIB_OUTPUT_PTR_DECL,                                 // Carrier table pointer
   double,                                                           // Carrier phase increment per sample (radians / 2Ï€)
@@ -2895,21 +2905,21 @@ long _stdcall   SDS_CostasQamDemodulateDebug (
    long,                                                           // Mapped Rx di-bit
   long *);                                                          // Previous Rx di-bit pointer
 void _stdcall  SIF_DifferentialEncoder (
-   long *SIGLIB_PTR_DECL,                                          // Pointer to encoder look-up-table
-  long *SIGLIB_PTR_DECL,                                            // Pointer to decoder look-up-table
+   long *SIGLIB_INPUT_PTR_DECL,                                    // Pointer to encoder look-up-table
+  long *SIGLIB_INPUT_PTR_DECL,                                      // Pointer to decoder look-up-table
   long);                                                            // Word length to encode / decode
 long _stdcall  SDS_DifferentialEncode (
    long,                                                           // Source word to encode
-  long *SIGLIB_PTR_DECL,                                            // Encoder / decoder table
+  long *SIGLIB_INPUT_PTR_DECL,                                      // Encoder / decoder table
   long,                                                             // Word length to encode / decode
   long,                                                             // Bit mask for given word length
-  long *SIGLIB_PTR_DECL);                                           // Previously encoded word
+  long *SIGLIB_INOUT_PTR_DECL);                                     // Previously encoded word
 long _stdcall  SDS_DifferentialDecode (
    long,                                                           // Source word to encode
-  long *SIGLIB_PTR_DECL,                                            // Encoder / decoder table
+  long *SIGLIB_INPUT_PTR_DECL,                                      // Encoder / decoder table
   long,                                                             // Word length to encode / decode
   long,                                                             // Bit mask for given word length
-  long *SIGLIB_PTR_DECL);                                           // Previously decoded word
+  long *SIGLIB_INOUT_PTR_DECL);                                     // Previously decoded word
 void _stdcall  SIF_FskModulate (
    double *SIGLIB_OUTPUT_PTR_DECL,                                 // Carrier sinusoid table
   double,                                                           // Carrier phase increment per sample (radians / 2Ï€)
@@ -3687,7 +3697,7 @@ void _stdcall   SDA_Multiplex (
 // DTMF generation and detection functions - dtmf.c
 void _stdcall  SIF_DtmfGenerate (
    double *SIGLIB_OUTPUT_PTR_DECL,                                 // Generator coefficient look up table pointer
-  double);                                                          // Sample rate
+  double);                                                          // Sample rate (Hz)
 long _stdcall  SDA_DtmfGenerate (
    double *SIGLIB_OUTPUT_PTR_DECL,                                 // Destination array pointer
   long,                                                             // Key code
@@ -3695,7 +3705,7 @@ void _stdcall   SDA_Multiplex (
   double *SIGLIB_INPUT_PTR_DECL,                                    // Generator coefficient look up table pointer
   long);                                                            // Array length
 void _stdcall  SIF_DtmfDetect (
-   double,                                                         // Sample rate
+   double,                                                         // Sample rate (Hz)
   long);                                                            // Array length
 long _stdcall  SDA_DtmfDetect (
    double *SIGLIB_INPUT_PTR_DECL,                                  // Source array pointer
@@ -3981,61 +3991,61 @@ void _stdcall   SDA_Multiplex (
   long,                                                             // Dead-band high-point
   long);                                                            // Array length
 void _stdcall  SIF_Envelope (
-   double *SIGLIB_PTR_DECL);                                       // Pointer to filter state variable
+   double *SIGLIB_INOUT_PTR_DECL);                                 // Pointer to filter state variable
 double _stdcall SDS_Envelope (
    double,                                                         // Source sample
   double,                                                           // Attack coefficient
   double,                                                           // Decay coefficient
-  double *SIGLIB_PTR_DECL);                                         // Pointer to filter state variable
+  double *SIGLIB_INOUT_PTR_DECL);                                   // Pointer to filter state variable
 void _stdcall  SDA_Envelope (
-   double *SIGLIB_PTR_DECL,                                        // Pointer to source array
-  double *SIGLIB_PTR_DECL,                                          // Pointer to destination array
+   double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to source array
+  double *SIGLIB_OUTPUT_PTR_DECL,                                   // Pointer to destination array
   double,                                                           // Attack coefficient
   double,                                                           // Decay coefficient
-  double *SIGLIB_PTR_DECL,                                          // Pointer to filter state variable
+  double *SIGLIB_INOUT_PTR_DECL,                                    // Pointer to filter state variable
   long);                                                            // Input array length
 void _stdcall  SIF_EnvelopeRMS (
-   double *SIGLIB_PTR_DECL);                                       // Pointer to filter state variable
+   double *SIGLIB_INPUT_PTR_DECL);                                 // Pointer to filter state variable
 double _stdcall SDS_EnvelopeRMS (
    double,                                                         // Source sample
   double,                                                           // Attack coefficient
   double,                                                           // Decay coefficient
-  double *SIGLIB_PTR_DECL);                                         // Pointer to filter state variable
+  double *SIGLIB_INPUT_PTR_DECL);                                   // Pointer to filter state variable
 void _stdcall  SDA_EnvelopeRMS (
-   double *SIGLIB_PTR_DECL,                                        // Pointer to source array
-  double *SIGLIB_PTR_DECL,                                          // Pointer to destination array
+   double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to source array
+  double *SIGLIB_OUTPUT_PTR_DECL,                                   // Pointer to destination array
   double,                                                           // Attack coefficient
   double,                                                           // Decay coefficient
-  double *SIGLIB_PTR_DECL,                                          // Pointer to filter state variable
+  double *SIGLIB_INOUT_PTR_DECL,                                    // Pointer to filter state variable
   long);                                                            // Input array length
 void _stdcall  SIF_EnvelopeHilbert (
-   double *SIGLIB_PTR_DECL,                                        // Pointer to Hilbert transform filter coefficient array
-  double *SIGLIB_PTR_DECL,                                          // Pointer to filter state array
+   double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to Hilbert transform filter coefficient array
+  double *SIGLIB_INOUT_PTR_DECL,                                    // Pointer to filter state array
   long *,                                                           // Pointer to filter index
-  double *SIGLIB_PTR_DECL,                                          // Pointer to filter delay compensator array
+  double *SIGLIB_INOUT_PTR_DECL,                                    // Pointer to filter delay compensator array
   long,                                                             // Filter length
   long,                                                             // Filter group delay
   double *);                                                        // Pointer to one-pole state variable
 double _stdcall SDS_EnvelopeHilbert (
    double,                                                         // Source sample
-  double *SIGLIB_PTR_DECL,                                          // Pointer to Hilbert transform filter coefficient array
-  double *SIGLIB_PTR_DECL,                                          // Pointer to filter state array
+  double *SIGLIB_INPUT_PTR_DECL,                                    // Pointer to Hilbert transform filter coefficient array
+  double *SIGLIB_INOUT_PTR_DECL,                                    // Pointer to filter state array
   long *,                                                           // Pointer to filter index
-  double *SIGLIB_PTR_DECL,                                          // Pointer to filter delay compensator array
+  double *SIGLIB_INOUT_PTR_DECL,                                    // Pointer to filter delay compensator array
   long *,                                                           // Pointer to delay index
   long,                                                             // Filter length
   long,                                                             // Filter group delay
   double,                                                           // One pole filter coefficient
   double *);                                                        // Pointer to one-pole state variable
 void _stdcall  SDA_EnvelopeHilbert (
-   double *SIGLIB_PTR_DECL,                                        // Pointer to source array
-  double *SIGLIB_PTR_DECL,                                          // Pointer to destination array
-  double *SIGLIB_PTR_DECL,                                          // Pointer to Hilbert transform filter coefficient array
-  double *SIGLIB_PTR_DECL,                                          // Pointer to filter state array
+   double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to source array
+  double *SIGLIB_OUTPUT_PTR_DECL,                                   // Pointer to destination array
+  double *SIGLIB_INPUT_PTR_DECL,                                    // Pointer to Hilbert transform filter coefficient array
+  double *SIGLIB_INOUT_PTR_DECL,                                    // Pointer to filter state array
   long *,                                                           // Pointer to filter index
-  double *SIGLIB_PTR_DECL,                                          // Pointer to temporary analytical signal array
-  double *SIGLIB_PTR_DECL,                                          // Pointer to filter delay compensator array
-  double *SIGLIB_PTR_DECL,                                          // Pointer to temporary delay array
+  double *SIGLIB_INOUT_PTR_DECL,                                    // Pointer to temporary analytical signal array
+  double *SIGLIB_INOUT_PTR_DECL,                                    // Pointer to filter delay compensator array
+  double *SIGLIB_INOUT_PTR_DECL,                                    // Pointer to temporary delay array
   long,                                                             // Filter length
   long,                                                             // Filter group delay
   double,                                                           // One pole filter coefficient
@@ -4587,7 +4597,7 @@ void _stdcall   SDA_Multiplex (
    double,                                                         // Linear power value
   double);                                                          // Zero dBm Level
 void _stdcall  SDA_VoltageTodBm (
-   double *SIGLIB_PTR_DECL,                                        // Pointer to source array
+   double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to source array
   double *SIGLIB_OUTPUT_PTR_DECL,                                   // Pointer to destination array
   double,                                                           // Zero dBm level
   long);                                                            // Array lengths
@@ -4595,32 +4605,32 @@ void _stdcall   SDA_Multiplex (
    double,                                                         // dBm powervalue
   double);                                                          // Zero dBm Level
 void _stdcall  SDA_dBmToVoltage (
-   double *SIGLIB_PTR_DECL,                                        // Pointer to source array
+   double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to source array
   double *SIGLIB_OUTPUT_PTR_DECL,                                   // Pointer to destination array
   double,                                                           // Zero dBm level
   long);                                                            // Array lengths
 double _stdcall SDS_VoltageTodB (
    double);                                                        // Linear voltage value
 void _stdcall  SDA_VoltageTodB (
-   double *SIGLIB_PTR_DECL,                                        // Pointer to source array
+   double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to source array
   double *SIGLIB_OUTPUT_PTR_DECL,                                   // Pointer to destination array
   long);                                                            // Array lengths
 double _stdcall SDS_dBToVoltage (
    double);                                                        // dB value
 void _stdcall  SDA_dBToVoltage (
-   double *SIGLIB_PTR_DECL,                                        // Pointer to source array
+   double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to source array
   double *SIGLIB_OUTPUT_PTR_DECL,                                   // Pointer to destination array
   long);                                                            // Array lengths
 double _stdcall SDS_PowerTodB (
    double);                                                        // Linear power value
 void _stdcall  SDA_PowerTodB (
-   double *SIGLIB_PTR_DECL,                                        // Pointer to source array
+   double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to source array
   double *SIGLIB_OUTPUT_PTR_DECL,                                   // Pointer to destination array
   long);                                                            // Array lengths
 double _stdcall SDS_dBToPower (
    double);                                                        // dB value
 void _stdcall  SDA_dBToPower (
-   double *SIGLIB_PTR_DECL,                                        // Pointer to source array
+   double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to source array
   double *SIGLIB_OUTPUT_PTR_DECL,                                   // Pointer to destination array
   long);                                                            // Array lengths
 long _stdcall  SDS_Compare (
@@ -4804,7 +4814,7 @@ void _stdcall   SDA_Multiplex (
   double *,                                                         // Pointer to moving average sum
   double *,                                                         // Pointer to AGC gain
   long,                                                             // Length of moving average state array
-  long);                                                            // Length of input array
+  long);                                                            // Array length
 void _stdcall  SIF_AgcMeanSquared (
    double *SIGLIB_OUTPUT_PTR_DECL,                                 // Moving average state array
   long *,                                                           // Moving average state array index
@@ -4827,7 +4837,64 @@ void _stdcall   SDA_Multiplex (
   double *,                                                         // Pointer to moving average sum
   double *,                                                         // Pointer to AGC gain
   long,                                                             // Length of moving average state array
-  long);                                                            // Length of input array
+  long);                                                            // Array length
+void _stdcall  SIF_AgcEnvelopeDetector (
+   double,                                                         // Envelope detector time constant
+  double,                                                           // Sample rate
+  double *,                                                         // Pointer to One-pole filter state variable
+  double *,                                                         // Pointer to One-pole filter coefficient
+  double *);                                                        // Pointer to AGC gain variable
+double _stdcall SDS_AgcEnvelopeDetector (
+   double,                                                         // Source sample
+  double,                                                           // AGC desired output level
+  double,                                                           // AGC minimum threshold below which no gain control occurs
+  double,                                                           // AGC slow attack sensitivity
+  double,                                                           // AGC slow decay sensitivity
+  double,                                                           // AGC fast attack sensitivity
+  double,                                                           // AGC fast decay sensitivity
+  double *,                                                         // Pointer to One-pole filter state variable
+  double,                                                           // One-pole filter coefficient
+  double *,                                                         // Pointer to AGC gain variable
+  double,                                                           // AGC maximum gain value
+  double);                                                          // AGC maximum attenuation value
+void _stdcall  SDA_AgcEnvelopeDetector (
+   double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to source array
+  double *SIGLIB_OUTPUT_PTR_DECL,                                   // Pointer to destination array
+  double,                                                           // AGC desired output level
+  double,                                                           // AGC minimum threshold below which no gain control occurs
+  double,                                                           // AGC slow attack sensitivity
+  double,                                                           // AGC slow decay sensitivity
+  double,                                                           // AGC fast attack sensitivity
+  double,                                                           // AGC fast decay sensitivity
+  double *,                                                         // Pointer to One-pole filter state variable
+  double,                                                           // One-pole filter coefficient
+  double *,                                                         // Pointer to AGC gain variable
+  double,                                                           // AGC maximum gain value
+  double,                                                           // AGC maximum attenuation value
+  long);                                                            // Array length
+void _stdcall  SIF_Drc (
+   double,                                                         // Envelope detector time constant
+  double,                                                           // Sample rate
+  double *,                                                         // Pointer to envelope follower One-pole filter state variable
+  double *);                                                        // Pointer to envelope follower One-pole filter coefficient
+double _stdcall SDS_Drc (
+   double,                                                         // Input sample
+  double *,                                                         // Pointer to envelope follower state variable
+  double,                                                           // Envelope follower one-pole filter coefficient
+  double,                                                           // Envelope follower threshold to enable DRC functionality
+  SLDrcLevelGainTable *,                                            // Pointer to Thresholds/Gains table
+  long,                                                             // Number of knees
+  double);                                                          // Makeup gain
+void _stdcall  SDA_Drc (
+   double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to source array
+  double *SIGLIB_OUTPUT_PTR_DECL,                                   // Pointer to destination array
+  double *,                                                         // Pointer to envelope follower state variable
+  double,                                                           // Envelope follower one-pole filter coefficient
+  double,                                                           // Envelope follower threshold to enable DRC functionality
+  SLDrcLevelGainTable *,                                            // Pointer to Thresholds/Gains table
+  long,                                                             // Number of knees
+  double,                                                           // Makeup gain
+  long);                                                            // Array length
 void _stdcall  SDA_GroupDelay (
    double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to source array
   double *SIGLIB_OUTPUT_PTR_DECL,                                   // Pointer to destination array
@@ -5118,7 +5185,7 @@ void _stdcall   SDA_Multiplex (
   long,                                                             // Number of adjacent samples to search
   double,                                                           // First order frequency
   long,                                                             // FFT length
-  double,                                                           // Sample period = 1/(Sample rate)
+  double,                                                           // Sample period = 1/(Sample rate (Hz))
   long);                                                            // Input array length
 double _stdcall SDA_SumLevel (
    double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to source array
@@ -5651,4 +5718,4 @@ void _stdcall   SDA_Multiplex (
 // Deprecated functionality - these may be removed in a later version
                     
 // End of SigLib DSP function section
-#line 7664 "siglib.h"
+#line 7739 "siglib.h"

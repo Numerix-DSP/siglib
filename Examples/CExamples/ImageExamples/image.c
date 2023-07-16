@@ -1,5 +1,5 @@
 // SigLib imaging processing functions example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -270,7 +270,7 @@ int main (
 // Uncomment this code if you want to save the image data to a file
 //    FILE *fimp = fopen ("image.txt", "w");          // Print the FFT results to a file for debugging
 //    for (SLArrayIndex_t i = 0; i < IMAGE_DIMENSION; i++) {
-//        for (j = 0; j < IMAGE_DIMENSION; j++) {
+//        for (SLArrayIndex_t j = 0; j < IMAGE_DIMENSION; j++) {
 //            fprintf (fimp, "%u, ", *(pImage1Start+(i*IMAGE_DIMENSION)+j));
 //        }
 //        fprintf (fimp, "\n");

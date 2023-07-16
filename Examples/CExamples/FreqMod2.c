@@ -1,5 +1,5 @@
 // SigLib Frequency Modulation Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -10,7 +10,7 @@
 // Define constants
 #define SAMPLE_LENGTH               512
 #define INVERSE_SAMPLE_LENGTH       (SIGLIB_ONE / ((SLData_t)SAMPLE_LENGTH))
-#define SAMPLE_RATE                 44100.
+#define SAMPLE_RATE_HZ              44100.
 #define CHIRP_MAGNITUDE             SIGLIB_ONE
 #define CHIRP_START_FREQ            1800.
 #define CHIRP_END_FREQ              2200.
@@ -58,10 +58,10 @@ int main (
                       SIGLIB_CHIRP_LIN,                             // Signal type - Chirp with linear frequency ramp
                       CHIRP_MAGNITUDE,                              // Signal peak level
                       SIGLIB_FILL,                                  // Fill (overwrite) or add to existing array contents
-                      (CHIRP_START_FREQ / SAMPLE_RATE),             // Signal lower frequency
+                      (CHIRP_START_FREQ / SAMPLE_RATE_HZ),          // Signal lower frequency
                       SIGLIB_ZERO,                                  // D.C. Offset
-                      ((CHIRP_END_FREQ - CHIRP_START_FREQ) / (SAMPLE_LENGTH * SAMPLE_RATE)),  // Frequency change per sample period
-                      (CHIRP_END_FREQ / SAMPLE_RATE),               // Signal upper frequency
+                      ((CHIRP_END_FREQ - CHIRP_START_FREQ) / (SAMPLE_LENGTH * SAMPLE_RATE_HZ)), // Frequency change per sample period
+                      (CHIRP_END_FREQ / SAMPLE_RATE_HZ),            // Signal upper frequency
                       &ChirpPhase,                                  // Chirp phase - used for next iteration
                       &ChirpValue,                                  // Chirp current value - used for next iteration
                       SAMPLE_LENGTH);                               // Output dataset length
@@ -71,7 +71,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "Source Signal",                                     // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -104,7 +104,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "Unfiltered Demodulated Signal",                     // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -124,7 +124,7 @@ int main (
                SAMPLE_LENGTH,                                       // Dataset length
                "Filtered Demodulated Signal",                       // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),        // Maximum X value
+               ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),     // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph

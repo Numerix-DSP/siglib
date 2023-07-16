@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : MINMAX.C      | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 25/05/1999
 Options   :                             | Latest Update : 17/11/2022
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : DSP minimum, max, peak hold functions, for SigLib DSP library.
 
@@ -39,9 +39,7 @@ Description : DSP minimum, max, peak hold functions, for SigLib DSP library.
 
 #define SIGLIB_SRC_FILE_MINMAX  1                                   // Defines the source file that this code is being used in
 
-
 #include <siglib.h>                                                 // Include SigLib header file
-
 
 /**/
 
@@ -64,15 +62,13 @@ SLData_t SIGLIB_FUNC_DECL SDA_Max (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        max;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  max = *pSrc++;                                                    // Initial value
+  SLData_t        max = *pSrc++;                                    // Initial value
 
   for (SLArrayIndex_t i = 1; i < arrayLength; i++) {
     if (*pSrc > max) {
@@ -82,7 +78,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_Max (
   }
 
   return (max);
-
 }                                                                   // End of SDA_Max()
 
 
@@ -107,19 +102,17 @@ SLData_t SIGLIB_FUNC_DECL SDA_AbsMax (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        Tmp, Max;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  Tmp = *pSrc++;                                                    // Initial value
+  SLData_t        Max;
+  SLData_t        Tmp = *pSrc++;                                    // Initial value
   if (Tmp >= SIGLIB_ZERO) {
     Max = Tmp;
   }
-
   else {
     Max = -Tmp;
   }
@@ -130,14 +123,12 @@ SLData_t SIGLIB_FUNC_DECL SDA_AbsMax (
     if (Tmp > Max) {                                                // Positive data value
       Max = Tmp;
     }
-
     else if ((-Tmp) > Max) {                                        // Negative data value
       Max = -Tmp;
     }
   }
 
   return (Max);
-
 }                                                                   // End of SDA_AbsMax()
 
 
@@ -162,15 +153,13 @@ SLData_t SIGLIB_FUNC_DECL SDA_Min (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        min;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  min = *pSrc++;                                                    // Initial value
+  SLData_t        min = *pSrc++;                                    // Initial value
 
   for (SLArrayIndex_t i = 1; i < arrayLength; i++) {
     if (*pSrc < min) {
@@ -180,7 +169,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_Min (
   }
 
   return (min);
-
 }                                                                   // End of SDA_Min()
 
 
@@ -205,19 +193,17 @@ SLData_t SIGLIB_FUNC_DECL SDA_AbsMin (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        Tmp, Min;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  Tmp = *pSrc++;                                                    // Initial value
+  SLData_t        Min;
+  SLData_t        Tmp = *pSrc++;                                    // Initial value
   if (Tmp >= SIGLIB_ZERO) {
     Min = Tmp;
   }
-
   else {
     Min = -Tmp;
   }
@@ -230,7 +216,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_AbsMin (
         Min = Tmp;
       }
     }
-
     else {                                                          // Negative data value
       if ((-Tmp) < Min) {
         Min = -Tmp;
@@ -239,7 +224,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_AbsMin (
   }
 
   return (Min);
-
 }                                                                   // End of SDA_AbsMin()
 
 
@@ -265,7 +249,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_Middle (
   const SLArrayIndex_t arrayLength)
 {
   return ((SDA_Max (pSrc, arrayLength) + SDA_Min (pSrc, arrayLength)) / SIGLIB_TWO);
-
 }                                                                   // End of SDA_Middle()
 
 
@@ -291,19 +274,17 @@ SLData_t SIGLIB_FUNC_DECL SDA_Range (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        min, max, temp;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  max = *pSrc;                                                      // Initial values
-  min = *pSrc++;
+  SLData_t        max = *pSrc;                                      // Initial values
+  SLData_t        min = *pSrc++;
 
   for (SLArrayIndex_t i = 1; i < arrayLength; i++) {
-    temp = *pSrc++;
+    SLData_t        temp = *pSrc++;
 
     if (temp > max) {
       max = temp;
@@ -313,7 +294,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_Range (
     }
   }
   return (max - min);
-
 }                                                                   // End of SDA_Range()
 
 
@@ -338,14 +318,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_MaxIndex (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        max = *pSrc++;                                    // Initial values
-  SLArrayIndex_t  position = 0;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
+
+  SLData_t        max = *pSrc++;                                    // Initial values
+  SLArrayIndex_t  position = 0;
 
   for (SLArrayIndex_t i = 1; i < arrayLength; i++) {
     if (*pSrc > max) {
@@ -356,7 +336,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_MaxIndex (
   }
 
   return (position);
-
 }                                                                   // End of SDA_MaxIndex()
 
 
@@ -381,20 +360,19 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AbsMaxIndex (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  position;
-  SLData_t        Tmp, Max;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
+  SLArrayIndex_t  position;
+  SLData_t        Tmp, Max;
+
   Tmp = *pSrc++;                                                    // Initial value
   if (Tmp >= SIGLIB_ZERO) {
     Max = Tmp;
   }
-
   else {
     Max = -Tmp;
   }
@@ -410,7 +388,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AbsMaxIndex (
         position = i;
       }
     }
-
     else {                                                          // Negative data value
       if ((-Tmp) > Max) {
         Max = -Tmp;
@@ -420,7 +397,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AbsMaxIndex (
   }
 
   return (position);
-
 }                                                                   // End of SDA_AbsMaxIndex()
 
 
@@ -445,14 +421,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_MinIndex (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        min = *pSrc++;                                    // Initial values
-  SLArrayIndex_t  position = 0;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
+
+  SLData_t        min = *pSrc++;                                    // Initial values
+  SLArrayIndex_t  position = 0;
 
   for (SLArrayIndex_t i = 1; i < arrayLength; i++) {
     if (*pSrc < min) {
@@ -463,7 +439,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_MinIndex (
   }
 
   return (position);
-
 }                                                                   // End of SDA_MinIndex()
 
 
@@ -488,20 +463,18 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AbsMinIndex (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  position;
-  SLData_t        Tmp, Min;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  Tmp = *pSrc++;                                                    // Initial value
+  SLArrayIndex_t  position;
+  SLData_t        Min;
+  SLData_t        Tmp = *pSrc++;                                    // Initial value
   if (Tmp >= SIGLIB_ZERO) {
     Min = Tmp;
   }
-
   else {
     Min = -Tmp;
   }
@@ -517,7 +490,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AbsMinIndex (
         position = i;
       }
     }
-
     else {                                                          // Negative data value
       if ((-Tmp) < Min) {
         Min = -Tmp;
@@ -527,7 +499,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AbsMinIndex (
   }
 
   return (position);
-
 }                                                                   // End of SDA_AbsMinIndex()
 
 
@@ -558,7 +529,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_Max (
   else {
     return (Src2);
   }
-
 }                                                                   // End of SDS_Max()
 
 
@@ -606,7 +576,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_AbsMax (
   else {
     return (absSrc2);
   }
-
 }                                                                   // End of SDS_AbsMax()
 
 
@@ -637,7 +606,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_Min (
   else {
     return (Src1);
   }
-
 }                                                                   // End of SDS_Min()
 
 
@@ -669,7 +637,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_AbsMin (
   else {
     return (Src1);
   }
-
 }                                                                   // End of SDS_AbsMin()
 
 
@@ -698,31 +665,26 @@ SLData_t SIGLIB_FUNC_DECL SDA_LocalMax (
   const SLArrayIndex_t NEitherSide,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  StartIndex, EndIndex;
-  SLData_t        MaxValue;
-  SLData_t        InputValue;
-
-  StartIndex = Location - NEitherSide;                              // Calculate start index
+  SLArrayIndex_t  StartIndex = Location - NEitherSide;              // Calculate start index
   if (StartIndex < SIGLIB_AI_ZERO) {
     StartIndex = SIGLIB_AI_ZERO;
   }
 
-  EndIndex = Location + NEitherSide + SIGLIB_AI_ONE;                // Calculate end index
+  SLArrayIndex_t  EndIndex = Location + NEitherSide + SIGLIB_AI_ONE;  // Calculate end index
   if (EndIndex > arrayLength) {
     EndIndex = arrayLength;
   }
 
-  MaxValue = *(pSrc + StartIndex);                                  // Initial value
+  SLData_t        MaxValue = *(pSrc + StartIndex);                  // Initial value
 
   for (SLArrayIndex_t i = (StartIndex + 1); i < EndIndex; i++) {
-    InputValue = *(pSrc + i);
+    SLData_t        InputValue = *(pSrc + i);
     if (InputValue > MaxValue) {
       MaxValue = InputValue;
     }
   }
 
   return (MaxValue);
-
 }                                                                   // End of SDA_LocalMax()
 
 
@@ -752,27 +714,23 @@ SLData_t SIGLIB_FUNC_DECL SDA_LocalAbsMax (
   const SLArrayIndex_t NEitherSide,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  StartIndex, EndIndex;
-  SLData_t        MaxValue;
-  SLData_t        InputValue;
-
-  StartIndex = Location - NEitherSide;                              // Calculate start index
+  SLArrayIndex_t  StartIndex = Location - NEitherSide;              // Calculate start index
   if (StartIndex < SIGLIB_AI_ZERO) {
     StartIndex = SIGLIB_AI_ZERO;
   }
 
-  EndIndex = Location + NEitherSide + SIGLIB_AI_ONE;                // Calculate end index
+  SLArrayIndex_t  EndIndex = Location + NEitherSide + SIGLIB_AI_ONE;  // Calculate end index
   if (EndIndex > arrayLength) {
     EndIndex = arrayLength;
   }
 
-  MaxValue = *(pSrc + StartIndex);                                  // Initial value
+  SLData_t        MaxValue = *(pSrc + StartIndex);                  // Initial value
   if (MaxValue < SIGLIB_ZERO) {
     MaxValue = -MaxValue;
   }
 
   for (SLArrayIndex_t i = (StartIndex + 1); i < EndIndex; i++) {
-    InputValue = *(pSrc + i);
+    SLData_t        InputValue = *(pSrc + i);
     if (InputValue < SIGLIB_ZERO) {
       InputValue = -InputValue;
     }
@@ -783,7 +741,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LocalAbsMax (
   }
 
   return (MaxValue);
-
 }                                                                   // End of SDA_LocalAbsMax()
 
 
@@ -812,31 +769,26 @@ SLData_t SIGLIB_FUNC_DECL SDA_LocalMin (
   const SLArrayIndex_t NEitherSide,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  StartIndex, EndIndex;
-  SLData_t        MinValue;
-  SLData_t        InputValue;
-
-  StartIndex = Location - NEitherSide;                              // Calculate start index
+  SLArrayIndex_t  StartIndex = Location - NEitherSide;              // Calculate start index
   if (StartIndex < SIGLIB_AI_ZERO) {
     StartIndex = SIGLIB_AI_ZERO;
   }
 
-  EndIndex = Location + NEitherSide + SIGLIB_AI_ONE;                // Calculate end index
+  SLArrayIndex_t  EndIndex = Location + NEitherSide + SIGLIB_AI_ONE;  // Calculate end index
   if (EndIndex > arrayLength) {
     EndIndex = arrayLength;
   }
 
-  MinValue = *(pSrc + StartIndex);                                  // Initial value
+  SLData_t        MinValue = *(pSrc + StartIndex);                  // Initial value
 
   for (SLArrayIndex_t i = (StartIndex + 1); i < EndIndex; i++) {
-    InputValue = *(pSrc + i);
+    SLData_t        InputValue = *(pSrc + i);
     if (InputValue < MinValue) {
       MinValue = InputValue;
     }
   }
 
   return (MinValue);
-
 }                                                                   // End of SDA_LocalMin()
 
 
@@ -866,27 +818,23 @@ SLData_t SIGLIB_FUNC_DECL SDA_LocalAbsMin (
   const SLArrayIndex_t NEitherSide,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  StartIndex, EndIndex;
-  SLData_t        MinValue;
-  SLData_t        InputValue;
-
-  StartIndex = Location - NEitherSide;                              // Calculate start index
+  SLArrayIndex_t  StartIndex = Location - NEitherSide;              // Calculate start index
   if (StartIndex < SIGLIB_AI_ZERO) {
     StartIndex = SIGLIB_AI_ZERO;
   }
 
-  EndIndex = Location + NEitherSide + SIGLIB_AI_ONE;                // Calculate end index
+  SLArrayIndex_t  EndIndex = Location + NEitherSide + SIGLIB_AI_ONE;  // Calculate end index
   if (EndIndex > arrayLength) {
     EndIndex = arrayLength;
   }
 
-  MinValue = *(pSrc + StartIndex);                                  // Initial value
+  SLData_t        MinValue = *(pSrc + StartIndex);                  // Initial value
   if (MinValue < SIGLIB_ZERO) {
     MinValue = -MinValue;
   }
 
   for (SLArrayIndex_t i = (StartIndex + 1); i < EndIndex; i++) {
-    InputValue = *(pSrc + i);
+    SLData_t        InputValue = *(pSrc + i);
     if (InputValue < SIGLIB_ZERO) {
       InputValue = -InputValue;
     }
@@ -897,7 +845,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LocalAbsMin (
   }
 
   return (MinValue);
-
 }                                                                   // End of SDA_LocalAbsMin()
 
 
@@ -927,8 +874,6 @@ void SIGLIB_FUNC_DECL SDA_Max2 (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        Src1, Src2;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -939,8 +884,8 @@ void SIGLIB_FUNC_DECL SDA_Max2 (
 
   for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
-    Src1 = pSrc1[i];
-    Src2 = pSrc2[i];
+    SLData_t        Src1 = pSrc1[i];
+    SLData_t        Src2 = pSrc2[i];
     if (Src1 > Src2) {                                              // Select maximum values
       pDst[i] = Src1;
     }
@@ -948,8 +893,8 @@ void SIGLIB_FUNC_DECL SDA_Max2 (
       pDst[i] = Src2;
     }
 #else
-    Src1 = *pSrc1++;
-    Src2 = *pSrc2++;
+    SLData_t        Src1 = *pSrc1++;
+    SLData_t        Src2 = *pSrc2++;
     if (Src1 > Src2) {                                              // Select maximum values
       *pDst++ = Src1;
     }
@@ -987,8 +932,6 @@ void SIGLIB_FUNC_DECL SDA_AbsMax2 (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        Src1, Src2;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -999,8 +942,8 @@ void SIGLIB_FUNC_DECL SDA_AbsMax2 (
 
   for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
-    Src1 = pSrc1[i];
-    Src2 = pSrc2[i];
+    SLData_t        Src1 = pSrc1[i];
+    SLData_t        Src2 = pSrc2[i];
     if (Src1 < SIGLIB_ZERO) {                                       // Get absolute values
       Src1 = -Src1;
     }
@@ -1014,8 +957,8 @@ void SIGLIB_FUNC_DECL SDA_AbsMax2 (
       pDst[i] = Src2;
     }
 #else
-    Src1 = *pSrc1++;
-    Src2 = *pSrc2++;
+    SLData_t        Src1 = *pSrc1++;
+    SLData_t        Src2 = *pSrc2++;
     if (Src1 < SIGLIB_ZERO) {                                       // Get absolute values
       Src1 = -Src1;
     }
@@ -1060,8 +1003,6 @@ void SIGLIB_FUNC_DECL SDA_SignedAbsMax2 (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        Src1, Src2;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -1072,8 +1013,8 @@ void SIGLIB_FUNC_DECL SDA_SignedAbsMax2 (
 
   for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
-    Src1 = pSrc1[i];
-    Src2 = pSrc2[i];
+    SLData_t        Src1 = pSrc1[i];
+    SLData_t        Src2 = pSrc2[i];
     if (Src1 < SIGLIB_ZERO) {                                       // Get absolute values
       Src1 = -Src1;
     }
@@ -1087,8 +1028,8 @@ void SIGLIB_FUNC_DECL SDA_SignedAbsMax2 (
       pDst[i] = pSrc2[i];
     }
 #else
-    Src1 = *pSrc1++;
-    Src2 = *pSrc2++;
+    SLData_t        Src1 = *pSrc1++;
+    SLData_t        Src2 = *pSrc2++;
     if (Src1 < SIGLIB_ZERO) {                                       // Get absolute values
       Src1 = -Src1;
     }
@@ -1132,8 +1073,6 @@ void SIGLIB_FUNC_DECL SDA_Min2 (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        Src1, Src2;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -1144,8 +1083,8 @@ void SIGLIB_FUNC_DECL SDA_Min2 (
 
   for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
-    Src1 = pSrc1[i];
-    Src2 = pSrc2[i];
+    SLData_t        Src1 = pSrc1[i];
+    SLData_t        Src2 = pSrc2[i];
     if (Src1 < Src2) {                                              // Select minimum values
       pDst[i] = Src1;
     }
@@ -1153,8 +1092,8 @@ void SIGLIB_FUNC_DECL SDA_Min2 (
       pDst[i] = Src2;
     }
 #else
-    Src1 = *pSrc1++;
-    Src2 = *pSrc2++;
+    SLData_t        Src1 = *pSrc1++;
+    SLData_t        Src2 = *pSrc2++;
     if (Src1 < Src2) {                                              // Select minimum values
       *pDst++ = Src1;
     }
@@ -1192,8 +1131,6 @@ void SIGLIB_FUNC_DECL SDA_AbsMin2 (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        Src1, Src2;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -1204,8 +1141,8 @@ void SIGLIB_FUNC_DECL SDA_AbsMin2 (
 
   for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
-    Src1 = pSrc1[i];
-    Src2 = pSrc2[i];
+    SLData_t        Src1 = pSrc1[i];
+    SLData_t        Src2 = pSrc2[i];
     if (Src1 < SIGLIB_ZERO) {                                       // Get absolute values
       Src1 = -Src1;
     }
@@ -1219,8 +1156,8 @@ void SIGLIB_FUNC_DECL SDA_AbsMin2 (
       pDst[i] = Src2;
     }
 #else
-    Src1 = *pSrc1++;
-    Src2 = *pSrc2++;
+    SLData_t        Src1 = *pSrc1++;
+    SLData_t        Src2 = *pSrc2++;
     if (Src1 < SIGLIB_ZERO) {                                       // Get absolute values
       Src1 = -Src1;
     }
@@ -1265,8 +1202,6 @@ void SIGLIB_FUNC_DECL SDA_SignedAbsMin2 (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        Src1, Src2;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -1277,8 +1212,8 @@ void SIGLIB_FUNC_DECL SDA_SignedAbsMin2 (
 
   for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
-    Src1 = pSrc1[i];
-    Src2 = pSrc2[i];
+    SLData_t        Src1 = pSrc1[i];
+    SLData_t        Src2 = pSrc2[i];
     if (Src1 < SIGLIB_ZERO) {                                       // Get absolute values
       Src1 = -Src1;
     }
@@ -1292,8 +1227,8 @@ void SIGLIB_FUNC_DECL SDA_SignedAbsMin2 (
       pDst[i] = pSrc2[i];
     }
 #else
-    Src1 = *pSrc1++;
-    Src2 = *pSrc2++;
+    SLData_t        Src1 = *pSrc1++;
+    SLData_t        Src2 = *pSrc2++;
     if (Src1 < SIGLIB_ZERO) {                                       // Get absolute values
       Src1 = -Src1;
     }
@@ -1337,14 +1272,14 @@ void SIGLIB_FUNC_DECL SDA_PeakHold (
   SLData_t * SIGLIB_PTR_DECL pPrevious,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        Peak = *pPrevious;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
   _nassert ((int) pPeak % 8 == 0);
 #endif
 #endif
+
+  SLData_t        Peak = *pPrevious;
 
   for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
     Peak *= Decay;                                                  // Decay the current peak value
@@ -1356,7 +1291,6 @@ void SIGLIB_FUNC_DECL SDA_PeakHold (
   }
 
   *pPrevious = Peak;                                                // Save, so that function is re-entrant
-
 }                                                                   // End of SDA_PeakHold()
 
 
@@ -1428,18 +1362,17 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_DetectFirstPeakOverThreshold (
   const SLData_t Threshold,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Input, PreviousValue;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  PreviousValue = *pSrc++;                                          // Initial value
+  SLArrayIndex_t  i;
+  SLData_t        PreviousValue = *pSrc++;                          // Initial value
+
   for (i = 1; i < arrayLength; i++) {
-    Input = *pSrc++;
+    SLData_t        Input = *pSrc++;
     if ((Input > Threshold) && (Input < PreviousValue)) {           // Detect if we are over the threshold and we have passed the peak
       break;
     }
@@ -1924,8 +1857,6 @@ void SIGLIB_FUNC_DECL SDA_SoftThreshold (
   const SLData_t Threshold,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        Tmp;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -1934,7 +1865,7 @@ void SIGLIB_FUNC_DECL SDA_SoftThreshold (
 #endif
 
   for (SLArrayIndex_t i = 0; i < arrayLength; i++) {                // Absolute threshold
-    Tmp = *pSrc++;
+    SLData_t        Tmp = *pSrc++;
     if (Tmp > Threshold) {
       *pDst++ = Tmp - Threshold;
     }
@@ -1977,26 +1908,21 @@ SLData_t SIGLIB_FUNC_DECL SDS_ThresholdAndClamp (
   const SLData_t Clamp,
   const enum SLThresholdMode_t TType)
 {
-
   if (TType == SIGLIB_SINGLE_SIDED_THOLD) {                         // Threshold on single value
     if (src >= Threshold) {                                         // If i/p >= threshold then o/p = i/p
       return (Clamp);
     }
-
     else {
       return (SIGLIB_ZERO);                                         // If i/p < threshold then set o/p to 0.0
     }
   }
-
   else {
     if (src >= Threshold) {                                         // If abs(i/p) >= threshold then o/p = i/p
       return (Clamp);
     }
-
     else if (src <= (-Threshold)) {                                 // If abs(i/p) >= threshold then o/p = i/p
       return (-Clamp);
     }
-
     else {
       return (SIGLIB_ZERO);                                         // If abs(i/p) < threshold then set o/p to 0.0
     }
@@ -2035,8 +1961,6 @@ void SIGLIB_FUNC_DECL SDA_ThresholdAndClamp (
   const enum SLThresholdMode_t TType,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        Tmp;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -2046,11 +1970,10 @@ void SIGLIB_FUNC_DECL SDA_ThresholdAndClamp (
 
   if (TType == SIGLIB_SINGLE_SIDED_THOLD) {                         // Threshold on single value
     for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
-      Tmp = *pSrc++;
+      SLData_t        Tmp = *pSrc++;
       if (Tmp >= Threshold) {                                       // If i/p >= threshold then o/p = i/p
         *pDst++ = Clamp;
       }
-
       else {
         *pDst++ = SIGLIB_ZERO;                                      // If i/p < threshold then set o/p to 0.0
       }
@@ -2059,15 +1982,13 @@ void SIGLIB_FUNC_DECL SDA_ThresholdAndClamp (
 
   else {
     for (SLArrayIndex_t i = 0; i < arrayLength; i++) {              // Absolute threshold
-      Tmp = *pSrc++;
+      SLData_t        Tmp = *pSrc++;
       if (Tmp >= Threshold) {                                       // If abs(i/p) >= threshold then o/p = i/p
         *pDst++ = Clamp;
       }
-
       else if (Tmp <= (-Threshold)) {                               // If abs(i/p) >= threshold then o/p = i/p
         *pDst++ = -Clamp;
       }
-
       else {
         *pDst++ = SIGLIB_ZERO;                                      // If abs(i/p) < threshold then set o/p to 0.0
       }
@@ -2105,7 +2026,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_Clamp (
     if (src >= Threshold) {                                         // If i/p > threshold then clamp o/p to threshold
       return (Clamp);
     }
-
     else {
       return (src);                                                 // If i/p <= threshold then o/p = i/p
     }
@@ -2115,11 +2035,9 @@ SLData_t SIGLIB_FUNC_DECL SDS_Clamp (
     if (src >= Threshold) {                                         // If abs(i/p) > threshold then clamp o/p to threshold
       return (Clamp);
     }
-
     else if (src < (-Threshold)) {
       return (-Clamp);
     }
-
     else {
       return (src);                                                 // If abs(i/p) <= threshold then o/p = i/p
     }
@@ -2156,8 +2074,6 @@ void SIGLIB_FUNC_DECL SDA_Clamp (
   const enum SLThresholdMode_t TType,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        Tmp;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -2167,11 +2083,10 @@ void SIGLIB_FUNC_DECL SDA_Clamp (
 
   if (TType == SIGLIB_SINGLE_SIDED_THOLD) {
     for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
-      Tmp = *pSrc++;
+      SLData_t        Tmp = *pSrc++;
       if (Tmp >= Threshold) {                                       // If i/p > threshold then clamp o/p to threshold
         *pDst++ = Clamp;
       }
-
       else {
         *pDst++ = Tmp;                                              // If i/p <= threshold then o/p = i/p
       }
@@ -2180,15 +2095,13 @@ void SIGLIB_FUNC_DECL SDA_Clamp (
 
   else {
     for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
-      Tmp = *pSrc++;
+      SLData_t        Tmp = *pSrc++;
       if (Tmp >= Threshold) {                                       // If abs(i/p) > threshold then clamp o/p to threshold
         *pDst++ = Clamp;
       }
-
       else if (Tmp < (-Threshold)) {
         *pDst++ = -Clamp;
       }
-
       else {
         *pDst++ = Tmp;                                              // If abs(i/p) <= threshold then o/p = i/p
       }
@@ -2233,7 +2146,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_TestOverThreshold (
   }
 
   return (SIGLIB_SIGNAL_NOT_PRESENT);                               // Signal is NOT over threshold
-
 }                                                                   // End of SDA_TestOverThreshold()
 
 
@@ -2276,7 +2188,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_TestAbsOverThreshold (
   }
 
   return (SIGLIB_SIGNAL_NOT_PRESENT);                               // Absolute value of signal is NOT over threshold
-
 }                                                                   // End of SDA_TestAbsOverThreshold()
 
 
@@ -2559,8 +2470,6 @@ void SIGLIB_FUNC_DECL SDA_SetMinValue (
   const SLData_t MinValue,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        SrcTmp;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -2569,7 +2478,7 @@ void SIGLIB_FUNC_DECL SDA_SetMinValue (
 #endif
 
   for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
-    SrcTmp = *pSrc++;
+    SLData_t        SrcTmp = *pSrc++;
     if (SrcTmp > MinValue) {
       *pDst++ = SrcTmp;
     }
@@ -2607,18 +2516,17 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAverageRatio (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        Peak = SIGLIB_ZERO;
-  SLData_t        Average = SIGLIB_ZERO;
-  SLData_t        Temp;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
+  SLData_t        Peak = SIGLIB_ZERO;
+  SLData_t        Average = SIGLIB_ZERO;
+
   for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
-    Temp = *pSrc++;
+    SLData_t        Temp = *pSrc++;
 
     if (Temp < SIGLIB_ZERO) {                                       // Allow for sign of the data
       Temp = -Temp;
@@ -2656,18 +2564,17 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAveragePowerRatio (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        PeakPower = SIGLIB_ZERO;
-  SLData_t        AveragePower = SIGLIB_ZERO;
-  SLData_t        Temp;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
+  SLData_t        PeakPower = SIGLIB_ZERO;
+  SLData_t        AveragePower = SIGLIB_ZERO;
+
   for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
-    Temp = *pSrc++;
+    SLData_t        Temp = *pSrc++;
     Temp = Temp * Temp;
 
     AveragePower += Temp;                                           // Calculate the average value
@@ -2702,18 +2609,17 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAveragePowerRatioDB (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        PeakPower = SIGLIB_ZERO;
-  SLData_t        AveragePower = SIGLIB_ZERO;
-  SLData_t        Temp;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
+  SLData_t        PeakPower = SIGLIB_ZERO;
+  SLData_t        AveragePower = SIGLIB_ZERO;
+
   for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
-    Temp = *pSrc++;
+    SLData_t        Temp = *pSrc++;
     Temp = Temp * Temp;
 
     AveragePower += Temp;                                           // Calculate the average value
@@ -2750,10 +2656,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAverageRatioComplex (
   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        Peak = SIGLIB_ZERO;
-  SLData_t        Average = SIGLIB_ZERO;
-  SLData_t        Temp, TempReal, TempImag;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrcReal % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
@@ -2761,10 +2663,13 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAverageRatioComplex (
 #endif
 #endif
 
+  SLData_t        Peak = SIGLIB_ZERO;
+  SLData_t        Average = SIGLIB_ZERO;
+
   for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
-    TempReal = *pSrcReal++;
-    TempImag = *pSrcImag++;
-    Temp = SDS_Sqrt ((TempReal * TempReal) + (TempImag * TempImag));
+    SLData_t        TempReal = *pSrcReal++;
+    SLData_t        TempImag = *pSrcImag++;
+    SLData_t        Temp = SDS_Sqrt ((TempReal * TempReal) + (TempImag * TempImag));
 
     Average += Temp;                                                // Calculate the average value
 
@@ -2800,10 +2705,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAveragePowerRatioComplex (
   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        PeakPower = SIGLIB_ZERO;
-  SLData_t        AveragePower = SIGLIB_ZERO;
-  SLData_t        Temp, TempReal, TempImag;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrcReal % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
@@ -2811,10 +2712,13 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAveragePowerRatioComplex (
 #endif
 #endif
 
+  SLData_t        PeakPower = SIGLIB_ZERO;
+  SLData_t        AveragePower = SIGLIB_ZERO;
+
   for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
-    TempReal = *pSrcReal++;
-    TempImag = *pSrcImag++;
-    Temp = (TempReal * TempReal) + (TempImag * TempImag);
+    SLData_t        TempReal = *pSrcReal++;
+    SLData_t        TempImag = *pSrcImag++;
+    SLData_t        Temp = (TempReal * TempReal) + (TempImag * TempImag);
 
     AveragePower += Temp;                                           // Calculate the average value
 
@@ -2850,10 +2754,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAveragePowerRatioComplexDB (
   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        PeakPower = SIGLIB_ZERO;
-  SLData_t        AveragePower = SIGLIB_ZERO;
-  SLData_t        Temp, TempReal, TempImag;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrcReal % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
@@ -2861,10 +2761,13 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAveragePowerRatioComplexDB (
 #endif
 #endif
 
+  SLData_t        PeakPower = SIGLIB_ZERO;
+  SLData_t        AveragePower = SIGLIB_ZERO;
+
   for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
-    TempReal = *pSrcReal++;
-    TempImag = *pSrcImag++;
-    Temp = (TempReal * TempReal) + (TempImag * TempImag);
+    SLData_t        TempReal = *pSrcReal++;
+    SLData_t        TempImag = *pSrcImag++;
+    SLData_t        Temp = (TempReal * TempReal) + (TempImag * TempImag);
 
     AveragePower += Temp;                                           // Calculate the average value
 
@@ -2909,10 +2812,9 @@ void SIGLIB_FUNC_DECL SDA_MovePeakTowardsDeadBand (
 {
   SLArrayIndex_t  PeakIndex = SIGLIB_AI_ZERO;
   SLData_t        PeakLevel = SIGLIB_ZERO;
-  SLData_t        Sample;
 
   for (SLArrayIndex_t i = 0; i < arrayLength; i++) {                // Detect peak location
-    Sample = *(pSrc + i);
+    SLData_t        Sample = *(pSrc + i);
     if (Sample > PeakLevel) {
       PeakIndex = i;
       PeakLevel = Sample;
@@ -2998,9 +2900,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Envelope (
   }
 
   *pOnePoleState = dst;
-
   return (dst);
-
 }                                                                   // End of SDS_Envelope()
 
 
@@ -3034,11 +2934,11 @@ void SIGLIB_FUNC_DECL SDA_Envelope (
   SLData_t * pOnePoleState,
   const SLArrayIndex_t sampleLength)
 {
-  SLData_t        src, dst;
+  SLData_t        dst;
   SLData_t        localOnePoleState = *pOnePoleState;
 
   for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
-    src = *pSrc++;
+    SLData_t        src = *pSrc++;
     if (src >= localOnePoleState) {
       dst = (attackCoefficient * (localOnePoleState - src)) + src;
     }
@@ -3049,9 +2949,7 @@ void SIGLIB_FUNC_DECL SDA_Envelope (
     localOnePoleState = dst;
     *pDst++ = dst;
   }
-
   *pOnePoleState = localOnePoleState;
-
 }                                                                   // End of SDA_Envelope()
 
 
@@ -3105,19 +3003,17 @@ SLData_t SIGLIB_FUNC_DECL SDS_EnvelopeRMS (
   SLData_t * pOnePoleState)
 {
   SLData_t        dst;
-  SLData_t        srcsrc = src * src;
+  SLData_t        srcSquared = src * src;
 
-  if (srcsrc >= *pOnePoleState) {
-    dst = (attackCoefficient * (*pOnePoleState - srcsrc)) + srcsrc;
+  if (srcSquared >= *pOnePoleState) {
+    dst = (attackCoefficient * (*pOnePoleState - srcSquared)) + srcSquared;
   }
   else {
-    dst = (decayCoefficient * (*pOnePoleState - srcsrc)) + srcsrc;
+    dst = (decayCoefficient * (*pOnePoleState - srcSquared)) + srcSquared;
   }
 
   *pOnePoleState = dst;
-
   return (SDS_Sqrt (dst));
-
 }                                                                   // End of SDS_EnvelopeRMS()
 
 
@@ -3151,18 +3047,18 @@ void SIGLIB_FUNC_DECL SDA_EnvelopeRMS (
   SLData_t * pOnePoleState,
   const SLArrayIndex_t sampleLength)
 {
-  SLData_t        srcsrc, dst;
+  SLData_t        dst;
   SLData_t        localOnePoleState = *pOnePoleState;
 
   for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
-    srcsrc = *pSrc++;
-    srcsrc = srcsrc * srcsrc;
+    SLData_t        srcSquared = *pSrc++;
+    srcSquared = srcSquared * srcSquared;
 
-    if (srcsrc >= localOnePoleState) {
-      dst = (attackCoefficient * (localOnePoleState - srcsrc)) + srcsrc;
+    if (srcSquared >= localOnePoleState) {
+      dst = (attackCoefficient * (localOnePoleState - srcSquared)) + srcSquared;
     }
     else {
-      dst = (decayCoefficient * (localOnePoleState - srcsrc)) + srcsrc;
+      dst = (decayCoefficient * (localOnePoleState - srcSquared)) + srcSquared;
     }
 
     localOnePoleState = dst;
@@ -3170,7 +3066,6 @@ void SIGLIB_FUNC_DECL SDA_EnvelopeRMS (
   }
 
   *pOnePoleState = localOnePoleState;
-
 }                                                                   // End of SDA_EnvelopeRMS()
 
 
@@ -3282,7 +3177,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_EnvelopeHilbert (
                                   pOnePoleState);                   // One pole filter state array
 
   return (sample);
-
 }                                                                   // End of SDS_EnvelopeHilbert()
 
 
@@ -3359,7 +3253,6 @@ void SIGLIB_FUNC_DECL SDA_EnvelopeHilbert (
                          onePoleCoefficient,                        // One pole filter coefficients
                          pOnePoleState,                             // One pole filter state array
                          sampleLength);                             // Dataset length
-
 }                                                                   // End of SDA_EnvelopeHilbert()
 
 
@@ -3582,8 +3475,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateArbitraryThreePointQuadraticVertexMagni
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        y0, y1, y2;
-
   SLArrayIndex_t  maxPos = SDA_AbsMaxIndex (pSrc,                   // Pointer to log magnitude destination array
                                             arrayLength);           // Dataset length
 
@@ -3594,9 +3485,9 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateArbitraryThreePointQuadraticVertexMagni
     return (pSrc[arrayLength - 1]);
   }
 
-  y0 = *(pSrc + maxPos - 1);
-  y1 = *(pSrc + maxPos);
-  y2 = *(pSrc + maxPos + 1);
+  SLData_t        y0 = *(pSrc + maxPos - 1);
+  SLData_t        y1 = *(pSrc + maxPos);
+  SLData_t        y2 = *(pSrc + maxPos + 1);
 
   SLData_t        T1 = SIGLIB_MINUS_HALF * (SIGLIB_TWO * (y1 - y0) + (y0 - y2));
   SLData_t        T2 = SIGLIB_MINUS_HALF * (SIGLIB_FOUR * (y0 - y1) + (y2 - y0));
@@ -3628,8 +3519,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateArbitraryThreePointQuadraticVertexLocat
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        y0, y1, y2;
-
   SLArrayIndex_t  maxPos = SDA_AbsMaxIndex (pSrc,                   // Pointer to log magnitude destination array
                                             arrayLength);           // Dataset length
 
@@ -3640,14 +3529,13 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateArbitraryThreePointQuadraticVertexLocat
     return ((SLData_t) (arrayLength - 1));
   }
 
-  y0 = *(pSrc + maxPos - 1);
-  y1 = *(pSrc + maxPos);
-  y2 = *(pSrc + maxPos + 1);
+  SLData_t        y0 = *(pSrc + maxPos - 1);
+  SLData_t        y1 = *(pSrc + maxPos);
+  SLData_t        y2 = *(pSrc + maxPos + 1);
 
   SLData_t        T1 = SIGLIB_MINUS_HALF * (SIGLIB_TWO * (y1 - y0) + (y0 - y2));
   SLData_t        T2 = SIGLIB_MINUS_HALF * (SIGLIB_FOUR * (y0 - y1) + (y2 - y0));
   return ((SLData_t) maxPos - SIGLIB_ONE + (-T2 / (SIGLIB_TWO * T1)));
-
 }                                                                   // End of SDA_InterpolateArbitraryThreePointQuadraticVertexLocation()
 
 
@@ -3679,7 +3567,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateArbitraryThreePointQuadraticPeakVertexM
 
 // Interpolate the FFT results
 // Select the magnitude values but allow for the edges
-  SLData_t        y0, y1, y2;
   if (maxPos == 0) {
     return (pSrc[0]);
   }
@@ -3687,9 +3574,9 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateArbitraryThreePointQuadraticPeakVertexM
     return (pSrc[arrayLength - 1]);
   }
 
-  y0 = *(pSrc + maxPos - 1);
-  y1 = *(pSrc + maxPos);
-  y2 = *(pSrc + maxPos + 1);
+  SLData_t        y0 = *(pSrc + maxPos - 1);
+  SLData_t        y1 = *(pSrc + maxPos);
+  SLData_t        y2 = *(pSrc + maxPos + 1);
 
   SLData_t        T1 = SIGLIB_MINUS_HALF * (SIGLIB_TWO * (y1 - y0) + (y0 - y2));
   SLData_t        T2 = SIGLIB_MINUS_HALF * (SIGLIB_FOUR * (y0 - y1) + (y2 - y0));
@@ -3725,7 +3612,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateArbitraryThreePointQuadraticPeakVertexL
 
 // Interpolate the FFT results
 // Select the magnitude values but allow for the edges
-  SLData_t        y0, y1, y2;
   if (maxPos == 0) {
     return (SIGLIB_ZERO);
   }
@@ -3733,14 +3619,13 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateArbitraryThreePointQuadraticPeakVertexL
     return ((SLData_t) (arrayLength - 1));
   }
 
-  y0 = *(pSrc + maxPos - 1);
-  y1 = *(pSrc + maxPos);
-  y2 = *(pSrc + maxPos + 1);
+  SLData_t        y0 = *(pSrc + maxPos - 1);
+  SLData_t        y1 = *(pSrc + maxPos);
+  SLData_t        y2 = *(pSrc + maxPos + 1);
 
   SLData_t        T1 = SIGLIB_MINUS_HALF * (SIGLIB_TWO * (y1 - y0) + (y0 - y2));
   SLData_t        T2 = SIGLIB_MINUS_HALF * (SIGLIB_FOUR * (y0 - y1) + (y2 - y0));
   return ((SLData_t) maxPos - SIGLIB_ONE + (-T2 / (SIGLIB_TWO * T1)));
-
 }                                                                   // End of SDA_InterpolateArbitraryThreePointQuadraticPeakVertexLocation()
 
 
@@ -3798,9 +3683,8 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FirstMinVertexPos (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  i;
   SLData_t        previousMagnitude = *pSrc++;
-
+  SLArrayIndex_t  i;
   for (i = 1; i < arrayLength; i++) {
     if (*pSrc > previousMagnitude) {
       break;
@@ -3864,9 +3748,8 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FirstMaxVertexPos (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  i;
   SLData_t        previousMagnitude = *pSrc++;
-
+  SLArrayIndex_t  i;
   for (i = 1; i < arrayLength; i++) {
     if (*pSrc < previousMagnitude) {
       break;

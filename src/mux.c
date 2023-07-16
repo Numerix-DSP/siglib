@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : MUX.C         | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 13/04/2094
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Channel multiplexing routines, for SigLib DSP library.
 
@@ -40,7 +40,6 @@ Description : Channel multiplexing routines, for SigLib DSP library.
 #define SIGLIB_SRC_FILE_MUX     1                                   // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
 
 /**/
 
@@ -74,9 +73,6 @@ void SIGLIB_FUNC_DECL SDA_Multiplex (
   const SLArrayIndex_t NumFrames,
   const SLArrayIndex_t NumSamplesInFrame)
 {
-  SLArrayIndex_t  i;
-  SLArrayIndex_t  Offset;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMuxArray % 8 == 0);                          // Align arrays on 64 bit double word boundary for LDDW
@@ -89,9 +85,9 @@ void SIGLIB_FUNC_DECL SDA_Multiplex (
     SDA_Copy (p_SrcMuxArray, p_DstMuxArray, (SLArrayIndex_t) (NumSamplesInFrame * NumFrames));  // Copy src data to dest
   }
 
-  Offset = FrameSampleIndex;
+  SLArrayIndex_t  Offset = FrameSampleIndex;
 
-  for (i = 0; i < NumFrames; i++) {
+  for (SLArrayIndex_t i = 0; i < NumFrames; i++) {
     *(p_DstMuxArray + Offset) = *p_SrcArray++;
     Offset += NumSamplesInFrame;
   }
@@ -127,9 +123,6 @@ void SIGLIB_FUNC_DECL SDA_Demultiplex (
   const SLArrayIndex_t NumFrames,
   const SLArrayIndex_t NumSamplesInFrame)
 {
-  SLArrayIndex_t  i;
-  SLArrayIndex_t  Offset;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) p_SrcMuxArray % 8 == 0);                          // Align arrays on 64 bit double word boundary for LDDW
@@ -137,9 +130,9 @@ void SIGLIB_FUNC_DECL SDA_Demultiplex (
 #endif
 #endif
 
-  Offset = FrameSampleIndex;
+  SLArrayIndex_t  Offset = FrameSampleIndex;
 
-  for (i = 0; i < NumFrames; i++) {
+  for (SLArrayIndex_t i = 0; i < NumFrames; i++) {
     *p_DstArray++ = *(p_SrcMuxArray + Offset);
     Offset += NumSamplesInFrame;
   }
@@ -171,8 +164,6 @@ void SIGLIB_FUNC_DECL SDA_Mux2 (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -181,7 +172,7 @@ void SIGLIB_FUNC_DECL SDA_Mux2 (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst[2 * i] = pSrc1[i];
     pDst[2 * i + 1] = pSrc2[i];
@@ -218,8 +209,6 @@ void SIGLIB_FUNC_DECL SDA_Demux2 (
   SLData_t * SIGLIB_PTR_DECL pDst2,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -228,7 +217,7 @@ void SIGLIB_FUNC_DECL SDA_Demux2 (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst1[i] = pSrc[2 * i];
     pDst2[i] = pSrc[2 * i + 1];
@@ -267,8 +256,6 @@ void SIGLIB_FUNC_DECL SDA_Mux3 (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -278,7 +265,7 @@ void SIGLIB_FUNC_DECL SDA_Mux3 (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst[3 * i] = pSrc1[i];
     pDst[3 * i + 1] = pSrc2[i];
@@ -320,8 +307,6 @@ void SIGLIB_FUNC_DECL SDA_Demux3 (
   SLData_t * SIGLIB_PTR_DECL pDst3,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -331,7 +316,7 @@ void SIGLIB_FUNC_DECL SDA_Demux3 (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst1[i] = pSrc[3 * i];
     pDst2[i] = pSrc[3 * i + 1];
@@ -374,8 +359,6 @@ void SIGLIB_FUNC_DECL SDA_Mux4 (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -386,7 +369,7 @@ void SIGLIB_FUNC_DECL SDA_Mux4 (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst[4 * i] = pSrc1[i];
     pDst[4 * i + 1] = pSrc2[i];
@@ -431,8 +414,6 @@ void SIGLIB_FUNC_DECL SDA_Demux4 (
   SLData_t * SIGLIB_PTR_DECL pDst4,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -443,7 +424,7 @@ void SIGLIB_FUNC_DECL SDA_Demux4 (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst1[i] = pSrc[4 * i];
     pDst2[i] = pSrc[4 * i + 1];
@@ -490,8 +471,6 @@ void SIGLIB_FUNC_DECL SDA_Mux5 (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -503,7 +482,7 @@ void SIGLIB_FUNC_DECL SDA_Mux5 (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst[5 * i] = pSrc1[i];
     pDst[5 * i + 1] = pSrc2[i];
@@ -552,8 +531,6 @@ void SIGLIB_FUNC_DECL SDA_Demux5 (
   SLData_t * SIGLIB_PTR_DECL pDst5,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -565,7 +542,7 @@ void SIGLIB_FUNC_DECL SDA_Demux5 (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst1[i] = pSrc[5 * i];
     pDst2[i] = pSrc[5 * i + 1];
@@ -616,8 +593,6 @@ void SIGLIB_FUNC_DECL SDA_Mux6 (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -630,7 +605,7 @@ void SIGLIB_FUNC_DECL SDA_Mux6 (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst[6 * i] = pSrc1[i];
     pDst[6 * i + 1] = pSrc2[i];
@@ -683,8 +658,6 @@ void SIGLIB_FUNC_DECL SDA_Demux6 (
   SLData_t * SIGLIB_PTR_DECL pDst6,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -697,7 +670,7 @@ void SIGLIB_FUNC_DECL SDA_Demux6 (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst1[i] = pSrc[6 * i];
     pDst2[i] = pSrc[6 * i + 1];
@@ -752,8 +725,6 @@ void SIGLIB_FUNC_DECL SDA_Mux7 (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -767,7 +738,7 @@ void SIGLIB_FUNC_DECL SDA_Mux7 (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst[7 * i] = pSrc1[i];
     pDst[7 * i + 1] = pSrc2[i];
@@ -824,8 +795,6 @@ void SIGLIB_FUNC_DECL SDA_Demux7 (
   SLData_t * SIGLIB_PTR_DECL pDst7,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -839,7 +808,7 @@ void SIGLIB_FUNC_DECL SDA_Demux7 (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst1[i] = pSrc[7 * i];
     pDst2[i] = pSrc[7 * i + 1];
@@ -898,8 +867,6 @@ void SIGLIB_FUNC_DECL SDA_Mux8 (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -914,7 +881,7 @@ void SIGLIB_FUNC_DECL SDA_Mux8 (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst[8 * i] = pSrc1[i];
     pDst[8 * i + 1] = pSrc2[i];
@@ -975,8 +942,6 @@ void SIGLIB_FUNC_DECL SDA_Demux8 (
   SLData_t * SIGLIB_PTR_DECL pDst8,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -991,7 +956,7 @@ void SIGLIB_FUNC_DECL SDA_Demux8 (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst1[i] = pSrc[8 * i];
     pDst2[i] = pSrc[8 * i + 1];

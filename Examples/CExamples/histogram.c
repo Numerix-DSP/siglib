@@ -1,5 +1,5 @@
 // SigLib - Histogram Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 #include <stdio.h>
 #include <siglib.h>
@@ -75,15 +75,13 @@ static SLData_t *pHistogram, *pHistogramCumul;
 int main (
   void)
 {
-  int             i;
-
   pHistogram = SUF_VectorArrayAllocate (HISTOGRAM_LENGTH1);         // Allocate arrays to the maximum histogram length
   pHistogramCumul = SUF_VectorArrayAllocate (HISTOGRAM_LENGTH1);
 
 
 // Test number 1
   printf ("\nTest number 1\n\n");
-  for (i = 0; i < SOURCE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SOURCE_LENGTH; i++) {
     printf ("SourceData[%d] = %lf\n", i, SourceData1[i]);
   }
 
@@ -108,14 +106,14 @@ int main (
                            HISTOGRAM_LENGTH1);                      // Output (histogram) array length
 
   printf ("\n-Histogram-\t\t\t-Cumulative Histogram-\n");
-  for (i = 0; i < HISTOGRAM_LENGTH1; i++) {
+  for (SLArrayIndex_t i = 0; i < HISTOGRAM_LENGTH1; i++) {
     printf ("pHistogram[%d] = %lf\tpHistogramCumul[%d] = %lf\n", i, pHistogram[i], i, pHistogramCumul[i]);
   }
 
 
 // Test number 2
   printf ("\nTest number 2\n\n");
-  for (i = 0; i < SOURCE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SOURCE_LENGTH; i++) {
     printf ("SourceData[%d] = %lf\n", i, SourceData2[i]);
   }
 
@@ -140,14 +138,14 @@ int main (
                                    HISTOGRAM_LENGTH2);              // Output (histogram) array length
 
   printf ("\n-Histogram-\t\t\t-Cumulative Histogram-\n");
-  for (i = 0; i < HISTOGRAM_LENGTH2; i++) {
+  for (SLArrayIndex_t i = 0; i < HISTOGRAM_LENGTH2; i++) {
     printf ("pHistogram[%d] = %lf\tpHistogramCumul[%d] = %lf\n", i, pHistogram[i], i, pHistogramCumul[i]);
   }
 
 
 // Test number 3
   printf ("\nTest number 3\n\n");
-  for (i = 0; i < SOURCE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SOURCE_LENGTH; i++) {
     printf ("SourceData[%d] = %lf\n", i, SourceData3[i]);
   }
 
@@ -172,7 +170,7 @@ int main (
                                    HISTOGRAM_LENGTH3);              // Output (histogram) array length
 
   printf ("\n-Histogram-\t\t\t-Cumulative Histogram-\n");
-  for (i = 0; i < HISTOGRAM_LENGTH3; i++) {
+  for (SLArrayIndex_t i = 0; i < HISTOGRAM_LENGTH3; i++) {
     printf ("pHistogram[%d] = %lf\tpHistogramCumul[%d] = %lf\n", i, pHistogram[i], i, pHistogramCumul[i]);
   }
 

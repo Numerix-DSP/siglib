@@ -1,6 +1,6 @@
 // SigLib FIR Single Conjugate Zero Notch Filter Example
 // The conjugate zeros will be located on the unit circle at the specified frequency
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -9,7 +9,7 @@
 
 // Define constants
 #define FILTER_LENGTH           3
-#define SAMPLE_RATE             16000.
+#define SAMPLE_RATE_HZ          16000.
 #define NOTCH_FREQUENCY         2000.
 
 #define IMPULSE_RESPONSE_LENGTH 1024
@@ -46,7 +46,7 @@ int main (
 
 // Generate the notch filter coefficients
   SIF_FirZeroNotchFilter (pFilterTaps,                              // Coefficients array
-                          NOTCH_FREQUENCY / SAMPLE_RATE);           // Notch centre frequency normalized to Fs = 1 Hz
+                          NOTCH_FREQUENCY / SAMPLE_RATE_HZ);        // Notch centre frequency normalized to Fs = 1 Hz
 
 
 // Generate impulse response
@@ -97,7 +97,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Impulse response",                                  // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE),          // Maximum X value
+               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE_HZ),       // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -123,7 +123,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Frequency response",                                // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               (SAMPLE_RATE / SIGLIB_TWO),                          // Maximum X value
+               (SAMPLE_RATE_HZ / SIGLIB_TWO),                       // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph

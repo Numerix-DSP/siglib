@@ -3,7 +3,7 @@ Option Explicit
 '
 '*************************************************************************
 'File Name              : GLOBAL.BAS    | Author        : JOHN EDWARDS
-'Siglib Library version : 8.51          |
+'Siglib Library Version  : 10.50          |
 '---------------------------------------+---------------------------------
 'Compiler       : Visual Basic V6.00    | Start Date    : 16/11/95
 'Options        :                       | Latest Update : 07/01/18
@@ -17,7 +17,7 @@ Option Explicit
 'END USER LICENSE AGREEMENT.
 'DELETION OF ANY INFORMATION IN THIS HEADER IS IN VIOLATION OF YOUR LICENSE.
 '
-'Copyright (C) 1992 to 2018 Alpha Numerix
+'Copyright (C) 1992 to 2018 Delta Numerix
 '-------------------------------------------------------------------------
 'Description : Visual Basic Global definitions file for SigLib DSP DLL
 '

@@ -4,7 +4,7 @@
 //      Baud rate - 600 Baud
 //      Sample rate - 9600 Hz
 //      Carrier freq. - 2400 Hz
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -27,7 +27,7 @@
 
             // Basic application definitions
 #define SAMPLE_LENGTH                   ((SLFixData_t)512)          // Number of samples in array - should represent an integer number of symbols
-#define SAMPLE_RATE                     9600.0                      // Sample rate
+#define SAMPLE_RATE_HZ                  9600.0                      // Sample rate
 #define BAUD_RATE                       600.0                       // Baud rate
 
 #define CARRIER_TABLE_FREQ              100.0                       // Frequency of sine wave in table
@@ -38,7 +38,7 @@
 #if RRCF_ENABLE
 #define RX_STRING_NIBBLE_COUNT_START    1                           // Starting phase of Rx string nibble count
                                                             // allows for group delay of RRC filter
-#define RRCF_PERIOD                     (SAMPLE_RATE / BAUD_RATE)   // RRCF Period
+#define RRCF_PERIOD                     (SAMPLE_RATE_HZ / BAUD_RATE)  // RRCF Period
 #define RRCF_ROLL_OFF                   0.75                        // Root raised cosine filter roll off factor
 #define RRCF_LENGTH                     81                          // Root raised cosine filter length
 #define RX_STARTUP_DELAY                3                           // Rxr startup delay (# symbols) to allow correct synchronization with transmitter
@@ -57,10 +57,10 @@
 
 
             // Derived application definitions
-#define SYMBOL_LENGTH                   ((SLFixData_t)(SAMPLE_RATE / BAUD_RATE))  // Number of samples per symbol
+#define SYMBOL_LENGTH                   ((SLFixData_t)(SAMPLE_RATE_HZ / BAUD_RATE)) // Number of samples per symbol
 #define SYMBOLS_PER_LOOP                ((SLFixData_t)(SAMPLE_LENGTH / SYMBOL_LENGTH))  // Number of symbols per loop for graph
 
-#define CARRIER_SINE_TABLE_SIZE         ((SLFixData_t)(SAMPLE_RATE / CARRIER_TABLE_FREQ)) // Number of samples in each of cos and sine table
+#define CARRIER_SINE_TABLE_SIZE         ((SLFixData_t)(SAMPLE_RATE_HZ / CARRIER_TABLE_FREQ))  // Number of samples in each of cos and sine table
 #define CARRIER_TABLE_INCREMENT         ((SLFixData_t)(CARRIER_FREQ / CARRIER_TABLE_FREQ))  // Carrier frequency
 
 #define EYE_DIAGRAM_SIZE                (2 * SYMBOL_LENGTH)         // Size of eye diagram graph - Two complete symbol periods
@@ -122,7 +122,6 @@ int main (
   SLData_t        TimeIndex = SIGLIB_ZERO;
 #endif
 
-  SLFixData_t     i;
   SLFixData_t     TxStringIndex = 0;
   SLFixData_t     TxStringNibbleCount = 0;
   SLFixData_t     TxNibble;
@@ -177,7 +176,7 @@ int main (
 
 // Initialise 16-QAM functions
   SIF_Qam16Modulate (pCarrierTable,                                 // Carrier table pointer
-                     CARRIER_TABLE_FREQ / SAMPLE_RATE,              // Carrier phase increment per sample (radians / 2π)
+                     CARRIER_TABLE_FREQ / SAMPLE_RATE_HZ,           // Carrier phase increment per sample (radians / 2π)
                      CARRIER_SINE_TABLE_SIZE,                       // Carrier sine table size
                      &TxCarrierPhase,                               // Carrier phase pointer
                      &TxSampleClock,                                // Sample clock pointer
@@ -192,7 +191,7 @@ int main (
                      RRCF_LENGTH,                                   // RRCF size
                      RRCF_ENABLE);                                  // RRCF enable / disable switch
   SIF_Qam16Demodulate (pCarrierTable,                               // Carrier table pointer
-                       CARRIER_TABLE_FREQ / SAMPLE_RATE,            // Carrier phase increment per sample (radians / 2π)
+                       CARRIER_TABLE_FREQ / SAMPLE_RATE_HZ,         // Carrier phase increment per sample (radians / 2π)
                        CARRIER_SINE_TABLE_SIZE,                     // Carrier sine table size
                        &RxCarrierPhase,                             // Carrier phase pointer
                        &RxSampleClock,                              // Sample clock pointer
@@ -215,7 +214,7 @@ int main (
   TxBitInversionFlag = 0;                                           // Clear bit inversion flags
   RxBitInversionFlag = 0;
 
-  for (i = 0; i < PREAMBLE_LENGTH; i++) {                           // Calculate pre-amble
+  for (SLArrayIndex_t i = 0; i < PREAMBLE_LENGTH; i++) {            // Calculate pre-amble
     if (!TxStringNibbleCount) {                                     // Always send scrambled binary ones
       TxTmpVariable = SDS_Scrambler1417WithInversion (0xff,         // Source character
                                                       &TxShiftRegister, // Shift register
@@ -288,7 +287,7 @@ int main (
 
 // Main data processing loop
   for (LoopCount = 0; LoopCount < NUMBER_OF_LOOPS; LoopCount++) {
-    for (i = 0; i < SYMBOLS_PER_LOOP; i++) {                        // Modulate new sample
+    for (SLArrayIndex_t i = 0; i < SYMBOLS_PER_LOOP; i++) {         // Modulate new sample
       if (!TxStringNibbleCount) {                                   // Keep track of Tx nibbles
         TxTmpVariable = SDS_Scrambler1417WithInversion (TxString[TxStringIndex++],  // Source character
                                                         &TxShiftRegister, // Shift register
@@ -330,12 +329,12 @@ int main (
                  ModulatedSignal,                                   // Dataset
                  SAMPLE_LENGTH,                                     // Dataset length
                  "Output data",                                     // Dataset title
-                 ((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount, // Minimum X value
-                 (((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                 ((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount,  // Minimum X value
+                 (((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),  // Maximum X value
                  "lines",                                           // Graph type
                  "blue",                                            // Colour
                  GPC_NEW);                                          // New graph
-    TimeIndex += (SLData_t) SAMPLE_LENGTH / SAMPLE_RATE;
+    TimeIndex += (SLData_t) SAMPLE_LENGTH / SAMPLE_RATE_HZ;
     printf ("\nOutput data\nPlease hit <Carriage Return> to continue . . .");
     getchar ();
 #endif
@@ -371,7 +370,7 @@ int main (
 
 
 // Receiver - De-modulate new sample
-    for (i = 0; i < SYMBOLS_PER_LOOP; i++) {
+    for (SLArrayIndex_t i = 0; i < SYMBOLS_PER_LOOP; i++) {
 #if (DISPLAY_EYE_DIAGRAM || DISPLAY_CONSTELLATION)
 // Demodulate data and generate constellation and eye diagram data
       RxNibble = SDA_Qam16DemodulateDebug (ModulatedSignal + (i * SYMBOL_LENGTH), // Source array
@@ -440,13 +439,13 @@ int main (
     }
 
 #if DISPLAY_EYE_DIAGRAM
-    for (i = 0; i < SAMPLE_LENGTH; i += EYE_DIAGRAM_SIZE) {
+    for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i += EYE_DIAGRAM_SIZE) {
       gpc_plot_2d (h2DPlot,                                         // Graph handle
                    EyeSamples + i,                                  // Dataset
                    EYE_DIAGRAM_SIZE,                                // Dataset length
                    "Eye diagram",                                   // Dataset title
-                   ((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount, // Minimum X value
-                   (((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                   ((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount,  // Minimum X value
+                   (((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),  // Maximum X value
                    "lines",                                         // Graph type
                    "blue",                                          // Colour
                    GPC_ADD);                                        // New graph
@@ -465,7 +464,7 @@ int main (
     exit (-1);
   }
 
-  for (i = 0; i < ConstellationRxSymbolCount; i++) {                // Plot all consteallation diagram points
+  for (SLArrayIndex_t i = 0; i < ConstellationRxSymbolCount; i++) { // Plot all consteallation diagram points
     gpc_plot_xy (hConstellationDiagram,                             // Graph handle
                  (ComplexRect_s *) ConstellationPoints,             // Array of complex dataset
                  (int) ConstellationRxSymbolCount,                  // Dataset length

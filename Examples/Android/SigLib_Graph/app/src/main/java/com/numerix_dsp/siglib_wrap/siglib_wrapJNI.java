@@ -32,13 +32,12 @@ public class siglib_wrapJNI {
   public final static native int SIGLIB_SWIG_SWITCH_get();
   public final static native int SIGLIB_get();
   public final static native double SIGLIB_VERSION_get();
-  public final static native int SIGLIB_ENABLE_DEBUG_FPRINTF_get();
+  public final static native int SIGLIB_ENABLE_DEBUG_LOGGING_get();
   public final static native int SIGLIB_FIX_DATA_SHORT_get();
   public final static native int SIGLIB_DATA_SHORT_get();
   public final static native int SIGLIB_DATA_LONG_get();
   public final static native int SIGLIB_DATA_FLOAT_get();
   public final static native int SIGLIB_INDEX_SHORT_get();
-  public final static native int SIGLIB_HUGE_ARRAYS_get();
   public final static native int SIGLIB_ARRAYS_ALIGNED_get();
   public final static native int SIGLIB_FILE_IO_SUPPORTED_get();
   public final static native int SIGLIB_CONSOLE_IO_SUPPORTED_get();

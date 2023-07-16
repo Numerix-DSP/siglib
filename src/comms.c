@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : COMMS.C       | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 22/01/2000
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Communications routines, for SigLib DSP library.
 
@@ -40,7 +40,6 @@ Description : Communications routines, for SigLib DSP library.
 #define SIGLIB_SRC_FILE_COMMS   1                                   // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
 
 /**/
 
@@ -68,10 +67,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_BitErrorRate (
   const SLData_t InverseNumberOfBits,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i, j;
-  SLArrayIndex_t  BERCount = (SLArrayIndex_t) 0;
-  SLChar_t        Tmp1, Tmp2;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -79,10 +74,12 @@ SLData_t SIGLIB_FUNC_DECL SDA_BitErrorRate (
 #endif
 #endif
 
-  for (i = 0; i < ArrayLength; i++) {                               // Calculate number of bits in error
-    Tmp1 = *pSrc1++;
-    Tmp2 = *pSrc2++;
-    for (j = 0; j < 8; j++) {                                       // Calculate number of bits in error
+  SLArrayIndex_t  BERCount = (SLArrayIndex_t) 0;
+
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {                // Calculate number of bits in error
+    SLChar_t        Tmp1 = *pSrc1++;
+    SLChar_t        Tmp2 = *pSrc2++;
+    for (SLArrayIndex_t j = 0; j < 8; j++) {                        // Calculate number of bits in error
       if ((Tmp1 & 0x1U) != (Tmp2 & 0x1U)) {
         BERCount++;                                                 // Increment error count
       }
@@ -90,9 +87,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_BitErrorRate (
       Tmp2 >>= 1;
     }
   }
-
   return (((SLData_t) BERCount) * InverseNumberOfBits);
-
 }                                                                   // End of SDA_BitErrorRate()
 
 
@@ -121,8 +116,6 @@ void SIGLIB_FUNC_DECL SDA_Interleave (
   const SLArrayIndex_t Stride,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  InputIndex, OutputIndex;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -130,7 +123,7 @@ void SIGLIB_FUNC_DECL SDA_Interleave (
 #endif
 #endif
 
-  for (InputIndex = 0, OutputIndex = 0; OutputIndex < SampleLength; OutputIndex++) {
+  for (SLArrayIndex_t InputIndex = 0, OutputIndex = 0; OutputIndex < SampleLength; OutputIndex++) {
     pDst[OutputIndex] = pSrc[InputIndex];
 
     InputIndex += Stride;
@@ -138,7 +131,6 @@ void SIGLIB_FUNC_DECL SDA_Interleave (
     if (InputIndex >= SampleLength) {
       InputIndex -= (SampleLength - 1);
     }
-
   }
 }                                                                   // End of SDA_Interleave()
 
@@ -168,8 +160,6 @@ void SIGLIB_FUNC_DECL SDA_Deinterleave (
   const SLArrayIndex_t Stride,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  InputIndex, OutputIndex;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -177,7 +167,7 @@ void SIGLIB_FUNC_DECL SDA_Deinterleave (
 #endif
 #endif
 
-  for (InputIndex = 0, OutputIndex = 0; InputIndex < SampleLength; InputIndex++) {
+  for (SLArrayIndex_t InputIndex = 0, OutputIndex = 0; InputIndex < SampleLength; InputIndex++) {
     pDst[OutputIndex] = pSrc[InputIndex];
 
     OutputIndex += Stride;
@@ -185,7 +175,6 @@ void SIGLIB_FUNC_DECL SDA_Deinterleave (
     if (OutputIndex >= SampleLength) {
       OutputIndex -= (SampleLength - 1);
     }
-
   }
 }                                                                   // End of SDA_Deinterleave()
 
@@ -211,10 +200,8 @@ SLData_t SIGLIB_FUNC_DECL SCV_EuclideanDistance (
   const SLComplexRect_s SrcVector1,
   const SLComplexRect_s SrcVector2)
 {
-
   return (SDS_Sqrt ((SrcVector1.real - SrcVector2.real) * (SrcVector1.real - SrcVector2.real) +
                     (SrcVector1.imag - SrcVector2.imag) * (SrcVector1.imag - SrcVector2.imag)));
-
 }                                                                   // End of SCV_EuclideanDistance()
 
 
@@ -240,10 +227,8 @@ SLData_t SIGLIB_FUNC_DECL SCV_EuclideanDistanceSquared (
   const SLComplexRect_s SrcVector1,
   const SLComplexRect_s SrcVector2)
 {
-
   return ((SrcVector1.real - SrcVector2.real) * (SrcVector1.real - SrcVector2.real) +
           (SrcVector1.imag - SrcVector2.imag) * (SrcVector1.imag - SrcVector2.imag));
-
 }                                                                   // End of SCV_EuclideanDistanceSquared()
 
 
@@ -273,14 +258,12 @@ void SIGLIB_FUNC_DECL SCA_EuclideanDistance (
   SLData_t * SIGLIB_OUTPUT_PTR_DECL pDst,
   const SLArrayIndex_t srcLength)
 {
-
   for (SLArrayIndex_t i = 0; i < srcLength; i++) {
     *pDst++ = (SDS_Sqrt ((psrcVector1->real - psrcVector2->real) * (psrcVector1->real - psrcVector2->real) +
                          (psrcVector1->imag - psrcVector2->imag) * (psrcVector1->imag - psrcVector2->imag)));
     psrcVector1++;
     psrcVector2++;
   }
-
 }                                                                   // End of SCA_EuclideanDistance()
 
 
@@ -310,14 +293,12 @@ void SIGLIB_FUNC_DECL SCA_EuclideanDistanceSquared (
   SLData_t * SIGLIB_OUTPUT_PTR_DECL pDst,
   const SLArrayIndex_t srcLength)
 {
-
   for (SLArrayIndex_t i = 0; i < srcLength; i++) {
     *pDst++ = ((psrcVector1->real - psrcVector2->real) * (psrcVector1->real - psrcVector2->real) +
                (psrcVector1->imag - psrcVector2->imag) * (psrcVector1->imag - psrcVector2->imag));
     psrcVector1++;
     psrcVector2++;
   }
-
 }                                                                   // End of SCA_EuclideanDistanceSquared()
 
 
@@ -544,10 +525,9 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ManchesterDecode (
 SLFixData_t SIGLIB_FUNC_DECL SDS_ManchesterEncodeByte (
   const SLChar_t Input)
 {
-  SLFixData_t     i;
   SLFixData_t     Output = (SLFixData_t) 0;
 
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {
+  for (SLFixData_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {
     if ((SLUFixData_t) Input & (0x1U << (SLUFixData_t) i)) {        // Extract and test LSB
       Output += (SLArrayIndex_t) (0x2U << (SLUFixData_t) (i * 2));
     }
@@ -579,10 +559,9 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ManchesterEncodeByte (
 SLFixData_t SIGLIB_FUNC_DECL SDS_ManchesterDecodeByte (
   const SLFixData_t Input)
 {
-  SLFixData_t     i;
   SLFixData_t     Output = (SLFixData_t) 0;
 
-  for (i = 0; i < SIGLIB_BYTE_LENGTH; i++) {
+  for (SLFixData_t i = 0; i < SIGLIB_BYTE_LENGTH; i++) {
     if ((((SLUFixData_t) Input >> (SLUFixData_t) (i * 2)) & 0x3U) == 0x2) { // Extract and test 2 LSBs
       Output += 0x1U << (SLUFixData_t) i;
     }
@@ -620,15 +599,13 @@ void SIGLIB_FUNC_DECL SIF_DetectNumericalWordSequence (
   SLArrayIndex_t WordLength,
   SLArrayIndex_t SynchSequenceLength)
 {
-  SLArrayIndex_t  i;
-
   *pBitMask = (SLFixData_t) 0;
 
-  for (i = 0; i < WordLength; i++) {                                // Set up the bit mask
+  for (SLArrayIndex_t i = 0; i < WordLength; i++) {                 // Set up the bit mask
     *pBitMask += (SLFixData_t) (0x1U << (SLUFixData_t) i);
   }
 
-  for (i = 0; i < SynchSequenceLength; i++) {                       // Clear the synch detector state array
+  for (SLArrayIndex_t i = 0; i < SynchSequenceLength; i++) {        // Clear the synch detector state array
     pDetectorState[i] = 0;
   }
 }                                                                   // End of SIF_DetectNumericalWordSequence()
@@ -661,16 +638,15 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_DetectNumericalWordSequence (
   SLFixData_t * SIGLIB_INOUT_PTR_DECL pDetectorState,
   SLArrayIndex_t SynchSequenceLength)
 {
-  SLArrayIndex_t  i;
-  SLFixData_t     SynchDetectedFlag = SIGLIB_TRUE;                  // Assume synch is detected - flag will be cleared if difference detected
-
-  for (i = 0; i < (SynchSequenceLength - 1); i++) {                 // Shift the data in the synch state array
+  for (SLArrayIndex_t i = 0; i < (SynchSequenceLength - 1); i++) {  // Shift the data in the synch state array
     pDetectorState[i] = pDetectorState[i + 1];
   }
 
   pDetectorState[SynchSequenceLength - 1] = (SLFixData_t) ((SLUFixData_t) InputWord & (SLUFixData_t) BitMask);  // Put input data into state array
 
-  for (i = 0; (i < SynchSequenceLength) && (SynchDetectedFlag == SIGLIB_TRUE); i++) { // Check to see if the data matches the synch sequence
+  SLFixData_t     SynchDetectedFlag = SIGLIB_TRUE;                  // Assume synch is detected - flag will be cleared if difference detected
+
+  for (SLArrayIndex_t i = 0; (i < SynchSequenceLength) && (SynchDetectedFlag == SIGLIB_TRUE); i++) {  // Check to see if the data matches the synch sequence
     if (pDetectorState[i] != pSynchSequence[i]) {
       SynchDetectedFlag = SIGLIB_FALSE;                             // There is a difference so we don't have synch
     }
@@ -703,12 +679,10 @@ void SIGLIB_FUNC_DECL SIF_DetectNumericalBitSequence (
   SLFixData_t * pDetectorState,
   SLArrayIndex_t SynchSequenceLength)
 {
-  SLArrayIndex_t  i;
-
   *pDetectorState = (SLFixData_t) 0;
   *pSynchSequenceBitMask = (SLFixData_t) 0;
 
-  for (i = 0; i < SynchSequenceLength; i++) {                       // Initialize the synch sequence bit mask
+  for (SLArrayIndex_t i = 0; i < SynchSequenceLength; i++) {        // Initialize the synch sequence bit mask
     *pSynchSequenceBitMask += (SLFixData_t) (0x1U << (SLUFixData_t) i);
   }
 }                                                                   // End of SIF_DetectNumericalBitSequence()
@@ -741,11 +715,10 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_DetectNumericalBitSequence (
   SLFixData_t * pDetectorState,
   SLArrayIndex_t InputWordLength)
 {
-  SLArrayIndex_t  i;
   SLArrayIndex_t  SynchDetectedFlag = SIGLIB_SEQUENCE_NOT_DETECTED; // Assume synch is NOT detected - flag will be set if synch detected
   SLFixData_t     LocalDetectorState = *pDetectorState;             // Local detector state
 
-  for (i = 0; i < InputWordLength; i++) {                           // Check to see if the data matches the synch sequence
+  for (SLArrayIndex_t i = 0; i < InputWordLength; i++) {            // Check to see if the data matches the synch sequence
     LocalDetectorState <<= 1;                                       // Shift state array data
     LocalDetectorState += (((SLUFixData_t) InputWord >> (SLUFixData_t) ((InputWordLength - i) - 1)) & 0x1U);  // Add in input bit
 
@@ -782,9 +755,7 @@ void SIGLIB_FUNC_DECL SIF_DetectCharacterSequence (
   SLChar_t * SIGLIB_OUTPUT_PTR_DECL pDetectorState,
   SLArrayIndex_t SynchSequenceLength)
 {
-  SLArrayIndex_t  i;
-
-  for (i = 0; i < SynchSequenceLength; i++) {                       // Clear the synchronization detector state array
+  for (SLArrayIndex_t i = 0; i < SynchSequenceLength; i++) {        // Clear the synchronization detector state array
     pDetectorState[i] = (SLChar_t) 0;
   }
 }                                                                   // End of SIF_DetectCharacterSequence()
@@ -816,16 +787,15 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_DetectCharacterSequence (
   SLChar_t * SIGLIB_INOUT_PTR_DECL pDetectorState,
   SLArrayIndex_t SynchSequenceLength)
 {
-  SLArrayIndex_t  i;
-  SLFixData_t     SynchDetectedFlag = SIGLIB_TRUE;                  // Assume synch is detected - flag will be cleared if difference detected
-
-  for (i = 0; i < (SynchSequenceLength - 1); i++) {                 // Shift the data in the synch state array
+  for (SLArrayIndex_t i = 0; i < (SynchSequenceLength - 1); i++) {  // Shift the data in the synch state array
     pDetectorState[i] = pDetectorState[i + 1];
   }
 
   pDetectorState[SynchSequenceLength - 1] = InputCharacter;         // Put input data into state array
 
-  for (i = 0; (i < SynchSequenceLength) && (SynchDetectedFlag == SIGLIB_TRUE); i++) { // Check to see if the data matches the EOP sequence
+  SLFixData_t     SynchDetectedFlag = SIGLIB_TRUE;                  // Assume synch is detected - flag will be cleared if difference detected
+
+  for (SLArrayIndex_t i = 0; (i < SynchSequenceLength) && (SynchDetectedFlag == SIGLIB_TRUE); i++) {  // Check to see if the data matches the EOP sequence
     if (pDetectorState[i] != pSynchSequence[i]) {
       SynchDetectedFlag = SIGLIB_FALSE;                             // There is a difference so we don't have EOP
     }
@@ -855,13 +825,10 @@ SLData_t SIGLIB_FUNC_DECL SDS_ErrorVector (
   const SLComplexRect_s IdealPoint,
   const SLComplexRect_s ReceivedPoint)
 {
-  SLData_t        ErrorVector_Real, ErrorVector_Imag;
-  SLData_t        ErrorVector;
+  SLData_t        ErrorVector_Real = IdealPoint.real - ReceivedPoint.real;
+  SLData_t        ErrorVector_Imag = IdealPoint.imag - ReceivedPoint.imag;
 
-  ErrorVector_Real = IdealPoint.real - ReceivedPoint.real;
-  ErrorVector_Imag = IdealPoint.imag - ReceivedPoint.imag;
-
-  ErrorVector = SDS_Sqrt ((ErrorVector_Real * ErrorVector_Real) + (ErrorVector_Imag * ErrorVector_Imag));
+  SLData_t        ErrorVector = SDS_Sqrt ((ErrorVector_Real * ErrorVector_Real) + (ErrorVector_Imag * ErrorVector_Imag));
 
   return (ErrorVector);
 }                                                                   // End of SDS_ErrorVector()
@@ -888,15 +855,13 @@ SLData_t SIGLIB_FUNC_DECL SDS_ErrorVectorMagnitudePercent (
   const SLComplexRect_s IdealPoint,
   const SLComplexRect_s ReceivedPoint)
 {
-  SLData_t        ErrorVector_Real, ErrorVector_Imag;
-  SLData_t        ErrorVector, ErrorVectorMagnitudePercent;
   SLData_t        IdealMagnitude = SDS_Sqrt ((IdealPoint.real * IdealPoint.real) + (IdealPoint.imag * IdealPoint.imag));
 
-  ErrorVector_Real = IdealPoint.real - ReceivedPoint.real;
-  ErrorVector_Imag = IdealPoint.imag - ReceivedPoint.imag;
+  SLData_t        ErrorVector_Real = IdealPoint.real - ReceivedPoint.real;
+  SLData_t        ErrorVector_Imag = IdealPoint.imag - ReceivedPoint.imag;
 
-  ErrorVector = SDS_Sqrt ((ErrorVector_Real * ErrorVector_Real) + (ErrorVector_Imag * ErrorVector_Imag));
-  ErrorVectorMagnitudePercent = SDS_Sqrt (ErrorVector / IdealMagnitude) * SIGLIB_ONE_HUNDRED;
+  SLData_t        ErrorVector = SDS_Sqrt ((ErrorVector_Real * ErrorVector_Real) + (ErrorVector_Imag * ErrorVector_Imag));
+  SLData_t        ErrorVectorMagnitudePercent = SDS_Sqrt (ErrorVector / IdealMagnitude) * SIGLIB_ONE_HUNDRED;
 
   return (ErrorVectorMagnitudePercent);
 }                                                                   // End of SDS_ErrorVectorMagnitudePercent()
@@ -923,14 +888,13 @@ SLData_t SIGLIB_FUNC_DECL SDS_ErrorVectorMagnitudeDecibels (
   const SLComplexRect_s IdealPoint,
   const SLComplexRect_s ReceivedPoint)
 {
-  SLData_t        ErrorVector_Real, ErrorVector_Imag;
-  SLData_t        ErrorVector, ErrorVectorMagnitudeDecibels;
+  SLData_t        ErrorVectorMagnitudeDecibels;
   SLData_t        IdealMagnitude = SDS_Sqrt ((IdealPoint.real * IdealPoint.real) + (IdealPoint.imag * IdealPoint.imag));
 
-  ErrorVector_Real = IdealPoint.real - ReceivedPoint.real;
-  ErrorVector_Imag = IdealPoint.imag - ReceivedPoint.imag;
+  SLData_t        ErrorVector_Real = IdealPoint.real - ReceivedPoint.real;
+  SLData_t        ErrorVector_Imag = IdealPoint.imag - ReceivedPoint.imag;
 
-  ErrorVector = SDS_Sqrt ((ErrorVector_Real * ErrorVector_Real) + (ErrorVector_Imag * ErrorVector_Imag));
+  SLData_t        ErrorVector = SDS_Sqrt ((ErrorVector_Real * ErrorVector_Real) + (ErrorVector_Imag * ErrorVector_Imag));
 
   if (ErrorVector <= SIGLIB_MIN) {
     ErrorVectorMagnitudeDecibels = SIGLIB_DB_MIN;
@@ -962,9 +926,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ReverseDiBits (
   const SLFixData_t Src)
 {
   static SLFixData_t ReverseTable[] = { 0, 2, 1, 3 };
-
   return (ReverseTable[Src]);
-
 }                                                                   // End of SDS_ReverseDiBits()
 
 
@@ -1003,7 +965,6 @@ void SIGLIB_FUNC_DECL SDS_QpskBitErrorCount (
   }
 
   *pBitCount += 2;
-
 }                                                                   // End of SDS_QpskBitErrorCount()
 
 
@@ -1028,5 +989,4 @@ SLData_t SIGLIB_FUNC_DECL SDS_BitErrorRate (
   const SLFixData_t BitErrorCount)
 {
   return (((SLData_t) BitErrorCount) / ((SLData_t) BitCount));
-
 }                                                                   // End of SDS_BitErrorRate()

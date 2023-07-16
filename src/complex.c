@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : COMPLEX.C     | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 03/07/1994
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Complex number routines for SigLib DSP library.
 
@@ -68,7 +68,6 @@ SLComplexPolar_s SIGLIB_FUNC_DECL SCV_Polar (
   Polar.angle = IA;
 
   return (Polar);
-
 }                                                                   // End of SCV_Polar()
 
 
@@ -98,7 +97,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Rectangular (
   Rect.imag = II;
 
   return (Rect);
-
 }                                                                   // End of SCV_Rectangular()
 
 
@@ -126,7 +124,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_PolarToRectangular (
   Rect.imag = Polar.magn * SDS_Sin (Polar.angle);
 
   return (Rect);
-
 }                                                                   // End of SCV_PolarToRectangular()
 
 
@@ -161,7 +158,6 @@ SLComplexPolar_s SIGLIB_FUNC_DECL SCV_RectangularToPolar (
   }
 
   return (Polar);
-
 }                                                                   // End of SCV_RectangularToPolar()
 
 
@@ -193,7 +189,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Sqrt (
   OVect.angle = SIGLIB_HALF * OVect.angle;
 
   return (SCV_PolarToRectangular (OVect));
-
 }                                                                   // End of SCV_Sqrt()
 
 
@@ -230,7 +225,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Inverse (
   }
 
   return (Result);
-
 }                                                                   // End of SCV_Inverse()
 
 
@@ -259,7 +253,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Conjugate (
   OVectVect.imag *= SIGLIB_MINUS_ONE;
 
   return (OVectVect);
-
 }                                                                   // End of SCV_Conjugate()
 
 
@@ -283,7 +276,6 @@ SLData_t SIGLIB_FUNC_DECL SCV_Magnitude (
   const SLComplexRect_s IVect)
 {
   return (SDS_Sqrt (IVect.real * IVect.real + IVect.imag * IVect.imag));
-
 }                                                                   // End of SCV_Magnitude()
 
 
@@ -307,7 +299,6 @@ SLData_t SIGLIB_FUNC_DECL SCV_MagnitudeSquared (
   const SLComplexRect_s IVect)
 {
   return (IVect.real * IVect.real + IVect.imag * IVect.imag);
-
 }                                                                   // End of SCV_MagnitudeSquared()
 
 
@@ -331,7 +322,6 @@ SLData_t SIGLIB_FUNC_DECL SCV_Phase (
   const SLComplexRect_s IVect)
 {
   return (SDS_Atan2 (IVect.imag, IVect.real));
-
 }                                                                   // End of SCV_Phase()
 
 
@@ -361,7 +351,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Multiply (
   OVect.imag = IVect1.real * IVect2.imag + IVect1.imag * IVect2.real;
 
   return (OVect);
-
 }                                                                   // End of SCV_Multiply()
 
 
@@ -405,7 +394,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Divide (
   }
 
   return (Result);
-
 }                                                                   // End of SCV_Divide()
 
 
@@ -435,7 +423,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Add (
   OVect.imag = IVect1.imag + IVect2.imag;
 
   return (OVect);
-
 }                                                                   // End of SCV_Add()
 
 
@@ -465,7 +452,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Subtract (
   OVect.imag = IVect1.imag - IVect2.imag;
 
   return (OVect);
-
 }                                                                   // End of SCV_Subtract()
 
 
@@ -493,7 +479,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Log (
   OVect.imag = SDS_Atan2 (IVect.imag, IVect.real);
 
   return (OVect);
-
 }                                                                   // End of SCV_Log()
 
 
@@ -546,7 +531,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Expj (
 {
 
   return SCV_Rectangular (SDS_Cos (Theta), SDS_Sin (Theta));
-
 }                                                                   // End of SCV_Expj()
 
 
@@ -588,7 +572,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Pow (
   OVect.imag = Magn * SDS_Sin (Power * Angle);
 
   return (OVect);
-
 }                                                                   // End of SCV_Pow()
 
 
@@ -619,7 +602,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorAddScalar (
   OVect.imag = IVect.imag;
 
   return (OVect);
-
 }                                                                   // End of SCV_VectorAddScalar()
 
 
@@ -650,7 +632,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorSubtractScalar (
   OVect.imag = IVect.imag;
 
   return (OVect);
-
 }                                                                   // End of SCV_VectorSubtractScalar()
 
 
@@ -681,7 +662,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorMultiplyScalar (
   OVect.imag = IVect.imag * Scalar;
 
   return (OVect);
-
 }                                                                   // End of SCV_VectorMultiplyScalar()
 
 
@@ -712,7 +692,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorDivideScalar (
   OVect.imag = IVect.imag / Scalar;
 
   return (OVect);
-
 }                                                                   // End of SCV_VectorDivideScalar()
 
 
@@ -743,7 +722,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_ScalarSubtractVector (
   OVect.imag = -IVect.imag;
 
   return (OVect);
-
 }                                                                   // End of SCV_ScalarSubtractVector()
 
 
@@ -781,7 +759,6 @@ void SIGLIB_FUNC_DECL SCV_Roots (
   *Root2 = SCV_Divide (SCV_Subtract (SCV_VectorMultiplyScalar (b, -1.0),
                                      SCV_Sqrt (SCV_Subtract (SCV_Multiply (b, b), SCV_VectorMultiplyScalar (SCV_Multiply (a, c), SIGLIB_FOUR)))),
                        SCV_VectorMultiplyScalar (a, SIGLIB_TWO));
-
 }                                                                   // End of SCV_Roots()
 
 
@@ -804,7 +781,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Copy (
   const SLComplexRect_s IVect)
 {
   return (IVect);
-
 }                                                                   // End of SCV_Copy()
 
 
@@ -835,5 +811,4 @@ enum SLCompareType_t SIGLIB_FUNC_DECL SCV_Compare (
   }
 
   return (SIGLIB_NOT_EQUAL);
-
 }                                                                   // End of SCV_Compare()

@@ -1,5 +1,5 @@
 // PRBS Scrambler
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -17,13 +17,11 @@ static SLFixData_t TxBitInversionFlag, RxBitInversionFlag;
 int main (
   void)
 {
-  SLFixData_t     i, Tmp;
-
   TxShiftRegister = 0;                                              // Clear shift registers
   RxShiftRegister = 0;
-  for (i = 0; i < 70; i++) {
-    Tmp = SDS_Scrambler1417 (TxString[i],                           // Source character
-                             &TxShiftRegister);                     // Shift register
+  for (SLArrayIndex_t i = 0; i < 70; i++) {
+    SLFixData_t     Tmp = SDS_Scrambler1417 (TxString[i],           // Source character
+                                             &TxShiftRegister);     // Shift register
     RxString[i] = (char) SDS_Descrambler1417 (Tmp,                  // Source character
                                               &RxShiftRegister);    // Shift register
   }
@@ -37,11 +35,11 @@ int main (
   RxOnesBitCount = 0;
   TxBitInversionFlag = 0;                                           // Clear bit inversion flags
   RxBitInversionFlag = 0;
-  for (i = 0; i < 70; i++) {
-    Tmp = SDS_Scrambler1417WithInversion (TxString[i],              // Source character
-                                          &TxShiftRegister,         // Shift register
-                                          &TxOnesBitCount,          // Ones bit counter
-                                          &TxBitInversionFlag);     // Bit inversion flag
+  for (SLArrayIndex_t i = 0; i < 70; i++) {
+    SLFixData_t     Tmp = SDS_Scrambler1417WithInversion (TxString[i],  // Source character
+                                                          &TxShiftRegister, // Shift register
+                                                          &TxOnesBitCount,  // Ones bit counter
+                                                          &TxBitInversionFlag); // Bit inversion flag
     RxString[i] = (char) SDS_Descrambler1417WithInversion (Tmp,     // Source character
                                                            &RxShiftRegister,  // Shift register
                                                            &RxOnesBitCount, // Ones bit counter
@@ -53,9 +51,9 @@ int main (
 
   TxShiftRegister = 0;                                              // Clear shift registers
   RxShiftRegister = 0;
-  for (i = 0; i < 70; i++) {
-    Tmp = SDS_Scrambler1823 (TxString[i],                           // Source character
-                             &TxShiftRegister);                     // Shift register
+  for (SLArrayIndex_t i = 0; i < 70; i++) {
+    SLFixData_t     Tmp = SDS_Scrambler1823 (TxString[i],           // Source character
+                                             &TxShiftRegister);     // Shift register
     RxString[i] = (char) SDS_Descrambler1823 (Tmp,                  // Source character
                                               &RxShiftRegister);    // Shift register
   }
@@ -65,9 +63,9 @@ int main (
 
   TxShiftRegister = 0;                                              // Clear shift registers
   RxShiftRegister = 0;
-  for (i = 0; i < 70; i++) {
-    Tmp = SDS_Scrambler523 (TxString[i],                            // Source character
-                            &TxShiftRegister);                      // Shift register
+  for (SLArrayIndex_t i = 0; i < 70; i++) {
+    SLFixData_t     Tmp = SDS_Scrambler523 (TxString[i],            // Source character
+                                            &TxShiftRegister);      // Shift register
     RxString[i] = (char) SDS_Descrambler523 (Tmp,                   // Source character
                                              &RxShiftRegister);     // Shift register
   }

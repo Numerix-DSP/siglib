@@ -18,11 +18,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2022, Alpha Numerix, All rights reserved.
+Copyright (c) 2022, Delta Numerix, All rights reserved.
 ****************************************************************************/
 
 // Include files
@@ -687,7 +687,6 @@ void PoleZeroPlot::Draw (
   wxDC & GraphPaintDC,
   bool WXUNUSED   (draw_bitmaps))
 {
-  int i;
   double XPos, YPos;
 
 // wxMessageBox (_T("Got here - Start"), _T("PoleZeroPlot::Draw"), wxOK | wxICON_EXCLAMATION, NULL);
@@ -716,7 +715,7 @@ void PoleZeroPlot::Draw (
   {
     switch (PlotType) {
       case PZ_COMPLEX_POLE_ZERO:
-        for (i = 0; i < DataSetSize; i++) {
+        for (int i = 0; i < DataSetSize; i++) {
           GraphPaintDC.SetPen (*wxRED_PEN);
 
           XPos = pDataSet[(2 * i) + 0].real;
@@ -739,7 +738,7 @@ void PoleZeroPlot::Draw (
         }
         break;
       case PZ_CONJUGATE_POLE_ZERO:
-        for (i = 0; i < DataSetSize; i++) {
+        for (int i = 0; i < DataSetSize; i++) {
 
           GraphPaintDC.SetPen (*wxRED_PEN);
 
@@ -772,7 +771,7 @@ void PoleZeroPlot::Draw (
         }
         break;
       case PZ_COMPLEX_ZERO:
-        for (i = 0; i < DataSetSize; i++) {
+        for (int i = 0; i < DataSetSize; i++) {
           GraphPaintDC.SetPen (*wxBLUE_PEN);
           GraphPaintDC.SetBrush (*wxTRANSPARENT_BRUSH);
 
@@ -784,7 +783,7 @@ void PoleZeroPlot::Draw (
         }
         break;
       case PZ_CONJUGATE_ZERO:
-        for (i = 0; i < DataSetSize; i++) {
+        for (int i = 0; i < DataSetSize; i++) {
           GraphPaintDC.SetPen (*wxBLUE_PEN);
           GraphPaintDC.SetBrush (*wxTRANSPARENT_BRUSH);
 
@@ -799,7 +798,7 @@ void PoleZeroPlot::Draw (
         }
         break;
       case PZ_COMPLEX_POLE:
-        for (i = 0; i < DataSetSize; i++) {
+        for (int i = 0; i < DataSetSize; i++) {
           GraphPaintDC.SetPen (*wxRED_PEN);
 
           XPos = pDataSet[i].real;
@@ -813,7 +812,7 @@ void PoleZeroPlot::Draw (
         }
         break;
       case PZ_CONJUGATE_POLE:
-        for (i = 0; i < DataSetSize; i++) {
+        for (int i = 0; i < DataSetSize; i++) {
           GraphPaintDC.SetPen (*wxRED_PEN);
 
           XPos = pDataSet[i].real;

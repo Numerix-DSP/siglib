@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : CORRELATE.C   | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 13/09/1992
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Correlation routines for SigLib DSP library.
 
@@ -40,7 +40,6 @@ Description : Correlation routines for SigLib DSP library.
 #define SIGLIB_SRC_FILE_CORRELAT    1                               // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
 
 /**/
 
@@ -74,11 +73,6 @@ void SIGLIB_FUNC_DECL SDA_CorrelateLinear (
   const SLArrayIndex_t Length2,
   const SLArrayIndex_t NumCorr)
 {
-  SLArrayIndex_t  i, j, Diff;
-  SLData_t        SumProd;
-  const SLData_t *p_Shortest, *p_Longest;
-  SLArrayIndex_t  LenShortest, LenLongest;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -88,12 +82,12 @@ void SIGLIB_FUNC_DECL SDA_CorrelateLinear (
 #endif
 
   if (Length1 <= Length2) {                                         // Calculate which is shortest and which is longest array
-    p_Shortest = pSrc1;
-    p_Longest = pSrc2;
-    LenShortest = Length1;
-    LenLongest = Length2;
+    const SLData_t *p_Shortest = pSrc1;
+    const SLData_t *p_Longest = pSrc2;
+    SLArrayIndex_t  LenShortest = Length1;
+    SLArrayIndex_t  LenLongest = Length2;
 
-    Diff = LenLongest - LenShortest;                                // Calculate difference in lengths
+    SLArrayIndex_t  Diff = LenLongest - LenShortest;                // Calculate difference in lengths
 
 // Initial correlation  - starting with an overlap of 1
 // Do this for the difference in length between the two arrays,
@@ -101,37 +95,37 @@ void SIGLIB_FUNC_DECL SDA_CorrelateLinear (
 // Otherwise just do it for the number of correlations.
     *pDst++ = *(p_Shortest + LenShortest - 1) * *p_Longest;         // Calculate very first result
 
-    for (i = 1; (i < LenShortest) && (i < NumCorr); i++) {          // First overlap stage
-      SumProd = p_Shortest[LenShortest - 1 - i] * p_Longest[0];
-      for (j = 1; j <= i; j++) {
+    for (SLArrayIndex_t i = 1; (i < LenShortest) && (i < NumCorr); i++) { // First overlap stage
+      SLData_t        SumProd = p_Shortest[LenShortest - 1 - i] * p_Longest[0];
+      for (SLArrayIndex_t j = 1; j <= i; j++) {
         SumProd += p_Shortest[LenShortest - 1 - i + j] * p_Longest[j];
       }
       *pDst++ = SumProd;
     }
 
-    for (i = 0; (i < Diff) && (LenShortest + i < NumCorr); i++) {   // Middle overlap stage
-      SumProd = p_Shortest[0] * p_Longest[i + 1];
-      for (j = 1; j < LenShortest; j++) {
+    for (SLArrayIndex_t i = 0; (i < Diff) && (LenShortest + i < NumCorr); i++) {  // Middle overlap stage
+      SLData_t        SumProd = p_Shortest[0] * p_Longest[i + 1];
+      for (SLArrayIndex_t j = 1; j < LenShortest; j++) {
         SumProd += p_Shortest[j] * p_Longest[i + 1 + j];
       }
       *pDst++ = SumProd;
     }
 
-    for (i = 0; (i < (LenShortest - 1)) && (LenShortest + Diff + i < NumCorr); i++) { // Final overlap stage
-      SumProd = p_Shortest[0] * p_Longest[Diff + 1 + i];
-      for (j = 1; j < (LenShortest - 1 - i); j++) {
+    for (SLArrayIndex_t i = 0; (i < (LenShortest - 1)) && (LenShortest + Diff + i < NumCorr); i++) {  // Final overlap stage
+      SLData_t        SumProd = p_Shortest[0] * p_Longest[Diff + 1 + i];
+      for (SLArrayIndex_t j = 1; j < (LenShortest - 1 - i); j++) {
         SumProd += p_Shortest[j] * p_Longest[Diff + 1 + i + j];
       }
       *pDst++ = SumProd;
     }
   }
   else {
-    p_Shortest = pSrc2;
-    p_Longest = pSrc1;
-    LenShortest = Length2;
-    LenLongest = Length1;
+    const SLData_t *p_Shortest = pSrc2;
+    const SLData_t *p_Longest = pSrc1;
+    SLArrayIndex_t  LenShortest = Length2;
+    SLArrayIndex_t  LenLongest = Length1;
 
-    Diff = LenLongest - LenShortest;                                // Calculate difference in lengths
+    SLArrayIndex_t  Diff = LenLongest - LenShortest;                // Calculate difference in lengths
 
 // Initial correlation  - starting with an overlap of 1
 // Do this for the difference in length between the two arrays,
@@ -139,25 +133,25 @@ void SIGLIB_FUNC_DECL SDA_CorrelateLinear (
 // Otherwise just do it for the number of correlations.
     *pDst++ = *(p_Longest + LenLongest - 1) * *p_Shortest;          // Calculate very first result
 
-    for (i = 1; (i < LenShortest) && (i < NumCorr); i++) {          // First overlap stage
-      SumProd = p_Shortest[0] * p_Longest[LenLongest - 1 - i];
-      for (j = 1; j <= i; j++) {
+    for (SLArrayIndex_t i = 1; (i < LenShortest) && (i < NumCorr); i++) { // First overlap stage
+      SLData_t        SumProd = p_Shortest[0] * p_Longest[LenLongest - 1 - i];
+      for (SLArrayIndex_t j = 1; j <= i; j++) {
         SumProd += p_Shortest[j] * p_Longest[LenLongest - 1 - i + j];
       }
       *pDst++ = SumProd;
     }
 
-    for (i = 0; (i < Diff) && (LenShortest + i < NumCorr); i++) {   // Middle overlap stage
-      SumProd = p_Shortest[0] * p_Longest[LenLongest - LenShortest - 1 - i];
-      for (j = 1; j < LenShortest; j++) {
+    for (SLArrayIndex_t i = 0; (i < Diff) && (LenShortest + i < NumCorr); i++) {  // Middle overlap stage
+      SLData_t        SumProd = p_Shortest[0] * p_Longest[LenLongest - LenShortest - 1 - i];
+      for (SLArrayIndex_t j = 1; j < LenShortest; j++) {
         SumProd += p_Shortest[j] * p_Longest[LenLongest - LenShortest - 1 - i + j];
       }
       *pDst++ = SumProd;
     }
 
-    for (i = 0; (i < (LenShortest - 1)) && (LenShortest + Diff + i < NumCorr); i++) { // Final overlap stage
-      SumProd = p_Shortest[i + 1] * p_Longest[0];
-      for (j = 1; j < (LenShortest - i - 1); j++) {
+    for (SLArrayIndex_t i = 0; (i < (LenShortest - 1)) && (LenShortest + Diff + i < NumCorr); i++) {  // Final overlap stage
+      SLData_t        SumProd = p_Shortest[i + 1] * p_Longest[0];
+      for (SLArrayIndex_t j = 1; j < (LenShortest - i - 1); j++) {
         SumProd += p_Shortest[i + 1 + j] * p_Longest[j];
       }
       *pDst++ = SumProd;
@@ -198,9 +192,6 @@ void SIGLIB_FUNC_DECL SDA_CorrelatePartial (
   const SLArrayIndex_t Length1,
   const SLArrayIndex_t Length2)
 {
-  SLArrayIndex_t  i, j;
-  SLData_t        SumProd;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -212,9 +203,9 @@ void SIGLIB_FUNC_DECL SDA_CorrelatePartial (
   if (Length2 > Length1) {                                          // Calculate which is shortest and which is longest array
     pSrc2 += Length2 - Length1;
 
-    for (i = 0; i < Length2 - Length1 + 1; i++) {
-      SumProd = pSrc1[0] * pSrc2[0];
-      for (j = 1; j < Length1; j++) {                               // Calculate for length of shortest array
+    for (SLArrayIndex_t i = 0; i < Length2 - Length1 + 1; i++) {
+      SLData_t        SumProd = pSrc1[0] * pSrc2[0];
+      for (SLArrayIndex_t j = 1; j < Length1; j++) {                // Calculate for length of shortest array
         SumProd += pSrc1[j] * pSrc2[j];
       }
       pSrc2--;
@@ -222,9 +213,9 @@ void SIGLIB_FUNC_DECL SDA_CorrelatePartial (
     }
   }
   else {                                                            // Length1 >= Length2
-    for (i = 0; i < Length1 - Length2 + 1; i++) {
-      SumProd = pSrc1[0] * pSrc2[0];
-      for (j = 1; j < Length2; j++) {                               // Calculate for length of shortest array
+    for (SLArrayIndex_t i = 0; i < Length1 - Length2 + 1; i++) {
+      SLData_t        SumProd = pSrc1[0] * pSrc2[0];
+      for (SLArrayIndex_t j = 1; j < Length2; j++) {                // Calculate for length of shortest array
         SumProd += pSrc1[j] * pSrc2[j];
       }
       pSrc1++;
@@ -262,11 +253,6 @@ void SIGLIB_FUNC_DECL SDA_CorrelateCircular (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i, j;
-  SLArrayIndex_t  ao = 0;                                           // a offset
-  SLArrayIndex_t  bo = 1;                                           // b offset
-  SLData_t        SumProd;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -275,12 +261,15 @@ void SIGLIB_FUNC_DECL SDA_CorrelateCircular (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
-    SumProd = pSrc1[ao] * pSrc2[0];
+  SLArrayIndex_t  ao = 0;                                           // a offset
+  SLArrayIndex_t  bo = 1;                                           // b offset
+
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+    SLData_t        SumProd = pSrc1[ao] * pSrc2[0];
     ao++;                                                           // Increment a offset
     ao %= SampleLength;                                             // Circular array
 
-    for (j = 1; j < SampleLength; j++) {
+    for (SLArrayIndex_t j = 1; j < SampleLength; j++) {
       SumProd += pSrc1[ao] * pSrc2[bo];
       ao++;                                                         // Increment a offset
       ao %= SampleLength;                                           // Circular array
@@ -330,9 +319,6 @@ void SIGLIB_FUNC_DECL SDA_Covariance (
   const SLArrayIndex_t Length2,
   const SLArrayIndex_t NumCorr)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Sum, Src1Mean, Src2Mean;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -341,29 +327,27 @@ void SIGLIB_FUNC_DECL SDA_Covariance (
 #endif
 #endif
 
-  Sum = *pSrc1;                                                     // Calculate means
-  for (i = 1; i < Length1; i++) {
+  SLData_t        Sum = *pSrc1;                                     // Calculate means
+  for (SLArrayIndex_t i = 1; i < Length1; i++) {
     Sum += *(pSrc1 + i);
   }
-  Src1Mean = Sum * InverseLength1;
+  SLData_t        Src1Mean = Sum * InverseLength1;
 
   Sum = *pSrc2;
-  for (i = 1; i < Length2; i++) {
+  for (SLArrayIndex_t i = 1; i < Length2; i++) {
     Sum += *(pSrc2 + i);
   }
-  Src2Mean = Sum * InverseLength2;
+  SLData_t        Src2Mean = Sum * InverseLength2;
 
-
-  for (i = 0; i < Length1; i++) {                                   // Remove means from data
+  for (SLArrayIndex_t i = 0; i < Length1; i++) {                    // Remove means from data
     *(pSrc1 + i) -= Src1Mean;
   }
 
-  for (i = 0; i < Length2; i++) {
+  for (SLArrayIndex_t i = 0; i < Length2; i++) {
     *(pSrc2 + i) -= Src2Mean;
   }
 
   SDA_CorrelateLinear (pSrc1, pSrc2, pDst, Length1, Length2, NumCorr);
-
 }                                                                   // End of SDA_Covariance()
 
 
@@ -400,9 +384,6 @@ void SIGLIB_FUNC_DECL SDA_CovariancePartial (
   const SLArrayIndex_t Length1,
   const SLArrayIndex_t Length2)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Sum, Src1Mean, Src2Mean;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -411,24 +392,23 @@ void SIGLIB_FUNC_DECL SDA_CovariancePartial (
 #endif
 #endif
 
-  Sum = *pSrc1;                                                     // Calculate means
-  for (i = 1; i < Length1; i++) {
+  SLData_t        Sum = *pSrc1;                                     // Calculate means
+  for (SLArrayIndex_t i = 1; i < Length1; i++) {
     Sum += *(pSrc1 + i);
   }
-  Src1Mean = Sum * InverseLength1;
+  SLData_t        Src1Mean = Sum * InverseLength1;
 
   Sum = *pSrc2;
-  for (i = 1; i < Length2; i++) {
+  for (SLArrayIndex_t i = 1; i < Length2; i++) {
     Sum += *(pSrc2 + i);
   }
-  Src2Mean = Sum * InverseLength2;
+  SLData_t        Src2Mean = Sum * InverseLength2;
 
-
-  for (i = 0; i < Length1; i++) {                                   // Remove means from data
+  for (SLArrayIndex_t i = 0; i < Length1; i++) {                    // Remove means from data
     *(pSrc1 + i) -= Src1Mean;
   }
 
-  for (i = 0; i < Length2; i++) {
+  for (SLArrayIndex_t i = 0; i < Length2; i++) {
     *(pSrc2 + i) -= Src2Mean;
   }
 
@@ -474,8 +454,13 @@ void SIGLIB_FUNC_DECL SDA_CorrelateLinearReturnPeak (
   const SLArrayIndex_t Length2,
   const SLArrayIndex_t NumCorr)
 {
-  SLArrayIndex_t  i, j, Diff;
-  SLData_t        SumProd;
+#if (SIGLIB_ARRAYS_ALIGNED)
+#ifdef _TMS320C6700                                                 // Defined by TI compiler
+  _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pSrc2 % 8 == 0);
+#endif
+#endif
+
   const SLData_t *p_Shortest, *p_Longest;
   SLArrayIndex_t  LenShortest, LenLongest;
 
@@ -484,27 +469,19 @@ void SIGLIB_FUNC_DECL SDA_CorrelateLinearReturnPeak (
   SLArrayIndex_t  peakIndex = 0;
   SLArrayIndex_t  currentIndex = 0;
 
-
-#if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                                                 // Defined by TI compiler
-  _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
-  _nassert ((int) pSrc2 % 8 == 0);
-#endif
-#endif
-
   if (Length1 <= Length2) {                                         // Calculate which is shortest and which is longest array
     p_Shortest = pSrc1;
     p_Longest = pSrc2;
     LenShortest = Length1;
     LenLongest = Length2;
 
-    Diff = LenLongest - LenShortest;                                // Calculate difference in lengths
+    SLArrayIndex_t  Diff = LenLongest - LenShortest;                // Calculate difference in lengths
 
 // Initial correlation  - starting with an overlap of 1
 // Do this for the difference in length between the two arrays,
 // as long as this is less than the number of correlations.
 // Otherwise just do it for the number of correlations.
-    SumProd = *(p_Shortest + LenShortest - 1) * *p_Longest;         // Calculate very first result
+    SLData_t        SumProd = *(p_Shortest + LenShortest - 1) * *p_Longest; // Calculate very first result
     if (SumProd >= 0) {
       if (SumProd > absPeakMagn) {
         absPeakMagn = SumProd;
@@ -521,9 +498,9 @@ void SIGLIB_FUNC_DECL SDA_CorrelateLinearReturnPeak (
     }
     currentIndex++;
 
-    for (i = 1; (i < LenShortest) && (i < NumCorr); i++) {          // First overlap stage
+    for (SLArrayIndex_t i = 1; (i < LenShortest) && (i < NumCorr); i++) { // First overlap stage
       SumProd = p_Shortest[LenShortest - 1 - i] * p_Longest[0];
-      for (j = 1; j <= i; j++) {
+      for (SLArrayIndex_t j = 1; j <= i; j++) {
         SumProd += p_Shortest[LenShortest - 1 - i + j] * p_Longest[j];
       }
       if (SumProd >= 0) {
@@ -543,9 +520,9 @@ void SIGLIB_FUNC_DECL SDA_CorrelateLinearReturnPeak (
       currentIndex++;
     }
 
-    for (i = 0; (i < Diff) && (LenShortest + i < NumCorr); i++) {   // Middle overlap stage
+    for (SLArrayIndex_t i = 0; (i < Diff) && (LenShortest + i < NumCorr); i++) {  // Middle overlap stage
       SumProd = p_Shortest[0] * p_Longest[i + 1];
-      for (j = 1; j < LenShortest; j++) {
+      for (SLArrayIndex_t j = 1; j < LenShortest; j++) {
         SumProd += p_Shortest[j] * p_Longest[i + 1 + j];
       }
       if (SumProd >= 0) {
@@ -565,9 +542,9 @@ void SIGLIB_FUNC_DECL SDA_CorrelateLinearReturnPeak (
       currentIndex++;
     }
 
-    for (i = 0; (i < (LenShortest - 1)) && (LenShortest + Diff + i < NumCorr); i++) { // Final overlap stage
+    for (SLArrayIndex_t i = 0; (i < (LenShortest - 1)) && (LenShortest + Diff + i < NumCorr); i++) {  // Final overlap stage
       SumProd = p_Shortest[0] * p_Longest[Diff + 1 + i];
-      for (j = 1; j < (LenShortest - 1 - i); j++) {
+      for (SLArrayIndex_t j = 1; j < (LenShortest - 1 - i); j++) {
         SumProd += p_Shortest[j] * p_Longest[Diff + 1 + i + j];
       }
       if (SumProd >= 0) {
@@ -593,13 +570,13 @@ void SIGLIB_FUNC_DECL SDA_CorrelateLinearReturnPeak (
     LenShortest = Length2;
     LenLongest = Length1;
 
-    Diff = LenLongest - LenShortest;                                // Calculate difference in lengths
+    SLArrayIndex_t  Diff = LenLongest - LenShortest;                // Calculate difference in lengths
 
 // Initial correlation  - starting with an overlap of 1
 // Do this for the difference in length between the two arrays,
 // as long as this is less than the number of correlations.
 // Otherwise just do it for the number of correlations.
-    SumProd = *(p_Longest + LenLongest - 1) * *p_Shortest;          // Calculate very first result
+    SLData_t        SumProd = *(p_Longest + LenLongest - 1) * *p_Shortest;  // Calculate very first result
     if (SumProd >= 0) {
       if (SumProd > absPeakMagn) {
         absPeakMagn = SumProd;
@@ -616,9 +593,9 @@ void SIGLIB_FUNC_DECL SDA_CorrelateLinearReturnPeak (
     }
     currentIndex++;
 
-    for (i = 1; (i < LenShortest) && (i < NumCorr); i++) {          // First overlap stage
+    for (SLArrayIndex_t i = 1; (i < LenShortest) && (i < NumCorr); i++) { // First overlap stage
       SumProd = p_Shortest[0] * p_Longest[LenLongest - 1 - i];
-      for (j = 1; j <= i; j++) {
+      for (SLArrayIndex_t j = 1; j <= i; j++) {
         SumProd += p_Shortest[j] * p_Longest[LenLongest - 1 - i + j];
       }
       if (SumProd >= 0) {
@@ -638,9 +615,9 @@ void SIGLIB_FUNC_DECL SDA_CorrelateLinearReturnPeak (
       currentIndex++;
     }
 
-    for (i = 0; (i < Diff) && (LenShortest + i < NumCorr); i++) {   // Middle overlap stage
+    for (SLArrayIndex_t i = 0; (i < Diff) && (LenShortest + i < NumCorr); i++) {  // Middle overlap stage
       SumProd = p_Shortest[0] * p_Longest[LenLongest - LenShortest - 1 - i];
-      for (j = 1; j < LenShortest; j++) {
+      for (SLArrayIndex_t j = 1; j < LenShortest; j++) {
         SumProd += p_Shortest[j] * p_Longest[LenLongest - LenShortest - 1 - i + j];
       }
       if (SumProd >= 0) {
@@ -660,9 +637,9 @@ void SIGLIB_FUNC_DECL SDA_CorrelateLinearReturnPeak (
       currentIndex++;
     }
 
-    for (i = 0; (i < (LenShortest - 1)) && (LenShortest + Diff + i < NumCorr); i++) { // Final overlap stage
+    for (SLArrayIndex_t i = 0; (i < (LenShortest - 1)) && (LenShortest + Diff + i < NumCorr); i++) {  // Final overlap stage
       SumProd = p_Shortest[i + 1] * p_Longest[0];
-      for (j = 1; j < (LenShortest - i - 1); j++) {
+      for (SLArrayIndex_t j = 1; j < (LenShortest - i - 1); j++) {
         SumProd += p_Shortest[i + 1 + j] * p_Longest[j];
       }
       if (SumProd >= 0) {

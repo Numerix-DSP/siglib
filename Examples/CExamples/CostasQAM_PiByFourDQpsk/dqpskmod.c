@@ -3,7 +3,7 @@
 //     Baud rate - 1200 Baud
 //     Sample rate - 48000 Hz
 //     Carrier freq. - 1800 Hz
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -23,7 +23,7 @@
 // #define SAMPLE_LENGTH                   512                 // Number of samples in array
 #define SAMPLE_LENGTH                   480                         // Number of samples in array
 
-#define SAMPLE_RATE                     48000.                      // Sample rate
+#define SAMPLE_RATE_HZ                  48000.                      // Sample rate
 #define SYMBOL_RATE                     1200.                       // Symbol rate
 #define CARRIER_TABLE_FREQ              100.                        // Frequency of sine wave in table
 #define CARRIER_FREQ                    1800.                       // Frequency of carrier signal - a multiple of the sine table frequency
@@ -31,7 +31,7 @@
 #define NOISE_LENGTH                    ((SAMPLE_LENGTH * 15) + 100)  // Length of the noise sections
 
 #if RRCF_ENABLE
-#define RRCF_PERIOD                     (SAMPLE_RATE / SYMBOL_RATE) // RRCF Period
+#define RRCF_PERIOD                     (SAMPLE_RATE_HZ / SYMBOL_RATE)  // RRCF Period
 #define RRCF_ROLL_OFF                   0.75                        // Root raised cosine filter roll off factor
 #define RRCF_LENGTH                     ((3 * SYMBOL_LENGTH) | 0x01)  // Root raised cosine filter length
 #else
@@ -48,10 +48,10 @@
 
 
             // Derived application definitions
-#define SYMBOL_LENGTH                   40                          //((SLArrayIndex_t)(SAMPLE_RATE / SYMBOL_RATE))           // Number of samples per symbol
+#define SYMBOL_LENGTH                   40                          //((SLArrayIndex_t)(SAMPLE_RATE_HZ / SYMBOL_RATE))           // Number of samples per symbol
 #define SYMBOLS_PER_LOOP                12                          //((SLArrayIndex_t)(SAMPLE_LENGTH / SYMBOL_LENGTH))       // Number of symbols per loop for graph
 
-#define CARRIER_SINE_TABLE_SIZE         480                         //((SLArrayIndex_t)(SAMPLE_RATE / CARRIER_TABLE_FREQ))    // Number of samples in each of cos and sine table
+#define CARRIER_SINE_TABLE_SIZE         480                         //((SLArrayIndex_t)(SAMPLE_RATE_HZ / CARRIER_TABLE_FREQ))    // Number of samples in each of cos and sine table
 #define CARRIER_TABLE_INCREMENT         18                          //((SLArrayIndex_t)(CARRIER_FREQ / CARRIER_TABLE_FREQ))   // Carrier frequency
 
 // Declare global variables and arrays
@@ -122,7 +122,7 @@ int main (
 
 // Initialise QPSK functions
   SIF_PiByFourDQpskModulate (pCarrierTable,                         // Carrier table pointer
-                             CARRIER_TABLE_FREQ / SAMPLE_RATE,      // Carrier phase increment per sample (radians / 2π)
+                             CARRIER_TABLE_FREQ / SAMPLE_RATE_HZ,   // Carrier phase increment per sample (radians / 2π)
                              CARRIER_SINE_TABLE_SIZE,               // Carrier sine table size
                              &TxCarrierPhase,                       // Carrier phase pointer
                              &TxSampleClock,                        // Sample clock pointer
@@ -147,7 +147,7 @@ int main (
     exit (-1);
   }
 
-  wavInfo = SUF_WavSetInfo ((int) SAMPLE_RATE, 0, (short) 1, (short) 16, (short) 2, (short) 1);
+  wavInfo = SUF_WavSetInfo ((int) SAMPLE_RATE_HZ, 0, (short) 1, (short) 16, (short) 2, (short) 1);
   SUF_WavWriteHeader (fpo, wavInfo);                                // Write the header information
 
   GaussianNoisePhase = SIGLIB_ZERO;
@@ -271,9 +271,7 @@ int main (
 void inject_noise (
   FILE * fpo)
 {
-  int             j;
-
-  for (j = 0; j < 15; j++) {
+  for (SLArrayIndex_t j = 0; j < 15; j++) {
 // Pre fill with noise
     SDA_SignalGenerate (OutputArray,                                // Pointer to destination array
                         SIGLIB_GAUSSIAN_NOISE,                      // Signal type

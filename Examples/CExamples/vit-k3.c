@@ -1,5 +1,5 @@
 // SigLib K = 3 (7,5), Rate 1/2 Convolutional Encoder  / Viterbi Decoder Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -32,7 +32,6 @@ static SLFixData_t VitDecDoTraceBackFlag;                           // Flag is s
 int main (
   void)
 {
-  SLArrayIndex_t  i, j;
   SLFixData_t     ConvEncOutput;
   SLArrayIndex_t  ConvEncHistory = 0;
   char            ViterbiOutput;
@@ -69,7 +68,7 @@ int main (
       }
     }
 
-    for (i = 0; i < INPUT_STRING_LENGTH; i++) {
+    for (SLArrayIndex_t i = 0; i < INPUT_STRING_LENGTH; i++) {
 // Convolutionally encode the input byte
       ConvEncOutput = SDS_ConvEncoderK3 (InputString[i],            // Input character
                                          &ConvEncHistory);          // Pointer to history word
@@ -79,7 +78,7 @@ int main (
 #endif
 
 // Convert 1s and 0s to +1s and -1s to simulate the channel
-      for (j = 0; j < 16; j++) {
+      for (SLArrayIndex_t j = 0; j < 16; j++) {
         ChannelData[j] = (SLData_t) ((2 * ((ConvEncOutput >> j) & 0x1)) - 1);
 
 // Add noise

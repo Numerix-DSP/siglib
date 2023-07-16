@@ -7,9 +7,8 @@ SLArrayIndex_t read_vibration_data (
   SLData_t * pSpeed,
   const SLArrayIndex_t array_length)
 {
-  SLArrayIndex_t  i, sample_count;
+  SLArrayIndex_t  i;
   SLData_t        Speed;
-
 
   for (i = 0; ((i < array_length) && (fscanf (fp, "%le %le\n", bp, &Speed) != EOF)); i++) {
     if (i == 0) {                                                   // Return the speed
@@ -19,11 +18,9 @@ SLArrayIndex_t read_vibration_data (
     bp++;
   }
 
-  sample_count = i;
-
   for (; (i < array_length); i++) {                                 // Zero pad the array
     *bp++ = 0.0;
   }
 
-  return (sample_count);
+  return (i);
 }                                                                   // End of read_vibration_data()

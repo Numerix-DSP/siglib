@@ -1,5 +1,5 @@
 // SigLib De-glitch / De-bounce example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -23,9 +23,6 @@ int main (
 {
   SLArrayIndex_t  OutOfRangeCount;                                  // Out of range sample count
   SLData_t        GlitchLevelHoldover;                              // Level holdover variable
-#if PER_SAMPLE
-  SLArrayIndex_t  i;
-#endif
 
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
@@ -65,7 +62,7 @@ int main (
                GPC_NEW);                                            // New graph
 
 #if PER_SAMPLE
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     Dst[i] = SDS_DeGlitch (Src[i],                                  // Source sample
                            &OutOfRangeCount,                        // Count of number of samples out of range
                            SIGLIB_DEGLITCH_BOTH,                    // Switch to indicate de-glitch mode
@@ -121,7 +118,7 @@ int main (
                GPC_NEW);                                            // New graph
 
 #if PER_SAMPLE
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     Dst[i] = SDS_DeGlitch (Src[i],                                  // Source sample
                            &OutOfRangeCount,                        // Count of number of samples out of range
                            SIGLIB_DEGLITCH_ABOVE,                   // Switch to indicate de-glitch mode
@@ -176,7 +173,7 @@ int main (
                GPC_NEW);                                            // New graph
 
 #if PER_SAMPLE
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     Dst[i] = SDS_DeGlitch (Src[i],                                  // Source sample
                            &OutOfRangeCount,                        // Count of number of samples out of range
                            SIGLIB_DEGLITCH_BELOW,                   // Switch to indicate de-glitch mode

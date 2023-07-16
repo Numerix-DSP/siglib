@@ -1,5 +1,5 @@
 // SigLib - Statistics Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -17,9 +17,7 @@ static SLData_t Dst[DATA_LENGTH];
 int main (
   void)
 {
-  SLFixData_t     i;
-
-  for (i = 0; i < DATA_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < DATA_LENGTH; i++) {
     printf ("Data = %lf\n", Src[i]);
   }
 
@@ -47,7 +45,7 @@ int main (
              DATA_LENGTH);                                          // Array length
   printf ("\nData squared = ");
 
-  for (i = 0; i < DATA_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < DATA_LENGTH; i++) {
     printf ("%lf, ", Dst[i]);
   }
 
@@ -57,7 +55,7 @@ int main (
                     DATA_LENGTH);                                   // Array length
   printf ("\nMean subtracted = ");
 
-  for (i = 0; i < DATA_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < DATA_LENGTH; i++) {
     printf ("%lf, ", Dst[i]);
   }
 
@@ -66,7 +64,7 @@ int main (
                    DATA_LENGTH);                                    // Array length
   printf ("\nMax subtracted = ");
 
-  for (i = 0; i < DATA_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < DATA_LENGTH; i++) {
     printf ("%lf, ", Dst[i]);
   }
 

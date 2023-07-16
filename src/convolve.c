@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : CONVOLVE.C    | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 13/09/1992
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Convolution routines for SigLib DSP library.
 
@@ -40,7 +40,6 @@ Description : Convolution routines for SigLib DSP library.
 #define SIGLIB_SRC_FILE_CONVOLVE    1                               // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
 
 /**/
 
@@ -70,12 +69,6 @@ void SIGLIB_FUNC_DECL SDA_ConvolveLinear (
   const SLArrayIndex_t InputLength,
   const SLArrayIndex_t ImpulseLength)
 {
-  SLArrayIndex_t  i, j, Diff;
-  SLData_t        SumProd;
-  const SLData_t *p_Shortest, *p_Longest;
-  SLArrayIndex_t  LenShortest, LenLongest;
-
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -83,6 +76,9 @@ void SIGLIB_FUNC_DECL SDA_ConvolveLinear (
   _nassert ((int) pDst % 8 == 0);
 #endif
 #endif
+
+  const SLData_t *p_Shortest, *p_Longest;
+  SLArrayIndex_t  LenShortest, LenLongest;
 
   if (InputLength >= ImpulseLength) {                               // Calculate which is shortest and which is longest array
     p_Shortest = pImpulseResponse;
@@ -97,29 +93,29 @@ void SIGLIB_FUNC_DECL SDA_ConvolveLinear (
     LenLongest = ImpulseLength;
   }
 
-  Diff = LenLongest - LenShortest;                                  // Calculate difference in lengths
+  SLArrayIndex_t  Diff = LenLongest - LenShortest;                  // Calculate difference in lengths
 
   *pDst++ = *p_Shortest * *p_Longest;                               // Calculate very first result
 
-  for (i = 1; i < LenShortest; i++) {                               // First overlap stage
-    SumProd = p_Shortest[i] * p_Longest[0];
-    for (j = 1; j <= i; j++) {
+  for (SLArrayIndex_t i = 1; i < LenShortest; i++) {                // First overlap stage
+    SLData_t        SumProd = p_Shortest[i] * p_Longest[0];
+    for (SLArrayIndex_t j = 1; j <= i; j++) {
       SumProd += p_Shortest[i - j] * p_Longest[j];
     }
     *pDst++ = SumProd;
   }
 
-  for (i = 0; i < Diff; i++) {                                      // Middle overlap stage
-    SumProd = p_Shortest[LenShortest - 1] * p_Longest[i + 1];
-    for (j = 1; j < LenShortest; j++) {
+  for (SLArrayIndex_t i = 0; i < Diff; i++) {                       // Middle overlap stage
+    SLData_t        SumProd = p_Shortest[LenShortest - 1] * p_Longest[i + 1];
+    for (SLArrayIndex_t j = 1; j < LenShortest; j++) {
       SumProd += p_Shortest[LenShortest - 1 - j] * p_Longest[i + 1 + j];
     }
     *pDst++ = SumProd;
   }
 
-  for (i = 0; i < (LenShortest - 1); i++) {                         // Final overlap stage
-    SumProd = p_Shortest[LenShortest - 1] * p_Longest[Diff + 1 + i];
-    for (j = 1; j < (LenShortest - 1 - i); j++) {
+  for (SLArrayIndex_t i = 0; i < (LenShortest - 1); i++) {          // Final overlap stage
+    SLData_t        SumProd = p_Shortest[LenShortest - 1] * p_Longest[Diff + 1 + i];
+    for (SLArrayIndex_t j = 1; j < (LenShortest - 1 - i); j++) {
       SumProd += p_Shortest[LenShortest - 1 - j] * p_Longest[Diff + 1 + i + j];
     }
     *pDst++ = SumProd;
@@ -156,9 +152,6 @@ void SIGLIB_FUNC_DECL SDA_ConvolvePartial (
   const SLArrayIndex_t InputLength,
   const SLArrayIndex_t ImpulseLength)
 {
-  SLArrayIndex_t  i, j, ao, Diff;
-  SLData_t        SumProd;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -167,13 +160,13 @@ void SIGLIB_FUNC_DECL SDA_ConvolvePartial (
 #endif
 #endif
 
-  Diff = InputLength - ImpulseLength;                               // Length difference
+  SLArrayIndex_t  Diff = InputLength - ImpulseLength;               // Length difference
 
-  for (i = 0; i < Diff + 1; i++) {
-    ao = ImpulseLength + i - 1;
-    SumProd = pSrc[ao--] * pImpulseResponse[0];                     // Calculate first MAC in sequence
+  for (SLArrayIndex_t i = 0; i < Diff + 1; i++) {
+    SLArrayIndex_t  ao = ImpulseLength + i - 1;
+    SLData_t        SumProd = pSrc[ao--] * pImpulseResponse[0];     // Calculate first MAC in sequence
 
-    for (j = 1; j < ImpulseLength; j++) {                           // Calculate remaining MACs
+    for (SLArrayIndex_t j = 1; j < ImpulseLength; j++) {            // Calculate remaining MACs
       SumProd += pSrc[ao--] * pImpulseResponse[j];
     }
     *pDst++ = SumProd;
@@ -206,10 +199,6 @@ void SIGLIB_FUNC_DECL SDA_ConvolveCircular (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i, j;
-  SLArrayIndex_t  ao = 0;                                           // a offset into pSrc
-  SLData_t        SumProd;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -219,19 +208,19 @@ void SIGLIB_FUNC_DECL SDA_ConvolveCircular (
 #endif
 
 // Start with the last output and work backwards through the results
-  ao = SampleLength - 1;
+  SLArrayIndex_t  ao = SampleLength - 1;                            // a offset into pSrc
   pDst += SampleLength - 1;                                         // Write backwards through array
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 // Calculate first MAC - this saves having to clear accumulator
-    SumProd = pSrc[ao] * pImpulseResponse[0];
+    SLData_t        SumProd = pSrc[ao] * pImpulseResponse[0];
     if (--ao < 0) {
       ao += SampleLength;                                           // Circular array
     }
 
 // Calculate subsequent MACs
 // a0 is already decremented but b0 must start from '1'
-    for (j = 1; j < SampleLength; j++) {
+    for (SLArrayIndex_t j = 1; j < SampleLength; j++) {
       SumProd += pSrc[ao] * pImpulseResponse[j];
       if (--ao < 0) {
         ao += SampleLength;                                         // Circular array
@@ -279,8 +268,6 @@ void SIGLIB_FUNC_DECL SDA_ConvolveLinearComplex (
   const SLArrayIndex_t InputLength,
   const SLArrayIndex_t ImpulseLength)
 {
-  SLArrayIndex_t  i, j, Diff;
-  SLData_t        SumProdReal, SumProdImag;
   const SLData_t *p_ShortestReal, *p_ShortestImag, *p_LongestReal, *p_LongestImag;
   SLArrayIndex_t  LenShortest, LenLongest;
 
@@ -301,26 +288,28 @@ void SIGLIB_FUNC_DECL SDA_ConvolveLinearComplex (
     LenLongest = ImpulseLength;
   }
 
-  Diff = LenLongest - LenShortest;                                  // Calculate difference in lengths
+  SLArrayIndex_t  Diff = LenLongest - LenShortest;                  // Calculate difference in lengths
 
   *pDstReal++ = (*p_ShortestReal * *p_LongestReal) - (*p_ShortestImag * *p_LongestImag);
   *pDstImag++ = (*p_ShortestReal * *p_LongestImag) + (*p_ShortestImag * *p_LongestReal);
 
-  for (i = 1; i < LenShortest; i++) {                               // First overlap stage
-    SumProdReal = (p_ShortestReal[i] * p_LongestReal[0]) - (p_ShortestImag[i] * p_LongestImag[0]);
-    SumProdImag = (p_ShortestReal[i] * p_LongestImag[0]) + (p_ShortestImag[i] * p_LongestReal[0]);
+  for (SLArrayIndex_t i = 1; i < LenShortest; i++) {                // First overlap stage
+    SLData_t        SumProdReal = (p_ShortestReal[i] * p_LongestReal[0]) - (p_ShortestImag[i] * p_LongestImag[0]);
+    SLData_t        SumProdImag = (p_ShortestReal[i] * p_LongestImag[0]) + (p_ShortestImag[i] * p_LongestReal[0]);
 
-    for (j = 1; j <= i; j++) {
+    for (SLArrayIndex_t j = 1; j <= i; j++) {
       SumProdReal += (p_ShortestReal[i - j] * p_LongestReal[j]) - (p_ShortestImag[i - j] * p_LongestImag[j]);
       SumProdImag += (p_ShortestReal[i - j] * p_LongestImag[j]) + (p_ShortestImag[i - j] * p_LongestReal[j]);
     }
     *pDstReal++ = SumProdReal;
     *pDstImag++ = SumProdImag;
   }
-  for (i = 0; i < Diff; i++) {                                      // Middle overlap stage
-    SumProdReal = (p_ShortestReal[LenShortest - 1] * p_LongestReal[i + 1]) - (p_ShortestImag[LenShortest - 1] * p_LongestImag[i + 1]);
-    SumProdImag = (p_ShortestReal[LenShortest - 1] * p_LongestImag[i + 1]) + (p_ShortestImag[LenShortest - 1] * p_LongestReal[i + 1]);
-    for (j = 1; j < LenShortest; j++) {
+  for (SLArrayIndex_t i = 0; i < Diff; i++) {                       // Middle overlap stage
+    SLData_t        SumProdReal =
+      (p_ShortestReal[LenShortest - 1] * p_LongestReal[i + 1]) - (p_ShortestImag[LenShortest - 1] * p_LongestImag[i + 1]);
+    SLData_t        SumProdImag =
+      (p_ShortestReal[LenShortest - 1] * p_LongestImag[i + 1]) + (p_ShortestImag[LenShortest - 1] * p_LongestReal[i + 1]);
+    for (SLArrayIndex_t j = 1; j < LenShortest; j++) {
       SumProdReal +=
         (p_ShortestReal[LenShortest - 1 - j] * p_LongestReal[i + 1 + j]) - (p_ShortestImag[LenShortest - 1 - j] * p_LongestImag[i + 1 + j]);
       SumProdImag +=
@@ -330,10 +319,12 @@ void SIGLIB_FUNC_DECL SDA_ConvolveLinearComplex (
     *pDstImag++ = SumProdImag;
   }
 
-  for (i = 0; i < (LenShortest - 1); i++) {                         // Final overlap stage
-    SumProdReal = (p_ShortestReal[LenShortest - 1] * p_LongestReal[Diff + 1 + i]) - (p_ShortestImag[LenShortest - 1] * p_LongestImag[Diff + 1 + i]);
-    SumProdImag = (p_ShortestReal[LenShortest - 1] * p_LongestImag[Diff + 1 + i]) + (p_ShortestImag[LenShortest - 1] * p_LongestReal[Diff + 1 + i]);
-    for (j = 1; j < (LenShortest - 1 - i); j++) {
+  for (SLArrayIndex_t i = 0; i < (LenShortest - 1); i++) {          // Final overlap stage
+    SLData_t        SumProdReal =
+      (p_ShortestReal[LenShortest - 1] * p_LongestReal[Diff + 1 + i]) - (p_ShortestImag[LenShortest - 1] * p_LongestImag[Diff + 1 + i]);
+    SLData_t        SumProdImag =
+      (p_ShortestReal[LenShortest - 1] * p_LongestImag[Diff + 1 + i]) + (p_ShortestImag[LenShortest - 1] * p_LongestReal[Diff + 1 + i]);
+    for (SLArrayIndex_t j = 1; j < (LenShortest - 1 - i); j++) {
       SumProdReal +=
         (p_ShortestReal[LenShortest - 1 - j] * p_LongestReal[Diff + 1 + i + j]) -
         (p_ShortestImag[LenShortest - 1 - j] * p_LongestImag[Diff + 1 + i + j]);
@@ -382,18 +373,15 @@ void SIGLIB_FUNC_DECL SDA_ConvolvePartialComplex (
   const SLArrayIndex_t InputLength,
   const SLArrayIndex_t ImpulseLength)
 {
-  SLArrayIndex_t  i, j, ao, Diff;
-  SLData_t        SumProdReal, SumProdImag;
+  SLArrayIndex_t  Diff = InputLength - ImpulseLength;               // Length difference
 
-  Diff = InputLength - ImpulseLength;                               // Length difference
-
-  for (i = 0; i < Diff + 1; i++) {
-    ao = ImpulseLength + i - 1;
-    SumProdReal = (pSrcReal[ao] * pImpulseResponseReal[0]) - (pSrcImag[ao] * pImpulseResponseImag[0]);
-    SumProdImag = (pSrcReal[ao] * pImpulseResponseImag[0]) + (pSrcImag[ao] * pImpulseResponseReal[0]);
+  for (SLArrayIndex_t i = 0; i < Diff + 1; i++) {
+    SLArrayIndex_t  ao = ImpulseLength + i - 1;
+    SLData_t        SumProdReal = (pSrcReal[ao] * pImpulseResponseReal[0]) - (pSrcImag[ao] * pImpulseResponseImag[0]);
+    SLData_t        SumProdImag = (pSrcReal[ao] * pImpulseResponseImag[0]) + (pSrcImag[ao] * pImpulseResponseReal[0]);
     ao--;
 
-    for (j = 1; j < ImpulseLength; j++) {                           // Calculate remaining MACs
+    for (SLArrayIndex_t j = 1; j < ImpulseLength; j++) {            // Calculate remaining MACs
       SumProdReal += (pSrcReal[ao] * pImpulseResponseReal[j]) - (pSrcImag[ao] * pImpulseResponseImag[j]);
       SumProdImag += (pSrcReal[ao] * pImpulseResponseImag[j]) + (pSrcImag[ao] * pImpulseResponseReal[j]);
       ao--;
@@ -435,19 +423,15 @@ void SIGLIB_FUNC_DECL SDA_ConvolveCircularComplex (
   SLData_t * SIGLIB_PTR_DECL pDstImag,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i, j;
-  SLArrayIndex_t  ao = 0;                                           // a offset into pSrc
-  SLData_t        SumProdReal, SumProdImag;
-
 // Start with the last output and work backwards through the results
-  ao = SampleLength - 1;
+  SLArrayIndex_t  ao = SampleLength - 1;                            // a offset into pSrc
   pDstReal += SampleLength - 1;                                     // Write backwards through array
   pDstImag += SampleLength - 1;
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 // Calculate first MAC - this saves having to clear accumulator
-    SumProdReal = (pSrcReal[ao] * pImpulseResponseReal[0]) - (pSrcImag[ao] * pImpulseResponseImag[0]);
-    SumProdImag = (pSrcReal[ao] * pImpulseResponseImag[0]) + (pSrcImag[ao] * pImpulseResponseReal[0]);
+    SLData_t        SumProdReal = (pSrcReal[ao] * pImpulseResponseReal[0]) - (pSrcImag[ao] * pImpulseResponseImag[0]);
+    SLData_t        SumProdImag = (pSrcReal[ao] * pImpulseResponseImag[0]) + (pSrcImag[ao] * pImpulseResponseReal[0]);
 
     if (--ao < 0) {
       ao += SampleLength;                                           // Circular array
@@ -455,7 +439,7 @@ void SIGLIB_FUNC_DECL SDA_ConvolveCircularComplex (
 
 // Calculate subsequent MACs
 // a0 is already decremented but b0 must start from '1'
-    for (j = 1; j < SampleLength; j++) {
+    for (SLArrayIndex_t j = 1; j < SampleLength; j++) {
       SumProdReal += (pSrcReal[ao] * pImpulseResponseReal[j]) - (pSrcImag[ao] * pImpulseResponseImag[j]);
       SumProdImag += (pSrcReal[ao] * pImpulseResponseImag[j]) + (pSrcImag[ao] * pImpulseResponseReal[j]);
       if (--ao < 0) {
@@ -529,7 +513,6 @@ void SIGLIB_FUNC_DECL SDA_FftDeconvolution (
 
 // Divide result magnitudes by FFT length to restore correct gain
   SDA_ComplexScalarMultiply (pSrcReal, pSrcImag, InvFFTLength, pSrcReal, pSrcImag, FFTLength);
-
 }                                                                   // End of SDA_FftDeconvolution()
 
 
@@ -584,7 +567,6 @@ void SIGLIB_FUNC_DECL SIF_FftDeconvolutionPre (
 
 // Invert the Fourier Transform of the impulse response
   SDA_ComplexInverse (pImpulseFdReal, pImpulseFdImag, pImpulseFdReal, pImpulseFdImag, FFTLength);
-
 }                                                                   // End of SIF_FftDeconvolutionPre()
 
 
@@ -641,5 +623,4 @@ void SIGLIB_FUNC_DECL SDA_FftDeconvolutionPre (
 
 // Divide result magnitudes by FFT length to restore correct gain
   SDA_ComplexScalarMultiply (pSrcReal, pSrcImag, InvFFTLength, pSrcReal, pSrcImag, FFTLength);
-
 }                                                                   // End of SDA_FftDeconvolutionPre()

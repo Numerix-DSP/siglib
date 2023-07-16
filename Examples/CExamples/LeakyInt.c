@@ -1,5 +1,5 @@
 // SigLib Leaky Integrator Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -25,14 +25,13 @@ int main (
 {
   SLData_t        State;
   SLData_t        LeakOutput;
-  SLFixData_t     i;
   const SLData_t *pSrc = SrcData;
 
 
   printf ("Test integrator #1\n");
   SIF_LeakyIntegrator (&State);                                     // Pointer to state variable
 
-  for (i = 0; i < NUMBER_OF_SAMPLES; i++) {
+  for (SLFixData_t i = 0; i < NUMBER_OF_SAMPLES; i++) {
     printf ("Input value = %lf, ", *pSrc);
     LeakOutput = SDS_LeakyIntegrator1 (*pSrc++,                     // Data value
                                        &State,                      // Pointer to state variable
@@ -48,7 +47,7 @@ int main (
   pSrc = SrcData;
   SIF_LeakyIntegrator (&State);                                     // Pointer to state variable
 
-  for (i = 0; i < NUMBER_OF_SAMPLES; i++) {
+  for (SLFixData_t i = 0; i < NUMBER_OF_SAMPLES; i++) {
     printf ("Input value = %lf, ", *pSrc);
     LeakOutput = SDS_LeakyIntegrator2 (*pSrc++,                     // Data value
                                        &State,                      // Pointer to state variable

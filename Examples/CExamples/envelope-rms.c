@@ -1,5 +1,5 @@
 // SigLib Envelope Detection Using One Pole Filter Example, with RMS
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -8,7 +8,7 @@
 
 #define ARRAY_OR_SAMPLE     0                                       // Set to '1' for array mode, '0' for per-sample
 
-#define SAMPLE_RATE         8000.                                   // Simulated sample rate
+#define SAMPLE_RATE_HZ      8000.                                   // Simulated sample rate
 #define F_SIN_1             2000.                                   // Sinewave #1 frequency (signal)
 #define F_SIN_2             60.                                     // Sinewave #2 frequency (envelope)
 
@@ -50,12 +50,12 @@ int main (
   SIF_EnvelopeRMS (&envOnePoleFilterState);                         // Pointer to one-pole state variable
 
   attackCoeff = SDS_OnePoleTimeConstantToFilterCoeff (ATTACK_MS_PERIOD, // Attack period in ms
-                                                      SAMPLE_RATE); // Sample rate
+                                                      SAMPLE_RATE_HZ);  // Sample rate
 
   printf ("\nAttack period = %lf, Attack Coefficient = %lf\n", ATTACK_MS_PERIOD, attackCoeff);
 
   decayCoeff = SDS_OnePoleTimeConstantToFilterCoeff (DECAY_MS_PERIOD, // Decay filter period in ms
-                                                     SAMPLE_RATE);  // Sample rate
+                                                     SAMPLE_RATE_HZ); // Sample rate
 
   printf ("\nDecay period = %lf, Decay Coefficient = %lf\n", DECAY_MS_PERIOD, decayCoeff);
 
@@ -64,7 +64,7 @@ int main (
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
                       SIGLIB_FILL,                                  // Fill (overwrite) or add to existing array contents
-                      F_SIN_1 / SAMPLE_RATE,                        // Signal frequency
+                      F_SIN_1 / SAMPLE_RATE_HZ,                     // Signal frequency
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
@@ -77,7 +77,7 @@ int main (
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
                       SIGLIB_FILL,                                  // Fill (overwrite) or add to existing array contents
-                      F_SIN_2 / SAMPLE_RATE,                        // Signal frequency
+                      F_SIN_2 / SAMPLE_RATE_HZ,                     // Signal frequency
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused

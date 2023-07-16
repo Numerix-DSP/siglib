@@ -1,5 +1,5 @@
 // SigLib - SDA_Find example program
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -23,98 +23,79 @@ int main (
   printf ("\nSIGLIB_FIND_GREATER_THAN_ZERO\n");
   NumberOfElements = SDA_Find (SrcArray, DstDataArray, DstLocationArray, SIGLIB_FIND_GREATER_THAN_ZERO, SRC_ARRAY_LENGTH);
   printf ("Number of elements found = %d\n", NumberOfElements);
-  printf ("Data :\n"); {
-    SLArrayIndex_t  j;
-    for (j = 0; j < NumberOfElements; j++)
-      printf ("%lf, ", DstDataArray[j]);
-    printf ("\n");
-  }
-  printf ("Location :\n"); {
-    SLArrayIndex_t  j;
-    for (j = 0; j < NumberOfElements; j++)
-      printf ("%d, ", DstLocationArray[j]);
-    printf ("\n");
-  }
+  printf ("Data :\n");
+  for (SLArrayIndex_t j = 0; j < NumberOfElements; j++)
+    printf ("%lf, ", DstDataArray[j]);
+  printf ("\n");
+  printf ("Location :\n");
+  for (SLArrayIndex_t j = 0; j < NumberOfElements; j++)
+    printf ("%d, ", DstLocationArray[j]);
+  printf ("\n");
+
 
   printf ("\nSIGLIB_FIND_GREATER_THAN_OR_EQUAL_TO_ZERO\n");
   NumberOfElements = SDA_Find (SrcArray, DstDataArray, DstLocationArray, SIGLIB_FIND_GREATER_THAN_OR_EQUAL_TO_ZERO, SRC_ARRAY_LENGTH);
   printf ("Number of elements found = %d\n", NumberOfElements);
-  printf ("Data :\n"); {
-    SLArrayIndex_t  j;
-    for (j = 0; j < NumberOfElements; j++)
-      printf ("%lf, ", DstDataArray[j]);
-    printf ("\n");
-  }
-  printf ("Location :\n"); {
-    SLArrayIndex_t  j;
-    for (j = 0; j < NumberOfElements; j++)
-      printf ("%d, ", DstLocationArray[j]);
-    printf ("\n");
-  }
+  printf ("Data :\n");
+  for (SLArrayIndex_t j = 0; j < NumberOfElements; j++)
+    printf ("%lf, ", DstDataArray[j]);
+  printf ("\n");
+  printf ("Location :\n");
+  for (SLArrayIndex_t j = 0; j < NumberOfElements; j++)
+    printf ("%d, ", DstLocationArray[j]);
+  printf ("\n");
+
 
   printf ("\nSIGLIB_FIND_EQUAL_TO_ZERO\n");
   NumberOfElements = SDA_Find (SrcArray, DstDataArray, DstLocationArray, SIGLIB_FIND_EQUAL_TO_ZERO, SRC_ARRAY_LENGTH);
   printf ("Number of elements found = %d\n", NumberOfElements);
-  printf ("Data :\n"); {
-    SLArrayIndex_t  j;
-    for (j = 0; j < NumberOfElements; j++)
-      printf ("%lf, ", DstDataArray[j]);
-    printf ("\n");
-  }
-  printf ("Location :\n"); {
-    SLArrayIndex_t  j;
-    for (j = 0; j < NumberOfElements; j++)
-      printf ("%d, ", DstLocationArray[j]);
-    printf ("\n");
-  }
+  printf ("Data :\n");
+  for (SLArrayIndex_t j = 0; j < NumberOfElements; j++)
+    printf ("%lf, ", DstDataArray[j]);
+  printf ("\n");
+  printf ("Location :\n");
+  for (SLArrayIndex_t j = 0; j < NumberOfElements; j++)
+    printf ("%d, ", DstLocationArray[j]);
+  printf ("\n");
+
 
   printf ("\nSIGLIB_FIND_LESS_THAN_ZERO\n");
   NumberOfElements = SDA_Find (SrcArray, DstDataArray, DstLocationArray, SIGLIB_FIND_LESS_THAN_ZERO, SRC_ARRAY_LENGTH);
   printf ("Number of elements found = %d\n", NumberOfElements);
-  printf ("Data :\n"); {
-    SLArrayIndex_t  j;
-    for (j = 0; j < NumberOfElements; j++)
-      printf ("%lf, ", DstDataArray[j]);
-    printf ("\n");
-  }
-  printf ("Location :\n"); {
-    SLArrayIndex_t  j;
-    for (j = 0; j < NumberOfElements; j++)
-      printf ("%d, ", DstLocationArray[j]);
-    printf ("\n");
-  }
+  printf ("Data :\n");
+  for (SLArrayIndex_t j = 0; j < NumberOfElements; j++)
+    printf ("%lf, ", DstDataArray[j]);
+  printf ("\n");
+  printf ("Location :\n");
+  for (SLArrayIndex_t j = 0; j < NumberOfElements; j++)
+    printf ("%d, ", DstLocationArray[j]);
+  printf ("\n");
+
 
   printf ("\nSIGLIB_FIND_LESS_THAN_OR_EQUAL_TO_ZERO\n");
   NumberOfElements = SDA_Find (SrcArray, DstDataArray, DstLocationArray, SIGLIB_FIND_LESS_THAN_OR_EQUAL_TO_ZERO, SRC_ARRAY_LENGTH);
   printf ("Number of elements found = %d\n", NumberOfElements);
-  printf ("Data :\n"); {
-    SLArrayIndex_t  j;
-    for (j = 0; j < NumberOfElements; j++)
-      printf ("%lf, ", DstDataArray[j]);
-    printf ("\n");
-  }
-  printf ("Location :\n"); {
-    SLArrayIndex_t  j;
-    for (j = 0; j < NumberOfElements; j++)
-      printf ("%d, ", DstLocationArray[j]);
-    printf ("\n");
-  }
+  printf ("Data :\n");
+  for (SLArrayIndex_t j = 0; j < NumberOfElements; j++)
+    printf ("%lf, ", DstDataArray[j]);
+  printf ("\n");
+  printf ("Location :\n");
+  for (SLArrayIndex_t j = 0; j < NumberOfElements; j++)
+    printf ("%d, ", DstLocationArray[j]);
+  printf ("\n");
+
 
   printf ("\nSIGLIB_FIND_NOT_EQUAL_TO_ZERO\n");
   NumberOfElements = SDA_Find (SrcArray, DstDataArray, DstLocationArray, SIGLIB_FIND_NOT_EQUAL_TO_ZERO, SRC_ARRAY_LENGTH);
   printf ("Number of elements found = %d\n", NumberOfElements);
-  printf ("Data :\n"); {
-    SLArrayIndex_t  j;
-    for (j = 0; j < NumberOfElements; j++)
-      printf ("%lf, ", DstDataArray[j]);
-    printf ("\n");
-  }
-  printf ("Location :\n"); {
-    SLArrayIndex_t  j;
-    for (j = 0; j < NumberOfElements; j++)
-      printf ("%d, ", DstLocationArray[j]);
-    printf ("\n");
-  }
+  printf ("Data :\n");
+  for (SLArrayIndex_t j = 0; j < NumberOfElements; j++)
+    printf ("%lf, ", DstDataArray[j]);
+  printf ("\n");
+  printf ("Location :\n");
+  for (SLArrayIndex_t j = 0; j < NumberOfElements; j++)
+    printf ("%d, ", DstLocationArray[j]);
+  printf ("\n");
 
   exit (0);
 }

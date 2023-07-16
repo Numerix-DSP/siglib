@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : ARBFFT.C      | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 06/01/2001
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : SigLib DSP library Arbitrary length Fast Fourier Transform
     routines.
@@ -86,10 +86,8 @@ void SIGLIB_FUNC_DECL SIF_FftArb (
   SLData_t * pInverseSampleLengthXFFTLength,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  IntLog2Size;
-
 // Calculate log2 sample length & round down
-  IntLog2Size = (SLArrayIndex_t) ((SDS_Log2 ((SLData_t) SampleLength)) + SIGLIB_EPSILON);
+  SLArrayIndex_t  IntLog2Size = (SLArrayIndex_t) ((SDS_Log2 ((SLData_t) SampleLength)) + SIGLIB_EPSILON);
 
 // Test to see if we can use the pure FFT or if we need to use the chirp z-transform
   if (SAI_PowerOfTwo (SampleLength)) {                              // Length is an integer power of two so use FFT
@@ -110,7 +108,6 @@ void SIGLIB_FUNC_DECL SIF_FftArb (
 
   *pInverseFFTLength = SIGLIB_ONE / *pFFTLength;
   *pInverseSampleLengthXFFTLength = SIGLIB_ONE / (((SLData_t) SampleLength) * ((SLData_t) * pFFTLength));
-
 }                                                                   // End of SIF_FftArb()
 
 
@@ -134,11 +131,10 @@ void SIGLIB_FUNC_DECL SIF_FftArb (
 SLArrayIndex_t SIGLIB_FUNC_DECL SUF_FftArbAllocLength (
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  IntLog2Size;
   SLArrayIndex_t  FFTLength;
 
 // Calculate log2 sample length & round down
-  IntLog2Size = (SLArrayIndex_t) ((SDS_Log2 ((SLData_t) SampleLength)) + SIGLIB_EPSILON);
+  SLArrayIndex_t  IntLog2Size = (SLArrayIndex_t) ((SDS_Log2 ((SLData_t) SampleLength)) + SIGLIB_EPSILON);
 
 // Test to see if we can use the pure FFT or if we need to use the chirp z-transform
   if (SAI_PowerOfTwo (SampleLength)) {                              // Length is an integer power of two so use FFT
@@ -150,7 +146,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_FftArbAllocLength (
   }
 
   return (FFTLength);
-
 }                                                                   // End of SUF_FftArbAllocLength()
 
 
@@ -238,7 +233,6 @@ void SIGLIB_FUNC_DECL SDA_RfftArb (
 // Ensure the results give the same scaling as the Fourier transform
     SDA_ComplexScalarMultiply (pRealDst, pImagDst, InverseSampleLengthXFFTLength, pRealDst, pImagDst, SampleLength);
   }
-
 }                                                                   // End of SDA_RfftArb()
 
 

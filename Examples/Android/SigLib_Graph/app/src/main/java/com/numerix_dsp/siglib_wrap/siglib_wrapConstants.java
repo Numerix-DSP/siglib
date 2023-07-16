@@ -12,13 +12,12 @@ public interface siglib_wrapConstants {
   public final static int SIGLIB_SWIG_SWITCH = siglib_wrapJNI.SIGLIB_SWIG_SWITCH_get();
   public final static int SIGLIB = siglib_wrapJNI.SIGLIB_get();
   public final static double SIGLIB_VERSION = siglib_wrapJNI.SIGLIB_VERSION_get();
-  public final static int SIGLIB_ENABLE_DEBUG_FPRINTF = siglib_wrapJNI.SIGLIB_ENABLE_DEBUG_FPRINTF_get();
+  public final static int SIGLIB_ENABLE_DEBUG_LOGGING = siglib_wrapJNI.SIGLIB_ENABLE_DEBUG_LOGGING_get();
   public final static int SIGLIB_FIX_DATA_SHORT = siglib_wrapJNI.SIGLIB_FIX_DATA_SHORT_get();
   public final static int SIGLIB_DATA_SHORT = siglib_wrapJNI.SIGLIB_DATA_SHORT_get();
   public final static int SIGLIB_DATA_LONG = siglib_wrapJNI.SIGLIB_DATA_LONG_get();
   public final static int SIGLIB_DATA_FLOAT = siglib_wrapJNI.SIGLIB_DATA_FLOAT_get();
   public final static int SIGLIB_INDEX_SHORT = siglib_wrapJNI.SIGLIB_INDEX_SHORT_get();
-  public final static int SIGLIB_HUGE_ARRAYS = siglib_wrapJNI.SIGLIB_HUGE_ARRAYS_get();
   public final static int SIGLIB_ARRAYS_ALIGNED = siglib_wrapJNI.SIGLIB_ARRAYS_ALIGNED_get();
   public final static int SIGLIB_FILE_IO_SUPPORTED = siglib_wrapJNI.SIGLIB_FILE_IO_SUPPORTED_get();
   public final static int SIGLIB_CONSOLE_IO_SUPPORTED = siglib_wrapJNI.SIGLIB_CONSOLE_IO_SUPPORTED_get();

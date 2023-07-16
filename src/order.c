@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : ORDER.C       | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 22/01/2000
 Options   :                             | Latest Update : 17/11/2022
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Order analysis routines, for SigLib DSP library.
 
@@ -40,7 +40,6 @@ Description : Order analysis routines, for SigLib DSP library.
 #define SIGLIB_SRC_FILE_ORDER   1                                   // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
 
 /**/
 
@@ -73,34 +72,28 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExtractOrder (
   const SLData_t SamplePeriod,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i, StartIndex, EndIndex;
-  SLData_t        MaxValue;
-  SLData_t        InputValue;
-  SLArrayIndex_t  Location;
+  SLArrayIndex_t  Location = ((SLArrayIndex_t) ((FirstOrdFrq * ((SLData_t) OrderToExtract) * ((SLData_t) FFTLen)) * SamplePeriod));
 
-  Location = ((SLArrayIndex_t) ((FirstOrdFrq * ((SLData_t) OrderToExtract) * ((SLData_t) FFTLen)) * SamplePeriod));
-
-  StartIndex = Location - NumberOfAdjacentSamples;                  // Calculate start index
+  SLArrayIndex_t  StartIndex = Location - NumberOfAdjacentSamples;  // Calculate start index
   if (StartIndex < SIGLIB_AI_ZERO) {
     StartIndex = SIGLIB_AI_ZERO;
   }
 
-  EndIndex = Location + NumberOfAdjacentSamples;                    // Calculate end index
+  SLArrayIndex_t  EndIndex = Location + NumberOfAdjacentSamples;    // Calculate end index
   if (EndIndex > ArrayLength) {
     EndIndex = ArrayLength;
   }
 
-  MaxValue = *(pSrc + StartIndex);                                  // Initial value
+  SLData_t        MaxValue = *(pSrc + StartIndex);                  // Initial value
 
-  for (i = (StartIndex + 1); i <= EndIndex; i++) {
-    InputValue = *(pSrc + i);
+  for (SLArrayIndex_t i = (StartIndex + 1); i <= EndIndex; i++) {
+    SLData_t        InputValue = *(pSrc + i);
     if (InputValue > MaxValue) {
       MaxValue = InputValue;
     }
   }
 
   return (MaxValue);
-
 }                                                                   // End of SDA_ExtractOrder()
 
 
@@ -129,27 +122,25 @@ SLData_t SIGLIB_FUNC_DECL SDA_SumLevel (
   const SLArrayIndex_t LogMagnitudeFlag,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i;
   SLData_t        SumLevel = SIGLIB_ZERO;
-
-  SLData_t        LocalArray[5];
 
   if (LogMagnitudeFlag == SIGLIB_TRUE) {                            // LogMagnitudeFlag == SIGLIB_TRUE
     if (SignalSourceType == SIGLIB_SIGNAL_COHERENT) {               // Coherent sampling
-      for (i = 0; i < ArrayLength; i++) {
+      for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
         SumLevel += SDS_Pow (SIGLIB_TEN, (pSrc[i] * 0.05));
       }
       SumLevel = SIGLIB_TWENTY * SDS_Log10 (SumLevel);
     }
 
     else {                                                          // Incoherent sampling
-      for (i = 0; i < ArrayLength; i++) {
+      for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
         SumLevel += SDS_Pow (SIGLIB_TEN, (pSrc[i] * 0.1));
       }
       SumLevel = SIGLIB_TEN * SDS_Log10 (SumLevel);
     }
   }
   else {                                                            // LogMagnitudeFlag == SIGLIB_FALSE
+    SLData_t        LocalArray[5];
     SDA_Copy (pSrc, LocalArray, 5);
     SDA_SortMaxToMin (LocalArray, LocalArray, 5);
     SumLevel = LocalArray[0];
@@ -161,7 +152,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_SumLevel (
 
   return (SumLevel);
 }                                                                   // End of SDA_SumLevel()
-
 
 
 /**/
@@ -191,13 +181,12 @@ SLData_t SIGLIB_FUNC_DECL SDA_SumLevelWholeSpectrum (
   const SLData_t LinearScale,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i;
   SLData_t        SumLevel = SIGLIB_ZERO;
   SLData_t        returnValue;
 
   if (LogMagnitudeFlag == SIGLIB_TRUE) {                            // LogMagnitudeFlag == SIGLIB_TRUE
     if (SignalSourceType == SIGLIB_SIGNAL_COHERENT) {               // Coherent sampling
-      for (i = 0; i < ArrayLength; i++) {
+      for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
         SumLevel += SDS_Pow (SIGLIB_TEN, (pSrc[i] * 0.05));
       }
       SumLevel = SIGLIB_TWENTY * SDS_Log10 (SumLevel);
@@ -205,7 +194,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_SumLevelWholeSpectrum (
 
     else                                                            // Incoherent sampling
     {
-      for (i = 0; i < ArrayLength; i++) {
+      for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
         SumLevel += SDS_Pow (SIGLIB_TEN, (pSrc[i] * 0.1));
       }
       SumLevel = SIGLIB_TEN * SDS_Log10 (SumLevel);
@@ -216,14 +205,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_SumLevelWholeSpectrum (
   else                                                              // LogMagnitudeFlag == SIGLIB_FALSE
   {
     if (SignalSourceType == SIGLIB_SIGNAL_COHERENT) {               // Coherent sampling
-      for (i = 0; i < ArrayLength; i++) {
+      for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
         SumLevel += LinearScale * pSrc[i];
       }
       SumLevel = SIGLIB_TWENTY * SDS_Log10 (SumLevel);
     }
 
     else {                                                          // Incoherent sampling
-      for (i = 0; i < ArrayLength; i++) {
+      for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
         SumLevel += (LinearScale * pSrc[i]) * (LinearScale * pSrc[i]);
 
       }
@@ -308,7 +297,6 @@ void SIGLIB_FUNC_DECL SIF_OrderAnalysis (
              ResultLength);                                         // Array length
   SDA_Clear (pImagAverage,                                          // Pointer to source array
              ResultLength);                                         // Array length
-
 }                                                                   // End of SIF_OrderAnalysis()
 
 
@@ -381,17 +369,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_OrderAnalysis (
   const SLArrayIndex_t FFTLength,
   const SLArrayIndex_t Log2FFTLength)
 {
-#define SL_PRINT_DEBUG_RESULTS          0                           // Set to '1' to print debug results, '0' otherwise
-
-  SLArrayIndex_t  i;
   SLArrayIndex_t  ResultLength = (SLArrayIndex_t) ((SLUFixData_t) FFTLength >> 1U); // Calculate the length of the output result
   SLData_t        OrderSum = SIGLIB_ZERO;
   SLData_t       *pLocalProcArray2 = pLocalProcArray + FFTLength;   // Split array for real and imag components
-#if SL_PRINT_DEBUG_RESULTS
+#if SIGLIB_ENABLE_DEBUG_LOGGING
   SLArrayIndex_t  ResampleResultLength;                             // Resample result length
 #endif
 
-#if SL_PRINT_DEBUG_RESULTS
+#if SIGLIB_ENABLE_DEBUG_LOGGING
   SUF_Debugfprintf ("Calling Resample function\n");
   SUF_DebugPrintArray (pSrc, SourceLength);
   SUF_Debugfprintf ("Calling resample\n");
@@ -402,7 +387,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_OrderAnalysis (
 
 
 // Resample only as many samples as we require
-#if SL_PRINT_DEBUG_RESULTS
+#if SIGLIB_ENABLE_DEBUG_LOGGING
   ResampleResultLength =
 #endif
     SDA_ResampleSincNSamples (pSrc,                                 // Pointer to source array
@@ -415,7 +400,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_OrderAnalysis (
                               FFTLength);                           // Destination array length
 
 #if COMMENT
-#if SL_PRINT_DEBUG_RESULTS
+#if SIGLIB_ENABLE_DEBUG_LOGGING
   ResampleResultLength =
 #endif
     SDA_ResampleLinearNSamples (pSrc,                               // Pointer to source array
@@ -425,7 +410,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_OrderAnalysis (
                                 FFTLength);                         // Destination array length
 #endif
 
-#if SL_PRINT_DEBUG_RESULTS
+#if SIGLIB_ENABLE_DEBUG_LOGGING
   SUF_Debugfprintf ("\n");
   SUF_Debugfprintf ("ResampleResultLength = %d\n", ResampleResultLength);
   SUF_ClearDebugfprintf ();
@@ -489,13 +474,13 @@ SLData_t SIGLIB_FUNC_DECL SDA_OrderAnalysis (
                    ResultLength);                                   // Array length
   }
 
-#if SL_PRINT_DEBUG_RESULTS
+#if SIGLIB_ENABLE_DEBUG_LOGGING
 //  SUF_Debugfprintf ("Magnitude array\n");
 //  SUF_DebugPrintArray (pDst, ResultLength);
 //  SUF_Debugfprintf ("Extracting orders\n");
 #endif
 
-  for (i = 0; i < NumberOfOrders; i++) {                            // Extract the required orders from the results
+  for (SLArrayIndex_t i = 0; i < NumberOfOrders; i++) {             // Extract the required orders from the results
     *(pOrderArray + i) = SDA_ExtractOrder (pDst,                    // Pointer to source array
                                            BaseOrder * (i + SIGLIB_AI_ONE), // Order to extract
                                            OrderNumberOfAdjacentSamples,  // Number of samples to search either side of centre
@@ -504,7 +489,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_OrderAnalysis (
                                            SamplePeriod,            // Sample period
                                            ResultLength);           // Input array length
   }
-#if SL_PRINT_DEBUG_RESULTS
+#if SIGLIB_ENABLE_DEBUG_LOGGING
 //  SUF_Debugfprintf ("Order extraction array\n");
 //  SUF_DebugPrintArray (pOrderArray, NumberOfOrders);
 #endif
@@ -515,7 +500,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_OrderAnalysis (
                            LogMagnitudeFlag,                        // Log magnitude flag
                            NumberOfOrdersToSum);                    // Number of orders to sum
 
-#if SL_PRINT_DEBUG_RESULTS
+#if SIGLIB_ENABLE_DEBUG_LOGGING
 //  SUF_Debugfprintf ("OrderSum = %lf\n", OrderSum);
 #endif
 

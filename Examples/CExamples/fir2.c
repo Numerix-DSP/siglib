@@ -1,5 +1,5 @@
 // SigLib FIR Filter Example 2
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -73,8 +73,6 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  SLFixData_t     i;
-
   pSrc1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
   pSrc2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
   pImagData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
@@ -120,7 +118,7 @@ int main (
                       SAMPLE_LENGTH);                               // Output dataset length
 
 // Apply fir filter and store filtered data
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLFixData_t i = 0; i < SAMPLE_LENGTH; i++) {
     *pSrc2++ = SDS_Fir (*pSrc1++,                                   // Input data sample to be filtered
                         pFilterState,                               // Pointer to filter state array
                         pFilterTaps,                                // Pointer to filter coefficients

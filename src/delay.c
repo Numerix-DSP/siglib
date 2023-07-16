@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : DELAY.C       | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 30/06/2005
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Delay functions, for SigLib DSP library.
 
@@ -40,7 +40,6 @@ Description : Delay functions, for SigLib DSP library.
 #define SIGLIB_SRC_FILE_DELAY   1                                   // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
 
 /**/
 
@@ -65,16 +64,13 @@ void SIGLIB_FUNC_DECL SIF_FixedDelay (
   SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
   const SLArrayIndex_t DelayLength)
 {
-  SLArrayIndex_t  i;
-
-  for (i = 0; i < DelayLength; i++) {                               // Clear delay state array
+  for (SLArrayIndex_t i = 0; i < DelayLength; i++) {                // Clear delay state array
     *pState++ = SIGLIB_ZERO;
   }
 
   if (pDelayIndex != SIGLIB_NULL_ARRAY_INDEX_PTR) {
     *pDelayIndex = SIGLIB_AI_ZERO;                                  // Initilaise filter index
   }
-
 }                                                                   // End of SIF_FixedDelay()
 
 
@@ -103,8 +99,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_FixedDelay (
   SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
   const SLArrayIndex_t DelayLength)
 {
-  SLData_t        dtmp;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pState % 8 == 0);                                 // Align arrays on 64 bit double word boundary for LDDW
@@ -115,7 +109,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_FixedDelay (
   if (*pDelayIndex >= DelayLength) {
     *pDelayIndex = 0;
   }
-  dtmp = pState[*pDelayIndex];
+  SLData_t        dtmp = pState[*pDelayIndex];
   pState[*pDelayIndex] = Src;
 
   return (dtmp);
@@ -151,9 +145,6 @@ void SIGLIB_FUNC_DECL SDA_FixedDelay (
   const SLArrayIndex_t DelayLength,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLArrayIndex_t  LocalDelayIndex = *pDelayIndex;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -162,7 +153,9 @@ void SIGLIB_FUNC_DECL SDA_FixedDelay (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  SLArrayIndex_t  LocalDelayIndex = *pDelayIndex;
+
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
     LocalDelayIndex++;
     if (LocalDelayIndex >= DelayLength) {
       LocalDelayIndex = 0;
@@ -172,7 +165,6 @@ void SIGLIB_FUNC_DECL SDA_FixedDelay (
   }
 
   *pDelayIndex = LocalDelayIndex;
-
 }                                                                   // End of SDA_FixedDelay()
 
 
@@ -201,10 +193,7 @@ void SIGLIB_FUNC_DECL SIF_FixedDelayComplex (
   SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
   const SLArrayIndex_t DelayLength)
 {
-  SLArrayIndex_t  i;
-
-// Clear delay state array
-  for (i = 0; i < DelayLength; i++) {
+  for (SLArrayIndex_t i = 0; i < DelayLength; i++) {                // Clear delay state array
     *pRealState++ = SIGLIB_ZERO;
     *pImagState++ = SIGLIB_ZERO;
   }
@@ -212,7 +201,6 @@ void SIGLIB_FUNC_DECL SIF_FixedDelayComplex (
   if (pDelayIndex != SIGLIB_NULL_ARRAY_INDEX_PTR) {
     *pDelayIndex = SIGLIB_AI_ZERO;                                  // Initilaise filter index
   }
-
 }                                                                   // End of SIF_FixedDelayComplex()
 
 
@@ -264,7 +252,6 @@ void SIGLIB_FUNC_DECL SDS_FixedDelayComplex (
   pRealState[*pDelayIndex] = RealSrc;
   *pImagDst = pImagState[*pDelayIndex];
   pImagState[*pDelayIndex] = ImagSrc;
-
 }                                                                   // End of SDS_FixedDelayComplex()
 
 
@@ -303,9 +290,6 @@ void SIGLIB_FUNC_DECL SDA_FixedDelayComplex (
   const SLArrayIndex_t DelayLength,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLArrayIndex_t  LocalDelayIndex = *pDelayIndex;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrcReal % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
@@ -318,7 +302,9 @@ void SIGLIB_FUNC_DECL SDA_FixedDelayComplex (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  SLArrayIndex_t  LocalDelayIndex = *pDelayIndex;
+
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
     LocalDelayIndex++;
     if (LocalDelayIndex >= DelayLength) {
       LocalDelayIndex = 0;
@@ -363,9 +349,6 @@ void SIGLIB_FUNC_DECL SDA_ShortFixedDelay (
   const SLArrayIndex_t Delay,
   const SLArrayIndex_t SampleLength)
 {
-  SLData_t       *LocalpDelay;
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -376,24 +359,23 @@ void SIGLIB_FUNC_DECL SDA_ShortFixedDelay (
 #endif
 
   pSrc += (SampleLength - 1);                                       // Write input data to delay array
-  for (i = 0; i < Delay; i++) {
+  for (SLArrayIndex_t i = 0; i < Delay; i++) {
     *pTempDst++ = *pSrc--;
   }
 
   pTempDst -= Delay;
 
   pDst += (SampleLength - 1);                                       // Write input data to output array
-  for (i = 0; i < (SampleLength - Delay); i++) {
+  for (SLArrayIndex_t i = 0; i < (SampleLength - Delay); i++) {
     *pDst-- = *pSrc--;
   }
 
-  LocalpDelay = pDelay;                                             // Write delayed data to output array
-  for (i = 0; i < Delay; i++) {
+  SLData_t       *LocalpDelay = pDelay;                             // Write delayed data to output array
+  for (SLArrayIndex_t i = 0; i < Delay; i++) {
     *pDst-- = *LocalpDelay++;
   }
 
   SDA_Copy (pTempDst, pDelay, Delay);                               // Save delayed data
-
 }                                                                   // End of SDA_ShortFixedDelay
 
 
@@ -480,14 +462,13 @@ SLData_t SIGLIB_FUNC_DECL SDS_VariableDelay (
   SLArrayIndex_t * pOutputIndex,
   const SLArrayIndex_t MaxDelayLength)
 {
-  SLData_t        OutputValue;
-  SLArrayIndex_t  LocalIndex = *pInputIndex;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) pDelayArray % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
+
+  SLArrayIndex_t  LocalIndex = *pInputIndex;
 
   *(pDelayArray + LocalIndex) = InputValue;                         // Write in new input value
 
@@ -499,7 +480,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_VariableDelay (
 
 
   LocalIndex = *pOutputIndex;
-  OutputValue = *(pDelayArray + LocalIndex);                        // Read out delayed value
+  SLData_t        OutputValue = *(pDelayArray + LocalIndex);        // Read out delayed value
 
   LocalIndex++;                                                     // Update output pointer
   if (LocalIndex >= MaxDelayLength) {
@@ -544,17 +525,16 @@ void SIGLIB_FUNC_DECL SDA_VariableDelay (
   const SLArrayIndex_t MaxDelayLength,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  LocalInputIndex = *pInputIndex;
-  SLArrayIndex_t  LocalOutputIndex = *pOutputIndex;
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pDelayArray % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  SLArrayIndex_t  LocalInputIndex = *pInputIndex;
+  SLArrayIndex_t  LocalOutputIndex = *pOutputIndex;
+
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
     *(pDelayArray + LocalInputIndex) = *pSrc++;                     // Write in new input value
 
     LocalInputIndex++;                                              // Update input pointer
@@ -669,8 +649,6 @@ void SIGLIB_FUNC_DECL SDS_VariableDelayComplex (
   SLArrayIndex_t * pOutputIndex,
   const SLArrayIndex_t MaxDelayLength)
 {
-  SLArrayIndex_t  LocalIndex = *pInputIndex;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) pRealDelayedResult % 8 == 0);                     // Align arrays on 64 bit double word boundary for LDDW
@@ -679,6 +657,8 @@ void SIGLIB_FUNC_DECL SDS_VariableDelayComplex (
   _nassert ((int) pImagDelayArray % 8 == 0);
 #endif
 #endif
+
+  SLArrayIndex_t  LocalIndex = *pInputIndex;
 
   *(pRealDelayArray + LocalIndex) = RealInputValue;                 // Write in new input values
   *(pImagDelayArray + LocalIndex) = ImagInputValue;
@@ -741,10 +721,6 @@ void SIGLIB_FUNC_DECL SDA_VariableDelayComplex (
   const SLArrayIndex_t MaxDelayLength,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  LocalInputIndex = *pInputIndex;
-  SLArrayIndex_t  LocalOutputIndex = *pOutputIndex;
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrcReal % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
@@ -758,7 +734,10 @@ void SIGLIB_FUNC_DECL SDA_VariableDelayComplex (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  SLArrayIndex_t  LocalInputIndex = *pInputIndex;
+  SLArrayIndex_t  LocalOutputIndex = *pOutputIndex;
+
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
     *(pRealDelayArray + LocalInputIndex) = *pSrcReal++;             // Write in new input value
     *(pImagDelayArray + LocalInputIndex) = *pSrcImag++;
 
@@ -883,7 +862,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_Align (
   SLArrayIndex_t  OutputIndexSrc2End;
   SLArrayIndex_t  InputIndexSrc1Start;
   SLArrayIndex_t  InputIndexSrc2Start;
-
 
   SDA_CorrelateLinearReturnPeak (pSrc1,                             // Pointer to input array #1
                                  pSrc2,                             // Pointer to input array #2

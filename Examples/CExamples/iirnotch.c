@@ -1,6 +1,6 @@
 // IIR Notch Filter Example
 // Generates the notch filter with the specified magnitude for the pole
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -8,7 +8,7 @@
 #include <gnuplot_c.h>                                              // Gnuplot/C
 
 // Define constants
-#define SAMPLE_RATE             16000.
+#define SAMPLE_RATE_HZ          16000.
 #define NOTCH_FREQUENCY         2000.
 #define POLE_MAGNITUDE          0.9                                 // Magnitude of the pole
 
@@ -50,7 +50,7 @@ int main (
 
 // Generate the notch filter coefficients
   SIF_IirNotchFilter2 (pIIRCoeffs,                                  // Pointer to filter coefficients
-                       NOTCH_FREQUENCY / SAMPLE_RATE,               // Notch frequency
+                       NOTCH_FREQUENCY / SAMPLE_RATE_HZ,            // Notch frequency
                        POLE_MAGNITUDE,                              // Pole magnitude
                        FILTER_ORDER);                               // Filter order
 
@@ -100,7 +100,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Impulse response",                                  // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE),          // Maximum X value
+               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE_HZ),       // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -126,7 +126,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Frequency response",                                // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               (SAMPLE_RATE / SIGLIB_TWO),                          // Maximum X value
+               (SAMPLE_RATE_HZ / SIGLIB_TWO),                       // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph

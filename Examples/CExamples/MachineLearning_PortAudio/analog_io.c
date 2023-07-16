@@ -1,5 +1,5 @@
 // SigLib PortAudio Example Program
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 #include <stdio.h>
 #include "portaudio.h"
@@ -34,19 +34,19 @@ static int paCallback (
 {
   SAMPLE         *out = (SAMPLE *) outputBuffer;
   const SAMPLE   *in = (const SAMPLE *) inputBuffer;
-  unsigned int    i;
+
   (void) timeInfo;                                                  // Prevent unused variable warnings.
   (void) statusFlags;
   (void) userData;
 
   if (inputBuffer == NULL) {                                        // If input array empty then output silence
-    for (i = 0; i < framesPerBuffer; i++) {
+    for (unsigned int i = 0; i < framesPerBuffer; i++) {
       *out++ = 0;                                                   // Left
       *out++ = 0;                                                   // Right
     }
   }
   else {                                                            // If input array NOT empty then process data
-    for (i = 0; i < framesPerBuffer; i++) {
+    for (unsigned int i = 0; i < framesPerBuffer; i++) {
       adc_in0 = (short) (*in++ >> 16);                              // Left
       adc_in1 = (short) (*in++ >> 16);                              // Right
       p_analog_isr ();

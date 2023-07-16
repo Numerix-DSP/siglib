@@ -1,7 +1,7 @@
 
 
 
-                                SigLib™
+                                SigLibï¿½
 
                        Signal Processing Library
                           Benchmark Functions
@@ -32,13 +32,13 @@ For further information, please read the header at the top of the source
 file benchfft.c.
 
 
-SigLib is a trademark of Alpha Numerix all othertrademarks acknowledged.
+SigLib is a trademark of Delta Numerix all othertrademarks acknowledged.
 
 
 For additional information, please contact :
 
-Alpha Numerix
+Delta Numerix
 Email: info@numerix-dsp.com
 WWW  : https:\\www.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.

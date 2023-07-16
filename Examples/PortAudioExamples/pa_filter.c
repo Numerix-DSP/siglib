@@ -1,12 +1,12 @@
 // SigLib PortAudio Example Program
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 #include <stdio.h>
 #include <math.h>
 #include "analog_io.h"
 #include <siglib.h>                                                 // SigLib DSP library
 
-#define SAMPLE_RATE     44100
+#define SAMPLE_RATE_HZ  44100
 #define FILTER_STAGES   1                                           // Single 2nd ordrer biquad
 
 // Fc = 1 kHz LPF
@@ -49,7 +49,7 @@ int main (
   SIF_Iir (Chan0FilterState, FILTER_STAGES);
   SIF_Iir (Chan1FilterState, FILTER_STAGES);
 
-  Error = analog_open (SAMPLE_RATE, analog_isr);                    // Open the analog interface
+  Error = analog_open (SAMPLE_RATE_HZ, analog_isr);                 // Open the analog interface
   if (Error == -1)
     return 1;
 

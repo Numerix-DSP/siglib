@@ -1,8 +1,33 @@
 SigLib (Tm) Revision Update History File
 ========================================
 
-VERSION : 10.41
-RELEASE DATE : xx/xx/2023
+VERSION : 10.51
+RELEASE DATE : 16/07/2023
+_________________________
+
+Additional Functionality
+  SDS_OnePoleEWMA and SDA_OnePoleEWMA - Exponentially Weighted Moving Average One-Pole filters
+  SIF_AgcEnvelopeDetector, SDS_AgcEnvelopeDetector, SDA_AgcEnvelopeDetector
+  SIF_Drc, SDS_Drc, SDA_Drc
+
+Operational Changes :
+  Updated build and run shell scripts to more portably handle command line parameters to pass to executable
+
+Additional Processor / Compiler Support :
+  None.
+
+Optimisation Changes :
+  None.
+
+Bug Fixes :
+  None.
+
+Notes :
+  Tidied up some examples
+
+
+VERSION : 10.50
+RELEASE DATE : 24/06/2023
 _________________________
 
 Additional Processor / Compiler Support :
@@ -11,6 +36,7 @@ Additional Processor / Compiler Support :
 Additional Functionality
   SUF_PCMReadData, SUF_PCMWriteData, SUF_PCMReadFile, SUF_PCMWriteFile
   SDS_VoltageTodB, SDA_VoltageTodB, SDS_dBToVoltage, SDA_dBToVoltage, SDS_PowerTodB, SDA_PowerTodB, SDS_dBToPower, SDA_dBToPower
+  Macros: SDS_VoltageTodBmMacro, SDS_dBmToVoltageMacro, SDS_VoltageTodBMacro, SDS_dBToVoltageMacro, SDS_PowerTodBMacro, SDS_dBToPowerMacro
 
 Bug Fixes :
   None.
@@ -22,10 +48,10 @@ Operational Changes :
     SDS_dBmToLinear to SDS_dBmToVoltage, SDA_dBmToLinear to SDA_dBmToVoltage
 
 Optimisation Changes :
-  None.
+  Reworked all for loops so that loop counters are declared locally. Allows greater optimisation for certain compilers.
 
 Notes :
-  None.
+  Tidied up some examples
 
 
 VERSION : 10.40
@@ -2157,5 +2183,5 @@ Operational Changes :
 	Started to integrate functions into library
 
 
-DFPlus, Digital Filter Plus, SigLib are trademarks of Alpha Numerix
-Copyright (c) 2023 Alpha Numerix
+DFPlus, Digital Filter Plus, SigLib are trademarks of Delta Numerix
+Copyright (c) 2023 Delta Numerix

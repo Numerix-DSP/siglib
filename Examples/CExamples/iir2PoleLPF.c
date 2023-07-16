@@ -1,5 +1,5 @@
 // SigLib IIR 2 Pole Low Pass Filter Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -9,7 +9,7 @@
 // Define constants
 #define PLOT_RESULTS            1                                   // Set to 1 to plot results as well as print them
 
-#define SAMPLE_RATE             10000.                              // 10 KHz sample rate
+#define SAMPLE_RATE_HZ          10000.                              // 10 KHz sample rate
 #define CUT_OFF_FREQUENCY       1000.                               // Cut-off frequency
 #define RADIUS                  0.9                                 // Radius
 
@@ -90,7 +90,7 @@ int main (
 // Initialize the IIR filter function
   SIF_Iir2PoleLpf (pFilterState,                                    // Pointer to filter state array
                    pIIRCoeffs,                                      // Pointer to filter coefficients array
-                   CUT_OFF_FREQUENCY / SAMPLE_RATE,                 // Cut-off frequency
+                   CUT_OFF_FREQUENCY / SAMPLE_RATE_HZ,              // Cut-off frequency
                    RADIUS);                                         // Pole radius
 
   printf ("Coeff [0] = %lf, Coeff [1] = %lf\n", *pIIRCoeffs, *(pIIRCoeffs + 1));

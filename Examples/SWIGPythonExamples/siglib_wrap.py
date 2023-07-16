@@ -3,7 +3,7 @@
 #
 # Do not make changes to this file unless you know what you are doing--modify
 # the SWIG interface file instead.
-# Copyright (c) 2023 Alpha Numerix
+# Copyright (c) 2023 Delta Numerix
 
 from sys import version_info as _swig_python_version_info
 if _swig_python_version_info >= (2, 7, 0):
@@ -168,13 +168,12 @@ longArray_frompointer = _siglib_wrap.longArray_frompointer
 
 SIGLIB = _siglib_wrap.SIGLIB
 SIGLIB_VERSION = _siglib_wrap.SIGLIB_VERSION
-SIGLIB_ENABLE_DEBUG_FPRINTF = _siglib_wrap.SIGLIB_ENABLE_DEBUG_FPRINTF
+SIGLIB_ENABLE_DEBUG_LOGGING = _siglib_wrap.SIGLIB_ENABLE_DEBUG_LOGGING
 SIGLIB_FIX_DATA_SHORT = _siglib_wrap.SIGLIB_FIX_DATA_SHORT
 SIGLIB_DATA_SHORT = _siglib_wrap.SIGLIB_DATA_SHORT
 SIGLIB_DATA_LONG = _siglib_wrap.SIGLIB_DATA_LONG
 SIGLIB_DATA_FLOAT = _siglib_wrap.SIGLIB_DATA_FLOAT
 SIGLIB_INDEX_SHORT = _siglib_wrap.SIGLIB_INDEX_SHORT
-SIGLIB_HUGE_ARRAYS = _siglib_wrap.SIGLIB_HUGE_ARRAYS
 SIGLIB_ARRAYS_ALIGNED = _siglib_wrap.SIGLIB_ARRAYS_ALIGNED
 SIGLIB_FILE_IO_SUPPORTED = _siglib_wrap.SIGLIB_FILE_IO_SUPPORTED
 SIGLIB_CONSOLE_IO_SUPPORTED = _siglib_wrap.SIGLIB_CONSOLE_IO_SUPPORTED

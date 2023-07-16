@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : TRIG.C        | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 08/03/1994
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Trigonometry functions, for SigLib DSP library.
 
@@ -40,7 +40,6 @@ Description : Trigonometry functions, for SigLib DSP library.
 #define SIGLIB_SRC_FILE_TRIG    1                                   // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
 
 /**/
 
@@ -65,8 +64,6 @@ void SIGLIB_FUNC_DECL SDA_Sin (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -74,10 +71,9 @@ void SIGLIB_FUNC_DECL SDA_Sin (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
     *pDst++ = SDS_Sin (*pSrc++);
   }
-
 }                                                                   // End of SDA_Sin()
 
 
@@ -104,8 +100,6 @@ void SIGLIB_FUNC_DECL SDA_Cos (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -113,10 +107,9 @@ void SIGLIB_FUNC_DECL SDA_Cos (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
     *pDst++ = SDS_Cos (*pSrc++);
   }
-
 }                                                                   // End of SDA_Cos()
 
 
@@ -143,8 +136,6 @@ void SIGLIB_FUNC_DECL SDA_Tan (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -152,10 +143,9 @@ void SIGLIB_FUNC_DECL SDA_Tan (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
     *pDst++ = SDS_Tan (*pSrc++);
   }
-
 }                                                                   // End of SDA_Tan()
 
 
@@ -180,13 +170,10 @@ void SIGLIB_FUNC_DECL SIF_FastSin (
   SLData_t * pSineTable,
   const SLArrayIndex_t TableLength)
 {
-  SLArrayIndex_t  i;
   SLData_t        PhaseMultiplier = (SIGLIB_TWO_PI / ((SLData_t) TableLength));
-
-  for (i = 0; i < TableLength; i++) {
+  for (SLArrayIndex_t i = 0; i < TableLength; i++) {
     *pSineTable++ = SDS_Sin (PhaseMultiplier * i);
   }
-
 }                                                                   // End of SIF_FastSin()
 
 
@@ -219,10 +206,6 @@ void SIGLIB_FUNC_DECL SDA_FastSin (
   const SLArrayIndex_t SineTableLength,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        LocalCarrierTablePhase = *pSineTablePhase;
-  SLData_t        SLData_tPeriod = (SLData_t) SineTableLength;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pDst % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -230,7 +213,10 @@ void SIGLIB_FUNC_DECL SDA_FastSin (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  SLData_t        LocalCarrierTablePhase = *pSineTablePhase;
+  SLData_t        SLData_tPeriod = (SLData_t) SineTableLength;
+
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst[i] = pSineTable[(SLArrayIndex_t) ((LocalCarrierTablePhase * SLData_tPeriod) + 0.1)];
 #else
@@ -242,9 +228,7 @@ void SIGLIB_FUNC_DECL SDA_FastSin (
       LocalCarrierTablePhase -= SIGLIB_ONE;
     }
   }
-
   *pSineTablePhase = LocalCarrierTablePhase;                        // Save carrier table index for next iteration
-
 }                                                                   // End of SDA_FastSin()
 
 
@@ -273,17 +257,13 @@ SLData_t SIGLIB_FUNC_DECL SDS_FastSin (
   const SLData_t SineFrequency,
   const SLArrayIndex_t SineTableLength)
 {
-  SLData_t        Dst;
-
-  Dst = pSineTable[(SLArrayIndex_t) ((*pSineTablePhase * (SLData_t) SineTableLength) + 0.1)];
+  SLData_t        Dst = pSineTable[(SLArrayIndex_t) ((*pSineTablePhase * (SLData_t) SineTableLength) + 0.1)];
 
   (*pSineTablePhase) += SineFrequency;                              // Update the carrier table index
   if (*pSineTablePhase >= SIGLIB_ONE) {
     *pSineTablePhase -= SIGLIB_ONE;
   }
-
   return (Dst);
-
 }                                                                   // End of SDS_FastSin()
 
 
@@ -308,13 +288,11 @@ void SIGLIB_FUNC_DECL SIF_FastCos (
   SLData_t * pCosineTable,
   const SLArrayIndex_t TableLength)
 {
-  SLArrayIndex_t  i;
   SLData_t        PhaseMultiplier = (SIGLIB_TWO_PI / ((SLData_t) TableLength));
 
-  for (i = 0; i < TableLength; i++) {
+  for (SLArrayIndex_t i = 0; i < TableLength; i++) {
     *pCosineTable++ = SDS_Cos (PhaseMultiplier * i);
   }
-
 }                                                                   // End of SIF_FastCos()
 
 
@@ -347,10 +325,6 @@ void SIGLIB_FUNC_DECL SDA_FastCos (
   const SLArrayIndex_t CosineTableLength,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        LocalCarrierTablePhase = *pCosineTablePhase;
-  SLData_t        SLData_tPeriod = (SLData_t) CosineTableLength;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pDst % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -358,7 +332,10 @@ void SIGLIB_FUNC_DECL SDA_FastCos (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  SLData_t        LocalCarrierTablePhase = *pCosineTablePhase;
+  SLData_t        SLData_tPeriod = (SLData_t) CosineTableLength;
+
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst[i] = pCosineTable[(SLArrayIndex_t) ((LocalCarrierTablePhase * SLData_tPeriod) + 0.1)];
 #else
@@ -370,9 +347,7 @@ void SIGLIB_FUNC_DECL SDA_FastCos (
       LocalCarrierTablePhase -= SIGLIB_ONE;
     }
   }
-
   *pCosineTablePhase = LocalCarrierTablePhase;                      // Save carrier table index for next iteration
-
 }                                                                   // End of SDA_FastCos()
 
 
@@ -401,17 +376,13 @@ SLData_t SIGLIB_FUNC_DECL SDS_FastCos (
   const SLData_t CosineFrequency,
   const SLArrayIndex_t CosineTableLength)
 {
-  SLData_t        Dst;
-
-  Dst = pCosineTable[(SLArrayIndex_t) ((*pCosineTablePhase * (SLData_t) CosineTableLength) + 0.1)];
+  SLData_t        Dst = pCosineTable[(SLArrayIndex_t) ((*pCosineTablePhase * (SLData_t) CosineTableLength) + 0.1)];
 
   (*pCosineTablePhase) += CosineFrequency;                          // Update the carrier table index
   if (*pCosineTablePhase >= SIGLIB_ONE) {
     *pCosineTablePhase -= SIGLIB_ONE;
   }
-
   return (Dst);
-
 }                                                                   // End of SDS_FastCos()
 
 
@@ -436,14 +407,12 @@ void SIGLIB_FUNC_DECL SIF_FastSinCos (
   SLData_t * pSineTable,
   const SLArrayIndex_t SinCosPeriod)
 {
-  SLArrayIndex_t  i;
   SLArrayIndex_t  TableLength = ((SinCosPeriod * 5) / 4);
   SLData_t        PhaseMultiplier = (SIGLIB_TWO_PI / ((SLData_t) SinCosPeriod));
 
-  for (i = 0; i < TableLength; i++) {
+  for (SLArrayIndex_t i = 0; i < TableLength; i++) {
     *pSineTable++ = SDS_Sin (PhaseMultiplier * i);
   }
-
 }                                                                   // End of SIF_FastSinCos()
 
 
@@ -479,11 +448,6 @@ void SIGLIB_FUNC_DECL SDA_FastSinCos (
   const SLArrayIndex_t SinCosPeriod,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        LocalCarrierTablePhase = *pSineTablePhase;
-  SLData_t        SLData_tPeriod = (SLData_t) SinCosPeriod;
-  SLArrayIndex_t  QuarterPeriod = (SLUFixData_t) SinCosPeriod >> 2U;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSinDst % 8 == 0);                                // Align arrays on 64 bit double word boundary for LDDW
@@ -492,7 +456,11 @@ void SIGLIB_FUNC_DECL SDA_FastSinCos (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  SLData_t        LocalCarrierTablePhase = *pSineTablePhase;
+  SLData_t        SLData_tPeriod = (SLData_t) SinCosPeriod;
+  SLArrayIndex_t  QuarterPeriod = (SLUFixData_t) SinCosPeriod >> 2U;
+
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pSinDst[i] = pSineTable[(SLArrayIndex_t) ((LocalCarrierTablePhase * SLData_tPeriod) + 0.1)];
     pCosDst[i] = pSineTable[(SLArrayIndex_t) (((LocalCarrierTablePhase * SLData_tPeriod)) + 0.1) + QuarterPeriod];
@@ -508,7 +476,6 @@ void SIGLIB_FUNC_DECL SDA_FastSinCos (
   }
 
   *pSineTablePhase = LocalCarrierTablePhase;                        // Save carrier table index for next iteration
-
 }                                                                   // End of SDA_FastSinCos()
 
 
@@ -550,7 +517,6 @@ void SIGLIB_FUNC_DECL SDS_FastSinCos (
   if (*pSineTablePhase >= SIGLIB_ONE) {
     *pSineTablePhase -= SIGLIB_ONE;
   }
-
 }                                                                   // End of SDS_FastSinCos()
 
 
@@ -577,16 +543,12 @@ void SIGLIB_FUNC_DECL SIF_QuickSin (
   SLData_t * pPhaseGain,
   const SLArrayIndex_t TableLength)
 {
-  SLArrayIndex_t  i;
-
   *pPhaseGain = (SIGLIB_TWO_PI / TableLength);                      // Calculate phase increment through lookup table
 
-  for (i = 0; i < TableLength; i++) {
+  for (SLArrayIndex_t i = 0; i < TableLength; i++) {
     *pSineTable++ = SDS_Sin (*pPhaseGain * i);
   }
-
   *pPhaseGain = SIGLIB_ONE / (*pPhaseGain);                         // Invert for use in the quick functions
-
 }                                                                   // End of SIF_QuickSin()
 
 
@@ -618,9 +580,6 @@ void SIGLIB_FUNC_DECL SDA_QuickSin (
   const SLData_t PhaseGain,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        LocalAngle;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -629,9 +588,9 @@ void SIGLIB_FUNC_DECL SDA_QuickSin (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
-    LocalAngle = pSrc[i];
+    SLData_t        LocalAngle = pSrc[i];
     if (LocalAngle >= SIGLIB_ZERO) {
       while (LocalAngle >= SIGLIB_TWO_PI) {                         // Wrap into 0 -> 2.0*pi
         LocalAngle -= SIGLIB_TWO_PI;
@@ -645,7 +604,7 @@ void SIGLIB_FUNC_DECL SDA_QuickSin (
       pDst[i] = -pSineTable[(SLArrayIndex_t) ((LocalAngle * PhaseGain) + 0.1)];
     }
 #else
-    LocalAngle = *pSrc++;
+    SLData_t        LocalAngle = *pSrc++;
     if (LocalAngle >= SIGLIB_ZERO) {
       while (LocalAngle >= SIGLIB_TWO_PI) {                         // Wrap into 0 -> 2.0*pi
         LocalAngle -= SIGLIB_TWO_PI;
@@ -687,7 +646,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_QuickSin (
   const SLData_t PhaseGain)
 {
   SLData_t        LocalAngle = Angle;
-
   if (LocalAngle >= SIGLIB_ZERO) {
     while (LocalAngle >= SIGLIB_TWO_PI) {                           // Wrap into 0 -> 2.0*pi
       LocalAngle -= SIGLIB_TWO_PI;
@@ -726,16 +684,11 @@ void SIGLIB_FUNC_DECL SIF_QuickCos (
   SLData_t * pPhaseGain,
   const SLArrayIndex_t TableLength)
 {
-  SLArrayIndex_t  i;
-
   *pPhaseGain = (SIGLIB_TWO_PI / TableLength);                      // Calculate phase increment through lookup table
-
-  for (i = 0; i < TableLength; i++) {
+  for (SLArrayIndex_t i = 0; i < TableLength; i++) {
     *pCosineTable++ = SDS_Cos (*pPhaseGain * i);
   }
-
   *pPhaseGain = SIGLIB_ONE / (*pPhaseGain);                         // Invert for use in the quick functions
-
 }                                                                   // End of SIF_QuickCos()
 
 
@@ -767,9 +720,6 @@ void SIGLIB_FUNC_DECL SDA_QuickCos (
   const SLData_t PhaseGain,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        LocalAngle;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -778,9 +728,9 @@ void SIGLIB_FUNC_DECL SDA_QuickCos (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
-    LocalAngle = pSrc[i];
+    SLData_t        LocalAngle = pSrc[i];
     if (LocalAngle >= SIGLIB_ZERO) {
       while (LocalAngle >= SIGLIB_TWO_PI) {                         // Wrap into 0 -> 2.0*pi
         LocalAngle -= SIGLIB_TWO_PI;
@@ -793,7 +743,7 @@ void SIGLIB_FUNC_DECL SDA_QuickCos (
     }
     pDst[i] = pCosineTable[(SLArrayIndex_t) ((LocalAngle * PhaseGain) + 0.1)];
 #else
-    LocalAngle = *pSrc++;
+    SLData_t        LocalAngle = *pSrc++;
     if (LocalAngle >= SIGLIB_ZERO) {
       while (LocalAngle >= SIGLIB_TWO_PI) {                         // Wrap into 0 -> 2.0*pi
         LocalAngle -= SIGLIB_TWO_PI;
@@ -834,7 +784,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_QuickCos (
   const SLData_t PhaseGain)
 {
   SLData_t        LocalAngle = Angle;
-
   if (LocalAngle >= SIGLIB_ZERO) {
     while (LocalAngle >= SIGLIB_TWO_PI) {                           // Wrap into 0 -> 2.0*pi
       LocalAngle -= SIGLIB_TWO_PI;
@@ -873,17 +822,12 @@ void SIGLIB_FUNC_DECL SIF_QuickSinCos (
   SLData_t * pPhaseGain,
   const SLArrayIndex_t SinCosPeriod)
 {
-  SLArrayIndex_t  i;
   SLArrayIndex_t  TableLength = ((SinCosPeriod * 5) / 4);
-
   *pPhaseGain = (SIGLIB_TWO_PI / TableLength);                      // Calculate phase increment through lookup table
-
-  for (i = 0; i < TableLength; i++) {
+  for (SLArrayIndex_t i = 0; i < TableLength; i++) {
     *pSineTable++ = SDS_Sin (*pPhaseGain * i);
   }
-
   *pPhaseGain = SIGLIB_ONE / (*pPhaseGain);                         // Invert for use in the quick functions
-
 }                                                                   // End of SIF_QuickSinCos()
 
 
@@ -919,10 +863,6 @@ void SIGLIB_FUNC_DECL SDA_QuickSinCos (
   const SLArrayIndex_t SinCosPeriod,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLArrayIndex_t  QuarterPeriod = (SLUFixData_t) SinCosPeriod >> 2U;
-  SLData_t        LocalAngle;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSinDst % 8 == 0);                                // Align arrays on 64 bit double word boundary for LDDW
@@ -931,9 +871,10 @@ void SIGLIB_FUNC_DECL SDA_QuickSinCos (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  SLArrayIndex_t  QuarterPeriod = (SLUFixData_t) SinCosPeriod >> 2U;
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
-    LocalAngle = pSrc[i];
+    SLData_t        LocalAngle = pSrc[i];
     if (LocalAngle >= SIGLIB_ZERO) {
       while (LocalAngle >= SIGLIB_TWO_PI) {                         // Wrap into 0 -> 2.0*pi
         LocalAngle -= SIGLIB_TWO_PI;
@@ -949,7 +890,7 @@ void SIGLIB_FUNC_DECL SDA_QuickSinCos (
       pCosDst[i] = pSineTable[(SLArrayIndex_t) ((LocalAngle * PhaseGain) + 0.1) + QuarterPeriod];
     }
 #else
-    LocalAngle = *pSrc++;
+    SLData_t        LocalAngle = *pSrc++;
     if (LocalAngle >= SIGLIB_ZERO) {
       while (LocalAngle >= SIGLIB_TWO_PI) {                         // Wrap into 0 -> 2.0*pi
         LocalAngle -= SIGLIB_TWO_PI;
@@ -965,7 +906,6 @@ void SIGLIB_FUNC_DECL SDA_QuickSinCos (
       *pCosDst++ = *(pSineTable + ((SLArrayIndex_t) ((LocalAngle * PhaseGain) + 0.1)) + QuarterPeriod);
     }
 #endif
-
   }
 }                                                                   // End of SDA_QuickSinCos()
 
@@ -1001,7 +941,6 @@ void SIGLIB_FUNC_DECL SDS_QuickSinCos (
   const SLArrayIndex_t SinCosPeriod)
 {
   SLData_t        LocalAngle = Angle;
-
   if (LocalAngle >= SIGLIB_ZERO) {
     while (LocalAngle >= SIGLIB_TWO_PI) {                           // Wrap into 0 -> 2.0*pi
       LocalAngle -= SIGLIB_TWO_PI;
@@ -1042,16 +981,11 @@ void SIGLIB_FUNC_DECL SIF_QuickTan (
   SLData_t * pPhaseGain,
   const SLArrayIndex_t TableLength)
 {
-  SLArrayIndex_t  i;
-
   *pPhaseGain = (SIGLIB_TWO_PI / TableLength);                      // Calculate phase increment through lookup table
-
-  for (i = 0; i < TableLength; i++) {
+  for (SLArrayIndex_t i = 0; i < TableLength; i++) {
     *pTanTable++ = SDS_Tan (*pPhaseGain * i);
   }
-
   *pPhaseGain = SIGLIB_ONE / (*pPhaseGain);                         // Invert for use in the quick functions
-
 }                                                                   // End of SIF_QuickTan()
 
 
@@ -1083,9 +1017,6 @@ void SIGLIB_FUNC_DECL SDA_QuickTan (
   const SLData_t PhaseGain,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        LocalAngle;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -1094,9 +1025,9 @@ void SIGLIB_FUNC_DECL SDA_QuickTan (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
-    LocalAngle = pSrc[i];
+    SLData_t        LocalAngle = pSrc[i];
     if (LocalAngle >= SIGLIB_ZERO) {
       while (LocalAngle >= SIGLIB_TWO_PI) {                         // Wrap into 0 -> 2.0*pi
         LocalAngle -= SIGLIB_TWO_PI;
@@ -1110,7 +1041,7 @@ void SIGLIB_FUNC_DECL SDA_QuickTan (
       pDst[i] = -pTanTable[(SLArrayIndex_t) ((LocalAngle * PhaseGain) + 0.1)];
     }
 #else
-    LocalAngle = *pSrc++;
+    SLData_t        LocalAngle = *pSrc++;
     if (LocalAngle >= SIGLIB_ZERO) {
       while (LocalAngle >= SIGLIB_TWO_PI) {                         // Wrap into 0 -> 2.0*pi
         LocalAngle -= SIGLIB_TWO_PI;
@@ -1152,7 +1083,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_QuickTan (
   const SLData_t PhaseGain)
 {
   SLData_t        LocalAngle = Angle;
-
   if (LocalAngle >= SIGLIB_ZERO) {
     while (LocalAngle >= SIGLIB_TWO_PI) {                           // Wrap into 0 -> 2.0*pi
       LocalAngle -= SIGLIB_TWO_PI;
@@ -1191,9 +1121,6 @@ void SIGLIB_FUNC_DECL SDA_Sinc (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        x;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -1201,8 +1128,8 @@ void SIGLIB_FUNC_DECL SDA_Sinc (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
-    x = pSrc[i];
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+    SLData_t        x = pSrc[i];
     if (x == SIGLIB_ZERO) {
       pDst[i] = SIGLIB_ONE;
     }
@@ -1266,19 +1193,12 @@ void SIGLIB_FUNC_DECL SIF_QuickSinc (
   const SLData_t MaxXValue,
   const SLArrayIndex_t TableLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        localPhaseGain;
-
-//    localPhaseGain = ((MaxXValue + 1.) / ((SLData_t)(TableLength-1)));   // Calculate phase increment through lookup table
-
-  localPhaseGain = (MaxXValue / TableLength);                       // Calculate phase increment through lookup table
-
-  for (i = 0; i < TableLength; i++) {
+//    SLData_t localPhaseGain = ((MaxXValue + 1.) / ((SLData_t)(TableLength-1)));   // Calculate phase increment through lookup table
+  SLData_t        localPhaseGain = (MaxXValue / TableLength);       // Calculate phase increment through lookup table
+  for (SLArrayIndex_t i = 0; i < TableLength; i++) {
     *pSincTable++ = SDS_Sinc (localPhaseGain * i);
   }
-
   *pPhaseGain = SIGLIB_ONE / localPhaseGain;                        // Invert for use in the quick functions
-
 }                                                                   // End of SIF_QuickSinc()
 
 
@@ -1310,9 +1230,6 @@ void SIGLIB_FUNC_DECL SDA_QuickSinc (
   const SLData_t PhaseGain,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Localx;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -1321,9 +1238,9 @@ void SIGLIB_FUNC_DECL SDA_QuickSinc (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
-    Localx = pSrc[i];
+    SLData_t        Localx = pSrc[i];
     if (Localx >= SIGLIB_ZERO) {
       pDst[i] = pSincTable[(SLArrayIndex_t) (Localx * PhaseGain)];
     }
@@ -1331,7 +1248,7 @@ void SIGLIB_FUNC_DECL SDA_QuickSinc (
       pDst[i] = pSincTable[(SLArrayIndex_t) (-Localx * PhaseGain)];
     }
 #else
-    Localx = *pSrc++;
+    SLData_t        Localx = *pSrc++;
     if (Localx >= SIGLIB_ZERO) {
       *pDst++ = pSincTable[(SLArrayIndex_t) (Localx * PhaseGain)];
     }

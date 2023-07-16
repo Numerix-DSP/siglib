@@ -7,7 +7,7 @@
 // To see how to apply a scrambler to the sequence
 // (e.g. polynomial: 1 + x-14 + x-17 used in the ITU-T
 // recommendations), please refer to example tstqam16.c.
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -34,14 +34,14 @@
             // Basic application definitions
 #define SAMPLE_LENGTH                   512                         // Number of samples in array
 
-#define SAMPLE_RATE                     9600.                       // Sample rate
+#define SAMPLE_RATE_HZ                  9600.                       // Sample rate
 #define BAUD_RATE                       600.                        // Baud rate
 
 #define CARRIER_TABLE_FREQ              100.                        // Frequency of sine wave in table
 #define CARRIER_FREQ                    2400.                       // Frequency of carrier signal - a multiple of the sine table frequency
 
 #if RRCF_ENABLE
-#define RRCF_PERIOD                     (SAMPLE_RATE / BAUD_RATE)   // RRCF Period
+#define RRCF_PERIOD                     (SAMPLE_RATE_HZ / BAUD_RATE)  // RRCF Period
 #define RRCF_ROLL_OFF                   0.75                        // Root raised cosine filter roll off factor
 #define RRCF_LENGTH                     81                          // Root raised cosine filter length
 #if DIFFERENTIAL_ENCODING_ENABLE
@@ -69,10 +69,10 @@
 
 
             // Derived application definitions
-#define SYMBOL_LENGTH                   ((SLArrayIndex_t)(SAMPLE_RATE / BAUD_RATE)) // Number of samples per symbol
+#define SYMBOL_LENGTH                   ((SLArrayIndex_t)(SAMPLE_RATE_HZ / BAUD_RATE))  // Number of samples per symbol
 #define SYMBOLS_PER_LOOP                ((SLArrayIndex_t)(SAMPLE_LENGTH / SYMBOL_LENGTH)) // Number of symbols per loop for graph
 
-#define CARRIER_SINE_TABLE_SIZE         ((SLArrayIndex_t)(SAMPLE_RATE / CARRIER_TABLE_FREQ))  // Number of samples in each of cos and sine table
+#define CARRIER_SINE_TABLE_SIZE         ((SLArrayIndex_t)(SAMPLE_RATE_HZ / CARRIER_TABLE_FREQ)) // Number of samples in each of cos and sine table
 #define CARRIER_TABLE_INCREMENT         ((SLArrayIndex_t)(CARRIER_FREQ / CARRIER_TABLE_FREQ)) // Carrier frequency
 
 #define EYE_DIAGRAM_SIZE                (2 * SYMBOL_LENGTH)         // Size of eye diagram graph - Two complete symbol periods
@@ -127,7 +127,6 @@ int main (
   SLData_t        TimeIndex = SIGLIB_ZERO;
 #endif
 
-  SLArrayIndex_t  i;
   SLArrayIndex_t  TxStringIndex = 0;
   SLArrayIndex_t  TxSourceWordPhase = 0;
   SLFixData_t     TxDiBit;
@@ -152,7 +151,7 @@ int main (
 
 #if DEBUG_LOG_FILE
   SUF_ClearDebugfprintf ();
-  for (i = 0; i < 20; i++) {
+  for (SLArrayIndex_t i = 0; i < 20; i++) {
     SUF_Debugfprintf ("TxString[%d]", i);
     dpchar (TxString[i]);
   }
@@ -207,7 +206,7 @@ int main (
 
 // Initialise QPSK functions
   SIF_QpskModulate (pCarrierTable,                                  // Carrier table pointer
-                    CARRIER_TABLE_FREQ / SAMPLE_RATE,               // Carrier phase increment per sample (radians / 2π)
+                    CARRIER_TABLE_FREQ / SAMPLE_RATE_HZ,            // Carrier phase increment per sample (radians / 2π)
                     CARRIER_SINE_TABLE_SIZE,                        // Carrier sine table size
                     &TxCarrierPhase,                                // Carrier phase pointer
                     &TxSampleClock,                                 // Sample clock pointer
@@ -223,7 +222,7 @@ int main (
                     RRCF_ENABLE);                                   // RRCF enable / disable switch
 
   SIF_QpskDemodulate (pCarrierTable,                                // Carrier table pointer
-                      CARRIER_TABLE_FREQ / SAMPLE_RATE,             // Carrier phase increment per sample (radians / 2π)
+                      CARRIER_TABLE_FREQ / SAMPLE_RATE_HZ,          // Carrier phase increment per sample (radians / 2π)
                       CARRIER_SINE_TABLE_SIZE,                      // Carrier sine table size
                       &RxCarrierPhase,                              // Carrier phase pointer
                       &RxSampleClock,                               // Sample clock pointer
@@ -240,7 +239,7 @@ int main (
 
 // Main data processing loop
   for (LoopCount = 0; LoopCount < NUMBER_OF_LOOPS; LoopCount++) {
-    for (i = 0; i < SYMBOLS_PER_LOOP; i++) {                        // Modulate new symbol
+    for (SLArrayIndex_t i = 0; i < SYMBOLS_PER_LOOP; i++) {         // Modulate new symbol
       if (TxPreFillSymbolCount < TX_STARTUP_PREFILL) {              // Pre-fill the TxRx pipeline the pre-fill symbol is created prior to the modulate function
 // In order to lock the TED we must use a signal that changes phase every symbol period
 // TxDiBit = (TxPreFillSymbolCount + TxPreFillSymbolCount) & SIGLIB_QPSK_BIT_MASK;
@@ -297,12 +296,12 @@ int main (
                  ModulatedSignal,                                   // Dataset
                  SAMPLE_LENGTH,                                     // Dataset length
                  "Modulated Signal",                                // Dataset title
-                 ((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount, // Minimum X value
-                 (((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                 ((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount,  // Minimum X value
+                 (((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),  // Maximum X value
                  "lines",                                           // Graph type
                  "blue",                                            // Colour
                  GPC_NEW);                                          // New graph
-    TimeIndex += (SLData_t) SAMPLE_LENGTH / SAMPLE_RATE;
+    TimeIndex += (SLData_t) SAMPLE_LENGTH / SAMPLE_RATE_HZ;
     printf ("\nModulated Signal\nPlease hit <Carriage Return> to continue . . .");
     getchar ();
 #endif
@@ -336,7 +335,7 @@ int main (
                         SAMPLE_LENGTH);                             // Output dataset length
 
 // Receiver - De-modulate new sample
-    for (i = 0; i < SYMBOLS_PER_LOOP; i++) {
+    for (SLArrayIndex_t i = 0; i < SYMBOLS_PER_LOOP; i++) {
 #if (DISPLAY_EYE_DIAGRAM || DISPLAY_CONSTELLATION)
 // Demodulate data and generate constellation and eye diagram data
       RxDiBit = SDA_QpskDemodulateDebug (ModulatedSignal + (i * SYMBOL_LENGTH), // Source array
@@ -409,14 +408,14 @@ int main (
 
 
 #if DISPLAY_EYE_DIAGRAM
-    for (i = 0; i < SAMPLE_LENGTH; i += EYE_DIAGRAM_SIZE) {
+    for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i += EYE_DIAGRAM_SIZE) {
       if (FirstEyeDiagramFlag == 1) {
         gpc_plot_2d (h2DPlot,                                       // Graph handle
                      EyeSamples + i,                                // Dataset
                      EYE_DIAGRAM_SIZE,                              // Dataset length
                      "Eye diagram",                                 // Dataset title
-                     ((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount, // Minimum X value
-                     (((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                     ((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount,  // Minimum X value
+                     (((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),  // Maximum X value
                      "lines",                                       // Graph type
                      "blue",                                        // Colour
                      GPC_NEW);                                      // New graph
@@ -427,8 +426,8 @@ int main (
                      EyeSamples + i,                                // Dataset
                      EYE_DIAGRAM_SIZE,                              // Dataset length
                      "Eye diagram",                                 // Dataset title
-                     ((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount, // Minimum X value
-                     (((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                     ((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount,  // Minimum X value
+                     (((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),  // Maximum X value
                      "lines",                                       // Graph type
                      "blue",                                        // Colour
                      GPC_ADD);                                      // New graph
@@ -457,7 +456,7 @@ int main (
   printf ("Received string: %s\n", RxString);
 
 #if DEBUG_LOG_FILE
-  for (i = 0; i < RxStringIndex; i++) {
+  for (SLArrayIndex_t i = 0; i < RxStringIndex; i++) {
     SUF_Debugfprintf ("RxString[%d]", i);
     dpchar (RxString[i]);
   }

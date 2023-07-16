@@ -1,5 +1,5 @@
 // SigLib BPSK Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Simulating :
 // 600 bps
@@ -26,14 +26,14 @@
 #define SAMPLE_LENGTH                   512
 #define NUMBER_OF_LOOPS                 8
 
-#define SAMPLE_RATE                     9600.0
+#define SAMPLE_RATE_HZ                  9600.0
 #define BAUD_RATE                       600.0
 #define CARRIER_FREQ                    1200.0
 
-#define SYMBOL_LENGTH                   16                          // Number of samples per symbol - SAMPLE_RATE / BAUD_RATE
+#define SYMBOL_LENGTH                   16                          // Number of samples per symbol - SAMPLE_RATE_HZ / BAUD_RATE
 #define MAX_RX_STRING_LENGTH            80                          // Maximum length of an Rx string
 #define CARRIER_TABLE_FREQ              100.                        // Frequency of sine wave in table
-#define CARRIER_SINE_TABLE_SIZE         ((SLArrayIndex_t)(SAMPLE_RATE / CARRIER_TABLE_FREQ))  // Number of samples in each of cos and sine table
+#define CARRIER_SINE_TABLE_SIZE         ((SLArrayIndex_t)(SAMPLE_RATE_HZ / CARRIER_TABLE_FREQ)) // Number of samples in each of cos and sine table
 #define RX_STARTUP_DELAY                1                           // Rxr startup delay (# symbols) to allow correct synchronization with transmitter
 #define RX_BIT_COUNT_START              0                           // Starting phase of Rx bit count
 
@@ -86,7 +86,6 @@ int main (
   SLData_t        TimeIndex = SIGLIB_ZERO;
 #endif
 
-  SLArrayIndex_t  i, j;
   SLFixData_t     LoopCount;
 #if TX_BIT_MODE_ENABLED
   SLArrayIndex_t  TxBitIndex;
@@ -98,7 +97,7 @@ int main (
 
 #if DEBUG_LOG_FILE
   SUF_ClearDebugfprintf ();
-  for (i = 0; i < 20; i++) {
+  for (SLArrayIndex_t i = 0; i < 20; i++) {
     SUF_Debugfprintf ("TxString[%d]", i);
     dpchar (TxString[i]);
   }
@@ -145,14 +144,14 @@ int main (
 #endif
 
   SIF_BpskModulate (pCarrierTable,                                  // Carrier table pointer
-                    (CARRIER_TABLE_FREQ / SAMPLE_RATE),             // Carrier phase increment per sample (radians / 2π)
+                    (CARRIER_TABLE_FREQ / SAMPLE_RATE_HZ),          // Carrier phase increment per sample (radians / 2π)
                     &TxSampleCount,                                 // Transmitter sample count - tracks samples
                     CARRIER_SINE_TABLE_SIZE);                       // Carrier sine table size
 
   SIF_BpskDemodulate (&CostasLpVCOPhase,                            // VCO phase
                       pVCOLookUpTable,                              // VCO look up table
                       VCO_SINE_TABLE_SIZE,                          // VCO look up table size
-                      CARRIER_FREQ / SAMPLE_RATE,                   // Carrier phase increment per sample (radians / 2π)
+                      CARRIER_FREQ / SAMPLE_RATE_HZ,                // Carrier phase increment per sample (radians / 2π)
                       pCostasLpLPF1State,                           // Pointer to loop filter 1 state
                       &CostasLpLPF1Index,                           // Pointer to loop filter 1 index
                       pCostasLpLPF2State,                           // Pointer to loop filter 2 state
@@ -168,7 +167,7 @@ int main (
 // The phase of the transmitter can be rotated by changing this value
 
   for (LoopCount = 0; LoopCount < NUMBER_OF_LOOPS; LoopCount++) {
-    for (i = 0; i < SAMPLE_LENGTH; i += (SIGLIB_BYTE_LENGTH * SYMBOL_LENGTH)) {
+    for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i += (SIGLIB_BYTE_LENGTH * SYMBOL_LENGTH)) {
 #if TX_BIT_MODE_ENABLED
       for (TxBitIndex = 0; TxBitIndex < SIGLIB_BYTE_LENGTH; TxBitIndex++) {
         SDA_BpskModulate ((*TxStringPtr >> TxBitIndex),             // Modulating bit
@@ -197,26 +196,26 @@ int main (
                  pData,                                             // Dataset
                  SAMPLE_LENGTH,                                     // Dataset length
                  "Modulated Signal",                                // Dataset title
-                 ((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount, // Minimum X value
-                 (((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                 ((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount,  // Minimum X value
+                 (((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),  // Maximum X value
                  "lines",                                           // Graph type
                  "blue",                                            // Colour
                  GPC_NEW);                                          // New graph
-    TimeIndex += (SLData_t) SAMPLE_LENGTH / SAMPLE_RATE;
+    TimeIndex += (SLData_t) SAMPLE_LENGTH / SAMPLE_RATE_HZ;
     printf ("\nModulated Signal\nPlease hit <Carriage Return> to continue . . .");
     getchar ();
 #endif
 
 
-    for (i = 0; i < SAMPLE_LENGTH; i += (SIGLIB_BYTE_LENGTH * SYMBOL_LENGTH)) {
-      for (j = 0; j < SIGLIB_BYTE_LENGTH; j++) {
+    for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i += (SIGLIB_BYTE_LENGTH * SYMBOL_LENGTH)) {
+      for (SLArrayIndex_t j = 0; j < SIGLIB_BYTE_LENGTH; j++) {
 #if DISPLAY_FILTER_OUTPUT
         RxDemodulatedBit = SDA_BpskDemodulateDebug (pData + i + (j * SYMBOL_LENGTH),  // Source array
                                                     &CostasLpVCOPhase,  // VCO phase
                                                     VCO_MODULATION_INDEX, // VCO modulation index
                                                     pVCOLookUpTable,  // VCO look up table
                                                     VCO_SINE_TABLE_SIZE,  // VCO look up table size
-                                                    CARRIER_FREQ / SAMPLE_RATE, // Carrier frequency
+                                                    CARRIER_FREQ / SAMPLE_RATE_HZ,  // Carrier frequency
                                                     pCostasLpLPF1State, // Pointer to loop filter 1 state
                                                     &CostasLpLPF1Index, // Pointer to loop filter 1 index
                                                     pCostasLpLPF2State, // Pointer to loop filter 2 state
@@ -235,8 +234,8 @@ int main (
                      pFilterOutput,                                 // Dataset
                      SAMPLE_LENGTH,                                 // Dataset length
                      "Filter Output",                               // Dataset title
-                     ((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount, // Minimum X value
-                     (((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                     ((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount,  // Minimum X value
+                     (((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),  // Maximum X value
                      "lines",                                       // Graph type
                      "blue",                                        // Colour
                      GPC_NEW);                                      // New graph
@@ -248,7 +247,7 @@ int main (
                                                VCO_MODULATION_INDEX,  // VCO modulation index
                                                pVCOLookUpTable,     // VCO look up table
                                                VCO_SINE_TABLE_SIZE, // VCO look up table size
-                                               CARRIER_FREQ / SAMPLE_RATE,  // Carrier frequency
+                                               CARRIER_FREQ / SAMPLE_RATE_HZ, // Carrier frequency
                                                pCostasLpLPF1State,  // Pointer to loop filter 1 state
                                                &CostasLpLPF1Index,  // Pointer to loop filter 1 index
                                                pCostasLpLPF2State,  // Pointer to loop filter 2 state
@@ -280,7 +279,7 @@ int main (
   }
 
 #if DEBUG_LOG_FILE
-  for (i = 0; i < 20; i++) {
+  for (SLArrayIndex_t i = 0; i < 20; i++) {
     SUF_Debugfprintf ("RxString[%d]", i);
     dpchar (RxString[i]);
   }

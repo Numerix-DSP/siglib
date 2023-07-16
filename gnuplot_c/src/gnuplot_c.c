@@ -18,11 +18,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023, Alpha Numerix, All rights reserved.
+Copyright (c) 2023, Delta Numerix, All rights reserved.
 ****************************************************************************/
 
 #include <math.h>
@@ -245,8 +245,6 @@ int gpc_plot_2d (
   const char *pColour,
   const enum gpcNewAddGraphMode addMode)
 {
-  int             i;
-
   if (addMode == GPC_NEW) {                                         // GPC_NEW
 //        fprintf (plotHandle->pipe, "undefine $*\n");        // Release all datablocks
     plotHandle->numberOfGraphs = 0;
@@ -262,14 +260,14 @@ int gpc_plot_2d (
   sprintf (plotHandle->graphArray[plotHandle->numberOfGraphs].formatString, "%s lc rgb \"%s\"", plotType, pColour);
 
   fprintf (plotHandle->pipe, "$DATA%d << EOD\n", plotHandle->numberOfGraphs); // Write data to named data block
-  for (i = 0; i < graphLength; i++) {
+  for (int i = 0; i < graphLength; i++) {
     fprintf (plotHandle->pipe, "%1.6le %1.6le\n", xMin + ((((double) i) * (xMax - xMin)) / ((double) (graphLength - 1))), pData[i]);
   }
   fprintf (plotHandle->pipe, "EOD\n");
 
 
   fprintf (plotHandle->pipe, "plot $DATA%d u 1:2 t \"%s\" w %s", 0, plotHandle->graphArray[0].title, plotHandle->graphArray[0].formatString); // Send start of plot and first plot command
-  for (i = 1; i <= plotHandle->numberOfGraphs; i++) {               // Send individual plot commands
+  for (int i = 1; i <= plotHandle->numberOfGraphs; i++) {           // Send individual plot commands
     fprintf (plotHandle->pipe, ", \\\n $DATA%d u 1:2 t \"%s\" w %s", i, plotHandle->graphArray[i].title, plotHandle->graphArray[i].formatString); // Set plot format
   }
   fprintf (plotHandle->pipe, "\n");                                 // Send end of plot command
@@ -399,8 +397,6 @@ int gpc_plot_2d_dual_plot (
   const enum gpcPlotSignMode signMode2,
   const int graphLength)
 {
-  int             i;
-
   fprintf (plotHandle->pipe, "set origin 0.0,0.0\n");
   fprintf (plotHandle->pipe, "set size 1.0,1.0\n");
   fprintf (plotHandle->pipe, "clear\n");                            // Clear the plot
@@ -436,7 +432,7 @@ int gpc_plot_2d_dual_plot (
   }
 
   fprintf (plotHandle->pipe, "plot '-' using 1:2 title \"%s\" with %s lc rgb \"%s\"\n", pDataName1, plotType1, pColour1); // Set plot format
-  for (i = 0; i < graphLength; i++) {                               // Copy the data to gnuplot
+  for (int i = 0; i < graphLength; i++) {                           // Copy the data to gnuplot
     fprintf (plotHandle->pipe, "%1.6le %1.6le\n", xMin + ((((double) i) * (xMax - xMin)) / ((double) (graphLength - 1))), pData1[i]);
   }
   fprintf (plotHandle->pipe, "e\n");                                // End of dataset
@@ -472,7 +468,7 @@ int gpc_plot_2d_dual_plot (
   }
 
   fprintf (plotHandle->pipe, "plot '-' using 1:2 title \"%s\" with %s lc rgb \"%s\"\n", pDataName2, plotType2, pColour2); // Set plot format
-  for (i = 0; i < graphLength; i++) {                               // Copy the data to gnuplot
+  for (int i = 0; i < graphLength; i++) {                           // Copy the data to gnuplot
     fprintf (plotHandle->pipe, "%1.6le %1.6le\n", xMin + ((((double) i) * (xMax - xMin)) / ((double) (graphLength - 1))), pData2[i]);
   }
   fprintf (plotHandle->pipe, "e\n");                                // End of dataset
@@ -593,8 +589,6 @@ int gpc_plot_xy (
   const char *pColour,
   const enum gpcNewAddGraphMode addMode)
 {
-  int             i;
-
   if (addMode == GPC_NEW) {
     if (plotHandle->scalingMode == GPC_AUTO_SCALE) {                // Set the X and Y axis scaling
       fprintf (plotHandle->pipe, "set autoscale xy\n");             // Auto-scale Y axis
@@ -616,7 +610,7 @@ int gpc_plot_xy (
   }
 
   fprintf (plotHandle->pipe, "plot '-' title \"%s\" with %s lc rgb \"%s\"\n", pDataName, plotType, pColour);  // Set plot format
-  for (i = 0; i < graphLength; i++) {                               // Copy the data to gnuplot
+  for (int i = 0; i < graphLength; i++) {                           // Copy the data to gnuplot
     fprintf (plotHandle->pipe, "%1.6le %1.6le\n", pData[i].real, pData[i].imag);
   }
 
@@ -737,8 +731,6 @@ int gpc_plot_pz (
   const enum gpcPoleZeroMode poleZeroMode,
   const enum gpcNewAddGraphMode addMode)
 {
-  int             i;
-
   if (addMode == GPC_NEW) {
     if (plotHandle->scalingMode == GPC_AUTO_SCALE) {                // Set the X and Y axis scaling
       fprintf (plotHandle->pipe, "set xrange[-1.5:1.5]\n");
@@ -769,31 +761,31 @@ int gpc_plot_pz (
   switch (poleZeroMode) {
     case GPC_COMPLEX_POLE:
       fprintf (plotHandle->pipe, "plot '-' title \"%s\" with points ls 1\n", pDataName);  // Set plot format
-      for (i = 0; i < graphLength; i++) {                           // Copy the data to gnuplot
+      for (int i = 0; i < graphLength; i++) {                       // Copy the data to gnuplot
         fprintf (plotHandle->pipe, "%1.6le %1.6le\n", pData[i].real, pData[i].imag);
       }
       break;
     case GPC_CONJUGATE_POLE:
       fprintf (plotHandle->pipe, "plot '-' title \"%s\" with points ls 1\n", pDataName);  // Set plot format
-      for (i = 0; i < graphLength; i++) {                           // Copy the data to gnuplot
+      for (int i = 0; i < graphLength; i++) {                       // Copy the data to gnuplot
         fprintf (plotHandle->pipe, "%1.6le %1.6le\n", pData[i].real, pData[i].imag);
       }
-      for (i = 0; i < graphLength; i++) {                           // Copy the data to gnuplot - conjugate pole
+      for (int i = 0; i < graphLength; i++) {                       // Copy the data to gnuplot - conjugate pole
         fprintf (plotHandle->pipe, "%1.6le %1.6le\n", pData[i].real, -pData[i].imag);
       }
       break;
     case GPC_COMPLEX_ZERO:
       fprintf (plotHandle->pipe, "plot '-' title \"%s\" with points ls 2\n", pDataName);  // Set plot format
-      for (i = 0; i < graphLength; i++) {                           // Copy the data to gnuplot
+      for (int i = 0; i < graphLength; i++) {                       // Copy the data to gnuplot
         fprintf (plotHandle->pipe, "%1.6le %1.6le\n", pData[i].real, pData[i].imag);
       }
       break;
     case GPC_CONJUGATE_ZERO:
       fprintf (plotHandle->pipe, "plot '-' title \"%s\" with points ls 2\n", pDataName);  // Set plot format
-      for (i = 0; i < graphLength; i++) {                           // Copy the data to gnuplot
+      for (int i = 0; i < graphLength; i++) {                       // Copy the data to gnuplot
         fprintf (plotHandle->pipe, "%1.6le %1.6le\n", pData[i].real, pData[i].imag);
       }
-      for (i = 0; i < graphLength; i++) {                           // Copy the data to gnuplot - conjugate zero
+      for (int i = 0; i < graphLength; i++) {                       // Copy the data to gnuplot - conjugate zero
         fprintf (plotHandle->pipe, "%1.6le %1.6le\n", pData[i].real, -pData[i].imag);
       }
       break;
@@ -937,8 +929,6 @@ int gpc_plot_spectrogram (
   const double xMin,
   const double xMax)
 {
-  int             i;
-
   if (pData == GPC_END_PLOT) {                                      // End of plot
     fprintf (plotHandle->pipe, "e\n");                              // End of spectrogram dataset
     fflush (plotHandle->pipe);                                      // Flush the pipe
@@ -950,7 +940,7 @@ int gpc_plot_spectrogram (
     fprintf (plotHandle->pipe, "plot '-' using 1:2:3 title \"%s\" with image\n", pDataName);  // Set plot format
   }
 
-  for (i = 0; i < plotHandle->yAxisLength; i++) {                   // Copy the data to gnuplot
+  for (int i = 0; i < plotHandle->yAxisLength; i++) {               // Copy the data to gnuplot
     fprintf (plotHandle->pipe, "%1.6le %1.6le %1.6le\n",
              xMin + ((((double) plotHandle->numberOfGraphs) * (xMax - xMin)) / ((double) (plotHandle->xAxisLength - 1))),
              plotHandle->yMin + ((((double) i) * (plotHandle->yMax - plotHandle->yMin)) / ((double) (plotHandle->yAxisLength - 1))), pData[i]);
@@ -1090,12 +1080,10 @@ int gpc_plot_image (
   const unsigned int *pData,
   const char *pDataName)
 {
-  int             i, j;
-
   fprintf (plotHandle->pipe, "splot '-' matrix title \"%s\" with image\n", pDataName);  // Set plot format
 
-  for (j = 0; j < plotHandle->yAxisLength; j++) {                   // For every row
-    for (i = 0; i < plotHandle->xAxisLength; i++) {                 // For every pixel in the row
+  for (int j = 0; j < plotHandle->yAxisLength; j++) {               // For every row
+    for (int i = 0; i < plotHandle->xAxisLength; i++) {             // For every pixel in the row
       fprintf (plotHandle->pipe, "%u ", pData[i + (j * plotHandle->xAxisLength)]);
     }
     fprintf (plotHandle->pipe, "\n");                               // End of isoline scan
@@ -1248,8 +1236,6 @@ int gpc_plot_polar (
   const char *pColour,
   const enum gpcNewAddGraphMode addMode)
 {
-  int             i;
-
   if (addMode == GPC_NEW) {                                         // GPC_NEW
     plotHandle->numberOfGraphs = 0;
   }
@@ -1265,7 +1251,7 @@ int gpc_plot_polar (
 
 
   fprintf (plotHandle->pipe, "$DATA%d << EOD\n", plotHandle->numberOfGraphs); // Write data to named data block
-  for (i = 0; i < numAngles; i++) {
+  for (int i = 0; i < numAngles; i++) {
     if (pGains[i] < plotHandle->xMin) {
       fprintf (plotHandle->pipe, "%1.6le %1.6le\n", pAngles[i], plotHandle->xMin);
     }
@@ -1280,7 +1266,7 @@ int gpc_plot_polar (
 
 
   fprintf (plotHandle->pipe, "plot $DATA%d u (-$1+90.):($2-f_maxGain) t \"%s\" w %s", 0, plotHandle->graphArray[0].title, plotHandle->graphArray[0].formatString);  // Send start of plot and first plot command
-  for (i = 1; i <= plotHandle->numberOfGraphs; i++) {               // Send individual plot commands
+  for (int i = 1; i <= plotHandle->numberOfGraphs; i++) {           // Send individual plot commands
     fprintf (plotHandle->pipe, ", \\\n $DATA%d u (-$1+90.):($2-f_maxGain) t \"%s\" w %s", i, plotHandle->graphArray[i].title, plotHandle->graphArray[i].formatString);  // Set plot format
   }
   fprintf (plotHandle->pipe, "\n");                                 // Send end of plot command
@@ -1332,7 +1318,7 @@ h_GPC_Plot     *gpc_plot_confusion_matrix (
     fprintf (plotHandle->pipe, "$confMat << EOD\n");
     for (int j = 0; j < numCategories; j++) {
       int             i;
-      for (i = 0; i < numCategories - 1; i++) {
+      for (int i = 0; i < numCategories - 1; i++) {
         fprintf (plotHandle->pipe, "%lf ", *(confusionMatrix + (j * numCategories) + i));
       }
       fprintf (plotHandle->pipe, "%lf\n", *(confusionMatrix + (j * numCategories) + i));
@@ -1407,7 +1393,7 @@ h_GPC_Plot     *gpc_plot_confusion_matrix_percentage (
     fprintf (plotHandle->pipe, "$confMat << EOD\n");
     for (int j = 0; j < numCategories; j++) {
       int             i;
-      for (i = 0; i < numCategories - 1; i++) {
+      for (int i = 0; i < numCategories - 1; i++) {
         fprintf (plotHandle->pipe, "%lf ", *(confusionMatrix + (j * numCategories) + i));
       }
       fprintf (plotHandle->pipe, "%lf\n", *(confusionMatrix + (j * numCategories) + i));

@@ -2,7 +2,7 @@
 //  Simulated sample rate = 10 KHz
 //  Input signal frequency = 100 Hz
 //  Modulation frequency = 1 KHz
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -17,11 +17,11 @@
 #define COMP_SHFT_CARRIER_TABLE_LENGTH  1000
 #define FILTER_LENGTH                   10
 
-#define SAMPLE_RATE                     10000.                      // Sample rates normalized to 1 Hz
+#define SAMPLE_RATE_HZ                  10000.                      // Sample rates normalized to 1 Hz
 #define CARRIER_FREQUENCY               1000.                       // Modulation carrier frequency
 #define MODULATING_FREQUENCY            100.                        // Frequency of modulating signal
 
-#define CARRIER_TABLE_LENGTH            ((SLArrayIndex_t)(SAMPLE_RATE / CARRIER_FREQUENCY))
+#define CARRIER_TABLE_LENGTH            ((SLArrayIndex_t)(SAMPLE_RATE_HZ / CARRIER_FREQUENCY))
 
 
 // Declare global variables and arrays
@@ -51,7 +51,7 @@ int main (
   pCombFilter1 = SUF_VectorArrayAllocate (FILTER_LENGTH);
   pCombFilter2 = SUF_VectorArrayAllocate (FILTER_LENGTH);
   pSineTable = SUF_VectorArrayAllocate (COMP_SHFT_CARRIER_TABLE_LENGTH);
-  pCarrierTable = SUF_AmCarrierArrayAllocate (CARRIER_FREQUENCY, SAMPLE_RATE);
+  pCarrierTable = SUF_AmCarrierArrayAllocate (CARRIER_FREQUENCY, SAMPLE_RATE_HZ);
 
   SIF_AmplitudeModulate (pCarrierTable,                             // Carrier table pointer
                          &CarrierTableIndex,                        // Carrier table index
@@ -111,7 +111,7 @@ int main (
                         SIGLIB_SQUARE_WAVE,                         // Signal type - Square wave
                         0.4,                                        // Signal peak level
                         SIGLIB_FILL,                                // Fill (overwrite) or add to existing array contents
-                        MODULATING_FREQUENCY / SAMPLE_RATE,         // Signal frequency
+                        MODULATING_FREQUENCY / SAMPLE_RATE_HZ,      // Signal frequency
                         SIGLIB_HALF,                                // D.C. Offset
                         0.75,                                       // Duty cycle
                         SIGLIB_ZERO,                                // Signal end value - Unused
@@ -136,7 +136,7 @@ int main (
                       &CombFilterPhase,                             // Comb filter phase
                       pSineTable,                                   // Sine table pointer
                       &SineTablePhase,                              // Sine table phase for mixer
-                      CARRIER_FREQUENCY / SAMPLE_RATE,              // Mix frequency
+                      CARRIER_FREQUENCY / SAMPLE_RATE_HZ,           // Mix frequency
                       FILTER_LENGTH,                                // Length of comb filter
                       COMP_SHFT_CARRIER_TABLE_LENGTH,               // Sine table size for mixer
                       SAMPLE_LENGTH);                               // Dataset length
@@ -150,7 +150,7 @@ int main (
                    SAMPLE_LENGTH,                                   // Dataset length
                    "Modulated Data",                                // Dataset title
                    SIGLIB_ZERO,                                     // Minimum X value
-                   ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),    // Maximum X value
+                   ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ), // Maximum X value
                    "lines",                                         // Graph type
                    "magenta",                                       // Colour
                    GPC_NEW);                                        // New graph
@@ -161,13 +161,13 @@ int main (
                    SAMPLE_LENGTH,                                   // Dataset length
                    "Shifted Data",                                  // Dataset title
                    SIGLIB_ZERO,                                     // Minimum X value
-                   ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),    // Maximum X value
+                   ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ), // Maximum X value
                    "lines",                                         // Graph type
                    "magenta",                                       // Colour
                    GPC_NEW);                                        // New graph
     }
 
-    TimeIndex += (SLData_t) SAMPLE_LENGTH / SAMPLE_RATE;
+    TimeIndex += (SLData_t) SAMPLE_LENGTH / SAMPLE_RATE_HZ;
   }
 
   gpc_close (h2DPlot);

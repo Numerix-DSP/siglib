@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Shell script for building and executing the helicopter examples with GCC
+# Shell script for building and executing the machine examples with GCC
 
 rm -f wavfwfall
 rm -f *.gpdt

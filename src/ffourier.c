@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : FFOURIER.C    | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 06/01/2001
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : SigLib DSP library Fast Fourier Transform routines.
 
@@ -40,7 +40,6 @@ Description : SigLib DSP library Fast Fourier Transform routines.
 #define SIGLIB_SRC_FILE_FFOURIER    1                               // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
 
 /**/
 
@@ -114,9 +113,6 @@ void SIGLIB_FUNC_DECL SDA_Rfft (
   const SLArrayIndex_t fftLength,
   const SLArrayIndex_t log2FFTLength)
 {
-  const SLData_t *pFFTSineCoeffs = pFFTCoeffs;
-  const SLData_t *pFFTCosineCoeffs = pFFTCoeffs + (SLArrayIndex_t) ((SLUFixData_t) fftLength >> 2U);
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) realData % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
@@ -124,6 +120,9 @@ void SIGLIB_FUNC_DECL SDA_Rfft (
   _nassert ((int) pFFTCoeffs % 8 == 0);
 #endif
 #endif
+
+  const SLData_t *pFFTSineCoeffs = pFFTCoeffs;
+  const SLData_t *pFFTCosineCoeffs = pFFTCoeffs + (SLArrayIndex_t) ((SLUFixData_t) fftLength >> 2U);
 
   {
     SLUFixData_t    j = (SLUFixData_t) fftLength >> 1U;
@@ -206,7 +205,6 @@ void SIGLIB_FUNC_DECL SDA_Rfft (
       }
     }
   }
-
 }                                                                   // End of SDA_Rfft()
 
 
@@ -239,9 +237,6 @@ void SIGLIB_FUNC_DECL SDA_Cfft (
   const SLArrayIndex_t fftLength,
   const SLArrayIndex_t log2FFTLength)
 {
-  const SLData_t *pFFTSineCoeffs = pFFTCoeffs;
-  const SLData_t *pFFTCosineCoeffs = pFFTCoeffs + (SLArrayIndex_t) ((SLUFixData_t) fftLength >> 2U);
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) realData % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
@@ -249,6 +244,9 @@ void SIGLIB_FUNC_DECL SDA_Cfft (
   _nassert ((int) pFFTCoeffs % 8 == 0);
 #endif
 #endif
+
+  const SLData_t *pFFTSineCoeffs = pFFTCoeffs;
+  const SLData_t *pFFTCosineCoeffs = pFFTCoeffs + (SLArrayIndex_t) ((SLUFixData_t) fftLength >> 2U);
 
   for (SLUFixData_t i = 0, Stride = (SLUFixData_t) fftLength, AngleInc = 1U; i < (SLUFixData_t) log2FFTLength; i++) {
     SLUFixData_t    k = Stride;
@@ -302,7 +300,6 @@ void SIGLIB_FUNC_DECL SDA_Cfft (
       }
     }
   }
-
 }                                                                   // End of SDA_Cfft()
 
 
@@ -336,9 +333,6 @@ void SIGLIB_FUNC_DECL SDA_Cifft (
   const SLArrayIndex_t fftLength,
   const SLArrayIndex_t log2FFTLength)
 {
-  const SLData_t *pFFTSineCoeffs = pFFTCoeffs;
-  const SLData_t *pFFTCosineCoeffs = pFFTCoeffs + (SLArrayIndex_t) ((SLUFixData_t) fftLength >> 2U);
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) realData % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
@@ -346,6 +340,9 @@ void SIGLIB_FUNC_DECL SDA_Cifft (
   _nassert ((int) pFFTCoeffs % 8 == 0);
 #endif
 #endif
+
+  const SLData_t *pFFTSineCoeffs = pFFTCoeffs;
+  const SLData_t *pFFTCosineCoeffs = pFFTCoeffs + (SLArrayIndex_t) ((SLUFixData_t) fftLength >> 2U);
 
   for (SLUFixData_t i = 0, Stride = (SLUFixData_t) fftLength, AngleInc = 1U; i < (SLUFixData_t) log2FFTLength; i++) {
     SLUFixData_t    k = Stride;
@@ -399,7 +396,6 @@ void SIGLIB_FUNC_DECL SDA_Cifft (
       }
     }
   }
-
 }                                                                   // End of SDA_Cifft()
 
 
@@ -428,11 +424,9 @@ void SIGLIB_FUNC_DECL SDA_BitReverseReorder (
   const SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
   const SLArrayIndex_t fftLength)
 {
-  SLUFixData_t    i, j, k;
-
 // Bit reverse reorder data
   if (pBitReverseAddressTable == SIGLIB_BIT_REV_STANDARD) {         // Standard mode
-    for (j = 0, i = 0; j < (SLUFixData_t) fftLength; j++) {
+    for (SLUFixData_t j = 0, i = 0; j < (SLUFixData_t) fftLength; j++) {
       if (j < i) {                                                  // Only swap if necessary
         SLData_t        Temp = Src[i];                              // Use temporary variable so that function can work in-place
         Dst[i] = Src[j];
@@ -443,7 +437,7 @@ void SIGLIB_FUNC_DECL SDA_BitReverseReorder (
         Dst[i] = Src[i];
       }
 
-      k = (SLUFixData_t) fftLength >> 1U;
+      SLUFixData_t    k = (SLUFixData_t) fftLength >> 1U;
       while ((k <= i) && (k >= 1)) {
         i -= k;
         k >>= 1;
@@ -452,7 +446,8 @@ void SIGLIB_FUNC_DECL SDA_BitReverseReorder (
     }
   }
   else if (pBitReverseAddressTable != SIGLIB_BIT_REV_NONE) {        // Fast mode - uses look up table
-    for (i = 0; i < (SLUFixData_t) fftLength; i++) {
+    for (SLUFixData_t i = 0; i < (SLUFixData_t) fftLength; i++) {
+      SLUFixData_t    j;
       if (i < (j = *(pBitReverseAddressTable + i))) {               // Only swap if necessary
         SLData_t        Temp = Src[i];                              // Use temporary variable so that function can work in-place
         Dst[i] = Src[j];
@@ -490,9 +485,7 @@ void SIGLIB_FUNC_DECL SDA_IndexBitReverseReorder (
   SLArrayIndex_t Dst[],
   const SLArrayIndex_t fftLength)
 {
-  SLUFixData_t    i, j, k;
-
-  for (j = 0, i = 0; j < (SLUFixData_t) fftLength; j++) {           // Reorder scrambled data
+  for (SLUFixData_t j = 0, i = 0; j < (SLUFixData_t) fftLength; j++) {  // Reorder scrambled data
     if (j < i) {                                                    // Only swap if necessary
       SLUFixData_t    Temp = Src[i];                                // Use temporary variable so that function can work in-place
       Dst[i] = Src[j];
@@ -503,7 +496,7 @@ void SIGLIB_FUNC_DECL SDA_IndexBitReverseReorder (
       Dst[i] = Src[i];
     }
 
-    k = (SLUFixData_t) fftLength >> 1U;
+    SLUFixData_t    k = (SLUFixData_t) fftLength >> 1U;
     while ((k <= i) && (k >= 1)) {
       i -= k;
       k >>= 1;
@@ -534,11 +527,9 @@ void SIGLIB_FUNC_DECL SIF_FastBitReverseReorder (
   SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
   const SLArrayIndex_t fftLength)
 {
-  SLArrayIndex_t  i;
-
 // Generate bit-reversed address table
 // Table contains address indices in bit-reversed order
-  for (i = 0; i < fftLength; i++) {
+  for (SLArrayIndex_t i = 0; i < fftLength; i++) {
     *pBitReverseAddressTable++ = i;
   }
 
@@ -546,7 +537,6 @@ void SIGLIB_FUNC_DECL SIF_FastBitReverseReorder (
 
 // Swap look-up table data
   SDA_IndexBitReverseReorder (pBitReverseAddressTable, pBitReverseAddressTable, fftLength);
-
 }                                                                   // End of SIF_FastBitReverseReorder()
 
 
@@ -585,7 +575,6 @@ void SIGLIB_FUNC_DECL SDA_RealRealCepstrum (
   SDA_Rfft (pRealOutput, pImagOutput, pFFTCoeffs, pBitReverseAddressTable, fftLength, log2FFTLength); // Perform FFT
   SDA_LogMagnitude (pRealOutput, pImagOutput, pRealOutput, fftLength);  // Log magnitude
   SDA_Rfft (pRealOutput, pImagOutput, pFFTCoeffs, pBitReverseAddressTable, fftLength, log2FFTLength); // Perform FFT
-
 }                                                                   // End of SDA_RealRealCepstrum()
 
 
@@ -624,7 +613,6 @@ void SIGLIB_FUNC_DECL SDA_RealComplexCepstrum (
   SDA_Rfft (pRealOutput, pImagOutput, pFFTCoeffs, pBitReverseAddressTable, fftLength, log2FFTLength); // Perform FFT
   SDA_LogMagnitudeAndPhaseUnWrapped (pRealOutput, pImagOutput, pRealOutput, pImagOutput, fftLength);  // Log magnitude
   SDA_Cfft (pRealOutput, pImagOutput, pFFTCoeffs, pBitReverseAddressTable, fftLength, log2FFTLength); // Perform FFT
-
 }                                                                   // End of SDA_RealComplexCepstrum()
 
 
@@ -666,7 +654,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexComplexCepstrum (
   SDA_Cfft (pRealOutput, pImagOutput, pFFTCoeffs, pBitReverseAddressTable, fftLength, log2FFTLength); // Perform FFT
   SDA_LogMagnitudeAndPhaseUnWrapped (pRealOutput, pImagOutput, pRealOutput, pImagOutput, fftLength);  // Log magnitude
   SDA_Cfft (pRealOutput, pImagOutput, pFFTCoeffs, pBitReverseAddressTable, fftLength, log2FFTLength); // Perform FFT
-
 }                                                                   // End of SDA_ComplexComplexCepstrum()
 
 
@@ -694,7 +681,6 @@ void SIGLIB_FUNC_DECL SIF_FftTone (
   const SLArrayIndex_t fftLength)
 {
   SIF_Fft (pFFTCoeffs, pBitReverseAddressTable, fftLength);
-
 }                                                                   // End of SIF_FftTone()
 
 
@@ -734,13 +720,11 @@ void SIGLIB_FUNC_DECL SDA_RfftTone (
   const SLArrayIndex_t fftLength,
   const SLArrayIndex_t log2FFTLength)
 {
-  SLArrayIndex_t  PeakBinLocation;
-
   SDA_Copy (pSrc, pRealData, fftLength);
   SDA_Rfft (pRealData, pImagData, pFFTCoeffs, pBitReverseAddressTable, fftLength, log2FFTLength); // Perform FFT
   SDA_Magnitude (pRealData, pImagData, pRealData, (SLArrayIndex_t) ((SLUFixData_t) fftLength >> 1U)); // Calc real power fm complex
 
-  PeakBinLocation = SDA_MaxIndex (pRealData, (SLArrayIndex_t) ((SLUFixData_t) fftLength >> 1U));
+  SLArrayIndex_t  PeakBinLocation = SDA_MaxIndex (pRealData, (SLArrayIndex_t) ((SLUFixData_t) fftLength >> 1U));
   *pToneBinNumber = PeakBinLocation;
   *pToneMagnitude = *(pRealData + PeakBinLocation);
 }                                                                   // End of SDA_RfftTone()
@@ -777,15 +761,6 @@ void SIGLIB_FUNC_DECL SDA_Rfftr (
   const SLArrayIndex_t fftLength,
   const SLArrayIndex_t log2FFTLength)
 {
-  const SLData_t *pDCTSineCoeffs = pDCTCoeffs;
-  const SLData_t *pDCTCosineCoeffs = pDCTCoeffs + (SLArrayIndex_t) ((SLUFixData_t) fftLength >> 2U);
-
-// const SLData_t  *pDCTSineCoeffs;
-// const SLData_t  *pDCTCosineCoeffs;
-// SLUFixData_t    i, j, k, Stride, BflyCounter, g, h;
-// SLArrayIndex_t  Angle, AngleInc;    // Angle step thro sin & cos tables
-// SLData_t        realTemp, imagTemp, Cos, Sin;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) realData % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
@@ -793,6 +768,9 @@ void SIGLIB_FUNC_DECL SDA_Rfftr (
   _nassert ((int) pDCTCoeffs % 8 == 0);
 #endif
 #endif
+
+  const SLData_t *pDCTSineCoeffs = pDCTCoeffs;
+  const SLData_t *pDCTCosineCoeffs = pDCTCoeffs + (SLArrayIndex_t) ((SLUFixData_t) fftLength >> 2U);
 
   {
     SLUFixData_t    j = (SLUFixData_t) fftLength >> 1U;
@@ -870,7 +848,6 @@ void SIGLIB_FUNC_DECL SDA_Rfftr (
       }
     }
   }
-
 }                                                                   // End of SDA_Rfftr()
 
 
@@ -897,7 +874,7 @@ void SIGLIB_FUNC_DECL SIF_Fft4 (
   SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
   const SLArrayIndex_t fftLength)
 {
-  for (int i = 0; i < (5 * fftLength) >> 2; i++) {
+  for (SLArrayIndex_t i = 0; i < (5 * fftLength) >> 2; i++) {
     pFFTCoeffs[i] = SDS_Sin ((SIGLIB_TWO_PI * ((SLData_t) i)) / ((SLData_t) fftLength));
   }
 
@@ -945,9 +922,6 @@ void SIGLIB_FUNC_DECL SDA_Rfft4 (
   const SLArrayIndex_t fftLength,
   const SLArrayIndex_t log4FFTLength)
 {
-  const SLData_t *pFFTSineCoeffs = pFFTCoeffs;
-  const SLData_t *pFFTCosineCoeffs = pFFTCoeffs + (SLArrayIndex_t) ((SLUFixData_t) fftLength >> 2U);
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) realData % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
@@ -955,6 +929,9 @@ void SIGLIB_FUNC_DECL SDA_Rfft4 (
   _nassert ((int) pFFTCoeffs % 8 == 0);
 #endif
 #endif
+
+  const SLData_t *pFFTSineCoeffs = pFFTCoeffs;
+  const SLData_t *pFFTCosineCoeffs = pFFTCoeffs + (SLArrayIndex_t) ((SLUFixData_t) fftLength >> 2U);
 
   {                                                                 // First stage
     SLUFixData_t    Stride = (SLUFixData_t) fftLength;
@@ -1104,9 +1081,6 @@ void SIGLIB_FUNC_DECL SDA_Cfft4 (
   const SLArrayIndex_t fftLength,
   const SLArrayIndex_t log4FFTLength)
 {
-  const SLData_t *pFFTSineCoeffs = pFFTCoeffs;
-  const SLData_t *pFFTCosineCoeffs = pFFTCoeffs + (SLArrayIndex_t) ((SLUFixData_t) fftLength >> 2U);
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) realData % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
@@ -1114,6 +1088,9 @@ void SIGLIB_FUNC_DECL SDA_Cfft4 (
   _nassert ((int) pFFTCoeffs % 8 == 0);
 #endif
 #endif
+
+  const SLData_t *pFFTSineCoeffs = pFFTCoeffs;
+  const SLData_t *pFFTCosineCoeffs = pFFTCoeffs + (SLArrayIndex_t) ((SLUFixData_t) fftLength >> 2U);
 
   for (SLUFixData_t i = 0, Stride = (SLUFixData_t) fftLength, AngleInc = 1U; i < (SLUFixData_t) log4FFTLength; i++) {
     SLUFixData_t    k = Stride;
@@ -1219,7 +1196,7 @@ void SIGLIB_FUNC_DECL SDA_DigitReverseReorder4 (
 {
   SLArrayIndex_t  num_digits = fftLength >> 2;
 
-  for (int i = 1, j = num_digits; i < fftLength - 1; i++) {
+  for (SLArrayIndex_t i = 1, j = num_digits; i < fftLength - 1; i++) {
     if (i < j) {
       SLData_t        Temp = Src[i];                                // Use temporary variable so that function can work in-place
       Dst[i] = Src[j];
@@ -1264,7 +1241,7 @@ void SIGLIB_FUNC_DECL SDA_IndexDigitReverseReorder4 (
 {
   SLArrayIndex_t  num_digits = fftLength >> 2;
 
-  for (int i = 1, j = num_digits; i < fftLength - 1; i++) {
+  for (SLArrayIndex_t i = 1, j = num_digits; i < fftLength - 1; i++) {
     if (i < j) {
       SLArrayIndex_t  Temp = Src[i];                                // Use temporary variable so that function can work in-place
       Dst[i] = Src[j];
@@ -1305,11 +1282,9 @@ void SIGLIB_FUNC_DECL SIF_FastDigitReverseReorder4 (
   SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
   const SLArrayIndex_t fftLength)
 {
-  SLArrayIndex_t  i;
-
 // Generate bit-reversed address table
 // Table contains address indices in bit-reversed order
-  for (i = 0; i < fftLength; i++) {
+  for (SLArrayIndex_t i = 0; i < fftLength; i++) {
     *pBitReverseAddressTable++ = i;
   }
 
@@ -1317,7 +1292,6 @@ void SIGLIB_FUNC_DECL SIF_FastDigitReverseReorder4 (
 
 // Swap look-up table data
   SDA_IndexDigitReverseReorder4 (pBitReverseAddressTable, pBitReverseAddressTable, fftLength);
-
 }                                                                   // End of SIF_FastDigitReverseReorder4()
 
 
@@ -1359,9 +1333,6 @@ void SIGLIB_FUNC_DECL SDA_Cfft2rBy1c (
   const SLArrayIndex_t fftLength,
   const SLArrayIndex_t log2FFTLength)
 {
-  const SLData_t *pFFTSineCoeffs = pFFTCoeffs;
-  const SLData_t *pFFTCosineCoeffs = pFFTCoeffs + (SLArrayIndex_t) ((SLUFixData_t) fftLength >> 2U);
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) realData % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
@@ -1369,6 +1340,9 @@ void SIGLIB_FUNC_DECL SDA_Cfft2rBy1c (
   _nassert ((int) pFFTCoeffs % 8 == 0);
 #endif
 #endif
+
+  const SLData_t *pFFTSineCoeffs = pFFTCoeffs;
+  const SLData_t *pFFTCosineCoeffs = pFFTCoeffs + (SLArrayIndex_t) ((SLUFixData_t) fftLength >> 2U);
 
   for (SLUFixData_t i = 0, Stride = (SLUFixData_t) fftLength, AngleInc = 1U; i < (SLUFixData_t) log2FFTLength; i++) {
     SLUFixData_t    k = Stride;
@@ -1436,7 +1410,6 @@ void SIGLIB_FUNC_DECL SDA_Cfft2rBy1c (
     output2r1cResult2[i] = SIGLIB_HALF * (imagData[i] + imagData[fftLength - i]);
     output2r1cResult2[halfFFTLength + i] = SIGLIB_HALF * (realData[fftLength - i] - realData[i]);
   }
-
 }                                                                   // End of SDA_Cfft2rBy1c()
 
 
@@ -1479,9 +1452,6 @@ void SIGLIB_FUNC_DECL SDA_Cfft2rBy1cr (
   const SLArrayIndex_t fftLength,
   const SLArrayIndex_t log2FFTLength)
 {
-  const SLData_t *pFFTSineCoeffs = pFFTCoeffs;
-  const SLData_t *pFFTCosineCoeffs = pFFTCoeffs + (SLArrayIndex_t) ((SLUFixData_t) fftLength >> 2U);
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) realData % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
@@ -1489,6 +1459,9 @@ void SIGLIB_FUNC_DECL SDA_Cfft2rBy1cr (
   _nassert ((int) pFFTCoeffs % 8 == 0);
 #endif
 #endif
+
+  const SLData_t *pFFTSineCoeffs = pFFTCoeffs;
+  const SLData_t *pFFTCosineCoeffs = pFFTCoeffs + (SLArrayIndex_t) ((SLUFixData_t) fftLength >> 2U);
 
   for (SLUFixData_t i = 0, Stride = (SLUFixData_t) fftLength, AngleInc = 1U; i < (SLUFixData_t) log2FFTLength; i++) {
     SLUFixData_t    k = Stride;
@@ -1551,7 +1524,6 @@ void SIGLIB_FUNC_DECL SDA_Cfft2rBy1cr (
     output2r1cResult1[i] = SIGLIB_HALF * (realData[i] + realData[fftLength - i]);
     output2r1cResult2[i] = SIGLIB_HALF * (imagData[i] + imagData[fftLength - i]);
   }
-
 }                                                                   // End of SDA_Cfft2rBy1cr()
 
 
@@ -1886,7 +1858,6 @@ void SIGLIB_FUNC_DECL SDA_Cfft2 (
   *pDstImag = sum_i;
   *(pDstReal + 1) = dif_r;
   *(pDstImag + 1) = dif_i;
-
 }                                                                   // End of SDA_Cfft2()
 
 
@@ -1944,7 +1915,6 @@ void SIGLIB_FUNC_DECL SDS_Cfft3 (
   *pDstImag2 = tmp1_i + tmp2_i + tmp3_i;
   *pDstReal3 = tmp1_r - (tmp2_r + tmp3_r) * SIGLIB_HALF + (tmp2_i - tmp3_i) * SIGLIB_HALF_SQRT_THREE;
   *pDstImag3 = tmp1_i - (tmp2_i + tmp3_i) * SIGLIB_HALF - (tmp2_r - tmp3_r) * SIGLIB_HALF_SQRT_THREE;
-
 }                                                                   // End of SDS_Cfft3()
 
 
@@ -1986,5 +1956,4 @@ void SIGLIB_FUNC_DECL SDA_Cfft3 (
   *(pDstImag + 1) = tmp1_i + tmp2_i + tmp3_i;
   *(pDstReal + 2) = tmp1_r - (tmp2_r + tmp3_r) * SIGLIB_HALF + (tmp2_i - tmp3_i) * SIGLIB_HALF_SQRT_THREE;
   *(pDstImag + 2) = tmp1_i - (tmp2_i + tmp3_i) * SIGLIB_HALF - (tmp2_r - tmp3_r) * SIGLIB_HALF_SQRT_THREE;
-
 }                                                                   // End of SDA_Cfft3()

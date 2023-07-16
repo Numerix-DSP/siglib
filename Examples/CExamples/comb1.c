@@ -1,5 +1,5 @@
 // SigLib Comb Filter Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // This program demonstrates the impulse and frequency response of four
 // different arrangents of comb filter. The flow diagrams for each are :
@@ -55,8 +55,6 @@ int main (
   void)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
-
-  SLFixData_t     i;
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Comb Filter",                                     // Plot title
@@ -129,7 +127,7 @@ int main (
                       SAMPLE_LENGTH);                               // Output dataset length
 
 // Apply comb filter and store filtered data
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     *pSrc2++ = *pSrc1 - SDS_FixedDelay (*pSrc1,                     // Input data sample
                                         pCombFilterStateArray1,     // Pointer to delay state array
                                         &combFilterIndex1,          // Pointer to delay state index
@@ -224,7 +222,7 @@ int main (
                       SAMPLE_LENGTH);                               // Output dataset length
 
 // Apply comb filter and store filtered data
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     *pSrc2++ = SDS_Comb (*pSrc1++,                                  // Input data sample to be filtered
                          pCombFilterStateArray1,                    // Pointer to filter state array
                          &combFilterIndex1,                         // Pointer to filter index register
@@ -328,7 +326,7 @@ int main (
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
 // Apply comb filter 1 and store filtered data
     *pSrc2 = SDS_Comb (*pSrc1,                                      // Input data sample to be filtered
                        pCombFilterStateArray1,                      // Pointer to filter state array
@@ -457,7 +455,7 @@ int main (
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
-  for (i = 0; i < SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
 // Apply comb filter 1 and store filtered data
     *pSrc2 = SDS_FixedDelay (*pSrc1,                                // Input data sample
                              pCombFilterStateArray1,                // Pointer to delay state array

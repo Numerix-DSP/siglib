@@ -1,5 +1,5 @@
 // Takes functionList.txt and creates siglib_ti_memory_sections.h
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 
@@ -21,7 +21,7 @@ char            InputString[100];
 
 char            header[] = ("/**************************************************************************\r\n\
 File Name               : siglib_ti_memory_sections.h   | Author : JOHN EDWARDS\r\n\
-Siglib Library Version  : 10.00                         |\r\n\
+Siglib Library Version  : 10.50                         |\r\n\
 ----------------------------------------+----------------------------------\r\n\
 Compiler  : Independent                 | Start Date    : 27/12/1999\r\n\
 Options   :                             | Latest Update : 17/11/2020\r\n\
@@ -46,11 +46,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 \r\n\
-Copyright (c) 2023 Alpha Numerix All rights reserved.\r\n\
+Copyright (c) 2023 Delta Numerix All rights reserved.\r\n\
 ---------------------------------------------------------------------------\r\n\
 Description : SigLib function memory section definition file for TI compilers\r\n\
     This file includes a memory section definition line for each function in\r\n\
@@ -78,17 +78,11 @@ char            footer[] = ("\r\n#endif                      // End of #ifndef _
 // End of siglib_memory_sections.h\r\n\r\n");
 
 
-int             main (
-  void);
-
-
 int main (
   void)
 {
-  int             i;
-
   printf
-    ("\r\nTIMemSectionsGen.exe - siglib_ti_memory_sections.h file generation utility (C)  V2.00. Copyright (C) Alpha Numerix 2017. All rights reserved.\r\n");
+    ("\r\nTIMemSectionsGen.exe - siglib_ti_memory_sections.h file generation utility (C)  V2.00. Copyright (C) Delta Numerix 2017. All rights reserved.\r\n");
 
   if ((IFPtr = fopen ("functionList.txt", "rb")) == NULL) {
     printf ("Can not open input data file %s\r\n", "siglib.dg");
@@ -101,7 +95,7 @@ int main (
     exit (-1);
   }
 
-  for (i = 0; i < (int) strlen (header); i++) {
+  for (int i = 0; i < (int) strlen (header); i++) {
     putc (header[i], OFPtr);                                        // Output header
   }
 
@@ -109,7 +103,7 @@ int main (
     fprintf (OFPtr, "#pragma CODE_SECTION(%s, \".text\")\r\n", InputString);
   }
 
-  for (i = 0; i < (int) strlen (footer); i++) {
+  for (int i = 0; i < (int) strlen (footer); i++) {
     putc (footer[i], OFPtr);                                        // Output footer
   }
 

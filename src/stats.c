@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : STATS.C       | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 02/10/1993
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : SigLib DSP library statistics routines.
 
@@ -40,7 +40,6 @@ Description : SigLib DSP library statistics routines.
 #define SIGLIB_SRC_FILE_STATS   1                                   // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
 
 /**/
 
@@ -62,25 +61,21 @@ SLData_t SIGLIB_FUNC_DECL SDA_Sum (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Sum = SIGLIB_ZERO;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  for (i = 0; i < ArrayLength; i++) {
+  SLData_t        Sum = SIGLIB_ZERO;
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     Sum += pSrc[i];
 #else
     Sum += *pSrc++;
 #endif
   }
-
   return (Sum);
-
 }                                                                   // End of SDA_Sum()
 
 
@@ -105,16 +100,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_AbsSum (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Sum = SIGLIB_ZERO;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  for (i = 0; i < ArrayLength; i++) {
+  SLData_t        Sum = SIGLIB_ZERO;
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     if (pSrc[i] > SIGLIB_EPSILON) {
       Sum += pSrc[i];
@@ -131,9 +124,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_AbsSum (
     }
 #endif
   }
-
   return (Sum);
-
 }                                                                   // End of SDA_AbsSum()
 
 
@@ -158,16 +149,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_SumOfSquares (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Sum = SIGLIB_ZERO;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  for (i = 0; i < ArrayLength; i++) {
+  SLData_t        Sum = SIGLIB_ZERO;
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     Sum += pSrc[i] * pSrc[i];
 #else
@@ -175,9 +164,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_SumOfSquares (
     pSrc++;
 #endif
   }
-
   return (Sum);
-
 }                                                                   // End of SDA_SumOfSquares()
 
 
@@ -203,25 +190,21 @@ SLData_t SIGLIB_FUNC_DECL SDA_Mean (
   const SLData_t InverseArrayLength,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Sum = SIGLIB_ZERO;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  for (i = 0; i < ArrayLength; i++) {
+  SLData_t        Sum = SIGLIB_ZERO;
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     Sum += pSrc[i];
 #else
     Sum += *pSrc++;
 #endif
   }
-
   return (Sum * InverseArrayLength);
-
 }                                                                   // End of SDA_Mean()
 
 
@@ -248,21 +231,18 @@ SLData_t SIGLIB_FUNC_DECL SDA_AbsMean (
   const SLData_t InverseArrayLength,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Sum = SIGLIB_ZERO;
-  SLData_t        Sample;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  for (i = 0; i < ArrayLength; i++) {
+  SLData_t        Sum = SIGLIB_ZERO;
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
-    Sample = pSrc[i];
+    SLData_t        Sample = pSrc[i];
 #else
-    Sample = *pSrc++;
+    SLData_t        Sample = *pSrc++;
 #endif
     if (Sample < SIGLIB_ZERO) {
       Sum -= Sample;
@@ -271,9 +251,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_AbsMean (
       Sum += Sample;
     }
   }
-
   return (Sum * InverseArrayLength);
-
 }                                                                   // End of SDA_AbsMean()
 
 
@@ -302,9 +280,6 @@ void SIGLIB_FUNC_DECL SDA_SubtractMean (
   const SLData_t InverseArrayLength,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Sum_Mean = SIGLIB_ZERO;                           // Reuse variable for sum and mean for optimum performance
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -312,7 +287,8 @@ void SIGLIB_FUNC_DECL SDA_SubtractMean (
 #endif
 #endif
 
-  for (i = 0; i < ArrayLength; i++) {
+  SLData_t        Sum_Mean = SIGLIB_ZERO;                           // Reuse variable for sum and mean for optimum performance
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     Sum_Mean += pSrc[i];
 #else
@@ -326,14 +302,13 @@ void SIGLIB_FUNC_DECL SDA_SubtractMean (
 
   Sum_Mean *= InverseArrayLength;
 
-  for (i = 0; i < ArrayLength; i++) {
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst[i] = pSrc[i] - Sum_Mean;
 #else
     *pDst++ = *pSrc++ - Sum_Mean;
 #endif
   }
-
 }                                                                   // End of SDA_SubtractMean()
 
 
@@ -360,9 +335,6 @@ void SIGLIB_FUNC_DECL SDA_SubtractMax (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Max = SIGLIB_ZERO;                                // Reuse variable for sum and mean for optimum performance
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -370,13 +342,14 @@ void SIGLIB_FUNC_DECL SDA_SubtractMax (
 #endif
 #endif
 
-  for (i = 0; i < ArrayLength; i++) {
+  SLData_t        Max = SIGLIB_ZERO;                                // Reuse variable for sum and mean for optimum performance
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
     if (pSrc[i] > Max) {
       Max = pSrc[i];
     }
   }
 
-  for (i = 0; i < ArrayLength; i++) {
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst[i] = pSrc[i] - Max;
 #else
@@ -407,27 +380,22 @@ SLData_t SIGLIB_FUNC_DECL SDA_SampleSd (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Sum, SquaredSum;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  Sum = *pSrc;
-  SquaredSum = (*pSrc) * (*pSrc);
+  SLData_t        Sum = *pSrc;
+  SLData_t        SquaredSum = (*pSrc) * (*pSrc);
   pSrc++;
 
-  for (i = 1; i < ArrayLength; i++) {
+  for (SLArrayIndex_t i = 1; i < ArrayLength; i++) {
     Sum += *pSrc;
     SquaredSum += (*pSrc) * (*pSrc);
     pSrc++;
   }
-
   return (SDS_Sqrt ((SquaredSum - ((Sum * Sum) / ((SLData_t) (ArrayLength)))) / ((SLData_t) (ArrayLength - 1))));
-
 }                                                                   // End of SDA_SampleSd()
 
 
@@ -452,25 +420,21 @@ SLData_t SIGLIB_FUNC_DECL SDA_PopulationSd (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Sum, SquaredSum;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  Sum = *pSrc;
-  SquaredSum = (*pSrc) * (*pSrc);
+  SLData_t        Sum = *pSrc;
+  SLData_t        SquaredSum = (*pSrc) * (*pSrc);
   pSrc++;
 
-  for (i = 1; i < ArrayLength; i++) {
+  for (SLArrayIndex_t i = 1; i < ArrayLength; i++) {
     Sum += *pSrc;
     SquaredSum += (*pSrc) * (*pSrc);
     pSrc++;
   }
-
   return (SDS_Sqrt ((SquaredSum - ((Sum * Sum) / ((SLData_t) (ArrayLength)))) / ((SLData_t) ArrayLength)));
 }                                                                   // End of SDA_PopulationSd()
 
@@ -496,12 +460,8 @@ SLData_t SIGLIB_FUNC_DECL SDA_UnbiasedVariance (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLArrayIndex_t ArrayLength)
 {
-  SLData_t        Tmp;
-
-  Tmp = SDA_SampleSd (pSrc, ArrayLength);
-
+  SLData_t        Tmp = SDA_SampleSd (pSrc, ArrayLength);
   return (Tmp * Tmp);
-
 }                                                                   // End of SDA_UnbiasedVariance()
 
 
@@ -527,10 +487,9 @@ SLData_t SIGLIB_FUNC_DECL SDA_Median (
   SLData_t * SIGLIB_PTR_DECL pWorkArray,
   const SLArrayIndex_t ArrayLength)
 {
-  SLData_t        returnValue;
-
   SDA_SortMinToMax (pSrc, pWorkArray, ArrayLength);
 
+  SLData_t        returnValue;
   if (((SLUFixData_t) ArrayLength & 0x1U) == 0U) {                  // Return mean of two middle values
     returnValue =
       ((*(pWorkArray + ((SLUFixData_t) ArrayLength >> 1U))) +
@@ -540,5 +499,4 @@ SLData_t SIGLIB_FUNC_DECL SDA_Median (
     returnValue = *(pWorkArray + ((SLUFixData_t) (ArrayLength - 1) >> 1U)); // Return middle value
   }
   return (returnValue);
-
 }                                                                   // End of SDA_Median()

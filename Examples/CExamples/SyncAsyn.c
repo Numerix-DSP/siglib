@@ -1,5 +1,5 @@
 // Siglib Synch / Asynch Converter Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -52,7 +52,6 @@ int main (
   void)
 {
   SLArrayIndex_t  NumberOfBytesConverted;
-  SLArrayIndex_t  i;
   SLArrayIndex_t  ParityErrorFlag;
   SLArrayIndex_t  NumberOfAsyncBitsPerByte = SUF_AsyncCharacterLength (NUMBER_OF_ASYNCH_BITS_PER_BYTE,  // Number of bits in the data word
                                                                        ASYNCH_PARITY_TYPE,  // Parity type
@@ -88,7 +87,7 @@ int main (
 
   printf ("SDA_SyncToAsyncConverter - number of bytes converted = %d\n", NumberOfBytesConverted);
 
-  for (i = 0; i < NumberOfBytesConverted; i++) {
+  for (SLArrayIndex_t i = 0; i < NumberOfBytesConverted; i++) {
     SUF_Debugfprintf ("AsyncSequence[%d]", i);
     dpchar (AsyncSequence[i]);
   }
@@ -108,9 +107,9 @@ int main (
   printf ("SDA_AsyncToSyncConverter - number of bytes converted = %d\n", NumberOfBytesConverted);
   printf ("SDA_AsyncToSyncConverter - ParityErrorFlag = %d\n", ParityErrorFlag);
 
-  SUF_Debugfprintf ("\n", i);
+  SUF_Debugfprintf ("\n");
 
-  for (i = 0; i < NumberOfBytesConverted; i++) {
+  for (SLArrayIndex_t i = 0; i < NumberOfBytesConverted; i++) {
     SUF_Debugfprintf ("ReSyncSequence[%d]", i);
     dpchar (ReSyncSequence[i]);
   }
@@ -119,9 +118,9 @@ int main (
   printf ("ReAsync string = %s\n", ReSyncSequence);
 
 
-  SUF_Debugfprintf ("\n", i);
+  SUF_Debugfprintf ("\n");
 
-  for (i = 0; i < 20; i++) {
+  for (SLArrayIndex_t i = 0; i < 20; i++) {
     SUF_Debugfprintf ("Input to stop bit remove[%d]", i);
     dpchar (ReSyncSequence[i]);
   }
@@ -138,9 +137,9 @@ int main (
 
   printf ("SDA_AsyncRemoveStopBits - number of bytes converted = %d\n", NumberOfBytesConverted);
 
-  SUF_Debugfprintf ("\n", i);
+  SUF_Debugfprintf ("\n");
 
-  for (i = 0; i < NumberOfBytesConverted; i++) {
+  for (SLArrayIndex_t i = 0; i < NumberOfBytesConverted; i++) {
     SUF_Debugfprintf ("Stop bit removed sequence[%d]", i);
     dpchar (AsyncSequence[i]);
   }
@@ -158,9 +157,9 @@ int main (
 
   printf ("SDA_AsyncAddStopBits - number of bytes converted = %d\n", NumberOfBytesConverted);
 
-  SUF_Debugfprintf ("\n", i);
+  SUF_Debugfprintf ("\n");
 
-  for (i = 0; i < NumberOfBytesConverted; i++) {
+  for (SLArrayIndex_t i = 0; i < NumberOfBytesConverted; i++) {
     SUF_Debugfprintf ("Stop bit added sequence[%d]", i);
     dpchar (ReSyncSequence[i]);
   }

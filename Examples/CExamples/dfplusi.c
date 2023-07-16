@@ -1,5 +1,5 @@
 // SigLib z-Domain Coefficients From Digital Filter Plus Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -28,14 +28,12 @@ int main (
   SLComplexRect_s pZPlanePoles[FILTER_ORDER];
   SLComplexRect_s pZPlaneZeros[FILTER_ORDER];
 
-  int             i;
-
   SDA_ZDomainCoefficientReorg (zDomainCoefficientArray,             // Pointer to source z-domain coefficient array
                                pZPlanePoles,                        // Pointer to z-domain poles array
                                pZPlaneZeros,                        // Pointer to z-domain zeros array
                                FILTER_ORDER);                       // Filter order
 
-  for (i = 0; i < FILTER_ORDER; i++) {
+  for (SLArrayIndex_t i = 0; i < FILTER_ORDER; i++) {
     printf ("P[%d] = %le + j%le\n", i, pZPlanePoles[i].real, pZPlanePoles[i].imag);
     printf ("Z[%d] = %le + j%le\n\n", i, pZPlaneZeros[i].real, pZPlaneZeros[i].imag);
   }

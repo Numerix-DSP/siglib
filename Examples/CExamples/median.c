@@ -1,5 +1,5 @@
 // SigLib Median Filter Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -22,12 +22,11 @@ static SLData_t SortedData[LONG_SAMPLE_LENGTH], MedianWorkArray[LONG_SAMPLE_LENG
 int main (
   void)
 {
-  SLFixData_t     i;
   SLData_t        Median;
 
   printf ("\n\nLong (odd) array :\n\n");
 // Print source data
-  for (i = 0; i < LONG_SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < LONG_SAMPLE_LENGTH; i++) {
     printf ("SourceData[%d] = %lf\n", (SLInt16_t) i, SourceData[i]);
   }
 
@@ -37,7 +36,7 @@ int main (
 
   printf ("\n\n");
 // Print sorted data
-  for (i = 0; i < LONG_SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < LONG_SAMPLE_LENGTH; i++) {
     printf ("SortedData[%d] = %lf\n", (SLInt16_t) i, SortedData[i]);
   }
 
@@ -50,7 +49,7 @@ int main (
 
   printf ("\n\nShort (even) array :\n\n");
 // Print source data
-  for (i = 0; i < SHORT_SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SHORT_SAMPLE_LENGTH; i++) {
     printf ("SourceData[%d] = %lf\n", (SLInt16_t) i, SourceData[i]);
   }
 
@@ -60,7 +59,7 @@ int main (
 
   printf ("\n\n");
 // Print sorted data
-  for (i = 0; i < SHORT_SAMPLE_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SHORT_SAMPLE_LENGTH; i++) {
     printf ("SortedData[%d] = %lf\n", (SLInt16_t) i, SortedData[i]);
   }
 

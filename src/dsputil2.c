@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : DSPUTIL2.C    | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 27/10/1993
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : DSP maths utility functions, for SigLib DSP library.
 
@@ -69,8 +69,6 @@ void SIGLIB_FUNC_DECL SDA_RealSpectralInverse (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i, j;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -79,7 +77,7 @@ void SIGLIB_FUNC_DECL SDA_RealSpectralInverse (
 #endif
 
 // Negate alternate values
-  for (i = 0, j = 1; i < ArrayLength; i++, j *= -1) {
+  for (SLArrayIndex_t i = 0, j = 1; i < ArrayLength; i++, j *= -1) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst[i] = pSrc[i] * j;
 #else
@@ -117,8 +115,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexSpectralInverse (
   SLData_t * SIGLIB_PTR_DECL pImagDst,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i, j;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrcReal % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
@@ -129,7 +125,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexSpectralInverse (
 #endif
 
 // Negate alternate values
-  for (i = 0, j = 1; i < ArrayLength; i++, j *= -1) {
+  for (SLArrayIndex_t i = 0, j = 1; i < ArrayLength; i++, j *= -1) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pRealDst[i] = pSrcReal[i] * j;
     pImagDst[i] = pSrcImag[i] * j;
@@ -173,13 +169,6 @@ void SIGLIB_FUNC_DECL SDA_FdInterpolate (
   const SLFixData_t RatioDown,
   const SLArrayIndex_t sampleLength)
 {
-  SLArrayIndex_t  Index = 0;
-  SLFixData_t     x;
-  SLArrayIndex_t  i, j;
-  SLArrayIndex_t  HalfsampleLength = (SLArrayIndex_t) ((SLUFixData_t) sampleLength >> 1U);
-  SLData_t        SumReal = SIGLIB_ZERO;
-  SLData_t        SumImag = SIGLIB_ZERO;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrcReal % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
@@ -188,6 +177,13 @@ void SIGLIB_FUNC_DECL SDA_FdInterpolate (
   _nassert ((int) pImagDst % 8 == 0);
 #endif
 #endif
+
+  SLArrayIndex_t  Index = 0;
+  SLFixData_t     x;
+  SLArrayIndex_t  i, j;
+  SLArrayIndex_t  HalfsampleLength = (SLArrayIndex_t) ((SLUFixData_t) sampleLength >> 1U);
+  SLData_t        SumReal = SIGLIB_ZERO;
+  SLData_t        SumImag = SIGLIB_ZERO;
 
   if (RatioDown > RatioUp) {
 // Shift lower half of FFT data (DC to Nyquist)
@@ -308,8 +304,6 @@ void SIGLIB_FUNC_DECL SDA_FdInterpolate2 (
   const SLArrayIndex_t SrcsampleLength,
   const SLArrayIndex_t DstsampleLength)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrcReal % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
@@ -320,6 +314,8 @@ void SIGLIB_FUNC_DECL SDA_FdInterpolate2 (
 #endif
 
   if (SrcsampleLength < DstsampleLength) {
+    SLArrayIndex_t  i;
+
     for (i = 0; i < (SLArrayIndex_t) ((SLUFixData_t) SrcsampleLength >> 1U); i++) {
       pRealDst[i] = pSrcReal[i];
       pImagDst[i] = pSrcImag[i];
@@ -337,7 +333,7 @@ void SIGLIB_FUNC_DECL SDA_FdInterpolate2 (
   }
 
   else {                                                            // Input larger than output
-    for (i = 0; i < (SLArrayIndex_t) ((SLUFixData_t) DstsampleLength >> 1U); i++) {
+    for (SLArrayIndex_t i = 0; i < (SLArrayIndex_t) ((SLUFixData_t) DstsampleLength >> 1U); i++) {
       pRealDst[i] = pSrcReal[i];
       pImagDst[i] = pSrcImag[i];
       pRealDst[(DstsampleLength - 1) - i] = pSrcReal[(SrcsampleLength - 1) - i];
@@ -382,13 +378,13 @@ SLData_t SIGLIB_FUNC_DECL SDS_TdPitchShift (
   const SLData_t ShiftRatio,
   const SLArrayIndex_t ShiftArrayLength)
 {
-  SLData_t        OutputSample;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pShiftArray % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
+
+  SLData_t        OutputSample;
 
   pShiftArray[*pShiftArrayOffsetIn] = Sample;
   OutputSample = pShiftArray[((SLArrayIndex_t) * pShiftArrayOffsetOut)];
@@ -454,9 +450,6 @@ void SIGLIB_FUNC_DECL SDA_TdPitchShift (
   const SLArrayIndex_t ShiftArrayLength,
   const SLArrayIndex_t sampleLength)
 {
-  SLData_t        OutputSample;
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pShiftArray % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
@@ -465,7 +458,9 @@ void SIGLIB_FUNC_DECL SDA_TdPitchShift (
 #endif
 #endif
 
-  for (i = 0; i < sampleLength; i++) {
+  SLData_t        OutputSample;
+
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     pShiftArray[*pShiftArrayOffsetIn] = *pSrc++;
     OutputSample = pShiftArray[((SLArrayIndex_t) * pShiftArrayOffsetOut)];
 
@@ -528,14 +523,14 @@ SLData_t SIGLIB_FUNC_DECL SDS_EchoGenerate (
   const enum SLEcho_t EchoType,
   const SLArrayIndex_t EchoArrayLength)
 {
-  SLArrayIndex_t  EchoArrayOffsetOut;
-  SLData_t        OutputSample;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) EchoArray % 8 == 0);                              // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
+
+  SLArrayIndex_t  EchoArrayOffsetOut;
+  SLData_t        OutputSample;
 
 // Calculate the delay
   EchoArrayOffsetOut = *EchoArrayOffsetIn - ((SLArrayIndex_t) (EchoDelay * ((SLData_t) EchoArrayLength)));
@@ -598,8 +593,6 @@ void SIGLIB_FUNC_DECL SDA_Power (
   const SLData_t power,
   const SLArrayIndex_t sampleLength)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -607,7 +600,7 @@ void SIGLIB_FUNC_DECL SDA_Power (
 #endif
 #endif
 
-  for (i = 0; i < sampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     *pDst++ = SDS_Pow (*pSrc, power);                               // Calls the ANSI standard pow() function through the macro
     pSrc++;
   }
@@ -647,7 +640,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_Polynomial (
 {
   return (y0 + y1 * data + y2 * SDS_Pow (data, SIGLIB_TWO) + y3 * SDS_Pow (data, SIGLIB_THREE) +
           y4 * SDS_Pow (data, SIGLIB_FOUR) + y5 * SDS_Pow (data, SIGLIB_FIVE));
-
 }                                                                   // End of SDS_Polynomial()
 
 
@@ -686,8 +678,6 @@ void SIGLIB_FUNC_DECL SDA_Polynomial (
   const SLData_t y5,
   const SLArrayIndex_t sampleLength)
 {
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -695,7 +685,7 @@ void SIGLIB_FUNC_DECL SDA_Polynomial (
 #endif
 #endif
 
-  for (i = 0; i < sampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     *pDst++ = SDS_Polynomial (*pSrc++, y0, y1, y2, y3, y4, y5);
   }
 }                                                                   // End of SDA_Polynomial()
@@ -723,9 +713,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Modulo (
   const SLData_t Modulo,
   const enum SLModuloMode_t ModuloType)
 {
-  SLData_t        Tmp;
-
-  Tmp = Sample;
+  SLData_t        Tmp = Sample;
 
   if (ModuloType == SIGLIB_SINGLE_SIDED_MODULO) {
     if (Tmp > SIGLIB_EPSILON) {
@@ -783,9 +771,6 @@ void SIGLIB_FUNC_DECL SDA_Modulo (
   const enum SLModuloMode_t ModuloType,
   const SLArrayIndex_t sampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Tmp;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -794,8 +779,8 @@ void SIGLIB_FUNC_DECL SDA_Modulo (
 #endif
 
   if (ModuloType == SIGLIB_SINGLE_SIDED_MODULO) {
-    for (i = 0; i < sampleLength; i++) {
-      Tmp = *pSrc++;
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+      SLData_t        Tmp = *pSrc++;
 
       if (Tmp > SIGLIB_EPSILON) {
         while (Tmp > Modulo) {
@@ -812,8 +797,8 @@ void SIGLIB_FUNC_DECL SDA_Modulo (
   }
 
   else {
-    for (i = 0; i < sampleLength; i++) {
-      Tmp = *pSrc++;
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+      SLData_t        Tmp = *pSrc++;
 
       if (Tmp > SIGLIB_EPSILON) {
         while (Tmp > Modulo) {
@@ -880,10 +865,6 @@ void SIGLIB_FUNC_DECL SDA_AgcPeak (
   const SLArrayIndex_t SubsampleLength,
   const SLArrayIndex_t sampleLength)
 {
-  SLArrayIndex_t  i, j;
-  SLData_t        Max, Gain;
-  SLData_t        LocalSensitivity = SIGLIB_ONE;                    // Local sensitivity, used to optimise code
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -891,10 +872,12 @@ void SIGLIB_FUNC_DECL SDA_AgcPeak (
 #endif
 #endif
 
-  Gain = *pGain;                                                    // Load gain from previous iteration
-  Max = *pMax;                                                      // Load max from previous iteration
+  SLData_t        LocalSensitivity = SIGLIB_ONE;                    // Local sensitivity, used to optimise code
 
-  for (i = 0; i < sampleLength; i += SubsampleLength) {
+  SLData_t        Gain = *pGain;                                    // Load gain from previous iteration
+  SLData_t        Max = *pMax;                                      // Load max from previous iteration
+
+  for (SLArrayIndex_t i = 0; i < sampleLength; i += SubsampleLength) {
     if (Max > MinThreshold) {                                       // If signal level is above threshold then adjust gain
       if (Max < DesiredMagnitude) {
         LocalSensitivity = AttackSensitivity;                       // Increment gain
@@ -904,7 +887,7 @@ void SIGLIB_FUNC_DECL SDA_AgcPeak (
       }
     }
 
-    for (j = 0; j < SubsampleLength; j++) {
+    for (SLArrayIndex_t j = 0; j < SubsampleLength; j++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
       pDst[i + j] = pSrc[i + j] * Gain;
 #else
@@ -959,19 +942,18 @@ void SIGLIB_FUNC_DECL SIF_AgcMeanAbs (
   const SLData_t Threshold,
   const SLArrayIndex_t MeanLength)
 {
-  SLArrayIndex_t  i;
-
-  for (i = 0; i < MeanLength; i++) {                                // Initialise the mean state array to 0
+  for (SLArrayIndex_t i = 0; i < MeanLength; i++) {                 // Initialise the mean state array to 0
     *pState++ = SIGLIB_ZERO;
   }
 
   *pGain = SIGLIB_ONE;                                              // Initilaise the gain
   *pStateIndex = SIGLIB_AI_ZERO;                                    // Initilaise state index
   *pMeanSum = SIGLIB_ZERO;                                          // Initilaise mean sum
-  *pDesiredMeanScaled = DesiredLevel * (SLData_t) 0.636618 *MeanLength; // Scaled mean value
 // Mean(abs(sine wave)) = 0.636618
-  *pThresholdScaled = Threshold * (SLData_t) 0.636618 *MeanLength;  // Scaled threshold value
-
+  *pDesiredMeanScaled = DesiredLevel * (SLData_t) 0.636618 *(
+  SLData_t)       MeanLength;                                       // Scaled mean value
+  *pThresholdScaled = Threshold * (SLData_t) 0.636618 *(
+  SLData_t)       MeanLength;                                       // Scaled threshold value
 }                                                                   // End of SIF_AgcMeanAbs()
 
 
@@ -1026,11 +1008,6 @@ void SIGLIB_FUNC_DECL SDA_AgcMeanAbs (
   const SLArrayIndex_t MeanLength,
   const SLArrayIndex_t sampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Tmp;
-  SLData_t        Gain = *pGain;                                    // Load gain from previous iteration
-  SLData_t        MeanSum = *pMeanSum;                              // Load mean sum scaled from previous iteration
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -1038,7 +1015,10 @@ void SIGLIB_FUNC_DECL SDA_AgcMeanAbs (
 #endif
 #endif
 
-  for (i = 0; i < sampleLength; i++) {
+  SLData_t        Gain = *pGain;                                    // Load gain from previous iteration
+  SLData_t        MeanSum = *pMeanSum;                              // Load mean sum scaled from previous iteration
+
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     Tmp = pSrc[i] * Gain;                                           // Get in new sample
     pDst[i] = Tmp;                                                  // Store output value
@@ -1049,7 +1029,7 @@ void SIGLIB_FUNC_DECL SDA_AgcMeanAbs (
     MeanSum -= pState[*pStateIndex];                                // Subtract old sample
     pState[*pStateIndex] = Tmp;                                     // Store new sample in state array
 #else
-    Tmp = *pSrc++ * Gain;                                           // Get in new sample
+    SLData_t        Tmp = *pSrc++ * Gain;                           // Get in new sample
     *pDst++ = Tmp;                                                  // Store output value
     if (Tmp < SIGLIB_ZERO) {                                        // Ensure positive
       Tmp = -Tmp;
@@ -1113,20 +1093,19 @@ void SIGLIB_FUNC_DECL SIF_AgcMeanSquared (
   const SLData_t Threshold,
   const SLArrayIndex_t MeanLength)
 {
-  SLArrayIndex_t  i;
-
-  for (i = 0; i < MeanLength; i++) {                                // Initialise the mean state array to 0
+  for (SLArrayIndex_t i = 0; i < MeanLength; i++) {                 // Initialise the mean state array to 0
     *pState++ = SIGLIB_ZERO;
   }
 
   *pGain = SIGLIB_ONE;                                              // Initilaise the gain
   *pStateIndex = SIGLIB_AI_ZERO;                                    // Initilaise state index
   *pMeanSquaredSum = SIGLIB_ZERO;                                   // Initilaise mean sum
-  *pDesiredMeanSquaredScaled = DesiredLevel * DesiredLevel * 0.5 * MeanLength;  // Scaled mean squared value
-  *pThresholdScaled = Threshold * Threshold * 0.5 * MeanLength;     // Scaled mean squared threshold value
+// *pDesiredMeanSquaredScaled = DesiredLevel * DesiredLevel * 0.405282 * (SLData_t)MeanLength;  // Scaled mean squared value
+// *pThresholdScaled = Threshold * Threshold * 0.405282 * (SLData_t)MeanLength; // Scaled mean squared threshold value
+  *pDesiredMeanSquaredScaled = DesiredLevel * DesiredLevel * 0.01 * (SLData_t) MeanLength;  // Scaled mean squared value
+  *pThresholdScaled = Threshold * Threshold * 0.01 * (SLData_t) MeanLength; // Scaled mean squared threshold value
 
 }                                                                   // End of SIF_AgcMeanSquared()
-
 
 
 /**/
@@ -1180,11 +1159,6 @@ void SIGLIB_FUNC_DECL SDA_AgcMeanSquared (
   const SLArrayIndex_t MeanLength,
   const SLArrayIndex_t sampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Tmp;
-  SLData_t        Gain = *pGain;                                    // Load gain from previous iteration
-  SLData_t        MeanSquaredSum = *pMeanSquaredSum;                // Load mean sum scaled from previous iteration
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef _TMS320C6700                                                 // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -1192,16 +1166,19 @@ void SIGLIB_FUNC_DECL SDA_AgcMeanSquared (
 #endif
 #endif
 
-  for (i = 0; i < sampleLength; i++) {
+  SLData_t        Gain = *pGain;                                    // Load gain from previous iteration
+  SLData_t        MeanSquaredSum = *pMeanSquaredSum;                // Load mean sum scaled from previous iteration
+
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
-    Tmp = pSrc[i] * Gain;                                           // Get in new sample
+    SLData_t        Tmp = pSrc[i] * Gain;                           // Get in new sample
     pDst[i] = Tmp;                                                  // Store output value
     Tmp *= Tmp;                                                     // Square the data
     MeanSquaredSum += Tmp;                                          // Add in new sample
     MeanSquaredSum -= pState[*pStateIndex];                         // Subtract old sample
     pState[*pStateIndex] = Tmp;                                     // Store new sample in state array
 #else
-    Tmp = *pSrc++ * Gain;                                           // Get in new sample
+    SLData_t        Tmp = *pSrc++ * Gain;                           // Get in new sample
     *pDst++ = Tmp;                                                  // Store output value
     Tmp *= Tmp;                                                     // Square the data
     MeanSquaredSum += Tmp;                                          // Add in new sample
@@ -1232,6 +1209,466 @@ void SIGLIB_FUNC_DECL SDA_AgcMeanSquared (
 /**/
 
 /********************************************************
+* Function: SIF_AgcEnvelopeDetector
+*
+* Parameters:
+*   const SLData_t envelopeDetectorTimeConstant,  - Envelope detector time constant
+*   const SLData_t sampleRate,                    - Sample rate
+*   SLData_t *pState,                             - Pointer to envelope detector state variable
+*   SLData_t * pOnePoleCoefficient,               - Pointer to envelope detector coefficient
+*   SLData_t * pGain,                             - Pointer to AGC gain
+*
+* Return value:
+*   void
+*
+* Description: Initialize the AGC Envelope Detector functions.
+*
+********************************************************/
+
+void SIGLIB_FUNC_DECL SIF_AgcEnvelopeDetector (
+  const SLData_t envelopeDetectorTimeConstant,
+  const SLData_t sampleRate,
+  SLData_t * pState,
+  SLData_t * pOnePoleCoefficient,
+  SLData_t * pGain)
+{
+  *pState = SIGLIB_ZERO;
+
+  *pOnePoleCoefficient = SDS_OnePoleTimeConstantToFilterCoeff (envelopeDetectorTimeConstant,  // Time period (ms)
+                                                               sampleRate); // Sample rate (Hz)
+
+  *pGain = SIGLIB_ONE;                                              // Initilaise the gain
+}                                                                   // End of SIF_AgcEnvelopeDetector()
+
+
+
+/**/
+
+/********************************************************
+* Function: SDS_AgcEnvelopeDetector
+*
+* Parameters:
+*   const SLData_t src,                     - Source sample
+*   const SLData_t desiredLevel,            - Desired level
+*   const SLData_t minThresholdLevel,       - Minimum threshold level
+*   const SLData_t AttackSensitivitySlow,   - Attack sensitivity - slow
+*   const SLData_t DecaySensitivitySlow,    - Decay sensitivity - slow
+*   const SLData_t AttackSensitivityFast,   - Attack sensitivity - fast
+*   const SLData_t DecaySensitivityFast,    - Decay sensitivity - fast
+*   SLData_t * SIGLIB_PTR_DECL pState,      - Pointer to envelope detector state variable
+*   SLData_t envelopeDetectorCoeff,         - Envelope detector coefficient
+*   SLData_t * pGain,                       - Pointer to AGC gain
+*   const SLData_t maxGain,                 - Maximum gain
+*   const SLData_t maxAttenuation           - Maximum attenuation
+*   const SLArrayIndex_t sampleLength       - Length of input array
+*
+* Return value:
+*   AGC'd result
+*
+* Description: Control the signal amplitude, using the
+*   gain control by size of error of the envelope following algorithm.
+*
+*   Notes :
+*   The initial gain should be 1.0 on the first iteration
+*   of this function.
+*   The desiredLevel is the level to which the magnitude
+*   will tend towards.
+*   The AttackSensitivity(Slow/Fast) is the amount by which the gain
+*   will be incremented when modified.
+*   The DecaySensitivity(Slow/Fast) is the amount by which the gain
+*   will be decremented when modified.
+*
+********************************************************/
+
+SLData_t SIGLIB_FUNC_DECL SDS_AgcEnvelopeDetector (
+  const SLData_t src,
+  const SLData_t desiredLevel,
+  const SLData_t minThresholdLevel,
+  const SLData_t AttackSensitivitySlow,
+  const SLData_t DecaySensitivitySlow,
+  const SLData_t AttackSensitivityFast,
+  const SLData_t DecaySensitivityFast,
+  SLData_t * pState,
+  const SLData_t onePoleCoefficient,
+  SLData_t * pGain,
+  const SLData_t MaxGain,
+  const SLData_t MaxAttenuation)
+{
+  SLData_t        Gain = *pGain;                                    // Load gain from previous iteration
+  SLData_t        envelopeDetectorState = *pState;                  // Load envelope detector state from previous iteration
+
+  SLData_t        inputSample = src;                                // Get in new sample
+  SLData_t        dst = inputSample * Gain;                         // Store output value and multiply by gain
+
+#if SIGLIB_ENABLE_DEBUG_LOGGING
+  SUF_Debugfprintf ("InputSample, %lf, Sample*Gain, %lf, ", inputSample, inputSample * Gain);
+#endif
+  envelopeDetectorState *= onePoleCoefficient;
+  if (inputSample >= SIGLIB_ZERO) {
+    if (inputSample > envelopeDetectorState) {
+      envelopeDetectorState = inputSample;
+    }
+  }
+  else {
+    if (-inputSample > envelopeDetectorState) {
+      envelopeDetectorState = -inputSample;
+    }
+  }
+
+#if SIGLIB_ENABLE_DEBUG_LOGGING
+  SUF_Debugfprintf ("envelopeDetectorState, %lf, Gain, %lf, ", envelopeDetectorState, Gain);
+#endif
+
+  if (envelopeDetectorState > minThresholdLevel) {                  // If signal level is above threshold then adjust gain
+    if ((envelopeDetectorState * Gain < desiredLevel) && (Gain < MaxGain)) {
+      if (envelopeDetectorState < (desiredLevel * SIGLIB_HALF)) {
+        Gain *= AttackSensitivityFast;                              // Increment gain
+      }
+      else {
+        Gain *= AttackSensitivitySlow;                              // Increment gain
+      }
+#if SIGLIB_ENABLE_DEBUG_LOGGING
+      SUF_Debugfprintf ("NewGain, %lf, +++++, 1\n", Gain);
+#endif
+    }
+    else if ((envelopeDetectorState * Gain > desiredLevel) && (Gain > MaxAttenuation)) {
+      if (envelopeDetectorState > (desiredLevel * SIGLIB_TWO)) {
+        Gain *= DecaySensitivityFast;                               // Decrement gain
+      }
+      else {
+        Gain *= DecaySensitivitySlow;                               // Decrement gain
+      }
+#if SIGLIB_ENABLE_DEBUG_LOGGING
+      SUF_Debugfprintf ("NewGain, %lf, -----, -1\n", Gain);
+#endif
+    }
+#if SIGLIB_ENABLE_DEBUG_LOGGING
+    else {
+      SUF_Debugfprintf ("NewGain, %lf, GainLimits, 0\n", Gain);
+    }
+#endif
+    if (Gain > MaxGain) {                                           // Ensure gain within limits
+      Gain = MaxGain;
+    }
+    else if (Gain < MaxAttenuation) {
+      Gain = MaxAttenuation;
+    }
+  }
+  else {                                                            // If input level < Threshold set gain to 1.
+    Gain = SIGLIB_ONE;
+#if SIGLIB_ENABLE_DEBUG_LOGGING
+    SUF_Debugfprintf ("NewGain, %lf, envelopeDetectorState < ThresholdScale, 0\n", Gain);
+#endif
+  }
+
+  *pGain = Gain;
+  *pState = envelopeDetectorState;
+
+  return (dst);
+}                                                                   // End of SDS_AgcEnvelopeDetector()
+
+/**/
+
+/********************************************************
+* Function: SDA_AgcEnvelopeDetector
+*
+* Parameters:
+*   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Source array
+*   SLData_t * SIGLIB_PTR_DECL pDst,        - Destination array
+*   const SLData_t desiredLevel,            - Desired level
+*   const SLData_t minThresholdLevel,       - Minimum threshold level
+*   const SLData_t AttackSensitivitySlow,   - Attack sensitivity - slow
+*   const SLData_t DecaySensitivitySlow,    - Decay sensitivity - slow
+*   const SLData_t AttackSensitivityFast,   - Attack sensitivity - fast
+*   const SLData_t DecaySensitivityFast,    - Decay sensitivity - fast
+*   SLData_t * SIGLIB_PTR_DECL pState,      - Pointer to envelope detector state variable
+*   SLData_t envelopeDetectorCoeff,         - Envelope detector coefficient
+*   SLData_t * pGain,                       - Pointer to AGC gain
+*   const SLData_t maxGain,                 - Maximum gain
+*   const SLData_t maxAttenuation           - Maximum attenuation
+*   const SLArrayIndex_t sampleLength       - Length of input array
+*
+* Return value:
+*   void
+*
+* Description: Control the signal amplitude, using the
+*   gain control by size of error of the envelope following algorithm.
+*
+*   Notes :
+*   The initial gain should be 1.0 on the first iteration
+*   of this function.
+*   The desiredLevel is the level to which the magnitude
+*   will tend towards.
+*   The AttackSensitivity(Slow/Fast) is the amount by which the gain
+*   will be incremented when modified.
+*   The DecaySensitivity(Slow/Fast) is the amount by which the gain
+*   will be decremented when modified.
+*
+********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_AgcEnvelopeDetector (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLData_t desiredLevel,
+  const SLData_t minThresholdLevel,
+  const SLData_t AttackSensitivitySlow,
+  const SLData_t DecaySensitivitySlow,
+  const SLData_t AttackSensitivityFast,
+  const SLData_t DecaySensitivityFast,
+  SLData_t * pState,
+  const SLData_t onePoleCoefficient,
+  SLData_t * pGain,
+  const SLData_t MaxGain,
+  const SLData_t MaxAttenuation,
+  const SLArrayIndex_t sampleLength)
+{
+#if (SIGLIB_ARRAYS_ALIGNED)
+#ifdef _TMS320C6700                                                 // Defined by TI compiler
+  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
+  _nassert ((int) pDst % 8 == 0);
+#endif
+#endif
+
+  SLData_t        Gain = *pGain;                                    // Load gain from previous iteration
+  SLData_t        envelopeDetectorState = *pState;                  // Load envelope detector state from previous iteration
+
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+    SLData_t        inputSample = pSrc[i];                          // Get in new sample
+    pDst[i] = inputSample * Gain;                                   // Store output value and multiply by gain
+
+#if SIGLIB_ENABLE_DEBUG_LOGGING
+    SUF_Debugfprintf ("InputSample, %lf, Sample*Gain, %lf, ", inputSample, inputSample * Gain);
+#endif
+    envelopeDetectorState *= onePoleCoefficient;
+    if (inputSample >= SIGLIB_ZERO) {
+      if (inputSample > envelopeDetectorState) {
+        envelopeDetectorState = inputSample;
+      }
+    }
+    else {
+      if (-inputSample > envelopeDetectorState) {
+        envelopeDetectorState = -inputSample;
+      }
+    }
+
+#if SIGLIB_ENABLE_DEBUG_LOGGING
+    SUF_Debugfprintf ("envelopeDetectorState, %lf, Gain, %lf, ", envelopeDetectorState, Gain);
+#endif
+
+    if (envelopeDetectorState > minThresholdLevel) {                // If signal level is above threshold then adjust gain
+      if ((envelopeDetectorState * Gain < desiredLevel) && (Gain < MaxGain)) {
+        if (envelopeDetectorState < (desiredLevel * SIGLIB_HALF)) {
+          Gain *= AttackSensitivityFast;                            // Increment gain
+        }
+        else {
+          Gain *= AttackSensitivitySlow;                            // Increment gain
+        }
+#if SIGLIB_ENABLE_DEBUG_LOGGING
+        SUF_Debugfprintf ("NewGain, %lf, +++++, 1\n", Gain);
+#endif
+      }
+      else if ((envelopeDetectorState * Gain > desiredLevel) && (Gain > MaxAttenuation)) {
+        if (envelopeDetectorState > (desiredLevel * SIGLIB_TWO)) {
+          Gain *= DecaySensitivityFast;                             // Decrement gain
+        }
+        else {
+          Gain *= DecaySensitivitySlow;                             // Decrement gain
+        }
+#if SIGLIB_ENABLE_DEBUG_LOGGING
+        SUF_Debugfprintf ("NewGain, %lf, -----, -1\n", Gain);
+#endif
+      }
+#if SIGLIB_ENABLE_DEBUG_LOGGING
+      else {
+        SUF_Debugfprintf ("NewGain, %lf, GainLimits, 0\n", Gain);
+      }
+#endif
+      if (Gain > MaxGain) {                                         // Ensure gain within limits
+        Gain = MaxGain;
+      }
+      else if (Gain < MaxAttenuation) {
+        Gain = MaxAttenuation;
+      }
+    }
+    else {                                                          // If input level < Threshold set gain to 1.
+      Gain = SIGLIB_ONE;
+#if SIGLIB_ENABLE_DEBUG_LOGGING
+      SUF_Debugfprintf ("NewGain, %lf, envelopeDetectorState < ThresholdScale, 0\n", Gain);
+#endif
+    }
+  }
+
+  *pGain = Gain;
+  *pState = envelopeDetectorState;
+}                                                                   // End of SDA_AgcEnvelopeDetector()
+
+
+/**/
+
+/********************************************************
+* Function: SIF_Drc
+*
+* Parameters:
+*   SLData_t *envelopeState)                - Envelope follower state variable
+*
+* Return value:
+*   void
+*
+* Description: Initialize the dynamic range compression functions
+*
+********************************************************/
+
+void SIGLIB_FUNC_DECL SIF_Drc (
+  const SLData_t envelopeDetectorTimeConstant,
+  const SLData_t sampleRate,
+  SLData_t * pState,
+  SLData_t * pOnePoleCoefficient)
+{
+  *pState = SIGLIB_ZERO;
+
+  *pOnePoleCoefficient = SDS_OnePoleTimeConstantToFilterCoeff (envelopeDetectorTimeConstant,  // Time period (ms)
+                                                               sampleRate); // Sample rate (Hz)
+}                                                                   // End of SIF_Drc()
+
+
+/**/
+
+/********************************************************
+* Function: SDS_Drc
+*
+* Parameters:
+*   const SLData_t input,                     - Input sample
+*   SLData_t *envelopeState,                  - Envelope follower state variable
+*   const SLData_t envelopeOnePoleCoeff,      - Envelope follower one-pole filter coefficient
+*   const SLData_t envelopeThreshold,         - Envelope follower threshold to enable DRC functionality
+*   const SLDrcLevelGainTable *drcGainTable,  - Thresholds/Gains table
+*   const SLArrayIndex_t numberOfKnees,       - Number of knees
+*   const SLData_t makeupGain)                - Makeup gain
+*
+* Return value:
+*   Compressed value
+*
+* Description: Apply dynamic range compression to the input samples
+*
+********************************************************/
+
+SLData_t SIGLIB_FUNC_DECL SDS_Drc (
+  const SLData_t input,
+  SLData_t * envelopeState,
+  const SLData_t envelopeOnePoleCoeff,
+  const SLData_t envelopeThreshold,
+  const SLDrcLevelGainTable * drcGainTable,
+  const SLArrayIndex_t numberOfKnees,
+  const SLData_t makeupGain)
+{
+  SLData_t        inputSign = SIGLIB_ONE;
+  SLData_t        magnitude;
+
+  if (input < SIGLIB_ZERO) {
+    inputSign = SIGLIB_MINUS_ONE;
+    magnitude = -input;
+  }
+  else {
+    magnitude = input;
+  }
+
+  SLData_t        localEnvelopeState = *envelopeState;
+
+// Envelope follower using magnitude normalized one-pole filter:
+// y(n) = (1-alpha).x(n) + alpha.y(n-1)
+  localEnvelopeState = ((SIGLIB_ONE - envelopeOnePoleCoeff) * magnitude) + (localEnvelopeState * envelopeOnePoleCoeff);
+
+  if (localEnvelopeState > envelopeThreshold) {
+    for (SLArrayIndex_t i = 0; i < numberOfKnees; i++) {
+      if (magnitude > drcGainTable[i].level) {
+        magnitude = drcGainTable[i].level + ((magnitude - drcGainTable[i].level) * drcGainTable[i].gain);
+      }
+      else {
+        break;
+      }
+    }
+  }
+
+  *envelopeState = localEnvelopeState;
+
+  return (magnitude * inputSign * makeupGain);
+}                                                                   // End of SDS_Drc()
+
+
+/**/
+
+/********************************************************
+* Function: SDA_Drc
+*
+* Parameters:
+*   const SLData_t * SIGLIB_PTR_DECL pSrc,    - Source array
+*   SLData_t * SIGLIB_PTR_DECL pDst,          - Destination array
+*   SLData_t *envelopeState,                  - Envelope follower state variable
+*   const SLData_t envelopeOnePoleCoeff,      - Envelope follower one-pole filter coefficient
+*   const SLData_t envelopeThreshold,         - Envelope follower threshold to enable DRC functionality
+*   const SLDrcLevelGainTable *drcGainTable,  - Thresholds/Gains table
+*   const SLArrayIndex_t numberOfKnees,       - Number of knees
+*   const SLData_t makeupGain)                - Makeup gain
+*   const SLArrayIndex_t sampleLength)        - Sample length
+*
+* Return value:
+*   void
+*
+* Description: Apply dynamic range compression to the input samples
+*
+********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_Drc (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  SLData_t * envelopeState,
+  const SLData_t envelopeOnePoleCoeff,
+  const SLData_t envelopeThreshold,
+  const SLDrcLevelGainTable * drcGainTable,
+  const SLArrayIndex_t numberOfKnees,
+  const SLData_t makeupGain,
+  const SLArrayIndex_t sampleLength)
+{
+  SLData_t        localEnvelopeState = *envelopeState;
+
+  for (SLArrayIndex_t j = 0; j < sampleLength; j++) {
+    SLData_t        input = *pSrc++;
+
+    SLData_t        inputSign = SIGLIB_ONE;
+    SLData_t        magnitude;
+
+    if (input < SIGLIB_ZERO) {
+      inputSign = SIGLIB_MINUS_ONE;
+      magnitude = -input;
+    }
+    else {
+      magnitude = input;
+    }
+
+// Envelope follower using magnitude normalized one-pole filter:
+// y(n) = (1-alpha).x(n) + alpha.y(n-1)
+    localEnvelopeState = ((SIGLIB_ONE - envelopeOnePoleCoeff) * magnitude) + (localEnvelopeState * envelopeOnePoleCoeff);
+
+    if (localEnvelopeState > envelopeThreshold) {
+      for (SLArrayIndex_t i = 0; i < numberOfKnees; i++) {
+        if (magnitude > drcGainTable[i].level) {
+          magnitude = drcGainTable[i].level + ((magnitude - drcGainTable[i].level) * drcGainTable[i].gain);
+        }
+        else {
+          break;
+        }
+      }
+    }
+    *pDst++ = magnitude * inputSign * makeupGain;
+  }
+
+  *envelopeState = localEnvelopeState;
+}                                                                   // End of SDA_Drc()
+
+
+/**/
+
+/********************************************************
 * Function: SDA_GroupDelay()
 *
 * Parameters  :
@@ -1253,9 +1690,6 @@ void SIGLIB_FUNC_DECL SDA_GroupDelay (
   SLData_t * SIGLIB_PTR_DECL PreviousPhase,
   const SLArrayIndex_t sampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        LocalPreviousPhase, New, TInput;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -1263,10 +1697,10 @@ void SIGLIB_FUNC_DECL SDA_GroupDelay (
 #endif
 #endif
 
-  LocalPreviousPhase = *PreviousPhase;
+  SLData_t        LocalPreviousPhase = *PreviousPhase;
 
-  for (i = 0; i < sampleLength; i++) {
-    TInput = *pSrc++;
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+    SLData_t        TInput = *pSrc++;
 
     if (SDS_Abs (TInput - LocalPreviousPhase) > SIGLIB_PI) {        // Has phase sign changed ?
       if (TInput > LocalPreviousPhase) {
@@ -1281,7 +1715,7 @@ void SIGLIB_FUNC_DECL SDA_GroupDelay (
       }
     }
 
-    New = TInput - LocalPreviousPhase;                              // Get difference from previous sample
+    SLData_t        New = TInput - LocalPreviousPhase;              // Get difference from previous sample
 
     LocalPreviousPhase = TInput;
     *pDst++ = New;
@@ -1318,11 +1752,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_ZeroCrossingDetect (
   const enum SLLevelCrossingMode_t ZXT,
   const SLArrayIndex_t sampleLength)
 {
-  SLArrayIndex_t  i;
-  SLFixData_t     NumXings = 0;
-  SLData_t        LocalPrevValue = *pPrevValue;
-  SLData_t        ITmp;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -1330,9 +1759,12 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_ZeroCrossingDetect (
 #endif
 #endif
 
+  SLFixData_t     NumXings = 0;
+  SLData_t        LocalPrevValue = *pPrevValue;
+
   if (ZXT == SIGLIB_POSITIVE_LEVEL_CROSS) {
-    for (i = 0; i < sampleLength; i++) {
-      ITmp = *pSrc++;
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+      SLData_t        ITmp = *pSrc++;
 
       if (SDS_Sign (ITmp) > SDS_Sign (LocalPrevValue)) {
         *pDst++ = SIGLIB_ONE;                                       // Indicate +ve zero crossing
@@ -1348,8 +1780,8 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_ZeroCrossingDetect (
   }
 
   else if (ZXT == SIGLIB_NEGATIVE_LEVEL_CROSS) {
-    for (i = 0; i < sampleLength; i++) {
-      ITmp = *pSrc++;
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+      SLData_t        ITmp = *pSrc++;
 
       if (SDS_Sign (ITmp) < SDS_Sign (LocalPrevValue)) {
         *pDst++ = SIGLIB_MINUS_ONE;                                 // Indicate -ve zero crossing
@@ -1365,8 +1797,8 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_ZeroCrossingDetect (
   }
 
   if (ZXT == SIGLIB_ALL_LEVEL_CROSS) {
-    for (i = 0; i < sampleLength; i++) {
-      ITmp = *pSrc++;
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+      SLData_t        ITmp = *pSrc++;
 
       if (SDS_Sign (ITmp) > SDS_Sign (LocalPrevValue)) {
         *pDst++ = SIGLIB_ONE;                                       // Indicate +ve zero crossing
@@ -1483,19 +1915,17 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FirstZeroCrossingLocation (
   const enum SLLevelCrossingMode_t ZXT,
   const SLArrayIndex_t sampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        LocalPrevValue = *pPrevValue;
-  SLData_t        ITmp;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
+  SLData_t        LocalPrevValue = *pPrevValue;
+
   if (ZXT == SIGLIB_POSITIVE_LEVEL_CROSS) {
-    for (i = 0; i < sampleLength; i++) {
-      ITmp = pSrc[i];
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+      SLData_t        ITmp = pSrc[i];
 
       if (SDS_Sign (ITmp) > SDS_Sign (LocalPrevValue)) {
         *pPrevValue = *(pSrc + (sampleLength - 1));                 // Set previous value for next iteration
@@ -1507,8 +1937,8 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FirstZeroCrossingLocation (
   }
 
   else if (ZXT == SIGLIB_NEGATIVE_LEVEL_CROSS) {
-    for (i = 0; i < sampleLength; i++) {
-      ITmp = pSrc[i];
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+      SLData_t        ITmp = pSrc[i];
 
       if (SDS_Sign (ITmp) < SDS_Sign (LocalPrevValue)) {
         *pPrevValue = *(pSrc + (sampleLength - 1));                 // Set previous value for next iteration
@@ -1520,8 +1950,8 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FirstZeroCrossingLocation (
   }
 
   if (ZXT == SIGLIB_ALL_LEVEL_CROSS) {
-    for (i = 0; i < sampleLength; i++) {
-      ITmp = pSrc[i];
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+      SLData_t        ITmp = pSrc[i];
 
       if (SDS_Sign (ITmp) != SDS_Sign (LocalPrevValue)) {
         *pPrevValue = *(pSrc + (sampleLength - 1));                 // Set previous value for next iteration
@@ -1562,20 +1992,18 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_ZeroCrossingCount (
   const enum SLLevelCrossingMode_t ZXT,
   const SLArrayIndex_t sampleLength)
 {
-  SLArrayIndex_t  i;
-  SLFixData_t     NumXings = 0;
-  SLData_t        LocalPrevValue = *pPrevValue;
-  SLData_t        ITmp;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
+  SLFixData_t     NumXings = 0;
+  SLData_t        LocalPrevValue = *pPrevValue;
+
   if (ZXT == SIGLIB_POSITIVE_LEVEL_CROSS) {
-    for (i = 0; i < sampleLength; i++) {
-      ITmp = *pSrc++;
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+      SLData_t        ITmp = *pSrc++;
 
       if (SDS_Sign (ITmp) > SDS_Sign (LocalPrevValue)) {
         NumXings++;                                                 // Increment number of zero crossings
@@ -1585,8 +2013,8 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_ZeroCrossingCount (
   }
 
   else if (ZXT == SIGLIB_NEGATIVE_LEVEL_CROSS) {
-    for (i = 0; i < sampleLength; i++) {
-      ITmp = *pSrc++;
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+      SLData_t        ITmp = *pSrc++;
 
       if (SDS_Sign (ITmp) < SDS_Sign (LocalPrevValue)) {
         NumXings++;                                                 // Increment number of zero crossings
@@ -1596,8 +2024,8 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_ZeroCrossingCount (
   }
 
   if (ZXT == SIGLIB_ALL_LEVEL_CROSS) {
-    for (i = 0; i < sampleLength; i++) {
-      ITmp = *pSrc++;
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+      SLData_t        ITmp = *pSrc++;
 
       if (SDS_Sign (ITmp) > SDS_Sign (LocalPrevValue)) {
         NumXings++;                                                 // Increment number of zero crossings
@@ -1645,11 +2073,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_LevelCrossingDetect (
   const enum SLLevelCrossingMode_t ZXT,
   const SLArrayIndex_t sampleLength)
 {
-  SLArrayIndex_t  i;
-  SLFixData_t     NumXings = 0;
-  SLData_t        LocalPrevValue = *pPrevValue;
-  SLData_t        ITmp;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -1657,9 +2080,12 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_LevelCrossingDetect (
 #endif
 #endif
 
+  SLFixData_t     NumXings = 0;
+  SLData_t        LocalPrevValue = *pPrevValue;
+
   if (ZXT == SIGLIB_POSITIVE_LEVEL_CROSS) {
-    for (i = 0; i < sampleLength; i++) {
-      ITmp = *pSrc++ - DetectionLevel;
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+      SLData_t        ITmp = *pSrc++ - DetectionLevel;
 
       if (SDS_Sign (ITmp) > SDS_Sign (LocalPrevValue)) {
         *pDst++ = SIGLIB_ONE;                                       // Indicate +ve zero crossing
@@ -1675,8 +2101,8 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_LevelCrossingDetect (
   }
 
   else if (ZXT == SIGLIB_NEGATIVE_LEVEL_CROSS) {
-    for (i = 0; i < sampleLength; i++) {
-      ITmp = *pSrc++ - DetectionLevel;
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+      SLData_t        ITmp = *pSrc++ - DetectionLevel;
 
       if (SDS_Sign (ITmp) < SDS_Sign (LocalPrevValue)) {
         *pDst++ = SIGLIB_MINUS_ONE;                                 // Indicate -ve zero crossing
@@ -1692,8 +2118,8 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_LevelCrossingDetect (
   }
 
   if (ZXT == SIGLIB_ALL_LEVEL_CROSS) {
-    for (i = 0; i < sampleLength; i++) {
-      ITmp = *pSrc++ - DetectionLevel;
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+      SLData_t        ITmp = *pSrc++ - DetectionLevel;
 
       if (SDS_Sign (ITmp) > SDS_Sign (LocalPrevValue)) {
         *pDst++ = SIGLIB_ONE;                                       // Indicate +ve zero crossing
@@ -1745,9 +2171,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_LevelCrossingDetect (
   const enum SLLevelCrossingMode_t ZXT)
 {
   SLData_t        LevelCrossingFlag = SIGLIB_ZERO;
-  SLData_t        ITmp;
-
-  ITmp = Src - DetectionLevel;
+  SLData_t        ITmp = Src - DetectionLevel;
 
   if (ZXT == SIGLIB_POSITIVE_LEVEL_CROSS) {
     if (SDS_Sign (ITmp) > SDS_Sign (*pPrevValue)) {
@@ -1817,19 +2241,17 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FirstLevelCrossingLocation (
   const enum SLLevelCrossingMode_t ZXT,
   const SLArrayIndex_t sampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        LocalPrevValue = *pPrevValue;
-  SLData_t        ITmp;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
+  SLData_t        LocalPrevValue = *pPrevValue;
+
   if (ZXT == SIGLIB_POSITIVE_LEVEL_CROSS) {
-    for (i = 0; i < sampleLength; i++) {
-      ITmp = pSrc[i] - DetectionLevel;
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+      SLData_t        ITmp = pSrc[i] - DetectionLevel;
 
       if (SDS_Sign (ITmp) > SDS_Sign (LocalPrevValue)) {
         *pPrevValue = *(pSrc + (sampleLength - 1));                 // Set previous value for next iteration
@@ -1841,8 +2263,8 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FirstLevelCrossingLocation (
   }
 
   else if (ZXT == SIGLIB_NEGATIVE_LEVEL_CROSS) {
-    for (i = 0; i < sampleLength; i++) {
-      ITmp = pSrc[i] - DetectionLevel;
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+      SLData_t        ITmp = pSrc[i] - DetectionLevel;
 
       if (SDS_Sign (ITmp) < SDS_Sign (LocalPrevValue)) {
         *pPrevValue = *(pSrc + (sampleLength - 1));                 // Set previous value for next iteration
@@ -1854,8 +2276,8 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FirstLevelCrossingLocation (
   }
 
   if (ZXT == SIGLIB_ALL_LEVEL_CROSS) {
-    for (i = 0; i < sampleLength; i++) {
-      ITmp = pSrc[i] - DetectionLevel;
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+      SLData_t        ITmp = pSrc[i] - DetectionLevel;
 
       if (SDS_Sign (ITmp) != SDS_Sign (LocalPrevValue)) {
         *pPrevValue = *(pSrc + (sampleLength - 1));                 // Set previous value for next iteration
@@ -1898,20 +2320,18 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_LevelCrossingCount (
   const enum SLLevelCrossingMode_t ZXT,
   const SLArrayIndex_t sampleLength)
 {
-  SLArrayIndex_t  i;
-  SLFixData_t     NumXings = 0;
-  SLData_t        LocalPrevValue = *pPrevValue;
-  SLData_t        ITmp;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
+  SLFixData_t     NumXings = 0;
+  SLData_t        LocalPrevValue = *pPrevValue;
+
   if (ZXT == SIGLIB_POSITIVE_LEVEL_CROSS) {
-    for (i = 0; i < sampleLength; i++) {
-      ITmp = *pSrc++ - DetectionLevel;
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+      SLData_t        ITmp = *pSrc++ - DetectionLevel;
 
       if (SDS_Sign (ITmp) > SDS_Sign (LocalPrevValue)) {
         NumXings++;                                                 // Increment number of zero crossings
@@ -1921,8 +2341,8 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_LevelCrossingCount (
   }
 
   else if (ZXT == SIGLIB_NEGATIVE_LEVEL_CROSS) {
-    for (i = 0; i < sampleLength; i++) {
-      ITmp = *pSrc++ - DetectionLevel;
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+      SLData_t        ITmp = *pSrc++ - DetectionLevel;
 
       if (SDS_Sign (ITmp) < SDS_Sign (LocalPrevValue)) {
         NumXings++;                                                 // Increment number of zero crossings
@@ -1932,8 +2352,8 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_LevelCrossingCount (
   }
 
   if (ZXT == SIGLIB_ALL_LEVEL_CROSS) {
-    for (i = 0; i < sampleLength; i++) {
-      ITmp = *pSrc++ - DetectionLevel;
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+      SLData_t        ITmp = *pSrc++ - DetectionLevel;
 
       if (SDS_Sign (ITmp) > SDS_Sign (LocalPrevValue)) {
         NumXings++;                                                 // Increment number of zero crossings
@@ -1983,12 +2403,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_Trigger (
   const enum SLLevelCrossingMode_t ZXT,
   const SLArrayIndex_t sampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        LocalPrevSign = *pPrevSign;
-  SLData_t        Sign, ITmp;
-  SLArrayIndex_t  ZXFlag = SIGLIB_FALSE;                            // Flag to indicate that zero has been crossed
-  SLArrayIndex_t  ZXi = 0;                                          // Register to store location of zero
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -1996,10 +2410,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_Trigger (
 #endif
 #endif
 
+  SLData_t        LocalPrevSign = *pPrevSign;
+  SLArrayIndex_t  ZXFlag = SIGLIB_FALSE;                            // Flag to indicate that zero has been crossed
+  SLArrayIndex_t  ZXi = 0;                                          // Register to store location of zero
+
   if (ZXT == SIGLIB_POSITIVE_LEVEL_CROSS) {
-    for (i = 0; i < sampleLength; i++) {
-      ITmp = pSrc[i];
-      Sign = SDS_Sign (ITmp);
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+      SLData_t        ITmp = pSrc[i];
+      SLData_t        Sign = SDS_Sign (ITmp);
       if (Sign > LocalPrevSign) {
         ZXFlag = SIGLIB_TRUE;
         ZXi = i;
@@ -2014,9 +2432,9 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_Trigger (
 
   else                                                              // ZXT == SIGLIB_NEGATIVE_LEVEL_CROSS
   {
-    for (i = 0; i < sampleLength; i++) {
-      ITmp = pSrc[i];
-      Sign = SDS_Sign (ITmp);
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+      SLData_t        ITmp = pSrc[i];
+      SLData_t        Sign = SDS_Sign (ITmp);
       if (Sign < LocalPrevSign) {
         ZXFlag = SIGLIB_TRUE;
         ZXi = i;
@@ -2378,12 +2796,9 @@ void SIGLIB_FUNC_DECL SDA_SortIndexed (
 SLFixData_t SIGLIB_FUNC_DECL SDS_CountOneBits (
   const SLFixData_t Source)
 {
-  SLFixData_t     i, BitCount;
-  SLUFixData_t    Mask;
-
-  Mask = 0x01U;
-  BitCount = 0;
-  for (i = 0; i < SIGLIB_FIX_WORD_LENGTH; i++) {
+  SLUFixData_t    Mask = 0x01U;
+  SLFixData_t     BitCount = 0;
+  for (SLFixData_t i = 0; i < SIGLIB_FIX_WORD_LENGTH; i++) {
     if ((SLUFixData_t) Source & Mask) {
       BitCount++;
     }
@@ -2412,12 +2827,9 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_CountOneBits (
 SLFixData_t SIGLIB_FUNC_DECL SDS_CountZeroBits (
   const SLFixData_t Source)
 {
-  SLFixData_t     i, BitCount;
-  SLUFixData_t    Mask;
-
-  Mask = 0x01U;
-  BitCount = 0;
-  for (i = 0; i < SIGLIB_FIX_WORD_LENGTH; i++) {
+  SLUFixData_t    Mask = 0x01U;
+  SLFixData_t     BitCount = 0;
+  for (SLFixData_t i = 0; i < SIGLIB_FIX_WORD_LENGTH; i++) {
     if (((SLUFixData_t) Source & Mask) == 0U) {
       BitCount++;
     }
@@ -2447,10 +2859,9 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_CountLeadingOneBits (
   const SLFixData_t Source)
 {
   SLFixData_t     LocalSrc = Source;
-  SLFixData_t     i;
   SLFixData_t     BitLocationCount = 0;
 
-  for (i = 0; i < SIGLIB_FIX_WORD_LENGTH; i++) {
+  for (SLFixData_t i = 0; i < SIGLIB_FIX_WORD_LENGTH; i++) {
     if (((SLUFixData_t) LocalSrc & 0x1U) == 0U) {
       break;
     }
@@ -2481,10 +2892,9 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_CountLeadingZeroBits (
   const SLFixData_t Source)
 {
   SLFixData_t     LocalSrc = Source;
-  SLFixData_t     i;
   SLFixData_t     BitLocationCount = 0;
 
-  for (i = 0; i < SIGLIB_FIX_WORD_LENGTH; i++) {
+  for (SLFixData_t i = 0; i < SIGLIB_FIX_WORD_LENGTH; i++) {
     if (((SLUFixData_t) LocalSrc & 0x1U) == 1U) {
       break;
     }
@@ -2518,9 +2928,6 @@ void SIGLIB_FUNC_DECL SDA_Sign (
   SLData_t * SIGLIB_PTR_DECL pDst,
   const SLArrayIndex_t sampleLength)
 {
-  SLData_t        Tmp;
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -2528,8 +2935,8 @@ void SIGLIB_FUNC_DECL SDA_Sign (
 #endif
 #endif
 
-  for (i = 0; i < sampleLength; i++) {
-    Tmp = *pSrc++;
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+    SLData_t        Tmp = *pSrc++;
     if (Tmp > SIGLIB_EPSILON) {
       *pDst++ = SIGLIB_ONE;
     }
@@ -2565,9 +2972,6 @@ void SIGLIB_FUNC_DECL SDA_Swap (
   SLData_t * SIGLIB_PTR_DECL pSrc2,
   const SLArrayIndex_t sampleLength)
 {
-  SLData_t        Tmp;
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc1 % 8 == 0);                                  // Align arrays on 64 bit double word boundary for LDDW
@@ -2575,13 +2979,13 @@ void SIGLIB_FUNC_DECL SDA_Swap (
 #endif
 #endif
 
-  for (i = 0; i < sampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
-    Tmp = pSrc1[i];
+    SLData_t        Tmp = pSrc1[i];
     pSrc1[i] = pSrc2[i];
     pSrc2[i] = Tmp;
 #else
-    Tmp = *pSrc1;
+    SLData_t        Tmp = *pSrc1;
     *pSrc1++ = *pSrc2;
     *pSrc2++ = Tmp;
 #endif
@@ -2749,12 +3153,11 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_Find (
   const enum SLFindType_t FindType,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i;
   SLArrayIndex_t  NumberOfElements = ((SLArrayIndex_t) 0);
 
   switch (FindType) {
     case SIGLIB_FIND_GREATER_THAN_ZERO:
-      for (i = 0; i < ArrayLength; i++) {
+      for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
         if (*pSrc++ > SIGLIB_ZERO) {
           NumberOfElements++;
           *pDataDst++ = *(pSrc - 1);
@@ -2764,7 +3167,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_Find (
       break;
 
     case SIGLIB_FIND_GREATER_THAN_OR_EQUAL_TO_ZERO:
-      for (i = 0; i < ArrayLength; i++) {
+      for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
         if (*pSrc++ >= SIGLIB_ZERO) {
           NumberOfElements++;
           *pDataDst++ = *(pSrc - 1);
@@ -2774,7 +3177,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_Find (
       break;
 
     case SIGLIB_FIND_EQUAL_TO_ZERO:
-      for (i = 0; i < ArrayLength; i++) {
+      for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
         if (*pSrc++ == SIGLIB_ZERO) {
           NumberOfElements++;
           *pDataDst++ = *(pSrc - 1);
@@ -2784,7 +3187,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_Find (
       break;
 
     case SIGLIB_FIND_LESS_THAN_ZERO:
-      for (i = 0; i < ArrayLength; i++) {
+      for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
         if (*pSrc++ < SIGLIB_ZERO) {
           NumberOfElements++;
           *pDataDst++ = *(pSrc - 1);
@@ -2794,7 +3197,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_Find (
       break;
 
     case SIGLIB_FIND_LESS_THAN_OR_EQUAL_TO_ZERO:
-      for (i = 0; i < ArrayLength; i++) {
+      for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
         if (*pSrc++ <= SIGLIB_ZERO) {
           NumberOfElements++;
           *pDataDst++ = *(pSrc - 1);
@@ -2804,7 +3207,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_Find (
       break;
 
     case SIGLIB_FIND_NOT_EQUAL_TO_ZERO:
-      for (i = 0; i < ArrayLength; i++) {
+      for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
         if (*pSrc++ != SIGLIB_ZERO) {
           NumberOfElements++;
           *pDataDst++ = *(pSrc - 1);
@@ -2818,7 +3221,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_Find (
   }
 
   return (NumberOfElements);
-
 }                                                                   // End of SDA_Find()
 
 
@@ -2856,12 +3258,11 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindValue (
   const enum SLFindType_t FindType,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i;
   SLArrayIndex_t  NumberOfElements = ((SLArrayIndex_t) 0);
 
   switch (FindType) {
     case SIGLIB_FIND_GREATER_THAN_ZERO:
-      for (i = 0; i < ArrayLength; i++) {
+      for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
         if (*pSrc++ > DesiredValue) {
           NumberOfElements++;
           *pDataDst++ = *(pSrc - 1);
@@ -2871,7 +3272,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindValue (
       break;
 
     case SIGLIB_FIND_GREATER_THAN_OR_EQUAL_TO_ZERO:
-      for (i = 0; i < ArrayLength; i++) {
+      for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
         if (*pSrc++ >= DesiredValue) {
           NumberOfElements++;
           *pDataDst++ = *(pSrc - 1);
@@ -2881,7 +3282,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindValue (
       break;
 
     case SIGLIB_FIND_EQUAL_TO_ZERO:
-      for (i = 0; i < ArrayLength; i++) {
+      for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
         if (*pSrc++ == DesiredValue) {
           NumberOfElements++;
           *pDataDst++ = *(pSrc - 1);
@@ -2891,7 +3292,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindValue (
       break;
 
     case SIGLIB_FIND_LESS_THAN_ZERO:
-      for (i = 0; i < ArrayLength; i++) {
+      for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
         if (*pSrc++ < DesiredValue) {
           NumberOfElements++;
           *pDataDst++ = *(pSrc - 1);
@@ -2901,7 +3302,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindValue (
       break;
 
     case SIGLIB_FIND_LESS_THAN_OR_EQUAL_TO_ZERO:
-      for (i = 0; i < ArrayLength; i++) {
+      for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
         if (*pSrc++ <= DesiredValue) {
           NumberOfElements++;
           *pDataDst++ = *(pSrc - 1);
@@ -2911,7 +3312,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindValue (
       break;
 
     case SIGLIB_FIND_NOT_EQUAL_TO_ZERO:
-      for (i = 0; i < ArrayLength; i++) {
+      for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
         if (*pSrc++ != DesiredValue) {
           NumberOfElements++;
           *pDataDst++ = *(pSrc - 1);
@@ -2925,5 +3326,4 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindValue (
   }
 
   return (NumberOfElements);
-
 }                                                                   // End of SDA_FindValue()

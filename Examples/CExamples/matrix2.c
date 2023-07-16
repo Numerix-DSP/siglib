@@ -2,7 +2,7 @@
 // Note - in this program we will declare the matrices as multi-dimensional
 // but we need to pass them by reference as arrays of type SLData_t so
 // we need to cast the array pointers as follows : (SLData_t *)
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -60,9 +60,6 @@ static SLData_t LargeSrcMatrix[LARGE_ARRAY_DIMENSION][LARGE_ARRAY_DIMENSION] = {
 int main (
   void)
 {
-  SLArrayIndex_t  i;
-
-
   printf ("Source matrix 1\n");
   SUF_PrintMatrix ((SLData_t *) SrcMatrix, NUMBER_OF_ROWS, NUMBER_OF_COLUMNS);
 
@@ -129,7 +126,7 @@ int main (
   SMX_ExtractDiagonal ((SLData_t *) SrcMatrix,                      // Pointer to source matrix
                        (SLData_t *) DstMatrix2,                     // Pointer to destination matrix
                        MAX_DIMENSION);                              // Longtst dimension (Row or column) in matrix
-  for (i = 0; i < MAX_DIMENSION; i++) {
+  for (SLArrayIndex_t i = 0; i < MAX_DIMENSION; i++) {
     printf ("%d, ", (short) DstMatrix2[0][i]);
   }
   printf ("\n\n");
@@ -151,7 +148,7 @@ int main (
            (SLData_t *) DstMatrix2,                                 // Pointer to destination matrix
            NUMBER_OF_ROWS,                                          // Number of rows in matrix
            NUMBER_OF_COLUMNS);                                      // Number of columns in matrix
-  for (i = 0; i < NUMBER_OF_COLUMNS; i++) {
+  for (SLArrayIndex_t i = 0; i < NUMBER_OF_COLUMNS; i++) {
     printf ("%d, ", (short) DstMatrix2[0][i]);
   }
   printf ("\n\n");
@@ -162,7 +159,7 @@ int main (
                   (SLData_t *) DstMatrix2,                          // Pointer to destination matrix
                   2,                                                // Row number being extracted
                   NUMBER_OF_COLUMNS);                               // Number of columns in matrix
-  for (i = 0; i < NUMBER_OF_COLUMNS; i++) {
+  for (SLArrayIndex_t i = 0; i < NUMBER_OF_COLUMNS; i++) {
     printf ("%d, ", (short) DstMatrix2[0][i]);
   }
   printf ("\n\n");
@@ -173,7 +170,7 @@ int main (
                      3,                                             // Column to extract
                      NUMBER_OF_ROWS,                                // Number of rows in matrix
                      NUMBER_OF_COLUMNS);                            // Number of columns in matrix
-  for (i = 0; i < NUMBER_OF_ROWS; i++) {
+  for (SLArrayIndex_t i = 0; i < NUMBER_OF_ROWS; i++) {
     printf ("%d, ", (short) DstMatrix2[0][i]);
   }
   printf ("\n\n");

@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : SigLib DSP library file I/O functions.
 
@@ -545,13 +545,12 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadData (
   const SLArrayIndex_t numColumns,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  i;
   SLArrayIndex_t  sampleCount = 0;
   SLData_t        sample;
   SLData_t        samplePeriod = 1. / sampleRate;
 
   if (numColumns == 1) {
-    for (i = 0; i < arrayLength; i++) {                             // Write the data
+    for (SLArrayIndex_t i = 0; i < arrayLength; i++) {              // Write the data
 #if (SIGLIB_DATA_FLOAT == 1)                                        // If SLData_t == float
       size_t          numItems = fscanf (p_ioFile, "%f\n", (float *) &sample);
 #else                                                               // Default: SLData_t == double
@@ -567,7 +566,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadData (
     }
   }
   else if (numColumns == 2) {
-    for (i = 0; i < arrayLength; i++) {                             // Write the data
+    for (SLArrayIndex_t i = 0; i < arrayLength; i++) {              // Write the data
 #if (SIGLIB_DATA_FLOAT == 1)                                        // If SLData_t == float
       size_t          numItems = fscanf (p_ioFile, "%f,%f\n", (float *) &samplePeriod, (float *) &sample);
 #else                                                               // Default: SLData_t == double
@@ -591,7 +590,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadData (
   }
 
   return (sampleCount);
-
 }                                                                   // End of SUF_CsvReadData()
 
 
@@ -623,9 +621,9 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvWriteData (
   const SLArrayIndex_t numColumns,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  i;
   SLData_t        samplePeriod = 1. / sampleRate;
 
+  SLArrayIndex_t  i;
   if (numColumns == 1) {
     for (i = 0; i < arrayLength; i++) {                             // Write the data
       SUF_Fprintf (p_ioFile, "%lf\n", (double) BPtr[i]);
@@ -641,7 +639,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvWriteData (
   }
 
   return (i);
-
 }                                                                   // End of SUF_CsvWriteData()
 
 
@@ -672,7 +669,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadFile (
   const SLArrayIndex_t numColumns,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  i;
   SLArrayIndex_t  sampleCount = 0;
   SLData_t        sample;
   SLData_t        samplePeriod = 1. / sampleRate;
@@ -684,7 +680,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadFile (
   }
 
   if (numColumns == 1) {
-    for (i = 0; i < arrayLength; i++) {                             // Write the data
+    for (SLArrayIndex_t i = 0; i < arrayLength; i++) {              // Write the data
 #if (SIGLIB_DATA_FLOAT == 1)                                        // If SLData_t == float
       size_t          numItems = fscanf (p_ioFile, "%f\n", (float *) &sample);
 #else                                                               // Default: SLData_t == double
@@ -711,7 +707,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadFile (
     }
   }
   else if (numColumns == 2) {
-    for (i = 0; i < arrayLength; i++) {                             // Write the data
+    for (SLArrayIndex_t i = 0; i < arrayLength; i++) {              // Write the data
 #if (SIGLIB_DATA_FLOAT == 1)                                        // If SLData_t == float
       size_t          numItems = fscanf (p_ioFile, "%f,%f\n", (float *) &samplePeriod, (float *) &sample);
 #else                                                               // Default: SLData_t == double
@@ -743,7 +739,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadFile (
 
   fclose (p_ioFile);
   return (sampleCount);
-
 }                                                                   // End of SUF_CsvReadFile()
 
 
@@ -776,10 +771,10 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvWriteFile (
   const SLArrayIndex_t numColumns,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  i;
   SLData_t        samplePeriod = 1. / sampleRate;
   FILE           *p_ioFile;
 
+  SLArrayIndex_t  i;
   p_ioFile = fopen (filename, "w");
   if (NULL == p_ioFile) {
     return (-1);
@@ -801,7 +796,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvWriteFile (
 
   fclose (p_ioFile);
   return (i);
-
 }                                                                   // End of SUF_CsvWriteFile()
 
 
@@ -950,7 +944,6 @@ SLArrayIndex_t SUF_CsvWriteMatrix (
 
   fclose (p_ioFile);
   return (count);
-
 }                                                                   // End of SUF_CsvWriteMatrix()
 
 
@@ -1002,7 +995,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_DatReadData (
   }
 
   return (sampleCount);
-
 }                                                                   // End of SUF_DatReadData()
 
 
@@ -1032,15 +1024,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_DatWriteData (
   const SLArrayIndex_t sampleIndex,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  i;
   SLData_t        samplePeriod = 1. / sampleRate;
 
+  SLArrayIndex_t  i;
   for (i = 0; i < arrayLength; i++) {                               // Write the data
     SUF_Fprintf (p_ioFile, " %1.7lf %lf\n", (double) ((SLData_t) (sampleIndex + i)) * samplePeriod, (double) BPtr[i]);
   }
 
   return (i);
-
 }                                                                   // End of SUF_DatWriteData()
 
 
@@ -1124,9 +1115,9 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigReadData (
   FILE * p_ioFile,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  i;
   SLArrayIndex_t  sampleCount = 0;
 
+  SLArrayIndex_t  i;
   for (i = 0; ((i < arrayLength) && (fscanf (p_ioFile, "%le\n", (double *) BPtr) != EOF)); i++) {
     BPtr++;
     sampleCount++;
@@ -1163,7 +1154,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigWriteData (
   const SLArrayIndex_t arrayLength)
 {
   SLArrayIndex_t  i;
-
   for (i = 0; i < arrayLength; i++) {
     SUF_Fprintf (p_ioFile, "%le\n", *BPtr++);                       // Some compilers / OSs need \r\n
   }
@@ -1319,13 +1309,12 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadData (
   const SLWavFileInfo_s wavInfo,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  i;
   SLArrayIndex_t  sampleCount = 0;
   SLArrayIndex_t  Word;
   unsigned char   Char;
 
 
-  for (i = 0; i < arrayLength; i++) {                               // Read data 32, 16 or 8 bits at a time
+  for (SLArrayIndex_t i = 0; i < arrayLength; i++) {                // Read data 32, 16 or 8 bits at a time
     if (wavInfo.WordLength == 32) {
       Word = (SLArrayIndex_t) SUF_WavReadLong (p_ioFile);
 
@@ -1371,7 +1360,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadData (
   }
 
   return (sampleCount);
-
 }                                                                   // End of SUF_WavReadData()
 
 
@@ -1399,9 +1387,7 @@ void SIGLIB_FUNC_DECL SUF_WavWriteData (
   const SLWavFileInfo_s wavInfo,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  i;
-
-  for (i = 0; i < arrayLength; i++) {                               // Read data 32, 16 or 8 bits at a time
+  for (SLArrayIndex_t i = 0; i < arrayLength; i++) {                // Read data 32, 16 or 8 bits at a time
     if (wavInfo.WordLength == 32) {
       SUF_WavWriteLong ((SLArrayIndex_t) * (BPtr + i), p_ioFile);
     }
@@ -1447,13 +1433,12 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadData16 (
   const SLWavFileInfo_s wavInfo,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  i;
   SLArrayIndex_t  sampleCount = 0;
   short           Word;
   char            Char;
 
 
-  for (i = 0; i < arrayLength; i++) {                               // Read data 16 or 8 bits at a time
+  for (SLArrayIndex_t i = 0; i < arrayLength; i++) {                // Read data 16 or 8 bits at a time
     if (wavInfo.WordLength == 16) {
       Word = SUF_WavReadWord (p_ioFile);
 
@@ -1486,7 +1471,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadData16 (
   }
 
   return (sampleCount);
-
 }                                                                   // End of SUF_WavReadData16()
 
 
@@ -1516,9 +1500,7 @@ void SIGLIB_FUNC_DECL SUF_WavWriteData16 (
   const SLWavFileInfo_s wavInfo,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  i;
-
-  for (i = 0; i < arrayLength; i++) {                               // Write data 16 or 8 bits at a time
+  for (SLArrayIndex_t i = 0; i < arrayLength; i++) {                // Write data 16 or 8 bits at a time
     if (wavInfo.WordLength == 16) {
       SUF_WavWriteWord ((short) *(BPtr + i), p_ioFile);
     }
@@ -1560,13 +1542,11 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadData32 (
   const SLWavFileInfo_s wavInfo,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  i;
   SLArrayIndex_t  sampleCount = 0;
   short           Word;
   char            Char;
 
-
-  for (i = 0; i < arrayLength; i++) {                               // Read the data 16 or 8 bits at a time
+  for (SLArrayIndex_t i = 0; i < arrayLength; i++) {                // Read the data 16 or 8 bits at a time
     if (wavInfo.WordLength == 16) {
       Word = SUF_WavReadWord (p_ioFile);
 
@@ -1599,7 +1579,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadData32 (
   }
 
   return (sampleCount);
-
 }                                                                   // End of SUF_WavReadData32()
 
 
@@ -1627,9 +1606,7 @@ void SIGLIB_FUNC_DECL SUF_WavWriteData32 (
   const SLWavFileInfo_s wavInfo,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  i;
-
-  for (i = 0; i < arrayLength; i++) {                               // Write data 16 or 8 bits at a time
+  for (SLArrayIndex_t i = 0; i < arrayLength; i++) {                // Write data 16 or 8 bits at a time
     if (wavInfo.WordLength == 16) {
       SUF_WavWriteWord ((short) *(BPtr + i), p_ioFile);
     }
@@ -1643,7 +1620,6 @@ void SIGLIB_FUNC_DECL SUF_WavWriteData32 (
     }
   }
 }                                                                   // End of SUF_WavWriteData32()
-
 
 
 /**/
@@ -1670,7 +1646,6 @@ short SIGLIB_FUNC_DECL SUF_WavReadWord (
   Word |= ((short) (getc (p_ioFile))) << 8;
 
   return (Word);
-
 }                                                                   // End of SUF_WavReadWord()
 
 
@@ -1700,7 +1675,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadLong (
   LongWord |= ((SLArrayIndex_t) (getc (p_ioFile))) << 24;
 
   return (LongWord);
-
 }                                                                   // End of SUF_WavReadLong()
 
 
@@ -1726,7 +1700,6 @@ void SIGLIB_FUNC_DECL SUF_WavWriteWord (
 {
   putc (Word & 0x0ff, p_ioFile);
   putc ((Word >> 8) & 0x0ff, p_ioFile);
-
 }                                                                   // End of SUF_WavWriteWord()
 
 
@@ -1755,7 +1728,6 @@ void SIGLIB_FUNC_DECL SUF_WavWriteLong (
   putc ((short) ((LongWord >> 8) & 0x0ff), p_ioFile);
   putc ((short) ((LongWord >> 16) & 0x0ff), p_ioFile);
   putc ((short) ((LongWord >> 24) & 0x0ff), p_ioFile);
-
 }                                                                   // End of SUF_WavWriteLong()
 
 
@@ -1860,9 +1832,7 @@ SLWavFileInfo_s SIGLIB_FUNC_DECL SUF_WavReadHeader (
   wavInfo.NumberOfSamples = LongWord / ((SLArrayIndex_t) wavInfo.BytesPerSample);
 
   return (wavInfo);
-
 }                                                                   // End of SUF_WavReadHeader()
-
 
 
 /**/
@@ -1898,9 +1868,7 @@ void SIGLIB_FUNC_DECL SUF_WavWriteHeader (
   SUF_WavWriteWord (wavInfo.WordLength, p_ioFile);                  // Write bits per sample
   SUF_Fprintf (p_ioFile, "data");                                   // Write data section header
   SUF_WavWriteLong (wavInfo.BytesPerSample * wavInfo.NumberOfSamples, p_ioFile);  // Write data section length (bytes)
-
 }                                                                   // End of SUF_WavWriteHeader()
-
 
 
 /**/
@@ -1928,7 +1896,6 @@ void SIGLIB_FUNC_DECL SUF_WavDisplayInfo (
   SUF_Printf ("Word length       : %ld\n", (long) wavInfo.WordLength);
   SUF_Printf ("Bytes per sample  : %ld\n", (long) wavInfo.BytesPerSample);
   SUF_Printf ("Data format       : %ld\n\n", (long) wavInfo.DataFormat);
-
 }                                                                   // End of SUF_WavDisplayInfo()
 
 
@@ -1970,7 +1937,6 @@ SLWavFileInfo_s SIGLIB_FUNC_DECL SUF_WavSetInfo (
   wavInfo.DataFormat = DataFormat;
 
   return (wavInfo);
-
 }                                                                   // End of SUF_WavSetInfo()
 
 
@@ -2127,7 +2093,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavWriteFileScaled (
     return (-1);
   }
 
-
   SLWavFileInfo_s tmpWavFileInfo;
 
   tmpWavFileInfo.SampleRate = wavInfo.SampleRate;
@@ -2193,14 +2158,13 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_XmtReadData (
   FILE * p_ioFile,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  i;
   SLArrayIndex_t  sampleCount = 0;
   SLArrayIndex_t  fpsample;
   SLData_t        sample;
   char            lineArray[200];
   char           *p_char;
 
-  for (i = 0; i < arrayLength; i++) {                               // Write the data
+  for (SLArrayIndex_t i = 0; i < arrayLength; i++) {                // Write the data
     if (NULL != fgets (lineArray, sizeof (lineArray), p_ioFile)) {
       if (NULL != (p_char = strstr (lineArray, " User="))) {
 //              printf("The substring is: %s\n", p_char+7);
@@ -2222,7 +2186,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_XmtReadData (
   }
 
   return (sampleCount);
-
 }                                                                   // End of SUF_XmtReadData()
 
 

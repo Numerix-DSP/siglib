@@ -1,5 +1,5 @@
 // SigLib - DTMF Generation And Detection Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Freq. (Hz) 1209 1336 1477 1633
 //     697     1     2    3    A
@@ -21,7 +21,7 @@
 #define FFT_LENGTH              512
 #define LOG2_FFT_LENGTH         SAI_FftLengthLog2(FFT_LENGTH)       // Log2 FFT length,
 #define DTMF_DETECT_LENGTH      102
-#define SAMPLE_RATE             8000.
+#define SAMPLE_RATE_HZ          8000.
 #define SIGNAL_MAGNITUDE        SIGLIB_HALF                         // Note - the final output magnitude will be twice this magnitude
 
 // Declare global variables and arrays
@@ -82,8 +82,8 @@ int main (
 #endif
 
   SIF_DtmfGenerate (pDTMFGenCoeffs,                                 // Generator coefficient look up table pointer
-                    SAMPLE_RATE);                                   // Sample rate
-  SIF_DtmfDetect (SAMPLE_RATE,                                      // Sample rate
+                    SAMPLE_RATE_HZ);                                // Sample rate
+  SIF_DtmfDetect (SAMPLE_RATE_HZ,                                   // Sample rate
                   SAMPLE_LENGTH);                                   // Dataset length
 
 // Initialise FFT
@@ -113,11 +113,11 @@ int main (
                    SAMPLE_LENGTH,                                   // Dataset length
                    "Time domain signal",                            // Dataset title
                    TimeIndex,                                       // Minimum X value
-                   TimeIndex + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                   TimeIndex + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ), // Maximum X value
                    "lines",                                         // Graph type
                    "blue",                                          // Colour
                    GPC_NEW);                                        // New graph
-      TimeIndex += (SLData_t) SAMPLE_LENGTH / SAMPLE_RATE;
+      TimeIndex += (SLData_t) SAMPLE_LENGTH / SAMPLE_RATE_HZ;
       printf ("Please hit <Carriage Return> to continue . . .");
 #endif
 
@@ -140,7 +140,7 @@ int main (
                    FFT_LENGTH >> 1,                                 // Dataset length
                    "Frequency domain signal",                       // Dataset title
                    SIGLIB_ZERO,                                     // Minimum X value
-                   (((double) ((SAMPLE_RATE / 2) * (FFT_LENGTH - 1))) / ((double) FFT_LENGTH)), // Maximum X value
+                   (((double) ((SAMPLE_RATE_HZ / 2) * (FFT_LENGTH - 1))) / ((double) FFT_LENGTH)),  // Maximum X value
                    "lines",                                         // Graph type
                    "blue",                                          // Colour
                    GPC_NEW);                                        // New graph

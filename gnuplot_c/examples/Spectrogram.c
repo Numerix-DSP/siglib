@@ -36,7 +36,6 @@ int main (
   void)
 {
   h_GPC_Plot     *hSpectrogram;                                     // Plot object
-  int             i, j;
 
   hSpectrogram =                                                    // Initialize plot
     gpc_init_spectrogram ("Spectrogram Plot",                       // Plot title
@@ -58,8 +57,8 @@ int main (
 
   printf ("Spectrogram Plot\n");
 
-  for (i = 0; i < PLOT_LENGTH; i++) {
-    for (j = 0; j < Y_AXIS_LENGTH; j++) {
+  for (int i = 0; i < PLOT_LENGTH; i++) {
+    for (int j = 0; j < Y_AXIS_LENGTH; j++) {
 // Transfer columns to columnArray - note this is performed bottom up
       columnArray[j] = Data[i + (((Y_AXIS_LENGTH - 1) - j) * X_AXIS_LENGTH)];
     }

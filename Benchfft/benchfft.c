@@ -14,17 +14,17 @@ benchmark results.
 
 This file uses DOS format end of line characters.
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 
 Support for SigLib is available via EMail : support@numerix.co.uk
 For further information about the SigLib library please refer to the
-Alpha Numerix Web site at : https://www.numerix-dsp.com
+Delta Numerix Web site at : https://www.numerix-dsp.com
 
 THIS FILE MUST NOT BE DISTRIBUTED OR PASSED TO A THIRD PARTY, WITHOUT THE
-EXPRESS PRIOR PERMISSION OF ALPHA NUMERIX.
+EXPRESS PRIOR PERMISSION OF Delta Numerix.
 
 NONE OF THE SOURCE CODE CONTAINED IN THIS FILE MAY BE USED IN ANY
-COMMERCIAL APPLICATION, WITHOUT THE EXPRESS PRIOR PERMISSION OF ALPHA NUMERIX.
+COMMERCIAL APPLICATION, WITHOUT THE EXPRESS PRIOR PERMISSION OF Delta Numerix.
 For commercial applications, please contact Numerix for a full development
 license.
 
@@ -33,7 +33,7 @@ benchmarks quoted by Numerix will positively reflect the performance
 of all processors.
 
 All benchmarks quoted as a result of using this program must acknowledge
-Alpha Numerix. as the author and results must be communicated to Numerix,
+Delta Numerix. as the author and results must be communicated to Numerix,
 prior to divulgance to any third party.
 
 For the TMS320C4x, TMS320C3x, ADSP21x6x, StarCore and LSI Logic processors
@@ -257,8 +257,6 @@ int main (
   void)
 #endif
 {
-  SLFixData_t     i;
-
 #if defined (_TMS320C40) || defined (_TMS320C30)
   asm ("  OR  0800h, ST");                                          // Enable the C3x  /C4x cache
 #elif defined (__ZSP__)
@@ -289,7 +287,7 @@ int main (
             32,                                                     // FFT length
             5);                                                     // log2 FFT length
 
-  for (i = 0; i < 32; i++) {
+  for (SLFixData_t i = 0; i < 32; i++) {
     if ((pRealData[i] - RealTestResults[i] > 1e-05) || (pImagData[i] - ImagTestResults[i] > 1e-05)) {
 #if defined (_MSC_VER) || defined (__unix) || defined (_TMS320C6700) || defined (_TMS320C6200) || defined (_TMS320C6400)
       printf ("Error in initialisation test, probably due to optimisation.\n\n");
@@ -354,7 +352,7 @@ int main (
 #endif
 
 #else
-  for (i = 0; i < FFT_LOOP_SIZE; i++) {                             // Perform N loops of 100 FFTs, to optimise granularity of timers
+  for (SLFixData_t i = 0; i < FFT_LOOP_SIZE; i++) {                 // Perform N loops of 100 FFTs, to optimise granularity of timers
     one_hundred_rfft ();
   }
 #endif
@@ -439,7 +437,7 @@ SLFixData_t SDA_SignalGenerate (
     switch (signal_type) {
       case SINE_WAVE:                                              // Sine wave
         phase = *phase_offset;
-        for (i = 0; i < array_size; i++) {
+        for (SLFixData_t i = 0; i < array_size; i++) {
           if (phase >= SIGLIB_TWO_PI)
             phase -= SIGLIB_TWO_PI;
           *ptr++ = (((SLData_t) sin (phase)) * peak) + offset;
@@ -449,7 +447,7 @@ SLFixData_t SDA_SignalGenerate (
         break;
       case COS_WAVE:                                               // Sine wave
         phase = *phase_offset;
-        for (i = 0; i < array_size; i++) {
+        for (SLFixData_t i = 0; i < array_size; i++) {
           if (phase >= SIGLIB_TWO_PI)
             phase -= SIGLIB_TWO_PI;
           *ptr++ = (((SLData_t) cos (phase)) * peak) + offset;
@@ -468,7 +466,7 @@ SLFixData_t SDA_SignalGenerate (
     switch (signal_type) {
       case SINE_WAVE:                                              // Sine wave
         phase = *phase_offset;
-        for (i = 0; i < array_size; i++) {
+        for (SLFixData_t i = 0; i < array_size; i++) {
           if (phase >= SIGLIB_TWO_PI)
             phase -= SIGLIB_TWO_PI;
           *ptr++ += (((SLData_t) sin (phase)) * peak) + offset;
@@ -478,7 +476,7 @@ SLFixData_t SDA_SignalGenerate (
         break;
       case COS_WAVE:                                               // Sine wave
         phase = *phase_offset;
-        for (i = 0; i < array_size; i++) {
+        for (SLFixData_t i = 0; i < array_size; i++) {
           if (phase >= SIGLIB_TWO_PI)
             phase -= SIGLIB_TWO_PI;
           *ptr++ += (((SLData_t) cos (phase)) * peak) + offset;
@@ -528,7 +526,7 @@ void SDA_Window (
 {
   SLFixData_t     i;
 
-  for (i = 0; i < window_length; i++) {
+  for (SLFixData_t i = 0; i < window_length; i++) {
     *rp++ = *ip++ * *wp++;
   }
 
@@ -609,7 +607,7 @@ void SIF_Fft (
   SLFixData_t     i;
 
 // Generate Sine and Cos tables
-  for (i = 0; i < ((3 * FFTLength) / 4); i++) {
+  for (SLFixData_t i = 0; i < ((3 * FFTLength) / 4); i++) {
     *pFFTCoeffs++ = ((SLData_t) sin ((((SLData_t) i) * SIGLIB_TWO_PI) / ((SLData_t) FFTLength)));
   }
 
@@ -815,7 +813,7 @@ void SDA_Copy (
 {
   SLFixData_t     i;
 
-  for (i = 0; i < BufLen; i++) {
+  for (SLFixData_t i = 0; i < BufLen; i++) {
     *op++ = *ip++;
   }
 

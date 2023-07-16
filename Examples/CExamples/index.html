@@ -22,7 +22,7 @@
 </table>
 </div>
 
-<hr style="font-family: Arial;">
+<hr>
 <p style="font-family: Arial;"><font size="3">This directory contains
 the&nbsp;ANSI C source example programs for SigLib.</font></p>
 
@@ -64,6 +64,7 @@ makefile_wav - compile the dtmfwav example</font></p>
 </blockquote>
 
 <p style="font-family: Arial;">
+<a href="AGC/index.html" target="SrcWindow1"><font size="3">Automatic Gain Control</a> - SigLib includes several different AGC algorithms. This one is recommended for real-time applications such as speech etc.</font><br>
 <a href="Align/index.html" target="SrcWindow1"><font size="3">Alignment</a> - Audio (.wav) alignment examples</font><br>
 <a href="Beamforming" target="SrcWindow1"><font size="3">Beamforming</a> - Acoustic beamforming examples</font><br>
 <a href="CostasQAM_PiByFourDQpsk/index.html" target="SrcWindow1"><font size="3">Costas QAM_PiByFourDQpsk</a> - V.26b modem Costas loop QAM / p/4 DQPSK modulation / demodulation examples</font><br>
@@ -123,6 +124,7 @@ format to </font><font size="1">SigLib format - see also&nbsp;</font><a href="ii
 <a href="dft_fft_scaling.c" target="SrcWindow1"><font size="3">dft_fft_scaling.c</a> - DFT and FFT Scaling FAQ</font><br>
 <a href="differential_encoding.c" target="SrcWindow1"><font size="3">differential_encoding.c</a> - Differential Encoding</font><br>
 <a href="dotprod.c" target="SrcWindow1"><font size="3">dotprod.c</a> - Dot product</font><br>
+<a href="drc.c" target="SrcWindow1"><font size="3">drc.c</a> - Dynamic Range Conversion</font><br>
 <a href="dtmf.c" target="SrcWindow1"><font size="3">dtmf.c</a> - DTMF generation and detection, see also </font><a href="dtmfwav.c" target="SrcWindow1"><font size="3">dtmfwav.c</a> and </font><a href="dtmf_gen.c" target="SrcWindow1"><font size="3">dtmf_gen.c</font></a><br>
 <a href="dtmf_gen.c" target="SrcWindow1"><font size="3">dtmf_gen.c</a> - Generate a DTMF sequence to a file (dtmf.wav) from a text
 file (dtmf.txt). Performs DTMF detection on the data in the file, see
@@ -154,7 +156,7 @@ the peak tone in the signal, see also&nbsp;</font><a href="fft.c" target="SrcWin
 <a href="fifo.c" target="SrcWindow1"><font size="3">fifo.c</a> - FIFO delay. See also&nbsp;</font><a href="delay.c" target="SrcWindow1"><font size="3">delay.c</font></a><br>
 <a href="Find.c" target="SrcWindow1"><font size="3">Find.c </a> - Find values in an array with certain properties<br>
 <a href="fir1.c" target="SrcWindow1"><font size="3">fir1.c</font></a>,&nbsp;<a style="font-family: Arial;" href="fir2.c" target="SrcWindow1"><font size="3">fir2.c</font></a><font style="font-family: Arial;" size="3">
-and </font><a style="font-family: Arial;" href="fir3.c" target="SrcWindow1"><font size="3">fir3.c</font></a><font style="font-family: Arial;" size="3">&nbsp;- FIR filter, see also</font><font style="font-family: Arial;" size="3">&nbsp;</font><font style="font-family: Arial;"><a href="firadds.c" target="SrcWindow1"><font size="3">firadds.c</font></a></font><font style="font-family: Arial;" size="3"> and&nbsp;</font><font style="font-family: Arial;"><a href="FDFilt.c" target="SrcWindow1"><font size="3">FDFilt.c</font></a></font></font><br style="font-family: Arial;">
+and </font><a style="font-family: Arial;" href="fir3.c" target="SrcWindow1"><font size="3">fir3.c</font></a><font style="font-family: Arial;" size="3">&nbsp;- FIR filter, see also</font><font style="font-family: Arial;" size="3">&nbsp;</font><font style="font-family: Arial;"><a href="firadds.c" target="SrcWindow1"><font size="3">firadds.c</font></a></font><font style="font-family: Arial;" size="3"> and&nbsp;</font><font style="font-family: Arial;"><a href="FDFilt.c" target="SrcWindow1"><font size="3">FDFilt.c</font></a></font></font><br>
 <a href="firComplex.c" target="SrcWindow1"><font size="3">firComplex.c</a> - Complex FIR filter</font><br>
 <a href="firWithStore.c" target="SrcWindow1"><font size="3">firWithStore.c</a> - FIR filter with store - Uses bucket brigade state array. May be more efficient on regular microcontrollers</font><br>
 <a href="firComplexWithStore.c" target="SrcWindow1"><font size="3">firComplexWithStore.c</a> - Complex FIR filter </font><font style="font-family: Arial;" size="3">with store - Uses bucket brigade
@@ -165,7 +167,7 @@ efficient on regular microcontrollers</font><br>
 - Reduces the overhead of the circular array</font><font style="font-family: Arial;" size="3">. May be more efficient on regular microcontrollers</font><br>
 <a href="firadds.c" target="SrcWindow1"><font size="3">firadds.c</a> -&nbsp;FIR filter add samples - see also <font size="3"><a href="fir1.c" target="SrcWindow1"><font size="3">fir1.c</font></a></font></font><font style="font-family: Arial;" size="3">
 <a href="fir.c" target="SrcWindow1"><font size="3"> </font></a><a href="firdesn.c" target="SrcWindow1"><font size="3">firdesn.c</a>
-- FIR filter design and use, see also&nbsp;<a href="firdesnw.c" target="SrcWindow1"><font size="3">firdesnw.c</font></a> and&nbsp;</font><a href="fir.c" target="SrcWindow1"><font size="3">fir.c</font></a></font><br style="font-family: Arial;">
+- FIR filter design and use, see also&nbsp;<a href="firdesnw.c" target="SrcWindow1"><font size="3">firdesnw.c</font></a> and&nbsp;</font><a href="fir.c" target="SrcWindow1"><font size="3">fir.c</font></a></font><br>
 <font style="font-family: Arial;" size="3"><a href="fir.c" target="SrcWindow1"><font size="3"> </font></a><a href="firdesnw.c" target="SrcWindow1"><font size="3">firdesnw.c</a>
 - FIR filter design and use, see also&nbsp;<a href="firdesn.c" target="SrcWindow1"><font size="3">firdesn.c</font></a>,&nbsp;<a href="firdesnw.c" target="SrcWindow1"><font size="3">firdesnw.c</font></a> and&nbsp;</font><a href="fir.c" target="SrcWindow1"><font size="3">fir.c</font></a><br>
 <a href="firnotch.c" target="SrcWindow1"><font size="3">firnotch.c </a> - FIR single conjugate zero notch filter<br>
@@ -236,8 +238,8 @@ Butterworth&nbsp;specifications - digital prototype
 <a href="iir.c" target="SrcWindow1"><font size="3">iir.c</a>and&nbsp;<a href="all-pole.c" target="SrcWindow1"><font size="3">all-pole.c</font></a></font><br>
 <a href="OnePoleCutOffFrequency.c" target="SrcWindow1"><font size="3">OnePoleCutOffFrequency.c</a> - One pole IIR filter with specified cut-off frequencies. Includes both Low-pass and High-pass one pole filters - see also&nbsp;</font>
 <a href="OnePole.c" target="SrcWindow1"><font size="3">OnePole.c</a><br>
-<a href="OnePoleTimeConstant.c" target="SrcWindow1"><font size="3">OnePoleTimeConstant.c</a> - One pole IIR filter with specified attack / decay time constant- see also&nbsp;</font>
-<a href="OnePole.c" target="SrcWindow1"><font size="3">OnePole.c</a><br>
+<a href="OnePoleTimeConstant.c" target="SrcWindow1"><font size="3">OnePoleTimeConstant.c</a> - One pole IIR filter with specified attack / decay time constant</font><br>
+<a href="OnePoleComparison.c" target="SrcWindow1"><font size="3">OnePoleComparison.c</a> - Compare time domain and frequency domain responses of One-Pole, Noralized Magnitude One-Pole and Exponentially Weighted One-Pole filters<br>
 <a href="OrdNIIR.c" target="SrcWindow1"><font size="3">OrdNIIR.c</a> - Order N IIR filter - does not use the more common biquad structure - see also&nbsp;</font><a href="iir.c" target="SrcWindow1"><font size="3">iir.c</font></a><br>
 <a href="ovl_add.c" target="SrcWindow1"><font size="3">ovl_add.c</a> - Overlap and add - used to overlap data from one array to another</font><br>
 <a href="parametricEqualizer.c" target="SrcWindow1"><font size="3">parametricEqualizer.c</a> - Parametric Equalizer filter design functions</font><br>
@@ -314,7 +316,7 @@ also&nbsp;</font><a href="psd.c" target="SrcWindow1"><font size="3">psd.c</a> an
 
 <p style="font-family: Arial;"><font size="3"><a href="plot_fd/plot_fd.h" target="SrcWindow1"><font size="3">plot_fd/plot_fd.h</font></a> - Functions for plotting frequency domain response of vector</font></p>
 
-<hr style="font-family: Arial;">
+<hr>
 <table style="font-family: Arial;" border="0" cellspacing="5">
 
   <tbody>
@@ -331,10 +333,10 @@ contact :</strong></font><font color="#0000ff" size="2"><strong><br>
   </tbody>
 </table>
 
-<p style="font-family: Arial;"><font size="3"><font size="1">Copyright &#169; 2017, Alpha Numerix All rights reserved.<br>
+<p style="font-family: Arial;"><font size="3"><font size="1">Copyright &#169; 2023, Delta Numerix All rights reserved.<br>
 SigLib and Digital Filter Plus are
-trademarks of Alpha Numerix All other trademarks acknowledged.<br>
-Alpha Numerix are continuously increasing the functionality of SigLib
+trademarks of Delta Numerix All other trademarks acknowledged.<br>
+Delta Numerix are continuously increasing the functionality of SigLib
 and reserve the right to alter the product at any time.</font></font></p>
 
 </body></html>

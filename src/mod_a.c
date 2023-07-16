@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : MOD_A.C       | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 15/11/1992
 Options   :                             | Latest Update : 17/11/2022
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Analog Modulation / demodulation routines, for SigLib DSP library.
 
@@ -40,7 +40,6 @@ Description : Analog Modulation / demodulation routines, for SigLib DSP library.
 #define SIGLIB_SRC_FILE_MOD_A   1                                   // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
 
 /**/
 
@@ -68,7 +67,6 @@ void SIGLIB_FUNC_DECL SIF_AmplitudeModulate (
   SIF_FastCos (pCarrierTable, ModulatorArrayLength);                // Initialise the modulator look-up tables
 
   *pCarrierTableIndex = (SLArrayIndex_t) 0;
-
 }                                                                   // End of SIF_AmplitudeModulate()
 
 
@@ -104,9 +102,6 @@ void SIGLIB_FUNC_DECL SDA_AmplitudeModulate (
   const SLArrayIndex_t ModulatorArrayLength,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLArrayIndex_t  LocalCarrierTableIndex = *pCarrierTableIndex;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -115,7 +110,9 @@ void SIGLIB_FUNC_DECL SDA_AmplitudeModulate (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  SLArrayIndex_t  LocalCarrierTableIndex = *pCarrierTableIndex;
+
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst[i] = pSrc[i] * pCarrierTable[LocalCarrierTableIndex];
 #else
@@ -128,7 +125,6 @@ void SIGLIB_FUNC_DECL SDA_AmplitudeModulate (
   }
 
   *pCarrierTableIndex = LocalCarrierTableIndex;                     // Save carrier table index for next iteration
-
 }                                                                   // End of SDA_AmplitudeModulate()
 
 
@@ -160,15 +156,13 @@ SLData_t SIGLIB_FUNC_DECL SDS_AmplitudeModulate (
   SLArrayIndex_t * pCarrierTableIndex,
   const SLArrayIndex_t ModulatorArrayLength)
 {
-  SLData_t        Dst;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pCarrierTable % 8 == 0);                          // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  Dst = Src * pCarrierTable[*pCarrierTableIndex];
+  SLData_t        Dst = Src * pCarrierTable[*pCarrierTableIndex];
 
   (*pCarrierTableIndex)++;                                          // Update the carrier table index
   if (*pCarrierTableIndex == ModulatorArrayLength) {
@@ -176,7 +170,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_AmplitudeModulate (
   }
 
   return (Dst);
-
 }                                                                   // End of SDS_AmplitudeModulate()
 
 
@@ -206,7 +199,6 @@ void SIGLIB_FUNC_DECL SIF_AmplitudeModulate2 (
   SIF_FastCos (pCarrierTable, ModulatorArrayLength);                // Initialise the modulator look-up tables
 
   *pCarrierTablePhase = SIGLIB_ZERO;
-
 }                                                                   // End of SIF_AmplitudeModulate2()
 
 
@@ -244,9 +236,6 @@ void SIGLIB_FUNC_DECL SDA_AmplitudeModulate2 (
   const SLArrayIndex_t ModulatorArrayLength,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        LocalCarrierTablePhase = *pCarrierTablePhase;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -255,7 +244,9 @@ void SIGLIB_FUNC_DECL SDA_AmplitudeModulate2 (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  SLData_t        LocalCarrierTablePhase = *pCarrierTablePhase;
+
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     pDst[i] = pSrc[i] * pCarrierTable[(SLArrayIndex_t) (LocalCarrierTablePhase * (SLData_t) ModulatorArrayLength)];
 #else
@@ -269,7 +260,6 @@ void SIGLIB_FUNC_DECL SDA_AmplitudeModulate2 (
   }
 
   *pCarrierTablePhase = LocalCarrierTablePhase;                     // Save carrier table index for next iteration
-
 }                                                                   // End of SDA_AmplitudeModulate2()
 
 
@@ -303,15 +293,13 @@ SLData_t SIGLIB_FUNC_DECL SDS_AmplitudeModulate2 (
   const SLData_t CarrierPhaseIncrement,
   const SLArrayIndex_t ModulatorArrayLength)
 {
-  SLData_t        Dst;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pCarrierTable % 8 == 0);                          // Align arrays on 64 bit double word boundary for LDDW
 #endif
 #endif
 
-  Dst = Src * pCarrierTable[(SLArrayIndex_t) (*pCarrierTablePhase * (SLData_t) ModulatorArrayLength)];
+  SLData_t        Dst = Src * pCarrierTable[(SLArrayIndex_t) (*pCarrierTablePhase * (SLData_t) ModulatorArrayLength)];
 
   (*pCarrierTablePhase) += CarrierPhaseIncrement;                   // Update the carrier table index
   if (*pCarrierTablePhase >= SIGLIB_ONE) {
@@ -319,7 +307,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_AmplitudeModulate2 (
   }
 
   return (Dst);
-
 }                                                                   // End of SDS_AmplitudeModulate2()
 
 
@@ -359,11 +346,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_ComplexShift (
   const SLArrayIndex_t FilterLength,
   const SLArrayIndex_t SineTableSize)
 {
-  SLArrayIndex_t  i;
-  SLData_t        SinePhase;
-  SLError_t       ErrorCode;
-
-  for (i = 0; i < FilterLength; i++) {                              // Clear comb filter arrays
+  for (SLArrayIndex_t i = 0; i < FilterLength; i++) {               // Clear comb filter arrays
     *pRealCombFilter++ = SIGLIB_ZERO;
     *pImagCombFilter++ = SIGLIB_ZERO;
   }
@@ -374,15 +357,14 @@ SLError_t SIGLIB_FUNC_DECL SIF_ComplexShift (
   *RealCombFilterSum = SIGLIB_ZERO;
   *ImagCombFilterSum = SIGLIB_ZERO;
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        SinePhase = SIGLIB_ZERO;
 
 // Fill demod array with single sine wave
-  ErrorCode = SDA_SignalGenerate (pSineTable, SIGLIB_COSINE_WAVE, SIGLIB_ONE, SIGLIB_FILL,
-                                  (SIGLIB_ONE / ((SLData_t) SineTableSize)), SIGLIB_ZERO, SIGLIB_ZERO, SIGLIB_ZERO,
-                                  &SinePhase, SIGLIB_NULL_DATA_PTR, SineTableSize);
+  SLError_t       ErrorCode = SDA_SignalGenerate (pSineTable, SIGLIB_COSINE_WAVE, SIGLIB_ONE, SIGLIB_FILL,
+                                                  (SIGLIB_ONE / ((SLData_t) SineTableSize)), SIGLIB_ZERO, SIGLIB_ZERO, SIGLIB_ZERO,
+                                                  &SinePhase, SIGLIB_NULL_DATA_PTR, SineTableSize);
 
   return (ErrorCode);
-
 }                                                                   // End of SIF_ComplexShift()
 
 
@@ -449,14 +431,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexShift (
   const SLArrayIndex_t SineTableSize,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        RealLocalSum = *RealCombFilterSum;
-  SLData_t        ImagLocalSum = *ImagCombFilterSum;
-  SLData_t        Sample, Tmp;
-  const SLData_t *pLocalSineTable;
-  SLData_t       *pLocalRealCombFilter, *pLocalImagCombFilter;
-  SLArrayIndex_t  LocalSinPhase, LocalCosPhase, LocalCombPhase;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -464,24 +438,27 @@ void SIGLIB_FUNC_DECL SDA_ComplexShift (
 #endif
 #endif
 
-  pLocalSineTable = pSineTable;                                     // Set up local pointer to mixer sinusoid tables
+  const SLData_t *pLocalSineTable = pSineTable;                     // Set up local pointer to mixer sinusoid tables
 
-  LocalSinPhase = *SineTablePhase;                                  // Initialize local sine and cosine phase offsets
-  LocalCosPhase = LocalSinPhase + (SLArrayIndex_t) ((SLUFixData_t) SineTableSize >> 2U);
+  SLArrayIndex_t  LocalSinPhase = *SineTablePhase;                  // Initialize local sine and cosine phase offsets
+  SLArrayIndex_t  LocalCosPhase = LocalSinPhase + (SLArrayIndex_t) ((SLUFixData_t) SineTableSize >> 2U);
   if (LocalCosPhase >= SineTableSize) {                             // Ensure no overlap
     LocalCosPhase -= SineTableSize;
   }
 
-  LocalCombPhase = *CombFilterPhase;
+  SLArrayIndex_t  LocalCombPhase = *CombFilterPhase;
 
-  pLocalRealCombFilter = pRealCombFilter;                           // Set up local pointers to comb filter state arrays
-  pLocalImagCombFilter = pImagCombFilter;
+  SLData_t       *pLocalRealCombFilter = pRealCombFilter;           // Set up local pointers to comb filter state arrays
+  SLData_t       *pLocalImagCombFilter = pImagCombFilter;
 
-  for (i = 0; i < SampleLength; i++) {
-    Sample = *pSrc++;
+  SLData_t        RealLocalSum = *RealCombFilterSum;
+  SLData_t        ImagLocalSum = *ImagCombFilterSum;
+
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+    SLData_t        Sample = *pSrc++;
 
 // Calculate real data path
-    Tmp = Sample * *(pLocalSineTable + LocalCosPhase);              // Multiply input data by complex exponential
+    SLData_t        Tmp = Sample * *(pLocalSineTable + LocalCosPhase);  // Multiply input data by complex exponential
 
     LocalCosPhase += (SLArrayIndex_t) (MixFrequency * (SLData_t) SineTableSize);  // Increment cosine table pointer
     if (LocalCosPhase >= SineTableSize) {                           // Circular array
@@ -515,7 +492,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexShift (
 
   *SineTablePhase = LocalSinPhase;
   *CombFilterPhase = LocalCombPhase;
-
 }                                                                   // End of SDA_ComplexShift()
 
 
@@ -578,14 +554,12 @@ SLData_t SIGLIB_FUNC_DECL SDS_FrequencyModulate (
   const SLData_t * SIGLIB_PTR_DECL pLookUpTable,
   const SLArrayIndex_t LookUpTableSize)
 {
-
   *PhaseOffset += CarrierPhaseIncrement + (ModIndex * Src);         // Increment phase
   if (*PhaseOffset >= SIGLIB_ONE) {                                 // Check phase in limits
     *PhaseOffset -= SIGLIB_ONE;
   }
 
   return (pLookUpTable[(SLArrayIndex_t) (*PhaseOffset * ((SLData_t) LookUpTableSize))]);
-
 }                                                                   // End of SDS_FrequencyModulate()
 
 
@@ -622,9 +596,6 @@ void SIGLIB_FUNC_DECL SDA_FrequencyModulate (
   const SLArrayIndex_t LookUpTableSize,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Phase;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -633,9 +604,9 @@ void SIGLIB_FUNC_DECL SDA_FrequencyModulate (
 #endif
 #endif
 
-  Phase = *PhaseOffset;
+  SLData_t        Phase = *PhaseOffset;
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
     Phase += CarrierPhaseIncrement + (ModIndex * (*pSrc++));        // Increment phase
     if (Phase >= SIGLIB_ONE) {                                      // Check phase in limits
       Phase -= SIGLIB_ONE;
@@ -645,7 +616,6 @@ void SIGLIB_FUNC_DECL SDA_FrequencyModulate (
   }
 
   *PhaseOffset = Phase;
-
 }                                                                   // End of SDA_FrequencyModulate()
 
 
@@ -679,11 +649,6 @@ void SIGLIB_FUNC_DECL SDA_FrequencyDemodulate (
   const SLData_t EnvelopeDecay,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Difference;
-  SLData_t        TPrevious = *DifferentiatePrevious;
-  SLData_t        Peak = *EnvelopePrevious;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -691,9 +656,12 @@ void SIGLIB_FUNC_DECL SDA_FrequencyDemodulate (
 #endif
 #endif
 
-  for (i = 0; i < SampleLength; i++) {
+  SLData_t        TPrevious = *DifferentiatePrevious;
+  SLData_t        Peak = *EnvelopePrevious;
+
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 // Differentiate the data
-    Difference = *pSrc - TPrevious;                                 // Get difference from previous Sample
+    SLData_t        Difference = *pSrc - TPrevious;                 // Get difference from previous Sample
     TPrevious = *pSrc++;                                            // Store Sample for next iteration
 
 // Extract the envelope
@@ -706,7 +674,6 @@ void SIGLIB_FUNC_DECL SDA_FrequencyDemodulate (
 
   *DifferentiatePrevious = TPrevious;
   *EnvelopePrevious = Peak;                                         // Save, so that function is re-entrant
-
 }                                                                   // End of SDA_FrequencyDemodulate()
 
 
@@ -780,7 +747,6 @@ void SIGLIB_FUNC_DECL SDS_FrequencyModulateComplex (
 
   *pRealDst = pLookUpTable[((SLArrayIndex_t) (*PhaseOffset * ((SLData_t) SinCosPeriod))) + (SLArrayIndex_t) ((SLUFixData_t) SinCosPeriod >> 2U)];
   *pImagDst = pLookUpTable[((SLArrayIndex_t) (*PhaseOffset * ((SLData_t) SinCosPeriod)))];
-
 }                                                                   // End of SDS_FrequencyModulateComplex()
 
 
@@ -820,10 +786,6 @@ void SIGLIB_FUNC_DECL SDA_FrequencyModulateComplex (
   const SLArrayIndex_t SinCosPeriod,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        Phase;
-  SLArrayIndex_t  QuarterPeriod = (SLArrayIndex_t) ((SLUFixData_t) SinCosPeriod >> 2U);
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -833,9 +795,10 @@ void SIGLIB_FUNC_DECL SDA_FrequencyModulateComplex (
 #endif
 #endif
 
-  Phase = *PhaseOffset;
+  SLData_t        Phase = *PhaseOffset;
+  SLArrayIndex_t  QuarterPeriod = (SLArrayIndex_t) ((SLUFixData_t) SinCosPeriod >> 2U);
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
     Phase += CarrierPhaseIncrement + (ModIndex * (*pSrc++));        // Increment phase
     if (Phase >= SIGLIB_ONE) {                                      // Check phase in limits
       Phase -= SIGLIB_ONE;
@@ -846,7 +809,6 @@ void SIGLIB_FUNC_DECL SDA_FrequencyModulateComplex (
   }
 
   *PhaseOffset = Phase;
-
 }                                                                   // End of SDA_FrequencyModulateComplex()
 
 
@@ -877,9 +839,6 @@ void SIGLIB_FUNC_DECL SDA_DeltaModulate (
   const SLData_t Delta,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        CurrentValue;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -887,9 +846,9 @@ void SIGLIB_FUNC_DECL SDA_DeltaModulate (
 #endif
 #endif
 
-  CurrentValue = *CurrentModValue;
+  SLData_t        CurrentValue = *CurrentModValue;
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
     if (*pSrc++ >= CurrentValue) {
       CurrentValue += Delta;
       *pDst++ = Delta;
@@ -902,7 +861,6 @@ void SIGLIB_FUNC_DECL SDA_DeltaModulate (
   }
 
   *CurrentModValue = CurrentValue;
-
 }                                                                   // End of SDA_DeltaModulate()
 
 
@@ -931,9 +889,6 @@ void SIGLIB_FUNC_DECL SDA_DeltaDemodulate (
   SLData_t * SIGLIB_PTR_DECL CurrentDeModValue,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        CurrentValue;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -941,9 +896,9 @@ void SIGLIB_FUNC_DECL SDA_DeltaDemodulate (
 #endif
 #endif
 
-  CurrentValue = *CurrentDeModValue;
+  SLData_t        CurrentValue = *CurrentDeModValue;
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
     CurrentValue += pSrc[i];
     pDst[i] = CurrentValue;
@@ -954,7 +909,6 @@ void SIGLIB_FUNC_DECL SDA_DeltaDemodulate (
   }
 
   *CurrentDeModValue = CurrentValue;
-
 }                                                                   // SDA_DeltaDemodulate()
 
 
@@ -985,10 +939,6 @@ void SIGLIB_FUNC_DECL SDA_DeltaModulate2 (
   const SLData_t IntegratorMax,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        LocalCurrentIntegralValue;
-  SLData_t        Delta;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -996,10 +946,10 @@ void SIGLIB_FUNC_DECL SDA_DeltaModulate2 (
 #endif
 #endif
 
-  LocalCurrentIntegralValue = *CurrentIntegralValue;
+  SLData_t        LocalCurrentIntegralValue = *CurrentIntegralValue;
 
-  for (i = 0; i < SampleLength; i++) {
-    Delta = *pSrc++ - LocalCurrentIntegralValue;                    // Get difference between input and integrator
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+    SLData_t        Delta = *pSrc++ - LocalCurrentIntegralValue;    // Get difference between input and integrator
 
     if (Delta > IntegratorMax) {                                    // Limit peak integration value
       Delta = IntegratorMax;
@@ -1014,5 +964,4 @@ void SIGLIB_FUNC_DECL SDA_DeltaModulate2 (
   }
 
   *CurrentIntegralValue = LocalCurrentIntegralValue;
-
 }                                                                   // End of SDA_DeltaModulate2()

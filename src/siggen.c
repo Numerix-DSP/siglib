@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : SIGGEN.C      | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 13/09/1992
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : SigLib signal generation routines.
 
@@ -40,7 +40,6 @@ Description : SigLib signal generation routines.
 #define SIGLIB_SRC_FILE_SIGGEN  1                                   // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
 
 /**/
 
@@ -82,7 +81,6 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
   SLData_t * SIGLIB_PTR_DECL CurrentValue,
   const SLArrayIndex_t arrayLength)
 {
-  SLArrayIndex_t  i;
   SLError_t       ErrorCode = SIGLIB_NO_ERROR;                      // No error yet
   SLData_t        phase, inc, sum;
   SLData_t        PreviousPhase;
@@ -109,7 +107,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
     switch (SLSignal_t) {
       case SIGLIB_SINE_WAVE:                                       // Sine wave
         phase = *PhaseOffset;
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           if (phase >= SIGLIB_TWO_PI) {
             phase -= SIGLIB_TWO_PI;
           }
@@ -121,7 +119,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
 
       case SIGLIB_COSINE_WAVE:                                     // Cosine wave
         phase = *PhaseOffset;
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           if (phase >= SIGLIB_TWO_PI) {
             phase -= SIGLIB_TWO_PI;
           }
@@ -132,13 +130,13 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
         break;
 
       case SIGLIB_WHITE_NOISE:                                     // White noise
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           *pDst++ = (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * Peak) + Offset;
         }
         break;
 
       case SIGLIB_GAUSSIAN_NOISE:                                  // Gaussian noise generator
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           if (!*PhaseOffset) {
 // Generate two random numbers betweem -1 and +1
             do {
@@ -155,7 +153,6 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
               Sample1 *= GaussianBias;
               Sample2 *= GaussianBias;
             }
-
             else {
               Sample1 = SIGLIB_ZERO;
               Sample2 = SIGLIB_ZERO;
@@ -165,7 +162,6 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
             *PhaseOffset = SIGLIB_ONE;                              // Switch to next sample
             *CurrentValue = Sample2;
           }
-
           else {
             *pDst++ = *CurrentValue + Offset;                       // Write out gaussian sample
             *PhaseOffset = SIGLIB_ZERO;                             // Switch to next sample
@@ -177,7 +173,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
         inc = SIGLIB_TWO_PI * Frequency;
         phase = *PhaseOffset;
         sum = *CurrentValue;
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           *pDst++ = (SDS_Sin (phase) * Peak) + Offset;
           PreviousPhase = phase;
 
@@ -190,7 +186,6 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
               sum = SIGLIB_ONE;
             }
           }
-
           else {                                                    // Negative chirp
 // If freq < limit, set to maximum
             if ((phase - PreviousPhase) <= (EndValue * SIGLIB_TWO_PI)) {
@@ -214,7 +209,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
 
         sum = *CurrentValue;
 
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           PreviousPhase = SIGLIB_TWO_PI * Frequency * sum++;
           *pDst++ = (SDS_Sin (PreviousPhase) * Peak) + Offset;
           phase = SIGLIB_TWO_PI * Frequency * sum;
@@ -234,7 +229,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
 
       case SIGLIB_SQUARE_WAVE:                                     // Square wave
         phase = Frequency * *PhaseOffset;
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           if (phase < Param) {                                      // Duty cycle
             *pDst++ = Peak + Offset;
           }
@@ -254,7 +249,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
         if (Param < -SIGLIB_EPSILON) {                              // Decreasing wave
           inc = Peak * SIGLIB_TWO * Frequency;
           sum = *PhaseOffset;
-          for (i = 0; i < arrayLength; i++) {
+          for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
             *pDst++ = sum + Offset;
             sum -= inc;
             if (sum < -Peak) {
@@ -272,7 +267,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
             sum = -sum;
             inc = -inc;
           }
-          for (i = 0; i < arrayLength; i++) {
+          for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
             *pDst++ = sum - Peak + Offset;
             sum += inc;
             if (sum > (Peak * SIGLIB_TWO)) {
@@ -295,7 +290,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
         else {                                                      // Increasing wave
           inc = Peak * SIGLIB_TWO * Frequency;
           sum = *PhaseOffset;
-          for (i = 0; i < arrayLength; i++) {
+          for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
             *pDst++ = sum + Offset;
             sum += inc;
             if (sum > Peak) {
@@ -307,7 +302,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
         break;
 
       case SIGLIB_IMPULSE:                                         // Impulse
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           *pDst++ = Offset;
         }
         pDst -= arrayLength;
@@ -316,7 +311,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
 
       case SIGLIB_IMPULSE_STREAM:                                  // Impulse stream
         phase = Frequency * (*PhaseOffset);
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           if (phase == SIGLIB_ONE) {                                // Check phase
             phase = SIGLIB_ZERO;
           }
@@ -325,23 +320,20 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
               (phase > -SIGLIB_MIN_THRESHOLD)) {                    // First sample
             *pDst++ = (Peak + Offset);
           }
-
           else if (phase > SIGLIB_ONE) {
             phase -= SIGLIB_ONE;
             *pDst++ = (Peak + Offset);
           }
-
           else {
             *pDst++ = Offset;
           }
-
           phase += Frequency;
         }
         *PhaseOffset = phase / Frequency;
         break;
 
       case SIGLIB_STEP:                                            // Step
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           if (i < ((SLArrayIndex_t) Param)) {
             *pDst++ = Offset;
           }
@@ -354,7 +346,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
       case SIGLIB_PN_SEQUENCE:                                     // Pseudo random number sequence
         phase = Frequency * (*PhaseOffset);
         sum = *CurrentValue;
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           if (phase == SIGLIB_ONE) {                                // Check phase
             phase = SIGLIB_ZERO;
           }
@@ -370,15 +362,12 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
             else {
               sum = ((SLData_t) ((SLArrayIndex_t) (sum - ((SLData_t) 0.9999999999999))));
             }
-
             sum = (sum * (Peak / (Param - 1))) + Offset;
-
             *pDst++ = sum;
           }
 
           else if (phase > SIGLIB_ONE) {
             phase -= SIGLIB_ONE;
-
             sum = ((((SLData_t) rand ()) * (Param - ((SLData_t) 0.0000000001))) / ((SLData_t) SIGLIB_FIX_MAX));
 
 // Round to nearest integer
@@ -388,16 +377,12 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
             else {
               sum = ((SLData_t) ((SLArrayIndex_t) (sum - ((SLData_t) 0.9999999999999))));
             }
-
             sum = (sum * (Peak / (Param - 1))) + Offset;
-
             *pDst++ = sum;
           }
-
           else {
             *pDst++ = sum;
           }
-
           phase += Frequency;
         }
         *PhaseOffset = phase / Frequency;
@@ -405,7 +390,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
         break;
 
       case SIGLIB_DC_LEVEL:                                        // Constant D.C. level
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           *pDst++ = Offset;
         }
         break;
@@ -421,7 +406,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
     switch (SLSignal_t) {
       case SIGLIB_SINE_WAVE:                                       // Sine wave
         phase = *PhaseOffset;
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           if (phase >= SIGLIB_TWO_PI) {
             phase -= SIGLIB_TWO_PI;
           }
@@ -433,7 +418,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
 
       case SIGLIB_COSINE_WAVE:                                     // Cosine wave
         phase = *PhaseOffset;
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           if (phase >= SIGLIB_TWO_PI) {
             phase -= SIGLIB_TWO_PI;
           }
@@ -444,13 +429,13 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
         break;
 
       case SIGLIB_WHITE_NOISE:                                     // White noise
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           *pDst++ += (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * Peak) + Offset;
         }
         break;
 
       case SIGLIB_GAUSSIAN_NOISE:                                  // Gaussian noise generator
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           if (!*PhaseOffset) {
 // Generate two random numbers betweem -1 and +1
             do {
@@ -467,7 +452,6 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
               Sample1 *= GaussianBias;
               Sample2 *= GaussianBias;
             }
-
             else {
               Sample1 = SIGLIB_ZERO;
               Sample2 = SIGLIB_ZERO;
@@ -477,7 +461,6 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
             *PhaseOffset = SIGLIB_ONE;                              // Switch to next sample
             *CurrentValue = Sample2;
           }
-
           else {
             *pDst++ += *CurrentValue + Offset;                      // Write out gaussian sample
             *PhaseOffset = SIGLIB_ZERO;                             // Switch to next sample
@@ -489,7 +472,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
         inc = SIGLIB_TWO_PI * Frequency;
         phase = *PhaseOffset;
         sum = *CurrentValue;
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           *pDst++ += (SDS_Sin (phase) * Peak) + Offset;
           PreviousPhase = phase;
 
@@ -502,7 +485,6 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
               sum = SIGLIB_ONE;
             }
           }
-
           else {                                                    // Negative chirp
 // If freq < limit, set to maximum
             if ((phase - PreviousPhase) <= (EndValue * SIGLIB_TWO_PI)) {
@@ -526,11 +508,10 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
 
         sum = *CurrentValue;
 
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           PreviousPhase = SIGLIB_TWO_PI * Frequency * sum++;
           *pDst++ += (SDS_Sin (PreviousPhase) * Peak) + Offset;
           phase = SIGLIB_TWO_PI * Frequency * sum;
-
           Frequency *= Param;                                       // Chirp the signal
 
 // If freq > limit, set to minimum
@@ -546,7 +527,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
 
       case SIGLIB_SQUARE_WAVE:                                     // Square wave
         phase = Frequency * *PhaseOffset;
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           if (phase < Param) {                                      // Duty cycle
             *pDst++ += Peak + Offset;
           }
@@ -566,7 +547,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
         if (Param < -SIGLIB_EPSILON) {                              // Decreasing wave
           inc = Peak * SIGLIB_TWO * Frequency;
           sum = *PhaseOffset;
-          for (i = 0; i < arrayLength; i++) {
+          for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
             *pDst++ += sum + Offset;
             sum -= inc;
             if (sum < -Peak) {
@@ -584,7 +565,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
             sum = -sum;
             inc = -inc;
           }
-          for (i = 0; i < arrayLength; i++) {
+          for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
             *pDst++ += sum - Peak + Offset;
             sum += inc;
             if (sum > (Peak * SIGLIB_TWO)) {
@@ -603,12 +584,11 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
             *PhaseOffset = sum;
           }
         }
-
         else                                                        // Increasing wave
         {
           inc = Peak * SIGLIB_TWO * Frequency;
           sum = *PhaseOffset;
-          for (i = 0; i < arrayLength; i++) {
+          for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
             *pDst++ += sum + Offset;
             sum += inc;
             if (sum > Peak) {
@@ -620,7 +600,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
         break;
 
       case SIGLIB_IMPULSE:                                         // Impulse
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           *pDst++ += Offset;
         }
         pDst -= arrayLength;
@@ -629,7 +609,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
 
       case SIGLIB_IMPULSE_STREAM:                                  // Impulse stream
         phase = Frequency * (*PhaseOffset);
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           if (phase == SIGLIB_ONE) {                                // Check phase
             phase = SIGLIB_ZERO;
           }
@@ -638,12 +618,10 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
               (phase > -SIGLIB_MIN_THRESHOLD)) {                    // First sample
             *pDst++ += (Peak + Offset);
           }
-
           else if (phase > SIGLIB_ONE) {
             phase -= SIGLIB_ONE;
             *pDst++ += (Peak + Offset);
           }
-
           else {
             *pDst++ += Offset;
           }
@@ -654,7 +632,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
         break;
 
       case SIGLIB_STEP:                                            // Step
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           if (i < ((SLArrayIndex_t) Param)) {
             *pDst++ += Offset;
           }
@@ -667,7 +645,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
       case SIGLIB_PN_SEQUENCE:                                     // Pseudo random number sequence
         phase = Frequency * (*PhaseOffset);
         sum = *CurrentValue;
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           if (phase == SIGLIB_ONE) {                                // Check phase
             phase = SIGLIB_ZERO;
           }
@@ -683,15 +661,11 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
             else {
               sum = ((SLData_t) ((SLArrayIndex_t) (sum - ((SLData_t) 0.9999999999999))));
             }
-
             sum = (sum * (Peak / (Param - 1))) + Offset;
-
             *pDst++ += sum;
           }
-
           else if (phase > SIGLIB_ONE) {
             phase -= SIGLIB_ONE;
-
             sum = ((((SLData_t) rand ()) * (Param - (SLData_t) 0.0000000001)) / (SLData_t) SIGLIB_FIX_MAX);
 
 // Round to nearest integer
@@ -701,16 +675,12 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
             else {
               sum = ((SLData_t) ((SLArrayIndex_t) (sum - ((SLData_t) 0.9999999999999))));
             }
-
             sum = (sum * (Peak / (Param - 1))) + Offset;
-
             *pDst++ += sum;
           }
-
           else {
             *pDst++ += sum;
           }
-
           phase += Frequency;
         }
         *PhaseOffset = phase / Frequency;
@@ -718,7 +688,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
         break;
 
       case SIGLIB_DC_LEVEL:                                        // Constant D.C. level
-        for (i = 0; i < arrayLength; i++) {
+        for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           *pDst++ += Offset;
         }
         break;
@@ -726,10 +696,8 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
       default:
         ErrorCode = SIGLIB_PARAMETER_ERROR;                         // Error
         break;
-
     }
   }
-
   else {
     ErrorCode = SIGLIB_PARAMETER_ERROR;                             // Error
   }
@@ -836,7 +804,6 @@ SLError_t SIGLIB_FUNC_DECL SDS_SignalGenerate (
             Sample1 *= GaussianBias;
             Sample2 *= GaussianBias;
           }
-
           else {
             Sample1 = SIGLIB_ZERO;
             Sample2 = SIGLIB_ZERO;
@@ -846,7 +813,6 @@ SLError_t SIGLIB_FUNC_DECL SDS_SignalGenerate (
           *PhaseOffset = SIGLIB_ONE;                                // Switch to next sample
           *CurrentValue = Sample2;
         }
-
         else {
           *pDst = *CurrentValue + Offset;                           // Write out gaussian sample
           *PhaseOffset = SIGLIB_ZERO;                               // Switch to next sample
@@ -868,7 +834,6 @@ SLError_t SIGLIB_FUNC_DECL SDS_SignalGenerate (
             sum = SIGLIB_ONE;
           }
         }
-
         else {                                                      // Negative chirp
 // If freq < limit, set to maximum
           if ((phase - PreviousPhase) <= (EndValue * SIGLIB_TWO_PI)) {
@@ -890,11 +855,9 @@ SLError_t SIGLIB_FUNC_DECL SDS_SignalGenerate (
         }
 
         sum = *CurrentValue;
-
         PreviousPhase = SIGLIB_TWO_PI * Frequency * sum++;
         *pDst = (SDS_Sin (PreviousPhase) * Peak) + Offset;
         phase = SIGLIB_TWO_PI * Frequency * sum;
-
         Frequency *= Param;                                         // Chirp the signal
 
 // If freq > limit, set to minimum
@@ -934,7 +897,6 @@ SLError_t SIGLIB_FUNC_DECL SDS_SignalGenerate (
           }
           *PhaseOffset = sum;
         }
-
         else if ((Param < SIGLIB_MIN_THRESHOLD) &&                  // Check for close to zero
                  (Param > -SIGLIB_MIN_THRESHOLD)) {                 // Standard wave
           inc = Peak * SIGLIB_FOUR * Frequency;
@@ -960,7 +922,6 @@ SLError_t SIGLIB_FUNC_DECL SDS_SignalGenerate (
             *PhaseOffset = sum;
           }
         }
-
         else                                                        // Increasing wave
         {
           inc = Peak * SIGLIB_TWO * Frequency;
@@ -990,21 +951,17 @@ SLError_t SIGLIB_FUNC_DECL SDS_SignalGenerate (
         if (phase == SIGLIB_ONE) {                                  // Check phase
           phase = SIGLIB_ZERO;
         }
-
         if ((phase < SIGLIB_MIN_THRESHOLD) &&                       // Check for close to zero
             (phase > -SIGLIB_MIN_THRESHOLD)) {                      // First sample
           *pDst = (Peak + Offset);
         }
-
         else if (phase > SIGLIB_ONE) {
           phase -= SIGLIB_ONE;
           *pDst = (Peak + Offset);
         }
-
         else {
           *pDst = Offset;
         }
-
         phase += Frequency;
         *PhaseOffset = phase / Frequency;
         break;
@@ -1031,16 +988,13 @@ SLError_t SIGLIB_FUNC_DECL SDS_SignalGenerate (
             (phase > -SIGLIB_MIN_THRESHOLD)) {                      // First sample
           sum = ((((SLData_t) rand ()) * (Param - ((SLData_t) 0.0000000001))) / ((SLData_t) SIGLIB_FIX_MAX));
 
-// Round to nearest integer
-          if (sum >= SIGLIB_ZERO) {
+          if (sum >= SIGLIB_ZERO) {                                 // Round to nearest integer
             sum = ((SLData_t) ((SLArrayIndex_t) sum));
           }
           else {
             sum = ((SLData_t) ((SLArrayIndex_t) (sum - ((SLData_t) 0.9999999999999))));
           }
-
           sum = (sum * (Peak / (Param - 1))) + Offset;
-
           *pDst = sum;
         }
 
@@ -1049,16 +1003,13 @@ SLError_t SIGLIB_FUNC_DECL SDS_SignalGenerate (
 
           sum = ((((SLData_t) rand ()) * (Param - ((SLData_t) 0.0000000001))) / ((SLData_t) SIGLIB_FIX_MAX));
 
-// Round to nearest integer
-          if (sum >= SIGLIB_ZERO) {
+          if (sum >= SIGLIB_ZERO) {                                 // Round to nearest integer
             sum = ((SLData_t) ((SLArrayIndex_t) sum));
           }
           else {
             sum = ((SLData_t) ((SLArrayIndex_t) (sum - ((SLData_t) 0.9999999999999))));
           }
-
           sum = (sum * (Peak / (Param - 1))) + Offset;
-
           *pDst = sum;
         }
 
@@ -1321,37 +1272,28 @@ SLError_t SIGLIB_FUNC_DECL SDS_SignalGenerate (
             (phase > -SIGLIB_MIN_THRESHOLD)) {                      // First sample
           sum = ((((SLData_t) rand ()) * (Param - (SLData_t) 0.0000000001)) / (SLData_t) SIGLIB_FIX_MAX);
 
-// Round to nearest integer
-          if (sum >= SIGLIB_ZERO) {
+          if (sum >= SIGLIB_ZERO) {                                 // Round to nearest integer
             sum = ((SLData_t) ((SLArrayIndex_t) sum));
           }
           else {
             sum = ((SLData_t) ((SLArrayIndex_t) (sum - ((SLData_t) 0.9999999999999))));
           }
-
           sum = (sum * (Peak / (Param - 1))) + Offset;
-
           *pDst += sum;
         }
-
         else if (phase > SIGLIB_ONE) {
           phase -= SIGLIB_ONE;
-
           sum = ((((SLData_t) rand ()) * (Param - (SLData_t) 0.0000000001)) / (SLData_t) SIGLIB_FIX_MAX);
 
-// Round to nearest integer
-          if (sum >= SIGLIB_ZERO) {
+          if (sum >= SIGLIB_ZERO) {                                 // Round to nearest integer
             sum = ((SLData_t) ((SLArrayIndex_t) sum));
           }
           else {
             sum = ((SLData_t) ((SLArrayIndex_t) (sum - ((SLData_t) 0.9999999999999))));
           }
-
           sum = (sum * (Peak / (Param - 1))) + Offset;
-
           *pDst += sum;
         }
-
         else {
           *pDst += sum;
         }
@@ -1368,16 +1310,13 @@ SLError_t SIGLIB_FUNC_DECL SDS_SignalGenerate (
       default:
         ErrorCode = SIGLIB_PARAMETER_ERROR;                         // Error
         break;
-
     }
   }
-
   else {
     ErrorCode = SIGLIB_PARAMETER_ERROR;                             // Error
   }
 
   return (ErrorCode);
-
 }                                                                   // End of SDS_SignalGenerate()
 
 
@@ -1406,16 +1345,12 @@ void SIGLIB_FUNC_DECL SIF_Resonator (
   SLData_t * pCosCoeff,
   SLData_t * pSinCoeff)
 {
-  SLArrayIndex_t  i;
-
-// Initialise the filter state array to 0
-  for (i = 0; i < SIGLIB_RESONATOR_DELAY_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SIGLIB_RESONATOR_DELAY_LENGTH; i++) {  // Initialise the filter state array to 0
     *pState++ = SIGLIB_ZERO;
   }
 
   *pCosCoeff = SIGLIB_TWO * SDS_Cos (SIGLIB_TWO_PI * Frequency);
   *pSinCoeff = SDS_Sin (SIGLIB_TWO_PI * Frequency);
-
 }                                                                   // End of SIF_Resonator()
 
 
@@ -1453,10 +1388,6 @@ void SIGLIB_FUNC_DECL SDA_Resonator (
   const SLData_t SinCoeff,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        Sum;
-  SLData_t        Delay0, Delay1, Delay2;
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -1465,14 +1396,14 @@ void SIGLIB_FUNC_DECL SDA_Resonator (
 #endif
 #endif
 
-  Delay0 = *pDelay;                                                 // Copy state array to local variables
-  Delay1 = *(pDelay + 1);
-  Delay2 = *(pDelay + 2);
+  SLData_t        Delay0 = *pDelay;                                 // Copy state array to local variables
+  SLData_t        Delay1 = *(pDelay + 1);
+  SLData_t        Delay2 = *(pDelay + 2);
 
 //SUF_Debugfprintf ("CosCoeff = %lf, SinCoeff = %lf\n", CosCoeff*16383.0, SinCoeff*16383.0);
 
-  for (i = 0; i < arrayLength; i++) {
-    Sum = Delay0 * SinCoeff + CosCoeff * Delay1 - Delay2;
+  for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
+    SLData_t        Sum = Delay0 * SinCoeff + CosCoeff * Delay1 - Delay2;
 // SUF_Debugfprintf ("%d : Sum = %3.2lf, Delay0 = %3.2lf, Delay1 = %3.2lf, Delay2 = %3.2lf\n",
 // (int)i, Sum*16383.0, Delay0*16383.0, Delay1*16383.0, Delay2*16383.0);
 
@@ -1486,7 +1417,6 @@ void SIGLIB_FUNC_DECL SDA_Resonator (
   *pDelay = Delay0;                                                 // Copy local variables to state array
   *(pDelay + 1) = Delay1;
   *(pDelay + 2) = Delay2;
-
 }                                                                   // End of SDA_Resonator()
 
 
@@ -1517,10 +1447,7 @@ void SIGLIB_FUNC_DECL SIF_Resonator1 (
   SLData_t * pSinCoeff,
   SLFixData_t * FirstTimeFlag)
 {
-  SLArrayIndex_t  i;
-
-// Initialise the filter state array to 0
-  for (i = 0; i < SIGLIB_RESONATOR_DELAY_LENGTH; i++) {
+  for (SLArrayIndex_t i = 0; i < SIGLIB_RESONATOR_DELAY_LENGTH; i++) {  // Initialise the filter state array to 0
     *pState++ = SIGLIB_ZERO;
   }
 
@@ -1528,7 +1455,6 @@ void SIGLIB_FUNC_DECL SIF_Resonator1 (
   *pSinCoeff = SDS_Sin (SIGLIB_TWO_PI * Frequency);
 
   *FirstTimeFlag = SIGLIB_TRUE;
-
 }                                                                   // End of SIF_Resonator1()
 
 
@@ -1568,10 +1494,6 @@ void SIGLIB_FUNC_DECL SDA_Resonator1 (
   const SLData_t SinCoeff,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        Sum;
-  SLData_t        Delay0, Delay1;
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pDst % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -1579,11 +1501,11 @@ void SIGLIB_FUNC_DECL SDA_Resonator1 (
 #endif
 #endif
 
-  Delay0 = *pDelay;                                                 // Copy state array to local variables
-  Delay1 = *(pDelay + 1);
+  SLData_t        Delay0 = *pDelay;                                 // Copy state array to local variables
+  SLData_t        Delay1 = *(pDelay + 1);
 
   if (*FirstTimeFlag == SIGLIB_FALSE) {                             // This iteration is not the first one
-    Sum = CosCoeff * Delay0 - Delay1;
+    SLData_t        Sum = CosCoeff * Delay0 - Delay1;
     Delay1 = Delay0;
     Delay0 = Sum;
     *pDst++ = Sum;
@@ -1597,7 +1519,7 @@ void SIGLIB_FUNC_DECL SDA_Resonator1 (
   else {                                                            // FIRST iteration - 1st two samples not recursive
     *pDst++ = SIGLIB_ZERO;
 
-    Sum = Magn * SinCoeff;
+    SLData_t        Sum = Magn * SinCoeff;
     Delay1 = SIGLIB_ZERO;
     Delay0 = Sum;
     *pDst++ = Sum;
@@ -1605,8 +1527,8 @@ void SIGLIB_FUNC_DECL SDA_Resonator1 (
     *FirstTimeFlag = SIGLIB_FALSE;                                  // Next iteration will not be the first
   }
 
-  for (i = 2; i < arrayLength; i++) {
-    Sum = CosCoeff * Delay0 - Delay1;
+  for (SLArrayIndex_t i = 2; i < arrayLength; i++) {
+    SLData_t        Sum = CosCoeff * Delay0 - Delay1;
     Delay1 = Delay0;
     Delay0 = Sum;
     *pDst++ = Sum;
@@ -1614,7 +1536,6 @@ void SIGLIB_FUNC_DECL SDA_Resonator1 (
 
   *pDelay = Delay0;                                                 // Copy local variables to state array
   *(pDelay + 1) = Delay1;
-
 }                                                                   // End of SDA_Resonator1()
 
 
@@ -1657,10 +1578,6 @@ void SIGLIB_FUNC_DECL SDA_Resonator1Add (
   const SLData_t SinCoeff,
   const SLArrayIndex_t arrayLength)
 {
-  SLData_t        Sum;
-  SLData_t        Delay0, Delay1;
-  SLArrayIndex_t  i;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pDst % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -1668,11 +1585,11 @@ void SIGLIB_FUNC_DECL SDA_Resonator1Add (
 #endif
 #endif
 
-  Delay0 = *pDelay;                                                 // Copy state array to local variables
-  Delay1 = *(pDelay + 1);
+  SLData_t        Delay0 = *pDelay;                                 // Copy state array to local variables
+  SLData_t        Delay1 = *(pDelay + 1);
 
   if (*FirstTimeFlag == SIGLIB_FALSE) {                             // This iteration is not the first one
-    Sum = CosCoeff * Delay0 - Delay1;
+    SLData_t        Sum = CosCoeff * Delay0 - Delay1;
     Delay1 = Delay0;
     Delay0 = Sum;
 //      (*pDst++) += Sum;
@@ -1690,7 +1607,7 @@ void SIGLIB_FUNC_DECL SDA_Resonator1Add (
   else {                                                            // FIRST iteration - 1st two samples not recursive
     *pDst++ = SIGLIB_ZERO;
 
-    Sum = Magn * SinCoeff;
+    SLData_t        Sum = Magn * SinCoeff;
     Delay1 = SIGLIB_ZERO;
     Delay0 = Sum;
 //      (*pDst++) += Sum;
@@ -1700,8 +1617,8 @@ void SIGLIB_FUNC_DECL SDA_Resonator1Add (
     *FirstTimeFlag = SIGLIB_FALSE;                                  // Next iteration will not be the first
   }
 
-  for (i = 2; i < arrayLength; i++) {
-    Sum = CosCoeff * Delay0 - Delay1;
+  for (SLArrayIndex_t i = 2; i < arrayLength; i++) {
+    SLData_t        Sum = CosCoeff * Delay0 - Delay1;
     Delay1 = Delay0;
     Delay0 = Sum;
 //      (*pDst++) += Sum;
@@ -1711,7 +1628,6 @@ void SIGLIB_FUNC_DECL SDA_Resonator1Add (
 
   *pDelay = Delay0;                                                 // Copy local variables to state array
   *(pDelay + 1) = Delay1;
-
 }                                                                   // End of SDA_Resonator1Add()
 
 
@@ -1742,10 +1658,9 @@ void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarWhiteNoise (
 {
   SLComplexRect_s NoiseRectLocal;
   SLComplexPolar_s NoisePolarLocal;
-  SLArrayIndex_t  i;
 
   if (FillMode == SIGLIB_FILL) {                                    // Generate signal and fill array
-    for (i = 0; i < arrayLength; i++) {
+    for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
       NoisePolarLocal.magn = ((((SLData_t) rand ()) / RAND_MAX) * NoisePeak);
       NoisePolarLocal.angle = (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_PI);
       NoiseRectLocal = SCV_PolarToRectangular (NoisePolarLocal);
@@ -1753,7 +1668,7 @@ void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarWhiteNoise (
     }
   }
   else {
-    for (i = 0; i < arrayLength; i++) {
+    for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
       NoisePolarLocal.magn = ((((SLData_t) rand ()) / RAND_MAX) * NoisePeak);
       NoisePolarLocal.angle = (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_PI);
       NoiseRectLocal = SCV_PolarToRectangular (NoisePolarLocal);
@@ -1792,7 +1707,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_SignalGeneratePolarWhiteNoise (
   NoisePolarLocal.angle = (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_PI);
   NoiseRectLocal = SCV_PolarToRectangular (NoisePolarLocal);
   return (NoiseRectLocal);
-
 }                                                                   // End of SDS_SignalGeneratePolarWhiteNoise()
 
 
@@ -1827,11 +1741,10 @@ void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarGaussianNoise (
 {
   SLComplexRect_s NoiseRectLocal;
   SLComplexPolar_s NoisePolarLocal;
-  SLArrayIndex_t  i;
   SLData_t        Sample1, Sample2, SquareSum, GaussianBias;
 
   if (FillMode == SIGLIB_FILL) {                                    // Generate signal and fill array
-    for (i = 0; i < arrayLength; i++) {
+    for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
       if (!*NoisePhaseOffset) {
 // Generate two random numbers betweem -1 and +1
         do {
@@ -1848,7 +1761,6 @@ void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarGaussianNoise (
           Sample1 *= GaussianBias;
           Sample2 *= GaussianBias;
         }
-
         else {
           Sample1 = SIGLIB_ZERO;
           Sample2 = SIGLIB_ZERO;
@@ -1862,7 +1774,6 @@ void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarGaussianNoise (
         *NoisePhaseOffset = SIGLIB_ONE;                             // Switch to next sample
         *NoiseCurrentValue = Sample2;
       }
-
       else {
         NoisePolarLocal.magn = *NoiseCurrentValue;
         NoisePolarLocal.angle = (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_HALF_PI);
@@ -1874,7 +1785,7 @@ void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarGaussianNoise (
     }
   }
   else {
-    for (i = 0; i < arrayLength; i++) {
+    for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
       if (!*NoisePhaseOffset) {
 // Generate two random numbers betweem -1 and +1
         do {
@@ -1891,7 +1802,6 @@ void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarGaussianNoise (
           Sample1 *= GaussianBias;
           Sample2 *= GaussianBias;
         }
-
         else {
           Sample1 = SIGLIB_ZERO;
           Sample2 = SIGLIB_ZERO;
@@ -1907,7 +1817,6 @@ void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarGaussianNoise (
         *NoisePhaseOffset = SIGLIB_ONE;                             // Switch to next sample
         *NoiseCurrentValue = Sample2;
       }
-
       else {
         NoisePolarLocal.magn = *NoiseCurrentValue;
         NoisePolarLocal.angle = (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_HALF_PI);
@@ -1988,7 +1897,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_SignalGeneratePolarGaussianNoise (
   }
 
   return (NoiseRectLocal);
-
 }                                                                   // End of SDS_SignalGeneratePolarGaussianNoise()
 
 
@@ -2025,7 +1933,6 @@ void SIGLIB_FUNC_DECL SDA_SignalAddPolarJitterAndGaussianNoise (
 {
   SLComplexRect_s NoiseRectLocal;
   SLComplexPolar_s NoisePolarLocal;
-  SLArrayIndex_t  i;
   SLData_t        Sample1, Sample2, SquareSum, GaussianBias;
   SLData_t        JitterPhase, Jitter;
   SLComplexRect_s SrcRectLocal;
@@ -2033,7 +1940,7 @@ void SIGLIB_FUNC_DECL SDA_SignalAddPolarJitterAndGaussianNoise (
 
   JitterPhase = *JitterPhaseOffset;
 
-  for (i = 0; i < arrayLength; i++) {
+  for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
     SrcPolarLocal = SCV_RectangularToPolar (*pSrc++);
 
 // Generate sinusoidal jitter
@@ -2298,5 +2205,4 @@ void SIGLIB_FUNC_DECL SDA_RandomNumber (
   for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
     *pDst++ = ((((SLData_t) rand () / (SLData_t) RAND_MAX) * (upperBound - lowerBound)) + lowerBound);
   }
-
 }                                                                   // End of SDA_RandomNumber()

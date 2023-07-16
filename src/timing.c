@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : TIMING.C      | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.00         |
+Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 11/03/2001
 Options   :                             | Latest Update : 17/11/2020
@@ -26,11 +26,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Alpha Numerix All rights reserved.
+Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description : Communications timing detection routines, for SigLib DSP library.
 
@@ -40,7 +40,6 @@ Description : Communications timing detection routines, for SigLib DSP library.
 #define SIGLIB_SRC_FILE_TIMING  1                                   // Defines the source file that this code is being used in
 
 #include <siglib.h>                                                 // Include SigLib header file
-
 
 /**/
 
@@ -95,7 +94,6 @@ void SIGLIB_FUNC_DECL SIF_PhaseLockedLoop (
 
   SIF_Fir (pHilbertTformFilterState, pHilbertTformFilterIndex, HilbertTformFilterLength); // Initialise Hilbert transformer filter
   SIF_HilbertTransformer (pHilbertTformFilterCoeffs, HilbertTformFilterLength);
-
 }                                                                   // End of SIF_PhaseLockedLoop()
 
 
@@ -158,7 +156,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_PhaseLockedLoop (
 
 // Apply Hilbert transformer filter - output negated to account for 180 degree phase ambiguity
   return (-SDS_Fir (VCOOutput, pHilbertTformFilterState, pHilbertTformFilterCoeffs, HilbertTformFilterIndex, HilbertTformFilterLength));
-
 }                                                                   // End of SDS_PhaseLockedLoop()
 
 
@@ -213,13 +210,11 @@ void SIGLIB_FUNC_DECL SDA_PhaseLockedLoop (
   SLData_t * pSample,
   const SLArrayIndex_t SampleSize)
 {
-  SLArrayIndex_t  i;
-  SLData_t        VCOOutput;
-
-  for (i = 0; i < SampleSize; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleSize; i++) {
 // Use the frequency modulator as a voltage controlled oscillator
 // Input is saved feedback sample from previous iteration
-    VCOOutput = SDS_FrequencyModulate (*pSample, CarrierPhaseIncrement, VCOModulationIndex, VCOPhase, pVCOLookUpTable, VCOLookUpTableSize);
+    SLData_t        VCOOutput =
+      SDS_FrequencyModulate (*pSample, CarrierPhaseIncrement, VCOModulationIndex, VCOPhase, pVCOLookUpTable, VCOLookUpTableSize);
 
 // Multiply input by VCO output then
 // apply loop filter and save sample for next iteration
@@ -272,22 +267,18 @@ SLError_t SIGLIB_FUNC_DECL SIF_CostasLoop (
   SLData_t * pCostasLpLoopFilterState,
   SLData_t * pSample)
 {
-  SLError_t       Error;
-
   *pSample = SIGLIB_ONE;                                            // Initialise Costas loop saved sample
   *pCostasLpLoopFilterState = SIGLIB_ZERO;                          // Initialise Costas loop loop filter feedback coeff
 
   SIF_Fir (pCostasLpLPF1State, pCostasLpLPF1Index, CostasLpLPFLength);  // Initialise Costas loop LPF 1
   SIF_Fir (pCostasLpLPF2State, pCostasLpLPF2Index, CostasLpLPFLength);  // Initialise Costas loop LPF 2
-  Error = SIF_FirLowPassFilter (pCostasLpLPFCoeffs, LPFCutOffFrequency, SIGLIB_HANNING, CostasLpLPFLength);
+  SLError_t       Error = SIF_FirLowPassFilter (pCostasLpLPFCoeffs, LPFCutOffFrequency, SIGLIB_HANNING, CostasLpLPFLength);
 
   SIF_FastSinCos (pVCOLookUpTable, VCOLookUpTableSize);
   *pCostasLpVCOPhase = SIGLIB_ZERO;                                 // Initialise Costas loop VCO phase
 
   return (Error);
-
 }                                                                   // End of SIF_CostasLoop()
-
 
 
 /**/
@@ -339,7 +330,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_CostasLoop (
   const enum SLCostasLoopFeedbackMode_t FeedbackMode,
   SLData_t * pSample)
 {
-  SLData_t        ImagTmp, RealTmp;                                 // Temporary data processing variables - one for each path
   SLData_t        RealVCOOutput, ImagVCOOutput;                     // Local VCO output
   SLData_t        LocalLoopSample;
 
@@ -349,8 +339,8 @@ SLData_t SIGLIB_FUNC_DECL SDS_CostasLoop (
                                 &RealVCOOutput,
                                 &ImagVCOOutput, CarrierPhaseIncrement, VCOModulationIndex, pCostasLpVCOPhase, pVCOLookUpTable, VCOLookUpTableSize);
 
-  RealTmp = Src * RealVCOOutput;                                    // Multiply input by the real and imaginary VCO output
-  ImagTmp = Src * ImagVCOOutput;
+  SLData_t        RealTmp = Src * RealVCOOutput;                    // Multiply input by the real and imaginary VCO output
+  SLData_t        ImagTmp = Src * ImagVCOOutput;
 
 // Filter real data path
   RealTmp = SDS_Fir (RealTmp, pCostasLpLPF1State, pCostasLpLPFCoeffs, pCostasLpLPF1Index, CostasLpLPFLength);
@@ -386,9 +376,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_CostasLoop (
 
 // Calculate one pole loop filter
   *pSample = SDS_OnePoleNormalized (LocalLoopSample, CostasLpLoopFilterCoeff, pCostasLpLoopFilterState);
-
   return (-ImagVCOOutput);                                          // Return output sample - negate to account for 180 degree phase shift
-
 }                                                                   // End of SDS_CostasLoop()
 
 
@@ -445,20 +433,18 @@ void SIGLIB_FUNC_DECL SDA_CostasLoop (
   SLData_t * pSample,
   const SLArrayIndex_t SampleSize)
 {
-  SLArrayIndex_t  i;
-  SLData_t        ImagTmp, RealTmp;                                 // Temporary data processing variables - one for each path
   SLData_t        RealVCOOutput, ImagVCOOutput;                     // Local VCO output
   SLData_t        LocalLoopSample = *pSample;
 
-  for (i = 0; i < SampleSize; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleSize; i++) {
 // Use the frequency modulator as a voltage controlled oscillator
 // Input is saved feedback sample from previous iteration
     SDS_FrequencyModulateComplex (LocalLoopSample,
                                   &RealVCOOutput,
                                   &ImagVCOOutput, CarrierPhaseIncrement, VCOModulationIndex, pCostasLpVCOPhase, pVCOLookUpTable, VCOLookUpTableSize);
 
-    RealTmp = *pSrc * RealVCOOutput;                                // Multiply input by the real and imaginary VCO output
-    ImagTmp = *pSrc++ * ImagVCOOutput;
+    SLData_t        RealTmp = *pSrc * RealVCOOutput;                // Multiply input by the real and imaginary VCO output
+    SLData_t        ImagTmp = *pSrc++ * ImagVCOOutput;
 
     *pDst++ = -ImagVCOOutput;                                       // Output the VCO output - negate to account for 180 degree phase shift
 
@@ -497,9 +483,7 @@ void SIGLIB_FUNC_DECL SDA_CostasLoop (
 // Calculate one pole loop filter
     LocalLoopSample = SDS_OnePoleNormalized (LocalLoopSample, CostasLpLoopFilterCoeff, pCostasLpLoopFilterState);
   }
-
   *pSample = LocalLoopSample;                                       // Save loop sample for next iteration
-
 }                                                                   // End of SDA_CostasLoop()
 
 
@@ -542,7 +526,6 @@ void SIGLIB_FUNC_DECL SRF_CostasLoop (
 
   SIF_Fir (pCostasLpLPF1State, pCostasLpLPF1Index, CostasLpLPFLength);  // Initialise Costas loop LPF 1
   SIF_Fir (pCostasLpLPF2State, pCostasLpLPF2Index, CostasLpLPFLength);  // Initialise Costas loop LPF 2
-
 }                                                                   // End of SRF_CostasLoop()
 
 
@@ -589,7 +572,6 @@ void SIGLIB_FUNC_DECL SIF_180DegreePhaseDetect (
   SIF_FirLowPassFilter (pFilterCoeffs, LPFCutOffFrequency, SIGLIB_HANNING, FilterLength);
 
   *pPreviousOutputSign = SIGLIB_AI_ZERO;                            // Initialise previous output sign
-
 }                                                                   // End of SIF_180DegreePhaseDetect()
 
 
@@ -640,13 +622,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_180DegreePhaseDetect (
   SLArrayIndex_t * pPreviousOutputSign,
   const SLArrayIndex_t SampleSize)
 {
-  SLArrayIndex_t  i;
-  SLData_t        SinMultiplierOutput, CosMultiplierOutput;
-  SLData_t        CosFastCosineLookUpTablePhase;
-  SLData_t        FilterOutput;
-  SLArrayIndex_t  FilterOutputSign;
-  SLArrayIndex_t  PhaseChangeLocation = SIGLIB_NO_PHASE_CHANGE;
-
 #if (SIGLIB_ARRAYS_ALIGNED)
 #ifdef __TMS320C6X__                                                // Defined by TI compiler
   _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
@@ -657,14 +632,16 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_180DegreePhaseDetect (
 #endif
 #endif
 
-  for (i = 0; i < SampleSize; i++) {
-    SinMultiplierOutput = *pSrc * *(pFastCosineLookUpTable + ((SLArrayIndex_t) * pFastCosineLookUpTablePhase));
+  SLArrayIndex_t  PhaseChangeLocation = SIGLIB_NO_PHASE_CHANGE;
 
-    CosFastCosineLookUpTablePhase = *pFastCosineLookUpTablePhase + ((SLData_t) ((SLUFixData_t) FastCosineLookUpTableSize >> 2U));
+  for (SLArrayIndex_t i = 0; i < SampleSize; i++) {
+    SLData_t        SinMultiplierOutput = *pSrc * *(pFastCosineLookUpTable + ((SLArrayIndex_t) * pFastCosineLookUpTablePhase));
+
+    SLData_t        CosFastCosineLookUpTablePhase = *pFastCosineLookUpTablePhase + ((SLData_t) ((SLUFixData_t) FastCosineLookUpTableSize >> 2U));
     if (CosFastCosineLookUpTablePhase >= ((SLData_t) FastCosineLookUpTableSize)) {
       CosFastCosineLookUpTablePhase -= ((SLData_t) FastCosineLookUpTableSize);
     }
-    CosMultiplierOutput = *pSrc++ * *(pFastCosineLookUpTable + ((SLArrayIndex_t) CosFastCosineLookUpTablePhase));
+    SLData_t        CosMultiplierOutput = *pSrc++ * *(pFastCosineLookUpTable + ((SLArrayIndex_t) CosFastCosineLookUpTablePhase));
 
     *pFastCosineLookUpTablePhase += CarrierPhaseIncrement * FastCosineLookUpTableSize;
     if (*pFastCosineLookUpTablePhase >= ((SLData_t) FastCosineLookUpTableSize)) {
@@ -674,7 +651,8 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_180DegreePhaseDetect (
     SinMultiplierOutput += CosMultiplierOutput;
 
 // Apply LPF and save output
-    FilterOutput = SDS_Fir (SinMultiplierOutput, pFilterState, pFilterCoeffs, pFilterIndex, FilterLength);
+    SLData_t        FilterOutput = SDS_Fir (SinMultiplierOutput, pFilterState, pFilterCoeffs, pFilterIndex, FilterLength);
+    SLArrayIndex_t  FilterOutputSign;
 
     *pDst++ = FilterOutput;
 
@@ -695,9 +673,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_180DegreePhaseDetect (
 
     *pPreviousOutputSign = FilterOutputSign;
   }
-
   return (PhaseChangeLocation);
-
 }                                                                   // End of SDA_180DegreePhaseDetect()
 
 
@@ -728,7 +704,6 @@ void SIGLIB_FUNC_DECL SIF_TriggerReverberator (
   *pTriggerCount = (SLArrayIndex_t) 0;
   *pTriggerDetectedFlag = (SLFixData_t) 0;
   *pTriggerUpdatedFlag = (SLFixData_t) 0;
-
 }                                                                   // End of SIF_TriggerReverberator()
 
 
@@ -824,7 +799,6 @@ void SIGLIB_FUNC_DECL SDA_TriggerReverberator (
   *pTriggerCount = TriggerCount;                                    // Save values for next iteration
   *pTriggerDetectedFlag = TriggerDetectedFlag;
   *pTriggerUpdatedFlag = TriggerUpdatedFlag;
-
 }                                                                   // End of SDA_TriggerReverberator()
 
 
@@ -937,18 +911,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_TriggerSelector (
   const SLData_t * SIGLIB_PTR_DECL pTrigger,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
   SLArrayIndex_t  NumberOfOutputSamples = (SLArrayIndex_t) 0;
-
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
     if (*pTrigger++ == SIGLIB_ONE) {
       *pDst++ = *(pSrc + i);
       NumberOfOutputSamples++;
     }
   }
-
   return (NumberOfOutputSamples);
-
 }                                                                   // End of SDA_TriggerSelector()
 
 
@@ -1009,8 +979,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_EarlyLateGate (
   SLArrayIndex_t * pTriggerLatency,
   const SLArrayIndex_t SymbolLength)
 {
-  SLError_t       ErrorCode;
-
   SIF_FirMatchedFilter (pMatchedFilterSignal, pMatchedFilterCoeffs, SymbolLength);
   SIF_Fir (pMatchedFilterState, pMatchedFilterIndex, SymbolLength); // Initialise matched filter
 
@@ -1019,7 +987,8 @@ SLError_t SIGLIB_FUNC_DECL SIF_EarlyLateGate (
 
   SIF_Fir (pLoopFilterState, pLoopFilterIndex, LoopFilterLength);   // Initialise loop filter
   *pLoopFilterState = SIGLIB_ZERO;                                  // Initialise loop filter feedback coefficients
-  ErrorCode = SIF_FirBandPassFilter (pLoopFilterCoeffs, LoopFilterFc, SIGLIB_HALF / SIGLIB_ONE_HUNDRED, SIGLIB_HANNING, LoopFilterLength);
+  SLError_t       ErrorCode =
+    SIF_FirBandPassFilter (pLoopFilterCoeffs, LoopFilterFc, SIGLIB_HALF / SIGLIB_ONE_HUNDRED, SIGLIB_HANNING, LoopFilterLength);
 //  ErrorCode = SIF_FirLowPassFilter (pLoopFilterCoeffs, LoopFilterFc, SIGLIB_HANNING, LoopFilterLength);
   if (ErrorCode != SIGLIB_NO_ERROR) {
     return (ErrorCode);
@@ -1030,7 +999,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_EarlyLateGate (
 // This positions the timing pulse at the start of the received symbols
     *pTriggerLatency = (SLArrayIndex_t) (((SLUFixData_t) EarlyGateDelayLength >> 1U) + ((SLUFixData_t) LoopFilterLength >> 1U));
   }
-
   else {
 // Delay = sum of group delays for Matched Filter + Early-Late Gate + Loop Filter
 // This positions the timing pulse in the middle of the received symbols
@@ -1042,7 +1010,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_EarlyLateGate (
   SIF_TriggerReverberator (pTriggerCount, pTriggerDetectedFlag, pTriggerUpdatedFlag);
 
   *pPulseDetectorThresholdFlag = (SLFixData_t) 0;                   // Initialise flag to indicate signal level over noise level
-
   *pZeroCrossingPreviousSample = SIGLIB_ZERO;                       // We have not yet detected a zero crossing
 
   return (SIGLIB_NO_ERROR);
@@ -1106,16 +1073,12 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGate (
   const SLArrayIndex_t SymbolLength,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        EarlyGateOutput, LateGateOutput;
-  SLData_t        ZeroCrossingDetectorOutput;
-
   SDA_Fir (pSrc, pTriggerOutput, pMatchedFilterState, pMatchedFilterCoeffs, pMatchedFilterIndex, SymbolLength, SampleLength);
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 // Generate delays for the early gate
-    EarlyGateOutput = *pTriggerOutput;                              // Note that there is no delay on the late gate data point
-    LateGateOutput = SDS_FixedDelay (*pTriggerOutput, pEarlyGateDelay, pEarlyGateDelayIndex, EarlyGateDelayLength);
+    SLData_t        EarlyGateOutput = *pTriggerOutput;              // Note that there is no delay on the late gate data point
+    SLData_t        LateGateOutput = SDS_FixedDelay (*pTriggerOutput, pEarlyGateDelay, pEarlyGateDelayIndex, EarlyGateDelayLength);
 
     EarlyGateOutput -= LateGateOutput;                              // Get the difference between the two delay signals
 
@@ -1128,7 +1091,7 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGate (
       *pPulseDetectorThresholdFlag = (SLFixData_t) 1;
     }
 
-    ZeroCrossingDetectorOutput = SDS_ZeroCrossingDetect (EarlyGateOutput, pZeroCrossingPreviousSample, SIGLIB_ALL_LEVEL_CROSS);
+    SLData_t        ZeroCrossingDetectorOutput = SDS_ZeroCrossingDetect (EarlyGateOutput, pZeroCrossingPreviousSample, SIGLIB_ALL_LEVEL_CROSS);
 
     if (*pPulseDetectorThresholdFlag != (SLFixData_t) 1) {
       ZeroCrossingDetectorOutput = SIGLIB_ZERO;
@@ -1146,8 +1109,6 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGate (
 
 // Generate continuous pulse stream
   SDA_TriggerReverberator (pTriggerOutput, pTriggerOutput, pTriggerCount, pTriggerDetectedFlag, pTriggerUpdatedFlag, SymbolLength, SampleLength);
-
-
 }                                                                   // End of SDA_EarlyLateGate()
 
 
@@ -1214,25 +1175,19 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateDebug (
   const SLArrayIndex_t SymbolLength,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        EarlyGateOutput, LateGateOutput;
-  SLData_t        ZeroCrossingDetectorOutput;
-
   SDA_Fir (pSrc, pTriggerOutput, pMatchedFilterState, pMatchedFilterCoeffs, pMatchedFilterIndex, SymbolLength, SampleLength);
 
   SDA_Copy (pTriggerOutput, pMatchedFilterOutput, SampleLength);    // Copy matched filter output for debug
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 // Generate delays for the early gate
-    EarlyGateOutput = *pTriggerOutput;                              // Note that there is no delay on the late gate data point
-    LateGateOutput = SDS_FixedDelay (*pTriggerOutput, pEarlyGateDelay, pEarlyGateDelayIndex, EarlyGateDelayLength);
+    SLData_t        EarlyGateOutput = *pTriggerOutput;              // Note that there is no delay on the late gate data point
+    SLData_t        LateGateOutput = SDS_FixedDelay (*pTriggerOutput, pEarlyGateDelay, pEarlyGateDelayIndex, EarlyGateDelayLength);
 
     EarlyGateOutput -= LateGateOutput;                              // Get the difference between the two delay signals
 
 // Calculate loop filter
     EarlyGateOutput = SDS_Fir (EarlyGateOutput, pLoopFilterState, pLoopFilterCoeffs, pLoopFilterIndex, LoopFilterLength);
-
-
     pLoopFilterOutput[i] = EarlyGateOutput;                         // Save output of loop filter for debugging
 
 // Extract timing
@@ -1241,7 +1196,7 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateDebug (
       *pPulseDetectorThresholdFlag = (SLFixData_t) 1;
     }
 
-    ZeroCrossingDetectorOutput = SDS_ZeroCrossingDetect (EarlyGateOutput, pZeroCrossingPreviousSample, SIGLIB_ALL_LEVEL_CROSS);
+    SLData_t        ZeroCrossingDetectorOutput = SDS_ZeroCrossingDetect (EarlyGateOutput, pZeroCrossingPreviousSample, SIGLIB_ALL_LEVEL_CROSS);
 
     if (*pPulseDetectorThresholdFlag != (SLFixData_t) 1) {
       ZeroCrossingDetectorOutput = SIGLIB_ZERO;
@@ -1259,8 +1214,6 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateDebug (
 
 // Generate continuous pulse stream
   SDA_TriggerReverberator (pTriggerOutput, pTriggerOutput, pTriggerCount, pTriggerDetectedFlag, pTriggerUpdatedFlag, SymbolLength, SampleLength);
-
-
 }                                                                   // End of SDA_EarlyLateGateDebug()
 
 
@@ -1319,15 +1272,11 @@ SLData_t SIGLIB_FUNC_DECL SDS_EarlyLateGate (
   SLFixData_t * pTriggerUpdatedFlag,
   const SLArrayIndex_t SymbolLength)
 {
-  SLData_t        EarlyGateOutput, LateGateOutput;
-  SLData_t        ZeroCrossingDetectorOutput;
-  SLData_t        TriggerOutput;
-
-  TriggerOutput = SDS_Fir (Src, pMatchedFilterState, pMatchedFilterCoeffs, pMatchedFilterIndex, SymbolLength);
+  SLData_t        TriggerOutput = SDS_Fir (Src, pMatchedFilterState, pMatchedFilterCoeffs, pMatchedFilterIndex, SymbolLength);
 
 // Generate delays for the early gate
-  EarlyGateOutput = TriggerOutput;                                  // Note that there is no delay on the late gate data point
-  LateGateOutput = SDS_FixedDelay (TriggerOutput, pEarlyGateDelay, pEarlyGateDelayIndex, EarlyGateDelayLength);
+  SLData_t        EarlyGateOutput = TriggerOutput;                  // Note that there is no delay on the late gate data point
+  SLData_t        LateGateOutput = SDS_FixedDelay (TriggerOutput, pEarlyGateDelay, pEarlyGateDelayIndex, EarlyGateDelayLength);
 
   EarlyGateOutput -= LateGateOutput;                                // Get the difference between the two delay signals
 
@@ -1341,7 +1290,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_EarlyLateGate (
     *pPulseDetectorThresholdFlag = (SLFixData_t) 1;
   }
 
-  ZeroCrossingDetectorOutput = SDS_ZeroCrossingDetect (EarlyGateOutput, pZeroCrossingPreviousSample, SIGLIB_ALL_LEVEL_CROSS);
+  SLData_t        ZeroCrossingDetectorOutput = SDS_ZeroCrossingDetect (EarlyGateOutput, pZeroCrossingPreviousSample, SIGLIB_ALL_LEVEL_CROSS);
 
   if (*pPulseDetectorThresholdFlag != (SLFixData_t) 1) {
     ZeroCrossingDetectorOutput = SIGLIB_ZERO;
@@ -1358,7 +1307,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_EarlyLateGate (
   TriggerOutput = SDS_TriggerReverberator (TriggerOutput, pTriggerCount, pTriggerDetectedFlag, pTriggerUpdatedFlag, SymbolLength);
 
   return (TriggerOutput);
-
 }                                                                   // End of SDS_EarlyLateGate()
 
 
@@ -1419,8 +1367,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_EarlyLateGateSquarePulse (
   SLArrayIndex_t * pTriggerLatency,
   const SLArrayIndex_t SymbolLength)
 {
-  SLError_t       ErrorCode;
-
   SIF_Comb (pMatchedFilterState, pMatchedFilterIndex, pMatchedFilterSum, SymbolLength); // Initialise matched filter
 
 // Initialise the early gate delay
@@ -1428,7 +1374,8 @@ SLError_t SIGLIB_FUNC_DECL SIF_EarlyLateGateSquarePulse (
 
   SIF_Fir (pLoopFilterState, pLoopFilterIndex, LoopFilterLength);   // Initialise loop filter
   *pLoopFilterState = SIGLIB_ZERO;                                  // Initialise loop filter feedback coefficients
-  ErrorCode = SIF_FirBandPassFilter (pLoopFilterCoeffs, LoopFilterFc, SIGLIB_HALF / SIGLIB_ONE_HUNDRED, SIGLIB_HANNING, LoopFilterLength);
+  SLError_t       ErrorCode =
+    SIF_FirBandPassFilter (pLoopFilterCoeffs, LoopFilterFc, SIGLIB_HALF / SIGLIB_ONE_HUNDRED, SIGLIB_HANNING, LoopFilterLength);
 //  ErrorCode = SIF_FirLowPassFilter (pLoopFilterCoeffs, LoopFilterFc, SIGLIB_HANNING, LoopFilterLength);
   if (ErrorCode != SIGLIB_NO_ERROR) {
     return (ErrorCode);
@@ -1439,7 +1386,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_EarlyLateGateSquarePulse (
 // This positions the timing pulse at the start of the received symbols
     *pTriggerLatency = (SLArrayIndex_t) (((SLUFixData_t) EarlyGateDelayLength >> 1U) + ((SLUFixData_t) LoopFilterLength >> 1U));
   }
-
   else {
 // Delay = sum of group delays for Matched Filter + Early-Late Gate + Loop Filter
 // This positions the timing pulse in the middle of the received symbols
@@ -1451,7 +1397,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_EarlyLateGateSquarePulse (
   SIF_TriggerReverberator (pTriggerCount, pTriggerDetectedFlag, pTriggerUpdatedFlag);
 
   *pPulseDetectorThresholdFlag = (SLFixData_t) 0;                   // Initialise flag to indicate signal level over noise level
-
   *pZeroCrossingPreviousSample = SIGLIB_ZERO;                       // We have not yet detected a zero crossing
 
   return (SIGLIB_NO_ERROR);
@@ -1516,16 +1461,12 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateSquarePulse (
   const SLArrayIndex_t SymbolLength,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        EarlyGateOutput, LateGateOutput;
-  SLData_t        ZeroCrossingDetectorOutput;
-
   SDA_Comb (pSrc, pTriggerOutput, pMatchedFilterState, pMatchedFilterIndex, pMatchedFilterSum, SymbolLength, SampleLength);
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 // Generate delays for the early gate
-    EarlyGateOutput = *pTriggerOutput;                              // Note that there is no delay on the late gate data point
-    LateGateOutput = SDS_FixedDelay (*pTriggerOutput, pEarlyGateDelay, pEarlyGateDelayIndex, EarlyGateDelayLength);
+    SLData_t        EarlyGateOutput = *pTriggerOutput;              // Note that there is no delay on the late gate data point
+    SLData_t        LateGateOutput = SDS_FixedDelay (*pTriggerOutput, pEarlyGateDelay, pEarlyGateDelayIndex, EarlyGateDelayLength);
 
     EarlyGateOutput -= LateGateOutput;                              // Get the difference between the two delay signals
 
@@ -1538,7 +1479,7 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateSquarePulse (
       *pPulseDetectorThresholdFlag = (SLFixData_t) 1;
     }
 
-    ZeroCrossingDetectorOutput = SDS_ZeroCrossingDetect (EarlyGateOutput, pZeroCrossingPreviousSample, SIGLIB_ALL_LEVEL_CROSS);
+    SLData_t        ZeroCrossingDetectorOutput = SDS_ZeroCrossingDetect (EarlyGateOutput, pZeroCrossingPreviousSample, SIGLIB_ALL_LEVEL_CROSS);
 
     if (*pPulseDetectorThresholdFlag != (SLFixData_t) 1) {
       ZeroCrossingDetectorOutput = SIGLIB_ZERO;
@@ -1556,8 +1497,6 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateSquarePulse (
 
 // Generate continuous pulse stream
   SDA_TriggerReverberator (pTriggerOutput, pTriggerOutput, pTriggerCount, pTriggerDetectedFlag, pTriggerUpdatedFlag, SymbolLength, SampleLength);
-
-
 }                                                                   // End of SDA_EarlyLateGateSquarePulse()
 
 
@@ -1625,18 +1564,14 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateSquarePulseDebug (
   const SLArrayIndex_t SymbolLength,
   const SLArrayIndex_t SampleLength)
 {
-  SLArrayIndex_t  i;
-  SLData_t        EarlyGateOutput, LateGateOutput;
-  SLData_t        ZeroCrossingDetectorOutput;
-
   SDA_Comb (pSrc, pTriggerOutput, pMatchedFilterState, pMatchedFilterIndex, pMatchedFilterSum, SymbolLength, SampleLength);
 
   SDA_Copy (pTriggerOutput, pMatchedFilterOutput, SampleLength);    // Copy matched filter output for debug
 
-  for (i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 // Generate delays for the early gate
-    EarlyGateOutput = *pTriggerOutput;                              // Note that there is no delay on the late gate data point
-    LateGateOutput = SDS_FixedDelay (*pTriggerOutput, pEarlyGateDelay, pEarlyGateDelayIndex, EarlyGateDelayLength);
+    SLData_t        EarlyGateOutput = *pTriggerOutput;              // Note that there is no delay on the late gate data point
+    SLData_t        LateGateOutput = SDS_FixedDelay (*pTriggerOutput, pEarlyGateDelay, pEarlyGateDelayIndex, EarlyGateDelayLength);
 
     EarlyGateOutput -= LateGateOutput;                              // Get the difference between the two delay signals
 
@@ -1652,7 +1587,7 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateSquarePulseDebug (
       *pPulseDetectorThresholdFlag = (SLFixData_t) 1;
     }
 
-    ZeroCrossingDetectorOutput = SDS_ZeroCrossingDetect (EarlyGateOutput, pZeroCrossingPreviousSample, SIGLIB_ALL_LEVEL_CROSS);
+    SLData_t        ZeroCrossingDetectorOutput = SDS_ZeroCrossingDetect (EarlyGateOutput, pZeroCrossingPreviousSample, SIGLIB_ALL_LEVEL_CROSS);
 
     if (*pPulseDetectorThresholdFlag != (SLFixData_t) 1) {
       ZeroCrossingDetectorOutput = SIGLIB_ZERO;
@@ -1665,13 +1600,10 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateSquarePulseDebug (
     }
     *pTriggerOutput++ = ZeroCrossingDetectorOutput;                 // Indicate we have a trigger
   }
-
   pTriggerOutput -= SampleLength;                                   // Reset trigger output array pointer
 
 // Generate continuous pulse stream
   SDA_TriggerReverberator (pTriggerOutput, pTriggerOutput, pTriggerCount, pTriggerDetectedFlag, pTriggerUpdatedFlag, SymbolLength, SampleLength);
-
-
 }                                                                   // End of SDA_EarlyLateGateSquarePulseDebug()
 
 
@@ -1732,15 +1664,11 @@ SLData_t SIGLIB_FUNC_DECL SDS_EarlyLateGateSquarePulse (
   SLFixData_t * pTriggerUpdatedFlag,
   const SLArrayIndex_t SymbolLength)
 {
-  SLData_t        EarlyGateOutput, LateGateOutput;
-  SLData_t        ZeroCrossingDetectorOutput;
-  SLData_t        TriggerOutput;
-
-  TriggerOutput = SDS_Comb (Src, pMatchedFilterState, pMatchedFilterIndex, pMatchedFilterSum, SymbolLength);
+  SLData_t        TriggerOutput = SDS_Comb (Src, pMatchedFilterState, pMatchedFilterIndex, pMatchedFilterSum, SymbolLength);
 
 // Generate delays for the gate
-  EarlyGateOutput = TriggerOutput;                                  // Note that there is no delay on the late gate data point
-  LateGateOutput = SDS_FixedDelay (TriggerOutput, pEarlyGateDelay, pEarlyGateDelayIndex, EarlyGateDelayLength);
+  SLData_t        EarlyGateOutput = TriggerOutput;                  // Note that there is no delay on the late gate data point
+  SLData_t        LateGateOutput = SDS_FixedDelay (TriggerOutput, pEarlyGateDelay, pEarlyGateDelayIndex, EarlyGateDelayLength);
 
   EarlyGateOutput -= LateGateOutput;                                // Get the difference between the two delay signals
 
@@ -1754,7 +1682,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_EarlyLateGateSquarePulse (
     *pPulseDetectorThresholdFlag = (SLFixData_t) 1;
   }
 
-  ZeroCrossingDetectorOutput = SDS_ZeroCrossingDetect (EarlyGateOutput, pZeroCrossingPreviousSample, SIGLIB_ALL_LEVEL_CROSS);
+  SLData_t        ZeroCrossingDetectorOutput = SDS_ZeroCrossingDetect (EarlyGateOutput, pZeroCrossingPreviousSample, SIGLIB_ALL_LEVEL_CROSS);
 
   if (*pPulseDetectorThresholdFlag != (SLFixData_t) 1) {
     ZeroCrossingDetectorOutput = SIGLIB_ZERO;
@@ -1771,5 +1699,4 @@ SLData_t SIGLIB_FUNC_DECL SDS_EarlyLateGateSquarePulse (
   TriggerOutput = SDS_TriggerReverberator (TriggerOutput, pTriggerCount, pTriggerDetectedFlag, pTriggerUpdatedFlag, SymbolLength);
 
   return (TriggerOutput);
-
 }                                                                   // End of SDS_EarlyLateGateSquarePulse()

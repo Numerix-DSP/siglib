@@ -1,5 +1,5 @@
 // SigLib Phase Locked Loop Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -8,7 +8,7 @@
 
 // Define constants
 #define SAMPLE_LENGTH                   512
-#define SAMPLE_RATE                     8000.
+#define SAMPLE_RATE_HZ                  8000.
 #define PLL_LOOP_FILTER_LENGTH          41                          // PLL loop filter length
 #define CARRIER_FREQ                    200.                        // Carrier frequency
 #define LPF_CUTOFF_FREQUENCY            100.                        // LPF cut-off frequency
@@ -63,7 +63,7 @@ int main (
   SIF_PhaseLockedLoop (&PLLVCOPhase,                                // VCO phase
                        pVCOLookUpTable,                             // VCO look up table
                        VCO_SINE_TABLE_SIZE,                         // VCO look up table size
-                       LPF_CUTOFF_FREQUENCY / SAMPLE_RATE,          // Carrier frequency
+                       LPF_CUTOFF_FREQUENCY / SAMPLE_RATE_HZ,       // Carrier frequency
                        pPLLLoopFilterState,                         // Pointer to loop filter state
                        pPLLLoopFilterCoeffs,                        // Pointer to loop filter coefficients
                        &PLLLoopFilterIndex,                         // Pointer to loop filter index
@@ -85,7 +85,7 @@ int main (
                         SIGLIB_SINE_WAVE,                           // Signal type - Sine wave
                         SIGLIB_ONE,                                 // Signal peak level
                         SIGLIB_FILL,                                // Fill (overwrite) or add to existing array contents
-                        CARRIER_FREQ / SAMPLE_RATE,                 // Signal frequency
+                        CARRIER_FREQ / SAMPLE_RATE_HZ,              // Signal frequency
                         SIGLIB_ZERO,                                // D.C. Offset
                         SIGLIB_ZERO,                                // Unused
                         SIGLIB_ZERO,                                // Signal end value - Unused
@@ -98,7 +98,7 @@ int main (
                  SAMPLE_LENGTH,                                     // Dataset length
                  "Original Sine Wave",                              // Dataset title
                  TimeIndex,                                         // Minimum X value
-                 TimeIndex + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                 TimeIndex + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ), // Maximum X value
                  "lines",                                           // Graph type
                  "blue",                                            // Colour
                  GPC_NEW);                                          // New graph
@@ -109,7 +109,7 @@ int main (
                          VCO_MODULATION_INDEX,                      // VCO modulation index
                          pVCOLookUpTable,                           // VCO look up table
                          VCO_SINE_TABLE_SIZE,                       // VCO look up table size
-                         CARRIER_FREQ / SAMPLE_RATE,                // Carrier frequency
+                         CARRIER_FREQ / SAMPLE_RATE_HZ,             // Carrier frequency
                          pPLLLoopFilterState,                       // Pointer to loop filter state
                          pPLLLoopFilterCoeffs,                      // Pointer to loop filter coefficients
                          &PLLLoopFilterIndex,                       // Pointer to loop filter index
@@ -126,11 +126,11 @@ int main (
                  SAMPLE_LENGTH,                                     // Dataset length
                  "PLL Output",                                      // Dataset title
                  TimeIndex,                                         // Minimum X value
-                 TimeIndex + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                 TimeIndex + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ), // Maximum X value
                  "lines",                                           // Graph type
                  "red",                                             // Colour
                  GPC_ADD);                                          // New graph
-    TimeIndex += (SLData_t) SAMPLE_LENGTH / SAMPLE_RATE;
+    TimeIndex += (SLData_t) SAMPLE_LENGTH / SAMPLE_RATE_HZ;
 //        printf ("TI = %lf\n", TimeIndex);
 
   } while (tolower (getchar ()) != 'x');

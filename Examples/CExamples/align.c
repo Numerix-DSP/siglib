@@ -1,6 +1,6 @@
 // SigLib - array alignment and display program
 // The datasets are aligned using correlation
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 #include <stdio.h>
 #include <string.h>
@@ -34,9 +34,7 @@ void SIGLIB_FUNC_DECL SUF_PrintAlignedArrays (
   const SLData_t * pSrc2,
   const SLArrayIndex_t ArrayLength)
 {
-  SLArrayIndex_t  i;
-
-  for (i = 0; i < ArrayLength; i++) {
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
     printf ("[%d] = %1.6lf\t\t[%d] = %1.6lf\n", (SLInt32_t) i, *pSrc1++, (SLInt32_t) i, *pSrc2++);
   }
   printf ("\n");

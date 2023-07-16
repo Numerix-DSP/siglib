@@ -1,5 +1,5 @@
 // SigLib BPSK With 8KHz Sample Rate Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Simulating :
 // 600 bps
@@ -31,7 +31,7 @@
 #define SAMPLE_LENGTH                   512
 #define NUMBER_OF_LOOPS                 8
 
-#define SAMPLE_RATE                     8000.
+#define SAMPLE_RATE_HZ                  8000.
 #define BAUD_RATE                       600.
 #define CARRIER_FREQ                    1200.
 
@@ -39,7 +39,7 @@
 #define SYMBOLS_PER_DATA_SET            24                          // Number of symbols per data set - 3 bytes * # symbols per byte
 #define MAX_RX_STRING_LENGTH            80                          // Maximum length of an Rx string
 #define CARRIER_TABLE_FREQ              100.                        // Frequency of sine wave in table
-#define CARRIER_SINE_TABLE_SIZE         ((SLArrayIndex_t)(SAMPLE_RATE / CARRIER_TABLE_FREQ))  // Number of samples in each of cos and sine table
+#define CARRIER_SINE_TABLE_SIZE         ((SLArrayIndex_t)(SAMPLE_RATE_HZ / CARRIER_TABLE_FREQ)) // Number of samples in each of cos and sine table
 #define RX_STARTUP_DELAY                1                           // Rxr startup delay (# symbols) to allow correct synchronization with transmitter
 #define RX_BIT_COUNT_START              0                           // Starting phase of Rx bit count
 
@@ -90,7 +90,6 @@ int main (
 
   SLData_t        TimeIndex = SIGLIB_ZERO;
 
-  SLArrayIndex_t  i, j;
   SLFixData_t     LoopCount;
   SLArrayIndex_t  TxBitIndex;
   SLArrayIndex_t  RxStartUpDelayCount = 0;                          // Rx startup delay count
@@ -142,14 +141,14 @@ int main (
 #endif
 #if DEBUG_LOG_FILE
   SUF_ClearDebugfprintf ();
-  for (i = 0; i < 20; i++) {
+  for (SLArrayIndex_t i = 0; i < 20; i++) {
     SUF_Debugfprintf ("TxString[%d]: ", (int) i);
     dpchar (TxString[i]);
   }
 #endif
 
   SIF_BpskModulate (pCarrierTable,                                  // Carrier table pointer
-                    (CARRIER_TABLE_FREQ / SAMPLE_RATE),             // Carrier phase increment per sample (radians / 2π)
+                    (CARRIER_TABLE_FREQ / SAMPLE_RATE_HZ),          // Carrier phase increment per sample (radians / 2π)
                     &TxSampleCount,                                 // Transmitter sample count - tracks samples
                     CARRIER_SINE_TABLE_SIZE);                       // Carrier sine table size
 
@@ -157,7 +156,7 @@ int main (
   SIF_BpskDemodulate (&CostasLpVCOPhase,                            // VCO phase
                       pVCOLookUpTable,                              // VCO look up table
                       VCO_SINE_TABLE_SIZE,                          // VCO look up table size
-                      CARRIER_FREQ / SAMPLE_RATE,                   // Carrier phase increment per sample (radians / 2π)
+                      CARRIER_FREQ / SAMPLE_RATE_HZ,                // Carrier phase increment per sample (radians / 2π)
                       pCostasLpLPF1State,                           // Pointer to loop filter 1 state
                       &CostasLpLPF1Index,                           // Pointer to loop filter 1 index
                       pCostasLpLPF2State,                           // Pointer to loop filter 2 state
@@ -175,7 +174,7 @@ int main (
   for (LoopCount = 0; LoopCount < NUMBER_OF_LOOPS; LoopCount++) {
     DataArrayOffset = SIGLIB_AI_ZERO;                               // Reset offset into array
 
-    for (i = 0; i < SYMBOLS_PER_DATA_SET; i += SIGLIB_BYTE_LENGTH) {
+    for (SLArrayIndex_t i = 0; i < SYMBOLS_PER_DATA_SET; i += SIGLIB_BYTE_LENGTH) {
       for (TxBitIndex = 0; TxBitIndex < SIGLIB_BYTE_LENGTH; TxBitIndex++) {
         if (SamplesPerSymbolCounter == 2) {                         // Account for non integer number of samples per symbol
           SamplesPerSymbolOffset = 1;
@@ -202,8 +201,8 @@ int main (
                  pData,                                             // Dataset
                  SAMPLE_LENGTH,                                     // Dataset length
                  "Modulated Signal",                                // Dataset title
-                 ((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount, // Minimum X value
-                 (((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                 ((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount,  // Minimum X value
+                 (((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),  // Maximum X value
                  "lines",                                           // Graph type
                  "blue",                                            // Colour
                  GPC_NEW);                                          // New graph
@@ -215,8 +214,8 @@ int main (
     SamplesPerSymbolOffset = SIGLIB_AI_ZERO;                        // Reset samples per symbol offset for receiver
     DataArrayOffset = SIGLIB_AI_ZERO;                               // Reset offset into array
 
-    for (i = 0; i < SYMBOLS_PER_DATA_SET; i += SIGLIB_BYTE_LENGTH) {
-      for (j = 0; j < SIGLIB_BYTE_LENGTH; j++) {
+    for (SLArrayIndex_t i = 0; i < SYMBOLS_PER_DATA_SET; i += SIGLIB_BYTE_LENGTH) {
+      for (SLArrayIndex_t j = 0; j < SIGLIB_BYTE_LENGTH; j++) {
         if (SamplesPerSymbolCounter == 2) {                         // Account for non integer number of samples per symbol
           SamplesPerSymbolOffset = 1;
           SamplesPerSymbolCounter = SIGLIB_AI_ZERO;
@@ -231,7 +230,7 @@ int main (
                                                     VCO_MODULATION_INDEX, // VCO modulation index
                                                     pVCOLookUpTable,  // VCO look up table
                                                     VCO_SINE_TABLE_SIZE,  // VCO look up table size
-                                                    CARRIER_FREQ / SAMPLE_RATE, // Carrier frequency
+                                                    CARRIER_FREQ / SAMPLE_RATE_HZ,  // Carrier frequency
                                                     pCostasLpLPF1State, // Pointer to loop filter 1 state
                                                     &CostasLpLPF1Index, // Pointer to loop filter 1 index
                                                     pCostasLpLPF2State, // Pointer to loop filter 2 state
@@ -253,7 +252,7 @@ int main (
                                                VCO_MODULATION_INDEX,  // VCO modulation index
                                                pVCOLookUpTable,     // VCO look up table
                                                VCO_SINE_TABLE_SIZE, // VCO look up table size
-                                               CARRIER_FREQ / SAMPLE_RATE,  // Carrier frequency
+                                               CARRIER_FREQ / SAMPLE_RATE_HZ, // Carrier frequency
                                                pCostasLpLPF1State,  // Pointer to loop filter 1 state
                                                &CostasLpLPF1Index,  // Pointer to loop filter 1 index
                                                pCostasLpLPF2State,  // Pointer to loop filter 2 state
@@ -291,8 +290,8 @@ int main (
                  DebugArray,                                        // Dataset
                  SAMPLE_LENGTH,                                     // Dataset length
                  "Demodulated Data",                                // Dataset title
-                 ((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount, // Minimum X value
-                 (((double) SAMPLE_LENGTH / SAMPLE_RATE) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE),  // Maximum X value
+                 ((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount,  // Minimum X value
+                 (((double) SAMPLE_LENGTH / SAMPLE_RATE_HZ) * (double) LoopCount) + ((double) (SAMPLE_LENGTH - 1) / SAMPLE_RATE_HZ),  // Maximum X value
                  "lines",                                           // Graph type
                  "blue",                                            // Colour
                  GPC_NEW);                                          // New graph
@@ -300,14 +299,14 @@ int main (
     getchar ();
 #endif
 #endif
-    TimeIndex += (DataArrayOffset / SAMPLE_RATE);
+    TimeIndex += (DataArrayOffset / SAMPLE_RATE_HZ);
   }
 
   *RxStringPtr = 0;                                                 // Terminate string for printf
   printf ("BPSK8 Received string: %s\n", RxString);
 
 #if DEBUG_LOG_FILE
-  for (i = 0; i < 20; i++) {                                        // Write Rx bit pattern to log file
+  for (SLArrayIndex_t i = 0; i < 20; i++) {                         // Write Rx bit pattern to log file
     SUF_Debugfprintf ("RxString[%d]: ", (int) i);
     dpchar (RxString[i]);
   }

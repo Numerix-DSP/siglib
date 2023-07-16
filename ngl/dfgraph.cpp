@@ -18,11 +18,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
 
 This sofware is also available with a commercial license, for use in
 proprietary, research, government or commercial applications.
-Please contact Sigma Numerix Ltd. for further details :
+Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2022, Alpha Numerix, All rights reserved.
+Copyright (c) 2022, Delta Numerix, All rights reserved.
 ****************************************************************************/
 
 // Include files
@@ -167,8 +167,7 @@ void GraphDisplay::OnGraphTypeChanged (
   if (GraphType == GRAPH_SINE) {
     double         *pTemp;
     pTemp = (double *) malloc ((size_t) (GRAPH_WIDTH * sizeof (double)));
-    int i;
-    for (i = 0; i < GRAPH_WIDTH; i++) {
+    for (int i = 0; i < GRAPH_WIDTH; i++) {
       pTemp[i] = sin ((TWO_PI * ((double) i)) / 512.);
     }
     DataGraph->AddDataSet (pTemp, GRAPH_SCALE, *wxBLUE, GRAPH_WIDTH);
@@ -190,8 +189,7 @@ void GraphDisplay::OnGraphTypeChanged (
   else if (GraphType == GRAPH_COSINE) {
     double         *pTemp;
     pTemp = (double *) malloc ((size_t) (GRAPH_WIDTH * sizeof (double)));
-    int i;
-    for (i = 0; i < GRAPH_WIDTH; i++) {
+    for (int i = 0; i < GRAPH_WIDTH; i++) {
       pTemp[i] = cos ((TWO_PI * ((double) i)) / 512.);
     }
     DataGraph->AddDataSet (pTemp, GRAPH_SCALE, *wxBLUE, GRAPH_WIDTH);

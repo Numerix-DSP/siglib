@@ -1,6 +1,6 @@
 // Bilinear Transform IIR Filter Example.
 // Generates a low pass filter
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -8,7 +8,7 @@
 #include <gnuplot_c.h>                                              // Gnuplot/C
 
 // Define constants
-#define SAMPLE_RATE             10.
+#define SAMPLE_RATE_HZ          10.
 #define PREWARP_MATCH_FREQUENCY SIGLIB_TWO
 #define REQUIRED_FILTER_GAIN    10.
 
@@ -45,7 +45,6 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot objects
   h_GPC_Plot     *hPZPlot;
 
-  SLArrayIndex_t  i;
   SLData_t        Max;
   SLArrayIndex_t  NumberOfZeros = NUMBER_OF_ZEROS;                  // Used for initialising correct number
   SLArrayIndex_t  NumberOfPoles = NUMBER_OF_POLES;                  // of  s-plane poles and zeros
@@ -88,12 +87,12 @@ int main (
 
 
   printf ("\nComplex s-plane zeros\n");                             // Print s-plane poles and zeros
-  for (i = 0; i < NumberOfZeros; i++) {
+  for (SLArrayIndex_t i = 0; i < NumberOfZeros; i++) {
     SUF_PrintRectangular (SPlaneZeros[i]);
   }
 
   printf ("\nComplex s-plane poles\n");
-  for (i = 0; i < NUMBER_OF_POLES; i++) {
+  for (SLArrayIndex_t i = 0; i < NUMBER_OF_POLES; i++) {
     SUF_PrintRectangular (SPlanePoles[i]);
   }
 
@@ -106,7 +105,7 @@ int main (
                          SPlanePoles,                               // S-plane poles
                          ZPlaneZeros,                               // Z-plane zeros
                          ZPlanePoles,                               // Z-plane poles
-                         SAMPLE_RATE,                               // Sample rate
+                         SAMPLE_RATE_HZ,                            // Sample rate
                          PREWARP_MATCH_FREQUENCY,                   // Pre-warp frequency
                          SIGLIB_OFF,                                // Pre-warp switch
                          NumberOfZeros,                             // Number of zeros
@@ -116,12 +115,12 @@ int main (
 // additional zeros places at Fs/2
 
   printf ("\nComplex z-plane zeros\n");                             // Print z-plane poles and zeros
-  for (i = 0; i < NumberOfZeros; i++) {
+  for (SLArrayIndex_t i = 0; i < NumberOfZeros; i++) {
     SUF_PrintRectangular (ZPlaneZeros[i]);
   }
 
   printf ("\nComplex z-plane poles\n");
-  for (i = 0; i < NUMBER_OF_POLES; i++) {
+  for (SLArrayIndex_t i = 0; i < NUMBER_OF_POLES; i++) {
     SUF_PrintRectangular (ZPlanePoles[i]);
   }
 
@@ -167,7 +166,7 @@ int main (
 // Print filter coefficients
   printf ("\nIIR filter coefficients : b(0), b(1), b(2), a(1), a(2)\n\n");
 
-  for (i = 0; i < IIR_FILTER_STAGES; i++) {
+  for (SLArrayIndex_t i = 0; i < IIR_FILTER_STAGES; i++) {
     printf ("%le, %le, %le, %le, %le\n", *(pIIRCoeffs + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)),
             *(pIIRCoeffs + 1 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)), *(pIIRCoeffs + 2 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)),
             *(pIIRCoeffs + 3 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)), *(pIIRCoeffs + 4 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)));
@@ -218,7 +217,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Impulse response",                                  // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE),          // Maximum X value
+               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE_HZ),       // Maximum X value
                "lines",                                             // Graph type
                "magenta",                                           // Colour
                GPC_NEW);                                            // New graph
@@ -255,7 +254,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Step response",                                     // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE),          // Maximum X value
+               ((double) (PLOT_LENGTH - 1) / SAMPLE_RATE_HZ),       // Maximum X value
                "lines",                                             // Graph type
                "magenta",                                           // Colour
                GPC_NEW);                                            // New graph
@@ -306,7 +305,7 @@ int main (
                PLOT_LENGTH,                                         // Dataset length
                "Frequency response",                                // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               (SAMPLE_RATE / SIGLIB_TWO),                          // Maximum X value
+               (SAMPLE_RATE_HZ / SIGLIB_TWO),                       // Maximum X value
                "lines",                                             // Graph type
                "magenta",                                           // Colour
                GPC_NEW);                                            // New graph

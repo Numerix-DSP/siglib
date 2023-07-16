@@ -1,5 +1,5 @@
 // SigLib Resampling Example
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -12,9 +12,9 @@
 
 #define SOURCE_LENGTH           512                                 // Input sample length
 #define DST_ARRAY_LENGTH        (SOURCE_LENGTH*2)                   // Output sample length - allow for growth
-#define ORIGINAL_SAMPLE_RATE    8000.
-#define NEW_DOWN_SAMPLE_RATE    7000.
-#define NEW_UP_SAMPLE_RATE      10000.
+#define ORIGINAL_SAMPLE_RATE_HZ 8000.
+#define NEW_DOWN_SAMPLE_RATE_HZ 7000.
+#define NEW_UP_SAMPLE_RATE_HZ   10000.
 
 // Declare global variables and arrays
 static SLData_t *pSrc, *pDst;
@@ -75,7 +75,7 @@ int main (
                SOURCE_LENGTH,                                       // Dataset length
                "Sine Waveform",                                     // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               (((double) SOURCE_LENGTH - 1) / ((double) ORIGINAL_SAMPLE_RATE)),  // Maximum X value
+               (((double) SOURCE_LENGTH - 1) / ((double) ORIGINAL_SAMPLE_RATE_HZ)), // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -91,7 +91,7 @@ int main (
 
   ResultSampleLength = SDA_ResampleLinear (pSrc,                    // Pointer to source array
                                            pDst,                    // Pointer to destination array
-                                           ORIGINAL_SAMPLE_RATE / NEW_DOWN_SAMPLE_RATE, // New sample period
+                                           ORIGINAL_SAMPLE_RATE_HZ / NEW_DOWN_SAMPLE_RATE_HZ, // New sample period
                                            SOURCE_LENGTH);          // Input dataset length
 
   gpc_plot_2d (h2DPlot,                                             // Graph handle
@@ -99,7 +99,7 @@ int main (
                ResultSampleLength,                                  // Dataset length
                "Down sampled sine waveform - using linear interpolation", // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               (((double) SOURCE_LENGTH - 1) / ((double) NEW_DOWN_SAMPLE_RATE)),  // Maximum X value
+               (((double) SOURCE_LENGTH - 1) / ((double) NEW_DOWN_SAMPLE_RATE_HZ)), // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -116,7 +116,7 @@ int main (
 
   ResultSampleLength = SDA_ResampleLinear (pSrc,                    // Pointer to source array
                                            pDst,                    // Pointer to destination array
-                                           ORIGINAL_SAMPLE_RATE / NEW_UP_SAMPLE_RATE, // New sample period
+                                           ORIGINAL_SAMPLE_RATE_HZ / NEW_UP_SAMPLE_RATE_HZ, // New sample period
                                            SOURCE_LENGTH);          // Input dataset length
 
   gpc_plot_2d (h2DPlot,                                             // Graph handle
@@ -124,7 +124,7 @@ int main (
                ResultSampleLength,                                  // Dataset length
                "Up sampled sine waveform - using linear interpolation", // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               (((double) SOURCE_LENGTH - 1) / ((double) NEW_UP_SAMPLE_RATE)),  // Maximum X value
+               (((double) SOURCE_LENGTH - 1) / ((double) NEW_UP_SAMPLE_RATE_HZ)), // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -163,7 +163,7 @@ int main (
                                          pDst,                      // Pointer to destination array
                                          SincLUT,                   // Pointer to LUT array
                                          SincLookUpTablePhaseGain,  // Look up table phase gain
-                                         ORIGINAL_SAMPLE_RATE / NEW_DOWN_SAMPLE_RATE, // New sample period
+                                         ORIGINAL_SAMPLE_RATE_HZ / NEW_DOWN_SAMPLE_RATE_HZ, // New sample period
                                          NUMBER_OF_ADJ_SAMPLES,     // Number of adjacent samples
                                          SOURCE_LENGTH);            // Source dataset length
 
@@ -172,7 +172,7 @@ int main (
                ResultSampleLength,                                  // Dataset length
                "Down sampled sine waveform - using sinc interpolation", // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               (((double) SOURCE_LENGTH - 1) / ((double) NEW_DOWN_SAMPLE_RATE)),  // Maximum X value
+               (((double) SOURCE_LENGTH - 1) / ((double) NEW_DOWN_SAMPLE_RATE_HZ)), // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
@@ -196,7 +196,7 @@ int main (
                                          pDst,                      // Pointer to destination array
                                          SincLUT,                   // Pointer to LUT array
                                          SincLookUpTablePhaseGain,  // Look up table phase gain
-                                         ORIGINAL_SAMPLE_RATE / NEW_UP_SAMPLE_RATE, // New sample period
+                                         ORIGINAL_SAMPLE_RATE_HZ / NEW_UP_SAMPLE_RATE_HZ, // New sample period
                                          NUMBER_OF_ADJ_SAMPLES,     // Number of adjacent samples
                                          SOURCE_LENGTH);            // Source dataset length
 
@@ -205,7 +205,7 @@ int main (
                ResultSampleLength,                                  // Dataset length
                "Up sampled sine waveform - using sinc interpolation", // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               (((double) SOURCE_LENGTH - 1) / ((double) NEW_UP_SAMPLE_RATE)),  // Maximum X value
+               (((double) SOURCE_LENGTH - 1) / ((double) NEW_UP_SAMPLE_RATE_HZ)), // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph

@@ -1,6 +1,6 @@
 // SigLib Correlation Example.
 // Pulls a signal outof noise with successive auto-correlations
-// Copyright (c) 2023 Alpha Numerix All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -24,7 +24,6 @@ int main (
 
   SLData_t        sineLevel;
   SLFixData_t     numIters;
-  SLArrayIndex_t  i;
 
   if (argc != 3) {
     printf ("\nThis demo pulls a signal out of noise with successive auto-correlations\n");
@@ -104,7 +103,7 @@ int main (
   printf ("\nNoisy Sine Wave\nPlease hit <Carriage Return> to continue . . .");
   getchar ();
 
-  for (i = 0; i < numIters; i++) {
+  for (SLArrayIndex_t i = 0; i < numIters; i++) {
     SDA_CorrelateCircular (pSrc1,                                   // Pointer to input array 1
                            pSrc1,                                   // Pointer to input array 2
                            pSrc2,                                   // Pointer to destination array
