@@ -3063,6 +3063,91 @@ long _stdcall   SDS_CostasQamDemodulateDebug (
 long _stdcall  SDA_Qam16DifferentialDecode (
    long,                                                           // Mapped Rx nibble
   long *);                                                          // Previous Rx nibble pointer
+void _stdcall  SIF_OpskModulate (
+   double *SIGLIB_OUTPUT_PTR_DECL,                                 // Carrier table pointer
+  double,                                                           // Carrier phase increment per sample (radians / 2Ï€)
+  long,                                                             // Sine table length
+  double *SIGLIB_OUTPUT_PTR_DECL,                                   // Carrier phase pointer
+  long *SIGLIB_OUTPUT_PTR_DECL,                                     // Sample clock pointer
+  double *SIGLIB_OUTPUT_PTR_DECL,                                   // Magnitude pointer
+  double *SIGLIB_OUTPUT_PTR_DECL,                                   // RRCF Tx I delay pointer
+  long *SIGLIB_OUTPUT_PTR_DECL,                                     // RRCF Tx I Filter Index pointer
+  double *SIGLIB_OUTPUT_PTR_DECL,                                   // RRCF Tx Q delay pointer
+  long *SIGLIB_OUTPUT_PTR_DECL,                                     // RRCF Tx Q Filter Index pointer
+  double *SIGLIB_OUTPUT_PTR_DECL,                                   // RRCF Coeffs pointer
+  double,                                                           // RRCF Period
+  double,                                                           // RRCF Roll off
+  long,                                                             // RRCF size
+  long);                                                            // RRCF enable / disable switch
+void _stdcall  SDA_OpskModulate (
+   long,                                                           // Tx tri-bit,
+  double *SIGLIB_OUTPUT_PTR_DECL,                                   // Destination data array pointer
+  double *SIGLIB_INPUT_PTR_DECL,                                    // Carrier table pointer
+  long,                                                             // Sine table length
+  double *SIGLIB_INOUT_PTR_DECL,                                    // Carrier phase pointer
+  long *SIGLIB_INOUT_PTR_DECL,                                      // Sample clock pointer
+  double *SIGLIB_INOUT_PTR_DECL,                                    // Magnitude pointer
+  long,                                                             // Carrier table increment
+  long,                                                             // Samples per symbol
+  double *SIGLIB_INOUT_PTR_DECL,                                    // RRCF Tx I delay pointer
+  long *SIGLIB_INOUT_PTR_DECL,                                      // RRCF Tx I Filter Index pointer
+  double *SIGLIB_INOUT_PTR_DECL,                                    // RRCF Tx Q delay pointer
+  long *SIGLIB_INOUT_PTR_DECL,                                      // RRCF Tx Q Filter Index pointer
+  double *SIGLIB_INPUT_PTR_DECL,                                    // RRCF Coeffs pointer
+  long,                                                             // RRCF size
+  long);                                                            // RRCF enable / disable switch
+void _stdcall  SIF_OpskDemodulate (
+   double *SIGLIB_INPUT_PTR_DECL,                                  // Carrier table pointer
+  double,                                                           // Carrier phase increment per sample (radians / 2Ï€)
+  long,                                                             // Sine table length
+  double *SIGLIB_INOUT_PTR_DECL,                                    // Carrier phase pointer
+  long *SIGLIB_INOUT_PTR_DECL,                                      // Sample clock pointer
+  double *SIGLIB_INOUT_PTR_DECL,                                    // Magnitude pointer
+  double *SIGLIB_INOUT_PTR_DECL,                                    // RRCF Rx I delay pointer
+  long *SIGLIB_INOUT_PTR_DECL,                                      // RRCF Rx I Filter Index pointer
+  double *SIGLIB_INOUT_PTR_DECL,                                    // RRCF Rx Q delay pointer
+  long *SIGLIB_INOUT_PTR_DECL,                                      // RRCF Rx Q Filter Index pointer
+  double *SIGLIB_INPUT_PTR_DECL,                                    // RRCF Coeffs pointer
+  double,                                                           // RRCF Period
+  double,                                                           // RRCF Roll off
+  long,                                                             // RRCF size
+  long);                                                            // RRCF enable / disable switch
+long _stdcall  SDA_OpskDemodulate (
+   double *SIGLIB_INPUT_PTR_DECL,                                  // Source data pointer
+  double *SIGLIB_INPUT_PTR_DECL,                                    // Carrier table pointer
+  long,                                                             // Sine table length
+  double *SIGLIB_INOUT_PTR_DECL,                                    // Carrier phase pointer
+  long *SIGLIB_INOUT_PTR_DECL,                                      // Sample clock pointer
+  double *SIGLIB_INOUT_PTR_DECL,                                    // Magnitude pointer
+  double *SIGLIB_INOUT_PTR_DECL,                                    // DemodErrorArray
+  long,                                                             // Carrier table increment
+  long,                                                             // Samples per symbol
+  double *SIGLIB_INOUT_PTR_DECL,                                    // RRCF Rx I delay pointer
+  long *SIGLIB_INOUT_PTR_DECL,                                      // RRCF Rx I Filter Index pointer
+  double *SIGLIB_INOUT_PTR_DECL,                                    // RRCF Rx Q delay pointer
+  long *SIGLIB_INOUT_PTR_DECL,                                      // RRCF Rx Q Filter Index pointer
+  double *SIGLIB_INPUT_PTR_DECL,                                    // RRCF Coeffs pointer
+  long,                                                             // RRCF size
+  long);                                                            // RRCF enable / disable switch
+long _stdcall  SDA_OpskDemodulateDebug (
+   double *SIGLIB_INPUT_PTR_DECL,                                  // Source data pointer
+  double *SIGLIB_INPUT_PTR_DECL,                                    // Carrier table pointer
+  long,                                                             // Sine table length
+  double *SIGLIB_INOUT_PTR_DECL,                                    // Carrier phase pointer
+  long *SIGLIB_INOUT_PTR_DECL,                                      // Sample clock pointer
+  double *SIGLIB_INOUT_PTR_DECL,                                    // Magnitude pointer
+  double *SIGLIB_INOUT_PTR_DECL,                                    // DemodErrorArray
+  long,                                                             // Carrier table increment
+  long,                                                             // Samples per symbol
+  double *SIGLIB_INOUT_PTR_DECL,                                    // RRCF Rx I delay pointer
+  long *SIGLIB_INOUT_PTR_DECL,                                      // RRCF Rx I Filter Index pointer
+  double *SIGLIB_INOUT_PTR_DECL,                                    // RRCF Rx Q delay pointer
+  long *SIGLIB_INOUT_PTR_DECL,                                      // RRCF Rx Q Filter Index pointer
+  double *SIGLIB_INPUT_PTR_DECL,                                    // RRCF Coeffs pointer
+  long,                                                             // RRCF size
+  long,                                                             // RRCF enable / disable switch
+  double *SIGLIB_INOUT_PTR_DECL,                                    // Eye samples pointer
+  double *SIGLIB_INOUT_PTR_DECL);                                   // Constellation points pointer
 void _stdcall  SIF_BpskModulate (
    double *SIGLIB_OUTPUT_PTR_DECL,                                 // Carrier table pointer
   double,                                                           // Carrier phase increment per sample (radians / 2Ï€)
@@ -5718,4 +5803,4 @@ void _stdcall   SDA_Multiplex (
 // Deprecated functionality - these may be removed in a later version
                     
 // End of SigLib DSP function section
-#line 7739 "siglib.h"
+#line 7829 "siglib.h"

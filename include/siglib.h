@@ -44,7 +44,7 @@ Update history :
 #ifndef _HP_VEE                                                     // The following functionality is not supported by VEE
 
 #define SIGLIB                          1                           // Indicates SigLib is being used
-#define SIGLIB_VERSION                  10.51                       // Indicates SigLib version being used
+#define SIGLIB_VERSION                  10.52                       // Indicates SigLib version being used
 #ifndef SIGLIB_ENABLE_DEBUG_LOGGING
 #define SIGLIB_ENABLE_DEBUG_LOGGING   0                             // Set to 1 to enable SUF_Debugfprintf functions in some SigLib functions
 #endif
@@ -4054,6 +4054,96 @@ extern          "C" {
   SLFixData_t SIGLIB_FUNC_DECL SDA_Qam16DifferentialDecode (
   const SLFixData_t,                                                // Mapped Rx nibble
   SLFixData_t *);                                                   // Previous Rx nibble pointer
+
+  void SIGLIB_FUNC_DECL SIF_OpskModulate (
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Carrier table pointer
+  const SLData_t,                                                   // Carrier phase increment per sample (radians / 2π)
+  const SLArrayIndex_t,                                             // Sine table length
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Carrier phase pointer
+  SLArrayIndex_t * SIGLIB_OUTPUT_PTR_DECL,                          // Sample clock pointer
+  SLComplexRect_s * SIGLIB_OUTPUT_PTR_DECL,                         // Magnitude pointer
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // RRCF Tx I delay pointer
+  SLArrayIndex_t * SIGLIB_OUTPUT_PTR_DECL,                          // RRCF Tx I Filter Index pointer
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // RRCF Tx Q delay pointer
+  SLArrayIndex_t * SIGLIB_OUTPUT_PTR_DECL,                          // RRCF Tx Q Filter Index pointer
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // RRCF Coeffs pointer
+  const SLData_t,                                                   // RRCF Period
+  const SLData_t,                                                   // RRCF Roll off
+  const SLArrayIndex_t,                                             // RRCF size
+  const SLArrayIndex_t);                                            // RRCF enable / disable switch
+
+  void SIGLIB_FUNC_DECL SDA_OpskModulate (
+  const SLFixData_t,                                                // Tx tri-bit,
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Destination data array pointer
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Carrier table pointer
+  const SLArrayIndex_t,                                             // Sine table length
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // Carrier phase pointer
+  SLArrayIndex_t * SIGLIB_INOUT_PTR_DECL,                           // Sample clock pointer
+  SLComplexRect_s * SIGLIB_INOUT_PTR_DECL,                          // Magnitude pointer
+  const SLArrayIndex_t,                                             // Carrier table increment
+  const SLFixData_t,                                                // Samples per symbol
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // RRCF Tx I delay pointer
+  SLArrayIndex_t * SIGLIB_INOUT_PTR_DECL,                           // RRCF Tx I Filter Index pointer
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // RRCF Tx Q delay pointer
+  SLArrayIndex_t * SIGLIB_INOUT_PTR_DECL,                           // RRCF Tx Q Filter Index pointer
+  SLData_t * SIGLIB_INPUT_PTR_DECL,                                 // RRCF Coeffs pointer
+  const SLArrayIndex_t,                                             // RRCF size
+  const SLArrayIndex_t);                                            // RRCF enable / disable switch
+
+  void SIGLIB_FUNC_DECL SIF_OpskDemodulate (
+  SLData_t * SIGLIB_INPUT_PTR_DECL,                                 // Carrier table pointer
+  const SLData_t,                                                   // Carrier phase increment per sample (radians / 2π)
+  const SLArrayIndex_t,                                             // Sine table length
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // Carrier phase pointer
+  SLArrayIndex_t * SIGLIB_INOUT_PTR_DECL,                           // Sample clock pointer
+  SLComplexRect_s * SIGLIB_INOUT_PTR_DECL,                          // Magnitude pointer
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // RRCF Rx I delay pointer
+  SLArrayIndex_t * SIGLIB_INOUT_PTR_DECL,                           // RRCF Rx I Filter Index pointer
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // RRCF Rx Q delay pointer
+  SLArrayIndex_t * SIGLIB_INOUT_PTR_DECL,                           // RRCF Rx Q Filter Index pointer
+  SLData_t * SIGLIB_INPUT_PTR_DECL,                                 // RRCF Coeffs pointer
+  const SLData_t,                                                   // RRCF Period
+  const SLData_t,                                                   // RRCF Roll off
+  const SLArrayIndex_t,                                             // RRCF size
+  const SLArrayIndex_t);                                            // RRCF enable / disable switch
+
+  SLFixData_t SIGLIB_FUNC_DECL SDA_OpskDemodulate (
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Source data pointer
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Carrier table pointer
+  const SLArrayIndex_t,                                             // Sine table length
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // Carrier phase pointer
+  SLArrayIndex_t * SIGLIB_INOUT_PTR_DECL,                           // Sample clock pointer
+  SLComplexRect_s * SIGLIB_INOUT_PTR_DECL,                          // Magnitude pointer
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // DemodErrorArray
+  const SLArrayIndex_t,                                             // Carrier table increment
+  const SLFixData_t,                                                // Samples per symbol
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // RRCF Rx I delay pointer
+  SLArrayIndex_t * SIGLIB_INOUT_PTR_DECL,                           // RRCF Rx I Filter Index pointer
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // RRCF Rx Q delay pointer
+  SLArrayIndex_t * SIGLIB_INOUT_PTR_DECL,                           // RRCF Rx Q Filter Index pointer
+  SLData_t * SIGLIB_INPUT_PTR_DECL,                                 // RRCF Coeffs pointer
+  const SLArrayIndex_t,                                             // RRCF size
+  const SLArrayIndex_t);                                            // RRCF enable / disable switch
+
+  SLFixData_t SIGLIB_FUNC_DECL SDA_OpskDemodulateDebug (
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Source data pointer
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Carrier table pointer
+  const SLArrayIndex_t,                                             // Sine table length
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // Carrier phase pointer
+  SLArrayIndex_t * SIGLIB_INOUT_PTR_DECL,                           // Sample clock pointer
+  SLComplexRect_s * SIGLIB_INOUT_PTR_DECL,                          // Magnitude pointer
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // DemodErrorArray
+  const SLArrayIndex_t,                                             // Carrier table increment
+  const SLFixData_t,                                                // Samples per symbol
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // RRCF Rx I delay pointer
+  SLArrayIndex_t * SIGLIB_INOUT_PTR_DECL,                           // RRCF Rx I Filter Index pointer
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // RRCF Rx Q delay pointer
+  SLArrayIndex_t * SIGLIB_INOUT_PTR_DECL,                           // RRCF Rx Q Filter Index pointer
+  SLData_t * SIGLIB_INPUT_PTR_DECL,                                 // RRCF Coeffs pointer
+  const SLArrayIndex_t,                                             // RRCF size
+  const SLArrayIndex_t,                                             // RRCF enable / disable switch
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // Eye samples pointer
+  SLComplexRect_s * SIGLIB_INOUT_PTR_DECL);                         // Constellation points pointer
 
   void SIGLIB_FUNC_DECL SIF_BpskModulate (
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Carrier table pointer

@@ -1,6 +1,29 @@
 SigLib (Tm) Revision Update History File
 ========================================
 
+VERSION : 10.52
+RELEASE DATE : 18/07/2023
+_________________________
+
+Additional Functionality
+  SIF_OpskModulate, SDA_OpskModulate, SIF_OpskDemodulate, SDA_OpskDemodulate, SDA_OpskDemodulateDebug
+
+Operational Changes :
+  None.
+
+Additional Processor / Compiler Support :
+  None.
+
+Optimisation Changes :
+  None.
+
+Bug Fixes :
+  None.
+
+Notes :
+  None.
+
+
 VERSION : 10.51
 RELEASE DATE : 16/07/2023
 _________________________

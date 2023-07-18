@@ -407,8 +407,8 @@ void SIGLIB_FUNC_DECL SDA_Cifft (
 * Parameters:
 *   const SLData_t Src[],
 *   SLData_t Dst[],
-*   const SLArrayIndex_t * SIGLIB_PTR_DECL,     Bit reverse address table ptr
-*   const SLArrayIndex_t fftLength,
+*   const SLArrayIndex_t *,   Bit reverse address table ptr
+*   const SLArrayIndex_t      fftLength,
 *
 * Return value:
 *   void

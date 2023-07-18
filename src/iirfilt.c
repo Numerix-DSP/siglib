@@ -47,7 +47,7 @@ Description : SigLib DSP library IIR filter routines.
 * Function: SIF_Iir
 *
 * Parameters:
-*   SLData_t * SIGLIB_PTR_DECL pState,
+*   SLData_t *pState,
 *   const SLArrayIndex_t NumberOfBiquads
 *
 * Return value:
@@ -75,8 +75,8 @@ void SIGLIB_FUNC_DECL SIF_Iir (
 *
 * Parameters:
 *   const SLData_t Source sample,
-*   SLData_t * SIGLIB_PTR_DECL pState,
-*   const SLData_t * SIGLIB_PTR_DECL pCoeffs,
+*   SLData_t *pState,
+*   const SLData_t *pCoeffs,
 *   const SLArrayIndex_t NumberOfBiquads
 *
 * Return value:
@@ -118,10 +118,10 @@ SLData_t SIGLIB_FUNC_DECL SDS_Iir (
 * Function: SDA_Iir
 *
 * Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pSrc,
-*   SLData_t * SIGLIB_PTR_DECL pDst,
-*   SLData_t * SIGLIB_PTR_DECL pState,
-*   const SLData_t * SIGLIB_PTR_DECL pCoeffs,
+*   const SLData_t *pSrc,
+*   SLData_t *pDst,
+*   SLData_t *pState,
+*   const SLData_t *pCoeffs,
 *   const SLArrayIndex_t NumberOfBiquads,
 *   const SLArrayIndex_t SampleLength
 *
@@ -179,8 +179,8 @@ void SIGLIB_FUNC_DECL SDA_Iir (
 *
 * Parameters:
 *   const SLData_t Source sample,
-*   SLData_t * SIGLIB_PTR_DECL pState,
-*   const SLData_t * SIGLIB_PTR_DECL pCoeffs,
+*   SLData_t *pState,
+*   const SLData_t *pCoeffs,
 *   const SLArrayIndex_t NumberOfBiquads
 *
 * Return value:
@@ -223,10 +223,10 @@ SLData_t SIGLIB_FUNC_DECL SDS_IirMac (
 * Function: SDA_IirMac
 *
 * Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pSrc,
-*   SLData_t * SIGLIB_PTR_DECL pDst,
-*   SLData_t * SIGLIB_PTR_DECL pState,
-*   const SLData_t * SIGLIB_PTR_DECL pCoeffs,
+*   const SLData_t *pSrc,
+*   SLData_t *pDst,
+*   SLData_t *pState,
+*   const SLData_t *pCoeffs,
 *   const SLArrayIndex_t NumberOfBiquads,
 *   const SLArrayIndex_t SampleLength
 *
@@ -284,8 +284,8 @@ void SIGLIB_FUNC_DECL SDA_IirMac (
 * Function: SIF_IirOrderN
 *
 * Parameters:
-*   SLData_t * SIGLIB_PTR_DECL pState,
-    SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
+*   SLData_t *pState,
+    SLArrayIndex_t *pFilterIndex,
 *   const SLArrayIndex_t NumberOfPoles
 *
 * Return value:
@@ -317,9 +317,9 @@ void SIGLIB_FUNC_DECL SIF_IirOrderN (
 *
 * Parameters:
 *   const SLData_t Source,
-*   SLData_t * SIGLIB_PTR_DECL pState,
-*   const SLData_t * SIGLIB_PTR_DECL pCoeffs,
-*   SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
+*   SLData_t *pState,
+*   const SLData_t *pCoeffs,
+*   SLArrayIndex_t *pFilterIndex,
 *   const SLArrayIndex_t FilterOrder
 *
 * Return value:
@@ -374,11 +374,11 @@ SLData_t SIGLIB_FUNC_DECL SDS_IirOrderN (
 * Function: SDA_IirOrderN
 *
 * Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pSrc,
-*   SLData_t * SIGLIB_PTR_DECL pDst,
-*   SLData_t * SIGLIB_PTR_DECL pState,
-*   const SLData_t * SIGLIB_PTR_DECL pCoeffs,
-*   SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
+*   const SLData_t *pSrc,
+*   SLData_t *pDst,
+*   SLData_t *pState,
+*   const SLData_t *pCoeffs,
+*   SLArrayIndex_t *pFilterIndex,
 *   const SLArrayIndex_t FilterOrder,
 *   const SLArrayIndex_t SampleLength
 *
@@ -444,7 +444,7 @@ void SIGLIB_FUNC_DECL SDA_IirOrderN (
 * Function: SIF_IirNc
 *
 * Parameters:
-*   SLData_t * SIGLIB_PTR_DECL pState
+*   SLData_t *pState
 *   const SLArrayIndex_t NumberOfBiquads
 *   const SLArrayIndex_t SampleLength
 *
@@ -474,7 +474,7 @@ void SIGLIB_FUNC_DECL SIF_IirNc (
 * Parameters:
 *   const SLData_t pSrc,
 *   SLData_t pDst,
-*   SLData_t * SIGLIB_PTR_DECL pState,
+*   SLData_t *pState,
 *   const SLData_t * SIGLIB_PTR_DECL pCoeffs,
 *   const SLArrayIndex_t NumberOfBiquads,
 *   const SLArrayIndex_t SampleLength
@@ -512,10 +512,10 @@ void SIGLIB_FUNC_DECL SDA_IirNc (
 * Function: SDA_BilinearTransform
 *
 * Parameters:
-*   const SLComplexRect_s * SIGLIB_PTR_DECL SPlaneZeros,    - S-plane zeros
-*   const SLComplexRect_s * SIGLIB_PTR_DECL SPlanePoles,    - S-plane poles
-*   SLComplexRect_s * SIGLIB_PTR_DECL ZPlaneZeros,      - Z-plane zeros
-*   SLComplexRect_s * SIGLIB_PTR_DECL ZPlanePoles,      - Z-plane poles
+*   const SLComplexRect_s *SPlaneZeros, - S-plane zeros
+*   const SLComplexRect_s *SPlanePoles, - S-plane poles
+*   SLComplexRect_s *ZPlaneZeros,       - Z-plane zeros
+*   SLComplexRect_s *ZPlanePoles,       - Z-plane poles
 *   const SLData_t SampleRate,          - Sample rate
 *   const SLData_t PreWarpFreq,         - Pre-warp frequency
 *   const SLArrayIndex_t PreWarpSwitch, - Pre-warp switch
@@ -651,11 +651,11 @@ void SIGLIB_FUNC_DECL SDA_MatchedZTransform (
 * Function: SDA_IirZplaneToCoeffs
 *
 * Parameters:
-*   const SLComplexRect_s * SIGLIB_PTR_DECL ZPlaneZeros,    - Z-plane zeros
-*   const SLComplexRect_s * SIGLIB_PTR_DECL ZPlanePoles,    - Z-plane poles
-*   SLData_t * SIGLIB_PTR_DECL pIIRCoeffs,  - IIR filter coefficients
-*   const NumberOfZeros             - Number of zeros
-*   const NumberOfPoles             - Number of poles
+*   const SLComplexRect_s *ZPlaneZeros, - Z-plane zeros
+*   const SLComplexRect_s *ZPlanePoles, - Z-plane poles
+*   SLData_t *pIIRCoeffs,               - IIR filter coefficients
+*   const NumberOfZeros                 - Number of zeros
+*   const NumberOfPoles                 - Number of poles
 *
 * Return value:
 *   void
@@ -742,11 +742,11 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneToCoeffs (
 * Function: SDA_IirZplanePolarToCoeffs
 *
 * Parameters:
-*   const SLComplexRect_s * SIGLIB_PTR_DECL ZPlaneZeros,    - Z-plane zeros
-*   const SLComplexRect_s * SIGLIB_PTR_DECL ZPlanePoles,    - Z-plane poles
-*   SLData_t * SIGLIB_PTR_DECL pIIRCoeffs,  - IIR filter coefficients
-*   const NumberOfZeros             - Number of zeros
-*   const NumberOfPoles             - Number of poles
+*   const SLComplexRect_s *ZPlaneZeros, - Z-plane zeros
+*   const SLComplexRect_s *ZPlanePoles, - Z-plane poles
+*   SLData_t *pIIRCoeffs,               - IIR filter coefficients
+*   const NumberOfZeros                 - Number of zeros
+*   const NumberOfPoles                 - Number of poles
 *
 * Return value:
 *   void
@@ -826,15 +826,15 @@ void SIGLIB_FUNC_DECL SDA_IirZplanePolarToCoeffs (
 * Function: SDA_IirZplaneLpfToLpf
 *
 * Parameters:
-*   const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlaneZeros, - Source z-plane zeros
-*   const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlanePoles, - Source z-plane poles
-*   SLComplexRect_s * SIGLIB_PTR_DECL DstZPlaneZeros,       - Destination z-plane zeros
-*   SLComplexRect_s * SIGLIB_PTR_DECL DstZPlanePoles,       - Destination z-plane poles
-*   const SLData_t Frequency1,      - Cut off freq. of source filter
-*   const SLData_t Frequency2,      - Cut off freq. of destn. filter
-*   const SLData_t SampleRate,      - Sample rate
-*   const NumberOfZeros             - Number of zeros
-*   const NumberOfPoles             - Number of poles
+*   const SLComplexRect_s *SrcZPlaneZeros,  - Source z-plane zeros
+*   const SLComplexRect_s *SrcZPlanePoles,  - Source z-plane poles
+*   SLComplexRect_s *DstZPlaneZeros,        - Destination z-plane zeros
+*   SLComplexRect_s *DstZPlanePoles,        - Destination z-plane poles
+*   const SLData_t Frequency1,              - Cut off freq. of source filter
+*   const SLData_t Frequency2,              - Cut off freq. of destn. filter
+*   const SLData_t SampleRate,              - Sample rate
+*   const NumberOfZeros                     - Number of zeros
+*   const NumberOfPoles                     - Number of poles
 *
 * Return value:
 *   void
@@ -885,15 +885,15 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToLpf (
 * Function: SDA_IirZplaneLpfToHpf
 *
 * Parameters:
-*   const SLComplexRect_s * SIGLIB_PTR_DECL SrcSZlaneZeros, - Source z-plane zeros
-*   const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlanePoles, - Source z-plane poles
-*   SLComplexRect_s * SIGLIB_PTR_DECL DstZPlaneZeros,       - Destination z-plane zeros
-*   SLComplexRect_s * SIGLIB_PTR_DECL DstZPlanePoles,       - Destination z-plane poles
-*   const SLData_t Frequency1,      - Cut off freq. of source filter
-*   const SLData_t Frequency2,      - Cut off freq. of destn. filter
-*   const SLData_t SampleRate,      - Sample rate
-*   const NumberOfZeros             - Number of zeros
-*   const NumberOfPoles             - Number of poles
+*   const SLComplexRect_s *SrcSZlaneZeros,  - Source z-plane zeros
+*   const SLComplexRect_s *SrcZPlanePoles,  - Source z-plane poles
+*   SLComplexRect_s *DstZPlaneZeros,        - Destination z-plane zeros
+*   SLComplexRect_s *DstZPlanePoles,        - Destination z-plane poles
+*   const SLData_t Frequency1,              - Cut off freq. of source filter
+*   const SLData_t Frequency2,              - Cut off freq. of destn. filter
+*   const SLData_t SampleRate,              - Sample rate
+*   const NumberOfZeros                     - Number of zeros
+*   const NumberOfPoles                     - Number of poles
 *
 * Return value:
 *   void
@@ -940,16 +940,16 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToHpf (
 * Function: SDA_IirZplaneLpfToBpf
 *
 * Parameters:
-*   const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlaneZeros, - Source z-plane zeros
-*   const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlanePoles, - Source z-plane poles
-*   SLComplexRect_s * SIGLIB_PTR_DECL DstZPlaneZeros,       - Destination z-plane zeros
-*   SLComplexRect_s * SIGLIB_PTR_DECL DstZPlanePoles,       - Destination z-plane poles
-*   const SLData_t Frequency1,      - Cut off freq. of source filter
-*   const SLData_t FrequencyP1,     - Lower cut off freq. of bp. filter
-*   const SLData_t FrequencyP2,     - Upper cut off freq. of bp. filter
-*   const SLData_t SampleRate,      - Sample rate
-*   const NumberOfZeros             - Number of zeros
-*   const NumberOfPoles             - Number of poles
+*   const SLComplexRect_s *SrcZPlaneZeros,  - Source z-plane zeros
+*   const SLComplexRect_s *SrcZPlanePoles,  - Source z-plane poles
+*   SLComplexRect_s *DstZPlaneZeros,        - Destination z-plane zeros
+*   SLComplexRect_s *DstZPlanePoles,        - Destination z-plane poles
+*   const SLData_t Frequency1,              - Cut off freq. of source filter
+*   const SLData_t FrequencyP1,             - Lower cut off freq. of bp. filter
+*   const SLData_t FrequencyP2,             - Upper cut off freq. of bp. filter
+*   const SLData_t SampleRate,              - Sample rate
+*   const NumberOfZeros                     - Number of zeros
+*   const NumberOfPoles                     - Number of poles
 *
 * Return value:
 *   void
@@ -1022,16 +1022,16 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToBpf (
 * Function: SDA_IirZplaneLpfToBsf
 *
 * Parameters:
-*   const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlaneZeros, - Source z-plane zeros
-*   const SLComplexRect_s * SIGLIB_PTR_DECL SrcZPlanePoles, - Source z-plane poles
-*   SLComplexRect_s * SIGLIB_PTR_DECL DstZPlaneZeros,       - Destination z-plane zeros
-*   SLComplexRect_s * SIGLIB_PTR_DECL DstZPlanePoles,       - Destination z-plane poles
-*   const SLData_t Frequency1,      - Cut off freq. of source filter
-*   const SLData_t FrequencyP1,     - Lower cut off freq. of bp. filter
-*   const SLData_t FrequencyP2,     - Upper cut off freq. of bp. filter
-*   const SLData_t SampleRate,      - Sample rate
-*   const NumberOfZeros             - Number of zeros
-*   const NumberOfPoles             - Number of poles
+*   const SLComplexRect_s *SrcZPlaneZeros,  - Source z-plane zeros
+*   const SLComplexRect_s *SrcZPlanePoles,  - Source z-plane poles
+*   SLComplexRect_s *DstZPlaneZeros,        - Destination z-plane zeros
+*   SLComplexRect_s *DstZPlanePoles,        - Destination z-plane poles
+*   const SLData_t Frequency1,              - Cut off freq. of source filter
+*   const SLData_t FrequencyP1,             - Lower cut off freq. of bp. filter
+*   const SLData_t FrequencyP2,             - Upper cut off freq. of bp. filter
+*   const SLData_t SampleRate,              - Sample rate
+*   const NumberOfZeros                     - Number of zeros
+*   const NumberOfPoles                     - Number of poles
 *
 * Return value:
 *   void
@@ -1502,10 +1502,10 @@ void SIGLIB_FUNC_DECL SIF_IirHighShelfFilter (
 * Function: SDS_IirRemoveDC
 *
 * Parameters:
-*   SLData_t Src,                                - Input data word
-*   SLData_t * SIGLIB_PTR_DECL p_PreviousInput,  - Previous input data word
-*   SLData_t * SIGLIB_PTR_DECL p_PreviousOutput, - Previous output data word
-*   const SLData_t convergenceRate               - Convergence rate
+*   SLData_t Src,                     - Input data word
+*   SLData_t *p_PreviousInput,        - Previous input data word
+*   SLData_t *p_PreviousOutput,       - Previous output data word
+*   const SLData_t convergenceRate    - Convergence rate
 *
 * Return value:
 *   SLData_t        - Sample with D.C. component removed
@@ -1536,12 +1536,12 @@ SLData_t SIGLIB_FUNC_DECL SDS_IirRemoveDC (
 * Function: SDA_IirRemoveDC
 *
 * Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL  pSrc,      - Input data array
-*   SLData_t * SIGLIB_PTR_DECL  pDst,            - Output data array
-*   SLData_t * SIGLIB_PTR_DECL p_PreviousInput,  - Previous input data word
-*   SLData_t * SIGLIB_PTR_DECL p_PreviousOutput, - Previous output data word
-*   const SLArrayIndex_t SampleLength,           - Number of samples
-*   const SLData_t convergenceRate               - Convergence rate
+*   const SLData_t * pSrc,              - Input data array
+*   SLData_t * pDst,                    - Output data array
+*   SLData_t *p_PreviousInput,          - Previous input data word
+*   SLData_t *p_PreviousOutput,         - Previous output data word
+*   const SLArrayIndex_t SampleLength,  - Number of samples
+*   const SLData_t convergenceRate      - Convergence rate
 *
 * Return value:
 *   void
@@ -1606,7 +1606,7 @@ void SIGLIB_FUNC_DECL SIF_OnePole (
 * Parameters:
 *   const SLData_t Src  - Source data
 *   const SLData_t      - Filter coefficient
-*   SLData_t *pState     - Filter state
+*   SLData_t *pState    - Filter state
 *
 * Return value:
 *   SLData_t    Filtered - The filtered signal
@@ -1631,12 +1631,12 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePole (
 * Function: SDA_OnePole
 *
 * Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pSrc   - Source data array pointer
-*   SLData_t * SIGLIB_PTR_DECL pDst         - Destination data array pointer
-*   const SLData_t              - Filter coefficient
-*   SLArrayIndex_t              - Sample length
-*   const SLData_t              - Filter state
-*   const SLArrayIndex_t        - Dataset length
+*   const SLData_t *pSrc    - Source data array pointer
+*   SLData_t *pDst          - Destination data array pointer
+*   const SLData_t          - Filter coefficient
+*   SLArrayIndex_t          - Sample length
+*   const SLData_t          - Filter state
+*   const SLArrayIndex_t    - Dataset length
 *
 * Return value:
 *   void
@@ -1679,7 +1679,7 @@ void SIGLIB_FUNC_DECL SDA_OnePole (
 * Parameters:
 *   const SLData_t Src  - Source data
 *   const SLData_t      - Filter coefficient
-*   SLData_t *pState     - Filter state
+*   SLData_t *pState    - Filter state
 *
 * Return value:
 *   SLData_t    Filtered - The filtered signal
@@ -1704,11 +1704,11 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePoleNormalized (
 * Function: SDA_OnePoleNormalized
 *
 * Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pSrc   - Source data array pointer
-*   SLData_t * SIGLIB_PTR_DECL pDst         - Destination data array pointer
-*   const SLData_t              - Filter coefficient
-*   SLArrayIndex_t              - SampleLength
-*   const SLData_t              - Filter state
+*   const SLData_t *pSrc    - Source data array pointer
+*   SLData_t *pDst          - Destination data array pointer
+*   const SLData_t          - Filter coefficient
+*   SLArrayIndex_t          - SampleLength
+*   const SLData_t          - Filter state
 *
 * Return value:
 *   void
@@ -1776,11 +1776,11 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePoleEWMA (
 * Function: SDA_OnePoleEWMA
 *
 * Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pSrc   - Source data array pointer
-*   SLData_t * SIGLIB_PTR_DECL pDst         - Destination data array pointer
-*   const SLData_t              - Filter coefficient
-*   SLArrayIndex_t              - SampleLength
-*   const SLData_t              - Filter state
+*   const SLData_t *pSrc    - Source data array pointer
+*   SLData_t *pDst          - Destination data array pointer
+*   const SLData_t          - Filter coefficient
+*   SLArrayIndex_t          - SampleLength
+*   const SLData_t          - Filter state
 *
 * Return value:
 *   void
@@ -1821,10 +1821,10 @@ void SIGLIB_FUNC_DECL SDA_OnePoleEWMA (
 * Function: SDA_OnePolePerSample
 *
 * Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Source data pointer
-*   SLData_t * SIGLIB_PTR_DECL pDst,        - Destination data pointer
-*   SLData_t * SIGLIB_PTR_DECL pDelay,  - Delayed data pointer
-*   const SLData_t onePoleCoefficient,   - Feedback coefficient
+*   const SLData_t *pSrc,               - Source data pointer
+*   SLData_t *pDst,                     - Destination data pointer
+*   SLData_t *pDelay,                   - Delayed data pointer
+*   const SLData_t onePoleCoefficient,  - Feedback coefficient
 *   const SLArrayIndex_t SampleLength
 *
 * Return value:
@@ -1906,12 +1906,12 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePoleHighPass (
 * Function: SDA_OnePoleHighPass
 *
 * Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pSrc   - Source data array pointer
-*   SLData_t * SIGLIB_PTR_DECL pDst         - Destination data array pointer
-*   const SLData_t              - Filter coefficient
-*   SLArrayIndex_t              - Sample length
-*   const SLData_t              - Filter state
-*   const SLArrayIndex_t        - Dataset length
+*   const SLData_t *pSrc    - Source data array pointer
+*   SLData_t *pDst          - Destination data array pointer
+*   const SLData_t          - Filter coefficient
+*   SLArrayIndex_t          - Sample length
+*   const SLData_t          - Filter state
+*   const SLArrayIndex_t    - Dataset length
 *
 * Return value:
 *   void
@@ -1979,11 +1979,11 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePoleHighPassNormalized (
 * Function: SDA_OnePoleHighPassNormalized
 *
 * Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pSrc   - Source data array pointer
-*   SLData_t * SIGLIB_PTR_DECL pDst         - Destination data array pointer
-*   const SLData_t              - Filter coefficient
-*   const SLData_t              - Filter state
-*   SLArrayIndex_t              - SampleLength
+*   const SLData_t *pSrc  - Source data array pointer
+*   SLData_t *pDst        - Destination data array pointer
+*   const SLData_t        - Filter coefficient
+*   const SLData_t        - Filter state
+*   SLArrayIndex_t        - SampleLength
 *
 * Return value:
 *   void
@@ -2024,10 +2024,10 @@ void SIGLIB_FUNC_DECL SDA_OnePoleHighPassNormalized (
 * Function: SDA_OnePoleHighPassPerSample
 *
 * Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Source data pointer
-*   SLData_t * SIGLIB_PTR_DECL pDst,        - Destination data pointer
-*   SLData_t * SIGLIB_PTR_DECL pDelay,  - Delayed data pointer
-*   const SLData_t onePoleCoefficient,   - Feedback coefficient
+*   const SLData_t *pSrc,               - Source data pointer
+*   SLData_t *pDst,                     - Destination data pointer
+*   SLData_t *pDelay,                   - Delayed data pointer
+*   const SLData_t onePoleCoefficient,  - Feedback coefficient
 *   const SLArrayIndex_t SampleLength
 *
 * Return value:
@@ -2147,8 +2147,8 @@ SLData_t SDS_OnePoleHighPassCutOffFrequencyToFilterCoeff (
 * Function: SIF_AllPole
 *
 * Parameters:
-*   SLData_t * SIGLIB_PTR_DECL pState,
-*   SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
+*   SLData_t *pState,
+*   SLArrayIndex_t *pFilterIndex,
 *   const SLArrayIndex_t NumberOfPoles
 *
 * Return value:
@@ -2179,9 +2179,9 @@ void SIGLIB_FUNC_DECL SIF_AllPole (
 *
 * Parameters:
 *   const SLData_t Source,
-*   SLData_t * SIGLIB_PTR_DECL pState,
-*   const SLData_t * SIGLIB_PTR_DECL pCoeffs,
-*   SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
+*   SLData_t *pState,
+*   const SLData_t *pCoeffs,
+*   SLArrayIndex_t *pFilterIndex,
 *   const SLArrayIndex_t NumberOfPoles
 *
 * Return value:
@@ -2231,11 +2231,11 @@ SLData_t SIGLIB_FUNC_DECL SDS_AllPole (
 * Function: SDA_AllPole
 *
 * Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pSrc,
-*   SLData_t * SIGLIB_PTR_DECL pDst,
-*   SLData_t * SIGLIB_PTR_DECL pState,
-*   const SLData_t * SIGLIB_PTR_DECL pCoeffs,
-*   SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
+*   const SLData_t *pSrc,
+*   SLData_t *pDst,
+*   SLData_t *pState,
+*   const SLData_t *pCoeffs,
+*   SLArrayIndex_t *pFilterIndex,
 *   const SLArrayIndex_t NumberOfPoles,
 *   const SLArrayIndex_t SampleLength
 *
@@ -2498,8 +2498,8 @@ SLError_t SIGLIB_FUNC_DECL SIF_IirNormalizedSPlaneCoefficients (
 * Function: SDA_TranslateSPlaneCutOffFrequency
 *
 * Parameters:
-*   const SLComplexRect_s * SIGLIB_PTR_DECL pSrcSPlanePZs,
-*   SLComplexRect_s * SIGLIB_PTR_DECL pDstSPlanePZs,
+*   const SLComplexRect_s *pSrcSPlanePZs,
+*   SLComplexRect_s *pDstSPlanePZs,
 *   const SLData_t NewCutOffFrequency,
 *   const SLArrayIndex_t FilterOrder)
 *
@@ -2531,12 +2531,12 @@ void SIGLIB_FUNC_DECL SDA_TranslateSPlaneCutOffFrequency (
 * Function: SDA_IirLpLpShift
 *
 * Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL,   Source coefficients
-*   SLData_t * SIGLIB_PTR_DECL,     Destination coefficients
-*   const SLData_t,                 Frequency # 1
-*   const SLData_t,                 Frequency # 2
-*   const SLData_t,                 Sample rate
-*   const SLArrayIndex_t)           Number of biquads
+*   const SLData_t *,       Source coefficients
+*   SLData_t *,             Destination coefficients
+*   const SLData_t,         Frequency # 1
+*   const SLData_t,         Frequency # 2
+*   const SLData_t,         Sample rate
+*   const SLArrayIndex_t)   Number of biquads
 *
 * Return value:
 *   SLData_t                        Scaling factor
@@ -2639,12 +2639,12 @@ SLData_t SIGLIB_FUNC_DECL SDA_IirLpLpShift (
 * Function: SDA_IirLpHpShift
 *
 * Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL,   Source coefficients
-*   SLData_t * SIGLIB_PTR_DECL,     Destination coefficients
-*   const SLData_t,                 Frequency # 1
-*   const SLData_t,                 Frequency # 2
-*   const SLData_t,                 Sample rate
-*   const SLArrayIndex_t)           Number of biquads
+*   const SLData_t *,       Source coefficients
+*   SLData_t *,             Destination coefficients
+*   const SLData_t,         Frequency # 1
+*   const SLData_t,         Frequency # 2
+*   const SLData_t,         Sample rate
+*   const SLArrayIndex_t)   Number of biquads
 *
 * Return value:
 *   SLData_t                        Scaling factor
@@ -2745,8 +2745,8 @@ SLData_t SIGLIB_FUNC_DECL SDA_IirLpHpShift (
 * Parameters:
 *   const SLData_t CutOffFrequency,
 *   const SLData_t Radius,
-*   SLData_t * SIGLIB_PTR_DECL pCoeff1,
-*   SLData_t * SIGLIB_PTR_DECL pCoeff2)
+*   SLData_t *pCoeff1,
+*   SLData_t *pCoeff2)
 *
 * Return value:
 *   void
@@ -2777,8 +2777,8 @@ void SIGLIB_FUNC_DECL SIF_Iir2PoleLpf (
 *
 * Parameters:
 *   const SLData_t Source sample,
-*   SLData_t * SIGLIB_PTR_DECL pState,
-*   const SLData_t * SIGLIB_PTR_DECL pCoeffs,
+*   SLData_t *pState,
+*   const SLData_t *pCoeffs,
 *
 * Return value:
 *   SLData_t - Filtered sample
@@ -2809,10 +2809,10 @@ SLData_t SIGLIB_FUNC_DECL SDS_Iir2Pole (
 * Function: SDA_Iir2Pole
 *
 * Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pSrc,
-*   SLData_t * SIGLIB_PTR_DECL pDst,
-*   SLData_t * SIGLIB_PTR_DECL pState,
-*   const SLData_t * SIGLIB_PTR_DECL pCoeffs,
+*   const SLData_t *pSrc,
+*   SLData_t *pDst,
+*   SLData_t *pState,
+*   const SLData_t *pCoeffs,
 *   const SLArrayIndex_t SampleLength
 *
 * Return value:
@@ -2855,8 +2855,8 @@ void SIGLIB_FUNC_DECL SDA_Iir2Pole (
 * Function: SDA_IirNegateAlphaCoeffs
 *
 * Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pSrcCoeffs,
-*   const SLData_t * SIGLIB_PTR_DECL pDstCoeffs,
+*   const SLData_t *pSrcCoeffs,
+*   const SLData_t *pDstCoeffs,
 *   const SLArrayIndex_t NumberOfBiquads
 *
 * Return value:

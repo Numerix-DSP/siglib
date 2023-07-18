@@ -47,7 +47,7 @@ Description : SigLib signal generation routines.
 * Function: SDA_SignalGenerate
 *
 * Parameters:
-*   SLData_t * SIGLIB_PTR_DECL pDst,
+*   SLData_t *pDst,
 *   const enum SLSignal_t SLSignal_t,
 *   const SLData_t Peak,
 *   const enum SLSignalFillMode_t FillMode,
@@ -55,8 +55,8 @@ Description : SigLib signal generation routines.
 *   const SLData_t Offset,
 *   const SLData_t Param,
 *   const SLData_t EndValue,
-*   SLData_t * SIGLIB_PTR_DECL PhaseOffset,
-*   SLData_t * SIGLIB_PTR_DECL CurrentValue,
+*   SLData_t *PhaseOffset,
+*   SLData_t *CurrentValue,
 *   const SLArrayIndex_t arrayLength
 *
 * Return value:
@@ -713,7 +713,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
 * Function: SDS_SignalGenerate
 *
 * Parameters:
-*   SLData_t * SIGLIB_PTR_DECL pDst,
+*   SLData_t *pDst,
 *   const enum SLSignal_t SLSignal_t,
 *   const SLData_t Peak,
 *   const enum SLSignalFillMode_t FillMode,
@@ -721,8 +721,8 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
 *   const SLData_t Offset,
 *   const SLData_t Param,
 *   const SLData_t EndValue,
-*   SLData_t * SIGLIB_PTR_DECL PhaseOffset,
-*   SLData_t * SIGLIB_PTR_DECL CurrentValue,
+*   SLData_t *PhaseOffset,
+*   SLData_t *CurrentValue,
 *
 * Return value:
 *   SLError_t Error value
@@ -1326,10 +1326,10 @@ SLError_t SIGLIB_FUNC_DECL SDS_SignalGenerate (
 * Function: SIF_Resonator
 *
 * Parameters:
-*   SLData_t * SIGLIB_PTR_DECL,     Filter state
-*   const SLData_t,                 Resonator Frequency,
-*   SLData_t *,                     Cosine coefficient
-*   SLData_t *,                     Sine coefficient
+*   SLData_t *,       Filter state
+*   const SLData_t,   Resonator Frequency,
+*   SLData_t *,       Cosine coefficient
+*   SLData_t *,       Sine coefficient
 *
 * Return value:
 *   void
@@ -1360,12 +1360,12 @@ void SIGLIB_FUNC_DECL SIF_Resonator (
 * Function: SDA_Resonator
 *
 * Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL,   Input pointer
-*   SLData_t * SIGLIB_PTR_DECL,     Output pointer
-*   SLData_t * SIGLIB_PTR_DECL,     Filter state
-*   const SLData_t,                 Cosine coefficient
-*   const SLData_t,                 Sine coefficient
-*   const SLArrayIndex_t            Buffer length
+*   const SLData_t *,       Input pointer
+*   SLData_t *,             Output pointer
+*   SLData_t *,             Filter state
+*   const SLData_t,         Cosine coefficient
+*   const SLData_t,         Sine coefficient
+*   const SLArrayIndex_t    Buffer length
 *
 * Return value:
 *   void
@@ -1426,11 +1426,11 @@ void SIGLIB_FUNC_DECL SDA_Resonator (
 * Function: SIF_Resonator1
 *
 * Parameters:
-*   SLData_t * SIGLIB_PTR_DECL,     Filter state
-*   const SLData_t,                 Resonator Frequency,
-*   SLData_t *,                     Cosine coefficient
-*   SLData_t *,                     Sine coefficient
-*   SLFixData_t *,              Flag to indicate first iteration
+*   SLData_t *,         Filter state
+*   const SLData_t,     Resonator Frequency,
+*   SLData_t *,         Cosine coefficient
+*   SLData_t *,         Sine coefficient
+*   SLFixData_t *,      Flag to indicate first iteration
 *
 * Return value:
 *   void
@@ -1464,13 +1464,13 @@ void SIGLIB_FUNC_DECL SIF_Resonator1 (
 * Function: SDA_Resonator1
 *
 * Parameters:
-*   SLData_t * SIGLIB_PTR_DECL, Output pointer
-*   const SLData_t,             Output sinusoid magnitude
-*   SLData_t * SIGLIB_PTR_DECL, Filter state
-*   SLFixData_t *,              Flag to indicate first iteration
-*   const SLData_t,             Cosine coefficient
-*   const SLData_t,             Sine coefficient
-*   const SLArrayIndex_t        Buffer length
+*   SLData_t *,             Output pointer
+*   const SLData_t,         Output sinusoid magnitude
+*   SLData_t *,             Filter state
+*   SLFixData_t *,          Flag to indicate first iteration
+*   const SLData_t,         Cosine coefficient
+*   const SLData_t,         Sine coefficient
+*   const SLArrayIndex_t    Buffer length
 *
 * Return value:
 *   void
@@ -1546,13 +1546,13 @@ void SIGLIB_FUNC_DECL SDA_Resonator1 (
 * Function: SDA_Resonator1Add
 *
 * Parameters:
-*   SLData_t * SIGLIB_PTR_DECL, Output pointer
-*   const SLData_t,             Output sinusoid magnitude
-*   SLData_t * SIGLIB_PTR_DECL, Filter state
-*   SLFixData_t *,              Flag to indicate first iteration
-*   const SLData_t,             Cosine coefficient
-*   const SLData_t,             Sine coefficient
-*   const SLArrayIndex_t        Buffer length
+*   SLData_t *,             Output pointer
+*   const SLData_t,         Output sinusoid magnitude
+*   SLData_t *,             Filter state
+*   SLFixData_t *,          Flag to indicate first iteration
+*   const SLData_t,         Cosine coefficient
+*   const SLData_t,         Sine coefficient
+*   const SLArrayIndex_t    Buffer length
 *
 * Return value:
 *   void
@@ -1637,7 +1637,7 @@ void SIGLIB_FUNC_DECL SDA_Resonator1Add (
 * Function: SDA_SignalGeneratePolarWhiteNoise
 *
 * Parameters:
-*   SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+*   SLComplexRect_s *pDst,
 *   const SLData_t NoisePeak,
 *   const enum SLSignalFillMode_t FillMode,
 *   const SLArrayIndex_t arrayLength
@@ -1716,7 +1716,7 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_SignalGeneratePolarWhiteNoise (
 * Function: SDA_SignalGeneratePolarGaussianNoise
 *
 * Parameters:
-*   SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+*   SLComplexRect_s *pDst,
 *   const SLData_t NoiseVariance,
 *   SLData_t *NoisePhaseOffset,
 *   SLData_t *NoiseCurrentValue,
@@ -1906,7 +1906,7 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_SignalGeneratePolarGaussianNoise (
 * Function: SDA_SignalAddPolarJitterAndGaussianNoise
 *
 * Parameters:
-*   SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+*   SLComplexRect_s *pDst,
 *   const SLData_t Variance,
 *   SLData_t *NoisePhaseOffset,
 *   SLData_t *NoiseCurrentValue,

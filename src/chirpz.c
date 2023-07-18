@@ -49,21 +49,21 @@ Description : Chirp z-Transform routines, for SigLib DSP library.
 * Function: SIF_Czt
 *
 * Parameters:
-*   SLData_t * SIGLIB_PTR_DECL ,    - Pointer to AWNr coefficients
-*   SLData_t * SIGLIB_PTR_DECL ,    - Pointer to AWNi coefficients
-*   SLData_t * SIGLIB_PTR_DECL ,    - Pointer to WMr coefficients
-*   SLData_t * SIGLIB_PTR_DECL ,    - Pointer to WMi coefficients
-*   SLData_t * SIGLIB_PTR_DECL ,    - Pointer to vLr coefficients
-*   SLData_t * SIGLIB_PTR_DECL ,    - Pointer to vLi coefficients
-*   SLData_t * SIGLIB_PTR_DECL ,    - FFT coeff pointer
-*   SLArrayIndex_t * SIGLIB_PTR_DECL ,                      - Bit reverse mode flag / Pointer to bit reverse address table
-*   const SLData_t Radius,          - Contour start radius
-*   const SLData_t Decay,           - Contour decay rate
-*   const SLData_t StartFreq,       - Contour start frequency
-*   const SLData_t EndFreq,         - Contour end frequency
-*   const SLData_t SampleRate,      - System sample rate
-*   const SLArrayIndex_t InLen,     - Input array length
-*   const SLArrayIndex_t OutLen,        - Output array length
+*   SLData_t *,                           - Pointer to AWNr coefficients
+*   SLData_t *,                           - Pointer to AWNi coefficients
+*   SLData_t *,                           - Pointer to WMr coefficients
+*   SLData_t *,                           - Pointer to WMi coefficients
+*   SLData_t *,                           - Pointer to vLr coefficients
+*   SLData_t *,                           - Pointer to vLi coefficients
+*   SLData_t *,                           - FFT coeff pointer
+*   SLArrayIndex_t *,                     - Bit reverse mode flag / Pointer to bit reverse address table
+*   const SLData_t Radius,                - Contour start radius
+*   const SLData_t Decay,                 - Contour decay rate
+*   const SLData_t StartFreq,             - Contour start frequency
+*   const SLData_t EndFreq,               - Contour end frequency
+*   const SLData_t SampleRate,            - System sample rate
+*   const SLArrayIndex_t InLen,           - Input array length
+*   const SLArrayIndex_t OutLen,          - Output array length
 *   const SLArrayIndex_t FFTLength,       - FFT length
 *   const SLArrayIndex_t Log2FFTLength    - Log 2 FFT length
 *
@@ -223,13 +223,13 @@ void SIGLIB_FUNC_DECL SIF_Awn (
 * Function: SIF_Vl
 *
 * Parameters:
-*   SLData_t * SIGLIB_PTR_DECL pvLr - Real coefficient pointer
-*   SLData_t * SIGLIB_PTR_DECL pvLi - Imaginary coefficient pointer
-*   const SLComplexRect_s,          - W^(-1)
-*   const SLComplexRect_s,          - W^(-1/2)
-*   const SLArrayIndex_t InLen      - Input array length
-*   const SLArrayIndex_t OutLen     - Output array length
-*   const SLArrayIndex_t FFTLen     - FFT array length
+*   SLData_t *pvLr              - Real coefficient pointer
+*   SLData_t *pvLi              - Imaginary coefficient pointer
+*   const SLComplexRect_s,      - W^(-1)
+*   const SLComplexRect_s,      - W^(-1/2)
+*   const SLArrayIndex_t InLen  - Input array length
+*   const SLArrayIndex_t OutLen - Output array length
+*   const SLArrayIndex_t FFTLen - FFT array length
 *
 * Return value:
 *   void
@@ -313,8 +313,8 @@ void SIGLIB_FUNC_DECL SIF_Vl (
 * Function: SIF_Wm
 *
 * Parameters:
-*   SLData_t * SIGLIB_PTR_DECL pWMr,    - Real coefficient pointer
-*   SLData_t * SIGLIB_PTR_DECL pWMi,    - Imaginary coefficient pointer
+*   SLData_t *pWMr,                     - Real coefficient pointer
+*   SLData_t *pWMi,                     - Imaginary coefficient pointer
 *   const SLComplexRect_s,              - W
 *   const SLComplexRect_s,              - W^(1/2)
 *   const SLArrayIndex_t SampleLength   - Buffer length

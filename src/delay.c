@@ -326,11 +326,11 @@ void SIGLIB_FUNC_DECL SDA_FixedDelayComplex (
 * Function: SDA_ShortFixedDelay
 *
 * Parameters:
-*   const SLData_t * pSrc           - Source data array pointer
-*   SLData_t * pDst                 - Destination data array pointer
-*   SLData_t * pDelay               - Delay Data array pointer
-*   SLData_t * pTempDst             - Temporary Destination data array pointer
-*   const SLArrayIndex_t Delay      - Delay length
+*   const SLData_t * pSrc             - Source data array pointer
+*   SLData_t * pDst                   - Destination data array pointer
+*   SLData_t * pDelay                 - Delay Data array pointer
+*   SLData_t * pTempDst               - Temporary Destination data array pointer
+*   const SLArrayIndex_t Delay        - Delay length
 *   const SLArrayIndex_t SampleLength - Buffer length
 *
 * Return value:
@@ -385,12 +385,12 @@ void SIGLIB_FUNC_DECL SDA_ShortFixedDelay (
 * Function: SIF_VariableDelay
 *
 * Parameters:
-*   SLData_t * SIGLIB_PTR_DECL, Pointer to the delay state array
-*   SLArrayIndex_t *,           Pointer to the FIFO input index
-*   SLArrayIndex_t *,           Pointer to the FIFO output index
-*   SLArrayIndex_t *,           Variable FIFO delay
-*   const SLArrayIndex_t,       Initial FIFO delay value
-*   const SLArrayIndex_t);      Maximum delay length
+*   SLData_t *,             Pointer to the delay state array
+*   SLArrayIndex_t *,       Pointer to the FIFO input index
+*   SLArrayIndex_t *,       Pointer to the FIFO output index
+*   SLArrayIndex_t *,       Variable FIFO delay
+*   const SLArrayIndex_t,   Initial FIFO delay value
+*   const SLArrayIndex_t)   Maximum delay length
 *
 * Return value:
 *   SIGLIB_ERROR if the length of the delay is < 0 or >
@@ -439,11 +439,11 @@ SLError_t SIGLIB_FUNC_DECL SIF_VariableDelay (
 * Function: SDS_VariableDelay
 *
 * Parameters:
-*   const SLData_t,                 Input value
-*   SLData_t * SIGLIB_PTR_DECL,     Pointer to the delay state array
-*   SLArrayIndex_t *,               Pointer to the FIFO input index
-*   SLArrayIndex_t *,               Pointer to the FIFO output index
-*   const SLArrayIndex_t);          Maximum delay length
+*   const SLData_t,         Input value
+*   SLData_t *,             Pointer to the delay state array
+*   SLArrayIndex_t *,       Pointer to the FIFO input index
+*   SLArrayIndex_t *,       Pointer to the FIFO output index
+*   const SLArrayIndex_t)   Maximum delay length
 *
 * Return value:
 *   Delayed sample
@@ -498,13 +498,13 @@ SLData_t SIGLIB_FUNC_DECL SDS_VariableDelay (
 * Function: SDA_VariableDelay
 *
 * Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL,   Pointer to the input data array
-*   SLData_t * SIGLIB_PTR_DECL, Pointer to the output data array
-*   SLData_t * SIGLIB_PTR_DECL, Pointer to the delay state array
-*   SLArrayIndex_t *,           Pointer to the FIFO input index
-*   SLArrayIndex_t *,           Pointer to the FIFO output index
-*   const SLArrayIndex_t,       Maximum delay length
-*   const SLArrayIndex_t);      Input / output sample length
+*   const SLData_t *,       Pointer to the input data array
+*   SLData_t *,             Pointer to the output data array
+*   SLData_t *,             Pointer to the delay state array
+*   SLArrayIndex_t *,       Pointer to the FIFO input index
+*   SLArrayIndex_t *,       Pointer to the FIFO output index
+*   const SLArrayIndex_t,   Maximum delay length
+*   const SLArrayIndex_t)   Input / output sample length
 *
 * Return value:
 *   void
@@ -561,13 +561,13 @@ void SIGLIB_FUNC_DECL SDA_VariableDelay (
 * Function: SIF_VariableDelayComplex
 *
 * Parameters:
-*   SLData_t * SIGLIB_PTR_DECL, Pointer to the real delay state array
-*   SLData_t * SIGLIB_PTR_DECL, Pointer to the imaginary delay state array
-*   SLArrayIndex_t *,           Pointer to the FIFO input index
-*   SLArrayIndex_t *,           Pointer to the FIFO output index
-*   SLArrayIndex_t *,           Variable FIFO delay
-*   const SLArrayIndex_t,       Initial FIFO delay value
-*   const SLArrayIndex_t);      Maximum delay length
+*   SLData_t *,             Pointer to the real delay state array
+*   SLData_t *,             Pointer to the imaginary delay state array
+*   SLArrayIndex_t *,       Pointer to the FIFO input index
+*   SLArrayIndex_t *,       Pointer to the FIFO output index
+*   SLArrayIndex_t *,       Variable FIFO delay
+*   const SLArrayIndex_t,   Initial FIFO delay value
+*   const SLArrayIndex_t)   Maximum delay length
 *
 * Return value:
 *   SIGLIB_ERROR if the length of the delay is < 0 or >
@@ -618,15 +618,15 @@ SLError_t SIGLIB_FUNC_DECL SIF_VariableDelayComplex (
 * Function: SDS_VariableDelayComplex
 *
 * Parameters:
-*   const SLData_t,                 Real input value
-*   const SLData_t,                 Imaginary input value
-*   SLData_t *,                     Real output value
-*   SLData_t *,                     Imaginary output value
-*   SLData_t * SIGLIB_PTR_DECL,     Pointer to the real delay state array
-*   SLData_t * SIGLIB_PTR_DECL,     Pointer to the imag delay state array
-*   SLArrayIndex_t *,               Pointer to the FIFO input index
-*   const SLArrayIndex_t *,         Pointer to the FIFO output index
-*   const SLArrayIndex_t);          Maximum delay length
+*   const SLData_t,           Real input value
+*   const SLData_t,           Imaginary input value
+*   SLData_t *,               Real output value
+*   SLData_t *,               Imaginary output value
+*   SLData_t *,               Pointer to the real delay state array
+*   SLData_t *,               Pointer to the imag delay state array
+*   SLArrayIndex_t *,         Pointer to the FIFO input index
+*   const SLArrayIndex_t *,   Pointer to the FIFO output index
+*   const SLArrayIndex_t)     Maximum delay length
 *
 * Return value:
 *   void
@@ -688,16 +688,16 @@ void SIGLIB_FUNC_DECL SDS_VariableDelayComplex (
 * Function: SDA_VariableDelayComplex
 *
 * Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL,   Pointer to the real input data array
-*   const SLData_t * SIGLIB_PTR_DECL,   Pointer to the imag input data array
-*   SLData_t * SIGLIB_PTR_DECL, Pointer to the real output data array
-*   SLData_t * SIGLIB_PTR_DECL, Pointer to the imag output data array
-*   SLData_t * SIGLIB_PTR_DECL, Pointer to the real delay state array
-*   SLData_t * SIGLIB_PTR_DECL, Pointer to the imag delay state array
-*   SLArrayIndex_t *,           Pointer to the FIFO input index
-*   SLArrayIndex_t *,           Pointer to the FIFO output index
-*   const SLArrayIndex_t,       Maximum delay length
-*   const SLArrayIndex_t);      Input / output sample length
+*   const SLData_t *,       Pointer to the real input data array
+*   const SLData_t *,       Pointer to the imag input data array
+*   SLData_t *,             Pointer to the real output data array
+*   SLData_t *,             Pointer to the imag output data array
+*   SLData_t *,             Pointer to the real delay state array
+*   SLData_t *,             Pointer to the imag delay state array
+*   SLArrayIndex_t *,       Pointer to the FIFO input index
+*   SLArrayIndex_t *,       Pointer to the FIFO output index
+*   const SLArrayIndex_t,   Maximum delay length
+*   const SLArrayIndex_t)   Input / output sample length
 *
 * Return value:
 *   void
@@ -766,9 +766,9 @@ void SIGLIB_FUNC_DECL SDA_VariableDelayComplex (
 * Function: SUF_IncreaseVariableDelay
 *
 * Parameters:
-*   SLArrayIndex_t *pOutputIndex,   Pointer to the FIFO output index
-*   SLArrayIndex_t *pDelayLength,   Pointer to delay length
-*   const SLArrayIndex_t MaxDelayLength)    Maximum delay length
+*   SLArrayIndex_t *pOutputIndex,         Pointer to the FIFO output index
+*   SLArrayIndex_t *pDelayLength,         Pointer to delay length
+*   const SLArrayIndex_t MaxDelayLength)  Maximum delay length
 *
 * Return value:
 *   void
@@ -808,9 +808,9 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_IncreaseVariableDelay (
 * Function: SUF_DecreaseVariableDelay
 *
 * Parameters:
-*   SLArrayIndex_t *pOutputIndex,   Pointer to the FIFO output index
-*   SLArrayIndex_t *pDelayLength,   Pointer to delay length
-*   const SLArrayIndex_t MaxDelayLength)    Maximum delay length
+*   SLArrayIndex_t *pOutputIndex,         Pointer to the FIFO output index
+*   SLArrayIndex_t *pDelayLength,         Pointer to delay length
+*   const SLArrayIndex_t MaxDelayLength)  Maximum delay length
 *
 * Return value:
 *   void

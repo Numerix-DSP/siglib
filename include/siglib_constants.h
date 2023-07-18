@@ -438,6 +438,7 @@ Update history :
 #define SIGLIB_QPSK_PEAK_NORM       ((SLData_t)8.0)                 // Peak magnitude of perfect constellation
 #define SIGLIB_QPSK_DEMOD_OFFSET    SIGLIB_TEN                      // 8 * 5 * 0.25 - 8 is peak
 #define SIGLIB_QPSK_DEMOD_SCALE     ((SLData_t)0.1875)              // 3 * 0.5 * 0.125 - 8 is peak
+#define SIGLIB_OPSK_DEMOD_SCALE     ((SLData_t)3.3)                 // Correctly scale the output from SDA__CostasQamDemodulate
 
                             // Histogram constants
 #define SIGLIB_HISTOGRAM_AUTOSCALE  ((SLData_t)0.0)                 // Auto scale the histogram or cumulative histogram
