@@ -587,7 +587,7 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDA_GoertzelDetectComplex (
 * Function: SIF_GaussianFilter
 *
 * Parameters:
-*   SLData_t    *pCoeffs - Filter coefficients pointer
+*   SLData_t    *pCoeffs - Pointer to filter coefficients
 *   const SLData_t  - Standard deviation of the distribution
 *   const SLArrayIndex_t        - Filter length
 *
@@ -619,7 +619,7 @@ void SIGLIB_FUNC_DECL SIF_GaussianFilter (
 * Function: SIF_GaussianFilter2
 *
 * Parameters:
-*   SLData_t *pCoeffs           - Filter coefficients pointer
+*   SLData_t *pCoeffs           - Pointer to filter coefficients
 *   const SLData_t Bandwidth    - Bandwidth
 *   const SLArrayIndex_t FilterLength   - Filter length
 *

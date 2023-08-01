@@ -102,7 +102,7 @@ int main (
   int argc,
   char *argv[])
 {
-  FILE           *pInputFile, *pTrainingFile, *pValidationFile, *pPredictionFile;
+  FILE           *fpInputFile, *pTrainingFile, *pValidationFile, *pPredictionFile;
   SLArrayIndex_t  numberOfFramesProcessed = 0;
   SLArrayIndex_t  trainingFileCount = 0;
   SLArrayIndex_t  validationFileCount = 0;
@@ -229,7 +229,7 @@ int main (
     exit (-1);
   }
 
-  if ((pInputFile = fopen (inputFilename, "rb")) == NULL) {         // Note this file is binary
+  if ((fpInputFile = fopen (inputFilename, "rb")) == NULL) {        // Note this file is binary
     printf ("Error opening input file %s\n", inputFilename);
     exit (-1);
   }
@@ -278,7 +278,7 @@ int main (
   }
 
   printf ("%s: ", inputFilename);
-  wavInfo = SUF_WavReadHeader (pInputFile);
+  wavInfo = SUF_WavReadHeader (fpInputFile);
   SUF_WavDisplayInfo (wavInfo);
   if (wavInfo.NumberOfChannels != 1) {                              // Check how many channels
     printf ("Number of channels in %s = %d\n", inputFilename, wavInfo.NumberOfChannels);
@@ -322,7 +322,7 @@ int main (
     exit (-2);                                                      // Exit - memory allocation error
   }
 
-  if (SUF_WavReadData (pInputArray, pInputFile, wavInfo, globalSampleCount) != globalSampleCount) {
+  if (SUF_WavReadData (pInputArray, fpInputFile, wavInfo, globalSampleCount) != globalSampleCount) {
     printf ("\nWav File Read Error !!!: Due to incorrect number of samples\n\n");
     exit (-3);                                                      // Exit - wav file read error
   }
@@ -621,11 +621,11 @@ int main (
   }
 
   if (1 == predictionModeSwitch) {                                  // Close the files
-    fclose (pInputFile);
+    fclose (fpInputFile);
     fclose (pPredictionFile);
   }
   else {
-    fclose (pInputFile);
+    fclose (fpInputFile);
     fclose (pTrainingFile);
     fclose (pValidationFile);
   }

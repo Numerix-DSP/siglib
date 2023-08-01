@@ -7,7 +7,7 @@
 // To see how to apply a scrambler to the sequence
 // (e.g. polynomial: 1 + x-14 + x-17 used in the ITU-T
 // recommendations), please refer to example tstqam16.c.
-// Copyright (c) 2023 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -22,7 +22,8 @@
 #define DIFFERENTIAL_ENCODING_ENABLE    1                           // Differential encoding / decoding
 
 #define TX_ALPHABET                     1                           // Set to '1' to Tx the alphabet or '0' to Tx 0xFFs
-#define DEBUG_LOG_FILE                  1                           // Set to '1' to enable logging to debug.log
+#define DEBUG_LOG_FILE                  0                           // Set to '1' to enable logging to debug.log
+
                     // Select one of the following display modes
 #define DISPLAY_TIME_DOMAIN             0                           // Set to '1' to display the time domain output from the transmitter
 #define DISPLAY_FREQ_DOMAIN             0                           // Set to '1' to display the frequency domain output
@@ -663,10 +664,6 @@ int main (
 
 // Decode constellation - Find nearest constellation point
       for (int j = 0; j < SIGLIB_OPSK_NUMBER_OF_PHASES; j++) {
-// RxDemodErrorArray[j] = SDS_EuclideanDistanceSquared (siglib_numerix_OPSKTxConstellation[j].real,
-//                                                      siglib_numerix_OPSKTxConstellation[j].imag,
-//                                                      pRealOutput[i],
-//                                                      pImagOutput[i]);
         RxDemodErrorArray[j] = SDS_EuclideanDistanceSquared (siglib_numerix_OPSKRxConstellation[j].real,
                                                              siglib_numerix_OPSKRxConstellation[j].imag, pRealOutput[i], pImagOutput[i]);
       }

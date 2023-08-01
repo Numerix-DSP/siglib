@@ -26,7 +26,7 @@
 // Define constants
 #define DISPLAY_GRAPHICS                0                           // Set to '1' to display graphics
 #define DISPLAY_DEBUG_INFO              0                           // Set to '1' to display receiver debug data
-#define DEBUG_LOG_FILE                  1                           // Set to '1' to enable logging to log file
+#define DEBUG_LOG_FILE                  0                           // Set to '1' to enable logging to log file
 
 #define SAMPLE_LENGTH                   512
 #define NUMBER_OF_LOOPS                 8

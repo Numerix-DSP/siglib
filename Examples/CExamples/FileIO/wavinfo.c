@@ -10,7 +10,7 @@
 // Declare arrays and variables
 
 SLWavFileInfo_s wavInfo;
-FILE           *pInputFile;
+FILE           *fpInputFile;
 
 
 int main (
@@ -19,15 +19,15 @@ int main (
 {
   printf ("Opening : %s\n", argv[1]);
 
-  if ((pInputFile = fopen (argv[1], "rb")) == NULL) {
+  if ((fpInputFile = fopen (argv[1], "rb")) == NULL) {
     printf ("Error opening input file %s\n", argv[1]);
     exit (0);
   }
 
-  wavInfo = SUF_WavReadHeader (pInputFile);
+  wavInfo = SUF_WavReadHeader (fpInputFile);
   SUF_WavDisplayInfo (wavInfo);
 
-  fclose (pInputFile);
+  fclose (fpInputFile);
 
   exit (0);
 }

@@ -29,8 +29,8 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 #endif
 
-  SLArrayIndex_t  sampleCount;
-  FILE           *pInputFile, *pOutputFile;
+  SLArrayIndex_t  inputSampleCount;
+  FILE           *fpInputFile, *fpOutputFile;
 
   pDataArray = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
@@ -48,12 +48,12 @@ int main (
   printf ("Source file = %s\n", inputFileName);
   printf ("Destination file = %s\n", outputFileName);
 
-  if ((pInputFile = fopen (inputFileName, "rb")) == NULL) {         // Note this file is binary
+  if ((fpInputFile = fopen (inputFileName, "rb")) == NULL) {        // Note this file is binary
     printf ("Error opening input .bin file\n");
     exit (-1);
   }
 
-  if ((pOutputFile = fopen (outputFileName, "wb")) == NULL) {       // Note this file is binary
+  if ((fpOutputFile = fopen (outputFileName, "wb")) == NULL) {      // Note this file is binary
     printf ("Error opening output .wav file\n");
     exit (-1);
   }
@@ -72,13 +72,13 @@ int main (
   }
 #endif
 
-  sampleCount = SUF_BinReadData (pDataArray, pInputFile, 'l', SAMPLE_LENGTH);
+  inputSampleCount = SUF_BinReadData (pDataArray, fpInputFile, 'l', SAMPLE_LENGTH);
 
-  wavInfo = SUF_WavSetInfo (16000, sampleCount, 1, 16, 2, 1);
+  wavInfo = SUF_WavSetInfo (16000, inputSampleCount, 1, 16, 2, 1);
 
-  printf ("\nSample Count = %d\n", sampleCount);
+  printf ("\nSample Count = %d\n", inputSampleCount);
 
-  if (sampleCount == SAMPLE_LENGTH) {
+  if (inputSampleCount == SAMPLE_LENGTH) {
 #if PLOT_DATA
     gpc_plot_2d (h2DPlot,                                           // Graph handle
                  pDataArray,                                        // Dataset
@@ -91,8 +91,8 @@ int main (
                  GPC_NEW);                                          // New graph
 #endif
 
-    SUF_WavWriteHeader (pOutputFile, wavInfo);
-    SUF_WavWriteData (pDataArray, pOutputFile, wavInfo, SAMPLE_LENGTH);
+    SUF_WavWriteHeader (fpOutputFile, wavInfo);
+    SUF_WavWriteData (pDataArray, fpOutputFile, wavInfo, SAMPLE_LENGTH);
   }
 
 #if PLOT_DATA
@@ -102,8 +102,8 @@ int main (
   gpc_close (h2DPlot);
 #endif
 
-  fclose (pInputFile);                                              // Close the input file
-  fclose (pOutputFile);
+  fclose (fpInputFile);                                             // Close the input file
+  fclose (fpOutputFile);
 
   free (pDataArray);                                                // Free memory
 

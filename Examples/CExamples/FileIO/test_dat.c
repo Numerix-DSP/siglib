@@ -17,7 +17,7 @@ SLData_t        srcData[SAMPLE_LENGTH] = { 10, 11, 12, 13, 14, 15, 16, 17, 18, 1
 int main (
   void)
 {
-  SLArrayIndex_t  sampleCount;
+  SLArrayIndex_t  inputSampleCount;
   SLData_t        sampleRate = 8000.;                               // .dat file parameters
   SLArrayIndex_t  sampleIndex = 0l;
   FILE           *fpInputFile, *fpOutputFile;
@@ -45,8 +45,8 @@ int main (
   sampleRate = SUF_DatReadHeader (fpInputFile);
   printf ("Sample Rate = %lf\n", sampleRate);
 
-  while ((sampleCount = SUF_DatReadData (inputData, fpInputFile, IO_LENGTH)) == IO_LENGTH) {
-    for (int i = 0; i < sampleCount; i++) {
+  while ((inputSampleCount = SUF_DatReadData (inputData, fpInputFile, IO_LENGTH)) == IO_LENGTH) {
+    for (int i = 0; i < inputSampleCount; i++) {
       printf ("%lf, ", inputData[i]);
     }
   }

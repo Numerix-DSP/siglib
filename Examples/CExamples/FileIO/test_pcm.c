@@ -27,7 +27,7 @@ static SLData_t readDataArray[SOURCE_ARRAY_LENGTH];
 int main (
   void)
 {
-  SLArrayIndex_t  sampleCount;
+  SLArrayIndex_t  inputSampleCount;
   FILE           *fpInputFile, *fpOutputFile;
 
   printf ("Opening and writing to test.pcm file\n");
@@ -48,8 +48,8 @@ int main (
     exit (-1);
   }
 
-  while ((sampleCount = SUF_PCMReadData (inputData, fpInputFile, SIGLIB_LITTLE_ENDIAN, WORD_LENGTH, IO_LENGTH)) == IO_LENGTH) {
-    for (SLArrayIndex_t i = 0; i < sampleCount; i++) {
+  while ((inputSampleCount = SUF_PCMReadData (inputData, fpInputFile, SIGLIB_LITTLE_ENDIAN, WORD_LENGTH, IO_LENGTH)) == IO_LENGTH) {
+    for (SLArrayIndex_t i = 0; i < inputSampleCount; i++) {
       printf ("%lf, \n", inputData[i]);
     }
   }

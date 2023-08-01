@@ -21,7 +21,7 @@
 #define DISPLAY_GRAPHICS                1                           // Set to '1' to display graphics
 #define DISPLAY_FILTER_OUTPUT           0                           // Set to '1' to display the output of the demodulator filter
 #define TX_BIT_MODE_ENABLED             1                           // Set to '1' to process Tx bits, '0' for bytes
-#define DEBUG_LOG_FILE                  1                           // Set to '1' to enable logging to log file
+#define DEBUG_LOG_FILE                  0                           // Set to '1' to enable logging to log file
 
 #define SAMPLE_LENGTH                   512
 #define NUMBER_OF_LOOPS                 8

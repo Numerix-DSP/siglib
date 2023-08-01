@@ -14,7 +14,7 @@ int main (
   char *argv[])
 {
   SLData_t        Value;
-  FILE           *pInputFile, *pOutputFile;
+  FILE           *fpInputFile, *fpOutputFile;
   char            FileName[256];
 
   if (argc != 2) {
@@ -27,7 +27,7 @@ int main (
 
   printf ("Source file = %s\n", FileName);
 
-  if ((pInputFile = fopen (FileName, "r")) == NULL) {               // Open i/p file
+  if ((fpInputFile = fopen (FileName, "r")) == NULL) {              // Open i/p file
     printf ("Error opening input file %s\n", FileName);
     exit (-1);                                                      // Exit - file not opened
   }
@@ -37,22 +37,22 @@ int main (
 
   printf ("Destination file = %s\n", FileName);
 
-  if ((pOutputFile = fopen (FileName, "w")) == NULL) {              // Open o/p file
+  if ((fpOutputFile = fopen (FileName, "w")) == NULL) {             // Open o/p file
     printf ("Error opening output file %s\n", FileName);
-    fclose (pInputFile);                                            // Close input file
+    fclose (fpInputFile);                                           // Close input file
     exit (-1);                                                      // Exit - file not opened
   }
 
-  if (fscanf (pInputFile, "%lf\n", &Value) != EOF) {                // Read first word
-    fprintf (pOutputFile, "%lf", Value);                            // Write data
+  if (fscanf (fpInputFile, "%lf\n", &Value) != EOF) {               // Read first word
+    fprintf (fpOutputFile, "%lf", Value);                           // Write data
   }
-  while (fscanf (pInputFile, "%lf\n", &Value) != EOF) {             // Get data
-    fprintf (pOutputFile, ",%lf", Value);                           // Write data
+  while (fscanf (fpInputFile, "%lf\n", &Value) != EOF) {            // Get data
+    fprintf (fpOutputFile, ",%lf", Value);                          // Write data
   }
-  fprintf (pOutputFile, "\n");                                      // Write data
+  fprintf (fpOutputFile, "\n");                                     // Write data
 
-  fclose (pInputFile);                                              // Close files
-  fclose (pOutputFile);
+  fclose (fpInputFile);                                             // Close files
+  fclose (fpOutputFile);
 
   exit (0);
 }

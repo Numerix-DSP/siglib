@@ -1,6 +1,30 @@
 SigLib (Tm) Revision Update History File
 ========================================
 
+VERSION : 10.53
+RELEASE DATE : 01/08/2023
+_________________________
+
+Additional Functionality
+  None.
+
+Operational Changes :
+  None.
+
+Additional Processor / Compiler Support :
+  None.
+
+Optimisation Changes :
+  SDA_FilterAndDecimate optimized.
+
+Bug Fixes :
+ SIF_FilterAndDecimate and SIF_InterpolateAndFilter documentation updates.
+
+Notes :
+  Tidied up some examples
+  Added new Synchronous Sample Rate Conversion Example
+
+
 VERSION : 10.52
 RELEASE DATE : 18/07/2023
 _________________________

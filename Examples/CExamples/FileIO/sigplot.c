@@ -8,7 +8,7 @@
 #include <gnuplot_c.h>                                              // Gnuplot/C
 
 double         *pDataArray;
-FILE           *pInputFile;
+FILE           *fpInputFile;
 
 
 int main (
@@ -36,38 +36,38 @@ int main (
 
   printf ("Source file = %s\n", argv[1]);
 
-  SLArrayIndex_t  sampleCount = SUF_SigCountSamplesInFile (argv[1]);
-  if (sampleCount == -1) {
+  SLArrayIndex_t  inputSampleCount = SUF_SigCountSamplesInFile (argv[1]);
+  if (inputSampleCount == -1) {
     printf ("Error opening input file to count number of samples: %s\n", argv[1]);
     exit (-1);
   }
 
-  printf ("Sample count = %d\n", sampleCount);
+  printf ("Sample count = %d\n", inputSampleCount);
 
 
-  pDataArray = SUF_VectorArrayAllocate (sampleCount);
+  pDataArray = SUF_VectorArrayAllocate (inputSampleCount);
   if (NULL == pDataArray) {
     printf ("\n\nMemory allocation failed\n\n");
     exit (0);
   }
 
-  sampleCount = SUF_SigReadFile (pDataArray, argv[1]);
-  if (sampleCount == -1) {
+  inputSampleCount = SUF_SigReadFile (pDataArray, argv[1]);
+  if (inputSampleCount == -1) {
     printf ("Error reading from input file: %s\n", argv[1]);
     exit (-1);
   }
 
-  if (!sampleCount) {
+  if (!inputSampleCount) {
     printf ("Can not read from .sig file %s\n", argv[1]);
     exit (0);
   }
 
   gpc_plot_2d (h2DPlot,                                             // Graph handle
                pDataArray,                                          // Dataset
-               sampleCount,                                         // Dataset length
+               inputSampleCount,                                    // Dataset length
                "Input Signal",                                      // Dataset title
                (double) SIGLIB_ZERO,                                // Minimum X value
-               (double) (sampleCount - 1),                          // Maximum X value
+               (double) (inputSampleCount - 1),                     // Maximum X value
                "lines",                                             // Graph type
                "magenta",                                           // Colour
                GPC_NEW);                                            // New graph

@@ -119,6 +119,11 @@ popd
 pushd $SIGLIB_PATH/Examples/CExamples/OrderAnalysis/
 $SIGLIB_PATH/utils/clean_executables.sh
 popd
+pushd $SIGLIB_PATH/Examples/CExamples/SynchronousSampleRateConversion/
+rm -f 1kHz_16kHz_minus6_dbfs_10ms_48kHz
+rm -f 1kHz_16kHz_minus6_dbfs_10ms_48kHz_16kHz
+$SIGLIB_PATH/utils/clean_executables.sh
+popd
 pushd $SIGLIB_PATH/Examples/CExamples/ToneLevels/
 $SIGLIB_PATH/utils/clean_executables.sh
 popd

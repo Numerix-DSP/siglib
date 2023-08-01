@@ -21,8 +21,8 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  SLArrayIndex_t  sampleCount;
-  FILE           *pInputFile;
+  SLArrayIndex_t  inputSampleCount;
+  FILE           *fpInputFile;
 
   if (argc != 2) {
     printf ("\nUsage error  :\nplotwav_stereo filename (no extension)\n\n");
@@ -34,12 +34,12 @@ int main (
 
   printf ("Source file = %s\n", FileName);
 
-  if ((pInputFile = fopen (FileName, "rb")) == NULL) {              // Note this file is binary
+  if ((fpInputFile = fopen (FileName, "rb")) == NULL) {             // Note this file is binary
     printf ("Error opening input .WAV file\n");
     exit (-1);
   }
 
-  wavInfo = SUF_WavReadHeader (pInputFile);
+  wavInfo = SUF_WavReadHeader (fpInputFile);
   if (wavInfo.NumberOfChannels != 2) {                              // Check how many channels
     printf ("Number of channels in .wav file = %d\n", wavInfo.NumberOfChannels);
     printf ("This app requires a stereo .wav file\n");
@@ -69,10 +69,10 @@ int main (
     exit (-1);
   }
 
-  if ((sampleCount =
-       SUF_WavReadData (pDataArray, pInputFile, wavInfo,
+  if ((inputSampleCount =
+       SUF_WavReadData (pDataArray, fpInputFile, wavInfo,
                         wavInfo.NumberOfSamples * wavInfo.NumberOfChannels)) == wavInfo.NumberOfSamples * wavInfo.NumberOfChannels) {
-    sampleCount /= wavInfo.NumberOfChannels;
+    inputSampleCount /= wavInfo.NumberOfChannels;
 
     SDA_Demux2 (pDataArray,                                         // Pointer to source array
                 pCh0,                                               // Pointer to destination array 1
@@ -81,32 +81,32 @@ int main (
 
     gpc_plot_2d (h2DPlot,                                           // Graph handle
                  pCh0,                                              // Dataset
-                 sampleCount,                                       // Dataset length
+                 inputSampleCount,                                  // Dataset length
                  "Channel 0",                                       // Dataset title
                  (double) SIGLIB_ZERO,                              // Minimum X value
-                 (double) (sampleCount - 1) / (double) wavInfo.SampleRate,  // Maximum X value
+                 (double) (inputSampleCount - 1) / (double) wavInfo.SampleRate, // Maximum X value
                  "lines",                                           // Graph type
                  "red",                                             // Colour
                  GPC_NEW);                                          // New graph
 
     gpc_plot_2d (h2DPlot,                                           // Graph handle
                  pCh1,                                              // Dataset
-                 sampleCount,                                       // Dataset length
+                 inputSampleCount,                                  // Dataset length
                  "Channel 1",                                       // Dataset title
                  (double) SIGLIB_ZERO,                              // Minimum X value
-                 (double) (sampleCount - 1) / (double) wavInfo.SampleRate,  // Maximum X value
+                 (double) (inputSampleCount - 1) / (double) wavInfo.SampleRate, // Maximum X value
                  "lines",                                           // Graph type
                  "blue",                                            // Colour
                  GPC_ADD);                                          // New graph
   }
   else {
-    printf ("\n.wav file read error - Number of samples read = %d\n\n", sampleCount);
+    printf ("\n.wav file read error - Number of samples read = %d\n\n", inputSampleCount);
   }
 
   printf ("\nWave file plot\nPlease hit <Carriage Return> to continue . . .");
   getchar ();
 
-  fclose (pInputFile);                                              // Close the input file
+  fclose (fpInputFile);                                             // Close the input file
   free (pDataArray);                                                // Free memory
   free (pCh0);
   free (pCh1);

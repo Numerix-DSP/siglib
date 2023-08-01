@@ -12,11 +12,6 @@
 #include <siglib.h>                                                 // SigLib DSP library
 #include <gnuplot_c.h>                                              // Gnuplot/C
 
-#if defined(SIGLIB_ENABLE_DEBUG_LOGGING)
-#undef SIGLIB_ENABLE_DEBUG_LOGGING
-#define SIGLIB_ENABLE_DEBUG_LOGGING 1
-#endif
-
 
 // Define constants
 #define PER_SAMPLE                    0                             // Set to '1' to use per sample functions, '0' to use array functions

@@ -47,7 +47,7 @@ Description : SigLib DSP library FIR filter routines.
 * Function: SIF_Fir
 *
 * Parameters:
-*   SLData_t *pState,                   Filter state array pointer
+*   SLData_t *pState,                   Pointer to filter state array
 *   SLArrayIndex_t * pFilterIndex,      Filter index
 *   const SLArrayIndex_t FilterLength   Filter length
 *
@@ -84,10 +84,10 @@ void SIGLIB_FUNC_DECL SIF_Fir (
 * Function: SDS_Fir
 *
 * Parameters:
-*   const SLData_t Src,         Data sample to be filtered
-*   SLData_t pState[],          Filter state array pointer
-*   const SLData_t pCoeffs[],       Filter coefficients pointer
-*   SLArrayIndex_t * pFilterIndex,      Filter index offset
+*   const SLData_t Src,                 Data sample to be filtered
+*   SLData_t pState[],                  Pointer to filter state array
+*   const SLData_t pCoeffs[],           Pointer to filter coefficients
+*   SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
 *   const SLArrayIndex_t FilterLength,  Filter length
 *
 * Return value:
@@ -138,9 +138,9 @@ SLData_t SIGLIB_FUNC_DECL SDS_Fir (
 * Parameters:
 *   const SLData_t pSrc[],              Source array pointer
 *   SLData_t pDst[],                    Destination array pointer
-*   SLData_t pState[],                  Filter state array pointer
-*   const SLData_t pCoeffs[],           Filter coefficients pointer
-*   SLArrayIndex_t * pFilterIndex,      Filter index offset
+*   SLData_t pState[],                  Pointer to filter state array
+*   const SLData_t pCoeffs[],           Pointer to filter coefficients
+*   SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
 *   const SLArrayIndex_t FilterLength,  Filter length
 *   const SLArrayIndex_t SampleLength   Input sample length
 *
@@ -198,8 +198,8 @@ void SIGLIB_FUNC_DECL SDA_Fir (
 *
 * Parameters:
 *   const SLData_t Src,                 Source data sample
-*   SLData_t pState[],                  Filter state array pointer
-*   SLArrayIndex_t * pFilterIndex,      Filter index offset
+*   SLData_t pState[],                  Pointer to filter state array
+*   SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
 *   const SLArrayIndex_t FilterLength,  Filter length
 *
 * Return value:
@@ -240,8 +240,8 @@ void SIGLIB_FUNC_DECL SDS_FirAddSample (
 *
 * Parameters:
 *   const SLData_t *pSrc,                   Source array pointer
-*   SLData_t pState[],                      Filter state array pointer
-*   SLArrayIndex_t * pFilterIndex,          Filter index offset
+*   SLData_t pState[],                      Pointer to filter state array
+*   SLArrayIndex_t * pFilterIndex,          Pointer to filter index offset
 *   const SLArrayIndex_t FilterLength,      Filter length
 *   const SLArrayIndex_t InputArrayLength,  Input array length
 *
@@ -291,7 +291,7 @@ void SIGLIB_FUNC_DECL SDA_FirAddSamples (
 * Function: SIF_Comb
 *
 * Parameters:
-*   SLData_t * pState,                  Filter state array pointer
+*   SLData_t * pState,                  Pointer to filter state array
 *   SLArrayIndex_t * pFilterIndex,      Filter index pointer
 *   SLData_t * pFilterSum,              Filter sum pointer
 *   const SLArrayIndex_t FilterLength   Filter length
@@ -332,8 +332,8 @@ void SIGLIB_FUNC_DECL SIF_Comb (
 *
 * Parameters:
 *   const SLData_t Src,                 Data sample to be filtered
-*   SLData_t pState[],                  Filter state array pointer
-*   SLArrayIndex_t * pFilterIndex,      Filter index offset
+*   SLData_t pState[],                  Pointer to filter state array
+*   SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
 *   const SLData_t pFilterSum[],        Filter sum
 *   const SLArrayIndex_t FilterLength,  Filter length
 *
@@ -377,9 +377,9 @@ SLData_t SIGLIB_FUNC_DECL SDS_Comb (
 * Parameters:
 *   const SLData_t * pSrc,              Source array pointer
 *   SLData_t * pDst[],                  Destination array pointer
-*   SLData_t pState[],                  Filter state array pointer
-*   SLArrayIndex_t * pFilterIndex,      Filter index offset
-*   const SLData_t pCoeffs[],           Filter coefficients pointer
+*   SLData_t pState[],                  Pointer to filter state array
+*   SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
+*   const SLData_t pCoeffs[],           Pointer to filter coefficients
 *   const SLArrayIndex_t FilterLength,  Filter length
 *   const SLArrayIndex_t SampleLength)  Sample length
 *
@@ -595,7 +595,7 @@ void SIGLIB_FUNC_DECL SDA_FirComplex (
 * Function: SIF_FirWithStore
 *
 * Parameters:
-*   SLData_t *pState,                   Filter state array pointer
+*   SLData_t *pState,                   Pointer to filter state array
 *   const SLArrayIndex_t FilterLength   Filter length
 *
 * Return value:
@@ -628,8 +628,8 @@ void SIGLIB_FUNC_DECL SIF_FirWithStore (
 *
 * Parameters:
 *   const SLData_t Src,                 Data sample to be filtered
-*   SLData_t pState[],                  Filter state array pointer
-*   const SLData_t pCoeffs[],           Filter coefficients pointer
+*   SLData_t pState[],                  Pointer to filter state array
+*   const SLData_t pCoeffs[],           Pointer to filter coefficients
 *   const SLArrayIndex_t FilterLength,  Filter length
 *
 * Return value:
@@ -676,8 +676,8 @@ SLData_t SIGLIB_FUNC_DECL SDS_FirWithStore (
 * Parameters:
 *   const SLData_t pSrc[],              Source array pointer
 *   SLData_t pDst[],                    Destination array pointer
-*   SLData_t pState[],                  Filter state array pointer
-*   const SLData_t pCoeffs[],           Filter coefficients pointer
+*   SLData_t pState[],                  Pointer to filter state array
+*   const SLData_t pCoeffs[],           Pointer to filter coefficients
 *   const SLArrayIndex_t FilterLength,  Filter length
 *   const SLArrayIndex_t SampleLength   Input sample length
 *
@@ -879,7 +879,7 @@ void SIGLIB_FUNC_DECL SDA_FirComplexWithStore (
 *
 * Parameters:
 *   const SLData_t Src,                 Source data sample
-*   SLData_t pState[],                  Filter state array pointer
+*   SLData_t pState[],                  Pointer to filter state array
 *   const SLArrayIndex_t FilterLength,  Filter length
 *
 * Return value:
@@ -915,7 +915,7 @@ void SIGLIB_FUNC_DECL SDS_FirWithStoreAddSample (
 *
 * Parameters:
 *   const SLData_t *pSrc,                   Source array pointer
-*   SLData_t pState[],                      Filter state array pointer
+*   SLData_t pState[],                      Pointer to filter state array
 *   const SLArrayIndex_t FilterLength,      Filter length
 *   const SLArrayIndex_t InputArrayLength,  Input array length
 *
@@ -957,7 +957,7 @@ void SIGLIB_FUNC_DECL SDA_FirWithStoreAddSamples (
 * Function: SIF_FirExtendedArray
 *
 * Parameters:
-*   SLData_t *pState,                   Filter state array pointer
+*   SLData_t *pState,                   Pointer to filter state array
 *   const SLData_t * pFilterTaps,       Filter coefficients
 *   SLData_t * pFilterProcCoeffs,       Filter processing coefficients
 *   SLArrayIndex_t * pFilterIndex,      Filter index
@@ -1002,9 +1002,9 @@ void SIGLIB_FUNC_DECL SIF_FirExtendedArray (
 *
 * Parameters:
 *   const SLData_t Src,                 Data sample to be filtered
-*   SLData_t *pState,                   Filter state array pointer
-*   const SLData_t *pCoeffs,            Filter coefficients pointer
-*   SLArrayIndex_t * pFilterIndex,      Filter index offset
+*   SLData_t *pState,                   Pointer to filter state array
+*   const SLData_t *pCoeffs,            Pointer to filter coefficients
+*   SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
 *   const SLArrayIndex_t FilterLength,  Filter length
 *
 * Return value:
@@ -1060,9 +1060,9 @@ SLData_t SIGLIB_FUNC_DECL SDS_FirExtendedArray (
 * Parameters:
 *   const SLData_t pSrc[],              Source array pointer
 *   SLData_t pDst[],                    Destination array pointer
-*   SLData_t pState[],                  Filter state array pointer
-*   const SLData_t pCoeffs[],           Filter coefficients pointer
-*   SLArrayIndex_t * pFilterIndex,      Filter index offset
+*   SLData_t pState[],                  Pointer to filter state array
+*   const SLData_t pCoeffs[],           Pointer to filter coefficients
+*   SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
 *   const SLArrayIndex_t FilterLength,  Filter length
 *   const SLArrayIndex_t SampleLength   Input sample length
 *
@@ -1331,8 +1331,8 @@ void SIGLIB_FUNC_DECL SDA_FirComplexExtendedArray (
 *
 * Parameters:
 *   const SLData_t Src,                 Data sample to be filtered
-*   SLData_t *pState,                   Filter state array pointer
-*   SLArrayIndex_t * pFilterIndex,      Filter index offset
+*   SLData_t *pState,                   Pointer to filter state array
+*   SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
 *   const SLArrayIndex_t FilterLength,  Filter length
 *
 * Return value:
@@ -1377,8 +1377,8 @@ void SIGLIB_FUNC_DECL SDS_FirExtendedArrayAddSample (
 *
 * Parameters:
 *   const SLData_t pSrc[],              Source array pointer
-*   SLData_t pState[],                  Filter state array pointer
-*   SLArrayIndex_t * pFilterIndex,      Filter index offset
+*   SLData_t pState[],                  Pointer to filter state array
+*   SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
 *   const SLArrayIndex_t FilterLength,  Filter length
 *   const SLArrayIndex_t SampleLength   Input sample length
 *

@@ -24,8 +24,8 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  SLArrayIndex_t  sampleCount;
-  FILE           *pInputFile;
+  SLArrayIndex_t  inputSampleCount;
+  FILE           *fpInputFile;
   SLArrayIndex_t  FrameNumber;
   SLArrayIndex_t  i;
 
@@ -44,12 +44,12 @@ int main (
   FrameNumber = atol (argv[2]);
   printf ("Frame number = %d\n", FrameNumber);
 
-  if ((pInputFile = fopen (WavFileName, "rb")) == NULL) {           // Note this file is binary
+  if ((fpInputFile = fopen (WavFileName, "rb")) == NULL) {          // Note this file is binary
     printf ("Error opening input file %s\n", WavFileName);
     exit (-1);
   }
 
-  wavInfo = SUF_WavReadHeader (pInputFile);
+  wavInfo = SUF_WavReadHeader (fpInputFile);
   SUF_WavDisplayInfo (wavInfo);
   if (wavInfo.NumberOfChannels != 1) {                              // Check how many channels
     printf ("Number of channels in %s = %d\n", WavFileName, wavInfo.NumberOfChannels);
@@ -62,13 +62,13 @@ int main (
 
   i = -1;
   do {
-    sampleCount = SUF_WavReadData (pDataArray, pInputFile, wavInfo, SAMPLE_LENGTH);
+    inputSampleCount = SUF_WavReadData (pDataArray, fpInputFile, wavInfo, SAMPLE_LENGTH);
     i++;
-  } while ((i <= FrameNumber) && (sampleCount == SAMPLE_LENGTH));
+  } while ((i <= FrameNumber) && (inputSampleCount == SAMPLE_LENGTH));
 
   if (i < FrameNumber) {
     printf ("The input file is not long enough for the number of frames you have requested\n");
-    fclose (pInputFile);                                            // Close the input file
+    fclose (fpInputFile);                                           // Close the input file
     free (pDataArray);                                              // Free memory
     exit (-1);
   }
@@ -85,7 +85,7 @@ int main (
     exit (-1);
   }
 
-  while (!kbhit () && ((sampleCount = SUF_WavReadData (pDataArray, pInputFile, wavInfo, SAMPLE_LENGTH)) == SAMPLE_LENGTH)) {
+  while (!kbhit () && ((inputSampleCount = SUF_WavReadData (pDataArray, fpInputFile, wavInfo, SAMPLE_LENGTH)) == SAMPLE_LENGTH)) {
     if (strcmp (argv[3], "F") == 0) {
       plot_frequency_domain (pDataArray, SIGLIB_BLACKMAN_HARRIS, "Power spectrum", SAMPLE_LENGTH, SAMPLE_LENGTH);
     }
@@ -105,7 +105,7 @@ int main (
   if (kbhit ())
     getchar ();                                                     // Clear keyboard buffer
 
-  fclose (pInputFile);                                              // Close the input file
+  fclose (fpInputFile);                                             // Close the input file
   free (pDataArray);                                                // Free memory
 
   exit (0);

@@ -7,7 +7,7 @@
 // To see how to apply a scrambler to the sequence
 // (e.g. polynomial: 1 + x-14 + x-17 used in the ITU-T
 // recommendations), please refer to example tstqam16.c.
-// Copyright (c) 2023 Sigma Numerix Ltd. All rights reserved.
+// Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -19,6 +19,8 @@
 // Define constants
 #define RRCF_ENABLE                     1                           // Root raised cosine filter on Tx and Rx
 #define DIFFERENTIAL_ENCODING_ENABLE    1                           // Differential encoding / decoding
+
+#define DEBUG_LOG_FILE                  0                           // Set to '1' to enable logging to debug.log
 
                     // Select one of the following display modes
 #define DISPLAY_TIME_DOMAIN             0                           // Time domain output

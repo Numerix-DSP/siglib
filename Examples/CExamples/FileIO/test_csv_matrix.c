@@ -30,23 +30,23 @@ int main (
   void)
 {
   SLArrayIndex_t  nRows, nCols;
-  SLArrayIndex_t  sampleCount;
+  SLArrayIndex_t  inputSampleCount;
 
   printf ("Writing to test.csv file\n");
 
-  sampleCount = SUF_CsvWriteMatrix ((SLData_t *) outputData,        // Source array pointer
-                                    "test.csv",                     // Output filename
-                                    N_ROWS,                         // Number of rows
-                                    N_COLS);                        // Number of columns
-  printf ("Number of words written to test.csv file : %d\n", sampleCount);
+  inputSampleCount = SUF_CsvWriteMatrix ((SLData_t *) outputData,   // Source array pointer
+                                         "test.csv",                // Output filename
+                                         N_ROWS,                    // Number of rows
+                                         N_COLS);                   // Number of columns
+  printf ("Number of words written to test.csv file : %d\n", inputSampleCount);
 
   printf ("Reading from test.csv file\n");
-  sampleCount = SUF_CsvReadMatrix (&pInputData,                     // Destination array pointer
-                                   "test.csv",                      // Input filename
-                                   SIGLIB_FIRST_ROW_KEEP,           // First row keep/ignore flag
-                                   &nRows,                          // Pointer to number of rows read
-                                   &nCols);                         // Pointer to number of columns read
-  printf ("Number of words read from test.csv file  : %d\n", sampleCount);
+  inputSampleCount = SUF_CsvReadMatrix (&pInputData,                // Destination array pointer
+                                        "test.csv",                 // Input filename
+                                        SIGLIB_FIRST_ROW_KEEP,      // First row keep/ignore flag
+                                        &nRows,                     // Pointer to number of rows read
+                                        &nCols);                    // Pointer to number of columns read
+  printf ("Number of words read from test.csv file  : %d\n", inputSampleCount);
   printf ("Number of rows read from test.csv file   : %d\n", nRows);
   printf ("Number of columns read from test.csv file: %d\n", nCols);
 

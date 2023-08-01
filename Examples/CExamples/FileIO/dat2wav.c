@@ -17,9 +17,9 @@ int main (
   int argc,
   char **argv)
 {
-  SLArrayIndex_t  sampleCount;
-  FILE           *pInputFile, *pOutputFile;
-  SLArrayIndex_t  totalSampleCount = 0;
+  SLArrayIndex_t  inputSampleCount;
+  SLArrayIndex_t  outputSampleCount = 0;
+  FILE           *fpInputFile, *fpOutputFile;
 
   char            DatFileName[256];
   char            WavFileName[256];
@@ -40,36 +40,36 @@ int main (
 
   p_DataArray = SUF_VectorArrayAllocate (SAMPLE_SIZE);
 
-  if ((pInputFile = fopen (DatFileName, "rb")) == NULL) {           // Note this file is binary
+  if ((fpInputFile = fopen (DatFileName, "rb")) == NULL) {          // Note this file is binary
     printf ("Error opening input file %s\n", DatFileName);
     exit (-1);
   }
 
-  if ((pOutputFile = fopen (WavFileName, "wb")) == NULL) {          // Note this file is binary
+  if ((fpOutputFile = fopen (WavFileName, "wb")) == NULL) {         // Note this file is binary
     printf ("Error opening output file %s\n", WavFileName);
     exit (-1);
   }
 
-  printf ("Input sample rate = %lf\n", SUF_DatReadHeader (pInputFile));
+  printf ("Input sample rate = %lf\n", SUF_DatReadHeader (fpInputFile));
 
-  wavInfo = SUF_WavSetInfo ((long) SUF_DatReadHeader (pInputFile), 0, 1, 16, 2, 1);
+  wavInfo = SUF_WavSetInfo ((long) SUF_DatReadHeader (fpInputFile), 0, 1, 16, 2, 1);
 
-  SUF_WavWriteHeader (pOutputFile, wavInfo);                        // Write dummy header to output file
+  SUF_WavWriteHeader (fpOutputFile, wavInfo);                       // Write dummy header to output file
 
-  while ((sampleCount = SUF_DatReadData (p_DataArray, pInputFile, SAMPLE_SIZE)) != 0) { // Successively read arrays of upto 128 samples
-    printf ("sampleCount = %d\n", sampleCount);
-    totalSampleCount += sampleCount;
-    SUF_WavWriteData (p_DataArray, pOutputFile, wavInfo, sampleCount);
+  while ((inputSampleCount = SUF_DatReadData (p_DataArray, fpInputFile, SAMPLE_SIZE)) != 0) { // Successively read arrays of upto 128 samples
+    printf ("inputSampleCount = %d\n", inputSampleCount);
+    outputSampleCount += inputSampleCount;
+    SUF_WavWriteData (p_DataArray, fpOutputFile, wavInfo, inputSampleCount);
   }
 // Write last block of data
-  printf ("Total number of samples read = %d\n", totalSampleCount);
+  printf ("Total number of samples read = %d\n", outputSampleCount);
 
-  wavInfo.NumberOfSamples = totalSampleCount;                       // Set total data length
-  rewind (pOutputFile);                                             // Rewind pointer to start of file
-  SUF_WavWriteHeader (pOutputFile, wavInfo);                        // Overwrite the header information
+  wavInfo.NumberOfSamples = outputSampleCount;                      // Set total data length
+  rewind (fpOutputFile);                                            // Rewind pointer to start of file
+  SUF_WavWriteHeader (fpOutputFile, wavInfo);                       // Overwrite the header information
 
-  fclose (pInputFile);
-  fclose (pOutputFile);
+  fclose (fpInputFile);
+  fclose (fpOutputFile);
 
   free (p_DataArray);                                               // Free memory
 

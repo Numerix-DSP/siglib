@@ -17,7 +17,7 @@ SLData_t        srcData[SAMPLE_LENGTH] = { -10, -11, -12, -13, -14, 15, 16, 17, 
 int main (
   void)
 {
-  SLArrayIndex_t  sampleCount;
+  SLArrayIndex_t  inputSampleCount;
   FILE           *fpInputFile, *fpOutputFile;
 
   printf ("Opening and writing to test.bin file\n");
@@ -38,8 +38,8 @@ int main (
     exit (-1);
   }
 
-  while ((sampleCount = SUF_BinReadData (inputData, fpInputFile, SIGLIB_LITTLE_ENDIAN, IO_LENGTH)) == IO_LENGTH) {
-    for (SLArrayIndex_t i = 0; i < sampleCount; i++) {
+  while ((inputSampleCount = SUF_BinReadData (inputData, fpInputFile, SIGLIB_LITTLE_ENDIAN, IO_LENGTH)) == IO_LENGTH) {
+    for (SLArrayIndex_t i = 0; i < inputSampleCount; i++) {
       printf ("%lf, \n", inputData[i]);
     }
   }

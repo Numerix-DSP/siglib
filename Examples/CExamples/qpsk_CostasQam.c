@@ -21,7 +21,8 @@
 #define DIFFERENTIAL_ENCODING_ENABLE    1                           // Differential encoding / decoding
 
 #define TX_ALPHABET                     1                           // Set to '1' to Tx the alphabet or '0' to Tx 0xFFs
-#define DEBUG_LOG_FILE                  1                           // Set to '1' to enable logging to debug.log
+#define DEBUG_LOG_FILE                  0                           // Set to '1' to enable logging to debug.log
+
                     // Select one of the following display modes
 #define DISPLAY_TIME_DOMAIN             0                           // Set to '1' to display the time domain output from the transmitter
 #define DISPLAY_FREQ_DOMAIN             0                           // Set to '1' to display the frequency domain output

@@ -17,7 +17,7 @@ SLData_t        srcData[SAMPLE_LENGTH] = { 10, 11, 12, 13, 14, 15, 16, 17, 18, 1
 int main (
   void)
 {
-  SLArrayIndex_t  sampleCount;
+  SLArrayIndex_t  inputSampleCount;
   SLData_t        sampleRate = 8000.;                               // .csv file parameters
   SLArrayIndex_t  sampleIndex = 0l;
   FILE           *fpInputFile, *fpOutputFile;
@@ -41,8 +41,8 @@ int main (
     exit (-1);
   }
 
-  while ((sampleCount = SUF_CsvReadData (inputData, fpInputFile, sampleRate, 2, IO_LENGTH)) == IO_LENGTH) {
-    for (int i = 0; i < sampleCount; i++) {
+  while ((inputSampleCount = SUF_CsvReadData (inputData, fpInputFile, sampleRate, 2, IO_LENGTH)) == IO_LENGTH) {
+    for (int i = 0; i < inputSampleCount; i++) {
       printf ("%lf, ", inputData[i]);
     }
   }

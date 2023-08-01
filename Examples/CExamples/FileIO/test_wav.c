@@ -19,7 +19,7 @@ SLWavFileInfo_s wavInfo;
 int main (
   void)
 {
-  SLArrayIndex_t  sampleCount;
+  SLArrayIndex_t  inputSampleCount;
   FILE           *fpInputFile, *fpOutputFile;
 
   wavInfo.SampleRate = 8000;                                        // .wav file parameters
@@ -57,8 +57,8 @@ int main (
 
   SUF_WavDisplayInfo (wavInfo);
 
-  while ((sampleCount = SUF_WavReadData (inputData, fpInputFile, wavInfo, IO_LENGTH)) == IO_LENGTH) {
-    for (int i = 0; i < sampleCount; i++)
+  while ((inputSampleCount = SUF_WavReadData (inputData, fpInputFile, wavInfo, IO_LENGTH)) == IO_LENGTH) {
+    for (int i = 0; i < inputSampleCount; i++)
       printf ("%lf, ", inputData[i]);
   }
 
