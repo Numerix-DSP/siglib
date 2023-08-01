@@ -44,9 +44,9 @@ Update history :
 #ifndef _HP_VEE                                                     // The following functionality is not supported by VEE
 
 #define SIGLIB                          1                           // Indicates SigLib is being used
-#define SIGLIB_VERSION                  10.53                       // Indicates SigLib version being used
+#define SIGLIB_VERSION                  10.54                       // Indicates SigLib version being used
 #ifndef SIGLIB_ENABLE_DEBUG_LOGGING
-#define SIGLIB_ENABLE_DEBUG_LOGGING   0                             // Set to 1 to enable SUF_Debugfprintf functions in some SigLib functions
+#define SIGLIB_ENABLE_DEBUG_LOGGING     0                           // Set to 1 to enable SUF_Debugfprintf functions in some SigLib functions
 #endif
 #define SIGLIB_LOG_FILE                 "siglib_debug.log"          // Filename for SigLib logging functions
 

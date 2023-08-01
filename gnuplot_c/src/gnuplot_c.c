@@ -1318,7 +1318,7 @@ h_GPC_Plot     *gpc_plot_confusion_matrix (
     fprintf (plotHandle->pipe, "$confMat << EOD\n");
     for (int j = 0; j < numCategories; j++) {
       int             i;
-      for (int i = 0; i < numCategories - 1; i++) {
+      for (i = 0; i < numCategories - 1; i++) {
         fprintf (plotHandle->pipe, "%lf ", *(confusionMatrix + (j * numCategories) + i));
       }
       fprintf (plotHandle->pipe, "%lf\n", *(confusionMatrix + (j * numCategories) + i));
@@ -1393,7 +1393,7 @@ h_GPC_Plot     *gpc_plot_confusion_matrix_percentage (
     fprintf (plotHandle->pipe, "$confMat << EOD\n");
     for (int j = 0; j < numCategories; j++) {
       int             i;
-      for (int i = 0; i < numCategories - 1; i++) {
+      for (i = 0; i < numCategories - 1; i++) {
         fprintf (plotHandle->pipe, "%lf ", *(confusionMatrix + (j * numCategories) + i));
       }
       fprintf (plotHandle->pipe, "%lf\n", *(confusionMatrix + (j * numCategories) + i));

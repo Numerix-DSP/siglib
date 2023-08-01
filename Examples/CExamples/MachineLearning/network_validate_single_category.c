@@ -24,9 +24,9 @@
 #define INPUT_SCALING_FACTOR            (SIGLIB_ONE/1000.)          // Scaling factor used to avoid numerical overflow in the exponent function
 #endif
 
-#define CLASSIFICATION_THRESHOLD            (0.5)
+#define CLASSIFICATION_THRESHOLD        (0.5)
 
-#define NUM_CATEGORIES                      2                       // Number of output categories
+#define NUM_CATEGORIES                  2                           // Number of output categories
 
 
 // Declare global variables and arrays
@@ -38,9 +38,9 @@ static char     filename1[512];
 static char     filenameWeights[1200];
 
 static SLData_t confusionMatrix[NUM_CATEGORIES][NUM_CATEGORIES];    //            Predicted Categories
-                                                                            // Actual         00, 01 ...
-                                                                            // Categories     10, 11 ...
-                                                                            //                  ...
+                                                                    // Actual         00, 01 ...
+                                                                    // Categories     10, 11 ...
+                                                                    //                  ...
 
 static SLData_t layer1Weights[NETWORK_HIDDEN_LAYER_NODES][NETWORK_INPUT_SAMPLE_LENGTH]; // Declare weights for two transition paths
 static SLData_t layer2Weights[NETWORK_HIDDEN_LAYER_NODES];

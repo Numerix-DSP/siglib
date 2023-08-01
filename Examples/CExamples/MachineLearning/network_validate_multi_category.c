@@ -24,7 +24,7 @@
 #define INPUT_SCALING_FACTOR            (SIGLIB_ONE/1000.)          // Scaling factor used to avoid numerical overflow in the exponent function
 #endif
 
-#define NUM_CATEGORIES                      4                       // Number of output categories
+#define NUM_CATEGORIES                  4                           // Number of output categories
 
 // Declare global variables and arrays
 static SLData_t *pLayer1PostActivation, *pLayer2PostActivation;
@@ -37,9 +37,9 @@ static char     filename3[512];
 static char     filenameWeights[2400];
 
 static SLData_t confusionMatrix[NUM_CATEGORIES][NUM_CATEGORIES];    //            Predicted Categories
-                                                                            // Actual         00, 01 ...
-                                                                            // Categories     10, 11 ...
-                                                                            //                  ...
+                                                                    // Actual         00, 01 ...
+                                                                    // Categories     10, 11 ...
+                                                                    //                  ...
 
 static SLData_t layer1Weights[NETWORK_HIDDEN_LAYER_NODES][NETWORK_INPUT_SAMPLE_LENGTH]; // Declare weights for two transition paths
 static SLData_t layer2Weights[NUM_CATEGORIES][NETWORK_HIDDEN_LAYER_NODES];
