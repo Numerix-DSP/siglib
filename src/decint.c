@@ -339,6 +339,9 @@ void SIGLIB_FUNC_DECL SIF_InterpolateAndFilter (
 *   Interpolate and filter the input data sample rate
 *
 * Notes :
+*   This function normalizes the gain by multiplying the
+*   output by the interpolation factor.
+*
 *   This function supports interpolation across contiguous
 * arrays through the use of the DstArrayIndex parameter.
 *
@@ -379,6 +382,9 @@ void SIGLIB_FUNC_DECL SDA_InterpolateAndFilter (
 
 // Filter the interpolated signal
   SDA_Fir (pDst, pDst, pState, pCoeffs, pFilterIndex, FilterLength, DstArrayLength);
+
+// Multiply the interpolated signal by the interpolation ratio, to normalize the gain
+  SDA_Multiply (pDst, (SLData_t) InterpolationRatio, pDst, DstArrayLength);
 }                                                                   // End of SDA_InterpolateAndFilter()
 
 

@@ -1,29 +1,6 @@
 SigLib (Tm) Revision Update History File
 ========================================
 
-VERSION : 10.54
-RELEASE DATE : XX/XX/2023
-_________________________
-
-Additional Functionality
-  None.
-
-Operational Changes :
-  None.
-
-Additional Processor / Compiler Support :
-  None.
-
-Optimisation Changes :
-  None.
-
-Bug Fixes :
- None.
-
-Notes :
-  None.
-
-
 VERSION : 10.53
 RELEASE DATE : 01/08/2023
 _________________________
@@ -32,7 +9,7 @@ Additional Functionality
   None.
 
 Operational Changes :
-  None.
+  SDA_InterpolateAndFilter() - Gain now normalized by multiplying output signal by interpolation factor.
 
 Additional Processor / Compiler Support :
   None.
