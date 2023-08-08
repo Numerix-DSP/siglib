@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><title>Graphical Equalizer Filter Design</title></head>
+<body bgcolor="#ffffff">
+<div>
+<table border="0">
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://www.numerix-dsp.com" target="_blank"><font face="Arial" size="2"><img src="../../../WebResources/NumerixLogoSM.JPG" alt="Numerix Web Site" border="0" height="100" width="105"></font></a></td>
+      <td align="center">&nbsp;</td>
+      <td align="center">
+      <h3><font color="#0000ff" face="Arial" size="3">SigLib Graphical Equalizer Filter Design Example Program</font></h3>
+      </td>
+      <td align="center"><font size="2">&nbsp;
+      </font></td>
+      <td align="center"><a href="https://www.numerix-dsp.com/siglib.html" target="_blank"><font size="2"><img src="../../../WebResources/siglib.gif" alt="SigLib DSP Library Information" border="0" height="49" width="125"></font></a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<hr>
+<p style="font-family: Arial;"><font size="2">The files in
+this folder provide examples of how to design a filter bank for a graphical equalizer.<br><br>
+
+Graphical equalizers and tone control filters employ a series of cascaded Infinite
+Impulse Response (IIR) filters, each consisting of a single biquad per frequency band.<br>
+These filter banks are commonly distributed uniformly across the logarithmic frequency
+spectrum to emulate the octave-based characteristics of music and the human auditory
+system.<br>
+The illustration below depicts this arrangement.<br><br>
+
+<img src="filter_bank.png" alt="Graphical Equalizer Filter Bank" border="0"><br><br>
+
+The filter bank design process involves computing the center frequencies and bandwidths for every filter,
+followed by the careful alignment of filter band edges (-3 dB points) to eliminate any potential overlaps
+or gaps between the bands.<br>
+It's important to highlight that the conversion of filter parameters from the logarithmic (octave) frequency
+domain to the linear frequency domain is essential, as demonstrated in the previously mentioned diagram.<br>
+In this context, the application selects the logarithmic midpoint between two adjacent filter bank center
+frequencies as the designated cross-over point.<br><br>
+
+The filter bank is a multi-dimensional array that includes entries for the number of filter bands
+and the number of gain levels for each filter band.<br><br>
+The filter bands are:<br>
+<ul>
+<li>low-shelf       - The low-shelf filter</li>
+<li>(N-2) * peaking - The peaking filters</li>
+<li>high-shelf      - The high-shelf filter</li>
+</ul>
+This code is based on the equations in
+<a target="_blank" href="https://webaudio.github.io/Audio-EQ-Cookbook/audio-eq-cookbook.html"><font size="2"> Robert Bristow-Johnson's Audio Equalizer Cookbook</font></a>
+and includes example configurations for 3, 5 and 10 band equalizers.<br>
+</font></p>
+
+<table style="font-family: Arial;" border="0" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td><strong>Filename&nbsp;</strong></td>
+      <td>&nbsp;</td>
+      <td><strong>Description</strong></td>
+    </tr>
+    <tr>
+      <td><a target="_blank" href="graphical_equalizer.c"><font size="2">graphical_equalizer.c</font></a><font size="2">&nbsp;</font></td>
+      <td>&nbsp;</td>
+      <td><font size="2">Graphical Equalizer Filter Design.</font></td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td style="vertical-align: top;"><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+<table style="font-family: Arial;" border="0" cellspacing="5">
+  <tbody>
+    <tr>
+      <td nowrap="nowrap" valign="top"><a name="contact"></a><font color="#0000ff" size="3"><strong>For further information, please contact :</strong></font><font color="#0000ff" size="2"><strong><br>
+      </strong></font><a href="mailto:numerix@numerix-dsp.com"><font size="2"><img src="../../../WebResources/email.gif" alt="Email Numerix" border="0" height="32" width="32"></font></a><font size="2"> Email : </font><a href="mailto:numerix@numerix-dsp.com"><font size="2">numerix@numerix-dsp.com
+      </font></a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><font face="Arial" size="2">Copyright &#169; 2023, Delta Numerix All rights reserved.<br>
+SigLib and Digital Filter Plus are trademarks of Delta Numerix All
+other trademarks acknowledged.<br>
+Delta Numerix are continuously increasing the functionality of SigLib
+and reserve the right to alter the product at any time.</font></p>
+
+</body></html>

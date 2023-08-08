@@ -1,6 +1,30 @@
 SigLib (Tm) Revision Update History File
 ========================================
 
+VERSION : 10.54
+RELEASE DATE : XX/XX/2023
+_________________________
+
+Additional Functionality
+  SIF_IirBandPassFilter0dBPeakGain
+  SIF_GraphicalEqualizerFilterBank
+
+Operational Changes :
+  SIF_IirBandPassFilter renamed SIF_IirBandPassFilterConstantSkirtGain
+
+Additional Processor / Compiler Support :
+  None.
+
+Optimisation Changes :
+  None.
+
+Bug Fixes :
+ None.
+
+Notes :
+  None.
+
+
 VERSION : 10.53
 RELEASE DATE : 01/08/2023
 _________________________
@@ -559,7 +583,7 @@ Operational Changes :
     SIF_LowPassIirFilter changed to SIF_IirLowPassFilter
     SIF_HighPassIirFilter changed to SIF_IirHighPassFilter
     SIF_AllPassIirFilter changed to SIF_IirAllPassFilter
-    SIF_BandPassIirFilter changed to SIF_IirBandPassFilter
+    SIF_BandPassIirFilter changed to SIF_IirBandPassFilterConstantSkirtGain
     SIF_NotchIirFilter changed to SIF_IirNotchFilter
     SIF_PeakingIirFilter changed to SIF_IirPeakingFilter
     SIF_LowShelfIirFilter changed to SIF_IirLowShelfFilter

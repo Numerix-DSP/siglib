@@ -59,7 +59,7 @@ static const SLData_t COS_MOD1[SIZE_COS_MOD1] = {
   -1.0000000000, 0.3090172937, 0.8090167786, -0.8090172410, -0.3090165454
 };
 
-static SLData_t *pSource, *pRealData, *pImagData, *pResults, *pFFTCoeffs;
+static SLData_t *pSrc, *pRealData, *pImagData, *pResults, *pFFTCoeffs;
 
 
 int main (
@@ -73,11 +73,17 @@ int main (
   SLData_t        SinePhase;
   SLData_t        working_data;
 
-  pSource = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
   pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
   pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
   pResults = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
   pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+
+  if ((NULL == pSrc) || (NULL == pRealData) || (NULL == pImagData) || (NULL == pResults) || (NULL == pFFTCoeffs)) {
+
+    printf ("\n\nMemory allocation failed\n\n");
+    exit (0);
+  }
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Amplitude Modulation",                            // Plot title
@@ -102,7 +108,7 @@ int main (
            FFT_LENGTH);                                             // FFT length
 
 // Generate signal to be shifted
-  SDA_SignalGenerate (pSource,                                      // Pointer to destination array
+  SDA_SignalGenerate (pSrc,                                         // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
                       SIGLIB_FILL,                                  // Fill (overwrite) or add to existing array contents
@@ -114,7 +120,7 @@ int main (
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
-  SDA_Copy (pSource,                                                // Pointer to source array
+  SDA_Copy (pSrc,                                                   // Pointer to source array
             pRealData,                                              // Pointer to destination array
             FFT_LENGTH);                                            // Dataset length
 
@@ -133,7 +139,7 @@ int main (
                     FFT_LENGTH);                                    // Dataset length
 
   gpc_plot_2d (h2DPlot,                                             // Graph handle
-               pSource,                                             // Dataset
+               pSrc,                                                // Dataset
                FFT_LENGTH,                                          // Dataset length
                "Source Signal",                                     // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
@@ -167,7 +173,7 @@ int main (
   for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
 // perform the first stage modulation to move baseband
 // signal around MOD_1_FREQ
-    working_data = COS_MOD1[cos_mod1_index++] * *(pSource + i);
+    working_data = COS_MOD1[cos_mod1_index++] * *(pSrc + i);
     if (cos_mod1_index >= SIZE_COS_MOD1) {
       cos_mod1_index = 0;
     }
@@ -231,13 +237,11 @@ int main (
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
-  printf ("\nShifted Spectrum\n");
-
-  printf ("\nHit <Carriage Return> to continue ....\n");
+  printf ("\nShifted Spectrum\nHit <Carriage Return> to continue ....\n");
   getchar ();                                                       // Wait for <Carriage Return>
   gpc_close (h2DPlot);
 
-  SUF_MemoryFree (pSource);                                         // Free memory
+  SUF_MemoryFree (pSrc);                                            // Free memory
   SUF_MemoryFree (pRealData);
   SUF_MemoryFree (pImagData);
   SUF_MemoryFree (pResults);

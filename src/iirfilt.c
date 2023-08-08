@@ -1204,11 +1204,10 @@ void SIGLIB_FUNC_DECL SIF_IirLowPassFilter (
   SLData_t        cosw0 = SDS_Cos (w0);
 
   SLData_t        a0 = SIGLIB_ONE + alpha;
-  SLData_t        b0_2_overA0 = ((SIGLIB_ONE - cosw0) / SIGLIB_TWO) / a0;
 
-  *pCoeffs = b0_2_overA0;                                           // Compute the coefficients
+  *pCoeffs = ((SIGLIB_ONE - cosw0) / SIGLIB_TWO) / a0;              // Compute the coefficients
   *(pCoeffs + 1) = (SIGLIB_ONE - cosw0) / a0;
-  *(pCoeffs + 2) = b0_2_overA0;
+  *(pCoeffs + 2) = ((SIGLIB_ONE - cosw0) / SIGLIB_TWO) / a0;
   *(pCoeffs + 3) = (SIGLIB_MINUS_TWO * cosw0) / a0;
   *(pCoeffs + 4) = (SIGLIB_ONE - alpha) / a0;
 }                                                                   // End of SIF_IirLowPassFilter()
@@ -1243,11 +1242,10 @@ void SIGLIB_FUNC_DECL SIF_IirHighPassFilter (
   SLData_t        cosw0 = SDS_Cos (w0);
 
   SLData_t        a0 = SIGLIB_ONE + alpha;
-  SLData_t        b0_2_overA0 = ((SIGLIB_ONE + cosw0) / SIGLIB_TWO) / a0;
 
-  *pCoeffs = b0_2_overA0;                                           // Compute the coefficients
+  *pCoeffs = ((SIGLIB_ONE + cosw0) / SIGLIB_TWO) / a0;              // Compute the coefficients
   *(pCoeffs + 1) = (-(SIGLIB_ONE + cosw0)) / a0;
-  *(pCoeffs + 2) = b0_2_overA0;
+  *(pCoeffs + 2) = ((SIGLIB_ONE + cosw0) / SIGLIB_TWO) / a0;
   *(pCoeffs + 3) = (SIGLIB_MINUS_TWO * cosw0) / a0;
   *(pCoeffs + 4) = (SIGLIB_ONE - alpha) / a0;
 }                                                                   // End of SIF_IirHighPassFilter()
@@ -1282,11 +1280,10 @@ void SIGLIB_FUNC_DECL SIF_IirAllPassFilter (
   SLData_t        cosw0 = SDS_Cos (w0);
 
   SLData_t        a0 = SIGLIB_ONE + alpha;
-  SLData_t        b0_2_overA0 = (SIGLIB_ONE - alpha) / a0;
 
-  *pCoeffs = b0_2_overA0;                                           // Compute the coefficients
+  *pCoeffs = (SIGLIB_ONE - alpha) / a0;                             // Compute the coefficients
   *(pCoeffs + 1) = (SIGLIB_MINUS_TWO * cosw0) / a0;
-  *(pCoeffs + 2) = b0_2_overA0;
+  *(pCoeffs + 2) = (SIGLIB_ONE - alpha) / a0;
   *(pCoeffs + 3) = (SIGLIB_MINUS_TWO * cosw0) / a0;
   *(pCoeffs + 4) = (SIGLIB_ONE - alpha) / a0;
 }                                                                   // End of SIF_IirAllPassFilter()
@@ -1295,7 +1292,7 @@ void SIGLIB_FUNC_DECL SIF_IirAllPassFilter (
 /**/
 
 /********************************************************
-* Function: SIF_IirBandPassFilter
+* Function: SIF_IirBandPassFilterConstantSkirtGain
 *
 * Parameters:
 *   SLData_t * pCoeffs,                 - Filter coefficient array
@@ -1306,12 +1303,12 @@ void SIGLIB_FUNC_DECL SIF_IirAllPassFilter (
 *   void
 *
 * Description:
-*   Generate the coefficients for an all-pass IIR filter with
-*   the specified cut-off frequency and Q factor.
+*   Generate the coefficients for a band-pass filter with
+*   constant skirt gain, peak gain = Q.
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_IirBandPassFilter (
+void SIGLIB_FUNC_DECL SIF_IirBandPassFilterConstantSkirtGain (
   SLData_t * SIGLIB_PTR_DECL pCoeffs,
   const SLData_t CutoffFrequency1,
   const SLData_t CutoffFrequency2)
@@ -1322,14 +1319,52 @@ void SIGLIB_FUNC_DECL SIF_IirBandPassFilter (
   SLData_t        alpha = sinw0 * SDS_Sinh ((SDS_Log (SIGLIB_TWO)) / SIGLIB_TWO * bw * w0 / sinw0);
 
   SLData_t        a0 = SIGLIB_ONE + alpha;
-  SLData_t        b0_2_overA0 = (sinw0 / SIGLIB_TWO) / a0;
 
-  *pCoeffs = b0_2_overA0;                                           // Compute the coefficients
+  *pCoeffs = (sinw0 / SIGLIB_TWO) / a0;                             // Compute the coefficients
   *(pCoeffs + 1) = SIGLIB_ZERO;
-  *(pCoeffs + 2) = -b0_2_overA0;
+  *(pCoeffs + 2) = -(sinw0 / SIGLIB_TWO) / a0;
   *(pCoeffs + 3) = (SIGLIB_MINUS_TWO * SDS_Cos (w0)) / a0;
   *(pCoeffs + 4) = (SIGLIB_ONE - alpha) / a0;
-}                                                                   // End of SIF_IirBandPassFilter()
+}                                                                   // End of SIF_IirBandPassFilterConstantSkirtGain()
+
+
+/**/
+
+/********************************************************
+* Function: SIF_IirBandPassFilter0dBPeakGain
+*
+* Parameters:
+*   SLData_t * pCoeffs,                 - Filter coefficient array
+*   const SLData_t CutoffFrequency1,    - Filter cut-off frequency (low)
+*   const SLData_t CutoffFrequency2)    - Filter cut-off frequency (high)
+*
+* Return value:
+*   void
+*
+* Description:
+*   Generate the coefficients for a band-pass filter with
+*   0 dB peak gain.
+*
+********************************************************/
+
+void SIGLIB_FUNC_DECL SIF_IirBandPassFilter0dBPeakGain (
+  SLData_t * SIGLIB_PTR_DECL pCoeffs,
+  const SLData_t CutoffFrequency1,
+  const SLData_t CutoffFrequency2)
+{
+  SLData_t        w0 = SIGLIB_TWO * SIGLIB_PI * CutoffFrequency1;   // Pre-compute the common factors
+  SLData_t        bw = CutoffFrequency2 - CutoffFrequency1;
+  SLData_t        sinw0 = SDS_Sin (w0);
+  SLData_t        alpha = sinw0 * SDS_Sinh ((SDS_Log (SIGLIB_TWO)) / SIGLIB_TWO * bw * w0 / sinw0);
+
+  SLData_t        a0 = SIGLIB_ONE + alpha;
+
+  *pCoeffs = alpha / a0;                                            // Compute the coefficients
+  *(pCoeffs + 1) = SIGLIB_ZERO;
+  *(pCoeffs + 2) = -alpha / a0;
+  *(pCoeffs + 3) = (SIGLIB_MINUS_TWO * SDS_Cos (w0)) / a0;
+  *(pCoeffs + 4) = (SIGLIB_ONE - alpha) / a0;
+}                                                                   // End of SIF_IirBandPassFilter0dBPeakGain()
 
 
 /**/
@@ -1361,11 +1396,10 @@ void SIGLIB_FUNC_DECL SIF_IirNotchFilter (
   SLData_t        cosw0 = SDS_Cos (w0);
 
   SLData_t        a0 = SIGLIB_ONE + alpha;
-  SLData_t        b0_2_overA0 = SIGLIB_ONE / a0;
 
-  *pCoeffs = b0_2_overA0;                                           // Compute the coefficients
+  *pCoeffs = SIGLIB_ONE / a0;                                       // Compute the coefficients
   *(pCoeffs + 1) = (SIGLIB_MINUS_TWO * cosw0) / a0;
-  *(pCoeffs + 2) = b0_2_overA0;
+  *(pCoeffs + 2) = SIGLIB_ONE / a0;
   *(pCoeffs + 3) = (SIGLIB_MINUS_TWO * cosw0) / a0;
   *(pCoeffs + 4) = (SIGLIB_ONE - alpha) / a0;
 }                                                                   // End of SIF_IirNotchFilter()
@@ -2881,3 +2915,149 @@ void SIGLIB_FUNC_DECL SDA_IirNegateAlphaCoeffs (
     *pDstCoeffs++ = -*pSrcCoeffs++;
   }
 }                                                                   // End of SDA_IirNegateAlphaCoeffs()
+
+
+/**/
+
+/********************************************************
+* Function: SIF_GraphicalEqualizerFilterBank
+*
+* Parameters:
+*   const SLData_t SIGLIB_PTR_DECL * inputFilterCutOffFrequencies,
+*   SLData_t SIGLIB_PTR_DECL * graphical_eq_coeffs,
+*   SLData_t SIGLIB_PTR_DECL * graphical_eq_state_arrays,
+*   const SLArrayIndex_t numFilterBands,
+*   const SLData_t sampleRate,
+*   const SLData_t gainMinDB,
+*   const SLData_t gainStepDB,
+*   const SLArrayIndex_t numGainLevels)
+*
+* Return value:
+*   SLError_t - Memory allocation error or no error
+*
+* Description:
+*   Generate the coefficients for a graphical equalizer
+*   filter bank.
+*
+********************************************************/
+
+SLError_t SIGLIB_FUNC_DECL SIF_GraphicalEqualizerFilterBank (
+  const SLData_t SIGLIB_PTR_DECL * inputFilterCutOffFrequencies,
+  SLData_t SIGLIB_PTR_DECL * graphical_eq_coeffs,
+  SLData_t SIGLIB_PTR_DECL * graphical_eq_state_arrays,
+  const SLArrayIndex_t numFilterBands,
+  const SLData_t sampleRate,
+  const SLData_t gainMinDB,
+  const SLData_t gainStepDB,
+  const SLArrayIndex_t numGainLevels)
+{
+  SLData_t       *filterCentreFrequencies = SUF_VectorArrayAllocate (numFilterBands);
+  SLData_t       *filterBandwidths = SUF_VectorArrayAllocate (numFilterBands);
+  SLData_t       *filterGainTable = SUF_VectorArrayAllocate (numGainLevels);
+  SLData_t       *filterCutOffFrequencies = SUF_VectorArrayAllocate (numFilterBands);
+
+  if ((NULL == filterCentreFrequencies) || (NULL == filterBandwidths) || (NULL == filterGainTable) || (NULL == filterCutOffFrequencies)) {
+    return (SIGLIB_MEM_ALLOC_ERROR);
+  }
+
+  SDA_Copy (inputFilterCutOffFrequencies, filterCutOffFrequencies, numFilterBands);
+
+// Pre-compute the centre frequencies for the low-shelf and high-shelf filters
+  filterCutOffFrequencies[0] = (filterCutOffFrequencies[0] * filterCutOffFrequencies[0]) / filterCutOffFrequencies[1];
+  filterCutOffFrequencies[numFilterBands - 1] =
+    (filterCutOffFrequencies[numFilterBands - 1] * filterCutOffFrequencies[numFilterBands - 1]) / filterCutOffFrequencies[numFilterBands - 2];
+
+// Low-shelf filter
+  SLData_t        octaveCentreFreq = filterCutOffFrequencies[0];
+  SLData_t        octavePrevCentreFreq;
+  SLData_t        octaveNextCentreFreq = filterCutOffFrequencies[1];
+  SLData_t        upperFc = SDS_Sqrt (octaveCentreFreq * octaveNextCentreFreq); // Octave band mid point
+  filterCentreFrequencies[0] = upperFc;
+  filterBandwidths[0] = upperFc;
+
+// Peaking filters
+  for (SLArrayIndex_t i = 1; i < numFilterBands - 1; i++) {
+    octaveCentreFreq = filterCutOffFrequencies[i];
+    octavePrevCentreFreq = filterCutOffFrequencies[i - 1];
+    octaveNextCentreFreq = filterCutOffFrequencies[i + 1];
+
+    SLData_t        lowerFc = SDS_Sqrt (octavePrevCentreFreq * octaveCentreFreq); // Octave band mid point
+    SLData_t        upperFc = SDS_Sqrt (octaveCentreFreq * octaveNextCentreFreq); // Octave band mid point
+    SLData_t        centreFreq = lowerFc + ((upperFc - lowerFc) / 2.0);
+    SLData_t        bandwidth = upperFc - lowerFc;
+
+    filterCentreFrequencies[i] = centreFreq;
+    filterBandwidths[i] = bandwidth;
+  }
+
+// High-shelf filter
+  octaveCentreFreq = filterCutOffFrequencies[numFilterBands - 1];
+  octavePrevCentreFreq = filterCutOffFrequencies[numFilterBands - 2];
+
+  SLData_t        lowerFc = SDS_Sqrt (octavePrevCentreFreq * octaveCentreFreq); // Octave band mid point
+  filterCentreFrequencies[numFilterBands - 1] = lowerFc;
+  filterBandwidths[numFilterBands - 1] = (sampleRate / SIGLIB_TWO) - lowerFc;
+
+// Generate the gain table
+  for (SLArrayIndex_t gainLevel = 0; gainLevel < numGainLevels; gainLevel++) {
+    filterGainTable[gainLevel] = gainMinDB + (((SLData_t) gainLevel) * gainStepDB);
+  }
+
+// Generate the filter coefficients for each filter band
+  for (SLArrayIndex_t freqBand = 0; freqBand < numFilterBands; freqBand++) {
+    for (SLArrayIndex_t gainLevel = 0; gainLevel < numGainLevels; gainLevel++) {
+      if (freqBand == 0) {
+        SIF_IirLowShelfFilter (graphical_eq_coeffs + (freqBand * numGainLevels * SIGLIB_IIR_COEFFS_PER_BIQUAD) + (gainLevel * SIGLIB_IIR_COEFFS_PER_BIQUAD),  // Filter coefficient array
+                               filterCentreFrequencies[freqBand] / sampleRate,  // Filter cut-off frequency
+                               filterCentreFrequencies[freqBand] / filterBandwidths[freqBand],  // Filter Q factor
+                               filterGainTable[gainLevel]);         // Filter shelf gain
+// SUF_DebugPrintIIRCoefficients (graphical_eq_coeffs+(freqBand*numGainLevels*SIGLIB_IIR_COEFFS_PER_BIQUAD)+(gainLevel*SIGLIB_IIR_COEFFS_PER_BIQUAD), 1);
+      }
+      else if (freqBand == (numFilterBands - 1)) {
+        SIF_IirHighShelfFilter (graphical_eq_coeffs + (freqBand * numGainLevels * SIGLIB_IIR_COEFFS_PER_BIQUAD) + (gainLevel * SIGLIB_IIR_COEFFS_PER_BIQUAD), // Filter coefficient array
+                                filterCentreFrequencies[freqBand] / sampleRate, // Filter cut-off frequency
+                                filterCentreFrequencies[freqBand] / filterBandwidths[freqBand], // Filter Q factor
+                                filterGainTable[gainLevel]);        // Filter shelf gain
+// SUF_DebugPrintIIRCoefficients (graphical_eq_coeffs+(freqBand*numGainLevels*SIGLIB_IIR_COEFFS_PER_BIQUAD)+(gainLevel*SIGLIB_IIR_COEFFS_PER_BIQUAD), 1);
+      }
+      else {
+        SIF_IirPeakingFilter (graphical_eq_coeffs + (freqBand * numGainLevels * SIGLIB_IIR_COEFFS_PER_BIQUAD) + (gainLevel * SIGLIB_IIR_COEFFS_PER_BIQUAD), // Filter coefficient array
+                              filterCentreFrequencies[freqBand] / sampleRate, // Filter cut-off frequency
+                              filterCentreFrequencies[freqBand] / filterBandwidths[freqBand], // Filter Q factor
+                              filterGainTable[gainLevel]);          // Filter peak gain
+// SUF_DebugPrintIIRCoefficients (graphical_eq_coeffs+(freqBand*numGainLevels*SIGLIB_IIR_COEFFS_PER_BIQUAD)+(gainLevel*SIGLIB_IIR_COEFFS_PER_BIQUAD), 1);
+      }
+    }
+  }
+
+  for (SLArrayIndex_t i = 0; i < numFilterBands * SIGLIB_IIR_DELAY_SIZE; i++) { // Clear the filter bank state array
+    graphical_eq_state_arrays[i] = SIGLIB_ZERO;
+  }
+
+
+#if SIGLIB_ENABLE_DEBUG_LOGGING
+  SUF_Debugfprintf ("Centre Freqs:\n");
+  for (SLArrayIndex_t i = 0; i < numFilterBands; i++) {
+    SUF_Debugfprintf ("%0.2lf, ", filterCentreFrequencies[i]);
+  }
+  SUF_Debugfprintf ("\n");
+  SUF_Debugfprintf ("filterBandwidths:\n");
+  for (SLArrayIndex_t i = 0; i < numFilterBands; i++) {
+    SUF_Debugfprintf ("%0.2lf, ", filterBandwidths[i]);
+  }
+  SUF_Debugfprintf ("\n");
+  SUF_Debugfprintf ("Gains:\n");
+  for (SLArrayIndex_t i = 0; i < numFilterBands; i++) {
+    SUF_Debugfprintf ("%0.2lf, ", filterGainTable[i]);
+  }
+  SUF_Debugfprintf ("\n");
+  SUF_Debugfprintf ("Number of Gains: %d\n", numFilterBands);
+#endif
+
+  SUF_MemoryFree (filterCutOffFrequencies);                         // Free memory
+  SUF_MemoryFree (filterCentreFrequencies);
+  SUF_MemoryFree (filterBandwidths);
+  SUF_MemoryFree (filterGainTable);
+
+  return (SIGLIB_NO_ERROR);                                         // Return success code
+}                                                                   // End of SIF_GraphicalEqualizerFilterBank()

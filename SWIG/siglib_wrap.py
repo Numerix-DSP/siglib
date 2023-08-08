@@ -1166,9 +1166,9 @@ def SIF_IirAllPassFilter(arg1, arg2, arg3):
     return _siglib_wrap.SIF_IirAllPassFilter(arg1, arg2, arg3)
 SIF_IirAllPassFilter = _siglib_wrap.SIF_IirAllPassFilter
 
-def SIF_IirBandPassFilter(arg1, arg2, arg3):
-    return _siglib_wrap.SIF_IirBandPassFilter(arg1, arg2, arg3)
-SIF_IirBandPassFilter = _siglib_wrap.SIF_IirBandPassFilter
+def SIF_IirBandPassFilterConstantSkirtGain(arg1, arg2, arg3):
+    return _siglib_wrap.SIF_IirBandPassFilterConstantSkirtGain(arg1, arg2, arg3)
+SIF_IirBandPassFilterConstantSkirtGain = _siglib_wrap.SIF_IirBandPassFilterConstantSkirtGain
 
 def SIF_IirNotchFilter(arg1, arg2, arg3):
     return _siglib_wrap.SIF_IirNotchFilter(arg1, arg2, arg3)

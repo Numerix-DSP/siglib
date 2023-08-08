@@ -314,7 +314,7 @@ public class siglib_wrapJNI {
   public final static native void SIF_IirLowPassFilter(long jarg1, double jarg2, double jarg3);
   public final static native void SIF_IirHighPassFilter(long jarg1, double jarg2, double jarg3);
   public final static native void SIF_IirAllPassFilter(long jarg1, double jarg2, double jarg3);
-  public final static native void SIF_IirBandPassFilter(long jarg1, double jarg2, double jarg3);
+  public final static native void SIF_IirBandPassFilterConstantSkirtGain(long jarg1, double jarg2, double jarg3);
   public final static native void SIF_IirNotchFilter(long jarg1, double jarg2, double jarg3);
   public final static native void SIF_IirPeakingFilter(long jarg1, double jarg2, double jarg3, double jarg4);
   public final static native void SIF_IirLowShelfFilter(long jarg1, double jarg2, double jarg3, double jarg4);

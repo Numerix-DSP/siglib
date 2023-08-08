@@ -49,7 +49,8 @@ int main (
     printf ("Filter Types   : L - Low-Pass\n");
     printf ("               : H - High-Pass\n");
     printf ("               : A - All-Pass\n");
-    printf ("               : D - Band-Pass\n");
+    printf ("               : D - Band-Pass - constant skirt gain\n");
+    printf ("               : E - Band-Pass - 0 dB peak gain\n");
     printf ("               : N - Notch\n");
     printf ("               : P - Peaking\n");
     printf ("               : B - Low-Shelf (Bass)\n");
@@ -102,7 +103,10 @@ int main (
       SIF_IirAllPassFilter (pIIRCoeffs, cutoffFreq / sampleRate, qFactor);
       break;
     case 'D':
-      SIF_IirBandPassFilter (pIIRCoeffs, cutoffFreq / sampleRate, qFactor);
+      SIF_IirBandPassFilterConstantSkirtGain (pIIRCoeffs, cutoffFreq / sampleRate, qFactor);
+      break;
+    case 'E':
+      SIF_IirBandPassFilter0dBPeakGain (pIIRCoeffs, cutoffFreq / sampleRate, qFactor);
       break;
     case 'N':
       SIF_IirNotchFilter (pIIRCoeffs, cutoffFreq / sampleRate, qFactor);
@@ -121,7 +125,8 @@ int main (
       printf ("Filter Types   : L - Low-Pass\n");
       printf ("               : H - High-Pass\n");
       printf ("               : A - All-Pass\n");
-      printf ("               : D - Band-Pass\n");
+      printf ("               : D - Band-Pass - constant skirt gain\n");
+      printf ("               : E - Band-Pass - 0 dB peak gain\n");
       printf ("               : N - Notch\n");
       printf ("               : P - Peaking\n");
       printf ("               : B - Bass-Shelf\n");

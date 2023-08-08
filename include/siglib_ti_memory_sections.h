@@ -37,16 +37,16 @@ Description : SigLib function memory section definition file for TI compilers
     the library.
     Each function can be located in a separate section of memory.
 
-****************************************************************************/
-
+****************************************************************************/  
+  
 #if SIGLIB
-
+  
 #ifndef     _SIGLIB_MEMORY_SECTIONS_H
 #define     _SIGLIB_MEMORY_SECTIONS_H
-
+  
 #ifdef _TMS320C6X                                                   // Defined by TI compiler
 #ifndef __cplusplus                                                 // These macros don't work in C++, you need to locate them adjacent to the function
-
+  
 #pragma CODE_SECTION(SDA_LinearMicrophoneArrayBeamPattern, ".text")
 #pragma CODE_SECTION(SDA_LinearMicrophoneArrayBeamPatternLinear, ".text")
 #pragma CODE_SECTION(SDA_MicrophoneArrayBeamPattern, ".text")
@@ -612,10 +612,12 @@ Description : SigLib function memory section definition file for TI compilers
 #pragma CODE_SECTION(SDS_OnePoleTimeConstantToFilterCoeff, ".text")
 #pragma CODE_SECTION(SDS_PreWarp, ".text")
 #pragma CODE_SECTION(SIF_AllPole, ".text")
+#pragma CODE_SECTION(SIF_GraphicalEqualizerFilterBank, ".text")
 #pragma CODE_SECTION(SIF_Iir, ".text")
 #pragma CODE_SECTION(SIF_Iir2PoleLpf, ".text")
 #pragma CODE_SECTION(SIF_IirAllPassFilter, ".text")
-#pragma CODE_SECTION(SIF_IirBandPassFilter, ".text")
+#pragma CODE_SECTION(SIF_IirBandPassFilter0dBPeakGain, ".text")
+#pragma CODE_SECTION(SIF_IirBandPassFilterConstantSkirtGain, ".text")
 #pragma CODE_SECTION(SIF_IirHighPassFilter, ".text")
 #pragma CODE_SECTION(SIF_IirHighShelfFilter, ".text")
 #pragma CODE_SECTION(SIF_IirLowPassFilter, ".text")
@@ -1100,13 +1102,14 @@ Description : SigLib function memory section definition file for TI compilers
 #pragma CODE_SECTION(SDS_I0Bessel, ".text")
 #pragma CODE_SECTION(SIF_TableTopWindow, ".text")
 #pragma CODE_SECTION(SIF_Window, ".text")
-
+  
 #endif                                                              // End of #ifndef __cplusplus
-
+  
 #endif                                                              // End of #ifdef _TMS320C6X - Defined by TI compiler
-
+  
 #endif                                                              // End of #if _SIGLIB_MEMORY_SECTIONS_H
-
+  
 #endif                                                              // End of #if SIGLIB
-
+  
 // End of siglib_memory_sections.h
+  

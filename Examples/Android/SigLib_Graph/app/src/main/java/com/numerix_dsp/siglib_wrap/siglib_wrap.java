@@ -702,8 +702,8 @@ public class siglib_wrap implements siglib_wrapConstants {
     siglib_wrapJNI.SIF_IirAllPassFilter(SWIGTYPE_p_double.getCPtr(arg0), arg1, arg2);
   }
 
-  public static void SIF_IirBandPassFilter(SWIGTYPE_p_double arg0, double arg1, double arg2) {
-    siglib_wrapJNI.SIF_IirBandPassFilter(SWIGTYPE_p_double.getCPtr(arg0), arg1, arg2);
+  public static void SIF_IirBandPassFilterConstantSkirtGain(SWIGTYPE_p_double arg0, double arg1, double arg2) {
+    siglib_wrapJNI.SIF_IirBandPassFilterConstantSkirtGain(SWIGTYPE_p_double.getCPtr(arg0), arg1, arg2);
   }
 
   public static void SIF_IirNotchFilter(SWIGTYPE_p_double arg0, double arg1, double arg2) {

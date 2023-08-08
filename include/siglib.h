@@ -1923,7 +1923,12 @@ extern          "C" {
   const SLData_t,                                                   // Filter cut-off frequency
   const SLData_t);                                                  // Filter Q factor
 
-  void SIGLIB_FUNC_DECL SIF_IirBandPassFilter (
+  void SIGLIB_FUNC_DECL SIF_IirBandPassFilterConstantSkirtGain (
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to output IIR filter coefficients
+  const SLData_t,                                                   // Filter cut-off frequency (low)
+  const SLData_t);                                                  // Filter cut-off frequency (high)
+
+  void SIGLIB_FUNC_DECL SIF_IirBandPassFilter0dBPeakGain (
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to output IIR filter coefficients
   const SLData_t,                                                   // Filter cut-off frequency (low)
   const SLData_t);                                                  // Filter cut-off frequency (high)
@@ -2144,6 +2149,16 @@ extern          "C" {
   const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to source filter coefficients array
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination filter coefficients array
   const SLArrayIndex_t);                                            // Number of biquads
+
+  SLError_t SIGLIB_FUNC_DECL SIF_GraphicalEqualizerFilterBank (
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to filter cut-off frequency array
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to filter bank coefficients
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to filter state array
+  const SLArrayIndex_t,                                             // Number of frequency bands
+  const SLData_t,                                                   // Sample rate
+  const SLData_t,                                                   // Minimum gain for each frequncy band
+  const SLData_t,                                                   // Gain step for each frequency band
+  const SLArrayIndex_t);                                            // Number of gain levels for each frequency band
 
 // Filtering functions - filter.c
 

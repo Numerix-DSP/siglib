@@ -1299,7 +1299,7 @@ var
                                   const _3: SLDATA_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
 var
-  SIF_IirBandPassFilter: procedure(var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
+  SIF_IirBandPassFilterConstantSkirtGain: procedure(var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                                    const _2: SLDATA_T;
                                    const _3: SLDATA_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
@@ -6533,9 +6533,9 @@ begin
   {$IFDEF WIN32}
     Assert(@SIF_IirAllPassFilter <> nil);
   {$ENDIF}
-    @SIF_IirBandPassFilter := GetProcAddress(DLLHandle,'SIF_IirBandPassFilter');
+    @SIF_IirBandPassFilterConstantSkirtGain := GetProcAddress(DLLHandle,'SIF_IirBandPassFilterConstantSkirtGain');
   {$IFDEF WIN32}
-    Assert(@SIF_IirBandPassFilter <> nil);
+    Assert(@SIF_IirBandPassFilterConstantSkirtGain <> nil);
   {$ENDIF}
     @SIF_IirNotchFilter := GetProcAddress(DLLHandle,'SIF_IirNotchFilter');
   {$IFDEF WIN32}

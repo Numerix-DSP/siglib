@@ -384,8 +384,7 @@ extern          "C" {
                    *(
   double **)     &jresult = result;
                     return jresult;
-  }
-  SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_delete_1doubleArray (
+  } SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_delete_1doubleArray (
   JNIEnv * jenv,
   jclass jcls,
   jlong jarg1) {
@@ -7748,7 +7747,7 @@ extern          "C" {
     arg1 = *(SLData_t **) & jarg1;
     arg2 = (SLData_t) jarg2;
     arg3 = (SLData_t) jarg3;
-    SIF_IirBandPassFilter (arg1, arg2, arg3);
+    SIF_IirBandPassFilterConstantSkirtGain (arg1, arg2, arg3);
   }
 
 
