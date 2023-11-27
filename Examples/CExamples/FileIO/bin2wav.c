@@ -35,7 +35,7 @@ int main (
   pDataArray = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   if (argc != 2) {
-    printf ("\nUsage error  :\nbin2wav  inputFileName (no extension)\n\n");
+    printf ("\nUsage:\nbin2wav  inputFileName (no extension)\n\n");
     exit (-1);                                                      // Exit - usage error
   }
 

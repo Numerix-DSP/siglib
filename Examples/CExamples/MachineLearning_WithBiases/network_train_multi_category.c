@@ -115,7 +115,7 @@ int main (
   parse_command_line (argc, argv);                                  //  Parse command line options
 
   if (0 == (filename0[0]) || 0 == (filename1[0]) || 0 == (filename2[0]) || 0 == (filename3[0])) {
-    printf ("Usage error: filename\n");
+    printf ("Usage: filename\n");
     show_help ();
     exit (0);
   }

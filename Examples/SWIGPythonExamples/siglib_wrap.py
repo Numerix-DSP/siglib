@@ -1303,21 +1303,21 @@ def SDS_LeakyIntegrator2(arg1, arg2, arg3, arg4):
     return _siglib_wrap.SDS_LeakyIntegrator2(arg1, arg2, arg3, arg4)
 SDS_LeakyIntegrator2 = _siglib_wrap.SDS_LeakyIntegrator2
 
-def SIF_HilbertTransformer(arg1, arg2):
-    return _siglib_wrap.SIF_HilbertTransformer(arg1, arg2)
-SIF_HilbertTransformer = _siglib_wrap.SIF_HilbertTransformer
+def SIF_HilbertTransformerFirFilter(arg1, arg2):
+    return _siglib_wrap.SIF_HilbertTransformerFirFilter(arg1, arg2)
+SIF_HilbertTransformerFirFilter = _siglib_wrap.SIF_HilbertTransformerFirFilter
 
-def SIF_GoertzelFilter(arg1, arg2, arg3):
-    return _siglib_wrap.SIF_GoertzelFilter(arg1, arg2, arg3)
-SIF_GoertzelFilter = _siglib_wrap.SIF_GoertzelFilter
+def SIF_GoertzelIirFilter(arg1, arg2, arg3):
+    return _siglib_wrap.SIF_GoertzelIirFilter(arg1, arg2, arg3)
+SIF_GoertzelIirFilter = _siglib_wrap.SIF_GoertzelIirFilter
 
-def SDA_GoertzelFilter(arg1, arg2, arg3, arg4, arg5):
-    return _siglib_wrap.SDA_GoertzelFilter(arg1, arg2, arg3, arg4, arg5)
-SDA_GoertzelFilter = _siglib_wrap.SDA_GoertzelFilter
+def SDA_GoertzelIirFilter(arg1, arg2, arg3, arg4, arg5):
+    return _siglib_wrap.SDA_GoertzelIirFilter(arg1, arg2, arg3, arg4, arg5)
+SDA_GoertzelIirFilter = _siglib_wrap.SDA_GoertzelIirFilter
 
-def SDS_GoertzelFilter(arg1, arg2, arg3):
-    return _siglib_wrap.SDS_GoertzelFilter(arg1, arg2, arg3)
-SDS_GoertzelFilter = _siglib_wrap.SDS_GoertzelFilter
+def SDS_GoertzelIirFilter(arg1, arg2, arg3):
+    return _siglib_wrap.SDS_GoertzelIirFilter(arg1, arg2, arg3)
+SDS_GoertzelIirFilter = _siglib_wrap.SDS_GoertzelIirFilter
 
 def SIF_GoertzelDetect(arg1, arg2):
     return _siglib_wrap.SIF_GoertzelDetect(arg1, arg2)
@@ -1335,21 +1335,21 @@ def SDA_GoertzelDetectComplex(arg1, arg2, arg3):
     return _siglib_wrap.SDA_GoertzelDetectComplex(arg1, arg2, arg3)
 SDA_GoertzelDetectComplex = _siglib_wrap.SDA_GoertzelDetectComplex
 
-def SIF_GaussianFilter(arg1, arg2, arg3):
-    return _siglib_wrap.SIF_GaussianFilter(arg1, arg2, arg3)
-SIF_GaussianFilter = _siglib_wrap.SIF_GaussianFilter
+def SIF_GaussianFirFilter(arg1, arg2, arg3):
+    return _siglib_wrap.SIF_GaussianFirFilter(arg1, arg2, arg3)
+SIF_GaussianFirFilter = _siglib_wrap.SIF_GaussianFirFilter
 
-def SIF_GaussianFilter2(arg1, arg2, arg3):
-    return _siglib_wrap.SIF_GaussianFilter2(arg1, arg2, arg3)
-SIF_GaussianFilter2 = _siglib_wrap.SIF_GaussianFilter2
+def SIF_GaussianFirFilter2(arg1, arg2, arg3):
+    return _siglib_wrap.SIF_GaussianFirFilter2(arg1, arg2, arg3)
+SIF_GaussianFirFilter2 = _siglib_wrap.SIF_GaussianFirFilter2
 
-def SIF_RaisedCosineFilter(arg1, arg2, arg3, arg4):
-    return _siglib_wrap.SIF_RaisedCosineFilter(arg1, arg2, arg3, arg4)
-SIF_RaisedCosineFilter = _siglib_wrap.SIF_RaisedCosineFilter
+def SIF_RaisedCosineFirFilter(arg1, arg2, arg3, arg4):
+    return _siglib_wrap.SIF_RaisedCosineFirFilter(arg1, arg2, arg3, arg4)
+SIF_RaisedCosineFirFilter = _siglib_wrap.SIF_RaisedCosineFirFilter
 
-def SIF_RootRaisedCosineFilter(arg1, arg2, arg3, arg4):
-    return _siglib_wrap.SIF_RootRaisedCosineFilter(arg1, arg2, arg3, arg4)
-SIF_RootRaisedCosineFilter = _siglib_wrap.SIF_RootRaisedCosineFilter
+def SIF_RootRaisedCosineFirFilter(arg1, arg2, arg3, arg4):
+    return _siglib_wrap.SIF_RootRaisedCosineFirFilter(arg1, arg2, arg3, arg4)
+SIF_RootRaisedCosineFirFilter = _siglib_wrap.SIF_RootRaisedCosineFirFilter
 
 def SDS_ZTransform(arg1, arg2, arg3, arg4, arg5):
     return _siglib_wrap.SDS_ZTransform(arg1, arg2, arg3, arg4, arg5)
@@ -1359,13 +1359,13 @@ def SDS_ZTransformDB(arg1, arg2, arg3, arg4, arg5):
     return _siglib_wrap.SDS_ZTransformDB(arg1, arg2, arg3, arg4, arg5)
 SDS_ZTransformDB = _siglib_wrap.SDS_ZTransformDB
 
-def SUF_EstimateBPFilterLength(arg1, arg2, arg3, arg4):
-    return _siglib_wrap.SUF_EstimateBPFilterLength(arg1, arg2, arg3, arg4)
-SUF_EstimateBPFilterLength = _siglib_wrap.SUF_EstimateBPFilterLength
+def SUF_EstimateBPFirFilterLength(arg1, arg2, arg3, arg4):
+    return _siglib_wrap.SUF_EstimateBPFirFilterLength(arg1, arg2, arg3, arg4)
+SUF_EstimateBPFirFilterLength = _siglib_wrap.SUF_EstimateBPFirFilterLength
 
-def SUF_EstimateBPFilterError(arg1, arg2, arg3, arg4, arg5):
-    return _siglib_wrap.SUF_EstimateBPFilterError(arg1, arg2, arg3, arg4, arg5)
-SUF_EstimateBPFilterError = _siglib_wrap.SUF_EstimateBPFilterError
+def SUF_EstimateBPFirFilterError(arg1, arg2, arg3, arg4, arg5):
+    return _siglib_wrap.SUF_EstimateBPFirFilterError(arg1, arg2, arg3, arg4, arg5)
+SUF_EstimateBPFirFilterError = _siglib_wrap.SUF_EstimateBPFirFilterError
 
 def SDA_LinearMicrophoneArrayBeamPattern(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8):
     return _siglib_wrap.SDA_LinearMicrophoneArrayBeamPattern(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8)

@@ -35,7 +35,7 @@ int main (
                             COMB_FILTER_LENGTH);                    // Filter length
   }
 
-  printf ("SDS_Comb results :\n");
+  printf ("SDS_Comb results:\n");
   SUF_PrintArray (DstArray, SAMPLE_LENGTH);
 
 

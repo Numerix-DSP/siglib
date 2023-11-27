@@ -44,7 +44,7 @@ static SLFixData_t TriggerUpdatedFlag;
 int main (
   void)
 {
-  printf ("Input sequence :\n");
+  printf ("Input sequence:\n");
   for (SLArrayIndex_t i = 0; i < 20; i++) {
     for (SLArrayIndex_t j = 0; j < 10; j++) {
       printf ("%1.1lf, ", TriggerInput[j + (i * 10)]);
@@ -64,7 +64,7 @@ int main (
                            SYMBOL_LENGTH,                           // Nominal period of output trigger sequence
                            SAMPLE_LENGTH);                          // Length of trigger sequences
 
-  printf ("Output sequence :\n");
+  printf ("Output sequence:\n");
   for (SLArrayIndex_t i = 0; i < 20; i++) {
     for (SLArrayIndex_t j = 0; j < 10; j++) {
       printf ("%1.1lf, ", TriggerOutput[j + (i * 10)]);

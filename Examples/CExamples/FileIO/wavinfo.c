@@ -17,7 +17,7 @@ int main (
   int argc,
   char **argv)
 {
-  printf ("Opening : %s\n", argv[1]);
+  printf ("Opening: %s\n", argv[1]);
 
   if ((fpInputFile = fopen (argv[1], "rb")) == NULL) {
     printf ("Error opening input file %s\n", argv[1]);

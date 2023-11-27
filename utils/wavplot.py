@@ -1,7 +1,6 @@
 # Plots a time domain graph of the .wav file data
 
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 import sys
 from scipy.io import wavfile

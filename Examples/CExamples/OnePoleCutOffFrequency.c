@@ -25,9 +25,9 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
   if (argc != 2) {
-    printf ("Usage   : OnePole <Fc>\n");
-    printf ("Example : OnePole 0.2\n");
-    printf ("(Nominal sample rate = 1 Hz)\n\n");
+    printf ("Usage: OnePole <Fc>\n");
+    printf ("Example: OnePole 0.2\n");
+    printf ("(Nominal sample rate: 1 Hz)\n\n");
     Fc = 0.2;
   }
   else {

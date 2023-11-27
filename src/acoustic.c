@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 07/10/2015
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : Acoustic signal processing functions, for SigLib DSP library.
+Description: Acoustic signal processing functions, for SigLib DSP library.
 
 
 ****************************************************************************/
@@ -77,7 +77,7 @@ void SIGLIB_FUNC_DECL SDA_LinearMicrophoneArrayBeamPattern (
   SLFixData_t     i = 0;
 
   SLData_t        angle = startAngle;
-  do {                                                              // For : signal arrival angle : -90 to +90 degrees
+  do {                                                              // For: signal arrival angle: -90 to +90 degrees
     SLData_t        angleRad = SIGLIB_TWO_PI_OVER_THREE_SIXTY * angle;  // Degrees to radians
 
     SLData_t        realSum = SIGLIB_ZERO;
@@ -141,7 +141,7 @@ void SIGLIB_FUNC_DECL SDA_LinearMicrophoneArrayBeamPatternLinear (
   SLFixData_t     i = 0;
 
   SLData_t        angle = startAngle;
-  do {                                                              // For : signal arrival angle : -90 to +90 degrees
+  do {                                                              // For: signal arrival angle: -90 to +90 degrees
     SLData_t        angleRad = SIGLIB_TWO_PI_OVER_THREE_SIXTY * angle;  // Degrees to radians
 
     SLData_t        realSum = SIGLIB_ZERO;
@@ -258,7 +258,7 @@ void SIGLIB_FUNC_DECL SDA_MicrophoneArrayBeamPattern (
   SLFixData_t     i = 0;
 
   SLData_t        calcAngle = startAngle;
-  do {                                                              // For : signal arrival angle : 0 to 359 degrees
+  do {                                                              // For: signal arrival angle: 0 to 359 degrees
 
     SLData_t        angleRad = SIGLIB_TWO_PI_OVER_THREE_SIXTY * calcAngle;  // Degrees to radians
 
@@ -339,7 +339,7 @@ void SIGLIB_FUNC_DECL SDA_MicrophoneArrayBeamPatternLinear (
   SLFixData_t     i = 0;
 
   SLData_t        calcAngle = startAngle;
-  do {                                                              // For : signal arrival angle : 0 to 359 degrees
+  do {                                                              // For: signal arrival angle: 0 to 359 degrees
 
     SLData_t        angleRad = SIGLIB_TWO_PI_OVER_THREE_SIXTY * calcAngle;  // Degrees to radians
 

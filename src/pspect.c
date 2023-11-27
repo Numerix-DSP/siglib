@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 06/04/2004
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : Power spectrum analysis functions.
+Description: Power spectrum analysis functions.
 
 
 ****************************************************************************/
@@ -94,7 +94,7 @@ void SIGLIB_FUNC_DECL SIF_FastAutoCrossPowerSpectrum (
 *   Calculates the real auto power spectrum of the supplied
 *   data.
 *
-* Notes : This function works in-place so the input data
+* Notes: This function works in-place so the input data
 *   is destroyed.
 *   The imaginary input data array is only used in the
 *   function, any input data is discarded.
@@ -149,7 +149,7 @@ void SIGLIB_FUNC_DECL SDA_FastAutoPowerSpectrum (
 *   Calculates the real cross power spectrum of the supplied
 *   data.
 *
-* Notes : This function works in-place so the input data
+* Notes: This function works in-place so the input data
 *   is destroyed.
 *   The imaginary input data arrays are only used in the
 *   function, any input data is discarded.
@@ -293,7 +293,7 @@ void SIGLIB_FUNC_DECL SIF_ArbAutoCrossPowerSpectrum (
 * Description:
 *   Arbitrary length auto power spectrum function.
 *
-* Notes : This function works in-place so the input data
+* Notes: This function works in-place so the input data
 *   is destroyed.
 *   The imaginary input data array is only used in the
 *   function, any input data is discarded.
@@ -393,7 +393,7 @@ void SIGLIB_FUNC_DECL SDA_ArbAutoPowerSpectrum (
 * Description:
 *   Arbitrary length cross power spectrum function.
 *
-* Notes : This function works in-place so the input data
+* Notes: This function works in-place so the input data
 *   is destroyed.
 *   The imaginary input data arrays are only used in the
 *   function, any input data is discarded.
@@ -581,7 +581,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_WelchPowerSpectrum (
 *   Returns the real Welch power spectrum of the
 *   supplied data.
 *
-* Notes : This function does not work in-place. The
+* Notes: This function does not work in-place. The
 *   results are placed in the result data array.
 *
 *   It is important to ensure that there is enough data
@@ -667,7 +667,7 @@ void SIGLIB_FUNC_DECL SDA_WelchRealPowerSpectrum (
 *   Returns the complex Welch power spectrum of the
 *   supplied data.
 *
-* Notes : This function does not work in-place. The
+* Notes: This function does not work in-place. The
 *   results are placed in the result data array.
 *
 *   It is important to ensure that there is enough data
@@ -789,7 +789,7 @@ void SIGLIB_FUNC_DECL SIF_MagnitudeSquaredCoherence (
 *   Returns the magnitude squared coherence of the
 *   supplied data.
 *
-* Notes : This function places the results in the first
+* Notes: This function places the results in the first
 *   real data array (*pDataArray1).
 *
 *   The result array is of length (N/2)+1 because the

@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 15/11/1992
 Options   :                             | Latest Update : 17/11/2022
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : PRBS Scrambler / descrambler routines, for SigLib DSP library.
+Description: PRBS Scrambler / descrambler routines, for SigLib DSP library.
 
 
 ****************************************************************************/
@@ -55,7 +55,7 @@ Description : PRBS Scrambler / descrambler routines, for SigLib DSP library.
 *
 * Description:
 *   This function executes a self synchronizing scrambler
-*   having the generating polynomial : 1 + x-14 + x-17.
+*   having the generating polynomial: 1 + x-14 + x-17.
 *
 *   The input data is handled lsb first.
 *
@@ -113,7 +113,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Scrambler1417 (
 *
 * Description:
 *   This function executes a self synchronizing descrambler
-*   having the generating polynomial : 1 + x-14 + x-17.
+*   having the generating polynomial: 1 + x-14 + x-17.
 *
 *   The input data is handled lsb first.
 *
@@ -172,7 +172,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Descrambler1417 (
 *
 * Description:
 *   This function executes a self synchronizing scrambler
-*   having the generating polynomial : 1 + x-14 + x-17.
+*   having the generating polynomial: 1 + x-14 + x-17.
 *
 *   The input data is handled lsb first.
 *
@@ -258,7 +258,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Scrambler1417WithInversion (
 *
 * Description:
 *   This function executes a self synchronizing descrambler
-*   having the generating polynomial : 1 + x-14 + x-17.
+*   having the generating polynomial: 1 + x-14 + x-17.
 *
 *   The input data is handled lsb first.
 *
@@ -342,7 +342,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Descrambler1417WithInversion (
 *
 * Description:
 *   This function executes a self synchronizing scrambler
-*   having the generating polynomial : 1 + x-18 + x-23.
+*   having the generating polynomial: 1 + x-18 + x-23.
 *
 *   The input data is handled lsb first.
 *
@@ -401,7 +401,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Scrambler1823 (
 *
 * Description:
 *   This function executes a self synchronizing descrambler
-*   having the generating polynomial : 1 + x-18 + x-23.
+*   having the generating polynomial: 1 + x-18 + x-23.
 *
 *   The input data is handled lsb first.
 *
@@ -458,7 +458,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Descrambler1823 (
 *
 * Description:
 *   This function executes a self synchronizing scrambler
-*   having the generating polynomial : 1 + x-5 + x-23.
+*   having the generating polynomial: 1 + x-5 + x-23.
 *
 *   The input data is handled lsb first.
 *
@@ -516,7 +516,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Scrambler523 (
 *
 * Description:
 *   This function executes a self synchronizing descrambler
-*   having the generating polynomial : 1 + x-5 + x-23.
+*   having the generating polynomial: 1 + x-5 + x-23.
 *
 *   The input data is handled lsb first.
 *
@@ -573,7 +573,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Descrambler523 (
 *
 * Description:
 *   This function executes a scrambler
-*   having the generating polynomial : x^9+x^4+1.
+*   having the generating polynomial: x^9+x^4+1.
 *   The input data is handled lsb first.
 *
 *   Ds = Di(x^9+x^4+1)
@@ -621,7 +621,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblerPN9 (
 *
 * Description:
 *   This function executes a PN9 sequence generator
-*   having the generating polynomial : x^9+x^4+1.
+*   having the generating polynomial: x^9+x^4+1.
 *   The output data is handled lsb first.
 *
 *   -> z-1 -- . . . --> z-1 ----> z-1 ----> . . . --> z-1---->
@@ -663,7 +663,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorPN9 (
 *
 * Description:
 *   This function executes a scrambler
-*   having the generating polynomial : x^15+x^14+1.
+*   having the generating polynomial: x^15+x^14+1.
 *   The input data is handled lsb first.
 *
 *   Ds = Di(x^15+x^14+1)
@@ -711,7 +711,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblerPN15 (
 *
 * Description:
 *   This function executes a PN9 sequence generator
-*   having the generating polynomial : x^15+x^14+1.
+*   having the generating polynomial: x^15+x^14+1.
 *   The output data is handled lsb first.
 *
 *    -----> z-1 ----> z-1 - . . . ---> z-1------> Ds
@@ -753,7 +753,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorPN15 (
 *
 * Description:
 *   This function executes a scrambler
-*   having the generating polynomial : gCRC24(D) = D^24 + D^23 + D^6 + D^5 + D + 1.
+*   having the generating polynomial: gCRC24(D) = D^24 + D^23 + D^6 + D^5 + D + 1.
 *   The input data is handled lsb first.
 *
 *   Ds = Di(D^24 + D^23 + D^6 + D^5 + D + 1)
@@ -794,7 +794,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblergCRC24 (
 *
 * Description:
 *   This function executes a gCRC24 sequence generator
-*   having the generating polynomial : gCRC24(D) = D^24 + D^23 + D^6 + D^5 + D + 1.
+*   having the generating polynomial: gCRC24(D) = D^24 + D^23 + D^6 + D^5 + D + 1.
 *   The output data is handled lsb first.
 *
 ********************************************************/
@@ -829,7 +829,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorgCRC24 (
 *
 * Description:
 *   This function executes a scrambler
-*   having the generating polynomial : gCRC16(D) = D^16 + D^12 + D^5 + 1.
+*   having the generating polynomial: gCRC16(D) = D^16 + D^12 + D^5 + 1.
 *   The input data is handled lsb first.
 *
 *   Ds = Di(D^16 + D^12 + D^5 + 1)
@@ -870,7 +870,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblergCRC16 (
 *
 * Description:
 *   This function executes a gCRC16 sequence generator
-*   having the generating polynomial : gCRC16(D) = D^16 + D^12 + D^5 + 1.
+*   having the generating polynomial: gCRC16(D) = D^16 + D^12 + D^5 + 1.
 *   The output data is handled lsb first.
 *
 ********************************************************/
@@ -905,7 +905,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorgCRC16 (
 *
 * Description:
 *   This function executes a scrambler
-*   having the generating polynomial : gCRC12(D) = D^12 + D^11 + D^3 + D^2 + D + 1.
+*   having the generating polynomial: gCRC12(D) = D^12 + D^11 + D^3 + D^2 + D + 1.
 *   The input data is handled lsb first.
 *
 *   Ds = Di(D^12 + D^11 + D^3 + D^2 + D + 1)
@@ -946,7 +946,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblergCRC12 (
 *
 * Description:
 *   This function executes a gCRC12 sequence generator
-*   having the generating polynomial : CRC12(D) = D^12 + D^11 + D^3 + D^2 + D + 1.
+*   having the generating polynomial: CRC12(D) = D^12 + D^11 + D^3 + D^2 + D + 1.
 *   The output data is handled lsb first.
 *
 ********************************************************/
@@ -981,7 +981,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorgCRC12 (
 *
 * Description:
 *   This function executes a scrambler
-*   having the generating polynomial : gCRC8(D) = D^8 + D^7 + D^4 + D^3 + D + 1.
+*   having the generating polynomial: gCRC8(D) = D^8 + D^7 + D^4 + D^3 + D + 1.
 *   The input data is handled lsb first.
 *
 *   Ds = Di(D^8 + D^7 + D^4 + D^3 + D + 1)
@@ -1022,7 +1022,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblergCRC8 (
 *
 * Description:
 *   This function executes a gCRC24 sequence generator
-*   having the generating polynomial : gCRC8(D) = D^8 + D^7 + D^4 + D^3 + D + 1.
+*   having the generating polynomial: gCRC8(D) = D^8 + D^7 + D^4 + D^3 + D + 1.
 *   The output data is handled lsb first.
 *
 ********************************************************/
@@ -1059,11 +1059,11 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorgCRC8 (
 *
 * Description:
 *   This function generates a 3GPP downlink long code
-*   PN sequence using the generating polynomials :
-*       X sequence : X^18 +X^7+ 1
-*       Y sequence : X^18 + X^10 + X^7 + X^5 + 1
+*   PN sequence using the generating polynomials:
+*       X sequence: X^18 +X^7+ 1
+*       Y sequence: X^18 + X^10 + X^7 + X^5 + 1
 *   The binary values are mapped to balanced output
-*   signals as follows :
+*   signals as follows:
 *       Binary value = 0 - Output = +1
 *       Binary value = 1 - Output = -1
 *
@@ -1112,11 +1112,11 @@ void SIGLIB_FUNC_DECL SDS_LongCodeGenerator3GPPDL (
 *
 * Description:
 *   This function generates a 3GPP uplink long code
-*   PN sequence using the generating polynomials :
-*       X sequence : X^25 + X^3 + 1
-*       Y sequence : X^25 + X^3 + X^2 + X + 1
+*   PN sequence using the generating polynomials:
+*       X sequence: X^25 + X^3 + 1
+*       Y sequence: X^25 + X^3 + X^2 + X + 1
 *   The binary values are mapped to balanced output
-*   signals as follows :
+*   signals as follows:
 *       Binary value = 0 - Output = +1
 *       Binary value = 1 - Output = -1
 *

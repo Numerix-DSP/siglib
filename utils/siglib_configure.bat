@@ -4,7 +4,7 @@ rem Configures SigLib header files and MSVC .def files
 
 z:
 
-cd %SIGLIB_PATH%
+pushd %SIGLIB_PATH%
 
 cd include
 
@@ -18,4 +18,4 @@ call DefGenerate.bat
 cd ..\TIMemSectionsGen
 call TIMemSectionsGenerate.bat
 
-cd %SIGLIB_PATH%
+popd

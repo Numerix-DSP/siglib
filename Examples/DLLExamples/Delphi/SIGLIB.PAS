@@ -28,7 +28,7 @@ uses
 {-Compiler : Independent | Start Date : 13/09/1992 }
 {-Options : | Latest Update : 17/11/2020 }
 {---------------------------------------------------------------------------- }
-{-Support for SigLib is available via EMail : support@numerix-dsp.com }
+{-Support for SigLib is available via Email: support@numerix-dsp.com }
 
 {-This file may be modified, in any way, providing that this header remains }
 {-within the file and none of the header contents are removed or modified. }
@@ -39,7 +39,7 @@ uses
 
 {-Copyright (C) 1992 to 2020 Delta Numerix }
 {---------------------------------------------------------------------------- }
-{-Description : Header file for SigLib DSP library }
+{-Description: Header file for SigLib DSP library }
 
 {-Update history : }
 {-See history.txt for more details. }
@@ -1528,23 +1528,23 @@ var
                                  const _4: SLDATA_T): SLDATA_T cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
 var
-  SIF_HilbertTransformer: procedure(var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
+  SIF_HilbertTransformerFirFilter: procedure(var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                                     const _2: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
 var
-  SIF_GoertzelFilter: function(var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
+  SIF_GoertzelIirFilter: function(var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                                const _2: SLDATA_T;
                                const _3: SLARRAYINDEX_T): SLDATA_T cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
 var
-  SDA_GoertzelFilter: procedure(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
+  SDA_GoertzelIirFilter: procedure(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
                                 var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                                 var SIGLIB_INOUT_PTR_DECL: SLDATA_T;
                                 const _4: SLDATA_T;
                                 const _5: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
 var
-  SDS_GoertzelFilter: function(const _1: SLDATA_T;
+  SDS_GoertzelIirFilter: function(const _1: SLDATA_T;
                                var SIGLIB_INOUT_PTR_DECL: SLDATA_T;
                                const _3: SLDATA_T): SLDATA_T cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
@@ -1571,23 +1571,23 @@ var
 {$ENDIF // End of #ifndef _HP_VEE}
 
 var
-  SIF_GaussianFilter: procedure(var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
+  SIF_GaussianFirFilter: procedure(var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                                 const _2: SLDATA_T;
                                 const _3: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
 var
-  SIF_GaussianFilter2: procedure(var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
+  SIF_GaussianFirFilter2: procedure(var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                                  const _2: SLDATA_T;
                                  const _3: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
 var
-  SIF_RaisedCosineFilter: procedure(var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
+  SIF_RaisedCosineFirFilter: procedure(var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                                     const _2: SLDATA_T;
                                     const _3: SLDATA_T;
                                     const _4: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
 var
-  SIF_RootRaisedCosineFilter: procedure(var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
+  SIF_RootRaisedCosineFirFilter: procedure(var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                                         const _2: SLDATA_T;
                                         const _3: SLDATA_T;
                                         const _4: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
@@ -1607,13 +1607,13 @@ var
                              const _5: SLARRAYINDEX_T): SLDATA_T cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
 var
-  SUF_EstimateBPFilterLength: function(const _1: SLDATA_T;
+  SUF_EstimateBPFirFilterLength: function(const _1: SLDATA_T;
                                        const _2: SLDATA_T;
                                        const _3: SLARRAYINDEX_T;
                                        const _4: SLARRAYINDEX_T): SLARRAYINDEX_T cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
 var
-  SUF_EstimateBPFilterError: procedure(const _1: SLDATA_T;
+  SUF_EstimateBPFirFilterError: procedure(const _1: SLDATA_T;
                                        const _2: SLDATA_T;
                                        const _3: SLARRAYINDEX_T;
                                        const _4: SLARRAYINDEX_T;
@@ -6677,21 +6677,21 @@ begin
   {$IFDEF WIN32}
     Assert(@SDS_LeakyIntegrator2 <> nil);
   {$ENDIF}
-    @SIF_HilbertTransformer := GetProcAddress(DLLHandle,'SIF_HilbertTransformer');
+    @SIF_HilbertTransformerFirFilter := GetProcAddress(DLLHandle,'SIF_HilbertTransformerFirFilter');
   {$IFDEF WIN32}
-    Assert(@SIF_HilbertTransformer <> nil);
+    Assert(@SIF_HilbertTransformerFirFilter <> nil);
   {$ENDIF}
-    @SIF_GoertzelFilter := GetProcAddress(DLLHandle,'SIF_GoertzelFilter');
+    @SIF_GoertzelIirFilter := GetProcAddress(DLLHandle,'SIF_GoertzelIirFilter');
   {$IFDEF WIN32}
-    Assert(@SIF_GoertzelFilter <> nil);
+    Assert(@SIF_GoertzelIirFilter <> nil);
   {$ENDIF}
-    @SDA_GoertzelFilter := GetProcAddress(DLLHandle,'SDA_GoertzelFilter');
+    @SDA_GoertzelIirFilter := GetProcAddress(DLLHandle,'SDA_GoertzelIirFilter');
   {$IFDEF WIN32}
-    Assert(@SDA_GoertzelFilter <> nil);
+    Assert(@SDA_GoertzelIirFilter <> nil);
   {$ENDIF}
-    @SDS_GoertzelFilter := GetProcAddress(DLLHandle,'SDS_GoertzelFilter');
+    @SDS_GoertzelIirFilter := GetProcAddress(DLLHandle,'SDS_GoertzelIirFilter');
   {$IFDEF WIN32}
-    Assert(@SDS_GoertzelFilter <> nil);
+    Assert(@SDS_GoertzelIirFilter <> nil);
   {$ENDIF}
     @SIF_GoertzelDetect := GetProcAddress(DLLHandle,'SIF_GoertzelDetect');
   {$IFDEF WIN32}
@@ -6709,21 +6709,21 @@ begin
   {$IFDEF WIN32}
     Assert(@SDA_GoertzelDetectComplex <> nil);
   {$ENDIF}
-    @SIF_GaussianFilter := GetProcAddress(DLLHandle,'SIF_GaussianFilter');
+    @SIF_GaussianFirFilter := GetProcAddress(DLLHandle,'SIF_GaussianFirFilter');
   {$IFDEF WIN32}
-    Assert(@SIF_GaussianFilter <> nil);
+    Assert(@SIF_GaussianFirFilter <> nil);
   {$ENDIF}
-    @SIF_GaussianFilter2 := GetProcAddress(DLLHandle,'SIF_GaussianFilter2');
+    @SIF_GaussianFirFilter2 := GetProcAddress(DLLHandle,'SIF_GaussianFirFilter2');
   {$IFDEF WIN32}
-    Assert(@SIF_GaussianFilter2 <> nil);
+    Assert(@SIF_GaussianFirFilter2 <> nil);
   {$ENDIF}
-    @SIF_RaisedCosineFilter := GetProcAddress(DLLHandle,'SIF_RaisedCosineFilter');
+    @SIF_RaisedCosineFirFilter := GetProcAddress(DLLHandle,'SIF_RaisedCosineFirFilter');
   {$IFDEF WIN32}
-    Assert(@SIF_RaisedCosineFilter <> nil);
+    Assert(@SIF_RaisedCosineFirFilter <> nil);
   {$ENDIF}
-    @SIF_RootRaisedCosineFilter := GetProcAddress(DLLHandle,'SIF_RootRaisedCosineFilter');
+    @SIF_RootRaisedCosineFirFilter := GetProcAddress(DLLHandle,'SIF_RootRaisedCosineFirFilter');
   {$IFDEF WIN32}
-    Assert(@SIF_RootRaisedCosineFilter <> nil);
+    Assert(@SIF_RootRaisedCosineFirFilter <> nil);
   {$ENDIF}
     @SDS_ZTransform := GetProcAddress(DLLHandle,'SDS_ZTransform');
   {$IFDEF WIN32}
@@ -6733,13 +6733,13 @@ begin
   {$IFDEF WIN32}
     Assert(@SDS_ZTransformDB <> nil);
   {$ENDIF}
-    @SUF_EstimateBPFilterLength := GetProcAddress(DLLHandle,'SUF_EstimateBPFilterLength');
+    @SUF_EstimateBPFirFilterLength := GetProcAddress(DLLHandle,'SUF_EstimateBPFirFilterLength');
   {$IFDEF WIN32}
-    Assert(@SUF_EstimateBPFilterLength <> nil);
+    Assert(@SUF_EstimateBPFirFilterLength <> nil);
   {$ENDIF}
-    @SUF_EstimateBPFilterError := GetProcAddress(DLLHandle,'SUF_EstimateBPFilterError');
+    @SUF_EstimateBPFirFilterError := GetProcAddress(DLLHandle,'SUF_EstimateBPFirFilterError');
   {$IFDEF WIN32}
-    Assert(@SUF_EstimateBPFilterError <> nil);
+    Assert(@SUF_EstimateBPFirFilterError <> nil);
   {$ENDIF}
     @SUF_FrequenciesToOctaves := GetProcAddress(DLLHandle,'SUF_FrequenciesToOctaves');
   {$IFDEF WIN32}

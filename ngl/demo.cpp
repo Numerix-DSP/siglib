@@ -44,9 +44,9 @@ GraphDisplay   *GlobalGraphDisplay;
 
 
 /*
-    Function Name : mainFrame::mainFrame
-    Description : Top level frame
-    Notes : This should contain the filter designer and graph children
+    Function Name: mainFrame::mainFrame
+    Description: Top level frame
+    Notes: This should contain the filter designer and graph children
 */
 
 mainFrame::mainFrame (const wxString & Title,
@@ -123,9 +123,9 @@ mainFrame::mainFrame (const wxString & Title,
 
 
 /*
-    Function Name : mainFrame::~mainFrame
-    Description : Destructor for top level frame
-    Notes :
+    Function Name: mainFrame::~mainFrame
+    Description: Destructor for top level frame
+    Notes:
 */
 
 mainFrame::~mainFrame ()
@@ -137,9 +137,9 @@ mainFrame::~mainFrame ()
 
 
 /*
-    Function Name : mainFrame::About
-    Description : Menu command : Help�About
-    Notes :
+    Function Name: mainFrame::About
+    Description: Menu command: Help|About
+    Notes:
 */
 
 void mainFrame::OnAbout (
@@ -159,9 +159,9 @@ void mainFrame::OnExit (
 
 
 /*
-    Function Name : mainFrame::SetGraphText
-    Description : Display text for graph
-    Notes :
+    Function Name: mainFrame::SetGraphText
+    Description: Display text for graph
+    Notes:
 */
 
 void mainFrame::DisplayStatusLineText (

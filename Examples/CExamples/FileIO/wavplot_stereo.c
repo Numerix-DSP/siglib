@@ -25,7 +25,7 @@ int main (
   FILE           *fpInputFile;
 
   if (argc != 2) {
-    printf ("\nUsage error  :\nplotwav_stereo filename (no extension)\n\n");
+    printf ("\nUsage:\nplotwav_stereo filename (no extension)\n\n");
     exit (-1);                                                      // Exit - usage error
   }
 

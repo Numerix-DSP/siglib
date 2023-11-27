@@ -27,7 +27,7 @@ int main (
     exit (-1);
   }
 
-  printf ("Rectangular Interpolation :\n");
+  printf ("Rectangular Interpolation:\n");
 
   rPoint1 = SCV_Rectangular (1.0, 0.0);
   rPoint2 = SCV_Rectangular (5.0, 0.0);
@@ -88,7 +88,7 @@ int main (
                "green",                                             // Colour
                GPC_ADD);                                            // New graph
 
-  printf ("Polar Interpolation :\n");
+  printf ("Polar Interpolation:\n");
 
   rPoint1 = SCV_Rectangular (1.0, 0.0);
   rPoint2 = SCV_Rectangular (5.0, 0.0);

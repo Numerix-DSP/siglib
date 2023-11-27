@@ -14,7 +14,7 @@
 
 // Declare global variables and arrays
 
-// Butterworth filter : 100Hz cut off frequency,4 pole,10kHz sample rate
+// Butterworth filter: 100Hz cut off frequency,4 pole,10kHz sample rate
 //   N+1 feedforward coefficients - b(0), b(1), . . b(N)
 //   N   feedback coefficients    -       a(1), . . a(N)
 

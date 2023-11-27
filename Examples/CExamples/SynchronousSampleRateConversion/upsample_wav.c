@@ -45,7 +45,7 @@ int main (
   char            outputFileName[256];
 
   if (argc != 2) {
-    printf ("Useage : resample-wav_FIR filename (no extension)\n");
+    printf ("Useage: resample-wav_FIR filename (no extension)\n");
     exit (-1);
   }
 

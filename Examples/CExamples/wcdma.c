@@ -60,8 +60,8 @@ int main (
   SLFixData_t     BitErrorCount = (SLFixData_t) 0;
 
   if (argc < 2) {
-    printf ("Usage   : wcdma <Number of iterations>\n");
-    printf ("Example : wcdma 50\n\n");
+    printf ("Usage:   wcdma <Number of iterations>\n");
+    printf ("Example: wcdma 50\n\n");
     NumberOfIterations = 50;
   }
   else {
@@ -116,8 +116,8 @@ int main (
 
 #if DEBUG
   for (SLArrayIndex_t i = 0; i < SPREADING_FACTOR; i++) {
-    printf ("Scram   : i = %lf, q = %lf\n", ScramblingCode[i].real, ScramblingCode[i].imag);
-    printf ("DeScram : i = %lf, q = %lf\n", DescramblingCode[i].imag, DescramblingCode[i].imag);
+    printf ("Scram:   i = %lf, q = %lf\n", ScramblingCode[i].real, ScramblingCode[i].imag);
+    printf ("DeScram: i = %lf, q = %lf\n", DescramblingCode[i].imag, DescramblingCode[i].imag);
   }
 #endif
 

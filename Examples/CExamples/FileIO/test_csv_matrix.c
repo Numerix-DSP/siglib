@@ -38,7 +38,7 @@ int main (
                                          "test.csv",                // Output filename
                                          N_ROWS,                    // Number of rows
                                          N_COLS);                   // Number of columns
-  printf ("Number of words written to test.csv file : %d\n", inputSampleCount);
+  printf ("Number of words written to test.csv file: %d\n", inputSampleCount);
 
   printf ("Reading from test.csv file\n");
   inputSampleCount = SUF_CsvReadMatrix (&pInputData,                // Destination array pointer
@@ -46,8 +46,8 @@ int main (
                                         SIGLIB_FIRST_ROW_KEEP,      // First row keep/ignore flag
                                         &nRows,                     // Pointer to number of rows read
                                         &nCols);                    // Pointer to number of columns read
-  printf ("Number of words read from test.csv file  : %d\n", inputSampleCount);
-  printf ("Number of rows read from test.csv file   : %d\n", nRows);
+  printf ("Number of words read from test.csv file:   %d\n", inputSampleCount);
+  printf ("Number of rows read from test.csv file:    %d\n", nRows);
   printf ("Number of columns read from test.csv file: %d\n", nCols);
 
   printf ("test.csv:\n");

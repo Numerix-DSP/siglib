@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 25/05/1999
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : DSP basic math functions, for SigLib DSP library.
+Description: DSP basic math functions, for SigLib DSP library.
 
 
 ****************************************************************************/
@@ -483,7 +483,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexScalarMultiply (
 *
 * Description:
 *   Piecewise complex multiply the contents of two
-*   arrays using :
+*   arrays using:
 *
 *   (a + jb).(c + jd) = (ac - bd) + j(ad + bc)
 *
@@ -1102,7 +1102,7 @@ void SIGLIB_FUNC_DECL SDA_Add (
 *   Add an offset to the data to ensure that all the values
 *   are positive and the smallest value is zero.
 *
-* Notes :
+* Notes:
 *
 ********************************************************/
 
@@ -1134,7 +1134,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PositiveOffset (
 *   Add an offset to the data to ensure that all the values
 *   are negative and the largest value is zero.
 *
-* Notes :
+* Notes:
 *
 ********************************************************/
 
@@ -1414,7 +1414,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_SumOfDifferences (
 *   result.
 *
 * Description: Generates roots of ax^2 + bx + c = 0
-*   Using : (-b +/- sqrt (b^2 - 4ac)) / 2a
+*   Using: (-b +/- sqrt (b^2 - 4ac)) / 2a
 *
 ********************************************************/
 
@@ -1487,7 +1487,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Factorial (
 * Description:
 *   This function returns the number of permutations
 *   (arrangements) of n items taking k at a time is
-*   represented as :
+*   represented as:
 *       n
 *        P
 *         k
@@ -1516,7 +1516,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Permutations (
 *
 * Description:
 *   This function returns the number of combinations of n
-*   items taking k at a time is represented as :
+*   items taking k at a time is represented as:
 *       n
 *        C
 *         k

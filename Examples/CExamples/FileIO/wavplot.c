@@ -32,7 +32,7 @@ int main (
   pDataArray = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   if (argc != 4) {
-    printf ("\nUsage error  :\nplotwav filename (no extension) frameNumber T/F\n\n");
+    printf ("\nUsage:\nplotwav filename (no extension) frameNumber T/F\n\n");
     exit (-1);                                                      // Exit - usage error
   }
 

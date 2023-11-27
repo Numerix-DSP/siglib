@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 13/09/1992
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : DSP utility functions, for SigLib DSP library.
+Description: DSP utility functions, for SigLib DSP library.
 
 
 ****************************************************************************/
@@ -875,7 +875,7 @@ void SIGLIB_FUNC_DECL SDA_PhaseUnWrap (
 * Return value:
 *
 * Description:
-*   Return the Log base 2 of a number using :
+*   Return the Log base 2 of a number using:
 *
 *   Log x   Log  x
 *      2  =    10
@@ -883,7 +883,7 @@ void SIGLIB_FUNC_DECL SDA_PhaseUnWrap (
 *           Log  2
 *              10
 *
-*   where : 1/Log10(2) = 3.32192809488736234787031942948939
+*   where: 1/Log10(2) = 3.32192809488736234787031942948939
 *
 ********************************************************/
 
@@ -913,7 +913,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Log2 (
 *   void
 *
 * Description:
-*   Return the Log base 2 of the array contents :
+*   Return the Log base 2 of the array contents:
 *
 *   Log x   Log  x
 *      2  =    10
@@ -921,7 +921,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Log2 (
 *           Log  2
 *              10
 *
-*   where : 1/Log10(2) = 3.32192809488736234787031942948939
+*   where: 1/Log10(2) = 3.32192809488736234787031942948939
 *
 ********************************************************/
 
@@ -971,7 +971,7 @@ void SIGLIB_FUNC_DECL SDA_Log2 (
 * Return value:
 *
 * Description:
-*   Return the Log base N of a number using :
+*   Return the Log base N of a number using:
 *
 *   Log x   Log  x
 *      N  =    10
@@ -1009,7 +1009,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_LogN (
 *   void
 *
 * Description:
-*   Return the Log base N of the array contents :
+*   Return the Log base N of the array contents:
 *
 *   Log x   Log  x
 *      N  =    10
@@ -1767,7 +1767,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ReSize (
 #endif
 #endif
 
-//  Strategy :
+//  Strategy:
 //  If state array length + input array length >= output array length
 //      copy state array data
 //      copy first part of input array data
@@ -3065,7 +3065,7 @@ void SIGLIB_FUNC_DECL SDA_dBToPower (
 *   const SLData_t Threshold,
 *
 * Return value:
-*   This function returns :
+*   This function returns:
 *       SIGLIB_TRUE - if the difference between samples
 *       is less than the threshold.
 *       SIGLIB_FALSE - if the difference between samples
@@ -3111,7 +3111,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Compare (
 *   const SLArrayIndex_t ArrayLength
 *
 * Return value:
-*   This function returns :
+*   This function returns:
 *       SIGLIB_TRUE - if the difference between samples
 *       is less than the threshold.
 *       SIGLIB_FALSE - if the difference between samples
@@ -3172,7 +3172,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Compare (
 *   const SLData_t Threshold,
 *
 * Return value:
-*   This function returns :
+*   This function returns:
 *       SIGLIB_TRUE - if the difference between samples
 *       is less than the threshold.
 *       SIGLIB_FALSE - if the difference between samples
@@ -3232,7 +3232,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_CompareComplex (
 *   const SLArrayIndex_t ArrayLength
 *
 * Return value:
-*   This function returns :
+*   This function returns:
 *       SIGLIB_TRUE - if the difference between samples
 *       is less than the threshold.
 *       SIGLIB_FALSE - if the difference between samples

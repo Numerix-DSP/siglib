@@ -77,7 +77,7 @@ int main (
   printf ("Hit <Carriage Return> to perform 40%% overlap between arrays ...");
   getchar ();
 
-// Note : The following code shows how this function is traditionally used
+//Note: The following code shows how this function is traditionally used
 // While there is data to process it,
 // otherwise get some new data then process that
 

@@ -20,9 +20,9 @@ int main (
   SLArrayIndex_t  CodeIndex;
 
   if (argc != 3) {
-    printf ("useage  : ChanCode SpreadingFactor CodeIndex\n");
-    printf ("        : The Channelization Sequence Number must be less than the Spreading Factor\n");
-    printf ("Example : ChanCode 16 3\n\n");
+    printf ("useage: ChanCode SpreadingFactor CodeIndex\n");
+    printf ("        The Channelization Sequence Number must be less than the Spreading Factor\n");
+    printf ("Example: ChanCode 16 3\n\n");
     SpreadingFactor = 16;
     CodeIndex = 3;
   }
@@ -32,7 +32,7 @@ int main (
   }
 
   if (CodeIndex >= SpreadingFactor) {
-    printf ("useage error :\nThe Channelization Sequence Number must be less than the Spreading Factor\n\n");
+    printf ("useage error:\nThe Channelization Sequence Number must be less than the Spreading Factor\n\n");
     exit (-1);
   }
 
@@ -44,7 +44,7 @@ int main (
                           SpreadingFactor,                          // Spreading factor
                           CodeIndex);                               // Channelization code index
 
-  printf ("Channelization codes : ");
+  printf ("Channelization codes: ");
   for (SLArrayIndex_t i = 0; i < SpreadingFactor; i++) {
     printf ("%d, ", (int) ChannelizationCode[i]);
   }

@@ -1,11 +1,11 @@
 // SigLib frequency domain plot header file
 // This file must be included after siglib.h
-// Frequency Domain Plots :
+// Frequency Domain Plots:
 // These functions support separate lengths for the source array and the DFT
 // so that short arrays can be zero padded to longer (power of 2) lengths
 // If the source dataset length is longer than the DFT length then the
 // DFT only operates on the DFT length, not the entire array
-// Time Domain Plots :
+// Time Domain Plots:
 // These functions generate simple time domain plots.
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 

@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 30/06/2005
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : Delay functions, for SigLib DSP library.
+Description: Delay functions, for SigLib DSP library.
 
 
 ****************************************************************************/
@@ -399,7 +399,7 @@ void SIGLIB_FUNC_DECL SDA_ShortFixedDelay (
 * Description:
 *   Initialises the Fifo Delay functions
 *
-* Notes :
+* Notes:
 *   The minimum delay length (in number of samples) is equal to 0.
 *   The maximum delay length (in number of samples) is equal to MaxDelayLength - 1.
 *   This function returns SIGLIB_ERROR if the requested delay is less than zero or
@@ -451,7 +451,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_VariableDelay (
 * Description:
 *   Implement the Fifo Delay on a single sample
 *
-* Notes :
+* Notes:
 *
 ********************************************************/
 
@@ -512,7 +512,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_VariableDelay (
 * Description:
 *   Implement the Fifo Delay on a stream of samples
 *
-* Notes :
+* Notes:
 *
 ********************************************************/
 
@@ -576,7 +576,7 @@ void SIGLIB_FUNC_DECL SDA_VariableDelay (
 * Description:
 *   Initialises the Fifo Delay functions
 *
-* Notes :
+* Notes:
 *   The minimum delay length (in number of samples) is equal to 0.
 *   The maximum delay length (in number of samples) is equal to MaxDelayLength - 1.
 *   This function returns SIGLIB_ERROR if the requested delay is less than zero or
@@ -634,7 +634,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_VariableDelayComplex (
 * Description:
 *   Implement the Fifo Delay on a single complex sample
 *
-* Notes :
+* Notes:
 *
 ********************************************************/
 
@@ -705,7 +705,7 @@ void SIGLIB_FUNC_DECL SDS_VariableDelayComplex (
 * Description:
 *   Implement the Fifo Delay on a complex stream of samples
 *
-* Notes :
+* Notes:
 *
 ********************************************************/
 
@@ -776,7 +776,7 @@ void SIGLIB_FUNC_DECL SDA_VariableDelayComplex (
 * Description:
 *   Increments the FIFO delay length
 *
-* Notes :
+* Notes:
 *   This function returns an error if the incremented delay
 *   is greater than the maximum allowable delay
 *   and it does not adjust the delay
@@ -818,7 +818,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_IncreaseVariableDelay (
 * Description:
 *   Decrements the FIFO delay length
 *
-* Notes :
+* Notes:
 *   This function returns SIGLIB_ERROR if the decremented
 *   delay is less than zero and it does not adjust the delay
 *

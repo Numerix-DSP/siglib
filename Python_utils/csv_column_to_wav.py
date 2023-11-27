@@ -21,7 +21,7 @@ def main(args):
   # print(np.shape(csv_array))
   # print(csv_column)
 
-  wav_filename = os.path.splitext(args[0])[0] + '.wav'
+  wav_filename: os.path.splitext(args[0])[0] + '.wav'
   scipy.io.wavfile.write(wav_filename, int(args[2]), csv_column.astype(np.int16))
 
 

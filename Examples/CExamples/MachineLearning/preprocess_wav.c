@@ -147,14 +147,14 @@ int main (
   parse_command_line (argc, argv);                                  //  Parse command line options
 
   if (0 == (inputBaseFilename[0])) {
-    printf ("Usage error: filename\n");
+    printf ("Usage: filename\n");
     show_help ();
     exit (0);
   }
 
   if (0 == predictionModeSwitch) {                                  // Check categorical value specified
     if (-1 == (categoricalValue)) {
-      printf ("Usage error: categorical value\n");
+      printf ("Usage: categorical value\n");
       show_help ();
       exit (0);
     }
@@ -238,8 +238,8 @@ int main (
   strcpy (validationFilename, "ValidationDataSet.csv");
   strcpy (predictionFilename, "PredictionDataSet.csv");
 
-// printf ("wp: trainingFilename = %s\n", trainingFilename);
-// printf ("wp: validationFilename = %s\n", validationFilename);
+// printf ("wp: trainingfilename: %s\n", trainingFilename);
+// printf ("wp: validationfilename: %s\n", validationFilename);
 
   if (1 == predictionModeSwitch) {
 

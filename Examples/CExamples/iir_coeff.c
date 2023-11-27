@@ -45,17 +45,17 @@ int main (
     gain = (SLData_t) atof (argv[SIGLIB_IIR_COEFFS_PER_BIQUAD]);
   }
   else {
-    printf ("Usage          : SL_Coeff_Gen <filterType> <sampleRate> <cutoffFreq> <qFactor> <gain>\n");
-    printf ("Filter Types   : L - Low-Pass\n");
-    printf ("               : H - High-Pass\n");
-    printf ("               : A - All-Pass\n");
-    printf ("               : D - Band-Pass - constant skirt gain\n");
-    printf ("               : E - Band-Pass - 0 dB peak gain\n");
-    printf ("               : N - Notch\n");
-    printf ("               : P - Peaking\n");
-    printf ("               : B - Low-Shelf (Bass)\n");
-    printf ("               : T - High-Shelf (Treble)\n\n");
-    printf ("Example        : iir_coeff B 48000 8000 0.7071 3\n\n");
+    printf ("Usage: SL_Coeff_Gen <filterType> <sampleRate> <cutoffFreq> <qFactor> <gain>\n");
+    printf ("Filter Types: L - Low-Pass\n");
+    printf ("              H - High-Pass\n");
+    printf ("              A - All-Pass\n");
+    printf ("              D - Band-Pass - constant skirt gain\n");
+    printf ("              E - Band-Pass - 0 dB peak gain\n");
+    printf ("              N - Notch\n");
+    printf ("              P - Peaking\n");
+    printf ("              B - Low-Shelf (Bass)\n");
+    printf ("              T - High-Shelf (Treble)\n\n");
+    printf ("Example: iir_coeff B 48000 8000 0.7071 3\n\n");
 
     filterType = 'B';
     sampleRate = 48000.;
@@ -121,17 +121,17 @@ int main (
       SIF_IirHighShelfFilter (pIIRCoeffs, cutoffFreq / sampleRate, qFactor, gain);
       break;
     default:
-      printf ("Syntax         : SL_Coeff_Gen <filterType> <sampleRate> <cutoffFreq> <qFactor> <gain>\n");
-      printf ("Filter Types   : L - Low-Pass\n");
-      printf ("               : H - High-Pass\n");
-      printf ("               : A - All-Pass\n");
-      printf ("               : D - Band-Pass - constant skirt gain\n");
-      printf ("               : E - Band-Pass - 0 dB peak gain\n");
-      printf ("               : N - Notch\n");
-      printf ("               : P - Peaking\n");
-      printf ("               : B - Bass-Shelf\n");
-      printf ("               : T - Treble-Shelf\n");
-      printf ("Try            : SL_Coeff_Gen B 48000 8000 0.7071 3\n\n");
+      printf ("Syntax: SL_Coeff_Gen <filterType> <sampleRate> <cutoffFreq> <qFactor> <gain>\n");
+      printf ("Filter Types: L - Low-Pass\n");
+      printf ("              H - High-Pass\n");
+      printf ("              A - All-Pass\n");
+      printf ("              D - Band-Pass - constant skirt gain\n");
+      printf ("              E - Band-Pass - 0 dB peak gain\n");
+      printf ("              N - Notch\n");
+      printf ("              P - Peaking\n");
+      printf ("              B - Bass-Shelf\n");
+      printf ("              T - Treble-Shelf\n");
+      printf ("Example: SL_Coeff_Gen B 48000 8000 0.7071 3\n\n");
       exit (-1);
   }
 
@@ -178,7 +178,7 @@ int main (
   getchar ();
 #endif
 
-  printf ("Coefficients - b(0), b(1), b(2), a(1), a(2) : %lf, %lf, %lf, %lf, %lf\n", pIIRCoeffs[0], pIIRCoeffs[1], pIIRCoeffs[2], pIIRCoeffs[3],
+  printf ("Coefficients - b(0), b(1), b(2), a(1), a(2): %lf, %lf, %lf, %lf, %lf\n", pIIRCoeffs[0], pIIRCoeffs[1], pIIRCoeffs[2], pIIRCoeffs[3],
           pIIRCoeffs[4]);
 
 // Generate frequency response

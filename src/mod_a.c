@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 15/11/1992
 Options   :                             | Latest Update : 17/11/2022
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : Analog Modulation / demodulation routines, for SigLib DSP library.
+Description: Analog Modulation / demodulation routines, for SigLib DSP library.
 
 
 ****************************************************************************/
@@ -323,7 +323,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_AmplitudeModulate2 (
 *   SLArrayIndex_t * SIGLIB_PTR_DECL CombFilterPhase,
 *   SLData_t * SIGLIB_PTR_DECL pSineTable,
 *   SLArrayIndex_t * SIGLIB_PTR_DECL SineTablePhase,
-*   const SLArrayIndex_t FilterLength,
+*   const SLArrayIndex_t filterLength,
 *   const SLArrayIndex_t SineTableSize,
 *
 * Return value:
@@ -343,10 +343,10 @@ SLError_t SIGLIB_FUNC_DECL SIF_ComplexShift (
   SLArrayIndex_t * SIGLIB_PTR_DECL CombFilterPhase,
   SLData_t * SIGLIB_PTR_DECL pSineTable,
   SLArrayIndex_t * SIGLIB_PTR_DECL SineTablePhase,
-  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t filterLength,
   const SLArrayIndex_t SineTableSize)
 {
-  for (SLArrayIndex_t i = 0; i < FilterLength; i++) {               // Clear comb filter arrays
+  for (SLArrayIndex_t i = 0; i < filterLength; i++) {               // Clear comb filter arrays
     *pRealCombFilter++ = SIGLIB_ZERO;
     *pImagCombFilter++ = SIGLIB_ZERO;
   }
@@ -384,7 +384,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_ComplexShift (
 *   const SLData_t * SIGLIB_PTR_DECL pSineTable,
 *   SLArrayIndex_t * SIGLIB_PTR_DECL SineTablePhase,
 *   const SLData_t MixFrequency,
-*   const SLArrayIndex_t FilterLength,
+*   const SLArrayIndex_t filterLength,
 *   const SLArrayIndex_t SineTableSize,
 *   const SLArrayIndex_t SampleLength
 *
@@ -427,7 +427,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexShift (
   const SLData_t * SIGLIB_PTR_DECL pSineTable,
   SLArrayIndex_t * SIGLIB_PTR_DECL SineTablePhase,
   const SLData_t MixFrequency,
-  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t filterLength,
   const SLArrayIndex_t SineTableSize,
   const SLArrayIndex_t SampleLength)
 {
@@ -480,7 +480,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexShift (
     *(pLocalImagCombFilter + LocalCombPhase) = Tmp;                 // Save input data
 
     LocalCombPhase++;                                               // Increment comb filter phase
-    if (LocalCombPhase >= FilterLength) {                           // Circular both comb filter arrays
+    if (LocalCombPhase >= filterLength) {                           // Circular both comb filter arrays
       LocalCombPhase = SIGLIB_AI_ZERO;
     }
 

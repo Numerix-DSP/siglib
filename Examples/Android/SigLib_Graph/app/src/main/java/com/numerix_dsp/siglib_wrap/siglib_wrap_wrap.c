@@ -384,7 +384,8 @@ extern          "C" {
                    *(
   double **)     &jresult = result;
                     return jresult;
-  } SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_delete_1doubleArray (
+  }
+  SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_delete_1doubleArray (
   JNIEnv * jenv,
   jclass jcls,
   jlong jarg1) {
@@ -8549,7 +8550,7 @@ extern          "C" {
     (void) jcls;
     arg1 = *(SLData_t **) & jarg1;
     arg2 = (SLArrayIndex_t) jarg2;
-    SIF_HilbertTransformer (arg1, arg2);
+    SIF_HilbertTransformerFirFilter (arg1, arg2);
   }
 
 
@@ -8570,7 +8571,7 @@ extern          "C" {
     arg1 = *(SLData_t **) & jarg1;
     arg2 = (SLData_t) jarg2;
     arg3 = (SLArrayIndex_t) jarg3;
-    result = (SLData_t) SIF_GoertzelFilter (arg1, arg2, arg3);
+    result = (SLData_t) SIF_GoertzelIirFilter (arg1, arg2, arg3);
     jresult = (jdouble) result;
     return jresult;
   }
@@ -8597,7 +8598,7 @@ extern          "C" {
     arg3 = *(SLData_t **) & jarg3;
     arg4 = (SLData_t) jarg4;
     arg5 = (SLArrayIndex_t) jarg5;
-    SDA_GoertzelFilter ((double const *) arg1, arg2, arg3, arg4, arg5);
+    SDA_GoertzelIirFilter ((double const *) arg1, arg2, arg3, arg4, arg5);
   }
 
 
@@ -8618,7 +8619,7 @@ extern          "C" {
     arg1 = (SLData_t) jarg1;
     arg2 = *(SLData_t **) & jarg2;
     arg3 = (SLData_t) jarg3;
-    result = (SLData_t) SDS_GoertzelFilter (arg1, arg2, arg3);
+    result = (SLData_t) SDS_GoertzelIirFilter (arg1, arg2, arg3);
     jresult = (jdouble) result;
     return jresult;
   }
@@ -8741,7 +8742,7 @@ extern          "C" {
     arg1 = *(SLData_t **) & jarg1;
     arg2 = (SLData_t) jarg2;
     arg3 = (SLArrayIndex_t) jarg3;
-    SIF_GaussianFilter (arg1, arg2, arg3);
+    SIF_GaussianFirFilter (arg1, arg2, arg3);
   }
 
 
@@ -8760,7 +8761,7 @@ extern          "C" {
     arg1 = *(SLData_t **) & jarg1;
     arg2 = (SLData_t) jarg2;
     arg3 = (SLArrayIndex_t) jarg3;
-    SIF_GaussianFilter2 (arg1, arg2, arg3);
+    SIF_GaussianFirFilter2 (arg1, arg2, arg3);
   }
 
 
@@ -8782,7 +8783,7 @@ extern          "C" {
     arg2 = (SLData_t) jarg2;
     arg3 = (SLData_t) jarg3;
     arg4 = (SLArrayIndex_t) jarg4;
-    SIF_RaisedCosineFilter (arg1, arg2, arg3, arg4);
+    SIF_RaisedCosineFirFilter (arg1, arg2, arg3, arg4);
   }
 
 
@@ -8804,7 +8805,7 @@ extern          "C" {
     arg2 = (SLData_t) jarg2;
     arg3 = (SLData_t) jarg3;
     arg4 = (SLArrayIndex_t) jarg4;
-    SIF_RootRaisedCosineFilter (arg1, arg2, arg3, arg4);
+    SIF_RootRaisedCosineFirFilter (arg1, arg2, arg3, arg4);
   }
 
 
@@ -8910,7 +8911,7 @@ extern          "C" {
     arg2 = (SLData_t) jarg2;
     arg3 = (SLArrayIndex_t) jarg3;
     arg4 = (SLArrayIndex_t) jarg4;
-    result = (SLArrayIndex_t) SUF_EstimateBPFilterLength (arg1, arg2, arg3, arg4);
+    result = (SLArrayIndex_t) SUF_EstimateBPFirFilterLength (arg1, arg2, arg3, arg4);
     jresult = (jint) result;
     return jresult;
   }
@@ -8937,7 +8938,7 @@ extern          "C" {
     arg3 = (SLArrayIndex_t) jarg3;
     arg4 = (SLArrayIndex_t) jarg4;
     arg5 = *(SLData_t **) & jarg5;
-    SUF_EstimateBPFilterError (arg1, arg2, arg3, arg4, arg5);
+    SUF_EstimateBPFirFilterError (arg1, arg2, arg3, arg4, arg5);
   }
 
 

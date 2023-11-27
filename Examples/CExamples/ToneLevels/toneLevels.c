@@ -53,7 +53,7 @@ int main (
   }
 
   if (argc != 2) {
-    printf ("\nUsage error  :\nplotToneLevels WavFilename (no extension)\n\n");
+    printf ("\nUsage:\nplotToneLevels WavFilename (no extension)\n\n");
     exit (-1);                                                      // Exit - usage error
   }
 

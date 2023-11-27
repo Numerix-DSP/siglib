@@ -41,9 +41,9 @@ int main (
 // Zero pad
   SDA_Clear (pFilterTaps,                                           // Pointer to destination array
              FOURIERT_LENGTH);                                      // Dataset length
-  SIF_GaussianFilter (pFilterTaps,                                  // Pointer to filter coefficients
-                      STANDARD_DEVIATION,                           // Standard deviation of the distribution
-                      FILTER_LENGTH);                               // Filter length
+  SIF_GaussianFirFilter (pFilterTaps,                               // Pointer to filter coefficients
+                         STANDARD_DEVIATION,                        // Standard deviation of the distribution
+                         FILTER_LENGTH);                            // Filter length
 
   gpc_plot_2d (h2DPlot,                                             // Graph handle
                pFilterTaps,                                         // Dataset
@@ -67,7 +67,7 @@ int main (
                  pImagData,                                         // Pointer to imaginary source array
                  pResults,                                          // Pointer to magnitude destination array
                  FOURIERT_LENGTH);                                  // Dataset length
-// Shift center frequency
+// Shift centre frequency
   SDA_FftShift (pResults,                                           // Pointer to source array
                 pResults,                                           // Pointer to destination array
                 FOURIERT_LENGTH);                                   // Dataset length
@@ -75,21 +75,21 @@ int main (
   gpc_plot_2d (h2DPlot,                                             // Graph handle
                pResults,                                            // Dataset
                FOURIERT_LENGTH,                                     // Dataset length
-               "Gaussian Filter Spectrum - D.C. Centered",          // Dataset title
+               "Gaussian Filter Spectrum - D.C. Centred",           // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
                (double) (FOURIERT_LENGTH - 1),                      // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
-  printf ("\nGaussian Filter Spectrum - D.C. Centered\nPlease hit <Carriage Return> to continue . . .");
+  printf ("\nGaussian Filter Spectrum - D.C. Centred\nPlease hit <Carriage Return> to continue . . .");
   getchar ();
 
 // Zero pad
   SDA_Clear (pFilterTaps,                                           // Pointer to destination array
              FOURIERT_LENGTH);                                      // Dataset length
-  SIF_GaussianFilter2 (pFilterTaps,                                 // Pointer to filter coefficients
-                       BANDWIDTH,                                   // Filter bandwidth
-                       FILTER_LENGTH);                              // Filter length
+  SIF_GaussianFirFilter2 (pFilterTaps,                              // Pointer to filter coefficients
+                          BANDWIDTH,                                // Filter bandwidth
+                          FILTER_LENGTH);                           // Filter length
 
   gpc_plot_2d (h2DPlot,                                             // Graph handle
                pFilterTaps,                                         // Dataset
@@ -113,7 +113,7 @@ int main (
                  pImagData,                                         // Pointer to imaginary source array
                  pResults,                                          // Pointer to magnitude destination array
                  FILTER_LENGTH);                                    // Dataset length
-// Shift center frequency
+// Shift centre frequency
   SDA_FftShift (pResults,                                           // Pointer to source array
                 pResults,                                           // Pointer to destination array
                 FILTER_LENGTH);                                     // Dataset length
@@ -121,13 +121,13 @@ int main (
   gpc_plot_2d (h2DPlot,                                             // Graph handle
                pResults,                                            // Dataset
                FILTER_LENGTH,                                       // Dataset length
-               "Gaussian Filter Spectrum - D.C. Centered - Bandwidth 0.15", // Dataset title
+               "Gaussian Filter Spectrum - D.C. Centred - Bandwidth 0.15",  // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
                (double) (FILTER_LENGTH - 1),                        // Maximum X value
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
-  printf ("\nGaussian Filter Spectrum - D.C. Centered - Bandwidth 0.15\n");
+  printf ("\nGaussian Filter Spectrum - D.C. Centred - Bandwidth 0.15\n");
 
   printf ("\nHit <Carriage Return> to continue ....\n");
   getchar ();                                                       // Wait for <Carriage Return>

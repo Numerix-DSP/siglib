@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 03/07/1994
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : Complex number routines for SigLib DSP library.
+Description: Complex number routines for SigLib DSP library.
 
 
 ****************************************************************************/
@@ -741,7 +741,7 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_ScalarSubtractVector (
 *   void
 *
 * Description: Generates roots of ax^2 + bx + c = 0
-*   Using : (-b +/- sqrt (b^2 - 4ac)) / 2a
+*   Using: (-b +/- sqrt (b^2 - 4ac)) / 2a
 *
 ********************************************************/
 

@@ -34,7 +34,7 @@ int main (
                        ARRAY_LENGTH);                               // Array length
 
   for (SLArrayIndex_t i = 0; i < ARRAY_LENGTH; i++) {
-    printf ("SDA_SigLibDataToFix : %lf = %d\n", dataArraySrc[i], fixDataArrayDst[i]);
+    printf ("SDA_SigLibDataToFix: %lf = %d\n", dataArraySrc[i], fixDataArrayDst[i]);
   }
   printf ("\n");
 
@@ -43,21 +43,21 @@ int main (
                        ARRAY_LENGTH);                               // Array length
 
   for (SLArrayIndex_t i = 0; i < ARRAY_LENGTH; i++) {
-    printf ("SDA_FixToSigLibData : %d = %lf\n", fixDataArraySrc[i], dataArrayDst[i]);
+    printf ("SDA_FixToSigLibData: %d = %lf\n", fixDataArraySrc[i], dataArrayDst[i]);
   }
   printf ("\n");
 
   printf ("\n8.24 Q Format Integer Examples\n\n");
-  printf ("SDS_SigLibDataToQFormatInteger : %lf = 0x%x\n", 1.0, SDS_SigLibDataToQFormatInteger (1.0, 8, 24));
-  printf ("SDS_SigLibDataToQFormatInteger : %lf = 0x%x\n", 0.9, SDS_SigLibDataToQFormatInteger (0.9, 8, 24));
-  printf ("SDS_SigLibDataToQFormatInteger : %lf = 0x%x\n", -1.0, SDS_SigLibDataToQFormatInteger (-1.0, 8, 24));
-  printf ("SDS_SigLibDataToQFormatInteger : %lf = 0x%x\n", -0.9, SDS_SigLibDataToQFormatInteger (-0.9, 8, 24));
+  printf ("SDS_SigLibDataToQFormatInteger: %lf = 0x%x\n", 1.0, SDS_SigLibDataToQFormatInteger (1.0, 8, 24));
+  printf ("SDS_SigLibDataToQFormatInteger: %lf = 0x%x\n", 0.9, SDS_SigLibDataToQFormatInteger (0.9, 8, 24));
+  printf ("SDS_SigLibDataToQFormatInteger: %lf = 0x%x\n", -1.0, SDS_SigLibDataToQFormatInteger (-1.0, 8, 24));
+  printf ("SDS_SigLibDataToQFormatInteger: %lf = 0x%x\n", -0.9, SDS_SigLibDataToQFormatInteger (-0.9, 8, 24));
   printf ("\n");
 
-  printf ("SDS_QFormatIntegerToSigLibData : 0x%x = %lf\n", 0x1000000, SDS_QFormatIntegerToSigLibData (0x1000000, 24));
-  printf ("SDS_QFormatIntegerToSigLibData : 0x%x = %lf\n", 0xe66666, SDS_QFormatIntegerToSigLibData (0xe66666, 24));
-  printf ("SDS_QFormatIntegerToSigLibData : 0x%x = %lf\n", 0xff000000, SDS_QFormatIntegerToSigLibData (0xff000000, 24));
-  printf ("SDS_QFormatIntegerToSigLibData : 0x%x = %lf\n", 0xff19999a, SDS_QFormatIntegerToSigLibData (0xff19999a, 24));
+  printf ("SDS_QFormatIntegerToSigLibData: 0x%x = %lf\n", 0x1000000, SDS_QFormatIntegerToSigLibData (0x1000000, 24));
+  printf ("SDS_QFormatIntegerToSigLibData: 0x%x = %lf\n", 0xe66666, SDS_QFormatIntegerToSigLibData (0xe66666, 24));
+  printf ("SDS_QFormatIntegerToSigLibData: 0x%x = %lf\n", 0xff000000, SDS_QFormatIntegerToSigLibData (0xff000000, 24));
+  printf ("SDS_QFormatIntegerToSigLibData: 0x%x = %lf\n", 0xff19999a, SDS_QFormatIntegerToSigLibData (0xff19999a, 24));
   printf ("\n");
 
   SDA_SigLibDataToQFormatInteger (dataArraySrc,                     // Pointer to source array
@@ -67,7 +67,7 @@ int main (
                                   ARRAY_LENGTH);                    // Array length
 
   for (SLArrayIndex_t i = 0; i < ARRAY_LENGTH; i++) {
-    printf ("SDA_SigLibDataToQFormatInteger : %lf = %x\n", dataArraySrc[i], fixDataArrayDst[i]);
+    printf ("SDA_SigLibDataToQFormatInteger: %lf = %x\n", dataArraySrc[i], fixDataArrayDst[i]);
   }
   printf ("\n");
 
@@ -77,7 +77,7 @@ int main (
                                   ARRAY_LENGTH);                    // Array length
 
   for (SLArrayIndex_t i = 0; i < ARRAY_LENGTH; i++) {
-    printf ("SDA_QFormatIntegerToSigLibData : %x = %lf\n", qFormatDataArraySrc[i], dataArrayDst[i]);
+    printf ("SDA_QFormatIntegerToSigLibData: %x = %lf\n", qFormatDataArraySrc[i], dataArrayDst[i]);
   }
   printf ("\n");
 

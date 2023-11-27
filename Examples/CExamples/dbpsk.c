@@ -1,5 +1,5 @@
 // SigLib Differential BPSK Example
-// Simulating :
+// Simulating:
 // 600 bps
 // '1' = cos (theta), '0' = - cos (theta)
 // Carrier frequency = 1200 Hz.
@@ -7,7 +7,7 @@
 // For a typical transmitter the modultor would be
 // followed by a filter e.g a root raised cosine filter,
 // which can be implemented using the SigLib
-// SIF_RootRaisedCosineFilter function.
+// SIF_RootRaisedCosineFirFilter function.
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files

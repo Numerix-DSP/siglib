@@ -1,6 +1,6 @@
 // SigLib Sorting Example
-// Sort2 : sort one array and reflect the changes in a second array
-// IndexedSort : Use a second input array to specify the output order of the source array
+// Sort2: sort one array and reflect the changes in a second array
+// IndexedSort: Use a second input array to specify the output order of the source array
 
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 

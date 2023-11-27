@@ -22,21 +22,21 @@ int main (
     y1 = (SLData_t) atof (argv[2]);
     y2 = (SLData_t) atof (argv[3]);
 
-    printf ("Sample #1 = %lf\n", y0);
-    printf ("Sample #2 = %lf\n", y1);
-    printf ("Sample #3 = %lf\n", y2);
+    printf ("Sample #1: %lf\n", y0);
+    printf ("Sample #2: %lf\n", y1);
+    printf ("Sample #3: %lf\n", y2);
 
     printf ("Sample Processing\n");
-    printf ("Vertex Magnitude = %lf\n", SDS_InterpolateThreePointQuadraticVertexMagnitude (y0, y1, y2));
-    printf ("Vertex Location = %lf\n\n", SDS_InterpolateThreePointQuadraticVertexLocation (y0, y1, y2));
+    printf ("Vertex Magnitude: %lf\n", SDS_InterpolateThreePointQuadraticVertexMagnitude (y0, y1, y2));
+    printf ("Vertex Location:  %lf\n\n", SDS_InterpolateThreePointQuadraticVertexLocation (y0, y1, y2));
 
     samples[0] = y0;
     samples[1] = y1;
     samples[2] = y2;
 
     printf ("Array Processing\n");
-    printf ("Vertex Magnitude = %lf\n", SDA_InterpolateThreePointQuadraticVertexMagnitude (samples));
-    printf ("Vertex Location = %lf\n\n", SDA_InterpolateThreePointQuadraticVertexLocation (samples));
+    printf ("Vertex Magnitude: %lf\n", SDA_InterpolateThreePointQuadraticVertexMagnitude (samples));
+    printf ("Vertex Location:  %lf\n\n", SDA_InterpolateThreePointQuadraticVertexLocation (samples));
 
     SDA_Clear (samples, ARRAY_LENGTH);
     samples[4] = y0;
@@ -44,8 +44,8 @@ int main (
     samples[6] = y2;
 
     printf ("Arbitrary Length Array Processing\n");
-    printf ("Vertex Magnitude = %lf\n", SDA_InterpolateArbitraryThreePointQuadraticVertexMagnitude (samples, ARRAY_LENGTH));
-    printf ("Vertex Location = %lf\n\n", SDA_InterpolateArbitraryThreePointQuadraticVertexLocation (samples, ARRAY_LENGTH));
+    printf ("Vertex Magnitude: %lf\n", SDA_InterpolateArbitraryThreePointQuadraticVertexMagnitude (samples, ARRAY_LENGTH));
+    printf ("Vertex Location:  %lf\n\n", SDA_InterpolateArbitraryThreePointQuadraticVertexLocation (samples, ARRAY_LENGTH));
   }
   else if (argc == 7) {
 
@@ -56,36 +56,36 @@ int main (
     x2 = (SLData_t) atof (argv[5]);
     y2 = (SLData_t) atof (argv[6]);
 
-    printf ("Sample #1 = %lf, %lf\n", x0, y0);
-    printf ("Sample #2 = %lf, %lf\n", x1, y1);
-    printf ("Sample #3 = %lf, %lf\n", x2, y2);
+    printf ("Sample #1: %lf, %lf\n", x0, y0);
+    printf ("Sample #2: %lf, %lf\n", x1, y1);
+    printf ("Sample #3: %lf, %lf\n", x2, y2);
 
-    printf ("Vertex Magnitude = %lf\n", SDS_InterpolateArbitraryThreePointQuadraticVertexMagnitude (x0, y0, x1, y1, x2, y2));
-    printf ("Vertex Location = %lf\n\n", SDS_InterpolateArbitraryThreePointQuadraticVertexLocation (x0, y0, x1, y1, x2, y2));
+    printf ("Vertex Magnitude: %lf\n", SDS_InterpolateArbitraryThreePointQuadraticVertexMagnitude (x0, y0, x1, y1, x2, y2));
+    printf ("Vertex Location:  %lf\n\n", SDS_InterpolateArbitraryThreePointQuadraticVertexLocation (x0, y0, x1, y1, x2, y2));
   }
   else {
 
-    printf ("\nUsage :\nVertexFinder y0 y1 y2\nor:\nVertexFinder x0 y0 x1 y1 x2 y2\n\nExamples :\n\n");
+    printf ("\nUsage:\nVertexFinder y0 y1 y2\nor:\nVertexFinder x0 y0 x1 y1 x2 y2\n\nExamples:\n\n");
 
     y0 = 1.;
     y1 = 1.5;
     y2 = 1.2;
-    printf ("Sample #1 = %lf\n", y0);
-    printf ("Sample #2 = %lf\n", y1);
-    printf ("Sample #3 = %lf\n", y2);
+    printf ("Sample #1: %lf\n", y0);
+    printf ("Sample #2: %lf\n", y1);
+    printf ("Sample #3: %lf\n", y2);
 
-    printf ("Vertex Magnitude = %lf\n", SDS_InterpolateThreePointQuadraticVertexMagnitude (y0, y1, y2));
-    printf ("Vertex Location = %lf\n\n", SDS_InterpolateThreePointQuadraticVertexLocation (y0, y1, y2));
+    printf ("Vertex Magnitude: %lf\n", SDS_InterpolateThreePointQuadraticVertexMagnitude (y0, y1, y2));
+    printf ("Vertex Location:  %lf\n\n", SDS_InterpolateThreePointQuadraticVertexLocation (y0, y1, y2));
 
     y0 = -1.;
     y1 = -1.5;
     y2 = -1.2;
-    printf ("Sample #1 = %lf\n", y0);
-    printf ("Sample #2 = %lf\n", y1);
-    printf ("Sample #3 = %lf\n", y2);
+    printf ("Sample #1: %lf\n", y0);
+    printf ("Sample #2: %lf\n", y1);
+    printf ("Sample #3: %lf\n", y2);
 
-    printf ("Vertex Magnitude = %lf\n", SDS_InterpolateThreePointQuadraticVertexMagnitude (y0, y1, y2));
-    printf ("Vertex Location = %lf\n\n", SDS_InterpolateThreePointQuadraticVertexLocation (y0, y1, y2));
+    printf ("Vertex Magnitude: %lf\n", SDS_InterpolateThreePointQuadraticVertexMagnitude (y0, y1, y2));
+    printf ("Vertex Location:  %lf\n\n", SDS_InterpolateThreePointQuadraticVertexLocation (y0, y1, y2));
 
 
     x0 = 0.;
@@ -94,12 +94,12 @@ int main (
     y1 = 1.5;
     x2 = 2.;
     y2 = 1.2;
-    printf ("Sample #1 = %lf, %lf\n", x0, y0);
-    printf ("Sample #2 = %lf, %lf\n", x1, y1);
-    printf ("Sample #3 = %lf, %lf\n", x2, y2);
+    printf ("Sample #1: %lf, %lf\n", x0, y0);
+    printf ("Sample #2: %lf, %lf\n", x1, y1);
+    printf ("Sample #3: %lf, %lf\n", x2, y2);
 
-    printf ("Vertex Magnitude = %lf\n", SDS_InterpolateArbitraryThreePointQuadraticVertexMagnitude (x0, y0, x1, y1, x2, y2));
-    printf ("Vertex Location = %lf\n\n", SDS_InterpolateArbitraryThreePointQuadraticVertexLocation (x0, y0, x1, y1, x2, y2));
+    printf ("Vertex Magnitude: %lf\n", SDS_InterpolateArbitraryThreePointQuadraticVertexMagnitude (x0, y0, x1, y1, x2, y2));
+    printf ("Vertex Location:  %lf\n\n", SDS_InterpolateArbitraryThreePointQuadraticVertexLocation (x0, y0, x1, y1, x2, y2));
 
     x0 = 0.;
     y0 = -1.;
@@ -107,28 +107,28 @@ int main (
     y1 = -1.5;
     x2 = 2.;
     y2 = -1.2;
-    printf ("Sample #1 = %lf, %lf\n", x0, y0);
-    printf ("Sample #2 = %lf, %lf\n", x1, y1);
-    printf ("Sample #3 = %lf, %lf\n", x2, y2);
+    printf ("Sample #1: %lf, %lf\n", x0, y0);
+    printf ("Sample #2: %lf, %lf\n", x1, y1);
+    printf ("Sample #3: %lf, %lf\n", x2, y2);
 
-    printf ("Vertex Magnitude = %lf\n", SDS_InterpolateArbitraryThreePointQuadraticVertexMagnitude (x0, y0, x1, y1, x2, y2));
-    printf ("Vertex Location = %lf\n\n", SDS_InterpolateArbitraryThreePointQuadraticVertexLocation (x0, y0, x1, y1, x2, y2));
+    printf ("Vertex Magnitude: %lf\n", SDS_InterpolateArbitraryThreePointQuadraticVertexMagnitude (x0, y0, x1, y1, x2, y2));
+    printf ("Vertex Location:  %lf\n\n", SDS_InterpolateArbitraryThreePointQuadraticVertexLocation (x0, y0, x1, y1, x2, y2));
 
 
     y0 = 1.;
     y1 = 1.5;
     y2 = 1.2;
-    printf ("Sample #1 = %lf\n", y0);
-    printf ("Sample #2 = %lf\n", y1);
-    printf ("Sample #3 = %lf\n", y2);
+    printf ("Sample #1: %lf\n", y0);
+    printf ("Sample #2: %lf\n", y1);
+    printf ("Sample #3: %lf\n", y2);
 
     samples[0] = y0;
     samples[1] = y1;
     samples[2] = y2;
 
     printf ("Array Processing\n");
-    printf ("Vertex Magnitude = %lf\n", SDA_InterpolateThreePointQuadraticVertexMagnitude (samples));
-    printf ("Vertex Location = %lf\n\n", SDA_InterpolateThreePointQuadraticVertexLocation (samples));
+    printf ("Vertex Magnitude: %lf\n", SDA_InterpolateThreePointQuadraticVertexMagnitude (samples));
+    printf ("Vertex Location:  %lf\n\n", SDA_InterpolateThreePointQuadraticVertexLocation (samples));
 
     SDA_Clear (samples, ARRAY_LENGTH);
     samples[4] = y0;
@@ -136,12 +136,12 @@ int main (
     samples[6] = y2;
 
     printf ("Arbitrary Length Array Processing (Positive and Negative Vertex)\n");
-    printf ("Vertex Magnitude = %lf\n", SDA_InterpolateArbitraryThreePointQuadraticVertexMagnitude (samples, ARRAY_LENGTH));
-    printf ("Vertex Location = %lf\n\n", SDA_InterpolateArbitraryThreePointQuadraticVertexLocation (samples, ARRAY_LENGTH));
+    printf ("Vertex Magnitude: %lf\n", SDA_InterpolateArbitraryThreePointQuadraticVertexMagnitude (samples, ARRAY_LENGTH));
+    printf ("Vertex Location:  %lf\n\n", SDA_InterpolateArbitraryThreePointQuadraticVertexLocation (samples, ARRAY_LENGTH));
 
     printf ("Arbitrary Length Array Processing (Positive Only Vertex)\n");
-    printf ("Vertex Magnitude = %lf\n", SDA_InterpolateArbitraryThreePointQuadraticPeakVertexMagnitude (samples, ARRAY_LENGTH));
-    printf ("Vertex Location = %lf\n\n", SDA_InterpolateArbitraryThreePointQuadraticPeakVertexLocation (samples, ARRAY_LENGTH));
+    printf ("Vertex Magnitude: %lf\n", SDA_InterpolateArbitraryThreePointQuadraticPeakVertexMagnitude (samples, ARRAY_LENGTH));
+    printf ("Vertex Location:  %lf\n\n", SDA_InterpolateArbitraryThreePointQuadraticPeakVertexLocation (samples, ARRAY_LENGTH));
   }
 
   exit (0);

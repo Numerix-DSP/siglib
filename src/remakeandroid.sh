@@ -4,7 +4,7 @@
 
 # Shell script for creating Java wrapper for accessing SigLib library
 # Ensure swig.exe is in your system PATH
-# Ensure the appropriate include paths are specified, for example :
+# Ensure the appropriate include paths are specified, for example:
 #     set INCLUDE=C:\Users\John\AppData\Local\Android\Sdk\ndk-bundle\sysroot\usr\include;%INCLUDE%
 #     set INCLUDE=C:\Users\John\AppData\Local\Android\Sdk\ndk-bundle\sysroot\usr\include\i686-linux-android\;%INCLUDE%
 

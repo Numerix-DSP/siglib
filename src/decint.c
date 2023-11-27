@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 06/08/2005
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : SigLib DSP library decimation and interpolation routines.
+Description: SigLib DSP library decimation and interpolation routines.
 
 
 ****************************************************************************/
@@ -80,7 +80,7 @@ void SIGLIB_FUNC_DECL SIF_Decimate (
 * Description:
 *   Decimate the input data sample rate
 *
-* Notes :
+* Notes:
 *   This function supports decimation across contiguous
 * arrays through the use of the SrcArrayIndex parameter.
 *
@@ -148,7 +148,7 @@ void SIGLIB_FUNC_DECL SIF_Interpolate (
 * Description:
 *   Interpolate the input data sample rate
 *
-* Notes :
+* Notes:
 *   This function supports interpolation across contiguous
 * arrays through the use of the DstArrayIndex parameter.
 *
@@ -194,7 +194,7 @@ void SIGLIB_FUNC_DECL SDA_Interpolate (
 *   SLData_t * DECL pState,             Pointer to filter state array
 *   SLArrayIndex_t * pDecimationIndex,  Decimation index
 *   SLArrayIndex_t * pFilterIndex,      Filter index
-*   const SLArrayIndex_t FilterLength   Filter length
+*   const SLArrayIndex_t filterLength   Filter length
 *
 * Return value: void
 *
@@ -206,9 +206,9 @@ void SIGLIB_FUNC_DECL SIF_FilterAndDecimate (
   SLData_t * SIGLIB_PTR_DECL pState,
   SLArrayIndex_t * SIGLIB_PTR_DECL pDecimationIndex,
   SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
-  const SLArrayIndex_t FilterLength)
+  const SLArrayIndex_t filterLength)
 {
-  SIF_Fir (pState, pFilterIndex, FilterLength);
+  SIF_Fir (pState, pFilterIndex, filterLength);
 
   *pDecimationIndex = SIGLIB_AI_ZERO;
   *pFilterIndex = SIGLIB_AI_ZERO;
@@ -228,7 +228,7 @@ void SIGLIB_FUNC_DECL SIF_FilterAndDecimate (
 *   SLData_t pState[],                      Pointer to filter state array
 *   const SLData_t pCoeffs[],               Pointer to filter coefficients
 *   SLArrayIndex_t * pFilterIndex,          Pointer to filter index offset
-*   const SLArrayIndex_t FilterLength,      Filter length
+*   const SLArrayIndex_t filterLength,      Filter length
 *   const SLArrayIndex_t SrcArrayLength)    Source array length
 *
 * Return value:
@@ -237,7 +237,7 @@ void SIGLIB_FUNC_DECL SIF_FilterAndDecimate (
 * Description:
 *   Filter and decimate the input data sample rate
 *
-* Notes :
+* Notes:
 *   This function supports decimation across contiguous
 * arrays through the use of the SrcArrayIndex parameter.
 *
@@ -256,7 +256,7 @@ void SIGLIB_FUNC_DECL SDA_FilterAndDecimate (
   SLData_t pState[],
   const SLData_t pCoeffs[],
   SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
-  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t filterLength,
   const SLArrayIndex_t SrcArrayLength)
 {
   SLArrayIndex_t  LocalSrcArrayIndex = *pSrcArrayIndex;
@@ -270,7 +270,7 @@ void SIGLIB_FUNC_DECL SDA_FilterAndDecimate (
                                          pState,                    // Pointer to filter state array
                                          pCoeffs,                   // Pointer to filter coefficients
                                          pFilterIndex,              // Pointer to filter index offset
-                                         FilterLength);             // Filter length
+                                         filterLength);             // Filter length
       outputSampleCount++;
       decimationPhase = 0;
     }
@@ -278,7 +278,7 @@ void SIGLIB_FUNC_DECL SDA_FilterAndDecimate (
       SDS_FirAddSample (pSrc[i],                                    // Sample to add to delay line
                         pState,                                     // Pointer to filter state array
                         pFilterIndex,                               // Pointer to filter index offset
-                        FilterLength);                              // Filter length
+                        filterLength);                              // Filter length
     }
   }
 
@@ -295,7 +295,7 @@ void SIGLIB_FUNC_DECL SDA_FilterAndDecimate (
 *   SLData_t * DECL pState,                 Pointer to filter state array
 *   SLArrayIndex_t * pInterpolationIndex,   Interpolation index
 *   SLArrayIndex_t * pFilterIndex,          Filter index
-*   const SLArrayIndex_t FilterLength       Filter length
+*   const SLArrayIndex_t filterLength       Filter length
 *
 * Return value: void
 *
@@ -307,9 +307,9 @@ void SIGLIB_FUNC_DECL SIF_InterpolateAndFilter (
   SLData_t * SIGLIB_PTR_DECL pState,
   SLArrayIndex_t * SIGLIB_PTR_DECL pInterpolationIndex,
   SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
-  const SLArrayIndex_t FilterLength)
+  const SLArrayIndex_t filterLength)
 {
-  SIF_Fir (pState, pFilterIndex, FilterLength);
+  SIF_Fir (pState, pFilterIndex, filterLength);
 
   *pInterpolationIndex = SIGLIB_AI_ZERO;
   *pFilterIndex = SIGLIB_AI_ZERO;
@@ -329,7 +329,7 @@ void SIGLIB_FUNC_DECL SIF_InterpolateAndFilter (
 *   SLData_t pState[],                      Pointer to filter state array
 *   const SLData_t pCoeffs[],               Pointer to filter coefficients
 *   SLArrayIndex_t * pFilterIndex,          Pointer to filter index offset
-*   const SLArrayIndex_t FilterLength,      Filter length
+*   const SLArrayIndex_t filterLength,      Filter length
 *   const SLArrayIndex_t DstArrayLength)    Destination array length
 *
 * Return value:
@@ -338,7 +338,7 @@ void SIGLIB_FUNC_DECL SIF_InterpolateAndFilter (
 * Description:
 *   Interpolate and filter the input data sample rate
 *
-* Notes :
+* Notes:
 *   This function normalizes the gain by multiplying the
 *   output by the interpolation factor.
 *
@@ -363,7 +363,7 @@ void SIGLIB_FUNC_DECL SDA_InterpolateAndFilter (
   SLData_t pState[],
   const SLData_t pCoeffs[],
   SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
-  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t filterLength,
   const SLArrayIndex_t DstArrayLength)
 {
   SLArrayIndex_t  LocalDstArrayIndex = *pDstArrayIndex;
@@ -381,7 +381,7 @@ void SIGLIB_FUNC_DECL SDA_InterpolateAndFilter (
   *pDstArrayIndex = LocalDstArrayIndex - DstArrayLength;
 
 // Filter the interpolated signal
-  SDA_Fir (pDst, pDst, pState, pCoeffs, pFilterIndex, FilterLength, DstArrayLength);
+  SDA_Fir (pDst, pDst, pState, pCoeffs, pFilterIndex, filterLength, DstArrayLength);
 
 // Multiply the interpolated signal by the interpolation ratio, to normalize the gain
   SDA_Multiply (pDst, (SLData_t) InterpolationRatio, pDst, DstArrayLength);
@@ -405,7 +405,7 @@ void SIGLIB_FUNC_DECL SDA_InterpolateAndFilter (
 * Description:
 *   Interpolate and filter the input data sample rate
 *
-* Notes :
+* Notes:
 *   This function uses linear interpolation to either
 *   interpolate or decimate the sample rate of the data
 *   in the array.
@@ -459,7 +459,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleLinear (
 * Description:
 *   Interpolate and filter the input data sample rate
 *
-* Notes :
+* Notes:
 *   This function uses linear interpolation to either
 *   interpolate or decimate the sample rate of the data
 *   in the array.
@@ -496,7 +496,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleLinearNSamples (
   } while ((SAI_RoundDown (xIndex) < SampleLength) && (outputSampleCount < OutputLength));
 
 // Debug
-//SUF_Debugfprintf ("%s : outputSampleCount = %d\n", __FUNCTION__, outputSampleCount);
+//SUF_Debugfprintf ("%s: outputSampleCount = %d\n", __FUNCTION__, outputSampleCount);
 
   if (outputSampleCount < OutputLength) {                           // Zero pad the array
     SDA_Clear (pDst, OutputLength - outputSampleCount);
@@ -691,7 +691,7 @@ void SIGLIB_FUNC_DECL SIF_ResampleWindowedSinc (
 * Description:
 *   Interpolate and filter the input data sample rate
 *
-* Notes :
+* Notes:
 *   This function uses sinc interpolation to either
 *   interpolate or decimate the sample rate of the data
 *   in the array.
@@ -717,7 +717,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSinc (
     SLArrayIndex_t  xIndexFixedPoint = SAI_RoundDown (xIndex);
 
 #if SIGLIB_ENABLE_DEBUG_LOGGING
-    SUF_Debugfprintf ("%s : xIndex = %lf, xIndexFixedPoint = %d\n", __FUNCTION__, xIndex, xIndexFixedPoint);
+    SUF_Debugfprintf ("%s: xIndex = %lf, xIndexFixedPoint = %d\n", __FUNCTION__, xIndex, xIndexFixedPoint);
 #endif
     SLArrayIndex_t  StartIndex = xIndexFixedPoint - (NumberOfAdjacentSamples - SIGLIB_AI_ONE);  // Calculate start index for sinc calculation
     if (StartIndex < SIGLIB_AI_ZERO) {
@@ -730,13 +730,13 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSinc (
     }
 
 #if SIGLIB_ENABLE_DEBUG_LOGGING
-    SUF_Debugfprintf ("%s : xIndex = %lf, StartIndex = %d, EndIndex = %d\n", __FUNCTION__, xIndex, StartIndex, EndIndex);
+    SUF_Debugfprintf ("%s: xIndex = %lf, StartIndex = %d, EndIndex = %d\n", __FUNCTION__, xIndex, StartIndex, EndIndex);
 #endif
 
     SLData_t        y = SIGLIB_ZERO;                                // Reset sinc sum
     for (SLArrayIndex_t i = StartIndex; i < EndIndex; i++) {        // Calculate sinc interpolation
 #if SIGLIB_ENABLE_DEBUG_LOGGING
-      SUF_Debugfprintf ("%s : i = %d, (xIndex - i) = %lf, SDS_QuickSinc(src) = %lf\n", __FUNCTION__, i, (xIndex - ((SLData_t) i)),
+      SUF_Debugfprintf ("%s: i = %d, (xIndex - i) = %lf, SDS_QuickSinc(src) = %lf\n", __FUNCTION__, i, (xIndex - ((SLData_t) i)),
                         (xIndex - ((SLData_t) i)));
 #endif
       y += pSrc[i] * SDS_QuickSinc ((xIndex - ((SLData_t) i)),      // Source 'x' value
@@ -745,7 +745,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSinc (
     }
     *pDst++ = y;                                                    // Save sinc value
 #if SIGLIB_ENABLE_DEBUG_LOGGING
-    SUF_Debugfprintf ("%s : y = %lf\n", __FUNCTION__, y);
+    SUF_Debugfprintf ("%s: y = %lf\n", __FUNCTION__, y);
 #endif
 
     outputSampleCount++;
@@ -778,7 +778,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSinc (
 * Description:
 *   Interpolate and filter the input data sample rate
 *
-* Notes :
+* Notes:
 *   This function uses sinc interpolation to either
 *   interpolate or decimate the sample rate of the data
 *   in the array.
@@ -807,7 +807,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSincNSamples (
   do {                                                              // For upsampling we need to calculate every sample in x0 to x1
     SLArrayIndex_t  xIndexFixedPoint = SAI_RoundDown (xIndex);
 
-//  SUF_Debugfprintf ("%s : xIndexFixedPoint = %d\n", __FUNCTION__, xIndexFixedPoint);
+//  SUF_Debugfprintf ("%s: xIndexFixedPoint = %d\n", __FUNCTION__, xIndexFixedPoint);
 
     SLArrayIndex_t  StartIndex = xIndexFixedPoint - (NumberOfAdjacentSamples - SIGLIB_AI_ONE);  // Calculate start index for sinc calculation
     if (StartIndex < SIGLIB_AI_ZERO) {
@@ -819,17 +819,17 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSincNSamples (
       EndIndex = SampleLength;
     }
 
-//      SUF_Debugfprintf ("%s : xIndex = %lf, StartIndex = %d, EndIndex = %d\n", __FUNCTION__, xIndex, StartIndex, EndIndex);
+//      SUF_Debugfprintf ("%s: xIndex = %lf, StartIndex = %d, EndIndex = %d\n", __FUNCTION__, xIndex, StartIndex, EndIndex);
 
     SLData_t        y = SIGLIB_ZERO;                                // Reset sinc sum
     for (SLArrayIndex_t i = StartIndex; i < EndIndex; i++) {        // Calculate sinc interpolation
-//      SUF_Debugfprintf ("%s : i = %d, (xIndex - i) = %lf\n", __FUNCTION__, i, (xIndex - ((SLData_t)i)));
+//      SUF_Debugfprintf ("%s: i = %d, (xIndex - i) = %lf\n", __FUNCTION__, i, (xIndex - ((SLData_t)i)));
       y += pSrc[i] * SDS_QuickSinc (xIndex - ((SLData_t) i),        // Source 'x' value
                                     pSincLUT,                       // Pointer to Sinc look up table
                                     LookUpTablePhaseGain);          // Phase gain
     }
     *pDst++ = y;                                                    // Save sinc value
-//      SUF_Debugfprintf ("%s : y = %lf\n", __FUNCTION__, y);
+//      SUF_Debugfprintf ("%s: y = %lf\n", __FUNCTION__, y);
 
     outputSampleCount++;
     xIndex += NewSamplePeriod;
@@ -973,14 +973,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateSinc1D (
     EndIndex = SampleLength;
   }
 
-//  SUF_Debugfprintf ("%s : StartIndex = %d, EndIndex = %d\n", __FUNCTION__, StartIndex, EndIndex);
+//  SUF_Debugfprintf ("%s: StartIndex = %d, EndIndex = %d\n", __FUNCTION__, StartIndex, EndIndex);
 
   SLData_t        y = SIGLIB_ZERO;
   for (SLArrayIndex_t i = StartIndex; i < EndIndex; i++) {          // Calculate sinc interpolation
-//  SUF_Debugfprintf ("%s : i = %d, (x - i) = %lf\n", __FUNCTION__, i, (x - ((SLData_t)i)));
+//  SUF_Debugfprintf ("%s: i = %d, (x - i) = %lf\n", __FUNCTION__, i, (x - ((SLData_t)i)));
     y += pData[i] * SDS_QuickSinc ((x - ((SLData_t) i)), pSincLUT, LookUpTablePhaseGain);
   }
-//  SUF_Debugfprintf ("%s : y = %lf\n", __FUNCTION__, y);
+//  SUF_Debugfprintf ("%s: y = %lf\n", __FUNCTION__, y);
 
   return (y);
 }
@@ -1031,7 +1031,7 @@ void SIGLIB_FUNC_DECL SIF_ResampleLinearContiguous (
 * Description:
 *   Interpolate and filter the input data sample rate
 *
-* Notes :
+* Notes:
 *   This function uses linear interpolation to either
 *   interpolate or decimate the sample rate of the data
 *   in the array.
@@ -1214,7 +1214,7 @@ void SIGLIB_FUNC_DECL SIF_ResampleWindowedSincContiguous (
 * Description:
 *   Interpolate and filter the input data sample rate
 *
-* Notes :
+* Notes:
 *   This function uses sinc interpolation to either
 *   interpolate or decimate the sample rate of the data
 *   in the array.
@@ -1239,22 +1239,22 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSincContiguous (
   SLArrayIndex_t  outputSampleCount = SIGLIB_AI_ZERO;
 
   SLData_t        xIndex = *pPreviousXValue;
-//  SUF_Debugfprintf ("%s : xIndex = %lf\n", __FUNCTION__, xIndex);
+//  SUF_Debugfprintf ("%s: xIndex = %lf\n", __FUNCTION__, xIndex);
 
   for (SLArrayIndex_t i = 0; i < (SIGLIB_AI_TWO * NumberOfAdjacentSamples) + SIGLIB_AI_ONE; i++) {
     pXDataTable[i + (SIGLIB_AI_TWO * NumberOfAdjacentSamples) - SIGLIB_AI_ONE] = pSrc[i];
   }
 
-//  SUF_DebugPrintArray (SDA_ResampleSincContiguous : pXDataTable, (SIGLIB_AI_FOUR * NumberOfAdjacentSamples));
+//  SUF_DebugPrintArray (SDA_ResampleSincContiguous: pXDataTable, (SIGLIB_AI_FOUR * NumberOfAdjacentSamples));
 
 // Pre-calculate first sidelobes
   do {                                                              // For upsampling we need to calculate every sample in x0 to x1
     SLArrayIndex_t  xIndexFixedPoint = SAI_RoundDown (xIndex);
 
-//      SUF_Debugfprintf ("%s : xIndexFixedPoint = %d\n", __FUNCTION__, xIndexFixedPoint);
+//      SUF_Debugfprintf ("%s: xIndexFixedPoint = %d\n", __FUNCTION__, xIndexFixedPoint);
     SLArrayIndex_t  StartIndex = xIndexFixedPoint - (NumberOfAdjacentSamples - SIGLIB_AI_ONE);  // Calculate start index for sinc calculation
     SLArrayIndex_t  EndIndex = xIndexFixedPoint + NumberOfAdjacentSamples + SIGLIB_AI_ONE;  // Calculate end index
-//      SUF_Debugfprintf ("%s : xIndex = %lf, StartIndex = %d, EndIndex = %d\n", __FUNCTION__, xIndex, StartIndex, EndIndex);
+//      SUF_Debugfprintf ("%s: xIndex = %lf, StartIndex = %d, EndIndex = %d\n", __FUNCTION__, xIndex, StartIndex, EndIndex);
 
     SLData_t        y = SIGLIB_ZERO;                                // Reset sinc sum
     for (SLArrayIndex_t i = StartIndex; i < EndIndex; i++) {        // Calculate sinc interpolation
@@ -1266,32 +1266,32 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSincContiguous (
     outputSampleCount++;
     xIndex += NewSamplePeriod;
 
-//          SUF_Debugfprintf ("%s : y = %lf\n", __FUNCTION__, y);
+//          SUF_Debugfprintf ("%s: y = %lf\n", __FUNCTION__, y);
 
   } while (SAI_RoundDown (xIndex) < (SIGLIB_AI_THREE * NumberOfAdjacentSamples));
 
-//  SUF_Debugfprintf ("%s : Done first stage\n", __FUNCTION__);
+//  SUF_Debugfprintf ("%s: Done first stage\n", __FUNCTION__);
 
   xIndex -= (SLData_t) (NumberOfAdjacentSamples + SIGLIB_AI_ONE);   // Move index from overlap array to data array
 
   do {                                                              // For upsampling we need to calculate every sample in x0 to x1
     SLArrayIndex_t  xIndexFixedPoint = SAI_RoundDown (xIndex);
-//      SUF_Debugfprintf ("%s : xIndexFixedPoint = %d\n", __FUNCTION__, xIndexFixedPoint);
+//      SUF_Debugfprintf ("%s: xIndexFixedPoint = %d\n", __FUNCTION__, xIndexFixedPoint);
 
     SLArrayIndex_t  StartIndex = xIndexFixedPoint - (NumberOfAdjacentSamples - SIGLIB_AI_ONE);  // Calculate start index for sinc calculation
     SLArrayIndex_t  EndIndex = xIndexFixedPoint + NumberOfAdjacentSamples + SIGLIB_AI_ONE;  // Calculate end index
 
-//      SUF_Debugfprintf ("%s : xIndex = %lf, StartIndex = %d, EndIndex = %d\n", __FUNCTION__, xIndex, StartIndex, EndIndex);
+//      SUF_Debugfprintf ("%s: xIndex = %lf, StartIndex = %d, EndIndex = %d\n", __FUNCTION__, xIndex, StartIndex, EndIndex);
 
     SLData_t        y = SIGLIB_ZERO;                                // Reset sinc sum
     for (SLArrayIndex_t i = StartIndex; i < EndIndex; i++) {        // Calculate sinc interpolation
-//      SUF_Debugfprintf ("%s : i = %d, (xIndex - i) = %lf\n", __FUNCTION__, i, (xIndex - ((SLData_t)i)));
+//      SUF_Debugfprintf ("%s: i = %d, (xIndex - i) = %lf\n", __FUNCTION__, i, (xIndex - ((SLData_t)i)));
       y += pSrc[i] * SDS_QuickSinc ((xIndex - ((SLData_t) i)),      // Source 'x' value
                                     pSincLUT,                       // Pointer to Sinc look up table
                                     LookUpTablePhaseGain);          // Phase gain
     }
     *pDst++ = y;                                                    // Save sinc value
-//      SUF_Debugfprintf ("%s : y = %lf\n", __FUNCTION__, y);
+//      SUF_Debugfprintf ("%s: y = %lf\n", __FUNCTION__, y);
 
     outputSampleCount++;
     xIndex += NewSamplePeriod;

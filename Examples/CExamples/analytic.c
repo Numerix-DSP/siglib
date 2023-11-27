@@ -3,7 +3,7 @@
 
 // Hilbert transform applied to a real input signal on the imaginary
 // output path and applies a corresponding delay to the real
-// output. The flow diagram is as follows :
+// output. The flow diagram is as follows:
 //
 //       +--     Delay     ----> R
 //     --|
@@ -15,7 +15,7 @@
 // The Hilbert Transform uses an N tap FIR filter to phase shift every
 // component in a signal by 90 degrees (N is odd ordered).
 //
-// The defining equations for the Hilbert transform are :
+// The defining equations for the Hilbert transform are:
 //
 //           2        2 ( n * PI )
 // h(n) = ______ * sin  (________)     for n = +-1, +-2, . . +- N/2
@@ -37,7 +37,7 @@
 #define LOG2_FFT_LENGTH         SAI_FftLengthLog2(FFT_LENGTH)       // Log2 FFT length,
 
 #define FILTER_LENGTH           63                                  // Hilbert filter length - ensure (N+1)/4 is an integer
-#define FILTER_GROUP_DELAY      (FILTER_LENGTH >> 1)                // Filter group delay - Note : C array indexing
+#define FILTER_GROUP_DELAY      (FILTER_LENGTH >> 1)                // Filter group delay -Note: C array indexing
 
 // Declare global variables and arrays
 static SLData_t SinePhase;
@@ -87,8 +87,8 @@ int main (
   }
 
 // Initialise Hilbert transformer coefficients
-  SIF_HilbertTransformer (pFilterTaps,                              // Pointer to filter coefficients
-                          FILTER_LENGTH);                           // Filter length
+  SIF_HilbertTransformerFirFilter (pFilterTaps,                     // Pointer to filter coefficients
+                                   FILTER_LENGTH);                  // Filter length
 // Generate window table
   SIF_Window (pWindowCoeffs,                                        // Pointer to window oefficient
               SIGLIB_KAISER,                                        // Window type

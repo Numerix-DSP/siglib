@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 20/11/2005
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : Functions to convert between different data types.
+Description: Functions to convert between different data types.
 
 
 ****************************************************************************/
@@ -46,7 +46,7 @@ Description : Functions to convert between different data types.
 /********************************************************
 * Function: SDA_SigLibDataToFix()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t pSrc                 Input data pointer
 *   SLFixData_t pDst                    Output data pointer
 *   const SLArrayIndex_t SampleLength   Array Length
@@ -86,7 +86,7 @@ void SIGLIB_FUNC_DECL SDA_SigLibDataToFix (
 /********************************************************
 * Function: SDA_FixToSigLibData()
 *
-* Parameters  :
+* Parameters:
 *   const SLFixData_t pSrc              Input data pointer
 *   SLData_t pDst                       Output data pointer
 *   const SLArrayIndex_t SampleLength   Array Length
@@ -126,7 +126,7 @@ void SIGLIB_FUNC_DECL SDA_FixToSigLibData (
 /********************************************************
 * Function: SDA_SigLibDataToImageData()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t pSrc                 Input data pointer
 *   SLImageData_t pDst                  Output data pointer
 *   const SLArrayIndex_t SampleLength   Array Length
@@ -166,7 +166,7 @@ void SIGLIB_FUNC_DECL SDA_SigLibDataToImageData (
 /********************************************************
 * Function: SDA_ImageDataToSigLibData()
 *
-* Parameters  :
+* Parameters:
 *   const SLImageData_t pSrc            Input data pointer
 *   SLData_t pDst                       Output data pointer
 *   const SLArrayIndex_t SampleLength   Array Length

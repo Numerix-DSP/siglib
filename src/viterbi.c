@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 07/05/2001
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : Communications timing detection routines, for SigLib DSP library.
+Description: Communications timing detection routines, for SigLib DSP library.
 
 
 ****************************************************************************/
@@ -213,12 +213,12 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderK3 (
   SLArrayIndex_t  NextMinErrorState = SIGLIB_AI_ZERO;               // Min. error states used for trace back and path look up
   SLArrayIndex_t  TempMinErrorState;                                // Min. error states used for trace back and path look up
 
-// To calculate the survivor path we need to know :
+// To calculate the survivor path we need to know:
 // Which paths enter a state
 // Accumulated distances to previous states
 // Distance for each transition to all states, using input data
 // Between states there are 2 possible paths to each state
-// We need to discard the one with the highest error using :
+// We need to discard the one with the highest error using:
 // add - errors
 // compare - accumulated errors
 // select - transition with smallest error
@@ -281,7 +281,7 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderK3 (
     }
 #endif
 
-// To calculate the bit that was sent we need to :
+// To calculate the bit that was sent we need to:
 // select the state with the smallest error
 // trace back through table to get state transition
 // return bit for appropriate transition
@@ -562,12 +562,12 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderV32 (
   SLArrayIndex_t  TransmittedPathState;                             // Final path state
 
 
-// To calculate the survivor path we need to know :
+// To calculate the survivor path we need to know:
 // Which paths enter a state
 // Accumulated distances to previous states
 // Error distance for each transition to all states, using input data
 // Between states there are 4 possible paths to each state
-// We need to select the one with the lowest error using :
+// We need to select the one with the lowest error using:
 // add - errors
 // compare - accumulated errors
 // select - transition with smallest error
@@ -655,7 +655,7 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderV32 (
           *(pSurvivorStateHistoryTable + (*pSurvivorStateHistoryOffset * SIGLIB_VITV32_NUMBER_OF_STATES) + 7));
 #endif
 
-// To calculate the bit that was sent we need to :
+// To calculate the bit that was sent we need to:
 // select the state with the smallest error
 // trace back through table to get state transition
 // return bit for appropriate transition

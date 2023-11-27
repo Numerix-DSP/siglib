@@ -18,7 +18,7 @@ int main (
   char            FileName[256];
 
   if (argc != 2) {
-    printf ("\nUsage error  :\nsig2csv filename (no extension)\n\n");
+    printf ("\nUsage:\nsig2csv filename (no extension)\n\n");
     exit (-1);                                                      // Exit - usage error
   }
 

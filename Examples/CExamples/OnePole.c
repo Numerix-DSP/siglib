@@ -25,8 +25,8 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
   if (argc != 2) {
-    printf ("Usage   : OnePole <Feedback_Coefficient>\n");
-    printf ("Example : OnePole 0.6\n\n");
+    printf ("Usage: OnePole <Feedback_Coefficient>\n");
+    printf ("Example: OnePole 0.6\n\n");
     onePoleFilterCoefficient = 0.6;
   }
   else {

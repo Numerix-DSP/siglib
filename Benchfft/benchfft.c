@@ -6,7 +6,7 @@ Compiler :   Various                    | Start Date    : 01/02/92
                                         | Latest Update : 07/08/06
 ---------------------------------------------------------------------------
 
-Description  : FFT benchmark test program for the SigLib DSP library
+Description: FFT benchmark test program for the SigLib DSP library
 This file contains a very small subset of the SigLib library for
 benchmarking purposes. Some of the functions have reduced
 functionality to simplify this program but this does not affect the
@@ -16,9 +16,9 @@ This file uses DOS format end of line characters.
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 
-Support for SigLib is available via EMail : support@numerix.co.uk
+Support for SigLib is available via Email: support@numerix.co.uk
 For further information about the SigLib library please refer to the
-Delta Numerix Web site at : https://www.numerix-dsp.com
+Delta Numerix Web site at: https://www.numerix-dsp.com
 
 THIS FILE MUST NOT BE DISTRIBUTED OR PASSED TO A THIRD PARTY, WITHOUT THE
 EXPRESS PRIOR PERMISSION OF Delta Numerix.
@@ -40,7 +40,7 @@ For the TMS320C4x, TMS320C3x, ADSP21x6x, StarCore and LSI Logic processors
 the code should be executed within an emulator using breakpoints. For all
 other processors, the results will be printed out automatically.
 
-Currently supported processors include :
+Currently supported processors include:
 Pentium, TMS320C3x, TMS320C4x, TMS320C67xx, ADSP21x6x,
 LSI Logic ZSP and StarCore SC100.
 Intel XScale - to compile this source file under MS EVC++ please change the
@@ -410,7 +410,7 @@ int main (
 *
 *   THIS FUNCTION HAS REDUCED FUNCTIONALITY FOR SIMPLICITY
 *   THIS REDUCTION DOES NOT AFFECT THE BENCHMARK RESULTS
-*   THE FULL FUNCTIONALITY INCLUDES THE FOLLOWING SIGNALS :
+*   THE FULL FUNCTIONALITY INCLUDES THE FOLLOWING SIGNALS:
 *   SINE_WAVE, COS_WAVE, WHITE_NOISE, GAUSSIAN_NOISE,
 *   CHIRP_LINEAR, CHIRP_NON_LINEAR, SQUARE_WAVE,
 *   TRIANGLE_WAVE, IMPULSE, IMPULSE_STREAM, STEP, PN_SEQUENCE.
@@ -552,7 +552,7 @@ void SDA_Window (
 *
 *   THIS FUNCTION HAS REDUCED FUNCTIONALITY FOR SIMPLICITY
 *   THIS REDUCTION DOES NOT AFFECT THE BENCHMARK RESULTS
-*   THE FULL FUNCTIONALITY INCLUDES THE FOLLOWING WINDOWS :
+*   THE FULL FUNCTIONALITY INCLUDES THE FOLLOWING WINDOWS:
 *   HANNING, HAMMING, BLACKMAN, BARTLETT/TRIANGLE, KAISER,
 *   BMAN_HARRIS, RECTANGLE.
 *

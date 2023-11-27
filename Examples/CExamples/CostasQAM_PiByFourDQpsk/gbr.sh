@@ -4,7 +4,7 @@
 # then executing both programs.
 
 rm -f dqpskmod
-rm -f dqpskdem
+rm -f dqpskdemod
 rm -f base.wav
 rm -f DemodOutput.txt
 
@@ -14,13 +14,19 @@ echo pi/4 DQPSK modulator has been compiled
 
 
 echo Compiling pi/4 DQPSK demodulator
-./gb.sh dqpskdem
+./gb.sh dqpskdemod
 echo pi/4 DQPSK demodulator has been compiled
 
 ./dqpskmod
 
-./dqpskdem base
+if [ "$1" ==  "-g" ];  then
+  python $SIGLIB_PATH/utils/wavplot.py base.wav
+else
+  echo "Use ./gbr.sh -g to plot graph of transmitted data"
+fi
 
-echo Results written to DemodOutput.txt :
+./dqpskdemod base
+
+echo Results written to DemodOutput.txt:
 
 cat DemodOutput.txt

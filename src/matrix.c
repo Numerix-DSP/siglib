@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 08/10/1994
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : Matrix manipulation routines, for SigLib DSP library.
+Description: Matrix manipulation routines, for SigLib DSP library.
 
 
 ****************************************************************************/
@@ -57,7 +57,7 @@ Description : Matrix manipulation routines, for SigLib DSP library.
 *
 * Description: Transpose a matrix
 *
-* Notes : This function can perform in-place or not
+* Notes: This function can perform in-place or not
 *   in-place transpositions but in-place transpositions
 *   can only be performed on square matrices.
 *
@@ -120,9 +120,9 @@ void SIGLIB_FUNC_DECL SMX_Transpose (
 *
 * Description: Cross multiply two matrices.
 *
-* Notes : The number of columns in the first must equal
+* Notes: The number of columns in the first must equal
 *   the number of rows in the second.
-*   The output matrix has order : [#rows 1, # cols 2]
+*   The output matrix has order: [#rows 1, # cols 2]
 *
 ********************************************************/
 
@@ -174,7 +174,7 @@ void SIGLIB_FUNC_DECL SMX_Multiply (
 *
 * Description: Create a square identity matrix.
 *
-* Notes :
+* Notes:
 *
 ********************************************************/
 
@@ -213,7 +213,7 @@ void SIGLIB_FUNC_DECL SMX_CreateIdentity (
 *   if A = |a b| then A^-1 = 1 / (ad - bc) | d -b|
 *          |c d|                           |-c  a|
 *
-* Notes :
+* Notes:
 *   This function does not work in-place.
 *
 *   This function will return the error code
@@ -260,7 +260,7 @@ SLError_t SIGLIB_FUNC_DECL SMX_Inverse2x2 (
 *   if A = |a b| then A^-1 = 1 / (ad - bc) | d -b|
 *          |c d|                           |-c  a|
 *
-* Notes :
+* Notes:
 *   This function does not work in-place.
 *
 *   This function will return the error code
@@ -275,7 +275,7 @@ SLError_t SIGLIB_FUNC_DECL SMX_ComplexInverse2x2 (
 {
   SLComplexRect_s Det_InvDet;
 
-// Calculate the determinat :
+// Calculate the determinat:
 // determinat = (*(pSrcMatrix+0) * *(pSrcMatrix+3)) - (*(pSrcMatrix+1) * *(pSrcMatrix+2));
   Det_InvDet.real =
     (((pSrcMatrix + 0)->real * (pSrcMatrix + 3)->real) - ((pSrcMatrix + 0)->imag * (pSrcMatrix + 3)->imag)) -
@@ -331,7 +331,7 @@ SLError_t SIGLIB_FUNC_DECL SMX_ComplexInverse2x2 (
 *
 * Description: Invert a square matrix
 *
-* Notes :
+* Notes:
 *   This function will return the error code
 *   SIGLIB_ERROR if the matrix is non-invertable.
 *   I.E. singular.
@@ -382,7 +382,7 @@ SLError_t SIGLIB_FUNC_DECL SMX_Inverse (
 *
 * Description: Perform LU decomposition on a square matrix
 *
-* Notes :
+* Notes:
 *   The data in the source matrix will be destroyed.
 *
 *   This function will return the error code
@@ -501,7 +501,7 @@ SLError_t SIGLIB_FUNC_DECL SMX_LuDecompose (
 *   on a square interchanged matrix, following LU
 *   decomposition.
 *
-* Notes :
+* Notes:
 *   This function accepts an LU array with interchanged
 *   rows, as indicated in the row interchange index matrix.
 *
@@ -557,7 +557,7 @@ void SIGLIB_FUNC_DECL SMX_LuSolve (
 *
 * Description: Returns the determinant of a square matrix
 *
-* Notes :
+* Notes:
 *   This function will NOT return an error code
 *   if the matrix is non-invertable (I.E. singular)
 *   or if there is a memory allocation error.
@@ -595,7 +595,7 @@ SLData_t SIGLIB_FUNC_DECL SMX_Determinant (
 *
 * Description: Return the determinant of the source matrix.
 *
-* Notes :
+* Notes:
 *   This function accepts an LU array with interchanged
 *   rows, as indicated in the row interchange index array.
 *
@@ -638,7 +638,7 @@ SLData_t SIGLIB_FUNC_DECL SMX_LuDeterminant (
 *
 * Description: Rotate the matrix clockwise.
 *
-* Notes :
+* Notes:
 *   This function does not work in-place.
 *
 ********************************************************/
@@ -680,7 +680,7 @@ void SIGLIB_FUNC_DECL SMX_RotateClockwise (
 *
 * Description: Rotate the matrix anti-clockwise.
 *
-* Notes :
+* Notes:
 *   This function does not work in-place.
 *
 ********************************************************/
@@ -723,7 +723,7 @@ void SIGLIB_FUNC_DECL SMX_RotateAntiClockwise (
 * Description: Reflect the matrix about the central
 *   vertical axis.
 *
-* Notes :
+* Notes:
 *
 ********************************************************/
 
@@ -771,7 +771,7 @@ void SIGLIB_FUNC_DECL SMX_Reflect (
 * Description: Flip the matrix about the central
 *   horizontal axis.
 *
-* Notes :
+* Notes:
 *
 ********************************************************/
 
@@ -821,7 +821,7 @@ void SIGLIB_FUNC_DECL SMX_Flip (
 * Description: Insert the new data into the selected
 *   row.
 *
-* Notes : This function overwrites the data in the
+* Notes: This function overwrites the data in the
 *   selected row in the matrix.
 *
 ********************************************************/
@@ -870,7 +870,7 @@ void SIGLIB_FUNC_DECL SMX_InsertRow (
 *
 * Description: Extract the selected row from the matrix.
 *
-* Notes : This function copies the data to the destination
+* Notes: This function copies the data to the destination
 * array. If you want to delete the row afterwards you
 * should use the function SMX_DeleteOldRow()
 *
@@ -916,7 +916,7 @@ void SIGLIB_FUNC_DECL SMX_ExtractRow (
 * Description: Insert the new data into the selected
 *   column.
 *
-* Notes : This function overwrites the data in the
+* Notes: This function overwrites the data in the
 *   selected column in the matrix
 *
 ********************************************************/
@@ -967,7 +967,7 @@ void SIGLIB_FUNC_DECL SMX_InsertColumn (
 *
 * Description: Extract the selected column from the matrix.
 *
-* Notes : This function copies the data to the destination
+* Notes: This function copies the data to the destination
 * array. If you want to delete the column afterwards you
 * should use the function SMX_DeleteOldColumn()
 *
@@ -1015,7 +1015,7 @@ void SIGLIB_FUNC_DECL SMX_ExtractColumn (
 * Description: This function creates a new row and inserts
 *   the new data into this row.
 *
-* Notes :
+* Notes:
 *   The number of rows specified in the parameter list is
 *   the number of rows in the source matrix.
 *   This function does not work in-place.
@@ -1073,7 +1073,7 @@ void SIGLIB_FUNC_DECL SMX_InsertNewRow (
 * Description: This function deletes the complete row
 *   from the matrix.
 *
-* Notes : The number of rows specified in the parameter
+* Notes: The number of rows specified in the parameter
 *   list is the number of rows in the source matrix.
 *   This function works in-place.
 *
@@ -1125,7 +1125,7 @@ void SIGLIB_FUNC_DECL SMX_DeleteOldRow (
 * Description: This function creates a new column and
 *   inserts the new data into this column.
 *
-* Notes :
+* Notes:
 *   The number of columns specified in the parameter list
 *   is the number of columns in the source matrix.
 *   This function does not work in-place.
@@ -1183,7 +1183,7 @@ void SIGLIB_FUNC_DECL SMX_InsertNewColumn (
 * Description: This function deletes the complete column
 *   from the matrix.
 *
-* Notes : The number of columns specified in the parameter
+* Notes: The number of columns specified in the parameter
 *   list is the number of columns in the source matrix.
 *   This function works in-place.
 *
@@ -1247,7 +1247,7 @@ void SIGLIB_FUNC_DECL SMX_DeleteOldColumn (
 * Description: Insert the new matrix data into the
 *   source matrix.
 *
-* Notes : This function overwrites the data in the
+* Notes: This function overwrites the data in the
 *   original matrix
 *
 ********************************************************/
@@ -1306,7 +1306,7 @@ void SIGLIB_FUNC_DECL SMX_InsertRegion (
 * Description: Extract the specified matrix from the
 *   source matrix.
 *
-* Notes :
+* Notes:
 *
 ********************************************************/
 
@@ -1354,7 +1354,7 @@ void SIGLIB_FUNC_DECL SMX_ExtractRegion (
 * Description: Insert the new data into the diagonal
 *   of the matrix.
 *
-* Notes : The matrix must be square
+* Notes: The matrix must be square
 *   This function overwrites the data in the original matrix
 *
 ********************************************************/
@@ -1400,7 +1400,7 @@ void SIGLIB_FUNC_DECL SMX_InsertDiagonal (
 *
 * Description: Extract the diagonal of the matrix.
 *
-* Notes : The matrix must be square
+* Notes: The matrix must be square
 *
 ********************************************************/
 
@@ -1442,7 +1442,7 @@ void SIGLIB_FUNC_DECL SMX_ExtractDiagonal (
 *
 * Description: Swap the data in the two rows.
 *
-* Notes :
+* Notes:
 *
 ********************************************************/
 
@@ -1494,7 +1494,7 @@ void SIGLIB_FUNC_DECL SMX_SwapRows (
 *
 * Description: Swap the data in the two columns.
 *
-* Notes :
+* Notes:
 *
 ********************************************************/
 
@@ -1544,7 +1544,7 @@ void SIGLIB_FUNC_DECL SMX_SwapColumns (
 * Description: Sum all values in each column so the
 *   number of results equals the number of columns.
 *
-* Notes :
+* Notes:
 *
 ********************************************************/
 
@@ -1594,7 +1594,7 @@ void SIGLIB_FUNC_DECL SMX_Sum (
 * Description: Shuffle the order of the columns in
 *   the matrix.
 *
-* Notes :
+* Notes:
 *   As the number of columns approaches RAND_MAX, the
 *   result becomes less random.
 *   The solution is to use a better random number
@@ -1644,7 +1644,7 @@ void SIGLIB_FUNC_DECL SMX_ShuffleColumns (
 * Description: Shuffle the order of the rows in
 *   the matrix.
 *
-* Notes :
+* Notes:
 *   As the number of rows approaches RAND_MAX, the
 *   result becomes less random.
 *   The solution is to use a better random number
@@ -1702,7 +1702,7 @@ void SIGLIB_FUNC_DECL SMX_ShuffleRows (
 * Description: Extract the categorical column from the matrix.
 * The categorical column must be the last column in the matrix.
 *
-* Notes : This function copies the data to the destination
+* Notes: This function copies the data to the destination
 * array. If you want to delete the column afterwards you
 * should use the function SMX_DeleteOldColumn()
 *

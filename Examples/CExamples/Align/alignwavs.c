@@ -26,7 +26,7 @@ int main (
   SLArrayIndex_t  outputLength;
 
   if (argc != 3) {
-    printf ("\nUsage error  :\nalignwav Filename1 Filename2\n\n");
+    printf ("\nUsage:\nalignwav Filename1 Filename2\n\n");
     exit (-1);                                                      // Exit - usage error
   }
 
@@ -46,13 +46,13 @@ int main (
 
   wavInfo1 = SUF_WavReadFile (pDataArray1, Filename1);
   if (wavInfo1.NumberOfSamples == -1) {
-    printf ("Error reading .WAV file header : %s\n", Filename1);
+    printf ("Error reading .WAV file header: %s\n", Filename1);
     exit (-1);
   }
 
   wavInfo2 = SUF_WavReadFile (pDataArray2, Filename2);
   if (wavInfo2.NumberOfSamples == -1) {
-    printf ("Error reading .WAV file header : %s\n", Filename2);
+    printf ("Error reading .WAV file header: %s\n", Filename2);
     exit (-1);
   }
 
@@ -64,9 +64,9 @@ int main (
                             wavInfo1.NumberOfSamples,               // Length of array #1
                             wavInfo2.NumberOfSamples);              // Length of array #2
 
-  printf ("Data File #1 read    = %d samples\n", wavInfo1.NumberOfSamples);
-  printf ("Data File #2 read    = %d samples\n", wavInfo2.NumberOfSamples);
-  printf ("Output Array Lengths = %d samples\n", outputLength);
+  printf ("Data File #1 read:    %d samples\n", wavInfo1.NumberOfSamples);
+  printf ("Data File #2 read:    %d samples\n", wavInfo2.NumberOfSamples);
+  printf ("Output Array Lengths: %d samples\n", outputLength);
 
   SUF_WavWriteFile (pAlignedArray1, "aligned_1.wav", wavInfo1, outputLength);
   SUF_WavWriteFile (pAlignedArray2, "aligned_2.wav", wavInfo2, outputLength);

@@ -26,7 +26,7 @@ Siglib Library Version  : 10.50                         |\r\n\
 Compiler  : Independent                 | Start Date    : 27/12/1999\r\n\
 Options   :                             | Latest Update : 17/11/2020\r\n\
 ---------------------------------------------------------------------------\r\n\
-Support for SigLib is available via EMail : support@numerix-dsp.com\r\n\
+Support for SigLib is available via Email: support@numerix-dsp.com\r\n\
 \r\n\
 This file may be modified, in any way, providing that this header remains\r\n\
 within the file and none of the header contents are removed or modified.\r\n\
@@ -52,7 +52,7 @@ support@.numerix-dsp.com
 \r\n\
 Copyright (c) 2023 Delta Numerix All rights reserved.\r\n\
 ---------------------------------------------------------------------------\r\n\
-Description : SigLib function memory section definition file for TI compilers\r\n\
+Description: SigLib function memory section definition file for TI compilers\r\n\
     This file includes a memory section definition line for each function in\r\n\
     the library.\r\n\
     Each function can be located in a separate section of memory.\r\n\

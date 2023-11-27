@@ -347,7 +347,7 @@ int main (
       SigLibErrorCode = plot_frequency_domain (ModulatedSignal, SIGLIB_FLAT_TOP, "Output Frequency Spectrum", SAMPLE_LENGTH, SAMPLE_LENGTH);
       if (SigLibErrorCode != SIGLIB_NO_ERROR) {
         printf ("\n\nSigLib failure, please ensure that you have enough memory\n\n");
-        printf ("SigLib Error Message :%s\n", SUF_StrError (SigLibErrorCode));
+        printf ("SigLib Error Message:%s\n", SUF_StrError (SigLibErrorCode));
         exit (0);
       }
       printf ("Please hit <Carriage Return> to continue . . .\n");

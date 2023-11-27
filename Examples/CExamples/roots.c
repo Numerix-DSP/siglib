@@ -1,5 +1,5 @@
 // SigLib Example for SDS_Roots and SCV_Roots
-// This program calculates the real factors of the polynomial : ax^2 + bx +c = 0
+// This program calculates the real factors of the polynomial: ax^2 + bx +c = 0
 // The values of a, b and c can be supplied on the command line alternatively, if they are no
 // then the program uses some pre-calculated values.
 // Copyright (c) 2023 Delta Numerix All rights reserved.
@@ -18,19 +18,19 @@ int main (
   SLError_t       SigLibErrorCode;
 
   if (argc == 4) {
-    printf ("Bi-quadratic equation : %lfx^2 + %lfx + %lf = 0.0\n", atof (argv[1]), atof (argv[2]), atof (argv[3]));
+    printf ("Bi-quadratic equation: %lfx^2 + %lfx + %lf = 0.0\n", atof (argv[1]), atof (argv[2]), atof (argv[3]));
     SigLibErrorCode = SDS_Roots (atof (argv[1]),                    // a
                                  atof (argv[2]),                    // b
                                  atof (argv[3]),                    // c
                                  &Root1,                            // Pointer to root # 1
                                  &Root2);                           // Pointer to root # 2
     if (SigLibErrorCode != SIGLIB_NO_ERROR) {
-      printf ("SigLib Error Message :%s\n", SUF_StrError (SigLibErrorCode));
+      printf ("SigLib Error Message:%s\n", SUF_StrError (SigLibErrorCode));
       printf ("There are no real factors for the polynomial provided!\n");
     }
     else {
-      printf ("The factors for the polynomial are : %lf and %lf\n", Root1, Root2);
-      printf ("The factorized equation is : ");
+      printf ("The factors for the polynomial are: %lf and %lf\n", Root1, Root2);
+      printf ("The factorized equation is: ");
       if (-Root1 >= SIGLIB_ZERO) {
         printf ("(x + %lf).", -Root1);
       }

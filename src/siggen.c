@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 13/09/1992
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : SigLib signal generation routines.
+Description: SigLib signal generation routines.
 
 
 ****************************************************************************/
@@ -1372,7 +1372,7 @@ void SIGLIB_FUNC_DECL SIF_Resonator (
 *
 * Description:
 *   Implements a digital resonator with the following
-*   z-transform :
+*   z-transform:
 *
 *               sin(w0) z^-1
 *   H(z) = ------------------------
@@ -1404,7 +1404,7 @@ void SIGLIB_FUNC_DECL SDA_Resonator (
 
   for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
     SLData_t        Sum = Delay0 * SinCoeff + CosCoeff * Delay1 - Delay2;
-// SUF_Debugfprintf ("%d : Sum = %3.2lf, Delay0 = %3.2lf, Delay1 = %3.2lf, Delay2 = %3.2lf\n",
+// SUF_Debugfprintf ("%d: Sum = %3.2lf, Delay0 = %3.2lf, Delay1 = %3.2lf, Delay2 = %3.2lf\n",
 // (int)i, Sum*16383.0, Delay0*16383.0, Delay1*16383.0, Delay2*16383.0);
 
     Delay0 = *pSrc++;                                               // Update state array
@@ -1477,7 +1477,7 @@ void SIGLIB_FUNC_DECL SIF_Resonator1 (
 *
 * Description:
 *   Implements a digital resonator with the following
-*   z-transform :
+*   z-transform:
 *
 *               sin(w0) z^-1
 *   H(z) = ------------------------
@@ -1559,7 +1559,7 @@ void SIGLIB_FUNC_DECL SDA_Resonator1 (
 *
 * Description:
 *   Implements a digital resonator with the following
-*   z-transform :
+*   z-transform:
 *
 *               sin(w0) z^-1
 *   H(z) = ------------------------
@@ -2104,7 +2104,7 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_SignalAddPolarJitterAndGaussianNoise (
 /********************************************************
 * Function: SDA_Ramp()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t *pDst,               Pointer to destination data array
 *   const SLData_t startValue,          Start value
 *   const SLData_t incrementValue,      Increment value
@@ -2139,7 +2139,7 @@ void SIGLIB_FUNC_DECL SDA_Ramp (
 /********************************************************
 * Function: SIF_RandomNumber()
 *
-* Parameters  :
+* Parameters:
 *   void
 *
 * Return value:
@@ -2159,7 +2159,7 @@ void SIGLIB_FUNC_DECL SIF_RandomNumber (
 /********************************************************
 * Function: SDS_RandomNumber()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t          lowerBound,
 *   const SLData_t          upperBound
 *
@@ -2182,7 +2182,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_RandomNumber (
 /********************************************************
 * Function: SDA_RandomNumber()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t *pDst,   Pointer to destination data array
 *   const SLData_t          lowerBound,
 *   const SLData_t          upperBound

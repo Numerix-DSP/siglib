@@ -155,9 +155,9 @@ LineGraph::LineGraph (wxWindow * parent, wxWindowID id, const wxSize graphSize)
 
 
 /*
-    Function Name : LineGraph::~LineGraph
-    Description : LineGraph destructor
-    Notes :
+    Function Name: LineGraph::~LineGraph
+    Description: LineGraph destructor
+    Notes:
 */
 
 LineGraph::~LineGraph ()
@@ -529,9 +529,9 @@ double LineGraph::AbsMax (
 
 
 /*
-    Function Name : LineGraph::GetValue
-    Description : Returns the value at the given location
-    Notes :
+    Function Name: LineGraph::GetValue
+    Description: Returns the value at the given location
+    Notes:
 */
 
 double LineGraph::GetValue (
@@ -592,11 +592,11 @@ void LineGraphCanvas::OnMouseMove (
     ArrayIndex = MAXIMUM_GRAPH_WIDTH - 1;
 
   if (m_LineGraph->GetQuantizeXAxisFlag () == true) {
-    String.sprintf ("%s : %1.3lf, Value : %1.3lf          ",
+    String.sprintf ("%s: %1.3lf, Value: %1.3lf          ",
                     m_LineGraph->GetStatusBarValueText ().GetData (), (double) ArrayIndex, m_LineGraph->GetValue (ArrayIndex));
   }
   else {
-    String.sprintf ("%s : %1.3lf, Value : %1.3lf          ",
+    String.sprintf ("%s: %1.3lf, Value: %1.3lf          ",
                     m_LineGraph->GetStatusBarValueText ().GetData (),
                     (((double) event.GetX ()) * m_LineGraph->GetStatusBarIndexMultiplier ()), m_LineGraph->GetValue (ArrayIndex));
   }
@@ -658,9 +658,9 @@ END_EVENT_TABLE ()
 
 
 /*
-    Function Name : PoleZeroPlot::~PoleZeroPlot
-    Description : PoleZeroPlot destructor
-    Notes :
+    Function Name: PoleZeroPlot::~PoleZeroPlot
+    Description: PoleZeroPlot destructor
+    Notes:
 */
 
 PoleZeroPlot::~PoleZeroPlot ()
@@ -861,7 +861,7 @@ void PoleZeroPlot::AddDataSet (
   int size,
   int plotType)
 {
-// wxMessageBox (_T("Got here : Start"), _T("PoleZeroPlot::AddDataSet"), wxOK | wxICON_EXCLAMATION, NULL);
+// wxMessageBox (_T("Got here: Start"), _T("PoleZeroPlot::AddDataSet"), wxOK | wxICON_EXCLAMATION, NULL);
 
   if (size <= MAXIMUM_PZ_SIZE) {
     DataSetSize = size;                                             // Set size variable
@@ -893,7 +893,7 @@ void PoleZeroPlot::AddDataSet (
 
   Refresh ();                                                       // Refresh graph window
 
-// wxMessageBox (_T("Got here : End"), _T("PoleZeroPlot::AddDataSet"), wxOK | wxICON_EXCLAMATION, NULL);
+// wxMessageBox (_T("Got here: End"), _T("PoleZeroPlot::AddDataSet"), wxOK | wxICON_EXCLAMATION, NULL);
 
 }                                                                   // End of PoleZeroPlot::AddDataSet()
 

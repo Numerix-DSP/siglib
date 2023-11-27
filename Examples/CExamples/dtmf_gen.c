@@ -179,9 +179,9 @@ int main (
 
 
 /*
-Function : read_dtmf_key()
+Function: read_dtmf_key()
 Read a set of dtmf keys
-Return codes :
+Return codes:
     0 - success
     1 - end of file
     2 - [START] not found

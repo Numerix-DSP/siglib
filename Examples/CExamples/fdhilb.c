@@ -23,7 +23,7 @@ static SLArrayIndex_t FilterIndex;
 static SLArrayIndex_t DelayIndex;
 
 #define FILTER_LENGTH       101
-#define FILTER_GROUP_DELAY  (FILTER_LENGTH >> 1)                    // Filter group delay - Note : C array indexing
+#define FILTER_GROUP_DELAY  (FILTER_LENGTH >> 1)                    // Filter group delay -Note: C array indexing
 #endif
 
 static SLData_t *pFFTCoeffs;
@@ -59,8 +59,8 @@ int main (
   pDelay = SUF_VectorArrayAllocate (FILTER_GROUP_DELAY);
   pTempDelay = SUF_VectorArrayAllocate (FILTER_GROUP_DELAY);
 
-  SIF_HilbertTransformer (pFilterTaps,                              // Pointer to filter coefficients
-                          FILTER_LENGTH);                           // Filter length
+  SIF_HilbertTransformerFirFilter (pFilterTaps,                     // Pointer to filter coefficients
+                                   FILTER_LENGTH);                  // Filter length
   SIF_Fir (pFilterState,                                            // Pointer to filter state array
            &FilterIndex,                                            // Pointer to filter index register
            FILTER_LENGTH);                                          // Filter length

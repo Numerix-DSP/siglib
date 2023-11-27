@@ -5,7 +5,7 @@ Siglib Library Version  : 10.50			|
 Compiler  : Independent					| Start Date	: 13/09/92
 Options	  :								| Latest Update : 03/02/18
 ---------------------------------------------------------------------------
-Support for SigLib is available via EMail : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -16,7 +16,7 @@ DELETION OF ANY INFORMATION IN THIS HEADER IS IN VIOLATION OF YOUR LICENSE.
 
 Copyright (C) 1992 to 2018 Delta Numerix
 ---------------------------------------------------------------------------
-Description : SWIG header file for SigLib DSP library
+Description: SWIG header file for SigLib DSP library
 
 Update history :
 		See history.txt for more details.

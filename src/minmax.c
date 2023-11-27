@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 25/05/1999
 Options   :                             | Latest Update : 17/11/2022
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : DSP minimum, max, peak hold functions, for SigLib DSP library.
+Description: DSP minimum, max, peak hold functions, for SigLib DSP library.
 
 
 ****************************************************************************/
@@ -3100,8 +3100,8 @@ void SIGLIB_FUNC_DECL SIF_EnvelopeHilbert (
   const SLArrayIndex_t filterGroupDelay,
   SLData_t * pOnePoleState)
 {
-  SIF_HilbertTransformer (pFilterCoeffs,                            // Pointer to filter coefficients
-                          filterLength);                            // Filter length
+  SIF_HilbertTransformerFirFilter (pFilterCoeffs,                   // Pointer to filter coefficients
+                                   filterLength);                   // Filter length
   SIF_Fir (pFilterState,                                            // Pointer to filter state array
            filterIndex,                                             // Pointer to filter index register
            filterLength);                                           // Filter length

@@ -102,7 +102,7 @@ int analog_open (
 
   const PaDeviceInfo *deviceInfo;
   deviceInfo = Pa_GetDeviceInfo (inputParameters.device);
-  printf ("Connected to input device %d : %s, inputs = %d, outputs = %d, Host API = %s\n", inputParameters.device, deviceInfo->name,
+  printf ("Connected to input device %d: %s, inputs = %d, outputs = %d, Host API = %s\n", inputParameters.device, deviceInfo->name,
           (int) deviceInfo->maxInputChannels, (int) deviceInfo->maxOutputChannels, Pa_GetHostApiInfo (deviceInfo->hostApi)->name);
   deviceInfo = Pa_GetDeviceInfo (outputParameters.device);
   printf ("Connected to output device %d: %s, inputs = %d, outputs = %d, Host API = %s\n", outputParameters.device, deviceInfo->name,

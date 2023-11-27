@@ -55,9 +55,9 @@ Copyright (c) 2022, Delta Numerix, All rights reserved.
 
 
 /*
-    Name : GraphDisplay::GraphDisplay
-    Description : Child widget that is used to display the filter graphs
-    Notes :
+    Name: GraphDisplay::GraphDisplay
+    Description: Child widget that is used to display the filter graphs
+    Notes:
 */
 
 GraphDisplay::GraphDisplay (wxWindow * parent)
@@ -98,7 +98,7 @@ GraphDisplay::GraphDisplay (wxWindow * parent)
 
 
 // A combo box for getting required data type
-  HSizer2->Add (new wxStaticText (this, -1, "Graph type : "), 0, wxALIGN_CENTER | wxALL, 0);
+  HSizer2->Add (new wxStaticText (this, -1, "Graph type: "), 0, wxALIGN_CENTER | wxALL, 0);
   static const wxString GraphChoices[] = {
     _T ("Sine"),
     _T ("Cosine"),
@@ -132,9 +132,9 @@ GraphDisplay::GraphDisplay (wxWindow * parent)
 
 
 /*
-    Function Name : GraphDisplay::~GraphDisplay
-    Description : GraphDisplay destructor
-    Notes :
+    Function Name: GraphDisplay::~GraphDisplay
+    Description: GraphDisplay destructor
+    Notes:
 */
 
 GraphDisplay::~GraphDisplay ()
@@ -145,9 +145,9 @@ GraphDisplay::~GraphDisplay ()
 
 
 /*
-    Function Name : GraphDisplay::OnGraphTypeChanged
-    Description : Function to process when graph type has changed
-    Notes :
+    Function Name: GraphDisplay::OnGraphTypeChanged
+    Description: Function to process when graph type has changed
+    Notes:
 */
 
 void GraphDisplay::OnGraphTypeChanged (

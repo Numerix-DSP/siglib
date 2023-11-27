@@ -62,10 +62,10 @@ int main (
            SIGLIB_BIT_REV_STANDARD,                                 // Bit reverse mode flag / Pointer to bit reverse address table
            FFT_LENGTH);                                             // FFT length
 
-  SIF_RaisedCosineFilter (pRCFCoeffs,                               // Pointer to filter coefficients
-                          SYMBOL_PERIOD,                            // Symbol period
-                          RCF_ALPHA,                                // Alpha
-                          FILTER_LENGTH);                           // Filter length
+  SIF_RaisedCosineFirFilter (pRCFCoeffs,                            // Pointer to filter coefficients
+                             SYMBOL_PERIOD,                         // Symbol period
+                             RCF_ALPHA,                             // Alpha
+                             FILTER_LENGTH);                        // Filter length
 
   gpc_plot_2d (h2DPlot,                                             // Graph handle
                pRCFCoeffs,                                          // Dataset
@@ -77,10 +77,10 @@ int main (
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
 
-  SIF_RootRaisedCosineFilter (pRRCFCoeffs,                          // Pointer to filter coefficients
-                              SYMBOL_PERIOD,                        // Symbol period
-                              RCF_ALPHA,                            // Alpha
-                              FILTER_LENGTH);                       // Filter length
+  SIF_RootRaisedCosineFirFilter (pRRCFCoeffs,                       // Pointer to filter coefficients
+                                 SYMBOL_PERIOD,                     // Symbol period
+                                 RCF_ALPHA,                         // Alpha
+                                 FILTER_LENGTH);                    // Filter length
 
   gpc_plot_2d (h2DPlot,                                             // Graph handle
                pRRCFCoeffs,                                         // Dataset

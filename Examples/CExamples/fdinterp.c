@@ -67,7 +67,7 @@ int main (
 
 // If shifting up, generate a low frequency,
 // if shifting down generate a high frequency
-// note : i and j are dummy variables to stop compiler warnings
+//Note: i and j are dummy variables to stop compiler warnings
   if (RATIO_UP > RATIO_DOWN) {
     SDA_SignalGenerate (pRealInput,                                 // Pointer to destination array
                         SIGLIB_SINE_WAVE,                           // Signal type - Sine wave

@@ -1,7 +1,7 @@
 @echo off
 
 rem Batch file to build the SigLib library for all targets
-rem Notes : you will need each compiler installed to build for each target
+rem Notes: you will need each compiler installed to build for each target
 rem This batch file calls other batch files that initialize the environment variables for each compiler
 rem Please read the documentation for your compiler to see how to set up your particular compiler
 

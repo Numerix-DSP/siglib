@@ -6,12 +6,12 @@ echo Batch file for configuring environment variables for SigLib DSP Library
 echo Please ensure this batch file is executed from a Visual Stuio command prompt
 
 rem SIGLIB_PATH - Set these to reflect the location of your SigLib installation
-rem Note : Cygwin GCC uses linux directory structure notation
+rem Note: Cygwin GCC uses linux directory structure notation
 REM set SIGLIB_PATH=c:\Integra\siglib
 REM set set SIGLIB_PATH_CYGWIN=/cygdrive/c/Integra/siglib
 
 rem Gnuplot - Ensure this path is set correctly, to locate gnuplot
-rem The SigLib graphical examples use gnuplot, which can be downloaded from here : http://www.gnuplot.info/
+rem The SigLib graphical examples use gnuplot, which can be downloaded from here: http://www.gnuplot.info/
 set PATH=C:\Program Files\gnuplot\bin;%PATH%
 
 rem SigLib Environment Variables

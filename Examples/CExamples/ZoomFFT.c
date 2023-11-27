@@ -32,10 +32,10 @@ static SLData_t *pRealCombFilter, *pImagCombFilter, *pSineTable;
 static SLData_t RealCombFilterSum, ImagCombFilterSum;
 static SLArrayIndex_t CombFilterPhase, SineTablePhase;
 
-// Low pass filter for final stage of down conversion Filter Spec :
-// Design Type : FIR-Remez
-// Sample rate : 1.0
-// Number of coefficients : 48
+// Low pass filter for final stage of down conversion Filter Spec:
+// Design Type: FIR-Remez
+// Sample rate: 1.0
+// Number of coefficients: 48
 // Fc1 = 0.200000, Fc2 = 0.000000, TBW = 0.050000, PBR = 1.000000, SBA = 70.000000
 static const SLData_t LPFCoefficientArray[] = {
   -1.48330832437900479900e-03, -2.08167828285720857600e-03, 1.82056303050500334000e-03, 9.24651371854399821400e-03,
@@ -84,7 +84,7 @@ int main (
   printf ("\n\n\nThis program performs a zoom-FFT on a modulated data set.\n");
   printf ("All frequencies are normalised to a sample rate of 1.0.\n\n");
   printf ("Carrier frequency  = %lf\n", CARRIER_FREQUENCY);
-  printf ("Sideband strengths :\n");
+  printf ("Sideband strengths:\n");
   printf ("        Freq.   Magn.\n");
   printf ("        -0.009  0.2\n");
   printf ("        -0.006  0.3\n");

@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 13/09/1992
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : Correlation routines for SigLib DSP library.
+Description: Correlation routines for SigLib DSP library.
 
 
 ****************************************************************************/
@@ -305,7 +305,7 @@ void SIGLIB_FUNC_DECL SDA_CorrelateCircular (
 * Description: Calculate the covariance of two arrays
 *   using the linear correlation function.
 *
-*   WARNING : THIS FUNCTION DESTROYS THE SOURCE DATA.
+*   WARNING: THIS FUNCTION DESTROYS THE SOURCE DATA.
 *
 ********************************************************/
 
@@ -371,7 +371,7 @@ void SIGLIB_FUNC_DECL SDA_Covariance (
 * Description: Calculate the covariance of two arrays.
 *   using the partial linear correlation function.
 *
-*   WARNING : THIS FUNCTION DESTROYS THE SOURCE DATA.
+*   WARNING: THIS FUNCTION DESTROYS THE SOURCE DATA.
 *
 ********************************************************/
 

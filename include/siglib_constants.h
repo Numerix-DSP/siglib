@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50                 |
 Compiler  : Independent                 | Start Date    : 22/01/2000
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via EMail : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,9 +32,9 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : Constants header file for SigLib DSP library
+Description: Constants header file for SigLib DSP library
 
-Update history :
+Update history:
         See history.txt for more details.
 
 ****************************************************************************/
@@ -419,6 +419,10 @@ Update history :
 #define SIGLIB_QPSK_BITS_PER_SYMBOL     2U                          // 2 bits per symbol
 #define SIGLIB_QPSK_NUMBER_OF_PHASES    (1<<SIGLIB_QPSK_BITS_PER_SYMBOL)  // 4 phases
 #define SIGLIB_QPSK_BIT_MASK            ((1<<SIGLIB_QPSK_BITS_PER_SYMBOL)-1)  // Bit mask
+
+#define SIGLIB_DQPSK_BITS_PER_SYMBOL     2U                         // 3 bits per symbol
+#define SIGLIB_DQPSK_NUMBER_OF_PHASES    (1<<(SIGLIB_DQPSK_BITS_PER_SYMBOL+1))  // 8 phases
+#define SIGLIB_DQPSK_BIT_MASK            ((1<<SIGLIB_OPSK_BITS_PER_SYMBOL)-1) // Bit mask
 
 #define SIGLIB_OPSK_BITS_PER_SYMBOL     3U                          // 3 bits per symbol
 #define SIGLIB_OPSK_NUMBER_OF_PHASES    (1<<SIGLIB_OPSK_BITS_PER_SYMBOL)  // 8 phases

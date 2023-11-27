@@ -67,7 +67,7 @@ int main (
                                             &InverseNumberOfArraysAveraged, // Pointer to the inverse of the number of arrays averaged
                                             NUMBER_OF_ARRAYS_AVERAGED); // Number of arrays averaged
   if (SigLibErrorCode != SIGLIB_NO_ERROR) {
-    printf ("SigLib Error Message :%s\n", SUF_StrError (SigLibErrorCode));
+    printf ("SigLib Error Message:%s\n", SUF_StrError (SigLibErrorCode));
     exit (0);
   }
 

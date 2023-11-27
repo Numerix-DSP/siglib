@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 23/10/1999
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : SigLib DSP library frequency domain FIR filter, convolution
+Description: SigLib DSP library frequency domain FIR filter, convolution
 and correlation functions.
 
 ****************************************************************************/
@@ -46,7 +46,7 @@ and correlation functions.
 /********************************************************
 * Function: SIF_FirOverlapAdd
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t * SIGLIB_PTR_DECL pTimeDomainCoeffs,
 *   SLData_t * SIGLIB_PTR_DECL pRealFreqDomainCoeffs,
 *   SLData_t * SIGLIB_PTR_DECL pImagFreqDomainCoeffs,
@@ -56,7 +56,7 @@ and correlation functions.
 *   SLData_t * pInverseFFTLength,
 *   const SLArrayIndex_t FFTLength,
 *   const SLArrayIndex_t Log10FFTLength,
-*   const SLArrayIndex_t FilterLength
+*   const SLArrayIndex_t filterLength
 *
 * Return value: void
 *
@@ -75,12 +75,12 @@ void SIGLIB_FUNC_DECL SIF_FirOverlapAdd (
   SLData_t * pInverseFFTLength,
   const SLArrayIndex_t FFTLength,
   const SLArrayIndex_t Log10FFTLength,
-  const SLArrayIndex_t FilterLength)
+  const SLArrayIndex_t filterLength)
 {
   SIF_Fft (pFFTCoeffs, pBitReverseAddressTable, FFTLength);         // Initialise FFT
-  SDA_Clear (pOverlapArray, (SLArrayIndex_t) (FilterLength - 1));   // Clear overlap storage
-  SDA_Copy (pTimeDomainCoeffs, pRealFreqDomainCoeffs, FilterLength);  // Copy coefficients
-  SDA_Clear (pRealFreqDomainCoeffs + FilterLength, (SLArrayIndex_t) (FFTLength - FilterLength));  // Zero pad
+  SDA_Clear (pOverlapArray, (SLArrayIndex_t) (filterLength - 1));   // Clear overlap storage
+  SDA_Copy (pTimeDomainCoeffs, pRealFreqDomainCoeffs, filterLength);  // Copy coefficients
+  SDA_Clear (pRealFreqDomainCoeffs + filterLength, (SLArrayIndex_t) (FFTLength - filterLength));  // Zero pad
   SDA_Rfft (pRealFreqDomainCoeffs, pImagFreqDomainCoeffs, pFFTCoeffs, pBitReverseAddressTable, FFTLength, Log10FFTLength);  // Perform FFT
 
   *pInverseFFTLength = SIGLIB_ONE / FFTLength;
@@ -92,7 +92,7 @@ void SIGLIB_FUNC_DECL SIF_FirOverlapAdd (
 /********************************************************
 * Function: SDA_FirOverlapAdd
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t * SIGLIB_PTR_DECL pSrc
 *   SLData_t * SIGLIB_PTR_DECL pDst
 *   const SLData_t * SIGLIB_PTR_DECL pRealFreqDomainCoeffs,
@@ -104,7 +104,7 @@ void SIGLIB_FUNC_DECL SIF_FirOverlapAdd (
 *   const SLData_t InverseFFTLength,
 *   const SLArrayIndex_t FFTLength,
 *   const SLArrayIndex_t Log10FFTLength,
-*   const SLArrayIndex_t FilterLength,
+*   const SLArrayIndex_t filterLength,
 *   const SLArrayIndex_t DataLength
 *
 * Return value: void
@@ -126,7 +126,7 @@ void SIGLIB_FUNC_DECL SDA_FirOverlapAdd (
   const SLData_t InverseFFTLength,
   const SLArrayIndex_t FFTLength,
   const SLArrayIndex_t Log10FFTLength,
-  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t filterLength,
   const SLArrayIndex_t DataLength)
 {
   SDA_Copy (pSrc, pDst, DataLength);                                // Copy data to destination
@@ -137,9 +137,9 @@ void SIGLIB_FUNC_DECL SDA_FirOverlapAdd (
   SDA_Cifft (pDst, pTempArray, pFFTCoeffs, pBitReverseAddressTable, FFTLength, Log10FFTLength); // Perform inverse FFT
 // Imaginary output ignored
   SDA_Multiply (pDst, InverseFFTLength, pDst, FFTLength);           // Scale FFT results
-  SDA_Add2 (pDst, pOverlapArray, pDst, (SLArrayIndex_t) (FilterLength - 1));  // Add overlap
+  SDA_Add2 (pDst, pOverlapArray, pDst, (SLArrayIndex_t) (filterLength - 1));  // Add overlap
 
-  SDA_Copy (pDst + DataLength, pOverlapArray, (SLArrayIndex_t) (FilterLength - 1)); // Copy remainder of output for next iteration
+  SDA_Copy (pDst + DataLength, pOverlapArray, (SLArrayIndex_t) (filterLength - 1)); // Copy remainder of output for next iteration
 }                                                                   // End of  SDA_FirOverlapAdd()
 
 
@@ -148,7 +148,7 @@ void SIGLIB_FUNC_DECL SDA_FirOverlapAdd (
 /********************************************************
 * Function: SIF_FirOverlapSave
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t * SIGLIB_PTR_DECL pTimeDomainCoeffs,
 *   SLData_t * SIGLIB_PTR_DECL pRealFreqDomainCoeffs,
 *   SLData_t * SIGLIB_PTR_DECL pImagFreqDomainCoeffs,
@@ -158,7 +158,7 @@ void SIGLIB_FUNC_DECL SDA_FirOverlapAdd (
 *   SLData_t * pInverseFFTLength,
 *   const SLArrayIndex_t FFTLength,
 *   const SLArrayIndex_t Log10FFTLength,
-*   const SLArrayIndex_t FilterLength
+*   const SLArrayIndex_t filterLength
 *
 * Return value: void
 *
@@ -177,12 +177,12 @@ void SIGLIB_FUNC_DECL SIF_FirOverlapSave (
   SLData_t * pInverseFFTLength,
   const SLArrayIndex_t FFTLength,
   const SLArrayIndex_t Log10FFTLength,
-  const SLArrayIndex_t FilterLength)
+  const SLArrayIndex_t filterLength)
 {
   SIF_Fft (pFFTCoeffs, pBitReverseAddressTable, FFTLength);         // Initialise FFT
   SDA_Clear (pOverlapArray, FFTLength);                             // Clear overlap storage
-  SDA_Copy (pTimeDomainCoeffs, pRealFreqDomainCoeffs, FilterLength);  // Copy coefficients
-  SDA_Clear (pRealFreqDomainCoeffs + FilterLength, (SLArrayIndex_t) (FFTLength - FilterLength));  // Zero pad
+  SDA_Copy (pTimeDomainCoeffs, pRealFreqDomainCoeffs, filterLength);  // Copy coefficients
+  SDA_Clear (pRealFreqDomainCoeffs + filterLength, (SLArrayIndex_t) (FFTLength - filterLength));  // Zero pad
   SDA_Rfft (pRealFreqDomainCoeffs, pImagFreqDomainCoeffs, pFFTCoeffs, pBitReverseAddressTable, FFTLength, Log10FFTLength);  // Perform FFT
 
   *pInverseFFTLength = SIGLIB_ONE / FFTLength;
@@ -194,7 +194,7 @@ void SIGLIB_FUNC_DECL SIF_FirOverlapSave (
 /********************************************************
 * Function: SDA_FirOverlapSave
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t * SIGLIB_PTR_DECL pSrc
 *   SLData_t * SIGLIB_PTR_DECL pDst
 *   const SLData_t * SIGLIB_PTR_DECL pRealFreqDomainCoeffs,
@@ -206,7 +206,7 @@ void SIGLIB_FUNC_DECL SIF_FirOverlapSave (
 *   const SLData_t InverseFFTLength,
 *   const SLArrayIndex_t FFTLength,
 *   const SLArrayIndex_t Log10FFTLength,
-*   const SLArrayIndex_t FilterLength,
+*   const SLArrayIndex_t filterLength,
 *   const SLArrayIndex_t DataLength
 *
 * Return value: void
@@ -214,7 +214,7 @@ void SIGLIB_FUNC_DECL SIF_FirOverlapSave (
 * Description: Apply the overlap and add frequency
 *   domain filter.
 *
-*   Notes :
+*   Notes:
 *   The data array length must be greater than or equal
 *   to the length on the filter.
 *
@@ -235,7 +235,7 @@ void SIGLIB_FUNC_DECL SDA_FirOverlapSave (
   const SLData_t InverseFFTLength,
   const SLArrayIndex_t FFTLength,
   const SLArrayIndex_t Log10FFTLength,
-  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t filterLength,
   const SLArrayIndex_t DataLength)
 {
   SDA_Copy (pSrc, pOverlapArray + (FFTLength - DataLength), DataLength);  // Copy source data
@@ -248,8 +248,8 @@ void SIGLIB_FUNC_DECL SDA_FirOverlapSave (
 
   SDA_Copy (pOverlapArray + FFTLength - DataLength, pDst, DataLength);  // Copy output data to destination
 
-  SDA_Copy (pSrc + DataLength - (FilterLength - 1), pOverlapArray + FFTLength - DataLength - (FilterLength - 1), (SLArrayIndex_t) (FilterLength - 1));  // Copy and shift overlap from input array for next iteration
-  SDA_Clear (pOverlapArray, (SLArrayIndex_t) (FFTLength - DataLength - (FilterLength - 1)));  // Clear start of overlap array
+  SDA_Copy (pSrc + DataLength - (filterLength - 1), pOverlapArray + FFTLength - DataLength - (filterLength - 1), (SLArrayIndex_t) (filterLength - 1));  // Copy and shift overlap from input array for next iteration
+  SDA_Clear (pOverlapArray, (SLArrayIndex_t) (FFTLength - DataLength - (filterLength - 1)));  // Clear start of overlap array
 }                                                                   // End of  SDA_FirOverlapSave()
 
 

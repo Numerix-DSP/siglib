@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 22/01/2000
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : Communications routines, for SigLib DSP library.
+Description: Communications routines, for SigLib DSP library.
 
 
 ****************************************************************************/
@@ -722,7 +722,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_DetectNumericalBitSequence (
     LocalDetectorState <<= 1;                                       // Shift state array data
     LocalDetectorState += (((SLUFixData_t) InputWord >> (SLUFixData_t) ((InputWordLength - i) - 1)) & 0x1U);  // Add in input bit
 
-    if ((SLFixData_t) ((SLUFixData_t) LocalDetectorState & (SLUFixData_t) SynchSequenceBitMask) == SynchSequence) { // Compare data and synch sequence
+    if ((SLFixData_t) ((SLUFixData_t) LocalDetectorState & (SLUFixData_t) SynchSequenceBitMask) == (SynchSequence & SynchSequenceBitMask)) {  // Compare data and synch sequence
       SynchDetectedFlag = i;                                        // There is a difference so we don't have synch
     }
   }

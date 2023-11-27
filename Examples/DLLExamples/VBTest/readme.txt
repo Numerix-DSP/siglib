@@ -18,7 +18,7 @@ of the SigLib User's Guide entitled "Using The SigLib DLL With Microsoft
 Visual Basic"
 
 This folder includes two files that declare the global definitions and function
-declarations :
+declarations:
 
 	vbglobal.bas		Visual Basic 6.0
 	vbglobal.NET.bas	Visual Basic .NET
@@ -29,11 +29,12 @@ NOTES
 This example was written using Visual Basic V5.0. It uses GRAPH32.OCX and
 GRID32.OCX. These DLLs have been removed from the later versions of Visual
 Basic but the functionality is available in other OCXs. The following URL
-has the details : http://support.microsoft.com/default.aspx?scid=kb;en-us;172193.
+has the details: http://support.microsoft.com/default.aspx?scid=kb;en-us;172193.
 
 This example also uses DBGRID32.OCX, which is still as part of the standard
 Visual Basic package but you may need to install it separately because it the default
-installation does not install it. Further instructions are available here : http://msdn.microsoft.com/library/default.asp?url=/library/en-us/vbcon98/html/vbconcontrolfilenames.asp.
+installation does not install it. Further instructions are available here:
+http://msdn.microsoft.com/library/default.asp?url=/library/en-us/vbcon98/html/vbconcontrolfilenames.asp.
 
 Please refer to the SigLib User's Guide for more information.
 
@@ -46,10 +47,10 @@ DFPlus, and SigLib are trademarks of Delta Numerix all other
 trademarks acknowledged.
 
 
-For additional information, please contact :
+For additional information, please contact:
 
 Delta Numerix,
 Email: support@numerix-dsp.com
-WWW  : https:\\www.numerix-dsp.com
+WWW:   https:\\www.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix. All rights reserved.

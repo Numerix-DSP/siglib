@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 03/02/1995
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : Siglib utility files.
+Description: Siglib utility files.
 
 
 ****************************************************************************/
@@ -362,7 +362,7 @@ void SIGLIB_FUNC_DECL SUF_PrintCount (
   const char *String)
 {
   static SLFixData_t Count = 0;
-  SUF_Printf ("%s : SigLib Count = %ld\n", String, (long) Count++);
+  SUF_Printf ("%s: SigLib Count = %ld\n", String, (long) Count++);
 }                                                                   // End of SUF_PrintCount()
 
 
@@ -1084,7 +1084,7 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintCount (
     return (SIGLIB_FILE_ERROR);
   }
 
-  SUF_Fprintf (fp_LogFile, "%s : SigLib Count = %d\n", String, (int) Count++);
+  SUF_Fprintf (fp_LogFile, "%s: SigLib Count = %d\n", String, (int) Count++);
   SUF_Fclose (fp_LogFile);
 
   return (SIGLIB_NO_ERROR);

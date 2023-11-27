@@ -12,7 +12,7 @@
 !                  16K of external data
 !
 !	Modified for SigLib, with more on-chip program space
-!	Lines : 27 and 30
+!	Lines: 27 and 30
 !	and internal memory C Heap space
 !
 
@@ -41,7 +41,7 @@
 
 
 !       16K 48 bit words of external code
-.SEGMENT/RAM/BEGIN = 0x00400000 /END = 0x00403fff /PM   	extcode; 
+.SEGMENT/RAM/BEGIN = 0x00400000 /END = 0x00403fff /PM   	extcode;
 
 !       16K 48 bit words of external code
 .SEGMENT/RAM/BEGIN = 0x00404000 /END = 0x0040ffff /DM   	extdata;

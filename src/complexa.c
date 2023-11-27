@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 03/11/2002
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : Complex number routines for SigLib DSP library.
+Description: Complex number routines for SigLib DSP library.
     Complex numbers are processed as arrays.
 
 
@@ -47,7 +47,7 @@ Description : Complex number routines for SigLib DSP library.
 /********************************************************
 * Function: SDA_CreateComplexRect()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t *pSrcReal    - Input real data pointer
 *   const SLData_t *pSrcImag    - Input imaginary data pointer
 *   SLComplexRect_s *pDst       - Output complex data pointer
@@ -92,7 +92,7 @@ void SIGLIB_FUNC_DECL SDA_CreateComplexRect (
 /********************************************************
 * Function: SDA_CreateComplexPolar()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t *pSrcMagn    - Input magnitude data pointer
 *   const SLData_t *pSrcPhase   - Input phase data pointer
 *   SLComplexPolar_s *pDst      - Output complex data pointer
@@ -138,7 +138,7 @@ void SIGLIB_FUNC_DECL SDA_CreateComplexPolar (
 /********************************************************
 * Function: SDA_ExtractComplexRect()
 *
-* Parameters  :
+* Parameters:
 *   const SLComplexRect_s *pSrc - Input complex data pointer
 *   SLData_t *pDstReal          - Output real data pointer
 *   SLData_t *pDstImag          - Output imaginary data pointer
@@ -183,7 +183,7 @@ void SIGLIB_FUNC_DECL SDA_ExtractComplexRect (
 /********************************************************
 * Function: SDA_ExtractComplexPolar()
 *
-* Parameters  :
+* Parameters:
 *   const SLComplexPolar_s *pSrc    - Input complex data pointer
 *   SLData_t *pDstMagn              - Output magnitude data pointer
 *   SLData_t *pDstPhase             - Output phase data pointer
@@ -228,7 +228,7 @@ void SIGLIB_FUNC_DECL SDA_ExtractComplexPolar (
 /********************************************************
 * Function: SDA_ClearComplexRect()
 *
-* Parameters  :
+* Parameters:
 *   SLComplexRect_s *pDst   - Output complex data pointer
 *   const SLArrayIndex_t ArrayLength    - Array length
 *
@@ -267,7 +267,7 @@ void SIGLIB_FUNC_DECL SDA_ClearComplexRect (
 /********************************************************
 * Function: SDA_ClearComplexPolar()
 *
-* Parameters  :
+* Parameters:
 *   SLComplexPolar_s *pDst  - Output complex data pointer
 *   const SLArrayIndex_t ArrayLength    - Array length
 *
@@ -306,7 +306,7 @@ void SIGLIB_FUNC_DECL SDA_ClearComplexPolar (
 /********************************************************
 * Function: SDA_FillComplexRect()
 *
-* Parameters  :
+* Parameters:
 *   SLComplexRect_s *pDst               - Output complex data pointer
 *   const SLComplexRect_s FillValue     - Value to fill array with
 *   const SLArrayIndex_t ArrayLength    - Array length
@@ -345,7 +345,7 @@ void SIGLIB_FUNC_DECL SDA_FillComplexRect (
 /********************************************************
 * Function: SDA_FillComplexPolar()
 *
-* Parameters  :
+* Parameters:
 *   SLComplexPolar_s *pDst              - Output complex data pointer
 *   const SLComplexPolar_s FillValue    - Value to fill array with
 *   const SLArrayIndex_t ArrayLength    - Array length

@@ -33,8 +33,8 @@ int main (
   char            plotTitle[120];
 
   if (argc != 9) {
-    printf ("Usage   : spectrogram <InputFile> 1/2<D> <# FFTs> <FFT Length> <overlap(samples)> <scale> <offset> <Sample Rate>\n");
-    printf ("Example : spectrogram quick.sig 2 150 512 256 0.06 -6 8000\n\n");
+    printf ("Usage:   spectrogram <InputFile> 1/2<D> <# FFTs> <FFT Length> <overlap(samples)> <scale> <offset> <Sample Rate>\n");
+    printf ("Example: spectrogram quick.sig 2 150 512 256 0.06 -6 8000\n\n");
 
     strcpy (filename, "quick.sig");
     dimensions = 2;

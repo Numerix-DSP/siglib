@@ -24,7 +24,7 @@ int main (
 {
   SLData_t        Median;
 
-  printf ("\n\nLong (odd) array :\n\n");
+  printf ("\n\nLong (odd) array:\n\n");
 // Print source data
   for (SLArrayIndex_t i = 0; i < LONG_SAMPLE_LENGTH; i++) {
     printf ("SourceData[%d] = %lf\n", (SLInt16_t) i, SourceData[i]);
@@ -47,7 +47,7 @@ int main (
 
   printf ("Median = %lf\n", Median);
 
-  printf ("\n\nShort (even) array :\n\n");
+  printf ("\n\nShort (even) array:\n\n");
 // Print source data
   for (SLArrayIndex_t i = 0; i < SHORT_SAMPLE_LENGTH; i++) {
     printf ("SourceData[%d] = %lf\n", (SLInt16_t) i, SourceData[i]);

@@ -24,7 +24,7 @@ int main (
   char            WavFileName[80];
 
   if (argc != 3) {
-    printf ("Useage : xmt2wav filename samplerate\nSample rates : 8000, 22050, 44100 etc.");
+    printf ("Useage: xmt2wav filename samplerate\nSample rates: 8000, 22050, 44100 etc.");
     exit (-1);
   }
 
@@ -34,8 +34,8 @@ int main (
   strcpy (WavFileName, argv[1]);
   strcat (WavFileName, ".wav");
 
-  printf ("xmt filename = %s\n", XmtFileName);
-  printf ("wav filename = %s\n", WavFileName);
+  printf ("xmt filename: %s\n", XmtFileName);
+  printf ("wav filename: %s\n", WavFileName);
 
   p_DataArray = SUF_VectorArrayAllocate (SAMPLE_SIZE);
 
@@ -61,7 +61,7 @@ int main (
     SUF_WavWriteData (p_DataArray, fpOutputFile, wavInfo, inputSampleCount);
   }
 // Write last block of data
-  printf ("Total number of samples read = %d\n", outputSampleCount);
+  printf ("Total number of samples read: %d\n", outputSampleCount);
 
   wavInfo.NumberOfSamples = outputSampleCount;                      // Set total data length
   rewind (fpOutputFile);                                            // Rewind pointer to start of file

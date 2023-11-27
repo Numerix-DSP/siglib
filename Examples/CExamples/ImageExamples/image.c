@@ -44,7 +44,7 @@ int main (
   h_GPC_Plot     *h2DPlot;
 
   if (argc != 2) {
-    printf ("Usage :\nimage imagefilename\n\n");
+    printf ("Usage:\nimage imagefilename\n\n");
     return (1);
   }
 

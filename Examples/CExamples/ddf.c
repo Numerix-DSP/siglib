@@ -38,10 +38,10 @@ int main (
   }
   else {
     printf ("DDF.EXE - Display data file utility\n");
-    printf ("Usage :\n");
+    printf ("Usage:\n");
     printf ("ddf filename [f]\n");
     printf ("   [f] indicates frequency domain display.\n");
-    printf ("Example : aa.sig f\n");
+    printf ("Example: aa.sig f\n");
     strcpy (filename, "aa.sig");
     PerformFFT = SIGLIB_TRUE;
   }
@@ -86,7 +86,7 @@ int main (
            FFT_LENGTH);                                             // FFT length
 
 // Gen. complex window coeffs
-  printf ("Data file : %s", filename);
+  printf ("Data file: %s", filename);
 
   gpc_plot_2d (h2DPlot,                                             // Graph handle
                input,                                               // Dataset

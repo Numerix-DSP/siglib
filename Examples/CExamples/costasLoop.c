@@ -19,7 +19,7 @@
 //#define FEEDBACK_MODE SIGLIB_COSTAS_LOOP_POLARITY_LOOP
 //#define FEEDBACK_MODE SIGLIB_COSTAS_LOOP_HARD_LIMITED_LOOP    // Very sensitive so may need to reduce modulation index
 
-                        // Note : Costas loop LPFs - lengths are chosen so that there
+                        //Note: Costas loop LPFs - lengths are chosen so that there
                         // are at least two full cycles and an odd number - for an integer group delay
 #define COSTAS_LP_LPF_LENGTH            (((SLFixData_t)((SAMPLE_RATE_HZ / CARRIER_FREQUENCY) * SIGLIB_TWO)) | 0x1)  // Costas loop LP LPF FIR filter length
 #define COSTAS_LP_LPF_CUTOFF_FREQUENCY  100.0                       // LPF cut-off frequency

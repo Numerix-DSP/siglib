@@ -13,11 +13,11 @@
 #include "Tx_FIR.h"                                                 // Transmitter FIR low-pass filter
 
 // Define constants
-#define RRCF_ENABLE                     0                           // Root raised cosine filter on Tx and Rx
+#define RRCF_ENABLE                     1                           // Root raised cosine filter on Tx and Rx
 
                     // Select one of the following three
 #define DISPLAY_TIME_DOMAIN             0                           // Time domain output
-#define DEBUG_LOG_FILE                  0                           // Set to '1' to enable logging to log file
+#define DEBUG_LOG_FILE                  0                           // Set to '1' to enable logging to siglib_debug.log
 
                     // Basic application definitions
 // #define SAMPLE_LENGTH                   512                 // Number of samples in array
@@ -155,48 +155,28 @@ int main (
   inject_noise (fpo);
   outputSampleCount += NOISE_LENGTH;                                // Inject noise into the output, if required
 
-  while ((InputChar = getc (fpi)) != EOF) {                         // Get first bit
+  SLArrayIndex_t  inputPhase = 0;
+
+  while ((InputChar = getc (fpi)) != EOF) {                         // Read input bits until EOF
     if (InputChar == '\n') {
       inject_noise (fpo);
       outputSampleCount += NOISE_LENGTH;                            // Inject noise into the output, if required
     }
     else {
-      if (InputChar == '1') {                                       // Convert di-bit pair from input file
-        TxDiBit = 0x2;
+      if (inputPhase == 0) {                                        // Build up di-bit
+        if (InputChar == '1') {                                     // Convert di-bit pair from input file
+          TxDiBit = 0x2;
+        }
+        else if (InputChar == '0') {
+          TxDiBit = 0x0;
+        }
+        inputPhase++;
       }
-      else if (InputChar == '0') {
-        TxDiBit = 0x0;
-      }
-
-      if ((InputChar = getc (fpi)) == EOF) {                        // Get second bit
-// No second bit so exiting
-        inject_noise (fpo);
-        outputSampleCount += NOISE_LENGTH;                          // Inject noise into the output, if required
-
-#if DISPLAY_TIME_DOMAIN
-        gpc_close (h2DPlot);
-#endif
-        SUF_MemoryFree (pCarrierTable);                             // Free memory
-
-        wavInfo.NumberOfSamples = outputSampleCount;                // Set total data length
-        rewind (fpo);                                               // Rewind pointer to start of file
-        SUF_WavWriteHeader (fpo, wavInfo);                          // Overwrite the header information
-
-        printf ("Total Tx Sample Count = %d\n", outputSampleCount);
-
-        fclose (fpi);
-        fclose (fpo);
-        exit (0);
-      }
-
-      if (InputChar == '\n') {
-        inject_noise (fpo);
-        outputSampleCount += NOISE_LENGTH;                          // Inject noise into the output, if required
-      }
-
       else {
-        if (InputChar == '1')
+        if (InputChar == '1') {
           TxDiBit += 0x1;                                           // Convert di-bit pair from input file
+        }
+        inputPhase = 0;
 
         SDA_PiByFourDQpskModulate (TxDiBit,                         // Source data di-bit
                                    OutputArray,                     // Destination array
@@ -259,7 +239,10 @@ int main (
   SUF_MemoryFree (pCarrierTable);                                   // Free memory
 
   wavInfo.NumberOfSamples = outputSampleCount;                      // Set total data length
+  rewind (fpo);                                                     // Rewind pointer to start of file
   SUF_WavWriteHeader (fpo, wavInfo);                                // Overwrite the header information
+
+  printf ("Total Tx Sample Count = %d\n", outputSampleCount);
 
   fclose (fpi);                                                     // Close files
   fclose (fpo);

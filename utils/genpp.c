@@ -7,7 +7,7 @@ Compiler  : Independent                 | Start Date    : 30/09/91
 Options   :                             | Latest Update : 02/01/99
 ---------------------------------------------------------------------------
 
-Description :   Convert FIR filter coefficients to poly-phase
+Description:   Convert FIR filter coefficients to poly-phase
 
 Copyright (C) 1999 Delta Numerix All rights reserved.
 ****************************************************************************/

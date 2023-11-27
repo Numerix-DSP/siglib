@@ -35,7 +35,7 @@
                                                             // Must be an integer number of cycles
 
 #define DETECT_FILTER_LENGTH            ((SLArrayIndex_t)((2 * MAX_SYMBOL_LENGTH) + 1)) // Detection filter length
-#define DETECT_FILTER_DELAY             ((SLArrayIndex_t)(DETECT_FILTER_LENGTH >> 1)) // Detection filter delay - Note : C array indexing
+#define DETECT_FILTER_DELAY             ((SLArrayIndex_t)(DETECT_FILTER_LENGTH >> 1)) // Detection filter delay -Note: C array indexing
 
 #define CARRIER_TABLE_FREQ              100.                        // Frequency of sine wave in table
 
@@ -91,12 +91,12 @@ int main (
 // Generate the filter coeffs on the fly - this
 // makes them dependent on the application sample rate
   SIF_FirBandPassFilter (pRxLevelOneBPFilter,                       // Filter coeffs array
-                         CARRIER_FREQ_ONE / SAMPLE_RATE_HZ,         // Filter center frequency
+                         CARRIER_FREQ_ONE / SAMPLE_RATE_HZ,         // Filter centre frequency
                          FILTER_BANDWIDTH / SAMPLE_RATE_HZ,         // Filter bandwidth
                          SIGLIB_HANNING,                            // Window type
                          DETECT_FILTER_LENGTH);                     // Filter length
   SIF_FirBandPassFilter (pRxLevelZeroBPFilter,                      // Filter coeffs array
-                         CARRIER_FREQ_ZERO / SAMPLE_RATE_HZ,        // Filter center frequency
+                         CARRIER_FREQ_ZERO / SAMPLE_RATE_HZ,        // Filter centre frequency
                          FILTER_BANDWIDTH / SAMPLE_RATE_HZ,         // Filter bandwidth
                          SIGLIB_HANNING,                            // Window type
                          DETECT_FILTER_LENGTH);                     // Filter length

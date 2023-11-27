@@ -164,7 +164,7 @@ int main (
                            IIR_FILTER_STAGES);                      // Number of biquads
 
 // Print filter coefficients
-  printf ("\nIIR filter coefficients : b(0), b(1), b(2), a(1), a(2)\n\n");
+  printf ("\nIIR filter coefficients: b(0), b(1), b(2), a(1), a(2)\n\n");
 
   for (SLArrayIndex_t i = 0; i < IIR_FILTER_STAGES; i++) {
     printf ("%le, %le, %le, %le, %le\n", *(pIIRCoeffs + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)),

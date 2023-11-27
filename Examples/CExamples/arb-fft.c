@@ -28,12 +28,12 @@ int main (
   static FILE    *fpInputFile;
 
   if (argc != 2) {
-    printf ("useage  : arb-fft filename\n");
+    printf ("useage: arb-fft filename\n");
     exit (-1);
   }
 
   if (NULL == (fpInputFile = fopen (argv[1], "rb"))) {
-    printf ("Error opening data file : %s\n", argv[1]);
+    printf ("Error opening data file: %s\n", argv[1]);
     exit (0);
   }
 

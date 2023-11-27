@@ -17,10 +17,10 @@ static SLData_t *pInterpolatedData;
 
 static SLData_t SinePhase;
 
-// Filter Spec :
-// Design Type : FIR-Remez
-// Sample rate : 1.0
-// Number of coefficients : 17
+// Filter Spec:
+// Design Type: FIR-Remez
+// Sample rate: 1.0
+// Number of coefficients: 17
 // Fc1 = 0.005000, Fc2 = 0.000000, TBW = 0.150000, PBR = 1.000000, SBA = 70.000000
 
 static const SLData_t LPFCoefficientArray[] = {

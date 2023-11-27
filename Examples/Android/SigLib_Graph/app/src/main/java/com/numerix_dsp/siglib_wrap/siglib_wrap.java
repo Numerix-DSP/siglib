@@ -838,20 +838,20 @@ public class siglib_wrap implements siglib_wrapConstants {
     return siglib_wrapJNI.SDS_LeakyIntegrator2(arg0, SWIGTYPE_p_double.getCPtr(arg1), arg2, arg3);
   }
 
-  public static void SIF_HilbertTransformer(SWIGTYPE_p_double arg0, int arg1) {
-    siglib_wrapJNI.SIF_HilbertTransformer(SWIGTYPE_p_double.getCPtr(arg0), arg1);
+  public static void SIF_HilbertTransformerFirFilter(SWIGTYPE_p_double arg0, int arg1) {
+    siglib_wrapJNI.SIF_HilbertTransformerFirFilter(SWIGTYPE_p_double.getCPtr(arg0), arg1);
   }
 
-  public static double SIF_GoertzelFilter(SWIGTYPE_p_double arg0, double arg1, int arg2) {
-    return siglib_wrapJNI.SIF_GoertzelFilter(SWIGTYPE_p_double.getCPtr(arg0), arg1, arg2);
+  public static double SIF_GoertzelIirFilter(SWIGTYPE_p_double arg0, double arg1, int arg2) {
+    return siglib_wrapJNI.SIF_GoertzelIirFilter(SWIGTYPE_p_double.getCPtr(arg0), arg1, arg2);
   }
 
-  public static void SDA_GoertzelFilter(SWIGTYPE_p_double arg0, SWIGTYPE_p_double arg1, SWIGTYPE_p_double arg2, double arg3, int arg4) {
-    siglib_wrapJNI.SDA_GoertzelFilter(SWIGTYPE_p_double.getCPtr(arg0), SWIGTYPE_p_double.getCPtr(arg1), SWIGTYPE_p_double.getCPtr(arg2), arg3, arg4);
+  public static void SDA_GoertzelIirFilter(SWIGTYPE_p_double arg0, SWIGTYPE_p_double arg1, SWIGTYPE_p_double arg2, double arg3, int arg4) {
+    siglib_wrapJNI.SDA_GoertzelIirFilter(SWIGTYPE_p_double.getCPtr(arg0), SWIGTYPE_p_double.getCPtr(arg1), SWIGTYPE_p_double.getCPtr(arg2), arg3, arg4);
   }
 
-  public static double SDS_GoertzelFilter(double arg0, SWIGTYPE_p_double arg1, double arg2) {
-    return siglib_wrapJNI.SDS_GoertzelFilter(arg0, SWIGTYPE_p_double.getCPtr(arg1), arg2);
+  public static double SDS_GoertzelIirFilter(double arg0, SWIGTYPE_p_double arg1, double arg2) {
+    return siglib_wrapJNI.SDS_GoertzelIirFilter(arg0, SWIGTYPE_p_double.getCPtr(arg1), arg2);
   }
 
   public static double SIF_GoertzelDetect(double arg0, int arg1) {
@@ -870,20 +870,20 @@ public class siglib_wrap implements siglib_wrapConstants {
     return new SLComplexRect_s(siglib_wrapJNI.SDA_GoertzelDetectComplex(SWIGTYPE_p_double.getCPtr(arg0), SLComplexRect_s.getCPtr(arg1), arg1, arg2), true);
   }
 
-  public static void SIF_GaussianFilter(SWIGTYPE_p_double arg0, double arg1, int arg2) {
-    siglib_wrapJNI.SIF_GaussianFilter(SWIGTYPE_p_double.getCPtr(arg0), arg1, arg2);
+  public static void SIF_GaussianFirFilter(SWIGTYPE_p_double arg0, double arg1, int arg2) {
+    siglib_wrapJNI.SIF_GaussianFirFilter(SWIGTYPE_p_double.getCPtr(arg0), arg1, arg2);
   }
 
-  public static void SIF_GaussianFilter2(SWIGTYPE_p_double arg0, double arg1, int arg2) {
-    siglib_wrapJNI.SIF_GaussianFilter2(SWIGTYPE_p_double.getCPtr(arg0), arg1, arg2);
+  public static void SIF_GaussianFirFilter2(SWIGTYPE_p_double arg0, double arg1, int arg2) {
+    siglib_wrapJNI.SIF_GaussianFirFilter2(SWIGTYPE_p_double.getCPtr(arg0), arg1, arg2);
   }
 
-  public static void SIF_RaisedCosineFilter(SWIGTYPE_p_double arg0, double arg1, double arg2, int arg3) {
-    siglib_wrapJNI.SIF_RaisedCosineFilter(SWIGTYPE_p_double.getCPtr(arg0), arg1, arg2, arg3);
+  public static void SIF_RaisedCosineFirFilter(SWIGTYPE_p_double arg0, double arg1, double arg2, int arg3) {
+    siglib_wrapJNI.SIF_RaisedCosineFirFilter(SWIGTYPE_p_double.getCPtr(arg0), arg1, arg2, arg3);
   }
 
-  public static void SIF_RootRaisedCosineFilter(SWIGTYPE_p_double arg0, double arg1, double arg2, int arg3) {
-    siglib_wrapJNI.SIF_RootRaisedCosineFilter(SWIGTYPE_p_double.getCPtr(arg0), arg1, arg2, arg3);
+  public static void SIF_RootRaisedCosineFirFilter(SWIGTYPE_p_double arg0, double arg1, double arg2, int arg3) {
+    siglib_wrapJNI.SIF_RootRaisedCosineFirFilter(SWIGTYPE_p_double.getCPtr(arg0), arg1, arg2, arg3);
   }
 
   public static double SDS_ZTransform(SLComplexRect_s arg0, SLComplexRect_s arg1, SLComplexRect_s arg2, int arg3, int arg4) {
@@ -894,12 +894,12 @@ public class siglib_wrap implements siglib_wrapConstants {
     return siglib_wrapJNI.SDS_ZTransformDB(SLComplexRect_s.getCPtr(arg0), arg0, SLComplexRect_s.getCPtr(arg1), arg1, SLComplexRect_s.getCPtr(arg2), arg2, arg3, arg4);
   }
 
-  public static int SUF_EstimateBPFilterLength(double arg0, double arg1, int arg2, int arg3) {
-    return siglib_wrapJNI.SUF_EstimateBPFilterLength(arg0, arg1, arg2, arg3);
+  public static int SUF_EstimateBPFirFilterLength(double arg0, double arg1, int arg2, int arg3) {
+    return siglib_wrapJNI.SUF_EstimateBPFirFilterLength(arg0, arg1, arg2, arg3);
   }
 
-  public static void SUF_EstimateBPFilterError(double arg0, double arg1, int arg2, int arg3, SWIGTYPE_p_double arg4) {
-    siglib_wrapJNI.SUF_EstimateBPFilterError(arg0, arg1, arg2, arg3, SWIGTYPE_p_double.getCPtr(arg4));
+  public static void SUF_EstimateBPFirFilterError(double arg0, double arg1, int arg2, int arg3, SWIGTYPE_p_double arg4) {
+    siglib_wrapJNI.SUF_EstimateBPFirFilterError(arg0, arg1, arg2, arg3, SWIGTYPE_p_double.getCPtr(arg4));
   }
 
   public static void SDA_LinearMicrophoneArrayBeamPattern(int arg0, double arg1, double arg2, SWIGTYPE_p_double arg3, SWIGTYPE_p_double arg4, double arg5, double arg6, int arg7) {

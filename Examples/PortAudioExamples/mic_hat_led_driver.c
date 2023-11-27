@@ -44,7 +44,7 @@ static void transfer (
 {
   int             ret;
 // Pixel frame
-// Three 1's, Five brightness bits, 8 bits each : B : G : R
+// Three 1's, Five brightness bits, 8 bits each: B:G:R
 // Max brightness: 31, RGB: 255
 // On
   uint8_t         rx[PIXEL_BUFFER_SIZE] = { 0, };

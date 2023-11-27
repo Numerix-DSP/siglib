@@ -1,6 +1,6 @@
-// DTMFWAV.cpp : SigLib DTMF detection test program. This file reads some dtmf tones from
+// DTMFWAV.cpp: SigLib DTMF detection test program. This file reads some dtmf tones from
 // a .WAV file and prints the Results on the screen
-// This program required the Numerix Host Library, which is available from :
+// This program required the Numerix Host Library, which is available from:
 // https://www.numerix-dsp.com/files
 // This project was generated automatically in Visual Studio it is a command line applicaiton
 // Copyright (c) 2023 Delta Numerix All rights reserved.

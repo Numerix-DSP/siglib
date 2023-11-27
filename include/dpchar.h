@@ -10,7 +10,7 @@
 void dpchar (
   char ch)
 {
-  SUF_Debugfprintf (" : c = %c, x = %x, b = ", ch, ch);
+  SUF_Debugfprintf (": c = %c, x = %x, b = ", ch, ch);
   for (int i = 0; i < 8; i++) {
     SUF_Debugfprintf ("%d", (ch >> (7 - i)) & 0x1);
   }

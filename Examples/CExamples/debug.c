@@ -17,9 +17,9 @@ int main (
   SUF_DebugPrintInfo ();                                            // Print the SigLib version number to the debug file
   SUF_DebugPrintLine ();                                            // Print the current line number to the debug file
   SUF_DebugPrintTime ();                                            // Print the current time to the debug file
-  SUF_Debugfprintf ("\nAn array of data :\n");                      // Print a text string to the debug file
+  SUF_Debugfprintf ("\nAn array of data:\n");                       // Print a text string to the debug file
   SUF_DebugPrintArray (pArray, 10);                                 // Print the data array to the debug file
-  SUF_Debugfprintf ("\nA matrix of data :\n");                      // Print a text string to the debug file
+  SUF_Debugfprintf ("\nA matrix of data:\n");                       // Print a text string to the debug file
   SUF_DebugPrintMatrix (pArray, 2, 5);                              // Print the 2D matrix to the debug file
 
   printf ("The debug information has been written to the SigLib logging file: %s\n", SIGLIB_LOG_FILE);

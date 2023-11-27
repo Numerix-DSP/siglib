@@ -27,7 +27,7 @@ int main (
 
   if (argc != 3) {
     printf ("\nThis demo pulls a signal out of noise with successive auto-correlations\n");
-    printf ("Usage  : corr2 <Sine level wrt noise> <# iterations>\n");
+    printf ("Usage:   corr2 <Sine level wrt noise> <# iterations>\n");
     printf ("Example: corr2 0.2 5\n");
     sineLevel = 0.2;
     numIters = 5;

@@ -5,7 +5,7 @@
 # For best results, rebuild SigLib using the shell script: remakelinux_profile.sh
 
 rm -f dqpskmod
-rm -f dqpskdem
+rm -f dqpskdemod
 rm -f base.wav
 rm -f DemodOutput.txt
 rm -f *.out
@@ -16,18 +16,20 @@ echo pi/4 DQPSK modulator has been compiled
 
 
 echo Compiling pi/4 DQPSK demodulator
-./gb_profile.sh dqpskdem
+./gb_profile.sh dqpskdemod
 echo pi/4 DQPSK demodulator has been compiled
 
 
 ./dqpskmod
 mv gmon.out dqpskmod.out
 
+python $SIGLIB_PATH/utils/wavplot.py base.wav
 
-./dqpskdem base
-mv gmon.out dqpskdem.out
 
-echo Results written to DemodOutput.txt :
+./dqpskdemod base
+mv gmon.out dqpskdemod.out
+
+echo Results written to DemodOutput.txt:
 
 cat DemodOutput.txt
 
@@ -38,10 +40,10 @@ rm -f *.png
 # Note, we are ignoring some functions which are not part of the real-time modem functionality
 
 gprof dqpskmod dqpskmod.out -Qinject_noise -QSIF_PiByFourDQpskModulate -QSDA_SignalGenerate -Qrand -QSIF_Fir | gprof2dot > dqpskmod.dot
-gprof dqpskdem dqpskdem.out | gprof2dot > dqpskdem.dot
+gprof dqpskdemod dqpskdemod.out | gprof2dot > dqpskdemod.dot
 
 dot -Tpng -odqpskmod.png dqpskmod.dot
-dot -Tpng -odqpskdem.png dqpskdem.dot
+dot -Tpng -odqpskdemod.png dqpskdemod.dot
 
 echo Profile images written to .png files
 

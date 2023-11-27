@@ -5,7 +5,7 @@
                     Using The SigLib DLL With LabView/CVI
 
 
-Several customers use the SigLib DLL with LabView/CVI. There are several applications notes on the NI web site that explain how to call DLLs :
+Several customers use the SigLib DLL with LabView/CVI. There are several applications notes on the NI web site that explain how to call DLLs:
 http://zone.ni.com/devzone/conceptd.nsf/webmain/23B41E710AE65ED88625686900620DA7?opendocument
 http://zone.ni.com/devzone/conceptd.nsf/webmain/54e1399955a894c286256865006e58c6?OpenDocument#3
 http://zone.ni.com/devzone/conceptd.nsf/webmain/A32E309A55A45CA08625686900623295?opendocument
@@ -18,10 +18,10 @@ DFPlus and SigLib are trademarks of Delta Numerix all other
 trademarks acknowledged.
 
 
-For additional information, please contact :
+For additional information, please contact:
 
 Delta Numerix
 Email: support@numerix-dsp.com
-WWW  : https:\\www.numerix-dsp.com
+WWW:   https:\\www.numerix-dsp.com
 
 Copyright (C) 2004 Delta Numerix All rights reserved.

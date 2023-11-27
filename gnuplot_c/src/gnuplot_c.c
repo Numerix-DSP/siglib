@@ -1175,9 +1175,9 @@ h_GPC_Plot     *gpc_init_polar (
   fprintf (plotHandle->pipe, "set rrange [f_minGain:f_maxGain]\n");
   fprintf (plotHandle->pipe, "set rtics tickstep format '' scale 0\n");
 
-  fprintf (plotHandle->pipe, "set label '0°' center at first 0, first (f_maxGain-f_minGain)*1.05\n");
+  fprintf (plotHandle->pipe, "set label '0°' centre at first 0, first (f_maxGain-f_minGain)*1.05\n");
   fprintf (plotHandle->pipe, "set label '90°' right at first (f_maxGain-f_minGain)*1.05, 0\n");
-  fprintf (plotHandle->pipe, "set label '180°' center at first 0, first -(f_maxGain-f_minGain)*1.05\n");
+  fprintf (plotHandle->pipe, "set label '180°' centre at first 0, first -(f_maxGain-f_minGain)*1.05\n");
   fprintf (plotHandle->pipe, "set label '270°' left at first -(f_maxGain-f_minGain)*1.05, 0\n");
 
   if ((gMax - gMin) > 1.0) {                                        // dB plot

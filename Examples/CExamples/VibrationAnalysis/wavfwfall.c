@@ -28,7 +28,7 @@ static SLWavFileInfo_s wavInfo;
 /*
 IIR Filter coeffs
 Sample rate = 22500 Hz
-Specification :
+Specification:
     8th order High Pass Butterworth Filter
     Fc = 500 Hz
 */
@@ -99,7 +99,7 @@ int main (
            FFT_LENGTH);                                             // FFT length
 
   if (argc != 2) {
-    printf ("\nUsage error  :\nwavfwfall filename (no extension)\n\n");
+    printf ("\nUsage error:\nwavfwfall filename (no extension)\n\n");
     exit (-1);                                                      // Exit - usage error
   }
 

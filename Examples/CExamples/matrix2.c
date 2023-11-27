@@ -1,7 +1,7 @@
 // SigLib Matrix Mathematics Example
 // Note - in this program we will declare the matrices as multi-dimensional
 // but we need to pass them by reference as arrays of type SLData_t so
-// we need to cast the array pointers as follows : (SLData_t *)
+// we need to cast the array pointers as follows: (SLData_t *)
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files

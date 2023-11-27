@@ -6,7 +6,7 @@ Siglib Library Version  : 10.53         |
 Compiler  : Independent                 | Start Date    : 13/09/1992
 Options   :                             | Latest Update : 06/06/2023
 ---------------------------------------------------------------------------
-Support for SigLib is available via EMail : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,9 +32,9 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : Header file for SigLib DSP library
+Description: Header file for SigLib DSP library
 
-Update history :
+Update history:
         See history.txt for more details.
 
 ****************************************************************************/
@@ -185,9 +185,9 @@ extern          "C" {
   const SLData_t,
   const SLData_t,
   const char *);
-#define SUF_DebugPrintInfo()    SUF_Debugfprintf("SigLib Version : %2.2lf\n", SIGLIB_VERSION);
-#define SUF_DebugPrintLine()    SUF_Debugfprintf("SigLib Debug - File : %s, Line # : %d\n", __FILE__, __LINE__);
-#define SUF_DebugPrintTime()    {time_t aclock; time( &aclock ); SUF_Debugfprintf("SigLib Debug - Time : %s\n", asctime(localtime(&aclock)));}
+#define SUF_DebugPrintInfo()    SUF_Debugfprintf("SigLib Version: %2.2lf\n", SIGLIB_VERSION);
+#define SUF_DebugPrintLine()    SUF_Debugfprintf("SigLib Debug - File: %s, Line #: %d\n", __FILE__, __LINE__);
+#define SUF_DebugPrintTime()    {time_t aclock; time( &aclock ); SUF_Debugfprintf("SigLib Debug - Time: %s\n", asctime(localtime(&aclock)));}
   const char     *SUF_StrError (
   const SLError_t ErrNo);
 
@@ -1597,7 +1597,7 @@ extern          "C" {
 
   SLError_t SIGLIB_FUNC_DECL SIF_FirBandPassFilter (
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Filter coeffs array
-  const SLData_t,                                                   // Filter center frequency
+  const SLData_t,                                                   // Filter centre frequency
   const SLData_t,                                                   // Filter bandwidth
   const enum SLWindow_t,                                            // Window type
   const SLArrayIndex_t);                                            // Filter length
@@ -1616,7 +1616,7 @@ extern          "C" {
 
   void SIGLIB_FUNC_DECL SIF_FirBandPassFilterWindow (
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Filter coeffs array
-  const SLData_t,                                                   // Filter center frequency
+  const SLData_t,                                                   // Filter centre frequency
   const SLData_t,                                                   // Filter bandwidth
   const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to window coefficients
   const SLArrayIndex_t);                                            // Filter length
@@ -1745,6 +1745,17 @@ extern          "C" {
   void SIGLIB_FUNC_DECL SIF_FirZeroNotchFilter (
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Coefficients array
   const SLData_t);                                                  // Notch centre frequency normalized to Fs = 1 Hz
+
+  void SIGLIB_FUNC_DECL SDA_FirLpBpShift (
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Source coefficients
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Destination coefficients
+  const SLData_t,                                                   // New centre frequency
+  const SLArrayIndex_t);                                            // Filter length
+
+  void SIGLIB_FUNC_DECL SDA_FirLpHpShift (
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Source coefficients
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Destination coefficients
+  const SLArrayIndex_t);                                            // Filter length
 
 // Filtering functions - iirfilt.c
 
@@ -2191,23 +2202,23 @@ extern          "C" {
   const SLData_t,                                                   // Leak value
   const SLData_t);                                                  // Peak value
 
-  void SIGLIB_FUNC_DECL SIF_HilbertTransformer (
+  void SIGLIB_FUNC_DECL SIF_HilbertTransformerFirFilter (
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to FIR taps
   const SLArrayIndex_t);                                            // Filter length
 
-  SLData_t SIGLIB_FUNC_DECL SIF_GoertzelFilter (
+  SLData_t SIGLIB_FUNC_DECL SIF_GoertzelIirFilter (
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to state array
   const SLData_t,                                                   // Filter frequency
   const SLArrayIndex_t);                                            // Filter length
 
-  void SIGLIB_FUNC_DECL SDA_GoertzelFilter (
+  void SIGLIB_FUNC_DECL SDA_GoertzelIirFilter (
   const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to input data
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination array
   SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // Pointer to state array
   const SLData_t,                                                   // Filter coefficient
   const SLArrayIndex_t);                                            // Array length
 
-  SLData_t SIGLIB_FUNC_DECL SDS_GoertzelFilter (
+  SLData_t SIGLIB_FUNC_DECL SDS_GoertzelIirFilter (
   const SLData_t,                                                   // Source value
   SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // Pointer to state array
   const SLData_t);                                                  // Filter coefficient
@@ -2234,23 +2245,23 @@ extern          "C" {
 
 #endif                                                              // End of #ifndef _HP_VEE
 
-  void SIGLIB_FUNC_DECL SIF_GaussianFilter (
+  void SIGLIB_FUNC_DECL SIF_GaussianFirFilter (
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to filter coefficients
   const SLData_t,                                                   // Standard deviation of the distribution
   const SLArrayIndex_t);                                            // Filter length
 
-  void SIGLIB_FUNC_DECL SIF_GaussianFilter2 (
+  void SIGLIB_FUNC_DECL SIF_GaussianFirFilter2 (
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to filter coefficients
   const SLData_t,                                                   // Filter bandwidth
   const SLArrayIndex_t);                                            // Filter length
 
-  void SIGLIB_FUNC_DECL SIF_RaisedCosineFilter (
+  void SIGLIB_FUNC_DECL SIF_RaisedCosineFirFilter (
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to filter coefficients
   const SLData_t,                                                   // Symbol period
   const SLData_t,                                                   // Alpha
   const SLArrayIndex_t);                                            // Filter length
 
-  void SIGLIB_FUNC_DECL SIF_RootRaisedCosineFilter (
+  void SIGLIB_FUNC_DECL SIF_RootRaisedCosineFirFilter (
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to filter coefficients
   const SLData_t,                                                   // Symbol period
   const SLData_t,                                                   // Alpha
@@ -2270,13 +2281,13 @@ extern          "C" {
   const SLArrayIndex_t,                                             // Number of numerator coefficients
   const SLArrayIndex_t);                                            // Number of denominator coefficients
 
-  SLArrayIndex_t SIGLIB_FUNC_DECL SUF_EstimateBPFilterLength (
+  SLArrayIndex_t SIGLIB_FUNC_DECL SUF_EstimateBPFirFilterLength (
   const SLData_t,                                                   // Sample rate (Hz)
   const SLData_t,                                                   // Centre frequency
   const SLArrayIndex_t,                                             // Minimum filter length
   const SLArrayIndex_t);                                            // Maximum filter length
 
-  void SIGLIB_FUNC_DECL SUF_EstimateBPFilterError (
+  void SIGLIB_FUNC_DECL SUF_EstimateBPFirFilterError (
   const SLData_t,                                                   // Sample rate (Hz)
   const SLData_t,                                                   // Centre frequency
   const SLArrayIndex_t,                                             // Minimum filter length
@@ -7837,20 +7848,31 @@ extern          "C" {
 
 
 // Deprecated functionality - these may be removed in a later version
-#define SDA_MaxPos              SDA_MaxIndex
-#define SDA_AbsMaxPos           SDA_AbsMaxIndex
-#define SDA_MinPos              SDA_MinIndex
-#define SDA_AbsMinPos           SDA_AbsMinIndex
-#define SDA_Offset              SDA_Add
-#define SDA_Rft                 SDA_Rdft
-#define SDA_Rift                SDA_Ridft
-#define SDA_Cft                 SDA_Cdft
-#define SDA_Cift                SDA_Cidft
+#define SDA_MaxPos                  SDA_MaxIndex
+#define SDA_AbsMaxPos               SDA_AbsMaxIndex
+#define SDA_MinPos                  SDA_MinIndex
+#define SDA_AbsMinPos               SDA_AbsMinIndex
+#define SDA_Offset                  SDA_Add
+#define SDA_Rft                     SDA_Rdft
+#define SDA_Rift                    SDA_Ridft
+#define SDA_Cft                     SDA_Cdft
+#define SDA_Cift                    SDA_Cidft
 
-#define SIGLIB_COS_WAVE         SIGLIB_COSINE_WAVE
+#define SIGLIB_COS_WAVE             SIGLIB_COSINE_WAVE
 
-#define SAI_FftSizeLog2         SAI_FftLengthLog2                   // Returns the log2(FFT length) for a given FFT length
-#define SAI_FftSizeLog4         SAI_FftLengthLog4                   // Returns the log4(FFT length) for a given FFT length
+#define SAI_FftSizeLog2             SAI_FftLengthLog2               // Returns the log2(FFT length) for a given FFT length
+#define SAI_FftSizeLog4             SAI_FftLengthLog4               // Returns the log4(FFT length) for a given FFT length
+
+#define SIF_HilbertTransformer      SIF_HilbertTransformerFirFilter
+#define SIF_GaussianFilter          SIF_GaussianFirFilter
+#define SIF_GaussianFilter2         SIF_GaussianFirFilter2
+#define SIF_GoertzelFilter          SIF_GoertzelIirFilter
+#define SDA_GoertzelFilter          SDA_GoertzelIirFilter
+#define SDS_GoertzelFilter          SDS_GoertzelIirFilter
+#define SIF_RaisedCosineFilter      SIF_RaisedCosineFirFilter
+#define SIF_RootRaisedCosineFilter  SIF_RootRaisedCosineFirFilter
+#define SUF_EstimateBPFilterLength  SUF_EstimateBPFirFilterLength
+#define SUF_EstimateBPFilterError   SUF_EstimateBPFirFilterError
 
 
 #ifdef __cplusplus                                                  // End of decl. for C++ program calls

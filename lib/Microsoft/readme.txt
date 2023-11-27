@@ -17,7 +17,7 @@ In order to use the DLL from an application, it should be copied into
 the Windows\System directory.
 
 
-The sub-folders are :
+The sub-folders are:
     dynamic_library         32 bit DLL
     dynamic_library_64      64 bit DLL
     static_library          32 bit SLL
@@ -34,10 +34,10 @@ other trademarks acknowledged.
 
 
 
-For additional information, please contact :
+For additional information, please contact:
 
 Delta Numerix
 Email: support@numerix-dsp.com
-WWW  : https:\\www.numerix-dsp.com
+WWW:   https:\\www.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix. All rights reserved.

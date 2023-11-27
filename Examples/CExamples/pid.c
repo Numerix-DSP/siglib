@@ -47,8 +47,8 @@ int main (
   SIF_OnePole (&OnePoleFilterState);                                // Filter alpha
 
   if (argc != 4) {
-    printf ("Usage   : pid Kp Ki Kd\n");
-    printf ("Example : pid 20.0 0.05 50.0\n\n");
+    printf ("Usage: pid Kp Ki Kd\n");
+    printf ("Example: pid 20.0 0.05 50.0\n\n");
     Kp = 20.;
     Ki = 0.05;
     Kd = 50.;

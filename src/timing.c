@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 11/03/2001
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : Communications timing detection routines, for SigLib DSP library.
+Description: Communications timing detection routines, for SigLib DSP library.
 
 
 ****************************************************************************/
@@ -93,7 +93,7 @@ void SIGLIB_FUNC_DECL SIF_PhaseLockedLoop (
   SIF_FirLowPassFilter (pLoopFilterCoeffs, LPFCutOffFrequency, SIGLIB_HANNING, LoopFilterLength);
 
   SIF_Fir (pHilbertTformFilterState, pHilbertTformFilterIndex, HilbertTformFilterLength); // Initialise Hilbert transformer filter
-  SIF_HilbertTransformer (pHilbertTformFilterCoeffs, HilbertTformFilterLength);
+  SIF_HilbertTransformerFirFilter (pHilbertTformFilterCoeffs, HilbertTformFilterLength);
 }                                                                   // End of SIF_PhaseLockedLoop()
 
 
@@ -542,7 +542,7 @@ void SIGLIB_FUNC_DECL SRF_CostasLoop (
 *   SLData_t * SIGLIB_PTR_DECL pFilterState,
 *   const SLData_t * SIGLIB_PTR_DECL pFilterCoeffs,
 *   SLArrayIndex_t * pFilterIndex,
-*   const SLArrayIndex_t FilterLength,
+*   const SLArrayIndex_t filterLength,
 *   SLArrayIndex_t * pPreviousOutputSign)
 *
 * Return value:
@@ -562,14 +562,14 @@ void SIGLIB_FUNC_DECL SIF_180DegreePhaseDetect (
   SLData_t * SIGLIB_PTR_DECL pFilterState,
   SLData_t * SIGLIB_PTR_DECL pFilterCoeffs,
   SLArrayIndex_t * pFilterIndex,
-  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t filterLength,
   SLArrayIndex_t * pPreviousOutputSign)
 {
   *pFastCosineLookUpTablePhase = SIGLIB_ZERO;                       // Initialise fast sine look up table phase
 
   SIF_FastCos (pFastCosineLookUpTable, FastCosineLookUpTableSize);
-  SIF_Fir (pFilterState, pFilterIndex, FilterLength);               // Initialise detector filter
-  SIF_FirLowPassFilter (pFilterCoeffs, LPFCutOffFrequency, SIGLIB_HANNING, FilterLength);
+  SIF_Fir (pFilterState, pFilterIndex, filterLength);               // Initialise detector filter
+  SIF_FirLowPassFilter (pFilterCoeffs, LPFCutOffFrequency, SIGLIB_HANNING, filterLength);
 
   *pPreviousOutputSign = SIGLIB_AI_ZERO;                            // Initialise previous output sign
 }                                                                   // End of SIF_180DegreePhaseDetect()
@@ -590,7 +590,7 @@ void SIGLIB_FUNC_DECL SIF_180DegreePhaseDetect (
 *   SLData_t * pFilterState,
 *   const SLData_t *pFilterCoeffs,
 *   SLArrayIndex_t *pFilterIndex,
-*   SLArrayIndex_t FilterLength,
+*   SLArrayIndex_t filterLength,
 *   SLArrayIndex_t * pPreviousOutputSign,
 *   SLArrayIndex_t SampleSize)
 *
@@ -602,7 +602,7 @@ void SIGLIB_FUNC_DECL SIF_180DegreePhaseDetect (
 *   This function detects 180 degree phase changes in the
 *   input signal.
 *
-* Notes :
+* Notes:
 *   The exact location of the phase change will be delayed
 *   by the group delay of the filter.
 *
@@ -618,7 +618,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_180DegreePhaseDetect (
   SLData_t * SIGLIB_PTR_DECL pFilterState,
   const SLData_t * SIGLIB_PTR_DECL pFilterCoeffs,
   SLArrayIndex_t * pFilterIndex,
-  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t filterLength,
   SLArrayIndex_t * pPreviousOutputSign,
   const SLArrayIndex_t SampleSize)
 {
@@ -651,7 +651,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_180DegreePhaseDetect (
     SinMultiplierOutput += CosMultiplierOutput;
 
 // Apply LPF and save output
-    SLData_t        FilterOutput = SDS_Fir (SinMultiplierOutput, pFilterState, pFilterCoeffs, pFilterIndex, FilterLength);
+    SLData_t        FilterOutput = SDS_Fir (SinMultiplierOutput, pFilterState, pFilterCoeffs, pFilterIndex, filterLength);
     SLArrayIndex_t  FilterOutputSign;
 
     *pDst++ = FilterOutput;
@@ -727,7 +727,7 @@ void SIGLIB_FUNC_DECL SIF_TriggerReverberator (
 * Description:
 *   This function implements a timing reverberator.
 *
-* Notes :
+* Notes:
 *   If the source timing clock is late then the period
 *   of the output clock is increased by one sample. If
 *   the source timing clock is early then the period is
@@ -820,7 +820,7 @@ void SIGLIB_FUNC_DECL SDA_TriggerReverberator (
 * Description:
 *   This function implements a timing reverberator.
 *
-* Notes :
+* Notes:
 *   If the source timing clock is late then the period
 *   of the output clock is increased by one sample. If
 *   the source timing clock is early then the period is

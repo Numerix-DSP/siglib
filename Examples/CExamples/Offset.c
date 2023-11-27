@@ -19,7 +19,7 @@ static SLData_t Dst[ARRAY_LENGTH];
 int main (
   void)
 {
-  printf ("Source array #1 :\n");
+  printf ("Source array #1:\n");
   SUF_PrintArray (Src1, ARRAY_LENGTH);
 
 // Set new range
@@ -29,7 +29,7 @@ int main (
                 120.0,                                              // New maximum
                 ARRAY_LENGTH);                                      // Array length
 
-  printf ("New offset 20:120 :\n");
+  printf ("New offset 20:120:\n");
   SUF_PrintArray (Dst, ARRAY_LENGTH);
 
 // Set new range
@@ -39,7 +39,7 @@ int main (
                 160.0,                                              // New maximum
                 ARRAY_LENGTH);                                      // Array length
 
-  printf ("New offset 20:160 :\n");
+  printf ("New offset 20:160:\n");
   SUF_PrintArray (Dst, ARRAY_LENGTH);
 
 // Set new range
@@ -49,10 +49,10 @@ int main (
                 40.0,                                               // New maximum
                 ARRAY_LENGTH);                                      // Array length
 
-  printf ("New offset -10:40 :\n");
+  printf ("New offset -10:40:\n");
   SUF_PrintArray (Dst, ARRAY_LENGTH);
 
-  printf ("Source array #2 :\n");
+  printf ("Source array #2:\n");
   SUF_PrintArray (Src2, ARRAY_LENGTH);
 
 // Set new range
@@ -62,11 +62,11 @@ int main (
                 120.0,                                              // New maximum
                 ARRAY_LENGTH);                                      // Array length
 
-  printf ("New offset 20:120 :\n");
+  printf ("New offset 20:120:\n");
   SUF_PrintArray (Dst, ARRAY_LENGTH);
 
 
-  printf ("Mean :\n");
+  printf ("Mean:\n");
   printf ("Mean of source array = %lf\n\n", SDA_Mean (Src1, INV_ARRAY_LENGTH, ARRAY_LENGTH));
 
 // Set new range

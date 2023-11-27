@@ -12,15 +12,15 @@ int main (
   int             RequiredDelay;
 
   if (argc != 2) {
-    printf ("Usage   : msDelay delay\n");
-    printf ("Example : msDelay 2000\n\n");
+    printf ("Usage:   msDelay delay\n");
+    printf ("Example: msDelay 2000\n\n");
     RequiredDelay = 2000;
   }
   else {
     RequiredDelay = atol (argv[1]);
   }
 
-  printf ("Waiting for delay = %d (ms)\n\n", (int) RequiredDelay);
+  printf ("Waiting for delay: %d (ms)\n\n", (int) RequiredDelay);
   SUF_MSDelay ((SLFixData_t) RequiredDelay);
   printf ("Finished\n");
 

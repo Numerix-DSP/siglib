@@ -110,7 +110,7 @@ int main (
 #endif
 
   if (argc != 2) {
-    printf ("\nUsage error  :\nwavorder filename (no extension)\n\n");
+    printf ("\nUsage error:\nwavorder filename (no extension)\n\n");
     exit (-1);                                                      // Exit - usage error
   }
 
@@ -142,7 +142,7 @@ int main (
 
 
 #if DEBUG_ENABLE
-  SUF_Debugfprintf ("%s : Number of peaks = %d\n", __FUNCTION__, (wavInfo.NumberOfSamples / (FFT_LENGTH - OVERLAP_LENGTH)));
+  SUF_Debugfprintf ("%s: Number of peaks: %d\n", __FUNCTION__, (wavInfo.NumberOfSamples / (FFT_LENGTH - OVERLAP_LENGTH)));
 #endif
 
 // Allocate memory for peak data array these peaks will be used for an indication of the
@@ -207,7 +207,7 @@ int main (
       PreviousPeakIndex = *(pPeakArray + FrameNumber);
 
 #if DEBUG_ENABLE
-      SUF_Debugfprintf ("%s : Frame Number = %d, PeakArray[FrameNumber] = %d\n", __FUNCTION__, FrameNumber, *(pPeakArray + FrameNumber));
+      SUF_Debugfprintf ("%s: Frame Number: %d, PeakArray[FrameNumber] = %d\n", __FUNCTION__, FrameNumber, *(pPeakArray + FrameNumber));
 #endif
 
       FrameNumber++;
@@ -232,7 +232,7 @@ int main (
                                 SAMPLE_LENGTH) <                    // Destination array length
            SAMPLE_LENGTH) {
 #if DEBUG_ENABLE
-      SUF_Debugfprintf ("%s : Frame Number =  = %d\n", __FUNCTION__, FrameNumber);
+      SUF_Debugfprintf ("%s: Frame Number: %d\n", __FUNCTION__, FrameNumber);
       SUF_Debugfprintf ("\t((SLData_t)*(pPeakArray+FrameNumber)) = %lf\n", ((SLData_t) * (pPeakArray + FrameNumber)));
       SUF_Debugfprintf ("\t((SLData_t)*(pPeakArray+FrameNumber)) / 100.0 = %lf\n", ((SLData_t) * (pPeakArray + FrameNumber)) / 100.0);
 #endif
@@ -247,7 +247,7 @@ int main (
                                                SAMPLE_LENGTH);      // Source array length
 
 #if DEBUG_ENABLE
-      SUF_Debugfprintf ("%s : ResampleResultLength = %d\n", __FUNCTION__, ResampleResultLength);
+      SUF_Debugfprintf ("%s: ResampleResultLength: %d\n", __FUNCTION__, ResampleResultLength);
 #endif
 
       if (ResampleResultLength < SAMPLE_LENGTH) {                   // Zero pad resampled array
@@ -307,7 +307,7 @@ int main (
       SDA_Clear (pFDPResults,                                       // Source array address
                  10);                                               // Array length
 
-// Store data to GNUPlot file - 3 columns are :
+// Store data to GNUPlot file - 3 columns are:
 // Time in seconds, Frequency in KHz, Order magnitude
       for (SLArrayIndex_t i = 0; i < RESULT_LENGTH; i++) {
         fprintf (fpOutputFile, "%lf\t%lf\t%lf\n",
@@ -323,7 +323,7 @@ int main (
 
 #if DISPLAY_AVERAGE_SPECTRUM
 #if DEBUG_ENABLE
-  SUF_Debugfprintf ("%s : Display Ave Spectrum - Frame Number = %d\n", __FUNCTION__, FrameNumber);
+  SUF_Debugfprintf ("%s: Display Ave Spectrum - Frame Number: %d\n", __FUNCTION__, FrameNumber);
 #endif
 
   SDA_Multiply (pAverageArray,                                      // Pointer to source array

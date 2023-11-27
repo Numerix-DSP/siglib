@@ -12,7 +12,7 @@
 // application.
 //
 // The complete system is best described by the following block
-// diagram :
+// diagram:
 //
 //                    +---------+
 //                    |         |

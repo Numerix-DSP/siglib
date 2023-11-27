@@ -83,7 +83,7 @@ int main (
            FFT_LENGTH);                                             // FFT length
 
   if (argc != 2) {
-    printf ("\nUsage error  :\nsgram filename\n\n");
+    printf ("\nUsage:\nsgram filename\n\n");
     exit (-1);                                                      // Exit - usage error
   }
 

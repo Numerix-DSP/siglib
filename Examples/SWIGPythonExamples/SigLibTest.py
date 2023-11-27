@@ -5,7 +5,7 @@ import siglib_wrap
 
 # Here you can display the attributes of the library but this is not advised because of the length of the output !
 #print ('')
-#print ('Library attributes :')              # Print the attributes of the library
+#print ('Library attributes:')              # Print the attributes of the library
 #for a in dir(siglib_wrap):
 #    print (a)
 #print ('')

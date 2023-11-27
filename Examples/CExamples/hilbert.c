@@ -45,8 +45,8 @@ int main (
   pDelayed = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
 // Initialise Hilbert transformer coefficients
-  SIF_HilbertTransformer (pFilterCoeffs,                            // Pointer to filter coefficients
-                          HILBERT_TRANSFORM_LENGTH);                // Filter length
+  SIF_HilbertTransformerFirFilter (pFilterCoeffs,                   // Pointer to filter coefficients
+                                   HILBERT_TRANSFORM_LENGTH);       // Filter length
 // Initialise FIR filter for Hilbert transformer
   SIF_Fir (pFilterState,                                            // Pointer to filter state array
            &FilterIndex,                                            // Pointer to filter index register

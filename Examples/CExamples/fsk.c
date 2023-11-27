@@ -73,12 +73,12 @@ int main (
 // Generate the filter coeffs on the fly - this
 //  makes them dependent on the application sample rate
   SIF_FirBandPassFilter (pRxLevelOneBPFilter,                       // Filter coeffs array
-                         CARRIER_FREQ_ONE / SAMPLE_RATE_HZ,         // Filter center frequency
+                         CARRIER_FREQ_ONE / SAMPLE_RATE_HZ,         // Filter centre frequency
                          FILTER_BANDWIDTH / SAMPLE_RATE_HZ,         // Filter bandwidth
                          SIGLIB_HANNING,                            // Window type
                          RX_FILTER_LENGTH);                         // Filter length
   SIF_FirBandPassFilter (pRxLevelZeroBPFilter,                      // Filter coeffs array
-                         CARRIER_FREQ_ZERO / SAMPLE_RATE_HZ,        // Filter center frequency
+                         CARRIER_FREQ_ZERO / SAMPLE_RATE_HZ,        // Filter centre frequency
                          FILTER_BANDWIDTH / SAMPLE_RATE_HZ,         // Filter bandwidth
                          SIGLIB_HANNING,                            // Window type
                          RX_FILTER_LENGTH);                         // Filter length
@@ -219,7 +219,7 @@ int main (
   }
 
   *RxStringPtr = 0;                                                 // Terminate string for printf
-  printf ("FSK received string : %s\n", RxString);
+  printf ("FSK received string: %s\n", RxString);
   printf ("Please hit any key to continue . . .");
   getchar ();
   printf ("\n");
@@ -307,7 +307,7 @@ int main (
   }
 
   *RxStringPtr = 0;                                                 // Terminate string for printf
-  printf ("CPFSK received string : %s\n", RxString);
+  printf ("CPFSK received string: %s\n", RxString);
 
   printf ("\nHit <Carriage Return> to continue ....\n");
   getchar ();                                                       // Wait for <Carriage Return>

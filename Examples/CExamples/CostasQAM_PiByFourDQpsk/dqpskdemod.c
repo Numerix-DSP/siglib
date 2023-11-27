@@ -6,11 +6,11 @@
 //     Sample rate - 48000 Hz
 //     Carrier freq. - 1800 Hz
 //
-// This program uses :
+// This program uses:
 //     SDS_CostasQamDemodulate - To test the demodulator and completely decode the rx data stream
 //     SDA_CostasQamDemodulate - To just test the demodulator
 //
-// Description :
+// Description:
 //     This program scans the input file to ascertain the peak signal amplitude. It then applies
 //     an automatic gain control function to normalize the gain into the demodulator.
 //     This data is fed through an IIR Elliptic filter to reduce the out-of-band noise.
@@ -67,7 +67,7 @@
 #endif
 
 #define SYMBOL_RATE                     1200.                       // Symbol rate
-#define CARRIER_FREQ                    1800.                       // Frequency of carrier signal - a multpImagDatale of the sine table frequency
+#define CARRIER_FREQ                    1800.                       // Frequency of carrier signal - a multiple of the sine table frequency
 
 #define SYMBOL_LENGTH                   ((SLArrayIndex_t)(SAMPLE_RATE_HZ / SYMBOL_RATE))  // Number of samples per symbol
 #define CARRIER_CYCLE_LENGTH            ((SLArrayIndex_t)(SAMPLE_RATE_HZ / CARRIER_FREQ)) // Carrier Period
@@ -92,23 +92,23 @@
 #define AGC_SUB_ARRAY_LEN               32                          // Sub dataset length
 
 
-enum ProcessingState_t                                              // Demodulator processing state
+enum DemodulatorProcessingState_t                                   // Demodulator processing state
 {
   DEMODULATOR_RESET,
   DEMODULATING_DATA
 };
 
-static enum ProcessingState_t DemodulatorState;                     // Demodulator processing state
+static enum DemodulatorProcessingState_t DemodulatorState;          // Demodulator processing state
 
 
                                     // Costas loop data
-                        // Note : Costas loop LPF lengths are chosen so that there
+                        //Note: Costas loop LPF lengths are chosen so that there
                         // are at least two full cycles and an odd number - for an integer group delay
 #define COSTAS_LP_LPF_LENGTH            (((SLArrayIndex_t)(2.0*CARRIER_CYCLE_LENGTH)) | 0x1)  // Costas loop LP LPF FIR filter length
                                     // Note the next few parameters vary depending on whether or not we decimate
 #if ENABLE_DECIMATE
-// #define COSTAS_LP_VCO_TRACK_MODE_MODULATION_GAIN    0.00001     // Tracking mode modulation gain
-// #define COSTAS_LP_VCO_ACQ_MODE_MODULATION_GAIN  0.0001          // Modulation gain
+// #define COSTAS_LP_VCO_TRACK_MODE_MODULATION_GAIN    0.00001        // Tracking mode modulation gain
+// #define COSTAS_LP_VCO_ACQ_MODE_MODULATION_GAIN  0.0001             // Modulation gain
 #define COSTAS_LP_VCO_TRACK_MODE_MODULATION_GAIN    0.000005        // Tracking mode modulation gain
 #define COSTAS_LP_VCO_ACQ_MODE_MODULATION_GAIN  0.000001            // Modulation gain
 #else
@@ -177,18 +177,7 @@ static SLData_t pRealOutput[MAX_CONST_POINTS_PER_BLOCK], pImagOutput[MAX_CONST_P
 
 // Declare global variables and arrays
 
-static const SLComplexRect_s IdealConstellationPoints[CONSTELLATION_POINTS] = {
-  { (1.0 * IDEAL_CONSTELLATION_POINT_MAGNITUDE), (0.0 * IDEAL_CONSTELLATION_POINT_MAGNITUDE) },
-  { (0.70710678 * IDEAL_CONSTELLATION_POINT_MAGNITUDE), (0.70710678 * IDEAL_CONSTELLATION_POINT_MAGNITUDE) },
-  { (0.0 * IDEAL_CONSTELLATION_POINT_MAGNITUDE), (1.0 * IDEAL_CONSTELLATION_POINT_MAGNITUDE) },
-  { (-0.70710678 * IDEAL_CONSTELLATION_POINT_MAGNITUDE), (0.70710678 * IDEAL_CONSTELLATION_POINT_MAGNITUDE) },
-  { (-1.0 * IDEAL_CONSTELLATION_POINT_MAGNITUDE), (0.0 * IDEAL_CONSTELLATION_POINT_MAGNITUDE) },
-  { (-0.70710678 * IDEAL_CONSTELLATION_POINT_MAGNITUDE), (-0.70710678 * IDEAL_CONSTELLATION_POINT_MAGNITUDE) },
-  { (0.0 * IDEAL_CONSTELLATION_POINT_MAGNITUDE), (-1.0 * IDEAL_CONSTELLATION_POINT_MAGNITUDE) },
-  { (0.70710678 * IDEAL_CONSTELLATION_POINT_MAGNITUDE), (-0.70710678 * IDEAL_CONSTELLATION_POINT_MAGNITUDE) },
-};                                                                  // Constellation diagram array
-
-
+extern const SLComplexRect_s siglib_numerix_PiBy4DQPSKTxModulationIQTable[];
 
 static SLData_t ConstellationPointErrors[CONSTELLATION_POINTS];
 
@@ -202,7 +191,7 @@ static SLData_t ConstellationPointErrors[CONSTELLATION_POINTS];
                                 6
     Note - table supports positive and negative phase changes.
         - alternate entries are not valid state changes but are included to locate nearest ideal point
-    Useage :
+    Useage:
     RxDiBit = ConstellationPointDeltaDibits [ReceivedConstellationPoint - PrevReceivedConstellationPoint + 7];
 */
 static const SLFixData_t ConstellationPointDeltaDibits[2 * CONSTELLATION_POINTS] = {
@@ -215,7 +204,7 @@ static SLData_t *pData;                                             // Processin
 
                                     // Data for synchronization detector
 #define SYNCH_SEQUENCE_WORD_LEN 2                                   // Process dibits
-#define SYNCH_SEQUENCE_LEN  14                                      // Number of bits in synch sequence length
+#define SYNCH_SEQUENCE_LENGTH  14                                   // Number of bits in synch sequence length
 static SLFixData_t SynchSequence = 0x0147e;                         // Synchronization sequence - 01,0100,0111,1110
 static SLFixData_t SynchSequenceBitMask;                            // Bit synch. mask
 static SLFixData_t SynchSequenceDetectorState;                      // State variable for bit synch. detector
@@ -312,7 +301,7 @@ int main (
 // Initialize numerical bit synch. detector
   SIF_DetectNumericalBitSequence (&SynchSequenceBitMask,            // Synchronization sequence bit mask
                                   &SynchSequenceDetectorState,      // Detector state variable
-                                  SYNCH_SEQUENCE_LEN);              // Synchronization sequence length
+                                  SYNCH_SEQUENCE_LENGTH);           // Synchronization sequence length
   SynchDetectedFlag = SIGLIB_SEQUENCE_NOT_DETECTED;                 // Synch has not been detected
 
 #if (DEBUG_LOG_FILE || DEBUG_DIBITS_TO_LOG_FILE)
@@ -327,7 +316,7 @@ int main (
 
 
   if (argc != 2) {
-    printf ("Useage : qpskwav filename [delay]\nIt is not necessary to include the .wav extension\n\n");
+    printf ("Useage: qpskwav filename [delay]\nIt is not necessary to include the .wav extension\n\n");
     exit (-1);
   }
 
@@ -335,7 +324,7 @@ int main (
   strcpy (WavFilename, argv[1]);
   strcat (WavFilename, ".wav");
 
-  printf ("Input .wav filename = %s\n", WavFilename);
+  printf ("Input .wav filename: %s\n", WavFilename);
 
   if ((pInputWavFile = fopen (WavFilename, "rb")) == NULL) {        // Note this file is binary
     printf ("Error opening input .WAV file\n");
@@ -456,12 +445,12 @@ int main (
 #endif
 
 #if DEBUG_LOG_FILE
-  SUF_Debugfprintf ("Returned from SIF_RootRaisedCosineFilter\n");
+  SUF_Debugfprintf ("Returned from SIF_RootRaisedCosineFirFilter\n");
 #endif
 
   if (SigLibErrorCode != SIGLIB_NO_ERROR) {
     printf ("Error in SIF_CostasQamDemodulate\n");
-    printf ("SigLib Error Message :%s\n", SUF_StrError (SigLibErrorCode));
+    printf ("SigLib Error Message:%s\n", SUF_StrError (SigLibErrorCode));
     exit (0);
   }
 
@@ -527,7 +516,7 @@ int main (
 // If we have finished demodulating a block of data then reset system
     if (FirstNonZeroSampleIndex == SIGLIB_SIGNAL_NOT_PRESENT) {     // If signal is not over threshold
 #if DEBUG_LOG_FILE
-      SUF_Debugfprintf ("NoData : sampleCount = %d\n", sampleCount);
+      SUF_Debugfprintf ("NoData: sampleCount = %d\n", sampleCount);
 #endif
       if (DemodulatorState == DEMODULATING_DATA) {                  // If we have finished demodulating a block of data then reset system
 #if DEBUG_LOG_FILE
@@ -568,16 +557,16 @@ int main (
 #endif
 
         SynchDetectedFlag = SIGLIB_SEQUENCE_NOT_DETECTED;           // Reset synch detected flag
-        DemodOutput (4);                                            // Output a <Carriage Return> separator to demod output file
-#if DEBUG_DIBITS_TO_LOG_FILE
-        SUF_Debugfprintf ("\n");
+        DemodOutput (SIGLIB_QPSK_NUMBER_OF_PHASES);                 // Output a <Carriage Return> separator to demod output file
+#if (DEBUG_LOG_FILE || DEBUG_DIBITS_TO_LOG_FILE)
+        SUF_Debugfprintf ("End of sequence\n");
 #endif
       }
     }
 
     else {                                                          // Signal is over threshold
 #if DEBUG_LOG_FILE
-      SUF_Debugfprintf ("GotData : sampleCount = %d\n", sampleCount);
+      SUF_Debugfprintf ("GotData: sampleCount = %d\n", sampleCount);
 #endif
 
       DemodulatorState = DEMODULATING_DATA;                         // Indicate state is demodulating data
@@ -721,8 +710,8 @@ int main (
 #endif
 
           for (SLArrayIndex_t j = 0; j < CONSTELLATION_POINTS; j++) { // Calculate the errors from the ideal points
-            SLData_t        RealError = (IdealConstellationPoints[j].real - RealMagn);
-            SLData_t        ImagError = (IdealConstellationPoints[j].imag - ImagMagn);
+            SLData_t        RealError = (siglib_numerix_PiBy4DQPSKTxModulationIQTable[j].real - RealMagn);
+            SLData_t        ImagError = (siglib_numerix_PiBy4DQPSKTxModulationIQTable[j].imag - ImagMagn);
             ConstellationPointErrors[j] = (RealError * RealError) + (ImagError * ImagError);
           }
 
@@ -735,15 +724,15 @@ int main (
           PrevReceivedConstellationPoint = ReceivedConstellationPoint;  // Save constellation point index for next iteration
 
 #if DEBUG_DIBITS_TO_LOG_FILE
-          SUF_Debugfprintf ("ReceivedConstellationPoint = %d\n", (int) ReceivedConstellationPoint);
+          SUF_Debugfprintf ("ReceivedConstellationPoint: %d\n", (int) ReceivedConstellationPoint);
           if (RxDiBit == 0x0)
-            SUF_Debugfprintf ("Dibits : 00");
+            SUF_Debugfprintf ("Dibits: 00");
           else if (RxDiBit == 0x1)
-            SUF_Debugfprintf ("Dibits : 01");
+            SUF_Debugfprintf ("Dibits: 01");
           else if (RxDiBit == 0x2)
-            SUF_Debugfprintf ("Dibits : 10");
+            SUF_Debugfprintf ("Dibits: 10");
           else if (RxDiBit == 0x3)
-            SUF_Debugfprintf ("Dibits : 11");
+            SUF_Debugfprintf ("Dibits: 11");
           SUF_Debugfprintf ("\n");
 #endif
 
@@ -754,7 +743,7 @@ int main (
 
           if (SynchDetectedFlag == SIGLIB_SEQUENCE_NOT_DETECTED) {  // If we haven't got synch then look for it
 // Search for synchronization sequence
-            SynchDetectedFlag = SDS_DetectNumericalBitSequence ((SLFixData_t) (RxDiBit & 0x3),  // Input word
+            SynchDetectedFlag = SDS_DetectNumericalBitSequence ((SLFixData_t) (RxDiBit & SIGLIB_QPSK_BIT_MASK), // Input word
                                                                 SynchSequence,  // Synchronization sequence
                                                                 SynchSequenceBitMask, // Synchronization sequence bit mask
                                                                 &SynchSequenceDetectorState,  // Detector state variable
@@ -772,7 +761,7 @@ int main (
             }
           }
           else {
-            DemodOutput ((SLInt8_t) (RxDiBit & 0x3));               // Output the dibit to demod output file
+            DemodOutput ((SLInt8_t) (RxDiBit & SIGLIB_QPSK_BIT_MASK));  // Output the dibit to demod output file
           }
         }
       }
@@ -885,8 +874,8 @@ int main (
 #endif
 
           for (SLArrayIndex_t j = 0; j < CONSTELLATION_POINTS; j++) { // Calculate the errors from the ideal points
-            SLData_t        RealError = (IdealConstellationPoints[j].real - RealMagn);
-            SLData_t        ImagError = (IdealConstellationPoints[j].imag - ImagMagn);
+            SLData_t        RealError = (siglib_numerix_PiBy4DQPSKTxModulationIQTable[j].real - RealMagn);
+            SLData_t        ImagError = (siglib_numerix_PiBy4DQPSKTxModulationIQTable[j].imag - ImagMagn);
             ConstellationPointErrors[j] = (RealError * RealError) + (ImagError * ImagError);
           }
 // Select minimum error point
@@ -897,15 +886,15 @@ int main (
           PrevReceivedConstellationPoint = ReceivedConstellationPoint;  // Save constellation point index for next iteration
 
 #if DEBUG_DIBITS_TO_LOG_FILE
-          SUF_Debugfprintf ("ReceivedConstellationPoint = %d\n", (int) ReceivedConstellationPoint);
+          SUF_Debugfprintf ("ReceivedConstellationPoint: %d\n", (int) ReceivedConstellationPoint);
           if (RxDiBit == 0x0)
-            SUF_Debugfprintf ("Dibits : 00");
+            SUF_Debugfprintf ("Dibits: 00");
           else if (RxDiBit == 0x1)
-            SUF_Debugfprintf ("Dibits : 01");
+            SUF_Debugfprintf ("Dibits: 01");
           else if (RxDiBit == 0x2)
-            SUF_Debugfprintf ("Dibits : 10");
+            SUF_Debugfprintf ("Dibits: 10");
           else if (RxDiBit == 0x3)
-            SUF_Debugfprintf ("Dibits : 11");
+            SUF_Debugfprintf ("Dibits: 11");
           SUF_Debugfprintf ("\n");
 #endif
 
@@ -916,7 +905,7 @@ int main (
 
           if (SynchDetectedFlag == SIGLIB_SEQUENCE_NOT_DETECTED) {  // If we haven't got synch then look for it
 // Search for synchronization sequence
-            SynchDetectedFlag = SDS_DetectNumericalBitSequence ((SLFixData_t) (RxDiBit & 0x3),  // Input word
+            SynchDetectedFlag = SDS_DetectNumericalBitSequence ((SLFixData_t) (RxDiBit & SIGLIB_QPSK_BIT_MASK), // Input word
                                                                 SynchSequence,  // Synchronization sequence
                                                                 SynchSequenceBitMask, // Synchronization sequence bit mask
                                                                 &SynchSequenceDetectorState,  // Detector state variable
@@ -924,17 +913,20 @@ int main (
 
             if (SynchDetectedFlag != SIGLIB_SEQUENCE_NOT_DETECTED) {  // If we have just detected synch then save synch sequence to output file
 // Output the synch sequence to the output file
-              DemodOutput ((SLInt8_t) 0x1);
-              DemodOutput ((SLInt8_t) 0x1);
-              DemodOutput ((SLInt8_t) 0x0);
-              DemodOutput ((SLInt8_t) 0x1);
-              DemodOutput ((SLInt8_t) 0x3);
-              DemodOutput ((SLInt8_t) 0x3);
-              DemodOutput ((SLInt8_t) 0x2);
+#if (DEBUG_LOG_FILE || DEBUG_DIBITS_TO_LOG_FILE)
+              SUF_Debugfprintf ("Synchronization sequence detected\n");
+#endif
+              DemodOutput ((SLInt8_t) (SynchSequence >> 12) & SIGLIB_QPSK_BIT_MASK);
+              DemodOutput ((SLInt8_t) (SynchSequence >> 10) & SIGLIB_QPSK_BIT_MASK);
+              DemodOutput ((SLInt8_t) (SynchSequence >> 8) & SIGLIB_QPSK_BIT_MASK);
+              DemodOutput ((SLInt8_t) (SynchSequence >> 6) & SIGLIB_QPSK_BIT_MASK);
+              DemodOutput ((SLInt8_t) (SynchSequence >> 4) & SIGLIB_QPSK_BIT_MASK);
+              DemodOutput ((SLInt8_t) (SynchSequence >> 2) & SIGLIB_QPSK_BIT_MASK);
+              DemodOutput ((SLInt8_t) (SynchSequence >> 0) & SIGLIB_QPSK_BIT_MASK);
             }
           }
           else {
-            DemodOutput ((SLInt8_t) (RxDiBit & 0x3));               // Output the dibit to demod output file
+            DemodOutput ((SLInt8_t) (RxDiBit & SIGLIB_QPSK_BIT_MASK));  // Output the dibit to demod output file
           }
         }
       }
@@ -1089,26 +1081,16 @@ SLError_t DemodOutput (
     return (SIGLIB_FILE_ERROR);
   }
 
-  switch (Input) {
-    case 0:
-      fprintf (fp_LogFile, "00");
-      break;
-    case 1:
-      fprintf (fp_LogFile, "01");
-      break;
-    case 2:
-      fprintf (fp_LogFile, "10");
-      break;
-    case 3:
-      fprintf (fp_LogFile, "11");
-      break;
-    case 4:
-      fprintf (fp_LogFile, "\n");
-      break;
-    default:
-      fprintf (fp_LogFile, "%d", (int) Input);
-      break;
+  if (SIGLIB_QPSK_NUMBER_OF_PHASES == Input) {                      // Unique case to generate Carriage Return
+    fprintf (fp_LogFile, "\n");
   }
+  else {                                                            // Print bits to output file
+    for (SLArrayIndex_t i = SIGLIB_QPSK_BITS_PER_SYMBOL - 1; i >= 0; i--) {
+      SLArrayIndex_t  bitVal = ((Input >> i) & 0x1) ? 1 : 0;
+      fprintf (fp_LogFile, "%d", bitVal);
+    }
+  }
+
   fclose (fp_LogFile);
 
   return (SIGLIB_NO_ERROR);

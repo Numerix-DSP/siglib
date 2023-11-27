@@ -96,6 +96,11 @@ $SIGLIB_PATH/utils/clean_executables.sh
 popd
 pushd $SIGLIB_PATH/Examples/CExamples/CostasQAM_PiByFourDQpsk/
 $SIGLIB_PATH/utils/clean_executables.sh
+rm -f base.wav
+rm -f DemodOutput.txt
+rm -f *.dot
+rm -f *.out
+rm -f *.png
 popd
 pushd $SIGLIB_PATH/Examples/CExamples/FileIO/
 $SIGLIB_PATH/utils/clean_executables.sh

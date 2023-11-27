@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 05/09/2005
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : Speech processing functions for SigLib DSP library.
+Description: Speech processing functions for SigLib DSP library.
 
 
 ****************************************************************************/
@@ -191,8 +191,8 @@ void SIGLIB_FUNC_DECL SDA_DeEmphasisFilter (
 *   This function applies ADPCM encoder to an individual
 *   frame of data
 *
-* Notes :
-*   This function uses the following adaptive step size algorithm :
+* Notes:
+*   This function uses the following adaptive step size algorithm:
 *       If the estimate is lower than the input then
 *       double the step size and transmit +1
 *       If the estimate is higher than the input then
@@ -271,8 +271,8 @@ void SIGLIB_FUNC_DECL SDA_AdpcmEncoder (
 *   This function applies ADPCM encoder to an individual
 *   frame of data
 *
-* Notes :
-*   This function uses the following adaptive step size algorithm :
+* Notes:
+*   This function uses the following adaptive step size algorithm:
 *       If the estimate is lower than the input then
 *       double the step size and transmit +1
 *       If the estimate is higher than the input then
@@ -359,8 +359,8 @@ void SIGLIB_FUNC_DECL SDA_AdpcmEncoderDebug (
 *   This function applies ADPCM decoder to an individual
 *   frame of data
 *
-* Notes :
-*   This function uses the following adaptive step size algorithm :
+* Notes:
+*   This function uses the following adaptive step size algorithm:
 *       If the estimate is lower than the input then
 *       double the step size and transmit +1
 *       If the estimate is higher than the input then

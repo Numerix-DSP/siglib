@@ -60,15 +60,15 @@ int main (
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
-  GoertzelCoeff = SIF_GoertzelFilter (pGoertzelDelay,               // Pointer to state array
-                                      FILTER_FREQ,                  // Filter frequency
-                                      SAMPLE_LENGTH);               // Filter length
+  GoertzelCoeff = SIF_GoertzelIirFilter (pGoertzelDelay,            // Pointer to state array
+                                         FILTER_FREQ,               // Filter frequency
+                                         SAMPLE_LENGTH);            // Filter length
 
-  SDA_GoertzelFilter (pRealData,                                    // Pointer to source array
-                      pRealData,                                    // Pointer to destination array
-                      pGoertzelDelay,                               // Pointer to state array
-                      GoertzelCoeff,                                // Pointer to Goertzel filter coeff.
-                      SAMPLE_LENGTH);                               // Dataset length
+  SDA_GoertzelIirFilter (pRealData,                                 // Pointer to source array
+                         pRealData,                                 // Pointer to destination array
+                         pGoertzelDelay,                            // Pointer to state array
+                         GoertzelCoeff,                             // Pointer to Goertzel filter coeff.
+                         SAMPLE_LENGTH);                            // Dataset length
 
   gpc_plot_2d (h2DPlot,                                             // Graph handle
                pRealData,                                           // Dataset

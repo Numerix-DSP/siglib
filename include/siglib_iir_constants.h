@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50                  |
 Compiler  : Independent                 | Start Date    : 14/05/2006
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via EMail : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,10 +32,10 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : IIR filter frequency normalized coefficients :
+Description: IIR filter frequency normalized coefficients:
     Fc = 1 radian and normalised sample rate 2PI radians
 
-Update history :
+Update history:
         See history.txt for more details.
 
 ****************************************************************************/

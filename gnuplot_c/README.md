@@ -14,9 +14,9 @@ INTRODUCTION
 A library of C functions that allow data to be plotted in Gnuplot using
 the pipe interface. Plot 2D DSP data, Images, Spectrograms, Modem
 Constellation Diagrams, X-Y plots and polar plots, from C/C++ using
-Gnuplot. The latest version can be downloaded from here :
+Gnuplot. The latest version can be downloaded from here:
 http://sourceforge.net/projects/gnuplotc/. Gnuplot can be downloaded
-from here : http://gnuplot.info/.
+from here: http://gnuplot.info/.
 
 HISTORY
 =======

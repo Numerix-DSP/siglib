@@ -27,9 +27,9 @@ enum {
 
 
 /*
-    Name : GraphDisplay
-    Description : Child widget that is used to display the graph
-    Notes :
+    Name: GraphDisplay
+    Description: Child widget that is used to display the graph
+    Notes:
 */
 
 class           GraphDisplay:public wxPanel {

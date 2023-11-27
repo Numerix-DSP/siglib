@@ -26,7 +26,7 @@ char            header[] = (";**************************************************
 ;Compiler : Microsoft Visual C++        | Start Date    : 16/11/1995\r\n\
 ;                                       | Latest Update : 17/06/2023\r\n\
 ;--------------------------------------------------------------------------\r\n\
-;Support for SigLib is available via Email : support@numerix-dsp.com\r\n\
+;Support for SigLib is available via Email: support@numerix-dsp.com\r\n\
 ;\r\n\
 ;This file may be modified, in any way, providing that this header remains\r\n\
 ;within the file and the only additions are made to this header.\r\n\
@@ -52,9 +52,9 @@ support@.numerix-dsp.com
 ;\r\n\
 ;Copyright (C) 2023 Delta Numerix All rights reserved.\r\n\
 ;---------------------------------------------------------------------------\r\n\
-;Description : DLL function definition file for SigLib DSP library\r\n\
+;Description: DLL function definition file for SigLib DSP library\r\n\
 ;\r\n\
-;Update history :\r\n\
+;Update history:\r\n\
 ; See history.txt file\r\n\
 ;\r\n\
 ;****************************************************************************\r\n\r\n\r\n\
@@ -90,8 +90,8 @@ int main (
     Index++;                                                        // Increment index
   }
 
-  printf ("Final Index         : %d\r\n", Index - 1);
-  printf ("Number of functions : %d\r\n\r\n", Index - 2);
+  printf ("Final Index:         %d\r\n", Index - 1);
+  printf ("Number of functions: %d\r\n\r\n", Index - 2);
 
   fclose (IFPtr);                                                   // Close files
   fclose (OFPtr);

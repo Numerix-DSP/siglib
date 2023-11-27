@@ -18,7 +18,7 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
   if (argc != 2) {
-    printf ("\nUsage error  :\nsigplot filename (no extension)\n\n");
+    printf ("\nUsage:\nsigplot filename (no extension)\n\n");
     exit (-1);                                                      // Exit - usage error
   }
 

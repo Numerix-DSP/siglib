@@ -11,13 +11,13 @@ call mb dqpskmod
 echo pi/4 DQPSK modulator has been compiled
 
 echo Compiling pi/4 DQPSK demodulator
-call mb dqpskdem
+call mb dqpskdemod
 echo pi/4 DQPSK demodulator has been compiled
 
 dqpskmod
 
-dqpskdem base
+dqpskdemod base
 
-echo Results written to DemodOutput.txt :
+echo Results written to DemodOutput.txt:
 
 type DemodOutput.txt

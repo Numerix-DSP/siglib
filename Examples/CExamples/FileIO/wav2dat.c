@@ -26,7 +26,7 @@ int main (
   char            DatFileName[256];
 
   if (argc != 2) {
-    printf ("Useage : wav2dat filename (no extension)\n");
+    printf ("Useage: wav2dat filename (no extension)\n");
     exit (-1);
   }
 
@@ -36,8 +36,8 @@ int main (
   strcpy (DatFileName, argv[1]);
   strcat (DatFileName, ".dat");
 
-  printf ("Wav filename = %s\n", WavFileName);
-  printf ("Dat filename = %s\n", DatFileName);
+  printf ("Wav filename: %s\n", WavFileName);
+  printf ("Dat filename: %s\n", DatFileName);
 
   p_DataArray = SUF_VectorArrayAllocate (SAMPLE_SIZE);
 
@@ -68,7 +68,7 @@ int main (
     sampleIndex += SUF_DatWriteData (p_DataArray, fpOutputFile, wavInfo.SampleRate, sampleIndex, inputSampleCount);
   }
 // Write last block of data
-  printf ("Total number of samples read = %d\n", outputSampleCount);
+  printf ("Total number of samples read: %d\n", outputSampleCount);
 
   fclose (fpInputFile);
   fclose (fpOutputFile);

@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 27/10/1993
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : DSP maths utility functions, for SigLib DSP library.
+Description: DSP maths utility functions, for SigLib DSP library.
 
 
 ****************************************************************************/
@@ -839,7 +839,7 @@ void SIGLIB_FUNC_DECL SDA_Modulo (
 * Description: Control the signal amplitude, using the
 *   gain control by size of error algorithm.
 *
-*   Notes :
+*   Notes:
 *   The initial gain (pGain) should be 1.0 on the
 *   first iteration of this function.
 *   The DesiredMagnitude is the level to which the magnitude
@@ -982,7 +982,7 @@ void SIGLIB_FUNC_DECL SIF_AgcMeanAbs (
 * Description: Control the signal amplitude, using the
 *   gain control by size of error of the mean levels algorithm.
 *
-*   Notes :
+*   Notes:
 *   The initial gain (PrevGain) should be 1.0 on the
 *   first iteration of this function.
 *   The DesiredMagnitude is the level to which the magnitude
@@ -1133,7 +1133,7 @@ void SIGLIB_FUNC_DECL SIF_AgcMeanSquared (
 * Description: Control the signal amplitude, using the
 *   gain control by size of error of the mean levels algorithm.
 *
-*   Notes :
+*   Notes:
 *   The initial gain (PrevGain) should be 1.0 on the
 *   first iteration of this function.
 *   The DesiredMagnitude is the level to which the magnitude
@@ -1268,7 +1268,7 @@ void SIGLIB_FUNC_DECL SIF_AgcEnvelopeDetector (
 * Description: Control the signal amplitude, using the
 *   gain control by size of error of the envelope following algorithm.
 *
-*   Notes :
+*   Notes:
 *   The initial gain should be 1.0 on the first iteration
 *   of this function.
 *   The desiredLevel is the level to which the magnitude
@@ -1394,7 +1394,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_AgcEnvelopeDetector (
 * Description: Control the signal amplitude, using the
 *   gain control by size of error of the envelope following algorithm.
 *
-*   Notes :
+*   Notes:
 *   The initial gain should be 1.0 on the first iteration
 *   of this function.
 *   The desiredLevel is the level to which the magnitude
@@ -1671,7 +1671,7 @@ void SIGLIB_FUNC_DECL SDA_Drc (
 /********************************************************
 * Function: SDA_GroupDelay()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t * SIGLIB_PTR_DECL pSrc,
 *   SLData_t * SIGLIB_PTR_DECL pDst,
 *   SLData_t * SIGLIB_PTR_DECL PreviousPhase,   - Pointer to previous phase value
@@ -1730,7 +1730,7 @@ void SIGLIB_FUNC_DECL SDA_GroupDelay (
 /********************************************************
 * Function: SDA_ZeroCrossingDetect()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t * SIGLIB_PTR_DECL pSrc,  Pointer to source data array
 *   SLData_t * SIGLIB_PTR_DECL pDst,        Pointer to destn. data array
 *   SLData_t *PrevValue,                    Pointer to previous source data value
@@ -1829,7 +1829,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_ZeroCrossingDetect (
 /********************************************************
 * Function: SDS_ZeroCrossingDetect()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t Src,                     Source data
 *   SLData_t * PrevValue,                   Pointer to previous source data value
 *   const enum SLLevelCrossingMode_t ZXT)   Zero crossing type - +ve, -ve, both
@@ -1894,7 +1894,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_ZeroCrossingDetect (
 /********************************************************
 * Function: SDA_FirstZeroCrossingLocation()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t * SIGLIB_PTR_DECL pSrc,  Pointer to source data array
 *   SLData_t * SIGLIB_PTR_DECL PrevValue,   Pointer to previous source data value
 *   const enum SLLevelCrossingMode_t ZXT,       Zero crossing type - +ve, -ve, both
@@ -1973,7 +1973,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FirstZeroCrossingLocation (
 /********************************************************
 * Function: SDA_ZeroCrossingCount()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t * SIGLIB_PTR_DECL pSrc,  Pointer to source data array
 *   SLData_t *PrevValue,                    Pointer to previous source data value
 *   const enum SLLevelCrossingMode_t ZXT,   Zero crossing type - +ve, -ve, both
@@ -2049,7 +2049,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_ZeroCrossingCount (
 /********************************************************
 * Function: SDA_LevelCrossingDetect()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t * SIGLIB_PTR_DECL pSrc,  Pointer to source data array
 *   const SLData_t DetectionLevel,          Detection level
 *   SLData_t * SIGLIB_PTR_DECL pDst,        Pointer to destn. data array
@@ -2150,7 +2150,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_LevelCrossingDetect (
 /********************************************************
 * Function: SDS_LevelCrossingDetect()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t Src,                     Source data
 *   const SLData_t DetectionLevel,          Detection level
 *   SLData_t * PrevValue,                   Pointer to previous source data value
@@ -2218,7 +2218,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_LevelCrossingDetect (
 /********************************************************
 * Function: SDA_FirstLevelCrossingLocation()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t * SIGLIB_PTR_DECL pSrc,  Pointer to source data array
 *   const SLData_t DetectionLevel,          Detection level
 *   SLData_t * SIGLIB_PTR_DECL PrevValue,   Pointer to previous source data value
@@ -2299,7 +2299,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FirstLevelCrossingLocation (
 /********************************************************
 * Function: SDA_LevelCrossingCount()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t * SIGLIB_PTR_DECL pSrc,  Pointer to source data array
 *   const SLData_t DetectionLevel,          Detection level
 *   SLData_t *PrevValue,                    Pointer to previous source data value
@@ -2377,7 +2377,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_LevelCrossingCount (
 /********************************************************
 * Function: SDA_Trigger()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t * SIGLIB_PTR_DECL pSrc,  Pointer to source data array
 *   SLData_t * SIGLIB_PTR_DECL PrevSign,    Pointer to previous source data sign
 *   const SLData_t TriggerLevel             Trigger level
@@ -2524,7 +2524,7 @@ void SIGLIB_FUNC_DECL SDA_SetLocation (
 /********************************************************
 * Function: SDA_SortMinToMax()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t pSrc[],      Pointer to source data array
 *   SLData_t pDst[],            Pointer to destn. data array
 *   const SLArrayIndex_t sampleLength); Array length
@@ -2571,7 +2571,7 @@ void SIGLIB_FUNC_DECL SDA_SortMinToMax (
 /********************************************************
 * Function: SDA_SortMaxToMin()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t pSrc[],      Pointer to source data array
 *   SLData_t pDst[],            Pointer to destn. data array
 *   const SLArrayIndex_t sampleLength); Array length
@@ -2618,7 +2618,7 @@ void SIGLIB_FUNC_DECL SDA_SortMaxToMin (
 /********************************************************
 * Function: SDA_SortMinToMax2()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t pSrc1[],      Pointer to source data array #1
 *   const SLData_t pSrc2[],      Pointer to source data array #2
 *   SLData_t pDst1[],            Pointer to destn. data array #1
@@ -2680,7 +2680,7 @@ void SIGLIB_FUNC_DECL SDA_SortMinToMax2 (
 /********************************************************
 * Function: SDA_SortMaxToMin2()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t pSrc1[],      Pointer to source data array #1
 *   const SLData_t pSrc2[],      Pointer to source data array #2
 *   SLData_t pDst1[],            Pointer to destn. data array #1
@@ -2742,7 +2742,7 @@ void SIGLIB_FUNC_DECL SDA_SortMaxToMin2 (
 /********************************************************
 * Function: SDA_SortIndexed()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t pSrc[],          Pointer to source data array
 *   const SLArrayIndex_t pIndex[],  Pointer to output index data array
 *   SLData_t pDst[],                Pointer to destn. data array
@@ -2753,7 +2753,7 @@ void SIGLIB_FUNC_DECL SDA_SortMaxToMin2 (
 *
 * Description: Sort the data, using the index array
 *   to provide the output location for the sample.
-*   Note : This function will not work in-place.
+*  Note: This function will not work in-place.
 *
 ********************************************************/
 
@@ -2782,7 +2782,7 @@ void SIGLIB_FUNC_DECL SDA_SortIndexed (
 /********************************************************
 * Function: SDS_CountOneBits()
 *
-* Parameters  :
+* Parameters:
 *   const SLFixData_t Source        Input data value
 *
 * Return value:
@@ -2813,7 +2813,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_CountOneBits (
 /********************************************************
 * Function: SDS_CountZeroBits()
 *
-* Parameters  :
+* Parameters:
 *   const SLFixData_t Source        Input data value
 *
 * Return value:
@@ -2844,7 +2844,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_CountZeroBits (
 /********************************************************
 * Function: SDS_CountLeadingOneBits()
 *
-* Parameters  :
+* Parameters:
 *   const SLFixData_t Source        Input data value
 *
 * Return value:
@@ -2877,7 +2877,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_CountLeadingOneBits (
 /********************************************************
 * Function: SDS_CountLeadingZeroBits()
 *
-* Parameters  :
+* Parameters:
 *   const SLFixData_t Source        Input data value
 *
 * Return value:
@@ -2910,7 +2910,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_CountLeadingZeroBits (
 /********************************************************
 * Function: SDA_Sign()
 *
-* Parameters  :
+* Parameters:
 *   const SLData_t pSrc                 Input data pointer
 *   SLData_t pDst                       Output data pointer
 *   const SLArrayIndex_t sampleLength   Array length
@@ -2955,7 +2955,7 @@ void SIGLIB_FUNC_DECL SDA_Sign (
 /********************************************************
 * Function: SDA_Swap()
 *
-* Parameters  :
+* Parameters:
 *   SLData_t pSrc1          Input data pointer
 *   SLData_t pSrc2          Output data pointer
 *   const SLArrayIndex_t sampleLength   Array length
@@ -2998,7 +2998,7 @@ void SIGLIB_FUNC_DECL SDA_Swap (
 /********************************************************
 * Function: SUF_ModuloIncrement()
 *
-* Parameters  :
+* Parameters:
 *   const SLFixData_t Input,    Input value
 *   const SLFixData_t IncValue, Increment value
 *   const SLFixData_t Modulus   Modulo value
@@ -3030,7 +3030,7 @@ SLFixData_t SIGLIB_FUNC_DECL SUF_ModuloIncrement (
 /********************************************************
 * Function: SUF_ModuloDecrement()
 *
-* Parameters  :
+* Parameters:
 *   const SLFixData_t Input,    Input value
 *   const SLFixData_t IncValue, Decrement value
 *   const SLFixData_t Modulus   Modulo value
@@ -3062,7 +3062,7 @@ SLFixData_t SIGLIB_FUNC_DECL SUF_ModuloDecrement (
 /********************************************************
 * Function: SUF_IndexModuloIncrement()
 *
-* Parameters  :
+* Parameters:
 *   const SLArrayIndex_t Input,     Input value
 *   const SLArrayIndex_t IncValue,  Increment value
 *   const SLArrayIndex_t Modulus    Modulo value
@@ -3094,7 +3094,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_IndexModuloIncrement (
 /********************************************************
 * Function: SUF_IndexModuloDecrement()
 *
-* Parameters  :
+* Parameters:
 *   const SLArrayIndex_t Input,     Input value
 *   const SLArrayIndex_t IncValue,  Decrement value
 *   const SLArrayIndex_t Modulus    Modulo value
@@ -3139,7 +3139,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_IndexModuloDecrement (
 * Description:
 *   Locate all the values in the source array that match
 *   the specification in 'FindType'.
-*   Note : The output array length will be variable,
+*  Note: The output array length will be variable,
 *   dependent on the source data. The safest way to use
 *   this function is to allocate the destination arrays
 *   to have the same input lengths as the source array.
@@ -3243,7 +3243,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_Find (
 * Description:
 *   Locate all the values in the source array that match
 *   the DesiredValue and the specification in 'FindType'.
-*   Note : The output array length will be variable,
+*  Note: The output array length will be variable,
 *   dependent on the source data. The safest way to use
 *   this function is to allocate the destination arrays
 *   to have the same input lengths as the source array.

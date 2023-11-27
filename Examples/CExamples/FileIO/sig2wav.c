@@ -25,7 +25,7 @@ int main (
   char            WavFileName[256];
 
   if (argc != 3) {
-    printf ("Useage : sig2wav filename (no extension) samplerate\nSample rates : 8000, 22050, 44100 etc.");
+    printf ("Useage: sig2wav filename (no extension) samplerate\nSample rates: 8000, 22050, 44100 etc.");
     exit (-1);
   }
 
@@ -35,8 +35,8 @@ int main (
   strcpy (WavFileName, argv[1]);
   strcat (WavFileName, ".wav");
 
-  printf ("Sig filename = %s\n", SigFileName);
-  printf ("Wav filename = %s\n", WavFileName);
+  printf ("Sig filename: %s\n", SigFileName);
+  printf ("Wav filename: %s\n", WavFileName);
 
   p_DataArray = SUF_VectorArrayAllocate (SAMPLE_SIZE);
 
@@ -62,7 +62,7 @@ int main (
     outputSampleCount += inputSampleCount;
   }
 // Write last block of data
-  printf ("Total number of samples read = %d\n", outputSampleCount);
+  printf ("Total number of samples read: %d\n", outputSampleCount);
 
   wavInfo.NumberOfSamples = outputSampleCount;                      // Set total data length
   rewind (fpOutputFile);                                            // Rewind pointer to start of file

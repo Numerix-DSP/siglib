@@ -1,7 +1,7 @@
 // SigLib Chirp z-Transform Example
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
-// The chirp z-transform algorithm is shown in the following diagram :
+// The chirp z-transform algorithm is shown in the following diagram:
 //                 _____
 //   vL           |     |  VL
 //   -------------| FFT |-------

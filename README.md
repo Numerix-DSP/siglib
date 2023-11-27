@@ -34,7 +34,7 @@ SigLib uses [Gnuplot](http://gnuplot.info/) and Gnuplot/C for displaying signals
 Gnuplot/C is included in the SigLib package and pipes data to Gnuplot.
 
 Under Windows, download and install the gp528-win64-mingw.exe package
-from here :
+from here:
 https://sourceforge.net/projects/gnuplot/files/gnuplot/5.2.8/gp528-win64-mingw.exe/download .
 add the location of the installation to the system path.
 
@@ -53,7 +53,7 @@ for the different supported architectures.
 
 ## Documentation
 
-Documentation is available in the folder 'docs', in particular :
+Documentation is available in the folder 'docs', in particular:
 
 * siglib_users.pdf  - SigLib User's Manual - This is the place to start for installation and overview
 information

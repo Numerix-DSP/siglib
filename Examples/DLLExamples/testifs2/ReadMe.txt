@@ -1,9 +1,9 @@
 ========================================================================
-       CONSOLE APPLICATION : testifs2
+       CONSOLE APPLICATION: testifs2
 ========================================================================
 
 
-AppWizard has created this testifs2 application for you.  
+AppWizard has created this testifs2 application for you.
 
 This file contains a summary of what you will find in each of the files that
 make up your testifs2 application.

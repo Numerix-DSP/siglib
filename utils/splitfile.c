@@ -41,7 +41,7 @@ int main (
   short           OutputFileNameCounter = 0;
 
   if (argc != 3) {
-    printf ("Useage error : splitfile <makefile prototype> <object file extension>\n");
+    printf ("Useage error: splitfile <makefile prototype> <object file extension>\n");
     return (1);
   }
 

@@ -44,7 +44,7 @@ int main (
   pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
   pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
-  printf ("\n\nA very common question in DSP is :\n\n");
+  printf ("\n\nA very common question in DSP is:\n\n");
   printf ("\"Why are the DFT and FFT results not scaled to the same level as the input signal ?\"\n\n");
   printf ("I.E. If you put a sinusoid of magnitude +/- 1 into the DFT or FFT, why is the output not\n");
   printf ("scaled to +/- 1 as well.\n");
@@ -53,7 +53,7 @@ int main (
   printf ("This issue is discussed in further detail within the SigLib documentation but\n");
   printf ("these examples show the scaling for a DFT and FFT of size 512 samples.\n\n");
 
-  printf ("Note : The phasors in the real and imaginary components of the DFT/FFT are magnitude A/2\n");
+  printf ("Note: The phasors in the real and imaginary components of the DFT/FFT are magnitude A/2\n");
   printf ("where A is the magnitude of the input sinusoid (1.0 in these examples).\n");
 
   printf ("Please hit <Carriage Return> to continue . . .");
@@ -199,7 +199,7 @@ int main (
            SIGLIB_BIT_REV_STANDARD,                                 // Bit reverse mode flag / Pointer to bit reverse address table
            SIMPLE_FFT_LENGTH);                                      // FFT length
 
-  printf ("Source signal :\n");
+  printf ("Source signal:\n");
   SUF_PrintArray (realData,                                         // Dataset
                   SIMPLE_FFT_LENGTH);                               // Dataset length
   printf ("\n");
@@ -212,7 +212,7 @@ int main (
             SIMPLE_FFT_LENGTH,                                      // FFT length
             LOG2_SIMPLE_FFT_LENGTH);                                // log2 FFT length
 
-  printf ("FFT(Source signal) :\n");
+  printf ("FFT(Source signal):\n");
   SUF_PrintComplexArray (realData,                                  // Real dataset
                          imagData,                                  // Imaginary dataset
                          SIMPLE_FFT_LENGTH);                        // Dataset length
@@ -226,7 +226,7 @@ int main (
              SIMPLE_FFT_LENGTH,                                     // FFT length
              LOG2_SIMPLE_FFT_LENGTH);                               // log2 FFT length
 
-  printf ("iFFT(FFT(Source signal)) :\n");
+  printf ("iFFT(FFT(Source signal)):\n");
   SUF_PrintArray (realData,                                         // Dataset
                   SIMPLE_FFT_LENGTH);                               // Dataset length
   printf ("\n");

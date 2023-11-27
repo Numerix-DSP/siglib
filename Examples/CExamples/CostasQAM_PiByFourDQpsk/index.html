@@ -27,20 +27,24 @@ example of a complete <font face="Symbol" size="2">p</font>/4 D-QPSK modem.</p>
 <p style="font-family: Arial;">The input data
 sequence is taken from the file "base.txt" this data is used to modulate
 the carrier (using dqpskmod.exe) and the data is written to a .wav
-file before the data is passed to dqpskdem.exe which
+file before the data is passed to dqpskdemod.exe which
 demodulates the data. The demodulated data is written to the file
 demodout.dat. Each data burst contains a precoding region of
 continuous 1s followed by the packet data sequence which is
-indicated by the synchronization sequence :
+indicated by the synchronization sequence:
 1111...01010001111110. The demodulated synchronization
 sequences and packet data sequences should be the same as base.txt.</p>
+
+<p style="font-family: Arial;">If you need to handle bytes rather than
+  a bit stream then the example program CExamples/qpsk_CostasQam.c
+  shows how to do this.</p>
 
 <p style="font-family: Arial;">Each data sequence in base.txt is
 transmitted as a separate data sequence which means that the
 symbol and carrier synchronizers have to be reinitialized on each
 iteration. These functions also work with continuous data streams.</p>
 
-<p style="font-family: Arial;">The application uses V.26B modulation with the following configuration :<br>
+<p style="font-family: Arial;">The application uses V.26B modulation with the following configuration:<br>
 </p>
 
 <blockquote style="font-family: Arial;">
@@ -62,27 +66,27 @@ Carrier Frequency = 1800 Hz</p>
     <tr>
       <td align="center">00</td>
       <td align="center">&nbsp;</td>
-      <td align="center">+ 45�</td>
+      <td align="center">+ 45&deg</td>
     </tr>
     <tr>
       <td align="center">01</td>
       <td align="center">&nbsp;</td>
-      <td align="center">+ 135�</td>
+      <td align="center">+ 135&deg</td>
     </tr>
     <tr>
       <td align="center">11</td>
       <td align="center">&nbsp;</td>
-      <td align="center">+ 225�</td>
+      <td align="center">+ 225&deg</td>
     </tr>
     <tr>
       <td align="center">10</td>
       <td align="center">&nbsp;</td>
-      <td align="center">+ 315�</td>
+      <td align="center">+ 315&deg</td>
     </tr>
   </tbody>
 </table>
 
-<p style="font-family: Arial;">These eexamples are provided for
+<p style="font-family: Arial;">These examples are provided for
   the Microsoft Visual C/C++ and GCC compilers, using Gnuplot/C which is included in SigLib.
   </p>
 
@@ -111,24 +115,24 @@ sequence and post-amble</td>
       <td>Output from demodulator</td>
     </tr>
     <tr>
-      <td><a href="dqpskdem.c">dqpskdem.c</a>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>Demodulator source code</td>
-    </tr>
-    <tr>
       <td><a href="dqpskmod.c">dqpskmod.c</a>&nbsp;</td>
       <td>&nbsp;</td>
       <td>Modulator source code</td>
     </tr>
     <tr>
-      <td><a href="Rx_FIR.h">Rx_FIR.h</a>&nbsp;</td>
+      <td><a href="dqpskdemod.c">dqpskdemod.c</a>&nbsp;</td>
       <td>&nbsp;</td>
-      <td>FIR filter for demodulator</td>
+      <td>Demodulator source code</td>
     </tr>
     <tr>
       <td><a href="Tx_FIR.h">Tx_FIR.h</a>&nbsp;</td>
       <td>&nbsp;</td>
       <td>FIR filter for modulator</td>
+    </tr>
+    <tr>
+      <td><a href="Rx_FIR.h">Rx_FIR.h</a>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>FIR filter for demodulator</td>
     </tr>
   </tbody>
 </table>
@@ -144,26 +148,20 @@ sequence and post-amble</td>
       <td style="height: 30px;"><strong>Description</strong></td>
     </tr>
     <tr>
-      <td><a href="bBuildRun.bat">gBuildRun.bat</a>&nbsp;</td>
+      <td><a href="gbr.sh">gbr.sh</a>&nbsp;</td>
       <td>&nbsp;</td>
-      <td>Batch file to build and run modulator and demodulator programs with GCC</td>
+      <td>Shell script to build and run modulator and demodulator programs with GCC</td>
     </tr>
     <tr>
-      <td><a href="gb.bat">gb.bat</a>&nbsp;</td>
+      <td><a href="gb_profile.sh">gb_profile.sh</a>&nbsp;</td>
       <td>&nbsp;</td>
-      <td>Batch file to build source files with GCC</td>
+      <td>Shell script to build and run modulator and demodulator programs with GCC, with gprof profiling enabled</td>
     </tr>
     <tr>
-      <td><a href="mBuildRun.bat">mBuildRun.bat</a></td>
+      <td><a href="mbr.bat">mbr.bat</a></td>
       <td><br>
       </td>
       <td>Batch file to build and run modulator and demodulator programs with Microsoft Visual C/C++ compiler</td>
-    </tr>
-    <tr>
-      <td><a href="mb.bat">mb.bat</a>&nbsp;</td>
-      <td><br>
-      </td>
-      <td>Batch file to build source files with Microsoft Visual C/C++ compiler</td>
     </tr>
   </tbody>
 </table>
@@ -171,19 +169,21 @@ sequence and post-amble</td>
 
 
 <span style="font-family: Arial;">
-Build example for analyzing the modem functions with gprof are provided
-in gBuildProfile.bat. Note, gprof is a statistical function with a
-sampling period of 0.01s. Many of the modem functions take less than
-this period to run so do not show up in the results.</span>
-<br>
+<strong>Notes:</strong><br>
+The Linux shell scripts call the wav plotting Python script: ../../../utils/wavplot.py.<br>
+This script uses the Numpy, Scipy and Matplotlib packages.<br><br>
 
-<span style="font-family: Arial;">
-To execute this under Cygwin, install the following packages :<br>
-&nbsp;&nbsp;&nbsp; Cygwin from <a style="font-family: Arial;" href="https://cygwin.com/install.html" target="_blank">https://cygwin.com/install.html</a> and include the following packages : gcc and make<br>
-&nbsp;&nbsp;&nbsp; GraphViz from ><a style="font-family: Arial;" href="http://www.graphviz.org/Download_windows.php" target="_blank">http://www.graphviz.org/Download_windows.php</a> and add the bin folder to the path<br>
+gprof is a statistical function with a sampling period of 0.01s. Many of the modem functions take less than
+this period to run so do not show up in the results.<br>
+The gprof results are presented in .png call graph images.<br>
+To execute the profiling option it is necessary to instal the following packages:<br>
+<strong>Linux</strong><br>
+&nbsp;&nbsp;&nbsp; GraphViz: sudo apt-get install graphviz<br>
+&nbsp;&nbsp;&nbsp; Gprof2dot:pip install gprof2dot<br>
+<strong>Windows</strong><br>
+&nbsp;&nbsp;&nbsp; GraphViz from <a style="font-family: Arial;" href="http://www.graphviz.org/Download_windows.php" target="_blank">http://www.graphviz.org/Download_windows.php</a> and add the bin folder to the path<br>
 &nbsp;&nbsp;&nbsp; Gprof2dot from <a style="font-family: Arial;" href="https://github.com/jrfonseca/gprof2dot" target="_blank">https://github.com/jrfonseca/gprof2dot</a>.
 Note, I located the extracted folder off %HOMEPATH%\python<br>
-The gprof results are presented in .png call graph images.<br>
 </span>
 <br>
 
@@ -191,8 +191,8 @@ The gprof results are presented in .png call graph images.<br>
 <table style="font-family: Arial;" border="0" cellspacing="5">
   <tbody>
     <tr>
-      <td nowrap="nowrap" valign="top"><a name="contact"></a><font color="#0000ff" size="3"><strong>For further information, please contact :</strong></font><font color="#0000ff" size="2"><strong><br>
-      </strong></font><a href="mailto:numerix@numerix-dsp.com"><img src="../../../WebResources/email.gif" alt="Email Numerix" border="0" height="32" width="32"></a> Email : </font><a href="mailto:numerix@numerix-dsp.com">numerix@numerix-dsp.com
+      <td nowrap="nowrap" valign="top"><a name="contact"></a><font color="#0000ff" size="3"><strong>For further information, please contact:</strong></font><font color="#0000ff" size="2"><strong><br>
+      </strong></font><a href="mailto:numerix@numerix-dsp.com"><img src="../../../WebResources/email.gif" alt="Email Numerix" border="0" height="32" width="32"></a> Email: </font><a href="mailto:numerix@numerix-dsp.com">numerix@numerix-dsp.com
       </font></a></td>
     </tr>
   </tbody>

@@ -1,145 +1,159 @@
 SigLib (Tm) Revision Update History File
 ========================================
 
-VERSION : 10.54
-RELEASE DATE : XX/XX/2023
+VERSION: 10.54
+RELEASE DATE: 27/11/2023
 _________________________
 
-Additional Functionality
+Additional Functionality:
   SIF_IirBandPassFilter0dBPeakGain
   SIF_GraphicalEqualizerFilterBank
+  SDA_FirLpBpShift and SDA_FirLpHpShift
 
-Operational Changes :
+Operational Changes:
   SIF_IirBandPassFilter renamed SIF_IirBandPassFilterConstantSkirtGain
+  SDS_DetectNumericalBitSequence - bit mask added to synch sequence
+  Renamed the following files
+    SIF_HilbertTransformer to SIF_HilbertTransformerFirFilter
+    SIF_GaussianFilter to SIF_GaussianFirFilter
+    SIF_GaussianFilter2 to SIF_GaussianFirFilter2
+    SIF_GoertzelFilter to SIF_GoertzelIirFilter
+    SDA_GoertzelFilter to SDA_GoertzelIirFilter
+    SDS_GoertzelFilter to SDS_GoertzelIirFilter
+    SIF_RaisedCosineFilter to SIF_RaisedCosineFirFilter
+    SIF_RootRaisedCosineFilter to SIF_RootRaisedCosineFirFilter
+    SUF_EstimateBPFilterLength to SUF_EstimateBPFirFilterLength
+    SUF_EstimateBPFilterError to SUF_EstimateBPFirFilterError
+  SIF_GaussianFirFilter2 bandwidth parameter normalized to 1 Hz
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   None.
 
-Optimisation Changes :
+Optimisation Changes:
   None.
 
-Bug Fixes :
+Bug Fixes:
  None.
 
-Notes :
+Notes:
   None.
 
 
-VERSION : 10.53
-RELEASE DATE : 01/08/2023
+VERSION: 10.53
+RELEASE DATE: 01/08/2023
 _________________________
 
-Additional Functionality
+Additional Functionality:
   None.
 
-Operational Changes :
+Operational Changes:
   SDA_InterpolateAndFilter() - Gain now normalized by multiplying output signal by interpolation factor.
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   None.
 
-Optimisation Changes :
+Optimisation Changes:
   SDA_FilterAndDecimate optimized.
 
-Bug Fixes :
+Bug Fixes:
  SIF_FilterAndDecimate and SIF_InterpolateAndFilter documentation updates.
 
-Notes :
+Notes:
   Tidied up some examples
   Added new Synchronous Sample Rate Conversion Example
 
 
-VERSION : 10.52
-RELEASE DATE : 18/07/2023
+VERSION: 10.52
+RELEASE DATE: 18/07/2023
 _________________________
 
-Additional Functionality
+Additional Functionality:
   SIF_OpskModulate, SDA_OpskModulate, SIF_OpskDemodulate, SDA_OpskDemodulate, SDA_OpskDemodulateDebug
 
-Operational Changes :
+Operational Changes:
   None.
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   None.
 
-Optimisation Changes :
+Optimisation Changes:
   None.
 
-Bug Fixes :
+Bug Fixes:
   None.
 
-Notes :
+Notes:
   None.
 
 
-VERSION : 10.51
-RELEASE DATE : 16/07/2023
+VERSION: 10.51
+RELEASE DATE: 16/07/2023
 _________________________
 
-Additional Functionality
+Additional Functionality:
   SDS_OnePoleEWMA and SDA_OnePoleEWMA - Exponentially Weighted Moving Average One-Pole filters
   SIF_AgcEnvelopeDetector, SDS_AgcEnvelopeDetector, SDA_AgcEnvelopeDetector
   SIF_Drc, SDS_Drc, SDA_Drc
 
-Operational Changes :
+Operational Changes:
   Updated build and run shell scripts to more portably handle command line parameters to pass to executable
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   None.
 
-Optimisation Changes :
+Optimisation Changes:
   None.
 
-Bug Fixes :
+Bug Fixes:
   None.
 
-Notes :
+Notes:
   Tidied up some examples
 
 
-VERSION : 10.50
-RELEASE DATE : 24/06/2023
+VERSION: 10.50
+RELEASE DATE: 24/06/2023
 _________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   None.
 
-Additional Functionality
+Additional Functionality:
   SUF_PCMReadData, SUF_PCMWriteData, SUF_PCMReadFile, SUF_PCMWriteFile
   SDS_VoltageTodB, SDA_VoltageTodB, SDS_dBToVoltage, SDA_dBToVoltage, SDS_PowerTodB, SDA_PowerTodB, SDS_dBToPower, SDA_dBToPower
   Macros: SDS_VoltageTodBmMacro, SDS_dBmToVoltageMacro, SDS_VoltageTodBMacro, SDS_dBToVoltageMacro, SDS_PowerTodBMacro, SDS_dBToPowerMacro
 
-Bug Fixes :
+Bug Fixes:
   None.
 
-Operational Changes :
+Operational Changes:
   Endian mode changed to enumerated type: SUF_BinReadData, SUF_BinWriteData, SUF_BinReadFile, SUF_BinWriteFile
   Changed the following to be consistent with new dB conversion functions:
     SDS_LinearTodBm to SDS_VoltageTodBm, SDA_LinearTodBm to SDA_VoltageTodBm,
     SDS_dBmToLinear to SDS_dBmToVoltage, SDA_dBmToLinear to SDA_dBmToVoltage
 
-Optimisation Changes :
+Optimisation Changes:
   Reworked all for loops so that loop counters are declared locally. Allows greater optimisation for certain compilers.
 
-Notes :
+Notes:
   Tidied up some examples
 
 
-VERSION : 10.40
-RELEASE DATE : 28/04/2023
+VERSION: 10.40
+RELEASE DATE: 28/04/2023
 _________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   None.
 
-Additional Functionality
+Additional Functionality:
   SUF_DebugPrintComplex, SUF_DebugPrintComplexRect, SUF_DebugPrintComplexPolar.
   SIF_DifferentialEncoder, SDS_DifferentialEncode, SDS_DifferentialDecode, SUF_DifferentialEncoderArrayAllocate
 
-Bug Fixes :
+Bug Fixes:
   None.
 
-Operational Changes :
+Operational Changes:
   SigLib debug log filename changed to "siglib_debug.log"
   Visual Studio project files updated to V17.5
   Renamed example qpsk2.c to qpsk_CostasQam.c
@@ -147,206 +161,206 @@ Operational Changes :
   Renamed SDA_QpskDifferentialEncode to SDS_QpskDifferentialEncode
   Renamed SDA_QpskDifferentialDecode to SDS_QpskDifferentialDecode
 
-Optimisation Changes :
+Optimisation Changes:
   None.
 
-Notes :
+Notes:
   QPSK, QAM examples tidied up
 
 
-VERSION : 10.31
-RELEASE DATE : 09/02/2023
+VERSION: 10.31
+RELEASE DATE: 09/02/2023
 _________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   None.
 
-Additional Functionality :
+Additional Functionality:
   None.
 
-Bug Fixes :
+Bug Fixes:
   None.
 
-Operational Changes :
+Operational Changes:
   None.
 
-Optimisation Changes :
+Optimisation Changes:
   None.
 
-Notes :
+Notes:
   Code re-indented for 2 character indent
 
-VERSION : 10.30
-RELEASE DATE : 19/12/2022
+VERSION: 10.30
+RELEASE DATE: 19/12/2022
 _________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   None.
 
-Additional Functionality :
+Additional Functionality:
   SDA_TwoLayer2CategoryWithBiasesNetworkFit, SDA_TwoLayer2CategoryWithBiasesNetworkPredict,
   SDA_TwoLayerNCategoryWithBiasesNetworkFit, SDA_TwoLayerNCategoryWithBiasesNetworkPredict.
   SUF_WriteWeightsWithBiasesIntegerCFile, SUF_WriteWeightsWithBiasesFloatCFile,
   SUF_WriteWeightsWithBiasesBinaryFile, SUF_ReadWeightsWithBiasesBinaryFile
 
-Bug Fixes :
+Bug Fixes:
   None.
 
-Operational Changes :
+Operational Changes:
   None.
 
-Optimisation Changes :
+Optimisation Changes:
   None.
 
-Notes :
+Notes:
 
 
-VERSION : 10.20
-RELEASE DATE : 19/12/2022
+VERSION: 10.20
+RELEASE DATE: 19/12/2022
 _________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   Updated TI C6x support.
 
-Additional Functionality :
+Additional Functionality:
   None.
 
-Bug Fixes :
+Bug Fixes:
   None.
 
-Operational Changes :
+Operational Changes:
   None.
 
-Optimisation Changes :
+Optimisation Changes:
   None.
 
-Notes :
+Notes:
 
 
-VERSION : 10.14
-RELEASE DATE : 21/06/2022
+VERSION: 10.14
+RELEASE DATE: 21/06/2022
 _________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   None.
 
-Additional Functionality :
+Additional Functionality:
   SIF_FirZeroNotchFilter()
 
-Bug Fixes :
+Bug Fixes:
   None.
 
-Operational Changes :
+Operational Changes:
   None.
 
-Optimisation Changes :
+Optimisation Changes:
   None.
 
-Notes :
+Notes:
 
 
-VERSION : 10.13
-RELEASE DATE : 02/05/2022
+VERSION: 10.13
+RELEASE DATE: 02/05/2022
 _________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   None.
 
-Additional Functionality :
+Additional Functionality:
   None
 
-Bug Fixes :
+Bug Fixes:
   None.
 
-Operational Changes :
+Operational Changes:
   SDA_IirNc tidied up.
 
-Optimisation Changes :
+Optimisation Changes:
   None.
 
-Notes :
+Notes:
 
 
-VERSION : 10.12
-RELEASE DATE : 01/03/2022
+VERSION: 10.12
+RELEASE DATE: 01/03/2022
 _________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   None.
 
-Additional Functionality :
+Additional Functionality:
   SUF_CsvWriteMatrix
 
-Bug Fixes :
+Bug Fixes:
   None.
 
-Operational Changes :
+Operational Changes:
   SUF_CsvReadMatrix, SUF_PrintMatrix tidied up
 
-Optimisation Changes :
+Optimisation Changes:
   None.
 
-Notes :
+Notes:
 
 
-VERSION : 10.11
-RELEASE DATE : 01/03/2022
+VERSION: 10.11
+RELEASE DATE: 01/03/2022
 _________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   None.
 
-Additional Functionality :
+Additional Functionality:
   SUF_SigCountSamplesInFile
 
-Bug Fixes :
+Bug Fixes:
   None.
 
-Operational Changes :
+Operational Changes:
   SDA_TwoLayer2CategoryNetworkPredict, SDA_TwoLayerNCategoryNetworkPredict now return prediction, probability
 
-Optimisation Changes :
+Optimisation Changes:
   None.
 
-Notes :
+Notes:
 
 
-VERSION : 10.10
-RELEASE DATE : 24/01/2022
+VERSION: 10.10
+RELEASE DATE: 24/01/2022
 _________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   None.
 
-Additional Functionality :
+Additional Functionality:
   Macros: SDA_Ones, SDA_Zeros, simplify the usef of SDA_Fill
   SDS_Cdft2, SDA_Cdft2, SDS_Cdft3, SDA_Cdft3
 
-Bug Fixes :
+Bug Fixes:
   None.
 
-Operational Changes :
+Operational Changes:
   Functions renamed (all #defined to maintain compatibility):
     SDA_Rft     to SDA_Rdft
     SDA_Rift    to SDA_Ridft
     SDA_Cft     to SDA_Cdft
     SDA_Cift    to SDA_Cidft
 
-Optimisation Changes :
+Optimisation Changes:
   None.
 
-Notes :
+Notes:
 
 
 
-VERSION : 10.00
-RELEASE DATE : 04/01/2022
+VERSION: 10.00
+RELEASE DATE: 04/01/2022
 _________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   MacOS - arm64 support added, x86 deprecated (x86_64 still supported)
 
-Additional Functionality :
+Additional Functionality:
   Raspberry Pi real-time machine learning example added.
   Machine learning examples now support DCT for pre-processing, with no loss of performance
   SDA_Rfftr
@@ -369,10 +383,10 @@ Additional Functionality :
   SDA_InsertSample, SDA_ExtractSample, SDA_InsertArray, SDA_ExtractArray
   SUF_BinReadFile, SUF_BinWriteFile
 
-Bug Fixes :
+Bug Fixes:
   None.
 
-Operational Changes :
+Operational Changes:
   Signal generators SIGLIB_COS_WAVE now changed to SIGLIB_COSINE_WAVE (SIGLIB_COS_WAVE #defined to maintain compatibility)
   FFT function bit reverse addressing is now handled via a function call parameter, rather than #define build options.
   SIF_FirPolyPhaseGenerate() tidied up.
@@ -393,49 +407,49 @@ Operational Changes :
     SAI_FftSizeLog4 to SAI_FftLengthLog4
   TI xDAIS API support deprecated
 
-Optimisation Changes :
+Optimisation Changes:
   FFT functions updated to use optimization capabilities of modern compilers
 
-Notes :
+Notes:
   Tidied up Machine Learning example code
   Tidied up SIF_Window, SIF_TableTopWindow
   Improved file I/O error reporting in file_io.c
 
 
 
-VERSION : 9.01
-RELEASE DATE : 05/01/2021
+VERSION: 9.01
+RELEASE DATE: 05/01/2021
 _________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   NXP LPC series.
 
-Additional Functionality :
+Additional Functionality:
   None.
 
-Bug Fixes :
+Bug Fixes:
   None.
 
-Operational Changes :
+Operational Changes:
   SUF_WriteWeightsBinaryFile return value changed to SLArrayIndex_t
   siglib.c, file_io.c now fprints %ld for SLArrayIndex_t
 
-Optimisation Changes :
+Optimisation Changes:
   None.
 
-Notes :
+Notes:
   None.
 
 
 
-VERSION : 9.00
-RELEASE DATE : 21/12/2020
+VERSION: 9.00
+RELEASE DATE: 21/12/2020
 _________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   Extended ARM Cortex support
 
-Additional Functionality :
+Additional Functionality:
   SDA_Shuffle, SMX_ShuffleColumns, SMX_ShuffleRows
   SDA_LinearMicrophoneArrayBeamPatternLinear, SDA_MicrophoneArrayBeamPatternLinear
   SDA_Multiplex, SDA_Demultiplex
@@ -476,13 +490,13 @@ Additional Functionality :
   SDS_EuclideanDistance, SDS_EuclideanDistanceSquared, SDA_EuclideanDistance, SDA_EuclideanDistanceSquared,
     SCA_EuclideanDistance, SCA_EuclideanDistanceSquared
 
-Bug Fixes :
+Bug Fixes:
   SDA_Quantize_N
-  Tidied up limit cases for atan2 function : e.g. SDS_Phase
+  Tidied up limit cases for atan2 function: e.g. SDS_Phase
   SDA_Subtract macro - incorrect parameter negation
   Updated digital comms initialization function comments. Carrier Frequncy is Carrier phase increment per sample (radians / 2π)
 
-Operational Changes :
+Operational Changes:
   Microsoft secure fopen_s used with MSVC
   SIGLIB_10LOG10_MIN replaced with SIGLIB_DB_MIN
   SDA_InterpolateArbitraryThreePointQuadraticVertexMagnitude, SDA_InterpolateArbitraryThreePointQuadraticVertexLocation - Tidied up array limits tests
@@ -512,54 +526,54 @@ Operational Changes :
   Numerix Host Library is no longer required to use the exampled. All of that functionality is now part of the standard SigLib library.
   SDS_EuclideanDistance renamed to SCV_EuclideanDistance
 
-Optimisation Changes :
+Optimisation Changes:
   SDA_PeakToAverageRatio, SDA_PeakToAveragePowerRatio, SDA_PeakToAveragePowerRatioDB, SDA_PeakToAverageRatioComplex
   SDA_PeakToAveragePowerRatioComplex, SDA_PeakToAveragePowerRatioComplexDB
 
-Notes :
+Notes:
   Complete analysis, tidy up using clang-tidy
 
 
-VERSION : 8.62
-RELEASE DATE : 08/07/2018
+VERSION: 8.62
+RELEASE DATE: 08/07/2018
 _________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   None
 
-Additional Functionality :
+Additional Functionality:
   SDS_InterpolateThreePointQuadraticVertexMagnitude, SDS_InterpolateThreePointQuadraticVertexLocation, SDS_InterpolateArbitraryThreePointQuadraticVertexMagnitude and
   SDS_InterpolateArbitraryThreePointQuadraticVertexLocation
   SDA_InterpolateThreePointQuadraticVertexMagnitude, SDA_InterpolateThreePointQuadraticVertexLocation, SDA_InterpolateArbitraryThreePointQuadraticVertexMagnitude and
   SDA_InterpolateArbitraryThreePointQuadraticVertexLocation
 
-Bug Fixes :
+Bug Fixes:
   None
 
-Operational Changes :
+Operational Changes:
   SDS_EnvelopeHilbert, SDA_EnvelopeHilbert tidied up
 
-Optimisation Changes :
+Optimisation Changes:
   None
 
-Notes :
+Notes:
   None
 
 
-VERSION : 8.61
-RELEASE DATE : 19/03/2018
+VERSION: 8.61
+RELEASE DATE: 19/03/2018
 _________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   Android
 
-Additional Functionality :
+Additional Functionality:
   None
 
-Bug Fixes :
+Bug Fixes:
   None
 
-Operational Changes :
+Operational Changes:
   Tidied up use of -Wmaybe-uninitialized
   Function name cleanup
     SIF_IirNotchFilter changed to SIF_IirNotchFilter2
@@ -601,25 +615,25 @@ Operational Changes :
     SDA_ArbCfft to SDA_CfftArb
     SDA_ArbCifft to SDA_CifftArb
 
-Optimisation Changes :
+Optimisation Changes:
   None
 
-Notes :
+Notes:
   None
 
 
-VERSION : 8.60
-RELEASE DATE : 07.01.2018
+VERSION: 8.60
+RELEASE DATE: 07.01.2018
 _________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   None
 
-Additional Functionality :
+Additional Functionality:
   SDA_RemoveDuplicates, SDA_FindAllDuplicates, SDA_FindFirstDuplicates, SDA_FindSortAllDuplicates, SDA_FindSortFirstDuplicates.
   SDA_SignedAbsMax, SDA_SignedAbsMin.
   SDA_ConvolveLinearComplex, SDA_ConvolvePartialComplex, SDA_ConvolveCircularComplex
-  Envelope Detector Examples moved to library :
+  Envelope Detector Examples moved to library:
     SIF_Envelope, SDS_Envelope, SDA_Envelope
     SIF_EnvelopeRMS, SDS_EnvelopeRMS, SDA_EnvelopeRMS
     SIF_EnvelopeHilbert, SDS_EnvelopeHilbert, SDA_EnvelopeHilbert
@@ -643,13 +657,13 @@ Additional Functionality :
   SDA_SigLibDataToImageData, SDA_ImageDataToSigLibData
   SDA_FftExtend, SDA_CfftExtend
 
-Bug Fixes :
+Bug Fixes:
   SIF_TableTopWindow - fix for odd length windows
-  Fixes for odd length FIR filter design coefficient indices :
+  Fixes for odd length FIR filter design coefficient indices:
     SIF_LowPassFirFilter, SIF_HighPassFirFilter, SIF_BandPassFirFilter
     SIF_LowPassFirFilterWindow, SIF_HighPassFirFilterWindow, SIF_BandPassFirFilterWindow
 
-Operational Changes :
+Operational Changes:
   Added more Portaudio / Analog I/O examples
     const declaration tidy up
   All Sinc, ResampleSinc functions tidied up
@@ -657,7 +671,7 @@ Operational Changes :
   limits.h support improved
   gcc support improved
   QPSK examples tidied up
-  Header filenames extended :
+  Header filenames extended:
     siglibc.h  -> siglib_constants.h
     siglibd.h  -> siglib_types.h
     siglibic.h -> siglib_iir_constants.h
@@ -669,91 +683,91 @@ Operational Changes :
   SDA_CorrelateLinear, SDA_CorrelateLinearPartial tidied up
   sconio.h renamed to siglib_host_utils.h, time.h functions added.
 
-Optimisation Changes :
+Optimisation Changes:
   SDS_AbsMax changed to remove macros
 
-Notes :
+Notes:
   None
 
 
-VERSION : 8.53
-RELEASE DATE : 30.12.2014
+VERSION: 8.53
+RELEASE DATE: 30.12.2014
 _________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   MACOS X
 
-Additional Functionality :
+Additional Functionality:
   Added SDS_QFormatIntegerToSigLibData, SDS_SigLibDataToQFormatInteger
   Added SDA_QFormatIntegerToSigLibData, SDA_SigLibDataToQFormatInteger
   SIGLIB_DATA_WORD_LENGTH, SIGLIB_ARRAY_INDEX_WORD_LENGTH macros added to verify the wordlengths
 
-Bug Fixes :
+Bug Fixes:
   SDA_CostasQamDemodulate, SDA_CostasQamDemodulateDebug - decode logic bug fixed
 
-Operational Changes :
+Operational Changes:
   SDS_EchoGenerate modified to remove some compiler warnings
   siglib.c modifications to printing angles for compatibility with more compilers
   SDS_Compare, SDS_CompareComplex - removed unused parameters
   SDA_ZoomFft, SDA_ZoomFftSimple - modified to remove some compiler warnings
 
-Optimisation Changes :
+Optimisation Changes:
   None
 
-Notes :
+Notes:
   None
 
 
-VERSION : 8.52
-RELEASE DATE : 18.01.2014
+VERSION: 8.52
+RELEASE DATE: 18.01.2014
 _________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   XMOS XS1
   64 bit Intel X64 support (Visual Studio 2010) - siglib64.lib
 
-Additional Functionality :
+Additional Functionality:
   Python support via SWIG
 
-Bug Fixes :
+Bug Fixes:
   None
 
-Operational Changes :
+Operational Changes:
   Examples tidied up, Gnuplot/C support added.
     SIM_Median3x3 modified to remove compiler warnings
 
-Optimisation Changes :
+Optimisation Changes:
   SDA_ComplexShift - code tidy up, optimization
 
-Notes :
+Notes:
   None
 
 
-VERSION : 8.51
-RELEASE DATE : 1.9.2012
+VERSION: 8.51
+RELEASE DATE: 1.9.2012
 _______________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   Microsoft Visual Studio 10.0
 
-Additional Functionality :
+Additional Functionality:
   SUF_StrError
   SLAccData_t added for future functionality
   SUF_DebugPrintInfo, SUF_DebugPrintLine, SUF_DebugPrintTime
   SDA_HistogramCumulative, SDA_HistogramExtended, SDA_HistogramExtendedCumulative
   SDS_Compare, SDS_CompareComplex
 
-Bug Fixes :
+Bug Fixes:
   SDS_SignalGenerateGaussianNoise, SDA_SignalGenerateGaussianNoise parameter errors fixed.
   SIF_FftConvolvePre, SDA_FftConvolvePre, SDA_FftConvolveArb
   SIF_FftCorrelatePre, SDA_FftCorrelatePre, SDA_FftCorrelateArb
   SDA_Histogram offset scaling problems
   SDA_ZoomFft error in I/Q path processing
 
-Operational Changes :
+Operational Changes:
   SDA_Histogram change to data range limit handling
   SDA_SigLibDataToFix, SDA_SigLibDataToFix32, SDA_SigLibDataToFix16 use SDS_RoundToNearest to avoid floating point to fixed point issues.
-  The following constant declarations have changed :
+  The following constant declarations have changed:
     SIGLIB_DATA_VERY_SMALL to SIGLIB_MIN
     SIGLIB_10LOG10_OF_DATA_VERY_SMALL to SIGLIB_10LOG10_MIN
     SIGLIB_AI_... to SIGLIB_FIX_....
@@ -761,22 +775,22 @@ Operational Changes :
     SIGLIB_AI_WORD_LENGTH to SIGLIB_FIX_WORD_LENGTH
     SIGLIB_DATA_CLOSE_TO_ZERO to SIGLIB_MIN_THRESHOLD
 
-Optimisation Changes :
+Optimisation Changes:
   None
 
-Notes :
+Notes:
   None
 
 
 
-VERSION : 8.50
-RELEASE DATE : 13.12.2010
+VERSION: 8.50
+RELEASE DATE: 13.12.2010
 _________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
   None
 
-Additional Functionality :
+Additional Functionality:
   SIF_BandPassFirFilterWindow, SIF_LowPassFirFilterWindow, SIF_HighPassFirFilterWindow
   C# example updated to support Microsoft C# 2008
   SIF_GoertzelDetect, SIF_GoertzelDetectComplex
@@ -791,12 +805,12 @@ Additional Functionality :
   SDS_GoertzelFilter
   SUF_IndexModuloIncrement, SUF_IndexModuloDeccrement
 
-Bug Fixes :
+Bug Fixes:
   SDA_ReSizeOutput - pointer update bug fixed
   SDA_TdPitchShift - pDst pointer update bug fixed
   SDA_Resonator, SDA_Resonator1, SDA_Resonator1Add - Removed pDst pointer update bug introduced in V8.40
 
-Operational Changes :
+Operational Changes:
   SIF_GoertzelFilterComplex function name changed to SIF_GoertzelDetectComplex
   SIF_Delay function name changed to SIF_FixedDelay
   SDS_Delay function name changed to SDS_FixedDelay
@@ -825,24 +839,24 @@ Operational Changes :
     SIF_ViterbiDecoderV32, SDS_ViterbiDecoderV32
 
 
-Optimisation Changes :
+Optimisation Changes:
   SDA_GoertzelDetect, SDA_GoertzelDetectComplex - Note function parameter lists have changed.
   SIF_DtmfDetect, SDA_DtmfDetect, SDA_DtmfDetectAndValidate - Note function parameter lists have changed.
   SDA_Resonator, SDA_Resonator1, SDA_Resonator1Add - use local variables for state arrays.
-  SIGLIB_TRIANGLE, SIGLIB_BARTLETT window types now split into :
+  SIGLIB_TRIANGLE, SIGLIB_BARTLETT window types now split into:
     SIGLIB_BARTLETT_TRIANGLE_ZERO_END_POINTS, SIGLIB_BARTLETT_TRIANGLE_NON_ZERO_END_POINTS
 
-Notes :
+Notes:
   None
 
 
-VERSION : 8.42
-RELEASE DATE : 26.6.2009
+VERSION: 8.42
+RELEASE DATE: 26.6.2009
 ________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
 
-Additional Functionality :
+Additional Functionality:
   Cft, Cift functions added
   SUF_PrintArray, SUF_PrintComplexArray, SUF_PrintMatrix, SUF_PrintPolar, SUF_PrintRectangular, SUF_PrintIIRCoefficients, SUF_DebugPrintComplexArray
   SIF_TappedDelayLine, SDS_TappedDelayLine, SDA_TappedDelayLine, SIF_TappedDelayLineComplex,
@@ -853,10 +867,10 @@ Additional Functionality :
   SDS_ZTransform, SDS_ZTransformDB
   SDA_PeakToAveragePowerRatio, SDA_PeakToAveragePowerRatioDB, SDA_PeakToAverageRatioComplex, SDA_PeakToAveragePowerRatioComplex, SDA_PeakToAveragePowerRatioComplexDB.
 
-Bug Fixes :
+Bug Fixes:
   None
 
-Operational Changes :
+Operational Changes:
   Scaling on dft function
   SDA_FirstZeroCrossingPos changed to SDA_FirstZeroCrossingLocation
   SIGLIB_POSITIVE_ZERO_CROSS changed to SIGLIB_POSITIVE_LEVEL_CROSS
@@ -865,42 +879,42 @@ Operational Changes :
   SLZeroCrossingMode_t changed to SLLevelCrossingMode_t
   SIGLIB_ZERO_CROSSING_NOT_DETECTED changed to SIGLIB_LEVEL_CROSSING_NOT_DETECTED
 
-Optimisation Changes :
+Optimisation Changes:
   Dft functions optimized
 
-Notes :
+Notes:
   None
 
 
-VERSION : 8.41
-RELEASE DATE : 1.5.2009
+VERSION: 8.41
+RELEASE DATE: 1.5.2009
 _______________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
 
-Additional Functionality :
+Additional Functionality:
   None
 
-Bug Fixes :
+Bug Fixes:
   SDA_Median - corrected for even array lengths
 
-Operational Changes :
+Operational Changes:
   None
 
-Optimisation Changes :
+Optimisation Changes:
   None
 
-Notes :
+Notes:
   None
 
 
-VERSION : 8.40
-RELEASE DATE : 1.4.2009
+VERSION: 8.40
+RELEASE DATE: 1.4.2009
 _______________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
 
-Additional Functionality :
+Additional Functionality:
   SDS_SignalGenerate
   Macros - SDA_SignalGenerateWhiteNoise, SDS_SignalGenerateWhiteNoise,
     SDA_SignalGenerateGaussianNoise, SDS_SignalGenerateGaussianNoise.
@@ -924,83 +938,83 @@ Additional Functionality :
   SIF_Iir2PoleLpf, SDS_Iir2Pole, SDA_Iir2Pole
   SDA_ComplexRectangularLinearInterpolate, SDA_ComplexPolarLinearInterpolate
 
-Bug Fixes :
+Bug Fixes:
   None
 
-Operational Changes :
+Operational Changes:
   SCV_RectangularToPolar, SDA_ComplexRectangularToPolar, SDA_RectangularToPolar changes to origin handling.
-  The following functions have been modified to remove static variables :
+  The following functions have been modified to remove static variables:
     SIF_QpskModulate, SDA_QpskModulate, SIF_QpskDemodulate, SDA_QpskDemodulate
     SDA_QpskDemodulateDebug, SIF_Qam16Modulate, SDA_Qam16Modulate
     SIF_Qam16Demodulate, SDA_Qam16Demodulate, SDA_Qam16DemodulateDebug
     SIF_PiByFourDQpskModulate, SDA_PiByFourDQpskModulate
 
-Optimisation Changes :
+Optimisation Changes:
   None
 
-Notes :
+Notes:
   None
 
 
-VERSION : 8.30
-RELEASE DATE : 1.1.2009
+VERSION: 8.30
+RELEASE DATE: 1.1.2009
 _______________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
 
-Additional Functionality :
+Additional Functionality:
   SDA_SignalGenerateKronekerDeltaFunction macro
   SDA_Find, SDA_FindValue
 
-Bug Fixes :
+Bug Fixes:
   None
 
-Operational Changes :
+Operational Changes:
   #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_POINTER_ACCESS) modifications for some functions using array accesses.
   SDA_WelchRealPowerSpectrum, SDA_WelchComplexPowerSpectrum modified to generate linear results rather than dB.
 
-Optimisation Changes :
+Optimisation Changes:
   None
 
-Notes :
+Notes:
   None
 
-VERSION : 8.20
-RELEASE DATE : Pre-release June 2008
+VERSION: 8.20
+RELEASE DATE: Pre-release June 2008
 _______________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
 	Microsoft Visual C++ 2008 Express Edition
 
-Additional Functionality :
+Additional Functionality:
 	SDA_Range
 	SDS_ScramblerDescramblerPN9, SDS_ScramblerDescramblerPN15, SDS_SequenceGeneratorPN9, SDS_SequenceGeneratorPN15
 	SDS_ErrorVector, SDS_ErrorVectorMagnitudePercent, SDS_ErrorVectorMagnitudeDecibels
 	SDA_Compare, SDA_CompareComplex
 
-Bug Fixes :
+Bug Fixes:
 	SDA_ReSizeOutput - pState array access bug fixed when using SIGLIB_ARRAY_ACCESS.
 
-Operational Changes :
+Operational Changes:
 	SDA_10log10 changed to SDA_10Log10, SDA_20log10 changed to SDA_20Log10 to fit in with
 	standard naming convention.
 
-Optimisation Changes :
+Optimisation Changes:
 	None
 
-Notes :
+Notes:
 	All examples re-written to support Signal Visualizer (http://signalvisualize.sourceforege.net)
 	16 bit DOS compiler (Borland, Microsoft) support deprecated
 
 
-VERSION : 8.10
-RELEASE DATE : Pre-release June 2007
+VERSION: 8.10
+RELEASE DATE: Pre-release June 2007
 _______________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
 	IAR Embedded Workbench, ARM architecture
 
-Additional Functionality :
+Additional Functionality:
 	SDA_ComplexRectangularToPolar, SDA_ComplexPolarToRectangular
 	SUF_DebugPrintCount, SUF_PrintCount
 	SUF_AmCarrierArrayAllocate, SIF_AmplitudeModulate, SDS_AmplitudeModulate
@@ -1041,17 +1055,17 @@ Additional Functionality :
 	SDA_FirFilterInverseCoherentGain
 	SDA_ExtractOrder, SDA_SumLevel, SDA_SumLevelWholeSpectrum, SIF_OrderAnalysis, SDA_OrderAnalysis
 
-Bug Fixes :
+Bug Fixes:
 	SDA_Abs - Array indexing bug fixed in SIGLIB_ARRAY_ACCESS mode.
 
-Operational Changes :
+Operational Changes:
 	SDA_RectangularToPolar, SDA_PolarToRectangular moved from dsputils.c to complexa.c
 	SDA_AmplitudeModulate - Modified to support carrier table with an integer number of cycles
 	SDS_FastSinCos - Array length parameter now specifies sinusoid period
 	SDA_Agc1, SDA_Agc2 deprecated.
 	SDA_Agc3 changed to SDA_AgcPeak.
 	The following functions no longer return a value (i.e. they are type void). The underlying
-		functionality has not changed. : SIF_Fft, SIF_ArbFft, SIF_Czt, SIF_Fft2d,
+		functionality has not changed.: SIF_Fft, SIF_ArbFft, SIF_Czt, SIF_Fft2d,
 		SIF_FastAutoCrossPowerSpectrum, SIF_ArbAutoCrossPowerSpectrum and
 		SIF_MagnitudeSquaredCoherence
 	SDA_Phase changed to SDA_PhaseWrapped
@@ -1062,7 +1076,7 @@ Operational Changes :
 	SCV_Inverse2, SCV_Divide2 functions deprecated use SCV_Inverse, SCV_Divide instead.
 	SDA_Sort has been deprecated, use SDA_SortMinToMax instead.
 
-Optimisation Changes :
+Optimisation Changes:
 	The Costas loop functions have been optimized to improve perfomance, the following
 	functions have been effected
 	SIF_CostasLoop, SDS_CostasLoop, SDA_CostasLoop, SRF_CostasLoop,
@@ -1073,22 +1087,22 @@ Optimisation Changes :
 	than SUF_VectorArrayAllocate().
 	SCV_Inverse, SCV_Divide functions optimized
 
-Notes :
+Notes:
 	None
 
 
-VERSION : 8.01
-RELEASE DATE : 02-08-06
+VERSION: 8.01
+RELEASE DATE: 02-08-06
 _______________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
 	Java - Via SWIG API
 	Linux shared object file support
 	C# - Via SWIG API
 	Perl - Via SWIG API
 	Keil MicroVision toolset - tested with the ARM7 architecture
 
-Additional Functionality :
+Additional Functionality:
 	SIF_PiByFourDQpskModulate, SDA_PiByFourDQpskModulate
 	SIF_IirNotchFilter
 	SDA_IirZplanePolarToCoeffs
@@ -1104,31 +1118,31 @@ to align with IIR biquad functions.
 	SDA_TranslateSPlaneCutOffFrequency
 	SDA_ComplexScalarDivide, SDA_ComplexScalarMultiply
 
-Bug Fixes :
+Bug Fixes:
 	None
 
-Operational Changes :
-	Corelate.c changed to correlat.c - we can never quite get away from the 8.3 file format :-(
+Operational Changes:
+	Corelate.c changed to correlat.c - we can never quite get away from the 8.3 file format:-(
 	SDS_Roots now returns SIGILB_DOMAIN_ERROR if the parameters will not lead to real factors.
 	SDA_CmplxSpectralInverse changed to SDA_ComplexSpectralInverse
 	SDA_ComplexDivide function renamed to SDA_ComplexDivide2
 	SDA_Divide, SDA_Multiply, SDA_Offset, SMX_ScalarMultiply - parameter order changed
 
-Optimisation Changes :
+Optimisation Changes:
 	SDA_MagnitudeSquaredCoherence optimised for performance
 
-Notes :
+Notes:
 	None
 
 
-VERSION : 8.00
-RELEASE DATE : 19-03-06
+VERSION: 8.00
+RELEASE DATE: 19-03-06
 _______________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
 	None
 
-Additional Functionality :
+Additional Functionality:
 	SDA_Fix16ToSigLibData, SDA_SigLibDataToFix16, SDA_Fix32ToSigLibData, SDA_SigLibDataToFix32
 	SDA_ThresholdAndClamp
 	SDA_Comb
@@ -1145,10 +1159,10 @@ Additional Functionality :
 	SDS_OnePoleNormalized, SDA_OnePoleNormalized
 	SIF_CostasQamDemodulate, SDS_CostasQamDemodulate, SDS_CostasQamDemodulateDebug, SDA_CostasQamDemodulate, SDA_CostasQamDemodulateDebug
 
-Bug Fixes :
+Bug Fixes:
 	None
 
-Operational Changes :
+Operational Changes:
 	SDS_Fabs has been deprecated - use SDS_Abs instead
 	SigLib data types have been expanded to provide more flexibility. Please refer to the SigLib reference guide for more details.
 		SFLOAT changed to SLData_t / SLImageData_t
@@ -1179,31 +1193,31 @@ Operational Changes :
 	SDA_SigGenRamp now called SDA_SignalGenerateRamp, parameters simplified.
 	SDA_SigGenImpulse now called SDA_SignalGenerateImpulse, parameters simplified.
 
-Optimisation Changes :
+Optimisation Changes:
 	SIF_DtmfGenerate, SDA_DtmfGenerate, SDA_GoertzelFilter, SDA_GoertzelDetect, SDA_GoertzelDetectComplex optimised for performance
 	SIF_Fft2d, SIM_Fft2d optimised + parameters modified
 	SDA_FirstZeroCrossingPos now returns -1 when no zero crossings have been detected in the source array.
-	SDA_TestAbsOverThreshold, SDA_TestAbsOverThreshold return :
+	SDA_TestAbsOverThreshold, SDA_TestAbsOverThreshold return:
 		The index of the first sample over the threshold value
 		-1 if no samples are greater than the threshold value
 	SDA_Differentiate modified to work in-place.
 	SDS_Comb code modified for performance
 	SIF_CostasLoop now returns error code
 
-Notes :
+Notes:
 	This version was released as Early Availability pending further development, testing.
 
 
-VERSION : 7.00
-RELEASE DATE : 22-10-05
+VERSION: 7.00
+RELEASE DATE: 22-10-05
 _______________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
 	Support for Ch C/C++ interpreter
 	Extended support for LSI Logic ZSP architectures
 	Modifications to allow the library to compile correctly with different versions of the GNU compiler. These are due to conflicts with the 'register' keyword.
 
-Additional Functionality :
+Additional Functionality:
 	SDA_SetMinValue
 	SDA_Deconvolution
 	SDA_ComplexDivide
@@ -1232,10 +1246,10 @@ Additional Functionality :
 	SIF_LeakyIntegrator, SDS_LeakyIntegrator1, SDS_LeakyIntegrator2
 	SDS_Square, SDS_Asinh macros added
 
-Bug Fixes :
+Bug Fixes:
 	None
 
-Operational Changes :
+Operational Changes:
 	SIF_BlockDelay, SIF_SampleDelay functions replaced with SIF_Delay
 	Siglibfi.h, siglibfd.h have been deprecated. See the SigLib User's Guide for more details about how to use SigLib in limited memory applications using the splitfile utility
 	Modification in how huge keyword is managed to tidy up code in image.c, siglib.h
@@ -1245,7 +1259,7 @@ Operational Changes :
 	Original SIF_ZoomFft, SDA_ZoomFft function names changed to SIF_ZoomFftSimple, SDA_ZoomFftSimple
 	SIF_Fir, SIF_Comb, SIF_Delay, SIF_ComplexFir, SIF_Lms now initialise filter index
 
-Optimisation Changes :
+Optimisation Changes:
 	SMX_Transpose modified to support in-place square matrices, which are faster than not-in-place
 THE FOLLOWING FUNCTIONS HAVE BEEN OPTIMISED TO REMOVE INTERNAL DIVISION OPERATIONS - THIS IMPROVES RUNTIME PERFORMANCE
 	SIF_FastAutoCrossPowerSpectrum, SDA_FastAutoPowerSpectrum, SDA_FastCrossPowerSpectrum, SIF_ArbAutoCrossPowerSpectrum, SDA_ArbAutoPowerSpectrum, SDA_ArbCrossPowerSpectrum optimised to remove internal division operations, only save required (N/2)+1 output samples.
@@ -1260,18 +1274,18 @@ THE FOLLOWING FUNCTIONS HAVE BEEN OPTIMISED TO REMOVE INTERNAL DIVISION OPERATIO
 	SDA_MeanSquareError
 	SDA_Covariance, SDA_CovariancePartial
 
-Notes :
+Notes:
 	None
 
 
-VERSION : 6.63
-RELEASE DATE : 22-01-05
+VERSION: 6.63
+RELEASE DATE: 22-01-05
 _______________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
 	None
 
-Additional Functionality :
+Additional Functionality:
 	SDA_FirstZeroCrossingPos function added
 	SDA_SignalGenerate now generates D.C. constant levels - same functionality as SDA_Fill
 	SDA_Trigger function added
@@ -1279,10 +1293,10 @@ Additional Functionality :
 	SIGLIB_POSITIVE, SIGLIB_NEGATIVE declared
 	SDS_PeakValueToBits, SDS_BitsToPeakValue, SDS_LinearTodBm, SDS_dBmToLinear functions added
 
-Bug Fixes :
+Bug Fixes:
 	None
 
-Operational Changes :
+Operational Changes:
 	lib/dll folder name changed to lib/MSVC because it now contains static, dynamic link libraries.
 	lib/ARMV4WinCEdll folder name changed to ARMV4WinCE, contents rearranged
 	SDS_Sign modified to remove warnings with certain compilers
@@ -1290,106 +1304,106 @@ Operational Changes :
 	SDA_Resonator, SDA_Resonator1, SDA_Resonator1Add optimised for performance, SIF_Resonator also modified.
 	SDA_DtmfDetectAndValidate, SDA_DtmfDetect modified to make detection more reliable
 
-Optimisation Changes :
+Optimisation Changes:
 	SDA_ZeroCrossingDetect optimised for performance
 
-Notes :
+Notes:
 	For details on how to recompile the DLL examples for use with static libraries please refer to the User's Guide.
 
 
-VERSION : 6.62
-RELEASE DATE : 08-01-05
+VERSION: 6.62
+RELEASE DATE: 08-01-05
 _______________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
 	None
 
-Additional Functionality :
+Additional Functionality:
 	SDA_SignalGenerate now supports randomization function under Windows Mobile 2003
 	SigLib DLL for PocketPC now supplied with prebuilt Debug, Release versions
 	siglibp.h functionality added to support further mixing of static, dynamic link libraries
 
-Bug Fixes :
+Bug Fixes:
 	None
 
-Operational Changes :
+Operational Changes:
 	None
 
-Optimisation Changes :
+Optimisation Changes:
 	None
 
-Notes :
+Notes:
 	None
 
 
-VERSION : 6.61
-RELEASE DATE : 01-01-05
+VERSION: 6.61
+RELEASE DATE: 01-01-05
 _______________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
 	None
 
-Additional Functionality :
+Additional Functionality:
 	SIGLIB_NULL definition added - this is primarily used to identify unused function parameters.
 	Flat top window added to SIF_Window
 
-Bug Fixes :
+Bug Fixes:
 	None
 
-Operational Changes :
+Operational Changes:
 	None
 
-Optimisation Changes :
+Optimisation Changes:
 	None
 
-Notes :
+Notes:
 	None
 
 
-VERSION : 6.60
-RELEASE DATE : 06-12-04
+VERSION: 6.60
+RELEASE DATE: 06-12-04
 _______________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
 	WindowsCE / PocketPC Microsoft Embedded Visual C++ V4.00
 	Open Watcom support added - see notes in /siglib/lib/watcom.
 
-Additional Functionality :
+Additional Functionality:
 	SIGLIB_SFLOAT_IS_DOUBLE, SIGLIB_SFLOAT_IS_FLOAT, SIGLIB_SFIX_IS_SHORT.
 
-Bug Fixes :
+Bug Fixes:
 	None
 
-Operational Changes :
+Operational Changes:
 	Moved SIGLIB_SFIX_IS_LONG to siglibm.h
 	SDA_SignalGenerate uses clock function for greater portability.
 
-Optimisation Changes :
+Optimisation Changes:
 	None
 
-Notes :
+Notes:
 	Example programs tidied up to improve portability.
 
 
-VERSION : 6.50
-RELEASE DATE : 26-06-04
+VERSION: 6.50
+RELEASE DATE: 26-06-04
 _______________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
 	None
 
-Additional Functionality :
+Additional Functionality:
 	SIF_BpskModulate, SDA_BpskModulate, SDA_BpskModulateByte
 	SIF_BpskDemodulate, SDA_BpskDemodulate, SDA_BpskDemodulateBaudDebug
 	SIF_DpskModulate, SDA_DpskModulate, SDA_DpskModulateByte
 	SIF_DpskDemodulate, SDA_DpskDemodulate
 	SDA_Average, SDA_Add, SDA_Subtract
 
-Bug Fixes :
+Bug Fixes:
 	None
 
-Operational Changes :
-	The following function names have changed to fit with the standard SigLib naming convention :
+Operational Changes:
+	The following function names have changed to fit with the standard SigLib naming convention:
 		SDA_FskModulate to SDA_FskModulateByte
 		SDA_FskDemodulate to SDA_FskDemodulateByte
 		SDA_CpfskModulate to SDA_CpfskModulateByte
@@ -1397,67 +1411,67 @@ Operational Changes :
 		SDA_FskDemodulateBit to SDA_FskDemodulate
 		SDA_CpfskModulateBit to SDA_CpfskModulate
 
-Optimisation Changes :
+Optimisation Changes:
 	None
 
-Notes :
+Notes:
 
 
-VERSION : 6.42
-RELEASE DATE : 06-04-04
+VERSION: 6.42
+RELEASE DATE: 06-04-04
 _______________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
 	None
 
-Additional Functionality :
-	pspect.c added, including the following functions :
+Additional Functionality:
+	pspect.c added, including the following functions:
 		SIF_FastAutoCrossPowerSpectrum, SDA_FastAutoPowerSpectrum, SDA_FastCrossPowerSpectrum
 		SIF_ArbAutoCrossPowerSpectrum, SDA_ArbAutoPowerSpectrum, SDA_ArbCrossPowerSpectrum
 	SDA_AbsSum
 
-Bug Fixes :
+Bug Fixes:
 	None
 
-Operational Changes :
+Operational Changes:
 	SDA_QPSKDifferentialEncode, SDA_QPSKDifferentialDecode changed to SDA_QpskDifferentialEncode, SDA_QpskDifferentialDecode to fit standard naming convention.
 
-Optimisation Changes :
+Optimisation Changes:
 	None
 
-Notes :
+Notes:
 
 
-VERSION : 6.41
-RELEASE DATE : 02-04-04
+VERSION: 6.41
+RELEASE DATE: 02-04-04
 _______________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
 	None
 
-Additional Functionality :
+Additional Functionality:
 	None
 
-Bug Fixes :
+Bug Fixes:
 	None
 
-Operational Changes :
+Operational Changes:
 	SIF_BandPassFirFilter modified to add additional parameter for bandwidth.
 
-Optimisation Changes :
+Optimisation Changes:
 	None
 
-Notes :
+Notes:
 
 
-VERSION : 6.40
-RELEASE DATE : 25-01-04
+VERSION: 6.40
+RELEASE DATE: 25-01-04
 _______________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
 	None
 
-Additional Functionality :
+Additional Functionality:
 	SDA_Agc3
 	PortAudio examples added
 	Additional DLL examples, compilation notes added
@@ -1474,29 +1488,29 @@ Additional Functionality :
 	SCV_Expj (e^jTheta)
 	SUF_KaiserApproximation
 
-Bug Fixes :
+Bug Fixes:
 	SDA_IirZplaneToCoeffs - poles were negated
 
-Operational Changes :
+Operational Changes:
 	SDS_Iir, SDA_Iir tidied up.
 	SDA_Agc2 tidied up, additional parameter added to improve stability
 	'DOSExamples' directory changed to 'Examples'
 	SCV_RectangularToPolar - Now checks for value close to zero at PI/2
 	Various functions modified to remove code of the form "value == SFLOAT_ZERO" to handle rounding errors.
 
-Optimisation Changes :
+Optimisation Changes:
 
-Notes :
+Notes:
 
 
-VERSION : 6.20
-RELEASE DATE : 04-10-03
+VERSION: 6.20
+RELEASE DATE: 04-10-03
 ________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
 	Analog Devices TigerSHARC
 
-Additional Functionality :
+Additional Functionality:
 	SDA_ZDomainCoefficientReorg - reorganises z-domain coefficients from Digital Filter Plus
 	SDS_PreWarp - pre-warps frequencies for bilinear transform
 	SDA_MagnitudeSquared, SDS_Magnitude, SDS_MagnitudeSquared
@@ -1504,13 +1518,13 @@ Additional Functionality :
 	SUF_Debugfprintf
 	SDS_I0Bessel
 
-Bug Fixes :
+Bug Fixes:
 	SDA_ArbCifft was not declared in header files
 	SDA_PhaseUnwrap indexing was incorrect
 	SIF_Window - Kaiser window
 	SDA_DtmfDetectAndValidate pointer dereferencing was incorrect
 
-Operational Changes :
+Operational Changes:
 	SDS_OnePole, SDA_OnePole, SDA_OnePolePerSample moved to iirfilt.c
 	SDA_RmsPower has been deprecated, is now called SDA_Magnitude
 	SUF_IirState_arrayAllocate changed to SUF_IirStateArrayAllocate
@@ -1520,27 +1534,27 @@ Operational Changes :
 	SCV_Abs, SCV_AbsSquared changed to SCV_Magnitude, SCV_MagnitudeSquared
 	SDA_BilinearTransform now returns 'void'
 
-Optimisation Changes :
+Optimisation Changes:
 	None
 
-Notes :
+Notes:
 
 
-VERSION : 6.10A
-RELEASE DATE : 06-03-03
+VERSION: 6.10A
+RELEASE DATE: 06-03-03
 ________________________
 
 Documentation updated to cover SDA_CreateComplexRect, SDA_CreateComplexPolar, SDA_ExtractComplexRect, SDA_ExtractComplexPolar functions.
 
 
-VERSION : 6.10
-RELEASE DATE : 01-10-02
+VERSION: 6.10
+RELEASE DATE: 01-10-02
 ________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
 	LSI Logic ZSP
 
-Additional Functionality :
+Additional Functionality:
 	SDA_Difference, SDA_SumOfDifferences
 	SDS_PowerOfTwo - checks to see if the number is a power of 2
 	SDS_RemoveDC, SDA_RemoveDC
@@ -1551,7 +1565,7 @@ Additional Functionality :
 	SDA_CorrelatePartial
 	SDA_CovariancePartial
 
-Bug Fixes :
+Bug Fixes:
 	SDA_CorrelateLinear - Fixed indexing bug in first overlap
 	Example program mrate.c - *pInput pointer increment modified
 	SIF_Window - increment of theta changed to correct slight asymmetry of response
@@ -1560,7 +1574,7 @@ Bug Fixes :
 	SDA_ConvolvePartial
 	SDA_CorrelateLinear, SDA_Covariance offsets
 
-Operational Changes :
+Operational Changes:
 	New API. The new API uses a simpler function naming convention. All source files can be modified by the use of the "slnewapi.bat" file in the \SigLib\utils directory. SigLib can still be accessed through the TI DAIS programming API using the header file siglib_610_numerix.h.
 	siglibp.h allows for processor specific definitions without conflict with the default GNU compiler definitions.
 	SIF_QpskModulate, SDA_QpskModulate have been deprecated.
@@ -1568,23 +1582,23 @@ Operational Changes :
 	SDA_CorrelateLinear, SDA_Covariance it is no longer necessary to specify which is the longest/shortest arrays
 	SDA_CorrelateLinear this function now zero pads at both ends so the output offset has shifted.
 
-Optimisation Changes :
+Optimisation Changes:
 	SIF_ArbFft, SUF_ArbFftAllocLength use function SDS_PowerOfTwo
 	SDA_ConvolveLinear, SDA_ConvolveCircular, SDA_ConvolvePartial simplified to improve performance
 
-Notes :
+Notes:
 	DFilter has been deprecated from SigLib. This functionality has been replaced by DFPlus, which runs under Windows, Linux. For further details, please see https://www.numerix-dsp.com/dfplus.
 
 
 
-VERSION : 6.00
-RELEASE DATE : 02-06-01
+VERSION: 6.00
+RELEASE DATE: 02-06-01
 ________________________
 
-Additional Processor / Compiler Support :
+Additional Processor / Compiler Support:
 	Diab Data compiler now supported
 
-Additional Functionality :
+Additional Functionality:
 	siglib_numerix_SIFLowPassFirFilter
 	siglib_numerix_SDSFrequencyModulate
 	siglib_numerix_SIFCostasLoop, siglib_numerix_SDSCostasLoop, siglib_numerix_SDACostasLoop
@@ -1598,135 +1612,135 @@ Additional Functionality :
 	siglib_numerix_SDAArbCifft
 
 
-Bug Fixes :
+Bug Fixes:
 	TWO_PI in siglibp.h (C62x section) replaced with SIGLIB_TWO_PI
 	pBitReverseAddressTable manipulation modified in ffourier.c when FAST mode not used, to avoid problems with certain compilers.
 	siglib_numerix_SDAComplexMultiply2 now works in place
 	siglib_numerix_SIFVl now correctly works with wider range of I/O lengths
 	siglib_numerix_SDADtmfDetectAndValidate - validation process made more robust
 
-Operational Changes :
+Operational Changes:
 	siglib_numerix_SDSFrequencyModulate, siglib_numerix_SDAFrequencyModulate optimised performance using fast sine look up tables
 	siglib_numerix_SDATdPitchShift renamed to siglib_numerix_SDSTdPitchShift, to fit standard SigLib naming conventions
 	siglib_numerix_SDAQpskModulate, siglib_numerix_SDAQpskModulate2 now process a byte of information at a time.
 
 
-Optimisation Changes :
+Optimisation Changes:
 	None
 
-Notes :
+Notes:
 	Please refer to the SigLib User's Guide (users.pdf)
 
 
 
-VERSION : 5.00
-RELEASE DATE : 07-01-00
+VERSION: 5.00
+RELEASE DATE: 07-01-00
 ________________________
 
-Additional Processor Support :
+Additional Processor Support:
 
-Additional Functionality :
+Additional Functionality:
 	Support for Texas Instruments' eXpress DSP Algorithm Integration Standard added. The primary changes to the API are that all function names, globals are preceeded by the string "siglib_numerix_", the "_" character is not allowed in the remainder of the function name. For further details, please refer to the SigLib User's Guide.
 	siglib_numerix_SDAResonator1Add function added
 	siglib_numerix_SDADeltaModulate2 function added
 
-Bug Fixes :
+Bug Fixes:
 
-Operational Changes :
+Operational Changes:
 	siglib_numerix_SUFKeyCodeToAscii, siglib_numerix_SUFAsciiToKeyCode now return SIGLIB_NO_DTMF_KEY on error.
 	Fourier.c has been split into ffourier.c, arbfft.c, fourier.c.
 	Filter.c has been split into firfilt.c, iirfilt.c, filter.c.
 	-Wall command line option removed from linux makefile because this caused warnings in code that was inserted to stop warnings in other compilers.
 
-Optimisation Changes :
+Optimisation Changes:
 	siglib_numerix_SDADtmfGenerate optimised to improve performance
 	siglib_numerix_SDAResonator1 optimised to improve performance, reduce code size
 
-Notes :
+Notes:
 
 
 
-VERSION : 4.03
-RELEASE DATE : 13-08-00
+VERSION: 4.03
+RELEASE DATE: 13-08-00
 ________________________
 
-Additional Processor Support :
+Additional Processor Support:
 
-Additional Functionality :
+Additional Functionality:
 	SDA_dtmf_detect_and_validate, SDA_test_over_threshold, SDA_test_abs_over_threshold, SCV_abs_squared functions added
 
-Bug Fixes :
+Bug Fixes:
 
-Operational Changes :
+Operational Changes:
 	Sldll.h removed, DLL now accessed through siglib.lib, dllimport / export mode selected through command line switch to siglibp.h - C++ examples updated to reflect this change.
 	SDA_dtmf_detect - optimised for use with 8KHz sample rate, 102 sample buffer length.
 	Constant SIGLIB_RESONATOR_DELAY_SIZE changed to SIGLIB_RESONATOR_DELAY_LENGTH
 	SIGLIB_DTMF_CODE_ERROR changed to SIGLIB_NO_DTMF_KEY
 
-Optimisation Changes :
+Optimisation Changes:
 
-Notes :
+Notes:
 	This version only released as a DLL.
 
 
 
-VERSION : 4.02
-RELEASE DATE : 20-07-00
+VERSION: 4.02
+RELEASE DATE: 20-07-00
 ________________________
 
-Additional Processor Support :
+Additional Processor Support:
 
-Additional Functionality :
+Additional Functionality:
 	SIF_goertzel_detect_complex, SDA_goertzel_detect_complex functions added.
 
-Bug Fixes :
+Bug Fixes:
 	SDA_goertzel_detect now returns true square magnitude energy. SIF_goertzel_detect also modified to fit this change.
 
-Operational Changes :
+Operational Changes:
 
-Optimisation Changes :
+Optimisation Changes:
 
-Notes :
+Notes:
 	This version only released as a DLL.
 
 
 
-VERSION : 4.01
-RELEASE DATE : 13-06-00
+VERSION: 4.01
+RELEASE DATE: 13-06-00
 ________________________
 
-Additional Processor Support :
+Additional Processor Support:
 
-Additional Functionality :
+Additional Functionality:
 	SDA_interleave, SDA_deinterleave functions added - these are used for rearranging sample ordering on channels with bursty noise.
 	SIF_fast_bit_reverse_reorder function added.
 	SDA_weighted_sum - Weighted vector sum function added
 	SIF_band_pass_fir_filter function added.
 	SDA_fsk_modulate_bit, SDA_fsk_demodulate_bit, SDA_cpfsk_modulate_bit functions added.
 
-Bug Fixes :
+Bug Fixes:
 
-Operational Changes :
+Operational Changes:
 	SDA_bit_reverse_reorder modified to support fast mode.
 	SIF_fft pointer error fixed in fast bit reverse initialisation.
 	SDA_cpfsk_demodulate function removed, obsolete - please use SDA_fsk_demodulate
 	SDA_fsk_demodulate changed, now includes enhanced filtering.
 
-Optimisation Changes :
+Optimisation Changes:
 
-Notes :
+Notes:
 	This version only released as a DLL.
 
 
-VERSION : 4.00
-RELEASE DATE : 12-02-00
+VERSION: 4.00
+RELEASE DATE: 12-02-00
 ________________________
 
-Additional Processor Support :
+Additional Processor Support:
 	ADSP-2116x
 	SigLib Sharc support now for visual DSP.
 
-Additional Functionality :
+Additional Functionality:
 	SUF_halt
 	DSP Examples directory added
 	Standard math library functions (e.g. sin()) now accessed through macros e.g. SDS_sin for portability.
@@ -1739,10 +1753,10 @@ Additional Functionality :
 	SIF_fsk_modulate, SDA_fsk_modulate, SDA_fsk_demodulate, SDA_cpfsk_modulate and
 	SDA_cpfsk_demodulate
 
-Bug Fixes :
-	SDA_detrend, SDA_extract_trend : RampPtr made static.
+Bug Fixes:
+	SDA_detrend, SDA_extract_trend: RampPtr made static.
 
-Operational Changes :
+Operational Changes:
 	C67x data format changed to float from double for greater optimisation.
 	Constant data values replaced by defined constants in SigLib.h (prefixed by SL_CONST_)
 	Rationalisation of the number of batch files for rebuilding the library
@@ -1753,7 +1767,7 @@ Operational Changes :
 	Redundant code removed from SDA_fd_interpolate
 	SIF_raised_cosine_filter, SIF_root_raised_cosine_filter functions optimised.
 	SCV_exponential changed to SCV_exp
-	The following functions have been removed : SIF_pwm, SIF_median. These are now obsolete.
+	The following functions have been removed: SIF_pwm, SIF_median. These are now obsolete.
 	All constants now begin with the string "SIGLIB_"
 	SDA_max, SDA_min, SDA_max_pos, SDA_min_pos modified to avoid problems with certain compilers.
 	The enumerated types win_type, sig_type have been changed to window_type, signal_type
@@ -1763,14 +1777,14 @@ Operational Changes :
 	SigLib processor definitions now held in siglibp.h
 	All SigLib functionality can now be included or removed using the header file siglibfi.h
 
-Optimisation Changes :
+Optimisation Changes:
 	SDA_peak_hold_per_sample
 	SDA_frequency_demodulate
 
-Notes :
+Notes:
 	SigLib documentation now provided in Acrobat 4.0 format
 
-Functions modified to support re-entrancy :
+Functions modified to support re-entrancy:
 	SIF_fft, SDA_rfft, SDA_cfft, SDA_cifft, SIF_zoom_fft, SDA_zoom_fft
 	SIF_fd_hilbert, SDA_fd_hilbert
 	SIF_arb_fft, SDA_arb_rfft, SDA_arb_cfft
@@ -1789,13 +1803,13 @@ Functions modified to support re-entrancy :
 	SDA_td_pitch_shift
 
 
-VERSION : 3.02
-RELEASE DATE : 15-05-99
+VERSION: 3.02
+RELEASE DATE: 15-05-99
 ________________________
 
-Additional Processor Support :
+Additional Processor Support:
 
-Additional Functionality :
+Additional Functionality:
 	SIF_gaussian_filter function added to full library.
 	SIF_raised_cosine_filter, SIF_root_raised_cosine_filter
 	functions added.
@@ -1806,60 +1820,60 @@ Additional Functionality :
 	SIF_qpsk_modulate, SDA_qpsk_modulate, SIF_qpsk_modulate2 and
 	SDA_qpsk_modulate2 functions added.
 	SDS_odd, SDS_even, SUF_number_of_elements macros added.
-	Telecomm.c added, containing : SIF_dtmf_generate, SDA_dtmf_generate,
+	Telecomm.c added, containing: SIF_dtmf_generate, SDA_dtmf_generate,
 	SIF_dtmf_detect, SDA_dtmf_detect, SUF_ascii_to_key_code and
 	SUF_key_code_to_ascii
 	SDA_sum_of_squares function added.
 
-Bug Fixes :
+Bug Fixes:
 	DFilter bilinear transform IIR filter design functionality now fixed.
 
-Operational Changes :
+Operational Changes:
 	SDA_goertzel_detect modified to reset filter state array on
 	each iteration, final stage optimised.
 	_SL_HOST_ENABLED replaced with _SL_TEXTIO_ENABLED,
 	_SL_GRAPHICSIO_ENABLED, _SL_FILEIO_ENABLED.
 
-Optimisation Changes :
+Optimisation Changes:
 
-Notes :
+Notes:
 
 
 
-VERSION : 3.01
-RELEASE DATE : 20-03-99
+VERSION: 3.01
+RELEASE DATE: 20-03-99
 ________________________
 
-Additional Processor Support :
+Additional Processor Support:
 
-Additional Functionality :
+Additional Functionality:
 	SIF_gaussian_filter function added to DLL
 
-Bug Fixes :
+Bug Fixes:
 
-Operational Changes :
+Operational Changes:
 
-Optimisation Changes :
+Optimisation Changes:
 
-Notes :
+Notes:
 	This version was only released as a DLL.
 
 
-VERSION : 3.00
-RELEASE DATE : 14-03-99
+VERSION: 3.00
+RELEASE DATE: 14-03-99
 ________________________
 
-Additional Processor Support :
+Additional Processor Support:
 
-Additional Functionality :
+Additional Functionality:
 	SDA_select_max, SDA_select_min, SDA_select_magnitude_squared_max and
 		SDA_select_magnitude_squared_min functions added.
 	Macros SUF_memory_allocate, SUF_memory_free used for malloc, free
 		aid portability to different operating environments
 
-Bug Fixes :
+Bug Fixes:
 
-Operational Changes :
+Operational Changes:
 	New API implemented, please refer to the "New API Reference Manual" for
 	more details.
 	SIF_median, SIF_complex_shift, SIF_fft2d - memory allocation
@@ -1868,30 +1882,30 @@ Operational Changes :
 	sample_one_pole mapped to SDA_one_pole, buffer_one_pole mapped to
 		SDA_one_pole_per_sample to fit new API
 
-Optimisation Changes :
+Optimisation Changes:
 	SDA_one_pole_per_sample changed to improve optimisation, number of
 		parameters changed
 
 
 
-VERSION : 2.52
-RELEASE DATE : 22-02-99
+VERSION: 2.52
+RELEASE DATE: 22-02-99
 ________________________
 
-Additional Processor Support :
+Additional Processor Support:
 
-Additional Functionality :
+Additional Functionality:
 	buffer_soft_threshold function added.
 	Linux support added (see Users.doc).
 	u2d, d2u (UNIX <> DOS) file converters added.
 	Poly-phase filter coefficient converters added.
 
-Bug Fixes :
+Bug Fixes:
 	Buffer_rotate did not rotate all samples, documentation also changed.
 	Siglib.h end of comment '/' character added.
 	Fourier.c FAST_SIGLIB_FFT changed to SL_FAST_BIT_REVERSAL
 
-Operational Changes :
+Operational Changes:
 	sig_gen_ramp, sig_gen_impulse modified, so that global variable sl_Dummy is not required
 	siglib.h undefines 'PI' before defining it, so as to avoid conflicts.
 	%le changed to %e in print statements to avoid compiler warnings on some compilers
@@ -1899,17 +1913,17 @@ Operational Changes :
 	moved to dspconio.c so that they can be used on a wider range of
 	operating systems without the graphics functionality.
 
-Optimisation Changes :
+Optimisation Changes:
 	rfft, cfft, cifft functions optimised
 
 
-VERSION : 2.51
-RELEASE DATE : 22-11-98
+VERSION: 2.51
+RELEASE DATE: 22-11-98
 ________________________
 
-Additional Processor Support :
+Additional Processor Support:
 
-Additional Functionality :
+Additional Functionality:
 	leaky_lms_update, normalized_lms_update, sign_error_lms_update,
 	sign_data_lms_update,, sign_sign_lms_update functions added.
 	buffer_bit_reverse_reorder, index_bit_reverse_reorder functions added.
@@ -1918,9 +1932,9 @@ Additional Functionality :
 	Additional declarations for UNIX environments in SigLib.h, Sun
 		Workstation makefile added.
 
-Bug Fixes :
+Bug Fixes:
 
-Operational Changes :
+Operational Changes:
 	siggen.c - randomization constant explicitly defined for all processors.
 	siglib.h - host graphics constant explicitly defined for all processors.
 	buffer_peak_hold made re-entrant. You are advised to clear the contents
@@ -1932,48 +1946,48 @@ Operational Changes :
 	C6700 declarations in siglib.h
 	The memory allocation / reallocation process has been changed to
 		remove the requirement to pre-allocate the largest array required,
-		this effects the following functions : pwm_init, matrix_inverse,
+		this effects the following functions: pwm_init, matrix_inverse,
 		matrix_lu_decompose, matrix_determinant, buffer_detrend,
 		buffer_extract_trend, fft_init, czt_init, buffer_median_init,
 		nc_iir_init, buffer_delay_init, init_display_buffer,
 		init_display_buffer_point. This will not effect any existing
 		working applicaitons when recompiled with the new version.
 
-Optimisation Changes :
+Optimisation Changes:
 	buffer_differentiate
 
 
-VERSION : 2.50
-RELEASE DATE : 20-10-98
+VERSION: 2.50
+RELEASE DATE: 20-10-98
 ________________________
 
-Additional Processor Support :
+Additional Processor Support:
 	TMS320C67X now fully supported
 
-Additional Functionality :
+Additional Functionality:
 	buffer_detrend, buffer_extract_trend functions added
 	modify_iir_filter_gain function added for bilinear transform
 	sig_gen_impulse macro added.
 
-Bug Fixes :
+Bug Fixes:
 
-Operational Changes :
+Operational Changes:
 	Offset parameter added as new 4th parameter to sig_gen_ramp macro.
 	bilinear_transform, iir_zplane_to_coeffs - more flexibility added wrt numbers of poles, zeros
 	signal_generate & window_init - Error flags modified to meet SigLib standards
 	SIGLIB_PARAMETER_ERROR error message added
 
-Optimisation Changes :
+Optimisation Changes:
 
 
-VERSION : 2.10
-RELEASE DATE : 24-05-98
+VERSION: 2.10
+RELEASE DATE: 24-05-98
 ________________________
 
-Additional Processor Support :
+Additional Processor Support:
 	TMS320C67X
 
-Additional Functionality :
+Additional Functionality:
 	histogram_equalize added
 	HP VEE support added
 	Definition SFLOAT_VERY_SMALL added.
@@ -1988,10 +2002,10 @@ Additional Functionality :
 		translation functions added.
 	buffer_add_3, buffer_add_4, buffer_add_5 functions added.
 
-Bug Fixes :
+Bug Fixes:
 	buffer_clamp SIG_DOUBLE_SIDED_THOLD
 
-Operational Changes :
+Operational Changes:
 	Definitiions _HOST_ENABLED changed to _SL_HOST_ENABLED, _HUGE_ARRAYS changed to _SL_HUGE_ARRAYS to avoid potential conflicts with user's applications.
 	_IMAGING_ENABLED definition removed.
 	Function declaration statement _SL_FUNC_DECL added to allow the same source code to be used for static, dynamic linkable libraries (DLLs).
@@ -2002,55 +2016,55 @@ Operational Changes :
 	buffer_quantise changed to buffer_quantize.
 	Compilation, librarian batch file names have changed.
 
-Optimisation Changes :
+Optimisation Changes:
 	buffer_lengthen improved.
 
 
-VERSION : 2.01
-RELEASE DATE : 30-08-97
+VERSION: 2.01
+RELEASE DATE: 30-08-97
 ________________________
 
-Additional Processor Support :
+Additional Processor Support:
 	None
 
-Additional Functionality :
+Additional Functionality:
 	Delta modulation
 	sample_count_one_bits function added
 	buffer_float_to_fix, buffer_fix_to_float functions added.
 
-Additional Examples :
-	See Additional Functionality
+Additional Examples:
+	See Additional Functionality:
 	Histogram equalisation added to imaging example
 
-Bug Fixes :
+Bug Fixes:
 	read_buffer - return from function misplaced
 	dat_buffer_to_disk, dat_buffer_from_disk incorrectly documented
 
-Operational Changes :
+Operational Changes:
 	printat macro changed to a function
 	Some header files (compiler specific graphics, I/O files) have been
 		removed from siglib.h for compatibility, these now need to be
 		included in the application source files.
 	The following functions now conform to the SigLib standard convention of
-		having separate input, output array pointers : buffer_clip, buffer_scale,
+		having separate input, output array pointers: buffer_clip, buffer_scale,
 		buffer_divide, buffer_multiply, buffer_offset.
 	The following functions were changed to avoid the side effects of using
-		the fabs macro in certain compilers : find_abs_max, find_abs_min,
+		the fabs macro in certain compilers: find_abs_max, find_abs_min,
 		find_abs_max_pos, find_abs_min_pos, buffer_abs, buffer_histogram.
 	The following functions now return the error code SIGLIB_MEM_ALLOC_ERROR
-		when there has been a memory allocation error : czt_init, fft2d_init,
+		when there has been a memory allocation error: czt_init, fft2d_init,
 		pwm_init, fft_init, arb_fft_init, buffer_median_init, complex_shift_init,
 		nc_iir_init, buffer_delay_init
 
 
-VERSION : 2.00
-RELEASE DATE : 01-05-97
+VERSION: 2.00
+RELEASE DATE: 01-05-97
 ________________________
 
-Additional Processor Support :
+Additional Processor Support:
 	TMS320C6X, TMS320C80-MP, Alpha, PowerPC.
 
-Additional Functionality :
+Additional Functionality:
 	.WAV file I/O
 	Arbitrary length FFT functions, czt_init() & phase_unwrap()
 	siglib_version()
@@ -2066,27 +2080,27 @@ Additional Functionality :
 	buffer_sort, buffer_median
 	Frequency domain Hilbert transform
 	Instantaneous frequency analyser functions
-	Image coding functions :
+	Image coding functions:
 		display_icoder, init_display_icoder, clear_display_icoder,
 		dct8x8_init, dct8x8, idct8x8, zig_zag_scan, zig_zag_descan.
 	BUFFER_OPERATE virtual function
-	Matrix manipulation :
+	Matrix manipulation:
 		matrix_multiply, matrix_transpose, SUF_PrintMatrix,
 		matrix_copy, matrix_add, matrix_subtract,
 		matrix_multiply_piecewise, matrix_scalar_multiply.
 
-Additional Example programs :
+Additional Example programs:
 	Analytic signal generation
 	Matched filters
 	Cepstrum analysis
 
-Bug Fixes :
+Bug Fixes:
 	convolve_linear
 	sl_clear_cross_hairs
 	buffer_reverse
 	buffer_lengthen
 
-Operational Changes :
+Operational Changes:
 	Goertzel detect buffer length factor removed
 	FFT.C changed to FOURIER.C, LMS.C changed to ADAPTIVE.C.
 	Changed int data types to 32 bits (SHEX -> SFIX)
@@ -2096,13 +2110,13 @@ Operational Changes :
 	Image file format changed - now 8 bits per pixel
 
 
-VERSION : 1.71
-RELEASE DATE : 02-09-94
+VERSION: 1.71
+RELEASE DATE: 02-09-94
 ________________________
 
-Additional DSP Support :
+Additional DSP Support:
 
-Additional Functionality :
+Additional Functionality:
 	convolve_partial, convolve_circular
 	correlate_linear function added.
 	buffer_log_magnitude
@@ -2117,13 +2131,13 @@ Additional Functionality :
 	Channel multiplex functions
 	Pulse width modulation
 
-Additional Example programs :
+Additional Example programs:
 	QPSK
 
-Bug Fixes :
+Bug Fixes:
 	fft_init - memory reallocation.
 
-Operational Changes :
+Operational Changes:
 	Word for Windows documentation added.
 	convolve function changed to convolve_linear.
 	correlate function changed to correlate_circular.
@@ -2132,7 +2146,7 @@ Operational Changes :
 
 		1.70A
 10-04-94		V1.70A released
-	ref.txt bug fixes : buffer_subtract_2 and
+	ref.txt bug fixes: buffer_subtract_2 and
 	buffer_threshold descriptions changed.
 	buffer_subtract_2 bug fix.
 

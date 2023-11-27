@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 06/01/2001
 Options   :                             | Latest Update : 17/11/2022
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : SigLib DSP library IIR filter routines.
+Description: SigLib DSP library IIR filter routines.
 
 
 ****************************************************************************/
@@ -85,7 +85,7 @@ void SIGLIB_FUNC_DECL SIF_Iir (
 * Description:
 *   Apply cascaded direct form II IIR filters to
 *   the data.
-*   Coefficient order : b(0)0, b(1)0, b(2)0, a(1)0, a(2)0, b(0)1, b(1)1, ....
+*   Coefficient order: b(0)0, b(1)0, b(2)0, a(1)0, a(2)0, b(0)1, b(1)1, ....
 *
 ********************************************************/
 
@@ -131,7 +131,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Iir (
 * Description:
 *   Apply cascaded direct form II IIR filters to
 *   the data array
-*   Coefficient order : b(0)0, b(1)0, b(2)0, a(1)0, a(2)0, b(0)1, b(1)1, ....
+*   Coefficient order: b(0)0, b(1)0, b(2)0, a(1)0, a(2)0, b(0)1, b(1)1, ....
 *
 ********************************************************/
 
@@ -189,7 +189,7 @@ void SIGLIB_FUNC_DECL SDA_Iir (
 * Description:
 *   Apply cascaded direct form II IIR filters to
 *   the data.
-*   Coefficient order : b(0)0, b(1)0, b(2)0, -a(1)0, -a(2)0, b(0)1, b(1)1, ....
+*   Coefficient order: b(0)0, b(1)0, b(2)0, -a(1)0, -a(2)0, b(0)1, b(1)1, ....
 *   The denominator (feedback) coefficients are negated.
 *
 ********************************************************/
@@ -236,7 +236,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_IirMac (
 * Description:
 *   Apply cascaded direct form II IIR filters to
 *   the data array
-*   Coefficient order : b(0)0, b(1)0, b(2)0, -a(1)0, -a(2)0, b(0)1, b(1)1, ....
+*   Coefficient order: b(0)0, b(1)0, b(2)0, -a(1)0, -a(2)0, b(0)1, b(1)1, ....
 *   The denominator (feedback) coefficients are negated.
 *
 ********************************************************/
@@ -663,7 +663,7 @@ void SIGLIB_FUNC_DECL SDA_MatchedZTransform (
 * Description:
 *   Convert z-plane poles and zeros (in rectangular format)
 *   to second order (biquad) filter coefficients.
-*   The coefficients are stored in the order :
+*   The coefficients are stored in the order:
 *       b(0)0, b(1)0, b(2)0, a(1)0, a(2)0, b(0)1, b(1)1, ....
 *   The poles and zeros are assumed to be complex
 *   conjugate.
@@ -754,7 +754,7 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneToCoeffs (
 * Description:
 *   Convert z-plane poles and zeros (in polar format)
 *   to second order (biquad) filter coefficients.
-*   The coefficients are stored in the order :
+*   The coefficients are stored in the order:
 *       b(0)0, b(1)0, b(2)0, a(1)0, a(2)0, b(0)1, b(1)1, ....
 *   The poles and zeros are assumed to be complex
 *   conjugate.
@@ -861,9 +861,9 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToLpf (
 
 // Frequency transform -    Z^-1 => (z^-1 - a) / (1 - a.z^-1)
 // This is the result after transformation.
-// To do the transform, the function is :
+// To do the transform, the function is:
 //     replace z^-1 with (z^-1 + a) / (1 + a.z^-1)
-// Reference : Oppenheim and Schafer, Discrete Time Signal Processing, 1989, pp434
+// Reference: Oppenheim and Schafer, Discrete Time Signal Processing, 1989, pp434
 
   for (SLArrayIndex_t i = 0; i < NumberOfZeros; i++) {
     *DstZPlaneZeros++ = SCV_Divide (SCV_VectorSubtractScalar (*SrcZPlaneZeros, Alpha),
@@ -1118,7 +1118,7 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToBsf (
 *   Apply a gain factor to the feedforward coefficients
 *   of an IIR filter.
 *
-* Reference :
+* Reference:
 *   Maurice Bellanger; Digital Processing Of Signals
 *   (Theory and Practice), P160
 *
@@ -2103,7 +2103,7 @@ void SIGLIB_FUNC_DECL SDA_OnePoleHighPassPerSample (
 * Description:
 * Convert the attack / decay rate to a one pole filter
 * coefficient that decays to -3 dB in the specified time
-* period. The following equation is used :
+* period. The following equation is used:
 *
 *   attack_decay_coeff = exp(-exp(-1) / (attack_decay_period_ms * sample_frequency * 0.001));
 *
@@ -2132,7 +2132,7 @@ SLData_t SDS_OnePoleTimeConstantToFilterCoeff (
 * Description:
 * Convert the cut-off frequency to a one pole filter
 * coefficient that decays to -3 dB in the specified time
-* period. The following equation is used :
+* period. The following equation is used:
 *
 *   attack_decay_coeff = exp(-exp(-1) / (attack_decay_period_ms * sample_frequency * 0.001));
 *
@@ -2161,7 +2161,7 @@ SLData_t SDS_OnePoleCutOffFrequencyToFilterCoeff (
 * Description:
 * Convert the cut-off frequency to a one pole high pass filter
 * coefficient that decays to -3 dB in the specified time
-* period. The following equation is used :
+* period. The following equation is used:
 *
 *   attack_decay_coeff = exp(-exp(-1) / (attack_decay_period_ms * sample_frequency * 0.001));
 *
@@ -2579,7 +2579,7 @@ void SIGLIB_FUNC_DECL SDA_TranslateSPlaneCutOffFrequency (
 *   This function shifts the cut-off frequency of a
 *   low pass IIR filter from Fc1 to Fc2.
 *
-* Reference :
+* Reference:
 *   Oppenheim and Schafer, Discrete Time Signal Processing
 *   pp 434
 *
@@ -2687,7 +2687,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_IirLpLpShift (
 *   This function converts a low pass filter to a high
 *   pass and shifts the cut-off frequency from Fc1 to Fc2.
 *
-* Reference :
+* Reference:
 *   Oppenheim and Schafer, Discrete Time Signal Processing
 *   pp 434
 *
@@ -2820,7 +2820,7 @@ void SIGLIB_FUNC_DECL SIF_Iir2PoleLpf (
 * Description:
 *   Apply cascaded direct form II IIR 2 pole filter to
 *   the data.
-*   Coefficient order : b(0)0, b(1)0, b(2)0, a(1)0, a(2)0, b(0)1, b(1)1, ....
+*   Coefficient order: b(0)0, b(1)0, b(2)0, a(1)0, a(2)0, b(0)1, b(1)1, ....
 *
 ********************************************************/
 
@@ -2855,7 +2855,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Iir2Pole (
 * Description:
 *   Apply cascaded direct form II IIR 2 pole filter to
 *   the data array
-*   Coefficient order : b(0)0, b(1)0, b(2)0, a(1)0, a(2)0, b(0)1, b(1)1, ....
+*   Coefficient order: b(0)0, b(1)0, b(2)0, a(1)0, a(2)0, b(0)1, b(1)1, ....
 *
 ********************************************************/
 
@@ -2898,7 +2898,7 @@ void SIGLIB_FUNC_DECL SDA_Iir2Pole (
 *
 * Description:
 *   Negate the feedback (a(n)) coefficients.
-*   Coefficient order : b(0)0, b(1)0, b(2)0, a(1)0, a(2)0, b(0)1, b(1)1, ....
+*   Coefficient order: b(0)0, b(1)0, b(2)0, a(1)0, a(2)0, b(0)1, b(1)1, ....
 *
 ********************************************************/
 

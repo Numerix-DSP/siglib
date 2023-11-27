@@ -24,9 +24,9 @@ DFPlus, and SigLib are trademarks of Delta Numerix all other
 trademarks acknowledged.
 
 
-For additional information, please contact :
+For additional information, please contact:
 
 Email: support@numerix-dsp.com
-WWW  : https:\\www.numerix-dsp.com
+WWW:   https:\\www.numerix-dsp.com
 
 Copyright (C) 2017 Delta Numerix

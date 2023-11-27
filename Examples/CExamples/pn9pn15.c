@@ -58,7 +58,7 @@ int main (
                                                       &RxShiftRegister);  // Shift register
   }
   RxString[70] = 0;                                                 // Terminate string for printf
-  printf ("Received string (PN9) :%s\n", RxString);
+  printf ("Received string (PN9):%s\n", RxString);
 
   TxShiftRegister = 0;                                              // Clear shift registers
   RxShiftRegister = 0;
@@ -69,7 +69,7 @@ int main (
                                                        &RxShiftRegister); // Shift register
   }
   RxString[70] = 0;                                                 // Terminate string for printf
-  printf ("Received string (PN15) :%s\n", RxString);
+  printf ("Received string (PN15):%s\n", RxString);
 #endif
 
   exit (0);

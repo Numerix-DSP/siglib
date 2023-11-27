@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 13/09/1992
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : SigLib DSP library adaptive filter routines.
+Description: SigLib DSP library adaptive filter routines.
 
 
 ****************************************************************************/
@@ -147,8 +147,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Lms (
 * Description:
 *   Update filter taps according to the LMS
 *   algorithm.
-*
-*   configuration :
+**   configuration:
 *
 *    d(n) --------------------------|
 *                                   |+
@@ -157,7 +156,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Lms (
 *    x(n) ---------| AF |-----------|--------> y(n)
 *                  ------
 *
-*    Algorithm :
+*    Algorithm:
 *          N-1
 *          __
 *   y(n) = \  w(k)*x(n-k)
@@ -222,7 +221,7 @@ void SIGLIB_FUNC_DECL SDA_LmsUpdate (
 *   Update filter taps according to the leaky LMS
 *   algorithm.
 *
-*   configuration :
+*   configuration:
 *
 *    d(n) --------------------------|
 *                                   |+
@@ -231,7 +230,7 @@ void SIGLIB_FUNC_DECL SDA_LmsUpdate (
 *    x(n) ---------| AF |-----------|--------> y(n)
 *                  ------
 *
-*    Algorithm :
+*    Algorithm:
 *          N-1
 *          __
 *   y(n) = \  w(k)*x(n-k)
@@ -298,7 +297,7 @@ void SIGLIB_FUNC_DECL SDA_LeakyLmsUpdate (
 *   Update filter taps according to the normalized LMS
 *   algorithm.
 *
-*   configuration :
+*   configuration:
 *
 *    d(n) --------------------------|
 *                                   |+
@@ -307,7 +306,7 @@ void SIGLIB_FUNC_DECL SDA_LeakyLmsUpdate (
 *    x(n) ----| AGC|----| AF |------|--------> y(n)
 *             ------    ------
 *
-*    Algorithm :
+*    Algorithm:
 *          N-1
 *          __
 *   y(n) = \  w(k)*x(n-k)
@@ -378,7 +377,7 @@ void SIGLIB_FUNC_DECL SDA_NormalizedLmsUpdate (
 *   Update filter taps according to the sign error LMS
 *   algorithm.
 *
-*   configuration :
+*   configuration:
 *
 *    d(n) --------------------------|
 *                                   |+
@@ -387,7 +386,7 @@ void SIGLIB_FUNC_DECL SDA_NormalizedLmsUpdate (
 *    x(n) ---------| AF |-----------|--------> y(n)
 *                  ------
 *
-*    Algorithm :
+*    Algorithm:
 *          N-1
 *          __
 *   y(n) = \  w(k)*x(n-k)
@@ -454,7 +453,7 @@ void SIGLIB_FUNC_DECL SDA_SignErrorLmsUpdate (
 *   Update filter taps according to the sign data LMS
 *   algorithm.
 *
-*   configuration :
+*   configuration:
 *
 *    d(n) --------------------------|
 *                                   |+
@@ -463,7 +462,7 @@ void SIGLIB_FUNC_DECL SDA_SignErrorLmsUpdate (
 *    x(n) ---------| AF |-----------|--------> y(n)
 *                  ------
 *
-*    Algorithm :
+*    Algorithm:
 *          N-1
 *          __
 *   y(n) = \  w(k)*x(n-k)
@@ -533,7 +532,7 @@ void SIGLIB_FUNC_DECL SDA_SignDataLmsUpdate (
 *   Update filter taps according to the sign sign LMS
 *   algorithm.
 *
-*   configuration :
+*   configuration:
 *
 *    d(n) --------------------------|
 *                                   |+
@@ -542,7 +541,7 @@ void SIGLIB_FUNC_DECL SDA_SignDataLmsUpdate (
 *    x(n) ---------| AF |-----------|--------> y(n)
 *                  ------
 *
-*    Algorithm :
+*    Algorithm:
 *          N-1
 *          __
 *   y(n) = \  w(k)*x(n-k)

@@ -1,10 +1,10 @@
 File for generating DTMF tones
 
-Format : Tone, Period, Magnitude
+Format: Tone, Period, Magnitude
 
-Tone : 0-9, A-D, *, #, S = silence
-Period : ms - max = 500 ms
-Magnitude : dBm
+Tone: 0-9, A-D, *, #, S = silence
+Period: ms - max = 500 ms
+Magnitude: dBm
 
 [START]
 S, 150, 0

@@ -38,9 +38,9 @@ mainFrame      *AppMainFrame = (mainFrame *) NULL;
 IMPLEMENT_APP (MyApp)
 
 /*
-    Function Name : main
-    Description : Top level function
-    Notes :
+    Function Name: main
+    Description: Top level function
+    Notes:
 */
 // `Main program' equivalent: the program execution "starts" here
 bool MyApp::OnInit (

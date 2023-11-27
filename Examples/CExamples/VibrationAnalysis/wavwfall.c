@@ -67,7 +67,7 @@ int main (
            FFT_LENGTH);                                             // FFT length
 
   if (argc != 2) {
-    printf ("\nUsage error  :\nwavwfall filename (no extension)\n\n");
+    printf ("\nUsage error:\nwavwfall filename (no extension)\n\n");
     exit (-1);                                                      // Exit - usage error
   }
 

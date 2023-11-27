@@ -119,7 +119,7 @@ int main (
 //SUF_ClearDebugfprintf();
 
   if (argc != 5) {
-    printf ("\nUsage error  :\norder SampleRate D/L T/S filename\n");
+    printf ("\nUsage:\norder SampleRate D/L T/S filename\n");
     printf ("    D/L indicates dB or linear scaling\n");
     printf ("    T/S indicates time or total speed on x-axis\n\n");
     exit (-1);                                                      // Exit - usage error
@@ -136,7 +136,7 @@ int main (
     LogMagnitudeFlag = SIGLIB_FALSE;
   }
   else {
-    printf ("Error : Scaling option should be D or L for dB or linear\n");
+    printf ("Error: Scaling option should be D or L for dB or linear\n");
     exit (-1);
   }
 
@@ -147,7 +147,7 @@ int main (
     XAxisTimeFlag = SIGLIB_FALSE;
   }
   else {
-    printf ("Error : X-Axis option should be T or S for time or speed\n");
+    printf ("Error: X-Axis option should be T or S for time or speed\n");
     exit (-1);
   }
 

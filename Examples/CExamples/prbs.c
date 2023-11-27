@@ -26,7 +26,7 @@ int main (
                                               &RxShiftRegister);    // Shift register
   }
   RxString[70] = 0;                                                 // Terminate string for printf
-  printf ("Received string (14_17) :%s\n", RxString);
+  printf ("Received string (14_17):%s\n", RxString);
 
 
   TxShiftRegister = 0;                                              // Clear shift registers
@@ -46,7 +46,7 @@ int main (
                                                            &RxBitInversionFlag);  // Bit inversion flag
   }
   RxString[70] = 0;                                                 // Terminate string for printf
-  printf ("Received string (14_17 + inversion) :%s\n", RxString);
+  printf ("Received string (14_17 + inversion):%s\n", RxString);
 
 
   TxShiftRegister = 0;                                              // Clear shift registers
@@ -58,7 +58,7 @@ int main (
                                               &RxShiftRegister);    // Shift register
   }
   RxString[70] = 0;                                                 // Terminate string for printf
-  printf ("Received string (18_23) :%s\n", RxString);
+  printf ("Received string (18_23):%s\n", RxString);
 
 
   TxShiftRegister = 0;                                              // Clear shift registers
@@ -70,7 +70,7 @@ int main (
                                              &RxShiftRegister);     // Shift register
   }
   RxString[70] = 0;                                                 // Terminate string for printf
-  printf ("Received string (5_23) :%s\n", RxString);
+  printf ("Received string (5_23):%s\n", RxString);
 
   exit (0);
 }

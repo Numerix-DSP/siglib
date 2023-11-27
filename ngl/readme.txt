@@ -42,10 +42,10 @@ HISTORY NOTES
 
 INSTALLATION
 
-NGL requires the following installation process :
+NGL requires the following installation process:
 
 Create a directory on the hard disk e.g. C:\NGL
-from this directory run :
+from this directory run:
 > a:pkunzip -d ngl.zip
 
 This will install DSPGraph on your hard disk.
@@ -57,7 +57,7 @@ Under Windows you can run the mrebuild.bat file to rebuild the example program
 and the library with the Free Microsoft Visual Studio Express tools.
 
 Under Linux, run the following commands to build the example program and the
-library :
+library:
 
 bakefile -f gnu project_gnu.bkl
 make -f GNUmakefile
@@ -87,10 +87,10 @@ Digital Filter Plus, DFPlus and SigLib are trademarks of Delta Numerix all other
 trademarks acknowledged.
 
 
-For additional information, please contact :
+For additional information, please contact:
 
 Delta Numerix,
-Email : support@numerix-dsp.com
-WWW : http:\\www.numerix-dsp.com
+Email: support@numerix-dsp.com
+WWW:   http:\\www.numerix-dsp.com
 
 (C) Copyright 2002-2020 Delta Numerix All rights reserved.

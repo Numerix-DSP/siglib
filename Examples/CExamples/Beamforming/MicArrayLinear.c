@@ -7,7 +7,7 @@
 #include <siglib.h>
 #include <gnuplot_c.h>
 
-#define NUM_ANGLES          181                                     // Number of angles analyzed : -90 to +90 degrees
+#define NUM_ANGLES          181                                     // Number of angles analyzed: -90 to +90 degrees
 #define START_ANGLE         -90.                                    // Start angle for calculating beam pattern
 #define END_ANGLE           90.                                     // End angle for calculating beam pattern
 #define NUM_MICROPHONES     4                                       // Number of microphones
@@ -28,7 +28,7 @@ int main (
   h_GPC_Plot     *hPolarPlot;                                       // Plot object
 
   char            title[80];
-  sprintf (title, "Beam Pattern : Mic Spacing %1.3f (meters)", MICROPHONE_SPACING);
+  sprintf (title, "Beam Pattern: Mic Spacing %1.3f (meters)", MICROPHONE_SPACING);
 
   hPolarPlot =                                                      // Initialize plot
     gpc_init_polar (title,                                          // Plot title

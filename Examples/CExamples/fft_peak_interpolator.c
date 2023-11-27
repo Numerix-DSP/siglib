@@ -31,7 +31,7 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot objects
 
-  SLData_t        centerFreq;
+  SLData_t        centreFreq;
 
   SLData_t        magnErrorPercent[NUM_FREQS], freqErrorPercent[NUM_FREQS];
 
@@ -73,14 +73,14 @@ int main (
            SIGLIB_BIT_REV_STANDARD,                                 // Bit reverse mode flag / Pointer to bit reverse address table
            FFT_LENGTH);                                             // FFT length
 
-  centerFreq = FREQ_START;
-  for (int i = 0; i < NUM_FREQS; i++, centerFreq += FREQ_INC) {
+  centreFreq = FREQ_START;
+  for (int i = 0; i < NUM_FREQS; i++, centreFreq += FREQ_INC) {
     SinePhase = SIGLIB_ZERO;
     SDA_SignalGenerate (pRealData,                                  // Pointer to destination array
                         SIGLIB_SINE_WAVE,                           // Signal type - Sine wave
                         SOURCE_MAGN,                                // Signal peak level
                         SIGLIB_FILL,                                // Fill (overwrite) or add to existing array contents
-                        centerFreq,                                 // Signal frequency
+                        centreFreq,                                 // Signal frequency
                         SIGLIB_ZERO,                                // D.C. Offset
                         SIGLIB_ZERO,                                // Unused
                         SIGLIB_ZERO,                                // Signal end value - Unused
@@ -121,7 +121,7 @@ int main (
     interpolatedFreq /= FFT_LENGTH;
 
     magnErrorPercent[i] = SIGLIB_ONE_HUNDRED * ((interpolatedMagn - SOURCE_MAGN) / SOURCE_MAGN);  // Save results to plot later
-    freqErrorPercent[i] = SIGLIB_ONE_HUNDRED * ((interpolatedFreq - centerFreq) / centerFreq);
+    freqErrorPercent[i] = SIGLIB_ONE_HUNDRED * ((interpolatedFreq - centreFreq) / centreFreq);
   }
 
   gpc_plot_2d (h2DPlot,                                             // Graph handle

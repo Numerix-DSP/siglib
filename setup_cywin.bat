@@ -1,17 +1,17 @@
 @echo off
 
 rem Batch file for configuring the cygwin environment for use with SigLib
-rem How to list installed cygwin packages : cygcheck -c
+rem How to list installed cygwin packages: cygcheck -c
 
 echo Instructions For Configuring The Cygwin Environment For Use With SigLib
 echo =======================================================================
 echo .
-echo Downloaded and execute the Cygwin setup file frrom : https://cygwin.com.
+echo Downloaded and execute the Cygwin setup file frrom: https://cygwin.com.
 echo Ensure that you have correctly configured the CYGWIN_ROOT_TEMP environment variable in this batch file - USES WINDOWS DIRECTORY STRUCTURE NOTATION
 echo .
-echo Note : The SigLib graphical examples use gnuplot, which can be downloaded from here : http://www.gnuplot.info/
-echo        It is possible to download and install gnuplot in cygwin however this might not be the latest version
-echo        We recommend downloading and using the native Windows version
+echo Note: The SigLib graphical examples use gnuplot, which can be downloaded from here: http://www.gnuplot.info/
+echo       It is possible to download and install gnuplot in cygwin however this might not be the latest version
+echo       We recommend downloading and using the native Windows version
 
 rem Modify these environment variables
 

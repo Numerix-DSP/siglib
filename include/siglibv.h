@@ -8,7 +8,7 @@ Siglib Library Version  : 10.53         |
 Compiler  : Independent                 | Start Date    : 13/09/1992
 Options   :                             | Latest Update : 06/06/2023
 ---------------------------------------------------------------------------
-Support for SigLib is available via EMail : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -34,9 +34,9 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : Header file for SigLib DSP library
+Description: Header file for SigLib DSP library
 
-Update history :
+Update history:
         See history.txt for more details.
 
 ****************************************************************************/ 
@@ -1024,7 +1024,7 @@ double _stdcall SUF_SiglibVersion (
   long);                                                            // Filter length
 long _stdcall  SIF_FirBandPassFilter (
    double *SIGLIB_OUTPUT_PTR_DECL,                                 // Filter coeffs array
-  double,                                                           // Filter center frequency
+  double,                                                           // Filter centre frequency
   double,                                                           // Filter bandwidth
   int SLWindow_t,                                                   // Window type
   long);                                                            // Filter length
@@ -1040,7 +1040,7 @@ double _stdcall SUF_SiglibVersion (
   long);                                                            // Filter length
 void _stdcall  SIF_FirBandPassFilterWindow (
    double *SIGLIB_OUTPUT_PTR_DECL,                                 // Filter coeffs array
-  double,                                                           // Filter center frequency
+  double,                                                           // Filter centre frequency
   double,                                                           // Filter bandwidth
   double *SIGLIB_INPUT_PTR_DECL,                                    // Pointer to window coefficients
   long);                                                            // Filter length
@@ -1146,6 +1146,15 @@ double _stdcall SUF_SiglibVersion (
           void _stdcall SIF_FirZeroNotchFilter (
    double *SIGLIB_OUTPUT_PTR_DECL,                                 // Coefficients array
   double);                                                          // Notch centre frequency normalized to Fs = 1 Hz
+void _stdcall  SDA_FirLpBpShift (
+   double *SIGLIB_INPUT_PTR_DECL,                                  // Source coefficients
+  double *SIGLIB_OUTPUT_PTR_DECL,                                   // Destination coefficients
+  double,                                                           // New centre frequency
+  long);                                                            // Filter length
+void _stdcall  SDA_FirLpHpShift (
+   double *SIGLIB_INPUT_PTR_DECL,                                  // Source coefficients
+  double *SIGLIB_OUTPUT_PTR_DECL,                                   // Destination coefficients
+  long);                                                            // Filter length
 
 // Filtering functions - iirfilt.c
 void _stdcall  SIF_Iir (
@@ -1445,20 +1454,20 @@ double _stdcall SUF_SiglibVersion (
   double *,                                                         // Pointer to state variable
   double,                                                           // Leak value
   double);                                                          // Peak value
-void _stdcall  SIF_HilbertTransformer (
+void _stdcall  SIF_HilbertTransformerFirFilter (
    double *SIGLIB_OUTPUT_PTR_DECL,                                 // Pointer to FIR taps
   long);                                                            // Filter length
-double _stdcall SIF_GoertzelFilter (
+double _stdcall SIF_GoertzelIirFilter (
    double *SIGLIB_OUTPUT_PTR_DECL,                                 // Pointer to state array
   double,                                                           // Filter frequency
   long);                                                            // Filter length
-void _stdcall  SDA_GoertzelFilter (
+void _stdcall  SDA_GoertzelIirFilter (
    double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to input data
   double *SIGLIB_OUTPUT_PTR_DECL,                                   // Pointer to destination array
   double *SIGLIB_INOUT_PTR_DECL,                                    // Pointer to state array
   double,                                                           // Filter coefficient
   long);                                                            // Array length
-double _stdcall SDS_GoertzelFilter (
+double _stdcall SDS_GoertzelIirFilter (
    double,                                                         // Source value
   double *SIGLIB_INOUT_PTR_DECL,                                    // Pointer to state array
   double);                                                          // Filter coefficient
@@ -1469,20 +1478,20 @@ double _stdcall SUF_SiglibVersion (
    double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to input data
   double,                                                           // Filter coefficient
   long);                                                            // Array length
-             void _stdcall SIF_GaussianFilter (
+             void _stdcall SIF_GaussianFirFilter (
    double *SIGLIB_OUTPUT_PTR_DECL,                                 // Pointer to filter coefficients
   double,                                                           // Standard deviation of the distribution
   long);                                                            // Filter length
-void _stdcall  SIF_GaussianFilter2 (
+void _stdcall  SIF_GaussianFirFilter2 (
    double *SIGLIB_OUTPUT_PTR_DECL,                                 // Pointer to filter coefficients
   double,                                                           // Filter bandwidth
   long);                                                            // Filter length
-void _stdcall  SIF_RaisedCosineFilter (
+void _stdcall  SIF_RaisedCosineFirFilter (
    double *SIGLIB_OUTPUT_PTR_DECL,                                 // Pointer to filter coefficients
   double,                                                           // Symbol period
   double,                                                           // Alpha
   long);                                                            // Filter length
-void _stdcall  SIF_RootRaisedCosineFilter (
+void _stdcall  SIF_RootRaisedCosineFirFilter (
    double *SIGLIB_OUTPUT_PTR_DECL,                                 // Pointer to filter coefficients
   double,                                                           // Symbol period
   double,                                                           // Alpha
@@ -1499,12 +1508,12 @@ double _stdcall SUF_SiglibVersion (
   double *SIGLIB_INPUT_PTR_DECL,                                    // Pointer to denominator coefficients
   long,                                                             // Number of numerator coefficients
   long);                                                            // Number of denominator coefficients
-long _stdcall  SUF_EstimateBPFilterLength (
+long _stdcall  SUF_EstimateBPFirFilterLength (
    double,                                                         // Sample rate (Hz)
   double,                                                           // Centre frequency
   long,                                                             // Minimum filter length
   long);                                                            // Maximum filter length
-void _stdcall  SUF_EstimateBPFilterError (
+void _stdcall  SUF_EstimateBPFirFilterError (
    double,                                                         // Sample rate (Hz)
   double,                                                           // Centre frequency
   long,                                                             // Minimum filter length
@@ -2697,7 +2706,7 @@ double _stdcall SUF_SiglibVersion (
   long *,                                                           // Pointer to ELG synchronization delay index
   long);                                                            // ELG output synchronization delay length
  
-#line 3651 "siglib.h"
+#line 3662 "siglib.h"
 long _stdcall   SDS_CostasQamDemodulateDebug (
    double,                                                         // Source data sample
   double *,                                                         // Pointer to real destination symbol point
@@ -2827,7 +2836,7 @@ long _stdcall   SDS_CostasQamDemodulateDebug (
   double *,                                                         // Pointer to debug real filter output
   double *,                                                         // Pointer to debug imaginary filter output
   double *);                                                        // Pointer to debug ELG trigger output
-#line 3783 "siglib.h"
+#line 3794 "siglib.h"
 void _stdcall  SIF_QpskModulate (
    double *SIGLIB_OUTPUT_PTR_DECL,                                 // Carrier table pointer
   double,                                                           // Carrier phase increment per sample (radians / 2Ï€)
@@ -5814,6 +5823,6 @@ void _stdcall   SDA_Multiplex (
 // Machine Learning functions - machinelearning.c
                                                                                                                                                                                                              
 // Deprecated functionality - these may be removed in a later version
-                    
+                               
 // End of SigLib DSP function section
-#line 7844 "siglib.h"
+#line 7866 "siglib.h"

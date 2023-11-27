@@ -1,9 +1,9 @@
 ========================================================================
-       CONSOLE APPLICATION : DTMFWav
+       CONSOLE APPLICATION: DTMFWav
 ========================================================================
 
 
-AppWizard has created this DTMFWav application for you.  
+AppWizard has created this DTMFWav application for you.
 
 This file contains a summary of what you will find in each of the files that
 make up your DTMFWav application.

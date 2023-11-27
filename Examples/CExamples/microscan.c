@@ -20,7 +20,7 @@
 #define CARRIER_FREQ            0.12
 #define MOD_INDEX               0.06
 #define FIR_FILTER_LENGTH       127
-#define FIR_FILTER_GROUP_DELAY  (FIR_FILTER_LENGTH >> 1)            // Group delay through BP filter - Note : C array indexing
+#define FIR_FILTER_GROUP_DELAY  (FIR_FILTER_LENGTH >> 1)            // Group delay through BP filter -Note: C array indexing
 
 #define C_START_FREQ            SIGLIB_QUARTER
 #define C_END_FREQ              SIGLIB_ZERO

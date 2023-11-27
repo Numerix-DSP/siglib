@@ -105,7 +105,7 @@ int main (
                                 DTMF_DETECT_LENGTH);                // Dataset length
 
       Key = SUF_KeyCodeToAscii (KeyCode);
-      printf ("\nDTMF signal detected : %c\n", (char) Key);
+      printf ("\nDTMF signal detected: %c\n", (char) Key);
 
 #if VIEW_TIME_DOMAIN
       gpc_plot_2d (h2DPlot,                                         // Graph handle

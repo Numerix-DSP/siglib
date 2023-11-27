@@ -5,15 +5,15 @@ File Name  : FixedPointFFT.C            | Author  : JOHN EDWARDS
 Compiler :   Various                    | Start Date    : 01/11/05
 Copyright (c) 2023 Delta Numerix        | Latest Update : 05/11/05
 ---------------------------------------------------------------------------
-Description  : SigLib fixed point FFT test program.
+Description: SigLib fixed point FFT test program.
 
 DELETION OF ANY INFORMATION IN THIS HEADER IS IN VIOLATION OF YOUR LICENSE.
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 
-Notes :
+Notes:
 This program includes two fixed point implementations of the SigLib FFT
-functionality :
+functionality:
 SDA_Rfft16 with corresponding initialisation function SIF_Fft16
 This function takes 16 bit input data and 16 bit coefficients to
 generate a 16 bit result. The internal accumulators are 32 bits long.
@@ -30,12 +30,12 @@ accumulators are 32 bits long.
 Please note that to ensure that the scaling through this FFT is 1.0
 rather than N (see below).
 
-Scaling :
+Scaling:
 If an N point DFT is performed on a cosine wave with magnitude = A an
 integer number of cycles in the input array then the result will give
 two peaks in the real result array of magnitude A/2 multiplied by N.
 For example, if a 1024 point DFT is performed on a cosine wave with
-magnitude 4096 then the result will have two peaks of magnitude :
+magnitude 4096 then the result will have two peaks of magnitude:
 4096 * (1024 / 2) = 2097152 in the real domain.
 
 ********************************************** End Of Header Information */
@@ -193,10 +193,10 @@ int main (
 #if DEBUG
 #if ENABLE_WINDOWING
   for (SLArrayIndex_t i = 0; i < FFT_SIZE; i++)
-    SUF_Debugfprintf ("Window : %d;  = %d\n", i, pWindowCoeffs[i]);
+    SUF_Debugfprintf ("Window: %d;  = %d\n", i, pWindowCoeffs[i]);
 #endif
   for (SLArrayIndex_t i = 0; i < FFT_SIZE; i++)
-    SUF_Debugfprintf ("Source : %d; Real = %d, Imag = %d\n", i, pRealData[i], 0);
+    SUF_Debugfprintf ("Source: %d; Real = %d, Imag = %d\n", i, pRealData[i], 0);
 #endif
 
   SDA_Rfft16 (pRealData, pImagData, pFFTCoeffs, FFT_SIZE, LOG_FFT_SIZE);
@@ -204,7 +204,7 @@ int main (
 #if DEBUG
   SUF_Debugfprintf ("FFT Results\n");
   for (SLArrayIndex_t i = 0; i < FFT_SIZE; i++)
-    SUF_Debugfprintf ("Index : %d; Real = %d, Imag = %d\n", i, pRealData[i], pImagData[i]);
+    SUF_Debugfprintf ("Index: %d; Real = %d, Imag = %d\n", i, pRealData[i], pImagData[i]);
 #endif
 
   SUF_Fix16ToSigLibData (pRealData, pFloatDisplayData, FFT_SIZE);
@@ -227,10 +227,10 @@ int main (
 #if DEBUG
 #if ENABLE_WINDOWING
   for (SLArrayIndex_t i = 0; i < FFT_SIZE; i++)
-    SUF_Debugfprintf ("Window : %d;  = %d\n", i, pWindowCoeffs[i]);
+    SUF_Debugfprintf ("Window: %d;  = %d\n", i, pWindowCoeffs[i]);
 #endif
   for (SLArrayIndex_t i = 0; i < FFT_SIZE; i++)
-    SUF_Debugfprintf ("Source : %d; Real = %d, Imag = %d\n", i, pRealData[i], 0);
+    SUF_Debugfprintf ("Source: %d; Real = %d, Imag = %d\n", i, pRealData[i], 0);
 #endif
 
   SDA_Rfft32 (pRealData, pImagData, pFFTCoeffs, FFT_SIZE, LOG_FFT_SIZE);
@@ -238,7 +238,7 @@ int main (
 #if DEBUG
   SUF_Debugfprintf ("FFT Results\n");
   for (SLArrayIndex_t i = 0; i < FFT_SIZE; i++)
-    SUF_Debugfprintf ("Index : %d; Real = %d, Imag = %d\n", i, pRealData[i], pImagData[i]);
+    SUF_Debugfprintf ("Index: %d; Real = %d, Imag = %d\n", i, pRealData[i], pImagData[i]);
 #endif
 
   SUF_Fix32ToSigLibData (pRealData, pFloatDisplayData, FFT_SIZE);
@@ -569,7 +569,7 @@ void SIGLIB_FUNC_DECL SDA_Rfft32 (
 * Description:
 *   Initialise the window data.
 *
-* Reference :
+* Reference:
 *   Discrete Time Signal Processing - Oppenheim and Schafer
 *   Kaiser Window - http://spsc.inw.tugraz.at/
 *       DSP Laboratory handout - dft1.pdf
@@ -673,7 +673,7 @@ void SIGLIB_FUNC_DECL SDA_Window16 (
 * Description:
 *   Initialise the window data.
 *
-* Reference :
+* Reference:
 *   Discrete Time Signal Processing - Oppenheim and Schafer
 *   Kaiser Window - http://spsc.inw.tugraz.at/
 *       DSP Laboratory handout - dft1.pdf
@@ -907,6 +907,6 @@ void SIGLIB_FUNC_DECL SUF_SigLibDataToFix32 (
 void ExitOnError (
   char *pFunctionNameString)
 {
-  printf ("Failure at : %s()\n", pFunctionNameString);
+  printf ("Failure at: %s()\n", pFunctionNameString);
   exit (-1);
 }

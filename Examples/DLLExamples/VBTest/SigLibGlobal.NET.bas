@@ -8,7 +8,7 @@ Option Explicit
 'Compiler       : Visual Basic V6.00    | Start Date    : 16/11/95
 'Options        :                       | Latest Update : 07/01/18
 '-------------------------------------------------------------------------
-'Support for SigLib is available via EMail : support@numerix-dsp.com
+'Support for SigLib is available via Email: support@numerix-dsp.com
 '
 'This file may be modified, in any way, providing that this header remains
 'within the file and the only additions are made to this header.
@@ -19,7 +19,7 @@ Option Explicit
 '
 'Copyright (C) 1992 to 2018 Delta Numerix
 '-------------------------------------------------------------------------
-'Description : Visual Basic Global definitions file for SigLib DSP DLL
+'Description: Visual Basic Global definitions file for SigLib DSP DLL
 '
 '
 '*************************************************************************
@@ -1223,20 +1223,20 @@ Declare Function SDS_LeakyIntegrator2 Lib "SIGLIB.DLL" (ByRef fpBuffer As Double
         ByVal fData As Double, _
         ByVal iData As Double) As Double
 
-Declare Sub SIF_HilbertTransformer Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
+Declare Sub SIF_HilbertTransformerFirFilter Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByVal iData As Integer)
 
-Declare Function SIF_GoertzelFilter Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
+Declare Function SIF_GoertzelIirFilter Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByVal iData As Integer) As Double
 
-Declare Sub SDA_GoertzelFilter Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
+Declare Sub SDA_GoertzelIirFilter Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByVal fData As Double, _
         ByVal iData As Integer)
 
-Declare Function SDS_GoertzelFilter Lib "SIGLIB.DLL" (ByVal fData As Double, _
+Declare Function SDS_GoertzelIirFilter Lib "SIGLIB.DLL" (ByVal fData As Double, _
         ByRef fpBuffer As Double, _
         ByVal fData As Double) As Double
 
@@ -1259,20 +1259,20 @@ Declare Function SDA_GoertzelDetect Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, 
 
 
 
-Declare Sub SIF_GaussianFilter Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
+Declare Sub SIF_GaussianFirFilter Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByVal fData As Double, _
         ByVal iData As Integer)
 
-Declare Sub SIF_GaussianFilter_2 Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
+Declare Sub SIF_GaussianFirFilter_2 Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByVal fData As Double, _
         ByVal iData As Integer)
 
-Declare Sub SIF_RaisedCosineFilter Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
+Declare Sub SIF_RaisedCosineFirFilter Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByVal fData As Double, _
         ByVal fData As Double, _
         ByVal iData As Integer)
 
-Declare Sub SIF_RootRaisedCosineFilter Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
+Declare Sub SIF_RootRaisedCosineFirFilter Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByVal fData As Double, _
         ByVal fData As Double, _
         ByVal iData As Integer)
@@ -1289,12 +1289,12 @@ Declare Function SDS_ZTransformDB (ByRef fpBuffer As Double, _
 		ByVal iData As Integer, _
 		ByVal iData As Integer) As Double
 
-Declare Function SUF_EstimateBPFilterLength (ByVal fData As Double, _
+Declare Function SUF_EstimateBPFirFilterLength (ByVal fData As Double, _
 		ByVal fData As Double, _
 		ByVal iData As Integer, _
 		ByVal iData As Integer) As Integer
 
-Declare Sub SUF_EstimateBPFilterError (ByVal fData As Double, _
+Declare Sub SUF_EstimateBPFirFilterError (ByVal fData As Double, _
 		ByVal fData As Double, _
 		ByVal iData As Integer, _
 		ByVal iData As Integer, _

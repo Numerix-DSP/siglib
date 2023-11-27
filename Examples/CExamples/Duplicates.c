@@ -26,13 +26,13 @@ int main (
   SLArrayIndex_t  NumDuplicates;
 
   printf ("\n\nOriginal Data Set #1\n");
-  printf ("Number of entries = %d :\n", SRC_ARRAY_LENGTH_1);
+  printf ("Number of entries = %d:\n", SRC_ARRAY_LENGTH_1);
   for (SLArrayIndex_t i = 0; i < SRC_ARRAY_LENGTH_1; i++) {
     printf ("%lf, ", SrcArray1[i]);
   }
 
   printf ("\n\nOriginal Data Set #2\n");
-  printf ("Number of entries = %d :\n", SRC_ARRAY_LENGTH_2);
+  printf ("Number of entries = %d:\n", SRC_ARRAY_LENGTH_2);
   for (SLArrayIndex_t i = 0; i < SRC_ARRAY_LENGTH_2; i++) {
     printf ("%lf, ", SrcArray2[i]);
   }
@@ -42,7 +42,7 @@ int main (
 
   printf ("Remove duplicates from original data set #1\n");
 
-  printf ("Number of entries = %d :\n", NumDuplicates);
+  printf ("Number of entries = %d:\n", NumDuplicates);
   for (SLArrayIndex_t i = 0; i < NumDuplicates; i++) {
     printf ("%lf, ", DstArray[i]);
   }
@@ -52,7 +52,7 @@ int main (
   NumDuplicates = SDA_FindAllDuplicates (SrcArray1, SrcArray2, DstArray, SRC_ARRAY_LENGTH_1, SRC_ARRAY_LENGTH_2);
 
   printf ("Find all duplicates between arrays\n");
-  printf ("Number of duplicates = %d :\n", NumDuplicates);
+  printf ("Number of duplicates = %d:\n", NumDuplicates);
 
   for (SLArrayIndex_t i = 0; i < NumDuplicates; i++) {
     printf ("%lf, ", DstArray[i]);
@@ -62,7 +62,7 @@ int main (
   NumDuplicates = SDA_FindFirstDuplicates (SrcArray1, SrcArray2, DstArray, SRC_ARRAY_LENGTH_1, SRC_ARRAY_LENGTH_2);
 
   printf ("Find first duplicates between arrays\n");
-  printf ("Number of duplicates = %d :\n", NumDuplicates);
+  printf ("Number of duplicates = %d:\n", NumDuplicates);
 
   for (SLArrayIndex_t i = 0; i < NumDuplicates; i++) {
     printf ("%lf, ", DstArray[i]);
@@ -72,7 +72,7 @@ int main (
   NumDuplicates = SDA_FindSortAllDuplicates (SrcArray1, SrcArray2, DstArray, SRC_ARRAY_LENGTH_1, SRC_ARRAY_LENGTH_2);
 
   printf ("Find and sort all duplicates between arrays\n");
-  printf ("Number of duplicates = %d :\n", NumDuplicates);
+  printf ("Number of duplicates = %d:\n", NumDuplicates);
 
   for (SLArrayIndex_t i = 0; i < NumDuplicates; i++) {
     printf ("%lf, ", DstArray[i]);
@@ -82,7 +82,7 @@ int main (
   NumDuplicates = SDA_FindSortFirstDuplicates (SrcArray1, SrcArray2, DstArray, SRC_ARRAY_LENGTH_1, SRC_ARRAY_LENGTH_2);
 
   printf ("Find and sort first duplicates between arrays\n");
-  printf ("Number of duplicates = %d :\n", NumDuplicates);
+  printf ("Number of duplicates = %d:\n", NumDuplicates);
 
   for (SLArrayIndex_t i = 0; i < NumDuplicates; i++) {
     printf ("%lf, ", DstArray[i]);

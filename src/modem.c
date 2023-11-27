@@ -6,7 +6,7 @@ Siglib Library Version  : 10.00         |
 Compiler  : Independent                 | Start Date    : 01/02/2006
 Options   :                             | Latest Update : 17/11/2022
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : Modem utility functions for SigLib DSP library.
+Description: Modem utility functions for SigLib DSP library.
 
 
 ****************************************************************************/
@@ -98,7 +98,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_AsyncCharacterLength (
 *
 *   The output is packed into 8 bit bytes, regardless of
 *   the number of data bits in the input byte
-*   This function has been tested with :
+*   This function has been tested with:
 *       Parity = Even, Odd and None
 *       Stop bits = 0, 1 and 2
 *       Data bits per asynchronous word = 7, 8, 9, 10 and 11
@@ -235,7 +235,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_SyncToAsyncConverter (
 *   The parity error flag will return -1 if no parity
 *   errors were detected or the location of the byte, in
 *   the frame, if a parity error was detected
-*   This function has been tested with :
+*   This function has been tested with:
 *       Parity = Even, Odd and None
 *       Stop bits = 0, 1 and 2
 *       Data bits per asynchronous word = 7, 8, 9, 10 and 11
@@ -480,7 +480,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AsyncRemoveStopBits (
 *   A common requirement for Asynch to Synch converters
 *   in a modem is to add or remove a given ratio of the
 *   stop bits to allow for clock rate variations.
-*   Please note : if you remove 1:N stop bits and then
+*   PleaseNote: if you remove 1:N stop bits and then
 *   add 1:(N-1) you will not return to exactly the same
 *   sequence that you started with. This is because the
 *   stop bit add and remove functions work on ratios so

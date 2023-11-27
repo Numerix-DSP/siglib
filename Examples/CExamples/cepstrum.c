@@ -1,10 +1,10 @@
 // SigLib Cepstrum Analysis Example
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
-// The real cepstrum is calculated as follows :
+// The real cepstrum is calculated as follows:
 // FFT (log_magnitude (FFT (data)))
 //
-// The complex cepstrum is calculated as follows :
+// The complex cepstrum is calculated as follows:
 // FFT (complex_log (FFT (data)))
 //
 // where the complex log of [X(z)] = log | X(z) | +  j (angle (X(z)))

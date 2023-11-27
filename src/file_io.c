@@ -6,7 +6,7 @@ Library version : 10.00                 | Modifications :
 Compiler  : Independent                 | Start Date    : 06/12/2020
 Options   :                             | Latest Update : 06/12/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : SigLib DSP library file I/O functions.
+Description: SigLib DSP library file I/O functions.
 
 ****************************************************************************/
 
@@ -1890,12 +1890,12 @@ void SIGLIB_FUNC_DECL SUF_WavDisplayInfo (
   const SLWavFileInfo_s wavInfo)
 {
   SUF_Printf (".WAV File header information:\n");
-  SUF_Printf ("Sample rate       : %ld\n", (long) wavInfo.SampleRate);
-  SUF_Printf ("Number of samples : %ld\n", (long) wavInfo.NumberOfSamples);
+  SUF_Printf ("Sample rate:        %ld\n", (long) wavInfo.SampleRate);
+  SUF_Printf ("Number of samples:  %ld\n", (long) wavInfo.NumberOfSamples);
   SUF_Printf ("Number of channels: %ld\n", (long) wavInfo.NumberOfChannels);
-  SUF_Printf ("Word length       : %ld\n", (long) wavInfo.WordLength);
-  SUF_Printf ("Bytes per sample  : %ld\n", (long) wavInfo.BytesPerSample);
-  SUF_Printf ("Data format       : %ld\n\n", (long) wavInfo.DataFormat);
+  SUF_Printf ("Word length:        %ld\n", (long) wavInfo.WordLength);
+  SUF_Printf ("Bytes per sample:   %ld\n", (long) wavInfo.BytesPerSample);
+  SUF_Printf ("Data format:        %ld\n\n", (long) wavInfo.DataFormat);
 }                                                                   // End of SUF_WavDisplayInfo()
 
 

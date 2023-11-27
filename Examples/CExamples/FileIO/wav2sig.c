@@ -25,7 +25,7 @@ int main (
   char            SigFileName[256];
 
   if (argc != 2) {
-    printf ("Useage : wav2sig filename (no extension)\n");
+    printf ("Useage: wav2sig filename (no extension)\n");
     exit (-1);
   }
 
@@ -35,8 +35,8 @@ int main (
   strcpy (SigFileName, argv[1]);
   strcat (SigFileName, ".sig");
 
-  printf ("Wav filename = %s\n", WavFileName);
-  printf ("Sig filename = %s\n", SigFileName);
+  printf ("Wav filename: %s\n", WavFileName);
+  printf ("Sig filename: %s\n", SigFileName);
 
   p_DataArray = SUF_VectorArrayAllocate (SAMPLE_SIZE);
 
@@ -65,7 +65,7 @@ int main (
     outputSampleCount += inputSampleCount;
   }
 
-  printf ("Total number of samples read = %d\n", outputSampleCount);
+  printf ("Total number of samples read: %d\n", outputSampleCount);
 
   fclose (fpInputFile);
   fclose (fpOutputFile);

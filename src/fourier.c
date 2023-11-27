@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 13/09/1992
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : SigLib DSP library Generic Fourier Transform routines.
+Description: SigLib DSP library Generic Fourier Transform routines.
 
 
 ****************************************************************************/
@@ -326,7 +326,7 @@ void SIGLIB_FUNC_DECL SDA_ZoomFft (
 *   SLArrayIndex_t *SineTablePhase,
 *   SLData_t *pFFTCoeffs,
 *   SLArrayIndex_t *pBitReverseAddressTable,
-*   const SLArrayIndex_t FilterLength,
+*   const SLArrayIndex_t filterLength,
 *   const SLArrayIndex_t SineTableLength,
 *   const SLArrayIndex_t FFTLength)
 *
@@ -349,12 +349,12 @@ void SIGLIB_FUNC_DECL SIF_ZoomFftSimple (
   SLArrayIndex_t * SIGLIB_PTR_DECL SineTablePhase,
   SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
   SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
-  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t filterLength,
   const SLArrayIndex_t SineTableLength,
   const SLArrayIndex_t FFTLength)
 {
   SIF_ComplexShift (pCombFilter1, CombFilter1Sum, pCombFilter2, CombFilter2Sum, CombFilterPhase,
-                    pSineTable, SineTablePhase, FilterLength, SineTableLength);
+                    pSineTable, SineTablePhase, filterLength, SineTableLength);
 
   SIF_Fft (pFFTCoeffs, pBitReverseAddressTable, FFTLength);         // Initialise the FFT sine and cosine tables
 }                                                                   // End of SIF_ZoomFftSimple()
@@ -378,7 +378,7 @@ void SIGLIB_FUNC_DECL SIF_ZoomFftSimple (
 *   const SLData_t *pSineTable,
 *   SLArrayIndex_t *SineTablePhase,
 *   const SLData_t MixFrequency,
-*   const SLArrayIndex_t FilterLength,
+*   const SLArrayIndex_t filterLength,
 *   const SLArrayIndex_t SineTableSize,
 *   const SLArrayIndex_t decimate_ratio,
 *   const SLData_t *pFFTCoeffs,
@@ -426,7 +426,7 @@ void SIGLIB_FUNC_DECL SDA_ZoomFftSimple (
   const SLData_t * SIGLIB_PTR_DECL pSineTable,
   SLArrayIndex_t * SIGLIB_PTR_DECL SineTablePhase,
   const SLData_t MixFrequency,
-  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t filterLength,
   const SLArrayIndex_t SineTableSize,
   const SLArrayIndex_t decimate_ratio,
   const SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
@@ -455,7 +455,7 @@ void SIGLIB_FUNC_DECL SDA_ZoomFftSimple (
 
   SLData_t       *pLocalCombFilter1 = pCombFilter1 + *CombFilterPhase;  // Set up local pointers to comb filter state arrays
   SLData_t       *pLocalCombFilter2 = pCombFilter2 + *CombFilterPhase;
-  SLData_t       *pLocalCombFilter1End = pCombFilter1 + FilterLength;
+  SLData_t       *pLocalCombFilter1End = pCombFilter1 + filterLength;
 
   SLData_t        LocalSum1 = *CombFilter1Sum;
   SLData_t        LocalSum2 = *CombFilter2Sum;

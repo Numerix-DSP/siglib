@@ -68,45 +68,45 @@ int main (
                          SIGLIB_HANNING,                            // Window type
                          FILTER_LENGTH);                            // Filter length
   SIF_FirBandPassFilter (pBPFilterCoeffs,                           // Filter coeffs array
-                         1600. / SAMPLE_RATE_HZ,                    // Filter center frequency
+                         1600. / SAMPLE_RATE_HZ,                    // Filter centre frequency
                          2000. / SAMPLE_RATE_HZ,                    // Filter bandwidth
                          SIGLIB_HANNING,                            // Window type
                          FILTER_LENGTH);                            // Filter length
 //    printf("\nFilter length = %d\n", FILTER_LENGTH);
 //    printf("\npLPFilterCoeffs\n");
-//    SUF_PrintArray (pLPFilterCoeffs,                        // Filter coeffs array
-//                    FILTER_LENGTH);                         // Filter length
-//    printf("\npHPFilterCoeffs\n");
-//    SUF_PrintArray (pHPFilterCoeffs,                        // Filter coeffs array
-//                    FILTER_LENGTH);                         // Filter length
-//    printf("\npBPFilterCoeffs\n");
-//    SUF_PrintArray (pBPFilterCoeffs,                        // Filter coeffs array
-//                    FILTER_LENGTH);                         // Filter length
-//
-//    SIF_FirLowPassFilter (pLPFilterCoeffs,                  // Filter coeffs array
-//                          3000. / SAMPLE_RATE_HZ,              // Filter cut off frequency
-//                          SIGLIB_HANNING,                   // Window type
-//                          FILTER_LENGTH+1);                 // Filter length
-//    SIF_FirHighPassFilter (pHPFilterCoeffs,                 // Filter coeffs array
-//                           1000. / SAMPLE_RATE_HZ,             // Filter cut off frequency
-//                           SIGLIB_HANNING,                  // Window type
-//                           FILTER_LENGTH+1);                // Filter length
-//    SIF_FirBandPassFilter (pBPFilterCoeffs,                 // Filter coeffs array
-//                           1600. / SAMPLE_RATE_HZ,             // Filter center frequency
-//                           2000. / SAMPLE_RATE_HZ,             // Filter bandwidth
-//                           SIGLIB_HANNING,                  // Window type
-//                           FILTER_LENGTH+1);                // Filter length
-//
-//    printf("\nFilter length = %d\n", FILTER_LENGTH+1);
-//    printf("\npLPFilterCoeffs\n");
-//    SUF_PrintArray (pLPFilterCoeffs,                        // Filter coeffs array
-//                    FILTER_LENGTH+1);                       // Filter length
-//    printf("\npHPFilterCoeffs\n");
-//    SUF_PrintArray (pHPFilterCoeffs,                        // Filter coeffs array
-//                    FILTER_LENGTH+1);                       // Filter length
-//    printf("\npBPFilterCoeffs\n");
-//    SUF_PrintArray (pBPFilterCoeffs,                        // Filter coeffs array
-//                    FILTER_LENGTH+1);                       // Filter length
+//    SUF_PrintArray (pLPFilterCoeffs,                                 // Filter coeffs array
+//                    FILTER_LENGTH);                                  // Filter length
+//    printf("\npHPFilterCoeffs\n");                                   
+//    SUF_PrintArray (pHPFilterCoeffs,                                 // Filter coeffs array
+//                    FILTER_LENGTH);                                  // Filter length
+//    printf("\npBPFilterCoeffs\n");                                   
+//    SUF_PrintArray (pBPFilterCoeffs,                                 // Filter coeffs array
+//                    FILTER_LENGTH);                                  // Filter length
+//                                                                     
+//    SIF_FirLowPassFilter (pLPFilterCoeffs,                           // Filter coeffs array
+//                          3000. / SAMPLE_RATE_HZ,                       // Filter cut off frequency
+//                          SIGLIB_HANNING,                            // Window type
+//                          FILTER_LENGTH+1);                          // Filter length
+//    SIF_FirHighPassFilter (pHPFilterCoeffs,                          // Filter coeffs array
+//                           1000. / SAMPLE_RATE_HZ,                      // Filter cut off frequency
+//                           SIGLIB_HANNING,                           // Window type
+//                           FILTER_LENGTH+1);                         // Filter length
+//    SIF_FirBandPassFilter (pBPFilterCoeffs,                          // Filter coeffs array
+//                           1600. / SAMPLE_RATE_HZ,                   // Filter centre frequency
+//                           2000. / SAMPLE_RATE_HZ,                   // Filter bandwidth
+//                           SIGLIB_HANNING,                           // Window type
+//                           FILTER_LENGTH+1);                         // Filter length
+//                                                                     
+//    printf("\nFilter length = %d\n", FILTER_LENGTH+1);               
+//    printf("\npLPFilterCoeffs\n");                                   
+//    SUF_PrintArray (pLPFilterCoeffs,                                 // Filter coeffs array
+//                    FILTER_LENGTH+1);                                // Filter length
+//    printf("\npHPFilterCoeffs\n");                                   
+//    SUF_PrintArray (pHPFilterCoeffs,                                 // Filter coeffs array
+//                    FILTER_LENGTH+1);                                // Filter length
+//    printf("\npBPFilterCoeffs\n");                                   
+//    SUF_PrintArray (pBPFilterCoeffs,                                 // Filter coeffs array
+//                    FILTER_LENGTH+1);                                // Filter length
 
 // Display coefficients for each filter
   gpc_plot_2d (h2DPlot,                                             // Graph handle

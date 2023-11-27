@@ -25,7 +25,7 @@ int main (
                                                      SAMPLE_LENGTH);  // Length of source sequence
 
   SUF_ClearDebugfprintf ();
-  SUF_Debugfprintf ("Trigger output :\n");
+  SUF_Debugfprintf ("Trigger output:\n");
 
   for (SLArrayIndex_t i = 0; i < OutputCount; i++) {
     printf ("%1.1lf\n", Dst[i]);

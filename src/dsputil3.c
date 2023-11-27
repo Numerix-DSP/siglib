@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 07/04/2010
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : DSP utility functions, for SigLib DSP library.
+Description: DSP utility functions, for SigLib DSP library.
 
 
 ****************************************************************************/
@@ -573,7 +573,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindSortFirstDuplicates (
 * Description: Shuffle the order of the data in
 *   the array.
 *
-* Notes :
+* Notes:
 *   As the size of the array approaches RAND_MAX, the
 *   result becomes less random.
 *   The solution is to use a better random number

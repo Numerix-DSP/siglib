@@ -91,13 +91,13 @@ int main (
 
 
   if (argc != 2) {
-    printf ("\nUsage error  :\nwav_process filename (no file extension)\n\n");
+    printf ("\nUsage:\nwav_process filename (no file extension)\n\n");
     exit (-1);                                                      // Exit - usage error
   }
 
   strcpy (filename, argv[1]);
   strcat (filename, ".wav");
-  printf ("Opening and processing source file = %s\n", filename);
+  printf ("Opening and processing source file: %s\n", filename);
 
   if ((fpInputFile = fopen (filename, "rb")) == NULL) {             // Note this file is wav samples
     printf ("Error opening input %s file\n", filename);

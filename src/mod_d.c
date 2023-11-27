@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 15/11/1992
 Options   :                             | Latest Update : 17/11/2022
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : Digital modulation / demodulation routines, for SigLib DSP library.
+Description: Digital modulation / demodulation routines, for SigLib DSP library.
 
 
 ****************************************************************************/
@@ -246,7 +246,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_CostasQamDemodulate (
 
 #if SIGLIB_ENABLE_DEBUG_LOGGING
   SUF_Debugfprintf
-    ("CostasQamDemodulate : CostasLoopLoopSample = %lf, CarrierFreq = %lf, CostasLpVCOModulationIndex = %lf, CostasLpVCOPhase = %lf\n",
+    ("CostasQamDemodulate: CostasLoopLoopSample = %lf, CarrierFreq = %lf, CostasLpVCOModulationIndex = %lf, CostasLpVCOPhase = %lf\n",
      *pCostasLoopLoopSample, CarrierFreq, CostasLpVCOModulationIndex, *pCostasLpVCOPhase);
 #endif
 // Use the frequency modulator as a voltage controlled oscillator
@@ -257,7 +257,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_CostasQamDemodulate (
                                 CarrierFreq, CostasLpVCOModulationIndex, pCostasLpVCOPhase, pCostasLoopVCOLookUpTable, CostasLoopVCOLookUpTableSize);
 
 #if SIGLIB_ENABLE_DEBUG_LOGGING
-  SUF_Debugfprintf ("CostasQamDemodulate : Src = %lf, CostasLoopLoopSample = %lf, RealVCOOutput = %lf, ImagVCOOutput = %lf\n", Src,
+  SUF_Debugfprintf ("CostasQamDemodulate: Src = %lf, CostasLoopLoopSample = %lf, RealVCOOutput = %lf, ImagVCOOutput = %lf\n", Src,
                     *pCostasLoopLoopSample, RealVCOOutput, ImagVCOOutput);
 #endif
 
@@ -266,7 +266,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_CostasQamDemodulate (
   ImagTmp = Src * ImagVCOOutput;                                    // Imaginary data path
 
 #if SIGLIB_ENABLE_DEBUG_LOGGING
-  SUF_Debugfprintf ("CostasQamDemodulate : Pre Filter : RealTmp = %lf, ImagTmp = %lf\n", RealTmp, ImagTmp);
+  SUF_Debugfprintf ("CostasQamDemodulate: Pre Filter: RealTmp = %lf, ImagTmp = %lf\n", RealTmp, ImagTmp);
 #endif
 
 // Filter real data path
@@ -276,7 +276,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_CostasQamDemodulate (
   ImagTmp = SDS_Fir (ImagTmp, pCostasLpLPF2State, pCostasLpLPFCoeffs, pCostasLpLPF2Index, CostasLpLPFLength);
 
 #if SIGLIB_ENABLE_DEBUG_LOGGING
-  SUF_Debugfprintf ("CostasQamDemodulate : Post Filter : RealTmp = %lf, ImagTmp = %lf\n", RealTmp, ImagTmp);
+  SUF_Debugfprintf ("CostasQamDemodulate: Post Filter: RealTmp = %lf, ImagTmp = %lf\n", RealTmp, ImagTmp);
 #endif
 
   if (FeedbackMode == SIGLIB_COSTAS_LOOP_HARD_LIMITED_LOOP) {       // Implement the hard limited Costas feedback loop
@@ -306,7 +306,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_CostasQamDemodulate (
   }
 
 #if SIGLIB_ENABLE_DEBUG_LOGGING
-// SUF_Debugfprintf ("CostasQamDemodulate : CostasLoopLoopSample = %lf\n", *pCostasLoopLoopSample);
+// SUF_Debugfprintf ("CostasQamDemodulate: CostasLoopLoopSample = %lf\n", *pCostasLoopLoopSample);
 #endif
 
 // Implement early-late gate trigger real data paths
@@ -628,7 +628,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulate (
   for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
 #if SIGLIB_ENABLE_DEBUG_LOGGING
     SUF_Debugfprintf
-      ("CostasQamDemodulate : CostasLoopLoopSample = %lf, CarrierFreq = %lf, CostasLpVCOModulationIndex = %lf, CostasLpVCOPhase = %lf\n",
+      ("CostasQamDemodulate: CostasLoopLoopSample = %lf, CarrierFreq = %lf, CostasLpVCOModulationIndex = %lf, CostasLpVCOPhase = %lf\n",
        LocalCostasLoopLoopSample, CarrierFreq, CostasLpVCOModulationIndex, *pCostasLpVCOPhase);
 #endif
 // Use the frequency modulator as a voltage controlled oscillator
@@ -640,7 +640,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulate (
                                   CostasLpVCOModulationIndex, pCostasLpVCOPhase, pCostasLoopVCOLookUpTable, CostasLoopVCOLookUpTableSize);
 
 #if SIGLIB_ENABLE_DEBUG_LOGGING
-    SUF_Debugfprintf ("CostasQamDemodulate : Src = %lf, CostasLoopLoopSample = %lf, RealVCOOutput = %lf, ImagVCOOutput = %lf\n", *pSrc,
+    SUF_Debugfprintf ("CostasQamDemodulate: Src = %lf, CostasLoopLoopSample = %lf, RealVCOOutput = %lf, ImagVCOOutput = %lf\n", *pSrc,
                       LocalCostasLoopLoopSample, RealVCOOutput, ImagVCOOutput);
 #endif
 
@@ -649,7 +649,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulate (
     ImagTmp = *pSrc++ * ImagVCOOutput;                              // Imaginary data path
 
 #if SIGLIB_ENABLE_DEBUG_LOGGING
-    SUF_Debugfprintf ("CostasQamDemodulate : Pre Filter : RealTmp = %lf, ImagTmp = %lf\n", RealTmp, ImagTmp);
+    SUF_Debugfprintf ("CostasQamDemodulate: Pre Filter: RealTmp = %lf, ImagTmp = %lf\n", RealTmp, ImagTmp);
 #endif
 
 // Filter real data path
@@ -659,7 +659,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulate (
     ImagTmp = SDS_Fir (ImagTmp, pCostasLpLPF2State, pCostasLpLPFCoeffs, pCostasLpLPF2Index, CostasLpLPFLength);
 
 #if SIGLIB_ENABLE_DEBUG_LOGGING
-    SUF_Debugfprintf ("CostasQamDemodulate : Post Filter : RealTmp = %lf, ImagTmp = %lf\n", RealTmp, ImagTmp);
+    SUF_Debugfprintf ("CostasQamDemodulate: Post Filter: RealTmp = %lf, ImagTmp = %lf\n", RealTmp, ImagTmp);
 #endif
 
     if (FeedbackMode == SIGLIB_COSTAS_LOOP_HARD_LIMITED_LOOP) {     // Implement the hard limited Costas feedback loop
@@ -689,7 +689,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulate (
     }
 
 #if SIGLIB_ENABLE_DEBUG_LOGGING
-    SUF_Debugfprintf ("CostasQamDemodulate : CostasLoopLoopSample = %lf\n", LocalCostasLoopLoopSample);
+    SUF_Debugfprintf ("CostasQamDemodulate: CostasLoopLoopSample = %lf\n", LocalCostasLoopLoopSample);
 #endif
 
 // Implement early-late gate trigger real data paths
@@ -918,12 +918,12 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulateDebug (
 
 // Definition of constelation space
 //
-//    10     00
+//    01     00
 //     *  |  *
 //     ___|___
 //        |
 //     *  |  *
-//    11     01
+//    11     10
 
 // REMEMBER THAT THE BIT ORDER IS REVERSED TO NORMAL ORDERING IN A BYTE
 
@@ -999,7 +999,7 @@ void SIGLIB_FUNC_DECL SIF_QpskModulate (
 
   if (RRCFSwitch == SIGLIB_ENABLE) {
 // Initialise Root raised cosine filter
-    SIF_RootRaisedCosineFilter (pRRCFCoeffs, RRCFPeriod, RRCFRollOff, RRCFSize);
+    SIF_RootRaisedCosineFirFilter (pRRCFCoeffs, RRCFPeriod, RRCFRollOff, RRCFSize);
 
 // Scale coefficients for unity gain
     SDA_Multiply (pRRCFCoeffs, SIGLIB_FOUR, pRRCFCoeffs, RRCFSize);
@@ -1186,7 +1186,7 @@ void SIGLIB_FUNC_DECL SIF_QpskDemodulate (
 
   if (RRCFSwitch == SIGLIB_ENABLE) {
 // Initialise Root raised cosine filter
-    SIF_RootRaisedCosineFilter (pRRCFCoeffs, RRCFPeriod, RRCFRollOff, RRCFSize);
+    SIF_RootRaisedCosineFirFilter (pRRCFCoeffs, RRCFPeriod, RRCFRollOff, RRCFSize);
 
 // Scale coefficients for unity gain
     SDA_Multiply (pRRCFCoeffs, SIGLIB_FOUR, pRRCFCoeffs, RRCFSize);
@@ -1238,7 +1238,7 @@ void SIGLIB_FUNC_DECL SIF_QpskDemodulate (
 *   filters. These are decoded by the constellation
 *   decoder.
 *   The demodulate function has the following flow
-*   diagram :
+*   diagram:
 *
 *                --------      ----------
 *        --------| RRCF |------|        |
@@ -1465,7 +1465,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_QpskDemodulateDebug (
 
 // QPSK phase change
 //
-// Quadrants :
+// Quadrants:
 //
 //     Q1  |  Q0
 //     ____|____
@@ -1794,7 +1794,7 @@ void SIGLIB_FUNC_DECL SDA_FskModulateByte (
 *   Demodulate an FSK or continuous phase FSK modulated signal.
 *   This function demodulates an 8 bit byte from the data
 *   stream.
-*   The filter length must be greater than :
+*   The filter length must be greater than:
 *   (2 * number of samples per symbol) + 1
 *
 ********************************************************/
@@ -1803,7 +1803,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_FskDemodulateByte (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLData_t * SIGLIB_PTR_DECL pLevelOneFilter,
   const SLData_t * SIGLIB_PTR_DECL pLevelZeroFilter,
-  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t filterLength,
   const SLFixData_t SamplesPerSymbol)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
@@ -1822,7 +1822,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_FskDemodulateByte (
     LevelOnePeak = SIGLIB_ZERO;                                     // Reset peak values
     LevelZeroPeak = SIGLIB_ZERO;
 
-    for (SLArrayIndex_t j = 0; j < (FilterLength - SamplesPerSymbol); j++) {
+    for (SLArrayIndex_t j = 0; j < (filterLength - SamplesPerSymbol); j++) {
       LevelOneSum = SIGLIB_ZERO;                                    // Reset running sum values
       LevelZeroSum = SIGLIB_ZERO;
       for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
@@ -2010,7 +2010,7 @@ void SIGLIB_FUNC_DECL SDA_FskModulate (
 *   Demodulate an FSK or continuous phase FSK modulated signal.
 *   This function demodulates a single bit from the data
 *   stream.
-*   The filter length must be greater than :
+*   The filter length must be greater than:
 *   (2 * number of samples per symbol) + 1
 *
 ********************************************************/
@@ -2019,7 +2019,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_FskDemodulate (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   const SLData_t * SIGLIB_PTR_DECL pLevelOneFilter,
   const SLData_t * SIGLIB_PTR_DECL pLevelZeroFilter,
-  const SLArrayIndex_t FilterLength,
+  const SLArrayIndex_t filterLength,
   const SLFixData_t SamplesPerSymbol)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
@@ -2036,7 +2036,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_FskDemodulate (
   LevelOnePeak = SIGLIB_ZERO;                                       // Reset peak values
   LevelZeroPeak = SIGLIB_ZERO;
 
-  for (SLArrayIndex_t j = 0; j < (FilterLength - SamplesPerSymbol); j++) {
+  for (SLArrayIndex_t j = 0; j < (filterLength - SamplesPerSymbol); j++) {
     LevelOneSum = SIGLIB_ZERO;                                      // Reset running sum values
     LevelZeroSum = SIGLIB_ZERO;
     for (SLArrayIndex_t i = 0; i < SamplesPerSymbol; i++) {
@@ -2237,7 +2237,7 @@ void SIGLIB_FUNC_DECL SIF_Qam16Modulate (
 
   if (RRCFSwitch == SIGLIB_ENABLE) {
 // Initialise Root raised cosine filter
-    SIF_RootRaisedCosineFilter (pRRCFCoeffs, RRCFPeriod, RRCFRollOff, RRCFSize);
+    SIF_RootRaisedCosineFirFilter (pRRCFCoeffs, RRCFPeriod, RRCFRollOff, RRCFSize);
 
 // Scale coefficients for unity gain
     SDA_Multiply (pRRCFCoeffs, SIGLIB_FOUR, pRRCFCoeffs, RRCFSize);
@@ -2425,7 +2425,7 @@ void SIGLIB_FUNC_DECL SIF_Qam16Demodulate (
 
   if (RRCFSwitch == SIGLIB_ENABLE) {
 // Initialise Root raised cosine filter
-    SIF_RootRaisedCosineFilter (pRRCFCoeffs, RRCFPeriod, RRCFRollOff, RRCFSize);
+    SIF_RootRaisedCosineFirFilter (pRRCFCoeffs, RRCFPeriod, RRCFRollOff, RRCFSize);
 
 // Scale coefficients for unity gain
     SDA_Multiply (pRRCFCoeffs, SIGLIB_FOUR, pRRCFCoeffs, RRCFSize);
@@ -2698,7 +2698,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Qam16DemodulateDebug (
 
 
 
-// Quadrants :
+// Quadrants:
 //
 //    Q1  |  Q0
 //    ____|____
@@ -2766,8 +2766,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Qam16DifferentialEncode (
 // Differential phase encoding
   Quadrant = (SLFixData_t) ((SLUFixData_t)
                             (*PreviousQuadrant +
-                             siglib_numerix_QAM16TxQuadrantChange[(SLArrayIndex_t) ((SLUFixData_t) TxNibble & SIGLIB_QPSK_BIT_MASK)]) &
-                            SIGLIB_QPSK_BIT_MASK);
+                             siglib_numerix_QAM16TxQuadrantChange[(SLArrayIndex_t) ((SLUFixData_t) TxNibble & SIGLIB_QPSK_BIT_MASK)]) & 0x3);
   *PreviousQuadrant = Quadrant;                                     // Save current quadrant for next iteration
 
 // Map application constellation to generic SigLib constellation
@@ -2806,7 +2805,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Qam16DifferentialDecode (
                    [(SLArrayIndex_t) (((SLUFixData_t) * PreviousQuadrant << 2U) + (SLArrayIndex_t) (Offset & SIGLIB_QPSK_BIT_MASK))] +
                    (SLFixData_t) (Offset & 0x0cU));
 
-  *PreviousQuadrant = (SLFixData_t) (Offset & SIGLIB_QPSK_BIT_MASK);  // Save current quadrant for next iteration
+  *PreviousQuadrant = (SLFixData_t) (Offset & 0x3);                 // Save current quadrant for next iteration
 
   return (Output);
 }                                                                   // End of SDA_Qam16DifferentialDecode()
@@ -2912,7 +2911,7 @@ void SIGLIB_FUNC_DECL SIF_OpskModulate (
 
   if (RRCFSwitch == SIGLIB_ENABLE) {
 // Initialise Root raised cosine filter
-    SIF_RootRaisedCosineFilter (pRRCFCoeffs, RRCFPeriod, RRCFRollOff, RRCFSize);
+    SIF_RootRaisedCosineFirFilter (pRRCFCoeffs, RRCFPeriod, RRCFRollOff, RRCFSize);
 
 // Scale coefficients for unity gain
     SDA_Multiply (pRRCFCoeffs, SIGLIB_FOUR, pRRCFCoeffs, RRCFSize);
@@ -3100,7 +3099,7 @@ void SIGLIB_FUNC_DECL SIF_OpskDemodulate (
 
   if (RRCFSwitch == SIGLIB_ENABLE) {
 // Initialise Root raised cosine filter
-    SIF_RootRaisedCosineFilter (pRRCFCoeffs, RRCFPeriod, RRCFRollOff, RRCFSize);
+    SIF_RootRaisedCosineFirFilter (pRRCFCoeffs, RRCFPeriod, RRCFRollOff, RRCFSize);
 
 // Scale coefficients for unity gain
     SDA_Multiply (pRRCFCoeffs, SIGLIB_FOUR, pRRCFCoeffs, RRCFSize);
@@ -3153,7 +3152,7 @@ void SIGLIB_FUNC_DECL SIF_OpskDemodulate (
 *   filters. These are decoded by the constellation
 *   decoder.
 *   The demodulate function has the following flow
-*   diagram :
+*   diagram:
 *
 *                --------      ----------
 *        --------| RRCF |------|        |
@@ -4232,7 +4231,7 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_DpskDemodulateDebug (
 
 /**/
 // Look-up-table to encode phase difference between previous symbol
-// and current symbol acording to the following table :
+// and current symbol acording to the following table:
 // Dibit      Phase change
 //            Alternative B
 //  00           + 45°
@@ -4331,7 +4330,7 @@ void SIGLIB_FUNC_DECL SIF_PiByFourDQpskModulate (
 
   if (RRCFSwitch == SIGLIB_ENABLE) {
 // Initialise Root raised cosine filter
-    SIF_RootRaisedCosineFilter (pRRCFCoeffs, RRCFPeriod, RRCFRollOff, RRCFSize);
+    SIF_RootRaisedCosineFirFilter (pRRCFCoeffs, RRCFPeriod, RRCFRollOff, RRCFSize);
 
 // Scale coefficients for unity gain
     SDA_Multiply (pRRCFCoeffs, SIGLIB_FOUR, pRRCFCoeffs, RRCFSize);

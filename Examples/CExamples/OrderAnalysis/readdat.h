@@ -1,5 +1,5 @@
 // Header file to read vibration data from .dat file
-// Columns are : Magnitude and Speed
+// Columns are: Magnitude and Speed
 
 SLArrayIndex_t read_vibration_data (
   SLData_t * bp,

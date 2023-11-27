@@ -1,7 +1,7 @@
 // SigLib microphone array far field beamformer beam pattern calculator (Microphone Polar Diversity Response)
 // This example simulates a 16 kHz sample rate and includes several different microphone configurations
 // that can be independently enabled by changing "#if 0" to "#if  1" where appropriate
-// The supported configurations are :
+// The supported configurations are:
 //      4 Mic Circular (Square), 0.043 mic radius
 //      4 Mic Circular (Square) + centre, 0.043 mic radius
 //      4 Mic Circular (Diamond), 0.043 mic radius
@@ -19,7 +19,7 @@
 
 #define PLOT_LOG_GAINS      1                                       // Set to '1' to plot logarithmic gains, '0' to plot linear
 
-#define NUM_ANGLES          181                                     // Number of angles analyzed : 0 to 360 degrees
+#define NUM_ANGLES          181                                     // Number of angles analyzed: 0 to 360 degrees
 #define START_ANGLE         0.                                      // Start angle for calculating beam pattern
 #define END_ANGLE           360.                                    // End angle for calculating beam pattern
 
@@ -42,7 +42,7 @@ static SLData_t responseGains[NUM_ANGLES];                          // Beam gain
 
 // Microphone configurations
 // Use "#if 1" to enable one of the configurations, for testing
-// Each microphone entry in represents :
+// Each microphone entry in represents:
 //      X location (Meters)
 //      Y location (Meters)
 //      Delay (seconds)
@@ -127,7 +127,7 @@ int main (
   SLFixData_t     ExitFlag = 0;
 
   char            title[80];
-  sprintf (title, "Beam Pattern : %s", MIC_ARRAY_DESCRIPTION);
+  sprintf (title, "Beam Pattern: %s", MIC_ARRAY_DESCRIPTION);
 
   hPolarPlot =                                                      // Initialize plot
     gpc_init_polar (title,                                          // Plot title
@@ -329,7 +329,7 @@ int main (
                     "forest-green",                                 // Colour
                     GPC_ADD);                                       // New graph
 
-    printf ("# Antenna Beam Pattern : Beam Angle = %f\n", beamAngle);
+    printf ("# Antenna Beam Pattern: Beam Angle = %f\n", beamAngle);
 
     char            cmdString[20];                                  // Get and process command
     scanf ("%s", cmdString);

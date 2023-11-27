@@ -154,7 +154,7 @@ int main (
                          IIR_FILTER_STAGES);                        // Number of poles
 
 // The Bilinear transform locates the zeros at the origin
-// we shall put them at : -1 + j0 for an LPF
+// we shall put them at: -1 + j0 for an LPF
   SDA_FillComplexRect (ZPlaneZeros, SCV_Rectangular (SIGLIB_MINUS_ONE, SIGLIB_ZERO), IIR_FILTER_STAGES);
 
 #if DEBUG_FPRINTF
@@ -250,7 +250,7 @@ int main (
 
 // Convert poles and zeros to coefficients
 // The Bilinear transform locates the zeros at the origin
-// we shall put them at : -1 + j0 for an LPF
+// we shall put them at: -1 + j0 for an LPF
   SDA_FillComplexRect (ZPlaneZeros, SCV_Rectangular (SIGLIB_MINUS_ONE, SIGLIB_ZERO), IIR_FILTER_STAGES);
 
   SDA_IirZplaneToCoeffs (ZPlaneZeros,                               // Z-plane zeros
@@ -363,7 +363,7 @@ int main (
 
 // Convert poles and zeros to coefficients
 // The Bilinear transform locates the zeros at the origin
-// we shall put them at : -1 + j0 for an LPF
+// we shall put them at: -1 + j0 for an LPF
   SDA_FillComplexRect (ZPlaneZeros, SCV_Rectangular (SIGLIB_MINUS_ONE, SIGLIB_ZERO), IIR_FILTER_STAGES);
 
   SDA_IirZplaneToCoeffs (ZPlaneZeros,                               // Z-plane zeros

@@ -1,5 +1,5 @@
-// Matrix.cpp : Console application to test the SigLib matrix processing functionality
-// This program required the Numerix Host Library, which is available from :
+// Matrix.cpp: Console application to test the SigLib matrix processing functionality
+// This program required the Numerix Host Library, which is available from:
 // https://www.numerix-dsp.com/files
 // This project was generated automatically in Visual Studio it is a command line applicaiton
 // Copyright (c) 2023 Delta Numerix All rights reserved.
@@ -83,7 +83,7 @@ int main (
 /*
    Print matrix A contents
  */
-  printf ("Source matrix A :\n");
+  printf ("Source matrix A:\n");
   SUF_PrintMatrix (pMatrixa, MATRIXA_ROWS, MATRIXA_COLS);
 
 /*
@@ -95,7 +95,7 @@ int main (
    MultpImagDataly matrix A by a scalar
  */
   SMX_ScalarMultiply (pMatrixa, 3.0, pMatrixa, MATRIXA_ROWS, MATRIXA_COLS);
-  printf ("\nMatrix A multiplied by 3.0 :\n");
+  printf ("\nMatrix A multiplied by 3.0:\n");
   SUF_PrintMatrix (pMatrixa, MATRIXA_ROWS, MATRIXA_COLS);
 
 /*
@@ -103,7 +103,7 @@ int main (
  */
   SMX_Copy (pMatrixc, pMatrixa, MATRIXA_ROWS, MATRIXA_COLS);
   SMX_Transpose (pMatrixa, pMatrixb, MATRIXA_ROWS, MATRIXA_COLS);
-  printf ("\nMatrix A transposed :\n");
+  printf ("\nMatrix A transposed:\n");
   SUF_PrintMatrix (pMatrixb, MATRIXAT_ROWS, MATRIXAT_COLS);
 
 /*
@@ -122,7 +122,7 @@ int main (
 /*
    Print matrix B contents with matrix A dimensions
  */
-  printf ("\nSource matrix B :\n");
+  printf ("\nSource matrix B:\n");
   SUF_PrintMatrix (pMatrixb, MATRIXA_ROWS, MATRIXA_COLS);
 
 /*
@@ -130,7 +130,7 @@ int main (
  */
   SMX_Copy (pMatrixc, pMatrixa, MATRIXA_ROWS, MATRIXA_COLS);
   SMX_Add (pMatrixa, pMatrixb, pMatrixc, MATRIXA_ROWS, MATRIXA_COLS);
-  printf ("\nA + B matrix :\n");
+  printf ("\nA + B matrix:\n");
   SUF_PrintMatrix (pMatrixc, MATRIXA_ROWS, MATRIXA_COLS);
 
 /*
@@ -146,14 +146,14 @@ int main (
 /*
    Print matrix B contents with correct dimensions
  */
-  printf ("\nNew source matrix B :\n");
+  printf ("\nNew source matrix B:\n");
   SUF_PrintMatrix (pMatrixb, MATRIXB_ROWS, MATRIXB_COLS);
 
 /*
    MultpImagDataly matrix A by matrix B
  */
   SMX_Multiply (pMatrixa, pMatrixb, pMatrixc, MATRIXA_ROWS, MATRIXA_COLS, MATRIXB_COLS);
-  printf ("\nA * B matrix :\n");
+  printf ("\nA * B matrix:\n");
   SUF_PrintMatrix (pMatrixc, MATRIXC_ROWS, MATRIXC_COLS);
 
   printf ("\nPlease hit any key to continue . . .\n");
@@ -176,7 +176,7 @@ int main (
 /*
    Print matrix D
  */
-  printf ("\nSource matrix D :\n");
+  printf ("\nSource matrix D:\n");
   SUF_PrintMatrix (pMatrixd, MATRIXD_ROWS, MATRIXD_COLS);
 
 
@@ -195,10 +195,10 @@ int main (
 /*
    Print inverse of matrix D
  */
-  printf ("\nInverse of matrix D :\n");
+  printf ("\nInverse of matrix D:\n");
   SUF_PrintMatrix (pMatrixd_inv, MATRIXD_INV_ROWS, MATRIXD_INV_COLS);
 
-  printf ("Inverse should be :\n");
+  printf ("Inverse should be:\n");
   printf ("    0.1579   -0.2105    0.1053\n");
   printf ("    1.6316   -0.8421   -0.5789\n");
   printf ("   -0.6842    0.5789    0.2105\n\n");
@@ -212,16 +212,16 @@ int main (
    Threshold Results to zero out values close to zero
  */
   SDA_Threshold (pMatrixi, pMatrixi, SIGLIB_MIN_THRESHOLD, SIGLIB_DOUBLE_SIDED_THOLD, MATRIXD_SIZE);
-  printf ("\nD * D^-1 matrix :\n");
+  printf ("\nD * D^-1 matrix:\n");
   SUF_PrintMatrix (pMatrixi, MATRIXD_ROWS, MATRIXD_COLS);
 
 /*
    Print the determinant of matrix D
  */
   Determinant = SMX_Determinant (pMatrixd, pTempSourceArray, pRowInterchangeIndex, pScalingFactor, MATRIXD_ROWS);
-  printf ("\nThe determinant of matrix D is : %lf\n", Determinant);
+  printf ("\nThe determinant of matrix D is: %lf\n", Determinant);
 
-  printf ("\nThe determinant of matrix D should be : 19\n", Determinant);
+  printf ("\nThe determinant of matrix D should be: 19\n", Determinant);
 
 /*
    Create identity matrix (I)
@@ -231,7 +231,7 @@ int main (
 /*
    Print identity matrix (I)
  */
-  printf ("\nIdentity matrix (I) :\n");
+  printf ("\nIdentity matrix (I):\n");
   SUF_PrintMatrix (pMatrixi, MATRIXI_ROWS, MATRIXI_COLS);
 
 

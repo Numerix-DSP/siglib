@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50                         |
 Compiler  : Independent                 | Start Date    : 27/12/1999
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via EMail : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : SigLib function memory section definition file for TI compilers
+Description: SigLib function memory section definition file for TI compilers
     This file includes a memory section definition line for each function in
     the library.
     Each function can be located in a separate section of memory.
@@ -472,25 +472,25 @@ Description : SigLib function memory section definition file for TI compilers
 #pragma CODE_SECTION(SDA_Differentiate, ".text")
 #pragma CODE_SECTION(SDA_GoertzelDetect, ".text")
 #pragma CODE_SECTION(SDA_GoertzelDetectComplex, ".text")
-#pragma CODE_SECTION(SDA_GoertzelFilter, ".text")
+#pragma CODE_SECTION(SDA_GoertzelIirFilter, ".text")
 #pragma CODE_SECTION(SDA_Integrate, ".text")
-#pragma CODE_SECTION(SDS_GoertzelFilter, ".text")
+#pragma CODE_SECTION(SDS_GoertzelIirFilter, ".text")
 #pragma CODE_SECTION(SDS_LeakyIntegrator1, ".text")
 #pragma CODE_SECTION(SDS_LeakyIntegrator2, ".text")
 #pragma CODE_SECTION(SDS_ZTransform, ".text")
 #pragma CODE_SECTION(SDS_ZTransformDB, ".text")
-#pragma CODE_SECTION(SIF_GaussianFilter, ".text")
-#pragma CODE_SECTION(SIF_GaussianFilter2, ".text")
+#pragma CODE_SECTION(SIF_GaussianFirFilter, ".text")
+#pragma CODE_SECTION(SIF_GaussianFirFilter2, ".text")
 #pragma CODE_SECTION(SIF_GoertzelDetect, ".text")
 #pragma CODE_SECTION(SIF_GoertzelDetectComplex, ".text")
-#pragma CODE_SECTION(SIF_GoertzelFilter, ".text")
-#pragma CODE_SECTION(SIF_HilbertTransformer, ".text")
+#pragma CODE_SECTION(SIF_GoertzelIirFilter, ".text")
+#pragma CODE_SECTION(SIF_HilbertTransformerFirFilter, ".text")
 #pragma CODE_SECTION(SIF_LeakyIntegrator, ".text")
-#pragma CODE_SECTION(SIF_RaisedCosineFilter, ".text")
-#pragma CODE_SECTION(SIF_RootRaisedCosineFilter, ".text")
+#pragma CODE_SECTION(SIF_RaisedCosineFirFilter, ".text")
+#pragma CODE_SECTION(SIF_RootRaisedCosineFirFilter, ".text")
 #pragma CODE_SECTION(SUF_BandwidthToQFactor, ".text")
-#pragma CODE_SECTION(SUF_EstimateBPFilterError, ".text")
-#pragma CODE_SECTION(SUF_EstimateBPFilterLength, ".text")
+#pragma CODE_SECTION(SUF_EstimateBPFirFilterError, ".text")
+#pragma CODE_SECTION(SUF_EstimateBPFirFilterLength, ".text")
 #pragma CODE_SECTION(SUF_FrequenciesToCentreFreqHz, ".text")
 #pragma CODE_SECTION(SUF_FrequenciesToOctaves, ".text")
 #pragma CODE_SECTION(SUF_FrequenciesToQFactor, ".text")
@@ -504,6 +504,8 @@ Description : SigLib function memory section definition file for TI compilers
 #pragma CODE_SECTION(SDA_FirExtendedArray, ".text")
 #pragma CODE_SECTION(SDA_FirExtendedArrayAddSamples, ".text")
 #pragma CODE_SECTION(SDA_FirFilterInverseCoherentGain, ".text")
+#pragma CODE_SECTION(SDA_FirLpBpShift, ".text")
+#pragma CODE_SECTION(SDA_FirLpHpShift, ".text")
 #pragma CODE_SECTION(SDA_FirWithStore, ".text")
 #pragma CODE_SECTION(SDA_FirWithStoreAddSamples, ".text")
 #pragma CODE_SECTION(SDA_TappedDelayLine, ".text")

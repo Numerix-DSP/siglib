@@ -34,9 +34,9 @@
 #define START_DELAY             15                                  // Arbitrary delay to test synchronizer
 
 #define SAMPLE_RATE_HZ          8000.                               // Characteristics of PRBS
-//#define SYMBOL_RATE             1000.                       // 8 samples per symbol
+//#define SYMBOL_RATE             1000.                                // 8 samples per symbol
 #define SYMBOL_RATE             400.                                // 20 samples per symbol
-//#define SYMBOL_RATE             200.                        // 40 samples per symbol
+//#define SYMBOL_RATE             200.                                 // 40 samples per symbol
 
 #define SYMBOL_LENGTH           ((SLFixData_t)(SAMPLE_RATE_HZ / SYMBOL_RATE))
 
@@ -197,7 +197,7 @@ int main (
     SUF_MemoryFree (pSrc);                                          // Free memory
     SUF_MemoryFree (pTriggerOutput);
     printf ("SIF_EarlyLateGate returned the error code %x\n", SigLibErrorCode);
-    printf ("SigLib Error Message :%s\n", SUF_StrError (SigLibErrorCode));
+    printf ("SigLib Error Message:%s\n", SUF_StrError (SigLibErrorCode));
     exit (1);
   }
 

@@ -49,7 +49,7 @@ int main (
   printf ("\n\n\nThis program performs a zoom-FFT on a modulated data set.\n");
   printf ("All frequencies are normalised to a sample rate of 1.0.\n\n");
   printf ("Carrier frequency  = %lf\n", CARRIER_FREQUENCY);
-  printf ("Sideband strengths :\n");
+  printf ("Sideband strengths:\n");
   printf ("        Freq.   Magn.\n");
   printf ("        -0.015  0.2\n");
   printf ("        -0.01   0.3\n");

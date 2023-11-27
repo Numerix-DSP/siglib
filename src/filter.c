@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 13/09/1992
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : SigLib DSP library generic filter routines.
+Description: SigLib DSP library generic filter routines.
 
 
 ****************************************************************************/
@@ -258,7 +258,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_LeakyIntegrator2 (
 /**/
 
 /********************************************************
-* Function: SIF_HilbertTransformer
+* Function: SIF_HilbertTransformerFirFilter
 *
 * Parameters:
 *   SLData_t    *pCoeffs    - Filter coeffs pointer
@@ -272,13 +272,13 @@ SLData_t SIGLIB_FUNC_DECL SDS_LeakyIntegrator2 (
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_HilbertTransformer (
+void SIGLIB_FUNC_DECL SIF_HilbertTransformerFirFilter (
   SLData_t * SIGLIB_PTR_DECL pCoeffs,
-  const SLArrayIndex_t FilterLength)
+  const SLArrayIndex_t filterLength)
 {
-  SLData_t        n = (SIGLIB_ONE - ((SLData_t) FilterLength)) * SIGLIB_HALF;
+  SLData_t        n = (SIGLIB_ONE - ((SLData_t) filterLength)) * SIGLIB_HALF;
 
-  for (SLArrayIndex_t i = 0; i < FilterLength; i++) {
+  for (SLArrayIndex_t i = 0; i < filterLength; i++) {
     if ((n < SIGLIB_MIN_THRESHOLD) &&                               // Check for close to zero
         (n > -SIGLIB_MIN_THRESHOLD)) {
 
@@ -289,13 +289,13 @@ void SIGLIB_FUNC_DECL SIF_HilbertTransformer (
     }
     n++;
   }
-}                                                                   // End of SIF_HilbertTransformer()
+}                                                                   // End of SIF_HilbertTransformerFirFilter()
 
 
 /**/
 
 /********************************************************
-* Function: SIF_GoertzelFilter
+* Function: SIF_GoertzelIirFilter
 *
 * Parameters:
 *   SLData_t * pState           - State array pointer
@@ -310,7 +310,7 @@ void SIGLIB_FUNC_DECL SIF_HilbertTransformer (
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SIF_GoertzelFilter (
+SLData_t SIGLIB_FUNC_DECL SIF_GoertzelIirFilter (
   SLData_t * SIGLIB_PTR_DECL pState,
   const SLData_t Freq,
   const SLArrayIndex_t SampleLength)
@@ -320,13 +320,13 @@ SLData_t SIGLIB_FUNC_DECL SIF_GoertzelFilter (
 
   SLData_t        k = ((SLData_t) SampleLength) * Freq;
   return (SDS_Cos (SIGLIB_TWO * SIGLIB_PI * k / ((SLData_t) SampleLength)));  // Filter coeff
-}                                                                   // End of SIF_GoertzelFilter()
+}                                                                   // End of SIF_GoertzelIirFilter()
 
 
 /**/
 
 /********************************************************
-* Function: SDA_GoertzelFilter
+* Function: SDA_GoertzelIirFilter
 *
 * Parameters:
 *   const SLData_t * SIGLIB_PTR_DECL pSrc   - Pointer to source array
@@ -342,7 +342,7 @@ SLData_t SIGLIB_FUNC_DECL SIF_GoertzelFilter (
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_GoertzelFilter (
+void SIGLIB_FUNC_DECL SDA_GoertzelIirFilter (
   const SLData_t * SIGLIB_PTR_DECL pSrc,
   SLData_t * SIGLIB_PTR_DECL pDst,
   SLData_t * SIGLIB_PTR_DECL pState,
@@ -372,13 +372,13 @@ void SIGLIB_FUNC_DECL SDA_GoertzelFilter (
     *pDst++ = (*pState * Coeff) - Tmp;
 #endif
   }
-}                                                                   // End of SDA_GoertzelFilter()
+}                                                                   // End of SDA_GoertzelIirFilter()
 
 
 /**/
 
 /********************************************************
-* Function: SDS_GoertzelFilter
+* Function: SDS_GoertzelIirFilter
 *
 * Parameters:
 *   const SLData_t  Src                 - Source value
@@ -392,7 +392,7 @@ void SIGLIB_FUNC_DECL SDA_GoertzelFilter (
 *
 ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_GoertzelFilter (
+SLData_t SIGLIB_FUNC_DECL SDS_GoertzelIirFilter (
   const SLData_t Src,
   SLData_t * SIGLIB_PTR_DECL pState,
   const SLData_t Coeff)
@@ -409,7 +409,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_GoertzelFilter (
   pState[0] = Src + (TwoRealCoeff * Tmp) - pState[1];
   pState[1] = Tmp;
   return ((pState[0] * Coeff) - Tmp);
-}                                                                   // End of SDS_GoertzelFilter()
+}                                                                   // End of SDS_GoertzelIirFilter()
 
 
 /**/
@@ -584,7 +584,7 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDA_GoertzelDetectComplex (
 /**/
 
 /********************************************************
-* Function: SIF_GaussianFilter
+* Function: SIF_GaussianFirFilter
 *
 * Parameters:
 *   SLData_t    *pCoeffs - Pointer to filter coefficients
@@ -599,29 +599,29 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDA_GoertzelDetectComplex (
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_GaussianFilter (
+void SIGLIB_FUNC_DECL SIF_GaussianFirFilter (
   SLData_t * SIGLIB_PTR_DECL pCoeffs,
-  const SLData_t StandardDeviation,
-  const SLArrayIndex_t FilterLength)
+  const SLData_t standardDeviation,
+  const SLArrayIndex_t filterLength)
 {
-  SLData_t        n = (SIGLIB_ONE - ((SLData_t) FilterLength)) * SIGLIB_HALF;
+  SLData_t        n = (SIGLIB_ONE - ((SLData_t) filterLength)) * SIGLIB_HALF;
 
-  for (SLArrayIndex_t i = 0; i < FilterLength; i++) {
-    *pCoeffs++ = (SIGLIB_INV_SQRT_TWO_PI / StandardDeviation) * SDS_Exp ((SIGLIB_MINUS_HALF * (n * n)) / (StandardDeviation * StandardDeviation));
+  for (SLArrayIndex_t i = 0; i < filterLength; i++) {
+    *pCoeffs++ = (SIGLIB_INV_SQRT_TWO_PI / standardDeviation) * SDS_Exp ((SIGLIB_MINUS_HALF * (n * n)) / (standardDeviation * standardDeviation));
     n++;
   }
-}                                                                   // End of SIF_GaussianFilter()
+}                                                                   // End of SIF_GaussianFirFilter()
 
 
 /**/
 
 /********************************************************
-* Function: SIF_GaussianFilter2
+* Function: SIF_GaussianFirFilter2
 *
 * Parameters:
 *   SLData_t *pCoeffs           - Pointer to filter coefficients
 *   const SLData_t Bandwidth    - Bandwidth
-*   const SLArrayIndex_t FilterLength   - Filter length
+*   const SLArrayIndex_t filterLength   - Filter length
 *
 * Return value:
 *   void
@@ -631,25 +631,25 @@ void SIGLIB_FUNC_DECL SIF_GaussianFilter (
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_GaussianFilter2 (
+void SIGLIB_FUNC_DECL SIF_GaussianFirFilter2 (
   SLData_t * SIGLIB_PTR_DECL pCoeffs,
   const SLData_t Bandwidth,
-  const SLArrayIndex_t FilterLength)
+  const SLArrayIndex_t filterLength)
 {
-  SLData_t        Alpha = SIGLIB_SQRT_HALF_LN2 / Bandwidth;
-  SLData_t        n = (SIGLIB_ONE - ((SLData_t) FilterLength)) * SIGLIB_HALF;
+  SLData_t        Alpha = SIGLIB_TWO * SIGLIB_SQRT_HALF_LN2 / Bandwidth;
+  SLData_t        n = (SIGLIB_ONE - ((SLData_t) filterLength)) * SIGLIB_HALF;
 
-  for (SLArrayIndex_t i = 0; i < FilterLength; i++) {
+  for (SLArrayIndex_t i = 0; i < filterLength; i++) {
     *pCoeffs++ = (SIGLIB_SQRT_PI / Alpha) * SDS_Exp (-(SIGLIB_PI_SQUARED * (n * n)) / (Alpha * Alpha));
     n++;
   }
-}                                                                   // End of SIF_GaussianFilter2()
+}                                                                   // End of SIF_GaussianFirFilter2()
 
 
 /**/
 
 /********************************************************
-* Function: SIF_RaisedCosineFilter
+* Function: SIF_RaisedCosineFirFilter
 *
 * Parameters:
 *   SLData_t * pCoeffs,
@@ -672,7 +672,7 @@ void SIGLIB_FUNC_DECL SIF_GaussianFilter2 (
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_RaisedCosineFilter (
+void SIGLIB_FUNC_DECL SIF_RaisedCosineFirFilter (
   SLData_t * SIGLIB_PTR_DECL pCoeffs,
   const SLData_t SymbolPeriod,
   const SLData_t Alpha,
@@ -719,13 +719,13 @@ void SIGLIB_FUNC_DECL SIF_RaisedCosineFilter (
     pCoeffs[Half_SampleLengthMinusOne + i] = Tmp;
     pCoeffs[Half_SampleLengthMinusOne - i] = Tmp;
   }
-}                                                                   // End of SIF_RaisedCosineFilter()
+}                                                                   // End of SIF_RaisedCosineFirFilter()
 
 
 /**/
 
 /********************************************************
-* Function: SIF_RootRaisedCosineFilter
+* Function: SIF_RootRaisedCosineFirFilter
 *
 * Parameters:
 *   SLData_t * pCoeffs,
@@ -748,7 +748,7 @@ void SIGLIB_FUNC_DECL SIF_RaisedCosineFilter (
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_RootRaisedCosineFilter (
+void SIGLIB_FUNC_DECL SIF_RootRaisedCosineFirFilter (
   SLData_t * SIGLIB_PTR_DECL pCoeffs,
   const SLData_t SymbolPeriod,
   const SLData_t Alpha,
@@ -796,7 +796,7 @@ void SIGLIB_FUNC_DECL SIF_RootRaisedCosineFilter (
     pCoeffs[Half_SampleLengthMinusOne + i] = Tmp;
     pCoeffs[Half_SampleLengthMinusOne - i] = Tmp;
   }
-}                                                                   // End of SIF_RootRaisedCosineFilter()
+}                                                                   // End of SIF_RootRaisedCosineFirFilter()
 
 
 /**/
@@ -951,7 +951,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_ZTransformDB (
 /**/
 
 /********************************************************
-* Function: SUF_EstimateBPFilterLength
+* Function: SUF_EstimateBPFirFilterLength
 *
 * Parameters:
 *   const SLData_t SampleRate,
@@ -971,7 +971,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_ZTransformDB (
 *
 ********************************************************/
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SUF_EstimateBPFilterLength (
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_EstimateBPFirFilterLength (
   const SLData_t SampleRate,
   const SLData_t CentreFrequency,
   const SLArrayIndex_t MinimumLength,
@@ -995,13 +995,13 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_EstimateBPFilterLength (
   }
 
   return (IndexOfMinFrac);
-}                                                                   // End of SUF_EstimateBPFilterLength()
+}                                                                   // End of SUF_EstimateBPFirFilterLength()
 
 
 /**/
 
 /********************************************************
-* Function: SUF_EstimateBPFilterError
+* Function: SUF_EstimateBPFirFilterError
 *
 * Parameters:
 *   const SLData_t SampleRate,
@@ -1022,7 +1022,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_EstimateBPFilterLength (
 *
 ********************************************************/
 
-void SIGLIB_FUNC_DECL SUF_EstimateBPFilterError (
+void SIGLIB_FUNC_DECL SUF_EstimateBPFirFilterError (
   const SLData_t SampleRate,
   const SLData_t CentreFrequency,
   const SLArrayIndex_t MinimumLength,
@@ -1041,7 +1041,7 @@ void SIGLIB_FUNC_DECL SUF_EstimateBPFilterError (
 
     *pError++ = Frac;
   }
-}                                                                   // End of SUF_EstimateBPFilterError()
+}                                                                   // End of SUF_EstimateBPFirFilterError()
 
 /**/
 

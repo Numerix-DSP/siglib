@@ -15,7 +15,7 @@ INTRODUCTION
 The files in this folder provide examples for accessing SigLib source
 files from C#. They are designed to work with Visual C# Express 2008.
 
-There are two sub-folders :
+There are two sub-folders:
 	Direct - A direct calling to the SigLib DLL
 	SWIG - A SWIG compatible SigLib interface
 
@@ -31,10 +31,10 @@ Visual C# Express 2008 can be downloaded from www.microsoft.com/express/vcsharp/
 SigLib is a trademark of Delta Numerix all other trademarks acknowledged.
 
 
-For additional information, please contact :
+For additional information, please contact:
 
 Delta Numerix,
 Email: info@numerix-dsp.com
-WWW  : https:\\www.numerix-dsp.com
+WWW:   https:\\www.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix. All rights reserved.

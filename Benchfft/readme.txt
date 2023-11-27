@@ -15,7 +15,7 @@ INTRODUCTION
 The files in this folder provide the basic benchmarking functionality for the SigLib
 FFT functions. The source code is located in the file benchfft.c.
 
-The following files are provided to build the benchmark application :
+The following files are provided to build the benchmark application:
 
 benchfft.dsw        Microsoft Visual Studio V6.00 workspace file
 benchfft.dsp        Analog Devices Sharc Visual DSP
@@ -35,10 +35,10 @@ file benchfft.c.
 SigLib is a trademark of Delta Numerix all othertrademarks acknowledged.
 
 
-For additional information, please contact :
+For additional information, please contact:
 
 Delta Numerix
 Email: info@numerix-dsp.com
-WWW  : https:\\www.numerix-dsp.com
+WWW:   https:\\www.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.

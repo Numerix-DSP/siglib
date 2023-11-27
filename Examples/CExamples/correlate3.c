@@ -25,8 +25,8 @@ static const SLData_t Src2[] = {                                    // Input dat
 #else
 // Dataset #2
 // Correct results
-// Src1 corr Src2 : 20, 41, 62, 47, 32, 17, 6
-// Src2 corr Src1 : 6, 17, 32, 47, 62, 41, 20
+// Src1 corr Src2: 20, 41, 62, 47, 32, 17, 6
+// Src2 corr Src1: 6, 17, 32, 47, 62, 41, 20
 
 #define INPUT_1_LENGTH          5                                   // Input array #1 length
 #define INPUT_2_LENGTH          3                                   // Input array #2 length

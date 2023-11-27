@@ -37,12 +37,12 @@ int main (
   printf ("SDS_EuclideanDistance (Sample): %.2lf\n\n", SDS_EuclideanDistance (src1x[0], src1y[0], src2x[0], src2y[0]));
 
   SDA_EuclideanDistance (src1x, src1y, src2x, src2y, dst, SRC_LEN);
-  printf ("SDA_EuclideanDistance (Array) : %.2lf, %.2lf, %.2lf\n\n", dst[0], dst[1], dst[2]);
+  printf ("SDA_EuclideanDistance (Array): %.2lf, %.2lf, %.2lf\n\n", dst[0], dst[1], dst[2]);
 
   printf ("SDS_EuclideanDistanceSquared (Sample): %.2lf\n\n", SDS_EuclideanDistanceSquared (src1x[0], src1y[0], src2x[0], src2y[0]));
 
   SDA_EuclideanDistanceSquared (src1x, src1y, src2x, src2y, dst, SRC_LEN);
-  printf ("SDA_EuclideanDistanceSquared (Array) : %.2lf, %.2lf, %.2lf\n\n", dst[0], dst[1], dst[2]);
+  printf ("SDA_EuclideanDistanceSquared (Array): %.2lf, %.2lf, %.2lf\n\n", dst[0], dst[1], dst[2]);
 
   exit (0);
 }

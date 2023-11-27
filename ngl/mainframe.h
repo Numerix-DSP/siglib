@@ -7,9 +7,9 @@
 #include "demo.h"                                                   // Include project header files
 
 /*
-    Function Name : mainFrame
-    Description : Top level frame
-    Notes : This should contain the filter designer and graph children
+    Function Name: mainFrame
+    Description: Top level frame
+    Notes: This should contain the filter designer and graph children
 */
 
 class           mainFrame:public wxFrame {

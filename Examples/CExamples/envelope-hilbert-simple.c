@@ -13,7 +13,7 @@
 #define SAMPLE_LENGTH   512
 
 #define FILTER_LENGTH   31
-#define FILTER_GROUP_DELAY  (FILTER_LENGTH >> 1)                    // Filter group delay - Note : C array indexing
+#define FILTER_GROUP_DELAY  (FILTER_LENGTH >> 1)                    // Filter group delay -Note: C array indexing
 
 // Declare global variables and arrays
 static SLData_t SinePhase;
@@ -52,8 +52,8 @@ int main (
 
   pFilterTapsStart = pFilterTaps;
 // Initialise Hilbert transformer coefficients
-  SIF_HilbertTransformer (pFilterTaps,                              // Pointer to filter coefficients
-                          FILTER_LENGTH);                           // Filter length
+  SIF_HilbertTransformerFirFilter (pFilterTaps,                     // Pointer to filter coefficients
+                                   FILTER_LENGTH);                  // Filter length
 // Initialise FIR filter for Hilbert transformer
   SIF_Fir (pFilterState,                                            // Pointer to filter state array
            &FilterIndex,                                            // Pointer to filter index register

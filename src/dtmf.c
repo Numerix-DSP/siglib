@@ -6,7 +6,7 @@ Siglib Library Version  : 10.50         |
 Compiler  : Independent                 | Start Date    : 08/05/2099
 Options   :                             | Latest Update : 17/11/2020
 ---------------------------------------------------------------------------
-Support for SigLib is available via Email : support@numerix-dsp.com
+Support for SigLib is available via Email: support@numerix-dsp.com
 
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
@@ -32,7 +32,7 @@ support@.numerix-dsp.com
 
 Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
-Description : DSP maths utility functions, for SigLib DSP library.
+Description: DSP maths utility functions, for SigLib DSP library.
 
 ****************************************************************************/
 
@@ -224,7 +224,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_DtmfGenerate (
 
 
 // Add the signals for the two tones
-// Note :- The signals are individually scaled by a factor of 2.0 to avoid overflow
+//Note:- The signals are individually scaled by a factor of 2.0 to avoid overflow
 
   SLFixData_t     FirstTimeFlag = SIGLIB_TRUE;
   SLData_t        ResonatorDelay[SIGLIB_RESONATOR_DELAY_LENGTH];

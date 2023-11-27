@@ -143,7 +143,7 @@ int main (
   getchar ();                                                       // Wait for <Carriage Return>
   gpc_close (h2DPlot);
 
-  printf ("Multiplexed array :\n");
+  printf ("Multiplexed array:\n");
   SUF_PrintArray (muxd, 12);
 
   SDA_Demultiplex (muxd,                                            // Pointer to source multiplexed array
@@ -161,7 +161,7 @@ int main (
                  4,                                                 // Number of frames in array
                  3);                                                // Number of samples in frame
 
-  printf ("Multiplexed array :\n");
+  printf ("Multiplexed array:\n");
   SUF_PrintArray (muxd, 12);
 
   SUF_MemoryFree (pData1);                                          // Free memory
