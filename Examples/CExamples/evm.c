@@ -61,5 +61,5 @@ int main (
           ReceivedConstellationPoints[4].real, ReceivedConstellationPoints[4].imag, ErrorVector);
   printf ("EVM (Percent) = %lf, EVM (dB) = %lf\n\n", ErrorVectorMagnitudePercent, ErrorVectorMagnitudeDecibels);
 
-  exit (0);
+  return (0);
 }

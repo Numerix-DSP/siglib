@@ -66,5 +66,5 @@ int main (
   SDS_ComplexDivide (2.0, 6.0, 4.0, 1.0, &ResultReal, &ResultImag);
   printf ("(2 + j6) / (4 + j1) = %lf +j%lf\n", ResultReal, ResultImag);
 
-  exit (0);
+  return (0);
 }

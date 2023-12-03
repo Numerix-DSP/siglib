@@ -80,5 +80,5 @@ int main (
   printf ("\nDestination Array:\n");
   SUF_PrintArray (dst, SOURCE1_ARRAY_LENGTH - SOURCE2_ARRAY_LENGTH);
 
-  exit (0);
+  return (0);
 }

@@ -18,7 +18,6 @@
 #define FIRST_SUB_CARRIER   3
 
 // Declare global variables and arrays
-static SLData_t *pSrcReal, *pSrcImag, *pDftReal, *pDftImag, *pDstReal, *pDstImag;
 
 
 int main (
@@ -27,12 +26,12 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot object
   SLData_t        CarrierSign;
 
-  pSrcReal = SUF_VectorArrayAllocate (SYMBOL_LENGTH);               // Allocate memory
-  pSrcImag = SUF_VectorArrayAllocate (SYMBOL_LENGTH);
-  pDftReal = SUF_VectorArrayAllocate (SYMBOL_LENGTH);
-  pDftImag = SUF_VectorArrayAllocate (SYMBOL_LENGTH);
-  pDstReal = SUF_VectorArrayAllocate (SYMBOL_LENGTH);
-  pDstImag = SUF_VectorArrayAllocate (SYMBOL_LENGTH);
+  SLData_t       *pSrcReal = SUF_VectorArrayAllocate (SYMBOL_LENGTH); // Allocate memory
+  SLData_t       *pSrcImag = SUF_VectorArrayAllocate (SYMBOL_LENGTH);
+  SLData_t       *pDftReal = SUF_VectorArrayAllocate (SYMBOL_LENGTH);
+  SLData_t       *pDftImag = SUF_VectorArrayAllocate (SYMBOL_LENGTH);
+  SLData_t       *pDstReal = SUF_VectorArrayAllocate (SYMBOL_LENGTH);
+  SLData_t       *pDstImag = SUF_VectorArrayAllocate (SYMBOL_LENGTH);
 
 
   h2DPlot =                                                         // Initialize plot
@@ -159,5 +158,5 @@ int main (
   SUF_MemoryFree (pDstReal);
   SUF_MemoryFree (pDstImag);
 
-  exit (0);
+  return (0);
 }

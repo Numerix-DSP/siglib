@@ -12,9 +12,6 @@
 #define LOG2_FFT_LENGTH         SAI_FftLengthLog2(FFT_LENGTH)       // Log2 FFT length,
 
 // Declare global variables and arrays
-static SLData_t *chirp, *noise, *pNoiseyChirp;
-static SLData_t *pRcc, *pRnn, *pRc_nc, *pRealData, *pImagData, *pResults, *pFFTCoeffs;
-static SLData_t ChirpPhase, ChirpValue;
 
 
 int main (
@@ -22,19 +19,21 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
+  SLData_t        ChirpPhase, ChirpValue;
+
 // Allocate memory
-  chirp = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  noise = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pNoiseyChirp = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *chirp = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *noise = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pNoiseyChirp = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
-  pRcc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pRnn = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pRc_nc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pRcc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pRnn = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pRc_nc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
-  pRealData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pResults = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (SAMPLE_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (SAMPLE_LENGTH);
 
   if ((NULL == chirp) || (NULL == noise) || (NULL == pNoiseyChirp) ||
       (NULL == pRcc) || (NULL == pRnn) || (NULL == pRc_nc) ||
@@ -299,5 +298,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

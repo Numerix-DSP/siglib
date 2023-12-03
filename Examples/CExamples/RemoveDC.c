@@ -12,8 +12,6 @@
 #define ALPHA                   0.99
 
 // Declare global variables and arrays
-static SLData_t *pSrc, *pDst;                                       // Dataset pointers
-static SLData_t SinePhase;
 
 
 int main (
@@ -24,8 +22,10 @@ int main (
   SLData_t        PreviousInput = SIGLIB_ZERO;
   SLData_t        PreviousOutput = SIGLIB_ZERO;
 
-  pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t        SinePhase;
+
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   if ((NULL == pSrc) || (NULL == pDst)) {
 
@@ -106,5 +106,5 @@ int main (
   SUF_MemoryFree (pSrc);                                            // Free memory
   SUF_MemoryFree (pDst);
 
-  exit (0);
+  return (0);
 }

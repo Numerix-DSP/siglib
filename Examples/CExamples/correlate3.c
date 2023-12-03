@@ -258,5 +258,5 @@ int main (
   getchar ();                                                       // Wait for <Carriage Return>
   gpc_close (h2DPlot);
 
-  exit (0);
+  return (0);
 }

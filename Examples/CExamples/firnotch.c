@@ -22,8 +22,6 @@
 // Declare global variables and arrays
 static SLData_t pFilterTaps[FILTER_LENGTH];
 static SLData_t pFilterState[FILTER_LENGTH];
-static SLArrayIndex_t FilterIndex;
-static SLData_t *pSrc, *pRealData, *pImagData, *pResults, *pFFTCoeffs;
 
 
 int main (
@@ -31,12 +29,14 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
+  SLArrayIndex_t  FilterIndex;
+
 // Allocate memory
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (PLOT_LENGTH);
-  pSrc = SUF_VectorArrayAllocate (IMPULSE_RESPONSE_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (PLOT_LENGTH);
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (IMPULSE_RESPONSE_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pRealData) || (NULL == pImagData) || (NULL == pResults) || (NULL == pSrc) || (NULL == pFFTCoeffs)) {
 
@@ -140,5 +140,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

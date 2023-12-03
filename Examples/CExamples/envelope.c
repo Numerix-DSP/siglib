@@ -18,11 +18,6 @@
 #define DECAY_MS_PERIOD     10.                                     // Decay time period
 
 // Declare global variables and arrays
-static SLData_t SinePhase;
-
-static SLData_t envOnePoleFilterState;
-static SLData_t attackCoeff, decayCoeff;
-static SLData_t *pSrc1, *pSrc2;
 
 
 int main (
@@ -43,23 +38,25 @@ int main (
     exit (-1);
   }
 
-  pSrc1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pSrc2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t        envOnePoleFilterState;
+
+  SLData_t       *pSrc1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pSrc2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
 
   SIF_Envelope (&envOnePoleFilterState);                            // Pointer to one-pole state variable
 
-  attackCoeff = SDS_OnePoleTimeConstantToFilterCoeff (ATTACK_MS_PERIOD, // Attack period in ms
-                                                      SAMPLE_RATE_HZ);  // Sample rate
+  SLData_t        attackCoeff = SDS_OnePoleTimeConstantToFilterCoeff (ATTACK_MS_PERIOD, // Attack period in ms
+                                                                      SAMPLE_RATE_HZ);  // Sample rate
 
   printf ("\nAttack period = %lf, Attack Coefficient = %lf\n", ATTACK_MS_PERIOD, attackCoeff);
 
-  decayCoeff = SDS_OnePoleTimeConstantToFilterCoeff (DECAY_MS_PERIOD, // Decay filter period in ms
-                                                     SAMPLE_RATE_HZ); // Sample rate
+  SLData_t        decayCoeff = SDS_OnePoleTimeConstantToFilterCoeff (DECAY_MS_PERIOD, // Decay filter period in ms
+                                                                     SAMPLE_RATE_HZ); // Sample rate
 
   printf ("\nDecay period = %lf, Decay Coefficient = %lf\n", DECAY_MS_PERIOD, decayCoeff);
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pSrc1,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
@@ -68,11 +65,11 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pSrc2,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
@@ -81,7 +78,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -137,5 +134,5 @@ int main (
   SUF_MemoryFree (pSrc1);                                           // Free memory
   SUF_MemoryFree (pSrc2);
 
-  exit (0);
+  return (0);
 }

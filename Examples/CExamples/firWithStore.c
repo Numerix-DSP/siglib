@@ -28,10 +28,7 @@ static const SLData_t pFilterTaps[FILTER_LENGTH] = {
   2.891E-3, 2.648E-3, 2.803E-3, -3.783E-3
 };
 
-
 static SLData_t pFilterState[FILTER_LENGTH];
-static SLData_t *pSrc, *pDst;
-static SLData_t SinePhase;
 
 
 int main (
@@ -39,8 +36,8 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   if ((NULL == pSrc) || (NULL == pDst)) {
     printf ("Memory allocation error in main()\n");
@@ -62,7 +59,7 @@ int main (
   SIF_FirWithStore (pFilterState,                                   // Pointer to filter state array
                     FILTER_LENGTH);                                 // Filter length
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
 
 // Generate a noisy sinewave
   SDA_SignalGenerate (pSrc,                                         // Pointer to destination array
@@ -73,7 +70,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -143,5 +140,5 @@ int main (
   SUF_MemoryFree (pSrc);                                            // Free memory
   SUF_MemoryFree (pDst);
 
-  exit (0);
+  return (0);
 }

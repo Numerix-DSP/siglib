@@ -48,13 +48,9 @@
 
 SLData_t        pSrc[DATA_LENGTH];                                  // Source data
 SLData_t        pDst[DATA_LENGTH];                                  // Destination data
-SLData_t       *pFilterState, *pIIRCoeffs;
 
 
-void            main (
-  void);
-
-void main (
+int main (
   void)
 {
 #if _MSC_VER
@@ -66,8 +62,8 @@ void main (
   double          elapsedTime;
 #endif
 
-  pIIRCoeffs = SUF_IirCoefficientAllocate (FILTER_STAGES);
-  pFilterState = SUF_IirStateArrayAllocate (FILTER_STAGES);
+  SLData_t       *pIIRCoeffs = SUF_IirCoefficientAllocate (FILTER_STAGES);
+  SLData_t       *pFilterState = SUF_IirStateArrayAllocate (FILTER_STAGES);
 
   SDA_Clear (pSrc, DATA_LENGTH);                                    // Ensure that it is valid data that we are processing
   SDA_Clear (pIIRCoeffs, FILTER_STAGES * SIGLIB_IIR_COEFFS_PER_BIQUAD);
@@ -115,4 +111,5 @@ void main (
   printf ("Execution time = %f seconds\n", elapsedTime);
 #endif
 
+  return (0);
 }

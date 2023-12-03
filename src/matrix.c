@@ -543,6 +543,56 @@ void SIGLIB_FUNC_DECL SMX_LuSolve (
 /**/
 
 /********************************************************
+* Function: SMX_CholeskyDecompose
+*
+* Parameters:
+*   const SLData_t *        - Source matrix pointer
+*   SLData_t *              - Destination matrix pointer
+*   const SLArrayIndex_t    - Number of rows and columns
+*
+* Return value:
+*   void
+*
+* Description: Perform Cholesky decomposition on a square matrix
+*
+* Notes:
+*   This function works in-place and not-in-place.
+*
+********************************************************/
+
+void SIGLIB_FUNC_DECL SMX_CholeskyDecompose (
+  const SLData_t * SIGLIB_PTR_DECL pSrc,
+  SLData_t * SIGLIB_PTR_DECL pDst,
+  const SLArrayIndex_t RowsAndCols)
+{
+  for (SLArrayIndex_t i = 0; i < RowsAndCols; i++) {
+    SLArrayIndex_t  j;
+    for (j = 0; j <= i; j++) {
+      SLData_t        sum = 0;
+
+      if (j == i) {                                                 // On the diagonal
+        for (SLArrayIndex_t k = 0; k < j; k++) {
+          sum += pDst[j * RowsAndCols + k] * pDst[j * RowsAndCols + k];
+        }
+        pDst[j * RowsAndCols + j] = SDS_Sqrt (pSrc[j * RowsAndCols + j] - sum);
+      }
+      else {                                                        // Not on the diagonal
+        for (SLArrayIndex_t k = 0; k < j; k++) {
+          sum += (pDst[i * RowsAndCols + k] * pDst[j * RowsAndCols + k]);
+        }
+        pDst[i * RowsAndCols + j] = (pSrc[i * RowsAndCols + j] - sum) / pDst[j * RowsAndCols + j];
+      }
+    }
+    for (; j < RowsAndCols; j++) {                                  // Clear the upper triangular matrix
+      pDst[i * RowsAndCols + j] = SIGLIB_ZERO;
+    }
+  }
+}                                                                   // End of SMX_CholeskyDecompose()
+
+
+/**/
+
+/********************************************************
 * Function: SMX_Determinant
 *
 * Parameters:

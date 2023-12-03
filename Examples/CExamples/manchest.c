@@ -34,5 +34,5 @@ int main (
     printf ("Encoder output = 0x%x, Decoder output = 0x%x\n", EncOutput, DecOutput);
   }
 
-  exit (0);
+  return (0);
 }

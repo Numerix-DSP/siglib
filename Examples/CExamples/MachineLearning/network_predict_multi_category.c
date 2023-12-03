@@ -31,8 +31,6 @@
 #define NUM_CATEGORIES                      4                       // Number of output categories
 
 // Declare global variables and arrays
-static SLData_t *pLayer1PostActivation, *pLayer2PostActivation;
-
 static char     filenameWeights[2400];
 static char     filenameWeightsParameter[2000];
 
@@ -86,8 +84,8 @@ int main (
   int argc,
   char *argv[])
 {
-  pLayer1PostActivation = SUF_VectorArrayAllocate (NETWORK_HIDDEN_LAYER_NODES); // Allocate arrays
-  pLayer2PostActivation = SUF_VectorArrayAllocate (NUM_CATEGORIES);
+  SLData_t       *pLayer1PostActivation = SUF_VectorArrayAllocate (NETWORK_HIDDEN_LAYER_NODES); // Allocate arrays
+  SLData_t       *pLayer2PostActivation = SUF_VectorArrayAllocate (NUM_CATEGORIES);
 
   if ((NULL == pLayer1PostActivation) || (NULL == pLayer2PostActivation)) {
     printf ("\n\nMemory allocation failed\n\n");
@@ -243,7 +241,7 @@ int main (
   SUF_MemoryFree (pLayer2PostActivation);
   SUF_MemoryFree (pPredictionData);
 
-  exit (0);
+  return (0);
 }
 
 

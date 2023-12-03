@@ -32,9 +32,6 @@ static SLData_t pRealInput[INPUT_LEN], pImagInput[LEN], pRealOutput[LEN], pImagO
 static SLData_t pResults[LEN];
 static SLData_t RealTime[FFT_LENGTH], ImagTime[FFT_LENGTH];
 static SLData_t RealNew[FFT_LENGTH], ImagNew[FFT_LENGTH];
-static SLData_t SinePhase;
-
-static SLData_t *pFFTCoeffs;
 
 
 int main (
@@ -42,8 +39,7 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-// Allocate enough space for largest FFT
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH2);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH2);  // Allocate enough space for largest FFT
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Frequency Domain Interpolation",                  // Plot title
@@ -63,7 +59,7 @@ int main (
            SIGLIB_BIT_REV_STANDARD,                                 // Bit reverse mode flag / Pointer to bit reverse address table
            FFT_LENGTH);                                             // FFT length
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
 
 // If shifting up, generate a low frequency,
 // if shifting down generate a high frequency
@@ -77,7 +73,7 @@ int main (
                         SIGLIB_ZERO,                                // D.C. Offset
                         SIGLIB_ZERO,                                // Unused
                         SIGLIB_ZERO,                                // Signal end value - Unused
-                        &SinePhase,                                 // Signal phase - maintained across array boundaries
+                        &sinePhase,                                 // Signal phase - maintained across array boundaries
                         SIGLIB_NULL_DATA_PTR,                       // Unused
                         LEN);                                       // Output dataset length
   }
@@ -90,7 +86,7 @@ int main (
                         SIGLIB_ZERO,                                // D.C. Offset
                         SIGLIB_ZERO,                                // Unused
                         SIGLIB_ZERO,                                // Signal end value - Unused
-                        &SinePhase,                                 // Signal phase - maintained across array boundaries
+                        &sinePhase,                                 // Signal phase - maintained across array boundaries
                         SIGLIB_NULL_DATA_PTR,                       // Unused
                         LEN);                                       // Output dataset length
   }
@@ -264,5 +260,5 @@ int main (
 
   SUF_MemoryFree (pFFTCoeffs);                                      // Free memory
 
-  exit (0);
+  return (0);
 }

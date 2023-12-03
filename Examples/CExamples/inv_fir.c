@@ -103,8 +103,6 @@ static const SLData_t filter_coeffs[FILTER_LENGTH] = {
   -1.41637511717E-0004
 };
 
-static SLData_t *pRealData, *pImagData, *pResults, *pFFTCoeffs;
-
 
 int main (
   void)
@@ -112,10 +110,10 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
 // Data array
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("FIR Filter Frequency Inversion",                  // Plot title
@@ -289,5 +287,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

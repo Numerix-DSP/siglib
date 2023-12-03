@@ -41,10 +41,10 @@
 #endif
 
                                                             // Injected noise parameters
-// #define GAUS_NOISE_VARIANCE             4.0
-#define GAUS_NOISE_VARIANCE             0.01
-// #define GAUS_NOISE_VARIANCE             0.0
-#define GAUS_NOISE_OFFSET               SIGLIB_ZERO
+// #define GAUSSIAN_NOISE_VARIANCE             4.0
+#define GAUSSIAN_NOISE_VARIANCE             0.01
+// #define GAUSSIAN_NOISE_VARIANCE             0.0
+#define GAUSSIAN_NOISE_OFFSET               SIGLIB_ZERO
 
 
             // Derived application definitions
@@ -56,10 +56,8 @@
 
 // Declare global variables and arrays
 
-static SLData_t *pCarrierTable;                                     // Overlapped cosine + sine look-up table
-
                                                             // Modem parameters and variables
-static SLData_t TxCarrierPhase;
+static SLData_t TxcarrierPhase;
 static SLArrayIndex_t TxPreviousOutputSymbol;
 
                             // RRCF arrays
@@ -95,7 +93,7 @@ int main (
   int             InputChar;
   int             outputSampleCount = 0;
 
-  pCarrierTable = SUF_QPSKCarrierArrayAllocate (CARRIER_SINE_TABLE_SIZE); // Allocate arrays
+  SLData_t       *pCarrierTable = SUF_QPSKCarrierArrayAllocate (CARRIER_SINE_TABLE_SIZE); // Overlapped cosine + sine look-up table
 
 // Initialize FIR low-pass filter
   SIF_Fir (TxPreFilterState,                                        // Pointer to filter state array
@@ -124,7 +122,7 @@ int main (
   SIF_PiByFourDQpskModulate (pCarrierTable,                         // Carrier table pointer
                              CARRIER_TABLE_FREQ / SAMPLE_RATE_HZ,   // Carrier phase increment per sample (radians / 2π)
                              CARRIER_SINE_TABLE_SIZE,               // Carrier sine table size
-                             &TxCarrierPhase,                       // Carrier phase pointer
+                             &TxcarrierPhase,                       // Carrier phase pointer
                              &TxSampleClock,                        // Sample clock pointer
                              &TxMagn,                               // Magnitude pointer
                              TxIFilterState,                        // RRCF Tx I delay pointer
@@ -182,7 +180,7 @@ int main (
                                    OutputArray,                     // Destination array
                                    pCarrierTable,                   // Carrier table pointer
                                    CARRIER_SINE_TABLE_SIZE,         // Carrier sine table size
-                                   &TxCarrierPhase,                 // Carrier phase pointer
+                                   &TxcarrierPhase,                 // Carrier phase pointer
                                    &TxSampleClock,                  // Sample clock pointer
                                    &TxMagn,                         // Magnitude pointer
                                    CARRIER_TABLE_INCREMENT,         // Carrier table increment
@@ -247,7 +245,7 @@ int main (
   fclose (fpi);                                                     // Close files
   fclose (fpo);
 
-  exit (0);
+  return (0);
 }
 
 
@@ -261,8 +259,8 @@ void inject_noise (
                         SIGLIB_ZERO,                                // Peak value of signal
                         SIGLIB_FILL,                                // Buffer fill mode, fill up or add to
                         SIGLIB_ZERO,                                // Signal frequency
-                        GAUS_NOISE_OFFSET,                          // Signal offset
-                        GAUS_NOISE_VARIANCE,                        // Param, different for each signal type
+                        GAUSSIAN_NOISE_OFFSET,                      // Signal offset
+                        GAUSSIAN_NOISE_VARIANCE,                    // Param, different for each signal type
                         SIGLIB_ZERO,                                // End value
                         &GaussianNoisePhase,                        // Phase offset
                         &GaussianNoiseValue,                        // Current value
@@ -297,8 +295,8 @@ void inject_noise (
                       SIGLIB_ZERO,                                  // Peak value of signal
                       SIGLIB_FILL,                                  // Buffer fill mode, fill up or add to
                       SIGLIB_ZERO,                                  // Signal frequency
-                      GAUS_NOISE_OFFSET,                            // Signal offset
-                      GAUS_NOISE_VARIANCE,                          // Param, different for each signal type
+                      GAUSSIAN_NOISE_OFFSET,                        // Signal offset
+                      GAUSSIAN_NOISE_VARIANCE,                      // Param, different for each signal type
                       SIGLIB_ZERO,                                  // End value
                       &GaussianNoisePhase,                          // Phase offset
                       &GaussianNoiseValue,                          // Current value

@@ -36,8 +36,7 @@ static SLComplexRect_s ZPlaneZeros[NUMBER_OF_POLES + 1];            // NOTE - TH
 static SLComplexRect_s ZPlanePoles[NUMBER_OF_POLES + 1];
 
 static SLData_t pFilterState[IIR_FILTER_STAGES * SIGLIB_IIR_DELAY_SIZE];
-static SLData_t *pIIRCoeffs;
-static SLData_t *pRealData, *pImagData, *pResults, *pStepData, *pFFTCoeffs;
+
 
 int main (
   void)
@@ -45,17 +44,16 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot objects
   h_GPC_Plot     *hPZPlot;
 
-  SLData_t        Max;
   SLArrayIndex_t  NumberOfZeros = NUMBER_OF_ZEROS;                  // Used for initialising correct number
   SLArrayIndex_t  NumberOfPoles = NUMBER_OF_POLES;                  // of  s-plane poles and zeros
 
 // Allocate memory
-  pIIRCoeffs = SUF_IirCoefficientAllocate (IIR_FILTER_STAGES);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pRealData = SUF_VectorArrayAllocate (IMPULSE_RESPONSE_LENGTH);
-  pStepData = SUF_VectorArrayAllocate (IMPULSE_RESPONSE_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pIIRCoeffs = SUF_IirCoefficientAllocate (IIR_FILTER_STAGES);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (IMPULSE_RESPONSE_LENGTH);
+  SLData_t       *pStepData = SUF_VectorArrayAllocate (IMPULSE_RESPONSE_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pIIRCoeffs) || (NULL == pImagData) || (NULL == pResults) || (NULL == pRealData) || (NULL == pStepData) || (NULL == pFFTCoeffs)) {
 
@@ -293,8 +291,8 @@ int main (
                     pResults,                                       // Pointer to log magnitude destination array
                     PLOT_LENGTH);                                   // Dataset length
 
-  Max = SDA_AbsMax (pResults,                                       // Pointer to source array
-                    PLOT_LENGTH);                                   // Dataset length
+  SLData_t        Max = SDA_AbsMax (pResults,                       // Pointer to source array
+                                    PLOT_LENGTH);                   // Dataset length
   SDA_Add (pResults,                                                // Pointer to source array
            Max,                                                     // D.C. offset
            pResults,                                                // Pointer to destination array
@@ -319,5 +317,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

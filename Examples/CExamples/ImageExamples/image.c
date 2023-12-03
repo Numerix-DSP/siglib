@@ -18,14 +18,6 @@
 #define INVERSE_IMAGE_DIMENSION     (21.0 / IMAGE_DIMENSION)
 
 // Declare global variables and arrays
-static SLImageData_t *pImage0, *pImage1;
-static SLImageData_t *pImage0Start, *pImage1Start;
-static SLImageData_t *pImagImage;                                   // Used for complex FFT data
-static SLData_t *pRealBuffer, *pImagBuffer;                         // Used for calculating the FFT
-
-static SLData_t *pLineBuffer, *pLineBufferStart;                    // Used for per-line processing
-
-static SLData_t *pHistogram;
 static SLData_t FilterCoeffs[] = { 0.0, 0.1, 0.0, 0.1, 0.5, 0.1, 0.0, 0.1, 0.0 };
 
 static SLData_t FFTCoeffs[IMAGE_DIMENSION];                         // FFT coefficients array
@@ -49,15 +41,15 @@ int main (
   }
 
 // Allocate memory
-  pImage0 = (SLImageData_t *) malloc ((size_t) (IMAGE_SIZE * sizeof (SLImageData_t)));
-  pImage1 = (SLImageData_t *) malloc ((size_t) (IMAGE_SIZE * sizeof (SLImageData_t)));
-  pImagImage = (SLImageData_t *) malloc ((size_t) (IMAGE_SIZE * sizeof (SLImageData_t)));
+  SLImageData_t  *pImage0 = (SLImageData_t *) malloc ((size_t) (IMAGE_SIZE * sizeof (SLImageData_t)));
+  SLImageData_t  *pImage1 = (SLImageData_t *) malloc ((size_t) (IMAGE_SIZE * sizeof (SLImageData_t)));
+  SLImageData_t  *pImagImage = (SLImageData_t *) malloc ((size_t) (IMAGE_SIZE * sizeof (SLImageData_t)));
 
-  pLineBuffer = SUF_VectorArrayAllocate (IMAGE_DIMENSION);
-  pHistogram = SUF_VectorArrayAllocate (HISTOGRAM_LENGTH);
+  SLData_t       *pLineBuffer = SUF_VectorArrayAllocate (IMAGE_DIMENSION);
+  SLData_t       *pHistogram = SUF_VectorArrayAllocate (HISTOGRAM_LENGTH);
 
-  pRealBuffer = SUF_VectorArrayAllocate (IMAGE_DIMENSION);
-  pImagBuffer = SUF_VectorArrayAllocate (IMAGE_DIMENSION);
+  SLData_t       *pRealBuffer = SUF_VectorArrayAllocate (IMAGE_DIMENSION);
+  SLData_t       *pImagBuffer = SUF_VectorArrayAllocate (IMAGE_DIMENSION);
 
   if ((NULL == pImage0) || (NULL == pImage1) || (NULL == pImagImage) ||
       (NULL == pLineBuffer) || (NULL == pHistogram) || (NULL == pRealBuffer) || (NULL == pImagBuffer)) {
@@ -66,9 +58,9 @@ int main (
     exit (-1);
   }
 
-  pImage0Start = pImage0;                                           // Initialize start pointers
-  pImage1Start = pImage1;
-  pLineBufferStart = pLineBuffer;
+  SLImageData_t  *pImage0Start = pImage0;                           // Initialize start pointers
+  SLImageData_t  *pImage1Start = pImage1;
+  SLData_t       *pLineBufferStart = pLineBuffer;
 
   SIF_Fft2d (FFTCoeffs, SIGLIB_NULL_ARRAY_INDEX_PTR, IMAGE_DIMENSION);
 
@@ -121,8 +113,7 @@ int main (
   getchar ();
 
 
-  pLineBuffer = pLineBufferStart;                                   // Set array pointers
-  for (SLArrayIndex_t i = 0; i < IMAGE_DIMENSION; i++) {
+  for (SLArrayIndex_t i = 0; i < IMAGE_DIMENSION; i++) {            // Set array pointers
     for (SLArrayIndex_t j = 0; j < IMAGE_DIMENSION; j++) {
       *pLineBuffer++ = (SLData_t) (*pImage0++);
     }

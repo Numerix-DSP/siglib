@@ -12,8 +12,6 @@
 #define BANDWIDTH           0.15
 
 // Declare global variables and arrays
-static SLData_t *pRealData, *pImagData, *pResults;                  // Dataset pointers
-static SLData_t *pFilterTaps;
 
 
 int main (
@@ -21,10 +19,10 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pRealData = SUF_VectorArrayAllocate (FOURIERT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FOURIERT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (FOURIERT_LENGTH);
-  pFilterTaps = SUF_VectorArrayAllocate (FOURIERT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FOURIERT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FOURIERT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (FOURIERT_LENGTH);
+  SLData_t       *pFilterTaps = SUF_VectorArrayAllocate (FOURIERT_LENGTH);
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Gaussian Filter",                                 // Plot title
@@ -138,5 +136,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFilterTaps);
 
-  exit (0);
+  return (0);
 }

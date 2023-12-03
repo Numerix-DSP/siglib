@@ -10,9 +10,6 @@
 #define SAMPLE_LENGTH   512
 
 // Declare global variables and arrays
-static SLData_t *pData, *pPeak;                                     // Dataset pointers
-static SLData_t PeakValue;
-static SLData_t SinePhase;
 
 
 int main (
@@ -20,8 +17,8 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pPeak = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pPeak = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Sample Peak Hold",                                // Plot title
@@ -35,7 +32,7 @@ int main (
     exit (-1);
   }
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.9,                                          // Signal peak level
@@ -44,7 +41,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -58,7 +55,7 @@ int main (
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
 
-  PeakValue = SIGLIB_ZERO;                                          // Initialise the peak
+  SLData_t        PeakValue = SIGLIB_ZERO;                          // Initialise the peak
 
   SDA_PeakHold (pData,                                              // Pointer to source array
                 pPeak,                                              // Pointer to peak array
@@ -84,5 +81,5 @@ int main (
   SUF_MemoryFree (pData);                                           // Free memory
   SUF_MemoryFree (pPeak);
 
-  exit (0);
+  return (0);
 }

@@ -14,7 +14,6 @@
 #define SAMPLE_RATE_HZ      10000.
 
 // Declare global variables and arrays
-static SLData_t *pSrc, *pDst;
 
 
 int main (
@@ -25,8 +24,8 @@ int main (
   SLData_t        OnePoleFilterState;
 
 // Allocate memory
-  pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("One-pole Filter",                                 // Plot title
@@ -87,5 +86,5 @@ int main (
   SUF_MemoryFree (pSrc);                                            // Free memory
   SUF_MemoryFree (pDst);
 
-  exit (0);
+  return (0);
 }

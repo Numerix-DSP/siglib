@@ -92,11 +92,6 @@ static const SLData_t FilterCoeffs[POLY_PHASE_FILTER_LENGTH] = {
 static SLData_t FilterPolyPhaseCoeffs[POLY_PHASE_FILTER_LENGTH];
 static SLData_t *pPolyPhaseFilterCoeffPointers[POLY_PHASE_FILTER_LENGTH];
 static SLArrayIndex_t PolyPhaseFilterLengths[NUMBER_OF_POLY_PHASES];
-static SLData_t *pPPFilter0StateArray, *pPPFilter1StateArray, *pPPFilter2StateArray;
-
-static SLArrayIndex_t PPFilter0Index, PPFilter1Index, Filter2Index;
-static SLData_t SinePhase;
-static SLData_t *pInput, *pConverted, *pRealData, *pImagData, *pResults, *pFFTCoeffs;
 
 
 int main (
@@ -106,12 +101,14 @@ int main (
 
   SLFixData_t     i, phase_clock;
 
-  pInput = SUF_VectorArrayAllocate (INPUT_SAMPLE_LENGTH);
-  pConverted = SUF_VectorArrayAllocate (OUTPUT_SAMPLE_LENGTH);
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLArrayIndex_t  PPFilter0Index, PPFilter1Index, Filter2Index;
+
+  SLData_t       *pInput = SUF_VectorArrayAllocate (INPUT_SAMPLE_LENGTH);
+  SLData_t       *pConverted = SUF_VectorArrayAllocate (OUTPUT_SAMPLE_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Multi-rate Filter Design",                        // Plot title
@@ -142,9 +139,9 @@ int main (
 // SUF_PrintArray (pPolyPhaseFilterCoeffPointers[2], PolyPhaseFilterLengths[2]);
 // printf ("\n");
 
-  pPPFilter0StateArray = SUF_VectorArrayAllocate (PolyPhaseFilterLengths[0]);
-  pPPFilter1StateArray = SUF_VectorArrayAllocate (PolyPhaseFilterLengths[1]);
-  pPPFilter2StateArray = SUF_VectorArrayAllocate (PolyPhaseFilterLengths[2]);
+  SLData_t       *pPPFilter0StateArray = SUF_VectorArrayAllocate (PolyPhaseFilterLengths[0]);
+  SLData_t       *pPPFilter1StateArray = SUF_VectorArrayAllocate (PolyPhaseFilterLengths[1]);
+  SLData_t       *pPPFilter2StateArray = SUF_VectorArrayAllocate (PolyPhaseFilterLengths[2]);
 
   SIF_Fir (pPPFilter0StateArray,                                    // Pointer to filter state array
            &PPFilter0Index,                                         // Pointer to filter index register
@@ -161,7 +158,7 @@ int main (
            SIGLIB_BIT_REV_STANDARD,                                 // Bit reverse mode flag / Pointer to bit reverse address table
            FFT_LENGTH);                                             // FFT length
 
-  SinePhase = SIGLIB_ZERO;                                          // Generate a sinewave
+  SLData_t        sinePhase = SIGLIB_ZERO;                          // Generate a sinewave
   SDA_SignalGenerate (pInput,                                       // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.7,                                          // Signal peak level
@@ -170,7 +167,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       INPUT_SAMPLE_LENGTH);                         // Output dataset length
 
@@ -313,5 +310,5 @@ int main (
   SUF_MemoryFree (pPPFilter1StateArray);
   SUF_MemoryFree (pPPFilter2StateArray);
 
-  exit (0);
+  return (0);
 }

@@ -68,8 +68,8 @@
 #endif
 #endif
 
-#define GAUS_NOISE_VARIANCE             SIGLIB_ZERO                 // Injected noise parameters
-#define GAUS_NOISE_OFFSET               SIGLIB_ZERO
+#define GAUSSIAN_NOISE_VARIANCE             SIGLIB_ZERO             // Injected noise parameters
+#define GAUSSIAN_NOISE_OFFSET               SIGLIB_ZERO
 
 
             // Derived application definitions
@@ -107,8 +107,7 @@ static const unsigned char TxString[] = {
 static char     RxString[80];
 
                                                             // Modem transmitter parameters and variables
-static SLData_t *pTxCarrierTable;                                   // Overlapped cosine + sine look-up table
-static SLData_t TxCarrierPhase;
+static SLData_t txCarrierPhase;
 static SLArrayIndex_t TxSampleClock;                                // Used to keep track of the samples and symbols
 static SLComplexRect_s TxMagn;                                      // Used to calculate the signal magnitude
 
@@ -133,14 +132,11 @@ static SLData_t pRealOutput[MAX_CONSTELLATION_POINTS], pImagOutput[MAX_CONSTELLA
 #define COSTAS_LP_LOOP_FILTER_ALPHA     0.5                         // Feedback coeff for one-pole loop filter
 #define COSTAS_LP_VCO_TABLE_SIZE        1024                        // Look up table for fast sine calculation
 
-static SLData_t *pCostasLpLPFCoeffs, *pCostasLpLPF1State, *pCostasLpLPF2State;  // Costas loop loop filter coefficient pointer
-
 static SLArrayIndex_t CostasLpLPF1Index;                            // Costas loop inphase LPF filter index
 static SLArrayIndex_t CostasLpLPF2Index;                            // Costas loop quadrature phase LPF filter index
 static SLData_t CostasLpState;                                      // Costas loop feedback state for next iteration
 
 static SLData_t CostasLpLoopFilterState;                            // Costas loop loop filter feedback coeff
-static SLData_t *pCostasLpVCOLookUpTable;                           // VCO cosine look-up-table pointer
 static SLData_t CostasLpVCOPhase;                                   // Costas loop VCO phase
 
                             // Early-late gate symbol synchronizer data
@@ -177,11 +173,6 @@ extern SLComplexRect_s siglib_numerix_OPSKRxConstellation[];        // Receiver 
 
 
 static SLData_t RxDemodErrorArray[SIGLIB_OPSK_NUMBER_OF_PHASES];    // Error calculation array
-
-#if (DIFFERENTIAL_ENCODING_ENABLE)
-static SLFixData_t *pDifferentialEncoderMap;                        // Differential encoding maps
-static SLFixData_t *pDifferentialDecoderMap;
-#endif
 
                             // Debug arrays
 #if DISPLAY_CONSTELLATION
@@ -241,16 +232,16 @@ int main (
     dpchar (TxString[i]);
   }
 #endif
-
-  pTxCarrierTable = SUF_OPSKCarrierArrayAllocate (TX_CARRIER_TABLE_SIZE); // Allocate arrays
+// Allocate arrays
+  SLData_t       *pTxCarrierTable = SUF_OPSKCarrierArrayAllocate (TX_CARRIER_TABLE_SIZE); // Overlapped cosine + sine look-up table
 #if (DIFFERENTIAL_ENCODING_ENABLE)
-  pDifferentialEncoderMap = SUF_DifferentialEncoderArrayAllocate (SIGLIB_OPSK_BITS_PER_SYMBOL);
-  pDifferentialDecoderMap = SUF_DifferentialEncoderArrayAllocate (SIGLIB_OPSK_BITS_PER_SYMBOL);
+  SLFixData_t    *pDifferentialEncoderMap = SUF_DifferentialEncoderArrayAllocate (SIGLIB_OPSK_BITS_PER_SYMBOL); // Differential encoding maps
+  SLFixData_t    *pDifferentialDecoderMap = SUF_DifferentialEncoderArrayAllocate (SIGLIB_OPSK_BITS_PER_SYMBOL);
 #endif
-  pCostasLpLPFCoeffs = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);
-  pCostasLpLPF1State = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);
-  pCostasLpLPF2State = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);
-  pCostasLpVCOLookUpTable = SUF_CostasLoopVCOArrayAllocate (COSTAS_LP_VCO_TABLE_SIZE);
+  SLData_t       *pCostasLpLPFCoeffs = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);  // Costas loop loop filter coefficient pointer
+  SLData_t       *pCostasLpLPF1State = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);
+  SLData_t       *pCostasLpLPF2State = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);
+  SLData_t       *pCostasLpVCOLookUpTable = SUF_CostasLoopVCOArrayAllocate (COSTAS_LP_VCO_TABLE_SIZE);  // VCO cosine look-up-table pointer
 
   if ((NULL == pTxCarrierTable) || (NULL == pCostasLpLPFCoeffs) || (NULL == pCostasLpLPF1State) ||
 #if (DIFFERENTIAL_ENCODING_ENABLE)
@@ -306,7 +297,7 @@ int main (
   SIF_OpskModulate (pTxCarrierTable,                                // Carrier table pointer
                     TX_CARRIER_TABLE_FREQ / SAMPLE_RATE,            // Carrier phase increment per sample (radians / 2π)
                     TX_CARRIER_TABLE_SIZE,                          // Carrier sine table size
-                    &TxCarrierPhase,                                // Carrier phase pointer
+                    &txCarrierPhase,                                // Carrier phase pointer
                     &TxSampleClock,                                 // Sample clock pointer
                     &TxMagn,                                        // Magnitude pointer
                     TxIRRCState,                                    // RRCF Tx I delay pointer
@@ -435,7 +426,7 @@ int main (
                         ModulatedSignal + (i * SYMBOL_LENGTH),      // Destination array
                         pTxCarrierTable,                            // Carrier table pointer
                         TX_CARRIER_TABLE_SIZE,                      // Carrier sine table size
-                        &TxCarrierPhase,                            // Carrier phase pointer
+                        &txCarrierPhase,                            // Carrier phase pointer
                         &TxSampleClock,                             // Sample clock pointer
                         &TxMagn,                                    // Magnitude pointer
                         TX_CARRIER_TABLE_INCREMENT,                 // Carrier table increment
@@ -484,8 +475,8 @@ int main (
                         SIGLIB_ZERO,                                // Signal peak level - Unused
                         SIGLIB_ADD,                                 // Fill (overwrite) or add to existing array contents
                         SIGLIB_ZERO,                                // Signal frequency - Unused
-                        GAUS_NOISE_OFFSET,                          // D.C. Offset
-                        GAUS_NOISE_VARIANCE,                        // Gaussian noise variance
+                        GAUSSIAN_NOISE_OFFSET,                      // D.C. Offset
+                        GAUSSIAN_NOISE_VARIANCE,                    // Gaussian noise variance
                         SIGLIB_ZERO,                                // Signal end value - Unused
                         &GaussianNoisePhase,                        // Pointer to gaussian signal phase - should be initialised to zero
                         &GaussianNoiseValue,                        // Gaussian signal second sample - should be initialised to zero
@@ -829,5 +820,5 @@ int main (
   SUF_MemoryFree (pCostasLpLPF2State);
   SUF_MemoryFree (pCostasLpVCOLookUpTable);
 
-  exit (0);
+  return (0);
 }

@@ -25,13 +25,6 @@
 //#define START_INDEX             60                        // Used for machine.wav
 
 
-static SLData_t *pDataArray, *pFDPRealData, *pFDPImagData, *pFDPResults;
-static SLData_t *pFDPFFTCoeffs, *pWindowCoeffs, *pOverlapArray;
-#if DISPLAY_AVERAGE_SPECTRUM
-static SLData_t *pAverageArray;
-#endif
-static SLArrayIndex_t *pPeakArray;
-
 static char     WavFilename[80];
 
 static SLWavFileInfo_s wavInfo;
@@ -60,13 +53,13 @@ int main (
   SLArrayIndex_t  ResampleResultLength;
   SLData_t        WindowInverseCoherentGain;
 
-  pDataArray = SUF_VectorArrayAllocate (SAMPLE_LENGTH);             // Input data array
-  pOverlapArray = SUF_VectorArrayAllocate (OVERLAP_LENGTH);         // Overlap data array
-  pWindowCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH);             // Window coeffs data array
-  pFDPRealData = SUF_VectorArrayAllocate (FFT_LENGTH);              // Real data array
-  pFDPImagData = SUF_VectorArrayAllocate (FFT_LENGTH * MAX_RESAMPLE_RATIO); // Imaginary data array - Extend to allow for oversampling
-  pFDPResults = SUF_VectorArrayAllocate (FFT_LENGTH);               // Results data array
-  pFDPFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);          // FFT coefficient data array
+  SLData_t       *pDataArray = SUF_VectorArrayAllocate (SAMPLE_LENGTH); // Input data array
+  SLData_t       *pOverlapArray = SUF_VectorArrayAllocate (OVERLAP_LENGTH); // Overlap data array
+  SLData_t       *pWindowCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH); // Window coeffs data array
+  SLData_t       *pFDPRealData = SUF_VectorArrayAllocate (FFT_LENGTH);  // Real data array
+  SLData_t       *pFDPImagData = SUF_VectorArrayAllocate (FFT_LENGTH * MAX_RESAMPLE_RATIO); // Imaginary data array - Extend to allow for oversampling
+  SLData_t       *pFDPResults = SUF_VectorArrayAllocate (FFT_LENGTH); // Results data array
+  SLData_t       *pFDPFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);  // FFT coefficient data array
 
   if ((NULL == pDataArray) || (NULL == pOverlapArray) || (NULL == pWindowCoeffs) ||
       (NULL == pFDPRealData) || (NULL == pFDPImagData) || (NULL == pFDPResults) || (NULL == pFDPFFTCoeffs)) {
@@ -75,7 +68,7 @@ int main (
     exit (0);
   }
 #if DISPLAY_AVERAGE_SPECTRUM
-  pAverageArray = SUF_VectorArrayAllocate (RESULT_LENGTH);          // Average order spectrum data array
+  SLData_t       *pAverageArray = SUF_VectorArrayAllocate (RESULT_LENGTH);  // Average order spectrum data array
   if (NULL == pAverageArray) {
     printf ("Memory allocation error\n");
     exit (0);
@@ -147,7 +140,7 @@ int main (
 
 // Allocate memory for peak data array these peaks will be used for an indication of the
 // rotational frequency of the machine and hence the first order
-  pPeakArray = SUF_IndexArrayAllocate (wavInfo.NumberOfSamples / (FFT_LENGTH - OVERLAP_LENGTH));
+  SLArrayIndex_t *pPeakArray = SUF_IndexArrayAllocate (wavInfo.NumberOfSamples / (FFT_LENGTH - OVERLAP_LENGTH));
 
   if (NULL == pPeakArray) {
     printf ("Peak data array memory allocation error\n");
@@ -353,5 +346,5 @@ int main (
   free (pAverageArray);
 #endif
 
-  exit (0);
+  return (0);
 }

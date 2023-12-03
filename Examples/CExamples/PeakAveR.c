@@ -41,5 +41,5 @@ int main (
                                                                                                         ImagArray,  // Pointer to source array
                                                                                                         ARRAY_LENGTH)); // Array length
 
-  exit (0);
+  return (0);
 }

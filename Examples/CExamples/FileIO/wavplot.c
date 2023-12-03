@@ -12,11 +12,8 @@
 
 #define SAMPLE_LENGTH     1024
 
-double         *pDataArray;
 char            WavFileName[256];
-
 SLWavFileInfo_s wavInfo;
-
 
 int main (
   int argc,
@@ -29,7 +26,7 @@ int main (
   SLArrayIndex_t  FrameNumber;
   SLArrayIndex_t  i;
 
-  pDataArray = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pDataArray = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   if (argc != 4) {
     printf ("\nUsage:\nplotwav filename (no extension) frameNumber T/F\n\n");
@@ -108,5 +105,5 @@ int main (
   fclose (fpInputFile);                                             // Close the input file
   free (pDataArray);                                                // Free memory
 
-  exit (0);
+  return (0);
 }

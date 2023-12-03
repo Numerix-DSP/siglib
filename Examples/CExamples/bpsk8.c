@@ -46,13 +46,10 @@
 // Declare global variables and arrays
 static const char TxString[] = "Hello World - abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 static char     RxString[MAX_RX_STRING_LENGTH];
-
 static const char *TxStringPtr;
 static char    *RxStringPtr;
 
-static SLData_t *pData, *pCarrierTable;
-
-static SLData_t TxCarrierPhase;
+static SLData_t txCarrierPhase;
 static SLData_t TxSampleCount;
 
 
@@ -63,15 +60,12 @@ static SLData_t TxSampleCount;
 
 #define VCO_SINE_TABLE_SIZE             1024                        // Look up table for fast sine calculation
 
-static SLData_t *pCostasLpLPFCoeffs, *pCostasLpLPF1State, *pCostasLpLPF2State;  // Costas loop loop filter coefficient pointer
-
 static SLArrayIndex_t CostasLpLPF1Index;                            // Costas loop inphase LPF filter index
 static SLArrayIndex_t CostasLpLPF2Index;                            // Costas loop quadrature phase LPF filter index
 static SLData_t CostasLpVCOPhase;                                   // Costas loop VCO phase
 static SLData_t CostasLpState;                                      // Costas loop feedback state for next iteration
 
 static SLData_t CostasLpLoopFilterState;                            // Costas loop loop filter feedback coeff
-static SLData_t *pVCOLookUpTable;                                   // VCO cosine look-up-table pointer
 
 static SLArrayIndex_t RxSampleClock;                                // Used to keep track of the samples and symbols
 static SLData_t RxSampleSum;                                        // Used to keep decide which bit was Tx'd
@@ -101,13 +95,13 @@ int main (
   SLFixData_t     SamplesPerSymbolOffset = SIGLIB_AI_ZERO;          // Samples per symbol offset - accounts for the  non integer value
 
 // Allocate memory
-  pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pCarrierTable = SUF_VectorArrayAllocate (CARRIER_SINE_TABLE_SIZE);
+  SLData_t       *pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pCarrierTable = SUF_VectorArrayAllocate (CARRIER_SINE_TABLE_SIZE);
 
-  pCostasLpLPFCoeffs = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);
-  pCostasLpLPF1State = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);
-  pCostasLpLPF2State = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);
-  pVCOLookUpTable = SUF_CostasLoopVCOArrayAllocate (VCO_SINE_TABLE_SIZE);
+  SLData_t       *pCostasLpLPFCoeffs = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);  // Costas loop loop filter coefficient pointer
+  SLData_t       *pCostasLpLPF1State = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);
+  SLData_t       *pCostasLpLPF2State = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);
+  SLData_t       *pVCOLookUpTable = SUF_CostasLoopVCOArrayAllocate (VCO_SINE_TABLE_SIZE); // VCO cosine look-up-table pointer
 
   if ((NULL == pData) || (NULL == pCarrierTable) || (NULL == pCostasLpLPFCoeffs) || (NULL == pCostasLpLPF1State) ||
       (NULL == pCostasLpLPF2State) || (NULL == pVCOLookUpTable)) {
@@ -168,7 +162,7 @@ int main (
                       &RxSampleClock,                               // Pointer to Rx sample clock
                       &RxSampleSum);                                // Pointer to Rx sample sum - used to decide which bit was Tx'd
 
-  TxCarrierPhase = SIGLIB_ZERO;                                     // Initialise BPSK transmitter phase
+  txCarrierPhase = SIGLIB_ZERO;                                     // Initialise BPSK transmitter phase
 // The phase of the transmitter can be rotated by changing this value
 
   for (LoopCount = 0; LoopCount < NUMBER_OF_LOOPS; LoopCount++) {
@@ -187,7 +181,7 @@ int main (
         SDA_BpskModulate ((*TxStringPtr >> TxBitIndex),             // Modulating bit
                           pData + DataArrayOffset,                  // Destination array
                           pCarrierTable,                            // Carrier table pointer
-                          &TxCarrierPhase,                          // Carrier phase pointer
+                          &txCarrierPhase,                          // Carrier phase pointer
                           SYMBOL_LENGTH + SamplesPerSymbolOffset,   // Samples per symbol
                           CARRIER_FREQ / CARRIER_TABLE_FREQ,        // Carrier table increment
                           CARRIER_SINE_TABLE_SIZE);                 // Carrier sine table size

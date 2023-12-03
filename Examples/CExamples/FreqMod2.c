@@ -18,11 +18,6 @@
 #define DEMOD_ENVELOPE_DECAY_FACTOR 0.999
 
 // Declare global variables and arrays
-static SLData_t OnePoleFilterState;
-static SLData_t Mean;
-
-static SLData_t *pSrc, *pDst;
-static SLData_t ChirpPhase, ChirpValue;
 
 
 int main (
@@ -33,9 +28,12 @@ int main (
   SLData_t        DifferentiatePrevious = SIGLIB_ZERO;              // Previous value of differential
   SLData_t        EnvelopePrevious = SIGLIB_ZERO;                   // Previous value of envelope
 
+  SLData_t        OnePoleFilterState;
+  SLData_t        Mean;
+
 // Allocate memory
-  pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Frequency Modulation",                            // Plot title
@@ -51,8 +49,8 @@ int main (
 
 
 // Generate the chirp signal
-  ChirpPhase = SIGLIB_ZERO;
-  ChirpValue = SIGLIB_ZERO;
+  SLData_t        ChirpPhase = SIGLIB_ZERO;
+  SLData_t        ChirpValue = SIGLIB_ZERO;
 
   SDA_SignalGenerate (pSrc,                                         // Pointer to destination array
                       SIGLIB_CHIRP_LIN,                             // Signal type - Chirp with linear frequency ramp
@@ -137,5 +135,5 @@ int main (
   SUF_MemoryFree (pSrc);                                            // Free memory
   SUF_MemoryFree (pDst);
 
-  exit (0);
+  return (0);
 }

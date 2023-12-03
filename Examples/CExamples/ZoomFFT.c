@@ -25,12 +25,6 @@
 #define LPF_FILTER_LENGTH           48
 
 // Declare global variables and arrays
-static SLData_t *pRealData, *pImagData, *pInputData, *pFFTCoeffs, *pWindowCoeffs;
-static SLData_t SinePhase;
-
-static SLData_t *pRealCombFilter, *pImagCombFilter, *pSineTable;
-static SLData_t RealCombFilterSum, ImagCombFilterSum;
-static SLArrayIndex_t CombFilterPhase, SineTablePhase;
 
 // Low pass filter for final stage of down conversion Filter Spec:
 // Design Type: FIR-Remez
@@ -53,9 +47,6 @@ static const SLData_t LPFCoefficientArray[] = {
 };
 
 static SLData_t pRealLPFStateArray[LPF_FILTER_LENGTH], pImagPFStateArray[LPF_FILTER_LENGTH];
-static SLArrayIndex_t RealLPFIndex, ImagLPFIndex;
-
-static SLArrayIndex_t RealDecimatorIndex, ImagDecimatorIndex;
 
 
 int main (
@@ -64,15 +55,21 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot object
   SLData_t        MixFreq;
 
+  SLData_t        RealCombFilterSum, ImagCombFilterSum;
+  SLArrayIndex_t  CombFilterPhase, SineTablePhase;
+
+  SLArrayIndex_t  RealLPFIndex, ImagLPFIndex;
+  SLArrayIndex_t  RealDecimatorIndex, ImagDecimatorIndex;
+
 // Allocate memory
-  pRealData = SUF_VectorArrayAllocate (INTERMEDIATE_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (INTERMEDIATE_LENGTH);
-  pInputData = SUF_VectorArrayAllocate (SOURCE_BUF_SIZE);
-  pRealCombFilter = SUF_VectorArrayAllocate (COMB_FILTER_LENGTH);
-  pImagCombFilter = SUF_VectorArrayAllocate (COMB_FILTER_LENGTH);
-  pSineTable = SUF_VectorArrayAllocate (SINE_BUF_SIZE);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
-  pWindowCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (INTERMEDIATE_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (INTERMEDIATE_LENGTH);
+  SLData_t       *pInputData = SUF_VectorArrayAllocate (SOURCE_BUF_SIZE);
+  SLData_t       *pRealCombFilter = SUF_VectorArrayAllocate (COMB_FILTER_LENGTH);
+  SLData_t       *pImagCombFilter = SUF_VectorArrayAllocate (COMB_FILTER_LENGTH);
+  SLData_t       *pSineTable = SUF_VectorArrayAllocate (SINE_BUF_SIZE);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pWindowCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH);
 
   if ((NULL == pRealData) || (NULL == pImagData) || (NULL == pInputData) || (NULL == pRealCombFilter) ||
       (NULL == pImagCombFilter) || (NULL == pSineTable) || (NULL == pFFTCoeffs) || (NULL == pWindowCoeffs)) {
@@ -120,7 +117,7 @@ int main (
            FFT_LENGTH);                                             // FFT length
 
 // Generate the source spectrum
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pInputData,                                   // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
@@ -129,7 +126,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SOURCE_BUF_SIZE);                             // Output dataset length
   SDA_SignalGenerate (pInputData,                                   // Pointer to destination array
@@ -140,7 +137,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SOURCE_BUF_SIZE);                             // Output dataset length
   SDA_SignalGenerate (pInputData,                                   // Pointer to destination array
@@ -151,7 +148,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SOURCE_BUF_SIZE);                             // Output dataset length
   SDA_SignalGenerate (pInputData,                                   // Pointer to destination array
@@ -162,7 +159,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SOURCE_BUF_SIZE);                             // Output dataset length
   SDA_SignalGenerate (pInputData,                                   // Pointer to destination array
@@ -173,7 +170,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SOURCE_BUF_SIZE);                             // Output dataset length
   SDA_SignalGenerate (pInputData,                                   // Pointer to destination array
@@ -184,7 +181,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SOURCE_BUF_SIZE);                             // Output dataset length
   SDA_SignalGenerate (pInputData,                                   // Pointer to destination array
@@ -195,7 +192,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SOURCE_BUF_SIZE);                             // Output dataset length
 
@@ -331,5 +328,5 @@ int main (
   SUF_MemoryFree (pFFTCoeffs);
   SUF_MemoryFree (pWindowCoeffs);
 
-  exit (0);
+  return (0);
 }

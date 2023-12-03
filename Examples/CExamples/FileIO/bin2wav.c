@@ -14,7 +14,6 @@
 #define SAMPLE_LENGTH       20000
 #define SAMPLE_RATE_HZ      ((double)16000.)
 
-double         *pDataArray;
 char            inputFileName[256];
 char            outputFileName[256];
 
@@ -32,7 +31,7 @@ int main (
   SLArrayIndex_t  inputSampleCount;
   FILE           *fpInputFile, *fpOutputFile;
 
-  pDataArray = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pDataArray = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   if (argc != 2) {
     printf ("\nUsage:\nbin2wav  inputFileName (no extension)\n\n");
@@ -107,5 +106,5 @@ int main (
 
   free (pDataArray);                                                // Free memory
 
-  exit (0);
+  return (0);
 }

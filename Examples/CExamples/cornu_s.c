@@ -12,10 +12,6 @@
 #define OFFSET          SIGLIB_ZERO                                 // Ramp offset
 
 // Declare global variables and arrays
-static SLData_t *pData1, *pData2;                                   // Dataset pointers
-static SLComplexRect_s *pComplexData;
-static SLData_t IntegralSum1, IntegralSum2;
-static SLData_t RampPhase;
 
 
 int main (
@@ -24,9 +20,9 @@ int main (
   h_GPC_Plot     *hXYGraph;                                         // Plot object
 
 // Allocate memory
-  pData1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pData2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pComplexData = SUF_ComplexRectArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pData1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pData2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLComplexRect_s *pComplexData = SUF_ComplexRectArrayAllocate (SAMPLE_LENGTH);
 
   hXYGraph =                                                        // Initialize plot
     gpc_init_xy ("Cornu's Spiral",                                  // Plot title
@@ -40,11 +36,11 @@ int main (
   }
 
 
-  RampPhase = SIGLIB_ZERO;
+  SLData_t        rampPhase = SIGLIB_ZERO;
   SDA_SignalGenerateRamp (pData1,                                   // Pointer to destination array
                           AMPLITUDE,                                // Amplitude
                           OFFSET,                                   // D.C. Offset
-                          &RampPhase,                               // Phase - maintained across array boundaries
+                          &rampPhase,                               // Phase - maintained across array boundaries
                           SAMPLE_LENGTH);                           // Dataset length
 
   SDA_Power (pData1,                                                // Pointer to source array
@@ -59,8 +55,8 @@ int main (
            pData1,                                                  // Pointer to destination array
            SAMPLE_LENGTH);                                          // Dataset length
 
-  IntegralSum1 = SIGLIB_ZERO;
-  IntegralSum2 = SIGLIB_ZERO;
+  SLData_t        IntegralSum1 = SIGLIB_ZERO;
+  SLData_t        IntegralSum2 = SIGLIB_ZERO;
 
   SDA_Integrate (pData1,                                            // Pointer to source array
                  pData1,                                            // Pointer to destination array
@@ -108,5 +104,5 @@ int main (
   SUF_MemoryFree (pData2);
   SUF_MemoryFree (pComplexData);
 
-  exit (0);
+  return (0);
 }

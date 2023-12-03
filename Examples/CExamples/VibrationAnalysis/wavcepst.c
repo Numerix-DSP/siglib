@@ -14,10 +14,6 @@
 #define RESULT_LENGTH           (FFT_LENGTH >> 1)                   // Only need to store the lower 1/2 of the FFT output
 #define OVERLAP_LENGTH          (FFT_LENGTH >> 2)                   // 25 % overlap
 
-static SLData_t *pDataArray, *pFDPRealData, *pFDPImagData;
-static SLData_t *pFDPMagn, *pFDPPhase;
-static SLData_t *pFDPFFTCoeffs, *pWindowCoeffs, *pOverlapArray;
-
 static char     WavFilename[80];
 
 static SLWavFileInfo_s wavInfo;
@@ -35,17 +31,17 @@ int main (
   SLData_t        SampleRate;
   SLData_t        WindowInverseCoherentGain;
 
-  pDataArray = SUF_VectorArrayAllocate (SAMPLE_LENGTH);             // Input data array
-  pOverlapArray = SUF_VectorArrayAllocate (OVERLAP_LENGTH);         // Overlap data array
-  pWindowCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH);             // Window coeffs data array
-  pFDPRealData = SUF_VectorArrayAllocate (FFT_LENGTH);              // Real data array
-  pFDPImagData = SUF_VectorArrayAllocate (FFT_LENGTH);              // Imaginary data array
-  pFDPMagn = SUF_VectorArrayAllocate (FFT_LENGTH);                  // Results - magnitude data array
-  pFDPPhase = SUF_VectorArrayAllocate (FFT_LENGTH);                 // Results - phase data array
-  pFDPFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);          // FFT coefficient data array
+  SLData_t       *pDataArray = SUF_VectorArrayAllocate (SAMPLE_LENGTH); // Input data array
+  SLData_t       *pOverlapArray = SUF_VectorArrayAllocate (OVERLAP_LENGTH); // Overlap data array
+  SLData_t       *pWindowCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH); // Window coeffs data array
+  SLData_t       *pFDPRealData = SUF_VectorArrayAllocate (FFT_LENGTH);  // Real data array
+  SLData_t       *pFDPImagData = SUF_VectorArrayAllocate (FFT_LENGTH);  // Imaginary data array
+  SLData_t       *pFDPMagn = SUF_VectorArrayAllocate (FFT_LENGTH);  // Results - magnitude data array
+  SLData_t       *pFDPPhase = SUF_VectorArrayAllocate (FFT_LENGTH); // Results - phase data array
+  SLData_t       *pFDPFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);  // FFT coefficient data array
 
-  if ((NULL == pDataArray) || (NULL == pOverlapArray) || (NULL == pWindowCoeffs) ||
-      (NULL == pFDPRealData) || (NULL == pFDPImagData) || (NULL == pFDPMagn) || (NULL == pFDPPhase) || (NULL == pFDPFFTCoeffs)) {
+  if ((NULL == pDataArray) || (NULL == pOverlapArray) || (NULL == pWindowCoeffs) || (NULL == pFDPRealData) ||
+      (NULL == pFDPImagData) || (NULL == pFDPMagn) || (NULL == pFDPPhase) || (NULL == pFDPFFTCoeffs)) {
 
     printf ("Memory allocation error\n");
     exit (0);
@@ -177,5 +173,5 @@ int main (
   free (pFDPPhase);
   free (pFDPFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

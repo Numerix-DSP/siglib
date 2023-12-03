@@ -29,7 +29,6 @@
 
 
 // Declare global variables and arrays
-static SLData_t *pSrc, *pDst;
 
 static SLDrcLevelGainTable drcLevelGainTable[] = {                  // DRC level/gain table
   { SDS_dBmToVoltageMacro (DRC_FIRST_KNEE_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE), SDS_dBToVoltageMacro (-.5) },
@@ -62,15 +61,15 @@ int main (
     exit (-1);
   }
 
-  pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
 // Generate a ramp
-  SLData_t        RampPhase = SIGLIB_ZERO;
+  SLData_t        rampPhase = SIGLIB_ZERO;
   SDA_SignalGenerateRamp (pSrc,                                     // Pointer to destination array
                           32767.,                                   // Amplitude
                           SIGLIB_ZERO,                              // D.C. Offset
-                          &RampPhase,                               // Phase - maintained across array boundaries
+                          &rampPhase,                               // Phase - maintained across array boundaries
                           SAMPLE_LENGTH);                           // Dataset length
 
   gpc_plot_2d (h2DPlot,                                             // Graph handle
@@ -133,5 +132,5 @@ int main (
   SUF_MemoryFree (pSrc);                                            // Free memory
   SUF_MemoryFree (pDst);
 
-  exit (0);
+  return (0);
 }

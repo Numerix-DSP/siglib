@@ -15,11 +15,6 @@
 #define RESULT_LENGTH               ((FFT_LENGTH >> SIGLIB_AI_ONE)+SIGLIB_AI_ONE) // Note the result length is N/2+1
 
 // Declare global variables and arrays
-static SLData_t *pSrc, *pDst;
-static SLData_t *pRealData, *pImagData, *pOverlap, *pWindowCoeffs, *pFFTCoeffs;
-static SLArrayIndex_t OverlapSourceIndex;
-static SLData_t SinePhase;
-static SLData_t InverseFFTLength, InverseNumberOfArraysAveraged;
 
 
 int main (
@@ -29,13 +24,16 @@ int main (
 
   SLError_t       SigLibErrorCode;
 
-  pSrc = SUF_VectorArrayAllocate (INPUT_ARRAY_LENGTH);              // Allocate memory
-  pDst = SUF_VectorArrayAllocate (RESULT_LENGTH);
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pOverlap = SUF_VectorArrayAllocate (OVERLAP_SIZE);
-  pWindowCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLArrayIndex_t  OverlapSourceIndex;
+  SLData_t        InverseFFTLength, InverseNumberOfArraysAveraged;
+
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (INPUT_ARRAY_LENGTH);  // Allocate memory
+  SLData_t       *pDst = SUF_VectorArrayAllocate (RESULT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pOverlap = SUF_VectorArrayAllocate (OVERLAP_SIZE);
+  SLData_t       *pWindowCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pRealData) || (NULL == pImagData) || (NULL == pSrc) || (NULL == pDst) || (NULL == pWindowCoeffs) || (NULL == pFFTCoeffs)) {
 
@@ -71,7 +69,7 @@ int main (
     exit (0);
   }
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pSrc,                                         // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.9,                                          // Signal peak level
@@ -80,7 +78,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       INPUT_ARRAY_LENGTH);                          // Output dataset length
 
@@ -155,5 +153,5 @@ int main (
   SUF_MemoryFree (pWindowCoeffs);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

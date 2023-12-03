@@ -37,7 +37,7 @@ SLData_t        FourPoleButterworth_Fc50_Fs1000[] = {
 
 SLData_t        NewFilterCoeffs[SIGLIB_IIR_COEFFS_PER_BIQUAD * NUMBER_OF_BIQUADS];
 
-void main (
+int main (
   void)
 {
   SLData_t        Scale;
@@ -62,5 +62,5 @@ void main (
   printf ("Source Biquad #2 = %lf, %lf, %lf, %lf, %lf\n", NewFilterCoeffs[5],
           NewFilterCoeffs[6], NewFilterCoeffs[7], NewFilterCoeffs[8], NewFilterCoeffs[9]);
 
-
+  return (0);
 }

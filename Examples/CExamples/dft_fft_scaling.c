@@ -14,19 +14,14 @@
 #define FFT_LENGTH      512
 #define LOG_FFT_LENGTH  9
 
-// Declare global variables
-static SLData_t *pSrc, *pRealData, *pImagData, *pFFTCoeffs;
-static SLData_t SinePhase;
-
-// Define constants
 #define SIMPLE_FFT_LENGTH      8
 #define LOG2_SIMPLE_FFT_LENGTH 3
 
 #define realData    realSin                                         // Choose sin or cos for input data
 
+// Declare global variables
 static SLData_t realSin[] = { 0., 0.7071, 1., 0.7071, 0., -0.7071, -1., -0.7071 };
 static SLData_t realCos[] = { 1., 0.7071, 0., -0.7071, -1., -0.7071, 0., 0.7071 };
-
 
 static SLData_t imagData[8] = { 0., 0., 0., 0., 0., 0., 0., 0. };
 
@@ -39,10 +34,10 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot objects
   h_GPC_Plot     *h2DDualPlot;
 
-  pSrc = SUF_VectorArrayAllocate (FFT_LENGTH);                      // Allocate memory
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (FFT_LENGTH);      // Allocate memory
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   printf ("\n\nA very common question in DSP is:\n\n");
   printf ("\"Why are the DFT and FFT results not scaled to the same level as the input signal ?\"\n\n");
@@ -72,7 +67,7 @@ int main (
   }
 
 // Create sine wave with suitable freq to avoid edge effects
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pSrc,                                         // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
@@ -81,7 +76,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       FFT_LENGTH);                                  // Output array length
 
@@ -138,7 +133,7 @@ int main (
   getchar ();
 
 // Create sine wave with suitable freq to avoid edge effects
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pRealData,                                    // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
@@ -147,7 +142,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       FFT_LENGTH);                                  // Output array length
 
@@ -237,5 +232,5 @@ int main (
   SUF_MemoryFree (pImagData);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

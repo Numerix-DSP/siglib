@@ -56,18 +56,17 @@ SLError_t plot_frequency_domain (
   static int      FirstTimeFlag = 1;
 
   SLData_t        Max;
-  SLData_t       *pFDPSrcReal, *pFDPRealData, *pFDPImagData, *pFDPResults, *pWindowCoeffs;
   SLArrayIndex_t  MaxIndex;
 
   char            PrintString[100];
   strcpy (PrintString, pLabelString);
   strcat (PrintString, " (dB)");
 
-  pFDPSrcReal = SUF_VectorArrayAllocate (DFTLength);                // Real source data array
-  pFDPRealData = SUF_VectorArrayAllocate (DFTLength);               // Real data array
-  pFDPImagData = SUF_VectorArrayAllocate (DFTLength);               // Imaginary data array
-  pFDPResults = SUF_VectorArrayAllocate (DFTLength);                // Results data array
-  pWindowCoeffs = SUF_VectorArrayAllocate (DFTLength);              // Window coeffs data array
+  SLData_t       *pFDPSrcReal = SUF_VectorArrayAllocate (DFTLength);  // Real source data array
+  SLData_t       *pFDPRealData = SUF_VectorArrayAllocate (DFTLength); // Real data array
+  SLData_t       *pFDPImagData = SUF_VectorArrayAllocate (DFTLength); // Imaginary data array
+  SLData_t       *pFDPResults = SUF_VectorArrayAllocate (DFTLength);  // Results data array
+  SLData_t       *pWindowCoeffs = SUF_VectorArrayAllocate (DFTLength);  // Window coeffs data array
 
   if ((NULL == pFDPSrcReal) || (NULL == pFDPRealData) || (NULL == pFDPImagData) || (NULL == pFDPResults) || (NULL == pWindowCoeffs)) {
     printf ("Memory allocation error ...\n");
@@ -199,19 +198,18 @@ SLError_t plot_complex_frequency_domain (
   static int      FirstTimeFlag = 1;
 
   SLData_t        Max;
-  SLData_t       *pFDPSrcReal, *pFDPSrcImag, *pFDPRealData, *pFDPImagData, *pFDPResults, *pWindowCoeffs;
   SLArrayIndex_t  MaxIndex;
 
   char            PrintString[100];
   strcpy (PrintString, pLabelString);
   strcat (PrintString, " (dB)");
 
-  pFDPSrcReal = SUF_VectorArrayAllocate (DFTLength);                // Real source data array
-  pFDPSrcImag = SUF_VectorArrayAllocate (DFTLength);                // Imaginary source data array
-  pFDPRealData = SUF_VectorArrayAllocate (DFTLength);               // Real data array
-  pFDPImagData = SUF_VectorArrayAllocate (DFTLength);               // Imaginary data array
-  pFDPResults = SUF_VectorArrayAllocate (DFTLength);                // Results data array
-  pWindowCoeffs = SUF_VectorArrayAllocate (DFTLength);              // Window coeffs data array
+  SLData_t       *pFDPSrcReal = SUF_VectorArrayAllocate (DFTLength);  // Real source data array
+  SLData_t       *pFDPSrcImag = SUF_VectorArrayAllocate (DFTLength);  // Imaginary source data array
+  SLData_t       *pFDPRealData = SUF_VectorArrayAllocate (DFTLength); // Real data array
+  SLData_t       *pFDPImagData = SUF_VectorArrayAllocate (DFTLength); // Imaginary data array
+  SLData_t       *pFDPResults = SUF_VectorArrayAllocate (DFTLength);  // Results data array
+  SLData_t       *pWindowCoeffs = SUF_VectorArrayAllocate (DFTLength);  // Window coeffs data array
 
   if ((NULL == pFDPSrcReal) || (NULL == pFDPSrcImag) || (NULL == pFDPRealData) || (NULL == pFDPImagData) || (NULL == pFDPResults) ||
       (NULL == pWindowCoeffs)) {
@@ -337,9 +335,7 @@ SLError_t plot_frequency_magnitude (
   static h_GPC_Plot *h2DPlot;                                       // Plot object
   static int      FirstTimeFlag = 1;
 
-  SLData_t       *pFDPResults;
-
-  pFDPResults = SUF_VectorArrayAllocate (DFTLength);                // Results data array
+  SLData_t       *pFDPResults = SUF_VectorArrayAllocate (DFTLength);  // Results data array
 
   if (NULL == pFDPResults) {
     printf ("Memory allocation error ...\n");

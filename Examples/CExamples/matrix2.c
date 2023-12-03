@@ -9,6 +9,10 @@
 #include <siglib.h>                                                 // SigLib DSP library
 
 // Define constants
+#define   ENABLE_CHOLESKY_IN_PLACE     1                            // Set to '1' to execute in-place, '0' for not in-place
+
+#define CHOLESKY_NUMBER_OF_ROWS_AND_COLUMNS  3
+
 #define NUMBER_OF_ROWS          3                                   // Number of rows and columns in matrix
 #define NUMBER_OF_COLUMNS       4
 #define MAX_DIMENSION           4
@@ -17,6 +21,12 @@
 #define NUMBER_OF_COLUMNS_T     3
 
 #define LARGE_ARRAY_DIMENSION   8                                   // Dimension of large matrix
+
+#if ENABLE_CHOLESKY_IN_PLACE
+#define CHOLESKY_DST_MATRIX  choleskySrcMatrix
+#else
+#define CHOLESKY_DST_MATRIX  choleskyDstMatrix
+#endif
 
 // Declare global variables and arrays
 
@@ -55,6 +65,17 @@ static SLData_t LargeSrcMatrix[LARGE_ARRAY_DIMENSION][LARGE_ARRAY_DIMENSION] = {
   { 61.0, 62.0, 63.0, 64.0, 65.0, 66.0, 67.0, 68.0 },
   { 71.0, 72.0, 73.0, 74.0, 75.0, 76.0, 77.0, 78.0 }
 };
+
+// Test data courtesy of https://en.wikipedia.org/wiki/Cholesky_decomposition
+SLData_t        choleskySrcMatrix[CHOLESKY_NUMBER_OF_ROWS_AND_COLUMNS][CHOLESKY_NUMBER_OF_ROWS_AND_COLUMNS] = {
+  { 4.00, 12.00, -16.00 },
+  { 12.00, 37.00, -43.00 },
+  { -16.00, -43.00, 98.00 },
+};
+
+#if (!ENABLE_CHOLESKY_IN_PLACE)
+SLData_t        choleskyDstMatrix[CHOLESKY_NUMBER_OF_ROWS_AND_COLUMNS][CHOLESKY_NUMBER_OF_ROWS_AND_COLUMNS];
+#endif
 
 
 int main (
@@ -423,5 +444,24 @@ int main (
                    MAX_DIMENSION);                                  // Number of columns in matrix
   SUF_PrintMatrix ((SLData_t *) DstMatrix1, MAX_DIMENSION, MAX_DIMENSION);
 
-  exit (0);
+
+  printf ("Cholesky Source Matrix:\n");
+  SUF_PrintMatrix ((SLData_t *) choleskySrcMatrix, CHOLESKY_NUMBER_OF_ROWS_AND_COLUMNS, CHOLESKY_NUMBER_OF_ROWS_AND_COLUMNS);
+
+// Perform Cholesky Decomposition
+  SMX_CholeskyDecompose ((SLData_t *) choleskySrcMatrix,            // Pointer to source matrix
+                         (SLData_t *) CHOLESKY_DST_MATRIX,          // Pointer to destination matrix
+                         CHOLESKY_NUMBER_OF_ROWS_AND_COLUMNS);      // Number of rows and columns
+
+  printf ("Cholesky Decomposition (Lower Triangular Matrix):\n");
+  SUF_PrintMatrix ((SLData_t *) CHOLESKY_DST_MATRIX, CHOLESKY_NUMBER_OF_ROWS_AND_COLUMNS, CHOLESKY_NUMBER_OF_ROWS_AND_COLUMNS);
+
+  SMX_Transpose ((SLData_t *) CHOLESKY_DST_MATRIX,                  // Pointer to source matrix
+                 (SLData_t *) CHOLESKY_DST_MATRIX,                  // Pointer to destination matrix
+                 CHOLESKY_NUMBER_OF_ROWS_AND_COLUMNS,               // Source matrix # of rows
+                 CHOLESKY_NUMBER_OF_ROWS_AND_COLUMNS);              // Source matrix # cols
+  printf ("Conjugate Transpose of Cholesky Decomposition (Upper Triangular Matrix):\n");
+  SUF_PrintMatrix ((SLData_t *) CHOLESKY_DST_MATRIX, CHOLESKY_NUMBER_OF_ROWS_AND_COLUMNS, CHOLESKY_NUMBER_OF_ROWS_AND_COLUMNS);
+
+  return (0);
 }

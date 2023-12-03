@@ -11,11 +11,6 @@
 #define NUMBER_OF_CHANNELS      2
 
 // Declare global variables and arrays
-static SLData_t *pData1, *pData2;                                   // Dataset pointers
-static SLData_t *pMuxedData;
-
-static SLData_t SinePhase, CosinePhase;
-
 static SLData_t muxd[] = { 1., 2., 3., 4., 5., 6., 7., 8., 9., 10., 11., 12. };
 
 static SLData_t demuxd[4];
@@ -27,9 +22,9 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pData1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pData2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pMuxedData = SUF_VectorArrayAllocate (SAMPLE_LENGTH * NUMBER_OF_CHANNELS);
+  SLData_t       *pData1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pData2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pMuxedData = SUF_VectorArrayAllocate (SAMPLE_LENGTH * NUMBER_OF_CHANNELS);
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Multiplex / Demultiplex",                         // Plot title
@@ -43,8 +38,8 @@ int main (
     exit (-1);
   }
 
-  SinePhase = SIGLIB_ZERO;
-  CosinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
+  SLData_t        CosinePhase = SIGLIB_ZERO;
 
   SDA_SignalGenerate (pData1,                                       // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
@@ -54,7 +49,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -168,5 +163,5 @@ int main (
   SUF_MemoryFree (pData2);
   SUF_MemoryFree (pMuxedData);
 
-  exit (0);
+  return (0);
 }

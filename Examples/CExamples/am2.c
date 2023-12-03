@@ -25,7 +25,6 @@ static const SLData_t pPreFilterTaps[PRE_FILTER_LENGTH] = {
 };
 
 static SLData_t pPreFilterState[PRE_FILTER_LENGTH];
-static SLArrayIndex_t PreFilterIndex;
 
 static const SLData_t pLpfFilterTaps[LPF_FILTER_LENGTH] = {
   0.076923, 0.0, -0.09091, 0.0, 0.111111, 0.0,
@@ -36,10 +35,6 @@ static const SLData_t pLpfFilterTaps[LPF_FILTER_LENGTH] = {
 };
 
 static SLData_t pLpfFilterState[LPF_FILTER_LENGTH];
-static SLArrayIndex_t pLpfFilterIndex;
-
-static SLData_t *pInput, *pCarrierTable, *modulated, *demodulated;
-static SLData_t CarrierTablePhase;
 
 
 int main (
@@ -47,10 +42,14 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pInput = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pCarrierTable = SUF_VectorArrayAllocate (CARRIER_TABLE_LENGTH);
-  modulated = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  demodulated = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t        CarrierTablePhase;
+  SLArrayIndex_t  PreFilterIndex;
+  SLArrayIndex_t  pLpfFilterIndex;
+
+  SLData_t       *pInput = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pCarrierTable = SUF_VectorArrayAllocate (CARRIER_TABLE_LENGTH);
+  SLData_t       *modulated = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *demodulated = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   if ((NULL == pInput) || (NULL == pCarrierTable) || (NULL == modulated) || (NULL == demodulated)) {
 
@@ -189,5 +188,5 @@ int main (
   SUF_MemoryFree (modulated);
   SUF_MemoryFree (demodulated);
 
-  exit (0);
+  return (0);
 }

@@ -25,8 +25,6 @@
 #define SIGNAL_MAGNITUDE        SIGLIB_HALF                         // Note - the final output magnitude will be twice this magnitude
 
 // Declare global variables and arrays
-static SLData_t *pRealData, *pImagData, *pResults, *pFFTCoeffs;     // Dataset pointers
-static SLData_t *pDTMFGenCoeffs;                                    // DTMF generator frequency look up table
 
 
 int main (
@@ -41,11 +39,11 @@ int main (
   SLFixData_t     Key;
   SLStatus_t      KeyCode;
 
-  pRealData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pDTMFGenCoeffs = SUF_VectorArrayAllocate (SIGLIB_DTMF_FTABLE_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pDTMFGenCoeffs = SUF_VectorArrayAllocate (SIGLIB_DTMF_FTABLE_LENGTH); // DTMF generator frequency look up table
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   printf ("\n\n\nHit standard DTMF keys 0 - 9, A - D, * and #. <Esc> to exit\n");
   printf ("The key displayed on the screen is decoded from the DTMF.\n\n");

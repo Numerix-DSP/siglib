@@ -102,5 +102,5 @@ int main (
   printf ("\n\nIndexed sorted data:\n");
   SUF_PrintArray (SortedData, SAMPLE_LENGTH);
 
-  exit (0);
+  return (0);
 }

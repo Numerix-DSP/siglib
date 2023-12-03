@@ -9,7 +9,6 @@
 #include <siglib.h>                                                 // SigLib DSP library
 #include <gnuplot_c.h>                                              // Gnuplot/C
 
-double         *pDataArray, *pCh0, *pCh1;
 char            FileName[256];
 
 SLWavFileInfo_s wavInfo;
@@ -48,9 +47,9 @@ int main (
 
   SUF_WavDisplayInfo (wavInfo);
 
-  pDataArray = SUF_VectorArrayAllocate (wavInfo.NumberOfChannels * wavInfo.NumberOfSamples);
-  pCh0 = SUF_VectorArrayAllocate (wavInfo.NumberOfSamples);
-  pCh1 = SUF_VectorArrayAllocate (wavInfo.NumberOfSamples);
+  SLData_t       *pDataArray = SUF_VectorArrayAllocate (wavInfo.NumberOfChannels * wavInfo.NumberOfSamples);
+  SLData_t       *pCh0 = SUF_VectorArrayAllocate (wavInfo.NumberOfSamples);
+  SLData_t       *pCh1 = SUF_VectorArrayAllocate (wavInfo.NumberOfSamples);
 
   if ((NULL == pDataArray) || (NULL == pCh0) || (NULL == pCh1)) {
     printf ("\n\nMemory allocation failed\n\n");
@@ -111,5 +110,5 @@ int main (
   free (pCh0);
   free (pCh1);
 
-  exit (0);
+  return (0);
 }

@@ -12,7 +12,6 @@
 #define DISPLAY_LENGTH  512
 
 // Declare global variables and arrays
-static SLData_t *pSrc;
 static SLData_t SinePhase;
 static SLData_t ZXPrevSign;                                         // Sign of last value in previous array, for zero crossing detect
 static SLArrayIndex_t TriggerLocation;                              // Location of trigger in source array
@@ -28,7 +27,7 @@ int main (
   SLData_t        Magnitude = 1.5;
   int             action;
 
-  pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);                   // Allocate memory
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);   // Allocate memory
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Trigger Detector",                                // Plot title
@@ -122,4 +121,6 @@ int main (
                  GPC_NEW);                                          // New graph
 
   }
+
+  return (0);
 }

@@ -12,20 +12,19 @@
 #define LOG2_FFT_LENGTH         SAI_FftLengthLog2(FFT_LENGTH)       // Log2 FFT length,
 
 // Declare global variables and arrays
-static SLData_t *pRealData, *pImagData, *pResults, *pInverse, *pFFTCoeffs;
-static SLData_t ChirpPhase, ChirpValue;
-
 
 int main (
   void)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pRealData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pInverse = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  static SLData_t ChirpPhase, ChirpValue;
+
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pInverse = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
 
   h2DPlot =                                                         // Initialize plot
@@ -152,5 +151,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

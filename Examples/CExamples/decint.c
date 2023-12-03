@@ -12,17 +12,11 @@
 #define LPF_FILTER_LENGTH       17
 
 // Declare global variables and arrays
-static SLData_t *pSrc;                                              // Dataset pointers
-static SLData_t *pInterpolatedData;
-
-static SLData_t SinePhase;
-
 // Filter Spec:
 // Design Type: FIR-Remez
 // Sample rate: 1.0
 // Number of coefficients: 17
 // Fc1 = 0.005000, Fc2 = 0.000000, TBW = 0.150000, PBR = 1.000000, SBA = 70.000000
-
 static const SLData_t LPFCoefficientArray[] = {
   2.07352739160608385400e-03, 7.26522635862037607900e-03, 1.76055129619916740600e-02, 3.40183878681010326600e-02,
   5.58186845441603976600e-02, 8.02862272098151808000e-02, 1.03056538811698808480e-01, 1.19282706465355922700e-01,
@@ -43,8 +37,8 @@ int main (
   SLArrayIndex_t  DecimationIndex;
   SLArrayIndex_t  InterpolationIndex;
 
-  pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pInterpolatedData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pInterpolatedData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Decimation And Interpolation",                    // Plot title
@@ -58,7 +52,7 @@ int main (
     exit (-1);
   }
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pSrc,                                         // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.9,                                          // Signal peak level
@@ -67,7 +61,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -126,7 +120,7 @@ int main (
   getchar ();
 
 
-// Filter and decimate followed by interpolate and filter    SinePhase = SIGLIB_ZERO;
+// Filter and decimate followed by interpolate and filter    sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pSrc,                                         // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.9,                                          // Signal peak level
@@ -135,7 +129,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -211,5 +205,5 @@ int main (
 
   SUF_MemoryFree (pSrc);                                            // Free memory
 
-  exit (0);
+  return (0);
 }

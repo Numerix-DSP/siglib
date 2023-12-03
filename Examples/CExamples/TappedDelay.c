@@ -11,10 +11,6 @@
 #define SAMPLE_LENGTH       20
 
 // Declare global variables and arrays
-static SLData_t *pStateArray;
-static SLData_t *pStateArrayReal, *pStateArrayImag;
-static SLArrayIndex_t StateArrayIndex;
-
 // Arrays for scalar tapped delay
 static const SLArrayIndex_t pTapLocns[] = { 0, 3, 5, 7, 9 };
 static const SLData_t pTapGains[] = { 10.0, 13.1, 15.2, 17.3, 19.4 };
@@ -44,10 +40,11 @@ int main (
   SLData_t        MultiPathOutput;
   SLData_t        MultiPathOutputReal, MultiPathOutputImag;
 
-  pStateArray = SUF_VectorArrayAllocate (MAX_DELAY_LENGTH);         // Allocate memory
+  SLArrayIndex_t  StateArrayIndex;
 
-  pStateArrayReal = SUF_VectorArrayAllocate (MAX_DELAY_LENGTH);
-  pStateArrayImag = SUF_VectorArrayAllocate (MAX_DELAY_LENGTH);
+  SLData_t       *pStateArray = SUF_VectorArrayAllocate (MAX_DELAY_LENGTH); // Allocate memory
+  SLData_t       *pStateArrayReal = SUF_VectorArrayAllocate (MAX_DELAY_LENGTH);
+  SLData_t       *pStateArrayImag = SUF_VectorArrayAllocate (MAX_DELAY_LENGTH);
 
 // Initialize multi-path delay
   SIF_TappedDelayLine (pStateArray,                                 // Pointer to multi-path delay array
@@ -337,5 +334,5 @@ int main (
   SUF_MemoryFree (pStateArrayReal);
   SUF_MemoryFree (pStateArrayImag);
 
-  exit (0);
+  return (0);
 }

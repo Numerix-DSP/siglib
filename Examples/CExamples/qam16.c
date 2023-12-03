@@ -51,9 +51,9 @@
 #endif
 
 
-#define GAUS_NOISE_VARIANCE             SIGLIB_ZERO                 // Injected noise parameters
-//#define   GAUS_NOISE_VARIANCE             0.1               // Injected noise parameters
-#define GAUS_NOISE_OFFSET               SIGLIB_ZERO
+#define GAUSSIAN_NOISE_VARIANCE             SIGLIB_ZERO             // Injected noise parameters
+//#define   GAUSSIAN_NOISE_VARIANCE             0.1               // Injected noise parameters
+#define GAUSSIAN_NOISE_OFFSET               SIGLIB_ZERO
 
 
             // Derived application definitions
@@ -72,12 +72,9 @@
 static const char TxString[] = "Hello World - abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 static char     RxString[80];
 
-
-static SLData_t *pCarrierTable;                                     // Overlapped cosine + sine look-up table
-
                                                         // Modem parameters and variables
-static SLData_t TxCarrierPhase;
-static SLData_t RxCarrierPhase;
+static SLData_t txCarrierPhase;
+static SLData_t rxCarrierPhase;
 static SLArrayIndex_t TxSampleClock, RxSampleClock;                 // Used to keep track of the samples and symbols
 static SLComplexRect_s TxMagn, RxMagn;                              // Used to calculate the signal magnitude
 
@@ -140,7 +137,8 @@ int main (
   SLFixData_t     ConstellationRxSymbolCount = 0;                   // Constellation Rx symbol count debug variable
 #endif
 
-  pCarrierTable = SUF_QamCarrierArrayAllocate (CARRIER_SINE_TABLE_SIZE);  // Allocate arrays
+// Allocate arrays
+  SLData_t       *pCarrierTable = SUF_QamCarrierArrayAllocate (CARRIER_SINE_TABLE_SIZE);  // Overlapped cosine + sine look-up table
 
 // Always initialise to largest size first
 #if (DISPLAY_TIME_DOMAIN || DISPLAY_FREQ_DOMAIN)
@@ -178,7 +176,7 @@ int main (
   SIF_Qam16Modulate (pCarrierTable,                                 // Carrier table pointer
                      CARRIER_TABLE_FREQ / SAMPLE_RATE_HZ,           // Carrier phase increment per sample (radians / 2π)
                      CARRIER_SINE_TABLE_SIZE,                       // Carrier sine table size
-                     &TxCarrierPhase,                               // Carrier phase pointer
+                     &txCarrierPhase,                               // Carrier phase pointer
                      &TxSampleClock,                                // Sample clock pointer
                      &TxMagn,                                       // Magnitude pointer
                      TxIDelay,                                      // RRCF Tx I delay pointer
@@ -193,7 +191,7 @@ int main (
   SIF_Qam16Demodulate (pCarrierTable,                               // Carrier table pointer
                        CARRIER_TABLE_FREQ / SAMPLE_RATE_HZ,         // Carrier phase increment per sample (radians / 2π)
                        CARRIER_SINE_TABLE_SIZE,                     // Carrier sine table size
-                       &RxCarrierPhase,                             // Carrier phase pointer
+                       &rxCarrierPhase,                             // Carrier phase pointer
                        &RxSampleClock,                              // Sample clock pointer
                        &RxMagn,                                     // Magnitude pointer
                        RxIDelay,                                    // RRCF Rx I delay pointer
@@ -237,7 +235,7 @@ int main (
                        ModulatedSignal + (i * SYMBOL_LENGTH),       // Destination array
                        pCarrierTable,                               // Carrier table pointer
                        CARRIER_SINE_TABLE_SIZE,                     // Carrier sine table size
-                       &TxCarrierPhase,                             // Carrier phase pointer
+                       &txCarrierPhase,                             // Carrier phase pointer
                        &TxSampleClock,                              // Sample clock pointer
                        &TxMagn,                                     // Magnitude pointer
                        CARRIER_TABLE_INCREMENT,                     // Carrier table increment
@@ -253,7 +251,7 @@ int main (
     RxNibble = SDA_Qam16Demodulate (ModulatedSignal + (i * SYMBOL_LENGTH),  // Source array
                                     pCarrierTable,                  // Carrier table pointer
                                     CARRIER_SINE_TABLE_SIZE,        // Carrier sine table size
-                                    &RxCarrierPhase,                // Carrier phase pointer
+                                    &rxCarrierPhase,                // Carrier phase pointer
                                     &RxSampleClock,                 // Sample clock pointer
                                     &RxMagn,                        // Magnitude pointer
                                     CARRIER_TABLE_INCREMENT,        // Carrier table increment
@@ -310,7 +308,7 @@ int main (
                          ModulatedSignal + (i * SYMBOL_LENGTH),     // Destination array
                          pCarrierTable,                             // Carrier table pointer
                          CARRIER_SINE_TABLE_SIZE,                   // Carrier sine table size
-                         &TxCarrierPhase,                           // Carrier phase pointer
+                         &txCarrierPhase,                           // Carrier phase pointer
                          &TxSampleClock,                            // Sample clock pointer
                          &TxMagn,                                   // Magnitude pointer
                          CARRIER_TABLE_INCREMENT,                   // Carrier table increment
@@ -361,8 +359,8 @@ int main (
                         SIGLIB_ZERO,                                // Signal peak level - Unused
                         SIGLIB_ADD,                                 // Fill (overwrite) or add to existing array contents
                         SIGLIB_ZERO,                                // Signal frequency - Unused
-                        GAUS_NOISE_OFFSET,                          // D.C. Offset
-                        GAUS_NOISE_VARIANCE,                        // Gaussian noise variance
+                        GAUSSIAN_NOISE_OFFSET,                      // D.C. Offset
+                        GAUSSIAN_NOISE_VARIANCE,                    // Gaussian noise variance
                         SIGLIB_ZERO,                                // Signal end value - Unused
                         &GaussianNoisePhase,                        // Pointer to gaussian signal phase - should be initialised to zero
                         &GaussianNoiseValue,                        // Gaussian signal second sample - should be initialised to zero
@@ -376,7 +374,7 @@ int main (
       RxNibble = SDA_Qam16DemodulateDebug (ModulatedSignal + (i * SYMBOL_LENGTH), // Source array
                                            pCarrierTable,           // Carrier table pointer
                                            CARRIER_SINE_TABLE_SIZE, // Carrier sine table size
-                                           &RxCarrierPhase,         // Carrier phase pointer
+                                           &rxCarrierPhase,         // Carrier phase pointer
                                            &RxSampleClock,          // Sample clock pointer
                                            &RxMagn,                 // Magnitude pointer
                                            CARRIER_TABLE_INCREMENT, // Carrier table increment
@@ -396,7 +394,7 @@ int main (
       RxNibble = SDA_Qam16Demodulate (ModulatedSignal + (i * SYMBOL_LENGTH),  // Source array
                                       pCarrierTable,                // Carrier table pointer
                                       CARRIER_SINE_TABLE_SIZE,      // Carrier sine table size
-                                      &RxCarrierPhase,              // Carrier phase pointer
+                                      &rxCarrierPhase,              // Carrier phase pointer
                                       &RxSampleClock,               // Sample clock pointer
                                       &RxMagn,                      // Magnitude pointer
                                       CARRIER_TABLE_INCREMENT,      // Carrier table increment
@@ -496,5 +494,5 @@ int main (
 
   SUF_MemoryFree (pCarrierTable);                                   // Free memory
 
-  exit (0);
+  return (0);
 }

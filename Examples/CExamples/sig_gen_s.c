@@ -11,8 +11,8 @@
 #define FFT_LENGTH              512
 #define LOG2_FFT_LENGTH         SAI_FftLengthLog2(FFT_LENGTH)       // Log2 FFT length,
 
-#define GAUS_NOISE_VARIANCE     SIGLIB_FOUR
-#define GAUS_NOISE_OFFSET       SIGLIB_ZERO
+#define GAUSSIAN_NOISE_VARIANCE     SIGLIB_FOUR
+#define GAUSSIAN_NOISE_OFFSET       SIGLIB_ZERO
 
 #define OUTPUT_MAGNITUDE        SIGLIB_ONE                          // Magnitude of output signals
 
@@ -24,12 +24,6 @@
 #define HGRAM_SAMPLE_LENGTH     64
 
 // Declare global variables and arrays
-static SLData_t *pRealData, *pImagData, *pResults, *pFFTCoeffs;     // Dataset pointers
-
-static SLData_t SinePhase, CosinePhase, SqPhase, TriPhase, ImpulsePhase;
-static SLData_t ChirpPhase, ChirpValue;
-static SLData_t GaussPhase, GaussValue;
-static SLData_t PnsPhase, PnsCurrentValue;
 
 
 int main (
@@ -40,10 +34,15 @@ int main (
   SLData_t        RMSValue;
   char            OutputString[80];
 
-  pRealData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t        SinePhase, CosinePhase, SqPhase, TriPhase, ImpulsePhase;
+  SLData_t        ChirpPhase, ChirpValue;
+  SLData_t        GaussPhase, GaussValue;
+  SLData_t        PnsPhase, PnsCurrentValue;
+
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   printf ("\nSignal generation examples - simulated sample rate = %lf\n", SAMPLE_RATE_HZ);
 
@@ -771,8 +770,8 @@ int main (
                         SIGLIB_ZERO,                                // Signal peak level - Unused
                         SIGLIB_FILL,                                // Fill (overwrite) or add to existing array contents
                         SIGLIB_ZERO,                                // Signal frequency - Unused
-                        GAUS_NOISE_OFFSET,                          // D.C. Offset
-                        GAUS_NOISE_VARIANCE,                        // Gaussian noise variance
+                        GAUSSIAN_NOISE_OFFSET,                      // D.C. Offset
+                        GAUSSIAN_NOISE_VARIANCE,                    // Gaussian noise variance
                         SIGLIB_ZERO,                                // Signal end value - Unused
                         &GaussPhase,                                // Pointer to gaussian signal phase - should be initialised to zero
                         &GaussValue);                               // Gaussian signal second sample - should be initialised to zero
@@ -854,7 +853,6 @@ int main (
     printf ("\t%lf\n", SDS_RandomNumber (SIGLIB_ONE, SIGLIB_FIVE));
   }
 
-
   gpc_close (h2DPlot);
 
   SUF_MemoryFree (pRealData);                                       // Free memory
@@ -862,5 +860,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

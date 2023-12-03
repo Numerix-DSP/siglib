@@ -29,5 +29,5 @@ int main (
 
   fclose (fpInputFile);
 
-  exit (0);
+  return (0);
 }

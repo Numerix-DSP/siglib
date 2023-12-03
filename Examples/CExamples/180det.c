@@ -15,17 +15,6 @@
 #define SINE_TABLE_SIZE 1024                                        // Look up table for fast sine calculation
 
 // Declare global variables and arrays
-static SLData_t *pData;
-static SLData_t *pFilterCoeffs, *pFilterState;                      // 180 degree phase detector filter coefficient pointer
-
-static SLArrayIndex_t FilterIndex;                                  // Filter index
-static SLData_t CosineTablePhase;                                   // Cosine table phase
-
-static SLArrayIndex_t PreviousOutputSign;                           // Sign of previous output value
-static SLArrayIndex_t PhaseChangeLocation;                          // Location of phase change in array
-
-static SLData_t *pFastCosineLookUpTable;                            // For fast sine lookup
-static SLData_t SinePhase;
 
 
 int main (
@@ -33,10 +22,16 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pFilterCoeffs = SUF_VectorArrayAllocate (FILTER_LENGTH);
-  pFilterState = SUF_VectorArrayAllocate (FILTER_LENGTH);
-  pFastCosineLookUpTable = SUF_VectorArrayAllocate (SINE_TABLE_SIZE);
+  SLArrayIndex_t  FilterIndex;                                      // Filter index
+  SLData_t        CosineTablePhase;                                 // Cosine table phase
+
+  SLArrayIndex_t  PreviousOutputSign;                               // Sign of previous output value
+  SLArrayIndex_t  PhaseChangeLocation;                              // Location of phase change in array
+
+  SLData_t       *pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pFilterCoeffs = SUF_VectorArrayAllocate (FILTER_LENGTH);  // 180 degree phase detector filter coefficient pointer
+  SLData_t       *pFilterState = SUF_VectorArrayAllocate (FILTER_LENGTH); // 180 degree phase detector filter state pointer
+  SLData_t       *pFastCosineLookUpTable = SUF_VectorArrayAllocate (SINE_TABLE_SIZE); // For fast sine lookup
 
   if ((NULL == pData) || (NULL == pFilterCoeffs) || (NULL == pFilterState) || (NULL == pFastCosineLookUpTable)) {
     printf ("\n\nMemory allocation failed\n\n");
@@ -56,10 +51,10 @@ int main (
   }
 
 
-  SinePhase = 1.2;                                                  // Arbitrary phase - radians
-//  SinePhase = SIGLIB_ZERO;
-//  SinePhase = SIGLIB_PI / SIGLIB_TWO;
-//  SinePhase = SIGLIB_PI;
+  SLData_t        sinePhase = 1.2;                                  // Arbitrary phase - radians
+//  sinePhase = SIGLIB_ZERO;
+//  sinePhase = SIGLIB_PI / SIGLIB_TWO;
+//  sinePhase = SIGLIB_PI;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
@@ -68,11 +63,11 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH / 2);                           // Output dataset length
 
-  SinePhase += SIGLIB_PI;                                           // Arbitrary phase - radians
+  sinePhase += SIGLIB_PI;                                           // Arbitrary phase - radians
   SDA_SignalGenerate (pData + (SAMPLE_LENGTH / 2),                  // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
@@ -81,7 +76,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH / 2);                           // Output dataset length
 
@@ -138,5 +133,5 @@ int main (
   SUF_MemoryFree (pFilterState);
   SUF_MemoryFree (pFastCosineLookUpTable);
 
-  exit (0);
+  return (0);
 }

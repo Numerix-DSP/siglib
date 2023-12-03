@@ -152,7 +152,7 @@ void SIGLIB_FUNC_DECL SDA_Differentiate (
 * Function: SIF_LeakyIntegrator
 *
 * Parameters:
-*   SLData_t *pState         - Pointer to integrator state
+*   SLData_t *                - Pointer to integrator state
 *
 * Return value:
 *   void
@@ -174,10 +174,10 @@ void SIGLIB_FUNC_DECL SIF_LeakyIntegrator (
 * Function: SDS_LeakyIntegrator1
 *
 * Parameters:
-*   const SLData_t Src,
-*   SLData_t *pState         - Pointer to integrator state
-*   SLData_t const LeakOutput,
-*   const SLData_t Peak
+*   const SLData_t            - Pointer to source data
+*   SLData_t *                - Pointer to integrator state
+*   SLData_t const            - LeakOutput
+*   const SLData_t            - Peak
 *
 * Return value:
 *   void
@@ -217,10 +217,10 @@ SLData_t SIGLIB_FUNC_DECL SDS_LeakyIntegrator1 (
 * Function: SDS_LeakyIntegrator2
 *
 * Parameters:
-*   const SLData_t Src,
-*   SLData_t *pState         - Pointer to integrator state
-*   SLData_t const LeakOutput,
-*   const SLData_t Peak
+*   const SLData_t            - Pointer to source data
+*   SLData_t *                - Pointer to integrator state
+*   SLData_t const            - LeakOutput
+*   const SLData_t            - Peak
 *
 * Return value:
 *   void
@@ -261,8 +261,8 @@ SLData_t SIGLIB_FUNC_DECL SDS_LeakyIntegrator2 (
 * Function: SIF_HilbertTransformerFirFilter
 *
 * Parameters:
-*   SLData_t    *pCoeffs    - Filter coeffs pointer
-*   const SLArrayIndex_t    - Filter length
+*   SLData_t *                - Filter coeffs pointer
+*   const SLArrayIndex_t      - Filter length
 *
 * Return value:
 *   void
@@ -298,12 +298,12 @@ void SIGLIB_FUNC_DECL SIF_HilbertTransformerFirFilter (
 * Function: SIF_GoertzelIirFilter
 *
 * Parameters:
-*   SLData_t * pState           - State array pointer
-*   const SLData_t Freq         - Filter centre frequency
-*   const SLArrayIndex_t SampleLength       - Data array length
+*   SLData_t *                - State array pointer
+*   const SLData_t            - Filter centre frequency
+*   const SLArrayIndex_t      - Data array length
 *
 * Return value:
-*   SLData_t            - Goertzel filter coefficient
+*   SLData_t                  - Goertzel filter coefficient
 *
 * Description: Generate the coefficient for a Goertzel
 *   IIR filter.
@@ -329,11 +329,11 @@ SLData_t SIGLIB_FUNC_DECL SIF_GoertzelIirFilter (
 * Function: SDA_GoertzelIirFilter
 *
 * Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pSrc   - Pointer to source array
-*   SLData_t * SIGLIB_PTR_DECL pDst         - Pointer to destination array
-*   SLData_t * SIGLIB_PTR_DECL pState       - State array pointer
-*   const SLData_t Coeff                    - Filter coefficient
-*   const SLArrayIndex_t SampleLength       - Data array length
+*   const SLData_t *          - Pointer to source array
+*   SLData_t *                - Pointer to destination array
+*   SLData_t *                - State array pointer
+*   const SLData_t            - Filter coefficient
+*   const SLArrayIndex_t      - Data array length
 *
 * Return value:
 *   void
@@ -381,9 +381,9 @@ void SIGLIB_FUNC_DECL SDA_GoertzelIirFilter (
 * Function: SDS_GoertzelIirFilter
 *
 * Parameters:
-*   const SLData_t  Src                 - Source value
-*   SLData_t * SIGLIB_PTR_DECL pState   - State array pointer
-*   const SLData_t Coeff                - Filter coefficient
+*   const SLData_t            - Source value
+*   SLData_t *                - State array pointer
+*   const SLData_t            - Filter coefficient
 *
 * Return value:
 *   Filtered value
@@ -418,11 +418,11 @@ SLData_t SIGLIB_FUNC_DECL SDS_GoertzelIirFilter (
 * Function: SIF_GoertzelDetect
 *
 * Parameters:
-*   const SLData_t Freq         - Filter centre frequency
-*   const SLArrayIndex_t SampleLength       - Data array length
+*   const SLData_t            - Filter centre frequency
+*   const SLArrayIndex_t      - Data array length
 *
 * Return value:
-*   SLData_t            - Goertzel filter coefficient
+*   SLData_t                  - Goertzel filter coefficient
 *
 * Description: Generate the coefficient for a Goertzel
 *   IIR filter.
@@ -444,9 +444,9 @@ SLData_t SIGLIB_FUNC_DECL SIF_GoertzelDetect (
 * Function: SDA_GoertzelDetect
 *
 * Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pSrc   - Input array pointer
-*   const SLData_t Coeff                    - Filter coefficient
-*   const SLArrayIndex_t SampleLength       - Data array length
+*   const SLData_t *          - Input array pointer
+*   const SLData_t            - Filter coefficient
+*   const SLArrayIndex_t      - Data array length
 *
 * Return value:
 *   SLData_t            - Filtered energy
@@ -494,11 +494,11 @@ SLData_t SIGLIB_FUNC_DECL SDA_GoertzelDetect (
 * Function: SIF_GoertzelDetectComplex
 *
 * Parameters:
-*   const SLData_t Freq         - Filter centre frequency
-*   const SLArrayIndex_t SampleLength   - Data array length
+*   const SLData_t            - Filter centre frequency
+*   const SLArrayIndex_t      - Data array length
 *
 * Return value:
-*   SLComplexRect_s         - Complex Goertzel filter coefficient
+*   SLComplexRect_s           - Complex Goertzel filter coefficient
 *
 * Description: Generate the coefficient for a Goertzel
 *   IIR filter.
@@ -526,9 +526,9 @@ SLComplexRect_s SIGLIB_FUNC_DECL SIF_GoertzelDetectComplex (
 * Function: SDA_GoertzelDetectComplex
 *
 * Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pSrc   - Input array pointer
-*   const SLComplexRect_s Coeff             - Filter coefficient
-*   const SLArrayIndex_t SampleLength       - Data array length
+*   const SLData_t *          - Input array pointer
+*   const SLComplexRect_s     - Filter coefficient
+*   const SLArrayIndex_t      - Data array length
 *
 * Return value:
 *   SLComplexRect_s         - Complex filtered energy
@@ -587,9 +587,9 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDA_GoertzelDetectComplex (
 * Function: SIF_GaussianFirFilter
 *
 * Parameters:
-*   SLData_t    *pCoeffs - Pointer to filter coefficients
-*   const SLData_t  - Standard deviation of the distribution
-*   const SLArrayIndex_t        - Filter length
+*   SLData_t *                - Pointer to filter coefficients
+*   const SLData_t            - Standard deviation of the distribution
+*   const SLArrayIndex_t      - Filter length
 *
 * Return value:
 *   void
@@ -619,9 +619,9 @@ void SIGLIB_FUNC_DECL SIF_GaussianFirFilter (
 * Function: SIF_GaussianFirFilter2
 *
 * Parameters:
-*   SLData_t *pCoeffs           - Pointer to filter coefficients
-*   const SLData_t Bandwidth    - Bandwidth
-*   const SLArrayIndex_t filterLength   - Filter length
+*   SLData_t *                - Pointer to filter coefficients
+*   const SLData_t            - Bandwidth
+*   const SLArrayIndex_t      - Filter length
 *
 * Return value:
 *   void

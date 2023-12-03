@@ -118,5 +118,5 @@ int main (
     SUF_PrintArray (DstArray, DST_ARRAY_LENGTH);
   } while (copyIndexLength == DST_ARRAY_LENGTH);
 
-  exit (0);
+  return (0);
 }

@@ -13,11 +13,6 @@
 #define HALF_MAX_FFT_LENGTH 512
 
 // Declare global variables and arrays
-static SLData_t *pRealData, *pImagData, *sine_wave, *pResults, *pFFTCoeffs;
-static SLData_t SinePhase;
-static SLData_t offset;
-
-static SLArrayIndex_t fft_size, half_fft_size, log_fft_size;
 
 
 int main (
@@ -26,13 +21,13 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
 // Allocate memory
-  pRealData = SUF_VectorArrayAllocate (MAX_FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (MAX_FFT_LENGTH);
-  sine_wave = SUF_VectorArrayAllocate (MAX_FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (MAX_FFT_LENGTH);              // RMS result array
-  pFFTCoeffs = SUF_FftCoefficientAllocate (MAX_FFT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (MAX_FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (MAX_FFT_LENGTH);
+  SLData_t       *sine_wave = SUF_VectorArrayAllocate (MAX_FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (MAX_FFT_LENGTH);  // RMS result array
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (MAX_FFT_LENGTH);
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (sine_wave,                                    // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
@@ -41,7 +36,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       MAX_FFT_LENGTH);                              // Output dataset length
 
@@ -71,8 +66,8 @@ int main (
 
 
 
-  fft_size = 512;
-  log_fft_size = 9;
+  SLData_t        fft_size = 512;
+  SLData_t        log_fft_size = 9;
 // Initialise FFT
   SIF_Fft (pFFTCoeffs,                                              // Pointer to FFT coefficients
            SIGLIB_BIT_REV_STANDARD,                                 // Bit reverse mode flag / Pointer to bit reverse address table
@@ -98,8 +93,8 @@ int main (
   SDA_20Log10 (pResults,                                            // Pointer to source array
                pResults,                                            // Pointer to destination array
                fft_size);                                           // Dataset length
-  offset = SDA_AbsMax (pResults,                                    // Pointer to source array
-                       fft_size);                                   // Dataset length
+  SLData_t        offset = SDA_AbsMax (pResults,                    // Pointer to source array
+                                       fft_size);                   // Dataset length
   SDA_Add (pResults,                                                // Pointer to source array
            offset,                                                  // D.C. offset
            pResults,                                                // Pointer to destination array
@@ -443,8 +438,8 @@ int main (
 
 
   fft_size = 1024;
-  half_fft_size = 512;
   log_fft_size = 10;
+  SLData_t        half_fft_size = 512;
 // Initialise FFT
   SIF_Fft (pFFTCoeffs,                                              // Pointer to FFT coefficients
            SIGLIB_BIT_REV_STANDARD,                                 // Bit reverse mode flag / Pointer to bit reverse address table
@@ -505,5 +500,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

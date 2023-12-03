@@ -131,5 +131,5 @@ int main (
                                                                      0.35,  // X value
                                                                      DATA_LENGTH)); // Array length
 
-  exit (0);
+  return (0);
 }

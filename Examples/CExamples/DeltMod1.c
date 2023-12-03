@@ -10,9 +10,6 @@
 #define SAMPLE_LENGTH       128
 
 // Declare global variables and arrays
-static SLData_t *input, *modulated, *demodulated;
-static SLData_t CosinePhase;
-static SLData_t Delta, CurrentModValue, CurrentDeModValue;
 
 
 int main (
@@ -20,9 +17,11 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  input = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  modulated = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  demodulated = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t        Delta, CurrentModValue, CurrentDeModValue;
+
+  SLData_t       *input = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *modulated = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *demodulated = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Delta Modulation / Demodulation",                 // Plot title
@@ -36,7 +35,7 @@ int main (
     exit (-1);
   }
 
-  CosinePhase = SIGLIB_ZERO;
+  SLData_t        cosinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (input,                                        // Pointer to destination array
                       SIGLIB_COSINE_WAVE,                           // Signal type - Cosine wave
                       32.,                                          // Signal peak level
@@ -45,7 +44,7 @@ int main (
                       16.,                                          // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &CosinePhase,                                 // Signal phase - maintained across array boundaries
+                      &cosinePhase,                                 // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -103,5 +102,5 @@ int main (
   SUF_MemoryFree (modulated);
   SUF_MemoryFree (demodulated);
 
-  exit (0);
+  return (0);
 }

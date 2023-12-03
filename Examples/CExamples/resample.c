@@ -17,14 +17,9 @@
 #define NEW_UP_SAMPLE_RATE_HZ   10000.
 
 // Declare global variables and arrays
-static SLData_t *pSrc, *pDst;
-
-static SLData_t SinePhase;
-
                                             // Parameters for quick sinc look up table
 #define NUMBER_OF_ADJ_SAMPLES   4                                   // Number of adjacent samples
 #define SINC_LUT_LENGTH         1000
-static SLData_t SincLookUpTablePhaseGain;
 static SLData_t SincLUT[SINC_LUT_LENGTH];
 
 
@@ -33,11 +28,12 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
+  SLData_t        SincLookUpTablePhaseGain;
   SLArrayIndex_t  ResultSampleLength;
 
 // Allocate arrays
-  pSrc = SUF_VectorArrayAllocate (SOURCE_LENGTH);
-  pDst = SUF_VectorArrayAllocate (DST_ARRAY_LENGTH);
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (SOURCE_LENGTH);
+  SLData_t       *pDst = SUF_VectorArrayAllocate (DST_ARRAY_LENGTH);
 
   if ((NULL == pSrc) || (NULL == pDst)) {
 
@@ -45,7 +41,7 @@ int main (
     exit (0);
   }
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pSrc,                                         // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
@@ -54,7 +50,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SOURCE_LENGTH);                               // Output dataset length
 
@@ -223,5 +219,5 @@ int main (
   SUF_MemoryFree (pSrc);                                            // Free memory
   SUF_MemoryFree (pDst);
 
-  exit (0);
+  return (0);
 }

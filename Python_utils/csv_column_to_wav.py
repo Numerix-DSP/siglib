@@ -4,11 +4,11 @@ import os
 import scipy.io.wavfile
 import sys
 
-def main(args):
+def main (args):
 
   if (len(args) != 3):
     print('Usage: python csv_column_to_wav.py filename.csv columnNumber sampleRate (Hz)')
-    exit(1)
+    exit (1)
 
   csv_array = np.genfromtxt(args[0], delimiter=',')
   csv_column = csv_array[:, int(args[1])-1]
@@ -26,5 +26,5 @@ def main(args):
 
 
 if __name__ == "__main__":
-  main(sys.argv[1:])
+  main (sys.argv[1:])
 

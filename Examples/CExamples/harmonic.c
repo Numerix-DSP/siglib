@@ -10,8 +10,6 @@
 #define SAMPLE_LENGTH   512
 
 // Declare global variables and arrays
-static SLData_t *pData;                                             // Data array
-static SLData_t SinePhase;
 
 
 int main (
@@ -19,7 +17,7 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Harmonic Analysis",                               // Plot title
@@ -34,7 +32,7 @@ int main (
   }
 
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
@@ -43,7 +41,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -60,7 +58,7 @@ int main (
   getchar ();
 
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_HALF,                                  // Signal peak level
@@ -69,7 +67,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -86,7 +84,7 @@ int main (
   getchar ();
 
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_QUARTER,                               // Signal peak level
@@ -95,7 +93,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -112,7 +110,7 @@ int main (
   getchar ();
 
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.125,                                        // Signal peak level
@@ -121,7 +119,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -138,7 +136,7 @@ int main (
   getchar ();
 
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.0625,                                       // Signal peak level
@@ -147,7 +145,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -164,7 +162,7 @@ int main (
   getchar ();
 
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.03125,                                      // Signal peak level
@@ -173,7 +171,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -190,7 +188,7 @@ int main (
   getchar ();
 
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_EIGHT / (SLData_t) SAMPLE_LENGTH,      // Signal peak level
@@ -199,7 +197,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -216,7 +214,7 @@ int main (
   getchar ();
 
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.0078125,                                    // Signal peak level
@@ -225,7 +223,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -242,7 +240,7 @@ int main (
   getchar ();
 
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.00390625,                                   // Signal peak level
@@ -251,7 +249,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -268,7 +266,7 @@ int main (
   getchar ();
 
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.001953125,                                  // Signal peak level
@@ -277,7 +275,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -296,7 +294,7 @@ int main (
 
 
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
@@ -305,7 +303,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -322,7 +320,7 @@ int main (
   getchar ();
 
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_HALF,                                  // Signal peak level
@@ -331,7 +329,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -348,7 +346,7 @@ int main (
   getchar ();
 
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.125,                                        // Signal peak level
@@ -357,7 +355,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -374,7 +372,7 @@ int main (
   getchar ();
 
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.03125,                                      // Signal peak level
@@ -383,7 +381,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -400,7 +398,7 @@ int main (
   getchar ();
 
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.0078125,                                    // Signal peak level
@@ -409,7 +407,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -426,7 +424,7 @@ int main (
   getchar ();
 
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.001953125,                                  // Signal peak level
@@ -435,7 +433,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -454,7 +452,7 @@ int main (
 
 
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
@@ -463,7 +461,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -480,7 +478,7 @@ int main (
   getchar ();
 
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_QUARTER,                               // Signal peak level
@@ -489,7 +487,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -506,7 +504,7 @@ int main (
   getchar ();
 
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.0625,                                       // Signal peak level
@@ -515,7 +513,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -532,7 +530,7 @@ int main (
   getchar ();
 
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_EIGHT / (SLData_t) SAMPLE_LENGTH,      // Signal peak level
@@ -541,7 +539,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -558,7 +556,7 @@ int main (
   getchar ();
 
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.00390625,                                   // Signal peak level
@@ -567,7 +565,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -590,5 +588,5 @@ int main (
 
   SUF_MemoryFree (pData);                                           // Free memory
 
-  exit (0);
+  return (0);
 }

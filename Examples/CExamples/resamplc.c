@@ -21,12 +21,6 @@ static const SLData_t SrcDataArray[] = {
   21.0, 22.0, 23.0, 24.0, 25.0, 26.0, 27.0, 28.0, 29.0, 30.0
 };
 
-static const SLData_t *pSrc;
-static SLData_t *pDst;
-
-static SLData_t PreviousXValue;                                     // Used to maintain continuity across array boundaries
-static SLData_t PreviousYValue;
-
                                                             // Sinc interpolation down sample results - length 25*/
 // static const SLData_t   DownSampleResults [] = {
 //     9.989990e-001, 2.011253e+000, 3.038393e+000, 4.176304e+000, 5.497119e+000, 7.000000e+000,
@@ -62,10 +56,13 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
+  SLData_t        PreviousXValue;                                   // Used to maintain continuity across array boundaries
+  SLData_t        PreviousYValue;
+
   SLArrayIndex_t  ResultSampleLength;
 
 // Allocate arrays
-  pDst = SUF_VectorArrayAllocate (DST_ARRAY_LENGTH);
+  SLData_t       *pDst = SUF_VectorArrayAllocate (DST_ARRAY_LENGTH);
 
   if (NULL == pDst) {
 
@@ -87,7 +84,7 @@ int main (
     exit (-1);
   }
 
-  pSrc = SrcDataArray;                                              // Initialize Dataset pointer
+  const SLData_t *pSrc = SrcDataArray;                              // Initialize Dataset pointer
 
 
 // Down sampling
@@ -347,5 +344,5 @@ int main (
 
   SUF_MemoryFree (pDst);                                            // Free memory
 
-  exit (0);
+  return (0);
 }

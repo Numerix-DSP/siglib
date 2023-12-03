@@ -31,9 +31,6 @@
 #define NUM_OUTPUT_NODES                    NUM_CATEGORIES          // Number of output nodes
 
 // Declare global variables and arrays
-static SLData_t *pLayer1PostActivation, *pLayer2PostActivation;
-static SLArrayIndex_t *pCategoricalValue;
-
 static char     filename0[512];
 static char     filename1[512];
 static char     filename2[512];
@@ -92,8 +89,8 @@ int main (
   int argc,
   char *argv[])
 {
-  pLayer1PostActivation = SUF_VectorArrayAllocate (NETWORK_HIDDEN_LAYER_NODES); // Allocate arrays
-  pLayer2PostActivation = SUF_VectorArrayAllocate (NUM_CATEGORIES);
+  SLData_t       *pLayer1PostActivation = SUF_VectorArrayAllocate (NETWORK_HIDDEN_LAYER_NODES); // Allocate arrays
+  SLData_t       *pLayer2PostActivation = SUF_VectorArrayAllocate (NUM_CATEGORIES);
 
   if ((NULL == pLayer1PostActivation) || (NULL == pLayer2PostActivation)) {
     printf ("\n\nMemory allocation failed\n\n");
@@ -169,7 +166,7 @@ int main (
     SUF_PrintMatrix (pValidationData, nRows, NETWORK_INPUT_SAMPLE_LENGTH);
   }
 
-  pCategoricalValue = SUF_IndexArrayAllocate (nRows);               // Allocate the categorical value array
+  SLArrayIndex_t *pCategoricalValue = SUF_IndexArrayAllocate (nRows); // Allocate the categorical value array
   if (NULL == pCategoricalValue) {
     printf ("\n\nMemory allocation failed (pCategoricalValue)\n\n");
     exit (-1);
@@ -332,7 +329,7 @@ int main (
   SUF_MemoryFree (pValidationData);
   SUF_MemoryFree (pCategoricalValue);
 
-  exit (0);
+  return (0);
 }
 
 

@@ -137,5 +137,5 @@ int main (
   printf ("Filter length of min ErrorSum = %d, Min value = %lf\n", START_LENGTH + SDA_MinIndex (ErrorSum, NUMBER_OF_ESTIMATES),
           SDA_Min (ErrorSum, NUMBER_OF_ESTIMATES));
 
-  exit (0);
+  return (0);
 }

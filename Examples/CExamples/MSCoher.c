@@ -13,10 +13,6 @@
 #define RESULT_LENGTH   ((FFT_LENGTH >> SIGLIB_AI_ONE)+SIGLIB_AI_ONE) // Note the result length is N/2+1
 
 // Declare global variables and arrays
-static SLData_t *pRealData1, *pImagData1, *pRealData2, *pImagData2, *pFFTCoeffs;
-static SLData_t *pRealAPSData1, *pImagAPSData1, *pRealAPSData2, *pImagAPSData2;
-static SLData_t SinePhase;
-static SLData_t InverseFFTLength;
 
 
 int main (
@@ -24,15 +20,17 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pRealData1 = SUF_VectorArrayAllocate (FFT_LENGTH);                // Allocate memory
-  pImagData1 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pRealData2 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData2 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pRealAPSData1 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagAPSData1 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pRealAPSData2 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagAPSData2 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t        InverseFFTLength;
+
+  SLData_t       *pRealData1 = SUF_VectorArrayAllocate (FFT_LENGTH);  // Allocate memory
+  SLData_t       *pImagData1 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pRealData2 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData2 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pRealAPSData1 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagAPSData1 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pRealAPSData2 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagAPSData2 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pRealData1) || (NULL == pImagData1) || (NULL == pRealData2) || (NULL == pImagData2) ||
       (NULL == pRealAPSData1) || (NULL == pImagAPSData1) || (NULL == pRealAPSData2) || (NULL == pImagAPSData2) || (NULL == pFFTCoeffs)) {
@@ -59,7 +57,7 @@ int main (
                                  &InverseFFTLength,                 // Pointer to the inverse FFT length
                                  FFT_LENGTH);                       // FFT length
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pRealData1,                                   // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
@@ -68,7 +66,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       FFT_LENGTH);                                  // Output dataset length
 
@@ -92,7 +90,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       FFT_LENGTH);                                  // Output dataset length
 
@@ -174,5 +172,5 @@ int main (
   SUF_MemoryFree (pImagAPSData2);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

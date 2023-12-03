@@ -51,19 +51,16 @@ static SLArrayIndex_t graphical_eq_gains_table_index[] = {          // Specify t
   10, 13, 10, 10, 13, 10, 10, 13, 10, 13
 };
 
-static SLData_t *pRealData, *pImagData, *pResults, *pFFTCoeffs;
-
-
 
 int main (
   void)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
 // Dynamically allocate this array becasue C does not like using doubles for array dimensions in static declarations
   SLData_t (*graphical_eq_coeffs)[GRAPHICAL_EQ_NUM_FREQ_BANDS][GRAPHICAL_EQ_NUM_GAIN_LEVELS][SIGLIB_IIR_COEFFS_PER_BIQUAD] =
@@ -166,5 +163,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

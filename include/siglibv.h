@@ -3,7 +3,7 @@
 
 /**************************************************************************
 File Name               : siglib.h      | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.53         |
+Siglib Library Version  : 10.55         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 13/09/1992
 Options   :                             | Latest Update : 06/06/2023
@@ -5674,6 +5674,10 @@ void _stdcall   SDA_Multiplex (
   double *SIGLIB_OUTPUT_PTR_DECL,                                   // Pointer to destination matrix
   long *SIGLIB_INOUT_PTR_DECL,                                      // Index matrix pointer
   long);                                                            // Number of rows and columns in matrix
+void _stdcall  SMX_CholeskyDecompose (
+   double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to source matrix
+  double *SIGLIB_INOUT_PTR_DECL,                                    // Pointer to destination matrix
+  long);                                                            // Number of rows and columns in matrix
 double _stdcall SMX_Determinant (
    double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to source matrix
   double *SIGLIB_INOUT_PTR_DECL,                                    // Temporary array for source
@@ -5825,4 +5829,4 @@ void _stdcall   SDA_Multiplex (
 // Deprecated functionality - these may be removed in a later version
                                
 // End of SigLib DSP function section
-#line 7866 "siglib.h"
+#line 7871 "siglib.h"

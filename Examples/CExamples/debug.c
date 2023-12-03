@@ -24,5 +24,5 @@ int main (
 
   printf ("The debug information has been written to the SigLib logging file: %s\n", SIGLIB_LOG_FILE);
 
-  exit (0);
+  return (0);
 }

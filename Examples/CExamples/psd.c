@@ -32,15 +32,6 @@
 #define ARB_FFT_RESULT_LENGTH   ((ARB_FFT_LENGTH >> SIGLIB_AI_ONE)+SIGLIB_AI_ONE) // Note the result length is N/2+1
 
 // Declare global variables and arrays
-static SLData_t *pRealData1, *pRealData2, *pImagData1, *pImagData2, *pFFTCoeffs;
-static enum SLArbitraryFFT_t CZTorFFTSwitch;
-static SLArrayIndex_t FFTLength, Log2FFTLength;
-static SLData_t *AWNrPtr, *AWNiPtr, *vLrPtr, *vLiPtr, *WMrPtr, *WMiPtr;
-static SLData_t *CZTRealWorkPtr, *CZTImagWorkPtr;
-
-static SLData_t SinePhase;
-static SLData_t ChirpPhase, ChirpValue;
-static SLData_t InverseFFTLength, InverseArbFFTLength;
 
 
 int main (
@@ -48,23 +39,27 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pRealData1 = SUF_VectorArrayAllocate (FFT_LENGTH);                // Allocate memory
-  pImagData1 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pRealData2 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData2 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  enum SLArbitraryFFT_t CZTorFFTSwitch;
+  SLArrayIndex_t  FFTLength, Log2FFTLength;
+  SLData_t        InverseFFTLength, InverseArbFFTLength;
 
-  AWNrPtr = SUF_VectorArrayAllocate (ARB_FFT_LENGTH);
-  AWNiPtr = SUF_VectorArrayAllocate (ARB_FFT_LENGTH);
+  SLData_t       *pRealData1 = SUF_VectorArrayAllocate (FFT_LENGTH);  // Allocate memory
+  SLData_t       *pImagData1 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pRealData2 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData2 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
-  vLrPtr = SUF_VectorArrayAllocate (FFT_LENGTH);
-  vLiPtr = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *AWNrPtr = SUF_VectorArrayAllocate (ARB_FFT_LENGTH);
+  SLData_t       *AWNiPtr = SUF_VectorArrayAllocate (ARB_FFT_LENGTH);
 
-  CZTRealWorkPtr = SUF_VectorArrayAllocate (FFT_LENGTH);
-  CZTImagWorkPtr = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *vLrPtr = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *vLiPtr = SUF_VectorArrayAllocate (FFT_LENGTH);
 
-  WMrPtr = SUF_VectorArrayAllocate (ARB_FFT_LENGTH);
-  WMiPtr = SUF_VectorArrayAllocate (ARB_FFT_LENGTH);
+  SLData_t       *CZTRealWorkPtr = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *CZTImagWorkPtr = SUF_VectorArrayAllocate (FFT_LENGTH);
+
+  SLData_t       *WMrPtr = SUF_VectorArrayAllocate (ARB_FFT_LENGTH);
+  SLData_t       *WMiPtr = SUF_VectorArrayAllocate (ARB_FFT_LENGTH);
 
   if ((NULL == pRealData1) || (NULL == pImagData1) || (NULL == pRealData2) || (NULL == pImagData2) ||
       (NULL == AWNrPtr) || (NULL == AWNiPtr) ||
@@ -94,7 +89,7 @@ int main (
                                   FFT_LENGTH);                      // FFT length
 
 // Calculate and display auto power spectrum
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pRealData1,                                   // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.9,                                          // Signal peak level
@@ -103,7 +98,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       FFT_LENGTH);                                  // Output dataset length
 
@@ -143,7 +138,7 @@ int main (
 
 
 // Calculate and display cross power spectrum
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pRealData1,                                   // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.9,                                          // Signal peak level
@@ -152,7 +147,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       FFT_LENGTH);                                  // Output dataset length
 
@@ -168,8 +163,8 @@ int main (
   printf ("\nSine Wave #1\nPlease hit <Carriage Return> to continue . . .");
   getchar ();
 
-  ChirpPhase = SIGLIB_ZERO;
-  ChirpValue = SIGLIB_ZERO;
+  SLData_t        ChirpPhase = SIGLIB_ZERO;
+  SLData_t        ChirpValue = SIGLIB_ZERO;
 
   SDA_SignalGenerate (pRealData2,                                   // Pointer to destination array
                       SIGLIB_CHIRP_LIN,                             // Signal type - Chirp with linear frequency ramp
@@ -236,7 +231,7 @@ int main (
                                  ARB_FFT_LENGTH);                   // Dataset length
 
 // Calculate and display arbitrary length auto power spectrum
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pRealData1,                                   // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.9,                                          // Signal peak level
@@ -245,7 +240,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       ARB_FFT_LENGTH);                              // Output dataset length
 
@@ -295,7 +290,7 @@ int main (
 
 
 // Calculate and display cross power spectrum
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pRealData1,                                   // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.9,                                          // Signal peak level
@@ -304,7 +299,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       ARB_FFT_LENGTH);                              // Output dataset length
 
@@ -404,5 +399,5 @@ int main (
   SUF_MemoryFree (WMrPtr);
   SUF_MemoryFree (WMiPtr);
 
-  exit (0);
+  return (0);
 }

@@ -1,4 +1,4 @@
-// SigLib 128 Point LMS Adaptive Filter Example.
+// SigLib LMS Adaptive Filter Example.
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // This files allows the testing of: Least Mean Square, Leaky LMS,
@@ -6,8 +6,8 @@
 // algorithms.
 
 // This program plots the adaptation of the coefficients and
-// simultaneously averages the error over 4 sample periods and then
-// plots the history of the error. The averaging smooths the
+// simultaneously averages the error over a number of sample periods
+// and then plots the history of the error. The averaging smooths the
 // history plot.
 
 // Include files
@@ -21,9 +21,9 @@
 #define LMS_CONVERGENCE_FACTOR  0.02
 #define LMS_DECAY               0.999
 #define AEC_ALPHA               0.002
-#define LMS_LENGTH               128                                // Adaptive filter length
+#define LMS_LENGTH              128                                 // Adaptive filter length
 #define ECHO_PATH_LENGTH        128                                 // Echo filter length
-#define CNVRG_ARR_SIZE          512                                 // Storage of error history
+#define CONVERGENCE_ARRAY_SIZE  512                                 // Storage of error history
 #define NUM_ITERATIONS          1024                                // Number of iterations
 
 // Declare global variables and arrays
@@ -55,18 +55,6 @@ static const SLData_t echoPathTaps[] = {
 };
 
 
-static SLData_t ConvergeArray[CNVRG_ARR_SIZE];
-
-static SLData_t *pLMSTaps, *pLMSState;
-static const SLData_t *pEchoTaps;
-static SLData_t *pEchoState;
-static SLData_t data, replica, echo, Error, ErrorStore;
-static SLArrayIndex_t LMSUpdateIndex, LMSFilterIndex, EchoIndex;
-static SLData_t NormalizedLMSInputPower;
-
-static h_GPC_Plot *h2DPlot;                                         // Declare plot object
-
-
 void            CompareAll (
   void);
 
@@ -74,11 +62,8 @@ void            CompareAll (
 int main (
   void)
 {
-  SLFixData_t     WriteCount = 0;
-  SLFixData_t     ConvergeOffset = 0;
-  SLFixData_t     IterationCount = 0;
+  time_t          ltime;                                            // Seed for all computations so we are working from a constant base
   SLFixData_t     AdaptationType = 0;
-  time_t          ltime;
 
   printf ("\n\nWhat type of adaptation would you like to try ?\n");
   printf ("\tLeast Mean Square . . . . . . . . (1)\n");
@@ -114,21 +99,26 @@ int main (
     case 7:
       printf ("\nCompare All\n");
       CompareAll ();
-
-      while (_kbhit ())
-        _getch ();
-      printf ("\n\nHit <Carriage Return> to continue ....\n");
-      _getch ();                                                    // Clear keyboard buffer and wait for <Carriage Return>
-      gpc_close (h2DPlot);
-      SUF_MemoryFree (pEchoState);                                  // Free memory
-      SUF_MemoryFree (pLMSTaps);
-      SUF_MemoryFree (pLMSState);
       exit (0);
       break;
     default:
       printf ("\nLeast Mean Square Adaptation\n");
       break;
   }
+
+  SLArrayIndex_t  LMSUpdateIndex, LMSFilterIndex, EchoFilterIndex;
+
+  SLData_t       *pEchoFilterState = SUF_VectorArrayAllocate (ECHO_PATH_LENGTH);
+  SLData_t       *pLMSTaps = SUF_VectorArrayAllocate (LMS_LENGTH);
+  SLData_t       *pLMSState = SUF_VectorArrayAllocate (LMS_LENGTH);
+  SLData_t       *pConvergeArray = SUF_VectorArrayAllocate (CONVERGENCE_ARRAY_SIZE);
+
+  if ((NULL == pEchoFilterState) || (NULL == pLMSTaps) || (NULL == pLMSState) || (NULL == pConvergeArray)) {
+    printf ("\n\nMemory allocation failure\n\n");
+    exit (0);
+  }
+
+  h_GPC_Plot     *h2DPlot;                                          // Declare plot object
 
 // Initialise plot display
   h2DPlot =                                                         // Initialize plot
@@ -143,59 +133,51 @@ int main (
     exit (-1);
   }
 
-  SDA_Clear (ConvergeArray,                                         // Pointer to destination array
-             CNVRG_ARR_SIZE);                                       // Dataset length
+  SDA_Clear (pConvergeArray,                                        // Pointer to destination array
+             CONVERGENCE_ARRAY_SIZE);                               // Dataset length
 
   time (&ltime);
   srand ((unsigned int) ltime);                                     // Randomise the seed
 
-  ErrorStore = 0;
+  SLData_t        ErrorStore = SIGLIB_ZERO;
 
-  pEchoTaps = echoPathTaps;
-  pEchoState = SUF_VectorArrayAllocate (ECHO_PATH_LENGTH);
-  pLMSTaps = SUF_VectorArrayAllocate (LMS_LENGTH);
-  pLMSState = SUF_VectorArrayAllocate (LMS_LENGTH);
-
-  if ((NULL == pEchoTaps) || (NULL == pEchoState) || (NULL == pLMSTaps) || (NULL == pLMSState)) {
-    printf ("\n\nMemory allocation failure\n\n");
-    exit (0);
-  }
-
-
-// Init LMS filter
+// Initialise LMS filter
   SIF_Lms (pLMSState,                                               // Pointer to LMS filter state array
            pLMSTaps,                                                // Pointer to LMS filter coefficients
            &LMSFilterIndex,                                         // Pointer to LMS filter index
            &LMSUpdateIndex,                                         // Pointer to LMS filter updater index
            LMS_LENGTH);                                             // Adaptive filter size
 
-  NormalizedLMSInputPower = SIGLIB_ZERO;                            // Initiialize power level
+  SLData_t        NormalizedLMSInputPower = SIGLIB_ZERO;            // Initiialize power level
 
-// Init echo path filter
-  SIF_Fir (pEchoState,                                              // Pointer to filter state array
-           &EchoIndex,                                              // Pointer to filter index register
+// Initialise echo path filter
+  SIF_Fir (pEchoFilterState,                                        // Pointer to filter state array
+           &EchoFilterIndex,                                        // Pointer to filter index register
            ECHO_PATH_LENGTH);                                       // Filter length
 
   printf ("\nFilter Coefficients\n");
   printf ("Hit any key to exit...\n");
 
+  SLFixData_t     WriteCount = 0;
+  SLFixData_t     ConvergeOffset = 0;
+  SLFixData_t     IterationCount = 0;
   while (!_kbhit () && (IterationCount != NUM_ITERATIONS)) {
-    data = (((SLData_t) rand ()) - ((SLData_t) (RAND_MAX / 2))) / ((SLData_t) (RAND_MAX / 2));  // Generate random data
+    SLData_t        data = (((SLData_t) rand ()) - ((SLData_t) (RAND_MAX / 2))) / ((SLData_t) (RAND_MAX / 2));  // Generate random data
 
 // Apply echo path filter
-    echo = SDS_Fir (data,                                           // Input data sample to be filtered
-                    pEchoState,                                     // Pointer to filter state array
-                    pEchoTaps,                                      // Pointer to filter coefficients
-                    &EchoIndex,                                     // Pointer to filter index register
-                    ECHO_PATH_LENGTH);                              // Filter length
+    SLData_t        echo = SDS_Fir (data,                           // Input data sample to be filtered
+                                    pEchoFilterState,               // Pointer to filter state array
+                                    echoPathTaps,                   // Pointer to filter coefficients
+                                    &EchoFilterIndex,               // Pointer to filter index register
+                                    ECHO_PATH_LENGTH);              // Filter length
 
 // Generate replica
-    replica = SDS_Lms (data,                                        // Input data sample to be filtered
-                       pLMSState,                                   // Pointer to filter state array
-                       pLMSTaps,                                    // Pointer to filter coefficients
-                       &LMSFilterIndex,                             // Pointer to filter index register
-                       LMS_LENGTH);                                 // Filter length
-    Error = echo - replica;
+    SLData_t        replica = SDS_Lms (data,                        // Input data sample to be filtered
+                                       pLMSState,                   // Pointer to filter state array
+                                       pLMSTaps,                    // Pointer to filter coefficients
+                                       &LMSFilterIndex,             // Pointer to filter index register
+                                       LMS_LENGTH);                 // Filter length
+    SLData_t        Error = echo - replica;
 
 // Update LMS filter
     switch (AdaptationType) {
@@ -272,16 +254,16 @@ int main (
 
     ErrorStore += SDS_Abs (Error);
 
-    if (ConvergeOffset < CNVRG_ARR_SIZE) {                          // Sample convergence until at end of array
-      if (++WriteCount == (NUM_ITERATIONS / CNVRG_ARR_SIZE)) {      // Take every Nth sample*/
-        ConvergeArray[ConvergeOffset++] = ErrorStore / (NUM_ITERATIONS / CNVRG_ARR_SIZE);
+    if (ConvergeOffset < CONVERGENCE_ARRAY_SIZE) {                  // Sample convergence until at end of array
+      if (++WriteCount == (NUM_ITERATIONS / CONVERGENCE_ARRAY_SIZE)) {  // Take every Nth sample*/
+        pConvergeArray[ConvergeOffset++] = ErrorStore / (NUM_ITERATIONS / CONVERGENCE_ARRAY_SIZE);
         ErrorStore = SIGLIB_ZERO;
         WriteCount = 0;
       }
     }
 
+    printf ("IterationCount: %d, echo: %lf, replica: %lf, Error: %lf\n", (int) IterationCount, echo, replica, Error);
     IterationCount++;
-    printf ("Iteration Count = %d, Error = %lf\r", IterationCount, Error);
   }
 
   if (_kbhit ())
@@ -290,11 +272,11 @@ int main (
   getchar ();                                                       // Clear keyboard buffer and wait for <Carriage Return>
 
   gpc_plot_2d (h2DPlot,                                             // Plot handle
-               ConvergeArray,                                       // Dataset
-               CNVRG_ARR_SIZE,                                      // Dataset length
+               pConvergeArray,                                      // Dataset
+               CONVERGENCE_ARRAY_SIZE,                              // Dataset length
                "LMS Filter Convergence",                            // Dataset title
                SIGLIB_ZERO,                                         // Minimum X value
-               (double) (CNVRG_ARR_SIZE - 1),                       // Maximum X value
+               (double) (CONVERGENCE_ARRAY_SIZE - 1),               // Maximum X value
                "lines",                                             // Plot type
                "magenta",                                           // Colour
                GPC_NEW);                                            // New plot
@@ -308,28 +290,34 @@ int main (
 
   gpc_close (h2DPlot);
 
-  SUF_MemoryFree (pEchoState);                                      // Free memory
+  SUF_MemoryFree (pEchoFilterState);                                // Free memory
   SUF_MemoryFree (pLMSTaps);
   SUF_MemoryFree (pLMSState);
+  SUF_MemoryFree (pConvergeArray);
 
-  exit (0);
+  return (0);
 }
 
 
 void CompareAll (
   void)
 {
-  SLFixData_t     WriteCount = 0;
-  SLFixData_t     ConvergeOffset = 0;
-  SLFixData_t     IterationCount = 0;
-  SLFixData_t     AdaptationType = 0;
-  time_t          ltime;
+  time_t          ltime;                                            // Seed for all computations so we are working from a constant base
 
-  time (&ltime);                                                    // Grab the time to randomize the seed but use the same
-// seed for all computations so we are working from a
-// constant base
+  SLData_t       *pEchoFilterState = SUF_VectorArrayAllocate (ECHO_PATH_LENGTH);
+  SLData_t       *pLMSTaps = SUF_VectorArrayAllocate (LMS_LENGTH);
+  SLData_t       *pLMSState = SUF_VectorArrayAllocate (LMS_LENGTH);
+  SLData_t       *pConvergeArray = SUF_VectorArrayAllocate (CONVERGENCE_ARRAY_SIZE);
+
+  if ((NULL == pEchoFilterState) || (NULL == pLMSTaps) || (NULL == pLMSState) || (NULL == pConvergeArray)) {
+    printf ("\n\nMemory allocation failure\n\n");
+    exit (0);
+  }
+
 
 // Initialise plot display
+  h_GPC_Plot     *h2DPlot;                                          // Declare plot object
+
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Adaptive Filter Example",                         // Plot title
                  "Time",                                            // X-Axis label
@@ -342,52 +330,51 @@ void CompareAll (
     exit (-1);
   }
 
-  for (AdaptationType = 6; AdaptationType >= 1; AdaptationType--) {
-    WriteCount = 0;
-    ConvergeOffset = 0;
+  for (SLFixData_t AdaptationType = 6; AdaptationType >= 1; AdaptationType--) {
 
-    SDA_Clear (ConvergeArray,                                       // Pointer to destination array
-               CNVRG_ARR_SIZE);                                     // Dataset length
+    SLArrayIndex_t  LMSUpdateIndex, LMSFilterIndex, EchoFilterIndex;
 
+    SDA_Clear (pConvergeArray,                                      // Pointer to destination array
+               CONVERGENCE_ARRAY_SIZE);                             // Dataset length
+
+    time (&ltime);                                                  // Grab the time to randomize the seed but use the same
     srand ((unsigned int) ltime);                                   // Randomise the seed
 
-    ErrorStore = 0;
+    SLData_t        ErrorStore = SIGLIB_ZERO;
 
-    pEchoTaps = echoPathTaps;
-    pEchoState = SUF_VectorArrayAllocate (ECHO_PATH_LENGTH);
-    pLMSTaps = SUF_VectorArrayAllocate (LMS_LENGTH);
-    pLMSState = SUF_VectorArrayAllocate (LMS_LENGTH);
-// Init LMS filter
-    SIF_Lms (pLMSTaps,                                              // Pointer to LMS filter state array
-             pLMSState,                                             // Pointer to LMS filter coefficients
+// Initialise LMS filter
+    SIF_Lms (pLMSState,                                             // Pointer to LMS filter state array
+             pLMSTaps,                                              // Pointer to LMS filter coefficients
              &LMSFilterIndex,                                       // Pointer to LMS filter index
              &LMSUpdateIndex,                                       // Pointer to LMS filter updater index
              LMS_LENGTH);                                           // Adaptive filter size
 
-    NormalizedLMSInputPower = SIGLIB_ZERO;                          // Initiialize power level
-// Init echo path filter
-    SIF_Fir (pEchoState,                                            // Pointer to filter state array
-             &EchoIndex,                                            // Pointer to filter index register
+    SLData_t        NormalizedLMSInputPower = SIGLIB_ZERO;          // Initiialize power level
+// Initialise echo path filter
+    SIF_Fir (pEchoFilterState,                                      // Pointer to filter state array
+             &EchoFilterIndex,                                      // Pointer to filter index register
              ECHO_PATH_LENGTH);                                     // Filter length
 
-    IterationCount = 0;
+    SLFixData_t     WriteCount = 0;
+    SLFixData_t     ConvergeOffset = 0;
+    SLFixData_t     IterationCount = 0;
     while (IterationCount != NUM_ITERATIONS) {
-      data = (((SLData_t) rand ()) - 16383.) / 16383.;              // Generate random data
+      SLData_t        data = (((SLData_t) rand ()) - ((SLData_t) (RAND_MAX / 2))) / ((SLData_t) (RAND_MAX / 2));  // Generate random data
 
 // Apply echo path filter
-      echo = SDS_Fir (data,                                         // Input data sample to be filtered
-                      pEchoState,                                   // Pointer to filter state array
-                      pEchoTaps,                                    // Pointer to filter coefficients
-                      &EchoIndex,                                   // Pointer to filter index register
-                      ECHO_PATH_LENGTH);                            // Filter length
+      SLData_t        echo = SDS_Fir (data,                         // Input data sample to be filtered
+                                      pEchoFilterState,             // Pointer to filter state array
+                                      echoPathTaps,                 // Pointer to filter coefficients
+                                      &EchoFilterIndex,             // Pointer to filter index register
+                                      ECHO_PATH_LENGTH);            // Filter length
 
 // Generate replica
-      replica = SDS_Lms (data,                                      // Input data sample to be filtered
-                         pLMSState,                                 // Pointer to filter state array
-                         pLMSTaps,                                  // Pointer to filter coefficients
-                         &LMSFilterIndex,                           // Pointer to filter index register
-                         LMS_LENGTH);                               // Filter length
-      Error = echo - replica;
+      SLData_t        replica = SDS_Lms (data,                      // Input data sample to be filtered
+                                         pLMSState,                 // Pointer to filter state array
+                                         pLMSTaps,                  // Pointer to filter coefficients
+                                         &LMSFilterIndex,           // Pointer to filter index register
+                                         LMS_LENGTH);               // Filter length
+      SLData_t        Error = echo - replica;
 
 // Update LMS filter
       switch (AdaptationType) {
@@ -453,81 +440,81 @@ void CompareAll (
 
       ErrorStore += SDS_Abs (Error);
 
-      if (ConvergeOffset < CNVRG_ARR_SIZE) {                        // Sample convergence until at end of array
-        if (++WriteCount == (NUM_ITERATIONS / CNVRG_ARR_SIZE)) {    // Take every Nth sample*/
-          ConvergeArray[ConvergeOffset++] = ErrorStore / (NUM_ITERATIONS / CNVRG_ARR_SIZE);
+      if (ConvergeOffset < CONVERGENCE_ARRAY_SIZE) {                // Sample convergence until at end of array
+        if (++WriteCount == (NUM_ITERATIONS / CONVERGENCE_ARRAY_SIZE)) {  // Take every Nth sample*/
+          pConvergeArray[ConvergeOffset++] = ErrorStore / (NUM_ITERATIONS / CONVERGENCE_ARRAY_SIZE);
           ErrorStore = SIGLIB_ZERO;
           WriteCount = 0;
         }
       }
 
+// printf ("IterationCount: %d, echo: %lf, replica: %lf, Error: %lf\n", (int)IterationCount, echo, replica, Error);
       IterationCount++;
-      printf ("Iteration Count = %d, Error = %lf\r", IterationCount, Error);
     }
 
     switch (AdaptationType) {
       case 1:
         gpc_plot_2d (h2DPlot,                                       // Plot handle
-                     ConvergeArray,                                 // Dataset
-                     CNVRG_ARR_SIZE,                                // Dataset length
+                     pConvergeArray,                                // Dataset
+                     CONVERGENCE_ARRAY_SIZE,                        // Dataset length
                      "Least Mean Square Adaptation",                // Dataset title
                      SIGLIB_ZERO,                                   // Minimum X value
-                     (double) (CNVRG_ARR_SIZE - 1),                 // Maximum X value
+                     (double) (CONVERGENCE_ARRAY_SIZE - 1),         // Maximum X value
                      "lines",                                       // Plot type
                      "magenta",                                     // Colour
                      GPC_ADD);                                      // New plot
         break;
       case 2:
         gpc_plot_2d (h2DPlot,                                       // Plot handle
-                     ConvergeArray,                                 // Dataset
-                     CNVRG_ARR_SIZE,                                // Dataset length
+                     pConvergeArray,                                // Dataset
+                     CONVERGENCE_ARRAY_SIZE,                        // Dataset length
                      "Leaky LMS Adaptation",                        // Dataset title
                      SIGLIB_ZERO,                                   // Minimum X value
-                     (double) (CNVRG_ARR_SIZE - 1),                 // Maximum X value
+                     (double) (CONVERGENCE_ARRAY_SIZE - 1),         // Maximum X value
                      "lines",                                       // Plot type
                      "blue",                                        // Colour
                      GPC_ADD);                                      // New plot
         break;
       case 3:
         gpc_plot_2d (h2DPlot,                                       // Plot handle
-                     ConvergeArray,                                 // Dataset
-                     CNVRG_ARR_SIZE,                                // Dataset length
+                     pConvergeArray,                                // Dataset
+                     CONVERGENCE_ARRAY_SIZE,                        // Dataset length
                      "Normalized LMS Adaptation",                   // Dataset title
                      SIGLIB_ZERO,                                   // Minimum X value
-                     (double) (CNVRG_ARR_SIZE - 1),                 // Maximum X value
+                     (double) (CONVERGENCE_ARRAY_SIZE - 1),         // Maximum X value
                      "lines",                                       // Plot type
                      "red",                                         // Colour
                      GPC_ADD);                                      // New plot
         break;
       case 4:
         gpc_plot_2d (h2DPlot,                                       // Plot handle
-                     ConvergeArray,                                 // Dataset
-                     CNVRG_ARR_SIZE,                                // Dataset length
+                     pConvergeArray,                                // Dataset
+                     CONVERGENCE_ARRAY_SIZE,                        // Dataset length
                      "Sign Error LMS Adaptation",                   // Dataset title
                      SIGLIB_ZERO,                                   // Minimum X value
-                     (double) (CNVRG_ARR_SIZE - 1),                 // Maximum X value
+                     (double) (CONVERGENCE_ARRAY_SIZE - 1),         // Maximum X value
                      "lines",                                       // Plot type
                      "cyan",                                        // Colour
                      GPC_ADD);                                      // New plot
         break;
       case 5:
         gpc_plot_2d (h2DPlot,                                       // Plot handle
-                     ConvergeArray,                                 // Dataset
-                     CNVRG_ARR_SIZE,                                // Dataset length
+                     pConvergeArray,                                // Dataset
+                     CONVERGENCE_ARRAY_SIZE,                        // Dataset length
                      "Sign Data LMS Adaptation",                    // Dataset title
                      SIGLIB_ZERO,                                   // Minimum X value
-                     (double) (CNVRG_ARR_SIZE - 1),                 // Maximum X value
+                     (double) (CONVERGENCE_ARRAY_SIZE - 1),         // Maximum X value
                      "lines",                                       // Plot type
                      "orange",                                      // Colour
                      GPC_ADD);                                      // New plot
         break;
       case 6:
         gpc_plot_2d (h2DPlot,                                       // Plot handle
-                     ConvergeArray,                                 // Dataset
-                     CNVRG_ARR_SIZE,                                // Dataset length
+                     pConvergeArray,                                // Dataset
+                     CONVERGENCE_ARRAY_SIZE,                        // Dataset length
                      "Sign Sign LMS Adaptation",                    // Dataset title
                      SIGLIB_ZERO,                                   // Minimum X value
-                     (double) (CNVRG_ARR_SIZE - 1),                 // Maximum X value
+                     (double) (CONVERGENCE_ARRAY_SIZE - 1),         // Maximum X value
                      "lines",                                       // Plot type
                      "green",                                       // Colour
                      GPC_NEW);                                      // New plot
@@ -536,4 +523,16 @@ void CompareAll (
         break;
     }
   }
+
+  if (_kbhit ())
+    _getch ();
+  printf ("\nHit <Carriage Return> to continue ....\n");
+  getchar ();                                                       // Clear keyboard buffer and wait for <Carriage Return>
+
+  gpc_close (h2DPlot);
+
+  SUF_MemoryFree (pEchoFilterState);                                // Free memory
+  SUF_MemoryFree (pLMSTaps);
+  SUF_MemoryFree (pLMSState);
+  SUF_MemoryFree (pConvergeArray);
 }

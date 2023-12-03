@@ -92,17 +92,7 @@ static const SLData_t pFIRFilterTaps[] = {
 };
 
 static SLData_t pFIRFilterState[FIR_FILTER_LENGTH];
-
-static SLData_t *pPNSequence, *pChirpData;
-static SLData_t *pDelay, *pDisplayArray;
-static SLData_t PnsPhase, PnsCurrentValue;
-static SLData_t SinePhase, ChirpPhase, ChirpValue, ImpulsePhase, CarrierPhase;
-static SLData_t *pRealData, *pImagData, *pWindowCoeffs, *pFFTCoeffs, *pTempDelay;
-
 static SLArrayIndex_t FIRFilterIndex;
-
-static SLData_t *pLookUpTable;                                      // For fast cosine lookup
-static SLData_t CarrierPhase;
 
 
 int main (
@@ -111,25 +101,24 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
 // Allocate memory
-  pPNSequence = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pChirpData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pDelay = SUF_VectorArrayAllocate (FIR_FILTER_GROUP_DELAY);
-  pDisplayArray = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pWindowCoeffs = SUF_VectorArrayAllocate (WINDOW_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
-  pTempDelay = SUF_VectorArrayAllocate (FIR_FILTER_GROUP_DELAY);
-  pLookUpTable = SUF_VectorArrayAllocate (SINE_TABLE_SIZE);
+  SLData_t       *pPNSequence = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pChirpData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pDelay = SUF_VectorArrayAllocate (FIR_FILTER_GROUP_DELAY);
+  SLData_t       *pDisplayArray = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pWindowCoeffs = SUF_VectorArrayAllocate (WINDOW_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pTempDelay = SUF_VectorArrayAllocate (FIR_FILTER_GROUP_DELAY);
+  SLData_t       *pLookUpTable = SUF_VectorArrayAllocate (SINE_TABLE_SIZE); // For fast cosine lookup
 
-  PnsPhase = SIGLIB_ZERO;
-  ChirpPhase = SIGLIB_ZERO;
-  ChirpValue = SIGLIB_ZERO;
-  SinePhase = SIGLIB_ZERO;
-  ImpulsePhase = SIGLIB_ZERO;
-  CarrierPhase = SIGLIB_ZERO;
+  SLData_t        PnsPhase = SIGLIB_ZERO;
+  SLData_t        ChirpPhase = SIGLIB_ZERO;
+  SLData_t        ChirpValue = SIGLIB_ZERO;
+  SLData_t        ImpulsePhase = SIGLIB_ZERO;
+  SLData_t        carrierPhase = SIGLIB_ZERO;
 
-  PnsCurrentValue = SIGLIB_ZERO;
+  SLData_t        PnsCurrentValue = SIGLIB_ZERO;
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Microscan Spectrum Analyzer",                     // Plot title
@@ -150,7 +139,7 @@ int main (
            &FIRFilterIndex,                                         // Pointer to filter index register
            FIR_FILTER_LENGTH);                                      // Filter length
 // Initialize FM modulator
-  SIF_FrequencyModulate (&CarrierPhase,                             // Pointer to carrier phase
+  SIF_FrequencyModulate (&carrierPhase,                             // Pointer to carrier phase
                          pLookUpTable,                              // Pointer to LUT array
                          SINE_TABLE_SIZE);                          // Table length
 
@@ -277,7 +266,7 @@ int main (
                          pPNSequence,                               // Modulated signal destination pointer
                          CARRIER_FREQ,                              // Carrier frequency
                          MOD_INDEX,                                 // Modulation index
-                         &CarrierPhase,                             // Pointer to carrier phase
+                         &carrierPhase,                             // Pointer to carrier phase
                          pLookUpTable,                              // Fast cosine look up table
                          SINE_TABLE_SIZE,                           // Look up table size
                          SAMPLE_LENGTH);                            // Dataset length
@@ -400,5 +389,5 @@ int main (
   SUF_MemoryFree (pTempDelay);
   SUF_MemoryFree (pLookUpTable);
 
-  exit (0);
+  return (0);
 }

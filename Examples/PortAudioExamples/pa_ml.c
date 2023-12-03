@@ -161,18 +161,19 @@ void processAudio (
 
   SLData_t        outputActivation;
 
-  SLArrayIndex_t  predictedCategory = SDA_TwoLayer2CategoryNetworkPredict (pRealData, // Pointer to data to validate
-                                                                           (SLData_t *) layer1Weights,  // Pointer to layer #1 weights
-                                                                           layer2Weights, // Pointer to layer #2 weights
-                                                                           pLayer1PostActivation, // Pointer to post activation for hidden layer
-                                                                           &outputActivation, // Pointer to output activation result
-                                                                           ACTIVATION_TYPE, // Hidden layer activation type
-                                                                           ACTIVATION_ALPHA,  // Hidden layer alpha value
-                                                                           ACTIVATION_TYPE, // Output layer activation type
-                                                                           ACTIVATION_ALPHA,  // Output layer alpha value
-                                                                           CLASSIFICATION_THRESHOLD,  // Classification threshold
-                                                                           NETWORK_INPUT_SAMPLE_LENGTH, // Input sample length
-                                                                           NETWORK_HIDDEN_LAYER_NODES); // Hidden layer length
+  SLArrayIndex_t  predictedCategory = (int)
+    SDA_TwoLayer2CategoryNetworkPredict (pRealData,                 // Pointer to data to validate
+                                         (SLData_t *) layer1Weights,  // Pointer to layer #1 weights
+                                         layer2Weights,             // Pointer to layer #2 weights
+                                         pLayer1PostActivation,     // Pointer to post activation for hidden layer
+                                         &outputActivation,         // Pointer to output activation result
+                                         ACTIVATION_TYPE,           // Hidden layer activation type
+                                         ACTIVATION_ALPHA,          // Hidden layer alpha value
+                                         ACTIVATION_TYPE,           // Output layer activation type
+                                         ACTIVATION_ALPHA,          // Output layer alpha value
+                                         CLASSIFICATION_THRESHOLD,  // Classification threshold
+                                         NETWORK_INPUT_SAMPLE_LENGTH, // Input sample length
+                                         NETWORK_HIDDEN_LAYER_NODES); // Hidden layer length
 
 // Use comb filter as really efficient way of summing the output over previous N samples
   SLData_t        fPredictedCategory = SDS_Comb ((SLData_t) predictedCategory,  // Input data sample to be filtered

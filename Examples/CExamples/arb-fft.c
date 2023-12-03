@@ -11,18 +11,16 @@
 #define SAMPLE_LENGTH   200                                         // Input dataset length
 
 // Declare global variables and arrays
-static SLData_t *pInput, *pResults, *pRealData, *pImagData, *pWindowCoeffs, *pRealDatac, *pImagDatac, *pFFTCoeffs;
-static enum SLArbitraryFFT_t CZTorFFTSwitch;
-static SLData_t *AWNrPtr, *AWNiPtr, *vLrPtr, *vLiPtr, *WMrPtr, *WMiPtr;
-static SLData_t *CZTRealWorkPtr, *CZTImagWorkPtr;
 
 
 int main (
   int argc,
   char *argv[])
 {
-  SLArrayIndex_t  FFTLength, Log2FFTLength;
+  SLArrayIndex_t  Log2FFTLength;
   SLData_t        InverseFFTLength, InverseSampleLengthXFFTLength;
+
+  enum SLArbitraryFFT_t CZTorFFTSwitch;
 
   h_GPC_Plot     *h2DPlot;                                          // Plot object
   static FILE    *fpInputFile;
@@ -37,33 +35,33 @@ int main (
     exit (0);
   }
 
-  FFTLength = SUF_FftArbAllocLength (SAMPLE_LENGTH);                // Calculate the required FFT length
+  SLArrayIndex_t  FFTLength = SUF_FftArbAllocLength (SAMPLE_LENGTH);  // Calculate the required FFT length
 
   printf ("Calculated FFT length for arbitrary FFT = %d\n", FFTLength);
 
-  pInput = SUF_VectorArrayAllocate (SAMPLE_LENGTH);                 // Allocate the memory
-  pWindowCoeffs = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pInput = SUF_VectorArrayAllocate (SAMPLE_LENGTH); // Allocate the memory
+  SLData_t       *pWindowCoeffs = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
-  pRealData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
-  pRealDatac = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pImagDatac = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pRealDatac = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pImagDatac = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
-  AWNrPtr = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  AWNiPtr = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *AWNrPtr = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *AWNiPtr = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
-  vLrPtr = SUF_VectorArrayAllocate (FFTLength);
-  vLiPtr = SUF_VectorArrayAllocate (FFTLength);
+  SLData_t       *vLrPtr = SUF_VectorArrayAllocate (FFTLength);
+  SLData_t       *vLiPtr = SUF_VectorArrayAllocate (FFTLength);
 
-  CZTRealWorkPtr = SUF_VectorArrayAllocate (FFTLength);
-  CZTImagWorkPtr = SUF_VectorArrayAllocate (FFTLength);
+  SLData_t       *CZTRealWorkPtr = SUF_VectorArrayAllocate (FFTLength);
+  SLData_t       *CZTImagWorkPtr = SUF_VectorArrayAllocate (FFTLength);
 
-  WMrPtr = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  WMiPtr = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *WMrPtr = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *WMiPtr = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
-  pResults = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFTLength);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFTLength);
 
   if ((NULL == pInput) || (NULL == pWindowCoeffs) || (NULL == pRealData) || (NULL == pImagData) ||
       (NULL == pRealDatac) || (NULL == pImagDatac) || (NULL == AWNrPtr) || (NULL == AWNiPtr) ||
@@ -268,5 +266,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

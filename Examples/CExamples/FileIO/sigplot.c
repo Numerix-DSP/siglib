@@ -7,7 +7,6 @@
 #include <siglib.h>                                                 // SigLib DSP library
 #include <gnuplot_c.h>                                              // Gnuplot/C
 
-double         *pDataArray;
 FILE           *fpInputFile;
 
 
@@ -45,7 +44,7 @@ int main (
   printf ("Sample count = %d\n", inputSampleCount);
 
 
-  pDataArray = SUF_VectorArrayAllocate (inputSampleCount);
+  SLData_t       *pDataArray = SUF_VectorArrayAllocate (inputSampleCount);
   if (NULL == pDataArray) {
     printf ("\n\nMemory allocation failed\n\n");
     exit (0);
@@ -76,5 +75,5 @@ int main (
 
   free (pDataArray);                                                // Free memory
 
-  exit (0);
+  return (0);
 }

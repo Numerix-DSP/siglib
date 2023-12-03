@@ -35,8 +35,6 @@
 #define NUM_OUTPUT_NODES                    NUM_CATEGORIES          // Number of output nodes
 
 // Declare global variables and arrays
-static SLData_t *pLayer1PostActivation, *pLayer2PostActivation;
-
 static char     filenameWeights[2400];
 static char     filenameWeightsParameter[2000];
 
@@ -92,8 +90,8 @@ int main (
   int argc,
   char *argv[])
 {
-  pLayer1PostActivation = SUF_VectorArrayAllocate (NETWORK_HIDDEN_LAYER_NODES); // Allocate arrays
-  pLayer2PostActivation = SUF_VectorArrayAllocate (NUM_CATEGORIES);
+  SLData_t       *pLayer1PostActivation = SUF_VectorArrayAllocate (NETWORK_HIDDEN_LAYER_NODES); // Allocate arrays
+  SLData_t       *pLayer2PostActivation = SUF_VectorArrayAllocate (NUM_CATEGORIES);
 
   if ((NULL == pLayer1PostActivation) || (NULL == pLayer2PostActivation)) {
     printf ("\n\nMemory allocation failed\n\n");
@@ -180,7 +178,6 @@ int main (
                                                                   (SLData_t *) layer1Biases,  // layer1Biases
                                                                   (SLData_t *) layer2Weights, // layer2Weights
                                                                   (SLData_t *) layer2Biases); // layer2Biases
-
   if (numItems != (NETWORK_HIDDEN_LAYER_NODES * NETWORK_INPUT_SAMPLE_LENGTH) + (NETWORK_HIDDEN_LAYER_NODES) +
       (NUM_OUTPUT_NODES * NETWORK_HIDDEN_LAYER_NODES) + (NUM_OUTPUT_NODES)) {
     printf ("**** ERROR - INCORRECT NUMBER OF WEIGHTS READ FROM BINARY FILE: %s\n\n", filenameWeights);
@@ -254,7 +251,7 @@ int main (
   SUF_MemoryFree (pLayer2PostActivation);
   SUF_MemoryFree (pPredictionData);
 
-  exit (0);
+  return (0);
 }
 
 

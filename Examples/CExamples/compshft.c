@@ -23,20 +23,10 @@
 
 #define CARRIER_TABLE_LENGTH            ((SLArrayIndex_t)(SAMPLE_RATE_HZ / CARRIER_FREQUENCY))
 
-
 // Declare global variables and arrays
 static SLData_t pModulatingData[SAMPLE_LENGTH];
 static SLData_t pModulatedData[SAMPLE_LENGTH];
 static SLData_t pShiftedData[SAMPLE_LENGTH];
-
-static SLData_t ModulatingSignalPhase;
-
-static SLData_t *pCarrierTable;
-static SLArrayIndex_t CarrierTableIndex;
-
-static SLData_t *pCombFilter1, *pCombFilter2, *pSineTable;
-static SLData_t CombFilter1Sum, CombFilter2Sum;
-static SLArrayIndex_t CombFilterPhase, SineTablePhase;
 
 
 int main (
@@ -44,14 +34,21 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
+  SLData_t        ModulatingSignalPhase;
+
+  SLArrayIndex_t  CarrierTableIndex;
+
+  SLData_t        CombFilter1Sum, CombFilter2Sum;
+  SLArrayIndex_t  CombFilterPhase, SineTablePhase;
+
   SLData_t        TimeIndex = SIGLIB_ZERO;
 
   SLFixData_t     action, io = 0;
 
-  pCombFilter1 = SUF_VectorArrayAllocate (FILTER_LENGTH);
-  pCombFilter2 = SUF_VectorArrayAllocate (FILTER_LENGTH);
-  pSineTable = SUF_VectorArrayAllocate (COMP_SHFT_CARRIER_TABLE_LENGTH);
-  pCarrierTable = SUF_AmCarrierArrayAllocate (CARRIER_FREQUENCY, SAMPLE_RATE_HZ);
+  SLData_t       *pCombFilter1 = SUF_VectorArrayAllocate (FILTER_LENGTH);
+  SLData_t       *pCombFilter2 = SUF_VectorArrayAllocate (FILTER_LENGTH);
+  SLData_t       *pSineTable = SUF_VectorArrayAllocate (COMP_SHFT_CARRIER_TABLE_LENGTH);
+  SLData_t       *pCarrierTable = SUF_AmCarrierArrayAllocate (CARRIER_FREQUENCY, SAMPLE_RATE_HZ);
 
   SIF_AmplitudeModulate (pCarrierTable,                             // Carrier table pointer
                          &CarrierTableIndex,                        // Carrier table index
@@ -177,5 +174,5 @@ int main (
   SUF_MemoryFree (pSineTable);
   SUF_MemoryFree (pCarrierTable);
 
-  exit (0);
+  return (0);
 }

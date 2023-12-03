@@ -26,25 +26,24 @@
 #define WINDOW_LENGTH           FFT_LENGTH
 
 // Declare global variables and arrays
-static SLData_t *pRealData, *pImagData, *pWindowCoeffs, *pMagnitude, *pPhase, *pMarker, *pFFTCoeffs;
-static FILE    *fpInputFile;
 
 
 int main (
   void)
 {
+  FILE           *fpInputFile;
   SLFixData_t     waveformChoice;
 
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
 // Allocate arrays
-  pPhase = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pMagnitude = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pWindowCoeffs = SUF_VectorArrayAllocate (WINDOW_LENGTH);
-  pMarker = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pPhase = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pMagnitude = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pWindowCoeffs = SUF_VectorArrayAllocate (WINDOW_LENGTH);
+  SLData_t       *pMarker = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
 
   SDA_SignalGenerate (pMarker,                                      // Pointer to destination array
@@ -233,5 +232,5 @@ int main (
   SUF_MemoryFree (pMarker);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

@@ -1024,7 +1024,7 @@ int main (
   SUF_MemoryFree (pELGRealOutputSynchDelay);
   SUF_MemoryFree (pELGImagOutputSynchDelay);
 
-  exit (0);
+  return (0);
 }
 
 

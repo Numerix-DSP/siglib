@@ -71,5 +71,5 @@ int main (
   printf ("\n");
   printf ("\n");
 
-  exit (0);
+  return (0);
 }

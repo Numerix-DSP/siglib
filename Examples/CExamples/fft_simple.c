@@ -12,7 +12,6 @@
 #define LOG2_FFT_LENGTH SAI_FftLengthLog2(FFT_LENGTH)               // Log FFT length
 
 // Declare global variables and arrays
-static SLData_t *pRealData, *pImagData, *pFFTCoeffs;
 
 
 int main (
@@ -23,9 +22,9 @@ int main (
 #endif
 
 // Allocate memory
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pRealData) || (NULL == pImagData) || (NULL == pFFTCoeffs)) {
     printf ("\n\nMemory allocation failed\n\n");
@@ -182,5 +181,5 @@ int main (
   SUF_MemoryFree (pImagData);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

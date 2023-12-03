@@ -13,8 +13,6 @@
 #define LOG2_FFT_LENGTH SAI_FftLengthLog2(FFT_LENGTH)               // Log2 FFT length,
 
 // Declare global variables and arrays
-static SLData_t *pImagData;
-static SLData_t *pResults, *pFFTCoeffs;
 
             // Initialise filter coefficients
 static const SLData_t pFilterTaps[FILTER_LENGTH] = {
@@ -65,7 +63,6 @@ static const SLData_t pFilterTaps[FILTER_LENGTH] = {
 
 static SLData_t pFilterState[FILTER_LENGTH];
 static SLArrayIndex_t FilterIndex;
-static SLData_t *pSrc1, *pSrc2;
 
 
 int main (
@@ -73,12 +70,11 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pSrc1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pSrc2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pResults = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
-
+  SLData_t       *pSrc1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pSrc2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
   if ((NULL == pSrc1) || (NULL == pSrc2) || (NULL == pImagData) || (NULL == pResults) || (NULL == pFFTCoeffs)) {
     printf ("Memory allocation error in main()\n");
     exit (-1);
@@ -215,5 +211,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

@@ -16,11 +16,6 @@
 #define FILTER_GROUP_DELAY  (FILTER_LENGTH >> 1)                    // Filter group delay -Note: C array indexing
 
 // Declare global variables and arrays
-static SLData_t SinePhase;
-static SLData_t *pMagnitude, *pDelay, *pTempDelay;
-static SLData_t *pFilterTaps, *pFilterTapsStart, *pFilterState;
-static SLArrayIndex_t FilterIndex;
-static SLData_t *pSrc, *pHilbertTransformed;
 
 
 int main (
@@ -40,17 +35,18 @@ int main (
     exit (-1);
   }
 
+  SLArrayIndex_t  FilterIndex;
+
+  SLData_t       *pFilterTaps = SUF_VectorArrayAllocate (FILTER_LENGTH);
+  SLData_t       *pFilterState = SUF_VectorArrayAllocate (FILTER_LENGTH);
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pHilbertTransformed = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pMagnitude = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pDelay = SUF_VectorArrayAllocate (FILTER_GROUP_DELAY);
+  SLData_t       *pTempDelay = SUF_VectorArrayAllocate (FILTER_GROUP_DELAY);
+
   printf ("Hilbert transform filter length   => %d", FILTER_LENGTH);
 
-  pFilterTaps = SUF_VectorArrayAllocate (FILTER_LENGTH);
-  pFilterState = SUF_VectorArrayAllocate (FILTER_LENGTH);
-  pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pHilbertTransformed = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pMagnitude = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pDelay = SUF_VectorArrayAllocate (FILTER_GROUP_DELAY);
-  pTempDelay = SUF_VectorArrayAllocate (FILTER_GROUP_DELAY);
-
-  pFilterTapsStart = pFilterTaps;
 // Initialise Hilbert transformer coefficients
   SIF_HilbertTransformerFirFilter (pFilterTaps,                     // Pointer to filter coefficients
                                    FILTER_LENGTH);                  // Filter length
@@ -63,7 +59,7 @@ int main (
                   SIGLIB_NULL_ARRAY_INDEX_PTR,                      // Unused
                   FILTER_GROUP_DELAY);                              // Filter length
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pSrc,                                         // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
@@ -72,11 +68,11 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pHilbertTransformed,                          // Pointer to destination array - reuse pHilbertTransformed array for temp data
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
@@ -85,7 +81,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -153,5 +149,5 @@ int main (
   SUF_MemoryFree (pDelay);
   SUF_MemoryFree (pTempDelay);
 
-  exit (0);
+  return (0);
 }

@@ -11,11 +11,6 @@
 #define DC_LEVEL        SIGLIB_EIGHT
 
 // Declare global variables and arrays
-static SLData_t *pSrc, *pCrossingLocations;
-static SLData_t SinePhase;
-static SLData_t DetectorPrevValue;
-static SLFixData_t NumberOfCrossings;
-static SLArrayIndex_t FirstPos;
 
 
 int main (
@@ -35,12 +30,15 @@ int main (
     exit (-1);
   }
 
+  SLData_t        DetectorPrevValue;
+  SLFixData_t     NumberOfCrossings;
+  SLArrayIndex_t  FirstPosition;
 
 // Allocate memory
-  pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pCrossingLocations = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pCrossingLocations = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
 
   SDA_SignalGenerate (pSrc,                                         // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
@@ -50,7 +48,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -75,12 +73,12 @@ int main (
                                               SAMPLE_LENGTH);       // Dataset length
 
   DetectorPrevValue = SIGLIB_ZERO;
-  FirstPos = SDA_FirstZeroCrossingLocation (pSrc,                   // Pointer to source array
-                                            &DetectorPrevValue,     // Pointer to previous source data value
-                                            SIGLIB_POSITIVE_LEVEL_CROSS,  // Zero crossing type - +ve, -ve, both
-                                            SAMPLE_LENGTH);         // Dataset length
+  FirstPosition = SDA_FirstZeroCrossingLocation (pSrc,              // Pointer to source array
+                                                 &DetectorPrevValue,  // Pointer to previous source data value
+                                                 SIGLIB_POSITIVE_LEVEL_CROSS, // Zero crossing type - +ve, -ve, both
+                                                 SAMPLE_LENGTH);    // Dataset length
 
-  printf ("\nLocation of first zero crossing = %d\n", FirstPos);
+  printf ("\nLocation of first zero crossing = %d\n", FirstPosition);
   printf ("Number of zero crossingss = %d\n", NumberOfCrossings);
   gpc_plot_2d (h2DPlot,                                             // Graph handle
                pCrossingLocations,                                  // Dataset
@@ -103,12 +101,12 @@ int main (
                                               SAMPLE_LENGTH);       // Dataset length
 
   DetectorPrevValue = SIGLIB_ZERO;
-  FirstPos = SDA_FirstZeroCrossingLocation (pSrc,                   // Pointer to source array
-                                            &DetectorPrevValue,     // Pointer to previous source data value
-                                            SIGLIB_NEGATIVE_LEVEL_CROSS,  // Zero crossing type - +ve, -ve, both
-                                            SAMPLE_LENGTH);         // Dataset length
+  FirstPosition = SDA_FirstZeroCrossingLocation (pSrc,              // Pointer to source array
+                                                 &DetectorPrevValue,  // Pointer to previous source data value
+                                                 SIGLIB_NEGATIVE_LEVEL_CROSS, // Zero crossing type - +ve, -ve, both
+                                                 SAMPLE_LENGTH);    // Dataset length
 
-  printf ("\nLocation of first zero crossing = %d\n", FirstPos);
+  printf ("\nLocation of first zero crossing = %d\n", FirstPosition);
   printf ("Number of zero crossingss = %d\n", NumberOfCrossings);
   gpc_plot_2d (h2DPlot,                                             // Graph handle
                pCrossingLocations,                                  // Dataset
@@ -131,12 +129,12 @@ int main (
                                               SAMPLE_LENGTH);       // Dataset length
 
   DetectorPrevValue = SIGLIB_ZERO;
-  FirstPos = SDA_FirstZeroCrossingLocation (pSrc,                   // Pointer to source array
-                                            &DetectorPrevValue,     // Pointer to previous source data value
-                                            SIGLIB_ALL_LEVEL_CROSS, // Zero crossing type - +ve, -ve, both
-                                            SAMPLE_LENGTH);         // Dataset length
+  FirstPosition = SDA_FirstZeroCrossingLocation (pSrc,              // Pointer to source array
+                                                 &DetectorPrevValue,  // Pointer to previous source data value
+                                                 SIGLIB_ALL_LEVEL_CROSS,  // Zero crossing type - +ve, -ve, both
+                                                 SAMPLE_LENGTH);    // Dataset length
 
-  printf ("\nLocation of first zero crossing = %d\n", FirstPos);
+  printf ("\nLocation of first zero crossing = %d\n", FirstPosition);
   printf ("Number of zero crossingss = %d\n", NumberOfCrossings);
   gpc_plot_2d (h2DPlot,                                             // Graph handle
                pCrossingLocations,                                  // Dataset
@@ -172,23 +170,18 @@ int main (
                                               SAMPLE_LENGTH);       // Dataset length
 
   DetectorPrevValue = SIGLIB_ZERO;
-  FirstPos = SDA_FirstZeroCrossingLocation (pSrc,                   // Pointer to source array
-                                            &DetectorPrevValue,     // Pointer to previous source data value
-                                            SIGLIB_ALL_LEVEL_CROSS, // Zero crossing type - +ve, -ve, both
-                                            SAMPLE_LENGTH);         // Dataset length
+  FirstPosition = SDA_FirstZeroCrossingLocation (pSrc,              // Pointer to source array
+                                                 &DetectorPrevValue,  // Pointer to previous source data value
+                                                 SIGLIB_ALL_LEVEL_CROSS,  // Zero crossing type - +ve, -ve, both
+                                                 SAMPLE_LENGTH);    // Dataset length
 
   printf ("\nSource Signal - No Zero Crossings\n");
-  printf ("\nLocation of first zero crossing = %d\n", FirstPos);
+  printf ("\nLocation of first zero crossing = %d\n", FirstPosition);
   printf ("Number of zero crossingss = %d\n", NumberOfCrossings);
 
 
 
-
-
-
-
-
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
 
   SDA_SignalGenerate (pSrc,                                         // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
@@ -198,7 +191,7 @@ int main (
                       DC_LEVEL,                                     // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -224,13 +217,13 @@ int main (
                                                SAMPLE_LENGTH);      // Dataset length
 
   DetectorPrevValue = SIGLIB_ZERO;
-  FirstPos = SDA_FirstLevelCrossingLocation (pSrc,                  // Pointer to source array
-                                             DC_LEVEL,              // Detection level
-                                             &DetectorPrevValue,    // Pointer to previous source data value
-                                             SIGLIB_POSITIVE_LEVEL_CROSS, // Level crossing type - +ve, -ve, both
-                                             SAMPLE_LENGTH);        // Dataset length
+  FirstPosition = SDA_FirstLevelCrossingLocation (pSrc,             // Pointer to source array
+                                                  DC_LEVEL,         // Detection level
+                                                  &DetectorPrevValue, // Pointer to previous source data value
+                                                  SIGLIB_POSITIVE_LEVEL_CROSS,  // Level crossing type - +ve, -ve, both
+                                                  SAMPLE_LENGTH);   // Dataset length
 
-  printf ("\nLocation of first level crossing = %d\n", FirstPos);
+  printf ("\nLocation of first level crossing = %d\n", FirstPosition);
   printf ("Number of level crossingss = %d\n", NumberOfCrossings);
   gpc_plot_2d (h2DPlot,                                             // Graph handle
                pCrossingLocations,                                  // Dataset
@@ -254,13 +247,13 @@ int main (
                                                SAMPLE_LENGTH);      // Dataset length
 
   DetectorPrevValue = SIGLIB_ZERO;
-  FirstPos = SDA_FirstLevelCrossingLocation (pSrc,                  // Pointer to source array
-                                             DC_LEVEL,              // Detection level
-                                             &DetectorPrevValue,    // Pointer to previous source data value
-                                             SIGLIB_NEGATIVE_LEVEL_CROSS, // Level crossing type - +ve, -ve, both
-                                             SAMPLE_LENGTH);        // Dataset length
+  FirstPosition = SDA_FirstLevelCrossingLocation (pSrc,             // Pointer to source array
+                                                  DC_LEVEL,         // Detection level
+                                                  &DetectorPrevValue, // Pointer to previous source data value
+                                                  SIGLIB_NEGATIVE_LEVEL_CROSS,  // Level crossing type - +ve, -ve, both
+                                                  SAMPLE_LENGTH);   // Dataset length
 
-  printf ("\nLocation of first level crossing = %d\n", FirstPos);
+  printf ("\nLocation of first level crossing = %d\n", FirstPosition);
   printf ("Number of level crossingss = %d\n", NumberOfCrossings);
   gpc_plot_2d (h2DPlot,                                             // Graph handle
                pCrossingLocations,                                  // Dataset
@@ -284,13 +277,13 @@ int main (
                                                SAMPLE_LENGTH);      // Dataset length
 
   DetectorPrevValue = SIGLIB_ZERO;
-  FirstPos = SDA_FirstLevelCrossingLocation (pSrc,                  // Pointer to source array
-                                             DC_LEVEL,              // Detection level
-                                             &DetectorPrevValue,    // Pointer to previous source data value
-                                             SIGLIB_ALL_LEVEL_CROSS,  // Level crossing type - +ve, -ve, both
-                                             SAMPLE_LENGTH);        // Dataset length
+  FirstPosition = SDA_FirstLevelCrossingLocation (pSrc,             // Pointer to source array
+                                                  DC_LEVEL,         // Detection level
+                                                  &DetectorPrevValue, // Pointer to previous source data value
+                                                  SIGLIB_ALL_LEVEL_CROSS, // Level crossing type - +ve, -ve, both
+                                                  SAMPLE_LENGTH);   // Dataset length
 
-  printf ("\nLocation of first level crossing = %d\n", FirstPos);
+  printf ("\nLocation of first level crossing = %d\n", FirstPosition);
   printf ("Number of level crossingss = %d\n", NumberOfCrossings);
   gpc_plot_2d (h2DPlot,                                             // Graph handle
                pCrossingLocations,                                  // Dataset
@@ -327,14 +320,14 @@ int main (
                                                SAMPLE_LENGTH);      // Dataset length
 
   DetectorPrevValue = SIGLIB_ZERO;
-  FirstPos = SDA_FirstLevelCrossingLocation (pSrc,                  // Pointer to source array
-                                             DC_LEVEL,              // Detection level
-                                             &DetectorPrevValue,    // Pointer to previous source data value
-                                             SIGLIB_ALL_LEVEL_CROSS,  // Level crossing type - +ve, -ve, both
-                                             SAMPLE_LENGTH);        // Dataset length
+  FirstPosition = SDA_FirstLevelCrossingLocation (pSrc,             // Pointer to source array
+                                                  DC_LEVEL,         // Detection level
+                                                  &DetectorPrevValue, // Pointer to previous source data value
+                                                  SIGLIB_ALL_LEVEL_CROSS, // Level crossing type - +ve, -ve, both
+                                                  SAMPLE_LENGTH);   // Dataset length
 
   printf ("\nSource Signal - No Level Crossings\n");
-  printf ("\nLocation of first level crossing = %d\n", FirstPos);
+  printf ("\nLocation of first level crossing = %d\n", FirstPosition);
   printf ("Number of level crossingss = %d\n", NumberOfCrossings);
 
   gpc_close (h2DPlot);
@@ -343,5 +336,5 @@ int main (
   SUF_MemoryFree (pSrc);                                            // Free memory
   SUF_MemoryFree (pCrossingLocations);
 
-  exit (0);
+  return (0);
 }

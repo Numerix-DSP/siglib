@@ -61,5 +61,5 @@ int main (
   printf ("Source Biquad #2 = %lf, %lf, %lf, %lf, %lf\n", NewFilterCoeffs[5],
           NewFilterCoeffs[6], NewFilterCoeffs[7], NewFilterCoeffs[8], NewFilterCoeffs[9]);
 
-  exit (0);
+  return (0);
 }

@@ -38,7 +38,7 @@
 #define ORDER_NUMBER_OF_ADJ_SAMPLES 3                               // Number of adjacent samples to search
 
 #define DB_SCALE                    (1e5)                           // Input signal scaling - bar to dB*/
-//#define LINEAR_SCALE              (1e-5)                  // Input signal scaling - dB to Bar
+// #define LINEAR_SCALE              (1e-5)                             // Input signal scaling - dB to Bar
 
 
 #define NUMBER_OF_ORDERS_TO_SUM      5                              // Number of orders to Sum
@@ -46,10 +46,6 @@
 // Declare global variables and arrays
 static SLData_t LookUpTablePhaseGain;
 static SLData_t SincLUT[SINC_LUT_LENGTH];
-
-static SLData_t *pInputData, *pOverlapArray, *pWindowCoeffs;
-static SLData_t *pOverlappedData, *pOrderAnalysisInternalArray, *pOrderMagnitudeResults, *pFFTCoeffs;
-static SLData_t *pOrderArray, *pSumLevelArray, *pRealAverage, *pImagAverage, *pSpeed;
 
 static char    *plotColour[] = { "purple", "green", "blue", "black", "orange", "cyan", "violet", "grey", "magenta", "light-red" };
 
@@ -75,18 +71,18 @@ int main (
   SLData_t        SampleRate;
 
 
-  pInputData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);             // Input data array
-  pOverlapArray = SUF_VectorArrayAllocate (OVERLAP_LENGTH);         // Overlap data array
-  pWindowCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH);             // Window coeffs data array
-  pOverlappedData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);        // Overlapped data array
-  pOrderAnalysisInternalArray = SUF_OrderAnalysisArrayAllocate (FFT_LENGTH);  // Order analysis internal processing array
-  pOrderMagnitudeResults = SUF_VectorArrayAllocate (RESULT_LENGTH); // Results data array
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);             // FFT coefficient data array
-  pOrderArray = SUF_VectorArrayAllocate (NUMBER_OF_ORDERS * MAX_NUMBER_OF_FRAMES);  // Order results data array
-  pSumLevelArray = SUF_VectorArrayAllocate (MAX_NUMBER_OF_FRAMES);  // Sum level results data array
-  pRealAverage = SUF_VectorArrayAllocate (RESULT_LENGTH);           // Average order spectrum data array
-  pImagAverage = SUF_VectorArrayAllocate (RESULT_LENGTH);           // Average order spectrum data array
-  pSpeed = SUF_VectorArrayAllocate (MAX_NUMBER_OF_FRAMES);          // Speed data array
+  SLData_t       *pInputData = SUF_VectorArrayAllocate (SAMPLE_LENGTH); // Input data array
+  SLData_t       *pOverlapArray = SUF_VectorArrayAllocate (OVERLAP_LENGTH); // Overlap data array
+  SLData_t       *pWindowCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH); // Window coeffs data array
+  SLData_t       *pOverlappedData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);  // Overlapped data array
+  SLData_t       *pOrderAnalysisInternalArray = SUF_OrderAnalysisArrayAllocate (FFT_LENGTH);  // Order analysis internal processing array
+  SLData_t       *pOrderMagnitudeResults = SUF_VectorArrayAllocate (RESULT_LENGTH); // Results data array
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH); // FFT coefficient data array
+  SLData_t       *pOrderArray = SUF_VectorArrayAllocate (NUMBER_OF_ORDERS * MAX_NUMBER_OF_FRAMES);  // Order results data array
+  SLData_t       *pSumLevelArray = SUF_VectorArrayAllocate (MAX_NUMBER_OF_FRAMES);  // Sum level results data array
+  SLData_t       *pRealAverage = SUF_VectorArrayAllocate (RESULT_LENGTH); // Average order spectrum data array
+  SLData_t       *pImagAverage = SUF_VectorArrayAllocate (RESULT_LENGTH); // Average order spectrum data array
+  SLData_t       *pSpeed = SUF_VectorArrayAllocate (MAX_NUMBER_OF_FRAMES);  // Speed data array
 
   if ((NULL == pInputData) || (NULL == pOverlapArray) || (NULL == pWindowCoeffs) ||
       (NULL == pOverlappedData) || (NULL == pOrderAnalysisInternalArray) || (NULL == pOrderMagnitudeResults) ||
@@ -496,5 +492,5 @@ int main (
   SUF_MemoryFree (pImagAverage);
   SUF_MemoryFree (pSpeed);
 
-  exit (0);
+  return (0);
 }

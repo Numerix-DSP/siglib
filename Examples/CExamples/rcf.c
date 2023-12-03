@@ -24,8 +24,6 @@
 #define LOG2_FFT_LENGTH         SAI_FftLengthLog2(FFT_LENGTH)       // Log2 FFT length,
 
 // Declare global variables and arrays
-static SLData_t *pRCFCoeffs, *pRRCFCoeffs;
-static SLData_t *pRealData, *pImagData, *pResults, *pFFTCoeffs;
 
 
 int main (
@@ -33,12 +31,12 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pRCFCoeffs = SUF_VectorArrayAllocate (FILTER_LENGTH);
-  pRRCFCoeffs = SUF_VectorArrayAllocate (FILTER_LENGTH);
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pRCFCoeffs = SUF_VectorArrayAllocate (FILTER_LENGTH);
+  SLData_t       *pRRCFCoeffs = SUF_VectorArrayAllocate (FILTER_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pRCFCoeffs) || (NULL == pRRCFCoeffs) || (NULL == pRealData) || (NULL == pImagData) || (NULL == pResults) || (NULL == pFFTCoeffs)) {
     printf ("Memory allocation error in main()\n");
@@ -177,5 +175,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

@@ -41,19 +41,6 @@
 #define FT_SIZE                 OUTPUT_LENGTH
 
 // Declare global variables and arrays
-static SLData_t Radius, Decay, StartFreq, EndFreq;
-static SLComplexPolar_s ContourStart;
-
-static SLData_t phinc, w1inc, w2inc;                                // Variables used to calculate W
-static SLComplexRect_s A_1, W1, W_1, W12, W_12;                     // Complex contour coeffs
-
-static SLData_t *pInput, *pResults;
-static SLData_t *pRealData, *pImagData, *pFFTCoeffs;
-static SLData_t *pAWNr, *pAWNi, *pvLr, *pvLi, *pWMr, *pWMi;
-static SLData_t *pCZTRealWork, *pCZTImagWork;
-static SLData_t *pRealDataFT, *pImagDataFT;
-
-static SLData_t SinePhase;
 
 
 int main (
@@ -61,26 +48,32 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pInput = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pRealDataFT = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagDataFT = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t        Radius, Decay, StartFreq, EndFreq;
+  SLComplexPolar_s ContourStart;
 
-  pAWNr = SUF_VectorArrayAllocate (INPUT_LENGTH);
-  pAWNi = SUF_VectorArrayAllocate (INPUT_LENGTH);
+  SLData_t        phinc, w1inc, w2inc;                              // Variables used to calculate W
+  SLComplexRect_s A_1, W1, W_1, W12, W_12;                          // Complex contour coeffs
 
-  pvLr = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pvLi = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pInput = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pRealDataFT = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagDataFT = SUF_VectorArrayAllocate (FFT_LENGTH);
 
-  pCZTRealWork = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pCZTImagWork = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pAWNr = SUF_VectorArrayAllocate (INPUT_LENGTH);
+  SLData_t       *pAWNi = SUF_VectorArrayAllocate (INPUT_LENGTH);
 
-  pWMr = SUF_VectorArrayAllocate (OUTPUT_LENGTH);
-  pWMi = SUF_VectorArrayAllocate (OUTPUT_LENGTH);
+  SLData_t       *pvLr = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pvLi = SUF_VectorArrayAllocate (FFT_LENGTH);
 
-  pResults = SUF_VectorArrayAllocate (OUTPUT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pCZTRealWork = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pCZTImagWork = SUF_VectorArrayAllocate (FFT_LENGTH);
+
+  SLData_t       *pWMr = SUF_VectorArrayAllocate (OUTPUT_LENGTH);
+  SLData_t       *pWMi = SUF_VectorArrayAllocate (OUTPUT_LENGTH);
+
+  SLData_t       *pResults = SUF_VectorArrayAllocate (OUTPUT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
 
   if ((NULL == pInput) || (NULL == pRealData) || (NULL == pImagData) ||
@@ -106,7 +99,7 @@ int main (
   }
 
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pInput,                                       // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
@@ -115,7 +108,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       FFT_LENGTH);                                  // Output dataset length
 
@@ -362,5 +355,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

@@ -33,7 +33,6 @@ SLData_t        SourceData1[] = {
   2.000001, 2.000001                                                // Outside decalared range
 };
 
-
                                                     // Test number 2
                                                     // Five bins with nomnial median value equal to the integer numbers
                                                     // The extremity bins are not the same width as the central bins
@@ -75,15 +74,13 @@ SLData_t        SourceData3[] = {
   2.500001, 2.500001                                                // Outside decalared range
 };
 
-SLData_t       *pHistogram, *pHistogramCumul;
-
 
 int _tmain (
   int argc,
   _TCHAR * argv[])
 {
-  pHistogram = SUF_VectorArrayAllocate (HISTOGRAM_LENGTH1);         /* Allocate arrays to the maximum histogram length */
-  pHistogramCumul = SUF_VectorArrayAllocate (HISTOGRAM_LENGTH1);
+  SLData_t       *pHistogram = SUF_VectorArrayAllocate (HISTOGRAM_LENGTH1); // Allocate arrays to the maximum histogram length
+  SLData_t       *pHistogramCumul = SUF_VectorArrayAllocate (HISTOGRAM_LENGTH1);
 
 
 /*
@@ -94,25 +91,25 @@ int _tmain (
     printf ("SourceData[%d] = %lf\n", i, SourceData1[i]);
   }
 
-  SIF_Histogram (pHistogram,                                        /* Histogram array pointer */
-                 HISTOGRAM_LENGTH1);                                /* Histogram array length */
+  SIF_Histogram (pHistogram,                                        // Histogram array pointer
+                 HISTOGRAM_LENGTH1);                                // Histogram array length
 
-  SDA_Histogram (SourceData1,                                       /* Input array pointer */
-                 pHistogram,                                        /* Output (histogram) array pointer */
-                 MIN1,                                              /* Lower range limit */
-                 MAX1,                                              /* Upper range limit */
-                 SOURCE_LENGTH,                                     /* Input array length */
-                 HISTOGRAM_LENGTH1);                                /* Output (histogram) array length */
+  SDA_Histogram (SourceData1,                                       // Input array pointer
+                 pHistogram,                                        // Output (histogram) array pointer
+                 MIN1,                                              // Lower range limit
+                 MAX1,                                              // Upper range limit
+                 SOURCE_LENGTH,                                     // Input array length
+                 HISTOGRAM_LENGTH1);                                // Output (histogram) array length
 
-  SIF_Histogram (pHistogramCumul,                                   /* Cumulative histogram array pointer */
-                 HISTOGRAM_LENGTH1);                                /* Histogram array length */
+  SIF_Histogram (pHistogramCumul,                                   // Cumulative histogram array pointer
+                 HISTOGRAM_LENGTH1);                                // Histogram array length
 
-  SDA_HistogramCumulative (SourceData1,                             /* Input array pointer */
-                           pHistogramCumul,                         /* Output (cumulative histogram) array pointer */
-                           MIN1,                                    /* Lower range limit */
-                           MAX2,                                    /* Upper range limit */
-                           SOURCE_LENGTH,                           /* Input array length */
-                           HISTOGRAM_LENGTH1);                      /* Output (histogram) array length */
+  SDA_HistogramCumulative (SourceData1,                             // Input array pointer
+                           pHistogramCumul,                         // Output (cumulative histogram) array pointer
+                           MIN1,                                    // Lower range limit
+                           MAX2,                                    // Upper range limit
+                           SOURCE_LENGTH,                           // Input array length
+                           HISTOGRAM_LENGTH1);                      // Output (histogram) array length
 
   printf ("\n-Histogram-\t\t\t-Cumulative Histogram-\n");
   for (SLArrayIndex_t i = 0; i < HISTOGRAM_LENGTH1; i++) {
@@ -128,25 +125,25 @@ int _tmain (
     printf ("SourceData[%d] = %lf\n", i, SourceData2[i]);
   }
 
-  SIF_Histogram (pHistogram,                                        /* Histogram array pointer */
-                 HISTOGRAM_LENGTH2);                                /* Histogram array length */
+  SIF_Histogram (pHistogram,                                        // Histogram array pointer
+                 HISTOGRAM_LENGTH2);                                // Histogram array length
 
-  SDA_HistogramExtended (SourceData2,                               /* Input array pointer */
-                         pHistogram,                                /* Output (histogram) array pointer */
-                         MIN2,                                      /* Lower range limit */
-                         MAX2,                                      /* Upper range limit */
-                         SOURCE_LENGTH,                             /* Input array length */
-                         HISTOGRAM_LENGTH2);                        /* Output (histogram) array length */
+  SDA_HistogramExtended (SourceData2,                               // Input array pointer
+                         pHistogram,                                // Output (histogram) array pointer
+                         MIN2,                                      // Lower range limit
+                         MAX2,                                      // Upper range limit
+                         SOURCE_LENGTH,                             // Input array length
+                         HISTOGRAM_LENGTH2);                        // Output (histogram) array length
 
-  SIF_Histogram (pHistogramCumul,                                   /* Cumulative histogram array pointer */
-                 HISTOGRAM_LENGTH2);                                /* Histogram array length */
+  SIF_Histogram (pHistogramCumul,                                   // Cumulative histogram array pointer
+                 HISTOGRAM_LENGTH2);                                // Histogram array length
 
-  SDA_HistogramExtendedCumulative (SourceData2,                     /* Input array pointer */
-                                   pHistogramCumul,                 /* Output (cumulative histogram) array pointer */
-                                   MIN2,                            /* Lower range limit */
-                                   MAX2,                            /* Upper range limit */
-                                   SOURCE_LENGTH,                   /* Input array length */
-                                   HISTOGRAM_LENGTH2);              /* Output (histogram) array length */
+  SDA_HistogramExtendedCumulative (SourceData2,                     // Input array pointer
+                                   pHistogramCumul,                 // Output (cumulative histogram) array pointer
+                                   MIN2,                            // Lower range limit
+                                   MAX2,                            // Upper range limit
+                                   SOURCE_LENGTH,                   // Input array length
+                                   HISTOGRAM_LENGTH2);              // Output (histogram) array length
 
   printf ("\n-Histogram-\t\t\t-Cumulative Histogram-\n");
   for (SLArrayIndex_t i = 0; i < HISTOGRAM_LENGTH2; i++) {
@@ -162,25 +159,25 @@ int _tmain (
     printf ("SourceData[%d] = %lf\n", i, SourceData3[i]);
   }
 
-  SIF_Histogram (pHistogram,                                        /* Histogram array pointer */
-                 HISTOGRAM_LENGTH3);                                /* Histogram array length */
+  SIF_Histogram (pHistogram,                                        // Histogram array pointer
+                 HISTOGRAM_LENGTH3);                                // Histogram array length
 
-  SDA_HistogramExtended (SourceData3,                               /* Input array pointer */
-                         pHistogram,                                /* Output (histogram) array pointer */
-                         MIN3,                                      /* Lower range limit */
-                         MAX3,                                      /* Upper range limit */
-                         SOURCE_LENGTH,                             /* Input array length */
-                         HISTOGRAM_LENGTH3);                        /* Output (histogram) array length */
+  SDA_HistogramExtended (SourceData3,                               // Input array pointer
+                         pHistogram,                                // Output (histogram) array pointer
+                         MIN3,                                      // Lower range limit
+                         MAX3,                                      // Upper range limit
+                         SOURCE_LENGTH,                             // Input array length
+                         HISTOGRAM_LENGTH3);                        // Output (histogram) array length
 
-  SIF_Histogram (pHistogramCumul,                                   /* Cumulative histogram array pointer */
-                 HISTOGRAM_LENGTH3);                                /* Histogram array length */
+  SIF_Histogram (pHistogramCumul,                                   // Cumulative histogram array pointer
+                 HISTOGRAM_LENGTH3);                                // Histogram array length
 
-  SDA_HistogramExtendedCumulative (SourceData3,                     /* Input array pointer */
-                                   pHistogramCumul,                 /* Output (cumulative histogram) array pointer */
-                                   MIN3,                            /* Lower range limit */
-                                   MAX3,                            /* Upper range limit */
-                                   SOURCE_LENGTH,                   /* Input array length */
-                                   HISTOGRAM_LENGTH3);              /* Output (histogram) array length */
+  SDA_HistogramExtendedCumulative (SourceData3,                     // Input array pointer
+                                   pHistogramCumul,                 // Output (cumulative histogram) array pointer
+                                   MIN3,                            // Lower range limit
+                                   MAX3,                            // Upper range limit
+                                   SOURCE_LENGTH,                   // Input array length
+                                   HISTOGRAM_LENGTH3);              // Output (histogram) array length
 
   printf ("\n-Histogram-\t\t\t-Cumulative Histogram-\n");
   for (SLArrayIndex_t i = 0; i < HISTOGRAM_LENGTH3; i++) {
@@ -188,7 +185,7 @@ int _tmain (
   }
 
 
-  SUF_MemoryFree (pHistogram);                                      /* Free memory */
+  SUF_MemoryFree (pHistogram);                                      // Free memory
   SUF_MemoryFree (pHistogramCumul);
 
   return 0;

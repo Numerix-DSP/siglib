@@ -14,8 +14,6 @@
 #define LOG2_FFT_LENGTH     SAI_FftLengthLog2(FFT_LENGTH)           // Log2 FFT length,
 
 // Declare global variables and arrays
-static SLData_t *pRealData, *pImagData, *pFFTCoeffs;
-static SLData_t SinePhase;
 
 
 int main (
@@ -27,9 +25,9 @@ int main (
 #endif
 
 // Allocate memory
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pRealData) || (NULL == pImagData) || (NULL == pFFTCoeffs)) {
     printf ("\n\nMemory allocation failed\n\n");
@@ -42,7 +40,7 @@ int main (
            FFT_LENGTH);                                             // FFT length
 
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pRealData,                                    // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.9,                                          // Signal peak level
@@ -51,7 +49,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       FFT_LENGTH);                                  // Output dataset length
 
@@ -82,5 +80,5 @@ int main (
   SUF_MemoryFree (pImagData);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

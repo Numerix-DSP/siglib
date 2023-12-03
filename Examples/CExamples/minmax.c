@@ -204,5 +204,5 @@ int main (
     printf ("%lf\n", dstL[i]);
   }
 
-  exit (0);
+  return (0);
 }

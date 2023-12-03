@@ -667,6 +667,7 @@ Description: SigLib function memory section definition file for TI compilers
 #pragma CODE_SECTION(SDS_ActivationReLUDerivative, ".text")
 #pragma CODE_SECTION(SDS_ActivationTanH, ".text")
 #pragma CODE_SECTION(SDS_ActivationTanHDerivative, ".text")
+#pragma CODE_SECTION(SMX_CholeskyDecompose, ".text")
 #pragma CODE_SECTION(SMX_ComplexInverse2x2, ".text")
 #pragma CODE_SECTION(SMX_CreateIdentity, ".text")
 #pragma CODE_SECTION(SMX_DeleteOldColumn, ".text")

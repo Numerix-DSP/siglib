@@ -59,8 +59,6 @@ static const SLData_t COS_MOD1[SIZE_COS_MOD1] = {
   -1.0000000000, 0.3090172937, 0.8090167786, -0.8090172410, -0.3090165454
 };
 
-static SLData_t *pSrc, *pRealData, *pImagData, *pResults, *pFFTCoeffs;
-
 
 int main (
   void)
@@ -70,14 +68,14 @@ int main (
   SLFixData_t     cos_mod1_index;                                   // Size of the 1st stage modulator lookup table
 
   SLData_t        alpha, freq_shift, omega;
-  SLData_t        SinePhase;
+  SLData_t        sinePhase;
   SLData_t        working_data;
 
-  pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pSrc) || (NULL == pRealData) || (NULL == pImagData) || (NULL == pResults) || (NULL == pFFTCoeffs)) {
 
@@ -116,7 +114,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -247,5 +245,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

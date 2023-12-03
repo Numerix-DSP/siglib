@@ -34,5 +34,5 @@ int main (
   SUF_PrintArray (logTable,                                         // Pointer to data array
                   LOG_TABLE_LENGTH);                                // Table length
 
-  exit (0);
+  return (0);
 }

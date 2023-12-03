@@ -70,5 +70,5 @@ int main (
 
   printf ("Median = %lf\n", Median);
 
-  exit (0);
+  return (0);
 }

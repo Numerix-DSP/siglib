@@ -13,7 +13,6 @@
 // Define constants
 
 // Declare global variables and arrays
-static SLData_t *pInputData, *pProcessData, *pOverlapData, *pImagData, *pResults, *pWindowCoeffs, *pFFTCoeffs;
 
 
 int main (
@@ -65,13 +64,13 @@ int main (
   SLFixData_t     log2FftLength = SAI_FftLengthLog2 (fftLength);
   SLFixData_t     HalfFftLength = (fftLength >> 1);
 
-  pProcessData = SUF_VectorArrayAllocate (fftLength);
-  pOverlapData = SUF_VectorArrayAllocate (overlap);
-  pInputData = SUF_VectorArrayAllocate (fftLength);
-  pImagData = SUF_VectorArrayAllocate (fftLength);
-  pWindowCoeffs = SUF_VectorArrayAllocate (fftLength);
-  pResults = SUF_VectorArrayAllocate (fftLength);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (fftLength);
+  SLData_t       *pProcessData = SUF_VectorArrayAllocate (fftLength);
+  SLData_t       *pOverlapData = SUF_VectorArrayAllocate (overlap);
+  SLData_t       *pInputData = SUF_VectorArrayAllocate (fftLength);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (fftLength);
+  SLData_t       *pWindowCoeffs = SUF_VectorArrayAllocate (fftLength);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (fftLength);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (fftLength);
 
   if (dimensions == 1) {
     strcpy (plotTitle, "Spectrum: ");
@@ -220,5 +219,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

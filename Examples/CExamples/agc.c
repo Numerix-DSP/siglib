@@ -14,18 +14,10 @@
 #define AGC_ATTACK_SENSITIVITY      1.004                           // Sensitivity of attack gain adjustment
 #define AGC_DECAY_SENSITIVITY       0.996                           // Sensitivity of decay gain adjustment
 #define AGC_SUB_ARRAY_LEN           32                              // Sub dataset length
-#define AGC_MEAN_LENGTH                32                           // Mean length
+#define AGC_MEAN_LENGTH             32                              // Mean length
 
 // Declare global variables and arrays
-static SLData_t *pSrc, *pDst;
-static SLData_t SinePhase;
-static SLData_t AGCGain, AGCMax;
-
 static SLData_t MeanState[AGC_MEAN_LENGTH];
-static SLArrayIndex_t MeanStateIndex;
-static SLData_t MeanSum;
-static SLData_t DesiredMeanScaled;
-static SLData_t ThresholdScaled;
 
 
 int main (
@@ -45,15 +37,20 @@ int main (
     exit (-1);
   }
 
-  pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);                   // Allocate memory
-  pDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLArrayIndex_t  MeanStateIndex;
+  SLData_t        MeanSum;
+  SLData_t        DesiredMeanScaled;
+  SLData_t        ThresholdScaled;
+
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);   // Allocate memory
+  SLData_t       *pDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   if ((NULL == pSrc) || (NULL == pDst)) {
     printf ("\n\nMemory allocation failed\n\n");
     exit (0);
   }
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pSrc,                                         // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.4,                                          // Signal peak level
@@ -62,12 +59,12 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
-  AGCGain = SIGLIB_ONE;
-  AGCMax = SIGLIB_ZERO;
+  SLData_t        AGCGain = SIGLIB_ONE;
+  SLData_t        AGCMax = SIGLIB_ZERO;
 
   gpc_plot_2d (h2DPlot,                                             // Graph handle
                pSrc,                                                // Dataset
@@ -200,5 +197,5 @@ int main (
   SUF_MemoryFree (pSrc);                                            // Free memory
   SUF_MemoryFree (pDst);
 
-  exit (0);
+  return (0);
 }

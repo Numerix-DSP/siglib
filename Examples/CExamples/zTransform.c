@@ -56,10 +56,6 @@ static char     printString[] = ("All Pole Filter\nNumerator [] = {{0.0, 0.0}}\n
 #endif
 
 
-static SLData_t *pZTransform;
-static SLImageData_t *pImage;
-
-
 int main (
   void)
 {
@@ -67,8 +63,8 @@ int main (
   SLData_t        RealPoint, ImagPoint;
   SLFixData_t     RealIndex, ImagIndex;
 
-  pZTransform = SUF_VectorArrayAllocate (ZT_SIZE);                  // Allocate memory
-  pImage = (SLImageData_t *) malloc ((size_t) (ZT_SIZE * sizeof (SLImageData_t)));
+  SLData_t       *pZTransform = SUF_VectorArrayAllocate (ZT_SIZE);  // Allocate memory
+  SLImageData_t  *pImage = (SLImageData_t *) malloc ((size_t) (ZT_SIZE * sizeof (SLImageData_t)));
 
   hImage =                                                          // Initialize plot
     gpc_init_image ("z-transform Plot",                             // Plot title
@@ -148,5 +144,5 @@ int main (
   SUF_MemoryFree (pZTransform);                                     // Free memory
   SUF_MemoryFree (pImage);
 
-  exit (0);
+  return (0);
 }

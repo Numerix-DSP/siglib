@@ -27,8 +27,6 @@
 #define FULL_FFT_LENGTH             (FFT_LENGTH*OUTPUT_STAGE_FFT_LENGTH)
 
 // Declare global variables and arrays
-static SLData_t *pSrcData, *pRealData, *pImagData, *pRealResults, *pImagResults, *pFFTCoeffs;
-
 SLData_t        extendedTwiddleFactorsReal[OUTPUT_STAGE_FFT_LENGTH][FFT_LENGTH];
 SLData_t        extendedTwiddleFactorsImag[OUTPUT_STAGE_FFT_LENGTH][FFT_LENGTH];
 SLData_t       *pExtendedTwiddleFactorsReal = &extendedTwiddleFactorsReal[0][0];
@@ -39,19 +37,17 @@ int main (
   void)
 {
 // Allocate memory
-  pSrcData = SUF_VectorArrayAllocate (FULL_FFT_LENGTH);
-  pRealData = SUF_VectorArrayAllocate (FULL_FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FULL_FFT_LENGTH);
-  pRealResults = SUF_VectorArrayAllocate (FULL_FFT_LENGTH);
-  pImagResults = SUF_VectorArrayAllocate (FULL_FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FULL_FFT_LENGTH);
+  SLData_t       *pSrcData = SUF_VectorArrayAllocate (FULL_FFT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FULL_FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FULL_FFT_LENGTH);
+  SLData_t       *pRealResults = SUF_VectorArrayAllocate (FULL_FFT_LENGTH);
+  SLData_t       *pImagResults = SUF_VectorArrayAllocate (FULL_FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FULL_FFT_LENGTH);
 
   if ((NULL == pSrcData) || (NULL == pRealData) || (NULL == pImagData) || (NULL == pRealResults) || (NULL == pImagResults) || (NULL == pFFTCoeffs)) {
     printf ("\n\nMemory allocation failed\n\n");
     exit (0);
   }
-
-
 
   SLData_t        cosinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pSrcData,                                     // Pointer to destination array
@@ -76,7 +72,6 @@ int main (
            SIGLIB_BIT_REV_STANDARD,                                 // Bit reverse mode flag / Pointer to bit reverse address table
            FFT_LENGTH);                                             // FFT length
 
-
 // Pre-calculate twiddle factors
   for (SLArrayIndex_t i = 0; i < FFT_LENGTH; i++) {
     for (SLArrayIndex_t j = 0; j < OUTPUT_STAGE_FFT_LENGTH; j++) {
@@ -84,8 +79,6 @@ int main (
       extendedTwiddleFactorsImag[j][i] = -sin (SIGLIB_TWO_PI * i * j / FULL_FFT_LENGTH);
     }
   }
-
-
 
 
 // Interleave datasets
@@ -235,5 +228,5 @@ int main (
   SUF_MemoryFree (pImagResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  return 0;
+  return (0);
 }

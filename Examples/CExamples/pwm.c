@@ -10,9 +10,6 @@
 #define SAMPLE_LENGTH   512
 
 // Declare global variables and arrays
-static SLData_t *pData, *pModulated, *pRamp;                        // Dataset pointers
-static SLData_t SinePhase;
-static SLData_t RampPhase;
 
 
 int main (
@@ -20,9 +17,9 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pModulated = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pRamp = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pModulated = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pRamp = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Pulse Width Modulation",                          // Plot title
@@ -36,7 +33,7 @@ int main (
     exit (-1);
   }
 
-
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.4,                                          // Signal peak level
@@ -45,7 +42,7 @@ int main (
                       0.4,                                          // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -61,11 +58,11 @@ int main (
                GPC_NEW);                                            // New graph
 
 
-  RampPhase = SIGLIB_ZERO;
+  SLData_t        rampPhase = SIGLIB_ZERO;
   SDA_Pwm (pData,                                                   // Pointer to source array
            pModulated,                                              // Pointer to destination array
            pRamp,                                                   // Pointer to ramp array
-           &RampPhase,                                              // Pointer to ramp phase array
+           &rampPhase,                                              // Pointer to ramp phase array
            0.05,                                                    // Pulse repetition frequency
            SAMPLE_LENGTH);                                          // Dataset length
 
@@ -86,5 +83,5 @@ int main (
   SUF_MemoryFree (pData);                                           // Free memory
   SUF_MemoryFree (pModulated);
 
-  exit (0);
+  return (0);
 }

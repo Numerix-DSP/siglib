@@ -35,5 +35,5 @@ int main (
   printf ("b = %lf\n", b);
   printf ("c = %lf\n", c);
 
-  exit (0);
+  return (0);
 }

@@ -54,5 +54,5 @@ int main (
   fclose (fpInputFile);                                             // Close files
   fclose (fpOutputFile);
 
-  exit (0);
+  return (0);
 }

@@ -237,5 +237,5 @@ int main (
   gpc_close (h2DPlot);
 #endif
 
-  exit (0);
+  return (0);
 }

@@ -14,9 +14,6 @@
 #define PEAK_HOLD_DECAY         0.99
 
 // Declare global variables and arrays
-static SLData_t *pRealData, *pImagData, *pResults, *peak, *pFFTCoeffs;
-static SLData_t SinePhase;
-static SLData_t offset;
 
 
 int main (
@@ -25,11 +22,11 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
 // Allocate memory
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
-  peak = SUF_VectorArrayAllocate (HALF_FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *peak = SUF_VectorArrayAllocate (HALF_FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Peak Hold",                                       // Plot title
@@ -49,7 +46,7 @@ int main (
            SIGLIB_BIT_REV_STANDARD,                                 // Bit reverse mode flag / Pointer to bit reverse address table
            FFT_LENGTH);                                             // FFT length
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_Clear (peak,                                                  // Pointer to destination array
              HALF_FFT_LENGTH);                                      // Dataset length
 
@@ -64,7 +61,7 @@ int main (
                         SIGLIB_ZERO,                                // D.C. Offset
                         SIGLIB_ZERO,                                // Unused
                         SIGLIB_ZERO,                                // Signal end value - Unused
-                        &SinePhase,                                 // Signal phase - maintained across array boundaries
+                        &sinePhase,                                 // Signal phase - maintained across array boundaries
                         SIGLIB_NULL_DATA_PTR,                       // Unused
                         FFT_LENGTH);                                // Output dataset length
 
@@ -104,8 +101,8 @@ int main (
     SDA_20Log10 (pResults,                                          // Pointer to source array
                  pResults,                                          // Pointer to destination array
                  FFT_LENGTH);                                       // Dataset length
-    offset = SDA_AbsMax (pResults,                                  // Pointer to source array
-                         FFT_LENGTH);                               // Dataset length
+    SLData_t        offset = SDA_AbsMax (pResults,                  // Pointer to source array
+                                         FFT_LENGTH);               // Dataset length
 
     SDA_Add (pResults,                                              // Pointer to source array
              offset,                                                // D.C. offset
@@ -150,5 +147,5 @@ int main (
   SUF_MemoryFree (peak);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

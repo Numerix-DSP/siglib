@@ -13,5 +13,5 @@ int main (
   printf ("Desired frequency = %lf, Sample rate = %lf, Warped frequency = %lf\n", 5.0, 25.0, SDS_PreWarp (5.0, 25.0));
   printf ("Desired frequency = %lf, Sample rate = %lf, Warped frequency = %lf\n", 0.4, 2.0, SDS_PreWarp (0.4, 2.0));
 
-  exit (0);
+  return (0);
 }

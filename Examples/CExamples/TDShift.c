@@ -19,12 +19,6 @@ static SLData_t pImagInput[SAMPLE_LENGTH], pImagOutput[SAMPLE_LENGTH];
 static SLData_t ShiftArray[SHIFT_BUF_SIZE];
 
 static SLData_t pResults[SAMPLE_LENGTH];
-static SLData_t SinePhase;
-static SLData_t *pFFTCoeffs;
-
-static SLArrayIndex_t ShiftArrayOffsetIn;
-static SLData_t ShiftArrayOffsetOut;
-static SLData_t PreviousSample;
 
 
 int main (
@@ -32,13 +26,11 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  ShiftArrayOffsetIn = 0;
-  ShiftArrayOffsetOut = SIGLIB_ZERO;
-  PreviousSample = SIGLIB_ZERO;
+  SLArrayIndex_t  ShiftArrayOffsetIn = 0;
+  SLData_t        ShiftArrayOffsetOut = SIGLIB_ZERO;
+  SLData_t        PreviousSample = SIGLIB_ZERO;
 
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
-
-  SinePhase = SIGLIB_ZERO;
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Time Domain Pitch Shifting",                      // Plot title
@@ -57,6 +49,7 @@ int main (
            SIGLIB_BIT_REV_STANDARD,                                 // Bit reverse mode flag / Pointer to bit reverse address table
            FFT_LENGTH);                                             // FFT length
 
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pRealInput,                                   // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.9,                                          // Signal peak level
@@ -65,7 +58,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -162,5 +155,5 @@ int main (
 
   SUF_MemoryFree (pFFTCoeffs);                                      // Free memory
 
-  exit (0);
+  return (0);
 }

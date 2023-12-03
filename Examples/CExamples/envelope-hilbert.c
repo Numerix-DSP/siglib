@@ -20,21 +20,14 @@
 #define ONE_POLE_COEFFICIENT    0.9
 
 // Declare global variables and arrays
-static SLData_t SinePhase;
-static SLData_t *pEnvFilterCoeffs, *pEnvFilterState, *pEnvDelay, *pEnvTempEnvDelay;
-#if ARRAY_OR_SAMPLE
-static SLData_t *pTempAnalytical;
-#endif
-
-static SLArrayIndex_t envFilterIndex;
-static SLData_t envOnePoleFilterState;
-static SLData_t *pSrc1, *pSrc2;
-
 
 int main (
   void)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
+
+  SLArrayIndex_t  envFilterIndex;
+  SLData_t        envOnePoleFilterState;
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Hilbert Transform Envelope Detector",             // Plot title
@@ -51,11 +44,11 @@ int main (
 
   printf ("Hilbert Transform Filter Length = %d\n", FILTER_LENGTH);
 
-  pEnvFilterCoeffs = SUF_VectorArrayAllocate (FILTER_LENGTH);
-  pEnvFilterState = SUF_VectorArrayAllocate (FILTER_LENGTH);
-  pSrc1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pSrc2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pEnvDelay = SUF_VectorArrayAllocate (FILTER_GROUP_DELAY);
+  SLData_t       *pEnvFilterCoeffs = SUF_VectorArrayAllocate (FILTER_LENGTH);
+  SLData_t       *pEnvFilterState = SUF_VectorArrayAllocate (FILTER_LENGTH);
+  SLData_t       *pSrc1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pSrc2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pEnvDelay = SUF_VectorArrayAllocate (FILTER_GROUP_DELAY);
 
   if ((NULL == pEnvFilterCoeffs) || (NULL == pEnvFilterState) || (NULL == pSrc1) || (NULL == pSrc2) || (NULL == pEnvDelay)) {
     printf ("\n\nMemory allocation failed\n\n");
@@ -63,8 +56,8 @@ int main (
   }
 
 #if ARRAY_OR_SAMPLE
-  pEnvTempEnvDelay = SUF_VectorArrayAllocate (FILTER_GROUP_DELAY);
-  pTempAnalytical = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pEnvTempEnvDelay = SUF_VectorArrayAllocate (FILTER_GROUP_DELAY);
+  SLData_t       *pTempAnalytical = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   if ((NULL == pEnvTempEnvDelay) || (NULL == pTempAnalytical)) {
     printf ("\n\nMemory allocation failed\n\n");
@@ -82,7 +75,7 @@ int main (
                        FILTER_GROUP_DELAY,                          // Filter group delay
                        &envOnePoleFilterState);                     // Pointer to one-pole state variable
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        SinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pSrc1,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
@@ -180,5 +173,5 @@ int main (
   SUF_MemoryFree (pTempAnalytical);
 #endif
 
-  exit (0);
+  return (0);
 }

@@ -34,11 +34,6 @@
 #define MATRIXI_SIZE    (MATRIXI_ROWS * MATRIXI_COLS)
 
 // Declare global variables and arrays
-static SLData_t *pMatrixa, *pMatrixb, *pMatrixc, *pMatrixd, *pMatrixd_inv, *pMatrixi;
-
-static SLData_t *pTempSourceArray, *pSubstituteIndex, *pScalingFactor;
-static SLArrayIndex_t *pRowInterchangeIndex;
-
 static const SLData_t SrcReal2x2[] = { 3.0, 1.0, 4.0, 2.0 };
 
 static SLData_t DstReal2x2[4];
@@ -64,17 +59,17 @@ int main (
   SLError_t       SigLibErrorCode;
 
 // Allocate matrices
-  pMatrixa = SUF_VectorArrayAllocate (MATRIXA_SIZE);
-  pMatrixb = SUF_VectorArrayAllocate (MATRIXB_SIZE);
-  pMatrixc = SUF_VectorArrayAllocate (MATRIXC_SIZE);
-  pMatrixd = SUF_VectorArrayAllocate (MATRIXD_SIZE);
-  pMatrixd_inv = SUF_VectorArrayAllocate (MATRIXD_INV_SIZE);
-  pMatrixi = SUF_VectorArrayAllocate (MATRIXI_SIZE);
+  SLData_t       *pMatrixa = SUF_VectorArrayAllocate (MATRIXA_SIZE);
+  SLData_t       *pMatrixb = SUF_VectorArrayAllocate (MATRIXB_SIZE);
+  SLData_t       *pMatrixc = SUF_VectorArrayAllocate (MATRIXC_SIZE);
+  SLData_t       *pMatrixd = SUF_VectorArrayAllocate (MATRIXD_SIZE);
+  SLData_t       *pMatrixd_inv = SUF_VectorArrayAllocate (MATRIXD_INV_SIZE);
+  SLData_t       *pMatrixi = SUF_VectorArrayAllocate (MATRIXI_SIZE);
 
-  pTempSourceArray = SUF_VectorArrayAllocate (MATRIXD_SIZE);
-  pSubstituteIndex = SUF_VectorArrayAllocate (MATRIXD_ROWS);
-  pRowInterchangeIndex = SUF_IndexArrayAllocate (MATRIXD_ROWS);
-  pScalingFactor = SUF_VectorArrayAllocate (MATRIXD_ROWS);
+  SLData_t       *pTempSourceArray = SUF_VectorArrayAllocate (MATRIXD_SIZE);
+  SLData_t       *pSubstituteIndex = SUF_VectorArrayAllocate (MATRIXD_ROWS);
+  SLArrayIndex_t *pRowInterchangeIndex = SUF_IndexArrayAllocate (MATRIXD_ROWS);
+  SLData_t       *pScalingFactor = SUF_VectorArrayAllocate (MATRIXD_ROWS);
 
 // Fill matrix A
   *pMatrixa++ = 1;
@@ -277,5 +272,5 @@ int main (
   SUF_MemoryFree (pMatrixd_inv);
   SUF_MemoryFree (pMatrixi);
 
-  exit (0);
+  return (0);
 }

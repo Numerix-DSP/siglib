@@ -10,9 +10,6 @@
 #define SAMPLE_LENGTH       512
 
 // Declare global variables and arrays
-static SLData_t *pImagData, *op;
-static SLData_t SinePhase;
-static SLData_t IntegralSum, DifferentialValue;
 
 
 int main (
@@ -20,8 +17,11 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pImagData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  op = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t        SinePhase;
+  SLData_t        IntegralSum, DifferentialValue;
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+
+  SLData_t       *op = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   SinePhase = SIGLIB_ZERO;
   IntegralSum = SIGLIB_ZERO;
@@ -106,5 +106,5 @@ int main (
   SUF_MemoryFree (pImagData);                                       // Free memory
   SUF_MemoryFree (op);
 
-  exit (0);
+  return (0);
 }

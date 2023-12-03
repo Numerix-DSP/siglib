@@ -13,19 +13,17 @@
 
 // Declare global variables and arrays
 
-static SLData_t *pReal, *pImag, *pMagnitude, *pFilterCoeffs, *pFFTCoeffs;
-
 
 int main (
   void)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pReal = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImag = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pMagnitude = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFilterCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pReal = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImag = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pMagnitude = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFilterCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pReal) || (NULL == pImag) || (NULL == pMagnitude) || (NULL == pFilterCoeffs) || (NULL == pFFTCoeffs)) {
     printf ("Memory allocation error in main()\n");
@@ -172,5 +170,5 @@ int main (
   SUF_MemoryFree (pFilterCoeffs);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

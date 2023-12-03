@@ -72,5 +72,5 @@ int main (
   RxString[70] = 0;                                                 // Terminate string for printf
   printf ("Received string (5_23):%s\n", RxString);
 
-  exit (0);
+  return (0);
 }

@@ -26,7 +26,7 @@ public class SigLib_Graph extends AppCompatActivity {
             System.loadLibrary("siglib_wrap");
         } catch (UnsatisfiedLinkError e) {
             System.err.println("siglib_wrap library failed to load.\n" + e);
-            System.exit(1);
+            System.exit (1);
         }
     }
 

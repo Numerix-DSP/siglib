@@ -22,12 +22,6 @@
 #define DECIMATION_FILTER_LENGTH    32
 
 // Declare global variables and arrays
-static SLData_t *pRealData, *pImagData, *pInputData, *pFFTCoeffs;
-static SLData_t SinePhase;
-
-static SLData_t *pCombFilter1, *pCombFilter2, *pSineTable;
-static SLData_t CombFilter1Sum, CombFilter2Sum;
-static SLArrayIndex_t CombFilterPhase, SineTablePhase;
 
 
 int main (
@@ -36,15 +30,20 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
   SLData_t        MixFreq;
+  static SLData_t SinePhase;
+
+  static SLData_t CombFilter1Sum, CombFilter2Sum;
+  static SLArrayIndex_t CombFilterPhase, SineTablePhase;
+
 
 // Allocate memory
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pInputData = SUF_VectorArrayAllocate (SOURCE_BUF_SIZE);
-  pCombFilter1 = SUF_VectorArrayAllocate (DECIMATION_FILTER_LENGTH);
-  pCombFilter2 = SUF_VectorArrayAllocate (DECIMATION_FILTER_LENGTH);
-  pSineTable = SUF_VectorArrayAllocate (SINE_BUF_SIZE);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pInputData = SUF_VectorArrayAllocate (SOURCE_BUF_SIZE);
+  SLData_t       *pCombFilter1 = SUF_VectorArrayAllocate (DECIMATION_FILTER_LENGTH);
+  SLData_t       *pCombFilter2 = SUF_VectorArrayAllocate (DECIMATION_FILTER_LENGTH);
+  SLData_t       *pSineTable = SUF_VectorArrayAllocate (SINE_BUF_SIZE);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   printf ("\n\n\nThis program performs a zoom-FFT on a modulated data set.\n");
   printf ("All frequencies are normalised to a sample rate of 1.0.\n\n");
@@ -271,5 +270,5 @@ int main (
   SUF_MemoryFree (pSineTable);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

@@ -72,5 +72,5 @@ int main (
   printf ("Received string (PN15):%s\n", RxString);
 #endif
 
-  exit (0);
+  return (0);
 }

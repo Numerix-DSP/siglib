@@ -22,8 +22,6 @@
 #define WINDOW_LENGTH       FFT_LENGTH
 
 // Declare global variables and arrays
-static SLData_t *pRealData, *pImagData, *pWindowCoeffs, *pFFTCoeffs, *pResults;
-static SLData_t SinePhase;
 
 
 int main (
@@ -36,11 +34,11 @@ int main (
   SLData_t        magnErrorPercent[NUM_FREQS], freqErrorPercent[NUM_FREQS];
 
 // Allocate memory
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pWindowCoeffs = SUF_VectorArrayAllocate (WINDOW_LENGTH);          // Window array
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (FFT_LENGTH);                  // RMS result array
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pWindowCoeffs = SUF_VectorArrayAllocate (WINDOW_LENGTH);  // Window array
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (FFT_LENGTH);  // RMS result array
 
   if ((NULL == pRealData) || (NULL == pImagData) || (NULL == pWindowCoeffs) || (NULL == pFFTCoeffs) || (NULL == pResults)) {
     printf ("\n\nMemory allocation failed\n\n");
@@ -75,7 +73,7 @@ int main (
 
   centreFreq = FREQ_START;
   for (int i = 0; i < NUM_FREQS; i++, centreFreq += FREQ_INC) {
-    SinePhase = SIGLIB_ZERO;
+    SLData_t        sinePhase = SIGLIB_ZERO;
     SDA_SignalGenerate (pRealData,                                  // Pointer to destination array
                         SIGLIB_SINE_WAVE,                           // Signal type - Sine wave
                         SOURCE_MAGN,                                // Signal peak level
@@ -84,7 +82,7 @@ int main (
                         SIGLIB_ZERO,                                // D.C. Offset
                         SIGLIB_ZERO,                                // Unused
                         SIGLIB_ZERO,                                // Signal end value - Unused
-                        &SinePhase,                                 // Signal phase - maintained across array boundaries
+                        &sinePhase,                                 // Signal phase - maintained across array boundaries
                         SIGLIB_NULL_DATA_PTR,                       // Unused
                         FFT_LENGTH);                                // Output dataset length
 
@@ -155,5 +153,5 @@ int main (
   SUF_MemoryFree (pFFTCoeffs);
   SUF_MemoryFree (pResults);
 
-  exit (0);
+  return (0);
 }

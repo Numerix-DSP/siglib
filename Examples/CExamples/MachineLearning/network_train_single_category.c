@@ -31,11 +31,6 @@
 #define DEFAULT_QUANTIZATION_BITS           7                       // Number of quantization bits for weights can be specified on the command line with '-q' option
 
 // Declare global variables and arrays
-static SLArrayIndex_t *pCategoricalValue;
-static SLData_t *pShuffledTrainingData;
-
-static SLData_t *pLayer1PreActivation, *pLayer1PostActivation;
-
 static char     filename0[512];
 static char     filename1[512];
 static char     filenameWeights[1200];
@@ -89,8 +84,8 @@ int main (
   int argc,
   char *argv[])
 {
-  pLayer1PreActivation = SUF_VectorArrayAllocate (NETWORK_HIDDEN_LAYER_NODES);  // Allocate arrays
-  pLayer1PostActivation = SUF_VectorArrayAllocate (NETWORK_HIDDEN_LAYER_NODES);
+  SLData_t       *pLayer1PreActivation = SUF_VectorArrayAllocate (NETWORK_HIDDEN_LAYER_NODES);  // Allocate arrays
+  SLData_t       *pLayer1PostActivation = SUF_VectorArrayAllocate (NETWORK_HIDDEN_LAYER_NODES);
 
   if ((NULL == pLayer1PreActivation) || (NULL == pLayer1PostActivation)) {
     printf ("\n\nMemory allocation failed\n\n");
@@ -205,8 +200,8 @@ int main (
     SUF_PrintMatrix (pTrainingData, nRows, NETWORK_INPUT_SAMPLE_LENGTH);
   }
 
-  pCategoricalValue = SUF_IndexArrayAllocate (nRows);               // Allocate the categorical value array
-  pShuffledTrainingData = SUF_VectorArrayAllocate (nRows * nCols);  // Allocate the shuffled data array
+  SLArrayIndex_t *pCategoricalValue = SUF_IndexArrayAllocate (nRows); // Allocate the categorical value array
+  SLData_t       *pShuffledTrainingData = SUF_VectorArrayAllocate (nRows * nCols);  // Allocate the shuffled data array
   if ((NULL == pCategoricalValue) || (NULL == pShuffledTrainingData)) {
     printf ("\n\nMemory allocation failed (pCategoricalValue and pShuffledTrainingData)\n\n");
     exit (-1);
@@ -324,7 +319,7 @@ int main (
   SUF_MemoryFree (pShuffledTrainingData);
   SUF_MemoryFree (pCategoricalValue);
 
-  exit (0);
+  return (0);
 }
 
 

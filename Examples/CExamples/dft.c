@@ -9,20 +9,18 @@
 #define DFT_LENGTH      8
 
 // Declare global variables and arrays
-static SLData_t *pSrcReal, *pSrcImag, *pDstReal, *pDstImag;
-static SLData_t SinePhase;
 
 
 int main (
   void)
 {
-  pSrcReal = SUF_VectorArrayAllocate (DFT_LENGTH);                  // Allocate memory
-  pSrcImag = SUF_VectorArrayAllocate (DFT_LENGTH);
-  pDstReal = SUF_VectorArrayAllocate (DFT_LENGTH);
-  pDstImag = SUF_VectorArrayAllocate (DFT_LENGTH);
+  SLData_t       *pSrcReal = SUF_VectorArrayAllocate (DFT_LENGTH);  // Allocate memory
+  SLData_t       *pSrcImag = SUF_VectorArrayAllocate (DFT_LENGTH);
+  SLData_t       *pDstReal = SUF_VectorArrayAllocate (DFT_LENGTH);
+  SLData_t       *pDstImag = SUF_VectorArrayAllocate (DFT_LENGTH);
 
 // Create sine wave with suitable freq to avoid edge effects
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pSrcReal,                                     // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
@@ -31,7 +29,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       DFT_LENGTH);                                  // Output array length
 
@@ -68,7 +66,7 @@ int main (
              DFT_LENGTH);                                           // Array length
 
 // Create sine wave with suitable freq to avoid edge effects
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pSrcImag,                                     // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
@@ -77,7 +75,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       DFT_LENGTH);                                  // Output array length
 
@@ -115,5 +113,5 @@ int main (
   SUF_MemoryFree (pDstReal);
   SUF_MemoryFree (pDstImag);
 
-  exit (0);
+  return (0);
 }

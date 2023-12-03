@@ -36,20 +36,6 @@
 #define LOG2_FFT_LENGTH         SAI_FftLengthLog2(FFT_LENGTH)       // Log2 FFT length,
 
 // Declare global variables and arrays
-static SLData_t Radius, Decay, StartFreq, EndFreq;
-static SLComplexPolar_s ContourStart;
-static SLComplexRect_s temp;
-
-static SLData_t deltaomega, deltasigma;                             // Variables used to calculate W
-static SLData_t phinc, w1inc, w2inc;
-
-static SLComplexRect_s A_1, W1, W_1, W12, W_12;                     // Complex contour coeffs
-
-static SLData_t *pInput, *pResults;
-static SLData_t *pRealData, *pImagData, *pFFTCoeffs;
-
-static SLData_t *pAWNr, *pAWNi, *pvLr, *pvLi, *pWMr, *pWMi;
-static SLData_t *pCZTRealWork, *pCZTImagWork;
 
 
 int main (
@@ -60,24 +46,33 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot object
   static FILE    *fpInputFile;
 
-  pInput = SUF_VectorArrayAllocate (INPUT_LENGTH);
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t        Radius, Decay, StartFreq, EndFreq;
+  SLComplexPolar_s ContourStart;
+  SLComplexRect_s temp;
 
-  pAWNr = SUF_VectorArrayAllocate (INPUT_LENGTH);
-  pAWNi = SUF_VectorArrayAllocate (INPUT_LENGTH);
+  SLData_t        deltaomega, deltasigma;                           // Variables used to calculate W
+  SLData_t        phinc, w1inc, w2inc;
 
-  pvLr = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pvLi = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLComplexRect_s A_1, W1, W_1, W12, W_12;                          // Complex contour coeffs
 
-  pCZTRealWork = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pCZTImagWork = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pInput = SUF_VectorArrayAllocate (INPUT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
 
-  pWMr = SUF_VectorArrayAllocate (OUTPUT_LENGTH);
-  pWMi = SUF_VectorArrayAllocate (OUTPUT_LENGTH);
+  SLData_t       *pAWNr = SUF_VectorArrayAllocate (INPUT_LENGTH);
+  SLData_t       *pAWNi = SUF_VectorArrayAllocate (INPUT_LENGTH);
 
-  pResults = SUF_VectorArrayAllocate (OUTPUT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pvLr = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pvLi = SUF_VectorArrayAllocate (FFT_LENGTH);
+
+  SLData_t       *pCZTRealWork = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pCZTImagWork = SUF_VectorArrayAllocate (FFT_LENGTH);
+
+  SLData_t       *pWMr = SUF_VectorArrayAllocate (OUTPUT_LENGTH);
+  SLData_t       *pWMi = SUF_VectorArrayAllocate (OUTPUT_LENGTH);
+
+  SLData_t       *pResults = SUF_VectorArrayAllocate (OUTPUT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pInput) || (NULL == pRealData) || (NULL == pImagData) ||
       (NULL == pAWNr) || (NULL == pAWNi) || (NULL == pvLr) || (NULL == pvLi) ||
@@ -355,5 +350,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

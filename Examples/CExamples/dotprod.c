@@ -25,5 +25,5 @@ int main (
 
   printf ("Dot product = %lf\n\n", DotProduct);
 
-  exit (0);
+  return (0);
 }

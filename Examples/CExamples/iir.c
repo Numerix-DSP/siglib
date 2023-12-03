@@ -46,9 +46,6 @@ static SLComplexRect_s ZPlanePoles[NUMBER_OF_POLES];
 static SLComplexRect_s TransformedZPlaneZeros[NUMBER_OF_ZEROS * 2]; // Need twice number of poles and zeros for BPFs and BSFs
 static SLComplexRect_s TransformedZPlanePoles[NUMBER_OF_POLES * 2];
 
-static SLData_t *pFilterState, *pIIRCoeffs;
-static SLData_t *pSrc, *pRealData, *pImagData, *pResults, *pFFTCoeffs;
-
 
 int main (
   void)
@@ -59,13 +56,13 @@ int main (
 
 // Allocate memory
 // Need twice number of poles and zeros for BPFs and BSFs
-  pIIRCoeffs = SUF_IirCoefficientAllocate (FILTER_STAGES * 2);
-  pFilterState = SUF_IirStateArrayAllocate (FILTER_STAGES * 2);
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (PLOT_LENGTH);
-  pSrc = SUF_VectorArrayAllocate (IMPULSE_RESPONSE_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pIIRCoeffs = SUF_IirCoefficientAllocate (FILTER_STAGES * 2);
+  SLData_t       *pFilterState = SUF_IirStateArrayAllocate (FILTER_STAGES * 2);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (PLOT_LENGTH);
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (IMPULSE_RESPONSE_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pIIRCoeffs) || (NULL == pFilterState) || (NULL == pRealData) || (NULL == pImagData) ||
       (NULL == pResults) || (NULL == pSrc) || (NULL == pFFTCoeffs)) {
@@ -774,5 +771,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

@@ -14,10 +14,6 @@
 #define MAX_DELAY_LENGTH    NUM_ITERS
 
 // Declare global arrays and variables
-static SLData_t *pData;                                             // Dataset pointers
-static SLData_t *pDelayArray, *pTempDelay;
-
-static SLData_t RampPhase;
 
 
 int main (
@@ -28,9 +24,9 @@ int main (
 
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pDelayArray = SUF_VectorArrayAllocate (NUM_ITERS - 1);
-  pTempDelay = SUF_VectorArrayAllocate (MAX_DELAY_LENGTH);
+  SLData_t       *pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pDelayArray = SUF_VectorArrayAllocate (NUM_ITERS - 1);
+  SLData_t       *pTempDelay = SUF_VectorArrayAllocate (MAX_DELAY_LENGTH);
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Sin (x) / x",                                     // Plot title
@@ -47,12 +43,12 @@ int main (
 
   for (i = 0, offset = SIGLIB_ONE, delay = NUM_ITERS - 1; i < NUM_ITERS; i++, delay--, offset -= (SIGLIB_TWO / NUM_ITERS)) {
 
-    RampPhase = SIGLIB_ZERO;
+    SLData_t        rampPhase = SIGLIB_ZERO;
 
     SDA_SignalGenerateRamp (pData,                                  // Pointer to destination array
                             RAMP_AMPLITUDE,                         // Amplitude
                             OFFSET,                                 // D.C. Offset
-                            &RampPhase,                             // Phase - maintained across array boundaries
+                            &rampPhase,                             // Phase - maintained across array boundaries
                             SAMPLE_LENGTH);                         // Dataset length
 
 // Calculate distance from position 0, 0
@@ -121,5 +117,5 @@ int main (
   SUF_MemoryFree (pDelayArray);
   SUF_MemoryFree (pTempDelay);
 
-  exit (0);
+  return (0);
 }

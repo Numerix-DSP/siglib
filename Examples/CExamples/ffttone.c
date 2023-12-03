@@ -16,10 +16,6 @@
 #define SIGNAL_FREQUENCY    2000.
 
 // Declare global variables and arrays
-static SLData_t *pSrc, *pRealData, *pImagData, *pFFTCoeffs;
-static SLArrayIndex_t ToneFFTBin;
-static SLData_t ToneMagnitude;
-static SLData_t SinePhase;
 
 
 int main (
@@ -27,10 +23,13 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);                   // Allocate memory
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLArrayIndex_t  ToneFFTBin;
+  SLData_t        ToneMagnitude;
+
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);   // Allocate memory
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pSrc) || (NULL == pRealData) || (NULL == pImagData) || (NULL == pFFTCoeffs)) {
     printf ("\n\nMemory allocation failed\n\n");
@@ -54,7 +53,7 @@ int main (
            SIGLIB_BIT_REV_STANDARD,                                 // Bit reverse mode flag / Pointer to bit reverse address table
            FFT_LENGTH);                                             // FFT length
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pSrc,                                         // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_ONE,                                   // Signal peak level
@@ -63,7 +62,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -113,5 +112,5 @@ int main (
   SUF_MemoryFree (pImagData);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

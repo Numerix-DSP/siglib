@@ -36,11 +36,6 @@ static const SLData_t pLpfFilterTaps[LPF_FILTER_LENGTH] = {
 };
 
 static SLData_t pLpfFilterState[LPF_FILTER_LENGTH];
-static SLArrayIndex_t pLpfFilterIndex;
-
-static SLData_t *pInput, *pCarrierTable, *modulated, *demodulated;
-
-static SLArrayIndex_t CarrierTableIndex;
 
 
 int main (
@@ -48,10 +43,13 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pInput = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pCarrierTable = SUF_AmCarrierArrayAllocate (CARRIER_FREQUENCY, SAMPLE_RATE_HZ);
-  modulated = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  demodulated = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLArrayIndex_t  pLpfFilterIndex;
+  SLArrayIndex_t  CarrierTableIndex;
+
+  SLData_t       *pInput = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pCarrierTable = SUF_AmCarrierArrayAllocate (CARRIER_FREQUENCY, SAMPLE_RATE_HZ);
+  SLData_t       *modulated = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *demodulated = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   if ((NULL == pInput) || (NULL == pCarrierTable) || (NULL == modulated) || (NULL == demodulated)) {
 
@@ -187,5 +185,5 @@ int main (
   SUF_MemoryFree (modulated);
   SUF_MemoryFree (demodulated);
 
-  exit (0);
+  return (0);
 }

@@ -16,11 +16,6 @@ static char     WavFilename[256];
 static SLWavFileInfo_s wavInfo;
 
 
-static SLData_t *pDataArray, *pPowerArray;
-static SLData_t *pEnvFilterCoeffs, *pEnvFilterState, *pEnvTempDelay, *pEnvDelay, *pEnvTempDelay, *pTempAnalytical;
-static SLArrayIndex_t envFilterIndex;
-static SLData_t envOnePoleFilterState;
-
 int main (
   int argc,
   char *argv[])
@@ -30,6 +25,8 @@ int main (
   SLArrayIndex_t  sampleCount;
   FILE           *fpInputFile;
   SLData_t        onePoleCoefficient;
+  SLArrayIndex_t  envFilterIndex;
+  SLData_t        envOnePoleFilterState;
 
   SLData_t        OnePoleFilterState = SIGLIB_ZERO;
 
@@ -42,10 +39,10 @@ int main (
   }
 
 
-  pEnvFilterCoeffs = SUF_VectorArrayAllocate (FILTER_LENGTH);
-  pEnvFilterState = SUF_VectorArrayAllocate (FILTER_LENGTH);
-  pEnvDelay = SUF_VectorArrayAllocate (FILTER_GROUP_DELAY);
-  pEnvTempDelay = SUF_VectorArrayAllocate (FILTER_GROUP_DELAY);
+  SLData_t       *pEnvFilterCoeffs = SUF_VectorArrayAllocate (FILTER_LENGTH);
+  SLData_t       *pEnvFilterState = SUF_VectorArrayAllocate (FILTER_LENGTH);
+  SLData_t       *pEnvDelay = SUF_VectorArrayAllocate (FILTER_GROUP_DELAY);
+  SLData_t       *pEnvTempDelay = SUF_VectorArrayAllocate (FILTER_GROUP_DELAY);
 
   if ((NULL == pEnvFilterCoeffs) || (NULL == pEnvFilterState) || (NULL == pEnvDelay) || (NULL == pEnvTempDelay)) {
     printf ("\n\nMemory allocation failed\n\n");
@@ -74,9 +71,9 @@ int main (
     exit (-1);
   }
 
-  pDataArray = SUF_VectorArrayAllocate (wavInfo.NumberOfSamples);
-  pPowerArray = SUF_VectorArrayAllocate (wavInfo.NumberOfSamples);
-  pTempAnalytical = SUF_VectorArrayAllocate (wavInfo.NumberOfSamples);
+  SLData_t       *pDataArray = SUF_VectorArrayAllocate (wavInfo.NumberOfSamples);
+  SLData_t       *pPowerArray = SUF_VectorArrayAllocate (wavInfo.NumberOfSamples);
+  SLData_t       *pTempAnalytical = SUF_VectorArrayAllocate (wavInfo.NumberOfSamples);
 
   if ((NULL == pDataArray) || (NULL == pPowerArray) || (NULL == pTempAnalytical)) {
     printf ("\n\nMemory allocation failed\n\n");

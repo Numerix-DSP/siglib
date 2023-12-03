@@ -64,10 +64,6 @@ static const SLData_t pFilterTaps[FILTER_LENGTH] = {
 };
 
 static SLData_t pFilterState[FILTER_LENGTH];
-static SLArrayIndex_t FilterIndex;
-static SLData_t *pReal, *pImag, *pMagnitude, *pPhase, *pFFTCoeffs;
-static SLData_t ChirpPhase, ChirpValue;
-static SLData_t PreviousPhase;
 
 #if FILE_OUTPUT
 static FILE    *fpOutputFile;
@@ -81,11 +77,15 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pReal = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pImag = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pMagnitude = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pPhase = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLArrayIndex_t  FilterIndex;
+  SLData_t        ChirpPhase, ChirpValue;
+  SLData_t        PreviousPhase;
+
+  SLData_t       *pReal = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pImag = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pMagnitude = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pPhase = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pReal) || (NULL == pImag) || (NULL == pMagnitude) || (NULL == pPhase) || (NULL == pFFTCoeffs)) {
     printf ("Memory allocation error in main()\n");
@@ -250,5 +250,5 @@ int main (
   SUF_MemoryFree (pPhase);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

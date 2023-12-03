@@ -39,12 +39,6 @@ static const SLData_t pFilterTaps[FILTER_STAGES * SIGLIB_IIR_COEFFS_PER_BIQUAD] 
 
 static SLData_t pFilterState[FILTER_STAGES * SIGLIB_IIR_DELAY_SIZE];
 
-static SLData_t SinePhase;
-static SLData_t Mean, StdDev, Kurtosis;
-
-static char     string[20];
-static char    *SPtr;
-
 
 int main (
   void)
@@ -63,9 +57,8 @@ int main (
     exit (-1);
   }
 
-  SPtr = string;
-
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        Mean, StdDev, Kurtosis;
+  SLData_t        sinePhase = SIGLIB_ZERO;
 
   pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
@@ -117,7 +110,7 @@ int main (
     Kurtosis = SDS_Pow ((StdDev / Mean),                            // Input
                         2) + 1;                                     // Power to raise number by
 
-    printf ("Kurtosis value = %lf\r", Kurtosis);
+    printf ("Kurtosis value = %lf\n", Kurtosis);
   }
 
   _getch ();                                                        // Clear keyboard buffer
@@ -133,7 +126,7 @@ int main (
                         SIGLIB_ZERO,                                // D.C. Offset
                         SIGLIB_ZERO,                                // Unused
                         SIGLIB_ZERO,                                // Signal end value - Unused
-                        &SinePhase,                                 // Signal phase - maintained across array boundaries
+                        &sinePhase,                                 // Signal phase - maintained across array boundaries
                         SIGLIB_NULL_DATA_PTR,                       // Unused
                         SAMPLE_LENGTH);                             // Output dataset length
 
@@ -167,7 +160,7 @@ int main (
     Kurtosis = SDS_Pow ((StdDev / Mean),                            // Input
                         2) + 1;                                     // Power to raise number by
 
-    printf ("Kurtosis value = %lf\r", Kurtosis);
+    printf ("Kurtosis value = %lf\n", Kurtosis);
   }
 
   _getch ();                                                        // Clear keyboard buffer
@@ -178,5 +171,5 @@ int main (
 
   SUF_MemoryFree (pData);                                           // Free memory
 
-  exit (0);
+  return (0);
 }

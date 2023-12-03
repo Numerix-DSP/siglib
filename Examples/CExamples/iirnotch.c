@@ -24,8 +24,6 @@
 #define PLOT_LENGTH             (IMPULSE_RESPONSE_LENGTH/2)
 
 // Declare global variables and arrays
-static SLData_t *pFilterState, *pIIRCoeffs;
-static SLData_t *pSrc, *pRealData, *pImagData, *pResults, *pFFTCoeffs;
 
 
 int main (
@@ -34,16 +32,15 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
 // Allocate memory
-  pIIRCoeffs = SUF_IirCoefficientAllocate (FILTER_STAGES);
-  pFilterState = SUF_IirStateArrayAllocate (FILTER_STAGES);
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (PLOT_LENGTH);
-  pSrc = SUF_VectorArrayAllocate (IMPULSE_RESPONSE_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pIIRCoeffs = SUF_IirCoefficientAllocate (FILTER_STAGES);
+  SLData_t       *pFilterState = SUF_IirStateArrayAllocate (FILTER_STAGES);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (PLOT_LENGTH);
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (IMPULSE_RESPONSE_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pIIRCoeffs) || (NULL == pRealData) || (NULL == pImagData) || (NULL == pResults) || (NULL == pSrc) || (NULL == pFFTCoeffs)) {
-
     printf ("\n\nMemory allocation failed\n\n");
     exit (0);
   }
@@ -145,5 +142,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

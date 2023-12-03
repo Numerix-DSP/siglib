@@ -31,5 +31,5 @@ int main (
   printf ("absfrac (-10.5) = %lf\n", SDS_AbsFrac (-10.5));
   printf ("absfrac (-10.6) = %lf\n\n", SDS_AbsFrac (-10.6));
 
-  exit (0);
+  return (0);
 }

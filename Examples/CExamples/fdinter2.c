@@ -23,8 +23,6 @@
 // Declare global variables and arrays
 static SLData_t pRealInput[LENGTH2], pImagInput[LENGTH2];
 static SLData_t pRealOutput[LENGTH2], pImagOutput[LENGTH2];
-static SLData_t *pFFTCoeffs;
-static SLData_t SinePhase;
 
 
 int main (
@@ -34,7 +32,7 @@ int main (
 
 
 // Allocate enough space for largest FFT
-  pFFTCoeffs = SUF_FftCoefficientAllocate (LARGE_FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (LARGE_FFT_LENGTH);
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Frequency Domain Interpolation",                  // Plot title
@@ -53,7 +51,7 @@ int main (
            SIGLIB_BIT_REV_STANDARD,                                 // Bit reverse mode flag / Pointer to bit reverse address table
            SMALL_FFT_LENGTH);                                       // FFT length
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
 
   SDA_SignalGenerate (pRealInput,                                   // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
@@ -63,7 +61,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       LENGTH1);                                     // Output dataset length
 
@@ -272,5 +270,5 @@ int main (
 
   SUF_MemoryFree (pFFTCoeffs);                                      // Free memory
 
-  exit (0);
+  return (0);
 }

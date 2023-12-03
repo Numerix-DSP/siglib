@@ -20,10 +20,6 @@
 #define TIME_INC            (TOTAL_TIME / ((SLData_t)SAMPLE_LENGTH))
 
 // Declare global variables and arrays
-static SLData_t *SetPointData;
-static SLData_t *ErrorData, *ControlData, *TorqueData, *SpeedData;
-
-static SLData_t OnePoleFilterState;
 
 
 int main (
@@ -31,6 +27,8 @@ int main (
   char *argv[])
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
+
+  SLData_t        OnePoleFilterState;
 
   SLData_t        Kp, Ki, Kd;
   SLData_t        Time = SIGLIB_ZERO;
@@ -60,11 +58,11 @@ int main (
   }
 
 // Allocate memory
-  SetPointData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  ErrorData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  ControlData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  TorqueData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  SpeedData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *SetPointData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *ErrorData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *ControlData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *TorqueData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *SpeedData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
 
   h2DPlot =                                                         // Initialize plot
@@ -195,5 +193,5 @@ int main (
   SUF_MemoryFree (TorqueData);
   SUF_MemoryFree (SpeedData);
 
-  exit (0);
+  return (0);
 }

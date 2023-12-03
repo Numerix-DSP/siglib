@@ -21,8 +21,8 @@
 
 #define DC_LEVEL                    20.                             // Input signal D.C. level
 
-#define GAUS_NOISE_VARIANCE         SIGLIB_FOUR                     // Gaussian noise parameters
-#define GAUS_NOISE_OFFSET           SIGLIB_ZERO
+#define GAUSSIAN_NOISE_VARIANCE         SIGLIB_FOUR                 // Gaussian noise parameters
+#define GAUSSIAN_NOISE_OFFSET           SIGLIB_ZERO
 
 #define STEP_START_POSITION_SEC     4                               // 4 seconds
 #define STEP_MAGNITUDE              30.                             // Step magnitude
@@ -53,11 +53,6 @@ static SLData_t pPulse[PULSE_LENGTH];
 static SLData_t pScaledPulse[PULSE_LENGTH];
 static SLData_t pCorrelatorRef[CORRELATOR_LENGTH];
 static SLData_t pCorrelatorState[CORRELATOR_LENGTH];
-static SLArrayIndex_t correlatorIndex;
-static SLData_t *pSrc, *pDst;
-
-static SLData_t pulseOnePoleFilterState;
-static SLData_t lpfOnePoleFilterState;
 
 
 int main (
@@ -65,8 +60,13 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLArrayIndex_t  correlatorIndex;
+
+  SLData_t        pulseOnePoleFilterState;
+  SLData_t        lpfOnePoleFilterState;
+
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   if ((NULL == pSrc) || (NULL == pDst)) {
     printf ("Memory allocation error in main()\n");
@@ -91,7 +91,7 @@ int main (
 
 
 // Generate reference pulse
-  SLData_t        CosinePhase = SIGLIB_ZERO;
+  SLData_t        cosinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pPulse,                                       // Output array pointer
                       SIGLIB_COSINE_WAVE,                           // Signal type - Sine wave
                       SIGLIB_MINUS_HALF,                            // Signal peak level
@@ -100,7 +100,7 @@ int main (
                       SIGLIB_HALF,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &CosinePhase,                                 // Signal phase - maintained across array boundaries
+                      &cosinePhase,                                 // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       PULSE_RISE_LENGTH - 10);                      // Output dataset length
 
@@ -154,8 +154,8 @@ int main (
                       SIGLIB_ZERO,                                  // Signal peak level - Unused
                       SIGLIB_ADD,                                   // Fill (overwrite) or add to existing array contents
                       SIGLIB_ZERO,                                  // Signal frequency - Unused
-                      GAUS_NOISE_OFFSET,                            // D.C. Offset
-                      GAUS_NOISE_VARIANCE,                          // Gaussian noise variance
+                      GAUSSIAN_NOISE_OFFSET,                        // D.C. Offset
+                      GAUSSIAN_NOISE_VARIANCE,                      // Gaussian noise variance
                       SIGLIB_ZERO,                                  // Signal end value - Unused
                       &GaussPhase,                                  // Pointer to gaussian signal phase - should be initialised to zero
                       &GaussValue,                                  // Gaussian signal second sample - should be initialised to zero
@@ -263,5 +263,5 @@ int main (
   SUF_MemoryFree (pSrc);                                            // Free memory
   SUF_MemoryFree (pDst);
 
-  exit (0);
+  return (0);
 }

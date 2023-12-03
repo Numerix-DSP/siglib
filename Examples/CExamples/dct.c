@@ -10,20 +10,17 @@
 
 // Declare global variables and arrays
 
-static SLData_t dctOutputScale;
-static SLData_t dctSqrtHalf;
-
-static SLData_t *pSource, *pResults, *pDCTCosAnglesLUT;
-static SLData_t SinePhase;
-
 
 int main (
   void)
 {
+  SLData_t        dctOutputScale;
+  SLData_t        dctSqrtHalf;
+
 // Allocate memory
-  pSource = SUF_VectorArrayAllocate (DCT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (DCT_LENGTH);
-  pDCTCosAnglesLUT = SUF_VectorArrayAllocate (DCT_LENGTH * DCT_LENGTH);
+  SLData_t       *pSource = SUF_VectorArrayAllocate (DCT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (DCT_LENGTH);
+  SLData_t       *pDCTCosAnglesLUT = SUF_VectorArrayAllocate (DCT_LENGTH * DCT_LENGTH);
 
   if ((NULL == pSource) || (NULL == pResults) || (NULL == pDCTCosAnglesLUT)) {
     printf ("\n\nMemory allocation failed\n\n");
@@ -40,7 +37,7 @@ int main (
                        DCT_LENGTH);                                 // DCT length
 
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pSource,                                      // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.9,                                          // Signal peak level
@@ -49,7 +46,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       DCT_LENGTH);                                  // Output dataset length
 
@@ -66,7 +63,7 @@ int main (
   SUF_PrintArray (pResults, DCT_LENGTH);
 
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pSource,                                      // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.9,                                          // Signal peak level
@@ -75,7 +72,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       DCT_LENGTH);                                  // Output dataset length
 
@@ -94,5 +91,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pDCTCosAnglesLUT);
 
-  exit (0);
+  return (0);
 }

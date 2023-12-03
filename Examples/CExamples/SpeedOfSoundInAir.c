@@ -15,5 +15,5 @@ int main (
   SLData_t        temp = 20.;
   printf ("Speed Of Sound In Air at %.2lf \370C = %.2lf\n", temp, SDS_TemperatureToSpeedOfSoundInAir (temp));
 
-  exit (0);
+  return (0);
 }

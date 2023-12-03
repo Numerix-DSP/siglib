@@ -20,8 +20,7 @@
 #define ONE_POLE_FILTER_ALPHA   0.9                                 // One-pole filter feedback value
 
 // Declare global variables and arrays
-SLData_t       *pRealData, *pImagData, *pWindowCoeffs, *pFFTCoeffs, *pOnePoleState;
-
+SLData_t       *pRealData, *pImagData, *pFFTCoeffs, *pWindowCoeffs, *pOnePoleState;
 
 volatile int    Input_SamplesCount;
 volatile int    Input_Data_Valid_Flag;

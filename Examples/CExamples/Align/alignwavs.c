@@ -9,8 +9,6 @@
 #include <siglib.h>                                                 // SigLib DSP library
 #include <gnuplot_c.h>                                              // Gnuplot/C
 
-static SLData_t *pDataArray1, *pDataArray2;
-static SLData_t *pAlignedArray1, *pAlignedArray2;
 static char     Filename1[80];
 static char     Filename2[80];
 
@@ -38,11 +36,11 @@ int main (
 
   printf ("\nAligning data arrays. This may take a little time ...\n");
 
-  pDataArray1 = SUF_VectorArrayAllocate (SUF_WavFileLength (Filename1));  // Input data arrays
-  pDataArray2 = SUF_VectorArrayAllocate (SUF_WavFileLength (Filename2));
+  SLData_t       *pDataArray1 = SUF_VectorArrayAllocate (SUF_WavFileLength (Filename1));  // Input data arrays
+  SLData_t       *pDataArray2 = SUF_VectorArrayAllocate (SUF_WavFileLength (Filename2));
 
-  pAlignedArray1 = SUF_VectorArrayAllocate (SUF_WavFileLength (Filename1) + SUF_WavFileLength (Filename2) - 1); // Aligned data arrays
-  pAlignedArray2 = SUF_VectorArrayAllocate (SUF_WavFileLength (Filename1) + SUF_WavFileLength (Filename2) - 1);
+  SLData_t       *pAlignedArray1 = SUF_VectorArrayAllocate (SUF_WavFileLength (Filename1) + SUF_WavFileLength (Filename2) - 1); // Aligned data arrays
+  SLData_t       *pAlignedArray2 = SUF_VectorArrayAllocate (SUF_WavFileLength (Filename1) + SUF_WavFileLength (Filename2) - 1);
 
   wavInfo1 = SUF_WavReadFile (pDataArray1, Filename1);
   if (wavInfo1.NumberOfSamples == -1) {
@@ -109,5 +107,5 @@ int main (
   free (pAlignedArray1);
   free (pAlignedArray2);
 
-  exit (0);
+  return (0);
 }

@@ -24,8 +24,6 @@ static const SLData_t ImagSrcArray[] = {
   130.0, 131.0, 132.0, 133.0, 134.0, 135.0, 136.0, 137.0, 138.0, 139.0,
 };
 
-static SLData_t *pRealDelayArray, *pImagDelayArray, *pRealDst, *pImagDst;
-
 
 int main (
   void)
@@ -36,10 +34,10 @@ int main (
   const SLData_t *pSrcReal = RealSrcArray;
   const SLData_t *pSrcImag = ImagSrcArray;
 
-  pRealDelayArray = SUF_VectorArrayAllocate (DELAY_LENGTH);
-  pImagDelayArray = SUF_VectorArrayAllocate (DELAY_LENGTH);
-  pRealDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pImagDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pRealDelayArray = SUF_VectorArrayAllocate (DELAY_LENGTH);
+  SLData_t       *pImagDelayArray = SUF_VectorArrayAllocate (DELAY_LENGTH);
+  SLData_t       *pRealDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pImagDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
 // Initialise the delay
   SIF_FixedDelay (pRealDelayArray,                                  // Pointer to delay state array
@@ -202,5 +200,5 @@ int main (
   SUF_MemoryFree (pRealDst);
   SUF_MemoryFree (pImagDst);
 
-  exit (0);
+  return (0);
 }

@@ -15,8 +15,6 @@
 #define LOG2_FFT_LENGTH         SAI_FftLengthLog2(FFT_LENGTH)       // Log2 FFT length,
 
 // Declare global variables and arrays
-static SLData_t *pRealData, *pImagData, *pResults, *pFFTCoeffs;
-static SLData_t RampPhase;
 
 
 int main (
@@ -24,10 +22,10 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);                 // Allocate memory
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH); // Allocate memory
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pRealData) || (NULL == pImagData) || (NULL == pResults) || (NULL == pFFTCoeffs)) {
 
@@ -53,11 +51,11 @@ int main (
            FFT_LENGTH);                                             // FFT length
 
 // Initialise the source data to a ramp
-  RampPhase = SIGLIB_ZERO;
+  SLData_t        rampPhase = SIGLIB_ZERO;
   SDA_SignalGenerateRamp (pRealData,                                // Pointer to destination array
                           ((SLData_t) FFT_LENGTH) / SIGLIB_TWENTY,  // Amplitude
                           ((SLData_t) FFT_LENGTH) / SIGLIB_TWENTY,  // D.C. Offset
-                          &RampPhase,                               // Phase - maintained across array boundaries
+                          &rampPhase,                               // Phase - maintained across array boundaries
                           FFT_LENGTH);                              // Dataset length
 
   gpc_plot_2d (h2DPlot,                                             // Graph handle
@@ -126,5 +124,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

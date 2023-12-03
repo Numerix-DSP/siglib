@@ -16,10 +16,6 @@
 #define MAX_FILTER_ORDER        10                                  // Max filter order
 
 // Declare global variables and arrays
-
-static SLData_t *pFilterState, *pIIRCoeffs;
-static SLData_t *pSrc, *pRealData, *pImagData, *pResults, *pFFTCoeffs;
-
 #define BUTT_LP         1                                           // Butterworth low pass to low pass transformation
 #if BUTT_LP
 static const SLData_t ButterworthLPFCoeffs[] = { 1.0, 2.0, 1.0, -1.1429805025, 0.4128015981 };
@@ -45,13 +41,13 @@ int main (
 
 // Allocate memory
 // Need twice number of poles and zeros for BPFs and BSFs
-  pIIRCoeffs = SUF_IirCoefficientAllocate (2 * MAX_FILTER_ORDER);
-  pFilterState = SUF_IirStateArrayAllocate (2 * MAX_FILTER_ORDER);
-  pRealData = SUF_VectorArrayAllocate (IMPULSE_RESPONSE_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (PLOT_LENGTH);
-  pSrc = SUF_VectorArrayAllocate (IMPULSE_RESPONSE_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pIIRCoeffs = SUF_IirCoefficientAllocate (2 * MAX_FILTER_ORDER);
+  SLData_t       *pFilterState = SUF_IirStateArrayAllocate (2 * MAX_FILTER_ORDER);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (IMPULSE_RESPONSE_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (PLOT_LENGTH);
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (IMPULSE_RESPONSE_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pIIRCoeffs) || (NULL == pFilterState) || (NULL == pRealData) || (NULL == pImagData) ||
       (NULL == pResults) || (NULL == pSrc) || (NULL == pFFTCoeffs)) {
@@ -382,5 +378,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

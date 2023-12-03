@@ -30,9 +30,6 @@ static SLData_t pResults[LEN];
 static SLData_t pRealTime[FFT_LENGTH], pImagTime[FFT_LENGTH];
 static SLData_t RealNew[FFT_LENGTH], ImagNew[FFT_LENGTH];
 
-static SLData_t *pFFTCoeffs;
-static SLData_t SqPhase;
-
 
 int main (
   void)
@@ -40,7 +37,7 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
 // Allocate array for largest FFT
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH2);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH2);
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Frequency Domain Pitch Shifting By Interpolation",  // Plot title
@@ -59,7 +56,7 @@ int main (
            SIGLIB_BIT_REV_STANDARD,                                 // Bit reverse mode flag / Pointer to bit reverse address table
            FFT_LENGTH);                                             // FFT length
 
-  SqPhase = SIGLIB_ZERO;
+  SLData_t        SqPhase = SIGLIB_ZERO;
 
   SDA_SignalGenerate (pRealInput,                                   // Pointer to destination array
                       SIGLIB_SQUARE_WAVE,                           // Signal type - Square wave
@@ -248,5 +245,5 @@ int main (
 
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

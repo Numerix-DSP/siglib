@@ -122,5 +122,5 @@ int main (
                                               &FilterIndex,         // Pointer to filter index register
                                               FILTER_LENGTH));      // Filter length
 
-  exit (0);
+  return (0);
 }

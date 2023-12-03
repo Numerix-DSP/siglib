@@ -18,18 +18,6 @@
 #define VCO_SINE_TABLE_SIZE             1024                        // Look up table for fast sine calculation
 
 // Declare global variables and arrays
-static SLData_t *pData;
-static SLData_t *pPLLLoopFilterCoeffs, *pPLLLoopFilterState;        // PLL loop filter coefficient pointer
-
-static SLArrayIndex_t PLLLoopFilterIndex;                           // PLL loop filter index
-static SLData_t PLLVCOPhase;                                        // PLL VCO phase
-static SLData_t PLLSavedSample;                                     // PLL saved sample for next iteration
-
-static SLData_t *pPLLHilbertTformFilterCoeffs, *pPLLHilbertTformFilterState;
-static SLArrayIndex_t PLLHilbertTformFilterIndex;
-
-static SLData_t *pVCOLookUpTable;                                   // For fast sine lookup
-static SLData_t SinePhase;
 
 
 int main (
@@ -39,12 +27,18 @@ int main (
 
   SLData_t        TimeIndex = SIGLIB_ZERO;
 
-  pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pPLLLoopFilterCoeffs = SUF_VectorArrayAllocate (PLL_LOOP_FILTER_LENGTH);
-  pPLLLoopFilterState = SUF_VectorArrayAllocate (PLL_LOOP_FILTER_LENGTH);
-  pPLLHilbertTformFilterCoeffs = SUF_VectorArrayAllocate (PLL_HILBERT_TFORM_LENGTH);
-  pPLLHilbertTformFilterState = SUF_VectorArrayAllocate (PLL_HILBERT_TFORM_LENGTH);
-  pVCOLookUpTable = SUF_VectorArrayAllocate (VCO_SINE_TABLE_SIZE);
+  SLArrayIndex_t  PLLLoopFilterIndex;                               // PLL loop filter index
+  SLData_t        PLLVCOPhase;                                      // PLL VCO phase
+  SLData_t        PLLSavedSample;                                   // PLL saved sample for next iteration
+
+  SLArrayIndex_t  PLLHilbertTformFilterIndex;
+
+  SLData_t       *pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pPLLLoopFilterCoeffs = SUF_VectorArrayAllocate (PLL_LOOP_FILTER_LENGTH);  // PLL loop filter coefficient pointer
+  SLData_t       *pPLLLoopFilterState = SUF_VectorArrayAllocate (PLL_LOOP_FILTER_LENGTH); // PLL loop filter state pointer
+  SLData_t       *pPLLHilbertTformFilterCoeffs = SUF_VectorArrayAllocate (PLL_HILBERT_TFORM_LENGTH);  // Hilbert transform filter coefficient pointer
+  SLData_t       *pPLLHilbertTformFilterState = SUF_VectorArrayAllocate (PLL_HILBERT_TFORM_LENGTH); // Hilbert transform filter state pointer
+  SLData_t       *pVCOLookUpTable = SUF_VectorArrayAllocate (VCO_SINE_TABLE_SIZE);  // For fast sine lookup
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Phase Locked Loop",                               // Plot title
@@ -58,7 +52,7 @@ int main (
     exit (-1);
   }
 
-  SinePhase = 1.2;                                                  // Arbitrary phase - radians
+  SLData_t        sinePhase = 1.2;                                  // Arbitrary phase - radians
 
   SIF_PhaseLockedLoop (&PLLVCOPhase,                                // VCO phase
                        pVCOLookUpTable,                             // VCO look up table
@@ -89,7 +83,7 @@ int main (
                         SIGLIB_ZERO,                                // D.C. Offset
                         SIGLIB_ZERO,                                // Unused
                         SIGLIB_ZERO,                                // Signal end value - Unused
-                        &SinePhase,                                 // Signal phase - maintained across array boundaries
+                        &sinePhase,                                 // Signal phase - maintained across array boundaries
                         SIGLIB_NULL_DATA_PTR,                       // Unused
                         SAMPLE_LENGTH);                             // Output dataset length
 
@@ -147,5 +141,5 @@ int main (
   SUF_MemoryFree (pPLLHilbertTformFilterState);
   SUF_MemoryFree (pVCOLookUpTable);
 
-  exit (0);
+  return (0);
 }

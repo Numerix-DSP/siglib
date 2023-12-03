@@ -26,18 +26,15 @@ static const SLData_t pFilterTaps[] = {
 static SLData_t pFilterState[FILTER_STAGES * SIGLIB_IIR_DELAY_SIZE];
 static SLData_t pNCFilterState[FILTER_STAGES * SIGLIB_IIR_DELAY_SIZE];
 
-static SLData_t *source, *causal_result, *non_causal_result;
-static SLData_t SinePhase;
-
 
 int main (
   void)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  source = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  causal_result = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  non_causal_result = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *source = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *causal_result = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *non_causal_result = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Non-causal IIR Filter",                           // Plot title
@@ -57,6 +54,7 @@ int main (
              FILTER_STAGES);                                        // Number of second order stages
 
 // Generate a noisy sinewave
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (source,                                       // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_HALF,                                  // Signal peak level
@@ -65,7 +63,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -137,5 +135,5 @@ int main (
   SUF_MemoryFree (causal_result);
   SUF_MemoryFree (non_causal_result);
 
-  exit (0);
+  return (0);
 }

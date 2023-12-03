@@ -164,5 +164,5 @@ int main (
     dpchar (ReSyncSequence[i]);
   }
 
-  exit (0);
+  return (0);
 }

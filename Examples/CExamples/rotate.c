@@ -11,29 +11,26 @@
 #define OFFSET          (SAMPLE_LENGTH >> 1)
 
 // Declare global variables and arrays
-static SLData_t *pData1, *pData2;
-static SLData_t RampPhase;
-static SLArrayIndex_t Rotation;
 
 
 int main (
   void)
 {
 // Allocate memory
-  pData1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pData2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pData1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pData2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
-  RampPhase = SIGLIB_ZERO;
+  SLData_t        rampPhase = SIGLIB_ZERO;
   SDA_SignalGenerateRamp (pData1,                                   // Pointer to destination array
                           AMPLITUDE,                                // Amplitude
                           OFFSET,                                   // D.C. Offset
-                          &RampPhase,                               // Phase - maintained across array boundaries
+                          &rampPhase,                               // Phase - maintained across array boundaries
                           SAMPLE_LENGTH);                           // Array length
 
   printf ("Input Array\n");
   SUF_PrintArray (pData1, SAMPLE_LENGTH);
 
-  Rotation = 1;
+  SLArrayIndex_t  Rotation = 1;
   SDA_Rotate (pData1,                                               // Pointer to source array
               pData2,                                               // Pointer to destination array
               Rotation,                                             // Rotation length - samples
@@ -104,5 +101,5 @@ int main (
   SUF_MemoryFree (pData1);                                          // Free memory
   SUF_MemoryFree (pData2);
 
-  exit (0);
+  return (0);
 }

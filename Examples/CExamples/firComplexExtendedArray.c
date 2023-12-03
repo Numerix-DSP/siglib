@@ -44,27 +44,23 @@ static const SLData_t pImagFilterTaps[FILTER_LENGTH] = {
   2.891E-3, 2.648E-3, 2.803E-3, -3.783E-3
 };
 
-static SLData_t *pRealFilterState, *pImagFilterState;               // Filter state arrays
-static SLData_t *pRealFilterProcCoeffs, *pImagFilterProcCoeffs;     // Filter processing coefficients arrays
-static SLArrayIndex_t FilterIndex;
-static SLData_t *pRealData, *pImagData, *pResults, *pFFTCoeffs;
-static SLData_t ChirpPhase, ChirpValue;
-
 
 int main (
   void)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pRealData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pResults = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLArrayIndex_t  FilterIndex;
 
-  pRealFilterState = SUF_FirExtendedArrayAllocate (FILTER_LENGTH);
-  pImagFilterState = SUF_FirExtendedArrayAllocate (FILTER_LENGTH);
-  pRealFilterProcCoeffs = SUF_FirExtendedArrayAllocate (FILTER_LENGTH);
-  pImagFilterProcCoeffs = SUF_FirExtendedArrayAllocate (FILTER_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+
+  SLData_t       *pRealFilterState = SUF_FirExtendedArrayAllocate (FILTER_LENGTH);  // Filter state arrays
+  SLData_t       *pImagFilterState = SUF_FirExtendedArrayAllocate (FILTER_LENGTH);
+  SLData_t       *pRealFilterProcCoeffs = SUF_FirExtendedArrayAllocate (FILTER_LENGTH); // Filter processing coefficients arrays
+  SLData_t       *pImagFilterProcCoeffs = SUF_FirExtendedArrayAllocate (FILTER_LENGTH);
 
   if ((NULL == pRealData) || (NULL == pImagData) || (NULL == pResults) || (NULL == pFFTCoeffs) ||
       (NULL == pRealFilterState) || (NULL == pImagFilterState) || (NULL == pRealFilterProcCoeffs) || (NULL == pImagFilterProcCoeffs)) {
@@ -99,8 +95,8 @@ int main (
                                FILTER_LENGTH);                      // Filter length
 
 // Generate a broadband complex signal
-  ChirpPhase = SIGLIB_ZERO;
-  ChirpValue = SIGLIB_ZERO;
+  SLData_t        ChirpPhase = SIGLIB_ZERO;
+  SLData_t        ChirpValue = SIGLIB_ZERO;
   SDA_SignalGenerate (pRealData,                                    // Pointer to destination array
                       SIGLIB_CHIRP_LIN,                             // Signal type - Chirp with linear frequency ramp
                       0.45,                                         // Signal peak level
@@ -247,5 +243,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

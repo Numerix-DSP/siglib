@@ -26,9 +26,6 @@
 #define DB_SCALE                (1e5)                               // Scaling for dB
 
 // Declare global variables and arrays
-static SLData_t *pDataArray, *pFDPRealData, *pFDPImagData, *pFDPResults;
-static SLData_t *pFDPFFTCoeffs, *pWindowCoeffs, *pOverlapArray;
-
 static char     Filename[80];
 
 
@@ -48,13 +45,13 @@ int main (
 
   SLData_t        WindowInverseCoherentGain = SIGLIB_ONE;
 
-  pDataArray = SUF_VectorArrayAllocate (SAMPLE_LENGTH);             // Input data array
-  pOverlapArray = SUF_VectorArrayAllocate (OVERLAP_LENGTH);         // Overlap data array
-  pWindowCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH);             // Window coeffs data array
-  pFDPRealData = SUF_VectorArrayAllocate (FFT_LENGTH);              // Real data array
-  pFDPImagData = SUF_VectorArrayAllocate (FFT_LENGTH);              // Imaginary data array
-  pFDPResults = SUF_VectorArrayAllocate (FFT_LENGTH);               // Results data array
-  pFDPFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);          // FFT coefficient data array
+  SLData_t       *pDataArray = SUF_VectorArrayAllocate (SAMPLE_LENGTH); // Input data array
+  SLData_t       *pOverlapArray = SUF_VectorArrayAllocate (OVERLAP_LENGTH); // Overlap data array
+  SLData_t       *pWindowCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH); // Window coeffs data array
+  SLData_t       *pFDPRealData = SUF_VectorArrayAllocate (FFT_LENGTH);  // Real data array
+  SLData_t       *pFDPImagData = SUF_VectorArrayAllocate (FFT_LENGTH);  // Imaginary data array
+  SLData_t       *pFDPResults = SUF_VectorArrayAllocate (FFT_LENGTH); // Results data array
+  SLData_t       *pFDPFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);  // FFT coefficient data array
 
   if ((NULL == pDataArray) || (NULL == pOverlapArray) || (NULL == pWindowCoeffs) ||
       (NULL == pFDPRealData) || (NULL == pFDPImagData) || (NULL == pFDPResults) || (NULL == pFDPFFTCoeffs)) {
@@ -201,5 +198,5 @@ int main (
   SUF_MemoryFree (pFDPResults);
   SUF_MemoryFree (pFDPFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

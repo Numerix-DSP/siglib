@@ -25,5 +25,5 @@ int main (
                                                                                                                                                         1024, //  FFT length
                                                                                                                                                         1.0 / 9600.0)); //  Inverse sample rate
 
-  exit (0);
+  return (0);
 }

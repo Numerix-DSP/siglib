@@ -15,8 +15,10 @@ SLData_t        src2y[] = { -5., -3., -2. };
 
 SLData_t        dst[SRC_LEN];
 
-SLComplexRect_s srcVector1[] = { { 1., 2. }, { 3., 4. }, { 5., -6. } };
-SLComplexRect_s srcVector2[] = { { 2., 1. }, { -1., -5. }, { -3., -2. } };
+SLComplexRect_s srcVector1[] = { { 1., 2. }, { 3., 4. }, { 5., -6. }
+};
+SLComplexRect_s srcVector2[] = { { 2., 1. }, { -1., -5. }, { -3., -2. }
+};
 
 
 int main (
@@ -44,5 +46,5 @@ int main (
   SDA_EuclideanDistanceSquared (src1x, src1y, src2x, src2y, dst, SRC_LEN);
   printf ("SDA_EuclideanDistanceSquared (Array): %.2lf, %.2lf, %.2lf\n\n", dst[0], dst[1], dst[2]);
 
-  exit (0);
+  return (0);
 }

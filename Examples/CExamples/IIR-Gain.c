@@ -17,8 +17,6 @@
 #define PLOT_LENGTH             (IMPULSE_RESPONSE_LENGTH/2)
 
 // Declare global variables and arrays
-static SLData_t pFilterState[FILTER_STAGES * SIGLIB_IIR_DELAY_SIZE];  // State array for IIR filter
-
 static const SLData_t pIIRCoeffs[] = {
   1.000000000000000000e+00, 2.00000000000000000000e+00, 1.000000000000000000e+00,
   -1.16789727837434376100e+00, 3.91656752294134713500e-01,
@@ -30,8 +28,7 @@ static const SLData_t pIIRCoeffs[] = {
   -1.74044544948026014300e+00, 7.64856611182405554600e-01
 };
 
-static SLData_t *pNewIIRCoeffs;
-static SLData_t *pSrc1, *pRealData, *pImagData, *pResults, *pFFTCoeffs;
+static SLData_t pFilterState[FILTER_STAGES * SIGLIB_IIR_DELAY_SIZE];  // State array for IIR filter
 
 
 int main (
@@ -40,12 +37,12 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
 // Allocate memory
-  pNewIIRCoeffs = SUF_IirCoefficientAllocate (FILTER_STAGES);
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (PLOT_LENGTH);
-  pSrc1 = SUF_VectorArrayAllocate (IMPULSE_RESPONSE_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pNewIIRCoeffs = SUF_IirCoefficientAllocate (FILTER_STAGES);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (PLOT_LENGTH);
+  SLData_t       *pSrc1 = SUF_VectorArrayAllocate (IMPULSE_RESPONSE_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pNewIIRCoeffs) || (NULL == pRealData) || (NULL == pImagData) || (NULL == pResults) || (NULL == pSrc1) || (NULL == pFFTCoeffs)) {
 
@@ -222,5 +219,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

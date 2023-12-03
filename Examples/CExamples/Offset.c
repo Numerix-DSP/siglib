@@ -79,5 +79,5 @@ int main (
   SUF_PrintArray (Dst, ARRAY_LENGTH);
   printf ("Mean of destination array = %lf\n\n", SDA_Mean (Dst, INV_ARRAY_LENGTH, ARRAY_LENGTH));
 
-  exit (0);
+  return (0);
 }

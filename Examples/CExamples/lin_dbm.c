@@ -120,5 +120,5 @@ int main (
   dB = -13.0;
   printf ("%lf (dB) = %lf\n", dB, SDS_dBToPower (dB));              // dB value
 
-  exit (0);
+  return (0);
 }

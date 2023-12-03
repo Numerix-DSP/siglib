@@ -97,5 +97,5 @@ int main (
     printf ("%d, ", DstLocationArray[j]);
   printf ("\n");
 
-  exit (0);
+  return (0);
 }

@@ -12,21 +12,12 @@
 #define FFT_LENGTH              512
 #define LOG2_FFT_LENGTH         SAI_FftLengthLog2(FFT_LENGTH)       // Log2 FFT length,
 
-// Declare global variables and arrays
-static SLData_t *pData, *pRealData, *pImagData, *pResults, *pFFTCoeffs; // Dataset pointers
-static SLData_t ChirpPhase, ChirpValue;
-static SLData_t InverseFFTLength;
-
 #if TIME_DOMAIN_AS_WELL
-static SLData_t *pFilterTaps, *pFilterState, *pDelay, *pTempDelay;
-static SLArrayIndex_t FilterIndex;
-static SLArrayIndex_t DelayIndex;
-
 #define FILTER_LENGTH       101
 #define FILTER_GROUP_DELAY  (FILTER_LENGTH >> 1)                    // Filter group delay -Note: C array indexing
 #endif
 
-static SLData_t *pFFTCoeffs;
+// Declare global variables and arrays
 
 
 int main (
@@ -34,11 +25,14 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t        ChirpPhase, ChirpValue;
+  SLData_t        InverseFFTLength;
+
+  SLData_t       *pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Frequency Domain Hilbert Transform",              // Plot title
@@ -54,10 +48,13 @@ int main (
 
 
 #if TIME_DOMAIN_AS_WELL
-  pFilterTaps = SUF_VectorArrayAllocate (FILTER_LENGTH);
-  pFilterState = SUF_VectorArrayAllocate (FILTER_LENGTH);
-  pDelay = SUF_VectorArrayAllocate (FILTER_GROUP_DELAY);
-  pTempDelay = SUF_VectorArrayAllocate (FILTER_GROUP_DELAY);
+  SLArrayIndex_t  FilterIndex;
+  SLArrayIndex_t  DelayIndex;
+
+  SLData_t       *pFilterTaps = SUF_VectorArrayAllocate (FILTER_LENGTH);
+  SLData_t       *pFilterState = SUF_VectorArrayAllocate (FILTER_LENGTH);
+  SLData_t       *pDelay = SUF_VectorArrayAllocate (FILTER_GROUP_DELAY);
+  SLData_t       *pTempDelay = SUF_VectorArrayAllocate (FILTER_GROUP_DELAY);
 
   SIF_HilbertTransformerFirFilter (pFilterTaps,                     // Pointer to filter coefficients
                                    FILTER_LENGTH);                  // Filter length
@@ -140,7 +137,8 @@ int main (
 
 // Apply time domain Hilbert transformerer
   SDA_Fir (pData,                                                   // Input array to be filtered
-           pRealData,                                               // Filtered output array
+           pRealData,
+// Filtered output array
            pFilterState,                                            // Pointer to filter state array
            pFilterTaps,                                             // Pointer to filter coefficients
            &FilterIndex,                                            // Pointer to filter index register
@@ -206,5 +204,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

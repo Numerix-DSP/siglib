@@ -40,11 +40,6 @@
 #define FILTER_COEFF_ARRAY_LENGTH   (IIR_FILTER_STAGES * SIGLIB_IIR_COEFFS_PER_BIQUAD)  // Number of filter coefficients
 
 // Declare global variables and arrays
-#if PLOT_RESULTS
-static SLData_t *pFilterState, *pIIRCoeffs;
-static SLData_t *pSrc, *pRealData, *pImagData, *pResults, *pFFTCoeffs;
-#endif
-
 static SLData_t NormalizedCoeffs[FILTER_COEFF_ARRAY_LENGTH];        // Plenty of length for the filter
 static SLData_t ModifiedCoeffs[FILTER_COEFF_ARRAY_LENGTH];
 
@@ -54,17 +49,15 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  SLData_t        Scale;
-
 #if PLOT_RESULTS
 // Allocate memory
-  pIIRCoeffs = SUF_IirCoefficientAllocate (IIR_FILTER_STAGES);
-  pFilterState = SUF_IirStateArrayAllocate (IIR_FILTER_STAGES);
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (PLOT_LENGTH);
-  pSrc = SUF_VectorArrayAllocate (IMPULSE_RESPONSE_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pIIRCoeffs = SUF_IirCoefficientAllocate (IIR_FILTER_STAGES);
+  SLData_t       *pFilterState = SUF_IirStateArrayAllocate (IIR_FILTER_STAGES);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (PLOT_LENGTH);
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (IMPULSE_RESPONSE_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pIIRCoeffs) || (NULL == pRealData) || (NULL == pImagData) || (NULL == pResults) || (NULL == pSrc) || (NULL == pFFTCoeffs)) {
 
@@ -161,12 +154,12 @@ int main (
   getchar ();
 
 // Low pass to low pass transformation
-  Scale = SDA_IirLpLpShift (NormalizedCoeffs,                       // Source coefficients
-                            ModifiedCoeffs,                         // Destination coefficients
-                            SIGLIB_ONE,                             // Frequency # 1
-                            SIGLIB_TWO,                             // Frequency # 2
-                            SIGLIB_TWO_PI,                          // Sample rate
-                            IIR_FILTER_STAGES);                     // Number of biquads
+  SLData_t        Scale = SDA_IirLpLpShift (NormalizedCoeffs,       // Source coefficients
+                                            ModifiedCoeffs,         // Destination coefficients
+                                            SIGLIB_ONE,             // Frequency # 1
+                                            SIGLIB_TWO,             // Frequency # 2
+                                            SIGLIB_TWO_PI,          // Sample rate
+                                            IIR_FILTER_STAGES);     // Number of biquads
 
 // Normalise filter gain
   SDA_IirModifyFilterGain (ModifiedCoeffs,                          // Pointer to source IIR filter coefficients
@@ -351,5 +344,5 @@ int main (
   SUF_MemoryFree (pFFTCoeffs);
 #endif
 
-  exit (0);
+  return (0);
 }

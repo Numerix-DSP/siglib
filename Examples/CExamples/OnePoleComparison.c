@@ -17,9 +17,6 @@
 #define LOG2_FFT_LENGTH         SAI_FftLengthLog2(FFT_LENGTH)       // Log2 FFT length,
 
 // Declare global variables and arrays
-static SLData_t *pSrc, *pOnePoleFiltered, *pOnePoleNormalizedFiltered, *pOnePoleEWMAFiltered;
-static SLData_t *pRealData, *pImagData, *pResults, *pFFTCoeffs;
-static SLData_t onePoleFilterCoefficient, OnePoleFilterState;
 
 
 int main (
@@ -27,6 +24,8 @@ int main (
   char **argv)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
+
+  SLData_t        onePoleFilterCoefficient, OnePoleFilterState;
 
   if (argc != 2) {
     printf ("Usage: OnePole <Feedback_Coefficient>\n");
@@ -38,14 +37,14 @@ int main (
   }
 
 // Allocate memory
-  pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pOnePoleFiltered = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pOnePoleNormalizedFiltered = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pOnePoleEWMAFiltered = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (FFT_LENGTH);                  // RMS result array
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pOnePoleFiltered = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pOnePoleNormalizedFiltered = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pOnePoleEWMAFiltered = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (FFT_LENGTH);  // RMS result array
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pSrc) || (NULL == pOnePoleFiltered) || (NULL == pOnePoleNormalizedFiltered) || (NULL == pOnePoleEWMAFiltered) ||
       (NULL == pRealData) || (NULL == pImagData) || (NULL == pResults) || (NULL == pFFTCoeffs)) {
@@ -308,5 +307,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

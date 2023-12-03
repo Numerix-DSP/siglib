@@ -131,19 +131,19 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
 
       case SIGLIB_WHITE_NOISE:                                     // White noise
         for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
-          *pDst++ = (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * Peak) + Offset;
+          *pDst++ = (((((SLData_t) rand ()) / (((SLData_t) RAND_MAX) * SIGLIB_HALF)) - SIGLIB_ONE) * Peak) + Offset;
         }
         break;
 
-      case SIGLIB_GAUSSIAN_NOISE:                                  // Gaussian noise generator
+      case SIGLIB_GAUSSIAN_NOISE:                                  // Gaussian (normal) distribution using the Box-Muller Method
         for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           if (!*PhaseOffset) {
 // Generate two random numbers betweem -1 and +1
             do {
 // Generate two random numbers betweem -1 and +1
-              Sample1 = rand () * (SIGLIB_TWO / RAND_MAX) - SIGLIB_ONE;
-              Sample2 = rand () * (SIGLIB_TWO / RAND_MAX) - SIGLIB_ONE;
-              SquareSum = Sample1 * Sample1 + Sample2 * Sample2;
+              Sample1 = ((SLData_t) rand ()) * (SIGLIB_TWO / ((SLData_t) RAND_MAX)) - SIGLIB_ONE;
+              Sample2 = ((SLData_t) rand ()) * (SIGLIB_TWO / ((SLData_t) RAND_MAX)) - SIGLIB_ONE;
+              SquareSum = (Sample1 * Sample1) + (Sample2 * Sample2);
             } while (SquareSum >= SIGLIB_ONE);
 
             if (SquareSum != SIGLIB_ZERO) {
@@ -430,19 +430,19 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate (
 
       case SIGLIB_WHITE_NOISE:                                     // White noise
         for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
-          *pDst++ += (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * Peak) + Offset;
+          *pDst++ += (((((SLData_t) rand ()) / (((SLData_t) RAND_MAX) * SIGLIB_HALF)) - SIGLIB_ONE) * Peak) + Offset;
         }
         break;
 
-      case SIGLIB_GAUSSIAN_NOISE:                                  // Gaussian noise generator
+      case SIGLIB_GAUSSIAN_NOISE:                                  // Gaussian (normal) distribution using the Box-Muller Method
         for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
           if (!*PhaseOffset) {
 // Generate two random numbers betweem -1 and +1
             do {
 // Generate two random numbers betweem -1 and +1
-              Sample1 = rand () * (SIGLIB_TWO / RAND_MAX) - SIGLIB_ONE;
-              Sample2 = rand () * (SIGLIB_TWO / RAND_MAX) - SIGLIB_ONE;
-              SquareSum = Sample1 * Sample1 + Sample2 * Sample2;
+              Sample1 = ((SLData_t) rand ()) * (SIGLIB_TWO / ((SLData_t) RAND_MAX)) - SIGLIB_ONE;
+              Sample2 = ((SLData_t) rand ()) * (SIGLIB_TWO / ((SLData_t) RAND_MAX)) - SIGLIB_ONE;
+              SquareSum = (Sample1 * Sample1) + (Sample2 * Sample2);
             } while (SquareSum >= SIGLIB_ONE);
 
             if (SquareSum != SIGLIB_ZERO) {
@@ -784,17 +784,17 @@ SLError_t SIGLIB_FUNC_DECL SDS_SignalGenerate (
         break;
 
       case SIGLIB_WHITE_NOISE:                                     // White noise
-        *pDst = (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * Peak) + Offset;
+        *pDst = (((((SLData_t) rand ()) / (((SLData_t) RAND_MAX) * SIGLIB_HALF)) - SIGLIB_ONE) * Peak) + Offset;
         break;
 
-      case SIGLIB_GAUSSIAN_NOISE:                                  // Gaussian noise generator
+      case SIGLIB_GAUSSIAN_NOISE:                                  // Gaussian (normal) distribution using the Box-Muller Method
         if (!*PhaseOffset) {
 // Generate two random numbers betweem -1 and +1
           do {
 // Generate two random numbers betweem -1 and +1
-            Sample1 = rand () * (SIGLIB_TWO / RAND_MAX) - SIGLIB_ONE;
-            Sample2 = rand () * (SIGLIB_TWO / RAND_MAX) - SIGLIB_ONE;
-            SquareSum = Sample1 * Sample1 + Sample2 * Sample2;
+            Sample1 = ((SLData_t) rand ()) * (SIGLIB_TWO / ((SLData_t) RAND_MAX)) - SIGLIB_ONE;
+            Sample2 = ((SLData_t) rand ()) * (SIGLIB_TWO / ((SLData_t) RAND_MAX)) - SIGLIB_ONE;
+            SquareSum = (Sample1 * Sample1) + (Sample2 * Sample2);
           } while (SquareSum >= SIGLIB_ONE);
 
           if (SquareSum != SIGLIB_ZERO) {
@@ -1057,17 +1057,17 @@ SLError_t SIGLIB_FUNC_DECL SDS_SignalGenerate (
         break;
 
       case SIGLIB_WHITE_NOISE:                                     // White noise
-        *pDst += (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * Peak) + Offset;
+        *pDst += (((((SLData_t) rand ()) / (((SLData_t) RAND_MAX) * SIGLIB_HALF)) - SIGLIB_ONE) * Peak) + Offset;
         break;
 
-      case SIGLIB_GAUSSIAN_NOISE:                                  // Gaussian noise generator
+      case SIGLIB_GAUSSIAN_NOISE:                                  // Gaussian (normal) distribution using the Box-Muller Method
         if (!*PhaseOffset) {
 // Generate two random numbers betweem -1 and +1
           do {
 // Generate two random numbers betweem -1 and +1
-            Sample1 = rand () * (SIGLIB_TWO / RAND_MAX) - SIGLIB_ONE;
-            Sample2 = rand () * (SIGLIB_TWO / RAND_MAX) - SIGLIB_ONE;
-            SquareSum = Sample1 * Sample1 + Sample2 * Sample2;
+            Sample1 = ((SLData_t) rand ()) * (SIGLIB_TWO / ((SLData_t) RAND_MAX)) - SIGLIB_ONE;
+            Sample2 = ((SLData_t) rand ()) * (SIGLIB_TWO / ((SLData_t) RAND_MAX)) - SIGLIB_ONE;
+            SquareSum = (Sample1 * Sample1) + (Sample2 * Sample2);
           } while (SquareSum >= SIGLIB_ONE);
 
           if (SquareSum != SIGLIB_ZERO) {
@@ -1661,16 +1661,16 @@ void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarWhiteNoise (
 
   if (FillMode == SIGLIB_FILL) {                                    // Generate signal and fill array
     for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
-      NoisePolarLocal.magn = ((((SLData_t) rand ()) / RAND_MAX) * NoisePeak);
-      NoisePolarLocal.angle = (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_PI);
+      NoisePolarLocal.magn = ((((SLData_t) rand ()) / ((SLData_t) RAND_MAX)) * NoisePeak);
+      NoisePolarLocal.angle = (((((SLData_t) rand ()) / (((SLData_t) RAND_MAX) * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_PI);
       NoiseRectLocal = SCV_PolarToRectangular (NoisePolarLocal);
       *pDst++ = NoiseRectLocal;
     }
   }
   else {
     for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
-      NoisePolarLocal.magn = ((((SLData_t) rand ()) / RAND_MAX) * NoisePeak);
-      NoisePolarLocal.angle = (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_PI);
+      NoisePolarLocal.magn = ((((SLData_t) rand ()) / ((SLData_t) RAND_MAX)) * NoisePeak);
+      NoisePolarLocal.angle = (((((SLData_t) rand ()) / (((SLData_t) RAND_MAX) * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_PI);
       NoiseRectLocal = SCV_PolarToRectangular (NoisePolarLocal);
       pDst->real += NoiseRectLocal.real;
       pDst->imag += NoiseRectLocal.imag;
@@ -1703,8 +1703,8 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_SignalGeneratePolarWhiteNoise (
   SLComplexRect_s NoiseRectLocal;
   SLComplexPolar_s NoisePolarLocal;
 
-  NoisePolarLocal.magn = ((((SLData_t) rand ()) / RAND_MAX) * NoisePeak);
-  NoisePolarLocal.angle = (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_PI);
+  NoisePolarLocal.magn = ((((SLData_t) rand ()) / ((SLData_t) RAND_MAX)) * NoisePeak);
+  NoisePolarLocal.angle = (((((SLData_t) rand ()) / (((SLData_t) RAND_MAX) * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_PI);
   NoiseRectLocal = SCV_PolarToRectangular (NoisePolarLocal);
   return (NoiseRectLocal);
 }                                                                   // End of SDS_SignalGeneratePolarWhiteNoise()
@@ -1749,9 +1749,9 @@ void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarGaussianNoise (
 // Generate two random numbers betweem -1 and +1
         do {
 // Generate two random numbers betweem -1 and +1
-          Sample1 = rand () * (SIGLIB_TWO / RAND_MAX) - SIGLIB_ONE;
-          Sample2 = rand () * (SIGLIB_TWO / RAND_MAX) - SIGLIB_ONE;
-          SquareSum = Sample1 * Sample1 + Sample2 * Sample2;
+          Sample1 = ((SLData_t) rand ()) * (SIGLIB_TWO / ((SLData_t) RAND_MAX)) - SIGLIB_ONE;
+          Sample2 = ((SLData_t) rand ()) * (SIGLIB_TWO / ((SLData_t) RAND_MAX)) - SIGLIB_ONE;
+          SquareSum = (Sample1 * Sample1) + (Sample2 * Sample2);
         } while (SquareSum >= SIGLIB_ONE);
 
         if (SquareSum != SIGLIB_ZERO) {
@@ -1767,7 +1767,7 @@ void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarGaussianNoise (
         }
 
         NoisePolarLocal.magn = Sample1;
-        NoisePolarLocal.angle = (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_HALF_PI);
+        NoisePolarLocal.angle = (((((SLData_t) rand ()) / (((SLData_t) RAND_MAX) * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_HALF_PI);
         NoiseRectLocal = SCV_PolarToRectangular (NoisePolarLocal);
         *pDst++ = NoiseRectLocal;
 
@@ -1776,7 +1776,7 @@ void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarGaussianNoise (
       }
       else {
         NoisePolarLocal.magn = *NoiseCurrentValue;
-        NoisePolarLocal.angle = (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_HALF_PI);
+        NoisePolarLocal.angle = (((((SLData_t) rand ()) / (((SLData_t) RAND_MAX) * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_HALF_PI);
         NoiseRectLocal = SCV_PolarToRectangular (NoisePolarLocal);
         *pDst++ = NoiseRectLocal;
 
@@ -1790,9 +1790,9 @@ void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarGaussianNoise (
 // Generate two random numbers betweem -1 and +1
         do {
 // Generate two random numbers betweem -1 and +1
-          Sample1 = rand () * (SIGLIB_TWO / RAND_MAX) - SIGLIB_ONE;
-          Sample2 = rand () * (SIGLIB_TWO / RAND_MAX) - SIGLIB_ONE;
-          SquareSum = Sample1 * Sample1 + Sample2 * Sample2;
+          Sample1 = ((SLData_t) rand ()) * (SIGLIB_TWO / ((SLData_t) RAND_MAX)) - SIGLIB_ONE;
+          Sample2 = ((SLData_t) rand ()) * (SIGLIB_TWO / ((SLData_t) RAND_MAX)) - SIGLIB_ONE;
+          SquareSum = (Sample1 * Sample1) + (Sample2 * Sample2);
         } while (SquareSum >= SIGLIB_ONE);
 
         if (SquareSum != SIGLIB_ZERO) {
@@ -1808,7 +1808,7 @@ void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarGaussianNoise (
         }
 
         NoisePolarLocal.magn = Sample1;
-        NoisePolarLocal.angle = (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_HALF_PI);
+        NoisePolarLocal.angle = (((((SLData_t) rand ()) / (((SLData_t) RAND_MAX) * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_HALF_PI);
         NoiseRectLocal = SCV_PolarToRectangular (NoisePolarLocal);
         pDst->real += NoiseRectLocal.real;
         pDst->imag += NoiseRectLocal.imag;
@@ -1819,7 +1819,7 @@ void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarGaussianNoise (
       }
       else {
         NoisePolarLocal.magn = *NoiseCurrentValue;
-        NoisePolarLocal.angle = (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_HALF_PI);
+        NoisePolarLocal.angle = (((((SLData_t) rand ()) / (((SLData_t) RAND_MAX) * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_HALF_PI);
         NoiseRectLocal = SCV_PolarToRectangular (NoisePolarLocal);
         pDst->real += NoiseRectLocal.real;
         pDst->imag += NoiseRectLocal.imag;
@@ -1862,9 +1862,9 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_SignalGeneratePolarGaussianNoise (
   if (!*NoisePhaseOffset) {
 // Generate two random numbers betweem -1 and +1
     do {
-      Sample1 = rand () * (SIGLIB_TWO / RAND_MAX) - SIGLIB_ONE;
-      Sample2 = rand () * (SIGLIB_TWO / RAND_MAX) - SIGLIB_ONE;
-      SquareSum = Sample1 * Sample1 + Sample2 * Sample2;
+      Sample1 = ((SLData_t) rand ()) * (SIGLIB_TWO / ((SLData_t) RAND_MAX)) - SIGLIB_ONE;
+      Sample2 = ((SLData_t) rand ()) * (SIGLIB_TWO / ((SLData_t) RAND_MAX)) - SIGLIB_ONE;
+      SquareSum = (Sample1 * Sample1) + (Sample2 * Sample2);
     } while (SquareSum >= SIGLIB_ONE);
 
     if (SquareSum != SIGLIB_ZERO) {
@@ -1881,7 +1881,7 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_SignalGeneratePolarGaussianNoise (
     }
 
     NoisePolarLocal.magn = Sample1;
-    NoisePolarLocal.angle = (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_HALF_PI);
+    NoisePolarLocal.angle = (((((SLData_t) rand ()) / (((SLData_t) RAND_MAX) * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_HALF_PI);
     NoiseRectLocal = SCV_PolarToRectangular (NoisePolarLocal);
 
     *NoisePhaseOffset = SIGLIB_ONE;                                 // Switch to next sample
@@ -1890,7 +1890,7 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_SignalGeneratePolarGaussianNoise (
 
   else {
     NoisePolarLocal.magn = *NoiseCurrentValue;
-    NoisePolarLocal.angle = (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_HALF_PI);
+    NoisePolarLocal.angle = (((((SLData_t) rand ()) / (((SLData_t) RAND_MAX) * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_HALF_PI);
     NoiseRectLocal = SCV_PolarToRectangular (NoisePolarLocal);
 
     *NoisePhaseOffset = SIGLIB_ZERO;                                // Switch to next sample
@@ -1957,9 +1957,9 @@ void SIGLIB_FUNC_DECL SDA_SignalAddPolarJitterAndGaussianNoise (
 // Generate two random numbers betweem -1 and +1
       do {
 // Generate two random numbers betweem -1 and +1
-        Sample1 = rand () * (SIGLIB_TWO / RAND_MAX) - SIGLIB_ONE;
-        Sample2 = rand () * (SIGLIB_TWO / RAND_MAX) - SIGLIB_ONE;
-        SquareSum = Sample1 * Sample1 + Sample2 * Sample2;
+        Sample1 = ((SLData_t) rand ()) * (SIGLIB_TWO / ((SLData_t) RAND_MAX)) - SIGLIB_ONE;
+        Sample2 = ((SLData_t) rand ()) * (SIGLIB_TWO / ((SLData_t) RAND_MAX)) - SIGLIB_ONE;
+        SquareSum = (Sample1 * Sample1) + (Sample2 * Sample2);
       } while (SquareSum >= SIGLIB_ONE);
 
       if (SquareSum != SIGLIB_ZERO) {
@@ -1976,7 +1976,7 @@ void SIGLIB_FUNC_DECL SDA_SignalAddPolarJitterAndGaussianNoise (
       }
 
       NoisePolarLocal.magn = Sample1;
-      NoisePolarLocal.angle = (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_HALF_PI);
+      NoisePolarLocal.angle = (((((SLData_t) rand ()) / (((SLData_t) RAND_MAX) * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_HALF_PI);
       NoiseRectLocal = SCV_PolarToRectangular (NoisePolarLocal);
       pDst->real = SrcRectLocal.real + NoiseRectLocal.real;
       pDst->imag = SrcRectLocal.imag + NoiseRectLocal.imag;
@@ -1988,7 +1988,7 @@ void SIGLIB_FUNC_DECL SDA_SignalAddPolarJitterAndGaussianNoise (
 
     else {
       NoisePolarLocal.magn = *NoiseCurrentValue;
-      NoisePolarLocal.angle = (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_HALF_PI);
+      NoisePolarLocal.angle = (((((SLData_t) rand ()) / (((SLData_t) RAND_MAX) * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_HALF_PI);
       NoiseRectLocal = SCV_PolarToRectangular (NoisePolarLocal);
       pDst->real = SrcRectLocal.real + NoiseRectLocal.real;
       pDst->imag = SrcRectLocal.imag + NoiseRectLocal.imag;
@@ -2057,9 +2057,9 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_SignalAddPolarJitterAndGaussianNoise (
   if (!*NoisePhaseOffset) {
 // Generate two random numbers betweem -1 and +1
     do {
-      Sample1 = rand () * (SIGLIB_TWO / RAND_MAX) - SIGLIB_ONE;
-      Sample2 = rand () * (SIGLIB_TWO / RAND_MAX) - SIGLIB_ONE;
-      SquareSum = Sample1 * Sample1 + Sample2 * Sample2;
+      Sample1 = ((SLData_t) rand ()) * (SIGLIB_TWO / ((SLData_t) RAND_MAX)) - SIGLIB_ONE;
+      Sample2 = ((SLData_t) rand ()) * (SIGLIB_TWO / ((SLData_t) RAND_MAX)) - SIGLIB_ONE;
+      SquareSum = (Sample1 * Sample1) + (Sample2 * Sample2);
     } while (SquareSum >= SIGLIB_ONE);
 
     if (SquareSum != SIGLIB_ZERO) {
@@ -2076,7 +2076,7 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_SignalAddPolarJitterAndGaussianNoise (
     }
 
     NoisePolarLocal.magn = Sample1;
-    NoisePolarLocal.angle = (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_HALF_PI);
+    NoisePolarLocal.angle = (((((SLData_t) rand ()) / (((SLData_t) RAND_MAX) * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_HALF_PI);
     NoiseRectLocal = SCV_PolarToRectangular (NoisePolarLocal);
 
     *NoisePhaseOffset = SIGLIB_ONE;                                 // Switch to next sample
@@ -2085,7 +2085,7 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_SignalAddPolarJitterAndGaussianNoise (
 
   else {
     NoisePolarLocal.magn = *NoiseCurrentValue;
-    NoisePolarLocal.angle = (((((SLData_t) rand ()) / (RAND_MAX * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_HALF_PI);
+    NoisePolarLocal.angle = (((((SLData_t) rand ()) / (((SLData_t) RAND_MAX) * SIGLIB_HALF)) - SIGLIB_ONE) * SIGLIB_HALF_PI);
     NoiseRectLocal = SCV_PolarToRectangular (NoisePolarLocal);
 
     *NoisePhaseOffset = SIGLIB_ZERO;                                // Switch to next sample
@@ -2175,7 +2175,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_RandomNumber (
   const SLData_t lowerBound,
   const SLData_t upperBound)
 {
-  return ((((SLData_t) rand () / (SLData_t) RAND_MAX) * (upperBound - lowerBound)) + lowerBound);
+  return (((((SLData_t) rand ()) / ((SLData_t) RAND_MAX)) * (upperBound - lowerBound)) + lowerBound);
 }                                                                   // End of SDS_RandomNumber()
 
 
@@ -2203,6 +2203,6 @@ void SIGLIB_FUNC_DECL SDA_RandomNumber (
   const SLArrayIndex_t arrayLength)
 {
   for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
-    *pDst++ = ((((SLData_t) rand () / (SLData_t) RAND_MAX) * (upperBound - lowerBound)) + lowerBound);
+    *pDst++ = (((((SLData_t) rand ()) / ((SLData_t) RAND_MAX)) * (upperBound - lowerBound)) + lowerBound);
   }
 }                                                                   // End of SDA_RandomNumber()

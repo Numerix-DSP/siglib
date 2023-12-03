@@ -13,8 +13,6 @@
 #define FILTER_COEFFICIENT      0.95                                // Filter coefficient
 
 // Declare global variables and arrays
-static SLData_t *pData;
-static SLData_t PreEmphasisFilterState, DeEmphasisFilterState;
 
 
 int main (
@@ -22,7 +20,9 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t        PreEmphasisFilterState, DeEmphasisFilterState;
+
+  SLData_t       *pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Pre-emphasis / De-emphasis Filter",               // Plot title
@@ -86,5 +86,5 @@ int main (
 
   SUF_MemoryFree (pData);                                           // Free memory
 
-  exit (0);
+  return (0);
 }

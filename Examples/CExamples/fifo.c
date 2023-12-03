@@ -31,8 +31,6 @@ static const SLData_t ImagSrcArray[] = {
   160.0, 161.0, 162.0, 163.0, 164.0, 165.0, 166.0, 167.0, 168.0, 169.0
 };
 
-static SLData_t *pRealDelayArray, *pImagDelayArray, *pRealDst, *pImagDst;
-
 
 int main (
   void)
@@ -44,10 +42,10 @@ int main (
   const SLData_t *pSrcImag = ImagSrcArray;
   SLArrayIndex_t  DelayLength;
 
-  pRealDelayArray = SUF_VectorArrayAllocate (MAX_DELAY);
-  pImagDelayArray = SUF_VectorArrayAllocate (MAX_DELAY);
-  pRealDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pImagDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pRealDelayArray = SUF_VectorArrayAllocate (MAX_DELAY);
+  SLData_t       *pImagDelayArray = SUF_VectorArrayAllocate (MAX_DELAY);
+  SLData_t       *pRealDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pImagDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
 // Initialise the FIFO delay
   if (SIF_VariableDelay (pRealDelayArray,                           // Pointer to the delay state array
@@ -546,5 +544,5 @@ int main (
   SUF_MemoryFree (pRealDst);
   SUF_MemoryFree (pImagDst);
 
-  exit (0);
+  return (0);
 }

@@ -44,11 +44,6 @@
 #define LOG2_FFT_LENGTH         SAI_FftLengthLog2(FFT_LENGTH)       // Log2 FFT length,
 
 // Declare global variables and arrays
-static SLArrayIndex_t combFilterLength;
-static SLArrayIndex_t combFilterIndex1, combFilterIndex2;
-static SLData_t combFilterSum1, combFilterSum2;
-static SLData_t *pSrc1, *pSrc2, *pSrc3, *pImagData, *pMagnitude, *pPhase, *pCombFilterStateArray1, *pCombFilterStateArray2, *pFFTCoeffs;
-static SLData_t K1, K2, K3;
 
 
 int main (
@@ -68,6 +63,11 @@ int main (
     exit (-1);
   }
 
+  SLArrayIndex_t  combFilterLength;
+  SLArrayIndex_t  combFilterIndex1, combFilterIndex2;
+  SLData_t        combFilterSum1, combFilterSum2;
+  SLData_t        K1, K2, K3;
+
   printf ("\n\n\nThis program demonstrates the impulse and frequency\n");
   printf ("response of four different arrangents of comb filter\n\n.");
 
@@ -76,15 +76,15 @@ int main (
   printf ("\nComb filter length => %d\n", combFilterLength);
   getchar ();                                                       // Clear keyboard buffer
 
-  pSrc1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pSrc2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pSrc3 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pMagnitude = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pPhase = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pCombFilterStateArray1 = SUF_VectorArrayAllocate (combFilterLength);
-  pCombFilterStateArray2 = SUF_VectorArrayAllocate (combFilterLength);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pSrc1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pSrc2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pSrc3 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pMagnitude = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pPhase = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pCombFilterStateArray1 = SUF_VectorArrayAllocate (combFilterLength);
+  SLData_t       *pCombFilterStateArray2 = SUF_VectorArrayAllocate (combFilterLength);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pSrc1) || (NULL == pSrc2) || (NULL == pSrc3) || (NULL == pImagData) || (NULL == pMagnitude) ||
       (NULL == pPhase) || (NULL == pCombFilterStateArray1) || (NULL == pCombFilterStateArray2) || (NULL == pFFTCoeffs)) {
@@ -552,5 +552,5 @@ int main (
   SUF_MemoryFree (pCombFilterStateArray2);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

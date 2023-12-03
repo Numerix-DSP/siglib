@@ -18,8 +18,6 @@ static const SLData_t SrcDataArray[] = {
   41.0, 42.0, 43.0, 44.0, 45.0, 46.0, 47.0, 48.0, 49.0, 50.0,
 };
 
-static SLData_t *pDst, *pReSizeState;
-
 
 int main (
   void)
@@ -28,8 +26,8 @@ int main (
   SLArrayIndex_t  ReSizeStateLength;
 
 // Allocate arrays
-  pDst = SUF_VectorArrayAllocate (DST_ARRAY_LENGTH);
-  pReSizeState = SUF_VectorArrayAllocate (STATE_ARRAY_LENGTH);
+  SLData_t       *pDst = SUF_VectorArrayAllocate (DST_ARRAY_LENGTH);
+  SLData_t       *pReSizeState = SUF_VectorArrayAllocate (STATE_ARRAY_LENGTH);
 
   printf ("Resize test one - short arrays\n");
 
@@ -117,5 +115,5 @@ int main (
   SUF_MemoryFree (pDst);                                            // Free memory
   SUF_MemoryFree (pReSizeState);
 
-  exit (0);
+  return (0);
 }

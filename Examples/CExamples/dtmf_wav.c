@@ -10,7 +10,6 @@
 #define DTMF_SAMPLE_LENGTH          102
 
 // Declare global variables and arrays
-static SLData_t *pData;                                             // Data array pointers
 static SLWavFileInfo_s wavFileInfo;
 
 
@@ -24,7 +23,7 @@ int main (
   SLFixData_t     KeyCodeRegistered = SIGLIB_FALSE;                 // A key code has not been registered
   FILE           *fpInputFile;
 
-  pData = SUF_VectorArrayAllocate (DTMF_SAMPLE_LENGTH);
+  SLData_t       *pData = SUF_VectorArrayAllocate (DTMF_SAMPLE_LENGTH);
 
   if ((fpInputFile = fopen ("tones.wav", "rb")) == NULL) {          // Note this file is binary
     printf ("Error opening input .WAV file\n");
@@ -73,5 +72,5 @@ int main (
 
   SUF_MemoryFree (pData);                                           // Free memory
 
-  exit (0);
+  return (0);
 }

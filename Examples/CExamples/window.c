@@ -13,13 +13,32 @@
 
 #define WINDOW_LENGTH           64
 
-static SLData_t *pWindowCoeffs, *pFFTCoeffs, *pRealData, *pImagData, *pResults;
-
 // Declare global variables and arrays
-static SLData_t *pSrc, *pDst, *pWindowCoeffs, *pFFTCoeffs, *pRealData, *pImagData, *pResults;
 
-void            prepFFT (
-  void);
+// Macro to prepare FFT results
+#define prepFFT    SDA_Lengthen (pWindowCoeffs, pRealData, WINDOW_LENGTH, FFT_LENGTH); \
+/* Perform real FFT */ \
+  SDA_Rfft (pRealData,                                              /* Pointer to real array */ \
+            pImagData,                                              /* Pointer to imaginary array */ \
+            pFFTCoeffs,                                             /* Pointer to FFT coefficients */ \
+            SIGLIB_BIT_REV_STANDARD,                                /* Bit reverse mode flag / Pointer to bit reverse address table */ \
+            FFT_LENGTH,                                             /* FFT length */ \
+            LOG2_FFT_LENGTH);                                       /* log2 FFT length */ \
+/* Calculate real power from complex */ \
+  SDA_LogMagnitude (pRealData,                                      /* Pointer to real source array */ \
+                    pImagData,                                      /* Pointer to imaginary source array */ \
+                    pResults,                                       /* Pointer to log magnitude destination array */ \
+                    FFT_LENGTH);                                    /* Dataset length */ \
+  SDA_LogMagnitude (pRealData, pImagData, pRealData, FFT_LENGTH);   /* Calc power in dB */ \
+  SDA_FftShift (pRealData, pResults, FFT_LENGTH); \
+  SDA_NegativeOffset (pResults,                                     /* Pointer to source array */ \
+                      pResults,                                     /* Pointer to destination array */ \
+                      FFT_LENGTH);                                  /* Dataset length */ \
+  SDA_Clip (pResults,                                               /* Pointer to results array */ \
+            pResults,                                               /* Pointer to results array */ \
+            SIGLIB_DB_MIN,                                          /* Clip level */ \
+            SIGLIB_CLIP_BELOW,                                      /* Clip direction */ \
+            FFT_LENGTH);                                            /* Dataset length */
 
 
 int main (
@@ -53,13 +72,13 @@ int main (
   }
 
 // Allocate memory
-  pSrc = SUF_VectorArrayAllocate (WINDOW_LENGTH);
-  pDst = SUF_VectorArrayAllocate (WINDOW_LENGTH);
-  pWindowCoeffs = SUF_VectorArrayAllocate (WINDOW_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (WINDOW_LENGTH);
+  SLData_t       *pDst = SUF_VectorArrayAllocate (WINDOW_LENGTH);
+  SLData_t       *pWindowCoeffs = SUF_VectorArrayAllocate (WINDOW_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
 
   SIF_Fft (pFFTCoeffs,                                              // Pointer to FFT coefficients
            SIGLIB_BIT_REV_STANDARD,                                 // Bit reverse mode flag / Pointer to bit reverse address table
@@ -85,7 +104,7 @@ int main (
                "lines",                                             // Graph type
                "violet",                                            // Colour
                GPC_NEW);                                            // New graph
-  prepFFT ();
+  prepFFT;
   gpc_plot_2d (h2DFreq,                                             // Graph handle
                pResults,                                            // Dataset
                FFT_LENGTH,                                          // Dataset length
@@ -115,7 +134,7 @@ int main (
                "lines",                                             // Graph type
                "blue",                                              // Colour
                GPC_ADD);                                            // New graph
-  prepFFT ();
+  prepFFT;
   gpc_plot_2d (h2DFreq,                                             // Graph handle
                pResults,                                            // Dataset
                FFT_LENGTH,                                          // Dataset length
@@ -146,7 +165,7 @@ int main (
                "lines",                                             // Graph type
                "red",                                               // Colour
                GPC_ADD);                                            // New graph
-  prepFFT ();
+  prepFFT;
   gpc_plot_2d (h2DFreq,                                             // Graph handle
                pResults,                                            // Dataset
                FFT_LENGTH,                                          // Dataset length
@@ -176,7 +195,7 @@ int main (
                "lines",                                             // Graph type
                "yellow",                                            // Colour
                GPC_ADD);                                            // New graph
-  prepFFT ();
+  prepFFT;
   gpc_plot_2d (h2DFreq,                                             // Graph handle
                pResults,                                            // Dataset
                FFT_LENGTH,                                          // Dataset length
@@ -206,7 +225,7 @@ int main (
                "lines",                                             // Graph type
                "green",                                             // Colour
                GPC_ADD);                                            // New graph
-  prepFFT ();
+  prepFFT;
   gpc_plot_2d (h2DFreq,                                             // Graph handle
                pResults,                                            // Dataset
                FFT_LENGTH,                                          // Dataset length
@@ -236,7 +255,7 @@ int main (
                "lines",                                             // Graph type
                "orange",                                            // Colour
                GPC_ADD);                                            // New graph
-  prepFFT ();
+  prepFFT;
   gpc_plot_2d (h2DFreq,                                             // Graph handle
                pResults,                                            // Dataset
                FFT_LENGTH,                                          // Dataset length
@@ -266,7 +285,7 @@ int main (
                "lines",                                             // Graph type
                "orange-red",                                        // Colour
                GPC_ADD);                                            // New graph
-  prepFFT ();
+  prepFFT;
   gpc_plot_2d (h2DFreq,                                             // Graph handle
                pResults,                                            // Dataset
                FFT_LENGTH,                                          // Dataset length
@@ -296,7 +315,7 @@ int main (
                "lines",                                             // Graph type
                "grey",                                              // Colour
                GPC_ADD);                                            // New graph
-  prepFFT ();
+  prepFFT;
   gpc_plot_2d (h2DFreq,                                             // Graph handle
                pResults,                                            // Dataset
                FFT_LENGTH,                                          // Dataset length
@@ -326,7 +345,7 @@ int main (
                "lines",                                             // Graph type
                "cyan",                                              // Colour
                GPC_ADD);                                            // New graph
-  prepFFT ();
+  prepFFT;
   gpc_plot_2d (h2DFreq,                                             // Graph handle
                pResults,                                            // Dataset
                FFT_LENGTH,                                          // Dataset length
@@ -356,7 +375,7 @@ int main (
                "lines",                                             // Graph type
                "purple",                                            // Colour
                GPC_ADD);                                            // New graph
-  prepFFT ();
+  prepFFT;
   gpc_plot_2d (h2DFreq,                                             // Graph handle
                pResults,                                            // Dataset
                FFT_LENGTH,                                          // Dataset length
@@ -378,34 +397,5 @@ int main (
   SUF_MemoryFree (pDst);
   SUF_MemoryFree (pWindowCoeffs);
 
-  exit (0);
-}
-
-
-void prepFFT (
-  void)                                                             // Macro to generate the FFT output
-{
-  SDA_Lengthen (pWindowCoeffs, pRealData, WINDOW_LENGTH, FFT_LENGTH);
-// Perform real FFT
-  SDA_Rfft (pRealData,                                              // Pointer to real array
-            pImagData,                                              // Pointer to imaginary array
-            pFFTCoeffs,                                             // Pointer to FFT coefficients
-            SIGLIB_BIT_REV_STANDARD,                                // Bit reverse mode flag / Pointer to bit reverse address table
-            FFT_LENGTH,                                             // FFT length
-            LOG2_FFT_LENGTH);                                       // log2 FFT length
-// Calculate real power from complex
-  SDA_LogMagnitude (pRealData,                                      // Pointer to real source array
-                    pImagData,                                      // Pointer to imaginary source array
-                    pResults,                                       // Pointer to log magnitude destination array
-                    FFT_LENGTH);                                    // Dataset length
-  SDA_LogMagnitude (pRealData, pImagData, pRealData, FFT_LENGTH);   // Calc power in dB
-  SDA_FftShift (pRealData, pResults, FFT_LENGTH);
-  SDA_NegativeOffset (pResults,                                     // Pointer to source array
-                      pResults,                                     // Pointer to destination array
-                      FFT_LENGTH);                                  // Dataset length
-  SDA_Clip (pResults,                                               // Pointer to results array
-            pResults,                                               // Pointer to results array
-            SIGLIB_DB_MIN,                                          // Clip level
-            SIGLIB_CLIP_BELOW,                                      // Clip direction
-            FFT_LENGTH);                                            // Dataset length
+  return (0);
 }

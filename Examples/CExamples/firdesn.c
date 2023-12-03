@@ -20,10 +20,6 @@ static SLData_t pBPFilterCoeffs[FILTER_LENGTH];
 static SLData_t pHPFilterCoeffs[FILTER_LENGTH];
 static SLData_t pHPFilterState[FILTER_LENGTH];
 
-static SLArrayIndex_t LPFilterIndex;
-static SLArrayIndex_t HPFilterIndex;
-
-static SLData_t *pSrc;
 
 
 int main (
@@ -33,7 +29,10 @@ int main (
 
   SLData_t        FilterInverseCoherentGain;
 
-  pSrc = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLArrayIndex_t  LPFilterIndex;
+  SLArrayIndex_t  HPFilterIndex;
+
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (FFT_LENGTH);
 
   if (NULL == pSrc) {
     printf ("Memory allocation error in main()\n");
@@ -76,13 +75,13 @@ int main (
 //    printf("\npLPFilterCoeffs\n");
 //    SUF_PrintArray (pLPFilterCoeffs,                                 // Filter coeffs array
 //                    FILTER_LENGTH);                                  // Filter length
-//    printf("\npHPFilterCoeffs\n");                                   
+//    printf("\npHPFilterCoeffs\n");
 //    SUF_PrintArray (pHPFilterCoeffs,                                 // Filter coeffs array
 //                    FILTER_LENGTH);                                  // Filter length
-//    printf("\npBPFilterCoeffs\n");                                   
+//    printf("\npBPFilterCoeffs\n");
 //    SUF_PrintArray (pBPFilterCoeffs,                                 // Filter coeffs array
 //                    FILTER_LENGTH);                                  // Filter length
-//                                                                     
+//
 //    SIF_FirLowPassFilter (pLPFilterCoeffs,                           // Filter coeffs array
 //                          3000. / SAMPLE_RATE_HZ,                       // Filter cut off frequency
 //                          SIGLIB_HANNING,                            // Window type
@@ -96,15 +95,15 @@ int main (
 //                           2000. / SAMPLE_RATE_HZ,                   // Filter bandwidth
 //                           SIGLIB_HANNING,                           // Window type
 //                           FILTER_LENGTH+1);                         // Filter length
-//                                                                     
-//    printf("\nFilter length = %d\n", FILTER_LENGTH+1);               
-//    printf("\npLPFilterCoeffs\n");                                   
+//
+//    printf("\nFilter length = %d\n", FILTER_LENGTH+1);
+//    printf("\npLPFilterCoeffs\n");
 //    SUF_PrintArray (pLPFilterCoeffs,                                 // Filter coeffs array
 //                    FILTER_LENGTH+1);                                // Filter length
-//    printf("\npHPFilterCoeffs\n");                                   
+//    printf("\npHPFilterCoeffs\n");
 //    SUF_PrintArray (pHPFilterCoeffs,                                 // Filter coeffs array
 //                    FILTER_LENGTH+1);                                // Filter length
-//    printf("\npBPFilterCoeffs\n");                                   
+//    printf("\npBPFilterCoeffs\n");
 //    SUF_PrintArray (pBPFilterCoeffs,                                 // Filter coeffs array
 //                    FILTER_LENGTH+1);                                // Filter length
 
@@ -252,5 +251,5 @@ int main (
 
   SUF_MemoryFree (pSrc);                                            // Free memory
 
-  exit (0);
+  return (0);
 }

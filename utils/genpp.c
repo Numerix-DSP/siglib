@@ -108,7 +108,7 @@ int main (
   fcloseall ();
   free (IPtr);                                                      // Free memory
 
-  exit (0);
+  return (0);
 }
 
 

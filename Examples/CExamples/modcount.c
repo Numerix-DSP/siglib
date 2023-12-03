@@ -79,5 +79,5 @@ int main (
   Count = SUF_ModuloDecrement (Count, 2, 7);
   printf ("|N-=2|7 = %d\n\n", Count);
 
-  exit (0);
+  return (0);
 }

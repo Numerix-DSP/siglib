@@ -67,5 +67,5 @@ int main (
   printf ("SDA_Comb results [6-10]:\n");
   SUF_PrintArray (DstArray, SAMPLE_LENGTH >> 1);
 
-  exit (0);
+  return (0);
 }

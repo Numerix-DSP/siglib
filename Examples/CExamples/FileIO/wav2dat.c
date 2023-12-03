@@ -7,7 +7,6 @@
 #include <math.h>
 #include <siglib.h>                                                 // SigLib DSP library
 
-double         *p_DataArray;
 #define SAMPLE_SIZE     128
 
 SLWavFileInfo_s wavInfo;
@@ -39,7 +38,7 @@ int main (
   printf ("Wav filename: %s\n", WavFileName);
   printf ("Dat filename: %s\n", DatFileName);
 
-  p_DataArray = SUF_VectorArrayAllocate (SAMPLE_SIZE);
+  SLData_t       *pDataArray = SUF_VectorArrayAllocate (SAMPLE_SIZE);
 
 
   if ((fpInputFile = fopen (WavFileName, "rb")) == NULL) {          // Note this file is binary
@@ -63,9 +62,9 @@ int main (
 
   SUF_DatWriteHeader (fpOutputFile, wavInfo.SampleRate);            // Write header - must be done ahead of writing data
 
-  while ((inputSampleCount = SUF_WavReadData (p_DataArray, fpInputFile, wavInfo, SAMPLE_SIZE)) != 0) {  // Successively read arrays of upto 128 samples
+  while ((inputSampleCount = SUF_WavReadData (pDataArray, fpInputFile, wavInfo, SAMPLE_SIZE)) != 0) { // Successively read arrays of upto 128 samples
     outputSampleCount += inputSampleCount;
-    sampleIndex += SUF_DatWriteData (p_DataArray, fpOutputFile, wavInfo.SampleRate, sampleIndex, inputSampleCount);
+    sampleIndex += SUF_DatWriteData (pDataArray, fpOutputFile, wavInfo.SampleRate, sampleIndex, inputSampleCount);
   }
 // Write last block of data
   printf ("Total number of samples read: %d\n", outputSampleCount);
@@ -73,7 +72,7 @@ int main (
   fclose (fpInputFile);
   fclose (fpOutputFile);
 
-  free (p_DataArray);                                               // Free memory
+  free (pDataArray);                                                // Free memory
 
-  exit (0);
+  return (0);
 }

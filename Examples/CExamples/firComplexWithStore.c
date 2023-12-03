@@ -45,8 +45,6 @@ static const SLData_t pImagFilterTaps[FILTER_LENGTH] = {
 };
 
 static SLData_t RealFilterState[FILTER_LENGTH], ImagFilterState[FILTER_LENGTH];
-static SLData_t *pRealData, *pImagData, *pResults, *pFFTCoeffs;
-static SLData_t ChirpPhase, ChirpValue;
 
 
 int main (
@@ -54,10 +52,10 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pRealData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pResults = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pRealData) || (NULL == pImagData) || (NULL == pResults) || (NULL == pFFTCoeffs)) {
     printf ("Memory allocation error in main()\n");
@@ -86,8 +84,8 @@ int main (
                            FILTER_LENGTH);                          // Filter length
 
 // Generate a broadband complex signal
-  ChirpPhase = SIGLIB_ZERO;
-  ChirpValue = SIGLIB_ZERO;
+  SLData_t        ChirpPhase = SIGLIB_ZERO;
+  SLData_t        ChirpValue = SIGLIB_ZERO;
   SDA_SignalGenerate (pRealData,                                    // Pointer to destination array
                       SIGLIB_CHIRP_LIN,                             // Signal type - Chirp with linear frequency ramp
                       0.45,                                         // Signal peak level
@@ -232,5 +230,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

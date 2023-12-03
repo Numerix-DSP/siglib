@@ -12,8 +12,6 @@
 #define NUMBER_OF_CORRELATIONS  512
 
 // Declare global variables and arrays
-static SLData_t *pSrc1, *pSrc2, *dest;
-static SLData_t SinePhase;
 
 
 int main (
@@ -33,11 +31,11 @@ int main (
     exit (-1);
   }
 
-  pSrc1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pSrc2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  dest = SUF_VectorArrayAllocate (NUMBER_OF_CORRELATIONS);
+  SLData_t       *pSrc1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pSrc2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *dest = SUF_VectorArrayAllocate (NUMBER_OF_CORRELATIONS);
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
 
 // Generate a noisy sinewave
   SDA_SignalGenerate (pSrc1,                                        // Pointer to destination array
@@ -48,7 +46,7 @@ int main (
                       SIGLIB_HALF,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -73,7 +71,7 @@ int main (
                       -0.3,                                         // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -160,5 +158,5 @@ int main (
   SUF_MemoryFree (pSrc2);
   SUF_MemoryFree (dest);
 
-  exit (0);
+  return (0);
 }

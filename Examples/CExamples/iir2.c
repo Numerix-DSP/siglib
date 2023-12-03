@@ -21,8 +21,6 @@ static const SLData_t pIIRCoeffs[IIR_FILTER_STAGES * SIGLIB_IIR_COEFFS_PER_BIQUA
   9.42380353047E-0002, -5.53439298689E-0002, 9.42380353047E-0002, -1.59154638820E+0000, 9.56063978767E-0001
 };
 
-static SLData_t *pRealData, *pImagData, *pFFTCoeffs, *pResults, *pFilterState;
-
 
 int main (
   void)
@@ -30,11 +28,11 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
 // Allocate memory
-  pFilterState = SUF_IirStateArrayAllocate (IIR_FILTER_STAGES);
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (PLOT_LENGTH);
+  SLData_t       *pFilterState = SUF_IirStateArrayAllocate (IIR_FILTER_STAGES);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (PLOT_LENGTH);
 
   if ((NULL == pFilterState) || (NULL == pRealData) || (NULL == pImagData) || (NULL == pFFTCoeffs) || (NULL == pResults)) {
 
@@ -131,5 +129,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

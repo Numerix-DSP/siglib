@@ -14,8 +14,6 @@
 #define LOG2_FFT_LENGTH         SAI_FftLengthLog2(FFT_LENGTH)       // Log2 FFT length,
 
 // Declare global variables and arrays
-static SLData_t *pRealData, *pImagData, *pResults, *pSrc1, *pSrc2, *pFFTCoeffs;
-static SLData_t Fc, onePoleCoefficient, OnePoleHighPassCoeff, OnePoleFilterState, OnePoleHighPassFilterState;
 
 
 int main (
@@ -23,6 +21,8 @@ int main (
   char **argv)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
+
+  SLData_t        Fc, OnePoleFilterState, OnePoleHighPassFilterState;
 
   if (argc != 2) {
     printf ("Usage: OnePole <Fc>\n");
@@ -34,21 +34,21 @@ int main (
     Fc = (SLData_t) atof (argv[1]);
   }
 
-  onePoleCoefficient = SDS_OnePoleCutOffFrequencyToFilterCoeff (Fc, // Cut-off frequency (Hz)
-                                                                SIGLIB_ONE);  // Sample rate
+  SLData_t        onePoleCoefficient = SDS_OnePoleCutOffFrequencyToFilterCoeff (Fc, // Cut-off frequency (Hz)
+                                                                                SIGLIB_ONE);  // Sample rate
   printf ("One-pole filter coefficient: %lf\n", onePoleCoefficient);
 
-  OnePoleHighPassCoeff = SDS_OnePoleHighPassCutOffFrequencyToFilterCoeff (Fc, // Cut-off frequency (Hz)
-                                                                          SIGLIB_ONE);  // Sample rate
+  SLData_t        OnePoleHighPassCoeff = SDS_OnePoleHighPassCutOffFrequencyToFilterCoeff (Fc, // Cut-off frequency (Hz)
+                                                                                          SIGLIB_ONE);  // Sample rate
   printf ("One-pole high pass filter coefficient: %lf\n", OnePoleHighPassCoeff);
 
 // Allocate memory
-  pSrc1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pSrc2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (FFT_LENGTH);                  // RMS result array
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pSrc1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pSrc2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (FFT_LENGTH);  // RMS result array
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
 // Initialise FFT
   SIF_Fft (pFFTCoeffs,                                              // Pointer to FFT coefficients
@@ -220,5 +220,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

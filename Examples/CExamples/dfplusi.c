@@ -38,5 +38,5 @@ int main (
     printf ("Z[%d] = %le + j%le\n\n", i, pZPlaneZeros[i].real, pZPlaneZeros[i].imag);
   }
 
-  exit (0);
+  return (0);
 }

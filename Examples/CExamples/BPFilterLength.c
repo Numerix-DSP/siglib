@@ -16,5 +16,5 @@ int main (
   printf ("est (4k, 1k, 10, 20) = %d\n\n", SUF_EstimateBPFirFilterLength (4000.0, 1000.0, 10, 20));
   printf ("est (10k, 1k, 8, 12) = %d\n\n", SUF_EstimateBPFirFilterLength (10000.0, 1000.0, 8, 12));
 
-  exit (0);
+  return (0);
 }

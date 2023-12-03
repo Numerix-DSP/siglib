@@ -60,7 +60,6 @@ static SLData_t source_data[] = {
 };
 #endif
 
-static SLData_t *pDctResults, *pZZSResults, *pQuantizeResults;
 static SLImageData_t pImageArray[64];                               // Used to plot the results
 
 
@@ -69,9 +68,9 @@ int main (
 {
   h_GPC_Plot     *hImage;                                           // Declare image object
 
-  pDctResults = SUF_VectorArrayAllocate (IMAGE_SIZE);
-  pZZSResults = SUF_VectorArrayAllocate (IMAGE_SIZE);
-  pQuantizeResults = SUF_VectorArrayAllocate (IMAGE_SIZE);
+  SLData_t       *pDctResults = SUF_VectorArrayAllocate (IMAGE_SIZE);
+  SLData_t       *pZZSResults = SUF_VectorArrayAllocate (IMAGE_SIZE);
+  SLData_t       *pQuantizeResults = SUF_VectorArrayAllocate (IMAGE_SIZE);
 
   SIF_Dct8x8 ();
 
@@ -164,5 +163,5 @@ int main (
   SUF_MemoryFree (pZZSResults);
   SUF_MemoryFree (pQuantizeResults);
 
-  exit (0);
+  return (0);
 }

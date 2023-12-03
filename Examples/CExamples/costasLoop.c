@@ -28,18 +28,6 @@
 #define COSTAS_LP_VCO_SINE_TABLE_SIZE   1024                        // Look up table for fast sine calculation
 
 // Declare global variables and arrays
-static SLData_t *pData;
-static SLData_t *pCostasLpLPFCoeffs, *pCostasLpLPF1State, *pCostasLpLPF2State;  // Costas loop loop filter coefficient pointer
-
-static SLArrayIndex_t CostasLpLPF1Index;                            // Costas loop inphase LPF filter index
-static SLArrayIndex_t CostasLpLPF2Index;                            // Costas loop quadrature phase LPF filter index
-static SLData_t CostasLpState;                                      // Costas loop feedback state for next iteration
-
-static SLData_t CostasLpLoopFilterState;                            // Costas loop loop filter feedback coeff
-static SLData_t *pCostasLpVCOLookUpTable;                           // VCO cosine look-up-table pointer
-static SLData_t CostasLpVCOPhase;                                   // Costas loop VCO phase
-
-static SLData_t SinePhase;
 
 
 int main (
@@ -49,13 +37,22 @@ int main (
 
   SLData_t        TimeIndex = SIGLIB_ZERO;
 
+  SLArrayIndex_t  CostasLpLPF1Index;                                // Costas loop inphase LPF filter index
+  SLArrayIndex_t  CostasLpLPF2Index;                                // Costas loop quadrature phase LPF filter index
+  SLData_t        CostasLpState;                                    // Costas loop feedback state for next iteration
+
+  SLData_t        CostasLpLoopFilterState;                          // Costas loop loop filter feedback coeff
+  SLData_t        CostasLpVCOPhase;                                 // Costas loop VCO phase
+
+  SLData_t        SinePhase;
+
   printf ("\n\nSigLib Costas Loop Example\n");
 
-  pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pCostasLpLPFCoeffs = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);
-  pCostasLpLPF1State = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);
-  pCostasLpLPF2State = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);
-  pCostasLpVCOLookUpTable = SUF_CostasLoopVCOArrayAllocate (COSTAS_LP_VCO_SINE_TABLE_SIZE);
+  SLData_t       *pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pCostasLpLPFCoeffs = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);  // Costas loop loop filter coefficient pointer
+  SLData_t       *pCostasLpLPF1State = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);
+  SLData_t       *pCostasLpLPF2State = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);
+  SLData_t       *pCostasLpVCOLookUpTable = SUF_CostasLoopVCOArrayAllocate (COSTAS_LP_VCO_SINE_TABLE_SIZE); // VCO cosine look-up-table pointer
 
   SIF_CostasLoop (&CostasLpVCOPhase,                                // VCO phase
                   pCostasLpVCOLookUpTable,                          // VCO look up table
@@ -172,5 +169,5 @@ int main (
   SUF_MemoryFree (pCostasLpLPF2State);
   SUF_MemoryFree (pCostasLpVCOLookUpTable);
 
-  exit (0);
+  return (0);
 }

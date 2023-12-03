@@ -40,8 +40,8 @@
 
 #define SYMBOL_LENGTH           ((SLFixData_t)(SAMPLE_RATE_HZ / SYMBOL_RATE))
 
-#define GAUS_NOISE_VARIANCE     SIGLIB_FOUR
-#define GAUS_NOISE_OFFSET       SIGLIB_ZERO
+#define GAUSSIAN_NOISE_VARIANCE     SIGLIB_FOUR
+#define GAUSSIAN_NOISE_OFFSET       SIGLIB_ZERO
 
 #define ELG_EARLY_GATE_DELAY_LENGTH (SYMBOL_LENGTH >> 1)
 #define ELG_LOOP_FILTER_LENGTH      ((5 * SYMBOL_LENGTH) + 1)
@@ -54,44 +54,6 @@
 #define ELG_SYNCH_DELAY_ARRAY_LENGTH    (10 * SYMBOL_LENGTH)        // Length of array for accounting for delay through timing detector
 
 // Declare global variables and arrays
-#if SQUARE_PULSE
-static SLData_t ELGMatchedFilterSum;                                // Sum variable for matched comb filter
-#else
-static SLData_t *pELGMatchedFilterSignal;                           // One complete symbol used to create matched filter
-static SLData_t *pELGMatchedFilterCoeffs;
-#endif
-static SLData_t *pELGMatchedFilterState;
-static SLArrayIndex_t ELGMatchedFilterIndex;
-
-static SLData_t *pELGEarlyGateDelay;
-static SLArrayIndex_t ELGEarlyGateDelayIndex;
-
-static SLData_t *pELGLoopFilterCoeffs;
-static SLData_t *pELGLoopFilterState;
-static SLArrayIndex_t ELGLoopFilterIndex;
-static SLFixData_t ELGPulseDetectorThresholdFlag;                   // Flag to indicate signal level higher than noise level
-static SLData_t ELGZeroCrossingPreviousSample;                      // Previous sample used for zero crossing detector
-static SLArrayIndex_t ELGTriggerLatency;                            // Estimate of the latency through the ELG TED
-static SLArrayIndex_t ELGTriggerCount;                              // Variables for trigger reverberator
-static SLFixData_t ELGTriggerDetectedFlag;
-static SLFixData_t ELGTriggerUpdatedFlag;
-
-static SLData_t *pELGOutputSynchDelay;                              // Output synchronization delay
-static SLArrayIndex_t ELGOutputSynchDelayIndex;
-
-#if (ELG_DEBUG && PROCESS_ARRAY)
-static SLData_t loopFilterOutput[SAMPLE_LENGTH];                    // Arrays for storing output of debug version of early late gate synchronizer
-static SLData_t matchedFilterOutput[SAMPLE_LENGTH];
-#endif
-
-
-// Declare global variables and arrays
-static SLData_t *pSrc, *pTriggerOutput, *pDelayedSrc;               // Dataset pointers
-
-static SLData_t srcPhase, PnsCurrentValue;
-#if ADD_NOISE
-static SLData_t gaussPhase, gaussValue;
-#endif
 
 
 int main (
@@ -101,15 +63,31 @@ int main (
 
   SLError_t       SigLibErrorCode;
 
-  pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pDelayedSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pTriggerOutput = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  static SLArrayIndex_t ELGMatchedFilterIndex;
+  static SLArrayIndex_t ELGEarlyGateDelayIndex;
+  static SLArrayIndex_t ELGLoopFilterIndex;
+  static SLFixData_t ELGPulseDetectorThresholdFlag;                 // Flag to indicate signal level higher than noise level
+  static SLData_t ELGZeroCrossingPreviousSample;                    // Previous sample used for zero crossing detector
+  static SLArrayIndex_t ELGTriggerLatency;                          // Estimate of the latency through the ELG TED
+  static SLArrayIndex_t ELGTriggerCount;                            // Variables for trigger reverberator
+  static SLFixData_t ELGTriggerDetectedFlag;
+  static SLFixData_t ELGTriggerUpdatedFlag;
+  static SLArrayIndex_t ELGOutputSynchDelayIndex;
 
-  pELGMatchedFilterState = SUF_VectorArrayAllocate (SYMBOL_LENGTH);
-  pELGEarlyGateDelay = SUF_VectorArrayAllocate (ELG_EARLY_GATE_DELAY_LENGTH);
-  pELGLoopFilterCoeffs = SUF_VectorArrayAllocate (ELG_LOOP_FILTER_LENGTH);
-  pELGLoopFilterState = SUF_VectorArrayAllocate (ELG_LOOP_FILTER_LENGTH);
-  pELGOutputSynchDelay = SUF_VectorArrayAllocate (ELG_SYNCH_DELAY_ARRAY_LENGTH);
+#if (ELG_DEBUG && PROCESS_ARRAY)
+  static SLData_t loopFilterOutput[SAMPLE_LENGTH];                  // Arrays for storing output of debug version of early late gate synchronizer
+  static SLData_t matchedFilterOutput[SAMPLE_LENGTH];
+#endif
+
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pDelayedSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pTriggerOutput = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+
+  SLData_t       *pELGMatchedFilterState = SUF_VectorArrayAllocate (SYMBOL_LENGTH);
+  SLData_t       *pELGEarlyGateDelay = SUF_VectorArrayAllocate (ELG_EARLY_GATE_DELAY_LENGTH);
+  SLData_t       *pELGLoopFilterCoeffs = SUF_VectorArrayAllocate (ELG_LOOP_FILTER_LENGTH);
+  SLData_t       *pELGLoopFilterState = SUF_VectorArrayAllocate (ELG_LOOP_FILTER_LENGTH);
+  SLData_t       *pELGOutputSynchDelay = SUF_VectorArrayAllocate (ELG_SYNCH_DELAY_ARRAY_LENGTH);  // Output synchronization delay
 
 
   if ((NULL == pSrc) || (NULL == pDelayedSrc) || (NULL == pTriggerOutput) || (NULL == pELGMatchedFilterState) ||
@@ -120,9 +98,10 @@ int main (
   }
 
 #if SQUARE_PULSE
+  static SLData_t ELGMatchedFilterSum;                              // Sum variable for matched comb filter
 #else
-  pELGMatchedFilterSignal = SUF_VectorArrayAllocate (SYMBOL_LENGTH);  // One complete symbol used to create matched filter
-  pELGMatchedFilterCoeffs = SUF_VectorArrayAllocate (SYMBOL_LENGTH);
+  SLData_t       *pELGMatchedFilterSignal = SUF_VectorArrayAllocate (SYMBOL_LENGTH);  // One complete symbol used to create matched filter
+  SLData_t       *pELGMatchedFilterCoeffs = SUF_VectorArrayAllocate (SYMBOL_LENGTH);
   if ((NULL == pELGMatchedFilterSignal) || (NULL == pELGMatchedFilterCoeffs)) {
 
     printf ("Memory allocation failure\n");
@@ -213,7 +192,8 @@ int main (
   printf ("\nLoop Filter Coefficients\nPlease hit <Carriage Return> to continue . . .");
   getchar ();
 
-  srcPhase = SIGLIB_ZERO;
+  SLData_t        PnsPhase = SIGLIB_ZERO;
+  SLData_t        PnsCurrentValue = SIGLIB_ZERO;
 // Clear the destination array so that we can generate a time offset
   SDA_Clear (pSrc,                                                  // Pointer to destination array
              SAMPLE_LENGTH);                                        // Dataset length
@@ -228,7 +208,7 @@ int main (
                       SIGLIB_ZERO,                                  // Signal minimum level
                       SIGLIB_TWO,                                   // Number of discrete levels in PN sequence
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &srcPhase,                                    // PRN phase - used for next iteration
+                      &PnsPhase,                                    // PRN phase - used for next iteration
                       &PnsCurrentValue,                             // PRN current value - used for next iteration
                       SAMPLE_LENGTH - START_DELAY);                 // Output dataset length
 #else
@@ -241,7 +221,7 @@ int main (
                       SIGLIB_MINUS_ONE,                             // Signal minimum level
                       SIGLIB_TWO,                                   // Number of discrete levels in PN sequence
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &srcPhase,                                    // PRN phase - used for next iteration
+                      &PnsPhase,                                    // PRN phase - used for next iteration
                       &PnsCurrentValue,                             // PRN current value - used for next iteration
                       SAMPLE_LENGTH - START_DELAY);                 // Output dataset length
 #else
@@ -253,7 +233,7 @@ int main (
                       SIGLIB_MINUS_ONE,                             // Signal minimum level
                       SIGLIB_FOUR,                                  // Number of discrete levels in PN sequence
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &srcPhase,                                    // PRN phase - used for next iteration
+                      &PnsPhase,                                    // PRN phase - used for next iteration
                       &PnsCurrentValue,                             // PRN current value - used for next iteration
                       SAMPLE_LENGTH - START_DELAY);                 // Output dataset length
 #endif
@@ -267,21 +247,21 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_HALF,                                  // Duty cycle
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &srcPhase,                                    // Signal phase - maintained across array boundaries
+                      &PnsPhase,                                    // Signal phase - maintained across array boundaries
                       &PnsCurrentValue,                             // Unused
                       SAMPLE_LENGTH - START_DELAY);                 // Output dataset length
 #endif
 
 #if ADD_NOISE
-  gaussPhase = SIGLIB_ZERO;
-  gaussValue = SIGLIB_ZERO;
+  SLData_t        gaussPhase = SIGLIB_ZERO;
+  SLData_t        gaussValue = SIGLIB_ZERO;
   SDA_SignalGenerate (pSrc + START_DELAY,                           // Pointer to destination array
                       SIGLIB_GAUSSIAN_NOISE,                        // Signal type - Gaussian noise
                       SIGLIB_ZERO,                                  // Signal peak level - Unused
                       SIGLIB_ADD,                                   // Fill (overwrite) or add to existing array contents
                       SIGLIB_ZERO,                                  // Signal frequency - Unused
-                      GAUS_NOISE_OFFSET,                            // D.C. Offset
-                      GAUS_NOISE_VARIANCE,                          // Gaussian noise variance
+                      GAUSSIAN_NOISE_OFFSET,                        // D.C. Offset
+                      GAUSSIAN_NOISE_VARIANCE,                      // Gaussian noise variance
                       SIGLIB_ZERO,                                  // Signal end value - Unused
                       &gaussPhase,                                  // Pointer to gaussian signal phase - should be initialised to zero
                       &gaussValue,                                  // Gaussian signal second sample - should be initialised to zero
@@ -518,5 +498,5 @@ int main (
   getchar ();                                                       // Wait for <Carriage Return>
   gpc_close (h2DPlot);
 
-  exit (0);
+  return (0);
 }

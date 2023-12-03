@@ -89,5 +89,5 @@ int main (
     printf ("Roots = %lf + j%lf, %lf + j%lf\n\n", CRoot1.real, CRoot1.imag, CRoot2.real, CRoot2.imag);
   }
 
-  exit (0);
+  return (0);
 }

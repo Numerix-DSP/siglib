@@ -270,16 +270,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_MeanSquareError (
 
   for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)                    // Select between array index or pointer access modes
-    MSE += pSrc1[i] - pSrc2[i];
+    SLData_t        tmp = pSrc1[i] - pSrc2[i];
 #else
-    MSE += *pSrc1++ - *pSrc2++;
+    SLData_t        tmp = *pSrc1++ - *pSrc2++;
 #endif
+    MSE += tmp * tmp;
   }
-
-  MSE *= MSE;                                                       // Claculate the mean square
-  MSE *= InverseArrayLength;
+  MSE *= InverseArrayLength;                                        // Claculate the mean
   return (MSE);
-
 }                                                                   // End of SDA_MeanSquareError()
 
 

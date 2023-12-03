@@ -18,16 +18,13 @@
 char            TxString[] = "Hello World - abcdefghijklmnopqrstuvwxyz0123456789ABCDEFG";
 char            RxString[80];
 
-static SLFixData_t *pDifferentialEncoderMap;
-static SLFixData_t *pDifferentialDecoderMap;
-
 
 int main (
   )
 {
 
-  pDifferentialEncoderMap = SUF_DifferentialEncoderArrayAllocate (BITS_PER_SYMBOL);
-  pDifferentialDecoderMap = SUF_DifferentialEncoderArrayAllocate (BITS_PER_SYMBOL);
+  SLFixData_t    *pDifferentialEncoderMap = SUF_DifferentialEncoderArrayAllocate (BITS_PER_SYMBOL);
+  SLFixData_t    *pDifferentialDecoderMap = SUF_DifferentialEncoderArrayAllocate (BITS_PER_SYMBOL);
 
   SIF_DifferentialEncoder (pDifferentialEncoderMap,                 // Differential encoder LUT
                            pDifferentialDecoderMap,                 // Differential decoder LUT

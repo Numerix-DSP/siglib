@@ -24,10 +24,6 @@
 #define FILTER_COEFF_ARRAY_LENGTH   (IIR_FILTER_STAGES * SIGLIB_IIR_COEFFS_PER_BIQUAD)  // Number of filter coefficients
 
 // Declare global variables and arrays
-#if PLOT_RESULTS
-static SLData_t *pFilterState, *pIIRCoeffs;
-static SLData_t *pSrc, *pRealData, *pImagData, *pResults, *pFFTCoeffs;
-#endif
 
 
 int main (
@@ -41,13 +37,13 @@ int main (
 
 #if PLOT_RESULTS
 // Allocate memory
-  pIIRCoeffs = SUF_IirCoefficientAllocate (IIR_FILTER_STAGES);
-  pFilterState = SUF_IirStateArrayAllocate (IIR_FILTER_STAGES);
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (PLOT_LENGTH);
-  pSrc = SUF_VectorArrayAllocate (IMPULSE_RESPONSE_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pIIRCoeffs = SUF_IirCoefficientAllocate (IIR_FILTER_STAGES);
+  SLData_t       *pFilterState = SUF_IirStateArrayAllocate (IIR_FILTER_STAGES);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (PLOT_LENGTH);
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (IMPULSE_RESPONSE_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pIIRCoeffs) || (NULL == pRealData) || (NULL == pImagData) || (NULL == pResults) || (NULL == pSrc) || (NULL == pFFTCoeffs)) {
 
@@ -154,5 +150,5 @@ int main (
   SUF_MemoryFree (pFFTCoeffs);
 #endif
 
-  exit (0);
+  return (0);
 }

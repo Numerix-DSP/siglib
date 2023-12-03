@@ -53,5 +53,5 @@ int main (
     printf ("Dst[%d] = %lf\n", i, Dst[i]);
   }
 
-  exit (0);
+  return (0);
 }

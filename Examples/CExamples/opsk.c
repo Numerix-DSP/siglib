@@ -53,8 +53,8 @@
 #define RX_STARTUP_DELAY                4                           // Rxr startup delay (# symbols) to allow correct synchronization with transmitter
 #endif
 
-#define GAUS_NOISE_VARIANCE             SIGLIB_ZERO                 // Injected noise parameters
-#define GAUS_NOISE_OFFSET               SIGLIB_ZERO
+#define GAUSSIAN_NOISE_VARIANCE             SIGLIB_ZERO             // Injected noise parameters
+#define GAUSSIAN_NOISE_OFFSET               SIGLIB_ZERO
 
 
             // Derived application definitions
@@ -72,19 +72,11 @@
 static const char TxString[] = "Hello World - abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 static char     RxString[80];
 
-
-static SLData_t *pCarrierTable;                                     // Overlapped cosine + sine look-up table
-
                                                         // Modem parameters and variables
-static SLData_t TxCarrierPhase;
-static SLData_t RxCarrierPhase;
+static SLData_t txCarrierPhase;
+static SLData_t rxCarrierPhase;
 static SLArrayIndex_t TxSampleClock, RxSampleClock;                 // Used to keep track of the samples and symbols
 static SLComplexRect_s TxMagn, RxMagn;                              // Used to calculate the signal magnitude
-
-#if (DIFFERENTIAL_ENCODING_ENABLE)
-static SLFixData_t *pDifferentialEncoderMap;                        // Differential encoding maps
-static SLFixData_t *pDifferentialDecoderMap;
-#endif
 
                             // Debug arrays
 #if (DISPLAY_EYE_DIAGRAM || DISPLAY_CONSTELLATION)
@@ -147,10 +139,10 @@ int main (
   int             FirstEyeDiagramFlag = 1;
 #endif
 
-  pCarrierTable = SUF_OPSKCarrierArrayAllocate (CARRIER_SINE_TABLE_SIZE); // Allocate arrays
+  SLData_t       *pCarrierTable = SUF_OPSKCarrierArrayAllocate (CARRIER_SINE_TABLE_SIZE); // Overlapped cosine + sine look-up table
 #if (DIFFERENTIAL_ENCODING_ENABLE)
-  pDifferentialEncoderMap = SUF_DifferentialEncoderArrayAllocate (SIGLIB_OPSK_BITS_PER_SYMBOL);
-  pDifferentialDecoderMap = SUF_DifferentialEncoderArrayAllocate (SIGLIB_OPSK_BITS_PER_SYMBOL);
+  SLFixData_t    *pDifferentialEncoderMap = SUF_DifferentialEncoderArrayAllocate (SIGLIB_OPSK_BITS_PER_SYMBOL);
+  SLFixData_t    *pDifferentialDecoderMap = SUF_DifferentialEncoderArrayAllocate (SIGLIB_OPSK_BITS_PER_SYMBOL);
 #endif
 
 #if (DIFFERENTIAL_ENCODING_ENABLE)
@@ -211,7 +203,7 @@ int main (
   SIF_OpskModulate (pCarrierTable,                                  // Carrier table pointer
                     CARRIER_TABLE_FREQ / SAMPLE_RATE,               // Carrier phase increment per sample (radians / 2π)
                     CARRIER_SINE_TABLE_SIZE,                        // Carrier sine table size
-                    &TxCarrierPhase,                                // Carrier phase pointer
+                    &txCarrierPhase,                                // Carrier phase pointer
                     &TxSampleClock,                                 // Sample clock pointer
                     &TxMagn,                                        // Magnitude pointer
                     TxIRRCState,                                    // RRCF Tx I delay pointer
@@ -227,7 +219,7 @@ int main (
   SIF_OpskDemodulate (pCarrierTable,                                // Carrier table pointer
                       CARRIER_TABLE_FREQ / SAMPLE_RATE,             // Carrier phase increment per sample (radians / 2π)
                       CARRIER_SINE_TABLE_SIZE,                      // Carrier sine table size
-                      &RxCarrierPhase,                              // Carrier phase pointer
+                      &rxCarrierPhase,                              // Carrier phase pointer
                       &RxSampleClock,                               // Sample clock pointer
                       &TxMagn,                                      // Magnitude pointer
                       RxIRRCState,                                  // RRCF Rx I delay pointer
@@ -312,7 +304,7 @@ int main (
                         ModulatedSignal + (i * SYMBOL_LENGTH),      // Destination array
                         pCarrierTable,                              // Carrier table pointer
                         CARRIER_SINE_TABLE_SIZE,                    // Carrier sine table size
-                        &TxCarrierPhase,                            // Carrier phase pointer
+                        &txCarrierPhase,                            // Carrier phase pointer
                         &TxSampleClock,                             // Sample clock pointer
                         &TxMagn,                                    // Magnitude pointer
                         CARRIER_TABLE_INCREMENT,                    // Carrier table increment
@@ -362,8 +354,8 @@ int main (
                         SIGLIB_ZERO,                                // Signal peak level - Unused
                         SIGLIB_ADD,                                 // Fill (overwrite) or add to existing array contents
                         SIGLIB_ZERO,                                // Signal frequency - Unused
-                        GAUS_NOISE_OFFSET,                          // D.C. Offset
-                        GAUS_NOISE_VARIANCE,                        // Gaussian noise variance
+                        GAUSSIAN_NOISE_OFFSET,                      // D.C. Offset
+                        GAUSSIAN_NOISE_VARIANCE,                    // Gaussian noise variance
                         SIGLIB_ZERO,                                // Signal end value - Unused
                         &GaussianNoisePhase,                        // Pointer to gaussian signal phase - should be initialised to zero
                         &GaussianNoiseValue,                        // Gaussian signal second sample - should be initialised to zero
@@ -376,7 +368,7 @@ int main (
       RxTriBit = SDA_OpskDemodulateDebug (ModulatedSignal + (i * SYMBOL_LENGTH),  // Source array
                                           pCarrierTable,            // Carrier table pointer
                                           CARRIER_SINE_TABLE_SIZE,  // Carrier sine table size
-                                          &RxCarrierPhase,          // Carrier phase pointer
+                                          &rxCarrierPhase,          // Carrier phase pointer
                                           &RxSampleClock,           // Sample clock pointer
                                           &RxMagn,                  // Magnitude pointer
                                           RxDemodErrorArray,        // Error calculation array
@@ -397,7 +389,7 @@ int main (
       RxTriBit = SDA_OpskDemodulate (ModulatedSignal + (i * SYMBOL_LENGTH), // Source array
                                      pCarrierTable,                 // Carrier table pointer
                                      CARRIER_SINE_TABLE_SIZE,       // Carrier sine table size
-                                     &RxCarrierPhase,               // Carrier phase pointer
+                                     &rxCarrierPhase,               // Carrier phase pointer
                                      &RxSampleClock,                // Sample clock pointer
                                      &RxMagn,                       // Magnitude pointer
                                      RxDemodErrorArray,             // Error calculation array
@@ -541,5 +533,5 @@ int main (
   gpc_close (hConstellationDiagram);
 #endif
 
-  exit (0);
+  return (0);
 }

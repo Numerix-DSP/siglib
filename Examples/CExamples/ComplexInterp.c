@@ -163,5 +163,5 @@ int main (
   getchar ();                                                       // Wait for <Carriage Return>
   gpc_close (hXYGraph);
 
-  exit (0);
+  return (0);
 }

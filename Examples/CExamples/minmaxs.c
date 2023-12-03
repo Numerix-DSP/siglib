@@ -15,15 +15,13 @@ static const SLData_t Data1Imag[] = { -0.0, -1.0, -2.0, -3.0, -4.0, -5.0, -6.0, 
 static const SLData_t Data2Real[] = { 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0, 0.0 };
 static const SLData_t Data2Imag[] = { -7.0, -6.0, -5.0, -4.0, -3.0, -2.0, -1.0, -0.0 };
 
-static SLData_t *ResultReal, *ResultImag;
-
 
 int main (
   void)
 {
 // Allocate memory
-  ResultReal = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  ResultImag = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *ResultReal = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *ResultImag = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   printf ("Input Array\n");
   SUF_PrintArray (Data1Real, SAMPLE_LENGTH);
@@ -77,5 +75,5 @@ int main (
   SUF_MemoryFree (ResultReal);                                      // Free memory
   SUF_MemoryFree (ResultImag);
 
-  exit (0);
+  return (0);
 }

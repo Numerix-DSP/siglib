@@ -15,8 +15,6 @@
 #define FILTER_FREQ         0.005
 
 // Declare global variables and arrays
-static SLData_t *pRealData, *pImagData, *pMagnitude, *pPhase, *pGoertzelDelay, *pFFTCoeffs;
-static SLData_t GoertzelCoeff;
 
 
 int main (
@@ -36,12 +34,12 @@ int main (
     exit (-1);
   }
 
-  pRealData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pMagnitude = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pPhase = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pGoertzelDelay = SUF_VectorArrayAllocate (SIGLIB_GOERTZEL_DELAY_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pMagnitude = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pPhase = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pGoertzelDelay = SUF_VectorArrayAllocate (SIGLIB_GOERTZEL_DELAY_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
 // Initialise FFT
   SIF_Fft (pFFTCoeffs,                                              // Pointer to FFT coefficients
@@ -60,9 +58,9 @@ int main (
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
-  GoertzelCoeff = SIF_GoertzelIirFilter (pGoertzelDelay,            // Pointer to state array
-                                         FILTER_FREQ,               // Filter frequency
-                                         SAMPLE_LENGTH);            // Filter length
+  SLData_t        GoertzelCoeff = SIF_GoertzelIirFilter (pGoertzelDelay,  // Pointer to state array
+                                                         FILTER_FREQ, // Filter frequency
+                                                         SAMPLE_LENGTH);  // Filter length
 
   SDA_GoertzelIirFilter (pRealData,                                 // Pointer to source array
                          pRealData,                                 // Pointer to destination array
@@ -131,5 +129,5 @@ int main (
   SUF_MemoryFree (pGoertzelDelay);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

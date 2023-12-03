@@ -10,17 +10,15 @@
 #define LOG4_FFT_LENGTH SAI_FftLengthLog4(FFT_LENGTH)               // Log4 FFT length
 
 // Declare global variables and arrays
-static SLData_t *pRealData, *pImagData, *pFFTCoeffs;
-static SLArrayIndex_t *pFFTBitReverseTable;
 
 
 int main (
   void)
 {
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);                 // Allocate memory
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTBitReverseTable = SUF_IndexArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate4 (FFT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH); // Allocate memory
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLArrayIndex_t *pFFTBitReverseTable = SUF_IndexArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate4 (FFT_LENGTH);
 
   if ((NULL == pRealData) || (NULL == pImagData) || (NULL == pFFTCoeffs) || (NULL == pFFTBitReverseTable)) {
     printf ("\n\nMemory allocation failed\n\n");
@@ -116,5 +114,5 @@ int main (
   SUF_MemoryFree (pFFTBitReverseTable);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

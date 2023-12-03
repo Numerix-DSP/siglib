@@ -56,5 +56,5 @@ int main (
     printf ("Leak value = %lf, Output value = %lf\n", LeakOutput, State);
   }
 
-  exit (0);
+  return (0);
 }

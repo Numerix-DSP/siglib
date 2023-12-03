@@ -39,9 +39,6 @@ static const SLData_t Src2[] = {                                    // Source da
   0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
 };
 
-static SLData_t *pRealData, *pImagData, *pRealCoeffs, *pImagCoeffs, *pFFTCoeffs, *pResults;
-static SLData_t *pRealSrc1, *pImagSrc1, *pRealSrc2, *pImagSrc2;
-
 
 int main (
   void)
@@ -49,16 +46,16 @@ int main (
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
 // Allocate memory
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pRealCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pRealSrc1 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagSrc1 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pRealSrc2 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagSrc2 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (RESULT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pRealCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pRealSrc1 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagSrc1 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pRealSrc2 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagSrc2 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (RESULT_LENGTH);
 
 
   h2DPlot =                                                         // Initialize plot
@@ -404,5 +401,5 @@ int main (
   getchar ();                                                       // Wait for <Carriage Return>
   gpc_close (h2DPlot);
 
-  exit (0);
+  return (0);
 }

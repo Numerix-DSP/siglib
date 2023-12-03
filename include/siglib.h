@@ -1,7 +1,7 @@
 
 /**************************************************************************
 File Name               : siglib.h      | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.53         |
+Siglib Library Version  : 10.55         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 13/09/1992
 Options   :                             | Latest Update : 06/06/2023
@@ -44,7 +44,7 @@ Update history:
 #ifndef _HP_VEE                                                     // The following functionality is not supported by VEE
 
 #define SIGLIB                          1                           // Indicates SigLib is being used
-#define SIGLIB_VERSION                  10.54                       // Indicates SigLib version being used
+#define SIGLIB_VERSION                  10.55                       // Indicates SigLib version being used
 #ifndef SIGLIB_ENABLE_DEBUG_LOGGING
 #define SIGLIB_ENABLE_DEBUG_LOGGING     0                           // Set to 1 to enable SUF_Debugfprintf functions in some SigLib functions
 #endif
@@ -7453,6 +7453,11 @@ extern          "C" {
   const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to source matrix
   SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination matrix
   const SLArrayIndex_t * SIGLIB_INOUT_PTR_DECL,                     // Index matrix pointer
+  const SLArrayIndex_t);                                            // Number of rows and columns in matrix
+
+  void SIGLIB_FUNC_DECL SMX_CholeskyDecompose (
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to source matrix
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // Pointer to destination matrix
   const SLArrayIndex_t);                                            // Number of rows and columns in matrix
 
   SLData_t SIGLIB_FUNC_DECL SMX_Determinant (

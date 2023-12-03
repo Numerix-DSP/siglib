@@ -20,5 +20,5 @@ int main (
   printf ("SDS_CountLeadingZeroBits (%x) = %d - correct answer = 5\n", ((SLFixData_t) 0x0aaa0), SDS_CountLeadingZeroBits (((SLFixData_t) 0x0aaa0)));
   printf ("SDS_CountLeadingZeroBits (%x) = %d - correct answer = 4\n", ((SLFixData_t) 0x05550), SDS_CountLeadingZeroBits (((SLFixData_t) 0x05550)));
 
-  exit (0);
+  return (0);
 }

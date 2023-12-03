@@ -38,15 +38,9 @@
 // Declare global variables and arrays
 static const char TxString[] = "Hello World - abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 static char     RxString[MAX_RX_STRING_LENGTH];
-
 static const char *TxStringPtr;
 static char    *RxStringPtr;
 
-static SLData_t *pData, *pCarrierTable;
-static SLData_t *pRxLevelOneBPFilter, *pRxLevelZeroBPFilter;        // Rx filter coefficient pointers
-
-static SLData_t TxLevelOneCarrierPhase, TxLevelZeroCarrierPhase;    // Used by FSK
-static SLData_t TxPhaseOffset;                                      // Used by CPFSK
 
 int main (
   void)
@@ -63,11 +57,14 @@ int main (
 #endif
   SLData_t        FilterGain;
 
+  SLData_t        txLevelOneCarrierPhase, txLevelZeroCarrierPhase;  // Used by FSK
+  SLData_t        TxPhaseOffset;                                    // Used by CPFSK
+
 // Allocate memory
-  pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pCarrierTable = SUF_VectorArrayAllocate (CARRIER_SINE_TABLE_SIZE);
-  pRxLevelOneBPFilter = SUF_VectorArrayAllocate (RX_FILTER_LENGTH);
-  pRxLevelZeroBPFilter = SUF_VectorArrayAllocate (RX_FILTER_LENGTH);
+  SLData_t       *pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pCarrierTable = SUF_VectorArrayAllocate (CARRIER_SINE_TABLE_SIZE);
+  SLData_t       *pRxLevelOneBPFilter = SUF_VectorArrayAllocate (RX_FILTER_LENGTH); // Rx filter coefficient pointers
+  SLData_t       *pRxLevelZeroBPFilter = SUF_VectorArrayAllocate (RX_FILTER_LENGTH);
 
 
 // Generate the filter coeffs on the fly - this
@@ -142,8 +139,8 @@ int main (
                    CARRIER_SINE_TABLE_SIZE);                        // Sine table size
 
 
-  TxLevelOneCarrierPhase = SIGLIB_ZERO;                             // Initialise FSK transmitter
-  TxLevelZeroCarrierPhase = SIGLIB_ZERO;
+  txLevelOneCarrierPhase = SIGLIB_ZERO;                             // Initialise FSK transmitter
+  txLevelZeroCarrierPhase = SIGLIB_ZERO;
 
 #if RX_BIT_MODE_ENABLED                                             // Clear receive string space
 // This is important because we are going to
@@ -159,8 +156,8 @@ int main (
         SDA_FskModulate ((*TxStringPtr >> TxBitIndex),              // Source data bit
                          pData + i + (TxBitIndex * SYMBOL_LENGTH),  // Destination data pointer
                          pCarrierTable,                             // Carrier sinusoid table
-                         &TxLevelOneCarrierPhase,                   // Level '1' carrier phase
-                         &TxLevelZeroCarrierPhase,                  // Level '0' carrier phase
+                         &txLevelOneCarrierPhase,                   // Level '1' carrier phase
+                         &txLevelZeroCarrierPhase,                  // Level '0' carrier phase
                          CARRIER_FREQ_ONE / CARRIER_TABLE_FREQ,     // Level '1' phase increment
                          CARRIER_FREQ_ZERO / CARRIER_TABLE_FREQ,    // Level '0' phase increment
                          SYMBOL_LENGTH,                             // Samples per symbol
@@ -172,8 +169,8 @@ int main (
       SDA_FskModulateByte (*TxStringPtr++,                          // Source data byte
                            pData + i,                               // Destination data pointer
                            pCarrierTable,                           // Carrier sinusoid table
-                           &TxLevelOneCarrierPhase,                 // Level '1' carrier phase
-                           &TxLevelZeroCarrierPhase,                // Level '0' carrier phase
+                           &txLevelOneCarrierPhase,                 // Level '1' carrier phase
+                           &txLevelZeroCarrierPhase,                // Level '0' carrier phase
                            CARRIER_FREQ_ONE / CARRIER_TABLE_FREQ,   // Level '1' carrier phase increment
                            CARRIER_FREQ_ZERO / CARRIER_TABLE_FREQ,  // Level '0' carrier phase increment
                            SYMBOL_LENGTH,                           // Samples per symbol
@@ -318,5 +315,5 @@ int main (
   SUF_MemoryFree (pRxLevelOneBPFilter);
   SUF_MemoryFree (pRxLevelZeroBPFilter);
 
-  exit (0);
+  return (0);
 }

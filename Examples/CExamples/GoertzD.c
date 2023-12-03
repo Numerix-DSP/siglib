@@ -24,11 +24,6 @@
 #define MAGN3           0.125
 
 // Declare global variables and arrays
-static SLData_t *pData;                                             // Data array
-static SLData_t SinePhase;
-static SLData_t GoertzelCoeff;
-
-static SLData_t Result1, Result2, Result3, Result4;
 
 
 int main (
@@ -49,9 +44,9 @@ int main (
   }
 
 
-  pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       MAGN0,                                        // Signal peak level
@@ -60,11 +55,11 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       MAGN1,                                        // Signal peak level
@@ -73,11 +68,11 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       MAGN2,                                        // Signal peak level
@@ -86,11 +81,11 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
-  SinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pData,                                        // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       MAGN3,                                        // Signal peak level
@@ -99,7 +94,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -116,29 +111,29 @@ int main (
   getchar ();
 
 
-  GoertzelCoeff = SIF_GoertzelDetect (FREQ0,                        // Filter frequency
-                                      SAMPLE_LENGTH);               // Filter length
-  Result1 = SDA_GoertzelDetect (pData,                              // Pointer to input data
-                                GoertzelCoeff,                      // Complex filter coefficients
-                                SAMPLE_LENGTH);                     // Dataset length
+  SLData_t        GoertzelCoeff = SIF_GoertzelDetect (FREQ0,        // Filter frequency
+                                                      SAMPLE_LENGTH); // Filter length
+  SLData_t        Result1 = SDA_GoertzelDetect (pData,              // Pointer to input data
+                                                GoertzelCoeff,      // Complex filter coefficients
+                                                SAMPLE_LENGTH);     // Dataset length
 
   GoertzelCoeff = SIF_GoertzelDetect (FREQ1,                        // Filter frequency
                                       SAMPLE_LENGTH);               // Filter length
-  Result2 = SDA_GoertzelDetect (pData,                              // Pointer to input data
-                                GoertzelCoeff,                      // Complex filter coefficients
-                                SAMPLE_LENGTH);                     // Dataset length
+  SLData_t        Result2 = SDA_GoertzelDetect (pData,              // Pointer to input data
+                                                GoertzelCoeff,      // Complex filter coefficients
+                                                SAMPLE_LENGTH);     // Dataset length
 
   GoertzelCoeff = SIF_GoertzelDetect (FREQ2,                        // Filter frequency
                                       SAMPLE_LENGTH);               // Filter length
-  Result3 = SDA_GoertzelDetect (pData,                              // Pointer to input data
-                                GoertzelCoeff,                      // Complex filter coefficients
-                                SAMPLE_LENGTH);                     // Dataset length
+  SLData_t        Result3 = SDA_GoertzelDetect (pData,              // Pointer to input data
+                                                GoertzelCoeff,      // Complex filter coefficients
+                                                SAMPLE_LENGTH);     // Dataset length
 
   GoertzelCoeff = SIF_GoertzelDetect (FREQ3,                        // Filter frequency
                                       SAMPLE_LENGTH);               // Filter length
-  Result4 = SDA_GoertzelDetect (pData,                              // Pointer to input data
-                                GoertzelCoeff,                      // Complex filter coefficients
-                                SAMPLE_LENGTH);                     // Dataset length
+  SLData_t        Result4 = SDA_GoertzelDetect (pData,              // Pointer to input data
+                                                GoertzelCoeff,      // Complex filter coefficients
+                                                SAMPLE_LENGTH);     // Dataset length
 
 
   printf ("\n");
@@ -155,5 +150,5 @@ int main (
 
   SUF_MemoryFree (pData);                                           // Free memory
 
-  exit (0);
+  return (0);
 }

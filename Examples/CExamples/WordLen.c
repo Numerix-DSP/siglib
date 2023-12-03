@@ -102,5 +102,5 @@ int main (
     printf ("\n\nThe output sequence was correct\n\n");
   }
 
-  exit (0);
+  return (0);
 }

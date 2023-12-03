@@ -68,8 +68,6 @@
 #define HALF_FFT_LENGTH (FFT_LENGTH>>1)                             // Half FFT length
 #define LOG2_FFT_LENGTH SAI_FftLengthLog2(FFT_LENGTH)               // Log FFT length
 
-static SLData_t *pRealData, *pImagData, *pWindowCoeffs, *pFFTCoeffs, *pFFTOutputOnePoleState, *pLargest;
-
 static char     inputFilename[512];
 static char     inputBaseFilename[256];
 static char     trainingFilename[512];
@@ -129,12 +127,12 @@ int main (
   SLArrayIndex_t  lastNonZeroLevel = 0;
 
 
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pWindowCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH);             // Window array
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
-  pFFTOutputOnePoleState = SUF_VectorArrayAllocate (HALF_FFT_LENGTH);
-  pLargest = SUF_VectorArrayAllocate (HALF_FFT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pWindowCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH); // Window array
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pFFTOutputOnePoleState = SUF_VectorArrayAllocate (HALF_FFT_LENGTH);
+  SLData_t       *pLargest = SUF_VectorArrayAllocate (HALF_FFT_LENGTH);
 
   if ((NULL == pRealData) || (NULL == pImagData) || (NULL == pWindowCoeffs) || (NULL == pFFTCoeffs) ||
       (NULL == pFFTOutputOnePoleState) || (NULL == pLargest)) {

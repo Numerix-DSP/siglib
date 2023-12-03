@@ -13,8 +13,6 @@
 #define SAMPLE_LENGTH           FFT_LENGTH
 
 // Declare global variables and arrays
-static SLData_t *pRealData, *pImagData, *pRealDataCopy, *pWindowCoeffs, *pResults, *RampPtr, *pFFTCoeffs;
-static SLData_t SinePhase, RampPhase;
 
 
 int main (
@@ -35,13 +33,13 @@ int main (
   }
 
 // Allocate memory
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pRealDataCopy = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (FFT_LENGTH);                  // RMS result array
-  pWindowCoeffs = SUF_VectorArrayAllocate (WINDOW_LENGTH);          // Window array
-  RampPtr = SUF_VectorArrayAllocate (FFT_LENGTH);                   // Detrend ramp array
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pRealDataCopy = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (FFT_LENGTH);  // RMS result array
+  SLData_t       *pWindowCoeffs = SUF_VectorArrayAllocate (WINDOW_LENGTH);  // Window array
+  SLData_t       *pRamp = SUF_VectorArrayAllocate (FFT_LENGTH);     // Detrend ramp array
 
 // Initialise FFT
   SIF_Fft (pFFTCoeffs,                                              // Pointer to FFT coefficients
@@ -49,14 +47,14 @@ int main (
            FFT_LENGTH);                                             // FFT length
 
 // Generate a noisy complex sinusoid, with a trend
-  RampPhase = SIGLIB_ZERO;
+  SLData_t        rampPhase = SIGLIB_ZERO;
   SDA_SignalGenerateRamp (pRealData,                                // Pointer to destination array
                           SIGLIB_TEN,                               // Amplitude
                           SIGLIB_ZERO,                              // D.C. Offset
-                          &RampPhase,                               // Phase - maintained across array boundaries
+                          &rampPhase,                               // Phase - maintained across array boundaries
                           SAMPLE_LENGTH);                           // Dataset length
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pRealData,                                    // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       0.9,                                          // Signal peak level
@@ -65,7 +63,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -77,7 +75,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -113,7 +111,7 @@ int main (
 // Extract the trend of the signal
   SDA_ExtractTrend (pRealData,                                      // Pointer to source array
                     pImagData,                                      // Pointer to destination array
-                    RampPtr,                                        // Pointer to ramp array
+                    pRamp,                                          // Pointer to ramp array
                     SAMPLE_LENGTH);                                 // Dataset length
 
   gpc_plot_2d (h2DPlot,                                             // Graph handle
@@ -168,7 +166,7 @@ int main (
 // Detrend the signal
   SDA_Detrend (pRealDataCopy,                                       // Pointer to source array
                pRealData,                                           // Pointer to destination array
-               RampPtr,                                             // Pointer to ramp array
+               pRamp,                                               // Pointer to ramp array
                SAMPLE_LENGTH);                                      // Dataset length
 
   gpc_plot_2d (h2DPlot,                                             // Graph handle
@@ -229,5 +227,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pWindowCoeffs);
 
-  exit (0);
+  return (0);
 }

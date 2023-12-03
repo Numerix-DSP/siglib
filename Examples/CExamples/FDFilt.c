@@ -34,32 +34,26 @@ static const SLData_t TimeDomainCoeffs[FILTER_LENGTH] = {
   2.891E-3, 2.648E-3, 2.803E-3, -3.783E-3
 };
 
-static SLData_t pFilterState[FILTER_LENGTH];
-static SLArrayIndex_t FilterIndex;
-static SLData_t *pSrc, *pTDFilt, *pFDFilt;
-static SLData_t *RealFreqDomainCoeffs, *ImagFreqDomainCoeffs;
-static SLData_t *OverlapArrayPtr;
-static SLData_t *TempArrayPtr;
-static SLData_t SinePhase, CosinePhase;
-static SLData_t *pFFTCoeffs;
-static SLData_t InverseFFTLength;
-
 
 int main (
   void)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-// Allocate memory
-  pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH + FFT_LENGTH);      // Allow for overlap - overlap and save
-  pTDFilt = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pFDFilt = SUF_VectorArrayAllocate (SAMPLE_LENGTH + FFT_LENGTH);   // Allow for overlap - overlap and add
+  SLData_t        InverseFFTLength;
+  SLArrayIndex_t  FilterIndex;
 
-  RealFreqDomainCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH);      // Allocate working arrays
-  ImagFreqDomainCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH);
-  OverlapArrayPtr = SUF_VectorArrayAllocate (FFT_LENGTH);           // Allocate overlap storage
-  TempArrayPtr = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+// Allocate memory
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH + FFT_LENGTH);  // Allow for overlap - overlap and save
+  SLData_t       *pFilterState = SUF_VectorArrayAllocate (FILTER_LENGTH);
+  SLData_t       *pTDFilt = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pFDFilt = SUF_VectorArrayAllocate (SAMPLE_LENGTH + FFT_LENGTH); // Allow for overlap - overlap and add
+
+  SLData_t       *RealFreqDomainCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH);  // Allocate working arrays
+  SLData_t       *ImagFreqDomainCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *OverlapArrayPtr = SUF_VectorArrayAllocate (FFT_LENGTH); // Allocate overlap storage
+  SLData_t       *TempArrayPtr = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
 // Clear array to ensure zero padded - overlap and save
   SDA_Clear (pSrc,                                                  // Pointer to destination array
@@ -77,8 +71,8 @@ int main (
   }
 
 
-  SinePhase = SIGLIB_ZERO;
-  CosinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
+  SLData_t        cosinePhase = SIGLIB_ZERO;
 
 // Generate a noisy sinewave
   SDA_SignalGenerate (pSrc,                                         // Pointer to destination array
@@ -89,7 +83,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -101,7 +95,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &CosinePhase,                                 // Signal phase - maintained across array boundaries
+                      &cosinePhase,                                 // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -248,8 +242,15 @@ int main (
   gpc_close (h2DPlot);
 
   SUF_MemoryFree (pSrc);                                            // Free memory
+  SUF_MemoryFree (pFilterState);
   SUF_MemoryFree (pTDFilt);
   SUF_MemoryFree (pFDFilt);
 
-  exit (0);
+  SUF_MemoryFree (RealFreqDomainCoeffs);
+  SUF_MemoryFree (ImagFreqDomainCoeffs);
+  SUF_MemoryFree (OverlapArrayPtr);
+  SUF_MemoryFree (TempArrayPtr);
+  SUF_MemoryFree (pFFTCoeffs);
+
+  return (0);
 }

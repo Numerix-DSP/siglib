@@ -69,14 +69,12 @@ static const SLData_t SourceData3[] = {
   2.500001, 2.500001                                                // Outside decalared range
 };
 
-static SLData_t *pHistogram, *pHistogramCumul;
-
 
 int main (
   void)
 {
-  pHistogram = SUF_VectorArrayAllocate (HISTOGRAM_LENGTH1);         // Allocate arrays to the maximum histogram length
-  pHistogramCumul = SUF_VectorArrayAllocate (HISTOGRAM_LENGTH1);
+  SLData_t       *pHistogram = SUF_VectorArrayAllocate (HISTOGRAM_LENGTH1); // Allocate arrays to the maximum histogram length
+  SLData_t       *pHistogramCumul = SUF_VectorArrayAllocate (HISTOGRAM_LENGTH1);
 
 
 // Test number 1
@@ -178,5 +176,5 @@ int main (
   SUF_MemoryFree (pHistogram);                                      // Free memory
   SUF_MemoryFree (pHistogramCumul);
 
-  exit (0);
+  return (0);
 }

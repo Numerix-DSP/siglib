@@ -14,8 +14,6 @@
 #define LOG2_FFT_LENGTH         SAI_FftLengthLog2(FFT_LENGTH)       // Log2 FFT length,
 
 // Declare global variables and arrays
-static SLData_t *pRealData, *pImagData, *pResults, *pSrc1, *pSrc2, *pFiltered, *pDelay, *pFFTCoeffs;
-static SLData_t onePoleFilterCoefficient, Offset, OnePoleFilterState, SinePhase;
 
 
 int main (
@@ -23,6 +21,8 @@ int main (
   char **argv)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
+
+  SLData_t        onePoleFilterCoefficient, Offset, OnePoleFilterState;
 
   if (argc != 2) {
     printf ("Usage: OnePole <Feedback_Coefficient>\n");
@@ -34,14 +34,14 @@ int main (
   }
 
 // Allocate memory
-  pSrc1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pSrc2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (FFT_LENGTH);                  // RMS result array
-  pFiltered = SUF_VectorArrayAllocate (HALF_FFT_LENGTH);
-  pDelay = SUF_VectorArrayAllocate (HALF_FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pSrc1 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pSrc2 = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (FFT_LENGTH);  // RMS result array
+  SLData_t       *pFiltered = SUF_VectorArrayAllocate (HALF_FFT_LENGTH);
+  SLData_t       *pDelay = SUF_VectorArrayAllocate (HALF_FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pSrc1) || (NULL == pSrc2) || (NULL == pRealData) || (NULL == pImagData) ||
       (NULL == pResults) || (NULL == pFiltered) || (NULL == pDelay) || (NULL == pFFTCoeffs)) {
@@ -151,7 +151,7 @@ int main (
   printf ("\nFrequency Response Of One-pole Filter\nPlease hit <Carriage Return> to continue . . .");
   getchar ();
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
   printf ("512 Point FFT, quantized data - one pole filter per bin (onePoleFilterCoefficient = %lf)\n", onePoleFilterCoefficient);
   OnePoleFilterState = SIGLIB_FIRST_SAMPLE;
 // Initialise one pole filter state array
@@ -167,7 +167,7 @@ int main (
                         SIGLIB_ZERO,                                // D.C. Offset
                         SIGLIB_ZERO,                                // Unused
                         SIGLIB_ZERO,                                // Signal end value - Unused
-                        &SinePhase,                                 // Signal phase - maintained across array boundaries
+                        &sinePhase,                                 // Signal phase - maintained across array boundaries
                         SIGLIB_NULL_DATA_PTR,                       // Unused
                         FFT_LENGTH);                                // Output dataset length
 
@@ -243,5 +243,5 @@ int main (
   SUF_MemoryFree (pDelay);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

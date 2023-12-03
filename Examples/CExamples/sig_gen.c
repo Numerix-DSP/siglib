@@ -11,8 +11,8 @@
 #define FFT_LENGTH              512
 #define LOG2_FFT_LENGTH         SAI_FftLengthLog2(FFT_LENGTH)       // Log2 FFT length,
 
-#define GAUS_NOISE_VARIANCE     SIGLIB_FOUR
-#define GAUS_NOISE_OFFSET       SIGLIB_ZERO
+#define GAUSSIAN_NOISE_VARIANCE     SIGLIB_FOUR
+#define GAUSSIAN_NOISE_OFFSET       SIGLIB_ZERO
 
 #define OUTPUT_MAGNITUDE        SIGLIB_ONE                          // Magnitude of output signals
 
@@ -24,12 +24,6 @@
 #define HGRAM_SAMPLE_LENGTH     64
 
 // Declare global variables and arrays
-static SLData_t *pRealData, *pImagData, *pResults, *pFFTCoeffs;     // Dataset pointers
-
-static SLData_t SinePhase, CosinePhase, SqPhase, TriPhase, ImpulsePhase;
-static SLData_t ChirpPhase, ChirpValue;
-static SLData_t GaussPhase, GaussValue;
-static SLData_t PnsPhase, PnsCurrentValue;
 
 
 int main (
@@ -40,10 +34,10 @@ int main (
   SLData_t        RMSValue;
   char            OutputString[80];
 
-  pRealData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   printf ("\nSignal generation examples - simulated sample rate = %lf\n", SAMPLE_RATE_HZ);
 
@@ -160,8 +154,8 @@ int main (
   getchar ();
 
 
-  SinePhase = SIGLIB_ZERO;
-  CosinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
+  SLData_t        cosinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pRealData,                                    // Output array pointer
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       OUTPUT_MAGNITUDE,                             // Signal peak level
@@ -170,7 +164,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -198,7 +192,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -226,7 +220,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &CosinePhase,                                 // Signal phase - maintained across array boundaries
+                      &cosinePhase,                                 // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -246,8 +240,8 @@ int main (
   getchar ();
 
 
-  SinePhase = SIGLIB_ZERO;
-  CosinePhase = SIGLIB_ZERO;
+  sinePhase = SIGLIB_ZERO;
+  cosinePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pRealData,                                    // Output array pointer
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       SIGLIB_HALF,                                  // Signal peak level
@@ -256,7 +250,7 @@ int main (
                       0.2,                                          // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -284,7 +278,7 @@ int main (
                       -0.2,                                         // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &CosinePhase,                                 // Signal phase - maintained across array boundaries
+                      &cosinePhase,                                 // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -304,7 +298,7 @@ int main (
   getchar ();
 
 
-  SqPhase = SIGLIB_ZERO;
+  SLData_t        SqPhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pRealData,                                    // Output array pointer
                       SIGLIB_SQUARE_WAVE,                           // Signal type - Square wave
                       OUTPUT_MAGNITUDE,                             // Signal peak level
@@ -361,7 +355,7 @@ int main (
   getchar ();
 
 
-  TriPhase = SIGLIB_ZERO;
+  SLData_t        TriPhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pRealData,                                    // Output array pointer
                       SIGLIB_TRIANGLE_WAVE,                         // Signal type - Triangular wave
                       OUTPUT_MAGNITUDE,                             // Signal peak level
@@ -532,6 +526,7 @@ int main (
   getchar ();
 
 
+  SLData_t        ImpulsePhase = SIGLIB_ZERO;
   SDA_SignalGenerate (pRealData,                                    // Output array pointer
                       SIGLIB_IMPULSE_STREAM,                        // Signal type - Impulse stream
                       OUTPUT_MAGNITUDE,                             // Signal peak level
@@ -561,7 +556,8 @@ int main (
   getchar ();
 
 
-  PnsPhase = SIGLIB_ZERO;
+  SLData_t        PnsPhase = SIGLIB_ZERO;
+  SLData_t        PnsCurrentValue = SIGLIB_ZERO;
 // Create a uni-polar PRN sequence
   SDA_SignalGenerate (pRealData,                                    // Output array pointer
                       SIGLIB_PN_SEQUENCE,                           // Signal type - Pseudo random number sequence
@@ -625,8 +621,8 @@ int main (
            SIGLIB_BIT_REV_STANDARD,                                 // Bit reverse mode flag / Pointer to bit reverse address table
            FFT_LENGTH);                                             // FFT length
 
-  ChirpPhase = SIGLIB_ZERO;
-  ChirpValue = SIGLIB_ZERO;
+  SLData_t        ChirpPhase = SIGLIB_ZERO;
+  SLData_t        ChirpValue = SIGLIB_ZERO;
   SDA_SignalGenerate (pRealData,                                    // Output array pointer
                       SIGLIB_CHIRP_NL,                              // Signal type - Chirp with non linear frequency ramp
                       0.45,                                         // Signal peak level
@@ -739,15 +735,15 @@ int main (
   getchar ();
 
 
-  GaussPhase = SIGLIB_ZERO;
-  GaussValue = SIGLIB_ZERO;
+  SLData_t        GaussPhase = SIGLIB_ZERO;
+  SLData_t        GaussValue = SIGLIB_ZERO;
   SDA_SignalGenerate (pRealData,                                    // Output array pointer
                       SIGLIB_GAUSSIAN_NOISE,                        // Signal type - Gaussian noise
                       SIGLIB_ZERO,                                  // Signal peak level - Unused
                       SIGLIB_FILL,                                  // Fill (overwrite) or add to existing array contents
                       SIGLIB_ZERO,                                  // Signal frequency - Unused
-                      GAUS_NOISE_OFFSET,                            // D.C. Offset
-                      GAUS_NOISE_VARIANCE,                          // Gaussian noise variance
+                      GAUSSIAN_NOISE_OFFSET,                        // D.C. Offset
+                      GAUSSIAN_NOISE_VARIANCE,                      // Gaussian noise variance
                       SIGLIB_ZERO,                                  // Signal end value - Unused
                       &GaussPhase,                                  // Pointer to gaussian signal phase - should be initialised to zero
                       &GaussValue,                                  // Gaussian signal second sample - should be initialised to zero
@@ -839,5 +835,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

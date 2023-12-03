@@ -23,22 +23,21 @@ static const SLData_t FourPoleButterworth_Fc100_Fs10000[] = {
   -3.83582554064735, 5.52081913662223, -3.53353521946301, 0.848555999266477
 };
 
-static SLData_t *pRealData, *pImagData, *pResults, *pSrc, *pFilterState, *pFFTCoeffs;
-static SLArrayIndex_t FilterStateOffset;
-
 
 int main (
   void)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
+  SLArrayIndex_t  FilterStateOffset;
+
 // Allocate memory
-  pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (FFT_LENGTH);                  // FFT result array
-  pFilterState = SUF_VectorArrayAllocate (FILTER_ORDER);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (FFT_LENGTH);  // FFT result array
+  SLData_t       *pFilterState = SUF_VectorArrayAllocate (FILTER_ORDER);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   SIF_IirOrderN (pFilterState,                                      // Pointer to filter state
                  &FilterStateOffset,                                // Pointer to filter state index
@@ -129,5 +128,5 @@ int main (
   SUF_MemoryFree (pFilterState);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

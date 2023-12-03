@@ -19,9 +19,6 @@
 #define GRAPH_Y_AXIS_LENGTH     HALF_FFT_LENGTH
 
 // Declare global variables and arrays
-static SLData_t *pRealData, *pImagData, *pResults, *pWindowCoeffs, *pFFTCoeffs;
-static SLData_t ChirpPhase1, ChirpPhase2, ChirpPhase3, ChirpPhase4;
-static SLData_t ChirpValue1, ChirpValue2, ChirpValue3, ChirpValue4;
 
 
 int main (
@@ -30,12 +27,15 @@ int main (
   h_GPC_Plot     *h3DGraph;                                         // Plot object
   SLFixData_t     i;
 
+  SLData_t        ChirpPhase1, ChirpPhase2, ChirpPhase3, ChirpPhase4;
+  SLData_t        ChirpValue1, ChirpValue2, ChirpValue3, ChirpValue4;
+
 // Allocate memory
-  pRealData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pWindowCoeffs = SUF_VectorArrayAllocate (WINDOW_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pWindowCoeffs = SUF_VectorArrayAllocate (WINDOW_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   h3DGraph =                                                        // Initialize plot
     gpc_init_spectrogram ("Spectrogram Plot",                       // Plot title
@@ -170,5 +170,5 @@ int main (
   SUF_MemoryFree (pWindowCoeffs);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

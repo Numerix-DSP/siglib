@@ -25,17 +25,15 @@ static SLData_t Msrc[MATRIX_ROWS][MATRIX_COLS] = {
   { 51., 52., 53., 54., 55. }
 };
 
-static SLData_t *pMsrc, *pMdst, *pMcolTmp1, *pMcolTmp2, *pMrowTmp;
-
 
 int main (
   void)
 {
-  pMsrc = (SLData_t *) Msrc;                                        // Setup source matrix pointer
-  pMdst = SUF_VectorArrayAllocate (MATRIX_SIZE);
-  pMcolTmp1 = SUF_VectorArrayAllocate (MATRIX_ROWS);
-  pMcolTmp2 = SUF_VectorArrayAllocate (MATRIX_ROWS);
-  pMrowTmp = SUF_VectorArrayAllocate (MATRIX_COLS);
+  SLData_t       *pMsrc = (SLData_t *) Msrc;                        // Setup source matrix pointer
+  SLData_t       *pMdst = SUF_VectorArrayAllocate (MATRIX_SIZE);
+  SLData_t       *pMcolTmp1 = SUF_VectorArrayAllocate (MATRIX_ROWS);
+  SLData_t       *pMcolTmp2 = SUF_VectorArrayAllocate (MATRIX_ROWS);
+  SLData_t       *pMrowTmp = SUF_VectorArrayAllocate (MATRIX_COLS);
 
   printf ("Source Array:\n");
   SUF_PrintArray (src, ARRAY_LENGTH);
@@ -62,5 +60,5 @@ int main (
   SUF_MemoryFree (pMcolTmp2);
   SUF_MemoryFree (pMrowTmp);
 
-  exit (0);
+  return (0);
 }

@@ -144,5 +144,5 @@ int main (
     printf ("Vertex Location:  %lf\n\n", SDA_InterpolateArbitraryThreePointQuadraticPeakVertexLocation (samples, ARRAY_LENGTH));
   }
 
-  exit (0);
+  return (0);
 }

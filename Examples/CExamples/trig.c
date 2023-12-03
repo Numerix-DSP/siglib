@@ -18,10 +18,6 @@
 #define MAX_SINC_INPUT_MAGNITUDE    ((11. * SIGLIB_PI) / SCALE_FACTOR)
 
 // Declare global variables and arrays
-static SLData_t *pSinOutput, *pCosOutput, *pSinCosLUT;
-static SLData_t *pSineLUT, *pCosineLUT, *pSincLUT;
-static SLData_t LookUpTablePhase;
-static SLData_t LookUpTablePhaseGain;
 
 
 int main (
@@ -29,12 +25,15 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pSinOutput = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pCosOutput = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pSinCosLUT = SUF_FastSinCosArrayAllocate (CARRIER_TABLE_LENGTH);
-  pSineLUT = SUF_VectorArrayAllocate (SINE_LUT_LENGTH);
-  pCosineLUT = SUF_VectorArrayAllocate (COSINE_LUT_LENGTH);
-  pSincLUT = SUF_VectorArrayAllocate (SINC_LUT_LENGTH);
+  SLData_t        LookUpTablePhase;
+  SLData_t        LookUpTablePhaseGain;
+
+  SLData_t       *pSinOutput = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pCosOutput = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pSinCosLUT = SUF_FastSinCosArrayAllocate (CARRIER_TABLE_LENGTH);
+  SLData_t       *pSineLUT = SUF_VectorArrayAllocate (SINE_LUT_LENGTH);
+  SLData_t       *pCosineLUT = SUF_VectorArrayAllocate (COSINE_LUT_LENGTH);
+  SLData_t       *pSincLUT = SUF_VectorArrayAllocate (SINC_LUT_LENGTH);
 
   SIF_QuickSin (pSineLUT,                                           // Pointer to LUT array
                 &LookUpTablePhaseGain,                              // Pointer to phase gain
@@ -355,5 +354,5 @@ int main (
   SUF_MemoryFree (pCosineLUT);
   SUF_MemoryFree (pSincLUT);
 
-  exit (0);
+  return (0);
 }

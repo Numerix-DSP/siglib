@@ -7,7 +7,6 @@
 #include <math.h>
 #include <siglib.h>                                                 // SigLib DSP library
 
-double         *p_DataArray;
 #define SAMPLE_SIZE     128
 
 SLWavFileInfo_s wavInfo;
@@ -38,7 +37,7 @@ int main (
   printf ("Wav filename: %s\n", WavFileName);
   printf ("Sig filename: %s\n", SigFileName);
 
-  p_DataArray = SUF_VectorArrayAllocate (SAMPLE_SIZE);
+  SLData_t       *pDataArray = SUF_VectorArrayAllocate (SAMPLE_SIZE);
 
 
   if ((fpInputFile = fopen (WavFileName, "rb")) == NULL) {          // Note this file is binary
@@ -60,8 +59,8 @@ int main (
     exit (-1);
   }
 
-  while ((inputSampleCount = SUF_WavReadData (p_DataArray, fpInputFile, wavInfo, SAMPLE_SIZE)) != 0) {  // Successively read arrays of upto SAMPLE_SIZE samples
-    SUF_SigWriteData (p_DataArray, fpOutputFile, inputSampleCount);
+  while ((inputSampleCount = SUF_WavReadData (pDataArray, fpInputFile, wavInfo, SAMPLE_SIZE)) != 0) { // Successively read arrays of upto SAMPLE_SIZE samples
+    SUF_SigWriteData (pDataArray, fpOutputFile, inputSampleCount);
     outputSampleCount += inputSampleCount;
   }
 
@@ -70,7 +69,7 @@ int main (
   fclose (fpInputFile);
   fclose (fpOutputFile);
 
-  free (p_DataArray);                                               // Free memory
+  free (pDataArray);                                                // Free memory
 
-  exit (0);
+  return (0);
 }

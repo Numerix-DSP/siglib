@@ -1,6 +1,29 @@
 SigLib (Tm) Revision Update History File
 ========================================
 
+VERSION: 10.55
+RELEASE DATE: XX/XX/2023
+_________________________
+
+Additional Functionality:
+  SMX_CholeskyDecompose
+
+Operational Changes:
+  None.
+
+Additional Processor / Compiler Support:
+  None.
+
+Optimisation Changes:
+  SDA_MeanSquareError tidied up
+
+Bug Fixes:
+ None.
+
+Notes:
+  None.
+
+
 VERSION: 10.54
 RELEASE DATE: 27/11/2023
 _________________________

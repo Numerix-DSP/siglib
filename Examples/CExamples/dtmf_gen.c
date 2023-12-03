@@ -21,8 +21,6 @@
 #define DTMF_SAMPLE_LENGTH      102
 
 // Declare global variables and arrays
-static SLData_t *pData;                                             // DTMF data
-static SLData_t *pDTMFGenCoeffs;                                    // DTMF generator frequency look up table
 static SLWavFileInfo_s wavFileInfo;
 
 static const char TextSrcFilename[] = "dtmf.txt";
@@ -55,8 +53,8 @@ int main (
   SLData_t        Max = SIGLIB_ZERO;
   SLData_t        NewMax = SIGLIB_ZERO;
 
-  pData = SUF_VectorArrayAllocate (MAX_SAMPLE_LENGTH);
-  pDTMFGenCoeffs = SUF_VectorArrayAllocate (SIGLIB_DTMF_FTABLE_LENGTH);
+  SLData_t       *pData = SUF_VectorArrayAllocate (MAX_SAMPLE_LENGTH);  // DTMF data
+  SLData_t       *pDTMFGenCoeffs = SUF_VectorArrayAllocate (SIGLIB_DTMF_FTABLE_LENGTH); // DTMF generator frequency look up table
 
   if ((fpInputFile = fopen (TextSrcFilename, "r")) == NULL) {
     printf ("Can not open input data file %s\n", TextSrcFilename);
@@ -220,4 +218,6 @@ int read_dtmf_key (
   else {
     return (1);                                                     // Failure
   }
+
+  return (0);
 }

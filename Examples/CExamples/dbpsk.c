@@ -37,19 +37,6 @@
 #define RX_STARTUP_DELAY                9                           // Rxr startup delay (# symbols) to allow correct synchronization with transmitter
 #define RX_BIT_COUNT_START              0                           // Starting phase of Rx bit count
 
-// Declare global variables and arrays
-static const char TxString[] = "Hello World - abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-static char     RxString[MAX_RX_STRING_LENGTH];
-
-static const char *TxStringPtr;
-static char    *RxStringPtr;
-
-static SLData_t *pData, *pCarrierTable;
-
-static SLData_t TxCarrierPhase;
-static SLData_t TxSampleCount;
-
-
 #define COSTAS_LP_LPF_LENGTH            17                          // Costas loop LP LPF FIR filter length
 #define VCO_MODULATION_INDEX            0.005                       // Modulation index
 
@@ -57,7 +44,15 @@ static SLData_t TxSampleCount;
 
 #define VCO_SINE_TABLE_SIZE             1024                        // Look up table for fast sine calculation
 
-static SLData_t *pCostasLpLPFCoeffs, *pCostasLpLPF1State, *pCostasLpLPF2State;  // Costas loop loop filter coefficient pointer
+// Declare global variables and arrays
+static const char TxString[] = "Hello World - abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+static char     RxString[MAX_RX_STRING_LENGTH];
+
+static const char *TxStringPtr;
+static char    *RxStringPtr;
+
+static SLData_t txCarrierPhase;
+static SLData_t TxSampleCount;
 
 static SLArrayIndex_t CostasLpLPF1Index;                            // Costas loop inphase LPF filter index
 static SLArrayIndex_t CostasLpLPF2Index;                            // Costas loop quadrature phase LPF filter index
@@ -65,7 +60,6 @@ static SLData_t CostasLpVCOPhase;                                   // Costas lo
 static SLData_t CostasLpState;                                      // Costas loop feedback state for next iteration
 
 static SLData_t CostasLpLoopFilterState;                            // Costas loop loop filter feedback coeff
-static SLData_t *pVCOLookUpTable;                                   // VCO cosine look-up-table pointer
 
 static SLData_t ModulationPhase;                                    // Modulation phase
 static SLData_t PreviousRxSum;                                      // Previously received bit
@@ -108,13 +102,13 @@ int main (
 #endif
 
 // Allocate memory
-  pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH + 10);             // Not always returning the same number of samples from the modulator
-  pCarrierTable = SUF_VectorArrayAllocate (CARRIER_SINE_TABLE_SIZE);
+  SLData_t       *pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH + 10); // Not always returning the same number of samples from the modulator
+  SLData_t       *pCarrierTable = SUF_VectorArrayAllocate (CARRIER_SINE_TABLE_SIZE);
 
-  pCostasLpLPFCoeffs = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);
-  pCostasLpLPF1State = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);
-  pCostasLpLPF2State = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);
-  pVCOLookUpTable = SUF_CostasLoopVCOArrayAllocate (VCO_SINE_TABLE_SIZE);
+  SLData_t       *pCostasLpLPFCoeffs = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);  // Costas loop loop filter coefficient pointer
+  SLData_t       *pCostasLpLPF1State = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);
+  SLData_t       *pCostasLpLPF2State = SUF_VectorArrayAllocate (COSTAS_LP_LPF_LENGTH);
+  SLData_t       *pVCOLookUpTable = SUF_CostasLoopVCOArrayAllocate (VCO_SINE_TABLE_SIZE); // VCO cosine look-up-table pointer
 
   if ((NULL == pData) || (NULL == pCarrierTable) || (NULL == pCostasLpLPFCoeffs) || (NULL == pCostasLpLPF1State) ||
       (NULL == pCostasLpLPF2State) || (NULL == pVCOLookUpTable)) {
@@ -168,7 +162,7 @@ int main (
                       &RxSampleSum,                                 // Pointer to Rx sample sum - used to decide which bit was Tx'd
                       &PreviousRxSum);                              // Previous Rx'd sample sum
 
-  TxCarrierPhase = SIGLIB_ZERO;                                     // Initialise BPSK transmitter phase
+  txCarrierPhase = SIGLIB_ZERO;                                     // Initialise BPSK transmitter phase
 // The phase of the transmitter can be rotated by changing this value
 
   for (LoopCount = 0; LoopCount < NUMBER_OF_LOOPS; LoopCount++) {
@@ -178,7 +172,7 @@ int main (
           SDA_DpskModulate (0x0,                                    // Modulating bit
                             pData + i + (TxBitIndex * SYMBOL_LENGTH), // Destination array
                             pCarrierTable,                          // Carrier table pointer
-                            &TxCarrierPhase,                        // Carrier phase pointer
+                            &txCarrierPhase,                        // Carrier phase pointer
                             SYMBOL_LENGTH,                          // Samples per symbol
                             CARRIER_FREQ / CARRIER_TABLE_FREQ,      // Carrier table increment
                             CARRIER_SINE_TABLE_SIZE,                // Carrier sine table size
@@ -192,7 +186,7 @@ int main (
           SDA_DpskModulate ((*TxStringPtr >> TxBitIndex),           // Modulating bit
                             pData + i + (TxBitIndex * SYMBOL_LENGTH), // Destination array
                             pCarrierTable,                          // Carrier table pointer
-                            &TxCarrierPhase,                        // Carrier phase pointer
+                            &txCarrierPhase,                        // Carrier phase pointer
                             SYMBOL_LENGTH,                          // Samples per symbol
                             CARRIER_FREQ / CARRIER_TABLE_FREQ,      // Carrier table increment
                             CARRIER_SINE_TABLE_SIZE,                // Carrier sine table size
@@ -205,7 +199,7 @@ int main (
         SDA_DpskModulateByte (*TxStringPtr++,                       // Modulating byte
                               pData + i,                            // Destination array
                               pCarrierTable,                        // Carrier table pointer
-                              &TxCarrierPhase,                      // Carrier phase pointer
+                              &txCarrierPhase,                      // Carrier phase pointer
                               SYMBOL_LENGTH,                        // Samples per symbol
                               CARRIER_FREQ / CARRIER_TABLE_FREQ,    // Carrier table increment
                               CARRIER_SINE_TABLE_SIZE,              // Carrier sine table size
@@ -326,5 +320,5 @@ int main (
   SUF_MemoryFree (pCostasLpLPF2State);
   SUF_MemoryFree (pVCOLookUpTable);
 
-  exit (0);
+  return (0);
 }

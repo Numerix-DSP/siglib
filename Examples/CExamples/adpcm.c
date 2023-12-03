@@ -15,22 +15,20 @@
 #define INPUT_MAGNITUDE         256                                 // Simulate 8 bit source data
 
 // Declare global variables and arrays
-static SLData_t SinePhase;
-static SLData_t *pSrc, *pDst, *pADPCMData, *pADPCMPlotData;
-
 #if DEBUG
 static SLData_t Estimate[SAMPLE_LENGTH];
 #endif
+
 
 int main (
   void)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pADPCMData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pADPCMPlotData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pADPCMData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pADPCMPlotData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   if ((NULL == pSrc) || (NULL == pADPCMData) || (NULL == pADPCMPlotData) || (NULL == pDst)) {
     printf ("\n\nMemory allocation failed\n\n");
@@ -49,10 +47,10 @@ int main (
     exit (-1);
   }
 
-  SinePhase = SIGLIB_ZERO;                                          // Different start phases to test encoder and decoder
-//  SinePhase = -1.0;
-//  SinePhase = 1.0;
-//  SinePhase = SIGLIB_PI;
+  SLData_t        sinePhase = SIGLIB_ZERO;                          // Different start phases to test encoder and decoder
+//  SLData_t sinePhase = -1.0;
+//  SLData_t sinePhase = 1.0;
+//  SLData_t sinePhase = SIGLIB_PI;
   SDA_SignalGenerate (pSrc,                                         // Pointer to destination array
                       SIGLIB_SINE_WAVE,                             // Signal type - Sine wave
                       INPUT_MAGNITUDE,                              // Signal peak level
@@ -61,7 +59,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -149,5 +147,5 @@ int main (
   SUF_MemoryFree (pADPCMPlotData);
   SUF_MemoryFree (pDst);
 
-  exit (0);
+  return (0);
 }

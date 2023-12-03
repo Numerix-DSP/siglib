@@ -18,8 +18,8 @@
 
 #define ADD_NOISE                   0                               // Select '1' to add noise
 
-#define GAUS_NOISE_OFFSET           SIGLIB_ZERO
-#define GAUS_NOISE_VARIANCE         0.00001
+#define GAUSSIAN_NOISE_OFFSET       SIGLIB_ZERO
+#define GAUSSIAN_NOISE_VARIANCE     0.00001
 
 // Declare global variables and arrays
 static const SLData_t Input[INPUT_LENGTH] = {                       // Input data
@@ -32,9 +32,6 @@ static const SLData_t Impulse[IMPULSE_LENGTH] = {                   // Impulse r
   0.0, 0.0, 0.3, 1.0, 0.3, -0.2, -0.3, -0.2, 0.0, 0.0
 };
 
-static SLData_t *pDistortedInput, *pSrcRealData, *pSrcImagData, *pFFTCoeffs, *pError;
-static SLData_t *pImpulseRealData, *pImpulseImagData, *pImpulseFdRealData, *pImpulseFdImagData;
-
 
 int main (
   void)
@@ -46,15 +43,15 @@ int main (
 #endif
 
 // Allocate memory
-  pDistortedInput = SUF_VectorArrayAllocate (CONVOLVED_SEQUENCE_LENGTH);
-  pSrcRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pSrcImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImpulseRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImpulseImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImpulseFdRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImpulseFdImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pError = SUF_VectorArrayAllocate (INPUT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pDistortedInput = SUF_VectorArrayAllocate (CONVOLVED_SEQUENCE_LENGTH);
+  SLData_t       *pSrcRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pSrcImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImpulseRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImpulseImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImpulseFdRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImpulseFdImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pError = SUF_VectorArrayAllocate (INPUT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pDistortedInput) || (NULL == pSrcRealData) || (NULL == pSrcImagData) || (NULL == pImpulseRealData) ||
       (NULL == pImpulseImagData) || (NULL == pImpulseFdRealData) || (NULL == pImpulseFdImagData) || (NULL == pError) || (NULL == pFFTCoeffs)) {
@@ -120,8 +117,8 @@ int main (
                       SIGLIB_ZERO,                                  // Signal peak level - Unused
                       SIGLIB_ADD,                                   // Fill (overwrite) or add to existing array contents
                       SIGLIB_ZERO,                                  // Signal frequency - Unused
-                      GAUS_NOISE_OFFSET,                            // D.C. Offset
-                      GAUS_NOISE_VARIANCE,                          // Gaussian noise variance
+                      GAUSSIAN_NOISE_OFFSET,                        // D.C. Offset
+                      GAUSSIAN_NOISE_VARIANCE,                      // Gaussian noise variance
                       SIGLIB_ZERO,                                  // Signal end value - Unused
                       &GaussianNoisePhase,                          // Pointer to gaussian signal phase - should be initialised to zero
                       &GaussianNoiseValue,                          // Gaussian signal second sample - should be initialised to zero
@@ -310,5 +307,5 @@ int main (
   SUF_MemoryFree (pFFTCoeffs);
   SUF_MemoryFree (pError);
 
-  exit (0);
+  return (0);
 }

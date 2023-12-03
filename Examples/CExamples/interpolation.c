@@ -252,5 +252,5 @@ int main (
 
   gpc_close (h2DPlot);
 
-  exit (0);
+  return (0);
 }

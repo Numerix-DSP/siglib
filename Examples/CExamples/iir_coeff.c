@@ -20,8 +20,6 @@
 // Declare global variables and arrays
 static SLData_t pIIRCoeffs[SIGLIB_IIR_COEFFS_PER_BIQUAD];
 
-static SLData_t *pRealData, *pImagData, *pFFTCoeffs, *pResults, *pFilterState;
-
 
 int main (
   int argc,
@@ -64,11 +62,11 @@ int main (
     gain = 3.;
   }
 
-  pFilterState = SUF_IirStateArrayAllocate (IIR_FILTER_STAGES);     // Allocate memory
-  pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (PLOT_LENGTH);
+  SLData_t       *pFilterState = SUF_IirStateArrayAllocate (IIR_FILTER_STAGES); // Allocate memory
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (PLOT_LENGTH);
 
   if ((NULL == pFilterState) || (NULL == pRealData) || (NULL == pImagData) || (NULL == pFFTCoeffs) || (NULL == pResults)) {
 
@@ -229,5 +227,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

@@ -49,26 +49,7 @@
 
 // Declare global variables and arrays
 static const char TxString[] = "Hello World - abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
 static const char *TxStringPtr;
-
-
-static SLData_t *pData, *pCarrierTable, *pDetection;
-static SLData_t *pRxLevelOneBPFilter, *pRxLevelZeroBPFilter;        // Rx filter coefficient pointers
-
-static SLData_t TxLevelOneCarrierPhase, TxLevelZeroCarrierPhase;    // Used by FSK
-
-
-                                // The following table defines the number of
-                                // samples used for each successive symbol (bit) of
-                                // data. The total over the entire period must equal
-                                // the integer number of samples for the perfect
-                                // sequence, in this case 20
-static const SLFixData_t SamplesPerSymbolTable[] = { 7, 6, 7 };
-
-static SLArrayIndex_t SamplesPerSymbolTableLength = 3;
-static SLArrayIndex_t TxSamplesPerSymbolTableOffset;
-static SLFixData_t TxSamplesPerSymbol;
 
 
 int main (
@@ -76,17 +57,31 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
+  SLData_t        txLevelOneCarrierPhase, txLevelZeroCarrierPhase;  // Used by FSK
+
+
+// The following table defines the number of
+// samples used for each successive symbol (bit) of
+// data. The total over the entire period must equal
+// the integer number of samples for the perfect
+// sequence, in this case 20
+  const SLFixData_t SamplesPerSymbolTable[] = { 7, 6, 7 };
+
+  SLArrayIndex_t  SamplesPerSymbolTableLength = 3;
+  SLArrayIndex_t  TxSamplesPerSymbolTableOffset;
+  SLFixData_t     TxSamplesPerSymbol;
+
   SLArrayIndex_t  TxBitIndex;
   SLData_t        LevelZeroFreqDotP, LevelOneFreqDotP;
   SLArrayIndex_t  Index = 0;
   SLData_t        FilterGain;
 
 // Allocate memory
-  pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH + 50);             // Additional length because variable # samples per symbol
-  pDetection = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pCarrierTable = SUF_VectorArrayAllocate (CARRIER_SINE_TABLE_SIZE);
-  pRxLevelOneBPFilter = SUF_VectorArrayAllocate (DETECT_FILTER_LENGTH);
-  pRxLevelZeroBPFilter = SUF_VectorArrayAllocate (DETECT_FILTER_LENGTH);
+  SLData_t       *pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH + 50); // Additional length because variable # samples per symbol
+  SLData_t       *pDetection = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pCarrierTable = SUF_VectorArrayAllocate (CARRIER_SINE_TABLE_SIZE);
+  SLData_t       *pRxLevelOneBPFilter = SUF_VectorArrayAllocate (DETECT_FILTER_LENGTH); // Rx filter coefficient pointers
+  SLData_t       *pRxLevelZeroBPFilter = SUF_VectorArrayAllocate (DETECT_FILTER_LENGTH);
 
 // Generate the filter coeffs on the fly - this
 // makes them dependent on the application sample rate
@@ -170,8 +165,8 @@ int main (
                    CARRIER_SINE_TABLE_SIZE);                        // Sine table size
 
 
-  TxLevelOneCarrierPhase = SIGLIB_ZERO;                             // Initialise FSK transmitter
-  TxLevelZeroCarrierPhase = SIGLIB_ZERO;
+  txLevelOneCarrierPhase = SIGLIB_ZERO;                             // Initialise FSK transmitter
+  txLevelZeroCarrierPhase = SIGLIB_ZERO;
 
   TxSamplesPerSymbolTableOffset = SIGLIB_AI_ZERO;                   // Initialise the samples per symbol table index
 
@@ -187,8 +182,8 @@ int main (
     SDA_FskModulate ((*TxStringPtr >> TxBitIndex),                  // Source data bit
                      pData + i,                                     // Destination data pointer
                      pCarrierTable,                                 // Carrier sinusoid table
-                     &TxLevelOneCarrierPhase,                       // Level '1' carrier phase
-                     &TxLevelZeroCarrierPhase,                      // Level '0' carrier phase
+                     &txLevelOneCarrierPhase,                       // Level '1' carrier phase
+                     &txLevelZeroCarrierPhase,                      // Level '0' carrier phase
                      CARRIER_FREQ_ONE / CARRIER_TABLE_FREQ,         // Level '1' phase increment
                      CARRIER_FREQ_ZERO / CARRIER_TABLE_FREQ,        // Level '0' phase increment
                      TxSamplesPerSymbol,                            // Samples per symbol
@@ -269,5 +264,5 @@ int main (
   SUF_MemoryFree (pRxLevelOneBPFilter);
   SUF_MemoryFree (pRxLevelZeroBPFilter);
 
-  exit (0);
+  return (0);
 }

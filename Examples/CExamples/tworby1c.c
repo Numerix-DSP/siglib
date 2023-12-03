@@ -18,35 +18,31 @@
 #define LOG2_FFT_LENGTH         SAI_FftLengthLog2(FFT_LENGTH)       // Log2 FFT length,
 
 // Declare global variables and arrays
-static SLData_t *pRealData1, *pImagData1, *pRealData2, *pImagData2, *pFFTCoeffs;
-static SLData_t *pRealDataCopy1, *pImagDataCopy1, *pRealDataCopy2, *pImagDataCopy2, *pRealDataCopy3, *pImagDataCopy3, *pRealDataCopy4,
-  *pImagDataCopy4;
-static SLData_t *pOutput2r1cResult1, *pOutput2r1cResult2;
-
-static SLData_t SourcePhase;
 
 
 int main (
   void)
 {
-  pRealData1 = SUF_VectorArrayAllocate (FFT_LENGTH);                // Allocate memory
-  pImagData1 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pRealData2 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData2 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t        SourcePhase;
 
-  pRealDataCopy1 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagDataCopy1 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pRealDataCopy2 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagDataCopy2 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pRealDataCopy3 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagDataCopy3 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pRealDataCopy4 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagDataCopy4 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pRealData1 = SUF_VectorArrayAllocate (FFT_LENGTH);  // Allocate memory
+  SLData_t       *pImagData1 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pRealData2 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData2 = SUF_VectorArrayAllocate (FFT_LENGTH);
 
-  pOutput2r1cResult1 = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pOutput2r1cResult2 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pRealDataCopy1 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagDataCopy1 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pRealDataCopy2 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagDataCopy2 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pRealDataCopy3 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagDataCopy3 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pRealDataCopy4 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagDataCopy4 = SUF_VectorArrayAllocate (FFT_LENGTH);
 
-  pFFTCoeffs = SUF_FftCoefficientAllocate4 (FFT_LENGTH);
+  SLData_t       *pOutput2r1cResult1 = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pOutput2r1cResult2 = SUF_VectorArrayAllocate (FFT_LENGTH);
+
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate4 (FFT_LENGTH);
 
   if ((NULL == pRealData1) || (NULL == pImagData1) || (NULL == pRealData2) || (NULL == pImagData2) ||
       (NULL == pRealDataCopy1) || (NULL == pImagDataCopy1) || (NULL == pRealDataCopy2) || (NULL == pImagDataCopy2) ||
@@ -320,5 +316,5 @@ int main (
   SUF_MemoryFree (pOutput2r1cResult2);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

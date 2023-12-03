@@ -33,13 +33,6 @@
 #define LOG2_FFT_LENGTH     SAI_FftLengthLog2(FFT_LENGTH)           // Log2 FFT length,
 
 // Declare global variables and arrays
-static SLArrayIndex_t FilterIndex;
-static SLData_t SrcData;
-
-static SLData_t *pFilterCoeffs;                                     // Filter coefficients
-static SLData_t *pFilterState;                                      // Filter state array
-
-static SLData_t *pFiltered, *pImagData, *pWindowCoeffs, *pResults, *pFFTCoeffs;
 
 
 int main (
@@ -47,19 +40,22 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
+  SLArrayIndex_t  FilterIndex;
+  SLData_t        SrcData;
+
 #if FILTER_NOISE
   time_t          ltime;
   time (&ltime);
   srand ((unsigned int) ltime);                                     // Randomise the seed
 #endif
 
-  pFilterCoeffs = SUF_VectorArrayAllocate (FILTER_LENGTH);
-  pFilterState = SUF_VectorArrayAllocate (FILTER_LENGTH);
+  SLData_t       *pFilterCoeffs = SUF_VectorArrayAllocate (FILTER_LENGTH);  // Filter coefficients
+  SLData_t       *pFilterState = SUF_VectorArrayAllocate (FILTER_LENGTH); // Filter state array
 
-  pFiltered = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *pFiltered = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (FFT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   if ((NULL == pFilterCoeffs) || (NULL == pFilterState) || (NULL == pFiltered) || (NULL == pImagData) || (NULL == pResults) || (NULL == pFFTCoeffs)) {
     printf ("Memory allocation error in main()\n");
@@ -148,7 +144,7 @@ int main (
   printf ("\nIFFT'd coefficients\nPlease hit <Carriage Return> to continue . . .");
   getchar ();
 
-  pWindowCoeffs = SUF_VectorArrayAllocate (FILTER_LENGTH);          // Initialise windowing function
+  SLData_t       *pWindowCoeffs = SUF_VectorArrayAllocate (FILTER_LENGTH);  // Initialise windowing function
   SIF_Window (pWindowCoeffs,                                        // Pointer to window oefficient
               SIGLIB_HANNING,                                       // Window type
               SIGLIB_ZERO,                                          // Window coefficient
@@ -265,5 +261,5 @@ int main (
   SUF_MemoryFree (pWindowCoeffs);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

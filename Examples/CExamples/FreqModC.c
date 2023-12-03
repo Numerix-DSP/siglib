@@ -16,8 +16,6 @@
 #define MOD_INDEX           0.05
 
 // Declare global variables and arrays
-static SLData_t *pSrc, *pRealDst, *pImagDst, *pLookUpTable;
-static SLData_t CarrierPhase, RampPhase;
 
 
 int main (
@@ -25,11 +23,13 @@ int main (
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
+  SLData_t        carrierPhase;
+
 // Allocate memory
-  pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pRealDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pImagDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pLookUpTable = SUF_ComplexFMArrayAllocate (SINE_TABLE_PERIOD);
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pRealDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pImagDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pLookUpTable = SUF_ComplexFMArrayAllocate (SINE_TABLE_PERIOD);
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Complex Frequency Modulation",                    // Plot title
@@ -43,14 +43,14 @@ int main (
     exit (-1);
   }
 
-  RampPhase = SIGLIB_ZERO;
+  SLData_t        rampPhase = SIGLIB_ZERO;
   SDA_SignalGenerateRamp (pSrc,                                     // Pointer to destination array
                           SIGLIB_ONE,                               // Amplitude
                           1.05,                                     // D.C. Offset
-                          &RampPhase,                               // Phase - maintained across array boundaries
+                          &rampPhase,                               // Phase - maintained across array boundaries
                           SAMPLE_LENGTH);                           // Dataset length
 
-  SIF_FrequencyModulateComplex (&CarrierPhase,                      // Pointer to carrier phase
+  SIF_FrequencyModulateComplex (&carrierPhase,                      // Pointer to carrier phase
                                 pLookUpTable,                       // Pointer to LUT array
                                 SINE_TABLE_PERIOD);                 // Table length
 
@@ -88,7 +88,7 @@ int main (
                                   pImagDst + i,                     // Modulated signal destination pointer
                                   CARRIER_FREQ,                     // Carrier frequency
                                   MOD_INDEX,                        // Modulation index
-                                  &CarrierPhase,                    // Pointer to carrier phase
+                                  &carrierPhase,                    // Pointer to carrier phase
                                   pLookUpTable,                     // Fast cosine look up table
                                   SINE_TABLE_PERIOD);               // Look up table size
   }
@@ -99,7 +99,7 @@ int main (
                                 pImagDst,                           // Modulated signal destination pointer
                                 CARRIER_FREQ,                       // Carrier frequency
                                 MOD_INDEX,                          // Modulation index
-                                &CarrierPhase,                      // Pointer to carrier phase
+                                &carrierPhase,                      // Pointer to carrier phase
                                 pLookUpTable,                       // Fast cosine look up table
                                 SINE_TABLE_PERIOD,                  // Look up table size
                                 SAMPLE_LENGTH);                     // Dataset length
@@ -135,5 +135,5 @@ int main (
   SUF_MemoryFree (pImagDst);
   SUF_MemoryFree (pLookUpTable);
 
-  exit (0);
+  return (0);
 }

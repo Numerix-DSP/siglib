@@ -27,12 +27,6 @@ static const SLData_t IIRFilterTaps[IIR_FILTER_STAGES * SIGLIB_IIR_COEFFS_PER_BI
   9.42380353047E-0002, -5.53439298689E-0002, 9.42380353047E-0002, -1.59154638820E+0000, 9.56063978767E-0001
 };
 
-static SLData_t *pIIRFilterState;
-static SLData_t *pPNSequence, *pDisplayArray;
-static SLData_t PnsPhase, PnsCurrentValue;
-static SLData_t *pLookUpTable;                                      // For fast sine lookup
-static SLData_t CarrierPhase;
-
 
 int main (
   void)
@@ -42,11 +36,14 @@ int main (
   SLData_t        DifferentiatePrevious = SIGLIB_ZERO;              // Previous value of differential
   SLData_t        EnvelopePrevious = SIGLIB_ZERO;                   // Previous value of envelope
 
+  SLData_t        PnsPhase, PnsCurrentValue;
+  SLData_t        carrierPhase;
+
 // Allocate memory
-  pPNSequence = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pDisplayArray = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pLookUpTable = SUF_VectorArrayAllocate (SINE_TABLE_SIZE);
-  pIIRFilterState = SUF_IirStateArrayAllocate (IIR_FILTER_STAGES);
+  SLData_t       *pPNSequence = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pDisplayArray = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pLookUpTable = SUF_VectorArrayAllocate (SINE_TABLE_SIZE);
+  SLData_t       *pIIRFilterState = SUF_IirStateArrayAllocate (IIR_FILTER_STAGES);
 
   h2DPlot =                                                         // Initialize plot
     gpc_init_2d ("Frequency Modulation",                            // Plot title
@@ -64,7 +61,7 @@ int main (
            IIR_FILTER_STAGES);                                      // Number of second order stages
 
 // Initialize FM modulator
-  SIF_FrequencyModulate (&CarrierPhase,                             // Pointer to carrier phase
+  SIF_FrequencyModulate (&carrierPhase,                             // Pointer to carrier phase
                          pLookUpTable,                              // Pointer to LUT array
                          SINE_TABLE_SIZE);                          // Table length
 
@@ -100,7 +97,7 @@ int main (
                          pPNSequence,                               // Modulated signal destination pointer
                          CARRIER_FREQ,                              // Carrier frequency
                          MOD_INDEX,                                 // Modulation index
-                         &CarrierPhase,                             // Pointer to carrier phase
+                         &carrierPhase,                             // Pointer to carrier phase
                          pLookUpTable,                              // Fast cosine look up table
                          SINE_TABLE_SIZE,                           // Look up table size
                          SAMPLE_LENGTH);                            // Dataset length
@@ -173,5 +170,5 @@ int main (
   SUF_MemoryFree (pLookUpTable);
   SUF_MemoryFree (pIIRFilterState);
 
-  exit (0);
+  return (0);
 }

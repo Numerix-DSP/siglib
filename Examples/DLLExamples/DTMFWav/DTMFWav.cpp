@@ -17,14 +17,9 @@
 #define SAMPLE_LENGTH           102
 
 // Declare global variables and arrays
-SLData_t       *pData;                                              // Data arrays
-SLData_t       *pDTMFDetectState;
 SLWavFileInfo_s wavInfo;
 
-void            main (
-  void);
-
-void main (
+int main (
   void)
 {
   SLFixData_t     Finished = 0;
@@ -35,8 +30,8 @@ void main (
   SLFixData_t     KeyCodeRegistered = SIGLIB_FALSE;                 // A key code has not been registered
   FILE           *fpInputFile;
 
-  pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pDTMFDetectState = SUF_VectorArrayAllocate (SIGLIB_GOERTZEL_DELAY_LENGTH);
+  SLData_t       *pData = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pDTMFDetectState = SUF_VectorArrayAllocate (SIGLIB_GOERTZEL_DELAY_LENGTH);
 
 
   if ((fpInputFile = fopen ("tones.wav", "rb")) == NULL) {          // Note this file is binary
@@ -78,4 +73,6 @@ void main (
 
   SUF_MemoryFree (pData);                                           // Free memory
   SUF_MemoryFree (pDTMFDetectState);
+
+  return (0);
 }

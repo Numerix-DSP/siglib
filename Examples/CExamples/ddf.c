@@ -13,7 +13,6 @@
 #define LOG2_FFT_LENGTH         SAI_FftLengthLog2(FFT_LENGTH)       // Log2 FFT length,
 
 // Declare global variables and arrays
-static SLData_t *input, *pRealData, *pImagData, *pResults, *pFFTCoeffs;
 
 
 int main (
@@ -46,11 +45,11 @@ int main (
     PerformFFT = SIGLIB_TRUE;
   }
 
-  input = SUF_VectorArrayAllocate (INPUT_LENGTH);
-  pRealData = SUF_VectorArrayAllocate (INPUT_LENGTH);
-  pImagData = SUF_VectorArrayAllocate (INPUT_LENGTH);
-  pResults = SUF_VectorArrayAllocate (INPUT_LENGTH);
-  pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
+  SLData_t       *input = SUF_VectorArrayAllocate (INPUT_LENGTH);
+  SLData_t       *pRealData = SUF_VectorArrayAllocate (INPUT_LENGTH);
+  SLData_t       *pImagData = SUF_VectorArrayAllocate (INPUT_LENGTH);
+  SLData_t       *pResults = SUF_VectorArrayAllocate (INPUT_LENGTH);
+  SLData_t       *pFFTCoeffs = SUF_FftCoefficientAllocate (FFT_LENGTH);
 
   SDA_Clear (input,                                                 // Pointer to destination array
              INPUT_LENGTH);                                         // Dataset length
@@ -187,5 +186,5 @@ int main (
   SUF_MemoryFree (pResults);
   SUF_MemoryFree (pFFTCoeffs);
 
-  exit (0);
+  return (0);
 }

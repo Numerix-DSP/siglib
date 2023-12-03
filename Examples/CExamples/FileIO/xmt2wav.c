@@ -6,7 +6,6 @@
 #include <math.h>
 #include <siglib.h>                                                 // SigLib DSP library
 
-SLData_t       *p_DataArray;
 #define SAMPLE_SIZE     128
 
 SLWavFileInfo_s wavInfo;
@@ -37,7 +36,7 @@ int main (
   printf ("xmt filename: %s\n", XmtFileName);
   printf ("wav filename: %s\n", WavFileName);
 
-  p_DataArray = SUF_VectorArrayAllocate (SAMPLE_SIZE);
+  SLData_t       *pDataArray = SUF_VectorArrayAllocate (SAMPLE_SIZE);
 
   if ((fpInputFile = fopen (XmtFileName, "rb")) == NULL) {          // Note this file is binary
     printf ("Error opening input .xmt file\n");
@@ -53,12 +52,12 @@ int main (
 
   SUF_WavWriteHeader (fpOutputFile, wavInfo);                       // Write dummy header to output file
 
-  while ((inputSampleCount = SUF_XmtReadData (p_DataArray, fpInputFile, SAMPLE_SIZE)) != 0) { // Successively read arrays of 128 samples*/
+  while ((inputSampleCount = SUF_XmtReadData (pDataArray, fpInputFile, SAMPLE_SIZE)) != 0) {  // Successively read arrays of 128 samples*/
     for (int i = 0; i < inputSampleCount; i++) {                    // Scale the data to 16 bit (from 32 bit)
-      *(p_DataArray + i) = *(p_DataArray + i) / (65536.);
+      *(pDataArray + i) = *(pDataArray + i) / (65536.);
     }
     outputSampleCount += inputSampleCount;
-    SUF_WavWriteData (p_DataArray, fpOutputFile, wavInfo, inputSampleCount);
+    SUF_WavWriteData (pDataArray, fpOutputFile, wavInfo, inputSampleCount);
   }
 // Write last block of data
   printf ("Total number of samples read: %d\n", outputSampleCount);
@@ -70,7 +69,7 @@ int main (
   fclose (fpInputFile);
   fclose (fpOutputFile);
 
-  free (p_DataArray);                                               // Free memory
+  free (pDataArray);                                                // Free memory
 
   return (0);
 }

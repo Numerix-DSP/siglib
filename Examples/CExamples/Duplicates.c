@@ -89,5 +89,5 @@ int main (
   }
   printf ("\n\n");
 
-  exit (0);
+  return (0);
 }

@@ -29,19 +29,16 @@ static const SLData_t pFilterTaps[FILTER_LENGTH] = {
 };
 
 
-static SLData_t pFilterState[FILTER_LENGTH];
-static SLArrayIndex_t FilterIndex;
-static SLData_t *pSrc, *pDst;
-static SLData_t SinePhase;
-
-
 int main (
   void)
 {
   h_GPC_Plot     *h2DPlot;                                          // Plot object
 
-  pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
-  pDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t        pFilterState[FILTER_LENGTH];
+  SLArrayIndex_t  FilterIndex;
+
+  SLData_t       *pSrc = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
+  SLData_t       *pDst = SUF_VectorArrayAllocate (SAMPLE_LENGTH);
 
   if ((NULL == pSrc) || (NULL == pDst)) {
     printf ("Memory allocation error in main()\n");
@@ -64,7 +61,7 @@ int main (
            &FilterIndex,                                            // Pointer to filter index register
            FILTER_LENGTH);                                          // Filter length
 
-  SinePhase = SIGLIB_ZERO;
+  SLData_t        sinePhase = SIGLIB_ZERO;
 
 // Generate a noisy sinewave
   SDA_SignalGenerate (pSrc,                                         // Pointer to destination array
@@ -75,7 +72,7 @@ int main (
                       SIGLIB_ZERO,                                  // D.C. Offset
                       SIGLIB_ZERO,                                  // Unused
                       SIGLIB_ZERO,                                  // Signal end value - Unused
-                      &SinePhase,                                   // Signal phase - maintained across array boundaries
+                      &sinePhase,                                   // Signal phase - maintained across array boundaries
                       SIGLIB_NULL_DATA_PTR,                         // Unused
                       SAMPLE_LENGTH);                               // Output dataset length
 
@@ -148,5 +145,5 @@ int main (
   SUF_MemoryFree (pSrc);                                            // Free memory
   SUF_MemoryFree (pDst);
 
-  exit (0);
+  return (0);
 }
