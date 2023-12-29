@@ -4996,8 +4996,8 @@ var
                              const _2: SLARRAYINDEX_T): SLDATA_T cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
 var
-  SDA_UnbiasedVariance: function(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
-                                 const _2: SLARRAYINDEX_T): SLDATA_T cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
+  SDA_SampleVariance: function(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
+                               const _2: SLARRAYINDEX_T): SLDATA_T cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
 var
   SDA_Median: function(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
@@ -8305,9 +8305,9 @@ begin
   {$IFDEF WIN32}
     Assert(@SDA_PopulationSd <> nil);
   {$ENDIF}
-    @SDA_UnbiasedVariance := GetProcAddress(DLLHandle,'SDA_UnbiasedVariance');
+    @SDA_SampleVariance := GetProcAddress(DLLHandle,'SDA_SampleVariance');
   {$IFDEF WIN32}
-    Assert(@SDA_UnbiasedVariance <> nil);
+    Assert(@SDA_SampleVariance <> nil);
   {$ENDIF}
     @SDA_Median := GetProcAddress(DLLHandle,'SDA_Median');
   {$IFDEF WIN32}

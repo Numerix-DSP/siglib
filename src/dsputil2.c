@@ -1541,7 +1541,7 @@ void SIGLIB_FUNC_DECL SIF_Drc (
 *   SLData_t *envelopeState,                  - Envelope follower state variable
 *   const SLData_t envelopeOnePoleCoeff,      - Envelope follower one-pole filter coefficient
 *   const SLData_t envelopeThreshold,         - Envelope follower threshold to enable DRC functionality
-*   const SLDrcLevelGainTable *drcGainTable,  - Thresholds/Gains table
+*   const SLDrcLevelGainTable_s *drcGainTable,  - Thresholds/Gains table
 *   const SLArrayIndex_t numberOfKnees,       - Number of knees
 *   const SLData_t makeupGain)                - Makeup gain
 *
@@ -1557,7 +1557,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Drc (
   SLData_t * envelopeState,
   const SLData_t envelopeOnePoleCoeff,
   const SLData_t envelopeThreshold,
-  const SLDrcLevelGainTable * drcGainTable,
+  const SLDrcLevelGainTable_s * drcGainTable,
   const SLArrayIndex_t numberOfKnees,
   const SLData_t makeupGain)
 {
@@ -1606,7 +1606,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Drc (
 *   SLData_t *envelopeState,                  - Envelope follower state variable
 *   const SLData_t envelopeOnePoleCoeff,      - Envelope follower one-pole filter coefficient
 *   const SLData_t envelopeThreshold,         - Envelope follower threshold to enable DRC functionality
-*   const SLDrcLevelGainTable *drcGainTable,  - Thresholds/Gains table
+*   const SLDrcLevelGainTable_s *drcGainTable,  - Thresholds/Gains table
 *   const SLArrayIndex_t numberOfKnees,       - Number of knees
 *   const SLData_t makeupGain)                - Makeup gain
 *   const SLArrayIndex_t sampleLength)        - Sample length
@@ -1624,7 +1624,7 @@ void SIGLIB_FUNC_DECL SDA_Drc (
   SLData_t * envelopeState,
   const SLData_t envelopeOnePoleCoeff,
   const SLData_t envelopeThreshold,
-  const SLDrcLevelGainTable * drcGainTable,
+  const SLDrcLevelGainTable_s * drcGainTable,
   const SLArrayIndex_t numberOfKnees,
   const SLData_t makeupGain,
   const SLArrayIndex_t sampleLength)

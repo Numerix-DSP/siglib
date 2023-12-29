@@ -111,6 +111,9 @@ popd
 pushd $SIGLIB_PATH/Examples/CExamples/ImageExamples/
 $SIGLIB_PATH/utils/clean_executables.sh
 popd
+pushd $SIGLIB_PATH/Examples/CExamples/KalmanFilters/
+$SIGLIB_PATH/utils/clean_executables.sh
+popd
 pushd $SIGLIB_PATH/Examples/CExamples/MachineLearning/
 rm -f *.csv
 rm -f weightCoefficientsFiles/*

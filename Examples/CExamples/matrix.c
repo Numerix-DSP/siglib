@@ -264,6 +264,35 @@ int main (
           DstComplex2x2[0].real, DstComplex2x2[0].imag, DstComplex2x2[1].real, DstComplex2x2[1].imag,
           DstComplex2x2[2].real, DstComplex2x2[2].imag, DstComplex2x2[3].real, DstComplex2x2[3].imag);
 
+#define DIAGONAL_MATRIX_DIMENSION      3
+
+  SLData_t        dsrc[DIAGONAL_MATRIX_DIMENSION][DIAGONAL_MATRIX_DIMENSION] = {
+    { 1., 2., 3. },
+    { 4., 5., 6. },
+    { 7., 8., 9. }
+  };
+  SLData_t        ddst[DIAGONAL_MATRIX_DIMENSION][DIAGONAL_MATRIX_DIMENSION];
+
+  printf ("\nDiagonal Matrix:\n");
+  printf ("Source Array:\n");
+  SUF_PrintMatrix ((SLData_t *) dsrc, DIAGONAL_MATRIX_DIMENSION, DIAGONAL_MATRIX_DIMENSION);
+
+  SMX_Diagonal ((SLData_t *) dsrc,                                  // Source matrix
+                (SLData_t *) ddst,                                  // Destination matrix
+                DIAGONAL_MATRIX_DIMENSION,                          // Number of rows
+                DIAGONAL_MATRIX_DIMENSION);                         // Number of columns
+
+  printf ("\nNot In-Place Destination Array:\n");
+  SUF_PrintMatrix ((SLData_t *) ddst, DIAGONAL_MATRIX_DIMENSION, DIAGONAL_MATRIX_DIMENSION);
+
+  SMX_Diagonal ((SLData_t *) dsrc,                                  // Source matrix
+                (SLData_t *) dsrc,                                  // Destination matrix
+                DIAGONAL_MATRIX_DIMENSION,                          // Number of rows
+                DIAGONAL_MATRIX_DIMENSION);                         // Number of columns
+
+  printf ("\nIn-Place Destination Array:\n");
+  SUF_PrintMatrix ((SLData_t *) dsrc, DIAGONAL_MATRIX_DIMENSION, DIAGONAL_MATRIX_DIMENSION);
+
 
   SUF_MemoryFree (pMatrixa);                                        // Free memory
   SUF_MemoryFree (pMatrixb);

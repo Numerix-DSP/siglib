@@ -859,7 +859,7 @@ public class siglib_wrapJNI {
   public final static native void SDA_SubtractMean(long jarg1, long jarg2, double jarg3, int jarg4);
   public final static native double SDA_SampleSd(long jarg1, int jarg2);
   public final static native double SDA_PopulationSd(long jarg1, int jarg2);
-  public final static native double SDA_UnbiasedVariance(long jarg1, int jarg2);
+  public final static native double SDA_SampleVariance(long jarg1, int jarg2);
   public final static native double SDA_Median(long jarg1, long jarg2, int jarg3);
   public final static native double SDA_LinraConstantCoeff(long jarg1, long jarg2, int jarg3);
   public final static native double SDA_LinraRegressionCoeff(long jarg1, long jarg2, int jarg3);

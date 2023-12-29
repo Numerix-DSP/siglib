@@ -3345,9 +3345,9 @@ def SDA_PopulationSd(arg1, arg2):
     return _siglib_wrap.SDA_PopulationSd(arg1, arg2)
 SDA_PopulationSd = _siglib_wrap.SDA_PopulationSd
 
-def SDA_UnbiasedVariance(arg1, arg2):
-    return _siglib_wrap.SDA_UnbiasedVariance(arg1, arg2)
-SDA_UnbiasedVariance = _siglib_wrap.SDA_UnbiasedVariance
+def SDA_SampleVariance(arg1, arg2):
+    return _siglib_wrap.SDA_SampleVariance(arg1, arg2)
+SDA_SampleVariance = _siglib_wrap.SDA_SampleVariance
 
 def SDA_Median(arg1, arg2, arg3):
     return _siglib_wrap.SDA_Median(arg1, arg2, arg3)

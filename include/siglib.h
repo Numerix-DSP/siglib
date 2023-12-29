@@ -2312,6 +2312,16 @@ extern          "C" {
   SLData_t SIGLIB_FUNC_DECL SUF_QFactorToBandwidth (
   const SLData_t QFactor);                                          // Q Factor
 
+  SLData_t SIGLIB_FUNC_DECL SDS_KalmanFilter1D (
+  const SLData_t,                                                   // Measured position
+  SLKalmanFilter1D_s *);                                            // Kalman filter structure
+
+  void SIGLIB_FUNC_DECL SDS_KalmanFilter2D (
+  const SLData_t,                                                   // Measured position
+  const SLData_t,                                                   // Measured velocity
+  SLKalmanFilter2D_s *,                                             // Kalman filter structure
+  SLData_t *,                                                       // Estimated position
+  SLData_t *);                                                      // Estimated velocity
 
 // Acoustic processing functions - acoustic.c
 
@@ -6346,7 +6356,7 @@ extern          "C" {
   SLData_t *,                                                       // Pointer to envelope follower state variable
   const SLData_t,                                                   // Envelope follower one-pole filter coefficient
   const SLData_t,                                                   // Envelope follower threshold to enable DRC functionality
-  const SLDrcLevelGainTable *,                                      // Pointer to Thresholds/Gains table
+  const SLDrcLevelGainTable_s *,                                    // Pointer to Thresholds/Gains table
   const SLArrayIndex_t,                                             // Number of knees
   const SLData_t);                                                  // Makeup gain
 
@@ -6356,7 +6366,7 @@ extern          "C" {
   SLData_t *,                                                       // Pointer to envelope follower state variable
   const SLData_t,                                                   // Envelope follower one-pole filter coefficient
   const SLData_t,                                                   // Envelope follower threshold to enable DRC functionality
-  const SLDrcLevelGainTable *,                                      // Pointer to Thresholds/Gains table
+  const SLDrcLevelGainTable_s *,                                    // Pointer to Thresholds/Gains table
   const SLArrayIndex_t,                                             // Number of knees
   const SLData_t,                                                   // Makeup gain
   const SLArrayIndex_t);                                            // Array length
@@ -6810,9 +6820,22 @@ extern          "C" {
   const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to array
   const SLArrayIndex_t);                                            // Array length
 
-  SLData_t SIGLIB_FUNC_DECL SDA_UnbiasedVariance (
+  SLData_t SIGLIB_FUNC_DECL SDA_SampleVariance (
   const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to array
   const SLArrayIndex_t);                                            // Array length
+
+  SLData_t SIGLIB_FUNC_DECL SDA_PopulationVariance (
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to array
+  const SLArrayIndex_t);                                            // Array length
+
+  void SIGLIB_FUNC_DECL SDA_CovarianceMatrix (
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to source matrix
+  SLData_t * SIGLIB_INOUT_PTR_DECL,                                 // Pointer to means array
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination covariance matrix
+  const SLData_t,                                                   // Inverse array length
+  const SLData_t,                                                   // Final divisor - sample or population covariance
+  const SLArrayIndex_t,                                             // Number of datasets
+  const SLArrayIndex_t);                                            // Array lengths
 
   SLData_t SIGLIB_FUNC_DECL SDA_Median (
   const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to array
@@ -7414,6 +7437,12 @@ extern          "C" {
   const SLArrayIndex_t,                                             // Source matrix # of rows
   const SLArrayIndex_t);                                            // Source matrix # cols
 
+  void SIGLIB_FUNC_DECL SMX_Diagonal (
+  const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to source matrix
+  SLData_t * SIGLIB_OUTPUT_PTR_DECL,                                // Pointer to destination matrix
+  const SLArrayIndex_t,                                             // Source matrix # of rows
+  const SLArrayIndex_t);                                            // Source matrix # cols
+
   void SIGLIB_FUNC_DECL SMX_Multiply (
   const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to source matrix 1
   const SLData_t * SIGLIB_INPUT_PTR_DECL,                           // Pointer to source matrix 2
@@ -7634,17 +7663,17 @@ extern          "C" {
 
 #define SMX_Copy(IPtr, OPtr, nRows, nCols)  SDA_Copy (IPtr, OPtr, (SLArrayIndex_t)(nRows * nCols))
 
-#define SMX_Add(IPtr1, IPtr2, OPtr, nRows, nCols)   SDA_Operate (IPtr1, \
-                                            IPtr2, OPtr, +, (SLArrayIndex_t)(nRows * nCols))
+#define SMX_Add(IPtr1, IPtr2, OPtr, nRows, nCols) \
+  SDA_Add2 ((SLData_t *)IPtr1, (SLData_t *)IPtr2, (SLData_t *)OPtr, (SLArrayIndex_t)(nRows * nCols))
 
-#define SMX_Subtract(IPtr1, IPtr2, OPtr, nRows, nCols)  SDA_Operate (IPtr1, \
-                                            IPtr2, OPtr, -, (SLArrayIndex_t)(nRows * nCols))
+#define SMX_Subtract(IPtr1, IPtr2, OPtr, nRows, nCols) \
+  SDA_Subtract2((SLData_t *)IPtr1, (SLData_t *)IPtr2, (SLData_t *)OPtr, (SLArrayIndex_t)(nRows * nCols))
 
-#define SMX_MultiplyPiecewise(IPtr1, IPtr2, OPtr, nRows, nCols) SDA_Operate (IPtr1, \
-                                            IPtr2, OPtr, *, (SLArrayIndex_t)(nRows * nCols))
+#define SMX_MultiplyPiecewise(IPtr1, IPtr2, OPtr, nRows, nCols) \
+  SDA_Multiply2 ((SLData_t *)IPtr1, (SLData_t *)IPtr2, (SLData_t *)OPtr, (SLArrayIndex_t)(nRows * nCols))
 
-#define SMX_ScalarMultiply(IPtr, Multiplier, OPtr, nRows, nCols)    SDA_Multiply (IPtr, Multiplier, \
-                                            OPtr, (SLArrayIndex_t)(nRows * nCols))
+#define SMX_ScalarMultiply(IPtr, Multiplier, OPtr, nRows, nCols) \
+  SDA_Multiply ((SLData_t *)IPtr, (SLData_t)Multiplier, (SLData_t *)OPtr, (SLArrayIndex_t)(nRows * nCols))
 #endif                                                              // End of #ifndef _HP_VEE
 
 // Machine Learning functions - machinelearning.c
@@ -7879,6 +7908,7 @@ extern          "C" {
 #define SUF_EstimateBPFilterLength  SUF_EstimateBPFirFilterLength
 #define SUF_EstimateBPFilterError   SUF_EstimateBPFirFilterError
 
+#define SDA_UnbiasedVariance        SDA_SampleVariance
 
 #ifdef __cplusplus                                                  // End of decl. for C++ program calls
 }

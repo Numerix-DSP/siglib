@@ -117,7 +117,31 @@ typedef struct {                                                    // Neural ne
 typedef struct {                                                    // Dynamic range compressor thresholds/gains
   SLData_t        level;
   SLData_t        gain;
-} SLDrcLevelGainTable;
+} SLDrcLevelGainTable_s;
+
+typedef struct {                                                    // 1D Kalman filter
+  SLData_t        A[1];                                             // State transition matrix
+  SLData_t        B[1];                                             // State transition matrix - Acceleration
+  SLData_t        u[1];                                             // Acceleration
+  SLData_t        w[1];                                             // Noise matrix
+  SLData_t        H[1];                                             // Measurement matrix
+  SLData_t        P[1];                                             // Process estimate error covariance matrix
+  SLData_t        Q[1];                                             // Process noise covariance matrix
+  SLData_t        R[1];                                             // Measurement noise covariance matrix
+  SLData_t        X[1];                                             // State estimate [position]
+} SLKalmanFilter1D_s;
+
+typedef struct {                                                    // 2D Kalman filter
+  SLData_t        A[2][2];                                          // State transition matrix
+  SLData_t        B[2];                                             // State transition matrix - Acceleration
+  SLData_t        u[1];                                             // Acceleration
+  SLData_t        w[2];                                             // Noise matrix
+  SLData_t        H[2][2];                                          // Measurement matrix
+  SLData_t        P[2][2];                                          // Process estimate error covariance matrix
+  SLData_t        Q[2][2];                                          // Process noise covariance matrix
+  SLData_t        R[2][2];                                          // Measurement noise covariance matrix
+  SLData_t        X[2];                                             // State estimate [position, velocity]
+} SLKalmanFilter2D_s;
 
 
             // SigLib enumerated data types

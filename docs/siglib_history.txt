@@ -2,14 +2,18 @@ SigLib (Tm) Revision Update History File
 ========================================
 
 VERSION: 10.55
-RELEASE DATE: XX/XX/2023
+RELEASE DATE: 29/12/2023
 _________________________
 
 Additional Functionality:
-  SMX_CholeskyDecompose
+  SMX_CholeskyDecompose, SMX_Diagonal
+  SDA_CovarianceMatrix
+  SDA_PopulationVariance
+  SDS_KalmanFilter1D, SDS_KalmanFilter2D
 
 Operational Changes:
-  None.
+  SMX_Add, SMX_Subtract, SMX_MultiplyPiecewise and SMX_ScalarMultiply tidied up
+  SDA_UnbiasedVariance changed to SDA_SampleVariance and optimized
 
 Additional Processor / Compiler Support:
   None.

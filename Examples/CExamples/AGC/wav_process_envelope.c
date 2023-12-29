@@ -60,7 +60,7 @@ static SLData_t agcGain;                                            // AGC gain
 static SLData_t agcEnvelopeDetectorCoeff;                           // AGC envelope detector coefficient
 static SLData_t agcEnvelopeDetectorState;                           // AGC envelope detector state
 
-static SLDrcLevelGainTable drcLevelGainTable[] = {                  // DRC level/gain table with a nice soft knee
+static SLDrcLevelGainTable_s drcLevelGainTable[] = {                // DRC level/gain table with a nice soft knee
   { SDS_dBmToVoltageMacro (AGC_DESIRED_OUTPUT_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE), SDS_dBToVoltageMacro (-1.) },
   { SDS_dBmToVoltageMacro (AGC_DESIRED_OUTPUT_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 500., SDS_dBToVoltageMacro (-2.) },
   { SDS_dBmToVoltageMacro (AGC_DESIRED_OUTPUT_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 1000., SDS_dBToVoltageMacro (-3.) },
@@ -71,7 +71,7 @@ static SLDrcLevelGainTable drcLevelGainTable[] = {                  // DRC level
 
 static SLData_t drcEnvelopeDetectorState = SIGLIB_ZERO;             // DRC envelope detector state
 static SLData_t drcEnvelopeDetectorCoeff;                           // DRC envelope detector one-pole filter coefficient
-static SLArrayIndex_t drcNumberOfKnees = sizeof (drcLevelGainTable) / sizeof (SLDrcLevelGainTable); // DRC number of knees
+static SLArrayIndex_t drcNumberOfKnees = sizeof (drcLevelGainTable) / sizeof (SLDrcLevelGainTable_s); // DRC number of knees
 
 
 static SLWavFileInfo_s wavInfo;

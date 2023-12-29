@@ -30,7 +30,7 @@
 
 // Declare global variables and arrays
 
-static SLDrcLevelGainTable drcLevelGainTable[] = {                  // DRC level/gain table
+static SLDrcLevelGainTable_s drcLevelGainTable[] = {                // DRC level/gain table
   { SDS_dBmToVoltageMacro (DRC_FIRST_KNEE_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE), SDS_dBToVoltageMacro (-.5) },
   { SDS_dBmToVoltageMacro (DRC_FIRST_KNEE_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 500., SDS_dBToVoltageMacro (-1.) },
   { SDS_dBmToVoltageMacro (DRC_FIRST_KNEE_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 1000., SDS_dBToVoltageMacro (-1.5) },
@@ -41,7 +41,7 @@ static SLDrcLevelGainTable drcLevelGainTable[] = {                  // DRC level
 
 static SLData_t drcEnvelopeDetectorState;                           // DRC envelope detector state
 static SLData_t drcEnvelopeDetectorCoeff;                           // DRC envelope detector one-pole filter coefficient
-static SLArrayIndex_t drcNumberOfKnees = sizeof (drcLevelGainTable) / sizeof (SLDrcLevelGainTable); // DRC number of knees
+static SLArrayIndex_t drcNumberOfKnees = sizeof (drcLevelGainTable) / sizeof (SLDrcLevelGainTable_s); // DRC number of knees
 
 
 int main (

@@ -1532,7 +1532,16 @@ double _stdcall SUF_SiglibVersion (
    double BW);                                                     // Bandwidth
 double _stdcall SUF_QFactorToBandwidth (
    double QFactor);                                                // Q Factor
- 
+double _stdcall SDS_KalmanFilter1D (
+   double,                                                         // Measured position
+  SLKalmanFilter1D_s *);                                            // Kalman filter structure
+void _stdcall  SDS_KalmanFilter2D (
+   double,                                                         // Measured position
+  double,                                                           // Measured velocity
+  SLKalmanFilter2D_s *,                                             // Kalman filter structure
+  double *,                                                         // Estimated position
+  double *);                                                        // Estimated velocity
+
 // Acoustic processing functions - acoustic.c
 void _stdcall  SDA_LinearMicrophoneArrayBeamPattern (
    long,                                                           // Number of microphones
@@ -2706,7 +2715,7 @@ double _stdcall SUF_SiglibVersion (
   long *,                                                           // Pointer to ELG synchronization delay index
   long);                                                            // ELG output synchronization delay length
  
-#line 3662 "siglib.h"
+#line 3672 "siglib.h"
 long _stdcall   SDS_CostasQamDemodulateDebug (
    double,                                                         // Source data sample
   double *,                                                         // Pointer to real destination symbol point
@@ -2836,7 +2845,7 @@ long _stdcall   SDS_CostasQamDemodulateDebug (
   double *,                                                         // Pointer to debug real filter output
   double *,                                                         // Pointer to debug imaginary filter output
   double *);                                                        // Pointer to debug ELG trigger output
-#line 3794 "siglib.h"
+#line 3804 "siglib.h"
 void _stdcall  SIF_QpskModulate (
    double *SIGLIB_OUTPUT_PTR_DECL,                                 // Carrier table pointer
   double,                                                           // Carrier phase increment per sample (radians / 2Ï€)
@@ -4989,7 +4998,7 @@ void _stdcall   SDA_Multiplex (
   double *,                                                         // Pointer to envelope follower state variable
   double,                                                           // Envelope follower one-pole filter coefficient
   double,                                                           // Envelope follower threshold to enable DRC functionality
-  SLDrcLevelGainTable *,                                            // Pointer to Thresholds/Gains table
+  SLDrcLevelGainTable_s *,                                          // Pointer to Thresholds/Gains table
   long,                                                             // Number of knees
   double);                                                          // Makeup gain
 void _stdcall  SDA_Drc (
@@ -4998,7 +5007,7 @@ void _stdcall   SDA_Multiplex (
   double *,                                                         // Pointer to envelope follower state variable
   double,                                                           // Envelope follower one-pole filter coefficient
   double,                                                           // Envelope follower threshold to enable DRC functionality
-  SLDrcLevelGainTable *,                                            // Pointer to Thresholds/Gains table
+  SLDrcLevelGainTable_s *,                                          // Pointer to Thresholds/Gains table
   long,                                                             // Number of knees
   double,                                                           // Makeup gain
   long);                                                            // Array length
@@ -5380,9 +5389,20 @@ void _stdcall   SDA_Multiplex (
 double _stdcall SDA_PopulationSd (
    double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to array
   long);                                                            // Array length
-double _stdcall SDA_UnbiasedVariance (
+double _stdcall SDA_SampleVariance (
    double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to array
   long);                                                            // Array length
+double _stdcall SDA_PopulationVariance (
+   double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to array
+  long);                                                            // Array length
+void _stdcall  SDA_CovarianceMatrix (
+  double *SIGLIB_INPUT_PTR_DECL,                                    // Pointer to source matrix
+  double *SIGLIB_INOUT_PTR_DECL,                                    // Pointer to means array
+  double *SIGLIB_OUTPUT_PTR_DECL,                                   // Pointer to destination covariance matrix
+  double,                                                           // Inverse array length
+  double,                                                           // Final divisor - sample or population covariance
+  long,                                                             // Number of datasets
+  long);                                                            // Array lengths
 double _stdcall SDA_Median (
    double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to array
   double *SIGLIB_INOUT_PTR_DECL,                                    // Pointer to working array
@@ -5640,6 +5660,11 @@ void _stdcall   SDA_Multiplex (
   double *SIGLIB_OUTPUT_PTR_DECL,                                   // Pointer to destination matrix
   long,                                                             // Source matrix # of rows
   long);                                                            // Source matrix # cols
+void _stdcall  SMX_Diagonal (
+   double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to source matrix
+  double *SIGLIB_OUTPUT_PTR_DECL,                                   // Pointer to destination matrix
+  long,                                                             // Source matrix # of rows
+  long);                                                            // Source matrix # cols
 void _stdcall  SMX_Multiply (
    double *SIGLIB_INPUT_PTR_DECL,                                  // Pointer to source matrix 1
   double *SIGLIB_INPUT_PTR_DECL,                                    // Pointer to source matrix 2
@@ -5827,6 +5852,6 @@ void _stdcall   SDA_Multiplex (
 // Machine Learning functions - machinelearning.c
                                                                                                                                                                                                              
 // Deprecated functionality - these may be removed in a later version
-                               
+                                
 // End of SigLib DSP function section
-#line 7871 "siglib.h"
+#line 7900 "siglib.h"

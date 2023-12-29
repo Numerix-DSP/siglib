@@ -811,7 +811,7 @@ int main (
                "blue",                                              // Colour
                GPC_NEW);                                            // New graph
   printf ("\nGaussian noise histogram\n");
-  printf ("Variance = %lf\n", SDA_UnbiasedVariance (pRealData, SAMPLE_LENGTH));
+  printf ("Variance = %lf\n", SDA_SampleVariance (pRealData, SAMPLE_LENGTH));
 
   printf ("\nHit <Carriage Return> to continue ....\n");
   getchar ();                                                       // Wait for <Carriage Return>

@@ -4,7 +4,7 @@ File Name               : FILTER.C      | Author        : JOHN EDWARDS
 Siglib Library Version  : 10.50         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 13/09/1992
-Options   :                             | Latest Update : 17/11/2020
+Options   :                             | Latest Update : 28/12/23
 ---------------------------------------------------------------------------
 Support for SigLib is available via Email: support@numerix-dsp.com
 
@@ -1218,3 +1218,147 @@ SLData_t SIGLIB_FUNC_DECL SUF_QFactorToBandwidth (
     return (SIGLIB_MAX);
   }
 }                                                                   // End of SUF_QFactorToBandwidth
+
+/**/
+
+/********************************************************
+* Function: SDS_KalmanFilter1D
+*
+* Parameters:
+*   const SLData_t positionNoisy,
+*   SLKalmanFilter2D_s * kf)
+*
+* Return value:
+*   Position estimate
+*
+* Description:
+*   Compute the 1D Kalman filter.
+*
+********************************************************/
+
+SLData_t SIGLIB_FUNC_DECL SDS_KalmanFilter1D (
+  SLData_t positionNoisy,
+  SLKalmanFilter1D_s * kf)
+{
+// Predict next state (X)
+  *kf->X = (*kf->A * *kf->X) + (*kf->B * *kf->u) + *kf->w;
+
+// Update next state processor covariance matrix (P)
+  *kf->P = (*kf->P * *kf->A * *kf->A) + *kf->Q;
+
+// Update new Kalman gain (K)
+  SLData_t        K = *kf->P / (*kf->P + *kf->R);
+
+// Update (X) with new measurement (Y)
+  *kf->X = *kf->X + K * (positionNoisy - *kf->H * *kf->X);
+
+// Update Process estimate error estimation (P)
+  *kf->P = *kf->P * (SIGLIB_ONE - K * *kf->H);
+
+// Return estimate
+  return (*kf->X);
+}                                                                   // End of SDS_KalmanFilter1D
+
+/**/
+
+/********************************************************
+* Function: SDS_KalmanFilter2D
+*
+* Parameters:
+*   const SLData_t positionNoisy,
+*   const SLData_t velocityNoisy,
+*   SLKalmanFilter2D_s * kf,
+*   SLData_t *pPositionEstimate,
+*   SLData_t *pVelocityEstimate)
+*
+* Return value:
+*   void
+*
+* Description:
+*   Compute the 2D Kalman filter.
+*
+********************************************************/
+
+void SIGLIB_FUNC_DECL SDS_KalmanFilter2D (
+  const SLData_t positionNoisy,
+  const SLData_t velocityNoisy,
+  SLKalmanFilter2D_s * kf,
+  SLData_t * pPositionEstimate,
+  SLData_t * pVelocityEstimate)
+{
+
+// Predict next state (X)
+  SLData_t        AX[2];
+  SLData_t        BU[2];
+  SMX_Multiply ((SLData_t *) kf->A, (SLData_t *) kf->X, AX, 2, 2, 1);
+  SMX_Multiply ((SLData_t *) kf->B, (SLData_t *) kf->u, BU, 2, 1, 1);
+  SMX_Add ((SLData_t *) AX, (SLData_t *) BU, (SLData_t *) AX, 2, 1);
+  SMX_Add ((SLData_t *) AX, (SLData_t *) kf->w, (SLData_t *) kf->X, 2, 1);
+
+// printf("kf->X\n");
+// SUF_PrintMatrix ((SLData_t *)kf->X, 2, 1);
+
+// Update next state processor covariance matrix (P)
+  SLData_t        AP[4];                                            // [2][2]
+  SLData_t        AT[4];                                            // [2][2]
+  SLData_t        APAT[4];                                          // [2][2]
+  SMX_Multiply ((SLData_t *) kf->A, (SLData_t *) kf->P, AP, 2, 2, 2);
+  SMX_Transpose ((SLData_t *) kf->A, AT, 2, 2);
+  SMX_Multiply (AP, AT, APAT, 2, 2, 2);
+  SMX_Add (APAT, (SLData_t *) kf->Q, (SLData_t *) kf->P, 2, 2);
+
+// printf("kf->P\n");
+// SUF_PrintMatrix ((SLData_t *)kf->P, 2, 2);
+
+// Update new Kalman gain (K)
+  SLData_t        N[4];                                             // [2][2]
+  SLData_t        HPHT[4];                                          // [2][2]
+  SLData_t        D[4];                                             // [2][2]
+  SLData_t        ID[4];                                            // [2][2]
+  SLData_t        K[4];                                             // [2][2]                                       // Kalman gain
+  SMX_Multiply ((SLData_t *) kf->P, (SLData_t *) kf->H, N, 2, 2, 2);
+  SMX_Multiply ((SLData_t *) kf->H, (SLData_t *) kf->P, K, 2, 2, 2);  // Use K as temporary storage
+  SMX_Transpose ((SLData_t *) kf->H, ID, 2, 2);                     // Use ID as temporary storage
+  SMX_Multiply (K, ID, HPHT, 2, 2, 2);
+  SMX_Add (HPHT, (SLData_t *) kf->R, D, 2, 2);
+  SMX_Inverse2x2 (D, ID);
+  SMX_Multiply (N, ID, (SLData_t *) K, 2, 2, 2);
+
+// printf("K\n");
+// SUF_PrintMatrix ((SLData_t *)K, 2, 2);
+
+// Read in new measurement (y)
+  SLData_t        Y[2];                                             // New measurement input
+  Y[0] = positionNoisy;
+  Y[1] = velocityNoisy;
+
+// printf("kf->Y\n");
+// SUF_PrintMatrix ((SLData_t *)Y, 2, 1);
+
+// Update (X) with new measurement (Y)
+  SLData_t        YmHX[2];
+  SLData_t        KYmHX[2];
+  SMX_Multiply ((SLData_t *) kf->H, (SLData_t *) kf->X, YmHX, 2, 2, 1);
+  SMX_Subtract ((SLData_t *) Y, YmHX, YmHX, 2, 1);
+  SMX_Multiply ((SLData_t *) K, YmHX, KYmHX, 2, 2, 1);
+  SMX_Add ((SLData_t *) kf->X, KYmHX, (SLData_t *) kf->X, 2, 1);
+
+// printf("kf->X\n");
+// SUF_PrintMatrix ((SLData_t *)kf->X, 2, 1);
+
+// Update Process estimate error estimation (P)
+  SLData_t        KH[4];                                            // [2][2]
+  SLData_t        identity_2x2[4] = { SIGLIB_ONE, SIGLIB_ZERO, SIGLIB_ZERO, SIGLIB_ONE }; // [2][2] = { { SIGLIB_ONE, SIGLIB_ZERO }, { SIGLIB_ZERO, SIGLIB_ONE } };
+  SLData_t        KHP[4];                                           // [2][2]
+  SMX_Multiply ((SLData_t *) K, (SLData_t *) kf->H, KH, 2, 2, 2);
+  SMX_Subtract ((SLData_t *) identity_2x2, KH, K, 2, 2);
+  SMX_Multiply (K, (SLData_t *) kf->P, KHP, 2, 2, 2);
+  SDA_Copy (KHP, (SLData_t *) kf->P, 4);
+
+// printf("kf->P\n");
+// SUF_PrintMatrix ((SLData_t *)kf->P, 2, 2);
+
+// Return estimates
+  *pPositionEstimate = kf->X[0];
+  *pVelocityEstimate = kf->X[1];
+}                                                                   // End of SDS_KalmanFilter2D

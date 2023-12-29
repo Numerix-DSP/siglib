@@ -2882,8 +2882,8 @@ public class siglib_wrap implements siglib_wrapConstants {
     return siglib_wrapJNI.SDA_PopulationSd(SWIGTYPE_p_double.getCPtr(arg0), arg1);
   }
 
-  public static double SDA_UnbiasedVariance(SWIGTYPE_p_double arg0, int arg1) {
-    return siglib_wrapJNI.SDA_UnbiasedVariance(SWIGTYPE_p_double.getCPtr(arg0), arg1);
+  public static double SDA_SampleVariance(SWIGTYPE_p_double arg0, int arg1) {
+    return siglib_wrapJNI.SDA_SampleVariance(SWIGTYPE_p_double.getCPtr(arg0), arg1);
   }
 
   public static double SDA_Median(SWIGTYPE_p_double arg0, SWIGTYPE_p_double arg1, int arg2) {

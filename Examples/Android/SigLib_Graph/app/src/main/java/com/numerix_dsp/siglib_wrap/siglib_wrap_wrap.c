@@ -384,7 +384,8 @@ extern          "C" {
                    *(
   double **)     &jresult = result;
                     return jresult;
-  } SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_delete_1doubleArray (
+  }
+  SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_delete_1doubleArray (
   JNIEnv * jenv,
   jclass jcls,
   jlong jarg1) {
@@ -23353,7 +23354,7 @@ extern          "C" {
     (void) jcls;
     arg1 = *(SLData_t **) & jarg1;
     arg2 = (SLArrayIndex_t) jarg2;
-    result = (SLData_t) SDA_UnbiasedVariance ((double const *) arg1, arg2);
+    result = (SLData_t) SDA_SampleVariance ((double const *) arg1, arg2);
     jresult = (jdouble) result;
     return jresult;
   }

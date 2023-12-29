@@ -3951,7 +3951,7 @@ Declare Function SDA_SampleSd Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
 Declare Function SDA_PopulationSd Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByVal iData As Integer) As Double
 
-Declare Function SDA_UnbiasedVariance Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
+Declare Function SDA_SampleVariance Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByVal iData As Integer) As Double
 
 Declare Function SDA_Median Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
