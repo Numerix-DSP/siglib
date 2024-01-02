@@ -189,6 +189,30 @@ int main (
   SLKalmanFilter2D_s kf;                                            // Declare Kalman filter structure
   init_KalmanFilter2D (&kf);                                        // Application initialization of Kalman filter structure
 
+
+// Generate the measurement covariance matrix by computing the
+// covariance matrix from the source data
+  SLData_t        covMatrixSrc[2][SAMPLE_LENGTH];                   // Build the covariance source matrix
+  for (SLArrayIndex_t j = 0; j < SAMPLE_LENGTH; j++) {
+    covMatrixSrc[0][j] = pPositionNoisy[j];
+    covMatrixSrc[1][j] = pVelocityNoisy[j];
+  }
+
+  SLData_t        meanValues[2];                                    // Temporary array used to calculate the means
+  SDA_CovarianceMatrix ((SLData_t *) covMatrixSrc,                  // Pointer to source matrix
+                        meanValues,                                 // Pointer to means array
+                        (SLData_t *) kf.R,                          // Pointer to destination covariance matrix
+                        SIGLIB_ONE / (SLData_t) SAMPLE_LENGTH,      // Inverse array length
+                        SIGLIB_ONE / (((SLData_t) SAMPLE_LENGTH) - SIGLIB_ONE), // Final divisor
+                        2,                                          // Number of datasets
+                        SAMPLE_LENGTH);                             // Array lengths
+
+// printf ("\n\nCovariance Matrix:\n");
+// SUF_PrintMatrix ((SLData_t *) kf.R,                   // Pointer to source matrix
+// 2,            // Number of rows
+// 2);           // Number of columns
+
+
   for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     SDS_KalmanFilter2D (pPositionNoisy[i],                          // Position sample
                         pVelocityNoisy[i],                          // Velocity sample

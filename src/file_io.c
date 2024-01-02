@@ -159,7 +159,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_BinWriteData (
 *
 * Parameters:
 *   SLData_t *BPtr,             - Data array pointer
-*   char *filename,                - File name
+*   char *filename,             - File name
 *   const char endianMode,
 *   const SLArrayIndex_t        - arrayLength
 *
@@ -223,7 +223,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_BinReadFile (
 *
 * Parameters:
 *   const SLData_t *BPtr,       - Data array pointer
-*   char *filename,                - File name
+*   char *filename,             - File name
 *   const enum SLEndianType_t endianMode,
 *   const SLArrayIndex_t        - arrayLength
 *
@@ -649,7 +649,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvWriteData (
 *
 * Parameters:
 *   SLData_t *BPtr,             - Output Data array pointer
-*   char *filename,                - File name
+*   char *filename,             - File name
 *   const SLData_t sampleRate,  - Sample rate
 *   const SLData_t numColumns,  - Number of columns (1 or 2)
 *   const SLArrayIndex_t        - Array Length
@@ -749,7 +749,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadFile (
 *
 * Parameters:
 *   const SLData_t *BPtr,           - Data array pointer
-*   char *filename,                    - File name
+*   char *filename,                 - File name
 *   const SLData_t sampleRate,      - Sample rate
 *   const SLData_t sampleIndex,     - Sample index
 *   const SLData_t numColumns,      - Number of columns (1 or 2)

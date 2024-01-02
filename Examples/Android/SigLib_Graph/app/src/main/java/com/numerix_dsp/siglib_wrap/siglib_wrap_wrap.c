@@ -384,8 +384,7 @@ extern          "C" {
                    *(
   double **)     &jresult = result;
                     return jresult;
-  }
-  SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_delete_1doubleArray (
+  } SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_delete_1doubleArray (
   JNIEnv * jenv,
   jclass jcls,
   jlong jarg1) {
