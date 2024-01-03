@@ -225,7 +225,7 @@ int main (
     gpc_plot_2d (h2DPlot,                                           // Graph handle
                  pPositionTrue,                                     // Dataset
                  SAMPLE_LENGTH,                                     // Dataset length
-                 "Source Signal",                                   // Dataset title
+                 "Source Position",                                 // Dataset title
                  SIGLIB_ZERO,                                       // Minimum X value
                  (SLData_t) (SAMPLE_LENGTH - 1),                    // Maximum X value
                  "linespoints lw 2 ps 1",                           // Graph type
@@ -234,7 +234,7 @@ int main (
     gpc_plot_2d (h2DPlot,                                           // Graph handle
                  pPositionNoisy,                                    // Dataset
                  SAMPLE_LENGTH,                                     // Dataset length
-                 "Noisy Signal",                                    // Dataset title
+                 "Noisy Position",                                  // Dataset title
                  SIGLIB_ZERO,                                       // Minimum X value
                  (SLData_t) (SAMPLE_LENGTH - 1),                    // Maximum X value
                  "linespoints lw 2 ps 1",                           // Graph type
@@ -243,7 +243,7 @@ int main (
     gpc_plot_2d (h2DPlot,                                           // Graph handle
                  pPositionKalmanEstimate,                           // Dataset
                  SAMPLE_LENGTH,                                     // Dataset length
-                 "Kalman Filtered Signal",                          // Dataset title
+                 "Kalman Filtered Position",                        // Dataset title
                  SIGLIB_ZERO,                                       // Minimum X value
                  (SLData_t) (SAMPLE_LENGTH - 1),                    // Maximum X value
                  "linespoints lw 2 ps 1",                           // Graph type
@@ -252,7 +252,7 @@ int main (
     gpc_plot_2d (h2DPlot,                                           // Graph handle
                  pPositionCombFilterEstimate,                       // Dataset
                  SAMPLE_LENGTH,                                     // Dataset length
-                 "Comb Filtered Signal",                            // Dataset title
+                 "Comb Filtered Position",                          // Dataset title
                  SIGLIB_ZERO,                                       // Minimum X value
                  (SLData_t) (SAMPLE_LENGTH - 1),                    // Maximum X value
                  "linespoints lw 2 ps 1",                           // Graph type
@@ -262,24 +262,35 @@ int main (
 
 // Compute the mean square errors
 // Use the second half of each dataset to allow the Kalman filter to settle
-  SLData_t        noisySignalMSE = SDA_MeanSquareError (pPositionTrue + (SAMPLE_LENGTH >> 1), // Source pointer 1
-                                                        pPositionNoisy + (SAMPLE_LENGTH >> 1),  // Source pointer 2
-                                                        SIGLIB_ONE / (SAMPLE_LENGTH >> 1),  // Inverse of the array length
-                                                        (SAMPLE_LENGTH >> 1));  // Array length
-  SLData_t        kalmanFilteredSignalMSE = SDA_MeanSquareError (pPositionTrue + (SAMPLE_LENGTH >> 1),  // Source pointer 1
-                                                                 pPositionKalmanEstimate + (SAMPLE_LENGTH >> 1),  // Source pointer 2
+  SLData_t        noisyPositionMSE = SDA_MeanSquareError (pPositionTrue + (SAMPLE_LENGTH >> 1), // Source pointer 1
+                                                          pPositionNoisy + (SAMPLE_LENGTH >> 1),  // Source pointer 2
+                                                          SIGLIB_ONE / (SAMPLE_LENGTH >> 1),  // Inverse of the array length
+                                                          (SAMPLE_LENGTH >> 1));  // Array length
+  SLData_t        kalmanFilteredPositionMSE = SDA_MeanSquareError (pPositionTrue + (SAMPLE_LENGTH >> 1),  // Source pointer 1
+                                                                   pPositionKalmanEstimate + (SAMPLE_LENGTH >> 1),  // Source pointer 2
+                                                                   SIGLIB_ONE / (SAMPLE_LENGTH >> 1), // Inverse of the array length
+                                                                   (SAMPLE_LENGTH >> 1)); // Array length
+  SLData_t        combFilteredPositionMSE = SDA_MeanSquareError (pPositionTrue + (SAMPLE_LENGTH >> 1),  // Source pointer 1
+                                                                 pPositionCombFilterEstimate + (SAMPLE_LENGTH >> 1),  // Source pointer 2
                                                                  SIGLIB_ONE / (SAMPLE_LENGTH >> 1), // Inverse of the array length
                                                                  (SAMPLE_LENGTH >> 1)); // Array length
-  SLData_t        combFilteredSignalMSE = SDA_MeanSquareError (pPositionTrue + (SAMPLE_LENGTH >> 1),  // Source pointer 1
-                                                               pPositionCombFilterEstimate + (SAMPLE_LENGTH >> 1),  // Source pointer 2
-                                                               SIGLIB_ONE / (SAMPLE_LENGTH >> 1), // Inverse of the array length
-                                                               (SAMPLE_LENGTH >> 1)); // Array length
-  printf ("Noisy signal Mean Square Error:           %lf\n", noisySignalMSE);
-  printf ("Kalman filtered signal Mean Square Error: %lf\n", kalmanFilteredSignalMSE);
-  printf ("Comb filtered signal Mean Square Error:   %lf\n", combFilteredSignalMSE);
+  printf ("Noisy Position Mean Square Error:           %lf\n", noisyPositionMSE);
+  printf ("Kalman Filtered Position Mean Square Error: %lf\n", kalmanFilteredPositionMSE);
+  printf ("Comb Filtered Position Mean Square Error:   %lf\n\n", combFilteredPositionMSE);
+
+  SLData_t        noisyVelocityMSE = SDA_MeanSquareError (pVelocityTrue + (SAMPLE_LENGTH >> 1), // Source pointer 1
+                                                          pVelocityNoisy + (SAMPLE_LENGTH >> 1),  // Source pointer 2
+                                                          SIGLIB_ONE / (SAMPLE_LENGTH >> 1),  // Inverse of the array length
+                                                          (SAMPLE_LENGTH >> 1));  // Array length
+  SLData_t        kalmanFilteredVelocityMSE = SDA_MeanSquareError (pVelocityTrue + (SAMPLE_LENGTH >> 1),  // Source pointer 1
+                                                                   pVelocityKalmanEstimate + (SAMPLE_LENGTH >> 1),  // Source pointer 2
+                                                                   SIGLIB_ONE / (SAMPLE_LENGTH >> 1), // Inverse of the array length
+                                                                   (SAMPLE_LENGTH >> 1)); // Array length
+  printf ("Noisy Velocity Mean Square Error:           %lf\n", noisyVelocityMSE);
+  printf ("Kalman Filtered Velocity Mean Square Error: %lf\n\n", kalmanFilteredVelocityMSE);
 
   if (enableGraphFlag == 1) {
-    printf ("Source, Noisy and Filtered Signals\nPlease hit <Carriage Return> to continue . . .");
+    printf ("Source, Noisy and Filtered Positions\nPlease hit <Carriage Return> to continue . . .");
     getchar ();
     gpc_close (h2DPlot);
   }
@@ -293,5 +304,5 @@ int main (
   SUF_MemoryFree (pPositionCombFilterEstimate);
   SUF_MemoryFree (pCombFilterStateArray);
 
-  return 0;
+  return (0);
 }
