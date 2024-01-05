@@ -3,7 +3,9 @@
 // This example implements the plane example from the excellent video series here: https://www.youtube.com/playlist?list=PLX2gX-ftPVXU3oUFNATxGXY90AULiqnWT
 // Inspired by Gergely Takács's excellent Python and Matlab examples: https://github.com/gergelytakacs/planeKF
 //  Gergely's examples are mentioned here: https://www.youtube.com/watch?v=Fuy73n6_bBc&list=PLX2gX-ftPVXU3oUFNATxGXY90AULiqnWT&index=27
-
+// Note: This program will not give exactly the same results as the video series
+//  because the SigLib Kalman filter functions do not zero out the off-diagonal values
+//  in the intermediate matrices. This was done in the videos to simplify the math.
 
 #include <stdio.h>
 #include <stdlib.h>
