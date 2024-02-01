@@ -22,7 +22,7 @@ Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023, Delta Numerix, All rights reserved.
+Copyright (c) 2024, Delta Numerix, All rights reserved.
 ****************************************************************************/
 
 #include <math.h>
@@ -119,7 +119,7 @@ h_GPC_Plot     *gpc_init_2d (
   plotHandle->numberOfGraphs = -1;                                  // Initialize number of graphs
 
   return (plotHandle);
-}
+}                                                                   // End of gpc_init_2d()
 
 /********************************************************
 * Function: gpc_init_2d_logscalex
@@ -211,7 +211,7 @@ h_GPC_Plot     *gpc_init_2d_logscalex (
   plotHandle->numberOfGraphs = -1;                                  // Initialize number of graphs
 
   return (plotHandle);
-}
+}                                                                   // End of gpc_init_2d_logscalex()
 
 /********************************************************
 * Function: gpc_plot_2d
@@ -264,6 +264,7 @@ int gpc_plot_2d (
     fprintf (plotHandle->pipe, "%1.6le %1.6le\n", xMin + ((((double) i) * (xMax - xMin)) / ((double) (graphLength - 1))), pData[i]);
   }
   fprintf (plotHandle->pipe, "EOD\n");
+  fprintf (plotHandle->pipe, "print DATA0\n");
 
 
   fprintf (plotHandle->pipe, "plot $DATA%d u 1:2 t \"%s\" w %s", 0, plotHandle->graphArray[0].title, plotHandle->graphArray[0].formatString); // Send start of plot and first plot command
@@ -285,7 +286,7 @@ int gpc_plot_2d (
 #endif
 
   return (GPC_NO_ERROR);
-}
+}                                                                   // End of gpc_plot_2d()
 
 
 /********************************************************
@@ -342,7 +343,7 @@ h_GPC_Plot     *gpc_init_2d_dual_plot (
   fflush (plotHandle->pipe);                                        // flush the pipe
 
   return (plotHandle);
-}
+}                                                                   // End of gpc_init_2d_dual_plot()
 
 
 /********************************************************
@@ -481,7 +482,135 @@ int gpc_plot_2d_dual_plot (
 #endif
 
   return (GPC_NO_ERROR);
-}
+}                                                                   // End of gpc_plot_2d_dual_plot()
+
+
+/********************************************************
+* Function: gpc_init_3d
+*
+* Parameters:
+*   const char *plotTitle,
+*   const enum gpcKeyMode keyMode)
+*
+* Return value:
+*   h_GPC_Plot - Plot handle
+*
+* Description: Initialize the 3D plot
+*
+********************************************************/
+
+h_GPC_Plot     *gpc_init_3d (
+  const char *plotTitle,
+  const enum gpcKeyMode keyMode)
+{
+  h_GPC_Plot     *plotHandle;                                       // Create plot
+
+  plotHandle = (h_GPC_Plot *) malloc (sizeof (h_GPC_Plot));         // Malloc plot and check for error
+  if (NULL == plotHandle) {
+    return (plotHandle);
+  }
+
+  plotHandle->pipe = popen (GNUPLOT_CMD, "w");                      // Open pipe to Gnuplot and check for error
+  if (NULL == plotHandle->pipe) {
+    printf ("\n\nGnuplot/C Error\n");
+    printf ("Gnuplot/C can not find the required Gnuplot executable.\n");
+    printf ("Please ensure you have installed Gnuplot from (http://www.gnuplot.info)\n");
+    printf ("and that the executable program is located in the system PATH.\n\n");
+
+    free (plotHandle);
+    return (plotHandle);
+  }
+
+  strcpy (plotHandle->plotTitle, plotTitle);                        // Set plot title in handle
+
+  fprintf (plotHandle->pipe, "set term %s 0 title \"%s\" size %u, %u\n", GPC_TERM, plotHandle->plotTitle, CANVAS_WIDTH, CANVAS_HEIGHT); // Set the plot
+
+  fprintf (plotHandle->pipe, "unset border\n");
+  fprintf (plotHandle->pipe, "set ticslevel 0\n");
+  fprintf (plotHandle->pipe, "set xlabel \"x\"\n");
+  fprintf (plotHandle->pipe, "set ylabel \"y\"\n");
+  fprintf (plotHandle->pipe, "set zlabel \"z\"\n");
+  fprintf (plotHandle->pipe, "set zeroaxis\n");
+  fprintf (plotHandle->pipe, "set xyplane at 0\n");
+
+  if (keyMode == GPC_KEY_ENABLE) {
+    fprintf (plotHandle->pipe, "set key out vert nobox\n");         // Legend / key location
+  }
+  else {
+    fprintf (plotHandle->pipe, "unset key\n");                      // Disable legend / key
+  }
+
+  fflush (plotHandle->pipe);                                        // flush the pipe
+
+  return (plotHandle);
+}                                                                   // End of gpc_init_3d()
+
+
+/********************************************************
+* Function: gpc_plot_3d
+*
+* Parameters:
+*   h_GPC_Plot *plotHandle,
+*   const double *pX,
+*   const double *pY,
+*   const double *pZ,
+*   const int graphLength,
+*   const char *pDataName,
+*   const char *plotType,
+*   const char *pColour,
+*   const enum gpcNewAddGraphMode addMode)
+*
+* Return value:
+*   int - error flag
+*
+* Description: Generate the 3D plot
+*
+********************************************************/
+
+int gpc_plot_3d (
+  h_GPC_Plot * plotHandle,
+  const double *pX,
+  const double *pY,
+  const double *pZ,
+  const int graphLength,
+  const char *pDataName,
+  const char *plotType,
+  const char *pColour,
+  const enum gpcNewAddGraphMode addMode)
+{
+  if (addMode == GPC_NEW) {                                         // GPC_NEW
+    plotHandle->numberOfGraphs = 0;
+  }
+  else {                                                            // GPC_ADD
+    plotHandle->numberOfGraphs++;
+    if (plotHandle->numberOfGraphs >= (MAX_NUM_GRAPHS - 1)) {       // Check we haven't overflowed the maximum number of graphs
+      return (GPC_ERROR);
+    }
+  }
+
+  sprintf (plotHandle->graphArray[plotHandle->numberOfGraphs].title, "%s", pDataName);
+  sprintf (plotHandle->graphArray[plotHandle->numberOfGraphs].formatString, "%s lc rgb \"%s\"", plotType, pColour);
+
+  fprintf (plotHandle->pipe, "$DATA%d << EOD\n", plotHandle->numberOfGraphs); // Write data to named data block
+  for (int i = 0; i < graphLength; i++) {
+    fprintf (plotHandle->pipe, "%1.6le %1.6le %1.6le\n", pX[i], pY[i], pZ[i]);
+  }
+  fprintf (plotHandle->pipe, "EOD\n");
+
+  fprintf (plotHandle->pipe, "splot $DATA%d u 1:2:3 t \"%s\" w %s", 0, plotHandle->graphArray[0].title, plotHandle->graphArray[0].formatString);  // Send start of plot and first plot command
+  for (int i = 1; i <= plotHandle->numberOfGraphs; i++) {           // Send individual plot commands
+    fprintf (plotHandle->pipe, ", \\\n $DATA%d u 1:2:3 t \"%s\" w %s", i, plotHandle->graphArray[i].title, plotHandle->graphArray[i].formatString); // Set plot format
+  }
+  fprintf (plotHandle->pipe, "\n");                                 // Send end of plot command
+
+  fflush (plotHandle->pipe);                                        // Flush the pipe
+
+#if GPC_DEBUG
+  mssleep (100);                                                    // Slow down output so that pipe doesn't overflow when logging results
+#endif
+
+  return (GPC_NO_ERROR);
+}                                                                   // End of gpc_plot_3d()
 
 
 /********************************************************
@@ -558,7 +687,7 @@ h_GPC_Plot     *gpc_init_xy (
   plotHandle->numberOfGraphs = -1;                                  // Initialize number of graphs
 
   return (plotHandle);
-}
+}                                                                   // End of gpc_init_xy()
 
 
 /********************************************************
@@ -623,7 +752,7 @@ int gpc_plot_xy (
 #endif
 
   return (GPC_NO_ERROR);
-}
+}                                                                   // End of gpc_plot_xy()
 
 
 /********************************************************
@@ -702,7 +831,7 @@ h_GPC_Plot     *gpc_init_pz (
   plotHandle->numberOfGraphs = -1;                                  // Initialize number of graphs
 
   return (plotHandle);
-}
+}                                                                   // End of gpc_init_pz()
 
 
 /********************************************************
@@ -800,7 +929,7 @@ int gpc_plot_pz (
 #endif
 
   return (GPC_NO_ERROR);
-}
+}                                                                   // End of gpc_plot_pz()
 
 
 /********************************************************
@@ -902,7 +1031,7 @@ h_GPC_Plot     *gpc_init_spectrogram (
 #endif
 
   return (plotHandle);
-}
+}                                                                   // End of gpc_init_spectrogram()
 
 
 /********************************************************
@@ -962,7 +1091,7 @@ int gpc_plot_spectrogram (
 #endif
 
   return (GPC_NO_ERROR);
-}
+}                                                                   // End of gpc_plot_spectrogram()
 
 
 /********************************************************
@@ -1057,7 +1186,7 @@ h_GPC_Plot     *gpc_init_image (
 #endif
 
   return (plotHandle);
-}
+}                                                                   // End of gpc_init_image()
 
 
 /********************************************************
@@ -1097,7 +1226,7 @@ int gpc_plot_image (
 #endif
 
   return (GPC_NO_ERROR);
-}
+}                                                                   // End of gpc_plot_image()
 
 
 /********************************************************
@@ -1203,7 +1332,7 @@ h_GPC_Plot     *gpc_init_polar (
   plotHandle->xMax = gMax;
 
   return (plotHandle);
-}
+}                                                                   // End of gpc_init_polar()
 
 
 /********************************************************
@@ -1274,7 +1403,7 @@ int gpc_plot_polar (
   fflush (plotHandle->pipe);                                        // Flush the pipe
 
   return (GPC_NO_ERROR);
-}
+}                                                                   // End of gpc_plot_polar()
 
 
 /********************************************************
@@ -1453,4 +1582,4 @@ void gpc_close (
   pclose (plotHandle->pipe);                                        // Close the pipe to Gnuplot
 
   free (plotHandle);                                                // Free the plot
-}
+}                                                                   // End of gpc_close()

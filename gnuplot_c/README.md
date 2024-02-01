@@ -21,6 +21,8 @@ from here: http://gnuplot.info/.
 HISTORY
 =======
 
+  * V3.70   01/02/2024      Added 3D plotting functions
+
   * V3.60   05/12/2020      Added confusion matrix plots
 
   * V3.53   18/10/2018      Create plot tidy up

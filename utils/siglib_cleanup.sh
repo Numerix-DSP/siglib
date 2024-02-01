@@ -77,10 +77,12 @@ rm -rf src/x64/*
 popd
 
 # Delete all executables
+pushd $SIGLIB_PATH/gnuplot_c/examples
+$SIGLIB_PATH/utils/clean_executables.sh
+popd
 pushd $SIGLIB_PATH/Examples/CExamples
 $SIGLIB_PATH/utils/clean_executables.sh
 popd
-
 pushd $SIGLIB_PATH/Examples/CExamples/AGC/
 rm -f Kipling_If_48kHz_Attenuated_processed.wav
 rm -f Kipling_If_48kHz_Attenuated_stereo.wav

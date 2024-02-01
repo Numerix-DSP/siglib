@@ -60,6 +60,7 @@ Update history:
 #include <stddef.h>                                                 // Include standard stddef.h file
 #include <stdio.h>                                                  // Include standard stdio.h file
 #include <stdlib.h>                                                 // Include standard stdlib.h file
+#include <string.h>                                                 // Include standard string.h file
 #include <time.h>                                                   // Include standard time.h file
 #endif
 

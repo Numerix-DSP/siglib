@@ -22,7 +22,7 @@ Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023, Delta Numerix, All rights reserved.
+Copyright (c) 2024, Delta Numerix, All rights reserved.
 ****************************************************************************/
 
 #if (!GPC_H)
@@ -30,7 +30,7 @@ Copyright (c) 2023, Delta Numerix, All rights reserved.
 #define GPC_H                   1                                   // Gnuplot/C included
 
 #ifndef GPC_DEBUG
-#define GPC_DEBUG             0                                     // Set to '1' to enable Gnuplot text debug output, '0' otherwise
+#define GPC_DEBUG               0                                   // Set to '1' to enable Gnuplot text debug output, '0' otherwise
 #endif
 
 #include<stdlib.h>
@@ -38,7 +38,7 @@ Copyright (c) 2023, Delta Numerix, All rights reserved.
 
 #define MAX_NUM_GRAPHS          100                                 // Maximum number of graphs in a plot
 
-#define GPC_VERSION             3.60                                // Gnuplot/C version number
+#define GPC_VERSION             3.70                                // Gnuplot/C version number
 
 #define GPC_AUTO_SCALE          0.0                                 // Auto scaling
 #define GPC_IMG_AUTO_SCALE      0                                   // Auto scaling for images
@@ -172,6 +172,21 @@ int             gpc_plot_2d_dual_plot (
   const double scalingMode2,                                        // Dataset #2 Scaling mode
   const enum gpcPlotSignMode signMode2,                             // Dataset #2 Sign mode - signed, positive, negative
   const int graphLength);                                           // Dataset lengths
+
+h_GPC_Plot     *gpc_init_3d (
+  const char *plotTitle,                                            // Plot title
+  const enum gpcKeyMode keyMode);                                   // Legend / key mode
+
+int             gpc_plot_3d (
+  h_GPC_Plot * plotHandle,                                          // Plot handle
+  const double *pX,                                                 // X dataset pointer
+  const double *pY,                                                 // Y dataset pointer
+  const double *pZ,                                                 // Z dataset pointer
+  const int graphLength,                                            // Dataset length
+  const char *pDataName,                                            // Dataset title
+  const char *plotType,                                             // Plot type - "lines", "points", "impulses", "linespoints"
+  const char *pColour,                                              // Colour - Use gnuplot> show colornames to see available colours
+  const enum gpcNewAddGraphMode addMode);                           // Add / new mode
 
 h_GPC_Plot     *gpc_init_xy (
   const char *plotTitle,                                            // Plot title

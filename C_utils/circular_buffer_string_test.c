@@ -9,15 +9,16 @@
 #include <string.h>
 #include "circular_buffer.h"
 
-#define CIRCULAR_BUFFER_SIZE    8                       // Maximum size of buffer
-#define MAX_CB_STRING_LENGTH    20                      // Maximum length of any individual string
+#define CIRCULAR_BUFFER_SIZE    8                                   // Maximum size of buffer
+#define MAX_CB_STRING_LENGTH    20                                  // Maximum length of any individual string
 
-char circularBuffer[CIRCULAR_BUFFER_SIZE*MAX_CB_STRING_LENGTH];   // Circular buffer
+char            circularBuffer[CIRCULAR_BUFFER_SIZE * MAX_CB_STRING_LENGTH];  // Circular buffer
 
-int main(void)
+int main (
+  void)
 {
-  char inputString[MAX_CB_STRING_LENGTH];
-  char bufferedString[MAX_CB_STRING_LENGTH];
+  char            inputString[MAX_CB_STRING_LENGTH];
+  char            bufferedString[MAX_CB_STRING_LENGTH];
 
   h_CircularBufferString myCircularBuffer;
 
@@ -28,22 +29,22 @@ int main(void)
 
     scanf ("%s", &inputString);
 
-    if (strcmp (inputString, "x") == 0) {               // Exit
-      exit(0);
+    if (strcmp (inputString, "x") == 0) {                           // Exit
+      exit (0);
     }
 
-    else if (strcmp (inputString, "r") == 0) {          // Read from circular buffer
+    else if (strcmp (inputString, "r") == 0) {                      // Read from circular buffer
       if (cb_string_read (&myCircularBuffer, bufferedString) == 0) {
-        printf("Circular buffer empty!\n");
+        printf ("Circular buffer empty!\n");
       }
       else {
-        printf("String : %s\n", bufferedString);
+        printf ("String : %s\n", bufferedString);
       }
     }
 
-    else {                                              // Write to circular buffer
+    else {                                                          // Write to circular buffer
       if (cb_string_write (&myCircularBuffer, inputString) == 0) {
-        printf("Circular buffer full!\n");
+        printf ("Circular buffer full!\n");
       }
       else {
         printf ("String written to circular buffer\n");
@@ -51,4 +52,3 @@ int main(void)
     }
   }
 }
-

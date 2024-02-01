@@ -9,14 +9,15 @@
 #include <string.h>
 #include "circular_buffer.h"
 
-#define CIRCULAR_BUFFER_SIZE    8                       // Maximum size of buffer
+#define CIRCULAR_BUFFER_SIZE    8                                   // Maximum size of buffer
 
-int circularBuffer[CIRCULAR_BUFFER_SIZE];               // Circular buffer
+int             circularBuffer[CIRCULAR_BUFFER_SIZE];               // Circular buffer
 
-int main(void)
+int main (
+  void)
 {
-  char inputString[20];
-  int  bufferedInt;
+  char            inputString[20];
+  int             bufferedInt;
 
   h_CircularBufferInteger myCircularBuffer;
 
@@ -27,22 +28,22 @@ int main(void)
 
     scanf ("%s", &inputString);
 
-    if (strcmp (inputString, "x") == 0) {               // Exit
-      exit(0);
+    if (strcmp (inputString, "x") == 0) {                           // Exit
+      exit (0);
     }
 
-    else if (strcmp (inputString, "r") == 0) {          // Read from circular buffer
+    else if (strcmp (inputString, "r") == 0) {                      // Read from circular buffer
       if (cb_integer_read (&myCircularBuffer, &bufferedInt) == 0) {
-        printf("Circular buffer empty!\n");
+        printf ("Circular buffer empty!\n");
       }
       else {
-        printf("Integer : %d\n", bufferedInt);
+        printf ("Integer : %d\n", bufferedInt);
       }
     }
 
-    else {                                              // Write to circular buffer
-      if (cb_integer_write (&myCircularBuffer, atoi(inputString)) == 0) {
-        printf("Circular buffer full!\n");
+    else {                                                          // Write to circular buffer
+      if (cb_integer_write (&myCircularBuffer, atoi (inputString)) == 0) {
+        printf ("Circular buffer full!\n");
       }
       else {
         printf ("Integer written to circular buffer\n");
@@ -50,4 +51,3 @@ int main(void)
     }
   }
 }
-

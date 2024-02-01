@@ -1,5 +1,5 @@
-# utility-functions
-My Utility Functions
+# SigLib utility-functions
+SigLib Utility Functions
 
 Includes algorithms for :
 FIFO Buffers
@@ -11,3 +11,5 @@ https://cs.stackexchange.com/questions/12621/contrasting-peterson-s-and-dekker-s
 
 FYI, I tend to use Peterson’s algorithm.
 
+This software is supplied under the terms of the MIT license: https://opensource.org/license/mit/
+(C) 2024 Delta Numerix
