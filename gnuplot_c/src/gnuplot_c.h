@@ -40,7 +40,8 @@ Copyright (c) 2024, Delta Numerix, All rights reserved.
 
 #define GPC_VERSION             3.70                                // Gnuplot/C version number
 
-#define GPC_AUTO_SCALE          0.0                                 // Auto scaling
+#define GPC_AUTO_SCALE          0.0                                 // Auto scaling - In 3D plot, each axis is individually scaled to their maximum
+#define GPC_AUTO_SCALE_GLOBAL  -1.0                                 // Auto scaling - 3D plot: all axes scaled to the maximum of all axes
 #define GPC_IMG_AUTO_SCALE      0                                   // Auto scaling for images
 
 // #define CANVAS_WIDTH            1920
@@ -175,6 +176,10 @@ int             gpc_plot_2d_dual_plot (
 
 h_GPC_Plot     *gpc_init_3d (
   const char *plotTitle,                                            // Plot title
+  const char *xLabel,                                               // X axis label
+  const char *yLabel,                                               // y axis label
+  const char *zLabel,                                               // z axis label
+  const double scalingMode,                                         // Scaling mode
   const enum gpcKeyMode keyMode);                                   // Legend / key mode
 
 int             gpc_plot_3d (

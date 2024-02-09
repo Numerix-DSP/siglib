@@ -501,6 +501,10 @@ int gpc_plot_2d_dual_plot (
 
 h_GPC_Plot     *gpc_init_3d (
   const char *plotTitle,
+  const char *xLabel,
+  const char *yLabel,
+  const char *zLabel,
+  const double scalingMode,                                         // Scaling mode
   const enum gpcKeyMode keyMode)
 {
   h_GPC_Plot     *plotHandle;                                       // Create plot
@@ -527,9 +531,9 @@ h_GPC_Plot     *gpc_init_3d (
 
   fprintf (plotHandle->pipe, "unset border\n");
   fprintf (plotHandle->pipe, "set ticslevel 0\n");
-  fprintf (plotHandle->pipe, "set xlabel \"x\"\n");
-  fprintf (plotHandle->pipe, "set ylabel \"y\"\n");
-  fprintf (plotHandle->pipe, "set zlabel \"z\"\n");
+  fprintf (plotHandle->pipe, "set xlabel \"%s\"\n", xLabel);
+  fprintf (plotHandle->pipe, "set ylabel \"%s\"\n", yLabel);
+  fprintf (plotHandle->pipe, "set zlabel \"%s\"\n", zLabel);
   fprintf (plotHandle->pipe, "set zeroaxis\n");
   fprintf (plotHandle->pipe, "set xyplane at 0\n");
 
@@ -538,6 +542,12 @@ h_GPC_Plot     *gpc_init_3d (
   }
   else {
     fprintf (plotHandle->pipe, "unset key\n");                      // Disable legend / key
+  }
+
+  plotHandle->scalingMode = scalingMode;                            // Set scalingMode in handle
+
+  if (scalingMode == GPC_AUTO_SCALE) {                              // Set the Y axis scaling
+    fprintf (plotHandle->pipe, "set autoscale\n");                  // Auto-scale Y axis
   }
 
   fflush (plotHandle->pipe);                                        // flush the pipe
@@ -579,6 +589,40 @@ int gpc_plot_3d (
   const enum gpcNewAddGraphMode addMode)
 {
   if (addMode == GPC_NEW) {                                         // GPC_NEW
+    if (plotHandle->scalingMode == GPC_AUTO_SCALE_GLOBAL) {         // Set the global axis scaling
+      double          Max = 0.;
+
+      for (int i = 0; i < graphLength; i++) {                       // Get the global maximum
+        if (pX[i] > Max) {
+          Max = pX[i];
+        }
+        else if (-pX[i] > Max) {
+          Max = -pX[i];
+        }
+        if (pY[i] > Max) {
+          Max = pY[i];
+        }
+        else if (-pY[i] > Max) {
+          Max = -pY[i];
+        }
+        if (pZ[i] > Max) {
+          Max = pZ[i];
+        }
+        else if (-pZ[i] > Max) {
+          Max = -pZ[i];
+        }
+      }
+
+      fprintf (plotHandle->pipe, "set xrange[-%1.6le:%1.6le]\n", Max, Max);
+      fprintf (plotHandle->pipe, "set yrange[-%1.6le:%1.6le]\n", Max, Max);
+      fprintf (plotHandle->pipe, "set zrange[-%1.6le:%1.6le]\n", Max, Max);
+    }
+    else if (plotHandle->scalingMode != GPC_AUTO_SCALE) {           // Set the individual axis scaling to the scalingMode value
+      fprintf (plotHandle->pipe, "set xrange[-%1.6le:%1.6le]\n", plotHandle->scalingMode, plotHandle->scalingMode);
+      fprintf (plotHandle->pipe, "set yrange[-%1.6le:%1.6le]\n", plotHandle->scalingMode, plotHandle->scalingMode);
+      fprintf (plotHandle->pipe, "set zrange[-%1.6le:%1.6le]\n", plotHandle->scalingMode, plotHandle->scalingMode);
+    }
+
     plotHandle->numberOfGraphs = 0;
   }
   else {                                                            // GPC_ADD
