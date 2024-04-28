@@ -1826,7 +1826,7 @@ void SIGLIB_FUNC_DECL SIF_FirBandPassFilterWindow (
 *   SLFixData_t     Approximation
 *
 * Description: Use the Kaiser approximation to estimate
-*   the required filter order/
+*   the required number of filter coefficients
 *
 *   N = (((-20.0 * Log10 (sqrt (Delta1 - Delta2))) - 13.0) / (14.6 * Deltaf)) + 1
 *

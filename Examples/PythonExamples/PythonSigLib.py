@@ -16,7 +16,7 @@ if _platform.system() == "Linux":
 elif _platform.system() == "Darwin":
   lib = ctypes.cdll.LoadLibrary('../../lib/macos_x86_64/siglib.dylib')
 elif _platform.system() == "Windows":
-  lib = ctypes.cdll.LoadLibrary('../../lib/Microsoft/Release/siglib.dll')
+  lib = ctypes.cdll.LoadLibrary('../../lib/Microsoft/dynamic_library_64/Release/siglib.dll')
 
 SDA_AbsMax = lib.SDA_AbsMax
 SDA_AbsMax.restype = ctypes.c_double

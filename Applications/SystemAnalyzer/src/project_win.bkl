@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+
+<!-- $Id: make.bkl,v 1.0 2005/05/11$ -->
+
+<makefile>
+
+    <!-- Additional include paths (include tag) -->
+
+    <set var="EXTRAINCLUDE"></set>
+
+    <include file="C:/wxWidgets-3.1.5/build/bakefiles/wxpresets/presets/wx.bkl" />
+
+    <exe id="sa" template="wx">
+        <app-type>gui</app-type>
+        <debug-info>off</debug-info>
+        <threading>multi</threading>
+        <runtime-libs>static</runtime-libs>
+
+        <include>
+            C:\portaudio_v19\include
+        </include>
+        <include>
+            C:\Users\johne\Development\siglib\include
+        </include>
+        <include>
+            C:\Users\johne\Development\siglib\ngl
+        </include>
+        <define>
+            SIGLIB_STATIC_LIB=1
+        </define>
+        <define>
+            PA_USE_ASIO=1
+        </define>
+        <sources>
+            mainframe.cpp
+            sa.cpp
+            saproc.cpp
+            dfgraph.cpp
+            led.cpp
+        </sources>
+
+        <wx-lib>adv</wx-lib>
+        <wx-lib>net</wx-lib>
+        <wx-lib>core</wx-lib>
+        <wx-lib>base</wx-lib>
+
+        <!-- <sys-lib>C:\Users\johne\Development\siglib\lib\Microsoft\static_library\Release\siglib</sys-lib> -->
+        <sys-lib>C:\Users\johne\Development\siglib\lib\Microsoft\siglib_32\static_library\Release\siglib</sys-lib>
+        <sys-lib>C:\Users\johne\Development\siglib\ngl\dspgraph</sys-lib>
+        <sys-lib>C:\portaudio_v19\build\msvc\portaudio</sys-lib>
+
+        <win32-res>sa.rc</win32-res>
+    </exe>
+</makefile>

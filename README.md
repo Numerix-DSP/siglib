@@ -74,7 +74,7 @@ applications.
 
 To inquire about our services, contact us at numerix@numerix-dsp.com.
 
-Copyright ©; 2022, Delta Numerix All rights reserved.
+Copyright ©; 2024, Delta Numerix All rights reserved.
 SigLib and Digital Filter Plus are trademarks of Delta Numerix All
 other trademarks acknowledged.
 

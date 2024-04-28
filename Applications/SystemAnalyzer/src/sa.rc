@@ -1,0 +1,4 @@
+ApplicationIcon ICON "app.ico"
+
+#include "wx/msw/wx.rc"
+
