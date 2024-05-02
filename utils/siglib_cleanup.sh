@@ -59,6 +59,7 @@ rm -f -r *.stackdump
 rm -f -r *.tds
 rm -f -r *.tlog
 rm -f -r *.user
+rm -f -r Applications/*.d
 rm -f -r src/*.a
 rm -f -r src/*.dll
 rm -f -r src/*.doj

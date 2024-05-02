@@ -522,6 +522,8 @@ void CompareAll (
       default:
         break;
     }
+
+    SUF_MSDelay (200);                                              // Short delay to avoiding overflowing Gnuplot
   }
 
   if (_kbhit ())

@@ -1,7 +1,7 @@
 @echo off
 
 nmake -f makefile.vc clean
-call mbuild
+call build
 
 echo Done
 

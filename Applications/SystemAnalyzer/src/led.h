@@ -1,7 +1,7 @@
 // LED include file
 // This functionality supports transparent objects, where the transparent colour is :
 // Red : 251, Green : 0, Blue : 251
-// Copyright (c) 1999-2020, Sigma Numerix Ltd, All rights reserved
+// Copyright (c) 1999-2024 Delta Numerix, All rights reserved.
 
 #ifndef     _LED_H
 #define     _LED_H

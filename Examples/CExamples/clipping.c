@@ -210,6 +210,8 @@ int main (
                  "lines",                                           // Graph type
                  "orange",                                          // Colour
                  GPC_NEW);                                          // New graph
+
+    SUF_MSDelay (500);                                              // Short delay to avoiding overflowing Gnuplot
   }
 
   return (0);

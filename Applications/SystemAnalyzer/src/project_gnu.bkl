@@ -39,6 +39,6 @@
 
          <sys-lib>../SigLib/lib/linux/siglib</sys-lib>
          <sys-lib>../SigLib/ngl/dspgraph</sys-lib>
-         <sys-lib>../portaudio_v19/build/borland/portaudio</sys-lib>
+         <sys-lib>../portaudio_v19/build/linux/portaudio</sys-lib>
     </exe>
 </makefile>

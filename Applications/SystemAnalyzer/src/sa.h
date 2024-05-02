@@ -1,5 +1,5 @@
 // SA include file
-// Copyright (c) 1999-2020, Sigma Numerix Ltd, All rights reserved
+// Copyright (c) 1999-2024 Delta Numerix, All rights reserved.
 
 #ifndef     _SA_H
 #define     _SA_H
