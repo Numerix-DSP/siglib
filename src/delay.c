@@ -37,123 +37,112 @@ Description: Delay functions, for SigLib DSP library.
 
 ****************************************************************************/
 
-#define SIGLIB_SRC_FILE_DELAY   1                                   // Defines the source file that this code is being used in
+#define SIGLIB_SRC_FILE_DELAY 1    // Defines the source file that this code is being used in
 
-#include <siglib.h>                                                 // Include SigLib header file
+#include <siglib.h>    // Include SigLib header file
 
 /**/
 
 /********************************************************
-* Function: SIF_FixedDelay
-*
-* Parameters:
-*   SLData_t * SIGLIB_PTR_DECL pState,
-*   SLArrayIndex_t * pDelayIndex,   Delay index
-*   const SLArrayIndex_t            DelayLength
-*
-* Return value:
-*   void
-*
-* Description:
-*   Clear delay array array and reset delay index
-*
-********************************************************/
+ * Function: SIF_FixedDelay
+ *
+ * Parameters:
+ *   SLData_t * SIGLIB_PTR_DECL pState,
+ *   SLArrayIndex_t * pDelayIndex,   Delay index
+ *   const SLArrayIndex_t            DelayLength
+ *
+ * Return value:
+ *   void
+ *
+ * Description:
+ *   Clear delay array array and reset delay index
+ *
+ ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_FixedDelay (
-  SLData_t * SIGLIB_PTR_DECL pState,
-  SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
-  const SLArrayIndex_t DelayLength)
+void SIGLIB_FUNC_DECL SIF_FixedDelay(SLData_t* SIGLIB_PTR_DECL pState, SLArrayIndex_t* SIGLIB_PTR_DECL pDelayIndex,
+                                     const SLArrayIndex_t DelayLength)
 {
-  for (SLArrayIndex_t i = 0; i < DelayLength; i++) {                // Clear delay state array
+  for (SLArrayIndex_t i = 0; i < DelayLength; i++) {    // Clear delay state array
     *pState++ = SIGLIB_ZERO;
   }
 
   if (pDelayIndex != SIGLIB_NULL_ARRAY_INDEX_PTR) {
-    *pDelayIndex = SIGLIB_AI_ZERO;                                  // Initilaise filter index
+    *pDelayIndex = SIGLIB_AI_ZERO;    // Initilaise filter index
   }
-}                                                                   // End of SIF_FixedDelay()
-
+}    // End of SIF_FixedDelay()
 
 /**/
 
 /********************************************************
-* Function: SDS_FixedDelay
-*
-* Parameters:
-*   const SLData_t Src,
-*   SLData_t * SIGLIB_PTR_DECL pState,
-*   SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
-*   const SLArrayIndex_t DelayLength
-*
-* Return value:
-*   SLData_t sum - Delayed sample
-*
-* Description:
-*   Apply a fixed delay to the data
-*
-********************************************************/
+ * Function: SDS_FixedDelay
+ *
+ * Parameters:
+ *   const SLData_t Src,
+ *   SLData_t * SIGLIB_PTR_DECL pState,
+ *   SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
+ *   const SLArrayIndex_t DelayLength
+ *
+ * Return value:
+ *   SLData_t sum - Delayed sample
+ *
+ * Description:
+ *   Apply a fixed delay to the data
+ *
+ ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_FixedDelay (
-  const SLData_t Src,
-  SLData_t * SIGLIB_PTR_DECL pState,
-  SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
-  const SLArrayIndex_t DelayLength)
+SLData_t SIGLIB_FUNC_DECL SDS_FixedDelay(const SLData_t Src, SLData_t* SIGLIB_PTR_DECL pState, SLArrayIndex_t* SIGLIB_PTR_DECL pDelayIndex,
+                                         const SLArrayIndex_t DelayLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                                                // Defined by TI compiler
-  _nassert ((int) pState % 8 == 0);                                 // Align arrays on 64 bit double word boundary for LDDW
-#endif
+#  ifdef __TMS320C6X__               // Defined by TI compiler
+  _nassert((int)pState % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+#  endif
 #endif
 
   (*pDelayIndex)++;
   if (*pDelayIndex >= DelayLength) {
     *pDelayIndex = 0;
   }
-  SLData_t        dtmp = pState[*pDelayIndex];
+  SLData_t dtmp = pState[*pDelayIndex];
   pState[*pDelayIndex] = Src;
 
   return (dtmp);
-}                                                                   // End of SDS_FixedDelay()
-
+}    // End of SDS_FixedDelay()
 
 /**/
 
 /********************************************************
-* Function: SDA_FixedDelay
-*
-* Parameters:
-*   const SLData_t *pSrc,
-*   SLData_t *pDst,
-*   SLData_t * SIGLIB_PTR_DECL pState,
-*   SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
-*   const SLArrayIndex_t DelayLength
-*   const SLArrayIndex_t SampleLength
-*
-* Return value:
-*   void
-*
-* Description:
-*   Apply a fixed delay to the data
-*
-********************************************************/
+ * Function: SDA_FixedDelay
+ *
+ * Parameters:
+ *   const SLData_t *pSrc,
+ *   SLData_t *pDst,
+ *   SLData_t * SIGLIB_PTR_DECL pState,
+ *   SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
+ *   const SLArrayIndex_t DelayLength
+ *   const SLArrayIndex_t SampleLength
+ *
+ * Return value:
+ *   void
+ *
+ * Description:
+ *   Apply a fixed delay to the data
+ *
+ ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_FixedDelay (
-  const SLData_t * SIGLIB_PTR_DECL pSrc,
-  SLData_t * SIGLIB_PTR_DECL pDst,
-  SLData_t * SIGLIB_PTR_DECL pState,
-  SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
-  const SLArrayIndex_t DelayLength,
-  const SLArrayIndex_t SampleLength)
+void SIGLIB_FUNC_DECL SDA_FixedDelay(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pState,
+                                     SLArrayIndex_t* SIGLIB_PTR_DECL pDelayIndex, const SLArrayIndex_t DelayLength,
+                                     const SLArrayIndex_t SampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                                                // Defined by TI compiler
-  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
-  _nassert ((int) pDst % 8 == 0);
-  _nassert ((int) pState % 8 == 0);
-#endif
+#  ifdef __TMS320C6X__             // Defined by TI compiler
+  _nassert((int)pSrc % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+  _nassert((int)pDst % 8 == 0);
+  _nassert((int)pState % 8 == 0);
+#  endif
 #endif
 
-  SLArrayIndex_t  LocalDelayIndex = *pDelayIndex;
+  SLArrayIndex_t LocalDelayIndex = *pDelayIndex;
 
   for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
     LocalDelayIndex++;
@@ -165,83 +154,72 @@ void SIGLIB_FUNC_DECL SDA_FixedDelay (
   }
 
   *pDelayIndex = LocalDelayIndex;
-}                                                                   // End of SDA_FixedDelay()
-
+}    // End of SDA_FixedDelay()
 
 /**/
 
 /********************************************************
-* Function: SIF_FixedDelayComplex
-*
-* Parameters:
-*   SLData_t * SIGLIB_PTR_DECL pRealState,
-*   SLData_t * SIGLIB_PTR_DECL pImagState,
-*   SLArrayIndex_t * pDelayIndex,   Delay index
-*   const SLArrayIndex_t            DelayLength
-*
-* Return value:
-*   void
-*
-* Description:
-*   Clear delay array array and reset delay index
-*
-********************************************************/
+ * Function: SIF_FixedDelayComplex
+ *
+ * Parameters:
+ *   SLData_t * SIGLIB_PTR_DECL pRealState,
+ *   SLData_t * SIGLIB_PTR_DECL pImagState,
+ *   SLArrayIndex_t * pDelayIndex,   Delay index
+ *   const SLArrayIndex_t            DelayLength
+ *
+ * Return value:
+ *   void
+ *
+ * Description:
+ *   Clear delay array array and reset delay index
+ *
+ ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_FixedDelayComplex (
-  SLData_t * SIGLIB_PTR_DECL pRealState,
-  SLData_t * SIGLIB_PTR_DECL pImagState,
-  SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
-  const SLArrayIndex_t DelayLength)
+void SIGLIB_FUNC_DECL SIF_FixedDelayComplex(SLData_t* SIGLIB_PTR_DECL pRealState, SLData_t* SIGLIB_PTR_DECL pImagState,
+                                            SLArrayIndex_t* SIGLIB_PTR_DECL pDelayIndex, const SLArrayIndex_t DelayLength)
 {
-  for (SLArrayIndex_t i = 0; i < DelayLength; i++) {                // Clear delay state array
+  for (SLArrayIndex_t i = 0; i < DelayLength; i++) {    // Clear delay state array
     *pRealState++ = SIGLIB_ZERO;
     *pImagState++ = SIGLIB_ZERO;
   }
 
   if (pDelayIndex != SIGLIB_NULL_ARRAY_INDEX_PTR) {
-    *pDelayIndex = SIGLIB_AI_ZERO;                                  // Initilaise filter index
+    *pDelayIndex = SIGLIB_AI_ZERO;    // Initilaise filter index
   }
-}                                                                   // End of SIF_FixedDelayComplex()
-
+}    // End of SIF_FixedDelayComplex()
 
 /**/
 
 /********************************************************
-* Function: SDS_FixedDelayComplex
-*
-* Parameters:
-*   const SLData_t RealSrc,
-*   const SLData_t ImagSrc,
-*   SLData_t *pRealDst,
-*   SLData_t *pImagDst,
-*   SLData_t * SIGLIB_PTR_DECL pRealState,
-*   SLData_t * SIGLIB_PTR_DECL pImagState,
-*   SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
-*   const SLArrayIndex_t DelayLength
-*
-* Return value:
-*   void
-*
-* Description:
-*   Apply a fixed delay to the complex data
-*
-********************************************************/
+ * Function: SDS_FixedDelayComplex
+ *
+ * Parameters:
+ *   const SLData_t RealSrc,
+ *   const SLData_t ImagSrc,
+ *   SLData_t *pRealDst,
+ *   SLData_t *pImagDst,
+ *   SLData_t * SIGLIB_PTR_DECL pRealState,
+ *   SLData_t * SIGLIB_PTR_DECL pImagState,
+ *   SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
+ *   const SLArrayIndex_t DelayLength
+ *
+ * Return value:
+ *   void
+ *
+ * Description:
+ *   Apply a fixed delay to the complex data
+ *
+ ********************************************************/
 
-void SIGLIB_FUNC_DECL SDS_FixedDelayComplex (
-  const SLData_t RealSrc,
-  const SLData_t ImagSrc,
-  SLData_t * pRealDst,
-  SLData_t * pImagDst,
-  SLData_t * SIGLIB_PTR_DECL pRealState,
-  SLData_t * SIGLIB_PTR_DECL pImagState,
-  SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
-  const SLArrayIndex_t DelayLength)
+void SIGLIB_FUNC_DECL SDS_FixedDelayComplex(const SLData_t RealSrc, const SLData_t ImagSrc, SLData_t* pRealDst, SLData_t* pImagDst,
+                                            SLData_t* SIGLIB_PTR_DECL pRealState, SLData_t* SIGLIB_PTR_DECL pImagState,
+                                            SLArrayIndex_t* SIGLIB_PTR_DECL pDelayIndex, const SLArrayIndex_t DelayLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                                                // Defined by TI compiler
-  _nassert ((int) pRealState % 8 == 0);                             // Align arrays on 64 bit double word boundary for LDDW
-  _nassert ((int) pImagState % 8 == 0);
-#endif
+#  ifdef __TMS320C6X__                   // Defined by TI compiler
+  _nassert((int)pRealState % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+  _nassert((int)pImagState % 8 == 0);
+#  endif
 #endif
 
   (*pDelayIndex)++;
@@ -252,57 +230,51 @@ void SIGLIB_FUNC_DECL SDS_FixedDelayComplex (
   pRealState[*pDelayIndex] = RealSrc;
   *pImagDst = pImagState[*pDelayIndex];
   pImagState[*pDelayIndex] = ImagSrc;
-}                                                                   // End of SDS_FixedDelayComplex()
-
+}    // End of SDS_FixedDelayComplex()
 
 /**/
 
 /********************************************************
-* Function: SDA_FixedDelayComplex
-*
-* Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
-*   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
-*   SLData_t * SIGLIB_PTR_DECL pRealDst,
-*   SLData_t * SIGLIB_PTR_DECL pImagDst,
-*   SLData_t * SIGLIB_PTR_DECL pRealState,
-*   SLData_t * SIGLIB_PTR_DECL pImagState,
-*   SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
-*   const SLArrayIndex_t DelayLength
-*   const SLArrayIndex_t SampleLength
-*
-* Return value:
-*   void
-*
-* Description:
-*   Apply a fixed delay to the complex data
-*
-********************************************************/
+ * Function: SDA_FixedDelayComplex
+ *
+ * Parameters:
+ *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *   SLData_t * SIGLIB_PTR_DECL pRealDst,
+ *   SLData_t * SIGLIB_PTR_DECL pImagDst,
+ *   SLData_t * SIGLIB_PTR_DECL pRealState,
+ *   SLData_t * SIGLIB_PTR_DECL pImagState,
+ *   SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
+ *   const SLArrayIndex_t DelayLength
+ *   const SLArrayIndex_t SampleLength
+ *
+ * Return value:
+ *   void
+ *
+ * Description:
+ *   Apply a fixed delay to the complex data
+ *
+ ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_FixedDelayComplex (
-  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
-  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
-  SLData_t * SIGLIB_PTR_DECL pRealDst,
-  SLData_t * SIGLIB_PTR_DECL pImagDst,
-  SLData_t * SIGLIB_PTR_DECL pRealState,
-  SLData_t * SIGLIB_PTR_DECL pImagState,
-  SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
-  const SLArrayIndex_t DelayLength,
-  const SLArrayIndex_t SampleLength)
+void SIGLIB_FUNC_DECL SDA_FixedDelayComplex(const SLData_t* SIGLIB_PTR_DECL pSrcReal, const SLData_t* SIGLIB_PTR_DECL pSrcImag,
+                                            SLData_t* SIGLIB_PTR_DECL pRealDst, SLData_t* SIGLIB_PTR_DECL pImagDst,
+                                            SLData_t* SIGLIB_PTR_DECL pRealState, SLData_t* SIGLIB_PTR_DECL pImagState,
+                                            SLArrayIndex_t* SIGLIB_PTR_DECL pDelayIndex, const SLArrayIndex_t DelayLength,
+                                            const SLArrayIndex_t SampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                                                // Defined by TI compiler
-  _nassert ((int) pSrcReal % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
-  _nassert ((int) pSrcImag % 8 == 0);
-  _nassert ((int) pRealDst % 8 == 0);
-  _nassert ((int) pImagDst % 8 == 0);
-  _nassert ((int) pRealState % 8 == 0);
-  _nassert ((int) pImagState % 8 == 0);
-  _nassert ((int) pDelayIndex % 8 == 0);
-#endif
+#  ifdef __TMS320C6X__                 // Defined by TI compiler
+  _nassert((int)pSrcReal % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+  _nassert((int)pSrcImag % 8 == 0);
+  _nassert((int)pRealDst % 8 == 0);
+  _nassert((int)pImagDst % 8 == 0);
+  _nassert((int)pRealState % 8 == 0);
+  _nassert((int)pImagState % 8 == 0);
+  _nassert((int)pDelayIndex % 8 == 0);
+#  endif
 #endif
 
-  SLArrayIndex_t  LocalDelayIndex = *pDelayIndex;
+  SLArrayIndex_t LocalDelayIndex = *pDelayIndex;
 
   for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
     LocalDelayIndex++;
@@ -317,587 +289,528 @@ void SIGLIB_FUNC_DECL SDA_FixedDelayComplex (
 
   *pDelayIndex = LocalDelayIndex;
 
-}                                                                   // End of SDA_FixedDelayComplex()
-
+}    // End of SDA_FixedDelayComplex()
 
 /**/
 
 /********************************************************
-* Function: SDA_ShortFixedDelay
-*
-* Parameters:
-*   const SLData_t * pSrc             - Source data array pointer
-*   SLData_t * pDst                   - Destination data array pointer
-*   SLData_t * pDelay                 - Delay Data array pointer
-*   SLData_t * pTempDst               - Temporary Destination data array pointer
-*   const SLArrayIndex_t Delay        - Delay length
-*   const SLArrayIndex_t SampleLength - Buffer length
-*
-* Return value:
-*   void
-*
-* Description: Delay the data in a block and across
-*   blocks
-*
-********************************************************/
+ * Function: SDA_ShortFixedDelay
+ *
+ * Parameters:
+ *   const SLData_t * pSrc             - Source data array pointer
+ *   SLData_t * pDst                   - Destination data array pointer
+ *   SLData_t * pDelay                 - Delay Data array pointer
+ *   SLData_t * pTempDst               - Temporary Destination data array
+ *pointer const SLArrayIndex_t Delay        - Delay length const SLArrayIndex_t
+ *SampleLength - Buffer length
+ *
+ * Return value:
+ *   void
+ *
+ * Description: Delay the data in a block and across
+ *   blocks
+ *
+ ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_ShortFixedDelay (
-  const SLData_t * SIGLIB_PTR_DECL pSrc,
-  SLData_t * SIGLIB_PTR_DECL pDst,
-  SLData_t * SIGLIB_PTR_DECL pDelay,
-  SLData_t * SIGLIB_PTR_DECL pTempDst,
-  const SLArrayIndex_t Delay,
-  const SLArrayIndex_t SampleLength)
+void SIGLIB_FUNC_DECL SDA_ShortFixedDelay(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pDelay,
+                                          SLData_t* SIGLIB_PTR_DECL pTempDst, const SLArrayIndex_t Delay, const SLArrayIndex_t SampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                                                // Defined by TI compiler
-  _nassert ((int) pSrc % 8 == 0);                                   // Align arrays on 64 bit double word boundary for LDDW
-  _nassert ((int) pDst % 8 == 0);
-  _nassert ((int) pDelay % 8 == 0);
-  _nassert ((int) pTempDst % 8 == 0);
-#endif
+#  ifdef __TMS320C6X__             // Defined by TI compiler
+  _nassert((int)pSrc % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+  _nassert((int)pDst % 8 == 0);
+  _nassert((int)pDelay % 8 == 0);
+  _nassert((int)pTempDst % 8 == 0);
+#  endif
 #endif
 
-  pSrc += (SampleLength - 1);                                       // Write input data to delay array
+  pSrc += (SampleLength - 1);    // Write input data to delay array
   for (SLArrayIndex_t i = 0; i < Delay; i++) {
     *pTempDst++ = *pSrc--;
   }
 
   pTempDst -= Delay;
 
-  pDst += (SampleLength - 1);                                       // Write input data to output array
+  pDst += (SampleLength - 1);    // Write input data to output array
   for (SLArrayIndex_t i = 0; i < (SampleLength - Delay); i++) {
     *pDst-- = *pSrc--;
   }
 
-  SLData_t       *LocalpDelay = pDelay;                             // Write delayed data to output array
+  SLData_t* LocalpDelay = pDelay;    // Write delayed data to output array
   for (SLArrayIndex_t i = 0; i < Delay; i++) {
     *pDst-- = *LocalpDelay++;
   }
 
-  SDA_Copy (pTempDst, pDelay, Delay);                               // Save delayed data
-}                                                                   // End of SDA_ShortFixedDelay
-
+  SDA_Copy(pTempDst, pDelay, Delay);    // Save delayed data
+}    // End of SDA_ShortFixedDelay
 
 /**/
 
 /********************************************************
-* Function: SIF_VariableDelay
-*
-* Parameters:
-*   SLData_t *,             Pointer to the delay state array
-*   SLArrayIndex_t *,       Pointer to the FIFO input index
-*   SLArrayIndex_t *,       Pointer to the FIFO output index
-*   SLArrayIndex_t *,       Variable FIFO delay
-*   const SLArrayIndex_t,   Initial FIFO delay value
-*   const SLArrayIndex_t)   Maximum delay length
-*
-* Return value:
-*   SIGLIB_ERROR if the length of the delay is < 0 or >
-*   maximum delay length.
-*
-* Description:
-*   Initialises the Fifo Delay functions
-*
-* Notes:
-*   The minimum delay length (in number of samples) is equal to 0.
-*   The maximum delay length (in number of samples) is equal to MaxDelayLength - 1.
-*   This function returns SIGLIB_ERROR if the requested delay is less than zero or
-*   greater than the maximum allowable delay
-*
-********************************************************/
+ * Function: SIF_VariableDelay
+ *
+ * Parameters:
+ *   SLData_t *,             Pointer to the delay state array
+ *   SLArrayIndex_t *,       Pointer to the FIFO input index
+ *   SLArrayIndex_t *,       Pointer to the FIFO output index
+ *   SLArrayIndex_t *,       Variable FIFO delay
+ *   const SLArrayIndex_t,   Initial FIFO delay value
+ *   const SLArrayIndex_t)   Maximum delay length
+ *
+ * Return value:
+ *   SIGLIB_ERROR if the length of the delay is < 0 or >
+ *   maximum delay length.
+ *
+ * Description:
+ *   Initialises the Fifo Delay functions
+ *
+ * Notes:
+ *   The minimum delay length (in number of samples) is equal to 0.
+ *   The maximum delay length (in number of samples) is equal to MaxDelayLength
+ *- 1. This function returns SIGLIB_ERROR if the requested delay is less than
+ *zero or greater than the maximum allowable delay
+ *
+ ********************************************************/
 
-SLError_t SIGLIB_FUNC_DECL SIF_VariableDelay (
-  SLData_t * SIGLIB_PTR_DECL pDelayArray,
-  SLArrayIndex_t * pInputIndex,
-  SLArrayIndex_t * pOutputIndex,
-  SLArrayIndex_t * pVariableDelay,
-  const SLArrayIndex_t InitialDelay,
-  const SLArrayIndex_t MaxDelayLength)
+SLError_t SIGLIB_FUNC_DECL SIF_VariableDelay(SLData_t* SIGLIB_PTR_DECL pDelayArray, SLArrayIndex_t* pInputIndex, SLArrayIndex_t* pOutputIndex,
+                                             SLArrayIndex_t* pVariableDelay, const SLArrayIndex_t InitialDelay, const SLArrayIndex_t MaxDelayLength)
 {
   if (InitialDelay >= MaxDelayLength) {
-    return (SIGLIB_ERROR);                                          // Error
+    return (SIGLIB_ERROR);    // Error
   }
 
   if (InitialDelay < SIGLIB_AI_ZERO) {
-    return (SIGLIB_ERROR);                                          // Error
+    return (SIGLIB_ERROR);    // Error
   }
 
-  *pInputIndex = InitialDelay;                                      // Preset the initial delay
-  *pOutputIndex = (SLArrayIndex_t) 0;
+  *pInputIndex = InitialDelay;    // Preset the initial delay
+  *pOutputIndex = (SLArrayIndex_t)0;
   *pVariableDelay = InitialDelay;
 
-  SDA_Clear (pDelayArray, MaxDelayLength);                          // Clear the delay state array
+  SDA_Clear(pDelayArray, MaxDelayLength);    // Clear the delay state array
 
-  return (SIGLIB_NO_ERROR);                                         // Success
-}                                                                   // End of SIF_VariableDelay()
-
+  return (SIGLIB_NO_ERROR);    // Success
+}    // End of SIF_VariableDelay()
 
 /**/
 
 /********************************************************
-* Function: SDS_VariableDelay
-*
-* Parameters:
-*   const SLData_t,         Input value
-*   SLData_t *,             Pointer to the delay state array
-*   SLArrayIndex_t *,       Pointer to the FIFO input index
-*   SLArrayIndex_t *,       Pointer to the FIFO output index
-*   const SLArrayIndex_t)   Maximum delay length
-*
-* Return value:
-*   Delayed sample
-*
-* Description:
-*   Implement the Fifo Delay on a single sample
-*
-* Notes:
-*
-********************************************************/
+ * Function: SDS_VariableDelay
+ *
+ * Parameters:
+ *   const SLData_t,         Input value
+ *   SLData_t *,             Pointer to the delay state array
+ *   SLArrayIndex_t *,       Pointer to the FIFO input index
+ *   SLArrayIndex_t *,       Pointer to the FIFO output index
+ *   const SLArrayIndex_t)   Maximum delay length
+ *
+ * Return value:
+ *   Delayed sample
+ *
+ * Description:
+ *   Implement the Fifo Delay on a single sample
+ *
+ * Notes:
+ *
+ ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_VariableDelay (
-  const SLData_t InputValue,
-  SLData_t * SIGLIB_PTR_DECL pDelayArray,
-  SLArrayIndex_t * pInputIndex,
-  SLArrayIndex_t * pOutputIndex,
-  const SLArrayIndex_t MaxDelayLength)
+SLData_t SIGLIB_FUNC_DECL SDS_VariableDelay(const SLData_t InputValue, SLData_t* SIGLIB_PTR_DECL pDelayArray, SLArrayIndex_t* pInputIndex,
+                                            SLArrayIndex_t* pOutputIndex, const SLArrayIndex_t MaxDelayLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                                                 // Defined by TI compiler
-  _nassert ((int) pDelayArray % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
+#  ifdef _TMS320C6700                     // Defined by TI compiler
+  _nassert((int)pDelayArray % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+#  endif
 #endif
-#endif
 
-  SLArrayIndex_t  LocalIndex = *pInputIndex;
+  SLArrayIndex_t LocalIndex = *pInputIndex;
 
-  *(pDelayArray + LocalIndex) = InputValue;                         // Write in new input value
+  *(pDelayArray + LocalIndex) = InputValue;    // Write in new input value
 
-  LocalIndex++;                                                     // Update input pointer
+  LocalIndex++;    // Update input pointer
   if (LocalIndex >= MaxDelayLength) {
-    LocalIndex = (SLArrayIndex_t) 0;
+    LocalIndex = (SLArrayIndex_t)0;
   }
   *pInputIndex = LocalIndex;
 
-
   LocalIndex = *pOutputIndex;
-  SLData_t        OutputValue = *(pDelayArray + LocalIndex);        // Read out delayed value
+  SLData_t OutputValue = *(pDelayArray + LocalIndex);    // Read out delayed value
 
-  LocalIndex++;                                                     // Update output pointer
+  LocalIndex++;    // Update output pointer
   if (LocalIndex >= MaxDelayLength) {
-    LocalIndex = (SLArrayIndex_t) 0;
+    LocalIndex = (SLArrayIndex_t)0;
   }
   *pOutputIndex = LocalIndex;
 
   return (OutputValue);
-}                                                                   // End of SDS_VariableDelay()
-
+}    // End of SDS_VariableDelay()
 
 /**/
 
 /********************************************************
-* Function: SDA_VariableDelay
-*
-* Parameters:
-*   const SLData_t *,       Pointer to the input data array
-*   SLData_t *,             Pointer to the output data array
-*   SLData_t *,             Pointer to the delay state array
-*   SLArrayIndex_t *,       Pointer to the FIFO input index
-*   SLArrayIndex_t *,       Pointer to the FIFO output index
-*   const SLArrayIndex_t,   Maximum delay length
-*   const SLArrayIndex_t)   Input / output sample length
-*
-* Return value:
-*   void
-*
-* Description:
-*   Implement the Fifo Delay on a stream of samples
-*
-* Notes:
-*
-********************************************************/
+ * Function: SDA_VariableDelay
+ *
+ * Parameters:
+ *   const SLData_t *,       Pointer to the input data array
+ *   SLData_t *,             Pointer to the output data array
+ *   SLData_t *,             Pointer to the delay state array
+ *   SLArrayIndex_t *,       Pointer to the FIFO input index
+ *   SLArrayIndex_t *,       Pointer to the FIFO output index
+ *   const SLArrayIndex_t,   Maximum delay length
+ *   const SLArrayIndex_t)   Input / output sample length
+ *
+ * Return value:
+ *   void
+ *
+ * Description:
+ *   Implement the Fifo Delay on a stream of samples
+ *
+ * Notes:
+ *
+ ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_VariableDelay (
-  const SLData_t * SIGLIB_PTR_DECL pSrc,
-  SLData_t * SIGLIB_PTR_DECL pDst,
-  SLData_t * SIGLIB_PTR_DECL pDelayArray,
-  SLArrayIndex_t * pInputIndex,
-  SLArrayIndex_t * pOutputIndex,
-  const SLArrayIndex_t MaxDelayLength,
-  const SLArrayIndex_t SampleLength)
+void SIGLIB_FUNC_DECL SDA_VariableDelay(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pDelayArray,
+                                        SLArrayIndex_t* pInputIndex, SLArrayIndex_t* pOutputIndex, const SLArrayIndex_t MaxDelayLength,
+                                        const SLArrayIndex_t SampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                                                // Defined by TI compiler
-  _nassert ((int) pDelayArray % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
-#endif
+#  ifdef __TMS320C6X__                    // Defined by TI compiler
+  _nassert((int)pDelayArray % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+#  endif
 #endif
 
-  SLArrayIndex_t  LocalInputIndex = *pInputIndex;
-  SLArrayIndex_t  LocalOutputIndex = *pOutputIndex;
+  SLArrayIndex_t LocalInputIndex = *pInputIndex;
+  SLArrayIndex_t LocalOutputIndex = *pOutputIndex;
 
   for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-    *(pDelayArray + LocalInputIndex) = *pSrc++;                     // Write in new input value
+    *(pDelayArray + LocalInputIndex) = *pSrc++;    // Write in new input value
 
-    LocalInputIndex++;                                              // Update input pointer
+    LocalInputIndex++;    // Update input pointer
     if (LocalInputIndex >= MaxDelayLength) {
-      LocalInputIndex = (SLArrayIndex_t) 0;
+      LocalInputIndex = (SLArrayIndex_t)0;
     }
 
-    *pDst++ = *(pDelayArray + LocalOutputIndex);                    // Read out delayed value
+    *pDst++ = *(pDelayArray + LocalOutputIndex);    // Read out delayed value
 
-    LocalOutputIndex++;                                             // Update output pointer
+    LocalOutputIndex++;    // Update output pointer
     if (LocalOutputIndex >= MaxDelayLength) {
-      LocalOutputIndex = (SLArrayIndex_t) 0;
+      LocalOutputIndex = (SLArrayIndex_t)0;
     }
   }
 
   *pInputIndex = LocalInputIndex;
   *pOutputIndex = LocalOutputIndex;
-}                                                                   // End of SDA_VariableDelay()
-
+}    // End of SDA_VariableDelay()
 
 /**/
 
 /********************************************************
-* Function: SIF_VariableDelayComplex
-*
-* Parameters:
-*   SLData_t *,             Pointer to the real delay state array
-*   SLData_t *,             Pointer to the imaginary delay state array
-*   SLArrayIndex_t *,       Pointer to the FIFO input index
-*   SLArrayIndex_t *,       Pointer to the FIFO output index
-*   SLArrayIndex_t *,       Variable FIFO delay
-*   const SLArrayIndex_t,   Initial FIFO delay value
-*   const SLArrayIndex_t)   Maximum delay length
-*
-* Return value:
-*   SIGLIB_ERROR if the length of the delay is < 0 or >
-*   maximum delay length.
-*
-* Description:
-*   Initialises the Fifo Delay functions
-*
-* Notes:
-*   The minimum delay length (in number of samples) is equal to 0.
-*   The maximum delay length (in number of samples) is equal to MaxDelayLength - 1.
-*   This function returns SIGLIB_ERROR if the requested delay is less than zero or
-*   greater than the maximum allowable delay
-*
-********************************************************/
+ * Function: SIF_VariableDelayComplex
+ *
+ * Parameters:
+ *   SLData_t *,             Pointer to the real delay state array
+ *   SLData_t *,             Pointer to the imaginary delay state array
+ *   SLArrayIndex_t *,       Pointer to the FIFO input index
+ *   SLArrayIndex_t *,       Pointer to the FIFO output index
+ *   SLArrayIndex_t *,       Variable FIFO delay
+ *   const SLArrayIndex_t,   Initial FIFO delay value
+ *   const SLArrayIndex_t)   Maximum delay length
+ *
+ * Return value:
+ *   SIGLIB_ERROR if the length of the delay is < 0 or >
+ *   maximum delay length.
+ *
+ * Description:
+ *   Initialises the Fifo Delay functions
+ *
+ * Notes:
+ *   The minimum delay length (in number of samples) is equal to 0.
+ *   The maximum delay length (in number of samples) is equal to MaxDelayLength
+ *- 1. This function returns SIGLIB_ERROR if the requested delay is less than
+ *zero or greater than the maximum allowable delay
+ *
+ ********************************************************/
 
-SLError_t SIGLIB_FUNC_DECL SIF_VariableDelayComplex (
-  SLData_t * SIGLIB_PTR_DECL pRealDelayArray,
-  SLData_t * SIGLIB_PTR_DECL pImagDelayArray,
-  SLArrayIndex_t * pInputIndex,
-  SLArrayIndex_t * pOutputIndex,
-  SLArrayIndex_t * pVariableDelay,
-  const SLArrayIndex_t InitialDelay,
-  const SLArrayIndex_t MaxDelayLength)
+SLError_t SIGLIB_FUNC_DECL SIF_VariableDelayComplex(SLData_t* SIGLIB_PTR_DECL pRealDelayArray, SLData_t* SIGLIB_PTR_DECL pImagDelayArray,
+                                                    SLArrayIndex_t* pInputIndex, SLArrayIndex_t* pOutputIndex, SLArrayIndex_t* pVariableDelay,
+                                                    const SLArrayIndex_t InitialDelay, const SLArrayIndex_t MaxDelayLength)
 {
   if (InitialDelay >= MaxDelayLength) {
-    return (SIGLIB_ERROR);                                          // Error
+    return (SIGLIB_ERROR);    // Error
   }
 
   if (InitialDelay < SIGLIB_AI_ZERO) {
-    return (SIGLIB_ERROR);                                          // Error
+    return (SIGLIB_ERROR);    // Error
   }
 
-  *pInputIndex = InitialDelay;                                      // Preset the initial delay
-  *pOutputIndex = (SLArrayIndex_t) 0;
+  *pInputIndex = InitialDelay;    // Preset the initial delay
+  *pOutputIndex = (SLArrayIndex_t)0;
   *pVariableDelay = InitialDelay;
 
-  SDA_Clear (pRealDelayArray, MaxDelayLength);                      // Clear the delay state arrays
-  SDA_Clear (pImagDelayArray, MaxDelayLength);
+  SDA_Clear(pRealDelayArray, MaxDelayLength);    // Clear the delay state arrays
+  SDA_Clear(pImagDelayArray, MaxDelayLength);
 
-  return (SIGLIB_NO_ERROR);                                         // Success
-}                                                                   // End of SIF_VariableDelayComplex()
-
+  return (SIGLIB_NO_ERROR);    // Success
+}    // End of SIF_VariableDelayComplex()
 
 /**/
 
 /********************************************************
-* Function: SDS_VariableDelayComplex
-*
-* Parameters:
-*   const SLData_t,           Real input value
-*   const SLData_t,           Imaginary input value
-*   SLData_t *,               Real output value
-*   SLData_t *,               Imaginary output value
-*   SLData_t *,               Pointer to the real delay state array
-*   SLData_t *,               Pointer to the imag delay state array
-*   SLArrayIndex_t *,         Pointer to the FIFO input index
-*   const SLArrayIndex_t *,   Pointer to the FIFO output index
-*   const SLArrayIndex_t)     Maximum delay length
-*
-* Return value:
-*   void
-*
-* Description:
-*   Implement the Fifo Delay on a single complex sample
-*
-* Notes:
-*
-********************************************************/
+ * Function: SDS_VariableDelayComplex
+ *
+ * Parameters:
+ *   const SLData_t,           Real input value
+ *   const SLData_t,           Imaginary input value
+ *   SLData_t *,               Real output value
+ *   SLData_t *,               Imaginary output value
+ *   SLData_t *,               Pointer to the real delay state array
+ *   SLData_t *,               Pointer to the imag delay state array
+ *   SLArrayIndex_t *,         Pointer to the FIFO input index
+ *   const SLArrayIndex_t *,   Pointer to the FIFO output index
+ *   const SLArrayIndex_t)     Maximum delay length
+ *
+ * Return value:
+ *   void
+ *
+ * Description:
+ *   Implement the Fifo Delay on a single complex sample
+ *
+ * Notes:
+ *
+ ********************************************************/
 
-void SIGLIB_FUNC_DECL SDS_VariableDelayComplex (
-  const SLData_t RealInputValue,
-  const SLData_t ImagInputValue,
-  SLData_t * pRealDelayedResult,
-  SLData_t * pImagDelayedResult,
-  SLData_t * SIGLIB_PTR_DECL pRealDelayArray,
-  SLData_t * SIGLIB_PTR_DECL pImagDelayArray,
-  SLArrayIndex_t * pInputIndex,
-  SLArrayIndex_t * pOutputIndex,
-  const SLArrayIndex_t MaxDelayLength)
+void SIGLIB_FUNC_DECL SDS_VariableDelayComplex(const SLData_t RealInputValue, const SLData_t ImagInputValue, SLData_t* pRealDelayedResult,
+                                               SLData_t* pImagDelayedResult, SLData_t* SIGLIB_PTR_DECL pRealDelayArray,
+                                               SLData_t* SIGLIB_PTR_DECL pImagDelayArray, SLArrayIndex_t* pInputIndex, SLArrayIndex_t* pOutputIndex,
+                                               const SLArrayIndex_t MaxDelayLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef _TMS320C6700                                                 // Defined by TI compiler
-  _nassert ((int) pRealDelayedResult % 8 == 0);                     // Align arrays on 64 bit double word boundary for LDDW
-  _nassert ((int) pImagDelayedResult % 8 == 0);
-  _nassert ((int) pRealDelayArray % 8 == 0);
-  _nassert ((int) pImagDelayArray % 8 == 0);
-#endif
+#  ifdef _TMS320C6700                            // Defined by TI compiler
+  _nassert((int)pRealDelayedResult % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+  _nassert((int)pImagDelayedResult % 8 == 0);
+  _nassert((int)pRealDelayArray % 8 == 0);
+  _nassert((int)pImagDelayArray % 8 == 0);
+#  endif
 #endif
 
-  SLArrayIndex_t  LocalIndex = *pInputIndex;
+  SLArrayIndex_t LocalIndex = *pInputIndex;
 
-  *(pRealDelayArray + LocalIndex) = RealInputValue;                 // Write in new input values
+  *(pRealDelayArray + LocalIndex) = RealInputValue;    // Write in new input values
   *(pImagDelayArray + LocalIndex) = ImagInputValue;
 
-  LocalIndex++;                                                     // Update input pointer
+  LocalIndex++;    // Update input pointer
   if (LocalIndex >= MaxDelayLength) {
-    LocalIndex = (SLArrayIndex_t) 0;
+    LocalIndex = (SLArrayIndex_t)0;
   }
   *pInputIndex = LocalIndex;
 
-
   LocalIndex = *pOutputIndex;
-  *pRealDelayedResult = *(pRealDelayArray + LocalIndex);            // Read out delayed values
+  *pRealDelayedResult = *(pRealDelayArray + LocalIndex);    // Read out delayed values
   *pImagDelayedResult = *(pImagDelayArray + LocalIndex);
 
-  LocalIndex++;                                                     // Update output pointer
+  LocalIndex++;    // Update output pointer
   if (LocalIndex >= MaxDelayLength) {
-    LocalIndex = (SLArrayIndex_t) 0;
+    LocalIndex = (SLArrayIndex_t)0;
   }
   *pOutputIndex = LocalIndex;
-}                                                                   // End of SDS_VariableDelayComplex()
-
+}    // End of SDS_VariableDelayComplex()
 
 /**/
 
 /********************************************************
-* Function: SDA_VariableDelayComplex
-*
-* Parameters:
-*   const SLData_t *,       Pointer to the real input data array
-*   const SLData_t *,       Pointer to the imag input data array
-*   SLData_t *,             Pointer to the real output data array
-*   SLData_t *,             Pointer to the imag output data array
-*   SLData_t *,             Pointer to the real delay state array
-*   SLData_t *,             Pointer to the imag delay state array
-*   SLArrayIndex_t *,       Pointer to the FIFO input index
-*   SLArrayIndex_t *,       Pointer to the FIFO output index
-*   const SLArrayIndex_t,   Maximum delay length
-*   const SLArrayIndex_t)   Input / output sample length
-*
-* Return value:
-*   void
-*
-* Description:
-*   Implement the Fifo Delay on a complex stream of samples
-*
-* Notes:
-*
-********************************************************/
+ * Function: SDA_VariableDelayComplex
+ *
+ * Parameters:
+ *   const SLData_t *,       Pointer to the real input data array
+ *   const SLData_t *,       Pointer to the imag input data array
+ *   SLData_t *,             Pointer to the real output data array
+ *   SLData_t *,             Pointer to the imag output data array
+ *   SLData_t *,             Pointer to the real delay state array
+ *   SLData_t *,             Pointer to the imag delay state array
+ *   SLArrayIndex_t *,       Pointer to the FIFO input index
+ *   SLArrayIndex_t *,       Pointer to the FIFO output index
+ *   const SLArrayIndex_t,   Maximum delay length
+ *   const SLArrayIndex_t)   Input / output sample length
+ *
+ * Return value:
+ *   void
+ *
+ * Description:
+ *   Implement the Fifo Delay on a complex stream of samples
+ *
+ * Notes:
+ *
+ ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_VariableDelayComplex (
-  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
-  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
-  SLData_t * SIGLIB_PTR_DECL pRealDst,
-  SLData_t * SIGLIB_PTR_DECL pImagDst,
-  SLData_t * SIGLIB_PTR_DECL pRealDelayArray,
-  SLData_t * SIGLIB_PTR_DECL pImagDelayArray,
-  SLArrayIndex_t * pInputIndex,
-  SLArrayIndex_t * pOutputIndex,
-  const SLArrayIndex_t MaxDelayLength,
-  const SLArrayIndex_t SampleLength)
+void SIGLIB_FUNC_DECL SDA_VariableDelayComplex(const SLData_t* SIGLIB_PTR_DECL pSrcReal, const SLData_t* SIGLIB_PTR_DECL pSrcImag,
+                                               SLData_t* SIGLIB_PTR_DECL pRealDst, SLData_t* SIGLIB_PTR_DECL pImagDst,
+                                               SLData_t* SIGLIB_PTR_DECL pRealDelayArray, SLData_t* SIGLIB_PTR_DECL pImagDelayArray,
+                                               SLArrayIndex_t* pInputIndex, SLArrayIndex_t* pOutputIndex, const SLArrayIndex_t MaxDelayLength,
+                                               const SLArrayIndex_t SampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                                                // Defined by TI compiler
-  _nassert ((int) pSrcReal % 8 == 0);                               // Align arrays on 64 bit double word boundary for LDDW
-  _nassert ((int) pSrcImag % 8 == 0);
-  _nassert ((int) pRealDst % 8 == 0);
-  _nassert ((int) pImagDst % 8 == 0);
-  _nassert ((int) pRealDelayArray % 8 == 0);
-  _nassert ((int) pImagDelayArray % 8 == 0);
-  _nassert ((int) pInputIndex % 8 == 0);
-  _nassert ((int) pOutputIndex % 8 == 0);
-#endif
+#  ifdef __TMS320C6X__                 // Defined by TI compiler
+  _nassert((int)pSrcReal % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+  _nassert((int)pSrcImag % 8 == 0);
+  _nassert((int)pRealDst % 8 == 0);
+  _nassert((int)pImagDst % 8 == 0);
+  _nassert((int)pRealDelayArray % 8 == 0);
+  _nassert((int)pImagDelayArray % 8 == 0);
+  _nassert((int)pInputIndex % 8 == 0);
+  _nassert((int)pOutputIndex % 8 == 0);
+#  endif
 #endif
 
-  SLArrayIndex_t  LocalInputIndex = *pInputIndex;
-  SLArrayIndex_t  LocalOutputIndex = *pOutputIndex;
+  SLArrayIndex_t LocalInputIndex = *pInputIndex;
+  SLArrayIndex_t LocalOutputIndex = *pOutputIndex;
 
   for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
-    *(pRealDelayArray + LocalInputIndex) = *pSrcReal++;             // Write in new input value
+    *(pRealDelayArray + LocalInputIndex) = *pSrcReal++;    // Write in new input value
     *(pImagDelayArray + LocalInputIndex) = *pSrcImag++;
 
-    LocalInputIndex++;                                              // Update input pointer
+    LocalInputIndex++;    // Update input pointer
     if (LocalInputIndex >= MaxDelayLength) {
-      LocalInputIndex = (SLArrayIndex_t) 0;
+      LocalInputIndex = (SLArrayIndex_t)0;
     }
 
-    *pRealDst++ = *(pRealDelayArray + LocalOutputIndex);            // Read out delayed value
+    *pRealDst++ = *(pRealDelayArray + LocalOutputIndex);    // Read out delayed value
     *pImagDst++ = *(pImagDelayArray + LocalOutputIndex);
 
-    LocalOutputIndex++;                                             // Update output pointer
+    LocalOutputIndex++;    // Update output pointer
     if (LocalOutputIndex >= MaxDelayLength) {
-      LocalOutputIndex = (SLArrayIndex_t) 0;
+      LocalOutputIndex = (SLArrayIndex_t)0;
     }
   }
 
   *pInputIndex = LocalInputIndex;
   *pOutputIndex = LocalOutputIndex;
-}                                                                   // End of SDA_VariableDelayComplex()
-
+}    // End of SDA_VariableDelayComplex()
 
 /**/
 
 /********************************************************
-* Function: SUF_IncreaseVariableDelay
-*
-* Parameters:
-*   SLArrayIndex_t *pOutputIndex,         Pointer to the FIFO output index
-*   SLArrayIndex_t *pDelayLength,         Pointer to delay length
-*   const SLArrayIndex_t MaxDelayLength)  Maximum delay length
-*
-* Return value:
-*   void
-*
-* Description:
-*   Increments the FIFO delay length
-*
-* Notes:
-*   This function returns an error if the incremented delay
-*   is greater than the maximum allowable delay
-*   and it does not adjust the delay
-*
-********************************************************/
+ * Function: SUF_IncreaseVariableDelay
+ *
+ * Parameters:
+ *   SLArrayIndex_t *pOutputIndex,         Pointer to the FIFO output index
+ *   SLArrayIndex_t *pDelayLength,         Pointer to delay length
+ *   const SLArrayIndex_t MaxDelayLength)  Maximum delay length
+ *
+ * Return value:
+ *   void
+ *
+ * Description:
+ *   Increments the FIFO delay length
+ *
+ * Notes:
+ *   This function returns an error if the incremented delay
+ *   is greater than the maximum allowable delay
+ *   and it does not adjust the delay
+ *
+ ********************************************************/
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SUF_IncreaseVariableDelay (
-  SLArrayIndex_t * pOutputIndex,
-  SLArrayIndex_t * pDelayLength,
-  const SLArrayIndex_t MaxDelayLength)
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_IncreaseVariableDelay(SLArrayIndex_t* pOutputIndex, SLArrayIndex_t* pDelayLength,
+                                                          const SLArrayIndex_t MaxDelayLength)
 {
   if (*pDelayLength < (MaxDelayLength - SIGLIB_AI_ONE)) {
-    (*pOutputIndex)--;                                              // Modulo decrement pOutputIndex
+    (*pOutputIndex)--;    // Modulo decrement pOutputIndex
     if (*pOutputIndex < -SIGLIB_EPSILON) {
       *pOutputIndex = MaxDelayLength - SIGLIB_AI_ONE;
     }
 
     (*pDelayLength)++;
-    return (SIGLIB_NO_ERROR);                                       // Success
+    return (SIGLIB_NO_ERROR);    // Success
   }
 
-  return (SIGLIB_ERROR);                                            // Error
-}                                                                   // End of SUF_IncreaseVariableDelay()
-
+  return (SIGLIB_ERROR);    // Error
+}    // End of SUF_IncreaseVariableDelay()
 
 /**/
 
 /********************************************************
-* Function: SUF_DecreaseVariableDelay
-*
-* Parameters:
-*   SLArrayIndex_t *pOutputIndex,         Pointer to the FIFO output index
-*   SLArrayIndex_t *pDelayLength,         Pointer to delay length
-*   const SLArrayIndex_t MaxDelayLength)  Maximum delay length
-*
-* Return value:
-*   void
-*
-* Description:
-*   Decrements the FIFO delay length
-*
-* Notes:
-*   This function returns SIGLIB_ERROR if the decremented
-*   delay is less than zero and it does not adjust the delay
-*
-********************************************************/
+ * Function: SUF_DecreaseVariableDelay
+ *
+ * Parameters:
+ *   SLArrayIndex_t *pOutputIndex,         Pointer to the FIFO output index
+ *   SLArrayIndex_t *pDelayLength,         Pointer to delay length
+ *   const SLArrayIndex_t MaxDelayLength)  Maximum delay length
+ *
+ * Return value:
+ *   void
+ *
+ * Description:
+ *   Decrements the FIFO delay length
+ *
+ * Notes:
+ *   This function returns SIGLIB_ERROR if the decremented
+ *   delay is less than zero and it does not adjust the delay
+ *
+ ********************************************************/
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SUF_DecreaseVariableDelay (
-  SLArrayIndex_t * pOutputIndex,
-  SLArrayIndex_t * pDelayLength,
-  const SLArrayIndex_t MaxDelayLength)
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_DecreaseVariableDelay(SLArrayIndex_t* pOutputIndex, SLArrayIndex_t* pDelayLength,
+                                                          const SLArrayIndex_t MaxDelayLength)
 {
   if (*pDelayLength > SIGLIB_AI_ZERO) {
-    (*pOutputIndex)++;                                              // Modulo increment pOutputIndex
+    (*pOutputIndex)++;    // Modulo increment pOutputIndex
     if (*pOutputIndex >= MaxDelayLength) {
       *pOutputIndex = SIGLIB_AI_ZERO;
     }
 
     (*pDelayLength)--;
-    return (SIGLIB_NO_ERROR);                                       // Success
+    return (SIGLIB_NO_ERROR);    // Success
   }
 
-  return (SIGLIB_ERROR);                                            // Error
-}                                                                   // End of SUF_DecreaseVariableDelay()
+  return (SIGLIB_ERROR);    // Error
+}    // End of SUF_DecreaseVariableDelay()
 
-
-SLArrayIndex_t SIGLIB_FUNC_DECL SDA_Align (
-  const SLData_t * SIGLIB_PTR_DECL pSrc1,
-  const SLData_t * SIGLIB_PTR_DECL pSrc2,
-  SLData_t * pDst1,
-  SLData_t * pDst2,
-  const enum SLAlign_t alignment_mode,
-  const SLArrayIndex_t Length1,
-  const SLArrayIndex_t Length2)
+SLArrayIndex_t SIGLIB_FUNC_DECL SDA_Align(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLData_t* SIGLIB_PTR_DECL pSrc2, SLData_t* pDst1,
+                                          SLData_t* pDst2, const enum SLAlign_t alignment_mode, const SLArrayIndex_t Length1,
+                                          const SLArrayIndex_t Length2)
 {
-  SLData_t        peakMagnitude;
-  SLArrayIndex_t  peakIndex;
-  SLArrayIndex_t  outputLength;
+  SLData_t peakMagnitude;
+  SLArrayIndex_t peakIndex;
+  SLArrayIndex_t outputLength;
 
-  SLArrayIndex_t  OutputIndexSrc1Start;
-  SLArrayIndex_t  OutputIndexSrc1End;
-  SLArrayIndex_t  OutputIndexSrc2Start;
-  SLArrayIndex_t  OutputIndexSrc2End;
-  SLArrayIndex_t  InputIndexSrc1Start;
-  SLArrayIndex_t  InputIndexSrc2Start;
+  SLArrayIndex_t OutputIndexSrc1Start;
+  SLArrayIndex_t OutputIndexSrc1End;
+  SLArrayIndex_t OutputIndexSrc2Start;
+  SLArrayIndex_t OutputIndexSrc2End;
+  SLArrayIndex_t InputIndexSrc1Start;
+  SLArrayIndex_t InputIndexSrc2Start;
 
-  SDA_CorrelateLinearReturnPeak (pSrc1,                             // Pointer to input array #1
-                                 pSrc2,                             // Pointer to input array #2
-                                 &peakMagnitude,                    // Pointer to peak magnitude
-                                 &peakIndex,                        // Pointer to peak index
-                                 Length1,                           // Length of array #1
-                                 Length2,                           // Length of array #2
-                                 Length1 + Length2 - 1);            // Number of correlations
+  SDA_CorrelateLinearReturnPeak(pSrc1,                     // Pointer to input array #1
+                                pSrc2,                     // Pointer to input array #2
+                                &peakMagnitude,            // Pointer to peak magnitude
+                                &peakIndex,                // Pointer to peak index
+                                Length1,                   // Length of array #1
+                                Length2,                   // Length of array #2
+                                Length1 + Length2 - 1);    // Number of correlations
 
-//    printf ("src1Length = %d, src2Length = %d\n", Length1, Length2);
-//    printf ("Correlation Peak index = %d, magnitude = %lf\n", peakIndex, peakMagnitude);
-
+  //    printf ("src1Length = %d, src2Length = %d\n", Length1, Length2);
+  //    printf ("Correlation Peak index = %d, magnitude = %lf\n", peakIndex,
+  //    peakMagnitude);
 
   if ((peakIndex + 1) <= Length1) {
     OutputIndexSrc1Start = 0;
     OutputIndexSrc1End = (Length1 - 1);
     OutputIndexSrc2Start = (Length1 - 1) - peakIndex;
     OutputIndexSrc2End = OutputIndexSrc2Start + Length2;
-  }
-  else {                                                            // ((peakIndex + 1) > Length1)
+  } else {    // ((peakIndex + 1) > Length1)
     OutputIndexSrc2Start = 0;
     OutputIndexSrc2End = (Length2 - 1);
     OutputIndexSrc1Start = peakIndex - (Length1 - 1);
     OutputIndexSrc1End = peakIndex;
   }
 
-//    printf ("OutputIndexSrc1Start = %d\n", OutputIndexSrc1Start);
-//    printf ("OutputIndexSrc1End   = %d\n", OutputIndexSrc1End);
-//    printf ("OutputIndexSrc2Start = %d\n", OutputIndexSrc2Start);
-//    printf ("OutputIndexSrc2End   = %d\n", OutputIndexSrc2End);
+  //    printf ("OutputIndexSrc1Start = %d\n", OutputIndexSrc1Start);
+  //    printf ("OutputIndexSrc1End   = %d\n", OutputIndexSrc1End);
+  //    printf ("OutputIndexSrc2Start = %d\n", OutputIndexSrc2Start);
+  //    printf ("OutputIndexSrc2End   = %d\n", OutputIndexSrc2End);
 
   if (alignment_mode == SIGLIB_ALIGN_EXTEND) {
     if (OutputIndexSrc1End >= OutputIndexSrc2End) {
       outputLength = OutputIndexSrc1End + 1;
-    }
-    else {                                                          // (OutputIndexSrc1End < OutputIndexSrc2End)
+    } else {    // (OutputIndexSrc1End < OutputIndexSrc2End)
       outputLength = OutputIndexSrc2End + 1;
     }
     for (SLArrayIndex_t i = 0; i < OutputIndexSrc1Start; i++) {
@@ -918,33 +831,29 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_Align (
     for (SLArrayIndex_t i = OutputIndexSrc2End; i < outputLength; i++) {
       pDst2[i] = SIGLIB_ZERO;
     }
-  }
-  else {                                                            // (alignment_mode == SIGLIB_ALIGN_CROP)
+  } else {    // (alignment_mode == SIGLIB_ALIGN_CROP)
     if (OutputIndexSrc1Start >= OutputIndexSrc2Start) {
       InputIndexSrc1Start = 0;
       InputIndexSrc2Start = peakIndex - (Length1 - 1);
 
       if (OutputIndexSrc1End <= OutputIndexSrc2End) {
         outputLength = (OutputIndexSrc1End - OutputIndexSrc1Start) + 1;
-      }
-      else {                                                        // (OutputIndexSrc1Start < OutputIndexSrc2Start)
+      } else {    // (OutputIndexSrc1Start < OutputIndexSrc2Start)
         outputLength = (OutputIndexSrc2End - OutputIndexSrc1Start) + 1;
       }
-    }
-    else {                                                          // (OutputIndexSrc1Start < OutputIndexSrc2Start)
+    } else {    // (OutputIndexSrc1Start < OutputIndexSrc2Start)
       InputIndexSrc1Start = (Length1 - 1) - peakIndex;
       InputIndexSrc2Start = 0;
 
       if (OutputIndexSrc1End <= OutputIndexSrc2End) {
         outputLength = (OutputIndexSrc1End - OutputIndexSrc2Start) + 1;
-      }
-      else {                                                        // (OutputIndexSrc1Start < OutputIndexSrc2Start)
+      } else {    // (OutputIndexSrc1Start < OutputIndexSrc2Start)
         outputLength = (OutputIndexSrc2End - OutputIndexSrc2Start) + 1;
       }
     }
 
-//        printf ("InputIndexSrc1Start  = %d\n", InputIndexSrc1Start);
-//        printf ("InputIndexSrc2Start  = %d\n", InputIndexSrc2Start);
+    //        printf ("InputIndexSrc1Start  = %d\n", InputIndexSrc1Start);
+    //        printf ("InputIndexSrc2Start  = %d\n", InputIndexSrc2Start);
 
     for (SLArrayIndex_t i = 0; i < outputLength; i++) {
       pDst1[i] = pSrc1[InputIndexSrc1Start + i];
@@ -952,5 +861,5 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_Align (
     }
   }
 
-  return (outputLength);                                            // Return the output array lengths
-}                                                                   // End of SDA_Align()
+  return (outputLength);    // Return the output array lengths
+}    // End of SDA_Align()

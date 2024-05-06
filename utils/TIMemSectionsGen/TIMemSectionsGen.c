@@ -4,22 +4,21 @@
 // Include files
 
 #include <math.h>
+#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
 #include <stdio.h>
-#include <siglib_host_utils.h>                                      // Optionally includes conio.h and time.h subset functions
 #include <stdlib.h>
 #include <string.h>
 
-#pragma warning(disable: 4001)                                      // Remove // warning from plain C
-#pragma warning(disable: 4996)                                      // Unsafe file function warnings
+#pragma warning(disable : 4001)    // Remove // warning from plain C
+#pragma warning(disable : 4996)    // Unsafe file function warnings
 
 // Define global variables
 
-FILE           *IFPtr, *OFPtr;
+FILE *IFPtr, *OFPtr;
 
-char            InputString[100];
+char InputString[100];
 
-
-char            header[] = ("/**************************************************************************\r\n\
+char header[] = ("/**************************************************************************\r\n\
 File Name               : siglib_ti_memory_sections.h   | Author : JOHN EDWARDS\r\n\
 Siglib Library Version  : 10.50                         |\r\n\
 ----------------------------------------+----------------------------------\r\n\
@@ -67,7 +66,7 @@ Description: SigLib function memory section definition file for TI compilers\r\n
 #ifdef _TMS320C6X           // Defined by TI compiler\r\n\
 #ifndef __cplusplus         // These macros don't work in C++, you need to locate them adjacent to the function\r\n\r\n");
 
-char            footer[] = ("\r\n#endif                      // End of #ifndef __cplusplus\r\n\
+char footer[] = ("\r\n#endif                      // End of #ifndef __cplusplus\r\n\
 \r\n\
 #endif                      // End of #ifdef _TMS320C6X - Defined by TI compiler\r\n\
 \r\n\
@@ -77,39 +76,37 @@ char            footer[] = ("\r\n#endif                      // End of #ifndef _
 \r\n\
 // End of siglib_memory_sections.h\r\n\r\n");
 
-
-int main (
-  void)
+int main(void)
 {
-  printf
-    ("\r\nTIMemSectionsGen.exe - siglib_ti_memory_sections.h file generation utility (C)  V2.00. Copyright (C) Delta Numerix 2017. All rights reserved.\r\n");
+  printf("\r\nTIMemSectionsGen.exe - siglib_ti_memory_sections.h file "
+         "generation utility (C)  V2.00. Copyright (C) Delta Numerix 2017. All "
+         "rights reserved.\r\n");
 
-  if ((IFPtr = fopen ("functionList.txt", "rb")) == NULL) {
-    printf ("Can not open input data file %s\r\n", "siglib.dg");
-    exit (-1);
+  if ((IFPtr = fopen("functionList.txt", "rb")) == NULL) {
+    printf("Can not open input data file %s\r\n", "siglib.dg");
+    exit(-1);
   }
 
-  if ((OFPtr = fopen ("siglib_ti_memory_sections.h", "wb")) == NULL) {
-    fclose (IFPtr);
-    printf ("Can not open output data file %s\r\n", "siglib_ti_memory_sections.h");
-    exit (-1);
+  if ((OFPtr = fopen("siglib_ti_memory_sections.h", "wb")) == NULL) {
+    fclose(IFPtr);
+    printf("Can not open output data file %s\r\n", "siglib_ti_memory_sections.h");
+    exit(-1);
   }
 
-  for (int i = 0; i < (int) strlen (header); i++) {
-    putc (header[i], OFPtr);                                        // Output header
+  for (int i = 0; i < (int)strlen(header); i++) {
+    putc(header[i], OFPtr);    // Output header
   }
 
-  while ((fscanf (IFPtr, "%s", InputString)) != EOF) {
-    fprintf (OFPtr, "#pragma CODE_SECTION(%s, \".text\")\r\n", InputString);
+  while ((fscanf(IFPtr, "%s", InputString)) != EOF) {
+    fprintf(OFPtr, "#pragma CODE_SECTION(%s, \".text\")\r\n", InputString);
   }
 
-  for (int i = 0; i < (int) strlen (footer); i++) {
-    putc (footer[i], OFPtr);                                        // Output footer
+  for (int i = 0; i < (int)strlen(footer); i++) {
+    putc(footer[i], OFPtr);    // Output footer
   }
 
-  fclose (IFPtr);                                                   // Close files
-  fclose (OFPtr);
+  fclose(IFPtr);    // Close files
+  fclose(OFPtr);
 
   return (0);
-
 }

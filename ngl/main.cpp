@@ -13,25 +13,24 @@
 // for all others, include the necessary headers (this file is usually all you
 // need because it includes almost all "standard" wxWidgets headers
 #ifndef WX_PRECOMP
-#include "wx/wx.h"
+#  include "wx/wx.h"
 #endif
 
 #if wxUSE_TOOLTIPS
-#include "wx/tooltip.h"
+#  include "wx/tooltip.h"
 #endif
 
 #include "mainframe.h"
 
-class           MyApp:public wxApp {
-public:
-  virtual bool    OnInit (
-    );
+class MyApp : public wxApp
+{
+    public:
+  virtual bool OnInit();
 };
 
+mainFrame* AppMainFrame = (mainFrame*)NULL;
 
-mainFrame      *AppMainFrame = (mainFrame *) NULL;
-
-IMPLEMENT_APP (MyApp)
+IMPLEMENT_APP(MyApp)
 
 /*
     Function Name: main
@@ -39,14 +38,13 @@ IMPLEMENT_APP (MyApp)
     Notes:
 */
 // `Main program' equivalent: the program execution "starts" here
-bool MyApp::OnInit (
-  )
+bool MyApp::OnInit()
 {
 
-  AppMainFrame = new mainFrame (_T ("Main Window"), wxDefaultPosition, wxDefaultSize);
+  AppMainFrame = new mainFrame(_T ("Main Window"), wxDefaultPosition, wxDefaultSize);
 
-  SetTopWindow (AppMainFrame);                                      // Tell the application that it's our main window
-  AppMainFrame->Show (TRUE);                                        // Show it
+  SetTopWindow(AppMainFrame);    // Tell the application that it's our main window
+  AppMainFrame->Show(TRUE);      // Show it
 
   return TRUE;
 }

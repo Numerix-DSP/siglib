@@ -37,89 +37,77 @@ Description: Control function file for SigLib DSP library
 
 ****************************************************************************/
 
-#define SIGLIB_SRC_FILE_CONTROL 1                                   // Defines the source file that this code is being used in
+#define SIGLIB_SRC_FILE_CONTROL 1    // Defines the source file that this code is being used in
 
-#include <siglib.h>                                                 // Include SigLib header file
+#include <siglib.h>    // Include SigLib header file
 
 /**/
 
 /********************************************************
-* Function: SDS_Pid
-*
-* Parameters:
-*       const SLData_t Kp   - Proportional gain
-*       const SLData_t Ki   - Integral gain
-*       const SLData_t Kd   - Differential gain
-*       const SLData_t Error - Error
-*       SLData_t * SIGLIB_PTR_DECL Control,
-*       SLData_t * SIGLIB_PTR_DECL PrevError,
-*       SLData_t * SIGLIB_PTR_DECL PrevErrorDot)
-*
-* Return value: New control value
-*
-* Description: Calculates the control signal
-*
-********************************************************/
+ * Function: SDS_Pid
+ *
+ * Parameters:
+ *       const SLData_t Kp   - Proportional gain
+ *       const SLData_t Ki   - Integral gain
+ *       const SLData_t Kd   - Differential gain
+ *       const SLData_t Error - Error
+ *       SLData_t * SIGLIB_PTR_DECL Control,
+ *       SLData_t * SIGLIB_PTR_DECL PrevError,
+ *       SLData_t * SIGLIB_PTR_DECL PrevErrorDot)
+ *
+ * Return value: New control value
+ *
+ * Description: Calculates the control signal
+ *
+ ********************************************************/
 
-void SIGLIB_FUNC_DECL SDS_Pid (
-  const SLData_t Kp,
-  const SLData_t Ki,
-  const SLData_t Kd,
-  const SLData_t Error,
-  SLData_t * SIGLIB_PTR_DECL Control,
-  SLData_t * SIGLIB_PTR_DECL PrevError,
-  SLData_t * SIGLIB_PTR_DECL PrevErrorDot)
+void SIGLIB_FUNC_DECL SDS_Pid(const SLData_t Kp, const SLData_t Ki, const SLData_t Kd, const SLData_t Error, SLData_t* SIGLIB_PTR_DECL Control,
+                              SLData_t* SIGLIB_PTR_DECL PrevError, SLData_t* SIGLIB_PTR_DECL PrevErrorDot)
 {
-  SLData_t        ErrorDot = (Error - *PrevError);                  // Differentiate the error
-  SLData_t        ErrorDoubleDot = (ErrorDot - *PrevErrorDot);
+  SLData_t ErrorDot = (Error - *PrevError);    // Differentiate the error
+  SLData_t ErrorDoubleDot = (ErrorDot - *PrevErrorDot);
 
-// Calculate the control differential
-  SLData_t        ControlDot = (Ki * Error) + (Kp * ErrorDot) + (Kd * ErrorDoubleDot);
+  // Calculate the control differential
+  SLData_t ControlDot = (Ki * Error) + (Kp * ErrorDot) + (Kd * ErrorDoubleDot);
   *PrevError = Error;
   *PrevErrorDot = ErrorDot;
 
-  (*Control) += (ControlDot);                                       // Calculate the new control value
-}                                                                   // End of SDS_Pid()
-
+  (*Control) += (ControlDot);    // Calculate the new control value
+}    // End of SDS_Pid()
 
 /**/
 
 /********************************************************
-* Function: SDA_Pwm
-*
-* Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Input data pointer
-*   SLData_t * SIGLIB_PTR_DECL pDst,        - Output data pointer
-*   SLData_t * SIGLIB_PTR_DECL pRamp,       - Ramp pointer
-*   SLData_t * SIGLIB_PTR_DECL pRampPhase,  - Ramp phase pointer
-*   const SLData_t PRF,                     - Pulse repetition frequency
-*   const SLArrayIndex_t SampleLength       - Buffer length
-*
-* Return value:
-*   void
-*
-* Description: Calculates the control signal
-*
-********************************************************/
+ * Function: SDA_Pwm
+ *
+ * Parameters:
+ *   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Input data pointer
+ *   SLData_t * SIGLIB_PTR_DECL pDst,        - Output data pointer
+ *   SLData_t * SIGLIB_PTR_DECL pRamp,       - Ramp pointer
+ *   SLData_t * SIGLIB_PTR_DECL pRampPhase,  - Ramp phase pointer
+ *   const SLData_t PRF,                     - Pulse repetition frequency
+ *   const SLArrayIndex_t SampleLength       - Buffer length
+ *
+ * Return value:
+ *   void
+ *
+ * Description: Calculates the control signal
+ *
+ ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Pwm (
-  const SLData_t * SIGLIB_PTR_DECL pSrc,
-  SLData_t * SIGLIB_PTR_DECL pDst,
-  SLData_t * SIGLIB_PTR_DECL pRamp,
-  SLData_t * SIGLIB_PTR_DECL pRampPhase,
-  const SLData_t PRF,
-  const SLArrayIndex_t SampleLength)
+void SIGLIB_FUNC_DECL SDA_Pwm(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pRamp,
+                              SLData_t* SIGLIB_PTR_DECL pRampPhase, const SLData_t PRF, const SLArrayIndex_t SampleLength)
 {
-// Generate ramp
-  SDA_SignalGenerate (pRamp, SIGLIB_TRIANGLE_WAVE, SIGLIB_HALF, SIGLIB_FILL, PRF, SIGLIB_HALF,
-                      SIGLIB_ONE, SIGLIB_ZERO, pRampPhase, SIGLIB_NULL_DATA_PTR, SampleLength);
+  // Generate ramp
+  SDA_SignalGenerate(pRamp, SIGLIB_TRIANGLE_WAVE, SIGLIB_HALF, SIGLIB_FILL, PRF, SIGLIB_HALF, SIGLIB_ONE, SIGLIB_ZERO, pRampPhase,
+                     SIGLIB_NULL_DATA_PTR, SampleLength);
 
-// Subtract ramp from signal
-  SDA_Subtract2 (pSrc, pRamp, pDst, SampleLength);
+  // Subtract ramp from signal
+  SDA_Subtract2(pSrc, pRamp, pDst, SampleLength);
 
-// Threshold difference
-  SDA_Threshold (pDst, pDst, SIGLIB_ZERO, SIGLIB_SINGLE_SIDED_THOLD, SampleLength);
+  // Threshold difference
+  SDA_Threshold(pDst, pDst, SIGLIB_ZERO, SIGLIB_SINGLE_SIDED_THOLD, SampleLength);
 
-// Clamp threshold - if signal > 0 then set to 1
-  SDA_Clamp (pDst, pDst, SIGLIB_ZERO, SIGLIB_ONE, SIGLIB_SINGLE_SIDED_THOLD, SampleLength);
-}                                                                   // End of SDA_Pwm()
+  // Clamp threshold - if signal > 0 then set to 1
+  SDA_Clamp(pDst, pDst, SIGLIB_ZERO, SIGLIB_ONE, SIGLIB_SINGLE_SIDED_THOLD, SampleLength);
+}    // End of SDA_Pwm()

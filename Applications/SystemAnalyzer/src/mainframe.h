@@ -1,11 +1,12 @@
 // Digital filter design program mainFrame include file
-// Copyright (c) 1999-2024 Delta Numerix, All rights reserved.
+// This software is provided under the terms of the GNU General Public License
+// V2, as published by the Free Software Foundation. Copyright (c) 1999-2024
+// Delta Numerix, All rights reserved.
 
-#ifndef     _MAINFRAME_H
-#define     _MAINFRAME_H
+#ifndef _MAINFRAME_H
+#define _MAINFRAME_H
 
-#include "sa.h"                                                     // Include project header files
-
+#include "sa.h"    // Include project header files
 
 /*
     Function Name : mainFrame
@@ -13,50 +14,38 @@
     Notes : This should contain the filter designer and graph children
 */
 
-class           mainFrame:public wxFrame {
-public:
-  mainFrame (
-  wxString aTitle,
-  wxPoint Position,
-  wxSize Size);
-  ~mainFrame (
-    );
-  wxString        FindExecutablePath (
-  const wxString & argv0,
-  const wxString & cwd);
-  void            OnAbout (
-  wxCommandEvent & event);
-  void            OnExit (
-  wxCommandEvent & event);
-  void            OnSize (
-  wxSizeEvent & event);
-  void            DisplayStatusLineText (
-  wxString & string);
-  void            DisplayStatusLineText2 (
-  wxString & string);
+class mainFrame : public wxFrame
+{
+    public:
+  mainFrame(wxString aTitle, wxPoint Position, wxSize Size);
+  ~mainFrame();
+  wxString FindExecutablePath(const wxString& argv0, const wxString& cwd);
+  void OnAbout(wxCommandEvent& event);
+  void OnExit(wxCommandEvent& event);
+  void OnSize(wxSizeEvent& event);
+  void DisplayStatusLineText(wxString& string);
+  void DisplayStatusLineText2(wxString& string);
 
-private:
-                  SAProcWindow * ProcessWindow;
-  wxSplitterWindow *SplitterWindow;
+    private:
+  SAProcWindow* ProcessWindow;
+  wxSplitterWindow* SplitterWindow;
 
-  wxWindow       *GraphDisplayWindow;
-  wxWindow       *TopProcessWindow;
+  wxWindow* GraphDisplayWindow;
+  wxWindow* TopProcessWindow;
 
+  wxString InstallDirectoryPathString;
 
-  wxString        InstallDirectoryPathString;
+  GraphDisplay* DataGraphDisplay;
 
-  GraphDisplay   *DataGraphDisplay;
+  DisplayTextDialog* TextDisplayDialog;
 
-  DisplayTextDialog *TextDisplayDialog;
+  double SampleRate;
 
-  double          SampleRate;
+  double* pData;
 
-  double         *pData;
+  int ChildWindowsCreated = FALSE;    // Filter spec and graph windows have NOT been created
 
-  int             ChildWindowsCreated = FALSE;                      // Filter spec and graph windows have NOT been created
-
-                  DECLARE_EVENT_TABLE (
-    )
+  DECLARE_EVENT_TABLE()
 };
 
 enum {
@@ -71,7 +60,4 @@ enum {
   SA_ABOUT
 };
 
-
-
-
-#endif                                                              // End of #ifndef _MAINFRAME_H
+#endif    // End of #ifndef _MAINFRAME_H

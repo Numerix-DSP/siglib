@@ -2,18 +2,16 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
+#include <siglib.h>    // SigLib DSP library
 #include <stdio.h>
-#include <siglib.h>                                                 // SigLib DSP library
 
-#include <stdio.h>
 #include <math.h>
+#include <stdio.h>
 
-
-int main (
-  void)
+int main(void)
 {
-  SLData_t        temp = 20.;
-  printf ("Speed Of Sound In Air at %.2lf \370C = %.2lf\n", temp, SDS_TemperatureToSpeedOfSoundInAir (temp));
+  SLData_t temp = 20.;
+  printf("Speed Of Sound In Air at %.2lf \370C = %.2lf\n", temp, SDS_TemperatureToSpeedOfSoundInAir(temp));
 
   return (0);
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+
+<!-- $Id: make.bkl,v 1.0 2005/05/11$ -->
+
+<makefile>
+
+    <!-- Additional include paths (include tag) -->
+
+    <set var="EXTRAINCLUDE"></set>
+
+    <include file="../wxWidgets-3.1.5/build/bakefiles/wxpresets/presets/wx.bkl" />
+
+    <exe id="dfplus" template="wx">
+        <app-type>gui</app-type>
+        <debug-info>off</debug-info>
+        <runtime-libs>static</runtime-libs>
+
+        <include>
+            ../siglib/include
+        </include>
+        <include>
+            ../siglib/ngl
+        </include>
+        <sources>
+            dfgraph.cpp
+            dfplus.cpp
+            firalgs.cpp
+            firremez.cpp
+            firsremz.cpp
+            firwin.cpp
+            optionsdialog.cpp
+            iiralgs.cpp
+            iirpzp.cpp
+            iirtrad.cpp
+            inifile.cpp
+            mainframe.cpp
+            pdialog.cpp
+            sdialog.cpp
+         </sources>
+
+         <wx-lib>adv</wx-lib>
+         <wx-lib>net</wx-lib>
+         <wx-lib>core</wx-lib>
+         <wx-lib>base</wx-lib>
+
+         <lib-path>../siglib/lib/linux</lib-path>
+         <lib-path>../siglib/ngl</lib-path>
+
+         <sys-lib>siglib</sys-lib>
+         <sys-lib>dspgraph</sys-lib>
+
+    </exe>
+</makefile>

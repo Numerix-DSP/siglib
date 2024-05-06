@@ -1,0 +1,14 @@
+Digital Filter Plus (C) 2002 to 2024 Delta Numerix, All rights reserved.File : Project.dfs
+
+[Design Type]
+FIR-Remez
+
+[Sample rate]
+48000.00000000000000000000
+
+[Number of coefficients]
+109
+
+Fc1 = 1200.000000, Fc2 = 0.000000, TBW = 1200.000000, PBR = 1.000000, SBA = 80.000000
+
+

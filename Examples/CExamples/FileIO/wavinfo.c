@@ -2,32 +2,29 @@
 // a .WAV file and prints the Results on the screen
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
+#include <siglib.h>               // SigLib DSP library
+#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
 #include <stdio.h>
 #include <stdlib.h>
-#include <siglib_host_utils.h>                                      // Optionally includes conio.h and time.h subset functions
-#include <siglib.h>                                                 // SigLib DSP library
 
 // Declare arrays and variables
 
 SLWavFileInfo_s wavInfo;
-FILE           *fpInputFile;
+FILE* fpInputFile;
 
-
-int main (
-  int argc,
-  char **argv)
+int main(int argc, char** argv)
 {
-  printf ("Opening: %s\n", argv[1]);
+  printf("Opening: %s\n", argv[1]);
 
-  if ((fpInputFile = fopen (argv[1], "rb")) == NULL) {
-    printf ("Error opening input file %s\n", argv[1]);
-    exit (0);
+  if ((fpInputFile = fopen(argv[1], "rb")) == NULL) {
+    printf("Error opening input file %s\n", argv[1]);
+    exit(0);
   }
 
-  wavInfo = SUF_WavReadHeader (fpInputFile);
-  SUF_WavDisplayInfo (wavInfo);
+  wavInfo = SUF_WavReadHeader(fpInputFile);
+  SUF_WavDisplayInfo(wavInfo);
 
-  fclose (fpInputFile);
+  fclose(fpInputFile);
 
   return (0);
 }

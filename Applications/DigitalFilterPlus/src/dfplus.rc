@@ -1,0 +1,4 @@
+ApplicationIcon ICON "dfplus.ico"
+
+#include "wx/msw/wx.rc"
+

@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+
+<!-- $Id: make.bkl,v 1.0 2005/05/11$ -->
+
+<makefile>
+
+    <!-- Additional include paths (include tag) -->
+
+    <set var="EXTRAINCLUDE"></set>
+
+    <!-- <set var="ARCH_SUFFIX">_x64</set> -->
+
+    <include file="C:/wxWidgets-3.2.4/build/bakefiles/wxpresets/presets/wx.bkl" />
+
+    <exe id="dfplus" template="wx">
+        <app-type>gui</app-type>
+        <debug-info>off</debug-info>
+        <runtime-libs>static</runtime-libs>
+        <threading>multi</threading>
+
+        <include>
+            C:\siglib\include
+        </include>
+        <include>
+            C:\siglib\ngl
+        </include>
+        <define>
+            SIGLIB_STATIC_LIB=1
+        </define>
+        <sources>
+            dfgraph.cpp
+            dfplus.cpp
+            evenspin.cpp
+            firalgs.cpp
+            firremez.cpp
+            firsremz.cpp
+            firwin.cpp
+            optionsdialog.cpp
+            iiralgs.cpp
+            iirpzp.cpp
+            iirtrad.cpp
+            inifile.cpp
+            mainframe.cpp
+            pdialog.cpp
+            sdialog.cpp
+        </sources>
+
+        <wx-lib>adv</wx-lib>
+        <wx-lib>net</wx-lib>
+        <wx-lib>core</wx-lib>
+        <wx-lib>base</wx-lib>
+
+        <sys-lib>C:\siglib\lib\Microsoft\static_library_64\Release\siglib</sys-lib>
+        <sys-lib>C:\siglib\ngl\dspgraph</sys-lib>
+
+        <win32-res>dfplus.rc</win32-res>
+    </exe>
+</makefile>

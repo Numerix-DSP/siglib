@@ -37,87 +37,78 @@ Description: SigLib DSP library adaptive filter routines.
 
 ****************************************************************************/
 
-#define SIGLIB_SRC_FILE_ADAPTIVE    1                               // Defines the source file that this code is being used in
+#define SIGLIB_SRC_FILE_ADAPTIVE 1    // Defines the source file that this code is being used in
 
-#include <siglib.h>                                                 // Include SigLib header file
+#include <siglib.h>    // Include SigLib header file
 
 /**/
 
 /********************************************************
-* Function: SIF_Lms
-*
-* Parameters:
-*   SLData_t * SIGLIB_PTR_DECL pStateArray,
-*   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
-*   SLArrayIndex_t *pLMSFilterIndex,
-*   SLArrayIndex_t *pLMSUpdateIndex,
-*   const SLArrayIndex_t LMSFilterLength
-*
-* Return value:
-*   void
-*
-* Description:
-*
-********************************************************/
+ * Function: SIF_Lms
+ *
+ * Parameters:
+ *   SLData_t * SIGLIB_PTR_DECL pStateArray,
+ *   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
+ *   SLArrayIndex_t *pLMSFilterIndex,
+ *   SLArrayIndex_t *pLMSUpdateIndex,
+ *   const SLArrayIndex_t LMSFilterLength
+ *
+ * Return value:
+ *   void
+ *
+ * Description:
+ *
+ ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_Lms (
-  SLData_t * SIGLIB_PTR_DECL pStateArray,
-  SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
-  SLArrayIndex_t * pLMSFilterIndex,
-  SLArrayIndex_t * pLMSUpdateIndex,
-  const SLArrayIndex_t LMSFilterLength)
+void SIGLIB_FUNC_DECL SIF_Lms(SLData_t* SIGLIB_PTR_DECL pStateArray, SLData_t* SIGLIB_PTR_DECL pCoeffsArray, SLArrayIndex_t* pLMSFilterIndex,
+                              SLArrayIndex_t* pLMSUpdateIndex, const SLArrayIndex_t LMSFilterLength)
 {
-  for (SLArrayIndex_t i = 0; i < LMSFilterLength; i++) {            // Initialise the LMS filter array to 0
+  for (SLArrayIndex_t i = 0; i < LMSFilterLength; i++) {    // Initialise the LMS filter array to 0
     *pStateArray++ = SIGLIB_ZERO;
     *pCoeffsArray++ = SIGLIB_ZERO;
   }
 
   *pLMSFilterIndex = SIGLIB_AI_ZERO;
   *pLMSUpdateIndex = SIGLIB_AI_ZERO;
-}                                                                   // End of SIF_Lms()
-
+}    // End of SIF_Lms()
 
 /**/
 
 /********************************************************
-* Function: SDS_Lms
-*
-* Parameters:
-*   SLData_t InputSample,
-*   SLData_t * SIGLIB_PTR_DECL pStateArray,
-*   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
-*   SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
-*   SLArrayIndex_t LMSFilterLength
-*
-* Return value:
-*   SLData_t acc - Filtered sample
-*
-* Description:
-*   Apply the filter to the data
-*
-********************************************************/
+ * Function: SDS_Lms
+ *
+ * Parameters:
+ *   SLData_t InputSample,
+ *   SLData_t * SIGLIB_PTR_DECL pStateArray,
+ *   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
+ *   SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
+ *   SLArrayIndex_t LMSFilterLength
+ *
+ * Return value:
+ *   SLData_t acc - Filtered sample
+ *
+ * Description:
+ *   Apply the filter to the data
+ *
+ ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDS_Lms (
-  const SLData_t InputSample,
-  SLData_t * SIGLIB_PTR_DECL pStateArray,
-  const SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
-  SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
-  const SLArrayIndex_t LMSFilterLength)
+SLData_t SIGLIB_FUNC_DECL SDS_Lms(const SLData_t InputSample, SLData_t* SIGLIB_PTR_DECL pStateArray, const SLData_t* SIGLIB_PTR_DECL pCoeffsArray,
+                                  SLArrayIndex_t* SIGLIB_PTR_DECL pFilterIndex, const SLArrayIndex_t LMSFilterLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                                                // Defined by TI compiler
-  _nassert ((int) pStateArray % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
-  _nassert ((int) pCoeffsArray % 8 == 0);
-#endif
+#  ifdef __TMS320C6X__                    // Defined by TI compiler
+  _nassert((int)pStateArray % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+  _nassert((int)pCoeffsArray % 8 == 0);
+#  endif
 #endif
 
   pStateArray[*pFilterIndex] = InputSample;
-  SLArrayIndex_t  j = --(*pFilterIndex);
-  SLData_t        acc = SIGLIB_ZERO;
+  SLArrayIndex_t j = --(*pFilterIndex);
+  SLData_t acc = SIGLIB_ZERO;
 
   for (SLArrayIndex_t i = 0; i < LMSFilterLength; i++) {
     if (++j == LMSFilterLength) {
-      j = 0;                                                        // Circular array
+      j = 0;    // Circular array
     }
     acc += pCoeffsArray[i] * pStateArray[j];
   }
@@ -125,469 +116,435 @@ SLData_t SIGLIB_FUNC_DECL SDS_Lms (
   *pFilterIndex = j;
 
   return acc;
-}                                                                   // End of SDS_Lms()
-
+}    // End of SDS_Lms()
 
 /**/
 
 /********************************************************
-* Function: SDA_LmsUpdate
-*
-* Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pStateArray,
-*   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
-*   SLArrayIndex_t *pLMSFilterIndex,
-*   const SLArrayIndex_t LMSFilterLength,
-*   const SLData_t LMSConvergenceFactor,
-*   const SLData_t Error
-*
-* Return value:
-*   void
-*
-* Description:
-*   Update filter taps according to the LMS
-*   algorithm.
-**   configuration:
-*
-*    d(n) --------------------------|
-*                                   |+
-*                                 (SUM)------> e(n)
-*                  ------           |-
-*    x(n) ---------| AF |-----------|--------> y(n)
-*                  ------
-*
-*    Algorithm:
-*          N-1
-*          __
-*   y(n) = \  w(k)*x(n-k)
-*          /_
-*          k=0
-*
-*   e(n) = d(n) - y(n)
-*   w(k) = w(k) + u*e(n)*x(n-k) k=0,1,2,...,N-1
-*
-********************************************************/
+ * Function: SDA_LmsUpdate
+ *
+ * Parameters:
+ *   const SLData_t * SIGLIB_PTR_DECL pStateArray,
+ *   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
+ *   SLArrayIndex_t *pLMSFilterIndex,
+ *   const SLArrayIndex_t LMSFilterLength,
+ *   const SLData_t LMSConvergenceFactor,
+ *   const SLData_t Error
+ *
+ * Return value:
+ *   void
+ *
+ * Description:
+ *   Update filter taps according to the LMS
+ *   algorithm.
+ **   configuration:
+ *
+ *    d(n) --------------------------|
+ *                                   |+
+ *                                 (SUM)------> e(n)
+ *                  ------           |-
+ *    x(n) ---------| AF |-----------|--------> y(n)
+ *                  ------
+ *
+ *    Algorithm:
+ *          N-1
+ *          __
+ *   y(n) = \  w(k)*x(n-k)
+ *          /_
+ *          k=0
+ *
+ *   e(n) = d(n) - y(n)
+ *   w(k) = w(k) + u*e(n)*x(n-k) k=0,1,2,...,N-1
+ *
+ ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_LmsUpdate (
-  const SLData_t * SIGLIB_PTR_DECL pStateArray,
-  SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
-  SLArrayIndex_t * pLMSFilterIndex,
-  const SLArrayIndex_t LMSFilterLength,
-  const SLData_t LMSConvergenceFactor,
-  const SLData_t Error)
+void SIGLIB_FUNC_DECL SDA_LmsUpdate(const SLData_t* SIGLIB_PTR_DECL pStateArray, SLData_t* SIGLIB_PTR_DECL pCoeffsArray,
+                                    SLArrayIndex_t* pLMSFilterIndex, const SLArrayIndex_t LMSFilterLength, const SLData_t LMSConvergenceFactor,
+                                    const SLData_t Error)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                                                // Defined by TI compiler
-  _nassert ((int) pStateArray % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
-  _nassert ((int) pCoeffsArray % 8 == 0);
-#endif
+#  ifdef __TMS320C6X__                    // Defined by TI compiler
+  _nassert((int)pStateArray % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+  _nassert((int)pCoeffsArray % 8 == 0);
+#  endif
 #endif
 
-// Calculate convergence factor
-  SLData_t        ConvergenceFactor = (SIGLIB_TWO * LMSConvergenceFactor * Error);
+  // Calculate convergence factor
+  SLData_t ConvergenceFactor = (SIGLIB_TWO * LMSConvergenceFactor * Error);
 
-// Update weights w(n)
-  SLArrayIndex_t  j = --(*pLMSFilterIndex);
+  // Update weights w(n)
+  SLArrayIndex_t j = --(*pLMSFilterIndex);
 
   for (SLArrayIndex_t i = 0; i < LMSFilterLength; i++) {
     if (++j == LMSFilterLength) {
-      j = 0;                                                        // Circular array
+      j = 0;    // Circular array
     }
     pCoeffsArray[i] += pStateArray[j] * ConvergenceFactor;
   }
 
   *pLMSFilterIndex = j;
-}                                                                   // End of SDA_LmsUpdate()
-
+}    // End of SDA_LmsUpdate()
 
 /**/
 
 /********************************************************
-* Function: SDA_LeakyLmsUpdate
-*
-* Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pStateArray,
-*   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
-*   SLArrayIndex_t *pLMSFilterIndex,
-*   const SLArrayIndex_t LMSFilterLength,
-*   const SLData_t LMSConvergenceFactor,
-*   const SLData_t DecayRate,
-*   const SLData_t Error
-*
-* Return value:
-*   void
-*
-* Description:
-*   Update filter taps according to the leaky LMS
-*   algorithm.
-*
-*   configuration:
-*
-*    d(n) --------------------------|
-*                                   |+
-*                                 (SUM)------> e(n)
-*                  ------           |-
-*    x(n) ---------| AF |-----------|--------> y(n)
-*                  ------
-*
-*    Algorithm:
-*          N-1
-*          __
-*   y(n) = \  w(k)*x(n-k)
-*          /_
-*          k=0
-*
-*   e(n) = d(n) - y(n)
-*   w(k) = (w(k)*Decay) + u*e(n)*x(n-k) k=0,1,2,...,N-1
-*
-********************************************************/
+ * Function: SDA_LeakyLmsUpdate
+ *
+ * Parameters:
+ *   const SLData_t * SIGLIB_PTR_DECL pStateArray,
+ *   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
+ *   SLArrayIndex_t *pLMSFilterIndex,
+ *   const SLArrayIndex_t LMSFilterLength,
+ *   const SLData_t LMSConvergenceFactor,
+ *   const SLData_t DecayRate,
+ *   const SLData_t Error
+ *
+ * Return value:
+ *   void
+ *
+ * Description:
+ *   Update filter taps according to the leaky LMS
+ *   algorithm.
+ *
+ *   configuration:
+ *
+ *    d(n) --------------------------|
+ *                                   |+
+ *                                 (SUM)------> e(n)
+ *                  ------           |-
+ *    x(n) ---------| AF |-----------|--------> y(n)
+ *                  ------
+ *
+ *    Algorithm:
+ *          N-1
+ *          __
+ *   y(n) = \  w(k)*x(n-k)
+ *          /_
+ *          k=0
+ *
+ *   e(n) = d(n) - y(n)
+ *   w(k) = (w(k)*Decay) + u*e(n)*x(n-k) k=0,1,2,...,N-1
+ *
+ ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_LeakyLmsUpdate (
-  const SLData_t * SIGLIB_PTR_DECL pStateArray,
-  SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
-  SLArrayIndex_t * pLMSFilterIndex,
-  const SLArrayIndex_t LMSFilterLength,
-  const SLData_t LMSConvergenceFactor,
-  const SLData_t DecayRate,
-  const SLData_t Error)
+void SIGLIB_FUNC_DECL SDA_LeakyLmsUpdate(const SLData_t* SIGLIB_PTR_DECL pStateArray, SLData_t* SIGLIB_PTR_DECL pCoeffsArray,
+                                         SLArrayIndex_t* pLMSFilterIndex, const SLArrayIndex_t LMSFilterLength, const SLData_t LMSConvergenceFactor,
+                                         const SLData_t DecayRate, const SLData_t Error)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                                                // Defined by TI compiler
-  _nassert ((int) pStateArray % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
-  _nassert ((int) pCoeffsArray % 8 == 0);
-#endif
+#  ifdef __TMS320C6X__                    // Defined by TI compiler
+  _nassert((int)pStateArray % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+  _nassert((int)pCoeffsArray % 8 == 0);
+#  endif
 #endif
 
-// Calculate convergence factor
-  SLData_t        ConvergenceFactor = (SIGLIB_TWO * LMSConvergenceFactor * Error);
+  // Calculate convergence factor
+  SLData_t ConvergenceFactor = (SIGLIB_TWO * LMSConvergenceFactor * Error);
 
-// Update weights w(n)
-  SLArrayIndex_t  j = --(*pLMSFilterIndex);
+  // Update weights w(n)
+  SLArrayIndex_t j = --(*pLMSFilterIndex);
 
   for (SLArrayIndex_t i = 0; i < LMSFilterLength; i++) {
     if (++j == LMSFilterLength) {
-      j = 0;                                                        // Circular array
+      j = 0;    // Circular array
     }
     pCoeffsArray[i] *= DecayRate;
     pCoeffsArray[i] += pStateArray[j] * ConvergenceFactor;
   }
 
   *pLMSFilterIndex = j;
-}                                                                   // End of SDA_LeakyLmsUpdate()
-
+}    // End of SDA_LeakyLmsUpdate()
 
 /**/
 
 /********************************************************
-* Function: SDA_NormalizedLmsUpdate
-*
-* Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pStateArray,
-*   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
-*   SLArrayIndex_t *pLMSFilterIndex,
-*   SLData_t * SIGLIB_PTR_DECL InputPower,
-*   const SLArrayIndex_t LMSFilterLength,
-*   const SLData_t LMSConvergenceFactor,
-*   const SLData_t Error
-*
-* Return value:
-*   void
-*
-* Description:
-*   Update filter taps according to the normalized LMS
-*   algorithm.
-*
-*   configuration:
-*
-*    d(n) --------------------------|
-*                                   |+
-*                                 (SUM)------> e(n)
-*             ------    ------      |-
-*    x(n) ----| AGC|----| AF |------|--------> y(n)
-*             ------    ------
-*
-*    Algorithm:
-*          N-1
-*          __
-*   y(n) = \  w(k)*x(n-k)
-*          /_
-*          k=0
-*
-*   Power(n) = (1 - b) * Power(n-1) + b * x[0]^2
-*   e(n) = d(n) - y(n)
-*   w(k) = w(k) + (u*a/Power)*e(n)*x(n-k) k=0,1,2,...,N-1
-*   Note variables a and b are the same in this
-*   and most other applications.
-*
-********************************************************/
+ * Function: SDA_NormalizedLmsUpdate
+ *
+ * Parameters:
+ *   const SLData_t * SIGLIB_PTR_DECL pStateArray,
+ *   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
+ *   SLArrayIndex_t *pLMSFilterIndex,
+ *   SLData_t * SIGLIB_PTR_DECL InputPower,
+ *   const SLArrayIndex_t LMSFilterLength,
+ *   const SLData_t LMSConvergenceFactor,
+ *   const SLData_t Error
+ *
+ * Return value:
+ *   void
+ *
+ * Description:
+ *   Update filter taps according to the normalized LMS
+ *   algorithm.
+ *
+ *   configuration:
+ *
+ *    d(n) --------------------------|
+ *                                   |+
+ *                                 (SUM)------> e(n)
+ *             ------    ------      |-
+ *    x(n) ----| AGC|----| AF |------|--------> y(n)
+ *             ------    ------
+ *
+ *    Algorithm:
+ *          N-1
+ *          __
+ *   y(n) = \  w(k)*x(n-k)
+ *          /_
+ *          k=0
+ *
+ *   Power(n) = (1 - b) * Power(n-1) + b * x[0]^2
+ *   e(n) = d(n) - y(n)
+ *   w(k) = w(k) + (u*a/Power)*e(n)*x(n-k) k=0,1,2,...,N-1
+ *   Note variables a and b are the same in this
+ *   and most other applications.
+ *
+ ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_NormalizedLmsUpdate (
-  const SLData_t * SIGLIB_PTR_DECL pStateArray,
-  SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
-  SLArrayIndex_t * pLMSFilterIndex,
-  SLData_t * SIGLIB_PTR_DECL InputPower,
-  const SLArrayIndex_t LMSFilterLength,
-  const SLData_t AGCAlpha,
-  const SLData_t Error)
+void SIGLIB_FUNC_DECL SDA_NormalizedLmsUpdate(const SLData_t* SIGLIB_PTR_DECL pStateArray, SLData_t* SIGLIB_PTR_DECL pCoeffsArray,
+                                              SLArrayIndex_t* pLMSFilterIndex, SLData_t* SIGLIB_PTR_DECL InputPower,
+                                              const SLArrayIndex_t LMSFilterLength, const SLData_t AGCAlpha, const SLData_t Error)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                                                // Defined by TI compiler
-  _nassert ((int) pStateArray % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
-  _nassert ((int) pCoeffsArray % 8 == 0);
-#endif
+#  ifdef __TMS320C6X__                    // Defined by TI compiler
+  _nassert((int)pStateArray % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+  _nassert((int)pCoeffsArray % 8 == 0);
+#  endif
 #endif
 
-// Estimate average input power
+  // Estimate average input power
   *InputPower = ((SIGLIB_ONE - AGCAlpha) * *InputPower) + (AGCAlpha * pStateArray[*pLMSFilterIndex] * pStateArray[*pLMSFilterIndex]);
 
-// Calculate convergence factor
-  SLData_t        ConvergenceFactor = (AGCAlpha / *InputPower) * Error;
+  // Calculate convergence factor
+  SLData_t ConvergenceFactor = (AGCAlpha / *InputPower) * Error;
 
-// Update weights w(n)
-  SLArrayIndex_t  j = --(*pLMSFilterIndex);
+  // Update weights w(n)
+  SLArrayIndex_t j = --(*pLMSFilterIndex);
 
   for (SLArrayIndex_t i = 0; i < LMSFilterLength; i++) {
     if (++j == LMSFilterLength) {
-      j = 0;                                                        // Circular array
+      j = 0;    // Circular array
     }
     pCoeffsArray[i] += pStateArray[j] * ConvergenceFactor;
   }
 
   *pLMSFilterIndex = j;
-}                                                                   // End of SDA_NormalizedLmsUpdate()
-
+}    // End of SDA_NormalizedLmsUpdate()
 
 /**/
 
 /********************************************************
-* Function: SDA_SignErrorLmsUpdate
-*
-* Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pStateArray,
-*   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
-*   SLArrayIndex_t *pLMSFilterIndex,
-*   const SLArrayIndex_t LMSFilterLength,
-*   const SLData_t LMSConvergenceFactor,
-*   const SLData_t Error
-*
-* Return value:
-*   void
-*
-* Description:
-*   Update filter taps according to the sign error LMS
-*   algorithm.
-*
-*   configuration:
-*
-*    d(n) --------------------------|
-*                                   |+
-*                                 (SUM)------> e(n)
-*                  ------           |-
-*    x(n) ---------| AF |-----------|--------> y(n)
-*                  ------
-*
-*    Algorithm:
-*          N-1
-*          __
-*   y(n) = \  w(k)*x(n-k)
-*          /_
-*          k=0
-*
-*   e(n) = d(n) - y(n)
-*   w(k) = w(k) + u*sign[e(n)]*x(n-k) k=0,1,2,...,N-1
-*
-********************************************************/
+ * Function: SDA_SignErrorLmsUpdate
+ *
+ * Parameters:
+ *   const SLData_t * SIGLIB_PTR_DECL pStateArray,
+ *   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
+ *   SLArrayIndex_t *pLMSFilterIndex,
+ *   const SLArrayIndex_t LMSFilterLength,
+ *   const SLData_t LMSConvergenceFactor,
+ *   const SLData_t Error
+ *
+ * Return value:
+ *   void
+ *
+ * Description:
+ *   Update filter taps according to the sign error LMS
+ *   algorithm.
+ *
+ *   configuration:
+ *
+ *    d(n) --------------------------|
+ *                                   |+
+ *                                 (SUM)------> e(n)
+ *                  ------           |-
+ *    x(n) ---------| AF |-----------|--------> y(n)
+ *                  ------
+ *
+ *    Algorithm:
+ *          N-1
+ *          __
+ *   y(n) = \  w(k)*x(n-k)
+ *          /_
+ *          k=0
+ *
+ *   e(n) = d(n) - y(n)
+ *   w(k) = w(k) + u*sign[e(n)]*x(n-k) k=0,1,2,...,N-1
+ *
+ ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_SignErrorLmsUpdate (
-  const SLData_t * SIGLIB_PTR_DECL pStateArray,
-  SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
-  SLArrayIndex_t * pLMSFilterIndex,
-  const SLArrayIndex_t LMSFilterLength,
-  const SLData_t LMSConvergenceFactor,
-  const SLData_t Error)
+void SIGLIB_FUNC_DECL SDA_SignErrorLmsUpdate(const SLData_t* SIGLIB_PTR_DECL pStateArray, SLData_t* SIGLIB_PTR_DECL pCoeffsArray,
+                                             SLArrayIndex_t* pLMSFilterIndex, const SLArrayIndex_t LMSFilterLength,
+                                             const SLData_t LMSConvergenceFactor, const SLData_t Error)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                                                // Defined by TI compiler
-  _nassert ((int) pStateArray % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
-  _nassert ((int) pCoeffsArray % 8 == 0);
-#endif
+#  ifdef __TMS320C6X__                    // Defined by TI compiler
+  _nassert((int)pStateArray % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+  _nassert((int)pCoeffsArray % 8 == 0);
+#  endif
 #endif
 
-// Calculate convergence factor
-  SLData_t        ConvergenceFactor = SIGLIB_TWO * LMSConvergenceFactor;
+  // Calculate convergence factor
+  SLData_t ConvergenceFactor = SIGLIB_TWO * LMSConvergenceFactor;
   if (Error < SIGLIB_EPSILON) {
     ConvergenceFactor *= SIGLIB_MINUS_ONE;
   }
 
-// Update weights w(n)
-  SLArrayIndex_t  j = --(*pLMSFilterIndex);
+  // Update weights w(n)
+  SLArrayIndex_t j = --(*pLMSFilterIndex);
   for (SLArrayIndex_t i = 0; i < LMSFilterLength; i++) {
     if (++j == LMSFilterLength) {
-      j = 0;                                                        // Circular array
+      j = 0;    // Circular array
     }
 
     pCoeffsArray[i] += pStateArray[j] * ConvergenceFactor;
   }
 
   *pLMSFilterIndex = j;
-}                                                                   // End of SDA_SignErrorLmsUpdate()
-
+}    // End of SDA_SignErrorLmsUpdate()
 
 /**/
 
 /********************************************************
-* Function: SDA_SignDataLmsUpdate
-*
-* Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pStateArray,
-*   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
-*   SLArrayIndex_t *pLMSFilterIndex,
-*   const SLArrayIndex_t LMSFilterLength,
-*   const SLData_t LMSConvergenceFactor,
-*   const SLData_t Error
-*
-* Return value:
-*   void
-*
-* Description:
-*   Update filter taps according to the sign data LMS
-*   algorithm.
-*
-*   configuration:
-*
-*    d(n) --------------------------|
-*                                   |+
-*                                 (SUM)------> e(n)
-*                  ------           |-
-*    x(n) ---------| AF |-----------|--------> y(n)
-*                  ------
-*
-*    Algorithm:
-*          N-1
-*          __
-*   y(n) = \  w(k)*x(n-k)
-*          /_
-*          k=0
-*
-*   e(n) = d(n) - y(n)
-*   w(k) = w(k) + u*e(n)*sign[x(n-k)] k=0,1,2,...,N-1
-*
-********************************************************/
+ * Function: SDA_SignDataLmsUpdate
+ *
+ * Parameters:
+ *   const SLData_t * SIGLIB_PTR_DECL pStateArray,
+ *   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
+ *   SLArrayIndex_t *pLMSFilterIndex,
+ *   const SLArrayIndex_t LMSFilterLength,
+ *   const SLData_t LMSConvergenceFactor,
+ *   const SLData_t Error
+ *
+ * Return value:
+ *   void
+ *
+ * Description:
+ *   Update filter taps according to the sign data LMS
+ *   algorithm.
+ *
+ *   configuration:
+ *
+ *    d(n) --------------------------|
+ *                                   |+
+ *                                 (SUM)------> e(n)
+ *                  ------           |-
+ *    x(n) ---------| AF |-----------|--------> y(n)
+ *                  ------
+ *
+ *    Algorithm:
+ *          N-1
+ *          __
+ *   y(n) = \  w(k)*x(n-k)
+ *          /_
+ *          k=0
+ *
+ *   e(n) = d(n) - y(n)
+ *   w(k) = w(k) + u*e(n)*sign[x(n-k)] k=0,1,2,...,N-1
+ *
+ ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_SignDataLmsUpdate (
-  const SLData_t * SIGLIB_PTR_DECL pStateArray,
-  SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
-  SLArrayIndex_t * pLMSFilterIndex,
-  const SLArrayIndex_t LMSFilterLength,
-  const SLData_t LMSConvergenceFactor,
-  const SLData_t Error)
+void SIGLIB_FUNC_DECL SDA_SignDataLmsUpdate(const SLData_t* SIGLIB_PTR_DECL pStateArray, SLData_t* SIGLIB_PTR_DECL pCoeffsArray,
+                                            SLArrayIndex_t* pLMSFilterIndex, const SLArrayIndex_t LMSFilterLength,
+                                            const SLData_t LMSConvergenceFactor, const SLData_t Error)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                                                // Defined by TI compiler
-  _nassert ((int) pStateArray % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
-  _nassert ((int) pCoeffsArray % 8 == 0);
-#endif
+#  ifdef __TMS320C6X__                    // Defined by TI compiler
+  _nassert((int)pStateArray % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+  _nassert((int)pCoeffsArray % 8 == 0);
+#  endif
 #endif
 
-// Calculate convergence factor
-  SLData_t        ConvergenceFactor = (SIGLIB_TWO * LMSConvergenceFactor * Error);
+  // Calculate convergence factor
+  SLData_t ConvergenceFactor = (SIGLIB_TWO * LMSConvergenceFactor * Error);
 
-// Update weights w(n)
-  SLArrayIndex_t  j = --(*pLMSFilterIndex);
+  // Update weights w(n)
+  SLArrayIndex_t j = --(*pLMSFilterIndex);
 
   for (SLArrayIndex_t i = 0; i < LMSFilterLength; i++) {
     if (++j == LMSFilterLength) {
-      j = 0;                                                        // Circular array
+      j = 0;    // Circular array
     }
 
     if (pStateArray[j] >= SIGLIB_ZERO) {
       pCoeffsArray[i] += ConvergenceFactor;
-    }
-    else {
+    } else {
       pCoeffsArray[i] -= ConvergenceFactor;
     }
   }
 
   *pLMSFilterIndex = j;
-}                                                                   // End of SDA_SignDataLmsUpdate()
-
+}    // End of SDA_SignDataLmsUpdate()
 
 /**/
 
 /********************************************************
-* Function: SDA_SignSignLmsUpdate
-*
-* Parameters:
-*   const SLData_t * SIGLIB_PTR_DECL pStateArray,
-*   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
-*   SLArrayIndex_t *pLMSFilterIndex,
-*   const SLArrayIndex_t LMSFilterLength,
-*   const SLData_t LMSConvergenceFactor,
-*   const SLData_t Error
-*
-* Return value:
-*   void
-*
-* Description:
-*   Update filter taps according to the sign sign LMS
-*   algorithm.
-*
-*   configuration:
-*
-*    d(n) --------------------------|
-*                                   |+
-*                                 (SUM)------> e(n)
-*                  ------           |-
-*    x(n) ---------| AF |-----------|--------> y(n)
-*                  ------
-*
-*    Algorithm:
-*          N-1
-*          __
-*   y(n) = \  w(k)*x(n-k)
-*          /_
-*          k=0
-*
-*   e(n) = d(n) - y(n)
-*   w(k) = w(k) + u*sign[e(n)]*sign[x(n-k)] k=0,1,2,...,N-1
-*
-********************************************************/
+ * Function: SDA_SignSignLmsUpdate
+ *
+ * Parameters:
+ *   const SLData_t * SIGLIB_PTR_DECL pStateArray,
+ *   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
+ *   SLArrayIndex_t *pLMSFilterIndex,
+ *   const SLArrayIndex_t LMSFilterLength,
+ *   const SLData_t LMSConvergenceFactor,
+ *   const SLData_t Error
+ *
+ * Return value:
+ *   void
+ *
+ * Description:
+ *   Update filter taps according to the sign sign LMS
+ *   algorithm.
+ *
+ *   configuration:
+ *
+ *    d(n) --------------------------|
+ *                                   |+
+ *                                 (SUM)------> e(n)
+ *                  ------           |-
+ *    x(n) ---------| AF |-----------|--------> y(n)
+ *                  ------
+ *
+ *    Algorithm:
+ *          N-1
+ *          __
+ *   y(n) = \  w(k)*x(n-k)
+ *          /_
+ *          k=0
+ *
+ *   e(n) = d(n) - y(n)
+ *   w(k) = w(k) + u*sign[e(n)]*sign[x(n-k)] k=0,1,2,...,N-1
+ *
+ ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_SignSignLmsUpdate (
-  const SLData_t * SIGLIB_PTR_DECL pStateArray,
-  SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
-  SLArrayIndex_t * pLMSFilterIndex,
-  const SLArrayIndex_t LMSFilterLength,
-  const SLData_t LMSConvergenceFactor,
-  const SLData_t Error)
+void SIGLIB_FUNC_DECL SDA_SignSignLmsUpdate(const SLData_t* SIGLIB_PTR_DECL pStateArray, SLData_t* SIGLIB_PTR_DECL pCoeffsArray,
+                                            SLArrayIndex_t* pLMSFilterIndex, const SLArrayIndex_t LMSFilterLength,
+                                            const SLData_t LMSConvergenceFactor, const SLData_t Error)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
-#ifdef __TMS320C6X__                                                // Defined by TI compiler
-  _nassert ((int) pStateArray % 8 == 0);                            // Align arrays on 64 bit double word boundary for LDDW
-  _nassert ((int) pCoeffsArray % 8 == 0);
-#endif
+#  ifdef __TMS320C6X__                    // Defined by TI compiler
+  _nassert((int)pStateArray % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+  _nassert((int)pCoeffsArray % 8 == 0);
+#  endif
 #endif
 
-// Calculate convergence factor
-  SLData_t        ConvergenceFactor = SIGLIB_TWO * LMSConvergenceFactor;
+  // Calculate convergence factor
+  SLData_t ConvergenceFactor = SIGLIB_TWO * LMSConvergenceFactor;
   if (Error < SIGLIB_EPSILON) {
     ConvergenceFactor *= SIGLIB_MINUS_ONE;
   }
 
-// Update weights w(n)
-  SLArrayIndex_t  j = --(*pLMSFilterIndex);
+  // Update weights w(n)
+  SLArrayIndex_t j = --(*pLMSFilterIndex);
 
   for (SLArrayIndex_t i = 0; i < LMSFilterLength; i++) {
     if (++j == LMSFilterLength) {
-      j = 0;                                                        // Circular array
+      j = 0;    // Circular array
     }
     if (pStateArray[j] >= SIGLIB_ZERO) {
       pCoeffsArray[i] += ConvergenceFactor;
-    }
-    else {
+    } else {
       pCoeffsArray[i] -= ConvergenceFactor;
     }
   }
 
   *pLMSFilterIndex = j;
-}                                                                   // End of SDA_SignSignLmsUpdate()
+}    // End of SDA_SignSignLmsUpdate()

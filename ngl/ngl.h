@@ -25,23 +25,23 @@ support@.numerix-dsp.com
 Copyright (c) 2023, Delta Numerix, All rights reserved.
 ****************************************************************************/
 
-#ifndef     _NGL_H
-#define     _NGL_H
+#ifndef _NGL_H
+#define _NGL_H
 
-#define NGL_VERSION             2.63                                // Indicates NGL version being used
+#define NGL_VERSION 2.63    // Indicates NGL version being used
 
 // Math constants
-#define TWO_PI                  6.283185307179586476925286766559
+#define TWO_PI 6.283185307179586476925286766559
 #define TWO_PI_OVER_THREE_SIXTY 0.017453292519943295769236907684886
 
 // Graphics constants
-#define GRAPH_SCALE             0                                   // Scale graph to screen
-#define GRAPH_NO_SCALE          1                                   // No graph scaling (default 1)
+#define GRAPH_SCALE 0       // Scale graph to screen
+#define GRAPH_NO_SCALE 1    // No graph scaling (default 1)
 
-#define MAXIMUM_GRAPH_WIDTH     512                                 // Maximum graph width
-#define MAXIMUM_PZ_SIZE         512                                 // Maximum number of poles and zeros to plot
+#define MAXIMUM_GRAPH_WIDTH 512    // Maximum graph width
+#define MAXIMUM_PZ_SIZE 512        // Maximum number of poles and zeros to plot
 
-enum pz_type                                                        // Pole zero types
+enum pz_type    // Pole zero types
 {
   PZ_COMPLEX_POLE_ZERO,
   PZ_CONJUGATE_POLE_ZERO,
@@ -51,188 +51,130 @@ enum pz_type                                                        // Pole zero
   PZ_CONJUGATE_POLE
 };
 
+class LineGraphCanvas;
+class PoleZeroPlotCanvas;
 
-class           LineGraphCanvas;
-class           PoleZeroPlotCanvas;
-
-
-#if !defined (SIGLIB)
-                // Complex Cartesian (Rectangular) numbers
+#if !defined(SIGLIB)
+// Complex Cartesian (Rectangular) numbers
 typedef struct {
-  double          real;
-  double          imag;
+  double real;
+  double imag;
 } SLComplexRect_s;
 #endif
 
-
 enum {
-//  UPDATE_LINE_GRAPH = wxID_HIGHEST + 1,
+  //  UPDATE_LINE_GRAPH = wxID_HIGHEST + 1,
   UPDATE_LINE_GRAPH = 1001,
   UPDATE_POLE_ZERO_PLOT = 1002,
 };
 
-class           LineGraph:public wxPanel {
-public:
-  LineGraph (
-  wxWindow * parent,
-  wxWindowID id,
-  wxSize GraphSize);
-  ~LineGraph (
-    );
-  void            AddDataSet (
-  const double *pSrc,
-  const double scaleFlag,
-  const wxColour colour,
-  const int size);
+class LineGraph : public wxPanel
+{
+    public:
+  LineGraph(wxWindow* parent, wxWindowID id, wxSize GraphSize);
+  ~LineGraph();
+  void AddDataSet(const double* pSrc, const double scaleFlag, const wxColour colour, const int size);
 
-  void            SetTopLabel (
-  wxString String);
-  void            SetMiddleLabel (
-  wxString String);
-  void            SetBottomLabel (
-  wxString String);
-  void            SetLeftLabel (
-  wxString String);
-  void            SetCenterLabel (
-  wxString String);
-  void            SetRightLabel (
-  wxString String);
-  void            SetStatusBarValueText (
-  wxString);
-  wxString        GetStatusBarValueText (
-  void);
-  void            SetQuantizeXAxisFlag (
-  bool);
-  bool            GetQuantizeXAxisFlag (
-  void);
-  void            SetStatusBarIndexMultiplier (
-  double);
-  double          GetStatusBarIndexMultiplier (
-  void);
+  void SetTopLabel(wxString String);
+  void SetMiddleLabel(wxString String);
+  void SetBottomLabel(wxString String);
+  void SetLeftLabel(wxString String);
+  void SetCenterLabel(wxString String);
+  void SetRightLabel(wxString String);
+  void SetStatusBarValueText(wxString);
+  wxString GetStatusBarValueText(void);
+  void SetQuantizeXAxisFlag(bool);
+  bool GetQuantizeXAxisFlag(void);
+  void SetStatusBarIndexMultiplier(double);
+  double GetStatusBarIndexMultiplier(void);
 
-  LineGraphCanvas *GraphCanvas;
+  LineGraphCanvas* GraphCanvas;
 
-  void            Draw (
-  wxDC & dc,
-  bool draw_bitmaps = TRUE);
-  double          GetValue (
-  int Location);
+  void Draw(wxDC& dc, bool draw_bitmaps = TRUE);
+  double GetValue(int Location);
 
-private:
-  double          AbsMax (
-  const double *pSrc,
-  const long SampleLength);
+    private:
+  double AbsMax(const double* pSrc, const long SampleLength);
 
-  wxStaticText   *LeftLabel, *CenterLabel, *RightLabel;
-  wxStaticText   *TopLabel, *MiddleLabel, *BottomLabel;
+  wxStaticText *LeftLabel, *CenterLabel, *RightLabel;
+  wxStaticText *TopLabel, *MiddleLabel, *BottomLabel;
 
-  wxString        pStatusBarValueText;                              // String used for title on status line
-  double          StatusBarIndexMultiplier;
+  wxString pStatusBarValueText;    // String used for title on status line
+  double StatusBarIndexMultiplier;
 
-  wxColour        LineColour;
+  wxColour LineColour;
 
-  wxSize          GraphSize;
-  bool            QuantizeXAxisFlag;
+  wxSize GraphSize;
+  bool QuantizeXAxisFlag;
 
-  double         *pDataSet;
-  double          Max;                                              // Peak value in data graph
-  int             DataSetSize;                                      // Data set size
-  int             PreviousX, PreviousY;
+  double* pDataSet;
+  double Max;         // Peak value in data graph
+  int DataSetSize;    // Data set size
+  int PreviousX, PreviousY;
 
-                  DECLARE_EVENT_TABLE (
-    )
+  DECLARE_EVENT_TABLE()
 };
-
-
 
 // Define a new canvas for the line graph
-class           LineGraphCanvas:public wxWindow {
-public:
-  LineGraphCanvas (
-  LineGraph * pLineGraph,
-  wxPanel * parent,
-  wxPoint GraphPoint,
-  wxSize GraphSize);
-//    LineGraphCanvas (wxPanel *parent, wxPoint GraphPoint, wxSize GraphSize);
-  ~LineGraphCanvas (
-    );
-  void            OnPaint (
-  wxPaintEvent & event);
+class LineGraphCanvas : public wxWindow
+{
+    public:
+  LineGraphCanvas(LineGraph* pLineGraph, wxPanel* parent, wxPoint GraphPoint, wxSize GraphSize);
+  //    LineGraphCanvas (wxPanel *parent, wxPoint GraphPoint, wxSize GraphSize);
+  ~LineGraphCanvas();
+  void OnPaint(wxPaintEvent& event);
 
-private:
-  void            OnMouseMove (
-  wxMouseEvent & event);
+    private:
+  void OnMouseMove(wxMouseEvent& event);
 
-  wxSize          GraphSize;
-  wxPanel        *m_owner;
-  LineGraph      *m_LineGraph;
-//  wxPanel     *m_LineGraph;
-//  wxString    pStatusBarValueText;        // String used for title on status line
+  wxSize GraphSize;
+  wxPanel* m_owner;
+  LineGraph* m_LineGraph;
+  //  wxPanel     *m_LineGraph;
+  //  wxString    pStatusBarValueText;        // String used for title on status
+  //  line
 
-                  DECLARE_EVENT_TABLE (
-    )
+  DECLARE_EVENT_TABLE()
 };
 
+class PoleZeroPlot : public wxPanel
+{
+    public:
+  PoleZeroPlot(wxWindow* parent, wxWindowID id, wxSize plotSize);
+  ~PoleZeroPlot();
+  void AddDataSet(const SLComplexRect_s* pSrc, int plotSize, const int plotType);
 
+  PoleZeroPlotCanvas* PlotCanvas;
 
+  void Draw(wxDC& dc, bool draw_bitmaps = TRUE);
 
-class           PoleZeroPlot:public wxPanel {
-public:
-  PoleZeroPlot (
-  wxWindow * parent,
-  wxWindowID id,
-  wxSize plotSize);
-  ~PoleZeroPlot (
-    );
-  void            AddDataSet (
-  const SLComplexRect_s * pSrc,
-  int plotSize,
-  const int plotType);
+    private:
+  SLComplexRect_s* pDataSet;
 
-  PoleZeroPlotCanvas *PlotCanvas;
+  int DataSetSize;    // Size of data set - may be different from the plot size
 
-  void            Draw (
-  wxDC & dc,
-  bool draw_bitmaps = TRUE);
+  int PlotType;       // Type of plot data
+  wxSize PlotSize;    // Size of plot
 
-private:
-                  SLComplexRect_s * pDataSet;
-
-  int             DataSetSize;                                      // Size of data set - may be different from the plot size
-
-  int             PlotType;                                         // Type of plot data
-  wxSize          PlotSize;                                         // Size of plot
-
-                  DECLARE_EVENT_TABLE (
-    )
+  DECLARE_EVENT_TABLE()
 };
-
-
 
 // Define a new canvas for the pole zero plot
-class           PoleZeroPlotCanvas:public wxWindow {
-public:
-  PoleZeroPlotCanvas (
-  PoleZeroPlot * pPoleZeroPlot,
-  wxPanel * parent,
-  wxPoint plotPoint,
-  wxSize plotSize);
-  ~PoleZeroPlotCanvas (
-    );
-  void            OnPaint (
-  wxPaintEvent & event);
+class PoleZeroPlotCanvas : public wxWindow
+{
+    public:
+  PoleZeroPlotCanvas(PoleZeroPlot* pPoleZeroPlot, wxPanel* parent, wxPoint plotPoint, wxSize plotSize);
+  ~PoleZeroPlotCanvas();
+  void OnPaint(wxPaintEvent& event);
 
-private:
-                  wxSize PlotSize;
-  wxPanel        *m_owner;
-  PoleZeroPlot   *m_PoleZeroPlot;
+    private:
+  wxSize PlotSize;
+  wxPanel* m_owner;
+  PoleZeroPlot* m_PoleZeroPlot;
 
-  double         *pDataSet;
+  double* pDataSet;
 
-                  DECLARE_EVENT_TABLE (
-    )
+  DECLARE_EVENT_TABLE()
 };
 
-
-
-#endif                                                              // End of #ifndef _NGL_H
+#endif    // End of #ifndef _NGL_H

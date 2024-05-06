@@ -34,7 +34,8 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: A subset of conio.h and time.h functions
 
-Calls Microsoft conio.h or implements subset of conio.h functions not implemented in GCC
+Calls Microsoft conio.h or implements subset of conio.h functions not
+implemented in GCC
 
 ****************************************************************************/
 
@@ -42,90 +43,88 @@ Calls Microsoft conio.h or implements subset of conio.h functions not implemente
 #define __SIGLIB_HOST_UTILS_H__
 
 #if _MSC_VER
-#include <conio.h>
-#include <time.h>
+#  include <conio.h>
+#  include <time.h>
 
-#define mssleep Sleep
+#  define mssleep Sleep
 
-#else                                                               // If compiler not MSVC then include the function subset
+#else    // If compiler not MSVC then include the function subset
 
-// This kbhit() modified from Morgan McGuire's code here: https://www.flipcode.com/archives/_kbhit_for_Linux.shtml
+// This kbhit() modified from Morgan McGuire's code here:
+// https://www.flipcode.com/archives/_kbhit_for_Linux.shtml
 
-#include <stdio.h>
-#include <termios.h>
-#include <unistd.h>
-#include <sys/select.h>
-#include <sys/types.h>
-#include <sys/time.h>
-#include <sys/socket.h>
-#include <sys/ioctl.h>
+#  include <stdio.h>
+#  include <sys/ioctl.h>
+#  include <sys/select.h>
+#  include <sys/socket.h>
+#  include <sys/time.h>
+#  include <sys/types.h>
+#  include <termios.h>
+#  include <unistd.h>
 
-#define _kbhit kbhit
+#  define _kbhit kbhit
 
-int             kbhit (
-  void);
+int kbhit(void);
 
-int kbhit (
-  )
+int kbhit()
 {
   static const int STDIN = 0;
-  static int      initialized = 0;
+  static int initialized = 0;
 
   if (!initialized) {
-// Use termios to turn off line buffering
-    struct termios  term;
-    tcgetattr (STDIN, &term);
+    // Use termios to turn off line buffering
+    struct termios term;
+    tcgetattr(STDIN, &term);
     term.c_lflag &= ~ICANON;
-    tcsetattr (STDIN, TCSANOW, &term);
-    setbuf (stdin, NULL);
+    tcsetattr(STDIN, TCSANOW, &term);
+    setbuf(stdin, NULL);
     initialized = 1;
   }
 
-  int             bytesWaiting;
-  ioctl (STDIN, FIONREAD, &bytesWaiting);
+  int bytesWaiting;
+  ioctl(STDIN, FIONREAD, &bytesWaiting);
   return bytesWaiting;
 }
 
-// These functions copied from here: http://stackoverflow.com/questions/3276546/how-to-implement-getch-function-of-c-in-linux
+// These functions copied from here:
+// http://stackoverflow.com/questions/3276546/how-to-implement-getch-function-of-c-in-linux
 
-#define _getch getch
-#define _getche getche
+#  define _getch getch
+#  define _getche getche
 
 /* reads from keypress, doesn't echo */
-int getch (
-  void)
+int getch(void)
 {
-  struct termios  oldattr, newattr;
-  int             ch;
-  tcgetattr (STDIN_FILENO, &oldattr);
+  struct termios oldattr, newattr;
+  int ch;
+  tcgetattr(STDIN_FILENO, &oldattr);
   newattr = oldattr;
   newattr.c_lflag &= ~(ICANON | ECHO);
-  tcsetattr (STDIN_FILENO, TCSANOW, &newattr);
-  ch = getchar ();
-  tcsetattr (STDIN_FILENO, TCSANOW, &oldattr);
+  tcsetattr(STDIN_FILENO, TCSANOW, &newattr);
+  ch = getchar();
+  tcsetattr(STDIN_FILENO, TCSANOW, &oldattr);
   return ch;
 }
 
 /* reads from keypress, echoes */
-int getche (
-  void)
+int getche(void)
 {
-  struct termios  oldattr, newattr;
-  int             ch;
-  tcgetattr (STDIN_FILENO, &oldattr);
+  struct termios oldattr, newattr;
+  int ch;
+  tcgetattr(STDIN_FILENO, &oldattr);
   newattr = oldattr;
   newattr.c_lflag &= ~(ICANON);
-  tcsetattr (STDIN_FILENO, TCSANOW, &newattr);
-  ch = getchar ();
-  tcsetattr (STDIN_FILENO, TCSANOW, &oldattr);
+  tcsetattr(STDIN_FILENO, TCSANOW, &newattr);
+  ch = getchar();
+  tcsetattr(STDIN_FILENO, TCSANOW, &oldattr);
   return ch;
 }
 
-                            // __unix, __GNUC__ are defined by the appropriate compilers
-#if defined (__unix) || defined (__GNUC__)
-#define mssleep(u) usleep(u*1000)
-#endif
+// __unix, __GNUC__ are defined by the appropriate compilers
+#  if defined(__unix) || defined(__GNUC__)
+#    define mssleep(u) usleep(u * 1000)
+#  endif
 
 #endif
 
-#endif                                                              // __SIGLIB_HOST_UTILS_H__
+#endif    // __SIGLIB_HOST_UTILS_H__
