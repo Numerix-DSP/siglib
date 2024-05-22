@@ -1,18 +1,14 @@
 
 
-
                SigLib™ Utility Files
-
 
 INTRODUCTION
 
 These files have been included to assist with your use of SigLib.
 
 
-
 SigLib and Digital Filter Plus are trademarks of Delta Numerix all other
 trademarks acknowledged.
-
 
 For additional information, please contact:
 

@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Trigonometry functions, for SigLib DSP library.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_TRIG 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SDA_Sin
@@ -73,8 +70,6 @@ void SIGLIB_FUNC_DECL SDA_Sin(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SI
   }
 }    // End of SDA_Sin()
 
-/**/
-
 /********************************************************
  * Function: SDA_Cos
  *
@@ -104,8 +99,6 @@ void SIGLIB_FUNC_DECL SDA_Cos(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SI
     *pDst++ = SDS_Cos(*pSrc++);
   }
 }    // End of SDA_Cos()
-
-/**/
 
 /********************************************************
  * Function: SDA_Tan
@@ -137,8 +130,6 @@ void SIGLIB_FUNC_DECL SDA_Tan(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SI
   }
 }    // End of SDA_Tan()
 
-/**/
-
 /********************************************************
  * Function: SIF_FastSin
  *
@@ -161,8 +152,6 @@ void SIGLIB_FUNC_DECL SIF_FastSin(SLData_t* pSineTable, const SLArrayIndex_t Tab
     *pSineTable++ = SDS_Sin(PhaseMultiplier * i);
   }
 }    // End of SIF_FastSin()
-
-/**/
 
 /********************************************************
  * Function: SDA_FastSin
@@ -212,8 +201,6 @@ void SIGLIB_FUNC_DECL SDA_FastSin(const SLData_t* SIGLIB_PTR_DECL pSineTable, SL
   *pSineTablePhase = LocalCarrierTablePhase;    // Save carrier table index for next iteration
 }    // End of SDA_FastSin()
 
-/**/
-
 /********************************************************
  * Function: SDS_FastSin
  *
@@ -243,8 +230,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_FastSin(const SLData_t* SIGLIB_PTR_DECL pSineTable
   return (Dst);
 }    // End of SDS_FastSin()
 
-/**/
-
 /********************************************************
  * Function: SIF_FastCos
  *
@@ -268,8 +253,6 @@ void SIGLIB_FUNC_DECL SIF_FastCos(SLData_t* pCosineTable, const SLArrayIndex_t T
     *pCosineTable++ = SDS_Cos(PhaseMultiplier * i);
   }
 }    // End of SIF_FastCos()
-
-/**/
 
 /********************************************************
  * Function: SDA_FastCos
@@ -319,8 +302,6 @@ void SIGLIB_FUNC_DECL SDA_FastCos(const SLData_t* SIGLIB_PTR_DECL pCosineTable, 
   *pCosineTablePhase = LocalCarrierTablePhase;    // Save carrier table index for next iteration
 }    // End of SDA_FastCos()
 
-/**/
-
 /********************************************************
  * Function: SDS_FastCos
  *
@@ -350,8 +331,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_FastCos(const SLData_t* SIGLIB_PTR_DECL pCosineTab
   return (Dst);
 }    // End of SDS_FastCos()
 
-/**/
-
 /********************************************************
  * Function: SIF_FastSinCos
  *
@@ -376,8 +355,6 @@ void SIGLIB_FUNC_DECL SIF_FastSinCos(SLData_t* pSineTable, const SLArrayIndex_t 
     *pSineTable++ = SDS_Sin(PhaseMultiplier * i);
   }
 }    // End of SIF_FastSinCos()
-
-/**/
 
 /********************************************************
  * Function: SDA_FastSinCos
@@ -435,8 +412,6 @@ void SIGLIB_FUNC_DECL SDA_FastSinCos(const SLData_t* SIGLIB_PTR_DECL pSineTable,
   *pSineTablePhase = LocalCarrierTablePhase;    // Save carrier table index for next iteration
 }    // End of SDA_FastSinCos()
 
-/**/
-
 /********************************************************
  * Function: SDS_FastSinCos
  *
@@ -469,8 +444,6 @@ void SIGLIB_FUNC_DECL SDS_FastSinCos(const SLData_t* SIGLIB_PTR_DECL pSineTable,
   }
 }    // End of SDS_FastSinCos()
 
-/**/
-
 /********************************************************
  * Function: SIF_QuickSin
  *
@@ -496,8 +469,6 @@ void SIGLIB_FUNC_DECL SIF_QuickSin(SLData_t* pSineTable, SLData_t* pPhaseGain, c
   }
   *pPhaseGain = SIGLIB_ONE / (*pPhaseGain);    // Invert for use in the quick functions
 }    // End of SIF_QuickSin()
-
-/**/
 
 /********************************************************
  * Function: SDA_QuickSin
@@ -561,8 +532,6 @@ void SIGLIB_FUNC_DECL SDA_QuickSin(const SLData_t* SIGLIB_PTR_DECL pSrc, const S
   }
 }    // End of SDA_QuickSin()
 
-/**/
-
 /********************************************************
  * Function: SDS_QuickSin
  *
@@ -595,8 +564,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_QuickSin(const SLData_t Angle, const SLData_t* SIG
   }
 }    // End of SDS_QuickSin()
 
-/**/
-
 /********************************************************
  * Function: SIF_QuickCos
  *
@@ -621,8 +588,6 @@ void SIGLIB_FUNC_DECL SIF_QuickCos(SLData_t* pCosineTable, SLData_t* pPhaseGain,
   }
   *pPhaseGain = SIGLIB_ONE / (*pPhaseGain);    // Invert for use in the quick functions
 }    // End of SIF_QuickCos()
-
-/**/
 
 /********************************************************
  * Function: SDA_QuickCos
@@ -684,8 +649,6 @@ void SIGLIB_FUNC_DECL SDA_QuickCos(const SLData_t* SIGLIB_PTR_DECL pSrc, const S
   }
 }    // End of SDA_QuickCos()
 
-/**/
-
 /********************************************************
  * Function: SDS_QuickCos
  *
@@ -718,8 +681,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_QuickCos(const SLData_t Angle, const SLData_t* SIG
   }
 }    // End of SDS_QuickCos()
 
-/**/
-
 /********************************************************
  * Function: SIF_QuickSinCos
  *
@@ -745,8 +706,6 @@ void SIGLIB_FUNC_DECL SIF_QuickSinCos(SLData_t* pSineTable, SLData_t* pPhaseGain
   }
   *pPhaseGain = SIGLIB_ONE / (*pPhaseGain);    // Invert for use in the quick functions
 }    // End of SIF_QuickSinCos()
-
-/**/
 
 /********************************************************
  * Function: SDA_QuickSinCos
@@ -818,8 +777,6 @@ void SIGLIB_FUNC_DECL SDA_QuickSinCos(const SLData_t* SIGLIB_PTR_DECL pSrc, cons
   }
 }    // End of SDA_QuickSinCos()
 
-/**/
-
 /********************************************************
 * Function: SDS_QuickSinCos
 *
@@ -859,8 +816,6 @@ void SIGLIB_FUNC_DECL SDS_QuickSinCos(const SLData_t Angle, const SLData_t* SIGL
   }
 }    // End of SDS_QuickSinCos()
 
-/**/
-
 /********************************************************
  * Function: SIF_QuickTan
  *
@@ -885,8 +840,6 @@ void SIGLIB_FUNC_DECL SIF_QuickTan(SLData_t* pTanTable, SLData_t* pPhaseGain, co
   }
   *pPhaseGain = SIGLIB_ONE / (*pPhaseGain);    // Invert for use in the quick functions
 }    // End of SIF_QuickTan()
-
-/**/
 
 /********************************************************
  * Function: SDA_QuickTan
@@ -950,8 +903,6 @@ void SIGLIB_FUNC_DECL SDA_QuickTan(const SLData_t* SIGLIB_PTR_DECL pSrc, const S
   }
 }    // End of SDA_QuickTan()
 
-/**/
-
 /********************************************************
  * Function: SDS_QuickTan
  *
@@ -983,8 +934,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_QuickTan(const SLData_t Angle, const SLData_t* SIG
     return (-pTanTable[(SLArrayIndex_t)((LocalAngle * PhaseGain) + 0.1)]);
   }
 }    // End of SDS_QuickTan()
-
-/**/
 
 /********************************************************
  * Function: SDA_Sinc
@@ -1021,8 +970,6 @@ void SIGLIB_FUNC_DECL SDA_Sinc(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* S
   }
 }    // End of SDA_Sinc()
 
-/**/
-
 /********************************************************
  * Function: SDS_Sinc
  *
@@ -1045,8 +992,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_Sinc(const SLData_t x)
     return (SDS_Sin(x) / x);
   }
 }    // End of SDS_Sinc()
-
-/**/
 
 /********************************************************
  * Function: SIF_QuickSinc
@@ -1076,8 +1021,6 @@ void SIGLIB_FUNC_DECL SIF_QuickSinc(SLData_t* pSincTable, SLData_t* pPhaseGain, 
   }
   *pPhaseGain = SIGLIB_ONE / localPhaseGain;    // Invert for use in the quick functions
 }    // End of SIF_QuickSinc()
-
-/**/
 
 /********************************************************
  * Function: SDA_QuickSinc
@@ -1128,8 +1071,6 @@ void SIGLIB_FUNC_DECL SDA_QuickSinc(const SLData_t* SIGLIB_PTR_DECL pSrc, const 
 #endif
   }
 }    // End of SDA_QuickSinc()
-
-/**/
 
 /********************************************************
  * Function: SDS_QuickSinc

@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Communications routines, for SigLib DSP library.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_COMMS 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SDA_BitErrorRate
@@ -87,8 +84,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_BitErrorRate(const SLChar_t* pSrc1, const SLChar_t
   return (((SLData_t)BERCount) * InverseNumberOfBits);
 }    // End of SDA_BitErrorRate()
 
-/**/
-
 /********************************************************
  * Function: SDA_Interleave
  *
@@ -125,8 +120,6 @@ void SIGLIB_FUNC_DECL SDA_Interleave(const SLData_t pSrc[], SLData_t pDst[], con
     }
   }
 }    // End of SDA_Interleave()
-
-/**/
 
 /********************************************************
  * Function: SDA_Deinterleave
@@ -165,8 +158,6 @@ void SIGLIB_FUNC_DECL SDA_Deinterleave(const SLData_t pSrc[], SLData_t pDst[], c
   }
 }    // End of SDA_Deinterleave()
 
-/**/
-
 /********************************************************
  * Function: SCV_EuclideanDistance
  *
@@ -187,8 +178,6 @@ SLData_t SIGLIB_FUNC_DECL SCV_EuclideanDistance(const SLComplexRect_s SrcVector1
   return (SDS_Sqrt((SrcVector1.real - SrcVector2.real) * (SrcVector1.real - SrcVector2.real) +
                    (SrcVector1.imag - SrcVector2.imag) * (SrcVector1.imag - SrcVector2.imag)));
 }    // End of SCV_EuclideanDistance()
-
-/**/
 
 /********************************************************
  * Function: SCV_EuclideanDistanceSquared
@@ -211,8 +200,6 @@ SLData_t SIGLIB_FUNC_DECL SCV_EuclideanDistanceSquared(const SLComplexRect_s Src
   return ((SrcVector1.real - SrcVector2.real) * (SrcVector1.real - SrcVector2.real) +
           (SrcVector1.imag - SrcVector2.imag) * (SrcVector1.imag - SrcVector2.imag));
 }    // End of SCV_EuclideanDistanceSquared()
-
-/**/
 
 /********************************************************
  * Function: SCA_EuclideanDistance
@@ -244,8 +231,6 @@ void SIGLIB_FUNC_DECL SCA_EuclideanDistance(const SLComplexRect_s* SIGLIB_INPUT_
   }
 }    // End of SCA_EuclideanDistance()
 
-/**/
-
 /********************************************************
  * Function: SCA_EuclideanDistanceSquared
  *
@@ -276,8 +261,6 @@ void SIGLIB_FUNC_DECL SCA_EuclideanDistanceSquared(const SLComplexRect_s* SIGLIB
   }
 }    // End of SCA_EuclideanDistanceSquared()
 
-/**/
-
 /********************************************************
  * Function: SDS_EuclideanDistance
  *
@@ -303,8 +286,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_EuclideanDistance(const SLData_t src1x, const SLDa
   return SDS_Sqrt(d1 * d1 + d2 * d2);
 }    // End of SDS_EuclideanDistance()
 
-/**/
-
 /********************************************************
  * Function: SDS_EuclideanDistanceSquared
  *
@@ -329,8 +310,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_EuclideanDistanceSquared(const SLData_t src1x, con
   SLData_t d2 = src1y - src2y;
   return d1 * d1 + d2 * d2;
 }    // End of SDS_EuclideanDistanceSquared()
-
-/**/
 
 /********************************************************
  * Function: SDA_EuclideanDistance
@@ -364,8 +343,6 @@ void SIGLIB_FUNC_DECL SDA_EuclideanDistance(const SLData_t* SIGLIB_INPUT_PTR_DEC
   }
 }    // End of SDA_EuclideanDistance()
 
-/**/
-
 /********************************************************
  * Function: SDA_EuclideanDistanceSquared
  *
@@ -398,8 +375,6 @@ void SIGLIB_FUNC_DECL SDA_EuclideanDistanceSquared(const SLData_t* SIGLIB_INPUT_
   }
 }    // End of SDA_EuclideanDistanceSquared()
 
-/**/
-
 /********************************************************
  * Function: SDS_ManchesterEncode
  *
@@ -423,8 +398,6 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ManchesterEncode(const SLChar_t Input)
     return (0x1);
   }
 }    // End of SDS_ManchesterEncode()
-
-/**/
 
 /********************************************************
  * Function: SDS_ManchesterDecode
@@ -451,8 +424,6 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ManchesterDecode(const SLChar_t Input)
     return (0x3);    // If not 0x01 or 0x02 then it is an error
   }
 }    // End of SDS_ManchesterDecode()
-
-/**/
 
 /********************************************************
  * Function: SDS_ManchesterEncodeByte
@@ -483,8 +454,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ManchesterEncodeByte(const SLChar_t Input)
   return (Output);
 }    // End of SDS_ManchesterEncodeByte()
 
-/**/
-
 /********************************************************
  * Function: SDS_ManchesterDecodeByte
  *
@@ -513,8 +482,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ManchesterDecodeByte(const SLFixData_t Input)
   }
   return (Output);
 }    // End of SDS_ManchesterDecodeByte()
-
-/**/
 
 /********************************************************
  * Function: SIF_DetectNumericalWordSequence
@@ -547,8 +514,6 @@ void SIGLIB_FUNC_DECL SIF_DetectNumericalWordSequence(SLFixData_t* pBitMask, SLF
     pDetectorState[i] = 0;
   }
 }    // End of SIF_DetectNumericalWordSequence()
-
-/**/
 
 /********************************************************
  * Function: SDS_DetectNumericalWordSequence
@@ -590,8 +555,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_DetectNumericalWordSequence(SLFixData_t InputWo
   return (SynchDetectedFlag);
 }    // End of SDS_DetectNumericalWordSequence()
 
-/**/
-
 /********************************************************
  * Function: SIF_DetectNumericalBitSequence
  *
@@ -619,8 +582,6 @@ void SIGLIB_FUNC_DECL SIF_DetectNumericalBitSequence(SLFixData_t* pSynchSequence
     *pSynchSequenceBitMask += (SLFixData_t)(0x1U << (SLUFixData_t)i);
   }
 }    // End of SIF_DetectNumericalBitSequence()
-
-/**/
 
 /********************************************************
  * Function: SDS_DetectNumericalBitSequence
@@ -663,8 +624,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_DetectNumericalBitSequence(SLFixData_t Input
   return (SynchDetectedFlag);
 }    // End of SDS_DetectNumericalBitSequence()
 
-/**/
-
 /********************************************************
  * Function: SIF_DetectCharacterSequence
  *
@@ -687,8 +646,6 @@ void SIGLIB_FUNC_DECL SIF_DetectCharacterSequence(SLChar_t* SIGLIB_OUTPUT_PTR_DE
     pDetectorState[i] = (SLChar_t)0;
   }
 }    // End of SIF_DetectCharacterSequence()
-
-/**/
 
 /********************************************************
  * Function: SDS_DetectCharacterSequence
@@ -729,8 +686,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_DetectCharacterSequence(SLChar_t InputCharacter
   return (SynchDetectedFlag);
 }    // End of SDS_DetectCharacterSequence()
 
-/**/
-
 /********************************************************
  * Function: SDS_ErrorVector
  *
@@ -755,8 +710,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_ErrorVector(const SLComplexRect_s IdealPoint, cons
 
   return (ErrorVector);
 }    // End of SDS_ErrorVector()
-
-/**/
 
 /********************************************************
  * Function: SDS_ErrorVectorMagnitudePercent
@@ -785,8 +738,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_ErrorVectorMagnitudePercent(const SLComplexRect_s 
 
   return (ErrorVectorMagnitudePercent);
 }    // End of SDS_ErrorVectorMagnitudePercent()
-
-/**/
 
 /********************************************************
  * Function: SDS_ErrorVectorMagnitudeDecibels
@@ -822,8 +773,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_ErrorVectorMagnitudeDecibels(const SLComplexRect_s
   return (ErrorVectorMagnitudeDecibels);
 }    // End of SDS_ErrorVectorMagnitudeDecibels()
 
-/**/
-
 /********************************************************
  * Function: SDS_ReverseDiBits()
  *
@@ -842,8 +791,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ReverseDiBits(const SLFixData_t Src)
   static SLFixData_t ReverseTable[] = {0, 2, 1, 3};
   return (ReverseTable[Src]);
 }    // End of SDS_ReverseDiBits()
-
-/**/
 
 /********************************************************
  * Function: SDS_QpskBitErrorCount

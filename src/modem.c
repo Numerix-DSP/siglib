@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Modem utility functions for SigLib DSP library.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_MODEM 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SUF_AsyncCharacterLength
@@ -71,8 +68,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_AsyncCharacterLength(const SLArrayIndex_t Nu
   }
   return (OutputCharLength);
 }    // End of SUF_AsyncCharacterLength()
-
-/**/
 
 /********************************************************
  * Function: SDA_SyncToAsyncConverter
@@ -198,8 +193,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_SyncToAsyncConverter(const SLUInt8_t* pSrc, 
   return (OutputWordCount);
 }    // End of SDA_SyncToAsyncConverter()
 
-/**/
-
 /********************************************************
  * Function: SDA_AsyncToSyncConverter
  *
@@ -304,8 +297,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AsyncToSyncConverter(const SLUInt8_t* pSrc, 
   return (OutputWordCount);
 }    // End of SDA_AsyncToSyncConverter()
 
-/**/
-
 /********************************************************
  * Function: SIF_AsyncAddRemoveStopBits
  *
@@ -326,8 +317,6 @@ void SIGLIB_FUNC_DECL SIF_AsyncAddRemoveStopBits(SLArrayIndex_t* pRemoveCount)
 {
   *pRemoveCount = SIGLIB_AI_ZERO;
 }    // End of SIF_AsyncAddRemoveStopBits()
-
-/**/
 
 /********************************************************
  * Function: SDA_AsyncRemoveStopBits
@@ -432,8 +421,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AsyncRemoveStopBits(const SLUInt8_t* pSrc, S
 
   return (OutputWordCount);
 }    // End of SDA_AsyncRemoveStopBits()
-
-/**/
 
 /********************************************************
  * Function: SDA_AsyncAddStopBits
@@ -571,8 +558,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AsyncAddStopBits(const SLUInt8_t* pSrc, SLUI
   return (OutputWordCount);
 }    // End of SDA_AsyncAddStopBits()
 
-/**/
-
 /********************************************************
  * Function: SDA_DecreaseWordLength
  *
@@ -648,8 +633,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_DecreaseWordLength(const SLUInt8_t* pSrc, SL
 
   return (OutputWordCount);
 }    // End of SDA_DecreaseWordLength()
-
-/**/
 
 /********************************************************
  * Function: SDA_IncreaseWordLength

@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Correlation routines for SigLib DSP library.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_CORRELAT 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SDA_CorrelateLinear()
@@ -155,8 +152,6 @@ void SIGLIB_FUNC_DECL SDA_CorrelateLinear(const SLData_t* SIGLIB_PTR_DECL pSrc1,
 
 }    // End of SDA_CorrelateLinear()
 
-/**/
-
 /********************************************************
  * Function: SDA_CorrelatePartial()
  *
@@ -213,8 +208,6 @@ void SIGLIB_FUNC_DECL SDA_CorrelatePartial(const SLData_t* SIGLIB_PTR_DECL pSrc1
   }
 }    // End of SDA_CorrelatePartial()
 
-/**/
-
 /********************************************************
  * Function: SDA_CorrelateCircular()
  *
@@ -267,8 +260,6 @@ void SIGLIB_FUNC_DECL SDA_CorrelateCircular(const SLData_t* SIGLIB_PTR_DECL pSrc
     bo = 1;
   }
 }    // End of SDA_CorrelateCircular()
-
-/**/
 
 /********************************************************
  * Function: SDA_Covariance()
@@ -328,8 +319,6 @@ void SIGLIB_FUNC_DECL SDA_Covariance(SLData_t* SIGLIB_PTR_DECL pSrc1, SLData_t* 
   SDA_CorrelateLinear(pSrc1, pSrc2, pDst, Length1, Length2, NumCorr);
 }    // End of SDA_Covariance()
 
-/**/
-
 /********************************************************
  * Function: SDA_CovariancePartial()
  *
@@ -387,8 +376,6 @@ void SIGLIB_FUNC_DECL SDA_CovariancePartial(SLData_t* SIGLIB_PTR_DECL pSrc1, SLD
   SDA_CorrelatePartial(pSrc1, pSrc2, pDst, Length1, Length2);
 
 }    // End of SDA_CovariancePartial()
-
-/**/
 
 /********************************************************
  * Function: SDA_CorrelateLinearReturnPeak()

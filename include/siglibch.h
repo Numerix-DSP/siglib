@@ -34,7 +34,6 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Ch header file for SigLib DSP library
 
-
 ****************************************************************************/
 
 #include <siglib.h>

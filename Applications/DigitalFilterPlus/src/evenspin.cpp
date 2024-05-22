@@ -18,7 +18,6 @@
 
 #include "evenspin.h"
 
-/**/
 /********************************************************
  * Function : EvenSpinCtrl::EvenSpinCtrl ()
  *

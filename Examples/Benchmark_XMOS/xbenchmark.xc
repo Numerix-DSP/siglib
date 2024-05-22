@@ -21,4 +21,3 @@ int xbench_init(void)
   return (end_time - start_time);
 }
 
-

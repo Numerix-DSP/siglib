@@ -36,13 +36,11 @@ UINT CBuffer::GetSize()
     return (BufSize);
 }
 
-
 double CBuffer::GetMax()
 {
     UINT        i;
     double      Max;
     double      *PtrDMem;       // Ptr to double type data array
-
 
     PtrDMem = (double *)::LocalLock (HBuf);
 
@@ -66,7 +64,6 @@ double CBuffer::GetMax()
 }       /* End of find_max() */
 
 
-
 void CBuffer::PutSample(int nIndex, double sample) const
 {
     int dummy;
@@ -84,7 +81,6 @@ double CBuffer::GetSample(int nIndex) const
     return (0);
 }
 
-
                 // Clipboard operations
 BOOL CBuffer::Undo()
 { return (BOOL)::SendMessage(m_hWnd, EM_UNDO, 0, 0); }
@@ -100,5 +96,4 @@ void CBuffer::Cut()
 
 void CBuffer::Paste()
 { ::SendMessage(m_hWnd, WM_PASTE, 0, 0); }
-
 

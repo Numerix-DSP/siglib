@@ -1,15 +1,12 @@
 
 
-
                            Digital Filter Plus™
 
                        Digital Filter Design Program
 
-
                              Version 3.00
 
                               02-06-2021
-
 
 
 # Introduction
@@ -35,7 +32,7 @@ nmake -f makefile.vc BUILD=release clean && nmake -f makefile.vc BUILD=release R
 Ensure the SIGLIB_PATH environment variable is set correctly e.g.: Z:\Development\siglib
 
 Open a Visual Studio command prompt here: siglib\ngl
-Run the following command to build the Numerix Graphical Library:
+Run the following command to build the Numerix Graphics Library:
 build
 
 Open a Visual Studio command prompt here: siglib\Applications\DigitalFilterPlus\src
@@ -59,7 +56,7 @@ ldconfig
 export WXWIN=~/wxWidgets-3.2.4
 
 Open a command prompt here: siglib/ngl
-Run the following command to build the Numerix Graphical Library:
+Run the following command to build the Numerix Graphics Library:
 ./build_linux.sh
 
 Open a command prompt here: siglib/Applications/DigitalFilterPlus/src
@@ -68,7 +65,6 @@ make -f makefile.lx
 
 To perform a clean build:
 make -f makefile.lx clean
-
 
 ## macOS
 
@@ -83,7 +79,7 @@ sudo make install
 export WXWIN=~/wxWidgets-3.2.4
 
 Open a command prompt here: siglib/ngl
-Run the following command to build the Numerix Graphical Library:
+Run the following command to build the Numerix Graphics Library:
 ./build_macos.sh
 
 Open a command prompt here: siglib/Applications/DigitalFilterPlus/src
@@ -101,15 +97,12 @@ RELEASE DATE : 03/05/2024
 
 Open sourced
 
-
 # License
 
 This software is licensed under the terms of the GPL V2 license.
 
-
 Digital Filter Plus, DFPlus and SigLib are trademarks of Delta Numerix all other
 trademarks acknowledged.
-
 
 For additional information, please contact :
 

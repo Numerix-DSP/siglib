@@ -1,10 +1,8 @@
 
 
-
                  SigLib™
 
           Signal Processing Library
-
 
 
 
@@ -23,15 +21,12 @@ After generation the siglib_ti_memory_sections.h file should be copied to the
 
 All of this functionality is wrapped up into the batch file TIMemSectionsGenerate.bat.
 
-
 LICENSE
 
 For the full license agreement, please refer to the document
 "license.txt".
 
-
 DFPlus, and SigLib are trademarks of Delta Numerix all other trademarks acknowledged.
-
 
 For additional information, please contact:
 

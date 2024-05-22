@@ -1,13 +1,11 @@
 
 
-
                                 SigLib™
 
                        Signal Processing Library
                         Python Example Functions
 
                               27-09-2018
-
 
 
 INTRODUCTION
@@ -18,13 +16,10 @@ They have been tested with Anaconda 64 bit Python under Linux, Windows
 and OSX.
 
 
-
 Please read the appropriate section of the SigLib reference manual for
 further information.
 
-
 SigLib is a trademark of Delta Numerix all other trademarks acknowledged.
-
 
 For additional information, please contact:
 

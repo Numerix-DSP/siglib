@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: SigLib DSP library decimation and interpolation routines.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_DECINT 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SIF_Decimate
@@ -59,8 +56,6 @@ void SIGLIB_FUNC_DECL SIF_Decimate(SLArrayIndex_t* SIGLIB_PTR_DECL pDecimationIn
 {
   *pDecimationIndex = SIGLIB_AI_ZERO;
 }    // End of SIF_Decimate()
-
-/**/
 
 /********************************************************
  * Function: SDA_Decimate
@@ -102,8 +97,6 @@ void SIGLIB_FUNC_DECL SDA_Decimate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_
   *pSrcArrayIndex = LocalSrcArrayIndex - SrcArrayLength;
 }    // End of SDA_Decimate()
 
-/**/
-
 /********************************************************
  * Function: SIF_Interpolate
  *
@@ -120,8 +113,6 @@ void SIGLIB_FUNC_DECL SIF_Interpolate(SLArrayIndex_t* SIGLIB_PTR_DECL pInterpola
 {
   *pInterpolationIndex = SIGLIB_AI_ZERO;
 }    // End of SIF_Interpolate()
-
-/**/
 
 /********************************************************
  * Function: SDA_Interpolate
@@ -171,8 +162,6 @@ void SIGLIB_FUNC_DECL SDA_Interpolate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
   *pDstArrayIndex = LocalDstArrayIndex - DstArrayLength;
 }    // End of SDA_Interpolate()
 
-/**/
-
 /********************************************************
  * Function: SIF_FilterAndDecimate
  *
@@ -196,8 +185,6 @@ void SIGLIB_FUNC_DECL SIF_FilterAndDecimate(SLData_t* SIGLIB_PTR_DECL pState, SL
   *pDecimationIndex = SIGLIB_AI_ZERO;
   *pFilterIndex = SIGLIB_AI_ZERO;
 }    // End of SIF_FilterAndDecimate()
-
-/**/
 
 /********************************************************
  * Function: SDA_FilterAndDecimate
@@ -260,8 +247,6 @@ void SIGLIB_FUNC_DECL SDA_FilterAndDecimate(const SLData_t* SIGLIB_PTR_DECL pSrc
   *pSrcArrayIndex = LocalSrcArrayIndex - SrcArrayLength;
 }    // End of SDA_FilterAndDecimate()
 
-/**/
-
 /********************************************************
  * Function: SIF_InterpolateAndFilter
  *
@@ -285,8 +270,6 @@ void SIGLIB_FUNC_DECL SIF_InterpolateAndFilter(SLData_t* SIGLIB_PTR_DECL pState,
   *pInterpolationIndex = SIGLIB_AI_ZERO;
   *pFilterIndex = SIGLIB_AI_ZERO;
 }    // End of SIF_InterpolateAndFilter()
-
-/**/
 
 /********************************************************
  * Function: SDA_InterpolateAndFilter
@@ -352,8 +335,6 @@ void SIGLIB_FUNC_DECL SDA_InterpolateAndFilter(const SLData_t* SIGLIB_PTR_DECL p
   SDA_Multiply(pDst, (SLData_t)InterpolationRatio, pDst, DstArrayLength);
 }    // End of SDA_InterpolateAndFilter()
 
-/**/
-
 /********************************************************
  * Function: SDA_ResampleLinear
  *
@@ -400,8 +381,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleLinear(const SLData_t* SIGLIB_PTR_DE
 
   return (outputSampleCount);
 }    // End of SDA_ResampleLinear()
-
-/**/
 
 /********************************************************
  * Function: SDA_ResampleLinearNSamples
@@ -462,8 +441,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleLinearNSamples(const SLData_t* SIGLI
   return (outputSampleCount);
 }    // End of SDA_ResampleLinearNSamples()
 
-/**/
-
 /********************************************************
  * Function: SDA_InterpolateLinear1D
  *
@@ -498,8 +475,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateLinear1D(const SLData_t* SIGLIB_PTR_DEC
 
   return (y0 + ((x - x0) * (y1 - y0)));
 }    // End of SDA_InterpolateLinear1D()
-
-/**/
 
 /********************************************************
  * Function: SDA_InterpolateLinear2D
@@ -537,8 +512,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateLinear2D(const SLData_t* SIGLIB_PTR_DEC
   return (y0 + ((x - x0) * ((y1 - y0) / (x1 - x0))));
 }    // End of SDA_InterpolateLinear2D()
 
-/**/
-
 /********************************************************
  * Function: SIF_ResampleSinc
  *
@@ -569,8 +542,6 @@ void SIGLIB_FUNC_DECL SIF_ResampleSinc(SLData_t* pSincLUT, SLData_t* pPhaseGain,
 
   *pPhaseGain = SIGLIB_ONE / localPhaseGain;    // Invert for use in the quick functions
 }    // End of SIF_ResampleSinc()
-
-/**/
 
 /********************************************************
  * Function: SIF_ResampleWindowedSinc
@@ -613,8 +584,6 @@ void SIGLIB_FUNC_DECL SIF_ResampleWindowedSinc(SLData_t* pSincLUT, SLData_t* pPh
   SDA_Multiply2(pSincLUT, pWindowCoeffs, pSincLUT,
                 SincTableLength);    // Cross multiply sinc data with window table
 }    // End of SIF_ResampleWindowedSinc()
-
-/**/
 
 /********************************************************
  * Function: SDA_ResampleSinc
@@ -694,8 +663,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSinc(const SLData_t* SIGLIB_PTR_DECL
 
   return (outputSampleCount);
 }    // End of SDA_ResampleSinc()
-
-/**/
 
 /********************************************************
  * Function: SDA_ResampleSincNSamples
@@ -779,8 +746,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSincNSamples(const SLData_t* SIGLIB_
   return (outputSampleCount);
 }    // End of SDA_ResampleSincNSamples()
 
-/**/
-
 /********************************************************
  * Function: SIF_InterpolateSinc1D
  *
@@ -810,8 +775,6 @@ void SIGLIB_FUNC_DECL SIF_InterpolateSinc1D(SLData_t* pSincLUT, SLData_t* pPhase
 
   *pPhaseGain = SIGLIB_ONE / localPhaseGain;    // Invert for use in the quick functions
 }    // End of SIF_InterpolateSinc1D()
-
-/**/
 
 /********************************************************
  * Function: SIF_InterpolateWindowedSinc1D
@@ -853,8 +816,6 @@ void SIGLIB_FUNC_DECL SIF_InterpolateWindowedSinc1D(SLData_t* pSincLUT, SLData_t
   SDA_Multiply2(pSincLUT, pWindowCoeffs, pSincLUT,
                 SincTableLength);    // Cross multiply sinc data with window table
 }    // End of SIF_InterpolateWindowedSinc1D()
-
-/**/
 
 /********************************************************
  * Function: SDA_InterpolateSinc1D
@@ -912,8 +873,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateSinc1D(const SLData_t* SIGLIB_PTR_DECL 
   return (y);
 }
 
-/**/
-
 /********************************************************
  * Function: SIF_ResampleLinearContiguous
  *
@@ -934,8 +893,6 @@ void SIGLIB_FUNC_DECL SIF_ResampleLinearContiguous(SLData_t* pPreviousXValue, SL
   *pPreviousXValue = SIGLIB_ZERO;
   *pPreviousYValue = SIGLIB_ZERO;
 }    // End of SIF_ResampleLinearContiguous()
-
-/**/
 
 /********************************************************
  * Function: SDA_ResampleLinearContiguous
@@ -1006,8 +963,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleLinearContiguous(const SLData_t* SIG
   return (outputSampleCount);
 }    // End of SDA_ResampleLinearContiguous()
 
-/**/
-
 /********************************************************
  * Function: SIF_ResampleSincContiguous
  *
@@ -1046,8 +1001,6 @@ void SIGLIB_FUNC_DECL SIF_ResampleSincContiguous(SLData_t* pPreviousXValue, SLDa
     *pXDataTable++ = SIGLIB_ZERO;
   }
 }    // End of SIF_ResampleSincContiguous()
-
-/**/
 
 /********************************************************
  * Function: SIF_ResampleWindowedSincContiguous
@@ -1099,8 +1052,6 @@ void SIGLIB_FUNC_DECL SIF_ResampleWindowedSincContiguous(SLData_t* pPreviousXVal
     *pXDataTable++ = SIGLIB_ZERO;
   }
 }    // End of SIF_ResampleWindowedSincContiguous()
-
-/**/
 
 /********************************************************
  * Function: SDA_ResampleSincContiguous
@@ -1218,8 +1169,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSincContiguous(const SLData_t* SIGLI
   return (outputSampleCount);
 }    // End of SDA_ResampleSincContiguous()
 
-/**/
-
 /********************************************************
  * Function: SDS_InterpolateQuadratic1D
  *
@@ -1247,8 +1196,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_InterpolateQuadratic1D(const SLData_t inputY0, con
 
   return (inputY1 + (deltaX * (deltaY1 + (SIGLIB_HALF * deltaX * deltaY2))));
 }    // End of SDS_InterpolateQuadratic1D()
-
-/**/
 
 /********************************************************
  * Function: SDS_InterpolateQuadraticBSpline1D
@@ -1279,8 +1226,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_InterpolateQuadraticBSpline1D(const SLData_t input
 
   return ((inputY0 * h2) + (inputY1 * +h1) + (inputY2 * h0));
 }    // End of SDS_InterpolateQuadraticBSpline1D()
-
-/**/
 
 /********************************************************
  * Function: SDS_InterpolateQuadraticLagrange1D

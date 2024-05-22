@@ -2,8 +2,7 @@
        CONSOLE APPLICATION : BenchIIR
 ========================================================================
 
-
-AppWizard has created this BenchIIR application for you.  
+AppWizard has created this BenchIIR application for you.
 
 This file contains a summary of what you will find in each of the files that
 make up your BenchIIR application.
@@ -16,14 +15,12 @@ BenchIIR.dsp
 BenchIIR.cpp
     This is the main application source file.
 
-
 /////////////////////////////////////////////////////////////////////////////
 Other standard files:
 
 StdAfx.h, StdAfx.cpp
     These files are used to build a precompiled header (PCH) file
     named BenchIIR.pch and a precompiled types file named StdAfx.obj.
-
 
 /////////////////////////////////////////////////////////////////////////////
 Other notes:

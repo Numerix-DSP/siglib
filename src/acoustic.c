@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Acoustic signal processing functions, for SigLib DSP library.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_ACOUSTIC 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SDA_LinearMicrophoneArrayBeamPattern
@@ -98,8 +95,6 @@ void SIGLIB_FUNC_DECL SDA_LinearMicrophoneArrayBeamPattern(const SLFixData_t num
   } while (angle <= endAngle);
 } /* End of SDA_LinearMicrophoneArrayBeamPattern() */
 
-/**/
-
 /********************************************************
  * Function: SDA_LinearMicrophoneArrayBeamPatternLinear
  *
@@ -153,8 +148,6 @@ void SIGLIB_FUNC_DECL SDA_LinearMicrophoneArrayBeamPatternLinear(const SLFixData
   } while (angle <= endAngle);
 } /* End of SDA_LinearMicrophoneArrayBeamPatternLinear() */
 
-/**/
-
 /********************************************************
  * Function: SDA_MicrophoneArrayCalculateDelays
  *
@@ -203,8 +196,6 @@ void SIGLIB_FUNC_DECL SDA_MicrophoneArrayCalculateDelays(const SLFixData_t numMi
     // microphones[micNum].delay);
   }
 } /* End of SDA_MicrophoneArrayCalculateDelays() */
-
-/**/
 
 /********************************************************
  * Function: SDA_MicrophoneArrayBeamPattern
@@ -277,8 +268,6 @@ void SIGLIB_FUNC_DECL SDA_MicrophoneArrayBeamPattern(const SLFixData_t numMics, 
   } while (calcAngle <= endAngle);
 } /* End of SDA_MicrophoneArrayBeamPattern() */
 
-/**/
-
 /********************************************************
  * Function: SDA_MicrophoneArrayBeamPatternLinear
  *
@@ -347,8 +336,6 @@ void SIGLIB_FUNC_DECL SDA_MicrophoneArrayBeamPatternLinear(const SLFixData_t num
     calcAngle += ((endAngle - startAngle) / (SLData_t)(numAngles - 1));
   } while (calcAngle <= endAngle);
 } /* End of SDA_MicrophoneArrayBeamPatternLinear() */
-
-/**/
 
 /********************************************************
  * Function: SDA_MicrophoneArrayBeamPatternLinear

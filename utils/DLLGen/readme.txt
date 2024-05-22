@@ -1,10 +1,8 @@
 
 
-
                  SigLib™
 
           Signal Processing Library
-
 
 
 
@@ -21,15 +19,12 @@ After generation the siglib.def file should be copied to the /siglib/src folder.
 
 All of this functionality is wrapped up into the batch file DefGenerate.bat.
 
-
 LICENSE
 
 For the full license agreement, please refer to the document
 "license.txt".
 
-
 DFPlus, and SigLib are trademarks of Delta Numerix all other trademarks acknowledged.
-
 
 For additional information, please contact:
 

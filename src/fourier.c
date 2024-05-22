@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: SigLib DSP library Generic Fourier Transform routines.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_FOURIER 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SIF_ZoomFft
@@ -110,8 +107,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_ZoomFft(SLData_t* SIGLIB_PTR_DECL pRealCombFilter
 
   return (ErrorCode);
 }    // End of SIF_ZoomFft()
-
-/**/
 
 /********************************************************
  * Function: SDA_ZoomFft
@@ -280,8 +275,6 @@ void SIGLIB_FUNC_DECL SDA_ZoomFft(
   }
 }    // End of SDA_ZoomFft()
 
-/**/
-
 /********************************************************
  * Function: SIF_ZoomFftSimple
  *
@@ -321,8 +314,6 @@ void SIGLIB_FUNC_DECL SIF_ZoomFftSimple(SLData_t* SIGLIB_PTR_DECL pCombFilter1, 
   SIF_Fft(pFFTCoeffs, pBitReverseAddressTable,
           FFTLength);    // Initialise the FFT sine and cosine tables
 }    // End of SIF_ZoomFftSimple()
-
-/**/
 
 /********************************************************
  * Function: SDA_ZoomFftSimple
@@ -461,8 +452,6 @@ void SIGLIB_FUNC_DECL SDA_ZoomFftSimple(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
   SDA_Cfft(RealData, ImagData, pFFTCoeffs, pBitReverseAddressTable, FFTLength, Log2Size);
 }    // End of SDA_ZoomFftSimple()
 
-/**/
-
 /********************************************************
  * Function: SIF_FdHilbert
  *
@@ -489,8 +478,6 @@ void SIGLIB_FUNC_DECL SIF_FdHilbert(SLData_t* SIGLIB_PTR_DECL pFFTCoeffs, SLArra
 
   *pInverseFFTLength = SIGLIB_ONE / FFTLength;
 }    // End of SIF_FdHilbert()
-
-/**/
 
 /********************************************************
  * Function: SDA_FdHilbert
@@ -567,8 +554,6 @@ void SIGLIB_FUNC_DECL SDA_FdHilbert(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData
             Log2FFTLength);    // Convert to time domain
 }    // End of SDA_FdHilbert()
 
-/**/
-
 /********************************************************
  * Function: SIF_FdAnalytic
  *
@@ -595,8 +580,6 @@ void SIGLIB_FUNC_DECL SIF_FdAnalytic(SLData_t* SIGLIB_PTR_DECL pFFTCoeffs, SLArr
 
   *pInverseFFTLength = SIGLIB_ONE / FFTLength;
 }    // End of SIF_FdAnalytic()
-
-/**/
 
 /********************************************************
  * Function: SDA_FdAnalytic
@@ -647,8 +630,6 @@ void SIGLIB_FUNC_DECL SDA_FdAnalytic(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDat
            FFTLength);    // Array length
 }    // End of SDA_FdAnalytic()
 
-/**/
-
 /********************************************************
  * Function: SDA_InstantFreq
  *
@@ -691,8 +672,6 @@ void SIGLIB_FUNC_DECL SDA_InstantFreq(const SLData_t* SIGLIB_PTR_DECL pSLead, co
   }
   *pDst = *(pDst - 1);
 }    // End of SDA_InstantFreq()
-
-/**/
 
 /********************************************************
  * Function: SDA_Rdft
@@ -778,8 +757,6 @@ void SIGLIB_FUNC_DECL SDA_Ridft(const SLData_t pRealData[], SLData_t pDstReal[],
     pDstImag[i] = imag_sum * InverseFTSize;
   }
 }    // End of SDA_Ridft()
-
-/**/
 
 /********************************************************
  * Function: SDA_Cdft
@@ -874,8 +851,6 @@ void SIGLIB_FUNC_DECL SDA_Cidft(const SLData_t pSrcReal[], const SLData_t pSrcIm
   }
 }    // End of SDA_Cidft()
 
-/**/
-
 /********************************************************
  * Function: SDA_FftShift
  *
@@ -914,8 +889,6 @@ void SIGLIB_FUNC_DECL SDA_FftShift(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_
     *HpDst++ = tmp;
   }
 }    // End of SDA_FftShift()
-
-/**/
 
 /********************************************************
  * Function: SDA_CfftShift
@@ -972,8 +945,6 @@ void SIGLIB_FUNC_DECL SDA_CfftShift(const SLData_t* SIGLIB_PTR_DECL pSrcReal, co
   }
 }    // End of SDA_CfftShift()
 
-/**/
-
 /********************************************************
  * Function: SDA_FftExtend
  *
@@ -1004,8 +975,6 @@ void SIGLIB_FUNC_DECL SDA_FftExtend(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData
            SIGLIB_ZERO,                                                                       // Value
            dstArrayLength - srcArrayLength);                                                  // Array length
 }    // End of SDA_FftExtend()
-
-/**/
 
 /********************************************************
  * Function: SDA_CfftExtend
@@ -1051,8 +1020,6 @@ void SIGLIB_FUNC_DECL SDA_CfftExtend(const SLData_t* SIGLIB_PTR_DECL pSrcReal, c
            dstArrayLength - srcArrayLength);                                                      // Array length
 }    // End of SDA_CfftExtend()
 
-/**/
-
 /********************************************************
  * Function: SIF_DctII
  *
@@ -1078,8 +1045,6 @@ void SIGLIB_FUNC_DECL SIF_DctII(SLData_t* SIGLIB_PTR_DECL pCosAnglesLUT, const S
     }
   }
 }    // End of SIF_DctII()
-
-/**/
 
 /********************************************************
  * Function: SDA_DctII
@@ -1109,8 +1074,6 @@ void SIGLIB_FUNC_DECL SDA_DctII(const SLData_t* SIGLIB_PTR_DECL pTime, SLData_t*
     pFreq[k] = sum;
   }
 }    // End of SDA_DctII()
-
-/**/
 
 /********************************************************
  * Function: SIF_DctIIOrthogonal
@@ -1142,8 +1105,6 @@ void SIGLIB_FUNC_DECL SIF_DctIIOrthogonal(SLData_t* pSqrtHalf, SLData_t* pOutput
     }
   }
 }    // End of SIF_DctIIOrthogonal()
-
-/**/
 
 /********************************************************
  * Function: SDA_DctIIOrthogonal

@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{0842D103-1E19-101B-9AAF-1A1626551E7C}#1.0#0"; "GRAPH32.OCX"
-Begin VB.Form Form1 
+Begin VB.Form Form1
    Caption         =   "SigLib DLL Test"
    ClientHeight    =   7230
    ClientLeft      =   1140
@@ -10,7 +10,7 @@ Begin VB.Form Form1
    PaletteMode     =   1  'UseZOrder
    ScaleHeight     =   7230
    ScaleWidth      =   9030
-   Begin GraphLib.Graph SigLibData 
+   Begin GraphLib.Graph SigLibData
       Height          =   4815
       Left            =   1080
       TabIndex        =   0
@@ -63,9 +63,9 @@ x	Private Sub Form_Load()
     SignalOffset# = 0#
     Zero# = 0#
     Dummy& = 0
-    
+
     fDummy# = SUF_SiglibVersion()
-    
+
     Dummy& = SDA_SignalGenerate(Buffer(0), SINE_WAVE, SignalMagn#, SIG_FILL, SignalFreq#, SignalOffset#, Zero#, Zero#, SignalPhase#, 0, Length&)
     SigLibData.ThisSet = 1
     SigLibData.NumPoints = Length&
@@ -74,5 +74,4 @@ x	Private Sub Form_Load()
         SigLibData.GraphData = Buffer(I%)
     Next I%
 End Sub
-
 

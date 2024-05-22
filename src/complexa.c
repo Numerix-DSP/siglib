@@ -35,14 +35,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 Description: Complex number routines for SigLib DSP library.
     Complex numbers are processed as arrays.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_COMPLEX_ARRAY 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SDA_CreateComplexRect()
@@ -83,8 +80,6 @@ void SIGLIB_FUNC_DECL SDA_CreateComplexRect(const SLData_t* SIGLIB_PTR_DECL pSrc
 #endif
   }
 }    // End of SDA_CreateComplexRect()
-
-/**/
 
 /********************************************************
  * Function: SDA_CreateComplexPolar()
@@ -127,8 +122,6 @@ void SIGLIB_FUNC_DECL SDA_CreateComplexPolar(const SLData_t* SIGLIB_PTR_DECL pSr
   }
 }    // End of SDA_CreateComplexPolar()
 
-/**/
-
 /********************************************************
  * Function: SDA_ExtractComplexRect()
  *
@@ -168,8 +161,6 @@ void SIGLIB_FUNC_DECL SDA_ExtractComplexRect(const SLComplexRect_s* SIGLIB_PTR_D
 #endif
   }
 }    // End of SDA_ExtractComplexRect()
-
-/**/
 
 /********************************************************
  * Function: SDA_ExtractComplexPolar()
@@ -211,8 +202,6 @@ void SIGLIB_FUNC_DECL SDA_ExtractComplexPolar(const SLComplexPolar_s* SIGLIB_PTR
   }
 }    // End of SDA_ExtractComplexPolar()
 
-/**/
-
 /********************************************************
  * Function: SDA_ClearComplexRect()
  *
@@ -247,8 +236,6 @@ void SIGLIB_FUNC_DECL SDA_ClearComplexRect(SLComplexRect_s* SIGLIB_PTR_DECL pDst
 #endif
   }
 }    // End of SDA_ClearComplexRect()
-
-/**/
 
 /********************************************************
  * Function: SDA_ClearComplexPolar()
@@ -285,8 +272,6 @@ void SIGLIB_FUNC_DECL SDA_ClearComplexPolar(SLComplexPolar_s* SIGLIB_PTR_DECL pD
   }
 }    // End of SDA_ClearComplexPolar()
 
-/**/
-
 /********************************************************
  * Function: SDA_FillComplexRect()
  *
@@ -320,8 +305,6 @@ void SIGLIB_FUNC_DECL SDA_FillComplexRect(SLComplexRect_s* SIGLIB_PTR_DECL pDst,
 #endif
   }
 }    // End of SDA_FillComplexRect()
-
-/**/
 
 /********************************************************
  * Function: SDA_FillComplexPolar()
@@ -357,8 +340,6 @@ void SIGLIB_FUNC_DECL SDA_FillComplexPolar(SLComplexPolar_s* SIGLIB_PTR_DECL pDs
 #endif
   }
 }    // End of SDA_FillComplexPolar()
-
-/**/
 
 /********************************************************
  * Function: SDA_ComplexRectangularToPolar
@@ -400,8 +381,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectangularToPolar(const SLComplexRect_s* SIGLI
   }
 }    // End of SDA_ComplexRectangularToPolar()
 
-/**/
-
 /********************************************************
  * Function: SDA_ComplexPolarToRectangular
  *
@@ -434,8 +413,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexPolarToRectangular(const SLComplexPolar_s* SIGL
     pSrc++;
   }
 }    // End of SDA_ComplexPolarToRectangular()
-
-/**/
 
 /********************************************************
  * Function: SDA_RectangularToPolar
@@ -484,8 +461,6 @@ void SIGLIB_FUNC_DECL SDA_RectangularToPolar(const SLData_t* SIGLIB_PTR_DECL pSr
   }
 }    // End of SDA_RectangularToPolar()
 
-/**/
-
 /********************************************************
  * Function: SDA_PolarToRectangular
  *
@@ -523,8 +498,6 @@ void SIGLIB_FUNC_DECL SDA_PolarToRectangular(const SLData_t* SIGLIB_PTR_DECL pSr
   }
 }    // End of SDA_PolarToRectangular()
 
-/**/
-
 /********************************************************
  * Function: SDA_ComplexRectSqrt
  *
@@ -561,8 +534,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectSqrt(const SLComplexRect_s* SIGLIB_PTR_DECL
     *pDst++ = SCV_PolarToRectangular(PVect);
   }
 }    // End of SDA_ComplexRectSqrt()
-
-/**/
 
 /********************************************************
  * Function: SDA_ComplexRectInverse
@@ -607,8 +578,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectInverse(const SLComplexRect_s* SIGLIB_PTR_D
   }
 }    // End of SDA_ComplexRectInverse()
 
-/**/
-
 /********************************************************
  * Function: SDA_ComplexRectConjugate
  *
@@ -642,8 +611,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectConjugate(const SLComplexRect_s* SIGLIB_PTR
   }
 }    // End of SDA_ComplexRectConjugate()
 
-/**/
-
 /********************************************************
  * Function: SDA_ComplexRectMagnitude
  *
@@ -675,8 +642,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectMagnitude(const SLComplexRect_s* SIGLIB_PTR
     *pDst++ = SDS_Sqrt(IVect.real * IVect.real + IVect.imag * IVect.imag);
   }
 }    // End of SDA_ComplexRectMagnitude()
-
-/**/
 
 /********************************************************
  * Function: SDA_ComplexRectMagnitudeSquared
@@ -710,8 +675,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectMagnitudeSquared(const SLComplexRect_s* SIG
   }
 }    // End of SDA_ComplexRectMagnitudeSquared()
 
-/**/
-
 /********************************************************
  * Function: SDA_ComplexRectPhase
  *
@@ -743,8 +706,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectPhase(const SLComplexRect_s* SIGLIB_PTR_DEC
     *pDst++ = SDS_Atan2(IVect.imag, IVect.real);
   }
 }    // End of SDA_ComplexRectPhase()
-
-/**/
 
 /********************************************************
  * Function: SDA_ComplexRectMultiply
@@ -783,8 +744,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectMultiply(const SLComplexRect_s* SIGLIB_PTR_
     *pDst++ = OVect;
   }
 }    // End of SDA_ComplexRectMultiply()
-
-/**/
 
 /********************************************************
  * Function: SDA_ComplexRectDivide
@@ -837,8 +796,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectDivide(const SLComplexRect_s* SIGLIB_PTR_DE
   }
 }    // End of SDA_ComplexRectDivide()
 
-/**/
-
 /********************************************************
  * Function: SDA_ComplexRectAdd
  *
@@ -876,8 +833,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectAdd(const SLComplexRect_s* SIGLIB_PTR_DECL 
     *pDst++ = OVect;
   }
 }    // End of SDA_ComplexRectAdd()
-
-/**/
 
 /********************************************************
  * Function: SDA_ComplexRectSubtract
@@ -917,8 +872,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectSubtract(const SLComplexRect_s* SIGLIB_PTR_
   }
 }    // End of SDA_ComplexRectSubtract()
 
-/**/
-
 /********************************************************
  * Function: SDA_ComplexRectLog
  *
@@ -953,8 +906,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectLog(const SLComplexRect_s* SIGLIB_PTR_DECL 
     *pDst++ = OVect;
   }
 }    // End of SDA_ComplexRectLog()
-
-/**/
 
 /********************************************************
  * Function: SDA_ComplexRectExp
@@ -992,8 +943,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectExp(const SLComplexRect_s* SIGLIB_PTR_DECL 
   }
 }    // End of SDA_ComplexRectExp()
 
-/**/
-
 /********************************************************
  * Function: SDA_ComplexRectExpj
  *
@@ -1025,8 +974,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectExpj(const SLData_t* SIGLIB_PTR_DECL pSrc, 
     pSrc++;
   }
 }    // End of SDA_ComplexRectExpj()
-
-/**/
 
 /********************************************************
  * Function: SDA_ComplexRectPow
@@ -1076,8 +1023,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectPow(const SLComplexRect_s* SIGLIB_PTR_DECL 
   }
 }    // End of SDA_ComplexRectPow()
 
-/**/
-
 /********************************************************
  * Function: SDA_ComplexRectAddScalar
  *
@@ -1113,8 +1058,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectAddScalar(const SLComplexRect_s* SIGLIB_PTR
     *pDst++ = OVect;
   }
 }    // End of SDA_ComplexRectAddScalar()
-
-/**/
 
 /********************************************************
  * Function: SDA_ComplexRectSubtractScalar
@@ -1152,8 +1095,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectSubtractScalar(const SLComplexRect_s* SIGLI
   }
 }    // End of SDA_ComplexRectSubtractScalar()
 
-/**/
-
 /********************************************************
  * Function: SDA_ComplexRectMultiplyScalar
  *
@@ -1189,8 +1130,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectMultiplyScalar(const SLComplexRect_s* SIGLI
     *pDst++ = OVect;
   }
 }    // End of SDA_ComplexRectMultiplyScalar()
-
-/**/
 
 /********************************************************
  * Function: SDA_ComplexRectDivideScalar
@@ -1230,8 +1169,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectDivideScalar(const SLComplexRect_s* SIGLIB_
   }
 }    // End of SDA_ComplexRectDivideScalar()
 
-/**/
-
 /********************************************************
  * Function: SDA_ComplexScalarSubtractRect
  *
@@ -1267,8 +1204,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexScalarSubtractRect(const SLData_t Scalar, const
     *pDst++ = OVect;
   }
 }    // End of SDA_ComplexScalarSubtractRect()
-
-/**/
 
 /********************************************************
  * Function: SDA_ComplexRectLinearInterpolate
@@ -1310,8 +1245,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectLinearInterpolate(const SLComplexRect_s rPo
   pDst->real = rPoint2.real;
   pDst++->imag = rPoint2.imag;
 }    // End of SDA_ComplexRectLinearInterpolate()
-
-/**/
 
 /********************************************************
  * Function: SDA_ComplexPolarLinearInterpolate

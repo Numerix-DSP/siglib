@@ -6,7 +6,6 @@
 
             Visual Basic Test Program For SigLib DLL
 
-
 INTRODUCTION
 
 This program is written for and tested with the 32 bit Visual Basic 6.00.
@@ -22,7 +21,6 @@ declarations:
 
 	vbglobal.bas		Visual Basic 6.0
 	vbglobal.NET.bas	Visual Basic .NET
-
 
 NOTES
 
@@ -42,10 +40,8 @@ LICENSE
 For the full license agreement, please refer to the document
 "license.txt".
 
-
 DFPlus, and SigLib are trademarks of Delta Numerix all other
 trademarks acknowledged.
-
 
 For additional information, please contact:
 

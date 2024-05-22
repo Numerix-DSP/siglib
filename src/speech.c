@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Speech processing functions for SigLib DSP library.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_SPEECH 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SIF_PreEmphasisFilter
@@ -61,8 +58,6 @@ void SIGLIB_FUNC_DECL SIF_PreEmphasisFilter(SLData_t* pState)
 {
   *pState = SIGLIB_ZERO;
 }
-
-/**/
 
 /********************************************************
  * Function: SDA_PreEmphasisFilter
@@ -101,8 +96,6 @@ void SIGLIB_FUNC_DECL SDA_PreEmphasisFilter(SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
   *pState = LocalState;    // Save state for next iteration
 }
 
-/**/
-
 /********************************************************
  * Function: SIF_DeEmphasisFilter
  *
@@ -121,8 +114,6 @@ void SIGLIB_FUNC_DECL SIF_DeEmphasisFilter(SLData_t* pState)
 {
   *pState = SIGLIB_ZERO;
 }
-
-/**/
 
 /********************************************************
  * Function: SDA_DeEmphasisFilter
@@ -159,8 +150,6 @@ void SIGLIB_FUNC_DECL SDA_DeEmphasisFilter(SLData_t* SIGLIB_PTR_DECL pSrc, SLDat
   }
   *pState = LocalState;    // Save state for next iteration
 }
-
-/**/
 
 /********************************************************
  * Function: SDA_AdpcmEncoder
@@ -232,8 +221,6 @@ void SIGLIB_FUNC_DECL SDA_AdpcmEncoder(const SLData_t* SIGLIB_PTR_DECL pSrc, SLD
     LocalPreviousInput = LocalInput;
   }
 }
-
-/**/
 
 /********************************************************
  * Function: SDA_AdpcmEncoderDebug
@@ -315,8 +302,6 @@ void SIGLIB_FUNC_DECL SDA_AdpcmEncoderDebug(const SLData_t* SIGLIB_PTR_DECL pSrc
     LocalPreviousInput = LocalInput;
   }
 }
-
-/**/
 
 /********************************************************
  * Function: SDA_AdpcmDecoder

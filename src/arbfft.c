@@ -41,8 +41,6 @@ Description: SigLib DSP library Arbitrary length Fast Fourier Transform
 
 #include <siglib.h>    // Include SigLib header file
 
-/**/
-
 /********************************************************
  * Function: SIF_FftArb
  *
@@ -101,8 +99,6 @@ void SIGLIB_FUNC_DECL SIF_FftArb(SLData_t* SIGLIB_PTR_DECL pAWNr, SLData_t* SIGL
   *pInverseSampleLengthXFFTLength = SIGLIB_ONE / (((SLData_t)SampleLength) * ((SLData_t)*pFFTLength));
 }    // End of SIF_FftArb()
 
-/**/
-
 /********************************************************
  * Function: SUF_FftArbAllocLength
  *
@@ -137,8 +133,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_FftArbAllocLength(const SLArrayIndex_t Sampl
 
   return (FFTLength);
 }    // End of SUF_FftArbAllocLength()
-
-/**/
 
 /********************************************************
  * Function: SDA_RfftArb
@@ -211,8 +205,6 @@ void SIGLIB_FUNC_DECL SDA_RfftArb(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
     SDA_ComplexScalarMultiply(pRealDst, pImagDst, InverseSampleLengthXFFTLength, pRealDst, pImagDst, SampleLength);
   }
 }    // End of SDA_RfftArb()
-
-/**/
 
 /********************************************************
  * Function: SDA_CfftArb
@@ -288,8 +280,6 @@ void SIGLIB_FUNC_DECL SDA_CfftArb(const SLData_t* SIGLIB_PTR_DECL pSrcReal, cons
     SDA_ComplexScalarMultiply(pRealDst, pImagDst, InverseSampleLengthXFFTLength, pRealDst, pImagDst, SampleLength);
   }
 }    // End of SDA_CfftArb()
-
-/**/
 
 /********************************************************
  * Function: SDA_CifftArb

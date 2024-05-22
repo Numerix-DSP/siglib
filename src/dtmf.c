@@ -44,8 +44,6 @@ Description: DSP maths utility functions, for SigLib DSP library.
 SLData_t siglib_numerix_GoertzelCoeffL0, siglib_numerix_GoertzelCoeffL1, siglib_numerix_GoertzelCoeffL2, siglib_numerix_GoertzelCoeffL3;
 SLData_t siglib_numerix_GoertzelCoeffH0, siglib_numerix_GoertzelCoeffH1, siglib_numerix_GoertzelCoeffH2, siglib_numerix_GoertzelCoeffH3;
 
-/**/
-
 /********************************************************
  * Function: SIF_DtmfGenerate()
  *
@@ -88,8 +86,6 @@ void SIGLIB_FUNC_DECL SIF_DtmfGenerate(SLData_t* SIGLIB_PTR_DECL pDTMFGenCoeff, 
   }
 #endif
 }    // End of SIF_DtmfGenerate()
-
-/**/
 
 /********************************************************
  * Function: SDA_DtmfGenerate()
@@ -234,8 +230,6 @@ SLError_t SIGLIB_FUNC_DECL SDA_DtmfGenerate(SLData_t* SIGLIB_PTR_DECL pDst, cons
   return (SIGLIB_NO_ERROR);
 }    // End of SDA_DtmfGenerate()
 
-/**/
-
 /********************************************************
  * Function: SIF_DtmfDetect()
  *
@@ -287,8 +281,6 @@ void SIGLIB_FUNC_DECL SIF_DtmfDetect(const SLData_t SampleRate, const SLArrayInd
                    siglib_numerix_GoertzelCoeffH3.imag);
 #endif
 }    // End of SIF_DtmfDetect()
-
-/**/
 
 /********************************************************
  * Function: SDA_DtmfDetect()
@@ -411,8 +403,6 @@ SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetect(SLData_t* SIGLIB_PTR_DECL pSrc, const
 
   return (KeyCode);
 }    // End of SDA_DtmfDetect()
-
-/**/
 
 /********************************************************
  * Function: SDA_DtmfDetectAndValidate()
@@ -608,8 +598,6 @@ SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetectAndValidate(SLData_t* SIGLIB_PTR_DECL 
   return (KeyCode);
 }    // End of SDA_DtmfDetectAndValidate()
 
-/**/
-
 /********************************************************
  * Function: SUF_AsciiToKeyCode()
  *
@@ -686,8 +674,6 @@ SLFixData_t SIGLIB_FUNC_DECL SUF_AsciiToKeyCode(const SLFixData_t Key)
 
   return (KeyCode);
 }    // End of SUF_AsciiToKeyCode()
-
-/**/
 
 /********************************************************
  * Function: SUF_KeyCodeToAscii()

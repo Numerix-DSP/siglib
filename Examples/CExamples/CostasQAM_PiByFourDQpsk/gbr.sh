@@ -12,7 +12,6 @@ echo Compiling pi/4 DQPSK modulator
 ./gb.sh dqpskmod
 echo pi/4 DQPSK modulator has been compiled
 
-
 echo Compiling pi/4 DQPSK demodulator
 ./gb.sh dqpskdemod
 echo pi/4 DQPSK demodulator has been compiled

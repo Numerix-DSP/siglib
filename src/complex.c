@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Complex number routines for SigLib DSP library.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_COMPLEX 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SCV_Polar()
@@ -67,8 +64,6 @@ SLComplexPolar_s SIGLIB_FUNC_DECL SCV_Polar(const SLData_t IM, const SLData_t IA
   return (Polar);
 }    // End of SCV_Polar()
 
-/**/
-
 /********************************************************
  * Function: SCV_Rectangular()
  *
@@ -93,8 +88,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Rectangular(const SLData_t IR, const SLData
   return (Rect);
 }    // End of SCV_Rectangular()
 
-/**/
-
 /********************************************************
  * Function: SCV_PolarToRectangular()
  *
@@ -117,8 +110,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_PolarToRectangular(const SLComplexPolar_s P
 
   return (Rect);
 }    // End of SCV_PolarToRectangular()
-
-/**/
 
 /********************************************************
  * Function: SCV_RectangularToPolar()
@@ -149,8 +140,6 @@ SLComplexPolar_s SIGLIB_FUNC_DECL SCV_RectangularToPolar(const SLComplexRect_s R
   return (Polar);
 }    // End of SCV_RectangularToPolar()
 
-/**/
-
 /********************************************************
  * Function: SCV_Sqrt()
  *
@@ -177,8 +166,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Sqrt(const SLComplexRect_s IVect)
 
   return (SCV_PolarToRectangular(OVect));
 }    // End of SCV_Sqrt()
-
-/**/
 
 /********************************************************
  * Function: SCV_Inverse()
@@ -212,8 +199,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Inverse(const SLComplexRect_s IVect)
   return (Result);
 }    // End of SCV_Inverse()
 
-/**/
-
 /********************************************************
  * Function: SCV_Conjugate()
  *
@@ -238,8 +223,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Conjugate(const SLComplexRect_s IVect)
   return (OVectVect);
 }    // End of SCV_Conjugate()
 
-/**/
-
 /********************************************************
  * Function: SCV_Magnitude()
  *
@@ -258,8 +241,6 @@ SLData_t SIGLIB_FUNC_DECL SCV_Magnitude(const SLComplexRect_s IVect)
 {
   return (SDS_Sqrt(IVect.real * IVect.real + IVect.imag * IVect.imag));
 }    // End of SCV_Magnitude()
-
-/**/
 
 /********************************************************
  * Function: SCV_MagnitudeSquared()
@@ -280,8 +261,6 @@ SLData_t SIGLIB_FUNC_DECL SCV_MagnitudeSquared(const SLComplexRect_s IVect)
   return (IVect.real * IVect.real + IVect.imag * IVect.imag);
 }    // End of SCV_MagnitudeSquared()
 
-/**/
-
 /********************************************************
  * Function: SCV_Phase()
  *
@@ -300,8 +279,6 @@ SLData_t SIGLIB_FUNC_DECL SCV_Phase(const SLComplexRect_s IVect)
 {
   return (SDS_Atan2(IVect.imag, IVect.real));
 }    // End of SCV_Phase()
-
-/**/
 
 /********************************************************
  * Function: SCV_Multiply()
@@ -326,8 +303,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Multiply(const SLComplexRect_s IVect1, cons
 
   return (OVect);
 }    // End of SCV_Multiply()
-
-/**/
 
 /********************************************************
  * Function: SCV_Divide()
@@ -367,8 +342,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Divide(const SLComplexRect_s Numerator, con
   return (Result);
 }    // End of SCV_Divide()
 
-/**/
-
 /********************************************************
  * Function: SCV_Add()
  *
@@ -392,8 +365,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Add(const SLComplexRect_s IVect1, const SLC
 
   return (OVect);
 }    // End of SCV_Add()
-
-/**/
 
 /********************************************************
  * Function: SCV_Subtract()
@@ -419,8 +390,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Subtract(const SLComplexRect_s IVect1, cons
   return (OVect);
 }    // End of SCV_Subtract()
 
-/**/
-
 /********************************************************
  * Function: SCV_Log()
  *
@@ -443,8 +412,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Log(const SLComplexRect_s IVect)
 
   return (OVect);
 }    // End of SCV_Log()
-
-/**/
 
 /********************************************************
  * Function: SCV_Exp()
@@ -471,8 +438,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Exp(const SLComplexRect_s IVect)
   return (OVect);
 }    // End of SCV_Exp()
 
-/**/
-
 /********************************************************
  * Function: SCV_Expj()
  *
@@ -491,8 +456,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Expj(const SLData_t Theta)
 
   return SCV_Rectangular(SDS_Cos(Theta), SDS_Sin(Theta));
 }    // End of SCV_Expj()
-
-/**/
 
 /********************************************************
  * Function: SCV_Pow()
@@ -531,8 +494,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Pow(const SLComplexRect_s IVect, const SLDa
   return (OVect);
 }    // End of SCV_Pow()
 
-/**/
-
 /********************************************************
  * Function: SCV_VectorAddScalar()
  *
@@ -557,8 +518,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorAddScalar(const SLComplexRect_s IVect
 
   return (OVect);
 }    // End of SCV_VectorAddScalar()
-
-/**/
 
 /********************************************************
  * Function: SCV_VectorSubtractScalar()
@@ -585,8 +544,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorSubtractScalar(const SLComplexRect_s 
   return (OVect);
 }    // End of SCV_VectorSubtractScalar()
 
-/**/
-
 /********************************************************
  * Function: SCV_VectorMultiplyScalar()
  *
@@ -611,8 +568,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorMultiplyScalar(const SLComplexRect_s 
 
   return (OVect);
 }    // End of SCV_VectorMultiplyScalar()
-
-/**/
 
 /********************************************************
  * Function: SCV_VectorDivideScalar()
@@ -639,8 +594,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorDivideScalar(const SLComplexRect_s IV
   return (OVect);
 }    // End of SCV_VectorDivideScalar()
 
-/**/
-
 /********************************************************
  * Function: SCV_ScalarSubtractVector()
  *
@@ -665,8 +618,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_ScalarSubtractVector(const SLData_t Scalar,
 
   return (OVect);
 }    // End of SCV_ScalarSubtractVector()
-
-/**/
 
 /********************************************************
  * Function: SCV_Roots()
@@ -698,8 +649,6 @@ void SIGLIB_FUNC_DECL SCV_Roots(const SLComplexRect_s a, const SLComplexRect_s b
                       SCV_VectorMultiplyScalar(a, SIGLIB_TWO));
 }    // End of SCV_Roots()
 
-/**/
-
 /********************************************************
  * Function: SCV_Copy()
  *
@@ -717,8 +666,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Copy(const SLComplexRect_s IVect)
 {
   return (IVect);
 }    // End of SCV_Copy()
-
-/**/
 
 /********************************************************
  * Function: SCV_Compare()

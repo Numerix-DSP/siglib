@@ -617,7 +617,7 @@ Description: SigLib function memory section definition file for TI compilers
 #        pragma CODE_SECTION(SDS_OnePoleTimeConstantToFilterCoeff, ".text")
 #        pragma CODE_SECTION(SDS_PreWarp, ".text")
 #        pragma CODE_SECTION(SIF_AllPole, ".text")
-#        pragma CODE_SECTION(SIF_GraphicalEqualizerFilterBank, ".text")
+#        pragma CODE_SECTION(SIF_GraphicEqualizerFilterBank, ".text")
 #        pragma CODE_SECTION(SIF_Iir, ".text")
 #        pragma CODE_SECTION(SIF_Iir2PoleLpf, ".text")
 #        pragma CODE_SECTION(SIF_IirAllPassFilter, ".text")

@@ -1,10 +1,8 @@
 
 
-
 				   Gnuplot/C (Tm)
 
 			  Signal Plotting Library
-
 
 
 
@@ -65,12 +63,10 @@ HISTORY
 
   * V3.00   31/01/2014      First release as Gnuplot/C library - Prior to this it was just a collection of separate functions
 
-
 INSTALLATION AND USE
 ====================
 
 For full details see "Gnuplot_C Users Guide.pdf"
-
 
 LICENSE
 =======

@@ -24,7 +24,6 @@ def main (args):
   wav_filename: os.path.splitext(args[0])[0] + '.wav'
   scipy.io.wavfile.write(wav_filename, int(args[2]), csv_column.astype(np.int16))
 
-
 if __name__ == "__main__":
   main (sys.argv[1:])
 

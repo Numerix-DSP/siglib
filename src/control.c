@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Control function file for SigLib DSP library
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_CONTROL 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SDS_Pid
@@ -74,8 +71,6 @@ void SIGLIB_FUNC_DECL SDS_Pid(const SLData_t Kp, const SLData_t Ki, const SLData
 
   (*Control) += (ControlDot);    // Calculate the new control value
 }    // End of SDS_Pid()
-
-/**/
 
 /********************************************************
  * Function: SDA_Pwm

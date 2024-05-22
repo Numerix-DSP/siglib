@@ -66,10 +66,8 @@ def _swig_setattr_nondynamic(self, class_type, name, value, static=1):
     else:
         raise AttributeError("You cannot add attributes to %s" % self)
 
-
 def _swig_setattr(self, class_type, name, value):
     return _swig_setattr_nondynamic(self, class_type, name, value, 0)
-
 
 def _swig_getattr(self, class_type, name):
     if (name == "thisown"):
@@ -78,7 +76,6 @@ def _swig_getattr(self, class_type, name):
     if method:
         return method(self)
     raise AttributeError("'%s' object has no attribute '%s'" % (class_type.__name__, name))
-
 
 def _swig_repr(self):
     try:
@@ -3909,5 +3906,4 @@ def SMX_Sum(arg1, arg2, arg3, arg4):
     return _siglib_wrap.SMX_Sum(arg1, arg2, arg3, arg4)
 SMX_Sum = _siglib_wrap.SMX_Sum
 # This file is compatible with both classic and new-style classes.
-
 

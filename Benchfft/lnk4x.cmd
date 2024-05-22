@@ -19,7 +19,6 @@ MEMORY
 SECTIONS
 {
 
-
 GROUP: {
 	.text:  {}		/* Code */
 	.bss:   {}		/* Global & static vars (beware models) */
@@ -39,7 +38,5 @@ GROUP: {
 	.stack: {}		/* SYSTEM STACK */
 	}	>IRAM0
 
-
 }	/* End of lnk4x.cmd */
-
 

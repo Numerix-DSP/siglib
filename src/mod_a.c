@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Analog Modulation / demodulation routines, for SigLib DSP library.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_MOD_A 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SIF_AmplitudeModulate
@@ -67,8 +64,6 @@ void SIGLIB_FUNC_DECL SIF_AmplitudeModulate(SLData_t* SIGLIB_PTR_DECL pCarrierTa
 
   *pCarrierTableIndex = (SLArrayIndex_t)0;
 }    // End of SIF_AmplitudeModulate()
-
-/**/
 
 /********************************************************
  * Function: SDA_AmplitudeModulate
@@ -122,8 +117,6 @@ void SIGLIB_FUNC_DECL SDA_AmplitudeModulate(const SLData_t* SIGLIB_PTR_DECL pSrc
   *pCarrierTableIndex = LocalCarrierTableIndex;    // Save carrier table index for next iteration
 }    // End of SDA_AmplitudeModulate()
 
-/**/
-
 /********************************************************
  * Function: SDS_AmplitudeModulate
  *
@@ -163,8 +156,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_AmplitudeModulate(const SLData_t Src, const SLData
   return (Dst);
 }    // End of SDS_AmplitudeModulate()
 
-/**/
-
 /********************************************************
  * Function: SIF_AmplitudeModulate2
  *
@@ -189,8 +180,6 @@ void SIGLIB_FUNC_DECL SIF_AmplitudeModulate2(SLData_t* SIGLIB_PTR_DECL pCarrierT
 
   *pCarrierTablePhase = SIGLIB_ZERO;
 }    // End of SIF_AmplitudeModulate2()
-
-/**/
 
 /********************************************************
  * Function: SDA_AmplitudeModulate2
@@ -246,8 +235,6 @@ void SIGLIB_FUNC_DECL SDA_AmplitudeModulate2(const SLData_t* SIGLIB_PTR_DECL pSr
   *pCarrierTablePhase = LocalCarrierTablePhase;    // Save carrier table index for next iteration
 }    // End of SDA_AmplitudeModulate2()
 
-/**/
-
 /********************************************************
  * Function: SDS_AmplitudeModulate2
  *
@@ -287,8 +274,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_AmplitudeModulate2(const SLData_t Src, const SLDat
 
   return (Dst);
 }    // End of SDS_AmplitudeModulate2()
-
-/**/
 
 /********************************************************
  * Function: SIF_ComplexShift
@@ -338,8 +323,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_ComplexShift(SLData_t* SIGLIB_PTR_DECL pRealCombF
 
   return (ErrorCode);
 }    // End of SIF_ComplexShift()
-
-/**/
 
 /********************************************************
  * Function: SDA_ComplexShift
@@ -457,8 +440,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexShift(const SLData_t* SIGLIB_PTR_DECL pSrc, SLD
   *CombFilterPhase = LocalCombPhase;
 }    // End of SDA_ComplexShift()
 
-/**/
-
 /********************************************************
  * Function: SIF_FrequencyModulate
  *
@@ -482,8 +463,6 @@ void SIGLIB_FUNC_DECL SIF_FrequencyModulate(SLData_t* pCarrierPhase, SLData_t* S
   SIF_FastCos(pCosineTable,    // Initialize look up table
               TableLength);
 }    // End of SIF_FrequencyModulate()
-
-/**/
 
 /********************************************************
  * Function: SDS_FrequencyModulate
@@ -515,8 +494,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_FrequencyModulate(const SLData_t Src, const SLData
 
   return (pLookUpTable[(SLArrayIndex_t)(*PhaseOffset * ((SLData_t)LookUpTableSize))]);
 }    // End of SDS_FrequencyModulate()
-
-/**/
 
 /********************************************************
  * Function: SDA_FrequencyModulate
@@ -565,8 +542,6 @@ void SIGLIB_FUNC_DECL SDA_FrequencyModulate(const SLData_t* SIGLIB_PTR_DECL pSrc
 
   *PhaseOffset = Phase;
 }    // End of SDA_FrequencyModulate()
-
-/**/
 
 /********************************************************
  * Function: SDA_FrequencyDemodulate
@@ -619,8 +594,6 @@ void SIGLIB_FUNC_DECL SDA_FrequencyDemodulate(const SLData_t* SIGLIB_PTR_DECL pS
   *EnvelopePrevious = Peak;    // Save, so that function is re-entrant
 }    // End of SDA_FrequencyDemodulate()
 
-/**/
-
 /********************************************************
  * Function: SIF_FrequencyModulateComplex
  *
@@ -643,8 +616,6 @@ void SIGLIB_FUNC_DECL SIF_FrequencyModulateComplex(SLData_t* pCarrierPhase, SLDa
   SIF_FastSinCos(pCosineTable,    // Initialize look up table
                  SinCosPeriod);
 }    // End of SIF_FrequencyModulateComplex()
-
-/**/
 
 /********************************************************
  * Function: SDS_FrequencyModulateComplex
@@ -680,8 +651,6 @@ void SIGLIB_FUNC_DECL SDS_FrequencyModulateComplex(const SLData_t Src, SLData_t*
   *pRealDst = pLookUpTable[((SLArrayIndex_t)(*PhaseOffset * ((SLData_t)SinCosPeriod))) + (SLArrayIndex_t)((SLUFixData_t)SinCosPeriod >> 2U)];
   *pImagDst = pLookUpTable[((SLArrayIndex_t)(*PhaseOffset * ((SLData_t)SinCosPeriod)))];
 }    // End of SDS_FrequencyModulateComplex()
-
-/**/
 
 /********************************************************
  * Function: SDA_FrequencyModulateComplex
@@ -736,8 +705,6 @@ void SIGLIB_FUNC_DECL SDA_FrequencyModulateComplex(const SLData_t* SIGLIB_PTR_DE
   *PhaseOffset = Phase;
 }    // End of SDA_FrequencyModulateComplex()
 
-/**/
-
 /********************************************************
  * Function: SDA_DeltaModulate
  *
@@ -783,8 +750,6 @@ void SIGLIB_FUNC_DECL SDA_DeltaModulate(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
   *CurrentModValue = CurrentValue;
 }    // End of SDA_DeltaModulate()
 
-/**/
-
 /********************************************************
  * Function: SDA_DeltaDemodulate
  *
@@ -827,8 +792,6 @@ void SIGLIB_FUNC_DECL SDA_DeltaDemodulate(const SLData_t* SIGLIB_PTR_DECL pSrc, 
 
   *CurrentDeModValue = CurrentValue;
 }    // SDA_DeltaDemodulate()
-
-/**/
 
 /********************************************************
  * Function: SDA_DeltaModulate2

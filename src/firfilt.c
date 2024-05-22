@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: SigLib DSP library FIR filter routines.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_FIRFILT 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SIF_Fir
@@ -73,8 +70,6 @@ void SIGLIB_FUNC_DECL SIF_Fir(SLData_t* SIGLIB_PTR_DECL pState, SLArrayIndex_t* 
 
   *pFilterIndex = SIGLIB_AI_ZERO;    // Initilaise filter index
 }    // End of SIF_Fir()
-
-/**/
 
 /********************************************************
  * Function: SDS_Fir
@@ -120,8 +115,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_Fir(const SLData_t Src, SLData_t pState[], const S
 
   return sum;
 }    // End of SDS_Fir()
-
-/**/
 
 /********************************************************
  * Function: SDA_Fir
@@ -175,8 +168,6 @@ void SIGLIB_FUNC_DECL SDA_Fir(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t pDs
   *pFilterIndex = j;    // Store index for next iteration
 }    // End of SDA_Fir()
 
-/**/
-
 /********************************************************
  * Function: SDS_FirAddSample
  *
@@ -211,8 +202,6 @@ void SIGLIB_FUNC_DECL SDS_FirAddSample(const SLData_t Src, SLData_t pState[], SL
 
   *pFilterIndex = j;
 }    // End of SDS_FirAddSample()
-
-/**/
 
 /********************************************************
  * Function: SDA_FirAddSamples
@@ -259,8 +248,6 @@ void SIGLIB_FUNC_DECL SDA_FirAddSamples(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
   *pFilterIndex = LocalFilterIndex;
 }    // End of SDA_FirAddSamples()
 
-/**/
-
 /********************************************************
  * Function: SIF_Comb
  *
@@ -294,8 +281,6 @@ void SIGLIB_FUNC_DECL SIF_Comb(SLData_t* SIGLIB_PTR_DECL pState, SLArrayIndex_t*
   *pFilterIndex = SIGLIB_AI_ZERO;
   *pFilterSum = SIGLIB_ZERO;
 }    // End of SIF_Comb()
-
-/**/
 
 /********************************************************
  * Function: SDS_Comb
@@ -333,8 +318,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_Comb(const SLData_t Src, SLData_t* SIGLIB_PTR_DECL
 
   return (*pFilterSum);
 }    // End of SDS_Comb()
-
-/**/
 
 /********************************************************
  * Function: SDA_Comb
@@ -389,8 +372,6 @@ void SIGLIB_FUNC_DECL SDA_Comb(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* S
   *pFilterIndex = LocalStateArrayIndex;
 }    // End of SDA_Comb()
 
-/**/
-
 /********************************************************
  * Function: SIF_FirComplex
  *
@@ -417,8 +398,6 @@ void SIGLIB_FUNC_DECL SIF_FirComplex(SLData_t* SIGLIB_PTR_DECL pRealState, SLDat
 
   *pFilterIndex = SIGLIB_AI_ZERO;    // Initilaise filter index
 }    // End of SIF_FirComplex()
-
-/**/
 
 /********************************************************
  * Function: SDS_FirComplex
@@ -471,8 +450,6 @@ void SIGLIB_FUNC_DECL SDS_FirComplex(const SLData_t RealSrc, const SLData_t Imag
 
   *pFilterIndex = j;    // Store index for next iteration
 }    // End of SDS_FirComplex()
-
-/**/
 
 /********************************************************
  * Function: SDA_FirComplex
@@ -528,8 +505,6 @@ void SIGLIB_FUNC_DECL SDA_FirComplex(const SLData_t* SIGLIB_PTR_DECL pRealSrc, c
   *pFilterIndex = j;    // Store index for next iteration
 }    // End of SDA_FirComplex()
 
-/**/
-
 /********************************************************
  * Function: SIF_FirWithStore
  *
@@ -556,8 +531,6 @@ void SIGLIB_FUNC_DECL SIF_FirWithStore(SLData_t* SIGLIB_PTR_DECL pState, const S
     *pState++ = SIGLIB_ZERO;
   }
 }    // End of SIF_FirWithStore()
-
-/**/
 
 /********************************************************
  * Function: SDS_FirWithStore
@@ -598,8 +571,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_FirWithStore(const SLData_t Src, SLData_t pState[]
 
   return sum;
 }    // End of SDS_FirWithStore()
-
-/**/
 
 /********************************************************
  * Function: SDA_FirWithStore
@@ -647,8 +618,6 @@ void SIGLIB_FUNC_DECL SDA_FirWithStore(const SLData_t* SIGLIB_PTR_DECL pSrc, SLD
   }
 }    // End of SDA_FirWithStore()
 
-/**/
-
 /********************************************************
  * Function: SIF_FirComplexWithStore
  *
@@ -672,8 +641,6 @@ void SIGLIB_FUNC_DECL SIF_FirComplexWithStore(SLData_t* SIGLIB_PTR_DECL pRealSta
     *pImagState++ = SIGLIB_ZERO;
   }
 }    // End of SIF_FirComplexWithStore()
-
-/**/
 
 /********************************************************
  * Function: SDS_FirComplexWithStore
@@ -724,8 +691,6 @@ void SIGLIB_FUNC_DECL SDS_FirComplexWithStore(const SLData_t SrcReal, const SLDa
   *pRealDst = RealSum;
   *pImagDst = ImagSum;
 }    // End of SDS_FirComplexWithStore()
-
-/**/
 
 /********************************************************
  * Function: SDA_FirComplexWithStore
@@ -780,8 +745,6 @@ void SIGLIB_FUNC_DECL SDA_FirComplexWithStore(const SLData_t* SIGLIB_PTR_DECL pS
   }
 }    // End of SDA_FirComplexWithStore()
 
-/**/
-
 /********************************************************
  * Function: SDS_FirWithStoreAddSample
  *
@@ -811,8 +774,6 @@ void SIGLIB_FUNC_DECL SDS_FirWithStoreAddSample(const SLData_t Src, SLData_t pSt
 
   pState[1] = Src;
 }    // End of SDS_FirWithStoreAddSample()
-
-/**/
 
 /********************************************************
  * Function: SDA_FirWithStoreAddSamples
@@ -849,8 +810,6 @@ void SIGLIB_FUNC_DECL SDA_FirWithStoreAddSamples(const SLData_t* SIGLIB_PTR_DECL
     }
   }
 }    // End of SDA_FirWithStoreAddSamples()
-
-/**/
 
 /********************************************************
  * Function: SIF_FirExtendedArray
@@ -889,8 +848,6 @@ void SIGLIB_FUNC_DECL SIF_FirExtendedArray(SLData_t* SIGLIB_PTR_DECL pState, con
 
   *pFilterIndex = SIGLIB_AI_ZERO;    // Initilaise filter index
 }    // End of SIF_FirExtendedArray()
-
-/**/
 
 /********************************************************
  * Function: SDS_FirExtendedArray
@@ -941,8 +898,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_FirExtendedArray(const SLData_t Src, SLData_t* pSt
 
   return sum;
 }    // End of SDS_FirExtendedArray()
-
-/**/
 
 /********************************************************
  * Function: SDA_FirExtendedArray
@@ -1000,8 +955,6 @@ void SIGLIB_FUNC_DECL SDA_FirExtendedArray(const SLData_t* SIGLIB_PTR_DECL pSrc,
   *pFilterIndex = localFilterIndex;    // Store index for next iteration
 }    // End of SDA_FirExtendedArray()
 
-/**/
-
 /********************************************************
 * Function: SIF_FirComplexExtendedArray
 *
@@ -1041,8 +994,6 @@ void SIGLIB_FUNC_DECL SIF_FirComplexExtendedArray(SLData_t* SIGLIB_PTR_DECL pRea
 
   *pFilterIndex = SIGLIB_AI_ZERO;    // Initilaise filter index
 }    // End of SIF_FirComplexExtendedArray()
-
-/**/
 
 /********************************************************
  * Function: SDS_FirComplexExtendedArray
@@ -1111,8 +1062,6 @@ void SIGLIB_FUNC_DECL SDS_FirComplexExtendedArray(const SLData_t SrcReal, const 
 
   *pFilterIndex = localFilterIndex;    // Store index for next iteration
 }    // End of SDS_FirComplexExtendedArray()
-
-/**/
 
 /********************************************************
  * Function: SDA_FirComplexExtendedArray
@@ -1187,8 +1136,6 @@ void SIGLIB_FUNC_DECL SDA_FirComplexExtendedArray(const SLData_t* SIGLIB_PTR_DEC
   *pFilterIndex = localFilterIndex;    // Store index for next iteration
 }    // End of SDA_FirComplexExtendedArray()
 
-/**/
-
 /********************************************************
  * Function: SDS_FirExtendedArrayAddSample
  *
@@ -1228,8 +1175,6 @@ void SIGLIB_FUNC_DECL SDS_FirExtendedArrayAddSample(const SLData_t Src, SLData_t
 
   *pFilterIndex = localFilterIndex;    // Store index for next iteration
 }    // End of SDS_FirExtendedArrayAddSample()
-
-/**/
 
 /********************************************************
  * Function: SDA_FirExtendedArrayAddSamples
@@ -1274,8 +1219,6 @@ void SIGLIB_FUNC_DECL SDA_FirExtendedArrayAddSamples(const SLData_t* SIGLIB_PTR_
 
   *pFilterIndex = localFilterIndex;    // Store index for next iteration
 }    // End of SDA_FirExtendedArrayAddSamples()
-
-/**/
 
 /********************************************************
  * Function: SIF_FirLowPassFilter
@@ -1343,8 +1286,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_FirLowPassFilter(SLData_t* SIGLIB_PTR_DECL pCoeff
 
   return (SIGLIB_NO_ERROR);
 }    // End of SIF_FirLowPassFilter()
-
-/**/
 
 /********************************************************
  * Function: SIF_FirHighPassFilter
@@ -1417,8 +1358,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_FirHighPassFilter(SLData_t* SIGLIB_PTR_DECL pCoef
 
   return (SIGLIB_NO_ERROR);
 }    // End of SIF_FirHighPassFilter()
-
-/**/
 
 /********************************************************
  * Function: SIF_FirBandPassFilter
@@ -1510,8 +1449,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_FirBandPassFilter(SLData_t* SIGLIB_PTR_DECL pCoef
   return (SIGLIB_NO_ERROR);
 }    // End of SIF_FirBandPassFilter()
 
-/**/
-
 /********************************************************
  * Function: SIF_FirLowPassFilterWindow
  *
@@ -1548,8 +1485,6 @@ void SIGLIB_FUNC_DECL SIF_FirLowPassFilterWindow(SLData_t* SIGLIB_PTR_DECL pCoef
     *(pCoeffs + i) *= *(pWindow + i);
   }
 }    // End of SIF_FirLowPassFilterWindow()
-
-/**/
 
 /********************************************************
  * Function: SIF_FirHighPassFilterWindow
@@ -1591,8 +1526,6 @@ void SIGLIB_FUNC_DECL SIF_FirHighPassFilterWindow(SLData_t* SIGLIB_PTR_DECL pCoe
     pCoeffs[i] *= SIGLIB_MINUS_ONE;
   }
 }    // End of SIF_FirHighPassFilterWindow()
-
-/**/
 
 /********************************************************
  * Function: SIF_FirBandPassFilterWindow
@@ -1638,8 +1571,6 @@ void SIGLIB_FUNC_DECL SIF_FirBandPassFilterWindow(SLData_t* SIGLIB_PTR_DECL pCoe
     *(pCoeffs + i) *= *(pWindow + i);
   }
 }    // End of SIF_FirBandPassFilterWindow()
-
-/**/
 
 /********************************************************
  * Function: SUF_FirKaiserApproximation
@@ -1689,8 +1620,6 @@ SLFixData_t SIGLIB_FUNC_DECL SUF_FirKaiserApproximation(SLData_t Fpass, SLData_t
                         SIGLIB_HALF));
 }    // End of SUF_FirKaiserApproximation()
 
-/**/
-
 /********************************************************
  * Function: SIF_FirMatchedFilter
  *
@@ -1714,8 +1643,6 @@ void SIGLIB_FUNC_DECL SIF_FirMatchedFilter(SLData_t* SIGLIB_PTR_DECL pMatchedFil
   SDA_Reverse(pMatchedFilterSignal, pCoeffs,
               filterLength);    // Generate the matched filter impulse response
 }    // End of SIF_FirMatchedFilter()
-
-/**/
 
 /********************************************************
  * Function: SDA_FirFilterInverseCoherentGain
@@ -1755,8 +1682,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_FirFilterInverseCoherentGain(const SLData_t* SIGLI
   return (SIGLIB_ONE / Sum);
 }    // End of SDA_FirFilterInverseCoherentGain()
 
-/**/
-
 /********************************************************
  * Function: SIF_TappedDelayLine
  *
@@ -1779,8 +1704,6 @@ void SIGLIB_FUNC_DECL SIF_TappedDelayLine(SLData_t* SIGLIB_PTR_DECL pDelay, SLAr
   SDA_Clear(pDelay, DelayArrayLength);    // Clear data arrays
   *pDelayIndex = (SLArrayIndex_t)0;       // Initialize delay index
 }    // End of SIF_TappedDelayLine()
-
-/**/
 
 /********************************************************
  * Function: SDS_TappedDelayLine
@@ -1829,8 +1752,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_TappedDelayLine(const SLData_t Src, SLData_t* SIGL
 
   return (SumOfProducts);    // Return sum of products
 }    // End of SDS_TappedDelayLine()
-
-/**/
 
 /********************************************************
  * Function: SDA_TappedDelayLine
@@ -1892,8 +1813,6 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLine(const SLData_t* SIGLIB_PTR_DECL pSrc, 
   *pDelayIndex = LocalDelayIndex;
 }    // End of SDA_TappedDelayLine()
 
-/**/
-
 /********************************************************
  * Function: SIF_TappedDelayLineComplex
  *
@@ -1918,8 +1837,6 @@ void SIGLIB_FUNC_DECL SIF_TappedDelayLineComplex(SLData_t* SIGLIB_PTR_DECL pDela
   SDA_Clear(pDelayImag, DelayArrayLength);    // Clear data arrays
   *pDelayIndex = (SLArrayIndex_t)0;           // Initialize delay index
 }    // End of SIF_TappedDelayLineComplex()
-
-/**/
 
 /********************************************************
  * Function: SDS_TappedDelayLineComplex
@@ -1983,8 +1900,6 @@ void SIGLIB_FUNC_DECL SDS_TappedDelayLineComplex(const SLData_t SrcReal, const S
   *pDstReal = SumOfProductsReal;    // Write out result data
   *pDstImag = SumOfProductsImag;
 }    // End of SDS_TappedDelayLineComplex()
-
-/**/
 
 /********************************************************
  * Function: SDA_TappedDelayLineComplex
@@ -2067,8 +1982,6 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLineComplex(const SLData_t* SIGLIB_PTR_DECL
   *pDelayIndex = LocalDelayIndex;
 }    // End of SDA_TappedDelayLineComplex()
 
-/**/
-
 /********************************************************
  * Function: SIF_TappedDelayLineIQ
  *
@@ -2093,8 +2006,6 @@ void SIGLIB_FUNC_DECL SIF_TappedDelayLineIQ(SLData_t* SIGLIB_PTR_DECL pDelayReal
   SDA_Clear(pDelayImag, DelayArrayLength);    // Clear data arrays
   *pDelayIndex = (SLArrayIndex_t)0;           // Initialize delay index
 }    // End of SIF_TappedDelayLineIQ()
-
-/**/
 
 /********************************************************
  * Function: SDS_TappedDelayLineIQ
@@ -2154,8 +2065,6 @@ void SIGLIB_FUNC_DECL SDS_TappedDelayLineIQ(const SLData_t SrcReal, const SLData
   *pDstReal = SumOfProductsReal;    // Write out result data
   *pDstImag = SumOfProductsImag;
 }    // End of SDS_TappedDelayLineIQ()
-
-/**/
 
 /********************************************************
  * Function: SDA_TappedDelayLineIQ
@@ -2234,8 +2143,6 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLineIQ(const SLData_t* SIGLIB_PTR_DECL pSrc
   *pDelayIndex = LocalDelayIndex;
 }    // End of SDA_TappedDelayLineIQ()
 
-/**/
-
 /********************************************************
  * Function: SIF_FirPolyPhaseGenerate
  *
@@ -2285,8 +2192,6 @@ void SIGLIB_FUNC_DECL SIF_FirPolyPhaseGenerate(const SLData_t* SIGLIB_PTR_DECL p
   }
 }    // End of SIF_FirPolyPhaseGenerate()
 
-/**/
-
 /********************************************************
  * Function: SIF_FirZeroNotchFilter
  *
@@ -2310,8 +2215,6 @@ void SIGLIB_FUNC_DECL SIF_FirZeroNotchFilter(SLData_t* SIGLIB_PTR_DECL pDstFIRCo
   *(pDstFIRCoeffs + 1) = SIGLIB_MINUS_TWO * SDS_Cos(SIGLIB_TWO_PI * centreFrequency);
   *(pDstFIRCoeffs + 2) = SIGLIB_ONE;
 }
-
-/**/
 
 /********************************************************
  * Function: SDA_FirLpBpShift
@@ -2340,8 +2243,6 @@ void SIGLIB_FUNC_DECL SDA_FirLpBpShift(const SLData_t* SIGLIB_PTR_DECL pSrcCoeff
     pDstCoeffs[halfFilterLength + i] = SIGLIB_TWO * pSrcCoeffs[halfFilterLength + i] * SDS_Cos(SIGLIB_TWO_PI * shiftFrequency * i);
   }
 }    // End of SDA_FirLpBpShift
-
-/**/
 
 /********************************************************
  * Function: SDA_FirLpHpShift

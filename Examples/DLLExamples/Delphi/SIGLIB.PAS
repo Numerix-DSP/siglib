@@ -18,7 +18,6 @@ uses
   Wintypes, WinProcs;
 {$ENDIF}
 
-
 {=> SIGLIB.H <=}
 
 {+//************************************************************************* }
@@ -56,7 +55,6 @@ const
   SIGLIB_VERSION = 9.00; {// Indicates SigLib version being used}
 const
   SIGLIB_ENABLE_DEBUG_LOGGING = 0; {// Set to 1 to enable SUF_Debugfprintf functions in some siglib functions}
-
 
 {$IFNDEF SWIG}
 {$INCLUDE <math.h> // Include standard math.h file}
@@ -124,7 +122,6 @@ const
 {$DEFINE SIGLIB_HUGE_DECL}
 
 {$ENDIF // End of #ifndef _HP_VEE}
-
 
 {/// Function declarations }
 
@@ -326,7 +323,6 @@ type
 var
   SUF_MSDelay: procedure(const Delay: SLFIXDATA_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 {$ENDIF}
-
 
 {/// Parameter description }
 
@@ -815,7 +811,6 @@ var
                     const _5: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
 {$ENDIF // End of #ifndef _HP_VEE}
-
 
 {/// Windowing functions - window.c }
 
@@ -1637,7 +1632,6 @@ var
 var
   SUF_QFactorToBandwidth: function(const QFactor: SLDATA_T): SLDATA_T cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
-
 {/// Acoustic processing functions - acoustic.c }
 
 var
@@ -1689,7 +1683,6 @@ var
  cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 var
   SDS_TemperatureToSpeedOfSoundInAir: function(const _1: SLDATA_T): SLDATA_T cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
-
 
 {/// Adaptive filtering functions - adaptive.c }
 
@@ -1756,7 +1749,6 @@ var
                                    const _4: SLARRAYINDEX_T;
                                    const _5: SLDATA_T;
                                    const _6: SLDATA_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
-
 
 {/// Convolution functions - convolve.c }
 
@@ -2069,7 +2061,6 @@ var
   SIM_ZigZagDescan: procedure(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
                               var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                               const _3: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
-
 
 {/// Signal generation functions - siggen.c }
 
@@ -2543,7 +2534,6 @@ var
                                   var _7: SLFIXDATA_T;
                                   const _8: SLARRAYINDEX_T): SLCHAR_T cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
-
 {/// Analog modulation functions - mod_a.c }
 
 var
@@ -2684,7 +2674,6 @@ var
                                 var _3: SLDATA_T;
                                 const _4: SLDATA_T;
                                 const _5: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
-
 
 {/// Digital modulation functions - mod_d.c }
 
@@ -3228,7 +3217,6 @@ var
                                          var SIGLIB_INOUT_PTR_DECL: SLUINT32_T;
                                          const _4: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
-
 {/// Multiplex and demultiplexing functions - mux.c }
 var
   SDA_Multiplex: procedure(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
@@ -3257,7 +3245,6 @@ var
                         var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                         const _4: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
-
 var
   SDA_Mux3: procedure(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
                       const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
@@ -3271,7 +3258,6 @@ var
                         var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                         var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                         const _5: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
-
 
 var
   SDA_Mux4: procedure(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
@@ -3288,7 +3274,6 @@ var
                         var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                         var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                         const _6: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
-
 
 var
   SDA_Mux5: procedure(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
@@ -3556,7 +3541,6 @@ var
 var
   SUF_KeyCodeToAscii: function(const _1: SLFIXDATA_T): SLFIXDATA_T cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
-
 {/// Speech processing functions - speech.c }
 
 var
@@ -3594,7 +3578,6 @@ var
   SDA_AdpcmDecoder: procedure(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
                               var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                               const _3: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
-
 
 {/// Min max and peak hold functions - minmax.c }
 
@@ -3991,7 +3974,6 @@ var
                                const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
                                const _3: SLARRAYINDEX_T): SLDATA_T cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
-
 {$IFNDEF _HP_VEE // The following functionality is not supported by VEE}
 
 var
@@ -4171,7 +4153,6 @@ var
 var
   SDA_DetectNAN: function(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
                           const _2: SLARRAYINDEX_T): SLARRAYINDEX_T cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
-
 
 {/// DSP utility functions - dsputils.c }
 
@@ -5004,7 +4985,6 @@ var
                        var SIGLIB_INOUT_PTR_DECL: SLDATA_T;
                        const _3: SLARRAYINDEX_T): SLDATA_T cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
-
 {/// Regression analysis functions - regress.c }
 
 var
@@ -5034,7 +5014,6 @@ var
                                const _3: SLDATA_T;
                                const _4: SLARRAYINDEX_T): SLDATA_T cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
-
 var
   SDA_LograConstantCoeff: function(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
                                    const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
@@ -5062,7 +5041,6 @@ var
                                const _3: SLDATA_T;
                                const _4: SLARRAYINDEX_T): SLDATA_T cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
-
 var
   SDA_ExpraConstantCoeff: function(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
                                    const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
@@ -5089,7 +5067,6 @@ var
                                const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
                                const _3: SLDATA_T;
                                const _4: SLARRAYINDEX_T): SLDATA_T cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
-
 
 var
   SDA_PowraConstantCoeff: function(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
@@ -5129,7 +5106,6 @@ var
                               var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
                               var SIGLIB_INOUT_PTR_DECL: SLDATA_T;
                               const _4: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
-
 
 {/// Trigonometrical functions - trig.c }
 
@@ -5303,7 +5279,6 @@ var
   SDS_QuickSinc: function(const _1: SLDATA_T;
                           const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
                           const _3: SLDATA_T): SLDATA_T cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
-
 
 {/// Complex vector functions - complex.c }
 
@@ -5593,7 +5568,6 @@ var
                                                const _4: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 {$ENDIF // End of #ifndef _HP_VEE}
 
-
 {/// 2D Matrix manipulation functions and macros - matrix.c }
 
 var
@@ -5828,7 +5802,6 @@ var
                                           const _3: SLARRAYINDEX_T;
                                           const _4: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
-
 {$IFNDEF _HP_VEE // The following functionality is not supported by VEE}
 
 const
@@ -5957,13 +5930,11 @@ var
                                           const _3: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
 
-
 {$IFDEF __cplusplus // End of decl. for C++ program calls}
 {$ENDIF}
 {/// End of SigLib DSP function section }
 
 {$ENDIF // End of #ifndef SIGLIB}
-
 
 
 var

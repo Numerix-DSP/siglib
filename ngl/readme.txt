@@ -1,14 +1,11 @@
 
 
 
-
             Numerix Graphics Library
-
 
                   Version 2.63
 
                    18/04/2020
-
 
 
 INTRODUCTION
@@ -24,7 +21,6 @@ we will incorporate them into future versions.
 
 This library has been tested under Windows and Linux.
 
-
 HISTORY NOTES
     18/04/2020    v2.63   Sizer warnings removed
     22/09/2017    v2.62   X axis scale error fixed
@@ -39,7 +35,6 @@ HISTORY NOTES
     30/01/2003    V1.10   Updated to support wxWindows V 2.4.0
     19/05/2002    V1.00   First release
 
-
 INSTALLATION
 
 NGL requires the following installation process:
@@ -49,7 +44,6 @@ from this directory run:
 > a:pkunzip -d ngl.zip
 
 This will install DSPGraph on your hard disk.
-
 
 BUILDING THE LIBRARY
 
@@ -64,11 +58,9 @@ make -f GNUmakefile
 ar r libdspgraph.a demo_dspgraph.o
 
 
-
             IMPORTANT
 After installation please ensure that the library and include file
 directories are included in the compiler; library and include paths.
-
 
 
 
@@ -76,16 +68,13 @@ Delta Numerix hopes you will find this product useful, if so then please
 tell others otherwise if you have any comments or suggestions then
 please tell us.
 
-
 LICENSE
 
 This software is free for use in any application but Delta Numerix does
 not provide any warranty or support.
 
-
 Digital Filter Plus, DFPlus and SigLib are trademarks of Delta Numerix all other
 trademarks acknowledged.
-
 
 For additional information, please contact:
 

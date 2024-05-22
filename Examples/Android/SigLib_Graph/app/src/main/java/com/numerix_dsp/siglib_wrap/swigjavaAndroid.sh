@@ -19,7 +19,6 @@ cp -f siglib_wrap.java.i siglib_wrap.i
 # swig -java -I/cygdrive/c/siglib/include -includeall siglib_wrap.i
 swig -java -I/cygdrive/c/siglib/include -includeall -package siglib_wrap siglib_wrap.i
 
-
 ndk-build NDK_PROJECT_PATH=$(pwd) APP_BUILD_SCRIPT=$(pwd)/jni/Android.mk clean
 ndk-build NDK_PROJECT_PATH=$(pwd) APP_BUILD_SCRIPT=$(pwd)/jni/Android.mk
 

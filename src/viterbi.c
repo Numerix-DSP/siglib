@@ -34,7 +34,6 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Communications timing detection routines, for SigLib DSP library.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_VITERBI 1    // Defines the source file that this code is being used in
@@ -58,8 +57,6 @@ Description: Communications timing detection routines, for SigLib DSP library.
 // State diagram map for transmitter
 // converts encoder state to output bits
 const SLUInt16_t siglib_numerix_K3TxConvEncMap[] = {0, 3, 1, 2, 3, 0, 2, 1};
-
-/**/
 
 /********************************************************
  * Function: SDS_ConvEncoderK3
@@ -93,7 +90,6 @@ SLUInt16_t SIGLIB_FUNC_DECL SDS_ConvEncoderK3(SLChar_t Input, SLArrayIndex_t* pH
 
 }    // End of SDS_ConvEncoderK3()
 
-/**/
 // Receiver ideal levels [OriginalState][TransitionNumber][BitNumber]
 const SLData_t siglib_numerix_K3RxIdealSymbol[SIGLIB_VITK3_NUMBER_OF_STATES][SIGLIB_VITK3_TRANSITIONS_PER_STATE]
                                              [SIGLIB_VITK3_NUMBER_OF_INPUT_CODES] = {
@@ -152,8 +148,6 @@ void SIGLIB_FUNC_DECL SIF_ViterbiDecoderK3(SLFixData_t* pOutputBitCount, SLChar_
   *pDoTraceBackFlag = SIGLIB_FALSE;    // Flag will be set to SIGLIB_TRUE when we
                                        // are in trace back mode
 }    // End of SIF_ViterbiDecoderK3()
-
-/**/
 
 /********************************************************
  * Function: SDS_ViterbiDecoderK3
@@ -328,8 +322,6 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderK3(SLData_t* pSrc, SLFixData_t* pOut
   return (OutputByte);
 }    // End of SDS_ViterbiDecoderK3()
 
-/**/
-
 // V32 Transmitter differential encoder [CurrentInput][Prev.Input]*/
 const SLArrayIndex_t siglib_numerix_V32TxDifferentialEncoder[4][4] = {{0, 1, 2, 3}, {1, 2, 3, 0}, {2, 3, 0, 1}, {3, 0, 1, 2}};
 
@@ -415,8 +407,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_ConvEncoderV32(SLChar_t SrcNibble,
   return (EncodedWord);
 }    // End of SDS_ConvEncoderV32()
 
-/**/
-
 /********************************************************
  * Function: SIF_ViterbiDecoderV32
  *
@@ -452,8 +442,6 @@ void SIGLIB_FUNC_DECL SIF_ViterbiDecoderV32(SLData_t* pAccumulatedErrorTable, SL
   *pDoTraceBackFlag = SIGLIB_FALSE;    // Flag will be set to SIGLIB_TRUE when we
                                        // are in trace back mode
 }    // End of SIF_ViterbiDecoderV32()
-
-/**/
 
 /********************************************************
  * Function: SDS_ViterbiDecoderV32

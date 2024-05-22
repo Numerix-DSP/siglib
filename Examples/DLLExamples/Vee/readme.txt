@@ -6,11 +6,9 @@
 
              Keysight Vee Test Program For SigLib DLL
 
-
 INTRODUCTION
 
 Keysight Vee uses 32 bit DLLs so please use the DLL in this folder.
-
 
 NOTES
 
@@ -20,10 +18,8 @@ LICENSE
 For the full license agreement, please refer to the document
 "license.txt".
 
-
 DFPlus, and SigLib are trademarks of Delta Numerix all other
 trademarks acknowledged.
-
 
 For additional information, please contact:
 

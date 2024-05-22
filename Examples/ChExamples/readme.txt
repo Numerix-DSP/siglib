@@ -1,13 +1,11 @@
 
 
-
                                 SigLib™
 
                        Signal Processing Library
                           Ch Example Functions
 
                               02-07-2005
-
 
 
 INTRODUCTION
@@ -18,9 +16,7 @@ files from Ch (http://www.softintegration.com).
 Please read the appropriate section of the SigLib reference manual for
 further information.
 
-
 SigLib is a trademark of Delta Numerix all other trademarks acknowledged.
-
 
 For additional information, please contact:
 

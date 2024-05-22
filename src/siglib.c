@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Siglib utility files.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_SIGLIB 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SUF_SiglibVersion
@@ -67,8 +64,6 @@ SLData_t SIGLIB_FUNC_DECL SUF_SiglibVersion(void)
 
 #if SIGLIB_CONSOLE_IO_SUPPORTED    // Console I/O is supported for printf functions
 
-/**/
-
 /********************************************************
  * Function: SUF_PrintArray
  *
@@ -92,8 +87,6 @@ void SIGLIB_FUNC_DECL SUF_PrintArray(const SLData_t* pSrc, const SLArrayIndex_t 
   SUF_Printf("\n");
 }    // End of SUF_PrintArray()
 
-/**/
-
 /********************************************************
  * Function: SUF_PrintFixedPointArray
  *
@@ -115,8 +108,6 @@ void SIGLIB_FUNC_DECL SUF_PrintFixedPointArray(const SLArrayIndex_t* pSrc, const
   }
   SUF_Printf("\n");
 }    // End of SUF_PrintFixedPointArray()
-
-/**/
 
 /********************************************************
  * Function: SUF_PrintComplexArray
@@ -152,8 +143,6 @@ void SIGLIB_FUNC_DECL SUF_PrintComplexArray(const SLData_t* pSrcReal, const SLDa
   }
   SUF_Printf("\n");
 }    // End of SUF_PrintComplexArray()
-
-/**/
 
 /********************************************************
  * Function: SUF_PrintMatrix
@@ -242,8 +231,6 @@ void SIGLIB_FUNC_DECL SUF_PrintMatrix(const SLData_t* pSrc, const SLArrayIndex_t
   SUF_Printf("\n");
 }    // End of SUF_PrintMatrix()
 
-/**/
-
 /********************************************************
  * Function: SUF_PrintPolar
  *
@@ -265,8 +252,6 @@ void SIGLIB_FUNC_DECL SUF_PrintPolar(const SLComplexPolar_s Src)
              (double)Rect.real, (double)Rect.imag);
 }    // End of SUF_PrintPolar()
 
-/**/
-
 /********************************************************
  * Function: SUF_PrintRectangular
  *
@@ -287,8 +272,6 @@ void SIGLIB_FUNC_DECL SUF_PrintRectangular(const SLComplexRect_s Src)
   SUF_Printf("%le + j%le  =  ||%le, <%lec (%le rad)\n", (double)Src.real, (double)Src.imag, (double)Polar.magn, (double)Polar.angle,
              (double)SDS_RadiansToDegrees(Polar.angle));
 }    // End of SUF_PrintRectangular()
-
-/**/
 
 /********************************************************
  * Function: SUF_PrintIIRCoefficients
@@ -313,8 +296,6 @@ void SIGLIB_FUNC_DECL SUF_PrintIIRCoefficients(const SLData_t* pIIRCoeffs, SLArr
   SUF_Printf("\n");
 }    // End of SUF_PrintIIRCoefficients()
 
-/**/
-
 /********************************************************
  * Function: SUF_PrintCount
  *
@@ -335,8 +316,6 @@ void SIGLIB_FUNC_DECL SUF_PrintCount(const char* String)
   static SLFixData_t Count = 0;
   SUF_Printf("%s: SigLib Count = %ld\n", String, (long)Count++);
 }    // End of SUF_PrintCount()
-
-/**/
 
 /********************************************************
  * Function: SUF_PrintHigher
@@ -359,8 +338,6 @@ void SIGLIB_FUNC_DECL SUF_PrintHigher(const SLData_t src, const SLData_t thresho
     printf("Over threshold: %s: %lf\n", string, (double)src);
   }
 }    // End of SUF_PrintHigher()
-
-/**/
 
 /********************************************************
  * Function: SUF_PrintLower
@@ -391,8 +368,6 @@ void SIGLIB_FUNC_DECL SUF_PrintLower(const SLData_t src, const SLData_t threshol
 
 #if SIGLIB_FILE_IO_SUPPORTED    // File I/O is supported for Debugfprintf functions
 
-/**/
-
 /********************************************************
  * Function: SUF_ClearDebugfprintf
  *
@@ -421,8 +396,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_ClearDebugfprintf(void)
 
   return (SIGLIB_NO_ERROR);
 }    // End of SUF_ClearDebugfprintf()
-
-/**/
 
 /********************************************************
  * Function: SUF_Debugfprintf
@@ -459,8 +432,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_Debugfprintf(const char* ArgumentType, ...)
   return (SIGLIB_NO_ERROR);
 }    // End of SUF_Debugfprintf()
 
-/**/
-
 /********************************************************
  * Function: SUF_Debugvfprintf
  *
@@ -491,8 +462,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_Debugvfprintf(const char* format, va_list ap)
   SUF_Fclose(fp_LogFile);
   return (SIGLIB_NO_ERROR);
 }    // End of SUF_Debugvfprintf()
-
-/**/
 
 /********************************************************
  * Function: SUF_DebugPrintArray
@@ -530,8 +499,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintArray(const SLData_t* pSrc, const SLArr
   return (SIGLIB_NO_ERROR);
 }    // End of SUF_DebugPrintArray()
 
-/**/
-
 /********************************************************
  * Function: SUF_DebugPrintFixedPointArray
  *
@@ -566,8 +533,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintFixedPointArray(const SLArrayIndex_t* p
 
   return (SIGLIB_NO_ERROR);
 }    // End of SUF_DebugPrintFixedPointArray()
-
-/**/
 
 /********************************************************
  * Function: SUF_DebugPrintComplexArray
@@ -621,8 +586,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexArray(const SLData_t* pSrcReal, 
   return (SIGLIB_NO_ERROR);
 }    // End of SUF_DebugPrintComplexArray()
 
-/**/
-
 /********************************************************
  * Function: SUF_DebugPrintComplex
  *
@@ -669,8 +632,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplex(const SLData_t real, const SLDa
   return (SIGLIB_NO_ERROR);
 }    // End of SUF_DebugPrintComplex()
 
-/**/
-
 /********************************************************
  * Function: SUF_DebugPrintComplexRect
  *
@@ -716,8 +677,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexRect(const SLComplexRect_s Rect)
   return (SIGLIB_NO_ERROR);
 }    // End of SUF_DebugPrintComplexRect()
 
-/**/
-
 /********************************************************
  * Function: SUF_DebugPrintComplexPolar
  *
@@ -762,8 +721,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexPolar(const SLComplexPolar_s Pol
 
   return (SIGLIB_NO_ERROR);
 }    // End of SUF_DebugPrintComplexPolar()
-
-/**/
 
 /********************************************************
  * Function: SUF_DebugPrintMatrix
@@ -871,8 +828,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintMatrix(const SLData_t* pSrc, const SLAr
   return (SIGLIB_NO_ERROR);
 }    // End of SUF_DebugPrintMatrix()
 
-/**/
-
 /********************************************************
  * Function: SUF_DebugPrintPolar
  *
@@ -907,8 +862,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintPolar(const SLComplexPolar_s Src)
   return (SIGLIB_NO_ERROR);
 }    // End of SUF_DebugPrintPolar()
 
-/**/
-
 /********************************************************
  * Function: SUF_DebugPrintRectangular
  *
@@ -942,8 +895,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintRectangular(const SLComplexRect_s Src)
 
   return (SIGLIB_NO_ERROR);
 }    // End of SUF_DebugPrintRectangular()
-
-/**/
 
 /********************************************************
  * Function: SUF_DebugPrintIIRCoefficients
@@ -981,8 +932,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintIIRCoefficients(const SLData_t* pIIRCoe
   return (SIGLIB_NO_ERROR);
 }    // End of SUF_DebugPrintIIRCoefficients()
 
-/**/
-
 /********************************************************
  * Function: SUF_DebugPrintCount
  *
@@ -1018,8 +967,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintCount(const char* String)
   return (SIGLIB_NO_ERROR);
 }
 
-/**/
-
 /********************************************************
  * Function: SUF_DebugPrintHigher
  *
@@ -1053,8 +1000,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintHigher(const SLData_t src, const SLData
   }
   return (SIGLIB_NO_ERROR);
 }    // End of SUF_DebugPrintHigher()
-
-/**/
 
 /********************************************************
  * Function: SUF_DebugPrintLower
@@ -1098,8 +1043,6 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintLower(const SLData_t src, const SLData_
 
 #ifdef CLOCKS_PER_SEC
 
-/**/
-
 /********************************************************
  * Function: SUF_MSDelay
  *
@@ -1131,8 +1074,6 @@ void SIGLIB_FUNC_DECL SUF_MSDelay(const SLFixData_t Delay)
   //  printf ("Execution time = %d milliseconds\n", (long)elapsedTime);
 }    // End of SUF_MSDelay()
 #endif
-
-/**/
 
 /********************************************************
  * Function: SUF_StrError

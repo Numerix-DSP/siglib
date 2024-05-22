@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: DSP basic math functions, for SigLib DSP library.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_SMATH 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SDA_Divide
@@ -95,8 +92,6 @@ void SIGLIB_FUNC_DECL SDA_Divide(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLD
   }
 }    // End of SDA_Divide()
 
-/**/
-
 /********************************************************
  * Function: SDA_Divide2
  *
@@ -148,8 +143,6 @@ void SIGLIB_FUNC_DECL SDA_Divide2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const S
 
 }    // End of SDA_Divide2()
 
-/**/
-
 /********************************************************
  * Function: SDA_Multiply
  *
@@ -186,8 +179,6 @@ void SIGLIB_FUNC_DECL SDA_Multiply(const SLData_t* SIGLIB_PTR_DECL pSrc, const S
 #endif
   }
 }    // End of SDA_Multiply()
-
-/**/
 
 /********************************************************
  * Function: SDA_Multiply2
@@ -227,8 +218,6 @@ void SIGLIB_FUNC_DECL SDA_Multiply2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const
   }
 }    // End of SDA_Multiply2()
 
-/**/
-
 /********************************************************
  * Function: SDS_ComplexMultiply
  *
@@ -257,8 +246,6 @@ void SIGLIB_FUNC_DECL SDS_ComplexMultiply(const SLData_t Src1Real, const SLData_
   *pResultReal = Src1Real * Src2Real - Src1Imag * Src2Imag;
   *pResultImag = Src1Real * Src2Imag + Src1Imag * Src2Real;
 }    // End of SDS_ComplexMultiply()
-
-/**/
 
 /********************************************************
  * Function: SDS_ComplexInverse
@@ -294,8 +281,6 @@ void SIGLIB_FUNC_DECL SDS_ComplexInverse(const SLData_t DenominatorReal, const S
     *pResultImag = (-DenominatorImag) * InverseDenominator;
   }
 }    // End of SDS_ComplexInverse()
-
-/**/
 
 /********************************************************
  * Function: SDA_ComplexInverse
@@ -335,8 +320,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexInverse(const SLData_t* pDenominatorReal, const
   }
 }    // End of SDA_ComplexInverse()
 
-/**/
-
 /********************************************************
  * Function: SDS_ComplexDivide
  *
@@ -373,8 +356,6 @@ void SIGLIB_FUNC_DECL SDS_ComplexDivide(const SLData_t NumeratorReal, const SLDa
     *pResultImag = ((NumeratorImag * DenominatorReal) + (NumeratorReal * DenominatorImag)) * InverseDenominator;
   }
 }    // End of SDS_ComplexDivide()
-
-/**/
 
 /********************************************************
  * Function: SDA_ComplexScalarMultiply
@@ -421,8 +402,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexScalarMultiply(const SLData_t* SIGLIB_PTR_DECL 
   }
 
 }    // End of SDA_ComplexScalarMultiply()
-
-/**/
 
 /********************************************************
  * Function: SDA_ComplexMultiply2
@@ -479,8 +458,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexMultiply2(const SLData_t* SIGLIB_PTR_DECL pSrc1
   }
 }    // End of SDA_ComplexMultiply2()
 
-/**/
-
 /********************************************************
  * Function: SDA_ComplexScalarDivide
  *
@@ -528,8 +505,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexScalarDivide(const SLData_t* SIGLIB_PTR_DECL pS
   }
 }    // End of SDA_ComplexScalarDivide()
 
-/**/
-
 /********************************************************
  * Function: SDA_ComplexDivide2
  *
@@ -564,8 +539,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexDivide2(const SLData_t* SIGLIB_PTR_DECL pRealNu
     *pImagDst++ = ComplexTmp1.imag;
   }
 }    // End of SDA_ComplexDivide2()
-
-/**/
 
 /********************************************************
  * Function: SDA_RealDotProduct
@@ -605,8 +578,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_RealDotProduct(const SLData_t* SIGLIB_PTR_DECL pSr
   }
   return DotProduct;
 }    // End of SDA_RealDotProduct()
-
-/**/
 
 /********************************************************
  * Function: SDA_ComplexDotProduct
@@ -656,8 +627,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDA_ComplexDotProduct(const SLData_t* SIGLIB_PT
   return (DotProduct);
 }    // End of SDA_ComplexDotProduct()
 
-/**/
-
 /********************************************************
  * Function: SDA_SumAndDifference
  *
@@ -700,8 +669,6 @@ void SIGLIB_FUNC_DECL SDA_SumAndDifference(const SLData_t* SIGLIB_PTR_DECL pSrc1
   }
 }    // End of SDA_Add2()
 
-/**/
-
 /********************************************************
  * Function: SDA_Add2
  *
@@ -739,8 +706,6 @@ void SIGLIB_FUNC_DECL SDA_Add2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
 #endif
   }
 }    // End of SDA_Add2()
-
-/**/
 
 /********************************************************
  * Function: SDA_Add3
@@ -781,8 +746,6 @@ void SIGLIB_FUNC_DECL SDA_Add3(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
 #endif
   }
 }    // End of SDA_Add3()
-
-/**/
 
 /********************************************************
  * Function: SDA_Add4
@@ -825,8 +788,6 @@ void SIGLIB_FUNC_DECL SDA_Add4(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
 #endif
   }
 }    // End of SDA_Add4()
-
-/**/
 
 /********************************************************
  * Function: SDA_Add5
@@ -873,8 +834,6 @@ void SIGLIB_FUNC_DECL SDA_Add5(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
   }
 }    // End of SDA_Add5()
 
-/**/
-
 /********************************************************
  * Function: SDA_WeightedSum
  *
@@ -912,8 +871,6 @@ void SIGLIB_FUNC_DECL SDA_WeightedSum(const SLData_t* SIGLIB_PTR_DECL pSrc1, con
 #endif
   }
 }    // End of SDA_WeightedSum()
-
-/**/
 
 /********************************************************
  * Function: SDA_Subtract2
@@ -954,8 +911,6 @@ void SIGLIB_FUNC_DECL SDA_Subtract2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const
   }
 }    // End of SDA_Subtract2()
 
-/**/
-
 /********************************************************
  * Function: SDA_Add
  *
@@ -993,8 +948,6 @@ void SIGLIB_FUNC_DECL SDA_Add(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLData
   }
 }    // End of SDA_Add()
 
-/**/
-
 /********************************************************
  * Function: SDA_PositiveOffset
  *
@@ -1021,8 +974,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_PositiveOffset(const SLData_t* SIGLIB_PTR_DECL pSr
   return (MinimumValue);
 }    // End of SDA_PositiveOffset()
 
-/**/
-
 /********************************************************
  * Function: SDA_NegativeOffset
  *
@@ -1048,8 +999,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_NegativeOffset(const SLData_t* SIGLIB_PTR_DECL pSr
   SDA_Add(pSrc, -MaximumValue, pDst, ArrayLength);
   return (MaximumValue);
 }    // End of SDA_NegativeOffset()
-
-/**/
 
 /********************************************************
  * Function: SDA_Negate
@@ -1086,8 +1035,6 @@ void SIGLIB_FUNC_DECL SDA_Negate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
   }
 }    // End of SDA_Negate()
 
-/**/
-
 /********************************************************
  * Function: SDA_Inverse
  *
@@ -1122,8 +1069,6 @@ void SIGLIB_FUNC_DECL SDA_Inverse(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
 #endif
   }
 }    // End of SDA_Inverse()
-
-/**/
 
 /********************************************************
  * Function: SDA_Square
@@ -1161,8 +1106,6 @@ void SIGLIB_FUNC_DECL SDA_Square(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
   }
 }    // End of SDA_Square()
 
-/**/
-
 /********************************************************
  * Function: SDA_Sqrt
  *
@@ -1197,8 +1140,6 @@ void SIGLIB_FUNC_DECL SDA_Sqrt(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* S
 #endif
   }
 }    // End of SDA_Sqrt()
-
-/**/
 
 /********************************************************
  * Function: SDA_Difference
@@ -1238,8 +1179,6 @@ void SIGLIB_FUNC_DECL SDA_Difference(const SLData_t* SIGLIB_PTR_DECL pSrc1, cons
   }
 }    // End of SDA_Difference()
 
-/**/
-
 /********************************************************
  * Function: SDA_SumOfDifferences
  *
@@ -1278,8 +1217,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_SumOfDifferences(const SLData_t* SIGLIB_PTR_DECL p
   return (Sum);
 }    // End of SDA_SumOfDifferences()
 
-/**/
-
 /********************************************************
  * Function: SDS_Roots()
  *
@@ -1310,8 +1247,6 @@ SLError_t SIGLIB_FUNC_DECL SDS_Roots(const SLData_t a, const SLData_t b, const S
 
   return (SIGLIB_NO_ERROR);
 }    // End of SDS_Roots()
-
-/**/
 
 /********************************************************
  * Function: SDS_Factorial()
@@ -1344,8 +1279,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_Factorial(const SLData_t Input)
   return (Factorial);
 }    // End of SDS_Factorial()
 
-/**/
-
 /********************************************************
  * Function: SDS_Permutations()
  *
@@ -1371,8 +1304,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_Permutations(const SLData_t n, const SLData_t k)
   return (SDS_Factorial(n) / SDS_Factorial(n - k));
 }    // End of SDS_Permutations()
 
-/**/
-
 /********************************************************
  * Function: SDS_Combinations()
  *
@@ -1397,8 +1328,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_Combinations(const SLData_t n, const SLData_t k)
   return (SDS_Factorial(n) / (SDS_Factorial(n - k) * SDS_Factorial(k)));
 }    // End of SDS_Combinations()
 
-/**/
-
 /********************************************************
  * Function: SIF_OverlapAndAddLinear()
  *
@@ -1418,8 +1347,6 @@ void SIGLIB_FUNC_DECL SIF_OverlapAndAddLinear(SLData_t* SIGLIB_PTR_DECL pIncreme
 {
   *pIncrement = (SIGLIB_ONE / ((SLData_t)ArrayLength));
 }    // End of SIF_OverlapAndAddLinear()
-
-/**/
 
 /********************************************************
  * Function: SDA_OverlapAndAddLinear
@@ -1462,8 +1389,6 @@ void SIGLIB_FUNC_DECL SDA_OverlapAndAddLinear(const SLData_t* SIGLIB_PTR_DECL pS
     Src2ScaleFactor += Increment;
   }
 }    // End of SDA_OverlapAndAddLinear()
-
-/**/
 
 /********************************************************
  * Function: SDA_OverlapAndAddLinearWithClip
@@ -1517,8 +1442,6 @@ void SIGLIB_FUNC_DECL SDA_OverlapAndAddLinearWithClip(const SLData_t* SIGLIB_PTR
   }
 }    // End of SDA_OverlapAndAddLinearWithClip()
 
-/**/
-
 /********************************************************
  * Function: SDA_OverlapAndAddArbitrary()
  *
@@ -1556,8 +1479,6 @@ void SIGLIB_FUNC_DECL SDA_OverlapAndAddArbitrary(const SLData_t* SIGLIB_PTR_DECL
     pDst[i] = (pSrc1[i] * pWin[i]) + (pSrc2[i] * pWin[(ArrayLength - 1) - i]);
   }
 }    // End of SDA_OverlapAndAddArbitrary()
-
-/**/
 
 /********************************************************
  * Function: SDA_OverlapAndAddArbitraryWithClip()
@@ -1606,8 +1527,6 @@ void SIGLIB_FUNC_DECL SDA_OverlapAndAddArbitraryWithClip(const SLData_t* SIGLIB_
   }
 }    // End of SDA_OverlapAndAddArbitraryWithClip()
 
-/**/
-
 /********************************************************
  * Function: SDS_DegreesToRadians()
  *
@@ -1626,8 +1545,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_DegreesToRadians(const SLData_t Degrees)
 {
   return (Degrees * SIGLIB_DEGREES_TO_RADIANS);
 }    // End of SDS_DegreesToRadians()
-
-/**/
 
 /********************************************************
  * Function: SDA_DegreesToRadians()
@@ -1664,8 +1581,6 @@ void SIGLIB_FUNC_DECL SDA_DegreesToRadians(const SLData_t* SIGLIB_PTR_DECL pSrc,
   }
 }    // End of SDA_DegreesToRadians()
 
-/**/
-
 /********************************************************
  * Function: SDS_RadiansToDegrees()
  *
@@ -1684,8 +1599,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_RadiansToDegrees(const SLData_t Degrees)
 {
   return (Degrees * SIGLIB_RADIANS_TO_DEGREES);
 }    // End of SDS_RadiansToDegrees()
-
-/**/
 
 /********************************************************
  * Function: SDA_RadiansToDegrees()
@@ -1722,8 +1635,6 @@ void SIGLIB_FUNC_DECL SDA_RadiansToDegrees(const SLData_t* SIGLIB_PTR_DECL pSrc,
   }
 }    // End of SDA_RadiansToDegrees()
 
-/**/
-
 /********************************************************
  * Function: SDS_DetectNAN
  *
@@ -1750,8 +1661,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_DetectNAN(const SLData_t x)
   }
   return (-1);
 }    // End of SDS_DetectNAN()
-
-/**/
 
 /********************************************************
  * Function: SDA_DetectNAN

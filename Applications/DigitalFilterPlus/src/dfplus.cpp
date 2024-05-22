@@ -51,7 +51,6 @@ int global_NegateIIRAlphaSign;    // Global NegateIIRAlphaSign for biquads
 // #define DEBUG_LOG_FILE 1 // Set to 1 to log progress to "debug.log" file
 // #endif
 
-/**/
 /********************************************************
  * Function : df_group_delay ()
  *
@@ -116,7 +115,6 @@ SLData_t df_group_delay(SLData_t FreqStep, SLArrayIndex_t FirstCalc, SLData_t Th
   return (GPDel);
 } /* End of df_group_delay ()*/
 
-/**/
 /********************************************************
  * Function : FloatToQFormatInteger ()
  *
@@ -560,7 +558,6 @@ mainFrame::~mainFrame()
   free(pImpulseResponse);
 }
 
-/**/
 /********************************************************
  * Function : mainFrame::FindExecutablePath ()
  *

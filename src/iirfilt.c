@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: SigLib DSP library IIR filter routines.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_IIRFILT 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SIF_Iir
@@ -64,8 +61,6 @@ void SIGLIB_FUNC_DECL SIF_Iir(SLData_t* SIGLIB_PTR_DECL pState, const SLArrayInd
     *pState++ = SIGLIB_ZERO;
   }
 }    // End of SIF_Iir()
-
-/**/
 
 /********************************************************
  * Function: SDS_Iir
@@ -105,8 +100,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_Iir(const SLData_t Source, SLData_t* SIGLIB_PTR_DE
 
   return (TempInputData);    // Save output
 }    // End of SDS_Iir()
-
-/**/
 
 /********************************************************
  * Function: SDA_Iir
@@ -160,8 +153,6 @@ void SIGLIB_FUNC_DECL SDA_Iir(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SI
   }
 }    // End of SDA_Iir()
 
-/**/
-
 /********************************************************
  * Function: SDS_IirMac
  *
@@ -201,8 +192,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_IirMac(const SLData_t Source, SLData_t* SIGLIB_PTR
 
   return (TempInputData);    // Save output
 }    // End of SDS_IirMac()
-
-/**/
 
 /********************************************************
  * Function: SDA_IirMac
@@ -257,8 +246,6 @@ void SIGLIB_FUNC_DECL SDA_IirMac(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
   }
 }    // End of SDA_IirMac()
 
-/**/
-
 /********************************************************
 * Function: SIF_IirOrderN
 *
@@ -285,8 +272,6 @@ void SIGLIB_FUNC_DECL SIF_IirOrderN(SLData_t* SIGLIB_PTR_DECL pState, SLArrayInd
 
   *pFilterIndex = 0;    // Set state array offset
 }    // End of SIF_IirOrderN()
-
-/**/
 
 /********************************************************
  * Function: SDS_IirOrderN
@@ -338,8 +323,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_IirOrderN(const SLData_t Source, SLData_t* SIGLIB_
 
   return (Result);
 }    // End of SDS_IirOrderN()
-
-/**/
 
 /********************************************************
  * Function: SDA_IirOrderN
@@ -403,8 +386,6 @@ void SIGLIB_FUNC_DECL SDA_IirOrderN(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData
   *pFilterIndex = LocalFilterIndex;    // Save filter index for next iteration
 }    // End of SDA_IirOrderN()
 
-/**/
-
 /********************************************************
  * Function: SIF_IirNc
  *
@@ -427,8 +408,6 @@ void SIGLIB_FUNC_DECL SIF_IirNc(SLData_t* SIGLIB_PTR_DECL pState, const SLArrayI
     *pState++ = SIGLIB_ZERO;
   }
 }    // End of SIF_IirNc()
-
-/**/
 
 /********************************************************
  * Function: SDA_IirNc
@@ -463,8 +442,6 @@ void SIGLIB_FUNC_DECL SDA_IirNc(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* 
 
   SDA_Reverse(pDst, pDst, SampleLength);    // Reverse time sequence
 }    // End of SDA_IirNc()
-
-/**/
 
 /********************************************************
  * Function: SDA_BilinearTransform
@@ -528,8 +505,6 @@ void SIGLIB_FUNC_DECL SDA_BilinearTransform(const SLComplexRect_s* SIGLIB_PTR_DE
   }
 }    // End of SDA_BilinearTransform
 
-/**/
-
 /********************************************************
  * Function: SDS_PreWarp
  *
@@ -549,8 +524,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_PreWarp(const SLData_t DesiredFrequency, const SLD
 {
   return ((SampleRate / SIGLIB_PI) * SDS_Tan((DesiredFrequency * SIGLIB_PI) / SampleRate));
 }    // End of SDS_PreWarp()
-
-/**/
 
 /********************************************************
  * Function: SDA_MatchedZTransform
@@ -587,8 +560,6 @@ void SIGLIB_FUNC_DECL SDA_MatchedZTransform(const SLComplexRect_s* SIGLIB_PTR_DE
     pzPlaneZeros[i] = SCV_Exp(SCV_VectorMultiplyScalar(pSPlaneZeros[i], SIGLIB_ONE / SampleRate));
   }
 }    // End of SDA_MatchedZTransform()
-
-/**/
 
 /********************************************************
  * Function: SDA_IirZplaneToCoeffs
@@ -674,8 +645,6 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneToCoeffs(const SLComplexRect_s* SIGLIB_PTR_DE
   }
 }    // End of SDA_IirZplaneToCoeffs
 
-/**/
-
 /********************************************************
  * Function: SDA_IirZplanePolarToCoeffs
  *
@@ -760,8 +729,6 @@ void SIGLIB_FUNC_DECL SDA_IirZplanePolarToCoeffs(const SLComplexPolar_s* SIGLIB_
   }
 }    // End of SDA_IirZplanePolarToCoeffs
 
-/**/
-
 /********************************************************
  * Function: SDA_IirZplaneLpfToLpf
  *
@@ -812,8 +779,6 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToLpf(const SLComplexRect_s* SIGLIB_PTR_DE
   }
 }    // End of SDA_IirZplaneLpfToLpf
 
-/**/
-
 /********************************************************
  * Function: SDA_IirZplaneLpfToHpf
  *
@@ -858,8 +823,6 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToHpf(const SLComplexRect_s* SIGLIB_PTR_DE
     SrcZPlanePoles++;
   }
 }    // End of SDA_IirZplaneLpfToHpf
-
-/**/
 
 /********************************************************
  * Function: SDA_IirZplaneLpfToBpf
@@ -932,8 +895,6 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToBpf(const SLComplexRect_s* SIGLIB_PTR_DE
     SrcZPlanePoles++;
   }
 }    // End of SDA_IirZplaneLpfToBpf
-
-/**/
 
 /********************************************************
  * Function: SDA_IirZplaneLpfToBsf
@@ -1008,8 +969,6 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToBsf(const SLComplexRect_s* SIGLIB_PTR_DE
   }
 }    // End of SDA_IirZplaneLpfToBsf
 
-/**/
-
 /********************************************************
  * Function: SDA_IirModifyFilterGain
  *
@@ -1080,8 +1039,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_IirModifyFilterGain(const SLData_t* SIGLIB_PTR_DEC
   return (OriginalFilterGain);    // Return original filter gain
 }    // End of SDA_IirModifyFilterGain
 
-/**/
-
 /********************************************************
  * Function: SIF_IirLowPassFilter
  *
@@ -1113,8 +1070,6 @@ void SIGLIB_FUNC_DECL SIF_IirLowPassFilter(SLData_t* SIGLIB_PTR_DECL pCoeffs, co
   *(pCoeffs + 3) = (SIGLIB_MINUS_TWO * cosw0) / a0;
   *(pCoeffs + 4) = (SIGLIB_ONE - alpha) / a0;
 }    // End of SIF_IirLowPassFilter()
-
-/**/
 
 /********************************************************
  * Function: SIF_IirHighPassFilter
@@ -1148,8 +1103,6 @@ void SIGLIB_FUNC_DECL SIF_IirHighPassFilter(SLData_t* SIGLIB_PTR_DECL pCoeffs, c
   *(pCoeffs + 4) = (SIGLIB_ONE - alpha) / a0;
 }    // End of SIF_IirHighPassFilter()
 
-/**/
-
 /********************************************************
  * Function: SIF_IirAllPassFilter
  *
@@ -1181,8 +1134,6 @@ void SIGLIB_FUNC_DECL SIF_IirAllPassFilter(SLData_t* SIGLIB_PTR_DECL pCoeffs, co
   *(pCoeffs + 3) = (SIGLIB_MINUS_TWO * cosw0) / a0;
   *(pCoeffs + 4) = (SIGLIB_ONE - alpha) / a0;
 }    // End of SIF_IirAllPassFilter()
-
-/**/
 
 /********************************************************
  * Function: SIF_IirBandPassFilterConstantSkirtGain
@@ -1218,8 +1169,6 @@ void SIGLIB_FUNC_DECL SIF_IirBandPassFilterConstantSkirtGain(SLData_t* SIGLIB_PT
   *(pCoeffs + 4) = (SIGLIB_ONE - alpha) / a0;
 }    // End of SIF_IirBandPassFilterConstantSkirtGain()
 
-/**/
-
 /********************************************************
  * Function: SIF_IirBandPassFilter0dBPeakGain
  *
@@ -1254,8 +1203,6 @@ void SIGLIB_FUNC_DECL SIF_IirBandPassFilter0dBPeakGain(SLData_t* SIGLIB_PTR_DECL
   *(pCoeffs + 4) = (SIGLIB_ONE - alpha) / a0;
 }    // End of SIF_IirBandPassFilter0dBPeakGain()
 
-/**/
-
 /********************************************************
  * Function: SIF_IirNotchFilter
  *
@@ -1287,8 +1234,6 @@ void SIGLIB_FUNC_DECL SIF_IirNotchFilter(SLData_t* SIGLIB_PTR_DECL pCoeffs, cons
   *(pCoeffs + 3) = (SIGLIB_MINUS_TWO * cosw0) / a0;
   *(pCoeffs + 4) = (SIGLIB_ONE - alpha) / a0;
 }    // End of SIF_IirNotchFilter()
-
-/**/
 
 /********************************************************
  * Function: SIF_IirPeakingFilter
@@ -1324,8 +1269,6 @@ void SIGLIB_FUNC_DECL SIF_IirPeakingFilter(SLData_t* SIGLIB_PTR_DECL pCoeffs, co
   *(pCoeffs + 3) = (SIGLIB_MINUS_TWO * cosw0) / a0;
   *(pCoeffs + 4) = (SIGLIB_ONE - alpha / A) / a0;
 }    // End of SIF_IirPeakingFilter()
-
-/**/
 
 /********************************************************
  * Function: SIF_IirLowShelfFilter
@@ -1364,8 +1307,6 @@ void SIGLIB_FUNC_DECL SIF_IirLowShelfFilter(SLData_t* SIGLIB_PTR_DECL pCoeffs, c
   *(pCoeffs + 4) = ((A + SIGLIB_ONE) + (A - SIGLIB_ONE) * cosw0 - SIGLIB_TWO * sqrtA * alpha) / a0;
 }    // End of SIF_IirLowShelfFilter()
 
-/**/
-
 /********************************************************
  * Function: SIF_IirHighShelfFilter
  *
@@ -1403,8 +1344,6 @@ void SIGLIB_FUNC_DECL SIF_IirHighShelfFilter(SLData_t* SIGLIB_PTR_DECL pCoeffs, 
   *(pCoeffs + 4) = ((A + SIGLIB_ONE) - (A - SIGLIB_ONE) * cosw0 - SIGLIB_TWO * sqrtA * alpha) / a0;
 }    // End of SIF_IirHighShelfFilter()
 
-/**/
-
 /********************************************************
  * Function: SDS_IirRemoveDC
  *
@@ -1432,8 +1371,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_IirRemoveDC(SLData_t Src, SLData_t* SIGLIB_PTR_DEC
 
   return (Dst);
 }
-
-/**/
 
 /********************************************************
  * Function: SDA_IirRemoveDC
@@ -1474,8 +1411,6 @@ void SIGLIB_FUNC_DECL SDA_IirRemoveDC(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
   }
 }
 
-/**/
-
 /********************************************************
  * Function: SIF_OnePole
  *
@@ -1493,8 +1428,6 @@ void SIGLIB_FUNC_DECL SIF_OnePole(SLData_t* pState)
 {
   *pState = SIGLIB_ZERO;
 }    // End of SIF_OnePole()
-
-/**/
 
 /********************************************************
  * Function: SDS_OnePole
@@ -1516,8 +1449,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePole(const SLData_t Src, const SLData_t onePole
   (*pState) = Src + ((*pState) * onePoleCoefficient);
   return (*pState);
 }    // End of SDS_OnePole()
-
-/**/
 
 /********************************************************
  * Function: SDA_OnePole
@@ -1559,8 +1490,6 @@ void SIGLIB_FUNC_DECL SDA_OnePole(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
   }
 }    // End of SDA_OnePole()
 
-/**/
-
 /********************************************************
  * Function: SDS_OnePoleNormalized
  *
@@ -1581,8 +1510,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePoleNormalized(const SLData_t Src, const SLData
   (*pState) = ((SIGLIB_ONE - onePoleCoefficient) * Src) + ((*pState) * onePoleCoefficient);
   return (*pState);
 }    // End of SDS_OnePoleNormalized()
-
-/**/
 
 /********************************************************
  * Function: SDA_OnePoleNormalized
@@ -1623,8 +1550,6 @@ void SIGLIB_FUNC_DECL SDA_OnePoleNormalized(const SLData_t* SIGLIB_PTR_DECL pSrc
   }
 }    // End of SDA_OnePoleNormalized()
 
-/**/
-
 /********************************************************
  * Function: SDS_OnePoleEWMA
  *
@@ -1645,8 +1570,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePoleEWMA(const SLData_t Src, const SLData_t one
   (*pState) = (onePoleCoefficient * Src) + ((*pState) * (SIGLIB_ONE - onePoleCoefficient));
   return (*pState);
 }    // End of SDS_OnePoleEWMA()
-
-/**/
 
 /********************************************************
  * Function: SDA_OnePoleEWMA
@@ -1687,8 +1610,6 @@ void SIGLIB_FUNC_DECL SDA_OnePoleEWMA(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
   }
 }    // End of SDA_OnePoleEWMA()
 
-/**/
-
 /********************************************************
  * Function: SDA_OnePolePerSample
  *
@@ -1720,8 +1641,6 @@ void SIGLIB_FUNC_DECL SDA_OnePolePerSample(const SLData_t* SIGLIB_PTR_DECL pSrc,
                SampleLength);    // Scale output
 }    // End of SDA_OnePolePerSample()
 
-/**/
-
 /********************************************************
  * Function: SIF_OnePoleHighPass
  *
@@ -1739,8 +1658,6 @@ void SIGLIB_FUNC_DECL SIF_OnePoleHighPass(SLData_t* pState)
 {
   *pState = SIGLIB_ZERO;
 }    // End of SIF_OnePoleHighPass()
-
-/**/
 
 /********************************************************
  * Function: SDS_OnePoleHighPass
@@ -1762,8 +1679,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePoleHighPass(const SLData_t Src, const SLData_t
   (*pState) = Src + ((*pState) * onePoleCoefficient);
   return (*pState);
 }    // End of SDS_OnePoleHighPass()
-
-/**/
 
 /********************************************************
  * Function: SDA_OnePoleHighPass
@@ -1805,8 +1720,6 @@ void SIGLIB_FUNC_DECL SDA_OnePoleHighPass(const SLData_t* SIGLIB_PTR_DECL pSrc, 
   }
 }    // End of SDA_OnePoleHighPass()
 
-/**/
-
 /********************************************************
  * Function: SDS_OnePoleHighPassNormalized
  *
@@ -1827,8 +1740,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePoleHighPassNormalized(const SLData_t Src, cons
   (*pState) = ((SIGLIB_ONE + onePoleCoefficient) * Src) + ((*pState) * onePoleCoefficient);
   return (*pState);
 }    // End of SDS_OnePoleHighPassNormalized()
-
-/**/
 
 /********************************************************
  * Function: SDA_OnePoleHighPassNormalized
@@ -1869,8 +1780,6 @@ void SIGLIB_FUNC_DECL SDA_OnePoleHighPassNormalized(const SLData_t* SIGLIB_PTR_D
   }
 }    // End of SDA_OnePoleHighPassNormalized()
 
-/**/
-
 /********************************************************
  * Function: SDA_OnePoleHighPassPerSample
  *
@@ -1903,8 +1812,6 @@ void SIGLIB_FUNC_DECL SDA_OnePoleHighPassPerSample(const SLData_t* SIGLIB_PTR_DE
                SampleLength);    // Scale output
 }    // End of SDA_OnePoleHighPassPerSample()
 
-/**/
-
 /********************************************************
  * Function: SDS_OnePoleTimeConstantToFilterCoeff
  *
@@ -1929,8 +1836,6 @@ SLData_t SDS_OnePoleTimeConstantToFilterCoeff(const SLData_t periodMs, const SLD
 {
   return (SDS_Exp(-SIGLIB_EXP_MINUS_ONE / (periodMs * 0.001 * sampleRate)));
 }    // SDS_OnePoleTimeConstantToFilterCoeff
-
-/**/
 
 /********************************************************
  * Function: SDS_OnePoleCutOffFrequencyToFilterCoeff
@@ -1957,8 +1862,6 @@ SLData_t SDS_OnePoleCutOffFrequencyToFilterCoeff(const SLData_t cutOffFreq, cons
   return (SDS_Exp(-SIGLIB_TWO_PI * (cutOffFreq / sampleRate)));
 }    // SDS_OnePoleCutOffFrequencyToFilterCoeff
 
-/**/
-
 /********************************************************
  * Function: SDS_OnePoleHighPassCutOffFrequencyToFilterCoeff
  *
@@ -1983,8 +1886,6 @@ SLData_t SDS_OnePoleHighPassCutOffFrequencyToFilterCoeff(const SLData_t cutOffFr
 {
   return (-SDS_Exp(-SIGLIB_TWO_PI * (SIGLIB_HALF - (cutOffFreq / sampleRate))));
 }    // SDS_OnePoleHighPassCutOffFrequencyToFilterCoeff
-
-/**/
 
 /********************************************************
  * Function: SIF_AllPole
@@ -2011,8 +1912,6 @@ void SIGLIB_FUNC_DECL SIF_AllPole(SLData_t* SIGLIB_PTR_DECL pState, SLArrayIndex
 
   *pFilterIndex = 0;    // Set state array offset
 }    // End of SIF_AllPole()
-
-/**/
 
 /********************************************************
  * Function: SDS_AllPole
@@ -2059,8 +1958,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_AllPole(const SLData_t Source, SLData_t* SIGLIB_PT
 
   return (Result);
 }    // End of SDS_AllPole()
-
-/**/
 
 /********************************************************
  * Function: SDA_AllPole
@@ -2119,8 +2016,6 @@ void SIGLIB_FUNC_DECL SDA_AllPole(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
   *pFilterIndex = LocalFilterIndex;    // Save filter index for next iteration
 }    // End of SDA_AllPole()
 
-/**/
-
 /********************************************************
  * Function: SDA_ZDomainCoefficientReorg
  *
@@ -2153,8 +2048,6 @@ void SIGLIB_FUNC_DECL SDA_ZDomainCoefficientReorg(const SLData_t* SIGLIB_PTR_DEC
     j += 4;
   }
 }    // End of SDA_ZDomainCoefficientReorg()
-
-/**/
 
 /********************************************************
  * Function: SIF_IirNotchFilter2
@@ -2197,7 +2090,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_IirNotchFilter2(SLData_t* SIGLIB_PTR_DECL pIIRCoe
   return (SIGLIB_NO_ERROR);
 }    // End of SIF_IirNotchFilter2
 
-/**/
 #include <siglib_iir_constants.h>    // Include SigLib IIR filter normalized coefficient header file
 
 /********************************************************
@@ -2254,7 +2146,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_IirNormalizedCoefficients(SLData_t* SIGLIB_PTR_DE
   return (SIGLIB_NO_ERROR);
 }    // End of SIF_IirNormalizedCoefficients()
 
-/**/
 #include <siglib_iir_constants.h>    // Include SigLib IIR filter normalized coefficient header file
 
 /********************************************************
@@ -2311,8 +2202,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_IirNormalizedSPlaneCoefficients(SLComplexRect_s* 
   return (SIGLIB_NO_ERROR);
 }    // End of SIF_IirNormalizedSPlaneCoefficients()
 
-/**/
-
 /********************************************************
  * Function: SDA_TranslateSPlaneCutOffFrequency
  *
@@ -2340,8 +2229,6 @@ void SIGLIB_FUNC_DECL SDA_TranslateSPlaneCutOffFrequency(const SLComplexRect_s* 
     pDstSPlanePZs[i] = SCV_VectorMultiplyScalar(pSrcSPlanePZs[i], (NewCutOffFrequency / SIGLIB_TWO_PI));
   }
 }    // End of SDA_TranslateSPlaneCutOffFrequency()
-
-/**/
 
 /********************************************************
  * Function: SDA_IirLpLpShift
@@ -2440,8 +2327,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_IirLpLpShift(const SLData_t* SIGLIB_PTR_DECL SrcCo
   return (Scale);
 }    // End of SDA_IirLpLpShift
 
-/**/
-
 /********************************************************
  * Function: SDA_IirLpHpShift
  *
@@ -2536,8 +2421,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_IirLpHpShift(const SLData_t* SIGLIB_PTR_DECL SrcCo
   return (Scale);
 }    // End of SDA_IirLpHpShift
 
-/**/
-
 /********************************************************
  * Function: SIF_Iir2PoleLpf
  *
@@ -2565,8 +2448,6 @@ void SIGLIB_FUNC_DECL SIF_Iir2PoleLpf(SLData_t* SIGLIB_PTR_DECL pState, SLData_t
   *(pState + 1) = SIGLIB_ZERO;
 }    // End of SIF_Iir2PoleLpf()
 
-/**/
-
 /********************************************************
  * Function: SDS_Iir2Pole
  *
@@ -2593,8 +2474,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_Iir2Pole(const SLData_t Source, SLData_t* SIGLIB_P
 
   return (FeedbackSumOfProducts);    // Save output
 }    // End of SDS_Iir2Pole()
-
-/**/
 
 /********************************************************
  * Function: SDA_Iir2Pole
@@ -2635,8 +2514,6 @@ void SIGLIB_FUNC_DECL SDA_Iir2Pole(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_
   }
 }    // End of SDA_Iir2Pole()
 
-/**/
-
 /********************************************************
  * Function: SDA_IirNegateAlphaCoeffs
  *
@@ -2666,15 +2543,13 @@ void SIGLIB_FUNC_DECL SDA_IirNegateAlphaCoeffs(const SLData_t* SIGLIB_PTR_DECL p
   }
 }    // End of SDA_IirNegateAlphaCoeffs()
 
-/**/
-
 /********************************************************
- * Function: SIF_GraphicalEqualizerFilterBank
+ * Function: SIF_GraphicEqualizerFilterBank
  *
  * Parameters:
  *   const SLData_t SIGLIB_PTR_DECL * inputFilterCutOffFrequencies,
- *   SLData_t SIGLIB_PTR_DECL * graphical_eq_coeffs,
- *   SLData_t SIGLIB_PTR_DECL * graphical_eq_state_arrays,
+ *   SLData_t SIGLIB_PTR_DECL * graphic_eq_coeffs,
+ *   SLData_t SIGLIB_PTR_DECL * graphic_eq_state_arrays,
  *   const SLArrayIndex_t numFilterBands,
  *   const SLData_t sampleRate,
  *   const SLData_t gainMinDB,
@@ -2685,16 +2560,16 @@ void SIGLIB_FUNC_DECL SDA_IirNegateAlphaCoeffs(const SLData_t* SIGLIB_PTR_DECL p
  *   SLError_t - Memory allocation error or no error
  *
  * Description:
- *   Generate the coefficients for a graphical equalizer
+ *   Generate the coefficients for a graphic equalizer
  *   filter bank.
  *
  ********************************************************/
 
-SLError_t SIGLIB_FUNC_DECL SIF_GraphicalEqualizerFilterBank(const SLData_t SIGLIB_PTR_DECL* inputFilterCutOffFrequencies,
-                                                            SLData_t SIGLIB_PTR_DECL* graphical_eq_coeffs,
-                                                            SLData_t SIGLIB_PTR_DECL* graphical_eq_state_arrays,
-                                                            const SLArrayIndex_t numFilterBands, const SLData_t sampleRate,
-                                                            const SLData_t gainMinDB, const SLData_t gainStepDB, const SLArrayIndex_t numGainLevels)
+SLError_t SIGLIB_FUNC_DECL SIF_GraphicEqualizerFilterBank(const SLData_t SIGLIB_PTR_DECL* inputFilterCutOffFrequencies,
+                                                          SLData_t SIGLIB_PTR_DECL* graphic_eq_coeffs,
+                                                          SLData_t SIGLIB_PTR_DECL* graphic_eq_state_arrays, const SLArrayIndex_t numFilterBands,
+                                                          const SLData_t sampleRate, const SLData_t gainMinDB, const SLData_t gainStepDB,
+                                                          const SLArrayIndex_t numGainLevels)
 {
   SLData_t* filterCentreFrequencies = SUF_VectorArrayAllocate(numFilterBands);
   SLData_t* filterBandwidths = SUF_VectorArrayAllocate(numFilterBands);
@@ -2752,38 +2627,38 @@ SLError_t SIGLIB_FUNC_DECL SIF_GraphicalEqualizerFilterBank(const SLData_t SIGLI
   for (SLArrayIndex_t freqBand = 0; freqBand < numFilterBands; freqBand++) {
     for (SLArrayIndex_t gainLevel = 0; gainLevel < numGainLevels; gainLevel++) {
       if (freqBand == 0) {
-        SIF_IirLowShelfFilter(graphical_eq_coeffs + (freqBand * numGainLevels * SIGLIB_IIR_COEFFS_PER_BIQUAD) +
+        SIF_IirLowShelfFilter(graphic_eq_coeffs + (freqBand * numGainLevels * SIGLIB_IIR_COEFFS_PER_BIQUAD) +
                                   (gainLevel * SIGLIB_IIR_COEFFS_PER_BIQUAD),                    // Filter coefficient array
                               filterCentreFrequencies[freqBand] / sampleRate,                    // Filter cut-off frequency
                               filterCentreFrequencies[freqBand] / filterBandwidths[freqBand],    // Filter Q factor
                               filterGainTable[gainLevel]);                                       // Filter shelf gain
                                                                                                  // SUF_DebugPrintIIRCoefficients
-        // (graphical_eq_coeffs+(freqBand*numGainLevels*SIGLIB_IIR_COEFFS_PER_BIQUAD)+(gainLevel*SIGLIB_IIR_COEFFS_PER_BIQUAD),
+        // (graphic_eq_coeffs+(freqBand*numGainLevels*SIGLIB_IIR_COEFFS_PER_BIQUAD)+(gainLevel*SIGLIB_IIR_COEFFS_PER_BIQUAD),
         // 1);
       } else if (freqBand == (numFilterBands - 1)) {
-        SIF_IirHighShelfFilter(graphical_eq_coeffs + (freqBand * numGainLevels * SIGLIB_IIR_COEFFS_PER_BIQUAD) +
+        SIF_IirHighShelfFilter(graphic_eq_coeffs + (freqBand * numGainLevels * SIGLIB_IIR_COEFFS_PER_BIQUAD) +
                                    (gainLevel * SIGLIB_IIR_COEFFS_PER_BIQUAD),                    // Filter coefficient array
                                filterCentreFrequencies[freqBand] / sampleRate,                    // Filter cut-off frequency
                                filterCentreFrequencies[freqBand] / filterBandwidths[freqBand],    // Filter Q factor
                                filterGainTable[gainLevel]);                                       // Filter shelf gain
                                                                                                   // SUF_DebugPrintIIRCoefficients
-        // (graphical_eq_coeffs+(freqBand*numGainLevels*SIGLIB_IIR_COEFFS_PER_BIQUAD)+(gainLevel*SIGLIB_IIR_COEFFS_PER_BIQUAD),
+        // (graphic_eq_coeffs+(freqBand*numGainLevels*SIGLIB_IIR_COEFFS_PER_BIQUAD)+(gainLevel*SIGLIB_IIR_COEFFS_PER_BIQUAD),
         // 1);
       } else {
-        SIF_IirPeakingFilter(graphical_eq_coeffs + (freqBand * numGainLevels * SIGLIB_IIR_COEFFS_PER_BIQUAD) +
+        SIF_IirPeakingFilter(graphic_eq_coeffs + (freqBand * numGainLevels * SIGLIB_IIR_COEFFS_PER_BIQUAD) +
                                  (gainLevel * SIGLIB_IIR_COEFFS_PER_BIQUAD),                    // Filter coefficient array
                              filterCentreFrequencies[freqBand] / sampleRate,                    // Filter cut-off frequency
                              filterCentreFrequencies[freqBand] / filterBandwidths[freqBand],    // Filter Q factor
                              filterGainTable[gainLevel]);                                       // Filter peak gain
                                                                                                 // SUF_DebugPrintIIRCoefficients
-        // (graphical_eq_coeffs+(freqBand*numGainLevels*SIGLIB_IIR_COEFFS_PER_BIQUAD)+(gainLevel*SIGLIB_IIR_COEFFS_PER_BIQUAD),
+        // (graphic_eq_coeffs+(freqBand*numGainLevels*SIGLIB_IIR_COEFFS_PER_BIQUAD)+(gainLevel*SIGLIB_IIR_COEFFS_PER_BIQUAD),
         // 1);
       }
     }
   }
 
   for (SLArrayIndex_t i = 0; i < numFilterBands * SIGLIB_IIR_DELAY_SIZE; i++) {    // Clear the filter bank state array
-    graphical_eq_state_arrays[i] = SIGLIB_ZERO;
+    graphic_eq_state_arrays[i] = SIGLIB_ZERO;
   }
 
 #if SIGLIB_ENABLE_DEBUG_LOGGING
@@ -2811,4 +2686,4 @@ SLError_t SIGLIB_FUNC_DECL SIF_GraphicalEqualizerFilterBank(const SLData_t SIGLI
   SUF_MemoryFree(filterGainTable);
 
   return (SIGLIB_NO_ERROR);    // Return success code
-}    // End of SIF_GraphicalEqualizerFilterBank()
+}    // End of SIF_GraphicEqualizerFilterBank()

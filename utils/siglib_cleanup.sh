@@ -147,4 +147,3 @@ pushd $SIGLIB_PATH/Examples/CExamples/VibrationAnalysis/
 $SIGLIB_PATH/utils/clean_executables.sh
 popd
 
-

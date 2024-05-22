@@ -15,11 +15,9 @@
 %include <typemaps/typemaps.swg>
 #else
 
-
 // INPUT typemaps.
 // These remap a C pointer to be an "INPUT" value which is passed by value
 // instead of reference.
-
 
 /*
 The following methods can be applied to turn a pointer into a simple
@@ -49,7 +47,7 @@ To use these, suppose you had a C function like this :
         }
 
 You could wrap it with SWIG as follows :
-        
+
         %include typemaps.i
         double fadd(double *INPUT, double *INPUT);
 
@@ -61,7 +59,7 @@ or you can use the %apply directive :
 
 */
 
-%define INPUT_TYPEMAP(type, converter) 
+%define INPUT_TYPEMAP(type, converter)
 %typemap(in) type *INPUT(type temp), type &INPUT(type temp) {
   temp = (type) converter($input);
   $1 = &temp;
@@ -102,9 +100,8 @@ INPUT_TYPEMAP(unsigned char, SvUV);
 %typemap(typecheck) unsigned long long *INPUT = unsigned long long;
 %typemap(typecheck) unsigned long long &INPUT = unsigned long long;
 
-
 #undef INPUT_TYPEMAP
-                 
+
 // OUTPUT typemaps.   These typemaps are used for parameters that
 // are output only.   The output value is appended to the result as
 // a list element.
@@ -149,7 +146,7 @@ or you can use the %apply directive :
         double modf(double x, double *ip);
 
 The Perl output of the function would be an array containing both
-output values. 
+output values.
 
 */
 
@@ -167,7 +164,7 @@ output values.
                  float          *OUTPUT(float temp), float &OUTPUT(float temp),
                  double         *OUTPUT(double temp), double &OUTPUT(double temp),
                  long long      *OUTPUT($*1_ltype temp), long long &OUTPUT($*1_ltype temp),
-                 unsigned long long *OUTPUT($*1_ltype temp), unsigned long long &OUTPUT($*1_ltype temp) 
+                 unsigned long long *OUTPUT($*1_ltype temp), unsigned long long &OUTPUT($*1_ltype temp)
 "$1 = &temp;";
 
 %typemap(argout)  int            *OUTPUT, int &OUTPUT,
@@ -196,7 +193,6 @@ output values.
   sv_setuv($result,(UV) *($1));
   argvi++;
 }
-
 
 
 %typemap(argout) float    *OUTPUT, float &OUTPUT,
@@ -312,7 +308,6 @@ do this :
 %typemap(in) long long &INOUT = long long &INPUT;
 %typemap(in) unsigned long long &INOUT = unsigned long long &INPUT;
 
-
 %typemap(argout) int *INOUT = int *OUTPUT;
 %typemap(argout) short *INOUT = short *OUTPUT;
 %typemap(argout) long *INOUT = long *OUTPUT;
@@ -327,7 +322,6 @@ do this :
 %typemap(argout) long long *INOUT = long long *OUTPUT;
 %typemap(argout) unsigned long long *INOUT = unsigned long long *OUTPUT;
 
-
 %typemap(argout) int &INOUT = int &OUTPUT;
 %typemap(argout) short &INOUT = short &OUTPUT;
 %typemap(argout) long &INOUT = long &OUTPUT;
@@ -341,7 +335,6 @@ do this :
 %typemap(argout) double &INOUT = double &OUTPUT;
 %typemap(argout) long long &INOUT = long long &OUTPUT;
 %typemap(argout) unsigned long long &INOUT = unsigned long long &OUTPUT;
-
 
 /* Overloading information */
 
@@ -378,6 +371,5 @@ do this :
 // --------------------------------------------------------------------
 // Special types
 // --------------------------------------------------------------------
-
 
 %include <reference.i>

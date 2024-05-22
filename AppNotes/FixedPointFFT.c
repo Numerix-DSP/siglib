@@ -241,8 +241,6 @@ int main(void)
   return (0);
 }
 
-/**/
-
 /********************************************************
  * Function: SIF_Fft16
  *
@@ -271,8 +269,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_Fft16(SLInt16_t* SIGLIB_PTR_DECL pFFTCoeffs, cons
   return (SIGLIB_NO_ERROR);
 
 }    // End of SIF_Fft16()
-
-/**/
 
 /********************************************************
  * Function: SDA_Rfft16
@@ -379,8 +375,6 @@ void SIGLIB_FUNC_DECL SDA_Rfft16(SLInt16_t SIGLIB_PTR_DECL realData[], SLInt16_t
 
 }    // End of SDA_Rfft16()
 
-/**/
-
 /********************************************************
  * Function: SIF_Fft32
  *
@@ -409,8 +403,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_Fft32(SLInt32_t* SIGLIB_PTR_DECL pFFTCoeffs, cons
   return (SIGLIB_NO_ERROR);
 
 }    // End of SIF_Fft32()
-
-/**/
 
 /********************************************************
  * Function: SDA_Rfft32
@@ -517,8 +509,6 @@ void SIGLIB_FUNC_DECL SDA_Rfft32(SLInt32_t SIGLIB_PTR_DECL realData[], SLInt32_t
 
 }    // End of SDA_Rfft32()
 
-/**/
-
 /********************************************************
  * Function: SIF_Window16
  *
@@ -573,8 +563,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_Window16(SLInt16_t* SIGLIB_PTR_DECL pWindowCoeffs
 
 }    // End of SDA_Window16()
 
-/**/
-
 /********************************************************
  * Function: SDA_Window16
  *
@@ -614,8 +602,6 @@ void SIGLIB_FUNC_DECL SDA_Window16(const SLInt16_t* SIGLIB_PTR_DECL pSrc, SLInt1
   }
 
 }    // End of SDA_Window16()
-
-/**/
 
 /********************************************************
  * Function: SIF_Window32
@@ -672,8 +658,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_Window32(SLInt32_t* SIGLIB_PTR_DECL pWindowCoeffs
 
 }    // End of SDA_Window32()
 
-/**/
-
 /********************************************************
  * Function: SDA_Window32
  *
@@ -714,8 +698,6 @@ void SIGLIB_FUNC_DECL SDA_Window32(const SLInt32_t* SIGLIB_PTR_DECL pSrc, SLInt3
 
 }    // End of SDA_Window32()
 
-/**/
-
 /********************************************************
  * Function: SUF_Fix16ToSigLibData
  *
@@ -746,8 +728,6 @@ void SIGLIB_FUNC_DECL SUF_Fix16ToSigLibData(SLInt16_t* SIGLIB_PTR_DECL pSrc, SLD
   }
 
 }    // End of SUF_Fix16ToSigLibData()
-
-/**/
 
 /********************************************************
  * Function: SUF_SigLibDataToFix16
@@ -780,8 +760,6 @@ void SIGLIB_FUNC_DECL SUF_SigLibDataToFix16(SLData_t* SIGLIB_PTR_DECL pSrc, SLIn
 
 }    // End of SUF_SigLibDataToFix16()
 
-/**/
-
 /********************************************************
  * Function: SUF_Fix32ToSigLibData
  *
@@ -812,8 +790,6 @@ void SIGLIB_FUNC_DECL SUF_Fix32ToSigLibData(SLInt32_t* SIGLIB_PTR_DECL pSrc, SLD
   }
 
 }    // End of SUF_Fix32ToSigLibData()
-
-/**/
 
 /********************************************************
  * Function: SUF_SigLibDataToFix32

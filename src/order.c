@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Order analysis routines, for SigLib DSP library.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_ORDER 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SDA_ExtractOrder
@@ -90,8 +87,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExtractOrder(const SLData_t* SIGLIB_PTR_DECL pSrc,
 
   return (MaxValue);
 }    // End of SDA_ExtractOrder()
-
-/**/
 
 /********************************************************
  * Function: SDA_SumLevel
@@ -142,8 +137,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_SumLevel(const SLData_t* SIGLIB_PTR_DECL pSrc, con
 
   return (SumLevel);
 }    // End of SDA_SumLevel()
-
-/**/
 
 /********************************************************
  * Function: SDA_SumLevelWholeSpectrum
@@ -208,8 +201,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_SumLevelWholeSpectrum(const SLData_t* SIGLIB_PTR_D
   return (returnValue);
 }    // End of SDA_SumLevelWholeSpectrum()
 
-/**/
-
 /********************************************************
  * Function: SIF_OrderAnalysis
  *
@@ -273,8 +264,6 @@ void SIGLIB_FUNC_DECL SIF_OrderAnalysis(SLData_t* SIGLIB_PTR_DECL pSincLUT, SLDa
   SDA_Clear(pImagAverage,     // Pointer to source array
             ResultLength);    // Array length
 }    // End of SIF_OrderAnalysis()
-
-/**/
 
 /********************************************************
  * Function: SDA_OrderAnalysis

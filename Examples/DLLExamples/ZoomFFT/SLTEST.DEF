@@ -1,6 +1,5 @@
 ; SLTest.DEF Module-definition file for SigLib DLL test program
 
-
 NAME		CPPTST32
 
 DESCRIPTION	'Windows SigLib DLL test program. , Copyright Delta Numerix 1998 All rights reserved.'
@@ -10,5 +9,4 @@ HEAPSIZE	4096
 CODE		PRELOAD MOVEABLE DISCARDABLE
 
 DATA		PRELOAD MOVEABLE MULTIPLE
-
 

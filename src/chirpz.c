@@ -34,7 +34,6 @@ Copyright (c) 2024 Delta Numerix, All rights reserved.
 ---------------------------------------------------------------------------
 Description: Chirp z-Transform routines, for SigLib DSP library.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_CHIRPZ 1    // Defines the source file that this code is being used in
@@ -42,8 +41,6 @@ Description: Chirp z-Transform routines, for SigLib DSP library.
 #include <siglib.h>    // Include SigLib header file
 
 #define LOCAL_DEBUG 0    // Set to '1' to enable debug print outs
-
-/**/
 
 /********************************************************
  * Function: SIF_Czt
@@ -145,8 +142,6 @@ void SIGLIB_FUNC_DECL SIF_Czt(SLData_t* SIGLIB_PTR_DECL pAWNr, SLData_t* SIGLIB_
 
 }    // End of SIF_Czt()
 
-/**/
-
 /********************************************************
  * Function: SIF_Awn
  *
@@ -197,8 +192,6 @@ void SIGLIB_FUNC_DECL SIF_Awn(SLData_t* SIGLIB_PTR_DECL pAWNr, SLData_t* SIGLIB_
     D.imag = Temp.imag;
   }
 }    // End of SIF_Awn()
-
-/**/
 
 /********************************************************
  * Function: SIF_Vl
@@ -280,8 +273,6 @@ void SIGLIB_FUNC_DECL SIF_Vl(SLData_t* SIGLIB_PTR_DECL pvLr, SLData_t* SIGLIB_PT
     D.imag = Temp.imag;
   }
 }    // End of SIF_Vl()
-
-/**/
 
 /********************************************************
  * Function: SIF_Wm

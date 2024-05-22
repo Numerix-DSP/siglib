@@ -2,11 +2,9 @@
 
             Numerix System Analyzer
 
-
                   Version 2.22
 
                    20/04/2020
-
 
 
 INTRODUCTION
@@ -46,12 +44,10 @@ HISTORY NOTES
     23/09/2017    V2.21     Linear graph x axis scale updated
     20/04/2020    V2.22     Documentation updated
 
-
 INSTALLATION
 
 You will need to unzip the SA install file and install the other libraries from the
 appropriate web sites to rebuild this application.
-
 
 BUILDING wxWidgets
 
@@ -66,12 +62,10 @@ nmake -f makefile.vc RUNTIME_LIBS=static BUILD=release
 Set the WXWIN environment variable :
 WXWIN=C:\wxWidgets-3.0.2
 
-
             IMPORTANT
 In order to recompile this application, after installation please ensure that the
 library and include file directories are included in the compiler; library and
 include paths.
-
 
 USING SA
 
@@ -88,7 +82,6 @@ There are three other options :
 pole filter and peak hold processing on each frequency bin
     Chirp - Generates a chirp signal between 0Hz and the Nyquist frequency (22.050 KHz) and displays the samples in time, frequency and cross-correlation modes.
 
-
 USING SA WITH PORTAUDIO
 
 When using portaudio you can re-build it to choose different audio interfaces.
@@ -100,7 +93,6 @@ Testing, under Windows, has shown that DS mode can introduce large latencies
 with certain I/O solutions (e.g. M-Audio Transit USB) in this case WMME mode
 might be more useful.
 
-
 COMPILING SA WITH AND WITHOUT SIGLIB
 
 If you have a copy of SigLib installed on your computer then you can use SA with it
@@ -108,7 +100,6 @@ and enable the full functionality of SA by uncommenting line 12 in sa.h, as foll
 #include <siglib.h>
 If you do not have SigLib installed then you can comment out this line and the
 functionality will not be available to you.
-
 
 
 CALIBRATION
@@ -137,7 +128,6 @@ The length of the delay caused by the software component and also the offset cau
 ADC converter calibration process may vary when the PC is rebooted so thresholds may also
 need to be varied.
 
-
 TRIGGER LED
 
 For some reason, the trigger LED does not draw correctly under certain Operating Systems.
@@ -147,21 +137,17 @@ SA is provided with two versions of the LED bitmaps :
 To swap between the bitmaps, please replace the standard ones with the modified versions.
 
 
-
 Numerix Ltd. hopes you will find this product useful, if so then please
 tell others otherwise if you have any comments or suggestions then
 please tell us.
-
 
 LICENSE
 
 This software is free for use in any application but Numerix Ltd does
 not provide any warranty or support.
 
-
 DFilter, DFPlus, Winbuf and SigLib are trademarks of Numerix Ltd. all other
 trademarks acknowledged.
-
 
 For additional information, please contact :
 

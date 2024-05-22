@@ -27,7 +27,6 @@ set key off          # No key
 
 plot "Tone_10_30dB.dat" using 1:2 with lines ls 1, "Tone_30_50dB.dat" using 1:2 with lines ls 2
 
-
 set autoscale  yfix
 set style data points
 set xlabel "Time (sec)"

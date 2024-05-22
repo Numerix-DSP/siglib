@@ -42,8 +42,6 @@ Description: Windowing routines for SigLib DSP library.
 
 #define SYMMETRICAL_WINDOW 0    // Set to '1' for symmetrical window and '0' for periodic
 
-/**/
-
 /********************************************************
  * Function: SIF_Window
  *
@@ -169,8 +167,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_Window(SLData_t* SIGLIB_PTR_DECL pWindowCoeffs, c
   return (SIGLIB_NO_ERROR);
 
 }    // End of SIF_Window()
-
-/**/
 
 /********************************************************
  * Function: SIF_TableTopWindow
@@ -309,8 +305,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_TableTopWindow(SLData_t* SIGLIB_PTR_DECL pWindowC
 
 }    // End of SIF_TableTopWindow()
 
-/**/
-
 /********************************************************
  * Function: SDA_Window
  *
@@ -349,8 +343,6 @@ void SIGLIB_FUNC_DECL SDA_Window(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
   }
 
 }    // End of SDA_Window()
-
-/**/
 
 /********************************************************
  * Function: SDA_ComplexWindow
@@ -401,8 +393,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexWindow(const SLData_t* SIGLIB_PTR_DECL pSrcReal
 
 }    // End of SDA_ComplexWindow()
 
-/**/
-
 /********************************************************
  * Function: SDA_WindowInverseCoherentGain
  *
@@ -442,8 +432,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_WindowInverseCoherentGain(const SLData_t* SIGLIB_P
 
 }    // End of SDA_WindowInverseCoherentGain()
 
-/**/
-
 /********************************************************
  * Function: SDA_WindowEquivalentNoiseBandwidth
  *
@@ -466,8 +454,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_WindowEquivalentNoiseBandwidth(const SLData_t* SIG
 
 }    // End of SDA_WindowEquivalentNoiseBandwidth()
 
-/**/
-
 /********************************************************
  * Function: SDA_WindowProcessingGain
  *
@@ -489,8 +475,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_WindowProcessingGain(const SLData_t* SIGLIB_PTR_DE
                                  (SDA_Sum(pWindowCoeffs, windowLength) * SDA_Sum(pWindowCoeffs, windowLength)));
 
 }    // End of SDA_WindowProcessingGain()
-
-/**/
 
 /********************************************************
  * Function: SDS_I0Bessel

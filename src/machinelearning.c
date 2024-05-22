@@ -44,8 +44,6 @@ Description: DSP basic math functions, for SigLib DSP library.
 #  pragma GCC diagnostic ignored "-Wunused-result"
 #endif
 
-/**/
-
 /********************************************************
  * Function: SDA_TwoLayer2CategoryNetworkFit
  *
@@ -182,8 +180,6 @@ void SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryNetworkFit(const SLData_t* pTrainingD
   }
 }    // End of SDA_TwoLayer2CategoryNetworkFit()
 
-/**/
-
 /********************************************************
  * Function: SDA_TwoLayer2CategoryNetworkPredict
  *
@@ -273,8 +269,6 @@ SLNeuralNetworkPrediction_s SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryNetworkPredict
 
   return (prediction);
 }    // End of SDA_TwoLayer2CategoryNetworkPredict()
-
-/**/
 
 /********************************************************
  * Function: SDA_TwoLayerNCategoryNetworkFit
@@ -423,8 +417,6 @@ void SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryNetworkFit(const SLData_t* pTrainingD
   }
 }    // End of SDA_TwoLayerNCategoryNetworkFit()
 
-/**/
-
 /********************************************************
  * Function: SDA_TwoLayerNCategoryNetworkPredict
  *
@@ -510,8 +502,6 @@ SLNeuralNetworkPrediction_s SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryNetworkPredict
 
   return (prediction);    // Category encoding: 0 to N-1
 }    // End of SDA_TwoLayerNCategoryNetworkPredict()
-
-/**/
 
 /********************************************************
  * Function: SDA_TwoLayer2CategoryWithBiasesNetworkFit
@@ -694,8 +684,6 @@ void SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryWithBiasesNetworkFit(
   }
 }    // End of SDA_TwoLayer2CategoryWithBiasesNetworkFit()
 
-/**/
-
 /********************************************************
  * Function: SDA_TwoLayer2CategoryWithBiasesNetworkPredict
  *
@@ -790,8 +778,6 @@ SLNeuralNetworkPrediction_s SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryWithBiasesNetw
 
   return (prediction);
 }    // End of SDA_TwoLayer2CategoryWithBiasesNetworkPredict()
-
-/**/
 
 /********************************************************
  * Function: SDA_TwoLayerNCategoryWithBiasesNetworkFit
@@ -988,8 +974,6 @@ void SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryWithBiasesNetworkFit(
   }
 }    // End of SDA_TwoLayerNCategoryWithBiasesNetworkFit()
 
-/**/
-
 /********************************************************
  * Function: SDA_TwoLayerNCategoryWithBiasesNetworkPredict
  *
@@ -1081,8 +1065,6 @@ SLNeuralNetworkPrediction_s SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryWithBiasesNetw
   return (prediction);    // Category encoding: 0 to N-1
 }    // End of SDA_TwoLayerNCategoryWithBiasesNetworkPredict()
 
-/**/
-
 /********************************************************
  * Function: SDS_ActivationReLU
  *
@@ -1104,8 +1086,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationReLU(const SLData_t x)
 
   return SIGLIB_ZERO;
 }    // End of SDS_ActivationReLU()
-
-/**/
 
 /********************************************************
  * Function: SDA_ActivationReLU
@@ -1135,8 +1115,6 @@ void SIGLIB_FUNC_DECL SDA_ActivationReLU(const SLData_t* pSrc, SLData_t* pDst, c
   }
 }    // End of SDA_ActivationReLU()
 
-/**/
-
 /********************************************************
  * Function: SDS_ActivationReLUDerivative
  *
@@ -1158,8 +1136,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationReLUDerivative(const SLData_t x)
 
   return SIGLIB_ZERO;
 }    // End of SDS_ActivationReLUDerivative()
-
-/**/
 
 /********************************************************
  * Function: SDA_ActivationReLUDerivative
@@ -1189,8 +1165,6 @@ void SIGLIB_FUNC_DECL SDA_ActivationReLUDerivative(const SLData_t* pSrc, SLData_
   }
 }    // End of SDA_ActivationReLUDerivative()
 
-/**/
-
 /********************************************************
  * Function: SDS_ActivationLeakyReLU
  *
@@ -1212,8 +1186,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationLeakyReLU(const SLData_t x, const SLData
 
   return (x * alpha);
 }    // End of SDS_ActivationLeakyReLU()
-
-/**/
 
 /********************************************************
  * Function: SDA_ActivationLeakyReLU
@@ -1243,8 +1215,6 @@ void SIGLIB_FUNC_DECL SDA_ActivationLeakyReLU(const SLData_t* pSrc, const SLData
   }
 }    // End of SDA_ActivationLeakyReLU()
 
-/**/
-
 /********************************************************
  * Function: SDS_ActivationLeakyReLUDerivative
  *
@@ -1266,8 +1236,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationLeakyReLUDerivative(const SLData_t x, co
 
   return alpha;
 }    // End of SDS_ActivationLeakyReLUDerivative()
-
-/**/
 
 /********************************************************
  * Function: SDA_ActivationLeakyReLUDerivative
@@ -1298,8 +1266,6 @@ void SIGLIB_FUNC_DECL SDA_ActivationLeakyReLUDerivative(const SLData_t* pSrc, co
   }
 }    // End of SDA_ActivationLeakyReLUDerivative()
 
-/**/
-
 /********************************************************
  * Function: SDS_ActivationLogistic
  *
@@ -1317,8 +1283,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationLogistic(const SLData_t x)
 {
   return (SIGLIB_ONE / (SIGLIB_ONE + SDS_Exp(-x)));
 }    // End of SDS_ActivationLogistic()
-
-/**/
 
 /********************************************************
  * Function: SDA_ActivationLogistic
@@ -1344,8 +1308,6 @@ void SIGLIB_FUNC_DECL SDA_ActivationLogistic(const SLData_t* pSrc, SLData_t* pDs
   }
 }    // End of SDA_ActivationLogistic()
 
-/**/
-
 /********************************************************
  * Function: SDS_ActivationLogisticDerivative
  *
@@ -1363,8 +1325,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationLogisticDerivative(const SLData_t x)
 {
   return (SIGLIB_ONE / (SIGLIB_ONE + SDS_Exp(-x))) * (SIGLIB_ONE - (SIGLIB_ONE / (SIGLIB_ONE + SDS_Exp(-x))));
 }    // End of SDS_ActivationLogisticDerivative()
-
-/**/
 
 /********************************************************
  * Function: SDA_ActivationLogisticDerivative
@@ -1390,8 +1350,6 @@ void SIGLIB_FUNC_DECL SDA_ActivationLogisticDerivative(const SLData_t* pSrc, SLD
   }
 }    // End of SDA_ActivationLogisticDerivative()
 
-/**/
-
 /********************************************************
  * Function: SDS_ActivationTanH
  *
@@ -1410,8 +1368,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationTanH(const SLData_t x)
 {
   return (SIGLIB_TWO / (SIGLIB_ONE + SDS_Exp(-SIGLIB_TWO * x))) - SIGLIB_ONE;
 }    // End of SDS_ActivationTanH()
-
-/**/
 
 /********************************************************
  * Function: SDA_ActivationTanH
@@ -1437,8 +1393,6 @@ void SIGLIB_FUNC_DECL SDA_ActivationTanH(const SLData_t* pSrc, SLData_t* pDst, c
   }
 }    // End of SDA_ActivationTanH()
 
-/**/
-
 /********************************************************
  * Function: SDS_ActivationTanHDerivative
  *
@@ -1458,8 +1412,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationTanHDerivative(const SLData_t x)
   SLData_t fx = (SIGLIB_TWO / (SIGLIB_ONE + SDS_Exp(-SIGLIB_TWO * x))) - SIGLIB_ONE;
   return (SIGLIB_ONE / (fx * fx));
 }    // End of SDS_ActivationTanHDerivative()
-
-/**/
 
 /********************************************************
  * Function: SDA_ActivationTanHDerivative

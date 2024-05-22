@@ -5,7 +5,6 @@
 # =========================================================================
 
 
-
 # -------------------------------------------------------------------------
 # These are configurable options:
 # -------------------------------------------------------------------------
@@ -36,7 +35,6 @@ WX_UNICODE ?= $(shell $(WX_CONFIG) --query-chartype | sed 's/unicode/1/;s/ansi/0
 
 # Version of the wx library to build against.
 WX_VERSION ?= $(shell $(WX_CONFIG) --query-version | sed -e 's/\([0-9]*\)\.\([0-9]*\)/\1\2/')
-
 
 
 # -------------------------------------------------------------------------
@@ -84,7 +82,6 @@ endif
 ifeq ($(WX_SHARED),1)
 WX_CONFIG_SHARED_FLAG = --static=no
 endif
-
 
 ### Targets: ###
 
@@ -154,7 +151,6 @@ dfplus_remez_gen.o: ./remez_gen.cpp
 	$(CXX) -c -arch x86_64 -o $@ $(DFPLUS_CXXFLAGS) $(CPPDEPS) $<
 
 .PHONY: all install uninstall clean
-
 
 # Dependencies tracking:
 -include ./*.d

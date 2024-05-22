@@ -11,7 +11,7 @@ Additional Functionality:
   Applications/DigitalFilterPlus added
 
 Operational Changes:
-  None.
+  SIF_GraphicalEqualizerFilterBank changed to SIF_GraphicEqualizerFilterBank.
 
 Additional Processor / Compiler Support:
   None.
@@ -24,7 +24,6 @@ Bug Fixes:
 
 Notes:
   None.
-
 
 VERSION: 10.55
 RELEASE DATE: 29/12/2023
@@ -52,14 +51,13 @@ Bug Fixes:
 Notes:
   None.
 
-
 VERSION: 10.54
 RELEASE DATE: 27/11/2023
 _________________________
 
 Additional Functionality:
   SIF_IirBandPassFilter0dBPeakGain
-  SIF_GraphicalEqualizerFilterBank
+  SIF_GraphicEqualizerFilterBank
   SDA_FirLpBpShift and SDA_FirLpHpShift
 
 Operational Changes:
@@ -90,7 +88,6 @@ Bug Fixes:
 Notes:
   None.
 
-
 VERSION: 10.53
 RELEASE DATE: 01/08/2023
 _________________________
@@ -114,7 +111,6 @@ Notes:
   Tidied up some examples
   Added new Synchronous Sample Rate Conversion Example
 
-
 VERSION: 10.52
 RELEASE DATE: 18/07/2023
 _________________________
@@ -136,7 +132,6 @@ Bug Fixes:
 
 Notes:
   None.
-
 
 VERSION: 10.51
 RELEASE DATE: 16/07/2023
@@ -161,7 +156,6 @@ Bug Fixes:
 
 Notes:
   Tidied up some examples
-
 
 VERSION: 10.50
 RELEASE DATE: 24/06/2023
@@ -190,7 +184,6 @@ Optimisation Changes:
 Notes:
   Tidied up some examples
 
-
 VERSION: 10.40
 RELEASE DATE: 28/04/2023
 _________________________
@@ -218,7 +211,6 @@ Optimisation Changes:
 
 Notes:
   QPSK, QAM examples tidied up
-
 
 VERSION: 10.31
 RELEASE DATE: 09/02/2023
@@ -266,7 +258,6 @@ Optimisation Changes:
 
 Notes:
 
-
 VERSION: 10.20
 RELEASE DATE: 19/12/2022
 _________________________
@@ -287,7 +278,6 @@ Optimisation Changes:
   None.
 
 Notes:
-
 
 VERSION: 10.14
 RELEASE DATE: 21/06/2022
@@ -310,7 +300,6 @@ Optimisation Changes:
 
 Notes:
 
-
 VERSION: 10.13
 RELEASE DATE: 02/05/2022
 _________________________
@@ -331,7 +320,6 @@ Optimisation Changes:
   None.
 
 Notes:
-
 
 VERSION: 10.12
 RELEASE DATE: 01/03/2022
@@ -354,7 +342,6 @@ Optimisation Changes:
 
 Notes:
 
-
 VERSION: 10.11
 RELEASE DATE: 01/03/2022
 _________________________
@@ -375,7 +362,6 @@ Optimisation Changes:
   None.
 
 Notes:
-
 
 VERSION: 10.10
 RELEASE DATE: 24/01/2022
@@ -402,7 +388,6 @@ Optimisation Changes:
   None.
 
 Notes:
-
 
 
 VERSION: 10.00
@@ -468,7 +453,6 @@ Notes:
   Improved file I/O error reporting in file_io.c
 
 
-
 VERSION: 9.01
 RELEASE DATE: 05/01/2021
 _________________________
@@ -491,7 +475,6 @@ Optimisation Changes:
 
 Notes:
   None.
-
 
 
 VERSION: 9.00
@@ -585,7 +568,6 @@ Optimisation Changes:
 Notes:
   Complete analysis, tidy up using clang-tidy
 
-
 VERSION: 8.62
 RELEASE DATE: 08/07/2018
 _________________________
@@ -610,7 +592,6 @@ Optimisation Changes:
 
 Notes:
   None
-
 
 VERSION: 8.61
 RELEASE DATE: 19/03/2018
@@ -672,7 +653,6 @@ Optimisation Changes:
 
 Notes:
   None
-
 
 VERSION: 8.60
 RELEASE DATE: 07.01.2018
@@ -741,7 +721,6 @@ Optimisation Changes:
 Notes:
   None
 
-
 VERSION: 8.53
 RELEASE DATE: 30.12.2014
 _________________________
@@ -769,7 +748,6 @@ Optimisation Changes:
 Notes:
   None
 
-
 VERSION: 8.52
 RELEASE DATE: 18.01.2014
 _________________________
@@ -793,7 +771,6 @@ Optimisation Changes:
 
 Notes:
   None
-
 
 VERSION: 8.51
 RELEASE DATE: 1.9.2012
@@ -832,7 +809,6 @@ Optimisation Changes:
 
 Notes:
   None
-
 
 
 VERSION: 8.50
@@ -890,7 +866,6 @@ Operational Changes:
     SDA_SignalGenerate, SDS_SignalGenerate
     SIF_ViterbiDecoderV32, SDS_ViterbiDecoderV32
 
-
 Optimisation Changes:
   SDA_GoertzelDetect, SDA_GoertzelDetectComplex - Note function parameter lists have changed.
   SIF_DtmfDetect, SDA_DtmfDetect, SDA_DtmfDetectAndValidate - Note function parameter lists have changed.
@@ -900,7 +875,6 @@ Optimisation Changes:
 
 Notes:
   None
-
 
 VERSION: 8.42
 RELEASE DATE: 26.6.2009
@@ -937,7 +911,6 @@ Optimisation Changes:
 Notes:
   None
 
-
 VERSION: 8.41
 RELEASE DATE: 1.5.2009
 _______________________
@@ -958,7 +931,6 @@ Optimisation Changes:
 
 Notes:
   None
-
 
 VERSION: 8.40
 RELEASE DATE: 1.4.2009
@@ -1006,7 +978,6 @@ Optimisation Changes:
 
 Notes:
   None
-
 
 VERSION: 8.30
 RELEASE DATE: 1.1.2009
@@ -1057,7 +1028,6 @@ Optimisation Changes:
 Notes:
 	All examples re-written to support Signal Visualizer (http://signalvisualize.sourceforege.net)
 	16 bit DOS compiler (Borland, Microsoft) support deprecated
-
 
 VERSION: 8.10
 RELEASE DATE: Pre-release June 2007
@@ -1142,7 +1112,6 @@ Optimisation Changes:
 Notes:
 	None
 
-
 VERSION: 8.01
 RELEASE DATE: 02-08-06
 _______________________
@@ -1185,7 +1154,6 @@ Optimisation Changes:
 
 Notes:
 	None
-
 
 VERSION: 8.00
 RELEASE DATE: 19-03-06
@@ -1259,7 +1227,6 @@ Optimisation Changes:
 Notes:
 	This version was released as Early Availability pending further development, testing.
 
-
 VERSION: 7.00
 RELEASE DATE: 22-10-05
 _______________________
@@ -1329,7 +1296,6 @@ THE FOLLOWING FUNCTIONS HAVE BEEN OPTIMISED TO REMOVE INTERNAL DIVISION OPERATIO
 Notes:
 	None
 
-
 VERSION: 6.63
 RELEASE DATE: 22-01-05
 _______________________
@@ -1362,7 +1328,6 @@ Optimisation Changes:
 Notes:
 	For details on how to recompile the DLL examples for use with static libraries please refer to the User's Guide.
 
-
 VERSION: 6.62
 RELEASE DATE: 08-01-05
 _______________________
@@ -1387,7 +1352,6 @@ Optimisation Changes:
 Notes:
 	None
 
-
 VERSION: 6.61
 RELEASE DATE: 01-01-05
 _______________________
@@ -1410,7 +1374,6 @@ Optimisation Changes:
 
 Notes:
 	None
-
 
 VERSION: 6.60
 RELEASE DATE: 06-12-04
@@ -1435,7 +1398,6 @@ Optimisation Changes:
 
 Notes:
 	Example programs tidied up to improve portability.
-
 
 VERSION: 6.50
 RELEASE DATE: 26-06-04
@@ -1468,7 +1430,6 @@ Optimisation Changes:
 
 Notes:
 
-
 VERSION: 6.42
 RELEASE DATE: 06-04-04
 _______________________
@@ -1493,7 +1454,6 @@ Optimisation Changes:
 
 Notes:
 
-
 VERSION: 6.41
 RELEASE DATE: 02-04-04
 _______________________
@@ -1514,7 +1474,6 @@ Optimisation Changes:
 	None
 
 Notes:
-
 
 VERSION: 6.40
 RELEASE DATE: 25-01-04
@@ -1554,7 +1513,6 @@ Optimisation Changes:
 
 Notes:
 
-
 VERSION: 6.20
 RELEASE DATE: 04-10-03
 ________________________
@@ -1591,13 +1549,11 @@ Optimisation Changes:
 
 Notes:
 
-
 VERSION: 6.10A
 RELEASE DATE: 06-03-03
 ________________________
 
 Documentation updated to cover SDA_CreateComplexRect, SDA_CreateComplexPolar, SDA_ExtractComplexRect, SDA_ExtractComplexPolar functions.
-
 
 VERSION: 6.10
 RELEASE DATE: 01-10-02
@@ -1642,7 +1598,6 @@ Notes:
 	DFilter has been deprecated from SigLib. This functionality has been replaced by DFPlus, which runs under Windows, Linux. For further details, please see https://www.numerix-dsp.com/dfplus.
 
 
-
 VERSION: 6.00
 RELEASE DATE: 02-06-01
 ________________________
@@ -1663,7 +1618,6 @@ Additional Functionality:
 	siglib_numerix_SDSEuclideanDistance, siglib_numerix_SDSEuclideanDistanceSquared
 	siglib_numerix_SDAArbCifft
 
-
 Bug Fixes:
 	TWO_PI in siglibp.h (C62x section) replaced with SIGLIB_TWO_PI
 	pBitReverseAddressTable manipulation modified in ffourier.c when FAST mode not used, to avoid problems with certain compilers.
@@ -1676,13 +1630,11 @@ Operational Changes:
 	siglib_numerix_SDATdPitchShift renamed to siglib_numerix_SDSTdPitchShift, to fit standard SigLib naming conventions
 	siglib_numerix_SDAQpskModulate, siglib_numerix_SDAQpskModulate2 now process a byte of information at a time.
 
-
 Optimisation Changes:
 	None
 
 Notes:
 	Please refer to the SigLib User's Guide (users.pdf)
-
 
 
 VERSION: 5.00
@@ -1711,7 +1663,6 @@ Optimisation Changes:
 Notes:
 
 
-
 VERSION: 4.03
 RELEASE DATE: 13-08-00
 ________________________
@@ -1735,7 +1686,6 @@ Notes:
 	This version only released as a DLL.
 
 
-
 VERSION: 4.02
 RELEASE DATE: 20-07-00
 ________________________
@@ -1754,7 +1704,6 @@ Optimisation Changes:
 
 Notes:
 	This version only released as a DLL.
-
 
 
 VERSION: 4.01
@@ -1782,7 +1731,6 @@ Optimisation Changes:
 
 Notes:
 	This version only released as a DLL.
-
 
 VERSION: 4.00
 RELEASE DATE: 12-02-00
@@ -1854,7 +1802,6 @@ Functions modified to support re-entrancy:
 	SDS_echo_generate
 	SDA_td_pitch_shift
 
-
 VERSION: 3.02
 RELEASE DATE: 15-05-99
 ________________________
@@ -1891,7 +1838,6 @@ Optimisation Changes:
 Notes:
 
 
-
 VERSION: 3.01
 RELEASE DATE: 20-03-99
 ________________________
@@ -1909,7 +1855,6 @@ Optimisation Changes:
 
 Notes:
 	This version was only released as a DLL.
-
 
 VERSION: 3.00
 RELEASE DATE: 14-03-99
@@ -1939,7 +1884,6 @@ Optimisation Changes:
 		parameters changed
 
 
-
 VERSION: 2.52
 RELEASE DATE: 22-02-99
 ________________________
@@ -1967,7 +1911,6 @@ Operational Changes:
 
 Optimisation Changes:
 	rfft, cfft, cifft functions optimised
-
 
 VERSION: 2.51
 RELEASE DATE: 22-11-98
@@ -2008,7 +1951,6 @@ Operational Changes:
 Optimisation Changes:
 	buffer_differentiate
 
-
 VERSION: 2.50
 RELEASE DATE: 20-10-98
 ________________________
@@ -2030,7 +1972,6 @@ Operational Changes:
 	SIGLIB_PARAMETER_ERROR error message added
 
 Optimisation Changes:
-
 
 VERSION: 2.10
 RELEASE DATE: 24-05-98
@@ -2071,7 +2012,6 @@ Operational Changes:
 Optimisation Changes:
 	buffer_lengthen improved.
 
-
 VERSION: 2.01
 RELEASE DATE: 30-08-97
 ________________________
@@ -2107,7 +2047,6 @@ Operational Changes:
 		when there has been a memory allocation error: czt_init, fft2d_init,
 		pwm_init, fft_init, arb_fft_init, buffer_median_init, complex_shift_init,
 		nc_iir_init, buffer_delay_init
-
 
 VERSION: 2.00
 RELEASE DATE: 01-05-97
@@ -2161,7 +2100,6 @@ Operational Changes:
 	bufffer_reverse modified to work in-place
 	Image file format changed - now 8 bits per pixel
 
-
 VERSION: 1.71
 RELEASE DATE: 02-09-94
 ________________________
@@ -2194,7 +2132,6 @@ Operational Changes:
 	convolve function changed to convolve_linear.
 	correlate function changed to correlate_circular.
 	sobel function changed to sobel3x3.
-
 
 		1.70A
 10-04-94		V1.70A released
@@ -2302,7 +2239,6 @@ Operational Changes:
 	has correct twiddle factors. Added 10log10
 	and 20log10 functions.
 
-
 27-10-92
 	DSPUTILS, added to_rect(), to_polar(),
 	find_abs_max, find_abs_min, also display_buffers
@@ -2318,7 +2254,6 @@ Operational Changes:
 
 01-09-92
 	Started to integrate functions into library
-
 
 DFPlus, Digital Filter Plus, SigLib are trademarks of Delta Numerix
 Copyright (c) 2023 Delta Numerix

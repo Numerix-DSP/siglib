@@ -38,7 +38,6 @@ support@.numerix-dsp.com
 ;
 ;****************************************************************************
 
-
 LIBRARY SigLib.dll
 
 DESCRIPTION "SigLib DLL Library"
@@ -614,7 +613,7 @@ EXPORTS
 	SDS_OnePoleTimeConstantToFilterCoeff @568 NONAME
 	SDS_PreWarp @569 NONAME
 	SIF_AllPole @570 NONAME
-	SIF_GraphicalEqualizerFilterBank @571 NONAME
+	SIF_GraphicEqualizerFilterBank @571 NONAME
 	SIF_Iir @572 NONAME
 	SIF_Iir2PoleLpf @573 NONAME
 	SIF_IirAllPassFilter @574 NONAME

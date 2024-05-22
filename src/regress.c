@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: SigLib DSP library regression analysis routines.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_REGRESS 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SDA_LinraConstantCoeff
@@ -96,8 +93,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraConstantCoeff(const SLData_t* SIGLIB_PTR_DECL
   return ((SumY - (SDA_LinraRegressionCoeff(pSrcX, pSrcY, SampleLength) * SumX)) / SampleLength);
 }    // End of SDA_LinraConstantCoeff()
 
-/**/
-
 /********************************************************
  * Function: SDA_LinraRegressionCoeff
  *
@@ -151,8 +146,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
 
   return (((SampleLength * SumXY) - (SumX * SumY)) / ((SampleLength * SumXSquared) - (SumX * SumX)));
 }    // End of SDA_LinraRegressionCoeff()
-
-/**/
 
 /********************************************************
  * Function: SDA_LinraCorrelationCoeff
@@ -211,8 +204,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
           SDS_Sqrt(((SampleLength * SumXSquared) - (SumX * SumX)) * ((SampleLength * SumYSquared) - (SumY * SumY))));
 }    // End of SDA_LinraRegressionCoeff()
 
-/**/
-
 /********************************************************
  * Function: SDA_LinraEstimateX
  *
@@ -239,8 +230,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraEstimateX(const SLData_t* SIGLIB_PTR_DECL pSr
   return ((YVal - SDA_LinraConstantCoeff(pSrcX, pSrcY, SampleLength)) / SDA_LinraRegressionCoeff(pSrcX, pSrcY, SampleLength));
 }    // End of SDA_LinraEstimateX()
 
-/**/
-
 /********************************************************
  * Function: SDA_LinraEstimateY
  *
@@ -266,8 +255,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraEstimateY(const SLData_t* SIGLIB_PTR_DECL pSr
 {
   return ((XVal * SDA_LinraRegressionCoeff(pSrcX, pSrcY, SampleLength)) + SDA_LinraConstantCoeff(pSrcX, pSrcY, SampleLength));
 }    // End of SDA_LinraEstimateY()
-
-/**/
 
 /********************************************************
  * Function: SDA_LograConstantCoeff
@@ -322,8 +309,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograConstantCoeff(const SLData_t* SIGLIB_PTR_DECL
   return ((SumY - (SDA_LograRegressionCoeff(pSrcX, pSrcY, SampleLength) * SumX)) / SampleLength);
 }    // End of SDA_LograConstantCoeff()
 
-/**/
-
 /********************************************************
  * Function: SDA_LograRegressionCoeff
  *
@@ -377,8 +362,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
 
   return (((SampleLength * SumXY) - (SumX * SumY)) / ((SampleLength * SumXSquared) - (SumX * SumX)));
 }    // End of SDA_LograRegressionCoeff()
-
-/**/
 
 /********************************************************
  * Function: SDA_LograCorrelationCoeff
@@ -437,8 +420,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
           SDS_Sqrt(((SampleLength * SumXSquared) - (SumX * SumX)) * ((SampleLength * SumYSquared) - (SumY * SumY))));
 }    // End of SDA_LograRegressionCoeff()
 
-/**/
-
 /********************************************************
  * Function: SDA_LograEstimateX
  *
@@ -465,8 +446,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograEstimateX(const SLData_t* SIGLIB_PTR_DECL pSr
   return (SDS_Exp((YVal - SDA_LograConstantCoeff(pSrcX, pSrcY, SampleLength)) / SDA_LograRegressionCoeff(pSrcX, pSrcY, SampleLength)));
 }    // End of SDA_LograEstimateX()
 
-/**/
-
 /********************************************************
  * Function: SDA_LograEstimateY
  *
@@ -492,8 +471,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograEstimateY(const SLData_t* SIGLIB_PTR_DECL pSr
 {
   return ((SDS_Log(XVal) * SDA_LograRegressionCoeff(pSrcX, pSrcY, SampleLength)) + SDA_LograConstantCoeff(pSrcX, pSrcY, SampleLength));
 }    // End of SDA_LograEstimateY()
-
-/**/
 
 /********************************************************
  * Function: SDA_ExpraConstantCoeff
@@ -548,8 +525,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraConstantCoeff(const SLData_t* SIGLIB_PTR_DECL
   return ((SumY - (SDA_ExpraRegressionCoeff(pSrcX, pSrcY, SampleLength) * SumX)) / SampleLength);
 }    // End of SDA_ExpraConstantCoeff()
 
-/**/
-
 /********************************************************
  * Function: SDA_ExpraRegressionCoeff
  *
@@ -603,8 +578,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
 
   return (((SampleLength * SumXY) - (SumX * SumY)) / ((SampleLength * SumXSquared) - (SumX * SumX)));
 }    // End of SDA_ExpraRegressionCoeff()
-
-/**/
 
 /********************************************************
  * Function: SDA_ExpraCorrelationCoeff
@@ -663,8 +636,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
           SDS_Sqrt(((SampleLength * SumXSquared) - (SumX * SumX)) * ((SampleLength * SumYSquared) - (SumY * SumY))));
 }    // End of SDA_ExpraRegressionCoeff()
 
-/**/
-
 /********************************************************
  * Function: SDA_ExpraEstimateX
  *
@@ -691,8 +662,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraEstimateX(const SLData_t* SIGLIB_PTR_DECL pSr
   return ((SDS_Log(YVal) - SDA_ExpraConstantCoeff(pSrcX, pSrcY, SampleLength)) / SDA_ExpraRegressionCoeff(pSrcX, pSrcY, SampleLength));
 }    // End of SDA_ExpraEstimateX()
 
-/**/
-
 /********************************************************
  * Function: SDA_ExpraEstimateY
  *
@@ -718,8 +687,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraEstimateY(const SLData_t* SIGLIB_PTR_DECL pSr
 {
   return (SDS_Exp((XVal * SDA_ExpraRegressionCoeff(pSrcX, pSrcY, SampleLength)) + SDA_ExpraConstantCoeff(pSrcX, pSrcY, SampleLength)));
 }    // End of SDA_ExpraEstimateY()
-
-/**/
 
 /********************************************************
  * Function: SDA_PowraConstantCoeff
@@ -774,8 +741,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraConstantCoeff(const SLData_t* SIGLIB_PTR_DECL
   return ((SumY - (SDA_PowraRegressionCoeff(pSrcX, pSrcY, SampleLength) * SumX)) / SampleLength);
 }    // End of SDA_PowraConstantCoeff()
 
-/**/
-
 /********************************************************
  * Function: SDA_PowraRegressionCoeff
  *
@@ -829,8 +794,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
 
   return (((SampleLength * SumXY) - (SumX * SumY)) / ((SampleLength * SumXSquared) - (SumX * SumX)));
 }    // End of SDA_PowraRegressionCoeff()
-
-/**/
 
 /********************************************************
  * Function: SDA_PowraCorrelationCoeff
@@ -891,8 +854,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
           SDS_Sqrt(((SampleLength * SumXSquared) - (SumX * SumX)) * ((SampleLength * SumYSquared) - (SumY * SumY))));
 }    // End of SDA_PowraRegressionCoeff()
 
-/**/
-
 /********************************************************
  * Function: SDA_PowraEstimateX
  *
@@ -919,8 +880,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraEstimateX(const SLData_t* SIGLIB_PTR_DECL pSr
   return (SDS_Exp((SDS_Log(YVal) - SDA_PowraConstantCoeff(pSrcX, pSrcY, SampleLength)) / SDA_PowraRegressionCoeff(pSrcX, pSrcY, SampleLength)));
 }    // End of SDA_PowraEstimateX()
 
-/**/
-
 /********************************************************
  * Function: SDA_PowraEstimateY
  *
@@ -946,8 +905,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraEstimateY(const SLData_t* SIGLIB_PTR_DECL pSr
 {
   return (SDS_Exp((SDS_Log(XVal) * SDA_PowraRegressionCoeff(pSrcX, pSrcY, SampleLength)) + SDA_PowraConstantCoeff(pSrcX, pSrcY, SampleLength)));
 }    // End of SDA_PowraEstimateY()
-
-/**/
 
 /********************************************************
  * Function: SDA_Detrend
@@ -1003,8 +960,6 @@ void SIGLIB_FUNC_DECL SDA_Detrend(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
     *pDst++ = *pSrc++ - (M * ((SLData_t)i) + C);
   }
 }    // End of SDA_Detrend()
-
-/**/
 
 /********************************************************
  * Function: SDA_ExtractTrend

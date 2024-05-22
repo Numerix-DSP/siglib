@@ -16,7 +16,6 @@ int main()
 	SFIX	i;
 	SFLOAT	SigLibVersion;
 
-
 	SigLibVersion = SUF_SiglibVersion();
 	printf ("SigLibVersion = %lf\n", SigLibVersion);
 
@@ -44,5 +43,4 @@ int main()
 	SUF_MemoryFree (pArray2);
 	SUF_MemoryFree (pResults);
 }
-
 

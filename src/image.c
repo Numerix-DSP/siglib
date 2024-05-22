@@ -34,7 +34,6 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Siglib library image processing routines.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_IMAGE 1    // Defines the source file that this code is being used in
@@ -55,8 +54,6 @@ Description: Siglib library image processing routines.
 // Define constants
 #define SIGLIB_SOBEL_CLIP_LEVEL (5 * 16)    // Sobel filter clipping level
 #define SIGLIB_IMAGE_MAX_VALUE 255          // Brightest pixel in image
-
-/**/
 
 /********************************************************
  * Function: SIM_Fft2d
@@ -199,8 +196,6 @@ void SIGLIB_FUNC_DECL SIM_Fft2d(const SLImageData_t* pSrc, SLImageData_t* pDst, 
   }
 }    // End of SIM_Fft2d()
 
-/**/
-
 /********************************************************
  * Function: SIF_Fft2d
  *
@@ -222,8 +217,6 @@ void SIGLIB_FUNC_DECL SIF_Fft2d(SLData_t* SIGLIB_PTR_DECL pFFTCoeffs, SLArrayInd
 {
   SIF_Fft(pFFTCoeffs, pBitReverseAddressTable, Dimension);
 }    // End of SIF_Fft2d()
-
-/**/
 
 /********************************************************
  * Function: SIM_Conv3x3
@@ -298,8 +291,6 @@ void SIGLIB_FUNC_DECL SIM_Conv3x3(const SLImageData_t* pSrc, SLImageData_t* pDst
   }
 
 }    // End of SIM_Conv3x3()
-
-/**/
 
 /********************************************************
  * Function: SIM_Sobel3x3
@@ -394,8 +385,6 @@ void SIGLIB_FUNC_DECL SIM_Sobel3x3(const SLImageData_t* pSrc, SLImageData_t* pDs
   }
 }    // End of SIM_Sobel3x3()
 
-/**/
-
 /********************************************************
  * Function: SIM_SobelVertical3x3
  *
@@ -476,8 +465,6 @@ void SIGLIB_FUNC_DECL SIM_SobelVertical3x3(const SLImageData_t* pSrc, SLImageDat
   }
 }    // End of SIM_SobelVertical3x3()
 
-/**/
-
 /********************************************************
  * Function: SIM_SobelHorizontal3x3
  *
@@ -552,8 +539,6 @@ void SIGLIB_FUNC_DECL SIM_SobelHorizontal3x3(const SLImageData_t* pSrc, SLImageD
   }
 }    // End of SIM_SobelHorizontal3x3()
 
-/**/
-
 /********************************************************
  * Function: SIM_Median3x3
  *
@@ -627,8 +612,6 @@ void SIGLIB_FUNC_DECL SIM_Median3x3(const SLImageData_t* pSrc, SLImageData_t* pD
   }
 }    // End of SIM_Median3x3()
 
-/**/
-
 /********************************************************
  * Function: SIF_ConvCoefficients3x3
  *
@@ -689,8 +672,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_ConvCoefficients3x3(SLData_t* pCoeffs, enum SL3x3
   return (SIGLIB_NO_ERROR);
 }    // End of SIF_ConvCoefficients3x3()
 
-/**/
-
 /********************************************************
  * Function: SIM_Max
  *
@@ -725,8 +706,6 @@ SLImageData_t SIGLIB_FUNC_DECL SIM_Max(const SLImageData_t* pSrc, const SLArrayI
 
   return (max);
 }    // End of SIM_Max()
-
-/**/
 
 /********************************************************
  * Function: SIM_Min

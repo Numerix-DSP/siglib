@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: SigLib DSP library statistics routines.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_STATS 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SDA_Sum
@@ -76,8 +73,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_Sum(const SLData_t* SIGLIB_PTR_DECL pSrc, const SL
   }
   return (Sum);
 }    // End of SDA_Sum()
-
-/**/
 
 /********************************************************
  * Function: SDA_AbsSum
@@ -122,8 +117,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_AbsSum(const SLData_t* SIGLIB_PTR_DECL pSrc, const
   return (Sum);
 }    // End of SDA_AbsSum()
 
-/**/
-
 /********************************************************
  * Function: SDA_SumOfSquares
  *
@@ -160,8 +153,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_SumOfSquares(const SLData_t* SIGLIB_PTR_DECL pSrc,
   return (Sum);
 }    // End of SDA_SumOfSquares()
 
-/**/
-
 /********************************************************
  * Function: SDA_Mean
  *
@@ -196,8 +187,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_Mean(const SLData_t* SIGLIB_PTR_DECL pSrc, const S
   }
   return (Sum * InverseArrayLength);
 }    // End of SDA_Mean()
-
-/**/
 
 /********************************************************
  * Function: SDA_AbsMean
@@ -239,8 +228,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_AbsMean(const SLData_t* SIGLIB_PTR_DECL pSrc, cons
   }
   return (Sum * InverseArrayLength);
 }    // End of SDA_AbsMean()
-
-/**/
 
 /********************************************************
  * Function: SDA_SubtractMean
@@ -295,8 +282,6 @@ void SIGLIB_FUNC_DECL SDA_SubtractMean(const SLData_t* SIGLIB_PTR_DECL pSrc, SLD
   }
 }    // End of SDA_SubtractMean()
 
-/**/
-
 /********************************************************
  * Function: SDA_SubtractMax
  *
@@ -339,8 +324,6 @@ void SIGLIB_FUNC_DECL SDA_SubtractMax(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
   }
 }    // End of SDA_SubtractMax()
 
-/**/
-
 /********************************************************
  * Function: SDA_SampleSd
  *
@@ -375,8 +358,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_SampleSd(const SLData_t* SIGLIB_PTR_DECL pSrc, con
   }
   return (SDS_Sqrt((SquaredSum - ((Sum * Sum) / ((SLData_t)(ArrayLength)))) / ((SLData_t)(ArrayLength - 1))));
 }    // End of SDA_SampleSd()
-
-/**/
 
 /********************************************************
  * Function: SDA_PopulationSd
@@ -413,8 +394,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_PopulationSd(const SLData_t* SIGLIB_PTR_DECL pSrc,
   return (SDS_Sqrt((SquaredSum - ((Sum * Sum) / ((SLData_t)(ArrayLength)))) / ((SLData_t)ArrayLength)));
 }    // End of SDA_PopulationSd()
 
-/**/
-
 /********************************************************
  * Function: SDA_SampleVariance
  *
@@ -450,8 +429,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_SampleVariance(const SLData_t* SIGLIB_PTR_DECL pSr
   return ((SquaredSum - ((Sum * Sum) / ((SLData_t)(ArrayLength)))) / ((SLData_t)(ArrayLength - 1)));
 }    // End of SDA_SampleVariance()
 
-/**/
-
 /********************************************************
  * Function: SDA_PopulationVariance
  *
@@ -486,8 +463,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_PopulationVariance(const SLData_t* SIGLIB_PTR_DECL
   }
   return ((SquaredSum - ((Sum * Sum) / ((SLData_t)(ArrayLength)))) / ((SLData_t)ArrayLength));
 }    // End of SDA_PopulationVariance()
-
-/**/
 
 /********************************************************
  * Function: SDA_CovarianceMatrix
@@ -539,8 +514,6 @@ void SIGLIB_FUNC_DECL SDA_CovarianceMatrix(const SLData_t* SIGLIB_PTR_DECL pSrc,
     }
   }
 }    // End of SDA_CovarianceMatrix()
-
-/**/
 
 /********************************************************
  * Function: SDA_Median

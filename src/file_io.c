@@ -48,8 +48,6 @@ typedef union {    // SigLib data type to char array union
   char c[8];
 } u_SLData_t_char_t;
 
-/**/
-
 /********************************************************
  * Function: SUF_BinReadData
  *
@@ -98,8 +96,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_BinReadData(SLData_t* SIGLIB_PTR_DECL BPtr, 
   return (sampleCount);
 }    // End of SUF_BinReadData()
 
-/**/
-
 /********************************************************
  * Function: SUF_BinWriteData
  *
@@ -140,8 +136,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_BinWriteData(const SLData_t* SIGLIB_PTR_DECL
 
   return (sampleCount);
 }    // End of SUF_BinWriteData()
-
-/**/
 
 /********************************************************
  * Function: SUF_BinReadFile
@@ -200,8 +194,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_BinReadFile(SLData_t* SIGLIB_PTR_DECL BPtr, 
   return (sampleCount);
 }    // End of SUF_BinReadFile()
 
-/**/
-
 /********************************************************
  * Function: SUF_BinWriteFile
  *
@@ -257,8 +249,6 @@ typedef union {    // SigLib fixed point data type to char array union
   char c[4];
 } u_SLInt32_t_char_t;
 
-/**/
-
 /********************************************************
  * Function: SUF_PCMReadData
  *
@@ -309,8 +299,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMReadData(SLData_t* SIGLIB_PTR_DECL BPtr, 
 
   return (sampleCount);
 }    // End of SUF_PCMReadData()
-
-/**/
 
 /********************************************************
  * Function: SUF_PCMWriteData
@@ -416,8 +404,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMReadFile(SLData_t* SIGLIB_PTR_DECL BPtr, 
   return (sampleCount);
 }    // End of SUF_PCMReadFile()
 
-/**/
-
 /********************************************************
  * Function: SUF_PCMWriteFile
  *
@@ -469,8 +455,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMWriteFile(const SLData_t* SIGLIB_PTR_DECL
   fclose(p_ioFile);
   return (sampleCount);
 }    // End of SUF_PCMWriteFile()
-
-/**/
 
 /********************************************************
  * Function: SUF_CsvReadData
@@ -536,8 +520,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadData(SLData_t* SIGLIB_PTR_DECL BPtr, 
   return (sampleCount);
 }    // End of SUF_CsvReadData()
 
-/**/
-
 /********************************************************
  * Function: SUF_CsvWriteData
  *
@@ -577,8 +559,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvWriteData(const SLData_t* SIGLIB_PTR_DECL
 
   return (i);
 }    // End of SUF_CsvWriteData()
-
-/**/
 
 /********************************************************
  * Function: SUF_CsvReadFile
@@ -671,8 +651,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadFile(SLData_t* SIGLIB_PTR_DECL BPtr, 
   return (sampleCount);
 }    // End of SUF_CsvReadFile()
 
-/**/
-
 /********************************************************
  * Function: SUF_CsvWriteFile
  *
@@ -720,8 +698,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvWriteFile(const SLData_t* SIGLIB_PTR_DECL
   fclose(p_ioFile);
   return (i);
 }    // End of SUF_CsvWriteFile()
-
-/**/
 
 /********************************************************
  * Function: SUF_CsvReadMatrix
@@ -815,8 +791,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadMatrix(SLData_t** SIGLIB_PTR_DECL BPt
   return (colcount * rowcount);
 }    // End of SUF_CsvReadMatrix()
 
-/**/
-
 /********************************************************
  * Function: SUF_CsvWriteMatrix
  *
@@ -858,8 +832,6 @@ SLArrayIndex_t SUF_CsvWriteMatrix(const SLData_t* BPtr, const char* filename, co
   fclose(p_ioFile);
   return (count);
 }    // End of SUF_CsvWriteMatrix()
-
-/**/
 
 /********************************************************
  * Function: SUF_DatReadData
@@ -905,8 +877,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_DatReadData(SLData_t* SIGLIB_PTR_DECL BPtr, 
   return (sampleCount);
 }    // End of SUF_DatReadData()
 
-/**/
-
 /********************************************************
  * Function: SUF_DatWriteData
  *
@@ -937,8 +907,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_DatWriteData(const SLData_t* SIGLIB_PTR_DECL
   return (i);
 }    // End of SUF_DatWriteData()
 
-/**/
-
 /********************************************************
  * Function: SUF_DatReadHeader
  *
@@ -968,8 +936,6 @@ SLData_t SIGLIB_FUNC_DECL SUF_DatReadHeader(FILE* p_ioFile)
   return (sampleRate);
 }    // End of SUF_DatReadHeader()
 
-/**/
-
 /********************************************************
  * Function: SUF_DatWriteHeader
  *
@@ -989,8 +955,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_DatWriteHeader(FILE* p_ioFile, const SLData_
   rewind(p_ioFile);
   return (SUF_Fprintf(p_ioFile, "; Sample Rate %ld\n; Channels 1\n", (long)sampleRate));
 }    // End of SUF_DatWriteHeader()
-
-/**/
 
 /********************************************************
  * Function: SUF_SigReadData
@@ -1024,8 +988,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigReadData(SLData_t* SIGLIB_PTR_DECL BPtr, 
   return (sampleCount);
 }    // End of SUF_SigReadData()
 
-/**/
-
 /********************************************************
  * Function: SUF_SigWriteData
  *
@@ -1050,8 +1012,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigWriteData(const SLData_t* SIGLIB_PTR_DECL
 
   return (i);
 }    // End of SUF_SigWriteData()
-
-/**/
 
 /********************************************************
  * Function: SUF_SigReadFile
@@ -1086,8 +1046,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigReadFile(SLData_t* SIGLIB_PTR_DECL BPtr, 
   return (sampleCount);
 }    // End of SUF_SigReadFile()
 
-/**/
-
 /********************************************************
  * Function: SUF_SigWriteFile
  *
@@ -1117,8 +1075,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigWriteFile(const SLData_t* SIGLIB_PTR_DECL
 
   return (arrayLength);
 }    // End of SUF_SigWriteFile()
-
-/**/
 
 /********************************************************
  * Function: SUF_SigCountSamplesInFile
@@ -1159,8 +1115,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigCountSamplesInFile(const char* filename)
 // Local functions
 SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadLong(FILE*);
 void SIGLIB_FUNC_DECL SUF_WavWriteLong(const SLArrayIndex_t, FILE*);
-
-/**/
 
 /********************************************************
  * Function: SUF_WavReadData
@@ -1234,8 +1188,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadData(SLData_t* SIGLIB_PTR_DECL BPtr, 
   return (sampleCount);
 }    // End of SUF_WavReadData()
 
-/**/
-
 /********************************************************
  * Function: SUF_WavWriteData
  *
@@ -1273,8 +1225,6 @@ void SIGLIB_FUNC_DECL SUF_WavWriteData(const SLData_t* SIGLIB_PTR_DECL BPtr, FIL
     }
   }
 }    // End of SUF_WavWriteData()
-
-/**/
 
 /********************************************************
  * Function: SUF_WavReadData16
@@ -1335,8 +1285,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadData16(short* SIGLIB_PTR_DECL BPtr, F
   return (sampleCount);
 }    // End of SUF_WavReadData16()
 
-/**/
-
 /********************************************************
  * Function: SUF_WavWriteData16
  *
@@ -1369,8 +1317,6 @@ void SIGLIB_FUNC_DECL SUF_WavWriteData16(const short* BPtr, FILE* p_ioFile, cons
     }
   }
 }    // End of SUF_WavWriteData16()
-
-/**/
 
 /********************************************************
  * Function: SUF_WavReadData32
@@ -1431,8 +1377,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadData32(SLArrayIndex_t* BPtr, FILE* p_
   return (sampleCount);
 }    // End of SUF_WavReadData32()
 
-/**/
-
 /********************************************************
  * Function: SUF_WavWriteData32
  *
@@ -1467,8 +1411,6 @@ void SIGLIB_FUNC_DECL SUF_WavWriteData32(const SLArrayIndex_t* BPtr, FILE* p_ioF
   }
 }    // End of SUF_WavWriteData32()
 
-/**/
-
 /********************************************************
  * Function: SUF_WavReadWord
  *
@@ -1491,8 +1433,6 @@ short SIGLIB_FUNC_DECL SUF_WavReadWord(FILE* p_ioFile)
 
   return (Word);
 }    // End of SUF_WavReadWord()
-
-/**/
 
 /********************************************************
  * Function: SUF_WavReadLong
@@ -1519,8 +1459,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadLong(FILE* p_ioFile)
   return (LongWord);
 }    // End of SUF_WavReadLong()
 
-/**/
-
 /********************************************************
  * Function: SUF_WavWriteWord
  *
@@ -1540,8 +1478,6 @@ void SIGLIB_FUNC_DECL SUF_WavWriteWord(const short Word, FILE* p_ioFile)
   putc(Word & 0x0ff, p_ioFile);
   putc((Word >> 8) & 0x0ff, p_ioFile);
 }    // End of SUF_WavWriteWord()
-
-/**/
 
 /********************************************************
  * Function: SUF_WavWriteLong
@@ -1564,8 +1500,6 @@ void SIGLIB_FUNC_DECL SUF_WavWriteLong(const SLArrayIndex_t LongWord, FILE* p_io
   putc((short)((LongWord >> 16) & 0x0ff), p_ioFile);
   putc((short)((LongWord >> 24) & 0x0ff), p_ioFile);
 }    // End of SUF_WavWriteLong()
-
-/**/
 
 /********************************************************
  * Function: SUF_WavReadHeader
@@ -1667,8 +1601,6 @@ SLWavFileInfo_s SIGLIB_FUNC_DECL SUF_WavReadHeader(FILE* p_ioFile)
   return (wavInfo);
 }    // End of SUF_WavReadHeader()
 
-/**/
-
 /********************************************************
  * Function: SUF_WavWriteHeader
  *
@@ -1704,8 +1636,6 @@ void SIGLIB_FUNC_DECL SUF_WavWriteHeader(FILE* p_ioFile, const SLWavFileInfo_s w
                    p_ioFile);    // Write data section length (bytes)
 }    // End of SUF_WavWriteHeader()
 
-/**/
-
 /********************************************************
  * Function: SUF_WavDisplayInfo
  *
@@ -1729,8 +1659,6 @@ void SIGLIB_FUNC_DECL SUF_WavDisplayInfo(const SLWavFileInfo_s wavInfo)
   SUF_Printf("Bytes per sample:   %ld\n", (long)wavInfo.BytesPerSample);
   SUF_Printf("Data format:        %ld\n\n", (long)wavInfo.DataFormat);
 }    // End of SUF_WavDisplayInfo()
-
-/**/
 
 /********************************************************
  * Function: SUF_WavSetInfo
@@ -1765,8 +1693,6 @@ SLWavFileInfo_s SIGLIB_FUNC_DECL SUF_WavSetInfo(const SLArrayIndex_t SampleRate,
   return (wavInfo);
 }    // End of SUF_WavSetInfo()
 
-/**/
-
 /********************************************************
  * Function: SUF_WavFileLength
  *
@@ -1794,8 +1720,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavFileLength(const char* filename)
   fclose(p_ioFile);
   return (wavInfo.NumberOfSamples);
 }    // End of SUF_WavFileLength()
-
-/**/
 
 /********************************************************
  * Function: SUF_WavReadFile
@@ -1831,8 +1755,6 @@ SLWavFileInfo_s SIGLIB_FUNC_DECL SUF_WavReadFile(SLData_t* SIGLIB_PTR_DECL BPtr,
   fclose(p_ioFile);
   return (wavInfo);
 }    // End of SUF_WavReadFile()
-
-/**/
 
 /********************************************************
  * Function: SUF_WavWriteFile
@@ -1876,8 +1798,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavWriteFile(const SLData_t* SIGLIB_PTR_DECL
 
   return (arrayLength);
 }    // End of SUF_WavWriteFile()
-
-/**/
 
 /********************************************************
  * Function: SUF_WavWriteFileScaled
@@ -1947,8 +1867,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavWriteFileScaled(const SLData_t* SIGLIB_PT
   return (arrayLength);
 }    // End of SUF_WavWriteFileScaled()
 
-/**/
-
 /********************************************************
  * Function: SUF_XmtReadData
  *
@@ -1998,8 +1916,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_XmtReadData(SLData_t* SIGLIB_PTR_DECL BPtr, 
 
   return (sampleCount);
 }    // End of SUF_XmtReadData()
-
-/**/
 
 /********************************************************
  * Function: SUF_WriteWeightsIntegerCFile
@@ -2063,8 +1979,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsIntegerCFile(const char* filenam
   return (weightsWriteCount);
 }    // End of SUF_WriteWeightsIntegerCFile()
 
-/**/
-
 /********************************************************
  * Function: SUF_WriteWeightsFloatCFile
  *
@@ -2124,8 +2038,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsFloatCFile(const char* filenameW
 
   return (weightsWriteCount);
 }    // End of SUF_WriteWeightsFloatCFile()
-
-/**/
 
 /********************************************************
  * Function: SUF_WriteWeightsBinaryFile
@@ -2277,8 +2189,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsBinaryFile(const char* filenameW
   return (weightsWriteCount);
 }    // End of SUF_WriteWeightsBinaryFile()
 
-/**/
-
 /********************************************************
  * Function: SUF_ReadWeightsBinaryFile
  *
@@ -2427,8 +2337,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_ReadWeightsBinaryFile(const char* filenameWe
   return (weightsReadCount);
 }    // End of SUF_ReadWeightsBinaryFile()
 
-/**/
-
 /********************************************************
  * Function: SUF_WriteWeightsWithBiasesIntegerCFile
  *
@@ -2522,8 +2430,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsWithBiasesIntegerCFile(const cha
   return (weightsWriteCount);
 }    // End of SUF_WriteWeightsWithBiasesIntegerCFile()
 
-/**/
-
 /********************************************************
  * Function: SUF_WriteWeightsWithBiasesFloatCFile
  *
@@ -2612,8 +2518,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsWithBiasesFloatCFile(const char*
 
   return (weightsWriteCount);
 }    // End of SUF_WriteWeightsWithBiasesFloatCFile()
-
-/**/
 
 /********************************************************
  * Function: SUF_WriteWeightsWithBiasesBinaryFile
@@ -2852,8 +2756,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsWithBiasesBinaryFile(const char*
 
   return (weightsWriteCount);
 }    // End of SUF_WriteWeightsWithBiasesBinaryFile()
-
-/**/
 
 /********************************************************
  * Function: SUF_ReadWeightsWithBiasesBinaryFile

@@ -1,10 +1,8 @@
 
 
-
 				    SigLib™
 
 			Signal Processing Library
-
 
 
 
@@ -15,15 +13,12 @@ architecture. In order to use these libraries, this directory should be
 configured in the linker library search path for the XMOS compiler.
 
 
-
 LICENSE
 
 For the full license agreement, please refer to the document "license.txt".
 
-
 DFPlus, and SigLib are trademarks of Delta Numerix all other
 trademarks acknowledged.
-
 
 
 For additional information, please contact:

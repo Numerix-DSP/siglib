@@ -1,7 +1,7 @@
 ;/*****************************************************************************/
 ;/* STARTUP.S: Startup file for Philips LPC2000                               */
 ;/*****************************************************************************/
-;/* <<< Use Configuration Wizard in Context Menu >>>                          */ 
+;/* <<< Use Configuration Wizard in Context Menu >>>                          */
 ;/*****************************************************************************/
 ;/* This file is part of the uVision/ARM development tools.                   */
 ;/* Copyright (c) 2005-2006 Keil Software. All rights reserved.               */
@@ -10,14 +10,13 @@
 ;/* development tools. Nothing else gives you the right to use this software. */
 ;/*****************************************************************************/
 
-
 ;/*
-; *  The STARTUP.S code is executed after CPU Reset. This file may be 
-; *  translated with the following SET symbols. In uVision these SET 
+; *  The STARTUP.S code is executed after CPU Reset. This file may be
+; *  translated with the following SET symbols. In uVision these SET
 ; *  symbols are entered under Options - ASM - Define.
 ; *
-; *  REMAP: when set the startup code initializes the register MEMMAP 
-; *  which overwrites the settings of the CPU configuration pins. The 
+; *  REMAP: when set the startup code initializes the register MEMMAP
+; *  which overwrites the settings of the CPU configuration pins. The
 ; *  startup and interrupt vectors are remapped from:
 ; *     0x00000000  default setting (not remapped)
 ; *     0x80000000  when EXTMEM_MODE is used
@@ -27,9 +26,8 @@
 ; *  from external memory starting at address 0x80000000.
 ; *
 ; *  RAM_MODE: when set the device is configured for code execution
-; *  from on-chip RAM starting at address 0x40000000. 
+; *  from on-chip RAM starting at address 0x40000000.
 ; */
-
 
 ; Standard definitions of Mode bits and Interrupt (I & F) flags in PSRs
 
@@ -43,7 +41,6 @@ Mode_SYS        EQU     0x1F
 
 I_Bit           EQU     0x80            ; when I bit is set, IRQ is disabled
 F_Bit           EQU     0x40            ; when F bit is set, FIQ is disabled
-
 
 ;// <h> Stack Configuration (Stack Sizes in Bytes)
 ;//   <o0> Undefined Mode      <0x0-0xFFFFFFFF:8>
@@ -69,7 +66,6 @@ Stack_Mem       SPACE   Stack_Size
 
 Stack_Top       EQU     Stack_Mem + Stack_Size
 
-
 ;// <h> Heap Configuration
 ;//   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF>
 ;// </h>
@@ -78,7 +74,6 @@ Heap_Size       EQU     0x00000000
 
                 AREA    HEAP, NOINIT, READWRITE, ALIGN=3
 Heap_Mem        SPACE   Heap_Size
-
 
 ; VPBDIV definitions
 VPBDIV          EQU     0xE01FC100      ; VPBDIV Address
@@ -96,7 +91,6 @@ VPBDIV          EQU     0xE01FC100      ; VPBDIV Address
 ;// </e>
 VPBDIV_SETUP    EQU     0
 VPBDIV_Val      EQU     0x00000000
-
 
 ; Phase Locked Loop (PLL) definitions
 PLL_BASE        EQU     0xE01FC080      ; PLL Base Address
@@ -121,7 +115,6 @@ PLLSTAT_PLOCK   EQU     (1<<10)         ; PLL Lock Status
 PLL_SETUP       EQU     1
 PLLCFG_Val      EQU     0x00000024
 
-
 ; Memory Accelerator Module (MAM) definitions
 MAM_BASE        EQU     0xE01FC000      ; MAM Base Address
 MAMCR_OFS       EQU     0x00            ; MAM Control Offset
@@ -141,7 +134,6 @@ MAMTIM_OFS      EQU     0x04            ; MAM Timing Offset
 MAM_SETUP       EQU     1
 MAMCR_Val       EQU     0x00000002
 MAMTIM_Val      EQU     0x00000004
-
 
 ; External Memory Controller (EMC) definitions
 EMC_BASE        EQU     0xFFE00000      ; EMC Base Address
@@ -207,15 +199,13 @@ BCFG3_Val   EQU         0x0000FBEF
 
 ;// </e> End of EMC
 
-
 ; External Memory Pins definitions
 PINSEL2         EQU     0xE002C014      ; PINSEL2 Address
-PINSEL2_Val     EQU     0x0E6149E4      ; CS0..3, OE, WE, BLS0..3, 
+PINSEL2_Val     EQU     0x0E6149E4      ; CS0..3, OE, WE, BLS0..3,
                                         ; D0..31, A2..23, JTAG Pins
 
-
                 PRESERVE8
-                
+
 
 ; Area Definition and Entry Point
 ;  Startup Code must be linked first at Address at which it expects to run.
@@ -223,18 +213,17 @@ PINSEL2_Val     EQU     0x0E6149E4      ; CS0..3, OE, WE, BLS0..3,
                 AREA    RESET, CODE, READONLY
                 ARM
 
-
 ; Exception Vectors
 ;  Mapped to Address 0.
 ;  Absolute addressing mode must be used.
 ;  Dummy Handlers are implemented as infinite loops which can be modified.
 
-Vectors         LDR     PC, Reset_Addr         
+Vectors         LDR     PC, Reset_Addr
                 LDR     PC, Undef_Addr
                 LDR     PC, SWI_Addr
                 LDR     PC, PAbt_Addr
                 LDR     PC, DAbt_Addr
-                NOP                            ; Reserved Vector 
+                NOP                            ; Reserved Vector
 ;               LDR     PC, IRQ_Addr
                 LDR     PC, [PC, #-0x0FF0]     ; Vector from VicVectAddr
                 LDR     PC, FIQ_Addr
@@ -244,7 +233,7 @@ Undef_Addr      DCD     Undef_Handler
 SWI_Addr        DCD     SWI_Handler
 PAbt_Addr       DCD     PAbt_Handler
 DAbt_Addr       DCD     DAbt_Handler
-                DCD     0                      ; Reserved Address 
+                DCD     0                      ; Reserved Address
 IRQ_Addr        DCD     IRQ_Handler
 FIQ_Addr        DCD     FIQ_Handler
 
@@ -255,12 +244,10 @@ DAbt_Handler    B       DAbt_Handler
 IRQ_Handler     B       IRQ_Handler
 FIQ_Handler     B       FIQ_Handler
 
-
 ; Reset Handler
 
                 EXPORT  Reset_Handler
-Reset_Handler   
-
+Reset_Handler
 
 ; Setup External Memory Pins
                 IF      :DEF:EXTERNAL_MODE
@@ -268,7 +255,6 @@ Reset_Handler
                 LDR     R1, =PINSEL2_Val
                 STR     R1, [R0]
                 ENDIF
-
 
 ; Setup External Memory Controller
                 IF      EMC_SETUP <> 0
@@ -296,14 +282,12 @@ Reset_Handler
 
                 ENDIF   ; EMC_SETUP
 
-
 ; Setup VPBDIV
                 IF      VPBDIV_SETUP <> 0
                 LDR     R0, =VPBDIV
                 LDR     R1, =VPBDIV_Val
                 STR     R1, [R0]
                 ENDIF
-
 
 ; Setup PLL
                 IF      PLL_SETUP <> 0
@@ -313,7 +297,7 @@ Reset_Handler
 
 ;  Configure and Enable PLL
                 MOV     R3, #PLLCFG_Val
-                STR     R3, [R0, #PLLCFG_OFS] 
+                STR     R3, [R0, #PLLCFG_OFS]
                 MOV     R3, #PLLCON_PLLE
                 STR     R3, [R0, #PLLCON_OFS]
                 STR     R1, [R0, #PLLFEED_OFS]
@@ -331,16 +315,14 @@ PLL_Loop        LDR     R3, [R0, #PLLSTAT_OFS]
                 STR     R2, [R0, #PLLFEED_OFS]
                 ENDIF   ; PLL_SETUP
 
-
 ; Setup MAM
                 IF      MAM_SETUP <> 0
                 LDR     R0, =MAM_BASE
                 MOV     R1, #MAMTIM_Val
-                STR     R1, [R0, #MAMTIM_OFS] 
+                STR     R1, [R0, #MAMTIM_OFS]
                 MOV     R1, #MAMCR_Val
-                STR     R1, [R0, #MAMCR_OFS] 
+                STR     R1, [R0, #MAMCR_OFS]
                 ENDIF   ; MAM_SETUP
-
 
 ; Memory Mapping (when Interrupt Vectors are in RAM)
 MEMMAP          EQU     0xE01FC040      ; Memory Mapping Control
@@ -356,10 +338,8 @@ MEMMAP          EQU     0xE01FC040      ; Memory Mapping Control
                 STR     R1, [R0]
                 ENDIF
 
-
 ; Initialise Interrupt System
 ;  ...
-
 
 ; Setup Stack for each mode
 
@@ -395,13 +375,11 @@ MEMMAP          EQU     0xE01FC040      ; Memory Mapping Control
                 MOV     SP, R0
                 SUB     SL, SP, #USR_Stack_Size
 
-
 ; Enter the C code
 
                 IMPORT  __main
                 LDR     R0, =__main
                 BX      R0
-
 
 ; User Initial Stack & Heap
                 AREA    |.text|, CODE, READONLY
@@ -415,6 +393,5 @@ __user_initial_stackheap
                 LDR     R2, = (Heap_Mem +      Heap_Size)
                 LDR     R3, = Stack_Mem
                 BX      LR
-
 
                 END

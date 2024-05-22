@@ -1064,8 +1064,6 @@ int main(int argc, char** argv)
   return (0);
 }
 
-/**/
-
 /********************************************************
  * Function: ClearDemodOutput
  *
@@ -1090,8 +1088,6 @@ SLError_t ClearDemodOutput(void)
 
   return (SIGLIB_NO_ERROR);
 }
-
-/**/
 
 /********************************************************
  * Function: DemodOutput

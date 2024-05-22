@@ -9,7 +9,6 @@ cl network_train_multi_category.c -O2 -W4 -D "NETWORK_INPUT_SAMPLE_LENGTH=120" -
 cl network_validate_multi_category.c -O2 -W4 -D "NETWORK_INPUT_SAMPLE_LENGTH=120" -D "NETWORK_HIDDEN_LAYER_NODES=10" -D "HIDDEN_LAYER_ACTIVATION_TYPE=SIGLIB_ACTIVATION_TYPE_LOGISTIC" -D "OUTPUT_LAYER_ACTIVATION_TYPE=SIGLIB_ACTIVATION_TYPE_LOGISTIC" -D "SIGLIB_STATIC_LIB=1" -D "_CRT_SECURE_NO_WARNINGS=1" siglib.lib gnuplot_c.lib
 del *.obj
 
-
 del weightCoefficientsFiles\*.* /Q
 
 rem Pre-process the data - always do category '0' first, other categories can be in any order

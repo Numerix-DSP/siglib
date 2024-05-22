@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: SigLib DSP library generic filter routines.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_FILTER 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SDA_Integrate
@@ -90,8 +87,6 @@ void SIGLIB_FUNC_DECL SDA_Integrate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData
   *Sum = TSum;
 }    // End of SDA_Integrate()
 
-/**/
-
 /********************************************************
  * Function: SDA_Differentiate
  *
@@ -139,8 +134,6 @@ void SIGLIB_FUNC_DECL SDA_Differentiate(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
   *pPrevious = LocalPrevious;
 }    // End of SDA_Differentiate()
 
-/**/
-
 /********************************************************
  * Function: SIF_LeakyIntegrator
  *
@@ -158,8 +151,6 @@ void SIGLIB_FUNC_DECL SIF_LeakyIntegrator(SLData_t* pState)
 {
   *pState = 0.0;
 }    // End of SIF_LeakyIntegrator()
-
-/**/
 
 /********************************************************
  * Function: SDS_LeakyIntegrator1
@@ -196,8 +187,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_LeakyIntegrator1(const SLData_t Src, SLData_t* pSt
   *pState = 0.0;
   return (Temp);
 }    // End of SDS_LeakyIntegrator1()
-
-/**/
 
 /********************************************************
  * Function: SDS_LeakyIntegrator2
@@ -236,8 +225,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_LeakyIntegrator2(const SLData_t Src, SLData_t* pSt
   return (Temp);
 }    // End of SDS_LeakyIntegrator2()
 
-/**/
-
 /********************************************************
  * Function: SIF_HilbertTransformerFirFilter
  *
@@ -269,8 +256,6 @@ void SIGLIB_FUNC_DECL SIF_HilbertTransformerFirFilter(SLData_t* SIGLIB_PTR_DECL 
   }
 }    // End of SIF_HilbertTransformerFirFilter()
 
-/**/
-
 /********************************************************
  * Function: SIF_GoertzelIirFilter
  *
@@ -295,8 +280,6 @@ SLData_t SIGLIB_FUNC_DECL SIF_GoertzelIirFilter(SLData_t* SIGLIB_PTR_DECL pState
   SLData_t k = ((SLData_t)SampleLength) * Freq;
   return (SDS_Cos(SIGLIB_TWO * SIGLIB_PI * k / ((SLData_t)SampleLength)));    // Filter coeff
 }    // End of SIF_GoertzelIirFilter()
-
-/**/
 
 /********************************************************
  * Function: SDA_GoertzelIirFilter
@@ -344,8 +327,6 @@ void SIGLIB_FUNC_DECL SDA_GoertzelIirFilter(const SLData_t* SIGLIB_PTR_DECL pSrc
   }
 }    // End of SDA_GoertzelIirFilter()
 
-/**/
-
 /********************************************************
  * Function: SDS_GoertzelIirFilter
  *
@@ -377,8 +358,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_GoertzelIirFilter(const SLData_t Src, SLData_t* SI
   return ((pState[0] * Coeff) - Tmp);
 }    // End of SDS_GoertzelIirFilter()
 
-/**/
-
 /********************************************************
  * Function: SIF_GoertzelDetect
  *
@@ -399,8 +378,6 @@ SLData_t SIGLIB_FUNC_DECL SIF_GoertzelDetect(const SLData_t Freq, const SLArrayI
   SLData_t k = ((SLData_t)SampleLength) * Freq;
   return (SDS_Cos(SIGLIB_TWO * SIGLIB_PI * k / ((SLData_t)SampleLength)));    // Filter coeff
 }    // End of SIF_GoertzelDetect()
-
-/**/
 
 /********************************************************
  * Function: SDA_GoertzelDetect
@@ -447,8 +424,6 @@ SLData_t SIGLIB_FUNC_DECL SDA_GoertzelDetect(const SLData_t* SIGLIB_PTR_DECL pSr
   return ((State0 * State0) - (SIGLIB_TWO * State0 * Coeff * Tmp) + (Tmp * Tmp));
 }    // End of SDA_GoertzelDetect()
 
-/**/
-
 /********************************************************
  * Function: SIF_GoertzelDetectComplex
  *
@@ -475,8 +450,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SIF_GoertzelDetectComplex(const SLData_t Freq, 
 
   return (Coeff);    // Filter coeff
 }    // End of SIF_GoertzelDetectComplex()
-
-/**/
 
 /********************************************************
  * Function: SDA_GoertzelDetectComplex
@@ -537,8 +510,6 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDA_GoertzelDetectComplex(const SLData_t* SIGLI
   return (Result);    // Calculate and return final stage
 }    // End of SDA_GoertzelDetectComplex()
 
-/**/
-
 /********************************************************
  * Function: SIF_GaussianFirFilter
  *
@@ -564,8 +535,6 @@ void SIGLIB_FUNC_DECL SIF_GaussianFirFilter(SLData_t* SIGLIB_PTR_DECL pCoeffs, c
     n++;
   }
 }    // End of SIF_GaussianFirFilter()
-
-/**/
 
 /********************************************************
  * Function: SIF_GaussianFirFilter2
@@ -593,8 +562,6 @@ void SIGLIB_FUNC_DECL SIF_GaussianFirFilter2(SLData_t* SIGLIB_PTR_DECL pCoeffs, 
     n++;
   }
 }    // End of SIF_GaussianFirFilter2()
-
-/**/
 
 /********************************************************
  * Function: SIF_RaisedCosineFirFilter
@@ -656,8 +623,6 @@ void SIGLIB_FUNC_DECL SIF_RaisedCosineFirFilter(SLData_t* SIGLIB_PTR_DECL pCoeff
     pCoeffs[Half_SampleLengthMinusOne - i] = Tmp;
   }
 }    // End of SIF_RaisedCosineFirFilter()
-
-/**/
 
 /********************************************************
  * Function: SIF_RootRaisedCosineFirFilter
@@ -723,8 +688,6 @@ void SIGLIB_FUNC_DECL SIF_RootRaisedCosineFirFilter(SLData_t* SIGLIB_PTR_DECL pC
     pCoeffs[Half_SampleLengthMinusOne - i] = Tmp;
   }
 }    // End of SIF_RootRaisedCosineFirFilter()
-
-/**/
 
 /********************************************************
  * Function: SDS_ZTransform
@@ -795,8 +758,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_ZTransform(const SLComplexRect_s Location, const S
   return (SIGLIB_ZERO);
 }    // End of SDS_ZTransform()
 
-/**/
-
 /********************************************************
  * Function: SDS_ZTransformDB
  *
@@ -866,8 +827,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_ZTransformDB(const SLComplexRect_s Location, const
   return (SIGLIB_ZERO);
 }    // End of SDS_ZTransformDB()
 
-/**/
-
 /********************************************************
  * Function: SUF_EstimateBPFirFilterLength
  *
@@ -912,8 +871,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_EstimateBPFirFilterLength(const SLData_t Sam
   return (IndexOfMinFrac);
 }    // End of SUF_EstimateBPFirFilterLength()
 
-/**/
-
 /********************************************************
  * Function: SUF_EstimateBPFirFilterError
  *
@@ -953,8 +910,6 @@ void SIGLIB_FUNC_DECL SUF_EstimateBPFirFilterError(const SLData_t SampleRate, co
   }
 }    // End of SUF_EstimateBPFirFilterError()
 
-/**/
-
 /********************************************************
  * Function: SUF_FrequenciesToOctaves
  *
@@ -988,8 +943,6 @@ SLData_t SIGLIB_FUNC_DECL SUF_FrequenciesToOctaves(const SLData_t Fl, const SLDa
     return (SIGLIB_MAX);
   }
 }    // End of SUF_FrequenciesToOctaves
-
-/**/
 
 /********************************************************
  * Function: SUF_FrequenciesToCentreFreqHz
@@ -1025,8 +978,6 @@ SLData_t SIGLIB_FUNC_DECL SUF_FrequenciesToCentreFreqHz(const SLData_t Fl, const
   }
 }    // End of SUF_FrequenciesToCentreFreqHz
 
-/**/
-
 /********************************************************
  * Function: SUF_FrequenciesToQFactor
  *
@@ -1060,8 +1011,6 @@ SLData_t SIGLIB_FUNC_DECL SUF_FrequenciesToQFactor(const SLData_t Fl, const SLDa
   }
 }    // End of SUF_FrequenciesToQFactor
 
-/**/
-
 /********************************************************
  * Function: SUF_BandwidthToQFactor
  *
@@ -1084,8 +1033,6 @@ SLData_t SIGLIB_FUNC_DECL SUF_BandwidthToQFactor(const SLData_t BW)
     return (SIGLIB_MAX);
   }
 }    // End of SUF_BandwidthToQFactor
-
-/**/
 
 /********************************************************
  * Function: SUF_QFactorToBandwidth
@@ -1112,8 +1059,6 @@ SLData_t SIGLIB_FUNC_DECL SUF_QFactorToBandwidth(const SLData_t QFactor)
     return (SIGLIB_MAX);
   }
 }    // End of SUF_QFactorToBandwidth
-
-/**/
 
 /********************************************************
  * Function: SDS_KalmanFilter1D
@@ -1150,8 +1095,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_KalmanFilter1D(SLData_t positionNoisy, SLKalmanFil
   // Return estimate
   return (*kf->X);
 }    // End of SDS_KalmanFilter1D
-
-/**/
 
 /********************************************************
  * Function: SDS_KalmanFilter2D

@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: SigLib DSP library adaptive filter routines.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_ADAPTIVE 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SIF_Lms
@@ -71,8 +68,6 @@ void SIGLIB_FUNC_DECL SIF_Lms(SLData_t* SIGLIB_PTR_DECL pStateArray, SLData_t* S
   *pLMSFilterIndex = SIGLIB_AI_ZERO;
   *pLMSUpdateIndex = SIGLIB_AI_ZERO;
 }    // End of SIF_Lms()
-
-/**/
 
 /********************************************************
  * Function: SDS_Lms
@@ -117,8 +112,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_Lms(const SLData_t InputSample, SLData_t* SIGLIB_P
 
   return acc;
 }    // End of SDS_Lms()
-
-/**/
 
 /********************************************************
  * Function: SDA_LmsUpdate
@@ -184,8 +177,6 @@ void SIGLIB_FUNC_DECL SDA_LmsUpdate(const SLData_t* SIGLIB_PTR_DECL pStateArray,
 
   *pLMSFilterIndex = j;
 }    // End of SDA_LmsUpdate()
-
-/**/
 
 /********************************************************
  * Function: SDA_LeakyLmsUpdate
@@ -254,8 +245,6 @@ void SIGLIB_FUNC_DECL SDA_LeakyLmsUpdate(const SLData_t* SIGLIB_PTR_DECL pStateA
 
   *pLMSFilterIndex = j;
 }    // End of SDA_LeakyLmsUpdate()
-
-/**/
 
 /********************************************************
  * Function: SDA_NormalizedLmsUpdate
@@ -330,8 +319,6 @@ void SIGLIB_FUNC_DECL SDA_NormalizedLmsUpdate(const SLData_t* SIGLIB_PTR_DECL pS
   *pLMSFilterIndex = j;
 }    // End of SDA_NormalizedLmsUpdate()
 
-/**/
-
 /********************************************************
  * Function: SDA_SignErrorLmsUpdate
  *
@@ -400,8 +387,6 @@ void SIGLIB_FUNC_DECL SDA_SignErrorLmsUpdate(const SLData_t* SIGLIB_PTR_DECL pSt
 
   *pLMSFilterIndex = j;
 }    // End of SDA_SignErrorLmsUpdate()
-
-/**/
 
 /********************************************************
  * Function: SDA_SignDataLmsUpdate
@@ -473,8 +458,6 @@ void SIGLIB_FUNC_DECL SDA_SignDataLmsUpdate(const SLData_t* SIGLIB_PTR_DECL pSta
 
   *pLMSFilterIndex = j;
 }    // End of SDA_SignDataLmsUpdate()
-
-/**/
 
 /********************************************************
  * Function: SDA_SignSignLmsUpdate

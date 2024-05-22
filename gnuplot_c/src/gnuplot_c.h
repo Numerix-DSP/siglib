@@ -34,6 +34,7 @@ Copyright (c) 2024, Delta Numerix, All rights reserved.
 #    define GPC_DEBUG 0    // Set to '1' to enable Gnuplot text debug output, '0' otherwise
 #  endif
 
+#  include <stdio.h>
 #  include <stdlib.h>
 #  include <sys/stat.h>
 

@@ -39,4 +39,3 @@ ma      0x80000000,0x08000,ram         ;128K SRAM GLOBAL, STRB0
 ma 0xffffffff,1,ram
 ;sconfig \bin\bin40\init.clr
 
-

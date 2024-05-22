@@ -50,7 +50,6 @@ call cfxc trig
 call cfxc viterbi
 call cfxc window
 
-
 call lfxc acoustic
 call lfxc adaptive
 call lfxc arbfft

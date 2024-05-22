@@ -1,10 +1,7 @@
 
 
-
                 SigLib™ DSP Library
                Speech Example Files
-
-
 
 
 
@@ -22,7 +19,6 @@ Other .wav files were recorded using Audacity: http://audacity.sourceforge.net/.
 1 kHz sinusoids are provided with different audio levels (0, -3, -12, -24 and -48 dBFS). These
 files can be used to calibrate absolute levels in different functions.
 
-
 SPECTROGRAM EXAMPLE
 
 The .wav file was converted to .sig format using the wav2sig example in the
@@ -35,10 +31,8 @@ as follows:
 
 
 
-
 SigLib and Digital Filter Plus are trademarks of Delta Numerix all other
 trademarks acknowledged.
-
 
 For additional information, please contact:
 

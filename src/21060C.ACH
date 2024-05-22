@@ -39,7 +39,6 @@
 !	16K 32 bit words of internal stack in bank 1
 .SEGMENT/RAM/BEGIN = 0x0003c000 /END = 0x0003ffff /DM		seg_stak;
 
-
 !       16K 48 bit words of external code
 .SEGMENT/RAM/BEGIN = 0x00400000 /END = 0x00403fff /PM   	extcode;
 

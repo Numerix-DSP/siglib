@@ -14,17 +14,14 @@ echo Compiling pi/4 DQPSK modulator
 ./gb_profile.sh dqpskmod
 echo pi/4 DQPSK modulator has been compiled
 
-
 echo Compiling pi/4 DQPSK demodulator
 ./gb_profile.sh dqpskdemod
 echo pi/4 DQPSK demodulator has been compiled
-
 
 ./dqpskmod
 mv gmon.out dqpskmod.out
 
 python $SIGLIB_PATH/utils/wavplot.py base.wav
-
 
 ./dqpskdemod base
 mv gmon.out dqpskdemod.out

@@ -34,7 +34,6 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: DSP maths utility functions, for SigLib DSP library.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_DSPUTIL2 1    // Defines the source file that this code is being used in
@@ -44,8 +43,6 @@ Description: DSP maths utility functions, for SigLib DSP library.
 #endif
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SDA_RealSpectralInverse
@@ -84,8 +81,6 @@ void SIGLIB_FUNC_DECL SDA_RealSpectralInverse(const SLData_t* SIGLIB_PTR_DECL pS
 #endif
   }
 }    // End of SDA_RealSpectralInverse()
-
-/**/
 
 /********************************************************
  * Function: SDA_ComplexSpectralInverse
@@ -131,8 +126,6 @@ void SIGLIB_FUNC_DECL SDA_ComplexSpectralInverse(const SLData_t* SIGLIB_PTR_DECL
 #endif
   }
 }    // End of SDA_ComplexSpectralInverse()
-
-/**/
 
 /********************************************************
  * Function: SDA_FdInterpolate
@@ -257,8 +250,6 @@ void SIGLIB_FUNC_DECL SDA_FdInterpolate(const SLData_t* SIGLIB_PTR_DECL pSrcReal
   }
 }    // End of SDA_FdInterpolate()
 
-/**/
-
 /********************************************************
  * Function: SDA_FdInterpolate2
  *
@@ -323,7 +314,6 @@ void SIGLIB_FUNC_DECL SDA_FdInterpolate2(const SLData_t* SIGLIB_PTR_DECL pSrcRea
   }
 }    // End of SDA_FdInterpolate2()
 
-/**/
 #if defined(_MSC_VER)                // Defined by Microsoft compilers
 #  pragma warning(disable : 4100)    // Remove unreferenced formal parameter warning
 #endif
@@ -385,7 +375,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_TdPitchShift(const SLData_t Sample, SLData_t* SIGL
   return (OutputSample);
 }    // End of SDS_TdPitchShift()
 
-/**/
 #ifdef _MSC_VER                      // Defined by Microsoft compilers
 #  pragma warning(disable : 4100)    // Remove unreferenced formal parameter warning
 #endif
@@ -454,7 +443,6 @@ void SIGLIB_FUNC_DECL SDA_TdPitchShift(const SLData_t* SIGLIB_PTR_DECL pSrc, SLD
   }
 }    // End of SDA_TdPitchShift()
 
-/**/
 #ifdef _MSC_VER                      // Defined by Microsoft compilers
 #  pragma warning(default : 4100)    // Remove unreferenced formal parameter warning
 #endif
@@ -529,8 +517,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_EchoGenerate(const SLData_t Sample, SLData_t* SIGL
   return (OutputSample);
 }    // End of SDS_EchoGenerate()
 
-/**/
-
 /********************************************************
  * Function: SDA_Power
  *
@@ -565,8 +551,6 @@ void SIGLIB_FUNC_DECL SDA_Power(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* 
   }
 }    // End of SDA_Power()
 
-/**/
-
 /********************************************************
  * Function: SDS_Polynomial
  *
@@ -593,8 +577,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_Polynomial(const SLData_t data, const SLData_t y0,
   return (y0 + y1 * data + y2 * SDS_Pow(data, SIGLIB_TWO) + y3 * SDS_Pow(data, SIGLIB_THREE) + y4 * SDS_Pow(data, SIGLIB_FOUR) +
           y5 * SDS_Pow(data, SIGLIB_FIVE));
 }    // End of SDS_Polynomial()
-
-/**/
 
 /********************************************************
  * Function: SDA_Polynomial
@@ -632,8 +614,6 @@ void SIGLIB_FUNC_DECL SDA_Polynomial(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDat
     *pDst++ = SDS_Polynomial(*pSrc++, y0, y1, y2, y3, y4, y5);
   }
 }    // End of SDA_Polynomial()
-
-/**/
 
 /********************************************************
  * Function: SDS_Modulo
@@ -680,8 +660,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_Modulo(const SLData_t Sample, const SLData_t Modul
 
   return (Tmp);
 }    // End of SDS_Modulo()
-
-/**/
 
 /********************************************************
  * Function: SDA_Modulo
@@ -744,8 +722,6 @@ void SIGLIB_FUNC_DECL SDA_Modulo(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
     }
   }
 }    // End of SDA_Modulo()
-
-/**/
 
 /********************************************************
  * Function: SDA_AgcPeak
@@ -833,8 +809,6 @@ void SIGLIB_FUNC_DECL SDA_AgcPeak(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
   *pMax = Max;
 }    // End of SDA_AgcPeak()
 
-/**/
-
 /********************************************************
  * Function: SIF_AgcMeanAbs
  *
@@ -871,8 +845,6 @@ void SIGLIB_FUNC_DECL SIF_AgcMeanAbs(SLData_t* SIGLIB_PTR_DECL pState, SLArrayIn
   *pDesiredMeanScaled = DesiredLevel * (SLData_t)0.636618 * (SLData_t)MeanLength;    // Scaled mean value
   *pThresholdScaled = Threshold * (SLData_t)0.636618 * (SLData_t)MeanLength;         // Scaled threshold value
 }    // End of SIF_AgcMeanAbs()
-
-/**/
 
 /********************************************************
  * Function: SDA_AgcMeanAbs
@@ -965,8 +937,6 @@ void SIGLIB_FUNC_DECL SDA_AgcMeanAbs(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDat
   *pMeanSum = MeanSum;
 }    // End of SDA_AgcMeanAbs()
 
-/**/
-
 /********************************************************
  * Function: SIF_AgcMeanSquared
  *
@@ -1007,8 +977,6 @@ void SIGLIB_FUNC_DECL SIF_AgcMeanSquared(SLData_t* SIGLIB_PTR_DECL pState, SLArr
   *pThresholdScaled = Threshold * Threshold * 0.01 * (SLData_t)MeanLength;                   // Scaled mean squared threshold value
 
 }    // End of SIF_AgcMeanSquared()
-
-/**/
 
 /********************************************************
  * Function: SDA_AgcMeanSquared
@@ -1098,8 +1066,6 @@ void SIGLIB_FUNC_DECL SDA_AgcMeanSquared(const SLData_t* SIGLIB_PTR_DECL pSrc, S
   *pMeanSquaredSum = MeanSquaredSum;
 }    // End of SDA_AgcMeanSquared()
 
-/**/
-
 /********************************************************
  * Function: SIF_AgcEnvelopeDetector
  *
@@ -1128,8 +1094,6 @@ void SIGLIB_FUNC_DECL SIF_AgcEnvelopeDetector(const SLData_t envelopeDetectorTim
 
   *pGain = SIGLIB_ONE;    // Initilaise the gain
 }    // End of SIF_AgcEnvelopeDetector()
-
-/**/
 
 /********************************************************
  * Function: SDS_AgcEnvelopeDetector
@@ -1240,8 +1204,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_AgcEnvelopeDetector(const SLData_t src, const SLDa
 
   return (dst);
 }    // End of SDS_AgcEnvelopeDetector()
-
-/**/
 
 /********************************************************
  * Function: SDA_AgcEnvelopeDetector
@@ -1362,8 +1324,6 @@ void SIGLIB_FUNC_DECL SDA_AgcEnvelopeDetector(const SLData_t* SIGLIB_PTR_DECL pS
   *pState = envelopeDetectorState;
 }    // End of SDA_AgcEnvelopeDetector()
 
-/**/
-
 /********************************************************
  * Function: SIF_Drc
  *
@@ -1385,8 +1345,6 @@ void SIGLIB_FUNC_DECL SIF_Drc(const SLData_t envelopeDetectorTimeConstant, const
   *pOnePoleCoefficient = SDS_OnePoleTimeConstantToFilterCoeff(envelopeDetectorTimeConstant,    // Time period (ms)
                                                               sampleRate);                     // Sample rate (Hz)
 }    // End of SIF_Drc()
-
-/**/
 
 /********************************************************
  * Function: SDS_Drc
@@ -1442,8 +1400,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_Drc(const SLData_t input, SLData_t* envelopeState,
 
   return (magnitude * inputSign * makeupGain);
 }    // End of SDS_Drc()
-
-/**/
 
 /********************************************************
  * Function: SDA_Drc
@@ -1505,8 +1461,6 @@ void SIGLIB_FUNC_DECL SDA_Drc(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SI
   *envelopeState = localEnvelopeState;
 }    // End of SDA_Drc()
 
-/**/
-
 /********************************************************
  * Function: SDA_GroupDelay()
  *
@@ -1558,8 +1512,6 @@ void SIGLIB_FUNC_DECL SDA_GroupDelay(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDat
 
   *PreviousPhase = LocalPreviousPhase;
 }    // End of SDA_GroupDelay()
-
-/**/
 
 /********************************************************
  * Function: SDA_ZeroCrossingDetect()
@@ -1653,8 +1605,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_ZeroCrossingDetect(const SLData_t* SIGLIB_PTR_D
   return (NumXings);
 }    // End of SDA_ZeroCrossingDetect()
 
-/**/
-
 /********************************************************
  * Function: SDS_ZeroCrossingDetect()
  *
@@ -1714,8 +1664,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_ZeroCrossingDetect(const SLData_t Src, SLData_t* p
 
   return (ZeroCrossingFlag);
 }    // End of SDS_ZeroCrossingDetect()
-
-/**/
 
 /********************************************************
  * Function: SDA_FirstZeroCrossingLocation()
@@ -1790,8 +1738,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FirstZeroCrossingLocation(const SLData_t* SI
 
 }    // End of SDA_FirstZeroCrossingLocation()
 
-/**/
-
 /********************************************************
  * Function: SDA_ZeroCrossingCount()
  *
@@ -1861,8 +1807,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_ZeroCrossingCount(const SLData_t* SIGLIB_PTR_DE
 
   return (NumXings);
 }    // End of SDA_ZeroCrossingCount()
-
-/**/
 
 /********************************************************
  * Function: SDA_LevelCrossingDetect()
@@ -1958,8 +1902,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_LevelCrossingDetect(const SLData_t* SIGLIB_PTR_
   return (NumXings);
 }    // End of SDA_LevelCrossingDetect()
 
-/**/
-
 /********************************************************
  * Function: SDS_LevelCrossingDetect()
  *
@@ -2022,8 +1964,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_LevelCrossingDetect(const SLData_t Src, const SLDa
 
   return (LevelCrossingFlag);
 }    // End of SDS_LevelCrossingDetect()
-
-/**/
 
 /********************************************************
  * Function: SDA_FirstLevelCrossingLocation()
@@ -2100,8 +2040,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FirstLevelCrossingLocation(const SLData_t* S
 
 }    // End of SDA_FirstLevelCrossingLocation()
 
-/**/
-
 /********************************************************
  * Function: SDA_LevelCrossingCount()
  *
@@ -2172,8 +2110,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_LevelCrossingCount(const SLData_t* SIGLIB_PTR_D
 
   return (NumXings);
 }    // End of SDA_LevelCrossingCount()
-
-/**/
 
 /********************************************************
  * Function: SDA_Trigger()
@@ -2252,8 +2188,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_Trigger(const SLData_t* SIGLIB_PTR_DECL pSrc
 
 }    // End of SDA_Trigger()
 
-/**/
-
 /********************************************************
  * Function: SDA_ClearLocation
  *
@@ -2276,8 +2210,6 @@ void SIGLIB_FUNC_DECL SDA_ClearLocation(SLData_t pDst[], const SLArrayIndex_t Lo
     pDst[Locn] = SIGLIB_ZERO;
   }
 }    // End of SDA_ClearLocation()
-
-/**/
 
 /********************************************************
  * Function: SDA_SetLocation
@@ -2303,8 +2235,6 @@ void SIGLIB_FUNC_DECL SDA_SetLocation(SLData_t pDst[], const SLArrayIndex_t Locn
     pDst[Locn] = Val;
   }
 }    // End of SDA_SetLocation()
-
-/**/
 
 /********************************************************
  * Function: SDA_SortMinToMax()
@@ -2347,8 +2277,6 @@ void SIGLIB_FUNC_DECL SDA_SortMinToMax(const SLData_t pSrc[], SLData_t pDst[], c
   }
 }    // End of SDA_SortMinToMax()
 
-/**/
-
 /********************************************************
  * Function: SDA_SortMaxToMin()
  *
@@ -2389,8 +2317,6 @@ void SIGLIB_FUNC_DECL SDA_SortMaxToMin(const SLData_t pSrc[], SLData_t pDst[], c
     }
   }
 }    // End of SDA_SortMaxToMin()
-
-/**/
 
 /********************************************************
  * Function: SDA_SortMinToMax2()
@@ -2447,8 +2373,6 @@ void SIGLIB_FUNC_DECL SDA_SortMinToMax2(const SLData_t pSrc1[], const SLData_t p
   }
 }    // End of SDA_SortMinToMax2()
 
-/**/
-
 /********************************************************
  * Function: SDA_SortMaxToMin2()
  *
@@ -2504,8 +2428,6 @@ void SIGLIB_FUNC_DECL SDA_SortMaxToMin2(const SLData_t pSrc1[], const SLData_t p
   }
 }    // End of SDA_SortMaxToMin2()
 
-/**/
-
 /********************************************************
  * Function: SDA_SortIndexed()
  *
@@ -2539,8 +2461,6 @@ void SIGLIB_FUNC_DECL SDA_SortIndexed(const SLData_t pSrc[], const SLArrayIndex_
   }
 }    // End of SDA_SortIndexed()
 
-/**/
-
 /********************************************************
  * Function: SDS_CountOneBits()
  *
@@ -2568,8 +2488,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_CountOneBits(const SLFixData_t Source)
   return (BitCount);
 }    // End of SDS_CountOneBits()
 
-/**/
-
 /********************************************************
  * Function: SDS_CountZeroBits()
  *
@@ -2596,8 +2514,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_CountZeroBits(const SLFixData_t Source)
   }
   return (BitCount);
 }    // End of SDS_CountZeroBits()
-
-/**/
 
 /********************************************************
  * Function: SDS_CountLeadingOneBits()
@@ -2628,8 +2544,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_CountLeadingOneBits(const SLFixData_t Source)
   return BitLocationCount;
 }    // End of SDS_CountLeadingOneBits()
 
-/**/
-
 /********************************************************
  * Function: SDS_CountLeadingZeroBits()
  *
@@ -2658,8 +2572,6 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_CountLeadingZeroBits(const SLFixData_t Source)
   }
   return BitLocationCount;
 }    // End of SDS_CountLeadingZeroBits()
-
-/**/
 
 /********************************************************
  * Function: SDA_Sign()
@@ -2697,8 +2609,6 @@ void SIGLIB_FUNC_DECL SDA_Sign(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* S
     }
   }
 }    // End of SDA_Sign()
-
-/**/
 
 /********************************************************
  * Function: SDA_Swap()
@@ -2738,8 +2648,6 @@ void SIGLIB_FUNC_DECL SDA_Swap(SLData_t* SIGLIB_PTR_DECL pSrc1, SLData_t* SIGLIB
   }
 }    // End of SDA_Swap()
 
-/**/
-
 /********************************************************
  * Function: SUF_ModuloIncrement()
  *
@@ -2765,8 +2673,6 @@ SLFixData_t SIGLIB_FUNC_DECL SUF_ModuloIncrement(const SLFixData_t Input, const 
 
   return (Tmp);
 }    // End of SUF_ModuloIncrement()
-
-/**/
 
 /********************************************************
  * Function: SUF_ModuloDecrement()
@@ -2794,8 +2700,6 @@ SLFixData_t SIGLIB_FUNC_DECL SUF_ModuloDecrement(const SLFixData_t Input, const 
   return (Tmp);
 }    // End of SUF_ModuloDecrement()
 
-/**/
-
 /********************************************************
  * Function: SUF_IndexModuloIncrement()
  *
@@ -2822,8 +2726,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_IndexModuloIncrement(const SLArrayIndex_t In
   return (Tmp);
 }    // End of SUF_IndexModuloIncrement()
 
-/**/
-
 /********************************************************
  * Function: SUF_IndexModuloDecrement()
  *
@@ -2849,8 +2751,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_IndexModuloDecrement(const SLArrayIndex_t In
 
   return (Tmp);
 }    // End of SUF_IndexModuloDecrement()
-
-/**/
 
 /********************************************************
  * Function: SDA_Find
@@ -2948,8 +2848,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_Find(const SLData_t* SIGLIB_PTR_DECL pSrc, S
 
   return (NumberOfElements);
 }    // End of SDA_Find()
-
-/**/
 
 /********************************************************
  * Function: SDA_FindValue

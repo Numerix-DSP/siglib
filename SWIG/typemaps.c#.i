@@ -45,7 +45,7 @@ To use these, suppose you had a C function like this :
         }
 
 You could wrap it with SWIG as follows :
-        
+
         %include <typemaps.i>
         double fadd(double *INPUT, double *INPUT);
 
@@ -136,7 +136,7 @@ or you can use the %apply directive :
         %apply double *OUTPUT { double *ip };
         double modf(double x, double *ip);
 
-The C# output of the function would be the function return value and the 
+The C# output of the function would be the function return value and the
 value returned in the second output parameter. In C# you would use it like this:
 
     double dptr;
@@ -172,7 +172,6 @@ OUTPUT_TYPEMAP(float,              float,                float,    FLOAT_PTR)
 OUTPUT_TYPEMAP(double,             double,               double,   DOUBLE_PTR)
 
 #undef OUTPUT_TYPEMAP
-
 
 /*
 INOUT typemaps
@@ -219,15 +218,14 @@ or you can use the %apply directive :
         %apply double *INOUT { double *x };
         void neg(double *x);
 
-The C# output of the function would be the new value returned by the 
+The C# output of the function would be the new value returned by the
 reference parameter. In C# you would use it like this:
-
 
        double x = 5.0;
        neg(ref x);
 
 The implementation of the OUTPUT and INOUT typemaps is different to the scripting
-languages in that the scripting languages will return the output value as part 
+languages in that the scripting languages will return the output value as part
 of the function return value.
 
 */

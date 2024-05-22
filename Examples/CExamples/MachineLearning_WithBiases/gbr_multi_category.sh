@@ -191,7 +191,6 @@ else
   fi
 fi
 
-
 if [ ! -f TrainingDataSet.csv ]; then                         # Test for correct generation of training and validation .csv files
   echo "ERROR! TrainingDataSet.csv not created"
   exit

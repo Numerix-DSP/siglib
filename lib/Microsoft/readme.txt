@@ -1,10 +1,8 @@
 
 
-
                        SigLib™
 
         SigLib Microsoft Visual C/C++ Static And Dynamic Link Library
-
 
 
 
@@ -15,7 +13,6 @@ that have been compiled using Microsoft Visual C++.
 
 In order to use the DLL from an application, it should be copied into
 the Windows\System directory.
-
 
 The sub-folders are:
     dynamic_library         32 bit DLL
@@ -28,10 +25,8 @@ LICENSE
 For the full license agreement, please refer to the document
 "license.txt".
 
-
 Digital Filter Plus and SigLib are trademarks of Delta Numerix all
 other trademarks acknowledged.
-
 
 
 For additional information, please contact:

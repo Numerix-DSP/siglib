@@ -7,7 +7,8 @@
 #ifdef __GNUG__
 #  pragma implementation "sa.cpp"
 #  pragma interface "sa.cpp"
-#endif /* */
+#endif /* \
+        */
 
 // For compilers that support precompilation, includes "wx/wx.h".
 #include "wx/wxprec.h"
@@ -16,11 +17,13 @@
 // need because it includes almost all "standard" wxWidgets headers
 #ifndef WX_PRECOMP
 #  include "wx/wx.h"
-#endif /* */
+#endif /* \
+        */
 
 #if wxUSE_TOOLTIPS
 #  include "wx/tooltip.h"
-#endif /* */
+#endif /* \
+        */
 
 #include "wx/file.h"
 #include "wx/mimetype.h"
@@ -30,14 +33,17 @@
 
 #if defined(__WXGTK__) || defined(__WXMOTIF__) || defined(__WXMAC__) || defined(__WXMGL__) || defined(__WXX11__)
 #  include "sa.xpm"    // the application icon
-#endif                 /* */
+#endif                 /* \
+                        */
 
 #include <stdlib.h>
 #if __APPLE__
 #  include <malloc/malloc.h>
-#else /* */
+#else /* \
+       */
 #  include <malloc.h>
-#endif                    /* */
+#endif                    /* \
+                           */
 #include "mainframe.h"    // mainframe header - must be located after other project headers
 #include "sa.h"
 #include <math.h>
@@ -75,7 +81,8 @@ mainFrame::mainFrame(wxString Title, wxPoint Position, wxSize Size)
   SetAutoLayout(TRUE);    // Autolayout the window
 #if defined(__WXMSW__)
   SetIcon(wxICON(ApplicationIcon));    // Select the application icon
-#endif                                 /* */
+#endif                                 /* \
+                                        */
 
   // Create the menubar
   wxMenuBar* menuBar = new wxMenuBar;
@@ -97,7 +104,8 @@ mainFrame::mainFrame(wxString Title, wxPoint Position, wxSize Size)
 #if DEBUG_LOG_FILE
   SUF_Debugfprintf("mainFrame::mainFrame : Splitter window created\n");
 
-#endif /* */
+#endif /* \
+        */
 
   // Create filter specification entry window
   TopProcessWindow = new wxWindow(SplitterWindow, -1);
@@ -132,7 +140,7 @@ mainFrame::mainFrame(wxString Title, wxPoint Position, wxSize Size)
 
 /*
     Function Name : mainFrame::~mainFrame
-    Description : Destructor for top level SA frame
+escription : Destructor for top level SA frame
     Notes :
 */
 mainFrame::~mainFrame()
@@ -179,10 +187,12 @@ wxString mainFrame::FindExecutablePath(const wxString& argv0, const wxString& cw
 #if defined(__WXGTK__) || defined(__WXMOTIF__)
     str = currentDir + argv0;
 
-#else /* */
+#else /* \
+       */
     str = currentDir + argv0 + wxString(".exe");
 
-#endif /* */
+#endif /* \
+        */
        //  SUF_Debugfprintf ("mainFrame::FindExecutablePath : str = \"%s\"\n",
        //  str);
     if (wxFileExists(str))

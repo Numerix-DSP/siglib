@@ -17,7 +17,6 @@ CWinGraph::CWinGraph()
     HGCursor = SLTestApp.LoadCursor ("GraphCursor");
 }
 
-
 afx_msg int CWinGraph::OnCreate (LPCREATESTRUCT lpCreateStruct)
 {
     LPCREATESTRUCT  dummy;
@@ -36,19 +35,16 @@ afx_msg int CWinGraph::OnCreate (LPCREATESTRUCT lpCreateStruct)
 }
 
 
-
 afx_msg void CWinGraph::OnClose()
 {
 
 }
-
 
 afx_msg void CWinGraph::OnExit()
 {
     ::LocalFree (HDOldDataMem);                             // Free old data array memory
     DestroyWindow();
 }
-
 
 
 afx_msg void CWinGraph::OnLButtonDown (UINT nFlags,
@@ -79,14 +75,12 @@ afx_msg void CWinGraph::OnPaint()
     int             YPos;
     double          XStep, YStep;
 
-
     GetClientRect (&Rect);
 
     if (FirstGraph) {
         PaintDC.SelectStockObject (BLACK_BRUSH);            // Black background
         PaintDC.Rectangle (&Rect);
     }
-
 
     Height = Rect.bottom - Rect.top;
     Width = Rect.right - Rect.left;
@@ -130,7 +124,6 @@ afx_msg void CWinGraph::OnPaint()
         ::LocalUnlock (HDOldDataMem);                       // Unlock the old graph data array
     }
 
-
     ClientDC.SelectObject (&GraticulePen);                  // Get the pen to draw the axes
     for (UINTi = 1; i < 10; i++) {
         ClientDC.MoveTo (Rect.left, Rect.top + (i * Height / 10));
@@ -141,7 +134,6 @@ afx_msg void CWinGraph::OnPaint()
     }
     FirstGraph = 0;
 }
-
 
 
 // On mouse move
@@ -159,7 +151,6 @@ afx_msg void CWinGraph::OnMouseMove (UINT nFlags, CPoint point)
 }
 
 
-
 // Erase Background - Issued when window revealed
 
 afx_msg BOOL CWinGraph::OnEraseBkgnd (CDC *pDC)
@@ -171,7 +162,6 @@ afx_msg BOOL CWinGraph::OnEraseBkgnd (CDC *pDC)
 
     return (0);
 }
-
 
 
 // Resize
@@ -187,7 +177,6 @@ afx_msg void CWinGraph::OnSize (UINT nType, int cx, int cy)
 
     FirstGraph = 1;                                         // Redraw the graticules etc
 }
-
 
 void CWinGraph::SetGraph (int S)
 {
@@ -205,7 +194,6 @@ BEGIN_MESSAGE_MAP (CWinGraph, CWnd)
     ON_WM_SIZE()
     ON_WM_ERASEBKGND()
 END_MESSAGE_MAP()
-
 
 // CWinStatus functions:
 

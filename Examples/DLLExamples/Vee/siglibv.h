@@ -1294,14 +1294,14 @@ void _stdcall SDA_IirNegateAlphaCoeffs(double* SIGLIB_INPUT_PTR_DECL,           
                                        double* SIGLIB_OUTPUT_PTR_DECL,                  // Pointer to destination filter
                                                                                         // coefficients array
                                        long);                                           // Number of biquads
-long _stdcall SIF_GraphicalEqualizerFilterBank(double* SIGLIB_INPUT_PTR_DECL,           // Pointer to filter cut-off frequency array
-                                               double* SIGLIB_OUTPUT_PTR_DECL,          // Pointer to filter bank coefficients
-                                               double* SIGLIB_OUTPUT_PTR_DECL,          // Pointer to filter state array
-                                               long,                                    // Number of frequency bands
-                                               double,                                  // Sample rate
-                                               double,                                  // Minimum gain for each frequncy band
-                                               double,                                  // Gain step for each frequency band
-                                               long);                                   // Number of gain levels for each frequency band
+long _stdcall SIF_GraphicEqualizerFilterBank(double* SIGLIB_INPUT_PTR_DECL,             // Pointer to filter cut-off frequency array
+                                             double* SIGLIB_OUTPUT_PTR_DECL,            // Pointer to filter bank coefficients
+                                             double* SIGLIB_OUTPUT_PTR_DECL,            // Pointer to filter state array
+                                             long,                                      // Number of frequency bands
+                                             double,                                    // Sample rate
+                                             double,                                    // Minimum gain for each frequncy band
+                                             double,                                    // Gain step for each frequency band
+                                             long);                                     // Number of gain levels for each frequency band
 
 // Filtering functions - filter.c
 void _stdcall SDA_Integrate(double* SIGLIB_INPUT_PTR_DECL,                       // Pointer to input data

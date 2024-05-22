@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Power spectrum analysis functions.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_PSPECT 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SIF_FastAutoCrossPowerSpectrum
@@ -68,8 +65,6 @@ void SIGLIB_FUNC_DECL SIF_FastAutoCrossPowerSpectrum(SLData_t* SIGLIB_PTR_DECL p
 
   SIF_Fft(pFFTCoeffs, pBitReverseAddressTable, FFTLength);
 }    // End of SIF_FastAutoCrossPowerSpectrum()
-
-/**/
 
 /********************************************************
  * Function: SDA_FastAutoPowerSpectrum
@@ -118,8 +113,6 @@ void SIGLIB_FUNC_DECL SDA_FastAutoPowerSpectrum(SLData_t* SIGLIB_PTR_DECL pRealD
   SDA_MagnitudeSquared(pRealData, pImagData, pRealData,
                        ResultLength);    // Calculate the magnitude squared
 }    // End of SDA_FastAutoPowerSpectrum()
-
-/**/
 
 /********************************************************
  * Function: SDA_FastCrossPowerSpectrum
@@ -178,8 +171,6 @@ void SIGLIB_FUNC_DECL SDA_FastCrossPowerSpectrum(SLData_t* SIGLIB_PTR_DECL pReal
   // Calculate the cross power spectrum
   SDA_ComplexMultiply2(pRealData1, pImagData1, pRealData2, pImagData2, pRealData1, pImagData1, ResultLength);
 }    // End of SDA_FastCrossPowerSpectrum()
-
-/**/
 
 /********************************************************
  * Function: SIF_ArbAutoCrossPowerSpectrum
@@ -240,8 +231,6 @@ void SIGLIB_FUNC_DECL SIF_ArbAutoCrossPowerSpectrum(SLData_t* SIGLIB_PTR_DECL pA
   *InverseFFTLength = SIGLIB_ONE / ((SLData_t)*pFFTLength);
   *pInverseSampleLengthXFFTLength = SIGLIB_ONE / (((SLData_t)SampleLength) * ((SLData_t)*pFFTLength));
 }    // End of SIF_ArbAutoCrossPowerSpectrum()
-
-/**/
 
 /********************************************************
  * Function: SDA_ArbAutoPowerSpectrum
@@ -327,8 +316,6 @@ void SIGLIB_FUNC_DECL SDA_ArbAutoPowerSpectrum(
   SDA_MagnitudeSquared(pRealData, pImagData, pRealData,
                        ResultLength);    // Calculate the magnitude squared
 }    // End of SDA_ArbAutoPowerSpectrum()
-
-/**/
 
 /********************************************************
  * Function: SDA_ArbCrossPowerSpectrum
@@ -444,8 +431,6 @@ SDA_ArbCrossPowerSpectrum(SLData_t* SIGLIB_PTR_DECL pRealData1, SLData_t* SIGLIB
   SDA_ComplexMultiply2(pRealData1, pImagData1, pRealData2, pImagData2, pRealData1, pImagData1, ResultLength);
 }    // End of SDA_ArbCrossPowerSpectrum()
 
-/**/
-
 /********************************************************
  * Function: SIF_WelchPowerSpectrum
  *
@@ -498,8 +483,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_WelchPowerSpectrum(SLArrayIndex_t* pOverlapSrcInd
 #  pragma GCC diagnostic push
 #  pragma GCC diagnostic ignored "-Wunused-parameter"
 #endif
-
-/**/
 
 /********************************************************
  * Function: SDA_WelchRealPowerSpectrum
@@ -578,8 +561,6 @@ void SIGLIB_FUNC_DECL SDA_WelchRealPowerSpectrum(const SLData_t* SIGLIB_PTR_DECL
   SDA_Multiply(pDst, SIGLIB_TWO * InverseNumberOfArraysAveraged, pDst,
                ResultLength);    // Perform single sided PSD and average scaling
 }    // End of SDA_WelchRealPowerSpectrum()
-
-/**/
 
 /********************************************************
  * Function: SDA_WelchComplexPowerSpectrum
@@ -672,8 +653,6 @@ void SIGLIB_FUNC_DECL SDA_WelchComplexPowerSpectrum(const SLData_t* SIGLIB_PTR_D
 #  pragma GCC diagnostic pop
 #endif
 
-/**/
-
 /********************************************************
  * Function: SIF_MagnitudeSquaredCoherence
  *
@@ -699,8 +678,6 @@ void SIGLIB_FUNC_DECL SIF_MagnitudeSquaredCoherence(SLData_t* SIGLIB_PTR_DECL pF
 
   SIF_Fft(pFFTCoeffs, pBitReverseAddressTable, FFTLength);
 }    // End of SIF_MagnitudeSquaredCoherence()
-
-/**/
 
 /********************************************************
  * Function: SDA_MagnitudeSquaredCoherence

@@ -370,8 +370,6 @@ int main(void)
   return (0);
 }
 
-/**/
-
 /********************************************************
  * Function: SDA_SignalGenerate
  *
@@ -475,8 +473,6 @@ SLFixData_t SDA_SignalGenerate(SLData_t* ptr, enum SLSignal_t signal_type, SLDat
 
 }    // End of SDA_SignalGenerate()
 
-/**/
-
 /********************************************************
  * Function: SDA_Window
  *
@@ -503,8 +499,6 @@ void SDA_Window(SLData_t* ip, SLData_t* rp, SLData_t* wp, SLFixData_t window_len
   }
 
 }    // End of SDA_Window()
-
-/**/
 
 /********************************************************
  * Function: SIF_Window
@@ -548,8 +542,6 @@ SLFixData_t SIF_Window(SLData_t* wp, enum SLWindow_t window_type, SLFixData_t wi
   }
 }    // End of SIF_Window()
 
-/**/
-
 /********************************************************
  * Function: SIF_Fft
  *
@@ -576,8 +568,6 @@ void SIF_Fft(SLData_t* pFFTCoeffs, const SLFixData_t FFTLength)
   }
 
 }    // End of SIF_Fft()
-
-/**/
 
 /********************************************************
  * Function: SDA_Rfft
@@ -689,8 +679,6 @@ void SDA_Rfft(SLData_t realData[], SLData_t imagData[], const SLData_t* pFFTCoef
   }
 
 }    // End of SDA_Rfft()
-
-/**/
 
 /********************************************************
  * Function: SDS_Round()

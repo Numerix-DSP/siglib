@@ -62,8 +62,6 @@ double AbsMax(const double*, const long);
 
 #define ALWAYS 1
 
-/**/
-
 /********************************************************
  * Function: LineGraph::LineGraph
  *
@@ -152,8 +150,6 @@ LineGraph::~LineGraph()
 {
   free(pDataSet);    // Free the memory
 }
-
-/**/
 
 /********************************************************
  * Function: LineGraph::Draw
@@ -295,8 +291,6 @@ void LineGraph::Draw(wxDC& GraphPaintDC, bool WXUNUSED(draw_bitmaps))
   //  wxICON_EXCLAMATION, NULL);
 }
 
-/**/
-
 /********************************************************
  * Function: LineGraph::AddDataSet
  *
@@ -427,8 +421,6 @@ double LineGraph::GetStatusBarIndexMultiplier(void)
   return (StatusBarIndexMultiplier);
 }    // End of LineGraph::GetStatusBarIndexMultiplier()
 
-/**/
-
 /********************************************************
  * Function: LineGraph::AbsMax
  *
@@ -555,8 +547,6 @@ EVT_PAINT(LineGraphCanvas::OnPaint)
 EVT_MOTION(LineGraphCanvas::OnMouseMove)
 END_EVENT_TABLE()
 
-/**/
-
 /********************************************************
  * Function: PoleZeroPlot::PoleZeroPlot()
  *
@@ -611,8 +601,6 @@ PoleZeroPlot::~PoleZeroPlot()
 {
   free(pDataSet);    // Free the memory
 }
-
-/**/
 
 /********************************************************
  * Function: PoleZeroPlot::Draw()
@@ -783,8 +771,6 @@ void PoleZeroPlot::Draw(wxDC& GraphPaintDC, bool WXUNUSED(draw_bitmaps))
   // wxMessageBox (_T("Got here - End"), _T("PoleZeroPlot::Draw"), wxOK |
   // wxICON_EXCLAMATION, NULL);
 }
-
-/**/
 
 /********************************************************
  * Function: PoleZeroPlot::AddDataSet()

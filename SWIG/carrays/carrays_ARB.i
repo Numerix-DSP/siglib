@@ -11,7 +11,7 @@
  * follows:
  * - the actual arrays are created of size = N+1
  * - array[0] stores the array size
- * - each read operation compares the passed index to array[0]; returns 0 if 
+ * - each read operation compares the passed index to array[0]; returns 0 if
  *   the index is >= array[0], otherwise returns array[index+1]
  * - each write operation compares the passed index to array[0]; does nothing if
  *   the index is >= array[0], otherwise updates array[index+1]
@@ -29,7 +29,7 @@
  *        void delete_NAME(TYPE *);
  *        TYPE NAME_getitem(TYPE *, int index);
  *        void NAME_setitem(TYPE *, int index, TYPE value);
- * 
+ *
  * ----------------------------------------------------------------------------- */
 
 %define %array_functions(TYPE,NAME)
@@ -66,7 +66,6 @@ TYPE NAME##_getitem(TYPE *ary, int index);
 void NAME##_setitem(TYPE *ary, int index, TYPE value);
 
 %enddef
-
 
 /* -----------------------------------------------------------------------------
  * %array_class(TYPE,NAME)

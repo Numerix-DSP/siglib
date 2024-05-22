@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Delay functions, for SigLib DSP library.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_DELAY 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SIF_FixedDelay
@@ -70,8 +67,6 @@ void SIGLIB_FUNC_DECL SIF_FixedDelay(SLData_t* SIGLIB_PTR_DECL pState, SLArrayIn
     *pDelayIndex = SIGLIB_AI_ZERO;    // Initilaise filter index
   }
 }    // End of SIF_FixedDelay()
-
-/**/
 
 /********************************************************
  * Function: SDS_FixedDelay
@@ -108,8 +103,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_FixedDelay(const SLData_t Src, SLData_t* SIGLIB_PT
 
   return (dtmp);
 }    // End of SDS_FixedDelay()
-
-/**/
 
 /********************************************************
  * Function: SDA_FixedDelay
@@ -156,8 +149,6 @@ void SIGLIB_FUNC_DECL SDA_FixedDelay(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDat
   *pDelayIndex = LocalDelayIndex;
 }    // End of SDA_FixedDelay()
 
-/**/
-
 /********************************************************
  * Function: SIF_FixedDelayComplex
  *
@@ -187,8 +178,6 @@ void SIGLIB_FUNC_DECL SIF_FixedDelayComplex(SLData_t* SIGLIB_PTR_DECL pRealState
     *pDelayIndex = SIGLIB_AI_ZERO;    // Initilaise filter index
   }
 }    // End of SIF_FixedDelayComplex()
-
-/**/
 
 /********************************************************
  * Function: SDS_FixedDelayComplex
@@ -231,8 +220,6 @@ void SIGLIB_FUNC_DECL SDS_FixedDelayComplex(const SLData_t RealSrc, const SLData
   *pImagDst = pImagState[*pDelayIndex];
   pImagState[*pDelayIndex] = ImagSrc;
 }    // End of SDS_FixedDelayComplex()
-
-/**/
 
 /********************************************************
  * Function: SDA_FixedDelayComplex
@@ -291,8 +278,6 @@ void SIGLIB_FUNC_DECL SDA_FixedDelayComplex(const SLData_t* SIGLIB_PTR_DECL pSrc
 
 }    // End of SDA_FixedDelayComplex()
 
-/**/
-
 /********************************************************
  * Function: SDA_ShortFixedDelay
  *
@@ -344,8 +329,6 @@ void SIGLIB_FUNC_DECL SDA_ShortFixedDelay(const SLData_t* SIGLIB_PTR_DECL pSrc, 
   SDA_Copy(pTempDst, pDelay, Delay);    // Save delayed data
 }    // End of SDA_ShortFixedDelay
 
-/**/
-
 /********************************************************
  * Function: SIF_VariableDelay
  *
@@ -391,8 +374,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_VariableDelay(SLData_t* SIGLIB_PTR_DECL pDelayArr
 
   return (SIGLIB_NO_ERROR);    // Success
 }    // End of SIF_VariableDelay()
-
-/**/
 
 /********************************************************
  * Function: SDS_VariableDelay
@@ -444,8 +425,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_VariableDelay(const SLData_t InputValue, SLData_t*
 
   return (OutputValue);
 }    // End of SDS_VariableDelay()
-
-/**/
 
 /********************************************************
  * Function: SDA_VariableDelay
@@ -502,8 +481,6 @@ void SIGLIB_FUNC_DECL SDA_VariableDelay(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
   *pOutputIndex = LocalOutputIndex;
 }    // End of SDA_VariableDelay()
 
-/**/
-
 /********************************************************
  * Function: SIF_VariableDelayComplex
  *
@@ -552,8 +529,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_VariableDelayComplex(SLData_t* SIGLIB_PTR_DECL pR
 
   return (SIGLIB_NO_ERROR);    // Success
 }    // End of SIF_VariableDelayComplex()
-
-/**/
 
 /********************************************************
  * Function: SDS_VariableDelayComplex
@@ -614,8 +589,6 @@ void SIGLIB_FUNC_DECL SDS_VariableDelayComplex(const SLData_t RealInputValue, co
   }
   *pOutputIndex = LocalIndex;
 }    // End of SDS_VariableDelayComplex()
-
-/**/
 
 /********************************************************
  * Function: SDA_VariableDelayComplex
@@ -686,8 +659,6 @@ void SIGLIB_FUNC_DECL SDA_VariableDelayComplex(const SLData_t* SIGLIB_PTR_DECL p
   *pOutputIndex = LocalOutputIndex;
 }    // End of SDA_VariableDelayComplex()
 
-/**/
-
 /********************************************************
  * Function: SUF_IncreaseVariableDelay
  *
@@ -724,8 +695,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_IncreaseVariableDelay(SLArrayIndex_t* pOutpu
 
   return (SIGLIB_ERROR);    // Error
 }    // End of SUF_IncreaseVariableDelay()
-
-/**/
 
 /********************************************************
  * Function: SUF_DecreaseVariableDelay

@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Matrix manipulation routines, for SigLib DSP library.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_MATRIX 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SMX_Transpose
@@ -97,8 +94,6 @@ void SIGLIB_FUNC_DECL SMX_Transpose(const SLData_t* SIGLIB_PTR_DECL pSrcMatrix, 
     }
   }
 }    // End of SMX_Transpose()
-
-/**/
 
 /********************************************************
  * Function: SMX_Diagonal
@@ -158,8 +153,6 @@ void SIGLIB_FUNC_DECL SMX_Diagonal(const SLData_t* SIGLIB_PTR_DECL pSrcMatrix, S
   }
 }    // End of SMX_Diagonal()
 
-/**/
-
 /********************************************************
  * Function: SMX_Multiply
  *
@@ -212,8 +205,6 @@ void SIGLIB_FUNC_DECL SMX_Multiply(const SLData_t* SIGLIB_PTR_DECL pSrcMatrix1, 
   }
 }    // End of SMX_Multiply()
 
-/**/
-
 /********************************************************
  * Function: SMX_CreateIdentity
  *
@@ -245,8 +236,6 @@ void SIGLIB_FUNC_DECL SMX_CreateIdentity(SLData_t* SIGLIB_PTR_DECL pDstMatrix, c
     pDstMatrix += (RowsAndCols + 1);
   }
 }    // End of SMX_CreateIdentity()
-
-/**/
 
 /********************************************************
  * Function: SMX_Inverse2x2
@@ -288,8 +277,6 @@ SLError_t SIGLIB_FUNC_DECL SMX_Inverse2x2(const SLData_t* SIGLIB_INPUT_PTR_DECL 
 
   return (SIGLIB_NO_ERROR);
 }    // End of SMX_Inverse2x2()
-
-/**/
 
 /********************************************************
  * Function: SMX_ComplexInverse2x2
@@ -354,8 +341,6 @@ SLError_t SIGLIB_FUNC_DECL SMX_ComplexInverse2x2(const SLComplexRect_s* SIGLIB_I
   return (SIGLIB_NO_ERROR);
 }    // End of SMX_ComplexInverse2x2()
 
-/**/
-
 /********************************************************
  * Function: SMX_Inverse
  *
@@ -405,8 +390,6 @@ SLError_t SIGLIB_FUNC_DECL SMX_Inverse(const SLData_t* SIGLIB_PTR_DECL pSrcMatri
 
   return (SIGLIB_NO_ERROR);
 }    // End of SMX_Inverse()
-
-/**/
 
 /********************************************************
  * Function: SMX_LuDecompose
@@ -517,8 +500,6 @@ SLError_t SIGLIB_FUNC_DECL SMX_LuDecompose(SLData_t* SIGLIB_PTR_DECL pSrcMatrix,
   return (SIGLIB_NO_ERROR);
 }    // End of SMX_LuDecompose()
 
-/**/
-
 /********************************************************
  * Function: SMX_LuSolve
  *
@@ -570,8 +551,6 @@ void SIGLIB_FUNC_DECL SMX_LuSolve(const SLData_t* SIGLIB_PTR_DECL pLUArray, SLDa
   }
 }    // End of SMX_LuSolve()
 
-/**/
-
 /********************************************************
  * Function: SMX_CholeskyDecompose
  *
@@ -615,8 +594,6 @@ void SIGLIB_FUNC_DECL SMX_CholeskyDecompose(const SLData_t* SIGLIB_PTR_DECL pSrc
   }
 }    // End of SMX_CholeskyDecompose()
 
-/**/
-
 /********************************************************
  * Function: SMX_Determinant
  *
@@ -652,8 +629,6 @@ SLData_t SIGLIB_FUNC_DECL SMX_Determinant(const SLData_t* SIGLIB_PTR_DECL pSrcMa
 
   return (SMX_LuDeterminant(pTempSourceArray, pRowInterchangeIndex, RowsAndCols));
 }    // End of SMX_Determinant()
-
-/**/
 
 /********************************************************
  * Function: SMX_LuDeterminant
@@ -692,8 +667,6 @@ SLData_t SIGLIB_FUNC_DECL SMX_LuDeterminant(const SLData_t* SIGLIB_PTR_DECL pLUA
   return (Determinant);
 }    // End of SMX_LuDeterminant()
 
-/**/
-
 /********************************************************
  * Function: SMX_RotateClockwise
  *
@@ -730,8 +703,6 @@ void SIGLIB_FUNC_DECL SMX_RotateClockwise(const SLData_t* SIGLIB_PTR_DECL pSrcMa
   }
 }    // End of SMX_RotateClockwise()
 
-/**/
-
 /********************************************************
  * Function: SMX_RotateAntiClockwise
  *
@@ -767,8 +738,6 @@ void SIGLIB_FUNC_DECL SMX_RotateAntiClockwise(const SLData_t* SIGLIB_PTR_DECL pS
     }
   }
 }    // End of SMX_RotateAntiClockwise()
-
-/**/
 
 /********************************************************
  * Function: SMX_Reflect
@@ -812,8 +781,6 @@ void SIGLIB_FUNC_DECL SMX_Reflect(const SLData_t* SIGLIB_PTR_DECL pSrcMatrix, SL
   }
 }    // End of SMX_Reflect()
 
-/**/
-
 /********************************************************
  * Function: SMX_Flip
  *
@@ -855,8 +822,6 @@ void SIGLIB_FUNC_DECL SMX_Flip(const SLData_t* SIGLIB_PTR_DECL pSrcMatrix, SLDat
     CurrentColumnStart++;
   }
 }    // End of SMX_Flip()
-
-/**/
 
 /********************************************************
  * Function: SMX_InsertRow
@@ -904,8 +869,6 @@ void SIGLIB_FUNC_DECL SMX_InsertRow(const SLData_t* SIGLIB_PTR_DECL pSrcMatrix, 
   }
 }    // End of SMX_InsertRow()
 
-/**/
-
 /********************************************************
  * Function: SMX_ExtractRow
  *
@@ -942,8 +905,6 @@ void SIGLIB_FUNC_DECL SMX_ExtractRow(const SLData_t* SIGLIB_PTR_DECL pSrcMatrix,
     *pDstMatrix++ = *pSrcMatrix++;
   }
 }    // End of SMX_ExtractRow()
-
-/**/
 
 /********************************************************
  * Function: SMX_InsertColumn
@@ -992,8 +953,6 @@ void SIGLIB_FUNC_DECL SMX_InsertColumn(const SLData_t* SIGLIB_PTR_DECL pSrcMatri
   }
 }    // End of SMX_InsertColumn()
 
-/**/
-
 /********************************************************
  * Function: SMX_ExtractColumn
  *
@@ -1032,8 +991,6 @@ void SIGLIB_FUNC_DECL SMX_ExtractColumn(const SLData_t* SIGLIB_PTR_DECL pSrcMatr
     Offset += Columns;
   }
 }    // End of SMX_ExtractColumn()
-
-/**/
 
 /********************************************************
  * Function: SMX_InsertNewRow
@@ -1087,8 +1044,6 @@ void SIGLIB_FUNC_DECL SMX_InsertNewRow(const SLData_t* SIGLIB_PTR_DECL pSrcMatri
   }
 }    // End of SMX_InsertNewRow()
 
-/**/
-
 /********************************************************
  * Function: SMX_DeleteOldRow
  *
@@ -1132,8 +1087,6 @@ void SIGLIB_FUNC_DECL SMX_DeleteOldRow(const SLData_t* SIGLIB_PTR_DECL pSrcMatri
     }
   }
 }    // End of SMX_DeleteOldRow()
-
-/**/
 
 /********************************************************
  * Function: SMX_InsertNewColumn
@@ -1186,8 +1139,6 @@ void SIGLIB_FUNC_DECL SMX_InsertNewColumn(const SLData_t* SIGLIB_PTR_DECL pSrcMa
     }
   }
 }    // End of SMX_InsertNewColumn()
-
-/**/
 
 /********************************************************
  * Function: SMX_DeleteOldColumn
@@ -1243,8 +1194,6 @@ void SIGLIB_FUNC_DECL SMX_DeleteOldColumn(const SLData_t* SIGLIB_PTR_DECL pSrcMa
   }
 }    // End of SMX_DeleteOldColumn()
 
-/**/
-
 /********************************************************
  * Function: SMX_InsertRegion
  *
@@ -1298,8 +1247,6 @@ void SIGLIB_FUNC_DECL SMX_InsertRegion(const SLData_t* SIGLIB_PTR_DECL pSrcMatri
   }
 }    // End of SMX_InsertRegion()
 
-/**/
-
 /********************************************************
  * Function: SMX_ExtractRegion
  *
@@ -1342,8 +1289,6 @@ void SIGLIB_FUNC_DECL SMX_ExtractRegion(const SLData_t* SIGLIB_PTR_DECL pSrcMatr
     pSrcMatrix += (MatrixColumns - RegionColsumns);
   }
 }    // End of SMX_ExtractRegion()
-
-/**/
 
 /********************************************************
  * Function: SMX_InsertDiagonal
@@ -1388,8 +1333,6 @@ void SIGLIB_FUNC_DECL SMX_InsertDiagonal(const SLData_t* SIGLIB_PTR_DECL pSrcMat
   }
 }    // End of SMX_InsertDiagonal()
 
-/**/
-
 /********************************************************
  * Function: SMX_ExtractDiagonal
  *
@@ -1423,8 +1366,6 @@ void SIGLIB_FUNC_DECL SMX_ExtractDiagonal(const SLData_t* SIGLIB_PTR_DECL pSrcMa
     InputOffset += (Dimension + 1);
   }
 }    // End of SMX_ExtractDiagonal()
-
-/**/
 
 /********************************************************
  * Function: SMX_SwapRows
@@ -1472,8 +1413,6 @@ void SIGLIB_FUNC_DECL SMX_SwapRows(const SLData_t* SIGLIB_PTR_DECL pSrcMatrix, S
   }
 }    // End of SMX_SwapRows()
 
-/**/
-
 /********************************************************
  * Function: SMX_SwapColumns
  *
@@ -1519,8 +1458,6 @@ void SIGLIB_FUNC_DECL SMX_SwapColumns(const SLData_t* SIGLIB_PTR_DECL pSrcMatrix
   }
 }    // End of SMX_SwapColumns()
 
-/**/
-
 /********************************************************
  * Function: SMX_Sum
  *
@@ -1562,8 +1499,6 @@ void SIGLIB_FUNC_DECL SMX_Sum(const SLData_t* SIGLIB_PTR_DECL pSrcMatrix, SLData
     *pDstMatrix++ = Sum;
   }
 }    // End of SMX_Sum()
-
-/**/
 
 /********************************************************
  * Function: SMX_ShuffleColumns
@@ -1607,8 +1542,6 @@ void SIGLIB_FUNC_DECL SMX_ShuffleColumns(const SLData_t* SIGLIB_PTR_DECL pSrc, S
     }
   }
 }    // End of SMX_ShuffleColumns()
-
-/**/
 
 /********************************************************
  * Function: SMX_ShuffleRows
@@ -1661,8 +1594,6 @@ void SIGLIB_FUNC_DECL SMX_ShuffleRows(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
     }
   }
 }    // End of SMX_ShuffleRows()
-
-/**/
 
 /********************************************************
  * Function: SMX_ExtractCategoricalColumn

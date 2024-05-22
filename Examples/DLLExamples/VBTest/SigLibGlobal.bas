@@ -24,12 +24,10 @@ Option Explicit
 '
 '*************************************************************************
 
-
 ' Define constants
 
 Global Const SIGLIB = 1                                      ' Indicates SigLib is being used
 Global Const SIGLIB_VERSION As Double = 7.0                  ' Indicates SigLib version
-
 
 Global Const SIGLIB_NO_ERROR As Long = 0                     ' Indicates SigLib no error occurred
 Global Const SIGLIB_ERROR As Long = 1                        ' Indicates SigLib error occurred
@@ -44,7 +42,6 @@ Global Const SIGLIB_DTMF_CONTINUATION As Long = 19           ' Key code is a con
                                         ' Word wdth definitions
 Global Const SIGLIB_NIBBLE_LENGTH As Long = 4                ' Standard 4 bit nibble
 Global Const SIGLIB_BYTE_LENGTH As Long = 8                  ' Standard 8 bit byte
-
 
 Global Const SIGLIB_ON As Long = 1                           ' Switch is ON
 Global Const SIGLIB_OFF As Long = 0                          ' Switch is OFF
@@ -88,13 +85,11 @@ Global Const SIGLIB_VITV32_NUMBER_OF_PATH_STATES As Long = 8            ' Total 
 Global Const SIGLIB_VITV32_SUB_STATES_PER_PATH_STATE As Long = 4        ' Number of sub-states per path state
 
 
-
 Global Const SFIX_MAX As Long = 2147483647                   ' Maximum fixed-point data type
 Global Const SFIX_WORD_LENGTH As Long = 32                   ' Length of fixed-point data type
 Global Const SFLOAT_CLOSE_TO_ZERO As Double = 0.000000001    ' Sample value close to zero but above numerical error floor
 Global Const SFLOAT_VERY_SMALL As Double = 0.000000000000001 ' Very small sample value
 Global Const SFLOAT_MAX As Double = 1E+30                    ' Maximum realistic sample value
-
 
 Global Const SIGLIB_MINUS_TWO As Double = -2#                ' Define numerical constants
 Global Const SIGLIB_MINUS_ONE As Double = -1#
@@ -153,7 +148,6 @@ Global Const SIGLIB_DTMF_HF_1 As Double = 1336#
 Global Const SIGLIB_DTMF_HF_2 As Double = 1477#
 Global Const SIGLIB_DTMF_HF_3 As Double = 1633#
 
-
 Global Const SIGLIB_DTMF_DETECT_LF_0 As Double = 706#
 Global Const SIGLIB_DTMF_DETECT_LF_1 As Double = 784#
 Global Const SIGLIB_DTMF_DETECT_LF_2 As Double = 863#
@@ -164,7 +158,6 @@ Global Const SIGLIB_DTMF_DETECT_HF_0 As Double = 1176#
 Global Const SIGLIB_DTMF_DETECT_HF_1 As Double = 1333#
 Global Const SIGLIB_DTMF_DETECT_HF_2 As Double = 1490#
 Global Const SIGLIB_DTMF_DETECT_HF_3 As Double = 1647#
-
 
         ' DTMF frequencies normalised to 1.0 Hz sample rate - These macros are not implemented in Basic, they are included here for reference.
                 ' DTMF low frequencies
@@ -214,7 +207,6 @@ Type SLComplexPolar_s
         angle As Double
 End Type
 
-
 ' SigLib enumerated data types
 
 ' Window types
@@ -228,7 +220,6 @@ Global Const SIGLIB_KAISER As Long = 6
 Global Const SIGLIB_BLACKMAN_HARRIS As Long = 7
 Global Const SIGLIB_RECTANGLE As Long = 8
 Global Const SIGLIB_FLAT_TOP As Long = 9
-
 
 
 ' Signal generation     types
@@ -332,7 +323,6 @@ Global Const SIGLIB_DEGLITCH_BOTH As Integer = 0
 Global Const SIGLIB_DEGLITCH_BELOW As Integer = -1
 
 
-
 ' Function declarations
 
 ' SigLib utility functions
@@ -350,7 +340,6 @@ Declare Function SUF_SiglibVersion Lib "SIGLIB.DLL"() As Double
 'SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintIIRCoefficients (const SLData_t *, SLArrayIndex_t);
 Declare Function SUF_DebugPrintCount Lib "SIGLIB.DLL" (ByRef pString As String) As Long
 Declare Sub SUF_MSDelay (ByVal iData As Long)
-
 
 
 
@@ -745,7 +734,6 @@ Declare Sub SDA_MagnitudeSquaredCoherence Lib "SIGLIB.DLL" (ByRef fpBuffer As Do
         ByVal iData As Long, _
         ByVal fData As Double)
 
-
 ' Frequency domain filtering functions
 
 Declare Sub SIF_FirOverlapAdd Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
@@ -798,7 +786,6 @@ Declare Sub SDA_FirOverlapSave Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByVal iData As Long, _
         ByVal iData As Long)
 
-
 ' Chirp z-transform functions
 
 Declare Sub SIF_Czt Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
@@ -818,7 +805,6 @@ Declare Sub SIF_Czt Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByVal iData As Long, _
         ByVal iData As Long, _
         ByVal iData As Long)
-
 
 
 
@@ -849,7 +835,6 @@ Declare Sub SIF_Wm Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
 
 
 
-
 ' Windowing     functions
 
 Declare Function SIF_Window Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
@@ -874,7 +859,6 @@ Declare Function SDA_WindowInverseCoherentGain Lib "SIGLIB.DLL" (ByRef fpBuffer 
         ByVal iData As Long) As Double
 
 Declare Function SDS_I0Bessel Lib "SIGLIB.DLL" (ByVal iData As Double) As Double
-
 
 ' Filtering functions - firfilt.c
 
@@ -968,7 +952,6 @@ Declare Function SUF_FirKaiserApproximation Lib "SIGLIB.DLL" (ByVal fpData As Do
 Declare Sub SIF_FirMatchedFilter Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByVal iData As Long)
-
 
 ' Filtering functions - iirfilt.c
 
@@ -1093,7 +1076,6 @@ Declare Sub SDA_IirNc Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
 '   const SFLOAT,
 '   const SFIX,
 '   const SFIX);
-
 
 
 Declare Sub SDA_IirModifyFilterGain Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
@@ -1257,7 +1239,6 @@ Declare Function SDA_GoertzelDetect Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, 
 '       const SFIX);
 
 
-
 Declare Sub SIF_GaussianFirFilter Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByVal fData As Double, _
         ByVal iData As Long)
@@ -1298,7 +1279,6 @@ Declare Sub SUF_EstimateBPFirFilterError (ByVal fData As Double, _
 		ByVal iData As Long, _
 		ByVal iData As Long, _
 		ByRef fpBuffer As Double)
-
 
 ' Adaptive filtering functions
 
@@ -1358,7 +1338,6 @@ Declare Sub SDA_SignSignLmsUpdate Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByVal fData As Double, _
         ByVal fData As Double)
 
-
 ' Convolution functions
 
 Declare Sub SDA_ConvolveLinear Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
@@ -1387,7 +1366,6 @@ Declare Sub SDA_Deconvolution Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef iPtr As Long, _
         ByVal iData As Long, _
         ByVal iData As Long)
-
 
 ' Correlation functions
 
@@ -1425,7 +1403,6 @@ Declare Sub SDA_CovariancePartial Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByVal fData As Double, _
         ByVal iData As Long, _
         ByVal iData As Long)
-
 
 ' FIFO delay functions
 
@@ -1577,7 +1554,6 @@ Declare Function SUF_DecreaseVariableDelay Lib "SIGLIB.DLL" (ByRef iPtr As Long,
 '        ByVal iData As Long, _
 '        ByVal iData As Long)
 
-
 ' Image coding functions
 
 Declare Sub SIF_Dct8x8 Lib "SIGLIB.DLL"()
@@ -1595,7 +1571,6 @@ Declare Sub SIM_ZigZagScan Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
 Declare Sub SIM_ZigZagDescan Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByVal iData As Long)
-
 
 ' Signal generation     functions
 
@@ -1645,7 +1620,6 @@ Declare Sub SDA_Resonator1Add Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpSinCoeff As Double, _
         ByVal iData As Long)
 
-
 ' Communication functions
 ' comms.c
 Declare Function SDA_BitErrorRate Lib "SIGLIB.DLL" (ByRef iPtr As Long, _
@@ -1676,7 +1650,6 @@ Declare Function SDS_ManchesterDecode Lib "SIGLIB.DLL" (ByVal iData As Long) As 
 Declare Function SDS_ManchesterEncodeByte Lib "SIGLIB.DLL" (ByVal iData As Long) As Long
 
 Declare Function SDS_ManchesterDecodeByte Lib "SIGLIB.DLL" (ByVal iData As Long) As Long
-
 
 ' Communications timing detection functions - timing.c
 
@@ -2026,7 +1999,6 @@ Declare Function SDS_EarlyLateGateSquarePulse Lib "SIGLIB.DLL" (ByVal iData As D
         ByRef ipBuffer As Long, _
         ByVal iData As Long) As Double
 
-
 ' Convolutional encoding / Viterbi decoding functions - viterbi.c
 
 Declare Function SDS_ConvEncoderK3 Lib "SIGLIB.DLL" (ByVal iData As Long, _
@@ -2067,7 +2039,6 @@ Declare Sub SDS_ViterbiDecoderK3 Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
 '       SFIX *,
 '       SFIX *,
 '       const SFIX);
-
 
 ' Analog modulation functions - Mod_a.c
 
@@ -2139,7 +2110,6 @@ Declare Sub SDA_DeltaModulate2 Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByVal fData As Double, _
         ByVal iData As Long)
-
 
 ' Digital modulation functions - mod_d.c
 
@@ -2888,7 +2858,6 @@ Declare Function SDA_IncreaseWordLength Lib "SIGLIB.DLL" (ByVal iData As Long, _
         ByVal iData As Long, _
         ByVal iData As Long) As Long
 
-
 ' PRBS functions
 
 Declare Function SDS_Scrambler1417 Lib "SIGLIB.DLL" (ByVal iData As Long, _
@@ -2919,7 +2888,6 @@ Declare Function SDS_Scrambler523 Lib "SIGLIB.DLL" (ByVal iData As Long, _
 Declare Function SDS_Descrambler523 Lib "SIGLIB.DLL" (ByVal iData As Long, _
         ByRef iPtr As Long) As Long
 
-
 ' Multiplex     functions
 Declare Sub SDA_Mux2 Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
@@ -2930,7 +2898,6 @@ Declare Sub SDA_Demux2 Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByVal iData As Long)
-
 
 Declare Sub SDA_Mux3 Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
@@ -2943,7 +2910,6 @@ Declare Sub SDA_Demux3 Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByVal iData As Long)
-
 
 Declare Sub SDA_Mux4 Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
@@ -2958,7 +2924,6 @@ Declare Sub SDA_Demux4 Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByVal iData As Long)
-
 
 Declare Sub SDA_Mux5 Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
@@ -2975,7 +2940,6 @@ Declare Sub SDA_Demux5 Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByVal iData As Long)
-
 
 ' Decimation and interpolation functions - decint.c
 
@@ -3056,7 +3020,6 @@ Declare Function SUF_AsciiToKeyCode Lib "SIGLIB.DLL" (ByVal iData As Long) As Lo
 
 Declare Function SUF_KeyCodeToAscii Lib "SIGLIB.DLL" (ByVal iData As Long) As Long
 
-
 ' Speech processing functions - speech.c
 
 Declare Sub SIF_PreEmphasisFilter Lib "SIGLIB.DLL" (ByRef fpBuffer As Double)
@@ -3087,7 +3050,6 @@ Declare Sub SDA_AdpcmEncoderDebug Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
 Declare Sub SDA_AdpcmDecoder Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByVal iData As Long)
-
 
 ' Min max and peak hold functions
 
@@ -3249,7 +3211,6 @@ Declare Sub SDA_MovePeakTowardsDeadBand Lib "SIGLIB.DLL" (ByRef fpBuffer As Doub
         ByVal iData As Long, _
         ByVal iData As Long)
 
-
 ' DSP Math functions
 
 Declare Sub SDA_Divide Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
@@ -3308,13 +3269,11 @@ Declare Function SDA_RealDotProduct Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, 
 
 
 
-
 'Declare Sub SDA_ComplexDotProduct Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
 '        ByRef fpBuffer As Double, _
 '        ByRef fpBuffer As Double, _
 '        ByRef fpBuffer As Double, _
 '        ByVal iData As Long)
-
 
 
 Declare Sub SDA_Add2 Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
@@ -3446,7 +3405,6 @@ Declare Function SDS_RadiansToDegrees Lib "SIGLIB.DLL" (ByVal fData As Double) A
 Declare Sub SDA_RadiansToDegrees Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByVal iData As Long)
-
 
 ' DSP utility functions - DSPUTILS.C
 
@@ -3670,7 +3628,6 @@ Declare Sub SDA_SetMean Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByVal fData As Double, _
         ByVal iData As Long)
 
-
         ' DSPUTIL2.C
 
 Declare Sub SDA_RealSpectralInverse Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
@@ -3855,7 +3812,6 @@ Declare Function SUF_IndexModuloDecrement Lib "SIGLIB.DLL" (ByVal iData As Long,
         ByVal iData As Long, _
         ByVal iData As Long) As Long
 
-
         ' DSPUTIL3.C
 
 Declare Sub SIF_DeGlitch Lib "SIGLIB.DLL" (ByRef ipBuffer As Long, _
@@ -3877,7 +3833,6 @@ Declare Sub SDA_DeGlitch Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByVal fData As Double, _
 		ByRef fpBuffer As Double, _
         ByVal iData As Long)
-
 
 ' Data type conversion functions - datatype.c
 
@@ -3905,7 +3860,6 @@ Declare Sub SDA_Fix32ToSigLibData Lib "SIGLIB.DLL" (ByRef ipBuffer As Long, _
         ByRef fpBuffer As Double, _
         ByVal iData As Long)
 
-
 ' Control functions
 
 Declare Function SDS_Pid Lib "SIGLIB.DLL" (ByVal fData As Double, _
@@ -3922,7 +3876,6 @@ Declare Sub SDA_Pwm Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByVal fData As Double, _
         ByVal iData As Long)
-
 
 ' Statistics functions
 
@@ -3957,7 +3910,6 @@ Declare Function SDA_Median Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByVal iData As Long) As Double
 
-
 ' Regression analysis functions
 
 Declare Function SDA_LinraConstantCoeff Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
@@ -3982,7 +3934,6 @@ Declare Function SDA_LinraEstimateY Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, 
         ByVal fData As Double, _
         ByVal iData As Long) As Double
 
-
 Declare Function SDA_LograConstantCoeff Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByVal iData As Long) As Double
@@ -4005,7 +3956,6 @@ Declare Function SDA_LograEstimateY Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, 
         ByVal fData As Double, _
         ByVal iData As Long) As Double
 
-
 Declare Function SDA_ExpraConstantCoeff Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByVal iData As Long) As Double
@@ -4027,7 +3977,6 @@ Declare Function SDA_ExpraEstimateY Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, 
         ByRef fpBuffer As Double, _
         ByVal fData As Double, _
         ByVal iData As Long) As Double
-
 
 Declare Function SDA_PowraConstantCoeff Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
@@ -4060,7 +4009,6 @@ Declare Sub SDA_ExtractTrend Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByVal iData As Long)
-
 
 ' Trigonometrical functions
 
@@ -4188,7 +4136,6 @@ Declare Sub SDA_Sinc Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
 Declare Function SDS_Sinc Lib "SIGLIB.DLL" (ByVal fData As Double) As Double
 
 
-
 ' Complex vector functions
 
 'These functions are implemented in the library but they return a
@@ -4292,7 +4239,6 @@ Declare Sub SDA_FillComplexRect Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
 Declare Sub SDA_FillComplexPolar Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByVal iData As Long)
-
 
 
 ' 2D Matrix     manipulation functions and macros
@@ -4475,5 +4421,4 @@ Declare Sub SMX_SwapRows Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
 ' 											OPtr, (SLArrayIndex_t)(nRows * nCols))
 '
 ' End of SigLib DSP     function section
-
 

@@ -34,14 +34,11 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Communications timing detection routines, for SigLib DSP library.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_TIMING 1    // Defines the source file that this code is being used in
 
 #include <siglib.h>    // Include SigLib header file
-
-/**/
 
 /********************************************************
  * Function: SIF_PhaseLockedLoop
@@ -89,8 +86,6 @@ void SIGLIB_FUNC_DECL SIF_PhaseLockedLoop(SLData_t* pVCOPhase, SLData_t* SIGLIB_
           HilbertTformFilterLength);    // Initialise Hilbert transformer filter
   SIF_HilbertTransformerFirFilter(pHilbertTformFilterCoeffs, HilbertTformFilterLength);
 }    // End of SIF_PhaseLockedLoop()
-
-/**/
 
 /********************************************************
  * Function: SDS_PhaseLockedLoop
@@ -143,8 +138,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_PhaseLockedLoop(const SLData_t Src, SLData_t* VCOP
   // phase ambiguity
   return (-SDS_Fir(VCOOutput, pHilbertTformFilterState, pHilbertTformFilterCoeffs, HilbertTformFilterIndex, HilbertTformFilterLength));
 }    // End of SDS_PhaseLockedLoop()
-
-/**/
 
 /********************************************************
  * Function: SDA_PhaseLockedLoop
@@ -200,8 +193,6 @@ void SIGLIB_FUNC_DECL SDA_PhaseLockedLoop(const SLData_t* SIGLIB_PTR_DECL pSrc, 
   }
 }    // End of SDA_PhaseLockedLoop()
 
-/**/
-
 /********************************************************
  * Function: SIF_CostasLoop
  *
@@ -248,8 +239,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_CostasLoop(SLData_t* pCostasLpVCOPhase, SLData_t*
 
   return (Error);
 }    // End of SIF_CostasLoop()
-
-/**/
 
 /********************************************************
  * Function: SDS_CostasLoop
@@ -334,8 +323,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_CostasLoop(const SLData_t Src, SLData_t* pCostasLp
   return (-ImagVCOOutput);    // Return output sample - negate to account for 180
                               // degree phase shift
 }    // End of SDS_CostasLoop()
-
-/**/
 
 /********************************************************
  * Function: SDA_CostasLoop
@@ -427,8 +414,6 @@ void SIGLIB_FUNC_DECL SDA_CostasLoop(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDat
   *pSample = LocalLoopSample;    // Save loop sample for next iteration
 }    // End of SDA_CostasLoop()
 
-/**/
-
 /********************************************************
  * Function: SRF_CostasLoop
  *
@@ -463,8 +448,6 @@ void SIGLIB_FUNC_DECL SRF_CostasLoop(SLData_t* pCostasLpVCOPhase, SLData_t* SIGL
   SIF_Fir(pCostasLpLPF2State, pCostasLpLPF2Index,
           CostasLpLPFLength);    // Initialise Costas loop LPF 2
 }    // End of SRF_CostasLoop()
-
-/**/
 
 /********************************************************
  * Function: SIF_180DegreePhaseDetect
@@ -503,8 +486,6 @@ void SIGLIB_FUNC_DECL SIF_180DegreePhaseDetect(SLData_t* pFastCosineLookUpTableP
 
   *pPreviousOutputSign = SIGLIB_AI_ZERO;    // Initialise previous output sign
 }    // End of SIF_180DegreePhaseDetect()
-
-/**/
 
 /********************************************************
  * Function: SDA_180DegreePhaseDetect
@@ -597,8 +578,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_180DegreePhaseDetect(const SLData_t* SIGLIB_
   return (PhaseChangeLocation);
 }    // End of SDA_180DegreePhaseDetect()
 
-/**/
-
 /********************************************************
  * Function: SIF_TriggerReverberator
  *
@@ -622,8 +601,6 @@ void SIGLIB_FUNC_DECL SIF_TriggerReverberator(SLArrayIndex_t* pTriggerCount, SLF
   *pTriggerDetectedFlag = (SLFixData_t)0;
   *pTriggerUpdatedFlag = (SLFixData_t)0;
 }    // End of SIF_TriggerReverberator()
-
-/**/
 
 /********************************************************
  * Function: SDA_TriggerReverberator
@@ -712,8 +689,6 @@ void SIGLIB_FUNC_DECL SDA_TriggerReverberator(const SLData_t* SIGLIB_PTR_DECL pS
   *pTriggerUpdatedFlag = TriggerUpdatedFlag;
 }    // End of SDA_TriggerReverberator()
 
-/**/
-
 /********************************************************
  * Function: SDS_TriggerReverberator
  *
@@ -791,8 +766,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_TriggerReverberator(const SLData_t Src, SLArrayInd
   }
 }    // End of SDS_TriggerReverberator()
 
-/**/
-
 /********************************************************
  * Function: SDA_TriggerSelector
  *
@@ -823,8 +796,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_TriggerSelector(const SLData_t* SIGLIB_PTR_D
   }
   return (NumberOfOutputSamples);
 }    // End of SDA_TriggerSelector()
-
-/**/
 
 /********************************************************
  * Function: SIF_EarlyLateGate
@@ -906,8 +877,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_EarlyLateGate(
   return (SIGLIB_NO_ERROR);
 }    // End of SIF_EarlyLateGate()
 
-/**/
-
 /********************************************************
  * Function: SDA_EarlyLateGate
  *
@@ -988,8 +957,6 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGate(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
   // Generate continuous pulse stream
   SDA_TriggerReverberator(pTriggerOutput, pTriggerOutput, pTriggerCount, pTriggerDetectedFlag, pTriggerUpdatedFlag, SymbolLength, SampleLength);
 }    // End of SDA_EarlyLateGate()
-
-/**/
 
 /********************************************************
  * Function: SDA_EarlyLateGateDebug
@@ -1081,8 +1048,6 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateDebug(const SLData_t* SIGLIB_PTR_DECL pSr
   SDA_TriggerReverberator(pTriggerOutput, pTriggerOutput, pTriggerCount, pTriggerDetectedFlag, pTriggerUpdatedFlag, SymbolLength, SampleLength);
 }    // End of SDA_EarlyLateGateDebug()
 
-/**/
-
 /********************************************************
  * Function: SDS_EarlyLateGate
  *
@@ -1160,8 +1125,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_EarlyLateGate(const SLData_t Src, SLData_t* SIGLIB
 
   return (TriggerOutput);
 }    // End of SDS_EarlyLateGate()
-
-/**/
 
 /********************************************************
  * Function: SIF_EarlyLateGateSquarePulse
@@ -1242,8 +1205,6 @@ SLError_t SIGLIB_FUNC_DECL SIF_EarlyLateGateSquarePulse(
   return (SIGLIB_NO_ERROR);
 }    // End of SIF_EarlyLateGateSquarePulse()
 
-/**/
-
 /********************************************************
  * Function: SDA_EarlyLateGateSquarePulse
  *
@@ -1323,8 +1284,6 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateSquarePulse(
   // Generate continuous pulse stream
   SDA_TriggerReverberator(pTriggerOutput, pTriggerOutput, pTriggerCount, pTriggerDetectedFlag, pTriggerUpdatedFlag, SymbolLength, SampleLength);
 }    // End of SDA_EarlyLateGateSquarePulse()
-
-/**/
 
 /********************************************************
  * Function: SDA_EarlyLateGateSquarePulseDebug
@@ -1414,8 +1373,6 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateSquarePulseDebug(
   // Generate continuous pulse stream
   SDA_TriggerReverberator(pTriggerOutput, pTriggerOutput, pTriggerCount, pTriggerDetectedFlag, pTriggerUpdatedFlag, SymbolLength, SampleLength);
 }    // End of SDA_EarlyLateGateSquarePulseDebug()
-
-/**/
 
 /********************************************************
  * Function: SDS_EarlyLateGateSquarePulse

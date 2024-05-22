@@ -119,7 +119,6 @@ const SLData_t CoefficientArray [] =
 	-2.52843990488769553709e-04
 };
 
-
 `~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 
 	/* Q format fixed point coefficients */
@@ -239,7 +238,6 @@ const SLData_t CoefficientArray [] =
 	0xffff8ec7,
 	0xfffef6e0
 };
-
 
 `~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
 

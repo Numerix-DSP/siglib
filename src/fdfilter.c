@@ -41,8 +41,6 @@ and correlation functions.
 
 #include <siglib.h>    // Include SigLib header file
 
-/**/
-
 /********************************************************
  * Function: SIF_FirOverlapAdd
  *
@@ -82,8 +80,6 @@ void SIGLIB_FUNC_DECL SIF_FirOverlapAdd(const SLData_t* SIGLIB_PTR_DECL pTimeDom
 
   *pInverseFFTLength = SIGLIB_ONE / FFTLength;
 }    // End of  SIF_FirOverlapAdd()
-
-/**/
 
 /********************************************************
  * Function: SDA_FirOverlapAdd
@@ -135,8 +131,6 @@ void SIGLIB_FUNC_DECL SDA_FirOverlapAdd(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
            (SLArrayIndex_t)(filterLength - 1));    // Copy remainder of output for next iteration
 }    // End of  SDA_FirOverlapAdd()
 
-/**/
-
 /********************************************************
  * Function: SIF_FirOverlapSave
  *
@@ -175,8 +169,6 @@ void SIGLIB_FUNC_DECL SIF_FirOverlapSave(const SLData_t* SIGLIB_PTR_DECL pTimeDo
 
   *pInverseFFTLength = SIGLIB_ONE / FFTLength;
 }    // End of  SIF_FirOverlapSave()
-
-/**/
 
 /********************************************************
  * Function: SDA_FirOverlapSave
@@ -237,8 +229,6 @@ void SIGLIB_FUNC_DECL SDA_FirOverlapSave(const SLData_t* SIGLIB_PTR_DECL pSrc, S
             (SLArrayIndex_t)(FFTLength - DataLength - (filterLength - 1)));    // Clear start of overlap array
 }    // End of  SDA_FirOverlapSave()
 
-/**/
-
 /********************************************************
  * Function: SIF_FftConvolvePre
  *
@@ -276,8 +266,6 @@ void SIGLIB_FUNC_DECL SIF_FftConvolvePre(const SLData_t* SIGLIB_PTR_DECL Coeffs,
   SDA_Clear(pRealCoeffs + FilterSize, (SLArrayIndex_t)(FFTLength - FilterSize));
   SDA_Rfft(pRealCoeffs, pImagCoeffs, pFFTCoeffs, pBitReverseAddressTable, FFTLength, Log2FFTLength);    // Coefficients FFT
 }
-
-/**/
 
 /********************************************************
  * Function: SDA_FftConvolvePre
@@ -325,8 +313,6 @@ void SIGLIB_FUNC_DECL SDA_FftConvolvePre(SLData_t* SIGLIB_PTR_DECL pRealData, SL
   SDA_Multiply(pRealData, InvFFTLength, pConvResults,
                SrcLength + CoeffsLength - 1);    // Scale and copy output results
 }    // End of SDA_FftConvolvePre()
-
-/**/
 
 /********************************************************
  * Function: SDA_FftConvolveArb
@@ -379,8 +365,6 @@ void SIGLIB_FUNC_DECL SDA_FftConvolveArb(SLData_t* SIGLIB_PTR_DECL pRealSrc1, SL
                Src1Length + Src2Length - 1);    // Scale and copy output results
 }    // End of SDA_FftConvolveArb()
 
-/**/
-
 /********************************************************
  * Function: SIF_FftCorrelatePre
  *
@@ -421,8 +405,6 @@ void SIGLIB_FUNC_DECL SIF_FftCorrelatePre(const SLData_t* SIGLIB_PTR_DECL Coeffs
            Log2FFTLength);                        // Coefficients FFT
   SDA_Negate(pImagSrc2, pImagSrc2, FFTLength);    // Conjugate input 2
 }
-
-/**/
 
 /********************************************************
  * Function: SDA_FftCorrelatePre
@@ -474,8 +456,6 @@ void SIGLIB_FUNC_DECL SDA_FftCorrelatePre(SLData_t* SIGLIB_PTR_DECL pRealSrc1, S
   SDA_Multiply(pImagSrc1, InvFFTLength, pCorrResults,
                Src1Length + Src2Length - 1);    // Scale and copy output results
 }    // End of SDA_FftCorrelatePre()
-
-/**/
 
 /********************************************************
  * Function: SDA_FftCorrelateArb

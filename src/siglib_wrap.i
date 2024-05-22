@@ -44,7 +44,6 @@ Update history:
 %array_functions(SLFixData_t, SLFixData_tArray);		/* Include support for "SLFixData_t *" functions */
 %array_functions(SLArrayIndex_t, SLArrayIndex_tArray);			/* Include support for "SLArrayIndex_t *" functions */
 
-
 				/* Make sure SIGLIB_SWIG_SWITCH is defined so that the function declaration is a SWIG style,
 					not a "C" style. This is important for handling function pointers */
 #define	SIGLIB_SWIG_SWITCH	1

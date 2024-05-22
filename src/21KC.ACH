@@ -5,7 +5,7 @@
 .segment/pm/ram/begin=0x000100/  end=0x0003ff         seg_init;
 .segment/pm/ram/begin=0x000400/  end=0x001fff         seg_pmco;
 .segment/pm/ram/begin=0x002000/  end=0x007fff         seg_pmda;
- 
+
 .segment/dm/ram/begin=0x00000000/end=0x00003fff       seg_dmda;
 .segment/dm/ram/begin=0x00004000/end=0x00005fff/cheap seg_heap;
 .segment/dm/ram/begin=0x00006000/end=0x00007fff       seg_stak;
@@ -21,7 +21,6 @@
 .segment/dm/port/begin=0x40000028/end=0x40000028      adc_b;
 .segment/dm/port/begin=0x40000030/end=0x40000030      dac_a;
 .segment/dm/port/begin=0x40000038/end=0x40000038      dac_b;
-
 
 .bank/pm0/wtstates=0/wtmode=internal/begin=0x000000;
 .bank/pm1/wtstates=0/wtmode=internal/begin=0x008000;

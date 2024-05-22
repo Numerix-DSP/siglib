@@ -40,7 +40,6 @@ Word length        : 16
 Bytes per sample   : 2
 Data format        : 1
 
-
 .WAV file data. '.' indicates no tone present
                 '-' indicates signal present but not DTMF
 
@@ -387,8 +386,6 @@ Keycode = 128, 80
 Keycode = 128, 80
 
 
-
 DTMF signal peak magnitude = 32727.000000
-
 
 

@@ -144,9 +144,9 @@ int main(int argc, char* argv[])
     // Add another scrambling code, jitter and noise here
 
 #if ADD_WHITE_NOISE
-    SDA_SignalGeneratePolarWhiteNoise(DataOut,    // Output data
-                                                  //                                         2.4,                 // Peak
-                                                  //                                         level - No errors
+    SDA_SignalGeneratePolarWhiteNoise(DataOut,              // Output data
+                                                            //                                         2.4,                 // Peak
+                                                            //                                         level - No errors
                                       5.0,                  // Peak level - Few errors
                                       SIGLIB_ADD,           // Buffer fill mode, fill up or add to
                                       SPREADING_FACTOR);    // Dataset length

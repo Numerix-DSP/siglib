@@ -34,7 +34,6 @@ Copyright (c) 2023 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Image coding routines, for SigLib DSP library.
 
-
 ****************************************************************************/
 
 #define SIGLIB_SRC_FILE_ICODER 1    // Defines the source file that this code is being used in
@@ -47,8 +46,6 @@ Description: Image coding routines, for SigLib DSP library.
 // Define global variables
 
 static SLData_t siglib_numerix_DCTCosineTable[DCT_SIZE][DCT_SIZE];    // DCT cosine array
-
-/**/
 
 /********************************************************
  * Function: SIF_Dct8x8
@@ -72,8 +69,6 @@ void SIGLIB_FUNC_DECL SIF_Dct8x8(void)
     }
   }
 }    // End of SIF_Dct8x8()
-
-/**/
 
 /********************************************************
  * Function: SIM_Dct8x8
@@ -125,8 +120,6 @@ void SIGLIB_FUNC_DECL SIM_Dct8x8(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
     }
   }
 }    // End of SIM_Dct8x8()
-
-/**/
 
 /********************************************************
  * Function: SIM_Idct8x8
@@ -180,8 +173,6 @@ void SIGLIB_FUNC_DECL SIM_Idct8x8(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
     }
   }
 }    // End of SIM_Idct8x8()
-
-/**/
 
 /********************************************************
  * Function: SIM_ZigZagScan
@@ -262,8 +253,6 @@ void SIGLIB_FUNC_DECL SIM_ZigZagScan(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDat
     }
   }
 }    // End of SIM_ZigZagScan()
-
-/**/
 
 /********************************************************
  * Function: SIM_ZigZagDescan
