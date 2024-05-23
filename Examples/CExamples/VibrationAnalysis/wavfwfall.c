@@ -2,11 +2,11 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 #include <math.h>
-#include <siglib.h>               // SigLib DSP library
-#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <siglib.h>               // SigLib DSP library
+#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
 
 #define SAMPLE_LENGTH 1024
 #define FFT_LENGTH SAMPLE_LENGTH

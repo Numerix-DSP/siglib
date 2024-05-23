@@ -2,12 +2,12 @@
 // This example stores the peaks of a number of FFT output frames and plots the
 // final peak dataset Copyright (c) 2023 Delta Numerix All rights reserved.
 
-#include "analog_io.h"
-#include <gnuplot_c.h>    // Gnuplot/C
 #include <math.h>
-#include <siglib.h>               // SigLib DSP library
-#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
 #include <stdio.h>
+#include <siglib.h>               // SigLib DSP library
+#include <gnuplot_c.h>            // Gnuplot/C
+#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
+#include "analog_io.h"
 
 #define SAMPLE_RATE_HZ 48000
 

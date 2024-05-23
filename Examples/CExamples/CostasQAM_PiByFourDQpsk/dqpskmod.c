@@ -7,11 +7,11 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
-#include "Tx_FIR.h"       // Transmitter FIR low-pass filter
-#include <gnuplot_c.h>    // Gnuplot/C
-#include <siglib.h>       // SigLib DSP library
 #include <stdio.h>
 #include <string.h>
+#include <siglib.h>       // SigLib DSP library
+#include <gnuplot_c.h>    // Gnuplot/C
+#include "Tx_FIR.h"       // Transmitter FIR low-pass filter
 
 // Define constants
 #define RRCF_ENABLE 1    // Root raised cosine filter on Tx and Rx

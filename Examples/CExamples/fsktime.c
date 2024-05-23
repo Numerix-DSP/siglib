@@ -13,11 +13,11 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
-#include "plot_fd/plot_fd.h"      // Frequency domain plots
-#include <gnuplot_c.h>            // Gnuplot/C
-#include <siglib.h>               // SigLib DSP library
-#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
 #include <stdio.h>
+#include <siglib.h>               // SigLib DSP library
+#include <gnuplot_c.h>            // Gnuplot/C
+#include "plot_fd/plot_fd.h"      // Frequency domain plots
+#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
 
 // Define constants
 #define TX_BIT_MODE_ENABLED 0    // Set to '1' to process Tx bits, '0' for bytes

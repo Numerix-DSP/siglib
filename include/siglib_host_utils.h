@@ -42,6 +42,8 @@ implemented in GCC
 #ifndef __SIGLIB_HOST_UTILS_H__
 #define __SIGLIB_HOST_UTILS_H__
 
+#include <siglib.h>
+
 #if _MSC_VER
 #  include <conio.h>
 #  include <time.h>

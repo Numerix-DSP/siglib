@@ -3,14 +3,16 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
-#include "readdat.h"
-#include <gnuplot_c.h>    // Gnuplot/C
 #include <math.h>
-#include <siglib.h>               // SigLib DSP library
-#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <siglib.h>               // SigLib DSP library
+#include <gnuplot_c.h>            // Gnuplot/C
+#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
+#include "readdat.h"
+
+#define ENABLE_DEBUG_LOG 0    // Set to '1' to enable debug logging and '0' to disable
 
 // Define constants
 #define SAMPLE_LENGTH 4096    // Length of array read from input file
@@ -89,6 +91,10 @@ int main(int argc, char* argv[])
     exit(0);
   }
 
+#if ENABLE_DEBUG_LOG
+  SUF_ClearDebugfprintf();
+#endif
+
   // Reset the copy with overlap
   SIF_CopyWithOverlap(&OverlapSrcArrayIndex);    // Pointer to overlap source array index
 
@@ -106,9 +112,6 @@ int main(int argc, char* argv[])
                     pRealAverage,                  // Pointer to real average array
                     pImagAverage,                  // Pointer to imaginary average array
                     FFT_LENGTH);                   // FFT length
-
-  // Debug
-  // SUF_ClearDebugfprintf();
 
   if (argc != 5) {
     printf("\nUsage:\norder SampleRate D/L T/S filename\n");
@@ -208,12 +211,15 @@ int main(int argc, char* argv[])
     exit(-1);
   }
 
-  // Debug
-  // SUF_Debugfprintf ("Starting order analysis\n");
+#if ENABLE_DEBUG_LOG
+  SUF_Debugfprintf("Starting order analysis\n");
+#endif
 
   while ((sampleCount = read_vibration_data(pInputData, fpInputFile, &Speed, SAMPLE_LENGTH)) == SAMPLE_LENGTH) {
-    // Debug
-    // SUF_Debugfprintf ("FN1 = %d\n", FrameNumber);
+#if ENABLE_DEBUG_LOG
+    SUF_Debugfprintf("FN1 = %d\n", FrameNumber);
+    SUF_Debugfprintf("sampleCount = %d\n", sampleCount);
+#endif
 
     // Apply the overlap to the data
     while (SDA_CopyWithOverlap(pInputData,               // Pointer to source array
@@ -226,9 +232,11 @@ int main(int argc, char* argv[])
            < SAMPLE_LENGTH) {
       pSpeed[FrameNumber] = Speed;    // Save speed
 
-      // Debug
-      // SUF_Debugfprintf ("FrameNumber = %d\n", FrameNumber);
-      // SUF_Debugfprintf ("Calling SDA_OrderAnalysis\n");
+#if ENABLE_DEBUG_LOG
+      SUF_Debugfprintf("FrameNumber = %d\n", FrameNumber);
+      SUF_Debugfprintf("Calling SDA_OrderAnalysis\n");
+#endif
+
       // Process and extract order information
       *(pSumLevelArray + FrameNumber) = SDA_OrderAnalysis(pOverlappedData,                // Pointer to source array
                                                           pOrderAnalysisInternalArray,    // Pointer to local processing array
@@ -274,9 +282,11 @@ int main(int argc, char* argv[])
 
   fclose(fpInputFile);    // Close input file
 
-  // Debug
-  // SUF_Debugfprintf ("Max frame number = %d\n", FrameNumber);
-  // SUF_Debugfprintf ("Plotting orders\n");
+#if ENABLE_DEBUG_LOG
+  SUF_Debugfprintf("Max frame number = %d\n", FrameNumber);
+  SUF_Debugfprintf("Plotting orders\n");
+#endif
+
   //  Plotting orders
   for (SLArrayIndex_t i = 0; i < NUMBER_OF_ORDERS; i++) {
     if (XAxisTimeFlag == SIGLIB_TRUE) {    // Display time on x-axis
@@ -336,8 +346,9 @@ int main(int argc, char* argv[])
     }
   }
 
-  // Debug
-  // SUF_Debugfprintf ("Plot speed\n");
+#if ENABLE_DEBUG_LOG
+  SUF_Debugfprintf("Plot speed\n");
+#endif
 
   if (XAxisTimeFlag == SIGLIB_TRUE) {    // Only plot speed if we are plotting orders against time
     // Plot speed - different scaling for variable and fixed speed
@@ -393,8 +404,9 @@ int main(int argc, char* argv[])
                 GPC_ADD);                     // New graph
   }
 
-  // Debug
-  // SUF_Debugfprintf ("Order sum calculated\n");
+#if ENABLE_DEBUG_LOG
+  SUF_Debugfprintf("Order sum calculated\n");
+#endif
 
   // Calculate average spectrum
   SDA_ComplexScalarDivide(pRealAverage,             // Pointer to real source array
@@ -416,8 +428,9 @@ int main(int argc, char* argv[])
                   RESULT_LENGTH);            // Dataset length
   }
 
-  // Debug
-  // SUF_Debugfprintf ("Calculating spectrum average\n");
+#if ENABLE_DEBUG_LOG
+  SUF_Debugfprintf("Calculating spectrum average\n");
+#endif
 
   printf("Spectrum average\n");
   for (SLArrayIndex_t i = 1; i <= NUMBER_OF_ORDERS; i++) {    // Extract the required orders from the results
@@ -433,8 +446,9 @@ int main(int argc, char* argv[])
   }
   printf("\n");
 
-  // Debug
-  // SUF_Debugfprintf ("Plot average spectrum\n");
+#if ENABLE_DEBUG_LOG
+  SUF_Debugfprintf("Plot average spectrum\n");
+#endif
 
   // Plot average spectrum
   gpc_plot_2d(hAverageSpectrumGraph,                                                  // Graph handle
@@ -447,8 +461,10 @@ int main(int argc, char* argv[])
               "red",                                                                  // Colour
               GPC_NEW);                                                               // New graph
 
-  // Debug
-  // SUF_Debugfprintf ("Number of frames processed = %d\n", FrameNumber);
+#if ENABLE_DEBUG_LOG
+  SUF_Debugfprintf("Number of frames processed = %d\n", FrameNumber);
+#endif
+
   printf("Number of frames processed = %d\n", FrameNumber);
 
   // Indicate end of plot

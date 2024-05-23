@@ -9,12 +9,12 @@
 
 // Use the following command to display the graphs: ./kalman_2D -g
 
-#include <gnuplot_c.h>    // Gnuplot/C
 #include <math.h>
-#include <siglib.h>    // SigLib DSP library
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <siglib.h>       // SigLib DSP library
+#include <gnuplot_c.h>    // Gnuplot/C
 
 // Define constants
 #define SAMPLE_LENGTH 200       // Sample length

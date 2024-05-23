@@ -2,11 +2,11 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
-#include <gnuplot_c.h>    // Gnuplot/C
 #include <malloc.h>
-#include <siglib.h>
 #include <stdio.h>
 #include <string.h>
+#include <siglib.h>
+#include <gnuplot_c.h>    // Gnuplot/C
 
 // Define constants
 #define IMAGE_DIMENSION 256

@@ -8,9 +8,9 @@
 // multiple times to remove each pulse
 
 // Include files
-#include <gnuplot_c.h>    // Gnuplot/C
-#include <siglib.h>       // SigLib DSP library
 #include <stdio.h>
+#include <siglib.h>       // SigLib DSP library
+#include <gnuplot_c.h>    // Gnuplot/C
 
 #define PLOT_PULSE_ENABLE 0    // Set to '1' to plot the simulated pulse, '0' otherwise
 

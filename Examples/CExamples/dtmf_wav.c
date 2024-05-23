@@ -3,8 +3,8 @@
 // the screen Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
-#include <siglib.h>    // SigLib DSP library
 #include <stdio.h>
+#include <siglib.h>    // SigLib DSP library
 
 // Define constants
 #define DTMF_SAMPLE_LENGTH 102

@@ -1,9 +1,9 @@
 // SigLib PortAudio Example Program
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
+#include <stdio.h>
 #include "analog_io.h"
 #include "portaudio.h"
-#include <stdio.h>
 
 #define PA_SAMPLE_TYPE paInt32
 #define FRAMES_PER_BUFFER (64)

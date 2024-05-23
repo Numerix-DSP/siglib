@@ -9,9 +9,9 @@
 #include "stdafx.h"
 #include <conio.h>
 #include <ctype.h>
-#include <siglib.h>    // SigLib DSP library
 #include <stdio.h>
 #include <stdlib.h>
+#include <siglib.h>    // SigLib DSP library
 
 // Declare constants
 #define SAMPLE_LENGTH 102

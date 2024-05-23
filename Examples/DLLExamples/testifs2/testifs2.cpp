@@ -17,9 +17,9 @@ filter with Fc = 0.01 Hz and Fs = 1 Hz.
 /* Include files */
 #include <conio.h>
 #include <math.h>
-#include <siglib.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <siglib.h>    // SigLib DSP library
 
 /* Declare constants */
 #define FILTER_ORDER 4                        /* Filter length */

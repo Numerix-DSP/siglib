@@ -1,9 +1,9 @@
 // SigLib Parametric Equalizer calculation functions
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
-#include <math.h>
-#include <siglib.h>    // SigLib DSP library
 #include <stdio.h>
+#include <siglib.h>       // SigLib DSP library
+#include <gnuplot_c.h>    // Gnuplot/C
 
 int main(void)
 {

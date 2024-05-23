@@ -2,9 +2,9 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
-#include "dpchar.h"
-#include <siglib.h>    // SigLib DSP library
 #include <stdio.h>
+#include <siglib.h>    // SigLib DSP library
+#include "dpchar.h"
 
 // Define constants
 #define ENABLE_DEBUG_LOG 0    // Set to '1' to enable debug logging and '0' to disable

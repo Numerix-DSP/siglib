@@ -13,6 +13,8 @@ Translation reference :
   http://www.ece.unh.edu/courses/ece707_3/Docs/DSP/IIR/IIr.htm
 */
 
+#include <siglib.h>    // SigLib DSP library
+
 #define DELAY_NORMAL 0    // Set to '1' for delay normalized poles
 
 #if DELAY_NORMAL

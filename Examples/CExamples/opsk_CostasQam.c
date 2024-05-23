@@ -10,11 +10,11 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
+#include <stdio.h>
+#include <siglib.h>             // SigLib DSP library
+#include <gnuplot_c.h>          // Gnuplot/C
 #include "plot_fd/plot_fd.h"    // Frequency domain plots
 #include <dpchar.h>
-#include <gnuplot_c.h>    // Gnuplot/C
-#include <siglib.h>       // SigLib DSP library
-#include <stdio.h>
 
 // Define constants
 #define RRCF_ENABLE 1                     // Root raised cosine filter on Tx and Rx
@@ -218,14 +218,14 @@ int main(void)
   SLError_t SigLibErrorCode;
   SLArrayIndex_t TxStringIndex = 0;
   SLArrayIndex_t TxSourceWordPhase = 0;
-  SLFixData_t TxTriBit;
-  SLFixData_t TxPreviousTxCharBits;
+  SLFixData_t TxTriBit = 0;
+  SLFixData_t TxPreviousTxCharBits = 0;
   SLArrayIndex_t TxPreFillSymbolCount = 0;    // Tx pipeline pre-fill
   SLArrayIndex_t RxStringIndex = 0;
   SLArrayIndex_t RxSourceWordPhase = 0;
   SLFixData_t RxTriBit;
   SLFixData_t RxStartUpDelayCount = 0;    // Rx startup delay count
-  SLFixData_t RxPreviousRxCharBits;
+  SLFixData_t RxPreviousRxCharBits = 0;
   SLArrayIndex_t LoopCount;
   char TxCharTmpVariable = 0;    // Temporary variables - char type
   char RxCharTmpVariable = 0;
@@ -726,25 +726,25 @@ int main(void)
           RxSourceWordPhase = 3;
           break;
         case 3:
-          RxCharTmpVariable = (RxPreviousRxCharBits << 7) + ((RxTriBit & SIGLIB_OPSK_BIT_MASK) << 4);
+          RxCharTmpVariable = (char)((RxPreviousRxCharBits << 7) + ((RxTriBit & SIGLIB_OPSK_BIT_MASK) << 4));
           RxSourceWordPhase = 4;
           break;
         case 4:
-          RxCharTmpVariable += (RxTriBit & SIGLIB_OPSK_BIT_MASK) << 1;
+          RxCharTmpVariable += (char)((RxTriBit & SIGLIB_OPSK_BIT_MASK) << 1);
           RxSourceWordPhase = 5;
           break;
         case 5:
-          RxCharTmpVariable += (RxTriBit & SIGLIB_OPSK_BIT_MASK) >> 2;
+          RxCharTmpVariable += (char)((RxTriBit & SIGLIB_OPSK_BIT_MASK) >> 2);
           RxString[RxStringIndex++] = RxCharTmpVariable;
           RxPreviousRxCharBits = RxTriBit & 0x3;
           RxSourceWordPhase = 6;
           break;
         case 6:
-          RxCharTmpVariable = (RxPreviousRxCharBits << 6) + ((RxTriBit & SIGLIB_OPSK_BIT_MASK) << 3);
+          RxCharTmpVariable = (char)((RxPreviousRxCharBits << 6) + ((RxTriBit & SIGLIB_OPSK_BIT_MASK) << 3));
           RxSourceWordPhase = 7;
           break;
         case 7:
-          RxString[RxStringIndex++] = (SLArrayIndex_t)RxCharTmpVariable + RxTriBit;
+          RxString[RxStringIndex++] = (char)(RxCharTmpVariable + RxTriBit);
           RxSourceWordPhase = 0;
           break;
         }

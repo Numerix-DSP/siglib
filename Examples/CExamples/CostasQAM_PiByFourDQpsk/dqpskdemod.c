@@ -23,13 +23,13 @@
 //     the next data burst.
 
 // Include files
-#include "../plot_fd/plot_fd.h"    // Frequency domain plots
-#include "Rx_FIR.h"                // Demodulator pre-filter to reduce the out-of-band noise.
-#include <dpchar.h>
-#include <gnuplot_c.h>    // Gnuplot/C
-#include <siglib.h>       // SigLib DSP library
 #include <stdio.h>
 #include <string.h>
+#include <siglib.h>       // SigLib DSP library
+#include <gnuplot_c.h>    // Gnuplot/C
+#include <dpchar.h>
+#include "../plot_fd/plot_fd.h"    // Frequency domain plots
+#include "Rx_FIR.h"                // Demodulator pre-filter to reduce the out-of-band noise.
 
 // Define constants
 // Select either or both of these for logging to log file

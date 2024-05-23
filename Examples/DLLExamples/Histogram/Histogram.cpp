@@ -6,9 +6,9 @@
 
 // Include files
 #include "stdafx.h"
-#include <siglib.h>    // SigLib DSP library
 #include <stdio.h>
 #include <stdlib.h>
+#include <siglib.h>    // SigLib DSP library
 
 #define SOURCE_LENGTH 13    // Use the same source array length for all tests
 

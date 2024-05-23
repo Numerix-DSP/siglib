@@ -16,8 +16,8 @@
 #endif
 #include "wx/image.h"
 
-#include "led.h"
 #include <siglib.h>
+#include "led.h"
 
 #include "BlueLEDOn.xpm"
 #include "CyanLEDOn.xpm"

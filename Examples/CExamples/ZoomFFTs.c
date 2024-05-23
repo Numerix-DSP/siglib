@@ -6,11 +6,11 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
-#include <gnuplot_c.h>    // Gnuplot/C
 #include <math.h>
-#include <siglib.h>    // SigLib DSP library
 #include <stdio.h>
 #include <stdlib.h>
+#include <siglib.h>       // SigLib DSP library
+#include <gnuplot_c.h>    // Gnuplot/C
 
 // Define constants
 #define FFT_LENGTH 256

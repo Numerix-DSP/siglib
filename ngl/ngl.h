@@ -2,6 +2,7 @@
 /******************************************************************************
 Numerix Graphics Library for wxWidgets
 Graph display functions. Supports line and pole-zero graphs.
+Shouuld always be included after siglib.h, if SigLib is being used.
 
 SigLib is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License V2, as

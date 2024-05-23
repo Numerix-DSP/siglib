@@ -17,11 +17,11 @@
 #  include "wx/tooltip.h"
 #endif
 
-#include "dfplus.h"
-#include "ngl.h"
 #include <math.h>
-#include <siglib.h>
 #include <stdlib.h>
+#include <siglib.h>    // SigLib DSP library
+#include "ngl.h"
+#include "dfplus.h"
 
 /*
   Function Name : GetFilterProjectDialog::GetFilterProjectDialog

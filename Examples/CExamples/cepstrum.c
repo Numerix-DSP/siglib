@@ -15,10 +15,10 @@
 // The signals on the left are the formant envelope.
 
 // Include files
-#include "plot_fd/plot_fd.h"    // Frequency domain plots
-#include <gnuplot_c.h>          // Gnuplot/C
-#include <siglib.h>             // SigLib DSP library
 #include <stdio.h>
+#include <siglib.h>             // SigLib DSP library
+#include <gnuplot_c.h>          // Gnuplot/C
+#include "plot_fd/plot_fd.h"    // Frequency domain plots
 
 // Define constants
 #define FFT_LENGTH 512

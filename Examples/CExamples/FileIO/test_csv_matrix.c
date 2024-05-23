@@ -2,9 +2,9 @@
 
 // Include files
 #include <ctype.h>
-#include <siglib.h>    // SigLib DSP library
 #include <stdio.h>
 #include <stdlib.h>
+#include <siglib.h>    // SigLib DSP library
 
 // Define constants
 #define N_ROWS 10

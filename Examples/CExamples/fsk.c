@@ -4,9 +4,9 @@
 // rights reserved.
 
 // Include files
-#include <gnuplot_c.h>    // Gnuplot/C
-#include <siglib.h>       // SigLib DSP library
 #include <stdio.h>
+#include <siglib.h>       // SigLib DSP library
+#include <gnuplot_c.h>    // Gnuplot/C
 
 // Define constants
 #define DISPLAY_GRAPHICS 1       // Set to '1' to display graphics

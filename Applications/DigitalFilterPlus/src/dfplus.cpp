@@ -34,11 +34,11 @@
 #else
 #  include <malloc.h>
 #endif
-#include "dfplus.h"
 #include "mainframe.h"    // mainframe header - must be located after other project headers
 #include <math.h>
-#include <siglib.h>
 #include <stdlib.h>
+#include <siglib.h>    // SigLib DSP library
+#include "dfplus.h"
 
 GraphDisplay* GlobalGraphDisplayWindow;
 

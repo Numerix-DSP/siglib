@@ -2,10 +2,10 @@
 // domain Copyright (C) 2022 Delta Numerix
 
 // Include files
-#include <gnuplot_c.h>            // Gnuplot/C
-#include <siglib.h>               // SigLib DSP library
-#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
 #include <stdio.h>
+#include <siglib.h>               // SigLib DSP library
+#include <gnuplot_c.h>            // Gnuplot/C
+#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
 
 // Define constants
 #define SAMPLE_LENGTH 1024
@@ -26,9 +26,8 @@ int main(void)
   h_GPC_Plot* h2DPlotTime;    // Plot object
   h_GPC_Plot* h2DPlotFreq;
 
-  SLData_t ZXPrevSign;               // Sign of last value in previous array, for zero
-                                     // crossing detect
-  SLArrayIndex_t TriggerLocation;    // Location of trigger in source array
+  SLData_t ZXPrevSign;                   // Sign of last value in previous array, for zero crossing detect
+  SLArrayIndex_t TriggerLocation = 0;    // Location of trigger in source array
 
   SLFixData_t TriggerFlag = 1;
   enum SLLevelCrossingMode_t ZXFlag = SIGLIB_POSITIVE_LEVEL_CROSS;

@@ -10,11 +10,11 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
+#include <stdio.h>
+#include <siglib.h>             // SigLib DSP library
+#include <gnuplot_c.h>          // Gnuplot/C
 #include "plot_fd/plot_fd.h"    // Frequency domain plots
 #include <dpchar.h>
-#include <gnuplot_c.h>    // Gnuplot/C
-#include <siglib.h>       // SigLib DSP library
-#include <stdio.h>
 
 // Define constants
 #define RRCF_ENABLE 1                     // Root raised cosine filter on Tx and Rx

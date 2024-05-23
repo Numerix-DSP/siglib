@@ -20,9 +20,9 @@
 // signal is complex (I and Q) then both components must be delayed.
 
 // Include files
-#include <gnuplot_c.h>    // Gnuplot/C
-#include <siglib.h>       // SigLib DSP library
 #include <stdio.h>
+#include <siglib.h>       // SigLib DSP library
+#include <gnuplot_c.h>    // Gnuplot/C
 
 // Define constants
 #define SQUARE_PULSE 0           // Set to '1' square pulse input OR '0' for arbitrary pulse shape

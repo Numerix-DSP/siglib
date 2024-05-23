@@ -1,11 +1,11 @@
 // SigLib Fill array from disk hex file test program
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
-#include <gnuplot_c.h>    // Gnuplot/C
-#include <siglib.h>       // SigLib DSP library
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <siglib.h>       // SigLib DSP library
+#include <gnuplot_c.h>    // Gnuplot/C
 
 FILE* fpInputFile;
 

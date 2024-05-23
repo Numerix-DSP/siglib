@@ -2,14 +2,16 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
-#include "readdat.h"
-#include <gnuplot_c.h>    // Gnuplot/C
 #include <math.h>
-#include <siglib.h>               // SigLib DSP library
-#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <siglib.h>               // SigLib DSP library
+#include <gnuplot_c.h>            // Gnuplot/C
+#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
+#include "readdat.h"
+
+#define ENABLE_DEBUG_LOG 0    // Set to '1' to enable debug logging and '0' to disable
 
 // Define constants
 #define SAMPLE_LENGTH 1024                               // Length of array read from input file
@@ -56,6 +58,10 @@ int main(int argc, char* argv[])
     printf("Memory allocation error\n");
     exit(0);
   }
+
+#if ENABLE_DEBUG_LOG
+  SUF_ClearDebugfprintf();
+#endif
 
   SampleRate = SAMPLE_RATE_HZ;
 
@@ -121,8 +127,10 @@ int main(int argc, char* argv[])
                                SAMPLE_LENGTH) <          // Destination dataset length
            SAMPLE_LENGTH) {
 
-      // SUF_Debugfprintf ("\nFN = %d\n", FrameNumber);
-      // SUF_DebugPrintArray (pDataArray, SAMPLE_LENGTH);
+#if ENABLE_DEBUG_LOG
+      SUF_Debugfprintf("\nFN = %d\n", FrameNumber);
+      SUF_DebugPrintArray(pDataArray, SAMPLE_LENGTH);
+#endif
 
       // Apply window to real data
       SDA_Window(pFDPRealData,             // Source array pointer

@@ -1,10 +1,10 @@
 // .SIG to .WAV file conversion program
 
 #include <math.h>
-#include <siglib.h>    // SigLib DSP library
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <siglib.h>    // SigLib DSP library
 
 #define SAMPLE_SIZE 128
 

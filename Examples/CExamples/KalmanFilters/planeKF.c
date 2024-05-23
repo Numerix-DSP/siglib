@@ -12,11 +12,11 @@
 //  values in the intermediate matrices. This was done in the videos to simplify
 //  the math.
 
-#include <gnuplot_c.h>    // Gnuplot/C
 #include <math.h>
-#include <siglib.h>    // SigLib DSP library
 #include <stdio.h>
 #include <stdlib.h>
+#include <siglib.h>       // SigLib DSP library
+#include <gnuplot_c.h>    // Gnuplot/C
 
 // Define constants
 #define SAMPLE_LENGTH 5

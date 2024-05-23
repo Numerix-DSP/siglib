@@ -18,4 +18,6 @@ AlwaysBreakTemplateDeclarations: true
 BreakBeforeBraces: Linux
 BreakConstructorInitializers: BeforeComma
 IndentPPDirectives: AfterHash
+IncludeBlocks: Preserve
+SortIncludes: Never
 PointerAlignment: Left

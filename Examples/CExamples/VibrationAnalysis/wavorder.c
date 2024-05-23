@@ -2,11 +2,11 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 #include <math.h>
-#include <siglib.h>               // SigLib DSP library
-#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <siglib.h>               // SigLib DSP library
+#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
 
 #define DEBUG_ENABLE 0    // Seto to '1' to enable debug printing, '0' to disable
 #define DISPLAY_AVERAGE_SPECTRUM \

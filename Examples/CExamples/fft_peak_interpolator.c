@@ -4,9 +4,9 @@
 // 0.596755 Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
-#include <gnuplot_c.h>    // Gnuplot/C
-#include <siglib.h>       // SigLib DSP library
 #include <stdio.h>
+#include <siglib.h>       // SigLib DSP library
+#include <gnuplot_c.h>    // Gnuplot/C
 
 #define NUM_FREQS 41
 #define SOURCE_MAGN SIGLIB_ONE

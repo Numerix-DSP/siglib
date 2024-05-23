@@ -1,7 +1,7 @@
 // SigLib insert and delete example program
 
-#include <siglib.h>
 #include <stdio.h>
+#include <siglib.h>
 
 #define SOURCE1_ARRAY_LENGTH 10
 #define SOURCE2_ARRAY_LENGTH 3

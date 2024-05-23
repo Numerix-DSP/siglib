@@ -25,7 +25,6 @@ rm -f -r *.cache
 rm -f -r *.cout
 rm -f -r *.dot
 rm -f -r *.elf
-rm -f -r *.exe
 rm -f -r *.gpdt
 rm -f -r *.gprof
 rm -f -r *.idb
@@ -61,6 +60,7 @@ rm -f -r *.tlog
 rm -f -r *.user
 rm -f -r Applications/*.d
 rm -f -r ngl/*.d
+rm -f -r ngl/*.exe
 rm -f -r src/*.a
 rm -f -r src/*.dll
 rm -f -r src/*.doj
@@ -81,9 +81,11 @@ popd
 # Delete all executables
 pushd $SIGLIB_PATH/gnuplot_c/examples
 $SIGLIB_PATH/utils/clean_executables.sh
+rm -f -r *.exe
 popd
 pushd $SIGLIB_PATH/Examples/CExamples
 $SIGLIB_PATH/utils/clean_executables.sh
+rm -f -r *.exe
 popd
 pushd $SIGLIB_PATH/Examples/CExamples/AGC/
 rm -f Kipling_If_48kHz_Attenuated_processed.wav
@@ -145,5 +147,18 @@ $SIGLIB_PATH/utils/clean_executables.sh
 popd
 pushd $SIGLIB_PATH/Examples/CExamples/VibrationAnalysis/
 $SIGLIB_PATH/utils/clean_executables.sh
+popd
+
+pushd $SIGLIB_PATH/Applications/DigitalFilterPlus/src/
+rm -f *.o
+rm -f *.obj
+rm -f dfplus.exe
+rm -f dfplus
+popd
+pushd $SIGLIB_PATH/Applications/SystemAnalyzer/src/
+rm -f *.o
+rm -f *.obj
+rm -f sa.exe
+rm -f sa
 popd
 

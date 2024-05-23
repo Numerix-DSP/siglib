@@ -24,10 +24,10 @@
 #else
 #  include <malloc.h>
 #endif
-#include "dfplus.h"
+#include <siglib.h>    // SigLib DSP library
 #include "ngl.h"
+#include "dfplus.h"
 #include "remez_gen.h"
-#include <siglib.h>
 
 #define BANDPASS 1 /* Filter types */
 #define DIFFERENTIATOR 2

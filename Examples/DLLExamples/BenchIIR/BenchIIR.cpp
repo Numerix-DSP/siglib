@@ -7,9 +7,9 @@
 
 // Include files
 #include <math.h>
-#include <siglib.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <siglib.h>    // SigLib DSP library
 
 // Define constants
 #define DATA_LENGTH 1000    // Number of samples per iteration

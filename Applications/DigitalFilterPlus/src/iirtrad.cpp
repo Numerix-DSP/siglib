@@ -24,12 +24,12 @@
 #else
 #  include <malloc.h>
 #endif
+#include <math.h>
+#include <stdlib.h>
+#include <siglib.h>    // SigLib DSP library
+#include "ngl.h"
 #include "dfplus.h"
 #include "iir_gen.h"
-#include "ngl.h"
-#include <math.h>
-#include <siglib.h>
-#include <stdlib.h>
 
 void BesselFilter(filter_t* FilterSpecification);    // Bessel filter design function
 #include "bessel.cpp"

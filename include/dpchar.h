@@ -7,6 +7,7 @@ comms
 */
 
 #include <stdio.h>
+#include <siglib.h>
 
 void dpchar(char ch)
 {

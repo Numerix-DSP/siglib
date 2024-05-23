@@ -4,7 +4,7 @@
 
 if [ "$#" -ne 1 ]; then
     echo "Usage error:"
-    echo "    ./process_agc_envelope.sh wav_filename"
+    echo "    ./process_wav_agc_envelope.sh wav_filename"
     exit -1
 fi
 

@@ -7,10 +7,10 @@
 // designed using Digital Filter Plus - https://numerix-dsp.com/dfplus/ Note:
 // The input array length must be a multiple of the down conversion ratio
 
-#include "low_pass_filter.h"
-#include <siglib.h>    // SigLib DSP library
 #include <stdio.h>
 #include <string.h>
+#include <siglib.h>    // SigLib DSP library
+#include "low_pass_filter.h"
 
 // Define constants
 #define INPUT_SAMPLE_RATE 48000

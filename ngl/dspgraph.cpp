@@ -47,8 +47,8 @@ Copyright (c) 2022, Delta Numerix, All rights reserved.
 #  include <malloc.h>
 #endif
 #include "mainframe.h"    // This is the top level application header file
-#include "ngl.h"
 #include <stdlib.h>
+#include "ngl.h"
 // It is used for the mouse event handler
 // The graph values are pushed to the application for displaying on mouse move
 

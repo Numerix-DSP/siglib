@@ -2,9 +2,9 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
-#include <gnuplot_c.h>    // Gnuplot/C
-#include <siglib.h>
 #include <stdio.h>
+#include <siglib.h>
+#include <gnuplot_c.h>    // Gnuplot/C
 
 // Define constants
 #define DC_SOURCE 0    // Define test image pattern

@@ -2,8 +2,8 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
-#include <siglib.h>    // SigLib DSP library
 #include <stdio.h>
+#include <siglib.h>    // SigLib DSP library
 
 #define LOG_TABLE_LENGTH 24
 #define LOG_TABLE_START 440.

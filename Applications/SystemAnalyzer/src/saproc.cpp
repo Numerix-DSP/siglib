@@ -62,11 +62,11 @@
 #else
 #  include <malloc.h>
 #endif
+#include <math.h>
+#include <stdlib.h>
 #include "pa_asio.h"
 #include "portaudio.h"
 #include "sa.h"
-#include <math.h>
-#include <stdlib.h>
 
 #ifndef SIGLIB
 #  undef DEBUG_IO

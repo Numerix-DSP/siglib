@@ -1,14 +1,14 @@
 // SigLib - .wav file function read and display program
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
-#include "plot_fd.h"
-#include <gnuplot_c.h>    // Gnuplot/C
-#include <math.h>
-#include <siglib.h>               // SigLib DSP library
-#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
+#include <siglib.h>       // SigLib DSP library
+#include <gnuplot_c.h>    // Gnuplot/C
+#include "../plot_fd/plot_fd.h"
+#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
 
 #define SAMPLE_LENGTH 1024
 

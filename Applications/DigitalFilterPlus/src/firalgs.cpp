@@ -25,9 +25,9 @@
 #else
 #  include <malloc.h>
 #endif
-#include "dfplus.h"
+#include <siglib.h>    // SigLib DSP library
 #include "ngl.h"
-#include <siglib.h>
+#include "dfplus.h"
 
 extern GraphDisplay* GlobalGraphDisplayWindow;
 

@@ -2,10 +2,10 @@
 // a .WAV file and prints the Results on the screen
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
-#include <siglib.h>               // SigLib DSP library
-#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
 #include <stdio.h>
 #include <stdlib.h>
+#include <siglib.h>               // SigLib DSP library
+#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
 
 // Declare arrays and variables
 

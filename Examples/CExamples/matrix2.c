@@ -5,8 +5,8 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
-#include <siglib.h>    // SigLib DSP library
 #include <stdio.h>
+#include <siglib.h>    // SigLib DSP library
 
 // Define constants
 #define ENABLE_CHOLESKY_IN_PLACE 1    // Set to '1' to execute in-place, '0' for not in-place

@@ -57,9 +57,9 @@
 // bin 51 to bin 34, a ratio change of 2/3, as would be expected.
 
 // Include files
-#include <gnuplot_c.h>    // Gnuplot/C
-#include <siglib.h>       // SigLib DSP library
 #include <stdio.h>
+#include <siglib.h>       // SigLib DSP library
+#include <gnuplot_c.h>    // Gnuplot/C
 
 // Define constants
 #define POLY_PHASE_FILTER_LENGTH 64

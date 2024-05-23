@@ -3,9 +3,10 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
-#include <siglib.h>
 #include <stdio.h>
 #include <string.h>
+#include <siglib.h>       // SigLib DSP library
+#include <gnuplot_c.h>    // Gnuplot/C
 
 #if defined(_MSC_VER)                // Defined by Microsoft compilers
 #  pragma warning(disable : 4127)    // Remove conditional expression is constant

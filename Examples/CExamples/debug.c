@@ -2,8 +2,8 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
-#include <siglib.h>    // SigLib DSP library
 #include <stdio.h>
+#include <siglib.h>    // SigLib DSP library
 
 // Declare global variables and arrays
 static const SLData_t pArray[] = {0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0};

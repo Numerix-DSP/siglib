@@ -13,10 +13,10 @@
 
 #include <gnuplot_c.h>
 #include <math.h>
-#include <siglib.h>
-#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
 #include <stdio.h>
 #include <string.h>
+#include <siglib.h>
+#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
 
 #define PLOT_LOG_GAINS 1    // Set to '1' to plot logarithmic gains, '0' to plot linear
 

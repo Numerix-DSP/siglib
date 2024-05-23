@@ -11,8 +11,8 @@
 #include <wx/spinctrl.h>
 #include <wx/splitter.h>
 
-#include "ngl.h"       // NGL header file - should always be included after siglib.h, if SigLib is being used
 #include <siglib.h>    // SigLib header file
+#include "ngl.h"       // NGL header file - should always be included after siglib.h, if SigLib is being used
 
 #define DEBUG_LOG_FILE 0    // Set to 1 to log progress to "debug.log" file
 

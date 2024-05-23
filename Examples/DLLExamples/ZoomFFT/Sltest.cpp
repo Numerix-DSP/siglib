@@ -2,11 +2,11 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
-#include "sltest.h"
-#include "siglib.h"
 #include <afxdlgs.h>
 #include <afxwin.h>
 #include <shellapi.h>
+#include "siglib.h"
+#include "sltest.h"
 
 // Define constants
 #define DEBUG 0

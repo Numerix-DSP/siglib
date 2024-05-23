@@ -2,11 +2,11 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
-#include "plot_fd/plot_fd.h"    // Frequency domain plots
-#include <gnuplot_c.h>          // Gnuplot/C
-#include <siglib.h>             // SigLib DSP library
 #include <stdio.h>
 #include <stdlib.h>
+#include <siglib.h>             // SigLib DSP library
+#include <gnuplot_c.h>          // Gnuplot/C
+#include "plot_fd/plot_fd.h"    // Frequency domain plots
 
 // Define constants
 #define SAMPLE_LENGTH 256

@@ -1,12 +1,12 @@
 // SigLib - bin2wav file function convert and display program
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
-#include <gnuplot_c.h>    // Gnuplot/C
 #include <math.h>
-#include <siglib.h>    // SigLib DSP library
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <siglib.h>       // SigLib DSP library
+#include <gnuplot_c.h>    // Gnuplot/C
 
 #define PLOT_DATA 0    // Set to '1' to display waveform, '0' to only convert
 

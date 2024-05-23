@@ -2,9 +2,9 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
-#include <siglib.h>    // SigLib DSP library
 #include <stdio.h>
 #include <stdlib.h>
+#include <siglib.h>    // SigLib DSP library
 
 // Define constants
 #define SAMPLE_LENGTH 10

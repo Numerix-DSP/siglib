@@ -1,11 +1,11 @@
 // SigLib linear microphone array beam pattern calculator (Microphone Polar
 // Diversity Response) Copyright (c) 2023 Delta Numerix All rights reserved.
 
-#include <gnuplot_c.h>
 #include <math.h>
-#include <siglib.h>
 #include <stdio.h>
 #include <string.h>
+#include <siglib.h>
+#include <gnuplot_c.h>
 
 #define NUM_ANGLES 181       // Number of angles analyzed: -90 to +90 degrees
 #define START_ANGLE -90.     // Start angle for calculating beam pattern

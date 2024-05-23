@@ -19,7 +19,7 @@
 #  include <malloc.h>
 #endif
 
-#include <siglib.h>
+#include <siglib.h>    // SigLib DSP library
 
 // #ifdef DEBUG_LOG_FILE
 // #undef DEBUG_LOG_FILE

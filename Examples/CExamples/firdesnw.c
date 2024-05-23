@@ -19,10 +19,10 @@
 //   +-------+        +--------+        +--------+        +----------+
 
 // Include files
-#include <gnuplot_c.h>    // Gnuplot/C
-#include <siglib.h>       // SigLib DSP library
 #include <stdio.h>
 #include <time.h>
+#include <siglib.h>       // SigLib DSP library
+#include <gnuplot_c.h>    // Gnuplot/C
 
 // Define constants
 #define RAISED_COS 0         // Set to '1' for raised cosine filter or '0' for arbitrary LPF

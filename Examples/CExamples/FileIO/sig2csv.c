@@ -3,10 +3,10 @@
 
 // Include files
 #include <math.h>
-#include <siglib.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <siglib.h>
 
 int main(int argc, char* argv[])
 {

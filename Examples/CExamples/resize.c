@@ -2,8 +2,8 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
-#include <siglib.h>    // SigLib DSP library
 #include <stdio.h>
+#include <siglib.h>    // SigLib DSP library
 
 // Define constants
 #define DST_ARRAY_LENGTH 60      // Output sample length - allow for growth

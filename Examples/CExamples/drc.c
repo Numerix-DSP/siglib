@@ -2,9 +2,9 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
-#include <gnuplot_c.h>    // Gnuplot/C
-#include <siglib.h>       // SigLib DSP library
 #include <stdio.h>
+#include <siglib.h>       // SigLib DSP library
+#include <gnuplot_c.h>    // Gnuplot/C
 
 // Define constants
 #define PER_SAMPLE 0    // Set to '1' to use per sample functions, '0' to use array functions
@@ -27,20 +27,8 @@
 
 // Declare global variables and arrays
 
-static SLDrcLevelGainTable_s drcLevelGainTable[] = {
-    // DRC level/gain table
-    {SDS_dBmToVoltageMacro(DRC_FIRST_KNEE_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE), SDS_dBToVoltageMacro(-.5)},
-    {SDS_dBmToVoltageMacro(DRC_FIRST_KNEE_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 500., SDS_dBToVoltageMacro(-1.)},
-    {SDS_dBmToVoltageMacro(DRC_FIRST_KNEE_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 1000., SDS_dBToVoltageMacro(-1.5)},
-    {SDS_dBmToVoltageMacro(DRC_FIRST_KNEE_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 1500., SDS_dBToVoltageMacro(-2.)},
-    {SDS_dBmToVoltageMacro(DRC_FIRST_KNEE_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 2000., SDS_dBToVoltageMacro(-2.5)},
-    {SDS_dBmToVoltageMacro(DRC_FIRST_KNEE_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 2500., SDS_dBToVoltageMacro(-3.)},
-};
-
-static SLData_t drcEnvelopeDetectorState;                                                              // DRC envelope detector state
-static SLData_t drcEnvelopeDetectorCoeff;                                                              // DRC envelope detector one-pole
-                                                                                                       // filter coefficient
-static SLArrayIndex_t drcNumberOfKnees = sizeof(drcLevelGainTable) / sizeof(SLDrcLevelGainTable_s);    // DRC number of knees
+static SLData_t drcEnvelopeDetectorState;    // DRC envelope detector state
+static SLData_t drcEnvelopeDetectorCoeff;    // DRC envelope detector one-pole
 
 int main(void)
 {
@@ -57,6 +45,20 @@ int main(void)
     printf("\nPlot creation failure.\n");
     exit(-1);
   }
+
+  // DRC Gain Table
+  // Note: GCC can handle these as global static values, Microsoft can't
+  SLDrcLevelGainTable_s drcLevelGainTable[] = {
+      // DRC level/gain table with a nice soft knee
+      {SDS_dBmToVoltageMacro(DRC_FIRST_KNEE_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE), SDS_dBToVoltageMacro(-.5)},
+      {SDS_dBmToVoltageMacro(DRC_FIRST_KNEE_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 500., SDS_dBToVoltageMacro(-1.)},
+      {SDS_dBmToVoltageMacro(DRC_FIRST_KNEE_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 1000., SDS_dBToVoltageMacro(-1.5)},
+      {SDS_dBmToVoltageMacro(DRC_FIRST_KNEE_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 1500., SDS_dBToVoltageMacro(-2.)},
+      {SDS_dBmToVoltageMacro(DRC_FIRST_KNEE_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 2000., SDS_dBToVoltageMacro(-2.5)},
+      {SDS_dBmToVoltageMacro(DRC_FIRST_KNEE_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 2500., SDS_dBToVoltageMacro(-3.)},
+  };
+
+  SLArrayIndex_t drcNumberOfKnees = sizeof(drcLevelGainTable) / sizeof(SLDrcLevelGainTable_s);    // DRC number of knees
 
   SLData_t* pSrc = SUF_VectorArrayAllocate(SAMPLE_LENGTH);
   SLData_t* pDst = SUF_VectorArrayAllocate(SAMPLE_LENGTH);

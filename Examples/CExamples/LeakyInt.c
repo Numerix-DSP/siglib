@@ -2,8 +2,8 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
-#include <siglib.h>    // SigLib DSP library
 #include <stdio.h>
+#include <siglib.h>    // SigLib DSP library
 
 // Define constants
 #define NUMBER_OF_SAMPLES 30    // Number of samples in source array

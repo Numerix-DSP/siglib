@@ -1,8 +1,8 @@
 // SigLib - Histogram Example
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
-#include <siglib.h>
 #include <stdio.h>
+#include <siglib.h>    // SigLib DSP library
 
 #define SOURCE_LENGTH 13    // Use the same source array length for all tests
 

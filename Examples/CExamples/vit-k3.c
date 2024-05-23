@@ -2,9 +2,9 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
+#include <stdio.h>
 #include <siglib.h>               // SigLib DSP library
 #include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
-#include <stdio.h>
 
 // Define constants
 #define DEBUG 0    // Debug mode - global debug switch

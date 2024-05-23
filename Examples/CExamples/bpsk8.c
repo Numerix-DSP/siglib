@@ -18,10 +18,10 @@
 // SIF_RootRaisedCosineFirFilter function.
 
 // Include files
-#include <dpchar.h>       // Plot bit sequences
-#include <gnuplot_c.h>    // Gnuplot/C
-#include <siglib.h>       // SigLib DSP library
 #include <stdio.h>
+#include <siglib.h>       // SigLib DSP library
+#include <gnuplot_c.h>    // Gnuplot/C
+#include <dpchar.h>       // Plot bit sequences
 
 // Define constants
 #define DISPLAY_GRAPHICS 0      // Set to '1' to display graphics

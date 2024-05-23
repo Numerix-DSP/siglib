@@ -2,8 +2,8 @@
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
 // Include files
-#include <siglib.h>
 #include <stdio.h>
+#include <siglib.h>
 
 // Define constants
 #define SIGLIB_MAX_SPREADING_FACTOR 512

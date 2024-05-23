@@ -4,13 +4,13 @@
 //    desired input word length The output data is scaled accordingly
 // Copyright (c) 2023 Delta Numerix All rights reserved.
 
-#include <gnuplot_c.h>    // Gnuplot/C
 #include <math.h>
-#include <siglib.h>               // SigLib DSP library
-#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <siglib.h>               // SigLib DSP library
+#include <gnuplot_c.h>            // Gnuplot/C
+#include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
 
 // Define constants
 #define PER_SAMPLE 0    // Set to '1' to use per sample functions, '0' to use array functions
@@ -58,20 +58,20 @@ static SLData_t agcGain;                     // AGC gain
 static SLData_t agcEnvelopeDetectorCoeff;    // AGC envelope detector coefficient
 static SLData_t agcEnvelopeDetectorState;    // AGC envelope detector state
 
-static SLDrcLevelGainTable_s drcLevelGainTable[] = {
-    // DRC level/gain table with a nice soft knee
-    {SDS_dBmToVoltageMacro(AGC_DESIRED_OUTPUT_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE), SDS_dBToVoltageMacro(-1.)},
-    {SDS_dBmToVoltageMacro(AGC_DESIRED_OUTPUT_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 500., SDS_dBToVoltageMacro(-2.)},
-    {SDS_dBmToVoltageMacro(AGC_DESIRED_OUTPUT_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 1000., SDS_dBToVoltageMacro(-3.)},
-    {SDS_dBmToVoltageMacro(AGC_DESIRED_OUTPUT_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 1500., SDS_dBToVoltageMacro(-4.)},
-    {SDS_dBmToVoltageMacro(AGC_DESIRED_OUTPUT_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 2000., SDS_dBToVoltageMacro(-5.)},
-    {SDS_dBmToVoltageMacro(AGC_DESIRED_OUTPUT_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 2500., SDS_dBToVoltageMacro(-6.)},
-};
+// static SLDrcLevelGainTable_s drcLevelGainTable[] = {
+// DRC level/gain table with a nice soft knee
+// {SDS_dBmToVoltageMacro(AGC_DESIRED_OUTPUT_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE), SDS_dBToVoltageMacro(-1.)},
+// {SDS_dBmToVoltageMacro(AGC_DESIRED_OUTPUT_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 500., SDS_dBToVoltageMacro(-2.)},
+// {SDS_dBmToVoltageMacro(AGC_DESIRED_OUTPUT_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 1000., SDS_dBToVoltageMacro(-3.)},
+// {SDS_dBmToVoltageMacro(AGC_DESIRED_OUTPUT_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 1500., SDS_dBToVoltageMacro(-4.)},
+// {SDS_dBmToVoltageMacro(AGC_DESIRED_OUTPUT_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 2000., SDS_dBToVoltageMacro(-5.)},
+// {SDS_dBmToVoltageMacro(AGC_DESIRED_OUTPUT_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 2500., SDS_dBToVoltageMacro(-6.)},
+// };
 
-static SLData_t drcEnvelopeDetectorState = SIGLIB_ZERO;                                                // DRC envelope detector state
-static SLData_t drcEnvelopeDetectorCoeff;                                                              // DRC envelope detector one-pole
-                                                                                                       // filter coefficient
-static SLArrayIndex_t drcNumberOfKnees = sizeof(drcLevelGainTable) / sizeof(SLDrcLevelGainTable_s);    // DRC number of knees
+static SLData_t drcEnvelopeDetectorState = SIGLIB_ZERO;    // DRC envelope detector state
+static SLData_t drcEnvelopeDetectorCoeff;                  // DRC envelope detector one-pole
+                                                           // filter coefficient
+// static SLArrayIndex_t drcNumberOfKnees = sizeof(drcLevelGainTable) / sizeof(SLDrcLevelGainTable_s);    // DRC number of knees
 
 static SLWavFileInfo_s wavInfo;
 
@@ -84,6 +84,20 @@ int main(int argc, char* argv[])
   SLArrayIndex_t sampleCount;
   SLArrayIndex_t processedSampleCount = 0;
   SLData_t frontendGain = SDS_dBToVoltage(FRONT_END_GAIN_DB);
+
+  // DRC Gain Table
+  // Note: GCC can handle these as global static values, Microsoft can't
+  SLDrcLevelGainTable_s drcLevelGainTable[] = {
+      // DRC level/gain table with a nice soft knee
+      {SDS_dBmToVoltageMacro(AGC_DESIRED_OUTPUT_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE), SDS_dBToVoltageMacro(-1.)},
+      {SDS_dBmToVoltageMacro(AGC_DESIRED_OUTPUT_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 500., SDS_dBToVoltageMacro(-2.)},
+      {SDS_dBmToVoltageMacro(AGC_DESIRED_OUTPUT_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 1000., SDS_dBToVoltageMacro(-3.)},
+      {SDS_dBmToVoltageMacro(AGC_DESIRED_OUTPUT_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 1500., SDS_dBToVoltageMacro(-4.)},
+      {SDS_dBmToVoltageMacro(AGC_DESIRED_OUTPUT_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 2000., SDS_dBToVoltageMacro(-5.)},
+      {SDS_dBmToVoltageMacro(AGC_DESIRED_OUTPUT_LEVEL_DBFS, WORD_MAX_POSITIVE_VALUE) + 2500., SDS_dBToVoltageMacro(-6.)},
+  };
+
+  SLArrayIndex_t drcNumberOfKnees = sizeof(drcLevelGainTable) / sizeof(SLDrcLevelGainTable_s);    // DRC number of knees
 
   if (argc != 2) {
     printf("\nUsage:\nwav_process filename (no file extension)\n\n");

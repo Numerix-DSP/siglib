@@ -26,11 +26,11 @@ support@.numerix-dsp.com
 Copyright (c) 2024, Delta Numerix, All rights reserved.
 ****************************************************************************/
 
-#include "gnuplot_c.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "gnuplot_c.h"
 
 /********************************************************
  * Function: gpc_init_2d
