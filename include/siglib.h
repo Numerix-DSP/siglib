@@ -209,13 +209,23 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadData(SLData_t SIGLIB_OUTPUT_PTR_DECL*
 
 void SIGLIB_FUNC_DECL SUF_WavWriteData(const SLData_t SIGLIB_INPUT_PTR_DECL*, FILE*, const SLWavFileInfo_s, const SLArrayIndex_t);
 
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadData16(short SIGLIB_OUTPUT_PTR_DECL*, FILE*, const SLWavFileInfo_s,
+                                                  const SLArrayIndex_t);    // Functions for reading and writing .wav files
+
+void SIGLIB_FUNC_DECL SUF_WavWriteData16(const short SIGLIB_INPUT_PTR_DECL*, FILE*, const SLWavFileInfo_s, const SLArrayIndex_t);
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadData32(SLArrayIndex_t SIGLIB_OUTPUT_PTR_DECL*, FILE*, const SLWavFileInfo_s,
+                                                  const SLArrayIndex_t);    // Functions for reading and writing .wav files
+
+void SIGLIB_FUNC_DECL SUF_WavWriteData32(const SLArrayIndex_t SIGLIB_INPUT_PTR_DECL*, FILE*, const SLWavFileInfo_s, const SLArrayIndex_t);
+
 short SIGLIB_FUNC_DECL SUF_WavReadWord(FILE*);
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadInt(FILE*);
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadLong(FILE*);
 
 void SIGLIB_FUNC_DECL SUF_WavWriteWord(const short, FILE*);
 
-void SIGLIB_FUNC_DECL SUF_WavWriteInt(const SLArrayIndex_t, FILE*);
+void SIGLIB_FUNC_DECL SUF_WavWriteLong(const SLArrayIndex_t, FILE*);
 
 SLWavFileInfo_s SIGLIB_FUNC_DECL SUF_WavReadHeader(FILE*);
 

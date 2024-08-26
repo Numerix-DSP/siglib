@@ -1,4 +1,3 @@
-
 /**************************************************************************
 File Name               : siglib_ti_memory_sections.h   | Author : JOHN EDWARDS
 Siglib Library Version  : 10.50                         |
@@ -45,8 +44,7 @@ Description: SigLib function memory section definition file for TI compilers
 #    define _SIGLIB_MEMORY_SECTIONS_H
 
 #    ifdef _TMS320C6X        // Defined by TI compiler
-#      ifndef __cplusplus    // These macros don't work in C++, you need to locate them
-                             // adjacent to the function
+#      ifndef __cplusplus    // These macros don't work in C++, you need to locate them adjacent to the function
 
 #        pragma CODE_SECTION(SDA_LinearMicrophoneArrayBeamPattern, ".text")
 #        pragma CODE_SECTION(SDA_LinearMicrophoneArrayBeamPatternLinear, ".text")

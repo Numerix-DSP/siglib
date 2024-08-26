@@ -11,7 +11,7 @@ copy siglib_wrap.perl.i siglib_wrap.i /Y
 
 swig -perl5 -I%SIGLIB_PATH%\include -includeall siglib_wrap.i
 
-cl -Od -MDd -DNDEBUG -DWIN32 -D_CONSOLE -DSIGLIB_STATIC_LIB=1 -DNO_STRICT siglib_wrap_wrap.c /link user32.lib %SIGLIB_PATH%\lib\Microsoft\static_library\Debug\siglib.lib c:\Perl\lib\CORE\perl58.lib /DLL /out:siglib_wrap.dll
+cl -Od -MDd -DNDEBUG -DWIN32 -D_CONSOLE -DSIGLIB_STATIC_LIB=1 -DNO_STRICT siglib_wrap_wrap.c /link user32.lib %SIGLIB_PATH%\lib\Microsoft\static_library_64\Debug\siglib.lib c:\Perl\lib\CORE\perl58.lib /DLL /out:siglib_wrap.dll
 
 perl makefile.pl
 

@@ -20,7 +20,7 @@ Optimisation Changes:
   None.
 
 Bug Fixes:
- None.
+ Fixed SUF_WavRead and SUF_WavWrite function naming error
 
 Notes:
   None.
@@ -512,7 +512,8 @@ Additional Functionality:
   SUF_DatReadData, SUF_DatWriteData, SUF_DatReadHeader, SUF_DatWriteHeader
   SUF_SigReadData, SUF_SigWriteData, SUF_SigReadFile, SUF_SigWriteFile
   SUF_XmtReadData
-  SUF_WavReadData, SUF_WavWriteData, SUF_WavReadWord, SUF_WavReadInt, SUF_WavWriteWord, SUF_WavWriteInt
+  SUF_WavReadData, SUF_WavWriteData, SUF_WavReadData16, SUF_WavWriteData16, SUF_WavReadData32, SUF_WavWriteData32
+  SUF_WavReadWord, SUF_WavReadLong, SUF_WavWriteWord, SUF_WavWriteLong
   SUF_WavReadHeader, SUF_WavWriteHeader, SUF_WavDisplayInfo, SUF_WavSetInfo, SUF_WavFileLength, SUF_WavReadFile
   SUF_WavWriteFile, SUF_WavWriteFileScaled
   SUF_CsvReadMatrix

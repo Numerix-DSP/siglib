@@ -14,7 +14,7 @@ copy siglib_wrap.java.i siglib_wrap.i /Y
 
 swig -java -I%SIGLIB_PATH%\include -includeall siglib_wrap.i
 
-cl -Od -MTd -DNDEBUG -DWIN32 -D_CONSOLE -DSIGLIB_STATIC_LIB=1 -DNO_STRICT siglib_wrap_wrap.c /link user32.lib %SIGLIB_PATH%\lib\Microsoft\static_library\Debug\siglib.lib /DLL /out:siglib_wrap.dll
+cl -Od -MTd -DNDEBUG -DWIN32 -D_CONSOLE -DSIGLIB_STATIC_LIB=1 -DNO_STRICT siglib_wrap_wrap.c /link user32.lib %SIGLIB_PATH%\lib\Microsoft\static_library_64\Debug\siglib.lib /DLL /out:siglib_wrap.dll
 
 copy *.dll C:\WINDOWS\system32 /Y
 

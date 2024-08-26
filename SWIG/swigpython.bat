@@ -11,7 +11,7 @@ copy siglib_wrap.python.i siglib_wrap.i /Y
 
 swig -python -I%SIGLIB_PATH%\include -includeall siglib_wrap.i
 
-cl -Od -MD -DNDEBUG -DWIN32 -IC:\Anaconda\include -D_CONSOLE -DSIGLIB_STATIC_LIB=1 -DNO_STRICT siglib_wrap_wrap.c /link user32.lib %SIGLIB_PATH%\lib\Microsoft\static_library\Release\siglib.lib C:\Anaconda\libs\python36.lib /DLL /out:siglib_wrap.dll /NODEFAULTLIB:LIBCMT
+cl -Od -MD -DNDEBUG -DWIN32 -I%USERPROFILE%\anaconda3\include -D_CONSOLE -DSIGLIB_STATIC_LIB=1 -DNO_STRICT siglib_wrap_wrap.c /link user32.lib %SIGLIB_PATH%\lib\Microsoft\static_library_64\Release\siglib.lib %USERPROFILE%\anaconda3\libs\python311.lib /DLL /out:siglib_wrap.dll /NODEFAULTLIB:LIBCMT
 
 del /Q _siglib_wrap.pyd
 ren siglib_wrap.dll _siglib_wrap.pyd
