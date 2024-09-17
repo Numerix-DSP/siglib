@@ -78,6 +78,11 @@ rm -rf src/x64/*
 
 popd
 
+# Clean-up SWIG
+pushd $SIGLIB_PATH/SWIG
+./cleanup.sh
+popd
+
 # Delete all executables
 pushd $SIGLIB_PATH/gnuplot_c/examples
 $SIGLIB_PATH/utils/clean_executables.sh

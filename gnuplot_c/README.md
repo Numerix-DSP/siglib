@@ -16,6 +16,11 @@ Gnuplot. The latest version can be downloaded from here:
 http://sourceforge.net/projects/gnuplotc/. Gnuplot can be downloaded
 from here: http://gnuplot.info/.
 
+This library has been tested with:
+  gnuplot v5.2.8
+  gnuplot v5.4.10
+  gnuplot v6.0.1
+
 HISTORY
 =======
 
