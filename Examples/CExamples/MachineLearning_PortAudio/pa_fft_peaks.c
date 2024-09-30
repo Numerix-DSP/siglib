@@ -1,6 +1,6 @@
 // SigLib PortAudio FFT Example Program
 // This example stores the peaks of a number of FFT output frames and plots the
-// final peak dataset Copyright (c) 2023 Delta Numerix All rights reserved.
+// final peak dataset Copyright (c) 2024 Delta Numerix All rights reserved.
 
 #include <math.h>
 #include <stdio.h>

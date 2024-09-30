@@ -1,6 +1,6 @@
 // SigLib FIR Single Conjugate Zero Notch Filter Example
 // The conjugate zeros will be located on the unit circle at the specified
-// frequency Copyright (c) 2023 Delta Numerix All rights reserved.
+// frequency Copyright (c) 2024 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

@@ -10,9 +10,6 @@
 
 h_GPC_Plot *h2DPlot1, *h2DPlot2;    // Declare plot object
 
-// Declare an arry of fun colours to use
-const char* plotColour[] = {"purple", "green", "blue", "black", "orange", "cyan", "violet", "grey", "magenta", "light-red"};
-
 char graphTitle[40];
 
 double Array[SAMPLE_LENGTH];
@@ -57,25 +54,25 @@ int main()
     sprintf(graphTitle, "Data set %d", j);
 
     if (j == 0) {
-      gpc_plot_2d(h2DPlot1,         // Plot handle
-                  Array,            // Dataset
-                  SAMPLE_LENGTH,    // Number of data points
-                  graphTitle,       // Dataset title
-                  X_MIN,            // Minimum X value
-                  X_MAX,            // Maximum X value
-                  "lines",          // Plot type
-                  plotColour[j],    // Colour
-                  GPC_NEW);         // New plot
+      gpc_plot_2d(h2DPlot1,                                    // Plot handle
+                  Array,                                       // Dataset
+                  SAMPLE_LENGTH,                               // Number of data points
+                  graphTitle,                                  // Dataset title
+                  X_MIN,                                       // Minimum X value
+                  X_MAX,                                       // Maximum X value
+                  "lines",                                     // Plot type
+                  gpcPlotColours[j % GPC_NUM_PLOT_COLOURS],    // Colour
+                  GPC_NEW);                                    // New plot
     } else {
-      gpc_plot_2d(h2DPlot1,         // Plot handle
-                  Array,            // Dataset
-                  SAMPLE_LENGTH,    // Number of data points
-                  graphTitle,       // Dataset title
-                  X_MIN,            // Minimum X value
-                  X_MAX,            // Maximum X value
-                  "lines",          // Plot type
-                  plotColour[j],    // Colour
-                  GPC_ADD);         // Add plot
+      gpc_plot_2d(h2DPlot1,                                    // Plot handle
+                  Array,                                       // Dataset
+                  SAMPLE_LENGTH,                               // Number of data points
+                  graphTitle,                                  // Dataset title
+                  X_MIN,                                       // Minimum X value
+                  X_MAX,                                       // Maximum X value
+                  "lines",                                     // Plot type
+                  gpcPlotColours[j % GPC_NUM_PLOT_COLOURS],    // Colour
+                  GPC_ADD);                                    // Add plot
     }
 
     for (int i = 0; i < SAMPLE_LENGTH; i++) {    // Fill the array
@@ -83,25 +80,25 @@ int main()
     }
 
     if (j == 0) {
-      gpc_plot_2d(h2DPlot2,                // Plot handle
-                  Array,                   // Dataset
-                  SAMPLE_LENGTH,           // Number of data points
-                  graphTitle,              // Dataset title
-                  X_MIN,                   // Minimum X value
-                  X_MAX,                   // Maximum X value
-                  "points pt 7 ps 0.5",    // Plot type
-                  plotColour[j],           // Colour
-                  GPC_NEW);                // New plot
+      gpc_plot_2d(h2DPlot2,                                    // Plot handle
+                  Array,                                       // Dataset
+                  SAMPLE_LENGTH,                               // Number of data points
+                  graphTitle,                                  // Dataset title
+                  X_MIN,                                       // Minimum X value
+                  X_MAX,                                       // Maximum X value
+                  "points pt 7 ps 0.5",                        // Plot type
+                  gpcPlotColours[j % GPC_NUM_PLOT_COLOURS],    // Colour
+                  GPC_NEW);                                    // New plot
     } else {
-      gpc_plot_2d(h2DPlot2,                // Plot handle
-                  Array,                   // Dataset
-                  SAMPLE_LENGTH,           // Number of data points
-                  graphTitle,              // Dataset title
-                  X_MIN,                   // Minimum X value
-                  X_MAX,                   // Maximum X value
-                  "points pt 7 ps 0.5",    // Plot type
-                  plotColour[j],           // Colour
-                  GPC_ADD);                // Add plot
+      gpc_plot_2d(h2DPlot2,                                    // Plot handle
+                  Array,                                       // Dataset
+                  SAMPLE_LENGTH,                               // Number of data points
+                  graphTitle,                                  // Dataset title
+                  X_MIN,                                       // Minimum X value
+                  X_MAX,                                       // Maximum X value
+                  "points pt 7 ps 0.5",                        // Plot type
+                  gpcPlotColours[j % GPC_NUM_PLOT_COLOURS],    // Colour
+                  GPC_ADD);                                    // Add plot
     }
 
     printf("\nHit <Carriage Return> to continue ....\n");

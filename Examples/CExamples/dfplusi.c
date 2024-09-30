@@ -1,5 +1,5 @@
 // SigLib z-Domain Coefficients From Digital Filter Plus Example
-// Copyright (c) 2023 Delta Numerix All rights reserved.
+// Copyright (c) 2024 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

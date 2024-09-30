@@ -31,7 +31,7 @@ Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Delta Numerix All rights reserved.
+Copyright (c) 2024 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Header file for SigLib DSP library
 
@@ -1698,6 +1698,18 @@ void _stdcall SDA_ConvolvePartial(double* SIGLIB_INPUT_PTR_DECL,     // Pointer 
                                   long,                              // Input data length
                                   long);                             // Impulse response length
 
+void _stdcall SDA_ConvolveInitial(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to input array
+                                  double* SIGLIB_INPUT_PTR_DECL,     // Pointer to impulse response data
+                                  double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
+                                  long,                              // Input data length
+                                  long);                             // Impulse response length
+
+double _stdcall SDA_ConvolveIterate(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to input array
+                                    double* SIGLIB_INPUT_PTR_DECL,    // Pointer to impulse response data
+                                    long,                             // Input data length
+                                    long,                             // Impulse response length
+                                    long);                            // Source index
+
 void _stdcall SDA_ConvolveCircular(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to input array
                                    double* SIGLIB_INPUT_PTR_DECL,     // Pointer to impulse response data
                                    double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
@@ -1713,6 +1725,15 @@ void _stdcall SDA_ConvolveLinearComplex(double* SIGLIB_INPUT_PTR_DECL,     // Po
                                         long);                             // Impulse response length
 
 void _stdcall SDA_ConvolvePartialComplex(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to real input array
+                                         double* SIGLIB_INPUT_PTR_DECL,     // Pointer to imaginary input array
+                                         double* SIGLIB_INPUT_PTR_DECL,     // Pointer to real impulse response data
+                                         double* SIGLIB_INPUT_PTR_DECL,     // Pointer to imaginary impulse response data
+                                         double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to real destination array
+                                         double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to imaginary destination array
+                                         long,                              // Input data length
+                                         long);                             // Impulse response length
+
+void _stdcall SDA_ConvolveInitialComplex(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to real input array
                                          double* SIGLIB_INPUT_PTR_DECL,     // Pointer to imaginary input array
                                          double* SIGLIB_INPUT_PTR_DECL,     // Pointer to real impulse response data
                                          double* SIGLIB_INPUT_PTR_DECL,     // Pointer to imaginary impulse response data
@@ -2791,7 +2812,7 @@ long _stdcall SDS_CostasQamDemodulate(double,                            // Sour
                                       long*,                             // Pointer to ELG synchronization delay index
                                       long);                             // ELG output synchronization delay length
 
-#line 3199 "siglib.h"
+#line 3220 "siglib.h"
 // compiler
 long _stdcall SDS_CostasQamDemodulateDebug(double,                            // Source data sample
                                            double*,                           // Pointer to real destination symbol point
@@ -2927,7 +2948,7 @@ long _stdcall SDA_CostasQamDemodulateDebug(double* SIGLIB_INPUT_PTR_DECL,     //
                                            double*,                           // Pointer to debug real filter output
                                            double*,                           // Pointer to debug imaginary filter output
                                            double*);                          // Pointer to debug ELG trigger output
-#line 3335 "siglib.h"
+#line 3356 "siglib.h"
 
 void _stdcall SIF_QpskModulate(double* SIGLIB_OUTPUT_PTR_DECL,    // Carrier table pointer
                                double,                            // Carrier phase increment per sample (radians / 2Ï€)
@@ -3891,6 +3912,22 @@ double _stdcall SDS_InterpolateQuadraticLagrange1D(double,     // y(0) input sam
                                                    double,     // y(2) input sample magnitude
                                                    double);    // Alpha x
 
+void _stdcall SIF_LagrangeFirFilter(double* SIGLIB_OUTPUT_PTR_DECL,    // Filter coefficients array
+                                    double,                            // Delay
+                                    long);                             // Filter length
+
+double SDS_LagrangeInterpolate(double* SIGLIB_INPUT_PTR_DECL,    // Ideal points
+                               double* SIGLIB_INOUT_PTR_DECL,    // Filter coefficients array
+                               double,                           // Delay
+                               long);                            // Filter length
+
+void SDA_LagrangeInterpolate(double* SIGLIB_INPUT_PTR_DECL,     // Ideal points
+                             double* SIGLIB_INPUT_PTR_DECL,     // Delay values
+                             double* SIGLIB_OUTPUT_PTR_DECL,    // Destination array
+                             double* SIGLIB_INOUT_PTR_DECL,     // Filter coefficients array
+                             long,                              // Filter length
+                             long);                             // Array length
+
 // DTMF generation and detection functions - dtmf.c
 
 void _stdcall SIF_DtmfGenerate(double* SIGLIB_OUTPUT_PTR_DECL,    // Generator coefficient look up table pointer
@@ -3963,6 +4000,12 @@ double _stdcall SDA_Min(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source a
 
 double _stdcall SDA_AbsMin(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                            long);                            // Array length
+
+long _stdcall SAI_Max(long* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                      long);                          // Array length
+
+long _stdcall SAI_Min(long* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                      long);                          // Array length
 
 double _stdcall SDA_Middle(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                            long);                            // Array length
@@ -4481,6 +4524,16 @@ long _stdcall SDS_Roots(double,      // a
                         double*);    // Pointer to root # 2
 
 double _stdcall SDS_Factorial(double);    // Input value
+
+void _stdcall SDA_Factorial(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
+                            double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
+                            long);                             // Array length
+
+double _stdcall SDS_BinomialCoefficient(double,     // n
+                                        double);    // k
+
+void _stdcall SDA_BinomialCoefficients(double,                             // n
+                                       double* SIGLIB_OUTPUT_PTR_DECL);    // Pointer to destination array
 
 double _stdcall SDS_Permutations(double n,     // Set size
                                  double k);    // Selection size
@@ -5942,4 +5995,4 @@ void _stdcall SMX_ExtractCategoricalColumn(double* SIGLIB_INPUT_PTR_DECL,    // 
 // Deprecated functionality - these may be removed in a later version
 
 // End of SigLib DSP function section
-#line 6816 "siglib.h"
+#line 6869 "siglib.h"

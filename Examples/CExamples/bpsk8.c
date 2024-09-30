@@ -1,5 +1,5 @@
 // SigLib BPSK With 8KHz Sample Rate Example
-// Copyright (c) 2023 Delta Numerix All rights reserved.
+// Copyright (c) 2024 Delta Numerix All rights reserved.
 
 // Simulating:
 // 600 bps

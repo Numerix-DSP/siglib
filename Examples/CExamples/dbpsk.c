@@ -8,7 +8,7 @@
 // followed by a filter e.g a root raised cosine filter,
 // which can be implemented using the SigLib
 // SIF_RootRaisedCosineFirFilter function.
-// Copyright (c) 2023 Delta Numerix All rights reserved.
+// Copyright (c) 2024 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

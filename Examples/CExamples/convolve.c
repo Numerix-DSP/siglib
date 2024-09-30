@@ -1,5 +1,5 @@
 // SigLib Convolution Example
-// Copyright (c) 2023 Delta Numerix All rights reserved.
+// Copyright (c) 2024 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -110,6 +110,48 @@ int main(void)
               "blue",                                             // Colour
               GPC_NEW);                                           // New graph
   printf("Partially Convolved Data\nPlease hit <Carriage Return> to continue . "
+         ". .");
+  getchar();
+
+  SDA_ConvolveInitial(input,                      // Pointer to input array
+                      impulse,                    // Pointer to impulse response data
+                      dest,                       // Pointer to destination array
+                      INPUT_LENGTH,               // Input data length
+                      PARTIAL_IMPULSE_LENGTH);    // Impulse response length
+
+  printf("\ny(t) = x(t)*h(t)\n");
+  gpc_plot_2d(h2DPlot,                       // Graph handle
+              dest,                          // Dataset
+              INPUT_LENGTH,                  // Dataset length
+              "Partially Convolved Data",    // Dataset title
+              SIGLIB_ZERO,                   // Minimum X value
+              (double)INPUT_LENGTH,          // Maximum X value
+              "lines",                       // Graph type
+              "blue",                        // Colour
+              GPC_NEW);                      // New graph
+  printf("Convolution Of Initial Data (Length of input data array)\nPlease hit <Carriage Return> to continue . "
+         ". .");
+  getchar();
+
+  for (SLArrayIndex_t i = 0; i < INPUT_LENGTH; i++) {
+    dest[i] = SDA_ConvolveIterate(input,                     // Pointer to input array
+                                  impulse,                   // Pointer to impulse response data
+                                  INPUT_LENGTH,              // Input data length
+                                  PARTIAL_IMPULSE_LENGTH,    // Impulse response length
+                                  i);                        // Source index
+  }
+
+  printf("\ny(t) = x(t)*h(t)\n");
+  gpc_plot_2d(h2DPlot,                       // Graph handle
+              dest,                          // Dataset
+              INPUT_LENGTH,                  // Dataset length
+              "Partially Convolved Data",    // Dataset title
+              SIGLIB_ZERO,                   // Minimum X value
+              (double)INPUT_LENGTH,          // Maximum X value
+              "lines",                       // Graph type
+              "blue",                        // Colour
+              GPC_NEW);                      // New graph
+  printf("Iterative convolution Of Initial Data (Length of input data array)\nPlease hit <Carriage Return> to continue . "
          ". .");
   getchar();
 

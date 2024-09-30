@@ -1,5 +1,5 @@
 // SLTest.CPP SigLib DLL Test program
-// Copyright (c) 2023 Delta Numerix All rights reserved.
+// Copyright (c) 2024 Delta Numerix All rights reserved.
 
 // Include files
 #include <afxdlgs.h>

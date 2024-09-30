@@ -1,6 +1,6 @@
 // SigLib Contiguous Resampling Example
 // This program uses a simulated input sample rate of 1.0 Hz
-// Copyright (c) 2023 Delta Numerix All rights reserved.
+// Copyright (c) 2024 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

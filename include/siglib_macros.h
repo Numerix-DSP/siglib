@@ -30,7 +30,7 @@ Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Delta Numerix All rights reserved.
+Copyright (c) 2024 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Macro definitions header file for SigLib DSP library
 
@@ -43,6 +43,10 @@ Update history:
 
 #  ifndef _SIGLIB_MACROS_H
 #    define _SIGLIB_MACROS_H
+
+// Macros to convert from number of samples to sample period and v.v.
+#    define SDS_SamplesToPeriod(samples, fs) ((SLData_t)(((SLData_t)samples) / ((SLData_t)fs)))
+#    define SDS_PeriodToSamples(period, fs) ((SLArrayIndex_t)(((SLData_t)period) * ((SLData_t)fs)))
 
 // Macros to handle standard C rounds down
 // These macros also allow for floating point not quantizing to perfect integer
@@ -82,9 +86,7 @@ Update history:
 #    define SAI_Sign(a) (((a) >= SIGLIB_ZERO) ? SIGLIB_POSITIVE : SIGLIB_NEGATIVE)                        // Returns the sign of a
 #    define SAI_Log2(a) (SAI_RoundToNearest(SDS_Log10((SLData_t)a) * SIGLIB_INV_LOG10_OF_2))              // Returns the nearest integer log2(n)
 #    define SAI_Log4(a) (SAI_RoundToNearest(SDS_Log10((SLData_t)a) * SIGLIB_INV_LOG10_OF_4))              // Returns the nearest integer log4(n)
-#    define SAI_NumberOfElements(a) \
-      ((SLArrayIndex_t)(sizeof((a)) / sizeof((a)[0])))    // Returns the number of
-                                                          // elements in the array
+#    define SAI_NumberOfElements(a) ((SLArrayIndex_t)(sizeof((a)) / sizeof((a)[0])))    // Returns the number of elements in the array
 
 #    define SAI_FftLength(x) (SLArrayIndex_t) pow(SIGLIB_TWO, (const double)x)      // Returns the FFT length for a given log2(FFT length)
 #    define SAI_FftLength4(x) (SLArrayIndex_t) pow(SIGLIB_FOUR, (const double)x)    // Returns the FFT length for a given log4(FFT length)
@@ -219,11 +221,25 @@ Update history:
 
 // Signal generation
 
-#    define SDA_SignalGenerateRamp(Address, Peak, Offset, PhasePtr, ArrayLength)                                                           \
+#    define SDA_SignalGenerateSine(Address, Frequency, Peak, pPhase, ArrayLength)                                                        \
+      {                                                                                                                                  \
+        SLData_t sl_Dummy;                                                                                                               \
+        SDA_SignalGenerate(Address, SIGLIB_SINE_WAVE, SIGLIB_ONE, SIGLIB_FILL, Frequency, SIGLIB_ZERO, SIGLIB_ZERO, SIGLIB_ZERO, pPhase, \
+                           &sl_Dummy, ArrayLength);                                                                                      \
+      }
+
+#    define SDA_SignalGenerateCosine(Address, Frequency, Peak, pPhase, ArrayLength)                                                        \
+      {                                                                                                                                    \
+        SLData_t sl_Dummy;                                                                                                                 \
+        SDA_SignalGenerate(Address, SIGLIB_COSINE_WAVE, SIGLIB_ONE, SIGLIB_FILL, Frequency, SIGLIB_ZERO, SIGLIB_ZERO, SIGLIB_ZERO, pPhase, \
+                           &sl_Dummy, ArrayLength);                                                                                        \
+      }
+
+#    define SDA_SignalGenerateRamp(Address, Peak, Offset, pPhase, ArrayLength)                                                             \
       {                                                                                                                                    \
         SLData_t sl_Dummy;                                                                                                                 \
         SDA_SignalGenerate(Address, SIGLIB_TRIANGLE_WAVE, Peak, SIGLIB_FILL, (SIGLIB_HALF / ((SLData_t)ArrayLength)), Offset, SIGLIB_ZERO, \
-                           SIGLIB_ZERO, PhasePtr, &sl_Dummy, ArrayLength);                                                                 \
+                           SIGLIB_ZERO, pPhase, &sl_Dummy, ArrayLength);                                                                   \
       }
 
 #    define SDA_SignalGenerateImpulse(Address, Peak, ArrayLength)                                                                         \
@@ -286,14 +302,13 @@ Update history:
 
 // Buffer / matrix manipulation
 
-#    define SDA_Operate(IPtr1, IPtr2, OPtr, Operation, ArrayLength) \
-      {                                                             \
-        long SIGLIB_i;                                              \
-        for (SIGLIB_i = 0; SIGLIB_i < ArrayLength; SIGLIB_i++)      \
-          *OPtr++ = (*IPtr1++)Operation(*IPtr2++);                  \
-        IPtr1 -= ArrayLength;                                       \
-        IPtr2 -= ArrayLength;                                       \
-        OPtr -= ArrayLength;                                        \
+#    define SDA_Operate(IPtr1, IPtr2, OPtr, Operation, ArrayLength)           \
+      {                                                                       \
+        for (SLArrayIndex_t SIGLIB_i = 0; SIGLIB_i < ArrayLength; SIGLIB_i++) \
+          *OPtr++ = (*IPtr1++)Operation(*IPtr2++);                            \
+        IPtr1 -= ArrayLength;                                                 \
+        IPtr2 -= ArrayLength;                                                 \
+        OPtr -= ArrayLength;                                                  \
       }
 
 // Memory allocation functions

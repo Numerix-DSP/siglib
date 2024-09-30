@@ -30,7 +30,7 @@ Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Delta Numerix All rights reserved.
+Copyright (c) 2024 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: DSP minimum, max, peak hold functions, for SigLib DSP library.
 
@@ -201,6 +201,58 @@ SLData_t SIGLIB_FUNC_DECL SDA_AbsMin(const SLData_t* SIGLIB_PTR_DECL pSrc, const
 
   return (Min);
 }    // End of SDA_AbsMin()
+
+/********************************************************
+ * Function: SAI_Min
+ *
+ * Parameters:
+ *   const SLArrayIndex_t * SIGLIB_PTR_DECL pSrc,
+ *   const SLArrayIndex_t arrayLength
+ *
+ * Return value:
+ *   Minimum value in an array.
+ *
+ * Description:
+ *   Return the minimum value in an array of SLArrayIndex_t.
+ *
+ ********************************************************/
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SAI_Min(const SLArrayIndex_t* SIGLIB_PTR_DECL pSrc, const SLArrayIndex_t arrayLength)
+{
+  SLArrayIndex_t result = pSrc[0];
+  for (SLArrayIndex_t i = 1; i < arrayLength; i++) {
+    if (pSrc[i] < result) {
+      result = pSrc[i];
+    }
+  }
+  return result;
+}    // End of SAI_Min()
+
+/********************************************************
+ * Function: SAI_Max
+ *
+ * Parameters:
+ *   const SLArrayIndex_t * SIGLIB_PTR_DECL pSrc,
+ *   const SLArrayIndex_t arrayLength
+ *
+ * Return value:
+ *   Maximum value in an array.
+ *
+ * Description:
+ *   Return the maximum value in an array of SLArrayIndex_t.
+ *
+ ********************************************************/
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SAI_Max(const SLArrayIndex_t* SIGLIB_PTR_DECL pSrc, const SLArrayIndex_t arrayLength)
+{
+  SLArrayIndex_t result = pSrc[0];
+  for (SLArrayIndex_t i = 1; i < arrayLength; i++) {
+    if (pSrc[i] > result) {
+      result = pSrc[i];
+    }
+  }
+  return result;
+}    // End of SAI_Max()
 
 /********************************************************
  * Function: SDA_Middle

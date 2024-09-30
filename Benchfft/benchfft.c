@@ -14,7 +14,7 @@ benchmark results.
 
 This file uses DOS format end of line characters.
 
-Copyright (c) 2023 Delta Numerix All rights reserved.
+Copyright (c) 2024 Delta Numerix All rights reserved.
 
 Support for SigLib is available via Email: support@numerix.co.uk
 For further information about the SigLib library please refer to the

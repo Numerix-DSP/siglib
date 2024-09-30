@@ -9,7 +9,7 @@
 // This code is based on the equations in Robert Bristow-Johnson's Audio
 // Equalizer Cookbook:
 //  https://webaudio.github.io/Audio-EQ-Cookbook/audio-eq-cookbook.html.
-// Copyright (c) 2023 Delta Numerix All rights reserved.
+// Copyright (c) 2024 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

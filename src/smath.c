@@ -30,7 +30,7 @@ Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Delta Numerix All rights reserved.
+Copyright (c) 2024 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: DSP basic math functions, for SigLib DSP library.
 
@@ -1268,8 +1268,6 @@ SLData_t SIGLIB_FUNC_DECL SDS_Factorial(const SLData_t Input)
 
   if (Input < SIGLIB_ZERO) {
     return (SIGLIB_ZERO);
-  } else if ((Input == SIGLIB_ZERO) || (Input == SIGLIB_ONE)) {
-    return (SIGLIB_ONE);
   }
   while (i <= (Input + SIGLIB_MIN_THRESHOLD)) {    // Ensure that input doesn't round down
     Factorial *= i;
@@ -1278,6 +1276,129 @@ SLData_t SIGLIB_FUNC_DECL SDS_Factorial(const SLData_t Input)
 
   return (Factorial);
 }    // End of SDS_Factorial()
+
+/********************************************************
+ * Function: SDA_Factorial()
+ *
+ * Parameters:
+ *   const SLData_t *pSrc
+ *   SLData_t *pDst
+ *   SLArrayIndex_t arrayLength
+ *
+ * Return value:
+ *   void
+ *
+ * Description: Computes the factorial of the numbers in
+ *  the source array
+ *
+ ********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_Factorial(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t arrayLength)
+{
+  for (SLArrayIndex_t idx = 0; idx < arrayLength; idx++) {
+    SLData_t i = SIGLIB_TWO;
+    SLData_t Factorial = SIGLIB_ONE;
+    SLData_t Input = pSrc[idx];
+
+    if (Input < SIGLIB_ZERO) {
+      pDst[idx] = SIGLIB_ZERO;
+    } else {
+      while (i <= (Input + SIGLIB_MIN_THRESHOLD)) {    // Ensure that input doesn't round down
+        Factorial *= i;
+        i++;
+      }
+    }
+    pDst[idx] = Factorial;
+  }
+}    // End of SDA_Factorial()
+
+/********************************************************
+ * Function: SDS_BinomialCoefficient()
+ *
+ * Parameters:
+ *   const SLData_t n
+ *   const SLData_t k
+ *
+ * Return value:
+ *   SLData_t factorial
+ *
+ * Description: Returns the binomial coefficient of:
+ *  C(n, k) = \frac{n!}{k! \cdot (n-k)!}
+ *
+ ********************************************************/
+
+SLData_t SIGLIB_FUNC_DECL SDS_BinomialCoefficient(const SLData_t n, const SLData_t k)
+{
+  SLData_t local_k = k;
+
+  if ((local_k > n) || (n < SIGLIB_ZERO)) {
+    return SIGLIB_ZERO;
+  }
+
+  // Take advantage of symmetry property: C(n, k) = C(n, n-k)
+  if (local_k > n - local_k) {
+    local_k = n - local_k;
+  }
+
+  // Compute the binomial coefficient using the factorial function
+  SLData_t numerator = SIGLIB_ONE;
+  SLData_t denominator = SIGLIB_ONE;
+
+  SLData_t i = SIGLIB_ZERO;
+  while (i < local_k) {
+    numerator *= (n - i);
+    denominator *= (i + 1);
+    i += SIGLIB_ONE;
+  }
+
+  return (numerator / denominator);
+}    // End of SDS_BinomialCoefficient()
+
+/********************************************************
+ * Function: SDA_BinomialCoefficients()
+ *
+ * Parameters:
+ *   const SLData_t n
+ *   SLData_t *pDst
+ *
+ * Return value:
+ *   void
+ *
+ * Description: Computes the binomial coefficients for all k <= n of:
+ *  C(n, k) = \frac{n!}{k! \cdot (n-k)!}
+ *  i.e. this function computes a row of Pascal's triangle,
+ *  where each row is of length (n+1)
+ *
+ ********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_BinomialCoefficients(const SLData_t n, SLData_t* SIGLIB_PTR_DECL pDst)
+{
+  SLArrayIndex_t idx = 0;
+
+  for (SLData_t k = SIGLIB_ZERO; k <= n + SIGLIB_MIN_THRESHOLD; k += SIGLIB_ONE) {    // Ensure that input doesn't round down
+    if ((k > n) || (n < SIGLIB_ZERO)) {
+      pDst[idx++] = SIGLIB_ZERO;
+    } else {
+      // Take advantage of symmetry property: C(n, k) = C(n, n-k)
+      SLData_t local_k = k;
+      if (local_k > n - local_k) {
+        local_k = n - local_k;
+      }
+
+      // Compute the binomial coefficient using the factorial function
+      SLData_t numerator = SIGLIB_ONE;
+      SLData_t denominator = SIGLIB_ONE;
+
+      SLData_t i = SIGLIB_ZERO;
+      while (i < local_k) {
+        numerator *= (n - i);
+        denominator *= (i + 1);
+        i += SIGLIB_ONE;
+      }
+      pDst[idx++] = (numerator / denominator);
+    }
+  }
+}    // End of SDA_BinomialCoefficients()
 
 /********************************************************
  * Function: SDS_Permutations()

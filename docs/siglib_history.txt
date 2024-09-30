@@ -9,6 +9,13 @@ Additional Functionality:
   Code formatting changed to clang-format, based on LLVM style
   Applications/SystemAnalyzer added
   Applications/DigitalFilterPlus added
+  SAI_Min and SAI_Max
+  SIF_LagrangeFirFilter, SDS_LagrangeInterpolate and SDA_LagrangeInterpolate
+  SDA_Factorial, SDS_BinomialCoefficient and SDA_BinomialCoefficients
+  SDA_ConvolveInitial and SDA_ConvolveInitialComplex
+  SDA_ConvolveIterate
+  SDA_SignalGenerateSine and SDA_SignalGenerateCosine
+  SDS_SamplesToPeriod and SDS_PeriodToSamples
 
 Operational Changes:
   SIF_GraphicalEqualizerFilterBank changed to SIF_GraphicEqualizerFilterBank.
@@ -2257,4 +2264,4 @@ Operational Changes:
 	Started to integrate functions into library
 
 DFPlus, Digital Filter Plus, SigLib are trademarks of Delta Numerix
-Copyright (c) 2023 Delta Numerix
+Copyright (c) 2024 Delta Numerix

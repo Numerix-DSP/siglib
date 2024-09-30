@@ -1,5 +1,5 @@
 // SigLib Complex Convolution Examples
-// Copyright (c) 2023 Delta Numerix All rights reserved.
+// Copyright (c) 2024 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
@@ -211,6 +211,38 @@ int main(void)
               "red",                                              // Colour
               GPC_ADD);                                           // New graph
   printf("Partially Convolved Data\nPlease hit <Carriage Return> to continue . "
+         ". .");
+  getchar();
+
+  SDA_ConvolveInitialComplex(input_re,                   // Pointer to real input array
+                             input_im,                   // Pointer to imag input array
+                             impulse_re,                 // Pointer to real impulse response data
+                             impulse_im,                 // Pointer to imag impulse response data
+                             dest_re,                    // Pointer to real destination array
+                             dest_im,                    // Pointer to imag destination array
+                             INPUT_LENGTH,               // Input data length
+                             PARTIAL_IMPULSE_LENGTH);    // Impulse response length
+
+  printf("\ny(t) = x(t)*h(t)\n");
+  gpc_plot_2d(h2DPlot,                              // Graph handle
+              dest_re,                              // Dataset
+              INPUT_LENGTH,                         // Dataset length
+              "Partially Convolved Data (Real)",    // Dataset title
+              SIGLIB_ZERO,                          // Minimum X value
+              (double)INPUT_LENGTH,                 // Maximum X value
+              "lines",                              // Graph type
+              "blue",                               // Colour
+              GPC_NEW);                             // New graph
+  gpc_plot_2d(h2DPlot,                              // Graph handle
+              dest_im,                              // Dataset
+              INPUT_LENGTH,                         // Dataset length
+              "Partially Convolved Data (Imag)",    // Dataset title
+              SIGLIB_ZERO,                          // Minimum X value
+              (double)INPUT_LENGTH,                 // Maximum X value
+              "lines",                              // Graph type
+              "red",                                // Colour
+              GPC_ADD);                             // New graph
+  printf("Convolution Of Initial Data (Length of input data array)\nPlease hit <Carriage Return> to continue . "
          ". .");
   getchar();
 

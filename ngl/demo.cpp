@@ -1,6 +1,6 @@
 // Numerix Graphics Library
 // Demo App
-// Copyright (c) 2023 Delta Numerix, All rights reserved.
+// Copyright (c) 2024 Delta Numerix, All rights reserved.
 
 // Include files
 // For compilers that support precompilation, includes "wx/wx.h".

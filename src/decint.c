@@ -30,7 +30,7 @@ Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Delta Numerix All rights reserved.
+Copyright (c) 2024 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: SigLib DSP library decimation and interpolation routines.
 
@@ -1256,3 +1256,104 @@ SLData_t SIGLIB_FUNC_DECL SDS_InterpolateQuadraticLagrange1D(const SLData_t inpu
 
   return ((inputY0 * h2) + (inputY1 * +h1) + (inputY2 * h0));
 }    // End of SDS_InterpolateQuadraticLagrange1D()
+
+/********************************************************
+ * Function: SIF_LagrangeFirFilter
+ *
+ * Parameters:
+ *   SLData_t *pFilterCoefficients,
+ *   const SLData_t delay,
+ *   const SLArrayIndex_t filterLength)
+ *
+ * Return value:
+ *   void
+ *
+ * Description:
+ *   This function returns a length N array of FIR filter
+ *   coefficients for a Lagrange interpolator
+ *
+ ********************************************************/
+
+void SIGLIB_FUNC_DECL SIF_LagrangeFirFilter(SLData_t* SIGLIB_PTR_DECL pFilterCoefficients, const SLData_t delay, const SLArrayIndex_t filterLength)
+
+{
+  for (SLArrayIndex_t i = 0; i < filterLength; i++) {
+    pFilterCoefficients[i] = SIGLIB_ONE;
+  }
+
+  for (SLArrayIndex_t i = 0; i < filterLength; i++) {
+    for (SLArrayIndex_t j = 0; j < filterLength; j++) {
+      if (j != i) {
+        pFilterCoefficients[j] *= (delay - i) / (j - i);
+      }
+    }
+  }
+}    // End of SIF_LagrangeFirFilter()
+
+/********************************************************
+ * Function: SDS_LagrangeInterpolate
+ *
+ * Parameters:
+ *   SLData_t* SIGLIB_PTR_DECL pSrcPoints,
+ *   SLData_t* SIGLIB_PTR_DECL pFilterCoefficients,
+ *   SLData_t delay,
+ *   SLArrayIndex_t filterLength)
+ *
+ * Return value:
+ *   Interpolated value
+ *
+ * Description:
+ *   This function perform Lagrange Interpolation on the
+ *   dataset at the given delay point.
+ *
+ ********************************************************/
+
+SLData_t SDS_LagrangeInterpolate(const SLData_t* SIGLIB_PTR_DECL pSrcPoints, SLData_t* SIGLIB_PTR_DECL pFilterCoefficients, const SLData_t delay,
+                                 const SLArrayIndex_t filterLength)
+
+{
+  SLData_t interpValue = SIGLIB_ZERO;
+  SIF_LagrangeFirFilter(pFilterCoefficients, delay, filterLength);
+
+  for (SLArrayIndex_t i = 0; i < filterLength; i++) {
+    interpValue += pSrcPoints[i] * pFilterCoefficients[i];
+  }
+
+  return interpValue;
+}    // End of SDS_LagrangeInterpolate()
+
+/********************************************************
+ * Function: SDA_LagrangeInterpolate
+ *
+ * Parameters:
+ *   const SLData_t* SIGLIB_PTR_DECL pSrcPoints,
+ *   SLData_t* SIGLIB_PTR_DECL pDst,
+ *   SLData_t* SIGLIB_PTR_DECL pFilterCoefficients,
+ *   const SLArrayIndex_t filterLength,
+ *   const SLArrayIndex_t arrayLength)
+ *
+ * Return value:
+ *   void
+ *
+ * Description:
+ *   This function perform Lagrange Interpolation on the
+ *   dataset at the given delay points, in the source array.
+ *
+ ********************************************************/
+
+void SDA_LagrangeInterpolate(const SLData_t* SIGLIB_PTR_DECL pSrcPoints, const SLData_t* SIGLIB_PTR_DECL pInterpPoints,
+                             SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pFilterCoefficients, const SLArrayIndex_t filterLength,
+                             const SLArrayIndex_t arrayLength)
+
+{
+  for (SLArrayIndex_t j = 0; j < arrayLength; j++) {
+    SLData_t interpValue = SIGLIB_ZERO;
+    SIF_LagrangeFirFilter(pFilterCoefficients, pInterpPoints[j], filterLength);
+
+    for (SLArrayIndex_t i = 0; i < filterLength; i++) {
+      interpValue += pSrcPoints[i] * pFilterCoefficients[i];
+    }
+
+    pDst[j] = interpValue;
+  }
+}    // End of SDA_LagrangeInterpolate()

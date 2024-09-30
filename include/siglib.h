@@ -30,7 +30,7 @@ Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Delta Numerix All rights reserved.
+Copyright (c) 2024 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Header file for SigLib DSP library
 
@@ -2118,6 +2118,18 @@ void SIGLIB_FUNC_DECL SDA_ConvolvePartial(const SLData_t* SIGLIB_INPUT_PTR_DECL,
                                           const SLArrayIndex_t,                     // Input data length
                                           const SLArrayIndex_t);                    // Impulse response length
 
+void SIGLIB_FUNC_DECL SDA_ConvolveInitial(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to input array
+                                          const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to impulse response data
+                                          SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
+                                          const SLArrayIndex_t,                     // Input data length
+                                          const SLArrayIndex_t);                    // Impulse response length
+
+SLData_t SIGLIB_FUNC_DECL SDA_ConvolveIterate(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to input array
+                                              const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to impulse response data
+                                              const SLArrayIndex_t,                     // Input data length
+                                              const SLArrayIndex_t,                     // Impulse response length
+                                              const SLArrayIndex_t);                    // Source index
+
 void SIGLIB_FUNC_DECL SDA_ConvolveCircular(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to input array
                                            const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to impulse response data
                                            SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
@@ -2133,6 +2145,15 @@ void SIGLIB_FUNC_DECL SDA_ConvolveLinearComplex(const SLData_t* SIGLIB_INPUT_PTR
                                                 const SLArrayIndex_t);                    // Impulse response length
 
 void SIGLIB_FUNC_DECL SDA_ConvolvePartialComplex(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to real input array
+                                                 const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to imaginary input array
+                                                 const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to real impulse response data
+                                                 const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to imaginary impulse response data
+                                                 SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to real destination array
+                                                 SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to imaginary destination array
+                                                 const SLArrayIndex_t,                     // Input data length
+                                                 const SLArrayIndex_t);                    // Impulse response length
+
+void SIGLIB_FUNC_DECL SDA_ConvolveInitialComplex(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to real input array
                                                  const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to imaginary input array
                                                  const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to real impulse response data
                                                  const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to imaginary impulse response data
@@ -4312,6 +4333,22 @@ SLData_t SIGLIB_FUNC_DECL SDS_InterpolateQuadraticLagrange1D(const SLData_t,    
                                                              const SLData_t,     // y(2) input sample magnitude
                                                              const SLData_t);    // Alpha x
 
+void SIGLIB_FUNC_DECL SIF_LagrangeFirFilter(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Filter coefficients array
+                                            const SLData_t,                      // Delay
+                                            const SLArrayIndex_t);               // Filter length
+
+SLData_t SDS_LagrangeInterpolate(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Ideal points
+                                 SLData_t* SIGLIB_INOUT_PTR_DECL,          // Filter coefficients array
+                                 const SLData_t,                           // Delay
+                                 const SLArrayIndex_t);                    // Filter length
+
+void SDA_LagrangeInterpolate(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Ideal points
+                             const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Delay values
+                             SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Destination array
+                             SLData_t* SIGLIB_INOUT_PTR_DECL,          // Filter coefficients array
+                             const SLArrayIndex_t,                     // Filter length
+                             const SLArrayIndex_t);                    // Array length
+
 // DTMF generation and detection functions - dtmf.c
 
 void SIGLIB_FUNC_DECL SIF_DtmfGenerate(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Generator coefficient look up table pointer
@@ -4384,6 +4421,12 @@ SLData_t SIGLIB_FUNC_DECL SDA_Min(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // P
 
 SLData_t SIGLIB_FUNC_DECL SDA_AbsMin(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                      const SLArrayIndex_t);                    // Array length
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SAI_Max(const SLArrayIndex_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                                        const SLArrayIndex_t);                          // Array length
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SAI_Min(const SLArrayIndex_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                                        const SLArrayIndex_t);                          // Array length
 
 SLData_t SIGLIB_FUNC_DECL SDA_Middle(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                      const SLArrayIndex_t);                    // Array length
@@ -4916,6 +4959,16 @@ SLError_t SIGLIB_FUNC_DECL SDS_Roots(const SLData_t,    // a
                                      SLData_t*);        // Pointer to root # 2
 
 SLData_t SIGLIB_FUNC_DECL SDS_Factorial(const SLData_t);    // Input value
+
+void SIGLIB_FUNC_DECL SDA_Factorial(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                                    SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
+                                    const SLArrayIndex_t);                    // Array length
+
+SLData_t SIGLIB_FUNC_DECL SDS_BinomialCoefficient(const SLData_t,     // n
+                                                  const SLData_t);    // k
+
+void SIGLIB_FUNC_DECL SDA_BinomialCoefficients(const SLData_t,                       // n
+                                               SLData_t* SIGLIB_OUTPUT_PTR_DECL);    // Pointer to destination array
 
 SLData_t SIGLIB_FUNC_DECL SDS_Permutations(const SLData_t n,     // Set size
                                            const SLData_t k);    // Selection size

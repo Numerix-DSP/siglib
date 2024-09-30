@@ -1,5 +1,5 @@
 // .DEF file generator. Takes functionList.txt and creates siglib.def
-// Copyright (c) 2023 Delta Numerix All rights reserved.
+// Copyright (c) 2024 Delta Numerix All rights reserved.
 
 // Include files
 
@@ -49,7 +49,7 @@ Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 ;\r\n\
-;Copyright (C) 2023 Delta Numerix All rights reserved.\r\n\
+;Copyright (c) 2024 Delta Numerix All rights reserved.\r\n\
 ;---------------------------------------------------------------------------\r\n\
 ;Description: DLL function definition file for SigLib DSP library\r\n\
 ;\r\n\

@@ -1,5 +1,5 @@
 // SigLib - Program to read .dat file and generate a spectrogram
-// Copyright (c) 2023 Delta Numerix All rights reserved.
+// Copyright (c) 2024 Delta Numerix All rights reserved.
 
 // Include files
 #include <math.h>

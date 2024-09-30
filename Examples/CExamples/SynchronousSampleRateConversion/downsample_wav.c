@@ -1,5 +1,5 @@
 // SigLib Down Sample Rate Conversion Example
-// Copyright (c) 2023 Delta Numerix All rights reserved.
+// Copyright (c) 2024 Delta Numerix All rights reserved.
 
 // This example down-samples the .wav file from 48 kHz to 16 kHz
 // Note the low-pass filter is designed around the original sample rate (48

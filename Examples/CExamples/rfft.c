@@ -3,7 +3,7 @@
 // (N/2)+1 long. The reason for this is that the results in bins 0 and N/2 are
 // purely real. The results are plotted on the screen and also written to the
 // log file. The FFT is 16 samples long and the data in the log file is stored
-// on two lines of 8 for each result. Copyright (c) 2023 Delta Numerix All
+// on two lines of 8 for each result. Copyright (c) 2024 Delta Numerix All
 // rights reserved.
 
 // Include files

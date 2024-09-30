@@ -1,6 +1,6 @@
 // SigLib - DTMF Detection Example
 // This file reads some dtmf tones from a .WAV file and prints the results on
-// the screen Copyright (c) 2023 Delta Numerix All rights reserved.
+// the screen Copyright (c) 2024 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

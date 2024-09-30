@@ -1,6 +1,6 @@
 // SigLib - Program to read vibration data file and generate an order analysis
 // This program re-orders the data into an ordergram
-// Copyright (c) 2023 Delta Numerix All rights reserved.
+// Copyright (c) 2024 Delta Numerix All rights reserved.
 
 // Include files
 #include <math.h>
@@ -49,8 +49,6 @@
 // Declare global variables and arrays
 static SLData_t LookUpTablePhaseGain;
 static SLData_t SincLUT[SINC_LUT_LENGTH];
-
-static char* plotColour[] = {"purple", "green", "blue", "black", "orange", "cyan", "violet", "grey", "magenta", "light-red"};
 
 static char Filename[80];
 
@@ -296,25 +294,25 @@ int main(int argc, char* argv[])
         PlotArray[j] = *(pOrderArray + (j * NUMBER_OF_ORDERS) + i);
       }
       if (i == 0) {
-        gpc_plot_2d(hOrderPlot,                   // Graph handle
-                    PlotArray,                    // Dataset
-                    FrameNumber,                  // Dataset length
-                    "Order results",              // Dataset title
-                    SIGLIB_ZERO,                  // Minimum X value
-                    (double)(FrameNumber - 1),    // Maximum X value
-                    "lines",                      // Graph type
-                    plotColour[i],                // Colour
-                    GPC_NEW);                     // New graph
+        gpc_plot_2d(hOrderPlot,                                  // Graph handle
+                    PlotArray,                                   // Dataset
+                    FrameNumber,                                 // Dataset length
+                    "Order results",                             // Dataset title
+                    SIGLIB_ZERO,                                 // Minimum X value
+                    (double)(FrameNumber - 1),                   // Maximum X value
+                    "lines",                                     // Graph type
+                    gpcPlotColours[i % GPC_NUM_PLOT_COLOURS],    // Colour
+                    GPC_NEW);                                    // New graph
       } else {
-        gpc_plot_2d(hOrderPlot,                   // Graph handle
-                    PlotArray,                    // Dataset
-                    FrameNumber,                  // Dataset length
-                    "Order results",              // Dataset title
-                    SIGLIB_ZERO,                  // Minimum X value
-                    (double)(FrameNumber - 1),    // Maximum X value
-                    "lines",                      // Graph type
-                    plotColour[i],                // Colour
-                    GPC_ADD);                     // New graph
+        gpc_plot_2d(hOrderPlot,                                  // Graph handle
+                    PlotArray,                                   // Dataset
+                    FrameNumber,                                 // Dataset length
+                    "Order results",                             // Dataset title
+                    SIGLIB_ZERO,                                 // Minimum X value
+                    (double)(FrameNumber - 1),                   // Maximum X value
+                    "lines",                                     // Graph type
+                    gpcPlotColours[i % GPC_NUM_PLOT_COLOURS],    // Colour
+                    GPC_ADD);                                    // New graph
       }
     } else {    // Display speed on x-axis
       SLData_t PlotArray[500];
@@ -323,25 +321,25 @@ int main(int argc, char* argv[])
         PlotArray[j] = *(pOrderArray + (j * NUMBER_OF_ORDERS) + i);
       }
       if (i == 0) {
-        gpc_plot_2d(hOrderPlot,                   // Graph handle
-                    PlotArray,                    // Dataset
-                    FrameNumber,                  // Dataset length
-                    "Order results",              // Dataset title
-                    SIGLIB_ZERO,                  // Minimum X value
-                    (double)(FrameNumber - 1),    // Maximum X value
-                    "lines",                      // Graph type
-                    plotColour[i],                // Colour
-                    GPC_NEW);                     // New graph
+        gpc_plot_2d(hOrderPlot,                                  // Graph handle
+                    PlotArray,                                   // Dataset
+                    FrameNumber,                                 // Dataset length
+                    "Order results",                             // Dataset title
+                    SIGLIB_ZERO,                                 // Minimum X value
+                    (double)(FrameNumber - 1),                   // Maximum X value
+                    "lines",                                     // Graph type
+                    gpcPlotColours[i % GPC_NUM_PLOT_COLOURS],    // Colour
+                    GPC_NEW);                                    // New graph
       } else {
-        gpc_plot_2d(hOrderPlot,                   // Graph handle
-                    PlotArray,                    // Dataset
-                    FrameNumber,                  // Dataset length
-                    "Order results",              // Dataset title
-                    SIGLIB_ZERO,                  // Minimum X value
-                    (double)(FrameNumber - 1),    // Maximum X value
-                    "lines",                      // Graph type
-                    plotColour[i],                // Colour
-                    GPC_ADD);                     // New graph
+        gpc_plot_2d(hOrderPlot,                                  // Graph handle
+                    PlotArray,                                   // Dataset
+                    FrameNumber,                                 // Dataset length
+                    "Order results",                             // Dataset title
+                    SIGLIB_ZERO,                                 // Minimum X value
+                    (double)(FrameNumber - 1),                   // Maximum X value
+                    "lines",                                     // Graph type
+                    gpcPlotColours[i % GPC_NUM_PLOT_COLOURS],    // Colour
+                    GPC_ADD);                                    // New graph
       }
     }
   }

@@ -1,5 +1,5 @@
 # SigLib Perl Example Program
-# Copyright (C) 2023 Delta Numerix
+# Copyright (c) 2024 Delta Numerix
 
 use siglib_wrap;
 

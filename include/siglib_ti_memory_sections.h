@@ -29,7 +29,7 @@ Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2023 Delta Numerix All rights reserved.
+Copyright (c) 2024 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: SigLib function memory section definition file for TI compilers
     This file includes a memory section definition line for each function in
@@ -159,6 +159,9 @@ Description: SigLib function memory section definition file for TI compilers
 #        pragma CODE_SECTION(SDS_Pid, ".text")
 #        pragma CODE_SECTION(SDA_ConvolveCircular, ".text")
 #        pragma CODE_SECTION(SDA_ConvolveCircularComplex, ".text")
+#        pragma CODE_SECTION(SDA_ConvolveInitial, ".text")
+#        pragma CODE_SECTION(SDA_ConvolveInitialComplex, ".text")
+#        pragma CODE_SECTION(SDA_ConvolveIterate, ".text")
 #        pragma CODE_SECTION(SDA_ConvolveLinear, ".text")
 #        pragma CODE_SECTION(SDA_ConvolveLinearComplex, ".text")
 #        pragma CODE_SECTION(SDA_ConvolvePartial, ".text")
@@ -191,6 +194,7 @@ Description: SigLib function memory section definition file for TI compilers
 #        pragma CODE_SECTION(SDA_InterpolateLinear1D, ".text")
 #        pragma CODE_SECTION(SDA_InterpolateLinear2D, ".text")
 #        pragma CODE_SECTION(SDA_InterpolateSinc1D, ".text")
+#        pragma CODE_SECTION(SDA_LagrangeInterpolate, ".text")
 #        pragma CODE_SECTION(SDA_ResampleLinear, ".text")
 #        pragma CODE_SECTION(SDA_ResampleLinearContiguous, ".text")
 #        pragma CODE_SECTION(SDA_ResampleLinearNSamples, ".text")
@@ -200,12 +204,14 @@ Description: SigLib function memory section definition file for TI compilers
 #        pragma CODE_SECTION(SDS_InterpolateQuadratic1D, ".text")
 #        pragma CODE_SECTION(SDS_InterpolateQuadraticBSpline1D, ".text")
 #        pragma CODE_SECTION(SDS_InterpolateQuadraticLagrange1D, ".text")
+#        pragma CODE_SECTION(SDS_LagrangeInterpolate, ".text")
 #        pragma CODE_SECTION(SIF_Decimate, ".text")
 #        pragma CODE_SECTION(SIF_FilterAndDecimate, ".text")
 #        pragma CODE_SECTION(SIF_Interpolate, ".text")
 #        pragma CODE_SECTION(SIF_InterpolateAndFilter, ".text")
 #        pragma CODE_SECTION(SIF_InterpolateSinc1D, ".text")
 #        pragma CODE_SECTION(SIF_InterpolateWindowedSinc1D, ".text")
+#        pragma CODE_SECTION(SIF_LagrangeFirFilter, ".text")
 #        pragma CODE_SECTION(SIF_ResampleLinearContiguous, ".text")
 #        pragma CODE_SECTION(SIF_ResampleSinc, ".text")
 #        pragma CODE_SECTION(SIF_ResampleSincContiguous, ".text")
@@ -702,6 +708,8 @@ Description: SigLib function memory section definition file for TI compilers
 #        pragma CODE_SECTION(SMX_SwapColumns, ".text")
 #        pragma CODE_SECTION(SMX_SwapRows, ".text")
 #        pragma CODE_SECTION(SMX_Transpose, ".text")
+#        pragma CODE_SECTION(SAI_Max, ".text")
+#        pragma CODE_SECTION(SAI_Min, ".text")
 #        pragma CODE_SECTION(SDA_AbsMax, ".text")
 #        pragma CODE_SECTION(SDA_AbsMax2, ".text")
 #        pragma CODE_SECTION(SDA_AbsMaxIndex, ".text")
@@ -985,6 +993,7 @@ Description: SigLib function memory section definition file for TI compilers
 #        pragma CODE_SECTION(SDA_Add3, ".text")
 #        pragma CODE_SECTION(SDA_Add4, ".text")
 #        pragma CODE_SECTION(SDA_Add5, ".text")
+#        pragma CODE_SECTION(SDA_BinomialCoefficients, ".text")
 #        pragma CODE_SECTION(SDA_ComplexDivide2, ".text")
 #        pragma CODE_SECTION(SDA_ComplexDotProduct, ".text")
 #        pragma CODE_SECTION(SDA_ComplexInverse, ".text")
@@ -996,6 +1005,7 @@ Description: SigLib function memory section definition file for TI compilers
 #        pragma CODE_SECTION(SDA_Difference, ".text")
 #        pragma CODE_SECTION(SDA_Divide, ".text")
 #        pragma CODE_SECTION(SDA_Divide2, ".text")
+#        pragma CODE_SECTION(SDA_Factorial, ".text")
 #        pragma CODE_SECTION(SDA_Inverse, ".text")
 #        pragma CODE_SECTION(SDA_Multiply, ".text")
 #        pragma CODE_SECTION(SDA_Multiply2, ".text")
@@ -1014,6 +1024,7 @@ Description: SigLib function memory section definition file for TI compilers
 #        pragma CODE_SECTION(SDA_SumAndDifference, ".text")
 #        pragma CODE_SECTION(SDA_SumOfDifferences, ".text")
 #        pragma CODE_SECTION(SDA_WeightedSum, ".text")
+#        pragma CODE_SECTION(SDS_BinomialCoefficient, ".text")
 #        pragma CODE_SECTION(SDS_Combinations, ".text")
 #        pragma CODE_SECTION(SDS_ComplexDivide, ".text")
 #        pragma CODE_SECTION(SDS_ComplexInverse, ".text")

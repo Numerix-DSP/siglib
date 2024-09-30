@@ -1,5 +1,5 @@
 // SigLib example for V.26b using pi/4 Differential Quadrature Phase Shift
-// Keying (DQPSK) demodulation Copyright (c) 2023 Delta Numerix All rights
+// Keying (DQPSK) demodulation Copyright (c) 2024 Delta Numerix All rights
 // reserved.
 
 //     Data rate - 2400 bps

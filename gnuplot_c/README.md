@@ -80,4 +80,4 @@ This software is released under the terms of the MIT License. For full details s
 
 This software has been written by Delta Numerix and placed in the public domain.
 
-Copyright (c) 2023 Delta Numerix All rights reserved.
+Copyright (c) 2024 Delta Numerix All rights reserved.

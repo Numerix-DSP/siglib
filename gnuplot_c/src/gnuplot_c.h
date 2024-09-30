@@ -92,6 +92,10 @@ enum gpcPoleZeroMode    // Pole zero plot modes
   GPC_CONJUGATE_ZERO
 };
 
+// Declare an array of convenient colours to use in line graphs etc.
+const char* gpcPlotColours[] = {"purple", "green", "blue", "black", "orange", "cyan", "violet", "grey", "magenta", "light-red"};
+#  define GPC_NUM_PLOT_COLOURS (sizeof((gpcPlotColours)) / sizeof((gpcPlotColours)[0]))
+
 // Spectrogram and image colour palettes
 #  define GPC_MONOCHROME "set palette defined (0 'black', 1 'white')"
 #  define GPC_COLOUR "set palette defined (0 'black', 1 'blue', 2 'red', 3 'yellow', 4 'white')"

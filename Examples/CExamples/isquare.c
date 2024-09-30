@@ -1,6 +1,6 @@
 // SigLib Frequency Domain Pitch Shifting Example
 // by interpolation, using a square wave.
-// Copyright (c) 2023 Delta Numerix All rights reserved.
+// Copyright (c) 2024 Delta Numerix All rights reserved.
 
 // This algorithm benefits from using overlapping windows, in general,
 // the greater the overlap, the better the performance. ie. the lower

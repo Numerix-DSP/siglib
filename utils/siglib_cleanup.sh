@@ -19,64 +19,69 @@ find . -type f -name "*.sh"   -print0 | xargs -0 -n 1 -P 4 dos2unix
 find . -type f -name "*.txt"  -print0 | xargs -0 -n 1 -P 4 dos2unix
 
 #Cleanup unwanted files
-rm -f -r *.bak
-rm -f -r *.browse
-rm -f -r *.cache
-rm -f -r *.cout
-rm -f -r *.dot
-rm -f -r *.elf
-rm -f -r *.gpdt
-rm -f -r *.gprof
-rm -f -r *.idb
-rm -f -r *.ilc
-rm -f -r *.ild
-rm -f -r *.ilf
-rm -f -r *.ilk
-rm -f -r *.ils
-rm -f -r *.ipch
-rm -f -r *.lastbuildstate
-rm -f -r *.log
-rm -f -r *.lst
-rm -f -r *.map
-rm -f -r *.manifest
-rm -f -r *.ncb
-# rm -f -r *.o
-# rm -f src/obj/gcc/*.o
-find . -name *.o -delete
-rm -f -r *.o.d
-rm -f -r *.obj
-rm -f -r *.opt
-rm -f -r *.out
-rm -f -r *.pbi
-rm -f -r *.pch
-rm -f -r *.pdb
-rm -f -r *.plg
-rm -f -r *.r79
-rm -f -r *.res
-rm -f -r *.sdf
-rm -f -r *.stackdump
-rm -f -r *.tds
-rm -f -r *.tlog
-rm -f -r *.user
-rm -f -r Applications/*.d
-rm -f -r ngl/*.d
-rm -f -r ngl/*.exe
-rm -f -r src/*.a
-rm -f -r src/*.dll
-rm -f -r src/*.doj
-rm -f -r src/*.elb
-rm -f -r src/*.eln
-rm -f -r src/*.exp
-rm -f -r src/*.lib
-rm -f src/*.java
-rm -f src/siglib_wrap_wrap.c
-rm -f -r src/.vs/*.VC.db
-rm -f -r src/.vs/*.VC.db-wal
-rm -rf src/dynamic_library_64/x64/*
-rm -rf src/static_library_64/x64/*
-rm -rf src/x64/*
+find . -name "*.bak" -type f -delete
+find . -name "*.browse" -type f -delete
+find . -name "*.cache" -type f -delete
+find . -name "*.cout" -type f -delete
+find . -name "*.dot" -type f -delete
+find . -name "*.elf" -type f -delete
+find . -name "*.gpdt" -type f -delete
+find . -name "*.gprof" -type f -delete
+find . -name "*.idb" -type f -delete
+find . -name "*.ilc" -type f -delete
+find . -name "*.ild" -type f -delete
+find . -name "*.ilf" -type f -delete
+find . -name "*.ilk" -type f -delete
+find . -name "*.ils" -type f -delete
+find . -name "*.ipch" -type f -delete
+find . -name "*.lastbuildstate" -type f -delete
+find . -name "*.log" -type f -delete
+find . -name "*.lst" -type f -delete
+find . -name "*.map" -type f -delete
+find . -name "*.manifest" -type f -delete
+find . -name "*.ncb" -type f -delete
+find . -name "*.o" -type f -delete
+find . -name "*.o.d" -type f -delete
+find . -name "*.obj" -type f -delete
+find . -name "*.opt" -type f -delete
+find . -name "*.out" -type f -delete
+find . -name "*.pbi" -type f -delete
+find . -name "*.pch" -type f -delete
+find . -name "*.pdb" -type f -delete
+find . -name "*.plg" -type f -delete
+find . -name "*.r79" -type f -delete
+find . -name "*.res" -type f -delete
+find . -name "*.sdf" -type f -delete
+find . -name "*.stackdump" -type f -delete
+find . -name "*.tds" -type f -delete
+find . -name "*.tlog" -type f -delete
+find . -name "*.user" -type f -delete
+cd $SIGLIB_PATH/Applications
+find . -name "*.d" -type f -delete
+cd $SIGLIB_PATH/ngl
+find . -name "*.d" -type f -delete
+find . -name "*.exe" -type f -delete
+cd $SIGLIB_PATH/src
+find . -name "*.a" -type f -delete
+find . -name "*.dll" -type f -delete
+find . -name "*.doj" -type f -delete
+find . -name "*.elb" -type f -delete
+find . -name "*.eln" -type f -delete
+find . -name "*.exp" -type f -delete
+find . -name "*.lib" -type f -delete
+find . -name "*.java" -type f -delete
+find . -name "siglib_wrap_wrap.c" -type f -delete
+cd $SIGLIB_PATH/src/.vs
+rm -rf *
+cd $SIGLIB_PATH/src/dynamic_library_64/x64
+rm -rf *
+cd $SIGLIB_PATH/src/static_library_64/x64
+rm -rf *
+cd $SIGLIB_PATH/src/x64
+rm -rf *
 
 popd
+
 
 # Clean-up SWIG
 pushd $SIGLIB_PATH/SWIG
@@ -84,6 +89,7 @@ pushd $SIGLIB_PATH/SWIG
 popd
 
 # Delete all executables
+# Do not delete .exe files globally because we want to preserve them in DigitalFilterPlus/releases
 pushd $SIGLIB_PATH/gnuplot_c/examples
 $SIGLIB_PATH/utils/clean_executables.sh
 rm -f -r *.exe
@@ -116,7 +122,7 @@ popd
 pushd $SIGLIB_PATH/Examples/CExamples/FileIO/
 $SIGLIB_PATH/utils/clean_executables.sh
 popd
-pushd $SIGLIB_PATH/Examples/CExamples/GraphicalEqualizerFilterDesign/
+pushd $SIGLIB_PATH/Examples/CExamples/GraphicEqualizerFilterDesign/
 $SIGLIB_PATH/utils/clean_executables.sh
 popd
 pushd $SIGLIB_PATH/Examples/CExamples/ImageExamples/

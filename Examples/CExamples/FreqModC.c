@@ -1,6 +1,6 @@
 // SigLib Complex Frequency Modulation Example
 // The complex modulator independently modulates the quadrature sine and cosine
-// carriers Copyright (c) 2023 Delta Numerix All rights reserved.
+// carriers Copyright (c) 2024 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>
