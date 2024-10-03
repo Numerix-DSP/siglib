@@ -45,7 +45,7 @@ Description: SigLib DSP library statistics routines.
  *
  * Parameters:
  *   const SLData_t * SIGLIB_PTR_DECL pSrc - Array pointer
- *   const SLArrayIndex_t SampleLength   - Array length
+ *   const SLArrayIndex_t sampleLength   - Array length
  *
  * Return value:
  *   SLData_t Sum

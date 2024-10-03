@@ -132,7 +132,7 @@ void SIGLIB_FUNC_DECL SDA_Demultiplex(const SLData_t* SIGLIB_PTR_DECL p_SrcMuxAr
  *   const SLData_t * SIGLIB_PTR_DECL pSrc1, - Input channel 1 pointer
  *   const SLData_t * SIGLIB_PTR_DECL pSrc2, - Input channel 2 pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst,        - Output channel pointer
- *   const SLArrayIndex_t SampleLength       - Input array length
+ *   const SLArrayIndex_t sampleLength       - Input array length
  *
  * Return value:
  *   void
@@ -143,7 +143,7 @@ void SIGLIB_FUNC_DECL SDA_Demultiplex(const SLData_t* SIGLIB_PTR_DECL p_SrcMuxAr
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Mux2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLData_t* SIGLIB_PTR_DECL pSrc2, SLData_t* SIGLIB_PTR_DECL pDst,
-                               const SLArrayIndex_t SampleLength)
+                               const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -153,7 +153,7 @@ void SIGLIB_FUNC_DECL SDA_Mux2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[2 * i] = pSrc1[i];
@@ -172,7 +172,7 @@ void SIGLIB_FUNC_DECL SDA_Mux2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  *   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Input channel pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst1,       - Output channel 1 pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst2,       - Output channel 2 pointer
- *   const SLArrayIndex_t SampleLength       - Output array length
+ *   const SLArrayIndex_t sampleLength       - Output array length
  *
  * Return value:
  *   void
@@ -183,7 +183,7 @@ void SIGLIB_FUNC_DECL SDA_Mux2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Demux2(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst1, SLData_t* SIGLIB_PTR_DECL pDst2,
-                                 const SLArrayIndex_t SampleLength)
+                                 const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -193,7 +193,7 @@ void SIGLIB_FUNC_DECL SDA_Demux2(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst1[i] = pSrc[2 * i];
@@ -213,7 +213,7 @@ void SIGLIB_FUNC_DECL SDA_Demux2(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  *   const SLData_t * SIGLIB_PTR_DECL pSrc2, - Input channel 2 pointer
  *   const SLData_t * SIGLIB_PTR_DECL pSrc3, - Input channel 3 pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst,        - Output channel pointer
- *   const SLArrayIndex_t SampleLength       - Input array length
+ *   const SLArrayIndex_t sampleLength       - Input array length
  *
  * Return value:
  *   void
@@ -224,7 +224,7 @@ void SIGLIB_FUNC_DECL SDA_Demux2(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Mux3(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLData_t* SIGLIB_PTR_DECL pSrc2, const SLData_t* SIGLIB_PTR_DECL pSrc3,
-                               SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t SampleLength)
+                               SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -235,7 +235,7 @@ void SIGLIB_FUNC_DECL SDA_Mux3(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[3 * i] = pSrc1[i];
@@ -257,7 +257,7 @@ void SIGLIB_FUNC_DECL SDA_Mux3(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  *   SLData_t * SIGLIB_PTR_DECL pDst1,       - Output channel 1 pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst2,       - Output channel 2 pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst3,       - Output channel 3 pointer
- *   const SLArrayIndex_t SampleLength       - Output array length
+ *   const SLArrayIndex_t sampleLength       - Output array length
  *
  * Return value:
  *   void
@@ -268,7 +268,7 @@ void SIGLIB_FUNC_DECL SDA_Mux3(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Demux3(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst1, SLData_t* SIGLIB_PTR_DECL pDst2,
-                                 SLData_t* SIGLIB_PTR_DECL pDst3, const SLArrayIndex_t SampleLength)
+                                 SLData_t* SIGLIB_PTR_DECL pDst3, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -279,7 +279,7 @@ void SIGLIB_FUNC_DECL SDA_Demux3(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst1[i] = pSrc[3 * i];
@@ -302,7 +302,7 @@ void SIGLIB_FUNC_DECL SDA_Demux3(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  *   const SLData_t * SIGLIB_PTR_DECL pSrc3, - Input channel 3 pointer
  *   const SLData_t * SIGLIB_PTR_DECL pSrc4, - Input channel 4 pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst,        - Output channel pointer
- *   const SLArrayIndex_t SampleLength       - Input array length
+ *   const SLArrayIndex_t sampleLength       - Input array length
  *
  * Return value:
  *   void
@@ -313,7 +313,7 @@ void SIGLIB_FUNC_DECL SDA_Demux3(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Mux4(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLData_t* SIGLIB_PTR_DECL pSrc2, const SLData_t* SIGLIB_PTR_DECL pSrc3,
-                               const SLData_t* SIGLIB_PTR_DECL pSrc4, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t SampleLength)
+                               const SLData_t* SIGLIB_PTR_DECL pSrc4, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -325,7 +325,7 @@ void SIGLIB_FUNC_DECL SDA_Mux4(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[4 * i] = pSrc1[i];
@@ -350,7 +350,7 @@ void SIGLIB_FUNC_DECL SDA_Mux4(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  *   SLData_t * SIGLIB_PTR_DECL pDst2,       - Output channel 2 pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst3,       - Output channel 3 pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst4,       - Output channel 4 pointer
- *   const SLArrayIndex_t SampleLength       - Output array length
+ *   const SLArrayIndex_t sampleLength       - Output array length
  *
  * Return value:
  *   void
@@ -361,7 +361,7 @@ void SIGLIB_FUNC_DECL SDA_Mux4(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Demux4(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst1, SLData_t* SIGLIB_PTR_DECL pDst2,
-                                 SLData_t* SIGLIB_PTR_DECL pDst3, SLData_t* SIGLIB_PTR_DECL pDst4, const SLArrayIndex_t SampleLength)
+                                 SLData_t* SIGLIB_PTR_DECL pDst3, SLData_t* SIGLIB_PTR_DECL pDst4, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -373,7 +373,7 @@ void SIGLIB_FUNC_DECL SDA_Demux4(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst1[i] = pSrc[4 * i];
@@ -399,7 +399,7 @@ void SIGLIB_FUNC_DECL SDA_Demux4(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  *   const SLData_t * SIGLIB_PTR_DECL pSrc4, - Input channel 4 pointer
  *   const SLData_t * SIGLIB_PTR_DECL pSrc5, - Input channel 5 pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst,        - Output channel pointer
- *   const SLArrayIndex_t SampleLength       - Input array length
+ *   const SLArrayIndex_t sampleLength       - Input array length
  *
  * Return value:
  *   void
@@ -411,7 +411,7 @@ void SIGLIB_FUNC_DECL SDA_Demux4(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
 
 void SIGLIB_FUNC_DECL SDA_Mux5(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLData_t* SIGLIB_PTR_DECL pSrc2, const SLData_t* SIGLIB_PTR_DECL pSrc3,
                                const SLData_t* SIGLIB_PTR_DECL pSrc4, const SLData_t* SIGLIB_PTR_DECL pSrc5, SLData_t* SIGLIB_PTR_DECL pDst,
-                               const SLArrayIndex_t SampleLength)
+                               const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -424,7 +424,7 @@ void SIGLIB_FUNC_DECL SDA_Mux5(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[5 * i] = pSrc1[i];
@@ -452,7 +452,7 @@ void SIGLIB_FUNC_DECL SDA_Mux5(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  *   SLData_t * SIGLIB_PTR_DECL pDst3,       - Output channel 3 pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst4,       - Output channel 4 pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst5,       - Output channel 5 pointer
- *   const SLArrayIndex_t SampleLength       - Output array length
+ *   const SLArrayIndex_t sampleLength       - Output array length
  *
  * Return value:
  *   void
@@ -464,7 +464,7 @@ void SIGLIB_FUNC_DECL SDA_Mux5(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
 
 void SIGLIB_FUNC_DECL SDA_Demux5(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst1, SLData_t* SIGLIB_PTR_DECL pDst2,
                                  SLData_t* SIGLIB_PTR_DECL pDst3, SLData_t* SIGLIB_PTR_DECL pDst4, SLData_t* SIGLIB_PTR_DECL pDst5,
-                                 const SLArrayIndex_t SampleLength)
+                                 const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -477,7 +477,7 @@ void SIGLIB_FUNC_DECL SDA_Demux5(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst1[i] = pSrc[5 * i];
@@ -506,7 +506,7 @@ void SIGLIB_FUNC_DECL SDA_Demux5(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  *   const SLData_t * SIGLIB_PTR_DECL pSrc5, - Input channel 5 pointer
  *   const SLData_t * SIGLIB_PTR_DECL pSrc6, - Input channel 6 pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst,        - Output channel pointer
- *   const SLArrayIndex_t SampleLength       - Input array length
+ *   const SLArrayIndex_t sampleLength       - Input array length
  *
  * Return value:
  *   void
@@ -518,7 +518,7 @@ void SIGLIB_FUNC_DECL SDA_Demux5(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
 
 void SIGLIB_FUNC_DECL SDA_Mux6(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLData_t* SIGLIB_PTR_DECL pSrc2, const SLData_t* SIGLIB_PTR_DECL pSrc3,
                                const SLData_t* SIGLIB_PTR_DECL pSrc4, const SLData_t* SIGLIB_PTR_DECL pSrc5, const SLData_t* SIGLIB_PTR_DECL pSrc6,
-                               SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t SampleLength)
+                               SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -532,7 +532,7 @@ void SIGLIB_FUNC_DECL SDA_Mux6(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[6 * i] = pSrc1[i];
@@ -563,7 +563,7 @@ void SIGLIB_FUNC_DECL SDA_Mux6(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  *   SLData_t * SIGLIB_PTR_DECL pDst4,       - Output channel 4 pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst5,       - Output channel 5 pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst6,       - Output channel 6 pointer
- *   const SLArrayIndex_t SampleLength       - Output array length
+ *   const SLArrayIndex_t sampleLength       - Output array length
  *
  * Return value:
  *   void
@@ -575,7 +575,7 @@ void SIGLIB_FUNC_DECL SDA_Mux6(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
 
 void SIGLIB_FUNC_DECL SDA_Demux6(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst1, SLData_t* SIGLIB_PTR_DECL pDst2,
                                  SLData_t* SIGLIB_PTR_DECL pDst3, SLData_t* SIGLIB_PTR_DECL pDst4, SLData_t* SIGLIB_PTR_DECL pDst5,
-                                 SLData_t* SIGLIB_PTR_DECL pDst6, const SLArrayIndex_t SampleLength)
+                                 SLData_t* SIGLIB_PTR_DECL pDst6, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -589,7 +589,7 @@ void SIGLIB_FUNC_DECL SDA_Demux6(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst1[i] = pSrc[6 * i];
@@ -621,7 +621,7 @@ void SIGLIB_FUNC_DECL SDA_Demux6(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  *   const SLData_t * SIGLIB_PTR_DECL pSrc6, - Input channel 6 pointer
  *   const SLData_t * SIGLIB_PTR_DECL pSrc7, - Input channel 7 pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst,        - Output channel pointer
- *   const SLArrayIndex_t SampleLength       - Input array length
+ *   const SLArrayIndex_t sampleLength       - Input array length
  *
  * Return value:
  *   void
@@ -633,7 +633,7 @@ void SIGLIB_FUNC_DECL SDA_Demux6(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
 
 void SIGLIB_FUNC_DECL SDA_Mux7(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLData_t* SIGLIB_PTR_DECL pSrc2, const SLData_t* SIGLIB_PTR_DECL pSrc3,
                                const SLData_t* SIGLIB_PTR_DECL pSrc4, const SLData_t* SIGLIB_PTR_DECL pSrc5, const SLData_t* SIGLIB_PTR_DECL pSrc6,
-                               const SLData_t* SIGLIB_PTR_DECL pSrc7, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t SampleLength)
+                               const SLData_t* SIGLIB_PTR_DECL pSrc7, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -648,7 +648,7 @@ void SIGLIB_FUNC_DECL SDA_Mux7(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[7 * i] = pSrc1[i];
@@ -682,7 +682,7 @@ void SIGLIB_FUNC_DECL SDA_Mux7(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  *   SLData_t * SIGLIB_PTR_DECL pDst5,       - Output channel 5 pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst6,       - Output channel 6 pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst7,       - Output channel 7 pointer
- *   const SLArrayIndex_t SampleLength       - Output array length
+ *   const SLArrayIndex_t sampleLength       - Output array length
  *
  * Return value:
  *   void
@@ -694,7 +694,7 @@ void SIGLIB_FUNC_DECL SDA_Mux7(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
 
 void SIGLIB_FUNC_DECL SDA_Demux7(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst1, SLData_t* SIGLIB_PTR_DECL pDst2,
                                  SLData_t* SIGLIB_PTR_DECL pDst3, SLData_t* SIGLIB_PTR_DECL pDst4, SLData_t* SIGLIB_PTR_DECL pDst5,
-                                 SLData_t* SIGLIB_PTR_DECL pDst6, SLData_t* SIGLIB_PTR_DECL pDst7, const SLArrayIndex_t SampleLength)
+                                 SLData_t* SIGLIB_PTR_DECL pDst6, SLData_t* SIGLIB_PTR_DECL pDst7, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -709,7 +709,7 @@ void SIGLIB_FUNC_DECL SDA_Demux7(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst1[i] = pSrc[7 * i];
@@ -744,7 +744,7 @@ void SIGLIB_FUNC_DECL SDA_Demux7(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  *   const SLData_t * SIGLIB_PTR_DECL pSrc7, - Input channel 7 pointer
  *   const SLData_t * SIGLIB_PTR_DECL pSrc8, - Input channel 8 pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst,        - Output channel pointer
- *   const SLArrayIndex_t SampleLength       - Input array length
+ *   const SLArrayIndex_t sampleLength       - Input array length
  *
  * Return value:
  *   void
@@ -757,7 +757,7 @@ void SIGLIB_FUNC_DECL SDA_Demux7(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
 void SIGLIB_FUNC_DECL SDA_Mux8(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLData_t* SIGLIB_PTR_DECL pSrc2, const SLData_t* SIGLIB_PTR_DECL pSrc3,
                                const SLData_t* SIGLIB_PTR_DECL pSrc4, const SLData_t* SIGLIB_PTR_DECL pSrc5, const SLData_t* SIGLIB_PTR_DECL pSrc6,
                                const SLData_t* SIGLIB_PTR_DECL pSrc7, const SLData_t* SIGLIB_PTR_DECL pSrc8, SLData_t* SIGLIB_PTR_DECL pDst,
-                               const SLArrayIndex_t SampleLength)
+                               const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -773,7 +773,7 @@ void SIGLIB_FUNC_DECL SDA_Mux8(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[8 * i] = pSrc1[i];
@@ -810,7 +810,7 @@ void SIGLIB_FUNC_DECL SDA_Mux8(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  *   SLData_t * SIGLIB_PTR_DECL pDst6,       - Output channel 6 pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst7,       - Output channel 7 pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst8,       - Output channel 8 pointer
- *   const SLArrayIndex_t SampleLength       - Output array length
+ *   const SLArrayIndex_t sampleLength       - Output array length
  *
  * Return value:
  *   void
@@ -823,7 +823,7 @@ void SIGLIB_FUNC_DECL SDA_Mux8(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
 void SIGLIB_FUNC_DECL SDA_Demux8(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst1, SLData_t* SIGLIB_PTR_DECL pDst2,
                                  SLData_t* SIGLIB_PTR_DECL pDst3, SLData_t* SIGLIB_PTR_DECL pDst4, SLData_t* SIGLIB_PTR_DECL pDst5,
                                  SLData_t* SIGLIB_PTR_DECL pDst6, SLData_t* SIGLIB_PTR_DECL pDst7, SLData_t* SIGLIB_PTR_DECL pDst8,
-                                 const SLArrayIndex_t SampleLength)
+                                 const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -839,7 +839,7 @@ void SIGLIB_FUNC_DECL SDA_Demux8(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst1[i] = pSrc[8 * i];

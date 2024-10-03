@@ -81,7 +81,7 @@ void SIGLIB_FUNC_DECL SDS_Pid(const SLData_t Kp, const SLData_t Ki, const SLData
  *   SLData_t * SIGLIB_PTR_DECL pRamp,       - Ramp pointer
  *   SLData_t * SIGLIB_PTR_DECL pRampPhase,  - Ramp phase pointer
  *   const SLData_t PRF,                     - Pulse repetition frequency
- *   const SLArrayIndex_t SampleLength       - Buffer length
+ *   const SLArrayIndex_t sampleLength       - Buffer length
  *
  * Return value:
  *   void
@@ -91,18 +91,18 @@ void SIGLIB_FUNC_DECL SDS_Pid(const SLData_t Kp, const SLData_t Ki, const SLData
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Pwm(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pRamp,
-                              SLData_t* SIGLIB_PTR_DECL pRampPhase, const SLData_t PRF, const SLArrayIndex_t SampleLength)
+                              SLData_t* SIGLIB_PTR_DECL pRampPhase, const SLData_t PRF, const SLArrayIndex_t sampleLength)
 {
   // Generate ramp
   SDA_SignalGenerate(pRamp, SIGLIB_TRIANGLE_WAVE, SIGLIB_HALF, SIGLIB_FILL, PRF, SIGLIB_HALF, SIGLIB_ONE, SIGLIB_ZERO, pRampPhase,
-                     SIGLIB_NULL_DATA_PTR, SampleLength);
+                     SIGLIB_NULL_DATA_PTR, sampleLength);
 
   // Subtract ramp from signal
-  SDA_Subtract2(pSrc, pRamp, pDst, SampleLength);
+  SDA_Subtract2(pSrc, pRamp, pDst, sampleLength);
 
   // Threshold difference
-  SDA_Threshold(pDst, pDst, SIGLIB_ZERO, SIGLIB_SINGLE_SIDED_THOLD, SampleLength);
+  SDA_Threshold(pDst, pDst, SIGLIB_ZERO, SIGLIB_SINGLE_SIDED_THOLD, sampleLength);
 
   // Clamp threshold - if signal > 0 then set to 1
-  SDA_Clamp(pDst, pDst, SIGLIB_ZERO, SIGLIB_ONE, SIGLIB_SINGLE_SIDED_THOLD, SampleLength);
+  SDA_Clamp(pDst, pDst, SIGLIB_ZERO, SIGLIB_ONE, SIGLIB_SINGLE_SIDED_THOLD, sampleLength);
 }    // End of SDA_Pwm()

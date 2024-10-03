@@ -45,7 +45,7 @@ int main(void)
   }
 
 #if TIME_DOMAIN_AS_WELL
-  SLArrayIndex_t FilterIndex;
+  SLArrayIndex_t filterIndex;
   SLArrayIndex_t DelayIndex;
 
   SLData_t* pFilterTaps = SUF_VectorArrayAllocate(FILTER_LENGTH);
@@ -56,7 +56,7 @@ int main(void)
   SIF_HilbertTransformerFirFilter(pFilterTaps,       // Pointer to filter coefficients
                                   FILTER_LENGTH);    // Filter length
   SIF_Fir(pFilterState,                              // Pointer to filter state array
-          &FilterIndex,                              // Pointer to filter index register
+          &filterIndex,                              // Pointer to filter index register
           FILTER_LENGTH);                            // Filter length
   SIF_FixedDelay(pDelay,                             // Pointer to delay state array
                  &DelayIndex,                        // Pointer to delay state index
@@ -140,7 +140,7 @@ int main(void)
           // Filtered output array
           pFilterState,      // Pointer to filter state array
           pFilterTaps,       // Pointer to filter coefficients
-          &FilterIndex,      // Pointer to filter index register
+          &filterIndex,      // Pointer to filter index register
           FILTER_LENGTH,     // Filter length
           SAMPLE_LENGTH);    // Dataset length
 

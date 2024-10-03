@@ -26,7 +26,7 @@ int main(void)
   h_GPC_Plot* h2DPlot;    // Plot object
 
   SLData_t pFilterState[FILTER_LENGTH];
-  SLArrayIndex_t FilterIndex;
+  SLArrayIndex_t filterIndex;
 
   SLData_t* pSrc = SUF_VectorArrayAllocate(SAMPLE_LENGTH);
   SLData_t* pDst = SUF_VectorArrayAllocate(SAMPLE_LENGTH);
@@ -49,7 +49,7 @@ int main(void)
   }
 
   SIF_Fir(pFilterState,      // Pointer to filter state array
-          &FilterIndex,      // Pointer to filter index register
+          &filterIndex,      // Pointer to filter index register
           FILTER_LENGTH);    // Filter length
 
   SLData_t sinePhase = SIGLIB_ZERO;
@@ -86,14 +86,14 @@ int main(void)
           pDst,                        // Pointer to filtered output array
           pFilterState,                // Pointer to filter state array
           pFilterTaps,                 // Pointer to filter coefficients
-          &FilterIndex,                // Pointer to filter index register
+          &filterIndex,                // Pointer to filter index register
           FILTER_LENGTH,               // Filter length
           SAMPLE_LENGTH / 2);          // Output dataset length
   SDA_Fir(pSrc + SAMPLE_LENGTH / 2,    // Pointer to input array to be filtered
           pDst + SAMPLE_LENGTH / 2,    // Pointer to filtered output array
           pFilterState,                // Pointer to filter state array
           pFilterTaps,                 // Pointer to filter coefficients
-          &FilterIndex,                // Pointer to filter index register
+          &filterIndex,                // Pointer to filter index register
           FILTER_LENGTH,               // Filter length
           SAMPLE_LENGTH / 2);          // Output dataset length
 #else
@@ -101,7 +101,7 @@ int main(void)
     *pDst++ = SDS_Fir(*pSrc++,           // Input data sample to be filtered
                       pFilterState,      // Pointer to filter state array
                       pFilterTaps,       // Pointer to filter coefficients
-                      &FilterIndex,      // Pointer to filter index register
+                      &filterIndex,      // Pointer to filter index register
                       FILTER_LENGTH);    // Filter length
   }
   pSrc -= SAMPLE_LENGTH;

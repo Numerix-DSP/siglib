@@ -10,7 +10,7 @@ Additional Functionality:
   Applications/SystemAnalyzer added
   Applications/DigitalFilterPlus added
   SAI_Min and SAI_Max
-  SIF_LagrangeFirFilter, SDS_LagrangeInterpolate and SDA_LagrangeInterpolate
+  SIF_LagrangeFirCoefficients, SDS_LagrangeInterpolate and SDA_LagrangeInterpolate
   SDA_Factorial, SDS_BinomialCoefficient and SDA_BinomialCoefficients
   SDA_ConvolveInitial and SDA_ConvolveInitialComplex
   SDA_ConvolveIterate

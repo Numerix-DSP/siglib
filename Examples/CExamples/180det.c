@@ -20,7 +20,7 @@ int main(void)
 {
   h_GPC_Plot* h2DPlot;    // Plot object
 
-  SLArrayIndex_t FilterIndex;    // Filter index
+  SLArrayIndex_t filterIndex;    // Filter index
   SLData_t CosineTablePhase;     // Cosine table phase
 
   SLArrayIndex_t PreviousOutputSign;     // Sign of previous output value
@@ -93,7 +93,7 @@ int main(void)
                            CARRIER_FREQ / SAMPLE_RATE_HZ,    // Carrier frequency
                            pFilterState,                     // Pointer to filter state array
                            pFilterCoeffs,                    // Pointer to filter coefficients
-                           &FilterIndex,                     // Pointer to filter index
+                           &filterIndex,                     // Pointer to filter index
                            FILTER_LENGTH,                    // Filter length
                            &PreviousOutputSign);             // Pointer to sign of previous output
 
@@ -105,7 +105,7 @@ int main(void)
                                                  CARRIER_FREQ / SAMPLE_RATE_HZ,    // Carrier frequency
                                                  pFilterState,                     // Pointer to filter state array
                                                  pFilterCoeffs,                    // Pointer to filter coefficients
-                                                 &FilterIndex,                     // Pointer to filter index
+                                                 &filterIndex,                     // Pointer to filter index
                                                  FILTER_LENGTH,                    // Filter length
                                                  &PreviousOutputSign,              // Pointer to sign of previous output
                                                  SAMPLE_LENGTH);                   // Length of input array

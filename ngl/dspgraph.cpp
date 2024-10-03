@@ -426,7 +426,7 @@ double LineGraph::GetStatusBarIndexMultiplier(void)
  *
  * Parameters:
  *   const double *pSrc,
- *   const long SampleLength
+ *   const long sampleLength
  *
  * Return value:
  *   Maximum absolute value in an array.
@@ -436,7 +436,7 @@ double LineGraph::GetStatusBarIndexMultiplier(void)
  *
  ********************************************************/
 
-double LineGraph::AbsMax(const double* pSrc, const long SampleLength)
+double LineGraph::AbsMax(const double* pSrc, const long sampleLength)
 {
   long i;
   double Tmp, Max;
@@ -450,7 +450,7 @@ double LineGraph::AbsMax(const double* pSrc, const long SampleLength)
     Max = -Tmp;
   }
 
-  for (i = 1; i < SampleLength; i++) {
+  for (i = 1; i < sampleLength; i++) {
     Tmp = *pSrc++;
 
     if (Tmp >= 0.)    // Positive data value

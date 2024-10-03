@@ -3912,9 +3912,9 @@ double _stdcall SDS_InterpolateQuadraticLagrange1D(double,     // y(0) input sam
                                                    double,     // y(2) input sample magnitude
                                                    double);    // Alpha x
 
-void _stdcall SIF_LagrangeFirFilter(double* SIGLIB_OUTPUT_PTR_DECL,    // Filter coefficients array
-                                    double,                            // Delay
-                                    long);                             // Filter length
+void _stdcall SIF_LagrangeFirCoefficients(double* SIGLIB_OUTPUT_PTR_DECL,    // Filter coefficients array
+                                          double,                            // Delay
+                                          long);                             // Filter length
 
 double SDS_LagrangeInterpolate(double* SIGLIB_INPUT_PTR_DECL,    // Ideal points
                                double* SIGLIB_INOUT_PTR_DECL,    // Filter coefficients array

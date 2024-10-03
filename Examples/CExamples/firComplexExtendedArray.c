@@ -34,7 +34,7 @@ int main(void)
 {
   h_GPC_Plot* h2DPlot;    // Plot object
 
-  SLArrayIndex_t FilterIndex;
+  SLArrayIndex_t filterIndex;
 
   SLData_t* pRealData = SUF_VectorArrayAllocate(SAMPLE_LENGTH);
   SLData_t* pImagData = SUF_VectorArrayAllocate(SAMPLE_LENGTH);
@@ -76,7 +76,7 @@ int main(void)
                               pImagFilterTaps,          // Imaginary filter coefficients
                               pRealFilterProcCoeffs,    // Real filter processing coefficients array
                               pImagFilterProcCoeffs,    // Imaginary filter processing coefficients array
-                              &FilterIndex,             // Filter index
+                              &filterIndex,             // Filter index
                               FILTER_LENGTH);           // Filter length
 
   // Generate a broadband complex signal
@@ -176,7 +176,7 @@ int main(void)
                               pImagFilterState,         // Imaginary state array pointer
                               pRealFilterProcCoeffs,    // Real filter processing coefficients array
                               pImagFilterProcCoeffs,    // Imaginary filter processing coefficients array
-                              &FilterIndex,             // Filter index
+                              &filterIndex,             // Filter index
                               FILTER_LENGTH,            // Filter length
                               SAMPLE_LENGTH);           // Dataset length
 #else
@@ -189,7 +189,7 @@ int main(void)
                                 pImagFilterState,         // Imaginary state array pointer
                                 pRealFilterProcCoeffs,    // Real filter processing coefficients array
                                 pImagFilterProcCoeffs,    // Imaginary filter processing coefficients array
-                                &FilterIndex,             // Filter index
+                                &filterIndex,             // Filter index
                                 FILTER_LENGTH);           // Filter length
   }
 #endif

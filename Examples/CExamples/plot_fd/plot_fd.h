@@ -12,11 +12,11 @@
 #include "string.h"
 #include <gnuplot_c.h>    // Gnuplot/C
 
-SLError_t plot_frequency_domain(SLData_t* pSrc, const enum SLWindow_t WindowType, char* pLabelString, SLArrayIndex_t SampleLength,
+SLError_t plot_frequency_domain(SLData_t* pSrc, const enum SLWindow_t WindowType, char* pLabelString, SLArrayIndex_t sampleLength,
                                 SLArrayIndex_t DFTLength);
 
 SLError_t plot_complex_frequency_domain(SLData_t* pSrcReal, SLData_t* pSrcImag, const enum SLWindow_t WindowType, char* pLabelString,
-                                        SLArrayIndex_t SampleLength, SLArrayIndex_t DFTLength);
+                                        SLArrayIndex_t sampleLength, SLArrayIndex_t DFTLength);
 
 SLError_t plot_frequency_magnitude(SLData_t*, SLData_t*, char*, SLArrayIndex_t);
 
@@ -24,7 +24,7 @@ SLError_t plot_time_domain(SLData_t* pSrcReal, char* pLabelString, SLArrayIndex_
 
 SLError_t plot_complex_time_domain(SLData_t* pSrcReal, SLData_t* pSrcImag, char* pLabelString, SLArrayIndex_t SequenceLength);
 
-SLError_t plot_frequency_domain(SLData_t* pSrc, const enum SLWindow_t WindowType, char* pLabelString, SLArrayIndex_t SampleLength,
+SLError_t plot_frequency_domain(SLData_t* pSrc, const enum SLWindow_t WindowType, char* pLabelString, SLArrayIndex_t sampleLength,
                                 SLArrayIndex_t DFTLength)
 {
   static h_GPC_Plot* h2DPlot;    // Plot object
@@ -75,10 +75,10 @@ SLError_t plot_frequency_domain(SLData_t* pSrc, const enum SLWindow_t WindowType
             DFTLength);     // Dataset length
 
   // Copy the input data to preserve it
-  if (SampleLength <= DFTLength) {
+  if (sampleLength <= DFTLength) {
     SDA_Copy(pSrc,             // Pointer to source array
              pFDPSrcReal,      // Pointer to destination array
-             SampleLength);    // Dataset length
+             sampleLength);    // Dataset length
   } else {
     SDA_Copy(pSrc,           // Pointer to source array
              pFDPSrcReal,    // Pointer to destination array
@@ -104,22 +104,22 @@ SLError_t plot_frequency_domain(SLData_t* pSrc, const enum SLWindow_t WindowType
                    DFTLength);      // Dataset length
 
   // printf ("\nInputMaxPos = %d\n", SDA_AbsMaxIndex (pFDPSrcReal,
-  // SampleLength)); printf ("\npFDPRealDataMaxPos = %d\n", SDA_AbsMaxIndex
-  // (pFDPRealData, SampleLength)); printf ("\npFDPImagDataMaxPos = %d\n",
-  // SDA_AbsMaxIndex (pFDPImagData, SampleLength)); printf ("\npFDPResultsMaxPos
-  // = %d\n", SDA_AbsMaxIndex (pFDPResults, SampleLength));
+  // sampleLength)); printf ("\npFDPRealDataMaxPos = %d\n", SDA_AbsMaxIndex
+  // (pFDPRealData, sampleLength)); printf ("\npFDPImagDataMaxPos = %d\n",
+  // SDA_AbsMaxIndex (pFDPImagData, sampleLength)); printf ("\npFDPResultsMaxPos
+  // = %d\n", SDA_AbsMaxIndex (pFDPResults, sampleLength));
 
-  // printf ("\nInputMax = %lf\n", SDA_AbsMax (pFDPSrcReal, SampleLength));
+  // printf ("\nInputMax = %lf\n", SDA_AbsMax (pFDPSrcReal, sampleLength));
   // printf ("\npFDPRealDataMax = %lf\n", SDA_Max (pFDPRealData, DFTLength));
   // printf ("\npFDPImagDataMax = %lf\n", SDA_Max (pFDPImagData, DFTLength));
   // printf ("\nResultMax = %lf\n", SDA_AbsMax (pFDPResults, DFTLength));
   // printf ("\nMaxIndex = %d\n", SDA_DetectFirstPeakOverThreshold (pFDPResults,
   // -20.0, DFTLength/2));
 
-  // SUF_PrintArray (pFDPSrcReal, SampleLength);
-  // SUF_PrintArray (pFDPRealData, SampleLength);
-  // SUF_PrintArray (pFDPImagData, SampleLength);
-  // SUF_PrintArray (pFDPResults, SampleLength);
+  // SUF_PrintArray (pFDPSrcReal, sampleLength);
+  // SUF_PrintArray (pFDPRealData, sampleLength);
+  // SUF_PrintArray (pFDPImagData, sampleLength);
+  // SUF_PrintArray (pFDPResults, sampleLength);
 
   Max = SDA_AbsMax(pFDPResults,    // Pointer to source array
                    DFTLength);     // Dataset length
@@ -162,7 +162,7 @@ SLError_t plot_frequency_domain(SLData_t* pSrc, const enum SLWindow_t WindowType
 }    // End of plot_frequency_domain()
 
 SLError_t plot_complex_frequency_domain(SLData_t* pSrcReal, SLData_t* pSrcImag, const enum SLWindow_t WindowType, char* pLabelString,
-                                        SLArrayIndex_t SampleLength, SLArrayIndex_t DFTLength)
+                                        SLArrayIndex_t sampleLength, SLArrayIndex_t DFTLength)
 {
   static h_GPC_Plot* h2DPlot;    // Plot object
   static int FirstTimeFlag = 1;
@@ -216,13 +216,13 @@ SLError_t plot_complex_frequency_domain(SLData_t* pSrcReal, SLData_t* pSrcImag, 
             DFTLength);      // Dataset length
 
   // Copy the input data to preserve it
-  if (SampleLength <= DFTLength) {
+  if (sampleLength <= DFTLength) {
     SDA_Copy(pSrcReal,         // Pointer to source array
              pFDPSrcReal,      // Pointer to destination array
-             SampleLength);    // Dataset length
+             sampleLength);    // Dataset length
     SDA_Copy(pSrcImag,         // Pointer to source array
              pFDPSrcImag,      // Pointer to destination array
-             SampleLength);    // Dataset length
+             sampleLength);    // Dataset length
   } else {
     SDA_Copy(pSrcReal,       // Pointer to source array
              pFDPSrcReal,    // Pointer to destination array

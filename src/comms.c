@@ -91,7 +91,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_BitErrorRate(const SLChar_t* pSrc1, const SLChar_t
  *   const SLData_t * SIGLIB_PTR_DECL pSrc,
  *   SLData_t pDst[],
  *   const SLArrayIndex_t Stride,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -101,7 +101,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_BitErrorRate(const SLChar_t* pSrc1, const SLChar_t
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Interleave(const SLData_t pSrc[], SLData_t pDst[], const SLArrayIndex_t Stride, const SLArrayIndex_t SampleLength)
+void SIGLIB_FUNC_DECL SDA_Interleave(const SLData_t pSrc[], SLData_t pDst[], const SLArrayIndex_t Stride, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -110,13 +110,13 @@ void SIGLIB_FUNC_DECL SDA_Interleave(const SLData_t pSrc[], SLData_t pDst[], con
 #  endif
 #endif
 
-  for (SLArrayIndex_t InputIndex = 0, OutputIndex = 0; OutputIndex < SampleLength; OutputIndex++) {
+  for (SLArrayIndex_t InputIndex = 0, OutputIndex = 0; OutputIndex < sampleLength; OutputIndex++) {
     pDst[OutputIndex] = pSrc[InputIndex];
 
     InputIndex += Stride;
 
-    if (InputIndex >= SampleLength) {
-      InputIndex -= (SampleLength - 1);
+    if (InputIndex >= sampleLength) {
+      InputIndex -= (sampleLength - 1);
     }
   }
 }    // End of SDA_Interleave()
@@ -128,7 +128,7 @@ void SIGLIB_FUNC_DECL SDA_Interleave(const SLData_t pSrc[], SLData_t pDst[], con
  *   const SLData_t * SIGLIB_PTR_DECL pSrc,
  *   SLData_t pDst[],
  *   const SLArrayIndex_t Stride,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -138,7 +138,7 @@ void SIGLIB_FUNC_DECL SDA_Interleave(const SLData_t pSrc[], SLData_t pDst[], con
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Deinterleave(const SLData_t pSrc[], SLData_t pDst[], const SLArrayIndex_t Stride, const SLArrayIndex_t SampleLength)
+void SIGLIB_FUNC_DECL SDA_Deinterleave(const SLData_t pSrc[], SLData_t pDst[], const SLArrayIndex_t Stride, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -147,13 +147,13 @@ void SIGLIB_FUNC_DECL SDA_Deinterleave(const SLData_t pSrc[], SLData_t pDst[], c
 #  endif
 #endif
 
-  for (SLArrayIndex_t InputIndex = 0, OutputIndex = 0; InputIndex < SampleLength; InputIndex++) {
+  for (SLArrayIndex_t InputIndex = 0, OutputIndex = 0; InputIndex < sampleLength; InputIndex++) {
     pDst[OutputIndex] = pSrc[InputIndex];
 
     OutputIndex += Stride;
 
-    if (OutputIndex >= SampleLength) {
-      OutputIndex -= (SampleLength - 1);
+    if (OutputIndex >= sampleLength) {
+      OutputIndex -= (sampleLength - 1);
     }
   }
 }    // End of SDA_Deinterleave()

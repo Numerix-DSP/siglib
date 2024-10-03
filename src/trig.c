@@ -46,7 +46,7 @@ Description: Trigonometry functions, for SigLib DSP library.
  * Parameters:
  *   const SLData_t * SIGLIB_PTR_DECL pSrc,
  *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -56,7 +56,7 @@ Description: Trigonometry functions, for SigLib DSP library.
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Sin(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t SampleLength)
+void SIGLIB_FUNC_DECL SDA_Sin(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef _TMS320C6700              // Defined by TI compiler
@@ -65,7 +65,7 @@ void SIGLIB_FUNC_DECL SDA_Sin(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SI
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     *pDst++ = SDS_Sin(*pSrc++);
   }
 }    // End of SDA_Sin()
@@ -76,7 +76,7 @@ void SIGLIB_FUNC_DECL SDA_Sin(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SI
  * Parameters:
  *   const SLData_t * SIGLIB_PTR_DECL pSrc,
  *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -86,7 +86,7 @@ void SIGLIB_FUNC_DECL SDA_Sin(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SI
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Cos(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t SampleLength)
+void SIGLIB_FUNC_DECL SDA_Cos(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef _TMS320C6700              // Defined by TI compiler
@@ -95,7 +95,7 @@ void SIGLIB_FUNC_DECL SDA_Cos(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SI
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     *pDst++ = SDS_Cos(*pSrc++);
   }
 }    // End of SDA_Cos()
@@ -106,7 +106,7 @@ void SIGLIB_FUNC_DECL SDA_Cos(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SI
  * Parameters:
  *   const SLData_t * SIGLIB_PTR_DECL pSrc,
  *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -116,7 +116,7 @@ void SIGLIB_FUNC_DECL SDA_Cos(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SI
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Tan(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t SampleLength)
+void SIGLIB_FUNC_DECL SDA_Tan(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef _TMS320C6700              // Defined by TI compiler
@@ -125,7 +125,7 @@ void SIGLIB_FUNC_DECL SDA_Tan(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SI
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     *pDst++ = SDS_Tan(*pSrc++);
   }
 }    // End of SDA_Tan()
@@ -162,7 +162,7 @@ void SIGLIB_FUNC_DECL SIF_FastSin(SLData_t* pSineTable, const SLArrayIndex_t Tab
  *   SLData_t *pSineTablePhase
  *   const SLData_t SineFrequency
  *   const SLArrayIndex_t SineTableLength
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -173,7 +173,7 @@ void SIGLIB_FUNC_DECL SIF_FastSin(SLData_t* pSineTable, const SLArrayIndex_t Tab
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_FastSin(const SLData_t* SIGLIB_PTR_DECL pSineTable, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* pSineTablePhase,
-                                  const SLData_t SineFrequency, const SLArrayIndex_t SineTableLength, const SLArrayIndex_t SampleLength)
+                                  const SLData_t SineFrequency, const SLArrayIndex_t SineTableLength, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -185,7 +185,7 @@ void SIGLIB_FUNC_DECL SDA_FastSin(const SLData_t* SIGLIB_PTR_DECL pSineTable, SL
   SLData_t LocalCarrierTablePhase = *pSineTablePhase;
   SLData_t SLData_tPeriod = (SLData_t)SineTableLength;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = pSineTable[(SLArrayIndex_t)((LocalCarrierTablePhase * SLData_tPeriod) + 0.1)];
@@ -263,7 +263,7 @@ void SIGLIB_FUNC_DECL SIF_FastCos(SLData_t* pCosineTable, const SLArrayIndex_t T
  *   SLData_t *pCosineTablePhase
  *   const SLData_t CosineFrequency
  *   const SLArrayIndex_t CosineTableLength
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -274,7 +274,7 @@ void SIGLIB_FUNC_DECL SIF_FastCos(SLData_t* pCosineTable, const SLArrayIndex_t T
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_FastCos(const SLData_t* SIGLIB_PTR_DECL pCosineTable, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* pCosineTablePhase,
-                                  const SLData_t CosineFrequency, const SLArrayIndex_t CosineTableLength, const SLArrayIndex_t SampleLength)
+                                  const SLData_t CosineFrequency, const SLArrayIndex_t CosineTableLength, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -286,7 +286,7 @@ void SIGLIB_FUNC_DECL SDA_FastCos(const SLData_t* SIGLIB_PTR_DECL pCosineTable, 
   SLData_t LocalCarrierTablePhase = *pCosineTablePhase;
   SLData_t SLData_tPeriod = (SLData_t)CosineTableLength;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = pCosineTable[(SLArrayIndex_t)((LocalCarrierTablePhase * SLData_tPeriod) + 0.1)];
@@ -366,7 +366,7 @@ void SIGLIB_FUNC_DECL SIF_FastSinCos(SLData_t* pSineTable, const SLArrayIndex_t 
  *   SLData_t *pSineTablePhase
  *   const SLData_t SineFrequency
  *   const SLArrayIndex_t SinCosPeriod
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -379,7 +379,7 @@ void SIGLIB_FUNC_DECL SIF_FastSinCos(SLData_t* pSineTable, const SLArrayIndex_t 
 
 void SIGLIB_FUNC_DECL SDA_FastSinCos(const SLData_t* SIGLIB_PTR_DECL pSineTable, SLData_t* SIGLIB_PTR_DECL pSinDst,
                                      SLData_t* SIGLIB_PTR_DECL pCosDst, SLData_t* pSineTablePhase, const SLData_t SineFrequency,
-                                     const SLArrayIndex_t SinCosPeriod, const SLArrayIndex_t SampleLength)
+                                     const SLArrayIndex_t SinCosPeriod, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__                // Defined by TI compiler
@@ -393,7 +393,7 @@ void SIGLIB_FUNC_DECL SDA_FastSinCos(const SLData_t* SIGLIB_PTR_DECL pSineTable,
   SLData_t SLData_tPeriod = (SLData_t)SinCosPeriod;
   SLArrayIndex_t QuarterPeriod = (SLUFixData_t)SinCosPeriod >> 2U;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pSinDst[i] = pSineTable[(SLArrayIndex_t)((LocalCarrierTablePhase * SLData_tPeriod) + 0.1)];
@@ -478,7 +478,7 @@ void SIGLIB_FUNC_DECL SIF_QuickSin(SLData_t* pSineTable, SLData_t* pPhaseGain, c
  *   const SLData_t * SIGLIB_PTR_DECL pSineTable,
  *   SLData_t * SIGLIB_PTR_DECL pDst,
  *   const SLData_t PhaseGain,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -490,7 +490,7 @@ void SIGLIB_FUNC_DECL SIF_QuickSin(SLData_t* pSineTable, SLData_t* pPhaseGain, c
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_QuickSin(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t* SIGLIB_PTR_DECL pSineTable, SLData_t* SIGLIB_PTR_DECL pDst,
-                                   const SLData_t PhaseGain, const SLArrayIndex_t SampleLength)
+                                   const SLData_t PhaseGain, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -500,7 +500,7 @@ void SIGLIB_FUNC_DECL SDA_QuickSin(const SLData_t* SIGLIB_PTR_DECL pSrc, const S
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     SLData_t LocalAngle = pSrc[i];
@@ -597,7 +597,7 @@ void SIGLIB_FUNC_DECL SIF_QuickCos(SLData_t* pCosineTable, SLData_t* pPhaseGain,
  *   const SLData_t * SIGLIB_PTR_DECL pCosineTable,
  *   SLData_t * SIGLIB_PTR_DECL pDst,
  *   const SLData_t PhaseGain,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -609,7 +609,7 @@ void SIGLIB_FUNC_DECL SIF_QuickCos(SLData_t* pCosineTable, SLData_t* pPhaseGain,
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_QuickCos(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t* SIGLIB_PTR_DECL pCosineTable,
-                                   SLData_t* SIGLIB_PTR_DECL pDst, const SLData_t PhaseGain, const SLArrayIndex_t SampleLength)
+                                   SLData_t* SIGLIB_PTR_DECL pDst, const SLData_t PhaseGain, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -619,7 +619,7 @@ void SIGLIB_FUNC_DECL SDA_QuickCos(const SLData_t* SIGLIB_PTR_DECL pSrc, const S
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     SLData_t LocalAngle = pSrc[i];
@@ -717,7 +717,7 @@ void SIGLIB_FUNC_DECL SIF_QuickSinCos(SLData_t* pSineTable, SLData_t* pPhaseGain
  *   SLData_t * SIGLIB_PTR_DECL pCosDst,
  *   const SLData_t PhaseGain,
  *   const SLArrayIndex_t SinCosPeriod
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -730,7 +730,7 @@ void SIGLIB_FUNC_DECL SIF_QuickSinCos(SLData_t* pSineTable, SLData_t* pPhaseGain
 
 void SIGLIB_FUNC_DECL SDA_QuickSinCos(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t* SIGLIB_PTR_DECL pSineTable,
                                       SLData_t* SIGLIB_PTR_DECL pSinDst, SLData_t* SIGLIB_PTR_DECL pCosDst, const SLData_t PhaseGain,
-                                      const SLArrayIndex_t SinCosPeriod, const SLArrayIndex_t SampleLength)
+                                      const SLArrayIndex_t SinCosPeriod, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__                // Defined by TI compiler
@@ -741,7 +741,7 @@ void SIGLIB_FUNC_DECL SDA_QuickSinCos(const SLData_t* SIGLIB_PTR_DECL pSrc, cons
 #endif
 
   SLArrayIndex_t QuarterPeriod = (SLUFixData_t)SinCosPeriod >> 2U;
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     SLData_t LocalAngle = pSrc[i];
@@ -849,7 +849,7 @@ void SIGLIB_FUNC_DECL SIF_QuickTan(SLData_t* pTanTable, SLData_t* pPhaseGain, co
  *   const SLData_t * SIGLIB_PTR_DECL pTanTable,
  *   SLData_t * SIGLIB_PTR_DECL pDst,
  *   const SLData_t PhaseGain,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -861,7 +861,7 @@ void SIGLIB_FUNC_DECL SIF_QuickTan(SLData_t* pTanTable, SLData_t* pPhaseGain, co
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_QuickTan(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t* SIGLIB_PTR_DECL pTanTable, SLData_t* SIGLIB_PTR_DECL pDst,
-                                   const SLData_t PhaseGain, const SLArrayIndex_t SampleLength)
+                                   const SLData_t PhaseGain, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -871,7 +871,7 @@ void SIGLIB_FUNC_DECL SDA_QuickTan(const SLData_t* SIGLIB_PTR_DECL pSrc, const S
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     SLData_t LocalAngle = pSrc[i];
@@ -941,7 +941,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_QuickTan(const SLData_t Angle, const SLData_t* SIG
  * Parameters:
  *   const SLData_t * SIGLIB_PTR_DECL pSrc,
  *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -951,7 +951,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_QuickTan(const SLData_t Angle, const SLData_t* SIG
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Sinc(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t SampleLength)
+void SIGLIB_FUNC_DECL SDA_Sinc(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -960,7 +960,7 @@ void SIGLIB_FUNC_DECL SDA_Sinc(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* S
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     SLData_t x = pSrc[i];
     if (x == SIGLIB_ZERO) {
       pDst[i] = SIGLIB_ONE;
@@ -1030,7 +1030,7 @@ void SIGLIB_FUNC_DECL SIF_QuickSinc(SLData_t* pSincTable, SLData_t* pPhaseGain, 
  *   const SLData_t * SIGLIB_PTR_DECL pSincTable,
  *   SLData_t * SIGLIB_PTR_DECL pDst,
  *   const SLData_t PhaseGain,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -1042,7 +1042,7 @@ void SIGLIB_FUNC_DECL SIF_QuickSinc(SLData_t* pSincTable, SLData_t* pPhaseGain, 
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_QuickSinc(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t* SIGLIB_PTR_DECL pSincTable,
-                                    SLData_t* SIGLIB_PTR_DECL pDst, const SLData_t PhaseGain, const SLArrayIndex_t SampleLength)
+                                    SLData_t* SIGLIB_PTR_DECL pDst, const SLData_t PhaseGain, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -1052,7 +1052,7 @@ void SIGLIB_FUNC_DECL SDA_QuickSinc(const SLData_t* SIGLIB_PTR_DECL pSrc, const 
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     SLData_t Localx = pSrc[i];

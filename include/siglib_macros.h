@@ -47,6 +47,7 @@ Update history:
 // Macros to convert from number of samples to sample period and v.v.
 #    define SDS_SamplesToPeriod(samples, fs) ((SLData_t)(((SLData_t)samples) / ((SLData_t)fs)))
 #    define SDS_PeriodToSamples(period, fs) ((SLArrayIndex_t)(((SLData_t)period) * ((SLData_t)fs)))
+#    define SDS_NormalizeFrequencyToSampleRate(freq, fs) (((SLData_t)freq) / ((SLData_t)fs))
 
 // Macros to handle standard C rounds down
 // These macros also allow for floating point not quantizing to perfect integer
@@ -221,18 +222,18 @@ Update history:
 
 // Signal generation
 
-#    define SDA_SignalGenerateSine(Address, Frequency, Peak, pPhase, ArrayLength)                                                        \
-      {                                                                                                                                  \
-        SLData_t sl_Dummy;                                                                                                               \
-        SDA_SignalGenerate(Address, SIGLIB_SINE_WAVE, SIGLIB_ONE, SIGLIB_FILL, Frequency, SIGLIB_ZERO, SIGLIB_ZERO, SIGLIB_ZERO, pPhase, \
-                           &sl_Dummy, ArrayLength);                                                                                      \
+#    define SDA_SignalGenerateSine(Address, Frequency, Peak, pPhase, ArrayLength)                                                             \
+      {                                                                                                                                       \
+        SLData_t sl_Dummy;                                                                                                                    \
+        SDA_SignalGenerate(Address, SIGLIB_SINE_WAVE, Peak, SIGLIB_FILL, Frequency, SIGLIB_ZERO, SIGLIB_ZERO, SIGLIB_ZERO, pPhase, &sl_Dummy, \
+                           ArrayLength);                                                                                                      \
       }
 
-#    define SDA_SignalGenerateCosine(Address, Frequency, Peak, pPhase, ArrayLength)                                                        \
-      {                                                                                                                                    \
-        SLData_t sl_Dummy;                                                                                                                 \
-        SDA_SignalGenerate(Address, SIGLIB_COSINE_WAVE, SIGLIB_ONE, SIGLIB_FILL, Frequency, SIGLIB_ZERO, SIGLIB_ZERO, SIGLIB_ZERO, pPhase, \
-                           &sl_Dummy, ArrayLength);                                                                                        \
+#    define SDA_SignalGenerateCosine(Address, Frequency, Peak, pPhase, ArrayLength)                                                             \
+      {                                                                                                                                         \
+        SLData_t sl_Dummy;                                                                                                                      \
+        SDA_SignalGenerate(Address, SIGLIB_COSINE_WAVE, Peak, SIGLIB_FILL, Frequency, SIGLIB_ZERO, SIGLIB_ZERO, SIGLIB_ZERO, pPhase, &sl_Dummy, \
+                           ArrayLength);                                                                                                        \
       }
 
 #    define SDA_SignalGenerateRamp(Address, Peak, Offset, pPhase, ArrayLength)                                                             \

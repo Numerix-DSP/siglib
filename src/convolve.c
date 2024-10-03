@@ -243,7 +243,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_ConvolveIterate(const SLData_t* SIGLIB_PTR_DECL pS
  *   const SLData_t * SIGLIB_PTR_DECL pSrc,
  *   const SLData_t * SIGLIB_PTR_DECL pImpulseResponse,
  *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -254,7 +254,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_ConvolveIterate(const SLData_t* SIGLIB_PTR_DECL pS
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_ConvolveCircular(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t* SIGLIB_PTR_DECL pImpulseResponse,
-                                           SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t SampleLength)
+                                           SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -265,22 +265,22 @@ void SIGLIB_FUNC_DECL SDA_ConvolveCircular(const SLData_t* SIGLIB_PTR_DECL pSrc,
 #endif
 
   // Start with the last output and work backwards through the results
-  SLArrayIndex_t ao = SampleLength - 1;    // a offset into pSrc
-  pDst += SampleLength - 1;                // Write backwards through array
+  SLArrayIndex_t ao = sampleLength - 1;    // a offset into pSrc
+  pDst += sampleLength - 1;                // Write backwards through array
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     // Calculate first MAC - this saves having to clear accumulator
     SLData_t sumOfProducts = pSrc[ao] * pImpulseResponse[0];
     if (--ao < 0) {
-      ao += SampleLength;    // Circular array
+      ao += sampleLength;    // Circular array
     }
 
     // Calculate subsequent MACs
     // a0 is already decremented but b0 must start from '1'
-    for (SLArrayIndex_t j = 1; j < SampleLength; j++) {
+    for (SLArrayIndex_t j = 1; j < sampleLength; j++) {
       sumOfProducts += pSrc[ao] * pImpulseResponse[j];
       if (--ao < 0) {
-        ao += SampleLength;    // Circular array
+        ao += sampleLength;    // Circular array
       }
     }
 
@@ -487,7 +487,7 @@ void SIGLIB_FUNC_DECL SDA_ConvolveInitialComplex(const SLData_t* SIGLIB_PTR_DECL
  *   const SLData_t * SIGLIB_PTR_DECL pImpulseResponseImag,
  *   SLData_t * SIGLIB_PTR_DECL pDstReal,
  *   SLData_t * SIGLIB_PTR_DECL pDstImag,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -500,29 +500,29 @@ void SIGLIB_FUNC_DECL SDA_ConvolveInitialComplex(const SLData_t* SIGLIB_PTR_DECL
 void SIGLIB_FUNC_DECL SDA_ConvolveCircularComplex(const SLData_t* SIGLIB_PTR_DECL pSrcReal, const SLData_t* SIGLIB_PTR_DECL pSrcImag,
                                                   const SLData_t* SIGLIB_PTR_DECL pImpulseResponseReal,
                                                   const SLData_t* SIGLIB_PTR_DECL pImpulseResponseImag, SLData_t* SIGLIB_PTR_DECL pDstReal,
-                                                  SLData_t* SIGLIB_PTR_DECL pDstImag, const SLArrayIndex_t SampleLength)
+                                                  SLData_t* SIGLIB_PTR_DECL pDstImag, const SLArrayIndex_t sampleLength)
 {
   // Start with the last output and work backwards through the results
-  SLArrayIndex_t ao = SampleLength - 1;    // a offset into pSrc
-  pDstReal += SampleLength - 1;            // Write backwards through array
-  pDstImag += SampleLength - 1;
+  SLArrayIndex_t ao = sampleLength - 1;    // a offset into pSrc
+  pDstReal += sampleLength - 1;            // Write backwards through array
+  pDstImag += sampleLength - 1;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     // Calculate first MAC - this saves having to clear accumulator
     SLData_t sumOfProductsReal = (pSrcReal[ao] * pImpulseResponseReal[0]) - (pSrcImag[ao] * pImpulseResponseImag[0]);
     SLData_t sumOfProductsImag = (pSrcReal[ao] * pImpulseResponseImag[0]) + (pSrcImag[ao] * pImpulseResponseReal[0]);
 
     if (--ao < 0) {
-      ao += SampleLength;    // Circular array
+      ao += sampleLength;    // Circular array
     }
 
     // Calculate subsequent MACs
     // a0 is already decremented but b0 must start from '1'
-    for (SLArrayIndex_t j = 1; j < SampleLength; j++) {
+    for (SLArrayIndex_t j = 1; j < sampleLength; j++) {
       sumOfProductsReal += (pSrcReal[ao] * pImpulseResponseReal[j]) - (pSrcImag[ao] * pImpulseResponseImag[j]);
       sumOfProductsImag += (pSrcReal[ao] * pImpulseResponseImag[j]) + (pSrcImag[ao] * pImpulseResponseReal[j]);
       if (--ao < 0) {
-        ao += SampleLength;    // Circular array
+        ao += sampleLength;    // Circular array
       }
     }
 

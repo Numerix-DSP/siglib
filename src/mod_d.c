@@ -464,7 +464,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_CostasQamDemodulateDebug(
  *   SLFixData_t *pTriggerDetectedFlag,
  *   SLFixData_t *pTriggerUpdatedFlag,
  *   const SLArrayIndex_t SymbolLength,
- *   const SLArrayIndex_t SampleLength)
+ *   const SLArrayIndex_t sampleLength)
  *
  * Return value:
  *   Number of symbols demodulated
@@ -490,7 +490,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulate(
     const SLArrayIndex_t ELGLoopFilterLength, const SLData_t ELGNoiseThreshold, SLFixData_t* pELGPulseDetectorThresholdFlag,
     SLData_t* pELGZeroCrossingPreviousSample, SLArrayIndex_t* pELGTriggerCount, SLFixData_t* pELGTriggerDetectedFlag,
     SLFixData_t* pELGTriggerUpdatedFlag, const SLArrayIndex_t SymbolLength, SLData_t* pELGRealOutputSynchDelay, SLData_t* pELGImagOutputSynchDelay,
-    SLArrayIndex_t* pELGOutputSynchDelayIndex, const SLArrayIndex_t ELGOutputSynchDelayLength, const SLArrayIndex_t SampleLength)
+    SLArrayIndex_t* pELGOutputSynchDelayIndex, const SLArrayIndex_t ELGOutputSynchDelayLength, const SLArrayIndex_t sampleLength)
 {
   SLData_t ImagTmp,
       RealTmp;                              // Temporary data processing variables - one for each path
@@ -500,7 +500,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulate(
   SLData_t RealDelayedOutput, ImagDelayedOutput;
   SLData_t LocalCostasLoopLoopSample = *pCostasLoopLoopSample;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #  if SIGLIB_ENABLE_DEBUG_LOGGING
     SUF_Debugfprintf("CostasQamDemodulate: CostasLoopLoopSample = %lf, CarrierFreq = %lf, "
                      "CostasLpVCOModulationIndex = %lf, CostasLpVCOPhase = %lf\n",
@@ -629,7 +629,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulate(
  *   SLFixData_t *pTriggerDetectedFlag,
  *   SLFixData_t *pTriggerUpdatedFlag,
  *   const SLArrayIndex_t SymbolLength,
- *   const SLArrayIndex_t SampleLength)
+ *   const SLArrayIndex_t sampleLength)
  *   SLData_t *pDebugRealFilterOutput,
  *   SLData_t *pDebugImagFilterOutput,
  *   SLData_t *pDebugELGTriggerOutput,
@@ -658,7 +658,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulateDebug(
     const SLArrayIndex_t ELGLoopFilterLength, const SLData_t ELGNoiseThreshold, SLFixData_t* pELGPulseDetectorThresholdFlag,
     SLData_t* pELGZeroCrossingPreviousSample, SLArrayIndex_t* pELGTriggerCount, SLFixData_t* pELGTriggerDetectedFlag,
     SLFixData_t* pELGTriggerUpdatedFlag, const SLArrayIndex_t SymbolLength, SLData_t* pELGRealOutputSynchDelay, SLData_t* pELGImagOutputSynchDelay,
-    SLArrayIndex_t* pELGOutputSynchDelayIndex, const SLArrayIndex_t ELGOutputSynchDelayLength, const SLArrayIndex_t SampleLength,
+    SLArrayIndex_t* pELGOutputSynchDelayIndex, const SLArrayIndex_t ELGOutputSynchDelayLength, const SLArrayIndex_t sampleLength,
     SLData_t* pDebugRealFilterOutput, SLData_t* pDebugImagFilterOutput, SLData_t* pDebugELGTriggerOutput)
 {
   SLData_t ImagTmp,
@@ -669,7 +669,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulateDebug(
   SLData_t RealDelayedOutput, ImagDelayedOutput;
   SLData_t LocalCostasLoopLoopSample = *pCostasLoopLoopSample;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     // Use the frequency modulator as a voltage controlled oscillator
     // Input is saved feedback sample from previous iteration
     SDS_FrequencyModulateComplex(LocalCostasLoopLoopSample, &RealVCOOutput, &ImagVCOOutput, CarrierFreq, CostasLpVCOModulationIndex,

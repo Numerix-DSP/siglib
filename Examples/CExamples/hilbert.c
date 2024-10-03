@@ -29,7 +29,7 @@ int main(void)
     exit(-1);
   }
 
-  SLArrayIndex_t FilterIndex, DelayIndex;
+  SLArrayIndex_t filterIndex, DelayIndex;
 
   SLData_t* pSrc = SUF_VectorArrayAllocate(SAMPLE_LENGTH);
   SLData_t* pFilterCoeffs = SUF_VectorArrayAllocate(HILBERT_TRANSFORM_LENGTH);
@@ -43,7 +43,7 @@ int main(void)
                                   HILBERT_TRANSFORM_LENGTH);    // Filter length
   // Initialise FIR filter for Hilbert transformer
   SIF_Fir(pFilterState,                 // Pointer to filter state array
-          &FilterIndex,                 // Pointer to filter index register
+          &filterIndex,                 // Pointer to filter index register
           HILBERT_TRANSFORM_LENGTH);    // Filter length
                                         // Initialise the delay
   SIF_FixedDelay(pDelayState,           // Pointer to delay state array
@@ -80,7 +80,7 @@ int main(void)
           pHilbertTransformed,         // Filtered output array
           pFilterState,                // Pointer to filter state array
           pFilterCoeffs,               // Pointer to filter coefficients
-          &FilterIndex,                // Pointer to filter index register
+          &filterIndex,                // Pointer to filter index register
           HILBERT_TRANSFORM_LENGTH,    // Filter length
           SAMPLE_LENGTH);              // Dataset length
 

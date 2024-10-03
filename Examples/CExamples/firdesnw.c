@@ -38,7 +38,7 @@ int main(void)
 {
   h_GPC_Plot* h2DPlot;    // Plot object
 
-  SLArrayIndex_t FilterIndex;
+  SLArrayIndex_t filterIndex;
   SLData_t SrcData;
 
 #if FILTER_NOISE
@@ -184,7 +184,7 @@ int main(void)
 
   // Initialise the filter
   SIF_Fir(pFilterState,      // Pointer to filter state array
-          &FilterIndex,      // Pointer to filter index register
+          &filterIndex,      // Pointer to filter index register
           FILTER_LENGTH);    // Filter length
 
   for (SLArrayIndex_t i = 0; i < FFT_LENGTH; i++) {    // Filter data
@@ -203,7 +203,7 @@ int main(void)
     *(pFiltered + i) = SDS_Fir(SrcData,           // Input data sample to be filtered
                                pFilterState,      // Pointer to filter state array
                                pFilterCoeffs,     // Pointer to filter coefficients
-                               &FilterIndex,      // Pointer to filter index register
+                               &filterIndex,      // Pointer to filter index register
                                FILTER_LENGTH);    // Filter length
   }
 

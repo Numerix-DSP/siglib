@@ -113,7 +113,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_FixedDelay(const SLData_t Src, SLData_t* SIGLIB_PT
  *   SLData_t * SIGLIB_PTR_DECL pState,
  *   SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
  *   const SLArrayIndex_t DelayLength
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -125,7 +125,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_FixedDelay(const SLData_t Src, SLData_t* SIGLIB_PT
 
 void SIGLIB_FUNC_DECL SDA_FixedDelay(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pState,
                                      SLArrayIndex_t* SIGLIB_PTR_DECL pDelayIndex, const SLArrayIndex_t DelayLength,
-                                     const SLArrayIndex_t SampleLength)
+                                     const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -137,7 +137,7 @@ void SIGLIB_FUNC_DECL SDA_FixedDelay(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDat
 
   SLArrayIndex_t LocalDelayIndex = *pDelayIndex;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     LocalDelayIndex++;
     if (LocalDelayIndex >= DelayLength) {
       LocalDelayIndex = 0;
@@ -233,7 +233,7 @@ void SIGLIB_FUNC_DECL SDS_FixedDelayComplex(const SLData_t RealSrc, const SLData
  *   SLData_t * SIGLIB_PTR_DECL pImagState,
  *   SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
  *   const SLArrayIndex_t DelayLength
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -247,7 +247,7 @@ void SIGLIB_FUNC_DECL SDA_FixedDelayComplex(const SLData_t* SIGLIB_PTR_DECL pSrc
                                             SLData_t* SIGLIB_PTR_DECL pRealDst, SLData_t* SIGLIB_PTR_DECL pImagDst,
                                             SLData_t* SIGLIB_PTR_DECL pRealState, SLData_t* SIGLIB_PTR_DECL pImagState,
                                             SLArrayIndex_t* SIGLIB_PTR_DECL pDelayIndex, const SLArrayIndex_t DelayLength,
-                                            const SLArrayIndex_t SampleLength)
+                                            const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__                 // Defined by TI compiler
@@ -263,7 +263,7 @@ void SIGLIB_FUNC_DECL SDA_FixedDelayComplex(const SLData_t* SIGLIB_PTR_DECL pSrc
 
   SLArrayIndex_t LocalDelayIndex = *pDelayIndex;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     LocalDelayIndex++;
     if (LocalDelayIndex >= DelayLength) {
       LocalDelayIndex = 0;
@@ -287,7 +287,7 @@ void SIGLIB_FUNC_DECL SDA_FixedDelayComplex(const SLData_t* SIGLIB_PTR_DECL pSrc
  *   SLData_t * pDelay                 - Delay Data array pointer
  *   SLData_t * pTempDst               - Temporary Destination data array
  *pointer const SLArrayIndex_t Delay        - Delay length const SLArrayIndex_t
- *SampleLength - Buffer length
+ *sampleLength - Buffer length
  *
  * Return value:
  *   void
@@ -298,7 +298,7 @@ void SIGLIB_FUNC_DECL SDA_FixedDelayComplex(const SLData_t* SIGLIB_PTR_DECL pSrc
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_ShortFixedDelay(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pDelay,
-                                          SLData_t* SIGLIB_PTR_DECL pTempDst, const SLArrayIndex_t Delay, const SLArrayIndex_t SampleLength)
+                                          SLData_t* SIGLIB_PTR_DECL pTempDst, const SLArrayIndex_t Delay, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -309,15 +309,15 @@ void SIGLIB_FUNC_DECL SDA_ShortFixedDelay(const SLData_t* SIGLIB_PTR_DECL pSrc, 
 #  endif
 #endif
 
-  pSrc += (SampleLength - 1);    // Write input data to delay array
+  pSrc += (sampleLength - 1);    // Write input data to delay array
   for (SLArrayIndex_t i = 0; i < Delay; i++) {
     *pTempDst++ = *pSrc--;
   }
 
   pTempDst -= Delay;
 
-  pDst += (SampleLength - 1);    // Write input data to output array
-  for (SLArrayIndex_t i = 0; i < (SampleLength - Delay); i++) {
+  pDst += (sampleLength - 1);    // Write input data to output array
+  for (SLArrayIndex_t i = 0; i < (sampleLength - Delay); i++) {
     *pDst-- = *pSrc--;
   }
 
@@ -450,7 +450,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_VariableDelay(const SLData_t InputValue, SLData_t*
 
 void SIGLIB_FUNC_DECL SDA_VariableDelay(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pDelayArray,
                                         SLArrayIndex_t* pInputIndex, SLArrayIndex_t* pOutputIndex, const SLArrayIndex_t MaxDelayLength,
-                                        const SLArrayIndex_t SampleLength)
+                                        const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__                    // Defined by TI compiler
@@ -461,7 +461,7 @@ void SIGLIB_FUNC_DECL SDA_VariableDelay(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
   SLArrayIndex_t LocalInputIndex = *pInputIndex;
   SLArrayIndex_t LocalOutputIndex = *pOutputIndex;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     *(pDelayArray + LocalInputIndex) = *pSrc++;    // Write in new input value
 
     LocalInputIndex++;    // Update input pointer
@@ -619,7 +619,7 @@ void SIGLIB_FUNC_DECL SDA_VariableDelayComplex(const SLData_t* SIGLIB_PTR_DECL p
                                                SLData_t* SIGLIB_PTR_DECL pRealDst, SLData_t* SIGLIB_PTR_DECL pImagDst,
                                                SLData_t* SIGLIB_PTR_DECL pRealDelayArray, SLData_t* SIGLIB_PTR_DECL pImagDelayArray,
                                                SLArrayIndex_t* pInputIndex, SLArrayIndex_t* pOutputIndex, const SLArrayIndex_t MaxDelayLength,
-                                               const SLArrayIndex_t SampleLength)
+                                               const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__                 // Defined by TI compiler
@@ -637,7 +637,7 @@ void SIGLIB_FUNC_DECL SDA_VariableDelayComplex(const SLData_t* SIGLIB_PTR_DECL p
   SLArrayIndex_t LocalInputIndex = *pInputIndex;
   SLArrayIndex_t LocalOutputIndex = *pOutputIndex;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     *(pRealDelayArray + LocalInputIndex) = *pSrcReal++;    // Write in new input value
     *(pImagDelayArray + LocalInputIndex) = *pSrcImag++;
 

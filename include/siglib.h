@@ -4333,9 +4333,9 @@ SLData_t SIGLIB_FUNC_DECL SDS_InterpolateQuadraticLagrange1D(const SLData_t,    
                                                              const SLData_t,     // y(2) input sample magnitude
                                                              const SLData_t);    // Alpha x
 
-void SIGLIB_FUNC_DECL SIF_LagrangeFirFilter(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Filter coefficients array
-                                            const SLData_t,                      // Delay
-                                            const SLArrayIndex_t);               // Filter length
+void SIGLIB_FUNC_DECL SIF_LagrangeFirCoefficients(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Filter coefficients array
+                                                  const SLData_t,                      // Delay
+                                                  const SLArrayIndex_t);               // Filter length
 
 SLData_t SDS_LagrangeInterpolate(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Ideal points
                                  SLData_t* SIGLIB_INOUT_PTR_DECL,          // Filter coefficients array

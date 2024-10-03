@@ -215,7 +215,7 @@ void SIGLIB_FUNC_DECL SDA_CorrelatePartial(const SLData_t* SIGLIB_PTR_DECL pSrc1
  *   const SLData_t * SIGLIB_PTR_DECL pSrc1,
  *   const SLData_t * SIGLIB_PTR_DECL pSrc2,
  *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -229,7 +229,7 @@ void SIGLIB_FUNC_DECL SDA_CorrelatePartial(const SLData_t* SIGLIB_PTR_DECL pSrc1
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_CorrelateCircular(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLData_t* SIGLIB_PTR_DECL pSrc2,
-                                            SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t SampleLength)
+                                            SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -242,17 +242,17 @@ void SIGLIB_FUNC_DECL SDA_CorrelateCircular(const SLData_t* SIGLIB_PTR_DECL pSrc
   SLArrayIndex_t ao = 0;    // a offset
   SLArrayIndex_t bo = 1;    // b offset
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     SLData_t SumProd = pSrc1[ao] * pSrc2[0];
     ao++;                  // Increment a offset
-    ao %= SampleLength;    // Circular array
+    ao %= sampleLength;    // Circular array
 
-    for (SLArrayIndex_t j = 1; j < SampleLength; j++) {
+    for (SLArrayIndex_t j = 1; j < sampleLength; j++) {
       SumProd += pSrc1[ao] * pSrc2[bo];
       ao++;                  // Increment a offset
-      ao %= SampleLength;    // Circular array
+      ao %= sampleLength;    // Circular array
       bo++;                  // Increment a offset
-      bo %= SampleLength;    // Circular array
+      bo %= sampleLength;    // Circular array
     }
 
     *pDst++ = SumProd;

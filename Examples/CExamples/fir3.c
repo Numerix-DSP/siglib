@@ -53,7 +53,7 @@ int main(void)
 {
   h_GPC_Plot* h2DPlot;    // Plot object
 
-  SLArrayIndex_t FilterIndex;
+  SLArrayIndex_t filterIndex;
   SLData_t ChirpPhase, ChirpValue;
   SLData_t PreviousPhase;
 
@@ -87,7 +87,7 @@ int main(void)
           FFT_LENGTH);                // FFT length
                                       // Initialise FIR filter
   SIF_Fir(pFilterState,               // Pointer to filter state array
-          &FilterIndex,               // Pointer to filter index register
+          &filterIndex,               // Pointer to filter index register
           FILTER_LENGTH);             // Filter length
 
   // Generate a linear source signal
@@ -132,7 +132,7 @@ int main(void)
           pReal,             // Filtered output array
           pFilterState,      // Pointer to filter state array
           pFilterTaps,       // Pointer to filter coefficients
-          &FilterIndex,      // Pointer to filter index register
+          &filterIndex,      // Pointer to filter index register
           FILTER_LENGTH,     // Filter length
           SAMPLE_LENGTH);    // Dataset length
 

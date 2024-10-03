@@ -95,7 +95,7 @@ class LineGraph : public wxPanel
   double GetValue(int Location);
 
     private:
-  double AbsMax(const double* pSrc, const long SampleLength);
+  double AbsMax(const double* pSrc, const long sampleLength);
 
   wxStaticText *LeftLabel, *CenterLabel, *RightLabel;
   wxStaticText *TopLabel, *MiddleLabel, *BottomLabel;

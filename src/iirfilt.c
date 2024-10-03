@@ -110,7 +110,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Iir(const SLData_t Source, SLData_t* SIGLIB_PTR_DE
  *   SLData_t *pState,
  *   const SLData_t *pCoeffs,
  *   const SLArrayIndex_t NumberOfBiquads,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -123,7 +123,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Iir(const SLData_t Source, SLData_t* SIGLIB_PTR_DE
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Iir(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pState,
-                              const SLData_t* SIGLIB_PTR_DECL pCoeffs, const SLArrayIndex_t NumberOfBiquads, const SLArrayIndex_t SampleLength)
+                              const SLData_t* SIGLIB_PTR_DECL pCoeffs, const SLArrayIndex_t NumberOfBiquads, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -133,7 +133,7 @@ void SIGLIB_FUNC_DECL SDA_Iir(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SI
 #  endif
 #endif
 
-  for (SLArrayIndex_t j = 0; j < SampleLength; j++) {
+  for (SLArrayIndex_t j = 0; j < sampleLength; j++) {
     SLData_t TempInputData = *pSrc++;
 
     for (SLArrayIndex_t i = 0; i < NumberOfBiquads; i++) {
@@ -202,7 +202,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_IirMac(const SLData_t Source, SLData_t* SIGLIB_PTR
  *   SLData_t *pState,
  *   const SLData_t *pCoeffs,
  *   const SLArrayIndex_t NumberOfBiquads,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -216,7 +216,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_IirMac(const SLData_t Source, SLData_t* SIGLIB_PTR
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_IirMac(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pState,
-                                 const SLData_t* SIGLIB_PTR_DECL pCoeffs, const SLArrayIndex_t NumberOfBiquads, const SLArrayIndex_t SampleLength)
+                                 const SLData_t* SIGLIB_PTR_DECL pCoeffs, const SLArrayIndex_t NumberOfBiquads, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -226,7 +226,7 @@ void SIGLIB_FUNC_DECL SDA_IirMac(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
 #  endif
 #endif
 
-  for (SLArrayIndex_t j = 0; j < SampleLength; j++) {
+  for (SLArrayIndex_t j = 0; j < sampleLength; j++) {
     SLData_t TempInputData = *pSrc++;
 
     for (SLArrayIndex_t i = 0; i < NumberOfBiquads; i++) {
@@ -334,7 +334,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_IirOrderN(const SLData_t Source, SLData_t* SIGLIB_
  *   const SLData_t *pCoeffs,
  *   SLArrayIndex_t *pFilterIndex,
  *   const SLArrayIndex_t FilterOrder,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -346,7 +346,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_IirOrderN(const SLData_t Source, SLData_t* SIGLIB_
 
 void SIGLIB_FUNC_DECL SDA_IirOrderN(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pState,
                                     const SLData_t* SIGLIB_PTR_DECL pCoeffs, SLArrayIndex_t* SIGLIB_PTR_DECL pFilterIndex,
-                                    const SLArrayIndex_t FilterOrder, const SLArrayIndex_t SampleLength)
+                                    const SLArrayIndex_t FilterOrder, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -359,7 +359,7 @@ void SIGLIB_FUNC_DECL SDA_IirOrderN(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData
 
   SLArrayIndex_t LocalFilterIndex = *pFilterIndex;
 
-  for (SLArrayIndex_t j = 0; j < SampleLength; j++) {
+  for (SLArrayIndex_t j = 0; j < sampleLength; j++) {
     SLData_t FeedBackwardSumOfProducts = SIGLIB_ZERO;    // Don't calculate 0th feedback term
     SLData_t FeedForwardSumOfProducts = SIGLIB_ZERO;
 
@@ -392,7 +392,7 @@ void SIGLIB_FUNC_DECL SDA_IirOrderN(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData
  * Parameters:
  *   SLData_t *pState
  *   const SLArrayIndex_t NumberOfBiquads
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -418,7 +418,7 @@ void SIGLIB_FUNC_DECL SIF_IirNc(SLData_t* SIGLIB_PTR_DECL pState, const SLArrayI
  *   SLData_t *pState,
  *   const SLData_t * SIGLIB_PTR_DECL pCoeffs,
  *   const SLArrayIndex_t NumberOfBiquads,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -430,17 +430,17 @@ void SIGLIB_FUNC_DECL SIF_IirNc(SLData_t* SIGLIB_PTR_DECL pState, const SLArrayI
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_IirNc(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pState,
-                                const SLData_t* SIGLIB_PTR_DECL pCoeffs, const SLArrayIndex_t NumberOfBiquads, const SLArrayIndex_t SampleLength)
+                                const SLData_t* SIGLIB_PTR_DECL pCoeffs, const SLArrayIndex_t NumberOfBiquads, const SLArrayIndex_t sampleLength)
 {
   SDA_Iir(pSrc, pDst, pState, pCoeffs, NumberOfBiquads,
-          SampleLength);    // Apply IIR filter
+          sampleLength);    // Apply IIR filter
 
-  SDA_Reverse(pDst, pDst, SampleLength);    // Reverse time sequence
+  SDA_Reverse(pDst, pDst, sampleLength);    // Reverse time sequence
 
   SDA_Iir(pDst, pDst, pState, pCoeffs, NumberOfBiquads,
-          SampleLength);    // Apply IIR filter
+          sampleLength);    // Apply IIR filter
 
-  SDA_Reverse(pDst, pDst, SampleLength);    // Reverse time sequence
+  SDA_Reverse(pDst, pDst, sampleLength);    // Reverse time sequence
 }    // End of SDA_IirNc()
 
 /********************************************************
@@ -1380,7 +1380,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_IirRemoveDC(SLData_t Src, SLData_t* SIGLIB_PTR_DEC
  *   SLData_t * pDst,                    - Output data array
  *   SLData_t *p_PreviousInput,          - Previous input data word
  *   SLData_t *p_PreviousOutput,         - Previous output data word
- *   const SLArrayIndex_t SampleLength,  - Number of samples
+ *   const SLArrayIndex_t sampleLength,  - Number of samples
  *   const SLData_t convergenceRate      - Convergence rate
  *
  * Return value:
@@ -1393,7 +1393,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_IirRemoveDC(SLData_t Src, SLData_t* SIGLIB_PTR_DEC
 
 void SIGLIB_FUNC_DECL SDA_IirRemoveDC(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst,
                                       SLData_t* SIGLIB_PTR_DECL p_PreviousInput, SLData_t* SIGLIB_PTR_DECL p_PreviousOutput,
-                                      const SLData_t convergenceRate, const SLArrayIndex_t SampleLength)
+                                      const SLData_t convergenceRate, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -1402,7 +1402,7 @@ void SIGLIB_FUNC_DECL SDA_IirRemoveDC(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     SLData_t Src = *pSrc++;
     SLData_t Dst = (convergenceRate * *p_PreviousOutput) + (Src - *p_PreviousInput);
     *pDst++ = Dst;
@@ -1469,7 +1469,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePole(const SLData_t Src, const SLData_t onePole
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_OnePole(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLData_t onePoleCoefficient,
-                                  SLData_t* pState, const SLArrayIndex_t SampleLength)
+                                  SLData_t* pState, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -1478,7 +1478,7 @@ void SIGLIB_FUNC_DECL SDA_OnePole(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     *pState = pSrc[i] + ((*pState) * onePoleCoefficient);
@@ -1518,7 +1518,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePoleNormalized(const SLData_t Src, const SLData
  *   const SLData_t *pSrc    - Source data array pointer
  *   SLData_t *pDst          - Destination data array pointer
  *   const SLData_t          - Filter coefficient
- *   SLArrayIndex_t          - SampleLength
+ *   SLArrayIndex_t          - sampleLength
  *   const SLData_t          - Filter state
  *
  * Return value:
@@ -1529,7 +1529,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePoleNormalized(const SLData_t Src, const SLData
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_OnePoleNormalized(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLData_t onePoleCoefficient,
-                                            SLData_t* pState, const SLArrayIndex_t SampleLength)
+                                            SLData_t* pState, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -1538,7 +1538,7 @@ void SIGLIB_FUNC_DECL SDA_OnePoleNormalized(const SLData_t* SIGLIB_PTR_DECL pSrc
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     *pState = ((SIGLIB_ONE - onePoleCoefficient) * pSrc[i]) - ((*pState) * onePoleCoefficient);
@@ -1578,7 +1578,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePoleEWMA(const SLData_t Src, const SLData_t one
  *   const SLData_t *pSrc    - Source data array pointer
  *   SLData_t *pDst          - Destination data array pointer
  *   const SLData_t          - Filter coefficient
- *   SLArrayIndex_t          - SampleLength
+ *   SLArrayIndex_t          - sampleLength
  *   const SLData_t          - Filter state
  *
  * Return value:
@@ -1589,7 +1589,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePoleEWMA(const SLData_t Src, const SLData_t one
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_OnePoleEWMA(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLData_t onePoleCoefficient,
-                                      SLData_t* pState, const SLArrayIndex_t SampleLength)
+                                      SLData_t* pState, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -1598,7 +1598,7 @@ void SIGLIB_FUNC_DECL SDA_OnePoleEWMA(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     *pState = (onePoleCoefficient * pSrc[i]) - ((*pState) * (SIGLIB_ONE - onePoleCoefficient));
@@ -1618,7 +1618,7 @@ void SIGLIB_FUNC_DECL SDA_OnePoleEWMA(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
  *   SLData_t *pDst,                     - Destination data pointer
  *   SLData_t *pDelay,                   - Delayed data pointer
  *   const SLData_t onePoleCoefficient,  - Feedback coefficient
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -1630,15 +1630,15 @@ void SIGLIB_FUNC_DECL SDA_OnePoleEWMA(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_OnePolePerSample(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pDelay,
-                                           const SLData_t onePoleCoefficient, const SLArrayIndex_t SampleLength)
+                                           const SLData_t onePoleCoefficient, const SLArrayIndex_t sampleLength)
 {
   SDA_Multiply(pDelay, onePoleCoefficient, pDelay,
-               SampleLength);    // Decay feedback data
+               sampleLength);    // Decay feedback data
 
-  SDA_Add2(pSrc, pDelay, pDelay, SampleLength);    // Add feedback and new source
+  SDA_Add2(pSrc, pDelay, pDelay, sampleLength);    // Add feedback and new source
 
   SDA_Multiply(pDelay, (SIGLIB_ONE - onePoleCoefficient), pDst,
-               SampleLength);    // Scale output
+               sampleLength);    // Scale output
 }    // End of SDA_OnePolePerSample()
 
 /********************************************************
@@ -1699,7 +1699,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePoleHighPass(const SLData_t Src, const SLData_t
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_OnePoleHighPass(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLData_t onePoleCoefficient,
-                                          SLData_t* pState, const SLArrayIndex_t SampleLength)
+                                          SLData_t* pState, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -1708,7 +1708,7 @@ void SIGLIB_FUNC_DECL SDA_OnePoleHighPass(const SLData_t* SIGLIB_PTR_DECL pSrc, 
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     *pState = pSrc[i] + ((*pState) * onePoleCoefficient);
@@ -1749,7 +1749,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePoleHighPassNormalized(const SLData_t Src, cons
  *   SLData_t *pDst        - Destination data array pointer
  *   const SLData_t        - Filter coefficient
  *   const SLData_t        - Filter state
- *   SLArrayIndex_t        - SampleLength
+ *   SLArrayIndex_t        - sampleLength
  *
  * Return value:
  *   void
@@ -1759,7 +1759,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_OnePoleHighPassNormalized(const SLData_t Src, cons
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_OnePoleHighPassNormalized(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst,
-                                                    const SLData_t onePoleCoefficient, SLData_t* pState, const SLArrayIndex_t SampleLength)
+                                                    const SLData_t onePoleCoefficient, SLData_t* pState, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -1768,7 +1768,7 @@ void SIGLIB_FUNC_DECL SDA_OnePoleHighPassNormalized(const SLData_t* SIGLIB_PTR_D
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     *pState = ((SIGLIB_ONE + onePoleCoefficient) * pSrc[i]) + ((*pState) * onePoleCoefficient);
@@ -1788,7 +1788,7 @@ void SIGLIB_FUNC_DECL SDA_OnePoleHighPassNormalized(const SLData_t* SIGLIB_PTR_D
  *   SLData_t *pDst,                     - Destination data pointer
  *   SLData_t *pDelay,                   - Delayed data pointer
  *   const SLData_t onePoleCoefficient,  - Feedback coefficient
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -1801,15 +1801,15 @@ void SIGLIB_FUNC_DECL SDA_OnePoleHighPassNormalized(const SLData_t* SIGLIB_PTR_D
 
 void SIGLIB_FUNC_DECL SDA_OnePoleHighPassPerSample(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst,
                                                    SLData_t* SIGLIB_PTR_DECL pDelay, const SLData_t onePoleCoefficient,
-                                                   const SLArrayIndex_t SampleLength)
+                                                   const SLArrayIndex_t sampleLength)
 {
   SDA_Multiply(pDelay, onePoleCoefficient, pDelay,
-               SampleLength);    // Decay feedback data
+               sampleLength);    // Decay feedback data
 
-  SDA_Add2(pSrc, pDelay, pDelay, SampleLength);    // Add feedback and new source
+  SDA_Add2(pSrc, pDelay, pDelay, sampleLength);    // Add feedback and new source
 
   SDA_Multiply(pDelay, (SIGLIB_ONE + onePoleCoefficient), pDst,
-               SampleLength);    // Scale output
+               sampleLength);    // Scale output
 }    // End of SDA_OnePoleHighPassPerSample()
 
 /********************************************************
@@ -1969,7 +1969,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_AllPole(const SLData_t Source, SLData_t* SIGLIB_PT
  *   const SLData_t *pCoeffs,
  *   SLArrayIndex_t *pFilterIndex,
  *   const SLArrayIndex_t NumberOfPoles,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -1981,7 +1981,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_AllPole(const SLData_t Source, SLData_t* SIGLIB_PT
 
 void SIGLIB_FUNC_DECL SDA_AllPole(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pState,
                                   const SLData_t* SIGLIB_PTR_DECL pCoeffs, SLArrayIndex_t* SIGLIB_PTR_DECL pFilterIndex,
-                                  const SLArrayIndex_t FilterOrder, const SLArrayIndex_t SampleLength)
+                                  const SLArrayIndex_t FilterOrder, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -1994,7 +1994,7 @@ void SIGLIB_FUNC_DECL SDA_AllPole(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
 
   SLArrayIndex_t LocalFilterIndex = *pFilterIndex;
 
-  for (SLArrayIndex_t j = 0; j < SampleLength; j++) {
+  for (SLArrayIndex_t j = 0; j < sampleLength; j++) {
     SLData_t FeedBackwardSumOfProducts = SIGLIB_ZERO;    // Don't calculate 0th feedback term
 
     for (SLArrayIndex_t i = 0; i < FilterOrder; i++) {
@@ -2483,7 +2483,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Iir2Pole(const SLData_t Source, SLData_t* SIGLIB_P
  *   SLData_t *pDst,
  *   SLData_t *pState,
  *   const SLData_t *pCoeffs,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -2496,7 +2496,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Iir2Pole(const SLData_t Source, SLData_t* SIGLIB_P
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Iir2Pole(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pState,
-                                   const SLData_t* SIGLIB_PTR_DECL pCoeffs, const SLArrayIndex_t SampleLength)
+                                   const SLData_t* SIGLIB_PTR_DECL pCoeffs, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -2506,7 +2506,7 @@ void SIGLIB_FUNC_DECL SDA_Iir2Pole(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     SLData_t FeedbackSumOfProducts = *pSrc++ + (*pCoeffs * *pState) + (*(pCoeffs + 1) * *(pState + 1));    // Feedback
     *pDst++ = FeedbackSumOfProducts;
     *(pState + 1) = *pState;    // Move delayed samples

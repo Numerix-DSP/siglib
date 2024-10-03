@@ -164,7 +164,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_DeGlitch(SLData_t Src, SLArrayIndex_t* pOutOfRange
  *   const SLArrayIndex_t GlitchLengthThreshold,
  *   const SLData_t GlitchLevelThreshold,
  *   SLData_t *pGlitchLevelHoldover,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -175,12 +175,12 @@ SLData_t SIGLIB_FUNC_DECL SDS_DeGlitch(SLData_t Src, SLArrayIndex_t* pOutOfRange
 
 void SIGLIB_FUNC_DECL SDA_DeGlitch(SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLArrayIndex_t* pOutOfRangeCount,
                                    const enum SLDeGlitchMode_t DeGlitchMode, const SLArrayIndex_t GlitchLengthThreshold,
-                                   const SLData_t GlitchLevelThreshold, SLData_t* pGlitchLevelHoldover, const SLArrayIndex_t SampleLength)
+                                   const SLData_t GlitchLevelThreshold, SLData_t* pGlitchLevelHoldover, const SLArrayIndex_t sampleLength)
 {
   SLArrayIndex_t OutOfRangeCount = *pOutOfRangeCount;
 
   if (DeGlitchMode == SIGLIB_DEGLITCH_ABOVE) {
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
       SLData_t InputSample = *pSrc++;
 
       if (InputSample > GlitchLevelThreshold) {
@@ -197,7 +197,7 @@ void SIGLIB_FUNC_DECL SDA_DeGlitch(SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIG
       }
     }
   } else if (DeGlitchMode == SIGLIB_DEGLITCH_BOTH) {
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
       SLData_t InputSample = *pSrc++;
 
       if ((InputSample > GlitchLevelThreshold) && (*pGlitchLevelHoldover < GlitchLevelThreshold)) {
@@ -228,7 +228,7 @@ void SIGLIB_FUNC_DECL SDA_DeGlitch(SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIG
       }
     }
   } else {    // if (DeGlitchMode == SIGLIB_DEGLITCH_BELOW
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
       SLData_t InputSample = *pSrc++;
 
       if (InputSample < GlitchLevelThreshold) {

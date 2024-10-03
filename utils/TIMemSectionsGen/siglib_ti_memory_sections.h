@@ -211,7 +211,7 @@ Description: SigLib function memory section definition file for TI compilers
 #        pragma CODE_SECTION(SIF_InterpolateAndFilter, ".text")
 #        pragma CODE_SECTION(SIF_InterpolateSinc1D, ".text")
 #        pragma CODE_SECTION(SIF_InterpolateWindowedSinc1D, ".text")
-#        pragma CODE_SECTION(SIF_LagrangeFirFilter, ".text")
+#        pragma CODE_SECTION(SIF_LagrangeFirCoefficients, ".text")
 #        pragma CODE_SECTION(SIF_ResampleLinearContiguous, ".text")
 #        pragma CODE_SECTION(SIF_ResampleSinc, ".text")
 #        pragma CODE_SECTION(SIF_ResampleSincContiguous, ".text")

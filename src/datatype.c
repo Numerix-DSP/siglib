@@ -46,7 +46,7 @@ Description: Functions to convert between different data types.
  * Parameters:
  *   const SLData_t pSrc                 Input data pointer
  *   SLFixData_t pDst                    Output data pointer
- *   const SLArrayIndex_t SampleLength   Array Length
+ *   const SLArrayIndex_t sampleLength   Array Length
  *
  * Return value:
  *   void
@@ -57,7 +57,7 @@ Description: Functions to convert between different data types.
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_SigLibDataToFix(const SLData_t* SIGLIB_PTR_DECL pSrc, SLFixData_t* SIGLIB_PTR_DECL pDst,
-                                          const SLArrayIndex_t SampleLength)
+                                          const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -66,7 +66,7 @@ void SIGLIB_FUNC_DECL SDA_SigLibDataToFix(const SLData_t* SIGLIB_PTR_DECL pSrc, 
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = (SLFixData_t)SDS_RoundToNearest(pSrc[i]);
@@ -82,7 +82,7 @@ void SIGLIB_FUNC_DECL SDA_SigLibDataToFix(const SLData_t* SIGLIB_PTR_DECL pSrc, 
  * Parameters:
  *   const SLFixData_t pSrc              Input data pointer
  *   SLData_t pDst                       Output data pointer
- *   const SLArrayIndex_t SampleLength   Array Length
+ *   const SLArrayIndex_t sampleLength   Array Length
  *
  * Return value:
  *   void
@@ -93,7 +93,7 @@ void SIGLIB_FUNC_DECL SDA_SigLibDataToFix(const SLData_t* SIGLIB_PTR_DECL pSrc, 
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_FixToSigLibData(const SLFixData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst,
-                                          const SLArrayIndex_t SampleLength)
+                                          const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -102,7 +102,7 @@ void SIGLIB_FUNC_DECL SDA_FixToSigLibData(const SLFixData_t* SIGLIB_PTR_DECL pSr
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = (SLData_t)pSrc[i];
@@ -118,7 +118,7 @@ void SIGLIB_FUNC_DECL SDA_FixToSigLibData(const SLFixData_t* SIGLIB_PTR_DECL pSr
  * Parameters:
  *   const SLData_t pSrc                 Input data pointer
  *   SLImageData_t pDst                  Output data pointer
- *   const SLArrayIndex_t SampleLength   Array Length
+ *   const SLArrayIndex_t sampleLength   Array Length
  *
  * Return value:
  *   void
@@ -129,7 +129,7 @@ void SIGLIB_FUNC_DECL SDA_FixToSigLibData(const SLFixData_t* SIGLIB_PTR_DECL pSr
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_SigLibDataToImageData(const SLData_t* SIGLIB_PTR_DECL pSrc, SLImageData_t* SIGLIB_PTR_DECL pDst,
-                                                const SLArrayIndex_t SampleLength)
+                                                const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -138,7 +138,7 @@ void SIGLIB_FUNC_DECL SDA_SigLibDataToImageData(const SLData_t* SIGLIB_PTR_DECL 
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = (SLImageData_t)SDS_RoundToNearest(pSrc[i]);
@@ -154,7 +154,7 @@ void SIGLIB_FUNC_DECL SDA_SigLibDataToImageData(const SLData_t* SIGLIB_PTR_DECL 
  * Parameters:
  *   const SLImageData_t pSrc            Input data pointer
  *   SLData_t pDst                       Output data pointer
- *   const SLArrayIndex_t SampleLength   Array Length
+ *   const SLArrayIndex_t sampleLength   Array Length
  *
  * Return value:
  *   void
@@ -165,7 +165,7 @@ void SIGLIB_FUNC_DECL SDA_SigLibDataToImageData(const SLData_t* SIGLIB_PTR_DECL 
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_ImageDataToSigLibData(const SLImageData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst,
-                                                const SLArrayIndex_t SampleLength)
+                                                const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -174,7 +174,7 @@ void SIGLIB_FUNC_DECL SDA_ImageDataToSigLibData(const SLImageData_t* SIGLIB_PTR_
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = (SLData_t)pSrc[i];

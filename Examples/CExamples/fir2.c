@@ -40,7 +40,7 @@ static const SLData_t pFilterTaps[FILTER_LENGTH] = {
     1.24568792546E-0003,  -5.34266824816E-0004};
 
 static SLData_t pFilterState[FILTER_LENGTH];
-static SLArrayIndex_t FilterIndex;
+static SLArrayIndex_t filterIndex;
 
 int main(void)
 {
@@ -75,7 +75,7 @@ int main(void)
   }
 
   SIF_Fir(pFilterState,      // Pointer to filter state array
-          &FilterIndex,      // Pointer to filter index register
+          &filterIndex,      // Pointer to filter index register
           FILTER_LENGTH);    // Filter length
 
   SDA_SignalGenerate(pSrc1,                   // Pointer to destination array
@@ -95,7 +95,7 @@ int main(void)
     *pSrc2++ = SDS_Fir(*pSrc1++,          // Input data sample to be filtered
                        pFilterState,      // Pointer to filter state array
                        pFilterTaps,       // Pointer to filter coefficients
-                       &FilterIndex,      // Pointer to filter index register
+                       &filterIndex,      // Pointer to filter index register
                        FILTER_LENGTH);    // Filter length
   }
 

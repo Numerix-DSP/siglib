@@ -36,7 +36,7 @@ int main(void)
 {
   h_GPC_Plot* h2DPlot;    // Plot object
 
-  SLArrayIndex_t FilterIndex;
+  SLArrayIndex_t filterIndex;
 
   SLData_t* pRealData = SUF_VectorArrayAllocate(SAMPLE_LENGTH);
   SLData_t* pImagData = SUF_VectorArrayAllocate(SAMPLE_LENGTH);
@@ -68,7 +68,7 @@ int main(void)
 
   SIF_FirComplex(RealFilterState,    // Real state array pointer
                  ImagFilterState,    // Imaginary state array pointer
-                 &FilterIndex,       // Filter index
+                 &filterIndex,       // Filter index
                  FILTER_LENGTH);     // Filter length
 
   // Generate a broadband complex signal
@@ -168,7 +168,7 @@ int main(void)
                  ImagFilterState,    // Imaginary state array pointer
                  pRealFilterTaps,    // Real coefficient array pointer
                  pImagFilterTaps,    // Imaginary coefficient array pointer
-                 &FilterIndex,       // Filter index
+                 &filterIndex,       // Filter index
                  FILTER_LENGTH,      // Filter length
                  SAMPLE_LENGTH);     // Dataset length
 #else
@@ -181,7 +181,7 @@ int main(void)
                    ImagFilterState,    // Imaginary state array pointer
                    pRealFilterTaps,    // Real coefficient array pointer
                    pImagFilterTaps,    // Imaginary coefficient array pointer
-                   &FilterIndex,       // Filter index
+                   &filterIndex,       // Filter index
                    FILTER_LENGTH);     // Filter length
   }
 #endif

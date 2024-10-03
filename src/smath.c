@@ -47,7 +47,7 @@ Description: DSP basic math functions, for SigLib DSP library.
  *   const SLData_t * SIGLIB_PTR_DECL pSrc,
  *   const SLData_t Divisor,
  *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -58,7 +58,7 @@ Description: DSP basic math functions, for SigLib DSP library.
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Divide(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t Divisor, SLData_t* SIGLIB_PTR_DECL pDst,
-                                 const SLArrayIndex_t SampleLength)
+                                 const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -81,7 +81,7 @@ void SIGLIB_FUNC_DECL SDA_Divide(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLD
 
   else {    // Not divide by zero
     SLData_t LocalMultiplier = SIGLIB_ONE / Divisor;
-    for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+    for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
       pDst[i] = pSrc[i] * LocalMultiplier;
@@ -99,7 +99,7 @@ void SIGLIB_FUNC_DECL SDA_Divide(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLD
  *   const SLData_t * SIGLIB_PTR_DECL pSrc1,
  *   const SLData_t * SIGLIB_PTR_DECL pSrc2,
  *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -111,7 +111,7 @@ void SIGLIB_FUNC_DECL SDA_Divide(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLD
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Divide2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLData_t* SIGLIB_PTR_DECL pSrc2, SLData_t* SIGLIB_PTR_DECL pDst,
-                                  const SLArrayIndex_t SampleLength)
+                                  const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -121,7 +121,7 @@ void SIGLIB_FUNC_DECL SDA_Divide2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const S
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     if ((*pSrc2 < SIGLIB_MIN_THRESHOLD) &&     // Check for close to zero
         (*pSrc2 > -SIGLIB_MIN_THRESHOLD)) {    // Prevent against divide by zero
 
@@ -150,7 +150,7 @@ void SIGLIB_FUNC_DECL SDA_Divide2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const S
  *   const SLData_t * SIGLIB_PTR_DECL pSrc,
  *   const SLData_t Multiplier,
  *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -161,7 +161,7 @@ void SIGLIB_FUNC_DECL SDA_Divide2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const S
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Multiply(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t Multiplier, SLData_t* SIGLIB_PTR_DECL pDst,
-                                   const SLArrayIndex_t SampleLength)
+                                   const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -170,7 +170,7 @@ void SIGLIB_FUNC_DECL SDA_Multiply(const SLData_t* SIGLIB_PTR_DECL pSrc, const S
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = pSrc[i] * Multiplier;
@@ -187,7 +187,7 @@ void SIGLIB_FUNC_DECL SDA_Multiply(const SLData_t* SIGLIB_PTR_DECL pSrc, const S
  *   const SLData_t * SIGLIB_PTR_DECL pSrc1,
  *   const SLData_t * SIGLIB_PTR_DECL pSrc2,
  *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -198,7 +198,7 @@ void SIGLIB_FUNC_DECL SDA_Multiply(const SLData_t* SIGLIB_PTR_DECL pSrc, const S
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Multiply2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLData_t* SIGLIB_PTR_DECL pSrc2, SLData_t* SIGLIB_PTR_DECL pDst,
-                                    const SLArrayIndex_t SampleLength)
+                                    const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -208,7 +208,7 @@ void SIGLIB_FUNC_DECL SDA_Multiply2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = pSrc1[i] * pSrc2[i];
@@ -290,7 +290,7 @@ void SIGLIB_FUNC_DECL SDS_ComplexInverse(const SLData_t DenominatorReal, const S
  *   const SLData_t *,     - Source imaginary
  *   SLData_t *,         - Destination real
  *   SLData_t *,         - Destination imaginary
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -303,9 +303,9 @@ void SIGLIB_FUNC_DECL SDS_ComplexInverse(const SLData_t DenominatorReal, const S
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_ComplexInverse(const SLData_t* pDenominatorReal, const SLData_t* pDenominatorImag, SLData_t* pResultReal,
-                                         SLData_t* pResultImag, const SLArrayIndex_t SampleLength)
+                                         SLData_t* pResultImag, const SLArrayIndex_t sampleLength)
 {
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     SLData_t InverseDenominator = SIGLIB_ONE / ((pDenominatorReal[i] * pDenominatorReal[i]) + (pDenominatorImag[i] * pDenominatorImag[i]));
 
     if (InverseDenominator == SIGLIB_ZERO) {    // Check for divide by zero
@@ -366,7 +366,7 @@ void SIGLIB_FUNC_DECL SDS_ComplexDivide(const SLData_t NumeratorReal, const SLDa
  *   const SLData_t,         - Scalar multiplier
  *   SLData_t * SIGLIB_PTR_DECL pDstReal,
  *   SLData_t * SIGLIB_PTR_DECL pDstImag,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -379,7 +379,7 @@ void SIGLIB_FUNC_DECL SDS_ComplexDivide(const SLData_t NumeratorReal, const SLDa
 
 void SIGLIB_FUNC_DECL SDA_ComplexScalarMultiply(const SLData_t* SIGLIB_PTR_DECL pSrcReal, const SLData_t* SIGLIB_PTR_DECL pSrcImag,
                                                 const SLData_t Scalar, SLData_t* SIGLIB_PTR_DECL pDstReal, SLData_t* SIGLIB_PTR_DECL pDstImag,
-                                                const SLArrayIndex_t SampleLength)
+                                                const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__                 // Defined by TI compiler
@@ -390,7 +390,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexScalarMultiply(const SLData_t* SIGLIB_PTR_DECL 
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDstReal[i] = pSrcReal[i] * Scalar;
@@ -413,7 +413,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexScalarMultiply(const SLData_t* SIGLIB_PTR_DECL 
  *   const SLData_t *,       - Source 2 imaginary
  *   SLData_t *,             - Destination real
  *   SLData_t *,             - Destination imaginary
- *   const SLArrayIndex_t    - SampleLength
+ *   const SLArrayIndex_t    - sampleLength
  *
  * Return value:
  *   void
@@ -429,7 +429,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexScalarMultiply(const SLData_t* SIGLIB_PTR_DECL 
 void SIGLIB_FUNC_DECL SDA_ComplexMultiply2(const SLData_t* SIGLIB_PTR_DECL pSrc1Real, const SLData_t* SIGLIB_PTR_DECL pSrc1Imag,
                                            const SLData_t* SIGLIB_PTR_DECL pSrc2Real, const SLData_t* SIGLIB_PTR_DECL pSrc2Imag,
                                            SLData_t* SIGLIB_PTR_DECL pDstReal, SLData_t* SIGLIB_PTR_DECL pDstImag,
-                                           const SLArrayIndex_t SampleLength)
+                                           const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__                  // Defined by TI compiler
@@ -442,7 +442,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexMultiply2(const SLData_t* SIGLIB_PTR_DECL pSrc1
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     SLData_t TempReal = (pSrc1Real[i] * pSrc2Real[i]) - (pSrc1Imag[i] * pSrc2Imag[i]);
@@ -467,7 +467,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexMultiply2(const SLData_t* SIGLIB_PTR_DECL pSrc1
  *   const SLData_t,         - Scalar divisor
  *   SLData_t * SIGLIB_PTR_DECL pDstReal,
  *   SLData_t * SIGLIB_PTR_DECL pDstImag,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -480,7 +480,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexMultiply2(const SLData_t* SIGLIB_PTR_DECL pSrc1
 
 void SIGLIB_FUNC_DECL SDA_ComplexScalarDivide(const SLData_t* SIGLIB_PTR_DECL pSrcReal, const SLData_t* SIGLIB_PTR_DECL pSrcImag,
                                               const SLData_t Scalar, SLData_t* SIGLIB_PTR_DECL pDstReal, SLData_t* SIGLIB_PTR_DECL pDstImag,
-                                              const SLArrayIndex_t SampleLength)
+                                              const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__                 // Defined by TI compiler
@@ -493,7 +493,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexScalarDivide(const SLData_t* SIGLIB_PTR_DECL pS
 
   SLData_t Multiplier = (SIGLIB_ONE / Scalar);
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDstReal[i] = pSrcReal[i] * Multiplier;
@@ -515,7 +515,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexScalarDivide(const SLData_t* SIGLIB_PTR_DECL pS
  *   const SLData_t * SIGLIB_PTR_DECL pImagDen2, - Imaginary denominator
  *   SLData_t * SIGLIB_PTR_DECL pRealDst,
  *   SLData_t * SIGLIB_PTR_DECL pImagDst,
- *   const SLArrayIndex_t SampleLength)
+ *   const SLArrayIndex_t sampleLength)
  *
  * Return value:
  *   void
@@ -527,11 +527,11 @@ void SIGLIB_FUNC_DECL SDA_ComplexScalarDivide(const SLData_t* SIGLIB_PTR_DECL pS
 
 void SIGLIB_FUNC_DECL SDA_ComplexDivide2(const SLData_t* SIGLIB_PTR_DECL pRealNum1, const SLData_t* SIGLIB_PTR_DECL pImagNum1,
                                          const SLData_t* SIGLIB_PTR_DECL pRealDen2, const SLData_t* SIGLIB_PTR_DECL pImagDen2,
-                                         SLData_t* SIGLIB_PTR_DECL pRealDst, SLData_t* SIGLIB_PTR_DECL pImagDst, const SLArrayIndex_t SampleLength)
+                                         SLData_t* SIGLIB_PTR_DECL pRealDst, SLData_t* SIGLIB_PTR_DECL pImagDst, const SLArrayIndex_t sampleLength)
 {
   SLComplexRect_s ComplexTmp1, ComplexTmp2;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     ComplexTmp1 = SCV_Rectangular(*pRealNum1++, *pImagNum1++);
     ComplexTmp2 = SCV_Rectangular(*pRealDen2++, *pImagDen2++);
     ComplexTmp1 = SCV_Divide(ComplexTmp1, ComplexTmp2);
@@ -646,7 +646,7 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDA_ComplexDotProduct(const SLData_t* SIGLIB_PT
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_SumAndDifference(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLData_t* SIGLIB_PTR_DECL pSrc2,
-                                           SLData_t* SIGLIB_PTR_DECL pSum, SLData_t* SIGLIB_PTR_DECL pDiff, const SLArrayIndex_t SampleLength)
+                                           SLData_t* SIGLIB_PTR_DECL pSum, SLData_t* SIGLIB_PTR_DECL pDiff, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -657,7 +657,7 @@ void SIGLIB_FUNC_DECL SDA_SumAndDifference(const SLData_t* SIGLIB_PTR_DECL pSrc1
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pSum[i] = pSrc1[i] + pSrc2[i];
@@ -687,7 +687,7 @@ void SIGLIB_FUNC_DECL SDA_SumAndDifference(const SLData_t* SIGLIB_PTR_DECL pSrc1
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Add2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLData_t* SIGLIB_PTR_DECL pSrc2, SLData_t* SIGLIB_PTR_DECL pDst,
-                               const SLArrayIndex_t SampleLength)
+                               const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -697,7 +697,7 @@ void SIGLIB_FUNC_DECL SDA_Add2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = pSrc1[i] + pSrc2[i];
@@ -726,7 +726,7 @@ void SIGLIB_FUNC_DECL SDA_Add2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Add3(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLData_t* SIGLIB_PTR_DECL pSrc2, const SLData_t* SIGLIB_PTR_DECL pSrc3,
-                               SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t SampleLength)
+                               SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -737,7 +737,7 @@ void SIGLIB_FUNC_DECL SDA_Add3(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = pSrc1[i] + pSrc2[i] + pSrc3[i];
@@ -767,7 +767,7 @@ void SIGLIB_FUNC_DECL SDA_Add3(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Add4(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLData_t* SIGLIB_PTR_DECL pSrc2, const SLData_t* SIGLIB_PTR_DECL pSrc3,
-                               const SLData_t* SIGLIB_PTR_DECL pSrc4, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t SampleLength)
+                               const SLData_t* SIGLIB_PTR_DECL pSrc4, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -779,7 +779,7 @@ void SIGLIB_FUNC_DECL SDA_Add4(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = pSrc1[i] + pSrc2[i] + pSrc3[i] + pSrc4[i];
@@ -811,7 +811,7 @@ void SIGLIB_FUNC_DECL SDA_Add4(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
 
 void SIGLIB_FUNC_DECL SDA_Add5(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLData_t* SIGLIB_PTR_DECL pSrc2, const SLData_t* SIGLIB_PTR_DECL pSrc3,
                                const SLData_t* SIGLIB_PTR_DECL pSrc4, const SLData_t* SIGLIB_PTR_DECL pSrc5, SLData_t* SIGLIB_PTR_DECL pDst,
-                               const SLArrayIndex_t SampleLength)
+                               const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -824,7 +824,7 @@ void SIGLIB_FUNC_DECL SDA_Add5(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = pSrc1[i] + pSrc2[i] + pSrc3[i] + pSrc4[i] + pSrc5[i];
@@ -891,7 +891,7 @@ void SIGLIB_FUNC_DECL SDA_WeightedSum(const SLData_t* SIGLIB_PTR_DECL pSrc1, con
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Subtract2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLData_t* SIGLIB_PTR_DECL pSrc2, SLData_t* SIGLIB_PTR_DECL pDst,
-                                    const SLArrayIndex_t SampleLength)
+                                    const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -901,7 +901,7 @@ void SIGLIB_FUNC_DECL SDA_Subtract2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = pSrc1[i] - pSrc2[i];
@@ -918,7 +918,7 @@ void SIGLIB_FUNC_DECL SDA_Subtract2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const
  *   const SLData_t * SIGLIB_PTR_DECL pSrc,
  *   const SLData_t Offset,
  *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -929,7 +929,7 @@ void SIGLIB_FUNC_DECL SDA_Subtract2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Add(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t Offset, SLData_t* SIGLIB_PTR_DECL pDst,
-                              const SLArrayIndex_t SampleLength)
+                              const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -938,7 +938,7 @@ void SIGLIB_FUNC_DECL SDA_Add(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLData
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = pSrc[i] + Offset;
@@ -1006,7 +1006,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_NegativeOffset(const SLData_t* SIGLIB_PTR_DECL pSr
  * Parameters:
  *   const SLData_t * SIGLIB_PTR_DECL pSrc   - input Data array pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst     - output Data array pointer
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -1016,7 +1016,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_NegativeOffset(const SLData_t* SIGLIB_PTR_DECL pSr
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Negate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t SampleLength)
+void SIGLIB_FUNC_DECL SDA_Negate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -1025,7 +1025,7 @@ void SIGLIB_FUNC_DECL SDA_Negate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = -pSrc[i];
@@ -1041,7 +1041,7 @@ void SIGLIB_FUNC_DECL SDA_Negate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  * Parameters:
  *   const SLData_t * SIGLIB_PTR_DECL pSrc,
  *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -1051,7 +1051,7 @@ void SIGLIB_FUNC_DECL SDA_Negate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Inverse(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t SampleLength)
+void SIGLIB_FUNC_DECL SDA_Inverse(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -1060,7 +1060,7 @@ void SIGLIB_FUNC_DECL SDA_Inverse(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = SIGLIB_ONE / pSrc[i];
@@ -1076,7 +1076,7 @@ void SIGLIB_FUNC_DECL SDA_Inverse(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
  * Parameters:
  *   const SLData_t * SIGLIB_PTR_DECL pSrc,
  *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -1086,7 +1086,7 @@ void SIGLIB_FUNC_DECL SDA_Inverse(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Square(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t SampleLength)
+void SIGLIB_FUNC_DECL SDA_Square(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -1095,7 +1095,7 @@ void SIGLIB_FUNC_DECL SDA_Square(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = pSrc[i] * pSrc[i];
@@ -1112,7 +1112,7 @@ void SIGLIB_FUNC_DECL SDA_Square(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  * Parameters:
  *   const SLData_t * SIGLIB_PTR_DECL pSrc,
  *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -1122,7 +1122,7 @@ void SIGLIB_FUNC_DECL SDA_Square(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Sqrt(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t SampleLength)
+void SIGLIB_FUNC_DECL SDA_Sqrt(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -1131,7 +1131,7 @@ void SIGLIB_FUNC_DECL SDA_Sqrt(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* S
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = SDS_Sqrt(pSrc[i]);
@@ -1148,7 +1148,7 @@ void SIGLIB_FUNC_DECL SDA_Sqrt(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* S
  *   const SLData_t * SIGLIB_PTR_DECL pSrc1,
  *   const SLData_t * SIGLIB_PTR_DECL pSrc2,
  *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -1160,7 +1160,7 @@ void SIGLIB_FUNC_DECL SDA_Sqrt(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* S
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Difference(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLData_t* SIGLIB_PTR_DECL pSrc2, SLData_t* SIGLIB_PTR_DECL pDst,
-                                     const SLArrayIndex_t SampleLength)
+                                     const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -1170,7 +1170,7 @@ void SIGLIB_FUNC_DECL SDA_Difference(const SLData_t* SIGLIB_PTR_DECL pSrc1, cons
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     SLData_t Difference = *pSrc1++ - *pSrc2++;
     if (Difference < SIGLIB_ZERO) {
       Difference = -Difference;
@@ -1185,7 +1185,7 @@ void SIGLIB_FUNC_DECL SDA_Difference(const SLData_t* SIGLIB_PTR_DECL pSrc1, cons
  * Parameters:
  *   const SLData_t * SIGLIB_PTR_DECL pSrc1,
  *   const SLData_t * SIGLIB_PTR_DECL pSrc2,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -1197,7 +1197,7 @@ void SIGLIB_FUNC_DECL SDA_Difference(const SLData_t* SIGLIB_PTR_DECL pSrc1, cons
  ********************************************************/
 
 SLData_t SIGLIB_FUNC_DECL SDA_SumOfDifferences(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLData_t* SIGLIB_PTR_DECL pSrc2,
-                                               const SLArrayIndex_t SampleLength)
+                                               const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -1207,7 +1207,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_SumOfDifferences(const SLData_t* SIGLIB_PTR_DECL p
 #endif
 
   SLData_t Sum = SIGLIB_ZERO;
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     SLData_t Difference = *pSrc1++ - *pSrc2++;
     if (Difference < SIGLIB_ZERO) {
       Difference = -Difference;
@@ -1673,7 +1673,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_DegreesToRadians(const SLData_t Degrees)
  * Parameters:
  *   SLData_t *pSrc          Pointer to src angle - degrees
  *   const SLData_t *pDst    Pointer to dst angle - radians
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -1683,7 +1683,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_DegreesToRadians(const SLData_t Degrees)
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_DegreesToRadians(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t SampleLength)
+void SIGLIB_FUNC_DECL SDA_DegreesToRadians(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -1692,7 +1692,7 @@ void SIGLIB_FUNC_DECL SDA_DegreesToRadians(const SLData_t* SIGLIB_PTR_DECL pSrc,
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = pSrc[i] * SIGLIB_DEGREES_TO_RADIANS;
@@ -1727,7 +1727,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_RadiansToDegrees(const SLData_t Degrees)
  * Parameters:
  *   SLData_t *pSrc          Pointer to src angle - radians
  *   const SLData_t *pDst    Pointer to dst angle - degrees
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -1737,7 +1737,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_RadiansToDegrees(const SLData_t Degrees)
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_RadiansToDegrees(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t SampleLength)
+void SIGLIB_FUNC_DECL SDA_RadiansToDegrees(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -1746,7 +1746,7 @@ void SIGLIB_FUNC_DECL SDA_RadiansToDegrees(const SLData_t* SIGLIB_PTR_DECL pSrc,
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = pSrc[i] * SIGLIB_RADIANS_TO_DEGREES;

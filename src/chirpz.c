@@ -151,7 +151,7 @@ void SIGLIB_FUNC_DECL SIF_Czt(SLData_t* SIGLIB_PTR_DECL pAWNr, SLData_t* SIGLIB_
  *   const SLComplexRect_s,              - A ^ (-1)
  *   const SLComplexRect_s,              - W
  *   const SLComplexRect_s,              - W^(1/2)
- *   const SLArrayIndex_t SampleLength   - Buffer length
+ *   const SLArrayIndex_t sampleLength   - Buffer length
  *
  * Return value:
  *   void
@@ -162,7 +162,7 @@ void SIGLIB_FUNC_DECL SIF_Czt(SLData_t* SIGLIB_PTR_DECL pAWNr, SLData_t* SIGLIB_
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SIF_Awn(SLData_t* SIGLIB_PTR_DECL pAWNr, SLData_t* SIGLIB_PTR_DECL pAWNi, const SLComplexRect_s A_1, const SLComplexRect_s W1,
-                              const SLComplexRect_s W12, const SLArrayIndex_t SampleLength)
+                              const SLComplexRect_s W12, const SLArrayIndex_t sampleLength)
 {
   SLComplexRect_s C, D, Temp;
 
@@ -175,7 +175,7 @@ void SIGLIB_FUNC_DECL SIF_Awn(SLData_t* SIGLIB_PTR_DECL pAWNr, SLData_t* SIGLIB_
   D.real = (W12.real * A_1.real) - (W12.imag * A_1.imag);
   D.imag = (W12.real * A_1.imag) + (W12.imag * A_1.real);
 
-  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {    // Iterate complex chirp (sin & cos)
+  for (SLArrayIndex_t i = 1; i < sampleLength; i++) {    // Iterate complex chirp (sin & cos)
     Temp.real = (C.real * D.real) - (C.imag * D.imag);
     Temp.imag = (C.real * D.imag) + (C.imag * D.real);
 
@@ -282,7 +282,7 @@ void SIGLIB_FUNC_DECL SIF_Vl(SLData_t* SIGLIB_PTR_DECL pvLr, SLData_t* SIGLIB_PT
  *   SLData_t *pWMi,                     - Imaginary coefficient pointer
  *   const SLComplexRect_s,              - W
  *   const SLComplexRect_s,              - W^(1/2)
- *   const SLArrayIndex_t SampleLength   - Buffer length
+ *   const SLArrayIndex_t sampleLength   - Buffer length
  *
  * Return value:
  *   void
@@ -293,7 +293,7 @@ void SIGLIB_FUNC_DECL SIF_Vl(SLData_t* SIGLIB_PTR_DECL pvLr, SLData_t* SIGLIB_PT
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SIF_Wm(SLData_t* SIGLIB_PTR_DECL pWMr, SLData_t* SIGLIB_PTR_DECL pWMi, const SLComplexRect_s W1, const SLComplexRect_s W12,
-                             const SLArrayIndex_t SampleLength)
+                             const SLArrayIndex_t sampleLength)
 {
   SLComplexRect_s C, D, Temp;
 
@@ -306,7 +306,7 @@ void SIGLIB_FUNC_DECL SIF_Wm(SLData_t* SIGLIB_PTR_DECL pWMr, SLData_t* SIGLIB_PT
   D.real = W12.real;
   D.imag = W12.imag;
 
-  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {    // Iterate complex chirp (sin & cos)
+  for (SLArrayIndex_t i = 1; i < sampleLength; i++) {    // Iterate complex chirp (sin & cos)
     Temp.real = (C.real * D.real) - (C.imag * D.imag);
     Temp.imag = (C.real * D.imag) + (C.imag * D.real);
 

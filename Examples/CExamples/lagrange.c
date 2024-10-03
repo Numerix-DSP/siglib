@@ -46,13 +46,13 @@ int main(void)
 
 #if LAGRANGE_CAUSAL_FILTER == 1
   SLData_t lagrangeFilterCausalDelay = (SDS_Floor((LAGRANGE_FILTER_LENGTH - 1) / 2));
-  SIF_LagrangeFirFilter(pLagrangeFilterCoeffs,                                           // Pointer to filter coefficients
-                        LAGRANGE_FILTER_FRACTIONAL_DELAY + lagrangeFilterCausalDelay,    // Fractional delay
-                        LAGRANGE_FILTER_LENGTH);                                         // Filter length
+  SIF_LagrangeFirCoefficients(pLagrangeFilterCoeffs,                                           // Pointer to filter coefficients
+                              LAGRANGE_FILTER_FRACTIONAL_DELAY + lagrangeFilterCausalDelay,    // Fractional delay
+                              LAGRANGE_FILTER_LENGTH);                                         // Filter length
 #else
-  SIF_LagrangeFirFilter(pLagrangeFilterCoeffs,               // Pointer to filter coefficients
-                        LAGRANGE_FILTER_FRACTIONAL_DELAY,    // Fractional delay
-                        LAGRANGE_FILTER_LENGTH);             // Filter length
+  SIF_LagrangeFirCoefficients(pLagrangeFilterCoeffs,               // Pointer to filter coefficients
+                              LAGRANGE_FILTER_FRACTIONAL_DELAY,    // Fractional delay
+                              LAGRANGE_FILTER_LENGTH);             // Filter length
 #endif
   printf("Compute filter coefficients for Lagrange interpolation:\n");
   SUF_PrintArray(pLagrangeFilterCoeffs, LAGRANGE_FILTER_LENGTH);
@@ -104,7 +104,7 @@ int main(void)
 #define SINE_FREQUENCY (SIGLIB_ONE / ((SLData_t)SINE_PERIOD))
 #define SAMPLE_RATE 1.
   SLData_t pFilterState[LAGRANGE_FILTER_LENGTH];
-  SLArrayIndex_t FilterIndex;
+  SLArrayIndex_t filterIndex;
 
   SLData_t* pSrc = SUF_VectorArrayAllocate(SINE_LENGTH);
   SLData_t* pDst = SUF_VectorArrayAllocate(SINE_LENGTH);
@@ -129,18 +129,18 @@ int main(void)
   delay = 0.1;
   for (SLArrayIndex_t i = 0; i <= 10; i++) {
     SIF_Fir(pFilterState,               // Pointer to filter state array
-            &FilterIndex,               // Pointer to filter index register
+            &filterIndex,               // Pointer to filter index register
             LAGRANGE_FILTER_LENGTH);    // Filter length
 
-    SIF_LagrangeFirFilter(pLagrangeFilterCoeffs,      // Pointer to filter coefficients
-                          delay,                      // Fractional delay
-                          LAGRANGE_FILTER_LENGTH);    // Filter length
+    SIF_LagrangeFirCoefficients(pLagrangeFilterCoeffs,      // Pointer to filter coefficients
+                                delay,                      // Fractional delay
+                                LAGRANGE_FILTER_LENGTH);    // Filter length
 
     SDA_Fir(pSrc,                      // Pointer to input array to be filtered
             pDst,                      // Pointer to filtered output array
             pFilterState,              // Pointer to filter state array
             pLagrangeFilterCoeffs,     // Pointer to filter coefficients
-            &FilterIndex,              // Pointer to filter index register
+            &filterIndex,              // Pointer to filter index register
             LAGRANGE_FILTER_LENGTH,    // Filter length
             SINE_LENGTH);              // Output dataset length
 

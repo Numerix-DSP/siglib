@@ -210,7 +210,7 @@ EXPORTS
 	SIF_InterpolateAndFilter @164 NONAME
 	SIF_InterpolateSinc1D @165 NONAME
 	SIF_InterpolateWindowedSinc1D @166 NONAME
-	SIF_LagrangeFirFilter @167 NONAME
+	SIF_LagrangeFirCoefficients @167 NONAME
 	SIF_ResampleLinearContiguous @168 NONAME
 	SIF_ResampleSinc @169 NONAME
 	SIF_ResampleSincContiguous @170 NONAME

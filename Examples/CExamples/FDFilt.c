@@ -32,7 +32,7 @@ int main(void)
   h_GPC_Plot* h2DPlot;    // Plot object
 
   SLData_t InverseFFTLength;
-  SLArrayIndex_t FilterIndex;
+  SLArrayIndex_t filterIndex;
 
   // Allocate memory
   SLData_t* pSrc = SUF_VectorArrayAllocate(SAMPLE_LENGTH + FFT_LENGTH);    // Allow for overlap - overlap and save
@@ -113,7 +113,7 @@ int main(void)
 
   // Initialise FIR filter
   SIF_Fir(pFilterState,      // Pointer to filter state array
-          &FilterIndex,      // Pointer to filter index register
+          &filterIndex,      // Pointer to filter index register
           FILTER_LENGTH);    // Filter length
 
   // Apply fir filter
@@ -121,7 +121,7 @@ int main(void)
           pTDFilt,             // Filtered output array
           pFilterState,        // Pointer to filter state array
           TimeDomainCoeffs,    // Pointer to filter coefficients
-          &FilterIndex,        // Pointer to filter index register
+          &filterIndex,        // Pointer to filter index register
           FILTER_LENGTH,       // Filter length
           SAMPLE_LENGTH);      // Dataset length
 

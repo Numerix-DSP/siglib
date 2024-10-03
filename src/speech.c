@@ -67,7 +67,7 @@ void SIGLIB_FUNC_DECL SIF_PreEmphasisFilter(SLData_t* pState)
  *   SLData_t * SIGLIB_PTR_DECL pDst,
  *   const SLData_t Coefficient,
  *   SLData_t *pState,
- *   const SLArrayIndex_t SampleLength)
+ *   const SLArrayIndex_t sampleLength)
  *
  * Return value:
  *   void
@@ -78,7 +78,7 @@ void SIGLIB_FUNC_DECL SIF_PreEmphasisFilter(SLData_t* pState)
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_PreEmphasisFilter(SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLData_t Coefficient,
-                                            SLData_t* pState, const SLArrayIndex_t SampleLength)
+                                            SLData_t* pState, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -88,7 +88,7 @@ void SIGLIB_FUNC_DECL SDA_PreEmphasisFilter(SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
 #endif
 
   SLData_t LocalState = *pState;
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {    // Calculate pre-emphasis filter
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {    // Calculate pre-emphasis filter
     SLData_t InputValue = *pSrc++;
     *pDst++ = InputValue - (LocalState * Coefficient);
     LocalState = InputValue;
@@ -123,7 +123,7 @@ void SIGLIB_FUNC_DECL SIF_DeEmphasisFilter(SLData_t* pState)
  *   SLData_t * SIGLIB_PTR_DECL pDst,
  *   const SLData_t Coefficient,
  *   SLData_t *pState,
- *   const SLArrayIndex_t SampleLength)
+ *   const SLArrayIndex_t sampleLength)
  *
  * Return value:
  *   void
@@ -134,7 +134,7 @@ void SIGLIB_FUNC_DECL SIF_DeEmphasisFilter(SLData_t* pState)
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_DeEmphasisFilter(SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLData_t Coefficient,
-                                           SLData_t* pState, const SLArrayIndex_t SampleLength)
+                                           SLData_t* pState, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -144,7 +144,7 @@ void SIGLIB_FUNC_DECL SDA_DeEmphasisFilter(SLData_t* SIGLIB_PTR_DECL pSrc, SLDat
 #endif
 
   SLData_t LocalState = *pState;
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     *pDst = *pSrc++ + (LocalState * Coefficient);
     LocalState = *pDst++;
   }

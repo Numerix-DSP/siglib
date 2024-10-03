@@ -126,7 +126,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Fir(const SLData_t Src, SLData_t pState[], const S
  *   const SLData_t pCoeffs[],           Pointer to filter coefficients
  *   SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
  *   const SLArrayIndex_t filterLength,  Filter length
- *   const SLArrayIndex_t SampleLength   Input sample length
+ *   const SLArrayIndex_t sampleLength   Input sample length
  *
  * Return value:
  *   void
@@ -136,7 +136,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Fir(const SLData_t Src, SLData_t pState[], const S
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Fir(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t pDst[], SLData_t pState[], const SLData_t pCoeffs[],
-                              SLArrayIndex_t* pFilterIndex, const SLArrayIndex_t filterLength, const SLArrayIndex_t SampleLength)
+                              SLArrayIndex_t* pFilterIndex, const SLArrayIndex_t filterLength, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -149,7 +149,7 @@ void SIGLIB_FUNC_DECL SDA_Fir(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t pDs
 
   SLArrayIndex_t j = *pFilterIndex;    // Initialise local filter index
 
-  for (SLArrayIndex_t k = 0; k < SampleLength; k++) {
+  for (SLArrayIndex_t k = 0; k < sampleLength; k++) {
     pState[j] = *pSrc++;
 
     j--;    // De-rotate filter index
@@ -329,7 +329,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Comb(const SLData_t Src, SLData_t* SIGLIB_PTR_DECL
  *   SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
  *   const SLData_t pCoeffs[],           Pointer to filter coefficients
  *   const SLArrayIndex_t filterLength,  Filter length
- *   const SLArrayIndex_t SampleLength)  Sample length
+ *   const SLArrayIndex_t sampleLength)  Sample length
  *
  * Return value:
  *   void
@@ -341,7 +341,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Comb(const SLData_t Src, SLData_t* SIGLIB_PTR_DECL
 
 void SIGLIB_FUNC_DECL SDA_Comb(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pState,
                                SLArrayIndex_t* pFilterIndex, SLData_t* pFilterSum, const SLArrayIndex_t filterLength,
-                               const SLArrayIndex_t SampleLength)
+                               const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -354,7 +354,7 @@ void SIGLIB_FUNC_DECL SDA_Comb(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* S
   SLArrayIndex_t LocalStateArrayIndex = *pFilterIndex;
   SLData_t LocalFilterSum = *pFilterSum;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     SLData_t LocalInput = *pSrc++;
 
     LocalFilterSum = LocalFilterSum - pState[LocalStateArrayIndex] + LocalInput;    // Add in new sample and subtract old one
@@ -413,7 +413,7 @@ void SIGLIB_FUNC_DECL SIF_FirComplex(SLData_t* SIGLIB_PTR_DECL pRealState, SLDat
  *   const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
  *   SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
  *   const SLArrayIndex_t filterLength,
- *   const SLArrayIndex_t SampleLength)
+ *   const SLArrayIndex_t sampleLength)
  *
  * Return value:
  *   void
@@ -465,7 +465,7 @@ void SIGLIB_FUNC_DECL SDS_FirComplex(const SLData_t RealSrc, const SLData_t Imag
  *   const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
  *   SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
  *   const SLArrayIndex_t filterLength,
- *   const SLArrayIndex_t SampleLength)
+ *   const SLArrayIndex_t sampleLength)
  *
  * Return value:
  *   void
@@ -478,11 +478,11 @@ void SIGLIB_FUNC_DECL SDA_FirComplex(const SLData_t* SIGLIB_PTR_DECL pRealSrc, c
                                      SLData_t* SIGLIB_PTR_DECL pRealDst, SLData_t* SIGLIB_PTR_DECL pImagDst, SLData_t* SIGLIB_PTR_DECL pRealState,
                                      SLData_t* SIGLIB_PTR_DECL pImagState, const SLData_t* SIGLIB_PTR_DECL pRealCoeffs,
                                      const SLData_t* SIGLIB_PTR_DECL pImagCoeffs, SLArrayIndex_t* pFilterIndex, const SLArrayIndex_t filterLength,
-                                     const SLArrayIndex_t SampleLength)
+                                     const SLArrayIndex_t sampleLength)
 {
   SLArrayIndex_t j = *pFilterIndex;    // Initialise local filter index
 
-  for (SLArrayIndex_t k = 0; k < SampleLength; k++) {
+  for (SLArrayIndex_t k = 0; k < sampleLength; k++) {
     pRealState[j] = *pRealSrc++;
     pImagState[j] = *pImagSrc++;
 
@@ -581,7 +581,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_FirWithStore(const SLData_t Src, SLData_t pState[]
  *   SLData_t pState[],                  Pointer to filter state array
  *   const SLData_t pCoeffs[],           Pointer to filter coefficients
  *   const SLArrayIndex_t filterLength,  Filter length
- *   const SLArrayIndex_t SampleLength   Input sample length
+ *   const SLArrayIndex_t sampleLength   Input sample length
  *
  * Return value:
  *   void
@@ -591,7 +591,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_FirWithStore(const SLData_t Src, SLData_t pState[]
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_FirWithStore(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t pDst[], SLData_t pState[], const SLData_t pCoeffs[],
-                                       const SLArrayIndex_t filterLength, const SLArrayIndex_t SampleLength)
+                                       const SLArrayIndex_t filterLength, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -602,7 +602,7 @@ void SIGLIB_FUNC_DECL SDA_FirWithStore(const SLData_t* SIGLIB_PTR_DECL pSrc, SLD
 #  endif
 #endif
 
-  for (SLArrayIndex_t k = 0; k < SampleLength; k++) {
+  for (SLArrayIndex_t k = 0; k < sampleLength; k++) {
     pState[0] = *pSrc++;
 
     SLData_t sum = SIGLIB_ZERO;    // Pre-initialise sum
@@ -655,7 +655,7 @@ void SIGLIB_FUNC_DECL SIF_FirComplexWithStore(SLData_t* SIGLIB_PTR_DECL pRealSta
  *   const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
  *   const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
  *   const SLArrayIndex_t filterLength,
- *   const SLArrayIndex_t SampleLength)
+ *   const SLArrayIndex_t sampleLength)
  *
  * Return value:
  *   void
@@ -705,7 +705,7 @@ void SIGLIB_FUNC_DECL SDS_FirComplexWithStore(const SLData_t SrcReal, const SLDa
  *   const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
  *   const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
  *   const SLArrayIndex_t filterLength,
- *   const SLArrayIndex_t SampleLength)
+ *   const SLArrayIndex_t sampleLength)
  *
  * Return value:
  *   void
@@ -718,9 +718,9 @@ void SIGLIB_FUNC_DECL SDA_FirComplexWithStore(const SLData_t* SIGLIB_PTR_DECL pS
                                               SLData_t* SIGLIB_PTR_DECL pRealDst, SLData_t* SIGLIB_PTR_DECL pImagDst,
                                               SLData_t* SIGLIB_PTR_DECL pRealState, SLData_t* SIGLIB_PTR_DECL pImagState,
                                               const SLData_t* SIGLIB_PTR_DECL pRealCoeffs, const SLData_t* SIGLIB_PTR_DECL pImagCoeffs,
-                                              const SLArrayIndex_t filterLength, const SLArrayIndex_t SampleLength)
+                                              const SLArrayIndex_t filterLength, const SLArrayIndex_t sampleLength)
 {
-  for (SLArrayIndex_t k = 0; k < SampleLength; k++) {
+  for (SLArrayIndex_t k = 0; k < sampleLength; k++) {
     pRealState[0] = *pSrcReal++;
     pImagState[0] = *pSrcImag++;
 
@@ -909,7 +909,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_FirExtendedArray(const SLData_t Src, SLData_t* pSt
  *   const SLData_t pCoeffs[],           Pointer to filter coefficients
  *   SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
  *   const SLArrayIndex_t filterLength,  Filter length
- *   const SLArrayIndex_t SampleLength   Input sample length
+ *   const SLArrayIndex_t sampleLength   Input sample length
  *
  * Return value:
  *   void
@@ -919,7 +919,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_FirExtendedArray(const SLData_t Src, SLData_t* pSt
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_FirExtendedArray(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t pDst[], SLData_t pState[], const SLData_t pCoeffs[],
-                                           SLArrayIndex_t* pFilterIndex, const SLArrayIndex_t filterLength, const SLArrayIndex_t SampleLength)
+                                           SLArrayIndex_t* pFilterIndex, const SLArrayIndex_t filterLength, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -932,7 +932,7 @@ void SIGLIB_FUNC_DECL SDA_FirExtendedArray(const SLData_t* SIGLIB_PTR_DECL pSrc,
 
   SLArrayIndex_t localFilterIndex = *pFilterIndex;
 
-  for (SLArrayIndex_t k = 0; k < SampleLength; k++) {
+  for (SLArrayIndex_t k = 0; k < sampleLength; k++) {
     SLArrayIndex_t j = filterLength - localFilterIndex - 1;    // Initialize local state array offset
 
     pState[j] = *pSrc;    // Save input data in state array
@@ -1009,7 +1009,7 @@ void SIGLIB_FUNC_DECL SIF_FirComplexExtendedArray(SLData_t* SIGLIB_PTR_DECL pRea
  *   const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
  *   SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
  *   const SLArrayIndex_t filterLength,
- *   const SLArrayIndex_t SampleLength)
+ *   const SLArrayIndex_t sampleLength)
  *
  * Return value:
  *   void
@@ -1077,7 +1077,7 @@ void SIGLIB_FUNC_DECL SDS_FirComplexExtendedArray(const SLData_t SrcReal, const 
  *   const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
  *   SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
  *   const SLArrayIndex_t filterLength,
- *   const SLArrayIndex_t SampleLength)
+ *   const SLArrayIndex_t sampleLength)
  *
  * Return value:
  *   void
@@ -1091,7 +1091,7 @@ void SIGLIB_FUNC_DECL SDA_FirComplexExtendedArray(const SLData_t* SIGLIB_PTR_DEC
                                                   SLData_t* SIGLIB_PTR_DECL pRealState, SLData_t* SIGLIB_PTR_DECL pImagState,
                                                   const SLData_t* SIGLIB_PTR_DECL pRealCoeffs, const SLData_t* SIGLIB_PTR_DECL pImagCoeffs,
                                                   SLArrayIndex_t* pFilterIndex, const SLArrayIndex_t filterLength,
-                                                  const SLArrayIndex_t SampleLength)
+                                                  const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__                 // Defined by TI compiler
@@ -1108,7 +1108,7 @@ void SIGLIB_FUNC_DECL SDA_FirComplexExtendedArray(const SLData_t* SIGLIB_PTR_DEC
 
   SLArrayIndex_t localFilterIndex = *pFilterIndex;
 
-  for (SLArrayIndex_t k = 0; k < SampleLength; k++) {
+  for (SLArrayIndex_t k = 0; k < sampleLength; k++) {
     SLArrayIndex_t j = filterLength - localFilterIndex - 1;    // Initialize local state array offset
 
     pRealState[j] = *pRealSrc;    // Save input data in state array
@@ -1184,7 +1184,7 @@ void SIGLIB_FUNC_DECL SDS_FirExtendedArrayAddSample(const SLData_t Src, SLData_t
  *   SLData_t pState[],                  Pointer to filter state array
  *   SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
  *   const SLArrayIndex_t filterLength,  Filter length
- *   const SLArrayIndex_t SampleLength   Input sample length
+ *   const SLArrayIndex_t sampleLength   Input sample length
  *
  * Return value:
  *   void
@@ -1194,7 +1194,7 @@ void SIGLIB_FUNC_DECL SDS_FirExtendedArrayAddSample(const SLData_t Src, SLData_t
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_FirExtendedArrayAddSamples(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t pState[], SLArrayIndex_t* pFilterIndex,
-                                                     const SLArrayIndex_t filterLength, const SLArrayIndex_t SampleLength)
+                                                     const SLArrayIndex_t filterLength, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -1205,7 +1205,7 @@ void SIGLIB_FUNC_DECL SDA_FirExtendedArrayAddSamples(const SLData_t* SIGLIB_PTR_
 
   SLArrayIndex_t localFilterIndex = *pFilterIndex;
 
-  for (SLArrayIndex_t k = 0; k < SampleLength; k++) {
+  for (SLArrayIndex_t k = 0; k < sampleLength; k++) {
     SLArrayIndex_t j = filterLength - localFilterIndex - 1;    // Initialize local state array offset
 
     pState[j] = *pSrc;    // Save input data in state array

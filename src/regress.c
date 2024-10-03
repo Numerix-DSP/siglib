@@ -46,7 +46,7 @@ Description: SigLib DSP library regression analysis routines.
  * Parameters:
  *       const SLData_t * SIGLIB_PTR_DECL pSrcX - Buffer X data pointer
  *       const SLData_t * SIGLIB_PTR_DECL pSrcY - Buffer Y data pointer
- *       const SLArrayIndex_t SampleLength - Buffer length
+ *       const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Constant coefficient.
  *
@@ -66,7 +66,7 @@ Description: SigLib DSP library regression analysis routines.
  ********************************************************/
 
 SLData_t SIGLIB_FUNC_DECL SDA_LinraConstantCoeff(const SLData_t* SIGLIB_PTR_DECL pSrcX, const SLData_t* SIGLIB_PTR_DECL pSrcY,
-                                                 const SLArrayIndex_t SampleLength)
+                                                 const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef _TMS320C6700               // Defined by TI compiler
@@ -80,17 +80,17 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraConstantCoeff(const SLData_t* SIGLIB_PTR_DECL
   pSrcX++;
   pSrcY++;
 
-  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < sampleLength; i++) {
     SumX += *pSrcX;
     SumY += *pSrcY;
     pSrcX++;
     pSrcY++;
   }
 
-  pSrcX -= SampleLength;
-  pSrcY -= SampleLength;
+  pSrcX -= sampleLength;
+  pSrcY -= sampleLength;
 
-  return ((SumY - (SDA_LinraRegressionCoeff(pSrcX, pSrcY, SampleLength) * SumX)) / SampleLength);
+  return ((SumY - (SDA_LinraRegressionCoeff(pSrcX, pSrcY, sampleLength) * SumX)) / sampleLength);
 }    // End of SDA_LinraConstantCoeff()
 
 /********************************************************
@@ -99,7 +99,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraConstantCoeff(const SLData_t* SIGLIB_PTR_DECL
  * Parameters:
  *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
  *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLArrayIndex_t SampleLength - Buffer length
+ *       const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Regression coefficient.
  *
@@ -119,7 +119,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraConstantCoeff(const SLData_t* SIGLIB_PTR_DECL
  ********************************************************/
 
 SLData_t SIGLIB_FUNC_DECL SDA_LinraRegressionCoeff(const SLData_t* SIGLIB_PTR_DECL pSrcX, const SLData_t* SIGLIB_PTR_DECL pSrcY,
-                                                   const SLArrayIndex_t SampleLength)
+                                                   const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef _TMS320C6700               // Defined by TI compiler
@@ -135,7 +135,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
   pSrcX++;
   pSrcY++;
 
-  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < sampleLength; i++) {
     SumXY += (*pSrcX) * (*pSrcY);
     SumX += *pSrcX;
     SumY += *pSrcY;
@@ -144,7 +144,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
     pSrcY++;
   }
 
-  return (((SampleLength * SumXY) - (SumX * SumY)) / ((SampleLength * SumXSquared) - (SumX * SumX)));
+  return (((sampleLength * SumXY) - (SumX * SumY)) / ((sampleLength * SumXSquared) - (SumX * SumX)));
 }    // End of SDA_LinraRegressionCoeff()
 
 /********************************************************
@@ -153,7 +153,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
  * Parameters:
  *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
  *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLArrayIndex_t SampleLength - Buffer length
+ *       const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Correlation coefficient.
  *
@@ -173,7 +173,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
  ********************************************************/
 
 SLData_t SIGLIB_FUNC_DECL SDA_LinraCorrelationCoeff(const SLData_t* SIGLIB_PTR_DECL pSrcX, const SLData_t* SIGLIB_PTR_DECL pSrcY,
-                                                    const SLArrayIndex_t SampleLength)
+                                                    const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef _TMS320C6700               // Defined by TI compiler
@@ -190,7 +190,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
   pSrcX++;
   pSrcY++;
 
-  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < sampleLength; i++) {
     SumXY += (*pSrcX) * (*pSrcY);
     SumX += *pSrcX;
     SumY += *pSrcY;
@@ -200,8 +200,8 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
     pSrcY++;
   }
 
-  return (((SampleLength * SumXY) - (SumX * SumY)) /
-          SDS_Sqrt(((SampleLength * SumXSquared) - (SumX * SumX)) * ((SampleLength * SumYSquared) - (SumY * SumY))));
+  return (((sampleLength * SumXY) - (SumX * SumY)) /
+          SDS_Sqrt(((sampleLength * SumXSquared) - (SumX * SumX)) * ((sampleLength * SumYSquared) - (SumY * SumY))));
 }    // End of SDA_LinraRegressionCoeff()
 
 /********************************************************
@@ -211,7 +211,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
  *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
  *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
  *       const SLData_t YVal  - Y value
- *       const SLArrayIndex_t SampleLength - Buffer length
+ *       const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Estimate X
  *
@@ -225,9 +225,9 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
  ********************************************************/
 
 SLData_t SIGLIB_FUNC_DECL SDA_LinraEstimateX(const SLData_t* SIGLIB_PTR_DECL pSrcX, const SLData_t* SIGLIB_PTR_DECL pSrcY, const SLData_t YVal,
-                                             const SLArrayIndex_t SampleLength)
+                                             const SLArrayIndex_t sampleLength)
 {
-  return ((YVal - SDA_LinraConstantCoeff(pSrcX, pSrcY, SampleLength)) / SDA_LinraRegressionCoeff(pSrcX, pSrcY, SampleLength));
+  return ((YVal - SDA_LinraConstantCoeff(pSrcX, pSrcY, sampleLength)) / SDA_LinraRegressionCoeff(pSrcX, pSrcY, sampleLength));
 }    // End of SDA_LinraEstimateX()
 
 /********************************************************
@@ -237,7 +237,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraEstimateX(const SLData_t* SIGLIB_PTR_DECL pSr
  *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
  *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
  *       const SLData_t YVal  - Y value
- *       const SLArrayIndex_t SampleLength - Buffer length
+ *       const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Estimate Y
  *
@@ -251,9 +251,9 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraEstimateX(const SLData_t* SIGLIB_PTR_DECL pSr
  ********************************************************/
 
 SLData_t SIGLIB_FUNC_DECL SDA_LinraEstimateY(const SLData_t* SIGLIB_PTR_DECL pSrcX, const SLData_t* SIGLIB_PTR_DECL pSrcY, const SLData_t XVal,
-                                             const SLArrayIndex_t SampleLength)
+                                             const SLArrayIndex_t sampleLength)
 {
-  return ((XVal * SDA_LinraRegressionCoeff(pSrcX, pSrcY, SampleLength)) + SDA_LinraConstantCoeff(pSrcX, pSrcY, SampleLength));
+  return ((XVal * SDA_LinraRegressionCoeff(pSrcX, pSrcY, sampleLength)) + SDA_LinraConstantCoeff(pSrcX, pSrcY, sampleLength));
 }    // End of SDA_LinraEstimateY()
 
 /********************************************************
@@ -262,7 +262,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraEstimateY(const SLData_t* SIGLIB_PTR_DECL pSr
  * Parameters:
  *       const SLData_t * SIGLIB_PTR_DECL pSrcX - Buffer X data pointer
  *       const SLData_t * SIGLIB_PTR_DECL pSrcY - Buffer Y data pointer
- *       const SLArrayIndex_t SampleLength - Buffer length
+ *       const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Constant coefficient.
  *
@@ -282,7 +282,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraEstimateY(const SLData_t* SIGLIB_PTR_DECL pSr
  ********************************************************/
 
 SLData_t SIGLIB_FUNC_DECL SDA_LograConstantCoeff(const SLData_t* SIGLIB_PTR_DECL pSrcX, const SLData_t* SIGLIB_PTR_DECL pSrcY,
-                                                 const SLArrayIndex_t SampleLength)
+                                                 const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -296,17 +296,17 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograConstantCoeff(const SLData_t* SIGLIB_PTR_DECL
   pSrcX++;
   pSrcY++;
 
-  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < sampleLength; i++) {
     SumX += SDS_Log(*pSrcX);
     SumY += *pSrcY;
     pSrcX++;
     pSrcY++;
   }
 
-  pSrcX -= SampleLength;
-  pSrcY -= SampleLength;
+  pSrcX -= sampleLength;
+  pSrcY -= sampleLength;
 
-  return ((SumY - (SDA_LograRegressionCoeff(pSrcX, pSrcY, SampleLength) * SumX)) / SampleLength);
+  return ((SumY - (SDA_LograRegressionCoeff(pSrcX, pSrcY, sampleLength) * SumX)) / sampleLength);
 }    // End of SDA_LograConstantCoeff()
 
 /********************************************************
@@ -315,7 +315,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograConstantCoeff(const SLData_t* SIGLIB_PTR_DECL
  * Parameters:
  *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
  *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLArrayIndex_t SampleLength - Buffer length
+ *       const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Regression coefficient.
  *
@@ -335,7 +335,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograConstantCoeff(const SLData_t* SIGLIB_PTR_DECL
  ********************************************************/
 
 SLData_t SIGLIB_FUNC_DECL SDA_LograRegressionCoeff(const SLData_t* SIGLIB_PTR_DECL pSrcX, const SLData_t* SIGLIB_PTR_DECL pSrcY,
-                                                   const SLArrayIndex_t SampleLength)
+                                                   const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -351,7 +351,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
   pSrcX++;
   pSrcY++;
 
-  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < sampleLength; i++) {
     SumXY += SDS_Log(*pSrcX) * (*pSrcY);
     SumX += SDS_Log(*pSrcX);
     SumY += *pSrcY;
@@ -360,7 +360,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
     pSrcY++;
   }
 
-  return (((SampleLength * SumXY) - (SumX * SumY)) / ((SampleLength * SumXSquared) - (SumX * SumX)));
+  return (((sampleLength * SumXY) - (SumX * SumY)) / ((sampleLength * SumXSquared) - (SumX * SumX)));
 }    // End of SDA_LograRegressionCoeff()
 
 /********************************************************
@@ -369,7 +369,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
  * Parameters:
  *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
  *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLArrayIndex_t SampleLength - Buffer length
+ *       const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Correlation coefficient.
  *
@@ -389,7 +389,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
  ********************************************************/
 
 SLData_t SIGLIB_FUNC_DECL SDA_LograCorrelationCoeff(const SLData_t* SIGLIB_PTR_DECL pSrcX, const SLData_t* SIGLIB_PTR_DECL pSrcY,
-                                                    const SLArrayIndex_t SampleLength)
+                                                    const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -406,7 +406,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
   pSrcX++;
   pSrcY++;
 
-  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < sampleLength; i++) {
     SumXY += SDS_Log(*pSrcX) * (*pSrcY);
     SumX += SDS_Log(*pSrcX);
     SumY += *pSrcY;
@@ -416,8 +416,8 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
     pSrcY++;
   }
 
-  return (((SampleLength * SumXY) - (SumX * SumY)) /
-          SDS_Sqrt(((SampleLength * SumXSquared) - (SumX * SumX)) * ((SampleLength * SumYSquared) - (SumY * SumY))));
+  return (((sampleLength * SumXY) - (SumX * SumY)) /
+          SDS_Sqrt(((sampleLength * SumXSquared) - (SumX * SumX)) * ((sampleLength * SumYSquared) - (SumY * SumY))));
 }    // End of SDA_LograRegressionCoeff()
 
 /********************************************************
@@ -427,7 +427,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
  *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
  *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
  *       const SLData_t YVal  - Y value
- *       const SLArrayIndex_t SampleLength - Buffer length
+ *       const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Estimate X
  *
@@ -441,9 +441,9 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
  ********************************************************/
 
 SLData_t SIGLIB_FUNC_DECL SDA_LograEstimateX(const SLData_t* SIGLIB_PTR_DECL pSrcX, const SLData_t* SIGLIB_PTR_DECL pSrcY, const SLData_t YVal,
-                                             const SLArrayIndex_t SampleLength)
+                                             const SLArrayIndex_t sampleLength)
 {
-  return (SDS_Exp((YVal - SDA_LograConstantCoeff(pSrcX, pSrcY, SampleLength)) / SDA_LograRegressionCoeff(pSrcX, pSrcY, SampleLength)));
+  return (SDS_Exp((YVal - SDA_LograConstantCoeff(pSrcX, pSrcY, sampleLength)) / SDA_LograRegressionCoeff(pSrcX, pSrcY, sampleLength)));
 }    // End of SDA_LograEstimateX()
 
 /********************************************************
@@ -453,7 +453,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograEstimateX(const SLData_t* SIGLIB_PTR_DECL pSr
  *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
  *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
  *       const SLData_t YVal  - Y value
- *       const SLArrayIndex_t SampleLength - Buffer length
+ *       const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Estimate Y
  *
@@ -467,9 +467,9 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograEstimateX(const SLData_t* SIGLIB_PTR_DECL pSr
  ********************************************************/
 
 SLData_t SIGLIB_FUNC_DECL SDA_LograEstimateY(const SLData_t* SIGLIB_PTR_DECL pSrcX, const SLData_t* SIGLIB_PTR_DECL pSrcY, const SLData_t XVal,
-                                             const SLArrayIndex_t SampleLength)
+                                             const SLArrayIndex_t sampleLength)
 {
-  return ((SDS_Log(XVal) * SDA_LograRegressionCoeff(pSrcX, pSrcY, SampleLength)) + SDA_LograConstantCoeff(pSrcX, pSrcY, SampleLength));
+  return ((SDS_Log(XVal) * SDA_LograRegressionCoeff(pSrcX, pSrcY, sampleLength)) + SDA_LograConstantCoeff(pSrcX, pSrcY, sampleLength));
 }    // End of SDA_LograEstimateY()
 
 /********************************************************
@@ -478,7 +478,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograEstimateY(const SLData_t* SIGLIB_PTR_DECL pSr
  * Parameters:
  *       const SLData_t * SIGLIB_PTR_DECL pSrcX - Buffer X data pointer
  *       const SLData_t * SIGLIB_PTR_DECL pSrcY - Buffer Y data pointer
- *       const SLArrayIndex_t SampleLength - Buffer length
+ *       const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Constant coefficient.
  *
@@ -498,7 +498,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograEstimateY(const SLData_t* SIGLIB_PTR_DECL pSr
  ********************************************************/
 
 SLData_t SIGLIB_FUNC_DECL SDA_ExpraConstantCoeff(const SLData_t* SIGLIB_PTR_DECL pSrcX, const SLData_t* SIGLIB_PTR_DECL pSrcY,
-                                                 const SLArrayIndex_t SampleLength)
+                                                 const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -512,17 +512,17 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraConstantCoeff(const SLData_t* SIGLIB_PTR_DECL
   pSrcX++;
   pSrcY++;
 
-  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < sampleLength; i++) {
     SumX += *pSrcX;
     SumY += SDS_Log(*pSrcY);
     pSrcX++;
     pSrcY++;
   }
 
-  pSrcX -= SampleLength;
-  pSrcY -= SampleLength;
+  pSrcX -= sampleLength;
+  pSrcY -= sampleLength;
 
-  return ((SumY - (SDA_ExpraRegressionCoeff(pSrcX, pSrcY, SampleLength) * SumX)) / SampleLength);
+  return ((SumY - (SDA_ExpraRegressionCoeff(pSrcX, pSrcY, sampleLength) * SumX)) / sampleLength);
 }    // End of SDA_ExpraConstantCoeff()
 
 /********************************************************
@@ -531,7 +531,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraConstantCoeff(const SLData_t* SIGLIB_PTR_DECL
  * Parameters:
  *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
  *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLArrayIndex_t SampleLength - Buffer length
+ *       const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Regression coefficient.
  *
@@ -551,7 +551,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraConstantCoeff(const SLData_t* SIGLIB_PTR_DECL
  ********************************************************/
 
 SLData_t SIGLIB_FUNC_DECL SDA_ExpraRegressionCoeff(const SLData_t* SIGLIB_PTR_DECL pSrcX, const SLData_t* SIGLIB_PTR_DECL pSrcY,
-                                                   const SLArrayIndex_t SampleLength)
+                                                   const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -567,7 +567,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
   pSrcX++;
   pSrcY++;
 
-  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < sampleLength; i++) {
     SumXY += (*pSrcX) * SDS_Log(*pSrcY);
     SumX += *pSrcX;
     SumY += SDS_Log(*pSrcY);
@@ -576,7 +576,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
     pSrcY++;
   }
 
-  return (((SampleLength * SumXY) - (SumX * SumY)) / ((SampleLength * SumXSquared) - (SumX * SumX)));
+  return (((sampleLength * SumXY) - (SumX * SumY)) / ((sampleLength * SumXSquared) - (SumX * SumX)));
 }    // End of SDA_ExpraRegressionCoeff()
 
 /********************************************************
@@ -585,7 +585,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
  * Parameters:
  *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
  *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLArrayIndex_t SampleLength - Buffer length
+ *       const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Correlation coefficient.
  *
@@ -605,7 +605,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
  ********************************************************/
 
 SLData_t SIGLIB_FUNC_DECL SDA_ExpraCorrelationCoeff(const SLData_t* SIGLIB_PTR_DECL pSrcX, const SLData_t* SIGLIB_PTR_DECL pSrcY,
-                                                    const SLArrayIndex_t SampleLength)
+                                                    const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -622,7 +622,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
   pSrcX++;
   pSrcY++;
 
-  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < sampleLength; i++) {
     SumXY += (*pSrcX) * SDS_Log(*pSrcY);
     SumX += *pSrcX;
     SumY += SDS_Log(*pSrcY);
@@ -632,8 +632,8 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
     pSrcY++;
   }
 
-  return (((SampleLength * SumXY) - (SumX * SumY)) /
-          SDS_Sqrt(((SampleLength * SumXSquared) - (SumX * SumX)) * ((SampleLength * SumYSquared) - (SumY * SumY))));
+  return (((sampleLength * SumXY) - (SumX * SumY)) /
+          SDS_Sqrt(((sampleLength * SumXSquared) - (SumX * SumX)) * ((sampleLength * SumYSquared) - (SumY * SumY))));
 }    // End of SDA_ExpraRegressionCoeff()
 
 /********************************************************
@@ -643,7 +643,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
  *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
  *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
  *       const SLData_t YVal  - Y value
- *       const SLArrayIndex_t SampleLength - Buffer length
+ *       const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Estimate X
  *
@@ -657,9 +657,9 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
  ********************************************************/
 
 SLData_t SIGLIB_FUNC_DECL SDA_ExpraEstimateX(const SLData_t* SIGLIB_PTR_DECL pSrcX, const SLData_t* SIGLIB_PTR_DECL pSrcY, const SLData_t YVal,
-                                             const SLArrayIndex_t SampleLength)
+                                             const SLArrayIndex_t sampleLength)
 {
-  return ((SDS_Log(YVal) - SDA_ExpraConstantCoeff(pSrcX, pSrcY, SampleLength)) / SDA_ExpraRegressionCoeff(pSrcX, pSrcY, SampleLength));
+  return ((SDS_Log(YVal) - SDA_ExpraConstantCoeff(pSrcX, pSrcY, sampleLength)) / SDA_ExpraRegressionCoeff(pSrcX, pSrcY, sampleLength));
 }    // End of SDA_ExpraEstimateX()
 
 /********************************************************
@@ -669,7 +669,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraEstimateX(const SLData_t* SIGLIB_PTR_DECL pSr
  *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
  *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
  *       const SLData_t YVal  - Y value
- *       const SLArrayIndex_t SampleLength - Buffer length
+ *       const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Estimate Y
  *
@@ -683,9 +683,9 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraEstimateX(const SLData_t* SIGLIB_PTR_DECL pSr
  ********************************************************/
 
 SLData_t SIGLIB_FUNC_DECL SDA_ExpraEstimateY(const SLData_t* SIGLIB_PTR_DECL pSrcX, const SLData_t* SIGLIB_PTR_DECL pSrcY, const SLData_t XVal,
-                                             const SLArrayIndex_t SampleLength)
+                                             const SLArrayIndex_t sampleLength)
 {
-  return (SDS_Exp((XVal * SDA_ExpraRegressionCoeff(pSrcX, pSrcY, SampleLength)) + SDA_ExpraConstantCoeff(pSrcX, pSrcY, SampleLength)));
+  return (SDS_Exp((XVal * SDA_ExpraRegressionCoeff(pSrcX, pSrcY, sampleLength)) + SDA_ExpraConstantCoeff(pSrcX, pSrcY, sampleLength)));
 }    // End of SDA_ExpraEstimateY()
 
 /********************************************************
@@ -694,7 +694,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraEstimateY(const SLData_t* SIGLIB_PTR_DECL pSr
  * Parameters:
  *       const SLData_t * SIGLIB_PTR_DECL pSrcX - Buffer X data pointer
  *       const SLData_t * SIGLIB_PTR_DECL pSrcY - Buffer Y data pointer
- *       const SLArrayIndex_t SampleLength - Buffer length
+ *       const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Constant coefficient.
  *
@@ -714,7 +714,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraEstimateY(const SLData_t* SIGLIB_PTR_DECL pSr
  ********************************************************/
 
 SLData_t SIGLIB_FUNC_DECL SDA_PowraConstantCoeff(const SLData_t* SIGLIB_PTR_DECL pSrcX, const SLData_t* SIGLIB_PTR_DECL pSrcY,
-                                                 const SLArrayIndex_t SampleLength)
+                                                 const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -728,17 +728,17 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraConstantCoeff(const SLData_t* SIGLIB_PTR_DECL
   pSrcX++;
   pSrcY++;
 
-  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < sampleLength; i++) {
     SumX += SDS_Log(*pSrcX);
     SumY += SDS_Log(*pSrcY);
     pSrcX++;
     pSrcY++;
   }
 
-  pSrcX -= SampleLength;
-  pSrcY -= SampleLength;
+  pSrcX -= sampleLength;
+  pSrcY -= sampleLength;
 
-  return ((SumY - (SDA_PowraRegressionCoeff(pSrcX, pSrcY, SampleLength) * SumX)) / SampleLength);
+  return ((SumY - (SDA_PowraRegressionCoeff(pSrcX, pSrcY, sampleLength) * SumX)) / sampleLength);
 }    // End of SDA_PowraConstantCoeff()
 
 /********************************************************
@@ -747,7 +747,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraConstantCoeff(const SLData_t* SIGLIB_PTR_DECL
  * Parameters:
  *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
  *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLArrayIndex_t SampleLength - Buffer length
+ *       const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Regression coefficient.
  *
@@ -767,7 +767,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraConstantCoeff(const SLData_t* SIGLIB_PTR_DECL
  ********************************************************/
 
 SLData_t SIGLIB_FUNC_DECL SDA_PowraRegressionCoeff(const SLData_t* SIGLIB_PTR_DECL pSrcX, const SLData_t* SIGLIB_PTR_DECL pSrcY,
-                                                   const SLArrayIndex_t SampleLength)
+                                                   const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -783,7 +783,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
   pSrcX++;
   pSrcY++;
 
-  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < sampleLength; i++) {
     SumXY += SDS_Log(*pSrcX) * SDS_Log(*pSrcY);
     SumX += SDS_Log(*pSrcX);
     SumY += SDS_Log(*pSrcY);
@@ -792,7 +792,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
     pSrcY++;
   }
 
-  return (((SampleLength * SumXY) - (SumX * SumY)) / ((SampleLength * SumXSquared) - (SumX * SumX)));
+  return (((sampleLength * SumXY) - (SumX * SumY)) / ((sampleLength * SumXSquared) - (SumX * SumX)));
 }    // End of SDA_PowraRegressionCoeff()
 
 /********************************************************
@@ -801,7 +801,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
  * Parameters:
  *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
  *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLArrayIndex_t SampleLength - Buffer length
+ *       const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Correlation coefficient.
  *
@@ -823,7 +823,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
  ********************************************************/
 
 SLData_t SIGLIB_FUNC_DECL SDA_PowraCorrelationCoeff(const SLData_t* SIGLIB_PTR_DECL pSrcX, const SLData_t* SIGLIB_PTR_DECL pSrcY,
-                                                    const SLArrayIndex_t SampleLength)
+                                                    const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__              // Defined by TI compiler
@@ -840,7 +840,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
   pSrcX++;
   pSrcY++;
 
-  for (SLArrayIndex_t i = 1; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 1; i < sampleLength; i++) {
     SumXY += SDS_Log(*pSrcX) * SDS_Log(*pSrcY);
     SumX += SDS_Log(*pSrcX);
     SumY += SDS_Log(*pSrcY);
@@ -850,8 +850,8 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
     pSrcY++;
   }
 
-  return (((SampleLength * SumXY) - (SumX * SumY)) /
-          SDS_Sqrt(((SampleLength * SumXSquared) - (SumX * SumX)) * ((SampleLength * SumYSquared) - (SumY * SumY))));
+  return (((sampleLength * SumXY) - (SumX * SumY)) /
+          SDS_Sqrt(((sampleLength * SumXSquared) - (SumX * SumX)) * ((sampleLength * SumYSquared) - (SumY * SumY))));
 }    // End of SDA_PowraRegressionCoeff()
 
 /********************************************************
@@ -861,7 +861,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
  *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
  *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
  *       const SLData_t YVal  - Y value
- *       const SLArrayIndex_t SampleLength - Buffer length
+ *       const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Estimate X
  *
@@ -875,9 +875,9 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
  ********************************************************/
 
 SLData_t SIGLIB_FUNC_DECL SDA_PowraEstimateX(const SLData_t* SIGLIB_PTR_DECL pSrcX, const SLData_t* SIGLIB_PTR_DECL pSrcY, const SLData_t YVal,
-                                             const SLArrayIndex_t SampleLength)
+                                             const SLArrayIndex_t sampleLength)
 {
-  return (SDS_Exp((SDS_Log(YVal) - SDA_PowraConstantCoeff(pSrcX, pSrcY, SampleLength)) / SDA_PowraRegressionCoeff(pSrcX, pSrcY, SampleLength)));
+  return (SDS_Exp((SDS_Log(YVal) - SDA_PowraConstantCoeff(pSrcX, pSrcY, sampleLength)) / SDA_PowraRegressionCoeff(pSrcX, pSrcY, sampleLength)));
 }    // End of SDA_PowraEstimateX()
 
 /********************************************************
@@ -887,7 +887,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraEstimateX(const SLData_t* SIGLIB_PTR_DECL pSr
  *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
  *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
  *       const SLData_t YVal  - Y value
- *       const SLArrayIndex_t SampleLength - Buffer length
+ *       const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Estimate Y
  *
@@ -901,9 +901,9 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraEstimateX(const SLData_t* SIGLIB_PTR_DECL pSr
  ********************************************************/
 
 SLData_t SIGLIB_FUNC_DECL SDA_PowraEstimateY(const SLData_t* SIGLIB_PTR_DECL pSrcX, const SLData_t* SIGLIB_PTR_DECL pSrcY, const SLData_t XVal,
-                                             const SLArrayIndex_t SampleLength)
+                                             const SLArrayIndex_t sampleLength)
 {
-  return (SDS_Exp((SDS_Log(XVal) * SDA_PowraRegressionCoeff(pSrcX, pSrcY, SampleLength)) + SDA_PowraConstantCoeff(pSrcX, pSrcY, SampleLength)));
+  return (SDS_Exp((SDS_Log(XVal) * SDA_PowraRegressionCoeff(pSrcX, pSrcY, sampleLength)) + SDA_PowraConstantCoeff(pSrcX, pSrcY, sampleLength)));
 }    // End of SDA_PowraEstimateY()
 
 /********************************************************
@@ -913,7 +913,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraEstimateY(const SLData_t* SIGLIB_PTR_DECL pSr
  *   const SLData_t * SIGLIB_PTR_DECL pSrc,  Source data pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst,        Destination data pointer
  *   SLData_t * SIGLIB_PTR_DECL pRamp,       Ramp pointer
- *   const SLArrayIndex_t SampleLength       Sample length
+ *   const SLArrayIndex_t sampleLength       Sample length
  *
  * Return value:
  *   None
@@ -935,7 +935,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraEstimateY(const SLData_t* SIGLIB_PTR_DECL pSr
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Detrend(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pRamp,
-                                  const SLArrayIndex_t SampleLength)
+                                  const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -947,16 +947,16 @@ void SIGLIB_FUNC_DECL SDA_Detrend(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
 
   const SLData_t* pSrcStart = pSrc;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {    // Fill index array with ramp
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {    // Fill index array with ramp
     *(pRamp + i) = (SLData_t)i;
   }
 
   // Calculate constant and regression coefficient
-  SLData_t M = SDA_LinraRegressionCoeff(pRamp, pSrcStart, SampleLength);
-  SLData_t C = SDA_LinraConstantCoeff(pRamp, pSrcStart, SampleLength);
+  SLData_t M = SDA_LinraRegressionCoeff(pRamp, pSrcStart, sampleLength);
+  SLData_t C = SDA_LinraConstantCoeff(pRamp, pSrcStart, sampleLength);
 
   // Detrend the signal by removing the estimate from the original
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     *pDst++ = *pSrc++ - (M * ((SLData_t)i) + C);
   }
 }    // End of SDA_Detrend()
@@ -968,7 +968,7 @@ void SIGLIB_FUNC_DECL SDA_Detrend(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
  *   const SLData_t * SIGLIB_PTR_DECL pSrc,  Source data pointer
  *   SLData_t * SIGLIB_PTR_DECL pDst,        Destination data pointer
  *   SLData_t * SIGLIB_PTR_DECL pRamp,       Ramp pointer
- *   const SLArrayIndex_t SampleLength       Sample length
+ *   const SLArrayIndex_t sampleLength       Sample length
  *
  * Return value:
  *   None
@@ -989,7 +989,7 @@ void SIGLIB_FUNC_DECL SDA_Detrend(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_ExtractTrend(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pRamp,
-                                       const SLArrayIndex_t SampleLength)
+                                       const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -1001,16 +1001,16 @@ void SIGLIB_FUNC_DECL SDA_ExtractTrend(const SLData_t* SIGLIB_PTR_DECL pSrc, SLD
 
   const SLData_t* pSrcStart = pSrc;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {    // Fill index array with ramp
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {    // Fill index array with ramp
     *(pRamp + i) = (SLData_t)i;
   }
 
   // Calculate constant and regression coefficient
-  SLData_t M = SDA_LinraRegressionCoeff(pRamp, pSrcStart, SampleLength);
-  SLData_t C = SDA_LinraConstantCoeff(pRamp, pSrcStart, SampleLength);
+  SLData_t M = SDA_LinraRegressionCoeff(pRamp, pSrcStart, sampleLength);
+  SLData_t C = SDA_LinraConstantCoeff(pRamp, pSrcStart, sampleLength);
 
   // Write the trend line of the original
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     *pDst++ = M * ((SLData_t)i) + C;
   }
 }    // End of SDA_ExtractTrend()

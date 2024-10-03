@@ -637,7 +637,7 @@ void SIGLIB_FUNC_DECL SDA_FdAnalytic(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDat
  *   const SLData_t *pSLead  - pSLeading waveform
  *   const SLData_t *pSLag       - pSLagging waveform
  *   SLData_t *pDst          - Destination waveform
- *   const SLArrayIndex_t SampleLength   - Sample size
+ *   const SLArrayIndex_t sampleLength   - Sample size
  *
  * Return value:
  *   void
@@ -653,7 +653,7 @@ void SIGLIB_FUNC_DECL SDA_FdAnalytic(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDat
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_InstantFreq(const SLData_t* SIGLIB_PTR_DECL pSLead, const SLData_t* SIGLIB_PTR_DECL pSLag, SLData_t* SIGLIB_PTR_DECL pDst,
-                                      const SLArrayIndex_t SampleLength)
+                                      const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__               // Defined by TI compiler
@@ -663,7 +663,7 @@ void SIGLIB_FUNC_DECL SDA_InstantFreq(const SLData_t* SIGLIB_PTR_DECL pSLead, co
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SampleLength - 1; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength - 1; i++) {
     SLData_t k1 = *pSLead * *(pSLag + 1) - *(pSLead + 1) * *pSLag;
     SLData_t k2 = *pSLead * *(pSLead + 1) + *pSLag * *(pSLag + 1);
     *pDst++ = SIGLIB_INV_TWO_PI * SDS_Atan2(k1, k2);
@@ -857,7 +857,7 @@ void SIGLIB_FUNC_DECL SDA_Cidft(const SLData_t pSrcReal[], const SLData_t pSrcIm
  * Parameters:
  *   const SLData_t *pSrc,
  *   SLData_t *pDst,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -867,7 +867,7 @@ void SIGLIB_FUNC_DECL SDA_Cidft(const SLData_t pSrcReal[], const SLData_t pSrcIm
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_FftShift(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t SampleLength)
+void SIGLIB_FUNC_DECL SDA_FftShift(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -876,7 +876,7 @@ void SIGLIB_FUNC_DECL SDA_FftShift(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_
 #  endif
 #endif
 
-  SLArrayIndex_t half_size = (SLArrayIndex_t)((SLUFixData_t)SampleLength >> 1U);
+  SLArrayIndex_t half_size = (SLArrayIndex_t)((SLUFixData_t)sampleLength >> 1U);
 
   const SLData_t* LpSrc = pSrc;    // Init. Low and high segment pointers
   const SLData_t* HpSrc = pSrc + half_size;
@@ -898,7 +898,7 @@ void SIGLIB_FUNC_DECL SDA_FftShift(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_
  *   const SLData_t *pSrcImag,   - Imag source data pointer
  *   SLData_t *pDstReal,         - Real destn. data pointer
  *   SLData_t *pDstImag,         - Imag destn. data pointer
- *   const SLArrayIndex_t        - SampleLength
+ *   const SLArrayIndex_t        - sampleLength
  *
  * Return value:
  *   void
@@ -909,7 +909,7 @@ void SIGLIB_FUNC_DECL SDA_FftShift(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_CfftShift(const SLData_t* SIGLIB_PTR_DECL pSrcReal, const SLData_t* SIGLIB_PTR_DECL pSrcImag,
-                                    SLData_t* SIGLIB_PTR_DECL pDstReal, SLData_t* SIGLIB_PTR_DECL pDstImag, const SLArrayIndex_t SampleLength)
+                                    SLData_t* SIGLIB_PTR_DECL pDstReal, SLData_t* SIGLIB_PTR_DECL pDstImag, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__                 // Defined by TI compiler
@@ -920,7 +920,7 @@ void SIGLIB_FUNC_DECL SDA_CfftShift(const SLData_t* SIGLIB_PTR_DECL pSrcReal, co
 #  endif
 #endif
 
-  SLArrayIndex_t half_size = (SLArrayIndex_t)((SLUFixData_t)SampleLength >> 1U);
+  SLArrayIndex_t half_size = (SLArrayIndex_t)((SLUFixData_t)sampleLength >> 1U);
 
   const SLData_t* LpSrc = pSrcReal;    // Init. Low and high segment pointers
   const SLData_t* HpSrc = pSrcReal + half_size;

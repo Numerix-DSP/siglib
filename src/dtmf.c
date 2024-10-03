@@ -95,7 +95,7 @@ void SIGLIB_FUNC_DECL SIF_DtmfGenerate(SLData_t* SIGLIB_PTR_DECL pDTMFGenCoeff, 
  *   const SLFixData_t KeyCode           - Key code
  *   const SLData_t HalfMagnitude,       - Half the peak output signal magnitude
  *   SLData_t * SIGLIB_PTR_DECL pDTMFGenCoeff,
- *   const SLArrayIndex_t SampleLength   - Buffer length
+ *   const SLArrayIndex_t sampleLength   - Buffer length
  *
  * Return value:
  *   SLError_t ErrorCode
@@ -105,7 +105,7 @@ void SIGLIB_FUNC_DECL SIF_DtmfGenerate(SLData_t* SIGLIB_PTR_DECL pDTMFGenCoeff, 
  ********************************************************/
 
 SLError_t SIGLIB_FUNC_DECL SDA_DtmfGenerate(SLData_t* SIGLIB_PTR_DECL pDst, const SLFixData_t KeyCode, const SLData_t HalfMagnitude,
-                                            const SLData_t* SIGLIB_PTR_DECL pDTMFGenCoeff, const SLArrayIndex_t SampleLength)
+                                            const SLData_t* SIGLIB_PTR_DECL pDTMFGenCoeff, const SLArrayIndex_t sampleLength)
 {
   SLData_t CosCoeffLowF, SinCoeffLowF, CosCoeffHighF, SinCoeffHighF;
 
@@ -221,11 +221,11 @@ SLError_t SIGLIB_FUNC_DECL SDA_DtmfGenerate(SLData_t* SIGLIB_PTR_DECL pDst, cons
   SLFixData_t FirstTimeFlag = SIGLIB_TRUE;
   SLData_t ResonatorDelay[SIGLIB_RESONATOR_DELAY_LENGTH];
   SDA_Clear(ResonatorDelay, SIGLIB_RESONATOR_DELAY_LENGTH);
-  SDA_Resonator1(pDst, HalfMagnitude, ResonatorDelay, &FirstTimeFlag, CosCoeffLowF, SinCoeffLowF, SampleLength);
+  SDA_Resonator1(pDst, HalfMagnitude, ResonatorDelay, &FirstTimeFlag, CosCoeffLowF, SinCoeffLowF, sampleLength);
 
   FirstTimeFlag = SIGLIB_TRUE;
   SDA_Clear(ResonatorDelay, SIGLIB_RESONATOR_DELAY_LENGTH);
-  SDA_Resonator1Add(pDst, HalfMagnitude, ResonatorDelay, &FirstTimeFlag, CosCoeffHighF, SinCoeffHighF, SampleLength);
+  SDA_Resonator1Add(pDst, HalfMagnitude, ResonatorDelay, &FirstTimeFlag, CosCoeffHighF, SinCoeffHighF, sampleLength);
 
   return (SIGLIB_NO_ERROR);
 }    // End of SDA_DtmfGenerate()
@@ -235,7 +235,7 @@ SLError_t SIGLIB_FUNC_DECL SDA_DtmfGenerate(SLData_t* SIGLIB_PTR_DECL pDst, cons
  *
  * Parameters:
  *   const SLData_t SampleRate                       - Sample rate
- *   const SLArrayIndex_t SampleLength               - Buffer length
+ *   const SLArrayIndex_t sampleLength               - Buffer length
  *
  * Return value:
  *   void
@@ -245,21 +245,21 @@ SLError_t SIGLIB_FUNC_DECL SDA_DtmfGenerate(SLData_t* SIGLIB_PTR_DECL pDst, cons
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_DtmfDetect(const SLData_t SampleRate, const SLArrayIndex_t SampleLength)
+void SIGLIB_FUNC_DECL SIF_DtmfDetect(const SLData_t SampleRate, const SLArrayIndex_t sampleLength)
 {
   SLData_t siglib_numerix_InverseDTMFSampleRate = (SIGLIB_ONE / SampleRate);    // Set 1.0 / system sample rate
                                                                                 // Used in normalized frequencies below
 
   // Initialise Goertzel filters
-  siglib_numerix_GoertzelCoeffL0 = SIF_GoertzelDetect(SIGLIB_DTMF_DETECT_LF_0_NORM, SampleLength);
-  siglib_numerix_GoertzelCoeffL1 = SIF_GoertzelDetect(SIGLIB_DTMF_DETECT_LF_1_NORM, SampleLength);
-  siglib_numerix_GoertzelCoeffL2 = SIF_GoertzelDetect(SIGLIB_DTMF_DETECT_LF_2_NORM, SampleLength);
-  siglib_numerix_GoertzelCoeffL3 = SIF_GoertzelDetect(SIGLIB_DTMF_DETECT_LF_3_NORM, SampleLength);
+  siglib_numerix_GoertzelCoeffL0 = SIF_GoertzelDetect(SIGLIB_DTMF_DETECT_LF_0_NORM, sampleLength);
+  siglib_numerix_GoertzelCoeffL1 = SIF_GoertzelDetect(SIGLIB_DTMF_DETECT_LF_1_NORM, sampleLength);
+  siglib_numerix_GoertzelCoeffL2 = SIF_GoertzelDetect(SIGLIB_DTMF_DETECT_LF_2_NORM, sampleLength);
+  siglib_numerix_GoertzelCoeffL3 = SIF_GoertzelDetect(SIGLIB_DTMF_DETECT_LF_3_NORM, sampleLength);
 
-  siglib_numerix_GoertzelCoeffH0 = SIF_GoertzelDetect(SIGLIB_DTMF_DETECT_HF_0_NORM, SampleLength);
-  siglib_numerix_GoertzelCoeffH1 = SIF_GoertzelDetect(SIGLIB_DTMF_DETECT_HF_1_NORM, SampleLength);
-  siglib_numerix_GoertzelCoeffH2 = SIF_GoertzelDetect(SIGLIB_DTMF_DETECT_HF_2_NORM, SampleLength);
-  siglib_numerix_GoertzelCoeffH3 = SIF_GoertzelDetect(SIGLIB_DTMF_DETECT_HF_3_NORM, SampleLength);
+  siglib_numerix_GoertzelCoeffH0 = SIF_GoertzelDetect(SIGLIB_DTMF_DETECT_HF_0_NORM, sampleLength);
+  siglib_numerix_GoertzelCoeffH1 = SIF_GoertzelDetect(SIGLIB_DTMF_DETECT_HF_1_NORM, sampleLength);
+  siglib_numerix_GoertzelCoeffH2 = SIF_GoertzelDetect(SIGLIB_DTMF_DETECT_HF_2_NORM, sampleLength);
+  siglib_numerix_GoertzelCoeffH3 = SIF_GoertzelDetect(SIGLIB_DTMF_DETECT_HF_3_NORM, sampleLength);
 
 #if SIGLIB_ENABLE_DEBUG_LOGGING
   SUF_Debugfprintf("siglib_numerix_GoertzelCoeffL0.real = %lf, .imag = %lf\n", siglib_numerix_GoertzelCoeffL0.real,
@@ -287,7 +287,7 @@ void SIGLIB_FUNC_DECL SIF_DtmfDetect(const SLData_t SampleRate, const SLArrayInd
  *
  * Parameters:
  *   SLData_t * SIGLIB_PTR_DECL pSrc                 - Source data aray pointer
- *   const SLArrayIndex_t SampleLength               - Buffer length
+ *   const SLArrayIndex_t sampleLength               - Buffer length
  *
  * Return value:
  *   SLStatus_t KeyCode      - Key code for detected key
@@ -296,18 +296,18 @@ void SIGLIB_FUNC_DECL SIF_DtmfDetect(const SLData_t SampleRate, const SLArrayInd
  *
  ********************************************************/
 
-SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetect(SLData_t* SIGLIB_PTR_DECL pSrc, const SLArrayIndex_t SampleLength)
+SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetect(SLData_t* SIGLIB_PTR_DECL pSrc, const SLArrayIndex_t sampleLength)
 {
   // Detect the individual frequency components - absolute magnitudes squared
-  SLData_t LowFreqMagn0 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL0, SampleLength);
-  SLData_t LowFreqMagn1 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL1, SampleLength);
-  SLData_t LowFreqMagn2 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL2, SampleLength);
-  SLData_t LowFreqMagn3 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL3, SampleLength);
+  SLData_t LowFreqMagn0 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL0, sampleLength);
+  SLData_t LowFreqMagn1 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL1, sampleLength);
+  SLData_t LowFreqMagn2 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL2, sampleLength);
+  SLData_t LowFreqMagn3 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL3, sampleLength);
 
-  SLData_t HighFreqMagn0 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH0, SampleLength);
-  SLData_t HighFreqMagn1 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH1, SampleLength);
-  SLData_t HighFreqMagn2 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH2, SampleLength);
-  SLData_t HighFreqMagn3 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH3, SampleLength);
+  SLData_t HighFreqMagn0 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH0, sampleLength);
+  SLData_t HighFreqMagn1 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH1, sampleLength);
+  SLData_t HighFreqMagn2 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH2, sampleLength);
+  SLData_t HighFreqMagn3 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH3, sampleLength);
 
   // Get total signal energy out of all filters / 2
   SLData_t ThirdLowFilterOutputSum = (LowFreqMagn0 + LowFreqMagn1 + LowFreqMagn2 + LowFreqMagn3) * SIGLIB_THIRD;
@@ -413,7 +413,7 @@ SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetect(SLData_t* SIGLIB_PTR_DECL pSrc, const
  *signal present SLFixData_t *SLStatus_t                         - Storage for
  *previous key  code SLFixData_t *KeyCodeLength                      - Storage
  *for key code length SLFixData_t  *KeyCodeRegistered                 - Storage
- *for key code registration flag const SLArrayIndex_t SampleLength - Buffer
+ *for key code registration flag const SLArrayIndex_t sampleLength - Buffer
  *length
  *
  * Return value:
@@ -425,11 +425,11 @@ SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetect(SLData_t* SIGLIB_PTR_DECL pSrc, const
  ********************************************************/
 
 SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetectAndValidate(SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t Threshold, SLStatus_t* PreviousKeyCode,
-                                                      SLFixData_t* KeyCodeLength, SLFixData_t* KeyCodeRegistered, const SLArrayIndex_t SampleLength)
+                                                      SLFixData_t* KeyCodeLength, SLFixData_t* KeyCodeRegistered, const SLArrayIndex_t sampleLength)
 {
   SLStatus_t KeyCode;
 
-  if (SDA_TestAbsOverThreshold(pSrc, Threshold, SampleLength) == -1) {    // Test if signal over threshold
+  if (SDA_TestAbsOverThreshold(pSrc, Threshold, sampleLength) == -1) {    // Test if signal over threshold
     if (*PreviousKeyCode != SIGLIB_NO_SIGNAL_PRESENT) {                   // Output "no signal" code
       KeyCode = SIGLIB_NO_SIGNAL_PRESENT;                                 // There is no signal present
       *PreviousKeyCode = SIGLIB_NO_SIGNAL_PRESENT;
@@ -445,27 +445,27 @@ SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetectAndValidate(SLData_t* SIGLIB_PTR_DECL 
   else {    // Only detect signal if over threshold
 
 #if SIGLIB_ENABLE_DEBUG_LOGGING
-    SUF_Debugfprintf("GoertzelDetect L0 = %lf\n", SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL0, SampleLength));
-    SUF_Debugfprintf("GoertzelDetect L1 = %lf\n", SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL1, SampleLength));
-    SUF_Debugfprintf("GoertzelDetect L2 = %lf\n", SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL2, SampleLength));
-    SUF_Debugfprintf("GoertzelDetect L3 = %lf\n", SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL3, SampleLength));
+    SUF_Debugfprintf("GoertzelDetect L0 = %lf\n", SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL0, sampleLength));
+    SUF_Debugfprintf("GoertzelDetect L1 = %lf\n", SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL1, sampleLength));
+    SUF_Debugfprintf("GoertzelDetect L2 = %lf\n", SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL2, sampleLength));
+    SUF_Debugfprintf("GoertzelDetect L3 = %lf\n", SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL3, sampleLength));
 
-    SUF_Debugfprintf("GoertzelDetect H0 = %lf\n", SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH0, SampleLength));
-    SUF_Debugfprintf("GoertzelDetect H1 = %lf\n", SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH1, SampleLength));
-    SUF_Debugfprintf("GoertzelDetect H2 = %lf\n", SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH2, SampleLength));
-    SUF_Debugfprintf("GoertzelDetect H3 = %lf\n", SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH3, SampleLength));
+    SUF_Debugfprintf("GoertzelDetect H0 = %lf\n", SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH0, sampleLength));
+    SUF_Debugfprintf("GoertzelDetect H1 = %lf\n", SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH1, sampleLength));
+    SUF_Debugfprintf("GoertzelDetect H2 = %lf\n", SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH2, sampleLength));
+    SUF_Debugfprintf("GoertzelDetect H3 = %lf\n", SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH3, sampleLength));
 #endif
 
     // Detect the individual frequency components - absolute magnitudes squared
-    SLData_t LowFreqMagn0 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL0, SampleLength);
-    SLData_t LowFreqMagn1 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL1, SampleLength);
-    SLData_t LowFreqMagn2 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL2, SampleLength);
-    SLData_t LowFreqMagn3 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL3, SampleLength);
+    SLData_t LowFreqMagn0 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL0, sampleLength);
+    SLData_t LowFreqMagn1 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL1, sampleLength);
+    SLData_t LowFreqMagn2 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL2, sampleLength);
+    SLData_t LowFreqMagn3 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffL3, sampleLength);
 
-    SLData_t HighFreqMagn0 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH0, SampleLength);
-    SLData_t HighFreqMagn1 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH1, SampleLength);
-    SLData_t HighFreqMagn2 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH2, SampleLength);
-    SLData_t HighFreqMagn3 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH3, SampleLength);
+    SLData_t HighFreqMagn0 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH0, sampleLength);
+    SLData_t HighFreqMagn1 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH1, sampleLength);
+    SLData_t HighFreqMagn2 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH2, sampleLength);
+    SLData_t HighFreqMagn3 = SDA_GoertzelDetect(pSrc, siglib_numerix_GoertzelCoeffH3, sampleLength);
 
     // Get total signal energy out of all filters / 2
     SLData_t ThirdLowFilterOutputSum = (LowFreqMagn0 + LowFreqMagn1 + LowFreqMagn2 + LowFreqMagn3) * SIGLIB_THIRD;

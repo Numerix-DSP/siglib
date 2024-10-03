@@ -3053,7 +3053,7 @@ void SIGLIB_FUNC_DECL SDA_AbsFrac(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
  *   const SLData_t *pSrc,               Input array
  *   SLData_t *pDst,                     Output array
  *   const SLData_t newMin,
- *   const SLArrayIndex_t SampleLength)
+ *   const SLArrayIndex_t sampleLength)
  *
  * Return value:
  *   void
@@ -3065,10 +3065,10 @@ void SIGLIB_FUNC_DECL SDA_AbsFrac(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_SetMin(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLData_t newMin,
-                                 const SLArrayIndex_t SampleLength)
+                                 const SLArrayIndex_t sampleLength)
 {
-  SLData_t oldMin = SDA_Min(pSrc, SampleLength);
-  SDA_Add(pSrc, newMin - oldMin, pDst, SampleLength);
+  SLData_t oldMin = SDA_Min(pSrc, sampleLength);
+  SDA_Add(pSrc, newMin - oldMin, pDst, sampleLength);
 
 }    // End of SDA_SetMin()
 
@@ -3079,7 +3079,7 @@ void SIGLIB_FUNC_DECL SDA_SetMin(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  *   const SLData_t *pSrc,               Input array
  *   SLData_t *pDst,                     Output array
  *   const SLData_t newMax,
- *   const SLArrayIndex_t SampleLength)
+ *   const SLArrayIndex_t sampleLength)
  *
  * Return value:
  *   void
@@ -3091,10 +3091,10 @@ void SIGLIB_FUNC_DECL SDA_SetMin(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_SetMax(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLData_t newMax,
-                                 const SLArrayIndex_t SampleLength)
+                                 const SLArrayIndex_t sampleLength)
 {
-  SLData_t oldMax = SDA_Max(pSrc, SampleLength);
-  SDA_Add(pSrc, newMax - oldMax, pDst, SampleLength);
+  SLData_t oldMax = SDA_Max(pSrc, sampleLength);
+  SDA_Add(pSrc, newMax - oldMax, pDst, sampleLength);
 
 }    // End of SDA_SetMax()
 
@@ -3106,7 +3106,7 @@ void SIGLIB_FUNC_DECL SDA_SetMax(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  *   SLData_t *pDst,                     Output array
  *   const SLData_t NewMin,
  *   const SLData_t NewMax,
- *   const SLArrayIndex_t SampleLength)
+ *   const SLArrayIndex_t sampleLength)
  *
  * Return value:
  *   void
@@ -3116,14 +3116,14 @@ void SIGLIB_FUNC_DECL SDA_SetMax(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_SetRange(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLData_t NewMin,
-                                   const SLData_t NewMax, const SLArrayIndex_t SampleLength)
+                                   const SLData_t NewMax, const SLArrayIndex_t sampleLength)
 {
-  SLData_t OldMin = SDA_Min(pSrc, SampleLength);
-  SLData_t OldScale = SDA_Max(pSrc, SampleLength) - OldMin;
+  SLData_t OldMin = SDA_Min(pSrc, sampleLength);
+  SLData_t OldScale = SDA_Max(pSrc, sampleLength) - OldMin;
   SLData_t NewScale = NewMax - NewMin;
-  SDA_Add(pSrc, -OldMin, pDst, SampleLength);
-  SDA_Multiply(pDst, NewScale / OldScale, pDst, SampleLength);
-  SDA_Add(pDst, NewMin, pDst, SampleLength);
+  SDA_Add(pSrc, -OldMin, pDst, sampleLength);
+  SDA_Multiply(pDst, NewScale / OldScale, pDst, sampleLength);
+  SDA_Add(pDst, NewMin, pDst, sampleLength);
 
 }    // End of SDA_SetRange()
 
@@ -3135,7 +3135,7 @@ void SIGLIB_FUNC_DECL SDA_SetRange(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_
  *   SLData_t *pDst,                     Output array
  *   const SLData_t NewMean,
  *   const SLData_t InverseSampleLength,
- *   const SLArrayIndex_t SampleLength)
+ *   const SLArrayIndex_t sampleLength)
  *
  * Return value:
  *   void
@@ -3145,9 +3145,9 @@ void SIGLIB_FUNC_DECL SDA_SetRange(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_SetMean(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLData_t NewMean,
-                                  const SLData_t InverseSampleLength, const SLArrayIndex_t SampleLength)
+                                  const SLData_t InverseSampleLength, const SLArrayIndex_t sampleLength)
 {
-  SLData_t OldMean = SDA_Mean(pSrc, InverseSampleLength, SampleLength);
-  SDA_Add(pSrc, NewMean - OldMean, pDst, SampleLength);
+  SLData_t OldMean = SDA_Mean(pSrc, InverseSampleLength, sampleLength);
+  SDA_Add(pSrc, NewMean - OldMean, pDst, sampleLength);
 
 }    // End of SDA_SetMean()

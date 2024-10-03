@@ -74,7 +74,7 @@ void SIGLIB_FUNC_DECL SIF_AmplitudeModulate(SLData_t* SIGLIB_PTR_DECL pCarrierTa
  *   SLData_t * SIGLIB_PTR_DECL pDst,
  *   SLArrayIndex_t *pCarrierTableIndex
  *   const SLArrayIndex_t ModulatorArrayLength
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -89,7 +89,7 @@ void SIGLIB_FUNC_DECL SIF_AmplitudeModulate(SLData_t* SIGLIB_PTR_DECL pCarrierTa
 
 void SIGLIB_FUNC_DECL SDA_AmplitudeModulate(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t* SIGLIB_PTR_DECL pCarrierTable,
                                             SLData_t* SIGLIB_PTR_DECL pDst, SLArrayIndex_t* pCarrierTableIndex,
-                                            const SLArrayIndex_t ModulatorArrayLength, const SLArrayIndex_t SampleLength)
+                                            const SLArrayIndex_t ModulatorArrayLength, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -101,7 +101,7 @@ void SIGLIB_FUNC_DECL SDA_AmplitudeModulate(const SLData_t* SIGLIB_PTR_DECL pSrc
 
   SLArrayIndex_t LocalCarrierTableIndex = *pCarrierTableIndex;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = pSrc[i] * pCarrierTable[LocalCarrierTableIndex];
@@ -191,7 +191,7 @@ void SIGLIB_FUNC_DECL SIF_AmplitudeModulate2(SLData_t* SIGLIB_PTR_DECL pCarrierT
  *   SLData_t *pCarrierTablePhase
  *   const SLData_t CarrierPhaseIncrement
  *   const SLArrayIndex_t ModulatorArrayLength
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -206,7 +206,7 @@ void SIGLIB_FUNC_DECL SIF_AmplitudeModulate2(SLData_t* SIGLIB_PTR_DECL pCarrierT
 
 void SIGLIB_FUNC_DECL SDA_AmplitudeModulate2(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t* SIGLIB_PTR_DECL pCarrierTable,
                                              SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* pCarrierTablePhase, const SLData_t CarrierPhaseIncrement,
-                                             const SLArrayIndex_t ModulatorArrayLength, const SLArrayIndex_t SampleLength)
+                                             const SLArrayIndex_t ModulatorArrayLength, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -218,7 +218,7 @@ void SIGLIB_FUNC_DECL SDA_AmplitudeModulate2(const SLData_t* SIGLIB_PTR_DECL pSr
 
   SLData_t LocalCarrierTablePhase = *pCarrierTablePhase;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = pSrc[i] * pCarrierTable[(SLArrayIndex_t)(LocalCarrierTablePhase * (SLData_t)ModulatorArrayLength)];
@@ -340,7 +340,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_ComplexShift(SLData_t* SIGLIB_PTR_DECL pRealCombF
  *   const SLData_t MixFrequency,
  *   const SLArrayIndex_t filterLength,
  *   const SLArrayIndex_t SineTableSize,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -375,7 +375,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexShift(const SLData_t* SIGLIB_PTR_DECL pSrc, SLD
                                        SLData_t* SIGLIB_PTR_DECL pImagCombFilter, SLData_t* SIGLIB_PTR_DECL ImagCombFilterSum,
                                        SLArrayIndex_t* SIGLIB_PTR_DECL CombFilterPhase, const SLData_t* SIGLIB_PTR_DECL pSineTable,
                                        SLArrayIndex_t* SIGLIB_PTR_DECL SineTablePhase, const SLData_t MixFrequency,
-                                       const SLArrayIndex_t filterLength, const SLArrayIndex_t SineTableSize, const SLArrayIndex_t SampleLength)
+                                       const SLArrayIndex_t filterLength, const SLArrayIndex_t SineTableSize, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -400,7 +400,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexShift(const SLData_t* SIGLIB_PTR_DECL pSrc, SLD
   SLData_t RealLocalSum = *RealCombFilterSum;
   SLData_t ImagLocalSum = *ImagCombFilterSum;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     SLData_t Sample = *pSrc++;
 
     // Calculate real data path
@@ -506,7 +506,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_FrequencyModulate(const SLData_t Src, const SLData
  *   SLData_t *PhaseOffset,                  Phase offset
  *   const SLData_t * SIGLIB_PTR_DECL pLookUpTable,    Fast sine lookup table
  *   const SLArrayIndex_t LookUpTableSize    Fast sine look up table size
- *   const SLArrayIndex_t SampleLength       Array length
+ *   const SLArrayIndex_t sampleLength       Array length
  *
  * Return value:
  *   void
@@ -519,7 +519,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_FrequencyModulate(const SLData_t Src, const SLData
 void SIGLIB_FUNC_DECL SDA_FrequencyModulate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst,
                                             const SLData_t CarrierPhaseIncrement, const SLData_t ModIndex, SLData_t* PhaseOffset,
                                             const SLData_t* SIGLIB_PTR_DECL pLookUpTable, const SLArrayIndex_t LookUpTableSize,
-                                            const SLArrayIndex_t SampleLength)
+                                            const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -531,7 +531,7 @@ void SIGLIB_FUNC_DECL SDA_FrequencyModulate(const SLData_t* SIGLIB_PTR_DECL pSrc
 
   SLData_t Phase = *PhaseOffset;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     Phase += CarrierPhaseIncrement + (ModIndex * (*pSrc++));    // Increment phase
     if (Phase >= SIGLIB_ONE) {                                  // Check phase in limits
       Phase -= SIGLIB_ONE;
@@ -552,7 +552,7 @@ void SIGLIB_FUNC_DECL SDA_FrequencyModulate(const SLData_t* SIGLIB_PTR_DECL pSrc
  *   SLData_t *DifferentiatePrevious,    Previous value of differential
  *   SLData_t *EnvelopePrevious,         Previous value of envelope
  *   const SLData_t EnvelopeDecay,       Envelope decay factor
- *   const SLArrayIndex_t SampleLength   Array length
+ *   const SLArrayIndex_t sampleLength   Array length
  *
  * Return value:
  *   void
@@ -565,7 +565,7 @@ void SIGLIB_FUNC_DECL SDA_FrequencyModulate(const SLData_t* SIGLIB_PTR_DECL pSrc
 
 void SIGLIB_FUNC_DECL SDA_FrequencyDemodulate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst,
                                               SLData_t* SIGLIB_PTR_DECL DifferentiatePrevious, SLData_t* SIGLIB_PTR_DECL EnvelopePrevious,
-                                              const SLData_t EnvelopeDecay, const SLArrayIndex_t SampleLength)
+                                              const SLData_t EnvelopeDecay, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -577,7 +577,7 @@ void SIGLIB_FUNC_DECL SDA_FrequencyDemodulate(const SLData_t* SIGLIB_PTR_DECL pS
   SLData_t TPrevious = *DifferentiatePrevious;
   SLData_t Peak = *EnvelopePrevious;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     // Differentiate the data
     SLData_t Difference = *pSrc - TPrevious;    // Get difference from previous Sample
     TPrevious = *pSrc++;                        // Store Sample for next iteration
@@ -664,7 +664,7 @@ void SIGLIB_FUNC_DECL SDS_FrequencyModulateComplex(const SLData_t Src, SLData_t*
  *   SLData_t *PhaseOffset,                  Phase offset
  *   const SLData_t * pLookUpTable,          Fast sine lookup table
  *   const SLArrayIndex_t SinCosPeriod       Fast sine look up table size
- *   const SLArrayIndex_t SampleLength       Array length
+ *   const SLArrayIndex_t sampleLength       Array length
  *
  * Return value:
  *   void
@@ -678,7 +678,7 @@ void SIGLIB_FUNC_DECL SDS_FrequencyModulateComplex(const SLData_t Src, SLData_t*
 void SIGLIB_FUNC_DECL SDA_FrequencyModulateComplex(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pRealDst,
                                                    SLData_t* SIGLIB_PTR_DECL pImagDst, const SLData_t CarrierPhaseIncrement,
                                                    const SLData_t ModIndex, SLData_t* PhaseOffset, const SLData_t* SIGLIB_PTR_DECL pLookUpTable,
-                                                   const SLArrayIndex_t SinCosPeriod, const SLArrayIndex_t SampleLength)
+                                                   const SLArrayIndex_t SinCosPeriod, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -692,7 +692,7 @@ void SIGLIB_FUNC_DECL SDA_FrequencyModulateComplex(const SLData_t* SIGLIB_PTR_DE
   SLData_t Phase = *PhaseOffset;
   SLArrayIndex_t QuarterPeriod = (SLArrayIndex_t)((SLUFixData_t)SinCosPeriod >> 2U);
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     Phase += CarrierPhaseIncrement + (ModIndex * (*pSrc++));    // Increment phase
     if (Phase >= SIGLIB_ONE) {                                  // Check phase in limits
       Phase -= SIGLIB_ONE;
@@ -713,7 +713,7 @@ void SIGLIB_FUNC_DECL SDA_FrequencyModulateComplex(const SLData_t* SIGLIB_PTR_DE
  *   const SLData_t * SIGLIB_PTR_DECL pDst,
  *   SLData_t * SIGLIB_PTR_DECL CurrentModValue,
  *   SLData_t Delta,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -724,7 +724,7 @@ void SIGLIB_FUNC_DECL SDA_FrequencyModulateComplex(const SLData_t* SIGLIB_PTR_DE
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_DeltaModulate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst,
-                                        SLData_t* SIGLIB_PTR_DECL CurrentModValue, const SLData_t Delta, const SLArrayIndex_t SampleLength)
+                                        SLData_t* SIGLIB_PTR_DECL CurrentModValue, const SLData_t Delta, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -735,7 +735,7 @@ void SIGLIB_FUNC_DECL SDA_DeltaModulate(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
 
   SLData_t CurrentValue = *CurrentModValue;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     if (*pSrc++ >= CurrentValue) {
       CurrentValue += Delta;
       *pDst++ = Delta;
@@ -757,7 +757,7 @@ void SIGLIB_FUNC_DECL SDA_DeltaModulate(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
  *   const SLData_t * SIGLIB_PTR_DECL pSrc,
  *   const SLData_t * SIGLIB_PTR_DECL pDst,
  *   SLData_t * SIGLIB_PTR_DECL CurrentDeModValue,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -768,7 +768,7 @@ void SIGLIB_FUNC_DECL SDA_DeltaModulate(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_DeltaDemodulate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst,
-                                          SLData_t* SIGLIB_PTR_DECL CurrentDeModValue, const SLArrayIndex_t SampleLength)
+                                          SLData_t* SIGLIB_PTR_DECL CurrentDeModValue, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -779,7 +779,7 @@ void SIGLIB_FUNC_DECL SDA_DeltaDemodulate(const SLData_t* SIGLIB_PTR_DECL pSrc, 
 
   SLData_t CurrentValue = *CurrentDeModValue;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     CurrentValue += pSrc[i];
@@ -801,7 +801,7 @@ void SIGLIB_FUNC_DECL SDA_DeltaDemodulate(const SLData_t* SIGLIB_PTR_DECL pSrc, 
  *   const SLData_t * SIGLIB_PTR_DECL pDst,
  *   SLData_t * SIGLIB_PTR_DECL CurrentIntegralValue,
  *   const SLData_t IntegratorMax,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -813,7 +813,7 @@ void SIGLIB_FUNC_DECL SDA_DeltaDemodulate(const SLData_t* SIGLIB_PTR_DECL pSrc, 
 
 void SIGLIB_FUNC_DECL SDA_DeltaModulate2(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst,
                                          SLData_t* SIGLIB_PTR_DECL CurrentIntegralValue, const SLData_t IntegratorMax,
-                                         const SLArrayIndex_t SampleLength)
+                                         const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -824,7 +824,7 @@ void SIGLIB_FUNC_DECL SDA_DeltaModulate2(const SLData_t* SIGLIB_PTR_DECL pSrc, S
 
   SLData_t LocalCurrentIntegralValue = *CurrentIntegralValue;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     SLData_t Delta = *pSrc++ - LocalCurrentIntegralValue;    // Get difference between input and
                                                              // integrator
 

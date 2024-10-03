@@ -58,7 +58,7 @@ Description: SigLib DSP library Arbitrary length Fast Fourier Transform
  *Pointer to FFT length SLArrayIndex_t *Log2pFFTLength,       - Pointer to Log 2
  *FFT length SLData_t * pInverseFFTLength  - Pointer to inverse FFT length
  *   SLData_t * pInverseSampleLengthXFFTLength - Pointer to inverse
- *(SampleLength * FFTLength) const SLArrayIndex_t SampleLength   - Buffer length
+ *(sampleLength * FFTLength) const SLArrayIndex_t sampleLength   - Buffer length
  *
  * Return value:
  *   void
@@ -72,18 +72,18 @@ void SIGLIB_FUNC_DECL SIF_FftArb(SLData_t* SIGLIB_PTR_DECL pAWNr, SLData_t* SIGL
                                  SLData_t* SIGLIB_PTR_DECL pWMi, SLData_t* SIGLIB_PTR_DECL pvLr, SLData_t* SIGLIB_PTR_DECL pvLi,
                                  SLData_t* SIGLIB_PTR_DECL pFFTCoeffs, SLArrayIndex_t* SIGLIB_PTR_DECL pBitReverseAddressTable,
                                  enum SLArbitraryFFT_t* pCZTorFFTSwitch, SLArrayIndex_t* pFFTLength, SLArrayIndex_t* Log2pFFTLength,
-                                 SLData_t* pInverseFFTLength, SLData_t* pInverseSampleLengthXFFTLength, const SLArrayIndex_t SampleLength)
+                                 SLData_t* pInverseFFTLength, SLData_t* pInverseSampleLengthXFFTLength, const SLArrayIndex_t sampleLength)
 {
   // Calculate log2 sample length & round down
-  SLArrayIndex_t IntLog2Size = (SLArrayIndex_t)((SDS_Log2((SLData_t)SampleLength)) + SIGLIB_EPSILON);
+  SLArrayIndex_t IntLog2Size = (SLArrayIndex_t)((SDS_Log2((SLData_t)sampleLength)) + SIGLIB_EPSILON);
 
   // Test to see if we can use the pure FFT or if we need to use the chirp
   // z-transform
-  if (SAI_PowerOfTwo(SampleLength)) {    // Length is an integer power of two so use FFT
+  if (SAI_PowerOfTwo(sampleLength)) {    // Length is an integer power of two so use FFT
     *pCZTorFFTSwitch = SIGLIB_ARB_FFT_DO_FFT;
-    *pFFTLength = SampleLength;
+    *pFFTLength = sampleLength;
     *Log2pFFTLength = IntLog2Size;
-    SIF_Fft(pFFTCoeffs, pBitReverseAddressTable, SampleLength);
+    SIF_Fft(pFFTCoeffs, pBitReverseAddressTable, sampleLength);
   }
 
   else {    // Use the chirp z-transform
@@ -92,18 +92,18 @@ void SIGLIB_FUNC_DECL SIF_FftArb(SLData_t* SIGLIB_PTR_DECL pAWNr, SLData_t* SIGL
     *pFFTLength = (SLArrayIndex_t)(SDS_Pow(SIGLIB_TWO, (SLData_t)(IntLog2Size + ((SLArrayIndex_t)2))) + SIGLIB_EPSILON);
     // Initialise chirp z-transform operation
     SIF_Czt(pAWNr, pAWNi, pWMr, pWMi, pvLr, pvLi, pFFTCoeffs, pBitReverseAddressTable, SIGLIB_ONE, SIGLIB_ZERO, SIGLIB_ZERO, SIGLIB_ONE, SIGLIB_ONE,
-            SampleLength, SampleLength, *pFFTLength, *Log2pFFTLength);
+            sampleLength, sampleLength, *pFFTLength, *Log2pFFTLength);
   }
 
   *pInverseFFTLength = SIGLIB_ONE / *pFFTLength;
-  *pInverseSampleLengthXFFTLength = SIGLIB_ONE / (((SLData_t)SampleLength) * ((SLData_t)*pFFTLength));
+  *pInverseSampleLengthXFFTLength = SIGLIB_ONE / (((SLData_t)sampleLength) * ((SLData_t)*pFFTLength));
 }    // End of SIF_FftArb()
 
 /********************************************************
  * Function: SUF_FftArbAllocLength
  *
  * Parameters:
- *   const SLArrayIndex_t SampleLength   - Buffer length
+ *   const SLArrayIndex_t sampleLength   - Buffer length
  *
  * Return value:
  *   FFT length for arbitrary FFTs
@@ -114,17 +114,17 @@ void SIGLIB_FUNC_DECL SIF_FftArb(SLData_t* SIGLIB_PTR_DECL pAWNr, SLData_t* SIGL
  *
  ********************************************************/
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SUF_FftArbAllocLength(const SLArrayIndex_t SampleLength)
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_FftArbAllocLength(const SLArrayIndex_t sampleLength)
 {
   SLArrayIndex_t FFTLength;
 
   // Calculate log2 sample length & round down
-  SLArrayIndex_t IntLog2Size = (SLArrayIndex_t)((SDS_Log2((SLData_t)SampleLength)) + SIGLIB_EPSILON);
+  SLArrayIndex_t IntLog2Size = (SLArrayIndex_t)((SDS_Log2((SLData_t)sampleLength)) + SIGLIB_EPSILON);
 
   // Test to see if we can use the pure FFT or if we need to use the chirp
   // z-transform
-  if (SAI_PowerOfTwo(SampleLength)) {    // Length is an integer power of two so use FFT
-    FFTLength = SampleLength;
+  if (SAI_PowerOfTwo(sampleLength)) {    // Length is an integer power of two so use FFT
+    FFTLength = sampleLength;
   }
 
   else {    // We will need to use the chirp z-transform
@@ -156,7 +156,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_FftArbAllocLength(const SLArrayIndex_t Sampl
  *length const SLArrayIndex_t Log2FFTLength,   - Log 2 FFT length const SLData_t
  *InverseFFTLength   - Inverse FFT length const SLData_t
  *InverseSampleLengthXFFTLength  - Inverse SampleLengthXFFTLength const
- *SLArrayIndex_t SampleLength   - Data array length
+ *SLArrayIndex_t sampleLength   - Data array length
  *
  * Return value:
  *   void
@@ -172,7 +172,7 @@ void SIGLIB_FUNC_DECL SDA_RfftArb(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
                                   const SLData_t* SIGLIB_PTR_DECL pvLr, const SLData_t* SIGLIB_PTR_DECL pvLi,
                                   const SLData_t* SIGLIB_PTR_DECL pFFTCoeffs, const SLArrayIndex_t* SIGLIB_PTR_DECL pBitReverseAddressTable,
                                   const enum SLArbitraryFFT_t CZTorFFTSwitch, const SLArrayIndex_t FFTLength, const SLArrayIndex_t Log2FFTLength,
-                                  const SLData_t InverseFFTLength, const SLData_t InverseSampleLengthXFFTLength, const SLArrayIndex_t SampleLength)
+                                  const SLData_t InverseFFTLength, const SLData_t InverseSampleLengthXFFTLength, const SLArrayIndex_t sampleLength)
 {
   if (CZTorFFTSwitch == SIGLIB_ARB_FFT_DO_FFT) {    // Perform a standard FFT
     SDA_Copy(pSrc, pRealDst, FFTLength);
@@ -183,12 +183,12 @@ void SIGLIB_FUNC_DECL SDA_RfftArb(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
   }
 
   else {    // Perform a chirp z-transform
-    SDA_Clear(pRealTemp + SampleLength,
-              (SLArrayIndex_t)(FFTLength - SampleLength));    // Ensure zero padded samples
-    SDA_Clear(pImagTemp + SampleLength, (SLArrayIndex_t)(FFTLength - SampleLength));
+    SDA_Clear(pRealTemp + sampleLength,
+              (SLArrayIndex_t)(FFTLength - sampleLength));    // Ensure zero padded samples
+    SDA_Clear(pImagTemp + sampleLength, (SLArrayIndex_t)(FFTLength - sampleLength));
 
     // Complex window = complex mpy with real data
-    SDA_ComplexWindow(pSrc, pSrc, pRealTemp, pImagTemp, pAWNr, pAWNi, SampleLength);
+    SDA_ComplexWindow(pSrc, pSrc, pRealTemp, pImagTemp, pAWNr, pAWNi, sampleLength);
 
     // Frequency domain convolution
     SDA_Cfft(pRealTemp, pImagTemp, pFFTCoeffs, pBitReverseAddressTable, FFTLength, Log2FFTLength);    // Source data FFT
@@ -199,10 +199,10 @@ void SIGLIB_FUNC_DECL SDA_RfftArb(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
     SDA_Cifft(pRealTemp, pImagTemp, pFFTCoeffs, pBitReverseAddressTable, FFTLength, Log2FFTLength);    // IFFT
 
     // Complex multiply
-    SDA_ComplexMultiply2(pWMr, pWMi, pRealTemp, pImagTemp, pRealDst, pImagDst, SampleLength);
+    SDA_ComplexMultiply2(pWMr, pWMi, pRealTemp, pImagTemp, pRealDst, pImagDst, sampleLength);
 
     // Ensure the results give the same scaling as the Fourier transform
-    SDA_ComplexScalarMultiply(pRealDst, pImagDst, InverseSampleLengthXFFTLength, pRealDst, pImagDst, SampleLength);
+    SDA_ComplexScalarMultiply(pRealDst, pImagDst, InverseSampleLengthXFFTLength, pRealDst, pImagDst, sampleLength);
   }
 }    // End of SDA_RfftArb()
 
@@ -229,7 +229,7 @@ void SIGLIB_FUNC_DECL SDA_RfftArb(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
  *FFTLength,     - FFT length const SLArrayIndex_t Log2FFTLength, - Log 2 FFT
  *length const SLData_t InverseFFTLength     - Inverse FFT length const SLData_t
  *InverseSampleLengthXFFTLength  - Inverse SampleLengthXFFTLength const
- *SLArrayIndex_t SampleLength   - Data array length
+ *SLArrayIndex_t sampleLength   - Data array length
  *
  * Return value:
  *   void
@@ -246,7 +246,7 @@ void SIGLIB_FUNC_DECL SDA_CfftArb(const SLData_t* SIGLIB_PTR_DECL pSrcReal, cons
                                   const SLData_t* SIGLIB_PTR_DECL pvLi, const SLData_t* SIGLIB_PTR_DECL pFFTCoeffs,
                                   const SLArrayIndex_t* SIGLIB_PTR_DECL pBitReverseAddressTable, const enum SLArbitraryFFT_t CZTorFFTSwitch,
                                   const SLArrayIndex_t FFTLength, const SLArrayIndex_t Log2FFTLength, const SLData_t InverseFFTLength,
-                                  const SLData_t InverseSampleLengthXFFTLength, const SLArrayIndex_t SampleLength)
+                                  const SLData_t InverseSampleLengthXFFTLength, const SLArrayIndex_t sampleLength)
 {
   if (CZTorFFTSwitch == SIGLIB_ARB_FFT_DO_FFT) {    // Perform a standard FFT
     SDA_Copy(pSrcReal, pRealDst, FFTLength);
@@ -258,12 +258,12 @@ void SIGLIB_FUNC_DECL SDA_CfftArb(const SLData_t* SIGLIB_PTR_DECL pSrcReal, cons
   }
 
   else {    // Perform a chirp z-transform
-    SDA_Clear(pRealTemp + SampleLength,
-              (SLArrayIndex_t)(FFTLength - SampleLength));    // Ensure zero padded samples
-    SDA_Clear(pImagTemp + SampleLength, (SLArrayIndex_t)(FFTLength - SampleLength));
+    SDA_Clear(pRealTemp + sampleLength,
+              (SLArrayIndex_t)(FFTLength - sampleLength));    // Ensure zero padded samples
+    SDA_Clear(pImagTemp + sampleLength, (SLArrayIndex_t)(FFTLength - sampleLength));
 
     // Complex multiply input data
-    SDA_ComplexMultiply2(pSrcReal, pSrcImag, pAWNr, pAWNi, pRealTemp, pImagTemp, SampleLength);
+    SDA_ComplexMultiply2(pSrcReal, pSrcImag, pAWNr, pAWNi, pRealTemp, pImagTemp, sampleLength);
 
     // Frequency domain convolution
     SDA_Cfft(pRealTemp, pImagTemp, pFFTCoeffs, pBitReverseAddressTable, FFTLength, Log2FFTLength);    // Source data FFT
@@ -274,10 +274,10 @@ void SIGLIB_FUNC_DECL SDA_CfftArb(const SLData_t* SIGLIB_PTR_DECL pSrcReal, cons
     SDA_Cifft(pRealTemp, pImagTemp, pFFTCoeffs, pBitReverseAddressTable, FFTLength, Log2FFTLength);    // IFFT
 
     // Complex multiply
-    SDA_ComplexMultiply2(pWMr, pWMi, pRealTemp, pImagTemp, pRealDst, pImagDst, SampleLength);
+    SDA_ComplexMultiply2(pWMr, pWMi, pRealTemp, pImagTemp, pRealDst, pImagDst, sampleLength);
 
     // Ensure the results give the same scaling as the Fourier transform
-    SDA_ComplexScalarMultiply(pRealDst, pImagDst, InverseSampleLengthXFFTLength, pRealDst, pImagDst, SampleLength);
+    SDA_ComplexScalarMultiply(pRealDst, pImagDst, InverseSampleLengthXFFTLength, pRealDst, pImagDst, sampleLength);
   }
 }    // End of SDA_CfftArb()
 
@@ -302,7 +302,7 @@ void SIGLIB_FUNC_DECL SDA_CfftArb(const SLData_t* SIGLIB_PTR_DECL pSrcReal, cons
  *Pointer to bit reverse address table const enum SLArbitraryFFT_t
  *CZTorFFTSwitch, - Switch to indicate CZT or FFT const SLArrayIndex_t
  *FFTLength,     - FFT length const SLArrayIndex_t Log2FFTLength, - Log 2 FFT
- *length const SLArrayIndex_t SampleLength   - Data array length
+ *length const SLArrayIndex_t sampleLength   - Data array length
  *
  * Return value:
  *   void
@@ -323,7 +323,7 @@ void SIGLIB_FUNC_DECL SDA_CifftArb(const SLData_t* SIGLIB_PTR_DECL pSrcReal, con
                                    const SLData_t* SIGLIB_PTR_DECL pWMi, const SLData_t* SIGLIB_PTR_DECL pvLr, const SLData_t* SIGLIB_PTR_DECL pvLi,
                                    const SLData_t* SIGLIB_PTR_DECL pFFTCoeffs, const SLArrayIndex_t* SIGLIB_PTR_DECL pBitReverseAddressTable,
                                    const enum SLArbitraryFFT_t CZTorFFTSwitch, const SLArrayIndex_t FFTLength, const SLArrayIndex_t Log2FFTLength,
-                                   const SLArrayIndex_t SampleLength)
+                                   const SLArrayIndex_t sampleLength)
 {
   if (CZTorFFTSwitch == SIGLIB_ARB_FFT_DO_FFT) {    // Perform a standard FFT
     SDA_Copy(pSrcReal, pRealDst, FFTLength);
@@ -332,15 +332,15 @@ void SIGLIB_FUNC_DECL SDA_CifftArb(const SLData_t* SIGLIB_PTR_DECL pSrcReal, con
   }
 
   else {    // Perform a chirp z-transform
-    SDA_Clear(pRealTemp + SampleLength,
-              FFTLength - SampleLength);    // Ensure zero padded samples
-    SDA_Clear(pImagTemp + SampleLength, FFTLength - SampleLength);
+    SDA_Clear(pRealTemp + sampleLength,
+              FFTLength - sampleLength);    // Ensure zero padded samples
+    SDA_Clear(pImagTemp + sampleLength, FFTLength - sampleLength);
 
     // Conjugate the input data - use pImagDst as temporary array
-    SDA_Multiply(pSrcImag, SIGLIB_MINUS_ONE, pImagDst, SampleLength);
+    SDA_Multiply(pSrcImag, SIGLIB_MINUS_ONE, pImagDst, sampleLength);
 
     // Complex multiply input data
-    SDA_ComplexMultiply2(pSrcReal, pImagDst, pAWNr, pAWNi, pRealTemp, pImagTemp, SampleLength);
+    SDA_ComplexMultiply2(pSrcReal, pImagDst, pAWNr, pAWNi, pRealTemp, pImagTemp, sampleLength);
 
     // Frequency domain convolution
     SDA_Cfft(pRealTemp, pImagTemp, pFFTCoeffs, pBitReverseAddressTable, FFTLength, Log2FFTLength);    // Source data FFT
@@ -351,9 +351,9 @@ void SIGLIB_FUNC_DECL SDA_CifftArb(const SLData_t* SIGLIB_PTR_DECL pSrcReal, con
     SDA_Cifft(pRealTemp, pImagTemp, pFFTCoeffs, pBitReverseAddressTable, FFTLength, Log2FFTLength);    // IFFT
 
     // Complex multiply
-    SDA_ComplexMultiply2(pWMr, pWMi, pRealTemp, pImagTemp, pRealDst, pImagDst, SampleLength);
+    SDA_ComplexMultiply2(pWMr, pWMi, pRealTemp, pImagTemp, pRealDst, pImagDst, sampleLength);
 
     // Conjugate the results
-    SDA_Multiply(pImagDst, SIGLIB_MINUS_ONE, pImagDst, SampleLength);
+    SDA_Multiply(pImagDst, SIGLIB_MINUS_ONE, pImagDst, sampleLength);
   }
 }    // End of SDA_CifftArb()

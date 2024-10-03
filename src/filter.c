@@ -60,7 +60,7 @@ Description: SigLib DSP library generic filter routines.
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Integrate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLData_t Reset,
-                                    const SLData_t Decay, SLData_t* SIGLIB_PTR_DECL Sum, const SLArrayIndex_t SampleLength)
+                                    const SLData_t Decay, SLData_t* SIGLIB_PTR_DECL Sum, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -71,7 +71,7 @@ void SIGLIB_FUNC_DECL SDA_Integrate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData
 
   SLData_t TSum = *Sum;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     TSum += *pSrc++;
     if (TSum > Reset) {    // Limit, if signal too large
       TSum = SIGLIB_ZERO;
@@ -94,7 +94,7 @@ void SIGLIB_FUNC_DECL SDA_Integrate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData
  *   const SLData_t * SIGLIB_PTR_DECL pSrc,
  *   SLData_t * SIGLIB_PTR_DECL pDst,
  *   SLData_t * SIGLIB_PTR_DECL pPrevious,
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -105,7 +105,7 @@ void SIGLIB_FUNC_DECL SDA_Integrate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_Differentiate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pPrevious,
-                                        const SLArrayIndex_t SampleLength)
+                                        const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -116,7 +116,7 @@ void SIGLIB_FUNC_DECL SDA_Differentiate(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
 
   SLData_t LocalPrevious = *pPrevious;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     SLData_t LocalInput = pSrc[i];
@@ -272,13 +272,13 @@ void SIGLIB_FUNC_DECL SIF_HilbertTransformerFirFilter(SLData_t* SIGLIB_PTR_DECL 
  *
  ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SIF_GoertzelIirFilter(SLData_t* SIGLIB_PTR_DECL pState, const SLData_t Freq, const SLArrayIndex_t SampleLength)
+SLData_t SIGLIB_FUNC_DECL SIF_GoertzelIirFilter(SLData_t* SIGLIB_PTR_DECL pState, const SLData_t Freq, const SLArrayIndex_t sampleLength)
 {
   *pState = SIGLIB_ZERO;
   *(pState + 1) = SIGLIB_ZERO;
 
-  SLData_t k = ((SLData_t)SampleLength) * Freq;
-  return (SDS_Cos(SIGLIB_TWO * SIGLIB_PI * k / ((SLData_t)SampleLength)));    // Filter coeff
+  SLData_t k = ((SLData_t)sampleLength) * Freq;
+  return (SDS_Cos(SIGLIB_TWO * SIGLIB_PI * k / ((SLData_t)sampleLength)));    // Filter coeff
 }    // End of SIF_GoertzelIirFilter()
 
 /********************************************************
@@ -299,7 +299,7 @@ SLData_t SIGLIB_FUNC_DECL SIF_GoertzelIirFilter(SLData_t* SIGLIB_PTR_DECL pState
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SDA_GoertzelIirFilter(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pState,
-                                            const SLData_t Coeff, const SLArrayIndex_t SampleLength)
+                                            const SLData_t Coeff, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -311,7 +311,7 @@ void SIGLIB_FUNC_DECL SDA_GoertzelIirFilter(const SLData_t* SIGLIB_PTR_DECL pSrc
 
   SLData_t TwoRealCoeff = SIGLIB_TWO * Coeff;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     SLData_t Tmp = pState[0];
@@ -373,10 +373,10 @@ SLData_t SIGLIB_FUNC_DECL SDS_GoertzelIirFilter(const SLData_t Src, SLData_t* SI
  *
  ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SIF_GoertzelDetect(const SLData_t Freq, const SLArrayIndex_t SampleLength)
+SLData_t SIGLIB_FUNC_DECL SIF_GoertzelDetect(const SLData_t Freq, const SLArrayIndex_t sampleLength)
 {
-  SLData_t k = ((SLData_t)SampleLength) * Freq;
-  return (SDS_Cos(SIGLIB_TWO * SIGLIB_PI * k / ((SLData_t)SampleLength)));    // Filter coeff
+  SLData_t k = ((SLData_t)sampleLength) * Freq;
+  return (SDS_Cos(SIGLIB_TWO * SIGLIB_PI * k / ((SLData_t)sampleLength)));    // Filter coeff
 }    // End of SIF_GoertzelDetect()
 
 /********************************************************
@@ -394,7 +394,7 @@ SLData_t SIGLIB_FUNC_DECL SIF_GoertzelDetect(const SLData_t Freq, const SLArrayI
  *
  ********************************************************/
 
-SLData_t SIGLIB_FUNC_DECL SDA_GoertzelDetect(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t Coeff, const SLArrayIndex_t SampleLength)
+SLData_t SIGLIB_FUNC_DECL SDA_GoertzelDetect(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t Coeff, const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -407,7 +407,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_GoertzelDetect(const SLData_t* SIGLIB_PTR_DECL pSr
   SLData_t State1 = SIGLIB_ZERO;
   SLData_t TwoRealCoeff = SIGLIB_TWO * Coeff;
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {    // Calculate filter feedback stages
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {    // Calculate filter feedback stages
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)         // Select between array index
                                                          // or pointer access modes
     Tmp = State0;
@@ -439,14 +439,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_GoertzelDetect(const SLData_t* SIGLIB_PTR_DECL pSr
  *
  ********************************************************/
 
-SLComplexRect_s SIGLIB_FUNC_DECL SIF_GoertzelDetectComplex(const SLData_t Freq, const SLArrayIndex_t SampleLength)
+SLComplexRect_s SIGLIB_FUNC_DECL SIF_GoertzelDetectComplex(const SLData_t Freq, const SLArrayIndex_t sampleLength)
 {
-  SLData_t k = ((SLData_t)SampleLength) * Freq;
+  SLData_t k = ((SLData_t)sampleLength) * Freq;
 
   SLComplexRect_s Coeff;
 
-  Coeff.real = SDS_Cos(SIGLIB_TWO * SIGLIB_PI * k / ((SLData_t)SampleLength));
-  Coeff.imag = -SDS_Sin(SIGLIB_TWO * SIGLIB_PI * k / ((SLData_t)SampleLength));
+  Coeff.real = SDS_Cos(SIGLIB_TWO * SIGLIB_PI * k / ((SLData_t)sampleLength));
+  Coeff.imag = -SDS_Sin(SIGLIB_TWO * SIGLIB_PI * k / ((SLData_t)sampleLength));
 
   return (Coeff);    // Filter coeff
 }    // End of SIF_GoertzelDetectComplex()
@@ -468,7 +468,7 @@ SLComplexRect_s SIGLIB_FUNC_DECL SIF_GoertzelDetectComplex(const SLData_t Freq, 
  ********************************************************/
 
 SLComplexRect_s SIGLIB_FUNC_DECL SDA_GoertzelDetectComplex(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLComplexRect_s Coeff,
-                                                           const SLArrayIndex_t SampleLength)
+                                                           const SLArrayIndex_t sampleLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -485,7 +485,7 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDA_GoertzelDetectComplex(const SLData_t* SIGLI
   //  SUF_Debugfprintf ("coeff.real = %lf, coeff.imag = %lf\n", Coeff.real,
   //  Coeff.imag);
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {    // Calculate filter feedback stages
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {    // Calculate filter feedback stages
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)         // Select between array index
                                                          // or pointer access modes
     Tmp = State0;
@@ -570,7 +570,7 @@ void SIGLIB_FUNC_DECL SIF_GaussianFirFilter2(SLData_t* SIGLIB_PTR_DECL pCoeffs, 
  *   SLData_t * pCoeffs,
  *   const SLData_t SymbolPeriod,
  *   const SLData_t Alpha,           0.0 <= Alpha <= 1.0
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -588,9 +588,9 @@ void SIGLIB_FUNC_DECL SIF_GaussianFirFilter2(SLData_t* SIGLIB_PTR_DECL pCoeffs, 
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SIF_RaisedCosineFirFilter(SLData_t* SIGLIB_PTR_DECL pCoeffs, const SLData_t SymbolPeriod, const SLData_t Alpha,
-                                                const SLArrayIndex_t SampleLength)
+                                                const SLArrayIndex_t sampleLength)
 {
-  SLArrayIndex_t Half_SampleLengthMinusOne = (SLArrayIndex_t)((SLUFixData_t)SampleLength >> 1U);
+  SLArrayIndex_t Half_SampleLengthMinusOne = (SLArrayIndex_t)((SLUFixData_t)sampleLength >> 1U);
   SLData_t Tmp;
 
   pCoeffs[Half_SampleLengthMinusOne] = SIGLIB_ONE;    // Set centre location
@@ -631,7 +631,7 @@ void SIGLIB_FUNC_DECL SIF_RaisedCosineFirFilter(SLData_t* SIGLIB_PTR_DECL pCoeff
  *   SLData_t * pCoeffs,
  *   const SLData_t SymbolPeriod,
  *   const SLData_t Alpha,           0.0 < Alpha < 1.0
- *   const SLArrayIndex_t SampleLength
+ *   const SLArrayIndex_t sampleLength
  *
  * Return value:
  *   void
@@ -649,13 +649,13 @@ void SIGLIB_FUNC_DECL SIF_RaisedCosineFirFilter(SLData_t* SIGLIB_PTR_DECL pCoeff
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SIF_RootRaisedCosineFirFilter(SLData_t* SIGLIB_PTR_DECL pCoeffs, const SLData_t SymbolPeriod, const SLData_t Alpha,
-                                                    const SLArrayIndex_t SampleLength)
+                                                    const SLArrayIndex_t sampleLength)
 {
-  SLArrayIndex_t Half_SampleLengthMinusOne = (SLArrayIndex_t)((SLUFixData_t)SampleLength >> 1U);
+  SLArrayIndex_t Half_SampleLengthMinusOne = (SLArrayIndex_t)((SLUFixData_t)sampleLength >> 1U);
   SLData_t Tmp;
 
   // Set centre location
-  pCoeffs[(SLArrayIndex_t)((SLUFixData_t)SampleLength >> 1U)] =
+  pCoeffs[(SLArrayIndex_t)((SLUFixData_t)sampleLength >> 1U)] =
       ((SIGLIB_FOUR * Alpha) / (SIGLIB_PI * SDS_Sqrt(SymbolPeriod))) * ((SIGLIB_ONE + ((SIGLIB_ONE - Alpha) * SIGLIB_PI / (SIGLIB_FOUR * Alpha))));
 
   for (SLArrayIndex_t i = 1; i <= Half_SampleLengthMinusOne; i++) {

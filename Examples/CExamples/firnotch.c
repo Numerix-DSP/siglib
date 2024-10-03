@@ -27,7 +27,7 @@ int main(void)
 {
   h_GPC_Plot* h2DPlot;    // Plot object
 
-  SLArrayIndex_t FilterIndex;
+  SLArrayIndex_t filterIndex;
 
   // Allocate memory
   SLData_t* pRealData = SUF_VectorArrayAllocate(FFT_LENGTH);
@@ -60,7 +60,7 @@ int main(void)
   }
 
   SIF_Fir(pFilterState,               // Pointer to filter state array
-          &FilterIndex,               // Pointer to filter index register
+          &filterIndex,               // Pointer to filter index register
           FILTER_LENGTH);             // Filter length
                                       // Initialise FFT
   SIF_Fft(pFFTCoeffs,                 // Pointer to FFT coefficients
@@ -86,7 +86,7 @@ int main(void)
           pRealData,                   // Pointer to filtered output array
           pFilterState,                // Pointer to filter state array
           pFilterTaps,                 // Pointer to filter coefficients
-          &FilterIndex,                // Pointer to filter index register
+          &filterIndex,                // Pointer to filter index register
           FILTER_LENGTH,               // Filter length
           IMPULSE_RESPONSE_LENGTH);    // Output dataset length
 

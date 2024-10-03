@@ -612,7 +612,7 @@ void SIGLIB_FUNC_DECL SIF_TriggerReverberator(SLArrayIndex_t* pTriggerCount, SLF
  *   SLFixData_t *pTriggerDetectedFlag,
  *   SLFixData_t *pTriggerUpdatedFlag,
  *   const SLArrayIndex_t TriggerPeriod,
- *   const SLArrayIndex_t SampleLength)
+ *   const SLArrayIndex_t sampleLength)
  *
  * Return value:
  *   void
@@ -630,7 +630,7 @@ void SIGLIB_FUNC_DECL SIF_TriggerReverberator(SLArrayIndex_t* pTriggerCount, SLF
 
 void SIGLIB_FUNC_DECL SDA_TriggerReverberator(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLArrayIndex_t* pTriggerCount,
                                               SLFixData_t* pTriggerDetectedFlag, SLFixData_t* pTriggerUpdatedFlag,
-                                              const SLArrayIndex_t TriggerPeriod, const SLArrayIndex_t SampleLength)
+                                              const SLArrayIndex_t TriggerPeriod, const SLArrayIndex_t sampleLength)
 {
   SLArrayIndex_t TriggerCount = *pTriggerCount;    // Use local variables to improve performance
   SLFixData_t TriggerDetectedFlag = *pTriggerDetectedFlag;
@@ -647,7 +647,7 @@ void SIGLIB_FUNC_DECL SDA_TriggerReverberator(const SLData_t* SIGLIB_PTR_DECL pS
     TriggerDetectedFlag = (SLFixData_t)1;    // Indicate trigger had been detected
   }
 
-  for (; i < SampleLength; i++) {    // Generate pulse stream for remainder of data
+  for (; i < sampleLength; i++) {    // Generate pulse stream for remainder of data
     TriggerCount++;                  // Increment trigger count
 
     if ((SLUFixData_t)TriggerCount < ((SLUFixData_t)TriggerPeriod >> 1U)) {    // If we have a trigger in first half then extend the clock
@@ -773,7 +773,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_TriggerReverberator(const SLData_t Src, SLArrayInd
  *   const SLData_t * SIGLIB_PTR_DECL pSrc,      Source data sequence
  *   SLData_t * SIGLIB_PTR_DECL pDst,            Destination data sequence
  *   const SLData_t * SIGLIB_PTR_DECL pTrigger,  Trigger sequence
- *   const SLArrayIndex_t SampleLength)          Length of source sequence
+ *   const SLArrayIndex_t sampleLength)          Length of source sequence
  *
  * Return value:
  *   Number of output samples
@@ -785,10 +785,10 @@ SLData_t SIGLIB_FUNC_DECL SDS_TriggerReverberator(const SLData_t Src, SLArrayInd
  ********************************************************/
 
 SLArrayIndex_t SIGLIB_FUNC_DECL SDA_TriggerSelector(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst,
-                                                    const SLData_t* SIGLIB_PTR_DECL pTrigger, const SLArrayIndex_t SampleLength)
+                                                    const SLData_t* SIGLIB_PTR_DECL pTrigger, const SLArrayIndex_t sampleLength)
 {
   SLArrayIndex_t NumberOfOutputSamples = (SLArrayIndex_t)0;
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     if (*pTrigger++ == SIGLIB_ONE) {
       *pDst++ = *(pSrc + i);
       NumberOfOutputSamples++;
@@ -900,7 +900,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_EarlyLateGate(
  *   SLFixData_t *pTriggerDetectedFlag,
  *   SLFixData_t *pTriggerUpdatedFlag,
  *   const SLArrayIndex_t SymbolLength,
- *   const SLArrayIndex_t SampleLength)
+ *   const SLArrayIndex_t sampleLength)
  *
  * Return value:
  *   void
@@ -918,11 +918,11 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGate(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
                                         SLArrayIndex_t* pLoopFilterIndex, const SLArrayIndex_t LoopFilterLength, const SLData_t NoiseThreshold,
                                         SLFixData_t* pPulseDetectorThresholdFlag, SLData_t* pZeroCrossingPreviousSample,
                                         SLArrayIndex_t* pTriggerCount, SLFixData_t* pTriggerDetectedFlag, SLFixData_t* pTriggerUpdatedFlag,
-                                        const SLArrayIndex_t SymbolLength, const SLArrayIndex_t SampleLength)
+                                        const SLArrayIndex_t SymbolLength, const SLArrayIndex_t sampleLength)
 {
-  SDA_Fir(pSrc, pTriggerOutput, pMatchedFilterState, pMatchedFilterCoeffs, pMatchedFilterIndex, SymbolLength, SampleLength);
+  SDA_Fir(pSrc, pTriggerOutput, pMatchedFilterState, pMatchedFilterCoeffs, pMatchedFilterIndex, SymbolLength, sampleLength);
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     // Generate delays for the early gate
     SLData_t EarlyGateOutput = *pTriggerOutput;    // Note that there is no delay
                                                    // on the late gate data point
@@ -952,10 +952,10 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGate(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
     *pTriggerOutput++ = ZeroCrossingDetectorOutput;    // Indicate we have a trigger
   }
 
-  pTriggerOutput -= SampleLength;    // Reset trigger output array pointer
+  pTriggerOutput -= sampleLength;    // Reset trigger output array pointer
 
   // Generate continuous pulse stream
-  SDA_TriggerReverberator(pTriggerOutput, pTriggerOutput, pTriggerCount, pTriggerDetectedFlag, pTriggerUpdatedFlag, SymbolLength, SampleLength);
+  SDA_TriggerReverberator(pTriggerOutput, pTriggerOutput, pTriggerCount, pTriggerDetectedFlag, pTriggerUpdatedFlag, SymbolLength, sampleLength);
 }    // End of SDA_EarlyLateGate()
 
 /********************************************************
@@ -983,7 +983,7 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGate(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
  *   SLData_t * SIGLIB_PTR_DECL pMatchedFilterOutput,
  *   SLData_t * SIGLIB_PTR_DECL pLoopFilterOutput,
  *   const SLArrayIndex_t SymbolLength,
- *   const SLArrayIndex_t SampleLength)
+ *   const SLArrayIndex_t sampleLength)
  *
  * Return value:
  *   void
@@ -1004,14 +1004,14 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateDebug(const SLData_t* SIGLIB_PTR_DECL pSr
                                              SLFixData_t* pPulseDetectorThresholdFlag, SLData_t* pZeroCrossingPreviousSample,
                                              SLArrayIndex_t* pTriggerCount, SLFixData_t* pTriggerDetectedFlag, SLFixData_t* pTriggerUpdatedFlag,
                                              SLData_t* SIGLIB_PTR_DECL pMatchedFilterOutput, SLData_t* SIGLIB_PTR_DECL pLoopFilterOutput,
-                                             const SLArrayIndex_t SymbolLength, const SLArrayIndex_t SampleLength)
+                                             const SLArrayIndex_t SymbolLength, const SLArrayIndex_t sampleLength)
 {
-  SDA_Fir(pSrc, pTriggerOutput, pMatchedFilterState, pMatchedFilterCoeffs, pMatchedFilterIndex, SymbolLength, SampleLength);
+  SDA_Fir(pSrc, pTriggerOutput, pMatchedFilterState, pMatchedFilterCoeffs, pMatchedFilterIndex, SymbolLength, sampleLength);
 
   SDA_Copy(pTriggerOutput, pMatchedFilterOutput,
-           SampleLength);    // Copy matched filter output for debug
+           sampleLength);    // Copy matched filter output for debug
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     // Generate delays for the early gate
     SLData_t EarlyGateOutput = *pTriggerOutput;    // Note that there is no delay
                                                    // on the late gate data point
@@ -1042,10 +1042,10 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateDebug(const SLData_t* SIGLIB_PTR_DECL pSr
     *pTriggerOutput++ = ZeroCrossingDetectorOutput;    // Indicate we have a trigger
   }
 
-  pTriggerOutput -= SampleLength;    // Reset trigger output array pointer
+  pTriggerOutput -= sampleLength;    // Reset trigger output array pointer
 
   // Generate continuous pulse stream
-  SDA_TriggerReverberator(pTriggerOutput, pTriggerOutput, pTriggerCount, pTriggerDetectedFlag, pTriggerUpdatedFlag, SymbolLength, SampleLength);
+  SDA_TriggerReverberator(pTriggerOutput, pTriggerOutput, pTriggerCount, pTriggerDetectedFlag, pTriggerUpdatedFlag, SymbolLength, sampleLength);
 }    // End of SDA_EarlyLateGateDebug()
 
 /********************************************************
@@ -1071,7 +1071,7 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateDebug(const SLData_t* SIGLIB_PTR_DECL pSr
  *   SLFixData_t *pTriggerDetectedFlag,
  *   SLFixData_t *pTriggerUpdatedFlag,
  *   const SLArrayIndex_t SymbolLength,
- *   const SLArrayIndex_t SampleLength)
+ *   const SLArrayIndex_t sampleLength)
  *
  * Return value:
  *   Trigger output
@@ -1228,7 +1228,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_EarlyLateGateSquarePulse(
  *   SLFixData_t *pTriggerDetectedFlag,
  *   SLFixData_t *pTriggerUpdatedFlag,
  *   const SLArrayIndex_t SymbolLength,
- *   const SLArrayIndex_t SampleLength)
+ *   const SLArrayIndex_t sampleLength)
  *
  * Return value:
  *   void
@@ -1245,11 +1245,11 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateSquarePulse(
     SLArrayIndex_t* pEarlyGateDelayIndex, const SLArrayIndex_t EarlyGateDelayLength, SLData_t* SIGLIB_PTR_DECL pLoopFilterState,
     SLData_t* SIGLIB_PTR_DECL pLoopFilterCoeffs, SLArrayIndex_t* pLoopFilterIndex, const SLArrayIndex_t LoopFilterLength,
     const SLData_t NoiseThreshold, SLFixData_t* pPulseDetectorThresholdFlag, SLData_t* pZeroCrossingPreviousSample, SLArrayIndex_t* pTriggerCount,
-    SLFixData_t* pTriggerDetectedFlag, SLFixData_t* pTriggerUpdatedFlag, const SLArrayIndex_t SymbolLength, const SLArrayIndex_t SampleLength)
+    SLFixData_t* pTriggerDetectedFlag, SLFixData_t* pTriggerUpdatedFlag, const SLArrayIndex_t SymbolLength, const SLArrayIndex_t sampleLength)
 {
-  SDA_Comb(pSrc, pTriggerOutput, pMatchedFilterState, pMatchedFilterIndex, pMatchedFilterSum, SymbolLength, SampleLength);
+  SDA_Comb(pSrc, pTriggerOutput, pMatchedFilterState, pMatchedFilterIndex, pMatchedFilterSum, SymbolLength, sampleLength);
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     // Generate delays for the early gate
     SLData_t EarlyGateOutput = *pTriggerOutput;    // Note that there is no delay
                                                    // on the late gate data point
@@ -1279,10 +1279,10 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateSquarePulse(
     *pTriggerOutput++ = ZeroCrossingDetectorOutput;    // Indicate we have a trigger
   }
 
-  pTriggerOutput -= SampleLength;    // Reset trigger output array pointer
+  pTriggerOutput -= sampleLength;    // Reset trigger output array pointer
 
   // Generate continuous pulse stream
-  SDA_TriggerReverberator(pTriggerOutput, pTriggerOutput, pTriggerCount, pTriggerDetectedFlag, pTriggerUpdatedFlag, SymbolLength, SampleLength);
+  SDA_TriggerReverberator(pTriggerOutput, pTriggerOutput, pTriggerCount, pTriggerDetectedFlag, pTriggerUpdatedFlag, SymbolLength, sampleLength);
 }    // End of SDA_EarlyLateGateSquarePulse()
 
 /********************************************************
@@ -1310,7 +1310,7 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateSquarePulse(
  *   SLData_t * SIGLIB_PTR_DECL pMatchedFilterOutput,
  *   SLData_t * SIGLIB_PTR_DECL pLoopFilterOutput,
  *   const SLArrayIndex_t SymbolLength,
- *   const SLArrayIndex_t SampleLength)
+ *   const SLArrayIndex_t sampleLength)
  *
  * Return value:
  *   void
@@ -1330,14 +1330,14 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateSquarePulseDebug(
     SLData_t* SIGLIB_PTR_DECL pLoopFilterCoeffs, SLArrayIndex_t* pLoopFilterIndex, const SLArrayIndex_t LoopFilterLength,
     const SLData_t NoiseThreshold, SLFixData_t* pPulseDetectorThresholdFlag, SLData_t* pZeroCrossingPreviousSample, SLArrayIndex_t* pTriggerCount,
     SLFixData_t* pTriggerDetectedFlag, SLFixData_t* pTriggerUpdatedFlag, SLData_t* SIGLIB_PTR_DECL pMatchedFilterOutput,
-    SLData_t* SIGLIB_PTR_DECL pLoopFilterOutput, const SLArrayIndex_t SymbolLength, const SLArrayIndex_t SampleLength)
+    SLData_t* SIGLIB_PTR_DECL pLoopFilterOutput, const SLArrayIndex_t SymbolLength, const SLArrayIndex_t sampleLength)
 {
-  SDA_Comb(pSrc, pTriggerOutput, pMatchedFilterState, pMatchedFilterIndex, pMatchedFilterSum, SymbolLength, SampleLength);
+  SDA_Comb(pSrc, pTriggerOutput, pMatchedFilterState, pMatchedFilterIndex, pMatchedFilterSum, SymbolLength, sampleLength);
 
   SDA_Copy(pTriggerOutput, pMatchedFilterOutput,
-           SampleLength);    // Copy matched filter output for debug
+           sampleLength);    // Copy matched filter output for debug
 
-  for (SLArrayIndex_t i = 0; i < SampleLength; i++) {
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
     // Generate delays for the early gate
     SLData_t EarlyGateOutput = *pTriggerOutput;    // Note that there is no delay
                                                    // on the late gate data point
@@ -1368,10 +1368,10 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateSquarePulseDebug(
     }
     *pTriggerOutput++ = ZeroCrossingDetectorOutput;    // Indicate we have a trigger
   }
-  pTriggerOutput -= SampleLength;    // Reset trigger output array pointer
+  pTriggerOutput -= sampleLength;    // Reset trigger output array pointer
 
   // Generate continuous pulse stream
-  SDA_TriggerReverberator(pTriggerOutput, pTriggerOutput, pTriggerCount, pTriggerDetectedFlag, pTriggerUpdatedFlag, SymbolLength, SampleLength);
+  SDA_TriggerReverberator(pTriggerOutput, pTriggerOutput, pTriggerCount, pTriggerDetectedFlag, pTriggerUpdatedFlag, SymbolLength, sampleLength);
 }    // End of SDA_EarlyLateGateSquarePulseDebug()
 
 /********************************************************
@@ -1397,7 +1397,7 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateSquarePulseDebug(
  *   SLFixData_t *pTriggerDetectedFlag,
  *   SLFixData_t *pTriggerUpdatedFlag,
  *   const SLArrayIndex_t SymbolLength,
- *   const SLArrayIndex_t SampleLength)
+ *   const SLArrayIndex_t sampleLength)
  *
  * Return value:
  *   Trigger output
