@@ -284,10 +284,10 @@ int main(int argc, char* argv[])
 
   SIF_CopyWithIndex(&overlapSrcArrayIndex);    // Pointer to source array index
 
-  SIF_Window(pWindowCoeffs,     // Pointer to window oefficient
-             SIGLIB_HANNING,    // Window type
-             SIGLIB_ZERO,       // Window coefficient
-             FFT_LENGTH);       // Window length
+  SIF_Window(pWindowCoeffs,             // Pointer to window oefficient
+             SIGLIB_HANNING_FOURIER,    // Window type
+             SIGLIB_ZERO,               // Window coefficient
+             FFT_LENGTH);               // Window length
 
   if (windowZeroEdgeLength > 0) {
     SDA_Clear(pWindowCoeffs, windowZeroEdgeLength);

@@ -3512,15 +3512,6 @@ Declare Sub SDA_LogMagnitude Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByRef fpBuffer As Double, _
         ByVal iData As Long)
 
-Declare Sub SDA_Lengthen Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
-        ByRef fpBuffer As Double, _
-        ByVal iData As Long, _
-        ByVal iData As Long)
-
-Declare Sub SDA_Shorten Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
-        ByRef fpBuffer As Double, _
-        ByVal iData As Long)
-
 Declare Sub SDA_Fill Lib "SIGLIB.DLL" (ByRef fpBuffer As Double, _
         ByVal fData As Double, _
         ByVal iData As Long)

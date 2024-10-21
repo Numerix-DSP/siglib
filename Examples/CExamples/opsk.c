@@ -347,7 +347,7 @@ int main(void)
 #if DISPLAY_FREQ_DOMAIN
     {
       SLError_t SigLibErrorCode;
-      SigLibErrorCode = plot_frequency_domain(ModulatedSignal, SIGLIB_FLAT_TOP, "Output Frequency Spectrum", SAMPLE_LENGTH, SAMPLE_LENGTH);
+      SigLibErrorCode = plot_frequency_domain(ModulatedSignal, SIGLIB_FLAT_TOP_FOURIER, "Output Frequency Spectrum", SAMPLE_LENGTH, SAMPLE_LENGTH);
       if (SigLibErrorCode != SIGLIB_NO_ERROR) {
         printf("\n\nSigLib failure, please ensure that you have enough "
                "memory\n\n");

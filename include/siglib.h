@@ -316,6 +316,10 @@ void SIGLIB_FUNC_DECL SUF_MSDelay(const SLFixData_t Delay);
 
 // Fast Fourier Transform Functions - ffourier.c
 
+SLArrayIndex_t SIGLIB_FUNC_DECL SAI_FftLengthLog2(const SLArrayIndex_t);    // FFT length
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SAI_FftLengthLog4(const SLArrayIndex_t);    // FFT length
+
 void SIGLIB_FUNC_DECL SIF_Fft(SLData_t* SIGLIB_OUTPUT_PTR_DECL,          // Pointer to FFT coefficients
                               SLArrayIndex_t* SIGLIB_OUTPUT_PTR_DECL,    // Bit reverse mode flag / Pointer
                                                                          // to bit reverse address table
@@ -604,7 +608,7 @@ void SIGLIB_FUNC_DECL SDA_ZoomFftSimple(const SLData_t* SIGLIB_INPUT_PTR_DECL,  
                                         const SLData_t* SIGLIB_INPUT_PTR_DECL,          // Pointer to FFT coefficients
                                         const SLArrayIndex_t* SIGLIB_INPUT_PTR_DECL,    // Bit reverse mode flag / Pointer to bit
                                                                                         // reverse address table
-                                        const SLArrayIndex_t,                           // Input array size
+                                        const SLArrayIndex_t,                           // Input array length
                                         const SLArrayIndex_t,                           // FFT length
                                         const SLArrayIndex_t);                          // Log2 FFT length
 
@@ -5050,6 +5054,11 @@ SLData_t SIGLIB_FUNC_DECL SDA_MeanSquareError(const SLData_t* SIGLIB_INPUT_PTR_D
 SLData_t SIGLIB_FUNC_DECL SDA_RootMeanSquare(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                              const SLArrayIndex_t);                    // Array length
 
+SLData_t SIGLIB_FUNC_DECL SDA_RootMeanSquareError(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array 1
+                                                  const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array 2
+                                                  const SLData_t,                           // Inverse of the array length
+                                                  const SLArrayIndex_t);                    // Array length
+
 void SIGLIB_FUNC_DECL SDA_Magnitude(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to real data source array
                                     const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to imaginary data source array
                                     SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to magnitude destination array
@@ -5125,6 +5134,16 @@ void SIGLIB_FUNC_DECL SDA_LogN(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Poin
                                const SLData_t,                           // Base number
                                const SLArrayIndex_t);                    // Array length
 
+SLData_t SIGLIB_FUNC_DECL SDS_Sigmoid(const SLData_t,     // Source value
+                                      const SLData_t,     // Shift value
+                                      const SLData_t);    // Multiplication value
+
+void SIGLIB_FUNC_DECL SDA_Sigmoid(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                                  SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
+                                  const SLData_t,                           // Shift value
+                                  const SLData_t,                           // Multiplication value
+                                  const SLArrayIndex_t);                    // Array length
+
 void SIGLIB_FUNC_DECL SDA_LogDistribution(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
                                           const SLData_t,                      // Start value
                                           const SLData_t,                      // End value
@@ -5184,14 +5203,11 @@ void SIGLIB_FUNC_DECL SDA_LogMagnitudeAndPhaseUnWrapped(const SLData_t* SIGLIB_I
                                                         SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to phase destination array
                                                         const SLArrayIndex_t);                    // Array length
 
-void SIGLIB_FUNC_DECL SDA_Lengthen(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
-                                   SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
-                                   const SLArrayIndex_t,                     // Source array size
-                                   const SLArrayIndex_t);                    // Destination array size
-
-void SIGLIB_FUNC_DECL SDA_Shorten(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+void SIGLIB_FUNC_DECL SDA_ZeroPad(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                   SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
-                                  const SLArrayIndex_t);                    // Destination array size
+                                  const SLArrayIndex_t,                     // Pre-pad length
+                                  const SLArrayIndex_t,                     // Post-pad length
+                                  const SLArrayIndex_t);                    // Source array length
 
 void SIGLIB_FUNC_DECL SIF_ReSize(SLArrayIndex_t*);    // Pointer to state array length
 
@@ -5223,43 +5239,43 @@ void SIGLIB_FUNC_DECL SDA_Histogram(const SLData_t* SIGLIB_INPUT_PTR_DECL,    //
                                     SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to histogram array
                                     const SLData_t,                           // Minimum input data value
                                     const SLData_t,                           // Maximum input data value
-                                    const SLArrayIndex_t,                     // Source array size
-                                    const SLArrayIndex_t);                    // Destination array size
+                                    const SLArrayIndex_t,                     // Source array length
+                                    const SLArrayIndex_t);                    // Destination array length
 
 void SIGLIB_FUNC_DECL SDA_HistogramCumulative(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                               SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to histogram array
                                               const SLData_t,                           // Minimum input data value
                                               const SLData_t,                           // Maximum input data value
-                                              const SLArrayIndex_t,                     // Source array size
-                                              const SLArrayIndex_t);                    // Destination array size
+                                              const SLArrayIndex_t,                     // Source array length
+                                              const SLArrayIndex_t);                    // Destination array length
 
 void SIGLIB_FUNC_DECL SDA_HistogramExtended(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                             SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to histogram array
                                             const SLData_t,                           // Minimum input data value
                                             const SLData_t,                           // Maximum input data value
-                                            const SLArrayIndex_t,                     // Source array size
-                                            const SLArrayIndex_t);                    // Destination array size
+                                            const SLArrayIndex_t,                     // Source array length
+                                            const SLArrayIndex_t);                    // Destination array length
 
 void SIGLIB_FUNC_DECL SDA_HistogramExtendedCumulative(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                                       SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to histogram array
                                                       const SLData_t,                           // Minimum input data value
                                                       const SLData_t,                           // Maximum input data value
-                                                      const SLArrayIndex_t,                     // Source array size
-                                                      const SLArrayIndex_t);                    // Destination array size
+                                                      const SLArrayIndex_t,                     // Source array length
+                                                      const SLArrayIndex_t);                    // Destination array length
 
 void SIGLIB_FUNC_DECL SIF_Histogram(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to histogram array
-                                    const SLArrayIndex_t);               // Histogram array size
+                                    const SLArrayIndex_t);               // Histogram array length
 
 void SIGLIB_FUNC_DECL SDA_HistogramEqualize(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                             SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
                                             const SLData_t,                           // New peak value
-                                            const SLArrayIndex_t);                    // Source array size
+                                            const SLArrayIndex_t);                    // Source array length
 
 void SIGLIB_FUNC_DECL SDA_Quantize(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                    SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
                                    const SLArrayIndex_t,                     // Quantisation number of bits
                                    const SLData_t,                           // Peak value
-                                   const SLArrayIndex_t);                    // Source array size
+                                   const SLArrayIndex_t);                    // Source array length
 
 SLData_t SIGLIB_FUNC_DECL SDS_Quantize(const SLData_t,          // Source sample
                                        const SLArrayIndex_t,    // Quantisation number of bits
@@ -5268,7 +5284,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Quantize(const SLData_t,          // Source sample
 void SIGLIB_FUNC_DECL SDA_Quantize_N(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                      SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
                                      const SLData_t,                           // Quantisation number
-                                     const SLArrayIndex_t);                    // Source array size
+                                     const SLArrayIndex_t);                    // Source array length
 
 SLData_t SIGLIB_FUNC_DECL SDS_Quantise_N(const SLData_t,     // Source sample
                                          const SLData_t);    // Quantisation number
@@ -5436,7 +5452,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_EchoGenerate(const SLData_t,                      
                                            const SLData_t,                           // Echo delay
                                            const SLData_t,                           // Echo decay
                                            const enum SLEcho_t,                      // Echo type
-                                           const SLArrayIndex_t);                    // Echo array size
+                                           const SLArrayIndex_t);                    // Echo array length
 
 void SIGLIB_FUNC_DECL SDA_Power(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                 SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
@@ -6850,6 +6866,9 @@ void SIGLIB_FUNC_DECL SDA_ActivationTanHDerivative(const SLData_t* SIGLIB_INPUT_
 #endif                                                                                       // End of #ifndef _HP_VEE
 
 // Deprecated functionality - these may be removed in a later version
+#define SDA_Shorten SDA_Copy
+#define SDA_Lengthen(pSrc, pDst, srcLength, dstLength) SDA_ZeroPad(pSrc, pDst, 0, (dstLength - srcLength), srcLength)
+
 #define SDA_MaxPos SDA_MaxIndex
 #define SDA_AbsMaxPos SDA_AbsMaxIndex
 #define SDA_MinPos SDA_MinIndex
@@ -6877,6 +6896,17 @@ void SIGLIB_FUNC_DECL SDA_ActivationTanHDerivative(const SLData_t* SIGLIB_INPUT_
 #define SUF_EstimateBPFilterError SUF_EstimateBPFirFilterError
 
 #define SDA_UnbiasedVariance SDA_SampleVariance
+
+#define SIGLIB_HANNING SIGLIB_HANNING_FILTER
+#define SIGLIB_HAMMING SIGLIB_HAMMING_FILTER
+#define SIGLIB_GENERALIZED_COSINE SIGLIB_GENERALIZED_COSINE_FILTER
+#define SIGLIB_BLACKMAN SIGLIB_BLACKMAN_FILTER
+#define SIGLIB_BARTLETT_TRIANGLE_ZERO_END_POINTS SIGLIB_BARTLETT_TRIANGLE_ZERO_END_POINTS_FILTER
+#define SIGLIB_BARTLETT_TRIANGLE_NON_ZERO_END_POINTS SIGLIB_BARTLETT_TRIANGLE_NON_ZERO_END_POINTS_FILTER
+#define SIGLIB_KAISER SIGLIB_KAISER_FILTER
+#define SIGLIB_BLACKMAN_HARRIS SIGLIB_BLACKMAN_HARRIS_FILTER
+#define SIGLIB_RECTANGLE SIGLIB_RECTANGLE_FILTER
+#define SIGLIB_FLAT_TOP SIGLIB_FLAT_TOP_FILTER
 
 #ifdef __cplusplus    // End of decl. for C++ program calls
 }

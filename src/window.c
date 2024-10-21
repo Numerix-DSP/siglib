@@ -40,8 +40,6 @@ Description: Windowing routines for SigLib DSP library.
 
 #include <siglib.h>    // Include SigLib header file
 
-#define SYMMETRICAL_WINDOW 0    // Set to '1' for symmetrical window and '0' for periodic
-
 /********************************************************
  * Function: SIF_Window
  *
@@ -70,45 +68,45 @@ SLError_t SIGLIB_FUNC_DECL SIF_Window(SLData_t* SIGLIB_PTR_DECL pWindowCoeffs, c
 {
   SLData_t theta, theta_inc, z;
 
-#if SYMMETRICAL_WINDOW                                                       // Symmetrical window
-  theta_inc = (SIGLIB_TWO_PI) / (((SLData_t)windowLength) - SIGLIB_HALF);    // Amount to increment through sinusoid
-#else                                                                        // Periodic window
-  theta_inc = (SIGLIB_TWO_PI) / ((SLData_t)windowLength);              // Amount to increment through sinusoid
-#endif
   theta = SIGLIB_ZERO;    // Initial angle
 
   // Generate window table
   switch (WindowType) {
-  case SIGLIB_HANNING:    // Hanning window
+  case SIGLIB_HANNING_FOURIER:                                 // Hanning window
+    theta_inc = (SIGLIB_TWO_PI) / ((SLData_t)windowLength);    // Angle to increment through window function
     for (SLArrayIndex_t i = 0; i < windowLength; i++) {
       *pWindowCoeffs++ = SIGLIB_HALF * (SIGLIB_ONE - SDS_Cos(theta));
       theta += theta_inc;
     }
     break;
 
-  case SIGLIB_HAMMING:    // Hamming window
+  case SIGLIB_HAMMING_FOURIER:                                 // Hamming window
+    theta_inc = (SIGLIB_TWO_PI) / ((SLData_t)windowLength);    // Angle to increment through window function
     for (SLArrayIndex_t i = 0; i < windowLength; i++) {
       *pWindowCoeffs++ = ((SLData_t)0.53836) - (((SLData_t)0.46164) * SDS_Cos(theta));
       theta += theta_inc;
     }
     break;
 
-  case SIGLIB_GENERALIZED_COSINE:    // Generalized cosine
+  case SIGLIB_GENERALIZED_COSINE_FOURIER:                      // Generalized cosine
+    theta_inc = (SIGLIB_TWO_PI) / ((SLData_t)windowLength);    // Angle to increment through window function
     for (SLArrayIndex_t i = 0; i < windowLength; i++) {
       *pWindowCoeffs++ = Coeff - (SIGLIB_ONE - Coeff) * SDS_Cos(theta);
       theta += theta_inc;
     }
     break;
 
-  case SIGLIB_BLACKMAN:    // Blackman window
+  case SIGLIB_BLACKMAN_FOURIER:                                // Blackman window
+    theta_inc = (SIGLIB_TWO_PI) / ((SLData_t)windowLength);    // Angle to increment through window function
     for (SLArrayIndex_t i = 0; i < windowLength; i++) {
       *pWindowCoeffs++ = ((SLData_t)0.42) - (SIGLIB_HALF * SDS_Cos(theta)) + (((SLData_t)0.08) * SDS_Cos(SIGLIB_TWO * theta));
       theta += theta_inc;
     }
     break;
 
-  case SIGLIB_BARTLETT_TRIANGLE_ZERO_END_POINTS:    // Bartlett / triangle window -
-                                                    // zero end points*/
+  case SIGLIB_BARTLETT_TRIANGLE_ZERO_END_POINTS_FOURIER:       // Bartlett / triangle window -
+                                                               // zero end points*/
+    theta_inc = (SIGLIB_TWO_PI) / ((SLData_t)windowLength);    // Angle to increment through window function
     for (SLArrayIndex_t i = 0; i < (SLArrayIndex_t)((SLUFixData_t)windowLength >> 1U); i++) {
       *(pWindowCoeffs + i) = SIGLIB_TWO * ((SLData_t)i) / ((SLData_t)(windowLength - 2));
     }
@@ -118,9 +116,10 @@ SLError_t SIGLIB_FUNC_DECL SIF_Window(SLData_t* SIGLIB_PTR_DECL pWindowCoeffs, c
     }
     break;
 
-  case SIGLIB_BARTLETT_TRIANGLE_NON_ZERO_END_POINTS:    // Bartlett / triangle
-                                                        // window - non zero end
-                                                        // points*/
+  case SIGLIB_BARTLETT_TRIANGLE_NON_ZERO_END_POINTS_FOURIER:    // Bartlett / triangle
+                                                                // window - non zero end
+                                                                // points*/
+    theta_inc = (SIGLIB_TWO_PI) / ((SLData_t)windowLength);     // Angle to increment through window function
     for (SLArrayIndex_t i = 0; i < (SLArrayIndex_t)((SLUFixData_t)windowLength >> 1U); i++) {
       *pWindowCoeffs++ = SIGLIB_TWO * ((SLData_t)i + 1) / ((SLData_t)windowLength);
     }
@@ -129,7 +128,8 @@ SLError_t SIGLIB_FUNC_DECL SIF_Window(SLData_t* SIGLIB_PTR_DECL pWindowCoeffs, c
     }
     break;
 
-  case SIGLIB_KAISER:    // Kaiser window
+  case SIGLIB_KAISER_FOURIER:                                  // Kaiser window
+    theta_inc = (SIGLIB_TWO_PI) / ((SLData_t)windowLength);    // Angle to increment through window function
     z = -((((SLData_t)windowLength) - SIGLIB_ONE) / SIGLIB_TWO);
     for (SLArrayIndex_t i = 0; i < windowLength; i++) {
       *pWindowCoeffs++ =
@@ -138,7 +138,8 @@ SLError_t SIGLIB_FUNC_DECL SIF_Window(SLData_t* SIGLIB_PTR_DECL pWindowCoeffs, c
     }
     break;
 
-  case SIGLIB_BLACKMAN_HARRIS:    // 4 th order Blackman-Harris window
+  case SIGLIB_BLACKMAN_HARRIS_FOURIER:                         // 4 th order Blackman-Harris window
+    theta_inc = (SIGLIB_TWO_PI) / ((SLData_t)windowLength);    // Angle to increment through window function
     for (SLArrayIndex_t i = 0; i < windowLength; i++) {
       *pWindowCoeffs++ = ((SLData_t)0.35875) - (((SLData_t)0.48829) * SDS_Cos(theta)) + (((SLData_t)0.14128) * SDS_Cos(SIGLIB_TWO * theta)) -
                          (((SLData_t)0.01168) * SDS_Cos(((SLData_t)3.0) * theta));
@@ -146,13 +147,106 @@ SLError_t SIGLIB_FUNC_DECL SIF_Window(SLData_t* SIGLIB_PTR_DECL pWindowCoeffs, c
     }
     break;
 
-  case SIGLIB_RECTANGLE:    // Rectangle window
+  case SIGLIB_RECTANGLE_FOURIER:                               // Rectangle window
+    theta_inc = (SIGLIB_TWO_PI) / ((SLData_t)windowLength);    // Angle to increment through window function
     for (SLArrayIndex_t i = 0; i < windowLength; i++) {
       *pWindowCoeffs++ = SIGLIB_ONE;
     }
     break;
 
-  case SIGLIB_FLAT_TOP:    // Flat top window
+  case SIGLIB_FLAT_TOP_FOURIER:                                // Flat top window
+    theta_inc = (SIGLIB_TWO_PI) / ((SLData_t)windowLength);    // Angle to increment through window function
+    for (SLArrayIndex_t i = 0; i < windowLength; i++) {
+      *pWindowCoeffs++ =
+          ((SLData_t)0.2810638602) - (((SLData_t)0.5208971735) * SDS_Cos(theta)) + (((SLData_t)0.1980389663) * SDS_Cos(SIGLIB_TWO * theta));
+      theta += theta_inc;
+    }
+    break;
+
+  case SIGLIB_HANNING_FILTER:                                                 // Hanning window
+    theta_inc = (SIGLIB_TWO_PI) / (((SLData_t)windowLength) - SIGLIB_ONE);    // Amount to increment through sinusoid
+    for (SLArrayIndex_t i = 0; i < windowLength; i++) {
+      *pWindowCoeffs++ = SIGLIB_HALF * (SIGLIB_ONE - SDS_Cos(theta));
+      theta += theta_inc;
+    }
+    break;
+
+  case SIGLIB_HAMMING_FILTER:                                                 // Hamming window
+    theta_inc = (SIGLIB_TWO_PI) / (((SLData_t)windowLength) - SIGLIB_ONE);    // Amount to increment through sinusoid
+    for (SLArrayIndex_t i = 0; i < windowLength; i++) {
+      *pWindowCoeffs++ = ((SLData_t)0.53836) - (((SLData_t)0.46164) * SDS_Cos(theta));
+      theta += theta_inc;
+    }
+    break;
+
+  case SIGLIB_GENERALIZED_COSINE_FILTER:                                      // Generalized cosine
+    theta_inc = (SIGLIB_TWO_PI) / (((SLData_t)windowLength) - SIGLIB_ONE);    // Amount to increment through sinusoid
+    for (SLArrayIndex_t i = 0; i < windowLength; i++) {
+      *pWindowCoeffs++ = Coeff - (SIGLIB_ONE - Coeff) * SDS_Cos(theta);
+      theta += theta_inc;
+    }
+    break;
+
+  case SIGLIB_BLACKMAN_FILTER:                                                // Blackman window
+    theta_inc = (SIGLIB_TWO_PI) / (((SLData_t)windowLength) - SIGLIB_ONE);    // Amount to increment through sinusoid
+    for (SLArrayIndex_t i = 0; i < windowLength; i++) {
+      *pWindowCoeffs++ = ((SLData_t)0.42) - (SIGLIB_HALF * SDS_Cos(theta)) + (((SLData_t)0.08) * SDS_Cos(SIGLIB_TWO * theta));
+      theta += theta_inc;
+    }
+    break;
+
+  case SIGLIB_BARTLETT_TRIANGLE_ZERO_END_POINTS_FILTER:                       // Bartlett / triangle window -
+                                                                              // zero end points*/
+    theta_inc = (SIGLIB_TWO_PI) / (((SLData_t)windowLength) - SIGLIB_ONE);    // Amount to increment through sinusoid
+    for (SLArrayIndex_t i = 0; i < (SLArrayIndex_t)((SLUFixData_t)windowLength >> 1U); i++) {
+      *(pWindowCoeffs + i) = SIGLIB_TWO * ((SLData_t)i) / ((SLData_t)(windowLength - 2));
+    }
+    for (SLArrayIndex_t i = 0; i < (SLArrayIndex_t)((SLUFixData_t)windowLength >> 1U); i++) {
+      *(pWindowCoeffs + i + (SLArrayIndex_t)((SLUFixData_t)windowLength >> 1U)) =
+          SIGLIB_ONE - (SIGLIB_TWO * ((SLData_t)i) / ((SLData_t)(windowLength - 2)));
+    }
+    break;
+
+  case SIGLIB_BARTLETT_TRIANGLE_NON_ZERO_END_POINTS_FILTER:                   // Bartlett / triangle
+                                                                              // window - non zero end
+                                                                              // points*/
+    theta_inc = (SIGLIB_TWO_PI) / (((SLData_t)windowLength) - SIGLIB_ONE);    // Amount to increment through sinusoid
+    for (SLArrayIndex_t i = 0; i < (SLArrayIndex_t)((SLUFixData_t)windowLength >> 1U); i++) {
+      *pWindowCoeffs++ = SIGLIB_TWO * ((SLData_t)i + 1) / ((SLData_t)windowLength);
+    }
+    for (SLArrayIndex_t i = 0; i < (SLArrayIndex_t)((SLUFixData_t)windowLength >> 1U); i++) {
+      *pWindowCoeffs++ = SIGLIB_ONE - (SIGLIB_TWO * ((SLData_t)i) / ((SLData_t)windowLength));
+    }
+    break;
+
+  case SIGLIB_KAISER_FILTER:                                                  // Kaiser window
+    theta_inc = (SIGLIB_TWO_PI) / (((SLData_t)windowLength) - SIGLIB_ONE);    // Amount to increment through sinusoid
+    z = -((((SLData_t)windowLength) - SIGLIB_ONE) / SIGLIB_TWO);
+    for (SLArrayIndex_t i = 0; i < windowLength; i++) {
+      *pWindowCoeffs++ =
+          (SDS_I0Bessel((Coeff * SDS_Sqrt(SIGLIB_ONE - SDS_Pow((SIGLIB_TWO * z / (windowLength - 1)), SIGLIB_TWO)))) / SDS_I0Bessel(Coeff));
+      z++;
+    }
+    break;
+
+  case SIGLIB_BLACKMAN_HARRIS_FILTER:                                         // 4 th order Blackman-Harris window
+    theta_inc = (SIGLIB_TWO_PI) / (((SLData_t)windowLength) - SIGLIB_ONE);    // Amount to increment through sinusoid
+    for (SLArrayIndex_t i = 0; i < windowLength; i++) {
+      *pWindowCoeffs++ = ((SLData_t)0.35875) - (((SLData_t)0.48829) * SDS_Cos(theta)) + (((SLData_t)0.14128) * SDS_Cos(SIGLIB_TWO * theta)) -
+                         (((SLData_t)0.01168) * SDS_Cos(((SLData_t)3.0) * theta));
+      theta += theta_inc;
+    }
+    break;
+
+  case SIGLIB_RECTANGLE_FILTER:                                               // Rectangle window
+    theta_inc = (SIGLIB_TWO_PI) / (((SLData_t)windowLength) - SIGLIB_ONE);    // Amount to increment through sinusoid
+    for (SLArrayIndex_t i = 0; i < windowLength; i++) {
+      *pWindowCoeffs++ = SIGLIB_ONE;
+    }
+    break;
+
+  case SIGLIB_FLAT_TOP_FILTER:                                                // Flat top window
+    theta_inc = (SIGLIB_TWO_PI) / (((SLData_t)windowLength) - SIGLIB_ONE);    // Amount to increment through sinusoid
     for (SLArrayIndex_t i = 0; i < windowLength; i++) {
       *pWindowCoeffs++ =
           ((SLData_t)0.2810638602) - (((SLData_t)0.5208971735) * SDS_Cos(theta)) + (((SLData_t)0.1980389663) * SDS_Cos(SIGLIB_TWO * theta));
@@ -195,62 +289,100 @@ SLError_t SIGLIB_FUNC_DECL SIF_Window(SLData_t* SIGLIB_PTR_DECL pWindowCoeffs, c
 SLError_t SIGLIB_FUNC_DECL SIF_TableTopWindow(SLData_t* SIGLIB_PTR_DECL pWindowCoeffs, const enum SLWindow_t WindowType, const SLData_t Coeff,
                                               const SLArrayIndex_t TableTopLength, const SLArrayIndex_t windowLength)
 {
-  SLArrayIndex_t RisingFallingSectionLength = (SLArrayIndex_t)((SLUFixData_t)(windowLength - TableTopLength) >> 1U);
+  SLArrayIndex_t RisingFallingSectionLength = windowLength - TableTopLength;
   SLData_t theta, theta_inc, z;
 
-#if SYMMETRICAL_WINDOW                                                                // Symmetrical window
-  theta_inc = (SIGLIB_PI) / (((SLData_t)RisingFallingSectionLength) - SIGLIB_ONE);    // Amount to increment through sinusoid
-#else                                                                                 // Periodic window
-  theta_inc = (SIGLIB_PI) / ((SLData_t)RisingFallingSectionLength);    // Amount to increment through sinusoid
-#endif
   theta = SIGLIB_ZERO;    // Initial angle
-
-  // Fill window with peak level for table top
-  SDA_Fill(pWindowCoeffs, SIGLIB_ONE, windowLength);
 
   // Generate window table - first section: 0 to start of table top
   switch (WindowType) {
-  case SIGLIB_HANNING:    // Hanning window
+  case SIGLIB_HANNING_FOURIER:                                               // Hanning window
+    theta_inc = (SIGLIB_TWO_PI) / ((SLData_t)RisingFallingSectionLength);    // Amount to increment through sinusoid
     for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength; i++) {
       *(pWindowCoeffs + i) = SIGLIB_HALF * (SIGLIB_ONE - SDS_Cos(theta));
       theta += theta_inc;
     }
+    // Copy falling section to end of array
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength >> 1; i++) {
+      *(pWindowCoeffs + windowLength - i - 1) = *(pWindowCoeffs + RisingFallingSectionLength - i - 1);
+    }
+    // Fill table-top section
+    for (SLArrayIndex_t i = 0; i < TableTopLength; i++) {
+      *((pWindowCoeffs + ((RisingFallingSectionLength) >> 1)) + i + 1) = SIGLIB_ONE;    // Fourier
+    }
     break;
 
-  case SIGLIB_HAMMING:    // Hamming window
+  case SIGLIB_HAMMING_FOURIER:                                               // Hamming window
+    theta_inc = (SIGLIB_TWO_PI) / ((SLData_t)RisingFallingSectionLength);    // Amount to increment through sinusoid
     for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength; i++) {
       *(pWindowCoeffs + i) = ((SLData_t)0.54) - (((SLData_t)0.46) * SDS_Cos(theta));
       theta += theta_inc;
     }
+    // Copy falling section to end of array
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength >> 1; i++) {
+      *(pWindowCoeffs + windowLength - i - 1) = *(pWindowCoeffs + RisingFallingSectionLength - i - 1);
+    }
+    // Fill table-top section
+    for (SLArrayIndex_t i = 0; i < TableTopLength; i++) {
+      *((pWindowCoeffs + ((RisingFallingSectionLength) >> 1)) + i + 1) = SIGLIB_ONE;    // Fourier
+    }
     break;
 
-  case SIGLIB_GENERALIZED_COSINE:    // Generalized cosine
+  case SIGLIB_GENERALIZED_COSINE_FOURIER:                                    // Generalized cosine
+    theta_inc = (SIGLIB_TWO_PI) / ((SLData_t)RisingFallingSectionLength);    // Amount to increment through sinusoid
     for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength; i++) {
       *(pWindowCoeffs + i) = Coeff - (SIGLIB_ONE - Coeff) * SDS_Cos(theta);
       theta += theta_inc;
     }
+    // Copy falling section to end of array
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength >> 1; i++) {
+      *(pWindowCoeffs + windowLength - i - 1) = *(pWindowCoeffs + RisingFallingSectionLength - i - 1);
+    }
+    // Fill table-top section
+    for (SLArrayIndex_t i = 0; i < TableTopLength; i++) {
+      *((pWindowCoeffs + ((RisingFallingSectionLength) >> 1)) + i + 1) = SIGLIB_ONE;    // Fourier
+    }
     break;
 
-  case SIGLIB_BLACKMAN:    // Blackman window
+  case SIGLIB_BLACKMAN_FOURIER:                                              // Blackman window
+    theta_inc = (SIGLIB_TWO_PI) / ((SLData_t)RisingFallingSectionLength);    // Amount to increment through sinusoid
     for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength; i++) {
       *(pWindowCoeffs + i) = ((SLData_t)0.42) - (SIGLIB_HALF * SDS_Cos(theta)) + (((SLData_t)0.08) * SDS_Cos(SIGLIB_TWO * theta));
       theta += theta_inc;
     }
+    // Copy falling section to end of array
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength >> 1; i++) {
+      *(pWindowCoeffs + windowLength - i - 1) = *(pWindowCoeffs + RisingFallingSectionLength - i - 1);
+    }
+    // Fill table-top section
+    for (SLArrayIndex_t i = 0; i < TableTopLength; i++) {
+      *((pWindowCoeffs + ((RisingFallingSectionLength) >> 1)) + i + 1) = SIGLIB_ONE;    // Fourier
+    }
     break;
 
-  case SIGLIB_BARTLETT_TRIANGLE_ZERO_END_POINTS:    // Bartlett / triangle window -
-                                                    // zero end points*/
+  case SIGLIB_BARTLETT_TRIANGLE_ZERO_END_POINTS_FOURIER:                     // Bartlett / triangle window -
+                                                                             // zero end points*/
+    theta_inc = (SIGLIB_TWO_PI) / ((SLData_t)RisingFallingSectionLength);    // Amount to increment through sinusoid
     for (SLArrayIndex_t i = 0; i < (SLArrayIndex_t)((SLUFixData_t)RisingFallingSectionLength >> 1U); i++) {
       *(pWindowCoeffs + i) = SIGLIB_TWO * ((SLData_t)i + 1) / ((SLData_t)RisingFallingSectionLength);
     }
     for (SLArrayIndex_t i = 0; i < (SLArrayIndex_t)((SLUFixData_t)RisingFallingSectionLength >> 1U); i++) {
       *(pWindowCoeffs + i) = SIGLIB_ONE - (SIGLIB_TWO * ((SLData_t)i) / ((SLData_t)RisingFallingSectionLength));
     }
+    // Copy falling section to end of array
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength >> 1; i++) {
+      *(pWindowCoeffs + windowLength - i - 1) = *(pWindowCoeffs + RisingFallingSectionLength - i - 1);
+    }
+    // Fill table-top section
+    for (SLArrayIndex_t i = 0; i < TableTopLength; i++) {
+      *((pWindowCoeffs + ((RisingFallingSectionLength) >> 1)) + i + 1) = SIGLIB_ONE;    // Fourier
+    }
     break;
 
-  case SIGLIB_BARTLETT_TRIANGLE_NON_ZERO_END_POINTS:    // Bartlett / triangle
-                                                        // window - non_zero end
-                                                        // points*/
+  case SIGLIB_BARTLETT_TRIANGLE_NON_ZERO_END_POINTS_FOURIER:                 // Bartlett / triangle
+                                                                             // window - non_zero end
+                                                                             // points*/
+    theta_inc = (SIGLIB_TWO_PI) / ((SLData_t)RisingFallingSectionLength);    // Amount to increment through sinusoid
     for (SLArrayIndex_t i = 0; i < (SLArrayIndex_t)((SLUFixData_t)RisingFallingSectionLength >> 1U); i++) {
       *(pWindowCoeffs + i) = SIGLIB_TWO * ((SLData_t)i) / ((SLData_t)(RisingFallingSectionLength - 2));
     }
@@ -258,9 +390,18 @@ SLError_t SIGLIB_FUNC_DECL SIF_TableTopWindow(SLData_t* SIGLIB_PTR_DECL pWindowC
       *(pWindowCoeffs + i + (SLArrayIndex_t)((SLUFixData_t)RisingFallingSectionLength >> 1U)) =
           SIGLIB_ONE - (SIGLIB_TWO * ((SLData_t)i) / ((SLData_t)(RisingFallingSectionLength - 2)));
     }
+    // Copy falling section to end of array
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength >> 1; i++) {
+      *(pWindowCoeffs + windowLength - i - 1) = *(pWindowCoeffs + RisingFallingSectionLength - i - 1);
+    }
+    // Fill table-top section
+    for (SLArrayIndex_t i = 0; i < TableTopLength; i++) {
+      *((pWindowCoeffs + ((RisingFallingSectionLength) >> 1)) + i + 1) = SIGLIB_ONE;    // Fourier
+    }
     break;
 
-  case SIGLIB_KAISER:    // Kaiser window
+  case SIGLIB_KAISER_FOURIER:                                                // Kaiser window
+    theta_inc = (SIGLIB_TWO_PI) / ((SLData_t)RisingFallingSectionLength);    // Amount to increment through sinusoid
     z = -((((SLData_t)RisingFallingSectionLength) - SIGLIB_ONE) / SIGLIB_TWO);
     for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength; i++) {
       *(pWindowCoeffs + i) =
@@ -268,37 +409,239 @@ SLError_t SIGLIB_FUNC_DECL SIF_TableTopWindow(SLData_t* SIGLIB_PTR_DECL pWindowC
            SDS_I0Bessel(Coeff));
       z++;
     }
+    // Copy falling section to end of array
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength >> 1; i++) {
+      *(pWindowCoeffs + windowLength - i - 1) = *(pWindowCoeffs + RisingFallingSectionLength - i - 1);
+    }
+    // Fill table-top section
+    for (SLArrayIndex_t i = 0; i < TableTopLength; i++) {
+      *((pWindowCoeffs + ((RisingFallingSectionLength) >> 1)) + i + 1) = SIGLIB_ONE;    // Fourier
+    }
     break;
 
-  case SIGLIB_BLACKMAN_HARRIS:    // 4 th order Blackman-Harris window
+  case SIGLIB_BLACKMAN_HARRIS_FOURIER:                                       // 4 th order Blackman-Harris window
+    theta_inc = (SIGLIB_TWO_PI) / ((SLData_t)RisingFallingSectionLength);    // Amount to increment through sinusoid
     for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength; i++) {
       *(pWindowCoeffs + i) = ((SLData_t)0.35875) - (((SLData_t)0.48829) * SDS_Cos(theta)) + (((SLData_t)0.14128) * SDS_Cos(SIGLIB_TWO * theta)) -
                              (((SLData_t)0.01168) * SDS_Cos(((SLData_t)3.0) * theta));
       theta += theta_inc;
     }
-    break;
-
-  case SIGLIB_RECTANGLE:    // Rectangle window
-    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength; i++) {
-      *(pWindowCoeffs + i) = SIGLIB_ONE;
+    // Copy falling section to end of array
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength >> 1; i++) {
+      *(pWindowCoeffs + windowLength - i - 1) = *(pWindowCoeffs + RisingFallingSectionLength - i - 1);
+    }
+    // Fill table-top section
+    for (SLArrayIndex_t i = 0; i < TableTopLength; i++) {
+      *((pWindowCoeffs + ((RisingFallingSectionLength) >> 1)) + i + 1) = SIGLIB_ONE;    // Fourier
     }
     break;
 
-  case SIGLIB_FLAT_TOP:    // Flat top window
+  case SIGLIB_RECTANGLE_FOURIER:                                             // Rectangle window
+    theta_inc = (SIGLIB_TWO_PI) / ((SLData_t)RisingFallingSectionLength);    // Amount to increment through sinusoid
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength; i++) {
+      *(pWindowCoeffs + i) = SIGLIB_ONE;
+    }
+    // Copy falling section to end of array
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength >> 1; i++) {
+      *(pWindowCoeffs + windowLength - i - 1) = *(pWindowCoeffs + RisingFallingSectionLength - i - 1);
+    }
+    // Fill table-top section
+    for (SLArrayIndex_t i = 0; i < TableTopLength; i++) {
+      *((pWindowCoeffs + ((RisingFallingSectionLength) >> 1)) + i + 1) = SIGLIB_ONE;    // Fourier
+    }
+    break;
+
+  case SIGLIB_FLAT_TOP_FOURIER:                                              // Flat top window
+    theta_inc = (SIGLIB_TWO_PI) / ((SLData_t)RisingFallingSectionLength);    // Amount to increment through sinusoid
     for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength; i++) {
       *(pWindowCoeffs + i) =
           ((SLData_t)0.2810638602) - (((SLData_t)0.5208971735) * SDS_Cos(theta)) + (((SLData_t)0.1980389663) * SDS_Cos(SIGLIB_TWO * theta));
       theta += theta_inc;
     }
+    // Copy falling section to end of array
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength >> 1; i++) {
+      *(pWindowCoeffs + windowLength - i - 1) = *(pWindowCoeffs + RisingFallingSectionLength - i - 1);
+    }
+    // Fill table-top section
+    for (SLArrayIndex_t i = 0; i < TableTopLength; i++) {
+      *((pWindowCoeffs + ((RisingFallingSectionLength) >> 1)) + i + 1) = SIGLIB_ONE;    // Fourier
+    }
+    break;
+
+  case SIGLIB_HANNING_FILTER:                                                               // Hanning window
+    theta_inc = (SIGLIB_TWO_PI) / (((SLData_t)RisingFallingSectionLength) - SIGLIB_ONE);    // Amount to increment through sinusoid
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength; i++) {
+      *(pWindowCoeffs + i) = SIGLIB_HALF * (SIGLIB_ONE - SDS_Cos(theta));
+      theta += theta_inc;
+    }
+    // Copy falling section to end of array
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength >> 1; i++) {
+      *(pWindowCoeffs + windowLength - i - 1) = *(pWindowCoeffs + RisingFallingSectionLength - i - 1);
+    }
+    // Fill table-top section
+    for (SLArrayIndex_t i = 0; i < TableTopLength; i++) {
+      *(pWindowCoeffs + ((RisingFallingSectionLength) >> 1) + i) = SIGLIB_ONE;    // Filter
+    }
+    break;
+
+  case SIGLIB_HAMMING_FILTER:                                                               // Hamming window
+    theta_inc = (SIGLIB_TWO_PI) / (((SLData_t)RisingFallingSectionLength) - SIGLIB_ONE);    // Amount to increment through sinusoid
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength; i++) {
+      *(pWindowCoeffs + i) = ((SLData_t)0.54) - (((SLData_t)0.46) * SDS_Cos(theta));
+      theta += theta_inc;
+    }
+    // Copy falling section to end of array
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength >> 1; i++) {
+      *(pWindowCoeffs + windowLength - i - 1) = *(pWindowCoeffs + RisingFallingSectionLength - i - 1);
+    }
+    // Fill table-top section
+    for (SLArrayIndex_t i = 0; i < TableTopLength; i++) {
+      *(pWindowCoeffs + ((RisingFallingSectionLength) >> 1) + i) = SIGLIB_ONE;    // Filter
+    }
+    break;
+
+  case SIGLIB_GENERALIZED_COSINE_FILTER:                                                    // Generalized cosine
+    theta_inc = (SIGLIB_TWO_PI) / (((SLData_t)RisingFallingSectionLength) - SIGLIB_ONE);    // Amount to increment through sinusoid
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength; i++) {
+      *(pWindowCoeffs + i) = Coeff - (SIGLIB_ONE - Coeff) * SDS_Cos(theta);
+      theta += theta_inc;
+    }
+    // Copy falling section to end of array
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength >> 1; i++) {
+      *(pWindowCoeffs + windowLength - i - 1) = *(pWindowCoeffs + RisingFallingSectionLength - i - 1);
+    }
+    // Fill table-top section
+    for (SLArrayIndex_t i = 0; i < TableTopLength; i++) {
+      *(pWindowCoeffs + ((RisingFallingSectionLength) >> 1) + i) = SIGLIB_ONE;    // Filter
+    }
+    break;
+
+  case SIGLIB_BLACKMAN_FILTER:                                                              // Blackman window
+    theta_inc = (SIGLIB_TWO_PI) / (((SLData_t)RisingFallingSectionLength) - SIGLIB_ONE);    // Amount to increment through sinusoid
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength; i++) {
+      *(pWindowCoeffs + i) = ((SLData_t)0.42) - (SIGLIB_HALF * SDS_Cos(theta)) + (((SLData_t)0.08) * SDS_Cos(SIGLIB_TWO * theta));
+      theta += theta_inc;
+    }
+    // Copy falling section to end of array
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength >> 1; i++) {
+      *(pWindowCoeffs + windowLength - i - 1) = *(pWindowCoeffs + RisingFallingSectionLength - i - 1);
+    }
+    // Fill table-top section
+    for (SLArrayIndex_t i = 0; i < TableTopLength; i++) {
+      *(pWindowCoeffs + ((RisingFallingSectionLength) >> 1) + i) = SIGLIB_ONE;    // Filter
+    }
+    break;
+
+  case SIGLIB_BARTLETT_TRIANGLE_ZERO_END_POINTS_FILTER:                                     // Bartlett / triangle window -
+                                                                                            // zero end points*/
+    theta_inc = (SIGLIB_TWO_PI) / (((SLData_t)RisingFallingSectionLength) - SIGLIB_ONE);    // Amount to increment through sinusoid
+    for (SLArrayIndex_t i = 0; i < (SLArrayIndex_t)((SLUFixData_t)RisingFallingSectionLength >> 1U); i++) {
+      *(pWindowCoeffs + i) = SIGLIB_TWO * ((SLData_t)i + 1) / ((SLData_t)RisingFallingSectionLength);
+    }
+    for (SLArrayIndex_t i = 0; i < (SLArrayIndex_t)((SLUFixData_t)RisingFallingSectionLength >> 1U); i++) {
+      *(pWindowCoeffs + i) = SIGLIB_ONE - (SIGLIB_TWO * ((SLData_t)i) / ((SLData_t)RisingFallingSectionLength));
+    }
+    // Copy falling section to end of array
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength >> 1; i++) {
+      *(pWindowCoeffs + windowLength - i - 1) = *(pWindowCoeffs + RisingFallingSectionLength - i - 1);
+    }
+    // Fill table-top section
+    for (SLArrayIndex_t i = 0; i < TableTopLength; i++) {
+      *(pWindowCoeffs + ((RisingFallingSectionLength) >> 1) + i) = SIGLIB_ONE;    // Filter
+    }
+    break;
+
+  case SIGLIB_BARTLETT_TRIANGLE_NON_ZERO_END_POINTS_FILTER:                                 // Bartlett / triangle
+                                                                                            // window - non_zero end
+                                                                                            // points*/
+    theta_inc = (SIGLIB_TWO_PI) / (((SLData_t)RisingFallingSectionLength) - SIGLIB_ONE);    // Amount to increment through sinusoid
+    for (SLArrayIndex_t i = 0; i < (SLArrayIndex_t)((SLUFixData_t)RisingFallingSectionLength >> 1U); i++) {
+      *(pWindowCoeffs + i) = SIGLIB_TWO * ((SLData_t)i) / ((SLData_t)(RisingFallingSectionLength - 2));
+    }
+    for (SLArrayIndex_t i = 0; i < (SLArrayIndex_t)((SLUFixData_t)RisingFallingSectionLength >> 1U); i++) {
+      *(pWindowCoeffs + i + (SLArrayIndex_t)((SLUFixData_t)RisingFallingSectionLength >> 1U)) =
+          SIGLIB_ONE - (SIGLIB_TWO * ((SLData_t)i) / ((SLData_t)(RisingFallingSectionLength - 2)));
+    }
+    // Copy falling section to end of array
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength >> 1; i++) {
+      *(pWindowCoeffs + windowLength - i - 1) = *(pWindowCoeffs + RisingFallingSectionLength - i - 1);
+    }
+    // Fill table-top section
+    for (SLArrayIndex_t i = 0; i < TableTopLength; i++) {
+      *(pWindowCoeffs + ((RisingFallingSectionLength) >> 1) + i) = SIGLIB_ONE;    // Filter
+    }
+    break;
+
+  case SIGLIB_KAISER_FILTER:                                                                // Kaiser window
+    theta_inc = (SIGLIB_TWO_PI) / (((SLData_t)RisingFallingSectionLength) - SIGLIB_ONE);    // Amount to increment through sinusoid
+    z = -((((SLData_t)RisingFallingSectionLength) - SIGLIB_ONE) / SIGLIB_TWO);
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength; i++) {
+      *(pWindowCoeffs + i) =
+          (SDS_I0Bessel((Coeff * SDS_Sqrt(SIGLIB_ONE - SDS_Pow((SIGLIB_TWO * z / (RisingFallingSectionLength - 1)), SIGLIB_TWO)))) /
+           SDS_I0Bessel(Coeff));
+      z++;
+    }
+    // Copy falling section to end of array
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength >> 1; i++) {
+      *(pWindowCoeffs + windowLength - i - 1) = *(pWindowCoeffs + RisingFallingSectionLength - i - 1);
+    }
+    // Fill table-top section
+    for (SLArrayIndex_t i = 0; i < TableTopLength; i++) {
+      *(pWindowCoeffs + ((RisingFallingSectionLength) >> 1) + i) = SIGLIB_ONE;    // Filter
+    }
+    break;
+
+  case SIGLIB_BLACKMAN_HARRIS_FILTER:                                                       // 4 th order Blackman-Harris window
+    theta_inc = (SIGLIB_TWO_PI) / (((SLData_t)RisingFallingSectionLength) - SIGLIB_ONE);    // Amount to increment through sinusoid
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength; i++) {
+      *(pWindowCoeffs + i) = ((SLData_t)0.35875) - (((SLData_t)0.48829) * SDS_Cos(theta)) + (((SLData_t)0.14128) * SDS_Cos(SIGLIB_TWO * theta)) -
+                             (((SLData_t)0.01168) * SDS_Cos(((SLData_t)3.0) * theta));
+      theta += theta_inc;
+    }
+    // Copy falling section to end of array
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength >> 1; i++) {
+      *(pWindowCoeffs + windowLength - i - 1) = *(pWindowCoeffs + RisingFallingSectionLength - i - 1);
+    }
+    // Fill table-top section
+    for (SLArrayIndex_t i = 0; i < TableTopLength; i++) {
+      *(pWindowCoeffs + ((RisingFallingSectionLength) >> 1) + i) = SIGLIB_ONE;    // Filter
+    }
+    break;
+
+  case SIGLIB_RECTANGLE_FILTER:                                                             // Rectangle window
+    theta_inc = (SIGLIB_TWO_PI) / (((SLData_t)RisingFallingSectionLength) - SIGLIB_ONE);    // Amount to increment through sinusoid
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength; i++) {
+      *(pWindowCoeffs + i) = SIGLIB_ONE;
+    }
+    // Copy falling section to end of array
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength >> 1; i++) {
+      *(pWindowCoeffs + windowLength - i - 1) = *(pWindowCoeffs + RisingFallingSectionLength - i - 1);
+    }
+    // Fill table-top section
+    for (SLArrayIndex_t i = 0; i < TableTopLength; i++) {
+      *(pWindowCoeffs + ((RisingFallingSectionLength) >> 1) + i) = SIGLIB_ONE;    // Filter
+    }
+    break;
+
+  case SIGLIB_FLAT_TOP_FILTER:                                                              // Flat top window
+    theta_inc = (SIGLIB_TWO_PI) / (((SLData_t)RisingFallingSectionLength) - SIGLIB_ONE);    // Amount to increment through sinusoid
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength; i++) {
+      *(pWindowCoeffs + i) =
+          ((SLData_t)0.2810638602) - (((SLData_t)0.5208971735) * SDS_Cos(theta)) + (((SLData_t)0.1980389663) * SDS_Cos(SIGLIB_TWO * theta));
+      theta += theta_inc;
+    }
+    // Copy falling section to end of array
+    for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength >> 1; i++) {
+      *(pWindowCoeffs + windowLength - i - 1) = *(pWindowCoeffs + RisingFallingSectionLength - i - 1);
+    }
+    // Fill table-top section
+    for (SLArrayIndex_t i = 0; i < TableTopLength; i++) {
+      *(pWindowCoeffs + ((RisingFallingSectionLength) >> 1) + i) = SIGLIB_ONE;    // Filter
+    }
     break;
 
   default:
     return (SIGLIB_PARAMETER_ERROR);    // Incorrect parameter
-  }
-
-  // Copy falling section to end of array
-  for (SLArrayIndex_t i = 0; i < RisingFallingSectionLength; i++) {
-    *((pWindowCoeffs + windowLength - 1) - i) = *(pWindowCoeffs + i);
   }
 
   return (SIGLIB_NO_ERROR);

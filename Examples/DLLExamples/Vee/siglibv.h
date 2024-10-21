@@ -52,6 +52,10 @@ double _stdcall SUF_SiglibVersion(void);
 
 // Fast Fourier Transform Functions - ffourier.c
 
+long _stdcall SAI_FftLengthLog2(long);    // FFT length
+
+long _stdcall SAI_FftLengthLog4(long);    // FFT length
+
 void _stdcall SIF_Fft(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to FFT coefficients
                       long* SIGLIB_OUTPUT_PTR_DECL,      // Bit reverse mode flag / Pointer
                                                          // to bit reverse address table
@@ -340,7 +344,7 @@ void _stdcall SDA_ZoomFftSimple(double* SIGLIB_INPUT_PTR_DECL,     // Input arra
                                 double* SIGLIB_INPUT_PTR_DECL,     // Pointer to FFT coefficients
                                 long* SIGLIB_INPUT_PTR_DECL,       // Bit reverse mode flag / Pointer to bit
                                                                    // reverse address table
-                                long,                              // Input array size
+                                long,                              // Input array length
                                 long,                              // FFT length
                                 long);                             // Log2 FFT length
 
@@ -2812,7 +2816,7 @@ long _stdcall SDS_CostasQamDemodulate(double,                            // Sour
                                       long*,                             // Pointer to ELG synchronization delay index
                                       long);                             // ELG output synchronization delay length
 
-#line 3220 "siglib.h"
+#line 3224 "siglib.h"
 // compiler
 long _stdcall SDS_CostasQamDemodulateDebug(double,                            // Source data sample
                                            double*,                           // Pointer to real destination symbol point
@@ -2948,7 +2952,7 @@ long _stdcall SDA_CostasQamDemodulateDebug(double* SIGLIB_INPUT_PTR_DECL,     //
                                            double*,                           // Pointer to debug real filter output
                                            double*,                           // Pointer to debug imaginary filter output
                                            double*);                          // Pointer to debug ELG trigger output
-#line 3356 "siglib.h"
+#line 3360 "siglib.h"
 
 void _stdcall SIF_QpskModulate(double* SIGLIB_OUTPUT_PTR_DECL,    // Carrier table pointer
                                double,                            // Carrier phase increment per sample (radians / 2Ï€)
@@ -4615,6 +4619,11 @@ double _stdcall SDA_MeanSquareError(double* SIGLIB_INPUT_PTR_DECL,    // Pointer
 double _stdcall SDA_RootMeanSquare(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                    long);                            // Array length
 
+double _stdcall SDA_RootMeanSquareError(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array 1
+                                        double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array 2
+                                        double,                           // Inverse of the array length
+                                        long);                            // Array length
+
 void _stdcall SDA_Magnitude(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to real data source array
                             double* SIGLIB_INPUT_PTR_DECL,     // Pointer to imaginary data source array
                             double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to magnitude destination array
@@ -4690,6 +4699,16 @@ void _stdcall SDA_LogN(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source a
                        double,                            // Base number
                        long);                             // Array length
 
+double _stdcall SDS_Sigmoid(double,     // Source value
+                            double,     // Shift value
+                            double);    // Multiplication value
+
+void _stdcall SDA_Sigmoid(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
+                          double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
+                          double,                            // Shift value
+                          double,                            // Multiplication value
+                          long);                             // Array length
+
 void _stdcall SDA_LogDistribution(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
                                   double,                            // Start value
                                   double,                            // End value
@@ -4749,14 +4768,11 @@ void _stdcall SDA_LogMagnitudeAndPhaseUnWrapped(double* SIGLIB_INPUT_PTR_DECL,  
                                                 double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to phase destination array
                                                 long);                             // Array length
 
-void _stdcall SDA_Lengthen(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
-                           double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
-                           long,                              // Source array size
-                           long);                             // Destination array size
-
-void _stdcall SDA_Shorten(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
+void _stdcall SDA_ZeroPad(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
                           double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
-                          long);                             // Destination array size
+                          long,                              // Pre-pad length
+                          long,                              // Post-pad length
+                          long);                             // Source array length
 
 void _stdcall SIF_ReSize(long*);    // Pointer to state array length
 
@@ -4788,43 +4804,43 @@ void _stdcall SDA_Histogram(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to sou
                             double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to histogram array
                             double,                            // Minimum input data value
                             double,                            // Maximum input data value
-                            long,                              // Source array size
-                            long);                             // Destination array size
+                            long,                              // Source array length
+                            long);                             // Destination array length
 
 void _stdcall SDA_HistogramCumulative(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
                                       double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to histogram array
                                       double,                            // Minimum input data value
                                       double,                            // Maximum input data value
-                                      long,                              // Source array size
-                                      long);                             // Destination array size
+                                      long,                              // Source array length
+                                      long);                             // Destination array length
 
 void _stdcall SDA_HistogramExtended(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
                                     double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to histogram array
                                     double,                            // Minimum input data value
                                     double,                            // Maximum input data value
-                                    long,                              // Source array size
-                                    long);                             // Destination array size
+                                    long,                              // Source array length
+                                    long);                             // Destination array length
 
 void _stdcall SDA_HistogramExtendedCumulative(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
                                               double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to histogram array
                                               double,                            // Minimum input data value
                                               double,                            // Maximum input data value
-                                              long,                              // Source array size
-                                              long);                             // Destination array size
+                                              long,                              // Source array length
+                                              long);                             // Destination array length
 
 void _stdcall SIF_Histogram(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to histogram array
-                            long);                             // Histogram array size
+                            long);                             // Histogram array length
 
 void _stdcall SDA_HistogramEqualize(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
                                     double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
                                     double,                            // New peak value
-                                    long);                             // Source array size
+                                    long);                             // Source array length
 
 void _stdcall SDA_Quantize(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
                            double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
                            long,                              // Quantisation number of bits
                            double,                            // Peak value
-                           long);                             // Source array size
+                           long);                             // Source array length
 
 double _stdcall SDS_Quantize(double,     // Source sample
                              long,       // Quantisation number of bits
@@ -4833,7 +4849,7 @@ double _stdcall SDS_Quantize(double,     // Source sample
 void _stdcall SDA_Quantize_N(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
                              double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
                              double,                            // Quantisation number
-                             long);                             // Source array size
+                             long);                             // Source array length
 
 double _stdcall SDS_Quantise_N(double,     // Source sample
                                double);    // Quantisation number
@@ -5001,7 +5017,7 @@ double _stdcall SDS_EchoGenerate(double,                           // Sample
                                  double,                           // Echo delay
                                  double,                           // Echo decay
                                  int SLEcho_t,                     // Echo type
-                                 long);                            // Echo array size
+                                 long);                            // Echo array length
 
 void _stdcall SDA_Power(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
                         double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
@@ -5994,5 +6010,16 @@ void _stdcall SMX_ExtractCategoricalColumn(double* SIGLIB_INPUT_PTR_DECL,    // 
 
 // Deprecated functionality - these may be removed in a later version
 
+// #define SIGLIB_HANNING                                SIGLIB_HANNING_FILTER
+// #define SIGLIB_HAMMING                                SIGLIB_HAMMING_FILTER
+// #define SIGLIB_GENERALIZED_COSINE                     SIGLIB_GENERALIZED_COSINE_FILTER
+// #define SIGLIB_BLACKMAN                               SIGLIB_BLACKMAN_FILTER
+// #define SIGLIB_BARTLETT_TRIANGLE_ZERO_END_POINTS      SIGLIB_BARTLETT_TRIANGLE_ZERO_END_POINTS_FILTER
+// #define SIGLIB_BARTLETT_TRIANGLE_NON_ZERO_END_POINTS  SIGLIB_BARTLETT_TRIANGLE_NON_ZERO_END_POINTS_FILTER
+// #define SIGLIB_KAISER                                 SIGLIB_KAISER_FILTER
+// #define SIGLIB_BLACKMAN_HARRIS                        SIGLIB_BLACKMAN_HARRIS_FILTER
+// #define SIGLIB_RECTANGLE                              SIGLIB_RECTANGLE_FILTER
+// #define SIGLIB_FLAT_TOP                               SIGLIB_FLAT_TOP_FILTER
+
 // End of SigLib DSP function section
-#line 6869 "siglib.h"
+#line 6899 "siglib.h"

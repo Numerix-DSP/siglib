@@ -96,7 +96,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_ZoomFft(SLData_t* SIGLIB_PTR_DECL pRealCombFilter
   SIF_FilterAndDecimate(pRealLPFStateArray, pRealDecimatorIndex, pRealLPFIndex, FIRFilterLength);
   SIF_FilterAndDecimate(pImagLPFStateArray, pImagDecimatorIndex, pImagLPFIndex, FIRFilterLength);
 
-  ErrorCode = SIF_Window(pWindow, SIGLIB_BLACKMAN_HARRIS, SIGLIB_ZERO,
+  ErrorCode = SIF_Window(pWindow, SIGLIB_BLACKMAN_HARRIS_FOURIER, SIGLIB_ZERO,
                          FFTLength);    // Generate window table
   if (ErrorCode != SIGLIB_NO_ERROR) {
     return (ErrorCode);

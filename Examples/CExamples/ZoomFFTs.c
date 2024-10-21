@@ -234,7 +234,7 @@ int main(void)
                     pFFTCoeffs,                  // Pointer to FFT coefficients
                     SIGLIB_BIT_REV_STANDARD,     // Bit reverse mode flag / Pointer
                                                  // to bit reverse address table
-                    SOURCE_BUF_SIZE,             // Input array size
+                    SOURCE_BUF_SIZE,             // Input array length
                     FFT_LENGTH,                  // FFT length
                     LOG2_FFT_LENGTH);            // Log2 FFT length
 

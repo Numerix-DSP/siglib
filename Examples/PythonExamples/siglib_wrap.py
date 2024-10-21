@@ -2702,12 +2702,6 @@ def SDA_LogMagnitudeAndPhaseWrapped(arg1, arg2, arg3, arg4, arg5):
 def SDA_LogMagnitudeAndPhaseUnWrapped(arg1, arg2, arg3, arg4, arg5):
     return _siglib_wrap.SDA_LogMagnitudeAndPhaseUnWrapped(arg1, arg2, arg3, arg4, arg5)
 
-def SDA_Lengthen(arg1, arg2, arg3, arg4):
-    return _siglib_wrap.SDA_Lengthen(arg1, arg2, arg3, arg4)
-
-def SDA_Shorten(arg1, arg2, arg3):
-    return _siglib_wrap.SDA_Shorten(arg1, arg2, arg3)
-
 def SIF_ReSize(arg1):
     return _siglib_wrap.SIF_ReSize(arg1)
 

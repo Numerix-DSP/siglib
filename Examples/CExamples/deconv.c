@@ -141,14 +141,16 @@ int main(void)
   getchar();
 
   // Zero pad distorted input and impuslse response
-  SDA_Lengthen(pDistortedInput,              // Pointer to source array
-               pSrcRealData,                 // Pointer to destination array
-               CONVOLVED_SEQUENCE_LENGTH,    // Source array size
-               FFT_LENGTH);                  // Destination array size
-  SDA_Lengthen(Impulse,                      // Pointer to source array
-               pImpulseRealData,             // Pointer to destination array
-               IMPULSE_LENGTH,               // Source array size
-               FFT_LENGTH);                  // Destination array size
+  SDA_ZeroPad(pDistortedInput,                           // Pointer to source array
+              pSrcRealData,                              // Pointer to destination array
+              0,                                         // Pre-pad length
+              FFT_LENGTH - CONVOLVED_SEQUENCE_LENGTH,    // Source array length
+              CONVOLVED_SEQUENCE_LENGTH);                // Source array length
+  SDA_ZeroPad(Impulse,                                   // Pointer to source array
+              pImpulseRealData,                          // Pointer to destination array
+              0,                                         // Pre-pad length
+              FFT_LENGTH - IMPULSE_LENGTH,               // Source array length
+              IMPULSE_LENGTH);                           // Source array length
 
   SDA_FftDeconvolution(pSrcRealData,                   // Pointer to real source array 1
                        pSrcImagData,                   // Pointer to imaginary source array 1
@@ -228,14 +230,16 @@ int main(void)
   getchar();    // Wait for <Carriage Return>
 
   // Zero pad distorted input and impuslse response
-  SDA_Lengthen(pDistortedInput,              // Pointer to source array
-               pSrcRealData,                 // Pointer to destination array
-               CONVOLVED_SEQUENCE_LENGTH,    // Source array size
-               FFT_LENGTH);                  // Destination array size
-  SDA_Lengthen(Impulse,                      // Pointer to source array
-               pImpulseRealData,             // Pointer to destination array
-               IMPULSE_LENGTH,               // Source array size
-               FFT_LENGTH);                  // Destination array size
+  SDA_ZeroPad(pDistortedInput,                           // Pointer to source array
+              pSrcRealData,                              // Pointer to destination array
+              0,                                         // Pre-pad length
+              FFT_LENGTH - CONVOLVED_SEQUENCE_LENGTH,    // Source array length
+              CONVOLVED_SEQUENCE_LENGTH);                // Source array length
+  SDA_ZeroPad(Impulse,                                   // Pointer to source array
+              pImpulseRealData,                          // Pointer to destination array
+              0,                                         // Pre-pad length
+              FFT_LENGTH - IMPULSE_LENGTH,               // Source array length
+              IMPULSE_LENGTH);                           // Source array length
 
   SIF_FftDeconvolutionPre(pImpulseRealData,               // Pointer to real source array 1
                           pImpulseFdRealData,             // Pointer to real source array 2

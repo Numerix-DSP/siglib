@@ -148,7 +148,7 @@ int main(void)
 
   SLData_t* pWindowCoeffs = SUF_VectorArrayAllocate(FILTER_LENGTH);    // Initialise windowing function
   SIF_Window(pWindowCoeffs,                                            // Pointer to window oefficient
-             SIGLIB_HANNING,                                           // Window type
+             SIGLIB_HANNING_FILTER,                                    // Window type
              SIGLIB_ZERO,                                              // Window coefficient
              FILTER_LENGTH);                                           // Window length
 

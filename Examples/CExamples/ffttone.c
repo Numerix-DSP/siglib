@@ -77,7 +77,7 @@ int main(void)
   printf("\nSource signal\nPlease hit <Carriage Return> to continue . . .");
   getchar();
 
-  plot_frequency_domain(pSrc, SIGLIB_HANNING, "Frequency Response", SAMPLE_LENGTH, FFT_LENGTH);
+  plot_frequency_domain(pSrc, SIGLIB_HANNING_FOURIER, "Frequency Response", SAMPLE_LENGTH, FFT_LENGTH);
   printf("Please hit <Carriage Return> to continue . . .\n");
   getchar();
 

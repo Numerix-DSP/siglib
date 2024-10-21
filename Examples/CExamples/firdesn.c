@@ -57,16 +57,16 @@ int main(void)
           FILTER_LENGTH);                          // Filter length
   SIF_FirLowPassFilter(pLPFilterCoeffs,            // Filter coeffs array
                        3000. / SAMPLE_RATE_HZ,     // Filter cut off frequency
-                       SIGLIB_HANNING,             // Window type
+                       SIGLIB_HANNING_FILTER,      // Window type
                        FILTER_LENGTH);             // Filter length
   SIF_FirHighPassFilter(pHPFilterCoeffs,           // Filter coeffs array
                         1000. / SAMPLE_RATE_HZ,    // Filter cut off frequency
-                        SIGLIB_HANNING,            // Window type
+                        SIGLIB_HANNING_FILTER,     // Window type
                         FILTER_LENGTH);            // Filter length
   SIF_FirBandPassFilter(pBPFilterCoeffs,           // Filter coeffs array
                         1600. / SAMPLE_RATE_HZ,    // Filter centre frequency
                         2000. / SAMPLE_RATE_HZ,    // Filter bandwidth
-                        SIGLIB_HANNING,            // Window type
+                        SIGLIB_HANNING_FILTER,     // Window type
                         FILTER_LENGTH);            // Filter length
   //    printf("\nFilter length = %d\n", FILTER_LENGTH);
   //    printf("\npLPFilterCoeffs\n");
@@ -88,19 +88,19 @@ int main(void)
   //    SIF_FirLowPassFilter (pLPFilterCoeffs,                           //
   //    Filter coeffs array
   //                          3000. / SAMPLE_RATE_HZ,                       //
-  //                          Filter cut off frequency SIGLIB_HANNING, // Window
+  //                          Filter cut off frequency SIGLIB_HANNING_FILTER, // Window
   //                          type FILTER_LENGTH+1);                          //
   //                          Filter length
   //    SIF_FirHighPassFilter (pHPFilterCoeffs,                          //
   //    Filter coeffs array
   //                           1000. / SAMPLE_RATE_HZ,                      //
-  //                           Filter cut off frequency SIGLIB_HANNING, //
+  //                           Filter cut off frequency SIGLIB_HANNING_FILTER, //
   //                           Window type FILTER_LENGTH+1); // Filter length
   //    SIF_FirBandPassFilter (pBPFilterCoeffs,                          //
   //    Filter coeffs array
   //                           1600. / SAMPLE_RATE_HZ,                   //
   //                           Filter centre frequency 2000. / SAMPLE_RATE_HZ,
-  //                           // Filter bandwidth SIGLIB_HANNING, // Window
+  //                           // Filter bandwidth SIGLIB_HANNING_FILTER, // Window
   //                           type FILTER_LENGTH+1);                         //
   //                           Filter length
   //
@@ -162,17 +162,17 @@ int main(void)
   getchar();
 
   // Display frequency response for each filter
-  plot_frequency_domain(pLPFilterCoeffs, SIGLIB_FLAT_TOP, "Low-pass Filter Frequency Response", FILTER_LENGTH, FFT_LENGTH);
+  plot_frequency_domain(pLPFilterCoeffs, SIGLIB_FLAT_TOP_FOURIER, "Low-pass Filter Frequency Response", FILTER_LENGTH, FFT_LENGTH);
   printf("Low-pass Filter Frequency Response\nPlease hit <Carriage Return> to "
          "continue . . .\n");
   getchar();
 
-  plot_frequency_domain(pHPFilterCoeffs, SIGLIB_FLAT_TOP, "High-pass Filter Frequency Response", FILTER_LENGTH, FFT_LENGTH);
+  plot_frequency_domain(pHPFilterCoeffs, SIGLIB_FLAT_TOP_FOURIER, "High-pass Filter Frequency Response", FILTER_LENGTH, FFT_LENGTH);
   printf("High-pass Filter Frequency Response\nPlease hit <Carriage Return> to "
          "continue . . .\n");
   getchar();
 
-  plot_frequency_domain(pBPFilterCoeffs, SIGLIB_FLAT_TOP, "Band-pass Filter Frequency Response", FILTER_LENGTH, FFT_LENGTH);
+  plot_frequency_domain(pBPFilterCoeffs, SIGLIB_FLAT_TOP_FOURIER, "Band-pass Filter Frequency Response", FILTER_LENGTH, FFT_LENGTH);
   printf("Band-pass Filter Frequency Response\nPlease hit <Carriage Return> to "
          "continue . . .\n");
   getchar();
@@ -222,7 +222,7 @@ int main(void)
          "continue . . .");
   getchar();
 
-  plot_frequency_domain(pSrc, SIGLIB_FLAT_TOP, "Dual filter frequency response", FFT_LENGTH, FFT_LENGTH);
+  plot_frequency_domain(pSrc, SIGLIB_FLAT_TOP_FOURIER, "Dual filter frequency response", FFT_LENGTH, FFT_LENGTH);
   printf("Please hit <Carriage Return> to continue . . .\n");
   getchar();
 
@@ -232,10 +232,10 @@ int main(void)
           &LPFilterIndex,    // Pointer to filter index register
           FILTER_LENGTH);    // Filter length
 
-  SIF_FirLowPassFilter(pLPFilterCoeffs,    // Filter coeffs array
-                       0.12,               // Filter cut off frequency
-                       SIGLIB_HAMMING,     // Window type
-                       FILTER_LENGTH);     // Filter length
+  SIF_FirLowPassFilter(pLPFilterCoeffs,          // Filter coeffs array
+                       0.12,                     // Filter cut off frequency
+                       SIGLIB_HAMMING_FILTER,    // Window type
+                       FILTER_LENGTH);           // Filter length
 
   FilterInverseCoherentGain = SDA_FirFilterInverseCoherentGain(pLPFilterCoeffs, FILTER_LENGTH);
 
@@ -262,7 +262,7 @@ int main(void)
   SDA_Multiply(pLPFilterCoeffs, 10000000.0, pLPFilterCoeffs, FILTER_LENGTH);
 
   // Display frequency response for each filter
-  plot_frequency_domain(pLPFilterCoeffs, SIGLIB_RECTANGLE, "Low-pass Filter Response", FILTER_LENGTH, FFT_LENGTH);
+  plot_frequency_domain(pLPFilterCoeffs, SIGLIB_RECTANGLE_FOURIER, "Low-pass Filter Response", FILTER_LENGTH, FFT_LENGTH);
 
   printf("\nHit <Carriage Return> to continue ....\n");
   getchar();    // Wait for <Carriage Return>

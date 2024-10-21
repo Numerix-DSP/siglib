@@ -41,6 +41,70 @@ Description: SigLib DSP library Fast Fourier Transform routines.
 #include <siglib.h>    // Include SigLib header file
 
 /********************************************************
+ * Function: SAI_FftLengthLog2
+ *
+ * Parameters:
+ *   const SLArrayIndex_t    fftLength
+ *
+ * Return value:
+ *   Log 2 of FFT length
+ *
+ * Description:
+ *   Compute the log 2 of the FFT length - this function
+ *   only accepts and returns integer values.
+ *
+ ********************************************************/
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SAI_FftLengthLog2(const SLArrayIndex_t n)
+{
+  SLArrayIndex_t ln = n;
+  if (ln <= 0) {
+    return INT_MAX;
+  }
+  if (ln == 1) {
+    return 0;
+  }
+  SLArrayIndex_t log2 = 0;
+  while (ln > 1) {
+    ln >>= 1;
+    log2++;
+  }
+  return log2;
+}    // End of SAI_FftLengthLog2()
+
+/********************************************************
+ * Function: SAI_FftLengthLog4
+ *
+ * Parameters:
+ *   const SLArrayIndex_t    fftLength
+ *
+ * Return value:
+ *   Log 4 of FFT length
+ *
+ * Description:
+ *   Compute the log 4 of the FFT length - this function
+ *   only accepts and returns integer values.
+ *
+ ********************************************************/
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SAI_FftLengthLog4(const SLArrayIndex_t n)
+{
+  SLArrayIndex_t ln = n;
+  if (ln <= 0) {
+    return INT_MAX;
+  }
+  if (ln == 1) {
+    return 0;
+  }
+  SLArrayIndex_t log2 = 0;
+  while (ln > 1) {
+    ln >>= 1;
+    log2++;
+  }
+  return (log2 >> 1);
+}    // End of SAI_FftLengthLog2()
+
+/********************************************************
  * Function: SIF_Fft
  *
  * Parameters:

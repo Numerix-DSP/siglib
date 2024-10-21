@@ -77,7 +77,7 @@ int main(void)
   getchar();
 
 #if PLOT_FREQ_DOMAIN
-  plot_frequency_domain(pSrc, SIGLIB_HANNING, "Sine waveform spectrum", SOURCE_LENGTH, SOURCE_LENGTH);
+  plot_frequency_domain(pSrc, SIGLIB_HANNING_FOURIER, "Sine waveform spectrum", SOURCE_LENGTH, SOURCE_LENGTH);
   printf("Please hit <Carriage Return> to continue . . .\n");
   getchar();
 #endif
@@ -100,7 +100,7 @@ int main(void)
   printf("\nDown sampled sine waveform - using linear interpolation\n");
 
 #if PLOT_FREQ_DOMAIN
-  plot_frequency_domain(pDst, SIGLIB_HANNING, "Down sampled sine waveform spectrum - using linear interpolation", ResultSampleLength,
+  plot_frequency_domain(pDst, SIGLIB_HANNING_FOURIER, "Down sampled sine waveform spectrum - using linear interpolation", ResultSampleLength,
                         2 * SOURCE_LENGTH);
   printf("Please hit <Carriage Return> to continue . . .\n");
   getchar();
@@ -125,7 +125,7 @@ int main(void)
   printf("\nUp sampled sine waveform - using linear interpolation\n");
 
 #if PLOT_FREQ_DOMAIN
-  plot_frequency_domain(pDst, SIGLIB_HANNING, "Up sampled sine waveform spectrum - using linear interpolation", ResultSampleLength,
+  plot_frequency_domain(pDst, SIGLIB_HANNING_FOURIER, "Up sampled sine waveform spectrum - using linear interpolation", ResultSampleLength,
                         2 * SOURCE_LENGTH);
 #endif
   printf("\nHit <Carriage Return> to continue ....\n");
@@ -170,7 +170,7 @@ int main(void)
   printf("\nDown sampled sine waveform - using sinc interpolation\n");
 
 #if PLOT_FREQ_DOMAIN
-  plot_frequency_domain(pDst, SIGLIB_HANNING, "Down sampled sine waveform spectrum - using sinc interpolation", ResultSampleLength,
+  plot_frequency_domain(pDst, SIGLIB_HANNING_FOURIER, "Down sampled sine waveform spectrum - using sinc interpolation", ResultSampleLength,
                         2 * SOURCE_LENGTH);
 #endif
   printf("\nHit <Carriage Return> to continue ....\n");
@@ -202,7 +202,7 @@ int main(void)
   printf("\nUp sampled sine waveform - using sinc interpolation\n");
 
 #if PLOT_FREQ_DOMAIN
-  plot_frequency_domain(pDst, SIGLIB_HANNING, "Up sampled sine waveform spectrum - using sinc interpolation", ResultSampleLength,
+  plot_frequency_domain(pDst, SIGLIB_HANNING_FOURIER, "Up sampled sine waveform spectrum - using sinc interpolation", ResultSampleLength,
                         2 * SOURCE_LENGTH);
 #endif
   printf("\nHit <Carriage Return> to continue ....\n");

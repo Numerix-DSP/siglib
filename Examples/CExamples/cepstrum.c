@@ -137,17 +137,17 @@ int main(void)
   getchar();
 
   // Initialise FFT
-  SIF_Fft(pFFTCoeffs,                 // Pointer to FFT coefficients
-          SIGLIB_BIT_REV_STANDARD,    // Bit reverse mode flag / Pointer to bit
-                                      // reverse address table
-          FFT_LENGTH);                // FFT length
-                                      // Generate Hanning window table
-  SIF_Window(pWindowCoeffs,           // Pointer to window oefficient
-             SIGLIB_HANNING,          // Window type
-             SIGLIB_ZERO,             // Window coefficient
-             FFT_LENGTH);             // Window length
+  SIF_Fft(pFFTCoeffs,                   // Pointer to FFT coefficients
+          SIGLIB_BIT_REV_STANDARD,      // Bit reverse mode flag / Pointer to bit
+                                        // reverse address table
+          FFT_LENGTH);                  // FFT length
+                                        // Generate Hanning window table
+  SIF_Window(pWindowCoeffs,             // Pointer to window oefficient
+             SIGLIB_HANNING_FOURIER,    // Window type
+             SIGLIB_ZERO,               // Window coefficient
+             FFT_LENGTH);               // Window length
 
-  plot_frequency_domain(pRealData, SIGLIB_HANNING, "Spectrum", FFT_LENGTH, FFT_LENGTH);
+  plot_frequency_domain(pRealData, SIGLIB_HANNING_FOURIER, "Spectrum", FFT_LENGTH, FFT_LENGTH);
   printf("Please hit <Carriage Return> to continue . . .\n");
   getchar();
 

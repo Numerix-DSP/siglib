@@ -89,12 +89,12 @@ int main(void)
   SIF_FirBandPassFilter(pRxLevelOneBPFilter,                   // Filter coeffs array
                         CARRIER_FREQ_ONE / SAMPLE_RATE_HZ,     // Filter centre frequency
                         FILTER_BANDWIDTH / SAMPLE_RATE_HZ,     // Filter bandwidth
-                        SIGLIB_HANNING,                        // Window type
+                        SIGLIB_HANNING_FILTER,                 // Window type
                         DETECT_FILTER_LENGTH);                 // Filter length
   SIF_FirBandPassFilter(pRxLevelZeroBPFilter,                  // Filter coeffs array
                         CARRIER_FREQ_ZERO / SAMPLE_RATE_HZ,    // Filter centre frequency
                         FILTER_BANDWIDTH / SAMPLE_RATE_HZ,     // Filter bandwidth
-                        SIGLIB_HANNING,                        // Window type
+                        SIGLIB_HANNING_FILTER,                 // Window type
                         DETECT_FILTER_LENGTH);                 // Filter length
 
   // Adjust filter gain
@@ -151,10 +151,10 @@ int main(void)
   getchar();
 
   // Display the filter coefficients in the frequency domain
-  plot_frequency_domain(pRxLevelOneBPFilter, SIGLIB_FLAT_TOP, "Receive level '1' filter", DETECT_FILTER_LENGTH, FFT_LENGTH);
+  plot_frequency_domain(pRxLevelOneBPFilter, SIGLIB_FLAT_TOP_FOURIER, "Receive level '1' filter", DETECT_FILTER_LENGTH, FFT_LENGTH);
   printf("Please hit <Carriage Return> to continue . . .\n");
   getchar();
-  plot_frequency_domain(pRxLevelZeroBPFilter, SIGLIB_FLAT_TOP, "Receive level '0' filter", DETECT_FILTER_LENGTH, FFT_LENGTH);
+  plot_frequency_domain(pRxLevelZeroBPFilter, SIGLIB_FLAT_TOP_FOURIER, "Receive level '0' filter", DETECT_FILTER_LENGTH, FFT_LENGTH);
   printf("Please hit <Carriage Return> to continue . . .\n");
   getchar();
 

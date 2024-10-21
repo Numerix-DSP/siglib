@@ -21,10 +21,10 @@ int main(void)
 {
   SLData_t Increment;
   // Generate Hanning window table
-  SIF_Window(Window,            // Pointer to window oefficient
-             SIGLIB_HANNING,    // Window type
-             SIGLIB_ZERO,       // Window coefficient
-             WINDOW_LENGTH);    // Window length
+  SIF_Window(Window,                    // Pointer to window oefficient
+             SIGLIB_HANNING_FOURIER,    // Window type
+             SIGLIB_ZERO,               // Window coefficient
+             WINDOW_LENGTH);            // Window length
 
   SIF_OverlapAndAddLinear(&Increment,       // Pointer to the value used to
                                             // in(de)crement between the two arrays

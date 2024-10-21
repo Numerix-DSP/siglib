@@ -161,9 +161,9 @@ int main(void)
 
       err = PaAsio_GetAvailableLatencyValues(i, &minLatency, &maxLatency, &preferredLatency, &granularity);
 
-      printf("ASIO minimum array size    = %ld\n", minLatency);
-      printf("ASIO maximum array size    = %ld\n", maxLatency);
-      printf("ASIO preferred array size  = %ld\n", preferredLatency);
+      printf("ASIO minimum array length    = %ld\n", minLatency);
+      printf("ASIO maximum array length    = %ld\n", maxLatency);
+      printf("ASIO preferred array length  = %ld\n", preferredLatency);
 
       if (granularity == -1)
         printf("ASIO array granularity     = power of 2\n");

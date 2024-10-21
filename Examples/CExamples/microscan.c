@@ -117,15 +117,15 @@ int main(void)
                         SINE_TABLE_SIZE);    // Table length
 
   // Initialise FFT
-  SIF_Fft(pFFTCoeffs,                 // Pointer to FFT coefficients
-          SIGLIB_BIT_REV_STANDARD,    // Bit reverse mode flag / Pointer to bit
-                                      // reverse address table
-          FFT_LENGTH);                // FFT length
-                                      // Generate Hanning window table
-  SIF_Window(pWindowCoeffs,           // Pointer to window oefficient
-             SIGLIB_HANNING,          // Window type
-             SIGLIB_ZERO,             // Window coefficient
-             FFT_LENGTH);             // Window length
+  SIF_Fft(pFFTCoeffs,                   // Pointer to FFT coefficients
+          SIGLIB_BIT_REV_STANDARD,      // Bit reverse mode flag / Pointer to bit
+                                        // reverse address table
+          FFT_LENGTH);                  // FFT length
+                                        // Generate Hanning window table
+  SIF_Window(pWindowCoeffs,             // Pointer to window oefficient
+             SIGLIB_HANNING_FOURIER,    // Window type
+             SIGLIB_ZERO,               // Window coefficient
+             FFT_LENGTH);               // Window length
 
   SDA_SignalGenerate(pChirpData,          // Pointer to destination array
                      SIGLIB_CHIRP_LIN,    // Signal type - Chirp with linear frequency ramp

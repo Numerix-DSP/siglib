@@ -105,7 +105,7 @@ int main(void)
   printf("\nSource Signal\nPlease hit <Carriage Return> to continue . . .");
   getchar();
 
-  plot_frequency_domain(pInput, SIGLIB_FLAT_TOP, "Raw signal spectrum", SAMPLE_LENGTH, FFT_LENGTH);
+  plot_frequency_domain(pInput, SIGLIB_FLAT_TOP_FOURIER, "Raw signal spectrum", SAMPLE_LENGTH, FFT_LENGTH);
   printf("Please hit <Carriage Return> to continue . . .\n");
   getchar();
 
@@ -128,7 +128,7 @@ int main(void)
   printf("\nModulated Signal\nPlease hit <Carriage Return> to continue . . .");
   getchar();
 
-  plot_frequency_domain(modulated, SIGLIB_FLAT_TOP, "Modulated signal spectrum", SAMPLE_LENGTH, FFT_LENGTH);
+  plot_frequency_domain(modulated, SIGLIB_FLAT_TOP_FOURIER, "Modulated signal spectrum", SAMPLE_LENGTH, FFT_LENGTH);
   printf("Please hit <Carriage Return> to continue . . .\n");
   getchar();
 
@@ -163,7 +163,7 @@ int main(void)
   printf("\nDemodulated Signal\nPlease hit <Carriage Return> to continue . . .");
   getchar();
 
-  plot_frequency_domain(demodulated, SIGLIB_FLAT_TOP, "Demodulated signal spectrum ", SAMPLE_LENGTH, FFT_LENGTH);
+  plot_frequency_domain(demodulated, SIGLIB_FLAT_TOP_FOURIER, "Demodulated signal spectrum ", SAMPLE_LENGTH, FFT_LENGTH);
 
   printf("\nHit <Carriage Return> to continue ....\n");
   getchar();    // Wait for <Carriage Return>

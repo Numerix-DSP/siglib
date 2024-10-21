@@ -84,12 +84,12 @@ int main(void)
   SIF_FirBandPassFilter(pRxLevelOneBPFilter,                   // Filter coeffs array
                         CARRIER_FREQ_ONE / SAMPLE_RATE_HZ,     // Filter centre frequency
                         FILTER_BANDWIDTH / SAMPLE_RATE_HZ,     // Filter bandwidth
-                        SIGLIB_HANNING,                        // Window type
+                        SIGLIB_HANNING_FILTER,                 // Window type
                         RX_FILTER_LENGTH);                     // Filter length
   SIF_FirBandPassFilter(pRxLevelZeroBPFilter,                  // Filter coeffs array
                         CARRIER_FREQ_ZERO / SAMPLE_RATE_HZ,    // Filter centre frequency
                         FILTER_BANDWIDTH / SAMPLE_RATE_HZ,     // Filter bandwidth
-                        SIGLIB_HANNING,                        // Window type
+                        SIGLIB_HANNING_FILTER,                 // Window type
                         RX_FILTER_LENGTH);                     // Filter length
 
   // Adjust filter gain

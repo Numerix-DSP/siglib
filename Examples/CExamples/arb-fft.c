@@ -99,10 +99,10 @@ int main(int argc, char* argv[])
              SAMPLE_LENGTH);                    // Dataset length
 
   // Generate Hanning window table
-  SIF_Window(pWindowCoeffs,     // Pointer to window oefficient
-             SIGLIB_HANNING,    // Window type
-             SIGLIB_ZERO,       // Window coefficient
-             SAMPLE_LENGTH);    // Window length
+  SIF_Window(pWindowCoeffs,             // Pointer to window oefficient
+             SIGLIB_HANNING_FOURIER,    // Window type
+             SIGLIB_ZERO,               // Window coefficient
+             SAMPLE_LENGTH);            // Window length
 
   SUF_SigReadData(pInput, fpInputFile, SAMPLE_LENGTH);    // Read data from disk
 

@@ -744,8 +744,6 @@ public class siglib_wrapJNI {
   public final static native void SDA_LogMagnitude(long jarg1, long jarg2, long jarg3, int jarg4);
   public final static native void SDA_LogMagnitudeAndPhaseWrapped(long jarg1, long jarg2, long jarg3, long jarg4, int jarg5);
   public final static native void SDA_LogMagnitudeAndPhaseUnWrapped(long jarg1, long jarg2, long jarg3, long jarg4, int jarg5);
-  public final static native void SDA_Lengthen(long jarg1, long jarg2, int jarg3, int jarg4);
-  public final static native void SDA_Shorten(long jarg1, long jarg2, int jarg3);
   public final static native void SIF_ReSize(long jarg1);
   public final static native int SDA_ReSize(long jarg1, long jarg2, long jarg3, long jarg4, int jarg5, int jarg6);
   public final static native void SDA_ReSizeInput(long jarg1, long jarg2, long jarg3, int jarg4);

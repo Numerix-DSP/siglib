@@ -1,4 +1,4 @@
-// SigLib - .WAV file alignment and display program
+// SigLib - .wav file alignment and display program
 // Copyright (c) 2024 Delta Numerix All rights reserved.
 
 #include <math.h>
@@ -28,8 +28,8 @@ int main(int argc, char* argv[])
   strcpy(Filename1, argv[1]);
   strcpy(Filename2, argv[2]);
 
-  printf("Source file 1 = %s\n", Filename1);
-  printf("Source file 2 = %s\n", Filename2);
+  printf("Source file #1: %s\n", Filename1);
+  printf("Source file #2: %s\n", Filename2);
 
   printf("\nAligning data arrays. This may take a little time ...\n");
 

@@ -46,10 +46,10 @@ int main(int argc, char* argv[])
   SIF_CopyWithOverlap(&OverlapSrcArrayIndex);    // Pointer to source array index
 
   // Generate window table
-  SIF_Window(pWindowCoeffs,             // Window coefficients pointer
-             SIGLIB_BLACKMAN_HARRIS,    // Window type
-             SIGLIB_ZERO,               // Window coefficient
-             FFT_LENGTH);               // Window length
+  SIF_Window(pWindowCoeffs,                     // Window coefficients pointer
+             SIGLIB_BLACKMAN_HARRIS_FOURIER,    // Window type
+             SIGLIB_ZERO,                       // Window coefficient
+             FFT_LENGTH);                       // Window length
 
   // Calculate window inverse coherent gain
   WindowInverseCoherentGain = SDA_WindowInverseCoherentGain(pWindowCoeffs,    // Source array pointer

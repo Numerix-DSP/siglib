@@ -16,15 +16,42 @@ Additional Functionality:
   SDA_ConvolveIterate
   SDA_SignalGenerateSine and SDA_SignalGenerateCosine
   SDS_SamplesToPeriod and SDS_PeriodToSamples
+  SDA_ZeroPad
+  SDA_RootMeanSquareError
+  SDS_Sigmoid and SDA_Sigmoid
+  Window types added:
+    SIGLIB_HANNING_FOURIER
+    SIGLIB_HAMMING_FOURIER
+    SIGLIB_GENERALIZED_COSINE_FOURIER
+    SIGLIB_BLACKMAN_FOURIER
+    SIGLIB_BARTLETT_TRIANGLE_ZERO_END_POINTS_FOURIER
+    SIGLIB_BARTLETT_TRIANGLE_NON_ZERO_END_POINTS_FOURIER
+    SIGLIB_KAISER_FOURIER
+    SIGLIB_BLACKMAN_HARRIS_FOURIER
+    SIGLIB_RECTANGLE_FOURIER
+    SIGLIB_FLAT_TOP_FOURIER
 
 Operational Changes:
-  SIF_GraphicalEqualizerFilterBank changed to SIF_GraphicEqualizerFilterBank.
+  SIF_GraphicalEqualizerFilterBank changed to SIF_GraphicEqualizerFilterBank
+  SDA_Shorten deprecated, use SDA_Copy instead
+  SDA_Lengthen deprecated, use SDA_ZeroPad instead
+  Window type name changes:
+    SIGLIB_HANNING                                to: SIGLIB_HANNING_FOURIER
+    SIGLIB_HAMMING                                to: SIGLIB_HAMMING_FOURIER
+    SIGLIB_GENERALIZED_COSINE                     to: SIGLIB_GENERALIZED_COSINE_FOURIER
+    SIGLIB_BLACKMAN                               to: SIGLIB_BLACKMAN_FOURIER
+    SIGLIB_BARTLETT_TRIANGLE_ZERO_END_POINTS      to: SIGLIB_BARTLETT_TRIANGLE_ZERO_END_POINTS_FOURIER
+    SIGLIB_BARTLETT_TRIANGLE_NON_ZERO_END_POINTS  to: SIGLIB_BARTLETT_TRIANGLE_NON_ZERO_END_POINTS_FOURIER
+    SIGLIB_KAISER                                 to: SIGLIB_KAISER_FOURIER
+    SIGLIB_BLACKMAN_HARRIS                        to: SIGLIB_BLACKMAN_HARRIS_FOURIER
+    SIGLIB_RECTANGLE                              to: SIGLIB_RECTANGLE_FOURIER
+    SIGLIB_FLAT_TOP                               to: SIGLIB_FLAT_TOP_FOURIER
 
 Additional Processor / Compiler Support:
   None.
 
 Optimisation Changes:
-  None.
+  SAI_FftLengthLog2 and SAI_FftLengthLog4 changed from macros to functions
 
 Bug Fixes:
  Fixed SUF_WavRead and SUF_WavWrite function naming error
@@ -2011,7 +2038,7 @@ Operational Changes:
 	_IMAGING_ENABLED definition removed.
 	Function declaration statement _SL_FUNC_DECL added to allow the same source code to be used for static, dynamic linkable libraries (DLLs).
 	fir_buffer_apply modified to avoid compilation warnings with some compilers.
-	Memory reallocation changed to only reallocate when array size changed.
+	Memory reallocation changed to only reallocate when array length changed.
 	init_display_buffer_point,, init_display_buffer now return error code when memory allocation fails.
 	buffer_clip moved to dsputil2.c.
 	buffer_quantise changed to buffer_quantize.

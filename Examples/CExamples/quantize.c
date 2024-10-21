@@ -150,7 +150,7 @@ int main(void)
                sine_wave,          // Pointer to destination array
                8,                  // Quantisation
                SIGLIB_ONE,         // Peak value
-               MAX_FFT_LENGTH);    // Source array size
+               MAX_FFT_LENGTH);    // Source array length
 
   // Uncorrelated noise (8 bit )
   SDA_SignalGenerate(sine_wave,               // Pointer to destination array

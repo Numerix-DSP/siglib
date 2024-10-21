@@ -56,7 +56,7 @@ int main(void)
                                TIME_DELAY,          // Echo delay
                                ECHO_DECAY,          // Echo decay
                                SIGLIB_ECHO,         // Echo type
-                               ECHO_BUF_SIZE);      // Echo array size
+                               ECHO_BUF_SIZE);      // Echo array length
   }
 
   gpc_plot_2d(h2DPlot,                        // Graph handle
@@ -103,7 +103,7 @@ int main(void)
                                TIME_DELAY,          // Echo delay
                                ECHO_DECAY,          // Echo decay
                                SIGLIB_REVERB,       // Echo type
-                               ECHO_BUF_SIZE);      // Echo array size
+                               ECHO_BUF_SIZE);      // Echo array length
   }
 
   gpc_plot_2d(h2DPlot,                        // Graph handle

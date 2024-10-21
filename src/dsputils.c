@@ -298,6 +298,48 @@ SLData_t SIGLIB_FUNC_DECL SDA_RootMeanSquare(const SLData_t* SIGLIB_PTR_DECL pSr
 }    // End of SDA_RootMeanSquare()
 
 /********************************************************
+ * Function: SDA_RootMeanSquareError
+ *
+ * Parameters:
+ *   const SLData_t  *pSrc1
+ *   const SLData_t  *pSrc2
+ *   const SLData_t InverseArrayLength,  - Inverse of array length
+ *   const SLArrayIndex_t    ArrayLength
+ *
+ * Return value:
+ *   SLData_t    MSE
+ *
+ * Description:
+ *   Calculate the MSE between 2 vectors.
+ *
+ ********************************************************/
+
+SLData_t SIGLIB_FUNC_DECL SDA_RootMeanSquareError(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLData_t* SIGLIB_PTR_DECL pSrc2,
+                                                  const SLData_t InverseArrayLength, const SLArrayIndex_t ArrayLength)
+{
+#if (SIGLIB_ARRAYS_ALIGNED)
+#  ifdef __TMS320C6X__              // Defined by TI compiler
+  _nassert((int)pSrc1 % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+  _nassert((int)pSrc2 % 8 == 0);
+#  endif
+#endif
+
+  SLData_t MSE = SIGLIB_ZERO;
+
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
+                                                    // or pointer access modes
+    SLData_t tmp = pSrc1[i] - pSrc2[i];
+#else
+    SLData_t tmp = *pSrc1++ - *pSrc2++;
+#endif
+    MSE += tmp * tmp;
+  }
+  MSE *= InverseArrayLength;    // Claculate the mean
+  return (SDS_Sqrt(MSE));
+}    // End of SDA_RootMeanSquareError()
+
+/********************************************************
  * Function: SDA_Magnitude
  *
  * Parameters:
@@ -921,6 +963,63 @@ void SIGLIB_FUNC_DECL SDA_LogN(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* S
 }    // End of SDA_LogN()
 
 /********************************************************
+ * Function: SDS_Sigmoid
+ *
+ * Parameters:
+ *  const SLData_t          - Source sample
+ *  const SLData_t shift,   - Shift value
+ *  const SLData_t mult     - Multiplication value
+ *
+ * Return value:
+ *   Result sample
+ *
+ * Description: Apply sigmoid function to the  sample.
+ *
+ ********************************************************/
+
+SLData_t SIGLIB_FUNC_DECL SDS_Sigmoid(const SLData_t x, const SLData_t shift, const SLData_t mult)
+{
+  // Calculate the exponent and sigmoid value
+  SLData_t result = 1.0 / (1.0 + SDS_Exp(-(x + shift) * mult));
+
+  return result;
+}    // End of SDS_Sigmoid()
+
+/********************************************************
+ * Function: SDA_Sigmoid
+ *
+ * Parameters:
+ *  const SLData_t *        - Pointer to source sample
+ *  SLData_t *              - Pointer to destination sample
+ *  const SLData_t shift,   - Shift value
+ *  const SLData_t mult     - Multiplication value
+ *  const SLArrayIndex_t    - Array length
+ *
+ * Return value:
+ *   void
+ *
+ * Description: Apply sigmoid function to the  samples.
+ *
+ ********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_Sigmoid(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLData_t shift, const SLData_t mult,
+                                  const SLArrayIndex_t length)
+{
+
+#if (SIGLIB_ARRAYS_ALIGNED)
+#  ifdef __TMS320C6X__             // Defined by TI compiler
+  _nassert((int)pSrc % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+  _nassert((int)pDst % 8 == 0);
+#  endif
+#endif
+
+  for (SLArrayIndex_t i = 0; i < length; i++) {
+    // Calculate exponent and sigmoid value for each element
+    pDst[i] = 1.0 / (1.0 + SDS_Exp(-(pSrc[i] + shift) * mult));
+  }
+}    // End of SDA_Sigmoid()
+
+/********************************************************
  * Function: SDA_LogDistribution
  *
  * Parameters:
@@ -1401,13 +1500,14 @@ void SIGLIB_FUNC_DECL SDA_LogMagnitudeAndPhaseUnWrapped(const SLData_t* SIGLIB_P
 }    // End of SDA_LogMagnitudeAndPhaseUnWrapped()
 
 /********************************************************
- * Function: SDA_Lengthen
+ * Function: SDA_ZeroPad
  *
  * Parameters:
  *   const SLData_t * SIGLIB_PTR_DECL pSrc,
  *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t SrcLength,
- *   const SLArrayIndex_t DstLength
+ *   const SLArrayIndex_t prePadLength,
+ *   const SLArrayIndex_t postPadLength,
+ *   const SLArrayIndex_t SrcLength
  *
  * Return value:
  *   void
@@ -1417,8 +1517,8 @@ void SIGLIB_FUNC_DECL SDA_LogMagnitudeAndPhaseUnWrapped(const SLData_t* SIGLIB_P
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Lengthen(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t SrcLength,
-                                   const SLArrayIndex_t DstLength)
+void SIGLIB_FUNC_DECL SDA_ZeroPad(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t prePadLength,
+                                  const SLArrayIndex_t postPadLength, const SLArrayIndex_t srcLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -1427,59 +1527,46 @@ void SIGLIB_FUNC_DECL SDA_Lengthen(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_
 #  endif
 #endif
 
-  for (SLArrayIndex_t i = 0; i < SrcLength; i++) {
+  // Copy data (backwards so we can work in-place)
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_POINTER_ACCESS)    // Select between array index
+  SLData_t* pLocalSrc = ((SLData_t*)pSrc) + srcLength;
+  SLData_t* pLocalDst = pDst + prePadLength + srcLength;
+#endif
+  for (SLArrayIndex_t i = 0; i < srcLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
-    pDst[i] = pSrc[i];
+    pDst[prePadLength + srcLength - i - 1] = pSrc[srcLength - i - 1];
 #else
-    *pDst++ = *pSrc++;
+    *--pLocalDst = *--pLocalSrc;
 #endif
   }
 
-  for (SLArrayIndex_t i = SrcLength; i < DstLength; i++) {
+// Pre-pad
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_POINTER_ACCESS)    // Select between array index
+  pLocalDst = pDst;
+#endif
+  for (SLArrayIndex_t i = 0; i < prePadLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
     pDst[i] = SIGLIB_ZERO;
 #else
-    *pDst++ = SIGLIB_ZERO;
+    *pLocalDst++ = SIGLIB_ZERO;
 #endif
   }
-}    // End of SDA_Lengthen()
 
-/********************************************************
- * Function: SDA_Shorten
- *
- * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t DstLength
- *
- * Return value:
- *   void
- *
- * Description:
- *   Shorten an array
- *
- ********************************************************/
-
-void SIGLIB_FUNC_DECL SDA_Shorten(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t DstLength)
-{
-#if (SIGLIB_ARRAYS_ALIGNED)
-#  ifdef __TMS320C6X__             // Defined by TI compiler
-  _nassert((int)pSrc % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
-  _nassert((int)pDst % 8 == 0);
-#  endif
+// Post-pad
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_POINTER_ACCESS)    // Select between array index
+  pLocalDst = pDst + prePadLength + srcLength;
 #endif
-
-  for (SLArrayIndex_t i = 0; i < DstLength; i++) {
+  for (SLArrayIndex_t i = 0; i < postPadLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
-    pDst[i] = pSrc[i];
+    pDst[prePadLength + srcLength + i] = SIGLIB_ZERO;
 #else
-    *pDst++ = *pSrc++;
+    *pLocalDst++ = SIGLIB_ZERO;
 #endif
   }
-}    // End of SDA_Shorten()
+}    // End of SDA_ZeroPad()
 
 /********************************************************
  * Function: SIF_ReSize

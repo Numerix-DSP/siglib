@@ -3,20 +3,11 @@
 rem Batch file for building and executing client application with Microsoft Visual Studio compiler
 rem This build uses the static library, release model
 
-set siglib_base_filename=%~n1
-set siglib_exe_filename=%siglib_base_filename%.exe
-set siglib_command=%siglib_exe_filename% %2 %3 %4 %5 %6 %7 %8 %9
+call mb alignwavs
+call mb wav_rms_error
 
-if exist %siglib_exe_filename% (
-    del %siglib_exe_filename%
-)
+alignwavs Kipling_If_16kHz_Short.wav Kipling_If_16kHz_PlusDelayAndNoise_Short.wav
 
-call mb %siglib_base_filename%
-del *.obj
-if exist %siglib_exe_filename% (
-    %siglib_command%
-)
+wav_rms_error Kipling_If_16kHz_Short.wav Kipling_If_16kHz_PlusDelayAndNoise_Short.wav
+wav_rms_error aligned_1.wav aligned_2.wav
 
-set "siglib_base_filename="
-set "siglib_command="
-set "siglib_exe_filename="

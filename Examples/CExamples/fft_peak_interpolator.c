@@ -55,10 +55,10 @@ int main(void)
   }
 
   // Generate Hanning window table
-  SIF_Window(pWindowCoeffs,      // Pointer to window oefficient
-             SIGLIB_BLACKMAN,    // Window type
-             SIGLIB_ZERO,        // Window coefficient
-             FFT_LENGTH);        // Window length
+  SIF_Window(pWindowCoeffs,              // Pointer to window oefficient
+             SIGLIB_BLACKMAN_FOURIER,    // Window type
+             SIGLIB_ZERO,                // Window coefficient
+             FFT_LENGTH);                // Window length
 
   SLData_t windowInverseCoherentGain = SDA_WindowInverseCoherentGain(pWindowCoeffs,    // Pointer to window oefficient
                                                                      FFT_LENGTH);      // Window length

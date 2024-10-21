@@ -54,7 +54,7 @@ int main(void)
   // Initialise the Welch power spectrum
   SigLibErrorCode = SIF_WelchPowerSpectrum(&OverlapSourceIndex,               // Pointer to overlap source array index
                                            pWindowCoeffs,                     // Window array pointer
-                                           SIGLIB_BLACKMAN,                   // Window type
+                                           SIGLIB_BLACKMAN_FOURIER,           // Window type
                                            SIGLIB_ZERO,                       // Window coefficient
                                            pFFTCoeffs,                        // Pointer to FFT coefficients
                                            SIGLIB_BIT_REV_STANDARD,           // Bit reverse mode flag / Pointer to bit reverse

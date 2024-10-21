@@ -96,20 +96,20 @@ int main(int argc, char* argv[])
   // Reset the copy with overlap
   SIF_CopyWithOverlap(&OverlapSrcArrayIndex);    // Pointer to overlap source array index
 
-  SIF_OrderAnalysis(SincLUT,                       // Pointer to sinc LUT array
-                    &LookUpTablePhaseGain,         // Pointer to phase gain
-                    SINC_NUMBER_OF_ADJ_SAMPLES,    // Number of adjacent samples
-                    SINC_LUT_LENGTH,               // Look up table length
-                    pWindowCoeffs,                 // Window coefficients pointer
-                    SIGLIB_BLACKMAN_HARRIS,        // Window type
-                    SIGLIB_ZERO,                   // Window coefficient
-                    &WindowInverseCoherentGain,    // Window inverse coherent gain
-                    pFFTCoeffs,                    // Pointer to FFT coefficients
-                    SIGLIB_BIT_REV_STANDARD,       // Bit reverse mode flag / Pointer
-                                                   // to bit reverse address table
-                    pRealAverage,                  // Pointer to real average array
-                    pImagAverage,                  // Pointer to imaginary average array
-                    FFT_LENGTH);                   // FFT length
+  SIF_OrderAnalysis(SincLUT,                           // Pointer to sinc LUT array
+                    &LookUpTablePhaseGain,             // Pointer to phase gain
+                    SINC_NUMBER_OF_ADJ_SAMPLES,        // Number of adjacent samples
+                    SINC_LUT_LENGTH,                   // Look up table length
+                    pWindowCoeffs,                     // Window coefficients pointer
+                    SIGLIB_BLACKMAN_HARRIS_FOURIER,    // Window type
+                    SIGLIB_ZERO,                       // Window coefficient
+                    &WindowInverseCoherentGain,        // Window inverse coherent gain
+                    pFFTCoeffs,                        // Pointer to FFT coefficients
+                    SIGLIB_BIT_REV_STANDARD,           // Bit reverse mode flag / Pointer
+                                                       // to bit reverse address table
+                    pRealAverage,                      // Pointer to real average array
+                    pImagAverage,                      // Pointer to imaginary average array
+                    FFT_LENGTH);                       // FFT length
 
   if (argc != 5) {
     printf("\nUsage:\norder SampleRate D/L T/S filename\n");

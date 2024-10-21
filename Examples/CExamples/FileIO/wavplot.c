@@ -83,7 +83,7 @@ int main(int argc, char* argv[])
 
   while (!kbhit() && ((inputSampleCount = SUF_WavReadData(pDataArray, fpInputFile, wavInfo, SAMPLE_LENGTH)) == SAMPLE_LENGTH)) {
     if (strcmp(argv[3], "F") == 0) {
-      plot_frequency_domain(pDataArray, SIGLIB_BLACKMAN_HARRIS, "Power spectrum", SAMPLE_LENGTH, SAMPLE_LENGTH);
+      plot_frequency_domain(pDataArray, SIGLIB_BLACKMAN_HARRIS_FOURIER, "Power spectrum", SAMPLE_LENGTH, SAMPLE_LENGTH);
     } else {
       gpc_plot_2d(h2DPlot,                        // Graph handle
                   pDataArray,                     // Dataset

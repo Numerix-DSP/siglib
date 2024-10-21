@@ -73,7 +73,7 @@ int main(void)
   printf("\nSource Signal\nPlease hit <Carriage Return> to continue . . .");
   getchar();
 
-  plot_frequency_domain(pSrc, SIGLIB_FLAT_TOP, "Output Frequency Spectrum", SAMPLE_LENGTH, SAMPLE_LENGTH);
+  plot_frequency_domain(pSrc, SIGLIB_FLAT_TOP_FOURIER, "Output Frequency Spectrum", SAMPLE_LENGTH, SAMPLE_LENGTH);
   printf("Please hit <Carriage Return> to continue . . .\n");
   getchar();
 

@@ -80,7 +80,7 @@ void SIGLIB_FUNC_DECL SIF_PhaseLockedLoop(SLData_t* pVCOPhase, SLData_t* SIGLIB_
 
   SIF_Fir(pLoopFilterState, pLoopFilterIndex,
           LoopFilterLength);    // Initialise PLL loop filter
-  SIF_FirLowPassFilter(pLoopFilterCoeffs, LPFCutOffFrequency, SIGLIB_HANNING, LoopFilterLength);
+  SIF_FirLowPassFilter(pLoopFilterCoeffs, LPFCutOffFrequency, SIGLIB_HANNING_FILTER, LoopFilterLength);
 
   SIF_Fir(pHilbertTformFilterState, pHilbertTformFilterIndex,
           HilbertTformFilterLength);    // Initialise Hilbert transformer filter
@@ -232,7 +232,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_CostasLoop(SLData_t* pCostasLpVCOPhase, SLData_t*
           CostasLpLPFLength);    // Initialise Costas loop LPF 1
   SIF_Fir(pCostasLpLPF2State, pCostasLpLPF2Index,
           CostasLpLPFLength);    // Initialise Costas loop LPF 2
-  SLError_t Error = SIF_FirLowPassFilter(pCostasLpLPFCoeffs, LPFCutOffFrequency, SIGLIB_HANNING, CostasLpLPFLength);
+  SLError_t Error = SIF_FirLowPassFilter(pCostasLpLPFCoeffs, LPFCutOffFrequency, SIGLIB_HANNING_FILTER, CostasLpLPFLength);
 
   SIF_FastSinCos(pVCOLookUpTable, VCOLookUpTableSize);
   *pCostasLpVCOPhase = SIGLIB_ZERO;    // Initialise Costas loop VCO phase
@@ -482,7 +482,7 @@ void SIGLIB_FUNC_DECL SIF_180DegreePhaseDetect(SLData_t* pFastCosineLookUpTableP
   SIF_FastCos(pFastCosineLookUpTable, FastCosineLookUpTableSize);
   SIF_Fir(pFilterState, pFilterIndex,
           filterLength);    // Initialise detector filter
-  SIF_FirLowPassFilter(pFilterCoeffs, LPFCutOffFrequency, SIGLIB_HANNING, filterLength);
+  SIF_FirLowPassFilter(pFilterCoeffs, LPFCutOffFrequency, SIGLIB_HANNING_FILTER, filterLength);
 
   *pPreviousOutputSign = SIGLIB_AI_ZERO;    // Initialise previous output sign
 }    // End of SIF_180DegreePhaseDetect()
@@ -848,9 +848,10 @@ SLError_t SIGLIB_FUNC_DECL SIF_EarlyLateGate(
   SIF_Fir(pLoopFilterState, pLoopFilterIndex,
           LoopFilterLength);          // Initialise loop filter
   *pLoopFilterState = SIGLIB_ZERO;    // Initialise loop filter feedback coefficients
-  SLError_t ErrorCode = SIF_FirBandPassFilter(pLoopFilterCoeffs, LoopFilterFc, SIGLIB_HALF / SIGLIB_ONE_HUNDRED, SIGLIB_HANNING, LoopFilterLength);
+  SLError_t ErrorCode =
+      SIF_FirBandPassFilter(pLoopFilterCoeffs, LoopFilterFc, SIGLIB_HALF / SIGLIB_ONE_HUNDRED, SIGLIB_HANNING_FILTER, LoopFilterLength);
   //  ErrorCode = SIF_FirLowPassFilter (pLoopFilterCoeffs, LoopFilterFc,
-  //  SIGLIB_HANNING, LoopFilterLength);
+  //  SIGLIB_HANNING_FILTER, LoopFilterLength);
   if (ErrorCode != SIGLIB_NO_ERROR) {
     return (ErrorCode);
   }
@@ -1176,9 +1177,10 @@ SLError_t SIGLIB_FUNC_DECL SIF_EarlyLateGateSquarePulse(
   SIF_Fir(pLoopFilterState, pLoopFilterIndex,
           LoopFilterLength);          // Initialise loop filter
   *pLoopFilterState = SIGLIB_ZERO;    // Initialise loop filter feedback coefficients
-  SLError_t ErrorCode = SIF_FirBandPassFilter(pLoopFilterCoeffs, LoopFilterFc, SIGLIB_HALF / SIGLIB_ONE_HUNDRED, SIGLIB_HANNING, LoopFilterLength);
+  SLError_t ErrorCode =
+      SIF_FirBandPassFilter(pLoopFilterCoeffs, LoopFilterFc, SIGLIB_HALF / SIGLIB_ONE_HUNDRED, SIGLIB_HANNING_FILTER, LoopFilterLength);
   //  ErrorCode = SIF_FirLowPassFilter (pLoopFilterCoeffs, LoopFilterFc,
-  //  SIGLIB_HANNING, LoopFilterLength);
+  //  SIGLIB_HANNING_FILTER, LoopFilterLength);
   if (ErrorCode != SIGLIB_NO_ERROR) {
     return (ErrorCode);
   }

@@ -85,7 +85,7 @@ int main(void)
                 GPC_ADD);                       // New graph
     printf("\nModulated signal\n");
 
-    plot_complex_frequency_domain(pDstReal, pDstImag, SIGLIB_RECTANGLE, "Raw signal spectrum", SYMBOL_LENGTH, SYMBOL_LENGTH);
+    plot_complex_frequency_domain(pDstReal, pDstImag, SIGLIB_RECTANGLE_FOURIER, "Raw signal spectrum", SYMBOL_LENGTH, SYMBOL_LENGTH);
 
     printf("Peak to average power ratio (linear) without DFT = %lf\n",
            SDA_PeakToAveragePowerRatioComplex(pDstReal,           // Pointer to real source array
@@ -136,7 +136,7 @@ int main(void)
                 GPC_ADD);                       // New graph
     printf("\nDFT Modulated signal\n");
 
-    plot_complex_frequency_domain(pDstReal, pDstImag, SIGLIB_RECTANGLE, "SC signal spectrum", SYMBOL_LENGTH, SYMBOL_LENGTH);
+    plot_complex_frequency_domain(pDstReal, pDstImag, SIGLIB_RECTANGLE_FOURIER, "SC signal spectrum", SYMBOL_LENGTH, SYMBOL_LENGTH);
 
     printf("Peak to average power ratio (linear) with DFT = %lf\n",
            SDA_PeakToAveragePowerRatioComplex(pDstReal,           // Pointer to real source array

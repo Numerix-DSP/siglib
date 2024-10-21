@@ -96,7 +96,7 @@ int main(void)
                pQuantizeResults,            // Pointer to destination array
                QUANTISATION_BITS,           // Quantisation
                NUMBER_OF_DCT_DATA_CODES,    // Peak value
-               IMAGE_SIZE);                 // Source array size
+               IMAGE_SIZE);                 // Source array length
 #else
   SDA_Copy(pZZSResults,         // Pointer to source array
            pQuantizeResults,    // Pointer to destination array

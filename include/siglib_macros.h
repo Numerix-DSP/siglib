@@ -56,6 +56,10 @@ Update history:
 #    define SDS_RoundUp(a) (((SLData_t)a) + SIGLIB_ONE - SIGLIB_EPSILON)            // Round up fixed point number
 #    define SDS_RoundToNearest(a) (((SLData_t)a) + SIGLIB_HALF - SIGLIB_EPSILON)    // Round to nearest fixed point number
 
+// Min Max Macros
+#    define SDS_MinMacro(a, b) ((a < b) ? a : b)    // Return the minimum of the 2 numbers
+#    define SDS_MaxMacro(a, b) ((a > b) ? a : b)    // Return the maximum of the 2 numbers
+
 // Macros that output type SLFixData_t
 #    define SDS_Odd(a) ((SLData_t)SDS_RoundToNearest((SLData_t)a) & ((SLArrayIndex_t)1))                   // Returns 1 if a is odd, 0 otherwise
 #    define SDS_Even(a) (((SLArrayIndex_t)1) - (SDS_RoundToNearest((SLData_t)a) & ((SLArrayIndex_t)1)))    // Returns 1 if a is even, 0 otherwise
@@ -91,11 +95,6 @@ Update history:
 
 #    define SAI_FftLength(x) (SLArrayIndex_t) pow(SIGLIB_TWO, (const double)x)      // Returns the FFT length for a given log2(FFT length)
 #    define SAI_FftLength4(x) (SLArrayIndex_t) pow(SIGLIB_FOUR, (const double)x)    // Returns the FFT length for a given log4(FFT length)
-#    define SAI_FftLengthLog2(x) \
-      (SLArrayIndex_t) log2(((const double)x) + SIGLIB_MIN_THRESHOLD)    // Returns the log2(FFT length)
-                                                                         // for a given FFT length
-#    define SAI_FftLengthLog4(x) \
-      ((SLArrayIndex_t)log2(((const double)x) + SIGLIB_MIN_THRESHOLD) >> 1)    // Returns the log4(FFT length) for a given FFT length
 
 #    define SDS_BitTest(a, Mask) \
       ((((a) & (Mask)) == (Mask)) ? ((SLArrayIndex_t)1) : ((SLArrayIndex_t)0))    // Returns 1 if all bits in

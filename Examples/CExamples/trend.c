@@ -126,15 +126,15 @@ int main(void)
   getchar();
 
   // Generate Hanning window table
-  SIF_Window(pWindowCoeffs,     // Pointer to window oefficient
-             SIGLIB_HANNING,    // Window type
-             SIGLIB_ZERO,       // Window coefficient
-             FFT_LENGTH);       // Window length
-                                // Apply window to real data
-  SDA_Window(pRealData,         // Pointer to source array
-             pRealData,         // Pointer to destination array
-             pWindowCoeffs,     // Pointer to window coefficients
-             WINDOW_LENGTH);    // Window length
+  SIF_Window(pWindowCoeffs,             // Pointer to window oefficient
+             SIGLIB_HANNING_FOURIER,    // Window type
+             SIGLIB_ZERO,               // Window coefficient
+             FFT_LENGTH);               // Window length
+                                        // Apply window to real data
+  SDA_Window(pRealData,                 // Pointer to source array
+             pRealData,                 // Pointer to destination array
+             pWindowCoeffs,             // Pointer to window coefficients
+             WINDOW_LENGTH);            // Window length
 
   // Perform real FFT
   SDA_Rfft(pRealData,                  // Pointer to real array
@@ -179,20 +179,19 @@ int main(void)
               "lines",                        // Graph type
               "blue",                         // Colour
               GPC_NEW);                       // New graph
-  printf("\nSpectrum Of Source Signal\nPlease hit <Carriage Return> to "
-         "continue . . .");
+  printf("\nSpectrum Of Source Signal\nPlease hit <Carriage Return> to continue . . .");
   getchar();
 
   // Generate Hanning window table
-  SIF_Window(pWindowCoeffs,     // Pointer to window oefficient
-             SIGLIB_HANNING,    // Window type
-             SIGLIB_ZERO,       // Window coefficient
-             FFT_LENGTH);       // Window length
-                                // Apply window to real data
-  SDA_Window(pRealData,         // Pointer to source array
-             pRealData,         // Pointer to destination array
-             pWindowCoeffs,     // Pointer to window coefficients
-             WINDOW_LENGTH);    // Window length
+  SIF_Window(pWindowCoeffs,             // Pointer to window oefficient
+             SIGLIB_HANNING_FOURIER,    // Window type
+             SIGLIB_ZERO,               // Window coefficient
+             FFT_LENGTH);               // Window length
+                                        // Apply window to real data
+  SDA_Window(pRealData,                 // Pointer to source array
+             pRealData,                 // Pointer to destination array
+             pWindowCoeffs,             // Pointer to window coefficients
+             WINDOW_LENGTH);            // Window length
 
   // Perform real FFT
   SDA_Rfft(pRealData,                  // Pointer to real array

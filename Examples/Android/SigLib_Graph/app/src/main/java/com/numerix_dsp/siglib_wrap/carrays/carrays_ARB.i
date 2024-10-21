@@ -10,7 +10,7 @@
  * MODIFIED ABIAGIONI@DUKE-RIVER.COM to make the arrays safe from overflow, as
  * follows:
  * - the actual arrays are created of size = N+1
- * - array[0] stores the array size
+ * - array[0] stores the array length
  * - each read operation compares the passed index to array[0]; returns 0 if
  *   the index is >= array[0], otherwise returns array[index+1]
  * - each write operation compares the passed index to array[0]; does nothing if

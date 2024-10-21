@@ -74,10 +74,10 @@ int main(void)
   SLData_t sinePhase = SIGLIB_ZERO;
 
   // Generate Hanning window table
-  SIF_Window(pWindowCoeffs,     // Pointer to window oefficient
-             SIGLIB_HANNING,    // Window type
-             SIGLIB_ZERO,       // Window coefficient
-             WINDOW_SIZE);      // Window length
+  SIF_Window(pWindowCoeffs,             // Pointer to window oefficient
+             SIGLIB_HANNING_FOURIER,    // Window type
+             SIGLIB_ZERO,               // Window coefficient
+             WINDOW_SIZE);              // Window length
 
   // Initialise FFT
   SIF_Fft(pFFTCoeffs,                 // Pointer to FFT coefficients

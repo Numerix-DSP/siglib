@@ -150,10 +150,10 @@ int main(void)
     exit(-1);
   }
 
-  SIF_Window(pWindowCoeffs,     // Pointer to window oefficient
-             SIGLIB_HANNING,    // Window type
-             SIGLIB_ZERO,       // Window coefficient
-             FFT_LENGTH);       // Window length
+  SIF_Window(pWindowCoeffs,             // Pointer to window oefficient
+             SIGLIB_HANNING_FOURIER,    // Window type
+             SIGLIB_ZERO,               // Window coefficient
+             FFT_LENGTH);               // Window length
 
   // Initialise FFT
   SIF_Fft(pFFTCoeffs,                 // Pointer to FFT coefficients

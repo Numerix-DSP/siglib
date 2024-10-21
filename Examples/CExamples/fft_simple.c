@@ -7,6 +7,7 @@
 #include <gnuplot_c.h>    // Gnuplot/C
 
 #define ENABLE_GRAPHS 0    // Set to '1' to enable Gnuplot/C graphs, '0' to disable graphs
+
 // Define constants
 #define FFT_LENGTH 16
 #define LOG2_FFT_LENGTH SAI_FftLengthLog2(FFT_LENGTH)    // Log FFT length

@@ -41,15 +41,15 @@ int main(void)
   }
 
   // Initialise FIR filter coefficients
-  SIF_FirLowPassFilter(pFilterCoeffs,             // Pointer to filter coefficients array
-                       0.1,                       // Filter cut-off frequency - normalized to 1 Hz
-                       SIGLIB_BLACKMAN_HARRIS,    // Window type
-                       FILTER_LENGTH);            // Filter length
-                                                  // Initialise FFT
-  SIF_Fft(pFFTCoeffs,                             // Pointer to FFT coefficients
-          SIGLIB_BIT_REV_STANDARD,                // Bit reverse mode flag / Pointer to bit
-                                                  // reverse address table
-          FFT_LENGTH);                            // FFT length
+  SIF_FirLowPassFilter(pFilterCoeffs,                    // Pointer to filter coefficients array
+                       0.1,                              // Filter cut-off frequency - normalized to 1 Hz
+                       SIGLIB_BLACKMAN_HARRIS_FILTER,    // Window type
+                       FILTER_LENGTH);                   // Filter length
+                                                         // Initialise FFT
+  SIF_Fft(pFFTCoeffs,                                    // Pointer to FFT coefficients
+          SIGLIB_BIT_REV_STANDARD,                       // Bit reverse mode flag / Pointer to bit
+                                                         // reverse address table
+          FFT_LENGTH);                                   // FFT length
 
   // Copy impulse response
   SDA_Clear(pReal, FFT_LENGTH);

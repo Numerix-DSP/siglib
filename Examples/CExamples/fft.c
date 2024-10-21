@@ -199,16 +199,16 @@ int main(void)
   getchar();
 
   // Generate Hanning window table
-  SIF_Window(pWindowCoeffs,     // Pointer to window oefficient
-             SIGLIB_HANNING,    // Window type
-             SIGLIB_ZERO,       // Window coefficient
-             FFT_LENGTH);       // Window length
-                                // Apply window to real data
-                                // Apply window to data
-  SDA_Window(pRealData,         // Pointer to source array
-             pRealData,         // Pointer to destination array
-             pWindowCoeffs,     // Pointer to window coefficients
-             WINDOW_LENGTH);    // Window length
+  SIF_Window(pWindowCoeffs,             // Pointer to window oefficient
+             SIGLIB_HANNING_FOURIER,    // Window type
+             SIGLIB_ZERO,               // Window coefficient
+             FFT_LENGTH);               // Window length
+                                        // Apply window to real data
+                                        // Apply window to data
+  SDA_Window(pRealData,                 // Pointer to source array
+             pRealData,                 // Pointer to destination array
+             pWindowCoeffs,             // Pointer to window coefficients
+             WINDOW_LENGTH);            // Window length
 
   gpc_plot_2d(h2DPlot,                         // Graph handle
               pRealData,                       // Dataset

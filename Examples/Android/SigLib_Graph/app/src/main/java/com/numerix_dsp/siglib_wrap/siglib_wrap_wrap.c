@@ -15799,36 +15799,6 @@ SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_SDA_1LogMagnitudeAndPh
   SDA_LogMagnitudeAndPhaseUnWrapped((double const*)arg1, (double const*)arg2, arg3, arg4, arg5);
 }
 
-SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_SDA_1Lengthen(JNIEnv* jenv, jclass jcls, jlong jarg1, jlong jarg2, jint jarg3, jint jarg4)
-{
-  SLData_t* arg1 = (SLData_t*)0;
-  SLData_t* arg2 = (SLData_t*)0;
-  SLArrayIndex_t arg3;
-  SLArrayIndex_t arg4;
-
-  (void)jenv;
-  (void)jcls;
-  arg1 = *(SLData_t**)&jarg1;
-  arg2 = *(SLData_t**)&jarg2;
-  arg3 = (SLArrayIndex_t)jarg3;
-  arg4 = (SLArrayIndex_t)jarg4;
-  SDA_Lengthen((double const*)arg1, arg2, arg3, arg4);
-}
-
-SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_SDA_1Shorten(JNIEnv* jenv, jclass jcls, jlong jarg1, jlong jarg2, jint jarg3)
-{
-  SLData_t* arg1 = (SLData_t*)0;
-  SLData_t* arg2 = (SLData_t*)0;
-  SLArrayIndex_t arg3;
-
-  (void)jenv;
-  (void)jcls;
-  arg1 = *(SLData_t**)&jarg1;
-  arg2 = *(SLData_t**)&jarg2;
-  arg3 = (SLArrayIndex_t)jarg3;
-  SDA_Shorten((double const*)arg1, arg2, arg3);
-}
-
 SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_SIF_1ReSize(JNIEnv* jenv, jclass jcls, jlong jarg1)
 {
   SLArrayIndex_t* arg1 = (SLArrayIndex_t*)0;

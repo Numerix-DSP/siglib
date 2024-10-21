@@ -87,7 +87,7 @@ int main(void)
               "lines",                        // Graph type
               "yellow",                       // Colour
               GPC_ADD);                       // New graph
-//  plot_frequency_domain (Estimate, SIGLIB_FLAT_TOP, "Estimate Frequency
+//  plot_frequency_domain (Estimate, SIGLIB_FLAT_TOP_FOURIER, "Estimate Frequency
 //  Spectrum", SAMPLE_LENGTH, SAMPLE_LENGTH); printf ("Please hit <Carriage
 //  Return> to continue . . .\n"); getchar();
 #else

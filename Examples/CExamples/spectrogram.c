@@ -104,15 +104,15 @@ int main(int argc, char** argv)
   }
 
   // Initialise FFT
-  SIF_Fft(pFFTCoeffs,                 // Pointer to FFT coefficients
-          SIGLIB_BIT_REV_STANDARD,    // Bit reverse mode flag / Pointer to bit
-                                      // reverse address table
-          fftLength);                 // FFT length
-                                      // Generate Hanning window table
-  SIF_Window(pWindowCoeffs,           // Pointer to window oefficient
-             SIGLIB_HANNING,          // Window type
-             SIGLIB_ZERO,             // Window coefficient
-             fftLength);              // Window length
+  SIF_Fft(pFFTCoeffs,                   // Pointer to FFT coefficients
+          SIGLIB_BIT_REV_STANDARD,      // Bit reverse mode flag / Pointer to bit
+                                        // reverse address table
+          fftLength);                   // FFT length
+                                        // Generate Hanning window table
+  SIF_Window(pWindowCoeffs,             // Pointer to window oefficient
+             SIGLIB_HANNING_FOURIER,    // Window type
+             SIGLIB_ZERO,               // Window coefficient
+             fftLength);                // Window length
 
   SIF_CopyWithOverlap(&overlapSrcArrayIndex);    // Pointer to source array index
 

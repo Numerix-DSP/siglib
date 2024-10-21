@@ -2422,14 +2422,6 @@ public class siglib_wrap implements siglib_wrapConstants {
     siglib_wrapJNI.SDA_LogMagnitudeAndPhaseUnWrapped(SWIGTYPE_p_double.getCPtr(arg0), SWIGTYPE_p_double.getCPtr(arg1), SWIGTYPE_p_double.getCPtr(arg2), SWIGTYPE_p_double.getCPtr(arg3), arg4);
   }
 
-  public static void SDA_Lengthen(SWIGTYPE_p_double arg0, SWIGTYPE_p_double arg1, int arg2, int arg3) {
-    siglib_wrapJNI.SDA_Lengthen(SWIGTYPE_p_double.getCPtr(arg0), SWIGTYPE_p_double.getCPtr(arg1), arg2, arg3);
-  }
-
-  public static void SDA_Shorten(SWIGTYPE_p_double arg0, SWIGTYPE_p_double arg1, int arg2) {
-    siglib_wrapJNI.SDA_Shorten(SWIGTYPE_p_double.getCPtr(arg0), SWIGTYPE_p_double.getCPtr(arg1), arg2);
-  }
-
   public static void SIF_ReSize(SWIGTYPE_p_int arg0) {
     siglib_wrapJNI.SIF_ReSize(SWIGTYPE_p_int.getCPtr(arg0));
   }

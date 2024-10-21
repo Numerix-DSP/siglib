@@ -92,10 +92,11 @@ int main(void)
          "<Carriage Return> to continue . . .");
   getchar();
 
-  SDA_Lengthen(pRCFCoeffs,       // Pointer to source array
-               pRealData,        // Pointer to destination array
-               FILTER_LENGTH,    // Source array size
-               FFT_LENGTH);      // Destination array size
+  SDA_ZeroPad(pRCFCoeffs,                    // Pointer to source array
+              pRealData,                     // Pointer to destination array
+              0,                             // Pre-pad length
+              FFT_LENGTH - FILTER_LENGTH,    // Source array length
+              FILTER_LENGTH);                // Source array length
 
   // Frequency domain calculation
   // Perform real FFT
@@ -131,10 +132,11 @@ int main(void)
               "blue",                                                                         // Colour
               GPC_NEW);                                                                       // New graph
 
-  SDA_Lengthen(pRRCFCoeffs,      // Pointer to source array
-               pRealData,        // Pointer to destination array
-               FILTER_LENGTH,    // Source array size
-               FFT_LENGTH);      // Destination array size
+  SDA_ZeroPad(pRRCFCoeffs,                   // Pointer to source array
+              pRealData,                     // Pointer to destination array
+              0,                             // Pre-pad length
+              FFT_LENGTH - FILTER_LENGTH,    // Source array length
+              FILTER_LENGTH);                // Source array length
 
   // Frequency domain calculation
   // Perform real FFT

@@ -13,7 +13,7 @@ CBuffer::CBuffer()
 
 void CBuffer::Create()
 {
-    BufSize = 0;            // Init array size to 0
+    BufSize = 0;            // Init array length to 0
 }
 
 HANDLE CBuffer::GetHandle() const

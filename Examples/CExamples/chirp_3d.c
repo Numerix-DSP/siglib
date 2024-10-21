@@ -54,15 +54,15 @@ int main(void)
   }
 
   // Initialise FFT
-  SIF_Fft(pFFTCoeffs,                 // Pointer to FFT coefficients
-          SIGLIB_BIT_REV_STANDARD,    // Bit reverse mode flag / Pointer to bit
-                                      // reverse address table
-          FFT_LENGTH);                // FFT length
-                                      // Generate Hanning window table
-  SIF_Window(pWindowCoeffs,           // Pointer to window oefficient
-             SIGLIB_RECTANGLE,        // Window type
-             SIGLIB_ZERO,             // Window coefficient
-             WINDOW_LENGTH);          // Window length
+  SIF_Fft(pFFTCoeffs,                     // Pointer to FFT coefficients
+          SIGLIB_BIT_REV_STANDARD,        // Bit reverse mode flag / Pointer to bit
+                                          // reverse address table
+          FFT_LENGTH);                    // FFT length
+                                          // Generate Hanning window table
+  SIF_Window(pWindowCoeffs,               // Pointer to window oefficient
+             SIGLIB_RECTANGLE_FOURIER,    // Window type
+             SIGLIB_ZERO,                 // Window coefficient
+             WINDOW_LENGTH);              // Window length
 
   ChirpPhase1 = SIGLIB_ZERO;
   ChirpPhase2 = SIGLIB_ZERO;

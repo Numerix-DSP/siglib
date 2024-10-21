@@ -62,28 +62,28 @@ int main(void)
   getchar();
 
   // Initialise FFT
-  SIF_Fft(pFFTCoeffs,                  // Pointer to FFT coefficients
-          SIGLIB_BIT_REV_STANDARD,     // Bit reverse mode flag / Pointer to bit
-                                       // reverse address table
-          FFT_LENGTH);                 // FFT length
-                                       // Generate Hanning window table
-  SIF_Window(pWindowCoeffs,            // Pointer to window oefficient
-             SIGLIB_HANNING,           // Window type
-             SIGLIB_ZERO,              // Window coefficient
-             FFT_LENGTH);              // Window length
-                                       // Apply window to data
-  SDA_Window(pRealData,                // Pointer to source array
-             pRealData,                // Pointer to destination array
-             pWindowCoeffs,            // Pointer to window coefficients
-             WINDOW_LENGTH);           // Window length
-                                       // Perform real FFT
-  SDA_Rfft(pRealData,                  // Pointer to real array
-           pImagData,                  // Pointer to imaginary array
-           pFFTCoeffs,                 // Pointer to FFT coefficients
-           SIGLIB_BIT_REV_STANDARD,    // Bit reverse mode flag / Pointer to bit
-                                       // reverse address table
-           FFT_LENGTH,                 // FFT length
-           LOG2_FFT_LENGTH);           // log2 FFT length
+  SIF_Fft(pFFTCoeffs,                   // Pointer to FFT coefficients
+          SIGLIB_BIT_REV_STANDARD,      // Bit reverse mode flag / Pointer to bit
+                                        // reverse address table
+          FFT_LENGTH);                  // FFT length
+                                        // Generate Hanning window table
+  SIF_Window(pWindowCoeffs,             // Pointer to window oefficient
+             SIGLIB_HANNING_FOURIER,    // Window type
+             SIGLIB_ZERO,               // Window coefficient
+             FFT_LENGTH);               // Window length
+                                        // Apply window to data
+  SDA_Window(pRealData,                 // Pointer to source array
+             pRealData,                 // Pointer to destination array
+             pWindowCoeffs,             // Pointer to window coefficients
+             WINDOW_LENGTH);            // Window length
+                                        // Perform real FFT
+  SDA_Rfft(pRealData,                   // Pointer to real array
+           pImagData,                   // Pointer to imaginary array
+           pFFTCoeffs,                  // Pointer to FFT coefficients
+           SIGLIB_BIT_REV_STANDARD,     // Bit reverse mode flag / Pointer to bit
+                                        // reverse address table
+           FFT_LENGTH,                  // FFT length
+           LOG2_FFT_LENGTH);            // log2 FFT length
 
   // Calculate real power from complex
   SDA_LogMagnitude(pRealData,      // Pointer to real source array

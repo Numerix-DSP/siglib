@@ -4351,17 +4351,6 @@ var
                                                const _5: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
 var
-  SDA_Lengthen: procedure(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
-                          var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
-                          const _3: SLARRAYINDEX_T;
-                          const _4: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
-
-var
-  SDA_Shorten: procedure(const SIGLIB_INPUT_PTR_DECL: PSLDATA_T;
-                         var SIGLIB_OUTPUT_PTR_DECL: SLDATA_T;
-                         const _3: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
-
-var
   SIF_ReSize: procedure(var _1: SLARRAYINDEX_T) cdecl  {$IFDEF WIN32} stdcall {$ENDIF};
 
 var
@@ -8031,14 +8020,6 @@ begin
     @SDA_LogMagnitudeAndPhaseUnWrapped := GetProcAddress(DLLHandle,'SDA_LogMagnitudeAndPhaseUnWrapped');
   {$IFDEF WIN32}
     Assert(@SDA_LogMagnitudeAndPhaseUnWrapped <> nil);
-  {$ENDIF}
-    @SDA_Lengthen := GetProcAddress(DLLHandle,'SDA_Lengthen');
-  {$IFDEF WIN32}
-    Assert(@SDA_Lengthen <> nil);
-  {$ENDIF}
-    @SDA_Shorten := GetProcAddress(DLLHandle,'SDA_Shorten');
-  {$IFDEF WIN32}
-    Assert(@SDA_Shorten <> nil);
   {$ENDIF}
     @SIF_ReSize := GetProcAddress(DLLHandle,'SIF_ReSize');
   {$IFDEF WIN32}

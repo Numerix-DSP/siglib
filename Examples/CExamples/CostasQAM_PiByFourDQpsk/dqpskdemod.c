@@ -599,7 +599,7 @@ int main(int argc, char** argv)
 #endif
 #if DISPLAY_FREQ_DOMAIN
       if (FirstNonZeroSampleIndex != SIGLIB_SIGNAL_NOT_PRESENT) {
-        if (plot_frequency_domain(pData, SIGLIB_FLAT_TOP, "FFT Of Modulated Data", ProcessSampleLength, SAMPLE_LENGTH) != SIGLIB_NO_ERROR) {
+        if (plot_frequency_domain(pData, SIGLIB_FLAT_TOP_FOURIER, "FFT Of Modulated Data", ProcessSampleLength, SAMPLE_LENGTH) != SIGLIB_NO_ERROR) {
           fclose(pInputWavFile);
           printf("Memory allocation failure in plot_frequency_domain\n");
           exit(0);

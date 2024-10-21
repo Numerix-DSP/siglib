@@ -83,7 +83,7 @@ int main(void)
                                   FILTER_LENGTH);    // Filter length
                                                      // Generate window table
   SIF_Window(pWindowCoeffs,                          // Pointer to window oefficient
-             SIGLIB_KAISER,                          // Window type
+             SIGLIB_KAISER_FOURIER,                  // Window type
              SIGLIB_SIX,                             // Window coefficient
              FILTER_LENGTH);                         // Window length
   SDA_Window(pFilterTaps,                            // Pointer to filter coefficients

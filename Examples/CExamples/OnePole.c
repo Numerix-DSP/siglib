@@ -178,7 +178,7 @@ int main(int argc, char** argv)
                  pRealData,      // Pointer to destination array
                  8,              // Quantisation
                  SIGLIB_ONE,     // Peak value
-                 FFT_LENGTH);    // Source array size
+                 FFT_LENGTH);    // Source array length
 
     // Uncorrelated noise (8 bit )
     SDA_SignalGenerate(pRealData,               // Pointer to destination array

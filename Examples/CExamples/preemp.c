@@ -53,7 +53,7 @@ int main(void)
                         &PreEmphasisFilterState,     // Pointer to filter state
                         SAMPLE_LENGTH);              // Dataset length
 
-  plot_frequency_domain(pData, SIGLIB_FLAT_TOP, "Pre-emphasis Filter Response", SAMPLE_LENGTH, SAMPLE_LENGTH);
+  plot_frequency_domain(pData, SIGLIB_FLAT_TOP_FOURIER, "Pre-emphasis Filter Response", SAMPLE_LENGTH, SAMPLE_LENGTH);
   printf("Please hit <Carriage Return> to continue . . .\n");
   getchar();
 
@@ -77,7 +77,7 @@ int main(void)
          "to continue . . .");
   getchar();
 
-  plot_frequency_domain(pData, SIGLIB_FLAT_TOP, "Combined Filter Response", SAMPLE_LENGTH, SAMPLE_LENGTH);
+  plot_frequency_domain(pData, SIGLIB_FLAT_TOP_FOURIER, "Combined Filter Response", SAMPLE_LENGTH, SAMPLE_LENGTH);
 
   printf("\nHit <Carriage Return> to continue ....\n");
   getchar();    // Wait for <Carriage Return>

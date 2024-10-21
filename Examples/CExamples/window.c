@@ -13,11 +13,16 @@
 
 #define WINDOW_LENGTH 64
 
+#define SHORT_WINDOW_LENGTH 8
+#define SHORT_FLAT_TOP_LENGTH 4
+
 // Declare global variables and arrays
+
+SLData_t win[SHORT_WINDOW_LENGTH + SHORT_FLAT_TOP_LENGTH];
 
 // Macro to prepare FFT results
 #define prepFFT                                                                                                   \
-  SDA_Lengthen(pWindowCoeffs, pRealData, WINDOW_LENGTH, FFT_LENGTH);                                              \
+  SDA_ZeroPad(pWindowCoeffs, pRealData, 0, FFT_LENGTH - WINDOW_LENGTH, WINDOW_LENGTH);                            \
   /* Perform real FFT */                                                                                          \
   SDA_Rfft(pRealData,                                            /* Pointer to real array */                      \
            pImagData,                                            /* Pointer to imaginary array */                 \
@@ -47,25 +52,25 @@ int main(void)
   h_GPC_Plot* h2DTime;    // Plot object
   h_GPC_Plot* h2DFreq;
 
-  h2DTime =                                   // Initialize plot
-      gpc_init_2d("Time Domain Windowing",    // Plot title
-                  "Time",                     // X-Axis label
-                  "Magnitude",                // Y-Axis label
-                  GPC_AUTO_SCALE,             // Scaling mode
-                  GPC_SIGNED,                 // Sign mode
-                  GPC_KEY_ENABLE);            // Legend / key mode
+  h2DTime =                                 // Initialize plot
+      gpc_init_2d("Time Domain Windows",    // Plot title
+                  "Time",                   // X-Axis label
+                  "Magnitude",              // Y-Axis label
+                  GPC_AUTO_SCALE,           // Scaling mode
+                  GPC_SIGNED,               // Sign mode
+                  GPC_KEY_ENABLE);          // Legend / key mode
   if (NULL == h2DTime) {
     printf("\nPlot creation failure.\n");
     exit(-1);
   }
 
-  h2DFreq =                                   // Initialize plot
-      gpc_init_2d("Time Domain Windowing",    // Plot title
-                  "Frequency",                // X-Axis label
-                  "Magnitude (dB)",           // Y-Axis label
-                  GPC_AUTO_SCALE,             // Scaling mode
-                  GPC_SIGNED,                 // Sign mode
-                  GPC_KEY_ENABLE);            // Legend / key mode
+  h2DFreq =                                                       // Initialize plot
+      gpc_init_2d("Frequency Response Of Time Domain Windows",    // Plot title
+                  "Frequency",                                    // X-Axis label
+                  "Magnitude (dB)",                               // Y-Axis label
+                  GPC_AUTO_SCALE,                                 // Scaling mode
+                  GPC_SIGNED,                                     // Sign mode
+                  GPC_KEY_ENABLE);                                // Legend / key mode
   if (NULL == h2DTime) {
     printf("\nPlot creation failure.\n");
     exit(-1);
@@ -86,10 +91,10 @@ int main(void)
           FFT_LENGTH);                // FFT length
 
   // Generate Rectangular window table
-  SIF_Window(pWindowCoeffs,       // Pointer to window oefficient
-             SIGLIB_RECTANGLE,    // Window type
-             SIGLIB_ZERO,         // Window coefficient
-             WINDOW_LENGTH);      // Window length
+  SIF_Window(pWindowCoeffs,               // Pointer to window oefficient
+             SIGLIB_RECTANGLE_FOURIER,    // Window type
+             SIGLIB_ZERO,                 // Window coefficient
+             WINDOW_LENGTH);              // Window length
 
   printf("\nRectangle window:\n");
   printf("\tInverse coherent gain      = %lf\n", SDA_WindowInverseCoherentGain(pWindowCoeffs, WINDOW_LENGTH));
@@ -116,10 +121,10 @@ int main(void)
               GPC_NEW);                    // New graph
 
   // Generate Hanning window table
-  SIF_Window(pWindowCoeffs,     // Pointer to window oefficient
-             SIGLIB_HANNING,    // Window type
-             SIGLIB_ZERO,       // Window coefficient
-             WINDOW_LENGTH);    // Window length
+  SIF_Window(pWindowCoeffs,             // Pointer to window oefficient
+             SIGLIB_HANNING_FOURIER,    // Window type
+             SIGLIB_ZERO,               // Window coefficient
+             WINDOW_LENGTH);            // Window length
 
   printf("Hanning window:\n");
   printf("\tInverse coherent gain      = %lf\n", SDA_WindowInverseCoherentGain(pWindowCoeffs, WINDOW_LENGTH));
@@ -146,11 +151,11 @@ int main(void)
               GPC_ADD);                    // New graph
 
   // Generate table top Hanning window table
-  SIF_TableTopWindow(pWindowCoeffs,     // Pointer to window oefficient
-                     SIGLIB_HANNING,    // Window type
-                     SIGLIB_ZERO,       // Window coefficient
-                     12,                // Flat top section length
-                     WINDOW_LENGTH);    // Window length
+  SIF_TableTopWindow(pWindowCoeffs,             // Pointer to window oefficient
+                     SIGLIB_HANNING_FOURIER,    // Window type
+                     SIGLIB_ZERO,               // Window coefficient
+                     12,                        // Flat top section length
+                     WINDOW_LENGTH);            // Window length
 
   printf("Table-Top Hanning window:\n");
   printf("\tInverse coherent gain      = %lf\n", SDA_WindowInverseCoherentGain(pWindowCoeffs, WINDOW_LENGTH));
@@ -177,10 +182,10 @@ int main(void)
               GPC_ADD);                      // New graph
 
   // Generate window table
-  SIF_Window(pWindowCoeffs,     // Pointer to window oefficient
-             SIGLIB_HAMMING,    // Window type
-             SIGLIB_ZERO,       // Window coefficient
-             WINDOW_LENGTH);    // Window length
+  SIF_Window(pWindowCoeffs,             // Pointer to window oefficient
+             SIGLIB_HAMMING_FOURIER,    // Window type
+             SIGLIB_ZERO,               // Window coefficient
+             WINDOW_LENGTH);            // Window length
 
   printf("Hamming window:\n");
   printf("\tInverse coherent gain      = %lf\n", SDA_WindowInverseCoherentGain(pWindowCoeffs, WINDOW_LENGTH));
@@ -207,10 +212,10 @@ int main(void)
               GPC_ADD);                    // New graph
 
   // Generate window table
-  SIF_Window(pWindowCoeffs,      // Pointer to window oefficient
-             SIGLIB_BLACKMAN,    // Window type
-             SIGLIB_ZERO,        // Window coefficient
-             WINDOW_LENGTH);     // Window length
+  SIF_Window(pWindowCoeffs,              // Pointer to window oefficient
+             SIGLIB_BLACKMAN_FOURIER,    // Window type
+             SIGLIB_ZERO,                // Window coefficient
+             WINDOW_LENGTH);             // Window length
 
   printf("Blackman window:\n");
   printf("\tInverse coherent gain      = %lf\n", SDA_WindowInverseCoherentGain(pWindowCoeffs, WINDOW_LENGTH));
@@ -237,10 +242,10 @@ int main(void)
               GPC_ADD);                    // New graph
 
   // Generate window table
-  SIF_Window(pWindowCoeffs,                               // Pointer to window oefficient
-             SIGLIB_BARTLETT_TRIANGLE_ZERO_END_POINTS,    // Window type
-             SIGLIB_ZERO,                                 // Window coefficient
-             WINDOW_LENGTH);                              // Window length
+  SIF_Window(pWindowCoeffs,                                       // Pointer to window oefficient
+             SIGLIB_BARTLETT_TRIANGLE_ZERO_END_POINTS_FOURIER,    // Window type
+             SIGLIB_ZERO,                                         // Window coefficient
+             WINDOW_LENGTH);                                      // Window length
 
   printf("Bartlett / Triangle window (zero end points):\n");
   printf("\tInverse coherent gain      = %lf\n", SDA_WindowInverseCoherentGain(pWindowCoeffs, WINDOW_LENGTH));
@@ -267,10 +272,10 @@ int main(void)
               GPC_ADD);                                          // New graph
 
   // Generate window table
-  SIF_Window(pWindowCoeffs,                                   // Pointer to window oefficient
-             SIGLIB_BARTLETT_TRIANGLE_NON_ZERO_END_POINTS,    // Window type
-             SIGLIB_ZERO,                                     // Window coefficient
-             WINDOW_LENGTH);                                  // Window length
+  SIF_Window(pWindowCoeffs,                                           // Pointer to window oefficient
+             SIGLIB_BARTLETT_TRIANGLE_NON_ZERO_END_POINTS_FOURIER,    // Window type
+             SIGLIB_ZERO,                                             // Window coefficient
+             WINDOW_LENGTH);                                          // Window length
 
   printf("Bartlett / Triangle window (non-zero end points):\n");
   printf("\tInverse coherent gain      = %lf\n", SDA_WindowInverseCoherentGain(pWindowCoeffs, WINDOW_LENGTH));
@@ -297,10 +302,10 @@ int main(void)
               GPC_ADD);                                              // New graph
 
   // Generate window table
-  SIF_Window(pWindowCoeffs,     // Pointer to window oefficient
-             SIGLIB_KAISER,     // Window type
-             SIGLIB_SIX,        // Window coefficient
-             WINDOW_LENGTH);    // Window length
+  SIF_Window(pWindowCoeffs,            // Pointer to window oefficient
+             SIGLIB_KAISER_FOURIER,    // Window type
+             SIGLIB_SIX,               // Window coefficient
+             WINDOW_LENGTH);           // Window length
 
   printf("Kaiser window:\n");
   printf("\tInverse coherent gain      = %lf\n", SDA_WindowInverseCoherentGain(pWindowCoeffs, WINDOW_LENGTH));
@@ -327,10 +332,10 @@ int main(void)
               GPC_ADD);                    // New graph
 
   // Generate window table
-  SIF_Window(pWindowCoeffs,             // Pointer to window oefficient
-             SIGLIB_BLACKMAN_HARRIS,    // Window type
-             SIGLIB_ZERO,               // Window coefficient
-             WINDOW_LENGTH);            // Window length
+  SIF_Window(pWindowCoeffs,                     // Pointer to window oefficient
+             SIGLIB_BLACKMAN_HARRIS_FOURIER,    // Window type
+             SIGLIB_ZERO,                       // Window coefficient
+             WINDOW_LENGTH);                    // Window length
 
   printf("Blackman-Harris window:\n");
   printf("\tInverse coherent gain      = %lf\n", SDA_WindowInverseCoherentGain(pWindowCoeffs, WINDOW_LENGTH));
@@ -357,10 +362,10 @@ int main(void)
               GPC_ADD);                    // New graph
 
   // Generate flat-top window table
-  SIF_Window(pWindowCoeffs,      // Pointer to window oefficient
-             SIGLIB_FLAT_TOP,    // Window type
-             SIGLIB_ZERO,        // Window coefficient
-             WINDOW_LENGTH);     // Window length
+  SIF_Window(pWindowCoeffs,              // Pointer to window oefficient
+             SIGLIB_FLAT_TOP_FOURIER,    // Window type
+             SIGLIB_ZERO,                // Window coefficient
+             WINDOW_LENGTH);             // Window length
 
   printf("Flat-Top window:\n");
   printf("\tInverse coherent gain      = %lf\n", SDA_WindowInverseCoherentGain(pWindowCoeffs, WINDOW_LENGTH));
@@ -395,6 +400,37 @@ int main(void)
   SUF_MemoryFree(pSrc);    // Free memory
   SUF_MemoryFree(pDst);
   SUF_MemoryFree(pWindowCoeffs);
+
+  // Verify flat top windows
+  printf("SIGLIB_HANNING_FOURIER - Normal Window (Asymmetrical)\n");
+  SIF_Window(win,                       // Pointer to window oefficient
+             SIGLIB_HANNING_FOURIER,    // Window type
+             SIGLIB_ZERO,               // Window coefficient
+             SHORT_WINDOW_LENGTH);      // Window length
+  SUF_PrintArray(win, SHORT_WINDOW_LENGTH);
+
+  printf("SIGLIB_HANNING_FOURIER - Flat-Top Window (Asymmetrical)\n");
+  SIF_TableTopWindow(win,                                             // Pointer to window oefficient
+                     SIGLIB_HANNING_FOURIER,                          // Window type
+                     SIGLIB_ZERO,                                     // Window coefficient
+                     SHORT_FLAT_TOP_LENGTH,                           // Flat top section length
+                     SHORT_WINDOW_LENGTH + SHORT_FLAT_TOP_LENGTH);    // Window length
+  SUF_PrintArray(win, SHORT_WINDOW_LENGTH + SHORT_FLAT_TOP_LENGTH);
+
+  printf("SIGLIB_HANNING_FILTER - Normal Window (Symmetrical)\n");
+  SIF_Window(win,                      // Pointer to window oefficient
+             SIGLIB_HANNING_FILTER,    // Window type
+             SIGLIB_ZERO,              // Window coefficient
+             SHORT_WINDOW_LENGTH);     // Window length
+  SUF_PrintArray(win, SHORT_WINDOW_LENGTH);
+
+  printf("SIGLIB_HANNING_FILTER - Flat-Top Window (Symmetrical)\n");
+  SIF_TableTopWindow(win,                                             // Pointer to window oefficient
+                     SIGLIB_HANNING_FILTER,                           // Window type
+                     SIGLIB_ZERO,                                     // Window coefficient
+                     SHORT_FLAT_TOP_LENGTH,                           // Flat top section length
+                     SHORT_WINDOW_LENGTH + SHORT_FLAT_TOP_LENGTH);    // Window length
+  SUF_PrintArray(win, SHORT_WINDOW_LENGTH + SHORT_FLAT_TOP_LENGTH);
 
   return (0);
 }
