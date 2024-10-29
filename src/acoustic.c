@@ -44,20 +44,20 @@ Description: Acoustic signal processing functions, for SigLib DSP library.
  * Function: SDA_LinearMicrophoneArrayBeamPattern
  *
  * Parameters:
- *    const SLFixData_t numMics,
- *    const SLData_t micSpacing,
- *    const SLData_t sourceFrequency,
- *    SLData_t *beamAngles,
- *    SLData_t *beamGains,
- *    const SLData_t startAngle,
- *    const SLData_t endAngle,
- *    const SLFixData_t numAngles)
+ *   const SLFixData_t numMics,
+ *   const SLData_t micSpacing,
+ *   const SLData_t sourceFrequency,
+ *   SLData_t *beamAngles,
+ *   SLData_t *beamGains,
+ *   const SLData_t startAngle,
+ *   const SLData_t endAngle,
+ *   const SLFixData_t numAngles)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Returns the beam pattern for the linear microphone array.
+ *  Returns the beam pattern for the linear microphone array.
  *
  ********************************************************/
 
@@ -99,20 +99,20 @@ void SIGLIB_FUNC_DECL SDA_LinearMicrophoneArrayBeamPattern(const SLFixData_t num
  * Function: SDA_LinearMicrophoneArrayBeamPatternLinear
  *
  * Parameters:
- *    const SLFixData_t numMics,
- *    const SLData_t micSpacing,
- *    const SLData_t sourceFrequency,
- *    SLData_t *beamAngles,
- *    SLData_t *beamGains,
- *    const SLData_t startAngle,
- *    const SLData_t endAngle,
- *    const SLFixData_t numAngles)
+ *   const SLFixData_t numMics,
+ *   const SLData_t micSpacing,
+ *   const SLData_t sourceFrequency,
+ *   SLData_t *beamAngles,
+ *   SLData_t *beamGains,
+ *   const SLData_t startAngle,
+ *   const SLData_t endAngle,
+ *   const SLFixData_t numAngles)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Returns the beam pattern for the linear microphone array.
+ *  Returns the beam pattern for the linear microphone array.
  *
  ********************************************************/
 
@@ -152,16 +152,16 @@ void SIGLIB_FUNC_DECL SDA_LinearMicrophoneArrayBeamPatternLinear(const SLFixData
  * Function: SDA_MicrophoneArrayCalculateDelays
  *
  * Parameters:
- *   const SLFixData_t numMics,
- *   SLMicrophone_s *microphones,
- *   const SLData_t beamAngle)
+ *  const SLFixData_t numMics,
+ *  SLMicrophone_s *microphones,
+ *  const SLData_t beamAngle)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Calculate the delays to point the beam pattern in
- *   a specific direction
+ *  Calculate the delays to point the beam pattern in
+ *  a specific direction
  *
  ********************************************************/
 
@@ -201,22 +201,22 @@ void SIGLIB_FUNC_DECL SDA_MicrophoneArrayCalculateDelays(const SLFixData_t numMi
  * Function: SDA_MicrophoneArrayBeamPattern
  *
  * Parameters:
- *   const SLFixData_t numMics,
- *   const SLMicrophone_s *microphones,
- *   const SLData_t sourceFrequency,
- *   const SLData_t sourceRadius,
- *   SLData_t *responseAngles,
- *   SLData_t *responseGains,
- *   const SLData_t startAngle,
- *   const SLData_t endAngle,
- *   const SLFixData_t numAngles,
- *   const SLData_t sampleRate)
+ *  const SLFixData_t numMics,
+ *  const SLMicrophone_s *microphones,
+ *  const SLData_t sourceFrequency,
+ *  const SLData_t sourceRadius,
+ *  SLData_t *responseAngles,
+ *  SLData_t *responseGains,
+ *  const SLData_t startAngle,
+ *  const SLData_t endAngle,
+ *  const SLFixData_t numAngles,
+ *  const SLData_t sampleRate)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Returns the beam pattern for an arbitrary microphone array.
+ *  Returns the beam pattern for an arbitrary microphone array.
  *
  ********************************************************/
 
@@ -272,22 +272,22 @@ void SIGLIB_FUNC_DECL SDA_MicrophoneArrayBeamPattern(const SLFixData_t numMics, 
  * Function: SDA_MicrophoneArrayBeamPatternLinear
  *
  * Parameters:
- *   const SLFixData_t numMics,
- *   const SLMicrophone_s *microphones,
- *   const SLData_t sourceFrequency,
- *   const SLData_t sourceRadius,
- *   SLData_t *responseAngles,
- *   SLData_t *responseGains,
- *   const SLData_t startAngle,
- *   const SLData_t endAngle,
- *   const SLFixData_t numAngles,
- *   const SLData_t sampleRate)
+ *  const SLFixData_t numMics,
+ *  const SLMicrophone_s *microphones,
+ *  const SLData_t sourceFrequency,
+ *  const SLData_t sourceRadius,
+ *  SLData_t *responseAngles,
+ *  SLData_t *responseGains,
+ *  const SLData_t startAngle,
+ *  const SLData_t endAngle,
+ *  const SLFixData_t numAngles,
+ *  const SLData_t sampleRate)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Returns the beam pattern for an arbitrary microphone array.
+ *  Returns the beam pattern for an arbitrary microphone array.
  *
  ********************************************************/
 
@@ -341,13 +341,13 @@ void SIGLIB_FUNC_DECL SDA_MicrophoneArrayBeamPatternLinear(const SLFixData_t num
  * Function: SDA_MicrophoneArrayBeamPatternLinear
  *
  * Parameters:
- *   const SLData_t temp)
+ *  const SLData_t temp)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Returns the beam pattern for an arbitrary microphone array.
+ *  Returns the beam pattern for an arbitrary microphone array.
  *
  ********************************************************/
 

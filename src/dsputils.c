@@ -44,16 +44,16 @@ Description: DSP utility functions, for SigLib DSP library.
  * Function: SDA_Rotate
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t pDst[],
- *   const SLArrayIndex_t Rotation,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t pDst[],
+ *  const SLArrayIndex_t Rotation,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Rotate the locations of data the source array
+ *  Rotate the locations of data the source array
  *
  ********************************************************/
 
@@ -86,15 +86,15 @@ void SIGLIB_FUNC_DECL SDA_Rotate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  * Function: SDA_Reverse
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Reverse the locations of data in the source array
+ *  Reverse the locations of data in the source array
  *
  ********************************************************/
 
@@ -131,18 +131,18 @@ void SIGLIB_FUNC_DECL SDA_Reverse(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
  * Function: SDA_Scale
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLData_t MaximumScaledValue,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLData_t MaximumScaledValue,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   SLData_t scalar
+ *  SLData_t scalar
  *
  * Description:
- *   Find the maximum value in the source array, and scale
- *   all the entries so that the maximum equals the
- *   parameter MaximumScaledValue.
+ *  Find the maximum value in the source array, and scale
+ *  all the entries so that the maximum equals the
+ *  parameter MaximumScaledValue.
  *
  ********************************************************/
 
@@ -176,11 +176,11 @@ SLData_t SIGLIB_FUNC_DECL SDA_Scale(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData
  * Function: SDA_MeanSquare
  *
  * Parameters:
- *   SLData_t    *pSrc - Source data array pointer
- *   SLArrayIndex_t  ArrayLength - Array length
+ *  SLData_t    *pSrc - Source data array pointer
+ *  SLArrayIndex_t  ArrayLength - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Return the mean square value of the data.
  *
@@ -217,16 +217,16 @@ SLData_t SIGLIB_FUNC_DECL SDA_MeanSquare(const SLData_t* SIGLIB_PTR_DECL pSrc, c
  * Function: SDA_MeanSquareError
  *
  * Parameters:
- *   const SLData_t  *pSrc1
- *   const SLData_t  *pSrc2
- *   const SLData_t InverseArrayLength,  - Inverse of array length
- *   const SLArrayIndex_t    ArrayLength
+ *  const SLData_t  *pSrc1
+ *  const SLData_t  *pSrc2
+ *  const SLData_t InverseArrayLength,  - Inverse of array length
+ *  const SLArrayIndex_t    ArrayLength
  *
  * Return value:
- *   SLData_t    MSE
+ *  SLData_t    MSE
  *
  * Description:
- *   Calculate the MSE between 2 vectors.
+ *  Calculate the MSE between 2 vectors.
  *
  ********************************************************/
 
@@ -259,14 +259,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_MeanSquareError(const SLData_t* SIGLIB_PTR_DECL pS
  * Function: SDA_RootMeanSquare
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc   - Data array pointer
- *   const SLArrayIndex_t ArrayLength        - Array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc   - Data array pointer
+ *  const SLArrayIndex_t ArrayLength        - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Return the root mean square value of
- *   the data.
+ *  the data.
  *
  ********************************************************/
 
@@ -301,16 +301,16 @@ SLData_t SIGLIB_FUNC_DECL SDA_RootMeanSquare(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SDA_RootMeanSquareError
  *
  * Parameters:
- *   const SLData_t  *pSrc1
- *   const SLData_t  *pSrc2
- *   const SLData_t InverseArrayLength,  - Inverse of array length
- *   const SLArrayIndex_t    ArrayLength
+ *  const SLData_t  *pSrc1
+ *  const SLData_t  *pSrc2
+ *  const SLData_t InverseArrayLength,  - Inverse of array length
+ *  const SLArrayIndex_t    ArrayLength
  *
  * Return value:
- *   SLData_t    MSE
+ *  SLData_t    MSE
  *
  * Description:
- *   Calculate the MSE between 2 vectors.
+ *  Calculate the MSE between 2 vectors.
  *
  ********************************************************/
 
@@ -343,16 +343,16 @@ SLData_t SIGLIB_FUNC_DECL SDA_RootMeanSquareError(const SLData_t* SIGLIB_PTR_DEC
  * Function: SDA_Magnitude
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Calculate magnitude of the complex data.
+ *  Calculate magnitude of the complex data.
  *
  ********************************************************/
 
@@ -383,16 +383,16 @@ void SIGLIB_FUNC_DECL SDA_Magnitude(const SLData_t* SIGLIB_PTR_DECL pSrcReal, co
  * Function: SDA_MagnitudeSquared
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Calculate magnitude squared of the complex data.
+ *  Calculate magnitude squared of the complex data.
  *
  ********************************************************/
 
@@ -423,14 +423,14 @@ void SIGLIB_FUNC_DECL SDA_MagnitudeSquared(const SLData_t* SIGLIB_PTR_DECL pSrcR
  * Function: SDS_Magnitude
  *
  * Parameters:
- *   const SLData_t  RealSrc,
- *   const SLData_t  ImagSrc,
+ *  const SLData_t  RealSrc,
+ *  const SLData_t  ImagSrc,
  *
  * Return value:
- *   SLData_t Phase
+ *  SLData_t Phase
  *
  * Description:
- *   Calculate magnitude from complex data sample.
+ *  Calculate magnitude from complex data sample.
  *
  ********************************************************/
 
@@ -443,14 +443,14 @@ SLData_t SIGLIB_FUNC_DECL SDS_Magnitude(const SLData_t RealSrc, const SLData_t I
  * Function: SDS_MagnitudeSquared
  *
  * Parameters:
- *   const SLData_t  RealSrc,
- *   const SLData_t  ImagSrc,
+ *  const SLData_t  RealSrc,
+ *  const SLData_t  ImagSrc,
  *
  * Return value:
- *   SLData_t Phase
+ *  SLData_t Phase
  *
  * Description:
- *   Calculate magnitude from complex data sample.
+ *  Calculate magnitude from complex data sample.
  *
  ********************************************************/
 
@@ -463,14 +463,14 @@ SLData_t SIGLIB_FUNC_DECL SDS_MagnitudeSquared(const SLData_t RealSrc, const SLD
  * Function: SDS_Phase
  *
  * Parameters:
- *   const SLData_t  RealSrc,
- *   const SLData_t  ImagSrc,
+ *  const SLData_t  RealSrc,
+ *  const SLData_t  ImagSrc,
  *
  * Return value:
- *   SLData_t Phase
+ *  SLData_t Phase
  *
  * Description:
- *   Calculate phase from complex data sample.
+ *  Calculate phase from complex data sample.
  *
  ********************************************************/
 
@@ -487,17 +487,17 @@ SLData_t SIGLIB_FUNC_DECL SDS_Phase(const SLData_t RealSrc, const SLData_t ImagS
  * Function: SDA_PhaseWrapped
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Calculate the phase from the complex data. The phase
- *   is wrapped between -PI and +PI
+ *  Calculate the phase from the complex data. The phase
+ *  is wrapped between -PI and +PI
  *
  ********************************************************/
 
@@ -520,17 +520,17 @@ void SIGLIB_FUNC_DECL SDA_PhaseWrapped(const SLData_t* SIGLIB_PTR_DECL pSrcReal,
  * Function: SDA_PhaseUnWrapped
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Calculate the phase from the complex data. The phase
- *   is NOT wrapped between -PI and +PI
+ *  Calculate the phase from the complex data. The phase
+ *  is NOT wrapped between -PI and +PI
  *
  ********************************************************/
 
@@ -556,17 +556,17 @@ void SIGLIB_FUNC_DECL SDA_PhaseUnWrapped(const SLData_t* SIGLIB_PTR_DECL pSrcRea
  * Function: SDA_MagnitudeAndPhaseWrapped
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   SLData_t * SIGLIB_PTR_DECL pMagnDst,
- *   SLData_t * SIGLIB_PTR_DECL pPhaseDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  SLData_t * SIGLIB_PTR_DECL pMagnDst,
+ *  SLData_t * SIGLIB_PTR_DECL pPhaseDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Calculate magnitude and phase of the complex data.
+ *  Calculate magnitude and phase of the complex data.
  *
  ********************************************************/
 
@@ -593,17 +593,17 @@ void SIGLIB_FUNC_DECL SDA_MagnitudeAndPhaseWrapped(const SLData_t* SIGLIB_PTR_DE
  * Function: SDA_MagnitudeAndPhaseUnWrapped
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   SLData_t * SIGLIB_PTR_DECL pMagnDst,
- *   SLData_t * SIGLIB_PTR_DECL pPhaseDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  SLData_t * SIGLIB_PTR_DECL pMagnDst,
+ *  SLData_t * SIGLIB_PTR_DECL pPhaseDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Calculate magnitude and phase of the complex data.
+ *  Calculate magnitude and phase of the complex data.
  *
  ********************************************************/
 
@@ -634,18 +634,18 @@ void SIGLIB_FUNC_DECL SDA_MagnitudeAndPhaseUnWrapped(const SLData_t* SIGLIB_PTR_
  * Function: SDA_MagnitudeSquaredAndPhaseWrapped
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   SLData_t * SIGLIB_PTR_DECL pMagnDst,
- *   SLData_t * SIGLIB_PTR_DECL pPhaseDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  SLData_t * SIGLIB_PTR_DECL pMagnDst,
+ *  SLData_t * SIGLIB_PTR_DECL pPhaseDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Calculate magnitude squared and phase of the complex
- *   data.
+ *  Calculate magnitude squared and phase of the complex
+ *  data.
  *
  ********************************************************/
 
@@ -672,18 +672,18 @@ void SIGLIB_FUNC_DECL SDA_MagnitudeSquaredAndPhaseWrapped(const SLData_t* SIGLIB
  * Function: SDA_MagnitudeSquaredAndPhaseUnWrapped
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   SLData_t * SIGLIB_PTR_DECL pMagnDst,
- *   SLData_t * SIGLIB_PTR_DECL pPhaseDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  SLData_t * SIGLIB_PTR_DECL pMagnDst,
+ *  SLData_t * SIGLIB_PTR_DECL pPhaseDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Calculate magnitude squared and phase of the complex
- *   data.
+ *  Calculate magnitude squared and phase of the complex
+ *  data.
  *
  ********************************************************/
 
@@ -714,15 +714,15 @@ void SIGLIB_FUNC_DECL SDA_MagnitudeSquaredAndPhaseUnWrapped(const SLData_t* SIGL
  * Function: SDA_PhaseWrap
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Wrap the phase signal between -PI and +PI.
+ *  Wrap the phase signal between -PI and +PI.
  *
  ********************************************************/
 
@@ -754,16 +754,16 @@ void SIGLIB_FUNC_DECL SDA_PhaseWrap(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData
  * Function: SDA_PhaseUnWrap
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Unwrap a phase signal that has been wrapped between
- *   -PI and +PI
+ *  Unwrap a phase signal that has been wrapped between
+ *  -PI and +PI
  *
  ********************************************************/
 
@@ -799,20 +799,20 @@ void SIGLIB_FUNC_DECL SDA_PhaseUnWrap(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
  * Function: SDS_Log2
  *
  * Parameters:
- *   const SLData_t src
+ *  const SLData_t src
  *
  * Return value:
  *
  * Description:
- *   Return the Log base 2 of a number using:
+ *  Return the Log base 2 of a number using:
  *
- *   Log x   Log  x
- *      2  =    10
- *           ------
- *           Log  2
- *              10
+ *  Log x   Log  x
+ *     2  =    10
+ *          ------
+ *          Log  2
+ *             10
  *
- *   where: 1/Log10(2) = 3.32192809488736234787031942948939
+ *  where: 1/Log10(2) = 3.32192809488736234787031942948939
  *
  ********************************************************/
 
@@ -829,23 +829,23 @@ SLData_t SIGLIB_FUNC_DECL SDS_Log2(const SLData_t Src)
  * Function: SDA_Log2
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc
- *   SLData_t * SIGLIB_PTR_DECL pDst
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc
+ *  SLData_t * SIGLIB_PTR_DECL pDst
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Return the Log base 2 of the array contents:
+ *  Return the Log base 2 of the array contents:
  *
- *   Log x   Log  x
- *      2  =    10
- *           ------
- *           Log  2
- *              10
+ *  Log x   Log  x
+ *     2  =    10
+ *          ------
+ *          Log  2
+ *             10
  *
- *   where: 1/Log10(2) = 3.32192809488736234787031942948939
+ *  where: 1/Log10(2) = 3.32192809488736234787031942948939
  *
  ********************************************************/
 
@@ -882,19 +882,19 @@ void SIGLIB_FUNC_DECL SDA_Log2(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* S
  * Function: SDS_LogN
  *
  * Parameters:
- *   const SLData_t src
- *   const SLData_t baseNumber
+ *  const SLData_t src
+ *  const SLData_t baseNumber
  *
  * Return value:
  *
  * Description:
- *   Return the Log base N of a number using:
+ *  Return the Log base N of a number using:
  *
- *   Log x   Log  x
- *      N  =    10
- *           ------
- *           Log  N
- *              10
+ *  Log x   Log  x
+ *     N  =    10
+ *          ------
+ *          Log  N
+ *             10
  *
  ********************************************************/
 
@@ -911,22 +911,22 @@ SLData_t SIGLIB_FUNC_DECL SDS_LogN(const SLData_t Src, const SLData_t baseNumber
  * Function: SDA_LogN
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc
- *   SLData_t * SIGLIB_PTR_DECL pDst
- *   const SLData_t baseNumber
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc
+ *  SLData_t * SIGLIB_PTR_DECL pDst
+ *  const SLData_t baseNumber
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Return the Log base N of the array contents:
+ *  Return the Log base N of the array contents:
  *
- *   Log x   Log  x
- *      N  =    10
- *           ------
- *           Log  N
- *              10
+ *  Log x   Log  x
+ *     N  =    10
+ *          ------
+ *          Log  N
+ *             10
  *
  ********************************************************/
 
@@ -971,7 +971,7 @@ void SIGLIB_FUNC_DECL SDA_LogN(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* S
  *  const SLData_t mult     - Multiplication value
  *
  * Return value:
- *   Result sample
+ *  Result sample
  *
  * Description: Apply sigmoid function to the  sample.
  *
@@ -989,14 +989,14 @@ SLData_t SIGLIB_FUNC_DECL SDS_Sigmoid(const SLData_t x, const SLData_t shift, co
  * Function: SDA_Sigmoid
  *
  * Parameters:
- *  const SLData_t *        - Pointer to source sample
- *  SLData_t *              - Pointer to destination sample
+ *  const SLData_t *       - Pointer to source sample
+ *  SLData_t *             - Pointer to destination sample
  *  const SLData_t shift,   - Shift value
  *  const SLData_t mult     - Multiplication value
  *  const SLArrayIndex_t    - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Apply sigmoid function to the  samples.
  *
@@ -1023,16 +1023,16 @@ void SIGLIB_FUNC_DECL SDA_Sigmoid(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
  * Function: SDA_LogDistribution
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLData_t start,
- *   const SLData_t end,
- *   const SLArrayIndex_t numberOfSteps)
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLData_t start,
+ *  const SLData_t end,
+ *  const SLArrayIndex_t numberOfSteps)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Generate a sequence with a logarithmic distribution
+ *  Generate a sequence with a logarithmic distribution
  *
  ********************************************************/
 
@@ -1054,15 +1054,15 @@ void SIGLIB_FUNC_DECL SDA_LogDistribution(SLData_t* SIGLIB_PTR_DECL pDst, const 
  * Function: SDA_Copy
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc
- *   SLData_t * SIGLIB_PTR_DECL pDst
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc
+ *  SLData_t * SIGLIB_PTR_DECL pDst
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Copy an array's contenets
+ *  Copy an array's contenets
  *
  ********************************************************/
 
@@ -1089,18 +1089,18 @@ void SIGLIB_FUNC_DECL SDA_Copy(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* S
  * Function: SDA_CopyWithStride
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc
- *   SLArrayIndex_t SourceStride,
- *   SLData_t * SIGLIB_PTR_DECL pDst
- *   SLArrayIndex_t DestStride,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc
+ *  SLArrayIndex_t SourceStride,
+ *  SLData_t * SIGLIB_PTR_DECL pDst
+ *  SLArrayIndex_t DestStride,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Copy an array's contenets and increment the pointer
- *   with any arbitarary stride.
+ *  Copy an array's contenets and increment the pointer
+ *  with any arbitarary stride.
  *
  ********************************************************/
 
@@ -1125,13 +1125,13 @@ void SIGLIB_FUNC_DECL SDA_CopyWithStride(const SLData_t* SIGLIB_PTR_DECL pSrc, c
  * Function: SIF_CopyWithOverlap
  *
  * Parameters:
- *   SLArrayIndex_t * pSrcIndex      Pointer to src array index
+ *  SLArrayIndex_t * pSrcIndex      Pointer to src array index
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the copy with overlap function.
+ *  Initialise the copy with overlap function.
  *
  ********************************************************/
 
@@ -1144,22 +1144,22 @@ void SIGLIB_FUNC_DECL SIF_CopyWithOverlap(SLArrayIndex_t* pSrcIndex)
  * Function: SDA_CopyWithOverlap
  *
  * Parameters:
- *   const SLData_t * pSrc,          Pointer to src array
- *   SLData_t * pDst,                Pointer to dst array
- *   SLData_t * pOverlap,            Pointer to overlap array
- *   SLArrayIndex_t * pSrcIndex      Pointer to src array index
- *   SLArrayIndex_t SrcLength,       Source array length
- *   SLArrayIndex_t OverlapLength,   Overlap length
- *   SLArrayIndex_t DstLength)       Destination array length
+ *  const SLData_t * pSrc,          Pointer to src array
+ *  SLData_t * pDst,                Pointer to dst array
+ *  SLData_t * pOverlap,            Pointer to overlap array
+ *  SLArrayIndex_t * pSrcIndex      Pointer to src array index
+ *  SLArrayIndex_t SrcLength,       Source array length
+ *  SLArrayIndex_t OverlapLength,   Overlap length
+ *  SLArrayIndex_t DstLength)       Destination array length
  *
  * Return value:
- *   SLArrayIndex_t  Source index
+ *  SLArrayIndex_t  Source index
  *
  * Description:
- *   Copy the "destination array length" of data from the
- *   source array to the destination and ensure there are
- *   "overlap length" of samples overlapped between the
- *   two OUTPUT arrays.
+ *  Copy the "destination array length" of data from the
+ *  source array to the destination and ensure there are
+ *  "overlap length" of samples overlapped between the
+ *  two OUTPUT arrays.
  *
  ********************************************************/
 
@@ -1231,13 +1231,13 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CopyWithOverlap(const SLData_t* SIGLIB_PTR_D
  * Function: SIF_CopyWithIndex
  *
  * Parameters:
- *   SLArrayIndex_t * pSrcIndex      Pointer to src array index
+ *  SLArrayIndex_t * pSrcIndex      Pointer to src array index
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the extract with overlap function.
+ *  Initialise the extract with overlap function.
  *
  ********************************************************/
 
@@ -1250,25 +1250,25 @@ void SIGLIB_FUNC_DECL SIF_CopyWithIndex(SLArrayIndex_t* pSrcIndex)
  * Function: SDA_CopyWithIndex
  *
  * Parameters:
- *   const SLData_t * pSrc,              Pointer to src array
- *   SLData_t * pDst,                    Pointer to dst array
- *   SLArrayIndex_t *pSrcIndex,          Pointer to source index
- *   const SLArrayIndex_t SrcLength,     Source array length
- *   const SLArrayIndex_t strideLength,  Stride length
- *   const SLArrayIndex_t DstLength)     Destination array length
+ *  const SLData_t * pSrc,              Pointer to src array
+ *  SLData_t * pDst,                    Pointer to dst array
+ *  SLArrayIndex_t *pSrcIndex,          Pointer to source index
+ *  const SLArrayIndex_t SrcLength,     Source array length
+ *  const SLArrayIndex_t strideLength,  Stride length
+ *  const SLArrayIndex_t DstLength)     Destination array length
  *
  * Return value:
- *   SLArrayIndex_t                      Length of data copied to destination
+ *  SLArrayIndex_t                      Length of data copied to destination
  *array
  *
  * Description:
- *   Extract the "destination array length" of data from the
- *   source array to the destination and increment the source
- *   index with the stride length.
- *   If copyLength < dstLength then zero pad destination array and
- *   returns length of valid data in output array.
- *   It is important that the source array length is greater
- *   than or equal to the destination array length.
+ *  Extract the "destination array length" of data from the
+ *  source array to the destination and increment the source
+ *  index with the stride length.
+ *  If copyLength < dstLength then zero pad destination array and
+ *  returns length of valid data in output array.
+ *  It is important that the source array length is greater
+ *  than or equal to the destination array length.
  *
  ********************************************************/
 
@@ -1304,15 +1304,15 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CopyWithIndex(const SLData_t* SIGLIB_PTR_DEC
  * Function: SDA_20Log10
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Output = 20Log10 (input), for each array entry.
+ *  Output = 20Log10 (input), for each array entry.
  *
  ********************************************************/
 
@@ -1341,15 +1341,15 @@ void SIGLIB_FUNC_DECL SDA_20Log10(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
  * Function: SDA_10Log10
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Output = 10Log10 (input), for each array entry.
+ *  Output = 10Log10 (input), for each array entry.
  *
  ********************************************************/
 
@@ -1378,16 +1378,16 @@ void SIGLIB_FUNC_DECL SDA_10Log10(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
  * Function: SDA_LogMagnitude
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   SLData_t * SIGLIB_PTR_DECL pLogMagnDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  SLData_t * SIGLIB_PTR_DECL pLogMagnDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Calculate the log magnitude of the complex data.
+ *  Calculate the log magnitude of the complex data.
  *
  ********************************************************/
 
@@ -1417,17 +1417,17 @@ void SIGLIB_FUNC_DECL SDA_LogMagnitude(const SLData_t* SIGLIB_PTR_DECL pSrcReal,
  * Function: SDA_LogMagnitudeAndPhaseWrapped
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   SLData_t * SIGLIB_PTR_DECL pLogMagnDst,
- *   SLData_t * SIGLIB_PTR_DECL pPhaseDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  SLData_t * SIGLIB_PTR_DECL pLogMagnDst,
+ *  SLData_t * SIGLIB_PTR_DECL pPhaseDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Calculate log magnitude and phase of the complex data.
+ *  Calculate log magnitude and phase of the complex data.
  *
  ********************************************************/
 
@@ -1458,17 +1458,17 @@ void SIGLIB_FUNC_DECL SDA_LogMagnitudeAndPhaseWrapped(const SLData_t* SIGLIB_PTR
  * Function: SDA_LogMagnitudeAndPhaseUnWrapped
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   SLData_t * SIGLIB_PTR_DECL pLogMagnDst,
- *   SLData_t * SIGLIB_PTR_DECL pPhaseDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  SLData_t * SIGLIB_PTR_DECL pLogMagnDst,
+ *  SLData_t * SIGLIB_PTR_DECL pPhaseDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Calculate log magnitude and phase of the complex data.
+ *  Calculate log magnitude and phase of the complex data.
  *
  ********************************************************/
 
@@ -1503,17 +1503,17 @@ void SIGLIB_FUNC_DECL SDA_LogMagnitudeAndPhaseUnWrapped(const SLData_t* SIGLIB_P
  * Function: SDA_ZeroPad
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t prePadLength,
- *   const SLArrayIndex_t postPadLength,
- *   const SLArrayIndex_t SrcLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t prePadLength,
+ *  const SLArrayIndex_t postPadLength,
+ *  const SLArrayIndex_t SrcLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Pad out an array's length.
+ *  Pad out an array's length.
  *
  ********************************************************/
 
@@ -1572,13 +1572,13 @@ void SIGLIB_FUNC_DECL SDA_ZeroPad(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
  * Function: SIF_ReSize
  *
  * Parameters:
- *   SLData_t *pStateLength,
+ *  SLData_t *pStateLength,
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialize the SDA_ReSize function.
+ *  Initialize the SDA_ReSize function.
  *
  ********************************************************/
 
@@ -1592,20 +1592,20 @@ void SIGLIB_FUNC_DECL SIF_ReSize(SLArrayIndex_t* pStateLength)
  * Function: SDA_ReSize
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   SLData_t * SIGLIB_PTR_DECL pState,
- *   SLArrayIndex_t *pStateLength,
- *   const SLArrayIndex_t SrcLength,
- *   const SLArrayIndex_t DstLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  SLData_t * SIGLIB_PTR_DECL pState,
+ *  SLArrayIndex_t *pStateLength,
+ *  const SLArrayIndex_t SrcLength,
+ *  const SLArrayIndex_t DstLength
  *
  * Return value:
- *   Number of samples in output array
+ *  Number of samples in output array
  *
  * Description:
- *   Resize an array - this function takes input arrays of
- *   arbitrary length and generates output arrays of the
- *   length specified.
+ *  Resize an array - this function takes input arrays of
+ *  arbitrary length and generates output arrays of the
+ *  length specified.
  *
  ********************************************************/
 
@@ -1698,16 +1698,16 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ReSize(const SLData_t* SIGLIB_PTR_DECL pSrc,
  * Function: SDA_ReSizeInput
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pState,
- *   SLArrayIndex_t *pStateLength,
- *   const SLArrayIndex_t SrcLength,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pState,
+ *  SLArrayIndex_t *pStateLength,
+ *  const SLArrayIndex_t SrcLength,
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Add data into ReSize state array.
+ *  Add data into ReSize state array.
  *
  ********************************************************/
 
@@ -1745,16 +1745,16 @@ void SIGLIB_FUNC_DECL SDA_ReSizeInput(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
  * Function: SDA_ReSizeOutput
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   SLData_t * SIGLIB_PTR_DECL pState,
- *   SLArrayIndex_t *pStateLength,
- *   const SLArrayIndex_t DstLength
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  SLData_t * SIGLIB_PTR_DECL pState,
+ *  SLArrayIndex_t *pStateLength,
+ *  const SLArrayIndex_t DstLength
  *
  * Return value:
- *   Number of samples in output array
+ *  Number of samples in output array
  *
  * Description:
- *   Extract an array of data from the resize state array.
+ *  Extract an array of data from the resize state array.
  *
  ********************************************************/
 
@@ -1811,12 +1811,12 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ReSizeOutput(SLData_t* SIGLIB_PTR_DECL pDst,
  * Function: SDA_Fill
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLData_t FillValue,
- *   const SLArrayIndex_t ArrayLength
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLData_t FillValue,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
  *
@@ -1841,20 +1841,20 @@ void SIGLIB_FUNC_DECL SDA_Fill(SLData_t* SIGLIB_PTR_DECL pDst, const SLData_t Fi
 }    // End of SDA_Fill()
 
 /********************************************************
- * Function: SDA_Clear
+ * Function: SDA_Zeros
  *
  * Parameters:
- *   SLData_t    *pDst,
- *   const SLArrayIndex_t    ArrayLength
+ *  SLData_t    *pDst,
+ *  const SLArrayIndex_t    ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
- * Description: Clear all the array to 0.0.
+ * Description: Set all the array to 0.0.
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SDA_Clear(SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t ArrayLength)
+void SIGLIB_FUNC_DECL SDA_Zeros(SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t ArrayLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -1870,24 +1870,56 @@ void SIGLIB_FUNC_DECL SDA_Clear(SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayInd
     *pDst++ = SIGLIB_ZERO;
 #endif
   }
-}    // End of SDA_Clear()
+}    // End of SDA_Zeros()
+
+/********************************************************
+ * Function: SDA_Ones
+ *
+ * Parameters:
+ *  SLData_t    *pDst,
+ *  const SLArrayIndex_t    ArrayLength
+ *
+ * Return value:
+ *  void
+ *
+ * Description: Set all the array to 1.0.
+ *
+ ********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_Ones(SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t ArrayLength)
+{
+#if (SIGLIB_ARRAYS_ALIGNED)
+#  ifdef __TMS320C6X__             // Defined by TI compiler
+  _nassert((int)pDst % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+#  endif
+#endif
+
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
+                                                    // or pointer access modes
+    pDst[i] = SIGLIB_ONE;
+#else
+    *pDst++ = SIGLIB_ONE;
+#endif
+  }
+}    // End of SDA_Ones()
 
 /********************************************************
  * Function: SDA_Histogram
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Source data pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst,        - Destination data pointer
- *   const SLData_t SourceMin,               - Minimum input data value
- *   const SLData_t SourceMax,               - Maximum input data value
- *   const SLArrayIndex_t SrcLength,         - Source data length
- *   const SLArrayIndex_t HistogramLength    - Histogram length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  - Source data pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst,        - Destination data pointer
+ *  const SLData_t SourceMin,               - Minimum input data value
+ *  const SLData_t SourceMax,               - Maximum input data value
+ *  const SLArrayIndex_t SrcLength,         - Source data length
+ *  const SLArrayIndex_t HistogramLength    - Histogram length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Generates the histogram of the source
- *       data.
+ *      data.
  *
  ********************************************************/
 
@@ -1929,18 +1961,18 @@ void SIGLIB_FUNC_DECL SDA_Histogram(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData
  * Function: SDA_HistogramCumulative
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Source data pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst,    - Destination data pointer
- *   const SLData_t SourceMin,           - Minimum input data value
- *   const SLData_t SourceMax,           - Maximum input data value
- *   const SLArrayIndex_t SrcLength,     - Source data length
- *   const SLArrayIndex_t HistogramLength    - Histogram length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  - Source data pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst,    - Destination data pointer
+ *  const SLData_t SourceMin,           - Minimum input data value
+ *  const SLData_t SourceMax,           - Maximum input data value
+ *  const SLArrayIndex_t SrcLength,     - Source data length
+ *  const SLArrayIndex_t HistogramLength    - Histogram length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Generates the cumulative histogram of the source
- *       data.
+ *      data.
  *
  ********************************************************/
 
@@ -1989,18 +2021,18 @@ void SIGLIB_FUNC_DECL SDA_HistogramCumulative(const SLData_t* SIGLIB_PTR_DECL pS
  * Function: SDA_HistogramExtended
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Source data pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst,    - Destination data pointer
- *   const SLData_t SourceMin,           - Minimum input data value
- *   const SLData_t SourceMax,           - Maximum input data value
- *   const SLArrayIndex_t SrcLength,     - Source data length
- *   const SLArrayIndex_t HistogramLength    - Histogram length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  - Source data pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst,    - Destination data pointer
+ *  const SLData_t SourceMin,           - Minimum input data value
+ *  const SLData_t SourceMax,           - Maximum input data value
+ *  const SLArrayIndex_t SrcLength,     - Source data length
+ *  const SLArrayIndex_t HistogramLength    - Histogram length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Generates the histogram of the source
- *       data, using the extended algorithm.
+ *      data, using the extended algorithm.
  *
  ********************************************************/
 
@@ -2042,18 +2074,18 @@ void SIGLIB_FUNC_DECL SDA_HistogramExtended(const SLData_t* SIGLIB_PTR_DECL pSrc
  * Function: SDA_HistogramExtendedCumulative
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Source data pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst,    - Destination data pointer
- *   const SLData_t SourceMin,           - Minimum input data value
- *   const SLData_t SourceMax,           - Maximum input data value
- *   const SLArrayIndex_t SrcLength,     - Source data length
- *   const SLArrayIndex_t HistogramLength    - Histogram length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  - Source data pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst,    - Destination data pointer
+ *  const SLData_t SourceMin,           - Minimum input data value
+ *  const SLData_t SourceMax,           - Maximum input data value
+ *  const SLArrayIndex_t SrcLength,     - Source data length
+ *  const SLArrayIndex_t HistogramLength    - Histogram length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Generates the cumulative histogram of the source
- *       data using the extended algorithm.
+ *      data using the extended algorithm.
  *
  ********************************************************/
 
@@ -2103,11 +2135,11 @@ void SIGLIB_FUNC_DECL SDA_HistogramExtendedCumulative(const SLData_t* SIGLIB_PTR
  * Function: SIF_Histogram
  *
  * Parameters:
- *   SLData_t *pHistArray,
- *   const SLArrayIndex_t HistoryArrayLength
+ *  SLData_t *pHistArray,
+ *  const SLArrayIndex_t HistoryArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Clears the histogram array.
  *
@@ -2135,13 +2167,13 @@ void SIGLIB_FUNC_DECL SIF_Histogram(SLData_t* SIGLIB_PTR_DECL pHistArray, const 
  * Function: SDA_HistogramEqualize
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Pointer to source data array
- *   SLData_t * SIGLIB_PTR_DECL pDst,    - Pointer to destn data array
- *   const SLData_t NewPeak,             - New peak value
- *   const SLArrayIndex_t ArrayLength    - Source array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  - Pointer to source data array
+ *  SLData_t * SIGLIB_PTR_DECL pDst,    - Pointer to destn data array
+ *  const SLData_t NewPeak,             - New peak value
+ *  const SLArrayIndex_t ArrayLength    - Source array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Equalizes the histogram of the array.
  *
@@ -2173,14 +2205,14 @@ void SIGLIB_FUNC_DECL SDA_HistogramEqualize(const SLData_t* SIGLIB_PTR_DECL pSrc
  * Function: SDA_Quantize
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t quantisation,
- *   const SLData_t peakInputValue,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t quantisation,
+ *  const SLData_t peakInputValue,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Quantize the data to N bits.
  *
@@ -2218,12 +2250,12 @@ void SIGLIB_FUNC_DECL SDA_Quantize(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_
  * Function: SDS_Quantize
  *
  * Parameters:
- *   const SLData_t src,
- *   const SLArrayIndex_t quantisation,
- *   const SLData_t peakInputValue,
+ *  const SLData_t src,
+ *  const SLArrayIndex_t quantisation,
+ *  const SLData_t peakInputValue,
  *
  * Return value:
- *   Quantized value
+ *  Quantized value
  *
  * Description: Quantize the data to N bits.
  *
@@ -2245,13 +2277,13 @@ SLData_t SIGLIB_FUNC_DECL SDS_Quantize(const SLData_t src, const SLArrayIndex_t 
  * Function: SDA_Quantize_N
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLData_t N,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLData_t N,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Quantize the data to N bits.
  *
@@ -2276,14 +2308,14 @@ void SIGLIB_FUNC_DECL SDA_Quantize_N(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDat
  * Function: SDS_Quantise_N
  *
  * Parameters:
- *   const SLData_t src,
- *   const SLData_t N)
+ *  const SLData_t src,
+ *  const SLData_t N)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Quantize the data to nearest N
+ *  Quantize the data to nearest N
  *
  ********************************************************/
 
@@ -2296,15 +2328,15 @@ SLData_t SIGLIB_FUNC_DECL SDS_Quantise_N(const SLData_t src, const SLData_t N)
  * Function: SDA_Abs
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t size
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t size
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Calculate the absolute values in an array.
+ *  Calculate the absolute values in an array.
  *
  ********************************************************/
 
@@ -2339,11 +2371,11 @@ void SIGLIB_FUNC_DECL SDA_Abs(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SI
  * Function: SDS_PeakValueToBits
  *
  * Parameters:
- *   SLData_t            PeakValue
- *   enum SLSignalSign_t SignType
+ *  SLData_t            PeakValue
+ *  enum SLSignalSign_t SignType
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Convert the peak value to a number of bits
  *
@@ -2362,11 +2394,11 @@ SLData_t SIGLIB_FUNC_DECL SDS_PeakValueToBits(SLData_t PeakValue, enum SLSignalS
  * Function: SDS_BitsToPeakValue
  *
  * Parameters:
- *   SLData_t                Bits
- *   enum SLSignalSign_t SignType
+ *  SLData_t                Bits
+ *  enum SLSignalSign_t SignType
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Convert the number of bits to the peak value
  *
@@ -2385,11 +2417,11 @@ SLData_t SIGLIB_FUNC_DECL SDS_BitsToPeakValue(SLData_t NumberOfBits, enum SLSign
  * Function: SDS_VoltageTodBm
  *
  * Parameters:
- *   const SLData_t  Linear,
- *   const SLData_t  ZerodBmLevel
+ *  const SLData_t  Linear,
+ *  const SLData_t  ZerodBmLevel
  *
  * Return value:
- *   dBm value
+ *  dBm value
  *
  * Description: Convert the linear value to dBm
  *
@@ -2408,16 +2440,16 @@ SLData_t SIGLIB_FUNC_DECL SDS_VoltageTodBm(const SLData_t Linear, const SLData_t
  * Function: SDA_VoltageTodBm
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLData_t  ZerodBmLevel
- *   const SLArrayIndex_t size
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLData_t  ZerodBmLevel
+ *  const SLArrayIndex_t size
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Convert the linear values to dBm.
+ *  Convert the linear values to dBm.
  *
  ********************************************************/
 
@@ -2455,11 +2487,11 @@ void SIGLIB_FUNC_DECL SDA_VoltageTodBm(const SLData_t* SIGLIB_PTR_DECL pSrc, SLD
  * Function: SDS_dBmToVoltage
  *
  * Parameters:
- *   const SLData_t  dBm,
- *   const SLData_t  ZerodBmLevel
+ *  const SLData_t  dBm,
+ *  const SLData_t  ZerodBmLevel
  *
  * Return value:
- *   Linear value
+ *  Linear value
  *
  * Description: Convert the dBm value to linear
  *
@@ -2474,16 +2506,16 @@ SLData_t SIGLIB_FUNC_DECL SDS_dBmToVoltage(const SLData_t dBm, const SLData_t Ze
  * Function: SDA_dBmToVoltage
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLData_t  ZerodBmLevel
- *   const SLArrayIndex_t size
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLData_t  ZerodBmLevel
+ *  const SLArrayIndex_t size
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Convert the dBm values to linear.
+ *  Convert the dBm values to linear.
  *
  ********************************************************/
 
@@ -2511,10 +2543,10 @@ void SIGLIB_FUNC_DECL SDA_dBmToVoltage(const SLData_t* SIGLIB_PTR_DECL pSrc, SLD
  * Function: SDS_VoltageTodB
  *
  * Parameters:
- *   const SLData_t  Linear voltage,
+ *  const SLData_t  Linear voltage,
  *
  * Return value:
- *   dB value
+ *  dB value
  *
  * Description: Convert the linear voltage gain to dB
  *
@@ -2529,15 +2561,15 @@ SLData_t SDS_VoltageTodB(SLData_t linearGain)
  * Function: SDA_VoltageTodB
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t size
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t size
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Convert the linear voltage gains to dB
+ *  Convert the linear voltage gains to dB
  *
  ********************************************************/
 
@@ -2574,10 +2606,10 @@ void SIGLIB_FUNC_DECL SDA_VoltageTodB(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
  * Function: SDS_dBToVoltage
  *
  * Parameters:
- *   const SLData_t  dB,
+ *  const SLData_t  dB,
  *
  * Return value:
- *   Linear voltage
+ *  Linear voltage
  *
  * Description: Convert the dB gain to linear voltage
  *
@@ -2592,15 +2624,15 @@ SLData_t SDS_dBToVoltage(SLData_t dB)
  * Function: SDA_dBToVoltage
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t size
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t size
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Convert the dB gains to linear voltage
+ *  Convert the dB gains to linear voltage
  *
  ********************************************************/
 
@@ -2627,10 +2659,10 @@ void SIGLIB_FUNC_DECL SDA_dBToVoltage(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
  * Function: SDS_PowerTodB
  *
  * Parameters:
- *   const SLData_t  Linear power,
+ *  const SLData_t  Linear power,
  *
  * Return value:
- *   dB value
+ *  dB value
  *
  * Description: Convert the linear power gain to dB
  *
@@ -2649,15 +2681,15 @@ SLData_t SDS_PowerTodB(SLData_t linearGain)
  * Function: SDA_PowerTodB
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t size
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t size
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Convert the linear power gains to dB
+ *  Convert the linear power gains to dB
  *
  ********************************************************/
 
@@ -2694,10 +2726,10 @@ void SIGLIB_FUNC_DECL SDA_PowerTodB(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData
  * Function: SDS_dBToPower
  *
  * Parameters:
- *   const SLData_t  dB,
+ *  const SLData_t  dB,
  *
  * Return value:
- *   Linear power
+ *  Linear power
  *
  * Description: Convert the dB gain to linear power
  *
@@ -2712,15 +2744,15 @@ SLData_t SDS_dBToPower(SLData_t dBm)
  * Function: SDA_dBToPower
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t size
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t size
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Convert the dB gains to linear power
+ *  Convert the dB gains to linear power
  *
  ********************************************************/
 
@@ -2747,19 +2779,19 @@ void SIGLIB_FUNC_DECL SDA_dBToPower(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData
  * Function: SDS_Compare
  *
  * Parameters:
- *   const SLData_t Src1,
- *   const SLData_t Src2,
- *   const SLData_t Threshold,
+ *  const SLData_t Src1,
+ *  const SLData_t Src2,
+ *  const SLData_t Threshold,
  *
  * Return value:
- *   This function returns:
- *       SIGLIB_TRUE - if the difference between samples
- *       is less than the threshold.
- *       SIGLIB_FALSE - if the difference between samples
- *       is greater than the threshold.
+ *  This function returns:
+ *      SIGLIB_TRUE - if the difference between samples
+ *      is less than the threshold.
+ *      SIGLIB_FALSE - if the difference between samples
+ *      is greater than the threshold.
  *
  * Description:
- *   Compare the contents of the two samples
+ *  Compare the contents of the two samples
  *
  ********************************************************/
 
@@ -2787,20 +2819,20 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Compare(const SLData_t Src1, const SLData_t Src
  * Function: SDA_Compare
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1,
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2,
- *   const SLData_t Threshold,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+ *  const SLData_t Threshold,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   This function returns:
- *       SIGLIB_TRUE - if the difference between samples
- *       is less than the threshold.
- *       SIGLIB_FALSE - if the difference between samples
- *       is greater than the threshold.
+ *  This function returns:
+ *      SIGLIB_TRUE - if the difference between samples
+ *      is less than the threshold.
+ *      SIGLIB_FALSE - if the difference between samples
+ *      is greater than the threshold.
  *
  * Description:
- *   Compare the contents of the two arrays
+ *  Compare the contents of the two arrays
  *
  ********************************************************/
 
@@ -2843,22 +2875,22 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Compare(const SLData_t* SIGLIB_PTR_DECL pSrc1, 
  * Function: SDS_CompareComplex
  *
  * Parameters:
- *   const SLData_t SrcReal1,
- *   const SLData_t SrcImag1,
- *   const SLData_t SrcReal2,
- *   const SLData_t SrcImag2,
- *   const SLData_t Threshold,
+ *  const SLData_t SrcReal1,
+ *  const SLData_t SrcImag1,
+ *  const SLData_t SrcReal2,
+ *  const SLData_t SrcImag2,
+ *  const SLData_t Threshold,
  *
  * Return value:
- *   This function returns:
- *       SIGLIB_TRUE - if the difference between samples
- *       is less than the threshold.
- *       SIGLIB_FALSE - if the difference between samples
- *       is greater than the threshold.
+ *  This function returns:
+ *      SIGLIB_TRUE - if the difference between samples
+ *      is less than the threshold.
+ *      SIGLIB_FALSE - if the difference between samples
+ *      is greater than the threshold.
  *
  * Description:
- *   Compare the real and imaginary parts of the two
- *   complex samples
+ *  Compare the real and imaginary parts of the two
+ *  complex samples
  *
  ********************************************************/
 
@@ -2897,23 +2929,23 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_CompareComplex(const SLData_t SrcReal1, const S
  * Function: SDA_CompareComplex
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal1,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag1,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal2,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag2,
- *   const SLData_t Threshold,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal1,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag1,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal2,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag2,
+ *  const SLData_t Threshold,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   This function returns:
- *       SIGLIB_TRUE - if the difference between samples
- *       is less than the threshold.
- *       SIGLIB_FALSE - if the difference between samples
- *       is greater than the threshold.
+ *  This function returns:
+ *      SIGLIB_TRUE - if the difference between samples
+ *      is less than the threshold.
+ *      SIGLIB_FALSE - if the difference between samples
+ *      is greater than the threshold.
  *
  * Description:
- *   Compare the real and imaginary parts of the
- *   contents of the two complex arrays
+ *  Compare the real and imaginary parts of the
+ *  contents of the two complex arrays
  *
  ********************************************************/
 
@@ -2974,14 +3006,14 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_CompareComplex(const SLData_t* SIGLIB_PTR_DECL 
  * Function: SDS_Int
  *
  * Parameters:
- *   const SLData_t  Src
+ *  const SLData_t  Src
  *
  * Return value:
- *   Integer component
+ *  Integer component
  *
  * Description:
- *   Return the integer component of the supplied data
- *   value.
+ *  Return the integer component of the supplied data
+ *  value.
  *
  ********************************************************/
 
@@ -2994,14 +3026,14 @@ SLData_t SIGLIB_FUNC_DECL SDS_Int(const SLData_t Src)
  * Function: SDS_Frac
  *
  * Parameters:
- *   const SLData_t  Src
+ *  const SLData_t  Src
  *
  * Return value:
- *   Fractional component
+ *  Fractional component
  *
  * Description:
- *   Return the fractional component of the supplied data
- *   value.
+ *  Return the fractional component of the supplied data
+ *  value.
  *
  ********************************************************/
 
@@ -3014,14 +3046,14 @@ SLData_t SIGLIB_FUNC_DECL SDS_Frac(const SLData_t Src)
  * Function: SDS_AbsFrac
  *
  * Parameters:
- *   const SLData_t  Src
+ *  const SLData_t  Src
  *
  * Return value:
- *   Absolute fractional component
+ *  Absolute fractional component
  *
  * Description:
- *   Return the absolute value of the fractional component
- *   of the supplied data value.
+ *  Return the absolute value of the fractional component
+ *  of the supplied data value.
  *
  ********************************************************/
 
@@ -3038,16 +3070,16 @@ SLData_t SIGLIB_FUNC_DECL SDS_AbsFrac(const SLData_t Src)
  * Function: SDA_Int
  *
  * Parameters:
- *   const SLData_t  *pSrc
- *   SLData_t    *pDst
- *   const SLArrayIndex_t    ArrayLength
+ *  const SLData_t  *pSrc
+ *  SLData_t    *pDst
+ *  const SLArrayIndex_t    ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Return the integer component of the supplied data
- *   values.
+ *  Return the integer component of the supplied data
+ *  values.
  *
  ********************************************************/
 
@@ -3069,16 +3101,16 @@ void SIGLIB_FUNC_DECL SDA_Int(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SI
  * Function: SDA_Frac
  *
  * Parameters:
- *   const SLData_t  *pSrc
- *   SLData_t    *pDst
- *   const SLArrayIndex_t    ArrayLength
+ *  const SLData_t  *pSrc
+ *  SLData_t    *pDst
+ *  const SLArrayIndex_t    ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Return the fractional component of the supplied data
- *   values.
+ *  Return the fractional component of the supplied data
+ *  values.
  *
  ********************************************************/
 
@@ -3100,16 +3132,16 @@ void SIGLIB_FUNC_DECL SDA_Frac(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* S
  * Function: SDA_AbsFrac
  *
  * Parameters:
- *   const SLData_t  *pSrc
- *   SLData_t    *pDst
- *   const SLArrayIndex_t    ArrayLength
+ *  const SLData_t  *pSrc
+ *  SLData_t    *pDst
+ *  const SLArrayIndex_t    ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Return the absolute value of the fractional component
- *   of the supplied data values.
+ *  Return the absolute value of the fractional component
+ *  of the supplied data values.
  *
  ********************************************************/
 
@@ -3137,17 +3169,17 @@ void SIGLIB_FUNC_DECL SDA_AbsFrac(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
  * Function: SDA_SetMin
  *
  * Parameters:
- *   const SLData_t *pSrc,               Input array
- *   SLData_t *pDst,                     Output array
- *   const SLData_t newMin,
- *   const SLArrayIndex_t sampleLength)
+ *  const SLData_t *pSrc,               Input array
+ *  SLData_t *pDst,                     Output array
+ *  const SLData_t newMin,
+ *  const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Set the minimum value in the data set.
- *   The difference between the previous min and new min
- *   is added to all of the values.
+ *  The difference between the previous min and new min
+ *  is added to all of the values.
  *
  ********************************************************/
 
@@ -3163,17 +3195,17 @@ void SIGLIB_FUNC_DECL SDA_SetMin(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  * Function: SDA_SetMax
  *
  * Parameters:
- *   const SLData_t *pSrc,               Input array
- *   SLData_t *pDst,                     Output array
- *   const SLData_t newMax,
- *   const SLArrayIndex_t sampleLength)
+ *  const SLData_t *pSrc,               Input array
+ *  SLData_t *pDst,                     Output array
+ *  const SLData_t newMax,
+ *  const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Set the maximum value in the data set.
- *   The difference between the previous max and new max
- *   is added to all of the values.
+ *  The difference between the previous max and new max
+ *  is added to all of the values.
  *
  ********************************************************/
 
@@ -3189,14 +3221,14 @@ void SIGLIB_FUNC_DECL SDA_SetMax(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  * Function: SDA_SetRange
  *
  * Parameters:
- *   const SLData_t *pSrc,               Input array
- *   SLData_t *pDst,                     Output array
- *   const SLData_t NewMin,
- *   const SLData_t NewMax,
- *   const SLArrayIndex_t sampleLength)
+ *  const SLData_t *pSrc,               Input array
+ *  SLData_t *pDst,                     Output array
+ *  const SLData_t NewMin,
+ *  const SLData_t NewMax,
+ *  const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Set the range (min to max) of the data set.
  *
@@ -3218,14 +3250,14 @@ void SIGLIB_FUNC_DECL SDA_SetRange(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_
  * Function: SDA_SetMean
  *
  * Parameters:
- *   const SLData_t *pSrc,               Input array
- *   SLData_t *pDst,                     Output array
- *   const SLData_t NewMean,
- *   const SLData_t InverseSampleLength,
- *   const SLArrayIndex_t sampleLength)
+ *  const SLData_t *pSrc,               Input array
+ *  SLData_t *pDst,                     Output array
+ *  const SLData_t NewMean,
+ *  const SLData_t InverseSampleLength,
+ *  const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Set the range (min to max) of the data set.
  *

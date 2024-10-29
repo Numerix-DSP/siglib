@@ -44,22 +44,22 @@ Description: Windowing routines for SigLib DSP library.
  * Function: SIF_Window
  *
  * Parameters:
- *   SLData_t *pWindowCoeffs             - Window coeffs array
- *   const enum SLWindow_t WindowType    - Window type,
- *   const SLData_t Coeff                - Window coefficient
- *   const SLArrayIndex_t windowLength   - Window length
+ *  SLData_t *pWindowCoeffs             - Window coeffs array
+ *  const enum SLWindow_t WindowType    - Window type,
+ *  const SLData_t Coeff                - Window coefficient
+ *  const SLArrayIndex_t windowLength   - Window length
  *
  * Return value:
- *   SIGLIB_PARAMETER_ERROR if incorrect window type
- *   specified otherwise SIGLIB_NO_ERROR.
+ *  SIGLIB_PARAMETER_ERROR if incorrect window type
+ *  specified otherwise SIGLIB_NO_ERROR.
  *
  * Description:
- *   Initialise the window coefficients.
+ *  Initialise the window coefficients.
  *
  * Reference:
- *   Discrete Time Signal Processing - Oppenheim and Schafer
- *   Kaiser Window - http://spsc.inw.tugraz.at/
- *       DSP Laboratory handout - dft1.pdf
+ *  Discrete Time Signal Processing - Oppenheim and Schafer
+ *  Kaiser Window - http://spsc.inw.tugraz.at/
+ *      DSP Laboratory handout - dft1.pdf
  *
  ********************************************************/
 
@@ -266,23 +266,23 @@ SLError_t SIGLIB_FUNC_DECL SIF_Window(SLData_t* SIGLIB_PTR_DECL pWindowCoeffs, c
  * Function: SIF_TableTopWindow
  *
  * Parameters:
- *   SLData_t *pWindowCoeffs             - Window coeffs array
- *   const enum SLWindow_t WindowType        - Window type,
- *   const SLData_t Coeff                - Window coefficient
- *   const SLArrayIndex_t FlatTopLength, - Flat top length
- *   const SLArrayIndex_t windowLength   - Window length
+ *  SLData_t *pWindowCoeffs             - Window coeffs array
+ *  const enum SLWindow_t WindowType        - Window type,
+ *  const SLData_t Coeff                - Window coefficient
+ *  const SLArrayIndex_t FlatTopLength, - Flat top length
+ *  const SLArrayIndex_t windowLength   - Window length
  *
  * Return value:
- *   SIGLIB_PARAMETER_ERROR if incorrect window type
- *   specified otherwise SIGLIB_NO_ERROR.
+ *  SIGLIB_PARAMETER_ERROR if incorrect window type
+ *  specified otherwise SIGLIB_NO_ERROR.
  *
  * Description:
- *   Initialise the table top window coefficients.
+ *  Initialise the table top window coefficients.
  *
  * Reference:
- *   Discrete Time Signal Processing - Oppenheim and Schafer
- *   Kaiser Window - http://spsc.inw.tugraz.at/
- *       DSP Laboratory handout - dft1.pdf
+ *  Discrete Time Signal Processing - Oppenheim and Schafer
+ *  Kaiser Window - http://spsc.inw.tugraz.at/
+ *      DSP Laboratory handout - dft1.pdf
  *
  ********************************************************/
 
@@ -652,16 +652,16 @@ SLError_t SIGLIB_FUNC_DECL SIF_TableTopWindow(SLData_t* SIGLIB_PTR_DECL pWindowC
  * Function: SDA_Window
  *
  * Parameters:
- *   const SLData_t *pSrc            - Source array
- *   SLData_t *pDst                  - Result array
- *   const SLData_t *pWindowCoeffs   - Window coeffs array
- *   const SLArrayIndex_t            - Window length
+ *  const SLData_t *pSrc            - Source array
+ *  SLData_t *pDst                  - Result array
+ *  const SLData_t *pWindowCoeffs   - Window coeffs array
+ *  const SLArrayIndex_t            - Window length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Apply a window to the data.
+ *  Apply a window to the data.
  *
  ********************************************************/
 
@@ -691,19 +691,19 @@ void SIGLIB_FUNC_DECL SDA_Window(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  * Function: SDA_ComplexWindow
  *
  * Parameters:
- *   const SLData_t *pSrcReal            - Real source array
- *   const SLData_t *pSrcImag            - Imag source array
- *   SLData_t *pRealDst                  - Real result array
- *   SLData_t *pImagDst                  - Imag result array
- *   const SLData_t *pRealWindowCoeffs   - Real Window coeffs array
- *   const SLData_t *pImagWindowCoeffs   - Imag Window coeffs array
- *   const SLArrayIndex_t                -  Window length
+ *  const SLData_t *pSrcReal            - Real source array
+ *  const SLData_t *pSrcImag            - Imag source array
+ *  SLData_t *pRealDst                  - Real result array
+ *  SLData_t *pImagDst                  - Imag result array
+ *  const SLData_t *pRealWindowCoeffs   - Real Window coeffs array
+ *  const SLData_t *pImagWindowCoeffs   - Imag Window coeffs array
+ *  const SLArrayIndex_t                -  Window length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Apply a complex window to the complex data.
+ *  Apply a complex window to the complex data.
  *
  ********************************************************/
 
@@ -740,15 +740,15 @@ void SIGLIB_FUNC_DECL SDA_ComplexWindow(const SLData_t* SIGLIB_PTR_DECL pSrcReal
  * Function: SDA_WindowInverseCoherentGain
  *
  * Parameters:
- *   const SLData_t          *pWindowCoeffs,
- *   const SLArrayIndex_t    windowLength
+ *  const SLData_t          *pWindowCoeffs,
+ *  const SLArrayIndex_t    windowLength
  *
  * Return value:
- *   SLData_t    Inverse coherent gain
+ *  SLData_t    Inverse coherent gain
  *
  * Description:
- *   Calculate inverse coherent gain of the window, so
- *   that the gain can be normalised.
+ *  Calculate inverse coherent gain of the window, so
+ *  that the gain can be normalised.
  *
  ********************************************************/
 
@@ -779,14 +779,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_WindowInverseCoherentGain(const SLData_t* SIGLIB_P
  * Function: SDA_WindowEquivalentNoiseBandwidth
  *
  * Parameters:
- *   const SLData_t          *pWindowCoeffs,
- *   const SLArrayIndex_t    windowLength
+ *  const SLData_t          *pWindowCoeffs,
+ *  const SLArrayIndex_t    windowLength
  *
  * Return value:
- *   SLData_t    Equivalent noise bandwidth
+ *  SLData_t    Equivalent noise bandwidth
  *
  * Description:
- *   Calculate equivalent noise bandwidth of the window.
+ *  Calculate equivalent noise bandwidth of the window.
  *
  ********************************************************/
 
@@ -801,14 +801,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_WindowEquivalentNoiseBandwidth(const SLData_t* SIG
  * Function: SDA_WindowProcessingGain
  *
  * Parameters:
- *   const SLData_t          *pWindowCoeffs,
- *   const SLArrayIndex_t    windowLength
+ *  const SLData_t          *pWindowCoeffs,
+ *  const SLArrayIndex_t    windowLength
  *
  * Return value:
- *   SLData_t    Processing gain
+ *  SLData_t    Processing gain
  *
  * Description:
- *   Calculate processing gain of the window.
+ *  Calculate processing gain of the window.
  *
  ********************************************************/
 
@@ -823,13 +823,13 @@ SLData_t SIGLIB_FUNC_DECL SDA_WindowProcessingGain(const SLData_t* SIGLIB_PTR_DE
  * Function: SDS_I0Bessel
  *
  * Parameters:
- *   const SLData_t  x,
+ *  const SLData_t  x,
  *
  * Return value:
- *   SLData_t    Modified Bessel function I0(x)
+ *  SLData_t    Modified Bessel function I0(x)
  *
  * Description:
- *   Calculate the Modified Bessel function I0(x).
+ *  Calculate the Modified Bessel function I0(x).
  *
  ********************************************************/
 

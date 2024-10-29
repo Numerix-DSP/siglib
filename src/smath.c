@@ -44,16 +44,16 @@ Description: DSP basic math functions, for SigLib DSP library.
  * Function: SDA_Divide
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLData_t Divisor,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLData_t Divisor,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Divide array contents by a scalar
+ *  Divide array contents by a scalar
  *
  ********************************************************/
 
@@ -96,17 +96,17 @@ void SIGLIB_FUNC_DECL SDA_Divide(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLD
  * Function: SDA_Divide2
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1,
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Piecewise divide the contents of the first array
- *   by the second.
+ *  Piecewise divide the contents of the first array
+ *  by the second.
  *
  ********************************************************/
 
@@ -147,16 +147,16 @@ void SIGLIB_FUNC_DECL SDA_Divide2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const S
  * Function: SDA_Multiply
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLData_t Multiplier,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLData_t Multiplier,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Multiply the array contents by a scalar value.
+ *  Multiply the array contents by a scalar value.
  *
  ********************************************************/
 
@@ -184,16 +184,16 @@ void SIGLIB_FUNC_DECL SDA_Multiply(const SLData_t* SIGLIB_PTR_DECL pSrc, const S
  * Function: SDA_Multiply2
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1,
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Piecewise multiply the contents of two arrays.
+ *  Piecewise multiply the contents of two arrays.
  *
  ********************************************************/
 
@@ -222,21 +222,21 @@ void SIGLIB_FUNC_DECL SDA_Multiply2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const
  * Function: SDS_ComplexMultiply
  *
  * Parameters:
- *   const SLData_t,     - Source 1 real
- *   const SLData_t,     - Source 1 imaginary
- *   const SLData_t,     - Source 2 real
- *   const SLData_t,     - Source 2 imaginary
- *   SLData_t *,         - Destination real
- *   SLData_t *,         - Destination imaginary
+ *  const SLData_t,     - Source 1 real
+ *  const SLData_t,     - Source 1 imaginary
+ *  const SLData_t,     - Source 2 real
+ *  const SLData_t,     - Source 2 imaginary
+ *  SLData_t *,         - Destination real
+ *  SLData_t *,         - Destination imaginary
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Multiply the contents of one complex variable by
- *   another - the real and imaginary components are
- *   stored in separate memory locations.
- *   (a+jb)*(c+jd) = (ac - bd) + j(ad + bc)
+ *  Multiply the contents of one complex variable by
+ *  another - the real and imaginary components are
+ *  stored in separate memory locations.
+ *  (a+jb)*(c+jd) = (ac - bd) + j(ad + bc)
  *
  ********************************************************/
 
@@ -251,18 +251,18 @@ void SIGLIB_FUNC_DECL SDS_ComplexMultiply(const SLData_t Src1Real, const SLData_
  * Function: SDS_ComplexInverse
  *
  * Parameters:
- *   const SLData_t,     - Source real
- *   const SLData_t,     - Source imaginary
- *   SLData_t *,         - Destination real
- *   SLData_t *,         - Destination imaginary
+ *  const SLData_t,     - Source real
+ *  const SLData_t,     - Source imaginary
+ *  SLData_t *,         - Destination real
+ *  SLData_t *,         - Destination imaginary
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Invert the complex variable - the real and imaginary
- *   components are stored in separate memory locations.
- *   1/(a+jb) = (a-jb) / (a^2 + b^2)
+ *  Invert the complex variable - the real and imaginary
+ *  components are stored in separate memory locations.
+ *  1/(a+jb) = (a-jb) / (a^2 + b^2)
  *
  ********************************************************/
 
@@ -286,19 +286,19 @@ void SIGLIB_FUNC_DECL SDS_ComplexInverse(const SLData_t DenominatorReal, const S
  * Function: SDA_ComplexInverse
  *
  * Parameters:
- *   const SLData_t *,     - Source real
- *   const SLData_t *,     - Source imaginary
- *   SLData_t *,         - Destination real
- *   SLData_t *,         - Destination imaginary
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t *,     - Source real
+ *  const SLData_t *,     - Source imaginary
+ *  SLData_t *,         - Destination real
+ *  SLData_t *,         - Destination imaginary
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Invert the complex variable - the real and imaginary
- *   components are stored in separate memory locations.
- *   1/(a+jb) = (a-jb) / (a^2 + b^2)
+ *  Invert the complex variable - the real and imaginary
+ *  components are stored in separate memory locations.
+ *  1/(a+jb) = (a-jb) / (a^2 + b^2)
  *
  ********************************************************/
 
@@ -324,22 +324,22 @@ void SIGLIB_FUNC_DECL SDA_ComplexInverse(const SLData_t* pDenominatorReal, const
  * Function: SDS_ComplexDivide
  *
  * Parameters:
- *   const SLData_t,     - Numerator real
- *   const SLData_t,     - Numerator imaginary
- *   const SLData_t,     - Denominator real
- *   const SLData_t,     - Denominator imaginary
- *   SLData_t *,         - Destination real
- *   SLData_t *,         - Destination imaginary
+ *  const SLData_t,     - Numerator real
+ *  const SLData_t,     - Numerator imaginary
+ *  const SLData_t,     - Denominator real
+ *  const SLData_t,     - Denominator imaginary
+ *  SLData_t *,         - Destination real
+ *  SLData_t *,         - Destination imaginary
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Divide the contents of one complex variable by
- *   another - the real and imaginary components are
- *   stored in separate memory locations.
- *   1/(a+jb) = (a-jb) / (a^2 + b^2)
- *   (a+jb)*(c+jd) = (ac - bd) + j(ad + bc)
+ *  Divide the contents of one complex variable by
+ *  another - the real and imaginary components are
+ *  stored in separate memory locations.
+ *  1/(a+jb) = (a-jb) / (a^2 + b^2)
+ *  (a+jb)*(c+jd) = (ac - bd) + j(ad + bc)
  *
  ********************************************************/
 
@@ -361,19 +361,19 @@ void SIGLIB_FUNC_DECL SDS_ComplexDivide(const SLData_t NumeratorReal, const SLDa
  * Function: SDA_ComplexScalarMultiply
  *
  * Parameters:
- *   const SLData_t *,       - Source 1 real
- *   const SLData_t *,       - Source 1 imaginary
- *   const SLData_t,         - Scalar multiplier
- *   SLData_t * SIGLIB_PTR_DECL pDstReal,
- *   SLData_t * SIGLIB_PTR_DECL pDstImag,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t *,       - Source 1 real
+ *  const SLData_t *,       - Source 1 imaginary
+ *  const SLData_t,         - Scalar multiplier
+ *  SLData_t * SIGLIB_PTR_DECL pDstReal,
+ *  SLData_t * SIGLIB_PTR_DECL pDstImag,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Multiply the contents of the complex arrays by
- *   a scalar value.
+ *  Multiply the contents of the complex arrays by
+ *  a scalar value.
  *
  ********************************************************/
 
@@ -407,22 +407,22 @@ void SIGLIB_FUNC_DECL SDA_ComplexScalarMultiply(const SLData_t* SIGLIB_PTR_DECL 
  * Function: SDA_ComplexMultiply2
  *
  * Parameters:
- *   const SLData_t *,       - Source 1 real
- *   const SLData_t *,       - Source 1 imaginary
- *   const SLData_t *,       - Source 2 real
- *   const SLData_t *,       - Source 2 imaginary
- *   SLData_t *,             - Destination real
- *   SLData_t *,             - Destination imaginary
- *   const SLArrayIndex_t    - sampleLength
+ *  const SLData_t *,       - Source 1 real
+ *  const SLData_t *,       - Source 1 imaginary
+ *  const SLData_t *,       - Source 2 real
+ *  const SLData_t *,       - Source 2 imaginary
+ *  SLData_t *,             - Destination real
+ *  SLData_t *,             - Destination imaginary
+ *  const SLArrayIndex_t    - sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Piecewise complex multiply the contents of two
- *   arrays using:
+ *  Piecewise complex multiply the contents of two
+ *  arrays using:
  *
- *   (a + jb).(c + jd) = (ac - bd) + j(ad + bc)
+ *  (a + jb).(c + jd) = (ac - bd) + j(ad + bc)
  *
  ********************************************************/
 
@@ -462,19 +462,19 @@ void SIGLIB_FUNC_DECL SDA_ComplexMultiply2(const SLData_t* SIGLIB_PTR_DECL pSrc1
  * Function: SDA_ComplexScalarDivide
  *
  * Parameters:
- *   const SLData_t *,       - Source 1 real
- *   const SLData_t *,       - Source 1 imaginary
- *   const SLData_t,         - Scalar divisor
- *   SLData_t * SIGLIB_PTR_DECL pDstReal,
- *   SLData_t * SIGLIB_PTR_DECL pDstImag,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t *,       - Source 1 real
+ *  const SLData_t *,       - Source 1 imaginary
+ *  const SLData_t,         - Scalar divisor
+ *  SLData_t * SIGLIB_PTR_DECL pDstReal,
+ *  SLData_t * SIGLIB_PTR_DECL pDstImag,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Divide the contents of the complex arrays by
- *   a scalar value.
+ *  Divide the contents of the complex arrays by
+ *  a scalar value.
  *
  ********************************************************/
 
@@ -509,19 +509,19 @@ void SIGLIB_FUNC_DECL SDA_ComplexScalarDivide(const SLData_t* SIGLIB_PTR_DECL pS
  * Function: SDA_ComplexDivide2
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pRealNum1, - Real numerator
- *   const SLData_t * SIGLIB_PTR_DECL pImagNum1, - Imaginary numerator
- *   const SLData_t * SIGLIB_PTR_DECL pRealDen2, - Real denominator
- *   const SLData_t * SIGLIB_PTR_DECL pImagDen2, - Imaginary denominator
- *   SLData_t * SIGLIB_PTR_DECL pRealDst,
- *   SLData_t * SIGLIB_PTR_DECL pImagDst,
- *   const SLArrayIndex_t sampleLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pRealNum1, - Real numerator
+ *  const SLData_t * SIGLIB_PTR_DECL pImagNum1, - Imaginary numerator
+ *  const SLData_t * SIGLIB_PTR_DECL pRealDen2, - Real denominator
+ *  const SLData_t * SIGLIB_PTR_DECL pImagDen2, - Imaginary denominator
+ *  SLData_t * SIGLIB_PTR_DECL pRealDst,
+ *  SLData_t * SIGLIB_PTR_DECL pImagDst,
+ *  const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Divide one complex number by another
+ *  Divide one complex number by another
  *
  ********************************************************/
 
@@ -544,15 +544,15 @@ void SIGLIB_FUNC_DECL SDA_ComplexDivide2(const SLData_t* SIGLIB_PTR_DECL pRealNu
  * Function: SDA_RealDotProduct
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1,
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2,
- *   const SLArrayIndex_t VectorLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+ *  const SLArrayIndex_t VectorLength
  *
  * Return value:
- *   SLData_t sum - Dot product
+ *  SLData_t sum - Dot product
  *
  * Description: Return vector dot product of the input
- *   vectors.
+ *  vectors.
  *
  ********************************************************/
 
@@ -583,17 +583,17 @@ SLData_t SIGLIB_FUNC_DECL SDA_RealDotProduct(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SDA_ComplexDotProduct
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1Real,
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1Imag,
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2Real,
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2Imag,
- *   const SLArrayIndex_t VectorLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1Real,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1Imag,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2Real,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2Imag,
+ *  const SLArrayIndex_t VectorLength
  *
  * Return value:
- *   SLData_t sum - Dot product
+ *  SLData_t sum - Dot product
  *
  * Description: Return vector dot product of the input
- *   vectors.
+ *  vectors.
  *
  ********************************************************/
 
@@ -631,17 +631,17 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDA_ComplexDotProduct(const SLData_t* SIGLIB_PT
  * Function: SDA_SumAndDifference
  *
  * Parameters:
- *   const SLData_t          *pSrc1,
- *   const SLData_t          *pSrc2,
- *   SLData_t *pSum,
- *   SLData_t *pDiff,
- *   const SLArrayIndex_t    DstLength
+ *  const SLData_t          *pSrc1,
+ *  const SLData_t          *pSrc2,
+ *  SLData_t *pSum,
+ *  SLData_t *pDiff,
+ *  const SLArrayIndex_t    DstLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Return the sum and difference between
- *   the samples in the two arrays.
+ *  the samples in the two arrays.
  *
  ********************************************************/
 
@@ -673,13 +673,13 @@ void SIGLIB_FUNC_DECL SDA_SumAndDifference(const SLData_t* SIGLIB_PTR_DECL pSrc1
  * Function: SDA_Add2
  *
  * Parameters:
- *   const SLData_t          *pSrc1,
- *   const SLData_t          *pSrc2,
- *   SLData_t *pDst,
- *   const SLArrayIndex_t    DstLength
+ *  const SLData_t          *pSrc1,
+ *  const SLData_t          *pSrc2,
+ *  SLData_t *pDst,
+ *  const SLArrayIndex_t    DstLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Add the contents of one array to
  * another and store results in a third.
@@ -711,14 +711,14 @@ void SIGLIB_FUNC_DECL SDA_Add2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  * Function: SDA_Add3
  *
  * Parameters:
- *   const SLData_t          *pSrc1,
- *   const SLData_t          *pSrc2,
- *   const SLData_t          *pSrc3,
- *   SLData_t    *pDst,
- *   const SLArrayIndex_t    DstLength
+ *  const SLData_t          *pSrc1,
+ *  const SLData_t          *pSrc2,
+ *  const SLData_t          *pSrc3,
+ *  SLData_t    *pDst,
+ *  const SLArrayIndex_t    DstLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Add the contents of three arrays
  * together and store results in a fourth.
@@ -751,15 +751,15 @@ void SIGLIB_FUNC_DECL SDA_Add3(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  * Function: SDA_Add4
  *
  * Parameters:
- *   const SLData_t          *pSrc1,
- *   const SLData_t          *pSrc2,
- *   const SLData_t          *pSrc3,
- *   const SLData_t          *pSrc4,
- *   SLData_t    *pDst,
- *   const SLArrayIndex_t    DstLength
+ *  const SLData_t          *pSrc1,
+ *  const SLData_t          *pSrc2,
+ *  const SLData_t          *pSrc3,
+ *  const SLData_t          *pSrc4,
+ *  SLData_t    *pDst,
+ *  const SLArrayIndex_t    DstLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Add the contents of four arrays
  * together and store results in a fifth.
@@ -793,16 +793,16 @@ void SIGLIB_FUNC_DECL SDA_Add4(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  * Function: SDA_Add5
  *
  * Parameters:
- *   const SLData_t          *pSrc1,
- *   const SLData_t          *pSrc2,
- *   const SLData_t          *pSrc3,
- *   const SLData_t          *pSrc4,
- *   const SLData_t          *pSrc5,
- *   SLData_t    *pDst,
- *   const SLArrayIndex_t    DstLength
+ *  const SLData_t          *pSrc1,
+ *  const SLData_t          *pSrc2,
+ *  const SLData_t          *pSrc3,
+ *  const SLData_t          *pSrc4,
+ *  const SLData_t          *pSrc5,
+ *  SLData_t    *pDst,
+ *  const SLArrayIndex_t    DstLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Add the contents of five arrays
  * together and store results in a sixth.
@@ -838,14 +838,14 @@ void SIGLIB_FUNC_DECL SDA_Add5(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  * Function: SDA_WeightedSum
  *
  * Parameters:
- *   const SLData_t          *pSrc1,
- *   const SLData_t          *pSrc2,
- *   SLData_t                *pDst,
- *   const SLData_t          Weight,
- *   const SLArrayIndex_t    VectorLength)
+ *  const SLData_t          *pSrc1,
+ *  const SLData_t          *pSrc2,
+ *  SLData_t                *pDst,
+ *  const SLData_t          Weight,
+ *  const SLArrayIndex_t    VectorLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform weighted vector sum on sources.
  *
@@ -876,13 +876,13 @@ void SIGLIB_FUNC_DECL SDA_WeightedSum(const SLData_t* SIGLIB_PTR_DECL pSrc1, con
  * Function: SDA_Subtract2
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1,
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t DstLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t DstLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Subtract the contents of one array from
  * another and store results in a third.
@@ -915,16 +915,16 @@ void SIGLIB_FUNC_DECL SDA_Subtract2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const
  * Function: SDA_Add
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLData_t Offset,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLData_t Offset,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Add the offset to the data
+ *  Add the offset to the data
  *
  ********************************************************/
 
@@ -952,16 +952,16 @@ void SIGLIB_FUNC_DECL SDA_Add(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLData
  * Function: SDA_PositiveOffset
  *
  * Parameters:
- *   SLData_t *pSrc,
- *   SLData_t *pDst,
- *   const SLData_t ArrayLength,
+ *  SLData_t *pSrc,
+ *  SLData_t *pDst,
+ *  const SLData_t ArrayLength,
  *
  * Return value:
- *   The minimum value detected in the original array
+ *  The minimum value detected in the original array
  *
  * Description:
- *   Add an offset to the data to ensure that all the values
- *   are positive and the smallest value is zero.
+ *  Add an offset to the data to ensure that all the values
+ *  are positive and the smallest value is zero.
  *
  * Notes:
  *
@@ -978,16 +978,16 @@ SLData_t SIGLIB_FUNC_DECL SDA_PositiveOffset(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SDA_NegativeOffset
  *
  * Parameters:
- *   SLData_t *pSrc,
- *   SLData_t *pDst,
- *   const SLData_t ArrayLength,
+ *  SLData_t *pSrc,
+ *  SLData_t *pDst,
+ *  const SLData_t ArrayLength,
  *
  * Return value:
- *   The maximum value detected in the original array
+ *  The maximum value detected in the original array
  *
  * Description:
- *   Add an offset to the data to ensure that all the values
- *   are negative and the largest value is zero.
+ *  Add an offset to the data to ensure that all the values
+ *  are negative and the largest value is zero.
  *
  * Notes:
  *
@@ -1004,15 +1004,15 @@ SLData_t SIGLIB_FUNC_DECL SDA_NegativeOffset(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SDA_Negate
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc   - input Data array pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst     - output Data array pointer
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc   - input Data array pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst     - output Data array pointer
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Negate all the entries in the array.
+ *  Negate all the entries in the array.
  *
  ********************************************************/
 
@@ -1039,15 +1039,15 @@ void SIGLIB_FUNC_DECL SDA_Negate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  * Function: SDA_Inverse
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Returns the reciprocal of each sample in the array.
+ *  Returns the reciprocal of each sample in the array.
  *
  ********************************************************/
 
@@ -1074,15 +1074,15 @@ void SIGLIB_FUNC_DECL SDA_Inverse(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
  * Function: SDA_Square
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Returns the square each sample in the array.
+ *  Returns the square each sample in the array.
  *
  ********************************************************/
 
@@ -1110,15 +1110,15 @@ void SIGLIB_FUNC_DECL SDA_Square(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  * Function: SDA_Sqrt
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Returns the reciprocal of each sample in the array.
+ *  Returns the reciprocal of each sample in the array.
  *
  ********************************************************/
 
@@ -1145,17 +1145,17 @@ void SIGLIB_FUNC_DECL SDA_Sqrt(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* S
  * Function: SDA_Difference
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1,
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Returns the difference (always positive) between the
- *   data in the two arrays.
+ *  Returns the difference (always positive) between the
+ *  data in the two arrays.
  *
  ********************************************************/
 
@@ -1183,16 +1183,16 @@ void SIGLIB_FUNC_DECL SDA_Difference(const SLData_t* SIGLIB_PTR_DECL pSrc1, cons
  * Function: SDA_SumOfDifferences
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1,
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Returns the sum of the differences (always positive)
- *   between the data in the two arrays.
+ *  Returns the sum of the differences (always positive)
+ *  between the data in the two arrays.
  *
  ********************************************************/
 
@@ -1221,18 +1221,18 @@ SLData_t SIGLIB_FUNC_DECL SDA_SumOfDifferences(const SLData_t* SIGLIB_PTR_DECL p
  * Function: SDS_Roots()
  *
  * Parameters:
- *   const SLData_t a,
- *   const SLData_t b,
- *   const SLData_t c,
- *   SLData_t *Root1,    - Pointer to root # 1
- *   SLData_t *Root2 - Pointer to root # 2
+ *  const SLData_t a,
+ *  const SLData_t b,
+ *  const SLData_t c,
+ *  SLData_t *Root1,    - Pointer to root # 1
+ *  SLData_t *Root2 - Pointer to root # 2
  *
  * Return value:
- *   SIGLIB_DOMAIN_ERROR if sqrt function produces invalid
- *   result.
+ *  SIGLIB_DOMAIN_ERROR if sqrt function produces invalid
+ *  result.
  *
  * Description: Generates roots of ax^2 + bx + c = 0
- *   Using: (-b +/- sqrt (b^2 - 4ac)) / 2a
+ *  Using: (-b +/- sqrt (b^2 - 4ac)) / 2a
  *
  ********************************************************/
 
@@ -1252,10 +1252,10 @@ SLError_t SIGLIB_FUNC_DECL SDS_Roots(const SLData_t a, const SLData_t b, const S
  * Function: SDS_Factorial()
  *
  * Parameters:
- *   const SLData_t Input
+ *  const SLData_t Input
  *
  * Return value:
- *   SLData_t factorial
+ *  SLData_t factorial
  *
  * Description: Returns the factorial of the number
  *
@@ -1281,12 +1281,12 @@ SLData_t SIGLIB_FUNC_DECL SDS_Factorial(const SLData_t Input)
  * Function: SDA_Factorial()
  *
  * Parameters:
- *   const SLData_t *pSrc
- *   SLData_t *pDst
- *   SLArrayIndex_t arrayLength
+ *  const SLData_t *pSrc
+ *  SLData_t *pDst
+ *  SLArrayIndex_t arrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Computes the factorial of the numbers in
  *  the source array
@@ -1316,11 +1316,11 @@ void SIGLIB_FUNC_DECL SDA_Factorial(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData
  * Function: SDS_BinomialCoefficient()
  *
  * Parameters:
- *   const SLData_t n
- *   const SLData_t k
+ *  const SLData_t n
+ *  const SLData_t k
  *
  * Return value:
- *   SLData_t factorial
+ *  SLData_t factorial
  *
  * Description: Returns the binomial coefficient of:
  *  C(n, k) = \frac{n!}{k! \cdot (n-k)!}
@@ -1358,11 +1358,11 @@ SLData_t SIGLIB_FUNC_DECL SDS_BinomialCoefficient(const SLData_t n, const SLData
  * Function: SDA_BinomialCoefficients()
  *
  * Parameters:
- *   const SLData_t n
- *   SLData_t *pDst
+ *  const SLData_t n
+ *  SLData_t *pDst
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Computes the binomial coefficients for all k <= n of:
  *  C(n, k) = \frac{n!}{k! \cdot (n-k)!}
@@ -1404,19 +1404,19 @@ void SIGLIB_FUNC_DECL SDA_BinomialCoefficients(const SLData_t n, SLData_t* SIGLI
  * Function: SDS_Permutations()
  *
  * Parameters:
- *   SLData_t n
- *   SLData_t k
+ *  SLData_t n
+ *  SLData_t k
  *
  * Return value:
- *   Number of permutations
+ *  Number of permutations
  *
  * Description:
- *   This function returns the number of permutations
- *   (arrangements) of n items taking k at a time is
- *   represented as:
- *       n
- *        P
- *         k
+ *  This function returns the number of permutations
+ *  (arrangements) of n items taking k at a time is
+ *  represented as:
+ *      n
+ *       P
+ *        k
  *
  ********************************************************/
 
@@ -1429,18 +1429,18 @@ SLData_t SIGLIB_FUNC_DECL SDS_Permutations(const SLData_t n, const SLData_t k)
  * Function: SDS_Combinations()
  *
  * Parameters:
- *   SLData_t n
- *   SLData_t k
+ *  SLData_t n
+ *  SLData_t k
  *
  * Return value:
- *   Number of combinations
+ *  Number of combinations
  *
  * Description:
- *   This function returns the number of combinations of n
- *   items taking k at a time is represented as:
- *       n
- *        C
- *         k
+ *  This function returns the number of combinations of n
+ *  items taking k at a time is represented as:
+ *      n
+ *       C
+ *        k
  *
  ********************************************************/
 
@@ -1453,14 +1453,14 @@ SLData_t SIGLIB_FUNC_DECL SDS_Combinations(const SLData_t n, const SLData_t k)
  * Function: SIF_OverlapAndAddLinear()
  *
  * Parameters:
- *   SLData_t *pIncrement,
- *   const SLArrayIndex_t ArrayLength
+ *  SLData_t *pIncrement,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialize the linear overlap and add function
+ *  Initialize the linear overlap and add function
  *
  ********************************************************/
 
@@ -1473,19 +1473,19 @@ void SIGLIB_FUNC_DECL SIF_OverlapAndAddLinear(SLData_t* SIGLIB_PTR_DECL pIncreme
  * Function: SDA_OverlapAndAddLinear
  *
  * Parameters:
- *   const SLData_t *pSrc1,
- *   const SLData_t *pSrc2,
- *   SLData_t *pDst,
- *   const SLData_t Increment,
- *   const SLArrayIndex_t ArrayLength)
+ *  const SLData_t *pSrc1,
+ *  const SLData_t *pSrc2,
+ *  SLData_t *pDst,
+ *  const SLData_t Increment,
+ *  const SLArrayIndex_t ArrayLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a linear overlap and add of the data in the
- *   two arrays. The data linearly ramps between the
- *   values in one array to the values in the second.
+ *  Perform a linear overlap and add of the data in the
+ *  two arrays. The data linearly ramps between the
+ *  values in one array to the values in the second.
  *
  ********************************************************/
 
@@ -1515,22 +1515,22 @@ void SIGLIB_FUNC_DECL SDA_OverlapAndAddLinear(const SLData_t* SIGLIB_PTR_DECL pS
  * Function: SDA_OverlapAndAddLinearWithClip
  *
  * Parameters:
- *   const SLData_t *pSrc1,
- *   const SLData_t *pSrc2,
- *   SLData_t *pDst,
- *   const SLData_t Threshold,
- *   const SLData_t Increment,
- *   const SLArrayIndex_t ArrayLength)
+ *  const SLData_t *pSrc1,
+ *  const SLData_t *pSrc2,
+ *  SLData_t *pDst,
+ *  const SLData_t Threshold,
+ *  const SLData_t Increment,
+ *  const SLArrayIndex_t ArrayLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a linear overlap and add of the data in the
- *   two arrays.  The data linearly ramps between the
- *   values in one array to the values in the second.
- *   Also applies a threshold and ensures that the
- *   addition operation does not overflow.
+ *  Perform a linear overlap and add of the data in the
+ *  two arrays.  The data linearly ramps between the
+ *  values in one array to the values in the second.
+ *  Also applies a threshold and ensures that the
+ *  addition operation does not overflow.
  *
  ********************************************************/
 
@@ -1567,19 +1567,19 @@ void SIGLIB_FUNC_DECL SDA_OverlapAndAddLinearWithClip(const SLData_t* SIGLIB_PTR
  * Function: SDA_OverlapAndAddArbitrary()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1,
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2,
- *   const SLData_t * SIGLIB_PTR_DECL pWin,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+ *  const SLData_t * SIGLIB_PTR_DECL pWin,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform an overlap and add of the data in the two
- *   arrays. The scaling function is performed by the
- *   data supplied in the windowing array.
+ *  Perform an overlap and add of the data in the two
+ *  arrays. The scaling function is performed by the
+ *  data supplied in the windowing array.
  *
  ********************************************************/
 
@@ -1605,22 +1605,22 @@ void SIGLIB_FUNC_DECL SDA_OverlapAndAddArbitrary(const SLData_t* SIGLIB_PTR_DECL
  * Function: SDA_OverlapAndAddArbitraryWithClip()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1,
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2,
- *   const SLData_t * SIGLIB_PTR_DECL pWin,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLData_t Threshold,
- *   const SLArrayIndex_t ArrayLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+ *  const SLData_t * SIGLIB_PTR_DECL pWin,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLData_t Threshold,
+ *  const SLArrayIndex_t ArrayLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform an overlap and add of the data in the two
- *   arrays. The scaling function is performed by the
- *   data supplied in the windowing array.
- *   Also applies a threshold and ensures that the
- *   addition operation does not overflow.
+ *  Perform an overlap and add of the data in the two
+ *  arrays. The scaling function is performed by the
+ *  data supplied in the windowing array.
+ *  Also applies a threshold and ensures that the
+ *  addition operation does not overflow.
  *
  ********************************************************/
 
@@ -1652,13 +1652,13 @@ void SIGLIB_FUNC_DECL SDA_OverlapAndAddArbitraryWithClip(const SLData_t* SIGLIB_
  * Function: SDS_DegreesToRadians()
  *
  * Parameters:
- *   SLData_t Angle          Angle - degrees
+ *  SLData_t Angle          Angle - degrees
  *
  * Return value:
- *   Angle in radians
+ *  Angle in radians
  *
  * Description:
- *   This function returns the angle in radians
+ *  This function returns the angle in radians
  *
  ********************************************************/
 
@@ -1671,15 +1671,15 @@ SLData_t SIGLIB_FUNC_DECL SDS_DegreesToRadians(const SLData_t Degrees)
  * Function: SDA_DegreesToRadians()
  *
  * Parameters:
- *   SLData_t *pSrc          Pointer to src angle - degrees
- *   const SLData_t *pDst    Pointer to dst angle - radians
- *   const SLArrayIndex_t sampleLength
+ *  SLData_t *pSrc          Pointer to src angle - degrees
+ *  const SLData_t *pDst    Pointer to dst angle - radians
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   This function returns the angles in radians
+ *  This function returns the angles in radians
  *
  ********************************************************/
 
@@ -1706,13 +1706,13 @@ void SIGLIB_FUNC_DECL SDA_DegreesToRadians(const SLData_t* SIGLIB_PTR_DECL pSrc,
  * Function: SDS_RadiansToDegrees()
  *
  * Parameters:
- *   SLData_t Angle          Angle - radians
+ *  SLData_t Angle          Angle - radians
  *
  * Return value:
- *   Angle in degrees
+ *  Angle in degrees
  *
  * Description:
- *   This function returns the angle in degrees
+ *  This function returns the angle in degrees
  *
  ********************************************************/
 
@@ -1725,15 +1725,15 @@ SLData_t SIGLIB_FUNC_DECL SDS_RadiansToDegrees(const SLData_t Degrees)
  * Function: SDA_RadiansToDegrees()
  *
  * Parameters:
- *   SLData_t *pSrc          Pointer to src angle - radians
- *   const SLData_t *pDst    Pointer to dst angle - degrees
- *   const SLArrayIndex_t sampleLength
+ *  SLData_t *pSrc          Pointer to src angle - radians
+ *  const SLData_t *pDst    Pointer to dst angle - degrees
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   This function returns the angles in degrees
+ *  This function returns the angles in degrees
  *
  ********************************************************/
 
@@ -1760,18 +1760,18 @@ void SIGLIB_FUNC_DECL SDA_RadiansToDegrees(const SLData_t* SIGLIB_PTR_DECL pSrc,
  * Function: SDS_DetectNAN
  *
  * Parameters:
- *   const SLData_t          - Source sample
+ *  const SLData_t          - Source sample
  *
  * Return value:
- *   Result:
- *   This function returns either:
- *     The index of the first NaN or +/- infinity, othewise
- *     -1 if the value is NOT NaN or +/- infinity
+ *  Result:
+ *  This function returns either:
+ *    The index of the first NaN or +/- infinity, othewise
+ *    -1 if the value is NOT NaN or +/- infinity
  *
  * Description: Checks if the sample is NaN
  *
- *   Note: This function does not work with the same logic as isinfinite()
- *   It uses the same logic as SDA_DetectNAN()
+ *  Note: This function does not work with the same logic as isinfinite()
+ *  It uses the same logic as SDA_DetectNAN()
  *
  ********************************************************/
 
@@ -1787,18 +1787,18 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_DetectNAN(const SLData_t x)
  * Function: SDA_DetectNAN
  *
  * Parameters:
- *   const SLData_t *        - Pointer to source array
- *   const SLArrayIndex_t    - Array lengths
+ *  const SLData_t *       - Pointer to source array
+ *  const SLArrayIndex_t    - Array lengths
  *
  * Return value:
- *   Result:
- *   This function returns either:
- *     The index of the first NaN or +/- infinity, othewise
- *     -1 if the value is NOT NaN or +/- infinity
+ *  Result:
+ *  This function returns either:
+ *    The index of the first NaN or +/- infinity, othewise
+ *    -1 if the value is NOT NaN or +/- infinity
  *
  * Description: Checks if any of the samples in the array are NaN
  *
- *   Note: This function does not work with the same logic as isinfinite()
+ *  Note: This function does not work with the same logic as isinfinite()
  *
  ********************************************************/
 

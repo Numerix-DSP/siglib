@@ -208,7 +208,7 @@ int main(int argc, char* argv[])
   SLArrayIndex_t totalActualClassOneCount = SIGLIB_AI_ZERO;
   ComplexRect_s* xyData = (ComplexRect_s*)SUF_ComplexRectArrayAllocate(nRows);
 
-  SDA_Clear((SLData_t*)confusionMatrix,          // Array pointer
+  SDA_Zeros((SLData_t*)confusionMatrix,          // Array pointer
             NUM_CATEGORIES * NUM_CATEGORIES);    // Array length
 
   for (SLArrayIndex_t validationSequenceNumber = 0; validationSequenceNumber < nRows; validationSequenceNumber++) {

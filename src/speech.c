@@ -44,13 +44,13 @@ Description: Speech processing functions for SigLib DSP library.
  * Function: SIF_PreEmphasisFilter
  *
  * Parameters:
- *   SLData_t *pState        Filter state
+ *  SLData_t *pState        Filter state
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the speech processing pre-emphasis filter
+ *  Initialise the speech processing pre-emphasis filter
  *
  ********************************************************/
 
@@ -63,17 +63,17 @@ void SIGLIB_FUNC_DECL SIF_PreEmphasisFilter(SLData_t* pState)
  * Function: SDA_PreEmphasisFilter
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLData_t Coefficient,
- *   SLData_t *pState,
- *   const SLArrayIndex_t sampleLength)
+ *  SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLData_t Coefficient,
+ *  SLData_t *pState,
+ *  const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Implement the speech processing pre-emphasis filter
+ *  Implement the speech processing pre-emphasis filter
  *
  ********************************************************/
 
@@ -100,13 +100,13 @@ void SIGLIB_FUNC_DECL SDA_PreEmphasisFilter(SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
  * Function: SIF_DeEmphasisFilter
  *
  * Parameters:
- *   SLData_t *pState        Filter state
+ *  SLData_t *pState        Filter state
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the speech processing de-emphasis filter
+ *  Initialise the speech processing de-emphasis filter
  *
  ********************************************************/
 
@@ -119,17 +119,17 @@ void SIGLIB_FUNC_DECL SIF_DeEmphasisFilter(SLData_t* pState)
  * Function: SDA_DeEmphasisFilter
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLData_t Coefficient,
- *   SLData_t *pState,
- *   const SLArrayIndex_t sampleLength)
+ *  SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLData_t Coefficient,
+ *  SLData_t *pState,
+ *  const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Implement the speech processing de-emphasis filter
+ *  Implement the speech processing de-emphasis filter
  *
  ********************************************************/
 
@@ -155,27 +155,27 @@ void SIGLIB_FUNC_DECL SDA_DeEmphasisFilter(SLData_t* SIGLIB_PTR_DECL pSrc, SLDat
  * Function: SDA_AdpcmEncoder
  *
  * Parameters:
- *   const SLData_t *pSrc,
- *   SLData_t *pDst,
- *   const SLArrayIndex_t FrameSize)
+ *  const SLData_t *pSrc,
+ *  SLData_t *pDst,
+ *  const SLArrayIndex_t FrameSize)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   This function applies ADPCM encoder to an individual
- *   frame of data
+ *  This function applies ADPCM encoder to an individual
+ *  frame of data
  *
  * Notes:
- *   This function uses the following adaptive step size algorithm:
- *       If the estimate is lower than the input then
- *       double the step size and transmit +1
- *       If the estimate is higher than the input then
- *       restart with the default step size and transmit 0
+ *  This function uses the following adaptive step size algorithm:
+ *      If the estimate is lower than the input then
+ *      double the step size and transmit +1
+ *      If the estimate is higher than the input then
+ *      restart with the default step size and transmit 0
  *
- *   The first sample in the destination frame is the first
- *   sample of the input frame so that transmission errors
- *   do not propagate beyond a single frame.
+ *  The first sample in the destination frame is the first
+ *  sample of the input frame so that transmission errors
+ *  do not propagate beyond a single frame.
  *
  ********************************************************/
 
@@ -226,32 +226,32 @@ void SIGLIB_FUNC_DECL SDA_AdpcmEncoder(const SLData_t* SIGLIB_PTR_DECL pSrc, SLD
  * Function: SDA_AdpcmEncoderDebug
  *
  * Parameters:
- *   const SLData_t *pSrc,
- *   SLData_t *pDst,
- *   SLData_t *pEstimate,
- *   const SLArrayIndex_t FrameSize)
+ *  const SLData_t *pSrc,
+ *  SLData_t *pDst,
+ *  SLData_t *pEstimate,
+ *  const SLArrayIndex_t FrameSize)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   This function applies ADPCM encoder to an individual
- *   frame of data
+ *  This function applies ADPCM encoder to an individual
+ *  frame of data
  *
  * Notes:
- *   This function uses the following adaptive step size algorithm:
- *       If the estimate is lower than the input then
- *       double the step size and transmit +1
- *       If the estimate is higher than the input then
- *       restart with the default step size and transmit 0
+ *  This function uses the following adaptive step size algorithm:
+ *      If the estimate is lower than the input then
+ *      double the step size and transmit +1
+ *      If the estimate is higher than the input then
+ *      restart with the default step size and transmit 0
  *
- *   The first sample in the destination frame is the first
- *   sample of the input frame so that transmission errors
- *   do not propagate beyond a single frame.
+ *  The first sample in the destination frame is the first
+ *  sample of the input frame so that transmission errors
+ *  do not propagate beyond a single frame.
  *
- *   This function saves the estimate array so that it
- *   can be compared to the output of the decoder -
- *   they should be identical.
+ *  This function saves the estimate array so that it
+ *  can be compared to the output of the decoder -
+ *  they should be identical.
  *
  ********************************************************/
 
@@ -307,27 +307,27 @@ void SIGLIB_FUNC_DECL SDA_AdpcmEncoderDebug(const SLData_t* SIGLIB_PTR_DECL pSrc
  * Function: SDA_AdpcmDecoder
  *
  * Parameters:
- *   const SLData_t *pSrc,
- *   SLData_t *pDst,
- *   const SLArrayIndex_t FrameSize)
+ *  const SLData_t *pSrc,
+ *  SLData_t *pDst,
+ *  const SLArrayIndex_t FrameSize)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   This function applies ADPCM decoder to an individual
- *   frame of data
+ *  This function applies ADPCM decoder to an individual
+ *  frame of data
  *
  * Notes:
- *   This function uses the following adaptive step size algorithm:
- *       If the estimate is lower than the input then
- *       double the step size and transmit +1
- *       If the estimate is higher than the input then
- *       restart with the default step size and transmit 0
+ *  This function uses the following adaptive step size algorithm:
+ *      If the estimate is lower than the input then
+ *      double the step size and transmit +1
+ *      If the estimate is higher than the input then
+ *      restart with the default step size and transmit 0
  *
- *   The first sample in the destination frame is the first
- *   sample of the input frame so that transmission errors
- *   do not propagate beyond a single frame.
+ *  The first sample in the destination frame is the first
+ *  sample of the input frame so that transmission errors
+ *  do not propagate beyond a single frame.
  *
  ********************************************************/
 

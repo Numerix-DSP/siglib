@@ -44,10 +44,10 @@ Description: Siglib utility files.
  * Function: SUF_SiglibVersion
  *
  * Parameters:
- *   void
+ *  void
  *
  * Return value:
- *   SLData_t        - Version number
+ *  SLData_t        - Version number
  *
  * Description: Returns SigLib version number.
  *
@@ -68,21 +68,46 @@ SLData_t SIGLIB_FUNC_DECL SUF_SiglibVersion(void)
  * Function: SUF_PrintArray
  *
  * Parameters:
- *   const SLData_t *pSrc,       - Pointer to data array
- *   const SLArrayIndex_t ArrayLength    - Array length
+ *  const SLData_t *pSrc,              - Pointer to data array
+ *  const SLArrayIndex_t arrayLength   - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Prints an array of data to the console.
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SUF_PrintArray(const SLData_t* pSrc, const SLArrayIndex_t ArrayLength)
+void SIGLIB_FUNC_DECL SUF_PrintArray(const SLData_t* pSrc, const SLArrayIndex_t arrayLength)
 {
-  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
-    //      SUF_Printf ("[%d] = %le\n", (int)i, (double)*pSrc++);
-    SUF_Printf("[%ld] = %1.6lf\n", (long)i, (double)*pSrc++);
+#  define MAX_INCLUSIVE_ARRAY_LENGTH 64    // Maximum inclusive array length for printing
+#  define NUMBER_OF_SAMPLES_PER_LINE 8     // Number of samples per line for printing
+
+  if (arrayLength < MAX_INCLUSIVE_ARRAY_LENGTH) {
+    for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
+      if ((i % NUMBER_OF_SAMPLES_PER_LINE) == 0) {
+        SUF_Printf("[%ld] = ", (long)i);
+      }
+      //      SUF_Printf ("%le, ", (int)i, (double)*pSrc++);
+      SUF_Printf("%1.6lf, ", (double)pSrc[i]);
+      if ((i % NUMBER_OF_SAMPLES_PER_LINE) == NUMBER_OF_SAMPLES_PER_LINE - 1) {
+        SUF_Printf("\n");
+      }
+    }
+  } else {
+    SUF_Printf("[0] = ");
+    for (SLArrayIndex_t i = 0; i < NUMBER_OF_SAMPLES_PER_LINE; i++) {
+      //      SUF_Printf ("%le, ", (double)pSrc[i]);
+      SUF_Printf("%1.6lf, ", (double)pSrc[i]);
+    }
+    SUF_Printf("\n");
+    SLArrayIndex_t arrayIndex = arrayLength - NUMBER_OF_SAMPLES_PER_LINE;
+    SUF_Printf("[%ld] = ", (long)arrayIndex);
+    for (SLArrayIndex_t i = arrayIndex; i < arrayLength; i++) {
+      //      SUF_Printf ("%le", (double)pSrc[i]);
+      SUF_Printf("%1.6lf, ", (double)pSrc[i]);
+    }
+    SUF_Printf("\n");
   }
   SUF_Printf("\n");
 }    // End of SUF_PrintArray()
@@ -91,19 +116,19 @@ void SIGLIB_FUNC_DECL SUF_PrintArray(const SLData_t* pSrc, const SLArrayIndex_t 
  * Function: SUF_PrintFixedPointArray
  *
  * Parameters:
- *   const SLArrayIndex_t *pSrc,         - Pointer to data array
- *   const SLArrayIndex_t ArrayLength    - Array length
+ *  const SLArrayIndex_t *pSrc,      - Pointer to data array
+ *  const SLArrayIndex_t arrayLength - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Prints an array of data to the console.
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SUF_PrintFixedPointArray(const SLArrayIndex_t* pSrc, const SLArrayIndex_t ArrayLength)
+void SIGLIB_FUNC_DECL SUF_PrintFixedPointArray(const SLArrayIndex_t* pSrc, const SLArrayIndex_t arrayLength)
 {
-  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
+  for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
     SUF_Printf("[%ld] = %ld\n", (long)i, (long)*pSrc++);
   }
   SUF_Printf("\n");
@@ -113,20 +138,20 @@ void SIGLIB_FUNC_DECL SUF_PrintFixedPointArray(const SLArrayIndex_t* pSrc, const
  * Function: SUF_PrintComplexArray
  *
  * Parameters:
- *   const SLData_t *pSrcReal,       - Pointer to real data array
- *   const SLData_t *pSrcImag,       - Pointer to imag data array
- *   const SLArrayIndex_t ArrayLength    - Array length
+ *  const SLData_t *pSrcReal,        - Pointer to real data array
+ *  const SLData_t *pSrcImag,        - Pointer to imag data array
+ *  const SLArrayIndex_t arrayLength - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Prints a complex array of data to the console.
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SUF_PrintComplexArray(const SLData_t* pSrcReal, const SLData_t* pSrcImag, const SLArrayIndex_t ArrayLength)
+void SIGLIB_FUNC_DECL SUF_PrintComplexArray(const SLData_t* pSrcReal, const SLData_t* pSrcImag, const SLArrayIndex_t arrayLength)
 {
-  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
+  for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
     SUF_Printf("[%ld] = ", (long)i);
     if (*pSrcReal >= SIGLIB_ZERO) {
       SUF_Printf(" ");
@@ -134,29 +159,98 @@ void SIGLIB_FUNC_DECL SUF_PrintComplexArray(const SLData_t* pSrcReal, const SLDa
     if (*pSrcImag >= SIGLIB_ZERO) {
       //          SUF_Printf ("%le + j%le\n", (double)*pSrcReal++,
       //          (double)*pSrcImag++);
-      SUF_Printf("%1.6lf + j %1.6lf\n", (double)*pSrcReal++, (double)*pSrcImag++);
+      SUF_Printf("%1.6lf +j%1.6lf\n", (double)*pSrcReal++, (double)*pSrcImag++);
     } else {
       //          SUF_Printf ("%le - j%le\n", (double)*pSrcReal++,
       //          (double)-*pSrcImag++);
-      SUF_Printf("%1.6lf - j %1.6lf\n", (double)*pSrcReal++, (double)-*pSrcImag++);
+      SUF_Printf("%1.6lf -j%1.6lf\n", (double)*pSrcReal++, (double)-*pSrcImag++);
     }
   }
   SUF_Printf("\n");
 }    // End of SUF_PrintComplexArray()
 
 /********************************************************
+ * Function: SUF_PrintComplexMatrix
+ *
+ * Parameters:
+ *  const SLData_t *pSrcReal,      - Pointer to real data array
+ *  const SLData_t *pSrcImag,      - Pointer to imag data array
+ *  const SLArrayIndex_t nRows     - Number of rows
+ *  const SLArrayIndex_t nCols     - Number of columns
+ *
+ * Return value:
+ *  void
+ *
+ * Description: Prints a complex matrix of data to the console.
+ *
+ ********************************************************/
+
+void SIGLIB_FUNC_DECL SUF_PrintComplexMatrix(const SLData_t* pSrcReal, const SLData_t* pSrcImag, const SLArrayIndex_t nRows,
+                                             const SLArrayIndex_t nCols)
+{
+  for (SLArrayIndex_t i = 0; i < nRows; i++) {
+    for (SLArrayIndex_t j = 0; j < nCols; j++) {
+      SLData_t real = *(pSrcReal + (i * nCols) + j);
+      SLData_t imag = *(pSrcImag + (i * nCols) + j);
+      if (real >= SIGLIB_ZERO) {
+        SUF_Printf(" ");
+      }
+      if (imag >= SIGLIB_ZERO) {
+        //          SUF_Printf ("%le + j%le  ", real, imag);
+        SUF_Printf("%1.4lf +j%1.4lf  ", real, imag);
+      } else {
+        //          SUF_Printf ("%le - j%le  ", real, -imag);
+        SUF_Printf("%1.4lf -j%1.4lf  ", real, -imag);
+      }
+    }
+    SUF_Printf("\n");
+  }
+  SUF_Printf("\n");
+}    // End of SUF_PrintComplexMatrix()
+
+/********************************************************
+ * Function: SUF_PrintComplexNumber
+ *
+ * Parameters:
+ *  const SLData_t *pSrcReal,      - Pointer to real data array
+ *  const SLData_t *pSrcImag,      - Pointer to imag data array
+ *  const SLArrayIndex_t nRows     - Number of rows
+ *  const SLArrayIndex_t nCols     - Number of columns
+ *
+ * Return value:
+ *  void
+ *
+ * Description: Prints a complex matrix of data to the console.
+ *
+ ********************************************************/
+
+void SIGLIB_FUNC_DECL SUF_PrintComplexNumber(const SLData_t real, const SLData_t imag)
+{
+  if (real >= SIGLIB_ZERO) {
+    SUF_Printf(" ");
+  }
+  if (imag >= SIGLIB_ZERO) {
+    //          SUF_Printf ("%le + j%le", real, imag);
+    SUF_Printf("%1.4lf +j%1.4lf", real, imag);
+  } else {
+    //          SUF_Printf ("%le - j%le", real, -imag);
+    SUF_Printf("%1.4lf -j%1.4lf", real, -imag);
+  }
+}    // End of SUF_PrintComplexNumber()
+
+/********************************************************
  * Function: SUF_PrintMatrix
  *
  * Parameters:
- *   const SLData_t *pSrc,       - Pointer to data array
- *   const SLArrayIndex_t nRows  - Number of rows
- *   const SLArrayIndex_t nCols  - Number of columns
+ *  const SLData_t *pSrc,       - Pointer to data array
+ *  const SLArrayIndex_t nRows  - Number of rows
+ *  const SLArrayIndex_t nCols  - Number of columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Print out all values in a 2D matrix to
- *   the debug file.
+ *  the debug file.
  *
  ********************************************************/
 
@@ -235,10 +329,10 @@ void SIGLIB_FUNC_DECL SUF_PrintMatrix(const SLData_t* pSrc, const SLArrayIndex_t
  * Function: SUF_PrintPolar
  *
  * Parameters:
- *   const SLComplexPolar_s Src,     - Polar source data
+ *  const SLComplexPolar_s Src,     - Polar source data
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Print the polar value to the console.
  *
@@ -256,10 +350,10 @@ void SIGLIB_FUNC_DECL SUF_PrintPolar(const SLComplexPolar_s Src)
  * Function: SUF_PrintRectangular
  *
  * Parameters:
- *   const SLComplexRect_s Src,      - Rectangular source data
+ *  const SLComplexRect_s Src,      - Rectangular source data
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Print the rectangular value to the console.
  *
@@ -277,10 +371,10 @@ void SIGLIB_FUNC_DECL SUF_PrintRectangular(const SLComplexRect_s Src)
  * Function: SUF_PrintIIRCoefficients
  *
  * Parameters:
- *   const SLComplexRect_s Src,      - Rectangular source data
+ *  const SLComplexRect_s Src,      - Rectangular source data
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Print the rectangular value to the console.
  *
@@ -300,14 +394,14 @@ void SIGLIB_FUNC_DECL SUF_PrintIIRCoefficients(const SLData_t* pIIRCoeffs, SLArr
  * Function: SUF_PrintCount
  *
  * Parameters:
- *   variable argument list
+ *  variable argument list
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Prints an incrementing value to log file
- *   This function is useful for counting how many
- *   instances of an event occur.
+ *  This function is useful for counting how many
+ *  instances of an event occur.
  *
  ********************************************************/
 
@@ -321,14 +415,14 @@ void SIGLIB_FUNC_DECL SUF_PrintCount(const char* String)
  * Function: SUF_PrintHigher
  *
  * Parameters:
- *   variable argument list
+ *  variable argument list
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: If the source is larger than the
- *   threshold then print the string. This function is
- *   useful for detecting data anomolies.
+ *  threshold then print the string. This function is
+ *  useful for detecting data anomolies.
  *
  ********************************************************/
 
@@ -343,16 +437,16 @@ void SIGLIB_FUNC_DECL SUF_PrintHigher(const SLData_t src, const SLData_t thresho
  * Function: SUF_PrintLower
  *
  * Parameters:
- *   const SLData_t      - src,
- *   const SLData_t      - threshold,
- *   const char *)       - string
+ *  const SLData_t      - src,
+ *  const SLData_t      - threshold,
+ *  const char *)       - string
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: If the source is less than the
- *   threshold then print the string. This function is
- *   useful for detecting data anomolies.
+ *  threshold then print the string. This function is
+ *  useful for detecting data anomolies.
  *
  ********************************************************/
 
@@ -372,10 +466,10 @@ void SIGLIB_FUNC_DECL SUF_PrintLower(const SLData_t src, const SLData_t threshol
  * Function: SUF_ClearDebugfprintf
  *
  * Parameters:
- *   None
+ *  None
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description: Clear the debug log file.
  *
@@ -401,10 +495,10 @@ SLError_t SIGLIB_FUNC_DECL SUF_ClearDebugfprintf(void)
  * Function: SUF_Debugfprintf
  *
  * Parameters:
- *   variable argument list
+ *  variable argument list
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description: Prints string to file for debugging
  *
@@ -436,11 +530,11 @@ SLError_t SIGLIB_FUNC_DECL SUF_Debugfprintf(const char* ArgumentType, ...)
  * Function: SUF_Debugvfprintf
  *
  * Parameters:
- *   const char *format,     - Format
- *   va_list ap              - Pointer to variable argument list
+ *  const char *format,     - Format
+ *  va_list ap              - Pointer to variable argument list
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description: Prints string to file for debugging
  *
@@ -467,17 +561,17 @@ SLError_t SIGLIB_FUNC_DECL SUF_Debugvfprintf(const char* format, va_list ap)
  * Function: SUF_DebugPrintArray
  *
  * Parameters:
- *   const SLData_t *pSrc,       - Pointer to data array
- *   const SLArrayIndex_t ArrayLength    - Array length
+ *  const SLData_t *pSrc,       - Pointer to data array
+ *  const SLArrayIndex_t arrayLength    - Array length
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description: Prints an array of data to the debug file.
  *
  ********************************************************/
 
-SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintArray(const SLData_t* pSrc, const SLArrayIndex_t ArrayLength)
+SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintArray(const SLData_t* pSrc, const SLArrayIndex_t arrayLength)
 {
   FILE* fp_LogFile;
 #  if SIGLIB_FILE_OPEN_SECURE
@@ -489,7 +583,7 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintArray(const SLData_t* pSrc, const SLArr
     return (SIGLIB_FILE_ERROR);
   }
 
-  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
+  for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
     //      SUF_Fprintf (fp_LogFile, "[%ld] = %le\n", (long)i, (double)*pSrc++);
     SUF_Fprintf(fp_LogFile, "[%ld] = %1.6lf\n", (long)i, (double)*pSrc++);
   }
@@ -503,17 +597,17 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintArray(const SLData_t* pSrc, const SLArr
  * Function: SUF_DebugPrintFixedPointArray
  *
  * Parameters:
- *   const SLArrayIndex_t *pSrc,         - Pointer to data array
- *   const SLArrayIndex_t ArrayLength    - Array length
+ *  const SLArrayIndex_t *pSrc,         - Pointer to data array
+ *  const SLArrayIndex_t arrayLength    - Array length
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description: Prints an array of data to the debug file.
  *
  ********************************************************/
 
-SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintFixedPointArray(const SLArrayIndex_t* pSrc, const SLArrayIndex_t ArrayLength)
+SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintFixedPointArray(const SLArrayIndex_t* pSrc, const SLArrayIndex_t arrayLength)
 {
   FILE* fp_LogFile;
 #  if SIGLIB_FILE_OPEN_SECURE
@@ -525,7 +619,7 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintFixedPointArray(const SLArrayIndex_t* p
     return (SIGLIB_FILE_ERROR);
   }
 
-  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
+  for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
     SUF_Fprintf(fp_LogFile, "[%ld] = %ld\n", (long)i, (long)*pSrc++);
   }
   SUF_Fprintf(fp_LogFile, "\n");
@@ -538,18 +632,18 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintFixedPointArray(const SLArrayIndex_t* p
  * Function: SUF_DebugPrintComplexArray
  *
  * Parameters:
- *   const SLData_t *pSrcReal,       - Pointer to real data array
- *   const SLData_t *pSrcImag,       - Pointer to imag data array
- *   const SLArrayIndex_t ArrayLength    - Array length
+ *  const SLData_t *pSrcReal,       - Pointer to real data array
+ *  const SLData_t *pSrcImag,       - Pointer to imag data array
+ *  const SLArrayIndex_t arrayLength    - Array length
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description: Prints a complex array of data to the debug file.
  *
  ********************************************************/
 
-SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexArray(const SLData_t* pSrcReal, const SLData_t* pSrcImag, const SLArrayIndex_t ArrayLength)
+SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexArray(const SLData_t* pSrcReal, const SLData_t* pSrcImag, const SLArrayIndex_t arrayLength)
 {
   FILE* fp_LogFile;
 #  if SIGLIB_FILE_OPEN_SECURE
@@ -561,7 +655,7 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexArray(const SLData_t* pSrcReal, 
     return (SIGLIB_FILE_ERROR);
   }
 
-  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
+  for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
     if (*pSrcImag >= SIGLIB_ZERO) {
       SUF_Fprintf(fp_LogFile, "[%ld] = ", (long)i);
       if (*pSrcReal >= SIGLIB_ZERO) {
@@ -590,11 +684,11 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexArray(const SLData_t* pSrcReal, 
  * Function: SUF_DebugPrintComplex
  *
  * Parameters:
- *   const SLData_t real,       - Real data value
- *   const SLData_t imag,       - Imag data value
+ *  const SLData_t real,       - Real data value
+ *  const SLData_t imag,       - Imag data value
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description: Prints a complex rectangular value to the debug file.
  *
@@ -636,10 +730,10 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplex(const SLData_t real, const SLDa
  * Function: SUF_DebugPrintComplexRect
  *
  * Parameters:
- *   const SLComplexRect_s     Rectangular value
+ *  const SLComplexRect_s     Rectangular value
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description: Prints a complex rectangular value to the debug file.
  *
@@ -681,10 +775,10 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexRect(const SLComplexRect_s Rect)
  * Function: SUF_DebugPrintComplexPolar
  *
  * Parameters:
- *   const SLComplexPolar_s      Polar value
+ *  const SLComplexPolar_s      Polar value
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description: Prints a complex polar value to the debug file.
  *
@@ -726,15 +820,15 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexPolar(const SLComplexPolar_s Pol
  * Function: SUF_DebugPrintMatrix
  *
  * Parameters:
- *   const SLData_t *pSrc,       - Pointer to data array
- *   const SLArrayIndex_t nRows  - Number of rows
- *   const SLArrayIndex_t nCols  - Number of columns
+ *  const SLData_t *pSrc,       - Pointer to data array
+ *  const SLArrayIndex_t nRows  - Number of rows
+ *  const SLArrayIndex_t nCols  - Number of columns
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description: Print out all values in a 2D matrix to
- *   the debug file.
+ *  the debug file.
  *
  ********************************************************/
 
@@ -832,10 +926,10 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintMatrix(const SLData_t* pSrc, const SLAr
  * Function: SUF_DebugPrintPolar
  *
  * Parameters:
- *   const SLComplexPolar_s Src,     - Polar source data
+ *  const SLComplexPolar_s Src,     - Polar source data
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description: Print the polar value to the debug file.
  *
@@ -866,10 +960,10 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintPolar(const SLComplexPolar_s Src)
  * Function: SUF_DebugPrintRectangular
  *
  * Parameters:
- *   const SLComplexRect_s Src,      - Rectangular source data
+ *  const SLComplexRect_s Src,      - Rectangular source data
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description: Print the rectangular value to the debug file.
  *
@@ -900,10 +994,10 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintRectangular(const SLComplexRect_s Src)
  * Function: SUF_DebugPrintIIRCoefficients
  *
  * Parameters:
- *   const SLComplexRect_s Src,      - Rectangular source data
+ *  const SLComplexRect_s Src,      - Rectangular source data
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description: Print the rectangular value to the debug file.
  *
@@ -936,14 +1030,14 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintIIRCoefficients(const SLData_t* pIIRCoe
  * Function: SUF_DebugPrintCount
  *
  * Parameters:
- *   variable argument list
+ *  variable argument list
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description: Prints an incrementing value to log file
- *   This function is useful for counting how many
- *   instances of an event occur.
+ *  This function is useful for counting how many
+ *  instances of an event occur.
  *
  ********************************************************/
 
@@ -971,14 +1065,14 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintCount(const char* String)
  * Function: SUF_DebugPrintHigher
  *
  * Parameters:
- *   variable argument list
+ *  variable argument list
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description: If the source is larger than the
- *   threshold then print the string to the log file. This
- *   function is useful for detecting data anomolies.
+ *  threshold then print the string to the log file. This
+ *  function is useful for detecting data anomolies.
  *
  ********************************************************/
 
@@ -1005,16 +1099,16 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintHigher(const SLData_t src, const SLData
  * Function: SUF_DebugPrintLower
  *
  * Parameters:
- *   const SLData_t      - src,
- *   const SLData_t      - threshold,
- *   const char *)       - string
+ *  const SLData_t      - src,
+ *  const SLData_t      - threshold,
+ *  const char *)       - string
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description: If the source is less than the
- *   threshold then print the string to the log file. This
- *   function is useful for detecting data anomolies.
+ *  threshold then print the string to the log file. This
+ *  function is useful for detecting data anomolies.
  *
  ********************************************************/
 
@@ -1047,13 +1141,13 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintLower(const SLData_t src, const SLData_
  * Function: SUF_MSDelay
  *
  * Parameters:
- *   const SLFixData_t   Delay in ms
+ *  const SLFixData_t   Delay in ms
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Delay the processing for the given number of ms
+ *  Delay the processing for the given number of ms
  *
  ********************************************************/
 
@@ -1079,13 +1173,13 @@ void SIGLIB_FUNC_DECL SUF_MSDelay(const SLFixData_t Delay)
  * Function: SUF_StrError
  *
  * Parameters:
- *   const SLError_t     Error number
+ *  const SLError_t     Error number
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Return the error message for the given error code
+ *  Return the error message for the given error code
  *
  ********************************************************/
 

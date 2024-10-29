@@ -30,6 +30,11 @@ Additional Functionality:
     SIGLIB_BLACKMAN_HARRIS_FOURIER
     SIGLIB_RECTANGLE_FOURIER
     SIGLIB_FLAT_TOP_FOURIER
+  SDA_RfftConvolve
+  SAI_CountOneBits and SAI_CountZeroBits
+  SDA_FftRealToComplex
+  SAI_Log2OfPowerof2, SAI_DivideByPowerOf2, SAI_NextPowerOf2, SAI_NextMultipleOfFftLength
+  SDA_FindFirstNonZeroIndex, SDA_FindNumberOfNonZeroValues
 
 Operational Changes:
   SIF_GraphicalEqualizerFilterBank changed to SIF_GraphicEqualizerFilterBank
@@ -46,6 +51,9 @@ Operational Changes:
     SIGLIB_BLACKMAN_HARRIS                        to: SIGLIB_BLACKMAN_HARRIS_FOURIER
     SIGLIB_RECTANGLE                              to: SIGLIB_RECTANGLE_FOURIER
     SIGLIB_FLAT_TOP                               to: SIGLIB_FLAT_TOP_FOURIER
+  SDA_Zeros and SDA_Ones changed from macros to functions, SDA_Clear deprecated
+  SDS_Odd changed to SDS_TestOdd, SDS_Even changed to SDS_TestEven, SDS_PowerOfTwo changed to SDS_TestPowerOfTwo
+  SAI_Odd changed to SAI_TestOdd, SAI_Even changed to SAI_TestEven, SAI_PowerOfTwo changed to SAI_TestPowerOfTwo
 
 Additional Processor / Compiler Support:
   None.

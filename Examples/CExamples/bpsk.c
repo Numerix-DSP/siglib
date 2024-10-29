@@ -112,7 +112,7 @@ int main(void)
 
 #if DISPLAY_FILTER_OUTPUT
   SLData_t* pFilterOutput = SUF_VectorArrayAllocate(SAMPLE_LENGTH);    // Array for displaying output of LPF
-  SDA_Clear(pFilterOutput,                                             // Pointer to destination array
+  SDA_Zeros(pFilterOutput,                                             // Pointer to destination array
             SAMPLE_LENGTH);                                            // Dataset length
 #endif
 

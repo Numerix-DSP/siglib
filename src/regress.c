@@ -44,24 +44,24 @@ Description: SigLib DSP library regression analysis routines.
  * Function: SDA_LinraConstantCoeff
  *
  * Parameters:
- *       const SLData_t * SIGLIB_PTR_DECL pSrcX - Buffer X data pointer
- *       const SLData_t * SIGLIB_PTR_DECL pSrcY - Buffer Y data pointer
- *       const SLArrayIndex_t sampleLength - Buffer length
+ *      const SLData_t * SIGLIB_PTR_DECL pSrcX - Buffer X data pointer
+ *      const SLData_t * SIGLIB_PTR_DECL pSrcY - Buffer Y data pointer
+ *      const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Constant coefficient.
  *
  * Description: The constant coefficient for the
- *   supplied data.
+ *  supplied data.
  *
- *   Assuming the data can be modeled according to:
+ *  Assuming the data can be modeled according to:
  *
- *       y = Mx + C
+ *      y = Mx + C
  *
- *   Gives:
+ *  Gives:
  *
- *       sum(y) - M.sum(x)
- *   C = -----------------
- *              n
+ *      sum(y) - M.sum(x)
+ *  C = -----------------
+ *             n
  *
  ********************************************************/
 
@@ -97,24 +97,24 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraConstantCoeff(const SLData_t* SIGLIB_PTR_DECL
  * Function: SDA_LinraRegressionCoeff
  *
  * Parameters:
- *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
- *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLArrayIndex_t sampleLength - Buffer length
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
+ *      const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Regression coefficient.
  *
  * Description: The regression coefficient for the
- *   supplied data.
+ *  supplied data.
  *
- *   Assuming the data can be modeled according to:
+ *  Assuming the data can be modeled according to:
  *
- *       y = Mx + C
+ *      y = Mx + C
  *
- *   Gives:
+ *  Gives:
  *
- *       n.sum(x.y) - sum(x) . sum(y)
- *   M = ----------------------------
- *         n.sum(x^2) - (sum(x))^2
+ *      n.sum(x.y) - sum(x) . sum(y)
+ *  M = ----------------------------
+ *        n.sum(x^2) - (sum(x))^2
  *
  ********************************************************/
 
@@ -151,24 +151,24 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
  * Function: SDA_LinraCorrelationCoeff
  *
  * Parameters:
- *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
- *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLArrayIndex_t sampleLength - Buffer length
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
+ *      const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Correlation coefficient.
  *
  * Description: The correlation coefficient for the
- *   supplied data.
+ *  supplied data.
  *
- *   Assuming the data can be modeled according to:
+ *  Assuming the data can be modeled according to:
  *
- *       y = Mx + C
+ *      y = Mx + C
  *
- *   Gives:
+ *  Gives:
  *
- *                       n.sum(x.y) - sum(x) . sum(y)
- *   r = ----------------------------------------------------------
- *       sqrt ((n.sum(x^2) - (sum(x))^2).(n.sum(y^2) - (sum(y))^2))
+ *                      n.sum(x.y) - sum(x) . sum(y)
+ *  r = ----------------------------------------------------------
+ *      sqrt ((n.sum(x^2) - (sum(x))^2).(n.sum(y^2) - (sum(y))^2))
  *
  ********************************************************/
 
@@ -208,19 +208,19 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
  * Function: SDA_LinraEstimateX
  *
  * Parameters:
- *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
- *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLData_t YVal  - Y value
- *       const SLArrayIndex_t sampleLength - Buffer length
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
+ *      const SLData_t YVal  - Y value
+ *      const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Estimate X
  *
  * Description: Estimate a value for X, given a value
- *   for Y.
+ *  for Y.
  *
- *   Assuming the data can be modeled according to:
+ *  Assuming the data can be modeled according to:
  *
- *       y = Mx + C
+ *      y = Mx + C
  *
  ********************************************************/
 
@@ -234,19 +234,19 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraEstimateX(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SDA_LinraEstimateY
  *
  * Parameters:
- *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
- *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLData_t YVal  - Y value
- *       const SLArrayIndex_t sampleLength - Buffer length
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
+ *      const SLData_t YVal  - Y value
+ *      const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Estimate Y
  *
  * Description: Estimate a value for Y, given a value
- *   for X.
+ *  for X.
  *
- *   Assuming the data can be modeled according to:
+ *  Assuming the data can be modeled according to:
  *
- *       y = Mx + C
+ *      y = Mx + C
  *
  ********************************************************/
 
@@ -260,24 +260,24 @@ SLData_t SIGLIB_FUNC_DECL SDA_LinraEstimateY(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SDA_LograConstantCoeff
  *
  * Parameters:
- *       const SLData_t * SIGLIB_PTR_DECL pSrcX - Buffer X data pointer
- *       const SLData_t * SIGLIB_PTR_DECL pSrcY - Buffer Y data pointer
- *       const SLArrayIndex_t sampleLength - Buffer length
+ *      const SLData_t * SIGLIB_PTR_DECL pSrcX - Buffer X data pointer
+ *      const SLData_t * SIGLIB_PTR_DECL pSrcY - Buffer Y data pointer
+ *      const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Constant coefficient.
  *
  * Description: The constant coefficient for the
- *   supplied data.
+ *  supplied data.
  *
- *   Assuming the data can be modeled according to:
+ *  Assuming the data can be modeled according to:
  *
- *       y = M.ln(x) + C
+ *      y = M.ln(x) + C
  *
- *   Gives:
+ *  Gives:
  *
- *       sum(y) - M.sum(ln(x))
- *   C = ---------------------
- *               n
+ *      sum(y) - M.sum(ln(x))
+ *  C = ---------------------
+ *              n
  *
  ********************************************************/
 
@@ -313,24 +313,24 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograConstantCoeff(const SLData_t* SIGLIB_PTR_DECL
  * Function: SDA_LograRegressionCoeff
  *
  * Parameters:
- *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
- *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLArrayIndex_t sampleLength - Buffer length
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
+ *      const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Regression coefficient.
  *
  * Description: The regression coefficient for the
- *   supplied data.
+ *  supplied data.
  *
- *   Assuming the data can be modeled according to:
+ *  Assuming the data can be modeled according to:
  *
- *       y = M.ln(x) + C
+ *      y = M.ln(x) + C
  *
- *   Gives:
+ *  Gives:
  *
- *       n.sum(ln(x).y) - sum(ln(x)) . sum(y)
- *   M = ------------------------------------
- *         n.sum(ln(x)^2) - (sum(ln(x)))^2
+ *      n.sum(ln(x).y) - sum(ln(x)) . sum(y)
+ *  M = ------------------------------------
+ *        n.sum(ln(x)^2) - (sum(ln(x)))^2
  *
  ********************************************************/
 
@@ -367,24 +367,24 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
  * Function: SDA_LograCorrelationCoeff
  *
  * Parameters:
- *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
- *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLArrayIndex_t sampleLength - Buffer length
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
+ *      const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Correlation coefficient.
  *
  * Description: The correlation coefficient for the
- *   supplied data.
+ *  supplied data.
  *
- *   Assuming the data can be modeled according to:
+ *  Assuming the data can be modeled according to:
  *
- *       y = M.ln(x) + C
+ *      y = M.ln(x) + C
  *
- *   Gives:
+ *  Gives:
  *
- *                       n.sum(ln(x).y) - sum(ln(x)) . sum(y)
- *   r = ------------------------------------------------------------------
- *       sqrt ((n.sum(ln(x)^2) - (sum(ln(x)))^2).(n.sum(y^2) - (sum(y))^2))
+ *                      n.sum(ln(x).y) - sum(ln(x)) . sum(y)
+ *  r = ------------------------------------------------------------------
+ *      sqrt ((n.sum(ln(x)^2) - (sum(ln(x)))^2).(n.sum(y^2) - (sum(y))^2))
  *
  ********************************************************/
 
@@ -424,19 +424,19 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
  * Function: SDA_LograEstimateX
  *
  * Parameters:
- *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
- *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLData_t YVal  - Y value
- *       const SLArrayIndex_t sampleLength - Buffer length
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
+ *      const SLData_t YVal  - Y value
+ *      const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Estimate X
  *
  * Description: Estimate a value for X, given a value
- *   for Y.
+ *  for Y.
  *
- *   Assuming the data can be modeled according to:
+ *  Assuming the data can be modeled according to:
  *
- *       y = M.ln(x) + C
+ *      y = M.ln(x) + C
  *
  ********************************************************/
 
@@ -450,19 +450,19 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograEstimateX(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SDA_LograEstimateY
  *
  * Parameters:
- *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
- *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLData_t YVal  - Y value
- *       const SLArrayIndex_t sampleLength - Buffer length
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
+ *      const SLData_t YVal  - Y value
+ *      const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Estimate Y
  *
  * Description: Estimate a value for Y, given a value
- *   for X.
+ *  for X.
  *
- *   Assuming the data can be modeled according to:
+ *  Assuming the data can be modeled according to:
  *
- *       y = M.ln(x) + C
+ *      y = M.ln(x) + C
  *
  ********************************************************/
 
@@ -476,24 +476,24 @@ SLData_t SIGLIB_FUNC_DECL SDA_LograEstimateY(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SDA_ExpraConstantCoeff
  *
  * Parameters:
- *       const SLData_t * SIGLIB_PTR_DECL pSrcX - Buffer X data pointer
- *       const SLData_t * SIGLIB_PTR_DECL pSrcY - Buffer Y data pointer
- *       const SLArrayIndex_t sampleLength - Buffer length
+ *      const SLData_t * SIGLIB_PTR_DECL pSrcX - Buffer X data pointer
+ *      const SLData_t * SIGLIB_PTR_DECL pSrcY - Buffer Y data pointer
+ *      const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Constant coefficient.
  *
  * Description: The constant coefficient for the
- *   supplied data.
+ *  supplied data.
  *
- *   Assuming the data can be modeled according to:
+ *  Assuming the data can be modeled according to:
  *
- *       y = C.exp(Mx)
+ *      y = C.exp(Mx)
  *
- *   Gives:
+ *  Gives:
  *
- *       sum(ln(y)) - M.sum(x)
- *   C = ---------------------
- *               n
+ *      sum(ln(y)) - M.sum(x)
+ *  C = ---------------------
+ *              n
  *
  ********************************************************/
 
@@ -529,24 +529,24 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraConstantCoeff(const SLData_t* SIGLIB_PTR_DECL
  * Function: SDA_ExpraRegressionCoeff
  *
  * Parameters:
- *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
- *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLArrayIndex_t sampleLength - Buffer length
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
+ *      const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Regression coefficient.
  *
  * Description: The regression coefficient for the
- *   supplied data.
+ *  supplied data.
  *
- *   Assuming the data can be modeled according to:
+ *  Assuming the data can be modeled according to:
  *
- *       y = C.exp(Mx)
+ *      y = C.exp(Mx)
  *
- *   Gives:
+ *  Gives:
  *
- *       n.sum(x.ln(y)) - sum(x) . sum(ln(y))
- *   M = ------------------------------------
- *           n.sum(x^2) - (sum(x))^2
+ *      n.sum(x.ln(y)) - sum(x) . sum(ln(y))
+ *  M = ------------------------------------
+ *          n.sum(x^2) - (sum(x))^2
  *
  ********************************************************/
 
@@ -583,24 +583,24 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
  * Function: SDA_ExpraCorrelationCoeff
  *
  * Parameters:
- *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
- *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLArrayIndex_t sampleLength - Buffer length
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
+ *      const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Correlation coefficient.
  *
  * Description: The correlation coefficient for the
- *   supplied data.
+ *  supplied data.
  *
- *   Assuming the data can be modeled according to:
+ *  Assuming the data can be modeled according to:
  *
- *       y = C.exp(Mx)
+ *      y = C.exp(Mx)
  *
- *   Gives:
+ *  Gives:
  *
- *                       n.sum(x.ln(y)) - sum(x) . sum(ln(y))
- *   r = ------------------------------------------------------------------
- *       sqrt ((n.sum(x^2) - (sum(x))^2).(n.sum(ln(y)^2) - (sum(ln(y)))^2))
+ *                      n.sum(x.ln(y)) - sum(x) . sum(ln(y))
+ *  r = ------------------------------------------------------------------
+ *      sqrt ((n.sum(x^2) - (sum(x))^2).(n.sum(ln(y)^2) - (sum(ln(y)))^2))
  *
  ********************************************************/
 
@@ -640,19 +640,19 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
  * Function: SDA_ExpraEstimateX
  *
  * Parameters:
- *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
- *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLData_t YVal  - Y value
- *       const SLArrayIndex_t sampleLength - Buffer length
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
+ *      const SLData_t YVal  - Y value
+ *      const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Estimate X
  *
  * Description: Estimate a value for X, given a value
- *   for Y.
+ *  for Y.
  *
- *   Assuming the data can be modeled according to:
+ *  Assuming the data can be modeled according to:
  *
- *       y = C.exp(Mx)
+ *      y = C.exp(Mx)
  *
  ********************************************************/
 
@@ -666,19 +666,19 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraEstimateX(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SDA_ExpraEstimateY
  *
  * Parameters:
- *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
- *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLData_t YVal  - Y value
- *       const SLArrayIndex_t sampleLength - Buffer length
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
+ *      const SLData_t YVal  - Y value
+ *      const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Estimate Y
  *
  * Description: Estimate a value for Y, given a value
- *   for X.
+ *  for X.
  *
- *   Assuming the data can be modeled according to:
+ *  Assuming the data can be modeled according to:
  *
- *       y = C.exp(Mx)
+ *      y = C.exp(Mx)
  *
  ********************************************************/
 
@@ -692,24 +692,24 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExpraEstimateY(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SDA_PowraConstantCoeff
  *
  * Parameters:
- *       const SLData_t * SIGLIB_PTR_DECL pSrcX - Buffer X data pointer
- *       const SLData_t * SIGLIB_PTR_DECL pSrcY - Buffer Y data pointer
- *       const SLArrayIndex_t sampleLength - Buffer length
+ *      const SLData_t * SIGLIB_PTR_DECL pSrcX - Buffer X data pointer
+ *      const SLData_t * SIGLIB_PTR_DECL pSrcY - Buffer Y data pointer
+ *      const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Constant coefficient.
  *
  * Description: The constant coefficient for the
- *   supplied data.
+ *  supplied data.
  *
- *   Assuming the data can be modeled according to:
+ *  Assuming the data can be modeled according to:
  *
- *       y = C.x^M
+ *      y = C.x^M
  *
- *   Gives:
+ *  Gives:
  *
- *       sum(ln(y)) - M.sum(ln(x))
- *   C = -------------------------
- *                   n
+ *      sum(ln(y)) - M.sum(ln(x))
+ *  C = -------------------------
+ *                  n
  *
  ********************************************************/
 
@@ -745,24 +745,24 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraConstantCoeff(const SLData_t* SIGLIB_PTR_DECL
  * Function: SDA_PowraRegressionCoeff
  *
  * Parameters:
- *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
- *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLArrayIndex_t sampleLength - Buffer length
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
+ *      const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Regression coefficient.
  *
  * Description: The regression coefficient for the
- *   supplied data.
+ *  supplied data.
  *
- *   Assuming the data can be modeled according to:
+ *  Assuming the data can be modeled according to:
  *
- *       y = C.x^M
+ *      y = C.x^M
  *
- *   Gives:
+ *  Gives:
  *
- *       n.sum(x.ln(y)) - sum(ln(x)) . sum(ln(y))
- *   M = ----------------------------------------
- *           n.sum(ln(x)^2) - (sum(ln(x)))^2
+ *      n.sum(x.ln(y)) - sum(ln(x)) . sum(ln(y))
+ *  M = ----------------------------------------
+ *          n.sum(ln(x)^2) - (sum(ln(x)))^2
  *
  ********************************************************/
 
@@ -799,25 +799,25 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraRegressionCoeff(const SLData_t* SIGLIB_PTR_DE
  * Function: SDA_PowraCorrelationCoeff
  *
  * Parameters:
- *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
- *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLArrayIndex_t sampleLength - Buffer length
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
+ *      const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Correlation coefficient.
  *
  * Description: The correlation coefficient for the
- *   supplied data.
+ *  supplied data.
  *
- *   Assuming the data can be modeled according to:
+ *  Assuming the data can be modeled according to:
  *
- *       y = C.x^M
+ *      y = C.x^M
  *
- *   Gives:
+ *  Gives:
  *
- *                       n.sum(ln(x).ln(y)) - sum(ln(x)) . sum(ln(y))
- *   r =
+ *                      n.sum(ln(x).ln(y)) - sum(ln(x)) . sum(ln(y))
+ *  r =
  *--------------------------------------------------------------------------
- *       sqrt ((n.sum(ln(x)^2) - (sum(ln(x)))^2).(n.sum(ln(y)^2) -
+ *      sqrt ((n.sum(ln(x)^2) - (sum(ln(x)))^2).(n.sum(ln(y)^2) -
  *(sum(ln(y)))^2))
  *
  ********************************************************/
@@ -858,19 +858,19 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraCorrelationCoeff(const SLData_t* SIGLIB_PTR_D
  * Function: SDA_PowraEstimateX
  *
  * Parameters:
- *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
- *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLData_t YVal  - Y value
- *       const SLArrayIndex_t sampleLength - Buffer length
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
+ *      const SLData_t YVal  - Y value
+ *      const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Estimate X
  *
  * Description: Estimate a value for X, given a value
- *   for Y.
+ *  for Y.
  *
- *   Assuming the data can be modeled according to:
+ *  Assuming the data can be modeled according to:
  *
- *       y = C.x^M
+ *      y = C.x^M
  *
  ********************************************************/
 
@@ -884,19 +884,19 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraEstimateX(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SDA_PowraEstimateY
  *
  * Parameters:
- *       const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
- *       const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
- *       const SLData_t YVal  - Y value
- *       const SLArrayIndex_t sampleLength - Buffer length
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc1 - Buffer X data pointer
+ *      const SLData_t * SIGLIB_PTR_DECL pSrc2 - Buffer Y data pointer
+ *      const SLData_t YVal  - Y value
+ *      const SLArrayIndex_t sampleLength - Buffer length
  *
  * Return value: Estimate Y
  *
  * Description: Estimate a value for Y, given a value
- *   for X.
+ *  for X.
  *
- *   Assuming the data can be modeled according to:
+ *  Assuming the data can be modeled according to:
  *
- *       y = C.x^M
+ *      y = C.x^M
  *
  ********************************************************/
 
@@ -910,27 +910,27 @@ SLData_t SIGLIB_FUNC_DECL SDA_PowraEstimateY(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SDA_Detrend
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  Source data pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst,        Destination data pointer
- *   SLData_t * SIGLIB_PTR_DECL pRamp,       Ramp pointer
- *   const SLArrayIndex_t sampleLength       Sample length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  Source data pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst,        Destination data pointer
+ *  SLData_t * SIGLIB_PTR_DECL pRamp,       Ramp pointer
+ *  const SLArrayIndex_t sampleLength       Sample length
  *
  * Return value:
- *   None
+ *  None
  *
  * Description:
- *   Uses y = M.x + C to generate the best straight-line
- *   fit to the data in the source array, this is then
- *   removed from the data before writing the results to
- *   the destination array.
+ *  Uses y = M.x + C to generate the best straight-line
+ *  fit to the data in the source array, this is then
+ *  removed from the data before writing the results to
+ *  the destination array.
  *
- *   The first iteration of this function and any where
- *   the vector length changes will take longer than
- *   subsequent iterations because the reference vector
- *   needs to be allocated. If execution time is
- *   important then this function can be called during
- *   the application initialisation process to
- *   initialise the state.
+ *  The first iteration of this function and any where
+ *  the vector length changes will take longer than
+ *  subsequent iterations because the reference vector
+ *  needs to be allocated. If execution time is
+ *  important then this function can be called during
+ *  the application initialisation process to
+ *  initialise the state.
  *
  ********************************************************/
 
@@ -965,26 +965,26 @@ void SIGLIB_FUNC_DECL SDA_Detrend(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
  * Function: SDA_ExtractTrend
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  Source data pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst,        Destination data pointer
- *   SLData_t * SIGLIB_PTR_DECL pRamp,       Ramp pointer
- *   const SLArrayIndex_t sampleLength       Sample length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  Source data pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst,        Destination data pointer
+ *  SLData_t * SIGLIB_PTR_DECL pRamp,       Ramp pointer
+ *  const SLArrayIndex_t sampleLength       Sample length
  *
  * Return value:
- *   None
+ *  None
  *
  * Description:
- *   Uses y = M.x + C to generate the best straight-line
- *   fit to the data in the source array, this is then
- *   written to the destination array.
+ *  Uses y = M.x + C to generate the best straight-line
+ *  fit to the data in the source array, this is then
+ *  written to the destination array.
  *
- *   The first iteration of this function and any where
- *   the vector length changes will take longer than
- *   subsequent iterations because the reference vector
- *   needs to be allocated. If execution time is
- *   important then this function can be called during
- *   the application initialisation process to
- *   initialise the state.
+ *  The first iteration of this function and any where
+ *  the vector length changes will take longer than
+ *  subsequent iterations because the reference vector
+ *  needs to be allocated. If execution time is
+ *  important then this function can be called during
+ *  the application initialisation process to
+ *  initialise the state.
  *
  ********************************************************/
 

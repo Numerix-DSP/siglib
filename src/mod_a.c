@@ -44,15 +44,15 @@ Description: Analog Modulation / demodulation routines, for SigLib DSP library.
  * Function: SIF_AmplitudeModulate
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pCarrierTable,
- *   SLArrayIndex_t *pCarrierTableIndex
- *   const SLArrayIndex_t ModulatorArrayLength
+ *  SLData_t * SIGLIB_PTR_DECL pCarrierTable,
+ *  SLArrayIndex_t *pCarrierTableIndex
+ *  const SLArrayIndex_t ModulatorArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialize the amplitude modulation functions.
+ *  Initialize the amplitude modulation functions.
  *
  ********************************************************/
 
@@ -69,21 +69,21 @@ void SIGLIB_FUNC_DECL SIF_AmplitudeModulate(SLData_t* SIGLIB_PTR_DECL pCarrierTa
  * Function: SDA_AmplitudeModulate
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLData_t * SIGLIB_PTR_DECL pCarrierTable,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   SLArrayIndex_t *pCarrierTableIndex
- *   const SLArrayIndex_t ModulatorArrayLength
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLData_t * SIGLIB_PTR_DECL pCarrierTable,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  SLArrayIndex_t *pCarrierTableIndex
+ *  const SLArrayIndex_t ModulatorArrayLength
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Amplitude modulate a carrier signal.
+ *  Amplitude modulate a carrier signal.
  *
- *   This routine can be identically used for
- *   modulation and demodulation.
+ *  This routine can be identically used for
+ *  modulation and demodulation.
  *
  ********************************************************/
 
@@ -121,19 +121,19 @@ void SIGLIB_FUNC_DECL SDA_AmplitudeModulate(const SLData_t* SIGLIB_PTR_DECL pSrc
  * Function: SDS_AmplitudeModulate
  *
  * Parameters:
- *   const SLData_t Src,
- *   const SLData_t * SIGLIB_PTR_DECL pCarrierTable,
- *   SLArrayIndex_t *pCarrierTableIndex
- *   const SLArrayIndex_t ModulatorArrayLength
+ *  const SLData_t Src,
+ *  const SLData_t * SIGLIB_PTR_DECL pCarrierTable,
+ *  SLArrayIndex_t *pCarrierTableIndex
+ *  const SLArrayIndex_t ModulatorArrayLength
  *
  * Return value:
- *   Modulator output
+ *  Modulator output
  *
  * Description:
- *   Amplitude modulate a carrier signal.
+ *  Amplitude modulate a carrier signal.
  *
- *   This routine can be identically used for
- *   modulation and demodulation.
+ *  This routine can be identically used for
+ *  modulation and demodulation.
  *
  ********************************************************/
 
@@ -160,15 +160,15 @@ SLData_t SIGLIB_FUNC_DECL SDS_AmplitudeModulate(const SLData_t Src, const SLData
  * Function: SIF_AmplitudeModulate2
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pCarrierTable,
- *   SLData_t *pCarrierTablePhase
- *   const SLArrayIndex_t ModulatorArrayLength
+ *  SLData_t * SIGLIB_PTR_DECL pCarrierTable,
+ *  SLData_t *pCarrierTablePhase
+ *  const SLArrayIndex_t ModulatorArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialize the amplitude modulation functions.
+ *  Initialize the amplitude modulation functions.
  *
  ********************************************************/
 
@@ -185,22 +185,22 @@ void SIGLIB_FUNC_DECL SIF_AmplitudeModulate2(SLData_t* SIGLIB_PTR_DECL pCarrierT
  * Function: SDA_AmplitudeModulate2
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLData_t * SIGLIB_PTR_DECL pCarrierTable,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   SLData_t *pCarrierTablePhase
- *   const SLData_t CarrierPhaseIncrement
- *   const SLArrayIndex_t ModulatorArrayLength
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLData_t * SIGLIB_PTR_DECL pCarrierTable,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  SLData_t *pCarrierTablePhase
+ *  const SLData_t CarrierPhaseIncrement
+ *  const SLArrayIndex_t ModulatorArrayLength
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Amplitude modulate a carrier signal.
+ *  Amplitude modulate a carrier signal.
  *
- *   This routine can be identically used for
- *   modulation and demodulation.
+ *  This routine can be identically used for
+ *  modulation and demodulation.
  *
  ********************************************************/
 
@@ -239,20 +239,20 @@ void SIGLIB_FUNC_DECL SDA_AmplitudeModulate2(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SDS_AmplitudeModulate2
  *
  * Parameters:
- *   const SLData_t Src,
- *   const SLData_t * SIGLIB_PTR_DECL pCarrierTable,
- *   SLData_t *pCarrierTablePhase
- *   const SLData_t CarrierPhaseIncrement
- *   const SLArrayIndex_t ModulatorArrayLength
+ *  const SLData_t Src,
+ *  const SLData_t * SIGLIB_PTR_DECL pCarrierTable,
+ *  SLData_t *pCarrierTablePhase
+ *  const SLData_t CarrierPhaseIncrement
+ *  const SLArrayIndex_t ModulatorArrayLength
  *
  * Return value:
- *   Modulator output
+ *  Modulator output
  *
  * Description:
- *   Amplitude modulate a carrier signal.
+ *  Amplitude modulate a carrier signal.
  *
- *   This routine can be identically used for
- *   modulation and demodulation.
+ *  This routine can be identically used for
+ *  modulation and demodulation.
  *
  ********************************************************/
 
@@ -279,22 +279,22 @@ SLData_t SIGLIB_FUNC_DECL SDS_AmplitudeModulate2(const SLData_t Src, const SLDat
  * Function: SIF_ComplexShift
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pRealCombFilter,
- *   SLData_t * SIGLIB_PTR_DECL RealCombFilterSum,
- *   SLData_t * SIGLIB_PTR_DECL pImagCombFilter,
- *   SLData_t * SIGLIB_PTR_DECL ImagCombFilterSum,
- *   SLArrayIndex_t * SIGLIB_PTR_DECL CombFilterPhase,
- *   SLData_t * SIGLIB_PTR_DECL pSineTable,
- *   SLArrayIndex_t * SIGLIB_PTR_DECL SineTablePhase,
- *   const SLArrayIndex_t filterLength,
- *   const SLArrayIndex_t SineTableSize,
+ *  SLData_t * SIGLIB_PTR_DECL pRealCombFilter,
+ *  SLData_t * SIGLIB_PTR_DECL RealCombFilterSum,
+ *  SLData_t * SIGLIB_PTR_DECL pImagCombFilter,
+ *  SLData_t * SIGLIB_PTR_DECL ImagCombFilterSum,
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL CombFilterPhase,
+ *  SLData_t * SIGLIB_PTR_DECL pSineTable,
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL SineTablePhase,
+ *  const SLArrayIndex_t filterLength,
+ *  const SLArrayIndex_t SineTableSize,
  *
  * Return value:
- *   SLError_t Error code
+ *  SLError_t Error code
  *
  * Description:
- *   Initialise the complex frequency shifting
- *   function.
+ *  Initialise the complex frequency shifting
+ *  function.
  *
  ********************************************************/
 
@@ -328,45 +328,45 @@ SLError_t SIGLIB_FUNC_DECL SIF_ComplexShift(SLData_t* SIGLIB_PTR_DECL pRealCombF
  * Function: SDA_ComplexShift
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   SLData_t * SIGLIB_PTR_DECL pRealCombFilter,
- *   SLData_t * SIGLIB_PTR_DECL RealCombFilterSum,
- *   SLData_t * SIGLIB_PTR_DECL pImagCombFilter,
- *   SLData_t * SIGLIB_PTR_DECL ImagCombFilterSum,
- *   SLArrayIndex_t * SIGLIB_PTR_DECL CombFilterPhase,
- *   const SLData_t * SIGLIB_PTR_DECL pSineTable,
- *   SLArrayIndex_t * SIGLIB_PTR_DECL SineTablePhase,
- *   const SLData_t MixFrequency,
- *   const SLArrayIndex_t filterLength,
- *   const SLArrayIndex_t SineTableSize,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  SLData_t * SIGLIB_PTR_DECL pRealCombFilter,
+ *  SLData_t * SIGLIB_PTR_DECL RealCombFilterSum,
+ *  SLData_t * SIGLIB_PTR_DECL pImagCombFilter,
+ *  SLData_t * SIGLIB_PTR_DECL ImagCombFilterSum,
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL CombFilterPhase,
+ *  const SLData_t * SIGLIB_PTR_DECL pSineTable,
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL SineTablePhase,
+ *  const SLData_t MixFrequency,
+ *  const SLArrayIndex_t filterLength,
+ *  const SLArrayIndex_t SineTableSize,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a complex frequency shift.
+ *  Perform a complex frequency shift.
  *
- *   The following block diagram describes the
- *   shifter structure.
+ *  The following block diagram describes the
+ *  shifter structure.
  *
- *           +-------+     +--------+
- *        ___|   x   |____\| Comb   |______
- *       |   |       |    /| Filter |      |
- *       |   +-------+     +--------+      |
- *       |      ^                          v
+ *          +-------+     +--------+
+ *       ___|   x   |____\| Comb   |______
+ *      |   |       |    /| Filter |      |
+ *      |   +-------+     +--------+      |
+ *      |      ^                          v
  * Input |      Cos                    +-------+ Output
  * ______|                             | Sum   |____
- *       |      Sin                    |       |
- *       |      v                      +-------+
- *       |   +-------+     +--------+      ^
- *       |___|   x   |____\| Comb   |______|
- *           |       |    /| Filter |
- *           +-------+     +--------+
+ *      |      Sin                    |       |
+ *      |      v                      +-------+
+ *      |   +-------+     +--------+      ^
+ *      |___|   x   |____\| Comb   |______|
+ *          |       |    /| Filter |
+ *          +-------+     +--------+
  *
- *   Sum can be Square magnitude sum, or Cos - Sin
- *   This routine uses square mag. sum.
+ *  Sum can be Square magnitude sum, or Cos - Sin
+ *  This routine uses square mag. sum.
  *
  ********************************************************/
 
@@ -444,15 +444,15 @@ void SIGLIB_FUNC_DECL SDA_ComplexShift(const SLData_t* SIGLIB_PTR_DECL pSrc, SLD
  * Function: SIF_FrequencyModulate
  *
  * Parameters:
- *   SLData_t *pCarrierPhase,
- *   SLData_t * SIGLIB_PTR_DECL pCosineTable,
- *   const SLArrayIndex_t TableLength
+ *  SLData_t *pCarrierPhase,
+ *  SLData_t * SIGLIB_PTR_DECL pCosineTable,
+ *  const SLArrayIndex_t TableLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise fast cosine look up table
+ *  Initialise fast cosine look up table
  *
  ********************************************************/
 
@@ -468,18 +468,18 @@ void SIGLIB_FUNC_DECL SIF_FrequencyModulate(SLData_t* pCarrierPhase, SLData_t* S
  * Function: SDS_FrequencyModulate
  *
  * Parameters:
- *   const SLData_t Src,                     Modulating signal source
- *   const SLData_t CarrierPhaseIncrement,   Carrier phase increment per sample
+ *  const SLData_t Src,                     Modulating signal source
+ *  const SLData_t CarrierPhaseIncrement,   Carrier phase increment per sample
  *(radians / 2π) const SLData_t ModIndex,                Modulation index
- *   SLData_t *PhaseOffset,                  Phase offset
- *   const SLData_t * pLookUpTable,          Look up table pointer
- *   const SLArrayIndex_t LookUpTableSize)   Look up table size
+ *  SLData_t *PhaseOffset,                  Phase offset
+ *  const SLData_t * pLookUpTable,          Look up table pointer
+ *  const SLArrayIndex_t LookUpTableSize)   Look up table size
  *
  * Return value:
- *   SLData_t                        Modulated signal
+ *  SLData_t                        Modulated signal
  *
  * Description:
- *   Frequency modulate a signal.
+ *  Frequency modulate a signal.
  *
  ********************************************************/
 
@@ -499,20 +499,20 @@ SLData_t SIGLIB_FUNC_DECL SDS_FrequencyModulate(const SLData_t Src, const SLData
  * Function: SDA_FrequencyModulate
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  Modulating signal source pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst,        Modulated signal destination
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  Modulating signal source pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst,        Modulated signal destination
  *pointer const SLData_t CarrierPhaseIncrement,   Carrier phase increment per
  *sample (radians / 2π) const SLData_t ModIndex,                Modulation index
- *   SLData_t *PhaseOffset,                  Phase offset
- *   const SLData_t * SIGLIB_PTR_DECL pLookUpTable,    Fast sine lookup table
- *   const SLArrayIndex_t LookUpTableSize    Fast sine look up table size
- *   const SLArrayIndex_t sampleLength       Array length
+ *  SLData_t *PhaseOffset,                  Phase offset
+ *  const SLData_t * SIGLIB_PTR_DECL pLookUpTable,    Fast sine lookup table
+ *  const SLArrayIndex_t LookUpTableSize    Fast sine look up table size
+ *  const SLArrayIndex_t sampleLength       Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Frequency modulate a signal - fast code.
+ *  Frequency modulate a signal - fast code.
  *
  ********************************************************/
 
@@ -547,19 +547,19 @@ void SIGLIB_FUNC_DECL SDA_FrequencyModulate(const SLData_t* SIGLIB_PTR_DECL pSrc
  * Function: SDA_FrequencyDemodulate
  *
  * Parameters:
- *   const SLData_t *pSrc,               Modulated signal source pointer
- *   SLData_t *pDst,                     Demodulated signal destination pointer
- *   SLData_t *DifferentiatePrevious,    Previous value of differential
- *   SLData_t *EnvelopePrevious,         Previous value of envelope
- *   const SLData_t EnvelopeDecay,       Envelope decay factor
- *   const SLArrayIndex_t sampleLength   Array length
+ *  const SLData_t *pSrc,               Modulated signal source pointer
+ *  SLData_t *pDst,                     Demodulated signal destination pointer
+ *  SLData_t *DifferentiatePrevious,    Previous value of differential
+ *  SLData_t *EnvelopePrevious,         Previous value of envelope
+ *  const SLData_t EnvelopeDecay,       Envelope decay factor
+ *  const SLArrayIndex_t sampleLength   Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Demodulate a frequency modulated signal using the
- *   direct method - differentiation and envelope detection.
+ *  Demodulate a frequency modulated signal using the
+ *  direct method - differentiation and envelope detection.
  *
  ********************************************************/
 
@@ -598,14 +598,14 @@ void SIGLIB_FUNC_DECL SDA_FrequencyDemodulate(const SLData_t* SIGLIB_PTR_DECL pS
  * Function: SIF_FrequencyModulateComplex
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pCosineTable,
- *   const SLArrayIndex_t SinCosPeriod
+ *  SLData_t * SIGLIB_PTR_DECL pCosineTable,
+ *  const SLArrayIndex_t SinCosPeriod
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise fast sine / cosine look up table
+ *  Initialise fast sine / cosine look up table
  *
  ********************************************************/
 
@@ -621,21 +621,21 @@ void SIGLIB_FUNC_DECL SIF_FrequencyModulateComplex(SLData_t* pCarrierPhase, SLDa
  * Function: SDS_FrequencyModulateComplex
  *
  * Parameters:
- *   const SLData_t Src,                     Modulating signal source
- *   SLData_t *pRealDst,                     Modulated real signal destination
+ *  const SLData_t Src,                     Modulating signal source
+ *  SLData_t *pRealDst,                     Modulated real signal destination
  *pointer SLData_t *pImagDst,                     Modulated imaginary signal
  *destination pointer const SLData_t CarrierPhaseIncrement,   Carrier phase
  *increment per sample (radians / 2π) const SLData_t ModIndex, Modulation index
- *   SLData_t *PhaseOffset,                  Phase offset
- *   const SLData_t * pLookUpTable,          Look up table pointer
- *   const SLArrayIndex_t SinCosPeriod)      Sine / cosine period
+ *  SLData_t *PhaseOffset,                  Phase offset
+ *  const SLData_t * pLookUpTable,          Look up table pointer
+ *  const SLArrayIndex_t SinCosPeriod)      Sine / cosine period
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Frequency modulate the individual components of a
- *   complex signal.
+ *  Frequency modulate the individual components of a
+ *  complex signal.
  *
  ********************************************************/
 
@@ -656,22 +656,22 @@ void SIGLIB_FUNC_DECL SDS_FrequencyModulateComplex(const SLData_t Src, SLData_t*
  * Function: SDA_FrequencyModulateComplex
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  Modulating signal source pointer
- *   SLData_t * SIGLIB_PTR_DECL pRealDst,    Modulated real signal destination
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  Modulating signal source pointer
+ *  SLData_t * SIGLIB_PTR_DECL pRealDst,    Modulated real signal destination
  *pointer SLData_t * SIGLIB_PTR_DECL pImagDst,    Modulated imaginary signal
  *destination pointer const SLData_t CarrierPhaseIncrement,   Carrier phase
  *increment per sample (radians / 2π) const SLData_t ModIndex, Modulation index
- *   SLData_t *PhaseOffset,                  Phase offset
- *   const SLData_t * pLookUpTable,          Fast sine lookup table
- *   const SLArrayIndex_t SinCosPeriod       Fast sine look up table size
- *   const SLArrayIndex_t sampleLength       Array length
+ *  SLData_t *PhaseOffset,                  Phase offset
+ *  const SLData_t * pLookUpTable,          Fast sine lookup table
+ *  const SLArrayIndex_t SinCosPeriod       Fast sine look up table size
+ *  const SLArrayIndex_t sampleLength       Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Frequency modulate the individual components of a
- *   complex signal.
+ *  Frequency modulate the individual components of a
+ *  complex signal.
  *
  ********************************************************/
 
@@ -709,17 +709,17 @@ void SIGLIB_FUNC_DECL SDA_FrequencyModulateComplex(const SLData_t* SIGLIB_PTR_DE
  * Function: SDA_DeltaModulate
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLData_t * SIGLIB_PTR_DECL pDst,
- *   SLData_t * SIGLIB_PTR_DECL CurrentModValue,
- *   SLData_t Delta,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLData_t * SIGLIB_PTR_DECL pDst,
+ *  SLData_t * SIGLIB_PTR_DECL CurrentModValue,
+ *  SLData_t Delta,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Delta modulate a signal.
+ *  Delta modulate a signal.
  *
  ********************************************************/
 
@@ -754,16 +754,16 @@ void SIGLIB_FUNC_DECL SDA_DeltaModulate(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
  * Function: SDA_DeltaDemodulate
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLData_t * SIGLIB_PTR_DECL pDst,
- *   SLData_t * SIGLIB_PTR_DECL CurrentDeModValue,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLData_t * SIGLIB_PTR_DECL pDst,
+ *  SLData_t * SIGLIB_PTR_DECL CurrentDeModValue,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   De-modulate a delta modulated signal.
+ *  De-modulate a delta modulated signal.
  *
  ********************************************************/
 
@@ -797,17 +797,17 @@ void SIGLIB_FUNC_DECL SDA_DeltaDemodulate(const SLData_t* SIGLIB_PTR_DECL pSrc, 
  * Function: SDA_DeltaModulate2
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLData_t * SIGLIB_PTR_DECL pDst,
- *   SLData_t * SIGLIB_PTR_DECL CurrentIntegralValue,
- *   const SLData_t IntegratorMax,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLData_t * SIGLIB_PTR_DECL pDst,
+ *  SLData_t * SIGLIB_PTR_DECL CurrentIntegralValue,
+ *  const SLData_t IntegratorMax,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   delta modulate a signal.
+ *  delta modulate a signal.
  *
  ********************************************************/
 

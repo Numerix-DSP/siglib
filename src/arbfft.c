@@ -45,26 +45,26 @@ Description: SigLib DSP library Arbitrary length Fast Fourier Transform
  * Function: SIF_FftArb
  *
  * Parameters:
- *   SLData_t *,             - Pointer to AWNr coefficients
- *   SLData_t *,             - Pointer to AWNi coefficients
- *   SLData_t *,             - Pointer to WMr coefficients
- *   SLData_t *,             - Pointer to WMi coefficients
- *   SLData_t *,             - Pointer to vLr coefficients
- *   SLData_t *,             - Pointer to vLi coefficients
- *   SLData_t *pFFTCoeffs,   - FFT coefficient pointer
- *   SLArrayIndex_t *pBitReverseAddressTable, - Bit reverse mode flag / Pointer
+ *  SLData_t *,             - Pointer to AWNr coefficients
+ *  SLData_t *,             - Pointer to AWNi coefficients
+ *  SLData_t *,             - Pointer to WMr coefficients
+ *  SLData_t *,             - Pointer to WMi coefficients
+ *  SLData_t *,             - Pointer to vLr coefficients
+ *  SLData_t *,             - Pointer to vLi coefficients
+ *  SLData_t *pFFTCoeffs,   - FFT coefficient pointer
+ *  SLArrayIndex_t *pBitReverseAddressTable, - Bit reverse mode flag / Pointer
  *to bit reverse address table enum SLArbitraryFFT_t *pCZTorFFTSwitch, - Pointer
  *to Switch to indicate CZT or FFT SLArrayIndex_t *pFFTLength,           -
  *Pointer to FFT length SLArrayIndex_t *Log2pFFTLength,       - Pointer to Log 2
  *FFT length SLData_t * pInverseFFTLength  - Pointer to inverse FFT length
- *   SLData_t * pInverseSampleLengthXFFTLength - Pointer to inverse
+ *  SLData_t * pInverseSampleLengthXFFTLength - Pointer to inverse
  *(sampleLength * FFTLength) const SLArrayIndex_t sampleLength   - Buffer length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the arbitrary length FFT functions.
+ *  Initialise the arbitrary length FFT functions.
  *
  ********************************************************/
 
@@ -79,7 +79,7 @@ void SIGLIB_FUNC_DECL SIF_FftArb(SLData_t* SIGLIB_PTR_DECL pAWNr, SLData_t* SIGL
 
   // Test to see if we can use the pure FFT or if we need to use the chirp
   // z-transform
-  if (SAI_PowerOfTwo(sampleLength)) {    // Length is an integer power of two so use FFT
+  if (SAI_TestPowerOfTwo(sampleLength)) {    // Length is an integer power of two so use FFT
     *pCZTorFFTSwitch = SIGLIB_ARB_FFT_DO_FFT;
     *pFFTLength = sampleLength;
     *Log2pFFTLength = IntLog2Size;
@@ -103,14 +103,14 @@ void SIGLIB_FUNC_DECL SIF_FftArb(SLData_t* SIGLIB_PTR_DECL pAWNr, SLData_t* SIGL
  * Function: SUF_FftArbAllocLength
  *
  * Parameters:
- *   const SLArrayIndex_t sampleLength   - Buffer length
+ *  const SLArrayIndex_t sampleLength   - Buffer length
  *
  * Return value:
- *   FFT length for arbitrary FFTs
+ *  FFT length for arbitrary FFTs
  *
  * Description:
- *   Given a sample length, returns the FFT length required
- *   for arbitrary-length FFTs.
+ *  Given a sample length, returns the FFT length required
+ *  for arbitrary-length FFTs.
  *
  ********************************************************/
 
@@ -123,7 +123,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_FftArbAllocLength(const SLArrayIndex_t sampl
 
   // Test to see if we can use the pure FFT or if we need to use the chirp
   // z-transform
-  if (SAI_PowerOfTwo(sampleLength)) {    // Length is an integer power of two so use FFT
+  if (SAI_TestPowerOfTwo(sampleLength)) {    // Length is an integer power of two so use FFT
     FFTLength = sampleLength;
   }
 
@@ -138,19 +138,19 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_FftArbAllocLength(const SLArrayIndex_t sampl
  * Function: SDA_RfftArb
  *
  * Parameters:
- *   const SLData_t *pSrc,       - Real Source data array pointer
- *   SLData_t *pRealDst,     - Real destn. data array pointer
- *   SLData_t *pImagDst,     - Imaginary destn. data array pointer
- *   SLData_t *pRealTemp,        - Real temporary data array pointer
- *   SLData_t *pImagTemp,        - Imaginary temporary data array pointer
- *   const SLData_t *,           - Pointer to AWNr coefficients
- *   const SLData_t *,           - Pointer to AWNi coefficients
- *   const SLData_t *,           - Pointer to WMr coefficients
- *   const SLData_t *,           - Pointer to WMi coefficients
- *   const SLData_t *,           - Pointer to vLr coefficients
- *   const SLData_t *,           - Pointer to vLi coefficients
- *   SLData_t *pFFTCoeffs,       - FFT coefficient pointer
- *   SLArrayIndex_t *pBitReverseAddressTable, - Bit reverse mode flag / Pointer
+ *  const SLData_t *pSrc,       - Real Source data array pointer
+ *  SLData_t *pRealDst,     - Real destn. data array pointer
+ *  SLData_t *pImagDst,     - Imaginary destn. data array pointer
+ *  SLData_t *pRealTemp,        - Real temporary data array pointer
+ *  SLData_t *pImagTemp,        - Imaginary temporary data array pointer
+ *  const SLData_t *,           - Pointer to AWNr coefficients
+ *  const SLData_t *,           - Pointer to AWNi coefficients
+ *  const SLData_t *,           - Pointer to WMr coefficients
+ *  const SLData_t *,           - Pointer to WMi coefficients
+ *  const SLData_t *,           - Pointer to vLr coefficients
+ *  const SLData_t *,           - Pointer to vLi coefficients
+ *  SLData_t *pFFTCoeffs,       - FFT coefficient pointer
+ *  SLArrayIndex_t *pBitReverseAddressTable, - Bit reverse mode flag / Pointer
  *to bit reverse address table const enum SLArbitraryFFT_t CZTorFFTSwitch, -
  *Switch to indicate CZT or FFT const SLArrayIndex_t FFTLength,       - FFT
  *length const SLArrayIndex_t Log2FFTLength,   - Log 2 FFT length const SLData_t
@@ -159,10 +159,10 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_FftArbAllocLength(const SLArrayIndex_t sampl
  *SLArrayIndex_t sampleLength   - Data array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Arbitrary length real FFT function.
+ *  Arbitrary length real FFT function.
  *
  ********************************************************/
 
@@ -183,9 +183,9 @@ void SIGLIB_FUNC_DECL SDA_RfftArb(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
   }
 
   else {    // Perform a chirp z-transform
-    SDA_Clear(pRealTemp + sampleLength,
+    SDA_Zeros(pRealTemp + sampleLength,
               (SLArrayIndex_t)(FFTLength - sampleLength));    // Ensure zero padded samples
-    SDA_Clear(pImagTemp + sampleLength, (SLArrayIndex_t)(FFTLength - sampleLength));
+    SDA_Zeros(pImagTemp + sampleLength, (SLArrayIndex_t)(FFTLength - sampleLength));
 
     // Complex window = complex mpy with real data
     SDA_ComplexWindow(pSrc, pSrc, pRealTemp, pImagTemp, pAWNr, pAWNi, sampleLength);
@@ -210,20 +210,20 @@ void SIGLIB_FUNC_DECL SDA_RfftArb(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
  * Function: SDA_CfftArb
  *
  * Parameters:
- *   const SLData_t *pSrcReal,   - Real Source data array pointer
- *   const SLData_t *pSrcImag,   - Imaginary Source data array pointer
- *   SLData_t *pRealDst,         - Real destn. data array pointer
- *   SLData_t *pImagDst,         - Imaginary destn. data array pointer
- *   SLData_t *pRealTemp,        - Real temporary data array pointer
- *   SLData_t *pImagTemp,        - Imaginary temporary data array pointer
- *   const SLData_t *,           - Pointer to AWNr coefficients
- *   const SLData_t *,           - Pointer to AWNi coefficients
- *   const SLData_t *,           - Pointer to WMr coefficients
- *   const SLData_t *,           - Pointer to WMi coefficients
- *   const SLData_t *,           - Pointer to vLr coefficients
- *   const SLData_t *,           - Pointer to vLi coefficients
- *   SLData_t *pFFTCoeffs,       - FFT coefficient pointer
- *   SLArrayIndex_t *pBitReverseAddressTable,    - Bit reverse mode flag /
+ *  const SLData_t *pSrcReal,   - Real Source data array pointer
+ *  const SLData_t *pSrcImag,   - Imaginary Source data array pointer
+ *  SLData_t *pRealDst,         - Real destn. data array pointer
+ *  SLData_t *pImagDst,         - Imaginary destn. data array pointer
+ *  SLData_t *pRealTemp,        - Real temporary data array pointer
+ *  SLData_t *pImagTemp,        - Imaginary temporary data array pointer
+ *  const SLData_t *,           - Pointer to AWNr coefficients
+ *  const SLData_t *,           - Pointer to AWNi coefficients
+ *  const SLData_t *,           - Pointer to WMr coefficients
+ *  const SLData_t *,           - Pointer to WMi coefficients
+ *  const SLData_t *,           - Pointer to vLr coefficients
+ *  const SLData_t *,           - Pointer to vLi coefficients
+ *  SLData_t *pFFTCoeffs,       - FFT coefficient pointer
+ *  SLArrayIndex_t *pBitReverseAddressTable,    - Bit reverse mode flag /
  *Pointer to bit reverse address table const enum SLArbitraryFFT_t
  *CZTorFFTSwitch, - Switch to indicate CZT or FFT const SLArrayIndex_t
  *FFTLength,     - FFT length const SLArrayIndex_t Log2FFTLength, - Log 2 FFT
@@ -232,10 +232,10 @@ void SIGLIB_FUNC_DECL SDA_RfftArb(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
  *SLArrayIndex_t sampleLength   - Data array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Arbitrary length complex FFT function.
+ *  Arbitrary length complex FFT function.
  *
  ********************************************************/
 
@@ -258,9 +258,9 @@ void SIGLIB_FUNC_DECL SDA_CfftArb(const SLData_t* SIGLIB_PTR_DECL pSrcReal, cons
   }
 
   else {    // Perform a chirp z-transform
-    SDA_Clear(pRealTemp + sampleLength,
+    SDA_Zeros(pRealTemp + sampleLength,
               (SLArrayIndex_t)(FFTLength - sampleLength));    // Ensure zero padded samples
-    SDA_Clear(pImagTemp + sampleLength, (SLArrayIndex_t)(FFTLength - sampleLength));
+    SDA_Zeros(pImagTemp + sampleLength, (SLArrayIndex_t)(FFTLength - sampleLength));
 
     // Complex multiply input data
     SDA_ComplexMultiply2(pSrcReal, pSrcImag, pAWNr, pAWNi, pRealTemp, pImagTemp, sampleLength);
@@ -285,34 +285,34 @@ void SIGLIB_FUNC_DECL SDA_CfftArb(const SLData_t* SIGLIB_PTR_DECL pSrcReal, cons
  * Function: SDA_CifftArb
  *
  * Parameters:
- *   const SLData_t *pSrcReal,   - Real Source data array pointer
- *   const SLData_t *pSrcImag,   - Imaginary Source data array pointer
- *   SLData_t *pRealDst,         - Real destn. data array pointer
- *   SLData_t *pImagDst,         - Imaginary destn. data array pointer
- *   SLData_t *pRealTemp,        - Real temporary data array pointer
- *   SLData_t *pImagTemp,        - Imaginary temporary data array pointer
- *   const SLData_t *,           - Pointer to AWNr coefficients
- *   const SLData_t *,           - Pointer to AWNi coefficients
- *   const SLData_t *,           - Pointer to WMr coefficients
- *   const SLData_t *,           - Pointer to WMi coefficients
- *   const SLData_t *,           - Pointer to vLr coefficients
- *   const SLData_t *,           - Pointer to vLi coefficients
- *   SLData_t *pFFTCoeffs,       - FFT coefficient pointer
- *   SLArrayIndex_t *pBitReverseAddressTable,    - Bit reverse mode flag /
+ *  const SLData_t *pSrcReal,   - Real Source data array pointer
+ *  const SLData_t *pSrcImag,   - Imaginary Source data array pointer
+ *  SLData_t *pRealDst,         - Real destn. data array pointer
+ *  SLData_t *pImagDst,         - Imaginary destn. data array pointer
+ *  SLData_t *pRealTemp,        - Real temporary data array pointer
+ *  SLData_t *pImagTemp,        - Imaginary temporary data array pointer
+ *  const SLData_t *,           - Pointer to AWNr coefficients
+ *  const SLData_t *,           - Pointer to AWNi coefficients
+ *  const SLData_t *,           - Pointer to WMr coefficients
+ *  const SLData_t *,           - Pointer to WMi coefficients
+ *  const SLData_t *,           - Pointer to vLr coefficients
+ *  const SLData_t *,           - Pointer to vLi coefficients
+ *  SLData_t *pFFTCoeffs,       - FFT coefficient pointer
+ *  SLArrayIndex_t *pBitReverseAddressTable,    - Bit reverse mode flag /
  *Pointer to bit reverse address table const enum SLArbitraryFFT_t
  *CZTorFFTSwitch, - Switch to indicate CZT or FFT const SLArrayIndex_t
  *FFTLength,     - FFT length const SLArrayIndex_t Log2FFTLength, - Log 2 FFT
  *length const SLArrayIndex_t sampleLength   - Data array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Arbitrary length complex inverse FFT function. For
- *   non integer power of 2 FFT lengths this is
- *   performed by conjugating the input sequence,
- *   applying the arbitrary length forward transform
- *   and then conjugating the result.
+ *  Arbitrary length complex inverse FFT function. For
+ *  non integer power of 2 FFT lengths this is
+ *  performed by conjugating the input sequence,
+ *  applying the arbitrary length forward transform
+ *  and then conjugating the result.
  *
  ********************************************************/
 
@@ -332,9 +332,9 @@ void SIGLIB_FUNC_DECL SDA_CifftArb(const SLData_t* SIGLIB_PTR_DECL pSrcReal, con
   }
 
   else {    // Perform a chirp z-transform
-    SDA_Clear(pRealTemp + sampleLength,
+    SDA_Zeros(pRealTemp + sampleLength,
               FFTLength - sampleLength);    // Ensure zero padded samples
-    SDA_Clear(pImagTemp + sampleLength, FFTLength - sampleLength);
+    SDA_Zeros(pImagTemp + sampleLength, FFTLength - sampleLength);
 
     // Conjugate the input data - use pImagDst as temporary array
     SDA_Multiply(pSrcImag, SIGLIB_MINUS_ONE, pImagDst, sampleLength);

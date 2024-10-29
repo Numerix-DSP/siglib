@@ -44,42 +44,42 @@ Description: Digital modulation / demodulation routines, for SigLib DSP library.
  * Function: SIF_CostasQamDemodulate
  *
  * Parameters:
- *   SLData_t *pCostasLpVCOPhase,                        Costas loop parameters
- *   SLData_t * SIGLIB_PTR_DECL pCostasLoopVCOLookUpTable,
- *   const SLArrayIndex_t CostasLoopVCOLookUpTableSize,
- *   const SLData_t CostasLoopLPFCutOffFrequency,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLpLPF1State,
- *   SLArrayIndex_t *pCostasLpLPF1Index,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLpLPF2State,
- *   SLArrayIndex_t *pCostasLpLPF2Index,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLpLPFCoeffs,
- *   const SLArrayIndex_t CostasLpLPFLength,
- *   SLData_t *pCostasLpLoopFilterState,
- *   SLData_t *pCostasLoopLoopSample,
- *   SLData_t * SIGLIB_PTR_DECL pELGMatchedFilterState,  ELG Parameters
- *   SLArrayIndex_t *pELGMatchedFilterIndex,
- *   SLData_t * SIGLIB_PTR_DECL pELGMatchedFilterSum,
- *   SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
- *   SLArrayIndex_t * pEarlyGateDelayIndex,
- *   const SLArrayIndex_t EarlyGateDelayLength,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
- *   SLArrayIndex_t *pLoopFilterIndex,
- *   const SLArrayIndex_t LoopFilterLength,
- *   const SLData_t LoopFilterFc,
- *   SLFixData_t *pPulseDetectorThresholdFlag,
- *   SLData_t *pZeroCrossingPreviousSample,
- *   SLArrayIndex_t *pTriggerCount,
- *   SLFixData_t *pTriggerDetectedFlag,
- *   SLFixData_t *pTriggerUpdatedFlag,
- *   SLArrayIndex_t *pTriggerLatency,
- *   const SLArrayIndex_t SymbolLength)
+ *  SLData_t *pCostasLpVCOPhase,                        Costas loop parameters
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLoopVCOLookUpTable,
+ *  const SLArrayIndex_t CostasLoopVCOLookUpTableSize,
+ *  const SLData_t CostasLoopLPFCutOffFrequency,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLpLPF1State,
+ *  SLArrayIndex_t *pCostasLpLPF1Index,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLpLPF2State,
+ *  SLArrayIndex_t *pCostasLpLPF2Index,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLpLPFCoeffs,
+ *  const SLArrayIndex_t CostasLpLPFLength,
+ *  SLData_t *pCostasLpLoopFilterState,
+ *  SLData_t *pCostasLoopLoopSample,
+ *  SLData_t * SIGLIB_PTR_DECL pELGMatchedFilterState,  ELG Parameters
+ *  SLArrayIndex_t *pELGMatchedFilterIndex,
+ *  SLData_t * SIGLIB_PTR_DECL pELGMatchedFilterSum,
+ *  SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
+ *  SLArrayIndex_t * pEarlyGateDelayIndex,
+ *  const SLArrayIndex_t EarlyGateDelayLength,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
+ *  SLArrayIndex_t *pLoopFilterIndex,
+ *  const SLArrayIndex_t LoopFilterLength,
+ *  const SLData_t LoopFilterFc,
+ *  SLFixData_t *pPulseDetectorThresholdFlag,
+ *  SLData_t *pZeroCrossingPreviousSample,
+ *  SLArrayIndex_t *pTriggerCount,
+ *  SLFixData_t *pTriggerDetectedFlag,
+ *  SLFixData_t *pTriggerUpdatedFlag,
+ *  SLArrayIndex_t *pTriggerLatency,
+ *  const SLArrayIndex_t SymbolLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the costas loop function.
+ *  Initialise the costas loop function.
  *
  ********************************************************/
 
@@ -121,48 +121,48 @@ SLError_t SIGLIB_FUNC_DECL SIF_CostasQamDemodulate(
  * Function: SDS_CostasQamDemodulate
  *
  * Parameters:
- *   const SLData_t Src,
- *   SLData_t *pRealDst,
- *   SLData_t *pImagDst,
- *   SLData_t * SIGLIB_PTR_DECL pTriggerOutput,
- *   SLData_t *pCostasLpVCOPhase,                    Costas loop parameters
- *   const SLData_t CostasLpVCOModulationIndex,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLoopVCOLookUpTable,
- *   const SLArrayIndex_t CostasLoopVCOLookUpTableSize,
- *   const SLData_t CarrierFreq,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLpLPF1State,
- *   SLArrayIndex_t *pCostasLpLPF1Index,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLpLPF2State,
- *   SLArrayIndex_t *pCostasLpLPF2Index,
- *   const SLData_t * SIGLIB_PTR_DECL pCostasLpLPFCoeffs,
- *   const SLArrayIndex_t CostasLpLPFLength,
- *   SLData_t *pCostasLpLoopFilterState,
- *   const SLData_t CostasLpLoopFilterCoeff,
- *   const enum SLCostasLoopFeedbackMode_t FeedbackMode,
- *   SLData_t *pCostasLoopLoopSample,
- *   SLData_t * SIGLIB_PTR_DECL pELGMatchedFilterState,      ELG Parmeters
- *   SLArrayIndex_t *pELGMatchedFilterIndex,
- *   SLData_t * SIGLIB_PTR_DECL pELGMatchedFilterSum,
- *   SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
- *   SLArrayIndex_t * pEarlyGateDelayIndex,
- *   const SLArrayIndex_t ELGEarlyGateDelayLength,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
- *   SLArrayIndex_t *pLoopFilterIndex,
- *   const SLArrayIndex_t ELGLoopFilterLength,
- *   const SLData_t NoiseThreshold,
- *   SLFixData_t *pPulseDetectorThresholdFlag,
- *   SLData_t *pZeroCrossingPreviousSample,
- *   SLArrayIndex_t *pTriggerCount,
- *   SLFixData_t * SIGLIB_PTR_DECL pTriggerDetectedFlag,
- *   SLFixData_t * SIGLIB_PTR_DECL pTriggerUpdatedFlag,
- *   const SLArrayIndex_t SymbolLength)
+ *  const SLData_t Src,
+ *  SLData_t *pRealDst,
+ *  SLData_t *pImagDst,
+ *  SLData_t * SIGLIB_PTR_DECL pTriggerOutput,
+ *  SLData_t *pCostasLpVCOPhase,                    Costas loop parameters
+ *  const SLData_t CostasLpVCOModulationIndex,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLoopVCOLookUpTable,
+ *  const SLArrayIndex_t CostasLoopVCOLookUpTableSize,
+ *  const SLData_t CarrierFreq,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLpLPF1State,
+ *  SLArrayIndex_t *pCostasLpLPF1Index,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLpLPF2State,
+ *  SLArrayIndex_t *pCostasLpLPF2Index,
+ *  const SLData_t * SIGLIB_PTR_DECL pCostasLpLPFCoeffs,
+ *  const SLArrayIndex_t CostasLpLPFLength,
+ *  SLData_t *pCostasLpLoopFilterState,
+ *  const SLData_t CostasLpLoopFilterCoeff,
+ *  const enum SLCostasLoopFeedbackMode_t FeedbackMode,
+ *  SLData_t *pCostasLoopLoopSample,
+ *  SLData_t * SIGLIB_PTR_DECL pELGMatchedFilterState,      ELG Parmeters
+ *  SLArrayIndex_t *pELGMatchedFilterIndex,
+ *  SLData_t * SIGLIB_PTR_DECL pELGMatchedFilterSum,
+ *  SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
+ *  SLArrayIndex_t * pEarlyGateDelayIndex,
+ *  const SLArrayIndex_t ELGEarlyGateDelayLength,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
+ *  SLArrayIndex_t *pLoopFilterIndex,
+ *  const SLArrayIndex_t ELGLoopFilterLength,
+ *  const SLData_t NoiseThreshold,
+ *  SLFixData_t *pPulseDetectorThresholdFlag,
+ *  SLData_t *pZeroCrossingPreviousSample,
+ *  SLArrayIndex_t *pTriggerCount,
+ *  SLFixData_t * SIGLIB_PTR_DECL pTriggerDetectedFlag,
+ *  SLFixData_t * SIGLIB_PTR_DECL pTriggerUpdatedFlag,
+ *  const SLArrayIndex_t SymbolLength)
  *
  * Return value:
- *   Flag = SIGLIB_TRUE when symbol demodulated
+ *  Flag = SIGLIB_TRUE when symbol demodulated
  *
  * Description:
- *   Implement the costas loop QAM demodulation function.
+ *  Implement the costas loop QAM demodulation function.
  *
  ********************************************************/
 
@@ -279,52 +279,52 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_CostasQamDemodulate(
  * Function: SDS_CostasQamDemodulateDebug
  *
  * Parameters:
- *   const SLData_t Src,
- *   SLData_t *pRealDst,
- *   SLData_t *pImagDst,
- *   SLData_t * SIGLIB_PTR_DECL pTriggerOutput,
- *   SLData_t *pCostasLpVCOPhase,                    Costas loop parameters
- *   const SLData_t CostasLpVCOModulationIndex,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLoopVCOLookUpTable,
- *   const SLArrayIndex_t CostasLoopVCOLookUpTableSize,
- *   const SLData_t CarrierFreq,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLpLPF1State,
- *   SLArrayIndex_t *pCostasLpLPF1Index,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLpLPF2State,
- *   SLArrayIndex_t *pCostasLpLPF2Index,
- *   const SLData_t * SIGLIB_PTR_DECL pCostasLpLPFCoeffs,
- *   const SLArrayIndex_t CostasLpLPFLength,
- *   SLData_t *pCostasLpLoopFilterState,
- *   const SLData_t CostasLpLoopFilterCoeff,
- *   const enum SLCostasLoopFeedbackMode_t FeedbackMode,
- *   SLData_t *pCostasLoopLoopSample,
- *   SLData_t * SIGLIB_PTR_DECL pELGMatchedFilterState,      ELG Parmeters
- *   SLArrayIndex_t *pELGMatchedFilterIndex,
- *   SLData_t * SIGLIB_PTR_DECL pELGMatchedFilterSum,
- *   SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
- *   SLArrayIndex_t * pEarlyGateDelayIndex,
- *   const SLArrayIndex_t ELGEarlyGateDelayLength,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
- *   SLArrayIndex_t *pLoopFilterIndex,
- *   const SLArrayIndex_t ELGLoopFilterLength,
- *   const SLData_t NoiseThreshold,
- *   SLFixData_t *pPulseDetectorThresholdFlag,
- *   SLData_t *pZeroCrossingPreviousSample,
- *   SLArrayIndex_t *pTriggerCount,
- *   SLFixData_t * SIGLIB_PTR_DECL pTriggerDetectedFlag,
- *   SLFixData_t * SIGLIB_PTR_DECL pTriggerUpdatedFlag,
- *   const SLArrayIndex_t SymbolLength,
- *   SLData_t *pDebugRealFilterOutput,
- *   SLData_t *pDebugImagFilterOutput,
- *   SLData_t *pDebugELGTriggerOutput,
- *   SLArrayIndex_t *pTriggerIndexCount)
+ *  const SLData_t Src,
+ *  SLData_t *pRealDst,
+ *  SLData_t *pImagDst,
+ *  SLData_t * SIGLIB_PTR_DECL pTriggerOutput,
+ *  SLData_t *pCostasLpVCOPhase,                    Costas loop parameters
+ *  const SLData_t CostasLpVCOModulationIndex,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLoopVCOLookUpTable,
+ *  const SLArrayIndex_t CostasLoopVCOLookUpTableSize,
+ *  const SLData_t CarrierFreq,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLpLPF1State,
+ *  SLArrayIndex_t *pCostasLpLPF1Index,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLpLPF2State,
+ *  SLArrayIndex_t *pCostasLpLPF2Index,
+ *  const SLData_t * SIGLIB_PTR_DECL pCostasLpLPFCoeffs,
+ *  const SLArrayIndex_t CostasLpLPFLength,
+ *  SLData_t *pCostasLpLoopFilterState,
+ *  const SLData_t CostasLpLoopFilterCoeff,
+ *  const enum SLCostasLoopFeedbackMode_t FeedbackMode,
+ *  SLData_t *pCostasLoopLoopSample,
+ *  SLData_t * SIGLIB_PTR_DECL pELGMatchedFilterState,      ELG Parmeters
+ *  SLArrayIndex_t *pELGMatchedFilterIndex,
+ *  SLData_t * SIGLIB_PTR_DECL pELGMatchedFilterSum,
+ *  SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
+ *  SLArrayIndex_t * pEarlyGateDelayIndex,
+ *  const SLArrayIndex_t ELGEarlyGateDelayLength,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
+ *  SLArrayIndex_t *pLoopFilterIndex,
+ *  const SLArrayIndex_t ELGLoopFilterLength,
+ *  const SLData_t NoiseThreshold,
+ *  SLFixData_t *pPulseDetectorThresholdFlag,
+ *  SLData_t *pZeroCrossingPreviousSample,
+ *  SLArrayIndex_t *pTriggerCount,
+ *  SLFixData_t * SIGLIB_PTR_DECL pTriggerDetectedFlag,
+ *  SLFixData_t * SIGLIB_PTR_DECL pTriggerUpdatedFlag,
+ *  const SLArrayIndex_t SymbolLength,
+ *  SLData_t *pDebugRealFilterOutput,
+ *  SLData_t *pDebugImagFilterOutput,
+ *  SLData_t *pDebugELGTriggerOutput,
+ *  SLArrayIndex_t *pTriggerIndexCount)
  *
  * Return value:
- *   Flag = SIGLIB_TRUE when symbol demodulated
+ *  Flag = SIGLIB_TRUE when symbol demodulated
  *
  * Description:
- *   Implement the costas loop QAM demodulation function.
+ *  Implement the costas loop QAM demodulation function.
  *
  ********************************************************/
 
@@ -427,50 +427,50 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_CostasQamDemodulateDebug(
  * Function: SDA_CostasQamDemodulate
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pRealDst,
- *   SLData_t * SIGLIB_PTR_DECL pImagDst,
- *   SLData_t * SIGLIB_PTR_DECL pTriggerOutput,
- *   SLData_t *pCostasLpVCOPhase,                    Costas loop parameters
- *   const SLData_t CostasLpVCOModulationIndex,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLoopVCOLookUpTable,
- *   const SLArrayIndex_t CostasLoopVCOLookUpTableSize,
- *   const SLData_t CarrierFreq,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLpLPF1State,
- *   SLArrayIndex_t *pCostasLpLPF1Index,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLpLPF2State,
- *   SLArrayIndex_t *pCostasLpLPF2Index,
- *   const SLData_t * SIGLIB_PTR_DECL pCostasLpLPFCoeffs,
- *   const SLArrayIndex_t CostasLpLPFLength,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLpHilbertTformState,
- *   SLData_t *pCostasLpLoopFilterState,
- *   const SLData_t CostasLpLoopFilterCoeff,
- *   const enum SLCostasLoopFeedbackMode_t FeedbackMode,
- *   SLData_t *pCostasLoopLoopSample,
- *   SLData_t * SIGLIB_PTR_DECL pELGMatchedFilterState,      ELG Parmeters
- *   SLArrayIndex_t *pELGMatchedFilterIndex,
- *   SLData_t * SIGLIB_PTR_DECL pELGMatchedFilterSum,
- *   SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
- *   SLArrayIndex_t * pEarlyGateDelayIndex,
- *   const SLArrayIndex_t ELGEarlyGateDelayLength,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
- *   SLArrayIndex_t *pLoopFilterIndex,
- *   const SLArrayIndex_t ELGLoopFilterLength,
- *   const SLData_t NoiseThreshold,
- *   SLFixData_t *pPulseDetectorThresholdFlag,
- *   SLData_t *pZeroCrossingPreviousSample,
- *   SLArrayIndex_t *pTriggerCount,
- *   SLFixData_t *pTriggerDetectedFlag,
- *   SLFixData_t *pTriggerUpdatedFlag,
- *   const SLArrayIndex_t SymbolLength,
- *   const SLArrayIndex_t sampleLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pRealDst,
+ *  SLData_t * SIGLIB_PTR_DECL pImagDst,
+ *  SLData_t * SIGLIB_PTR_DECL pTriggerOutput,
+ *  SLData_t *pCostasLpVCOPhase,                    Costas loop parameters
+ *  const SLData_t CostasLpVCOModulationIndex,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLoopVCOLookUpTable,
+ *  const SLArrayIndex_t CostasLoopVCOLookUpTableSize,
+ *  const SLData_t CarrierFreq,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLpLPF1State,
+ *  SLArrayIndex_t *pCostasLpLPF1Index,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLpLPF2State,
+ *  SLArrayIndex_t *pCostasLpLPF2Index,
+ *  const SLData_t * SIGLIB_PTR_DECL pCostasLpLPFCoeffs,
+ *  const SLArrayIndex_t CostasLpLPFLength,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLpHilbertTformState,
+ *  SLData_t *pCostasLpLoopFilterState,
+ *  const SLData_t CostasLpLoopFilterCoeff,
+ *  const enum SLCostasLoopFeedbackMode_t FeedbackMode,
+ *  SLData_t *pCostasLoopLoopSample,
+ *  SLData_t * SIGLIB_PTR_DECL pELGMatchedFilterState,      ELG Parmeters
+ *  SLArrayIndex_t *pELGMatchedFilterIndex,
+ *  SLData_t * SIGLIB_PTR_DECL pELGMatchedFilterSum,
+ *  SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
+ *  SLArrayIndex_t * pEarlyGateDelayIndex,
+ *  const SLArrayIndex_t ELGEarlyGateDelayLength,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
+ *  SLArrayIndex_t *pLoopFilterIndex,
+ *  const SLArrayIndex_t ELGLoopFilterLength,
+ *  const SLData_t NoiseThreshold,
+ *  SLFixData_t *pPulseDetectorThresholdFlag,
+ *  SLData_t *pZeroCrossingPreviousSample,
+ *  SLArrayIndex_t *pTriggerCount,
+ *  SLFixData_t *pTriggerDetectedFlag,
+ *  SLFixData_t *pTriggerUpdatedFlag,
+ *  const SLArrayIndex_t SymbolLength,
+ *  const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   Number of symbols demodulated
+ *  Number of symbols demodulated
  *
  * Description:
- *   Implement the costas loop QAM demodulation function.
+ *  Implement the costas loop QAM demodulation function.
  *
  ********************************************************/
 
@@ -593,52 +593,52 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulate(
  * Function: SDA_CostasQamDemodulateDebug
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pRealDst,
- *   SLData_t * SIGLIB_PTR_DECL pImagDst,
- *   SLData_t * SIGLIB_PTR_DECL pTriggerOutput,
- *   SLData_t *pCostasLpVCOPhase,                    Costas loop parameters
- *   const SLData_t CostasLpVCOModulationIndex,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLoopVCOLookUpTable,
- *   const SLArrayIndex_t CostasLoopVCOLookUpTableSize,
- *   const SLData_t CarrierFreq,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLpLPF1State,
- *   SLArrayIndex_t *pCostasLpLPF1Index,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLpLPF2State,
- *   SLArrayIndex_t *pCostasLpLPF2Index,
- *   const SLData_t * SIGLIB_PTR_DECL pCostasLpLPFCoeffs,
- *   const SLArrayIndex_t CostasLpLPFLength,
- *   SLData_t *pCostasLpLoopFilterState,
- *   const SLData_t CostasLpLoopFilterCoeff,
- *   const enum SLCostasLoopFeedbackMode_t FeedbackMode,
- *   SLData_t *pCostasLoopLoopSample,
- *   SLData_t * SIGLIB_PTR_DECL pELGMatchedFilterState,      ELG Parmeters
- *   SLArrayIndex_t *pELGMatchedFilterIndex,
- *   SLData_t * SIGLIB_PTR_DECL pELGMatchedFilterSum,
- *   SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
- *   SLArrayIndex_t * pEarlyGateDelayIndex,
- *   const SLArrayIndex_t ELGEarlyGateDelayLength,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
- *   SLArrayIndex_t *pLoopFilterIndex,
- *   const SLArrayIndex_t ELGLoopFilterLength,
- *   const SLData_t NoiseThreshold,
- *   SLFixData_t *pPulseDetectorThresholdFlag,
- *   SLData_t *pZeroCrossingPreviousSample,
- *   SLArrayIndex_t *pTriggerCount,
- *   SLFixData_t *pTriggerDetectedFlag,
- *   SLFixData_t *pTriggerUpdatedFlag,
- *   const SLArrayIndex_t SymbolLength,
- *   const SLArrayIndex_t sampleLength)
- *   SLData_t *pDebugRealFilterOutput,
- *   SLData_t *pDebugImagFilterOutput,
- *   SLData_t *pDebugELGTriggerOutput,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pRealDst,
+ *  SLData_t * SIGLIB_PTR_DECL pImagDst,
+ *  SLData_t * SIGLIB_PTR_DECL pTriggerOutput,
+ *  SLData_t *pCostasLpVCOPhase,                    Costas loop parameters
+ *  const SLData_t CostasLpVCOModulationIndex,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLoopVCOLookUpTable,
+ *  const SLArrayIndex_t CostasLoopVCOLookUpTableSize,
+ *  const SLData_t CarrierFreq,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLpLPF1State,
+ *  SLArrayIndex_t *pCostasLpLPF1Index,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLpLPF2State,
+ *  SLArrayIndex_t *pCostasLpLPF2Index,
+ *  const SLData_t * SIGLIB_PTR_DECL pCostasLpLPFCoeffs,
+ *  const SLArrayIndex_t CostasLpLPFLength,
+ *  SLData_t *pCostasLpLoopFilterState,
+ *  const SLData_t CostasLpLoopFilterCoeff,
+ *  const enum SLCostasLoopFeedbackMode_t FeedbackMode,
+ *  SLData_t *pCostasLoopLoopSample,
+ *  SLData_t * SIGLIB_PTR_DECL pELGMatchedFilterState,      ELG Parmeters
+ *  SLArrayIndex_t *pELGMatchedFilterIndex,
+ *  SLData_t * SIGLIB_PTR_DECL pELGMatchedFilterSum,
+ *  SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
+ *  SLArrayIndex_t * pEarlyGateDelayIndex,
+ *  const SLArrayIndex_t ELGEarlyGateDelayLength,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
+ *  SLArrayIndex_t *pLoopFilterIndex,
+ *  const SLArrayIndex_t ELGLoopFilterLength,
+ *  const SLData_t NoiseThreshold,
+ *  SLFixData_t *pPulseDetectorThresholdFlag,
+ *  SLData_t *pZeroCrossingPreviousSample,
+ *  SLArrayIndex_t *pTriggerCount,
+ *  SLFixData_t *pTriggerDetectedFlag,
+ *  SLFixData_t *pTriggerUpdatedFlag,
+ *  const SLArrayIndex_t SymbolLength,
+ *  const SLArrayIndex_t sampleLength)
+ *  SLData_t *pDebugRealFilterOutput,
+ *  SLData_t *pDebugImagFilterOutput,
+ *  SLData_t *pDebugELGTriggerOutput,
  *
  * Return value:
- *   Number of symbols demodulated
+ *  Number of symbols demodulated
  *
  * Description:
- *   Implement the costas loop QAM demodulation function.
+ *  Implement the costas loop QAM demodulation function.
  *
  ********************************************************/
 
@@ -772,27 +772,27 @@ const SLFixData_t siglib_numerix_QPSKRxConstellation[] = {
  * Function: SIF_QpskModulate
  *
  * Parameters:
- *   SLData_t *,             Carrier table pointer
- *   const SLData_t,         Carrier phase increment per sample (radians / 2π)
- *   const SLArrayIndex_t,   Sine table length
- *   SLData_t *,             Carrier phase pointer
- *   SLArrayIndex_t *,       Sample clock pointer
- *   SLComplexRect_s *,      Magnitude pointer
- *   SLData_t *,             RRCF Tx I delay pointer
- *   SLArrayIndex_t *,       RRCF Tx I Filter Index pointer
- *   SLData_t *,             RRCF Tx Q delay pointer
- *   SLArrayIndex_t *,       RRCF Tx Q Filter Index pointer
- *   SLData_t *,             RRCF Coeffs pointer
- *   const SLData_t,         RRCF Period
- *   const SLData_t,         RRCF Roll off
- *   const SLArrayIndex_t,   RRCF size
- *   const SLArrayIndex_t    RRCF enable / disable switch
+ *  SLData_t *,             Carrier table pointer
+ *  const SLData_t,         Carrier phase increment per sample (radians / 2π)
+ *  const SLArrayIndex_t,   Sine table length
+ *  SLData_t *,             Carrier phase pointer
+ *  SLArrayIndex_t *,       Sample clock pointer
+ *  SLComplexRect_s *,      Magnitude pointer
+ *  SLData_t *,             RRCF Tx I delay pointer
+ *  SLArrayIndex_t *,       RRCF Tx I Filter Index pointer
+ *  SLData_t *,             RRCF Tx Q delay pointer
+ *  SLArrayIndex_t *,       RRCF Tx Q Filter Index pointer
+ *  SLData_t *,             RRCF Coeffs pointer
+ *  const SLData_t,         RRCF Period
+ *  const SLData_t,         RRCF Roll off
+ *  const SLArrayIndex_t,   RRCF size
+ *  const SLArrayIndex_t    RRCF enable / disable switch
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the QPSK modem structure
+ *  Initialise the QPSK modem structure
  *
  ********************************************************/
 
@@ -832,33 +832,33 @@ void SIGLIB_FUNC_DECL SIF_QpskModulate(SLData_t* SIGLIB_PTR_DECL pCarrierTable, 
  * Function: SDA_QpskModulate
  *
  * Parameters:
- *   const SLFixData_t       Tx di-bit,
- *   SLData_t *,             Destination data array pointer
- *   const SLData_t *,       Carrier table pointer
- *   const SLArrayIndex_t,   Sine table length
- *   SLData_t *,             Carrier phase pointer
- *   SLArrayIndex_t *,       Sample clock pointer
- *   SLComplexRect_s *,      Magnitude pointer
- *   const SLArrayIndex_t,   Carrier table increment
- *   const SLArrayIndex_t,   Samples per symbol
- *   SLData_t *,             RRCF Tx I delay pointer
- *   SLArrayIndex_t *,       RRCF Tx I Filter Index pointer
- *   SLData_t *,             RRCF Tx Q delay pointer
- *   SLArrayIndex_t *,       RRCF Tx Q Filter Index pointer
- *   SLData_t *,             RRCF Coeffs pointer
- *   const SLArrayIndex_t,   RRCF size
- *   const SLArrayIndex_t    RRCF enable / disable switch
+ *  const SLFixData_t       Tx di-bit,
+ *  SLData_t *,             Destination data array pointer
+ *  const SLData_t *,       Carrier table pointer
+ *  const SLArrayIndex_t,   Sine table length
+ *  SLData_t *,             Carrier phase pointer
+ *  SLArrayIndex_t *,       Sample clock pointer
+ *  SLComplexRect_s *,      Magnitude pointer
+ *  const SLArrayIndex_t,   Carrier table increment
+ *  const SLArrayIndex_t,   Samples per symbol
+ *  SLData_t *,             RRCF Tx I delay pointer
+ *  SLArrayIndex_t *,       RRCF Tx I Filter Index pointer
+ *  SLData_t *,             RRCF Tx Q delay pointer
+ *  SLArrayIndex_t *,       RRCF Tx Q Filter Index pointer
+ *  SLData_t *,             RRCF Coeffs pointer
+ *  const SLArrayIndex_t,   RRCF size
+ *  const SLArrayIndex_t    RRCF enable / disable switch
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   This function runs the QPSK modulator to encode one
- *   symbol of the input signal.
- *   The constellation mapper generates one output symbol
- *   of I and Q samples, which are inputs to the root
- *   raised cosine shaping filters. These are modulated
- *   by the carrier and added together.
+ *  This function runs the QPSK modulator to encode one
+ *  symbol of the input signal.
+ *  The constellation mapper generates one output symbol
+ *  of I and Q samples, which are inputs to the root
+ *  raised cosine shaping filters. These are modulated
+ *  by the carrier and added together.
  *
  ********************************************************/
 
@@ -933,27 +933,27 @@ void SIGLIB_FUNC_DECL SDA_QpskModulate(const SLFixData_t TxDiBit, SLData_t* SIGL
  * Function: SIF_QpskDemodulate
  *
  * Parameters:
- *   SLData_t *,             Carrier table pointer
- *   const SLData_t,         Carrier phase increment per sample (radians / 2π)
- *   const SLArrayIndex_t,   Sine table length
- *   SLData_t *,             Carrier phase pointer
- *   SLArrayIndex_t *,       Sample clock pointer
- *   SLComplexRect_s *,      Magnitude pointer
- *   SLData_t *,             RRCF Rx I delay pointer
- *   SLArrayIndex_t *,       RRCF Rx I Filter Index pointer
- *   SLData_t *,             RRCF Rx Q delay pointer
- *   SLArrayIndex_t *,       RRCF Rx Q Filter Index pointer
- *   SLData_t *,             RRCF Coeffs pointer
- *   const SLData_t,         RRCF Period
- *   const SLData_t,         RRCF Roll off
- *   const SLArrayIndex_t,   RRCF size
- *   const SLArrayIndex_t    RRCF enable / disable switch
+ *  SLData_t *,             Carrier table pointer
+ *  const SLData_t,         Carrier phase increment per sample (radians / 2π)
+ *  const SLArrayIndex_t,   Sine table length
+ *  SLData_t *,             Carrier phase pointer
+ *  SLArrayIndex_t *,       Sample clock pointer
+ *  SLComplexRect_s *,      Magnitude pointer
+ *  SLData_t *,             RRCF Rx I delay pointer
+ *  SLArrayIndex_t *,       RRCF Rx I Filter Index pointer
+ *  SLData_t *,             RRCF Rx Q delay pointer
+ *  SLArrayIndex_t *,       RRCF Rx Q Filter Index pointer
+ *  SLData_t *,             RRCF Coeffs pointer
+ *  const SLData_t,         RRCF Period
+ *  const SLData_t,         RRCF Roll off
+ *  const SLArrayIndex_t,   RRCF size
+ *  const SLArrayIndex_t    RRCF enable / disable switch
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the QPSK demodulator
+ *  Initialise the QPSK demodulator
  *
  ********************************************************/
 
@@ -998,42 +998,42 @@ void SIGLIB_FUNC_DECL SIF_QpskDemodulate(SLData_t* SIGLIB_PTR_DECL pCarrierTable
  * Function: SDA_QpskDemodulate
  *
  * Parameters:
- *   SLData_t *,               Source data pointer
- *   const SLData_t *,         Carrier table pointer
- *   const SLArrayIndex_t,     Sine table length
- *   SLData_t *,               Carrier phase pointer
- *   SLArrayIndex_t *,         Sample clock pointer
- *   SLComplexRect_s *,        Magnitude pointer
- *   const SLArrayIndex_t,     Carrier table increment
- *   const SLArrayIndex_t,     Samples per symbol
- *   SLData_t *,               RRCF Rx I delay pointer
- *   SLArrayIndex_t *,         RRCF Rx I Filter Index pointer
- *   SLData_t *,               RRCF Rx Q delay pointer
- *   SLArrayIndex_t *,         RRCF Rx Q Filter Index pointer
- *   SLData_t *,               RRCF Coeffs pointer
- *   const SLArrayIndex_t,     RRCF size
- *   const SLArrayIndex_t      RRCF enable / disable switch
+ *  SLData_t *,               Source data pointer
+ *  const SLData_t *,         Carrier table pointer
+ *  const SLArrayIndex_t,     Sine table length
+ *  SLData_t *,               Carrier phase pointer
+ *  SLArrayIndex_t *,         Sample clock pointer
+ *  SLComplexRect_s *,        Magnitude pointer
+ *  const SLArrayIndex_t,     Carrier table increment
+ *  const SLArrayIndex_t,     Samples per symbol
+ *  SLData_t *,               RRCF Rx I delay pointer
+ *  SLArrayIndex_t *,         RRCF Rx I Filter Index pointer
+ *  SLData_t *,               RRCF Rx Q delay pointer
+ *  SLArrayIndex_t *,         RRCF Rx Q Filter Index pointer
+ *  SLData_t *,               RRCF Coeffs pointer
+ *  const SLArrayIndex_t,     RRCF size
+ *  const SLArrayIndex_t      RRCF enable / disable switch
  *
  * Return value:
- *   SLFixData_t     - Received di-bit
+ *  SLFixData_t     - Received di-bit
  *
  * Description:
- *   This function runs the Rx de-modulator to decode one
- *   symbol of the input signal.
- *   The de-modulator extracts the I and Q samples,
- *   which are inputs to the root raised cosine shaping
- *   filters. These are decoded by the constellation
- *   decoder.
- *   The demodulate function has the following flow
- *   diagram:
+ *  This function runs the Rx de-modulator to decode one
+ *  symbol of the input signal.
+ *  The de-modulator extracts the I and Q samples,
+ *  which are inputs to the root raised cosine shaping
+ *  filters. These are decoded by the constellation
+ *  decoder.
+ *  The demodulate function has the following flow
+ *  diagram:
  *
- *                --------      ----------
- *        --------| RRCF |------|        |
- *        |       --------      | const. |
+ *               --------      ----------
+ *       --------| RRCF |------|        |
+ *       |       --------      | const. |
  * In --- x <- Fc               |        |---> Out
- *        |       --------      | decode |
- *        --------| RRCF |------|        |
- *                --------      ----------
+ *       |       --------      | decode |
+ *       --------| RRCF |------|        |
+ *               --------      ----------
  *
  ********************************************************/
 
@@ -1109,36 +1109,36 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_QpskDemodulate(const SLData_t* SIGLIB_PTR_DECL 
  * Function: SDA_QpskDemodulateDebug
  *
  * Parameters:
- *   SLData_t *,             Source data pointer
- *   const SLData_t *,       Carrier table pointer
- *   const SLArrayIndex_t,   Sine table length
- *   SLData_t * ,            Carrier phase pointer
- *   SLArrayIndex_t *,       Sample clock pointer
- *   SLComplexRect_s * ,     Magnitude pointer
- *   const SLArrayIndex_t,   Carrier table increment
- *   const SLArrayIndex_t,   Samples per symbol
- *   SLData_t * ,            RRCF Rx I delay pointer
- *   SLArrayIndex_t * ,      RRCF Rx I Filter Index pointer
- *   SLData_t * ,            RRCF Rx Q delay pointer
- *   SLArrayIndex_t * ,      RRCF Rx Q Filter Index pointer
- *   SLData_t * ,            RRCF Coeffs pointer
- *   const SLArrayIndex_t,   RRCF size
- *   const SLArrayIndex_t,   RRCF enable / disable switch
- *   SLData_t * ,            Eye samples pointer
- *   SLComplexRect_s * ,     Constellation points pointer
+ *  SLData_t *,             Source data pointer
+ *  const SLData_t *,       Carrier table pointer
+ *  const SLArrayIndex_t,   Sine table length
+ *  SLData_t * ,            Carrier phase pointer
+ *  SLArrayIndex_t *,       Sample clock pointer
+ *  SLComplexRect_s * ,     Magnitude pointer
+ *  const SLArrayIndex_t,   Carrier table increment
+ *  const SLArrayIndex_t,   Samples per symbol
+ *  SLData_t * ,            RRCF Rx I delay pointer
+ *  SLArrayIndex_t * ,      RRCF Rx I Filter Index pointer
+ *  SLData_t * ,            RRCF Rx Q delay pointer
+ *  SLArrayIndex_t * ,      RRCF Rx Q Filter Index pointer
+ *  SLData_t * ,            RRCF Coeffs pointer
+ *  const SLArrayIndex_t,   RRCF size
+ *  const SLArrayIndex_t,   RRCF enable / disable switch
+ *  SLData_t * ,            Eye samples pointer
+ *  SLComplexRect_s * ,     Constellation points pointer
  *
  * Return value:
- *   SLFixData_t     - Received di-bit
+ *  SLFixData_t     - Received di-bit
  *
  * Description:
- *   This function runs the QPSK Rx de-modulator to decode one
- *   symbol of the input signal.
- *   The de-modulator extracts the I and Q samples,
- *   which are inputs to the root raised cosine shaping
- *   filters. These are decoded by the constellation
- *   decoder.
- *   This function will generate the eye and
- *   constellation diagram data.
+ *  This function runs the QPSK Rx de-modulator to decode one
+ *  symbol of the input signal.
+ *  The de-modulator extracts the I and Q samples,
+ *  which are inputs to the root raised cosine shaping
+ *  filters. These are decoded by the constellation
+ *  decoder.
+ *  This function will generate the eye and
+ *  constellation diagram data.
  *
  ********************************************************/
 
@@ -1254,15 +1254,15 @@ const SLFixData_t siglib_numerix_QPSKRxMapping[] = {2, 3, 0, 1, 0, 2, 1, 3, 3, 1
  * Function: SDS_QpskDifferentialEncode
  *
  * Parameters:
- *   const SLFixData_t   TxDiBit,
- *   SLFixData_t         *PreviousQuadrant
+ *  const SLFixData_t   TxDiBit,
+ *  SLFixData_t         *PreviousQuadrant
  *
  * Return value:
- *   SLFixData_t         MappedDiBit
+ *  SLFixData_t         MappedDiBit
  *
  * Description:
- *   This function differentially encodes the data and
- *   maps the code to the generic SigLib constellation
+ *  This function differentially encodes the data and
+ *  maps the code to the generic SigLib constellation
  *
  ********************************************************/
 
@@ -1280,15 +1280,15 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_QpskDifferentialEncode(const SLFixData_t TxDiBi
  * Function: SDS_QpskDifferentialDecode
  *
  * Parameters:
- *   const SLFixData_t   MappedDiBit,
- *   SLFixData_t         *PreviousQuadrant
+ *  const SLFixData_t   MappedDiBit,
+ *  SLFixData_t         *PreviousQuadrant
  *
  * Return value:
- *   SLFixData_t RxDiBit
+ *  SLFixData_t RxDiBit
  *
  * Description:
- *   This function differentially decodes the data and
- *   maps the generic SigLib constellation to the output.
+ *  This function differentially decodes the data and
+ *  maps the generic SigLib constellation to the output.
  *
  ********************************************************/
 
@@ -1307,19 +1307,19 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_QpskDifferentialDecode(const SLFixData_t Mapped
  * Function: SIF_DifferentialEncoder
  *
  * Parameters:
- *   SLArrayIndex_t *pEncodeTable,
- *   SLArrayIndex_t *pDecodeTable,
- *   const SLFixData_t wordLength)
+ *  SLArrayIndex_t *pEncodeTable,
+ *  SLArrayIndex_t *pDecodeTable,
+ *  const SLFixData_t wordLength)
  *
  * Return value:
- *   SLFixData_t         MappedDiBit
+ *  SLFixData_t         MappedDiBit
  *
  * Description:
- *   Initialize the differential encoder and decoder
- *   look-up-tables for the following function:
- *     y[n] = (x[n] - x[n-1]) % M
- *     Tx  (Previous Word + ((Current Word & bitMask) << Word Length))
- *     Rx  (Previous Word + ((Received Word & bitMask) << Word Length))
+ *  Initialize the differential encoder and decoder
+ *  look-up-tables for the following function:
+ *    y[n] = (x[n] - x[n-1]) % M
+ *    Tx  (Previous Word + ((Current Word & bitMask) << Word Length))
+ *    Rx  (Previous Word + ((Received Word & bitMask) << Word Length))
  *
  ********************************************************/
 
@@ -1342,18 +1342,18 @@ void SIGLIB_FUNC_DECL SIF_DifferentialEncoder(SLArrayIndex_t* SIGLIB_PTR_DECL pE
  * Function: SDS_QpskDifferentialEncode
  *
  * Parameters:
- *   const SLFixData_t srcWord,
- *   SLFixData_t *pEncodeTable,
- *   const SLFixData_t wordLength,
- *   const SLFixData_t bitMask,
- *   SLFixData_t *pPreviousWord)
+ *  const SLFixData_t srcWord,
+ *  SLFixData_t *pEncodeTable,
+ *  const SLFixData_t wordLength,
+ *  const SLFixData_t bitMask,
+ *  SLFixData_t *pPreviousWord)
  *
  * Return value:
- *   SLFixData_t         MappedDiBit
+ *  SLFixData_t         MappedDiBit
  *
  * Description:
- *   This function differentially encodes the data
- *   according to the mapping in the supplied look-up-table.
+ *  This function differentially encodes the data
+ *  according to the mapping in the supplied look-up-table.
  *
  ********************************************************/
 
@@ -1370,18 +1370,18 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_DifferentialEncode(const SLFixData_t srcWord, S
  * Function: SDS_QpskDifferentialDecode
  *
  * Parameters:
- *   const SLFixData_t srcWord,
- *   SLFixData_t *pEncodeTable,
- *   const SLFixData_t wordLength,
- *   const SLFixData_t bitMask,
- *   SLFixData_t *pPreviousWord)
+ *  const SLFixData_t srcWord,
+ *  SLFixData_t *pEncodeTable,
+ *  const SLFixData_t wordLength,
+ *  const SLFixData_t bitMask,
+ *  SLFixData_t *pPreviousWord)
  *
  * Return value:
- *   SLFixData_t RxDiBit
+ *  SLFixData_t RxDiBit
  *
  * Description:
- *   This function differentially decodes the data
- *   according to the mapping in the supplied look-up-table.
+ *  This function differentially decodes the data
+ *  according to the mapping in the supplied look-up-table.
  *
  ********************************************************/
 
@@ -1398,15 +1398,15 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_DifferentialDecode(const SLFixData_t srcWord, S
  * Function: SIF_FskModulate
  *
  * Parameters:
- *   const SLData_t *,       Carrier table pointer
- *   const SLData_t,         Carrier phase increment per sample (radians / 2π)
- *   const SLArrayIndex_t)   Sine table length
+ *  const SLData_t *,       Carrier table pointer
+ *  const SLData_t,         Carrier phase increment per sample (radians / 2π)
+ *  const SLArrayIndex_t)   Sine table length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the FSK modulation and demodulation functions.
+ *  Initialise the FSK modulation and demodulation functions.
  *
  ********************************************************/
 
@@ -1424,21 +1424,21 @@ void SIGLIB_FUNC_DECL SIF_FskModulate(SLData_t* SIGLIB_PTR_DECL pCarrierTable, c
  * Function: SDA_FskModulateByte
  *
  * Parameters:
- *   SLFixData_t,            Modulating byte
- *   SLData_t *,             Modulated signal
- *   const SLData_t *,       Carrier table pointer
- *   SLData_t *,             Level '1' Carrier phase
- *   SLData_t *,             Level '0' Carrier phase
- *   const SLData_t,         Level '1' Carrier phase increment
- *   const SLData_t,         Level '0' Carrier phase increment
- *   const SLFixData_t,      Samples per symbol
- *   const SLArrayIndex_t)   Sine table length
+ *  SLFixData_t,            Modulating byte
+ *  SLData_t *,             Modulated signal
+ *  const SLData_t *,       Carrier table pointer
+ *  SLData_t *,             Level '1' Carrier phase
+ *  SLData_t *,             Level '0' Carrier phase
+ *  const SLData_t,         Level '1' Carrier phase increment
+ *  const SLData_t,         Level '0' Carrier phase increment
+ *  const SLFixData_t,      Samples per symbol
+ *  const SLArrayIndex_t)   Sine table length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   FSK modulate a signal with a byte of data.
+ *  FSK modulate a signal with a byte of data.
  *
  ********************************************************/
 
@@ -1485,21 +1485,21 @@ void SIGLIB_FUNC_DECL SDA_FskModulateByte(SLFixData_t TxByte, SLData_t* SIGLIB_P
  * Function: SDA_FskDemodulateByte
  *
  * Parameters:
- *   const SLData_t *,       Modulated signal
- *   const SLData_t *,       Level '1' BP filter
- *   const SLData_t *,       Level '0' BP filter
- *   const SLArrayIndex_t,   Filter length
- *   const SLFixData_t)      Samples per symbol
+ *  const SLData_t *,       Modulated signal
+ *  const SLData_t *,       Level '1' BP filter
+ *  const SLData_t *,       Level '0' BP filter
+ *  const SLArrayIndex_t,   Filter length
+ *  const SLFixData_t)      Samples per symbol
  *
  * Return value:
- *   SLFixData_t             Demodulated byte
+ *  SLFixData_t             Demodulated byte
  *
  * Description:
- *   Demodulate an FSK or continuous phase FSK modulated signal.
- *   This function demodulates an 8 bit byte from the data
- *   stream.
- *   The filter length must be greater than:
- *   (2 * number of samples per symbol) + 1
+ *  Demodulate an FSK or continuous phase FSK modulated signal.
+ *  This function demodulates an 8 bit byte from the data
+ *  stream.
+ *  The filter length must be greater than:
+ *  (2 * number of samples per symbol) + 1
  *
  ********************************************************/
 
@@ -1558,20 +1558,20 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_FskDemodulateByte(const SLData_t* SIGLIB_PTR_DE
  * Function: SDA_CpfskModulateByte
  *
  * Parameters:
- *   SLFixData_t,                Modulating byte
- *   SLData_t *,                 Modulated signal
- *   const SLData_t *,           Carrier table pointer
- *   SLData_t *,                 Carrier phase
- *   const SLData_t, Level '1'   Carrier phase increment
- *   const SLData_t, Level '0'   Carrier phase increment
- *   const SLFixData_t,          Samples per symbol
- *   const SLArrayIndex_t)       Sine table length
+ *  SLFixData_t,                Modulating byte
+ *  SLData_t *,                 Modulated signal
+ *  const SLData_t *,           Carrier table pointer
+ *  SLData_t *,                 Carrier phase
+ *  const SLData_t, Level '1'   Carrier phase increment
+ *  const SLData_t, Level '0'   Carrier phase increment
+ *  const SLFixData_t,          Samples per symbol
+ *  const SLArrayIndex_t)       Sine table length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Continuous phase FSK modulate a signal.
+ *  Continuous phase FSK modulate a signal.
  *
  ********************************************************/
 
@@ -1616,23 +1616,23 @@ void SIGLIB_FUNC_DECL SDA_CpfskModulateByte(SLFixData_t TxByte, SLData_t* SIGLIB
  * Function: SDA_FskModulate
  *
  * Parameters:
- *   SLFixData_t,                Modulating bit
- *   SLData_t *,                 Modulated signal
- *   const SLData_t *,           Carrier table pointer
- *   SLData_t *,                 Level '1' carrier phase
- *   SLData_t *,                 Level '0' carrier phase
- *   const SLData_t, Level '1'   Carrier phase increment
- *   const SLData_t, Level '0'   Carrier phase increment
- *   const SLFixData_t,          Samples per symbol
- *   const SLArrayIndex_t)       Sine table length
+ *  SLFixData_t,                Modulating bit
+ *  SLData_t *,                 Modulated signal
+ *  const SLData_t *,           Carrier table pointer
+ *  SLData_t *,                 Level '1' carrier phase
+ *  SLData_t *,                 Level '0' carrier phase
+ *  const SLData_t, Level '1'   Carrier phase increment
+ *  const SLData_t, Level '0'   Carrier phase increment
+ *  const SLFixData_t,          Samples per symbol
+ *  const SLArrayIndex_t)       Sine table length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   FSK modulate a signal.
- *   This function modulates a single bit onto the data
- *   stream.
+ *  FSK modulate a signal.
+ *  This function modulates a single bit onto the data
+ *  stream.
  *
  ********************************************************/
 
@@ -1676,21 +1676,21 @@ void SIGLIB_FUNC_DECL SDA_FskModulate(SLFixData_t TxBit, SLData_t* SIGLIB_PTR_DE
  * Function: SDA_FskDemodulate
  *
  * Parameters:
- *   const SLData_t *,       Modulated signal
- *   const SLData_t *,       Level '1' BP filter
- *   const SLData_t *,       Level '0' BP filter
- *   const SLArrayIndex_t,   Filter length
- *   const SLFixData_t)      Samples per symbol
+ *  const SLData_t *,       Modulated signal
+ *  const SLData_t *,       Level '1' BP filter
+ *  const SLData_t *,       Level '0' BP filter
+ *  const SLArrayIndex_t,   Filter length
+ *  const SLFixData_t)      Samples per symbol
  *
  * Return value:
- *   SLFixData_t         Demodulated bit
+ *  SLFixData_t         Demodulated bit
  *
  * Description:
- *   Demodulate an FSK or continuous phase FSK modulated signal.
- *   This function demodulates a single bit from the data
- *   stream.
- *   The filter length must be greater than:
- *   (2 * number of samples per symbol) + 1
+ *  Demodulate an FSK or continuous phase FSK modulated signal.
+ *  This function demodulates a single bit from the data
+ *  stream.
+ *  The filter length must be greater than:
+ *  (2 * number of samples per symbol) + 1
  *
  ********************************************************/
 
@@ -1744,22 +1744,22 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_FskDemodulate(const SLData_t* SIGLIB_PTR_DECL p
  * Function: SDA_CpfskModulate
  *
  * Parameters:
- *   SLFixData_t,                Modulating character source pointer
- *   SLData_t *,                 Modulated signal
- *   const SLData_t *,           Carrier table pointer
- *   SLData_t *,                 Carrier phase
- *   const SLData_t, Level '1'   Carrier phase increment
- *   const SLData_t, Level '0'   Carrier phase increment
- *   const SLFixData_t,          Samples per symbol
- *   const SLArrayIndex_t)       Sine table length
+ *  SLFixData_t,                Modulating character source pointer
+ *  SLData_t *,                 Modulated signal
+ *  const SLData_t *,           Carrier table pointer
+ *  SLData_t *,                 Carrier phase
+ *  const SLData_t, Level '1'   Carrier phase increment
+ *  const SLData_t, Level '0'   Carrier phase increment
+ *  const SLFixData_t,          Samples per symbol
+ *  const SLArrayIndex_t)       Sine table length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Continuous phase FSK modulate a signal.
- *   This function modulates a single bit onto the data
- *   stream.
+ *  Continuous phase FSK modulate a signal.
+ *  This function modulates a single bit onto the data
+ *  stream.
  *
  ********************************************************/
 
@@ -1842,28 +1842,28 @@ const SLChar_t siglib_numerix_QAM16RxConstellation[] = {
  * Function: SIF_Qam16Modulate
  *
  * Parameters:
- *   const SLData_t          Sample rate
- *   SLData_t *,             Carrier table pointer
- *   const SLData_t,         Carrier phase increment per sample (radians / 2π)
- *   const SLArrayIndex_t,   Sine table length
- *   SLData_t *,             Carrier phase pointer
- *   SLArrayIndex_t *,       Sample clock pointer
- *   SLComplexRect_s *,      Magnitude pointer
- *   SLData_t *,             RRCF Tx I delay pointer
- *   SLArrayIndex_t *,       RRCF Tx I Filter Index pointer
- *   SLData_t *,             RRCF Tx Q delay pointer
- *   SLArrayIndex_t *,       RRCF Tx Q Filter Index pointer
- *   SLData_t *,             RRCF Coeffs pointer
- *   const SLData_t,         RRCF Period
- *   const SLData_t,         RRCF Roll off
- *   const SLArrayIndex_t,   RRCF size
- *   const SLArrayIndex_t    RRCF enable / disable switch
+ *  const SLData_t          Sample rate
+ *  SLData_t *,             Carrier table pointer
+ *  const SLData_t,         Carrier phase increment per sample (radians / 2π)
+ *  const SLArrayIndex_t,   Sine table length
+ *  SLData_t *,             Carrier phase pointer
+ *  SLArrayIndex_t *,       Sample clock pointer
+ *  SLComplexRect_s *,      Magnitude pointer
+ *  SLData_t *,             RRCF Tx I delay pointer
+ *  SLArrayIndex_t *,       RRCF Tx I Filter Index pointer
+ *  SLData_t *,             RRCF Tx Q delay pointer
+ *  SLArrayIndex_t *,       RRCF Tx Q Filter Index pointer
+ *  SLData_t *,             RRCF Coeffs pointer
+ *  const SLData_t,         RRCF Period
+ *  const SLData_t,         RRCF Roll off
+ *  const SLArrayIndex_t,   RRCF size
+ *  const SLArrayIndex_t    RRCF enable / disable switch
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the 16 QAM modem structure
+ *  Initialise the 16 QAM modem structure
  *
  ********************************************************/
 
@@ -1904,33 +1904,33 @@ void SIGLIB_FUNC_DECL SIF_Qam16Modulate(SLData_t* SIGLIB_PTR_DECL pCarrierTable,
  * Function: SDA_Qam16Modulate
  *
  * Parameters:
- *   const SLFixData_t,      Tx nibble,
- *   SLData_t *,             Destination data array pointer
- *   const SLData_t *,       Carrier table pointer
- *   const SLArrayIndex_t,   Sine table length
- *   SLData_t *,             Carrier phase pointer
- *   SLArrayIndex_t *,       Sample clock pointer
- *   SLComplexRect_s *,      Magnitude pointer
- *   const SLArrayIndex_t,   Carrier table increment
- *   const SLArrayIndex_t,   Samples per symbol
- *   SLData_t *,             RRCF Tx I delay pointer
- *   SLArrayIndex_t *,       RRCF Tx I Filter Index pointer
- *   SLData_t *,             RRCF Tx Q delay pointer
- *   SLArrayIndex_t *,       RRCF Tx Q Filter Index pointer
- *   SLData_t *,             RRCF Coeffs pointer
- *   const SLArrayIndex_t,   RRCF size
- *   const SLArrayIndex_t    RRCF enable / disable switch
+ *  const SLFixData_t,      Tx nibble,
+ *  SLData_t *,             Destination data array pointer
+ *  const SLData_t *,       Carrier table pointer
+ *  const SLArrayIndex_t,   Sine table length
+ *  SLData_t *,             Carrier phase pointer
+ *  SLArrayIndex_t *,       Sample clock pointer
+ *  SLComplexRect_s *,      Magnitude pointer
+ *  const SLArrayIndex_t,   Carrier table increment
+ *  const SLArrayIndex_t,   Samples per symbol
+ *  SLData_t *,             RRCF Tx I delay pointer
+ *  SLArrayIndex_t *,       RRCF Tx I Filter Index pointer
+ *  SLData_t *,             RRCF Tx Q delay pointer
+ *  SLArrayIndex_t *,       RRCF Tx Q Filter Index pointer
+ *  SLData_t *,             RRCF Coeffs pointer
+ *  const SLArrayIndex_t,   RRCF size
+ *  const SLArrayIndex_t    RRCF enable / disable switch
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   This function runs the Tx modulator to encode one
- *   symbol of the input signal.
- *   The constellation mapper generates one output symbol
- *   of I and Q samples, which are inputs to the root
- *   raised cosine shaping filters. These are modulated
- *   by the carrier and added together.
+ *  This function runs the Tx modulator to encode one
+ *  symbol of the input signal.
+ *  The constellation mapper generates one output symbol
+ *  of I and Q samples, which are inputs to the root
+ *  raised cosine shaping filters. These are modulated
+ *  by the carrier and added together.
  *
  ********************************************************/
 
@@ -2006,27 +2006,27 @@ void SIGLIB_FUNC_DECL SDA_Qam16Modulate(const SLFixData_t TxNibble, SLData_t* SI
  * Function: SIF_Qam16Demodulate
  *
  * Parameters:
- *   SLData_t *,             Carrier table pointer
- *   const SLData_t,         Carrier phase increment per sample (radians / 2π)
- *   const SLArrayIndex_t,   Sine table length
- *   SLData_t *,             Carrier phase pointer
- *   SLArrayIndex_t *,       Sample clock pointer
- *   SLData_t * ,            Magnitude pointer
- *   SLData_t *,             RRCF Rx I delay pointer
- *   SLArrayIndex_t *,       RRCF Rx I Filter Index pointer
- *   SLData_t *,             RRCF Rx Q delay pointer
- *   SLArrayIndex_t *,       RRCF Rx Q Filter Index pointer
- *   SLData_t *,             RRCF Coeffs pointer
- *   const SLData_t,         RRCF Period
- *   const SLData_t,         RRCF Roll off
- *   const SLArrayIndex_t,   RRCF size
- *   const SLArrayIndex_t    RRCF enable / disable switch
+ *  SLData_t *,             Carrier table pointer
+ *  const SLData_t,         Carrier phase increment per sample (radians / 2π)
+ *  const SLArrayIndex_t,   Sine table length
+ *  SLData_t *,             Carrier phase pointer
+ *  SLArrayIndex_t *,       Sample clock pointer
+ *  SLData_t * ,            Magnitude pointer
+ *  SLData_t *,             RRCF Rx I delay pointer
+ *  SLArrayIndex_t *,       RRCF Rx I Filter Index pointer
+ *  SLData_t *,             RRCF Rx Q delay pointer
+ *  SLArrayIndex_t *,       RRCF Rx Q Filter Index pointer
+ *  SLData_t *,             RRCF Coeffs pointer
+ *  const SLData_t,         RRCF Period
+ *  const SLData_t,         RRCF Roll off
+ *  const SLArrayIndex_t,   RRCF size
+ *  const SLArrayIndex_t    RRCF enable / disable switch
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the 16 QAM modem structure
+ *  Initialise the 16 QAM modem structure
  *
  ********************************************************/
 
@@ -2072,32 +2072,32 @@ void SIGLIB_FUNC_DECL SIF_Qam16Demodulate(SLData_t* SIGLIB_PTR_DECL pCarrierTabl
  * Function: SDA_Qam16Demodulate
  *
  * Parameters:
- *   SLData_t *,             Source data pointer
- *   const SLData_t *,       Carrier table pointer
- *   const SLArrayIndex_t,   Sine table length
- *   SLData_t *,             Carrier phase pointer
- *   SLArrayIndex_t *,       Sample clock pointer
- *   SLData_t *  ,           Magnitude pointer
- *   const SLArrayIndex_t,   Carrier table increment
- *   const SLArrayIndex_t,   Samples per symbol
- *   SLData_t *,             RRCF Rx I delay pointer
- *   SLArrayIndex_t *,       RRCF Rx I Filter Index pointer
- *   SLData_t *,             RRCF Rx Q delay pointer
- *   SLArrayIndex_t *,       RRCF Rx Q Filter Index pointer
- *   SLData_t *,             RRCF Coeffs pointer
- *   const SLArrayIndex_t,   RRCF size
- *   const SLArrayIndex_t    RRCF enable / disable switch
+ *  SLData_t *,             Source data pointer
+ *  const SLData_t *,       Carrier table pointer
+ *  const SLArrayIndex_t,   Sine table length
+ *  SLData_t *,             Carrier phase pointer
+ *  SLArrayIndex_t *,       Sample clock pointer
+ *  SLData_t *  ,           Magnitude pointer
+ *  const SLArrayIndex_t,   Carrier table increment
+ *  const SLArrayIndex_t,   Samples per symbol
+ *  SLData_t *,             RRCF Rx I delay pointer
+ *  SLArrayIndex_t *,       RRCF Rx I Filter Index pointer
+ *  SLData_t *,             RRCF Rx Q delay pointer
+ *  SLArrayIndex_t *,       RRCF Rx Q Filter Index pointer
+ *  SLData_t *,             RRCF Coeffs pointer
+ *  const SLArrayIndex_t,   RRCF size
+ *  const SLArrayIndex_t    RRCF enable / disable switch
  *
  * Return value:
- *   SLFixData_t     - Received nibble
+ *  SLFixData_t     - Received nibble
  *
  * Description:
- *   This function runs the Rx de-modulator to decode one
- *   symbol of the input signal.
- *   The de-modulator extracts the I and Q samples,
- *   which are inputs to the root raised cosine shaping
- *   filters. These are decoded by the constellation
- *   decoder.
+ *  This function runs the Rx de-modulator to decode one
+ *  symbol of the input signal.
+ *  The de-modulator extracts the I and Q samples,
+ *  which are inputs to the root raised cosine shaping
+ *  filters. These are decoded by the constellation
+ *  decoder.
  *
  ********************************************************/
 
@@ -2179,36 +2179,36 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Qam16Demodulate(const SLData_t* SIGLIB_PTR_DECL
  * Function: SDA_Qam16DemodulateDebug
  *
  * Parameters:
- *   SLData_t *,             Source data pointer
- *   const SLData_t *,       Carrier table pointer
- *   const SLArrayIndex_t,   Sine table length
- *   SLData_t *,             Carrier phase pointer
- *   SLArrayIndex_t *,       Sample clock pointer
- *   SLComplexRect_s *,      Magnitude pointer
- *   const SLArrayIndex_t,   Carrier table increment
- *   const SLArrayIndex_t,   Samples per symbol
- *   SLData_t *,             RRCF Rx I delay pointer
- *   SLArrayIndex_t *,       RRCF Rx I Filter Index pointer
- *   SLData_t *,             RRCF Rx Q delay pointer
- *   SLArrayIndex_t *,       RRCF Rx Q Filter Index pointer
- *   SLData_t *,             RRCF Coeffs pointer
- *   const SLArrayIndex_t,   RRCF size
- *   const SLArrayIndex_t,   RRCF enable / disable switch
- *   SLData_t *,             Eye samples pointer
- *   SLComplexRect_s *,      Constellation points pointer
+ *  SLData_t *,             Source data pointer
+ *  const SLData_t *,       Carrier table pointer
+ *  const SLArrayIndex_t,   Sine table length
+ *  SLData_t *,             Carrier phase pointer
+ *  SLArrayIndex_t *,       Sample clock pointer
+ *  SLComplexRect_s *,      Magnitude pointer
+ *  const SLArrayIndex_t,   Carrier table increment
+ *  const SLArrayIndex_t,   Samples per symbol
+ *  SLData_t *,             RRCF Rx I delay pointer
+ *  SLArrayIndex_t *,       RRCF Rx I Filter Index pointer
+ *  SLData_t *,             RRCF Rx Q delay pointer
+ *  SLArrayIndex_t *,       RRCF Rx Q Filter Index pointer
+ *  SLData_t *,             RRCF Coeffs pointer
+ *  const SLArrayIndex_t,   RRCF size
+ *  const SLArrayIndex_t,   RRCF enable / disable switch
+ *  SLData_t *,             Eye samples pointer
+ *  SLComplexRect_s *,      Constellation points pointer
  *
  * Return value:
- *   SLFixData_t     - Received nibble
+ *  SLFixData_t     - Received nibble
  *
  * Description:
- *   This function runs the Rx de-modulator to decode one
- *   symbol of the input signal.
- *   The de-modulator extracts the I and Q samples,
- *   which are inputs to the root raised cosine shaping
- *   filters. These are decoded by the constellation
- *   decoder.
- *   This function can optionally generate the eye
- *   and / or constellation diagram data
+ *  This function runs the Rx de-modulator to decode one
+ *  symbol of the input signal.
+ *  The de-modulator extracts the I and Q samples,
+ *  which are inputs to the root raised cosine shaping
+ *  filters. These are decoded by the constellation
+ *  decoder.
+ *  This function can optionally generate the eye
+ *  and / or constellation diagram data
  *
  ********************************************************/
 
@@ -2314,14 +2314,14 @@ const SLInt16_t siglib_numerix_QAM16RxQuadrantChange[] = {1, 0, 3, 2, 2, 1, 0, 3
  * Function: SDA_Qam16DifferentialEncode
  *
  * Parameters:
- *   const SLChar_t      TxNibble,
- *   SLChar_t            *PreviousQuadrant
+ *  const SLChar_t      TxNibble,
+ *  SLChar_t            *PreviousQuadrant
  *
  * Return value:
- *   SLChar_t            MappedNibble
+ *  SLChar_t            MappedNibble
  *
  * Description:
- *   This function differentially encodes the data.
+ *  This function differentially encodes the data.
  * The LSBs define the quadrant change and the MSBs
  * define the location in the quadrant.
  *
@@ -2345,14 +2345,14 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Qam16DifferentialEncode(const SLFixData_t TxNib
  * Function: SDA_Qam16DifferentialDecode
  *
  * Parameters:
- *   const SLFixData_t   MappedNibble,
- *   SLFixData_t         *PreviousQuadrant
+ *  const SLFixData_t   MappedNibble,
+ *  SLFixData_t         *PreviousQuadrant
  *
  * Return value:
- *   SLFixData_t         RxNibble
+ *  SLFixData_t         RxNibble
  *
  * Description:
- *   This function differentially decodes the data.
+ *  This function differentially decodes the data.
  *
  ********************************************************/
 
@@ -2376,15 +2376,15 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_Qam16DifferentialDecode(const SLFixData_t Mappe
 
 // Definition of constelation space - With Gray Coding
 //              010
-//     011        *     110
-//       *        |       *
+//     011        *    110
+//       *       |       *
 //                |
 //  001           |        111
 //    *----------------------*
 //                |
 //                |
-//       *        |       *
-//     000        *     101
+//       *       |       *
+//     000        *    101
 //              100
 
 // REMEMBER THAT THE BIT ORDER IS REVERSED TO NORMAL ORDERING IN A BYTE
@@ -2417,26 +2417,26 @@ const SLComplexRect_s siglib_numerix_OPSKRxConstellation[] = {
  * Function: SIF_OpskModulate
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL,         Carrier table pointer
- *   const SLData_t,                     Carrier phase increment per sample
+ *  SLData_t * SIGLIB_PTR_DECL,         Carrier table pointer
+ *  const SLData_t,                     Carrier phase increment per sample
  *(radians / 2π) const SLArrayIndex_t,               Sine table length SLData_t
  ** SIGLIB_PTR_DECL,         Carrier phase pointer SLArrayIndex_t *
  *SIGLIB_PTR_DECL,   Sample clock pointer SLComplexRect_s * SIGLIB_PTR_DECL,
  *Magnitude pointer SLData_t * SIGLIB_PTR_DECL,         RRCF Tx I delay pointer
- *   SLArrayIndex_t * SIGLIB_PTR_DECL,   RRCF Tx I Filter Index pointer
- *   SLData_t * SIGLIB_PTR_DECL,         RRCF Tx Q delay pointer
- *   SLArrayIndex_t * SIGLIB_PTR_DECL,   RRCF Tx Q Filter Index pointer
- *   SLData_t * SIGLIB_PTR_DECL,         RRCF Coeffs pointer
- *   const SLData_t,                     RRCF Period
- *   const SLData_t,                     RRCF Roll off
- *   const SLArrayIndex_t,               RRCF size
- *   const SLArrayIndex_t                RRCF enable / disable switch
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL,   RRCF Tx I Filter Index pointer
+ *  SLData_t * SIGLIB_PTR_DECL,         RRCF Tx Q delay pointer
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL,   RRCF Tx Q Filter Index pointer
+ *  SLData_t * SIGLIB_PTR_DECL,         RRCF Coeffs pointer
+ *  const SLData_t,                     RRCF Period
+ *  const SLData_t,                     RRCF Roll off
+ *  const SLArrayIndex_t,               RRCF size
+ *  const SLArrayIndex_t                RRCF enable / disable switch
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the OPSK modem structure
+ *  Initialise the OPSK modem structure
  *
  ********************************************************/
 
@@ -2476,33 +2476,33 @@ void SIGLIB_FUNC_DECL SIF_OpskModulate(SLData_t* SIGLIB_PTR_DECL pCarrierTable, 
  * Function: SDA_OpskModulate
  *
  * Parameters:
- *   const SLFixData_t                   Tx tri-bit,
- *   SLData_t * SIGLIB_PTR_DECL          Destination data array pointer
- *   const SLData_t * SIGLIB_PTR_DECL    Carrier table pointer
- *   const SLArrayIndex_t,               Sine table length
- *   SLData_t * SIGLIB_PTR_DECL,         Carrier phase pointer
- *   SLArrayIndex_t * SIGLIB_PTR_DECL,   Sample clock pointer
- *   SLComplexRect_s * SIGLIB_PTR_DECL,  Magnitude pointer
- *   const SLArrayIndex_t,               Carrier table increment
- *   const SLArrayIndex_t,               Samples per symbol
- *   SLData_t * SIGLIB_PTR_DECL,         RRCF Tx I delay pointer
- *   SLArrayIndex_t * SIGLIB_PTR_DECL,   RRCF Tx I Filter Index pointer
- *   SLData_t * SIGLIB_PTR_DECL,         RRCF Tx Q delay pointer
- *   SLArrayIndex_t * SIGLIB_PTR_DECL,   RRCF Tx Q Filter Index pointer
- *   SLData_t * SIGLIB_PTR_DECL,         RRCF Coeffs pointer
- *   const SLArrayIndex_t,               RRCF size
- *   const SLArrayIndex_t                RRCF enable / disable switch
+ *  const SLFixData_t                   Tx tri-bit,
+ *  SLData_t * SIGLIB_PTR_DECL          Destination data array pointer
+ *  const SLData_t * SIGLIB_PTR_DECL    Carrier table pointer
+ *  const SLArrayIndex_t,               Sine table length
+ *  SLData_t * SIGLIB_PTR_DECL,         Carrier phase pointer
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL,   Sample clock pointer
+ *  SLComplexRect_s * SIGLIB_PTR_DECL,  Magnitude pointer
+ *  const SLArrayIndex_t,               Carrier table increment
+ *  const SLArrayIndex_t,               Samples per symbol
+ *  SLData_t * SIGLIB_PTR_DECL,         RRCF Tx I delay pointer
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL,   RRCF Tx I Filter Index pointer
+ *  SLData_t * SIGLIB_PTR_DECL,         RRCF Tx Q delay pointer
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL,   RRCF Tx Q Filter Index pointer
+ *  SLData_t * SIGLIB_PTR_DECL,         RRCF Coeffs pointer
+ *  const SLArrayIndex_t,               RRCF size
+ *  const SLArrayIndex_t                RRCF enable / disable switch
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   This function runs the OPSK modulator to encode one
- *   symbol of the input signal.
- *   The constellation mapper generates one output symbol
- *   of I and Q samples, which are inputs to the root
- *   raised cosine shaping filters. These are modulated
- *   by the carrier and added together.
+ *  This function runs the OPSK modulator to encode one
+ *  symbol of the input signal.
+ *  The constellation mapper generates one output symbol
+ *  of I and Q samples, which are inputs to the root
+ *  raised cosine shaping filters. These are modulated
+ *  by the carrier and added together.
  *
  ********************************************************/
 
@@ -2578,25 +2578,25 @@ void SIGLIB_FUNC_DECL SDA_OpskModulate(const SLFixData_t TxTriBit, SLData_t* SIG
  * Function: SIF_OpskDemodulate
  *
  * Parameters:
- *   SLData_t *,                 Carrier table pointer
- *   const SLData_t,             Carrier phase increment per sample (radians /
+ *  SLData_t *,                 Carrier table pointer
+ *  const SLData_t,             Carrier phase increment per sample (radians /
  *2π) const SLArrayIndex_t,       Sine table length SLData_t *, Carrier phase
  *pointer SLArrayIndex_t *,           Sample clock pointer SLComplexRect_s *,
  *Magnitude pointer SLData_t *,                 RRCF Rx I delay pointer
- *   SLArrayIndex_t *,           RRCF Rx I Filter Index pointer
- *   SLData_t *,                 RRCF Rx Q delay pointer
- *   SLArrayIndex_t *,           RRCF Rx Q Filter Index pointer
- *   SLData_t *,                 RRCF Coeffs pointer
- *   const SLData_t,             RRCF Period
- *   const SLData_t,             RRCF Roll off
- *   const SLArrayIndex_t,       RRCF size
- *   const SLArrayIndex_t        RRCF enable / disable switch
+ *  SLArrayIndex_t *,           RRCF Rx I Filter Index pointer
+ *  SLData_t *,                 RRCF Rx Q delay pointer
+ *  SLArrayIndex_t *,           RRCF Rx Q Filter Index pointer
+ *  SLData_t *,                 RRCF Coeffs pointer
+ *  const SLData_t,             RRCF Period
+ *  const SLData_t,             RRCF Roll off
+ *  const SLArrayIndex_t,       RRCF size
+ *  const SLArrayIndex_t        RRCF enable / disable switch
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the OPSK demodulator
+ *  Initialise the OPSK demodulator
  *
  ********************************************************/
 
@@ -2641,43 +2641,43 @@ void SIGLIB_FUNC_DECL SIF_OpskDemodulate(SLData_t* SIGLIB_PTR_DECL pCarrierTable
  * Function: SDA_OpskDemodulate
  *
  * Parameters:
- *   SLData_t *,                 Source data pointer
- *   const SLData_t *,           Carrier table pointer
- *   const SLArrayIndex_t,       Sine table length
- *   SLData_t *,                 Carrier phase pointer
- *   SLArrayIndex_t *,           Sample clock pointer
- *   SLComplexRect_s *,          Magnitude pointer
- *   SLData_t *,                 DemodErrorArray
- *   const SLArrayIndex_t,       Carrier table increment
- *   const SLArrayIndex_t,       Samples per symbol
- *   SLData_t *,                 RRCF Rx I delay pointer
- *   SLArrayIndex_t *,           RRCF Rx I Filter Index pointer
- *   SLData_t *,                 RRCF Rx Q delay pointer
- *   SLArrayIndex_t *,           RRCF Rx Q Filter Index pointer
- *   SLData_t *,                 RRCF Coeffs pointer
- *   const SLArrayIndex_t,       RRCF size
- *   const SLArrayIndex_t        RRCF enable / disable switch
+ *  SLData_t *,                 Source data pointer
+ *  const SLData_t *,           Carrier table pointer
+ *  const SLArrayIndex_t,       Sine table length
+ *  SLData_t *,                 Carrier phase pointer
+ *  SLArrayIndex_t *,           Sample clock pointer
+ *  SLComplexRect_s *,          Magnitude pointer
+ *  SLData_t *,                 DemodErrorArray
+ *  const SLArrayIndex_t,       Carrier table increment
+ *  const SLArrayIndex_t,       Samples per symbol
+ *  SLData_t *,                 RRCF Rx I delay pointer
+ *  SLArrayIndex_t *,           RRCF Rx I Filter Index pointer
+ *  SLData_t *,                 RRCF Rx Q delay pointer
+ *  SLArrayIndex_t *,           RRCF Rx Q Filter Index pointer
+ *  SLData_t *,                 RRCF Coeffs pointer
+ *  const SLArrayIndex_t,       RRCF size
+ *  const SLArrayIndex_t        RRCF enable / disable switch
  *
  * Return value:
- *   SLFixData_t     - Received tri-bit
+ *  SLFixData_t     - Received tri-bit
  *
  * Description:
- *   This function runs the Rx de-modulator to decode one
- *   symbol of the input signal.
- *   The de-modulator extracts the I and Q samples,
- *   which are inputs to the root raised cosine shaping
- *   filters. These are decoded by the constellation
- *   decoder.
- *   The demodulate function has the following flow
- *   diagram:
+ *  This function runs the Rx de-modulator to decode one
+ *  symbol of the input signal.
+ *  The de-modulator extracts the I and Q samples,
+ *  which are inputs to the root raised cosine shaping
+ *  filters. These are decoded by the constellation
+ *  decoder.
+ *  The demodulate function has the following flow
+ *  diagram:
  *
- *                --------      ----------
- *        --------| RRCF |------|        |
- *        |       --------      | const. |
+ *               --------      ----------
+ *       --------| RRCF |------|        |
+ *       |       --------      | const. |
  * In --- x <- Fc               |        |---> Out
- *        |       --------      | decode |
- *        --------| RRCF |------|        |
- *                --------      ----------
+ *       |       --------      | decode |
+ *       --------| RRCF |------|        |
+ *               --------      ----------
  *
  ********************************************************/
 
@@ -2747,37 +2747,37 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_OpskDemodulate(const SLData_t* SIGLIB_PTR_DECL 
  * Function: SDA_OpskDemodulateDebug
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL          Source data pointer
- *   const SLData_t * SIGLIB_PTR_DECL    Carrier table pointer
- *   const SLArrayIndex_t,               Sine table length
- *   SLData_t * SIGLIB_PTR_DECL,         Carrier phase pointer
- *   SLArrayIndex_t *,                   Sample clock pointer
- *   SLComplexRect_s * SIGLIB_PTR_DECL,  Magnitude pointer
- *   SLData_t * SIGLIB_PTR_DECL,         DemodErrorArray
- *   const SLArrayIndex_t,               Carrier table increment
- *   const SLArrayIndex_t,               Samples per symbol
- *   SLData_t * SIGLIB_PTR_DECL,         RRCF Rx I delay pointer
- *   SLArrayIndex_t * SIGLIB_PTR_DECL,   RRCF Rx I Filter Index pointer
- *   SLData_t * SIGLIB_PTR_DECL,         RRCF Rx Q delay pointer
- *   SLArrayIndex_t * SIGLIB_PTR_DECL,   RRCF Rx Q Filter Index pointer
- *   SLData_t * SIGLIB_PTR_DECL,         RRCF Coeffs pointer
- *   const SLArrayIndex_t,               RRCF size
- *   const SLArrayIndex_t,               RRCF enable / disable switch
- *   SLData_t * SIGLIB_PTR_DECL,         Eye samples pointer
- *   SLComplexRect_s * SIGLIB_PTR_DECL,  Constellation points pointer
+ *  SLData_t * SIGLIB_PTR_DECL          Source data pointer
+ *  const SLData_t * SIGLIB_PTR_DECL    Carrier table pointer
+ *  const SLArrayIndex_t,               Sine table length
+ *  SLData_t * SIGLIB_PTR_DECL,         Carrier phase pointer
+ *  SLArrayIndex_t *,                   Sample clock pointer
+ *  SLComplexRect_s * SIGLIB_PTR_DECL,  Magnitude pointer
+ *  SLData_t * SIGLIB_PTR_DECL,         DemodErrorArray
+ *  const SLArrayIndex_t,               Carrier table increment
+ *  const SLArrayIndex_t,               Samples per symbol
+ *  SLData_t * SIGLIB_PTR_DECL,         RRCF Rx I delay pointer
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL,   RRCF Rx I Filter Index pointer
+ *  SLData_t * SIGLIB_PTR_DECL,         RRCF Rx Q delay pointer
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL,   RRCF Rx Q Filter Index pointer
+ *  SLData_t * SIGLIB_PTR_DECL,         RRCF Coeffs pointer
+ *  const SLArrayIndex_t,               RRCF size
+ *  const SLArrayIndex_t,               RRCF enable / disable switch
+ *  SLData_t * SIGLIB_PTR_DECL,         Eye samples pointer
+ *  SLComplexRect_s * SIGLIB_PTR_DECL,  Constellation points pointer
  *
  * Return value:
- *   SLFixData_t     - Received tri-bit
+ *  SLFixData_t     - Received tri-bit
  *
  * Description:
- *   This function runs the OPSK Rx de-modulator to decode one
- *   symbol of the input signal.
- *   The de-modulator extracts the I and Q samples,
- *   which are inputs to the root raised cosine shaping
- *   filters. These are decoded by the constellation
- *   decoder.
- *   This function will generate the eye and
- *   constellation diagram data.
+ *  This function runs the OPSK Rx de-modulator to decode one
+ *  symbol of the input signal.
+ *  The de-modulator extracts the I and Q samples,
+ *  which are inputs to the root raised cosine shaping
+ *  filters. These are decoded by the constellation
+ *  decoder.
+ *  This function will generate the eye and
+ *  constellation diagram data.
  *
  ********************************************************/
 
@@ -2860,16 +2860,16 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_OpskDemodulateDebug(
  * Function: SIF_BpskModulate
  *
  * Parameters:
- *   const SLData_t *,       Carrier table pointer
- *   const SLData_t,         Carrier phase increment per sample (radians / 2π)
- *   SLData_t *              Sample count,
- *   const SLArrayIndex_t)   Sine table length
+ *  const SLData_t *,       Carrier table pointer
+ *  const SLData_t,         Carrier phase increment per sample (radians / 2π)
+ *  SLData_t *             Sample count,
+ *  const SLArrayIndex_t)   Sine table length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the BPSK modulation and demodulation functions.
+ *  Initialise the BPSK modulation and demodulation functions.
  *
  ********************************************************/
 
@@ -2888,20 +2888,20 @@ void SIGLIB_FUNC_DECL SIF_BpskModulate(SLData_t* SIGLIB_PTR_DECL pCarrierTable, 
  * Function: SDA_BpskModulate
  *
  * Parameters:
- *   SLFixData_t,            Modulating bit
- *   SLData_t *,             Modulated signal
- *   const SLData_t *,       Carrier table pointer
- *   SLData_t *,             Carrier phase pointer
- *   const SLArrayIndex_t,   Samples per symbol
- *   const SLData_t *,       Carrier phase increment pointer
- *   const SLArrayIndex_t)   Sine table length
+ *  SLFixData_t,            Modulating bit
+ *  SLData_t *,             Modulated signal
+ *  const SLData_t *,       Carrier table pointer
+ *  SLData_t *,             Carrier phase pointer
+ *  const SLArrayIndex_t,   Samples per symbol
+ *  const SLData_t *,       Carrier phase increment pointer
+ *  const SLArrayIndex_t)   Sine table length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   BPSK modulate a signal with a single symbol of
- *   information
+ *  BPSK modulate a signal with a single symbol of
+ *  information
  *
  ********************************************************/
 
@@ -2937,17 +2937,17 @@ void SIGLIB_FUNC_DECL SDA_BpskModulate(SLFixData_t TxBit, SLData_t* SIGLIB_PTR_D
  * Function: SDA_BpskModulateByte
  *
  * Parameters:
- *   SLFixData_t,            Modulating byte
- *   SLData_t *,             Modulated signal
- *   const SLData_t *,       Carrier table pointer
- *   const SLArrayIndex_t,   Samples per symbol
- *   const SLArrayIndex_t)   Sine table length
+ *  SLFixData_t,            Modulating byte
+ *  SLData_t *,             Modulated signal
+ *  const SLData_t *,       Carrier table pointer
+ *  const SLArrayIndex_t,   Samples per symbol
+ *  const SLArrayIndex_t)   Sine table length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   BPSK modulate a signal.
+ *  BPSK modulate a signal.
  *
  ********************************************************/
 
@@ -2986,25 +2986,25 @@ void SIGLIB_FUNC_DECL SDA_BpskModulateByte(SLFixData_t TxByte, SLData_t* SIGLIB_
  * Function: SIF_BpskDemodulate
  *
  * Parameters:
- *   SLData_t *pCostasLpVCOPhase,
- *   SLData_t *pCostasLoopVCOLookUpTable,
- *   const SLArrayIndex_t CostasLoopVCOLookUpTableSize,
- *   const SLData_t CarrierPhaseIncrement,
- *   SLData_t *pCostasLpLPF1State,
- *   SLArrayIndex_t *pCostasLpLPF1Index,
- *   SLData_t *pCostasLpLPF2State,
- *   SLArrayIndex_t *pCostasLpLPF2Index,
- *   SLData_t *pCostasLpLPFCoeffs,
- *   const SLArrayIndex_t CostasLpLPFLength,
- *   SLData_t *pCostasLpLoopFilterState,
- *   SLData_t *pSample,
- *   SLArrayIndex_t *pRxSampleClock,
- *   SLData_t *pSampleSum)
+ *  SLData_t *pCostasLpVCOPhase,
+ *  SLData_t *pCostasLoopVCOLookUpTable,
+ *  const SLArrayIndex_t CostasLoopVCOLookUpTableSize,
+ *  const SLData_t CarrierPhaseIncrement,
+ *  SLData_t *pCostasLpLPF1State,
+ *  SLArrayIndex_t *pCostasLpLPF1Index,
+ *  SLData_t *pCostasLpLPF2State,
+ *  SLArrayIndex_t *pCostasLpLPF2Index,
+ *  SLData_t *pCostasLpLPFCoeffs,
+ *  const SLArrayIndex_t CostasLpLPFLength,
+ *  SLData_t *pCostasLpLoopFilterState,
+ *  SLData_t *pSample,
+ *  SLArrayIndex_t *pRxSampleClock,
+ *  SLData_t *pSampleSum)
  *
  * Return value:
  *
  * Description:
- *   Initialise the BPSK demodulate function.
+ *  Initialise the BPSK demodulate function.
  *
  ********************************************************/
 
@@ -3031,31 +3031,31 @@ void SIGLIB_FUNC_DECL SIF_BpskDemodulate(SLData_t* pCostasLpVCOPhase, SLData_t* 
  * Function: SDA_BpskDemodulate
  *
  * Parameters:
- *   const SLData_t *pSrc,
- *   SLData_t *pCostasLpVCOPhase,
- *   const SLData_t CostasLpVCOModulationIndex,
- *   SLData_t *pCostasLoopVCOLookUpTable,
- *   const SLArrayIndex_t CostasLoopVCOLookUpTableSize,
- *   const SLData_t CarrierFreq,
- *   SLData_t *pCostasLpLPF1State,
- *   SLArrayIndex_t *pCostasLpLPF1Index,
- *   SLData_t *pCostasLpLPF2State,
- *   SLArrayIndex_t *pCostasLpLPF2Index,
- *   const SLData_t *pCostasLpLPFCoeffs,
- *   const SLArrayIndex_t CostasLpLPFLength,
- *   SLData_t *pCostasLpLoopFilterState,
- *   const SLData_t CostasLpLoopFilterCoeff,
- *   SLData_t *pSample,
- *   SLArrayIndex_t *pRxSampleClock,
- *   SLData_t *pSampleSum,
- *   const SLFixData_t SamplesPerSymbol)
+ *  const SLData_t *pSrc,
+ *  SLData_t *pCostasLpVCOPhase,
+ *  const SLData_t CostasLpVCOModulationIndex,
+ *  SLData_t *pCostasLoopVCOLookUpTable,
+ *  const SLArrayIndex_t CostasLoopVCOLookUpTableSize,
+ *  const SLData_t CarrierFreq,
+ *  SLData_t *pCostasLpLPF1State,
+ *  SLArrayIndex_t *pCostasLpLPF1Index,
+ *  SLData_t *pCostasLpLPF2State,
+ *  SLArrayIndex_t *pCostasLpLPF2Index,
+ *  const SLData_t *pCostasLpLPFCoeffs,
+ *  const SLArrayIndex_t CostasLpLPFLength,
+ *  SLData_t *pCostasLpLoopFilterState,
+ *  const SLData_t CostasLpLoopFilterCoeff,
+ *  SLData_t *pSample,
+ *  SLArrayIndex_t *pRxSampleClock,
+ *  SLData_t *pSampleSum,
+ *  const SLFixData_t SamplesPerSymbol)
  *
  * Return value:
- *   SLFixData_t Demodulated bit
+ *  SLFixData_t Demodulated bit
  *
  * Description:
- *   Demodulate a single symbol of a BPSK signal using the
- *   costas loop function.
+ *  Demodulate a single symbol of a BPSK signal using the
+ *  costas loop function.
  *
  ********************************************************/
 
@@ -3123,33 +3123,33 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_BpskDemodulate(const SLData_t* SIGLIB_PTR_DECL 
  * Function: SDA_BpskDemodulateDebug
  *
  * Parameters:
- *   const SLData_t *pSrc,
- *   SLData_t *pCostasLpVCOPhase,
- *   const SLData_t CostasLpVCOModulationIndex,
- *   SLData_t *pCostasLoopVCOLookUpTable,
- *   const SLArrayIndex_t CostasLoopVCOLookUpTableSize,
- *   const SLData_t CarrierFreq,
- *   SLData_t *pCostasLpLPF1State,
- *   SLArrayIndex_t *pCostasLpLPF1Index,
- *   SLData_t *pCostasLpLPF2State,
- *   SLArrayIndex_t *pCostasLpLPF2Index,
- *   const SLData_t *pCostasLpLPFCoeffs,
- *   const SLArrayIndex_t CostasLpLPFLength,
- *   SLData_t *pCostasLpLoopFilterState,
- *   const SLData_t CostasLpLoopFilterCoeff,
- *   SLData_t *pSample,
- *   SLArrayIndex_t *pRxSampleClock,
- *   SLData_t *pSampleSum,
- *   const SLFixData_t SamplesPerSymbol,
- *   SLData_t *pFilterOutput)
+ *  const SLData_t *pSrc,
+ *  SLData_t *pCostasLpVCOPhase,
+ *  const SLData_t CostasLpVCOModulationIndex,
+ *  SLData_t *pCostasLoopVCOLookUpTable,
+ *  const SLArrayIndex_t CostasLoopVCOLookUpTableSize,
+ *  const SLData_t CarrierFreq,
+ *  SLData_t *pCostasLpLPF1State,
+ *  SLArrayIndex_t *pCostasLpLPF1Index,
+ *  SLData_t *pCostasLpLPF2State,
+ *  SLArrayIndex_t *pCostasLpLPF2Index,
+ *  const SLData_t *pCostasLpLPFCoeffs,
+ *  const SLArrayIndex_t CostasLpLPFLength,
+ *  SLData_t *pCostasLpLoopFilterState,
+ *  const SLData_t CostasLpLoopFilterCoeff,
+ *  SLData_t *pSample,
+ *  SLArrayIndex_t *pRxSampleClock,
+ *  SLData_t *pSampleSum,
+ *  const SLFixData_t SamplesPerSymbol,
+ *  SLData_t *pFilterOutput)
  *
  * Return value:
- *   SLFixData_t Demodulated bit
+ *  SLFixData_t Demodulated bit
  *
  * Description:
- *   Demodulate a single symbol of a BPSK signal using the
- *   costas loop function.
- *   This function stored the filter output for debug purposes.
+ *  Demodulate a single symbol of a BPSK signal using the
+ *  costas loop function.
+ *  This function stored the filter output for debug purposes.
  *
  ********************************************************/
 
@@ -3220,17 +3220,17 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_BpskDemodulateDebug(const SLData_t* SIGLIB_PTR_
  * Function: SIF_DpskModulate
  *
  * Parameters:
- *   const SLData_t *,         Carrier table pointer
- *   SLData_t *                Sample count,
- *   const SLData_t,           Carrier phase increment per sample (radians / 2π)
- *   const SLArrayIndex_t,     Sine table length
- *   SLData_t *)               Modulation phase
+ *  const SLData_t *,         Carrier table pointer
+ *  SLData_t *               Sample count,
+ *  const SLData_t,           Carrier phase increment per sample (radians / 2π)
+ *  const SLArrayIndex_t,     Sine table length
+ *  SLData_t *)               Modulation phase
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the BPSK modulation and demodulation functions.
+ *  Initialise the BPSK modulation and demodulation functions.
  *
  ********************************************************/
 
@@ -3250,19 +3250,19 @@ void SIGLIB_FUNC_DECL SIF_DpskModulate(SLData_t* SIGLIB_PTR_DECL pCarrierTable, 
  * Function: SDA_DpskModulate
  *
  * Parameters:
- *   SLArrayIndex_t ,        Modulating bit
- *   SLData_t *,             Modulated signal
- *   const SLData_t *,       Carrier table pointer
- *   const SLArrayIndex_t,   Samples per symbol
- *   const SLArrayIndex_t,   Sine table length
- *   SLData_t *)             Modulation phase
+ *  SLArrayIndex_t ,        Modulating bit
+ *  SLData_t *,             Modulated signal
+ *  const SLData_t *,       Carrier table pointer
+ *  const SLArrayIndex_t,   Samples per symbol
+ *  const SLArrayIndex_t,   Sine table length
+ *  SLData_t *)             Modulation phase
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   BPSK modulate a signal with a single symbol of
- *   information
+ *  BPSK modulate a signal with a single symbol of
+ *  information
  *
  ********************************************************/
 
@@ -3298,18 +3298,18 @@ void SIGLIB_FUNC_DECL SDA_DpskModulate(SLFixData_t TxBit, SLData_t* SIGLIB_PTR_D
  * Function: SDA_DpskModulateByte
  *
  * Parameters:
- *   SLFixData_t ,           Modulating byte
- *   SLData_t *,             Modulated signal
- *   const SLData_t *,       Carrier table pointer
- *   const SLArrayIndex_t,   Samples per symbol
- *   const SLArrayIndex_t,   Sine table length
- *   SLData_t *)             Modulation phase
+ *  SLFixData_t ,           Modulating byte
+ *  SLData_t *,             Modulated signal
+ *  const SLData_t *,       Carrier table pointer
+ *  const SLArrayIndex_t,   Samples per symbol
+ *  const SLArrayIndex_t,   Sine table length
+ *  SLData_t *)             Modulation phase
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Differential PSK modulate a signal.
+ *  Differential PSK modulate a signal.
  *
  ********************************************************/
 
@@ -3348,26 +3348,26 @@ void SIGLIB_FUNC_DECL SDA_DpskModulateByte(SLFixData_t TxByte, SLData_t* SIGLIB_
  * Function: SIF_DpskDemodulate
  *
  * Parameters:
- *   SLData_t *pCostasLpVCOPhase,
- *   SLData_t *pCostasLoopVCOLookUpTable,
- *   const SLArrayIndex_t CostasLoopVCOLookUpTableSize,
- *   const SLData_t CarrierPhaseIncrement,
- *   SLData_t *pCostasLpLPF1State,
- *   SLArrayIndex_t *pCostasLpLPF1Index,
- *   SLData_t *pCostasLpLPF2State,
- *   SLArrayIndex_t *pCostasLpLPF2Index,
- *   SLData_t *pCostasLpLPFCoeffs,
- *   const SLArrayIndex_t CostasLpLPFLength,
- *   SLData_t *pCostasLpLoopFilterState,
- *   SLData_t *pSample,
- *   SLArrayIndex_t *pRxSampleClock,
- *   SLData_t *pSampleSum,
- *   SLData_t *pPreviousSum)
+ *  SLData_t *pCostasLpVCOPhase,
+ *  SLData_t *pCostasLoopVCOLookUpTable,
+ *  const SLArrayIndex_t CostasLoopVCOLookUpTableSize,
+ *  const SLData_t CarrierPhaseIncrement,
+ *  SLData_t *pCostasLpLPF1State,
+ *  SLArrayIndex_t *pCostasLpLPF1Index,
+ *  SLData_t *pCostasLpLPF2State,
+ *  SLArrayIndex_t *pCostasLpLPF2Index,
+ *  SLData_t *pCostasLpLPFCoeffs,
+ *  const SLArrayIndex_t CostasLpLPFLength,
+ *  SLData_t *pCostasLpLoopFilterState,
+ *  SLData_t *pSample,
+ *  SLArrayIndex_t *pRxSampleClock,
+ *  SLData_t *pSampleSum,
+ *  SLData_t *pPreviousSum)
  *
  * Return value:
  *
  * Description:
- *   Initialise the DPSK demodulate function.
+ *  Initialise the DPSK demodulate function.
  *
  ********************************************************/
 
@@ -3394,32 +3394,32 @@ void SIGLIB_FUNC_DECL SIF_DpskDemodulate(SLData_t* pCostasLpVCOPhase, SLData_t* 
  * Function: SDA_DpskDemodulate
  *
  * Parameters:
- *   const SLData_t *pSrc,
- *   SLData_t *pCostasLpVCOPhase,
- *   const SLData_t CostasLpVCOModulationIndex,
- *   SLData_t *pCostasLoopVCOLookUpTable,
- *   const SLArrayIndex_t CostasLoopVCOLookUpTableSize,
- *   const SLData_t CarrierFreq,
- *   SLData_t *pCostasLpLPF1State,
- *   SLArrayIndex_t *pCostasLpLPF1Index,
- *   SLData_t *pCostasLpLPF2State,
- *   SLArrayIndex_t *pCostasLpLPF2Index,
- *   const SLData_t *pCostasLpLPFCoeffs,
- *   const SLArrayIndex_t CostasLpLPFLength,
- *   SLData_t *pCostasLpLoopFilterState,
- *   const SLData_t CostasLpLoopFilterCoeff,
- *   SLData_t *pSample,
- *   SLArrayIndex_t *pRxSampleClock,
- *   SLData_t *pSampleSum,
- *   const SLFixData_t SamplesPerSymbol,
- *   SLData_t *pPreviousSum)
+ *  const SLData_t *pSrc,
+ *  SLData_t *pCostasLpVCOPhase,
+ *  const SLData_t CostasLpVCOModulationIndex,
+ *  SLData_t *pCostasLoopVCOLookUpTable,
+ *  const SLArrayIndex_t CostasLoopVCOLookUpTableSize,
+ *  const SLData_t CarrierFreq,
+ *  SLData_t *pCostasLpLPF1State,
+ *  SLArrayIndex_t *pCostasLpLPF1Index,
+ *  SLData_t *pCostasLpLPF2State,
+ *  SLArrayIndex_t *pCostasLpLPF2Index,
+ *  const SLData_t *pCostasLpLPFCoeffs,
+ *  const SLArrayIndex_t CostasLpLPFLength,
+ *  SLData_t *pCostasLpLoopFilterState,
+ *  const SLData_t CostasLpLoopFilterCoeff,
+ *  SLData_t *pSample,
+ *  SLArrayIndex_t *pRxSampleClock,
+ *  SLData_t *pSampleSum,
+ *  const SLFixData_t SamplesPerSymbol,
+ *  SLData_t *pPreviousSum)
  *
  * Return value:
- *   Demodulated bit
+ *  Demodulated bit
  *
  * Description:
- *   Demodulate a single symbol of a DPSK signal using the
- *   costas loop function.
+ *  Demodulate a single symbol of a DPSK signal using the
+ *  costas loop function.
  *
  ********************************************************/
 
@@ -3492,33 +3492,33 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_DpskDemodulate(const SLData_t* SIGLIB_PTR_DECL 
  * Function: SDA_DpskDemodulateDebug
  *
  * Parameters:
- *   const SLData_t *pSrc,
- *   SLData_t *pCostasLpVCOPhase,
- *   const SLData_t CostasLpVCOModulationIndex,
- *   SLData_t *pCostasLoopVCOLookUpTable,
- *   const SLArrayIndex_t CostasLoopVCOLookUpTableSize,
- *   const SLData_t CarrierFreq,
- *   SLData_t *pCostasLpLPF1State,
- *   SLArrayIndex_t *pCostasLpLPF1Index,
- *   SLData_t *pCostasLpLPF2State,
- *   SLArrayIndex_t *pCostasLpLPF2Index,
- *   const SLData_t *pCostasLpLPFCoeffs,
- *   const SLArrayIndex_t CostasLpLPFLength,
- *   SLData_t *pCostasLpLoopFilterState,
- *   const SLData_t CostasLpLoopFilterCoeff,
- *   SLData_t *pSample,
- *   SLArrayIndex_t *pRxSampleClock,
- *   SLData_t *pSampleSum,
- *   const SLFixData_t SamplesPerSymbol,
- *   SLData_t *pPreviousSum,
- *   SLData_t *pFilterOutput)
+ *  const SLData_t *pSrc,
+ *  SLData_t *pCostasLpVCOPhase,
+ *  const SLData_t CostasLpVCOModulationIndex,
+ *  SLData_t *pCostasLoopVCOLookUpTable,
+ *  const SLArrayIndex_t CostasLoopVCOLookUpTableSize,
+ *  const SLData_t CarrierFreq,
+ *  SLData_t *pCostasLpLPF1State,
+ *  SLArrayIndex_t *pCostasLpLPF1Index,
+ *  SLData_t *pCostasLpLPF2State,
+ *  SLArrayIndex_t *pCostasLpLPF2Index,
+ *  const SLData_t *pCostasLpLPFCoeffs,
+ *  const SLArrayIndex_t CostasLpLPFLength,
+ *  SLData_t *pCostasLpLoopFilterState,
+ *  const SLData_t CostasLpLoopFilterCoeff,
+ *  SLData_t *pSample,
+ *  SLArrayIndex_t *pRxSampleClock,
+ *  SLData_t *pSampleSum,
+ *  const SLFixData_t SamplesPerSymbol,
+ *  SLData_t *pPreviousSum,
+ *  SLData_t *pFilterOutput)
  *
  * Return value:
- *   SLFixData_t Demodulated bit
+ *  SLFixData_t Demodulated bit
  *
  * Description:
- *   Demodulate a single symbol of a DPSK signal using the
- *   costas loop function.
+ *  Demodulate a single symbol of a DPSK signal using the
+ *  costas loop function.
  *
  ********************************************************/
 
@@ -3618,28 +3618,28 @@ const SLComplexRect_s siglib_numerix_PiBy4DQPSKTxModulationIQTable[] = {
  * Function: SIF_PiByFourDQpskModulate
  *
  * Parameters:
- *   SLData_t *,             Carrier table pointer
- *   const SLData_t,         Carrier phase increment per sample (radians / 2π)
- *   const SLArrayIndex_t,   Sine table length
- *   SLData_t *,             Carrier phase pointer
- *   SLArrayIndex_t *,       Sample clock pointer
- *   SLComplexRect_s *,      Magnitude pointer
- *   SLData_t *,             RRCF Tx I delay pointer
- *   SLArrayIndex_t *,       RRCF Tx I Filter Index pointer
- *   SLData_t *,             RRCF Tx Q delay pointer
- *   SLArrayIndex_t *,       RRCF Tx Q Filter Index pointer
- *   SLData_t *,             RRCF Coeffs pointer
- *   const SLData_t,         RRCF Period
- *   const SLData_t,         RRCF Roll off
- *   const SLArrayIndex_t,   RRCF size
- *   const SLArrayIndex_t    RRCF enable / disable switch
- *   SLArrayIndex_t *        Previous output symbol
+ *  SLData_t *,             Carrier table pointer
+ *  const SLData_t,         Carrier phase increment per sample (radians / 2π)
+ *  const SLArrayIndex_t,   Sine table length
+ *  SLData_t *,             Carrier phase pointer
+ *  SLArrayIndex_t *,       Sample clock pointer
+ *  SLComplexRect_s *,      Magnitude pointer
+ *  SLData_t *,             RRCF Tx I delay pointer
+ *  SLArrayIndex_t *,       RRCF Tx I Filter Index pointer
+ *  SLData_t *,             RRCF Tx Q delay pointer
+ *  SLArrayIndex_t *,       RRCF Tx Q Filter Index pointer
+ *  SLData_t *,             RRCF Coeffs pointer
+ *  const SLData_t,         RRCF Period
+ *  const SLData_t,         RRCF Roll off
+ *  const SLArrayIndex_t,   RRCF size
+ *  const SLArrayIndex_t    RRCF enable / disable switch
+ *  SLArrayIndex_t *       Previous output symbol
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the Pi/4 QPSK modem structure
+ *  Initialise the Pi/4 QPSK modem structure
  *
  ********************************************************/
 
@@ -3681,34 +3681,34 @@ void SIGLIB_FUNC_DECL SIF_PiByFourDQpskModulate(SLData_t* SIGLIB_PTR_DECL pCarri
  * Function: SDA_PiByFourDQpskModulate
  *
  * Parameters:
- *   const SLArrayIndex_t    Tx di-bit,
- *   SLData_t *,             Destination data array pointer
- *   const SLData_t *,       Carrier table pointer
- *   const SLArrayIndex_t,   Sine table length
- *   SLData_t *,             Carrier phase pointer
- *   SLArrayIndex_t *,       Sample clock pointer
- *   SLComplexRect_s *,      Magnitude pointer
- *   const SLArrayIndex_t,   Carrier table increment
- *   const SLArrayIndex_t,   Samples per symbol
- *   SLData_t *,             RRCF Tx I delay pointer
- *   SLArrayIndex_t *,       RRCF Tx I Filter Index pointer
- *   SLData_t *,             RRCF Tx Q delay pointer
- *   SLArrayIndex_t *,       RRCF Tx Q Filter Index pointer
- *   SLData_t *,             RRCF Coeffs pointer
- *   const SLArrayIndex_t,   RRCF size
- *   const SLArrayIndex_t    RRCF enable / disable switch
- *   SLArrayIndex_t *        Previous output symbol
+ *  const SLArrayIndex_t    Tx di-bit,
+ *  SLData_t *,             Destination data array pointer
+ *  const SLData_t *,       Carrier table pointer
+ *  const SLArrayIndex_t,   Sine table length
+ *  SLData_t *,             Carrier phase pointer
+ *  SLArrayIndex_t *,       Sample clock pointer
+ *  SLComplexRect_s *,      Magnitude pointer
+ *  const SLArrayIndex_t,   Carrier table increment
+ *  const SLArrayIndex_t,   Samples per symbol
+ *  SLData_t *,             RRCF Tx I delay pointer
+ *  SLArrayIndex_t *,       RRCF Tx I Filter Index pointer
+ *  SLData_t *,             RRCF Tx Q delay pointer
+ *  SLArrayIndex_t *,       RRCF Tx Q Filter Index pointer
+ *  SLData_t *,             RRCF Coeffs pointer
+ *  const SLArrayIndex_t,   RRCF size
+ *  const SLArrayIndex_t    RRCF enable / disable switch
+ *  SLArrayIndex_t *       Previous output symbol
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   This function runs the Pi/4 QPSK modulator to encode
- *   one symbol of the input signal.
- *   The constellation mapper generates one output symbol
- *   of I and Q samples, which are inputs to the root
- *   raised cosine shaping filters. These are modulated
- *   by the carrier and added together.
+ *  This function runs the Pi/4 QPSK modulator to encode
+ *  one symbol of the input signal.
+ *  The constellation mapper generates one output symbol
+ *  of I and Q samples, which are inputs to the root
+ *  raised cosine shaping filters. These are modulated
+ *  by the carrier and added together.
  *
  ********************************************************/
 
@@ -3794,16 +3794,16 @@ void SIGLIB_FUNC_DECL SDA_PiByFourDQpskModulate(const SLFixData_t TxDiBit, SLDat
  * Function: SDS_ChannelizationCode
  *
  * Parameters:
- *   SLData_t              ChannelizationCode[],
- *   const SLArrayIndex_t  SpreadingFactor,
- *   const SLArrayIndex_t  CodeIndex
+ *  SLData_t              ChannelizationCode[],
+ *  const SLArrayIndex_t  SpreadingFactor,
+ *  const SLArrayIndex_t  CodeIndex
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Generate the channelization code for the given
- *   spreading factor and code index.
+ *  Generate the channelization code for the given
+ *  spreading factor and code index.
  *
  ********************************************************/
 
@@ -3850,21 +3850,21 @@ const SLComplexRect_s siglib_numerix_QPSKSpreadTxConstellation[] = {
  * Function: SDA_ComplexQPSKSpread
  *
  * Parameters:
- *   const SLFixData_t               Tx di-bit,
- *   SLComplexRect_s *,
- *   const SLComplexRect_s *ChannelizationCodeI,
- *   const SLComplexRect_s *ChannelizationCodeQ,
- *   const SLData_t WeightI,
- *   const SLData_t WeightQ,
- *   const SLComplexRect_s *ScramblingCode,
- *   const SLArrayIndex_t SpreadingFactor
+ *  const SLFixData_t               Tx di-bit,
+ *  SLComplexRect_s *,
+ *  const SLComplexRect_s *ChannelizationCodeI,
+ *  const SLComplexRect_s *ChannelizationCodeQ,
+ *  const SLData_t WeightI,
+ *  const SLData_t WeightQ,
+ *  const SLComplexRect_s *ScramblingCode,
+ *  const SLArrayIndex_t SpreadingFactor
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   This function performs channelization, weighting,
- *   spreading and scrambling according to 3GPP 25.141.
+ *  This function performs channelization, weighting,
+ *  spreading and scrambling according to 3GPP 25.141.
  *
  ********************************************************/
 
@@ -3908,23 +3908,23 @@ const SLFixData_t siglib_numerix_QPSKDeSpreadRxConstellation[] = {
  * Function: SDA_ComplexQPSKDeSpread
  *
  * Parameters:
- *   const SLComplexRect_s *pSrc,
- *   SLComplexRect_s *pDst,
- *   const SLComplexRect_s *DeChannelizationCodeI,
- *   const SLComplexRect_s *DeChannelizationCodeQ,
- *   const SLData_t DeWeightI,
- *   const SLData_t DeWeightQ,
- *   const SLComplexRect_s *ScramblingCode,
- *   const SLData_t *DemodErrorArray,
- *   const SLArrayIndex_t SpreadingFactor
+ *  const SLComplexRect_s *pSrc,
+ *  SLComplexRect_s *pDst,
+ *  const SLComplexRect_s *DeChannelizationCodeI,
+ *  const SLComplexRect_s *DeChannelizationCodeQ,
+ *  const SLData_t DeWeightI,
+ *  const SLData_t DeWeightQ,
+ *  const SLComplexRect_s *ScramblingCode,
+ *  const SLData_t *DemodErrorArray,
+ *  const SLArrayIndex_t SpreadingFactor
  *
  * Return value:
- *   SLFixData_t     - Received and despread di-bit
+ *  SLFixData_t     - Received and despread di-bit
  *
  * Description:
- *   This function performs de-scrambling, de-spreading
- *   de-weighting and de-channelization according to
- *   3GPP 25.141.
+ *  This function performs de-scrambling, de-spreading
+ *  de-weighting and de-channelization according to
+ *  3GPP 25.141.
  *
  ********************************************************/
 

@@ -51,13 +51,13 @@ static SLData_t siglib_numerix_DCTCosineTable[DCT_SIZE][DCT_SIZE];    // DCT cos
  * Function: SIF_Dct8x8
  *
  * Parameters:
- *   void
+ *  void
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the cosine tables for an 8x8 DCT.
+ *  Initialise the cosine tables for an 8x8 DCT.
  *
  ********************************************************/
 
@@ -74,15 +74,15 @@ void SIGLIB_FUNC_DECL SIF_Dct8x8(void)
  * Function: SIM_Dct8x8
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform an 8 x 8 2D discrete cosine transform on the
- *   supplied data.
+ *  Perform an 8 x 8 2D discrete cosine transform on the
+ *  supplied data.
  *
  ********************************************************/
 
@@ -125,15 +125,15 @@ void SIGLIB_FUNC_DECL SIM_Dct8x8(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  * Function: SIM_Idct8x8
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform an 8 x 8 inverse 2D discrete cosine
- *   transform on the supplied data.
+ *  Perform an 8 x 8 inverse 2D discrete cosine
+ *  transform on the supplied data.
  *
  ********************************************************/
 
@@ -178,21 +178,21 @@ void SIGLIB_FUNC_DECL SIM_Idct8x8(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
  * Function: SIM_ZigZagScan
  *
  * Parameters:
- *   const SLData_t  *pSrc,
- *   SLData_t        *pDst,
- *   const SLArrayIndex_t    Length
+ *  const SLData_t  *pSrc,
+ *  SLData_t        *pDst,
+ *  const SLArrayIndex_t    Length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a zig-zag scan of the square 2D source data
- *   array and place the results in a 1D array.
+ *  Perform a zig-zag scan of the square 2D source data
+ *  array and place the results in a 1D array.
  *
- *   In the zig-zag scan, the destination array is
- *   linearly addressed and the pointer to the source
- *   array must be non-linearly modified at the
- *   boundaries of the square matrix.
+ *  In the zig-zag scan, the destination array is
+ *  linearly addressed and the pointer to the source
+ *  array must be non-linearly modified at the
+ *  boundaries of the square matrix.
  *
  ********************************************************/
 
@@ -258,22 +258,22 @@ void SIGLIB_FUNC_DECL SIM_ZigZagScan(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDat
  * Function: SIM_ZigZagDescan
  *
  * Parameters:
- *   const SLData_t  *pSrc,
- *   SLData_t        *pDst,
- *   const SLArrayIndex_t    Length
+ *  const SLData_t  *pSrc,
+ *  SLData_t        *pDst,
+ *  const SLArrayIndex_t    Length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a linear scan of the 1D source data array
- *   and place the results in a zig-zag scanned square 2D
- *   array.
+ *  Perform a linear scan of the 1D source data array
+ *  and place the results in a zig-zag scanned square 2D
+ *  array.
  *
- *   In the zig-zag de-scan, the source array is
- *   linearly addressed and the pointer to the destination
- *   bufer must be non-linearly modified at the boundaries
- *   of the square matrix.
+ *  In the zig-zag de-scan, the source array is
+ *  linearly addressed and the pointer to the destination
+ *  bufer must be non-linearly modified at the boundaries
+ *  of the square matrix.
  *
  ********************************************************/
 

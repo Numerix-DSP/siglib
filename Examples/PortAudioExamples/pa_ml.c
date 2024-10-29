@@ -258,7 +258,7 @@ int main(void)
                                       // reverse address table
           FFT_LENGTH);                // FFT length
 
-  SDA_Clear(pOnePoleState,                   // Pointer to array
+  SDA_Zeros(pOnePoleState,                   // Pointer to array
             NETWORK_INPUT_SAMPLE_LENGTH);    // Array length
 
   SIF_Comb(pCombFilterStateArray,    // Pointer to filter delay state array

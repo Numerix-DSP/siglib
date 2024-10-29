@@ -44,17 +44,17 @@ Description: Communications routines, for SigLib DSP library.
  * Function: SDA_BitErrorRate
  *
  * Parameters:
- *   const SLChar_t  *pSrc1,
- *   const SLChar_t  *pSrc2,
- *   const SLData_t  InverseNumberOfBits,    - Inverse of number of bits
- *   const SLArrayIndex_t    ArrayLength
+ *  const SLChar_t  *pSrc1,
+ *  const SLChar_t  *pSrc2,
+ *  const SLData_t  InverseNumberOfBits,    - Inverse of number of bits
+ *  const SLArrayIndex_t    ArrayLength
  *
  * Return value:
- *   SLData_t        Bit error count
+ *  SLData_t        Bit error count
  *
  * Description:
- *   This function returns the bit error rate between
- *   the two data sequences.
+ *  This function returns the bit error rate between
+ *  the two data sequences.
  *
  ********************************************************/
 
@@ -88,16 +88,16 @@ SLData_t SIGLIB_FUNC_DECL SDA_BitErrorRate(const SLChar_t* pSrc1, const SLChar_t
  * Function: SDA_Interleave
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t pDst[],
- *   const SLArrayIndex_t Stride,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t pDst[],
+ *  const SLArrayIndex_t Stride,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Interleave sanples in data stream.
+ *  Interleave sanples in data stream.
  *
  ********************************************************/
 
@@ -125,16 +125,16 @@ void SIGLIB_FUNC_DECL SDA_Interleave(const SLData_t pSrc[], SLData_t pDst[], con
  * Function: SDA_Deinterleave
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t pDst[],
- *   const SLArrayIndex_t Stride,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t pDst[],
+ *  const SLArrayIndex_t Stride,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Interleave sanples in data stream.
+ *  Interleave sanples in data stream.
  *
  ********************************************************/
 
@@ -162,14 +162,14 @@ void SIGLIB_FUNC_DECL SDA_Deinterleave(const SLData_t pSrc[], SLData_t pDst[], c
  * Function: SCV_EuclideanDistance
  *
  * Parameters:
- *   SLComplexRect_s SrcVector1,
- *   SLComplexRect_s SrcVector2)
+ *  SLComplexRect_s SrcVector1,
+ *  SLComplexRect_s SrcVector2)
  *
  * Return value:
- *   SLData_t    Euclidean distance
+ *  SLData_t    Euclidean distance
  *
  * Description:
- *   Return Euclidean distance between two complex samples.
+ *  Return Euclidean distance between two complex samples.
  *
  ********************************************************/
 
@@ -183,15 +183,15 @@ SLData_t SIGLIB_FUNC_DECL SCV_EuclideanDistance(const SLComplexRect_s SrcVector1
  * Function: SCV_EuclideanDistanceSquared
  *
  * Parameters:
- *   SLComplexRect_s SrcVector1,
- *   SLComplexRect_s SrcVector2)
+ *  SLComplexRect_s SrcVector1,
+ *  SLComplexRect_s SrcVector2)
  *
  * Return value:
- *   SLData_t    Euclidean distance
+ *  SLData_t    Euclidean distance
  *
  * Description:
- *   Return the square of the Euclidean distance between
- *   two complex samples.
+ *  Return the square of the Euclidean distance between
+ *  two complex samples.
  *
  ********************************************************/
 
@@ -205,17 +205,17 @@ SLData_t SIGLIB_FUNC_DECL SCV_EuclideanDistanceSquared(const SLComplexRect_s Src
  * Function: SCA_EuclideanDistance
  *
  * Parameters:
- *   const SLComplexRect_s   *psrcVector1,
- *   const SLComplexRect_s   *psrcVector2,
- *   SLData_t                *pDst,
- *   const SLArrayIndex_t    srcLength)
+ *  const SLComplexRect_s   *psrcVector1,
+ *  const SLComplexRect_s   *psrcVector2,
+ *  SLData_t                *pDst,
+ *  const SLArrayIndex_t    srcLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Return Euclidean distance between successive complex
- *   samples in the source arrays.
+ *  Return Euclidean distance between successive complex
+ *  samples in the source arrays.
  *
  ********************************************************/
 
@@ -235,17 +235,17 @@ void SIGLIB_FUNC_DECL SCA_EuclideanDistance(const SLComplexRect_s* SIGLIB_INPUT_
  * Function: SCA_EuclideanDistanceSquared
  *
  * Parameters:
- *   const SLComplexRect_s   *psrcVector1,
- *   const SLComplexRect_s   *psrcVector2,
- *   SLData_t                *pDst,
- *   const SLArrayIndex_t    srcLength)
+ *  const SLComplexRect_s   *psrcVector1,
+ *  const SLComplexRect_s   *psrcVector2,
+ *  SLData_t                *pDst,
+ *  const SLArrayIndex_t    srcLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Return Euclidean distance squared between successive
- *   complex samples in the source arrays.
+ *  Return Euclidean distance squared between successive
+ *  complex samples in the source arrays.
  *
  ********************************************************/
 
@@ -265,17 +265,17 @@ void SIGLIB_FUNC_DECL SCA_EuclideanDistanceSquared(const SLComplexRect_s* SIGLIB
  * Function: SDS_EuclideanDistance
  *
  * Parameters:
- *   const SLData_t src1x,
- *   const SLData_t src1y,
- *   const SLData_t src2x,
- *   const SLData_t src2y)
+ *  const SLData_t src1x,
+ *  const SLData_t src1y,
+ *  const SLData_t src2x,
+ *  const SLData_t src2y)
  *
  * Return value:
- *   SLData_t    Euclidean distance
+ *  SLData_t    Euclidean distance
  *
  * Description:
- *   Return Euclidean distance between two points given
- *   the provided x, y coordinates on a 2D plane.
+ *  Return Euclidean distance between two points given
+ *  the provided x, y coordinates on a 2D plane.
  *
  ********************************************************/
 
@@ -290,17 +290,17 @@ SLData_t SIGLIB_FUNC_DECL SDS_EuclideanDistance(const SLData_t src1x, const SLDa
  * Function: SDS_EuclideanDistanceSquared
  *
  * Parameters:
- *   const SLData_t src1x,
- *   const SLData_t src1y,
- *   const SLData_t src2x,
- *   const SLData_t src2y)
+ *  const SLData_t src1x,
+ *  const SLData_t src1y,
+ *  const SLData_t src2x,
+ *  const SLData_t src2y)
  *
  * Return value:
- *   SLData_t    Euclidean distance squared
+ *  SLData_t    Euclidean distance squared
  *
  * Description:
- *   Return Euclidean distance squared between two points
- *   given the provided x, y coordinates on a 2D plane.
+ *  Return Euclidean distance squared between two points
+ *  given the provided x, y coordinates on a 2D plane.
  *
  ********************************************************/
 
@@ -315,20 +315,20 @@ SLData_t SIGLIB_FUNC_DECL SDS_EuclideanDistanceSquared(const SLData_t src1x, con
  * Function: SDA_EuclideanDistance
  *
  * Parameters:
- *   const SLData_t          *pSrc1x,
- *   const SLData_t          *pSrc1y,
- *   const SLData_t          *pSrc2x,
- *   const SLData_t          *pSrc2y,
- *   SLData_t                *pDst,
- *   const SLArrayIndex_t    srcLength)
+ *  const SLData_t          *pSrc1x,
+ *  const SLData_t          *pSrc1y,
+ *  const SLData_t          *pSrc2x,
+ *  const SLData_t          *pSrc2y,
+ *  SLData_t                *pDst,
+ *  const SLArrayIndex_t    srcLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Calculates the Euclidean distance between two points
- *   given the provided x, y coordinates on a 2D plane,
- *   for all samples in arrays of data.
+ *  Calculates the Euclidean distance between two points
+ *  given the provided x, y coordinates on a 2D plane,
+ *  for all samples in arrays of data.
  *
  ********************************************************/
 
@@ -347,20 +347,20 @@ void SIGLIB_FUNC_DECL SDA_EuclideanDistance(const SLData_t* SIGLIB_INPUT_PTR_DEC
  * Function: SDA_EuclideanDistanceSquared
  *
  * Parameters:
- *   const SLData_t          *pSrc1x,
- *   const SLData_t          *pSrc1y,
- *   const SLData_t          *pSrc2x,
- *   const SLData_t          *pSrc2y,
- *   SLData_t                *pDst,
- *   const SLArrayIndex_t    srcLength)
+ *  const SLData_t          *pSrc1x,
+ *  const SLData_t          *pSrc1y,
+ *  const SLData_t          *pSrc2x,
+ *  const SLData_t          *pSrc2y,
+ *  SLData_t                *pDst,
+ *  const SLArrayIndex_t    srcLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Calculates the Euclidean distance squared between
- *   successive points, given the provided x, y coordinates
- *   on a 2D plane, for all samples in the source arrays.
+ *  Calculates the Euclidean distance squared between
+ *  successive points, given the provided x, y coordinates
+ *  on a 2D plane, for all samples in the source arrays.
  *
  ********************************************************/
 
@@ -379,14 +379,14 @@ void SIGLIB_FUNC_DECL SDA_EuclideanDistanceSquared(const SLData_t* SIGLIB_INPUT_
  * Function: SDS_ManchesterEncode
  *
  * Parameters:
- *   SLChar_t    Input
+ *  SLChar_t    Input
  *
  * Return value:
- *   SLChar_t    Output
+ *  SLChar_t    Output
  *
  * Description:
- *   Take an input bit and apply Manchester encoding to
- *   generate an output dibit
+ *  Take an input bit and apply Manchester encoding to
+ *  generate an output dibit
  *
  ********************************************************/
 
@@ -403,14 +403,14 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ManchesterEncode(const SLChar_t Input)
  * Function: SDS_ManchesterDecode
  *
  * Parameters:
- *   SLChar_t    Input
+ *  SLChar_t    Input
  *
  * Return value:
- *   SLChar_t    Output
+ *  SLChar_t    Output
  *
  * Description:
- *   Take an input dibit and apply Manchester decoding to
- *   generate an output bit
+ *  Take an input dibit and apply Manchester decoding to
+ *  generate an output bit
  *
  ********************************************************/
 
@@ -429,14 +429,14 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ManchesterDecode(const SLChar_t Input)
  * Function: SDS_ManchesterEncodeByte
  *
  * Parameters:
- *   SLChar_t    Input
+ *  SLChar_t    Input
  *
  * Return value:
- *   SLFixData_t Output
+ *  SLFixData_t Output
  *
  * Description:
- *   Take an input byte and apply Manchester encoding to
- *   each bit to generate an output of 8 dibits
+ *  Take an input byte and apply Manchester encoding to
+ *  each bit to generate an output of 8 dibits
  *
  ********************************************************/
 
@@ -458,14 +458,14 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ManchesterEncodeByte(const SLChar_t Input)
  * Function: SDS_ManchesterDecodeByte
  *
  * Parameters:
- *   SLFixData_t Input
+ *  SLFixData_t Input
  *
  * Return value:
- *   SLFixData_t Output
+ *  SLFixData_t Output
  *
  * Description:
- *   Take an input of 8 dibits and apply Manchester decoding
- *   to generate an output byte
+ *  Take an input of 8 dibits and apply Manchester decoding
+ *  to generate an output byte
  *
  ********************************************************/
 
@@ -487,17 +487,17 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ManchesterDecodeByte(const SLFixData_t Input)
  * Function: SIF_DetectNumericalWordSequence
  *
  * Parameters:
- *   SLFixData_t *pBitMask,
- *   SLFixData_t * SIGLIB_OUTPUT_PTR_DECL pDetectorState,
- *   SLArrayIndex_t WordLength,
- *   SLArrayIndex_t SynchSequenceLength)
+ *  SLFixData_t *pBitMask,
+ *  SLFixData_t * SIGLIB_OUTPUT_PTR_DECL pDetectorState,
+ *  SLArrayIndex_t WordLength,
+ *  SLArrayIndex_t SynchSequenceLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialize the function for detecting numerical word
- *   sequences
+ *  Initialize the function for detecting numerical word
+ *  sequences
  *
  ********************************************************/
 
@@ -519,17 +519,17 @@ void SIGLIB_FUNC_DECL SIF_DetectNumericalWordSequence(SLFixData_t* pBitMask, SLF
  * Function: SDS_DetectNumericalWordSequence
  *
  * Parameters:
- *   SLFixData_t InputWord,
- *   const SLFixData_t * SIGLIB_INPUT_PTR_DECL pSynchSequence,
- *   SLFixData_t BitMask,
- *   SLFixData_t * SIGLIB_INOUT_PTR_DECL pDetectorState,
- *   SLArrayIndex_t SynchSequenceLength)
+ *  SLFixData_t InputWord,
+ *  const SLFixData_t * SIGLIB_INPUT_PTR_DECL pSynchSequence,
+ *  SLFixData_t BitMask,
+ *  SLFixData_t * SIGLIB_INOUT_PTR_DECL pDetectorState,
+ *  SLArrayIndex_t SynchSequenceLength)
  *
  * Return value:
- *   Synchronization detected flag
+ *  Synchronization detected flag
  *
  * Description:
- *   Detect the presence of a numerical word sequence
+ *  Detect the presence of a numerical word sequence
  *
  ********************************************************/
 
@@ -559,16 +559,16 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_DetectNumericalWordSequence(SLFixData_t InputWo
  * Function: SIF_DetectNumericalBitSequence
  *
  * Parameters:
- *   SLFixData_t *pSynchSequenceBitMask,
- *   SLFixData_t *pDetectorState,
- *   SLArrayIndex_t SynchSequenceLength)
+ *  SLFixData_t *pSynchSequenceBitMask,
+ *  SLFixData_t *pDetectorState,
+ *  SLArrayIndex_t SynchSequenceLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialize the function for detecting numerical bit
- *   sequences
+ *  Initialize the function for detecting numerical bit
+ *  sequences
  *
  ********************************************************/
 
@@ -587,17 +587,17 @@ void SIGLIB_FUNC_DECL SIF_DetectNumericalBitSequence(SLFixData_t* pSynchSequence
  * Function: SDS_DetectNumericalBitSequence
  *
  * Parameters:
- *   SLFixData_t InputWord,
- *   const SLFixData_t SynchSequence,
- *   SLFixData_t SynchSequenceBitMask,
- *   SLFixData_t *pDetectorState,
- *   SLArrayIndex_t InputWordLength)
+ *  SLFixData_t InputWord,
+ *  const SLFixData_t SynchSequence,
+ *  SLFixData_t SynchSequenceBitMask,
+ *  SLFixData_t *pDetectorState,
+ *  SLArrayIndex_t InputWordLength)
  *
  * Return value:
- *   Synchronization detected flag
+ *  Synchronization detected flag
  *
  * Description:
- *   Detect the presence of a numerical bit sequence
+ *  Detect the presence of a numerical bit sequence
  *
  ********************************************************/
 
@@ -628,15 +628,15 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_DetectNumericalBitSequence(SLFixData_t Input
  * Function: SIF_DetectCharacterSequence
  *
  * Parameters:
- *   SLChar_t * SIGLIB_OUTPUT_PTR_DECL pDetectorState,
- *   SLArrayIndex_t SynchSequenceLength)
+ *  SLChar_t * SIGLIB_OUTPUT_PTR_DECL pDetectorState,
+ *  SLArrayIndex_t SynchSequenceLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialize the function for detecting character
- *   formatted bit sequences.
+ *  Initialize the function for detecting character
+ *  formatted bit sequences.
  *
  ********************************************************/
 
@@ -651,17 +651,17 @@ void SIGLIB_FUNC_DECL SIF_DetectCharacterSequence(SLChar_t* SIGLIB_OUTPUT_PTR_DE
  * Function: SDS_DetectCharacterSequence
  *
  * Parameters:
- *   SLChar_t InputCharacter,
- *   const SLChar_t * SIGLIB_INPUT_PTR_DECL pSynchSequence,
- *   SLChar_t * SIGLIB_INOUT_PTR_DECL pDetectorState,
- *   SLArrayIndex_t SynchSequenceLength)
+ *  SLChar_t InputCharacter,
+ *  const SLChar_t * SIGLIB_INPUT_PTR_DECL pSynchSequence,
+ *  SLChar_t * SIGLIB_INOUT_PTR_DECL pDetectorState,
+ *  SLArrayIndex_t SynchSequenceLength)
  *
  * Return value:
- *   Synchronization detected flag
+ *  Synchronization detected flag
  *
  * Description:
- *   Detect the presence of a character formatted bit
- *   sequence
+ *  Detect the presence of a character formatted bit
+ *  sequence
  *
  ********************************************************/
 
@@ -690,14 +690,14 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_DetectCharacterSequence(SLChar_t InputCharacter
  * Function: SDS_ErrorVector
  *
  * Parameters:
- *   const SLComplexRect_s IdealPoint,
- *   const SLComplexRect_s ReceivedPoint)
+ *  const SLComplexRect_s IdealPoint,
+ *  const SLComplexRect_s ReceivedPoint)
  *
  * Return value:
- *   Error vector
+ *  Error vector
  *
  * Description:
- *   Calculate the difference between two vectors.
+ *  Calculate the difference between two vectors.
  *
  ********************************************************/
 
@@ -715,14 +715,14 @@ SLData_t SIGLIB_FUNC_DECL SDS_ErrorVector(const SLComplexRect_s IdealPoint, cons
  * Function: SDS_ErrorVectorMagnitudePercent
  *
  * Parameters:
- *   const SLComplexRect_s IdealPoint,
- *   const SLComplexRect_s ReceivedPoint)
+ *  const SLComplexRect_s IdealPoint,
+ *  const SLComplexRect_s ReceivedPoint)
  *
  * Return value:
- *   Error vector magnitude (%)
+ *  Error vector magnitude (%)
  *
  * Description:
- *   Calculate the error vector magnitude (%)
+ *  Calculate the error vector magnitude (%)
  *
  ********************************************************/
 
@@ -743,14 +743,14 @@ SLData_t SIGLIB_FUNC_DECL SDS_ErrorVectorMagnitudePercent(const SLComplexRect_s 
  * Function: SDS_ErrorVectorMagnitudeDecibels
  *
  * Parameters:
- *   const SLComplexRect_s IdealPoint,
- *   const SLComplexRect_s ReceivedPoint)
+ *  const SLComplexRect_s IdealPoint,
+ *  const SLComplexRect_s ReceivedPoint)
  *
  * Return value:
- *   Error vector magnitude (dB)
+ *  Error vector magnitude (dB)
  *
  * Description:
- *   Calculate the error vector magnitude (dB)
+ *  Calculate the error vector magnitude (dB)
  *
  ********************************************************/
 
@@ -777,10 +777,10 @@ SLData_t SIGLIB_FUNC_DECL SDS_ErrorVectorMagnitudeDecibels(const SLComplexRect_s
  * Function: SDS_ReverseDiBits()
  *
  * Parameters:
- *   const SLFixData_t   Src,    - Source di-bit pair
+ *  const SLFixData_t   Src,    - Source di-bit pair
  *
  * Return value:
- *   Reversed di-bit pair
+ *  Reversed di-bit pair
  *
  * Description: Reverse the di-bit pair
  *
@@ -796,17 +796,17 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ReverseDiBits(const SLFixData_t Src)
  * Function: SDS_QpskBitErrorCount
  *
  * Parameters:
- *   const SLFixData_t Src1,
- *   const SLFixData_t Src2,
- *   SLFixData_t *pBitCount,
- *   SLFixData_t *pBitErrorCount)
+ *  const SLFixData_t Src1,
+ *  const SLFixData_t Src2,
+ *  SLFixData_t *pBitCount,
+ *  SLFixData_t *pBitErrorCount)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   This function calculates the bit errors in a QPSK
- *   bit stream.
+ *  This function calculates the bit errors in a QPSK
+ *  bit stream.
  *
  ********************************************************/
 
@@ -827,15 +827,15 @@ void SIGLIB_FUNC_DECL SDS_QpskBitErrorCount(const SLFixData_t Src1, const SLFixD
  * Function: SDS_BitErrorRate
  *
  * Parameters:
- *   const SLFixData_t BitCount,
- *   const SLFixData_t BitErrorCount)
+ *  const SLFixData_t BitCount,
+ *  const SLFixData_t BitErrorCount)
  *
  * Return value:
- *   SLData_t        Bit error rate
+ *  SLData_t        Bit error rate
  *
  * Description:
- *   This function returns the bit error rate given the
- *   total number of bits and the number of error bits.
+ *  This function returns the bit error rate given the
+ *  total number of bits and the number of error bits.
  *
  ********************************************************/
 

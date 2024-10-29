@@ -44,24 +44,24 @@ Description: SigLib signal generation routines.
  * Function: SDA_SignalGenerate
  *
  * Parameters:
- *   SLData_t *pDst,
- *   const enum SLSignal_t SLSignal_t,
- *   const SLData_t Peak,
- *   const enum SLSignalFillMode_t FillMode,
- *   SLData_t Frequency
- *   const SLData_t Offset,
- *   const SLData_t Param,
- *   const SLData_t EndValue,
- *   SLData_t *PhaseOffset,
- *   SLData_t *CurrentValue,
- *   const SLArrayIndex_t arrayLength
+ *  SLData_t *pDst,
+ *  const enum SLSignal_t SLSignal_t,
+ *  const SLData_t Peak,
+ *  const enum SLSignalFillMode_t FillMode,
+ *  SLData_t Frequency
+ *  const SLData_t Offset,
+ *  const SLData_t Param,
+ *  const SLData_t EndValue,
+ *  SLData_t *PhaseOffset,
+ *  SLData_t *CurrentValue,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   SLError_t Error value
+ *  SLError_t Error value
  *
  * Description:
- *   Fill a array with data according to the signal
- *   type parameter.
+ *  Fill a array with data according to the signal
+ *  type parameter.
  *
  ********************************************************/
 
@@ -677,23 +677,23 @@ SLError_t SIGLIB_FUNC_DECL SDA_SignalGenerate(SLData_t* SIGLIB_PTR_DECL pDst, co
  * Function: SDS_SignalGenerate
  *
  * Parameters:
- *   SLData_t *pDst,
- *   const enum SLSignal_t SLSignal_t,
- *   const SLData_t Peak,
- *   const enum SLSignalFillMode_t FillMode,
- *   SLData_t Frequency
- *   const SLData_t Offset,
- *   const SLData_t Param,
- *   const SLData_t EndValue,
- *   SLData_t *PhaseOffset,
- *   SLData_t *CurrentValue,
+ *  SLData_t *pDst,
+ *  const enum SLSignal_t SLSignal_t,
+ *  const SLData_t Peak,
+ *  const enum SLSignalFillMode_t FillMode,
+ *  SLData_t Frequency
+ *  const SLData_t Offset,
+ *  const SLData_t Param,
+ *  const SLData_t EndValue,
+ *  SLData_t *PhaseOffset,
+ *  SLData_t *CurrentValue,
  *
  * Return value:
- *   SLError_t Error value
+ *  SLError_t Error value
  *
  * Description:
- *   Generate a single sample according to the signal
- *   type parameter.
+ *  Generate a single sample according to the signal
+ *  type parameter.
  *
  ********************************************************/
 
@@ -1261,16 +1261,16 @@ SLError_t SIGLIB_FUNC_DECL SDS_SignalGenerate(SLData_t* SIGLIB_PTR_DECL pDst, co
  * Function: SIF_Resonator
  *
  * Parameters:
- *   SLData_t *,       Filter state
- *   const SLData_t,   Resonator Frequency,
- *   SLData_t *,       Cosine coefficient
- *   SLData_t *,       Sine coefficient
+ *  SLData_t *,       Filter state
+ *  const SLData_t,   Resonator Frequency,
+ *  SLData_t *,       Cosine coefficient
+ *  SLData_t *,       Sine coefficient
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the resonator function
+ *  Initialise the resonator function
  *
  ********************************************************/
 
@@ -1288,23 +1288,23 @@ void SIGLIB_FUNC_DECL SIF_Resonator(SLData_t* SIGLIB_PTR_DECL pState, const SLDa
  * Function: SDA_Resonator
  *
  * Parameters:
- *   const SLData_t *,       Input pointer
- *   SLData_t *,             Output pointer
- *   SLData_t *,             Filter state
- *   const SLData_t,         Cosine coefficient
- *   const SLData_t,         Sine coefficient
- *   const SLArrayIndex_t    Buffer length
+ *  const SLData_t *,       Input pointer
+ *  SLData_t *,             Output pointer
+ *  SLData_t *,             Filter state
+ *  const SLData_t,         Cosine coefficient
+ *  const SLData_t,         Sine coefficient
+ *  const SLArrayIndex_t    Buffer length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Implements a digital resonator with the following
- *   z-transform:
+ *  Implements a digital resonator with the following
+ *  z-transform:
  *
- *               sin(w0) z^-1
- *   H(z) = ------------------------
- *          1 - 2cos(w0) z^-1 + z^-2
+ *              sin(w0) z^-1
+ *  H(z) = ------------------------
+ *         1 - 2cos(w0) z^-1 + z^-2
  *
  ********************************************************/
 
@@ -1348,17 +1348,17 @@ void SIGLIB_FUNC_DECL SDA_Resonator(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData
  * Function: SIF_Resonator1
  *
  * Parameters:
- *   SLData_t *,         Filter state
- *   const SLData_t,     Resonator Frequency,
- *   SLData_t *,         Cosine coefficient
- *   SLData_t *,         Sine coefficient
- *   SLFixData_t *,      Flag to indicate first iteration
+ *  SLData_t *,         Filter state
+ *  const SLData_t,     Resonator Frequency,
+ *  SLData_t *,         Cosine coefficient
+ *  SLData_t *,         Sine coefficient
+ *  SLFixData_t *,      Flag to indicate first iteration
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the resonator function
+ *  Initialise the resonator function
  *
  ********************************************************/
 
@@ -1379,24 +1379,24 @@ void SIGLIB_FUNC_DECL SIF_Resonator1(SLData_t* SIGLIB_PTR_DECL pState, const SLD
  * Function: SDA_Resonator1
  *
  * Parameters:
- *   SLData_t *,             Output pointer
- *   const SLData_t,         Output sinusoid magnitude
- *   SLData_t *,             Filter state
- *   SLFixData_t *,          Flag to indicate first iteration
- *   const SLData_t,         Cosine coefficient
- *   const SLData_t,         Sine coefficient
- *   const SLArrayIndex_t    Buffer length
+ *  SLData_t *,             Output pointer
+ *  const SLData_t,         Output sinusoid magnitude
+ *  SLData_t *,             Filter state
+ *  SLFixData_t *,          Flag to indicate first iteration
+ *  const SLData_t,         Cosine coefficient
+ *  const SLData_t,         Sine coefficient
+ *  const SLArrayIndex_t    Buffer length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Implements a digital resonator with the following
- *   z-transform:
+ *  Implements a digital resonator with the following
+ *  z-transform:
  *
- *               sin(w0) z^-1
- *   H(z) = ------------------------
- *          1 - 2cos(w0) z^-1 + z^-2
+ *              sin(w0) z^-1
+ *  H(z) = ------------------------
+ *         1 - 2cos(w0) z^-1 + z^-2
  *
  ********************************************************/
 
@@ -1451,26 +1451,26 @@ void SIGLIB_FUNC_DECL SDA_Resonator1(SLData_t* SIGLIB_PTR_DECL pDst, const SLDat
  * Function: SDA_Resonator1Add
  *
  * Parameters:
- *   SLData_t *,             Output pointer
- *   const SLData_t,         Output sinusoid magnitude
- *   SLData_t *,             Filter state
- *   SLFixData_t *,          Flag to indicate first iteration
- *   const SLData_t,         Cosine coefficient
- *   const SLData_t,         Sine coefficient
- *   const SLArrayIndex_t    Buffer length
+ *  SLData_t *,             Output pointer
+ *  const SLData_t,         Output sinusoid magnitude
+ *  SLData_t *,             Filter state
+ *  SLFixData_t *,          Flag to indicate first iteration
+ *  const SLData_t,         Cosine coefficient
+ *  const SLData_t,         Sine coefficient
+ *  const SLArrayIndex_t    Buffer length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Implements a digital resonator with the following
- *   z-transform:
+ *  Implements a digital resonator with the following
+ *  z-transform:
  *
- *               sin(w0) z^-1
- *   H(z) = ------------------------
- *          1 - 2cos(w0) z^-1 + z^-2
+ *              sin(w0) z^-1
+ *  H(z) = ------------------------
+ *         1 - 2cos(w0) z^-1 + z^-2
  *
- *   and adds the output to the existing data in the array.
+ *  and adds the output to the existing data in the array.
  *
  ********************************************************/
 
@@ -1534,16 +1534,16 @@ void SIGLIB_FUNC_DECL SDA_Resonator1Add(SLData_t* SIGLIB_PTR_DECL pDst, const SL
  * Function: SDA_SignalGeneratePolarWhiteNoise
  *
  * Parameters:
- *   SLComplexRect_s *pDst,
- *   const SLData_t NoisePeak,
- *   const enum SLSignalFillMode_t FillMode,
- *   const SLArrayIndex_t arrayLength
+ *  SLComplexRect_s *pDst,
+ *  const SLData_t NoisePeak,
+ *  const enum SLSignalFillMode_t FillMode,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Generate polar white noise
+ *  Generate polar white noise
  *
  ********************************************************/
 
@@ -1576,13 +1576,13 @@ void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarWhiteNoise(SLComplexRect_s* SIGLIB_
  * Function: SDS_SignalGeneratePolarWhiteNoise
  *
  * Parameters:
- *   const SLData_t NoisePeak,
+ *  const SLData_t NoisePeak,
  *
  * Return value:
- *   Polar white noise
+ *  Polar white noise
  *
  * Description:
- *   Generate polar white noise
+ *  Generate polar white noise
  *
  ********************************************************/
 
@@ -1601,18 +1601,18 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_SignalGeneratePolarWhiteNoise(const SLData_
  * Function: SDA_SignalGeneratePolarGaussianNoise
  *
  * Parameters:
- *   SLComplexRect_s *pDst,
- *   const SLData_t NoiseVariance,
- *   SLData_t *NoisePhaseOffset,
- *   SLData_t *NoiseCurrentValue,
- *   const enum SLSignalFillMode_t FillMode,
- *   const SLArrayIndex_t arrayLength
+ *  SLComplexRect_s *pDst,
+ *  const SLData_t NoiseVariance,
+ *  SLData_t *NoisePhaseOffset,
+ *  SLData_t *NoiseCurrentValue,
+ *  const enum SLSignalFillMode_t FillMode,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Generate polar Gaussian noise
+ *  Generate polar Gaussian noise
  *
  ********************************************************/
 
@@ -1713,15 +1713,15 @@ void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarGaussianNoise(SLComplexRect_s* SIGL
  * Function: SDS_SignalGeneratePolarGaussianNoise
  *
  * Parameters:
- *   const SLData_t NoiseVariance,
- *   SLData_t *NoisePhaseOffset,
- *   SLData_t *NoiseCurrentValue,
+ *  const SLData_t NoiseVariance,
+ *  SLData_t *NoisePhaseOffset,
+ *  SLData_t *NoiseCurrentValue,
  *
  * Return value:
- *   Polar Gaussian noise
+ *  Polar Gaussian noise
  *
  * Description:
- *   Generate polar Gaussian noise
+ *  Generate polar Gaussian noise
  *
  ********************************************************/
 
@@ -1777,17 +1777,17 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_SignalGeneratePolarGaussianNoise(const SLDa
  * Function: SDA_SignalAddPolarJitterAndGaussianNoise
  *
  * Parameters:
- *   SLComplexRect_s *pDst,
- *   const SLData_t Variance,
- *   SLData_t *NoisePhaseOffset,
- *   SLData_t *NoiseCurrentValue,
- *   const SLArrayIndex_t arrayLength
+ *  SLComplexRect_s *pDst,
+ *  const SLData_t Variance,
+ *  SLData_t *NoisePhaseOffset,
+ *  SLData_t *NoiseCurrentValue,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Add jitter and polar Gaussian noise to a signal
+ *  Add jitter and polar Gaussian noise to a signal
  *
  ********************************************************/
 
@@ -1872,19 +1872,19 @@ void SIGLIB_FUNC_DECL SDA_SignalAddPolarJitterAndGaussianNoise(const SLComplexRe
  * Function: SDS_SignalAddPolarJitterAndGaussianNoise
  *
  * Parameters:
- *   const SLComplexRect_s Src
- *   const SLData_t JitterFrequency,
- *   const SLData_t JitterMagnitude,
- *   SLData_t *JitterPhaseOffset,
- *   const SLData_t NoiseVariance,
- *   SLData_t *NoisePhaseOffset,
- *   SLData_t *NoiseCurrentValue,
+ *  const SLComplexRect_s Src
+ *  const SLData_t JitterFrequency,
+ *  const SLData_t JitterMagnitude,
+ *  SLData_t *JitterPhaseOffset,
+ *  const SLData_t NoiseVariance,
+ *  SLData_t *NoisePhaseOffset,
+ *  SLData_t *NoiseCurrentValue,
  *
  * Return value:
- *   Signal with jitter and polar Gaussian noise added
+ *  Signal with jitter and polar Gaussian noise added
  *
  * Description:
- *   Add jitter and polar Gaussian noise to a signal
+ *  Add jitter and polar Gaussian noise to a signal
  *
  ********************************************************/
 
@@ -1963,18 +1963,18 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_SignalAddPolarJitterAndGaussianNoise(const 
  * Function: SDA_Ramp()
  *
  * Parameters:
- *   const SLData_t *pDst,               Pointer to destination data array
- *   const SLData_t startValue,          Start value
- *   const SLData_t incrementValue,      Increment value
- *   const SLArrayIndex_t arrayLength);  Array length
+ *  const SLData_t *pDst,               Pointer to destination data array
+ *  const SLData_t startValue,          Start value
+ *  const SLData_t incrementValue,      Increment value
+ *  const SLArrayIndex_t arrayLength);  Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Generate a ramp with incrementing N
- *   Values starting with the startValue.
- *   If the incrementValue is negative the data will
- *   ramp down.
+ *  Values starting with the startValue.
+ *  If the incrementValue is negative the data will
+ *  ramp down.
  *
  ********************************************************/
 
@@ -1991,10 +1991,10 @@ void SIGLIB_FUNC_DECL SDA_Ramp(SLData_t* pDst, const SLData_t startValue, const 
  * Function: SIF_RandomNumber()
  *
  * Parameters:
- *   void
+ *  void
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialize the random number generator seed.
  *
@@ -2009,14 +2009,14 @@ void SIGLIB_FUNC_DECL SIF_RandomNumber(void)
  * Function: SDS_RandomNumber()
  *
  * Parameters:
- *   const SLData_t          lowerBound,
- *   const SLData_t          upperBound
+ *  const SLData_t          lowerBound,
+ *  const SLData_t          upperBound
  *
  * Return value:
- *   SLData_t        Random number
+ *  SLData_t        Random number
  *
  * Description: Return a random number between the lower
- *   and upper bounds.
+ *  and upper bounds.
  *
  ********************************************************/
 
@@ -2029,16 +2029,16 @@ SLData_t SIGLIB_FUNC_DECL SDS_RandomNumber(const SLData_t lowerBound, const SLDa
  * Function: SDA_RandomNumber()
  *
  * Parameters:
- *   const SLData_t *pDst,   Pointer to destination data array
- *   const SLData_t          lowerBound,
- *   const SLData_t          upperBound
- *   const SLArrayIndex_t arrayLength); Array length
+ *  const SLData_t *pDst,   Pointer to destination data array
+ *  const SLData_t          lowerBound,
+ *  const SLData_t          upperBound
+ *  const SLArrayIndex_t arrayLength); Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Fills an array with random numbers between
- *   the lower and upper bounds.
+ *  the lower and upper bounds.
  *
  ********************************************************/
 

@@ -245,15 +245,15 @@ int main(void)
  * Function: SIF_Fft16
  *
  * Parameters:
- *   SLInt16_t *pFFTCoeffs,
- *   SLInt16_t *pBitReverseAddressTable,
- *   const SLArrayIndex_t    FFTLength
+ *  SLInt16_t *pFFTCoeffs,
+ *  SLInt16_t *pBitReverseAddressTable,
+ *  const SLArrayIndex_t    FFTLength
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description:
- *   Initialise the FFT sine and cosine tables.
+ *  Initialise the FFT sine and cosine tables.
  *
  ********************************************************/
 
@@ -274,20 +274,20 @@ SLError_t SIGLIB_FUNC_DECL SIF_Fft16(SLInt16_t* SIGLIB_PTR_DECL pFFTCoeffs, cons
  * Function: SDA_Rfft16
  *
  * Parameters:
- *   SLInt16_t realData[],
- *   SLInt16_t imagData[],
- *   SLInt16_t *pFFTCoeffs,
- *   SLInt16_t *pBitReverseAddressTable,
- *   const SLArrayIndex_t FFTLength,
- *   const SLArrayIndex_t Log2Size   - Log base2 transform size
+ *  SLInt16_t realData[],
+ *  SLInt16_t imagData[],
+ *  SLInt16_t *pFFTCoeffs,
+ *  SLInt16_t *pBitReverseAddressTable,
+ *  const SLArrayIndex_t FFTLength,
+ *  const SLArrayIndex_t Log2Size   - Log base2 transform size
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a real input FFT on the supplied data.
- *   The source data and coefficient values are both 16
- *   bits SLInt32_t.
+ *  Perform a real input FFT on the supplied data.
+ *  The source data and coefficient values are both 16
+ *  bits SLInt32_t.
  *
  ********************************************************/
 
@@ -379,15 +379,15 @@ void SIGLIB_FUNC_DECL SDA_Rfft16(SLInt16_t SIGLIB_PTR_DECL realData[], SLInt16_t
  * Function: SIF_Fft32
  *
  * Parameters:
- *   SLInt32_t *pFFTCoeffs,
- *   SLInt16_t *pBitReverseAddressTable,
- *   const SLArrayIndex_t    FFTLength
+ *  SLInt32_t *pFFTCoeffs,
+ *  SLInt16_t *pBitReverseAddressTable,
+ *  const SLArrayIndex_t    FFTLength
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description:
- *   Initialise the FFT sine and cosine tables.
+ *  Initialise the FFT sine and cosine tables.
  *
  ********************************************************/
 
@@ -408,20 +408,20 @@ SLError_t SIGLIB_FUNC_DECL SIF_Fft32(SLInt32_t* SIGLIB_PTR_DECL pFFTCoeffs, cons
  * Function: SDA_Rfft32
  *
  * Parameters:
- *   SLInt32_t realData[],
- *   SLInt32_t imagData[],
- *   SLInt32_t *pFFTCoeffs,
- *   SLInt16_t *pBitReverseAddressTable,
- *   const SLArrayIndex_t FFTLength,
- *   const SLArrayIndex_t Log2Size   - Log base2 transform size
+ *  SLInt32_t realData[],
+ *  SLInt32_t imagData[],
+ *  SLInt32_t *pFFTCoeffs,
+ *  SLInt16_t *pBitReverseAddressTable,
+ *  const SLArrayIndex_t FFTLength,
+ *  const SLArrayIndex_t Log2Size   - Log base2 transform size
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a real input FFT on the supplied data.
- *   The source data and coefficient values are both 16
- *   bits SLInt32_t.
+ *  Perform a real input FFT on the supplied data.
+ *  The source data and coefficient values are both 16
+ *  bits SLInt32_t.
  *
  ********************************************************/
 
@@ -513,22 +513,22 @@ void SIGLIB_FUNC_DECL SDA_Rfft32(SLInt32_t SIGLIB_PTR_DECL realData[], SLInt32_t
  * Function: SIF_Window16
  *
  * Parameters:
- *   SLInt16_t *pWindowCoeffs        - Window coeffs array
- *   const enum Window_t WindowType  - Window type,
- *   const SLData_t Coeff            - Window coefficient
- *   const SLArrayIndex_t WindowLength   - Window length
+ *  SLInt16_t *pWindowCoeffs        - Window coeffs array
+ *  const enum Window_t WindowType  - Window type,
+ *  const SLData_t Coeff            - Window coefficient
+ *  const SLArrayIndex_t WindowLength   - Window length
  *
  * Return value:
- *   SIGLIB_PARAMETER_ERROR if incorrect window type
- *   specified otherwise SIGLIB_NO_ERROR.
+ *  SIGLIB_PARAMETER_ERROR if incorrect window type
+ *  specified otherwise SIGLIB_NO_ERROR.
  *
  * Description:
- *   Initialise the window data.
+ *  Initialise the window data.
  *
  * Reference:
- *   Discrete Time Signal Processing - Oppenheim and Schafer
- *   Kaiser Window - http://spsc.inw.tugraz.at/
- *       DSP Laboratory handout - dft1.pdf
+ *  Discrete Time Signal Processing - Oppenheim and Schafer
+ *  Kaiser Window - http://spsc.inw.tugraz.at/
+ *      DSP Laboratory handout - dft1.pdf
  *
  ********************************************************/
 
@@ -567,16 +567,16 @@ SLError_t SIGLIB_FUNC_DECL SIF_Window16(SLInt16_t* SIGLIB_PTR_DECL pWindowCoeffs
  * Function: SDA_Window16
  *
  * Parameters:
- *   const SLInt16_t *pSrc           - Source array
- *   SLInt16_t *pDst                 - Result array
- *   const SLInt16_t *pWindowCoeffs  - Window coeffs array
- *   const SLArrayIndex_t            - Window length
+ *  const SLInt16_t *pSrc           - Source array
+ *  SLInt16_t *pDst                 - Result array
+ *  const SLInt16_t *pWindowCoeffs  - Window coeffs array
+ *  const SLArrayIndex_t            - Window length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Apply a window to the data.
+ *  Apply a window to the data.
  *
  ********************************************************/
 
@@ -607,22 +607,22 @@ void SIGLIB_FUNC_DECL SDA_Window16(const SLInt16_t* SIGLIB_PTR_DECL pSrc, SLInt1
  * Function: SIF_Window32
  *
  * Parameters:
- *   SLInt32_t *pWindowCoeffs        - Window coeffs array
- *   const enum Window_t WindowType  - Window type,
- *   const SLData_t Coeff            - Window coefficient
- *   const SLArrayIndex_t WindowLength   - Window length
+ *  SLInt32_t *pWindowCoeffs        - Window coeffs array
+ *  const enum Window_t WindowType  - Window type,
+ *  const SLData_t Coeff            - Window coefficient
+ *  const SLArrayIndex_t WindowLength   - Window length
  *
  * Return value:
- *   SIGLIB_PARAMETER_ERROR if incorrect window type
- *   specified otherwise SIGLIB_NO_ERROR.
+ *  SIGLIB_PARAMETER_ERROR if incorrect window type
+ *  specified otherwise SIGLIB_NO_ERROR.
  *
  * Description:
- *   Initialise the window data.
+ *  Initialise the window data.
  *
  * Reference:
- *   Discrete Time Signal Processing - Oppenheim and Schafer
- *   Kaiser Window - http://spsc.inw.tugraz.at/
- *       DSP Laboratory handout - dft1.pdf
+ *  Discrete Time Signal Processing - Oppenheim and Schafer
+ *  Kaiser Window - http://spsc.inw.tugraz.at/
+ *      DSP Laboratory handout - dft1.pdf
  *
  ********************************************************/
 
@@ -662,16 +662,16 @@ SLError_t SIGLIB_FUNC_DECL SIF_Window32(SLInt32_t* SIGLIB_PTR_DECL pWindowCoeffs
  * Function: SDA_Window32
  *
  * Parameters:
- *   const SLInt32_t *pSrc           - Source array
- *   SLInt32_t *pDst                 - Result array
- *   const SLInt32_t *pWindowCoeffs  - Window coeffs array
- *   const SLArrayIndex_t            - Window length
+ *  const SLInt32_t *pSrc           - Source array
+ *  SLInt32_t *pDst                 - Result array
+ *  const SLInt32_t *pWindowCoeffs  - Window coeffs array
+ *  const SLArrayIndex_t            - Window length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Apply a window to the data.
+ *  Apply a window to the data.
  *
  ********************************************************/
 
@@ -702,15 +702,15 @@ void SIGLIB_FUNC_DECL SDA_Window32(const SLInt32_t* SIGLIB_PTR_DECL pSrc, SLInt3
  * Function: SUF_Fix16ToSigLibData
  *
  * Parameters:
- *   const SLInt16_t * SIGLIB_PTR_DECL pSrc,
- *   const SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLInt16_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Convert the data from 16 bit fixed point to SLData_t
+ *  Convert the data from 16 bit fixed point to SLData_t
  *
  ********************************************************/
 
@@ -733,15 +733,15 @@ void SIGLIB_FUNC_DECL SUF_Fix16ToSigLibData(SLInt16_t* SIGLIB_PTR_DECL pSrc, SLD
  * Function: SUF_SigLibDataToFix16
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLInt16_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLInt16_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Convert the data from SLData_t to 16 bit fixed point
+ *  Convert the data from SLData_t to 16 bit fixed point
  *
  ********************************************************/
 
@@ -764,15 +764,15 @@ void SIGLIB_FUNC_DECL SUF_SigLibDataToFix16(SLData_t* SIGLIB_PTR_DECL pSrc, SLIn
  * Function: SUF_Fix32ToSigLibData
  *
  * Parameters:
- *   const SLInt32_t * SIGLIB_PTR_DECL pSrc,
- *   const SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLInt32_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Convert the data from 32 bit fixed point to SLData_t
+ *  Convert the data from 32 bit fixed point to SLData_t
  *
  ********************************************************/
 
@@ -795,15 +795,15 @@ void SIGLIB_FUNC_DECL SUF_Fix32ToSigLibData(SLInt32_t* SIGLIB_PTR_DECL pSrc, SLD
  * Function: SUF_SigLibDataToFix32
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLInt32_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLInt32_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Convert the data from SLData_t to 32 bit fixed point
+ *  Convert the data from SLData_t to 32 bit fixed point
  *
  ********************************************************/
 

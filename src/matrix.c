@@ -44,19 +44,19 @@ Description: Matrix manipulation routines, for SigLib DSP library.
  * Function: SMX_Transpose
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   SLData_t *              - Destination matrix pointer
- *   const SLArrayIndex_t    - Number of rows
- *   const SLArrayIndex_t    - Number of columns
+ *  const SLData_t *       - Source matrix pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  const SLArrayIndex_t    - Number of rows
+ *  const SLArrayIndex_t    - Number of columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Transpose a matrix
  *
  * Notes: This function can perform in-place or not
- *   in-place transpositions but in-place transpositions
- *   can only be performed on square matrices.
+ *  in-place transpositions but in-place transpositions
+ *  can only be performed on square matrices.
  *
  ********************************************************/
 
@@ -99,18 +99,18 @@ void SIGLIB_FUNC_DECL SMX_Transpose(const SLData_t* SIGLIB_PTR_DECL pSrcMatrix, 
  * Function: SMX_Diagonal
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   SLData_t *              - Destination matrix pointer
- *   const SLArrayIndex_t    - Number of rows
- *   const SLArrayIndex_t    - Number of columns
+ *  const SLData_t *       - Source matrix pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  const SLArrayIndex_t    - Number of rows
+ *  const SLArrayIndex_t    - Number of columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Return the diagonal of a matrix
  *
  * Notes: This function works in-place or not
- *   in-place.
+ *  in-place.
  *
  ********************************************************/
 
@@ -134,12 +134,12 @@ void SIGLIB_FUNC_DECL SMX_Diagonal(const SLData_t* SIGLIB_PTR_DECL pSrcMatrix, S
     }
 
     if (Rows > Columns) {    // Rows > Columns
-      SDA_Clear(pDstMatrix + (Columns * Columns), (Rows * Columns) - (Columns * Columns));
+      SDA_Zeros(pDstMatrix + (Columns * Columns), (Rows * Columns) - (Columns * Columns));
     }
   }
 
   else {    // Not in-place process
-    SDA_Clear(pDstMatrix, Rows * Columns);
+    SDA_Zeros(pDstMatrix, Rows * Columns);
     SLArrayIndex_t shorter;
     if (Rows < Columns) {
       shorter = Rows;
@@ -157,22 +157,22 @@ void SIGLIB_FUNC_DECL SMX_Diagonal(const SLData_t* SIGLIB_PTR_DECL pSrcMatrix, S
  * Function: SMX_Multiply
  *
  * Parameters:
- *   const SLData_t *        - Input matrix 1
- *   const SLData_t *        - Input matrix 2
- *   SLData_t    *           - Output matrix
- *   const SLArrayIndex_t    - Source matrix 1 number of rows
- *   const SLArrayIndex_t    - Source matrix 1 number of columns
- *   const SLArrayIndex_t    - Source matrix 2 number of columns
+ *  const SLData_t *       - Input matrix 1
+ *  const SLData_t *       - Input matrix 2
+ *  SLData_t    *          - Output matrix
+ *  const SLArrayIndex_t    - Source matrix 1 number of rows
+ *  const SLArrayIndex_t    - Source matrix 1 number of columns
+ *  const SLArrayIndex_t    - Source matrix 2 number of columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Cross multiply two matrices.
  *
  * Notes: The number of columns in the first must equal
- *   the number of rows in the second.
- *   The output matrix has order: [#rows 1, # cols 2]
- *   This function does not work in-place.
+ *  the number of rows in the second.
+ *  The output matrix has order: [#rows 1, # cols 2]
+ *  This function does not work in-place.
  *
  ********************************************************/
 
@@ -209,11 +209,11 @@ void SIGLIB_FUNC_DECL SMX_Multiply(const SLData_t* SIGLIB_PTR_DECL pSrcMatrix1, 
  * Function: SMX_CreateIdentity
  *
  * Parameters:
- *   SLData_t    *           - Output matrix
- *   const SLArrayIndex_t    - Number of rows and columns
+ *  SLData_t    *          - Output matrix
+ *  const SLArrayIndex_t    - Number of rows and columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Create a square identity matrix.
  *
@@ -229,7 +229,7 @@ void SIGLIB_FUNC_DECL SMX_CreateIdentity(SLData_t* SIGLIB_PTR_DECL pDstMatrix, c
 #  endif
 #endif
 
-  SDA_Clear(pDstMatrix, (SLArrayIndex_t)(RowsAndCols * RowsAndCols));
+  SDA_Zeros(pDstMatrix, (SLArrayIndex_t)(RowsAndCols * RowsAndCols));
 
   for (SLArrayIndex_t i = 0; i < RowsAndCols; i++) {
     *pDstMatrix = SIGLIB_ONE;
@@ -241,22 +241,22 @@ void SIGLIB_FUNC_DECL SMX_CreateIdentity(SLData_t* SIGLIB_PTR_DECL pDstMatrix, c
  * Function: SMX_Inverse2x2
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   SLData_t *              - Destination matrix pointer
+ *  const SLData_t *       - Source matrix pointer
+ *  SLData_t *             - Destination matrix pointer
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description: Invert a 2x2 square matrix
- *   if A = |a b| then A^-1 = 1 / (ad - bc) | d -b|
- *          |c d|                           |-c  a|
+ *  if A = |a b| then A^-1 = 1 / (ad - bc) | d -b|
+ *         |c d|                           |-c  a|
  *
  * Notes:
- *   This function does not work in-place.
+ *  This function does not work in-place.
  *
- *   This function will return the error code
- *   SIGLIB_ERROR if the matrix is non-invertable.
- *   I.E. singular.
+ *  This function will return the error code
+ *  SIGLIB_ERROR if the matrix is non-invertable.
+ *  I.E. singular.
  *
  ********************************************************/
 
@@ -282,23 +282,23 @@ SLError_t SIGLIB_FUNC_DECL SMX_Inverse2x2(const SLData_t* SIGLIB_INPUT_PTR_DECL 
  * Function: SMX_ComplexInverse2x2
  *
  * Parameters:
- *   const SLComplexRect_s *     - Source matrix pointer
- *   SLComplexRect_s *           - Destination matrix pointer
+ *  const SLComplexRect_s *    - Source matrix pointer
+ *  SLComplexRect_s *          - Destination matrix pointer
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description: Invert a 2x2 square matrix of complex
- *   numbers.
- *   if A = |a b| then A^-1 = 1 / (ad - bc) | d -b|
- *          |c d|                           |-c  a|
+ *  numbers.
+ *  if A = |a b| then A^-1 = 1 / (ad - bc) | d -b|
+ *         |c d|                           |-c  a|
  *
  * Notes:
- *   This function does not work in-place.
+ *  This function does not work in-place.
  *
- *   This function will return the error code
- *   SIGLIB_ERROR if the matrix is non-invertable.
- *   I.E. singular.
+ *  This function will return the error code
+ *  SIGLIB_ERROR if the matrix is non-invertable.
+ *  I.E. singular.
  *
  ********************************************************/
 
@@ -345,23 +345,23 @@ SLError_t SIGLIB_FUNC_DECL SMX_ComplexInverse2x2(const SLComplexRect_s* SIGLIB_I
  * Function: SMX_Inverse
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   SLData_t *              - Destination matrix pointer
- *   SLData_t *              - Temporary array for source
- *   SLData_t *              - Index substitution array
- *   SLArrayIndex_t *        - Row interchange indices
- *   SLData_t *              - Scaling factor array
- *   const SLArrayIndex_t    - Number of rows and columns
+ *  const SLData_t *       - Source matrix pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  SLData_t *             - Temporary array for source
+ *  SLData_t *             - Index substitution array
+ *  SLArrayIndex_t *       - Row interchange indices
+ *  SLData_t *             - Scaling factor array
+ *  const SLArrayIndex_t    - Number of rows and columns
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description: Invert a square matrix
  *
  * Notes:
- *   This function will return the error code
- *   SIGLIB_ERROR if the matrix is non-invertable.
- *   I.E. singular.
+ *  This function will return the error code
+ *  SIGLIB_ERROR if the matrix is non-invertable.
+ *  I.E. singular.
  *
  ********************************************************/
 
@@ -380,7 +380,7 @@ SLError_t SIGLIB_FUNC_DECL SMX_Inverse(const SLData_t* SIGLIB_PTR_DECL pSrcMatri
   }
 
   for (SLArrayIndex_t i = 0; i < RowsAndCols; i++) {    // Calculate the inverse of the input on per-column basis
-    SDA_Clear(pSubstituteIndex, RowsAndCols);           // Set a '1' in appropriate row
+    SDA_Zeros(pSubstituteIndex, RowsAndCols);           // Set a '1' in appropriate row
     *(pSubstituteIndex + i) = SIGLIB_ONE;
     SMX_LuSolve(pTempSourceArray, pSubstituteIndex, pRowInterchangeIndex,
                 RowsAndCols);    // Back substitute column
@@ -395,24 +395,24 @@ SLError_t SIGLIB_FUNC_DECL SMX_Inverse(const SLData_t* SIGLIB_PTR_DECL pSrcMatri
  * Function: SMX_LuDecompose
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   SLArrayIndex_t *        - Index matrix pointer
- *   SLData_t *              - Scaling factor array
- *   const SLArrayIndex_t    - Number of rows and columns
+ *  const SLData_t *       - Source matrix pointer
+ *  SLArrayIndex_t *       - Index matrix pointer
+ *  SLData_t *             - Scaling factor array
+ *  const SLArrayIndex_t    - Number of rows and columns
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description: Perform LU decomposition on a square matrix
  *
  * Notes:
- *   The data in the source matrix will be destroyed.
+ *  The data in the source matrix will be destroyed.
  *
- *   This function will return the error code
- *   SIGLIB_ERROR if the matrix is singular.
+ *  This function will return the error code
+ *  SIGLIB_ERROR if the matrix is singular.
  *
- *   Scaled partial pivoting is used I.E. only rows are
- *   interchanged.
+ *  Scaled partial pivoting is used I.E. only rows are
+ *  interchanged.
  *
  ********************************************************/
 
@@ -504,21 +504,21 @@ SLError_t SIGLIB_FUNC_DECL SMX_LuDecompose(SLData_t* SIGLIB_PTR_DECL pSrcMatrix,
  * Function: SMX_LuSolve
  *
  * Parameters:
- *   const SLData_t *        - Interchanged LU decomposed matrix pointer
- *   SLData_t *              - Source and inverse matrix pointer
- *   SLArrayIndex_t *        - Row interchange matrix pointer
- *   const SLArrayIndex_t    - Number of rows and columns
+ *  const SLData_t *       - Interchanged LU decomposed matrix pointer
+ *  SLData_t *             - Source and inverse matrix pointer
+ *  SLArrayIndex_t *       - Row interchange matrix pointer
+ *  const SLArrayIndex_t    - Number of rows and columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform forward and backward substitution
- *   on a square interchanged matrix, following LU
- *   decomposition.
+ *  on a square interchanged matrix, following LU
+ *  decomposition.
  *
  * Notes:
- *   This function accepts an LU array with interchanged
- *   rows, as indicated in the row interchange index matrix.
+ *  This function accepts an LU array with interchanged
+ *  rows, as indicated in the row interchange index matrix.
  *
  ********************************************************/
 
@@ -555,17 +555,17 @@ void SIGLIB_FUNC_DECL SMX_LuSolve(const SLData_t* SIGLIB_PTR_DECL pLUArray, SLDa
  * Function: SMX_CholeskyDecompose
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   SLData_t *              - Destination matrix pointer
- *   const SLArrayIndex_t    - Number of rows and columns
+ *  const SLData_t *       - Source matrix pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  const SLArrayIndex_t    - Number of rows and columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform Cholesky decomposition on a square matrix
  *
  * Notes:
- *   This function works in-place and not-in-place.
+ *  This function works in-place and not-in-place.
  *
  ********************************************************/
 
@@ -598,21 +598,21 @@ void SIGLIB_FUNC_DECL SMX_CholeskyDecompose(const SLData_t* SIGLIB_PTR_DECL pSrc
  * Function: SMX_Determinant
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   SLData_t *              - Temporary array for source
- *   SLArrayIndex_t *        - Row interchange indices
- *   SLData_t *              - Scaling factor array
- *   const SLArrayIndex_t    - Number of rows and columns
+ *  const SLData_t *       - Source matrix pointer
+ *  SLData_t *             - Temporary array for source
+ *  SLArrayIndex_t *       - Row interchange indices
+ *  SLData_t *             - Scaling factor array
+ *  const SLArrayIndex_t    - Number of rows and columns
  *
  * Return value:
- *   SLData_t Determinant    - Matrix determinant
+ *  SLData_t Determinant    - Matrix determinant
  *
  * Description: Returns the determinant of a square matrix
  *
  * Notes:
- *   This function will NOT return an error code
- *   if the matrix is non-invertable (I.E. singular)
- *   or if there is a memory allocation error.
+ *  This function will NOT return an error code
+ *  if the matrix is non-invertable (I.E. singular)
+ *  or if there is a memory allocation error.
  *
  ********************************************************/
 
@@ -634,18 +634,18 @@ SLData_t SIGLIB_FUNC_DECL SMX_Determinant(const SLData_t* SIGLIB_PTR_DECL pSrcMa
  * Function: SMX_LuDeterminant
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   const SLArrayIndex_t *  - Index matrix pointer
- *   const SLArrayIndex_t    - Number of rows and columns
+ *  const SLData_t *       - Source matrix pointer
+ *  const SLArrayIndex_t *  - Index matrix pointer
+ *  const SLArrayIndex_t    - Number of rows and columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Return the determinant of the source matrix.
  *
  * Notes:
- *   This function accepts an LU array with interchanged
- *   rows, as indicated in the row interchange index array.
+ *  This function accepts an LU array with interchanged
+ *  rows, as indicated in the row interchange index array.
  *
  ********************************************************/
 
@@ -671,18 +671,18 @@ SLData_t SIGLIB_FUNC_DECL SMX_LuDeterminant(const SLData_t* SIGLIB_PTR_DECL pLUA
  * Function: SMX_RotateClockwise
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   SLData_t *              - Destination matrix pointer
- *   const SLArrayIndex_t    - Number of rows
- *   const SLArrayIndex_t    - Number of columns
+ *  const SLData_t *       - Source matrix pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  const SLArrayIndex_t    - Number of rows
+ *  const SLArrayIndex_t    - Number of columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Rotate the matrix clockwise.
  *
  * Notes:
- *   This function does not work in-place.
+ *  This function does not work in-place.
  *
  ********************************************************/
 
@@ -707,18 +707,18 @@ void SIGLIB_FUNC_DECL SMX_RotateClockwise(const SLData_t* SIGLIB_PTR_DECL pSrcMa
  * Function: SMX_RotateAntiClockwise
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   SLData_t *              - Destination matrix pointer
- *   const SLArrayIndex_t    - Number of rows
- *   const SLArrayIndex_t    - Number of columns
+ *  const SLData_t *       - Source matrix pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  const SLArrayIndex_t    - Number of rows
+ *  const SLArrayIndex_t    - Number of columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Rotate the matrix anti-clockwise.
  *
  * Notes:
- *   This function does not work in-place.
+ *  This function does not work in-place.
  *
  ********************************************************/
 
@@ -743,16 +743,16 @@ void SIGLIB_FUNC_DECL SMX_RotateAntiClockwise(const SLData_t* SIGLIB_PTR_DECL pS
  * Function: SMX_Reflect
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   SLData_t *              - Destination matrix pointer
- *   const SLArrayIndex_t    - Number of rows
- *   const SLArrayIndex_t    - Number of columns
+ *  const SLData_t *       - Source matrix pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  const SLArrayIndex_t    - Number of rows
+ *  const SLArrayIndex_t    - Number of columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Reflect the matrix about the central
- *   vertical axis.
+ *  vertical axis.
  *
  * Notes:
  *
@@ -785,16 +785,16 @@ void SIGLIB_FUNC_DECL SMX_Reflect(const SLData_t* SIGLIB_PTR_DECL pSrcMatrix, SL
  * Function: SMX_Flip
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   SLData_t *              - Destination matrix pointer
- *   const SLArrayIndex_t    - Number of rows
- *   const SLArrayIndex_t    - Number of columns
+ *  const SLData_t *       - Source matrix pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  const SLArrayIndex_t    - Number of rows
+ *  const SLArrayIndex_t    - Number of columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Flip the matrix about the central
- *   horizontal axis.
+ *  horizontal axis.
  *
  * Notes:
  *
@@ -827,21 +827,21 @@ void SIGLIB_FUNC_DECL SMX_Flip(const SLData_t* SIGLIB_PTR_DECL pSrcMatrix, SLDat
  * Function: SMX_InsertRow
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   const SLArrayIndex_t *  - Row source data pointer
- *   SLData_t *              - Destination matrix pointer
- *   const SLArrayIndex_t    - Row number to insert
- *   const SLArrayIndex_t    - Number of rows
- *   const SLArrayIndex_t    - Number of columns
+ *  const SLData_t *       - Source matrix pointer
+ *  const SLArrayIndex_t *  - Row source data pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  const SLArrayIndex_t    - Row number to insert
+ *  const SLArrayIndex_t    - Number of rows
+ *  const SLArrayIndex_t    - Number of columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Insert the new data into the selected
- *   row.
+ *  row.
  *
  * Notes: This function overwrites the data in the
- *   selected row in the matrix.
+ *  selected row in the matrix.
  *
  ********************************************************/
 
@@ -873,13 +873,13 @@ void SIGLIB_FUNC_DECL SMX_InsertRow(const SLData_t* SIGLIB_PTR_DECL pSrcMatrix, 
  * Function: SMX_ExtractRow
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   SLData_t *              - Destination matrix pointer
- *   const SLArrayIndex_t    - Row number to extract
- *   const SLArrayIndex_t    - Number of columns
+ *  const SLData_t *       - Source matrix pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  const SLArrayIndex_t    - Row number to extract
+ *  const SLArrayIndex_t    - Number of columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Extract the selected row from the matrix.
  *
@@ -910,21 +910,21 @@ void SIGLIB_FUNC_DECL SMX_ExtractRow(const SLData_t* SIGLIB_PTR_DECL pSrcMatrix,
  * Function: SMX_InsertColumn
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   const SLArrayIndex_t *  - Column source data pointer
- *   SLData_t *              - Destination matrix pointer
- *   const SLArrayIndex_t    - Column number to insert
- *   const SLArrayIndex_t    - Number of rows
- *   const SLArrayIndex_t    - Number of columns
+ *  const SLData_t *       - Source matrix pointer
+ *  const SLArrayIndex_t *  - Column source data pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  const SLArrayIndex_t    - Column number to insert
+ *  const SLArrayIndex_t    - Number of rows
+ *  const SLArrayIndex_t    - Number of columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Insert the new data into the selected
- *   column.
+ *  column.
  *
  * Notes: This function overwrites the data in the
- *   selected column in the matrix
+ *  selected column in the matrix
  *
  ********************************************************/
 
@@ -957,14 +957,14 @@ void SIGLIB_FUNC_DECL SMX_InsertColumn(const SLData_t* SIGLIB_PTR_DECL pSrcMatri
  * Function: SMX_ExtractColumn
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   SLData_t *              - Destination matrix pointer
- *   const SLArrayIndex_t    - Column number to extract
- *   const SLArrayIndex_t    - Number of rows
- *   const SLArrayIndex_t    - Number of columns
+ *  const SLData_t *       - Source matrix pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  const SLArrayIndex_t    - Column number to extract
+ *  const SLArrayIndex_t    - Number of rows
+ *  const SLArrayIndex_t    - Number of columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Extract the selected column from the matrix.
  *
@@ -996,23 +996,23 @@ void SIGLIB_FUNC_DECL SMX_ExtractColumn(const SLData_t* SIGLIB_PTR_DECL pSrcMatr
  * Function: SMX_InsertNewRow
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   const SLArrayIndex_t *  - Row source data pointer
- *   SLData_t *              - Destination matrix pointer
- *   const SLArrayIndex_t    - Row number to insert
- *   const SLArrayIndex_t    - Number of rows
- *   const SLArrayIndex_t    - Number of columns
+ *  const SLData_t *       - Source matrix pointer
+ *  const SLArrayIndex_t *  - Row source data pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  const SLArrayIndex_t    - Row number to insert
+ *  const SLArrayIndex_t    - Number of rows
+ *  const SLArrayIndex_t    - Number of columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: This function creates a new row and inserts
- *   the new data into this row.
+ *  the new data into this row.
  *
  * Notes:
- *   The number of rows specified in the parameter list is
- *   the number of rows in the source matrix.
- *   This function does not work in-place.
+ *  The number of rows specified in the parameter list is
+ *  the number of rows in the source matrix.
+ *  This function does not work in-place.
  *
  ********************************************************/
 
@@ -1048,21 +1048,21 @@ void SIGLIB_FUNC_DECL SMX_InsertNewRow(const SLData_t* SIGLIB_PTR_DECL pSrcMatri
  * Function: SMX_DeleteOldRow
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   SLData_t *              - Destination matrix pointer
- *   const SLArrayIndex_t    - Row number to delete
- *   const SLArrayIndex_t    - Number of rows
- *   const SLArrayIndex_t    - Number of columns
+ *  const SLData_t *       - Source matrix pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  const SLArrayIndex_t    - Row number to delete
+ *  const SLArrayIndex_t    - Number of rows
+ *  const SLArrayIndex_t    - Number of columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: This function deletes the complete row
- *   from the matrix.
+ *  from the matrix.
  *
  * Notes: The number of rows specified in the parameter
- *   list is the number of rows in the source matrix.
- *   This function works in-place.
+ *  list is the number of rows in the source matrix.
+ *  This function works in-place.
  *
  ********************************************************/
 
@@ -1092,23 +1092,23 @@ void SIGLIB_FUNC_DECL SMX_DeleteOldRow(const SLData_t* SIGLIB_PTR_DECL pSrcMatri
  * Function: SMX_InsertNewColumn
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   const SLArrayIndex_t *  - Column source data pointer
- *   SLData_t *              - Destination matrix pointer
- *   const SLArrayIndex_t    - Row number to insert
- *   const SLArrayIndex_t    - Number of rows
- *   const SLArrayIndex_t    - Number of columns
+ *  const SLData_t *       - Source matrix pointer
+ *  const SLArrayIndex_t *  - Column source data pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  const SLArrayIndex_t    - Row number to insert
+ *  const SLArrayIndex_t    - Number of rows
+ *  const SLArrayIndex_t    - Number of columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: This function creates a new column and
- *   inserts the new data into this column.
+ *  inserts the new data into this column.
  *
  * Notes:
- *   The number of columns specified in the parameter list
- *   is the number of columns in the source matrix.
- *   This function does not work in-place.
+ *  The number of columns specified in the parameter list
+ *  is the number of columns in the source matrix.
+ *  This function does not work in-place.
  *
  ********************************************************/
 
@@ -1144,21 +1144,21 @@ void SIGLIB_FUNC_DECL SMX_InsertNewColumn(const SLData_t* SIGLIB_PTR_DECL pSrcMa
  * Function: SMX_DeleteOldColumn
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   SLData_t *              - Destination matrix pointer
- *   const SLArrayIndex_t    - Column number to delete
- *   const SLArrayIndex_t    - Number of rows
- *   const SLArrayIndex_t    - Number of columns
+ *  const SLData_t *       - Source matrix pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  const SLArrayIndex_t    - Column number to delete
+ *  const SLArrayIndex_t    - Number of rows
+ *  const SLArrayIndex_t    - Number of columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: This function deletes the complete column
- *   from the matrix.
+ *  from the matrix.
  *
  * Notes: The number of columns specified in the parameter
- *   list is the number of columns in the source matrix.
- *   This function works in-place.
+ *  list is the number of columns in the source matrix.
+ *  This function works in-place.
  *
  ********************************************************/
 
@@ -1198,24 +1198,24 @@ void SIGLIB_FUNC_DECL SMX_DeleteOldColumn(const SLData_t* SIGLIB_PTR_DECL pSrcMa
  * Function: SMX_InsertRegion
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   const SLArrayIndex_t *  - New matrix source data pointer
- *   SLData_t *              - Destination matrix pointer
- *   const SLArrayIndex_t    - Row number to insert
- *   const SLArrayIndex_t    - Column number to insert
- *   const SLArrayIndex_t    - Number of rows in the region
- *   const SLArrayIndex_t    - Number of columns in the region
- *   const SLArrayIndex_t    - Number of rows in the source
- *   const SLArrayIndex_t    - Number of columns in the source
+ *  const SLData_t *       - Source matrix pointer
+ *  const SLArrayIndex_t *  - New matrix source data pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  const SLArrayIndex_t    - Row number to insert
+ *  const SLArrayIndex_t    - Column number to insert
+ *  const SLArrayIndex_t    - Number of rows in the region
+ *  const SLArrayIndex_t    - Number of columns in the region
+ *  const SLArrayIndex_t    - Number of rows in the source
+ *  const SLArrayIndex_t    - Number of columns in the source
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Insert the new matrix data into the
- *   source matrix.
+ *  source matrix.
  *
  * Notes: This function overwrites the data in the
- *   original matrix
+ *  original matrix
  *
  ********************************************************/
 
@@ -1251,19 +1251,19 @@ void SIGLIB_FUNC_DECL SMX_InsertRegion(const SLData_t* SIGLIB_PTR_DECL pSrcMatri
  * Function: SMX_ExtractRegion
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   SLData_t *              - Destination matrix pointer
- *   const SLArrayIndex_t    - Row number to extract
- *   const SLArrayIndex_t    - Column number to extract
- *   const SLArrayIndex_t    - Number of rows in the region
- *   const SLArrayIndex_t    - Number of columns in the region
- *   const SLArrayIndex_t    - Number of columns in the source
+ *  const SLData_t *       - Source matrix pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  const SLArrayIndex_t    - Row number to extract
+ *  const SLArrayIndex_t    - Column number to extract
+ *  const SLArrayIndex_t    - Number of rows in the region
+ *  const SLArrayIndex_t    - Number of columns in the region
+ *  const SLArrayIndex_t    - Number of columns in the source
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Extract the specified matrix from the
- *   source matrix.
+ *  source matrix.
  *
  * Notes:
  *
@@ -1294,19 +1294,19 @@ void SIGLIB_FUNC_DECL SMX_ExtractRegion(const SLData_t* SIGLIB_PTR_DECL pSrcMatr
  * Function: SMX_InsertDiagonal
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   const SLArrayIndex_t *  - Diagonal source data pointer
- *   SLData_t *              - Destination matrix pointer
- *   const SLArrayIndex_t    - Dimension of matrix
+ *  const SLData_t *       - Source matrix pointer
+ *  const SLArrayIndex_t *  - Diagonal source data pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  const SLArrayIndex_t    - Dimension of matrix
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Insert the new data into the diagonal
- *   of the matrix.
+ *  of the matrix.
  *
  * Notes: The matrix must be square
- *   This function overwrites the data in the original matrix
+ *  This function overwrites the data in the original matrix
  *
  ********************************************************/
 
@@ -1337,12 +1337,12 @@ void SIGLIB_FUNC_DECL SMX_InsertDiagonal(const SLData_t* SIGLIB_PTR_DECL pSrcMat
  * Function: SMX_ExtractDiagonal
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   SLData_t *              - Destination matrix pointer
- *   const SLArrayIndex_t    - Dimension of matrix
+ *  const SLData_t *       - Source matrix pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  const SLArrayIndex_t    - Dimension of matrix
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Extract the diagonal of the matrix.
  *
@@ -1371,15 +1371,15 @@ void SIGLIB_FUNC_DECL SMX_ExtractDiagonal(const SLData_t* SIGLIB_PTR_DECL pSrcMa
  * Function: SMX_SwapRows
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   SLData_t *              - Destination matrix pointer
- *   const SLArrayIndex_t    - Row #1 to swap
- *   const SLArrayIndex_t    - Row #2 to swap
- *   const SLArrayIndex_t    - Number of rows
- *   const SLArrayIndex_t    - Number of columns
+ *  const SLData_t *       - Source matrix pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  const SLArrayIndex_t    - Row #1 to swap
+ *  const SLArrayIndex_t    - Row #2 to swap
+ *  const SLArrayIndex_t    - Number of rows
+ *  const SLArrayIndex_t    - Number of columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Swap the data in the two rows.
  *
@@ -1417,15 +1417,15 @@ void SIGLIB_FUNC_DECL SMX_SwapRows(const SLData_t* SIGLIB_PTR_DECL pSrcMatrix, S
  * Function: SMX_SwapColumns
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   SLData_t *              - Destination matrix pointer
- *   const SLArrayIndex_t    - Column #1 to swap
- *   const SLArrayIndex_t    - Column #2 to swap
- *   const SLArrayIndex_t    - Number of rows
- *   const SLArrayIndex_t    - Number of columns
+ *  const SLData_t *       - Source matrix pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  const SLArrayIndex_t    - Column #1 to swap
+ *  const SLArrayIndex_t    - Column #2 to swap
+ *  const SLArrayIndex_t    - Number of rows
+ *  const SLArrayIndex_t    - Number of columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Swap the data in the two columns.
  *
@@ -1462,16 +1462,16 @@ void SIGLIB_FUNC_DECL SMX_SwapColumns(const SLData_t* SIGLIB_PTR_DECL pSrcMatrix
  * Function: SMX_Sum
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   SLData_t *              - Destination matrix pointer
- *   const SLArrayIndex_t    - Number of rows
- *   const SLArrayIndex_t    - Number of columns
+ *  const SLData_t *       - Source matrix pointer
+ *  SLData_t *             - Destination matrix pointer
+ *  const SLArrayIndex_t    - Number of rows
+ *  const SLArrayIndex_t    - Number of columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Sum all values in each column so the
- *   number of results equals the number of columns.
+ *  number of results equals the number of columns.
  *
  * Notes:
  *
@@ -1504,24 +1504,24 @@ void SIGLIB_FUNC_DECL SMX_Sum(const SLData_t* SIGLIB_PTR_DECL pSrcMatrix, SLData
  * Function: SMX_ShuffleColumns
  *
  * Parameters:
- *   const SLData_t *        - Pointer to source array
- *   SLArrayIndex_t *        - Pointer to destination array
- *   SLArrayIndex_t *        - Temporary array pointer #1
- *   SLArrayIndex_t *        - Temporary array pointer #2
- *   const SLArrayIndex_t    - Number of rows
- *   const SLArrayIndex_t    - Number of columns
+ *  const SLData_t *       - Pointer to source array
+ *  SLArrayIndex_t *       - Pointer to destination array
+ *  SLArrayIndex_t *       - Temporary array pointer #1
+ *  SLArrayIndex_t *       - Temporary array pointer #2
+ *  const SLArrayIndex_t    - Number of rows
+ *  const SLArrayIndex_t    - Number of columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Shuffle the order of the columns in
- *   the matrix.
+ *  the matrix.
  *
  * Notes:
- *   As the number of columns approaches RAND_MAX, the
- *   result becomes less random.
- *   The solution is to use a better random number
- *   generator or call the function multiple times.
+ *  As the number of columns approaches RAND_MAX, the
+ *  result becomes less random.
+ *  The solution is to use a better random number
+ *  generator or call the function multiple times.
  *
  ********************************************************/
 
@@ -1547,23 +1547,23 @@ void SIGLIB_FUNC_DECL SMX_ShuffleColumns(const SLData_t* SIGLIB_PTR_DECL pSrc, S
  * Function: SMX_ShuffleRows
  *
  * Parameters:
- *   const SLData_t *        - Pointer to source array
- *   SLArrayIndex_t *        - Pointer to destination array
- *   SLArrayIndex_t *        - Temporary array pointer
- *   const SLArrayIndex_t    - Number of rows
- *   const SLArrayIndex_t    - Number of columns
+ *  const SLData_t *       - Pointer to source array
+ *  SLArrayIndex_t *       - Pointer to destination array
+ *  SLArrayIndex_t *       - Temporary array pointer
+ *  const SLArrayIndex_t    - Number of rows
+ *  const SLArrayIndex_t    - Number of columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Shuffle the order of the rows in
- *   the matrix.
+ *  the matrix.
  *
  * Notes:
- *   As the number of rows approaches RAND_MAX, the
- *   result becomes less random.
- *   The solution is to use a better random number
- *   generator or call the function multiple times.
+ *  As the number of rows approaches RAND_MAX, the
+ *  result becomes less random.
+ *  The solution is to use a better random number
+ *  generator or call the function multiple times.
  *
  ********************************************************/
 
@@ -1599,13 +1599,13 @@ void SIGLIB_FUNC_DECL SMX_ShuffleRows(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
  * Function: SMX_ExtractCategoricalColumn
  *
  * Parameters:
- *   const SLData_t *        - Source matrix pointer
- *   SLArrayIndex_t *        - Destination matrix pointer
- *   const SLArrayIndex_t    - Number of rows
- *   const SLArrayIndex_t    - Number of columns
+ *  const SLData_t *       - Source matrix pointer
+ *  SLArrayIndex_t *       - Destination matrix pointer
+ *  const SLArrayIndex_t    - Number of rows
+ *  const SLArrayIndex_t    - Number of columns
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Extract the categorical column from the matrix.
  * The categorical column must be the last column in the matrix.

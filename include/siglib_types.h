@@ -323,6 +323,12 @@ enum SLActivationType_t {    // Activation function type
   SIGLIB_ACTIVATION_TYPE_TANH
 };
 
+enum SLFftConvolveModeType_t {    // Activation function type
+  SIGLIB_FFT_CONVOLVE_MODE_FULL = 1,
+  SIGLIB_FFT_CONVOLVE_MODE_VALID,
+  SIGLIB_FFT_CONVOLVE_MODE_SAME
+};
+
 #  endif    // End of #if _SIGLIB_TYPES_H
 
 #endif    // End of #if SIGLIB

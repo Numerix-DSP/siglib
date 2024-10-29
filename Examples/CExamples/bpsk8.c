@@ -116,7 +116,7 @@ int main(void)
   TxStringPtr = TxString;
   RxStringPtr = RxString;
 
-  SDA_Clear(pData,             // Pointer to destination array
+  SDA_Zeros(pData,             // Pointer to destination array
             SAMPLE_LENGTH);    // Dataset length
 
 #if DISPLAY_GRAPHICS
@@ -134,7 +134,7 @@ int main(void)
 #endif
 #if DISPLAY_DEBUG_INFO
   DebugArrayOffset = 0;
-  SDA_Clear(DebugArray,        // Pointer to destination array
+  SDA_Zeros(DebugArray,        // Pointer to destination array
             SAMPLE_LENGTH);    // Dataset length
 #endif
 #if DEBUG_LOG_FILE

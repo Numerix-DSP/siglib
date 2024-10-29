@@ -52,13 +52,13 @@ typedef union {    // SigLib data type to char array union
  * Function: SUF_BinReadData
  *
  * Parameters:
- *   SLData_t *BPtr,             - Data array pointer
- *   FILE *p_ioFile,             - File pointer
- *   const enum SLEndianType_t endianMode,
- *   const SLArrayIndex_t        - arrayLength
+ *  SLData_t *BPtr,             - Data array pointer
+ *  FILE *p_ioFile,             - File pointer
+ *  const enum SLEndianType_t endianMode,
+ *  const SLArrayIndex_t        - arrayLength
  *
  * Return value:
- *   SLArrayIndex_t    sampleCount    - Number of samples read
+ *  SLArrayIndex_t    sampleCount    - Number of samples read
  *
  * Description: Read an array of data from a .bin file.
  *
@@ -100,13 +100,13 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_BinReadData(SLData_t* SIGLIB_PTR_DECL BPtr, 
  * Function: SUF_BinWriteData
  *
  * Parameters:
- *   const SLData_t *BPtr,       - Data array pointer
- *   FILE *p_ioFile,             - File pointer
- *   const enum SLEndianType_t endianMode,
- *   const SLArrayIndex_t        - arrayLength
+ *  const SLData_t *BPtr,       - Data array pointer
+ *  FILE *p_ioFile,             - File pointer
+ *  const enum SLEndianType_t endianMode,
+ *  const SLArrayIndex_t        - arrayLength
  *
  * Return value:
- *   Number of samples written.
+ *  Number of samples written.
  *
  * Description: Write an array of data to a .bin file.
  *
@@ -141,14 +141,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_BinWriteData(const SLData_t* SIGLIB_PTR_DECL
  * Function: SUF_BinReadFile
  *
  * Parameters:
- *   SLData_t *BPtr,             - Data array pointer
- *   char *filename,             - File name
- *   const char endianMode,
- *   const SLArrayIndex_t        - arrayLength
+ *  SLData_t *BPtr,             - Data array pointer
+ *  char *filename,             - File name
+ *  const char endianMode,
+ *  const SLArrayIndex_t        - arrayLength
  *
  * Return value:
- *   SLArrayIndex_t sampleCount  - Number of samples read
- *   Returns sampleCount = 0 on error op -1 on file open error
+ *  SLArrayIndex_t sampleCount  - Number of samples read
+ *  Returns sampleCount = 0 on error op -1 on file open error
  *
  * Description: Read an array of data from a .bin file.
  *
@@ -198,14 +198,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_BinReadFile(SLData_t* SIGLIB_PTR_DECL BPtr, 
  * Function: SUF_BinWriteFile
  *
  * Parameters:
- *   const SLData_t *BPtr,       - Data array pointer
- *   char *filename,             - File name
- *   const enum SLEndianType_t endianMode,
- *   const SLArrayIndex_t        - arrayLength
+ *  const SLData_t *BPtr,       - Data array pointer
+ *  char *filename,             - File name
+ *  const enum SLEndianType_t endianMode,
+ *  const SLArrayIndex_t        - arrayLength
  *
  * Return value:
- *   SLArrayIndex_t sampleCount   - Number of samples written
- *   Returns sampleCount = -1 on file open error
+ *  SLArrayIndex_t sampleCount   - Number of samples written
+ *  Returns sampleCount = -1 on file open error
  *
  * Description: Write an array of data to a .bin file.
  *
@@ -253,14 +253,14 @@ typedef union {    // SigLib fixed point data type to char array union
  * Function: SUF_PCMReadData
  *
  * Parameters:
- *   SLData_t *BPtr,             - Data array pointer
- *   FILE *p_ioFile,             - File pointer
- *   const enum SLEndianType_t endianMode,
- *   const char wordLength       - Word length
- *   const SLArrayIndex_t        - arrayLength
+ *  SLData_t *BPtr,             - Data array pointer
+ *  FILE *p_ioFile,             - File pointer
+ *  const enum SLEndianType_t endianMode,
+ *  const char wordLength       - Word length
+ *  const SLArrayIndex_t        - arrayLength
  *
  * Return value:
- *   SLArrayIndex_t    sampleCount    - Number of samples read
+ *  SLArrayIndex_t    sampleCount    - Number of samples read
  *
  * Description: Read an array of data from a .pcm file.
  *
@@ -304,14 +304,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMReadData(SLData_t* SIGLIB_PTR_DECL BPtr, 
  * Function: SUF_PCMWriteData
  *
  * Parameters:
- *   const SLData_t *BPtr,       - Data array pointer
- *   FILE *p_ioFile,             - File pointer
- *   const enum SLEndianType_t endianMode,
- *   const char wordLength       - Word length
- *   const SLArrayIndex_t        - arrayLength
+ *  const SLData_t *BPtr,       - Data array pointer
+ *  FILE *p_ioFile,             - File pointer
+ *  const enum SLEndianType_t endianMode,
+ *  const char wordLength       - Word length
+ *  const SLArrayIndex_t        - arrayLength
  *
  * Return value:
- *   Number of samples written.
+ *  Number of samples written.
  *
  * Description: Write an array of data to a .pcm file.
  *
@@ -348,14 +348,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMWriteData(const SLData_t* SIGLIB_PTR_DECL
  * Function: SUF_PCMReadFile
  *
  * Parameters:
- *   SLData_t *BPtr,               - Data array pointer
- *   const char *filename          - File name
- *   const enum SLEndianType_t endianMode,
- *   const char wordLength         - Word length
- *   const SLArrayIndex_t          - arrayLength
+ *  SLData_t *BPtr,               - Data array pointer
+ *  const char *filename          - File name
+ *  const enum SLEndianType_t endianMode,
+ *  const char wordLength         - Word length
+ *  const SLArrayIndex_t          - arrayLength
  *
  * Return value:
- *   SLArrayIndex_t    sampleCount    - Number of samples read
+ *  SLArrayIndex_t    sampleCount    - Number of samples read
  *
  * Description: Read an array of data from a .pcm file.
  *
@@ -408,14 +408,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMReadFile(SLData_t* SIGLIB_PTR_DECL BPtr, 
  * Function: SUF_PCMWriteFile
  *
  * Parameters:
- *   const SLData_t *BPtr,         - Data array pointer
- *   const char *filename          - File name
- *   const enum SLEndianType_t endianMode,
- *   const char wordLength         - Word length
- *   const SLArrayIndex_t          - arrayLength
+ *  const SLData_t *BPtr,         - Data array pointer
+ *  const char *filename          - File name
+ *  const enum SLEndianType_t endianMode,
+ *  const char wordLength         - Word length
+ *  const SLArrayIndex_t          - arrayLength
  *
  * Return value:
- *   Number of samples written.
+ *  Number of samples written.
  *
  * Description: Write an array of data to a .pcm file.
  *
@@ -460,15 +460,15 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMWriteFile(const SLData_t* SIGLIB_PTR_DECL
  * Function: SUF_CsvReadData
  *
  * Parameters:
- *   SLData_t *BPtr,             - Output Data array pointer
- *   FILE *p_ioFile,                 - File pointer
- *   const SLData_t sampleRate,  - Sample rate
- *   const SLData_t numColumns,  - Number of columns (1 or 2)
- *   const SLArrayIndex_t        - Array Length
+ *  SLData_t *BPtr,             - Output Data array pointer
+ *  FILE *p_ioFile,                 - File pointer
+ *  const SLData_t sampleRate,  - Sample rate
+ *  const SLData_t numColumns,  - Number of columns (1 or 2)
+ *  const SLArrayIndex_t        - Array Length
  *
  * Return value:
- *   SLArrayIndex_t sampleCount    - Number of samples read
- *   Returns sampleCount = 0 on error
+ *  SLArrayIndex_t sampleCount    - Number of samples read
+ *  Returns sampleCount = 0 on error
  *
  * Description: Read an array of data from a .csv file.
  *
@@ -524,15 +524,15 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadData(SLData_t* SIGLIB_PTR_DECL BPtr, 
  * Function: SUF_CsvWriteData
  *
  * Parameters:
- *   const SLData_t *BPtr,           - Data array pointer
- *   FILE *p_ioFile,                     - File pointer
- *   const SLData_t sampleRate,      - Sample rate
- *   const SLData_t sampleIndex,     - Sample index
- *   const SLData_t numColumns,      - Number of columns (1 or 2)
- *   const SLArrayIndex_t            - arrayLength
+ *  const SLData_t *BPtr,           - Data array pointer
+ *  FILE *p_ioFile,                     - File pointer
+ *  const SLData_t sampleRate,      - Sample rate
+ *  const SLData_t sampleIndex,     - Sample index
+ *  const SLData_t numColumns,      - Number of columns (1 or 2)
+ *  const SLArrayIndex_t            - arrayLength
  *
  * Return value:
- *   SLArrayIndex_t sampleCount   - Number of samples written
+ *  SLArrayIndex_t sampleCount   - Number of samples written
  *
  * Description: Write an array of data to a .csv file.
  *
@@ -564,15 +564,15 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvWriteData(const SLData_t* SIGLIB_PTR_DECL
  * Function: SUF_CsvReadFile
  *
  * Parameters:
- *   SLData_t *BPtr,             - Output Data array pointer
- *   char *filename,             - File name
- *   const SLData_t sampleRate,  - Sample rate
- *   const SLData_t numColumns,  - Number of columns (1 or 2)
- *   const SLArrayIndex_t        - Array Length
+ *  SLData_t *BPtr,             - Output Data array pointer
+ *  char *filename,             - File name
+ *  const SLData_t sampleRate,  - Sample rate
+ *  const SLData_t numColumns,  - Number of columns (1 or 2)
+ *  const SLArrayIndex_t        - Array Length
  *
  * Return value:
- *   SLArrayIndex_t sampleCount    - Number of samples read
- *   Returns sampleCount = 0 on error op -1 on file open error
+ *  SLArrayIndex_t sampleCount    - Number of samples read
+ *  Returns sampleCount = 0 on error op -1 on file open error
  *
  * Description: Read a complete .csv file.
  *
@@ -655,16 +655,16 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadFile(SLData_t* SIGLIB_PTR_DECL BPtr, 
  * Function: SUF_CsvWriteFile
  *
  * Parameters:
- *   const SLData_t *BPtr,           - Data array pointer
- *   char *filename,                 - File name
- *   const SLData_t sampleRate,      - Sample rate
- *   const SLData_t sampleIndex,     - Sample index
- *   const SLData_t numColumns,      - Number of columns (1 or 2)
- *   const SLArrayIndex_t            - arrayLength
+ *  const SLData_t *BPtr,           - Data array pointer
+ *  char *filename,                 - File name
+ *  const SLData_t sampleRate,      - Sample rate
+ *  const SLData_t sampleIndex,     - Sample index
+ *  const SLData_t numColumns,      - Number of columns (1 or 2)
+ *  const SLArrayIndex_t            - arrayLength
  *
  * Return value:
- *   SLArrayIndex_t sampleCount   - Number of samples written
- *   Returns sampleCount = -1 on file open error
+ *  SLArrayIndex_t sampleCount   - Number of samples written
+ *  Returns sampleCount = -1 on file open error
  *
  * Description: Write a complete .csv file.
  *
@@ -703,19 +703,19 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvWriteFile(const SLData_t* SIGLIB_PTR_DECL
  * Function: SUF_CsvReadMatrix
  *
  * Parameters:
- *   SLData_t *BPtr,                 - Output Data array pointer
- *   FILE *p_ioFile,                 - File pointer
- *   enum SLFileReadFirstRowFlag_t   - firstRowFlag (Keep or ignore)
- *   SLArrayIndex_t *nRows,          - Number of rows
- *   SLArrayIndex_t *nCols)          - Number of columns
+ *  SLData_t *BPtr,                 - Output Data array pointer
+ *  FILE *p_ioFile,                 - File pointer
+ *  enum SLFileReadFirstRowFlag_t   - firstRowFlag (Keep or ignore)
+ *  SLArrayIndex_t *nRows,          - Number of rows
+ *  SLArrayIndex_t *nCols)          - Number of columns
  *
  * Return value:
- *   SLArrayIndex_t  Number of samples read
- *   Returns 0 on error
+ *  SLArrayIndex_t  Number of samples read
+ *  Returns 0 on error
  *
  * Description: Read a matrix from a .csv file.
- *   Calculates the geometry for the array
- *   Allocates the memory for the array
+ *  Calculates the geometry for the array
+ *  Allocates the memory for the array
  *
  ********************************************************/
 
@@ -795,18 +795,18 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadMatrix(SLData_t** SIGLIB_PTR_DECL BPt
  * Function: SUF_CsvWriteMatrix
  *
  * Parameters:
- *   SLData_t *BPtr,                 - Source data array pointer
- *   FILE *p_ioFile,                 - File pointer
- *   SLArrayIndex_t *nRows,          - Number of rows
- *   SLArrayIndex_t *nCols)          - Number of columns
+ *  SLData_t *BPtr,                 - Source data array pointer
+ *  FILE *p_ioFile,                 - File pointer
+ *  SLArrayIndex_t *nRows,          - Number of rows
+ *  SLArrayIndex_t *nCols)          - Number of columns
  *
  * Return value:
- *   SLArrayIndex_t  Number of samples written
- *   Returns 0 on error
+ *  SLArrayIndex_t  Number of samples written
+ *  Returns 0 on error
  *
  * Description: Read a matrix from a .csv file.
- *   Calculates the geometry for the array
- *   Allocates the memory for the array
+ *  Calculates the geometry for the array
+ *  Allocates the memory for the array
  *
  ********************************************************/
 
@@ -837,13 +837,13 @@ SLArrayIndex_t SUF_CsvWriteMatrix(const SLData_t* BPtr, const char* filename, co
  * Function: SUF_DatReadData
  *
  * Parameters:
- *   SLData_t *BPtr,             - Output Data array pointer
- *   FILE *p_ioFile,                 - File pointer
- *   const SLArrayIndex_t        - arrayLength
+ *  SLData_t *BPtr,             - Output Data array pointer
+ *  FILE *p_ioFile,                 - File pointer
+ *  const SLArrayIndex_t        - arrayLength
  *
  * Return value:
- *   SLArrayIndex_t sampleCount  - Number of samples read
- *   Returns sampleCount = 0 on error
+ *  SLArrayIndex_t sampleCount  - Number of samples read
+ *  Returns sampleCount = 0 on error
  *
  * Description: Read an array of data from a .dat file.
  *
@@ -881,14 +881,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_DatReadData(SLData_t* SIGLIB_PTR_DECL BPtr, 
  * Function: SUF_DatWriteData
  *
  * Parameters:
- *   const SLData_t *BPtr,               - Data array pointer
- *   FILE *p_ioFile,                         - File pointer
- *   const SLData_t sampleRate,          - Sample rate
- *   const SLArrayIndex_t sampleIndex,   - Sample index
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t *BPtr,               - Data array pointer
+ *  FILE *p_ioFile,                         - File pointer
+ *  const SLData_t sampleRate,          - Sample rate
+ *  const SLArrayIndex_t sampleIndex,   - Sample index
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   SLArrayIndex_t sampleCount         - Number of samples written
+ *  SLArrayIndex_t sampleCount         - Number of samples written
  *
  * Description: Write an array of data to a .dat file.
  *
@@ -911,10 +911,10 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_DatWriteData(const SLData_t* SIGLIB_PTR_DECL
  * Function: SUF_DatReadHeader
  *
  * Parameters:
- *   FILE *p_ioFile      - File pointer
+ *  FILE *p_ioFile      - File pointer
  *
  * Return value:
- *   sample rate
+ *  sample rate
  *
  * Description: Read a .dat file header section.
  *
@@ -940,11 +940,11 @@ SLData_t SIGLIB_FUNC_DECL SUF_DatReadHeader(FILE* p_ioFile)
  * Function: SUF_DatWriteHeader
  *
  * Parameters:
- *   FILE *p_ioFile,             - File pointer
- *   const SLData_t          - Sample rate
+ *  FILE *p_ioFile,             - File pointer
+ *  const SLData_t          - Sample rate
  *
  * Return value:
- *   SLArrayIndex_t Error code
+ *  SLArrayIndex_t Error code
  *
  * Description: Write a .dat file header section.
  *
@@ -960,12 +960,12 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_DatWriteHeader(FILE* p_ioFile, const SLData_
  * Function: SUF_SigReadData
  *
  * Parameters:
- *   SLData_t *BPtr, - Data array pointer
- *   FILE *p_ioFile,   - File pointer
- *   const SLArrayIndex_t  arrayLength
+ *  SLData_t *BPtr, - Data array pointer
+ *  FILE *p_ioFile,   - File pointer
+ *  const SLArrayIndex_t  arrayLength
  *
  * Return value:
- *   SLArrayIndex_t    sampleCount    - Number of samples read
+ *  SLArrayIndex_t    sampleCount    - Number of samples read
  *
  * Description: Read an array of data from a file.
  *
@@ -992,12 +992,12 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigReadData(SLData_t* SIGLIB_PTR_DECL BPtr, 
  * Function: SUF_SigWriteData
  *
  * Parameters:
- *   const SLData_t *BPtr,     - Data array pointer
- *   FILE *p_ioFile,               - File pointer
- *   const SLArrayIndex_t    - arrayLength
+ *  const SLData_t *BPtr,     - Data array pointer
+ *  FILE *p_ioFile,               - File pointer
+ *  const SLArrayIndex_t    - arrayLength
  *
  * Return value:
- *   Number of samples written
+ *  Number of samples written
  *
  * Description: Write an array of data to a file.
  *
@@ -1017,11 +1017,11 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigWriteData(const SLData_t* SIGLIB_PTR_DECL
  * Function: SUF_SigReadFile
  *
  * Parameters:
- *   SLData_t *BPtr,         - Output Data array pointer
- *   const char *filename    - File name
+ *  SLData_t *BPtr,         - Output Data array pointer
+ *  const char *filename    - File name
  *
  * Return value:
- *   SLArrayIndex_t    sampleCount    - Number of samples read, -1 for file open
+ *  SLArrayIndex_t    sampleCount    - Number of samples read, -1 for file open
  *error
  *
  * Description: Return the number of samples in the .sig file
@@ -1050,12 +1050,12 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigReadFile(SLData_t* SIGLIB_PTR_DECL BPtr, 
  * Function: SUF_SigWriteFile
  *
  * Parameters:
- *   SLData_t *BPtr,         - Output Data array pointer
- *   const char *filename,   - File name
- *   const SLArrayIndex_t arrayLength
+ *  SLData_t *BPtr,         - Output Data array pointer
+ *  const char *filename,   - File name
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   SLArrayIndex_t          - Number of samples written, -1 for file open error
+ *  SLArrayIndex_t          - Number of samples written, -1 for file open error
  *
  * Description: Write the array to a .sig file
  *
@@ -1080,11 +1080,11 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigWriteFile(const SLData_t* SIGLIB_PTR_DECL
  * Function: SUF_SigCountSamplesInFile
  *
  * Parameters:
- *   const char *filename,   - File name
- *   const SLArrayIndex_t arrayLength
+ *  const char *filename,   - File name
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   SLArrayIndex_t          - Number of samples in file, -1 for file open error
+ *  SLArrayIndex_t          - Number of samples in file, -1 for file open error
  *
  * Description: Return the number of samples in a .sig file
  *
@@ -1120,14 +1120,14 @@ void SIGLIB_FUNC_DECL SUF_WavWriteLong(const SLArrayIndex_t, FILE*);
  * Function: SUF_WavReadData
  *
  * Parameters:
- *   SLData_t *BPtr,                 - Output Data array pointer
- *   FILE *p_ioFile,                     - File pointer
- *   const SLWavFileInfo_s wavInfo,  - WAV file info struct
- *   const SLArrayIndex_t arrayLength
+ *  SLData_t *BPtr,                 - Output Data array pointer
+ *  FILE *p_ioFile,                     - File pointer
+ *  const SLWavFileInfo_s wavInfo,  - WAV file info struct
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   SLArrayIndex_t sampleCount    - Number of samples read
- *   Returns sampleCount = 0 on error
+ *  SLArrayIndex_t sampleCount    - Number of samples read
+ *  Returns sampleCount = 0 on error
  *
  * Description: Read an array of data from a .WAV file.
  *
@@ -1192,13 +1192,13 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadData(SLData_t* SIGLIB_PTR_DECL BPtr, 
  * Function: SUF_WavWriteData
  *
  * Parameters:
- *   const SLData_t *BPtr,           - Data array pointer
- *   FILE *p_ioFile,                     - File pointer
- *   const SLWavFileInfo_s wavInfo,  - WAV file info struct
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t *BPtr,           - Data array pointer
+ *  FILE *p_ioFile,                     - File pointer
+ *  const SLWavFileInfo_s wavInfo,  - WAV file info struct
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   SLArrayIndex_t sampleCount   - Number of samples written
+ *  SLArrayIndex_t sampleCount   - Number of samples written
  *
  * Description: Write an array of data to a .WAV file.
  *
@@ -1230,14 +1230,14 @@ void SIGLIB_FUNC_DECL SUF_WavWriteData(const SLData_t* SIGLIB_PTR_DECL BPtr, FIL
  * Function: SUF_WavReadData16
  *
  * Parameters:
- *   SLData_t *BPtr,                 - Output Data array pointer
- *   FILE *p_ioFile,                     - File pointer
- *   const SLWavFileInfo_s wavInfo,  - WAV file info struct
- *   const SLArrayIndex_t arrayLength
+ *  SLData_t *BPtr,                 - Output Data array pointer
+ *  FILE *p_ioFile,                     - File pointer
+ *  const SLWavFileInfo_s wavInfo,  - WAV file info struct
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   SLArrayIndex_t sampleCount    - Number of samples read
- *   Returns sampleCount = 0 on error
+ *  SLArrayIndex_t sampleCount    - Number of samples read
+ *  Returns sampleCount = 0 on error
  *
  * Description: Read an array of 16 bit data from a .WAV file.
  *
@@ -1289,13 +1289,13 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadData16(short* SIGLIB_PTR_DECL BPtr, F
  * Function: SUF_WavWriteData16
  *
  * Parameters:
- *   const SLData_t *BPtr,           - Data array pointer
- *   FILE *p_ioFile,                     - File pointer
- *   const SLWavFileInfo_s wavInfo,  - WAV file info struct
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t *BPtr,           - Data array pointer
+ *  FILE *p_ioFile,                     - File pointer
+ *  const SLWavFileInfo_s wavInfo,  - WAV file info struct
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   SLArrayIndex_t sampleCount   - Number of samples written
+ *  SLArrayIndex_t sampleCount   - Number of samples written
  *
  * Description: Write an array of 16 bit data to a .WAV file.
  *
@@ -1322,14 +1322,14 @@ void SIGLIB_FUNC_DECL SUF_WavWriteData16(const short* BPtr, FILE* p_ioFile, cons
  * Function: SUF_WavReadData32
  *
  * Parameters:
- *   SLData_t *BPtr,                 - Output Data array pointer
- *   FILE *p_ioFile,                     - File pointer
- *   const SLWavFileInfo_s wavInfo,  - WAV file info struct
- *   const SLArrayIndex_t arrayLength
+ *  SLData_t *BPtr,                 - Output Data array pointer
+ *  FILE *p_ioFile,                     - File pointer
+ *  const SLWavFileInfo_s wavInfo,  - WAV file info struct
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   SLArrayIndex_t sampleCount      - Number of samples read
- *   Returns sampleCount = 0 on error
+ *  SLArrayIndex_t sampleCount      - Number of samples read
+ *  Returns sampleCount = 0 on error
  *
  * Description: Read an array of 32 bit data from a .WAV file.
  *
@@ -1381,13 +1381,13 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadData32(SLArrayIndex_t* BPtr, FILE* p_
  * Function: SUF_WavWriteData32
  *
  * Parameters:
- *   const SLData_t *BPtr,           - Data array pointer
- *   FILE *p_ioFile,                     - File pointer
- *   const SLWavFileInfo_s wavInfo,  - WAV file info struct
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t *BPtr,           - Data array pointer
+ *  FILE *p_ioFile,                     - File pointer
+ *  const SLWavFileInfo_s wavInfo,  - WAV file info struct
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   SLArrayIndex_t sampleCount     - Number of samples written
+ *  SLArrayIndex_t sampleCount     - Number of samples written
  *
  * Description: Write an array of 32 bit data to a .WAV file.
  *
@@ -1415,10 +1415,10 @@ void SIGLIB_FUNC_DECL SUF_WavWriteData32(const SLArrayIndex_t* BPtr, FILE* p_ioF
  * Function: SUF_WavReadWord
  *
  * Parameters:
- *   FILE    *p_ioFile   - File pointer
+ *  FILE    *p_ioFile   - File pointer
  *
  * Return value:
- *   short Word  - Word read from file
+ *  short Word  - Word read from file
  *
  * Description: Read a 16 bit of data from a .WAV file.
  *
@@ -1438,10 +1438,10 @@ short SIGLIB_FUNC_DECL SUF_WavReadWord(FILE* p_ioFile)
  * Function: SUF_WavReadLong
  *
  * Parameters:
- *   FILE *p_ioFile                  - File pointer
+ *  FILE *p_ioFile                  - File pointer
  *
  * Return value:
- *   SLArrayIndex_t LongWord     - Long word read from file
+ *  SLArrayIndex_t LongWord     - Long word read from file
  *
  * Description: Read a 32 bit of data from a .WAV file.
  *
@@ -1463,11 +1463,11 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadLong(FILE* p_ioFile)
  * Function: SUF_WavWriteWord
  *
  * Parameters:
- *   const short Word,   - Word to write to file
- *   FILE *p_ioFile          - File pointer
+ *  const short Word,   - Word to write to file
+ *  FILE *p_ioFile          - File pointer
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Write a 16 bit of data to a .WAV file.
  *
@@ -1483,11 +1483,11 @@ void SIGLIB_FUNC_DECL SUF_WavWriteWord(const short Word, FILE* p_ioFile)
  * Function: SUF_WavWriteLong
  *
  * Parameters:
- *   const short LongWord,   - Long word to write to file
- *   FILE *p_ioFile              - File pointer
+ *  const short LongWord,   - Long word to write to file
+ *  FILE *p_ioFile              - File pointer
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Write a 32 bit of data to a .WAV file.
  *
@@ -1505,11 +1505,11 @@ void SIGLIB_FUNC_DECL SUF_WavWriteLong(const SLArrayIndex_t LongWord, FILE* p_io
  * Function: SUF_WavReadHeader
  *
  * Parameters:
- *   FILE *p_ioFile      - File pointer
+ *  FILE *p_ioFile      - File pointer
  *
  * Return value:
- *   SLWavFileInfo_s wavInfo   - WAV file info struct
- *   Returns wavInfo.NumberOfSamples = 0 on error
+ *  SLWavFileInfo_s wavInfo   - WAV file info struct
+ *  Returns wavInfo.NumberOfSamples = 0 on error
  *
  * Description: Read a .WAV file header section.
  *
@@ -1605,11 +1605,11 @@ SLWavFileInfo_s SIGLIB_FUNC_DECL SUF_WavReadHeader(FILE* p_ioFile)
  * Function: SUF_WavWriteHeader
  *
  * Parameters:
- *   FILE *p_ioFile,         - File pointer
- *   const SLWavFileInfo_s wavInfo - WAV file info struct
+ *  FILE *p_ioFile,         - File pointer
+ *  const SLWavFileInfo_s wavInfo - WAV file info struct
  *
  * Return value:
- *   SLArrayIndex_t Error code
+ *  SLArrayIndex_t Error code
  *
  * Description: Write a .WAV file header section.
  *
@@ -1640,10 +1640,10 @@ void SIGLIB_FUNC_DECL SUF_WavWriteHeader(FILE* p_ioFile, const SLWavFileInfo_s w
  * Function: SUF_WavDisplayInfo
  *
  * Parameters:
- *   const SLWavFileInfo_s wavInfo
+ *  const SLWavFileInfo_s wavInfo
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Display an open .WAV file header info.
  *
@@ -1664,15 +1664,15 @@ void SIGLIB_FUNC_DECL SUF_WavDisplayInfo(const SLWavFileInfo_s wavInfo)
  * Function: SUF_WavSetInfo
  *
  * Parameters:
- *   const SLArrayIndex_t SampleRate,        - Sample rate
- *   const SLArrayIndex_t NumberOfSamples,   - Number of samples
- *   const short NumberOfChannels,           - Number of channels
- *   const short WordLength,                 - Word length
- *   const short BytesPerSample,             - Bytes per sample
- *   const short DataFormat                  - Data format
+ *  const SLArrayIndex_t SampleRate,        - Sample rate
+ *  const SLArrayIndex_t NumberOfSamples,   - Number of samples
+ *  const short NumberOfChannels,           - Number of channels
+ *  const short WordLength,                 - Word length
+ *  const short BytesPerSample,             - Bytes per sample
+ *  const short DataFormat                  - Data format
  *
  * Return value:
- *   SLWavFileInfo_s wavInfo                 - .WAV file information.
+ *  SLWavFileInfo_s wavInfo                 - .WAV file information.
  *
  * Description: Define .WAV file header info.
  *
@@ -1697,10 +1697,10 @@ SLWavFileInfo_s SIGLIB_FUNC_DECL SUF_WavSetInfo(const SLArrayIndex_t SampleRate,
  * Function: SUF_WavFileLength
  *
  * Parameters:
- *   const char *filename    - File name
+ *  const char *filename    - File name
  *
  * Return value:
- *   SLArrayIndex_t          - Number of samples read, -1 for file read error
+ *  SLArrayIndex_t          - Number of samples read, -1 for file read error
  *
  * Description: Return the number of samples in the .wav file
  *
@@ -1725,11 +1725,11 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavFileLength(const char* filename)
  * Function: SUF_WavReadFile
  *
  * Parameters:
- *   SLData_t *BPtr,             - Output Data array pointer
- *   const char *filename        - File name
+ *  SLData_t *BPtr,             - Output Data array pointer
+ *  const char *filename        - File name
  *
  * Return value:
- *   SLWavFileInfo_s wavInfo     - .WAV file information.
+ *  SLWavFileInfo_s wavInfo     - .WAV file information.
  *
  * Description: Return the number of samples in the .wav file
  *
@@ -1760,13 +1760,13 @@ SLWavFileInfo_s SIGLIB_FUNC_DECL SUF_WavReadFile(SLData_t* SIGLIB_PTR_DECL BPtr,
  * Function: SUF_WavWriteFile
  *
  * Parameters:
- *   SLData_t *BPtr,                 - Output Data array pointer
- *   const char *filename,           - File name
- *   const SLWavFileInfo_s wavInfo,  - WAV file info struct
- *   const SLArrayIndex_t arrayLength
+ *  SLData_t *BPtr,                 - Output Data array pointer
+ *  const char *filename,           - File name
+ *  const SLWavFileInfo_s wavInfo,  - WAV file info struct
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   SLArrayIndex_t                  - Number of samples written, -1 for file
+ *  SLArrayIndex_t                  - Number of samples written, -1 for file
  *open error
  *
  * Description: Write the array to a .wav file
@@ -1803,17 +1803,17 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavWriteFile(const SLData_t* SIGLIB_PTR_DECL
  * Function: SUF_WavWriteFileScaled
  *
  * Parameters:
- *   SLData_t *BPtr,                 - Output Data array pointer
- *   const char *filename,           - File name
- *   const SLWavFileInfo_s wavInfo,  - WAV file info struct
- *   const SLArrayIndex_t arrayLength
+ *  SLData_t *BPtr,                 - Output Data array pointer
+ *  const char *filename,           - File name
+ *  const SLWavFileInfo_s wavInfo,  - WAV file info struct
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   SLArrayIndex_t                  - Number of samples written, -1 for file
+ *  SLArrayIndex_t                  - Number of samples written, -1 for file
  *open error
  *
  * Description: Write the array to a .wav file
- *   Scales the output magnitude to 32767.0
+ *  Scales the output magnitude to 32767.0
  *
  ********************************************************/
 
@@ -1871,13 +1871,13 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavWriteFileScaled(const SLData_t* SIGLIB_PT
  * Function: SUF_XmtReadData
  *
  * Parameters:
- *   SLData_t *BPtr,             - Output Data array pointer
- *   FILE *p_ioFile,                 - File pointer
- *   const SLArrayIndex_t        - arrayLength
+ *  SLData_t *BPtr,             - Output Data array pointer
+ *  FILE *p_ioFile,                 - File pointer
+ *  const SLArrayIndex_t        - arrayLength
  *
  * Return value:
- *   SLArrayIndex_t sampleCount  - Number of samples read
- *   Returns sampleCount = 0 on error
+ *  SLArrayIndex_t sampleCount  - Number of samples read
+ *  Returns sampleCount = 0 on error
  *
  * Description: Read an array of data from a .xmt file.
  *
@@ -1921,18 +1921,18 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_XmtReadData(SLData_t* SIGLIB_PTR_DECL BPtr, 
  * Function: SUF_WriteWeightsIntegerCFile
  *
  * Parameters:
- *   const char *            - filename
- *   const SLData_t *        - layer1Weights
- *   const SLData_t *        - layer2Weights
- *   const SLArrayIndex_t    - numLayer1Weights
- *   const SLArrayIndex_t    - numLayer2Weights
- *   const SLArrayIndex_t)   - numLayers
+ *  const char *           - filename
+ *  const SLData_t *       - layer1Weights
+ *  const SLData_t *       - layer2Weights
+ *  const SLArrayIndex_t    - numLayer1Weights
+ *  const SLArrayIndex_t    - numLayer2Weights
+ *  const SLArrayIndex_t)   - numLayers
  *
  * Return value:
- *   SLArrayIndex_t - Number of weights written
+ *  SLArrayIndex_t - Number of weights written
  *
  * Description: Write neural network weights to a C
- *   header file, as 8 bit words.
+ *  header file, as 8 bit words.
  *
  ********************************************************/
 
@@ -1983,18 +1983,18 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsIntegerCFile(const char* filenam
  * Function: SUF_WriteWeightsFloatCFile
  *
  * Parameters:
- *   const char *            - filename
- *   const SLData_t *        - layer1Weights
- *   const SLData_t *        - layer2Weights
- *   const SLArrayIndex_t    - numLayer1Weights
- *   const SLArrayIndex_t    - numLayer2Weights
- *   const SLArrayIndex_t)   - numLayers
+ *  const char *           - filename
+ *  const SLData_t *       - layer1Weights
+ *  const SLData_t *       - layer2Weights
+ *  const SLArrayIndex_t    - numLayer1Weights
+ *  const SLArrayIndex_t    - numLayer2Weights
+ *  const SLArrayIndex_t)   - numLayers
  *
  * Return value:
- *   SLArrayIndex_t - Number of weights written
+ *  SLArrayIndex_t - Number of weights written
  *
  * Description: Write neural network weights to a C
- *   header file, as floating point numbers.
+ *  header file, as floating point numbers.
  *
  ********************************************************/
 
@@ -2043,19 +2043,19 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsFloatCFile(const char* filenameW
  * Function: SUF_WriteWeightsBinaryFile
  *
  * Parameters:
- *   const char *            - filename
- *   const SLData_t *        - layer1Weights
- *   const SLData_t *        - layer2Weights
- *   const SLArrayIndex_t    - numLayer1Weights
- *   const SLArrayIndex_t    - numLayer2Weights
- *   const SLArrayIndex_t    - numLayers
- *   const SLArrayIndex_t    - numBits
+ *  const char *           - filename
+ *  const SLData_t *       - layer1Weights
+ *  const SLData_t *       - layer2Weights
+ *  const SLArrayIndex_t    - numLayer1Weights
+ *  const SLArrayIndex_t    - numLayer2Weights
+ *  const SLArrayIndex_t    - numLayers
+ *  const SLArrayIndex_t    - numBits
  *
  * Return value:
- *   SLArrayIndex_t - Number of weights written
+ *  SLArrayIndex_t - Number of weights written
  *
  * Description: Write neural network weights to a binary
- *   file, as N bit words.
+ *  file, as N bit words.
  *
  ********************************************************/
 
@@ -2193,15 +2193,15 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsBinaryFile(const char* filenameW
  * Function: SUF_ReadWeightsBinaryFile
  *
  * Parameters:
- *   const char *            - filename
- *   SLData_t *              - layer1Weights
- *   SLData_t *)             - layer2Weights
+ *  const char *           - filename
+ *  SLData_t *             - layer1Weights
+ *  SLData_t *)             - layer2Weights
  *
  * Return value:
- *   SLArrayIndex_t - Number of weights read
+ *  SLArrayIndex_t - Number of weights read
  *
  * Description: Read neural network weights from a binary
- *   file, as 32 bit words.
+ *  file, as 32 bit words.
  *
  ********************************************************/
 
@@ -2341,20 +2341,20 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_ReadWeightsBinaryFile(const char* filenameWe
  * Function: SUF_WriteWeightsWithBiasesIntegerCFile
  *
  * Parameters:
- *   const char *            - filename
- *   const SLData_t *        - layer1Weights
- *   const SLData_t *        - layer1Biases
- *   const SLData_t *        - layer2Weights
- *   const SLData_t *        - layer2Biases
- *   const SLArrayIndex_t    - numInputNodes
- *   const SLArrayIndex_t    - numHiddenLayerNodes
- *   const SLArrayIndex_t    - numOutputCategories
+ *  const char *           - filename
+ *  const SLData_t *       - layer1Weights
+ *  const SLData_t *       - layer1Biases
+ *  const SLData_t *       - layer2Weights
+ *  const SLData_t *       - layer2Biases
+ *  const SLArrayIndex_t    - numInputNodes
+ *  const SLArrayIndex_t    - numHiddenLayerNodes
+ *  const SLArrayIndex_t    - numOutputCategories
  *
  * Return value:
- *   SLArrayIndex_t - Number of weights and biases written
+ *  SLArrayIndex_t - Number of weights and biases written
  *
  * Description: Write neural network weights to a C
- *   header file, as 8 bit words.
+ *  header file, as 8 bit words.
  *
  ********************************************************/
 
@@ -2434,20 +2434,20 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsWithBiasesIntegerCFile(const cha
  * Function: SUF_WriteWeightsWithBiasesFloatCFile
  *
  * Parameters:
- *   const char *            - filename
- *   const SLData_t *        - layer1Weights
- *   const SLData_t *        - layer1Biases
- *   const SLData_t *        - layer2Weights
- *   const SLData_t *        - layer2Biases
- *   const SLArrayIndex_t    - numInputNodes
- *   const SLArrayIndex_t    - numHiddenLayerNodes
- *   const SLArrayIndex_t    - numOutputCategories
+ *  const char *           - filename
+ *  const SLData_t *       - layer1Weights
+ *  const SLData_t *       - layer1Biases
+ *  const SLData_t *       - layer2Weights
+ *  const SLData_t *       - layer2Biases
+ *  const SLArrayIndex_t    - numInputNodes
+ *  const SLArrayIndex_t    - numHiddenLayerNodes
+ *  const SLArrayIndex_t    - numOutputCategories
  *
  * Return value:
- *   SLArrayIndex_t - Number of weights and biases written
+ *  SLArrayIndex_t - Number of weights and biases written
  *
  * Description: Write neural network weights to a C
- *   header file, as floating point numbers.
+ *  header file, as floating point numbers.
  *
  ********************************************************/
 
@@ -2523,21 +2523,21 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsWithBiasesFloatCFile(const char*
  * Function: SUF_WriteWeightsWithBiasesBinaryFile
  *
  * Parameters:
- *   const char *            - filename
- *   const SLData_t *        - layer1Weights
- *   const SLData_t *        - layer1Biases
- *   const SLData_t *        - layer2Weights
- *   const SLData_t *        - layer2Biases
- *   const SLArrayIndex_t    - numInputNodes
- *   const SLArrayIndex_t    - numHiddenLayerNodes
- *   const SLArrayIndex_t    - numOutputCategories
- *   const SLArrayIndex_t    - numBits
+ *  const char *           - filename
+ *  const SLData_t *       - layer1Weights
+ *  const SLData_t *       - layer1Biases
+ *  const SLData_t *       - layer2Weights
+ *  const SLData_t *       - layer2Biases
+ *  const SLArrayIndex_t    - numInputNodes
+ *  const SLArrayIndex_t    - numHiddenLayerNodes
+ *  const SLArrayIndex_t    - numOutputCategories
+ *  const SLArrayIndex_t    - numBits
  *
  * Return value:
- *   SLArrayIndex_t - Number of weights written
+ *  SLArrayIndex_t - Number of weights written
  *
  * Description: Write neural network weights to a binary
- *   file, as N bit words.
+ *  file, as N bit words.
  *
  ********************************************************/
 
@@ -2761,17 +2761,17 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WriteWeightsWithBiasesBinaryFile(const char*
  * Function: SUF_ReadWeightsWithBiasesBinaryFile
  *
  * Parameters:
- *   const char *            - filename
- *   SLData_t *              - layer1Weights
- *   SLData_t *              - layer1Biases
- *   SLData_t *              - layer2Weights
- *   SLData_t *)             - layer2Biases
+ *  const char *           - filename
+ *  SLData_t *             - layer1Weights
+ *  SLData_t *             - layer1Biases
+ *  SLData_t *             - layer2Weights
+ *  SLData_t *)             - layer2Biases
  *
  * Return value:
- *   SLArrayIndex_t - Number of weights and biases read
+ *  SLArrayIndex_t - Number of weights and biases read
  *
  * Description: Read neural network weights and biases from
- *   a binary file, as 32 bit words.
+ *  a binary file, as 32 bit words.
  *
  ********************************************************/
 

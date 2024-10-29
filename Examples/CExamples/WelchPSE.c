@@ -35,7 +35,7 @@ int main(void)
 
   if ((NULL == pRealData) || (NULL == pImagData) || (NULL == pSrc) || (NULL == pDst) || (NULL == pWindowCoeffs) || (NULL == pFFTCoeffs)) {
 
-    printf("\n\nMalloc failed\n\n");
+    printf("\n\nMemory allocation failed\n\n");
     exit(0);
   }
 

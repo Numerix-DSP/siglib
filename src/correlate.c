@@ -44,21 +44,21 @@ Description: Correlation routines for SigLib DSP library.
  * Function: SDA_CorrelateLinear()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1,
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t Length1
- *   const SLArrayIndex_t Length2
- *   const SLArrayIndex_t NumCorr
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t Length1
+ *  const SLArrayIndex_t Length2
+ *  const SLArrayIndex_t NumCorr
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform the linear (zero padded)
- *   correlation of two input arrays of unequal length.
+ *  correlation of two input arrays of unequal length.
  *
- *   For autocorrelation pass the same array to the
- *   function.
+ *  For autocorrelation pass the same array to the
+ *  function.
  *
  ********************************************************/
 
@@ -156,21 +156,21 @@ void SIGLIB_FUNC_DECL SDA_CorrelateLinear(const SLData_t* SIGLIB_PTR_DECL pSrc1,
  * Function: SDA_CorrelatePartial()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1,
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t Length1
- *   const SLArrayIndex_t Length2
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t Length1
+ *  const SLArrayIndex_t Length2
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform the linear (zero padded)
- *   correlation of two input arrays of unequal length.
- *   For autocorrelation pass the same array to the
- *   function.
- *   This function only processes the data where the
- *   arrays completely overlap each other.
+ *  correlation of two input arrays of unequal length.
+ *  For autocorrelation pass the same array to the
+ *  function.
+ *  This function only processes the data where the
+ *  arrays completely overlap each other.
  *
  ********************************************************/
 
@@ -212,19 +212,19 @@ void SIGLIB_FUNC_DECL SDA_CorrelatePartial(const SLData_t* SIGLIB_PTR_DECL pSrc1
  * Function: SDA_CorrelateCircular()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1,
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform the circular correlation of two
- *   input arrays.
+ *  input arrays.
  *
- *   For autocorrelation pass the same array to the
- *   function.
+ *  For autocorrelation pass the same array to the
+ *  function.
  *
  ********************************************************/
 
@@ -265,22 +265,22 @@ void SIGLIB_FUNC_DECL SDA_CorrelateCircular(const SLData_t* SIGLIB_PTR_DECL pSrc
  * Function: SDA_Covariance()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1,
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLData_t InverseLength1,
- *   const SLData_t InverseLength2,
- *   const SLArrayIndex_t Length1
- *   const SLArrayIndex_t Length2
- *   const SLArrayIndex_t NumCorr
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLData_t InverseLength1,
+ *  const SLData_t InverseLength2,
+ *  const SLArrayIndex_t Length1
+ *  const SLArrayIndex_t Length2
+ *  const SLArrayIndex_t NumCorr
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Calculate the covariance of two arrays
- *   using the linear correlation function.
+ *  using the linear correlation function.
  *
- *   WARNING: THIS FUNCTION DESTROYS THE SOURCE DATA.
+ *  WARNING: THIS FUNCTION DESTROYS THE SOURCE DATA.
  *
  ********************************************************/
 
@@ -323,21 +323,21 @@ void SIGLIB_FUNC_DECL SDA_Covariance(SLData_t* SIGLIB_PTR_DECL pSrc1, SLData_t* 
  * Function: SDA_CovariancePartial()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1,
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLData_t InverseLength1,
- *   const SLData_t InverseLength2,
- *   const SLArrayIndex_t Length1
- *   const SLArrayIndex_t Length2
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLData_t InverseLength1,
+ *  const SLData_t InverseLength2,
+ *  const SLArrayIndex_t Length1
+ *  const SLArrayIndex_t Length2
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Calculate the covariance of two arrays.
- *   using the partial linear correlation function.
+ *  using the partial linear correlation function.
  *
- *   WARNING: THIS FUNCTION DESTROYS THE SOURCE DATA.
+ *  WARNING: THIS FUNCTION DESTROYS THE SOURCE DATA.
  *
  ********************************************************/
 
@@ -381,25 +381,25 @@ void SIGLIB_FUNC_DECL SDA_CovariancePartial(SLData_t* SIGLIB_PTR_DECL pSrc1, SLD
  * Function: SDA_CorrelateLinearReturnPeak()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1,
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2,
- *   SLData_t * pPeakMagnitude,
- *   SLArrayIndex_t * pPeakIndex,
- *   const SLArrayIndex_t Length1
- *   const SLArrayIndex_t Length2
- *   const SLArrayIndex_t NumCorr
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2,
+ *  SLData_t * pPeakMagnitude,
+ *  SLArrayIndex_t * pPeakIndex,
+ *  const SLArrayIndex_t Length1
+ *  const SLArrayIndex_t Length2
+ *  const SLArrayIndex_t NumCorr
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform the linear (zero padded)
- *   correlation of two input arrays of unequal length.
+ *  correlation of two input arrays of unequal length.
  *
- *   Calculates only the peak cross correlation level
- *   and the index of that peak.
+ *  Calculates only the peak cross correlation level
+ *  and the index of that peak.
  *
- *   For autocorrelation pass the same array to the
- *   function.
+ *  For autocorrelation pass the same array to the
+ *  function.
  *
  ********************************************************/
 

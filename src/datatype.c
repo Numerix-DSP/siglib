@@ -44,15 +44,15 @@ Description: Functions to convert between different data types.
  * Function: SDA_SigLibDataToFix()
  *
  * Parameters:
- *   const SLData_t pSrc                 Input data pointer
- *   SLFixData_t pDst                    Output data pointer
- *   const SLArrayIndex_t sampleLength   Array Length
+ *  const SLData_t pSrc                 Input data pointer
+ *  SLFixData_t pDst                    Output data pointer
+ *  const SLArrayIndex_t sampleLength   Array Length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Convert the input floating point data
- *   to fixed point.
+ *  to fixed point.
  *
  ********************************************************/
 
@@ -80,15 +80,15 @@ void SIGLIB_FUNC_DECL SDA_SigLibDataToFix(const SLData_t* SIGLIB_PTR_DECL pSrc, 
  * Function: SDA_FixToSigLibData()
  *
  * Parameters:
- *   const SLFixData_t pSrc              Input data pointer
- *   SLData_t pDst                       Output data pointer
- *   const SLArrayIndex_t sampleLength   Array Length
+ *  const SLFixData_t pSrc              Input data pointer
+ *  SLData_t pDst                       Output data pointer
+ *  const SLArrayIndex_t sampleLength   Array Length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Convert the input fixed point data
- *   to floating point.
+ *  to floating point.
  *
  ********************************************************/
 
@@ -116,15 +116,15 @@ void SIGLIB_FUNC_DECL SDA_FixToSigLibData(const SLFixData_t* SIGLIB_PTR_DECL pSr
  * Function: SDA_SigLibDataToImageData()
  *
  * Parameters:
- *   const SLData_t pSrc                 Input data pointer
- *   SLImageData_t pDst                  Output data pointer
- *   const SLArrayIndex_t sampleLength   Array Length
+ *  const SLData_t pSrc                 Input data pointer
+ *  SLImageData_t pDst                  Output data pointer
+ *  const SLArrayIndex_t sampleLength   Array Length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Convert the input floating point data
- *   to fixed point.
+ *  to fixed point.
  *
  ********************************************************/
 
@@ -152,15 +152,15 @@ void SIGLIB_FUNC_DECL SDA_SigLibDataToImageData(const SLData_t* SIGLIB_PTR_DECL 
  * Function: SDA_ImageDataToSigLibData()
  *
  * Parameters:
- *   const SLImageData_t pSrc            Input data pointer
- *   SLData_t pDst                       Output data pointer
- *   const SLArrayIndex_t sampleLength   Array Length
+ *  const SLImageData_t pSrc            Input data pointer
+ *  SLData_t pDst                       Output data pointer
+ *  const SLArrayIndex_t sampleLength   Array Length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Convert the input fixed point data
- *   to floating point.
+ *  to floating point.
  *
  ********************************************************/
 
@@ -188,15 +188,15 @@ void SIGLIB_FUNC_DECL SDA_ImageDataToSigLibData(const SLImageData_t* SIGLIB_PTR_
  * Function: SDA_SigLibDataToFix16
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLInt16_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLInt16_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Convert the data from SLData_t to 16 bit fixed point
+ *  Convert the data from SLData_t to 16 bit fixed point
  *
  ********************************************************/
 
@@ -216,15 +216,15 @@ void SIGLIB_FUNC_DECL SDA_SigLibDataToFix16(const SLData_t* SIGLIB_PTR_DECL pSrc
  * Function: SDA_Fix16ToSigLibData
  *
  * Parameters:
- *   const SLInt16_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLInt16_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Convert the data from 16 bit fixed point to SLData_t
+ *  Convert the data from 16 bit fixed point to SLData_t
  *
  ********************************************************/
 
@@ -244,15 +244,15 @@ void SIGLIB_FUNC_DECL SDA_Fix16ToSigLibData(const SLInt16_t* SIGLIB_PTR_DECL pSr
  * Function: SDA_SigLibDataToFix32
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLInt32_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLInt32_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Convert the data from SLData_t to 32 bit fixed point
+ *  Convert the data from SLData_t to 32 bit fixed point
  *
  ********************************************************/
 
@@ -272,15 +272,15 @@ void SIGLIB_FUNC_DECL SDA_SigLibDataToFix32(const SLData_t* SIGLIB_PTR_DECL pSrc
  * Function: SDA_Fix32ToSigLibData
  *
  * Parameters:
- *   const SLInt32_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLInt32_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Convert the data from 32 bit fixed point to SLData_t
+ *  Convert the data from 32 bit fixed point to SLData_t
  *
  ********************************************************/
 
@@ -300,15 +300,15 @@ void SIGLIB_FUNC_DECL SDA_Fix32ToSigLibData(const SLInt32_t* SIGLIB_PTR_DECL pSr
  * Function: SDS_SigLibDataToQFormatInteger
  *
  * Parameters:
- *   const SLData_t x,
- *   const SLFixData_t m,
- *   const SLFixData_t n
+ *  const SLData_t x,
+ *  const SLFixData_t m,
+ *  const SLFixData_t n
  *
  * Return value:
- *   SLFixData_t Q format result
+ *  SLFixData_t Q format result
  *
  * Description:
- *   Convert the data from SLData_t to 64 bit Q format integer
+ *  Convert the data from SLData_t to 64 bit Q format integer
  *
  ********************************************************/
 
@@ -332,14 +332,14 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_SigLibDataToQFormatInteger(const SLData_t x, co
  * Function: SDS_QFormatIntegerToSigLibData
  *
  * Parameters:
- *   const long long x,
- *   const SLFixData_t n
+ *  const long long x,
+ *  const SLFixData_t n
  *
  * Return value:
- *   SLData_t result
+ *  SLData_t result
  *
  * Description:
- *   Convert the data from 64 bit Q format fixed point to SLData_t
+ *  Convert the data from 64 bit Q format fixed point to SLData_t
  *
  ********************************************************/
 
@@ -352,17 +352,17 @@ SLData_t SIGLIB_FUNC_DECL SDS_QFormatIntegerToSigLibData(const SLFixData_t x, co
  * Function: SDA_SigLibDataToQFormatInteger
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLFixData_t * SIGLIB_PTR_DECL pDst,
- *   const SLFixData_t m,
- *   const SLFixData_t n
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLFixData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLFixData_t m,
+ *  const SLFixData_t n
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Convert the data from SLData_t to 64 bit Q format integer
+ *  Convert the data from SLData_t to 64 bit Q format integer
  *
  ********************************************************/
 
@@ -393,16 +393,16 @@ void SIGLIB_FUNC_DECL SDA_SigLibDataToQFormatInteger(const SLData_t* SIGLIB_PTR_
  * Function: SDA_QFormatIntegerToSigLibData
  *
  * Parameters:
- *   const SLFixData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLFixData_t n
- *   const SLArrayIndex_t ArrayLength
+ *  const SLFixData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLFixData_t n
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Convert the data from 64 bit Q format fixed point to SLData_t
+ *  Convert the data from 64 bit Q format fixed point to SLData_t
  *
  ********************************************************/
 

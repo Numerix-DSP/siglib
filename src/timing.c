@@ -44,25 +44,25 @@ Description: Communications timing detection routines, for SigLib DSP library.
  * Function: SIF_PhaseLockedLoop
  *
  * Parameters:
- *   SLData_t *pVCOPhase,
- *   SLData_t * SIGLIB_PTR_DECL pVCOLookUpTable,
- *   const SLArrayIndex_t VCOLookUpTableSize,
- *   const SLData_t LPFCutOffFrequency,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
- *   const SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
- *   SLArrayIndex_t * pLoopFilterIndex,
- *   const SLArrayIndex_t LoopFilterLength,
- *   SLData_t * SIGLIB_PTR_DECL pHilbertTformFilterState,
- *   const SLData_t * SIGLIB_PTR_DECL pHilbertTformFilterCoeffs,
- *   SLArrayIndex_t * pHilbertTformFilterIndex,
- *   const SLArrayIndex_t HilbertTformFilterLength,
- *   SLData_t *pPLLSavedSample,
+ *  SLData_t *pVCOPhase,
+ *  SLData_t * SIGLIB_PTR_DECL pVCOLookUpTable,
+ *  const SLArrayIndex_t VCOLookUpTableSize,
+ *  const SLData_t LPFCutOffFrequency,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
+ *  const SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
+ *  SLArrayIndex_t * pLoopFilterIndex,
+ *  const SLArrayIndex_t LoopFilterLength,
+ *  SLData_t * SIGLIB_PTR_DECL pHilbertTformFilterState,
+ *  const SLData_t * SIGLIB_PTR_DECL pHilbertTformFilterCoeffs,
+ *  SLArrayIndex_t * pHilbertTformFilterIndex,
+ *  const SLArrayIndex_t HilbertTformFilterLength,
+ *  SLData_t *pPLLSavedSample,
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   This function initialises the phase locked loop functions.
+ *  This function initialises the phase locked loop functions.
  *
  ********************************************************/
 
@@ -91,28 +91,28 @@ void SIGLIB_FUNC_DECL SIF_PhaseLockedLoop(SLData_t* pVCOPhase, SLData_t* SIGLIB_
  * Function: SDS_PhaseLockedLoop
  *
  * Parameters:
- *   SLData_t Source,
- *   SLData_t *VCOPhase,
- *   SLData_t VCOModulationIndex,
- *   SLData_t *pVCOLookUpTable,              For VCO fast sine lookup
- *   const SLArrayIndex_t VCOLookUpTableSize,
- *   SLData_t CarrierPhaseIncrement,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
- *   const SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
- *   SLArrayIndex_t *pLoopFilterIndex,
- *   SLArrayIndex_t LoopFilterLength,
- *   SLData_t * SIGLIB_PTR_DECL pHilbertTformFilterState,
- *   const SLData_t * SIGLIB_PTR_DECL pHilbertTformFilterCoeffs,
- *   SLArrayIndex_t * HilbertTformFilterIndex,
- *   SLArrayIndex_t HilbertTformFilterLength,
- *   SLData_t *pSample)                              Feedback sample for next
+ *  SLData_t Source,
+ *  SLData_t *VCOPhase,
+ *  SLData_t VCOModulationIndex,
+ *  SLData_t *pVCOLookUpTable,              For VCO fast sine lookup
+ *  const SLArrayIndex_t VCOLookUpTableSize,
+ *  SLData_t CarrierPhaseIncrement,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
+ *  const SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
+ *  SLArrayIndex_t *pLoopFilterIndex,
+ *  SLArrayIndex_t LoopFilterLength,
+ *  SLData_t * SIGLIB_PTR_DECL pHilbertTformFilterState,
+ *  const SLData_t * SIGLIB_PTR_DECL pHilbertTformFilterCoeffs,
+ *  SLArrayIndex_t * HilbertTformFilterIndex,
+ *  SLArrayIndex_t HilbertTformFilterLength,
+ *  SLData_t *pSample)                              Feedback sample for next
  *iteration
  *
  * Return value:
- *   Phase locked sample
+ *  Phase locked sample
  *
  * Description:
- *   This function phase locks the output with the input.
+ *  This function phase locks the output with the input.
  *
  ********************************************************/
 
@@ -143,29 +143,29 @@ SLData_t SIGLIB_FUNC_DECL SDS_PhaseLockedLoop(const SLData_t Src, SLData_t* VCOP
  * Function: SDA_PhaseLockedLoop
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   SLData_t *VCOPhase,
- *   SLData_t VCOModulationIndex,
- *   SLData_t *pVCOLookUpTable,              For VCO fast sine lookup
- *   const SLArrayIndex_t VCOLookUpTableSize,
- *   SLData_t CarrierPhaseIncrement,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
- *   const SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
- *   SLArrayIndex_t *pLoopFilterIndex,
- *   SLArrayIndex_t LoopFilterLength,
- *   SLData_t * SIGLIB_PTR_DECL pHilbertTformFilterState,
- *   const SLData_t * SIGLIB_PTR_DECL pHilbertTformFilterCoeffs,
- *   SLArrayIndex_t * HilbertTformFilterIndex,
- *   SLArrayIndex_t HilbertTformFilterLength,
- *   SLData_t *pSample,                              Feedback sample for next
+ *  SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  SLData_t *VCOPhase,
+ *  SLData_t VCOModulationIndex,
+ *  SLData_t *pVCOLookUpTable,              For VCO fast sine lookup
+ *  const SLArrayIndex_t VCOLookUpTableSize,
+ *  SLData_t CarrierPhaseIncrement,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
+ *  const SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
+ *  SLArrayIndex_t *pLoopFilterIndex,
+ *  SLArrayIndex_t LoopFilterLength,
+ *  SLData_t * SIGLIB_PTR_DECL pHilbertTformFilterState,
+ *  const SLData_t * SIGLIB_PTR_DECL pHilbertTformFilterCoeffs,
+ *  SLArrayIndex_t * HilbertTformFilterIndex,
+ *  SLArrayIndex_t HilbertTformFilterLength,
+ *  SLData_t *pSample,                              Feedback sample for next
  *iteration SLArrayIndex_t SampleSize)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   This function phase locks the output with the input.
+ *  This function phase locks the output with the input.
  *
  ********************************************************/
 
@@ -197,24 +197,24 @@ void SIGLIB_FUNC_DECL SDA_PhaseLockedLoop(const SLData_t* SIGLIB_PTR_DECL pSrc, 
  * Function: SIF_CostasLoop
  *
  * Parameters:
- *   SLData_t *pCostasLpVCOPhase,
- *   SLData_t * SIGLIB_PTR_DECL pVCOLookUpTable,
- *   const SLArrayIndex_t VCOLookUpTableSize,
- *   const SLData_t LPFCutOffFrequency,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLpLPF1State,
- *   SLArrayIndex_t *pCostasLpLPF1Index,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLpLPF2State,
- *   SLArrayIndex_t *pCostasLpLPF2Index,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLpLPFCoeffs,
- *   const SLArrayIndex_t CostasLpLPFLength,
- *   SLData_t *pCostasLpLoopFilterState,
- *   SLData_t *pSample)
+ *  SLData_t *pCostasLpVCOPhase,
+ *  SLData_t * SIGLIB_PTR_DECL pVCOLookUpTable,
+ *  const SLArrayIndex_t VCOLookUpTableSize,
+ *  const SLData_t LPFCutOffFrequency,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLpLPF1State,
+ *  SLArrayIndex_t *pCostasLpLPF1Index,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLpLPF2State,
+ *  SLArrayIndex_t *pCostasLpLPF2Index,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLpLPFCoeffs,
+ *  const SLArrayIndex_t CostasLpLPFLength,
+ *  SLData_t *pCostasLpLoopFilterState,
+ *  SLData_t *pSample)
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description:
- *   Initialise the costas loop function.
+ *  Initialise the costas loop function.
  *
  ********************************************************/
 
@@ -244,28 +244,28 @@ SLError_t SIGLIB_FUNC_DECL SIF_CostasLoop(SLData_t* pCostasLpVCOPhase, SLData_t*
  * Function: SDS_CostasLoop
  *
  * Parameters:
- *   const SLData_t Src,
- *   SLData_t *pCostasLpVCOPhase,
- *   const SLData_t VCOModulationIndex,
- *   SLData_t * SIGLIB_PTR_DECL pVCOLookUpTable,
- *   const SLArrayIndex_t VCOLookUpTableSize,
- *   const SLData_t CarrierPhaseIncrement,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLpLPF1State,
- *   SLArrayIndex_t *pCostasLpLPF1Index,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLpLPF2State,
- *   SLArrayIndex_t *pCostasLpLPF2Index,
- *   const SLData_t * SIGLIB_PTR_DECL pCostasLpLPFCoeffs,
- *   const SLArrayIndex_t CostasLpLPFLength,
- *   SLData_t *pCostasLpLoopFilterState,
- *   const SLData_t CostasLpLoopFilterCoeff,
- *   const enum SLCostasLoopFeedbackMode_t FeedbackMode,
- *   SLData_t *pSample)
+ *  const SLData_t Src,
+ *  SLData_t *pCostasLpVCOPhase,
+ *  const SLData_t VCOModulationIndex,
+ *  SLData_t * SIGLIB_PTR_DECL pVCOLookUpTable,
+ *  const SLArrayIndex_t VCOLookUpTableSize,
+ *  const SLData_t CarrierPhaseIncrement,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLpLPF1State,
+ *  SLArrayIndex_t *pCostasLpLPF1Index,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLpLPF2State,
+ *  SLArrayIndex_t *pCostasLpLPF2Index,
+ *  const SLData_t * SIGLIB_PTR_DECL pCostasLpLPFCoeffs,
+ *  const SLArrayIndex_t CostasLpLPFLength,
+ *  SLData_t *pCostasLpLoopFilterState,
+ *  const SLData_t CostasLpLoopFilterCoeff,
+ *  const enum SLCostasLoopFeedbackMode_t FeedbackMode,
+ *  SLData_t *pSample)
  *
  * Return value:
- *   Phase locked sample
+ *  Phase locked sample
  *
  * Description:
- *   Implement the costas loop function.
+ *  Implement the costas loop function.
  *
  ********************************************************/
 
@@ -328,30 +328,30 @@ SLData_t SIGLIB_FUNC_DECL SDS_CostasLoop(const SLData_t Src, SLData_t* pCostasLp
  * Function: SDA_CostasLoop
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   SLData_t *pCostasLpVCOPhase,
- *   const SLData_t VCOModulationIndex,
- *   SLData_t * SIGLIB_PTR_DECL pVCOLookUpTable,
- *   const SLArrayIndex_t VCOLookUpTableSize,
- *   const SLData_t CarrierPhaseIncrement,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLpLPF1State,
- *   SLArrayIndex_t *pCostasLpLPF1Index,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLpLPF2State,
- *   SLArrayIndex_t *pCostasLpLPF2Index,
- *   const SLData_t * SIGLIB_PTR_DECL pCostasLpLPFCoeffs,
- *   const SLArrayIndex_t CostasLpLPFLength,
- *   SLData_t *pCostasLpLoopFilterState,
- *   const SLData_t CostasLpLoopFilterCoeff,
- *   const enum SLCostasLoopFeedbackMode_t FeedbackMode,
- *   SLData_t *pSample,
- *   const SLArrayIndex_t SampleSize)
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  SLData_t *pCostasLpVCOPhase,
+ *  const SLData_t VCOModulationIndex,
+ *  SLData_t * SIGLIB_PTR_DECL pVCOLookUpTable,
+ *  const SLArrayIndex_t VCOLookUpTableSize,
+ *  const SLData_t CarrierPhaseIncrement,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLpLPF1State,
+ *  SLArrayIndex_t *pCostasLpLPF1Index,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLpLPF2State,
+ *  SLArrayIndex_t *pCostasLpLPF2Index,
+ *  const SLData_t * SIGLIB_PTR_DECL pCostasLpLPFCoeffs,
+ *  const SLArrayIndex_t CostasLpLPFLength,
+ *  SLData_t *pCostasLpLoopFilterState,
+ *  const SLData_t CostasLpLoopFilterCoeff,
+ *  const enum SLCostasLoopFeedbackMode_t FeedbackMode,
+ *  SLData_t *pSample,
+ *  const SLArrayIndex_t SampleSize)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Implement the costas loop function.
+ *  Implement the costas loop function.
  *
  ********************************************************/
 
@@ -418,20 +418,20 @@ void SIGLIB_FUNC_DECL SDA_CostasLoop(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDat
  * Function: SRF_CostasLoop
  *
  * Parameters:
- *   SLData_t *pCostasLpVCOPhase,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLpLPF1State,
- *   SLArrayIndex_t *pCostasLpLPF1Index,
- *   SLData_t * SIGLIB_PTR_DECL pCostasLpLPF2State,
- *   SLArrayIndex_t *pCostasLpLPF2Index,
- *   const SLArrayIndex_t CostasLpLPFLength,
- *   SLData_t *pCostasLpLoopFilterState,
- *   SLData_t *pSample)
+ *  SLData_t *pCostasLpVCOPhase,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLpLPF1State,
+ *  SLArrayIndex_t *pCostasLpLPF1Index,
+ *  SLData_t * SIGLIB_PTR_DECL pCostasLpLPF2State,
+ *  SLArrayIndex_t *pCostasLpLPF2Index,
+ *  const SLArrayIndex_t CostasLpLPFLength,
+ *  SLData_t *pCostasLpLoopFilterState,
+ *  SLData_t *pSample)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Reset the costas loop function.
+ *  Reset the costas loop function.
  *
  ********************************************************/
 
@@ -453,22 +453,22 @@ void SIGLIB_FUNC_DECL SRF_CostasLoop(SLData_t* pCostasLpVCOPhase, SLData_t* SIGL
  * Function: SIF_180DegreePhaseDetect
  *
  * Parameters:
- *   SLData_t *pFastCosineLookUpTablePhase,
- *   SLData_t * SIGLIB_PTR_DECL pFastCosineLookUpTable,
- *   const SLArrayIndex_t FastCosineLookUpTableSize,
- *   const SLData_t LPFCutOffFrequency,
- *   SLData_t * SIGLIB_PTR_DECL pFilterState,
- *   const SLData_t * SIGLIB_PTR_DECL pFilterCoeffs,
- *   SLArrayIndex_t * pFilterIndex,
- *   const SLArrayIndex_t filterLength,
- *   SLArrayIndex_t * pPreviousOutputSign)
+ *  SLData_t *pFastCosineLookUpTablePhase,
+ *  SLData_t * SIGLIB_PTR_DECL pFastCosineLookUpTable,
+ *  const SLArrayIndex_t FastCosineLookUpTableSize,
+ *  const SLData_t LPFCutOffFrequency,
+ *  SLData_t * SIGLIB_PTR_DECL pFilterState,
+ *  const SLData_t * SIGLIB_PTR_DECL pFilterCoeffs,
+ *  SLArrayIndex_t * pFilterIndex,
+ *  const SLArrayIndex_t filterLength,
+ *  SLArrayIndex_t * pPreviousOutputSign)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   This function initialises the 180 degree phase
- *   change detector function.
+ *  This function initialises the 180 degree phase
+ *  change detector function.
  *
  ********************************************************/
 
@@ -491,30 +491,30 @@ void SIGLIB_FUNC_DECL SIF_180DegreePhaseDetect(SLData_t* pFastCosineLookUpTableP
  * Function: SDA_180DegreePhaseDetect
  *
  * Parameters:
- *   SLData_t *pSrc,
- *   SLData_t *pDst,
- *   SLData_t *pFastCosineLookUpTablePhase,
- *   const SLData_t *pFastCosineLookUpTable,               Fast sine lookup
- *   const SLArrayIndex_t FastCosineLookUpTableSize,
- *   SLData_t CarrierPhaseIncrement,
- *   SLData_t * pFilterState,
- *   const SLData_t *pFilterCoeffs,
- *   SLArrayIndex_t *pFilterIndex,
- *   SLArrayIndex_t filterLength,
- *   SLArrayIndex_t * pPreviousOutputSign,
- *   SLArrayIndex_t SampleSize)
+ *  SLData_t *pSrc,
+ *  SLData_t *pDst,
+ *  SLData_t *pFastCosineLookUpTablePhase,
+ *  const SLData_t *pFastCosineLookUpTable,               Fast sine lookup
+ *  const SLArrayIndex_t FastCosineLookUpTableSize,
+ *  SLData_t CarrierPhaseIncrement,
+ *  SLData_t * pFilterState,
+ *  const SLData_t *pFilterCoeffs,
+ *  SLArrayIndex_t *pFilterIndex,
+ *  SLArrayIndex_t filterLength,
+ *  SLArrayIndex_t * pPreviousOutputSign,
+ *  SLArrayIndex_t SampleSize)
  *
  * Return value:
- *   The location of the phase change or SIGLIB_NO_PHASE_CHANGE
- *   if no phase change was detected.
+ *  The location of the phase change or SIGLIB_NO_PHASE_CHANGE
+ *  if no phase change was detected.
  *
  * Description:
- *   This function detects 180 degree phase changes in the
- *   input signal.
+ *  This function detects 180 degree phase changes in the
+ *  input signal.
  *
  * Notes:
- *   The exact location of the phase change will be delayed
- *   by the group delay of the filter.
+ *  The exact location of the phase change will be delayed
+ *  by the group delay of the filter.
  *
  ********************************************************/
 
@@ -582,16 +582,16 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_180DegreePhaseDetect(const SLData_t* SIGLIB_
  * Function: SIF_TriggerReverberator
  *
  * Parameters:
- *   SLArrayIndex_t *pTriggerCount,
- *   SLFixData_t *pTriggerDetectedFlag
- *   SLFixData_t *pTriggerUpdatedFlag,
+ *  SLArrayIndex_t *pTriggerCount,
+ *  SLFixData_t *pTriggerDetectedFlag
+ *  SLFixData_t *pTriggerUpdatedFlag,
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   This function initialises the trigger reverberator
- *   function.
+ *  This function initialises the trigger reverberator
+ *  function.
  *
  ********************************************************/
 
@@ -606,25 +606,25 @@ void SIGLIB_FUNC_DECL SIF_TriggerReverberator(SLArrayIndex_t* pTriggerCount, SLF
  * Function: SDA_TriggerReverberator
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   SLArrayIndex_t *pTriggerCount,
- *   SLFixData_t *pTriggerDetectedFlag,
- *   SLFixData_t *pTriggerUpdatedFlag,
- *   const SLArrayIndex_t TriggerPeriod,
- *   const SLArrayIndex_t sampleLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  SLArrayIndex_t *pTriggerCount,
+ *  SLFixData_t *pTriggerDetectedFlag,
+ *  SLFixData_t *pTriggerUpdatedFlag,
+ *  const SLArrayIndex_t TriggerPeriod,
+ *  const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   This function implements a timing reverberator.
+ *  This function implements a timing reverberator.
  *
  * Notes:
- *   If the source timing clock is late then the period
- *   of the output clock is increased by one sample. If
- *   the source timing clock is early then the period is
- *   decreased by one sample.
+ *  If the source timing clock is late then the period
+ *  of the output clock is increased by one sample. If
+ *  the source timing clock is early then the period is
+ *  decreased by one sample.
  *
  ********************************************************/
 
@@ -693,23 +693,23 @@ void SIGLIB_FUNC_DECL SDA_TriggerReverberator(const SLData_t* SIGLIB_PTR_DECL pS
  * Function: SDS_TriggerReverberator
  *
  * Parameters:
- *   const SLData_t Src,
- *   SLArrayIndex_t *pTriggerCount,
- *   SLFixData_t *pTriggerDetectedFlag,
- *   SLFixData_t *pTriggerUpdatedFlag,
- *   const SLArrayIndex_t TriggerPeriod,
+ *  const SLData_t Src,
+ *  SLArrayIndex_t *pTriggerCount,
+ *  SLFixData_t *pTriggerDetectedFlag,
+ *  SLFixData_t *pTriggerUpdatedFlag,
+ *  const SLArrayIndex_t TriggerPeriod,
  *
  * Return value:
- *   Trigger output
+ *  Trigger output
  *
  * Description:
- *   This function implements a timing reverberator.
+ *  This function implements a timing reverberator.
  *
  * Notes:
- *   If the source timing clock is late then the period
- *   of the output clock is increased by one sample. If
- *   the source timing clock is early then the period is
- *   decreased by one sample.
+ *  If the source timing clock is late then the period
+ *  of the output clock is increased by one sample. If
+ *  the source timing clock is early then the period is
+ *  decreased by one sample.
  *
  ********************************************************/
 
@@ -770,17 +770,17 @@ SLData_t SIGLIB_FUNC_DECL SDS_TriggerReverberator(const SLData_t Src, SLArrayInd
  * Function: SDA_TriggerSelector
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,      Source data sequence
- *   SLData_t * SIGLIB_PTR_DECL pDst,            Destination data sequence
- *   const SLData_t * SIGLIB_PTR_DECL pTrigger,  Trigger sequence
- *   const SLArrayIndex_t sampleLength)          Length of source sequence
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,      Source data sequence
+ *  SLData_t * SIGLIB_PTR_DECL pDst,            Destination data sequence
+ *  const SLData_t * SIGLIB_PTR_DECL pTrigger,  Trigger sequence
+ *  const SLArrayIndex_t sampleLength)          Length of source sequence
  *
  * Return value:
- *   Number of output samples
+ *  Number of output samples
  *
  * Description:
- *   This function uses the trigger to select the output
- *   data samples.
+ *  This function uses the trigger to select the output
+ *  data samples.
  *
  ********************************************************/
 
@@ -801,32 +801,32 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_TriggerSelector(const SLData_t* SIGLIB_PTR_D
  * Function: SIF_EarlyLateGate
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pMatchedFilterSignal,
- *   SLData_t * SIGLIB_PTR_DECL pMatchedFilterState,
- *   SLData_t * SIGLIB_PTR_DECL pMatchedFilterCoeffs,
- *   SLArrayIndex_t *pMatchedFilterIndex,
- *   SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
- *   SLArrayIndex_t * pEarlyGateDelayIndex,
- *   const SLArrayIndex_t EarlyGateDelayLength,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
- *   SLArrayIndex_t *pLoopFilterIndex,
- *   const SLArrayIndex_t LoopFilterLength,
- *   const SLData_t LoopFilterFc,
- *   SLFixData_t *pPulseDetectorThresholdFlag,
- *   SLData_t *pZeroCrossingPreviousSample,
- *   SLArrayIndex_t *pTriggerCount,
- *   SLFixData_t *pTriggerDetectedFlag,
- *   SLFixData_t *pTriggerUpdatedFlag,
- *   const enum SLELGTriggerTiming_t TriggerTiming,
- *   SLArrayIndex_t *pTriggerLatency,
- *   const SLArrayIndex_t SymbolLength)
+ *  SLData_t * SIGLIB_PTR_DECL pMatchedFilterSignal,
+ *  SLData_t * SIGLIB_PTR_DECL pMatchedFilterState,
+ *  SLData_t * SIGLIB_PTR_DECL pMatchedFilterCoeffs,
+ *  SLArrayIndex_t *pMatchedFilterIndex,
+ *  SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
+ *  SLArrayIndex_t * pEarlyGateDelayIndex,
+ *  const SLArrayIndex_t EarlyGateDelayLength,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
+ *  SLArrayIndex_t *pLoopFilterIndex,
+ *  const SLArrayIndex_t LoopFilterLength,
+ *  const SLData_t LoopFilterFc,
+ *  SLFixData_t *pPulseDetectorThresholdFlag,
+ *  SLData_t *pZeroCrossingPreviousSample,
+ *  SLArrayIndex_t *pTriggerCount,
+ *  SLFixData_t *pTriggerDetectedFlag,
+ *  SLFixData_t *pTriggerUpdatedFlag,
+ *  const enum SLELGTriggerTiming_t TriggerTiming,
+ *  SLArrayIndex_t *pTriggerLatency,
+ *  const SLArrayIndex_t SymbolLength)
  *
  * Return value:
- *   SigLib error code
+ *  SigLib error code
  *
  * Description:
- *   Initialise the early-late gate timing function.
+ *  Initialise the early-late gate timing function.
  *
  ********************************************************/
 
@@ -882,32 +882,32 @@ SLError_t SIGLIB_FUNC_DECL SIF_EarlyLateGate(
  * Function: SDA_EarlyLateGate
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pTriggerOutput,
- *   SLData_t * SIGLIB_PTR_DECL pMatchedFilterState,
- *   SLData_t * SIGLIB_PTR_DECL pMatchedFilterCoeffs,
- *   SLArrayIndex_t *pMatchedFilterIndex,
- *   SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
- *   SLArrayIndex_t * pEarlyGateDelayIndex,
- *   const SLArrayIndex_t EarlyGateDelayLength,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
- *   SLArrayIndex_t *pLoopFilterIndex,
- *   const SLArrayIndex_t LoopFilterLength,
- *   const SLData_t NoiseThreshold,
- *   SLFixData_t *pPulseDetectorThresholdFlag,
- *   SLData_t *pZeroCrossingPreviousSample,
- *   SLArrayIndex_t *pTriggerCount,
- *   SLFixData_t *pTriggerDetectedFlag,
- *   SLFixData_t *pTriggerUpdatedFlag,
- *   const SLArrayIndex_t SymbolLength,
- *   const SLArrayIndex_t sampleLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pTriggerOutput,
+ *  SLData_t * SIGLIB_PTR_DECL pMatchedFilterState,
+ *  SLData_t * SIGLIB_PTR_DECL pMatchedFilterCoeffs,
+ *  SLArrayIndex_t *pMatchedFilterIndex,
+ *  SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
+ *  SLArrayIndex_t * pEarlyGateDelayIndex,
+ *  const SLArrayIndex_t EarlyGateDelayLength,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
+ *  SLArrayIndex_t *pLoopFilterIndex,
+ *  const SLArrayIndex_t LoopFilterLength,
+ *  const SLData_t NoiseThreshold,
+ *  SLFixData_t *pPulseDetectorThresholdFlag,
+ *  SLData_t *pZeroCrossingPreviousSample,
+ *  SLArrayIndex_t *pTriggerCount,
+ *  SLFixData_t *pTriggerDetectedFlag,
+ *  SLFixData_t *pTriggerUpdatedFlag,
+ *  const SLArrayIndex_t SymbolLength,
+ *  const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Implement the early-late gate timing function.
+ *  Implement the early-late gate timing function.
  *
  ********************************************************/
 
@@ -963,36 +963,36 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGate(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
  * Function: SDA_EarlyLateGateDebug
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pTriggerOutput,
- *   SLData_t * SIGLIB_PTR_DECL pMatchedFilterState,
- *   SLData_t * SIGLIB_PTR_DECL pMatchedFilterCoeffs,
- *   SLArrayIndex_t *pMatchedFilterIndex,
- *   SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
- *   SLArrayIndex_t * pEarlyGateDelayIndex,
- *   const SLArrayIndex_t EarlyGateDelayLength,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
- *   SLArrayIndex_t *pLoopFilterIndex,
- *   const SLArrayIndex_t LoopFilterLength,
- *   const SLData_t NoiseThreshold,
- *   SLFixData_t *pPulseDetectorThresholdFlag,
- *   SLData_t *pZeroCrossingPreviousSample,
- *   SLArrayIndex_t *pTriggerCount,
- *   SLFixData_t *pTriggerDetectedFlag,
- *   SLFixData_t *pTriggerUpdatedFlag,
- *   SLData_t * SIGLIB_PTR_DECL pMatchedFilterOutput,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterOutput,
- *   const SLArrayIndex_t SymbolLength,
- *   const SLArrayIndex_t sampleLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pTriggerOutput,
+ *  SLData_t * SIGLIB_PTR_DECL pMatchedFilterState,
+ *  SLData_t * SIGLIB_PTR_DECL pMatchedFilterCoeffs,
+ *  SLArrayIndex_t *pMatchedFilterIndex,
+ *  SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
+ *  SLArrayIndex_t * pEarlyGateDelayIndex,
+ *  const SLArrayIndex_t EarlyGateDelayLength,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
+ *  SLArrayIndex_t *pLoopFilterIndex,
+ *  const SLArrayIndex_t LoopFilterLength,
+ *  const SLData_t NoiseThreshold,
+ *  SLFixData_t *pPulseDetectorThresholdFlag,
+ *  SLData_t *pZeroCrossingPreviousSample,
+ *  SLArrayIndex_t *pTriggerCount,
+ *  SLFixData_t *pTriggerDetectedFlag,
+ *  SLFixData_t *pTriggerUpdatedFlag,
+ *  SLData_t * SIGLIB_PTR_DECL pMatchedFilterOutput,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterOutput,
+ *  const SLArrayIndex_t SymbolLength,
+ *  const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Implement the early-late gate timing function.
- *   This function saves the matched filter and loop
- *   filter outputs for debugging.
+ *  Implement the early-late gate timing function.
+ *  This function saves the matched filter and loop
+ *  filter outputs for debugging.
  *
  ********************************************************/
 
@@ -1053,32 +1053,32 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateDebug(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SDS_EarlyLateGate
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pTriggerOutput,
- *   SLData_t * SIGLIB_PTR_DECL pMatchedFilterState,
- *   SLData_t * SIGLIB_PTR_DECL pMatchedFilterCoeffs,
- *   SLArrayIndex_t *pMatchedFilterIndex,
- *   SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
- *   SLArrayIndex_t * pEarlyGateDelayIndex,
- *   const SLArrayIndex_t EarlyGateDelayLength,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
- *   SLArrayIndex_t *pLoopFilterIndex,
- *   const SLArrayIndex_t LoopFilterLength,
- *   const SLData_t NoiseThreshold,
- *   SLFixData_t *pPulseDetectorThresholdFlag,
- *   SLData_t *pZeroCrossingPreviousSample,
- *   SLArrayIndex_t *pTriggerCount,
- *   SLFixData_t *pTriggerDetectedFlag,
- *   SLFixData_t *pTriggerUpdatedFlag,
- *   const SLArrayIndex_t SymbolLength,
- *   const SLArrayIndex_t sampleLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pTriggerOutput,
+ *  SLData_t * SIGLIB_PTR_DECL pMatchedFilterState,
+ *  SLData_t * SIGLIB_PTR_DECL pMatchedFilterCoeffs,
+ *  SLArrayIndex_t *pMatchedFilterIndex,
+ *  SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
+ *  SLArrayIndex_t * pEarlyGateDelayIndex,
+ *  const SLArrayIndex_t EarlyGateDelayLength,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
+ *  SLArrayIndex_t *pLoopFilterIndex,
+ *  const SLArrayIndex_t LoopFilterLength,
+ *  const SLData_t NoiseThreshold,
+ *  SLFixData_t *pPulseDetectorThresholdFlag,
+ *  SLData_t *pZeroCrossingPreviousSample,
+ *  SLArrayIndex_t *pTriggerCount,
+ *  SLFixData_t *pTriggerDetectedFlag,
+ *  SLFixData_t *pTriggerUpdatedFlag,
+ *  const SLArrayIndex_t SymbolLength,
+ *  const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   Trigger output
+ *  Trigger output
  *
  * Description:
- *   Implement the early-late gate timing function.
+ *  Implement the early-late gate timing function.
  *
  ********************************************************/
 
@@ -1131,32 +1131,32 @@ SLData_t SIGLIB_FUNC_DECL SDS_EarlyLateGate(const SLData_t Src, SLData_t* SIGLIB
  * Function: SIF_EarlyLateGateSquarePulse
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pMatchedFilterState,
- *   SLArrayIndex_t *pMatchedFilterIndex,
- *   SLData_t *pMatchedFilterSum,
- *   SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
- *   SLArrayIndex_t * pEarlyGateDelayIndex,
- *   const SLArrayIndex_t EarlyGateDelayLength,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
- *   SLArrayIndex_t *pLoopFilterIndex,
- *   const SLArrayIndex_t LoopFilterLength,
- *   const SLData_t LoopFilterFc,
- *   SLFixData_t *pPulseDetectorThresholdFlag,
- *   SLData_t *pZeroCrossingPreviousSample,
- *   SLArrayIndex_t *pTriggerCount,
- *   SLFixData_t *pTriggerDetectedFlag,
- *   SLFixData_t *pTriggerUpdatedFlag,
- *   const enum SLELGTriggerTiming_t TriggerTiming,
- *   SLArrayIndex_t *pTriggerLatency,
- *   const SLArrayIndex_t SymbolLength)
+ *  SLData_t * SIGLIB_PTR_DECL pMatchedFilterState,
+ *  SLArrayIndex_t *pMatchedFilterIndex,
+ *  SLData_t *pMatchedFilterSum,
+ *  SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
+ *  SLArrayIndex_t * pEarlyGateDelayIndex,
+ *  const SLArrayIndex_t EarlyGateDelayLength,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
+ *  SLArrayIndex_t *pLoopFilterIndex,
+ *  const SLArrayIndex_t LoopFilterLength,
+ *  const SLData_t LoopFilterFc,
+ *  SLFixData_t *pPulseDetectorThresholdFlag,
+ *  SLData_t *pZeroCrossingPreviousSample,
+ *  SLArrayIndex_t *pTriggerCount,
+ *  SLFixData_t *pTriggerDetectedFlag,
+ *  SLFixData_t *pTriggerUpdatedFlag,
+ *  const enum SLELGTriggerTiming_t TriggerTiming,
+ *  SLArrayIndex_t *pTriggerLatency,
+ *  const SLArrayIndex_t SymbolLength)
  *
  * Return value:
- *   SigLib error code
+ *  SigLib error code
  *
  * Description:
- *   Initialise the early-late gate square pulse timing
- *   function.
+ *  Initialise the early-late gate square pulse timing
+ *  function.
  *
  ********************************************************/
 
@@ -1211,33 +1211,33 @@ SLError_t SIGLIB_FUNC_DECL SIF_EarlyLateGateSquarePulse(
  * Function: SDA_EarlyLateGateSquarePulse
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pTriggerOutput,
- *   SLData_t * SIGLIB_PTR_DECL pMatchedFilterState,
- *   SLArrayIndex_t *pMatchedFilterIndex,
- *   SLData_t *pMatchedFilterSum,
- *   SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
- *   SLArrayIndex_t * pEarlyGateDelayIndex,
- *   const SLArrayIndex_t EarlyGateDelayLength,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
- *   SLArrayIndex_t *pLoopFilterIndex,
- *   const SLArrayIndex_t LoopFilterLength,
- *   const SLData_t NoiseThreshold,
- *   SLFixData_t *pPulseDetectorThresholdFlag,
- *   SLData_t *pZeroCrossingPreviousSample,
- *   SLArrayIndex_t *pTriggerCount,
- *   SLFixData_t *pTriggerDetectedFlag,
- *   SLFixData_t *pTriggerUpdatedFlag,
- *   const SLArrayIndex_t SymbolLength,
- *   const SLArrayIndex_t sampleLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pTriggerOutput,
+ *  SLData_t * SIGLIB_PTR_DECL pMatchedFilterState,
+ *  SLArrayIndex_t *pMatchedFilterIndex,
+ *  SLData_t *pMatchedFilterSum,
+ *  SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
+ *  SLArrayIndex_t * pEarlyGateDelayIndex,
+ *  const SLArrayIndex_t EarlyGateDelayLength,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
+ *  SLArrayIndex_t *pLoopFilterIndex,
+ *  const SLArrayIndex_t LoopFilterLength,
+ *  const SLData_t NoiseThreshold,
+ *  SLFixData_t *pPulseDetectorThresholdFlag,
+ *  SLData_t *pZeroCrossingPreviousSample,
+ *  SLArrayIndex_t *pTriggerCount,
+ *  SLFixData_t *pTriggerDetectedFlag,
+ *  SLFixData_t *pTriggerUpdatedFlag,
+ *  const SLArrayIndex_t SymbolLength,
+ *  const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Implement the early-late gate square pulse timing
- *   function.
+ *  Implement the early-late gate square pulse timing
+ *  function.
  *
  ********************************************************/
 
@@ -1291,37 +1291,37 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateSquarePulse(
  * Function: SDA_EarlyLateGateSquarePulseDebug
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pTriggerOutput,
- *   SLData_t * SIGLIB_PTR_DECL pMatchedFilterState,
- *   SLArrayIndex_t *pMatchedFilterIndex,
- *   SLData_t *pMatchedFilterSum,
- *   SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
- *   SLArrayIndex_t * pEarlyGateDelayIndex,
- *   const SLArrayIndex_t EarlyGateDelayLength,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
- *   SLArrayIndex_t *pLoopFilterIndex,
- *   const SLArrayIndex_t LoopFilterLength,
- *   const SLData_t NoiseThreshold,
- *   SLFixData_t *pPulseDetectorThresholdFlag,
- *   SLData_t *pZeroCrossingPreviousSample,
- *   SLArrayIndex_t *pTriggerCount,
- *   SLFixData_t *pTriggerDetectedFlag,
- *   SLFixData_t *pTriggerUpdatedFlag,
- *   SLData_t * SIGLIB_PTR_DECL pMatchedFilterOutput,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterOutput,
- *   const SLArrayIndex_t SymbolLength,
- *   const SLArrayIndex_t sampleLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pTriggerOutput,
+ *  SLData_t * SIGLIB_PTR_DECL pMatchedFilterState,
+ *  SLArrayIndex_t *pMatchedFilterIndex,
+ *  SLData_t *pMatchedFilterSum,
+ *  SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
+ *  SLArrayIndex_t * pEarlyGateDelayIndex,
+ *  const SLArrayIndex_t EarlyGateDelayLength,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
+ *  SLArrayIndex_t *pLoopFilterIndex,
+ *  const SLArrayIndex_t LoopFilterLength,
+ *  const SLData_t NoiseThreshold,
+ *  SLFixData_t *pPulseDetectorThresholdFlag,
+ *  SLData_t *pZeroCrossingPreviousSample,
+ *  SLArrayIndex_t *pTriggerCount,
+ *  SLFixData_t *pTriggerDetectedFlag,
+ *  SLFixData_t *pTriggerUpdatedFlag,
+ *  SLData_t * SIGLIB_PTR_DECL pMatchedFilterOutput,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterOutput,
+ *  const SLArrayIndex_t SymbolLength,
+ *  const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Implement the early-late gate square pulse timing
- *   function.
- *   This function saves the matched filter and loop
- *   filter outputs for debugging.
+ *  Implement the early-late gate square pulse timing
+ *  function.
+ *  This function saves the matched filter and loop
+ *  filter outputs for debugging.
  *
  ********************************************************/
 
@@ -1380,34 +1380,34 @@ void SIGLIB_FUNC_DECL SDA_EarlyLateGateSquarePulseDebug(
  * Function: SDS_EarlyLateGateSquarePulse
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pTriggerOutput,
- *   SLData_t * SIGLIB_PTR_DECL pMatchedFilterState,
- *   SLArrayIndex_t *pMatchedFilterIndex,
- *   SLData_t *pMatchedFilterSum,
- *   SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
- *   SLArrayIndex_t * pEarlyGateDelayIndex,
- *   const SLArrayIndex_t EarlyGateDelayLength,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
- *   SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
- *   SLArrayIndex_t *pLoopFilterIndex,
- *   const SLArrayIndex_t LoopFilterLength,
- *   const SLData_t NoiseThreshold,
- *   SLFixData_t *pPulseDetectorThresholdFlag,
- *   SLData_t *pZeroCrossingPreviousSample,
- *   SLArrayIndex_t *pTriggerCount,
- *   SLFixData_t *pTriggerDetectedFlag,
- *   SLFixData_t *pTriggerUpdatedFlag,
- *   const SLArrayIndex_t SymbolLength,
- *   const SLArrayIndex_t sampleLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pTriggerOutput,
+ *  SLData_t * SIGLIB_PTR_DECL pMatchedFilterState,
+ *  SLArrayIndex_t *pMatchedFilterIndex,
+ *  SLData_t *pMatchedFilterSum,
+ *  SLData_t * SIGLIB_PTR_DECL pEarlyGateDelay,
+ *  SLArrayIndex_t * pEarlyGateDelayIndex,
+ *  const SLArrayIndex_t EarlyGateDelayLength,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterState,
+ *  SLData_t * SIGLIB_PTR_DECL pLoopFilterCoeffs,
+ *  SLArrayIndex_t *pLoopFilterIndex,
+ *  const SLArrayIndex_t LoopFilterLength,
+ *  const SLData_t NoiseThreshold,
+ *  SLFixData_t *pPulseDetectorThresholdFlag,
+ *  SLData_t *pZeroCrossingPreviousSample,
+ *  SLArrayIndex_t *pTriggerCount,
+ *  SLFixData_t *pTriggerDetectedFlag,
+ *  SLFixData_t *pTriggerUpdatedFlag,
+ *  const SLArrayIndex_t SymbolLength,
+ *  const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   Trigger output
+ *  Trigger output
  *
  * Description:
- *   Implement the early-late gate timing function.
- *   Implement the early-late gate square pulse timing
- *   function.
+ *  Implement the early-late gate timing function.
+ *  Implement the early-late gate square pulse timing
+ *  function.
  *
  ********************************************************/
 

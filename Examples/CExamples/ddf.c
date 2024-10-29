@@ -46,11 +46,11 @@ int main(int argc, char* argv[])
   SLData_t* pResults = SUF_VectorArrayAllocate(INPUT_LENGTH);
   SLData_t* pFFTCoeffs = SUF_FftCoefficientAllocate(FFT_LENGTH);
 
-  SDA_Clear(input,            // Pointer to destination array
+  SDA_Zeros(input,            // Pointer to destination array
             INPUT_LENGTH);    // Dataset length
-  SDA_Clear(pRealData,        // Pointer to destination array
+  SDA_Zeros(pRealData,        // Pointer to destination array
             INPUT_LENGTH);    // Dataset length
-  SDA_Clear(pImagData,        // Pointer to destination array
+  SDA_Zeros(pImagData,        // Pointer to destination array
             INPUT_LENGTH);    // Dataset length
 
   if ((fpInputFile = fopen(filename, "rb")) == NULL) {    // Note this file is binary

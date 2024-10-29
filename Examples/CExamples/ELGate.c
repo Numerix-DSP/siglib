@@ -206,7 +206,7 @@ int main(void)
   SLData_t PnsPhase = SIGLIB_ZERO;
   SLData_t PnsCurrentValue = SIGLIB_ZERO;
   // Clear the destination array so that we can generate a time offset
-  SDA_Clear(pSrc,              // Pointer to destination array
+  SDA_Zeros(pSrc,              // Pointer to destination array
             SAMPLE_LENGTH);    // Dataset length
 
 #if PRBS_INPUT

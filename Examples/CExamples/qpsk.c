@@ -214,7 +214,7 @@ int main(void)
 #endif
 
 #if DISPLAY_EYE_DIAGRAM
-  SDA_Clear(EyeSamples,           // Pointer to destination array
+  SDA_Zeros(EyeSamples,           // Pointer to destination array
             EYE_DIAGRAM_SIZE);    // Dataset length
 #endif
 

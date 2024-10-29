@@ -35,7 +35,7 @@ int main(void)
   }
 
   // Zero pad
-  SDA_Clear(pFilterTaps,                       // Pointer to destination array
+  SDA_Zeros(pFilterTaps,                       // Pointer to destination array
             FOURIERT_LENGTH);                  // Dataset length
   SIF_GaussianFirFilter(pFilterTaps,           // Pointer to filter coefficients
                         STANDARD_DEVIATION,    // Standard deviation of the distribution
@@ -83,7 +83,7 @@ int main(void)
   getchar();
 
   // Zero pad
-  SDA_Clear(pFilterTaps,                    // Pointer to destination array
+  SDA_Zeros(pFilterTaps,                    // Pointer to destination array
             FOURIERT_LENGTH);               // Dataset length
   SIF_GaussianFirFilter2(pFilterTaps,       // Pointer to filter coefficients
                          BANDWIDTH,         // Filter bandwidth

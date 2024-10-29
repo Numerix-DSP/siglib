@@ -45,16 +45,16 @@ Description: Complex number routines for SigLib DSP library.
  * Function: SDA_CreateComplexRect()
  *
  * Parameters:
- *   const SLData_t *pSrcReal    - Input real data pointer
- *   const SLData_t *pSrcImag    - Input imaginary data pointer
- *   SLComplexRect_s *pDst       - Output complex data pointer
- *   const SLArrayIndex_t ArrayLength    - Array length
+ *  const SLData_t *pSrcReal    - Input real data pointer
+ *  const SLData_t *pSrcImag    - Input imaginary data pointer
+ *  SLComplexRect_s *pDst       - Output complex data pointer
+ *  const SLArrayIndex_t ArrayLength    - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Convert the input floating point data
- *   to complex rectangular data.
+ *  to complex rectangular data.
  *
  ********************************************************/
 
@@ -85,16 +85,16 @@ void SIGLIB_FUNC_DECL SDA_CreateComplexRect(const SLData_t* SIGLIB_PTR_DECL pSrc
  * Function: SDA_CreateComplexPolar()
  *
  * Parameters:
- *   const SLData_t *pSrcMagn    - Input magnitude data pointer
- *   const SLData_t *pSrcPhase   - Input phase data pointer
- *   SLComplexPolar_s *pDst      - Output complex data pointer
- *   const SLArrayIndex_t ArrayLength    - Array length
+ *  const SLData_t *pSrcMagn    - Input magnitude data pointer
+ *  const SLData_t *pSrcPhase   - Input phase data pointer
+ *  SLComplexPolar_s *pDst      - Output complex data pointer
+ *  const SLArrayIndex_t ArrayLength    - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Convert the input floating point data
- *   to complex polar data.
+ *  to complex polar data.
  *
  ********************************************************/
 
@@ -126,16 +126,16 @@ void SIGLIB_FUNC_DECL SDA_CreateComplexPolar(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SDA_ExtractComplexRect()
  *
  * Parameters:
- *   const SLComplexRect_s *pSrc - Input complex data pointer
- *   SLData_t *pDstReal          - Output real data pointer
- *   SLData_t *pDstImag          - Output imaginary data pointer
- *   const SLArrayIndex_t ArrayLength    - Array length
+ *  const SLComplexRect_s *pSrc - Input complex data pointer
+ *  SLData_t *pDstReal          - Output real data pointer
+ *  SLData_t *pDstImag          - Output imaginary data pointer
+ *  const SLArrayIndex_t ArrayLength    - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Convert the input complex rectangular data
- *   to floating point data
+ *  to floating point data
  *
  ********************************************************/
 
@@ -166,16 +166,16 @@ void SIGLIB_FUNC_DECL SDA_ExtractComplexRect(const SLComplexRect_s* SIGLIB_PTR_D
  * Function: SDA_ExtractComplexPolar()
  *
  * Parameters:
- *   const SLComplexPolar_s *pSrc    - Input complex data pointer
- *   SLData_t *pDstMagn              - Output magnitude data pointer
- *   SLData_t *pDstPhase             - Output phase data pointer
- *   const SLArrayIndex_t ArrayLength    - Array length
+ *  const SLComplexPolar_s *pSrc    - Input complex data pointer
+ *  SLData_t *pDstMagn              - Output magnitude data pointer
+ *  SLData_t *pDstPhase             - Output phase data pointer
+ *  const SLArrayIndex_t ArrayLength    - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Convert the input complex polar data
- *   to floating point data
+ *  to floating point data
  *
  ********************************************************/
 
@@ -206,14 +206,14 @@ void SIGLIB_FUNC_DECL SDA_ExtractComplexPolar(const SLComplexPolar_s* SIGLIB_PTR
  * Function: SDA_ClearComplexRect()
  *
  * Parameters:
- *   SLComplexRect_s *pDst   - Output complex data pointer
- *   const SLArrayIndex_t ArrayLength    - Array length
+ *  SLComplexRect_s *pDst   - Output complex data pointer
+ *  const SLArrayIndex_t ArrayLength    - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Clear the contents of a complex rectangular
- *   array.
+ *  array.
  *
  ********************************************************/
 
@@ -241,14 +241,14 @@ void SIGLIB_FUNC_DECL SDA_ClearComplexRect(SLComplexRect_s* SIGLIB_PTR_DECL pDst
  * Function: SDA_ClearComplexPolar()
  *
  * Parameters:
- *   SLComplexPolar_s *pDst  - Output complex data pointer
- *   const SLArrayIndex_t ArrayLength    - Array length
+ *  SLComplexPolar_s *pDst  - Output complex data pointer
+ *  const SLArrayIndex_t ArrayLength    - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Clear the contents of a complex polar
- *   array.
+ *  array.
  *
  ********************************************************/
 
@@ -276,15 +276,15 @@ void SIGLIB_FUNC_DECL SDA_ClearComplexPolar(SLComplexPolar_s* SIGLIB_PTR_DECL pD
  * Function: SDA_FillComplexRect()
  *
  * Parameters:
- *   SLComplexRect_s *pDst               - Output complex data pointer
- *   const SLComplexRect_s FillValue     - Value to fill array with
- *   const SLArrayIndex_t ArrayLength    - Array length
+ *  SLComplexRect_s *pDst               - Output complex data pointer
+ *  const SLComplexRect_s FillValue     - Value to fill array with
+ *  const SLArrayIndex_t ArrayLength    - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Fill the contents of a complex rectangular
- *   array with a constant value.
+ *  array with a constant value.
  *
  ********************************************************/
 
@@ -310,15 +310,15 @@ void SIGLIB_FUNC_DECL SDA_FillComplexRect(SLComplexRect_s* SIGLIB_PTR_DECL pDst,
  * Function: SDA_FillComplexPolar()
  *
  * Parameters:
- *   SLComplexPolar_s *pDst              - Output complex data pointer
- *   const SLComplexPolar_s FillValue    - Value to fill array with
- *   const SLArrayIndex_t ArrayLength    - Array length
+ *  SLComplexPolar_s *pDst              - Output complex data pointer
+ *  const SLComplexPolar_s FillValue    - Value to fill array with
+ *  const SLArrayIndex_t ArrayLength    - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Clear the contents of a complex polar
- *   array with a constant value.
+ *  array with a constant value.
  *
  ********************************************************/
 
@@ -345,15 +345,15 @@ void SIGLIB_FUNC_DECL SDA_FillComplexPolar(SLComplexPolar_s* SIGLIB_PTR_DECL pDs
  * Function: SDA_ComplexRectangularToPolar
  *
  * Parameters:
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
- *   SLComplexPolar_s * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+ *  SLComplexPolar_s * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Convert rectangular to polar data vectors.
+ *  Convert rectangular to polar data vectors.
  *
  ********************************************************/
 
@@ -385,15 +385,15 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectangularToPolar(const SLComplexRect_s* SIGLI
  * Function: SDA_ComplexPolarToRectangular
  *
  * Parameters:
- *   const SLComplexPolar_s * SIGLIB_PTR_DECL pSrc,
- *   SLComplexRect_s * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLComplexPolar_s * SIGLIB_PTR_DECL pSrc,
+ *  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Convert polar to rectangular data vectors.
+ *  Convert polar to rectangular data vectors.
  *
  ********************************************************/
 
@@ -418,17 +418,17 @@ void SIGLIB_FUNC_DECL SDA_ComplexPolarToRectangular(const SLComplexPolar_s* SIGL
  * Function: SDA_RectangularToPolar
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   SLData_t * SIGLIB_PTR_DECL pDstMagn,
- *   SLData_t * SIGLIB_PTR_DECL pDstPhase,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  SLData_t * SIGLIB_PTR_DECL pDstMagn,
+ *  SLData_t * SIGLIB_PTR_DECL pDstPhase,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Convert rectangular to polar data vectors.
+ *  Convert rectangular to polar data vectors.
  *
  ********************************************************/
 
@@ -465,17 +465,17 @@ void SIGLIB_FUNC_DECL SDA_RectangularToPolar(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SDA_PolarToRectangular
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcMagn,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcPhase,
- *   SLData_t * SIGLIB_PTR_DECL pDstReal,
- *   SLData_t * SIGLIB_PTR_DECL pDstImag,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcMagn,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcPhase,
+ *  SLData_t * SIGLIB_PTR_DECL pDstReal,
+ *  SLData_t * SIGLIB_PTR_DECL pDstImag,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Convert polar to rectangular data vectors.
+ *  Convert polar to rectangular data vectors.
  *
  ********************************************************/
 
@@ -502,15 +502,15 @@ void SIGLIB_FUNC_DECL SDA_PolarToRectangular(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SDA_ComplexRectSqrt
  *
  * Parameters:
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
- *   SLComplexRect_s * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+ *  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Complex square root.
+ *  Complex square root.
  *
  ********************************************************/
 
@@ -539,15 +539,15 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectSqrt(const SLComplexRect_s* SIGLIB_PTR_DECL
  * Function: SDA_ComplexRectInverse
  *
  * Parameters:
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
- *   SLComplexRect_s * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+ *  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Complex inverse.
+ *  Complex inverse.
  *
  ********************************************************/
 
@@ -582,15 +582,15 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectInverse(const SLComplexRect_s* SIGLIB_PTR_D
  * Function: SDA_ComplexRectConjugate
  *
  * Parameters:
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
- *   SLComplexRect_s * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+ *  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Complex conjugate.
+ *  Complex conjugate.
  *
  ********************************************************/
 
@@ -615,15 +615,15 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectConjugate(const SLComplexRect_s* SIGLIB_PTR
  * Function: SDA_ComplexRectMagnitude
  *
  * Parameters:
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Complex inverse.
+ *  Complex inverse.
  *
  ********************************************************/
 
@@ -647,15 +647,15 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectMagnitude(const SLComplexRect_s* SIGLIB_PTR
  * Function: SDA_ComplexRectMagnitudeSquared
  *
  * Parameters:
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Complex inverse.
+ *  Complex inverse.
  *
  ********************************************************/
 
@@ -679,15 +679,15 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectMagnitudeSquared(const SLComplexRect_s* SIG
  * Function: SDA_ComplexRectPhase
  *
  * Parameters:
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Complex inverse.
+ *  Complex inverse.
  *
  ********************************************************/
 
@@ -711,16 +711,16 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectPhase(const SLComplexRect_s* SIGLIB_PTR_DEC
  * Function: SDA_ComplexRectMultiply
  *
  * Parameters:
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc1,
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc2,
- *   SLComplexRect_s * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc1,
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc2,
+ *  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Complex inverse.
+ *  Complex inverse.
  *
  ********************************************************/
 
@@ -749,16 +749,16 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectMultiply(const SLComplexRect_s* SIGLIB_PTR_
  * Function: SDA_ComplexRectDivide
  *
  * Parameters:
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc1,
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc2,
- *   SLComplexRect_s * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc1,
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc2,
+ *  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Complex divide.
+ *  Complex divide.
  *
  ********************************************************/
 
@@ -800,16 +800,16 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectDivide(const SLComplexRect_s* SIGLIB_PTR_DE
  * Function: SDA_ComplexRectAdd
  *
  * Parameters:
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc1,
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc2,
- *   SLComplexRect_s * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc1,
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc2,
+ *  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Complex add.
+ *  Complex add.
  *
  ********************************************************/
 
@@ -838,16 +838,16 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectAdd(const SLComplexRect_s* SIGLIB_PTR_DECL 
  * Function: SDA_ComplexRectSubtract
  *
  * Parameters:
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc1,
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc2,
- *   SLComplexRect_s * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc1,
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc2,
+ *  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Complex subtract.
+ *  Complex subtract.
  *
  ********************************************************/
 
@@ -876,15 +876,15 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectSubtract(const SLComplexRect_s* SIGLIB_PTR_
  * Function: SDA_ComplexRectLog
  *
  * Parameters:
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
- *   SLComplexRect_s * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+ *  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Complex log.
+ *  Complex log.
  *
  ********************************************************/
 
@@ -911,15 +911,15 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectLog(const SLComplexRect_s* SIGLIB_PTR_DECL 
  * Function: SDA_ComplexRectExp
  *
  * Parameters:
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
- *   SLComplexRect_s * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+ *  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Complex exponential.
+ *  Complex exponential.
  *
  ********************************************************/
 
@@ -947,15 +947,15 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectExp(const SLComplexRect_s* SIGLIB_PTR_DECL 
  * Function: SDA_ComplexRectExpj
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLComplexRect_s * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Complex exponential.
+ *  Complex exponential.
  *
  ********************************************************/
 
@@ -979,16 +979,16 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectExpj(const SLData_t* SIGLIB_PTR_DECL pSrc, 
  * Function: SDA_ComplexRectPow
  *
  * Parameters:
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
- *   SLComplexRect_s * SIGLIB_PTR_DECL pDst,
- *   const SLData_t Power,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+ *  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+ *  const SLData_t Power,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Raise complex number to the power provided.
+ *  Raise complex number to the power provided.
  *
  ********************************************************/
 
@@ -1027,16 +1027,16 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectPow(const SLComplexRect_s* SIGLIB_PTR_DECL 
  * Function: SDA_ComplexRectAddScalar
  *
  * Parameters:
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
- *   const SLData_t Scalar,
- *   SLComplexRect_s * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+ *  const SLData_t Scalar,
+ *  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Adds a scalar quantity to a complex vector.
+ *  Adds a scalar quantity to a complex vector.
  *
  ********************************************************/
 
@@ -1063,16 +1063,16 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectAddScalar(const SLComplexRect_s* SIGLIB_PTR
  * Function: SDA_ComplexRectSubtractScalar
  *
  * Parameters:
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
- *   const SLData_t Scalar,
- *   SLComplexRect_s * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+ *  const SLData_t Scalar,
+ *  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Subtract a scalar quantity from a complex vector.
+ *  Subtract a scalar quantity from a complex vector.
  *
  ********************************************************/
 
@@ -1099,16 +1099,16 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectSubtractScalar(const SLComplexRect_s* SIGLI
  * Function: SDA_ComplexRectMultiplyScalar
  *
  * Parameters:
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
- *   const SLData_t Scalar,
- *   SLComplexRect_s * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+ *  const SLData_t Scalar,
+ *  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Subtract a scalar quantity from a complex vector.
+ *  Subtract a scalar quantity from a complex vector.
  *
  ********************************************************/
 
@@ -1135,16 +1135,16 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectMultiplyScalar(const SLComplexRect_s* SIGLI
  * Function: SDA_ComplexRectDivideScalar
  *
  * Parameters:
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
- *   const SLData_t Scalar,
- *   SLComplexRect_s * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+ *  const SLData_t Scalar,
+ *  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Subtract a scalar quantity from a complex vector.
+ *  Subtract a scalar quantity from a complex vector.
  *
  ********************************************************/
 
@@ -1173,16 +1173,16 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectDivideScalar(const SLComplexRect_s* SIGLIB_
  * Function: SDA_ComplexScalarSubtractRect
  *
  * Parameters:
- *   const SLData_t Scalar,
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
- *   SLComplexRect_s * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t Scalar,
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pSrc,
+ *  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Subtract a scalar quantity from a complex vector.
+ *  Subtract a scalar quantity from a complex vector.
  *
  ********************************************************/
 
@@ -1209,17 +1209,17 @@ void SIGLIB_FUNC_DECL SDA_ComplexScalarSubtractRect(const SLData_t Scalar, const
  * Function: SDA_ComplexRectLinearInterpolate
  *
  * Parameters:
- *   const SLComplexRect_s rPoint1,
- *   const SLComplexRect_s rPoint2,
- *   SLComplexRect_s * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t NumberOfInterpolatedPoints
+ *  const SLComplexRect_s rPoint1,
+ *  const SLComplexRect_s rPoint2,
+ *  SLComplexRect_s * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t NumberOfInterpolatedPoints
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform rectangular linear interpolation of the
- *   samples between the two source complex numbers.
+ *  Perform rectangular linear interpolation of the
+ *  samples between the two source complex numbers.
  *
  ********************************************************/
 
@@ -1250,17 +1250,17 @@ void SIGLIB_FUNC_DECL SDA_ComplexRectLinearInterpolate(const SLComplexRect_s rPo
  * Function: SDA_ComplexPolarLinearInterpolate
  *
  * Parameters:
- *   const SLComplexPolar_s Point1,
- *   const SLComplexPolar_s Point2,
- *   SLComplexPolar_s * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t NumberOfInterpolatedPoints
+ *  const SLComplexPolar_s Point1,
+ *  const SLComplexPolar_s Point2,
+ *  SLComplexPolar_s * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t NumberOfInterpolatedPoints
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform polar linear interpolation of the samples
- *   between the two source complex numbers.
+ *  Perform polar linear interpolation of the samples
+ *  between the two source complex numbers.
  *
  ********************************************************/
 

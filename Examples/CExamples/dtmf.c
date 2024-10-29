@@ -5,7 +5,7 @@
 //     697     1     2    3    A
 //     770     4     5    6    B
 //     852     7     8    9    C
-//     941     *     0    #    D
+//     941     *    0    #    D
 
 // Include files
 #include <stdio.h>

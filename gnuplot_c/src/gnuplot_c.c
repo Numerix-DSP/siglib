@@ -36,15 +36,15 @@ Copyright (c) 2024, Delta Numerix, All rights reserved.
  * Function: gpc_init_2d
  *
  * Parameters:
- *   const char *plotTitle,
- *   const char *xLabel,
- *   const char *yLabel,
- *   const double scalingMode,
- *   const enum gpcPlotSignMode signMode,
- *   const enum gpcKeyMode keyMode)
+ *  const char *plotTitle,
+ *  const char *xLabel,
+ *  const char *yLabel,
+ *  const double scalingMode,
+ *  const enum gpcPlotSignMode signMode,
+ *  const enum gpcKeyMode keyMode)
  *
  * Return value:
- *   h_GPC_Plot - Plot handle
+ *  h_GPC_Plot - Plot handle
  *
  * Description: Initialize the 2d plot
  *
@@ -121,15 +121,15 @@ h_GPC_Plot* gpc_init_2d(const char* plotTitle, const char* xLabel, const char* y
  * Function: gpc_init_2d_logscalex
  *
  * Parameters:
- *   const char *plotTitle,
- *   const char *xLabel,
- *   const char *yLabel,
- *   const double scalingMode,
- *   const enum gpcPlotSignMode signMode,
- *   const enum gpcKeyMode keyMode)
+ *  const char *plotTitle,
+ *  const char *xLabel,
+ *  const char *yLabel,
+ *  const double scalingMode,
+ *  const enum gpcPlotSignMode signMode,
+ *  const enum gpcKeyMode keyMode)
  *
  * Return value:
- *   h_GPC_Plot - Plot handle
+ *  h_GPC_Plot - Plot handle
  *
  * Description: Initialize the 2d plot with logscale x axis
  *
@@ -208,18 +208,18 @@ h_GPC_Plot* gpc_init_2d_logscalex(const char* plotTitle, const char* xLabel, con
  * Function: gpc_plot_2d
  *
  * Parameters:
- *   h_GPC_Plot *plotHandle,
- *   const double *pData,
- *   const int graphLength,
- *   const char *pDataName,
- *   const double xMin,
- *   const double xMax,
- *   const char *plotType,
- *   const char *pColour,
- *   const enum gpcNewAddGraphMode addMode)
+ *  h_GPC_Plot *plotHandle,
+ *  const double *pData,
+ *  const int graphLength,
+ *  const char *pDataName,
+ *  const double xMin,
+ *  const double xMax,
+ *  const char *plotType,
+ *  const char *pColour,
+ *  const enum gpcNewAddGraphMode addMode)
  *
  * Return value:
- *   int - error flag
+ *  int - error flag
  *
  * Description: Generate the 2d plot
  *
@@ -277,11 +277,11 @@ int gpc_plot_2d(h_GPC_Plot* plotHandle, const double* pData, const int graphLeng
  * Function: gpc_init_2d_dual_plot
  *
  * Parameters:
- *   const char *plotTitle,
- *   const enum gpcKeyMode keyMode)
+ *  const char *plotTitle,
+ *  const enum gpcKeyMode keyMode)
  *
  * Return value:
- *   h_GPC_Plot - Plot handle
+ *  h_GPC_Plot - Plot handle
  *
  * Description: Initialize the 2d plot
  *
@@ -335,28 +335,28 @@ h_GPC_Plot* gpc_init_2d_dual_plot(const char* plotTitle, const enum gpcKeyMode k
  * Function: gpc_plot_2d_dual_plot
  *
  * Parameters:
- *   h_GPC_Plot *plotHandle,
- *   const char *xLabel,
- *   const double xMin,
- *   const double xMax,
- *   const double *pData1,
- *   const char *pDataName1,
- *   const char *plotType1,
- *   const char *pColour1,
- *   const char *yLabel1,
- *   const double scalingMode1,
- *   const enum gpcPlotSignMode signMode1,
- *   const double *pData2,
- *   const char *pDataName2,
- *   const char *plotType2,
- *   const char *pColour2,
- *   const char *yLabel2,
- *   const double scalingMode2,
- *   const enum gpcPlotSignMode signMode2,
- *   const int graphLength)
+ *  h_GPC_Plot *plotHandle,
+ *  const char *xLabel,
+ *  const double xMin,
+ *  const double xMax,
+ *  const double *pData1,
+ *  const char *pDataName1,
+ *  const char *plotType1,
+ *  const char *pColour1,
+ *  const char *yLabel1,
+ *  const double scalingMode1,
+ *  const enum gpcPlotSignMode signMode1,
+ *  const double *pData2,
+ *  const char *pDataName2,
+ *  const char *plotType2,
+ *  const char *pColour2,
+ *  const char *yLabel2,
+ *  const double scalingMode2,
+ *  const enum gpcPlotSignMode signMode2,
+ *  const int graphLength)
  *
  * Return value:
- *   int - error flag
+ *  int - error flag
  *
  * Description: Generate the 2d dual plot
  *
@@ -449,11 +449,11 @@ int gpc_plot_2d_dual_plot(h_GPC_Plot* plotHandle, const char* xLabel, const doub
  * Function: gpc_init_3d
  *
  * Parameters:
- *   const char *plotTitle,
- *   const enum gpcKeyMode keyMode)
+ *  const char *plotTitle,
+ *  const enum gpcKeyMode keyMode)
  *
  * Return value:
- *   h_GPC_Plot - Plot handle
+ *  h_GPC_Plot - Plot handle
  *
  * Description: Initialize the 3D plot
  *
@@ -517,18 +517,18 @@ h_GPC_Plot* gpc_init_3d(const char* plotTitle, const char* xLabel, const char* y
  * Function: gpc_plot_3d
  *
  * Parameters:
- *   h_GPC_Plot *plotHandle,
- *   const double *pX,
- *   const double *pY,
- *   const double *pZ,
- *   const int graphLength,
- *   const char *pDataName,
- *   const char *plotType,
- *   const char *pColour,
- *   const enum gpcNewAddGraphMode addMode)
+ *  h_GPC_Plot *plotHandle,
+ *  const double *pX,
+ *  const double *pY,
+ *  const double *pZ,
+ *  const int graphLength,
+ *  const char *pDataName,
+ *  const char *plotType,
+ *  const char *pColour,
+ *  const enum gpcNewAddGraphMode addMode)
  *
  * Return value:
- *   int - error flag
+ *  int - error flag
  *
  * Description: Generate the 3D plot
  *
@@ -609,14 +609,14 @@ int gpc_plot_3d(h_GPC_Plot* plotHandle, const double* pX, const double* pY, cons
  * Function: gpc_init_xy
  *
  * Parameters:
- *   const char *plotTitle,
- *   const char *xLabel,
- *   const char *yLabel,
- *   const double dimension,
- *   const enum gpcKeyMode keyMode)
+ *  const char *plotTitle,
+ *  const char *xLabel,
+ *  const char *yLabel,
+ *  const double dimension,
+ *  const enum gpcKeyMode keyMode)
  *
  * Return value:
- *   h_GPC_Plot - Plot handle
+ *  h_GPC_Plot - Plot handle
  *
  * Description: Initialize the XY plot
  *
@@ -684,16 +684,16 @@ h_GPC_Plot* gpc_init_xy(const char* plotTitle, const char* xLabel, const char* y
  * Function: gpc_plot_xy
  *
  * Parameters:
- *   h_GPC_Plot *plotHandle,
- *   const ComplexRect_s *pData,
- *   const int graphLength,
- *   const char *pDataName,
- *   const char *plotType,
- *   const char *pColour,
- *   const enum gpcNewAddGraphMode addMode)
+ *  h_GPC_Plot *plotHandle,
+ *  const ComplexRect_s *pData,
+ *  const int graphLength,
+ *  const char *pDataName,
+ *  const char *plotType,
+ *  const char *pColour,
+ *  const enum gpcNewAddGraphMode addMode)
  *
  * Return value:
- *   int - error flag
+ *  int - error flag
  *
  * Description: Generate the XY plot
  *
@@ -742,12 +742,12 @@ int gpc_plot_xy(h_GPC_Plot* plotHandle, const ComplexRect_s* pData, const int gr
  * Function: gpc_init_pz
  *
  * Parameters:
- *   const char *plotTitle,
- *   const double dimension,
- *   const enum gpcKeyMode keyMode)
+ *  const char *plotTitle,
+ *  const double dimension,
+ *  const enum gpcKeyMode keyMode)
  *
  * Return value:
- *   h_GPC_Plot - Plot handle
+ *  h_GPC_Plot - Plot handle
  *
  * Description: Initialize the Pole-Zero plot
  *
@@ -826,15 +826,15 @@ h_GPC_Plot* gpc_init_pz(const char* plotTitle, const double dimension, const enu
  * Function: gpc_plot_pz
  *
  * Parameters:
- *   h_GPC_Plot *plotHandle,
- *   const ComplexRect_s *pData,
- *   const int graphLength,
- *   const char *pDataName,
- *   const enum gpcPoleZeroMode poleZeroMode,
- *   const enum gpcNewAddGraphMode addMode)
+ *  h_GPC_Plot *plotHandle,
+ *  const ComplexRect_s *pData,
+ *  const int graphLength,
+ *  const char *pDataName,
+ *  const enum gpcPoleZeroMode poleZeroMode,
+ *  const enum gpcNewAddGraphMode addMode)
  *
  * Return value:
- *   int - error flag
+ *  int - error flag
  *
  * Description: Generate the Pole-Zero plot
  *
@@ -922,20 +922,20 @@ int gpc_plot_pz(h_GPC_Plot* plotHandle, const ComplexRect_s* pData, const int gr
  * Function: gpc_init_spectrogram
  *
  * Parameters:
- *   const char *plotTitle,
- *   const char *xLabel,
- *   const char *yLabel,
- *   const int xAxisLength,
- *   const int yAxisLength,
- *   const double yMin,
- *   const double yMax,
- *   const double zMin,
- *   const double zMax,
- *   const char *pColourPalette,
- *   const enum gpcKeyMode keyMode)
+ *  const char *plotTitle,
+ *  const char *xLabel,
+ *  const char *yLabel,
+ *  const int xAxisLength,
+ *  const int yAxisLength,
+ *  const double yMin,
+ *  const double yMax,
+ *  const double zMin,
+ *  const double zMax,
+ *  const char *pColourPalette,
+ *  const enum gpcKeyMode keyMode)
  *
  * Return value:
- *   h_GPC_Plot - Plot handle
+ *  h_GPC_Plot - Plot handle
  *
  * Description: Initialize the spectrogram plot
  *
@@ -1020,14 +1020,14 @@ h_GPC_Plot* gpc_init_spectrogram(const char* plotTitle, const char* xLabel, cons
  * Function: gpc_plot_spectrogram
  *
  * Parameters:
- *   h_GPC_Plot *plotHandle,
- *   const double *pData,
- *   const char *pDataName,
- *   const double xMin,
- *   const double xMax)
+ *  h_GPC_Plot *plotHandle,
+ *  const double *pData,
+ *  const char *pDataName,
+ *  const double xMin,
+ *  const double xMax)
  *
  * Return value:
- *   int - error flag
+ *  int - error flag
  *
  * Description: Generate the spectrogram plot
  *
@@ -1076,16 +1076,16 @@ int gpc_plot_spectrogram(h_GPC_Plot* plotHandle, const double* pData, const char
  * Function: gpc_init_image
  *
  * Parameters:
- *   const char *plotTitle,
- *   const int xAxisLength,
- *   const int yAxisLength,
- *   const unsigned int zMin,
- *   const unsigned int zMax,
- *   const char *pColourPalette,
- *   const enum gpcKeyMode keyMode)
+ *  const char *plotTitle,
+ *  const int xAxisLength,
+ *  const int yAxisLength,
+ *  const unsigned int zMin,
+ *  const unsigned int zMax,
+ *  const char *pColourPalette,
+ *  const enum gpcKeyMode keyMode)
  *
  * Return value:
- *   h_GPC_Plot - Plot handle
+ *  h_GPC_Plot - Plot handle
  *
  * Description: Initialize the image plot
  *
@@ -1169,12 +1169,12 @@ h_GPC_Plot* gpc_init_image(const char* plotTitle, const int xAxisLength, const i
  * Function: gpc_plot_image
  *
  * Parameters:
- *   h_GPC_Plot *plotHandle,
- *   const unsigned int *pData,
- *   const char *pDataName)
+ *  h_GPC_Plot *plotHandle,
+ *  const unsigned int *pData,
+ *  const char *pDataName)
  *
  * Return value:
- *   int - error flag
+ *  int - error flag
  *
  * Description: Generate the image plot
  *
@@ -1207,13 +1207,13 @@ int gpc_plot_image(h_GPC_Plot* plotHandle, const unsigned int* pData, const char
  * Function: gpc_init_polar
  *
  * Parameters:
- *   const char *plotTitle,
- *   const double gMin,
- *   const double gMax,
- *   const enum gpcKeyMode keyMode)
+ *  const char *plotTitle,
+ *  const double gMin,
+ *  const double gMax,
+ *  const enum gpcKeyMode keyMode)
  *
  * Return value:
- *   h_GPC_Plot - Plot handle
+ *  h_GPC_Plot - Plot handle
  *
  * Description: Initialize the polar plot
  *
@@ -1319,17 +1319,17 @@ h_GPC_Plot* gpc_init_polar(const char* plotTitle, const double gMin, const doubl
  * Function: gpc_plot_polar
  *
  * Parameters:
- *   h_GPC_Plot *plotHandle,
- *   const double *pAngles,
- *   const double *pGains,
- *   const int numAngles,
- *   const char *pDataName,
- *   const char *plotType,
- *   const char *pColour,
- *   const enum gpcNewAddGraphMode addMode)
+ *  h_GPC_Plot *plotHandle,
+ *  const double *pAngles,
+ *  const double *pGains,
+ *  const int numAngles,
+ *  const char *pDataName,
+ *  const char *plotType,
+ *  const char *pColour,
+ *  const enum gpcNewAddGraphMode addMode)
  *
  * Return value:
- *   int - error flag
+ *  int - error flag
  *
  * Description: Generate the polar plot
  *
@@ -1380,15 +1380,15 @@ int gpc_plot_polar(h_GPC_Plot* plotHandle, const double* pAngles, const double* 
  * Function: gpc_plot_confusion_matrix
  *
  * Parameters:
- *   const double *          confusionMatrix,
- *   const double            maxValue,
- *   const int               numCategories
+ *  const double *         confusionMatrix,
+ *  const double            maxValue,
+ *  const int               numCategories
  *
  * Return value:
- *   h_GPC_Plot - Plot handle
+ *  h_GPC_Plot - Plot handle
  *
  * Description: Create a confusion matrix plot and plot
- *   the results
+ *  the results
  *
  ********************************************************/
 
@@ -1457,14 +1457,14 @@ h_GPC_Plot* gpc_plot_confusion_matrix(const double* confusionMatrix, const doubl
  * Function: gpc_plot_confusion_matrix_percentage
  *
  * Parameters:
- *   const double *          confusionMatrix,
- *   const int               numCategories
+ *  const double *         confusionMatrix,
+ *  const int               numCategories
  *
  * Return value:
- *   h_GPC_Plot - Plot handle
+ *  h_GPC_Plot - Plot handle
  *
  * Description: Create a confusion matrix plot and plot
- *   the results as percentages
+ *  the results as percentages
  *
  ********************************************************/
 
@@ -1534,13 +1534,13 @@ h_GPC_Plot* gpc_plot_confusion_matrix_percentage(const double* confusionMatrix, 
  * Function: gpc_close
  *
  * Parameters:
- *   h_GPC_Plot *plotHandle
+ *  h_GPC_Plot *plotHandle
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Delete the plot and temporary files
- *   associated with the handle.
+ *  associated with the handle.
  *
  ********************************************************/
 

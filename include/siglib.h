@@ -108,7 +108,9 @@ SLData_t SIGLIB_FUNC_DECL SUF_SiglibVersion(void);
 #ifndef _HP_VEE    // The following functionality is not supported by VEE
 void SIGLIB_FUNC_DECL SUF_PrintArray(const SLData_t*, const SLArrayIndex_t);
 void SIGLIB_FUNC_DECL SUF_PrintFixedPointArray(const SLArrayIndex_t*, const SLArrayIndex_t);
+void SIGLIB_FUNC_DECL SUF_PrintComplexMatrix(const SLData_t*, const SLData_t*, const SLArrayIndex_t, const SLArrayIndex_t);
 void SIGLIB_FUNC_DECL SUF_PrintComplexArray(const SLData_t*, const SLData_t*, const SLArrayIndex_t);
+void SIGLIB_FUNC_DECL SUF_PrintComplexNumber(const SLData_t, const SLData_t);
 void SIGLIB_FUNC_DECL SUF_PrintMatrix(const SLData_t*, const SLArrayIndex_t, const SLArrayIndex_t);
 void SIGLIB_FUNC_DECL SUF_PrintPolar(const SLComplexPolar_s);
 void SIGLIB_FUNC_DECL SUF_PrintRectangular(const SLComplexRect_s);
@@ -693,6 +695,12 @@ void SIGLIB_FUNC_DECL SDA_CfftExtend(const SLData_t* SIGLIB_INPUT_PTR_DECL,    /
                                      const SLArrayIndex_t,                     // Source array length
                                      const SLArrayIndex_t);                    // Destination array length
 
+void SIGLIB_FUNC_DECL SDA_FftRealToComplex(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to real source array
+                                           const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to imaginary source array
+                                           SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to real destination array
+                                           SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to imaginary destination array
+                                           const SLArrayIndex_t);                    // FFT length
+
 void SIGLIB_FUNC_DECL SIF_DctII(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to cosine look up table
                                 const SLArrayIndex_t);               // DCT length
 
@@ -1090,6 +1098,22 @@ void SIGLIB_FUNC_DECL SDA_FftCorrelateArb(SLData_t* SIGLIB_INPUT_PTR_DECL,      
                                           const SLArrayIndex_t,                           // FFT length
                                           const SLArrayIndex_t,                           // Log 2 FFT length
                                           const SLData_t);                                // Inverse FFT length
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SDA_RfftConvolve(SLData_t* SIGLIB_INPUT_PTR_DECL,                // Pointer to real time domain source data 1
+                                                 SLData_t* SIGLIB_INPUT_PTR_DECL,                // Pointer to imag time domain source data 1
+                                                 SLData_t* SIGLIB_INPUT_PTR_DECL,                // Pointer to real time domain source data 2
+                                                 SLData_t* SIGLIB_INPUT_PTR_DECL,                // Pointer to imag time domain source data 2
+                                                 SLData_t* SIGLIB_OUTPUT_PTR_DECL,               // Pointer to real destination array
+                                                 SLData_t* SIGLIB_OUTPUT_PTR_DECL,               // Pointer to imag destination array
+                                                 const SLData_t* SIGLIB_INPUT_PTR_DECL,          // Pointer to FFT coefficients
+                                                 const SLArrayIndex_t* SIGLIB_INPUT_PTR_DECL,    // Bit reverse mode flag / Pointer to bit
+                                                                                                 // reverse address table
+                                                 const enum SLFftConvolveModeType_t,             // Result mode
+                                                 const SLArrayIndex_t,                           // Source 1 length
+                                                 const SLArrayIndex_t,                           // Source 2 length
+                                                 const SLArrayIndex_t,                           // FFT length
+                                                 const SLArrayIndex_t,                           // Log 2 FFT length
+                                                 const SLData_t);                                // Inverse FFT length
 
 // Chirp z-transform functions - chirpz.c
 
@@ -5232,8 +5256,11 @@ void SIGLIB_FUNC_DECL SDA_Fill(SLData_t* SIGLIB_INOUT_PTR_DECL,    // Pointer to
                                const SLData_t,                     // Fill value
                                const SLArrayIndex_t);              // Array length
 
-void SIGLIB_FUNC_DECL SDA_Clear(SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+void SIGLIB_FUNC_DECL SDA_Zeros(SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                 const SLArrayIndex_t);              // Array length
+
+void SIGLIB_FUNC_DECL SDA_Ones(SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                               const SLArrayIndex_t);              // Array length
 
 void SIGLIB_FUNC_DECL SDA_Histogram(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                     SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to histogram array
@@ -5813,6 +5840,26 @@ void SIGLIB_FUNC_DECL SDA_ExtractArray(const SLData_t* SIGLIB_INPUT_PTR_DECL,   
                                        const SLArrayIndex_t,                     // Extracted sample location
                                        const SLArrayIndex_t,                     // Extracted sample array length
                                        const SLArrayIndex_t);                    // Source array length
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SAI_CountOneBits(SLArrayIndex_t);    // Fixed point number
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SAI_CountZeroBits(SLArrayIndex_t);    // Fixed point number
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SAI_Log2OfPowerof2(SLArrayIndex_t);    // Fixed point number
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SAI_DivideByPowerOf2(SLArrayIndex_t,           // Dividend
+                                                     const SLArrayIndex_t);    // Divisor
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SAI_NextPowerOf2(SLArrayIndex_t);    // Fixed point number
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SAI_NextMultipleOfFftLength(SLArrayIndex_t,           // Fixed point number
+                                                            const SLArrayIndex_t);    // FFT Length
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindFirstNonZeroIndex(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                                                          const SLArrayIndex_t);                    // Array length
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindNumberOfNonZeroValues(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                                                              const SLArrayIndex_t);                    // Array length
 
 // Data type conversion functions - datatype.c
 
@@ -6865,7 +6912,11 @@ void SIGLIB_FUNC_DECL SDA_ActivationTanHDerivative(const SLData_t* SIGLIB_INPUT_
                                                    const SLArrayIndex_t);                    // Array length
 #endif                                                                                       // End of #ifndef _HP_VEE
 
-// Deprecated functionality - these may be removed in a later version
+// The following functionality has been deprecated
+// This is usually because the function name has been changed for consistency or compatibility with other libraries
+// These macros are provided to ease porting but will be removed in later versions of the library
+
+#define SDA_Clear SDA_Zeros
 #define SDA_Shorten SDA_Copy
 #define SDA_Lengthen(pSrc, pDst, srcLength, dstLength) SDA_ZeroPad(pSrc, pDst, 0, (dstLength - srcLength), srcLength)
 
@@ -6907,6 +6958,15 @@ void SIGLIB_FUNC_DECL SDA_ActivationTanHDerivative(const SLData_t* SIGLIB_INPUT_
 #define SIGLIB_BLACKMAN_HARRIS SIGLIB_BLACKMAN_HARRIS_FILTER
 #define SIGLIB_RECTANGLE SIGLIB_RECTANGLE_FILTER
 #define SIGLIB_FLAT_TOP SIGLIB_FLAT_TOP_FILTER
+
+#define SDS_Odd SDS_TestOdd
+#define SDS_Even SDS_TestEven
+#define SDS_PowerOfTwo SDS_TestPowerOfTwo
+#define SAI_Odd SAI_TestOdd
+#define SAI_Even SAI_TestEven
+#define SAI_PowerOfTwo SAI_TestPowerOfTwo
+
+// End of deprecation list
 
 #ifdef __cplusplus    // End of decl. for C++ program calls
 }

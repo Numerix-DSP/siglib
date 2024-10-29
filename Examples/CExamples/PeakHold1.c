@@ -45,7 +45,7 @@ int main(void)
           FFT_LENGTH);                // FFT length
 
   SLData_t sinePhase = SIGLIB_ZERO;
-  SDA_Clear(peak,                // Pointer to destination array
+  SDA_Zeros(peak,                // Pointer to destination array
             HALF_FFT_LENGTH);    // Dataset length
 
   printf("512 Point FFT, quantized data\n");

@@ -460,7 +460,7 @@ int main(int argc, char** argv)
   }
 
 #if DISPLAY_CONSTELLATION
-  SDA_Clear((SLData_t*)ReceivedConstellationPoints, 2 * MAX_CONST_POINTS_PER_BURST);
+  SDA_Zeros((SLData_t*)ReceivedConstellationPoints, 2 * MAX_CONST_POINTS_PER_BURST);
 #endif
 
   DemodulatorState = DEMODULATOR_RESET;    // Set initial demodulator state
@@ -1068,10 +1068,10 @@ int main(int argc, char** argv)
  * Function: ClearDemodOutput
  *
  * Parameters:
- *   None
+ *  None
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description: Clear the demodulated data output file.
  *
@@ -1093,10 +1093,10 @@ SLError_t ClearDemodOutput(void)
  * Function: DemodOutput
  *
  * Parameters:
- *   Input bits - if not 0, 1, 2 or 3 then enters a CR
+ *  Input bits - if not 0, 1, 2 or 3 then enters a CR
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description: Prints string to demodulated data output file
  *

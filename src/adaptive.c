@@ -44,14 +44,14 @@ Description: SigLib DSP library adaptive filter routines.
  * Function: SIF_Lms
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pStateArray,
- *   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
- *   SLArrayIndex_t *pLMSFilterIndex,
- *   SLArrayIndex_t *pLMSUpdateIndex,
- *   const SLArrayIndex_t LMSFilterLength
+ *  SLData_t * SIGLIB_PTR_DECL pStateArray,
+ *  SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
+ *  SLArrayIndex_t *pLMSFilterIndex,
+ *  SLArrayIndex_t *pLMSUpdateIndex,
+ *  const SLArrayIndex_t LMSFilterLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
  *
@@ -73,17 +73,17 @@ void SIGLIB_FUNC_DECL SIF_Lms(SLData_t* SIGLIB_PTR_DECL pStateArray, SLData_t* S
  * Function: SDS_Lms
  *
  * Parameters:
- *   SLData_t InputSample,
- *   SLData_t * SIGLIB_PTR_DECL pStateArray,
- *   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
- *   SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
- *   SLArrayIndex_t LMSFilterLength
+ *  SLData_t InputSample,
+ *  SLData_t * SIGLIB_PTR_DECL pStateArray,
+ *  SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
+ *  SLArrayIndex_t LMSFilterLength
  *
  * Return value:
- *   SLData_t acc - Filtered sample
+ *  SLData_t acc - Filtered sample
  *
  * Description:
- *   Apply the filter to the data
+ *  Apply the filter to the data
  *
  ********************************************************/
 
@@ -117,37 +117,37 @@ SLData_t SIGLIB_FUNC_DECL SDS_Lms(const SLData_t InputSample, SLData_t* SIGLIB_P
  * Function: SDA_LmsUpdate
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pStateArray,
- *   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
- *   SLArrayIndex_t *pLMSFilterIndex,
- *   const SLArrayIndex_t LMSFilterLength,
- *   const SLData_t LMSConvergenceFactor,
- *   const SLData_t Error
+ *  const SLData_t * SIGLIB_PTR_DECL pStateArray,
+ *  SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
+ *  SLArrayIndex_t *pLMSFilterIndex,
+ *  const SLArrayIndex_t LMSFilterLength,
+ *  const SLData_t LMSConvergenceFactor,
+ *  const SLData_t Error
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Update filter taps according to the LMS
- *   algorithm.
+ *  Update filter taps according to the LMS
+ *  algorithm.
  **   configuration:
  *
- *    d(n) --------------------------|
- *                                   |+
- *                                 (SUM)------> e(n)
- *                  ------           |-
- *    x(n) ---------| AF |-----------|--------> y(n)
- *                  ------
+ *   d(n) --------------------------|
+ *                                  |+
+ *                                (SUM)------> e(n)
+ *                 ------           |-
+ *   x(n) ---------| AF |-----------|--------> y(n)
+ *                 ------
  *
- *    Algorithm:
- *          N-1
- *          __
- *   y(n) = \  w(k)*x(n-k)
- *          /_
- *          k=0
+ *   Algorithm:
+ *         N-1
+ *         __
+ *  y(n) = \  w(k)*x(n-k)
+ *         /_
+ *         k=0
  *
- *   e(n) = d(n) - y(n)
- *   w(k) = w(k) + u*e(n)*x(n-k) k=0,1,2,...,N-1
+ *  e(n) = d(n) - y(n)
+ *  w(k) = w(k) + u*e(n)*x(n-k) k=0,1,2,...,N-1
  *
  ********************************************************/
 
@@ -182,39 +182,39 @@ void SIGLIB_FUNC_DECL SDA_LmsUpdate(const SLData_t* SIGLIB_PTR_DECL pStateArray,
  * Function: SDA_LeakyLmsUpdate
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pStateArray,
- *   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
- *   SLArrayIndex_t *pLMSFilterIndex,
- *   const SLArrayIndex_t LMSFilterLength,
- *   const SLData_t LMSConvergenceFactor,
- *   const SLData_t DecayRate,
- *   const SLData_t Error
+ *  const SLData_t * SIGLIB_PTR_DECL pStateArray,
+ *  SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
+ *  SLArrayIndex_t *pLMSFilterIndex,
+ *  const SLArrayIndex_t LMSFilterLength,
+ *  const SLData_t LMSConvergenceFactor,
+ *  const SLData_t DecayRate,
+ *  const SLData_t Error
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Update filter taps according to the leaky LMS
- *   algorithm.
+ *  Update filter taps according to the leaky LMS
+ *  algorithm.
  *
- *   configuration:
+ *  configuration:
  *
- *    d(n) --------------------------|
- *                                   |+
- *                                 (SUM)------> e(n)
- *                  ------           |-
- *    x(n) ---------| AF |-----------|--------> y(n)
- *                  ------
+ *   d(n) --------------------------|
+ *                                  |+
+ *                                (SUM)------> e(n)
+ *                 ------           |-
+ *   x(n) ---------| AF |-----------|--------> y(n)
+ *                 ------
  *
- *    Algorithm:
- *          N-1
- *          __
- *   y(n) = \  w(k)*x(n-k)
- *          /_
- *          k=0
+ *   Algorithm:
+ *         N-1
+ *         __
+ *  y(n) = \  w(k)*x(n-k)
+ *         /_
+ *         k=0
  *
- *   e(n) = d(n) - y(n)
- *   w(k) = (w(k)*Decay) + u*e(n)*x(n-k) k=0,1,2,...,N-1
+ *  e(n) = d(n) - y(n)
+ *  w(k) = (w(k)*Decay) + u*e(n)*x(n-k) k=0,1,2,...,N-1
  *
  ********************************************************/
 
@@ -250,42 +250,42 @@ void SIGLIB_FUNC_DECL SDA_LeakyLmsUpdate(const SLData_t* SIGLIB_PTR_DECL pStateA
  * Function: SDA_NormalizedLmsUpdate
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pStateArray,
- *   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
- *   SLArrayIndex_t *pLMSFilterIndex,
- *   SLData_t * SIGLIB_PTR_DECL InputPower,
- *   const SLArrayIndex_t LMSFilterLength,
- *   const SLData_t LMSConvergenceFactor,
- *   const SLData_t Error
+ *  const SLData_t * SIGLIB_PTR_DECL pStateArray,
+ *  SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
+ *  SLArrayIndex_t *pLMSFilterIndex,
+ *  SLData_t * SIGLIB_PTR_DECL InputPower,
+ *  const SLArrayIndex_t LMSFilterLength,
+ *  const SLData_t LMSConvergenceFactor,
+ *  const SLData_t Error
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Update filter taps according to the normalized LMS
- *   algorithm.
+ *  Update filter taps according to the normalized LMS
+ *  algorithm.
  *
- *   configuration:
+ *  configuration:
  *
- *    d(n) --------------------------|
- *                                   |+
- *                                 (SUM)------> e(n)
- *             ------    ------      |-
- *    x(n) ----| AGC|----| AF |------|--------> y(n)
- *             ------    ------
+ *   d(n) --------------------------|
+ *                                  |+
+ *                                (SUM)------> e(n)
+ *            ------    ------      |-
+ *   x(n) ----| AGC|----| AF |------|--------> y(n)
+ *            ------    ------
  *
- *    Algorithm:
- *          N-1
- *          __
- *   y(n) = \  w(k)*x(n-k)
- *          /_
- *          k=0
+ *   Algorithm:
+ *         N-1
+ *         __
+ *  y(n) = \  w(k)*x(n-k)
+ *         /_
+ *         k=0
  *
- *   Power(n) = (1 - b) * Power(n-1) + b * x[0]^2
- *   e(n) = d(n) - y(n)
- *   w(k) = w(k) + (u*a/Power)*e(n)*x(n-k) k=0,1,2,...,N-1
- *   Note variables a and b are the same in this
- *   and most other applications.
+ *  Power(n) = (1 - b) * Power(n-1) + b * x[0]^2
+ *  e(n) = d(n) - y(n)
+ *  w(k) = w(k) + (u*a/Power)*e(n)*x(n-k) k=0,1,2,...,N-1
+ *  Note variables a and b are the same in this
+ *  and most other applications.
  *
  ********************************************************/
 
@@ -323,38 +323,38 @@ void SIGLIB_FUNC_DECL SDA_NormalizedLmsUpdate(const SLData_t* SIGLIB_PTR_DECL pS
  * Function: SDA_SignErrorLmsUpdate
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pStateArray,
- *   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
- *   SLArrayIndex_t *pLMSFilterIndex,
- *   const SLArrayIndex_t LMSFilterLength,
- *   const SLData_t LMSConvergenceFactor,
- *   const SLData_t Error
+ *  const SLData_t * SIGLIB_PTR_DECL pStateArray,
+ *  SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
+ *  SLArrayIndex_t *pLMSFilterIndex,
+ *  const SLArrayIndex_t LMSFilterLength,
+ *  const SLData_t LMSConvergenceFactor,
+ *  const SLData_t Error
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Update filter taps according to the sign error LMS
- *   algorithm.
+ *  Update filter taps according to the sign error LMS
+ *  algorithm.
  *
- *   configuration:
+ *  configuration:
  *
- *    d(n) --------------------------|
- *                                   |+
- *                                 (SUM)------> e(n)
- *                  ------           |-
- *    x(n) ---------| AF |-----------|--------> y(n)
- *                  ------
+ *   d(n) --------------------------|
+ *                                  |+
+ *                                (SUM)------> e(n)
+ *                 ------           |-
+ *   x(n) ---------| AF |-----------|--------> y(n)
+ *                 ------
  *
- *    Algorithm:
- *          N-1
- *          __
- *   y(n) = \  w(k)*x(n-k)
- *          /_
- *          k=0
+ *   Algorithm:
+ *         N-1
+ *         __
+ *  y(n) = \  w(k)*x(n-k)
+ *         /_
+ *         k=0
  *
- *   e(n) = d(n) - y(n)
- *   w(k) = w(k) + u*sign[e(n)]*x(n-k) k=0,1,2,...,N-1
+ *  e(n) = d(n) - y(n)
+ *  w(k) = w(k) + u*sign[e(n)]*x(n-k) k=0,1,2,...,N-1
  *
  ********************************************************/
 
@@ -392,38 +392,38 @@ void SIGLIB_FUNC_DECL SDA_SignErrorLmsUpdate(const SLData_t* SIGLIB_PTR_DECL pSt
  * Function: SDA_SignDataLmsUpdate
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pStateArray,
- *   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
- *   SLArrayIndex_t *pLMSFilterIndex,
- *   const SLArrayIndex_t LMSFilterLength,
- *   const SLData_t LMSConvergenceFactor,
- *   const SLData_t Error
+ *  const SLData_t * SIGLIB_PTR_DECL pStateArray,
+ *  SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
+ *  SLArrayIndex_t *pLMSFilterIndex,
+ *  const SLArrayIndex_t LMSFilterLength,
+ *  const SLData_t LMSConvergenceFactor,
+ *  const SLData_t Error
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Update filter taps according to the sign data LMS
- *   algorithm.
+ *  Update filter taps according to the sign data LMS
+ *  algorithm.
  *
- *   configuration:
+ *  configuration:
  *
- *    d(n) --------------------------|
- *                                   |+
- *                                 (SUM)------> e(n)
- *                  ------           |-
- *    x(n) ---------| AF |-----------|--------> y(n)
- *                  ------
+ *   d(n) --------------------------|
+ *                                  |+
+ *                                (SUM)------> e(n)
+ *                 ------           |-
+ *   x(n) ---------| AF |-----------|--------> y(n)
+ *                 ------
  *
- *    Algorithm:
- *          N-1
- *          __
- *   y(n) = \  w(k)*x(n-k)
- *          /_
- *          k=0
+ *   Algorithm:
+ *         N-1
+ *         __
+ *  y(n) = \  w(k)*x(n-k)
+ *         /_
+ *         k=0
  *
- *   e(n) = d(n) - y(n)
- *   w(k) = w(k) + u*e(n)*sign[x(n-k)] k=0,1,2,...,N-1
+ *  e(n) = d(n) - y(n)
+ *  w(k) = w(k) + u*e(n)*sign[x(n-k)] k=0,1,2,...,N-1
  *
  ********************************************************/
 
@@ -463,38 +463,38 @@ void SIGLIB_FUNC_DECL SDA_SignDataLmsUpdate(const SLData_t* SIGLIB_PTR_DECL pSta
  * Function: SDA_SignSignLmsUpdate
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pStateArray,
- *   SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
- *   SLArrayIndex_t *pLMSFilterIndex,
- *   const SLArrayIndex_t LMSFilterLength,
- *   const SLData_t LMSConvergenceFactor,
- *   const SLData_t Error
+ *  const SLData_t * SIGLIB_PTR_DECL pStateArray,
+ *  SLData_t * SIGLIB_PTR_DECL pCoeffsArray,
+ *  SLArrayIndex_t *pLMSFilterIndex,
+ *  const SLArrayIndex_t LMSFilterLength,
+ *  const SLData_t LMSConvergenceFactor,
+ *  const SLData_t Error
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Update filter taps according to the sign sign LMS
- *   algorithm.
+ *  Update filter taps according to the sign sign LMS
+ *  algorithm.
  *
- *   configuration:
+ *  configuration:
  *
- *    d(n) --------------------------|
- *                                   |+
- *                                 (SUM)------> e(n)
- *                  ------           |-
- *    x(n) ---------| AF |-----------|--------> y(n)
- *                  ------
+ *   d(n) --------------------------|
+ *                                  |+
+ *                                (SUM)------> e(n)
+ *                 ------           |-
+ *   x(n) ---------| AF |-----------|--------> y(n)
+ *                 ------
  *
- *    Algorithm:
- *          N-1
- *          __
- *   y(n) = \  w(k)*x(n-k)
- *          /_
- *          k=0
+ *   Algorithm:
+ *         N-1
+ *         __
+ *  y(n) = \  w(k)*x(n-k)
+ *         /_
+ *         k=0
  *
- *   e(n) = d(n) - y(n)
- *   w(k) = w(k) + u*sign[e(n)]*sign[x(n-k)] k=0,1,2,...,N-1
+ *  e(n) = d(n) - y(n)
+ *  w(k) = w(k) + u*sign[e(n)]*sign[x(n-k)] k=0,1,2,...,N-1
  *
  ********************************************************/
 

@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
 
   printf("SpreadingFactor = %d, CodeIndex = %d\n", SpreadingFactor, CodeIndex);
 
-  SDA_Clear(ChannelizationCode, SIGLIB_MAX_SPREADING_FACTOR);
+  SDA_Zeros(ChannelizationCode, SIGLIB_MAX_SPREADING_FACTOR);
 
   SDS_ChannelizationCode(ChannelizationCode,    // Channelization code array
                          SpreadingFactor,       // Spreading factor

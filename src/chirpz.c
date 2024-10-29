@@ -46,28 +46,28 @@ Description: Chirp z-Transform routines, for SigLib DSP library.
  * Function: SIF_Czt
  *
  * Parameters:
- *   SLData_t *,                           - Pointer to AWNr coefficients
- *   SLData_t *,                           - Pointer to AWNi coefficients
- *   SLData_t *,                           - Pointer to WMr coefficients
- *   SLData_t *,                           - Pointer to WMi coefficients
- *   SLData_t *,                           - Pointer to vLr coefficients
- *   SLData_t *,                           - Pointer to vLi coefficients
- *   SLData_t *,                           - FFT coeff pointer
- *   SLArrayIndex_t *,                     - Bit reverse mode flag / Pointer to
+ *  SLData_t *,                           - Pointer to AWNr coefficients
+ *  SLData_t *,                           - Pointer to AWNi coefficients
+ *  SLData_t *,                           - Pointer to WMr coefficients
+ *  SLData_t *,                           - Pointer to WMi coefficients
+ *  SLData_t *,                           - Pointer to vLr coefficients
+ *  SLData_t *,                           - Pointer to vLi coefficients
+ *  SLData_t *,                           - FFT coeff pointer
+ *  SLArrayIndex_t *,                     - Bit reverse mode flag / Pointer to
  *bit reverse address table const SLData_t Radius,                - Contour
  *start radius const SLData_t Decay,                 - Contour decay rate const
  *SLData_t StartFreq,             - Contour start frequency const SLData_t
  *EndFreq,               - Contour end frequency const SLData_t SampleRate, -
  *System sample rate const SLArrayIndex_t InLen,           - Input array length
- *   const SLArrayIndex_t OutLen,          - Output array length
- *   const SLArrayIndex_t FFTLength,       - FFT length
- *   const SLArrayIndex_t Log2FFTLength    - Log 2 FFT length
+ *  const SLArrayIndex_t OutLen,          - Output array length
+ *  const SLArrayIndex_t FFTLength,       - FFT length
+ *  const SLArrayIndex_t Log2FFTLength    - Log 2 FFT length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the chirp z-transform functions.
+ *  Initialise the chirp z-transform functions.
  *
  ********************************************************/
 
@@ -146,18 +146,18 @@ void SIGLIB_FUNC_DECL SIF_Czt(SLData_t* SIGLIB_PTR_DECL pAWNr, SLData_t* SIGLIB_
  * Function: SIF_Awn
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pAWNr    - Real coefficient pointer
- *   SLData_t * SIGLIB_PTR_DECL pAWNi    - Imaginary coefficient pointer
- *   const SLComplexRect_s,              - A ^ (-1)
- *   const SLComplexRect_s,              - W
- *   const SLComplexRect_s,              - W^(1/2)
- *   const SLArrayIndex_t sampleLength   - Buffer length
+ *  SLData_t * SIGLIB_PTR_DECL pAWNr    - Real coefficient pointer
+ *  SLData_t * SIGLIB_PTR_DECL pAWNi    - Imaginary coefficient pointer
+ *  const SLComplexRect_s,              - A ^ (-1)
+ *  const SLComplexRect_s,              - W
+ *  const SLComplexRect_s,              - W^(1/2)
+ *  const SLArrayIndex_t sampleLength   - Buffer length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Generate complex window coeffs
+ *  Generate complex window coeffs
  *
  ********************************************************/
 
@@ -197,19 +197,19 @@ void SIGLIB_FUNC_DECL SIF_Awn(SLData_t* SIGLIB_PTR_DECL pAWNr, SLData_t* SIGLIB_
  * Function: SIF_Vl
  *
  * Parameters:
- *   SLData_t *pvLr              - Real coefficient pointer
- *   SLData_t *pvLi              - Imaginary coefficient pointer
- *   const SLComplexRect_s,      - W^(-1)
- *   const SLComplexRect_s,      - W^(-1/2)
- *   const SLArrayIndex_t InLen  - Input array length
- *   const SLArrayIndex_t OutLen - Output array length
- *   const SLArrayIndex_t FFTLen - FFT array length
+ *  SLData_t *pvLr              - Real coefficient pointer
+ *  SLData_t *pvLi              - Imaginary coefficient pointer
+ *  const SLComplexRect_s,      - W^(-1)
+ *  const SLComplexRect_s,      - W^(-1/2)
+ *  const SLArrayIndex_t InLen  - Input array length
+ *  const SLArrayIndex_t OutLen - Output array length
+ *  const SLArrayIndex_t FFTLen - FFT array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Generate contour definition coeffs
+ *  Generate contour definition coeffs
  *
  ********************************************************/
 
@@ -218,8 +218,8 @@ void SIGLIB_FUNC_DECL SIF_Vl(SLData_t* SIGLIB_PTR_DECL pvLr, SLData_t* SIGLIB_PT
 {
   SLComplexRect_s C, D, Temp;
 
-  SDA_Clear(pvLr, FFTLen);    // Clear output array
-  SDA_Clear(pvLi, FFTLen);
+  SDA_Zeros(pvLr, FFTLen);    // Clear output array
+  SDA_Zeros(pvLi, FFTLen);
 
   C.real = SIGLIB_ONE;
   C.imag = SIGLIB_ZERO;
@@ -278,17 +278,17 @@ void SIGLIB_FUNC_DECL SIF_Vl(SLData_t* SIGLIB_PTR_DECL pvLr, SLData_t* SIGLIB_PT
  * Function: SIF_Wm
  *
  * Parameters:
- *   SLData_t *pWMr,                     - Real coefficient pointer
- *   SLData_t *pWMi,                     - Imaginary coefficient pointer
- *   const SLComplexRect_s,              - W
- *   const SLComplexRect_s,              - W^(1/2)
- *   const SLArrayIndex_t sampleLength   - Buffer length
+ *  SLData_t *pWMr,                     - Real coefficient pointer
+ *  SLData_t *pWMi,                     - Imaginary coefficient pointer
+ *  const SLComplexRect_s,              - W
+ *  const SLComplexRect_s,              - W^(1/2)
+ *  const SLArrayIndex_t sampleLength   - Buffer length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Generate weighting coeffs
+ *  Generate weighting coeffs
  *
  ********************************************************/
 

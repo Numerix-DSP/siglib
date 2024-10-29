@@ -48,14 +48,14 @@ SLData_t siglib_numerix_GoertzelCoeffH0, siglib_numerix_GoertzelCoeffH1, siglib_
  * Function: SIF_DtmfGenerate()
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pDTMFGenCoeff,
- *   const SLData_t SampleRate       - Sample rate
+ *  SLData_t * SIGLIB_PTR_DECL pDTMFGenCoeff,
+ *  const SLData_t SampleRate       - Sample rate
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialise the generation of the
- *   standard DTMF signals.
+ *  standard DTMF signals.
  *
  ********************************************************/
 
@@ -91,14 +91,14 @@ void SIGLIB_FUNC_DECL SIF_DtmfGenerate(SLData_t* SIGLIB_PTR_DECL pDTMFGenCoeff, 
  * Function: SDA_DtmfGenerate()
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pDst     - Destination data aray pointer
- *   const SLFixData_t KeyCode           - Key code
- *   const SLData_t HalfMagnitude,       - Half the peak output signal magnitude
- *   SLData_t * SIGLIB_PTR_DECL pDTMFGenCoeff,
- *   const SLArrayIndex_t sampleLength   - Buffer length
+ *  SLData_t * SIGLIB_PTR_DECL pDst     - Destination data aray pointer
+ *  const SLFixData_t KeyCode           - Key code
+ *  const SLData_t HalfMagnitude,       - Half the peak output signal magnitude
+ *  SLData_t * SIGLIB_PTR_DECL pDTMFGenCoeff,
+ *  const SLArrayIndex_t sampleLength   - Buffer length
  *
  * Return value:
- *   SLError_t ErrorCode
+ *  SLError_t ErrorCode
  *
  * Description: Generate the standard DTMF signals
  *
@@ -220,11 +220,11 @@ SLError_t SIGLIB_FUNC_DECL SDA_DtmfGenerate(SLData_t* SIGLIB_PTR_DECL pDst, cons
 
   SLFixData_t FirstTimeFlag = SIGLIB_TRUE;
   SLData_t ResonatorDelay[SIGLIB_RESONATOR_DELAY_LENGTH];
-  SDA_Clear(ResonatorDelay, SIGLIB_RESONATOR_DELAY_LENGTH);
+  SDA_Zeros(ResonatorDelay, SIGLIB_RESONATOR_DELAY_LENGTH);
   SDA_Resonator1(pDst, HalfMagnitude, ResonatorDelay, &FirstTimeFlag, CosCoeffLowF, SinCoeffLowF, sampleLength);
 
   FirstTimeFlag = SIGLIB_TRUE;
-  SDA_Clear(ResonatorDelay, SIGLIB_RESONATOR_DELAY_LENGTH);
+  SDA_Zeros(ResonatorDelay, SIGLIB_RESONATOR_DELAY_LENGTH);
   SDA_Resonator1Add(pDst, HalfMagnitude, ResonatorDelay, &FirstTimeFlag, CosCoeffHighF, SinCoeffHighF, sampleLength);
 
   return (SIGLIB_NO_ERROR);
@@ -234,14 +234,14 @@ SLError_t SIGLIB_FUNC_DECL SDA_DtmfGenerate(SLData_t* SIGLIB_PTR_DECL pDst, cons
  * Function: SIF_DtmfDetect()
  *
  * Parameters:
- *   const SLData_t SampleRate                       - Sample rate
- *   const SLArrayIndex_t sampleLength               - Buffer length
+ *  const SLData_t SampleRate                       - Sample rate
+ *  const SLArrayIndex_t sampleLength               - Buffer length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialise the detection of the
- *   standard DTMF signals.
+ *  standard DTMF signals.
  *
  ********************************************************/
 
@@ -286,11 +286,11 @@ void SIGLIB_FUNC_DECL SIF_DtmfDetect(const SLData_t SampleRate, const SLArrayInd
  * Function: SDA_DtmfDetect()
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pSrc                 - Source data aray pointer
- *   const SLArrayIndex_t sampleLength               - Buffer length
+ *  SLData_t * SIGLIB_PTR_DECL pSrc                 - Source data aray pointer
+ *  const SLArrayIndex_t sampleLength               - Buffer length
  *
  * Return value:
- *   SLStatus_t KeyCode      - Key code for detected key
+ *  SLStatus_t KeyCode      - Key code for detected key
  *
  * Description: Detect the standard DTMF signals
  *
@@ -408,8 +408,8 @@ SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetect(SLData_t* SIGLIB_PTR_DECL pSrc, const
  * Function: SDA_DtmfDetectAndValidate()
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pSrc                 - Source data aray pointer
- *   const SLData_t  Threshold,                      - Threshold to detect
+ *  SLData_t * SIGLIB_PTR_DECL pSrc                 - Source data aray pointer
+ *  const SLData_t  Threshold,                      - Threshold to detect
  *signal present SLFixData_t *SLStatus_t                         - Storage for
  *previous key  code SLFixData_t *KeyCodeLength                      - Storage
  *for key code length SLFixData_t  *KeyCodeRegistered                 - Storage
@@ -417,10 +417,10 @@ SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetect(SLData_t* SIGLIB_PTR_DECL pSrc, const
  *length
  *
  * Return value:
- *   SLStatus_t KeyCode      - Key code for detected key
+ *  SLStatus_t KeyCode      - Key code for detected key
  *
  * Description: Detect the standard DTMF signals and
- *   validate the results.
+ *  validate the results.
  *
  ********************************************************/
 
@@ -602,13 +602,13 @@ SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetectAndValidate(SLData_t* SIGLIB_PTR_DECL 
  * Function: SUF_AsciiToKeyCode()
  *
  * Parameters:
- *   SLFixData_t Key         - Key ASCII code
+ *  SLFixData_t Key         - Key ASCII code
  *
  * Return value:
- *   SLFixData_t KeyCode     - Key code
+ *  SLFixData_t KeyCode     - Key code
  *
  * Description: Return the key code ( 0 -> 15 ) for the
- *   required ASCII code.
+ *  required ASCII code.
  *
  ********************************************************/
 
@@ -679,13 +679,13 @@ SLFixData_t SIGLIB_FUNC_DECL SUF_AsciiToKeyCode(const SLFixData_t Key)
  * Function: SUF_KeyCodeToAscii()
  *
  * Parameters:
- *   SLFixData_t KeyCode     - Key code
+ *  SLFixData_t KeyCode     - Key code
  *
  * Return value:
- *   SLFixData_t Key         - Key ASCII code
+ *  SLFixData_t Key         - Key ASCII code
  *
  * Description: Return the ACSCII code for the SigLib
- *   key code ( 0 -> 15 ).
+ *  key code ( 0 -> 15 ).
  *
  ********************************************************/
 

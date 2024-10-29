@@ -219,7 +219,7 @@ int main(int argc, char* argv[])
   SLArrayIndex_t correctClassificationCount = SIGLIB_AI_ZERO;
   SLArrayIndex_t incorrectClassificationCount = SIGLIB_AI_ZERO;
 
-  SDA_Clear((SLData_t*)confusionMatrix,          // Array pointer
+  SDA_Zeros((SLData_t*)confusionMatrix,          // Array pointer
             NUM_CATEGORIES * NUM_CATEGORIES);    // Array length
 
   for (SLArrayIndex_t validationSequenceNumber = 0; validationSequenceNumber < nRows; validationSequenceNumber++) {

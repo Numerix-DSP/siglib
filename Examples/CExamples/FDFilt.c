@@ -47,7 +47,7 @@ int main(void)
   SLData_t* pFFTCoeffs = SUF_FftCoefficientAllocate(FFT_LENGTH);
 
   // Clear array to ensure zero padded - overlap and save
-  SDA_Clear(pSrc,                                  // Pointer to destination array
+  SDA_Zeros(pSrc,                                  // Pointer to destination array
             SAMPLE_LENGTH + FFT_LENGTH);           // Dataset length
   h2DPlot =                                        // Initialize plot
       gpc_init_2d("Frequency Domain Filtering",    // Plot title

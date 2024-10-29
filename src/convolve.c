@@ -44,18 +44,18 @@ Description: Convolution routines for SigLib DSP library.
  * Function: SDA_ConvolveLinear()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLData_t * SIGLIB_PTR_DECL pImpulseResponse,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t inputLength,
- *   const SLArrayIndex_t impulseLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLData_t * SIGLIB_PTR_DECL pImpulseResponse,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t inputLength,
+ *  const SLArrayIndex_t impulseLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Convolve an input array with an
- *   impulse response array.
- *   This function overlaps the ends of the arrays.
+ *  impulse response array.
+ *  This function overlaps the ends of the arrays.
  *
  ********************************************************/
 
@@ -118,19 +118,19 @@ void SIGLIB_FUNC_DECL SDA_ConvolveLinear(const SLData_t* SIGLIB_PTR_DECL pSrc, c
  * Function: SDA_ConvolvePartial()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLData_t * SIGLIB_PTR_DECL pImpulseResponse,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t inputLength,
- *   const SLArrayIndex_t impulseLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLData_t * SIGLIB_PTR_DECL pImpulseResponse,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t inputLength,
+ *  const SLArrayIndex_t impulseLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform a partial convolution of an input
- *   array with an impulse response array.
- *   This function only processes the data where the
- *   arrays completely overlap each other.
+ *  array with an impulse response array.
+ *  This function only processes the data where the
+ *  arrays completely overlap each other.
  *
  ********************************************************/
 
@@ -162,19 +162,19 @@ void SIGLIB_FUNC_DECL SDA_ConvolvePartial(const SLData_t* SIGLIB_PTR_DECL pSrc, 
  * Function: SDA_ConvolveInitial()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLData_t * SIGLIB_PTR_DECL pImpulseResponse,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t inputLength,
- *   const SLArrayIndex_t impulseLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLData_t * SIGLIB_PTR_DECL pImpulseResponse,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t inputLength,
+ *  const SLArrayIndex_t impulseLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform a partial convolution of an input
- *   array with an impulse response array.
- *   This function only processes the data upto the length
- *   of the source data array.
+ *  array with an impulse response array.
+ *  This function only processes the data upto the length
+ *  of the source data array.
  *
  ********************************************************/
 
@@ -205,22 +205,22 @@ void SIGLIB_FUNC_DECL SDA_ConvolveInitial(const SLData_t* SIGLIB_PTR_DECL pSrc, 
  * Function: SDA_ConvolveIterate()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLData_t * SIGLIB_PTR_DECL pImpulseResponse,
- *   const SLArrayIndex_t inputLength,
- *   const SLArrayIndex_t impulseLength
- *   const SLArrayIndex_t source index
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLData_t * SIGLIB_PTR_DECL pImpulseResponse,
+ *  const SLArrayIndex_t inputLength,
+ *  const SLArrayIndex_t impulseLength
+ *  const SLArrayIndex_t source index
  *
  * Return value:
- *   Sum of products
+ *  Sum of products
  *
  * Description: Perform a partial convolution of an input
- *   array with an impulse response array.
- *   This function allows the input length index of the
- *   convolution to be updated one sample at a time so
- *   that the source data can be provided as an array and
- *   individual convolutions can be processed on a per
- *   sample basis through the source array.
+ *  array with an impulse response array.
+ *  This function allows the input length index of the
+ *  convolution to be updated one sample at a time so
+ *  that the source data can be provided as an array and
+ *  individual convolutions can be processed on a per
+ *  sample basis through the source array.
  *
  ********************************************************/
 
@@ -240,16 +240,16 @@ SLData_t SIGLIB_FUNC_DECL SDA_ConvolveIterate(const SLData_t* SIGLIB_PTR_DECL pS
  * Function: SDA_ConvolveCircular()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLData_t * SIGLIB_PTR_DECL pImpulseResponse,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLData_t * SIGLIB_PTR_DECL pImpulseResponse,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform the circular convolution of two
- *   signals.
+ *  signals.
  *
  ********************************************************/
 
@@ -293,21 +293,21 @@ void SIGLIB_FUNC_DECL SDA_ConvolveCircular(const SLData_t* SIGLIB_PTR_DECL pSrc,
  * Function: SDA_ConvolveLinearComplex()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   const SLData_t * SIGLIB_PTR_DECL pImpulseResponseReal,
- *   const SLData_t * SIGLIB_PTR_DECL pImpulseResponseImag,
- *   SLData_t * SIGLIB_PTR_DECL pDstReal,
- *   SLData_t * SIGLIB_PTR_DECL pDstImag,
- *   const SLArrayIndex_t inputLength,
- *   const SLArrayIndex_t impulseLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  const SLData_t * SIGLIB_PTR_DECL pImpulseResponseReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pImpulseResponseImag,
+ *  SLData_t * SIGLIB_PTR_DECL pDstReal,
+ *  SLData_t * SIGLIB_PTR_DECL pDstImag,
+ *  const SLArrayIndex_t inputLength,
+ *  const SLArrayIndex_t impulseLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Convolve an input array with an
- *   impulse response array.
- *   This function overlaps the ends of the arrays.
+ *  impulse response array.
+ *  This function overlaps the ends of the arrays.
  *
  ********************************************************/
 
@@ -387,22 +387,22 @@ void SIGLIB_FUNC_DECL SDA_ConvolveLinearComplex(const SLData_t* SIGLIB_PTR_DECL 
  * Function: SDA_ConvolvePartialComplex()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   const SLData_t * SIGLIB_PTR_DECL pImpulseResponseReal,
- *   const SLData_t * SIGLIB_PTR_DECL pImpulseResponseImag,
- *   SLData_t * SIGLIB_PTR_DECL pDstReal,
- *   SLData_t * SIGLIB_PTR_DECL pDstImag,
- *   const SLArrayIndex_t inputLength,
- *   const SLArrayIndex_t impulseLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  const SLData_t * SIGLIB_PTR_DECL pImpulseResponseReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pImpulseResponseImag,
+ *  SLData_t * SIGLIB_PTR_DECL pDstReal,
+ *  SLData_t * SIGLIB_PTR_DECL pDstImag,
+ *  const SLArrayIndex_t inputLength,
+ *  const SLArrayIndex_t impulseLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform a partial convolution of an input
- *   array with an impulse response array.
- *   This function only processes the data where the
- *   arrays completely overlap each other.
+ *  array with an impulse response array.
+ *  This function only processes the data where the
+ *  arrays completely overlap each other.
  *
  ********************************************************/
 
@@ -434,22 +434,22 @@ void SIGLIB_FUNC_DECL SDA_ConvolvePartialComplex(const SLData_t* SIGLIB_PTR_DECL
  * Function: SDA_ConvolveInitialComplex()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   const SLData_t * SIGLIB_PTR_DECL pImpulseResponseReal,
- *   const SLData_t * SIGLIB_PTR_DECL pImpulseResponseImag,
- *   SLData_t * SIGLIB_PTR_DECL pDstReal,
- *   SLData_t * SIGLIB_PTR_DECL pDstImag,
- *   const SLArrayIndex_t inputLength,
- *   const SLArrayIndex_t impulseLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  const SLData_t * SIGLIB_PTR_DECL pImpulseResponseReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pImpulseResponseImag,
+ *  SLData_t * SIGLIB_PTR_DECL pDstReal,
+ *  SLData_t * SIGLIB_PTR_DECL pDstImag,
+ *  const SLArrayIndex_t inputLength,
+ *  const SLArrayIndex_t impulseLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform a partial convolution of an input
- *   array with an impulse response array.
- *   This function only processes the data upto the length
- *   of the source data array.
+ *  array with an impulse response array.
+ *  This function only processes the data upto the length
+ *  of the source data array.
  *
  ********************************************************/
 
@@ -481,19 +481,19 @@ void SIGLIB_FUNC_DECL SDA_ConvolveInitialComplex(const SLData_t* SIGLIB_PTR_DECL
  * Function: SDA_ConvolveCircularComplex()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   const SLData_t * SIGLIB_PTR_DECL pImpulseResponseReal,
- *   const SLData_t * SIGLIB_PTR_DECL pImpulseResponseImag,
- *   SLData_t * SIGLIB_PTR_DECL pDstReal,
- *   SLData_t * SIGLIB_PTR_DECL pDstImag,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  const SLData_t * SIGLIB_PTR_DECL pImpulseResponseReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pImpulseResponseImag,
+ *  SLData_t * SIGLIB_PTR_DECL pDstReal,
+ *  SLData_t * SIGLIB_PTR_DECL pDstImag,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform the circular convolution of two
- *   signals.
+ *  signals.
  *
  ********************************************************/
 
@@ -536,22 +536,22 @@ void SIGLIB_FUNC_DECL SDA_ConvolveCircularComplex(const SLData_t* SIGLIB_PTR_DEC
  * Function: SDA_FftDeconvolution()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   const SLData_t * SIGLIB_PTR_DECL pImpulseReal,
- *   const SLData_t * SIGLIB_PTR_DECL pImpulseImag,
- *   const SLData_t Gamma,
- *   const SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
- *   const SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
- *   const SLArrayIndex_t FFTLength,
- *   const SLArrayIndex_t Log2FFTlength,
- *    const SLData_t InvFFTLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  const SLData_t * SIGLIB_PTR_DECL pImpulseReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pImpulseImag,
+ *  const SLData_t Gamma,
+ *  const SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
+ *  const SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
+ *  const SLArrayIndex_t FFTLength,
+ *  const SLArrayIndex_t Log2FFTlength,
+ *   const SLData_t InvFFTLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform the linear deconvolution of two
- *   signals using frequency domain division.
+ *  signals using frequency domain division.
  *
  ********************************************************/
 
@@ -592,21 +592,21 @@ void SIGLIB_FUNC_DECL SDA_FftDeconvolution(SLData_t* SIGLIB_PTR_DECL pSrcReal, S
  * Function: SIF_FftDeconvolutionPre()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pImpulseReal,
- *   SLData_t * SIGLIB_PTR_DECL pImpulseFdReal,
- *   SLData_t * SIGLIB_PTR_DECL pImpulseFdImag,
- *   const SLData_t Gamma,
- *   const SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
- *   const SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
- *   const SLArrayIndex_t FFTLength,
- *   const SLArrayIndex_t Log2FFTlength)
+ *  const SLData_t * SIGLIB_PTR_DECL pImpulseReal,
+ *  SLData_t * SIGLIB_PTR_DECL pImpulseFdReal,
+ *  SLData_t * SIGLIB_PTR_DECL pImpulseFdImag,
+ *  const SLData_t Gamma,
+ *  const SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
+ *  const SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
+ *  const SLArrayIndex_t FFTLength,
+ *  const SLArrayIndex_t Log2FFTlength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialize the SDA_Deconvolution2 function.
- *   The impulse response is provided as frequency domain
- *   coefficients of 1/(impulse_response)
+ *  The impulse response is provided as frequency domain
+ *  coefficients of 1/(impulse_response)
  *
  ********************************************************/
 
@@ -642,22 +642,22 @@ void SIGLIB_FUNC_DECL SIF_FftDeconvolutionPre(const SLData_t* SIGLIB_PTR_DECL pI
  * Function: SDA_FftDeconvolutionPre()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   const SLData_t * SIGLIB_PTR_DECL pImpulseFdReal,
- *   const SLData_t * SIGLIB_PTR_DECL pImpulseFdImag,
- *   const SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
- *   const SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
- *   const SLArrayIndex_t FFTLength,
- *   const SLArrayIndex_t Log2FFTlength,
- *   const SLData_t InvFFTLength)*
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  const SLData_t * SIGLIB_PTR_DECL pImpulseFdReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pImpulseFdImag,
+ *  const SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
+ *  const SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
+ *  const SLArrayIndex_t FFTLength,
+ *  const SLArrayIndex_t Log2FFTlength,
+ *  const SLData_t InvFFTLength)*
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform the linear deconvolution of two
- *   signals using frequency domain division.
- *   The impulse response is provided as frequency domain
- *   coefficients of 1/(impulse_response)
+ *  signals using frequency domain division.
+ *  The impulse response is provided as frequency domain
+ *  coefficients of 1/(impulse_response)
  *
  ********************************************************/
 

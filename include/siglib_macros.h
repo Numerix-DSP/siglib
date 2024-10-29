@@ -61,16 +61,17 @@ Update history:
 #    define SDS_MaxMacro(a, b) ((a > b) ? a : b)    // Return the maximum of the 2 numbers
 
 // Macros that output type SLFixData_t
-#    define SDS_Odd(a) ((SLData_t)SDS_RoundToNearest((SLData_t)a) & ((SLArrayIndex_t)1))                   // Returns 1 if a is odd, 0 otherwise
-#    define SDS_Even(a) (((SLArrayIndex_t)1) - (SDS_RoundToNearest((SLData_t)a) & ((SLArrayIndex_t)1)))    // Returns 1 if a is even, 0 otherwise
-// #define SDS_PowerOfTwo(a)       (((SLFixData_t)SDS_RoundToNearest(a) &
+#    define SDS_TestOdd(a) ((SLData_t)SDS_RoundToNearest((SLData_t)a) & ((SLArrayIndex_t)1))    // Returns 1 if a is odd, 0 otherwise
+#    define SDS_TestEven(a) \
+      (((SLArrayIndex_t)1) - (SDS_RoundToNearest((SLData_t)a) & ((SLArrayIndex_t)1)))    // Returns 1 if a is even, 0 otherwise
+// #define SDS_TestPowerOfTwo(a)       (((SLFixData_t)SDS_RoundToNearest(a) &
 // ((SLFixData_t)SDS_RoundToNearest(a) - ((SLArrayIndex_t)1))) ?
 // ((SLArrayIndex_t)0) : ((SLArrayIndex_t)1))   // Returns 1 if a is a power of
 // two, 0 otherwise
-#    define SDS_PowerOfTwo(a)                                                                              \
+#    define SDS_TestPowerOfTwo(a)                                                                          \
       (((SLUFixData_t)SDS_RoundToNearest(a) & ((SLUFixData_t)SDS_RoundToNearest(a) - ((SLArrayIndex_t)1))) \
            ? ((SLArrayIndex_t)0)                                                                           \
-           : ((SLArrayIndex_t)1))                                             // Returns 1 if a is a power of two, 0 otherwise
+           : ((SLArrayIndex_t)1))                                             // Returns SIGLIB_TRUE if a is a power of two, SIGLIB_FALSE otherwise
 #    define SDS_Absolute(a) ((((SLData_t)a) > SIGLIB_ZERO) ? (a) : (-(a)))    // Returns the absolute value of a
 #    define SDS_Sign(a) ((((SLData_t)a) >= SIGLIB_ZERO) ? ((SLData_t)SIGLIB_POSITIVE) : ((SLData_t)SIGLIB_NEGATIVE))    // Returns the sign of a
 
@@ -78,12 +79,12 @@ Update history:
 #    define SAI_RoundDown(a) ((SLArrayIndex_t)(((SLData_t)a) + SIGLIB_EPSILON))                       // Round down fixed point number
 #    define SAI_RoundUp(a) ((SLArrayIndex_t)(((SLData_t)a) + SIGLIB_ONE - SIGLIB_EPSILON))            // Round up fixed point number
 #    define SAI_RoundToNearest(a) ((SLArrayIndex_t)(((SLData_t)a) + SIGLIB_HALF - SIGLIB_EPSILON))    // Round to nearest fixed point number
-#    define SAI_Odd(a) (SAI_RoundToNearest((SLData_t)a) & ((SLArrayIndex_t)1))                        // Returns 1 if a is odd, 0 otherwise
-#    define SAI_Even(a)             (1-SAI_RoundToNearest((SLData_t)a)) & ((SLArrayIndex_t)1))  // Returns 1 if a is even, 0 otherwise
-// #define SAI_PowerOfTwo(a)       ((((SLArrayIndex_t)a) &
+#    define SAI_TestOdd(a) (SAI_RoundToNearest((SLData_t)a) & ((SLArrayIndex_t)1))                    // Returns 1 if a is odd, 0 otherwise
+#    define SAI_TestEven(a)             (1-SAI_RoundToNearest((SLData_t)a)) & ((SLArrayIndex_t)1))  // Returns 1 if a is even, 0 otherwise
+// #define SAI_TestPowerOfTwo(a)       ((((SLArrayIndex_t)a) &
 // (((SLArrayIndex_t)a)-1)) ? ((SLArrayIndex_t)0) : ((SLArrayIndex_t)1)) //
 // Returns 1 if a is a power of two, 0 otherwise
-#    define SAI_PowerOfTwo(a)                                              \
+#    define SAI_TestPowerOfTwo(a)                                          \
       ((((SLUFixData_t)a) & (((SLUFixData_t)a) - 1)) ? ((SLArrayIndex_t)0) \
                                                      : ((SLArrayIndex_t)1))    // Returns 1 if a is a power of two, 0 otherwise
 #    define SAI_Absolute(a) \
@@ -277,16 +278,6 @@ Update history:
 #    define SDS_SignalGenerateGaussianNoise(Address, Fill_Add, Variance, pPhase, pValue)                                               \
       {                                                                                                                                \
         SDA_SignalGenerate(Address, SIGLIB_GAUSSIAN_NOISE, SIGLIB_ZERO, Fill_Add, SIGLIB_ZERO, Variance, SIGLIB_ZERO, pPhase, pValue); \
-      }
-
-#    define SDA_Ones(Address, ArrayLength)          \
-      {                                             \
-        SDA_Fill(Address, SIGLIB_ONE, ArrayLength); \
-      }
-
-#    define SDA_Zeros(Address, ArrayLength)          \
-      {                                              \
-        SDA_Fill(Address, SIGLIB_ZERO, ArrayLength); \
       }
 
 // Complex numbers

@@ -52,7 +52,7 @@ int main(void)
           FFT_LENGTH);                                   // FFT length
 
   // Copy impulse response
-  SDA_Clear(pReal, FFT_LENGTH);
+  SDA_Zeros(pReal, FFT_LENGTH);
   SDA_Copy(pFilterCoeffs, pReal, FILTER_LENGTH);
   // SUF_PrintArray(pReal, FILTER_LENGTH);
 
@@ -87,7 +87,7 @@ int main(void)
   getchar();
 
   // Shift centre frequency of filter
-  SDA_Clear(pReal, FFT_LENGTH);
+  SDA_Zeros(pReal, FFT_LENGTH);
   SDA_FirLpBpShift(pFilterCoeffs,     // Pointer to source filter coefficients
                    pReal,             // Pointer to destination shifted coefficients
                    0.2,               // New centre frequency
@@ -125,7 +125,7 @@ int main(void)
   getchar();
 
   // Shift centre frequency of filter
-  SDA_Clear(pReal, FFT_LENGTH);
+  SDA_Zeros(pReal, FFT_LENGTH);
   SDA_FirLpHpShift(pFilterCoeffs,     // Pointer to source filter coefficients
                    pReal,             // Pointer to destination shifted coefficients
                    FILTER_LENGTH);    // Filter length

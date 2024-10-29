@@ -43,10 +43,10 @@ int main(void)
     exit(-1);
   }
 
-  SDA_Clear(pSrcReal, SYMBOL_LENGTH);    // Clear data arrays
-  SDA_Clear(pSrcImag, SYMBOL_LENGTH);
-  SDA_Clear(pDstReal, SYMBOL_LENGTH);
-  SDA_Clear(pDstImag, SYMBOL_LENGTH);
+  SDA_Zeros(pSrcReal, SYMBOL_LENGTH);    // Clear data arrays
+  SDA_Zeros(pSrcImag, SYMBOL_LENGTH);
+  SDA_Zeros(pDstReal, SYMBOL_LENGTH);
+  SDA_Zeros(pDstImag, SYMBOL_LENGTH);
 
   CarrierSign = SIGLIB_ONE;
 
@@ -99,8 +99,8 @@ int main(void)
     getchar();
 
     // Perform DFT
-    SDA_Clear(pDftReal, SYMBOL_LENGTH);    // Clear FFT source data arrays
-    SDA_Clear(pDftImag, SYMBOL_LENGTH);
+    SDA_Zeros(pDftReal, SYMBOL_LENGTH);    // Clear FFT source data arrays
+    SDA_Zeros(pDftImag, SYMBOL_LENGTH);
 
     SDA_Cdft(pSrcReal + FIRST_SUB_CARRIER,    // Pointer to real source array
              pSrcImag + FIRST_SUB_CARRIER,    // Pointer to imaginary source array

@@ -5,7 +5,7 @@
 //     697     1     2    3    A
 //     770     4     5    6    B
 //     852     7     8    9    C
-//     941     *     0    #    D
+//     941     *    0    #    D
 
 // Include files
 #include <stdio.h>
@@ -72,7 +72,7 @@ int main(void)
     printf("Tone = %c, Period = %d (ms), Magn. = %lf (dB), Lin. Magn. = %lf\n", Tone, Period, Magnitude, LinearDTMFMagnitude);
 
     if (Tone == 'S') {
-      SDA_Clear(pData,                                         // Pointer to destination array
+      SDA_Zeros(pData,                                         // Pointer to destination array
                 (SLArrayIndex_t)(Period * SAMPLES_PER_MS));    // Array length
     } else {
       SDA_DtmfGenerate(pData,                                         // Destination array pointer

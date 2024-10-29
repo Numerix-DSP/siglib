@@ -64,7 +64,7 @@ int main(void)
       (NULL == vLrPtr) || (NULL == vLiPtr) || (NULL == CZTRealWorkPtr) || (NULL == CZTImagWorkPtr) || (NULL == WMrPtr) || (NULL == WMiPtr) ||
       (NULL == pFFTCoeffs)) {
 
-    printf("\n\nMalloc failed\n\n");
+    printf("\n\nMemory allocation failed\n\n");
     exit(0);
   }
 

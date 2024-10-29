@@ -68,7 +68,7 @@ int main(void)
                      SIGLIB_NULL_DATA_PTR,                 // Unused
                      FFT_LENGTH);                          // Output dataset length
 
-  SDA_Clear(pImagData,      // Pointer to data array
+  SDA_Zeros(pImagData,      // Pointer to data array
             FFT_LENGTH);    // Array length
 
   SDA_Cfft4(pRealData,                  // Pointer to real array

@@ -33,7 +33,7 @@ int main(void)
   if ((NULL == pRealData1) || (NULL == pImagData1) || (NULL == pRealData2) || (NULL == pImagData2) || (NULL == pRealAPSData1) ||
       (NULL == pImagAPSData1) || (NULL == pRealAPSData2) || (NULL == pImagAPSData2) || (NULL == pFFTCoeffs)) {
 
-    printf("\n\nMalloc failed\n\n");
+    printf("\n\nMemory allocation failed\n\n");
     exit(0);
   }
 

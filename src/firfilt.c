@@ -44,12 +44,12 @@ Description: SigLib DSP library FIR filter routines.
  * Function: SIF_Fir
  *
  * Parameters:
- *   SLData_t *pState,                   Pointer to filter state array
- *   SLArrayIndex_t * pFilterIndex,      Filter index
- *   const SLArrayIndex_t filterLength   Filter length
+ *  SLData_t *pState,                   Pointer to filter state array
+ *  SLArrayIndex_t * pFilterIndex,      Filter index
+ *  const SLArrayIndex_t filterLength   Filter length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialise the FIR filter operation
  *
@@ -75,14 +75,14 @@ void SIGLIB_FUNC_DECL SIF_Fir(SLData_t* SIGLIB_PTR_DECL pState, SLArrayIndex_t* 
  * Function: SDS_Fir
  *
  * Parameters:
- *   const SLData_t Src,                 Data sample to be filtered
- *   SLData_t pState[],                  Pointer to filter state array
- *   const SLData_t pCoeffs[],           Pointer to filter coefficients
- *   SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
- *   const SLArrayIndex_t filterLength,  Filter length
+ *  const SLData_t Src,                 Data sample to be filtered
+ *  SLData_t pState[],                  Pointer to filter state array
+ *  const SLData_t pCoeffs[],           Pointer to filter coefficients
+ *  SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
+ *  const SLArrayIndex_t filterLength,  Filter length
  *
  * Return value:
- *   SLData_t sum - Filtered sample
+ *  SLData_t sum - Filtered sample
  *
  * Description: Apply the FIR filter to the data
  *
@@ -120,16 +120,16 @@ SLData_t SIGLIB_FUNC_DECL SDS_Fir(const SLData_t Src, SLData_t pState[], const S
  * Function: SDA_Fir
  *
  * Parameters:
- *   const SLData_t pSrc[],              Source array pointer
- *   SLData_t pDst[],                    Destination array pointer
- *   SLData_t pState[],                  Pointer to filter state array
- *   const SLData_t pCoeffs[],           Pointer to filter coefficients
- *   SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
- *   const SLArrayIndex_t filterLength,  Filter length
- *   const SLArrayIndex_t sampleLength   Input sample length
+ *  const SLData_t pSrc[],              Source array pointer
+ *  SLData_t pDst[],                    Destination array pointer
+ *  SLData_t pState[],                  Pointer to filter state array
+ *  const SLData_t pCoeffs[],           Pointer to filter coefficients
+ *  SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
+ *  const SLArrayIndex_t filterLength,  Filter length
+ *  const SLArrayIndex_t sampleLength   Input sample length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Apply the FIR filter to the data array
  *
@@ -172,13 +172,13 @@ void SIGLIB_FUNC_DECL SDA_Fir(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t pDs
  * Function: SDS_FirAddSample
  *
  * Parameters:
- *   const SLData_t Src,                 Source data sample
- *   SLData_t pState[],                  Pointer to filter state array
- *   SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
- *   const SLArrayIndex_t filterLength,  Filter length
+ *  const SLData_t Src,                 Source data sample
+ *  SLData_t pState[],                  Pointer to filter state array
+ *  SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
+ *  const SLArrayIndex_t filterLength,  Filter length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Add a sample to the delay line
  *
@@ -207,17 +207,17 @@ void SIGLIB_FUNC_DECL SDS_FirAddSample(const SLData_t Src, SLData_t pState[], SL
  * Function: SDA_FirAddSamples
  *
  * Parameters:
- *   const SLData_t *pSrc,                   Source array pointer
- *   SLData_t pState[],                      Pointer to filter state array
- *   SLArrayIndex_t * pFilterIndex,          Pointer to filter index offset
- *   const SLArrayIndex_t filterLength,      Filter length
- *   const SLArrayIndex_t InputArrayLength,  Input array length
+ *  const SLData_t *pSrc,                   Source array pointer
+ *  SLData_t pState[],                      Pointer to filter state array
+ *  SLArrayIndex_t * pFilterIndex,          Pointer to filter index offset
+ *  const SLArrayIndex_t filterLength,      Filter length
+ *  const SLArrayIndex_t InputArrayLength,  Input array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Add an array of samples to the FIR filter
- *   delay line
+ *  delay line
  *
  ********************************************************/
 
@@ -252,13 +252,13 @@ void SIGLIB_FUNC_DECL SDA_FirAddSamples(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
  * Function: SIF_Comb
  *
  * Parameters:
- *   SLData_t * pState,                  Pointer to filter state array
- *   SLArrayIndex_t * pFilterIndex,      Filter index pointer
- *   SLData_t * pFilterSum,              Filter sum pointer
- *   const SLArrayIndex_t filterLength   Filter length
+ *  SLData_t * pState,                  Pointer to filter state array
+ *  SLArrayIndex_t * pFilterIndex,      Filter index pointer
+ *  SLData_t * pFilterSum,              Filter sum pointer
+ *  const SLArrayIndex_t filterLength   Filter length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialise the comb filter function
  *
@@ -286,17 +286,17 @@ void SIGLIB_FUNC_DECL SIF_Comb(SLData_t* SIGLIB_PTR_DECL pState, SLArrayIndex_t*
  * Function: SDS_Comb
  *
  * Parameters:
- *   const SLData_t Src,                 Data sample to be filtered
- *   SLData_t pState[],                  Pointer to filter state array
- *   SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
- *   const SLData_t pFilterSum[],        Filter sum
- *   const SLArrayIndex_t filterLength,  Filter length
+ *  const SLData_t Src,                 Data sample to be filtered
+ *  SLData_t pState[],                  Pointer to filter state array
+ *  SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
+ *  const SLData_t pFilterSum[],        Filter sum
+ *  const SLArrayIndex_t filterLength,  Filter length
  *
  * Return value:
- *   SLData_t sum - Filtered sample
+ *  SLData_t sum - Filtered sample
  *
  * Description:
- *   Apply the comb filter to the data
+ *  Apply the comb filter to the data
  *
  ********************************************************/
 
@@ -323,19 +323,19 @@ SLData_t SIGLIB_FUNC_DECL SDS_Comb(const SLData_t Src, SLData_t* SIGLIB_PTR_DECL
  * Function: SDA_Comb
  *
  * Parameters:
- *   const SLData_t * pSrc,              Source array pointer
- *   SLData_t * pDst[],                  Destination array pointer
- *   SLData_t pState[],                  Pointer to filter state array
- *   SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
- *   const SLData_t pCoeffs[],           Pointer to filter coefficients
- *   const SLArrayIndex_t filterLength,  Filter length
- *   const SLArrayIndex_t sampleLength)  Sample length
+ *  const SLData_t * pSrc,              Source array pointer
+ *  SLData_t * pDst[],                  Destination array pointer
+ *  SLData_t pState[],                  Pointer to filter state array
+ *  SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
+ *  const SLData_t pCoeffs[],           Pointer to filter coefficients
+ *  const SLArrayIndex_t filterLength,  Filter length
+ *  const SLArrayIndex_t sampleLength)  Sample length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Apply the comb filter to the data array
+ *  Apply the comb filter to the data array
  *
  ********************************************************/
 
@@ -376,13 +376,13 @@ void SIGLIB_FUNC_DECL SDA_Comb(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* S
  * Function: SIF_FirComplex
  *
  * Parameters:
- *   SLData_t * pRealState,
- *   SLData_t * pImagState,
- *   SLArrayIndex_t * pFilterIndex,      Filter index
- *   const SLArrayIndex_t filterLength
+ *  SLData_t * pRealState,
+ *  SLData_t * pImagState,
+ *  SLArrayIndex_t * pFilterIndex,      Filter index
+ *  const SLArrayIndex_t filterLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialise the FIR filter operation
  *
@@ -403,20 +403,20 @@ void SIGLIB_FUNC_DECL SIF_FirComplex(SLData_t* SIGLIB_PTR_DECL pRealState, SLDat
  * Function: SDS_FirComplex
  *
  * Parameters:
- *   const SLData_t SrcReal,
- *   const SLData_t SrcImag,
- *   SLData_t * SIGLIB_PTR_DECL pRealDst,
- *   SLData_t * SIGLIB_PTR_DECL pImagDst,
- *   SLData_t * SIGLIB_PTR_DECL pRealState,
- *   SLData_t * SIGLIB_PTR_DECL pImagState,
- *   const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
- *   const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
- *   SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
- *   const SLArrayIndex_t filterLength,
- *   const SLArrayIndex_t sampleLength)
+ *  const SLData_t SrcReal,
+ *  const SLData_t SrcImag,
+ *  SLData_t * SIGLIB_PTR_DECL pRealDst,
+ *  SLData_t * SIGLIB_PTR_DECL pImagDst,
+ *  SLData_t * SIGLIB_PTR_DECL pRealState,
+ *  SLData_t * SIGLIB_PTR_DECL pImagState,
+ *  const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
+ *  const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
+ *  const SLArrayIndex_t filterLength,
+ *  const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialise the FIR filter operation
  *
@@ -455,20 +455,20 @@ void SIGLIB_FUNC_DECL SDS_FirComplex(const SLData_t RealSrc, const SLData_t Imag
  * Function: SDA_FirComplex
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pRealSrc,
- *   const SLData_t * SIGLIB_PTR_DECL pImagSrc,
- *   SLData_t * SIGLIB_PTR_DECL pRealDst,
- *   SLData_t * SIGLIB_PTR_DECL pImagDst,
- *   SLData_t * SIGLIB_PTR_DECL pRealState,
- *   SLData_t * SIGLIB_PTR_DECL pImagState,
- *   const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
- *   const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
- *   SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
- *   const SLArrayIndex_t filterLength,
- *   const SLArrayIndex_t sampleLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pRealSrc,
+ *  const SLData_t * SIGLIB_PTR_DECL pImagSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pRealDst,
+ *  SLData_t * SIGLIB_PTR_DECL pImagDst,
+ *  SLData_t * SIGLIB_PTR_DECL pRealState,
+ *  SLData_t * SIGLIB_PTR_DECL pImagState,
+ *  const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
+ *  const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
+ *  const SLArrayIndex_t filterLength,
+ *  const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialise the FIR filter operation
  *
@@ -509,11 +509,11 @@ void SIGLIB_FUNC_DECL SDA_FirComplex(const SLData_t* SIGLIB_PTR_DECL pRealSrc, c
  * Function: SIF_FirWithStore
  *
  * Parameters:
- *   SLData_t *pState,                   Pointer to filter state array
- *   const SLArrayIndex_t filterLength   Filter length
+ *  SLData_t *pState,                   Pointer to filter state array
+ *  const SLArrayIndex_t filterLength   Filter length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialise the FIR filter operation
  *
@@ -536,13 +536,13 @@ void SIGLIB_FUNC_DECL SIF_FirWithStore(SLData_t* SIGLIB_PTR_DECL pState, const S
  * Function: SDS_FirWithStore
  *
  * Parameters:
- *   const SLData_t Src,                 Data sample to be filtered
- *   SLData_t pState[],                  Pointer to filter state array
- *   const SLData_t pCoeffs[],           Pointer to filter coefficients
- *   const SLArrayIndex_t filterLength,  Filter length
+ *  const SLData_t Src,                 Data sample to be filtered
+ *  SLData_t pState[],                  Pointer to filter state array
+ *  const SLData_t pCoeffs[],           Pointer to filter coefficients
+ *  const SLArrayIndex_t filterLength,  Filter length
  *
  * Return value:
- *   SLData_t sum - Filtered sample
+ *  SLData_t sum - Filtered sample
  *
  * Description: Apply the FIR filter to the data
  *
@@ -576,15 +576,15 @@ SLData_t SIGLIB_FUNC_DECL SDS_FirWithStore(const SLData_t Src, SLData_t pState[]
  * Function: SDA_FirWithStore
  *
  * Parameters:
- *   const SLData_t pSrc[],              Source array pointer
- *   SLData_t pDst[],                    Destination array pointer
- *   SLData_t pState[],                  Pointer to filter state array
- *   const SLData_t pCoeffs[],           Pointer to filter coefficients
- *   const SLArrayIndex_t filterLength,  Filter length
- *   const SLArrayIndex_t sampleLength   Input sample length
+ *  const SLData_t pSrc[],              Source array pointer
+ *  SLData_t pDst[],                    Destination array pointer
+ *  SLData_t pState[],                  Pointer to filter state array
+ *  const SLData_t pCoeffs[],           Pointer to filter coefficients
+ *  const SLArrayIndex_t filterLength,  Filter length
+ *  const SLArrayIndex_t sampleLength   Input sample length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Apply the FIR filter to the data array
  *
@@ -622,12 +622,12 @@ void SIGLIB_FUNC_DECL SDA_FirWithStore(const SLData_t* SIGLIB_PTR_DECL pSrc, SLD
  * Function: SIF_FirComplexWithStore
  *
  * Parameters:
- *   SLData_t * pRealState,
- *   SLData_t * pImagState,
- *   const SLArrayIndex_t filterLength
+ *  SLData_t * pRealState,
+ *  SLData_t * pImagState,
+ *  const SLArrayIndex_t filterLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialise the FIR filter operation
  *
@@ -646,19 +646,19 @@ void SIGLIB_FUNC_DECL SIF_FirComplexWithStore(SLData_t* SIGLIB_PTR_DECL pRealSta
  * Function: SDS_FirComplexWithStore
  *
  * Parameters:
- *   const SLData_t SrcReal,
- *   const SLData_t SrcImag,
- *   SLData_t * SIGLIB_PTR_DECL pRealDst,
- *   SLData_t * SIGLIB_PTR_DECL pImagDst,
- *   SLData_t * SIGLIB_PTR_DECL pRealState,
- *   SLData_t * SIGLIB_PTR_DECL pImagState,
- *   const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
- *   const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
- *   const SLArrayIndex_t filterLength,
- *   const SLArrayIndex_t sampleLength)
+ *  const SLData_t SrcReal,
+ *  const SLData_t SrcImag,
+ *  SLData_t * SIGLIB_PTR_DECL pRealDst,
+ *  SLData_t * SIGLIB_PTR_DECL pImagDst,
+ *  SLData_t * SIGLIB_PTR_DECL pRealState,
+ *  SLData_t * SIGLIB_PTR_DECL pImagState,
+ *  const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
+ *  const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
+ *  const SLArrayIndex_t filterLength,
+ *  const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialise the FIR filter operation
  *
@@ -696,19 +696,19 @@ void SIGLIB_FUNC_DECL SDS_FirComplexWithStore(const SLData_t SrcReal, const SLDa
  * Function: SDA_FirComplexWithStore
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   SLData_t * SIGLIB_PTR_DECL pRealDst,
- *   SLData_t * SIGLIB_PTR_DECL pImagDst,
- *   SLData_t * SIGLIB_PTR_DECL pRealState,
- *   SLData_t * SIGLIB_PTR_DECL pImagState,
- *   const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
- *   const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
- *   const SLArrayIndex_t filterLength,
- *   const SLArrayIndex_t sampleLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  SLData_t * SIGLIB_PTR_DECL pRealDst,
+ *  SLData_t * SIGLIB_PTR_DECL pImagDst,
+ *  SLData_t * SIGLIB_PTR_DECL pRealState,
+ *  SLData_t * SIGLIB_PTR_DECL pImagState,
+ *  const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
+ *  const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
+ *  const SLArrayIndex_t filterLength,
+ *  const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialise the FIR filter operation
  *
@@ -749,12 +749,12 @@ void SIGLIB_FUNC_DECL SDA_FirComplexWithStore(const SLData_t* SIGLIB_PTR_DECL pS
  * Function: SDS_FirWithStoreAddSample
  *
  * Parameters:
- *   const SLData_t Src,                 Source data sample
- *   SLData_t pState[],                  Pointer to filter state array
- *   const SLArrayIndex_t filterLength,  Filter length
+ *  const SLData_t Src,                 Source data sample
+ *  SLData_t pState[],                  Pointer to filter state array
+ *  const SLArrayIndex_t filterLength,  Filter length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Add a sample to the delay line
  *
@@ -779,16 +779,16 @@ void SIGLIB_FUNC_DECL SDS_FirWithStoreAddSample(const SLData_t Src, SLData_t pSt
  * Function: SDA_FirWithStoreAddSamples
  *
  * Parameters:
- *   const SLData_t *pSrc,                   Source array pointer
- *   SLData_t pState[],                      Pointer to filter state array
- *   const SLArrayIndex_t filterLength,      Filter length
- *   const SLArrayIndex_t InputArrayLength,  Input array length
+ *  const SLData_t *pSrc,                   Source array pointer
+ *  SLData_t pState[],                      Pointer to filter state array
+ *  const SLArrayIndex_t filterLength,      Filter length
+ *  const SLArrayIndex_t InputArrayLength,  Input array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Add an array of samples to the FIR filter
- *   delay line
+ *  delay line
  *
  ********************************************************/
 
@@ -815,14 +815,14 @@ void SIGLIB_FUNC_DECL SDA_FirWithStoreAddSamples(const SLData_t* SIGLIB_PTR_DECL
  * Function: SIF_FirExtendedArray
  *
  * Parameters:
- *   SLData_t *pState,                   Pointer to filter state array
- *   const SLData_t * pFilterTaps,       Filter coefficients
- *   SLData_t * pFilterProcCoeffs,       Filter processing coefficients
- *   SLArrayIndex_t * pFilterIndex,      Filter index
- *   const SLArrayIndex_t filterLength   Filter length
+ *  SLData_t *pState,                   Pointer to filter state array
+ *  const SLData_t * pFilterTaps,       Filter coefficients
+ *  SLData_t * pFilterProcCoeffs,       Filter processing coefficients
+ *  SLArrayIndex_t * pFilterIndex,      Filter index
+ *  const SLArrayIndex_t filterLength   Filter length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialise the FIR filter operation
  *
@@ -853,14 +853,14 @@ void SIGLIB_FUNC_DECL SIF_FirExtendedArray(SLData_t* SIGLIB_PTR_DECL pState, con
  * Function: SDS_FirExtendedArray
  *
  * Parameters:
- *   const SLData_t Src,                 Data sample to be filtered
- *   SLData_t *pState,                   Pointer to filter state array
- *   const SLData_t *pCoeffs,            Pointer to filter coefficients
- *   SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
- *   const SLArrayIndex_t filterLength,  Filter length
+ *  const SLData_t Src,                 Data sample to be filtered
+ *  SLData_t *pState,                   Pointer to filter state array
+ *  const SLData_t *pCoeffs,            Pointer to filter coefficients
+ *  SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
+ *  const SLArrayIndex_t filterLength,  Filter length
  *
  * Return value:
- *   SLData_t sum - Filtered sample
+ *  SLData_t sum - Filtered sample
  *
  * Description: Apply the FIR filter to the data
  *
@@ -903,16 +903,16 @@ SLData_t SIGLIB_FUNC_DECL SDS_FirExtendedArray(const SLData_t Src, SLData_t* pSt
  * Function: SDA_FirExtendedArray
  *
  * Parameters:
- *   const SLData_t pSrc[],              Source array pointer
- *   SLData_t pDst[],                    Destination array pointer
- *   SLData_t pState[],                  Pointer to filter state array
- *   const SLData_t pCoeffs[],           Pointer to filter coefficients
- *   SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
- *   const SLArrayIndex_t filterLength,  Filter length
- *   const SLArrayIndex_t sampleLength   Input sample length
+ *  const SLData_t pSrc[],              Source array pointer
+ *  SLData_t pDst[],                    Destination array pointer
+ *  SLData_t pState[],                  Pointer to filter state array
+ *  const SLData_t pCoeffs[],           Pointer to filter coefficients
+ *  SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
+ *  const SLArrayIndex_t filterLength,  Filter length
+ *  const SLArrayIndex_t sampleLength   Input sample length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Apply the FIR filter to the data array
  *
@@ -999,20 +999,20 @@ void SIGLIB_FUNC_DECL SIF_FirComplexExtendedArray(SLData_t* SIGLIB_PTR_DECL pRea
  * Function: SDS_FirComplexExtendedArray
  *
  * Parameters:
- *   const SLData_t SrcReal,
- *   const SLData_t SrcImag,
- *   SLData_t * SIGLIB_PTR_DECL pRealDst,
- *   SLData_t * SIGLIB_PTR_DECL pImagDst,
- *   SLData_t * SIGLIB_PTR_DECL pRealState,
- *   SLData_t * SIGLIB_PTR_DECL pImagState,
- *   const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
- *   const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
- *   SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
- *   const SLArrayIndex_t filterLength,
- *   const SLArrayIndex_t sampleLength)
+ *  const SLData_t SrcReal,
+ *  const SLData_t SrcImag,
+ *  SLData_t * SIGLIB_PTR_DECL pRealDst,
+ *  SLData_t * SIGLIB_PTR_DECL pImagDst,
+ *  SLData_t * SIGLIB_PTR_DECL pRealState,
+ *  SLData_t * SIGLIB_PTR_DECL pImagState,
+ *  const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
+ *  const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
+ *  const SLArrayIndex_t filterLength,
+ *  const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialise the FIR filter operation
  *
@@ -1067,20 +1067,20 @@ void SIGLIB_FUNC_DECL SDS_FirComplexExtendedArray(const SLData_t SrcReal, const 
  * Function: SDA_FirComplexExtendedArray
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pRealSrc,
- *   const SLData_t * SIGLIB_PTR_DECL pImagSrc,
- *   SLData_t * SIGLIB_PTR_DECL pRealDst,
- *   SLData_t * SIGLIB_PTR_DECL pImagDst,
- *   SLData_t * SIGLIB_PTR_DECL pRealState,
- *   SLData_t * SIGLIB_PTR_DECL pImagState,
- *   const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
- *   const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
- *   SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
- *   const SLArrayIndex_t filterLength,
- *   const SLArrayIndex_t sampleLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pRealSrc,
+ *  const SLData_t * SIGLIB_PTR_DECL pImagSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pRealDst,
+ *  SLData_t * SIGLIB_PTR_DECL pImagDst,
+ *  SLData_t * SIGLIB_PTR_DECL pRealState,
+ *  SLData_t * SIGLIB_PTR_DECL pImagState,
+ *  const SLData_t * SIGLIB_PTR_DECL pRealCoeffs,
+ *  const SLData_t * SIGLIB_PTR_DECL pImagCoeffs,
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL pFilterIndex,
+ *  const SLArrayIndex_t filterLength,
+ *  const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialise the FIR filter operation
  *
@@ -1140,13 +1140,13 @@ void SIGLIB_FUNC_DECL SDA_FirComplexExtendedArray(const SLData_t* SIGLIB_PTR_DEC
  * Function: SDS_FirExtendedArrayAddSample
  *
  * Parameters:
- *   const SLData_t Src,                 Data sample to be filtered
- *   SLData_t *pState,                   Pointer to filter state array
- *   SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
- *   const SLArrayIndex_t filterLength,  Filter length
+ *  const SLData_t Src,                 Data sample to be filtered
+ *  SLData_t *pState,                   Pointer to filter state array
+ *  SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
+ *  const SLArrayIndex_t filterLength,  Filter length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Apply the FIR filter to the data
  *
@@ -1180,14 +1180,14 @@ void SIGLIB_FUNC_DECL SDS_FirExtendedArrayAddSample(const SLData_t Src, SLData_t
  * Function: SDA_FirExtendedArrayAddSamples
  *
  * Parameters:
- *   const SLData_t pSrc[],              Source array pointer
- *   SLData_t pState[],                  Pointer to filter state array
- *   SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
- *   const SLArrayIndex_t filterLength,  Filter length
- *   const SLArrayIndex_t sampleLength   Input sample length
+ *  const SLData_t pSrc[],              Source array pointer
+ *  SLData_t pState[],                  Pointer to filter state array
+ *  SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
+ *  const SLArrayIndex_t filterLength,  Filter length
+ *  const SLArrayIndex_t sampleLength   Input sample length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Apply the FIR filter to the data array
  *
@@ -1224,18 +1224,18 @@ void SIGLIB_FUNC_DECL SDA_FirExtendedArrayAddSamples(const SLData_t* SIGLIB_PTR_
  * Function: SIF_FirLowPassFilter
  *
  * Parameters:
- *   SLData_t *,               Filter coefficient array
- *   const SLData_t,           Filter centre frequency
- *   const enum SLWindow_t,    Filter window type
- *   const SLArrayIndex_t)     Filter length
+ *  SLData_t *,               Filter coefficient array
+ *  const SLData_t,           Filter centre frequency
+ *  const enum SLWindow_t,    Filter window type
+ *  const SLArrayIndex_t)     Filter length
  *
  * Return value:
- *   SLError_t   Error code
+ *  SLError_t   Error code
  *
  * Description:
- *   Generates a low pass FIR filter with the specified
- *   cut off frequency, using the windowing method.
- *   This filter must have an odd number of coefficients.
+ *  Generates a low pass FIR filter with the specified
+ *  cut off frequency, using the windowing method.
+ *  This filter must have an odd number of coefficients.
  *
  ********************************************************/
 
@@ -1291,18 +1291,18 @@ SLError_t SIGLIB_FUNC_DECL SIF_FirLowPassFilter(SLData_t* SIGLIB_PTR_DECL pCoeff
  * Function: SIF_FirHighPassFilter
  *
  * Parameters:
- *   SLData_t *,               Filter coefficient array
- *   const SLData_t,           Filter centre frequency
- *   const enum SLWindow_t,    Filter window type
- *   const SLArrayIndex_t)     Filter length
+ *  SLData_t *,               Filter coefficient array
+ *  const SLData_t,           Filter centre frequency
+ *  const enum SLWindow_t,    Filter window type
+ *  const SLArrayIndex_t)     Filter length
  *
  * Return value:
- *   SLError_t   Error code
+ *  SLError_t   Error code
  *
  * Description:
- *   Generates a high pass FIR filter with the specified
- *   cut off frequency, using the windowing method.
- *   This filter must have an odd number of coefficients.
+ *  Generates a high pass FIR filter with the specified
+ *  cut off frequency, using the windowing method.
+ *  This filter must have an odd number of coefficients.
  *
  ********************************************************/
 
@@ -1363,18 +1363,18 @@ SLError_t SIGLIB_FUNC_DECL SIF_FirHighPassFilter(SLData_t* SIGLIB_PTR_DECL pCoef
  * Function: SIF_FirBandPassFilter
  *
  * Parameters:
- *   SLData_t *,               Filter coefficient array
- *   const SLData_t,           Filter centre frequency
- *   const enum SLWindow_t,    Filter window type
- *   const SLArrayIndex_t)     Filter length
+ *  SLData_t *,               Filter coefficient array
+ *  const SLData_t,           Filter centre frequency
+ *  const enum SLWindow_t,    Filter window type
+ *  const SLArrayIndex_t)     Filter length
  *
  * Return value:
- *   SLError_t   Error code
+ *  SLError_t   Error code
  *
  * Description:
- *   Generates a narrow-band band pass filter at the
- *   specified frequency, using the windowing method.
- *   This filter must have an odd number of coefficients.
+ *  Generates a narrow-band band pass filter at the
+ *  specified frequency, using the windowing method.
+ *  This filter must have an odd number of coefficients.
  *
  ********************************************************/
 
@@ -1453,18 +1453,18 @@ SLError_t SIGLIB_FUNC_DECL SIF_FirBandPassFilter(SLData_t* SIGLIB_PTR_DECL pCoef
  * Function: SIF_FirLowPassFilterWindow
  *
  * Parameters:
- *   SLData_t *,             Filter coefficient array
- *   const SLData_t,         Filter centre frequency
- *   const SLData_t *,       Pointer to window coefficients
- *   const SLArrayIndex_t)   Filter length
+ *  SLData_t *,             Filter coefficient array
+ *  const SLData_t,         Filter centre frequency
+ *  const SLData_t *,       Pointer to window coefficients
+ *  const SLArrayIndex_t)   Filter length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Generates a low pass FIR filter with the specified
- *   cut off frequency, using the windowing method.
- *   This filter must have an odd number of coefficients.
+ *  Generates a low pass FIR filter with the specified
+ *  cut off frequency, using the windowing method.
+ *  This filter must have an odd number of coefficients.
  *
  ********************************************************/
 
@@ -1490,18 +1490,18 @@ void SIGLIB_FUNC_DECL SIF_FirLowPassFilterWindow(SLData_t* SIGLIB_PTR_DECL pCoef
  * Function: SIF_FirHighPassFilterWindow
  *
  * Parameters:
- *   SLData_t *,             Filter coefficient array
- *   const SLData_t,         Filter centre frequency
- *   const SLData_t *,       Pointer to window coefficients
- *   const SLArrayIndex_t)   Filter length
+ *  SLData_t *,             Filter coefficient array
+ *  const SLData_t,         Filter centre frequency
+ *  const SLData_t *,       Pointer to window coefficients
+ *  const SLArrayIndex_t)   Filter length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Generates a high pass FIR filter with the specified
- *   cut off frequency, using the windowing method.
- *   This filter must have an odd number of coefficients.
+ *  Generates a high pass FIR filter with the specified
+ *  cut off frequency, using the windowing method.
+ *  This filter must have an odd number of coefficients.
  *
  ********************************************************/
 
@@ -1531,18 +1531,18 @@ void SIGLIB_FUNC_DECL SIF_FirHighPassFilterWindow(SLData_t* SIGLIB_PTR_DECL pCoe
  * Function: SIF_FirBandPassFilterWindow
  *
  * Parameters:
- *   SLData_t *,             Filter coefficient array
- *   const SLData_t,         Filter centre frequency
- *   const SLData_t * ,      Pointer to window coefficients
- *   const SLArrayIndex_t)   Filter length
+ *  SLData_t *,             Filter coefficient array
+ *  const SLData_t,         Filter centre frequency
+ *  const SLData_t * ,      Pointer to window coefficients
+ *  const SLArrayIndex_t)   Filter length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Generates a narrow-band band pass filter at the
- *   specified frequency, using the windowing method.
- *   This filter must have an odd number of coefficients.
+ *  Generates a narrow-band band pass filter at the
+ *  specified frequency, using the windowing method.
+ *  This filter must have an odd number of coefficients.
  *
  ********************************************************/
 
@@ -1576,28 +1576,28 @@ void SIGLIB_FUNC_DECL SIF_FirBandPassFilterWindow(SLData_t* SIGLIB_PTR_DECL pCoe
  * Function: SUF_FirKaiserApproximation
  *
  * Parameters:
- *   SLData_t Fpass,
- *   SLData_t Fstop,
- *   SLData_t Apass,
- *   SLData_t Astop,
- *   SLData_t SampleRate)
+ *  SLData_t Fpass,
+ *  SLData_t Fstop,
+ *  SLData_t Apass,
+ *  SLData_t Astop,
+ *  SLData_t SampleRate)
  *
  * Return value:
- *   SLFixData_t     Approximation
+ *  SLFixData_t     Approximation
  *
  * Description: Use the Kaiser approximation to estimate
- *   the required number of filter coefficients
+ *  the required number of filter coefficients
  *
- *   N = (((-20.0 * Log10 (sqrt (Delta1 - Delta2))) - 13.0) / (14.6 * Deltaf)) +
+ *  N = (((-20.0 * Log10 (sqrt (Delta1 - Delta2))) - 13.0) / (14.6 * Deltaf)) +
  *1
  *
- *   Where :
- *       Delta1 = 1 - 10^(- Apass/40)
- *       Delta2 = 10^(- Astop/20)
- *       Deltaf = (Fstop - Fpass) / Fs
+ *  Where :
+ *      Delta1 = 1 - 10^(- Apass/40)
+ *      Delta2 = 10^(- Astop/20)
+ *      Deltaf = (Fstop - Fpass) / Fs
  *
- *       Apass = Maximum pass-band ripple (dB)
- *       Astop = Minimum stop-band ripple (dB)
+ *      Apass = Maximum pass-band ripple (dB)
+ *      Astop = Minimum stop-band ripple (dB)
  *
  ********************************************************/
 
@@ -1624,16 +1624,16 @@ SLFixData_t SIGLIB_FUNC_DECL SUF_FirKaiserApproximation(SLData_t Fpass, SLData_t
  * Function: SIF_FirMatchedFilter
  *
  * Parameters:
- *   SLData_t *,             Signal
- *   SLData_t *,             Filter coefficients
- *   const SLArrayIndex_t)   Filter length
+ *  SLData_t *,             Signal
+ *  SLData_t *,             Filter coefficients
+ *  const SLArrayIndex_t)   Filter length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Generates a set of coefficients for an FIR matched
- *   filter from a given input signal.
+ *  Generates a set of coefficients for an FIR matched
+ *  filter from a given input signal.
  *
  ********************************************************/
 
@@ -1648,15 +1648,15 @@ void SIGLIB_FUNC_DECL SIF_FirMatchedFilter(SLData_t* SIGLIB_PTR_DECL pMatchedFil
  * Function: SDA_FirFilterInverseCoherentGain
  *
  * Parameters:
- *   const SLData_t          *pFilterCoeffs,
- *   const SLArrayIndex_t    filterLength
+ *  const SLData_t          *pFilterCoeffs,
+ *  const SLArrayIndex_t    filterLength
  *
  * Return value:
- *   SLData_t    inverse coherent gain
+ *  SLData_t    inverse coherent gain
  *
  * Description:
- *   Calculate inverse coherent gain of the filter, so
- *   that the gain can be normalised.
+ *  Calculate inverse coherent gain of the filter, so
+ *  that the gain can be normalised.
  *
  ********************************************************/
 
@@ -1686,22 +1686,22 @@ SLData_t SIGLIB_FUNC_DECL SDA_FirFilterInverseCoherentGain(const SLData_t* SIGLI
  * Function: SIF_TappedDelayLine
  *
  * Parameters:
- *   SLData_t *pDelay,
- *   SLArrayIndex_t *pDelayIndex,
- *   const SLArrayIndex_t DelayArrayLength
+ *  SLData_t *pDelay,
+ *  SLArrayIndex_t *pDelayIndex,
+ *  const SLArrayIndex_t DelayArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initializes the tapped delay function.
+ *  Initializes the tapped delay function.
  *
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SIF_TappedDelayLine(SLData_t* SIGLIB_PTR_DECL pDelay, SLArrayIndex_t* SIGLIB_PTR_DECL pDelayIndex,
                                           const SLArrayIndex_t DelayArrayLength)
 {
-  SDA_Clear(pDelay, DelayArrayLength);    // Clear data arrays
+  SDA_Zeros(pDelay, DelayArrayLength);    // Clear data arrays
   *pDelayIndex = (SLArrayIndex_t)0;       // Initialize delay index
 }    // End of SIF_TappedDelayLine()
 
@@ -1709,19 +1709,19 @@ void SIGLIB_FUNC_DECL SIF_TappedDelayLine(SLData_t* SIGLIB_PTR_DECL pDelay, SLAr
  * Function: SDS_TappedDelayLine
  *
  * Parameters:
- *   const SLData_t Src,
- *   SLData_t *pDelay,
- *   SLArrayIndex_t *pDelayIndex,
- *   const SLArrayIndex_t *pTapsLocns,
- *   const SLData_t *pTapGains,
- *   const SLArrayIndex_t NumberOfTaps,
- *   const SLArrayIndex_t DelayArrayLength
+ *  const SLData_t Src,
+ *  SLData_t *pDelay,
+ *  SLArrayIndex_t *pDelayIndex,
+ *  const SLArrayIndex_t *pTapsLocns,
+ *  const SLData_t *pTapGains,
+ *  const SLArrayIndex_t NumberOfTaps,
+ *  const SLArrayIndex_t DelayArrayLength
  *
  * Return value:
- *   Multi-path delayed value
+ *  Multi-path delayed value
  *
  * Description:
- *   Returns the tapped delayed value on a per-sample basis
+ *  Returns the tapped delayed value on a per-sample basis
  *
  ********************************************************/
 
@@ -1757,21 +1757,21 @@ SLData_t SIGLIB_FUNC_DECL SDS_TappedDelayLine(const SLData_t Src, SLData_t* SIGL
  * Function: SDA_TappedDelayLine
  *
  * Parameters:
- *   const SLData_t *pSrc,
- *   SLData_t *pDst,
- *   SLData_t *pDelay,
- *   SLArrayIndex_t *pDelayIndex,
- *   const SLArrayIndex_t *pTapsLocns,
- *   const SLData_t *pTapGains,
- *   const SLArrayIndex_t NumberOfTaps,
- *   const SLArrayIndex_t DelayArrayLength,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t *pSrc,
+ *  SLData_t *pDst,
+ *  SLData_t *pDelay,
+ *  SLArrayIndex_t *pDelayIndex,
+ *  const SLArrayIndex_t *pTapsLocns,
+ *  const SLData_t *pTapGains,
+ *  const SLArrayIndex_t NumberOfTaps,
+ *  const SLArrayIndex_t DelayArrayLength,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Returns the tapped delayed value on an array of data
+ *  Returns the tapped delayed value on an array of data
  *
  ********************************************************/
 
@@ -1817,24 +1817,24 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLine(const SLData_t* SIGLIB_PTR_DECL pSrc, 
  * Function: SIF_TappedDelayLineComplex
  *
  * Parameters:
- *   SLData_t *pDelayReal,
- *   SLData_t *pDelayImag,
- *   SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
- *   const SLArrayIndex_t DelayArrayLength
+ *  SLData_t *pDelayReal,
+ *  SLData_t *pDelayImag,
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
+ *  const SLArrayIndex_t DelayArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initializes the tapped delay function.
+ *  Initializes the tapped delay function.
  *
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SIF_TappedDelayLineComplex(SLData_t* SIGLIB_PTR_DECL pDelayReal, SLData_t* SIGLIB_PTR_DECL pDelayImag,
                                                  SLArrayIndex_t* SIGLIB_PTR_DECL pDelayIndex, const SLArrayIndex_t DelayArrayLength)
 {
-  SDA_Clear(pDelayReal, DelayArrayLength);    // Clear data arrays
-  SDA_Clear(pDelayImag, DelayArrayLength);    // Clear data arrays
+  SDA_Zeros(pDelayReal, DelayArrayLength);    // Clear data arrays
+  SDA_Zeros(pDelayImag, DelayArrayLength);    // Clear data arrays
   *pDelayIndex = (SLArrayIndex_t)0;           // Initialize delay index
 }    // End of SIF_TappedDelayLineComplex()
 
@@ -1842,24 +1842,24 @@ void SIGLIB_FUNC_DECL SIF_TappedDelayLineComplex(SLData_t* SIGLIB_PTR_DECL pDela
  * Function: SDS_TappedDelayLineComplex
  *
  * Parameters:
- *   const SLData_t SrcReal,
- *   const SLData_t SrcImag,
- *   SLData_t * pDstReal,
- *   SLData_t * pDstImag,
- *   SLData_t *pDelayReal,
- *   SLData_t *pDelayImag,
- *   SLArrayIndex_t *pDelayIndex,
- *   const SLArrayIndex_t *pTapsLocns,
- *   const SLData_t *pTapGainsReal,
- *   const SLData_t *pTapGainsImag,
- *   const SLArrayIndex_t NumberOfTaps,
- *   const SLArrayIndex_t DelayArrayLength
+ *  const SLData_t SrcReal,
+ *  const SLData_t SrcImag,
+ *  SLData_t * pDstReal,
+ *  SLData_t * pDstImag,
+ *  SLData_t *pDelayReal,
+ *  SLData_t *pDelayImag,
+ *  SLArrayIndex_t *pDelayIndex,
+ *  const SLArrayIndex_t *pTapsLocns,
+ *  const SLData_t *pTapGainsReal,
+ *  const SLData_t *pTapGainsImag,
+ *  const SLArrayIndex_t NumberOfTaps,
+ *  const SLArrayIndex_t DelayArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Returns the tapped delayed value on a per-sample basis
+ *  Returns the tapped delayed value on a per-sample basis
  *
  ********************************************************/
 
@@ -1905,25 +1905,25 @@ void SIGLIB_FUNC_DECL SDS_TappedDelayLineComplex(const SLData_t SrcReal, const S
  * Function: SDA_TappedDelayLineComplex
  *
  * Parameters:
- *   const SLData_t *pSrcReal,
- *   const SLData_t *pSrcImag,
- *   SLData_t *pDstReal,
- *   SLData_t *pDstImag,
- *   SLData_t *pDelayReal,
- *   SLData_t *pDelayImag,
- *   SLArrayIndex_t *pDelayIndex,
- *   const SLArrayIndex_t *pTapsLocns,
- *   const SLData_t *pTapGainsReal,
- *   const SLData_t *pTapGainsImag,
- *   const SLArrayIndex_t NumberOfTaps,
- *   const SLArrayIndex_t DelayArrayLength,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t *pSrcReal,
+ *  const SLData_t *pSrcImag,
+ *  SLData_t *pDstReal,
+ *  SLData_t *pDstImag,
+ *  SLData_t *pDelayReal,
+ *  SLData_t *pDelayImag,
+ *  SLArrayIndex_t *pDelayIndex,
+ *  const SLArrayIndex_t *pTapsLocns,
+ *  const SLData_t *pTapGainsReal,
+ *  const SLData_t *pTapGainsImag,
+ *  const SLArrayIndex_t NumberOfTaps,
+ *  const SLArrayIndex_t DelayArrayLength,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Returns the tapped delayed value on an array of data
+ *  Returns the tapped delayed value on an array of data
  *
  ********************************************************/
 
@@ -1986,24 +1986,24 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLineComplex(const SLData_t* SIGLIB_PTR_DECL
  * Function: SIF_TappedDelayLineIQ
  *
  * Parameters:
- *   SLData_t *pDelayReal,
- *   SLData_t *pDelayImag,
- *   SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
- *   const SLArrayIndex_t DelayArrayLength
+ *  SLData_t *pDelayReal,
+ *  SLData_t *pDelayImag,
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
+ *  const SLArrayIndex_t DelayArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initializes the tapped delay function.
+ *  Initializes the tapped delay function.
  *
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SIF_TappedDelayLineIQ(SLData_t* SIGLIB_PTR_DECL pDelayReal, SLData_t* SIGLIB_PTR_DECL pDelayImag,
                                             SLArrayIndex_t* SIGLIB_PTR_DECL pDelayIndex, const SLArrayIndex_t DelayArrayLength)
 {
-  SDA_Clear(pDelayReal, DelayArrayLength);    // Clear data arrays
-  SDA_Clear(pDelayImag, DelayArrayLength);    // Clear data arrays
+  SDA_Zeros(pDelayReal, DelayArrayLength);    // Clear data arrays
+  SDA_Zeros(pDelayImag, DelayArrayLength);    // Clear data arrays
   *pDelayIndex = (SLArrayIndex_t)0;           // Initialize delay index
 }    // End of SIF_TappedDelayLineIQ()
 
@@ -2011,24 +2011,24 @@ void SIGLIB_FUNC_DECL SIF_TappedDelayLineIQ(SLData_t* SIGLIB_PTR_DECL pDelayReal
  * Function: SDS_TappedDelayLineIQ
  *
  * Parameters:
- *   const SLData_t SrcReal,
- *   const SLData_t SrcImag,
- *   SLData_t * pDstReal,
- *   SLData_t * pDstImag,
- *   SLData_t *pDelayReal,
- *   SLData_t *pDelayImag,
- *   SLArrayIndex_t *pDelayIndex,
- *   const SLArrayIndex_t *pTapsLocns,
- *   const SLData_t *pTapGainsReal,
- *   const SLData_t *pTapGainsImag,
- *   const SLArrayIndex_t NumberOfTaps,
- *   const SLArrayIndex_t DelayArrayLength
+ *  const SLData_t SrcReal,
+ *  const SLData_t SrcImag,
+ *  SLData_t * pDstReal,
+ *  SLData_t * pDstImag,
+ *  SLData_t *pDelayReal,
+ *  SLData_t *pDelayImag,
+ *  SLArrayIndex_t *pDelayIndex,
+ *  const SLArrayIndex_t *pTapsLocns,
+ *  const SLData_t *pTapGainsReal,
+ *  const SLData_t *pTapGainsImag,
+ *  const SLArrayIndex_t NumberOfTaps,
+ *  const SLArrayIndex_t DelayArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Returns the tapped delayed value on a per-sample basis
+ *  Returns the tapped delayed value on a per-sample basis
  *
  ********************************************************/
 
@@ -2070,25 +2070,25 @@ void SIGLIB_FUNC_DECL SDS_TappedDelayLineIQ(const SLData_t SrcReal, const SLData
  * Function: SDA_TappedDelayLineIQ
  *
  * Parameters:
- *   const SLData_t *pSrcReal,
- *   const SLData_t *pSrcImag,
- *   SLData_t *pDstReal,
- *   SLData_t *pDstImag,
- *   SLData_t *pDelayReal,
- *   SLData_t *pDelayImag,
- *   SLArrayIndex_t *pDelayIndex,
- *   const SLArrayIndex_t *pTapsLocns,
- *   const SLData_t *pTapGainsReal,
- *   const SLData_t *pTapGainsImag,
- *   const SLArrayIndex_t NumberOfTaps,
- *   const SLArrayIndex_t DelayArrayLength,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t *pSrcReal,
+ *  const SLData_t *pSrcImag,
+ *  SLData_t *pDstReal,
+ *  SLData_t *pDstImag,
+ *  SLData_t *pDelayReal,
+ *  SLData_t *pDelayImag,
+ *  SLArrayIndex_t *pDelayIndex,
+ *  const SLArrayIndex_t *pTapsLocns,
+ *  const SLData_t *pTapGainsReal,
+ *  const SLData_t *pTapGainsImag,
+ *  const SLArrayIndex_t NumberOfTaps,
+ *  const SLArrayIndex_t DelayArrayLength,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Returns the tapped delayed value on an array of data
+ *  Returns the tapped delayed value on an array of data
  *
  ********************************************************/
 
@@ -2147,18 +2147,18 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLineIQ(const SLData_t* SIGLIB_PTR_DECL pSrc
  * Function: SIF_FirPolyPhaseGenerate
  *
  * Parameters:
- *   const SLData_t *pSrcFIRCoeffs,            - Input FIR coefficient pointer
- *   SLData_t *pDstFIRCoeffs,                  - Output poly-phase coefficient
+ *  const SLData_t *pSrcFIRCoeffs,            - Input FIR coefficient pointer
+ *  SLData_t *pDstFIRCoeffs,                  - Output poly-phase coefficient
  *pointer SLData_t **pCoeffPtrs,                    - Output filter coefficient
  *pointers SLArrayIndex_t *pPolyPhaseFilterLengths,  - Output filter lengths
- *   const SLArrayIndex_t NumberOfPhases       - Number of output filter phases
- *   const SLArrayIndex_t filterLength         - Input filter length
+ *  const SLArrayIndex_t NumberOfPhases       - Number of output filter phases
+ *  const SLArrayIndex_t filterLength         - Input filter length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Convert FIR filter into separate poly-phase filter phases
+ *  Convert FIR filter into separate poly-phase filter phases
  *
  ********************************************************/
 
@@ -2196,15 +2196,15 @@ void SIGLIB_FUNC_DECL SIF_FirPolyPhaseGenerate(const SLData_t* SIGLIB_PTR_DECL p
  * Function: SIF_FirZeroNotchFilter
  *
  * Parameters:
- *   SLData_t *pDstFIRCoeffs,        - Output coefficient pointer
- *   const SLData_t centreFrequency  - Notch centre frequency normalized to Fs =
+ *  SLData_t *pDstFIRCoeffs,        - Output coefficient pointer
+ *  const SLData_t centreFrequency  - Notch centre frequency normalized to Fs =
  *1 Hz
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Convert FIR filter into separate poly-phase filter phases
+ *  Convert FIR filter into separate poly-phase filter phases
  *
  ********************************************************/
 
@@ -2220,17 +2220,17 @@ void SIGLIB_FUNC_DECL SIF_FirZeroNotchFilter(SLData_t* SIGLIB_PTR_DECL pDstFIRCo
  * Function: SDA_FirLpBpShift
  *
  * Parameters:
- *   const SLData_t *,       Pointer to source filter coefficients
- *   SLData_t *,             Pointer to destination shifted coefficients
- *   const SLData_t,         New centre frequency
- *   const SLArrayIndex_t)   Filter length
+ *  const SLData_t *,       Pointer to source filter coefficients
+ *  SLData_t *,             Pointer to destination shifted coefficients
+ *  const SLData_t,         New centre frequency
+ *  const SLArrayIndex_t)   Filter length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   This function shifts the centre frequency of a low pass
- *   FIR filter from D.C. to the new centre frequency.
+ *  This function shifts the centre frequency of a low pass
+ *  FIR filter from D.C. to the new centre frequency.
  *
  ********************************************************/
 
@@ -2248,16 +2248,16 @@ void SIGLIB_FUNC_DECL SDA_FirLpBpShift(const SLData_t* SIGLIB_PTR_DECL pSrcCoeff
  * Function: SDA_FirLpHpShift
  *
  * Parameters:
- *   const SLData_t *,       Pointer to source filter coefficients
- *   SLData_t *,             Pointer to destination shifted coefficients
- *   const SLArrayIndex_t)   Filter length
+ *  const SLData_t *,       Pointer to source filter coefficients
+ *  SLData_t *,             Pointer to destination shifted coefficients
+ *  const SLArrayIndex_t)   Filter length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   This function shifts the centre frequency of a low pass
- *   FIR filter from D.C. to the Nyquist frequency.
+ *  This function shifts the centre frequency of a low pass
+ *  FIR filter from D.C. to the Nyquist frequency.
  *
  ********************************************************/
 

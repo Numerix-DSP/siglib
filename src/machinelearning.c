@@ -48,26 +48,26 @@ Description: DSP basic math functions, for SigLib DSP library.
  * Function: SDA_TwoLayer2CategoryNetworkFit
  *
  * Parameters:
- *   const SLData_t *,               - pTrainingData
- *   const SLArrayIndex_t *,         - pCategoricalValue
- *   SLData_t *,                     - pLayer1Weights
- *   SLData_t *,                     - pLayer2Weights
- *   SLData_t *,                     - pLayer1PreActivation
- *   SLData_t *,                     - pLayer1PostActivation
- *   const enum SLActivationType_t   - layer1ActivationType
- *   const SLData_t,                 - layer1ActivationAlpha
- *   const enum SLActivationType_t   - layer2ActivationType
- *   const SLData_t,                 - layer2ActivationAlpha
- *   const SLData_t,                 - learningRate
- *   const SLArrayIndex_t,           - numberOfTrainingSequences
- *   const SLArrayIndex_t,           - numberOfInputNodes
- *   const SLArrayIndex_t)           - numberOfLayer1Nodes
+ *  const SLData_t *,               - pTrainingData
+ *  const SLArrayIndex_t *,         - pCategoricalValue
+ *  SLData_t *,                     - pLayer1Weights
+ *  SLData_t *,                     - pLayer2Weights
+ *  SLData_t *,                     - pLayer1PreActivation
+ *  SLData_t *,                     - pLayer1PostActivation
+ *  const enum SLActivationType_t   - layer1ActivationType
+ *  const SLData_t,                 - layer1ActivationAlpha
+ *  const enum SLActivationType_t   - layer2ActivationType
+ *  const SLData_t,                 - layer2ActivationAlpha
+ *  const SLData_t,                 - learningRate
+ *  const SLArrayIndex_t,           - numberOfTrainingSequences
+ *  const SLArrayIndex_t,           - numberOfInputNodes
+ *  const SLArrayIndex_t)           - numberOfLayer1Nodes
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Fit the 2 category model to the data
+ *  Fit the 2 category model to the data
  *
  ********************************************************/
 
@@ -184,24 +184,24 @@ void SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryNetworkFit(const SLData_t* pTrainingD
  * Function: SDA_TwoLayer2CategoryNetworkPredict
  *
  * Parameters:
- *   const SLData_t *,               - pData
- *   SLData_t *,                     - pLayer1Weights
- *   SLData_t *,                     - pLayer2Weights
- *   SLData_t *,                     - pLayer1PostActivation
- *   SLData_t *,                     - pLayer2Activation
- *   const enum SLActivationType_t   - layer1ActivationType
- *   const SLData_t,                 - layer1ActivationAlpha
- *   const enum SLActivationType_t   - layer2ActivationType
- *   const SLData_t,                 - layer2ActivationAlpha
- *   const SLData_t,                 - classificationThreshold
- *   const SLArrayIndex_t,           - numberOfInputNodes
- *   const SLArrayIndex_t)           - numberOfLayer1Nodes
+ *  const SLData_t *,               - pData
+ *  SLData_t *,                     - pLayer1Weights
+ *  SLData_t *,                     - pLayer2Weights
+ *  SLData_t *,                     - pLayer1PostActivation
+ *  SLData_t *,                     - pLayer2Activation
+ *  const enum SLActivationType_t   - layer1ActivationType
+ *  const SLData_t,                 - layer1ActivationAlpha
+ *  const enum SLActivationType_t   - layer2ActivationType
+ *  const SLData_t,                 - layer2ActivationAlpha
+ *  const SLData_t,                 - classificationThreshold
+ *  const SLArrayIndex_t,           - numberOfInputNodes
+ *  const SLArrayIndex_t)           - numberOfLayer1Nodes
  *
  * Return value:
- *   Predicted category and associated probability
+ *  Predicted category and associated probability
  *
  * Description:
- *   Use the model to predict the category of the data
+ *  Use the model to predict the category of the data
  *
  ********************************************************/
 
@@ -274,26 +274,26 @@ SLNeuralNetworkPrediction_s SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryNetworkPredict
  * Function: SDA_TwoLayerNCategoryNetworkFit
  *
  * Parameters:
- *   const SLData_t *,               - pTrainingData
- *   const SLArrayIndex_t *,         - pCategoricalValue
- *   SLData_t *,                     - pLayer1Weights
- *   SLData_t *,                     - pLayer2Weights
- *   SLData_t *,                     - pLayer1PreActivation
- *   SLData_t *,                     - pLayer1PostActivation
- *   const enum SLActivationType_t   - layer1ActivationType
- *   const SLData_t,                 - layer1ActivationAlpha
- *   const enum SLActivationType_t   - layer2ActivationType
- *   const SLData_t,                 - layer2ActivationAlpha
- *   const SLData_t,                 - learningRate
- *   const SLArrayIndex_t,           - numberOfTrainingSequences
- *   const SLArrayIndex_t,           - numberOfInputNodes
- *   const SLArrayIndex_t)           - numberOfLayer1Nodes
+ *  const SLData_t *,               - pTrainingData
+ *  const SLArrayIndex_t *,         - pCategoricalValue
+ *  SLData_t *,                     - pLayer1Weights
+ *  SLData_t *,                     - pLayer2Weights
+ *  SLData_t *,                     - pLayer1PreActivation
+ *  SLData_t *,                     - pLayer1PostActivation
+ *  const enum SLActivationType_t   - layer1ActivationType
+ *  const SLData_t,                 - layer1ActivationAlpha
+ *  const enum SLActivationType_t   - layer2ActivationType
+ *  const SLData_t,                 - layer2ActivationAlpha
+ *  const SLData_t,                 - learningRate
+ *  const SLArrayIndex_t,           - numberOfTrainingSequences
+ *  const SLArrayIndex_t,           - numberOfInputNodes
+ *  const SLArrayIndex_t)           - numberOfLayer1Nodes
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Fit the N category model to the data
+ *  Fit the N category model to the data
  *
  ********************************************************/
 
@@ -421,24 +421,24 @@ void SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryNetworkFit(const SLData_t* pTrainingD
  * Function: SDA_TwoLayerNCategoryNetworkPredict
  *
  * Parameters:
- *   const SLData_t *,               - pData
- *   SLData_t *,                     - pLayer1Weights
- *   SLData_t *,                     - pLayer2Weights
- *   SLData_t *,                     - pLayer1PostActivation
- *   SLData_t *,                     - pLayer2PostActivation
- *   const enum SLActivationType_t   - layer1ActivationType
- *   const SLData_t,                 - layer1ActivationAlpha
- *   const enum SLActivationType_t   - layer2ActivationType
- *   const SLData_t,                 - layer2ActivationAlpha
- *   const SLArrayIndex_t,           - numberOfInputNodes
- *   const SLArrayIndex_t,           - numberOfLayer1Nodes
- *   const SLArrayIndex_t)           - numberOfCategories
+ *  const SLData_t *,               - pData
+ *  SLData_t *,                     - pLayer1Weights
+ *  SLData_t *,                     - pLayer2Weights
+ *  SLData_t *,                     - pLayer1PostActivation
+ *  SLData_t *,                     - pLayer2PostActivation
+ *  const enum SLActivationType_t   - layer1ActivationType
+ *  const SLData_t,                 - layer1ActivationAlpha
+ *  const enum SLActivationType_t   - layer2ActivationType
+ *  const SLData_t,                 - layer2ActivationAlpha
+ *  const SLArrayIndex_t,           - numberOfInputNodes
+ *  const SLArrayIndex_t,           - numberOfLayer1Nodes
+ *  const SLArrayIndex_t)           - numberOfCategories
  *
  * Return value:
- *   Predicted category and associated probability
+ *  Predicted category and associated probability
  *
  * Description:
- *   Use the model to predict the category of the data
+ *  Use the model to predict the category of the data
  *
  ********************************************************/
 
@@ -507,30 +507,30 @@ SLNeuralNetworkPrediction_s SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryNetworkPredict
  * Function: SDA_TwoLayer2CategoryWithBiasesNetworkFit
  *
  * Parameters:
- *   const SLData_t *,               - pTrainingData
- *   const SLArrayIndex_t *,         - pCategoricalValue
- *   SLData_t *,                     - pLayer1Weights
- *   SLData_t *,                     - pLayer1Biases
- *   SLData_t *,                     - pLayer2Weights
- *   SLData_t *,                     - pLayer2Biases
- *   SLData_t *,                     - pLayer1PreActivation
- *   SLData_t *,                     - pLayer1BiasPreActivation
- *   SLData_t *,                     - pLayer1PostActivation
- *   const enum SLActivationType_t   - layer1ActivationType
- *   const SLData_t,                 - layer1ActivationAlpha
- *   const enum SLActivationType_t   - layer2ActivationType
- *   const SLData_t,                 - layer2ActivationAlpha
- *   const SLData_t,                 - learningRate
- *   const SLArrayIndex_t,           - numberOfTrainingSequences
- *   const SLArrayIndex_t,           - numberOfInputNodes
- *   const SLArrayIndex_t)           - numberOfLayer1Nodes
+ *  const SLData_t *,               - pTrainingData
+ *  const SLArrayIndex_t *,         - pCategoricalValue
+ *  SLData_t *,                     - pLayer1Weights
+ *  SLData_t *,                     - pLayer1Biases
+ *  SLData_t *,                     - pLayer2Weights
+ *  SLData_t *,                     - pLayer2Biases
+ *  SLData_t *,                     - pLayer1PreActivation
+ *  SLData_t *,                     - pLayer1BiasPreActivation
+ *  SLData_t *,                     - pLayer1PostActivation
+ *  const enum SLActivationType_t   - layer1ActivationType
+ *  const SLData_t,                 - layer1ActivationAlpha
+ *  const enum SLActivationType_t   - layer2ActivationType
+ *  const SLData_t,                 - layer2ActivationAlpha
+ *  const SLData_t,                 - learningRate
+ *  const SLArrayIndex_t,           - numberOfTrainingSequences
+ *  const SLArrayIndex_t,           - numberOfInputNodes
+ *  const SLArrayIndex_t)           - numberOfLayer1Nodes
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Fit the 2 category model to the data
- *   This network uses both weights and biases in all nodes.
+ *  Fit the 2 category model to the data
+ *  This network uses both weights and biases in all nodes.
  *
  ********************************************************/
 
@@ -688,27 +688,27 @@ void SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryWithBiasesNetworkFit(
  * Function: SDA_TwoLayer2CategoryWithBiasesNetworkPredict
  *
  * Parameters:
- *   const SLData_t *,               - pData
- *   const SLData_t *,               - pLayer1Weights
- *   const SLData_t *,               - pLayer1Biases
- *   const SLData_t *,               - pLayer2Weights
- *   const SLData_t *,               - pLayer2Biases
- *   SLData_t *,                     - pLayer1PostActivation
- *   SLData_t *,                     - pLayer2Activation
- *   const enum SLActivationType_t   - layer1ActivationType
- *   const SLData_t,                 - layer1ActivationAlpha
- *   const enum SLActivationType_t   - layer2ActivationType
- *   const SLData_t,                 - layer2ActivationAlpha
- *   const SLData_t,                 - classificationThreshold
- *   const SLArrayIndex_t,           - numberOfInputNodes
- *   const SLArrayIndex_t)           - numberOfLayer1Nodes
+ *  const SLData_t *,               - pData
+ *  const SLData_t *,               - pLayer1Weights
+ *  const SLData_t *,               - pLayer1Biases
+ *  const SLData_t *,               - pLayer2Weights
+ *  const SLData_t *,               - pLayer2Biases
+ *  SLData_t *,                     - pLayer1PostActivation
+ *  SLData_t *,                     - pLayer2Activation
+ *  const enum SLActivationType_t   - layer1ActivationType
+ *  const SLData_t,                 - layer1ActivationAlpha
+ *  const enum SLActivationType_t   - layer2ActivationType
+ *  const SLData_t,                 - layer2ActivationAlpha
+ *  const SLData_t,                 - classificationThreshold
+ *  const SLArrayIndex_t,           - numberOfInputNodes
+ *  const SLArrayIndex_t)           - numberOfLayer1Nodes
  *
  * Return value:
- *   Predicted category and associated probability
+ *  Predicted category and associated probability
  *
  * Description:
- *   Use the model to predict the category of the data
- *   This network uses both weights and biases in all nodes.
+ *  Use the model to predict the category of the data
+ *  This network uses both weights and biases in all nodes.
  *
  ********************************************************/
 
@@ -783,29 +783,29 @@ SLNeuralNetworkPrediction_s SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryWithBiasesNetw
  * Function: SDA_TwoLayerNCategoryWithBiasesNetworkFit
  *
  * Parameters:
- *   const SLData_t *,               - pTrainingData
- *   const SLArrayIndex_t *,         - pCategoricalValue
- *   SLData_t *,                     - pLayer1Weights
- *   SLData_t *,                     - pLayer1Biases
- *   SLData_t *,                     - pLayer2Weights
- *   SLData_t *,                     - pLayer2Biases
- *   SLData_t *,                     - pLayer1PreActivation
- *   SLData_t *,                     - pLayer1PostActivation
- *   const enum SLActivationType_t   - layer1ActivationType
- *   const SLData_t,                 - layer1ActivationAlpha
- *   const enum SLActivationType_t   - layer2ActivationType
- *   const SLData_t,                 - layer2ActivationAlpha
- *   const SLData_t,                 - learningRate
- *   const SLArrayIndex_t,           - numberOfTrainingSequences
- *   const SLArrayIndex_t,           - numberOfInputNodes
- *   const SLArrayIndex_t)           - numberOfLayer1Nodes
+ *  const SLData_t *,               - pTrainingData
+ *  const SLArrayIndex_t *,         - pCategoricalValue
+ *  SLData_t *,                     - pLayer1Weights
+ *  SLData_t *,                     - pLayer1Biases
+ *  SLData_t *,                     - pLayer2Weights
+ *  SLData_t *,                     - pLayer2Biases
+ *  SLData_t *,                     - pLayer1PreActivation
+ *  SLData_t *,                     - pLayer1PostActivation
+ *  const enum SLActivationType_t   - layer1ActivationType
+ *  const SLData_t,                 - layer1ActivationAlpha
+ *  const enum SLActivationType_t   - layer2ActivationType
+ *  const SLData_t,                 - layer2ActivationAlpha
+ *  const SLData_t,                 - learningRate
+ *  const SLArrayIndex_t,           - numberOfTrainingSequences
+ *  const SLArrayIndex_t,           - numberOfInputNodes
+ *  const SLArrayIndex_t)           - numberOfLayer1Nodes
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Fit the N category model to the data
- *   This network uses both weights and biases in all nodes.
+ *  Fit the N category model to the data
+ *  This network uses both weights and biases in all nodes.
  *
  ********************************************************/
 
@@ -978,27 +978,27 @@ void SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryWithBiasesNetworkFit(
  * Function: SDA_TwoLayerNCategoryWithBiasesNetworkPredict
  *
  * Parameters:
- *   const SLData_t *,               - pData
- *   const SLData_t *,               - pLayer1Weights
- *   const SLData_t *,               - pLayer1Biases
- *   const SLData_t *,               - pLayer2Weights
- *   const SLData_t *,               - pLayer2Biases
- *   SLData_t *,                     - pLayer1PostActivation
- *   SLData_t *,                     - pLayer2PostActivation
- *   const enum SLActivationType_t   - layer1ActivationType
- *   const SLData_t,                 - layer1ActivationAlpha
- *   const enum SLActivationType_t   - layer2ActivationType
- *   const SLData_t,                 - layer2ActivationAlpha
- *   const SLArrayIndex_t,           - numberOfInputNodes
- *   const SLArrayIndex_t,           - numberOfLayer1Nodes
- *   const SLArrayIndex_t)           - numberOfCategories
+ *  const SLData_t *,               - pData
+ *  const SLData_t *,               - pLayer1Weights
+ *  const SLData_t *,               - pLayer1Biases
+ *  const SLData_t *,               - pLayer2Weights
+ *  const SLData_t *,               - pLayer2Biases
+ *  SLData_t *,                     - pLayer1PostActivation
+ *  SLData_t *,                     - pLayer2PostActivation
+ *  const enum SLActivationType_t   - layer1ActivationType
+ *  const SLData_t,                 - layer1ActivationAlpha
+ *  const enum SLActivationType_t   - layer2ActivationType
+ *  const SLData_t,                 - layer2ActivationAlpha
+ *  const SLArrayIndex_t,           - numberOfInputNodes
+ *  const SLArrayIndex_t,           - numberOfLayer1Nodes
+ *  const SLArrayIndex_t)           - numberOfCategories
  *
  * Return value:
- *   Predicted category and associated probability
+ *  Predicted category and associated probability
  *
  * Description:
- *   Use the model to predict the category of the data
- *   This network uses both weights and biases in all nodes.
+ *  Use the model to predict the category of the data
+ *  This network uses both weights and biases in all nodes.
  *
  ********************************************************/
 
@@ -1069,10 +1069,10 @@ SLNeuralNetworkPrediction_s SIGLIB_FUNC_DECL SDA_TwoLayerNCategoryWithBiasesNetw
  * Function: SDS_ActivationReLU
  *
  * Parameters:
- *   const SLData_t          - Source sample
+ *  const SLData_t          - Source sample
  *
  * Return value:
- *   Result sample
+ *  Result sample
  *
  * Description: Perform ReLU activation on a sample.
  *
@@ -1091,15 +1091,15 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationReLU(const SLData_t x)
  * Function: SDA_ActivationReLU
  *
  * Parameters:
- *   const SLData_t *        - Pointer to source array
- *   SLData_t *              - Pointer to destination array
- *   const SLArrayIndex_t    - Array lengths
+ *  const SLData_t *       - Pointer to source array
+ *  SLData_t *             - Pointer to destination array
+ *  const SLArrayIndex_t    - Array lengths
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform ReLU activation on an array of
- *   samples.
+ *  samples.
  *
  ********************************************************/
 
@@ -1119,10 +1119,10 @@ void SIGLIB_FUNC_DECL SDA_ActivationReLU(const SLData_t* pSrc, SLData_t* pDst, c
  * Function: SDS_ActivationReLUDerivative
  *
  * Parameters:
- *   const SLData_t          - Source sample
+ *  const SLData_t          - Source sample
  *
  * Return value:
- *   Result sample
+ *  Result sample
  *
  * Description: Perform ReLU derivative on a sample.
  *
@@ -1141,15 +1141,15 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationReLUDerivative(const SLData_t x)
  * Function: SDA_ActivationReLUDerivative
  *
  * Parameters:
- *   const SLData_t *        - Pointer to source array
- *   SLData_t *              - Pointer to destination array
- *   const SLArrayIndex_t    - Array lengths
+ *  const SLData_t *       - Pointer to source array
+ *  SLData_t *             - Pointer to destination array
+ *  const SLArrayIndex_t    - Array lengths
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform ReLU derivative on an array of
- *   samples.
+ *  samples.
  *
  ********************************************************/
 
@@ -1169,10 +1169,10 @@ void SIGLIB_FUNC_DECL SDA_ActivationReLUDerivative(const SLData_t* pSrc, SLData_
  * Function: SDS_ActivationLeakyReLU
  *
  * Parameters:
- *   const SLData_t          - Source sample
+ *  const SLData_t          - Source sample
  *
  * Return value:
- *   Result sample
+ *  Result sample
  *
  * Description: Perform leaky ReLU activation on a sample.
  *
@@ -1191,15 +1191,15 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationLeakyReLU(const SLData_t x, const SLData
  * Function: SDA_ActivationLeakyReLU
  *
  * Parameters:
- *   const SLData_t *        - Pointer to source array
- *   SLData_t *              - Pointer to destination array
- *   const SLArrayIndex_t    - Array lengths
+ *  const SLData_t *       - Pointer to source array
+ *  SLData_t *             - Pointer to destination array
+ *  const SLArrayIndex_t    - Array lengths
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform leaky ReLU activation on an array of
- *   samples.
+ *  samples.
  *
  ********************************************************/
 
@@ -1219,10 +1219,10 @@ void SIGLIB_FUNC_DECL SDA_ActivationLeakyReLU(const SLData_t* pSrc, const SLData
  * Function: SDS_ActivationLeakyReLUDerivative
  *
  * Parameters:
- *   const SLData_t          - Source sample
+ *  const SLData_t          - Source sample
  *
  * Return value:
- *   Result sample
+ *  Result sample
  *
  * Description: Perform leaky ReLU derivative on a sample.
  *
@@ -1241,15 +1241,15 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationLeakyReLUDerivative(const SLData_t x, co
  * Function: SDA_ActivationLeakyReLUDerivative
  *
  * Parameters:
- *   const SLData_t *        - Pointer to source array
- *   SLData_t *              - Pointer to destination array
- *   const SLArrayIndex_t    - Array lengths
+ *  const SLData_t *       - Pointer to source array
+ *  SLData_t *             - Pointer to destination array
+ *  const SLArrayIndex_t    - Array lengths
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform leaky ReLU derivative on an array of
- *   samples.
+ *  samples.
  *
  ********************************************************/
 
@@ -1270,10 +1270,10 @@ void SIGLIB_FUNC_DECL SDA_ActivationLeakyReLUDerivative(const SLData_t* pSrc, co
  * Function: SDS_ActivationLogistic
  *
  * Parameters:
- *   const SLData_t          - Source sample
+ *  const SLData_t          - Source sample
  *
  * Return value:
- *   Result sample
+ *  Result sample
  *
  * Description: Perform logistic activation on a sample.
  *
@@ -1288,15 +1288,15 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationLogistic(const SLData_t x)
  * Function: SDA_ActivationLogistic
  *
  * Parameters:
- *   const SLData_t *        - Pointer to source array
- *   SLData_t *              - Pointer to destination array
- *   const SLArrayIndex_t    - Array lengths
+ *  const SLData_t *       - Pointer to source array
+ *  SLData_t *             - Pointer to destination array
+ *  const SLArrayIndex_t    - Array lengths
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform logistic activation on an array of
- *   samples.
+ *  samples.
  *
  ********************************************************/
 
@@ -1312,10 +1312,10 @@ void SIGLIB_FUNC_DECL SDA_ActivationLogistic(const SLData_t* pSrc, SLData_t* pDs
  * Function: SDS_ActivationLogisticDerivative
  *
  * Parameters:
- *   const SLData_t          - Source sample
+ *  const SLData_t          - Source sample
  *
  * Return value:
- *   Result sample
+ *  Result sample
  *
  * Description: Perform logistic derivative on a sample.
  *
@@ -1330,15 +1330,15 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationLogisticDerivative(const SLData_t x)
  * Function: SDA_ActivationLogisticDerivative
  *
  * Parameters:
- *   const SLData_t *        - Pointer to source array
- *   SLData_t *              - Pointer to destination array
- *   const SLArrayIndex_t    - Array lengths
+ *  const SLData_t *       - Pointer to source array
+ *  SLData_t *             - Pointer to destination array
+ *  const SLArrayIndex_t    - Array lengths
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform logistic derivative on an array of
- *   samples.
+ *  samples.
  *
  ********************************************************/
 
@@ -1354,13 +1354,13 @@ void SIGLIB_FUNC_DECL SDA_ActivationLogisticDerivative(const SLData_t* pSrc, SLD
  * Function: SDS_ActivationTanH
  *
  * Parameters:
- *   const SLData_t          - Source sample
+ *  const SLData_t          - Source sample
  *
  * Return value:
- *   Result sample
+ *  Result sample
  *
  * Description: Perform hyperbolic tangent activation
- *   on a sample.
+ *  on a sample.
  *
  ********************************************************/
 
@@ -1373,15 +1373,15 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationTanH(const SLData_t x)
  * Function: SDA_ActivationTanH
  *
  * Parameters:
- *   const SLData_t *        - Pointer to source array
- *   SLData_t *              - Pointer to destination array
- *   const SLArrayIndex_t    - Array lengths
+ *  const SLData_t *       - Pointer to source array
+ *  SLData_t *             - Pointer to destination array
+ *  const SLArrayIndex_t    - Array lengths
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform hyperbolic tangent activation
- *   on an array of samples.
+ *  on an array of samples.
  *
  ********************************************************/
 
@@ -1397,13 +1397,13 @@ void SIGLIB_FUNC_DECL SDA_ActivationTanH(const SLData_t* pSrc, SLData_t* pDst, c
  * Function: SDS_ActivationTanHDerivative
  *
  * Parameters:
- *   const SLData_t          - Source sample
+ *  const SLData_t          - Source sample
  *
  * Return value:
- *   Result sample
+ *  Result sample
  *
  * Description: Perform hyperbolic tangent derivative
- *   on a sample.
+ *  on a sample.
  *
  ********************************************************/
 
@@ -1417,15 +1417,15 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationTanHDerivative(const SLData_t x)
  * Function: SDA_ActivationTanHDerivative
  *
  * Parameters:
- *   const SLData_t *        - Pointer to source array
- *   SLData_t *              - Pointer to destination array
- *   const SLArrayIndex_t    - Array lengths
+ *  const SLData_t *       - Pointer to source array
+ *  SLData_t *             - Pointer to destination array
+ *  const SLArrayIndex_t    - Array lengths
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Perform hyperbolic tangent derivative
- *   on an array of samples.
+ *  on an array of samples.
  *
  ********************************************************/
 

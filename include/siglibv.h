@@ -429,6 +429,12 @@ void _stdcall SDA_CfftExtend(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to re
                              long,                              // Source array length
                              long);                             // Destination array length
 
+void _stdcall SDA_FftRealToComplex(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to real source array
+                                   double* SIGLIB_INPUT_PTR_DECL,     // Pointer to imaginary source array
+                                   double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to real destination array
+                                   double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to imaginary destination array
+                                   long);                             // FFT length
+
 void _stdcall SIF_DctII(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to cosine look up table
                         long);                             // DCT length
 
@@ -826,6 +832,22 @@ void _stdcall SDA_FftCorrelateArb(double* SIGLIB_INPUT_PTR_DECL,     // Pointer 
                                   long,                              // FFT length
                                   long,                              // Log 2 FFT length
                                   double);                           // Inverse FFT length
+
+long _stdcall SDA_RfftConvolve(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to real time domain source data 1
+                               double* SIGLIB_INPUT_PTR_DECL,     // Pointer to imag time domain source data 1
+                               double* SIGLIB_INPUT_PTR_DECL,     // Pointer to real time domain source data 2
+                               double* SIGLIB_INPUT_PTR_DECL,     // Pointer to imag time domain source data 2
+                               double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to real destination array
+                               double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to imag destination array
+                               double* SIGLIB_INPUT_PTR_DECL,     // Pointer to FFT coefficients
+                               long* SIGLIB_INPUT_PTR_DECL,       // Bit reverse mode flag / Pointer to bit
+                                                                  // reverse address table
+                               int SLFftConvolveModeType_t,       // Result mode
+                               long,                              // Source 1 length
+                               long,                              // Source 2 length
+                               long,                              // FFT length
+                               long,                              // Log 2 FFT length
+                               double);                           // Inverse FFT length
 
 // Chirp z-transform functions - chirpz.c
 
@@ -2816,7 +2838,7 @@ long _stdcall SDS_CostasQamDemodulate(double,                            // Sour
                                       long*,                             // Pointer to ELG synchronization delay index
                                       long);                             // ELG output synchronization delay length
 
-#line 3224 "siglib.h"
+#line 3248 "siglib.h"
 // compiler
 long _stdcall SDS_CostasQamDemodulateDebug(double,                            // Source data sample
                                            double*,                           // Pointer to real destination symbol point
@@ -2952,7 +2974,7 @@ long _stdcall SDA_CostasQamDemodulateDebug(double* SIGLIB_INPUT_PTR_DECL,     //
                                            double*,                           // Pointer to debug real filter output
                                            double*,                           // Pointer to debug imaginary filter output
                                            double*);                          // Pointer to debug ELG trigger output
-#line 3360 "siglib.h"
+#line 3384 "siglib.h"
 
 void _stdcall SIF_QpskModulate(double* SIGLIB_OUTPUT_PTR_DECL,    // Carrier table pointer
                                double,                            // Carrier phase increment per sample (radians / 2Ï€)
@@ -4797,8 +4819,11 @@ void _stdcall SDA_Fill(double* SIGLIB_INOUT_PTR_DECL,    // Pointer to array
                        double,                           // Fill value
                        long);                            // Array length
 
-void _stdcall SDA_Clear(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+void _stdcall SDA_Zeros(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                         long);                            // Array length
+
+void _stdcall SDA_Ones(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                       long);                            // Array length
 
 void _stdcall SDA_Histogram(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
                             double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to histogram array
@@ -5378,6 +5403,26 @@ void _stdcall SDA_ExtractArray(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to 
                                long,                              // Extracted sample location
                                long,                              // Extracted sample array length
                                long);                             // Source array length
+
+long _stdcall SAI_CountOneBits(long);    // Fixed point number
+
+long _stdcall SAI_CountZeroBits(long);    // Fixed point number
+
+long _stdcall SAI_Log2OfPowerof2(long);    // Fixed point number
+
+long _stdcall SAI_DivideByPowerOf2(long,     // Dividend
+                                   long);    // Divisor
+
+long _stdcall SAI_NextPowerOf2(long);    // Fixed point number
+
+long _stdcall SAI_NextMultipleOfFftLength(long,     // Fixed point number
+                                          long);    // FFT Length
+
+long _stdcall SDA_FindFirstNonZeroIndex(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                                        long);                            // Array length
+
+long _stdcall SDA_FindNumberOfNonZeroValues(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                                            long);                            // Array length
 
 // Data type conversion functions - datatype.c
 
@@ -6008,18 +6053,11 @@ void _stdcall SMX_ExtractCategoricalColumn(double* SIGLIB_INPUT_PTR_DECL,    // 
 
 // Machine Learning functions - machinelearning.c
 
-// Deprecated functionality - these may be removed in a later version
+// The following functionality has been deprecated
+// This is usually because the function name has been changed for consistency or compatibility with other libraries
+// These macros are provided to ease porting but will be removed in later versions of the library
 
-// #define SIGLIB_HANNING                                SIGLIB_HANNING_FILTER
-// #define SIGLIB_HAMMING                                SIGLIB_HAMMING_FILTER
-// #define SIGLIB_GENERALIZED_COSINE                     SIGLIB_GENERALIZED_COSINE_FILTER
-// #define SIGLIB_BLACKMAN                               SIGLIB_BLACKMAN_FILTER
-// #define SIGLIB_BARTLETT_TRIANGLE_ZERO_END_POINTS      SIGLIB_BARTLETT_TRIANGLE_ZERO_END_POINTS_FILTER
-// #define SIGLIB_BARTLETT_TRIANGLE_NON_ZERO_END_POINTS  SIGLIB_BARTLETT_TRIANGLE_NON_ZERO_END_POINTS_FILTER
-// #define SIGLIB_KAISER                                 SIGLIB_KAISER_FILTER
-// #define SIGLIB_BLACKMAN_HARRIS                        SIGLIB_BLACKMAN_HARRIS_FILTER
-// #define SIGLIB_RECTANGLE                              SIGLIB_RECTANGLE_FILTER
-// #define SIGLIB_FLAT_TOP                               SIGLIB_FLAT_TOP_FILTER
+// End of deprecation list
 
 // End of SigLib DSP function section
-#line 6899 "siglib.h"
+#line 6960 "siglib.h"

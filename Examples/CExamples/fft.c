@@ -232,6 +232,32 @@ int main(void)
            FFT_LENGTH,                 // FFT length
            LOG2_FFT_LENGTH);           // log2 FFT length
 
+  // Test SDA_FftRealToComplex
+  SDA_Zeros(pRealDataCopy,                                          // Pointer to destination array
+            FFT_LENGTH);                                            // Dataset length
+  SDA_Zeros(pImagDataCopy,                                          // Pointer to destination array
+            FFT_LENGTH);                                            // Dataset length
+  SDA_FftRealToComplex(pRealData,                                   // Pointer to real source array
+                       pImagData,                                   // Pointer to imaginary source array
+                       pRealDataCopy,                               // Pointer to real destination array
+                       pImagDataCopy,                               // Pointer to imaginary destination array
+                       FFT_LENGTH);                                 // Dataset length
+  SLFixData_t comparisonReal = SDA_Compare(pRealData,               // Source array pointer #1
+                                           pRealDataCopy,           // Source array pointer #2
+                                           SIGLIB_MIN_THRESHOLD,    // Threshold
+                                           FFT_LENGTH);             // Dataset length
+  SLFixData_t comparisonImag = SDA_Compare(pImagData,               // Source array pointer #1
+                                           pImagDataCopy,           // Source array pointer #2
+                                           SIGLIB_MIN_THRESHOLD,    // Threshold
+                                           FFT_LENGTH);             // Dataset length
+  if (comparisonReal != SIGLIB_TRUE) {
+    printf("\nSDA_FftRealToComplex() Failed on real component :-( !!!\n");
+  } else if (comparisonImag != SIGLIB_TRUE) {
+    printf("\nSDA_FftRealToComplex() Failed on imaginary component :-( !!!\n");
+  } else {
+    printf("\nSDA_FftRealToComplex() Passed :-)\n");
+  }
+
   SDA_Copy(pRealData,        // Pointer to source array
            pRealDataCopy,    // Pointer to destination array
            FFT_LENGTH);      // Dataset length
@@ -266,8 +292,14 @@ int main(void)
          "Shifted\nPlease hit <Carriage Return> to continue . . .");
   getchar();
 
-  SDA_Cifft(pRealDataCopy, pImagDataCopy, pFFTCoeffs, SIGLIB_NULL_ARRAY_INDEX_PTR, FFT_LENGTH,
-            LOG2_FFT_LENGTH);    // Perform inverse FFT
+  // Perform inverse FFT
+  SDA_Cifft(pRealDataCopy,                  // Pointer to real array
+            pImagDataCopy,                  // Pointer to imaginary array
+            pFFTCoeffs,                     // Pointer to FFT coefficients
+            SIGLIB_NULL_ARRAY_INDEX_PTR,    // Bit reverse mode flag / Pointer to bit
+                                            // reverse address table
+            FFT_LENGTH,                     // FFT length
+            LOG2_FFT_LENGTH);               // log2 FFT length
 
   gpc_plot_2d(h2DPlot,                     // Graph handle
               pRealDataCopy,               // Dataset

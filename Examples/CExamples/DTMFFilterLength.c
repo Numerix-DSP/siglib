@@ -57,9 +57,9 @@ int main(void)
   printf("est (8k, %lf, 60, 20) = %d\n\n", SIGLIB_DTMF_HF_3,
          SUF_EstimateBPFirFilterLength(SAMPLE_RATE_HZ, SIGLIB_DTMF_HF_3, START_LENGTH, END_LENGTH));
 
-  SDA_Clear(ErrorSum,
+  SDA_Zeros(ErrorSum,
             NUMBER_OF_ESTIMATES);    // Initialize Sum, Max and Min arrays
-  SDA_Clear(ErrorMax, NUMBER_OF_ESTIMATES);
+  SDA_Zeros(ErrorMax, NUMBER_OF_ESTIMATES);
   SDA_Fill(ErrorMin, SIGLIB_ONE, NUMBER_OF_ESTIMATES);
 
   SUF_EstimateBPFirFilterError(SAMPLE_RATE_HZ, SIGLIB_DTMF_LF_0, START_LENGTH, END_LENGTH, Error);

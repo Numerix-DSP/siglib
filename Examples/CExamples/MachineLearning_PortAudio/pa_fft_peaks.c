@@ -108,7 +108,7 @@ void processAudio(void)
                 "blue",                                             // Colour
                 GPC_NEW);                                           // New graph
 
-    SDA_Clear(pPeakDetect,    // Pointer to array
+    SDA_Zeros(pPeakDetect,    // Pointer to array
               FFT_LENGTH);    // Array length
     peakDetectCount = SIGLIB_AI_ZERO;
   }

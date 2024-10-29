@@ -44,19 +44,19 @@ Description: Order analysis routines, for SigLib DSP library.
  * Function: SDA_ExtractOrder
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLArrayIndex_t OrderToExtract,
- *   const SLArrayIndex_t NumberOfAdjacentSamples,
- *   const SLData_t FirstOrdFrq,
- *   const SLArrayIndex_t FFTLen,
- *   const SLData_t SamplePeriod,
- *   const SLArrayIndex_t ArrayLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLArrayIndex_t OrderToExtract,
+ *  const SLArrayIndex_t NumberOfAdjacentSamples,
+ *  const SLData_t FirstOrdFrq,
+ *  const SLArrayIndex_t FFTLen,
+ *  const SLData_t SamplePeriod,
+ *  const SLArrayIndex_t ArrayLength)
  *
  * Return value:
- *   The magnitude
+ *  The magnitude
  *
  * Description:
- *   Return the magnitude of the requested orders
+ *  Return the magnitude of the requested orders
  *
  ********************************************************/
 
@@ -92,16 +92,16 @@ SLData_t SIGLIB_FUNC_DECL SDA_ExtractOrder(const SLData_t* SIGLIB_PTR_DECL pSrc,
  * Function: SDA_SumLevel
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const enum SLSignalCoherenceType_t SignalSourceType,
- *   const SLArrayIndex_t LogMagnitudeFlag,
- *   const SLArrayIndex_t ArrayLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const enum SLSignalCoherenceType_t SignalSourceType,
+ *  const SLArrayIndex_t LogMagnitudeFlag,
+ *  const SLArrayIndex_t ArrayLength)
  *
  * Return value:
- *   The magnitude
+ *  The magnitude
  *
  * Description:
- *   Return the magnitude from an (in)coherent source
+ *  Return the magnitude from an (in)coherent source
  *
  ********************************************************/
 
@@ -142,17 +142,17 @@ SLData_t SIGLIB_FUNC_DECL SDA_SumLevel(const SLData_t* SIGLIB_PTR_DECL pSrc, con
  * Function: SDA_SumLevelWholeSpectrum
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const enum SLSignalCoherenceType_t SignalSourceType,
- *   const SLArrayIndex_t LogMagnitudeFlag,
- *   const SLData_t LinearScale,
- *   const SLArrayIndex_t ArrayLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const enum SLSignalCoherenceType_t SignalSourceType,
+ *  const SLArrayIndex_t LogMagnitudeFlag,
+ *  const SLData_t LinearScale,
+ *  const SLArrayIndex_t ArrayLength)
  *
  * Return value:
- *   The magnitude
+ *  The magnitude
  *
  * Description:
- *   Return the magnitude from an (in)coherent source
+ *  Return the magnitude from an (in)coherent source
  *
  ********************************************************/
 
@@ -205,25 +205,25 @@ SLData_t SIGLIB_FUNC_DECL SDA_SumLevelWholeSpectrum(const SLData_t* SIGLIB_PTR_D
  * Function: SIF_OrderAnalysis
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pSincLUT,
- *   SLData_t * pLookUpTablePhaseGain,
- *   const SLArrayIndex_t NumberOfAdjacentSamples,
- *   const SLArrayIndex_t SincLutLength,
- *   SLData_t * SIGLIB_PTR_DECL pWindowCoeffs,
- *   const enum SLWindow_t WindowType,
- *   const SLData_t WindowCoefficient,
- *   SLData_t * pWindowInverseCoherentGain,
- *   SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
- *   SLArrayIndex_t * SIGLIB_PTR_DECL pBitRevAddrTable,
- *   SLData_t * SIGLIB_PTR_DECL pRealAverage,
- *   SLData_t * SIGLIB_PTR_DECL pImagAverage,
- *   const SLArrayIndex_t FFTLength)
+ *  SLData_t * SIGLIB_PTR_DECL pSincLUT,
+ *  SLData_t * pLookUpTablePhaseGain,
+ *  const SLArrayIndex_t NumberOfAdjacentSamples,
+ *  const SLArrayIndex_t SincLutLength,
+ *  SLData_t * SIGLIB_PTR_DECL pWindowCoeffs,
+ *  const enum SLWindow_t WindowType,
+ *  const SLData_t WindowCoefficient,
+ *  SLData_t * pWindowInverseCoherentGain,
+ *  SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL pBitRevAddrTable,
+ *  SLData_t * SIGLIB_PTR_DECL pRealAverage,
+ *  SLData_t * SIGLIB_PTR_DECL pImagAverage,
+ *  const SLArrayIndex_t FFTLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialize the order analysis function
+ *  Initialize the order analysis function
  *
  ********************************************************/
 
@@ -259,9 +259,9 @@ void SIGLIB_FUNC_DECL SIF_OrderAnalysis(SLData_t* SIGLIB_PTR_DECL pSincLUT, SLDa
           FFTLength);          // FFT length
 
   // Clear FFT average array
-  SDA_Clear(pRealAverage,     // Pointer to source array
+  SDA_Zeros(pRealAverage,     // Pointer to source array
             ResultLength);    // Array length
-  SDA_Clear(pImagAverage,     // Pointer to source array
+  SDA_Zeros(pImagAverage,     // Pointer to source array
             ResultLength);    // Array length
 }    // End of SIF_OrderAnalysis()
 
@@ -269,38 +269,38 @@ void SIGLIB_FUNC_DECL SIF_OrderAnalysis(SLData_t* SIGLIB_PTR_DECL pSincLUT, SLDa
  * Function: SDA_OrderAnalysis
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pLocalProcArray,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLData_t * SIGLIB_PTR_DECL pSincLUT,
- *   const SLData_t pLookUpTablePhaseGain,
- *   const SLData_t FirstOrderFrequency,
- *   const SLData_t Speed,
- *   const SLArrayIndex_t SincNumberOfAdjacentSamples,
- *   SLData_t * SIGLIB_PTR_DECL pWindowCoeffs,
- *   const SLData_t WindowInverseCoherentGain,
- *   SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
- *   SLArrayIndex_t * SIGLIB_PTR_DECL pBitRevAddrTable,
- *   SLData_t * SIGLIB_PTR_DECL pRealAverage,
- *   SLData_t * SIGLIB_PTR_DECL pImagAverage,
- *   const SLArrayIndex_t LogMagnitudeFlag,
- *   SLData_t * SIGLIB_PTR_DECL pOrderArray,
- *   const SLArrayIndex_t BaseOrder,
- *   const SLArrayIndex_t NumberOfOrders,
- *   const SLArrayIndex_t OrderNumberOfAdjacentSamples,
- *   const SLData_t SamplePeriod,
- *   const enum SLSignalCoherenceType_t SignalSourceType,
- *   const SLData_t dBScale,
- *   const SLArrayIndex_t NumberOfOrdersToSum,
- *   const SLArrayIndex_t SourceLength,
- *   const SLArrayIndex_t FFTLength,
- *   const SLArrayIndex_t Log2FFTLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pLocalProcArray,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLData_t * SIGLIB_PTR_DECL pSincLUT,
+ *  const SLData_t pLookUpTablePhaseGain,
+ *  const SLData_t FirstOrderFrequency,
+ *  const SLData_t Speed,
+ *  const SLArrayIndex_t SincNumberOfAdjacentSamples,
+ *  SLData_t * SIGLIB_PTR_DECL pWindowCoeffs,
+ *  const SLData_t WindowInverseCoherentGain,
+ *  SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL pBitRevAddrTable,
+ *  SLData_t * SIGLIB_PTR_DECL pRealAverage,
+ *  SLData_t * SIGLIB_PTR_DECL pImagAverage,
+ *  const SLArrayIndex_t LogMagnitudeFlag,
+ *  SLData_t * SIGLIB_PTR_DECL pOrderArray,
+ *  const SLArrayIndex_t BaseOrder,
+ *  const SLArrayIndex_t NumberOfOrders,
+ *  const SLArrayIndex_t OrderNumberOfAdjacentSamples,
+ *  const SLData_t SamplePeriod,
+ *  const enum SLSignalCoherenceType_t SignalSourceType,
+ *  const SLData_t dBScale,
+ *  const SLArrayIndex_t NumberOfOrdersToSum,
+ *  const SLArrayIndex_t SourceLength,
+ *  const SLArrayIndex_t FFTLength,
+ *  const SLArrayIndex_t Log2FFTLength)
  *
  * Return value:
- *   Sum of desired number of orders
+ *  Sum of desired number of orders
  *
  * Description:
- *   Initialize the order analysis function
+ *  Initialize the order analysis function
  *
  ********************************************************/
 

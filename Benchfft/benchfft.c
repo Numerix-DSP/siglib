@@ -374,28 +374,28 @@ int main(void)
  * Function: SDA_SignalGenerate
  *
  * Parameters:
- *   SLData_t *ptr,
- *   enum SLSignal_t signal_type,
- *   SLData_t peak,
- *   enum SLSignalFillMode_t buf_fill_mode,
- *   SLData_t freq
- *   SLData_t offset,
- *   SLData_t *phase_offset,
- *   SLFixData_t array_size
+ *  SLData_t *ptr,
+ *  enum SLSignal_t signal_type,
+ *  SLData_t peak,
+ *  enum SLSignalFillMode_t buf_fill_mode,
+ *  SLData_t freq
+ *  SLData_t offset,
+ *  SLData_t *phase_offset,
+ *  SLFixData_t array_size
  *
  * Return value:
- *   Int Error value
+ *  Int Error value
  *
  * Description:
- *   Fill a array with data according to the signal
- *   type parameter.
+ *  Fill a array with data according to the signal
+ *  type parameter.
  *
- *   THIS FUNCTION HAS REDUCED FUNCTIONALITY FOR SIMPLICITY
- *   THIS REDUCTION DOES NOT AFFECT THE BENCHMARK RESULTS
- *   THE FULL FUNCTIONALITY INCLUDES THE FOLLOWING SIGNALS:
- *   SINE_WAVE, COS_WAVE, WHITE_NOISE, GAUSSIAN_NOISE,
- *   CHIRP_LINEAR, CHIRP_NON_LINEAR, SQUARE_WAVE,
- *   TRIANGLE_WAVE, IMPULSE, IMPULSE_STREAM, STEP, PN_SEQUENCE.
+ *  THIS FUNCTION HAS REDUCED FUNCTIONALITY FOR SIMPLICITY
+ *  THIS REDUCTION DOES NOT AFFECT THE BENCHMARK RESULTS
+ *  THE FULL FUNCTIONALITY INCLUDES THE FOLLOWING SIGNALS:
+ *  SINE_WAVE, COS_WAVE, WHITE_NOISE, GAUSSIAN_NOISE,
+ *  CHIRP_LINEAR, CHIRP_NON_LINEAR, SQUARE_WAVE,
+ *  TRIANGLE_WAVE, IMPULSE, IMPULSE_STREAM, STEP, PN_SEQUENCE.
  *
  ********************************************************/
 
@@ -477,16 +477,16 @@ SLFixData_t SDA_SignalGenerate(SLData_t* ptr, enum SLSignal_t signal_type, SLDat
  * Function: SDA_Window
  *
  * Parameters:
- *   ip = pRealData,
- *   rp = result_array,
- *   wp = pWindowData,
- *   SLFixData_t window_length
+ *  ip = pRealData,
+ *  rp = result_array,
+ *  wp = pWindowData,
+ *  SLFixData_t window_length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Apply a window to the data.
+ *  Apply a window to the data.
  *
  ********************************************************/
 
@@ -504,21 +504,21 @@ void SDA_Window(SLData_t* ip, SLData_t* rp, SLData_t* wp, SLFixData_t window_len
  * Function: SIF_Window
  *
  * Parameters:
- *   wp = pWindowData,
- *   SLWindow_t = window type,
- *   SLFixData_t window_length
+ *  wp = pWindowData,
+ *  SLWindow_t = window type,
+ *  SLFixData_t window_length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the window data.
+ *  Initialise the window data.
  *
- *   THIS FUNCTION HAS REDUCED FUNCTIONALITY FOR SIMPLICITY
- *   THIS REDUCTION DOES NOT AFFECT THE BENCHMARK RESULTS
- *   THE FULL FUNCTIONALITY INCLUDES THE FOLLOWING WINDOWS:
- *   HANNING, HAMMING, BLACKMAN, BARTLETT/TRIANGLE, KAISER,
- *   BMAN_HARRIS, RECTANGLE.
+ *  THIS FUNCTION HAS REDUCED FUNCTIONALITY FOR SIMPLICITY
+ *  THIS REDUCTION DOES NOT AFFECT THE BENCHMARK RESULTS
+ *  THE FULL FUNCTIONALITY INCLUDES THE FOLLOWING WINDOWS:
+ *  HANNING, HAMMING, BLACKMAN, BARTLETT/TRIANGLE, KAISER,
+ *  BMAN_HARRIS, RECTANGLE.
  *
  ********************************************************/
 
@@ -546,15 +546,15 @@ SLFixData_t SIF_Window(SLData_t* wp, enum SLWindow_t window_type, SLFixData_t wi
  * Function: SIF_Fft
  *
  * Parameters:
- *   SLData_t *pFFTCoeffs,
- *   SLFixData_t *pBitReverseAddressTable,
- *   const SLFixData_t   FFTLength
+ *  SLData_t *pFFTCoeffs,
+ *  SLFixData_t *pBitReverseAddressTable,
+ *  const SLFixData_t   FFTLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the FFT sine and cosine tables.
+ *  Initialise the FFT sine and cosine tables.
  *
  ********************************************************/
 
@@ -573,21 +573,21 @@ void SIF_Fft(SLData_t* pFFTCoeffs, const SLFixData_t FFTLength)
  * Function: SDA_Rfft
  *
  * Parameters:
- *   SLData_t realData[],
- *   SLData_t imagData[],
- *   SLData_t *pFFTCoeffs,
- *   SLFixData_t *pBitReverseAddressTable,
- *   const SLFixData_t FFTLength,
- *   const SLFixData_t Log2Size  - Log base2 transform size
+ *  SLData_t realData[],
+ *  SLData_t imagData[],
+ *  SLData_t *pFFTCoeffs,
+ *  SLFixData_t *pBitReverseAddressTable,
+ *  const SLFixData_t FFTLength,
+ *  const SLFixData_t Log2Size  - Log base2 transform size
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a real input FFT on the supplied data.
- *   THIS FUNCTION HAS REDUCED FUNCTIONALITY FOR SIMPLICITY
- *   THE FULL FUNCTIONALITY INCLUDES A FAST BIT REVERSED
- *   ADDRESSING OPTION THAT USES A LOOK UP TABLE.
+ *  Perform a real input FFT on the supplied data.
+ *  THIS FUNCTION HAS REDUCED FUNCTIONALITY FOR SIMPLICITY
+ *  THE FULL FUNCTIONALITY INCLUDES A FAST BIT REVERSED
+ *  ADDRESSING OPTION THAT USES A LOOK UP TABLE.
  *
  ********************************************************/
 
@@ -684,15 +684,15 @@ void SDA_Rfft(SLData_t realData[], SLData_t imagData[], const SLData_t* pFFTCoef
  * Function: SDS_Round()
  *
  * Parameters:
- *   SLData_t    input - input sample
- *   enum SLRoundingMode_t RoundingMode - rounding mode
- *   SLFixData_t ArraySize
+ *  SLData_t    input - input sample
+ *  enum SLRoundingMode_t RoundingMode - rounding mode
+ *  SLFixData_t ArraySize
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Round the data sample, according to the
- *   rounding mode parameter.
+ *  rounding mode parameter.
  *
  ********************************************************/
 

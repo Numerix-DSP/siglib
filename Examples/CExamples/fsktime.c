@@ -111,9 +111,9 @@ int main(void)
                pRxLevelZeroBPFilter,                // Pointer to destination array
                DETECT_FILTER_LENGTH);               // Dataset length
 
-  SDA_Clear(pData,             // Pointer to destination array
+  SDA_Zeros(pData,             // Pointer to destination array
             SAMPLE_LENGTH);    // Dataset length
-  SDA_Clear(pDetection,        // Pointer to destination array
+  SDA_Zeros(pDetection,        // Pointer to destination array
             SAMPLE_LENGTH);    // Dataset length
 
   // Display the filter coefficients in the time domain

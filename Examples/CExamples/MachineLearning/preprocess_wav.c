@@ -290,8 +290,8 @@ int main(int argc, char* argv[])
              FFT_LENGTH);               // Window length
 
   if (windowZeroEdgeLength > 0) {
-    SDA_Clear(pWindowCoeffs, windowZeroEdgeLength);
-    SDA_Clear(pWindowCoeffs + FFT_LENGTH - windowZeroEdgeLength, windowZeroEdgeLength);
+    SDA_Zeros(pWindowCoeffs, windowZeroEdgeLength);
+    SDA_Zeros(pWindowCoeffs + FFT_LENGTH - windowZeroEdgeLength, windowZeroEdgeLength);
   }
 
   // Initialise FFT
@@ -300,7 +300,7 @@ int main(int argc, char* argv[])
                                       // reverse address table
           FFT_LENGTH);                // FFT length
 
-  SDA_Clear(pFFTOutputOnePoleState,     // Pointer to array
+  SDA_Zeros(pFFTOutputOnePoleState,     // Pointer to array
             networkInputLayerNodes);    // Array length
 
   if (dataAugmentationRandomGainEnable == 1) {    // Data augmentation by applying random gain to input data

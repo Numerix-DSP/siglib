@@ -44,29 +44,29 @@ Description: PRBS Scrambler / descrambler routines, for SigLib DSP library.
  * Function: SDS_Scrambler1417
  *
  * Parameters:
- *   const SLFixData_t   Data byte
- *   SLUInt32_t          *pShiftRegister
+ *  const SLFixData_t   Data byte
+ *  SLUInt32_t          *pShiftRegister
  *
  * Return value:
- *   Scrambled word
+ *  Scrambled word
  *
  * Description:
- *   This function executes a self synchronizing scrambler
- *   having the generating polynomial: 1 + x-14 + x-17.
+ *  This function executes a self synchronizing scrambler
+ *  having the generating polynomial: 1 + x-14 + x-17.
  *
- *   The input data is handled lsb first.
+ *  The input data is handled lsb first.
  *
- *   Ds = Di + Ds.x-14 + Ds.x-17
- *       Ds is the data sequence at the output of the scrambler
- *       Di is the data sequence applied to the scrambler
- *       + denotes modulo 2 addition
- *       . denotes binary multiplication.
+ *  Ds = Di + Ds.x-14 + Ds.x-17
+ *      Ds is the data sequence at the output of the scrambler
+ *      Di is the data sequence applied to the scrambler
+ *      + denotes modulo 2 addition
+ *      . denotes binary multiplication.
  *
- *   Ds <-------> z-1 -- . . . --> z-1 ----> z-1 ----> z-1 ----> z-1
- *             ^                         |                        |
- *             |                         | Ds.x-14                | Ds.x-17
- *             |                         |                        |
- *          Di |                         V                        |
+ *  Ds <-------> z-1 -- . . . --> z-1 ----> z-1 ----> z-1 ----> z-1
+ *            ^                         |                        |
+ *            |                         | Ds.x-14                | Ds.x-17
+ *            |                         |                        |
+ *         Di |                         V                        |
  *  ---------->+<------------------------+<------------------------
  *
  ********************************************************/
@@ -97,29 +97,29 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Scrambler1417(const SLFixData_t Source, SLUInt3
  * Function: SDS_Descrambler1417
  *
  * Parameters:
- *   const SLFixData_t   Data byte
- *   SLUInt32_t          *pShiftRegister
+ *  const SLFixData_t   Data byte
+ *  SLUInt32_t          *pShiftRegister
  *
  * Return value:
- *   Scrambled word
+ *  Scrambled word
  *
  * Description:
- *   This function executes a self synchronizing descrambler
- *   having the generating polynomial: 1 + x-14 + x-17.
+ *  This function executes a self synchronizing descrambler
+ *  having the generating polynomial: 1 + x-14 + x-17.
  *
- *   The input data is handled lsb first.
+ *  The input data is handled lsb first.
  *
- *   Do = Ds (1 + x-14 + x-17)
- *       Do is the data sequence at the output of the descrambler
- *       Ds is the data sequence applied to the descrambler
- *       + denotes modulo 2 addition
- *       . denotes binary multiplication.
+ *  Do = Ds (1 + x-14 + x-17)
+ *      Do is the data sequence at the output of the descrambler
+ *      Ds is the data sequence applied to the descrambler
+ *      + denotes modulo 2 addition
+ *      . denotes binary multiplication.
  *
- *   Ds --------> z-1 -- . . . --> z-1 ----> z-1 ----> z-1 ----> z-1
- *             |                         |                        |
- *             |                         | Ds.x-14                | Ds.x-17
- *             |                         |                        |
- *          Do V                         V                        |
+ *  Ds --------> z-1 -- . . . --> z-1 ----> z-1 ----> z-1 ----> z-1
+ *            |                         |                        |
+ *            |                         | Ds.x-14                | Ds.x-17
+ *            |                         |                        |
+ *         Do V                         V                        |
  *  <----------+<------------------------+<------------------------
  *
  ********************************************************/
@@ -149,37 +149,37 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Descrambler1417(const SLFixData_t Source, SLUIn
  * Function: SDS_Scrambler1417WithInversion
  *
  * Parameters:
- *   const SLFixData_t   Data byte
- *   SLUInt32_t          *pShiftRegister
- *   SLFixData_t         *pOnesBitCount,
- *   SLFixData_t         *pBitInversionFlag,
+ *  const SLFixData_t   Data byte
+ *  SLUInt32_t          *pShiftRegister
+ *  SLFixData_t         *pOnesBitCount,
+ *  SLFixData_t         *pBitInversionFlag,
  *
  * Return value:
- *   Scrambled word
+ *  Scrambled word
  *
  * Description:
- *   This function executes a self synchronizing scrambler
- *   having the generating polynomial: 1 + x-14 + x-17.
+ *  This function executes a self synchronizing scrambler
+ *  having the generating polynomial: 1 + x-14 + x-17.
  *
- *   The input data is handled lsb first.
+ *  The input data is handled lsb first.
  *
- *   Ds = Di + Ds.x-14 + Ds.x-17
- *       Ds is the data sequence at the output of the scrambler
- *       Di is the data sequence applied to the scrambler
- *       + denotes modulo 2 addition
- *       . denotes binary multiplication.
+ *  Ds = Di + Ds.x-14 + Ds.x-17
+ *      Ds is the data sequence at the output of the scrambler
+ *      Di is the data sequence applied to the scrambler
+ *      + denotes modulo 2 addition
+ *      . denotes binary multiplication.
  *
- *   This function detects a sequence of 64 consecutive
- *   ones at the output of the scrambler (Ds) and,
- *   if detected, inverts the next input to the
- *   scrambler (Di). The counter is reset to zero.
+ *  This function detects a sequence of 64 consecutive
+ *  ones at the output of the scrambler (Ds) and,
+ *  if detected, inverts the next input to the
+ *  scrambler (Di). The counter is reset to zero.
  *
- *   Ds <------------> z-1 -- . . . --> z-1 ----> z-1 ----> z-1 ----> z-1
- *         |        ^                         |                        |
- *         v        |                         | Ds.x-14                | Ds.x-17
- *      Detector    |                         |                        |
- *         |        |                         |                        |
- *         v     Di |                         V                        |
+ *  Ds <------------> z-1 -- . . . --> z-1 ----> z-1 ----> z-1 ----> z-1
+ *        |        ^                         |                        |
+ *        v        |                         | Ds.x-14                | Ds.x-17
+ *     Detector    |                         |                        |
+ *        |        |                         |                        |
+ *        v     Di |                         V                        |
  *  --> Inverter -->+<------------------------+<------------------------
  *
  ********************************************************/
@@ -229,37 +229,37 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Scrambler1417WithInversion(const SLFixData_t So
  * Function: SDS_Descrambler1417WithInversion
  *
  * Parameters:
- *   const SLFixData_t   Data byte
- *   SLUInt32_t          *pBitInversionFlag,
- *   SLFixData_t         *pShiftRegister
- *   SLFixData_t         *pOnesBitCount,
+ *  const SLFixData_t   Data byte
+ *  SLUInt32_t          *pBitInversionFlag,
+ *  SLFixData_t         *pShiftRegister
+ *  SLFixData_t         *pOnesBitCount,
  *
  * Return value:
- *   Scrambled word
+ *  Scrambled word
  *
  * Description:
- *   This function executes a self synchronizing descrambler
- *   having the generating polynomial: 1 + x-14 + x-17.
+ *  This function executes a self synchronizing descrambler
+ *  having the generating polynomial: 1 + x-14 + x-17.
  *
- *   The input data is handled lsb first.
+ *  The input data is handled lsb first.
  *
- *   Do = Ds (1 + x-14 + x-17)
- *       Do is the data sequence at the output of the descrambler
- *       Ds is the data sequence applied to the descrambler
- *       + denotes modulo 2 addition
- *       . denotes binary multiplication.
+ *  Do = Ds (1 + x-14 + x-17)
+ *      Do is the data sequence at the output of the descrambler
+ *      Ds is the data sequence applied to the descrambler
+ *      + denotes modulo 2 addition
+ *      . denotes binary multiplication.
  *
- *   This function detects a sequence of 64 consecutive
- *   ones at the input to the descrambler (Ds) and,
- *   if detected, inverts the next output from the
- *   descrambler (Do)
+ *  This function detects a sequence of 64 consecutive
+ *  ones at the input to the descrambler (Ds) and,
+ *  if detected, inverts the next output from the
+ *  descrambler (Do)
  *
- *   Ds -------------> z-1 -- . . . --> z-1 ----> z-1 ----> z-1 ----> z-1
- *         |        |                         |                        |
- *         v        |                         | Ds.x-14                | Ds.x-17
- *      Detector    |                         |                        |
- *         |        |                         |                        |
- *         v     Do V                         V                        |
+ *  Ds -------------> z-1 -- . . . --> z-1 ----> z-1 ----> z-1 ----> z-1
+ *        |        |                         |                        |
+ *        v        |                         | Ds.x-14                | Ds.x-17
+ *     Detector    |                         |                        |
+ *        |        |                         |                        |
+ *        v     Do V                         V                        |
  *  <-- Inverter <--+<------------------------+<------------------------
  *
  ********************************************************/
@@ -309,29 +309,29 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Descrambler1417WithInversion(const SLFixData_t 
  * Function: SDS_Scrambler1823
  *
  * Parameters:
- *   const SLFixData_t   Data byte
- *   SLUInt32_t          *pShiftRegister
+ *  const SLFixData_t   Data byte
+ *  SLUInt32_t          *pShiftRegister
  *
  * Return value:
- *   Scrambled word
+ *  Scrambled word
  *
  * Description:
- *   This function executes a self synchronizing scrambler
- *   having the generating polynomial: 1 + x-18 + x-23.
+ *  This function executes a self synchronizing scrambler
+ *  having the generating polynomial: 1 + x-18 + x-23.
  *
- *   The input data is handled lsb first.
+ *  The input data is handled lsb first.
  *
- *   Ds = Di + Ds.x-18 + Ds.x-23
- *       Ds is the data sequence at the output of the scrambler
- *       Di is the data sequence applied to the scrambler
- *       + denotes modulo 2 addition
- *       . denotes binary multiplication.
+ *  Ds = Di + Ds.x-18 + Ds.x-23
+ *      Ds is the data sequence at the output of the scrambler
+ *      Di is the data sequence applied to the scrambler
+ *      + denotes modulo 2 addition
+ *      . denotes binary multiplication.
  *
- *   Ds <-------> z-1 -- . . . --> z-1 ----> z-1 ----> z-1 ----> z-1
- *             ^                         |                        |
- *             |                         | Ds.x-18                | Ds.x-23
- *             |                         |                        |
- *          Di |                         V                        |
+ *  Ds <-------> z-1 -- . . . --> z-1 ----> z-1 ----> z-1 ----> z-1
+ *            ^                         |                        |
+ *            |                         | Ds.x-18                | Ds.x-23
+ *            |                         |                        |
+ *         Di |                         V                        |
  *  ---------->+<------------------------+<------------------------
  *
  ********************************************************/
@@ -363,29 +363,29 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Scrambler1823(const SLFixData_t Source, SLUInt3
  * Function: SDS_Descrambler1823
  *
  * Parameters:
- *   const SLFixData_t   Data byte
- *   SLUInt32_t          *pShiftRegister
+ *  const SLFixData_t   Data byte
+ *  SLUInt32_t          *pShiftRegister
  *
  * Return value:
- *   Scrambled word
+ *  Scrambled word
  *
  * Description:
- *   This function executes a self synchronizing descrambler
- *   having the generating polynomial: 1 + x-18 + x-23.
+ *  This function executes a self synchronizing descrambler
+ *  having the generating polynomial: 1 + x-18 + x-23.
  *
- *   The input data is handled lsb first.
+ *  The input data is handled lsb first.
  *
- *   Do = Ds (1 + x-18 + x-23)
- *       Do is the data sequence at the output of the descrambler
- *       Ds is the data sequence applied to the descrambler
- *       + denotes modulo 2 addition
- *       . denotes binary multiplication.
+ *  Do = Ds (1 + x-18 + x-23)
+ *      Do is the data sequence at the output of the descrambler
+ *      Ds is the data sequence applied to the descrambler
+ *      + denotes modulo 2 addition
+ *      . denotes binary multiplication.
  *
- *   Ds --------> z-1 -- . . . --> z-1 ----> z-1 ----> z-1 ----> z-1
- *             |                         |                        |
- *             |                         | Ds.x-18                | Ds.x-23
- *             |                         |                        |
- *          Do V                         V                        |
+ *  Ds --------> z-1 -- . . . --> z-1 ----> z-1 ----> z-1 ----> z-1
+ *            |                         |                        |
+ *            |                         | Ds.x-18                | Ds.x-23
+ *            |                         |                        |
+ *         Do V                         V                        |
  *  <----------+<------------------------+<------------------------
  *
  ********************************************************/
@@ -415,29 +415,29 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Descrambler1823(const SLFixData_t Source, SLUIn
  * Function: SDS_Scrambler523
  *
  * Parameters:
- *   const SLFixData_t   Data byte
- *   SLUInt32_t          *pShiftRegister
+ *  const SLFixData_t   Data byte
+ *  SLUInt32_t          *pShiftRegister
  *
  * Return value:
- *   Scrambled word
+ *  Scrambled word
  *
  * Description:
- *   This function executes a self synchronizing scrambler
- *   having the generating polynomial: 1 + x-5 + x-23.
+ *  This function executes a self synchronizing scrambler
+ *  having the generating polynomial: 1 + x-5 + x-23.
  *
- *   The input data is handled lsb first.
+ *  The input data is handled lsb first.
  *
- *   Ds = Di + Ds.x-5 + Ds.x-23
- *       Ds is the data sequence at the output of the scrambler
- *       Di is the data sequence applied to the scrambler
- *       + denotes modulo 2 addition
- *       . denotes binary multiplication.
+ *  Ds = Di + Ds.x-5 + Ds.x-23
+ *      Ds is the data sequence at the output of the scrambler
+ *      Di is the data sequence applied to the scrambler
+ *      + denotes modulo 2 addition
+ *      . denotes binary multiplication.
  *
- *   Ds <-------> z-1 -- . . . --> z-1 ----> z-1 ----> z-1 ----> z-1
- *             ^                         |                        |
- *             |                         | Ds.x-5                 | Ds.x-23
- *             |                         |                        |
- *          Di |                         V                        |
+ *  Ds <-------> z-1 -- . . . --> z-1 ----> z-1 ----> z-1 ----> z-1
+ *            ^                         |                        |
+ *            |                         | Ds.x-5                 | Ds.x-23
+ *            |                         |                        |
+ *         Di |                         V                        |
  *  ---------->+<------------------------+<------------------------
  *
  ********************************************************/
@@ -468,29 +468,29 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Scrambler523(const SLFixData_t Source, SLUInt32
  * Function: SDS_Descrambler523
  *
  * Parameters:
- *   const SLFixData_t   Data byte
- *   SLUInt32_t          *pShiftRegister
+ *  const SLFixData_t   Data byte
+ *  SLUInt32_t          *pShiftRegister
  *
  * Return value:
- *   Scrambled word
+ *  Scrambled word
  *
  * Description:
- *   This function executes a self synchronizing descrambler
- *   having the generating polynomial: 1 + x-5 + x-23.
+ *  This function executes a self synchronizing descrambler
+ *  having the generating polynomial: 1 + x-5 + x-23.
  *
- *   The input data is handled lsb first.
+ *  The input data is handled lsb first.
  *
- *   Do = Ds (1 + x-5 + x-23)
- *       Do is the data sequence at the output of the descrambler
- *       Ds is the data sequence applied to the descrambler
- *       + denotes modulo 2 addition
- *       . denotes binary multiplication.
+ *  Do = Ds (1 + x-5 + x-23)
+ *      Do is the data sequence at the output of the descrambler
+ *      Ds is the data sequence applied to the descrambler
+ *      + denotes modulo 2 addition
+ *      . denotes binary multiplication.
  *
- *   Ds --------> z-1 -- . . . --> z-1 ----> z-1 ----> z-1 ----> z-1
- *             |                         |                        |
- *             |                         | Ds.x-5                 | Ds.x-23
- *             |                         |                        |
- *          Do V                         V                        |
+ *  Ds --------> z-1 -- . . . --> z-1 ----> z-1 ----> z-1 ----> z-1
+ *            |                         |                        |
+ *            |                         | Ds.x-5                 | Ds.x-23
+ *            |                         |                        |
+ *         Do V                         V                        |
  *  <----------+<------------------------+<------------------------
  *
  ********************************************************/
@@ -520,29 +520,29 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_Descrambler523(const SLFixData_t Source, SLUInt
  * Function: SDS_ScramblerDescramblerPN9
  *
  * Parameters:
- *   const SLFixData_t   Data byte
- *   SLUInt32_t          *pShiftRegister
+ *  const SLFixData_t   Data byte
+ *  SLUInt32_t          *pShiftRegister
  *
  * Return value:
- *   Scrambled word
+ *  Scrambled word
  *
  * Description:
- *   This function executes a scrambler
- *   having the generating polynomial: x^9+x^4+1.
- *   The input data is handled lsb first.
+ *  This function executes a scrambler
+ *  having the generating polynomial: x^9+x^4+1.
+ *  The input data is handled lsb first.
  *
- *   Ds = Di(x^9+x^4+1)
- *       Ds is the data sequence at the output of the scrambler
- *       Di is the data sequence applied to the scrambler
- *       + denotes modulo 2 addition
- *       . denotes binary multiplication.
+ *  Ds = Di(x^9+x^4+1)
+ *      Ds is the data sequence at the output of the scrambler
+ *      Di is the data sequence applied to the scrambler
+ *      + denotes modulo 2 addition
+ *      . denotes binary multiplication.
  *
- *   -> z-1 -- . . . --> z-1 ----> z-1 ----> . . . --> z-1---->-+--->
- *   |                         |                            |   ^
- *   | Ds.x-9                  | Ds.x-4                     |   |
- *   |                         |                            |   Di
- *   |                         V                            |
- *   --------------------------+<----------------------------
+ *  -> z-1 -- . . . --> z-1 ----> z-1 ----> . . . --> z-1---->-+--->
+ *  |                         |                            |   ^
+ *  | Ds.x-9                  | Ds.x-4                     |   |
+ *  |                         |                            |   Di
+ *  |                         V                            |
+ *  --------------------------+<----------------------------
  *
  ********************************************************/
 
@@ -564,22 +564,22 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblerPN9(const SLFixData_t Sourc
  * Function: SDS_SequenceGeneratorPN9
  *
  * Parameters:
- *   SLUInt32_t          *pShiftRegister
+ *  SLUInt32_t          *pShiftRegister
  *
  * Return value:
- *   PN 9 sequence
+ *  PN 9 sequence
  *
  * Description:
- *   This function executes a PN9 sequence generator
- *   having the generating polynomial: x^9+x^4+1.
- *   The output data is handled lsb first.
+ *  This function executes a PN9 sequence generator
+ *  having the generating polynomial: x^9+x^4+1.
+ *  The output data is handled lsb first.
  *
- *   -> z-1 -- . . . --> z-1 ----> z-1 ----> . . . --> z-1---->
- *   |                         |                            |
- *   | Ds.x-9                  | Ds.x-4                     |
- *   |                         |                            |
- *   |                         V                            |
- *   --------------------------+<----------------------------
+ *  -> z-1 -- . . . --> z-1 ----> z-1 ----> . . . --> z-1---->
+ *  |                         |                            |
+ *  | Ds.x-9                  | Ds.x-4                     |
+ *  |                         |                            |
+ *  |                         V                            |
+ *  --------------------------+<----------------------------
  *
  ********************************************************/
 
@@ -601,29 +601,29 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorPN9(SLUInt32_t* SIGLIB_PTR_DEC
  * Function: SDS_ScramblerDescramblerPN15
  *
  * Parameters:
- *   const SLFixData_t   Data byte
- *   SLUInt32_t          *pShiftRegister
+ *  const SLFixData_t   Data byte
+ *  SLUInt32_t          *pShiftRegister
  *
  * Return value:
- *   Scrambled word
+ *  Scrambled word
  *
  * Description:
- *   This function executes a scrambler
- *   having the generating polynomial: x^15+x^14+1.
- *   The input data is handled lsb first.
+ *  This function executes a scrambler
+ *  having the generating polynomial: x^15+x^14+1.
+ *  The input data is handled lsb first.
  *
- *   Ds = Di(x^15+x^14+1)
- *       Ds is the data sequence at the output of the scrambler
- *       Di is the data sequence applied to the scrambler
- *       + denotes modulo 2 addition
- *       . denotes binary multiplication.
+ *  Ds = Di(x^15+x^14+1)
+ *      Ds is the data sequence at the output of the scrambler
+ *      Di is the data sequence applied to the scrambler
+ *      + denotes modulo 2 addition
+ *      . denotes binary multiplication.
  *
- *    -----> z-1 ----> z-1 - . . . ---> z-1---------> Ds
- *    |           |                          |   ^
- *    | Ds.x^15   | Ds.x^14                  |   |
- *    |           |                          |   Di
- *    |           V                          |
- *    ------------+<--------------------------
+ *   -----> z-1 ----> z-1 - . . . ---> z-1---------> Ds
+ *   |           |                          |   ^
+ *   | Ds.x^15   | Ds.x^14                  |   |
+ *   |           |                          |   Di
+ *   |           V                          |
+ *   ------------+<--------------------------
  *
  ********************************************************/
 
@@ -645,22 +645,22 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblerPN15(const SLFixData_t Sour
  * Function: SDS_SequenceGeneratorPN15
  *
  * Parameters:
- *   SLUInt32_t          *pShiftRegister
+ *  SLUInt32_t          *pShiftRegister
  *
  * Return value:
- *   PN 15 sequence
+ *  PN 15 sequence
  *
  * Description:
- *   This function executes a PN9 sequence generator
- *   having the generating polynomial: x^15+x^14+1.
- *   The output data is handled lsb first.
+ *  This function executes a PN9 sequence generator
+ *  having the generating polynomial: x^15+x^14+1.
+ *  The output data is handled lsb first.
  *
- *    -----> z-1 ----> z-1 - . . . ---> z-1------> Ds
- *    |           |                          |
- *    | Ds.x^15   | Ds.x^14                  |
- *    |           |                          |
- *    |           V                          |
- *    ------------+<--------------------------
+ *   -----> z-1 ----> z-1 - . . . ---> z-1------> Ds
+ *   |           |                          |
+ *   | Ds.x^15   | Ds.x^14                  |
+ *   |           |                          |
+ *   |           V                          |
+ *   ------------+<--------------------------
  *
  ********************************************************/
 
@@ -682,22 +682,22 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorPN15(SLUInt32_t* SIGLIB_PTR_DE
  * Function: SDS_ScramblerDescramblergCRC24
  *
  * Parameters:
- *   const SLFixData_t   Data byte
- *   SLUInt32_t          *pShiftRegister
+ *  const SLFixData_t   Data byte
+ *  SLUInt32_t          *pShiftRegister
  *
  * Return value:
- *   Scrambled word
+ *  Scrambled word
  *
  * Description:
- *   This function executes a scrambler
- *   having the generating polynomial: gCRC24(D) = D^24 + D^23 + D^6 + D^5 + D
+ *  This function executes a scrambler
+ *  having the generating polynomial: gCRC24(D) = D^24 + D^23 + D^6 + D^5 + D
  *+ 1. The input data is handled lsb first.
  *
- *   Ds = Di(D^24 + D^23 + D^6 + D^5 + D + 1)
- *       Ds is the data sequence at the output of the scrambler
- *       Di is the data sequence applied to the scrambler
- *       + denotes modulo 2 addition
- *       . denotes binary multiplication.
+ *  Ds = Di(D^24 + D^23 + D^6 + D^5 + D + 1)
+ *      Ds is the data sequence at the output of the scrambler
+ *      Di is the data sequence applied to the scrambler
+ *      + denotes modulo 2 addition
+ *      . denotes binary multiplication.
  *
  ********************************************************/
 
@@ -719,14 +719,14 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblergCRC24(const SLFixData_t So
  * Function: SDS_SequenceGeneratorgCRC24
  *
  * Parameters:
- *   SLUInt32_t          *pShiftRegister
+ *  SLUInt32_t          *pShiftRegister
  *
  * Return value:
- *   gCRC24 sequence
+ *  gCRC24 sequence
  *
  * Description:
- *   This function executes a gCRC24 sequence generator
- *   having the generating polynomial: gCRC24(D) = D^24 + D^23 + D^6 + D^5 + D
+ *  This function executes a gCRC24 sequence generator
+ *  having the generating polynomial: gCRC24(D) = D^24 + D^23 + D^6 + D^5 + D
  *+ 1. The output data is handled lsb first.
  *
  ********************************************************/
@@ -749,22 +749,22 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorgCRC24(SLUInt32_t* SIGLIB_PTR_
  * Function: SDS_ScramblerDescramblergCRC16
  *
  * Parameters:
- *   const SLFixData_t   Data byte
- *   SLUInt32_t          *pShiftRegister
+ *  const SLFixData_t   Data byte
+ *  SLUInt32_t          *pShiftRegister
  *
  * Return value:
- *   Scrambled word
+ *  Scrambled word
  *
  * Description:
- *   This function executes a scrambler
- *   having the generating polynomial: gCRC16(D) = D^16 + D^12 + D^5 + 1.
- *   The input data is handled lsb first.
+ *  This function executes a scrambler
+ *  having the generating polynomial: gCRC16(D) = D^16 + D^12 + D^5 + 1.
+ *  The input data is handled lsb first.
  *
- *   Ds = Di(D^16 + D^12 + D^5 + 1)
- *       Ds is the data sequence at the output of the scrambler
- *       Di is the data sequence applied to the scrambler
- *       + denotes modulo 2 addition
- *       . denotes binary multiplication.
+ *  Ds = Di(D^16 + D^12 + D^5 + 1)
+ *      Ds is the data sequence at the output of the scrambler
+ *      Di is the data sequence applied to the scrambler
+ *      + denotes modulo 2 addition
+ *      . denotes binary multiplication.
  *
  ********************************************************/
 
@@ -786,15 +786,15 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblergCRC16(const SLFixData_t So
  * Function: SDS_SequenceGeneratorgCRC16
  *
  * Parameters:
- *   SLUInt32_t          *pShiftRegister
+ *  SLUInt32_t          *pShiftRegister
  *
  * Return value:
- *   gCRC16 sequence
+ *  gCRC16 sequence
  *
  * Description:
- *   This function executes a gCRC16 sequence generator
- *   having the generating polynomial: gCRC16(D) = D^16 + D^12 + D^5 + 1.
- *   The output data is handled lsb first.
+ *  This function executes a gCRC16 sequence generator
+ *  having the generating polynomial: gCRC16(D) = D^16 + D^12 + D^5 + 1.
+ *  The output data is handled lsb first.
  *
  ********************************************************/
 
@@ -816,22 +816,22 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorgCRC16(SLUInt32_t* SIGLIB_PTR_
  * Function: SDS_ScramblerDescramblergCRC12
  *
  * Parameters:
- *   const SLFixData_t   Data byte
- *   SLUInt32_t          *pShiftRegister
+ *  const SLFixData_t   Data byte
+ *  SLUInt32_t          *pShiftRegister
  *
  * Return value:
- *   Scrambled word
+ *  Scrambled word
  *
  * Description:
- *   This function executes a scrambler
- *   having the generating polynomial: gCRC12(D) = D^12 + D^11 + D^3 + D^2 + D
+ *  This function executes a scrambler
+ *  having the generating polynomial: gCRC12(D) = D^12 + D^11 + D^3 + D^2 + D
  *+ 1. The input data is handled lsb first.
  *
- *   Ds = Di(D^12 + D^11 + D^3 + D^2 + D + 1)
- *       Ds is the data sequence at the output of the scrambler
- *       Di is the data sequence applied to the scrambler
- *       + denotes modulo 2 addition
- *       . denotes binary multiplication.
+ *  Ds = Di(D^12 + D^11 + D^3 + D^2 + D + 1)
+ *      Ds is the data sequence at the output of the scrambler
+ *      Di is the data sequence applied to the scrambler
+ *      + denotes modulo 2 addition
+ *      . denotes binary multiplication.
  *
  ********************************************************/
 
@@ -853,14 +853,14 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblergCRC12(const SLFixData_t So
  * Function: SDS_SequenceGeneratorgCRC12
  *
  * Parameters:
- *   SLUInt32_t          *pShiftRegister
+ *  SLUInt32_t          *pShiftRegister
  *
  * Return value:
- *   gCRC12 sequence
+ *  gCRC12 sequence
  *
  * Description:
- *   This function executes a gCRC12 sequence generator
- *   having the generating polynomial: CRC12(D) = D^12 + D^11 + D^3 + D^2 + D
+ *  This function executes a gCRC12 sequence generator
+ *  having the generating polynomial: CRC12(D) = D^12 + D^11 + D^3 + D^2 + D
  *+ 1. The output data is handled lsb first.
  *
  ********************************************************/
@@ -883,22 +883,22 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorgCRC12(SLUInt32_t* SIGLIB_PTR_
  * Function: SDS_ScramblerDescramblergCRC8
  *
  * Parameters:
- *   const SLFixData_t   Data byte
- *   SLUInt32_t          *pShiftRegister
+ *  const SLFixData_t   Data byte
+ *  SLUInt32_t          *pShiftRegister
  *
  * Return value:
- *   Scrambled word
+ *  Scrambled word
  *
  * Description:
- *   This function executes a scrambler
- *   having the generating polynomial: gCRC8(D) = D^8 + D^7 + D^4 + D^3 + D + 1.
- *   The input data is handled lsb first.
+ *  This function executes a scrambler
+ *  having the generating polynomial: gCRC8(D) = D^8 + D^7 + D^4 + D^3 + D + 1.
+ *  The input data is handled lsb first.
  *
- *   Ds = Di(D^8 + D^7 + D^4 + D^3 + D + 1)
- *       Ds is the data sequence at the output of the scrambler
- *       Di is the data sequence applied to the scrambler
- *       + denotes modulo 2 addition
- *       . denotes binary multiplication.
+ *  Ds = Di(D^8 + D^7 + D^4 + D^3 + D + 1)
+ *      Ds is the data sequence at the output of the scrambler
+ *      Di is the data sequence applied to the scrambler
+ *      + denotes modulo 2 addition
+ *      . denotes binary multiplication.
  *
  ********************************************************/
 
@@ -920,15 +920,15 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_ScramblerDescramblergCRC8(const SLFixData_t Sou
  * Function: SDS_SequenceGeneratorgCRC8
  *
  * Parameters:
- *   SLUInt32_t          *pShiftRegister
+ *  SLUInt32_t          *pShiftRegister
  *
  * Return value:
- *   gCRC8 sequence
+ *  gCRC8 sequence
  *
  * Description:
- *   This function executes a gCRC24 sequence generator
- *   having the generating polynomial: gCRC8(D) = D^8 + D^7 + D^4 + D^3 + D + 1.
- *   The output data is handled lsb first.
+ *  This function executes a gCRC24 sequence generator
+ *  having the generating polynomial: gCRC8(D) = D^8 + D^7 + D^4 + D^3 + D + 1.
+ *  The output data is handled lsb first.
  *
  ********************************************************/
 
@@ -950,23 +950,23 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_SequenceGeneratorgCRC8(SLUInt32_t* SIGLIB_PTR_D
  * Function: SDS_LongCodeGenerator3GPPDL
  *
  * Parameters:
- *   SLComplexRect_s *pDst,
- *   SLUInt32_t  *pXShiftRegister
- *   SLUInt32_t  *pYShiftRegister
- *   const SLArrayIndex_t NumberOfSamples
+ *  SLComplexRect_s *pDst,
+ *  SLUInt32_t  *pXShiftRegister
+ *  SLUInt32_t  *pYShiftRegister
+ *  const SLArrayIndex_t NumberOfSamples
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   This function generates a 3GPP downlink long code
- *   PN sequence using the generating polynomials:
- *       X sequence: X^18 +X^7+ 1
- *       Y sequence: X^18 + X^10 + X^7 + X^5 + 1
- *   The binary values are mapped to balanced output
- *   signals as follows:
- *       Binary value = 0 - Output = +1
- *       Binary value = 1 - Output = -1
+ *  This function generates a 3GPP downlink long code
+ *  PN sequence using the generating polynomials:
+ *      X sequence: X^18 +X^7+ 1
+ *      Y sequence: X^18 + X^10 + X^7 + X^5 + 1
+ *  The binary values are mapped to balanced output
+ *  signals as follows:
+ *      Binary value = 0 - Output = +1
+ *      Binary value = 1 - Output = -1
  *
  ********************************************************/
 
@@ -997,23 +997,23 @@ void SIGLIB_FUNC_DECL SDS_LongCodeGenerator3GPPDL(SLComplexRect_s* SIGLIB_PTR_DE
  * Function: SDS_LongCodeGenerator3GPPUL
  *
  * Parameters:
- *   SLComplexRect_s *pDst,
- *   SLUInt32_t  *pXShiftRegister
- *   SLUInt32_t  *pYShiftRegister
- *   const SLArrayIndex_t NumberOfSamples
+ *  SLComplexRect_s *pDst,
+ *  SLUInt32_t  *pXShiftRegister
+ *  SLUInt32_t  *pYShiftRegister
+ *  const SLArrayIndex_t NumberOfSamples
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   This function generates a 3GPP uplink long code
- *   PN sequence using the generating polynomials:
- *       X sequence: X^25 + X^3 + 1
- *       Y sequence: X^25 + X^3 + X^2 + X + 1
- *   The binary values are mapped to balanced output
- *   signals as follows:
- *       Binary value = 0 - Output = +1
- *       Binary value = 1 - Output = -1
+ *  This function generates a 3GPP uplink long code
+ *  PN sequence using the generating polynomials:
+ *      X sequence: X^25 + X^3 + 1
+ *      Y sequence: X^25 + X^3 + X^2 + X + 1
+ *  The binary values are mapped to balanced output
+ *  signals as follows:
+ *      Binary value = 0 - Output = +1
+ *      Binary value = 1 - Output = -1
  *
  ********************************************************/
 

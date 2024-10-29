@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
     printf("Vertex Magnitude: %lf\n", SDA_InterpolateThreePointQuadraticVertexMagnitude(samples));
     printf("Vertex Location:  %lf\n\n", SDA_InterpolateThreePointQuadraticVertexLocation(samples));
 
-    SDA_Clear(samples, ARRAY_LENGTH);
+    SDA_Zeros(samples, ARRAY_LENGTH);
     samples[4] = y0;
     samples[5] = y1;
     samples[6] = y2;
@@ -124,7 +124,7 @@ int main(int argc, char* argv[])
     printf("Vertex Magnitude: %lf\n", SDA_InterpolateThreePointQuadraticVertexMagnitude(samples));
     printf("Vertex Location:  %lf\n\n", SDA_InterpolateThreePointQuadraticVertexLocation(samples));
 
-    SDA_Clear(samples, ARRAY_LENGTH);
+    SDA_Zeros(samples, ARRAY_LENGTH);
     samples[4] = y0;
     samples[5] = y1;
     samples[6] = y2;

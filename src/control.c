@@ -44,13 +44,13 @@ Description: Control function file for SigLib DSP library
  * Function: SDS_Pid
  *
  * Parameters:
- *       const SLData_t Kp   - Proportional gain
- *       const SLData_t Ki   - Integral gain
- *       const SLData_t Kd   - Differential gain
- *       const SLData_t Error - Error
- *       SLData_t * SIGLIB_PTR_DECL Control,
- *       SLData_t * SIGLIB_PTR_DECL PrevError,
- *       SLData_t * SIGLIB_PTR_DECL PrevErrorDot)
+ *      const SLData_t Kp   - Proportional gain
+ *      const SLData_t Ki   - Integral gain
+ *      const SLData_t Kd   - Differential gain
+ *      const SLData_t Error - Error
+ *      SLData_t * SIGLIB_PTR_DECL Control,
+ *      SLData_t * SIGLIB_PTR_DECL PrevError,
+ *      SLData_t * SIGLIB_PTR_DECL PrevErrorDot)
  *
  * Return value: New control value
  *
@@ -76,15 +76,15 @@ void SIGLIB_FUNC_DECL SDS_Pid(const SLData_t Kp, const SLData_t Ki, const SLData
  * Function: SDA_Pwm
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Input data pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst,        - Output data pointer
- *   SLData_t * SIGLIB_PTR_DECL pRamp,       - Ramp pointer
- *   SLData_t * SIGLIB_PTR_DECL pRampPhase,  - Ramp phase pointer
- *   const SLData_t PRF,                     - Pulse repetition frequency
- *   const SLArrayIndex_t sampleLength       - Buffer length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  - Input data pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst,        - Output data pointer
+ *  SLData_t * SIGLIB_PTR_DECL pRamp,       - Ramp pointer
+ *  SLData_t * SIGLIB_PTR_DECL pRampPhase,  - Ramp phase pointer
+ *  const SLData_t PRF,                     - Pulse repetition frequency
+ *  const SLArrayIndex_t sampleLength       - Buffer length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Calculates the control signal
  *

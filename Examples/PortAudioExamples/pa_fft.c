@@ -151,7 +151,7 @@ int main(void)
                                       // reverse address table
           FFT_LENGTH);                // FFT length
 
-  SDA_Clear(pOnePoleState,       // Pointer to array
+  SDA_Zeros(pOnePoleState,       // Pointer to array
             HALF_FFT_LENGTH);    // Array length
 
   Error = analog_open(SAMPLE_RATE_HZ, analog_isr);    // Open the analog interface

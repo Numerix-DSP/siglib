@@ -117,7 +117,7 @@ int main(void)
     exit(-1);
   }
 
-  SDA_Clear(pConvergeArray,             // Pointer to destination array
+  SDA_Zeros(pConvergeArray,             // Pointer to destination array
             CONVERGENCE_ARRAY_SIZE);    // Dataset length
 
   time(&ltime);
@@ -316,7 +316,7 @@ void CompareAll(void)
 
     SLArrayIndex_t LMSUpdateIndex, LMSFilterIndex, EchoFilterIndex;
 
-    SDA_Clear(pConvergeArray,             // Pointer to destination array
+    SDA_Zeros(pConvergeArray,             // Pointer to destination array
               CONVERGENCE_ARRAY_SIZE);    // Dataset length
 
     time(&ltime);                  // Grab the time to randomize the seed but use the same

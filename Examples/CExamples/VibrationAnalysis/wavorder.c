@@ -73,7 +73,7 @@ int main(int argc, char* argv[])
     printf("Memory allocation error\n");
     exit(0);
   }
-  SDA_Clear(pAverageArray,     // Pointer to source array
+  SDA_Zeros(pAverageArray,     // Pointer to source array
             RESULT_LENGTH);    // Array length
 #endif
   // Reset the copy with overlap
@@ -246,7 +246,7 @@ int main(int argc, char* argv[])
 #endif
 
       if (ResampleResultLength < SAMPLE_LENGTH) {           // Zero pad resampled array
-        SDA_Clear(pFDPImagData + ResampleResultLength,      // Pointer to source array
+        SDA_Zeros(pFDPImagData + ResampleResultLength,      // Pointer to source array
                   SAMPLE_LENGTH - ResampleResultLength);    // Array length
       }
 
@@ -301,7 +301,7 @@ int main(int argc, char* argv[])
 #else
 
       // Zero out the D.C. component and nearby bins
-      SDA_Clear(pFDPResults,    // Source array address
+      SDA_Zeros(pFDPResults,    // Source array address
                 10);            // Array length
 
       // Store data to GNUPlot file - 3 columns are:

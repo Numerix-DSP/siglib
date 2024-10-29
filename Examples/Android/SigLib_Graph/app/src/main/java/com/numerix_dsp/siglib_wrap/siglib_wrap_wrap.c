@@ -213,7 +213,7 @@ if (!(expr)) {                                                           \
 
 static double* new_doubleArray(int nelements)
 {
-  return (double*)calloc(nelements, sizeof(double));
+  return (double*)malloc(nelements, sizeof(double));
 }
 
 static void delete_doubleArray(double* ary)
@@ -233,7 +233,7 @@ static void doubleArray_setitem(double* ary, int index, double value)
 
 static long* new_longArray(int nelements)
 {
-  return (long*)calloc(nelements, sizeof(long));
+  return (long*)malloc(nelements, sizeof(long));
 }
 
 static void delete_longArray(long* ary)
@@ -261,7 +261,7 @@ static void longArray_setitem(long* ary, int index, long value)
 
 static SLData_t* new_SLData_tArray(int nelements)
 {
-  return (SLData_t*)calloc(nelements, sizeof(SLData_t));
+  return (SLData_t*)malloc(nelements, sizeof(SLData_t));
 }
 
 static void delete_SLData_tArray(SLData_t* ary)
@@ -281,7 +281,7 @@ static void SLData_tArray_setitem(SLData_t* ary, int index, SLData_t value)
 
 static SLFixData_t* new_SLFixData_tArray(int nelements)
 {
-  return (SLFixData_t*)calloc(nelements, sizeof(SLFixData_t));
+  return (SLFixData_t*)malloc(nelements, sizeof(SLFixData_t));
 }
 
 static void delete_SLFixData_tArray(SLFixData_t* ary)
@@ -301,7 +301,7 @@ static void SLFixData_tArray_setitem(SLFixData_t* ary, int index, SLFixData_t va
 
 static SLArrayIndex_t* new_SLArrayIndex_tArray(int nelements)
 {
-  return (SLArrayIndex_t*)calloc(nelements, sizeof(SLArrayIndex_t));
+  return (SLArrayIndex_t*)malloc(nelements, sizeof(SLArrayIndex_t));
 }
 
 static void delete_SLArrayIndex_tArray(SLArrayIndex_t* ary)
@@ -1404,7 +1404,7 @@ SWIGEXPORT jlong JNICALL Java_siglib_1wrap_siglib_1wrapJNI_new_1SLComplexRect_1s
 
   (void)jenv;
   (void)jcls;
-  result = (SLComplexRect_s*)calloc(1, sizeof(SLComplexRect_s));
+  result = (SLComplexRect_s*)malloc(1, sizeof(SLComplexRect_s));
   *(SLComplexRect_s**)&jresult = result;
   return jresult;
 }
@@ -1486,7 +1486,7 @@ SWIGEXPORT jlong JNICALL Java_siglib_1wrap_siglib_1wrapJNI_new_1SLComplexPolar_1
 
   (void)jenv;
   (void)jcls;
-  result = (SLComplexPolar_s*)calloc(1, sizeof(SLComplexPolar_s));
+  result = (SLComplexPolar_s*)malloc(1, sizeof(SLComplexPolar_s));
   *(SLComplexPolar_s**)&jresult = result;
   return jresult;
 }
@@ -1568,7 +1568,7 @@ SWIGEXPORT jlong JNICALL Java_siglib_1wrap_siglib_1wrapJNI_new_1SLComplexRect16_
 
   (void)jenv;
   (void)jcls;
-  result = (SLComplexRect16_s*)calloc(1, sizeof(SLComplexRect16_s));
+  result = (SLComplexRect16_s*)malloc(1, sizeof(SLComplexRect16_s));
   *(SLComplexRect16_s**)&jresult = result;
   return jresult;
 }
@@ -1650,7 +1650,7 @@ SWIGEXPORT jlong JNICALL Java_siglib_1wrap_siglib_1wrapJNI_new_1SLComplexPolar16
 
   (void)jenv;
   (void)jcls;
-  result = (SLComplexPolar16_s*)calloc(1, sizeof(SLComplexPolar16_s));
+  result = (SLComplexPolar16_s*)malloc(1, sizeof(SLComplexPolar16_s));
   *(SLComplexPolar16_s**)&jresult = result;
   return jresult;
 }
@@ -1732,7 +1732,7 @@ SWIGEXPORT jlong JNICALL Java_siglib_1wrap_siglib_1wrapJNI_new_1SLComplexRect32_
 
   (void)jenv;
   (void)jcls;
-  result = (SLComplexRect32_s*)calloc(1, sizeof(SLComplexRect32_s));
+  result = (SLComplexRect32_s*)malloc(1, sizeof(SLComplexRect32_s));
   *(SLComplexRect32_s**)&jresult = result;
   return jresult;
 }
@@ -1814,7 +1814,7 @@ SWIGEXPORT jlong JNICALL Java_siglib_1wrap_siglib_1wrapJNI_new_1SLComplexPolar32
 
   (void)jenv;
   (void)jcls;
-  result = (SLComplexPolar32_s*)calloc(1, sizeof(SLComplexPolar32_s));
+  result = (SLComplexPolar32_s*)malloc(1, sizeof(SLComplexPolar32_s));
   *(SLComplexPolar32_s**)&jresult = result;
   return jresult;
 }
@@ -1956,7 +1956,7 @@ SWIGEXPORT jlong JNICALL Java_siglib_1wrap_siglib_1wrapJNI_new_1SLMicrophone_1s(
 
   (void)jenv;
   (void)jcls;
-  result = (SLMicrophone_s*)calloc(1, sizeof(SLMicrophone_s));
+  result = (SLMicrophone_s*)malloc(1, sizeof(SLMicrophone_s));
   *(SLMicrophone_s**)&jresult = result;
   return jresult;
 }
@@ -2098,7 +2098,7 @@ SWIGEXPORT jlong JNICALL Java_siglib_1wrap_siglib_1wrapJNI_new_1SLMicrophone16_1
 
   (void)jenv;
   (void)jcls;
-  result = (SLMicrophone16_s*)calloc(1, sizeof(SLMicrophone16_s));
+  result = (SLMicrophone16_s*)malloc(1, sizeof(SLMicrophone16_s));
   *(SLMicrophone16_s**)&jresult = result;
   return jresult;
 }
@@ -2240,7 +2240,7 @@ SWIGEXPORT jlong JNICALL Java_siglib_1wrap_siglib_1wrapJNI_new_1SLMicrophone32_1
 
   (void)jenv;
   (void)jcls;
-  result = (SLMicrophone32_s*)calloc(1, sizeof(SLMicrophone32_s));
+  result = (SLMicrophone32_s*)malloc(1, sizeof(SLMicrophone32_s));
   *(SLMicrophone32_s**)&jresult = result;
   return jresult;
 }
@@ -15895,7 +15895,7 @@ SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_SDA_1Clear(JNIEnv* jen
   (void)jcls;
   arg1 = *(SLData_t**)&jarg1;
   arg2 = (SLArrayIndex_t)jarg2;
-  SDA_Clear(arg1, arg2);
+  SDA_Zeros(arg1, arg2);
 }
 
 SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_SDA_1Histogram(JNIEnv* jenv, jclass jcls, jlong jarg1, jlong jarg2, jdouble jarg3,

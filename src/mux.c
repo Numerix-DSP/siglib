@@ -44,21 +44,21 @@ Description: Channel multiplexing routines, for SigLib DSP library.
  * Function: SDA_Multiplex
  *
  * Parameters:
- *   const SLData_t *        - Source multiplexed array pointer
- *   const SLArrayIndex_t *  - Input data for frame sample index
- *   SLData_t *              - Destination multiplexed array pointer
- *   const SLArrayIndex_t    - Frame sample index to insert data
- *   const SLArrayIndex_t    - Number of frames in array
- *   const SLArrayIndex_t    - Number of samples in frame
+ *  const SLData_t *       - Source multiplexed array pointer
+ *  const SLArrayIndex_t *  - Input data for frame sample index
+ *  SLData_t *             - Destination multiplexed array pointer
+ *  const SLArrayIndex_t    - Frame sample index to insert data
+ *  const SLArrayIndex_t    - Number of frames in array
+ *  const SLArrayIndex_t    - Number of samples in frame
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Insert the new data into the selected
- *   column.
+ *  column.
  *
  * Notes: This function overwrites the data in the
- *   selected frame sample index in the multiplexed array
+ *  selected frame sample index in the multiplexed array
  *
  ********************************************************/
 
@@ -91,14 +91,14 @@ void SIGLIB_FUNC_DECL SDA_Multiplex(const SLData_t* SIGLIB_PTR_DECL p_SrcMuxArra
  * Function: SDA_Demultiplex
  *
  * Parameters:
- *   const SLData_t *        - Multiplexed array pointer
- *   SLData_t *              - Pointer to destination array
- *   const SLArrayIndex_t    - Frame sample index to extract
- *   const SLArrayIndex_t    - Number of frames in array
- *   const SLArrayIndex_t    - Number of samples in frame
+ *  const SLData_t *       - Multiplexed array pointer
+ *  SLData_t *             - Pointer to destination array
+ *  const SLArrayIndex_t    - Frame sample index to extract
+ *  const SLArrayIndex_t    - Number of frames in array
+ *  const SLArrayIndex_t    - Number of samples in frame
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Extract the selected column from the
  * multiplexed array.
@@ -129,16 +129,16 @@ void SIGLIB_FUNC_DECL SDA_Demultiplex(const SLData_t* SIGLIB_PTR_DECL p_SrcMuxAr
  * Function: SDA_Mux2
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1, - Input channel 1 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2, - Input channel 2 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst,        - Output channel pointer
- *   const SLArrayIndex_t sampleLength       - Input array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1, - Input channel 1 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2, - Input channel 2 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst,        - Output channel pointer
+ *  const SLArrayIndex_t sampleLength       - Input array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Multiplex 2 channels on to a single channel.
+ *  Multiplex 2 channels on to a single channel.
  *
  ********************************************************/
 
@@ -169,16 +169,16 @@ void SIGLIB_FUNC_DECL SDA_Mux2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  * Function: SDA_Demux2
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Input channel pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst1,       - Output channel 1 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst2,       - Output channel 2 pointer
- *   const SLArrayIndex_t sampleLength       - Output array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  - Input channel pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst1,       - Output channel 1 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst2,       - Output channel 2 pointer
+ *  const SLArrayIndex_t sampleLength       - Output array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Demultiplex 2 channels from a single channel.
+ *  Demultiplex 2 channels from a single channel.
  *
  ********************************************************/
 
@@ -209,17 +209,17 @@ void SIGLIB_FUNC_DECL SDA_Demux2(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  * Function: SDA_Mux3
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1, - Input channel 1 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2, - Input channel 2 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc3, - Input channel 3 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst,        - Output channel pointer
- *   const SLArrayIndex_t sampleLength       - Input array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1, - Input channel 1 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2, - Input channel 2 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc3, - Input channel 3 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst,        - Output channel pointer
+ *  const SLArrayIndex_t sampleLength       - Input array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Multiplex 3 channels on to a single channel.
+ *  Multiplex 3 channels on to a single channel.
  *
  ********************************************************/
 
@@ -253,17 +253,17 @@ void SIGLIB_FUNC_DECL SDA_Mux3(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  * Function: SDA_Demux3
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Input channel pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst1,       - Output channel 1 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst2,       - Output channel 2 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst3,       - Output channel 3 pointer
- *   const SLArrayIndex_t sampleLength       - Output array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  - Input channel pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst1,       - Output channel 1 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst2,       - Output channel 2 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst3,       - Output channel 3 pointer
+ *  const SLArrayIndex_t sampleLength       - Output array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Demultiplex 3 channels from a single channel.
+ *  Demultiplex 3 channels from a single channel.
  *
  ********************************************************/
 
@@ -297,18 +297,18 @@ void SIGLIB_FUNC_DECL SDA_Demux3(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  * Function: SDA_Mux4
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1, - Input channel 1 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2, - Input channel 2 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc3, - Input channel 3 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc4, - Input channel 4 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst,        - Output channel pointer
- *   const SLArrayIndex_t sampleLength       - Input array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1, - Input channel 1 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2, - Input channel 2 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc3, - Input channel 3 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc4, - Input channel 4 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst,        - Output channel pointer
+ *  const SLArrayIndex_t sampleLength       - Input array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Multiplex 4 channels on to a single channel.
+ *  Multiplex 4 channels on to a single channel.
  *
  ********************************************************/
 
@@ -345,18 +345,18 @@ void SIGLIB_FUNC_DECL SDA_Mux4(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  * Function: SDA_Demux4
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Input channel pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst1,       - Output channel 1 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst2,       - Output channel 2 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst3,       - Output channel 3 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst4,       - Output channel 4 pointer
- *   const SLArrayIndex_t sampleLength       - Output array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  - Input channel pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst1,       - Output channel 1 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst2,       - Output channel 2 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst3,       - Output channel 3 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst4,       - Output channel 4 pointer
+ *  const SLArrayIndex_t sampleLength       - Output array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Demultiplex 4 channels from a single channel.
+ *  Demultiplex 4 channels from a single channel.
  *
  ********************************************************/
 
@@ -393,19 +393,19 @@ void SIGLIB_FUNC_DECL SDA_Demux4(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  * Function: SDA_Mux5
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1, - Input channel 1 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2, - Input channel 2 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc3, - Input channel 3 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc4, - Input channel 4 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc5, - Input channel 5 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst,        - Output channel pointer
- *   const SLArrayIndex_t sampleLength       - Input array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1, - Input channel 1 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2, - Input channel 2 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc3, - Input channel 3 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc4, - Input channel 4 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc5, - Input channel 5 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst,        - Output channel pointer
+ *  const SLArrayIndex_t sampleLength       - Input array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Multiplex 5 channels on to a single channel.
+ *  Multiplex 5 channels on to a single channel.
  *
  ********************************************************/
 
@@ -446,19 +446,19 @@ void SIGLIB_FUNC_DECL SDA_Mux5(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  * Function: SDA_Demux5
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Input channel pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst1,       - Output channel 1 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst2,       - Output channel 2 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst3,       - Output channel 3 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst4,       - Output channel 4 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst5,       - Output channel 5 pointer
- *   const SLArrayIndex_t sampleLength       - Output array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  - Input channel pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst1,       - Output channel 1 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst2,       - Output channel 2 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst3,       - Output channel 3 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst4,       - Output channel 4 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst5,       - Output channel 5 pointer
+ *  const SLArrayIndex_t sampleLength       - Output array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Demultiplex 5 channels from a single channel.
+ *  Demultiplex 5 channels from a single channel.
  *
  ********************************************************/
 
@@ -499,20 +499,20 @@ void SIGLIB_FUNC_DECL SDA_Demux5(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  * Function: SDA_Mux6
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1, - Input channel 1 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2, - Input channel 2 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc3, - Input channel 3 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc4, - Input channel 4 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc5, - Input channel 5 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc6, - Input channel 6 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst,        - Output channel pointer
- *   const SLArrayIndex_t sampleLength       - Input array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1, - Input channel 1 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2, - Input channel 2 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc3, - Input channel 3 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc4, - Input channel 4 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc5, - Input channel 5 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc6, - Input channel 6 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst,        - Output channel pointer
+ *  const SLArrayIndex_t sampleLength       - Input array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Multiplex 6 channels on to a single channel.
+ *  Multiplex 6 channels on to a single channel.
  *
  ********************************************************/
 
@@ -556,20 +556,20 @@ void SIGLIB_FUNC_DECL SDA_Mux6(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  * Function: SDA_Demux6
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Input channel pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst1,       - Output channel 1 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst2,       - Output channel 2 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst3,       - Output channel 3 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst4,       - Output channel 4 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst5,       - Output channel 5 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst6,       - Output channel 6 pointer
- *   const SLArrayIndex_t sampleLength       - Output array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  - Input channel pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst1,       - Output channel 1 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst2,       - Output channel 2 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst3,       - Output channel 3 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst4,       - Output channel 4 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst5,       - Output channel 5 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst6,       - Output channel 6 pointer
+ *  const SLArrayIndex_t sampleLength       - Output array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Demultiplex 6 channels from a single channel.
+ *  Demultiplex 6 channels from a single channel.
  *
  ********************************************************/
 
@@ -613,21 +613,21 @@ void SIGLIB_FUNC_DECL SDA_Demux6(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  * Function: SDA_Mux7
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1, - Input channel 1 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2, - Input channel 2 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc3, - Input channel 3 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc4, - Input channel 4 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc5, - Input channel 5 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc6, - Input channel 6 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc7, - Input channel 7 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst,        - Output channel pointer
- *   const SLArrayIndex_t sampleLength       - Input array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1, - Input channel 1 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2, - Input channel 2 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc3, - Input channel 3 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc4, - Input channel 4 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc5, - Input channel 5 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc6, - Input channel 6 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc7, - Input channel 7 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst,        - Output channel pointer
+ *  const SLArrayIndex_t sampleLength       - Input array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Multiplex 7 channels on to a single channel.
+ *  Multiplex 7 channels on to a single channel.
  *
  ********************************************************/
 
@@ -674,21 +674,21 @@ void SIGLIB_FUNC_DECL SDA_Mux7(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  * Function: SDA_Demux7
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Input channel pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst1,       - Output channel 1 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst2,       - Output channel 2 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst3,       - Output channel 3 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst4,       - Output channel 4 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst5,       - Output channel 5 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst6,       - Output channel 6 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst7,       - Output channel 7 pointer
- *   const SLArrayIndex_t sampleLength       - Output array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  - Input channel pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst1,       - Output channel 1 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst2,       - Output channel 2 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst3,       - Output channel 3 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst4,       - Output channel 4 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst5,       - Output channel 5 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst6,       - Output channel 6 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst7,       - Output channel 7 pointer
+ *  const SLArrayIndex_t sampleLength       - Output array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Demultiplex 7 channels from a single channel.
+ *  Demultiplex 7 channels from a single channel.
  *
  ********************************************************/
 
@@ -735,22 +735,22 @@ void SIGLIB_FUNC_DECL SDA_Demux7(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  * Function: SDA_Mux8
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1, - Input channel 1 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2, - Input channel 2 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc3, - Input channel 3 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc4, - Input channel 4 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc5, - Input channel 5 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc6, - Input channel 6 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc7, - Input channel 7 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc8, - Input channel 8 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst,        - Output channel pointer
- *   const SLArrayIndex_t sampleLength       - Input array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1, - Input channel 1 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2, - Input channel 2 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc3, - Input channel 3 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc4, - Input channel 4 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc5, - Input channel 5 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc6, - Input channel 6 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc7, - Input channel 7 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc8, - Input channel 8 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst,        - Output channel pointer
+ *  const SLArrayIndex_t sampleLength       - Input array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Multiplex 8 channels on to a single channel.
+ *  Multiplex 8 channels on to a single channel.
  *
  ********************************************************/
 
@@ -801,22 +801,22 @@ void SIGLIB_FUNC_DECL SDA_Mux8(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  * Function: SDA_Demux8
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Input channel pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst1,       - Output channel 1 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst2,       - Output channel 2 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst3,       - Output channel 3 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst4,       - Output channel 4 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst5,       - Output channel 5 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst6,       - Output channel 6 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst7,       - Output channel 7 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst8,       - Output channel 8 pointer
- *   const SLArrayIndex_t sampleLength       - Output array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  - Input channel pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst1,       - Output channel 1 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst2,       - Output channel 2 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst3,       - Output channel 3 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst4,       - Output channel 4 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst5,       - Output channel 5 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst6,       - Output channel 6 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst7,       - Output channel 7 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst8,       - Output channel 8 pointer
+ *  const SLArrayIndex_t sampleLength       - Output array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Demultiplex 8 channels from a single channel.
+ *  Demultiplex 8 channels from a single channel.
  *
  ********************************************************/
 

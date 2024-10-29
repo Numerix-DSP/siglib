@@ -14,7 +14,7 @@ SLData_t extracted[SOURCE2_ARRAY_LENGTH];
 
 int main(void)
 {
-  SDA_Clear(dst, SOURCE1_ARRAY_LENGTH);
+  SDA_Zeros(dst, SOURCE1_ARRAY_LENGTH);
 
   SDA_InsertSample(src1,                     // Pointer to source array
                    23.,                      // New sample
@@ -28,7 +28,7 @@ int main(void)
   printf("\nDestination Array:\n");
   SUF_PrintArray(dst, SOURCE1_ARRAY_LENGTH);
 
-  SDA_Clear(dst, SOURCE1_ARRAY_LENGTH);
+  SDA_Zeros(dst, SOURCE1_ARRAY_LENGTH);
 
   SDA_InsertArray(src1,                     // Pointer to source array
                   src2,                     // New sample array pointer
@@ -43,7 +43,7 @@ int main(void)
   printf("\nDestination Array:\n");
   SUF_PrintArray(dst, SOURCE1_ARRAY_LENGTH);
 
-  SDA_Clear(dst, SOURCE1_ARRAY_LENGTH);
+  SDA_Zeros(dst, SOURCE1_ARRAY_LENGTH);
 
   SLData_t extractedSample = SDA_ExtractSample(src1,                     // Pointer to source array
                                                dst,                      // Pointer to destination array
@@ -58,7 +58,7 @@ int main(void)
   printf("\nDestination Array:\n");
   SUF_PrintArray(dst, SOURCE1_ARRAY_LENGTH - 1);
 
-  SDA_Clear(dst, SOURCE1_ARRAY_LENGTH);
+  SDA_Zeros(dst, SOURCE1_ARRAY_LENGTH);
 
   SDA_ExtractArray(src1,                     // Pointer to source array
                    dst,                      // Pointer to destination array

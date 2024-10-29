@@ -71,7 +71,7 @@ SLError_t plot_frequency_domain(SLData_t* pSrc, const enum SLWindow_t WindowType
              DFTLength);       // Window length
 
   // Clear the FFT array to zero pad the data
-  SDA_Clear(pFDPSrcReal,    // Pointer to source array
+  SDA_Zeros(pFDPSrcReal,    // Pointer to source array
             DFTLength);     // Dataset length
 
   // Copy the input data to preserve it
@@ -210,9 +210,9 @@ SLError_t plot_complex_frequency_domain(SLData_t* pSrcReal, SLData_t* pSrcImag, 
              DFTLength);       // Window length
 
   // Clear the FFT arrays to zero pad the data
-  SDA_Clear(pFDPRealData,    // Pointer to source array
+  SDA_Zeros(pFDPRealData,    // Pointer to source array
             DFTLength);      // Dataset length
-  SDA_Clear(pFDPImagData,    // Pointer to source array
+  SDA_Zeros(pFDPImagData,    // Pointer to source array
             DFTLength);      // Dataset length
 
   // Copy the input data to preserve it

@@ -44,14 +44,14 @@ Description: DSP minimum, max, peak hold functions, for SigLib DSP library.
  * Function: SDA_Max
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   Maximum value in an array.
+ *  Maximum value in an array.
  *
  * Description:
- *   Return the maximum value in an array.
+ *  Return the maximum value in an array.
  *
  ********************************************************/
 
@@ -79,14 +79,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_Max(const SLData_t* SIGLIB_PTR_DECL pSrc, const SL
  * Function: SDA_AbsMax
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   Maximum absolute value in an array.
+ *  Maximum absolute value in an array.
  *
  * Description:
- *   Return the maximum absolute value in an array.
+ *  Return the maximum absolute value in an array.
  *
  ********************************************************/
 
@@ -123,14 +123,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_AbsMax(const SLData_t* SIGLIB_PTR_DECL pSrc, const
  * Function: SDA_Min
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   Minimum value in an array.
+ *  Minimum value in an array.
  *
  * Description:
- *   Return the minimum value in an array.
+ *  Return the minimum value in an array.
  *
  ********************************************************/
 
@@ -158,14 +158,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_Min(const SLData_t* SIGLIB_PTR_DECL pSrc, const SL
  * Function: SDA_AbsMin
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   Minimum absolute value in an array.
+ *  Minimum absolute value in an array.
  *
  * Description:
- *   Return the minimum absolute value in an array.
+ *  Return the minimum absolute value in an array.
  *
  ********************************************************/
 
@@ -206,14 +206,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_AbsMin(const SLData_t* SIGLIB_PTR_DECL pSrc, const
  * Function: SAI_Min
  *
  * Parameters:
- *   const SLArrayIndex_t * SIGLIB_PTR_DECL pSrc,
- *   const SLArrayIndex_t arrayLength
+ *  const SLArrayIndex_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   Minimum value in an array.
+ *  Minimum value in an array.
  *
  * Description:
- *   Return the minimum value in an array of SLArrayIndex_t.
+ *  Return the minimum value in an array of SLArrayIndex_t.
  *
  ********************************************************/
 
@@ -232,14 +232,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SAI_Min(const SLArrayIndex_t* SIGLIB_PTR_DECL pS
  * Function: SAI_Max
  *
  * Parameters:
- *   const SLArrayIndex_t * SIGLIB_PTR_DECL pSrc,
- *   const SLArrayIndex_t arrayLength
+ *  const SLArrayIndex_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   Maximum value in an array.
+ *  Maximum value in an array.
  *
  * Description:
- *   Return the maximum value in an array of SLArrayIndex_t.
+ *  Return the maximum value in an array of SLArrayIndex_t.
  *
  ********************************************************/
 
@@ -258,14 +258,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SAI_Max(const SLArrayIndex_t* SIGLIB_PTR_DECL pS
  * Function: SDA_Middle
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   Middle value in an array.
+ *  Middle value in an array.
  *
  * Description:
- *   Return the middle value in an array.
+ *  Return the middle value in an array.
  *
  ********************************************************/
 
@@ -278,15 +278,15 @@ SLData_t SIGLIB_FUNC_DECL SDA_Middle(const SLData_t* SIGLIB_PTR_DECL pSrc, const
  * Function: SDA_Range
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   Minimum value in an array.
+ *  Minimum value in an array.
  *
  * Description:
- *   Return the range of the values in the array. I.E. the
- *   difference between the maximum and the minimum values.
+ *  Return the range of the values in the array. I.E. the
+ *  difference between the maximum and the minimum values.
  *
  ********************************************************/
 
@@ -317,14 +317,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_Range(const SLData_t* SIGLIB_PTR_DECL pSrc, const 
  * Function: SDA_MaxIndex
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   position of the maximum value in an array.
+ *  position of the maximum value in an array.
  *
  * Description:
- *   Return the maximum value in an array.
+ *  Return the maximum value in an array.
  *
  ********************************************************/
 
@@ -354,14 +354,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_MaxIndex(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SDA_AbsMaxIndex
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   position of the maximum absolute value in an array.
+ *  position of the maximum absolute value in an array.
  *
  * Description:
- *   Return the maximum absolute value in an array.
+ *  Return the maximum absolute value in an array.
  *
  ********************************************************/
 
@@ -408,14 +408,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AbsMaxIndex(const SLData_t* SIGLIB_PTR_DECL 
  * Function: SDA_MinIndex
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   position of the minimum value in an array.
+ *  position of the minimum value in an array.
  *
  * Description:
- *   Return the minimum value in an array.
+ *  Return the minimum value in an array.
  *
  ********************************************************/
 
@@ -445,14 +445,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_MinIndex(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SDA_AbsMinIndex
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   position of the minimum absolute value in an array.
+ *  position of the minimum absolute value in an array.
  *
  * Description:
- *   Return the minimum absolute value in an array.
+ *  Return the minimum absolute value in an array.
  *
  ********************************************************/
 
@@ -498,14 +498,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_AbsMinIndex(const SLData_t* SIGLIB_PTR_DECL 
  * Function: SDS_Max
  *
  * Parameters:
- *   const SLData_t Src1,
- *   const SLData_t Src2
+ *  const SLData_t Src1,
+ *  const SLData_t Src2
  *
  * Return value:
- *   The maximum value of the two inputs.
+ *  The maximum value of the two inputs.
  *
  * Description:
- *   Return the maximum of two input values.
+ *  Return the maximum of two input values.
  *
  ********************************************************/
 
@@ -522,15 +522,15 @@ SLData_t SIGLIB_FUNC_DECL SDS_Max(const SLData_t Src1, const SLData_t Src2)
  * Function: SDS_AbsMax
  *
  * Parameters:
- *   const SLData_t Src1,
- *   const SLData_t Src2
+ *  const SLData_t Src1,
+ *  const SLData_t Src2
  *
  * Return value:
- *   The maximum value of the absolutes of the two inputs.
+ *  The maximum value of the absolutes of the two inputs.
  *
  * Description:
- *   Return the maximum of the absolutes of the two
- *   input values.
+ *  Return the maximum of the absolutes of the two
+ *  input values.
  *
  ********************************************************/
 
@@ -561,14 +561,14 @@ SLData_t SIGLIB_FUNC_DECL SDS_AbsMax(const SLData_t Src1, const SLData_t Src2)
  * Function: SDS_Min
  *
  * Parameters:
- *   const SLData_t Src1,
- *   const SLData_t Src2
+ *  const SLData_t Src1,
+ *  const SLData_t Src2
  *
  * Return value:
- *   The minimum value of the two inputs.
+ *  The minimum value of the two inputs.
  *
  * Description:
- *   Return the minimum of the two input values.
+ *  Return the minimum of the two input values.
  *
  ********************************************************/
 
@@ -585,15 +585,15 @@ SLData_t SIGLIB_FUNC_DECL SDS_Min(const SLData_t Src1, const SLData_t Src2)
  * Function: SDS_AbsMin
  *
  * Parameters:
- *   const SLData_t Src1,
- *   const SLData_t Src2
+ *  const SLData_t Src1,
+ *  const SLData_t Src2
  *
  * Return value:
- *   The minimum value of the absolutes of the two inputs.
+ *  The minimum value of the absolutes of the two inputs.
  *
  * Description:
- *   Return the minimum of the absolutes of the two
- *   input values.
+ *  Return the minimum of the absolutes of the two
+ *  input values.
  *
  ********************************************************/
 
@@ -610,16 +610,16 @@ SLData_t SIGLIB_FUNC_DECL SDS_AbsMin(const SLData_t Src1, const SLData_t Src2)
  * Function: SDA_LocalMax
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLArrayIndex_t Location
- *   const SLArrayIndex_t NEitherSide
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLArrayIndex_t Location
+ *  const SLArrayIndex_t NEitherSide
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   Maximum value within the region of interest
+ *  Maximum value within the region of interest
  *
  * Description:
- *   Return the maximum value within the region of interest.
+ *  Return the maximum value within the region of interest.
  *
  ********************************************************/
 
@@ -652,17 +652,17 @@ SLData_t SIGLIB_FUNC_DECL SDA_LocalMax(const SLData_t* SIGLIB_PTR_DECL pSrc, con
  * Function: SDA_LocalAbsMax
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLArrayIndex_t Location
- *   const SLArrayIndex_t NEitherSide
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLArrayIndex_t Location
+ *  const SLArrayIndex_t NEitherSide
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   Absolute maximum value within the region of interest
+ *  Absolute maximum value within the region of interest
  *
  * Description:
- *   Return the absolute maximum value within the region
- *   of interest.
+ *  Return the absolute maximum value within the region
+ *  of interest.
  *
  ********************************************************/
 
@@ -702,16 +702,16 @@ SLData_t SIGLIB_FUNC_DECL SDA_LocalAbsMax(const SLData_t* SIGLIB_PTR_DECL pSrc, 
  * Function: SDA_LocalMin
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLArrayIndex_t Location
- *   const SLArrayIndex_t NEitherSide
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLArrayIndex_t Location
+ *  const SLArrayIndex_t NEitherSide
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   Minimum value within the region of interest
+ *  Minimum value within the region of interest
  *
  * Description:
- *   Return the minimum value within the region of interest.
+ *  Return the minimum value within the region of interest.
  *
  ********************************************************/
 
@@ -744,17 +744,17 @@ SLData_t SIGLIB_FUNC_DECL SDA_LocalMin(const SLData_t* SIGLIB_PTR_DECL pSrc, con
  * Function: SDA_LocalAbsMin
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLArrayIndex_t Location
- *   const SLArrayIndex_t NEitherSide
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLArrayIndex_t Location
+ *  const SLArrayIndex_t NEitherSide
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   Absolute maximum value within the region of interest
+ *  Absolute maximum value within the region of interest
  *
  * Description:
- *   Return the absolute minimum value within the region
- *   of interest.
+ *  Return the absolute minimum value within the region
+ *  of interest.
  *
  ********************************************************/
 
@@ -794,17 +794,17 @@ SLData_t SIGLIB_FUNC_DECL SDA_LocalAbsMin(const SLData_t* SIGLIB_PTR_DECL pSrc, 
  * Function: SDA_Max2
  *
  * Parameters:
- *   const SLData_t  *pSrc1
- *   const SLData_t  *pSrc2
- *   SLData_t *pDst
- *   const SLArrayIndex_t    arrayLength
+ *  const SLData_t  *pSrc1
+ *  const SLData_t  *pSrc2
+ *  SLData_t *pDst
+ *  const SLArrayIndex_t    arrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   For each sample in pSrc1 and pSrc2, select the maximum
- *   value and store in pDst.
+ *  For each sample in pSrc1 and pSrc2, select the maximum
+ *  value and store in pDst.
  *
  ********************************************************/
 
@@ -845,17 +845,17 @@ void SIGLIB_FUNC_DECL SDA_Max2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  * Function: SDA_AbsMax2
  *
  * Parameters:
- *   const SLData_t  *pSrc1
- *   const SLData_t  *pSrc2
- *   SLData_t *pDst
- *   const SLArrayIndex_t    arrayLength
+ *  const SLData_t  *pSrc1
+ *  const SLData_t  *pSrc2
+ *  SLData_t *pDst
+ *  const SLArrayIndex_t    arrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   For each sample in pSrc1 and pSrc2, select the maximum
- *   of the absolute value and store in pDst.
+ *  For each sample in pSrc1 and pSrc2, select the maximum
+ *  of the absolute value and store in pDst.
  *
  ********************************************************/
 
@@ -908,18 +908,18 @@ void SIGLIB_FUNC_DECL SDA_AbsMax2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const S
  * Function: SDA_SignedAbsMax2
  *
  * Parameters:
- *   const SLData_t  *pSrc1
- *   const SLData_t  *pSrc2
- *   SLData_t *pDst
- *   const SLArrayIndex_t    arrayLength
+ *  const SLData_t  *pSrc1
+ *  const SLData_t  *pSrc2
+ *  SLData_t *pDst
+ *  const SLArrayIndex_t    arrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   For each sample in pSrc1 and pSrc2, select the maximum
- *   of the absolute value and store the corresponding original
- *   value (including sign) in pDst.
+ *  For each sample in pSrc1 and pSrc2, select the maximum
+ *  of the absolute value and store the corresponding original
+ *  value (including sign) in pDst.
  *
  ********************************************************/
 
@@ -972,17 +972,17 @@ void SIGLIB_FUNC_DECL SDA_SignedAbsMax2(const SLData_t* SIGLIB_PTR_DECL pSrc1, c
  * Function: SDA_Min2
  *
  * Parameters:
- *   const SLData_t  *pSrc1
- *   const SLData_t  *pSrc2
- *   SLData_t *pDst
- *   const SLArrayIndex_t    arrayLength
+ *  const SLData_t  *pSrc1
+ *  const SLData_t  *pSrc2
+ *  SLData_t *pDst
+ *  const SLArrayIndex_t    arrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   For each sample in pSrc1 and pSrc2, select the minimum
- *   value and store in pDst.
+ *  For each sample in pSrc1 and pSrc2, select the minimum
+ *  value and store in pDst.
  *
  ********************************************************/
 
@@ -1023,17 +1023,17 @@ void SIGLIB_FUNC_DECL SDA_Min2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const SLDa
  * Function: SDA_AbsMin2
  *
  * Parameters:
- *   const SLData_t  *pSrc1
- *   const SLData_t  *pSrc2
- *   SLData_t *pDst
- *   const SLArrayIndex_t    arrayLength
+ *  const SLData_t  *pSrc1
+ *  const SLData_t  *pSrc2
+ *  SLData_t *pDst
+ *  const SLArrayIndex_t    arrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   For each sample in pSrc1 and pSrc2, select the minimum
- *   of the absolute value and store in pDst.
+ *  For each sample in pSrc1 and pSrc2, select the minimum
+ *  of the absolute value and store in pDst.
  *
  ********************************************************/
 
@@ -1086,18 +1086,18 @@ void SIGLIB_FUNC_DECL SDA_AbsMin2(const SLData_t* SIGLIB_PTR_DECL pSrc1, const S
  * Function: SDA_SignedAbsMin2
  *
  * Parameters:
- *   const SLData_t  *pSrc1
- *   const SLData_t  *pSrc2
- *   SLData_t *pDst
- *   const SLArrayIndex_t    arrayLength
+ *  const SLData_t  *pSrc1
+ *  const SLData_t  *pSrc2
+ *  SLData_t *pDst
+ *  const SLArrayIndex_t    arrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   For each sample in pSrc1 and pSrc2, select the maximum
- *   of the absolute value and store the corresponding original
- *   value (including sign) in pDst.
+ *  For each sample in pSrc1 and pSrc2, select the maximum
+ *  of the absolute value and store the corresponding original
+ *  value (including sign) in pDst.
  *
  ********************************************************/
 
@@ -1150,13 +1150,13 @@ void SIGLIB_FUNC_DECL SDA_SignedAbsMin2(const SLData_t* SIGLIB_PTR_DECL pSrc1, c
  * Function: SDA_PeakHold
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc   - Input Data array pointer
- *   SLData_t * SIGLIB_PTR_DECL pPeak        - Peak hold output Data array
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc   - Input Data array pointer
+ *  SLData_t * SIGLIB_PTR_DECL pPeak        - Peak hold output Data array
  *pointer const SLData_t Decay                    - Decay rate SLData_t *
  *SIGLIB_PTR_DECL pPrevious,   - Previous peak const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Peak hold, with decay.
  *
@@ -1190,13 +1190,13 @@ void SIGLIB_FUNC_DECL SDA_PeakHold(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_
  * Function: SDA_PeakHoldPerSample
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc   - input Data array pointer
- *   SLData_t * SIGLIB_PTR_DECL pPeak        - peak hold Data array pointer
- *   const SLData_t Decay                    - decay rate
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc   - input Data array pointer
+ *  SLData_t * SIGLIB_PTR_DECL pPeak        - peak hold Data array pointer
+ *  const SLData_t Decay                    - decay rate
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Peak hold, with decay between arrays.
  *
@@ -1270,14 +1270,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_DetectFirstPeakOverThreshold(const SLData_t*
  * Function: SDS_Round()
  *
  * Parameters:
- *   const SLData_t input        - input sample
- *   const enum SLRoundingMode_t RoundingMode - rounding mode
+ *  const SLData_t input        - input sample
+ *  const enum SLRoundingMode_t RoundingMode - rounding mode
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Round the data sample, according to the
- *   rounding mode parameter.
+ *  rounding mode parameter.
  *
  ********************************************************/
 
@@ -1331,16 +1331,16 @@ SLData_t SIGLIB_FUNC_DECL SDS_Round(const SLData_t input, const enum SLRoundingM
  * Function: SDA_Round
  *
  * Parameters:
- *   const SLData_t  *pSrc - input Data array pointer
- *   SLData_t        *pDst - output Data array pointer
- *   const enum SLRoundingMode_t RoundingMode - rounding mode
- *   const SLArrayIndex_t arrayLength - array length
+ *  const SLData_t  *pSrc - input Data array pointer
+ *  SLData_t        *pDst - output Data array pointer
+ *  const enum SLRoundingMode_t RoundingMode - rounding mode
+ *  const SLArrayIndex_t arrayLength - array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Round all the data in a array, according
- *   to the rounding mode parameter.
+ *  to the rounding mode parameter.
  *
  ********************************************************/
 
@@ -1364,20 +1364,20 @@ void SIGLIB_FUNC_DECL SDA_Round(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* 
  * Function: SDS_Clip
  *
  * Parameters:
- *   const SLData_t src,
- *   const SLData_t clip_level,
- *   const enum SLClipMode_t ClipMode,
+ *  const SLData_t src,
+ *  const SLData_t clip_level,
+ *  const enum SLClipMode_t ClipMode,
  *
  * Return value:
- *   Clipped value
+ *  Clipped value
  *
  * Description:
- *   Clip (I.E. clamp) the data sample to a given level,
- *   depending on the clip mode :
- *     SIGLIB_CLIP_ABOVE - Clip any values above the clip level,
- *     SIGLIB_CLIP_BELOW - Clip any values below the clip level,
- *     SIGLIB_CLIP_BOTH - Clip any values above the level and any below the
- *     negative of the given level.
+ *  Clip (I.E. clamp) the data sample to a given level,
+ *  depending on the clip mode :
+ *    SIGLIB_CLIP_ABOVE - Clip any values above the clip level,
+ *    SIGLIB_CLIP_BELOW - Clip any values below the clip level,
+ *    SIGLIB_CLIP_BOTH - Clip any values above the level and any below the
+ *    negative of the given level.
  *
  ********************************************************/
 
@@ -1434,25 +1434,25 @@ SLData_t SIGLIB_FUNC_DECL SDS_Clip(const SLData_t src, const SLData_t clip_level
  * Function: SDA_Clip
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLData_t clip_level,
- *   const enum SLClipMode_t ClipMode,
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLData_t clip_level,
+ *  const enum SLClipMode_t ClipMode,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Clip (I.E. clamp) the data in a array to a given level,
- *   depending on the clip mode :
- *     SIGLIB_CLIP_ABOVE - Clip any values above the clip level,
- *     SIGLIB_CLIP_BELOW - Clip any values below the clip level,
- *     SIGLIB_CLIP_BOTH - Clip any values above the clip level
- *     and any below the negative of the clip level.
- *     SIGLIB_CLIP_BOTH_BELOW - Clip any positive values below the
- *     clip level and any negative values above the negative of
- *     the given clip level.
+ *  Clip (I.E. clamp) the data in a array to a given level,
+ *  depending on the clip mode :
+ *    SIGLIB_CLIP_ABOVE - Clip any values above the clip level,
+ *    SIGLIB_CLIP_BELOW - Clip any values below the clip level,
+ *    SIGLIB_CLIP_BOTH - Clip any values above the clip level
+ *    and any below the negative of the clip level.
+ *    SIGLIB_CLIP_BOTH_BELOW - Clip any positive values below the
+ *    clip level and any negative values above the negative of
+ *    the given clip level.
  *
  ********************************************************/
 
@@ -1529,18 +1529,18 @@ void SIGLIB_FUNC_DECL SDA_Clip(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* S
  * Function: SDS_Threshold
  *
  * Parameters:
- *   const SLData_t src                      - Input sample
- *   const SLData_t Threshold                - Threshold
- *   const enum SLThresholdMode_t TType      - double sided or single sided
+ *  const SLData_t src                      - Input sample
+ *  const SLData_t Threshold                - Threshold
+ *  const enum SLThresholdMode_t TType      - double sided or single sided
  *threshold
  *
  * Return value:
- *   Thresholded value
+ *  Thresholded value
  *
  * Description:
- *   If the input is > than the threshold then it is
- *   passed to the output array, otherwise the output is
- *   set to zero.
+ *  If the input is > than the threshold then it is
+ *  passed to the output array, otherwise the output is
+ *  set to zero.
  *
  ********************************************************/
 
@@ -1571,19 +1571,19 @@ SLData_t SIGLIB_FUNC_DECL SDS_Threshold(const SLData_t src, const SLData_t Thres
  * Function: SDA_Threshold
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc   - Input Data array pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst         - Output Data array pointer
- *   const SLData_t Threshold                - Threshold
- *   const enum SLThresholdMode_t TType      - double sided or single sided
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc   - Input Data array pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst         - Output Data array pointer
+ *  const SLData_t Threshold                - Threshold
+ *  const enum SLThresholdMode_t TType      - double sided or single sided
  *threshold const SLArrayIndex_t arrayLength        - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   If the input is >= the threshold then it is
- *   passed to the output array, otherwise the output is
- *   set to zero.
+ *  If the input is >= the threshold then it is
+ *  passed to the output array, otherwise the output is
+ *  set to zero.
  *
  ********************************************************/
 
@@ -1628,16 +1628,16 @@ void SIGLIB_FUNC_DECL SDA_Threshold(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData
  * Function: SDS_SoftThreshold
  *
  * Parameters:
- *   const SLData_t src                      - Input sample
- *   const SLData_t Threshold                - Threshold
+ *  const SLData_t src                      - Input sample
+ *  const SLData_t Threshold                - Threshold
  *
  * Return value:
- *   Thresholded value
+ *  Thresholded value
  *
  * Description:
- *   If the input is >= the threshold then it is
- *   passed to the output array minus the threshold value,
- *   otherwise the output is set to zero.
+ *  If the input is >= the threshold then it is
+ *  passed to the output array minus the threshold value,
+ *  otherwise the output is set to zero.
  *
  ********************************************************/
 
@@ -1660,18 +1660,18 @@ SLData_t SIGLIB_FUNC_DECL SDS_SoftThreshold(const SLData_t src, const SLData_t T
  * Function: SDA_SoftThreshold
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc   - Input Data array pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst         - Output Data array pointer
- *   const SLData_t Threshold                - Threshold
- *   const SLArrayIndex_t arrayLength        - Array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc   - Input Data array pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst         - Output Data array pointer
+ *  const SLData_t Threshold                - Threshold
+ *  const SLArrayIndex_t arrayLength        - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   If the input is >= the threshold then it is
- *   passed to the output array minus the threshold value,
- *   otherwise the output is set to zero.
+ *  If the input is >= the threshold then it is
+ *  passed to the output array minus the threshold value,
+ *  otherwise the output is set to zero.
  *
  ********************************************************/
 
@@ -1705,19 +1705,19 @@ void SIGLIB_FUNC_DECL SDA_SoftThreshold(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
  * Function: SDS_ThresholdAndClamp
  *
  * Parameters:
- *   const SLData_t src                      - Input sample
- *   const SLData_t Threshold                - Threshold
- *   const SLData_t Clamp,                   - Clamp level
- *   const enum SLThresholdMode_t TType      - double sided or single sided
+ *  const SLData_t src                      - Input sample
+ *  const SLData_t Threshold                - Threshold
+ *  const SLData_t Clamp,                   - Clamp level
+ *  const enum SLThresholdMode_t TType      - double sided or single sided
  *threshold
  *
  * Return value:
- *   Thresholded and clamped value
+ *  Thresholded and clamped value
  *
  * Description:
- *   If the input is >= the threshold then it is
- *   set to the clamp level, otherwise the output is
- *   set to zero.
+ *  If the input is >= the threshold then it is
+ *  set to the clamp level, otherwise the output is
+ *  set to zero.
  *
  ********************************************************/
 
@@ -1745,20 +1745,20 @@ SLData_t SIGLIB_FUNC_DECL SDS_ThresholdAndClamp(const SLData_t src, const SLData
  * Function: SDA_ThresholdAndClamp
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc   - Input Data array pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst         - Output Data array pointer
- *   const SLData_t Threshold                - Threshold
- *   const SLData_t Clamp,                   - Clamp level
- *   const enum SLThresholdMode_t TType      - double sided or single sided
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc   - Input Data array pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst         - Output Data array pointer
+ *  const SLData_t Threshold                - Threshold
+ *  const SLData_t Clamp,                   - Clamp level
+ *  const enum SLThresholdMode_t TType      - double sided or single sided
  *threshold const SLArrayIndex_t arrayLength        - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   If the input is >= the threshold then it is
- *   set to the clamp level, otherwise the output is
- *   set to zero.
+ *  If the input is >= the threshold then it is
+ *  set to the clamp level, otherwise the output is
+ *  set to zero.
  *
  ********************************************************/
 
@@ -1801,17 +1801,17 @@ void SIGLIB_FUNC_DECL SDA_ThresholdAndClamp(const SLData_t* SIGLIB_PTR_DECL pSrc
  * Function: SDS_Clamp
  *
  * Parameters:
- *   const SLData_t src                  - Input sample
- *   SLData_t Threshold  - Threshold
- *   SLData_t Clamp      - Clamp
- *   enum SLThresholdMode_t TType        - double sided or single sided
+ *  const SLData_t src                  - Input sample
+ *  SLData_t Threshold  - Threshold
+ *  SLData_t Clamp      - Clamp
+ *  enum SLThresholdMode_t TType        - double sided or single sided
  *threshold
  *
  * Return value:
- *   clamped value
+ *  clamped value
  *
  * Description: If the data is >= the threshold set
- *   it to the Clamping value.
+ *  it to the Clamping value.
  *
  ********************************************************/
 
@@ -1840,18 +1840,18 @@ SLData_t SIGLIB_FUNC_DECL SDS_Clamp(const SLData_t src, const SLData_t Threshold
  * Function: SDA_Clamp
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc   - Input Data array pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst     - Output Data array pointer
- *   SLData_t Threshold  - Threshold
- *   SLData_t Clamp      - Clamp
- *   enum SLThresholdMode_t TType        - double sided or single sided
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc   - Input Data array pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst     - Output Data array pointer
+ *  SLData_t Threshold  - Threshold
+ *  SLData_t Clamp      - Clamp
+ *  enum SLThresholdMode_t TType        - double sided or single sided
  *threshold SLArrayIndex_t arrayLength          - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: If the data is >= the threshold set
- *   it to the Clamping value.
+ *  it to the Clamping value.
  *
  ********************************************************/
 
@@ -1894,15 +1894,15 @@ void SIGLIB_FUNC_DECL SDA_Clamp(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* 
  * Function: SDA_TestOverThreshold
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLData_t Threshold
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLData_t Threshold
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   SLArrayIndex_t index of first sample over threshold
+ *  SLArrayIndex_t index of first sample over threshold
  *
  * Description:
- *   Check to see if any part of a signal is >= the threshold.
+ *  Check to see if any part of a signal is >= the threshold.
  *
  ********************************************************/
 
@@ -1928,16 +1928,16 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_TestOverThreshold(const SLData_t* SIGLIB_PTR
  * Function: SDA_TestAbsOverThreshold
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLData_t Threshold
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLData_t Threshold
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   SLArrayIndex_t index of first sample over threshold
+ *  SLArrayIndex_t index of first sample over threshold
  *
  * Description:
- *   Check to see if the absolute value of any part of a
- *   signal is >= the threshold.
+ *  Check to see if the absolute value of any part of a
+ *  signal is >= the threshold.
  *
  ********************************************************/
 
@@ -1966,17 +1966,17 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_TestAbsOverThreshold(const SLData_t* SIGLIB_
  * Function: SDA_SelectMax
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1, - Input array 1 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2, - Input array 2 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst,        - Output array pointer
- *   const SLArrayIndex_t arrayLength        - Array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1, - Input array 1 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2, - Input array 2 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst,        - Output array pointer
+ *  const SLArrayIndex_t arrayLength        - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Return the maximum values from the source arrays in
- *   the destination array.
+ *  Return the maximum values from the source arrays in
+ *  the destination array.
  *
  ********************************************************/
 
@@ -2006,17 +2006,17 @@ void SIGLIB_FUNC_DECL SDA_SelectMax(const SLData_t* SIGLIB_PTR_DECL pSrc1, const
  * Function: SDA_SelectMin
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc1, - Input array 1 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrc2, - Input array 2 pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst,        - Output array pointer
- *   const SLArrayIndex_t arrayLength        - Array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc1, - Input array 1 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc2, - Input array 2 pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst,        - Output array pointer
+ *  const SLArrayIndex_t arrayLength        - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Return the minimum values from the source arrays in
- *   the destination array.
+ *  Return the minimum values from the source arrays in
+ *  the destination array.
  *
  ********************************************************/
 
@@ -2046,8 +2046,8 @@ void SIGLIB_FUNC_DECL SDA_SelectMin(const SLData_t* SIGLIB_PTR_DECL pSrc1, const
  * Function: SDA_SelectMagnitudeSquaredMax
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal1, - Real input array 1 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag1, - Imaginary input array 1
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal1, - Real input array 1 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag1, - Imaginary input array 1
  *pointer const SLData_t * SIGLIB_PTR_DECL pSrcReal2, - Real input array 2
  *pointer const SLData_t * SIGLIB_PTR_DECL pSrcImag2, - Imaginary input array 2
  *pointer SLData_t * SIGLIB_PTR_DECL pRealDst,        - Real output array
@@ -2055,11 +2055,11 @@ void SIGLIB_FUNC_DECL SDA_SelectMin(const SLData_t* SIGLIB_PTR_DECL pSrc1, const
  *pointer const SLArrayIndex_t arrayLength            - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Return the maximum of the magnitude squared values
- *   from the source arrays in the destination array.
+ *  Return the maximum of the magnitude squared values
+ *  from the source arrays in the destination array.
  *
  ********************************************************/
 
@@ -2099,8 +2099,8 @@ void SIGLIB_FUNC_DECL SDA_SelectMagnitudeSquaredMax(const SLData_t* SIGLIB_PTR_D
  * Function: SDA_SelectMagnitudeSquaredMin
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal1, - Real input array 1 pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag1, - Imaginary input array 1
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal1, - Real input array 1 pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag1, - Imaginary input array 1
  *pointer const SLData_t * SIGLIB_PTR_DECL pSrcReal2, - Real input array 2
  *pointer const SLData_t * SIGLIB_PTR_DECL pSrcImag2, - Imaginary input array 2
  *pointer SLData_t * SIGLIB_PTR_DECL pRealDst,        - Real output array
@@ -2108,11 +2108,11 @@ void SIGLIB_FUNC_DECL SDA_SelectMagnitudeSquaredMax(const SLData_t* SIGLIB_PTR_D
  *pointer const SLArrayIndex_t arrayLength            - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Return the minimum of the magnitude squared values
- *   from the source arrays in the destination array.
+ *  Return the minimum of the magnitude squared values
+ *  from the source arrays in the destination array.
  *
  ********************************************************/
 
@@ -2152,14 +2152,14 @@ void SIGLIB_FUNC_DECL SDA_SelectMagnitudeSquaredMin(const SLData_t* SIGLIB_PTR_D
  * Function: SDS_SetMinValue
  *
  * Parameters:
- *   const SLData_t src,                     - Input sample
- *   const SLData_t MinValue,                - Minimum value
+ *  const SLData_t src,                     - Input sample
+ *  const SLData_t MinValue,                - Minimum value
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Sets the minimum value for the data.
+ *  Sets the minimum value for the data.
  *
  ********************************************************/
 
@@ -2180,16 +2180,16 @@ SLData_t SIGLIB_FUNC_DECL SDS_SetMinValue(const SLData_t src, const SLData_t Min
  * Function: SDA_SetMinValue
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Pointer to source array
- *   SLData_t * SIGLIB_PTR_DECL pDst,        - Pointer to destination array
- *   const SLData_t MinValue,                - Minimum value
- *   const SLArrayIndex_t arrayLength        - Array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  - Pointer to source array
+ *  SLData_t * SIGLIB_PTR_DECL pDst,        - Pointer to destination array
+ *  const SLData_t MinValue,                - Minimum value
+ *  const SLArrayIndex_t arrayLength        - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Sets the minimum value for the data.
+ *  Sets the minimum value for the data.
  *
  ********************************************************/
 
@@ -2221,14 +2221,14 @@ void SIGLIB_FUNC_DECL SDA_SetMinValue(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
  * Function: SDA_PeakToAverageRatio
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Pointer to source array
- *   const SLArrayIndex_t arrayLength        - Array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  - Pointer to source array
+ *  const SLArrayIndex_t arrayLength        - Array length
  *
  * Return value:
- *   Peak to average ratio
+ *  Peak to average ratio
  *
  * Description:
- *   Returns the peak to average ratio for the data.
+ *  Returns the peak to average ratio for the data.
  *
  ********************************************************/
 
@@ -2264,14 +2264,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAverageRatio(const SLData_t* SIGLIB_PTR_DECL
  * Function: SDA_PeakToAveragePowerRatio
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Pointer to source array
- *   const SLArrayIndex_t arrayLength        - Array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  - Pointer to source array
+ *  const SLArrayIndex_t arrayLength        - Array length
  *
  * Return value:
- *   Peak to average power ratio
+ *  Peak to average power ratio
  *
  * Description:
- *   Returns the peak to average power ratio for the data.
+ *  Returns the peak to average power ratio for the data.
  *
  ********************************************************/
 
@@ -2304,14 +2304,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAveragePowerRatio(const SLData_t* SIGLIB_PTR
  * Function: SDA_PeakToAveragePowerRatioDB
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Pointer to source array
- *   const SLArrayIndex_t arrayLength        - Array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  - Pointer to source array
+ *  const SLArrayIndex_t arrayLength        - Array length
  *
  * Return value:
- *   Peak to average power ratio in dB
+ *  Peak to average power ratio in dB
  *
  * Description:
- *   Returns the peak to average power ratio for the data.
+ *  Returns the peak to average power ratio for the data.
  *
  ********************************************************/
 
@@ -2344,15 +2344,15 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAveragePowerRatioDB(const SLData_t* SIGLIB_P
  * Function: SDA_PeakToAverageRatioComplex
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,  - Real source array pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,  - Imag source array pointer
- *   const SLArrayIndex_t arrayLength        - Array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,  - Real source array pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,  - Imag source array pointer
+ *  const SLArrayIndex_t arrayLength        - Array length
  *
  * Return value:
- *   Peak to average ratio
+ *  Peak to average ratio
  *
  * Description:
- *   Returns the peak to average ratio for the data.
+ *  Returns the peak to average ratio for the data.
  *
  ********************************************************/
 
@@ -2388,15 +2388,15 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAverageRatioComplex(const SLData_t* SIGLIB_P
  * Function: SDA_PeakToAveragePowerRatioComplex
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,  - Real source array pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,  - Imag source array pointer
- *   const SLArrayIndex_t arrayLength        - Array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,  - Real source array pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,  - Imag source array pointer
+ *  const SLArrayIndex_t arrayLength        - Array length
  *
  * Return value:
- *   Peak to average power ratio
+ *  Peak to average power ratio
  *
  * Description:
- *   Returns the peak to average power ratio for the data.
+ *  Returns the peak to average power ratio for the data.
  *
  ********************************************************/
 
@@ -2432,15 +2432,15 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAveragePowerRatioComplex(const SLData_t* SIG
  * Function: SDA_PeakToAveragePowerRatioComplexDB
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,  - Real source array pointer
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,  - Imag source array pointer
- *   const SLArrayIndex_t arrayLength        - Array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,  - Real source array pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,  - Imag source array pointer
+ *  const SLArrayIndex_t arrayLength        - Array length
  *
  * Return value:
- *   Peak to average power ratio in dB
+ *  Peak to average power ratio in dB
  *
  * Description:
- *   Returns the peak to average power ratio for the data.
+ *  Returns the peak to average power ratio for the data.
  *
  ********************************************************/
 
@@ -2476,20 +2476,20 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAveragePowerRatioComplexDB(const SLData_t* S
  * Function: SDA_MovePeakTowardsDeadBand
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t DeadBandLowPoint,
- *   const SLArrayIndex_t DeadBandHighPoint,
- *   const SLArrayIndex_t arrayLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t DeadBandLowPoint,
+ *  const SLArrayIndex_t DeadBandHighPoint,
+ *  const SLArrayIndex_t arrayLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Locates the peak value and then shifts all of the
- *   data so that the peak moves towards the dead-band.
- *   The function accepts a dead-band, within which the
- *   data is not shifted.
+ *  Locates the peak value and then shifts all of the
+ *  data so that the peak moves towards the dead-band.
+ *  The function accepts a dead-band, within which the
+ *  data is not shifted.
  *
  ********************************************************/
 
@@ -2530,13 +2530,13 @@ void SIGLIB_FUNC_DECL SDA_MovePeakTowardsDeadBand(const SLData_t* SIGLIB_PTR_DEC
  * Function: SIF_Envelope
  *
  * Parameters:
- *   SLData_t *pOnePoleState
+ *  SLData_t *pOnePoleState
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialize the envelope detection function.
+ *  Initialize the envelope detection function.
  *
  ********************************************************/
 
@@ -2549,17 +2549,17 @@ void SIGLIB_FUNC_DECL SIF_Envelope(SLData_t* SIGLIB_PTR_DECL pOnePoleState)
  * Function: SDS_Envelope
  *
  * Parameters:
- *   const SLData_t src,
- *   const SLData_t attackCoefficient,
- *   const SLData_t decayCoefficient,
- *   SLData_t *pOnePoleState,
+ *  const SLData_t src,
+ *  const SLData_t attackCoefficient,
+ *  const SLData_t decayCoefficient,
+ *  SLData_t *pOnePoleState,
  *
  * Return value:
- *   Envelope sample
+ *  Envelope sample
  *
  * Description:
- *   Generates an envelope of the input sequence, using
- *   a single one-pole filter.
+ *  Generates an envelope of the input sequence, using
+ *  a single one-pole filter.
  *
  ********************************************************/
 
@@ -2582,19 +2582,19 @@ SLData_t SIGLIB_FUNC_DECL SDS_Envelope(const SLData_t src, const SLData_t attack
  * Function: SDA_Envelope
  *
  * Parameters:
- *   const SLData_t *pSrc,
- *   SLData_t *pDst,
- *   const SLData_t attackCoefficient,
- *   const SLData_t decayCoefficient,
- *   SLData_t *pOnePoleState,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t *pSrc,
+ *  SLData_t *pDst,
+ *  const SLData_t attackCoefficient,
+ *  const SLData_t decayCoefficient,
+ *  SLData_t *pOnePoleState,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Generates an envelope of the input sequence, using
- *   a single one-pole filter.
+ *  Generates an envelope of the input sequence, using
+ *  a single one-pole filter.
  *
  ********************************************************/
 
@@ -2622,13 +2622,13 @@ void SIGLIB_FUNC_DECL SDA_Envelope(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_
  * Function: SIF_EnvelopeRMS
  *
  * Parameters:
- *   SLData_t *pOnePoleState
+ *  SLData_t *pOnePoleState
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialize the envelope detection function, with RMS.
+ *  Initialize the envelope detection function, with RMS.
  *
  ********************************************************/
 
@@ -2641,17 +2641,17 @@ void SIGLIB_FUNC_DECL SIF_EnvelopeRMS(SLData_t* pOnePoleState)
  * Function: SDS_EnvelopeRMS
  *
  * Parameters:
- *   const SLData_t src,
- *   const SLData_t attackCoefficient,
- *   const SLData_t decayCoefficient,
- *   SLData_t *pOnePoleState,
+ *  const SLData_t src,
+ *  const SLData_t attackCoefficient,
+ *  const SLData_t decayCoefficient,
+ *  SLData_t *pOnePoleState,
  *
  * Return value:
- *   Envelope sample
+ *  Envelope sample
  *
  * Description:
- *   Generates an envelope of the input sequence, using
- *   a single one-pole filter, with RMS.
+ *  Generates an envelope of the input sequence, using
+ *  a single one-pole filter, with RMS.
  *
  ********************************************************/
 
@@ -2675,19 +2675,19 @@ SLData_t SIGLIB_FUNC_DECL SDS_EnvelopeRMS(const SLData_t src, const SLData_t att
  * Function: SDA_EnvelopeRMS
  *
  * Parameters:
- *   const SLData_t *pSrc,
- *   SLData_t *pDst,
- *   const SLData_t attackCoefficient,
- *   const SLData_t decayCoefficient,
- *   SLData_t *pOnePoleState,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t *pSrc,
+ *  SLData_t *pDst,
+ *  const SLData_t attackCoefficient,
+ *  const SLData_t decayCoefficient,
+ *  SLData_t *pOnePoleState,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Generates an envelope of the input sequence, using
- *   a single one-pole filter, with RMS.
+ *  Generates an envelope of the input sequence, using
+ *  a single one-pole filter, with RMS.
  *
  ********************************************************/
 
@@ -2718,19 +2718,19 @@ void SIGLIB_FUNC_DECL SDA_EnvelopeRMS(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
  * Function: SIF_EnvelopeHilbert
  *
  * Parameters:
- *   SLData_t *pFilterCoeffs,
- *   SLData_t *pFilterState,
- *   SLArrayIndex_t *filterIndex,
- *   SLData_t *pDelay,
- *   const SLArrayIndex_t filterLength,
- *   const SLArrayIndex_t filterGroupDelay,
- *   SLData_t *pOnePoleState
+ *  SLData_t *pFilterCoeffs,
+ *  SLData_t *pFilterState,
+ *  SLArrayIndex_t *filterIndex,
+ *  SLData_t *pDelay,
+ *  const SLArrayIndex_t filterLength,
+ *  const SLArrayIndex_t filterGroupDelay,
+ *  SLData_t *pOnePoleState
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialize the Hilbert transform envelope detection function.
+ *  Initialize the Hilbert transform envelope detection function.
  *
  ********************************************************/
 
@@ -2755,25 +2755,25 @@ void SIGLIB_FUNC_DECL SIF_EnvelopeHilbert(SLData_t* SIGLIB_PTR_DECL pFilterCoeff
  * Function: SDS_EnvelopeHilbert
  *
  * Parameters:
- *   const SLData_t src,
- *   const SLData_t *pFilterCoeffs,
- *   SLData_t *pFilterState,
- *   SLArrayIndex_t *filterIndex,
- *   SLData_t *pDelay,
- *   SLData_t *pTempDelay,
- *   const SLArrayIndex_t filterLength,
- *   const SLArrayIndex_t filterGroupDelay,
- *   const SLData_t onePoleCoefficient,
- *   SLData_t *pOnePoleState,
+ *  const SLData_t src,
+ *  const SLData_t *pFilterCoeffs,
+ *  SLData_t *pFilterState,
+ *  SLArrayIndex_t *filterIndex,
+ *  SLData_t *pDelay,
+ *  SLData_t *pTempDelay,
+ *  const SLArrayIndex_t filterLength,
+ *  const SLArrayIndex_t filterGroupDelay,
+ *  const SLData_t onePoleCoefficient,
+ *  SLData_t *pOnePoleState,
  *
  * Return value:
- *   Envelope sample
+ *  Envelope sample
  *
  * Description:
- *   Generates an envelope of the input sequence, where
- *   the envelope is the absolute maximum of the signal
- *   and the Hilbert transformed signal. The absolute
- *   maximum is then one-pole filtered to smooth.
+ *  Generates an envelope of the input sequence, where
+ *  the envelope is the absolute maximum of the signal
+ *  and the Hilbert transformed signal. The absolute
+ *  maximum is then one-pole filtered to smooth.
  *
  ********************************************************/
 
@@ -2811,28 +2811,28 @@ SLData_t SIGLIB_FUNC_DECL SDS_EnvelopeHilbert(const SLData_t src, const SLData_t
  * Function: SDA_EnvelopeHilbert
  *
  * Parameters:
- *   const SLData_t *pSrc,
- *   SLData_t *pDst,
- *   const SLData_t *pFilterCoeffs,
- *   SLData_t *pFilterState,
- *   SLArrayIndex_t *filterIndex,
- *   SLData_t *pTempAnalytic,
- *   SLData_t *pDelay,
- *   SLData_t *pTempDelay,
- *   const SLArrayIndex_t filterLength,
- *   const SLArrayIndex_t filterGroupDelay,
- *   const SLData_t onePoleCoefficient,
- *   SLData_t *pOnePoleState,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t *pSrc,
+ *  SLData_t *pDst,
+ *  const SLData_t *pFilterCoeffs,
+ *  SLData_t *pFilterState,
+ *  SLArrayIndex_t *filterIndex,
+ *  SLData_t *pTempAnalytic,
+ *  SLData_t *pDelay,
+ *  SLData_t *pTempDelay,
+ *  const SLArrayIndex_t filterLength,
+ *  const SLArrayIndex_t filterGroupDelay,
+ *  const SLData_t onePoleCoefficient,
+ *  SLData_t *pOnePoleState,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Generates an envelope of the input sequence, where
- *   the envelope is the absolute maximum of the signal
- *   and the Hilbert transformed signal. The absolute
- *   maximum is then one-pole filtered to smooth.
+ *  Generates an envelope of the input sequence, where
+ *  the envelope is the absolute maximum of the signal
+ *  and the Hilbert transformed signal. The absolute
+ *  maximum is then one-pole filtered to smooth.
  *
  ********************************************************/
 
@@ -2876,16 +2876,16 @@ void SIGLIB_FUNC_DECL SDA_EnvelopeHilbert(const SLData_t* SIGLIB_PTR_DECL pSrc, 
  * Function: SDS_InterpolateThreePointQuadraticVertexMagnitude
  *
  * Parameters:
- *   const SLData_t y0
- *   const SLData_t y1
- *   const SLData_t y2
+ *  const SLData_t y0
+ *  const SLData_t y1
+ *  const SLData_t y2
  *
  * Return value:
- *   Vertex Magnitude
+ *  Vertex Magnitude
  *
  * Description:
- *   Return the magnitude of the vertex for the given
- *   three y-axis magnitudes.
+ *  Return the magnitude of the vertex for the given
+ *  three y-axis magnitudes.
  *
  ********************************************************/
 
@@ -2901,16 +2901,16 @@ SLData_t SIGLIB_FUNC_DECL SDS_InterpolateThreePointQuadraticVertexMagnitude(cons
  * Function: SDS_InterpolateThreePointQuadraticVertexLocation
  *
  * Parameters:
- *   const SLData_t y0
- *   const SLData_t y1
- *   const SLData_t y2
+ *  const SLData_t y0
+ *  const SLData_t y1
+ *  const SLData_t y2
  *
  * Return value:
- *   Vertex Location
+ *  Vertex Location
  *
  * Description:
- *   Return the x-axis location of the vertex for the given
- *   three y-axis magnitudes.
+ *  Return the x-axis location of the vertex for the given
+ *  three y-axis magnitudes.
  *
  ********************************************************/
 
@@ -2925,19 +2925,19 @@ SLData_t SIGLIB_FUNC_DECL SDS_InterpolateThreePointQuadraticVertexLocation(const
  * Function: SDS_InterpolateArbitraryThreePointQuadraticVertexMagnitude
  *
  * Parameters:
- *   const SLData_t x0
- *   const SLData_t y0
- *   const SLData_t x1
- *   const SLData_t y1
- *   const SLData_t x2
- *   const SLData_t y2
+ *  const SLData_t x0
+ *  const SLData_t y0
+ *  const SLData_t x1
+ *  const SLData_t y1
+ *  const SLData_t x2
+ *  const SLData_t y2
  *
  * Return value:
- *   Vertex Magnitude
+ *  Vertex Magnitude
  *
  * Description:
- *   Return the magnitude of the vertex for the given
- *   three x-axis location / y-axis magnitude pairs.
+ *  Return the magnitude of the vertex for the given
+ *  three x-axis location / y-axis magnitude pairs.
  *
  ********************************************************/
 
@@ -2956,19 +2956,19 @@ SLData_t SIGLIB_FUNC_DECL SDS_InterpolateArbitraryThreePointQuadraticVertexMagni
  * Function: SDS_InterpolateArbitraryThreePointQuadraticVertexLocation
  *
  * Parameters:
- *   const SLData_t x0
- *   const SLData_t y0
- *   const SLData_t x1
- *   const SLData_t y1
- *   const SLData_t x2
- *   const SLData_t y2
+ *  const SLData_t x0
+ *  const SLData_t y0
+ *  const SLData_t x1
+ *  const SLData_t y1
+ *  const SLData_t x2
+ *  const SLData_t y2
  *
  * Return value:
- *   Vertex Location
+ *  Vertex Location
  *
  * Description:
- *   Return the Location of the vertex for the given
- *   three x-axis location / y-axis magnitude pairs.
+ *  Return the Location of the vertex for the given
+ *  three x-axis location / y-axis magnitude pairs.
  *
  ********************************************************/
 
@@ -2986,15 +2986,15 @@ SLData_t SIGLIB_FUNC_DECL SDS_InterpolateArbitraryThreePointQuadraticVertexLocat
  * Function: SDA_InterpolateThreePointQuadraticVertexMagnitude
  *
  * Parameters:
- *   const SLData_t *            // Pointer to source array
+ *  const SLData_t *           // Pointer to source array
  *
  * Return value:
- *   Vertex Magnitude
+ *  Vertex Magnitude
  *
  * Description:
- *   Return the magnitude of the vertex for the given
- *   three y-axis magnitudes.
- *   The source array is 3 samples long.
+ *  Return the magnitude of the vertex for the given
+ *  three y-axis magnitudes.
+ *  The source array is 3 samples long.
  *
  ********************************************************/
 
@@ -3013,16 +3013,16 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateThreePointQuadraticVertexMagnitude(cons
  * Function: SDA_InterpolateThreePointQuadraticVertexLocation
  *
  * Parameters:
- *   const SLData_t *            // Pointer to source array
- *   const SLArrayIndex_t);      // Array length
+ *  const SLData_t *           // Pointer to source array
+ *  const SLArrayIndex_t);      // Array length
  *
  * Return value:
- *   Vertex Location
+ *  Vertex Location
  *
  * Description:
- *   Return the x-axis location of the vertex for the given
- *   three y-axis magnitudes.
- *   The source array is 3 samples long.
+ *  Return the x-axis location of the vertex for the given
+ *  three y-axis magnitudes.
+ *  The source array is 3 samples long.
  *
  ********************************************************/
 
@@ -3041,17 +3041,17 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateThreePointQuadraticVertexLocation(const
  * Function: SDA_InterpolateArbitraryThreePointQuadraticVertexMagnitude
  *
  * Parameters:
- *   const SLData_t *            - Pointer to source array
- *   const SLArrayIndex_t);      - Array length
+ *  const SLData_t *           - Pointer to source array
+ *  const SLArrayIndex_t);      - Array length
  *
  * Return value:
- *   Vertex Magnitude
+ *  Vertex Magnitude
  *
  * Description:
- *   Locate the absolute peak and return the magnitude
- *   of the vertex (positive or negative) for the given
- *   data sequence.
- *   The source array is of arbitrary length.
+ *  Locate the absolute peak and return the magnitude
+ *  of the vertex (positive or negative) for the given
+ *  data sequence.
+ *  The source array is of arbitrary length.
  *
  ********************************************************/
 
@@ -3080,17 +3080,17 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateArbitraryThreePointQuadraticVertexMagni
  * Function: SDA_InterpolateArbitraryThreePointQuadraticVertexLocation
  *
  * Parameters:
- *   const SLData_t *            - Pointer to source array
- *   const SLArrayIndex_t);      - Array length
+ *  const SLData_t *           - Pointer to source array
+ *  const SLArrayIndex_t);      - Array length
  *
  * Return value:
- *   Vertex Location
+ *  Vertex Location
  *
  * Description:
- *   Locate the absolute peak and return the location
- *   of the vertex (positive or negative) for the given
- *   data sequence.
- *   The source array is of arbitrary length.
+ *  Locate the absolute peak and return the location
+ *  of the vertex (positive or negative) for the given
+ *  data sequence.
+ *  The source array is of arbitrary length.
  *
  ********************************************************/
 
@@ -3119,16 +3119,16 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateArbitraryThreePointQuadraticVertexLocat
  * Function: SDA_InterpolateArbitraryThreePointQuadraticPeakVertexMagnitude
  *
  * Parameters:
- *   const SLData_t *            - Pointer to source array
- *   const SLArrayIndex_t);      - Array length
+ *  const SLData_t *           - Pointer to source array
+ *  const SLArrayIndex_t);      - Array length
  *
  * Return value:
- *   Vertex Location
+ *  Vertex Location
  *
  * Description:
- *   Locate the peak and return the magnitude of the vertex
- *   (positive) for the provided data sequence.
- *   The source array is of arbitrary length.
+ *  Locate the peak and return the magnitude of the vertex
+ *  (positive) for the provided data sequence.
+ *  The source array is of arbitrary length.
  *
  ********************************************************/
 
@@ -3158,16 +3158,16 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateArbitraryThreePointQuadraticPeakVertexM
  * Function: SDA_InterpolateArbitraryThreePointQuadraticPeakVertexLocation
  *
  * Parameters:
- *   const SLData_t *            - Pointer to source array
- *   const SLArrayIndex_t);      - Array length
+ *  const SLData_t *           - Pointer to source array
+ *  const SLArrayIndex_t);      - Array length
  *
  * Return value:
- *   Vertex Location
+ *  Vertex Location
  *
  * Description:
- *   Locate the peak and return the magnitude of the vertex
- *   (positive) for the provided data sequence.
- *   The source array is of arbitrary length.
+ *  Locate the peak and return the magnitude of the vertex
+ *  (positive) for the provided data sequence.
+ *  The source array is of arbitrary length.
  *
  ********************************************************/
 
@@ -3197,14 +3197,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateArbitraryThreePointQuadraticPeakVertexL
  * Function: SDA_FirstMinVertex
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   Return the first minimum vertex value in an array.
+ *  Return the first minimum vertex value in an array.
  *
  * Description:
- *   Return the first minimum vertex value in an array.
+ *  Return the first minimum vertex value in an array.
  *
  ********************************************************/
 
@@ -3225,14 +3225,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_FirstMinVertex(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SDA_FirstMinVertexPos
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   Return index of the first minimum vertex value in an array.
+ *  Return index of the first minimum vertex value in an array.
  *
  * Description:
- *   Return index of the first minimum vertex value in an array.
+ *  Return index of the first minimum vertex value in an array.
  *
  ********************************************************/
 
@@ -3253,14 +3253,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FirstMinVertexPos(const SLData_t* SIGLIB_PTR
  * Function: SDA_FirstMaxVertex
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   Return the first maximum vertex value in an array.
+ *  Return the first maximum vertex value in an array.
  *
  * Description:
- *   Return the first maximum vertex value in an array.
+ *  Return the first maximum vertex value in an array.
  *
  ********************************************************/
 
@@ -3281,14 +3281,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_FirstMaxVertex(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SDA_FirstMaxVertexPos
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLArrayIndex_t arrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
- *   Return index of the first maximum vertex value in an array.
+ *  Return index of the first maximum vertex value in an array.
  *
  * Description:
- *   Return index of the first maximum vertex value in an array.
+ *  Return index of the first maximum vertex value in an array.
  *
  ********************************************************/
 
@@ -3309,18 +3309,18 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FirstMaxVertexPos(const SLData_t* SIGLIB_PTR
  * Function: SDA_NLargest
  *
  * Parameters:
- *   const SLData_t *pSrc,
- *   SLData_t * pDst,
- *   const SLArrayIndex_t srcLength,
- *   const SLArrayIndex_t numToFind)
+ *  const SLData_t *pSrc,
+ *  SLData_t * pDst,
+ *  const SLArrayIndex_t srcLength,
+ *  const SLArrayIndex_t numToFind)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Return first N largest values in the source array,
- *   order is largest to smallest.
- *   This algorithm supports duplicate numbers.
+ *  Return first N largest values in the source array,
+ *  order is largest to smallest.
+ *  This algorithm supports duplicate numbers.
  *
  ********************************************************/
 
@@ -3361,18 +3361,18 @@ void SIGLIB_FUNC_DECL SDA_NLargest(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_
  * Function: SDA_NSmallest
  *
  * Parameters:
- *   const SLData_t *pSrc,
- *   SLData_t * pDst,
- *   const SLArrayIndex_t srcLength,
- *   const SLArrayIndex_t numToFind)
+ *  const SLData_t *pSrc,
+ *  SLData_t * pDst,
+ *  const SLArrayIndex_t srcLength,
+ *  const SLArrayIndex_t numToFind)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Return first N smallest values in the source array,
- *   order is smallest to largest.
- *   This algorithm supports duplicate numbers.
+ *  Return first N smallest values in the source array,
+ *  order is smallest to largest.
+ *  This algorithm supports duplicate numbers.
  *
  ********************************************************/
 

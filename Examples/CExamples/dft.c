@@ -58,7 +58,7 @@ int main(void)
                         pSrcImag,       // Pointer to imag data array
                         DFT_LENGTH);    // Array length
 
-  SDA_Clear(pSrcReal,       // Pointer to data array
+  SDA_Zeros(pSrcReal,       // Pointer to data array
             DFT_LENGTH);    // Array length
 
   // Create sine wave with suitable freq to avoid edge effects

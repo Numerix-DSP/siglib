@@ -85,7 +85,7 @@ int main(void)
          FUNDAMENTAL_FREQ);
   getchar();
 
-  SDA_Clear(pSrc,              // Pointer to destination array
+  SDA_Zeros(pSrc,              // Pointer to destination array
             SAMPLE_LENGTH);    // Dataset length
 
   SDA_Resonator(pSrc,              // Pointer to source array
@@ -159,7 +159,7 @@ int main(void)
          FUNDAMENTAL_FREQ * SIGLIB_TWO);
   getchar();
 
-  SDA_Clear(pDst,              // Pointer to destination array
+  SDA_Zeros(pDst,              // Pointer to destination array
             SAMPLE_LENGTH);    // Dataset length
 
   SIF_Resonator1(ResonatorDelay,                    // Pointer to state array

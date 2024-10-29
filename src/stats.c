@@ -44,11 +44,11 @@ Description: SigLib DSP library statistics routines.
  * Function: SDA_Sum
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc - Array pointer
- *   const SLArrayIndex_t sampleLength   - Array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc - Array pointer
+ *  const SLArrayIndex_t sampleLength   - Array length
  *
  * Return value:
- *   SLData_t Sum
+ *  SLData_t Sum
  *
  * Description: Sum all the entries in the array.
  *
@@ -78,14 +78,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_Sum(const SLData_t* SIGLIB_PTR_DECL pSrc, const SL
  * Function: SDA_AbsSum
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc - Array pointer
- *   const SLArrayIndex_t ArrayLength    - Array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc - Array pointer
+ *  const SLArrayIndex_t ArrayLength    - Array length
  *
  * Return value:
- *   SLData_t Sum
+ *  SLData_t Sum
  *
  * Description: Sum the absolute values of all the
- *   entries in the array.
+ *  entries in the array.
  *
  ********************************************************/
 
@@ -121,14 +121,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_AbsSum(const SLData_t* SIGLIB_PTR_DECL pSrc, const
  * Function: SDA_SumOfSquares
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   Sum of squares
+ *  Sum of squares
  *
  * Description:
- *   Return the sum of squares of the values in the array.
+ *  Return the sum of squares of the values in the array.
  *
  ********************************************************/
 
@@ -157,12 +157,12 @@ SLData_t SIGLIB_FUNC_DECL SDA_SumOfSquares(const SLData_t* SIGLIB_PTR_DECL pSrc,
  * Function: SDA_Mean
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc - Array pointer
- *   const SLData_t InverseArrayLength
- *   const SLArrayIndex_t ArrayLength - Array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc - Array pointer
+ *  const SLData_t InverseArrayLength
+ *  const SLArrayIndex_t ArrayLength - Array length
  *
  * Return value:
- *   Mean
+ *  Mean
  *
  * Description: Mean of all the entries in the array.
  *
@@ -192,12 +192,12 @@ SLData_t SIGLIB_FUNC_DECL SDA_Mean(const SLData_t* SIGLIB_PTR_DECL pSrc, const S
  * Function: SDA_AbsMean
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc - Array pointer
- *   const SLData_t InverseArrayLength
- *   const SLArrayIndex_t ArrayLength - Array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc - Array pointer
+ *  const SLData_t InverseArrayLength
+ *  const SLArrayIndex_t ArrayLength - Array length
  *
  * Return value:
- *   Mean
+ *  Mean
  *
  * Description: Mean of the absolute values for all the
  * entries in the array.
@@ -233,16 +233,16 @@ SLData_t SIGLIB_FUNC_DECL SDA_AbsMean(const SLData_t* SIGLIB_PTR_DECL pSrc, cons
  * Function: SDA_SubtractMean
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc - Source pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst - Destination pointer
- *   const SLData_t InverseArrayLength
- *   const SLArrayIndex_t ArrayLength - Array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc - Source pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst - Destination pointer
+ *  const SLData_t InverseArrayLength
+ *  const SLArrayIndex_t ArrayLength - Array length
  *
  * Return value:
- *   None
+ *  None
  *
  * Description: Subtract the mean of all the entries in
- *   the array.
+ *  the array.
  *
  ********************************************************/
 
@@ -286,15 +286,15 @@ void SIGLIB_FUNC_DECL SDA_SubtractMean(const SLData_t* SIGLIB_PTR_DECL pSrc, SLD
  * Function: SDA_SubtractMax
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc - Source pointer
- *   SLData_t * SIGLIB_PTR_DECL pDst - Destination pointer
- *   const SLArrayIndex_t ArrayLength - Array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc - Source pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst - Destination pointer
+ *  const SLArrayIndex_t ArrayLength - Array length
  *
  * Return value:
- *   None
+ *  None
  *
  * Description: Subtract the maximum of all the entries in
- *   the array.
+ *  the array.
  *
  ********************************************************/
 
@@ -328,14 +328,14 @@ void SIGLIB_FUNC_DECL SDA_SubtractMax(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
  * Function: SDA_SampleSd
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc - Array pointer
- *   const SLArrayIndex_t ArrayLength    - Array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc - Array pointer
+ *  const SLArrayIndex_t ArrayLength    - Array length
  *
  * Return value:
- *   Sample standard deviation
+ *  Sample standard deviation
  *
  * Description: Calculate the sample standard deviation of
- *   the entries in the array.
+ *  the entries in the array.
  *
  ********************************************************/
 
@@ -363,14 +363,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_SampleSd(const SLData_t* SIGLIB_PTR_DECL pSrc, con
  * Function: SDA_PopulationSd
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc - Array pointer
- *   const SLArrayIndex_t ArrayLength    - Array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc - Array pointer
+ *  const SLArrayIndex_t ArrayLength    - Array length
  *
  * Return value:
- *   Population standard deviation
+ *  Population standard deviation
  *
  * Description: Calculate the Population standard deviation of
- *   the entries in the array.
+ *  the entries in the array.
  *
  ********************************************************/
 
@@ -398,14 +398,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_PopulationSd(const SLData_t* SIGLIB_PTR_DECL pSrc,
  * Function: SDA_SampleVariance
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc - Array pointer
- *   const SLArrayIndex_t ArrayLength    - Array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc - Array pointer
+ *  const SLArrayIndex_t ArrayLength    - Array length
  *
  * Return value:
- *   Sample (unbiased) variance
+ *  Sample (unbiased) variance
  *
  * Description: Calculate the sample (unbiased) variance
- *   of the entries in the array.
+ *  of the entries in the array.
  *
  ********************************************************/
 
@@ -433,14 +433,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_SampleVariance(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SDA_PopulationVariance
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc - Array pointer
- *   const SLArrayIndex_t ArrayLength    - Array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc - Array pointer
+ *  const SLArrayIndex_t ArrayLength    - Array length
  *
  * Return value:
- *   Population standard deviation
+ *  Population standard deviation
  *
  * Description: Calculate the population variance
- *   of the entries in the array.
+ *  of the entries in the array.
  *
  ********************************************************/
 
@@ -468,18 +468,18 @@ SLData_t SIGLIB_FUNC_DECL SDA_PopulationVariance(const SLData_t* SIGLIB_PTR_DECL
  * Function: SDA_CovarianceMatrix
  *
  * Parameters:
- *   const SLData_t *      - Pointer to source matrix
- *   SLData_t *            - Pointer to means array
- *   SLData_t *            - Pointer to destination covariance matrix
- *   const SLData_t        - inverseLength
- *   const SLData_t        - finalDivisor
- *   const SLArrayIndex_t  - Dataset lengths
+ *  const SLData_t *     - Pointer to source matrix
+ *  SLData_t *           - Pointer to means array
+ *  SLData_t *           - Pointer to destination covariance matrix
+ *  const SLData_t        - inverseLength
+ *  const SLData_t        - finalDivisor
+ *  const SLArrayIndex_t  - Dataset lengths
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Calculate the covariance matrix of the
- *   supplied vectors.
+ *  supplied vectors.
  *
  ********************************************************/
 
@@ -519,12 +519,12 @@ void SIGLIB_FUNC_DECL SDA_CovarianceMatrix(const SLData_t* SIGLIB_PTR_DECL pSrc,
  * Function: SDA_Median
  *
  * Parameters:
- *   const SLData_t *pSrc    - Input Data array pointer
- *   SLData_t *pWorkArray    - Working Data array pointer
- *   const SLArrayIndex_t    - Array length
+ *  const SLData_t *pSrc    - Input Data array pointer
+ *  SLData_t *pWorkArray    - Working Data array pointer
+ *  const SLArrayIndex_t    - Array length
  *
  * Return value:
- *       Median
+ *      Median
  *
  * Description: Return the median value of the array.
  *

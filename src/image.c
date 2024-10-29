@@ -59,23 +59,23 @@ Description: Siglib library image processing routines.
  * Function: SIM_Fft2d
  *
  * Parameters:
- *   const SLImageData_t *pSrc,
- *   SLImageData_t *pDst,
- *   const SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
- *   SLImageData_t *pImagImage,
- *   SLData_t * SIGLIB_PTR_DECL pRealArray,
- *   SLData_t * SIGLIB_PTR_DECL pImagArray,
- *   const SLData_t InvDimension,
- *   const SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
- *   const SLArrayIndex_t Dimension,
- *   const SLArrayIndex_t LogDimmension
+ *  const SLImageData_t *pSrc,
+ *  SLImageData_t *pDst,
+ *  const SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
+ *  SLImageData_t *pImagImage,
+ *  SLData_t * SIGLIB_PTR_DECL pRealArray,
+ *  SLData_t * SIGLIB_PTR_DECL pImagArray,
+ *  const SLData_t InvDimension,
+ *  const SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
+ *  const SLArrayIndex_t Dimension,
+ *  const SLArrayIndex_t LogDimmension
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a 2d FFT on an image, this assumes a square
- *   image
+ *  Perform a 2d FFT on an image, this assumes a square
+ *  image
  *
  ********************************************************/
 
@@ -200,15 +200,15 @@ void SIGLIB_FUNC_DECL SIM_Fft2d(const SLImageData_t* pSrc, SLImageData_t* pDst, 
  * Function: SIF_Fft2d
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
- *   SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
- *   const SLArrayIndex_t    Dimension
+ *  SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
+ *  const SLArrayIndex_t    Dimension
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise 2d FFT.
+ *  Initialise 2d FFT.
  *
  ********************************************************/
 
@@ -222,17 +222,17 @@ void SIGLIB_FUNC_DECL SIF_Fft2d(SLData_t* SIGLIB_PTR_DECL pFFTCoeffs, SLArrayInd
  * Function: SIM_Conv3x3
  *
  * Parameters:
- *   const SLImageData_t *pSrc,
- *   SLImageData_t *pDst,
- *   const SLData_t * SIGLIB_PTR_DECL pCoeffs,
- *   const SLArrayIndex_t line_length,
- *   const SLArrayIndex_t column_length
+ *  const SLImageData_t *pSrc,
+ *  SLImageData_t *pDst,
+ *  const SLData_t * SIGLIB_PTR_DECL pCoeffs,
+ *  const SLArrayIndex_t line_length,
+ *  const SLArrayIndex_t column_length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a 3x3 convolution on an image.
+ *  Perform a 3x3 convolution on an image.
  *
  ********************************************************/
 
@@ -296,16 +296,16 @@ void SIGLIB_FUNC_DECL SIM_Conv3x3(const SLImageData_t* pSrc, SLImageData_t* pDst
  * Function: SIM_Sobel3x3
  *
  * Parameters:
- *   SLImageData_t *pSrc,
- *   SLImageData_t *pDst,
- *   SLArrayIndex_t line_length,
- *   SLArrayIndex_t column_length
+ *  SLImageData_t *pSrc,
+ *  SLImageData_t *pDst,
+ *  SLArrayIndex_t line_length,
+ *  SLArrayIndex_t column_length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a sobel edge detection on an image.
+ *  Perform a sobel edge detection on an image.
  *
  ********************************************************/
 
@@ -389,16 +389,16 @@ void SIGLIB_FUNC_DECL SIM_Sobel3x3(const SLImageData_t* pSrc, SLImageData_t* pDs
  * Function: SIM_SobelVertical3x3
  *
  * Parameters:
- *   const SLImageData_t *pSrc,
- *   SLImageData_t *pDst,
- *   const SLArrayIndex_t line_length,
- *   const SLArrayIndex_t column_length
+ *  const SLImageData_t *pSrc,
+ *  SLImageData_t *pDst,
+ *  const SLArrayIndex_t line_length,
+ *  const SLArrayIndex_t column_length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a sobel edge detection on an image.
+ *  Perform a sobel edge detection on an image.
  *
  ********************************************************/
 
@@ -469,16 +469,16 @@ void SIGLIB_FUNC_DECL SIM_SobelVertical3x3(const SLImageData_t* pSrc, SLImageDat
  * Function: SIM_SobelHorizontal3x3
  *
  * Parameters:
- *   const SLImageData_t *pSrc,
- *   SLImageData_t *pDst,
- *   const SLArrayIndex_t line_length,
- *   const SLArrayIndex_t column_length
+ *  const SLImageData_t *pSrc,
+ *  SLImageData_t *pDst,
+ *  const SLArrayIndex_t line_length,
+ *  const SLArrayIndex_t column_length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a sobel edge detection on an image.
+ *  Perform a sobel edge detection on an image.
  *
  ********************************************************/
 
@@ -543,16 +543,16 @@ void SIGLIB_FUNC_DECL SIM_SobelHorizontal3x3(const SLImageData_t* pSrc, SLImageD
  * Function: SIM_Median3x3
  *
  * Parameters:
- *   const SLImageData_t *pSrc,
- *   SLImageData_t *pDst,
- *   const SLArrayIndex_t line_length,
- *   const SLArrayIndex_t column_length
+ *  const SLImageData_t *pSrc,
+ *  SLImageData_t *pDst,
+ *  const SLArrayIndex_t line_length,
+ *  const SLArrayIndex_t column_length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a median filter on the image.
+ *  Perform a median filter on the image.
  *
  ********************************************************/
 
@@ -616,14 +616,14 @@ void SIGLIB_FUNC_DECL SIM_Median3x3(const SLImageData_t* pSrc, SLImageData_t* pD
  * Function: SIF_ConvCoefficients3x3
  *
  * Parameters:
- *   SLData_t *pCoeffs,
- *   enum SL3x3Coeffs_t FilterType,
+ *  SLData_t *pCoeffs,
+ *  enum SL3x3Coeffs_t FilterType,
  *
  * Return value:
- *   SigLib error code
+ *  SigLib error code
  *
  * Description:
- *   Initialize the 3x3 filter coefficients.
+ *  Initialize the 3x3 filter coefficients.
  *
  ********************************************************/
 
@@ -676,14 +676,14 @@ SLError_t SIGLIB_FUNC_DECL SIF_ConvCoefficients3x3(SLData_t* pCoeffs, enum SL3x3
  * Function: SIM_Max
  *
  * Parameters:
- *   const SLImageData_t *pSrc,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLImageData_t *pSrc,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   Maximum value in an array.
+ *  Maximum value in an array.
  *
  * Description:
- *   Return the maximum value in an array.
+ *  Return the maximum value in an array.
  *
  ********************************************************/
 
@@ -711,14 +711,14 @@ SLImageData_t SIGLIB_FUNC_DECL SIM_Max(const SLImageData_t* pSrc, const SLArrayI
  * Function: SIM_Min
  *
  * Parameters:
- *   const SLImageData_t *pSrc,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLImageData_t *pSrc,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   Minimum value in an array.
+ *  Minimum value in an array.
  *
  * Description:
- *   Return the minimum value in an array.
+ *  Return the minimum value in an array.
  *
  ********************************************************/
 

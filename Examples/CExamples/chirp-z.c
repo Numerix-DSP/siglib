@@ -75,7 +75,7 @@ int main(void)
   if ((NULL == pInput) || (NULL == pRealData) || (NULL == pImagData) || (NULL == pAWNr) || (NULL == pAWNi) || (NULL == pvLr) || (NULL == pvLi) ||
       (NULL == pWMr) || (NULL == pWMi) || (NULL == pResults) || (NULL == pFFTCoeffs)) {
 
-    printf("\n\nMalloc failed\n\n");
+    printf("\n\nMemory allocation failed\n\n");
     exit(0);
   }
 
@@ -245,9 +245,9 @@ int main(void)
   getchar();
 
   // Ensure zero padded samples
-  SDA_Clear(pCZTRealWork,    // Pointer to destination array
+  SDA_Zeros(pCZTRealWork,    // Pointer to destination array
             FFT_LENGTH);     // Dataset length
-  SDA_Clear(pCZTImagWork,    // Pointer to destination array
+  SDA_Zeros(pCZTImagWork,    // Pointer to destination array
             FFT_LENGTH);     // Dataset length
 
   // Complex window = complex mpy with real data

@@ -62,14 +62,14 @@ const SLUInt16_t siglib_numerix_K3TxConvEncMap[] = {0, 3, 1, 2, 3, 0, 2, 1};
  * Function: SDS_ConvEncoderK3
  *
  * Parameters:
- *   SLChar_t Input,             Input character
- *   SLArrayIndex_t *pHistory    Pointer to history word
+ *  SLChar_t Input,             Input character
+ *  SLArrayIndex_t *pHistory    Pointer to history word
  *
  * Return value:
- *   SLUInt16_t              Encoded character
+ *  SLUInt16_t              Encoded character
  *
  * Description:
- *   K=3, rate 1/2 convolutional encode a character.
+ *  K=3, rate 1/2 convolutional encode a character.
  *
  ********************************************************/
 
@@ -113,19 +113,19 @@ const SLUInt16_t siglib_numerix_K3RxStateTransitionMap[SIGLIB_VITK3_NUMBER_OF_ST
  * Function: SIF_ViterbiDecoderK3
  *
  * Parameters:
- *   SLFixData_t             *pOutputBitCount,
- *   SLChar_t                *pDecodedByte,
- *   double                  *pAccumulatedErrorTable,
- *   SLArrayIndex_t          *pSurvivorStateHistoryTable,
- *   SLArrayIndex_t          *pSurvivorStateHistoryOffset,
- *   SLFixData_t             *pDoTraceBackFlag,
- *   const SLArrayIndex_t    TraceBackDepth)
+ *  SLFixData_t             *pOutputBitCount,
+ *  SLChar_t                *pDecodedByte,
+ *  double                  *pAccumulatedErrorTable,
+ *  SLArrayIndex_t          *pSurvivorStateHistoryTable,
+ *  SLArrayIndex_t          *pSurvivorStateHistoryOffset,
+ *  SLFixData_t             *pDoTraceBackFlag,
+ *  const SLArrayIndex_t    TraceBackDepth)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the K=3, rate 1/2 viterbi decoder.
+ *  Initialise the K=3, rate 1/2 viterbi decoder.
  *
  ********************************************************/
 
@@ -153,20 +153,20 @@ void SIGLIB_FUNC_DECL SIF_ViterbiDecoderK3(SLFixData_t* pOutputBitCount, SLChar_
  * Function: SDS_ViterbiDecoderK3
  *
  * Parameters:
- *   double *pSrc,           Source data pointer
- *   SLFixData_t             *pOutputBitCount,
- *   SLChar_t                *pDecodedByte,
- *   double                  *pAccumulatedErrorTable,
- *   SLArrayIndex_t          *pSurvivorStateHistoryTable,
- *   SLArrayIndex_t          *pSurvivorStateHistoryOffset,
- *   SLFixData_t             *pDoTraceBackFlag,
- *   const SLArrayIndex_t    TraceBackDepth)
+ *  double *pSrc,           Source data pointer
+ *  SLFixData_t             *pOutputBitCount,
+ *  SLChar_t                *pDecodedByte,
+ *  double                  *pAccumulatedErrorTable,
+ *  SLArrayIndex_t          *pSurvivorStateHistoryTable,
+ *  SLArrayIndex_t          *pSurvivorStateHistoryOffset,
+ *  SLFixData_t             *pDoTraceBackFlag,
+ *  const SLArrayIndex_t    TraceBackDepth)
  *
  * Return value:
- *   SLUInt16_t      Decoded character
+ *  SLUInt16_t      Decoded character
  *
  * Description:
- *   K=3, rate 1/2 viterbi decode a character.
+ *  K=3, rate 1/2 viterbi decode a character.
  *
  ********************************************************/
 
@@ -367,17 +367,17 @@ const SLUInt16_t siglib_numerix_V32RxStateTransitionMap[SIGLIB_VITV32_NUMBER_OF_
  * Function: SDS_ConvEncoderV32
  *
  * Parameters:
- *   SLChar_t SrcNibble, Source nibble
- *   SLArrayIndex_t *pDiffEncState,      Differential encoder state
- *   SLArrayIndex_t *pEncoderState)      Convolutional encoder state variable
+ *  SLChar_t SrcNibble, Source nibble
+ *  SLArrayIndex_t *pDiffEncState,      Differential encoder state
+ *  SLArrayIndex_t *pEncoderState)      Convolutional encoder state variable
  *
  * Return value:
- *   SLUInt16_t      Encoded character
+ *  SLUInt16_t      Encoded character
  *
  * Description:
- *   V.32 convolutional encode a nibble (4 bits). This
- *   function also includes differential encoding and
- *   QAM mapping.
+ *  V.32 convolutional encode a nibble (4 bits). This
+ *  function also includes differential encoding and
+ *  QAM mapping.
  *
  ********************************************************/
 
@@ -411,17 +411,17 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_ConvEncoderV32(SLChar_t SrcNibble,
  * Function: SIF_ViterbiDecoderV32
  *
  * Parameters:
- *   double                  *pAccumulatedErrorTable,
- *   SLArrayIndex_t          *pSurvivorStateHistoryTable,
- *   SLArrayIndex_t          *pSurvivorStateHistoryOffset,
- *   SLFixData_t             *pDoTraceBackFlag,
- *   const SLArrayIndex_t    TraceBackDepth)
+ *  double                  *pAccumulatedErrorTable,
+ *  SLArrayIndex_t          *pSurvivorStateHistoryTable,
+ *  SLArrayIndex_t          *pSurvivorStateHistoryOffset,
+ *  SLFixData_t             *pDoTraceBackFlag,
+ *  const SLArrayIndex_t    TraceBackDepth)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the V.32 viterbi decoder.
+ *  Initialise the V.32 viterbi decoder.
  *
  ********************************************************/
 
@@ -447,22 +447,22 @@ void SIGLIB_FUNC_DECL SIF_ViterbiDecoderV32(SLData_t* pAccumulatedErrorTable, SL
  * Function: SDS_ViterbiDecoderV32
  *
  * Parameters:
- *   SLComplexRect_s Src,    Source channel data
- *   SLData_t                *pAccumulatedErrorTable,
- *   SLArrayIndex_t          *pSurvivorStateHistoryTable,
- *   SLArrayIndex_t          *pSurvivorStateHistoryOffset,
- *   SLArrayIndex_t          *pQ4Q3HistoryTable,
- *   SLArrayIndex_t          *pDiffEncState,
- *   SLFixData_t             *pDoTraceBackFlag,
- *   const SLArrayIndex_t    TraceBackDepth)
+ *  SLComplexRect_s Src,    Source channel data
+ *  SLData_t                *pAccumulatedErrorTable,
+ *  SLArrayIndex_t          *pSurvivorStateHistoryTable,
+ *  SLArrayIndex_t          *pSurvivorStateHistoryOffset,
+ *  SLArrayIndex_t          *pQ4Q3HistoryTable,
+ *  SLArrayIndex_t          *pDiffEncState,
+ *  SLFixData_t             *pDoTraceBackFlag,
+ *  const SLArrayIndex_t    TraceBackDepth)
  *
  * Return value:
- *   SLChar_t        Decoded character
+ *  SLChar_t        Decoded character
  *
  * Description:
- *   V.32 Viterbi decode a nibble (4 bits) from the
- *   received channel sample. This function also
- *   includes differential decoding
+ *  V.32 Viterbi decode a nibble (4 bits) from the
+ *  received channel sample. This function also
+ *  includes differential decoding
  *
  ********************************************************/
 

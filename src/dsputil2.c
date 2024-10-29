@@ -48,16 +48,16 @@ Description: DSP maths utility functions, for SigLib DSP library.
  * Function: SDA_RealSpectralInverse
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Invert the spectrum of a real signal, in the time
- *   domain.
+ *  Invert the spectrum of a real signal, in the time
+ *  domain.
  *
  ********************************************************/
 
@@ -86,18 +86,18 @@ void SIGLIB_FUNC_DECL SDA_RealSpectralInverse(const SLData_t* SIGLIB_PTR_DECL pS
  * Function: SDA_ComplexSpectralInverse
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   SLData_t * SIGLIB_PTR_DECL pRealDst,
- *   SLData_t * SIGLIB_PTR_DECL pImagDst,
- *   const SLArrayIndex_t ArrayLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  SLData_t * SIGLIB_PTR_DECL pRealDst,
+ *  SLData_t * SIGLIB_PTR_DECL pImagDst,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Invert the spectrum of a complex signal, in the
- *   time domain.
+ *  Invert the spectrum of a complex signal, in the
+ *  time domain.
  *
  ********************************************************/
 
@@ -131,20 +131,20 @@ void SIGLIB_FUNC_DECL SDA_ComplexSpectralInverse(const SLData_t* SIGLIB_PTR_DECL
  * Function: SDA_FdInterpolate
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   SLData_t * SIGLIB_PTR_DECL pRealDst,
- *   SLData_t * SIGLIB_PTR_DECL pImagDst,
- *   const SLFixData_t RatioUp,
- *   const SLFixData_t RatioDown,
- *   const SLArrayIndex_t sampleLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  SLData_t * SIGLIB_PTR_DECL pRealDst,
+ *  SLData_t * SIGLIB_PTR_DECL pImagDst,
+ *  const SLFixData_t RatioUp,
+ *  const SLFixData_t RatioDown,
+ *  const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Interpolate a signal, in the frequency domain, to
- *   shift the frequency up, or down.
+ *  Interpolate a signal, in the frequency domain, to
+ *  shift the frequency up, or down.
  *
  ********************************************************/
 
@@ -254,21 +254,21 @@ void SIGLIB_FUNC_DECL SDA_FdInterpolate(const SLData_t* SIGLIB_PTR_DECL pSrcReal
  * Function: SDA_FdInterpolate2
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   SLData_t * SIGLIB_PTR_DECL pRealDst,
- *   SLData_t * SIGLIB_PTR_DECL pImagDst,
- *   const SLArrayIndex_t SrcsampleLength,
- *   const SLArrayIndex_t DstsampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  SLData_t * SIGLIB_PTR_DECL pRealDst,
+ *  SLData_t * SIGLIB_PTR_DECL pImagDst,
+ *  const SLArrayIndex_t SrcsampleLength,
+ *  const SLArrayIndex_t DstsampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Interpolate a signal, in the frequency domain, to
- *   increase the number of samples in the ouput array
- *   This algorithm is equivalent to a sin(x)/x
- *   time domain interpolation process.
+ *  Interpolate a signal, in the frequency domain, to
+ *  increase the number of samples in the ouput array
+ *  This algorithm is equivalent to a sin(x)/x
+ *  time domain interpolation process.
  *
  ********************************************************/
 
@@ -322,20 +322,20 @@ void SIGLIB_FUNC_DECL SDA_FdInterpolate2(const SLData_t* SIGLIB_PTR_DECL pSrcRea
  * Function: SDS_TdPitchShift
  *
  * Parameters:
- *   const SLData_t Sample,
- *   SLData_t * SIGLIB_PTR_DECL pShiftArray,
- *   SLArrayIndex_t * SIGLIB_PTR_DECL pShiftArrayOffsetIn,
- *   SLData_t * SIGLIB_PTR_DECL pShiftArrayOffsetOut,
- *   SLData_t * SIGLIB_PTR_DECL pPreviousSample,
- *   const SLData_t ShiftRatio,
- *   const SLArrayIndex_t ShiftArrayLength)
+ *  const SLData_t Sample,
+ *  SLData_t * SIGLIB_PTR_DECL pShiftArray,
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL pShiftArrayOffsetIn,
+ *  SLData_t * SIGLIB_PTR_DECL pShiftArrayOffsetOut,
+ *  SLData_t * SIGLIB_PTR_DECL pPreviousSample,
+ *  const SLData_t ShiftRatio,
+ *  const SLArrayIndex_t ShiftArrayLength)
  *
  * Return value:
- *   Shifted sample.
+ *  Shifted sample.
  *
  * Description:
- *   Pitch shift a sample, in the time domain, using a
- *   circular array, will shift the frequency up, or down.
+ *  Pitch shift a sample, in the time domain, using a
+ *  circular array, will shift the frequency up, or down.
  *
  ********************************************************/
 
@@ -383,23 +383,23 @@ SLData_t SIGLIB_FUNC_DECL SDS_TdPitchShift(const SLData_t Sample, SLData_t* SIGL
  * Function: SDA_TdPitchShift
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc
- *   SLData_t * SIGLIB_PTR_DECL pDst
- *   SLData_t * SIGLIB_PTR_DECL pShiftArray,
- *   SLArrayIndex_t * SIGLIB_PTR_DECL pShiftArrayOffsetIn,
- *   SLData_t * SIGLIB_PTR_DECL pShiftArrayOffsetOut,
- *   SLData_t * SIGLIB_PTR_DECL pPreviousSample,
- *   const SLData_t ShiftRatio,
- *   const SLArrayIndex_t ShiftArrayLength,
- *   const SLArrayIndex_t    sampleLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc
+ *  SLData_t * SIGLIB_PTR_DECL pDst
+ *  SLData_t * SIGLIB_PTR_DECL pShiftArray,
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL pShiftArrayOffsetIn,
+ *  SLData_t * SIGLIB_PTR_DECL pShiftArrayOffsetOut,
+ *  SLData_t * SIGLIB_PTR_DECL pPreviousSample,
+ *  const SLData_t ShiftRatio,
+ *  const SLArrayIndex_t ShiftArrayLength,
+ *  const SLArrayIndex_t    sampleLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Pitch shift an array of samples, in the time domain,
- *   using a circular array, will shift the frequency
- *   up, or down.
+ *  Pitch shift an array of samples, in the time domain,
+ *  using a circular array, will shift the frequency
+ *  up, or down.
  *
  ********************************************************/
 
@@ -451,22 +451,22 @@ void SIGLIB_FUNC_DECL SDA_TdPitchShift(const SLData_t* SIGLIB_PTR_DECL pSrc, SLD
  * Function: SDS_EchoGenerate()
  *
  * Parameters:
- *   const SLData_t Sample,
- *   SLData_t * SIGLIB_PTR_DECL EchoArray,
- *   SLArrayIndex_t * SIGLIB_PTR_DECL EchoArrayOffsetIn,
- *   const SLData_t EchoDelay,
- *   const SLData_t EchoDecay,
- *   const enum SLEcho_t EchoType,
- *   const SLArrayIndex_t EchoArrayLength)
+ *  const SLData_t Sample,
+ *  SLData_t * SIGLIB_PTR_DECL EchoArray,
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL EchoArrayOffsetIn,
+ *  const SLData_t EchoDelay,
+ *  const SLData_t EchoDecay,
+ *  const enum SLEcho_t EchoType,
+ *  const SLArrayIndex_t EchoArrayLength)
  *
  * Return value:
- *   Echoed sample.
+ *  Echoed sample.
  *
  * Description:
- *   Echo a sample, by delaying it and adding it to the
- *   original data sample, using a circular array.
- *   SIGLIB_ECHO produces a feedback echo.
- *   SIGLIB_REVERB produces a feedforward echo.
+ *  Echo a sample, by delaying it and adding it to the
+ *  original data sample, using a circular array.
+ *  SIGLIB_ECHO produces a feedback echo.
+ *  SIGLIB_REVERB produces a feedforward echo.
  *
  ********************************************************/
 
@@ -521,16 +521,16 @@ SLData_t SIGLIB_FUNC_DECL SDS_EchoGenerate(const SLData_t Sample, SLData_t* SIGL
  * Function: SDA_Power
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc   - Pointer to source array
- *   SLData_t * SIGLIB_PTR_DECL pDst     - Pointer to destination array
- *   const SLData_t power,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc   - Pointer to source array
+ *  SLData_t * SIGLIB_PTR_DECL pDst     - Pointer to destination array
+ *  const SLData_t power,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Raise each entry in a array to a power.
+ *  Raise each entry in a array to a power.
  *
  ********************************************************/
 
@@ -555,19 +555,19 @@ void SIGLIB_FUNC_DECL SDA_Power(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* 
  * Function: SDS_Polynomial
  *
  * Parameters:
- *   const SLData_t data - input sample
- *   const SLData_t y0   - x^0 coefficient
- *   const SLData_t y1   - x^1 coefficient
- *   const SLData_t y2   - x^2 coefficient
- *   const SLData_t y3   - x^3 coefficient
- *   const SLData_t y4   - x^4 coefficient
- *   const SLData_t y5   - x^5 coefficient
+ *  const SLData_t data - input sample
+ *  const SLData_t y0   - x^0 coefficient
+ *  const SLData_t y1   - x^1 coefficient
+ *  const SLData_t y2   - x^2 coefficient
+ *  const SLData_t y3   - x^3 coefficient
+ *  const SLData_t y4   - x^4 coefficient
+ *  const SLData_t y5   - x^5 coefficient
  *
  * Return value:
- *   SLData_t Sample
+ *  SLData_t Sample
  *
  * Description: Expand the data using the supplied
- *   polynomial coefficients.
+ *  polynomial coefficients.
  *
  ********************************************************/
 
@@ -582,21 +582,21 @@ SLData_t SIGLIB_FUNC_DECL SDS_Polynomial(const SLData_t data, const SLData_t y0,
  * Function: SDA_Polynomial
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc   - Pointer to source array
- *   SLData_t * SIGLIB_PTR_DECL pDst     - Pointer to destination array
- *   const SLData_t y0       - x^0 coefficient
- *   const SLData_t y1       - x^1 coefficient
- *   const SLData_t y2       - x^2 coefficient
- *   const SLData_t y3       - x^3 coefficient
- *   const SLData_t y4       - x^4 coefficient
- *   const SLData_t y5       - x^5 coefficient
- *   const SLArrayIndex_t sampleLength   - array length
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc   - Pointer to source array
+ *  SLData_t * SIGLIB_PTR_DECL pDst     - Pointer to destination array
+ *  const SLData_t y0       - x^0 coefficient
+ *  const SLData_t y1       - x^1 coefficient
+ *  const SLData_t y2       - x^2 coefficient
+ *  const SLData_t y3       - x^3 coefficient
+ *  const SLData_t y4       - x^4 coefficient
+ *  const SLData_t y5       - x^5 coefficient
+ *  const SLArrayIndex_t sampleLength   - array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Expand the data in the array using the
- *   supplied polynomial coefficients.
+ *  supplied polynomial coefficients.
  *
  ********************************************************/
 
@@ -619,12 +619,12 @@ void SIGLIB_FUNC_DECL SDA_Polynomial(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDat
  * Function: SDS_Modulo
  *
  * Parameters:
- *   const SLData_t Sample - Input sample
- *   const SLData_t Modulo - Modulo number
- *   const enum SLModuloMode_t ModuloType - Mode
+ *  const SLData_t Sample - Input sample
+ *  const SLData_t Modulo - Modulo number
+ *  const enum SLModuloMode_t ModuloType - Mode
  *
  * Return value:
- *   Modulo N data
+ *  Modulo N data
  *
  * Description: Rewrite the data as modulo N data.
  *
@@ -665,14 +665,14 @@ SLData_t SIGLIB_FUNC_DECL SDS_Modulo(const SLData_t Sample, const SLData_t Modul
  * Function: SDA_Modulo
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pDst   - Pointer to source array
- *   SLData_t * SIGLIB_PTR_DECL pDst     - Pointer to destination array
- *   const SLData_t Modulo               - Modulo number
- *   const enum SLModuloMode_t ModuloType    - Mode
- *   const SLArrayIndex_t sampleLength   - Array length
+ *  const SLData_t * SIGLIB_PTR_DECL pDst   - Pointer to source array
+ *  SLData_t * SIGLIB_PTR_DECL pDst     - Pointer to destination array
+ *  const SLData_t Modulo               - Modulo number
+ *  const enum SLModuloMode_t ModuloType    - Mode
+ *  const SLArrayIndex_t sampleLength   - Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Rewrite the data as modulo N data.
  *
@@ -727,10 +727,10 @@ void SIGLIB_FUNC_DECL SDA_Modulo(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  * Function: SDA_AgcPeak
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc   - Pointer to source array
- *   SLData_t * SIGLIB_PTR_DECL pDst     - Pointer to destination array
- *   const SLData_t DesiredMagnitude     - Desired signal magnitude to attain
- *   const SLData_t MinThreshold         - Threshold below which gain should not
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc   - Pointer to source array
+ *  SLData_t * SIGLIB_PTR_DECL pDst     - Pointer to destination array
+ *  const SLData_t DesiredMagnitude     - Desired signal magnitude to attain
+ *  const SLData_t MinThreshold         - Threshold below which gain should not
  *be controlled const SLData_t AttackSensitivity    - Sensitivity of attack gain
  *adjustment to error const SLData_t DecaySensitivity     - Sensitivity of decay
  *gain adjustment to error SLData_t * SIGLIB_PTR_DECL pGain    - Pointer to
@@ -740,22 +740,22 @@ void SIGLIB_FUNC_DECL SDA_Modulo(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
  *Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Control the signal amplitude, using the
- *   gain control by size of error algorithm.
+ *  gain control by size of error algorithm.
  *
- *   Notes:
- *   The initial gain (pGain) should be 1.0 on the
- *   first iteration of this function.
- *   The DesiredMagnitude is the level to which the magnitude
- *   will tend towards.
- *   The AttackSensitivity is the amount by which the gain
- *   will be incremented when modified.
- *   The DecaySensitivity is the amount by which the gain
- *   will be decremented when modified.
- *   The sampleLength should be an integer multiple of
- *   the SubsampleLength.
+ *  Notes:
+ *  The initial gain (pGain) should be 1.0 on the
+ *  first iteration of this function.
+ *  The DesiredMagnitude is the level to which the magnitude
+ *  will tend towards.
+ *  The AttackSensitivity is the amount by which the gain
+ *  will be incremented when modified.
+ *  The DecaySensitivity is the amount by which the gain
+ *  will be decremented when modified.
+ *  The sampleLength should be an integer multiple of
+ *  the SubsampleLength.
  *
  ********************************************************/
 
@@ -813,18 +813,18 @@ void SIGLIB_FUNC_DECL SDA_AgcPeak(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
  * Function: SIF_AgcMeanAbs
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pState,  - Moving average state array
- *   SLArrayIndex_t *pStateIndex,        - Moving average state array index
- *   SLData_t * pMeanSum,                - Pointer to moving average sum
- *   SLData_t * pGain,                   - Pointer to AGC gain
- *   SLData_t * pDesiredMeanScaled,      - Pointer to scaled desired mean level
- *   SLData_t * pThresholdScaled,        - Pointer to threshold mean level
- *   const SLData_t DesiredLevel,        - Desired level of AGC output
- *   const SLData_t Threshold,           - Threshold for update of AGC
- *   const SLArrayIndex_t MeanLength,    - Length of moving average state array
+ *  SLData_t * SIGLIB_PTR_DECL pState,  - Moving average state array
+ *  SLArrayIndex_t *pStateIndex,        - Moving average state array index
+ *  SLData_t * pMeanSum,                - Pointer to moving average sum
+ *  SLData_t * pGain,                   - Pointer to AGC gain
+ *  SLData_t * pDesiredMeanScaled,      - Pointer to scaled desired mean level
+ *  SLData_t * pThresholdScaled,        - Pointer to threshold mean level
+ *  const SLData_t DesiredLevel,        - Desired level of AGC output
+ *  const SLData_t Threshold,           - Threshold for update of AGC
+ *  const SLArrayIndex_t MeanLength,    - Length of moving average state array
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialize the SDA_AgcMeanAbs function.
  *
@@ -850,34 +850,34 @@ void SIGLIB_FUNC_DECL SIF_AgcMeanAbs(SLData_t* SIGLIB_PTR_DECL pState, SLArrayIn
  * Function: SDA_AgcMeanAbs
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Source array
- *   SLData_t * SIGLIB_PTR_DECL pDst,    - Destination array
- *   const SLData_t DesiredMeanScaled,   - Desired scaled value
- *   const SLData_t ThresholdScaled,     - Threshold scaled value
- *   const SLData_t AttackSensitivity,   - Attack sensitivity
- *   const SLData_t DecaySensitivity,    - Decay sensitivity
- *   SLData_t * SIGLIB_PTR_DECL pState,  - Moving average state array
- *   SLArrayIndex_t *pStateIndex,        - Moving average state array index
- *   SLData_t * pMeanSum,                - Pointer to moving average sum
- *   SLData_t * pGain,                   - Pointer to AGC gain
- *   const SLArrayIndex_t MeanLength,    - Length of moving average state array
- *   const SLArrayIndex_t sampleLength   - Length of input array
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  - Source array
+ *  SLData_t * SIGLIB_PTR_DECL pDst,    - Destination array
+ *  const SLData_t DesiredMeanScaled,   - Desired scaled value
+ *  const SLData_t ThresholdScaled,     - Threshold scaled value
+ *  const SLData_t AttackSensitivity,   - Attack sensitivity
+ *  const SLData_t DecaySensitivity,    - Decay sensitivity
+ *  SLData_t * SIGLIB_PTR_DECL pState,  - Moving average state array
+ *  SLArrayIndex_t *pStateIndex,        - Moving average state array index
+ *  SLData_t * pMeanSum,                - Pointer to moving average sum
+ *  SLData_t * pGain,                   - Pointer to AGC gain
+ *  const SLArrayIndex_t MeanLength,    - Length of moving average state array
+ *  const SLArrayIndex_t sampleLength   - Length of input array
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Control the signal amplitude, using the
- *   gain control by size of error of the mean levels algorithm.
+ *  gain control by size of error of the mean levels algorithm.
  *
- *   Notes:
- *   The initial gain (PrevGain) should be 1.0 on the
- *   first iteration of this function.
- *   The DesiredMagnitude is the level to which the magnitude
- *   will tend towards.
- *   The AttackSensitivity is the amount by which the gain
- *   will be incremented when modified.
- *   The DecaySensitivity is the amount by which the gain
- *   will be decremented when modified.
+ *  Notes:
+ *  The initial gain (PrevGain) should be 1.0 on the
+ *  first iteration of this function.
+ *  The DesiredMagnitude is the level to which the magnitude
+ *  will tend towards.
+ *  The AttackSensitivity is the amount by which the gain
+ *  will be incremented when modified.
+ *  The DecaySensitivity is the amount by which the gain
+ *  will be decremented when modified.
  *
  ********************************************************/
 
@@ -941,18 +941,18 @@ void SIGLIB_FUNC_DECL SDA_AgcMeanAbs(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDat
  * Function: SIF_AgcMeanSquared
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pState,  - Moving average state array
- *   SLArrayIndex_t *pStateIndex,        - Moving average state array index
- *   SLData_t * pMeanSum,                - Pointer to moving average sum
- *   SLData_t * pGain,                   - Pointer to AGC gain
- *   SLData_t * pDesiredMeanSquaredScaled,   - Pointer to scaled desired mean
+ *  SLData_t * SIGLIB_PTR_DECL pState,  - Moving average state array
+ *  SLArrayIndex_t *pStateIndex,        - Moving average state array index
+ *  SLData_t * pMeanSum,                - Pointer to moving average sum
+ *  SLData_t * pGain,                   - Pointer to AGC gain
+ *  SLData_t * pDesiredMeanSquaredScaled,   - Pointer to scaled desired mean
  *squared level SLData_t * pThresholdScaled,        - Pointer to threshold mean
  *squared level const SLData_t DesiredLevel,        - Desired level of AGC
  *output const SLData_t Threshold,           - Threshold for update of AGC const
  *SLArrayIndex_t MeanLength,    - Length of moving average state array
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialize the SDA_AgcMeanSquared function.
  *
@@ -982,34 +982,34 @@ void SIGLIB_FUNC_DECL SIF_AgcMeanSquared(SLData_t* SIGLIB_PTR_DECL pState, SLArr
  * Function: SDA_AgcMeanSquared
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Source array
- *   SLData_t * SIGLIB_PTR_DECL pDst,    - Destination array
- *   const SLData_t DesiredMeanSquaredScaled,    - Desired scaled value
- *   const SLData_t ThresholdScaled,     - Threshold scaled value
- *   const SLData_t AttackSensitivity,   - Attack sensitivity
- *   const SLData_t DecaySensitivity,    - Decay sensitivity
- *   SLData_t * SIGLIB_PTR_DECL pState,  - Moving average state array
- *   SLArrayIndex_t *pStateIndex,        - Moving average state array index
- *   SLData_t * pMeanSum,                - Pointer to moving average sum
- *   SLData_t * pGain,                   - Pointer to AGC gain
- *   const SLArrayIndex_t MeanLength,    - Length of moving average state array
- *   const SLArrayIndex_t sampleLength   - Length of input array
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  - Source array
+ *  SLData_t * SIGLIB_PTR_DECL pDst,    - Destination array
+ *  const SLData_t DesiredMeanSquaredScaled,    - Desired scaled value
+ *  const SLData_t ThresholdScaled,     - Threshold scaled value
+ *  const SLData_t AttackSensitivity,   - Attack sensitivity
+ *  const SLData_t DecaySensitivity,    - Decay sensitivity
+ *  SLData_t * SIGLIB_PTR_DECL pState,  - Moving average state array
+ *  SLArrayIndex_t *pStateIndex,        - Moving average state array index
+ *  SLData_t * pMeanSum,                - Pointer to moving average sum
+ *  SLData_t * pGain,                   - Pointer to AGC gain
+ *  const SLArrayIndex_t MeanLength,    - Length of moving average state array
+ *  const SLArrayIndex_t sampleLength   - Length of input array
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Control the signal amplitude, using the
- *   gain control by size of error of the mean levels algorithm.
+ *  gain control by size of error of the mean levels algorithm.
  *
- *   Notes:
- *   The initial gain (PrevGain) should be 1.0 on the
- *   first iteration of this function.
- *   The DesiredMagnitude is the level to which the magnitude
- *   will tend towards.
- *   The AttackSensitivity is the amount by which the gain
- *   will be incremented when modified.
- *   The DecaySensitivity is the amount by which the gain
- *   will be decremented when modified.
+ *  Notes:
+ *  The initial gain (PrevGain) should be 1.0 on the
+ *  first iteration of this function.
+ *  The DesiredMagnitude is the level to which the magnitude
+ *  will tend towards.
+ *  The AttackSensitivity is the amount by which the gain
+ *  will be incremented when modified.
+ *  The DecaySensitivity is the amount by which the gain
+ *  will be decremented when modified.
  *
  ********************************************************/
 
@@ -1070,7 +1070,7 @@ void SIGLIB_FUNC_DECL SDA_AgcMeanSquared(const SLData_t* SIGLIB_PTR_DECL pSrc, S
  * Function: SIF_AgcEnvelopeDetector
  *
  * Parameters:
- *   const SLData_t envelopeDetectorTimeConstant,  - Envelope detector time
+ *  const SLData_t envelopeDetectorTimeConstant,  - Envelope detector time
  *constant const SLData_t sampleRate,                    - Sample rate SLData_t
  **pState,                             - Pointer to envelope detector state
  *variable SLData_t * pOnePoleCoefficient,               - Pointer to envelope
@@ -1078,7 +1078,7 @@ void SIGLIB_FUNC_DECL SDA_AgcMeanSquared(const SLData_t* SIGLIB_PTR_DECL pSrc, S
  *to AGC gain
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialize the AGC Envelope Detector functions.
  *
@@ -1099,35 +1099,35 @@ void SIGLIB_FUNC_DECL SIF_AgcEnvelopeDetector(const SLData_t envelopeDetectorTim
  * Function: SDS_AgcEnvelopeDetector
  *
  * Parameters:
- *   const SLData_t src,                     - Source sample
- *   const SLData_t desiredLevel,            - Desired level
- *   const SLData_t minThresholdLevel,       - Minimum threshold level
- *   const SLData_t AttackSensitivitySlow,   - Attack sensitivity - slow
- *   const SLData_t DecaySensitivitySlow,    - Decay sensitivity - slow
- *   const SLData_t AttackSensitivityFast,   - Attack sensitivity - fast
- *   const SLData_t DecaySensitivityFast,    - Decay sensitivity - fast
- *   SLData_t * SIGLIB_PTR_DECL pState,      - Pointer to envelope detector
+ *  const SLData_t src,                     - Source sample
+ *  const SLData_t desiredLevel,            - Desired level
+ *  const SLData_t minThresholdLevel,       - Minimum threshold level
+ *  const SLData_t AttackSensitivitySlow,   - Attack sensitivity - slow
+ *  const SLData_t DecaySensitivitySlow,    - Decay sensitivity - slow
+ *  const SLData_t AttackSensitivityFast,   - Attack sensitivity - fast
+ *  const SLData_t DecaySensitivityFast,    - Decay sensitivity - fast
+ *  SLData_t * SIGLIB_PTR_DECL pState,      - Pointer to envelope detector
  *state variable SLData_t envelopeDetectorCoeff,         - Envelope detector
  *coefficient SLData_t * pGain,                       - Pointer to AGC gain
- *   const SLData_t maxGain,                 - Maximum gain
- *   const SLData_t maxAttenuation           - Maximum attenuation
- *   const SLArrayIndex_t sampleLength       - Length of input array
+ *  const SLData_t maxGain,                 - Maximum gain
+ *  const SLData_t maxAttenuation           - Maximum attenuation
+ *  const SLArrayIndex_t sampleLength       - Length of input array
  *
  * Return value:
- *   AGC'd result
+ *  AGC'd result
  *
  * Description: Control the signal amplitude, using the
- *   gain control by size of error of the envelope following algorithm.
+ *  gain control by size of error of the envelope following algorithm.
  *
- *   Notes:
- *   The initial gain should be 1.0 on the first iteration
- *   of this function.
- *   The desiredLevel is the level to which the magnitude
- *   will tend towards.
- *   The AttackSensitivity(Slow/Fast) is the amount by which the gain
- *   will be incremented when modified.
- *   The DecaySensitivity(Slow/Fast) is the amount by which the gain
- *   will be decremented when modified.
+ *  Notes:
+ *  The initial gain should be 1.0 on the first iteration
+ *  of this function.
+ *  The desiredLevel is the level to which the magnitude
+ *  will tend towards.
+ *  The AttackSensitivity(Slow/Fast) is the amount by which the gain
+ *  will be incremented when modified.
+ *  The DecaySensitivity(Slow/Fast) is the amount by which the gain
+ *  will be decremented when modified.
  *
  ********************************************************/
 
@@ -1209,36 +1209,36 @@ SLData_t SIGLIB_FUNC_DECL SDS_AgcEnvelopeDetector(const SLData_t src, const SLDa
  * Function: SDA_AgcEnvelopeDetector
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  - Source array
- *   SLData_t * SIGLIB_PTR_DECL pDst,        - Destination array
- *   const SLData_t desiredLevel,            - Desired level
- *   const SLData_t minThresholdLevel,       - Minimum threshold level
- *   const SLData_t AttackSensitivitySlow,   - Attack sensitivity - slow
- *   const SLData_t DecaySensitivitySlow,    - Decay sensitivity - slow
- *   const SLData_t AttackSensitivityFast,   - Attack sensitivity - fast
- *   const SLData_t DecaySensitivityFast,    - Decay sensitivity - fast
- *   SLData_t * SIGLIB_PTR_DECL pState,      - Pointer to envelope detector
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  - Source array
+ *  SLData_t * SIGLIB_PTR_DECL pDst,        - Destination array
+ *  const SLData_t desiredLevel,            - Desired level
+ *  const SLData_t minThresholdLevel,       - Minimum threshold level
+ *  const SLData_t AttackSensitivitySlow,   - Attack sensitivity - slow
+ *  const SLData_t DecaySensitivitySlow,    - Decay sensitivity - slow
+ *  const SLData_t AttackSensitivityFast,   - Attack sensitivity - fast
+ *  const SLData_t DecaySensitivityFast,    - Decay sensitivity - fast
+ *  SLData_t * SIGLIB_PTR_DECL pState,      - Pointer to envelope detector
  *state variable SLData_t envelopeDetectorCoeff,         - Envelope detector
  *coefficient SLData_t * pGain,                       - Pointer to AGC gain
- *   const SLData_t maxGain,                 - Maximum gain
- *   const SLData_t maxAttenuation           - Maximum attenuation
- *   const SLArrayIndex_t sampleLength       - Length of input array
+ *  const SLData_t maxGain,                 - Maximum gain
+ *  const SLData_t maxAttenuation           - Maximum attenuation
+ *  const SLArrayIndex_t sampleLength       - Length of input array
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Control the signal amplitude, using the
- *   gain control by size of error of the envelope following algorithm.
+ *  gain control by size of error of the envelope following algorithm.
  *
- *   Notes:
- *   The initial gain should be 1.0 on the first iteration
- *   of this function.
- *   The desiredLevel is the level to which the magnitude
- *   will tend towards.
- *   The AttackSensitivity(Slow/Fast) is the amount by which the gain
- *   will be incremented when modified.
- *   The DecaySensitivity(Slow/Fast) is the amount by which the gain
- *   will be decremented when modified.
+ *  Notes:
+ *  The initial gain should be 1.0 on the first iteration
+ *  of this function.
+ *  The desiredLevel is the level to which the magnitude
+ *  will tend towards.
+ *  The AttackSensitivity(Slow/Fast) is the amount by which the gain
+ *  will be incremented when modified.
+ *  The DecaySensitivity(Slow/Fast) is the amount by which the gain
+ *  will be decremented when modified.
  *
  ********************************************************/
 
@@ -1328,10 +1328,10 @@ void SIGLIB_FUNC_DECL SDA_AgcEnvelopeDetector(const SLData_t* SIGLIB_PTR_DECL pS
  * Function: SIF_Drc
  *
  * Parameters:
- *   SLData_t *envelopeState)                - Envelope follower state variable
+ *  SLData_t *envelopeState)                - Envelope follower state variable
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialize the dynamic range compression functions
  *
@@ -1350,8 +1350,8 @@ void SIGLIB_FUNC_DECL SIF_Drc(const SLData_t envelopeDetectorTimeConstant, const
  * Function: SDS_Drc
  *
  * Parameters:
- *   const SLData_t input,                     - Input sample
- *   SLData_t *envelopeState,                  - Envelope follower state
+ *  const SLData_t input,                     - Input sample
+ *  SLData_t *envelopeState,                  - Envelope follower state
  *variable const SLData_t envelopeOnePoleCoeff,      - Envelope follower
  *one-pole filter coefficient const SLData_t envelopeThreshold,         -
  *Envelope follower threshold to enable DRC functionality const
@@ -1360,7 +1360,7 @@ void SIGLIB_FUNC_DECL SIF_Drc(const SLData_t envelopeDetectorTimeConstant, const
  *makeupGain)                - Makeup gain
  *
  * Return value:
- *   Compressed value
+ *  Compressed value
  *
  * Description: Apply dynamic range compression to the input samples
  *
@@ -1405,9 +1405,9 @@ SLData_t SIGLIB_FUNC_DECL SDS_Drc(const SLData_t input, SLData_t* envelopeState,
  * Function: SDA_Drc
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,    - Source array
- *   SLData_t * SIGLIB_PTR_DECL pDst,          - Destination array
- *   SLData_t *envelopeState,                  - Envelope follower state
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,    - Source array
+ *  SLData_t * SIGLIB_PTR_DECL pDst,          - Destination array
+ *  SLData_t *envelopeState,                  - Envelope follower state
  *variable const SLData_t envelopeOnePoleCoeff,      - Envelope follower
  *one-pole filter coefficient const SLData_t envelopeThreshold,         -
  *Envelope follower threshold to enable DRC functionality const
@@ -1417,7 +1417,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Drc(const SLData_t input, SLData_t* envelopeState,
  *Sample length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Apply dynamic range compression to the input samples
  *
@@ -1465,13 +1465,13 @@ void SIGLIB_FUNC_DECL SDA_Drc(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SI
  * Function: SDA_GroupDelay()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   SLData_t * SIGLIB_PTR_DECL PreviousPhase,   - Pointer to previous phase
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  SLData_t * SIGLIB_PTR_DECL PreviousPhase,   - Pointer to previous phase
  *value const SLArrayIndex_t sampleLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Return group delay from phase signal.
  *
@@ -1517,17 +1517,17 @@ void SIGLIB_FUNC_DECL SDA_GroupDelay(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDat
  * Function: SDA_ZeroCrossingDetect()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  Pointer to source data array
- *   SLData_t * SIGLIB_PTR_DECL pDst,        Pointer to destn. data array
- *   SLData_t *PrevValue,                    Pointer to previous source data
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  Pointer to source data array
+ *  SLData_t * SIGLIB_PTR_DECL pDst,        Pointer to destn. data array
+ *  SLData_t *PrevValue,                    Pointer to previous source data
  *value const enum SLLevelCrossingMode_t ZXT,   Zero crossing type - +ve, -ve,
  *both const SLArrayIndex_t sampleLength);     Array length
  *
  * Return value:
- *   Number of zero crossings found.
+ *  Number of zero crossings found.
  *
  * Description: Find zero crossings in an array and store
- *   locations in destination array.
+ *  locations in destination array.
  *
  ********************************************************/
 
@@ -1609,16 +1609,16 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_ZeroCrossingDetect(const SLData_t* SIGLIB_PTR_D
  * Function: SDS_ZeroCrossingDetect()
  *
  * Parameters:
- *   const SLData_t Src,                     Source data
- *   SLData_t * PrevValue,                   Pointer to previous source data
+ *  const SLData_t Src,                     Source data
+ *  SLData_t * PrevValue,                   Pointer to previous source data
  *value const enum SLLevelCrossingMode_t ZXT)   Zero crossing type - +ve, -ve,
  *both
  *
  * Return value:
- *   Zero crossing flag
+ *  Zero crossing flag
  *
  * Description: Return '1' if a zero crossing is detected
- *   otherwise return '0'
+ *  otherwise return '0'
  *
  ********************************************************/
 
@@ -1669,17 +1669,17 @@ SLData_t SIGLIB_FUNC_DECL SDS_ZeroCrossingDetect(const SLData_t Src, SLData_t* p
  * Function: SDA_FirstZeroCrossingLocation()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  Pointer to source data array
- *   SLData_t * SIGLIB_PTR_DECL PrevValue,   Pointer to previous source data
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  Pointer to source data array
+ *  SLData_t * SIGLIB_PTR_DECL PrevValue,   Pointer to previous source data
  *value const enum SLLevelCrossingMode_t ZXT,       Zero crossing type - +ve,
  *-ve, both const SLArrayIndex_t sampleLength);     Array length
  *
  * Return value:
- *   Location of first zero crossing. If no zero crossings
- *   are located, function returns array length +1
+ *  Location of first zero crossing. If no zero crossings
+ *  are located, function returns array length +1
  *
  * Description: Locate the position of the first zero
- *   crossing in an array.
+ *  crossing in an array.
  *
  ********************************************************/
 
@@ -1742,13 +1742,13 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FirstZeroCrossingLocation(const SLData_t* SI
  * Function: SDA_ZeroCrossingCount()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  Pointer to source data array
- *   SLData_t *PrevValue,                    Pointer to previous source data
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  Pointer to source data array
+ *  SLData_t *PrevValue,                    Pointer to previous source data
  *value const enum SLLevelCrossingMode_t ZXT,   Zero crossing type - +ve, -ve,
  *both const SLArrayIndex_t sampleLength);     Array length
  *
  * Return value:
- *   Number of zero crossings found.
+ *  Number of zero crossings found.
  *
  * Description: Count the number of zero crossings in an array
  *
@@ -1812,18 +1812,18 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_ZeroCrossingCount(const SLData_t* SIGLIB_PTR_DE
  * Function: SDA_LevelCrossingDetect()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  Pointer to source data array
- *   const SLData_t DetectionLevel,          Detection level
- *   SLData_t * SIGLIB_PTR_DECL pDst,        Pointer to destn. data array
- *   SLData_t *PrevValue,                    Pointer to previous source data
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  Pointer to source data array
+ *  const SLData_t DetectionLevel,          Detection level
+ *  SLData_t * SIGLIB_PTR_DECL pDst,        Pointer to destn. data array
+ *  SLData_t *PrevValue,                    Pointer to previous source data
  *value const enum SLLevelCrossingMode_t ZXT,   Zero crossing type - +ve, -ve,
  *both const SLArrayIndex_t sampleLength);     Array length
  *
  * Return value:
- *   Number of zero crossings found.
+ *  Number of zero crossings found.
  *
  * Description: Find zero crossings in an array and store
- *   locations in destination array.
+ *  locations in destination array.
  *
  ********************************************************/
 
@@ -1906,17 +1906,17 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_LevelCrossingDetect(const SLData_t* SIGLIB_PTR_
  * Function: SDS_LevelCrossingDetect()
  *
  * Parameters:
- *   const SLData_t Src,                     Source data
- *   const SLData_t DetectionLevel,          Detection level
- *   SLData_t * PrevValue,                   Pointer to previous source data
+ *  const SLData_t Src,                     Source data
+ *  const SLData_t DetectionLevel,          Detection level
+ *  SLData_t * PrevValue,                   Pointer to previous source data
  *value const enum SLLevelCrossingMode_t ZXT)   Zero crossing type - +ve, -ve,
  *both
  *
  * Return value:
- *   Zero crossing flag
+ *  Zero crossing flag
  *
  * Description: Return '1' if a zero crossing is detected
- *   otherwise return '0'
+ *  otherwise return '0'
  *
  ********************************************************/
 
@@ -1969,18 +1969,18 @@ SLData_t SIGLIB_FUNC_DECL SDS_LevelCrossingDetect(const SLData_t Src, const SLDa
  * Function: SDA_FirstLevelCrossingLocation()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  Pointer to source data array
- *   const SLData_t DetectionLevel,          Detection level
- *   SLData_t * SIGLIB_PTR_DECL PrevValue,   Pointer to previous source data
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  Pointer to source data array
+ *  const SLData_t DetectionLevel,          Detection level
+ *  SLData_t * SIGLIB_PTR_DECL PrevValue,   Pointer to previous source data
  *value const enum SLLevelCrossingMode_t ZXT,   Zero crossing type - +ve, -ve,
  *both const SLArrayIndex_t sampleLength);     Array length
  *
  * Return value:
- *   Location of first zero crossing. If no zero crossings
- *   are located, function returns array length +1
+ *  Location of first zero crossing. If no zero crossings
+ *  are located, function returns array length +1
  *
  * Description: Locate the position of the first zero
- *   crossing in an array.
+ *  crossing in an array.
  *
  ********************************************************/
 
@@ -2044,14 +2044,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FirstLevelCrossingLocation(const SLData_t* S
  * Function: SDA_LevelCrossingCount()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  Pointer to source data array
- *   const SLData_t DetectionLevel,          Detection level
- *   SLData_t *PrevValue,                    Pointer to previous source data
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  Pointer to source data array
+ *  const SLData_t DetectionLevel,          Detection level
+ *  SLData_t *PrevValue,                    Pointer to previous source data
  *value const enum SLLevelCrossingMode_t ZXT,   Zero crossing type - +ve, -ve,
  *both const SLArrayIndex_t sampleLength);     Array length
  *
  * Return value:
- *   Number of zero crossings found.
+ *  Number of zero crossings found.
  *
  * Description: Count the number of zero crossings in an array
  *
@@ -2115,21 +2115,21 @@ SLFixData_t SIGLIB_FUNC_DECL SDA_LevelCrossingCount(const SLData_t* SIGLIB_PTR_D
  * Function: SDA_Trigger()
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,  Pointer to source data array
- *   SLData_t * SIGLIB_PTR_DECL PrevSign,    Pointer to previous source data
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,  Pointer to source data array
+ *  SLData_t * SIGLIB_PTR_DECL PrevSign,    Pointer to previous source data
  *sign const SLData_t TriggerLevel             Trigger level const enum
  *SLLevelCrossingMode_t ZXT,   Zero crossing type - +ve, -ve, both const
  *SLArrayIndex_t sampleLength);     Array length
  *
  * Return value:
- *   Location of first zero crossing where signal magnitude
- *   subsequently crosses trigger threshold.
+ *  Location of first zero crossing where signal magnitude
+ *  subsequently crosses trigger threshold.
  *
  * Description:
- *   Location of first zero crossing where signal magnitude
- *   subsequently crosses trigger threshold.
- *   If no zero crossings are located or signal does not
- *   cross threshold then function returns array length +1
+ *  Location of first zero crossing where signal magnitude
+ *  subsequently crosses trigger threshold.
+ *  If no zero crossings are located or signal does not
+ *  cross threshold then function returns array length +1
  *
  ********************************************************/
 
@@ -2192,15 +2192,15 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_Trigger(const SLData_t* SIGLIB_PTR_DECL pSrc
  * Function: SDA_ClearLocation
  *
  * Parameters:
- *   SLData_t pDst[],
- *   const SLArrayIndex_t Locn,
- *   const SLArrayIndex_t ArrayLength
+ *  SLData_t pDst[],
+ *  const SLArrayIndex_t Locn,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Clear the contents of the array at location N.
+ *  Clear the contents of the array at location N.
  *
  ********************************************************/
 
@@ -2215,17 +2215,17 @@ void SIGLIB_FUNC_DECL SDA_ClearLocation(SLData_t pDst[], const SLArrayIndex_t Lo
  * Function: SDA_SetLocation
  *
  * Parameters:
- *   SLData_t pDst[],
- *   const SLArrayIndex_t Locn,
- *   const SLData_t Val,
- *   const SLArrayIndex_t ArrayLength
+ *  SLData_t pDst[],
+ *  const SLArrayIndex_t Locn,
+ *  const SLData_t Val,
+ *  const SLArrayIndex_t ArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Set the contents of the array at location N to value
- *   Val.
+ *  Set the contents of the array at location N to value
+ *  Val.
  *
  ********************************************************/
 
@@ -2240,12 +2240,12 @@ void SIGLIB_FUNC_DECL SDA_SetLocation(SLData_t pDst[], const SLArrayIndex_t Locn
  * Function: SDA_SortMinToMax()
  *
  * Parameters:
- *   const SLData_t pSrc[],      Pointer to source data array
- *   SLData_t pDst[],            Pointer to destn. data array
- *   const SLArrayIndex_t sampleLength); Array length
+ *  const SLData_t pSrc[],      Pointer to source data array
+ *  SLData_t pDst[],            Pointer to destn. data array
+ *  const SLArrayIndex_t sampleLength); Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Sort array, minimum first, max last.
  *
@@ -2281,12 +2281,12 @@ void SIGLIB_FUNC_DECL SDA_SortMinToMax(const SLData_t pSrc[], SLData_t pDst[], c
  * Function: SDA_SortMaxToMin()
  *
  * Parameters:
- *   const SLData_t pSrc[],      Pointer to source data array
- *   SLData_t pDst[],            Pointer to destn. data array
- *   const SLArrayIndex_t sampleLength); Array length
+ *  const SLData_t pSrc[],      Pointer to source data array
+ *  SLData_t pDst[],            Pointer to destn. data array
+ *  const SLArrayIndex_t sampleLength); Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Sort array, minimum first, max last.
  *
@@ -2322,17 +2322,17 @@ void SIGLIB_FUNC_DECL SDA_SortMaxToMin(const SLData_t pSrc[], SLData_t pDst[], c
  * Function: SDA_SortMinToMax2()
  *
  * Parameters:
- *   const SLData_t pSrc1[],      Pointer to source data array #1
- *   const SLData_t pSrc2[],      Pointer to source data array #2
- *   SLData_t pDst1[],            Pointer to destn. data array #1
- *   SLData_t pDst2[],            Pointer to destn. data array #2
- *   const SLArrayIndex_t sampleLength); Array length
+ *  const SLData_t pSrc1[],      Pointer to source data array #1
+ *  const SLData_t pSrc2[],      Pointer to source data array #2
+ *  SLData_t pDst1[],            Pointer to destn. data array #1
+ *  SLData_t pDst2[],            Pointer to destn. data array #2
+ *  const SLArrayIndex_t sampleLength); Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Sort array #1, minimum first, max last.
- *   Perform same operations on array #2
+ *  Perform same operations on array #2
  *
  ********************************************************/
 
@@ -2377,17 +2377,17 @@ void SIGLIB_FUNC_DECL SDA_SortMinToMax2(const SLData_t pSrc1[], const SLData_t p
  * Function: SDA_SortMaxToMin2()
  *
  * Parameters:
- *   const SLData_t pSrc1[],      Pointer to source data array #1
- *   const SLData_t pSrc2[],      Pointer to source data array #2
- *   SLData_t pDst1[],            Pointer to destn. data array #1
- *   SLData_t pDst2[],            Pointer to destn. data array #2
- *   const SLArrayIndex_t sampleLength); Array length
+ *  const SLData_t pSrc1[],      Pointer to source data array #1
+ *  const SLData_t pSrc2[],      Pointer to source data array #2
+ *  SLData_t pDst1[],            Pointer to destn. data array #1
+ *  SLData_t pDst2[],            Pointer to destn. data array #2
+ *  const SLArrayIndex_t sampleLength); Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Sort array, minimum first, max last.
- *   Perform same operations on array #2
+ *  Perform same operations on array #2
  *
  ********************************************************/
 
@@ -2432,16 +2432,16 @@ void SIGLIB_FUNC_DECL SDA_SortMaxToMin2(const SLData_t pSrc1[], const SLData_t p
  * Function: SDA_SortIndexed()
  *
  * Parameters:
- *   const SLData_t pSrc[],          Pointer to source data array
- *   const SLArrayIndex_t pIndex[],  Pointer to output index data array
- *   SLData_t pDst[],                Pointer to destn. data array
- *   const SLArrayIndex_t            sampleLength); Array length
+ *  const SLData_t pSrc[],          Pointer to source data array
+ *  const SLArrayIndex_t pIndex[],  Pointer to output index data array
+ *  SLData_t pDst[],                Pointer to destn. data array
+ *  const SLArrayIndex_t            sampleLength); Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Sort the data, using the index array
- *   to provide the output location for the sample.
+ *  to provide the output location for the sample.
  *  Note: This function will not work in-place.
  *
  ********************************************************/
@@ -2465,67 +2465,63 @@ void SIGLIB_FUNC_DECL SDA_SortIndexed(const SLData_t pSrc[], const SLArrayIndex_
  * Function: SDS_CountOneBits()
  *
  * Parameters:
- *   const SLFixData_t Source        Input data value
+ *  const SLFixData_t         - Source fixed point number
  *
  * Return value:
- *   SLFixData_t number of one bits in word
+ *  SLFixData_t number of one bits in word
  *
  * Description: Count the number of "one" bits in the
- *   input sample.
+ *  input sample.
  *
  ********************************************************/
 
-SLFixData_t SIGLIB_FUNC_DECL SDS_CountOneBits(const SLFixData_t Source)
+SLFixData_t SIGLIB_FUNC_DECL SDS_CountOneBits(const SLFixData_t x)
 {
-  SLUFixData_t Mask = 0x01U;
-  SLFixData_t BitCount = 0;
-  for (SLFixData_t i = 0; i < SIGLIB_FIX_WORD_LENGTH; i++) {
-    if ((SLUFixData_t)Source & Mask) {
-      BitCount++;
-    }
-    Mask <<= 0x01U;
-  }
-  return (BitCount);
+  SLFixData_t localX = x;
+
+  localX = localX - ((localX >> 1) & 0x55555555);
+  localX = (localX & 0x33333333) + ((localX >> 2) & 0x33333333);
+  localX = localX + (localX >> 8);
+  localX = localX + (localX >> 16);
+  return localX & 0x0000003F;
 }    // End of SDS_CountOneBits()
 
 /********************************************************
  * Function: SDS_CountZeroBits()
  *
  * Parameters:
- *   const SLFixData_t Source        Input data value
+ *  const SLFixData_t         - Source fixed point number
  *
  * Return value:
- *   SLFixData_t number of zero bits in word
+ *  SLFixData_t number of zero bits in word
  *
  * Description: Count the number of "zero" bits in the
- *   input sample.
+ *  input sample.
  *
  ********************************************************/
 
-SLFixData_t SIGLIB_FUNC_DECL SDS_CountZeroBits(const SLFixData_t Source)
+SLFixData_t SIGLIB_FUNC_DECL SDS_CountZeroBits(const SLFixData_t x)
 {
-  SLUFixData_t Mask = 0x01U;
-  SLFixData_t BitCount = 0;
-  for (SLFixData_t i = 0; i < SIGLIB_FIX_WORD_LENGTH; i++) {
-    if (((SLUFixData_t)Source & Mask) == 0U) {
-      BitCount++;
-    }
-    Mask <<= 0x01U;
-  }
-  return (BitCount);
+  SLFixData_t localX = x;
+
+  localX = localX - ((localX >> 1) & 0x55555555);
+  localX = (localX & 0x33333333) + ((localX >> 2) & 0x33333333);
+  localX = localX + (localX >> 8);
+  localX = localX + (localX >> 16);
+  return 32 - (localX & 0x0000003F);
 }    // End of SDS_CountZeroBits()
 
 /********************************************************
  * Function: SDS_CountLeadingOneBits()
  *
  * Parameters:
- *   const SLFixData_t Source        Input data value
+ *  const SLFixData_t Source        Input data value
  *
  * Return value:
- *   SLFixData_t number of leading zero bits in word
+ *  SLFixData_t number of leading zero bits in word
  *
  * Description: Count the number of leading "zero" bits
- *   in the input sample.
+ *  in the input sample.
  *
  ********************************************************/
 
@@ -2548,13 +2544,13 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_CountLeadingOneBits(const SLFixData_t Source)
  * Function: SDS_CountLeadingZeroBits()
  *
  * Parameters:
- *   const SLFixData_t Source        Input data value
+ *  const SLFixData_t Source        Input data value
  *
  * Return value:
- *   SLFixData_t number of leading zero bits in word
+ *  SLFixData_t number of leading zero bits in word
  *
  * Description: Count the number of leading "zero" bits
- *   in the input sample.
+ *  in the input sample.
  *
  ********************************************************/
 
@@ -2577,15 +2573,15 @@ SLFixData_t SIGLIB_FUNC_DECL SDS_CountLeadingZeroBits(const SLFixData_t Source)
  * Function: SDA_Sign()
  *
  * Parameters:
- *   const SLData_t pSrc                 Input data pointer
- *   SLData_t pDst                       Output data pointer
- *   const SLArrayIndex_t sampleLength   Array length
+ *  const SLData_t pSrc                 Input data pointer
+ *  SLData_t pDst                       Output data pointer
+ *  const SLArrayIndex_t sampleLength   Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Return the sign of the values in the
- *   source vector.
+ *  source vector.
  *
  ********************************************************/
 
@@ -2614,12 +2610,12 @@ void SIGLIB_FUNC_DECL SDA_Sign(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* S
  * Function: SDA_Swap()
  *
  * Parameters:
- *   SLData_t pSrc1          Input data pointer
- *   SLData_t pSrc2          Output data pointer
- *   const SLArrayIndex_t sampleLength   Array length
+ *  SLData_t pSrc1          Input data pointer
+ *  SLData_t pSrc2          Output data pointer
+ *  const SLArrayIndex_t sampleLength   Array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Swap the elements in each array.
  *
@@ -2652,12 +2648,12 @@ void SIGLIB_FUNC_DECL SDA_Swap(SLData_t* SIGLIB_PTR_DECL pSrc1, SLData_t* SIGLIB
  * Function: SUF_ModuloIncrement()
  *
  * Parameters:
- *   const SLFixData_t Input,    Input value
- *   const SLFixData_t IncValue, Increment value
- *   const SLFixData_t Modulus   Modulo value
+ *  const SLFixData_t Input,    Input value
+ *  const SLFixData_t IncValue, Increment value
+ *  const SLFixData_t Modulus   Modulo value
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Increment a value with a modulo counter.
  *
@@ -2678,12 +2674,12 @@ SLFixData_t SIGLIB_FUNC_DECL SUF_ModuloIncrement(const SLFixData_t Input, const 
  * Function: SUF_ModuloDecrement()
  *
  * Parameters:
- *   const SLFixData_t Input,    Input value
- *   const SLFixData_t IncValue, Decrement value
- *   const SLFixData_t Modulus   Modulo value
+ *  const SLFixData_t Input,    Input value
+ *  const SLFixData_t IncValue, Decrement value
+ *  const SLFixData_t Modulus   Modulo value
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Decrement a value with a modulo counter.
  *
@@ -2704,12 +2700,12 @@ SLFixData_t SIGLIB_FUNC_DECL SUF_ModuloDecrement(const SLFixData_t Input, const 
  * Function: SUF_IndexModuloIncrement()
  *
  * Parameters:
- *   const SLArrayIndex_t Input,     Input value
- *   const SLArrayIndex_t IncValue,  Increment value
- *   const SLArrayIndex_t Modulus    Modulo value
+ *  const SLArrayIndex_t Input,     Input value
+ *  const SLArrayIndex_t IncValue,  Increment value
+ *  const SLArrayIndex_t Modulus    Modulo value
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Increment a value with a modulo counter.
  *
@@ -2730,12 +2726,12 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_IndexModuloIncrement(const SLArrayIndex_t In
  * Function: SUF_IndexModuloDecrement()
  *
  * Parameters:
- *   const SLArrayIndex_t Input,     Input value
- *   const SLArrayIndex_t IncValue,  Decrement value
- *   const SLArrayIndex_t Modulus    Modulo value
+ *  const SLArrayIndex_t Input,     Input value
+ *  const SLArrayIndex_t IncValue,  Decrement value
+ *  const SLArrayIndex_t Modulus    Modulo value
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Decrement a value with a modulo counter.
  *
@@ -2756,22 +2752,22 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_IndexModuloDecrement(const SLArrayIndex_t In
  * Function: SDA_Find
  *
  * Parameters:
- *   const SLData_t *pSrc,               - Source data array
- *   SLData_t *pDataDst,                 - Destination data array
- *   SLArrayIndex_t *pLocationDst,       - Destination index array
- *   const enum SLFindType_t FindType,   - Data types to find
- *   const SLArrayIndex_t ArrayLength)   - Array length
+ *  const SLData_t *pSrc,               - Source data array
+ *  SLData_t *pDataDst,                 - Destination data array
+ *  SLArrayIndex_t *pLocationDst,       - Destination index array
+ *  const enum SLFindType_t FindType,   - Data types to find
+ *  const SLArrayIndex_t ArrayLength)   - Array length
  *
  * Return value:
- *   Number of elements of the given type that have been found
+ *  Number of elements of the given type that have been found
  *
  * Description:
- *   Locate all the values in the source array that match
- *   the specification in 'FindType'.
+ *  Locate all the values in the source array that match
+ *  the specification in 'FindType'.
  *  Note: The output array length will be variable,
- *   dependent on the source data. The safest way to use
- *   this function is to allocate the destination arrays
- *   to have the same input lengths as the source array.
+ *  dependent on the source data. The safest way to use
+ *  this function is to allocate the destination arrays
+ *  to have the same input lengths as the source array.
  *
  ********************************************************/
 
@@ -2853,23 +2849,23 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_Find(const SLData_t* SIGLIB_PTR_DECL pSrc, S
  * Function: SDA_FindValue
  *
  * Parameters:
- *   const SLData_t *pSrc,               - Source data array
- *   const SLData_t DesiredValue,        - Desired value
- *   SLData_t *pDataDst,                 - Destination data array
- *   SLArrayIndex_t *pLocationDst,       - Destination index array
- *   const enum SLFindType_t FindType,   - Data types to find
- *   const SLArrayIndex_t ArrayLength)   - Array length
+ *  const SLData_t *pSrc,               - Source data array
+ *  const SLData_t DesiredValue,        - Desired value
+ *  SLData_t *pDataDst,                 - Destination data array
+ *  SLArrayIndex_t *pLocationDst,       - Destination index array
+ *  const enum SLFindType_t FindType,   - Data types to find
+ *  const SLArrayIndex_t ArrayLength)   - Array length
  *
  * Return value:
- *   Number of elements of the given type that have been found
+ *  Number of elements of the given type that have been found
  *
  * Description:
- *   Locate all the values in the source array that match
- *   the DesiredValue and the specification in 'FindType'.
+ *  Locate all the values in the source array that match
+ *  the DesiredValue and the specification in 'FindType'.
  *  Note: The output array length will be variable,
- *   dependent on the source data. The safest way to use
- *   this function is to allocate the destination arrays
- *   to have the same input lengths as the source array.
+ *  dependent on the source data. The safest way to use
+ *  this function is to allocate the destination arrays
+ *  to have the same input lengths as the source array.
  *
  ********************************************************/
 

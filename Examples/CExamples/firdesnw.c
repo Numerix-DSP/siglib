@@ -79,7 +79,7 @@ int main(void)
                                       // reverse address table
           FILTER_LENGTH);             // FFT length
                                       // Clear imaginary array for real inverse FFT
-  SDA_Clear(pImagData,                // Pointer to destination array
+  SDA_Zeros(pImagData,                // Pointer to destination array
             FILTER_LENGTH);           // Dataset length
 
 // Generate filter frequency response
@@ -89,7 +89,7 @@ int main(void)
   }
 
 #else    // Even-real low pass filter
-  SDA_Clear(pFilterCoeffs,     // Pointer to destination array
+  SDA_Zeros(pFilterCoeffs,     // Pointer to destination array
             FILTER_LENGTH);    // Dataset length
 
   *pFilterCoeffs = SIGLIB_ONE;    // Central frequency domain coefficient

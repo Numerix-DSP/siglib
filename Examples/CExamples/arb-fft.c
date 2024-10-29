@@ -130,7 +130,7 @@ int main(int argc, char* argv[])
   getchar();
 
   // Clear the imaginary data input
-  SDA_Clear(pImagDatac,        // Pointer to destination array
+  SDA_Zeros(pImagDatac,        // Pointer to destination array
             SAMPLE_LENGTH);    // Dataset length
 
   SDA_CfftArb(pInput,                           // Pointer to real source array

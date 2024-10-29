@@ -157,7 +157,7 @@ int main(int argc, char** argv)
          onePoleFilterCoefficient);
   OnePoleFilterState = SIGLIB_FIRST_SAMPLE;
   // Initialise one pole filter state array
-  SDA_Clear(pDelay,              // Pointer to destination array
+  SDA_Zeros(pDelay,              // Pointer to destination array
             HALF_FFT_LENGTH);    // Dataset length
 
   while (!_kbhit()) {

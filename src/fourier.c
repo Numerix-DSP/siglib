@@ -44,33 +44,33 @@ Description: SigLib DSP library Generic Fourier Transform routines.
  * Function: SIF_ZoomFft
  *
  * Parameters:
- *   SLData_t *pRealCombFilter,
- *   SLData_t *RealCombFilterSum,
- *   SLData_t *pImagCombFilter,
- *   SLData_t *ImagCombFilterSum,
- *   SLArrayIndex_t *CombFilterPhase,
- *   SLData_t *pSineTable,
- *   SLArrayIndex_t *SineTablePhase,
- *   SLArrayIndex_t * pRealDecimatorIndex,
- *   SLArrayIndex_t * pImagDecimatorIndex,
- *   SLArrayIndex_t * pRealLPFIndex,
- *   SLArrayIndex_t * pImagLPFIndex,
- *   SLData_t * pRealLPFStateArray,
- *   SLData_t * pImagLPFStateArray,
- *   SLData_t *pWindow,
- *   SLData_t *pFFTCoeffs,
- *   SLArrayIndex_t *pBitReverseAddressTable,
- *   const SLArrayIndex_t CombFilterLength,
- *   const SLArrayIndex_t SineTableLength,
- *   const SLArrayIndex_t FIRFilterLength,
- *   const SLArrayIndex_t FFTLength)
+ *  SLData_t *pRealCombFilter,
+ *  SLData_t *RealCombFilterSum,
+ *  SLData_t *pImagCombFilter,
+ *  SLData_t *ImagCombFilterSum,
+ *  SLArrayIndex_t *CombFilterPhase,
+ *  SLData_t *pSineTable,
+ *  SLArrayIndex_t *SineTablePhase,
+ *  SLArrayIndex_t * pRealDecimatorIndex,
+ *  SLArrayIndex_t * pImagDecimatorIndex,
+ *  SLArrayIndex_t * pRealLPFIndex,
+ *  SLArrayIndex_t * pImagLPFIndex,
+ *  SLData_t * pRealLPFStateArray,
+ *  SLData_t * pImagLPFStateArray,
+ *  SLData_t *pWindow,
+ *  SLData_t *pFFTCoeffs,
+ *  SLArrayIndex_t *pBitReverseAddressTable,
+ *  const SLArrayIndex_t CombFilterLength,
+ *  const SLArrayIndex_t SineTableLength,
+ *  const SLArrayIndex_t FIRFilterLength,
+ *  const SLArrayIndex_t FFTLength)
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description:
- *   Initialise the complex frequency shifting
- *   function.
+ *  Initialise the complex frequency shifting
+ *  function.
  *
  ********************************************************/
 
@@ -112,63 +112,63 @@ SLError_t SIGLIB_FUNC_DECL SIF_ZoomFft(SLData_t* SIGLIB_PTR_DECL pRealCombFilter
  * Function: SDA_ZoomFft
  *
  * Parameters:
- *   SLData_t *pSrc,
- *   SLData_t *pRealData,
- *   SLData_t *pImagData,
- *   SLData_t *pRealCombFilter,
- *   SLData_t *RealCombFilterSum,
- *   SLData_t *pImagCombFilter,
- *   SLData_t *ImagCombFilterSum,
- *   SLArrayIndex_t *CombFilterPhase,
- *   const SLData_t *pSineTable,
- *   SLArrayIndex_t *SineTablePhase,
- *   const SLData_t MixFrequency,
- *   const SLArrayIndex_t CombFilterLength,
- *   const SLArrayIndex_t SineTableSize,
- *   const SLArrayIndex_t HighDecimationRatio,
- *   SLData_t * pRealLPFStateArray,
- *   SLData_t * pImagLPFStateArray,
- *   const SLData_t pLPFCoefficientArray,
- *   SLArrayIndex_t * pRealDecimatorIndex,
- *   SLArrayIndex_t * pImagDecimatorIndex,
- *   SLArrayIndex_t * pRealLPFIndex,
- *   SLArrayIndex_t * pImagLPFIndex,
- *   const SLData_t *pWindow,
- *   const SLData_t *pFFTCoeffs,
- *   const SLArrayIndex_t *pBitReverseAddressTable,
- *   const SLArrayIndex_t InputArrayLength,
- *   const SLArrayIndex_t IntermediateArrayLength,
- *   const SLArrayIndex_t FIRFilterLength,
- *   const SLArrayIndex_t FIRDecimationRatio,
- *   const SLArrayIndex_t FrequencyReverseFlag,
- *   const SLArrayIndex_t FFTLength,
- *   const SLArrayIndex_t Log2Size)
+ *  SLData_t *pSrc,
+ *  SLData_t *pRealData,
+ *  SLData_t *pImagData,
+ *  SLData_t *pRealCombFilter,
+ *  SLData_t *RealCombFilterSum,
+ *  SLData_t *pImagCombFilter,
+ *  SLData_t *ImagCombFilterSum,
+ *  SLArrayIndex_t *CombFilterPhase,
+ *  const SLData_t *pSineTable,
+ *  SLArrayIndex_t *SineTablePhase,
+ *  const SLData_t MixFrequency,
+ *  const SLArrayIndex_t CombFilterLength,
+ *  const SLArrayIndex_t SineTableSize,
+ *  const SLArrayIndex_t HighDecimationRatio,
+ *  SLData_t * pRealLPFStateArray,
+ *  SLData_t * pImagLPFStateArray,
+ *  const SLData_t pLPFCoefficientArray,
+ *  SLArrayIndex_t * pRealDecimatorIndex,
+ *  SLArrayIndex_t * pImagDecimatorIndex,
+ *  SLArrayIndex_t * pRealLPFIndex,
+ *  SLArrayIndex_t * pImagLPFIndex,
+ *  const SLData_t *pWindow,
+ *  const SLData_t *pFFTCoeffs,
+ *  const SLArrayIndex_t *pBitReverseAddressTable,
+ *  const SLArrayIndex_t InputArrayLength,
+ *  const SLArrayIndex_t IntermediateArrayLength,
+ *  const SLArrayIndex_t FIRFilterLength,
+ *  const SLArrayIndex_t FIRDecimationRatio,
+ *  const SLArrayIndex_t FrequencyReverseFlag,
+ *  const SLArrayIndex_t FFTLength,
+ *  const SLArrayIndex_t Log2Size)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a complex frequency shift and an FFT.
+ *  Perform a complex frequency shift and an FFT.
  *
- *   The following block diagram describes the
- *   shifter structure.
+ *  The following block diagram describes the
+ *  shifter structure.
  *
- *       +---+  +--------+  +--------+  +-----+  +---------+
- *      _| x |_\| Comb + |_\| FIR +  |_\| Win |_\|         |          Output
- *     | |   | /| Hi Dec.| /| Lo Dec.| /|     | /|         |  +-----+ Real
- *     | +---+  +--------+  +--------+  +-----+  |         |_\| Frq.|____\
+ *      +---+  +--------+  +--------+  +-----+  +---------+
+ *     _| x |_\| Comb + |_\| FIR +  |_\| Win |_\|         |          Output
+ *    | |   | /| Hi Dec.| /| Lo Dec.| /|     | /|         |  +-----+ Real
+ *    | +---+  +--------+  +--------+  +-----+  |         |_\| Frq.|____\
  * I/p |   ^                                     | Complex | /| Rev.|    /
  * ____|   Cos                                   |         |  +-----+
- *     |                                         |         |
- *     |   Sin                                   |         |  +-----+ Imag.
- *     |   v                                     |   FFT   |_\| Frq.|____\
- *     | +---+  +--------+  +--------+  +-----+  |         | /| Rev.|    /
- *     |_| x |_\| Comb + |_\| FIR +  |_\| Win |_\|         |  +-----+
- *       |   | /| Hi Dec.| /| Lo Dec.| /|     | /|         |
- *       +---+  +--------+  +--------+  +-----+  +---------+
+ *    |                                         |         |
+ *    |   Sin                                   |         |  +-----+ Imag.
+ *    |   v                                     |   FFT   |_\| Frq.|____\
+ *    | +---+  +--------+  +--------+  +-----+  |         | /| Rev.|    /
+ *    |_| x |_\| Comb + |_\| FIR +  |_\| Win |_\|         |  +-----+
+ *      |   | /| Hi Dec.| /| Lo Dec.| /|     | /|         |
+ *      +---+  +--------+  +--------+  +-----+  +---------+
  *
- *   Comb + Hi Dec. is comb filter and decimate
- *   FIR + Lo Dec. is FIR filter and decimate
+ *  Comb + Hi Dec. is comb filter and decimate
+ *  FIR + Lo Dec. is FIR filter and decimate
  *
  ********************************************************/
 
@@ -279,25 +279,25 @@ void SIGLIB_FUNC_DECL SDA_ZoomFft(
  * Function: SIF_ZoomFftSimple
  *
  * Parameters:
- *   SLData_t *pCombFilter1,
- *   SLData_t *CombFilter1Sum,
- *   SLData_t *pCombFilter2,
- *   SLData_t *CombFilter2Sum,
- *   SLArrayIndex_t *CombFilterPhase,
- *   SLData_t *pSineTable,
- *   SLArrayIndex_t *SineTablePhase,
- *   SLData_t *pFFTCoeffs,
- *   SLArrayIndex_t *pBitReverseAddressTable,
- *   const SLArrayIndex_t filterLength,
- *   const SLArrayIndex_t SineTableLength,
- *   const SLArrayIndex_t FFTLength)
+ *  SLData_t *pCombFilter1,
+ *  SLData_t *CombFilter1Sum,
+ *  SLData_t *pCombFilter2,
+ *  SLData_t *CombFilter2Sum,
+ *  SLArrayIndex_t *CombFilterPhase,
+ *  SLData_t *pSineTable,
+ *  SLArrayIndex_t *SineTablePhase,
+ *  SLData_t *pFFTCoeffs,
+ *  SLArrayIndex_t *pBitReverseAddressTable,
+ *  const SLArrayIndex_t filterLength,
+ *  const SLArrayIndex_t SineTableLength,
+ *  const SLArrayIndex_t FFTLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the complex frequency shifting
- *   function.
+ *  Initialise the complex frequency shifting
+ *  function.
  *
  ********************************************************/
 
@@ -319,50 +319,50 @@ void SIGLIB_FUNC_DECL SIF_ZoomFftSimple(SLData_t* SIGLIB_PTR_DECL pCombFilter1, 
  * Function: SDA_ZoomFftSimple
  *
  * Parameters:
- *   SLData_t *pSrc,
- *   SLData_t *RealData,
- *   SLData_t *ImagData,
- *   SLData_t *pCombFilter1,
- *   SLData_t *CombFilter1Sum,
- *   SLData_t *pCombFilter2,
- *   SLData_t *CombFilter2Sum,
- *   SLArrayIndex_t *CombFilterPhase,
- *   const SLData_t *pSineTable,
- *   SLArrayIndex_t *SineTablePhase,
- *   const SLData_t MixFrequency,
- *   const SLArrayIndex_t filterLength,
- *   const SLArrayIndex_t SineTableSize,
- *   const SLArrayIndex_t decimate_ratio,
- *   const SLData_t *pFFTCoeffs,
- *   const SLArrayIndex_t *pBitReverseAddressTable,
- *   const SLArrayIndex_t InputArrayLength,
- *   const SLArrayIndex_t FFTLength,
- *   const SLArrayIndex_t Log2Size)
+ *  SLData_t *pSrc,
+ *  SLData_t *RealData,
+ *  SLData_t *ImagData,
+ *  SLData_t *pCombFilter1,
+ *  SLData_t *CombFilter1Sum,
+ *  SLData_t *pCombFilter2,
+ *  SLData_t *CombFilter2Sum,
+ *  SLArrayIndex_t *CombFilterPhase,
+ *  const SLData_t *pSineTable,
+ *  SLArrayIndex_t *SineTablePhase,
+ *  const SLData_t MixFrequency,
+ *  const SLArrayIndex_t filterLength,
+ *  const SLArrayIndex_t SineTableSize,
+ *  const SLArrayIndex_t decimate_ratio,
+ *  const SLData_t *pFFTCoeffs,
+ *  const SLArrayIndex_t *pBitReverseAddressTable,
+ *  const SLArrayIndex_t InputArrayLength,
+ *  const SLArrayIndex_t FFTLength,
+ *  const SLArrayIndex_t Log2Size)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a complex frequency shift and an FFT.
+ *  Perform a complex frequency shift and an FFT.
  *
- *   The following block diagram describes the
- *   shifter structure.
+ *  The following block diagram describes the
+ *  shifter structure.
  *
- *           +---+     +--------+     +---------+
- *        ___| x |____\| Comb + |____\|         | Output
- *       |   |   |    /| Decim. |    /|         |
- *       |   +---+     +--------+     |         | Real
+ *          +---+     +--------+     +---------+
+ *       ___| x |____\| Comb + |____\|         | Output
+ *      |   |   |    /| Decim. |    /|         |
+ *      |   +---+     +--------+     |         | Real
  * Input |     ^                      | Complex |____\
  * ______|     Cos                    |         |    /
- *       |                            |         |
- *       |     Sin                    |         | Imag.
- *       |     v                      |   FFT   |____\
- *       |   +---+     +--------+     |         |    /
- *       |___| x |____\| Comb + |____\|         |
- *           |   |    /| Decim. |    /|         |
- *           +---+     +--------+     +---------+
+ *      |                            |         |
+ *      |     Sin                    |         | Imag.
+ *      |     v                      |   FFT   |____\
+ *      |   +---+     +--------+     |         |    /
+ *      |___| x |____\| Comb + |____\|         |
+ *          |   |    /| Decim. |    /|         |
+ *          +---+     +--------+     +---------+
  *
- *   Comb + Decim. is comb filter and decimate
+ *  Comb + Decim. is comb filter and decimate
  *
  ********************************************************/
 
@@ -456,17 +456,17 @@ void SIGLIB_FUNC_DECL SDA_ZoomFftSimple(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
  * Function: SIF_FdHilbert
  *
  * Parameters:
- *   SLData_t *pFFTCoeffs,
- *   SLArrayIndex_t *pBitReverseAddressTable,
- *   SLData_t * pInverseFFTLength,
- *   const SLArrayIndex_t    Size    - Transform size
+ *  SLData_t *pFFTCoeffs,
+ *  SLArrayIndex_t *pBitReverseAddressTable,
+ *  SLData_t * pInverseFFTLength,
+ *  const SLArrayIndex_t    Size    - Transform size
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the frequency domain Hilbert transform
- *   function.
+ *  Initialise the frequency domain Hilbert transform
+ *  function.
  *
  ********************************************************/
 
@@ -483,24 +483,24 @@ void SIGLIB_FUNC_DECL SIF_FdHilbert(SLData_t* SIGLIB_PTR_DECL pFFTCoeffs, SLArra
  * Function: SDA_FdHilbert
  *
  * Parameters:
- *   const SLData_t *pSrc    - Source pointer
- *   SLData_t *pDstReal      - Real destination pointer
- *   SLData_t *pDstImag      - Imag destination pointer
- *   const SLData_t *,       - FFT coeff pointer
- *   const SLArrayIndex_t *, - Bit reverse mode flag / Pointer to bit reverse
+ *  const SLData_t *pSrc    - Source pointer
+ *  SLData_t *pDstReal      - Real destination pointer
+ *  SLData_t *pDstImag      - Imag destination pointer
+ *  const SLData_t *,       - FFT coeff pointer
+ *  const SLArrayIndex_t *, - Bit reverse mode flag / Pointer to bit reverse
  *address table const SLData_t          - InverseFFTLength, const
  *SLArrayIndex_t,   - Transform size const SLArrayIndex_t    - Log base2
  *transform size
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Calculates the complex Hilbert transform of a signal,
- *   by using the frequency domain.
+ *  Calculates the complex Hilbert transform of a signal,
+ *  by using the frequency domain.
  *
- *   The Hilbert transform (pi/2 phase shift) of the input
- *   data is returned in the real destination array.
+ *  The Hilbert transform (pi/2 phase shift) of the input
+ *  data is returned in the real destination array.
  *
  ********************************************************/
 
@@ -558,17 +558,17 @@ void SIGLIB_FUNC_DECL SDA_FdHilbert(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData
  * Function: SIF_FdAnalytic
  *
  * Parameters:
- *   SLData_t *pFFTCoeffs,
- *   SLArrayIndex_t *pBitReverseAddressTable,
- *   SLData_t * pInverseFFTLength,
- *   const SLArrayIndex_t    Size    - Transform size
+ *  SLData_t *pFFTCoeffs,
+ *  SLArrayIndex_t *pBitReverseAddressTable,
+ *  SLData_t * pInverseFFTLength,
+ *  const SLArrayIndex_t    Size    - Transform size
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the frequency domain analytic transform
- *   function.
+ *  Initialise the frequency domain analytic transform
+ *  function.
  *
  ********************************************************/
 
@@ -585,24 +585,24 @@ void SIGLIB_FUNC_DECL SIF_FdAnalytic(SLData_t* SIGLIB_PTR_DECL pFFTCoeffs, SLArr
  * Function: SDA_FdAnalytic
  *
  * Parameters:
- *   const SLData_t *pSrc    - Source pointer
- *   SLData_t *pDstReal      - Real destination pointer
- *   SLData_t *pDstImag      - Imag destination pointer
- *   const SLData_t *,       - FFT coeff pointer
- *   const SLArrayIndex_t *, - Bit reverse mode flag / Pointer to bit reverse
+ *  const SLData_t *pSrc    - Source pointer
+ *  SLData_t *pDstReal      - Real destination pointer
+ *  SLData_t *pDstImag      - Imag destination pointer
+ *  const SLData_t *,       - FFT coeff pointer
+ *  const SLArrayIndex_t *, - Bit reverse mode flag / Pointer to bit reverse
  *address table const SLData_t          - InverseFFTLength, const
  *SLArrayIndex_t,   - Transform size const SLArrayIndex_t    - Log base2
  *transform size
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Returns the analytic version of the input signal,
- *   by using the frequency domain. I.e. the real output
- *   is the same as the original signal and the imaginary
- *   output is the Hilbert transform (pi/2 phase shift)
- *   of the input data.
+ *  Returns the analytic version of the input signal,
+ *  by using the frequency domain. I.e. the real output
+ *  is the same as the original signal and the imaginary
+ *  output is the Hilbert transform (pi/2 phase shift)
+ *  of the input data.
  *
  ********************************************************/
 
@@ -634,21 +634,21 @@ void SIGLIB_FUNC_DECL SDA_FdAnalytic(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDat
  * Function: SDA_InstantFreq
  *
  * Parameters:
- *   const SLData_t *pSLead  - pSLeading waveform
- *   const SLData_t *pSLag       - pSLagging waveform
- *   SLData_t *pDst          - Destination waveform
- *   const SLArrayIndex_t sampleLength   - Sample size
+ *  const SLData_t *pSLead  - pSLeading waveform
+ *  const SLData_t *pSLag       - pSLagging waveform
+ *  SLData_t *pDst          - Destination waveform
+ *  const SLArrayIndex_t sampleLength   - Sample size
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Calculates the instantaneous frequency from two
- *   waveforms which are PI/2 out of phase. The frequency
- *   is returned in 'pSLag'.
- *   This function is implemented as a two point
- *   differentiator and assumes that the sample rate is
- *   normalised to 1.
+ *  Calculates the instantaneous frequency from two
+ *  waveforms which are PI/2 out of phase. The frequency
+ *  is returned in 'pSLag'.
+ *  This function is implemented as a two point
+ *  differentiator and assumes that the sample rate is
+ *  normalised to 1.
  *
  ********************************************************/
 
@@ -677,16 +677,16 @@ void SIGLIB_FUNC_DECL SDA_InstantFreq(const SLData_t* SIGLIB_PTR_DECL pSLead, co
  * Function: SDA_Rdft
  *
  * Parameters:
- *   const SLData_t pRealData[],
- *   SLData_t pDstReal[],
- *   SLData_t pDstImag[],
- *   const SLArrayIndex_t dft_size,
+ *  const SLData_t pRealData[],
+ *  SLData_t pDstReal[],
+ *  SLData_t pDstImag[],
+ *  const SLArrayIndex_t dft_size,
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a real Discrete Fourier Transform.
+ *  Perform a real Discrete Fourier Transform.
  *
  ********************************************************/
 
@@ -720,16 +720,16 @@ void SIGLIB_FUNC_DECL SDA_Rdft(const SLData_t pRealData[], SLData_t pDstReal[], 
  * Function: SDA_Ridft
  *
  * Parameters:
- *   SLData_t const pRealData[],
- *   SLData_t pDstReal[],
- *   SLData_t pDstImag[],
- *   SLArrayIndex_t const idft_size,
+ *  SLData_t const pRealData[],
+ *  SLData_t pDstReal[],
+ *  SLData_t pDstImag[],
+ *  SLArrayIndex_t const idft_size,
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a real Inverse Discrete Fourier Transform.
+ *  Perform a real Inverse Discrete Fourier Transform.
  *
  ********************************************************/
 
@@ -762,17 +762,17 @@ void SIGLIB_FUNC_DECL SDA_Ridft(const SLData_t pRealData[], SLData_t pDstReal[],
  * Function: SDA_Cdft
  *
  * Parameters:
- *   const SLData_t pSrcReal[],
- *   const SLData_t pSrcImag[],
- *   SLData_t pDstReal[],
- *   SLData_t pDstImag[],
- *   const SLArrayIndex_t dft_size,
+ *  const SLData_t pSrcReal[],
+ *  const SLData_t pSrcImag[],
+ *  SLData_t pDstReal[],
+ *  SLData_t pDstImag[],
+ *  const SLArrayIndex_t dft_size,
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a complex Discrete Fourier Transform.
+ *  Perform a complex Discrete Fourier Transform.
  *
  ********************************************************/
 
@@ -809,17 +809,17 @@ void SIGLIB_FUNC_DECL SDA_Cdft(const SLData_t pSrcReal[], const SLData_t pSrcIma
  * Function: SDA_Cidft
  *
  * Parameters:
- *   const SLData_t pSrcReal[],
- *   const SLData_t pSrcImag[],
- *   SLData_t pDstReal[],
- *   SLData_t pDstImag[],
- *   const SLArrayIndex_t idft_size,
+ *  const SLData_t pSrcReal[],
+ *  const SLData_t pSrcImag[],
+ *  SLData_t pDstReal[],
+ *  SLData_t pDstImag[],
+ *  const SLArrayIndex_t idft_size,
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a complex Inverse Discrete Fourier Transform.
+ *  Perform a complex Inverse Discrete Fourier Transform.
  *
  ********************************************************/
 
@@ -855,15 +855,15 @@ void SIGLIB_FUNC_DECL SDA_Cidft(const SLData_t pSrcReal[], const SLData_t pSrcIm
  * Function: SDA_FftShift
  *
  * Parameters:
- *   const SLData_t *pSrc,
- *   SLData_t *pDst,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t *pSrc,
+ *  SLData_t *pDst,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Shift the FFT data to DC at centre or V.V.
+ *  Shift the FFT data to DC at centre or V.V.
  *
  ********************************************************/
 
@@ -894,17 +894,17 @@ void SIGLIB_FUNC_DECL SDA_FftShift(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_
  * Function: SDA_CfftShift
  *
  * Parameters:
- *   const SLData_t *pSrcReal,   - Real source data pointer
- *   const SLData_t *pSrcImag,   - Imag source data pointer
- *   SLData_t *pDstReal,         - Real destn. data pointer
- *   SLData_t *pDstImag,         - Imag destn. data pointer
- *   const SLArrayIndex_t        - sampleLength
+ *  const SLData_t *pSrcReal,   - Real source data pointer
+ *  const SLData_t *pSrcImag,   - Imag source data pointer
+ *  SLData_t *pDstReal,         - Real destination data pointer
+ *  SLData_t *pDstImag,         - Imaginary destination data pointer
+ *  const SLArrayIndex_t        - sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Shift the complex FFT data to DC at centre or V.V.
+ *  Shift the complex FFT data to DC at centre or V.V.
  *
  ********************************************************/
 
@@ -949,16 +949,16 @@ void SIGLIB_FUNC_DECL SDA_CfftShift(const SLData_t* SIGLIB_PTR_DECL pSrcReal, co
  * Function: SDA_FftExtend
  *
  * Parameters:
- *   const SLData_t *pSrc,               - Source data pointer
- *   SLData_t *pDst,                     - Source data pointer
- *   const SLArrayIndex_t SLArrayIndex_t - srcArrayLength
- *   const SLArrayIndex_t SLArrayIndex_t - dstArrayLength
+ *  const SLData_t *pSrc,               - Source data pointer
+ *  SLData_t *pDst,                     - Source data pointer
+ *  const SLArrayIndex_t SLArrayIndex_t - srcArrayLength
+ *  const SLArrayIndex_t SLArrayIndex_t - dstArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Extend the real FFT data to a larger frequency domain
+ *  Extend the real FFT data to a larger frequency domain
  *
  ********************************************************/
 
@@ -980,18 +980,18 @@ void SIGLIB_FUNC_DECL SDA_FftExtend(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData
  * Function: SDA_CfftExtend
  *
  * Parameters:
- *   const SLData_t *pSrcReal,           - Real source data pointer
- *   const SLData_t *pSrcImag,           - Imag source data pointer
- *   SLData_t *pDstReal,                 - Real destn. data pointer
- *   SLData_t *pDstImag,                 - Imag destn. data pointer
- *   const SLArrayIndex_t SLArrayIndex_t - srcArrayLength
- *   const SLArrayIndex_t SLArrayIndex_t - dstArrayLength
+ *  const SLData_t *pSrcReal,           - Real source data pointer
+ *  const SLData_t *pSrcImag,           - Imag source data pointer
+ *  SLData_t *pDstReal,                 - Real destination data pointer
+ *  SLData_t *pDstImag,                 - Imaginary destination data pointer
+ *  const SLArrayIndex_t SLArrayIndex_t - srcArrayLength
+ *  const SLArrayIndex_t SLArrayIndex_t - dstArrayLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Extend the complex FFT data to a larger frequency domain
+ *  Extend the complex FFT data to a larger frequency domain
  *
  ********************************************************/
 
@@ -1021,17 +1021,62 @@ void SIGLIB_FUNC_DECL SDA_CfftExtend(const SLData_t* SIGLIB_PTR_DECL pSrcReal, c
 }    // End of SDA_CfftExtend()
 
 /********************************************************
+ * Function: SDA_FftRealToComplex
+ *
+ * Parameters:
+ *  const SLData_t *pSrcReal,           - Real source data pointer
+ *  const SLData_t *pSrcImag,           - Imag source data pointer
+ *  SLData_t *pDstReal,                 - Real destination data pointer
+ *  SLData_t *pDstImag,                 - Imaginary destination data pointer
+ *  const SLArrayIndex_t SLArrayIndex_t - fftLength
+ *
+ * Return value:
+ *  void
+ *
+ * Description:
+ *  Convert the real frequency domain dataset of length
+ *  ((fftLength/2)+1) to a complex dataset of length fftLength
+ *
+ ********************************************************/
+
+void SDA_FftRealToComplex(const SLData_t* SIGLIB_PTR_DECL pSrcReal, const SLData_t* SIGLIB_PTR_DECL pSrcImag, SLData_t* SIGLIB_PTR_DECL pDstReal,
+                          SLData_t* SIGLIB_PTR_DECL pDstImag, const SLArrayIndex_t fftLength)
+{
+  SLArrayIndex_t halfFftLength = fftLength >> 1;
+
+  // If source and destination arrays are different then copy the positive frequency components
+  if ((pSrcReal != pDstReal) || (pSrcImag != pDstImag)) {
+    for (SLArrayIndex_t i = 0; i <= halfFftLength; i++) {
+      pDstReal[i] = pSrcReal[i];
+      pDstImag[i] = pSrcImag[i];
+    }
+  }
+
+  // Mirror and conjugate the negative frequency components
+  for (SLArrayIndex_t i = 1; i < halfFftLength; i++) {
+    pDstReal[fftLength - i] = pSrcReal[i];
+    pDstImag[fftLength - i] = -pSrcImag[i];
+  }
+
+  // If N is even the imaginary part is zero at Nyquist frequency
+  if (fftLength % 2 == 0) {
+    pDstReal[halfFftLength] = pSrcReal[halfFftLength];
+    pDstImag[halfFftLength] = 0;
+  }
+}    // End of SDA_FftRealToComplex()
+
+/********************************************************
  * Function: SIF_DctII
  *
  * Parameters:
- *   SLData_t *pCosAnglesLUT,
- *   const SLArrayIndex_t    dctLength
+ *  SLData_t *pCosAnglesLUT,
+ *  const SLArrayIndex_t    dctLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the type II DCT cosine table.
+ *  Initialise the type II DCT cosine table.
  *
  ********************************************************/
 
@@ -1050,16 +1095,16 @@ void SIGLIB_FUNC_DECL SIF_DctII(SLData_t* SIGLIB_PTR_DECL pCosAnglesLUT, const S
  * Function: SDA_DctII
  *
  * Parameters:
- *   const SLData_t *pTime,
- *   SLData_t *pFreq,
- *   const SLData_t *pCosAnglesLUT,
- *   const SLArrayIndex_t dctLength,
+ *  const SLData_t *pTime,
+ *  SLData_t *pFreq,
+ *  const SLData_t *pCosAnglesLUT,
+ *  const SLArrayIndex_t dctLength,
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a type II DCT.
+ *  Perform a type II DCT.
  *
  ********************************************************/
 
@@ -1079,15 +1124,15 @@ void SIGLIB_FUNC_DECL SDA_DctII(const SLData_t* SIGLIB_PTR_DECL pTime, SLData_t*
  * Function: SIF_DctIIOrthogonal
  *
  * Parameters:
- *   SLData_t *pCosAnglesLUT,
- *   const SLArrayIndex_t    dctLength
+ *  SLData_t *pCosAnglesLUT,
+ *  const SLArrayIndex_t    dctLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the type II DCT cosine table and orthogonal
- *   scaling parameters.
+ *  Initialise the type II DCT cosine table and orthogonal
+ *  scaling parameters.
  *
  ********************************************************/
 
@@ -1110,18 +1155,18 @@ void SIGLIB_FUNC_DECL SIF_DctIIOrthogonal(SLData_t* pSqrtHalf, SLData_t* pOutput
  * Function: SDA_DctIIOrthogonal
  *
  * Parameters:
- *   const SLData_t *pTime,
- *   SLData_t *pFreq,
- *   const SLData_t sqrtHalf,
- *   const SLData_t outputScale,
- *   const SLData_t *pCosAnglesLUT,
- *   const SLArrayIndex_t dctLength,
+ *  const SLData_t *pTime,
+ *  SLData_t *pFreq,
+ *  const SLData_t sqrtHalf,
+ *  const SLData_t outputScale,
+ *  const SLData_t *pCosAnglesLUT,
+ *  const SLArrayIndex_t dctLength,
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   *   Perform a type II DCT with orthogonal scaling
+ *  *   Perform a type II DCT with orthogonal scaling
  *
  ********************************************************/
 

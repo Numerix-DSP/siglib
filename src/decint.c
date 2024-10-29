@@ -44,7 +44,7 @@ Description: SigLib DSP library decimation and interpolation routines.
  * Function: SIF_Decimate
  *
  * Parameters:
- *   SLArrayIndex_t * pDecimationIndex,  Decimation index
+ *  SLArrayIndex_t * pDecimationIndex,  Decimation index
  *
  * Return value: void
  *
@@ -61,27 +61,27 @@ void SIGLIB_FUNC_DECL SIF_Decimate(SLArrayIndex_t* SIGLIB_PTR_DECL pDecimationIn
  * Function: SDA_Decimate
  *
  * Parameters:
- *   const SLData_t * pSrc,                  Source data pointer
- *   SLData_t * pDst,                        Destination data pointer
- *   const SLFixData_t DecimationRatio,      Decimation ratio
- *   SLArrayIndex_t *pSrcArrayIndex,         Pointer to index into source array
- *   const SLArrayIndex_t SrcArrayLength)    Source array length
+ *  const SLData_t * pSrc,                  Source data pointer
+ *  SLData_t * pDst,                        Destination data pointer
+ *  const SLFixData_t DecimationRatio,      Decimation ratio
+ *  SLArrayIndex_t *pSrcArrayIndex,         Pointer to index into source array
+ *  const SLArrayIndex_t SrcArrayLength)    Source array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Decimate the input data sample rate
+ *  Decimate the input data sample rate
  *
  * Notes:
- *   This function supports decimation across contiguous
+ *  This function supports decimation across contiguous
  * arrays through the use of the SrcArrayIndex parameter.
  *
- *   This function will work in-place.
+ *  This function will work in-place.
  *
- *   This function does not low pass pre-filter the
- *   source data. This should be performed using
- *   the FIR filter functions.
+ *  This function does not low pass pre-filter the
+ *  source data. This should be performed using
+ *  the FIR filter functions.
  *
  ********************************************************/
 
@@ -101,7 +101,7 @@ void SIGLIB_FUNC_DECL SDA_Decimate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_
  * Function: SIF_Interpolate
  *
  * Parameters:
- *   SLArrayIndex_t * pInterpolationIndex,   Interpolation index
+ *  SLArrayIndex_t * pInterpolationIndex,   Interpolation index
  *
  * Return value: void
  *
@@ -118,29 +118,29 @@ void SIGLIB_FUNC_DECL SIF_Interpolate(SLArrayIndex_t* SIGLIB_PTR_DECL pInterpola
  * Function: SDA_Interpolate
  *
  * Parameters:
- *   const SLData_t * pSrc,                  Source data pointer
- *   SLData_t * pDst,                        Destination data pointer
- *   const SLFixData_t InterpolationRatio,   Interpolation ratio
- *   SLArrayIndex_t *pDstArrayIndex,         Pointer to index into dstn. array
- *   const SLArrayIndex_t DstArrayLength)    Destination array length
+ *  const SLData_t * pSrc,                  Source data pointer
+ *  SLData_t * pDst,                        Destination data pointer
+ *  const SLFixData_t InterpolationRatio,   Interpolation ratio
+ *  SLArrayIndex_t *pDstArrayIndex,         Pointer to index into dstn. array
+ *  const SLArrayIndex_t DstArrayLength)    Destination array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Interpolate the input data sample rate
+ *  Interpolate the input data sample rate
  *
  * Notes:
- *   This function supports interpolation across contiguous
+ *  This function supports interpolation across contiguous
  * arrays through the use of the DstArrayIndex parameter.
  *
- *   This function does NOT work in-place.
+ *  This function does NOT work in-place.
  *
- *   This function does not low pass post-filter the
+ *  This function does not low pass post-filter the
  * interpolated data. This should be performed using the
  * FIR filter functions.
  *
- *   This function does not verify that there is sufficient
+ *  This function does not verify that there is sufficient
  * data in the source array to avoid overrun.
  *
  ********************************************************/
@@ -166,10 +166,10 @@ void SIGLIB_FUNC_DECL SDA_Interpolate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
  * Function: SIF_FilterAndDecimate
  *
  * Parameters:
- *   SLData_t * DECL pState,             Pointer to filter state array
- *   SLArrayIndex_t * pDecimationIndex,  Decimation index
- *   SLArrayIndex_t * pFilterIndex,      Filter index
- *   const SLArrayIndex_t filterLength   Filter length
+ *  SLData_t * DECL pState,             Pointer to filter state array
+ *  SLArrayIndex_t * pDecimationIndex,  Decimation index
+ *  SLArrayIndex_t * pFilterIndex,      Filter index
+ *  const SLArrayIndex_t filterLength   Filter length
  *
  * Return value: void
  *
@@ -190,30 +190,30 @@ void SIGLIB_FUNC_DECL SIF_FilterAndDecimate(SLData_t* SIGLIB_PTR_DECL pState, SL
  * Function: SDA_FilterAndDecimate
  *
  * Parameters:
- *   const SLData_t * pSrc,                  Source data pointer
- *   SLData_t * pDst,                        Destination data pointer
- *   const SLFixData_t DecimationRatio,      Decimation ratio
- *   SLArrayIndex_t *pSrcArrayIndex,         Pointer to index into source array
- *   SLData_t pState[],                      Pointer to filter state array
- *   const SLData_t pCoeffs[],               Pointer to filter coefficients
- *   SLArrayIndex_t * pFilterIndex,          Pointer to filter index offset
- *   const SLArrayIndex_t filterLength,      Filter length
- *   const SLArrayIndex_t SrcArrayLength)    Source array length
+ *  const SLData_t * pSrc,                  Source data pointer
+ *  SLData_t * pDst,                        Destination data pointer
+ *  const SLFixData_t DecimationRatio,      Decimation ratio
+ *  SLArrayIndex_t *pSrcArrayIndex,         Pointer to index into source array
+ *  SLData_t pState[],                      Pointer to filter state array
+ *  const SLData_t pCoeffs[],               Pointer to filter coefficients
+ *  SLArrayIndex_t * pFilterIndex,          Pointer to filter index offset
+ *  const SLArrayIndex_t filterLength,      Filter length
+ *  const SLArrayIndex_t SrcArrayLength)    Source array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Filter and decimate the input data sample rate
+ *  Filter and decimate the input data sample rate
  *
  * Notes:
- *   This function supports decimation across contiguous
+ *  This function supports decimation across contiguous
  * arrays through the use of the SrcArrayIndex parameter.
  *
- *   This function will work in-place.
+ *  This function will work in-place.
  *
- *   This function low pass pre-filters the source
- *   data using the supplied filter coefficients.
+ *  This function low pass pre-filters the source
+ *  data using the supplied filter coefficients.
  *
  ********************************************************/
 
@@ -251,10 +251,10 @@ void SIGLIB_FUNC_DECL SDA_FilterAndDecimate(const SLData_t* SIGLIB_PTR_DECL pSrc
  * Function: SIF_InterpolateAndFilter
  *
  * Parameters:
- *   SLData_t * DECL pState,                 Pointer to filter state array
- *   SLArrayIndex_t * pInterpolationIndex,   Interpolation index
- *   SLArrayIndex_t * pFilterIndex,          Filter index
- *   const SLArrayIndex_t filterLength       Filter length
+ *  SLData_t * DECL pState,                 Pointer to filter state array
+ *  SLArrayIndex_t * pInterpolationIndex,   Interpolation index
+ *  SLArrayIndex_t * pFilterIndex,          Filter index
+ *  const SLArrayIndex_t filterLength       Filter length
  *
  * Return value: void
  *
@@ -275,35 +275,35 @@ void SIGLIB_FUNC_DECL SIF_InterpolateAndFilter(SLData_t* SIGLIB_PTR_DECL pState,
  * Function: SDA_InterpolateAndFilter
  *
  * Parameters:
- *   const SLData_t * pSrc,                  Source data pointer
- *   SLData_t * pDst,                        Destination data pointer
- *   const SLFixData_t InterpolationRatio,   Interpolation ratio
- *   SLArrayIndex_t *pDstArrayIndex,         Pointer to index into dstn. array
- *   SLData_t pState[],                      Pointer to filter state array
- *   const SLData_t pCoeffs[],               Pointer to filter coefficients
- *   SLArrayIndex_t * pFilterIndex,          Pointer to filter index offset
- *   const SLArrayIndex_t filterLength,      Filter length
- *   const SLArrayIndex_t DstArrayLength)    Destination array length
+ *  const SLData_t * pSrc,                  Source data pointer
+ *  SLData_t * pDst,                        Destination data pointer
+ *  const SLFixData_t InterpolationRatio,   Interpolation ratio
+ *  SLArrayIndex_t *pDstArrayIndex,         Pointer to index into dstn. array
+ *  SLData_t pState[],                      Pointer to filter state array
+ *  const SLData_t pCoeffs[],               Pointer to filter coefficients
+ *  SLArrayIndex_t * pFilterIndex,          Pointer to filter index offset
+ *  const SLArrayIndex_t filterLength,      Filter length
+ *  const SLArrayIndex_t DstArrayLength)    Destination array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Interpolate and filter the input data sample rate
+ *  Interpolate and filter the input data sample rate
  *
  * Notes:
- *   This function normalizes the gain by multiplying the
- *   output by the interpolation factor.
+ *  This function normalizes the gain by multiplying the
+ *  output by the interpolation factor.
  *
- *   This function supports interpolation across contiguous
+ *  This function supports interpolation across contiguous
  * arrays through the use of the DstArrayIndex parameter.
  *
- *   This function does NOT work in-place.
+ *  This function does NOT work in-place.
  *
- *   This function low pass post-filters the destination
- *   data using the supplied filter coefficients.
+ *  This function low pass post-filters the destination
+ *  data using the supplied filter coefficients.
  *
- *   This function does not verify that there is sufficient
+ *  This function does not verify that there is sufficient
  * data in the source array to avoid overrun.
  *
  ********************************************************/
@@ -339,24 +339,24 @@ void SIGLIB_FUNC_DECL SDA_InterpolateAndFilter(const SLData_t* SIGLIB_PTR_DECL p
  * Function: SDA_ResampleLinear
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLData_t NewSamplePeriod,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLData_t NewSamplePeriod,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   Number of interpolated / decimated output samples
+ *  Number of interpolated / decimated output samples
  *
  * Description:
- *   Interpolate and filter the input data sample rate
+ *  Interpolate and filter the input data sample rate
  *
  * Notes:
- *   This function uses linear interpolation to either
- *   interpolate or decimate the sample rate of the data
- *   in the array.
- *   The input sample rate is normalized to 1.0 Hz
- *   The new sample period is relative to the normalized
- *   input sample rate.
+ *  This function uses linear interpolation to either
+ *  interpolate or decimate the sample rate of the data
+ *  in the array.
+ *  The input sample rate is normalized to 1.0 Hz
+ *  The new sample period is relative to the normalized
+ *  input sample rate.
  *
  ********************************************************/
 
@@ -386,28 +386,28 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleLinear(const SLData_t* SIGLIB_PTR_DE
  * Function: SDA_ResampleLinearNSamples
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLData_t NewSamplePeriod,
- *   const SLArrayIndex_t sampleLength,
- *   const SLArrayIndex_t OutputLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLData_t NewSamplePeriod,
+ *  const SLArrayIndex_t sampleLength,
+ *  const SLArrayIndex_t OutputLength)
  *
  * Return value:
- *   Number of interpolated / decimated output samples
+ *  Number of interpolated / decimated output samples
  *
  * Description:
- *   Interpolate and filter the input data sample rate
+ *  Interpolate and filter the input data sample rate
  *
  * Notes:
- *   This function uses linear interpolation to either
- *   interpolate or decimate the sample rate of the data
- *   in the array.
- *   The input sample rate is normalized to 1.0 Hz
- *   The new sample period is relative to the normalized
- *   input sample rate.
- *   The function only outputs N samples. If the resampling
- *   shortens the array then it is zero padded. If the
- *   resampling lengthens the array then it is truncated.
+ *  This function uses linear interpolation to either
+ *  interpolate or decimate the sample rate of the data
+ *  in the array.
+ *  The input sample rate is normalized to 1.0 Hz
+ *  The new sample period is relative to the normalized
+ *  input sample rate.
+ *  The function only outputs N samples. If the resampling
+ *  shortens the array then it is zero padded. If the
+ *  resampling lengthens the array then it is truncated.
  *
  ********************************************************/
 
@@ -436,7 +436,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleLinearNSamples(const SLData_t* SIGLI
   // outputSampleCount);
 
   if (outputSampleCount < OutputLength) {    // Zero pad the array
-    SDA_Clear(pDst, OutputLength - outputSampleCount);
+    SDA_Zeros(pDst, OutputLength - outputSampleCount);
   }
   return (outputSampleCount);
 }    // End of SDA_ResampleLinearNSamples()
@@ -445,18 +445,18 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleLinearNSamples(const SLData_t* SIGLI
  * Function: SDA_InterpolateLinear1D
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pYData,
- *   const SLData_t x,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pYData,
+ *  const SLData_t x,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   Interpolated y value
+ *  Interpolated y value
  *
  * Description:
- *   This function uses linear interpolation to calculate
- *   the interpolated value of y, for a given x.
- *   The Y samples are stored in the source array, with
- *   the array index being the x value.
+ *  This function uses linear interpolation to calculate
+ *  the interpolated value of y, for a given x.
+ *  The Y samples are stored in the source array, with
+ *  the array index being the x value.
  *
  ********************************************************/
 
@@ -480,18 +480,18 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateLinear1D(const SLData_t* SIGLIB_PTR_DEC
  * Function: SDA_InterpolateLinear2D
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pXData,
- *   const SLData_t * SIGLIB_PTR_DECL pYData,
- *   const SLData_t x,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pXData,
+ *  const SLData_t * SIGLIB_PTR_DECL pYData,
+ *  const SLData_t x,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   Interpolated y value
+ *  Interpolated y value
  *
  * Description:
- *   This function uses linear interpolation to calculate
- *   the interpolated value of y, for a given x.
- *   The X and Y samples are stored in separate arrays.
+ *  This function uses linear interpolation to calculate
+ *  the interpolated value of y, for a given x.
+ *  The X and Y samples are stored in separate arrays.
  *
  ********************************************************/
 
@@ -516,17 +516,17 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateLinear2D(const SLData_t* SIGLIB_PTR_DEC
  * Function: SIF_ResampleSinc
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pSincLUT,
- *   SLData_t *pPhaseGain,
- *   const SLData_t NumberOfAdjacentSamples,
- *   const SLArrayIndex_t SincTableLength
+ *  SLData_t * SIGLIB_PTR_DECL pSincLUT,
+ *  SLData_t *pPhaseGain,
+ *  const SLData_t NumberOfAdjacentSamples,
+ *  const SLArrayIndex_t SincTableLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the resample sinc function with a quick
- *   sinc look up table
+ *  Initialise the resample sinc function with a quick
+ *  sinc look up table
  *
  ********************************************************/
 
@@ -547,20 +547,20 @@ void SIGLIB_FUNC_DECL SIF_ResampleSinc(SLData_t* pSincLUT, SLData_t* pPhaseGain,
  * Function: SIF_ResampleWindowedSinc
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pSincLUT,
- *   SLData_t *pPhaseGain,
- *   const SLData_t NumberOfAdjacentSamples,
- *   SLData_t * SIGLIB_PTR_DECL pWindowCoeffs,
- *   const enum SLWindow_t WindowType,
- *   const SLData_t Coeff,
- *   const SLArrayIndex_t SincTableLength
+ *  SLData_t * SIGLIB_PTR_DECL pSincLUT,
+ *  SLData_t *pPhaseGain,
+ *  const SLData_t NumberOfAdjacentSamples,
+ *  SLData_t * SIGLIB_PTR_DECL pWindowCoeffs,
+ *  const enum SLWindow_t WindowType,
+ *  const SLData_t Coeff,
+ *  const SLArrayIndex_t SincTableLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the resample sinc function with a windowed
- *   quick sinc look up table
+ *  Initialise the resample sinc function with a windowed
+ *  quick sinc look up table
  *
  ********************************************************/
 
@@ -589,27 +589,27 @@ void SIGLIB_FUNC_DECL SIF_ResampleWindowedSinc(SLData_t* pSincLUT, SLData_t* pPh
  * Function: SDA_ResampleSinc
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLData_t * SIGLIB_PTR_DECL pSincLUT,
- *   const SLData_t LookUpTablePhaseGain,
- *   const SLData_t NewSamplePeriod,
- *   const SLArrayIndex_t NumberOfAdjacentSamples,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLData_t * SIGLIB_PTR_DECL pSincLUT,
+ *  const SLData_t LookUpTablePhaseGain,
+ *  const SLData_t NewSamplePeriod,
+ *  const SLArrayIndex_t NumberOfAdjacentSamples,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   Number of interpolated / decimated output samples
+ *  Number of interpolated / decimated output samples
  *
  * Description:
- *   Interpolate and filter the input data sample rate
+ *  Interpolate and filter the input data sample rate
  *
  * Notes:
- *   This function uses sinc interpolation to either
- *   interpolate or decimate the sample rate of the data
- *   in the array.
- *   The input sample rate is normalized to 1.0 Hz
- *   The new sample period is relative to the normalized
- *   input sample rate.
+ *  This function uses sinc interpolation to either
+ *  interpolate or decimate the sample rate of the data
+ *  in the array.
+ *  The input sample rate is normalized to 1.0 Hz
+ *  The new sample period is relative to the normalized
+ *  input sample rate.
  *
  ********************************************************/
 
@@ -668,31 +668,31 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSinc(const SLData_t* SIGLIB_PTR_DECL
  * Function: SDA_ResampleSincNSamples
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLData_t * SIGLIB_PTR_DECL pSincLUT,
- *   const SLData_t LookUpTablePhaseGain,
- *   const SLData_t NewSamplePeriod,
- *   const SLArrayIndex_t NumberOfAdjacentSamples,
- *   const SLArrayIndex_t sampleLength,
- *   const SLArrayIndex_t OutputLength)
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLData_t * SIGLIB_PTR_DECL pSincLUT,
+ *  const SLData_t LookUpTablePhaseGain,
+ *  const SLData_t NewSamplePeriod,
+ *  const SLArrayIndex_t NumberOfAdjacentSamples,
+ *  const SLArrayIndex_t sampleLength,
+ *  const SLArrayIndex_t OutputLength)
  *
  * Return value:
- *   Number of interpolated / decimated output samples
+ *  Number of interpolated / decimated output samples
  *
  * Description:
- *   Interpolate and filter the input data sample rate
+ *  Interpolate and filter the input data sample rate
  *
  * Notes:
- *   This function uses sinc interpolation to either
- *   interpolate or decimate the sample rate of the data
- *   in the array.
- *   The input sample rate is normalized to 1.0 Hz
- *   The new sample period is relative to the normalized
- *   input sample rate.
- *   The function only outputs N samples. If the resampling
- *   shortens the array then it is zero padded. If the
- *   resampling lengthens the array then it is truncated.
+ *  This function uses sinc interpolation to either
+ *  interpolate or decimate the sample rate of the data
+ *  in the array.
+ *  The input sample rate is normalized to 1.0 Hz
+ *  The new sample period is relative to the normalized
+ *  input sample rate.
+ *  The function only outputs N samples. If the resampling
+ *  shortens the array then it is zero padded. If the
+ *  resampling lengthens the array then it is truncated.
  *
  ********************************************************/
 
@@ -740,7 +740,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSincNSamples(const SLData_t* SIGLIB_
   } while ((SAI_RoundDown(xIndex) < sampleLength) && (outputSampleCount < OutputLength));
 
   if (outputSampleCount < OutputLength) {    // Zero pad the array
-    SDA_Clear(pDst, OutputLength - outputSampleCount);
+    SDA_Zeros(pDst, OutputLength - outputSampleCount);
   }
 
   return (outputSampleCount);
@@ -750,16 +750,16 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSincNSamples(const SLData_t* SIGLIB_
  * Function: SIF_InterpolateSinc1D
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pSincLUT,
- *   SLData_t *pPhaseGain,
- *   const SLData_t NumberOfAdjacentSamples,
- *   const SLArrayIndex_t SincTableLength
+ *  SLData_t * SIGLIB_PTR_DECL pSincLUT,
+ *  SLData_t *pPhaseGain,
+ *  const SLData_t NumberOfAdjacentSamples,
+ *  const SLArrayIndex_t SincTableLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise quick sinc look up table
+ *  Initialise quick sinc look up table
  *
  ********************************************************/
 
@@ -780,19 +780,19 @@ void SIGLIB_FUNC_DECL SIF_InterpolateSinc1D(SLData_t* pSincLUT, SLData_t* pPhase
  * Function: SIF_InterpolateWindowedSinc1D
  *
  * Parameters:
- *   SLData_t * SIGLIB_PTR_DECL pSincLUT,
- *   SLData_t *pPhaseGain,
- *   const SLData_t NumberOfAdjacentSamples,
- *   SLData_t * SIGLIB_PTR_DECL pWindowCoeffs,
- *   const enum SLWindow_t WindowType,
- *   const SLData_t Coeff,
- *   const SLArrayIndex_t SincTableLength
+ *  SLData_t * SIGLIB_PTR_DECL pSincLUT,
+ *  SLData_t *pPhaseGain,
+ *  const SLData_t NumberOfAdjacentSamples,
+ *  SLData_t * SIGLIB_PTR_DECL pWindowCoeffs,
+ *  const enum SLWindow_t WindowType,
+ *  const SLData_t Coeff,
+ *  const SLArrayIndex_t SincTableLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise windowed quick sinc look up table
+ *  Initialise windowed quick sinc look up table
  *
  ********************************************************/
 
@@ -821,21 +821,21 @@ void SIGLIB_FUNC_DECL SIF_InterpolateWindowedSinc1D(SLData_t* pSincLUT, SLData_t
  * Function: SDA_InterpolateSinc1D
  *
  * Parameters:
- *   const SLData_t *pData,
- *   const SLData_t x,
- *   SLData_t * SIGLIB_PTR_DECL pSincLUT,
- *   const SLData_t LookUpTablePhaseGain,
- *   const SLArrayIndex_t NumberOfAdjacentSamples,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t *pData,
+ *  const SLData_t x,
+ *  SLData_t * SIGLIB_PTR_DECL pSincLUT,
+ *  const SLData_t LookUpTablePhaseGain,
+ *  const SLArrayIndex_t NumberOfAdjacentSamples,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   Interpolated y value
+ *  Interpolated y value
  *
  * Description:
- *   This function uses sinc interpolation to calculate
- *   the interpolated value of y, for a given x.
- *   The Y samples are located in the source array, with
- *   the array index being the x value.
+ *  This function uses sinc interpolation to calculate
+ *  the interpolated value of y, for a given x.
+ *  The Y samples are located in the source array, with
+ *  the array index being the x value.
  *
  ********************************************************/
 
@@ -877,14 +877,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_InterpolateSinc1D(const SLData_t* SIGLIB_PTR_DECL 
  * Function: SIF_ResampleLinearContiguous
  *
  * Parameters:
- *   SLData_t *pPreviousXValue
- *   SLData_t *pPreviousYValue
+ *  SLData_t *pPreviousXValue
+ *  SLData_t *pPreviousYValue
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the resample linear contiguous function
+ *  Initialise the resample linear contiguous function
  *
  ********************************************************/
 
@@ -898,27 +898,27 @@ void SIGLIB_FUNC_DECL SIF_ResampleLinearContiguous(SLData_t* pPreviousXValue, SL
  * Function: SDA_ResampleLinearContiguous
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   SLData_t *pPreviousXValue,
- *   SLData_t *pPreviousYValue
- *   const SLData_t NewSamplePeriod,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  SLData_t *pPreviousXValue,
+ *  SLData_t *pPreviousYValue
+ *  const SLData_t NewSamplePeriod,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   Number of interpolated / decimated output samples
+ *  Number of interpolated / decimated output samples
  *
  * Description:
- *   Interpolate and filter the input data sample rate
+ *  Interpolate and filter the input data sample rate
  *
  * Notes:
- *   This function uses linear interpolation to either
- *   interpolate or decimate the sample rate of the data
- *   in the array.
- *   The input sample rate is normalized to 1.0 Hz
- *   The new sample period is relative to the normalized
- *   input sample rate.
- *   This function is contiguous across array boundaries.
+ *  This function uses linear interpolation to either
+ *  interpolate or decimate the sample rate of the data
+ *  in the array.
+ *  The input sample rate is normalized to 1.0 Hz
+ *  The new sample period is relative to the normalized
+ *  input sample rate.
+ *  This function is contiguous across array boundaries.
  *
  ********************************************************/
 
@@ -967,19 +967,19 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleLinearContiguous(const SLData_t* SIG
  * Function: SIF_ResampleSincContiguous
  *
  * Parameters:
- *   SLData_t *pPreviousXValue,
- *   SLData_t * SIGLIB_PTR_DECL pSincLUT,
- *   SLData_t * SIGLIB_PTR_DECL pXDataTable,
- *   SLData_t *pPhaseGain,
- *   const SLData_t NumberOfAdjacentSamples,
- *   const SLArrayIndex_t SincTableLength
+ *  SLData_t *pPreviousXValue,
+ *  SLData_t * SIGLIB_PTR_DECL pSincLUT,
+ *  SLData_t * SIGLIB_PTR_DECL pXDataTable,
+ *  SLData_t *pPhaseGain,
+ *  const SLData_t NumberOfAdjacentSamples,
+ *  const SLArrayIndex_t SincTableLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the resample sinc contiguous function
- *   with a quick sinc look up table
+ *  Initialise the resample sinc contiguous function
+ *  with a quick sinc look up table
  *
  ********************************************************/
 
@@ -1006,22 +1006,22 @@ void SIGLIB_FUNC_DECL SIF_ResampleSincContiguous(SLData_t* pPreviousXValue, SLDa
  * Function: SIF_ResampleWindowedSincContiguous
  *
  * Parameters:
- *   SLData_t *pPreviousXValue,
- *   SLData_t * SIGLIB_PTR_DECL pSincLUT,
- *   SLData_t * SIGLIB_PTR_DECL pXDataTable,
- *   SLData_t *pPhaseGain,
- *   const SLData_t NumberOfAdjacentSamples,
- *   SLData_t * SIGLIB_PTR_DECL pWindowCoeffs,
- *   const enum SLWindow_t WindowType,
- *   const SLData_t Coeff,
- *   const SLArrayIndex_t SincTableLength
+ *  SLData_t *pPreviousXValue,
+ *  SLData_t * SIGLIB_PTR_DECL pSincLUT,
+ *  SLData_t * SIGLIB_PTR_DECL pXDataTable,
+ *  SLData_t *pPhaseGain,
+ *  const SLData_t NumberOfAdjacentSamples,
+ *  SLData_t * SIGLIB_PTR_DECL pWindowCoeffs,
+ *  const enum SLWindow_t WindowType,
+ *  const SLData_t Coeff,
+ *  const SLArrayIndex_t SincTableLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the resample sinc contiguous function
- *   with a windowed sinc look up table
+ *  Initialise the resample sinc contiguous function
+ *  with a windowed sinc look up table
  *
  ********************************************************/
 
@@ -1057,30 +1057,30 @@ void SIGLIB_FUNC_DECL SIF_ResampleWindowedSincContiguous(SLData_t* pPreviousXVal
  * Function: SDA_ResampleSincContiguous
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   SLData_t *pPreviousXValue,
- *   SLData_t * SIGLIB_PTR_DECL pSincLUT,
- *   SLData_t * SIGLIB_PTR_DECL pXDataTable,
- *   const SLData_t LookUpTablePhaseGain,
- *   const SLData_t NewSamplePeriod,
- *   const SLArrayIndex_t NumberOfAdjacentSamples,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  SLData_t *pPreviousXValue,
+ *  SLData_t * SIGLIB_PTR_DECL pSincLUT,
+ *  SLData_t * SIGLIB_PTR_DECL pXDataTable,
+ *  const SLData_t LookUpTablePhaseGain,
+ *  const SLData_t NewSamplePeriod,
+ *  const SLArrayIndex_t NumberOfAdjacentSamples,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   Number of interpolated / decimated output samples
+ *  Number of interpolated / decimated output samples
  *
  * Description:
- *   Interpolate and filter the input data sample rate
+ *  Interpolate and filter the input data sample rate
  *
  * Notes:
- *   This function uses sinc interpolation to either
- *   interpolate or decimate the sample rate of the data
- *   in the array.
- *   The input sample rate is normalized to 1.0 Hz
- *   The new sample period is relative to the normalized
- *   input sample rate.
- *   This function is contiguous across array boundaries.
+ *  This function uses sinc interpolation to either
+ *  interpolate or decimate the sample rate of the data
+ *  in the array.
+ *  The input sample rate is normalized to 1.0 Hz
+ *  The new sample period is relative to the normalized
+ *  input sample rate.
+ *  This function is contiguous across array boundaries.
  *
  ********************************************************/
 
@@ -1173,19 +1173,19 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_ResampleSincContiguous(const SLData_t* SIGLI
  * Function: SDS_InterpolateQuadratic1D
  *
  * Parameters:
- *   const SLData_t inputY0,
- *   const SLData_t inputY1,
- *   const SLData_t inputY2,
- *   const SLData_t deltaX)
+ *  const SLData_t inputY0,
+ *  const SLData_t inputY1,
+ *  const SLData_t inputY2,
+ *  const SLData_t deltaX)
  *
  * Return value:
- *   Interpolated y value
+ *  Interpolated y value
  *
  * Description:
- *   This function uses quadratic spline interpolation to
- *   calculate the interpolated value of y, for a given deltaX.
- *   DeltaX is a value between 0 and 1 and represents the
- *   fractional offset from x(1) to x(2).
+ *  This function uses quadratic spline interpolation to
+ *  calculate the interpolated value of y, for a given deltaX.
+ *  DeltaX is a value between 0 and 1 and represents the
+ *  fractional offset from x(1) to x(2).
  *
  ********************************************************/
 
@@ -1201,19 +1201,19 @@ SLData_t SIGLIB_FUNC_DECL SDS_InterpolateQuadratic1D(const SLData_t inputY0, con
  * Function: SDS_InterpolateQuadraticBSpline1D
  *
  * Parameters:
- *   const SLData_t inputY0,
- *   const SLData_t inputY1,
- *   const SLData_t inputY2,
- *   const SLData_t deltaX)
+ *  const SLData_t inputY0,
+ *  const SLData_t inputY1,
+ *  const SLData_t inputY2,
+ *  const SLData_t deltaX)
  *
  * Return value:
- *   Interpolated y value
+ *  Interpolated y value
  *
  * Description:
- *   This function uses quadratic spline interpolation to
- *   calculate the interpolated value of y, for a given deltaX.
- *   DeltaX is a value between 0 and 1 and represents the
- *   fractional offset from x(1) to x(2).
+ *  This function uses quadratic spline interpolation to
+ *  calculate the interpolated value of y, for a given deltaX.
+ *  DeltaX is a value between 0 and 1 and represents the
+ *  fractional offset from x(1) to x(2).
  *
  ********************************************************/
 
@@ -1231,19 +1231,19 @@ SLData_t SIGLIB_FUNC_DECL SDS_InterpolateQuadraticBSpline1D(const SLData_t input
  * Function: SDS_InterpolateQuadraticLagrange1D
  *
  * Parameters:
- *   const SLData_t inputY0,
- *   const SLData_t inputY1,
- *   const SLData_t inputY2,
- *   const SLData_t deltaX)
+ *  const SLData_t inputY0,
+ *  const SLData_t inputY1,
+ *  const SLData_t inputY2,
+ *  const SLData_t deltaX)
  *
  * Return value:
- *   Interpolated y value
+ *  Interpolated y value
  *
  * Description:
- *   This function uses quadratic Lagrange interpolation to
- *   calculate the interpolated value of y, for a given deltaX.
- *   DeltaX is a value between 0 and 1 and represents the
- *   fractional offset from x(1) to x(2).
+ *  This function uses quadratic Lagrange interpolation to
+ *  calculate the interpolated value of y, for a given deltaX.
+ *  DeltaX is a value between 0 and 1 and represents the
+ *  fractional offset from x(1) to x(2).
  *
  ********************************************************/
 
@@ -1261,16 +1261,16 @@ SLData_t SIGLIB_FUNC_DECL SDS_InterpolateQuadraticLagrange1D(const SLData_t inpu
  * Function: SIF_LagrangeFirCoefficients
  *
  * Parameters:
- *   SLData_t *pFilterCoefficients,
- *   const SLData_t delay,
- *   const SLArrayIndex_t filterLength)
+ *  SLData_t *pFilterCoefficients,
+ *  const SLData_t delay,
+ *  const SLArrayIndex_t filterLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   This function returns a length N array of FIR filter
- *   coefficients for a Lagrange interpolator
+ *  This function returns a length N array of FIR filter
+ *  coefficients for a Lagrange interpolator
  *
  ********************************************************/
 
@@ -1295,17 +1295,17 @@ void SIGLIB_FUNC_DECL SIF_LagrangeFirCoefficients(SLData_t* SIGLIB_PTR_DECL pFil
  * Function: SDS_LagrangeInterpolate
  *
  * Parameters:
- *   SLData_t* SIGLIB_PTR_DECL pSrcPoints,
- *   SLData_t* SIGLIB_PTR_DECL pFilterCoefficients,
- *   SLData_t delay,
- *   SLArrayIndex_t filterLength)
+ *  SLData_t* SIGLIB_PTR_DECL pSrcPoints,
+ *  SLData_t* SIGLIB_PTR_DECL pFilterCoefficients,
+ *  SLData_t delay,
+ *  SLArrayIndex_t filterLength)
  *
  * Return value:
- *   Interpolated value
+ *  Interpolated value
  *
  * Description:
- *   This function perform Lagrange Interpolation on the
- *   dataset at the given delay point.
+ *  This function perform Lagrange Interpolation on the
+ *  dataset at the given delay point.
  *
  ********************************************************/
 
@@ -1327,18 +1327,18 @@ SLData_t SDS_LagrangeInterpolate(const SLData_t* SIGLIB_PTR_DECL pSrcPoints, SLD
  * Function: SDA_LagrangeInterpolate
  *
  * Parameters:
- *   const SLData_t* SIGLIB_PTR_DECL pSrcPoints,
- *   SLData_t* SIGLIB_PTR_DECL pDst,
- *   SLData_t* SIGLIB_PTR_DECL pFilterCoefficients,
- *   const SLArrayIndex_t filterLength,
- *   const SLArrayIndex_t arrayLength)
+ *  const SLData_t* SIGLIB_PTR_DECL pSrcPoints,
+ *  SLData_t* SIGLIB_PTR_DECL pDst,
+ *  SLData_t* SIGLIB_PTR_DECL pFilterCoefficients,
+ *  const SLArrayIndex_t filterLength,
+ *  const SLArrayIndex_t arrayLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   This function perform Lagrange Interpolation on the
- *   dataset at the given delay points, in the source array.
+ *  This function perform Lagrange Interpolation on the
+ *  dataset at the given delay points, in the source array.
  *
  ********************************************************/
 

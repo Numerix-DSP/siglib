@@ -44,18 +44,18 @@ Description: SigLib DSP library generic filter routines.
  * Function: SDA_Integrate
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLData_t  Reset,
- *   const SLData_t  Decay,
- *   SLData_t    *Sum,
- *   const SLArrayIndex_t size
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLData_t  Reset,
+ *  const SLData_t  Decay,
+ *  SLData_t    *Sum,
+ *  const SLArrayIndex_t size
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Integrate the samples in the array.
+ *  Integrate the samples in the array.
  *
  ********************************************************/
 
@@ -91,16 +91,16 @@ void SIGLIB_FUNC_DECL SDA_Integrate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData
  * Function: SDA_Differentiate
  *
  * Parameters:
- *   const SLData_t * SIGLIB_PTR_DECL pSrc,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   SLData_t * SIGLIB_PTR_DECL pPrevious,
- *   const SLArrayIndex_t sampleLength
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  SLData_t * SIGLIB_PTR_DECL pPrevious,
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Differentiate the samples in the array.
+ *  Differentiate the samples in the array.
  *
  ********************************************************/
 
@@ -138,10 +138,10 @@ void SIGLIB_FUNC_DECL SDA_Differentiate(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
  * Function: SIF_LeakyIntegrator
  *
  * Parameters:
- *   SLData_t *                - Pointer to integrator state
+ *  SLData_t *               - Pointer to integrator state
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialize the leaky integrator functions.
  *
@@ -156,17 +156,17 @@ void SIGLIB_FUNC_DECL SIF_LeakyIntegrator(SLData_t* pState)
  * Function: SDS_LeakyIntegrator1
  *
  * Parameters:
- *   const SLData_t            - Pointer to source data
- *   SLData_t *                - Pointer to integrator state
- *   SLData_t const            - LeakOutput
- *   const SLData_t            - Peak
+ *  const SLData_t            - Pointer to source data
+ *  SLData_t *               - Pointer to integrator state
+ *  SLData_t const            - LeakOutput
+ *  const SLData_t            - Peak
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Implement a leaky integrator. The state
- *   value is not allowed to overflow the peak level,
- *   even temporarily
+ *  value is not allowed to overflow the peak level,
+ *  even temporarily
  *
  ********************************************************/
 
@@ -192,18 +192,18 @@ SLData_t SIGLIB_FUNC_DECL SDS_LeakyIntegrator1(const SLData_t Src, SLData_t* pSt
  * Function: SDS_LeakyIntegrator2
  *
  * Parameters:
- *   const SLData_t            - Pointer to source data
- *   SLData_t *                - Pointer to integrator state
- *   SLData_t const            - LeakOutput
- *   const SLData_t            - Peak
+ *  const SLData_t            - Pointer to source data
+ *  SLData_t *               - Pointer to integrator state
+ *  SLData_t const            - LeakOutput
+ *  const SLData_t            - Peak
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Implement a leaky integrator. The state
- *   value is allowed to overflow the peak level
- *   temporarily as SLArrayIndex_t as the accumulator value is
- *   below the peak level when the function returns.
+ *  value is allowed to overflow the peak level
+ *  temporarily as SLArrayIndex_t as the accumulator value is
+ *  below the peak level when the function returns.
  *
  ********************************************************/
 
@@ -229,14 +229,14 @@ SLData_t SIGLIB_FUNC_DECL SDS_LeakyIntegrator2(const SLData_t Src, SLData_t* pSt
  * Function: SIF_HilbertTransformerFirFilter
  *
  * Parameters:
- *   SLData_t *                - Filter coeffs pointer
- *   const SLArrayIndex_t      - Filter length
+ *  SLData_t *               - Filter coeffs pointer
+ *  const SLArrayIndex_t      - Filter length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Generate the taps for an FIR filter
- *   Hilbert transformer.
+ *  Hilbert transformer.
  *
  ********************************************************/
 
@@ -260,15 +260,15 @@ void SIGLIB_FUNC_DECL SIF_HilbertTransformerFirFilter(SLData_t* SIGLIB_PTR_DECL 
  * Function: SIF_GoertzelIirFilter
  *
  * Parameters:
- *   SLData_t *                - State array pointer
- *   const SLData_t            - Filter centre frequency
- *   const SLArrayIndex_t      - Data array length
+ *  SLData_t *               - State array pointer
+ *  const SLData_t            - Filter centre frequency
+ *  const SLArrayIndex_t      - Data array length
  *
  * Return value:
- *   SLData_t                  - Goertzel filter coefficient
+ *  SLData_t                  - Goertzel filter coefficient
  *
  * Description: Generate the coefficient for a Goertzel
- *   IIR filter.
+ *  IIR filter.
  *
  ********************************************************/
 
@@ -285,14 +285,14 @@ SLData_t SIGLIB_FUNC_DECL SIF_GoertzelIirFilter(SLData_t* SIGLIB_PTR_DECL pState
  * Function: SDA_GoertzelIirFilter
  *
  * Parameters:
- *   const SLData_t *          - Pointer to source array
- *   SLData_t *                - Pointer to destination array
- *   SLData_t *                - State array pointer
- *   const SLData_t            - Filter coefficient
- *   const SLArrayIndex_t      - Data array length
+ *  const SLData_t *         - Pointer to source array
+ *  SLData_t *               - Pointer to destination array
+ *  SLData_t *               - State array pointer
+ *  const SLData_t            - Filter coefficient
+ *  const SLArrayIndex_t      - Data array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Apply the Goertzel IIR filter.
  *
@@ -331,12 +331,12 @@ void SIGLIB_FUNC_DECL SDA_GoertzelIirFilter(const SLData_t* SIGLIB_PTR_DECL pSrc
  * Function: SDS_GoertzelIirFilter
  *
  * Parameters:
- *   const SLData_t            - Source value
- *   SLData_t *                - State array pointer
- *   const SLData_t            - Filter coefficient
+ *  const SLData_t            - Source value
+ *  SLData_t *               - State array pointer
+ *  const SLData_t            - Filter coefficient
  *
  * Return value:
- *   Filtered value
+ *  Filtered value
  *
  * Description: Apply the Goertzel IIR filter.
  *
@@ -362,14 +362,14 @@ SLData_t SIGLIB_FUNC_DECL SDS_GoertzelIirFilter(const SLData_t Src, SLData_t* SI
  * Function: SIF_GoertzelDetect
  *
  * Parameters:
- *   const SLData_t            - Filter centre frequency
- *   const SLArrayIndex_t      - Data array length
+ *  const SLData_t            - Filter centre frequency
+ *  const SLArrayIndex_t      - Data array length
  *
  * Return value:
- *   SLData_t                  - Goertzel filter coefficient
+ *  SLData_t                  - Goertzel filter coefficient
  *
  * Description: Generate the coefficient for a Goertzel
- *   IIR filter.
+ *  IIR filter.
  *
  ********************************************************/
 
@@ -383,12 +383,12 @@ SLData_t SIGLIB_FUNC_DECL SIF_GoertzelDetect(const SLData_t Freq, const SLArrayI
  * Function: SDA_GoertzelDetect
  *
  * Parameters:
- *   const SLData_t *          - Input array pointer
- *   const SLData_t            - Filter coefficient
- *   const SLArrayIndex_t      - Data array length
+ *  const SLData_t *         - Input array pointer
+ *  const SLData_t            - Filter coefficient
+ *  const SLArrayIndex_t      - Data array length
  *
  * Return value:
- *   SLData_t            - Filtered energy
+ *  SLData_t            - Filtered energy
  *
  * Description: Return the filtered signal energy squared.
  *
@@ -428,14 +428,14 @@ SLData_t SIGLIB_FUNC_DECL SDA_GoertzelDetect(const SLData_t* SIGLIB_PTR_DECL pSr
  * Function: SIF_GoertzelDetectComplex
  *
  * Parameters:
- *   const SLData_t            - Filter centre frequency
- *   const SLArrayIndex_t      - Data array length
+ *  const SLData_t            - Filter centre frequency
+ *  const SLArrayIndex_t      - Data array length
  *
  * Return value:
- *   SLComplexRect_s           - Complex Goertzel filter coefficient
+ *  SLComplexRect_s           - Complex Goertzel filter coefficient
  *
  * Description: Generate the coefficient for a Goertzel
- *   IIR filter.
+ *  IIR filter.
  *
  ********************************************************/
 
@@ -455,15 +455,15 @@ SLComplexRect_s SIGLIB_FUNC_DECL SIF_GoertzelDetectComplex(const SLData_t Freq, 
  * Function: SDA_GoertzelDetectComplex
  *
  * Parameters:
- *   const SLData_t *          - Input array pointer
- *   const SLComplexRect_s     - Filter coefficient
- *   const SLArrayIndex_t      - Data array length
+ *  const SLData_t *         - Input array pointer
+ *  const SLComplexRect_s     - Filter coefficient
+ *  const SLArrayIndex_t      - Data array length
  *
  * Return value:
- *   SLComplexRect_s         - Complex filtered energy
+ *  SLComplexRect_s         - Complex filtered energy
  *
  * Description: Return the frequency domain coefficients
- *   for the signal.
+ *  for the signal.
  *
  ********************************************************/
 
@@ -514,15 +514,15 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDA_GoertzelDetectComplex(const SLData_t* SIGLI
  * Function: SIF_GaussianFirFilter
  *
  * Parameters:
- *   SLData_t *                - Pointer to filter coefficients
- *   const SLData_t            - Standard deviation of the distribution
- *   const SLArrayIndex_t      - Filter length
+ *  SLData_t *               - Pointer to filter coefficients
+ *  const SLData_t            - Standard deviation of the distribution
+ *  const SLArrayIndex_t      - Filter length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Generate the taps for an FIR
- *   Gaussian filter.
+ *  Gaussian filter.
  *
  ********************************************************/
 
@@ -540,15 +540,15 @@ void SIGLIB_FUNC_DECL SIF_GaussianFirFilter(SLData_t* SIGLIB_PTR_DECL pCoeffs, c
  * Function: SIF_GaussianFirFilter2
  *
  * Parameters:
- *   SLData_t *                - Pointer to filter coefficients
- *   const SLData_t            - Bandwidth
- *   const SLArrayIndex_t      - Filter length
+ *  SLData_t *               - Pointer to filter coefficients
+ *  const SLData_t            - Bandwidth
+ *  const SLArrayIndex_t      - Filter length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Generate the coefficient for a Gaussian
- *   FIR filter.
+ *  FIR filter.
  *
  ********************************************************/
 
@@ -567,23 +567,23 @@ void SIGLIB_FUNC_DECL SIF_GaussianFirFilter2(SLData_t* SIGLIB_PTR_DECL pCoeffs, 
  * Function: SIF_RaisedCosineFirFilter
  *
  * Parameters:
- *   SLData_t * pCoeffs,
- *   const SLData_t SymbolPeriod,
- *   const SLData_t Alpha,           0.0 <= Alpha <= 1.0
- *   const SLArrayIndex_t sampleLength
+ *  SLData_t * pCoeffs,
+ *  const SLData_t SymbolPeriod,
+ *  const SLData_t Alpha,           0.0 <= Alpha <= 1.0
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialise the raised cosine FIR filter.
- *   This function detects possible issues such as
- *   cos (PI/2) and generates the coefficient as a linear
- *   interpolation of the two adjacent coefficients.
- *   Filter index k = -N to +N where N = (Length -1) /2
- *   Alpha is the excess bandwidth of the filter beyond
- *   the -3dB point.
- *   Symbol rate = B = 1/T
- *   Sample rate normalised to 1.0 Hz
+ *  This function detects possible issues such as
+ *  cos (PI/2) and generates the coefficient as a linear
+ *  interpolation of the two adjacent coefficients.
+ *  Filter index k = -N to +N where N = (Length -1) /2
+ *  Alpha is the excess bandwidth of the filter beyond
+ *  the -3dB point.
+ *  Symbol rate = B = 1/T
+ *  Sample rate normalised to 1.0 Hz
  *
  ********************************************************/
 
@@ -628,23 +628,23 @@ void SIGLIB_FUNC_DECL SIF_RaisedCosineFirFilter(SLData_t* SIGLIB_PTR_DECL pCoeff
  * Function: SIF_RootRaisedCosineFirFilter
  *
  * Parameters:
- *   SLData_t * pCoeffs,
- *   const SLData_t SymbolPeriod,
- *   const SLData_t Alpha,           0.0 < Alpha < 1.0
- *   const SLArrayIndex_t sampleLength
+ *  SLData_t * pCoeffs,
+ *  const SLData_t SymbolPeriod,
+ *  const SLData_t Alpha,           0.0 < Alpha < 1.0
+ *  const SLArrayIndex_t sampleLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Initialise the square root raised cosine
- *   FIR filter. This function detects possible issues such
- *   as cos (PI/2) and generates the coefficient as a linear
- *   interpolation of the two adjacent coefficients.
- *   Filter index k = -N to +N
- *   Alpha is the excess bandwidth of the filter beyond
- *   the -3dB point.
- *   Symbol rate = B = 1/T
- *   Sample rate normalised to 1.0 Hz
+ *  FIR filter. This function detects possible issues such
+ *  as cos (PI/2) and generates the coefficient as a linear
+ *  interpolation of the two adjacent coefficients.
+ *  Filter index k = -N to +N
+ *  Alpha is the excess bandwidth of the filter beyond
+ *  the -3dB point.
+ *  Symbol rate = B = 1/T
+ *  Sample rate normalised to 1.0 Hz
  *
  ********************************************************/
 
@@ -693,17 +693,17 @@ void SIGLIB_FUNC_DECL SIF_RootRaisedCosineFirFilter(SLData_t* SIGLIB_PTR_DECL pC
  * Function: SDS_ZTransform
  *
  * Parameters:
- *   const SLComplexRect_s Location,
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pNumerator,
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pDenominator,
- *   const SLArrayIndex_t NumeratorLength,
- *   const SLArrayIndex_t DenominatorLength)
+ *  const SLComplexRect_s Location,
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pNumerator,
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pDenominator,
+ *  const SLArrayIndex_t NumeratorLength,
+ *  const SLArrayIndex_t DenominatorLength)
  *
  * Return value:
- *   Magnitude of z-transform at the specific location
+ *  Magnitude of z-transform at the specific location
  *
  * Description:
- *   Returns the magnitude of z-transform at the specific location
+ *  Returns the magnitude of z-transform at the specific location
  *
  ********************************************************/
 
@@ -762,17 +762,17 @@ SLData_t SIGLIB_FUNC_DECL SDS_ZTransform(const SLComplexRect_s Location, const S
  * Function: SDS_ZTransformDB
  *
  * Parameters:
- *   const SLComplexRect_s Location,
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pNumerator,
- *   const SLComplexRect_s * SIGLIB_PTR_DECL pDenominator,
- *   const SLArrayIndex_t NumeratorLength,
- *   const SLArrayIndex_t DenominatorLength)
+ *  const SLComplexRect_s Location,
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pNumerator,
+ *  const SLComplexRect_s * SIGLIB_PTR_DECL pDenominator,
+ *  const SLArrayIndex_t NumeratorLength,
+ *  const SLArrayIndex_t DenominatorLength)
  *
  * Return value:
- *   Magnitude of z-transform at the specific location
+ *  Magnitude of z-transform at the specific location
  *
  * Description:
- *   Returns the magnitude in dB of z-transform at the specific location
+ *  Returns the magnitude in dB of z-transform at the specific location
  *
  ********************************************************/
 
@@ -831,20 +831,20 @@ SLData_t SIGLIB_FUNC_DECL SDS_ZTransformDB(const SLComplexRect_s Location, const
  * Function: SUF_EstimateBPFirFilterLength
  *
  * Parameters:
- *   const SLData_t SampleRate,
- *   const SLData_t CentreFrequency,
- *   const SLArrayIndex_t MinimumLength,
- *   const SLArrayIndex_t MaximumLength
+ *  const SLData_t SampleRate,
+ *  const SLData_t CentreFrequency,
+ *  const SLArrayIndex_t MinimumLength,
+ *  const SLArrayIndex_t MaximumLength
  *
  * Return value:
- *   Number of coefficients
+ *  Number of coefficients
  *
  * Description:
- *   For the given range of filter lengths, estimate the
- *   length that provides the minimum side lobe error.
- *   Side lobe error is estimated from the fractional
- *   component of the number of cycles of the input
- *   waveform in the filter, for the given sample rate.
+ *  For the given range of filter lengths, estimate the
+ *  length that provides the minimum side lobe error.
+ *  Side lobe error is estimated from the fractional
+ *  component of the number of cycles of the input
+ *  waveform in the filter, for the given sample rate.
  *
  ********************************************************/
 
@@ -875,21 +875,21 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_EstimateBPFirFilterLength(const SLData_t Sam
  * Function: SUF_EstimateBPFirFilterError
  *
  * Parameters:
- *   const SLData_t SampleRate,
- *   const SLData_t CentreFrequency,
- *   const SLArrayIndex_t MinimumLength,
- *   const SLArrayIndex_t MaximumLength
- *   SLData_t    *pError
+ *  const SLData_t SampleRate,
+ *  const SLData_t CentreFrequency,
+ *  const SLArrayIndex_t MinimumLength,
+ *  const SLArrayIndex_t MaximumLength
+ *  SLData_t    *pError
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   For the given range of filter lengths, estimate the
- *   side lobe error.
- *   Side lobe error is estimated from the fractional
- *   component of the number of cycles of the input
- *   waveform in the filter, for the given sample rate.
+ *  For the given range of filter lengths, estimate the
+ *  side lobe error.
+ *  Side lobe error is estimated from the fractional
+ *  component of the number of cycles of the input
+ *  waveform in the filter, for the given sample rate.
  *
  ********************************************************/
 
@@ -914,15 +914,15 @@ void SIGLIB_FUNC_DECL SUF_EstimateBPFirFilterError(const SLData_t SampleRate, co
  * Function: SUF_FrequenciesToOctaves
  *
  * Parameters:
- *   const SLData_t Fl,
- *   const SLData_t Fh)
+ *  const SLData_t Fl,
+ *  const SLData_t Fh)
  *
  * Return value:
- *   Octave magnitude
+ *  Octave magnitude
  *
  * Description:
- *   Return the octave band magnitude for the given
- *   frequency band.
+ *  Return the octave band magnitude for the given
+ *  frequency band.
  *
  ********************************************************/
 
@@ -948,15 +948,15 @@ SLData_t SIGLIB_FUNC_DECL SUF_FrequenciesToOctaves(const SLData_t Fl, const SLDa
  * Function: SUF_FrequenciesToCentreFreqHz
  *
  * Parameters:
- *   const SLData_t Fl,
- *   const SLData_t Fh)
+ *  const SLData_t Fl,
+ *  const SLData_t Fh)
  *
  * Return value:
- *   Centre frequency
+ *  Centre frequency
  *
  * Description:
- *   Return the centre frequency for the given
- *   frequency band.
+ *  Return the centre frequency for the given
+ *  frequency band.
  *
  ********************************************************/
 
@@ -982,14 +982,14 @@ SLData_t SIGLIB_FUNC_DECL SUF_FrequenciesToCentreFreqHz(const SLData_t Fl, const
  * Function: SUF_FrequenciesToQFactor
  *
  * Parameters:
- *   const SLData_t Fl,
- *   const SLData_t Fh)
+ *  const SLData_t Fl,
+ *  const SLData_t Fh)
  *
  * Return value:
- *   Q factor
+ *  Q factor
  *
  * Description:
- *   Return the Q factor for the given frequency band.
+ *  Return the Q factor for the given frequency band.
  *
  ********************************************************/
 
@@ -1015,13 +1015,13 @@ SLData_t SIGLIB_FUNC_DECL SUF_FrequenciesToQFactor(const SLData_t Fl, const SLDa
  * Function: SUF_BandwidthToQFactor
  *
  * Parameters:
- *   const SLData_t BW)
+ *  const SLData_t BW)
  *
  * Return value:
- *   Q factor
+ *  Q factor
  *
  * Description:
- *   Return the Q factor for the given frequency bandwidth.
+ *  Return the Q factor for the given frequency bandwidth.
  *
  ********************************************************/
 
@@ -1038,13 +1038,13 @@ SLData_t SIGLIB_FUNC_DECL SUF_BandwidthToQFactor(const SLData_t BW)
  * Function: SUF_QFactorToBandwidth
  *
  * Parameters:
- *   const SLData_t QFactor)
+ *  const SLData_t QFactor)
  *
  * Return value:
- *   Bandwidth
+ *  Bandwidth
  *
  * Description:
- *   Return the bandwidth for the given Q factor.
+ *  Return the bandwidth for the given Q factor.
  *
  ********************************************************/
 
@@ -1064,14 +1064,14 @@ SLData_t SIGLIB_FUNC_DECL SUF_QFactorToBandwidth(const SLData_t QFactor)
  * Function: SDS_KalmanFilter1D
  *
  * Parameters:
- *   const SLData_t positionNoisy,
- *   SLKalmanFilter2D_s * kf)
+ *  const SLData_t positionNoisy,
+ *  SLKalmanFilter2D_s * kf)
  *
  * Return value:
- *   Position estimate
+ *  Position estimate
  *
  * Description:
- *   Compute the 1D Kalman filter.
+ *  Compute the 1D Kalman filter.
  *
  ********************************************************/
 
@@ -1100,17 +1100,17 @@ SLData_t SIGLIB_FUNC_DECL SDS_KalmanFilter1D(SLData_t positionNoisy, SLKalmanFil
  * Function: SDS_KalmanFilter2D
  *
  * Parameters:
- *   const SLData_t positionNoisy,
- *   const SLData_t velocityNoisy,
- *   SLKalmanFilter2D_s * kf,
- *   SLData_t *pPositionEstimate,
- *   SLData_t *pVelocityEstimate)
+ *  const SLData_t positionNoisy,
+ *  const SLData_t velocityNoisy,
+ *  SLKalmanFilter2D_s * kf,
+ *  SLData_t *pPositionEstimate,
+ *  SLData_t *pVelocityEstimate)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Compute the 2D Kalman filter.
+ *  Compute the 2D Kalman filter.
  *
  ********************************************************/
 

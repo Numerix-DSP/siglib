@@ -44,17 +44,17 @@ Description: Power spectrum analysis functions.
  * Function: SIF_FastAutoCrossPowerSpectrum
  *
  * Parameters:
- *   SLData_t *pFFTCoeffs,
- *   SLArrayIndex_t *pBitReverseAddressTable,
- *   const SLArrayIndex_t    FFTLength
- *   SLData_t *InverseFFTLength)
+ *  SLData_t *pFFTCoeffs,
+ *  SLArrayIndex_t *pBitReverseAddressTable,
+ *  const SLArrayIndex_t    FFTLength
+ *  SLData_t *InverseFFTLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the fast auto power spectrum and cross
- *   power spectrum function tables.
+ *  Initialise the fast auto power spectrum and cross
+ *  power spectrum function tables.
  *
  ********************************************************/
 
@@ -70,29 +70,29 @@ void SIGLIB_FUNC_DECL SIF_FastAutoCrossPowerSpectrum(SLData_t* SIGLIB_PTR_DECL p
  * Function: SDA_FastAutoPowerSpectrum
  *
  * Parameters:
- *   SLData_t * pRealData,
- *   SLData_t * pImagData,
- *   SLData_t *pFFTCoeffs,
- *   SLArrayIndex_t *pBitReverseAddressTable,
- *   const SLArrayIndex_t FFTLength,
- *   const SLArrayIndex_t Log2Size   - Log base2 transform size
- *   const SLData_t InverseFFTLength,
+ *  SLData_t * pRealData,
+ *  SLData_t * pImagData,
+ *  SLData_t *pFFTCoeffs,
+ *  SLArrayIndex_t *pBitReverseAddressTable,
+ *  const SLArrayIndex_t FFTLength,
+ *  const SLArrayIndex_t Log2Size   - Log base2 transform size
+ *  const SLData_t InverseFFTLength,
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Calculates the real auto power spectrum of the supplied
- *   data.
+ *  Calculates the real auto power spectrum of the supplied
+ *  data.
  *
  * Notes: This function works in-place so the input data
- *   is destroyed.
- *   The imaginary input data array is only used in the
- *   function, any input data is discarded.
- *   The results are returned in array RealData.
+ *  is destroyed.
+ *  The imaginary input data array is only used in the
+ *  function, any input data is discarded.
+ *  The results are returned in array RealData.
  *
- *   The result array is of length (N/2)+1 because the
- *   results in bins 0 and N/2 are purely real.
+ *  The result array is of length (N/2)+1 because the
+ *  results in bins 0 and N/2 are purely real.
  *
  ********************************************************/
 
@@ -118,34 +118,34 @@ void SIGLIB_FUNC_DECL SDA_FastAutoPowerSpectrum(SLData_t* SIGLIB_PTR_DECL pRealD
  * Function: SDA_FastCrossPowerSpectrum
  *
  * Parameters:
- *   SLData_t * pRealData1,
- *   SLData_t * pImagData1,
- *   SLData_t * pRealData2,
- *   SLData_t * pImagData2,
- *   SLData_t *pFFTCoeffs,
- *   SLArrayIndex_t *pBitReverseAddressTable,
- *   const SLArrayIndex_t FFTLength,
- *   const SLArrayIndex_t Log2Size   - Log base2 transform size
- *   const SLData_t InverseFFTLength,
+ *  SLData_t * pRealData1,
+ *  SLData_t * pImagData1,
+ *  SLData_t * pRealData2,
+ *  SLData_t * pImagData2,
+ *  SLData_t *pFFTCoeffs,
+ *  SLArrayIndex_t *pBitReverseAddressTable,
+ *  const SLArrayIndex_t FFTLength,
+ *  const SLArrayIndex_t Log2Size   - Log base2 transform size
+ *  const SLData_t InverseFFTLength,
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Calculates the real cross power spectrum of the supplied
- *   data.
+ *  Calculates the real cross power spectrum of the supplied
+ *  data.
  *
  * Notes: This function works in-place so the input data
- *   is destroyed.
- *   The imaginary input data arrays are only used in the
- *   function, any input data is discarded.
- *   The results are returned in array pRealData1.
- *   If pRealData1 and pRealData2 point to the same array
- *   (i.e. auto power spectrum) then the result will be
- *   corrupted.
+ *  is destroyed.
+ *  The imaginary input data arrays are only used in the
+ *  function, any input data is discarded.
+ *  The results are returned in array pRealData1.
+ *  If pRealData1 and pRealData2 point to the same array
+ *  (i.e. auto power spectrum) then the result will be
+ *  corrupted.
  *
- *   The result array is of length (N/2)+1 because the
- *   results in bins 0 and N/2 are purely real.
+ *  The result array is of length (N/2)+1 because the
+ *  results in bins 0 and N/2 are purely real.
  *
  ********************************************************/
 
@@ -176,26 +176,26 @@ void SIGLIB_FUNC_DECL SDA_FastCrossPowerSpectrum(SLData_t* SIGLIB_PTR_DECL pReal
  * Function: SIF_ArbAutoCrossPowerSpectrum
  *
  * Parameters:
- *   SLData_t *,             - Pointer to AWNr coefficients
- *   SLData_t *,             - Pointer to AWNi coefficients
- *   SLData_t *,             - Pointer to WMr coefficients
- *   SLData_t *,             - Pointer to WMi coefficients
- *   SLData_t *,             - Pointer to vLr coefficients
- *   SLData_t *,             - Pointer to vLi coefficients
- *   SLData_t *pFFTCoeffs,       - FFT coefficient pointer
- *   SLArrayIndex_t *pBitReverseAddressTable, - Bit reverse mode flag / Pointer
+ *  SLData_t *,             - Pointer to AWNr coefficients
+ *  SLData_t *,             - Pointer to AWNi coefficients
+ *  SLData_t *,             - Pointer to WMr coefficients
+ *  SLData_t *,             - Pointer to WMi coefficients
+ *  SLData_t *,             - Pointer to vLr coefficients
+ *  SLData_t *,             - Pointer to vLi coefficients
+ *  SLData_t *pFFTCoeffs,       - FFT coefficient pointer
+ *  SLArrayIndex_t *pBitReverseAddressTable, - Bit reverse mode flag / Pointer
  *to bit reverse address table enum SLArbitraryFFT_t *pCZTorFFTSwitch, - Pointer
  *to Switch to indicate CZT or FFT SLArrayIndex_t *pFFTLength,           -
  *Pointer to FFT length SLArrayIndex_t *Log2pFFTLength,       - Pointer to Log 2
  *FFT length SLData_t *InverseFFTLength,   - Pointer to inverse FFT length
- *   SLData_t *InverseSampleLength,  - Pointer to inverse Sample length
- *   const SLArrayIndex_t sampleLength   - Buffer length
+ *  SLData_t *InverseSampleLength,  - Pointer to inverse Sample length
+ *  const SLArrayIndex_t sampleLength   - Buffer length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the arbitrary power spectrum functions.
+ *  Initialise the arbitrary power spectrum functions.
  *
  ********************************************************/
 
@@ -211,7 +211,7 @@ void SIGLIB_FUNC_DECL SIF_ArbAutoCrossPowerSpectrum(SLData_t* SIGLIB_PTR_DECL pA
 
   // Test to see if we can use the pure FFT
   // i.e. the length is an integer power of two
-  if (SDS_PowerOfTwo(sampleLength)) {
+  if (SAI_TestPowerOfTwo(sampleLength)) {
     // Length is an integer power of two so use FFT
     *pCZTorFFTSwitch = SIGLIB_ARB_FFT_DO_FFT;
     *pFFTLength = sampleLength;
@@ -236,18 +236,18 @@ void SIGLIB_FUNC_DECL SIF_ArbAutoCrossPowerSpectrum(SLData_t* SIGLIB_PTR_DECL pA
  * Function: SDA_ArbAutoPowerSpectrum
  *
  * Parameters:
- *   SLData_t *pRealData,            - Real Source data array pointer
- *   SLData_t *pImagData,            - Imaginary destn. data array pointer
- *   SLData_t *pRealTemp,            - Real temporary data array pointer
- *   SLData_t *pImagTemp,            - Imaginary temporary data array pointer
- *   const SLData_t *,               - Pointer to AWNr coefficients
- *   const SLData_t *,               - Pointer to AWNi coefficients
- *   const SLData_t *,               - Pointer to WMr coefficients
- *   const SLData_t *,               - Pointer to WMi coefficients
- *   const SLData_t *,               - Pointer to vLr coefficients
- *   const SLData_t *,               - Pointer to vLi coefficients
- *   SLData_t *pFFTCoeffs,           - FFT coefficient pointer
- *   SLArrayIndex_t *pBitReverseAddressTable, - Bit reverse mode flag / Pointer
+ *  SLData_t *pRealData,            - Real Source data array pointer
+ *  SLData_t *pImagData,            - Imaginary destn. data array pointer
+ *  SLData_t *pRealTemp,            - Real temporary data array pointer
+ *  SLData_t *pImagTemp,            - Imaginary temporary data array pointer
+ *  const SLData_t *,               - Pointer to AWNr coefficients
+ *  const SLData_t *,               - Pointer to AWNi coefficients
+ *  const SLData_t *,               - Pointer to WMr coefficients
+ *  const SLData_t *,               - Pointer to WMi coefficients
+ *  const SLData_t *,               - Pointer to vLr coefficients
+ *  const SLData_t *,               - Pointer to vLi coefficients
+ *  SLData_t *pFFTCoeffs,           - FFT coefficient pointer
+ *  SLArrayIndex_t *pBitReverseAddressTable, - Bit reverse mode flag / Pointer
  *to bit reverse address table const enum SLArbitraryFFT_t CZTorFFTSwitch, -
  *Switch to indicate CZT or FFT const SLArrayIndex_t FFTLength,           - FFT
  *length const SLArrayIndex_t Log2FFTLength,       - Log 2 FFT length const
@@ -255,19 +255,19 @@ void SIGLIB_FUNC_DECL SIF_ArbAutoCrossPowerSpectrum(SLData_t* SIGLIB_PTR_DECL pA
  *SLArrayIndex_t sampleLength       - Data array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Arbitrary length auto power spectrum function.
+ *  Arbitrary length auto power spectrum function.
  *
  * Notes: This function works in-place so the input data
- *   is destroyed.
- *   The imaginary input data array is only used in the
- *   function, any input data is discarded.
- *   The results are returned in array pRealData.
+ *  is destroyed.
+ *  The imaginary input data array is only used in the
+ *  function, any input data is discarded.
+ *  The results are returned in array pRealData.
  *
- *   The result array is of length (N/2)+1 because the
- *   results in bins 0 and N/2 are purely real.
+ *  The result array is of length (N/2)+1 because the
+ *  results in bins 0 and N/2 are purely real.
  *
  ********************************************************/
 
@@ -290,9 +290,9 @@ void SIGLIB_FUNC_DECL SDA_ArbAutoPowerSpectrum(
   }
 
   else {    // Perform a chirp z-transform
-    SDA_Clear(pRealTemp + sampleLength,
+    SDA_Zeros(pRealTemp + sampleLength,
               (SLArrayIndex_t)(FFTLength - sampleLength));    // Ensure zero padded samples
-    SDA_Clear(pImagTemp + sampleLength, (SLArrayIndex_t)(FFTLength - sampleLength));
+    SDA_Zeros(pImagTemp + sampleLength, (SLArrayIndex_t)(FFTLength - sampleLength));
 
     // Complex window = complex mpy with real data
     SDA_ComplexWindow(pRealData, pRealData, pRealTemp, pImagTemp, pAWNr, pAWNi, sampleLength);
@@ -321,20 +321,20 @@ void SIGLIB_FUNC_DECL SDA_ArbAutoPowerSpectrum(
  * Function: SDA_ArbCrossPowerSpectrum
  *
  * Parameters:
- *   SLData_t *pRealData1,           - Real source data array 1 pointer
- *   SLData_t *pImagData1,           - Imaginary Source data array pointer
- *   SLData_t *pRealData2,           - Real source data array 2 pointer
- *   SLData_t *pImagData2,           - Imaginary source data array 2 pointer
- *   SLData_t *pRealTemp,            - Real temporary data array pointer
- *   SLData_t *pImagTemp,            - Imaginary temporary data array pointer
- *   const SLData_t *,               - Pointer to AWNr coefficients
- *   const SLData_t *,               - Pointer to AWNi coefficients
- *   const SLData_t *,               - Pointer to WMr coefficients
- *   const SLData_t *,               - Pointer to WMi coefficients
- *   const SLData_t *,               - Pointer to vLr coefficients
- *   const SLData_t *,               - Pointer to vLi coefficients
- *   SLData_t *pFFTCoeffs,           - FFT coefficient pointer
- *   SLArrayIndex_t *pBitReverseAddressTable, - Bit reverse mode flag / Pointer
+ *  SLData_t *pRealData1,           - Real source data array 1 pointer
+ *  SLData_t *pImagData1,           - Imaginary Source data array pointer
+ *  SLData_t *pRealData2,           - Real source data array 2 pointer
+ *  SLData_t *pImagData2,           - Imaginary source data array 2 pointer
+ *  SLData_t *pRealTemp,            - Real temporary data array pointer
+ *  SLData_t *pImagTemp,            - Imaginary temporary data array pointer
+ *  const SLData_t *,               - Pointer to AWNr coefficients
+ *  const SLData_t *,               - Pointer to AWNi coefficients
+ *  const SLData_t *,               - Pointer to WMr coefficients
+ *  const SLData_t *,               - Pointer to WMi coefficients
+ *  const SLData_t *,               - Pointer to vLr coefficients
+ *  const SLData_t *,               - Pointer to vLi coefficients
+ *  SLData_t *pFFTCoeffs,           - FFT coefficient pointer
+ *  SLArrayIndex_t *pBitReverseAddressTable, - Bit reverse mode flag / Pointer
  *to bit reverse address table const enum SLArbitraryFFT_t CZTorFFTSwitch, -
  *Switch to indicate CZT or FFT const SLArrayIndex_t FFTLength,           - FFT
  *length const SLArrayIndex_t Log2FFTLength,       - Log 2 FFT length const
@@ -342,22 +342,22 @@ void SIGLIB_FUNC_DECL SDA_ArbAutoPowerSpectrum(
  *SLArrayIndex_t sampleLength       - Data array length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Arbitrary length cross power spectrum function.
+ *  Arbitrary length cross power spectrum function.
  *
  * Notes: This function works in-place so the input data
- *   is destroyed.
- *   The imaginary input data arrays are only used in the
- *   function, any input data is discarded.
- *   The results are returned in array pRealData1.
- *   If pRealData1 and pRealData2 point to the same array
- *   (i.e. auto power spectrum) then the result will be
- *   corrupted.
+ *  is destroyed.
+ *  The imaginary input data arrays are only used in the
+ *  function, any input data is discarded.
+ *  The results are returned in array pRealData1.
+ *  If pRealData1 and pRealData2 point to the same array
+ *  (i.e. auto power spectrum) then the result will be
+ *  corrupted.
  *
- *   The result array is of length (N/2)+1 because the
- *   results in bins 0 and N/2 are purely real.
+ *  The result array is of length (N/2)+1 because the
+ *  results in bins 0 and N/2 are purely real.
  *
  ********************************************************/
 
@@ -383,9 +383,9 @@ SDA_ArbCrossPowerSpectrum(SLData_t* SIGLIB_PTR_DECL pRealData1, SLData_t* SIGLIB
   }
 
   else {    // Perform a chirp z-transform
-    SDA_Clear(pRealTemp + sampleLength,
+    SDA_Zeros(pRealTemp + sampleLength,
               (SLArrayIndex_t)(FFTLength - sampleLength));    // Ensure zero padded samples
-    SDA_Clear(pImagTemp + sampleLength, (SLArrayIndex_t)(FFTLength - sampleLength));
+    SDA_Zeros(pImagTemp + sampleLength, (SLArrayIndex_t)(FFTLength - sampleLength));
 
     // Complex window = complex mpy with real data
     SDA_ComplexWindow(pRealData1, pRealData1, pRealTemp, pImagTemp, pAWNr, pAWNi, sampleLength);
@@ -401,9 +401,9 @@ SDA_ArbCrossPowerSpectrum(SLData_t* SIGLIB_PTR_DECL pRealData1, SLData_t* SIGLIB
     // Complex multiply
     SDA_ComplexMultiply2(pWMr, pWMi, pRealTemp, pImagTemp, pRealData1, pImagData1, sampleLength);
 
-    SDA_Clear(pRealTemp + sampleLength,
+    SDA_Zeros(pRealTemp + sampleLength,
               (SLArrayIndex_t)(FFTLength - sampleLength));    // Ensure zero padded samples
-    SDA_Clear(pImagTemp + sampleLength, (SLArrayIndex_t)(FFTLength - sampleLength));
+    SDA_Zeros(pImagTemp + sampleLength, (SLArrayIndex_t)(FFTLength - sampleLength));
 
     // Complex window = complex mpy with real data
     SDA_ComplexWindow(pRealData2, pRealData2, pRealTemp, pImagTemp, pAWNr, pAWNi, sampleLength);
@@ -435,22 +435,22 @@ SDA_ArbCrossPowerSpectrum(SLData_t* SIGLIB_PTR_DECL pRealData1, SLData_t* SIGLIB
  * Function: SIF_WelchPowerSpectrum
  *
  * Parameters:
- *   SLArrayIndex_t *pOverlapSrcIndex,
- *   SLData_t * SIGLIB_PTR_DECL pWindowCoeffs,
- *   const enum SLWindow_t WindowType,
- *   const SLData_t Coeff,
- *   SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
- *   SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
- *   SLData_t *InverseFFTLength,
- *   const SLArrayIndex_t FFTLength,
- *   SLData_t *InverseNumberOfArraysAveraged,
- *   const SLArrayIndex_t NumberOfArraysAveraged)
+ *  SLArrayIndex_t *pOverlapSrcIndex,
+ *  SLData_t * SIGLIB_PTR_DECL pWindowCoeffs,
+ *  const enum SLWindow_t WindowType,
+ *  const SLData_t Coeff,
+ *  SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
+ *  SLData_t *InverseFFTLength,
+ *  const SLArrayIndex_t FFTLength,
+ *  SLData_t *InverseNumberOfArraysAveraged,
+ *  const SLArrayIndex_t NumberOfArraysAveraged)
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description:
- *   Initialise the fast Welch power spectrum functions.
+ *  Initialise the fast Welch power spectrum functions.
  *
  ********************************************************/
 
@@ -488,39 +488,39 @@ SLError_t SIGLIB_FUNC_DECL SIF_WelchPowerSpectrum(SLArrayIndex_t* pOverlapSrcInd
  * Function: SDA_WelchRealPowerSpectrum
  *
  * Parameters:
- *   const SLData_t *pSrcReal,
- *   SLData_t *pDst,
- *   SLData_t *pRealData,
- *   SLData_t *pImagData,
- *   SLData_t *pOverlap,
- *   SLArrayIndex_t *pOverlapSrcIndex,
- *   SLArrayIndex_t OverlapSize,
- *   const SLData_t *pWindowCoeffs,
- *   SLData_t *pFFTCoeffs,
- *   SLArrayIndex_t *pBitReverseAddressTable,
- *   const SLArrayIndex_t FFTLength,
- *   const SLArrayIndex_t Log2Size   - Log base2 transform size
- *   const SLData_t InverseFFTLength,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t NumberOfArraysAveraged,
- *   const SLData_t InverseNumberOfArraysAveraged,
- *   const SLArrayIndex_t SourceArrayLength)
+ *  const SLData_t *pSrcReal,
+ *  SLData_t *pDst,
+ *  SLData_t *pRealData,
+ *  SLData_t *pImagData,
+ *  SLData_t *pOverlap,
+ *  SLArrayIndex_t *pOverlapSrcIndex,
+ *  SLArrayIndex_t OverlapSize,
+ *  const SLData_t *pWindowCoeffs,
+ *  SLData_t *pFFTCoeffs,
+ *  SLArrayIndex_t *pBitReverseAddressTable,
+ *  const SLArrayIndex_t FFTLength,
+ *  const SLArrayIndex_t Log2Size   - Log base2 transform size
+ *  const SLData_t InverseFFTLength,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t NumberOfArraysAveraged,
+ *  const SLData_t InverseNumberOfArraysAveraged,
+ *  const SLArrayIndex_t SourceArrayLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Returns the real Welch power spectrum of the
- *   supplied data.
+ *  Returns the real Welch power spectrum of the
+ *  supplied data.
  *
  * Notes: This function does not work in-place. The
- *   results are placed in the result data array.
+ *  results are placed in the result data array.
  *
- *   It is important to ensure that there is enough data
- *   in the source array to avoid overflow.
+ *  It is important to ensure that there is enough data
+ *  in the source array to avoid overflow.
  *
- *   The result array is of length (N/2)+1 because the
- *   results in bins 0 and N/2 are purely real.
+ *  The result array is of length (N/2)+1 because the
+ *  results in bins 0 and N/2 are purely real.
  *
  ********************************************************/
 
@@ -536,7 +536,7 @@ void SIGLIB_FUNC_DECL SDA_WelchRealPowerSpectrum(const SLData_t* SIGLIB_PTR_DECL
   SLArrayIndex_t ResultLength =
       ((SLArrayIndex_t)((SLUFixData_t)FFTLength >> SIGLIB_UFIX_ONE) + SIGLIB_AI_ONE);    // Calculate the length of the result array
 
-  SDA_Clear(pDst, ResultLength);    // Clear result accumulator array
+  SDA_Zeros(pDst, ResultLength);    // Clear result accumulator array
 
   for (SLArrayIndex_t i = 0; i < NumberOfArraysAveraged; i++) {
     SDA_CopyWithOverlap(pSrcReal, pRealData, pOverlap, pOverlapSrcIndex, SourceArrayLength, OverlapSize, FFTLength);
@@ -566,42 +566,42 @@ void SIGLIB_FUNC_DECL SDA_WelchRealPowerSpectrum(const SLData_t* SIGLIB_PTR_DECL
  * Function: SDA_WelchComplexPowerSpectrum
  *
  * Parameters:
- *   const SLData_t *pSrcReal,
- *   const SLData_t * SIGLIB_PTR_DECL pSrcImag,
- *   SLData_t *pDst,
- *   SLData_t *pRealData,
- *   SLData_t *pImagData,
- *   SLData_t * SIGLIB_PTR_DECL pRealOverlap,
- *   SLData_t * SIGLIB_PTR_DECL pImagOverlap,
- *   SLArrayIndex_t *pOverlapSrcIndex,
- *   SLArrayIndex_t OverlapSize,
- *   const SLData_t *pWindowCoeffs,
- *   SLData_t *pFFTCoeffs,
- *   SLArrayIndex_t *pBitReverseAddressTable,
- *   const SLArrayIndex_t FFTLength,
- *   const SLArrayIndex_t Log2Size   - Log base2 transform size
- *   const SLData_t InverseFFTLength,
- *   SLData_t * SIGLIB_PTR_DECL pDst,
- *   const SLArrayIndex_t NumberOfArraysAveraged,
- *   const SLData_t InverseNumberOfArraysAveraged,
- *   const SLArrayIndex_t SourceArrayLength)
+ *  const SLData_t *pSrcReal,
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,
+ *  SLData_t *pDst,
+ *  SLData_t *pRealData,
+ *  SLData_t *pImagData,
+ *  SLData_t * SIGLIB_PTR_DECL pRealOverlap,
+ *  SLData_t * SIGLIB_PTR_DECL pImagOverlap,
+ *  SLArrayIndex_t *pOverlapSrcIndex,
+ *  SLArrayIndex_t OverlapSize,
+ *  const SLData_t *pWindowCoeffs,
+ *  SLData_t *pFFTCoeffs,
+ *  SLArrayIndex_t *pBitReverseAddressTable,
+ *  const SLArrayIndex_t FFTLength,
+ *  const SLArrayIndex_t Log2Size   - Log base2 transform size
+ *  const SLData_t InverseFFTLength,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t NumberOfArraysAveraged,
+ *  const SLData_t InverseNumberOfArraysAveraged,
+ *  const SLArrayIndex_t SourceArrayLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Returns the complex Welch power spectrum of the
- *   supplied data.
+ *  Returns the complex Welch power spectrum of the
+ *  supplied data.
  *
  * Notes: This function does not work in-place. The
- *   results are placed in the result data array.
+ *  results are placed in the result data array.
  *
- *   It is important to ensure that there is enough data
- *   in the source arrays to avoid overflow.
+ *  It is important to ensure that there is enough data
+ *  in the source arrays to avoid overflow.
  *
- *   The result array is of length (N/2)+1 because for a
- *   purely real FFT the results in bins 0 and N/2 are
- *   purely real.
+ *  The result array is of length (N/2)+1 because for a
+ *  purely real FFT the results in bins 0 and N/2 are
+ *  purely real.
  *
  ********************************************************/
 
@@ -620,7 +620,7 @@ void SIGLIB_FUNC_DECL SDA_WelchComplexPowerSpectrum(const SLData_t* SIGLIB_PTR_D
   SLArrayIndex_t ResultLength =
       ((SLArrayIndex_t)((SLUFixData_t)FFTLength >> SIGLIB_UFIX_ONE) + SIGLIB_AI_ONE);    // Calculate the length of the result array
 
-  SDA_Clear(pDst, ResultLength);    // Clear result accumulator array
+  SDA_Zeros(pDst, ResultLength);    // Clear result accumulator array
 
   for (SLArrayIndex_t i = 0; i < NumberOfArraysAveraged; i++) {
     SDA_CopyWithOverlap(pSrcReal, pRealData, pRealOverlap, pOverlapSrcIndex, SourceArrayLength, OverlapSize, FFTLength);
@@ -657,17 +657,17 @@ void SIGLIB_FUNC_DECL SDA_WelchComplexPowerSpectrum(const SLData_t* SIGLIB_PTR_D
  * Function: SIF_MagnitudeSquaredCoherence
  *
  * Parameters:
- *   SLData_t *pFFTCoeffs,
- *   SLArrayIndex_t *pBitReverseAddressTable,
- *   const SLArrayIndex_t    FFTLength
- *   SLData_t *InverseFFTLength)
+ *  SLData_t *pFFTCoeffs,
+ *  SLArrayIndex_t *pBitReverseAddressTable,
+ *  const SLArrayIndex_t    FFTLength
+ *  SLData_t *InverseFFTLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the magnitude squared coherence function
- *   tables.
+ *  Initialise the magnitude squared coherence function
+ *  tables.
  *
  ********************************************************/
 
@@ -683,36 +683,36 @@ void SIGLIB_FUNC_DECL SIF_MagnitudeSquaredCoherence(SLData_t* SIGLIB_PTR_DECL pF
  * Function: SDA_MagnitudeSquaredCoherence
  *
  * Parameters:
- *   SLData_t *pRealData1,       - The real source for input 1
- *   SLData_t *pImagData1,
- *   SLData_t *pRealData2,       - The real source for input 2
- *   SLData_t *pImagData2,
- *   SLData_t *pFFTCoeffs,
- *   SLData_t *pRealAPSData1,        - The real source for input 1
- *   SLData_t *pImagAPSData1,
- *   SLData_t *pRealAPSData2,        - The real source for input 2
- *   SLData_t *pImagAPSData2,
- *   SLData_t *pFFTCoeffs,
- *   SLArrayIndex_t *pBitReverseAddressTable,
- *   const SLArrayIndex_t FFTLength,
- *   const SLArrayIndex_t Log2Size   - Log base2 transform size
- *   const SLData_t InverseFFTLength)
+ *  SLData_t *pRealData1,       - The real source for input 1
+ *  SLData_t *pImagData1,
+ *  SLData_t *pRealData2,       - The real source for input 2
+ *  SLData_t *pImagData2,
+ *  SLData_t *pFFTCoeffs,
+ *  SLData_t *pRealAPSData1,        - The real source for input 1
+ *  SLData_t *pImagAPSData1,
+ *  SLData_t *pRealAPSData2,        - The real source for input 2
+ *  SLData_t *pImagAPSData2,
+ *  SLData_t *pFFTCoeffs,
+ *  SLArrayIndex_t *pBitReverseAddressTable,
+ *  const SLArrayIndex_t FFTLength,
+ *  const SLArrayIndex_t Log2Size   - Log base2 transform size
+ *  const SLData_t InverseFFTLength)
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Returns the magnitude squared coherence of the
- *   supplied data.
+ *  Returns the magnitude squared coherence of the
+ *  supplied data.
  *
  * Notes: This function places the results in the first
- *   real data array (*pDataArray1).
+ *  real data array (*pDataArray1).
  *
- *   The result array is of length (N/2)+1 because the
- *   results in bins 0 and N/2 are purely real.
+ *  The result array is of length (N/2)+1 because the
+ *  results in bins 0 and N/2 are purely real.
  *
- *   This function does not check for numerical overflow
- *   in the internal divide operation.
+ *  This function does not check for numerical overflow
+ *  in the internal divide operation.
  *
  ********************************************************/
 

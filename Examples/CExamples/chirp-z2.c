@@ -76,7 +76,7 @@ int main(void)
   if ((NULL == pInput) || (NULL == pRealData) || (NULL == pImagData) || (NULL == pRealDataFT) || (NULL == pImagDataFT) || (NULL == pAWNr) ||
       (NULL == pAWNi) || (NULL == pvLr) || (NULL == pvLi) || (NULL == pWMr) || (NULL == pWMi) || (NULL == pResults) || (NULL == pFFTCoeffs)) {
 
-    printf("\n\nMalloc failed\n\n");
+    printf("\n\nMemory allocation failed\n\n");
     exit(0);
   }
 
@@ -105,7 +105,7 @@ int main(void)
                      SIGLIB_NULL_DATA_PTR,    // Unused
                      FFT_LENGTH);             // Output dataset length
 
-  SDA_Clear(pRealData,       // Pointer to destination array
+  SDA_Zeros(pRealData,       // Pointer to destination array
             FT_SIZE);        // Dataset length
   SDA_Copy(pInput,           // Pointer to source array
            pRealData,        // Pointer to destination array
@@ -223,9 +223,9 @@ int main(void)
            FFT_LENGTH,                      // FFT length
            LOG2_FFT_LENGTH);                // log2 FFT length
                                             // Ensure zero padded samples
-  SDA_Clear(pCZTRealWork + INPUT_LENGTH,    // Pointer to destination array
+  SDA_Zeros(pCZTRealWork + INPUT_LENGTH,    // Pointer to destination array
             FFT_LENGTH - INPUT_LENGTH);     // Dataset length
-  SDA_Clear(pCZTImagWork + INPUT_LENGTH,    // Pointer to destination array
+  SDA_Zeros(pCZTImagWork + INPUT_LENGTH,    // Pointer to destination array
             FFT_LENGTH - INPUT_LENGTH);     // Dataset length
 
   // Complex window = complex mpy with real input data

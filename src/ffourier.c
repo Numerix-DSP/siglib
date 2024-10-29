@@ -44,14 +44,14 @@ Description: SigLib DSP library Fast Fourier Transform routines.
  * Function: SAI_FftLengthLog2
  *
  * Parameters:
- *   const SLArrayIndex_t    fftLength
+ *  const SLArrayIndex_t    fftLength
  *
  * Return value:
- *   Log 2 of FFT length
+ *  Log 2 of FFT length
  *
  * Description:
- *   Compute the log 2 of the FFT length - this function
- *   only accepts and returns integer values.
+ *  Compute the log 2 of the FFT length - this function
+ *  only accepts and returns integer values.
  *
  ********************************************************/
 
@@ -76,14 +76,14 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SAI_FftLengthLog2(const SLArrayIndex_t n)
  * Function: SAI_FftLengthLog4
  *
  * Parameters:
- *   const SLArrayIndex_t    fftLength
+ *  const SLArrayIndex_t    fftLength
  *
  * Return value:
- *   Log 4 of FFT length
+ *  Log 4 of FFT length
  *
  * Description:
- *   Compute the log 4 of the FFT length - this function
- *   only accepts and returns integer values.
+ *  Compute the log 4 of the FFT length - this function
+ *  only accepts and returns integer values.
  *
  ********************************************************/
 
@@ -108,15 +108,15 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SAI_FftLengthLog4(const SLArrayIndex_t n)
  * Function: SIF_Fft
  *
  * Parameters:
- *   SLData_t *pFFTCoeffs,
- *   SLArrayIndex_t *pBitReverseAddressTable,
- *   const SLArrayIndex_t    fftLength
+ *  SLData_t *pFFTCoeffs,
+ *  SLArrayIndex_t *pBitReverseAddressTable,
+ *  const SLArrayIndex_t    fftLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the FFT sine and cosine tables.
+ *  Initialise the FFT sine and cosine tables.
  *
  ********************************************************/
 
@@ -146,18 +146,18 @@ void SIGLIB_FUNC_DECL SIF_Fft(SLData_t* SIGLIB_PTR_DECL pFFTCoeffs, SLArrayIndex
  * Function: SDA_Rfft
  *
  * Parameters:
- *   SLData_t realData[],
- *   SLData_t imagData[],
- *   SLData_t *pFFTCoeffs,
- *   SLArrayIndex_t *pBitReverseAddressTable,
- *   const SLArrayIndex_t fftLength,
- *   const SLArrayIndex_t log2FFTLength   - Log base2 transform length
+ *  SLData_t realData[],
+ *  SLData_t imagData[],
+ *  SLData_t *pFFTCoeffs,
+ *  SLArrayIndex_t *pBitReverseAddressTable,
+ *  const SLArrayIndex_t fftLength,
+ *  const SLArrayIndex_t log2FFTLength   - Log base2 transform length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a real input FFT on the supplied data.
+ *  Perform a real input FFT on the supplied data.
  *
  ********************************************************/
 
@@ -262,18 +262,18 @@ void SIGLIB_FUNC_DECL SDA_Rfft(SLData_t realData[], SLData_t imagData[], const S
  * Function: SDA_Cfft
  *
  * Parameters:
- *   SLData_t realData[],
- *   SLData_t imagData[],
- *   SLData_t *pFFTCoeffs,                       - FFT coefficient pointer
- *   SLArrayIndex_t *pBitReverseAddressTable,    - Bit reverse mode flag /
+ *  SLData_t realData[],
+ *  SLData_t imagData[],
+ *  SLData_t *pFFTCoeffs,                       - FFT coefficient pointer
+ *  SLArrayIndex_t *pBitReverseAddressTable,    - Bit reverse mode flag /
  *Pointer to bit reverse address table const SLArrayIndex_t fftLength, const
  *SLArrayIndex_t log2FFTLength          - Log base2 transform length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a complex FFT on the supplied data.
+ *  Perform a complex FFT on the supplied data.
  *
  ********************************************************/
 
@@ -349,20 +349,20 @@ void SIGLIB_FUNC_DECL SDA_Cfft(SLData_t realData[], SLData_t imagData[], const S
  * Function: SDA_Cifft
  *
  * Parameters:
- *   SLData_t realData[],
- *   SLData_t imagData[],
- *   SLData_t *pFFTCoeffs,
- *   SLData_t *pFFTCoeffs,       - FFT coefficient pointer
- *   SLArrayIndex_t *pBitReverseAddressTable, - Bit reverse mode flag / Pointer
+ *  SLData_t realData[],
+ *  SLData_t imagData[],
+ *  SLData_t *pFFTCoeffs,
+ *  SLData_t *pFFTCoeffs,       - FFT coefficient pointer
+ *  SLArrayIndex_t *pBitReverseAddressTable, - Bit reverse mode flag / Pointer
  *to bit reverse address table const SLArrayIndex_t log2FFTLength       - Log
  *base2 transform length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a complex inverse FFT on the supplied
- *   data.
+ *  Perform a complex inverse FFT on the supplied
+ *  data.
  *
  ********************************************************/
 
@@ -438,16 +438,16 @@ void SIGLIB_FUNC_DECL SDA_Cifft(SLData_t realData[], SLData_t imagData[], const 
  * Function: SDA_BitReverseReorder
  *
  * Parameters:
- *   const SLData_t Src[],
- *   SLData_t Dst[],
- *   const SLArrayIndex_t *,   Bit reverse address table ptr
- *   const SLArrayIndex_t      fftLength,
+ *  const SLData_t Src[],
+ *  SLData_t Dst[],
+ *  const SLArrayIndex_t *,   Bit reverse address table ptr
+ *  const SLArrayIndex_t      fftLength,
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform bit reverse data reordering
+ *  Perform bit reverse data reordering
  *
  ********************************************************/
 
@@ -494,15 +494,15 @@ void SIGLIB_FUNC_DECL SDA_BitReverseReorder(const SLData_t Src[], SLData_t Dst[]
  * Function: SDA_IndexBitReverseReorder
  *
  * Parameters:
- *   const SLArrayIndex_t Src[],
- *   SLArrayIndex_t Dst[],
- *   const SLArrayIndex_t fftLength,
+ *  const SLArrayIndex_t Src[],
+ *  SLArrayIndex_t Dst[],
+ *  const SLArrayIndex_t fftLength,
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform bit reverse data reordering on fixed point data
+ *  Perform bit reverse data reordering on fixed point data
  *
  ********************************************************/
 
@@ -532,14 +532,14 @@ void SIGLIB_FUNC_DECL SDA_IndexBitReverseReorder(const SLArrayIndex_t Src[], SLA
  * Function: SIF_FastBitReverseReorder
  *
  * Parameters:
- *   SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
- *   const SLArrayIndex_t    fftLength
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
+ *  const SLArrayIndex_t    fftLength
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description:
- *   Initialise the fast bit reverse look up table.
+ *  Initialise the fast bit reverse look up table.
  *
  ********************************************************/
 
@@ -561,19 +561,19 @@ void SIGLIB_FUNC_DECL SIF_FastBitReverseReorder(SLArrayIndex_t* SIGLIB_PTR_DECL 
  * Function: SDA_RealRealCepstrum
  *
  * Parameters:
- *   SLData_t *pRealInput,
- *   SLData_t *pRealOutput,
- *   SLData_t *pImagOutput,
- *   SLData_t *pFFTCoeffs,
- *   SLArrayIndex_t *pBitReverseAddressTable,
- *   const SLArrayIndex_t fftLength,
- *   const SLArrayIndex_t log2FFTLength   - Log base2 transform length
+ *  SLData_t *pRealInput,
+ *  SLData_t *pRealOutput,
+ *  SLData_t *pImagOutput,
+ *  SLData_t *pFFTCoeffs,
+ *  SLArrayIndex_t *pBitReverseAddressTable,
+ *  const SLArrayIndex_t fftLength,
+ *  const SLArrayIndex_t log2FFTLength   - Log base2 transform length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a real input real cepstrum on the supplied data.
+ *  Perform a real input real cepstrum on the supplied data.
  *
  ********************************************************/
 
@@ -594,19 +594,19 @@ void SIGLIB_FUNC_DECL SDA_RealRealCepstrum(SLData_t* SIGLIB_INPUT_PTR_DECL pReal
  * Function: SDA_RealComplexCepstrum
  *
  * Parameters:
- *   SLData_t *pRealInput,
- *   SLData_t *pRealOutput,
- *   SLData_t *pImagOutput,
- *   SLData_t *pFFTCoeffs,
- *   SLArrayIndex_t *pBitReverseAddressTable,
- *   const SLArrayIndex_t fftLength,
- *   const SLArrayIndex_t log2FFTLength   - Log base2 transform length
+ *  SLData_t *pRealInput,
+ *  SLData_t *pRealOutput,
+ *  SLData_t *pImagOutput,
+ *  SLData_t *pFFTCoeffs,
+ *  SLArrayIndex_t *pBitReverseAddressTable,
+ *  const SLArrayIndex_t fftLength,
+ *  const SLArrayIndex_t log2FFTLength   - Log base2 transform length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a real input complex cepstrum on the supplied data.
+ *  Perform a real input complex cepstrum on the supplied data.
  *
  ********************************************************/
 
@@ -626,20 +626,20 @@ void SIGLIB_FUNC_DECL SDA_RealComplexCepstrum(SLData_t* SIGLIB_INPUT_PTR_DECL pR
  * Function: SDA_ComplexComplexCepstrum
  *
  * Parameters:
- *   SLData_t *pRealInput,
- *   SLData_t *pImagInput,
- *   SLData_t *pRealOutput,
- *   SLData_t *pImagOutput,
- *   SLData_t *pFFTCoeffs,
- *   SLArrayIndex_t *pBitReverseAddressTable,
- *   const SLArrayIndex_t fftLength,
- *   const SLArrayIndex_t log2FFTLength   - Log base2 transform length
+ *  SLData_t *pRealInput,
+ *  SLData_t *pImagInput,
+ *  SLData_t *pRealOutput,
+ *  SLData_t *pImagOutput,
+ *  SLData_t *pFFTCoeffs,
+ *  SLArrayIndex_t *pBitReverseAddressTable,
+ *  const SLArrayIndex_t fftLength,
+ *  const SLArrayIndex_t log2FFTLength   - Log base2 transform length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a real input complex cepstrum on the supplied data.
+ *  Perform a real input complex cepstrum on the supplied data.
  *
  ********************************************************/
 
@@ -662,15 +662,15 @@ void SIGLIB_FUNC_DECL SDA_ComplexComplexCepstrum(SLData_t* SIGLIB_INPUT_PTR_DECL
  * Function: SIF_FftTone
  *
  * Parameters:
- *   SLData_t *pFFTCoeffs,
- *   SLArrayIndex_t *pBitReverseAddressTable,
- *   const SLArrayIndex_t    fftLength
+ *  SLData_t *pFFTCoeffs,
+ *  SLArrayIndex_t *pBitReverseAddressTable,
+ *  const SLArrayIndex_t    fftLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the FFT sine and cosine tables.
+ *  Initialise the FFT sine and cosine tables.
  *
  ********************************************************/
 
@@ -684,22 +684,22 @@ void SIGLIB_FUNC_DECL SIF_FftTone(SLData_t* SIGLIB_PTR_DECL pFFTCoeffs, SLArrayI
  * Function: SDA_RfftTone
  *
  * Parameters:
- *   const SLData_t *pSrc,
- *   SLData_t *pRealData,
- *   SLData_t *pImagData,
- *   const SLData_t *pFFTCoeffs,
- *   SLArrayIndex_t *pBitReverseAddressTable,
- *   SLArrayIndex_t * pToneBinNumber,
- *   SLData_t * pToneMagnitude,
- *   const SLArrayIndex_t fftLength,
- *   const SLArrayIndex_t log2FFTLength   - Log base2 transform length
+ *  const SLData_t *pSrc,
+ *  SLData_t *pRealData,
+ *  SLData_t *pImagData,
+ *  const SLData_t *pFFTCoeffs,
+ *  SLArrayIndex_t *pBitReverseAddressTable,
+ *  SLArrayIndex_t * pToneBinNumber,
+ *  SLData_t * pToneMagnitude,
+ *  const SLArrayIndex_t fftLength,
+ *  const SLArrayIndex_t log2FFTLength   - Log base2 transform length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Return the FFT bin and magnitude of the peak frequency
- *   in the input signal.
+ *  Return the FFT bin and magnitude of the peak frequency
+ *  in the input signal.
  *
  ********************************************************/
 
@@ -723,20 +723,20 @@ void SIGLIB_FUNC_DECL SDA_RfftTone(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_
  * Function: SDA_Rfftr
  *
  * Parameters:
- *   SLData_t realData[],
- *   SLData_t imagData[],
- *   SLData_t *pDCTCoeffs,
- *   SLArrayIndex_t *pBitReverseAddressTable,
- *   const SLArrayIndex_t fftLength,
- *   const SLArrayIndex_t log2FFTLength   - Log base2 transform length
+ *  SLData_t realData[],
+ *  SLData_t imagData[],
+ *  SLData_t *pDCTCoeffs,
+ *  SLArrayIndex_t *pBitReverseAddressTable,
+ *  const SLArrayIndex_t fftLength,
+ *  const SLArrayIndex_t log2FFTLength   - Log base2 transform length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a real input FFT on the supplied data and
- *   only output the real component of the frequency
- *   domain results.
+ *  Perform a real input FFT on the supplied data and
+ *  only output the real component of the frequency
+ *  domain results.
  *
  ********************************************************/
 
@@ -836,15 +836,15 @@ void SIGLIB_FUNC_DECL SDA_Rfftr(SLData_t realData[], SLData_t imagData[], const 
  * Function: SIF_Fft4
  *
  * Parameters:
- *   SLData_t *pFFTCoeffs,
- *   SLArrayIndex_t *pBitReverseAddressTable,    - Digit reverse mode flag /
+ *  SLData_t *pFFTCoeffs,
+ *  SLArrayIndex_t *pBitReverseAddressTable,    - Digit reverse mode flag /
  *Pointer to digit reverse address table const SLArrayIndex_t    fftLength
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Initialise the radix-4 FFT sine and cosine tables.
+ *  Initialise the radix-4 FFT sine and cosine tables.
  *
  ********************************************************/
 
@@ -873,18 +873,18 @@ void SIGLIB_FUNC_DECL SIF_Fft4(SLData_t* SIGLIB_PTR_DECL pFFTCoeffs, SLArrayInde
  * Function: SDA_Rfft4
  *
  * Parameters:
- *   SLData_t realData[],
- *   SLData_t imagData[],
- *   SLData_t *pFFTCoeffs,                           - FFT coefficient pointer
- *   const SLArrayIndex_t *pBitReverseAddressTable,  - Digit reverse mode flag /
+ *  SLData_t realData[],
+ *  SLData_t imagData[],
+ *  SLData_t *pFFTCoeffs,                           - FFT coefficient pointer
+ *  const SLArrayIndex_t *pBitReverseAddressTable,  - Digit reverse mode flag /
  *Pointer to digit reverse address table const SLArrayIndex_t fftLength, const
  *SLArrayIndex_t log4FFTLength              - Log base4 transform length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a real radix-4 FFT on the supplied data.
+ *  Perform a real radix-4 FFT on the supplied data.
  *
  ********************************************************/
 
@@ -1024,18 +1024,18 @@ void SIGLIB_FUNC_DECL SDA_Rfft4(SLData_t realData[], SLData_t imagData[], const 
  * Function: SDA_Cfft4
  *
  * Parameters:
- *   SLData_t realData[],
- *   SLData_t imagData[],
- *   SLData_t *pFFTCoeffs,                           - FFT coefficient pointer
- *   const SLArrayIndex_t *pBitReverseAddressTable,  - Digit reverse mode flag /
+ *  SLData_t realData[],
+ *  SLData_t imagData[],
+ *  SLData_t *pFFTCoeffs,                           - FFT coefficient pointer
+ *  const SLArrayIndex_t *pBitReverseAddressTable,  - Digit reverse mode flag /
  *Pointer to digit reverse address table const SLArrayIndex_t fftLength, const
  *SLArrayIndex_t log4FFTLength              - Log base4 transform length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a complex radix-4 FFT on the supplied data.
+ *  Perform a complex radix-4 FFT on the supplied data.
  *
  ********************************************************/
 
@@ -1135,15 +1135,15 @@ void SIGLIB_FUNC_DECL SDA_Cfft4(SLData_t realData[], SLData_t imagData[], const 
  * Function: SDA_DigitReverseReorder4
  *
  * Parameters:
- *   const SLData_t Src[],
- *   SLData_t Dst[],
- *   const SLArrayIndex_t fftLength,
+ *  const SLData_t Src[],
+ *  SLData_t Dst[],
+ *  const SLArrayIndex_t fftLength,
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform radix-4 digit reverse data reordering
+ *  Perform radix-4 digit reverse data reordering
  *
  ********************************************************/
 
@@ -1173,15 +1173,15 @@ void SIGLIB_FUNC_DECL SDA_DigitReverseReorder4(const SLData_t Src[], SLData_t Ds
  * Function: SDA_IndexDigitReverseReorder4
  *
  * Parameters:
- *   const SLArrayIndex_t Src[],
- *   SLArrayIndex_t Dst[],
- *   const SLArrayIndex_t fftLength,
+ *  const SLArrayIndex_t Src[],
+ *  SLArrayIndex_t Dst[],
+ *  const SLArrayIndex_t fftLength,
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform radix-4 digit reverse data reordering on fixed point data
+ *  Perform radix-4 digit reverse data reordering on fixed point data
  *
  ********************************************************/
 
@@ -1211,14 +1211,14 @@ void SIGLIB_FUNC_DECL SDA_IndexDigitReverseReorder4(const SLArrayIndex_t Src[], 
  * Function: SIF_FastDigitReverseReorder4
  *
  * Parameters:
- *   SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
- *   const SLArrayIndex_t    fftLength
+ *  SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
+ *  const SLArrayIndex_t    fftLength
  *
  * Return value:
- *   Error code
+ *  Error code
  *
  * Description:
- *   Initialise the fast radix-4 digit reverse look up table.
+ *  Initialise the fast radix-4 digit reverse look up table.
  *
  ********************************************************/
 
@@ -1240,25 +1240,25 @@ void SIGLIB_FUNC_DECL SIF_FastDigitReverseReorder4(SLArrayIndex_t* SIGLIB_PTR_DE
  * Function: SDA_Cfft2rBy1c
  *
  * Parameters:
- *   SLData_t realData[],
- *   SLData_t imagData[],
- *   SLData_t output2r1cResult1[],
- *   SLData_t output2r1cResult2[],
- *   SLData_t *pFFTCoeffs,                           - FFT coefficient pointer
- *   const SLArrayIndex_t *pBitReverseAddressTable,  - Bit reverse mode flag /
+ *  SLData_t realData[],
+ *  SLData_t imagData[],
+ *  SLData_t output2r1cResult1[],
+ *  SLData_t output2r1cResult2[],
+ *  SLData_t *pFFTCoeffs,                           - FFT coefficient pointer
+ *  const SLArrayIndex_t *pBitReverseAddressTable,  - Bit reverse mode flag /
  *Pointer to bit reverse address table const SLArrayIndex_t fftLength, const
  *SLArrayIndex_t log2FFTLength              - Log base2 transform length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform two real FFTs using a single complex FFT.
- *   The results are returned in two separate arrays, one for
- *   each channel. Each array contains real and imaginary results:
- *       real[0],..,real[N-1],imag[0],..,imag[N-1]
- *   Note: The original input data is destroyed by this function
- *   as it is used to calculate the intermediate results.
+ *  Perform two real FFTs using a single complex FFT.
+ *  The results are returned in two separate arrays, one for
+ *  each channel. Each array contains real and imaginary results:
+ *      real[0],..,real[N-1],imag[0],..,imag[N-1]
+ *  Note: The original input data is destroyed by this function
+ *  as it is used to calculate the intermediate results.
  *
  ********************************************************/
 
@@ -1348,26 +1348,26 @@ void SIGLIB_FUNC_DECL SDA_Cfft2rBy1c(SLData_t realData[], SLData_t imagData[], S
  * Function: SDA_Cfft2rBy1cr
  *
  * Parameters:
- *   SLData_t realData[],
- *   SLData_t imagData[],
- *   SLData_t output2r1cResult1[],
- *   SLData_t output2r1cResult2[],
- *   SLData_t *pFFTCoeffs,                           - FFT coefficient pointer
- *   const SLArrayIndex_t *pBitReverseAddressTable,  - Bit reverse mode flag /
+ *  SLData_t realData[],
+ *  SLData_t imagData[],
+ *  SLData_t output2r1cResult1[],
+ *  SLData_t output2r1cResult2[],
+ *  SLData_t *pFFTCoeffs,                           - FFT coefficient pointer
+ *  const SLArrayIndex_t *pBitReverseAddressTable,  - Bit reverse mode flag /
  *Pointer to bit reverse address table const SLArrayIndex_t fftLength, const
  *SLArrayIndex_t log2FFTLength              - Log base2 transform length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform two real FFTs using a single complex FFT.
- *   This function only returns the real component of the result.
- *   The results are returned in two separate arrays, one for
- *   each channel. Each array contains real and imaginary results:
- *       real[0],..,real[N-1],imag[0],..,imag[N-1]
- *   Note: The original input data is destroyed by this function
- *   as it is used to calculate the intermediate results.
+ *  Perform two real FFTs using a single complex FFT.
+ *  This function only returns the real component of the result.
+ *  The results are returned in two separate arrays, one for
+ *  each channel. Each array contains real and imaginary results:
+ *      real[0],..,real[N-1],imag[0],..,imag[N-1]
+ *  Note: The original input data is destroyed by this function
+ *  as it is used to calculate the intermediate results.
  *
  ********************************************************/
 
@@ -1452,25 +1452,25 @@ void SIGLIB_FUNC_DECL SDA_Cfft2rBy1cr(SLData_t realData[], SLData_t imagData[], 
  * Function: SDA_Cfft42rBy1c
  *
  * Parameters:
- *   SLData_t realData[],
- *   SLData_t imagData[],
- *   SLData_t output2r1cResult1[],
- *   SLData_t output2r1cResult2[],
- *   SLData_t *pFFTCoeffs,                           - FFT coefficient pointer
- *   const SLArrayIndex_t *pBitReverseAddressTable,  - Digit reverse mode flag /
+ *  SLData_t realData[],
+ *  SLData_t imagData[],
+ *  SLData_t output2r1cResult1[],
+ *  SLData_t output2r1cResult2[],
+ *  SLData_t *pFFTCoeffs,                           - FFT coefficient pointer
+ *  const SLArrayIndex_t *pBitReverseAddressTable,  - Digit reverse mode flag /
  *Pointer to digit reverse address table const SLArrayIndex_t fftLength, const
  *SLArrayIndex_t log4FFTLength              - Log base4 transform length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform two real radix-4 FFTs using a single complex FFT.
- *   The results are returned in two separate arrays, one for
- *   each channel. Each array contains real and imaginary results:
- *       real[0],..,real[N-1],imag[0],..,imag[N-1]
- *   Note: The original input data is destroyed by this function
- *   as it is used to calculate the intermediate results.
+ *  Perform two real radix-4 FFTs using a single complex FFT.
+ *  The results are returned in two separate arrays, one for
+ *  each channel. Each array contains real and imaginary results:
+ *      real[0],..,real[N-1],imag[0],..,imag[N-1]
+ *  Note: The original input data is destroyed by this function
+ *  as it is used to calculate the intermediate results.
  *
  ********************************************************/
 
@@ -1572,26 +1572,26 @@ void SIGLIB_FUNC_DECL SDA_Cfft42rBy1c(SLData_t realData[], SLData_t imagData[], 
  * Function: SDA_Cfft42rBy1cr
  *
  * Parameters:
- *   SLData_t realData[],
- *   SLData_t imagData[],
- *   SLData_t output2r1cResult1[],
- *   SLData_t output2r1cResult2[],
- *   SLData_t *pFFTCoeffs,                           - FFT coefficient pointer
- *   const SLArrayIndex_t *pBitReverseAddressTable,  - Digit reverse mode flag /
+ *  SLData_t realData[],
+ *  SLData_t imagData[],
+ *  SLData_t output2r1cResult1[],
+ *  SLData_t output2r1cResult2[],
+ *  SLData_t *pFFTCoeffs,                           - FFT coefficient pointer
+ *  const SLArrayIndex_t *pBitReverseAddressTable,  - Digit reverse mode flag /
  *Pointer to digit reverse address table const SLArrayIndex_t fftLength, const
  *SLArrayIndex_t log4FFTLength              - Log base4 transform length
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform two real radix-4 FFTs using a single complex FFT.
- *   This function only returns the real component of the result.
- *   The results are returned in two separate arrays, one for
- *   each channel:
- *       real[0],..,real[N-1]
- *   Note: The original input data is destroyed by this function
- *   as it is used to calculate the intermediate results.
+ *  Perform two real radix-4 FFTs using a single complex FFT.
+ *  This function only returns the real component of the result.
+ *  The results are returned in two separate arrays, one for
+ *  each channel:
+ *      real[0],..,real[N-1]
+ *  Note: The original input data is destroyed by this function
+ *  as it is used to calculate the intermediate results.
  *
  ********************************************************/
 
@@ -1690,20 +1690,20 @@ void SIGLIB_FUNC_DECL SDA_Cfft42rBy1cr(SLData_t realData[], SLData_t imagData[],
  * Function: SDS_Cfft2
  *
  * Parameters:
- *   const SLData_t srcReal1,
- *   const SLData_t srcImag1,
- *   const SLData_t srcReal2,
- *   const SLData_t srcImag2,
- *   SLData_t *pDstReal1,
- *   SLData_t *pDstImag1,
- *   SLData_t *pDstReal2,
- *   SLData_t *pDstImag2,
+ *  const SLData_t srcReal1,
+ *  const SLData_t srcImag1,
+ *  const SLData_t srcReal2,
+ *  const SLData_t srcImag2,
+ *  SLData_t *pDstReal1,
+ *  SLData_t *pDstImag1,
+ *  SLData_t *pDstReal2,
+ *  SLData_t *pDstImag2,
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a two point complex Discrete Fourier Transform.
+ *  Perform a two point complex Discrete Fourier Transform.
  *
  ********************************************************/
 
@@ -1720,16 +1720,16 @@ void SIGLIB_FUNC_DECL SDS_Cfft2(const SLData_t srcReal1, const SLData_t srcImag1
  * Function: SDA_Cfft2
  *
  * Parameters:
- *   const SLData_t pSrcReal[],
- *   const SLData_t pSrcImag[],
- *   SLData_t pDstReal[],
- *   SLData_t pDstImag[],
+ *  const SLData_t pSrcReal[],
+ *  const SLData_t pSrcImag[],
+ *  SLData_t pDstReal[],
+ *  SLData_t pDstImag[],
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a two point complex Discrete Fourier Transform.
+ *  Perform a two point complex Discrete Fourier Transform.
  *
  ********************************************************/
 
@@ -1749,24 +1749,24 @@ void SIGLIB_FUNC_DECL SDA_Cfft2(const SLData_t pSrcReal[], const SLData_t pSrcIm
  * Function: SDS_Cfft3
  *
  * Parameters:
- *   const SLData_t srcReal1,
- *   const SLData_t srcImag1,
- *   const SLData_t srcReal2,
- *   const SLData_t srcImag2,
- *   const SLData_t srcReal3,
- *   const SLData_t srcImag3,
- *   SLData_t *pDstReal1,
- *   SLData_t *pDstImag1,
- *   SLData_t *pDstReal2,
- *   SLData_t *pDstImag2,
- *   SLData_t *pDstReal3,
- *   SLData_t *pDstImag3,
+ *  const SLData_t srcReal1,
+ *  const SLData_t srcImag1,
+ *  const SLData_t srcReal2,
+ *  const SLData_t srcImag2,
+ *  const SLData_t srcReal3,
+ *  const SLData_t srcImag3,
+ *  SLData_t *pDstReal1,
+ *  SLData_t *pDstImag1,
+ *  SLData_t *pDstReal2,
+ *  SLData_t *pDstImag2,
+ *  SLData_t *pDstReal3,
+ *  SLData_t *pDstImag3,
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a three point complex Discrete Fourier Transform.
+ *  Perform a three point complex Discrete Fourier Transform.
  *
  ********************************************************/
 
@@ -1793,16 +1793,16 @@ void SIGLIB_FUNC_DECL SDS_Cfft3(const SLData_t srcReal1, const SLData_t srcImag1
  * Function: SDA_Cfft3
  *
  * Parameters:
- *   const SLData_t pSrcReal[],
- *   const SLData_t pSrcImag[],
- *   SLData_t pDstReal[],
- *   SLData_t pDstImag[],
+ *  const SLData_t pSrcReal[],
+ *  const SLData_t pSrcImag[],
+ *  SLData_t pDstReal[],
+ *  SLData_t pDstImag[],
  *
  * Return value:
- *   void
+ *  void
  *
  * Description:
- *   Perform a three point complex Discrete Fourier Transform.
+ *  Perform a three point complex Discrete Fourier Transform.
  *
  ********************************************************/
 

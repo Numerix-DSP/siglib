@@ -44,11 +44,11 @@ Description: Complex number routines for SigLib DSP library.
  * Function: SCV_Polar()
  *
  * Parameters:
- *   const SLData_t IM   - Source magnitude data
- *   const SLData_t IA   - Source angle data
+ *  const SLData_t IM   - Source magnitude data
+ *  const SLData_t IA   - Source angle data
  *
  * Return value:
- *   Polar   - Polar data
+ *  Polar   - Polar data
  *
  * Description: Convert the real data to polar.
  *
@@ -68,11 +68,11 @@ SLComplexPolar_s SIGLIB_FUNC_DECL SCV_Polar(const SLData_t IM, const SLData_t IA
  * Function: SCV_Rectangular()
  *
  * Parameters:
- *   const SLData_t IR   - Source real data
- *   const SLData_t II   - Source imag data
+ *  const SLData_t IR   - Source real data
+ *  const SLData_t II   - Source imag data
  *
  * Return value:
- *   Rect    - Rectangular data
+ *  Rect    - Rectangular data
  *
  * Description: Convert the real data to rectangular.
  *
@@ -92,10 +92,10 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Rectangular(const SLData_t IR, const SLData
  * Function: SCV_PolarToRectangular()
  *
  * Parameters:
- *   const Polar - Polar data
+ *  const Polar - Polar data
  *
  * Return value:
- *   Rect,   - Rectangular data
+ *  Rect,   - Rectangular data
  *
  * Description: Convert the polar data to complex.
  *
@@ -115,10 +115,10 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_PolarToRectangular(const SLComplexPolar_s P
  * Function: SCV_RectangularToPolar()
  *
  * Parameters:
- *   const Rect  - Rectangular data
+ *  const Rect  - Rectangular data
  *
  * Return value:
- *   Polar data
+ *  Polar data
  *
  * Description: Convert the complex data to polar.
  *
@@ -144,14 +144,14 @@ SLComplexPolar_s SIGLIB_FUNC_DECL SCV_RectangularToPolar(const SLComplexRect_s R
  * Function: SCV_Sqrt()
  *
  * Parameters:
- *   const Complex   IVect,  - Complex source data
+ *  const Complex   IVect,  - Complex source data
  *
  * Return value:
- *   Complex OVect,  - Complex destn. data
+ *  Complex OVect,  - Complex destn. data
  *
  * Description: Calculate the square root of a Vector
- *   using DeMoivre's Theorem, i.e. using polar
- *   coordinates.
+ *  using DeMoivre's Theorem, i.e. using polar
+ *  coordinates.
  *
  ********************************************************/
 
@@ -171,13 +171,13 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Sqrt(const SLComplexRect_s IVect)
  * Function: SCV_Inverse()
  *
  * Parameters:
- *   const Complex   IVect,  - Complex source data
+ *  const Complex   IVect,  - Complex source data
  *
  * Return value:
- *   Complex OVect,  - Complex destn. data
+ *  Complex OVect,  - Complex destn. data
  *
  * Description: Calculate the inverse of a vector using
- *   1/(a+jb) = (a-jb) / (a^2 + b^2)
+ *  1/(a+jb) = (a-jb) / (a^2 + b^2)
  *
  ********************************************************/
 
@@ -203,13 +203,13 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Inverse(const SLComplexRect_s IVect)
  * Function: SCV_Conjugate()
  *
  * Parameters:
- *   const Complex IVect,    - Complex source data
+ *  const Complex IVect,    - Complex source data
  *
  * Return value:
- *   Complex OVect,  - Complex destn. data
+ *  Complex OVect,  - Complex destn. data
  *
  * Description: Calculate the complex conjugate of a
- *   Vector.
+ *  Vector.
  *
  ********************************************************/
 
@@ -227,13 +227,13 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Conjugate(const SLComplexRect_s IVect)
  * Function: SCV_Magnitude()
  *
  * Parameters:
- *   const Complex IVect,    - Complex source data
+ *  const Complex IVect,    - Complex source data
  *
  * Return value:
- *   SLData_t        - Absolute magnitude
+ *  SLData_t        - Absolute magnitude
  *
  * Description: Calculate the real absolute value of a
- *   Vector.
+ *  Vector.
  *
  ********************************************************/
 
@@ -246,13 +246,13 @@ SLData_t SIGLIB_FUNC_DECL SCV_Magnitude(const SLComplexRect_s IVect)
  * Function: SCV_MagnitudeSquared()
  *
  * Parameters:
- *   const Complex IVect,    - Complex source data
+ *  const Complex IVect,    - Complex source data
  *
  * Return value:
- *   SLData_t        - Absolute magnitude squared
+ *  SLData_t        - Absolute magnitude squared
  *
  * Description: Calculate the real absolute value
- *   squared of a complex vector.
+ *  squared of a complex vector.
  *
  ********************************************************/
 
@@ -265,13 +265,13 @@ SLData_t SIGLIB_FUNC_DECL SCV_MagnitudeSquared(const SLComplexRect_s IVect)
  * Function: SCV_Phase()
  *
  * Parameters:
- *   const Complex IVect,    - Complex source data
+ *  const Complex IVect,    - Complex source data
  *
  * Return value:
- *   SLData_t        - Phase
+ *  SLData_t        - Phase
  *
  * Description: Calculate the phase of a complex
- *   Vector.
+ *  Vector.
  *
  ********************************************************/
 
@@ -284,11 +284,11 @@ SLData_t SIGLIB_FUNC_DECL SCV_Phase(const SLComplexRect_s IVect)
  * Function: SCV_Multiply()
  *
  * Parameters:
- *   const Complex IVect1,   - Complex source data
- *   const Complex IVect2,   - Complex source data
+ *  const Complex IVect1,   - Complex source data
+ *  const Complex IVect2,   - Complex source data
  *
  * Return value:
- *   Complex OVect,  - Complex destn. data
+ *  Complex OVect,  - Complex destn. data
  *
  * Description: Multiply two complex vectors.
  *
@@ -308,14 +308,14 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Multiply(const SLComplexRect_s IVect1, cons
  * Function: SCV_Divide()
  *
  * Parameters:
- *   const Complex Numerator,    - Complex source data
- *   const Complex Divisor,      - Complex source data
+ *  const Complex Numerator,    - Complex source data
+ *  const Complex Divisor,      - Complex source data
  *
  * Return value:
- *   Complex Output, - Complex output data
+ *  Complex Output, - Complex output data
  *
  * Description: Divide complex vector 1 by vector 2 using
- *   1/(a+jb) = (a-jb) / (a^2 + b^2)
+ *  1/(a+jb) = (a-jb) / (a^2 + b^2)
  *
  ********************************************************/
 
@@ -346,11 +346,11 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Divide(const SLComplexRect_s Numerator, con
  * Function: SCV_Add()
  *
  * Parameters:
- *   const Complex IVect1,   - Complex source data
- *   const Complex IVect2,   - Complex source data
+ *  const Complex IVect1,   - Complex source data
+ *  const Complex IVect2,   - Complex source data
  *
  * Return value:
- *   Complex OVect,  - Complex destn. data
+ *  Complex OVect,  - Complex destn. data
  *
  * Description: Add two complex vectors.
  *
@@ -370,11 +370,11 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Add(const SLComplexRect_s IVect1, const SLC
  * Function: SCV_Subtract()
  *
  * Parameters:
- *   const Complex IVect1,   - Complex source data
- *   const Complex IVect2,   - Complex source data
+ *  const Complex IVect1,   - Complex source data
+ *  const Complex IVect2,   - Complex source data
  *
  * Return value:
- *   Complex OVect,  - Complex destn. data
+ *  Complex OVect,  - Complex destn. data
  *
  * Description: Subtract IVect 2 from IVect1.
  *
@@ -394,10 +394,10 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Subtract(const SLComplexRect_s IVect1, cons
  * Function: SCV_Log()
  *
  * Parameters:
- *   const Complex IVect,    - Complex source data
+ *  const Complex IVect,    - Complex source data
  *
  * Return value:
- *   Complex OVect,  - Complex log
+ *  Complex OVect,  - Complex log
  *
  * Description: Return the complex logrithm.
  *
@@ -417,10 +417,10 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Log(const SLComplexRect_s IVect)
  * Function: SCV_Exp()
  *
  * Parameters:
- *   const Complex IVect,    - Complex source data
+ *  const Complex IVect,    - Complex source data
  *
  * Return value:
- *   Complex OVect,  - Complex exponential
+ *  Complex OVect,  - Complex exponential
  *
  * Description: Return the complex exponential.
  *
@@ -442,10 +442,10 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Exp(const SLComplexRect_s IVect)
  * Function: SCV_Expj()
  *
  * Parameters:
- *   const SLData_t Theta,   - Real angle
+ *  const SLData_t Theta,   - Real angle
  *
  * Return value:
- *   Complex OVect,  - Complex exponential
+ *  Complex OVect,  - Complex exponential
  *
  * Description: Return the complex exponential (e^jTheta).
  *
@@ -461,11 +461,11 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Expj(const SLData_t Theta)
  * Function: SCV_Pow()
  *
  * Parameters:
- *   const Complex IVect,    - Complex source data
- *   const SLData_t Power    - Real power
+ *  const Complex IVect,    - Complex source data
+ *  const SLData_t Power    - Real power
  *
  * Return value:
- *   Complex OVect,  - Complex destn. data
+ *  Complex OVect,  - Complex destn. data
  *
  * Description: Raise the complex number to a real power.
  *
@@ -498,14 +498,14 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Pow(const SLComplexRect_s IVect, const SLDa
  * Function: SCV_VectorAddScalar()
  *
  * Parameters:
- *   const Complex   IVect,  - Complex source data
- *   const SLData_t  Scalar  - Scalar quantity
+ *  const Complex   IVect,  - Complex source data
+ *  const SLData_t  Scalar  - Scalar quantity
  *
  * Return value:
- *   Complex OVect           - Complex result
+ *  Complex OVect           - Complex result
  *
  * Description: Adds a scalar quantity to a complex
- *   vector.
+ *  vector.
  *
  ********************************************************/
 
@@ -523,14 +523,14 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorAddScalar(const SLComplexRect_s IVect
  * Function: SCV_VectorSubtractScalar()
  *
  * Parameters:
- *   const Complex   IVect,  - Complex source data
- *   const SLData_t  Scalar  - Scalar quantity
+ *  const Complex   IVect,  - Complex source data
+ *  const SLData_t  Scalar  - Scalar quantity
  *
  * Return value:
- *   Complex OVect           - Complex result
+ *  Complex OVect           - Complex result
  *
  * Description: Subtract a scalar quantity from a complex
- *   vector.
+ *  vector.
  *
  ********************************************************/
 
@@ -548,14 +548,14 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorSubtractScalar(const SLComplexRect_s 
  * Function: SCV_VectorMultiplyScalar()
  *
  * Parameters:
- *   const Complex   IVect,  - Complex source data
- *   const SLData_t  Scalar  - Scalar quantity
+ *  const Complex   IVect,  - Complex source data
+ *  const SLData_t  Scalar  - Scalar quantity
  *
  * Return value:
- *   Complex OVect           - Complex result
+ *  Complex OVect           - Complex result
  *
  * Description: Multiply a complex vector by a scalar
- *   quantity .
+ *  quantity .
  *
  ********************************************************/
 
@@ -573,14 +573,14 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorMultiplyScalar(const SLComplexRect_s 
  * Function: SCV_VectorDivideScalar()
  *
  * Parameters:
- *   const Complex   IVect,  - Complex source data
- *   const SLData_t  Scalar  - Scalar quantity
+ *  const Complex   IVect,  - Complex source data
+ *  const SLData_t  Scalar  - Scalar quantity
  *
  * Return value:
- *   Complex OVect,  - Complex result
+ *  Complex OVect,  - Complex result
  *
  * Description: Divide a complex vector by a scalar
- *   quantity.
+ *  quantity.
  *
  ********************************************************/
 
@@ -598,14 +598,14 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_VectorDivideScalar(const SLComplexRect_s IV
  * Function: SCV_ScalarSubtractVector()
  *
  * Parameters:
- *   const SLData_t  Scalar  - Scalar quantity
- *   const Complex   IVect,  - Complex source data
+ *  const SLData_t  Scalar  - Scalar quantity
+ *  const Complex   IVect,  - Complex source data
  *
  * Return value:
- *   Complex OVect           - Complex result
+ *  Complex OVect           - Complex result
  *
  * Description: Subtract a complex vector quantity from
- *   a scalar.
+ *  a scalar.
  *
  ********************************************************/
 
@@ -623,17 +623,17 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_ScalarSubtractVector(const SLData_t Scalar,
  * Function: SCV_Roots()
  *
  * Parameters:
- *   const SLComplexRect_s a,
- *   const SLComplexRect_s b,
- *   const SLComplexRect_s c,
- *   SLComplexRect_s *Root1, - Pointer to root # 1
- *   SLComplexRect_s *Root2  - Pointer to root # 2
+ *  const SLComplexRect_s a,
+ *  const SLComplexRect_s b,
+ *  const SLComplexRect_s c,
+ *  SLComplexRect_s *Root1, - Pointer to root # 1
+ *  SLComplexRect_s *Root2  - Pointer to root # 2
  *
  * Return value:
- *   void
+ *  void
  *
  * Description: Generates roots of ax^2 + bx + c = 0
- *   Using: (-b +/- sqrt (b^2 - 4ac)) / 2a
+ *  Using: (-b +/- sqrt (b^2 - 4ac)) / 2a
  *
  ********************************************************/
 
@@ -653,10 +653,10 @@ void SIGLIB_FUNC_DECL SCV_Roots(const SLComplexRect_s a, const SLComplexRect_s b
  * Function: SCV_Copy()
  *
  * Parameters:
- *   const Complex   IVect,  - Complex source data
+ *  const Complex   IVect,  - Complex source data
  *
  * Return value:
- *   Complex OVect,  - Complex destn. data
+ *  Complex OVect,  - Complex destn. data
  *
  * Description: Copy the source vector to the destination.
  *
@@ -671,12 +671,12 @@ SLComplexRect_s SIGLIB_FUNC_DECL SCV_Copy(const SLComplexRect_s IVect)
  * Function: SCV_Compare()
  *
  * Parameters:
- *   const Complex IVect1,   - Complex source data
- *   const Complex IVect2,   - Complex source data
+ *  const Complex IVect1,   - Complex source data
+ *  const Complex IVect2,   - Complex source data
  *
  * Return value:
- *   SLCompareType_t = SIGLIB_EQUAL(1) if they are the same,
- *   SIGLIB_NOT_EQUAL(0) otherwise
+ *  SLCompareType_t = SIGLIB_EQUAL(1) if they are the same,
+ *  SIGLIB_NOT_EQUAL(0) otherwise
  *
  * Description: Compare IVect1 to IVect2.
  *
