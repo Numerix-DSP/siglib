@@ -52,17 +52,8 @@ int main(void)
                                       // reverse address table
           FFT_LENGTH);                // FFT length
 
-  SDA_SignalGenerate(pSrc,                    // Pointer to destination array
-                     SIGLIB_IMPULSE,          // Signal type - Impulse function
-                     SIGLIB_ONE,              // Signal peak level
-                     SIGLIB_FILL,             // Fill (overwrite) or add to existing array contents
-                     SIGLIB_ZERO,             // Signal frequency - Unused
-                     SIGLIB_ZERO,             // D.C. Offset
-                     SIGLIB_ZERO,             // Delay (samples periods) applied to impulse
-                     SIGLIB_ZERO,             // Signal end value - Unused
-                     SIGLIB_NULL_DATA_PTR,    // Unused
-                     SIGLIB_NULL_DATA_PTR,    // Unused
-                     SAMPLE_LENGTH);          // Output dataset length
+  SDA_Impulse(pSrc,              // Pointer to destination array
+              SAMPLE_LENGTH);    // Output dataset length
 
   SDA_AllPole(pSrc,                                 // Pointer to input data
               pRealData,                            // Pointer to output data

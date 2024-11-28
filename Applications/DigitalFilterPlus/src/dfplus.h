@@ -478,7 +478,7 @@ class IIRPZPFilterDesignWindow : public wxPanel
   wxString ProjectNameString;
   SLData_t SampleRate;
 
-  SLArrayIndex_t NumberOfBiquads;
+  SLArrayIndex_t numberOfBiquads;
 
   SLData_t* pGain;
   SLData_t* pPhase;
@@ -531,7 +531,7 @@ class IIRTraditionalFilterDesignWindow : public wxPanel
 
   SLData_t pIIRCoeffs[5 * MAX_BLT_ORDER];    // 5 * Max Biquads
 
-  short NumberOfBiquads;
+  short numberOfBiquads;
 
   wxString ProjectNameString;
   SLData_t SampleRate;
@@ -583,7 +583,7 @@ class IIRAlgsFilterDesignWindow : public wxPanel
   wxCheckBox* ScaleGainCheckBox;
 
   short FilterType;
-  SLArrayIndex_t FilterOrder;
+  SLArrayIndex_t filterOrder;
   SLData_t CentreFrequency;
   SLData_t PoleMagnitude;
 
@@ -592,7 +592,7 @@ class IIRAlgsFilterDesignWindow : public wxPanel
 
   SLData_t pIIRCoeffs[5 * MAX_BLT_ORDER];    // 5 * Max Biquads
 
-  short NumberOfBiquads;
+  short numberOfBiquads;
 
   SLData_t* pGain;
   SLData_t* pPhase;

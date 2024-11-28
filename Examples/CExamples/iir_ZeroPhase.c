@@ -1,4 +1,4 @@
-// SigLib Non-causal or zero phase IIR Filter Example
+// SigLib zero phase or non-causal IIR Filter Example
 // This example performs a non-causal IIR filter on the data. This
 // technique uses time reversal of the data stream to give zero phase
 // distortion. The results are compared with the causal filter. This is
@@ -17,12 +17,13 @@
 // Declare global variables and arrays
 
 // IIR filter coeffs, b(0), b(1), b(2), a(1), a(2)
-static const SLData_t pFilterTaps[] = {9.49176257342E-0004, 1.89835251468E-0003, 9.49176257342E-0004, -1.88186809358E+0000, 8.85591821538E-0001,
-                                       9.49176257342E-0004, 1.89835251468E-0003, 9.49176257342E-0004, -1.91116198217E+0000, 9.14943675120E-0001,
-                                       9.49176257342E-0004, 1.89835251468E-0003, 9.49176257342E-0004, -1.96411809146E+0000, 9.68004570790E-0001};
+static const SLData_t pFilterCoefficients[] = {9.49176257342E-0004,  1.89835251468E-0003,  9.49176257342E-0004, -1.88186809358E+0000,
+                                               8.85591821538E-0001,  9.49176257342E-0004,  1.89835251468E-0003, 9.49176257342E-0004,
+                                               -1.91116198217E+0000, 9.14943675120E-0001,  9.49176257342E-0004, 1.89835251468E-0003,
+                                               9.49176257342E-0004,  -1.96411809146E+0000, 9.68004570790E-0001};
 
 static SLData_t pFilterState[FILTER_STAGES * SIGLIB_IIR_DELAY_SIZE];
-static SLData_t pNCFilterState[FILTER_STAGES * SIGLIB_IIR_DELAY_SIZE];
+static SLData_t pZeroPhaseFilterState[FILTER_STAGES * SIGLIB_IIR_DELAY_SIZE];
 
 int main(void)
 {
@@ -44,10 +45,8 @@ int main(void)
     exit(-1);
   }
 
-  SIF_Iir(pFilterState,        // Pointer to filter state array
-          FILTER_STAGES);      // Number of second order stages
-  SIF_IirNc(pNCFilterState,    // Pointer to filter state array
-            FILTER_STAGES);    // Number of second order stages
+  SIF_Iir(pFilterState,      // Pointer to filter state array
+          FILTER_STAGES);    // Number of second order stages
 
   // Generate a noisy sinewave
   SLData_t sinePhase = SIGLIB_ZERO;
@@ -76,20 +75,20 @@ int main(void)
                      SAMPLE_LENGTH);          // Output dataset length
 
   // Apply causal IIR filter and store filtered data
-  SDA_Iir(source,            // Input array to be filtered
-          causal_result,     // Filtered output array
-          pFilterState,      // Pointer to filter state array
-          pFilterTaps,       // Pointer to filter coefficients array
-          FILTER_STAGES,     // Number of stages
-          SAMPLE_LENGTH);    // Dataset length
+  SDA_Iir(source,                 // Input array to be filtered
+          causal_result,          // Filtered output array
+          pFilterState,           // Pointer to filter state array
+          pFilterCoefficients,    // Pointer to filter coefficients array
+          FILTER_STAGES,          // Number of stages
+          SAMPLE_LENGTH);         // Dataset length
 
   // Apply non-causal IIR filter and store filtered data
-  SDA_IirNc(source,               // Input array to be filtered
-            non_causal_result,    // Filtered output array
-            pNCFilterState,       // Pointer to filter state array
-            pFilterTaps,          // Pointer to filter coefficients array
-            FILTER_STAGES,        // Number of stages
-            SAMPLE_LENGTH);       // Dataset length
+  SDA_IirZeroPhase(source,                   // Input array to be filtered
+                   non_causal_result,        // Filtered output array
+                   pZeroPhaseFilterState,    // Pointer to filter state array
+                   pFilterCoefficients,      // Pointer to filter coefficients array
+                   FILTER_STAGES,            // Number of stages
+                   SAMPLE_LENGTH);           // Dataset length
 
   gpc_plot_2d(h2DPlot,                        // Graph handle
               source,                         // Dataset

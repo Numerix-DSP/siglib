@@ -37,17 +37,8 @@ int main(void)
     exit(-1);
   }
 
-  SDA_SignalGenerate(pSrc,                    // Pointer to destination array
-                     SIGLIB_IMPULSE,          // Signal type - step function
-                     SIGLIB_ONE,              // Signal peak level
-                     SIGLIB_FILL,             // Fill (overwrite) or add to existing array contents
-                     SIGLIB_ZERO,             // Signal frequency - Unused
-                     SIGLIB_ZERO,             // D.C. Offset
-                     SIGLIB_ZERO,             // Delay (samples periods) applied to step
-                     SIGLIB_ZERO,             // Signal end value - Unused
-                     SIGLIB_NULL_DATA_PTR,    // Unused
-                     SIGLIB_NULL_DATA_PTR,    // Unused
-                     SAMPLE_LENGTH);          // Output dataset length
+  SDA_Impulse(pSrc,              // Pointer to destination array
+              SAMPLE_LENGTH);    // Output dataset length
 
   onePoleCoefficient = SDS_OnePoleTimeConstantToFilterCoeff(ATTACK_DECAY_RATE,    // Attack / decay rate (ms)
                                                             SAMPLE_RATE_HZ);      // Sample rate

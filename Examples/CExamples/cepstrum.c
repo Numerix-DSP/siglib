@@ -43,17 +43,8 @@ int main(void)
   SLData_t* pMarker = SUF_VectorArrayAllocate(FFT_LENGTH);
   SLData_t* pFFTCoeffs = SUF_FftCoefficientAllocate(FFT_LENGTH);
 
-  SDA_SignalGenerate(pMarker,                 // Pointer to destination array
-                     SIGLIB_IMPULSE,          // Signal type - Impulse function
-                     30000.0,                 // Signal peak level
-                     SIGLIB_FILL,             // Fill (overwrite) or add to existing array contents
-                     SIGLIB_ZERO,             // Signal frequency - Unused
-                     SIGLIB_ZERO,             // D.C. Offset
-                     30.,                     // Delay (samples periods) applied to impulse
-                     SIGLIB_ZERO,             // Signal end value - Unused
-                     SIGLIB_NULL_DATA_PTR,    // Unused
-                     SIGLIB_NULL_DATA_PTR,    // Unused
-                     FFT_LENGTH);             // Output dataset length
+  SDA_Impulse(pMarker,        // Pointer to destination array
+              FFT_LENGTH);    // Output dataset length
 
   printf("\n\n\n");
 

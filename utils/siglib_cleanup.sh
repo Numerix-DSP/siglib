@@ -147,6 +147,9 @@ popd
 pushd $SIGLIB_PATH/Examples/CExamples/OrderAnalysis/
 $SIGLIB_PATH/utils/clean_executables.sh
 popd
+pushd $SIGLIB_PATH/Examples/CExamples/STFT_Wav/
+$SIGLIB_PATH/utils/clean_executables.sh
+popd
 pushd $SIGLIB_PATH/Examples/CExamples/SynchronousSampleRateConversion/
 rm -f 1kHz_16kHz_minus6_dbfs_10ms_48kHz.wav
 rm -f 1kHz_16kHz_minus6_dbfs_10ms_48kHz_16kHz.wav

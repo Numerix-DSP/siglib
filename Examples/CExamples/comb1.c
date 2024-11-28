@@ -113,17 +113,8 @@ int main(void)
                  combFilterLength);         // Delay length
 
   // Generate an impulse
-  SDA_SignalGenerate(pSrc1,                   // Pointer to destination array
-                     SIGLIB_IMPULSE,          // Signal type - Impulse function
-                     SIGLIB_ONE,              // Signal peak level
-                     SIGLIB_FILL,             // Fill (overwrite) or add to existing array contents
-                     SIGLIB_ZERO,             // Signal frequency - Unused
-                     SIGLIB_ZERO,             // D.C. Offset
-                     SIGLIB_ZERO,             // Delay (samples periods) applied to impulse
-                     SIGLIB_ZERO,             // Signal end value - Unused
-                     SIGLIB_NULL_DATA_PTR,    // Unused
-                     SIGLIB_NULL_DATA_PTR,    // Unused
-                     SAMPLE_LENGTH);          // Output dataset length
+  SDA_Impulse(pSrc1,             // Pointer to destination array
+              SAMPLE_LENGTH);    // Output dataset length
 
   // Apply comb filter and store filtered data
   for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
@@ -208,17 +199,8 @@ int main(void)
            combFilterLength);         // Filter length
 
   // Generate an impulse
-  SDA_SignalGenerate(pSrc1,                   // Pointer to destination array
-                     SIGLIB_IMPULSE,          // Signal type - Impulse function
-                     SIGLIB_ONE,              // Signal peak level
-                     SIGLIB_FILL,             // Fill (overwrite) or add to existing array contents
-                     SIGLIB_ZERO,             // Signal frequency - Unused
-                     SIGLIB_ZERO,             // D.C. Offset
-                     SIGLIB_ZERO,             // Delay (samples periods) applied to impulse
-                     SIGLIB_ZERO,             // Signal end value - Unused
-                     SIGLIB_NULL_DATA_PTR,    // Unused
-                     SIGLIB_NULL_DATA_PTR,    // Unused
-                     SAMPLE_LENGTH);          // Output dataset length
+  SDA_Impulse(pSrc1,             // Pointer to destination array
+              SAMPLE_LENGTH);    // Output dataset length
 
   // Apply comb filter and store filtered data
   for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
@@ -312,17 +294,8 @@ int main(void)
            combFilterLength);         // Filter length
 
   // Generate an impulse
-  SDA_SignalGenerate(pSrc1,                   // Pointer to destination array
-                     SIGLIB_IMPULSE,          // Signal type - Impulse function
-                     SIGLIB_ONE,              // Signal peak level
-                     SIGLIB_FILL,             // Fill (overwrite) or add to existing array contents
-                     SIGLIB_ZERO,             // Signal frequency - Unused
-                     SIGLIB_ZERO,             // D.C. Offset
-                     SIGLIB_ZERO,             // Delay (samples periods) applied to impulse
-                     SIGLIB_ZERO,             // Signal end value - Unused
-                     SIGLIB_NULL_DATA_PTR,    // Unused
-                     SIGLIB_NULL_DATA_PTR,    // Unused
-                     SAMPLE_LENGTH);          // Output dataset length
+  SDA_Impulse(pSrc1,             // Pointer to destination array
+              SAMPLE_LENGTH);    // Output dataset length
 
   for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     // Apply comb filter 1 and store filtered data
@@ -440,17 +413,8 @@ int main(void)
   //    K3 = SIGLIB_ZERO;
 
   // Generate an impulse
-  SDA_SignalGenerate(pSrc1,                   // Pointer to destination array
-                     SIGLIB_IMPULSE,          // Signal type - Impulse function
-                     SIGLIB_ONE,              // Signal peak level
-                     SIGLIB_FILL,             // Fill (overwrite) or add to existing array contents
-                     SIGLIB_ZERO,             // Signal frequency - Unused
-                     SIGLIB_ZERO,             // D.C. Offset
-                     SIGLIB_ZERO,             // Delay (samples periods) applied to impulse
-                     SIGLIB_ZERO,             // Signal end value - Unused
-                     SIGLIB_NULL_DATA_PTR,    // Unused
-                     SIGLIB_NULL_DATA_PTR,    // Unused
-                     SAMPLE_LENGTH);          // Output dataset length
+  SDA_Impulse(pSrc1,             // Pointer to destination array
+              SAMPLE_LENGTH);    // Output dataset length
 
   for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {
     // Apply comb filter 1 and store filtered data

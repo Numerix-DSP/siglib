@@ -105,17 +105,8 @@ int main(void)
           FFT_LENGTH);                // FFT length
 
   // Generate signal to be filtered
-  SDA_SignalGenerate(pRealData,               // Pointer to destination array
-                     SIGLIB_IMPULSE,          // Signal type - step function
-                     SIGLIB_ONE,              // Signal peak level
-                     SIGLIB_FILL,             // Fill (overwrite) or add to existing array contents
-                     SIGLIB_ZERO,             // Signal frequency - Unused
-                     SIGLIB_ZERO,             // D.C. Offset
-                     SIGLIB_TEN,              // Delay (samples periods) applied to step
-                     SIGLIB_ZERO,             // Signal end value - Unused
-                     SIGLIB_NULL_DATA_PTR,    // Unused
-                     SIGLIB_NULL_DATA_PTR,    // Unused
-                     SAMPLE_LENGTH);          // Output dataset length
+  SDA_Impulse(pRealData,         // Pointer to destination array
+              SAMPLE_LENGTH);    // Output dataset length
 
   // Filter the data stream
   for (SLArrayIndex_t i = 0; i < SAMPLE_LENGTH; i++) {

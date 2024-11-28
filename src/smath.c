@@ -949,6 +949,43 @@ void SIGLIB_FUNC_DECL SDA_Add(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLData
 }    // End of SDA_Add()
 
 /********************************************************
+ * Function: SDA_Subtract
+ *
+ * Parameters:
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc,
+ *  const SLData_t Offset,
+ *  SLData_t * SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t sampleLength
+ *
+ * Return value:
+ *  void
+ *
+ * Description:
+ *  Subtract the offset from the data
+ *
+ ********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_Subtract(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t Offset, SLData_t* SIGLIB_PTR_DECL pDst,
+                                   const SLArrayIndex_t sampleLength)
+{
+#if (SIGLIB_ARRAYS_ALIGNED)
+#  ifdef __TMS320C6X__             // Defined by TI compiler
+  _nassert((int)pSrc % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+  _nassert((int)pDst % 8 == 0);
+#  endif
+#endif
+
+  for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
+                                                    // or pointer access modes
+    pDst[i] = pSrc[i] - Offset;
+#else
+    *pDst++ = *pSrc++ - Offset;
+#endif
+  }
+}    // End of SDA_Subtract()
+
+/********************************************************
  * Function: SDA_PositiveOffset
  *
  * Parameters:

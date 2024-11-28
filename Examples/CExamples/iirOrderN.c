@@ -10,7 +10,7 @@
 #define SAMPLE_LENGTH 512
 #define FFT_LENGTH 512
 #define LOG2_FFT_LENGTH SAI_FftLengthLog2(FFT_LENGTH)    // Log2 FFT length,
-#define FILTER_ORDER 4                                   // Filter length
+#define FILTER_ORDER 4                                   // Filter order
 
 // Declare global variables and arrays
 
@@ -57,17 +57,8 @@ int main(void)
                                       // reverse address table
           FFT_LENGTH);                // FFT length
 
-  SDA_SignalGenerate(pSrc,                    // Output array pointer
-                     SIGLIB_IMPULSE,          // Signal type - Impulse function
-                     SIGLIB_ONE,              // Signal peak level
-                     SIGLIB_FILL,             // Fill (overwrite) or add to existing array contents
-                     SIGLIB_ZERO,             // Signal frequency - Unused
-                     SIGLIB_ZERO,             // D.C. Offset
-                     SIGLIB_ZERO,             // Delay (samples periods) applied to impulse
-                     SIGLIB_ZERO,             // Signal end value - Unused
-                     SIGLIB_NULL_DATA_PTR,    // Unused
-                     SIGLIB_NULL_DATA_PTR,    // Unused
-                     SAMPLE_LENGTH);          // Output dataset length
+  SDA_Impulse(pSrc,              // Output array pointer
+              SAMPLE_LENGTH);    // Output dataset length
 
   SDA_IirOrderN(pSrc,                                 // Pointer to source array
                 pRealData,                            // Pointer to destination array

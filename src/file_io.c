@@ -54,7 +54,7 @@ typedef union {    // SigLib data type to char array union
  * Parameters:
  *  SLData_t *BPtr,             - Data array pointer
  *  FILE *p_ioFile,             - File pointer
- *  const enum SLEndianType_t endianMode,
+ *  const enum SLEndianType_t   - endianMode
  *  const SLArrayIndex_t        - arrayLength
  *
  * Return value:
@@ -102,7 +102,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_BinReadData(SLData_t* SIGLIB_PTR_DECL BPtr, 
  * Parameters:
  *  const SLData_t *BPtr,       - Data array pointer
  *  FILE *p_ioFile,             - File pointer
- *  const enum SLEndianType_t endianMode,
+ *  const enum SLEndianType_t   - endianMode
  *  const SLArrayIndex_t        - arrayLength
  *
  * Return value:
@@ -143,7 +143,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_BinWriteData(const SLData_t* SIGLIB_PTR_DECL
  * Parameters:
  *  SLData_t *BPtr,             - Data array pointer
  *  char *filename,             - File name
- *  const char endianMode,
+ *  const char endianMode,      - endianMode
  *  const SLArrayIndex_t        - arrayLength
  *
  * Return value:
@@ -200,7 +200,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_BinReadFile(SLData_t* SIGLIB_PTR_DECL BPtr, 
  * Parameters:
  *  const SLData_t *BPtr,       - Data array pointer
  *  char *filename,             - File name
- *  const enum SLEndianType_t endianMode,
+ *  const enum SLEndianType_t   - endianMode
  *  const SLArrayIndex_t        - arrayLength
  *
  * Return value:
@@ -244,20 +244,53 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_BinWriteFile(const SLData_t* SIGLIB_PTR_DECL
   return (sampleCount);
 }    // End of SUF_BinWriteFile()
 
+/********************************************************
+ * Function: SUF_BinFileLength
+ *
+ * Parameters:
+ *  const char *filename    - File name
+ *
+ * Return value:
+ *  SLArrayIndex_t          - Number of samples read, -1 for file read error
+ *
+ * Description: Return the number of samples in the .bin file
+ *
+ ********************************************************/
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_BinFileLength(const char* filename)
+{
+  SLArrayIndex_t sampleCount = 0;
+  FILE* p_ioFile;
+
+  p_ioFile = fopen(filename, "r");
+  if (NULL == p_ioFile) {
+    return (-1);
+  }
+
+  char s2c_buffer[8];
+
+  while ((SLArrayIndex_t)fread(s2c_buffer, 1, sizeof(SLData_t), p_ioFile) == sizeof(SLData_t)) {
+    sampleCount++;
+  }
+
+  fclose(p_ioFile);
+  return (sampleCount);
+}    // End of SUF_BinFileLength()
+
 typedef union {    // SigLib fixed point data type to char array union
   SLInt32_t s;
   char c[4];
 } u_SLInt32_t_char_t;
 
 /********************************************************
- * Function: SUF_PCMReadData
+ * Function: SUF_RawReadData
  *
  * Parameters:
- *  SLData_t *BPtr,             - Data array pointer
- *  FILE *p_ioFile,             - File pointer
- *  const enum SLEndianType_t endianMode,
- *  const char wordLength       - Word length
- *  const SLArrayIndex_t        - arrayLength
+ *  SLData_t *BPtr,                 - Data array pointer
+ *  FILE *p_ioFile,                 - File pointer
+ *  const enum SLEndianType_t       - endianMode
+ *  const SLArrayIndex_t wordLength - Word length
+ *  const SLArrayIndex_t            - arrayLength
  *
  * Return value:
  *  SLArrayIndex_t    sampleCount    - Number of samples read
@@ -266,7 +299,7 @@ typedef union {    // SigLib fixed point data type to char array union
  *
  ********************************************************/
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMReadData(SLData_t* SIGLIB_PTR_DECL BPtr, FILE* p_ioFile, const enum SLEndianType_t endianMode,
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_RawReadData(SLData_t* SIGLIB_PTR_DECL BPtr, FILE* p_ioFile, const enum SLEndianType_t endianMode,
                                                 const SLArrayIndex_t wordLength, const SLArrayIndex_t arrayLength)
 {
   SLArrayIndex_t sampleCount = 0;
@@ -274,6 +307,9 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMReadData(SLData_t* SIGLIB_PTR_DECL BPtr, 
   u_SLInt32_t_char_t s2c;
 
   SLArrayIndex_t numBytesInWord = wordLength >> 3;
+  if (numBytesInWord <= 0) {
+    return (-1);
+  }
 
   while ((SLArrayIndex_t)fread(s2c_buffer, 1, numBytesInWord, p_ioFile) == numBytesInWord) {
     if (endianMode == SIGLIB_BIG_ENDIAN) {
@@ -298,17 +334,17 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMReadData(SLData_t* SIGLIB_PTR_DECL BPtr, 
   }
 
   return (sampleCount);
-}    // End of SUF_PCMReadData()
+}    // End of SUF_RawReadData()
 
 /********************************************************
- * Function: SUF_PCMWriteData
+ * Function: SUF_RawWriteData
  *
  * Parameters:
- *  const SLData_t *BPtr,       - Data array pointer
- *  FILE *p_ioFile,             - File pointer
- *  const enum SLEndianType_t endianMode,
- *  const char wordLength       - Word length
- *  const SLArrayIndex_t        - arrayLength
+ *  const SLData_t *BPtr,           - Data array pointer
+ *  FILE *p_ioFile,                 - File pointer
+ *  const enum SLEndianType_t       - endianMode
+ *  const SLArrayIndex_t wordLength - Word length
+ *  const SLArrayIndex_t            - arrayLength
  *
  * Return value:
  *  Number of samples written.
@@ -317,7 +353,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMReadData(SLData_t* SIGLIB_PTR_DECL BPtr, 
  *
  ********************************************************/
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMWriteData(const SLData_t* SIGLIB_PTR_DECL BPtr, FILE* p_ioFile, const enum SLEndianType_t endianMode,
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_RawWriteData(const SLData_t* SIGLIB_PTR_DECL BPtr, FILE* p_ioFile, const enum SLEndianType_t endianMode,
                                                  const SLArrayIndex_t wordLength, const SLArrayIndex_t arrayLength)
 {
   SLArrayIndex_t sampleCount;
@@ -325,6 +361,9 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMWriteData(const SLData_t* SIGLIB_PTR_DECL
   u_SLInt32_t_char_t s2c;
 
   SLArrayIndex_t numBytesInWord = wordLength >> 3;
+  if (numBytesInWord <= 0) {
+    return (-1);
+  }
 
   for (sampleCount = 0; sampleCount < arrayLength; sampleCount++) {
     s2c.s = (SLInt32_t)*BPtr++;
@@ -342,26 +381,26 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMWriteData(const SLData_t* SIGLIB_PTR_DECL
   }
 
   return (sampleCount);
-}    // End of SUF_PCMWriteData()
+}    // End of SUF_RawWriteData()
 
 /********************************************************
- * Function: SUF_PCMReadFile
+ * Function: SUF_RawReadFile
  *
  * Parameters:
- *  SLData_t *BPtr,               - Data array pointer
- *  const char *filename          - File name
- *  const enum SLEndianType_t endianMode,
- *  const char wordLength         - Word length
- *  const SLArrayIndex_t          - arrayLength
+ *  SLData_t *BPtr,                 - Data array pointer
+ *  const char *filename            - File name
+ *  const enum SLEndianType_t       - endianMode
+ *  const SLArrayIndex_t wordLength - Word length
+ *  const SLArrayIndex_t            - arrayLength
  *
  * Return value:
- *  SLArrayIndex_t    sampleCount    - Number of samples read
+ *  SLArrayIndex_t    sampleCount    - Number of samples read, -1 for file read error
  *
  * Description: Read an array of data from a .pcm file.
  *
  ********************************************************/
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMReadFile(SLData_t* SIGLIB_PTR_DECL BPtr, const char* filename, const enum SLEndianType_t endianMode,
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_RawReadFile(SLData_t* SIGLIB_PTR_DECL BPtr, const char* filename, const enum SLEndianType_t endianMode,
                                                 const SLArrayIndex_t wordLength, const SLArrayIndex_t arrayLength)
 {
   SLArrayIndex_t sampleCount = 0;
@@ -376,6 +415,9 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMReadFile(SLData_t* SIGLIB_PTR_DECL BPtr, 
   u_SLInt32_t_char_t s2c;
 
   SLArrayIndex_t numBytesInWord = wordLength >> 3;
+  if (numBytesInWord <= 0) {
+    return (-1);
+  }
 
   while ((SLArrayIndex_t)fread(s2c_buffer, 1, numBytesInWord, p_ioFile) == numBytesInWord) {
     if (endianMode == SIGLIB_BIG_ENDIAN) {
@@ -402,17 +444,17 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMReadFile(SLData_t* SIGLIB_PTR_DECL BPtr, 
 
   fclose(p_ioFile);
   return (sampleCount);
-}    // End of SUF_PCMReadFile()
+}    // End of SUF_RawReadFile()
 
 /********************************************************
- * Function: SUF_PCMWriteFile
+ * Function: SUF_RawWriteFile
  *
  * Parameters:
- *  const SLData_t *BPtr,         - Data array pointer
- *  const char *filename          - File name
- *  const enum SLEndianType_t endianMode,
- *  const char wordLength         - Word length
- *  const SLArrayIndex_t          - arrayLength
+ *  const SLData_t *BPtr,           - Data array pointer
+ *  const char *filename            - File name
+ *  const enum SLEndianType_t       - endianMode
+ *  const SLArrayIndex_t wordLength - Word length
+ *  const SLArrayIndex_t            - arrayLength
  *
  * Return value:
  *  Number of samples written.
@@ -421,8 +463,8 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMReadFile(SLData_t* SIGLIB_PTR_DECL BPtr, 
  *
  ********************************************************/
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMWriteFile(const SLData_t* SIGLIB_PTR_DECL BPtr, const char* filename, const enum SLEndianType_t endianMode,
-                                                 const char wordLength, const SLArrayIndex_t arrayLength)
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_RawWriteFile(const SLData_t* SIGLIB_PTR_DECL BPtr, const char* filename, const enum SLEndianType_t endianMode,
+                                                 const SLArrayIndex_t wordLength, const SLArrayIndex_t arrayLength)
 {
   SLArrayIndex_t sampleCount;
   FILE* p_ioFile;
@@ -436,6 +478,9 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMWriteFile(const SLData_t* SIGLIB_PTR_DECL
   u_SLInt32_t_char_t s2c;
 
   SLArrayIndex_t numBytesInWord = wordLength >> 3;
+  if (numBytesInWord <= 0) {
+    return (-1);
+  }
 
   for (sampleCount = 0; sampleCount < arrayLength; sampleCount++) {
     s2c.s = (SLInt32_t)*BPtr++;
@@ -454,14 +499,53 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMWriteFile(const SLData_t* SIGLIB_PTR_DECL
 
   fclose(p_ioFile);
   return (sampleCount);
-}    // End of SUF_PCMWriteFile()
+}    // End of SUF_RawWriteFile()
+
+/********************************************************
+ * Function: SUF_RawFileLength
+ *
+ * Parameters:
+ *  const char *filename            - File name
+ *  const SLArrayIndex_t wordLength - Word length
+ *
+ * Return value:
+ *  SLArrayIndex_t    sampleCount    - Number of samples read, -1 for file read error
+ *
+ * Description: Return the number of samples in the .pcm file
+ *
+ ********************************************************/
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_RawFileLength(const char* filename, const SLArrayIndex_t wordLength)
+{
+  SLArrayIndex_t sampleCount = 0;
+  FILE* p_ioFile;
+
+  p_ioFile = fopen(filename, "r");
+  if (NULL == p_ioFile) {
+    return (-1);
+  }
+
+  char s2c_buffer[4];
+
+  SLArrayIndex_t numBytesInWord = wordLength >> 3;
+  if (numBytesInWord <= 0) {
+    return (-1);
+  }
+
+  while ((SLArrayIndex_t)fread(s2c_buffer, 1, numBytesInWord, p_ioFile) == numBytesInWord) {
+    sampleCount++;
+  }
+
+  fclose(p_ioFile);
+  return (sampleCount);
+}    // End of SUF_RawFileLength()
 
 /********************************************************
  * Function: SUF_CsvReadData
  *
  * Parameters:
  *  SLData_t *BPtr,             - Output Data array pointer
- *  FILE *p_ioFile,                 - File pointer
+ *  FILE *p_ioFile,             - File pointer
  *  const SLData_t sampleRate,  - Sample rate
  *  const SLData_t numColumns,  - Number of columns (1 or 2)
  *  const SLArrayIndex_t        - Array Length
@@ -488,11 +572,26 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadData(SLData_t* SIGLIB_PTR_DECL BPtr, 
 #  else    // Default: SLData_t == double
       size_t numItems = fscanf(p_ioFile, "%lf\n", (double*)&sample);
 #  endif
-      if (numItems == 1) {
+      if (numItems != 1) {
+        if (sampleCount < arrayLength) {
+          for (SLArrayIndex_t j = sampleCount; j < arrayLength; j++) {
+            *BPtr++ = SIGLIB_ZERO;
+          }
+        }
+        fclose(p_ioFile);
+        return (sampleCount);
+      } else {
         *BPtr++ = sample;
         sampleCount++;
-      } else {
-        *BPtr++ = SIGLIB_ZERO;
+      }
+      if (feof(p_ioFile)) {    // Check end of file error
+        if (sampleCount < arrayLength) {
+          for (SLArrayIndex_t j = sampleCount; j < arrayLength; j++) {
+            *BPtr++ = SIGLIB_ZERO;
+          }
+        }
+        fclose(p_ioFile);
+        return (sampleCount);
       }
     }
   } else if (numColumns == 2) {
@@ -502,15 +601,26 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadData(SLData_t* SIGLIB_PTR_DECL BPtr, 
 #  else    // Default: SLData_t == double
       size_t numItems = fscanf(p_ioFile, "%lf,%lf\n", (double*)&samplePeriod, (double*)&sample);
 #  endif
-      if (numItems == 2) {
-        *BPtr++ = sample;
-        sampleCount++;
-      } else if (feof(p_ioFile)) {    // Check end of file error
+      if (numItems != 2) {
         if (sampleCount < arrayLength) {
           for (SLArrayIndex_t j = sampleCount; j < arrayLength; j++) {
             *BPtr++ = SIGLIB_ZERO;
           }
         }
+        fclose(p_ioFile);
+        return (sampleCount);
+      } else {
+        *BPtr++ = sample;
+        sampleCount++;
+      }
+      if (feof(p_ioFile)) {    // Check end of file error
+        if (sampleCount < arrayLength) {
+          for (SLArrayIndex_t j = sampleCount; j < arrayLength; j++) {
+            *BPtr++ = SIGLIB_ZERO;
+          }
+        }
+        fclose(p_ioFile);
+        return (sampleCount);
       }
     }
   } else {    // If not 1 or 2 columns return error
@@ -525,7 +635,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadData(SLData_t* SIGLIB_PTR_DECL BPtr, 
  *
  * Parameters:
  *  const SLData_t *BPtr,           - Data array pointer
- *  FILE *p_ioFile,                     - File pointer
+ *  FILE *p_ioFile,                 - File pointer
  *  const SLData_t sampleRate,      - Sample rate
  *  const SLData_t sampleIndex,     - Sample index
  *  const SLData_t numColumns,      - Number of columns (1 or 2)
@@ -599,8 +709,16 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadFile(SLData_t* SIGLIB_PTR_DECL BPtr, 
       size_t numItems = fscanf(p_ioFile, "%lf\n", (double*)&sample);
 #  endif
       if (numItems != 1) {
+        if (sampleCount < arrayLength) {
+          for (SLArrayIndex_t j = sampleCount; j < arrayLength; j++) {
+            *BPtr++ = SIGLIB_ZERO;
+          }
+        }
         fclose(p_ioFile);
-        return (0);
+        return (sampleCount);
+      } else {
+        *BPtr++ = sample;
+        sampleCount++;
       }
       if (feof(p_ioFile)) {    // Check end of file error
         if (sampleCount < arrayLength) {
@@ -610,11 +728,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadFile(SLData_t* SIGLIB_PTR_DECL BPtr, 
         }
         fclose(p_ioFile);
         return (sampleCount);
-      }
-
-      else {
-        *BPtr++ = sample;
-        sampleCount++;
       }
     }
   } else if (numColumns == 2) {
@@ -624,9 +737,17 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadFile(SLData_t* SIGLIB_PTR_DECL BPtr, 
 #  else    // Default: SLData_t == double
       size_t numItems = fscanf(p_ioFile, "%lf,%lf\n", (double*)&samplePeriod, (double*)&sample);
 #  endif
-      if (numItems != 1) {
+      if (numItems != 2) {
+        if (sampleCount < arrayLength) {
+          for (SLArrayIndex_t j = sampleCount; j < arrayLength; j++) {
+            *BPtr++ = SIGLIB_ZERO;
+          }
+        }
         fclose(p_ioFile);
-        return (0);
+        return (sampleCount);
+      } else {
+        *BPtr++ = sample;
+        sampleCount++;
       }
       if (feof(p_ioFile)) {    // Check end of file error
         if (sampleCount < arrayLength) {
@@ -636,11 +757,6 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadFile(SLData_t* SIGLIB_PTR_DECL BPtr, 
         }
         fclose(p_ioFile);
         return (sampleCount);
-      }
-
-      else {
-        *BPtr++ = sample;
-        sampleCount++;
       }
     }
   } else {    // If not 1 or 2 columns return error

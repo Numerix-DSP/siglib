@@ -14,7 +14,7 @@ operating systems, include:
 
 ## Why use SigLib?
 
-SigLib includes over 1000 fully tested DSP functions and now includes functions for Artificial
+SigLib includes over 1100 fully tested DSP functions and now includes functions for Artificial
 Intelligence and Machine Learning.
 
 SigLib is the easiest way to develop portable signal processing applications because the code can be
@@ -61,6 +61,12 @@ information
 overviews
 
 The easiest way to navigate the folders is to use the provided html files, starting with [Welcome.html](./welcome.html).
+
+## API Changes
+
+Some function names have been changed an tidied up.
+Functions who's names have changed are listed in siglib_deprecated.h.
+For compatibility with old API function names, this file can be enabled at the end of siglib.h.
 
 ## License
 

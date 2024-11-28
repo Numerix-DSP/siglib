@@ -68,6 +68,9 @@ void SIGLIB_FUNC_DECL SDA_Rotate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t*
 #endif
 
   SLArrayIndex_t Index = Rotation;
+  if (Index < 0) {
+    Index += ArrayLength;
+  }
 
   for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
@@ -1903,6 +1906,35 @@ void SIGLIB_FUNC_DECL SDA_Ones(SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayInde
 #endif
   }
 }    // End of SDA_Ones()
+
+/********************************************************
+ * Function: SDA_Impulse
+ *
+ * Parameters:
+ *  SLData_t    *pDst,
+ *  const SLArrayIndex_t    ArrayLength
+ *
+ * Return value:
+ *  void
+ *
+ * Description: Generate an impulse function.
+ *  The first sample is 1, the remainder are 0.
+ *
+ ********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_Impulse(SLData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t ArrayLength)
+{
+#if (SIGLIB_ARRAYS_ALIGNED)
+#  ifdef __TMS320C6X__             // Defined by TI compiler
+  _nassert((int)pDst % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+#  endif
+#endif
+
+  for (SLArrayIndex_t i = 0; i < ArrayLength; i++) {
+    pDst[i] = SIGLIB_ZERO;
+  }
+  pDst[0] = SIGLIB_ONE;
+}    // End of SDA_Impulse()
 
 /********************************************************
  * Function: SDA_Histogram

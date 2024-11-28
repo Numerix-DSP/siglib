@@ -5711,7 +5711,7 @@ SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_SIF_1IirNc(JNIEnv* jen
   arg1 = *(SLData_t**)&jarg1;
   arg2 = *(SLData_t**)&jarg2;
   arg3 = (SLArrayIndex_t)jarg3;
-  SIF_IirNc(arg1, arg2, arg3);
+  SIF_IirZeroPhase(arg1, arg2, arg3);
 }
 
 SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_SDA_1IirNc(JNIEnv* jenv, jclass jcls, jlong jarg1, jlong jarg2, jlong jarg3, jlong jarg4,
@@ -5734,7 +5734,7 @@ SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_SDA_1IirNc(JNIEnv* jen
   arg5 = *(SLData_t**)&jarg5;
   arg6 = (SLArrayIndex_t)jarg6;
   arg7 = (SLArrayIndex_t)jarg7;
-  SDA_IirNc((double const*)arg1, arg2, arg3, arg4, (double const*)arg5, arg6, arg7);
+  SDA_IirZeroPhase((double const*)arg1, arg2, arg3, arg4, (double const*)arg5, arg6, arg7);
 }
 
 SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_SDA_1BilinearTransform(JNIEnv* jenv, jclass jcls, jlong jarg1, jobject jarg1_,
@@ -20339,7 +20339,7 @@ SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_SMX_1Multiply(JNIEnv* 
   arg4 = (SLArrayIndex_t)jarg4;
   arg5 = (SLArrayIndex_t)jarg5;
   arg6 = (SLArrayIndex_t)jarg6;
-  SMX_Multiply((double const*)arg1, (double const*)arg2, arg3, arg4, arg5, arg6);
+  SMX_Multiply2((double const*)arg1, (double const*)arg2, arg3, arg4, arg5, arg6);
 }
 
 SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_SMX_1CreateIdentity(JNIEnv* jenv, jclass jcls, jlong jarg1, jint jarg2)
@@ -20351,7 +20351,7 @@ SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_SMX_1CreateIdentity(JN
   (void)jcls;
   arg1 = *(SLData_t**)&jarg1;
   arg2 = (SLArrayIndex_t)jarg2;
-  SMX_CreateIdentity(arg1, arg2);
+  SMX_Identity(arg1, arg2);
 }
 
 SWIGEXPORT jint JNICALL Java_siglib_1wrap_siglib_1wrapJNI_SMX_1Inverse2x2(JNIEnv* jenv, jclass jcls, jlong jarg1, jlong jarg2)

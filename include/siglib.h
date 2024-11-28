@@ -155,17 +155,21 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_BinReadFile(SLData_t SIGLIB_OUTPUT_PTR_DECL*
 SLArrayIndex_t SIGLIB_FUNC_DECL SUF_BinWriteFile(const SLData_t SIGLIB_INPUT_PTR_DECL*, const char*, const enum SLEndianType_t,
                                                  const SLArrayIndex_t);
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMReadData(SLData_t SIGLIB_OUTPUT_PTR_DECL*, FILE*, const enum SLEndianType_t, const SLArrayIndex_t,
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_BinFileLength(const char*);
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_RawReadData(SLData_t SIGLIB_OUTPUT_PTR_DECL*, FILE*, const enum SLEndianType_t, const SLArrayIndex_t,
                                                 const SLArrayIndex_t);    // Functions for reading and writing .pcm files
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMWriteData(const SLData_t SIGLIB_INPUT_PTR_DECL*, FILE*, const enum SLEndianType_t, const SLArrayIndex_t,
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_RawWriteData(const SLData_t SIGLIB_INPUT_PTR_DECL*, FILE*, const enum SLEndianType_t, const SLArrayIndex_t,
                                                  const SLArrayIndex_t);
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMReadFile(SLData_t SIGLIB_OUTPUT_PTR_DECL*, const char*, const enum SLEndianType_t, const SLArrayIndex_t,
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_RawReadFile(SLData_t SIGLIB_OUTPUT_PTR_DECL*, const char*, const enum SLEndianType_t, const SLArrayIndex_t,
                                                 const SLArrayIndex_t);
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SUF_PCMWriteFile(const SLData_t SIGLIB_INPUT_PTR_DECL*, const char*, const enum SLEndianType_t,
-                                                 const char wordLength, const SLArrayIndex_t);
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_RawWriteFile(const SLData_t SIGLIB_INPUT_PTR_DECL*, const char*, const enum SLEndianType_t,
+                                                 const SLArrayIndex_t, const SLArrayIndex_t);
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_RawFileLength(const char*, const SLArrayIndex_t);
 
 SLArrayIndex_t SIGLIB_FUNC_DECL SUF_CsvReadData(SLData_t SIGLIB_OUTPUT_PTR_DECL*, FILE*, const SLData_t, const SLArrayIndex_t,
                                                 const SLArrayIndex_t);    // Functions for reading and writing .csv files
@@ -720,6 +724,50 @@ void SIGLIB_FUNC_DECL SDA_DctIIOrthogonal(const SLData_t* SIGLIB_INPUT_PTR_DECL,
                                           const SLData_t,                           // Output scale parameter
                                           const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to cosine look up table
                                           SLArrayIndex_t);                          // DCT length
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SAI_RstftNumberOfFrequencyDomainFrames(const SLArrayIndex_t,     // Source array length
+                                                                       const SLArrayIndex_t,     // Window length
+                                                                       const SLArrayIndex_t,     // Hop length
+                                                                       const SLArrayIndex_t);    // Centre padding flag
+
+void SIGLIB_FUNC_DECL SIF_Stft(SLData_t* SIGLIB_OUTPUT_PTR_DECL,          // Pointer to window coefficients
+                               const enum SLWindow_t,                     // Window type
+                               const SLData_t,                            // Window coefficient
+                               SLData_t* SIGLIB_OUTPUT_PTR_DECL,          // Pointer to FFT coefficients
+                               SLArrayIndex_t* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to Bit Reverse Address Table
+                               const SLArrayIndex_t,                      // Window length
+                               const SLArrayIndex_t);                     // FFT length
+
+void SIGLIB_FUNC_DECL SDA_Rstft(SLData_t* SIGLIB_INPUT_PTR_DECL,                // Pointer to source array
+                                const SLData_t* SIGLIB_INPUT_PTR_DECL,          // Pointer to window coefficients
+                                const SLData_t* SIGLIB_INPUT_PTR_DECL,          // Pointer to FFT coefficients
+                                const SLArrayIndex_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to Bit Reverse Address Table
+                                SLData_t* SIGLIB_INPUT_PTR_DECL,                // Pointer to real temporary array
+                                SLData_t* SIGLIB_INPUT_PTR_DECL,                // Pointer to imaginary temporary array
+                                SLData_t* SIGLIB_OUTPUT_PTR_DECL,               // Pointer to real destination array
+                                SLData_t* SIGLIB_OUTPUT_PTR_DECL,               // Pointer to imaginary destination array
+                                const SLArrayIndex_t,                           // Source array length
+                                const SLArrayIndex_t,                           // Hop array length
+                                const SLArrayIndex_t,                           // Window length
+                                const SLArrayIndex_t,                           // FFT length
+                                const SLArrayIndex_t,                           // Log2 FFT length
+                                const SLArrayIndex_t);                          // Centre padding flag
+
+void SIGLIB_FUNC_DECL SDA_Ristft(SLData_t* SIGLIB_INPUT_PTR_DECL,                // Pointer to real source array
+                                 SLData_t* SIGLIB_INPUT_PTR_DECL,                // Pointer to imaginary source array
+                                 const SLData_t* SIGLIB_INPUT_PTR_DECL,          // Pointer to window coefficients
+                                 const SLData_t* SIGLIB_INPUT_PTR_DECL,          // Pointer to FFT coefficients
+                                 const SLArrayIndex_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to Bit Reverse Address Table
+                                 SLData_t* SIGLIB_INPUT_PTR_DECL,                // Pointer to real temporary array
+                                 SLData_t* SIGLIB_INPUT_PTR_DECL,                // Pointer to imaginary temporary array
+                                 SLData_t* SIGLIB_OUTPUT_PTR_DECL,               // Pointer to real destination array
+                                 SLData_t* SIGLIB_OUTPUT_PTR_DECL,               // Pointer to real normalization array
+                                 const SLArrayIndex_t,                           // Number of frames
+                                 const SLArrayIndex_t,                           // Hop array length
+                                 const SLArrayIndex_t,                           // Window length
+                                 const SLArrayIndex_t,                           // FFT length
+                                 const SLArrayIndex_t,                           // Log2 FFT length
+                                 const SLArrayIndex_t);                          // Centre padding flag
 
 // Arbitrary Length Fast Fourier Transform Functions - arbfft.c
 
@@ -1428,11 +1476,22 @@ void SIGLIB_FUNC_DECL SIF_FirBandPassFilterWindow(SLData_t* SIGLIB_OUTPUT_PTR_DE
                                                   const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to window coefficients
                                                   const SLArrayIndex_t);                    // Filter length
 
-SLFixData_t SIGLIB_FUNC_DECL SUF_FirKaiserApproximation(SLData_t,     // Pass-band cut off frequency
-                                                        SLData_t,     // Stop-band cut off frequency
-                                                        SLData_t,     // Pass-band ripple
-                                                        SLData_t,     // Stop-band attenuation
-                                                        SLData_t);    // Sample rate (Hz)
+SLFixData_t SIGLIB_FUNC_DECL SUF_FirKaiserApproximation(const SLData_t,     // Pass-band cut off frequency
+                                                        const SLData_t,     // Stop-band cut off frequency
+                                                        const SLData_t,     // Pass-band ripple
+                                                        const SLData_t,     // Stop-band attenuation
+                                                        const SLData_t);    // Sample rate (Hz)
+
+SLFixData_t SIGLIB_FUNC_DECL SUF_FirHarrisApproximation(const SLData_t,     // Pass-band cut off frequency
+                                                        const SLData_t,     // Stop-band cut off frequency
+                                                        const SLData_t,     // Stop-band attenuation
+                                                        const SLData_t);    // Sample rate (Hz)
+
+SLFixData_t SIGLIB_FUNC_DECL SUF_FirHarrisMultirateApproximation(const SLData_t,     // Pass-band cut off frequency
+                                                                 const SLData_t,     // Stop-band cut off frequency
+                                                                 const SLData_t,     // Stop-band attenuation
+                                                                 const SLData_t,     // M
+                                                                 const SLData_t);    // Sample rate (Hz)
 
 void SIGLIB_FUNC_DECL SIF_FirMatchedFilter(SLData_t* SIGLIB_INPUT_PTR_DECL,     // Source signal
                                            SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Output matched filter coefficients
@@ -1548,6 +1607,10 @@ void SIGLIB_FUNC_DECL SDA_FirLpHpShift(const SLData_t* SIGLIB_INPUT_PTR_DECL,   
                                        SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Destination coefficients
                                        const SLArrayIndex_t);                    // Filter length
 
+void SIGLIB_FUNC_DECL SDA_FirLpHpShiftReflectAroundMinus6dBPoint(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Source coefficients
+                                                                 SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Destination coefficients
+                                                                 const SLArrayIndex_t);                    // Filter length
+
 // Filtering functions - iirfilt.c
 
 void SIGLIB_FUNC_DECL SIF_Iir(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to filter state array
@@ -1579,31 +1642,70 @@ void SIGLIB_FUNC_DECL SDA_IirMac(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // In
 
 void SIGLIB_FUNC_DECL SIF_IirOrderN(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to filter state array
                                     SLArrayIndex_t*,                     // Pointer to filter index
-                                    const SLArrayIndex_t);               // Filter Order
+                                    const SLArrayIndex_t);               // Filter order
 
 SLData_t SIGLIB_FUNC_DECL SDS_IirOrderN(const SLData_t,                           // Input data sample to be filtered
                                         SLData_t* SIGLIB_INOUT_PTR_DECL,          // Pointer to filter state array
                                         const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to filter coefficients array
                                         SLArrayIndex_t*,                          // Pointer to filter index
-                                        const SLArrayIndex_t);                    // Filter Order
+                                        const SLArrayIndex_t);                    // Filter order
 
 void SIGLIB_FUNC_DECL SDA_IirOrderN(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to input array
                                     SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
                                     SLData_t* SIGLIB_INOUT_PTR_DECL,          // Pointer to filter state array
                                     const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to filter coefficients array
                                     SLArrayIndex_t*,                          // Pointer to filter index
-                                    const SLArrayIndex_t,                     // Filter Order
+                                    const SLArrayIndex_t,                     // Filter order
                                     const SLArrayIndex_t);                    // Array length
 
-void SIGLIB_FUNC_DECL SIF_IirNc(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to filter state array
-                                const SLArrayIndex_t);               // Source array length
+SLData_t SIGLIB_FUNC_DECL SDS_IirOrderNMac(const SLData_t,                           // Input data sample to be filtered
+                                           SLData_t* SIGLIB_INOUT_PTR_DECL,          // Pointer to filter state array
+                                           const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to filter coefficients array
+                                           SLArrayIndex_t*,                          // Pointer to filter index
+                                           const SLArrayIndex_t);                    // Filter order
 
-void SIGLIB_FUNC_DECL SDA_IirNc(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Input array to be filtered
-                                SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
-                                SLData_t* SIGLIB_INOUT_PTR_DECL,          // Pointer to filter state array
-                                const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to filter coefficients
-                                const SLArrayIndex_t,                     // Number of stages
-                                const SLArrayIndex_t);                    // Source array length
+void SIGLIB_FUNC_DECL SDA_IirOrderNMac(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to input array
+                                       SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
+                                       SLData_t* SIGLIB_INOUT_PTR_DECL,          // Pointer to filter state array
+                                       const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to filter coefficients array
+                                       SLArrayIndex_t*,                          // Pointer to filter index
+                                       const SLArrayIndex_t,                     // Filter order
+                                       const SLArrayIndex_t);                    // Array length
+
+void SIGLIB_FUNC_DECL SDA_IirOrderNDirectFormIITransposed(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to input array
+                                                          SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
+                                                          SLData_t* SIGLIB_INOUT_PTR_DECL,          // Pointer to filter state array
+                                                          const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to filter coefficients array
+                                                          const SLArrayIndex_t,                     // Filter order
+                                                          const SLArrayIndex_t);                    // Array length
+
+void SIGLIB_FUNC_DECL SDA_IirZeroPhase(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to input source array to be filtered
+                                       SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
+                                       SLData_t* SIGLIB_INOUT_PTR_DECL,          // Pointer to filter state array
+                                       const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to filter coefficients
+                                       const SLArrayIndex_t,                     // Number of stages
+                                       const SLArrayIndex_t);                    // Source array length
+
+void SIGLIB_FUNC_DECL SIF_IirZeroPhaseOrderN(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to filter coefficients array
+                                             SLData_t* SIGLIB_INOUT_PTR_DECL,          // Pointer to internal transposed companion matrix
+                                             SLData_t* SIGLIB_INOUT_PTR_DECL,          // Pointer to internal IminusA matrix
+                                             SLArrayIndex_t*,                          // Pointer to internal row interchange matrix
+                                             SLData_t* SIGLIB_INOUT_PTR_DECL,          // Pointer to internal scaling factor matrix
+                                             SLData_t* SIGLIB_INOUT_PTR_DECL,          // Pointer to internal feedforward coefficient array
+                                             SLData_t* SIGLIB_INOUT_PTR_DECL,          // Pointer to internal feedback coefficient array
+                                             SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to output initialized state array
+                                             const SLArrayIndex_t);                    // Filter order
+
+void SIGLIB_FUNC_DECL SDA_IirZeroPhaseOrderN(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to input source array to be filtered
+                                             const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to initialized filter state array
+                                             const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to filter coefficients
+                                             SLData_t* SIGLIB_INOUT_PTR_DECL,          // Pointer to internal filter state array
+                                             SLData_t* SIGLIB_INOUT_PTR_DECL,          // Pointer to internal padded source array
+                                             SLData_t* SIGLIB_INOUT_PTR_DECL,          // Pointer to internal padded destination array
+                                             SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
+                                             const SLArrayIndex_t,                     // Filter order
+                                             const SLArrayIndex_t,                     // Source array extension length
+                                             const SLArrayIndex_t);                    // Source array length
 
 #ifndef _HP_VEE    // The following functionality is not supported by VEE
 
@@ -1899,6 +2001,36 @@ SLError_t SIGLIB_FUNC_DECL SIF_GraphicEqualizerFilterBank(const SLData_t* SIGLIB
                                                           const SLData_t,                           // Minimum gain for each frequncy band
                                                           const SLData_t,                           // Gain step for each frequency band
                                                           const SLArrayIndex_t);                    // Number of gain levels for each frequency band
+
+void SIGLIB_FUNC_DECL SDA_SplitIIRFilterCoefficients(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to SigLib filter coefficients
+                                                     SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to feedforward filter coefficients
+                                                     SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to feedback filter coefficients
+                                                     const SLArrayIndex_t);                    // Number of biquads
+
+void SIGLIB_FUNC_DECL SDA_MergeIIRFilterCoefficients(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to feedforward filter coefficients
+                                                     const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to feedback filter coefficients
+                                                     SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to SigLib filter coefficients
+                                                     const SLArrayIndex_t);                    // Number of biquads
+
+void SIGLIB_FUNC_DECL SDA_SplitIIROrderNFilterCoefficients(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to SigLib filter coefficients
+                                                           SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to feedforward filter coefficients
+                                                           SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to feedback filter coefficients
+                                                           const SLArrayIndex_t);                    // Filter order
+
+void SIGLIB_FUNC_DECL SDA_MergeIIROrderNFilterCoefficients(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to feedforward filter coefficients
+                                                           SLData_t* SIGLIB_INPUT_PTR_DECL,          // Pointer to feedback filter coefficients
+                                                           SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to SigLib filter coefficients
+                                                           const SLArrayIndex_t);                    // Filter order
+
+SLError_t SIGLIB_FUNC_DECL
+SDA_IirOrderNInitializeCoefficients(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to feedforward coefficients
+                                    const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to feedback coefficients
+                                    SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to state array initialized values
+                                    SLData_t* SIGLIB_INOUT_PTR_DECL,          // Pointer to internal transposed companion matrix
+                                    SLData_t* SIGLIB_INOUT_PTR_DECL,          // Pointer to internal IminusA matrix
+                                    SLArrayIndex_t*,                          // Pointer to internal row interchange matrix
+                                    SLData_t* SIGLIB_INOUT_PTR_DECL,          // Pointer to internal scaling factor matrix
+                                    const SLArrayIndex_t);                    // Filter order
 
 // Filtering functions - filter.c
 
@@ -4947,6 +5079,11 @@ void SIGLIB_FUNC_DECL SDA_Add(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Point
                               SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
                               const SLArrayIndex_t);                    // Array length
 
+void SIGLIB_FUNC_DECL SDA_Subtract(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                                   const SLData_t,                           // Offset
+                                   SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
+                                   const SLArrayIndex_t);                    // Array length
+
 SLData_t SIGLIB_FUNC_DECL SDA_PositiveOffset(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                              SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
                                              const SLArrayIndex_t);                    // Array length
@@ -5261,6 +5398,9 @@ void SIGLIB_FUNC_DECL SDA_Zeros(SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer t
 
 void SIGLIB_FUNC_DECL SDA_Ones(SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                const SLArrayIndex_t);              // Array length
+
+void SIGLIB_FUNC_DECL SDA_Impulse(SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                                  const SLArrayIndex_t);              // Array length
 
 void SIGLIB_FUNC_DECL SDA_Histogram(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                     SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to histogram array
@@ -5860,6 +6000,12 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindFirstNonZeroIndex(const SLData_t* SIGLIB
 
 SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindNumberOfNonZeroValues(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                                               const SLArrayIndex_t);                    // Array length
+
+void SIGLIB_FUNC_DECL SDA_Pad(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                              SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
+                              const enum SLPadModeType_t,               // Array extend mode
+                              const SLArrayIndex_t,                     // Extension length
+                              const SLArrayIndex_t);                    // Array length
 
 // Data type conversion functions - datatype.c
 
@@ -6529,15 +6675,19 @@ void SIGLIB_FUNC_DECL SMX_Diagonal(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // 
                                    const SLArrayIndex_t,                     // Source matrix # of rows
                                    const SLArrayIndex_t);                    // Source matrix # cols
 
-void SIGLIB_FUNC_DECL SMX_Multiply(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source matrix 1
-                                   const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source matrix 2
-                                   SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination matrix
-                                   const SLArrayIndex_t,                     // Source matrix 1 # of rows
-                                   const SLArrayIndex_t,                     // Source matrix 1 # of columns
-                                   const SLArrayIndex_t);                    // Source matrix 2 # of columns
+void SIGLIB_FUNC_DECL SMX_Multiply2(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source matrix 1
+                                    const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source matrix 2
+                                    SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination matrix
+                                    const SLArrayIndex_t,                     // Source matrix 1 # of rows
+                                    const SLArrayIndex_t,                     // Source matrix 1 # of columns
+                                    const SLArrayIndex_t);                    // Source matrix 2 # of columns
 
-void SIGLIB_FUNC_DECL SMX_CreateIdentity(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Output Matrix pointer
-                                         const SLArrayIndex_t);               //  Destination matrix # of rows and columns
+void SIGLIB_FUNC_DECL SMX_Identity(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Output Matrix pointer
+                                   const SLArrayIndex_t);               //  Destination matrix # of rows and columns
+
+void SIGLIB_FUNC_DECL SMX_Eye(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination matrix
+                              const SLArrayIndex_t,                // Number of rows in matrix
+                              const SLArrayIndex_t);               // Number of columns in matrix
 
 SLError_t SIGLIB_FUNC_DECL SMX_Inverse2x2(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source matrix
                                           SLData_t* SIGLIB_OUTPUT_PTR_DECL);        // Pointer to destination matrix
@@ -6576,6 +6726,21 @@ SLData_t SIGLIB_FUNC_DECL SMX_Determinant(const SLData_t* SIGLIB_INPUT_PTR_DECL,
 SLData_t SIGLIB_FUNC_DECL SMX_LuDeterminant(const SLData_t* SIGLIB_INPUT_PTR_DECL,          // Pointer to source matrix
                                             const SLArrayIndex_t* SIGLIB_INOUT_PTR_DECL,    // Index matrix pointer
                                             const SLArrayIndex_t);                          // Number of rows and columns in matrix
+
+void SIGLIB_FUNC_DECL SMX_LuDecomposeSeparateLU(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Source matrix pointer
+                                                SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Lower triangular matrix pointer
+                                                SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Upper triangular matrix pointer
+                                                const SLArrayIndex_t);                    // Number of rows and columns in matrix
+
+void SIGLIB_FUNC_DECL SMX_ForwardSubstitution(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Lower triangular matrix pointer
+                                              const SLData_t* SIGLIB_INPUT_PTR_DECL,    // B matrix pointer
+                                              SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Y matrix pointer
+                                              const SLArrayIndex_t);                    // Number of rows and columns in matrix
+
+void SIGLIB_FUNC_DECL SMX_BackwardSubstitution(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Upper triangular matrix pointer
+                                               const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Y matrix pointer
+                                               SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // X matrix pointer
+                                               const SLArrayIndex_t);                    // Number of rows and columns in matrix
 
 void SIGLIB_FUNC_DECL SMX_RotateClockwise(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source matrix
                                           SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination matrix
@@ -6707,6 +6872,14 @@ void SIGLIB_FUNC_DECL SMX_ShuffleRows(const SLData_t* SIGLIB_INPUT_PTR_DECL,    
                                       const SLArrayIndex_t,                     // Number of rows in matrix
                                       const SLArrayIndex_t);                    // Number of columns in matrix
 
+void SIGLIB_FUNC_DECL SMX_CompanionMatrix(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                                          SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination matrix
+                                          const SLArrayIndex_t);                    // Array length
+
+void SIGLIB_FUNC_DECL SMX_CompanionMatrixTransposed(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                                                    SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination matrix
+                                                    const SLArrayIndex_t);                    // Array length
+
 void SIGLIB_FUNC_DECL SMX_ExtractCategoricalColumn(const SLData_t* SIGLIB_INPUT_PTR_DECL,     // Pointer to source matrix
                                                    SLArrayIndex_t* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination matrix
                                                    const SLArrayIndex_t,                      // Number of rows in matrix
@@ -6716,12 +6889,22 @@ void SIGLIB_FUNC_DECL SMX_ExtractCategoricalColumn(const SLData_t* SIGLIB_INPUT_
 
 #  define SMX_Copy(IPtr, OPtr, nRows, nCols) SDA_Copy(IPtr, OPtr, (SLArrayIndex_t)(nRows * nCols))
 
-#  define SMX_Add(IPtr1, IPtr2, OPtr, nRows, nCols) SDA_Add2((SLData_t*)IPtr1, (SLData_t*)IPtr2, (SLData_t*)OPtr, (SLArrayIndex_t)(nRows * nCols))
+#  define SMX_Fill(OPtr, fillVal, nRows, nCols) SDA_Fill(OPtr, fillVal, (SLArrayIndex_t)(nRows * nCols))
 
-#  define SMX_Subtract(IPtr1, IPtr2, OPtr, nRows, nCols) \
+#  define SMX_Ones(OPtr, nRows, nCols) SDA_Ones(OPtr, (SLArrayIndex_t)(nRows * nCols))
+
+#  define SMX_Zeros(OPtr, nRows, nCols) SDA_Zeros(OPtr, (SLArrayIndex_t)(nRows * nCols))
+
+#  define SMX_Add(IPtr1, addVal, OPtr, nRows, nCols) SDA_Add((SLData_t*)IPtr1, addVal, (SLData_t*)OPtr, (SLArrayIndex_t)(nRows * nCols))
+
+#  define SMX_Subtract(IPtr1, IPtr2, OPtr, nRows, nCols) SDA_Subtract((SLData_t*)IPtr1, addVal, (SLData_t*)OPtr, (SLArrayIndex_t)(nRows * nCols))
+
+#  define SMX_Add2(IPtr1, IPtr2, OPtr, nRows, nCols) SDA_Add2((SLData_t*)IPtr1, (SLData_t*)IPtr2, (SLData_t*)OPtr, (SLArrayIndex_t)(nRows * nCols))
+
+#  define SMX_Subtract2(IPtr1, IPtr2, OPtr, nRows, nCols) \
     SDA_Subtract2((SLData_t*)IPtr1, (SLData_t*)IPtr2, (SLData_t*)OPtr, (SLArrayIndex_t)(nRows * nCols))
 
-#  define SMX_MultiplyPiecewise(IPtr1, IPtr2, OPtr, nRows, nCols) \
+#  define SMX_Multiply2Piecewise(IPtr1, IPtr2, OPtr, nRows, nCols) \
     SDA_Multiply2((SLData_t*)IPtr1, (SLData_t*)IPtr2, (SLData_t*)OPtr, (SLArrayIndex_t)(nRows * nCols))
 
 #  define SMX_ScalarMultiply(IPtr, Multiplier, OPtr, nRows, nCols) \
@@ -6912,61 +7095,10 @@ void SIGLIB_FUNC_DECL SDA_ActivationTanHDerivative(const SLData_t* SIGLIB_INPUT_
                                                    const SLArrayIndex_t);                    // Array length
 #endif                                                                                       // End of #ifndef _HP_VEE
 
-// The following functionality has been deprecated
-// This is usually because the function name has been changed for consistency or compatibility with other libraries
-// These macros are provided to ease porting but will be removed in later versions of the library
+// Functions who's names have changed are listed in the following header file
+// Un-comment this line to use the original function names as #defines
 
-#define SDA_Clear SDA_Zeros
-#define SDA_Shorten SDA_Copy
-#define SDA_Lengthen(pSrc, pDst, srcLength, dstLength) SDA_ZeroPad(pSrc, pDst, 0, (dstLength - srcLength), srcLength)
-
-#define SDA_MaxPos SDA_MaxIndex
-#define SDA_AbsMaxPos SDA_AbsMaxIndex
-#define SDA_MinPos SDA_MinIndex
-#define SDA_AbsMinPos SDA_AbsMinIndex
-#define SDA_Offset SDA_Add
-#define SDA_Rft SDA_Rdft
-#define SDA_Rift SDA_Ridft
-#define SDA_Cft SDA_Cdft
-#define SDA_Cift SDA_Cidft
-
-#define SIGLIB_COS_WAVE SIGLIB_COSINE_WAVE
-
-#define SAI_FftSizeLog2 SAI_FftLengthLog2    // Returns the log2(FFT length) for a given FFT length
-#define SAI_FftSizeLog4 SAI_FftLengthLog4    // Returns the log4(FFT length) for a given FFT length
-
-#define SIF_HilbertTransformer SIF_HilbertTransformerFirFilter
-#define SIF_GaussianFilter SIF_GaussianFirFilter
-#define SIF_GaussianFilter2 SIF_GaussianFirFilter2
-#define SIF_GoertzelFilter SIF_GoertzelIirFilter
-#define SDA_GoertzelFilter SDA_GoertzelIirFilter
-#define SDS_GoertzelFilter SDS_GoertzelIirFilter
-#define SIF_RaisedCosineFilter SIF_RaisedCosineFirFilter
-#define SIF_RootRaisedCosineFilter SIF_RootRaisedCosineFirFilter
-#define SUF_EstimateBPFilterLength SUF_EstimateBPFirFilterLength
-#define SUF_EstimateBPFilterError SUF_EstimateBPFirFilterError
-
-#define SDA_UnbiasedVariance SDA_SampleVariance
-
-#define SIGLIB_HANNING SIGLIB_HANNING_FILTER
-#define SIGLIB_HAMMING SIGLIB_HAMMING_FILTER
-#define SIGLIB_GENERALIZED_COSINE SIGLIB_GENERALIZED_COSINE_FILTER
-#define SIGLIB_BLACKMAN SIGLIB_BLACKMAN_FILTER
-#define SIGLIB_BARTLETT_TRIANGLE_ZERO_END_POINTS SIGLIB_BARTLETT_TRIANGLE_ZERO_END_POINTS_FILTER
-#define SIGLIB_BARTLETT_TRIANGLE_NON_ZERO_END_POINTS SIGLIB_BARTLETT_TRIANGLE_NON_ZERO_END_POINTS_FILTER
-#define SIGLIB_KAISER SIGLIB_KAISER_FILTER
-#define SIGLIB_BLACKMAN_HARRIS SIGLIB_BLACKMAN_HARRIS_FILTER
-#define SIGLIB_RECTANGLE SIGLIB_RECTANGLE_FILTER
-#define SIGLIB_FLAT_TOP SIGLIB_FLAT_TOP_FILTER
-
-#define SDS_Odd SDS_TestOdd
-#define SDS_Even SDS_TestEven
-#define SDS_PowerOfTwo SDS_TestPowerOfTwo
-#define SAI_Odd SAI_TestOdd
-#define SAI_Even SAI_TestEven
-#define SAI_PowerOfTwo SAI_TestPowerOfTwo
-
-// End of deprecation list
+// #include "siglib_deprecated.h"
 
 #ifdef __cplusplus    // End of decl. for C++ program calls
 }

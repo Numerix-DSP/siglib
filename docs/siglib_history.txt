@@ -34,9 +34,28 @@ Additional Functionality:
   SAI_CountOneBits and SAI_CountZeroBits
   SDA_FftRealToComplex
   SAI_Log2OfPowerof2, SAI_DivideByPowerOf2, SAI_NextPowerOf2, SAI_NextMultipleOfFftLength
-  SDA_FindFirstNonZeroIndex, SDA_FindNumberOfNonZeroValues
+  SDA_FindFirstNonZeroIndex and SDA_FindNumberOfNonZeroValues
+  SUF_FirHarrisApproximation and SUF_FirHarrisMultirateApproximation
+  SDA_FirLpHpShiftReflectAroundMinus6dBPoint
+  SDA_Impulse
+  SUF_BinFileLength and SUF_RawFileLength
+  SMX_Eye
+  New matrix macros: SMX_Fill, SMX_Ones, SMX_Zeros, SMX_Add, SMX_Subtract
+  SMX_CompanionMatrix and SMX_CompanionMatrixTransposed
+  SDA_SplitIIRFilterCoefficients, SDA_MergeIIRFilterCoefficients, SDA_SplitIIROrderNFilterCoefficients and SDA_MergeIIROrderNFilterCoefficients
+  SDA_Subtract
+  SMX_LuDecomposeSeparateLU, SMX_ForwardSubstitution and SMX_BackwardSubstitution
+  SDA_Pad
+  SDS_IirOrderNMac and SDA_IirOrderNMac
+  SDA_IirOrderNInitializeCoefficients
+  SDA_IirOrderNDirectFormIITransposed
+  SIF_IirZeroPhaseOrderN and SDA_IirZeroPhaseOrderN
+  SAI_RstftNumberOfFrequencyDomainFrames, SIF_Stft, SDA_Rstft, SDA_Ristft
 
 Operational Changes:
+  Functions who's names have changed are listed in siglib_deprecated.h.
+  For compatibility with old API function names, this file can be enabled at the end of siglib.h.
+
   SIF_GraphicalEqualizerFilterBank changed to SIF_GraphicEqualizerFilterBank
   SDA_Shorten deprecated, use SDA_Copy instead
   SDA_Lengthen deprecated, use SDA_ZeroPad instead
@@ -54,6 +73,14 @@ Operational Changes:
   SDA_Zeros and SDA_Ones changed from macros to functions, SDA_Clear deprecated
   SDS_Odd changed to SDS_TestOdd, SDS_Even changed to SDS_TestEven, SDS_PowerOfTwo changed to SDS_TestPowerOfTwo
   SAI_Odd changed to SAI_TestOdd, SAI_Even changed to SAI_TestEven, SAI_PowerOfTwo changed to SAI_TestPowerOfTwo
+  SDA_IirNc changed to SDA_ZeroPhase
+  SUF_PCMReadData, SUF_PCMWriteData, SUF_PCMReadFile and SUF_PCMWriteFile names changed to :
+    SUF_RawReadData, SUF_RawWriteData, SUF_RawReadFile and SUF_RawWriteFile. This change reflects
+    a more modern file extension, as used by Audacity etc.
+  SMX_CreateIdentity changed to SMX_Identity
+  SMX_Add and SMX_Subtract changed to SMX_Add2 and SMX_Subtract2 to match SDA_ functions
+  SMX_Multiply and SMX_MultiplyPiecewise changed to SMX_Multiply2 and SMX_Multiply2Piecewise to match SDA_ functions
+  SDA_IirNc is deprecated as this functionality is now includes in SDA_IirZeroPhase.
 
 Additional Processor / Compiler Support:
   None.
@@ -62,7 +89,8 @@ Optimisation Changes:
   SAI_FftLengthLog2 and SAI_FftLengthLog4 changed from macros to functions
 
 Bug Fixes:
- Fixed SUF_WavRead and SUF_WavWrite function naming error
+  Fixed SUF_WavRead and SUF_WavWrite function naming error
+  SUF_CsvReadData and SUF_CsvReadFile missed last sample
 
 Notes:
   None.

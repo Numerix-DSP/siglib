@@ -231,21 +231,21 @@ void SIGLIB_FUNC_DECL SDA_FirAddSamples(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
 #  endif
 #endif
 
-  SLArrayIndex_t LocalFilterIndex = *pFilterIndex;
+  SLArrayIndex_t localFilterIndex = *pFilterIndex;
 
   for (SLArrayIndex_t i = 0; i < InputArrayLength; i++) {
-    pState[LocalFilterIndex] = *pSrc++;
+    pState[localFilterIndex] = *pSrc++;
 
-    SLArrayIndex_t j = --(LocalFilterIndex);
+    SLArrayIndex_t j = --(localFilterIndex);
 
     if (j < 0) {
       j = (filterLength - 1);
     }
 
-    LocalFilterIndex = j;
+    localFilterIndex = j;
   }
 
-  *pFilterIndex = LocalFilterIndex;
+  *pFilterIndex = localFilterIndex;
 }    // End of SDA_FirAddSamples()
 
 /********************************************************
@@ -816,7 +816,7 @@ void SIGLIB_FUNC_DECL SDA_FirWithStoreAddSamples(const SLData_t* SIGLIB_PTR_DECL
  *
  * Parameters:
  *  SLData_t *pState,                   Pointer to filter state array
- *  const SLData_t * pFilterTaps,       Filter coefficients
+ *  const SLData_t * pFilterCoefficients,       Filter coefficients
  *  SLData_t * pFilterProcCoeffs,       Filter processing coefficients
  *  SLArrayIndex_t * pFilterIndex,      Filter index
  *  const SLArrayIndex_t filterLength   Filter length
@@ -828,7 +828,7 @@ void SIGLIB_FUNC_DECL SDA_FirWithStoreAddSamples(const SLData_t* SIGLIB_PTR_DECL
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_FirExtendedArray(SLData_t* SIGLIB_PTR_DECL pState, const SLData_t* SIGLIB_PTR_DECL pFilterTaps,
+void SIGLIB_FUNC_DECL SIF_FirExtendedArray(SLData_t* SIGLIB_PTR_DECL pState, const SLData_t* SIGLIB_PTR_DECL pFilterCoefficients,
                                            SLData_t* SIGLIB_PTR_DECL pFilterProcCoeffs, SLArrayIndex_t* pFilterIndex,
                                            const SLArrayIndex_t filterLength)
 {
@@ -840,8 +840,8 @@ void SIGLIB_FUNC_DECL SIF_FirExtendedArray(SLData_t* SIGLIB_PTR_DECL pState, con
 
   // Initialise the filter state array to 0 and copy the coefficient array
   for (SLArrayIndex_t i = 0; i < filterLength; i++) {
-    pFilterProcCoeffs[i] = pFilterTaps[i];
-    pFilterProcCoeffs[i + filterLength] = pFilterTaps[i];
+    pFilterProcCoeffs[i] = pFilterCoefficients[i];
+    pFilterProcCoeffs[i + filterLength] = pFilterCoefficients[i];
     pState[i] = SIGLIB_ZERO;
     pState[i + filterLength] = SIGLIB_ZERO;
   }
@@ -1576,11 +1576,11 @@ void SIGLIB_FUNC_DECL SIF_FirBandPassFilterWindow(SLData_t* SIGLIB_PTR_DECL pCoe
  * Function: SUF_FirKaiserApproximation
  *
  * Parameters:
- *  SLData_t Fpass,
- *  SLData_t Fstop,
- *  SLData_t Apass,
- *  SLData_t Astop,
- *  SLData_t SampleRate)
+ *  SLData_t fPass,
+ *  SLData_t fStop,
+ *  SLData_t aPass,
+ *  SLData_t aStop,
+ *  SLData_t sampleRate)
  *
  * Return value:
  *  SLFixData_t     Approximation
@@ -1588,37 +1588,106 @@ void SIGLIB_FUNC_DECL SIF_FirBandPassFilterWindow(SLData_t* SIGLIB_PTR_DECL pCoe
  * Description: Use the Kaiser approximation to estimate
  *  the required number of filter coefficients
  *
- *  N = (((-20.0 * Log10 (sqrt (Delta1 - Delta2))) - 13.0) / (14.6 * Deltaf)) +
+ *  N = (((-20.0 * Log10 (sqrt (Delta1 - Delta2))) - 13.0) / (14.6 * deltaF)) +
  *1
  *
  *  Where :
- *      Delta1 = 1 - 10^(- Apass/40)
- *      Delta2 = 10^(- Astop/20)
- *      Deltaf = (Fstop - Fpass) / Fs
+ *      Delta1 = 1 - 10^(- aPass/40)
+ *      Delta2 = 10^(- aStop/20)
+ *      deltaF = (fStop - fPass) / Fs
  *
- *      Apass = Maximum pass-band ripple (dB)
- *      Astop = Minimum stop-band ripple (dB)
+ *      aPass = Maximum pass-band ripple (dB)
+ *      aStop = Minimum stop-band ripple (dB)
  *
  ********************************************************/
 
-SLFixData_t SIGLIB_FUNC_DECL SUF_FirKaiserApproximation(SLData_t Fpass, SLData_t Fstop, SLData_t Apass, SLData_t Astop, SLData_t SampleRate)
+SLFixData_t SIGLIB_FUNC_DECL SUF_FirKaiserApproximation(const SLData_t fPass, const SLData_t fStop, const SLData_t aPass, const SLData_t aStop,
+                                                        const SLData_t sampleRate)
 {
-  // APass and AStop are attenuations in dB
-  SLData_t Delta1 = SIGLIB_ONE - SDS_Pow(SIGLIB_TEN, -Apass / ((SLData_t)40.0));
-  SLData_t Delta2 = SDS_Pow(SIGLIB_TEN, -Astop * SDS_Sign(Astop) / ((SLData_t)20.0));    // SDS_Sign(Astop) accounts for +ve and
+  // aPass and aStop are attenuations in dB
+  SLData_t Delta1 = SIGLIB_ONE - SDS_Pow(SIGLIB_TEN, -aPass / ((SLData_t)40.0));
+  SLData_t Delta2 = SDS_Pow(SIGLIB_TEN, -aStop * SDS_Sign(aStop) / ((SLData_t)20.0));    // SDS_Sign(aStop) accounts for +ve and
                                                                                          // -ve stop band attenuation
-  SLData_t DeltaF;
+  SLData_t deltaF;
 
   // Transition bandwidth
-  if (Fstop >= Fpass) {
-    DeltaF = (Fstop - Fpass) / SampleRate;
+  if (fStop >= fPass) {
+    deltaF = (fStop - fPass) / sampleRate;
   } else {
-    DeltaF = (Fpass - Fstop) / SampleRate;
+    deltaF = (fPass - fStop) / sampleRate;
   }
 
-  return ((SLFixData_t)((((((SLData_t)-10.0) * SDS_Log10(Delta1 * Delta2)) - ((SLData_t)13.0)) / (((SLData_t)14.6) * DeltaF)) + SIGLIB_ONE +
+  return ((SLFixData_t)((((((SLData_t)-10.0) * SDS_Log10(Delta1 * Delta2)) - ((SLData_t)13.0)) / (((SLData_t)14.6) * deltaF)) + SIGLIB_ONE +
                         SIGLIB_HALF));
 }    // End of SUF_FirKaiserApproximation()
+
+/********************************************************
+ * Function: SUF_FirHarrisApproximation
+ *
+ * Parameters:
+ *  SLData_t fPass,
+ *  SLData_t fStop,
+ *  SLData_t aStop,
+ *  SLData_t sampleRate)
+ *
+ * Return value:
+ *  SLFixData_t     Approximation
+ *
+ * Description: Use the Harris approximation to estimate
+ *  the required number of filter coefficients
+ *
+ *  N = (Fs/deltaF).(aStop(dB)/22)
+ *
+ ********************************************************/
+
+SLFixData_t SIGLIB_FUNC_DECL SUF_FirHarrisApproximation(const SLData_t fPass, const SLData_t fStop, const SLData_t aStop, const SLData_t sampleRate)
+{
+  SLData_t deltaF;
+
+  // Transition bandwidth
+  if (fStop >= fPass) {
+    deltaF = (fStop - fPass);
+  } else {
+    deltaF = (fPass - fStop);
+  }
+
+  return ((SLFixData_t)((sampleRate / deltaF) * (aStop / 22.)));
+}    // End of SUF_FirHarrisApproximation()
+
+/********************************************************
+ * Function: SUF_FirHarrisMultirateApproximation
+ *
+ * Parameters:
+ *  SLData_t fPass,
+ *  SLData_t fStop,
+ *  SLData_t aStop,
+ *  SLData_t M,
+ *  SLData_t sampleRate)
+ *
+ * Return value:
+ *  SLFixData_t     Approximation
+ *
+ * Description: Use the Harris approximation to estimate
+ *  the required number of filter coefficients
+ *
+ *  N = ((Fs/M)/deltaF).(aStop(dB)/22)
+ *
+ ********************************************************/
+
+SLFixData_t SIGLIB_FUNC_DECL SUF_FirHarrisMultirateApproximation(const SLData_t fPass, const SLData_t fStop, const SLData_t aStop, const SLData_t M,
+                                                                 const SLData_t sampleRate)
+{
+  SLData_t deltaF;
+
+  // Transition bandwidth
+  if (fStop >= fPass) {
+    deltaF = (fStop - fPass);
+  } else {
+    deltaF = (fPass - fStop);
+  }
+
+  return ((SLFixData_t)(((sampleRate / M) / deltaF) * (aStop / 22.)));
+}    // End of SUF_FirHarrisMultirateApproximation()
 
 /********************************************************
  * Function: SIF_FirMatchedFilter
@@ -1688,7 +1757,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_FirFilterInverseCoherentGain(const SLData_t* SIGLI
  * Parameters:
  *  SLData_t *pDelay,
  *  SLArrayIndex_t *pDelayIndex,
- *  const SLArrayIndex_t DelayArrayLength
+ *  const SLArrayIndex_t delayArrayLength
  *
  * Return value:
  *  void
@@ -1699,9 +1768,9 @@ SLData_t SIGLIB_FUNC_DECL SDA_FirFilterInverseCoherentGain(const SLData_t* SIGLI
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SIF_TappedDelayLine(SLData_t* SIGLIB_PTR_DECL pDelay, SLArrayIndex_t* SIGLIB_PTR_DECL pDelayIndex,
-                                          const SLArrayIndex_t DelayArrayLength)
+                                          const SLArrayIndex_t delayArrayLength)
 {
-  SDA_Zeros(pDelay, DelayArrayLength);    // Clear data arrays
+  SDA_Zeros(pDelay, delayArrayLength);    // Clear data arrays
   *pDelayIndex = (SLArrayIndex_t)0;       // Initialize delay index
 }    // End of SIF_TappedDelayLine()
 
@@ -1714,8 +1783,8 @@ void SIGLIB_FUNC_DECL SIF_TappedDelayLine(SLData_t* SIGLIB_PTR_DECL pDelay, SLAr
  *  SLArrayIndex_t *pDelayIndex,
  *  const SLArrayIndex_t *pTapsLocns,
  *  const SLData_t *pTapGains,
- *  const SLArrayIndex_t NumberOfTaps,
- *  const SLArrayIndex_t DelayArrayLength
+ *  const SLArrayIndex_t numberOfTaps,
+ *  const SLArrayIndex_t delayArrayLength
  *
  * Return value:
  *  Multi-path delayed value
@@ -1727,7 +1796,7 @@ void SIGLIB_FUNC_DECL SIF_TappedDelayLine(SLData_t* SIGLIB_PTR_DECL pDelay, SLAr
 
 SLData_t SIGLIB_FUNC_DECL SDS_TappedDelayLine(const SLData_t Src, SLData_t* SIGLIB_PTR_DECL pDelay, SLArrayIndex_t* SIGLIB_PTR_DECL pDelayIndex,
                                               const SLArrayIndex_t* SIGLIB_PTR_DECL pTapsLocns, const SLData_t* SIGLIB_PTR_DECL pTapGains,
-                                              const SLArrayIndex_t NumberOfTaps, const SLArrayIndex_t DelayArrayLength)
+                                              const SLArrayIndex_t numberOfTaps, const SLArrayIndex_t delayArrayLength)
 {
   SLArrayIndex_t LocalDelayIndex = *pDelayIndex;
 
@@ -1735,17 +1804,17 @@ SLData_t SIGLIB_FUNC_DECL SDS_TappedDelayLine(const SLData_t Src, SLData_t* SIGL
 
   SLData_t SumOfProducts = SIGLIB_ZERO;
 
-  for (SLArrayIndex_t i = 0; i < NumberOfTaps; i++) {
+  for (SLArrayIndex_t i = 0; i < numberOfTaps; i++) {
     SLArrayIndex_t StateArrayOffset = LocalDelayIndex - pTapsLocns[i];
     if (StateArrayOffset < ((SLArrayIndex_t)0)) {    // Ensure state array wrap around
-      StateArrayOffset += DelayArrayLength;
+      StateArrayOffset += delayArrayLength;
     }
     SumOfProducts += *(pDelay + StateArrayOffset) * pTapGains[i];    // Multiply data by tap
   }
 
   LocalDelayIndex++;                            // Increment pointer
-  if (LocalDelayIndex >= DelayArrayLength) {    // Ensure state array wrap around
-    LocalDelayIndex -= DelayArrayLength;
+  if (LocalDelayIndex >= delayArrayLength) {    // Ensure state array wrap around
+    LocalDelayIndex -= delayArrayLength;
   }
 
   *pDelayIndex = LocalDelayIndex;
@@ -1763,9 +1832,9 @@ SLData_t SIGLIB_FUNC_DECL SDS_TappedDelayLine(const SLData_t Src, SLData_t* SIGL
  *  SLArrayIndex_t *pDelayIndex,
  *  const SLArrayIndex_t *pTapsLocns,
  *  const SLData_t *pTapGains,
- *  const SLArrayIndex_t NumberOfTaps,
- *  const SLArrayIndex_t DelayArrayLength,
- *  const SLArrayIndex_t ArrayLength
+ *  const SLArrayIndex_t numberOfTaps,
+ *  const SLArrayIndex_t delayArrayLength,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
  *  void
@@ -1777,8 +1846,8 @@ SLData_t SIGLIB_FUNC_DECL SDS_TappedDelayLine(const SLData_t Src, SLData_t* SIGL
 
 void SIGLIB_FUNC_DECL SDA_TappedDelayLine(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pDelay,
                                           SLArrayIndex_t* SIGLIB_PTR_DECL pDelayIndex, const SLArrayIndex_t* SIGLIB_PTR_DECL pTapsLocns,
-                                          const SLData_t* SIGLIB_PTR_DECL pTapGains, const SLArrayIndex_t NumberOfTaps,
-                                          const SLArrayIndex_t DelayArrayLength, const SLArrayIndex_t ArrayLength)
+                                          const SLData_t* SIGLIB_PTR_DECL pTapGains, const SLArrayIndex_t numberOfTaps,
+                                          const SLArrayIndex_t delayArrayLength, const SLArrayIndex_t arrayLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -1789,22 +1858,22 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLine(const SLData_t* SIGLIB_PTR_DECL pSrc, 
 
   SLArrayIndex_t LocalDelayIndex = *pDelayIndex;
 
-  for (SLArrayIndex_t j = 0; j < ArrayLength; j++) {
+  for (SLArrayIndex_t j = 0; j < arrayLength; j++) {
     *(pDelay + LocalDelayIndex) = *pSrc++;    // Add data into array
 
     SLData_t SumOfProducts = SIGLIB_ZERO;
 
-    for (SLArrayIndex_t i = 0; i < NumberOfTaps; i++) {
+    for (SLArrayIndex_t i = 0; i < numberOfTaps; i++) {
       SLArrayIndex_t StateArrayOffset = LocalDelayIndex - pTapsLocns[i];
       if (StateArrayOffset < ((SLArrayIndex_t)0)) {    // Ensure state array wrap around
-        StateArrayOffset += DelayArrayLength;
+        StateArrayOffset += delayArrayLength;
       }
       SumOfProducts += *(pDelay + StateArrayOffset) * pTapGains[i];    // Multiply data by tap
     }
 
     LocalDelayIndex++;                            // Increment pointer
-    if (LocalDelayIndex >= DelayArrayLength) {    // Ensure state array wrap around
-      LocalDelayIndex -= DelayArrayLength;
+    if (LocalDelayIndex >= delayArrayLength) {    // Ensure state array wrap around
+      LocalDelayIndex -= delayArrayLength;
     }
 
     *pDst++ = SumOfProducts;    // Write out result data
@@ -1820,7 +1889,7 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLine(const SLData_t* SIGLIB_PTR_DECL pSrc, 
  *  SLData_t *pDelayReal,
  *  SLData_t *pDelayImag,
  *  SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
- *  const SLArrayIndex_t DelayArrayLength
+ *  const SLArrayIndex_t delayArrayLength
  *
  * Return value:
  *  void
@@ -1831,10 +1900,10 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLine(const SLData_t* SIGLIB_PTR_DECL pSrc, 
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SIF_TappedDelayLineComplex(SLData_t* SIGLIB_PTR_DECL pDelayReal, SLData_t* SIGLIB_PTR_DECL pDelayImag,
-                                                 SLArrayIndex_t* SIGLIB_PTR_DECL pDelayIndex, const SLArrayIndex_t DelayArrayLength)
+                                                 SLArrayIndex_t* SIGLIB_PTR_DECL pDelayIndex, const SLArrayIndex_t delayArrayLength)
 {
-  SDA_Zeros(pDelayReal, DelayArrayLength);    // Clear data arrays
-  SDA_Zeros(pDelayImag, DelayArrayLength);    // Clear data arrays
+  SDA_Zeros(pDelayReal, delayArrayLength);    // Clear data arrays
+  SDA_Zeros(pDelayImag, delayArrayLength);    // Clear data arrays
   *pDelayIndex = (SLArrayIndex_t)0;           // Initialize delay index
 }    // End of SIF_TappedDelayLineComplex()
 
@@ -1852,8 +1921,8 @@ void SIGLIB_FUNC_DECL SIF_TappedDelayLineComplex(SLData_t* SIGLIB_PTR_DECL pDela
  *  const SLArrayIndex_t *pTapsLocns,
  *  const SLData_t *pTapGainsReal,
  *  const SLData_t *pTapGainsImag,
- *  const SLArrayIndex_t NumberOfTaps,
- *  const SLArrayIndex_t DelayArrayLength
+ *  const SLArrayIndex_t numberOfTaps,
+ *  const SLArrayIndex_t delayArrayLength
  *
  * Return value:
  *  void
@@ -1867,7 +1936,7 @@ void SIGLIB_FUNC_DECL SDS_TappedDelayLineComplex(const SLData_t SrcReal, const S
                                                  SLData_t* SIGLIB_PTR_DECL pDelayReal, SLData_t* SIGLIB_PTR_DECL pDelayImag,
                                                  SLArrayIndex_t* SIGLIB_PTR_DECL pDelayIndex, const SLArrayIndex_t* SIGLIB_PTR_DECL pTapsLocns,
                                                  const SLData_t* SIGLIB_PTR_DECL pTapGainsReal, const SLData_t* SIGLIB_PTR_DECL pTapGainsImag,
-                                                 const SLArrayIndex_t NumberOfTaps, const SLArrayIndex_t DelayArrayLength)
+                                                 const SLArrayIndex_t numberOfTaps, const SLArrayIndex_t delayArrayLength)
 {
   SLArrayIndex_t LocalDelayIndex = *pDelayIndex;
 
@@ -1877,10 +1946,10 @@ void SIGLIB_FUNC_DECL SDS_TappedDelayLineComplex(const SLData_t SrcReal, const S
   SLData_t SumOfProductsReal = SIGLIB_ZERO;
   SLData_t SumOfProductsImag = SIGLIB_ZERO;
 
-  for (SLArrayIndex_t i = 0; i < NumberOfTaps; i++) {
+  for (SLArrayIndex_t i = 0; i < numberOfTaps; i++) {
     SLArrayIndex_t StateArrayOffset = LocalDelayIndex - pTapsLocns[i];
     if (StateArrayOffset < ((SLArrayIndex_t)0)) {    // Ensure state array wrap around
-      StateArrayOffset += DelayArrayLength;
+      StateArrayOffset += delayArrayLength;
     }
     SLData_t a = *(pDelayReal + StateArrayOffset);
     SLData_t b = *(pDelayImag + StateArrayOffset);
@@ -1891,8 +1960,8 @@ void SIGLIB_FUNC_DECL SDS_TappedDelayLineComplex(const SLData_t SrcReal, const S
   }
 
   LocalDelayIndex++;                            // Increment pointer
-  if (LocalDelayIndex >= DelayArrayLength) {    // Ensure state array wrap around
-    LocalDelayIndex -= DelayArrayLength;
+  if (LocalDelayIndex >= delayArrayLength) {    // Ensure state array wrap around
+    LocalDelayIndex -= delayArrayLength;
   }
 
   *pDelayIndex = LocalDelayIndex;
@@ -1915,9 +1984,9 @@ void SIGLIB_FUNC_DECL SDS_TappedDelayLineComplex(const SLData_t SrcReal, const S
  *  const SLArrayIndex_t *pTapsLocns,
  *  const SLData_t *pTapGainsReal,
  *  const SLData_t *pTapGainsImag,
- *  const SLArrayIndex_t NumberOfTaps,
- *  const SLArrayIndex_t DelayArrayLength,
- *  const SLArrayIndex_t ArrayLength
+ *  const SLArrayIndex_t numberOfTaps,
+ *  const SLArrayIndex_t delayArrayLength,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
  *  void
@@ -1932,8 +2001,8 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLineComplex(const SLData_t* SIGLIB_PTR_DECL
                                                  SLData_t* SIGLIB_PTR_DECL pDelayReal, SLData_t* SIGLIB_PTR_DECL pDelayImag,
                                                  SLArrayIndex_t* SIGLIB_PTR_DECL pDelayIndex, const SLArrayIndex_t* SIGLIB_PTR_DECL pTapsLocns,
                                                  const SLData_t* SIGLIB_PTR_DECL pTapGainsReal, const SLData_t* SIGLIB_PTR_DECL pTapGainsImag,
-                                                 const SLArrayIndex_t NumberOfTaps, const SLArrayIndex_t DelayArrayLength,
-                                                 const SLArrayIndex_t ArrayLength)
+                                                 const SLArrayIndex_t numberOfTaps, const SLArrayIndex_t delayArrayLength,
+                                                 const SLArrayIndex_t arrayLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__                 // Defined by TI compiler
@@ -1950,17 +2019,17 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLineComplex(const SLData_t* SIGLIB_PTR_DECL
 
   SLArrayIndex_t LocalDelayIndex = *pDelayIndex;
 
-  for (SLArrayIndex_t j = 0; j < ArrayLength; j++) {
+  for (SLArrayIndex_t j = 0; j < arrayLength; j++) {
     *(pDelayReal + LocalDelayIndex) = *pSrcReal++;    // Add data into array
     *(pDelayImag + LocalDelayIndex) = *pSrcImag++;
 
     SLData_t SumOfProductsReal = SIGLIB_ZERO;
     SLData_t SumOfProductsImag = SIGLIB_ZERO;
 
-    for (SLArrayIndex_t i = 0; i < NumberOfTaps; i++) {
+    for (SLArrayIndex_t i = 0; i < numberOfTaps; i++) {
       SLArrayIndex_t StateArrayOffset = LocalDelayIndex - pTapsLocns[i];
       if (StateArrayOffset < ((SLArrayIndex_t)0)) {    // Ensure state array wrap around
-        StateArrayOffset += DelayArrayLength;
+        StateArrayOffset += delayArrayLength;
       }
       SLData_t a = *(pDelayReal + StateArrayOffset);
       SLData_t b = *(pDelayImag + StateArrayOffset);
@@ -1971,8 +2040,8 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLineComplex(const SLData_t* SIGLIB_PTR_DECL
     }
 
     LocalDelayIndex++;                            // Increment pointer
-    if (LocalDelayIndex >= DelayArrayLength) {    // Ensure state array wrap around
-      LocalDelayIndex -= DelayArrayLength;
+    if (LocalDelayIndex >= delayArrayLength) {    // Ensure state array wrap around
+      LocalDelayIndex -= delayArrayLength;
     }
 
     *pDstReal++ = SumOfProductsReal;    // Write out result data
@@ -1989,7 +2058,7 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLineComplex(const SLData_t* SIGLIB_PTR_DECL
  *  SLData_t *pDelayReal,
  *  SLData_t *pDelayImag,
  *  SLArrayIndex_t * SIGLIB_PTR_DECL pDelayIndex,
- *  const SLArrayIndex_t DelayArrayLength
+ *  const SLArrayIndex_t delayArrayLength
  *
  * Return value:
  *  void
@@ -2000,10 +2069,10 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLineComplex(const SLData_t* SIGLIB_PTR_DECL
  ********************************************************/
 
 void SIGLIB_FUNC_DECL SIF_TappedDelayLineIQ(SLData_t* SIGLIB_PTR_DECL pDelayReal, SLData_t* SIGLIB_PTR_DECL pDelayImag,
-                                            SLArrayIndex_t* SIGLIB_PTR_DECL pDelayIndex, const SLArrayIndex_t DelayArrayLength)
+                                            SLArrayIndex_t* SIGLIB_PTR_DECL pDelayIndex, const SLArrayIndex_t delayArrayLength)
 {
-  SDA_Zeros(pDelayReal, DelayArrayLength);    // Clear data arrays
-  SDA_Zeros(pDelayImag, DelayArrayLength);    // Clear data arrays
+  SDA_Zeros(pDelayReal, delayArrayLength);    // Clear data arrays
+  SDA_Zeros(pDelayImag, delayArrayLength);    // Clear data arrays
   *pDelayIndex = (SLArrayIndex_t)0;           // Initialize delay index
 }    // End of SIF_TappedDelayLineIQ()
 
@@ -2021,8 +2090,8 @@ void SIGLIB_FUNC_DECL SIF_TappedDelayLineIQ(SLData_t* SIGLIB_PTR_DECL pDelayReal
  *  const SLArrayIndex_t *pTapsLocns,
  *  const SLData_t *pTapGainsReal,
  *  const SLData_t *pTapGainsImag,
- *  const SLArrayIndex_t NumberOfTaps,
- *  const SLArrayIndex_t DelayArrayLength
+ *  const SLArrayIndex_t numberOfTaps,
+ *  const SLArrayIndex_t delayArrayLength
  *
  * Return value:
  *  void
@@ -2036,7 +2105,7 @@ void SIGLIB_FUNC_DECL SDS_TappedDelayLineIQ(const SLData_t SrcReal, const SLData
                                             SLData_t* SIGLIB_PTR_DECL pDelayReal, SLData_t* SIGLIB_PTR_DECL pDelayImag,
                                             SLArrayIndex_t* SIGLIB_PTR_DECL pDelayIndex, const SLArrayIndex_t* SIGLIB_PTR_DECL pTapsLocns,
                                             const SLData_t* SIGLIB_PTR_DECL pTapGainsReal, const SLData_t* SIGLIB_PTR_DECL pTapGainsImag,
-                                            const SLArrayIndex_t NumberOfTaps, const SLArrayIndex_t DelayArrayLength)
+                                            const SLArrayIndex_t numberOfTaps, const SLArrayIndex_t delayArrayLength)
 {
   SLArrayIndex_t LocalDelayIndex = *pDelayIndex;
 
@@ -2046,18 +2115,18 @@ void SIGLIB_FUNC_DECL SDS_TappedDelayLineIQ(const SLData_t SrcReal, const SLData
   SLData_t SumOfProductsReal = SIGLIB_ZERO;
   SLData_t SumOfProductsImag = SIGLIB_ZERO;
 
-  for (SLArrayIndex_t i = 0; i < NumberOfTaps; i++) {
+  for (SLArrayIndex_t i = 0; i < numberOfTaps; i++) {
     SLArrayIndex_t StateArrayOffset = LocalDelayIndex - pTapsLocns[i];
     if (StateArrayOffset < ((SLArrayIndex_t)0)) {    // Ensure state array wrap around
-      StateArrayOffset += DelayArrayLength;
+      StateArrayOffset += delayArrayLength;
     }
     SumOfProductsReal += *(pDelayReal + StateArrayOffset) * pTapGainsReal[i];    // Multiply data by tap
     SumOfProductsImag += *(pDelayImag + StateArrayOffset) * pTapGainsImag[i];    // Multiply data by tap
   }
 
   LocalDelayIndex++;                            // Increment pointer
-  if (LocalDelayIndex >= DelayArrayLength) {    // Ensure state array wrap around
-    LocalDelayIndex -= DelayArrayLength;
+  if (LocalDelayIndex >= delayArrayLength) {    // Ensure state array wrap around
+    LocalDelayIndex -= delayArrayLength;
   }
 
   *pDelayIndex = LocalDelayIndex;
@@ -2080,9 +2149,9 @@ void SIGLIB_FUNC_DECL SDS_TappedDelayLineIQ(const SLData_t SrcReal, const SLData
  *  const SLArrayIndex_t *pTapsLocns,
  *  const SLData_t *pTapGainsReal,
  *  const SLData_t *pTapGainsImag,
- *  const SLArrayIndex_t NumberOfTaps,
- *  const SLArrayIndex_t DelayArrayLength,
- *  const SLArrayIndex_t ArrayLength
+ *  const SLArrayIndex_t numberOfTaps,
+ *  const SLArrayIndex_t delayArrayLength,
+ *  const SLArrayIndex_t arrayLength
  *
  * Return value:
  *  void
@@ -2097,8 +2166,8 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLineIQ(const SLData_t* SIGLIB_PTR_DECL pSrc
                                             SLData_t* SIGLIB_PTR_DECL pDelayReal, SLData_t* SIGLIB_PTR_DECL pDelayImag,
                                             SLArrayIndex_t* SIGLIB_PTR_DECL pDelayIndex, const SLArrayIndex_t* SIGLIB_PTR_DECL pTapsLocns,
                                             const SLData_t* SIGLIB_PTR_DECL pTapGainsReal, const SLData_t* SIGLIB_PTR_DECL pTapGainsImag,
-                                            const SLArrayIndex_t NumberOfTaps, const SLArrayIndex_t DelayArrayLength,
-                                            const SLArrayIndex_t ArrayLength)
+                                            const SLArrayIndex_t numberOfTaps, const SLArrayIndex_t delayArrayLength,
+                                            const SLArrayIndex_t arrayLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__                 // Defined by TI compiler
@@ -2115,25 +2184,25 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLineIQ(const SLData_t* SIGLIB_PTR_DECL pSrc
 
   SLArrayIndex_t LocalDelayIndex = *pDelayIndex;
 
-  for (SLArrayIndex_t j = 0; j < ArrayLength; j++) {
+  for (SLArrayIndex_t j = 0; j < arrayLength; j++) {
     *(pDelayReal + LocalDelayIndex) = *pSrcReal++;    // Add data into array
     *(pDelayImag + LocalDelayIndex) = *pSrcImag++;
 
     SLData_t SumOfProductsReal = SIGLIB_ZERO;
     SLData_t SumOfProductsImag = SIGLIB_ZERO;
 
-    for (SLArrayIndex_t i = 0; i < NumberOfTaps; i++) {
+    for (SLArrayIndex_t i = 0; i < numberOfTaps; i++) {
       SLArrayIndex_t StateArrayOffset = LocalDelayIndex - pTapsLocns[i];
       if (StateArrayOffset < ((SLArrayIndex_t)0)) {    // Ensure state array wrap around
-        StateArrayOffset += DelayArrayLength;
+        StateArrayOffset += delayArrayLength;
       }
       SumOfProductsReal += *(pDelayReal + StateArrayOffset) * pTapGainsReal[i];    // Multiply data by tap
       SumOfProductsImag += *(pDelayImag + StateArrayOffset) * pTapGainsImag[i];    // Multiply data by tap
     }
 
     LocalDelayIndex++;                            // Increment pointer
-    if (LocalDelayIndex >= DelayArrayLength) {    // Ensure state array wrap around
-      LocalDelayIndex -= DelayArrayLength;
+    if (LocalDelayIndex >= delayArrayLength) {    // Ensure state array wrap around
+      LocalDelayIndex -= delayArrayLength;
     }
 
     *pDstReal++ = SumOfProductsReal;    // Write out result data
@@ -2239,7 +2308,7 @@ void SIGLIB_FUNC_DECL SDA_FirLpBpShift(const SLData_t* SIGLIB_PTR_DECL pSrcCoeff
 {
   // Shift centre frequency
   SLArrayIndex_t halfFilterLength = filterLength >> 1;
-  for (int i = -halfFilterLength; i < halfFilterLength; i++) {
+  for (SLArrayIndex_t i = -halfFilterLength; i < halfFilterLength; i++) {
     pDstCoeffs[halfFilterLength + i] = SIGLIB_TWO * pSrcCoeffs[halfFilterLength + i] * SDS_Cos(SIGLIB_TWO_PI * shiftFrequency * i);
   }
 }    // End of SDA_FirLpBpShift
@@ -2267,8 +2336,38 @@ void SIGLIB_FUNC_DECL SDA_FirLpHpShift(const SLData_t* SIGLIB_PTR_DECL pSrcCoeff
   // Shift centre frequency
   SLArrayIndex_t halfFilterLength = filterLength >> 1;
   SLData_t Multiplier = SIGLIB_ONE;
-  for (int i = -halfFilterLength; i < halfFilterLength; i++) {
+  for (SLArrayIndex_t i = -halfFilterLength; i < halfFilterLength; i++) {
     pDstCoeffs[halfFilterLength + i] = Multiplier * pSrcCoeffs[halfFilterLength + i];
     Multiplier *= SIGLIB_MINUS_ONE;
   }
 }    // End of SDA_FirLpHpShift
+
+/********************************************************
+ * Function: SDA_FirLpHpShiftReflectAroundMinus6dBPoint
+ *
+ * Parameters:
+ *  const SLData_t *,       Pointer to source filter coefficients
+ *  SLData_t *,             Pointer to destination shifted coefficients
+ *  const SLArrayIndex_t)   Filter length
+ *
+ * Return value:
+ *  void
+ *
+ * Description:
+ *  This function converts a low-pass filter into an high-pass
+ *  filter, reflecting the frequency spectrum around the
+ *  -6 dB point of the LPF.
+ *
+ *  This function only works for odd length filters.
+ *
+ ********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_FirLpHpShiftReflectAroundMinus6dBPoint(const SLData_t* SIGLIB_PTR_DECL pSrcCoeffs, SLData_t* SIGLIB_PTR_DECL pDstCoeffs,
+                                                                 const SLArrayIndex_t filterLength)
+{
+  for (SLArrayIndex_t i = 0; i < filterLength; i++) {
+    pDstCoeffs[i] = -pSrcCoeffs[i];
+  }
+
+  pDstCoeffs[filterLength >> 1] = SIGLIB_ONE - pSrcCoeffs[filterLength >> 1];
+}    // End of SDA_FirLpHpShiftReflectAroundMinus6dBPoint

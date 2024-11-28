@@ -455,6 +455,50 @@ void _stdcall SDA_DctIIOrthogonal(double* SIGLIB_INPUT_PTR_DECL,     // Pointer 
                                   double* SIGLIB_INPUT_PTR_DECL,     // Pointer to cosine look up table
                                   long);                             // DCT length
 
+long _stdcall SAI_RstftNumberOfFrequencyDomainFrames(long,     // Source array length
+                                                     long,     // Window length
+                                                     long,     // Hop length
+                                                     long);    // Centre padding flag
+
+void _stdcall SIF_Stft(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to window coefficients
+                       int SLWindow_t,                    // Window type
+                       double,                            // Window coefficient
+                       double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to FFT coefficients
+                       long* SIGLIB_OUTPUT_PTR_DECL,      // Pointer to Bit Reverse Address Table
+                       long,                              // Window length
+                       long);                             // FFT length
+
+void _stdcall SDA_Rstft(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
+                        double* SIGLIB_INPUT_PTR_DECL,     // Pointer to window coefficients
+                        double* SIGLIB_INPUT_PTR_DECL,     // Pointer to FFT coefficients
+                        long* SIGLIB_INPUT_PTR_DECL,       // Pointer to Bit Reverse Address Table
+                        double* SIGLIB_INPUT_PTR_DECL,     // Pointer to real temporary array
+                        double* SIGLIB_INPUT_PTR_DECL,     // Pointer to imaginary temporary array
+                        double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to real destination array
+                        double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to imaginary destination array
+                        long,                              // Source array length
+                        long,                              // Hop array length
+                        long,                              // Window length
+                        long,                              // FFT length
+                        long,                              // Log2 FFT length
+                        long);                             // Centre padding flag
+
+void _stdcall SDA_Ristft(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to real source array
+                         double* SIGLIB_INPUT_PTR_DECL,     // Pointer to imaginary source array
+                         double* SIGLIB_INPUT_PTR_DECL,     // Pointer to window coefficients
+                         double* SIGLIB_INPUT_PTR_DECL,     // Pointer to FFT coefficients
+                         long* SIGLIB_INPUT_PTR_DECL,       // Pointer to Bit Reverse Address Table
+                         double* SIGLIB_INPUT_PTR_DECL,     // Pointer to real temporary array
+                         double* SIGLIB_INPUT_PTR_DECL,     // Pointer to imaginary temporary array
+                         double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to real destination array
+                         double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to real normalization array
+                         long,                              // Number of frames
+                         long,                              // Hop array length
+                         long,                              // Window length
+                         long,                              // FFT length
+                         long,                              // Log2 FFT length
+                         long);                             // Centre padding flag
+
 // Arbitrary Length Fast Fourier Transform Functions - arbfft.c
 
 void _stdcall SIF_FftArb(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to AWNr coefficients
@@ -1139,6 +1183,17 @@ long _stdcall SUF_FirKaiserApproximation(double,     // Pass-band cut off freque
                                          double,     // Stop-band attenuation
                                          double);    // Sample rate (Hz)
 
+long _stdcall SUF_FirHarrisApproximation(double,     // Pass-band cut off frequency
+                                         double,     // Stop-band cut off frequency
+                                         double,     // Stop-band attenuation
+                                         double);    // Sample rate (Hz)
+
+long _stdcall SUF_FirHarrisMultirateApproximation(double,     // Pass-band cut off frequency
+                                                  double,     // Stop-band cut off frequency
+                                                  double,     // Stop-band attenuation
+                                                  double,     // M
+                                                  double);    // Sample rate (Hz)
+
 void _stdcall SIF_FirMatchedFilter(double* SIGLIB_INPUT_PTR_DECL,     // Source signal
                                    double* SIGLIB_OUTPUT_PTR_DECL,    // Output matched filter coefficients
                                    long);                             // Filter length
@@ -1244,6 +1299,10 @@ void _stdcall SDA_FirLpHpShift(double* SIGLIB_INPUT_PTR_DECL,     // Source coef
                                double* SIGLIB_OUTPUT_PTR_DECL,    // Destination coefficients
                                long);                             // Filter length
 
+void _stdcall SDA_FirLpHpShiftReflectAroundMinus6dBPoint(double* SIGLIB_INPUT_PTR_DECL,     // Source coefficients
+                                                         double* SIGLIB_OUTPUT_PTR_DECL,    // Destination coefficients
+                                                         long);                             // Filter length
+
 // Filtering functions - iirfilt.c
 
 void _stdcall SIF_Iir(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to filter state array
@@ -1275,31 +1334,70 @@ void _stdcall SDA_IirMac(double* SIGLIB_INPUT_PTR_DECL,     // Input array to be
 
 void _stdcall SIF_IirOrderN(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to filter state array
                             long*,                             // Pointer to filter index
-                            long);                             // Filter Order
+                            long);                             // Filter order
 
 double _stdcall SDS_IirOrderN(double,                           // Input data sample to be filtered
                               double* SIGLIB_INOUT_PTR_DECL,    // Pointer to filter state array
                               double* SIGLIB_INPUT_PTR_DECL,    // Pointer to filter coefficients array
                               long*,                            // Pointer to filter index
-                              long);                            // Filter Order
+                              long);                            // Filter order
 
 void _stdcall SDA_IirOrderN(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to input array
                             double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
                             double* SIGLIB_INOUT_PTR_DECL,     // Pointer to filter state array
                             double* SIGLIB_INPUT_PTR_DECL,     // Pointer to filter coefficients array
                             long*,                             // Pointer to filter index
-                            long,                              // Filter Order
+                            long,                              // Filter order
                             long);                             // Array length
 
-void _stdcall SIF_IirNc(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to filter state array
-                        long);                             // Source array length
+double _stdcall SDS_IirOrderNMac(double,                           // Input data sample to be filtered
+                                 double* SIGLIB_INOUT_PTR_DECL,    // Pointer to filter state array
+                                 double* SIGLIB_INPUT_PTR_DECL,    // Pointer to filter coefficients array
+                                 long*,                            // Pointer to filter index
+                                 long);                            // Filter order
 
-void _stdcall SDA_IirNc(double* SIGLIB_INPUT_PTR_DECL,     // Input array to be filtered
-                        double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
-                        double* SIGLIB_INOUT_PTR_DECL,     // Pointer to filter state array
-                        double* SIGLIB_INPUT_PTR_DECL,     // Pointer to filter coefficients
-                        long,                              // Number of stages
-                        long);                             // Source array length
+void _stdcall SDA_IirOrderNMac(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to input array
+                               double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
+                               double* SIGLIB_INOUT_PTR_DECL,     // Pointer to filter state array
+                               double* SIGLIB_INPUT_PTR_DECL,     // Pointer to filter coefficients array
+                               long*,                             // Pointer to filter index
+                               long,                              // Filter order
+                               long);                             // Array length
+
+void _stdcall SDA_IirOrderNDirectFormIITransposed(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to input array
+                                                  double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
+                                                  double* SIGLIB_INOUT_PTR_DECL,     // Pointer to filter state array
+                                                  double* SIGLIB_INPUT_PTR_DECL,     // Pointer to filter coefficients array
+                                                  long,                              // Filter order
+                                                  long);                             // Array length
+
+void _stdcall SDA_IirZeroPhase(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to input source array to be filtered
+                               double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
+                               double* SIGLIB_INOUT_PTR_DECL,     // Pointer to filter state array
+                               double* SIGLIB_INPUT_PTR_DECL,     // Pointer to filter coefficients
+                               long,                              // Number of stages
+                               long);                             // Source array length
+
+void _stdcall SIF_IirZeroPhaseOrderN(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to filter coefficients array
+                                     double* SIGLIB_INOUT_PTR_DECL,     // Pointer to internal transposed companion matrix
+                                     double* SIGLIB_INOUT_PTR_DECL,     // Pointer to internal IminusA matrix
+                                     long*,                             // Pointer to internal row interchange matrix
+                                     double* SIGLIB_INOUT_PTR_DECL,     // Pointer to internal scaling factor matrix
+                                     double* SIGLIB_INOUT_PTR_DECL,     // Pointer to internal feedforward coefficient array
+                                     double* SIGLIB_INOUT_PTR_DECL,     // Pointer to internal feedback coefficient array
+                                     double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to output initialized state array
+                                     long);                             // Filter order
+
+void _stdcall SDA_IirZeroPhaseOrderN(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to input source array to be filtered
+                                     double* SIGLIB_INPUT_PTR_DECL,     // Pointer to initialized filter state array
+                                     double* SIGLIB_INPUT_PTR_DECL,     // Pointer to filter coefficients
+                                     double* SIGLIB_INOUT_PTR_DECL,     // Pointer to internal filter state array
+                                     double* SIGLIB_INOUT_PTR_DECL,     // Pointer to internal padded source array
+                                     double* SIGLIB_INOUT_PTR_DECL,     // Pointer to internal padded destination array
+                                     double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
+                                     long,                              // Filter order
+                                     long,                              // Source array extension length
+                                     long);                             // Source array length
 
 double _stdcall SDA_IirModifyFilterGain(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source IIR filter coefficients
                                         double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to modified IIR filter coefficients
@@ -1516,6 +1614,35 @@ long _stdcall SIF_GraphicEqualizerFilterBank(double* SIGLIB_INPUT_PTR_DECL,     
                                              double,                            // Minimum gain for each frequncy band
                                              double,                            // Gain step for each frequency band
                                              long);                             // Number of gain levels for each frequency band
+
+void _stdcall SDA_SplitIIRFilterCoefficients(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to SigLib filter coefficients
+                                             double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to feedforward filter coefficients
+                                             double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to feedback filter coefficients
+                                             long);                             // Number of biquads
+
+void _stdcall SDA_MergeIIRFilterCoefficients(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to feedforward filter coefficients
+                                             double* SIGLIB_INPUT_PTR_DECL,     // Pointer to feedback filter coefficients
+                                             double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to SigLib filter coefficients
+                                             long);                             // Number of biquads
+
+void _stdcall SDA_SplitIIROrderNFilterCoefficients(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to SigLib filter coefficients
+                                                   double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to feedforward filter coefficients
+                                                   double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to feedback filter coefficients
+                                                   long);                             // Filter order
+
+void _stdcall SDA_MergeIIROrderNFilterCoefficients(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to feedforward filter coefficients
+                                                   double* SIGLIB_INPUT_PTR_DECL,     // Pointer to feedback filter coefficients
+                                                   double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to SigLib filter coefficients
+                                                   long);                             // Filter order
+
+long _stdcall SDA_IirOrderNInitializeCoefficients(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to feedforward coefficients
+                                                  double* SIGLIB_INPUT_PTR_DECL,     // Pointer to feedback coefficients
+                                                  double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to state array initialized values
+                                                  double* SIGLIB_INOUT_PTR_DECL,     // Pointer to internal transposed companion matrix
+                                                  double* SIGLIB_INOUT_PTR_DECL,     // Pointer to internal IminusA matrix
+                                                  long*,                             // Pointer to internal row interchange matrix
+                                                  double* SIGLIB_INOUT_PTR_DECL,     // Pointer to internal scaling factor matrix
+                                                  long);                             // Filter order
 
 // Filtering functions - filter.c
 
@@ -2838,7 +2965,7 @@ long _stdcall SDS_CostasQamDemodulate(double,                            // Sour
                                       long*,                             // Pointer to ELG synchronization delay index
                                       long);                             // ELG output synchronization delay length
 
-#line 3248 "siglib.h"
+#line 3379 "siglib.h"
 // compiler
 long _stdcall SDS_CostasQamDemodulateDebug(double,                            // Source data sample
                                            double*,                           // Pointer to real destination symbol point
@@ -2974,7 +3101,7 @@ long _stdcall SDA_CostasQamDemodulateDebug(double* SIGLIB_INPUT_PTR_DECL,     //
                                            double*,                           // Pointer to debug real filter output
                                            double*,                           // Pointer to debug imaginary filter output
                                            double*);                          // Pointer to debug ELG trigger output
-#line 3384 "siglib.h"
+#line 3515 "siglib.h"
 
 void _stdcall SIF_QpskModulate(double* SIGLIB_OUTPUT_PTR_DECL,    // Carrier table pointer
                                double,                            // Carrier phase increment per sample (radians / 2Ï€)
@@ -4510,6 +4637,11 @@ void _stdcall SDA_Add(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source ar
                       double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
                       long);                             // Array length
 
+void _stdcall SDA_Subtract(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
+                           double,                            // Offset
+                           double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
+                           long);                             // Array length
+
 double _stdcall SDA_PositiveOffset(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
                                    double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
                                    long);                             // Array length
@@ -4824,6 +4956,9 @@ void _stdcall SDA_Zeros(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source a
 
 void _stdcall SDA_Ones(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                        long);                            // Array length
+
+void _stdcall SDA_Impulse(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                          long);                            // Array length
 
 void _stdcall SDA_Histogram(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
                             double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to histogram array
@@ -5424,6 +5559,12 @@ long _stdcall SDA_FindFirstNonZeroIndex(double* SIGLIB_INPUT_PTR_DECL,    // Poi
 long _stdcall SDA_FindNumberOfNonZeroValues(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                             long);                            // Array length
 
+void _stdcall SDA_Pad(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
+                      double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
+                      int SLPadModeType_t,               // Array extend mode
+                      long,                              // Extension length
+                      long);                             // Array length
+
 // Data type conversion functions - datatype.c
 
 void _stdcall SDA_SigLibDataToFix(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
@@ -5868,15 +6009,19 @@ void _stdcall SMX_Diagonal(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to sour
                            long,                              // Source matrix # of rows
                            long);                             // Source matrix # cols
 
-void _stdcall SMX_Multiply(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source matrix 1
-                           double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source matrix 2
-                           double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination matrix
-                           long,                              // Source matrix 1 # of rows
-                           long,                              // Source matrix 1 # of columns
-                           long);                             // Source matrix 2 # of columns
+void _stdcall SMX_Multiply2(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source matrix 1
+                            double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source matrix 2
+                            double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination matrix
+                            long,                              // Source matrix 1 # of rows
+                            long,                              // Source matrix 1 # of columns
+                            long);                             // Source matrix 2 # of columns
 
-void _stdcall SMX_CreateIdentity(double* SIGLIB_OUTPUT_PTR_DECL,    // Output Matrix pointer
-                                 long);                             //  Destination matrix # of rows and columns
+void _stdcall SMX_Identity(double* SIGLIB_OUTPUT_PTR_DECL,    // Output Matrix pointer
+                           long);                             //  Destination matrix # of rows and columns
+
+void _stdcall SMX_Eye(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination matrix
+                      long,                              // Number of rows in matrix
+                      long);                             // Number of columns in matrix
 
 long _stdcall SMX_Inverse2x2(double* SIGLIB_INPUT_PTR_DECL,      // Pointer to source matrix
                              double* SIGLIB_OUTPUT_PTR_DECL);    // Pointer to destination matrix
@@ -5915,6 +6060,21 @@ double _stdcall SMX_Determinant(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to 
 double _stdcall SMX_LuDeterminant(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source matrix
                                   long* SIGLIB_INOUT_PTR_DECL,      // Index matrix pointer
                                   long);                            // Number of rows and columns in matrix
+
+void _stdcall SMX_LuDecomposeSeparateLU(double* SIGLIB_INPUT_PTR_DECL,     // Source matrix pointer
+                                        double* SIGLIB_OUTPUT_PTR_DECL,    // Lower triangular matrix pointer
+                                        double* SIGLIB_OUTPUT_PTR_DECL,    // Upper triangular matrix pointer
+                                        long);                             // Number of rows and columns in matrix
+
+void _stdcall SMX_ForwardSubstitution(double* SIGLIB_INPUT_PTR_DECL,     // Lower triangular matrix pointer
+                                      double* SIGLIB_INPUT_PTR_DECL,     // B matrix pointer
+                                      double* SIGLIB_OUTPUT_PTR_DECL,    // Y matrix pointer
+                                      long);                             // Number of rows and columns in matrix
+
+void _stdcall SMX_BackwardSubstitution(double* SIGLIB_INPUT_PTR_DECL,     // Upper triangular matrix pointer
+                                       double* SIGLIB_INPUT_PTR_DECL,     // Y matrix pointer
+                                       double* SIGLIB_OUTPUT_PTR_DECL,    // X matrix pointer
+                                       long);                             // Number of rows and columns in matrix
 
 void _stdcall SMX_RotateClockwise(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source matrix
                                   double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination matrix
@@ -6046,6 +6206,14 @@ void _stdcall SMX_ShuffleRows(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to s
                               long,                              // Number of rows in matrix
                               long);                             // Number of columns in matrix
 
+void _stdcall SMX_CompanionMatrix(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
+                                  double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination matrix
+                                  long);                             // Array length
+
+void _stdcall SMX_CompanionMatrixTransposed(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
+                                            double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination matrix
+                                            long);                             // Array length
+
 void _stdcall SMX_ExtractCategoricalColumn(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source matrix
                                            long* SIGLIB_OUTPUT_PTR_DECL,     // Pointer to destination matrix
                                            long,                             // Number of rows in matrix
@@ -6053,11 +6221,10 @@ void _stdcall SMX_ExtractCategoricalColumn(double* SIGLIB_INPUT_PTR_DECL,    // 
 
 // Machine Learning functions - machinelearning.c
 
-// The following functionality has been deprecated
-// This is usually because the function name has been changed for consistency or compatibility with other libraries
-// These macros are provided to ease porting but will be removed in later versions of the library
+// Functions who's names have changed are listed in the following header file
+// Un-comment this line to use the original function names as #defines
 
-// End of deprecation list
+// #include "siglib_deprecated.h"
 
 // End of SigLib DSP function section
-#line 6960 "siglib.h"
+#line 7093 "siglib.h"

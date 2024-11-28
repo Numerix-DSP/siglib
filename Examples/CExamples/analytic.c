@@ -61,7 +61,7 @@ int main(void)
 
   SLArrayIndex_t filterIndex;
 
-  SLData_t* pFilterTaps = SUF_VectorArrayAllocate(FILTER_LENGTH);
+  SLData_t* pFilterCoefficients = SUF_VectorArrayAllocate(FILTER_LENGTH);
   SLData_t* pFilterState = SUF_VectorArrayAllocate(FILTER_LENGTH);
   SLData_t* pWindowCoeffs = SUF_VectorArrayAllocate(FILTER_LENGTH);
   SLData_t* pSrc1 = SUF_VectorArrayAllocate(SAMPLE_LENGTH);
@@ -72,32 +72,32 @@ int main(void)
   SLData_t* pDelay = SUF_VectorArrayAllocate(FILTER_GROUP_DELAY);
   SLData_t* pTempDelay = SUF_VectorArrayAllocate(FILTER_GROUP_DELAY);
 
-  if ((NULL == pFilterTaps) || (NULL == pFilterState) || (NULL == pWindowCoeffs) || (NULL == pSrc1) || (NULL == pSrc2) || (NULL == pImagData) ||
-      (NULL == pMagnitude) || (NULL == pFFTCoeffs) || (NULL == pDelay) || (NULL == pTempDelay)) {
+  if ((NULL == pFilterCoefficients) || (NULL == pFilterState) || (NULL == pWindowCoeffs) || (NULL == pSrc1) || (NULL == pSrc2) ||
+      (NULL == pImagData) || (NULL == pMagnitude) || (NULL == pFFTCoeffs) || (NULL == pDelay) || (NULL == pTempDelay)) {
     printf("\n\nMemory allocation failure\n\n");
     exit(0);
   }
 
   // Initialise Hilbert transformer coefficients
-  SIF_HilbertTransformerFirFilter(pFilterTaps,       // Pointer to filter coefficients
-                                  FILTER_LENGTH);    // Filter length
-                                                     // Generate window table
-  SIF_Window(pWindowCoeffs,                          // Pointer to window oefficient
-             SIGLIB_KAISER_FOURIER,                  // Window type
-             SIGLIB_SIX,                             // Window coefficient
-             FILTER_LENGTH);                         // Window length
-  SDA_Window(pFilterTaps,                            // Pointer to filter coefficients
-             pFilterTaps,                            // Pointer to filter coefficients
-             pWindowCoeffs,                          // Pointer to window oefficient
-             FILTER_LENGTH);                         // Window length
+  SIF_HilbertTransformerFirFilter(pFilterCoefficients,    // Pointer to filter coefficients
+                                  FILTER_LENGTH);         // Filter length
+                                                          // Generate window table
+  SIF_Window(pWindowCoeffs,                               // Pointer to window oefficient
+             SIGLIB_KAISER_FOURIER,                       // Window type
+             SIGLIB_SIX,                                  // Window coefficient
+             FILTER_LENGTH);                              // Window length
+  SDA_Window(pFilterCoefficients,                         // Pointer to filter coefficients
+             pFilterCoefficients,                         // Pointer to filter coefficients
+             pWindowCoeffs,                               // Pointer to window oefficient
+             FILTER_LENGTH);                              // Window length
   SLData_t windowInverseCoherentGain = SDA_WindowInverseCoherentGain(pWindowCoeffs, FILTER_LENGTH);
-  SDA_Multiply(pFilterTaps,                  // Pointer to filter coefficients
+  SDA_Multiply(pFilterCoefficients,          // Pointer to filter coefficients
                windowInverseCoherentGain,    // Scaling factor
-               pFilterTaps,                  // Pointer to filter coefficients
+               pFilterCoefficients,          // Pointer to filter coefficients
                FILTER_LENGTH);               // Window length
 
   gpc_plot_2d(h2DPlot,                                    // Graph handle
-              pFilterTaps,                                // Dataset
+              pFilterCoefficients,                        // Dataset
               FILTER_LENGTH,                              // Dataset length
               "Hilbert Transform Filter Coefficients",    // Dataset title
               SIGLIB_ZERO,                                // Minimum X value
@@ -200,13 +200,13 @@ int main(void)
   getchar();
 
   // Apply Hilbert transformerer
-  SDA_Fir(pSrc1,             // Input array to be filtered
-          pSrc2,             // Filtered output array
-          pFilterState,      // Pointer to filter state array
-          pFilterTaps,       // Pointer to filter coefficients
-          &filterIndex,      // Pointer to filter index register
-          FILTER_LENGTH,     // Filter length
-          SAMPLE_LENGTH);    // Dataset length
+  SDA_Fir(pSrc1,                  // Input array to be filtered
+          pSrc2,                  // Filtered output array
+          pFilterState,           // Pointer to filter state array
+          pFilterCoefficients,    // Pointer to filter coefficients
+          &filterIndex,           // Pointer to filter index register
+          FILTER_LENGTH,          // Filter length
+          SAMPLE_LENGTH);         // Dataset length
 
   // Delay real component to generate an analytical signal
   SDA_ShortFixedDelay(pSrc1,                 // Pointer to source array
@@ -270,7 +270,7 @@ int main(void)
   getchar();    // Wait for <Carriage Return>
   gpc_close(h2DPlot);
 
-  SUF_MemoryFree(pFilterTaps);    // Free memory
+  SUF_MemoryFree(pFilterCoefficients);    // Free memory
   SUF_MemoryFree(pFilterState);
   SUF_MemoryFree(pWindowCoeffs);
   SUF_MemoryFree(pSrc1);

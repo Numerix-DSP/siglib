@@ -103,8 +103,7 @@ Update history:
 #    define SDS_BitMask(a) (~(-1 << a))                                           // Sets 'a' LSBs to 1 and the remainder to 0
 
 // Macros that output type SLData_t
-#    define SDA_Average(a, b) SDA_Mean(a, b)                   // Another name for the same function
-#    define SDA_Subtract(a, b, c, d) SDA_Add(a, -(b), c, d)    // Subtract, instead of add
+#    define SDA_Average(a, b) SDA_Mean(a, b)    // Another name for the same function
 #    define SDS_SumAndDifference(a, b, sum, diff) \
       {                                           \
         sum = a + b;                              \

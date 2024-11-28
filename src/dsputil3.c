@@ -864,8 +864,8 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SAI_NextMultipleOfFftLength(SLArrayIndex_t n, SL
  * Function: SDA_FindFirstNonZeroIndex
  *
  * Parameters:
- *  const SLData_t pSrc                 Input data pointer
- *  const SLArrayIndex_t sampleLength   Array length
+ *  const SLData_t pSrc                 - Input data pointer
+ *  const SLArrayIndex_t sampleLength   - Array length
  *
  * Return value:
  *  Index of first non-zero value
@@ -889,8 +889,8 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindFirstNonZeroIndex(const SLData_t* SIGLIB
  * Function: SDA_FindNumberOfNonZeroValues
  *
  * Parameters:
- *  const SLData_t pSrc                 Input data pointer
- *  const SLArrayIndex_t sampleLength   Array length
+ *  const SLData_t pSrc                 - Input data pointer
+ *  const SLArrayIndex_t sampleLength   - Array length
  *
  * Return value:
  *  Number of non-zero values in the array
@@ -911,3 +911,99 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindNumberOfNonZeroValues(const SLData_t* SI
   }
   return (numNonZeroLocations);
 }    // End of SDA_FindNumberOfNonZeroValues()
+
+/********************************************************
+ * Function: SDA_Pad
+ *
+ * Parameters:
+ *  const SLData_t* pSrc            - Input data pointer
+ *  SLData_t* pDst                  - Output data pointer
+ *  const enum SLPadModeType_t padMode - Pad mode
+ *  const SLArrayIndex_t padLength  - Pad length
+ *  const SLArrayIndex_t srcLen           - Array length
+ *
+ * Return value:
+ *  void
+ *
+ * Description: Extend the dataset, with the following modes:
+ *  Even extension is a "mirror image" at each end
+ *  Odd extension is a "negation+rotation" at each end
+ *  Constant extension is a copy of the first or last element at each end
+ *
+ ********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_Pad(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const enum SLPadModeType_t padMode,
+                              const SLArrayIndex_t padLength, const SLArrayIndex_t srcLen)
+{
+
+  SLArrayIndex_t dataOffset = 0;    // Compute data offset for working in-place
+  if (pSrc == pDst) {
+    dataOffset = padLength;
+  }
+
+  for (SLArrayIndex_t i = srcLen - 1; i >= 0; i--) {    // Copy source array backwards so it works in-place
+    pDst[padLength + i] = pSrc[i];
+  }
+
+  switch (padMode) {
+  case (SIGLIB_ARRAY_PAD_MODE_EVEN):
+    for (SLArrayIndex_t i = 0; i < padLength; i++) {
+      pDst[i] = pSrc[dataOffset + padLength - i];                          // Left extension
+      pDst[padLength + srcLen + i] = pSrc[dataOffset + srcLen - 2 - i];    // Right extension
+    }
+    break;
+
+  case (SIGLIB_ARRAY_PAD_MODE_CONSTANT):
+    for (SLArrayIndex_t i = 0; i < padLength; i++) {
+      pDst[i] = pSrc[dataOffset];                                      // Left extension
+      pDst[padLength + srcLen + i] = pSrc[dataOffset + srcLen - 1];    // Right extension
+    }
+    break;
+
+  default:    // SIGLIB_ARRAY_PAD_MODE_ODD
+    for (SLArrayIndex_t i = 0; i < padLength; i++) {
+      pDst[i] = 2 * pSrc[dataOffset + 0] - pSrc[dataOffset + padLength - i];                                   // Left extension
+      pDst[padLength + srcLen + i] = 2 * pSrc[dataOffset + srcLen - 1] - pSrc[dataOffset + srcLen - 2 - i];    // Right extension
+    }
+    break;
+  }
+}    // End of SDA_PadEven()
+
+// /********************************************************
+//  * Function: SDA_PadOdd
+//  *
+//  * Parameters:
+//  *  const SLData_t* pSrc            - Input data pointer
+//  *  SLData_t* pDst                  - Output data pointer
+//  *  const SLArrayIndex_t padLength  - Extension length
+//  *  const SLArrayIndex_t srcLen           - Array length
+//  *
+//  * Return value:
+//  *  void
+//  *
+//  * Description: Compute the odd extension of the dataset.
+//  *  Odd extension is a "negation+rotation" at each end
+//  *  This function does not work in-place
+//  *
+//  ********************************************************/
+// void SDA_PadOdd (const SLData_t* SIGLIB_PTR_DECL pSrc,
+//   SLData_t* SIGLIB_PTR_DECL pDst,
+//   const SLArrayIndex_t padLength,
+//   const SLArrayIndex_t srcLen) {
+//
+//   SLArrayIndex_t dataOffset = 0;
+//   if (pSrc == pDst) {
+//     dataOffset = padLength;
+//   }
+//   for (SLArrayIndex_t i = 0; i < srcLen; i++) {             // Copy source array
+//     pDst[padLength + i] = pSrc[i];
+//   }
+//
+//   for (SLArrayIndex_t i = 0; i < padLength; i++) {    // Calculate left extension
+//     pDst[i] = 2 * pSrc[dataOffset + 0] - pSrc[dataOffset + padLength - i];
+//   }
+//
+//   for (SLArrayIndex_t i = 0; i < padLength; i++) {    // Calculate right extension
+//     pDst[padLength + srcLen + i] = 2 * pSrc[dataOffset + srcLen - 1] - pSrc[dataOffset + srcLen - 2 - i];
+//   }
+// }    // End of SDA_PadOdd()

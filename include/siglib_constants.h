@@ -168,6 +168,7 @@ Update history:
 #    define SIGLIB_IIR_DELAY_SIZE ((SLFixData_t)2)               // Size of IIR filter state vector
 #    define SIGLIB_IIR_COEFFS_PER_BIQUAD ((SLFixData_t)5)        // Number of coefficients per biquad
 #    define SIGLIB_IIR_MAX_NOTCH_BIQUADS ((SLArrayIndex_t)10)    // Maximum number of biquads for a notch filter
+#    define SIGLIB_IIR_COEFFS_PER_ ((SLFixData_t)5)              // Number of coefficients per biquad
 
 #    define SIGLIB_DTMF_STATE_LENGTH (SIGLIB_GOERTZEL_DELAY_LENGTH * ((SLFixData_t)8))    // Number of state array elements
 #    define SIGLIB_DTMF_FTABLE_LENGTH ((SLFixData_t)16)                                   // DTMF generator freq look up table length

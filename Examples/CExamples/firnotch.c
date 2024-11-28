@@ -20,7 +20,7 @@
 #define PLOT_LENGTH (IMPULSE_RESPONSE_LENGTH / 2)
 
 // Declare global variables and arrays
-static SLData_t pFilterTaps[FILTER_LENGTH];
+static SLData_t pFilterCoefficients[FILTER_LENGTH];
 static SLData_t pFilterState[FILTER_LENGTH];
 
 int main(void)
@@ -43,7 +43,7 @@ int main(void)
   }
 
   // Generate the notch filter coefficients
-  SIF_FirZeroNotchFilter(pFilterTaps,                          // Coefficients array
+  SIF_FirZeroNotchFilter(pFilterCoefficients,                  // Coefficients array
                          NOTCH_FREQUENCY / SAMPLE_RATE_HZ);    // Notch centre frequency normalized to Fs = 1 Hz
 
   // Generate impulse response
@@ -69,23 +69,14 @@ int main(void)
           FFT_LENGTH);                // FFT length
 
   // Generate test impulse
-  SDA_SignalGenerate(pSrc,                        // Pointer to destination array
-                     SIGLIB_IMPULSE,              // Signal type - Impulse function
-                     SIGLIB_ONE,                  // Signal peak level
-                     SIGLIB_FILL,                 // Fill (overwrite) or add to existing array contents
-                     SIGLIB_ZERO,                 // Signal frequency - Unused
-                     SIGLIB_ZERO,                 // D.C. Offset
-                     SIGLIB_ZERO,                 // Delay (samples periods) applied to impulse
-                     SIGLIB_ZERO,                 // Signal end value - Unused
-                     SIGLIB_NULL_DATA_PTR,        // Unused
-                     SIGLIB_NULL_DATA_PTR,        // Unused
-                     IMPULSE_RESPONSE_LENGTH);    // Output dataset length
+  SDA_Impulse(pSrc,                        // Pointer to destination array
+              IMPULSE_RESPONSE_LENGTH);    // Output dataset length
 
   // Apply fir filter and store filtered data
   SDA_Fir(pSrc,                        // Pointer to input array to be filtered
           pRealData,                   // Pointer to filtered output array
           pFilterState,                // Pointer to filter state array
-          pFilterTaps,                 // Pointer to filter coefficients
+          pFilterCoefficients,         // Pointer to filter coefficients
           &filterIndex,                // Pointer to filter index register
           FILTER_LENGTH,               // Filter length
           IMPULSE_RESPONSE_LENGTH);    // Output dataset length

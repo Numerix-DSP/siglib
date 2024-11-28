@@ -20,7 +20,7 @@ int main(void)
   SLData_t* pRealData = SUF_VectorArrayAllocate(FOURIERT_LENGTH);
   SLData_t* pImagData = SUF_VectorArrayAllocate(FOURIERT_LENGTH);
   SLData_t* pResults = SUF_VectorArrayAllocate(FOURIERT_LENGTH);
-  SLData_t* pFilterTaps = SUF_VectorArrayAllocate(FOURIERT_LENGTH);
+  SLData_t* pFilterCoefficients = SUF_VectorArrayAllocate(FOURIERT_LENGTH);
 
   h2DPlot =                              // Initialize plot
       gpc_init_2d("Gaussian Filter",     // Plot title
@@ -35,14 +35,14 @@ int main(void)
   }
 
   // Zero pad
-  SDA_Zeros(pFilterTaps,                       // Pointer to destination array
-            FOURIERT_LENGTH);                  // Dataset length
-  SIF_GaussianFirFilter(pFilterTaps,           // Pointer to filter coefficients
-                        STANDARD_DEVIATION,    // Standard deviation of the distribution
-                        FILTER_LENGTH);        // Filter length
+  SDA_Zeros(pFilterCoefficients,                // Pointer to destination array
+            FOURIERT_LENGTH);                   // Dataset length
+  SIF_GaussianFirFilter(pFilterCoefficients,    // Pointer to filter coefficients
+                        STANDARD_DEVIATION,     // Standard deviation of the distribution
+                        FILTER_LENGTH);         // Filter length
 
   gpc_plot_2d(h2DPlot,                           // Graph handle
-              pFilterTaps,                       // Dataset
+              pFilterCoefficients,               // Dataset
               FILTER_LENGTH,                     // Dataset length
               "Gaussian Filter Coefficients",    // Dataset title
               SIGLIB_ZERO,                       // Minimum X value
@@ -55,7 +55,7 @@ int main(void)
   getchar();
 
   // Perform DFT
-  SDA_Rdft(pFilterTaps,              // Pointer to real source array
+  SDA_Rdft(pFilterCoefficients,      // Pointer to real source array
            pRealData,                // Pointer to real destination array
            pImagData,                // Pointer to imaginary destination array
            FOURIERT_LENGTH);         // Transform size
@@ -83,14 +83,14 @@ int main(void)
   getchar();
 
   // Zero pad
-  SDA_Zeros(pFilterTaps,                    // Pointer to destination array
-            FOURIERT_LENGTH);               // Dataset length
-  SIF_GaussianFirFilter2(pFilterTaps,       // Pointer to filter coefficients
-                         BANDWIDTH,         // Filter bandwidth
-                         FILTER_LENGTH);    // Filter length
+  SDA_Zeros(pFilterCoefficients,                 // Pointer to destination array
+            FOURIERT_LENGTH);                    // Dataset length
+  SIF_GaussianFirFilter2(pFilterCoefficients,    // Pointer to filter coefficients
+                         BANDWIDTH,              // Filter bandwidth
+                         FILTER_LENGTH);         // Filter length
 
   gpc_plot_2d(h2DPlot,                                            // Graph handle
-              pFilterTaps,                                        // Dataset
+              pFilterCoefficients,                                // Dataset
               FILTER_LENGTH,                                      // Dataset length
               "Gaussian Filter Coefficients - Bandwidth 0.15",    // Dataset title
               SIGLIB_ZERO,                                        // Minimum X value
@@ -103,7 +103,7 @@ int main(void)
   getchar();
 
   // Perform FT
-  SDA_Rdft(pFilterTaps,            // Pointer to real source array
+  SDA_Rdft(pFilterCoefficients,    // Pointer to real source array
            pRealData,              // Pointer to real destination array
            pImagData,              // Pointer to imaginary destination array
            FILTER_LENGTH);         // Transform size
@@ -136,7 +136,7 @@ int main(void)
   SUF_MemoryFree(pRealData);    // Free memory
   SUF_MemoryFree(pImagData);
   SUF_MemoryFree(pResults);
-  SUF_MemoryFree(pFilterTaps);
+  SUF_MemoryFree(pFilterCoefficients);
 
   return (0);
 }

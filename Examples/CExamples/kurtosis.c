@@ -32,7 +32,7 @@ SLData_t* pData;    // Data array
 #define FILTER_STAGES \
   3    // Number of 2nd-order filter stages
        // IIR filter coeffs, b(0), b(1), b(2), a(1), a(2)
-static const SLData_t pFilterTaps[FILTER_STAGES * SIGLIB_IIR_COEFFS_PER_BIQUAD] = {
+static const SLData_t pFilterCoefficients[FILTER_STAGES * SIGLIB_IIR_COEFFS_PER_BIQUAD] = {
     9.49176257342E-0004, 1.89835251468E-0003, 9.49176257342E-0004, -1.88186809358E+0000, 8.85591821538E-0001,
     9.49176257342E-0004, 1.89835251468E-0003, 9.49176257342E-0004, -1.91116198217E+0000, 9.14943675120E-0001,
     9.49176257342E-0004, 1.89835251468E-0003, 9.49176257342E-0004, -1.96411809146E+0000, 9.68004570790E-0001};
@@ -89,12 +89,12 @@ int main(void)
                 GPC_NEW);                       // New graph
 
     // Split data stream into frequency bands
-    SDA_Iir(pData,             // Input array to be filtered
-            pData,             // Filtered output array
-            pFilterState,      // Pointer to filter state array
-            pFilterTaps,       // Pointer to filter coefficients array
-            FILTER_STAGES,     // Number of stages
-            SAMPLE_LENGTH);    // Dataset length
+    SDA_Iir(pData,                  // Input array to be filtered
+            pData,                  // Filtered output array
+            pFilterState,           // Pointer to filter state array
+            pFilterCoefficients,    // Pointer to filter coefficients array
+            FILTER_STAGES,          // Number of stages
+            SAMPLE_LENGTH);         // Dataset length
 
     SDA_Power(pData,                          // Pointer to source array
               pData,                          // Pointer to destination array
@@ -140,12 +140,12 @@ int main(void)
                 GPC_NEW);                       // New graph
 
     // Split data stream into frequency bands
-    SDA_Iir(pData,             // Input array to be filtered
-            pData,             // Filtered output array
-            pFilterState,      // Pointer to filter state array
-            pFilterTaps,       // Pointer to filter coefficients array
-            FILTER_STAGES,     // Number of stages
-            SAMPLE_LENGTH);    // Dataset length
+    SDA_Iir(pData,                  // Input array to be filtered
+            pData,                  // Filtered output array
+            pFilterState,           // Pointer to filter state array
+            pFilterCoefficients,    // Pointer to filter coefficients array
+            FILTER_STAGES,          // Number of stages
+            SAMPLE_LENGTH);         // Dataset length
 
     SDA_Power(pData,                          // Pointer to source array
               pData,                          // Pointer to destination array

@@ -14,7 +14,7 @@
 
 // Declare global variables and arrays
 // Initialise filter coefficients
-static const SLData_t pFilterTaps[FILTER_LENGTH] = {
+static const SLData_t pFilterCoefficients[FILTER_LENGTH] = {
     -3.783E-3, 2.803E-3, 2.648E-3, 2.891E-3, 3.397E-3, 4.094E-3, 4.942E-3, 5.917E-3, 7.005E-3, 8.196E-3, 9.479E-3, 1.084E-2, 1.229E-2,
     1.379E-2,  1.535E-2, 1.695E-2, 1.857E-2, 2.021E-2, 2.183E-2, 2.344E-2, 2.500E-2, 2.651E-2, 2.795E-2, 2.929E-2, 3.053E-2, 3.165E-2,
     3.264E-2,  3.348E-2, 3.417E-2, 3.469E-2, 3.504E-2, 3.522E-2, 3.522E-2, 3.504E-2, 3.469E-2, 3.417E-2, 3.348E-2, 3.264E-2, 3.165E-2,
@@ -50,11 +50,11 @@ int main(void)
     exit(-1);
   }
 
-  SIF_FirExtendedArray(pFilterState,         // Pointer to filter state array
-                       pFilterTaps,          // Filter coefficients
-                       pFilterProcCoeffs,    // Filter processing coefficients array
-                       &filterIndex,         // Pointer to filter index register
-                       FILTER_LENGTH);       // Filter length
+  SIF_FirExtendedArray(pFilterState,           // Pointer to filter state array
+                       pFilterCoefficients,    // Filter coefficients
+                       pFilterProcCoeffs,      // Filter processing coefficients array
+                       &filterIndex,           // Pointer to filter index register
+                       FILTER_LENGTH);         // Filter length
 
   SLData_t sinePhase = SIGLIB_ZERO;
 

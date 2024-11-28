@@ -1166,7 +1166,7 @@ void SIGLIB_FUNC_DECL SIF_DctIIOrthogonal(SLData_t* pSqrtHalf, SLData_t* pOutput
  *  void
  *
  * Description:
- *  *   Perform a type II DCT with orthogonal scaling
+ *  Perform a type II DCT with orthogonal scaling
  *
  ********************************************************/
 
@@ -1188,3 +1188,270 @@ void SIGLIB_FUNC_DECL SDA_DctIIOrthogonal(const SLData_t* SIGLIB_PTR_DECL pTime,
     pFreq[k] = sum * outputScale;
   }
 }    // End of SDA_DctIIOrthogonal()
+
+/********************************************************
+ * Function: SAI_RstftNumberOfFrequencyDomainFrames
+ *
+ * Parameters:
+ *  const SLArrayIndex_t srcLength,
+ *  const SLArrayIndex_t windowLength,
+ *  const SLArrayIndex_t hopLength,
+ *  const SLArrayIndex_t centrePaddingFlag
+ *
+ * Return value:
+ *  Number of STFT frames
+ *
+ * Description:
+ *  Compute the number of STFT frames for the given source,
+ *  window and hop lengths and centre padding flag.
+ *
+ ********************************************************/
+
+SLArrayIndex_t SAI_RstftNumberOfFrequencyDomainFrames(const SLArrayIndex_t srcLength, const SLArrayIndex_t hopLength,
+                                                      const SLArrayIndex_t windowLength, const SLArrayIndex_t centrePaddingFlag)
+{
+  SLArrayIndex_t localHopLength = hopLength;
+  if (localHopLength <= 0) {
+    localHopLength = windowLength / 2;
+  }
+
+  if (centrePaddingFlag == SIGLIB_TRUE) {
+    return ((SLArrayIndex_t)(((srcLength - windowLength) / localHopLength) + 2));
+  }
+  return ((SLArrayIndex_t)(((srcLength - windowLength) / localHopLength) + 1));
+}    // End of SAI_RstftNumberOfFrequencyDomainFrames()
+
+/********************************************************
+ * Function: SIF_Stft
+ *
+ * Parameters:
+ * SLData_t* pWindowCoeffs,
+ * const enum SLWindow_t WindowType,
+ * const SLData_t Coeff,
+ * SLData_t* pFFTCoeffs,
+ * SLArrayIndex_t* pBitReverseAddressTable,
+ * const SLArrayIndex_t windowLength,
+ * const SLArrayIndex_t fftLength
+ *
+ * Return value:
+ *   void
+ *
+ * Description:
+ *   Initialise the STFT sine and cosine tables etc.
+ *
+ ********************************************************/
+
+void SIGLIB_FUNC_DECL SIF_Stft(SLData_t* SIGLIB_PTR_DECL pWindowCoeffs, const enum SLWindow_t WindowType, const SLData_t Coeff,
+                               SLData_t* SIGLIB_PTR_DECL pFFTCoeffs, SLArrayIndex_t* SIGLIB_PTR_DECL pBitReverseAddressTable,
+                               const SLArrayIndex_t windowLength, const SLArrayIndex_t fftLength)
+{
+
+  SIF_Window(pWindowCoeffs, WindowType, Coeff, windowLength);    // Initialize window table
+
+  // Generate Sine and Cos tables
+  for (SLArrayIndex_t i = 0; i < (SLArrayIndex_t)((3U * (SLUFixData_t)fftLength) >> 2U); i++) {
+    pFFTCoeffs[i] = SDS_Sin((SIGLIB_TWO_PI * ((SLData_t)i)) / ((SLData_t)fftLength));
+  }
+
+  if ((pBitReverseAddressTable != SIGLIB_BIT_REV_STANDARD) && (pBitReverseAddressTable != SIGLIB_BIT_REV_NONE)) {
+    // Generate bit-reversed address table
+    // Table contains address indices in bit-reversed order
+    for (SLArrayIndex_t i = 0; i < fftLength; i++) {
+      *pBitReverseAddressTable++ = i;
+    }
+
+    pBitReverseAddressTable -= fftLength;
+
+    // Swap look-up table data
+    SDA_IndexBitReverseReorder(pBitReverseAddressTable, pBitReverseAddressTable, fftLength);
+  }
+}    // End of SIF_Stft()
+
+/********************************************************
+ * Function: SDA_Rstft
+ *
+ * Parameters:
+ * SLData_t* pSrc,
+ * const SLData_t* pWindowCoeffs,
+ * const SLData_t* pFFTCoeffs,
+ * const SLArrayIndex_t* pBitReverseAddressTable,
+ * SLData_t* pTempReal,
+ * SLData_t* pTempImag,
+ * SLData_t* pResultsReal,
+ * SLData_t* pResultsImag,
+ * const SLArrayIndex_t srcLength,
+ * const SLArrayIndex_t hopLength,
+ * const SLArrayIndex_t windowLength,
+ * const SLArrayIndex_t fftLength,
+ * const SLArrayIndex_t log2FftLength,
+ * const SLArrayIndex_t centrePaddingFlag
+ *
+ * Return value:
+ *   void
+ *
+ * Description:
+ *   Compute the real STFT on the source data array.
+ *   Note, with centre padding, padding occurs at both ends of
+ *   the source array and hence the original data will be modified
+ *
+ ********************************************************/
+
+void SDA_Rstft(SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t* SIGLIB_PTR_DECL pWindowCoeffs, const SLData_t* SIGLIB_PTR_DECL pFFTCoeffs,
+               const SLArrayIndex_t* SIGLIB_PTR_DECL pBitReverseAddressTable, SLData_t* SIGLIB_PTR_DECL pTempReal,
+               SLData_t* SIGLIB_PTR_DECL pTempImag, SLData_t* SIGLIB_PTR_DECL pResultsReal, SLData_t* SIGLIB_PTR_DECL pResultsImag,
+               const SLArrayIndex_t srcLength, const SLArrayIndex_t hopLength, const SLArrayIndex_t windowLength, const SLArrayIndex_t fftLength,
+               const SLArrayIndex_t log2FftLength, const SLArrayIndex_t centrePaddingFlag)
+
+{
+  SLArrayIndex_t localSrcLength = srcLength;
+  SLArrayIndex_t localWindowLength = windowLength;
+  if (localWindowLength <= 0) {
+    localWindowLength = fftLength;
+  }
+  SLArrayIndex_t localHopLength = hopLength;
+  if (localHopLength <= 0) {
+    localHopLength = localWindowLength >> 2;
+  }
+
+  if (centrePaddingFlag == SIGLIB_TRUE) {
+    SDA_ZeroPad(pSrc, pSrc, (fftLength >> 1), (fftLength >> 1), localSrcLength);
+    if (localSrcLength % fftLength != 0) {                                                    // Pad the signal if divisible by n_fft
+      localSrcLength = SAI_NextMultipleOfFftLength(localSrcLength, fftLength) - fftLength;    // Adjust length
+    }
+  } else {
+    SLArrayIndex_t nextMultipleOfFftLength = SAI_NextMultipleOfFftLength(localSrcLength, fftLength);
+    SDA_ZeroPad(pSrc, pSrc, 0, nextMultipleOfFftLength - localSrcLength, localSrcLength);
+    localSrcLength = localSrcLength + (nextMultipleOfFftLength - localSrcLength);    // Adjust length
+  }
+
+  SLArrayIndex_t numOutputFrames = (SLArrayIndex_t)(srcLength / localHopLength);
+  if ((numOutputFrames % localHopLength) > 0) {    // Increment for partially filled frames
+    numOutputFrames++;
+  }
+
+  for (SLArrayIndex_t i = 0; i < numOutputFrames; i++) {    // Process each frame
+    SLArrayIndex_t start = i * localHopLength;
+
+    for (SLArrayIndex_t j = 0; j < localWindowLength; j++) {
+      pTempReal[j] = pSrc[start + j] * pWindowCoeffs[j];
+    }
+    for (SLArrayIndex_t j = localWindowLength; j < fftLength; j++) {    // Zero pad
+      pTempReal[j] = SIGLIB_ZERO;
+    }
+
+    // Perform real FFT
+    SDA_Rfft(pTempReal,                  // Pointer to real array
+             pTempImag,                  // Pointer to imaginary array
+             pFFTCoeffs,                 // Pointer to FFT coefficients
+             pBitReverseAddressTable,    // Bit reverse mode flag / Pointer to bit reverse address table
+             fftLength,                  // FFT length
+             log2FftLength);             // log2 FFT length
+
+    // Store the result
+    SLArrayIndex_t fourierFrameLength = (fftLength >> 1) + 1;
+    for (SLArrayIndex_t j = 0; j < fourierFrameLength; j++) {
+      // *(pResultsReal+(j*numOutputFrames)+i) = pTempReal[j];
+      // *(pResultsImag+(j*numOutputFrames)+i) = pTempImag[j];
+      *(pResultsReal + ((fourierFrameLength - 1 - j) * numOutputFrames) + i) = pTempReal[j];
+      *(pResultsImag + ((fourierFrameLength - 1 - j) * numOutputFrames) + i) = pTempImag[j];
+    }
+  }
+}    // End of SDA_Rstft()
+
+/********************************************************
+ * Function: SDA_Ristft
+ *
+ * Parameters:
+ * SLData_t* pSrcReal,
+ * SLData_t* pSrcImag,
+ * const SLData_t* pWindowCoeffs,
+ * const SLData_t* pFFTCoeffs,
+ * const SLArrayIndex_t* pBitReverseAddressTable,
+ * SLData_t* pTempReal,
+ * SLData_t* pTempImag,
+ * SLData_t* pResultsReal,
+ * SLData_t* pNormalization,
+ * const SLArrayIndex_t numFrames,
+ * const SLArrayIndex_t hopLength,
+ * const SLArrayIndex_t windowLength,
+ * const SLArrayIndex_t fftLength,
+ * const SLArrayIndex_t log2FftLength,
+ * const SLArrayIndex_t centrePaddingFlag
+ *
+ * Return value:
+ *   void
+ *
+ * Description:
+ *   Compute the real inverse STFT on the source data arrays.
+ *
+ ********************************************************/
+
+void SDA_Ristft(SLData_t* SIGLIB_PTR_DECL pSrcReal, SLData_t* SIGLIB_PTR_DECL pSrcImag, const SLData_t* SIGLIB_PTR_DECL pWindowCoeffs,
+                const SLData_t* SIGLIB_PTR_DECL pFFTCoeffs, const SLArrayIndex_t* SIGLIB_PTR_DECL pBitReverseAddressTable,
+                SLData_t* SIGLIB_PTR_DECL pTempReal, SLData_t* SIGLIB_PTR_DECL pTempImag, SLData_t* SIGLIB_PTR_DECL pResultsReal,
+                SLData_t* SIGLIB_PTR_DECL pNormalization, const SLArrayIndex_t numFrames, const SLArrayIndex_t hopLength,
+                const SLArrayIndex_t windowLength, const SLArrayIndex_t fftLength, const SLArrayIndex_t log2FftLength,
+                const SLArrayIndex_t centrePaddingFlag)
+{
+  SLArrayIndex_t localWindowLength = windowLength;
+  if (localWindowLength <= 0) {
+    localWindowLength = fftLength;
+  }
+  SLArrayIndex_t localHopLength = hopLength;
+  if (localHopLength <= 0) {
+    localHopLength = localWindowLength >> 2;
+  }
+
+  SLArrayIndex_t fourierFrameLength = (fftLength >> 1) + 1;
+  SLArrayIndex_t outputLength = (numFrames - 1) * localHopLength + fftLength;
+
+  SDA_Zeros(pResultsReal, outputLength);      // Clear results array
+  SDA_Zeros(pNormalization, outputLength);    // Clear normalization array
+
+  // Perform ISTFT
+  for (SLArrayIndex_t i = 0; i < numFrames; i++) {
+    // Extract FFT data from source
+    for (SLArrayIndex_t j = 0; j < fourierFrameLength; j++) {
+      // pTempReal[j] = pSrcReal[(j*numFrames)+i];
+      // pTempImag[j] = pSrcImag[(j*numFrames)+i];
+      pTempReal[j] = pSrcReal[((fourierFrameLength - 1 - j) * numFrames) + i];
+      pTempImag[j] = pSrcImag[((fourierFrameLength - 1 - j) * numFrames) + i];
+    }
+
+    // Convert real to complex data
+    SDA_FftRealToComplex(pTempReal,     // Pointer to real source array
+                         pTempImag,     // Pointer to imaginary source array
+                         pTempReal,     // Pointer to real destination array
+                         pTempImag,     // Pointer to imaginary destination array
+                         fftLength);    // Dataset length
+
+    // Perform inverse FFT
+    SDA_Cifft(pTempReal,                  // Pointer to real array
+              pTempImag,                  // Pointer to imaginary array
+              pFFTCoeffs,                 // Pointer to FFT coefficients
+              pBitReverseAddressTable,    // Bit reverse mode flag / Pointer to bit reverse address table
+              fftLength,                  // FFT length
+              log2FftLength);             // log2 FFT length
+
+    SLArrayIndex_t start = i * localHopLength;
+    for (SLArrayIndex_t j = 0; j < localWindowLength; j++) {
+      pResultsReal[start + j] += pTempReal[j] * pWindowCoeffs[j];
+      pNormalization[start + j] += pWindowCoeffs[j] * pWindowCoeffs[j];
+    }
+  }
+
+  // Normalize the output signal and scale by 1/fftLength
+  for (SLArrayIndex_t i = 0; i < outputLength + fftLength; i++) {
+    if (pNormalization[i] > SIGLIB_EPSILON) {
+      pResultsReal[i] /= (pNormalization[i] * fftLength);
+    }
+  }
+
+  // Handle center padding
+  if (centrePaddingFlag == SIGLIB_TRUE) {
+    SLArrayIndex_t pad_amount = fftLength >> 1;
+    for (SLArrayIndex_t i = 0; i < outputLength; i++) {
+      pResultsReal[i] = pResultsReal[i + pad_amount];
+    }
+  }
+}    // End of SDA_Ristft()

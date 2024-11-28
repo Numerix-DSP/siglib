@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 // Define constants
-#define PLOT_LENGTH 10    // Plot X axis length - change this to plot full or partial spectrogram
+#define PLOT_X_AXIS_LENGTH 10    // Plot X axis length - change this to plot full or partial spectrogram
 
 #define X_AXIS_LENGTH 20
 #define Y_AXIS_LENGTH 10
@@ -53,7 +53,7 @@ int main(void)
 
   printf("Spectrogram Plot\n");
 
-  for (int i = 0; i < PLOT_LENGTH; i++) {
+  for (int i = 0; i < PLOT_X_AXIS_LENGTH; i++) {
     for (int j = 0; j < Y_AXIS_LENGTH; j++) {
       // Transfer columns to columnArray - note this is performed bottom up
       columnArray[j] = Data[i + (((Y_AXIS_LENGTH - 1) - j) * X_AXIS_LENGTH)];
@@ -65,7 +65,7 @@ int main(void)
                          X_MAX);                // Maximum X value
   }
 
-  if (PLOT_LENGTH != X_AXIS_LENGTH) {           // If the plot length is not equal to the
+  if (PLOT_X_AXIS_LENGTH != X_AXIS_LENGTH) {    // If the plot length is not equal to the
                                                 // X axis length need to send end of plot
     gpc_plot_spectrogram(hSpectrogram,          // Graph handle
                          GPC_END_PLOT,          // Data array

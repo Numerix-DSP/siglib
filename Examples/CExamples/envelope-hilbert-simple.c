@@ -35,7 +35,7 @@ int main(void)
 
   SLArrayIndex_t filterIndex;
 
-  SLData_t* pFilterTaps = SUF_VectorArrayAllocate(FILTER_LENGTH);
+  SLData_t* pFilterCoefficients = SUF_VectorArrayAllocate(FILTER_LENGTH);
   SLData_t* pFilterState = SUF_VectorArrayAllocate(FILTER_LENGTH);
   SLData_t* pSrc = SUF_VectorArrayAllocate(SAMPLE_LENGTH);
   SLData_t* pHilbertTransformed = SUF_VectorArrayAllocate(SAMPLE_LENGTH);
@@ -46,8 +46,8 @@ int main(void)
   printf("Hilbert transform filter length   => %d", FILTER_LENGTH);
 
   // Initialise Hilbert transformer coefficients
-  SIF_HilbertTransformerFirFilter(pFilterTaps,       // Pointer to filter coefficients
-                                  FILTER_LENGTH);    // Filter length
+  SIF_HilbertTransformerFirFilter(pFilterCoefficients,    // Pointer to filter coefficients
+                                  FILTER_LENGTH);         // Filter length
   // Initialise FIR filter for Hilbert transformer
   SIF_Fir(pFilterState,                          // Pointer to filter state array
           &filterIndex,                          // Pointer to filter index register
@@ -107,7 +107,7 @@ int main(void)
   SDA_Fir(pSrc,                   // Input array to be filtered
           pHilbertTransformed,    // Filtered output array
           pFilterState,           // Pointer to filter state array
-          pFilterTaps,            // Pointer to filter coefficients
+          pFilterCoefficients,    // Pointer to filter coefficients
           &filterIndex,           // Pointer to filter index register
           FILTER_LENGTH,          // Filter length
           SAMPLE_LENGTH);         // Dataset length
@@ -141,7 +141,7 @@ int main(void)
   getchar();    // Wait for <Carriage Return>
   gpc_close(h2DPlot);
 
-  SUF_MemoryFree(pFilterTaps);    // Free memory
+  SUF_MemoryFree(pFilterCoefficients);    // Free memory
   SUF_MemoryFree(pFilterState);
   SUF_MemoryFree(pSrc);
   SUF_MemoryFree(pHilbertTransformed);

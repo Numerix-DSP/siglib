@@ -323,10 +323,16 @@ enum SLActivationType_t {    // Activation function type
   SIGLIB_ACTIVATION_TYPE_TANH
 };
 
-enum SLFftConvolveModeType_t {    // Activation function type
+enum SLFftConvolveModeType_t {    // FFT based convolution type
   SIGLIB_FFT_CONVOLVE_MODE_FULL = 1,
   SIGLIB_FFT_CONVOLVE_MODE_VALID,
   SIGLIB_FFT_CONVOLVE_MODE_SAME
+};
+
+enum SLPadModeType_t {    // Array padding mode type
+  SIGLIB_ARRAY_PAD_MODE_EVEN = 1,
+  SIGLIB_ARRAY_PAD_MODE_ODD,
+  SIGLIB_ARRAY_PAD_MODE_CONSTANT
 };
 
 #  endif    // End of #if _SIGLIB_TYPES_H

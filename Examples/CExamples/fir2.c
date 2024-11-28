@@ -15,7 +15,7 @@
 // Declare global variables and arrays
 
 // Initialise filter coefficients
-static const SLData_t pFilterTaps[FILTER_LENGTH] = {
+static const SLData_t pFilterCoefficients[FILTER_LENGTH] = {
     -5.34266824816E-0004, 1.24568792546E-0003,  8.73278953630E-0004,  4.37786545396E-0004,  1.57576481250E-0003,  -1.38557006660E-0003,
     1.90710297624E-0004,  -1.85794214656E-0003, -2.00704829381E-0003, 2.40455797115E-0004,  -2.04022181601E-0003, 2.71242012844E-0003,
     8.82181294290E-0004,  2.06390803758E-0003,  3.46115122350E-0003,  -1.75033817834E-0003, 1.86645226647E-0003,  -4.19706616768E-0003,
@@ -92,11 +92,11 @@ int main(void)
 
   // Apply fir filter and store filtered data
   for (SLFixData_t i = 0; i < SAMPLE_LENGTH; i++) {
-    *pSrc2++ = SDS_Fir(*pSrc1++,          // Input data sample to be filtered
-                       pFilterState,      // Pointer to filter state array
-                       pFilterTaps,       // Pointer to filter coefficients
-                       &filterIndex,      // Pointer to filter index register
-                       FILTER_LENGTH);    // Filter length
+    *pSrc2++ = SDS_Fir(*pSrc1++,               // Input data sample to be filtered
+                       pFilterState,           // Pointer to filter state array
+                       pFilterCoefficients,    // Pointer to filter coefficients
+                       &filterIndex,           // Pointer to filter index register
+                       FILTER_LENGTH);         // Filter length
   }
 
   pSrc1 -= SAMPLE_LENGTH;

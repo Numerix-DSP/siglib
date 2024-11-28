@@ -186,17 +186,8 @@ int main(void)
           IIR_FILTER_STAGES);    // Number of second order stages
 
   // Generate impulse response
-  SDA_SignalGenerate(pRealData,                   // Pointer to destination array
-                     SIGLIB_IMPULSE,              // Signal type - Impulse function
-                     SIGLIB_ONE,                  // Signal peak level
-                     SIGLIB_FILL,                 // Fill (overwrite) or add to existing array contents
-                     SIGLIB_ZERO,                 // Signal frequency - Unused
-                     SIGLIB_ZERO,                 // D.C. Offset
-                     SIGLIB_ZERO,                 // Delay (samples periods) applied to impulse
-                     SIGLIB_ZERO,                 // Signal end value - Unused
-                     SIGLIB_NULL_DATA_PTR,        // Unused
-                     SIGLIB_NULL_DATA_PTR,        // Unused
-                     IMPULSE_RESPONSE_LENGTH);    // Output dataset length;
+  SDA_Impulse(pRealData,                   // Pointer to destination array
+              IMPULSE_RESPONSE_LENGTH);    // Output dataset length;
 
   // Apply iir filter and store filtered data
   SDA_Iir(pRealData,                   // Input array to be filtered

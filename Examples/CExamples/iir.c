@@ -189,17 +189,8 @@ int main(void)
   }
 
   // Generate test impulse
-  SDA_SignalGenerate(pSrc,                        // Pointer to destination array
-                     SIGLIB_IMPULSE,              // Signal type - Impulse function
-                     SIGLIB_ONE,                  // Signal peak level
-                     SIGLIB_FILL,                 // Fill (overwrite) or add to existing array contents
-                     SIGLIB_ZERO,                 // Signal frequency - Unused
-                     SIGLIB_ZERO,                 // D.C. Offset
-                     SIGLIB_ZERO,                 // Delay (samples periods) applied to impulse
-                     SIGLIB_ZERO,                 // Signal end value - Unused
-                     SIGLIB_NULL_DATA_PTR,        // Unused
-                     SIGLIB_NULL_DATA_PTR,        // Unused
-                     IMPULSE_RESPONSE_LENGTH);    // Output dataset length
+  SDA_Impulse(pSrc,                        // Pointer to destination array
+              IMPULSE_RESPONSE_LENGTH);    // Output dataset length
 
   // Generate impulse response
   // Apply iir filter and store filtered data
@@ -308,17 +299,8 @@ int main(void)
           FILTER_STAGES);    // Number of second order stages
 
   // Generate test impulse
-  SDA_SignalGenerate(pSrc,                        // Pointer to destination array
-                     SIGLIB_IMPULSE,              // Signal type - Impulse function
-                     SIGLIB_ONE,                  // Signal peak level
-                     SIGLIB_FILL,                 // Fill (overwrite) or add to existing array contents
-                     SIGLIB_ZERO,                 // Signal frequency - Unused
-                     SIGLIB_ZERO,                 // D.C. Offset
-                     SIGLIB_ZERO,                 // Delay (samples periods) applied to impulse
-                     SIGLIB_ZERO,                 // Signal end value - Unused
-                     SIGLIB_NULL_DATA_PTR,        // Unused
-                     SIGLIB_NULL_DATA_PTR,        // Unused
-                     IMPULSE_RESPONSE_LENGTH);    // Output dataset length
+  SDA_Impulse(pSrc,                        // Pointer to destination array
+              IMPULSE_RESPONSE_LENGTH);    // Output dataset length
 
   // Apply iir filter and store filtered data
   SDA_Iir(pSrc,                        // Input array to be filtered
@@ -443,17 +425,8 @@ int main(void)
           FILTER_STAGES);    // Number of second order stages
 
   // Generate test impulse
-  SDA_SignalGenerate(pSrc,                        // Pointer to destination array
-                     SIGLIB_IMPULSE,              // Signal type - Impulse function
-                     SIGLIB_ONE,                  // Signal peak level
-                     SIGLIB_FILL,                 // Fill (overwrite) or add to existing array contents
-                     SIGLIB_ZERO,                 // Signal frequency - Unused
-                     SIGLIB_ZERO,                 // D.C. Offset
-                     SIGLIB_ZERO,                 // Delay (samples periods) applied to impulse
-                     SIGLIB_ZERO,                 // Signal end value - Unused
-                     SIGLIB_NULL_DATA_PTR,        // Unused
-                     SIGLIB_NULL_DATA_PTR,        // Unused
-                     IMPULSE_RESPONSE_LENGTH);    // Output dataset length
+  SDA_Impulse(pSrc,                        // Pointer to destination array
+              IMPULSE_RESPONSE_LENGTH);    // Output dataset length
 
   // Apply iir filter and store filtered data
   SDA_Iir(pSrc,                        // Input array to be filtered
@@ -565,17 +538,8 @@ int main(void)
           2 * FILTER_STAGES);    // Number of second order stages
 
   // Generate test impulse
-  SDA_SignalGenerate(pSrc,                        // Pointer to destination array
-                     SIGLIB_IMPULSE,              // Signal type - Impulse function
-                     SIGLIB_ONE,                  // Signal peak level
-                     SIGLIB_FILL,                 // Fill (overwrite) or add to existing array contents
-                     SIGLIB_ZERO,                 // Signal frequency - Unused
-                     SIGLIB_ZERO,                 // D.C. Offset
-                     SIGLIB_ZERO,                 // Delay (samples periods) applied to impulse
-                     SIGLIB_ZERO,                 // Signal end value - Unused
-                     SIGLIB_NULL_DATA_PTR,        // Unused
-                     SIGLIB_NULL_DATA_PTR,        // Unused
-                     IMPULSE_RESPONSE_LENGTH);    // Output dataset length
+  SDA_Impulse(pSrc,                        // Pointer to destination array
+              IMPULSE_RESPONSE_LENGTH);    // Output dataset length
 
   // Apply iir filter and store filtered data
   SDA_Iir(pSrc,                        // Input array to be filtered
@@ -687,17 +651,8 @@ int main(void)
           2 * FILTER_STAGES);    // Number of second order stages
 
   // Generate test impulse
-  SDA_SignalGenerate(pSrc,                        // Pointer to destination array
-                     SIGLIB_IMPULSE,              // Signal type - Impulse function
-                     SIGLIB_ONE,                  // Signal peak level
-                     SIGLIB_FILL,                 // Fill (overwrite) or add to existing array contents
-                     SIGLIB_ZERO,                 // Signal frequency - Unused
-                     SIGLIB_ZERO,                 // D.C. Offset
-                     SIGLIB_ZERO,                 // Delay (samples periods) applied to impulse
-                     SIGLIB_ZERO,                 // Signal end value - Unused
-                     SIGLIB_NULL_DATA_PTR,        // Unused
-                     SIGLIB_NULL_DATA_PTR,        // Unused
-                     IMPULSE_RESPONSE_LENGTH);    // Output dataset length
+  SDA_Impulse(pSrc,                        // Pointer to destination array
+              IMPULSE_RESPONSE_LENGTH);    // Output dataset length
 
   // Apply iir filter and store filtered data
   SDA_Iir(pSrc,                        // Input array to be filtered

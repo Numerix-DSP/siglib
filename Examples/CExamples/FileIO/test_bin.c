@@ -33,6 +33,9 @@ int main(void)
 
   printf("Opening and reading from test.bin file\n");
 
+  SLArrayIndex_t fileLength = SUF_BinFileLength("test.bin");
+  printf("File length: %d\n", fileLength);
+
   if ((fpInputFile = fopen("test.bin", "rb")) == NULL) {    // Note this file is binary
     printf("Error opening input .bin file\n");
     exit(-1);

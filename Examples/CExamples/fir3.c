@@ -17,7 +17,7 @@
 // Declare global variables and arrays
 
 // Initialise filter coefficients
-static const SLData_t pFilterTaps[FILTER_LENGTH] = {
+static const SLData_t pFilterCoefficients[FILTER_LENGTH] = {
     -5.34266824816E-0004, 1.24568792546E-0003,  8.73278953630E-0004,  4.37786545396E-0004,  1.57576481250E-0003,  -1.38557006660E-0003,
     1.90710297624E-0004,  -1.85794214656E-0003, -2.00704829381E-0003, 2.40455797115E-0004,  -2.04022181601E-0003, 2.71242012844E-0003,
     8.82181294290E-0004,  2.06390803758E-0003,  3.46115122350E-0003,  -1.75033817834E-0003, 1.86645226647E-0003,  -4.19706616768E-0003,
@@ -123,18 +123,18 @@ int main(void)
     exit(0);
   }
 
-  SUF_SigWriteData(pFilterTaps, fpOutputFile, FILTER_LENGTH);
+  SUF_SigWriteData(pFilterCoefficients, fpOutputFile, FILTER_LENGTH);
 
   fclose(fpOutputFile);
 #endif
 
-  SDA_Fir(pReal,             // Input array to be filtered
-          pReal,             // Filtered output array
-          pFilterState,      // Pointer to filter state array
-          pFilterTaps,       // Pointer to filter coefficients
-          &filterIndex,      // Pointer to filter index register
-          FILTER_LENGTH,     // Filter length
-          SAMPLE_LENGTH);    // Dataset length
+  SDA_Fir(pReal,                  // Input array to be filtered
+          pReal,                  // Filtered output array
+          pFilterState,           // Pointer to filter state array
+          pFilterCoefficients,    // Pointer to filter coefficients
+          &filterIndex,           // Pointer to filter index register
+          FILTER_LENGTH,          // Filter length
+          SAMPLE_LENGTH);         // Dataset length
 
   gpc_plot_2d(h2DPlot,                           // Graph handle
               pReal,                             // Dataset

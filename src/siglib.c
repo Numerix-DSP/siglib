@@ -82,6 +82,7 @@ void SIGLIB_FUNC_DECL SUF_PrintArray(const SLData_t* pSrc, const SLArrayIndex_t 
 {
 #  define MAX_INCLUSIVE_ARRAY_LENGTH 64    // Maximum inclusive array length for printing
 #  define NUMBER_OF_SAMPLES_PER_LINE 8     // Number of samples per line for printing
+#  define MAX_SPLIT_LENGTH 4               // MAX_SPLIT_LENGTH number of lines printed at start and end
 
   if (arrayLength < MAX_INCLUSIVE_ARRAY_LENGTH) {
     for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
@@ -89,23 +90,50 @@ void SIGLIB_FUNC_DECL SUF_PrintArray(const SLData_t* pSrc, const SLArrayIndex_t 
         SUF_Printf("[%ld] = ", (long)i);
       }
       //      SUF_Printf ("%le, ", (int)i, (double)*pSrc++);
-      SUF_Printf("%1.6lf, ", (double)pSrc[i]);
+      SUF_Printf("%.8lf, ", (double)pSrc[i]);
       if ((i % NUMBER_OF_SAMPLES_PER_LINE) == NUMBER_OF_SAMPLES_PER_LINE - 1) {
         SUF_Printf("\n");
       }
     }
-  } else {
+  } else if (arrayLength < (MAX_SPLIT_LENGTH * NUMBER_OF_SAMPLES_PER_LINE)) {
     SUF_Printf("[0] = ");
     for (SLArrayIndex_t i = 0; i < NUMBER_OF_SAMPLES_PER_LINE; i++) {
       //      SUF_Printf ("%le, ", (double)pSrc[i]);
-      SUF_Printf("%1.6lf, ", (double)pSrc[i]);
+      SUF_Printf("%.8lf, ", (double)pSrc[i]);
     }
-    SUF_Printf("\n");
+    SUF_Printf("\n.\n.\n");
     SLArrayIndex_t arrayIndex = arrayLength - NUMBER_OF_SAMPLES_PER_LINE;
     SUF_Printf("[%ld] = ", (long)arrayIndex);
     for (SLArrayIndex_t i = arrayIndex; i < arrayLength; i++) {
       //      SUF_Printf ("%le", (double)pSrc[i]);
-      SUF_Printf("%1.6lf, ", (double)pSrc[i]);
+      SUF_Printf("%.8lf, ", (double)pSrc[i]);
+    }
+    SUF_Printf("\n");
+  } else {
+    SUF_Printf("[0] = ");
+    for (SLArrayIndex_t i = 0; i < NUMBER_OF_SAMPLES_PER_LINE; i++) {
+      //      SUF_Printf ("%le, ", (double)pSrc[i]);
+      SUF_Printf("%.8lf, ", (double)pSrc[i]);
+    }
+    SUF_Printf("\n");
+    SUF_Printf("[%ld] = ", (long)NUMBER_OF_SAMPLES_PER_LINE);
+    for (SLArrayIndex_t i = NUMBER_OF_SAMPLES_PER_LINE; i < 2 * NUMBER_OF_SAMPLES_PER_LINE; i++) {
+      //      SUF_Printf ("%le, ", (double)pSrc[i]);
+      SUF_Printf("%.8lf, ", (double)pSrc[i]);
+    }
+    SUF_Printf("\n.\n.\n");
+    SLArrayIndex_t arrayIndex = arrayLength - (2 * NUMBER_OF_SAMPLES_PER_LINE);
+    SUF_Printf("[%ld] = ", (long)arrayIndex);
+    for (SLArrayIndex_t i = arrayIndex; i < arrayLength - NUMBER_OF_SAMPLES_PER_LINE; i++) {
+      //      SUF_Printf ("%le", (double)pSrc[i]);
+      SUF_Printf("%.8lf, ", (double)pSrc[i]);
+    }
+    SUF_Printf("\n");
+    arrayIndex = arrayLength - NUMBER_OF_SAMPLES_PER_LINE;
+    SUF_Printf("[%ld] = ", (long)arrayIndex);
+    for (SLArrayIndex_t i = arrayIndex; i < arrayLength; i++) {
+      //      SUF_Printf ("%le", (double)pSrc[i]);
+      SUF_Printf("%.8lf, ", (double)pSrc[i]);
     }
     SUF_Printf("\n");
   }
@@ -159,11 +187,11 @@ void SIGLIB_FUNC_DECL SUF_PrintComplexArray(const SLData_t* pSrcReal, const SLDa
     if (*pSrcImag >= SIGLIB_ZERO) {
       //          SUF_Printf ("%le + j%le\n", (double)*pSrcReal++,
       //          (double)*pSrcImag++);
-      SUF_Printf("%1.6lf +j%1.6lf\n", (double)*pSrcReal++, (double)*pSrcImag++);
+      SUF_Printf("%.8lf +j%.8lf\n", (double)*pSrcReal++, (double)*pSrcImag++);
     } else {
       //          SUF_Printf ("%le - j%le\n", (double)*pSrcReal++,
       //          (double)-*pSrcImag++);
-      SUF_Printf("%1.6lf -j%1.6lf\n", (double)*pSrcReal++, (double)-*pSrcImag++);
+      SUF_Printf("%.8lf -j%.8lf\n", (double)*pSrcReal++, (double)-*pSrcImag++);
     }
   }
   SUF_Printf("\n");
@@ -256,70 +284,76 @@ void SIGLIB_FUNC_DECL SUF_PrintComplexNumber(const SLData_t real, const SLData_t
 
 void SIGLIB_FUNC_DECL SUF_PrintMatrix(const SLData_t* pSrc, const SLArrayIndex_t nRows, const SLArrayIndex_t nCols)
 {
-  if ((nRows > 6) && (nCols > 6)) {
-    SUF_Printf(" [%lf %lf %lf ... %lf %lf %lf]\n", (double)*(pSrc + (0 * nCols) + 0), (double)*(pSrc + (0 * nCols) + 1), *(pSrc + (0 * nCols) + 2),
-               (double)*(pSrc + (0 * nCols) + nCols - 3), (double)*(pSrc + (0 * nCols) + nCols - 2), (double)*(pSrc + (0 * nCols) + nCols - 1));
-    SUF_Printf(" [%lf %lf %lf ... %lf %lf %lf]\n", (double)*(pSrc + (1 * nCols) + 0), (double)*(pSrc + (1 * nCols) + 1), *(pSrc + (1 * nCols) + 2),
-               (double)*(pSrc + (1 * nCols) + nCols - 3), (double)*(pSrc + (1 * nCols) + nCols - 2), (double)*(pSrc + (1 * nCols) + nCols - 1));
-    SUF_Printf(" [%lf %lf %lf ... %lf %lf %lf]\n", (double)*(pSrc + (2 * nCols) + 0), (double)*(pSrc + (2 * nCols) + 1), *(pSrc + (2 * nCols) + 2),
-               (double)*(pSrc + (2 * nCols) + nCols - 3), (double)*(pSrc + (2 * nCols) + nCols - 2), (double)*(pSrc + (2 * nCols) + nCols - 1));
+  if ((nRows > 7) && (nCols > 7)) {
+    SUF_Printf("[0] [%.8lf %.8lf %.8lf ... %.8lf %.8lf %.8lf]\n", (double)*(pSrc + (0 * nCols) + 0), (double)*(pSrc + (0 * nCols) + 1),
+               *(pSrc + (0 * nCols) + 2), (double)*(pSrc + (0 * nCols) + nCols - 3), (double)*(pSrc + (0 * nCols) + nCols - 2),
+               (double)*(pSrc + (0 * nCols) + nCols - 1));
+    SUF_Printf("[1] [%.8lf %.8lf %.8lf ... %.8lf %.8lf %.8lf]\n", (double)*(pSrc + (1 * nCols) + 0), (double)*(pSrc + (1 * nCols) + 1),
+               *(pSrc + (1 * nCols) + 2), (double)*(pSrc + (1 * nCols) + nCols - 3), (double)*(pSrc + (1 * nCols) + nCols - 2),
+               (double)*(pSrc + (1 * nCols) + nCols - 1));
+    SUF_Printf("[2] [%.8lf %.8lf %.8lf ... %.8lf %.8lf %.8lf]\n", (double)*(pSrc + (2 * nCols) + 0), (double)*(pSrc + (2 * nCols) + 1),
+               *(pSrc + (2 * nCols) + 2), (double)*(pSrc + (2 * nCols) + nCols - 3), (double)*(pSrc + (2 * nCols) + nCols - 2),
+               (double)*(pSrc + (2 * nCols) + nCols - 1));
     SUF_Printf(" ...\n");
-    SUF_Printf(" [%lf %lf %lf ... %lf %lf %lf]\n", (double)*(pSrc + ((nRows - 3) * nCols) + 0), (double)*(pSrc + ((nRows - 3) * nCols) + 1),
-               (double)*(pSrc + ((nRows - 3) * nCols) + 2), (double)*(pSrc + ((nRows - 3) * nCols) + nCols - 3),
-               (double)*(pSrc + ((nRows - 3) * nCols) + nCols - 2), (double)*(pSrc + ((nRows - 3) * nCols) + nCols - 1));
-    SUF_Printf(" [%lf %lf %lf ... %lf %lf %lf]\n", (double)*(pSrc + ((nRows - 2) * nCols) + 0), (double)*(pSrc + ((nRows - 2) * nCols) + 1),
-               (double)*(pSrc + ((nRows - 2) * nCols) + 2), (double)*(pSrc + ((nRows - 2) * nCols) + nCols - 3),
-               (double)*(pSrc + ((nRows - 2) * nCols) + nCols - 2), (double)*(pSrc + ((nRows - 2) * nCols) + nCols - 1));
-    SUF_Printf(" [%lf %lf %lf ... %lf %lf %lf]\n", (double)*(pSrc + ((nRows - 1) * nCols) + 0), (double)*(pSrc + ((nRows - 1) * nCols) + 1),
-               (double)*(pSrc + ((nRows - 1) * nCols) + 2), (double)*(pSrc + ((nRows - 1) * nCols) + nCols - 3),
-               (double)*(pSrc + ((nRows - 1) * nCols) + nCols - 2), (double)*(pSrc + ((nRows - 1) * nCols) + nCols - 1));
-  } else if ((nRows <= 6) && (nCols > 6)) {
+    SUF_Printf("[%d] [%.8lf %.8lf %.8lf ... %.8lf %.8lf %.8lf]\n", nRows - 3, (double)*(pSrc + ((nRows - 3) * nCols) + 0),
+               (double)*(pSrc + ((nRows - 3) * nCols) + 1), (double)*(pSrc + ((nRows - 3) * nCols) + 2),
+               (double)*(pSrc + ((nRows - 3) * nCols) + nCols - 3), (double)*(pSrc + ((nRows - 3) * nCols) + nCols - 2),
+               (double)*(pSrc + ((nRows - 3) * nCols) + nCols - 1));
+    SUF_Printf("[%d] [%.8lf %.8lf %.8lf ... %.8lf %.8lf %.8lf]\n", nRows - 2, (double)*(pSrc + ((nRows - 2) * nCols) + 0),
+               (double)*(pSrc + ((nRows - 2) * nCols) + 1), (double)*(pSrc + ((nRows - 2) * nCols) + 2),
+               (double)*(pSrc + ((nRows - 2) * nCols) + nCols - 3), (double)*(pSrc + ((nRows - 2) * nCols) + nCols - 2),
+               (double)*(pSrc + ((nRows - 2) * nCols) + nCols - 1));
+    SUF_Printf("[%d] [%.8lf %.8lf %.8lf ... %.8lf %.8lf %.8lf]\n", nRows - 1, (double)*(pSrc + ((nRows - 1) * nCols) + 0),
+               (double)*(pSrc + ((nRows - 1) * nCols) + 1), (double)*(pSrc + ((nRows - 1) * nCols) + 2),
+               (double)*(pSrc + ((nRows - 1) * nCols) + nCols - 3), (double)*(pSrc + ((nRows - 1) * nCols) + nCols - 2),
+               (double)*(pSrc + ((nRows - 1) * nCols) + nCols - 1));
+  } else if ((nRows <= 7) && (nCols > 7)) {
     for (SLArrayIndex_t rc = 0; rc < nRows; rc++) {
-      SUF_Printf(" [%lf %lf %lf ... %lf %lf %lf]\n", (double)*(pSrc + (rc * nCols) + 0), (double)*(pSrc + (rc * nCols) + 1),
+      SUF_Printf("[%d] [%.8lf %.8lf %.8lf ... %.8lf %.8lf %.8lf]\n", rc, (double)*(pSrc + (rc * nCols) + 0), (double)*(pSrc + (rc * nCols) + 1),
                  (double)*(pSrc + (rc * nCols) + 2), (double)*(pSrc + (rc * nCols) + nCols - 3), (double)*(pSrc + (rc * nCols) + nCols - 2),
                  (double)*(pSrc + (rc * nCols) + nCols - 1));
     }
-  } else if ((nRows > 6) && ((nCols - 1) <= 6)) {
-    SUF_Printf(" [");
+  } else if ((nRows > 7) && ((nCols - 1) <= 7)) {
+    SUF_Printf("[0] [");
     for (SLArrayIndex_t j = 0; j < (nCols - 1); j++) {
-      SUF_Printf("%lf, ", (double)*(pSrc + (0 * nCols) + j));
+      SUF_Printf("%.8lf, ", (double)*(pSrc + (0 * nCols) + j));
     }
-    SUF_Printf("%lf]\n", (double)*(pSrc + (0 * nCols) + nCols - 1));
-    SUF_Printf(" [");
+    SUF_Printf("%.8lf]\n", (double)*(pSrc + (0 * nCols) + nCols - 1));
+    SUF_Printf("[1] [");
     for (SLArrayIndex_t j = 0; j < (nCols - 1); j++) {
-      SUF_Printf("%lf, ", (double)*(pSrc + (1 * nCols) + j));
+      SUF_Printf("%.8lf, ", (double)*(pSrc + (1 * nCols) + j));
     }
-    SUF_Printf("%lf]\n", (double)*(pSrc + (1 * nCols) + (nCols - 1)));
-    SUF_Printf(" [");
+    SUF_Printf("%.8lf]\n", (double)*(pSrc + (1 * nCols) + (nCols - 1)));
+    SUF_Printf("[2] [");
     for (SLArrayIndex_t j = 0; j < (nCols - 1); j++) {
-      SUF_Printf("%lf, ", (double)*(pSrc + (2 * nCols) + j));
+      SUF_Printf("%.8lf, ", (double)*(pSrc + (2 * nCols) + j));
     }
-    SUF_Printf("%lf]\n", (double)*(pSrc + (2 * nCols) + (nCols - 1)));
+    SUF_Printf("%.8lf]\n", (double)*(pSrc + (2 * nCols) + (nCols - 1)));
 
     SUF_Printf(" ...\n");
 
-    SUF_Printf(" [");
+    SUF_Printf("[%d] [", (nRows - 3));
     for (SLArrayIndex_t j = 0; j < (nCols - 1); j++) {
-      SUF_Printf("%lf, ", (double)*(pSrc + ((nRows - 3) * nCols) + j));
+      SUF_Printf("%.8lf, ", (double)*(pSrc + ((nRows - 3) * nCols) + j));
     }
-    SUF_Printf("%lf]\n", (double)*(pSrc + ((nRows - 3) * nCols) + (nCols - 1)));
-    SUF_Printf(" [");
+    SUF_Printf("%.8lf]\n", (double)*(pSrc + ((nRows - 3) * nCols) + (nCols - 1)));
+    SUF_Printf("[%d] [", (nRows - 2));
     for (SLArrayIndex_t j = 0; j < (nCols - 1); j++) {
-      SUF_Printf("%lf, ", (double)*(pSrc + ((nRows - 2) * nCols) + j));
+      SUF_Printf("%.8lf, ", (double)*(pSrc + ((nRows - 2) * nCols) + j));
     }
-    SUF_Printf("%lf]\n", (double)*(pSrc + ((nRows - 2) * nCols) + (nCols - 1)));
-    SUF_Printf(" [");
+    SUF_Printf("%.8lf]\n", (double)*(pSrc + ((nRows - 2) * nCols) + (nCols - 1)));
+    SUF_Printf("[%d] [", (nRows - 1));
     for (SLArrayIndex_t j = 0; j < (nCols - 1); j++) {
-      SUF_Printf("%lf, ", (double)*(pSrc + ((nRows - 1) * nCols) + j));
+      SUF_Printf("%.8lf, ", (double)*(pSrc + ((nRows - 1) * nCols) + j));
     }
-    SUF_Printf("%lf]\n", (double)*(pSrc + ((nRows - 1) * nCols) + (nCols - 1)));
+    SUF_Printf("%.8lf]\n", (double)*(pSrc + ((nRows - 1) * nCols) + (nCols - 1)));
   } else {
     for (SLArrayIndex_t i = 0; i < nRows; i++) {
-      SUF_Printf(" [");
+      SUF_Printf("[%d] [", i);
       for (SLArrayIndex_t j = 0; j < (nCols - 1); j++) {
-        SUF_Printf("%lf, ", (double)*pSrc++);
+        SUF_Printf("%.8lf, ", (double)*pSrc++);
       }
-      SUF_Printf("%lf]\n", (double)*pSrc++);
+      SUF_Printf("%.8lf]\n", (double)*pSrc++);
     }
   }
   SUF_Printf("\n");
@@ -380,9 +414,9 @@ void SIGLIB_FUNC_DECL SUF_PrintRectangular(const SLComplexRect_s Src)
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SUF_PrintIIRCoefficients(const SLData_t* pIIRCoeffs, SLArrayIndex_t NumberOfBiquads)
+void SIGLIB_FUNC_DECL SUF_PrintIIRCoefficients(const SLData_t* pIIRCoeffs, SLArrayIndex_t numberOfBiquads)
 {
-  for (SLArrayIndex_t i = 0; i < NumberOfBiquads; i++) {
+  for (SLArrayIndex_t i = 0; i < numberOfBiquads; i++) {
     SUF_Printf("%le, %le, %le, %le, %le\n", (double)*(pIIRCoeffs + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)),
                (double)*(pIIRCoeffs + 1 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)), (double)*(pIIRCoeffs + 2 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)),
                (double)*(pIIRCoeffs + 3 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)), (double)*(pIIRCoeffs + 4 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)));
@@ -429,7 +463,7 @@ void SIGLIB_FUNC_DECL SUF_PrintCount(const char* String)
 void SIGLIB_FUNC_DECL SUF_PrintHigher(const SLData_t src, const SLData_t threshold, const char* string)
 {
   if (src > threshold) {
-    printf("Over threshold: %s: %lf\n", string, (double)src);
+    printf("Over threshold: %s: %.8lf\n", string, (double)src);
   }
 }    // End of SUF_PrintHigher()
 
@@ -453,7 +487,7 @@ void SIGLIB_FUNC_DECL SUF_PrintHigher(const SLData_t src, const SLData_t thresho
 void SIGLIB_FUNC_DECL SUF_PrintLower(const SLData_t src, const SLData_t threshold, const char* string)
 {
   if (src < threshold) {
-    printf("Under threshold: %s: %lf\n", string, (double)src);
+    printf("Under threshold: %s: %.8lf\n", string, (double)src);
   }
 }    // End of SUF_PrintLower()
 
@@ -585,7 +619,7 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintArray(const SLData_t* pSrc, const SLArr
 
   for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
     //      SUF_Fprintf (fp_LogFile, "[%ld] = %le\n", (long)i, (double)*pSrc++);
-    SUF_Fprintf(fp_LogFile, "[%ld] = %1.6lf\n", (long)i, (double)*pSrc++);
+    SUF_Fprintf(fp_LogFile, "[%ld] = %.8lf\n", (long)i, (double)*pSrc++);
   }
   SUF_Fprintf(fp_LogFile, "\n");
   SUF_Fclose(fp_LogFile);
@@ -663,7 +697,7 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexArray(const SLData_t* pSrcReal, 
       }
       //          SUF_Fprintf (fp_LogFile, "%le + j%le\n", (double)*pSrcReal++,
       //          (double)*pSrcImag++);
-      SUF_Fprintf(fp_LogFile, "%1.6lf + j%1.6lf\n", (double)*pSrcReal++, (double)*pSrcImag++);
+      SUF_Fprintf(fp_LogFile, "%.8lf + j%.8lf\n", (double)*pSrcReal++, (double)*pSrcImag++);
     } else {
       SUF_Fprintf(fp_LogFile, "[%ld] = ", (long)i);
       if (*pSrcReal >= SIGLIB_ZERO) {
@@ -671,7 +705,7 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexArray(const SLData_t* pSrcReal, 
       }
       //          SUF_Fprintf (fp_LogFile, "%le - j%le\n", (double)*pSrcReal++,
       //          (double)-*pSrcImag++);
-      SUF_Fprintf(fp_LogFile, "%1.6lf - j%1.6lf\n", (double)*pSrcReal++, (double)-*pSrcImag++);
+      SUF_Fprintf(fp_LogFile, "%.8lf - j%.8lf\n", (double)*pSrcReal++, (double)-*pSrcImag++);
     }
   }
   SUF_Fprintf(fp_LogFile, "\n");
@@ -712,14 +746,14 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplex(const SLData_t real, const SLDa
     }
     //          SUF_Fprintf (fp_LogFile, "%le + j%le\n", (double)real,
     //          (double)imag);
-    SUF_Fprintf(fp_LogFile, "%1.6lf + j%1.6lf\n", (double)real, (double)imag);
+    SUF_Fprintf(fp_LogFile, "%.8lf + j%.8lf\n", (double)real, (double)imag);
   } else {
     if (real >= SIGLIB_ZERO) {
       SUF_Fprintf(fp_LogFile, " ");
     }
     //          SUF_Fprintf (fp_LogFile, "%le - j%le\n", (double)real,
     //          (double)-imag);
-    SUF_Fprintf(fp_LogFile, "%1.6lf - j%1.6lf\n", (double)real, (double)-imag);
+    SUF_Fprintf(fp_LogFile, "%.8lf - j%.8lf\n", (double)real, (double)-imag);
   }
   SUF_Fclose(fp_LogFile);
 
@@ -757,14 +791,14 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexRect(const SLComplexRect_s Rect)
     }
     //          SUF_Fprintf (fp_LogFile, "%le + j%le\n", (double)Rect.real,
     //          (double)Rect.imag);
-    SUF_Fprintf(fp_LogFile, "%1.6lf + j%1.6lf\n", (double)Rect.real, (double)Rect.imag);
+    SUF_Fprintf(fp_LogFile, "%.8lf + j%.8lf\n", (double)Rect.real, (double)Rect.imag);
   } else {
     if (Rect.real >= SIGLIB_ZERO) {
       SUF_Fprintf(fp_LogFile, " ");
     }
     //          SUF_Fprintf (fp_LogFile, "%le - j%le\n", (double)Rect.real,
     //          (double)-Rect.imag);
-    SUF_Fprintf(fp_LogFile, "%1.6lf - j%1.6lf\n", (double)Rect.real, (double)-Rect.imag);
+    SUF_Fprintf(fp_LogFile, "%.8lf - j%.8lf\n", (double)Rect.real, (double)-Rect.imag);
   }
   SUF_Fclose(fp_LogFile);
 
@@ -802,14 +836,14 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintComplexPolar(const SLComplexPolar_s Pol
     }
     //          SUF_Fprintf (fp_LogFile, "%le + j%le\n", (double)Polar.magn,
     //          (double)Polar.angle);
-    SUF_Fprintf(fp_LogFile, "%1.6lf + j%1.6lf\n", (double)Polar.magn, (double)Polar.angle);
+    SUF_Fprintf(fp_LogFile, "%.8lf + j%.8lf\n", (double)Polar.magn, (double)Polar.angle);
   } else {
     if (Polar.magn >= SIGLIB_ZERO) {
       SUF_Fprintf(fp_LogFile, " ");
     }
     //          SUF_Fprintf (fp_LogFile, "%le - j%le\n", (double)Polar.magn,
     //          (double)-Polar.angle);
-    SUF_Fprintf(fp_LogFile, "%1.6lf - j%1.6lf\n", (double)Polar.magn, (double)-Polar.angle);
+    SUF_Fprintf(fp_LogFile, "%.8lf - j%.8lf\n", (double)Polar.magn, (double)-Polar.angle);
   }
   SUF_Fclose(fp_LogFile);
 
@@ -845,48 +879,48 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintMatrix(const SLData_t* pSrc, const SLAr
   }
 
   if ((nRows > 6) && (nCols > 6)) {
-    SUF_Fprintf(fp_LogFile, " [%lf %lf %lf ... %lf %lf %lf]\n", (double)*(pSrc + (0 * nCols) + 0), (double)*(pSrc + (0 * nCols) + 1),
+    SUF_Fprintf(fp_LogFile, " [%.8lf %.8lf %.8lf ... %.8lf %.8lf %.8lf]\n", (double)*(pSrc + (0 * nCols) + 0), (double)*(pSrc + (0 * nCols) + 1),
                 (double)*(pSrc + (0 * nCols) + 2), (double)*(pSrc + (0 * nCols) + nCols - 3), (double)*(pSrc + (0 * nCols) + nCols - 2),
                 (double)*(pSrc + (0 * nCols) + nCols - 1));
-    SUF_Fprintf(fp_LogFile, " [%lf %lf %lf ... %lf %lf %lf]\n", (double)*(pSrc + (1 * nCols) + 0), (double)*(pSrc + (1 * nCols) + 1),
+    SUF_Fprintf(fp_LogFile, " [%.8lf %.8lf %.8lf ... %.8lf %.8lf %.8lf]\n", (double)*(pSrc + (1 * nCols) + 0), (double)*(pSrc + (1 * nCols) + 1),
                 (double)*(pSrc + (1 * nCols) + 2), (double)*(pSrc + (1 * nCols) + nCols - 3), (double)*(pSrc + (1 * nCols) + nCols - 2),
                 (double)*(pSrc + (1 * nCols) + nCols - 1));
-    SUF_Fprintf(fp_LogFile, " [%lf %lf %lf ... %lf %lf %lf]\n", (double)*(pSrc + (2 * nCols) + 0), (double)*(pSrc + (2 * nCols) + 1),
+    SUF_Fprintf(fp_LogFile, " [%.8lf %.8lf %.8lf ... %.8lf %.8lf %.8lf]\n", (double)*(pSrc + (2 * nCols) + 0), (double)*(pSrc + (2 * nCols) + 1),
                 (double)*(pSrc + (2 * nCols) + 2), (double)*(pSrc + (2 * nCols) + nCols - 3), (double)*(pSrc + (2 * nCols) + nCols - 2),
                 (double)*(pSrc + (2 * nCols) + nCols - 1));
     SUF_Fprintf(fp_LogFile, " ...\n");
-    SUF_Fprintf(fp_LogFile, " [%lf %lf %lf ... %lf %lf %lf]\n", (double)*(pSrc + ((nRows - 3) * nCols) + 0),
+    SUF_Fprintf(fp_LogFile, " [%.8lf %.8lf %.8lf ... %.8lf %.8lf %.8lf]\n", (double)*(pSrc + ((nRows - 3) * nCols) + 0),
                 (double)*(pSrc + ((nRows - 3) * nCols) + 1), (double)*(pSrc + ((nRows - 3) * nCols) + 2),
                 (double)*(pSrc + ((nRows - 3) * nCols) + nCols - 3), (double)*(pSrc + ((nRows - 3) * nCols) + nCols - 2),
                 (double)*(pSrc + ((nRows - 3) * nCols) + nCols - 1));
-    SUF_Fprintf(fp_LogFile, " [%lf %lf %lf ... %lf %lf %lf]\n", (double)*(pSrc + ((nRows - 2) * nCols) + 0),
+    SUF_Fprintf(fp_LogFile, " [%.8lf %.8lf %.8lf ... %.8lf %.8lf %.8lf]\n", (double)*(pSrc + ((nRows - 2) * nCols) + 0),
                 (double)*(pSrc + ((nRows - 2) * nCols) + 1), (double)*(pSrc + ((nRows - 2) * nCols) + 2),
                 (double)*(pSrc + ((nRows - 2) * nCols) + nCols - 3), (double)*(pSrc + ((nRows - 2) * nCols) + nCols - 2),
                 (double)*(pSrc + ((nRows - 2) * nCols) + nCols - 1));
-    SUF_Fprintf(fp_LogFile, " [%lf %lf %lf ... %lf %lf %lf]\n", (double)*(pSrc + ((nRows - 1) * nCols) + 0),
+    SUF_Fprintf(fp_LogFile, " [%.8lf %.8lf %.8lf ... %.8lf %.8lf %.8lf]\n", (double)*(pSrc + ((nRows - 1) * nCols) + 0),
                 (double)*(pSrc + ((nRows - 1) * nCols) + 1), (double)*(pSrc + ((nRows - 1) * nCols) + 2),
                 (double)*(pSrc + ((nRows - 1) * nCols) + nCols - 3), (double)*(pSrc + ((nRows - 1) * nCols) + nCols - 2),
                 (double)*(pSrc + ((nRows - 1) * nCols) + nCols - 1));
   } else if ((nRows < 6) && (nCols > 6)) {
     for (SLArrayIndex_t rc = 0; rc < nRows; rc++) {
-      SUF_Fprintf(fp_LogFile, " [%lf %lf %lf ... %lf %lf %lf]\n", (double)*(pSrc + (rc * nCols) + 0), (double)*(pSrc + (rc * nCols) + 1),
-                  (double)*(pSrc + (rc * nCols) + 2), (double)*(pSrc + (rc * nCols) + nCols - 3), (double)*(pSrc + (rc * nCols) + nCols - 2),
-                  (double)*(pSrc + (rc * nCols) + nCols - 1));
+      SUF_Fprintf(fp_LogFile, " [%.8lf %.8lf %.8lf ... %.8lf %.8lf %.8lf]\n", (double)*(pSrc + (rc * nCols) + 0),
+                  (double)*(pSrc + (rc * nCols) + 1), (double)*(pSrc + (rc * nCols) + 2), (double)*(pSrc + (rc * nCols) + nCols - 3),
+                  (double)*(pSrc + (rc * nCols) + nCols - 2), (double)*(pSrc + (rc * nCols) + nCols - 1));
     }
   } else if ((nRows > 6) && (nCols < 6)) {
     SUF_Fprintf(fp_LogFile, " [");
     for (SLArrayIndex_t j = 0; j < nCols; j++) {
-      SUF_Fprintf(fp_LogFile, "%lf, ", (double)*(pSrc + (0 * nCols) + j));
+      SUF_Fprintf(fp_LogFile, "%.8lf, ", (double)*(pSrc + (0 * nCols) + j));
     }
     SUF_Fprintf(fp_LogFile, "]\n");
     SUF_Fprintf(fp_LogFile, " [");
     for (SLArrayIndex_t j = 0; j < nCols; j++) {
-      SUF_Fprintf(fp_LogFile, "%lf, ", (double)*(pSrc + (1 * nCols) + j));
+      SUF_Fprintf(fp_LogFile, "%.8lf, ", (double)*(pSrc + (1 * nCols) + j));
     }
     SUF_Fprintf(fp_LogFile, "]\n");
     SUF_Fprintf(fp_LogFile, " [");
     for (SLArrayIndex_t j = 0; j < nCols; j++) {
-      SUF_Fprintf(fp_LogFile, "%lf, ", (double)*(pSrc + (2 * nCols) + j));
+      SUF_Fprintf(fp_LogFile, "%.8lf, ", (double)*(pSrc + (2 * nCols) + j));
     }
     SUF_Fprintf(fp_LogFile, "]\n");
 
@@ -894,24 +928,24 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintMatrix(const SLData_t* pSrc, const SLAr
 
     SUF_Fprintf(fp_LogFile, " [");
     for (SLArrayIndex_t j = 0; j < nCols; j++) {
-      SUF_Fprintf(fp_LogFile, "%lf, ", (double)*(pSrc + ((nRows - 3) * nCols) + j));
+      SUF_Fprintf(fp_LogFile, "%.8lf, ", (double)*(pSrc + ((nRows - 3) * nCols) + j));
     }
     SUF_Fprintf(fp_LogFile, "]\n");
     SUF_Fprintf(fp_LogFile, " [");
     for (SLArrayIndex_t j = 0; j < nCols; j++) {
-      SUF_Fprintf(fp_LogFile, "%lf, ", (double)*(pSrc + ((nRows - 2) * nCols) + j));
+      SUF_Fprintf(fp_LogFile, "%.8lf, ", (double)*(pSrc + ((nRows - 2) * nCols) + j));
     }
     SUF_Fprintf(fp_LogFile, "]\n");
     SUF_Fprintf(fp_LogFile, " [");
     for (SLArrayIndex_t j = 0; j < nCols; j++) {
-      SUF_Fprintf(fp_LogFile, "%lf, ", (double)*(pSrc + ((nRows - 1) * nCols) + j));
+      SUF_Fprintf(fp_LogFile, "%.8lf, ", (double)*(pSrc + ((nRows - 1) * nCols) + j));
     }
     SUF_Fprintf(fp_LogFile, "]\n");
   } else {
     for (SLArrayIndex_t i = 0; i < nRows; i++) {
       SUF_Fprintf(fp_LogFile, " [");
       for (SLArrayIndex_t j = 0; j < nCols; j++) {
-        SUF_Fprintf(fp_LogFile, "%lf ", (double)*pSrc++);
+        SUF_Fprintf(fp_LogFile, "%.8lf ", (double)*pSrc++);
       }
       SUF_Fprintf(fp_LogFile, "]\n");
     }
@@ -1003,7 +1037,7 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintRectangular(const SLComplexRect_s Src)
  *
  ********************************************************/
 
-SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintIIRCoefficients(const SLData_t* pIIRCoeffs, SLArrayIndex_t NumberOfBiquads)
+SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintIIRCoefficients(const SLData_t* pIIRCoeffs, SLArrayIndex_t numberOfBiquads)
 {
   FILE* fp_LogFile;
 #  if SIGLIB_FILE_OPEN_SECURE
@@ -1015,7 +1049,7 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintIIRCoefficients(const SLData_t* pIIRCoe
     return (SIGLIB_FILE_ERROR);
   }
 
-  for (SLArrayIndex_t i = 0; i < NumberOfBiquads; i++) {
+  for (SLArrayIndex_t i = 0; i < numberOfBiquads; i++) {
     SUF_Fprintf(fp_LogFile, "%le, %le, %le, %le, %le\n", (double)*(pIIRCoeffs + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)),
                 (double)*(pIIRCoeffs + 1 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)), (double)*(pIIRCoeffs + 2 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)),
                 (double)*(pIIRCoeffs + 3 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)), (double)*(pIIRCoeffs + 4 + (i * SIGLIB_IIR_COEFFS_PER_BIQUAD)));
@@ -1089,7 +1123,7 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintHigher(const SLData_t src, const SLData
       return (SIGLIB_FILE_ERROR);
     }
 
-    SUF_Fprintf(fp_LogFile, "Over threshold: %s: %lf\n", string, (double)src);
+    SUF_Fprintf(fp_LogFile, "Over threshold: %s: %.8lf\n", string, (double)src);
     SUF_Fclose(fp_LogFile);
   }
   return (SIGLIB_NO_ERROR);
@@ -1126,7 +1160,7 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintLower(const SLData_t src, const SLData_
       return (SIGLIB_FILE_ERROR);
     }
 
-    SUF_Fprintf(fp_LogFile, "Under threshold: %s: %lf\n", string, (double)src);
+    SUF_Fprintf(fp_LogFile, "Under threshold: %s: %.8lf\n", string, (double)src);
     SUF_Fclose(fp_LogFile);
   }
   return (SIGLIB_NO_ERROR);

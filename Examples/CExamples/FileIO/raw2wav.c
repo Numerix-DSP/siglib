@@ -1,4 +1,4 @@
-// SigLib - bin2wav file function convert and display program
+// SigLib - raw2wav file function convert and display program
 // Copyright (c) 2024 Delta Numerix All rights reserved.
 
 #include <math.h>
@@ -10,7 +10,10 @@
 
 #define PLOT_DATA 0    // Set to '1' to display waveform, '0' to only convert
 
+#define WORD_LENGTH 16    // Word length: Options - 32, 24, 16, 8
 #define SAMPLE_RATE_HZ 16000
+#define RAW_FILE_EXTENSION ".raw"
+// #define RAW_FILE_EXTENSION  ".pcm"
 
 char inputFileName[256];
 char outputFileName[256];
@@ -20,7 +23,7 @@ SLWavFileInfo_s wavInfo;
 int main(int argc, char* argv[])
 {
   if (argc != 2) {
-    printf("\nUsage:\nbin2wav  inputFileName (no extension)\n\n");
+    printf("\nUsage:\nraw2wav  inputFileName (no extension)\n\n");
     exit(-1);    // Exit - usage error
   }
 
@@ -31,7 +34,7 @@ int main(int argc, char* argv[])
   FILE* fpOutputFile;
 
   strcpy(inputFileName, argv[1]);
-  strcat(inputFileName, ".bin");
+  strcat(inputFileName, RAW_FILE_EXTENSION);
 
   strcpy(outputFileName, argv[1]);
   strcat(outputFileName, ".wav");
@@ -39,7 +42,7 @@ int main(int argc, char* argv[])
   printf("Source file = %s\n", inputFileName);
   printf("Destination file = %s\n", outputFileName);
 
-  SLArrayIndex_t fileLength = SUF_BinFileLength(inputFileName);
+  SLArrayIndex_t fileLength = SUF_RawFileLength(inputFileName, WORD_LENGTH);
 
   SLData_t* pDataArray = SUF_VectorArrayAllocate(fileLength);
 
@@ -62,12 +65,13 @@ int main(int argc, char* argv[])
   }
 #endif
 
-  SLArrayIndex_t inputSampleCount = SUF_BinReadFile(pDataArray,              // Input data array pointer
+  SLArrayIndex_t inputSampleCount = SUF_RawReadFile(pDataArray,              // Input data array pointer
                                                     inputFileName,           // File name
                                                     SIGLIB_LITTLE_ENDIAN,    // Data endian mode
+                                                    WORD_LENGTH,             // Word length
                                                     fileLength);             // Maximum sample length
 
-  wavInfo = SUF_WavSetInfo(SAMPLE_RATE_HZ, inputSampleCount, 1, 16, 2, 1);
+  wavInfo = SUF_WavSetInfo(SAMPLE_RATE_HZ, inputSampleCount, 1, WORD_LENGTH, 2, 1);
 
   printf("\nSample Count = %d\n", inputSampleCount);
 

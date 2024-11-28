@@ -131,28 +131,28 @@ int main(void)
            pMatrixa,         // Pointer to destination matrix
            MATRIXA_ROWS,     // Number of rows
            MATRIXA_COLS);    // Number of columns
-  SMX_Add(pMatrixa,          // Pointer to source matrix 1
-          pMatrixb,          // Pointer to source matrix 2
-          pMatrixc,          // Pointer to destination matrix
-          MATRIXA_ROWS,      // Number of rows
-          MATRIXA_COLS);     // Number of columns
+  SMX_Add2(pMatrixa,         // Pointer to source matrix 1
+           pMatrixb,         // Pointer to source matrix 2
+           pMatrixc,         // Pointer to destination matrix
+           MATRIXA_ROWS,     // Number of rows
+           MATRIXA_COLS);    // Number of columns
   printf("\nA + B matrix:\n");
   SUF_PrintMatrix(pMatrixc, MATRIXA_ROWS, MATRIXA_COLS);
 
   // Restore matrix A and subtract from matrix B
-  SMX_Copy(pMatrixc,             // Pointer to source matrix
-           pMatrixa,             // Pointer to destination matrix
-           MATRIXA_ROWS,         // Number of rows
-           MATRIXA_COLS);        // Number of columns
-  SMX_Subtract(pMatrixa,         // Pointer to source matrix 1
-               pMatrixb,         // Pointer to source matrix 2
-               pMatrixc,         // Pointer to destination matrix
-               MATRIXA_ROWS,     // Number of rows
-               MATRIXA_COLS);    // Number of columns
-  SMX_Copy(pMatrixc,             // Pointer to source matrix
-           pMatrixa,             // Pointer to destination matrix
-           MATRIXA_ROWS,         // Number of rows
-           MATRIXA_COLS);        // Number of columns
+  SMX_Copy(pMatrixc,              // Pointer to source matrix
+           pMatrixa,              // Pointer to destination matrix
+           MATRIXA_ROWS,          // Number of rows
+           MATRIXA_COLS);         // Number of columns
+  SMX_Subtract2(pMatrixa,         // Pointer to source matrix 1
+                pMatrixb,         // Pointer to source matrix 2
+                pMatrixc,         // Pointer to destination matrix
+                MATRIXA_ROWS,     // Number of rows
+                MATRIXA_COLS);    // Number of columns
+  SMX_Copy(pMatrixc,              // Pointer to source matrix
+           pMatrixa,              // Pointer to destination matrix
+           MATRIXA_ROWS,          // Number of rows
+           MATRIXA_COLS);         // Number of columns
 
   printf("\nPlease hit any key to continue . . .\n");
   getchar();
@@ -162,12 +162,12 @@ int main(void)
   SUF_PrintMatrix(pMatrixb, MATRIXB_ROWS, MATRIXB_COLS);
 
   // MultpImagDataly matrix A by matrix B
-  SMX_Multiply(pMatrixa,         // Pointer to source matrix 1
-               pMatrixb,         // Pointer to source matrix 2
-               pMatrixc,         // Pointer to destination matrix
-               MATRIXA_ROWS,     // Number of rows matrix 1
-               MATRIXA_COLS,     // Number of columns matrix 1
-               MATRIXB_COLS);    // Number of columns matrix 2
+  SMX_Multiply2(pMatrixa,         // Pointer to source matrix 1
+                pMatrixb,         // Pointer to source matrix 2
+                pMatrixc,         // Pointer to destination matrix
+                MATRIXA_ROWS,     // Number of rows matrix 1
+                MATRIXA_COLS,     // Number of columns matrix 1
+                MATRIXB_COLS);    // Number of columns matrix 2
   printf("\nA * B matrix:\n");
   SUF_PrintMatrix(pMatrixc, MATRIXC_ROWS, MATRIXC_COLS);
 
@@ -215,12 +215,12 @@ int main(void)
   printf("   -0.6842    0.5789    0.2105\n\n");
 
   // MultpImagDataly matrix D by the inverse of matrix D
-  SMX_Multiply(pMatrixd,             // Pointer to source matrix 1
-               pMatrixd_inv,         // Pointer to source matrix 2
-               pMatrixi,             // Pointer to destination matrix
-               MATRIXD_ROWS,         // Number of rows matrix 1
-               MATRIXD_COLS,         // Number of columns matrix 1
-               MATRIXD_INV_COLS);    // Number of columns matrix 2
+  SMX_Multiply2(pMatrixd,             // Pointer to source matrix 1
+                pMatrixd_inv,         // Pointer to source matrix 2
+                pMatrixi,             // Pointer to destination matrix
+                MATRIXD_ROWS,         // Number of rows matrix 1
+                MATRIXD_COLS,         // Number of columns matrix 1
+                MATRIXD_INV_COLS);    // Number of columns matrix 2
 
   // Threshold results to zero out values close to zero
   SDA_Threshold(pMatrixi,                     // Pointer to source matrix
@@ -242,12 +242,28 @@ int main(void)
   printf("\nThe determinant of matrix D should be: 19\n");
 
   // Create identity matrix (I)
-  SMX_CreateIdentity(pMatrixi,         // Pointer to destination matrix
-                     MATRIXI_ROWS);    // Number of rows and columns in square matrix
+  SMX_Identity(pMatrixi,         // Pointer to destination matrix
+               MATRIXI_ROWS);    // Number of rows and columns in square matrix
 
   // Print identity matrix (I)
   printf("\nIdentity matrix (I):\n");
   SUF_PrintMatrix(pMatrixi, MATRIXI_ROWS, MATRIXI_COLS);
+
+  // Create an eye matrix
+  SMX_Eye(pMatrixa,         // Pointer to destinaion matrix
+          MATRIXA_ROWS,     // Number of rows
+          MATRIXA_COLS);    // Number of columns
+
+  printf("Source matrix A Eye:\n");
+  SUF_PrintMatrix(pMatrixa, MATRIXA_ROWS, MATRIXA_COLS);
+
+  // Create an eye matrix
+  SMX_Eye(pMatrixb,         // Pointer to destinaion matrix
+          MATRIXB_ROWS,     // Number of rows
+          MATRIXB_COLS);    // Number of columns
+
+  printf("Source matrix B Eye:\n");
+  SUF_PrintMatrix(pMatrixb, MATRIXB_ROWS, MATRIXB_COLS);
 
   printf("\nSource matrix = \n\t%lf, %lf\n\t%lf, %lf\n", SrcReal2x2[0], SrcReal2x2[1], SrcReal2x2[2], SrcReal2x2[3]);
   SMX_Inverse2x2(SrcReal2x2, DstReal2x2);

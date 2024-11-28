@@ -48,22 +48,22 @@ int main(void)
   SLArrayIndex_t filterIndex;
   SLArrayIndex_t DelayIndex;
 
-  SLData_t* pFilterTaps = SUF_VectorArrayAllocate(FILTER_LENGTH);
+  SLData_t* pFilterCoefficients = SUF_VectorArrayAllocate(FILTER_LENGTH);
   SLData_t* pFilterState = SUF_VectorArrayAllocate(FILTER_LENGTH);
   SLData_t* pDelay = SUF_VectorArrayAllocate(FILTER_GROUP_DELAY);
   SLData_t* pTempDelay = SUF_VectorArrayAllocate(FILTER_GROUP_DELAY);
 
-  SIF_HilbertTransformerFirFilter(pFilterTaps,       // Pointer to filter coefficients
-                                  FILTER_LENGTH);    // Filter length
-  SIF_Fir(pFilterState,                              // Pointer to filter state array
-          &filterIndex,                              // Pointer to filter index register
-          FILTER_LENGTH);                            // Filter length
-  SIF_FixedDelay(pDelay,                             // Pointer to delay state array
-                 &DelayIndex,                        // Pointer to delay state index
-                 FILTER_GROUP_DELAY);                // Delay length
+  SIF_HilbertTransformerFirFilter(pFilterCoefficients,    // Pointer to filter coefficients
+                                  FILTER_LENGTH);         // Filter length
+  SIF_Fir(pFilterState,                                   // Pointer to filter state array
+          &filterIndex,                                   // Pointer to filter index register
+          FILTER_LENGTH);                                 // Filter length
+  SIF_FixedDelay(pDelay,                                  // Pointer to delay state array
+                 &DelayIndex,                             // Pointer to delay state index
+                 FILTER_GROUP_DELAY);                     // Delay length
 
   gpc_plot_2d(h2DPlot,                        // Graph handle
-              pFilterTaps,                    // Dataset
+              pFilterCoefficients,            // Dataset
               FILTER_LENGTH,                  // Dataset length
               "Filter Coefficients",          // Dataset title
               SIGLIB_ZERO,                    // Minimum X value
@@ -138,11 +138,11 @@ int main(void)
   SDA_Fir(pData,    // Input array to be filtered
           pRealData,
           // Filtered output array
-          pFilterState,      // Pointer to filter state array
-          pFilterTaps,       // Pointer to filter coefficients
-          &filterIndex,      // Pointer to filter index register
-          FILTER_LENGTH,     // Filter length
-          SAMPLE_LENGTH);    // Dataset length
+          pFilterState,           // Pointer to filter state array
+          pFilterCoefficients,    // Pointer to filter coefficients
+          &filterIndex,           // Pointer to filter index register
+          FILTER_LENGTH,          // Filter length
+          SAMPLE_LENGTH);         // Dataset length
 
   SDA_ShortFixedDelay(pData,                 // Pointer to source array
                       pData,                 // Pointer to destination array

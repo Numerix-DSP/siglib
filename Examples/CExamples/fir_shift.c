@@ -77,16 +77,86 @@ int main(void)
   gpc_plot_2d(h2DPlot,                            // Graph handle
               pMagnitude,                         // Dataset
               FFT_LENGTH >> 1,                    // Dataset length
-              "Frequency Response",               // Dataset title
+              "Low-pass Filter",                  // Dataset title
               SIGLIB_ZERO,                        // Minimum X value
               (double)((FFT_LENGTH >> 1) - 1),    // Maximum X value
               "lines",                            // Graph type
               "blue",                             // Colour
               GPC_NEW);                           // New graph
+
+  // Reflect frequency response around the -6dB point
+  SDA_Zeros(pReal, FFT_LENGTH);
+  SDA_FirLpHpShiftReflectAroundMinus6dBPoint(pFilterCoeffs,     // Pointer to source filter coefficients
+                                             pReal,             // Pointer to destination shifted coefficients
+                                             FILTER_LENGTH);    // Filter length
+                                                                // SUF_PrintArray(pReal, FILTER_LENGTH);
+
+  // Perform real FFT
+  SDA_Rfft(pReal,                      // Pointer to real array
+           pImag,                      // Pointer to imaginary array
+           pFFTCoeffs,                 // Pointer to FFT coefficients
+           SIGLIB_BIT_REV_STANDARD,    // Bit reverse mode flag / Pointer to bit
+                                       // reverse address table
+           FFT_LENGTH,                 // FFT length
+           LOG2_FFT_LENGTH);           // log2 FFT length
+
+  // Calculate real magnitude from complex
+  SDA_Magnitude(pReal,          // Pointer to real source array
+                pImag,          // Pointer to imaginary source array
+                pMagnitude,     // Pointer to magnitude destination array
+                FFT_LENGTH);    // Dataset length
+  SDA_20Log10(pMagnitude,       // Pointer to source array
+              pMagnitude,       // Pointer to destination array
+              FFT_LENGTH);      // Dataset length
+
+  gpc_plot_2d(h2DPlot,                              // Graph handle
+              pMagnitude,                           // Dataset
+              FFT_LENGTH >> 1,                      // Dataset length
+              "HPF Reflected Aournd -6dB Point",    // Dataset title
+              SIGLIB_ZERO,                          // Minimum X value
+              (double)((FFT_LENGTH >> 1) - 1),      // Maximum X value
+              "lines",                              // Graph type
+              "red",                                // Colour
+              GPC_ADD);                             // New graph
+
+  // Shift centre frequency of filter to Nyquist point
+  SDA_Zeros(pReal, FFT_LENGTH);
+  SDA_FirLpHpShift(pFilterCoeffs,     // Pointer to source filter coefficients
+                   pReal,             // Pointer to destination shifted coefficients
+                   FILTER_LENGTH);    // Filter length
+                                      // SUF_PrintArray(pReal, FILTER_LENGTH);
+
+  // Perform real FFT
+  SDA_Rfft(pReal,                      // Pointer to real array
+           pImag,                      // Pointer to imaginary array
+           pFFTCoeffs,                 // Pointer to FFT coefficients
+           SIGLIB_BIT_REV_STANDARD,    // Bit reverse mode flag / Pointer to bit
+                                       // reverse address table
+           FFT_LENGTH,                 // FFT length
+           LOG2_FFT_LENGTH);           // log2 FFT length
+
+  // Calculate real magnitude from complex
+  SDA_Magnitude(pReal,          // Pointer to real source array
+                pImag,          // Pointer to imaginary source array
+                pMagnitude,     // Pointer to magnitude destination array
+                FFT_LENGTH);    // Dataset length
+  SDA_20Log10(pMagnitude,       // Pointer to source array
+              pMagnitude,       // Pointer to destination array
+              FFT_LENGTH);      // Dataset length
+
+  gpc_plot_2d(h2DPlot,                                    // Graph handle
+              pMagnitude,                                 // Dataset
+              FFT_LENGTH >> 1,                            // Dataset length
+              "HPF Center Frequency Moved To Nyquist",    // Dataset title
+              SIGLIB_ZERO,                                // Minimum X value
+              (double)((FFT_LENGTH >> 1) - 1),            // Maximum X value
+              "lines",                                    // Graph type
+              "green",                                    // Colour
+              GPC_ADD);                                   // New graph
   printf("\nFrequency Response\nPlease hit <Carriage Return> to continue . . .");
   getchar();
 
-  // Shift centre frequency of filter
+  // Shift centre frequency of filter to band-pass filter
   SDA_Zeros(pReal, FFT_LENGTH);
   SDA_FirLpBpShift(pFilterCoeffs,     // Pointer to source filter coefficients
                    pReal,             // Pointer to destination shifted coefficients
@@ -115,44 +185,7 @@ int main(void)
   gpc_plot_2d(h2DPlot,                            // Graph handle
               pMagnitude,                         // Dataset
               FFT_LENGTH >> 1,                    // Dataset length
-              "Frequency Response",               // Dataset title
-              SIGLIB_ZERO,                        // Minimum X value
-              (double)((FFT_LENGTH >> 1) - 1),    // Maximum X value
-              "lines",                            // Graph type
-              "blue",                             // Colour
-              GPC_NEW);                           // New graph
-  printf("\nFrequency Response\nPlease hit <Carriage Return> to continue . . .");
-  getchar();
-
-  // Shift centre frequency of filter
-  SDA_Zeros(pReal, FFT_LENGTH);
-  SDA_FirLpHpShift(pFilterCoeffs,     // Pointer to source filter coefficients
-                   pReal,             // Pointer to destination shifted coefficients
-                   FILTER_LENGTH);    // Filter length
-                                      // SUF_PrintArray(pReal, FILTER_LENGTH);
-
-  // Perform real FFT
-  SDA_Rfft(pReal,                      // Pointer to real array
-           pImag,                      // Pointer to imaginary array
-           pFFTCoeffs,                 // Pointer to FFT coefficients
-           SIGLIB_BIT_REV_STANDARD,    // Bit reverse mode flag / Pointer to bit
-                                       // reverse address table
-           FFT_LENGTH,                 // FFT length
-           LOG2_FFT_LENGTH);           // log2 FFT length
-
-  // Calculate real magnitude from complex
-  SDA_Magnitude(pReal,          // Pointer to real source array
-                pImag,          // Pointer to imaginary source array
-                pMagnitude,     // Pointer to magnitude destination array
-                FFT_LENGTH);    // Dataset length
-  SDA_20Log10(pMagnitude,       // Pointer to source array
-              pMagnitude,       // Pointer to destination array
-              FFT_LENGTH);      // Dataset length
-
-  gpc_plot_2d(h2DPlot,                            // Graph handle
-              pMagnitude,                         // Dataset
-              FFT_LENGTH >> 1,                    // Dataset length
-              "Frequency Response",               // Dataset title
+              "Band-Pass Filter",                 // Dataset title
               SIGLIB_ZERO,                        // Minimum X value
               (double)((FFT_LENGTH >> 1) - 1),    // Maximum X value
               "lines",                            // Graph type

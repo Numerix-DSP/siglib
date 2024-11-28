@@ -434,5 +434,23 @@ int main(void)
          "Matrix):\n");
   SUF_PrintMatrix((SLData_t*)CHOLESKY_DST_MATRIX, CHOLESKY_NUMBER_OF_ROWS_AND_COLUMNS, CHOLESKY_NUMBER_OF_ROWS_AND_COLUMNS);
 
+#define COMPANION_SOURCE_ARRAY_LENGTH 6
+#define COMPANION_MATRIX_DIMENSION (COMPANION_SOURCE_ARRAY_LENGTH - 1)
+  SLData_t x[] = {2, 3, 4, 5, 6, 7};
+  // The companion matrix will be (n-1) x (n-1)
+  SLData_t C[COMPANION_MATRIX_DIMENSION * COMPANION_MATRIX_DIMENSION];
+  SMX_CompanionMatrix(x, C, COMPANION_SOURCE_ARRAY_LENGTH);
+
+  printf("Companion Matrix:\n");
+  SUF_PrintMatrix(C, COMPANION_MATRIX_DIMENSION, COMPANION_MATRIX_DIMENSION);
+
+  // The transposed companion matrix will be (n-1) x (n-1)
+  SLData_t C_T[COMPANION_MATRIX_DIMENSION * COMPANION_MATRIX_DIMENSION];
+
+  SMX_CompanionMatrixTransposed(x, C_T, COMPANION_SOURCE_ARRAY_LENGTH);
+
+  printf("Transposed Companion Matrix:\n");
+  SUF_PrintMatrix(C_T, COMPANION_MATRIX_DIMENSION, COMPANION_MATRIX_DIMENSION);
+
   return (0);
 }
