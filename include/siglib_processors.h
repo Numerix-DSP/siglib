@@ -308,7 +308,7 @@ typedef double SLFloat64_t;           // 64 bit floating point values
 #      endif
 
 #      ifndef SIGLIB_ARRAY_OR_PTR
-#        define SIGLIB_ARRAY_OR_PTR SIGLIB_ARRAY_ACCESS    // Use arrays for memory accesses
+#        define SIGLIB_ARRAY_OR_PTR SIGLIB_POINTER_ACCESS    // Use arrays for memory accesses
 #      endif
 #      define SIGLIB_ARRAYS_ALIGNED 1    // Functionality currently only supported by TMS320C6000 compiler
 

@@ -594,7 +594,7 @@ void SIGLIB_FUNC_DECL SDA_Window16(const SLInt16_t* SIGLIB_PTR_DECL pSrc, SLInt1
 #endif
 
   for (SLArrayIndex_t i = 0; i < WindowLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
     *pDst++ = (SLInt16_t)((((SLInt32_t)pSrc[i]) * ((SLInt32_t)pWindowCoeffs[i])) SIGLIB_FIX_MPY_SHIFT);
 #else
     *pDst++ = (SLInt16_t)((((SLInt32_t)*pSrc++) * ((SLInt32_t)*pWindowCoeffs++)) SIGLIB_FIX_MPY_SHIFT);
@@ -689,7 +689,7 @@ void SIGLIB_FUNC_DECL SDA_Window32(const SLInt32_t* SIGLIB_PTR_DECL pSrc, SLInt3
 #endif
 
   for (SLArrayIndex_t i = 0; i < WindowLength; i++) {
-#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
     pDst[i] = (pSrc[i] * pWindowCoeffs[i]) SIGLIB_FIX_MPY_SHIFT;
 #else
     *pDst++ = (*pSrc++ * *pWindowCoeffs++) SIGLIB_FIX_MPY_SHIFT;

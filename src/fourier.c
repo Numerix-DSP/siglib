@@ -1480,8 +1480,16 @@ void SIGLIB_FUNC_DECL SDA_RstftInsertFrequencyFrame(const SLData_t* SIGLIB_PTR_D
                                                     const SLArrayIndex_t frameNumber, const SLArrayIndex_t numFrequencies,
                                                     const SLArrayIndex_t numFrames)
 {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_POINTER_ACCESS)    // Select between array index
+  pDst += (((numFrequencies - 1) * numFrames) + frameNumber);
+#endif
   for (SLArrayIndex_t i = 0; i < numFrequencies; i++) {
-    pDst[(i * numFrames) + frameNumber] = pSrc[numFrequencies - i - 1];
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
+    pDst[((numFrequencies - i - 1) * numFrames) + frameNumber] = pSrc[i];
+#else
+    *pDst = *pSrc++;
+    pDst -= numFrames;
+#endif
   }
 }    // End of SDA_RstftInsertFrequencyFrame()
 
@@ -1507,7 +1515,15 @@ void SIGLIB_FUNC_DECL SDA_RstftExtractFrequencyFrame(const SLData_t* SIGLIB_PTR_
                                                      const SLArrayIndex_t frameNumber, const SLArrayIndex_t numFrequencies,
                                                      const SLArrayIndex_t numFrames)
 {
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_POINTER_ACCESS)    // Select between array index
+  pSrc += (((numFrequencies - 1) * numFrames) + frameNumber);
+#endif
   for (SLArrayIndex_t i = 0; i < numFrequencies; i++) {
-    pDst[numFrequencies - i - 1] = pSrc[(i * numFrames) + frameNumber];
+#if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
+    pDst[i] = pSrc[((numFrequencies - i - 1) * numFrames) + frameNumber];
+#else
+    *pDst++ = *pSrc;
+    pSrc -= numFrames;
+#endif
   }
 }    // End of SDA_RstftExtractFrequencyFrame()
