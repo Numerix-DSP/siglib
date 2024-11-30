@@ -1190,38 +1190,6 @@ void SIGLIB_FUNC_DECL SDA_DctIIOrthogonal(const SLData_t* SIGLIB_PTR_DECL pTime,
 }    // End of SDA_DctIIOrthogonal()
 
 /********************************************************
- * Function: SAI_RstftNumberOfFrequencyDomainFrames
- *
- * Parameters:
- *  const SLArrayIndex_t srcLength,
- *  const SLArrayIndex_t windowLength,
- *  const SLArrayIndex_t hopLength,
- *  const SLArrayIndex_t centrePaddingFlag
- *
- * Return value:
- *  Number of STFT frames
- *
- * Description:
- *  Compute the number of STFT frames for the given source,
- *  window and hop lengths and centre padding flag.
- *
- ********************************************************/
-
-SLArrayIndex_t SAI_RstftNumberOfFrequencyDomainFrames(const SLArrayIndex_t srcLength, const SLArrayIndex_t hopLength,
-                                                      const SLArrayIndex_t windowLength, const SLArrayIndex_t centrePaddingFlag)
-{
-  SLArrayIndex_t localHopLength = hopLength;
-  if (localHopLength <= 0) {
-    localHopLength = windowLength / 2;
-  }
-
-  if (centrePaddingFlag == SIGLIB_TRUE) {
-    return ((SLArrayIndex_t)(((srcLength - windowLength) / localHopLength) + 2));
-  }
-  return ((SLArrayIndex_t)(((srcLength - windowLength) / localHopLength) + 1));
-}    // End of SAI_RstftNumberOfFrequencyDomainFrames()
-
-/********************************************************
  * Function: SIF_Stft
  *
  * Parameters:
@@ -1271,20 +1239,20 @@ void SIGLIB_FUNC_DECL SIF_Stft(SLData_t* SIGLIB_PTR_DECL pWindowCoeffs, const en
  * Function: SDA_Rstft
  *
  * Parameters:
- * SLData_t* pSrc,
- * const SLData_t* pWindowCoeffs,
- * const SLData_t* pFFTCoeffs,
- * const SLArrayIndex_t* pBitReverseAddressTable,
- * SLData_t* pTempReal,
- * SLData_t* pTempImag,
- * SLData_t* pResultsReal,
- * SLData_t* pResultsImag,
- * const SLArrayIndex_t srcLength,
- * const SLArrayIndex_t hopLength,
- * const SLArrayIndex_t windowLength,
- * const SLArrayIndex_t fftLength,
- * const SLArrayIndex_t log2FftLength,
- * const SLArrayIndex_t centrePaddingFlag
+ *  SLData_t* pSrc,
+ *  const SLData_t* pWindowCoeffs,
+ *  const SLData_t* pFFTCoeffs,
+ *  const SLArrayIndex_t* pBitReverseAddressTable,
+ *  SLData_t* pTempReal,
+ *  SLData_t* pTempImag,
+ *  SLData_t* pResultsReal,
+ *  SLData_t* pResultsImag,
+ *  const SLArrayIndex_t srcLength,
+ *  const SLArrayIndex_t hopLength,
+ *  const SLArrayIndex_t windowLength,
+ *  const SLArrayIndex_t fftLength,
+ *  const SLArrayIndex_t log2FftLength,
+ *  const SLArrayIndex_t centrePaddingFlag
  *
  * Return value:
  *   void
@@ -1296,11 +1264,12 @@ void SIGLIB_FUNC_DECL SIF_Stft(SLData_t* SIGLIB_PTR_DECL pWindowCoeffs, const en
  *
  ********************************************************/
 
-void SDA_Rstft(SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t* SIGLIB_PTR_DECL pWindowCoeffs, const SLData_t* SIGLIB_PTR_DECL pFFTCoeffs,
-               const SLArrayIndex_t* SIGLIB_PTR_DECL pBitReverseAddressTable, SLData_t* SIGLIB_PTR_DECL pTempReal,
-               SLData_t* SIGLIB_PTR_DECL pTempImag, SLData_t* SIGLIB_PTR_DECL pResultsReal, SLData_t* SIGLIB_PTR_DECL pResultsImag,
-               const SLArrayIndex_t srcLength, const SLArrayIndex_t hopLength, const SLArrayIndex_t windowLength, const SLArrayIndex_t fftLength,
-               const SLArrayIndex_t log2FftLength, const SLArrayIndex_t centrePaddingFlag)
+void SIGLIB_FUNC_DECL SDA_Rstft(SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t* SIGLIB_PTR_DECL pWindowCoeffs,
+                                const SLData_t* SIGLIB_PTR_DECL pFFTCoeffs, const SLArrayIndex_t* SIGLIB_PTR_DECL pBitReverseAddressTable,
+                                SLData_t* SIGLIB_PTR_DECL pTempReal, SLData_t* SIGLIB_PTR_DECL pTempImag, SLData_t* SIGLIB_PTR_DECL pResultsReal,
+                                SLData_t* SIGLIB_PTR_DECL pResultsImag, const SLArrayIndex_t srcLength, const SLArrayIndex_t hopLength,
+                                const SLArrayIndex_t windowLength, const SLArrayIndex_t fftLength, const SLArrayIndex_t log2FftLength,
+                                const SLArrayIndex_t centrePaddingFlag)
 
 {
   SLArrayIndex_t localSrcLength = srcLength;
@@ -1362,21 +1331,21 @@ void SDA_Rstft(SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t* SIGLIB_PTR_DECL p
  * Function: SDA_Ristft
  *
  * Parameters:
- * SLData_t* pSrcReal,
- * SLData_t* pSrcImag,
- * const SLData_t* pWindowCoeffs,
- * const SLData_t* pFFTCoeffs,
- * const SLArrayIndex_t* pBitReverseAddressTable,
- * SLData_t* pTempReal,
- * SLData_t* pTempImag,
- * SLData_t* pResultsReal,
- * SLData_t* pNormalization,
- * const SLArrayIndex_t numFrames,
- * const SLArrayIndex_t hopLength,
- * const SLArrayIndex_t windowLength,
- * const SLArrayIndex_t fftLength,
- * const SLArrayIndex_t log2FftLength,
- * const SLArrayIndex_t centrePaddingFlag
+ *  SLData_t* pSrcReal,
+ *  SLData_t* pSrcImag,
+ *  const SLData_t* pWindowCoeffs,
+ *  const SLData_t* pFFTCoeffs,
+ *  const SLArrayIndex_t* pBitReverseAddressTable,
+ *  SLData_t* pTempReal,
+ *  SLData_t* pTempImag,
+ *  SLData_t* pResultsReal,
+ *  SLData_t* pNormalization,
+ *  const SLArrayIndex_t numFrames,
+ *  const SLArrayIndex_t hopLength,
+ *  const SLArrayIndex_t windowLength,
+ *  const SLArrayIndex_t fftLength,
+ *  const SLArrayIndex_t log2FftLength,
+ *  const SLArrayIndex_t centrePaddingFlag
  *
  * Return value:
  *   void
@@ -1386,12 +1355,13 @@ void SDA_Rstft(SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t* SIGLIB_PTR_DECL p
  *
  ********************************************************/
 
-void SDA_Ristft(SLData_t* SIGLIB_PTR_DECL pSrcReal, SLData_t* SIGLIB_PTR_DECL pSrcImag, const SLData_t* SIGLIB_PTR_DECL pWindowCoeffs,
-                const SLData_t* SIGLIB_PTR_DECL pFFTCoeffs, const SLArrayIndex_t* SIGLIB_PTR_DECL pBitReverseAddressTable,
-                SLData_t* SIGLIB_PTR_DECL pTempReal, SLData_t* SIGLIB_PTR_DECL pTempImag, SLData_t* SIGLIB_PTR_DECL pResultsReal,
-                SLData_t* SIGLIB_PTR_DECL pNormalization, const SLArrayIndex_t numFrames, const SLArrayIndex_t hopLength,
-                const SLArrayIndex_t windowLength, const SLArrayIndex_t fftLength, const SLArrayIndex_t log2FftLength,
-                const SLArrayIndex_t centrePaddingFlag)
+void SIGLIB_FUNC_DECL SDA_Ristft(SLData_t* SIGLIB_PTR_DECL pSrcReal, SLData_t* SIGLIB_PTR_DECL pSrcImag,
+                                 const SLData_t* SIGLIB_PTR_DECL pWindowCoeffs, const SLData_t* SIGLIB_PTR_DECL pFFTCoeffs,
+                                 const SLArrayIndex_t* SIGLIB_PTR_DECL pBitReverseAddressTable, SLData_t* SIGLIB_PTR_DECL pTempReal,
+                                 SLData_t* SIGLIB_PTR_DECL pTempImag, SLData_t* SIGLIB_PTR_DECL pResultsReal,
+                                 SLData_t* SIGLIB_PTR_DECL pNormalization, const SLArrayIndex_t numFrames, const SLArrayIndex_t hopLength,
+                                 const SLArrayIndex_t windowLength, const SLArrayIndex_t fftLength, const SLArrayIndex_t log2FftLength,
+                                 const SLArrayIndex_t centrePaddingFlag)
 {
   SLArrayIndex_t localWindowLength = windowLength;
   if (localWindowLength <= 0) {
@@ -1455,3 +1425,89 @@ void SDA_Ristft(SLData_t* SIGLIB_PTR_DECL pSrcReal, SLData_t* SIGLIB_PTR_DECL pS
     }
   }
 }    // End of SDA_Ristft()
+
+/********************************************************
+ * Function: SAI_RstftNumberOfFrequencyDomainFrames
+ *
+ * Parameters:
+ *  const SLArrayIndex_t srcLength,
+ *  const SLArrayIndex_t windowLength,
+ *  const SLArrayIndex_t hopLength,
+ *  const SLArrayIndex_t centrePaddingFlag
+ *
+ * Return value:
+ *  Number of STFT frames
+ *
+ * Description:
+ *  Compute the number of STFT frames for the given source,
+ *  window and hop lengths and centre padding flag.
+ *
+ ********************************************************/
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SAI_RstftNumberOfFrequencyDomainFrames(const SLArrayIndex_t srcLength, const SLArrayIndex_t hopLength,
+                                                                       const SLArrayIndex_t windowLength, const SLArrayIndex_t centrePaddingFlag)
+{
+  SLArrayIndex_t localHopLength = hopLength;
+  if (localHopLength <= 0) {
+    localHopLength = windowLength / 2;
+  }
+
+  if (centrePaddingFlag == SIGLIB_TRUE) {
+    return ((SLArrayIndex_t)(((srcLength - windowLength) / localHopLength) + 2));
+  }
+  return ((SLArrayIndex_t)(((srcLength - windowLength) / localHopLength) + 1));
+}    // End of SAI_RstftNumberOfFrequencyDomainFrames()
+
+/********************************************************
+ * Function: SDA_RstftInsertFrequencyFrame
+ *
+ * Parameters:
+ *  const SLData_t* SIGLIB_PTR_DECL pSrc,
+ *  SLData_t* SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t frameNumber,
+ *  const SLArrayIndex_t numFrequencies,
+ *  const SLArrayIndex_t numFrames
+ *
+ * Return value:
+ *  void
+ *
+ * Description:
+ *  Insert the 1D frequency domain frame into the 2D STFT frame.
+ *
+ ********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_RstftInsertFrequencyFrame(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst,
+                                                    const SLArrayIndex_t frameNumber, const SLArrayIndex_t numFrequencies,
+                                                    const SLArrayIndex_t numFrames)
+{
+  for (SLArrayIndex_t i = 0; i < numFrequencies; i++) {
+    pDst[(i * numFrames) + frameNumber] = pSrc[numFrequencies - i - 1];
+  }
+}    // End of SDA_RstftInsertFrequencyFrame()
+
+/********************************************************
+ * Function: SDA_RstftExtractFrequencyFrame
+ *
+ * Parameters:
+ *  const SLData_t* SIGLIB_PTR_DECL pSrc,
+ *  SLData_t* SIGLIB_PTR_DECL pDst,
+ *  const SLArrayIndex_t frameNumber,
+ *  const SLArrayIndex_t numFrequencies,
+ *  const SLArrayIndex_t numFrames
+ *
+ * Return value:
+ *  void
+ *
+ * Description:
+ *  Extract the 1D frequency domain frame from the 2D STFT frame.
+ *
+ ********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_RstftExtractFrequencyFrame(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst,
+                                                     const SLArrayIndex_t frameNumber, const SLArrayIndex_t numFrequencies,
+                                                     const SLArrayIndex_t numFrames)
+{
+  for (SLArrayIndex_t i = 0; i < numFrequencies; i++) {
+    pDst[numFrequencies - i - 1] = pSrc[(i * numFrames) + frameNumber];
+  }
+}    // End of SDA_RstftExtractFrequencyFrame()

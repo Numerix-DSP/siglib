@@ -589,6 +589,8 @@ Description: SigLib function memory section definition file for TI compilers
 #        pragma CODE_SECTION(SDA_Ridft, ".text")
 #        pragma CODE_SECTION(SDA_Ristft, ".text")
 #        pragma CODE_SECTION(SDA_Rstft, ".text")
+#        pragma CODE_SECTION(SDA_RstftExtractFrequencyFrame, ".text")
+#        pragma CODE_SECTION(SDA_RstftInsertFrequencyFrame, ".text")
 #        pragma CODE_SECTION(SDA_ZoomFft, ".text")
 #        pragma CODE_SECTION(SDA_ZoomFftSimple, ".text")
 #        pragma CODE_SECTION(SIF_DctII, ".text")

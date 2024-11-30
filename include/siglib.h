@@ -725,11 +725,6 @@ void SIGLIB_FUNC_DECL SDA_DctIIOrthogonal(const SLData_t* SIGLIB_INPUT_PTR_DECL,
                                           const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to cosine look up table
                                           SLArrayIndex_t);                          // DCT length
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SAI_RstftNumberOfFrequencyDomainFrames(const SLArrayIndex_t,     // Source array length
-                                                                       const SLArrayIndex_t,     // Window length
-                                                                       const SLArrayIndex_t,     // Hop length
-                                                                       const SLArrayIndex_t);    // Centre padding flag
-
 void SIGLIB_FUNC_DECL SIF_Stft(SLData_t* SIGLIB_OUTPUT_PTR_DECL,          // Pointer to window coefficients
                                const enum SLWindow_t,                     // Window type
                                const SLData_t,                            // Window coefficient
@@ -768,6 +763,23 @@ void SIGLIB_FUNC_DECL SDA_Ristft(SLData_t* SIGLIB_INPUT_PTR_DECL,               
                                  const SLArrayIndex_t,                           // FFT length
                                  const SLArrayIndex_t,                           // Log2 FFT length
                                  const SLArrayIndex_t);                          // Centre padding flag
+
+SLArrayIndex_t SIGLIB_FUNC_DECL SAI_RstftNumberOfFrequencyDomainFrames(const SLArrayIndex_t,     // Source array length
+                                                                       const SLArrayIndex_t,     // Window length
+                                                                       const SLArrayIndex_t,     // Hop length
+                                                                       const SLArrayIndex_t);    // Centre padding flag
+
+void SIGLIB_FUNC_DECL SDA_RstftInsertFrequencyFrame(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source 1D frequency array
+                                                    SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination 2D STFT array
+                                                    const SLArrayIndex_t,                     // Frame number to insert
+                                                    const SLArrayIndex_t,                     // Number of frequencies in STFT frame
+                                                    const SLArrayIndex_t);                    // Number of frequency frames in STFT frame
+
+void SIGLIB_FUNC_DECL SDA_RstftExtractFrequencyFrame(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source 2D STFT array
+                                                     SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination 1D frequency array
+                                                     const SLArrayIndex_t,                     // Frame number to extract
+                                                     const SLArrayIndex_t,                     // Number of frequencies in STFT frame
+                                                     const SLArrayIndex_t);                    // Number of frequency frames in STFT frame
 
 // Arbitrary Length Fast Fourier Transform Functions - arbfft.c
 

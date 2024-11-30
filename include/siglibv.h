@@ -455,11 +455,6 @@ void _stdcall SDA_DctIIOrthogonal(double* SIGLIB_INPUT_PTR_DECL,     // Pointer 
                                   double* SIGLIB_INPUT_PTR_DECL,     // Pointer to cosine look up table
                                   long);                             // DCT length
 
-long _stdcall SAI_RstftNumberOfFrequencyDomainFrames(long,     // Source array length
-                                                     long,     // Window length
-                                                     long,     // Hop length
-                                                     long);    // Centre padding flag
-
 void _stdcall SIF_Stft(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to window coefficients
                        int SLWindow_t,                    // Window type
                        double,                            // Window coefficient
@@ -498,6 +493,23 @@ void _stdcall SDA_Ristft(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to real s
                          long,                              // FFT length
                          long,                              // Log2 FFT length
                          long);                             // Centre padding flag
+
+long _stdcall SAI_RstftNumberOfFrequencyDomainFrames(long,     // Source array length
+                                                     long,     // Window length
+                                                     long,     // Hop length
+                                                     long);    // Centre padding flag
+
+void _stdcall SDA_RstftInsertFrequencyFrame(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source 1D frequency array
+                                            double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination 2D STFT array
+                                            long,                              // Frame number to insert
+                                            long,                              // Number of frequencies in STFT frame
+                                            long);                             // Number of frequency frames in STFT frame
+
+void _stdcall SDA_RstftExtractFrequencyFrame(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source 2D STFT array
+                                             double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination 1D frequency array
+                                             long,                              // Frame number to extract
+                                             long,                              // Number of frequencies in STFT frame
+                                             long);                             // Number of frequency frames in STFT frame
 
 // Arbitrary Length Fast Fourier Transform Functions - arbfft.c
 
@@ -2965,7 +2977,7 @@ long _stdcall SDS_CostasQamDemodulate(double,                            // Sour
                                       long*,                             // Pointer to ELG synchronization delay index
                                       long);                             // ELG output synchronization delay length
 
-#line 3379 "siglib.h"
+#line 3392 "siglib.h"
 // compiler
 long _stdcall SDS_CostasQamDemodulateDebug(double,                            // Source data sample
                                            double*,                           // Pointer to real destination symbol point
@@ -3101,7 +3113,7 @@ long _stdcall SDA_CostasQamDemodulateDebug(double* SIGLIB_INPUT_PTR_DECL,     //
                                            double*,                           // Pointer to debug real filter output
                                            double*,                           // Pointer to debug imaginary filter output
                                            double*);                          // Pointer to debug ELG trigger output
-#line 3515 "siglib.h"
+#line 3528 "siglib.h"
 
 void _stdcall SIF_QpskModulate(double* SIGLIB_OUTPUT_PTR_DECL,    // Carrier table pointer
                                double,                            // Carrier phase increment per sample (radians / 2Ï€)
@@ -6227,4 +6239,4 @@ void _stdcall SMX_ExtractCategoricalColumn(double* SIGLIB_INPUT_PTR_DECL,    // 
 // #include "siglib_deprecated.h"
 
 // End of SigLib DSP function section
-#line 7093 "siglib.h"
+#line 7103 "siglib.h"

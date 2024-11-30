@@ -50,7 +50,8 @@ Additional Functionality:
   SDA_IirOrderNInitializeCoefficients
   SDA_IirOrderNDirectFormIITransposed
   SIF_IirZeroPhaseOrderN and SDA_IirZeroPhaseOrderN
-  SAI_RstftNumberOfFrequencyDomainFrames, SIF_Stft, SDA_Rstft, SDA_Ristft
+  SIF_Stft, SDA_Rstft, SDA_Ristft, SAI_RstftNumberOfFrequencyDomainFrames
+  SDA_RstftInsertFrequencyFrame, SDA_RstftExtractFrequencyFrame
 
 Operational Changes:
   Functions who's names have changed are listed in siglib_deprecated.h.
