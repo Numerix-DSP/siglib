@@ -4,19 +4,21 @@
 
 pushd $SIGLIB_PATH
 
-# Re-indent code
-find . -type f -name "*.c"   -print0 | xargs -0 -P 4 clang-format -i
-find . -type f -name "*.cpp" -print0 | xargs -0 -P 4 clang-format -i
-find . -type f -name "*.h"   -print0 | xargs -0 -P 4 clang-format -i
+# Re-indent code with clang-format
+# This requires the use of run-clang-format.py, which is available here: https://github.com/Sarcasm/run-clang-format/
+  # find . -type f -name "*.c"   -print0 | xargs -0 -P 4 clang-format -i
+  # find . -type f -name "*.cpp" -print0 | xargs -0 -P 4 clang-format -i
+  # find . -type f -name "*.h"   -print0 | xargs -0 -P 4 clang-format -i
+run-clang-format.py -r -i .
 
 # Ensure all appropriate files are in unix format
-find . -type f -name "*.c"    -print0 | xargs -0 -n 1 -P 4 dos2unix
-find . -type f -name "*.cpp"  -print0 | xargs -0 -n 1 -P 4 dos2unix
-find . -type f -name "*.h"    -print0 | xargs -0 -n 1 -P 4 dos2unix
-find . -type f -name "*.html" -print0 | xargs -0 -n 1 -P 4 dos2unix
-find . -type f -name "*.py"   -print0 | xargs -0 -n 1 -P 4 dos2unix
-find . -type f -name "*.sh"   -print0 | xargs -0 -n 1 -P 4 dos2unix
-find . -type f -name "*.txt"  -print0 | xargs -0 -n 1 -P 4 dos2unix
+find . -type f -name "*.c"    -print0 | xargs -0 -n 1 -P 4 dos2unix -k
+find . -type f -name "*.cpp"  -print0 | xargs -0 -n 1 -P 4 dos2unix -k
+find . -type f -name "*.h"    -print0 | xargs -0 -n 1 -P 4 dos2unix -k
+find . -type f -name "*.html" -print0 | xargs -0 -n 1 -P 4 dos2unix -k
+find . -type f -name "*.py"   -print0 | xargs -0 -n 1 -P 4 dos2unix -k
+find . -type f -name "*.sh"   -print0 | xargs -0 -n 1 -P 4 dos2unix -k
+find . -type f -name "*.txt"  -print0 | xargs -0 -n 1 -P 4 dos2unix -k
 
 #Cleanup unwanted files
 find . -name "*.bak" -type f -delete
