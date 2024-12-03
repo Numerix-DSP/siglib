@@ -104,5 +104,7 @@ Update history:
 #  define SMX_CreateIdentity SMX_Identity
 #  define SMX_MultiplyPiecewise SMX_Multiply2Piecewise
 
+#  define SIM_Conv3x3(a, b, c, d, e) SIM_Convolve3x3(a, c, b, d, e)
+
 // End of deprecation list
 #endif    // End of #ifndef SIGLIB_DEPRECATED

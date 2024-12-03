@@ -133,7 +133,7 @@ int main(int argc, char* argv[])
   printf("\nThresholded Image\nPlease hit <Carriage Return> to continue . . .");
   getchar();
 
-  SIM_Conv3x3(pImage0Start, pImage1Start, FilterCoeffs, IMAGE_DIMENSION, IMAGE_DIMENSION);
+  SIM_Convolve3x3(pImage0Start, FilterCoeffs, pImage1Start, IMAGE_DIMENSION, IMAGE_DIMENSION);
   gpc_plot_image(hImage,                        // Graph handle
                  pImage1Start,                  // Dataset
                  "Low-pass Filtered Image");    // Dataset title

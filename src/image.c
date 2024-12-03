@@ -219,14 +219,14 @@ void SIGLIB_FUNC_DECL SIF_Fft2d(SLData_t* SIGLIB_PTR_DECL pFFTCoeffs, SLArrayInd
 }    // End of SIF_Fft2d()
 
 /********************************************************
- * Function: SIM_Conv3x3
+ * Function: SIM_Convolve3x3
  *
  * Parameters:
  *  const SLImageData_t *pSrc,
  *  SLImageData_t *pDst,
  *  const SLData_t * SIGLIB_PTR_DECL pCoeffs,
- *  const SLArrayIndex_t line_length,
- *  const SLArrayIndex_t column_length
+ *  const SLArrayIndex_t lineLength,
+ *  const SLArrayIndex_t columnLength
  *
  * Return value:
  *  void
@@ -236,8 +236,8 @@ void SIGLIB_FUNC_DECL SIF_Fft2d(SLData_t* SIGLIB_PTR_DECL pFFTCoeffs, SLArrayInd
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SIM_Conv3x3(const SLImageData_t* pSrc, SLImageData_t* pDst, const SLData_t* SIGLIB_PTR_DECL pCoeffs,
-                                  const SLArrayIndex_t line_length, const SLArrayIndex_t column_length)
+void SIGLIB_FUNC_DECL SIM_Convolve3x3(const SLImageData_t* pSrc, const SLData_t* SIGLIB_PTR_DECL pCoeffs, SLImageData_t* pDst,
+                                      const SLArrayIndex_t lineLength, const SLArrayIndex_t columnLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef _TMS320C6700              // Defined by TI compiler
@@ -248,18 +248,18 @@ void SIGLIB_FUNC_DECL SIM_Conv3x3(const SLImageData_t* pSrc, SLImageData_t* pDst
 #endif
 
   const SLImageData_t* line1p = pSrc;
-  const SLImageData_t* line2p = pSrc + (line_length * sizeof(SLImageData_t));
-  const SLImageData_t* line3p = line2p + (line_length * sizeof(SLImageData_t));
+  const SLImageData_t* line2p = pSrc + (lineLength * sizeof(SLImageData_t));
+  const SLImageData_t* line3p = line2p + (lineLength * sizeof(SLImageData_t));
 
   // Clear first line
-  for (SLArrayIndex_t i = 0; i < line_length; i++) {
+  for (SLArrayIndex_t i = 0; i < lineLength; i++) {
     *pDst++ = 0;
   }
 
-  for (SLArrayIndex_t i = 0; i < (column_length - 2); i++) {
+  for (SLArrayIndex_t i = 0; i < (columnLength - 2); i++) {
     *pDst++ = 0;    // Clear first column
 
-    for (SLArrayIndex_t j = 0; j < (line_length - 2); j++) {
+    for (SLArrayIndex_t j = 0; j < (lineLength - 2); j++) {
       // At end of each block, reset line
       // pointers for next block
       SLData_t sum = (((SLData_t)*line1p++) * (*pCoeffs++));
@@ -286,11 +286,60 @@ void SIGLIB_FUNC_DECL SIM_Conv3x3(const SLImageData_t* pSrc, SLImageData_t* pDst
     line3p += 2;
   }
 
-  for (SLArrayIndex_t i = 0; i < line_length; i++) {    // Clear last line
+  for (SLArrayIndex_t i = 0; i < lineLength; i++) {    // Clear last line
     *pDst++ = 0;
   }
 
-}    // End of SIM_Conv3x3()
+}    // End of SIM_Convolve3x3()
+
+/********************************************************
+ * Function: SIM_Convolve2d()
+ *
+ * Parameters:
+ *  const SLImageData_t* dpSrc,
+ *  const SLData_t* pCoeffs,
+ *  SLImageData_t* pDst,
+ *  const SLArrayIndex_t dataLineLength,
+ *  const SLArrayIndex_t dataColumnLength,
+ *  const SLArrayIndex_t filterLineLength,
+ *  const SLArrayIndex_t filterColumnLength
+ *
+ * Return value:
+ *  void
+ *
+ * Description: Perform a NxM convolution on an image.
+ *
+ ********************************************************/
+
+void SIGLIB_FUNC_DECL SIM_Convolve2d(const SLImageData_t* SIGLIB_PTR_DECL pSrc, const SLData_t* SIGLIB_PTR_DECL pCoeffs,
+                                     SLImageData_t* SIGLIB_PTR_DECL pDst, const SLArrayIndex_t dataLineLength,
+                                     const SLArrayIndex_t dataColumnLength, const SLArrayIndex_t filterLineLength,
+                                     const SLArrayIndex_t filterColumnLength)
+{
+  SLArrayIndex_t padSizeX = filterColumnLength / 2;
+  SLArrayIndex_t padSizeY = filterLineLength / 2;
+
+  // Iterate over each element of the output array
+  for (SLArrayIndex_t i = 0; i < dataColumnLength; i++) {
+    for (SLArrayIndex_t j = 0; j < dataLineLength; j++) {
+      SLData_t sum = 0.0;
+
+      for (SLArrayIndex_t m = filterColumnLength - 1; m >= 0; m--) {    // Apply the time reversed filter kernel
+        for (SLArrayIndex_t n = filterLineLength - 1; n >= 0; n--) {
+          // Calculate input array indices
+          SLArrayIndex_t xIndex = i + (filterColumnLength - m - 1) - padSizeX;
+          SLArrayIndex_t yIndex = j + (filterLineLength - n - 1) - padSizeY;
+
+          // Check bounds for the input array, with zero padding
+          if (xIndex >= 0 && xIndex < dataColumnLength && yIndex >= 0 && yIndex < dataLineLength) {
+            sum += ((SLData_t)pSrc[xIndex * dataLineLength + yIndex]) * pCoeffs[m * filterLineLength + n];
+          }
+        }
+      }
+      pDst[i * dataLineLength + j] = (SLImageData_t)sum;    // Store the result in the output array
+    }
+  }
+}    // End of SIM_Convolve2d()
 
 /********************************************************
  * Function: SIM_Sobel3x3
@@ -298,8 +347,8 @@ void SIGLIB_FUNC_DECL SIM_Conv3x3(const SLImageData_t* pSrc, SLImageData_t* pDst
  * Parameters:
  *  SLImageData_t *pSrc,
  *  SLImageData_t *pDst,
- *  SLArrayIndex_t line_length,
- *  SLArrayIndex_t column_length
+ *  SLArrayIndex_t lineLength,
+ *  SLArrayIndex_t columnLength
  *
  * Return value:
  *  void
@@ -309,8 +358,8 @@ void SIGLIB_FUNC_DECL SIM_Conv3x3(const SLImageData_t* pSrc, SLImageData_t* pDst
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SIM_Sobel3x3(const SLImageData_t* pSrc, SLImageData_t* pDst, const SLArrayIndex_t line_length,
-                                   const SLArrayIndex_t column_length)
+void SIGLIB_FUNC_DECL SIM_Sobel3x3(const SLImageData_t* pSrc, SLImageData_t* pDst, const SLArrayIndex_t lineLength,
+                                   const SLArrayIndex_t columnLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -320,18 +369,18 @@ void SIGLIB_FUNC_DECL SIM_Sobel3x3(const SLImageData_t* pSrc, SLImageData_t* pDs
 #endif
 
   const SLImageData_t* line1p = pSrc;
-  const SLImageData_t* line2p = pSrc + (line_length * sizeof(SLImageData_t));
-  const SLImageData_t* line3p = line2p + (line_length * sizeof(SLImageData_t));
+  const SLImageData_t* line2p = pSrc + (lineLength * sizeof(SLImageData_t));
+  const SLImageData_t* line3p = line2p + (lineLength * sizeof(SLImageData_t));
 
   // Clear first line
-  for (SLArrayIndex_t i = 0; i < line_length; i++) {
+  for (SLArrayIndex_t i = 0; i < lineLength; i++) {
     *pDst++ = 0;
   }
 
-  for (SLArrayIndex_t i = 0; i < (column_length - 2); i++) {
+  for (SLArrayIndex_t i = 0; i < (columnLength - 2); i++) {
     *pDst++ = 0;    // Clear first column
 
-    for (SLArrayIndex_t j = 0; j < (line_length - 2); j++) {
+    for (SLArrayIndex_t j = 0; j < (lineLength - 2); j++) {
       // At end of each block, reset line
       // pointers for next block
       SLData_t SumY = ((SLData_t)(*line1p++) * SIGLIB_MINUS_ONE);
@@ -380,7 +429,7 @@ void SIGLIB_FUNC_DECL SIM_Sobel3x3(const SLImageData_t* pSrc, SLImageData_t* pDs
     line3p += 2;
   }
 
-  for (SLArrayIndex_t i = 0; i < line_length; i++) {    // Clear last line
+  for (SLArrayIndex_t i = 0; i < lineLength; i++) {    // Clear last line
     *pDst++ = 0;
   }
 }    // End of SIM_Sobel3x3()
@@ -391,8 +440,8 @@ void SIGLIB_FUNC_DECL SIM_Sobel3x3(const SLImageData_t* pSrc, SLImageData_t* pDs
  * Parameters:
  *  const SLImageData_t *pSrc,
  *  SLImageData_t *pDst,
- *  const SLArrayIndex_t line_length,
- *  const SLArrayIndex_t column_length
+ *  const SLArrayIndex_t lineLength,
+ *  const SLArrayIndex_t columnLength
  *
  * Return value:
  *  void
@@ -402,8 +451,8 @@ void SIGLIB_FUNC_DECL SIM_Sobel3x3(const SLImageData_t* pSrc, SLImageData_t* pDs
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SIM_SobelVertical3x3(const SLImageData_t* pSrc, SLImageData_t* pDst, const SLArrayIndex_t line_length,
-                                           const SLArrayIndex_t column_length)
+void SIGLIB_FUNC_DECL SIM_SobelVertical3x3(const SLImageData_t* pSrc, SLImageData_t* pDst, const SLArrayIndex_t lineLength,
+                                           const SLArrayIndex_t columnLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -413,17 +462,17 @@ void SIGLIB_FUNC_DECL SIM_SobelVertical3x3(const SLImageData_t* pSrc, SLImageDat
 #endif
 
   const SLImageData_t* line1p = pSrc;
-  const SLImageData_t* line2p = pSrc + (line_length * sizeof(SLImageData_t));
-  const SLImageData_t* line3p = pSrc + 2 * (line_length * sizeof(SLImageData_t));
+  const SLImageData_t* line2p = pSrc + (lineLength * sizeof(SLImageData_t));
+  const SLImageData_t* line3p = pSrc + 2 * (lineLength * sizeof(SLImageData_t));
 
-  for (SLArrayIndex_t i = 0; i < line_length; i++) {    // Clear first line
+  for (SLArrayIndex_t i = 0; i < lineLength; i++) {    // Clear first line
     *pDst++ = 0;
   }
 
-  for (SLArrayIndex_t i = 0; i < (column_length - 2); i++) {
+  for (SLArrayIndex_t i = 0; i < (columnLength - 2); i++) {
     *pDst++ = 0;    // Clear first column
 
-    for (SLArrayIndex_t j = 0; j < (line_length - 2); j++) {
+    for (SLArrayIndex_t j = 0; j < (lineLength - 2); j++) {
       // At end of each block, reset line
       // pointers for next block
       SLData_t Sum = ((SLData_t)(*line1p++) * SIGLIB_MINUS_ONE);
@@ -460,7 +509,7 @@ void SIGLIB_FUNC_DECL SIM_SobelVertical3x3(const SLImageData_t* pSrc, SLImageDat
     line3p += 2;
   }
 
-  for (SLArrayIndex_t i = 0; i < line_length; i++) {    // Clear last line
+  for (SLArrayIndex_t i = 0; i < lineLength; i++) {    // Clear last line
     *pDst++ = 0;
   }
 }    // End of SIM_SobelVertical3x3()
@@ -471,8 +520,8 @@ void SIGLIB_FUNC_DECL SIM_SobelVertical3x3(const SLImageData_t* pSrc, SLImageDat
  * Parameters:
  *  const SLImageData_t *pSrc,
  *  SLImageData_t *pDst,
- *  const SLArrayIndex_t line_length,
- *  const SLArrayIndex_t column_length
+ *  const SLArrayIndex_t lineLength,
+ *  const SLArrayIndex_t columnLength
  *
  * Return value:
  *  void
@@ -482,8 +531,8 @@ void SIGLIB_FUNC_DECL SIM_SobelVertical3x3(const SLImageData_t* pSrc, SLImageDat
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SIM_SobelHorizontal3x3(const SLImageData_t* pSrc, SLImageData_t* pDst, const SLArrayIndex_t line_length,
-                                             const SLArrayIndex_t column_length)
+void SIGLIB_FUNC_DECL SIM_SobelHorizontal3x3(const SLImageData_t* pSrc, SLImageData_t* pDst, const SLArrayIndex_t lineLength,
+                                             const SLArrayIndex_t columnLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -493,16 +542,16 @@ void SIGLIB_FUNC_DECL SIM_SobelHorizontal3x3(const SLImageData_t* pSrc, SLImageD
 #endif
 
   const SLImageData_t* line1p = pSrc;
-  const SLImageData_t* line3p = pSrc + 2 * (line_length * sizeof(SLImageData_t));
+  const SLImageData_t* line3p = pSrc + 2 * (lineLength * sizeof(SLImageData_t));
 
-  for (SLArrayIndex_t i = 0; i < line_length; i++) {    // Clear first line
+  for (SLArrayIndex_t i = 0; i < lineLength; i++) {    // Clear first line
     *pDst++ = 0;
   }
 
-  for (SLArrayIndex_t i = 0; i < (column_length - 2); i++) {
+  for (SLArrayIndex_t i = 0; i < (columnLength - 2); i++) {
     *pDst++ = 0;    // Clear first column
 
-    for (SLArrayIndex_t j = 0; j < (line_length - 2); j++) {
+    for (SLArrayIndex_t j = 0; j < (lineLength - 2); j++) {
       // At end of each block, reset line
       // pointers for next block
       SLData_t Sum = ((SLData_t)(*line1p++) * SIGLIB_MINUS_ONE);
@@ -534,7 +583,7 @@ void SIGLIB_FUNC_DECL SIM_SobelHorizontal3x3(const SLImageData_t* pSrc, SLImageD
     line3p += 2;
   }
 
-  for (SLArrayIndex_t i = 0; i < line_length; i++) {    // Clear last line
+  for (SLArrayIndex_t i = 0; i < lineLength; i++) {    // Clear last line
     *pDst++ = 0;
   }
 }    // End of SIM_SobelHorizontal3x3()
@@ -545,8 +594,8 @@ void SIGLIB_FUNC_DECL SIM_SobelHorizontal3x3(const SLImageData_t* pSrc, SLImageD
  * Parameters:
  *  const SLImageData_t *pSrc,
  *  SLImageData_t *pDst,
- *  const SLArrayIndex_t line_length,
- *  const SLArrayIndex_t column_length
+ *  const SLArrayIndex_t lineLength,
+ *  const SLArrayIndex_t columnLength
  *
  * Return value:
  *  void
@@ -556,8 +605,8 @@ void SIGLIB_FUNC_DECL SIM_SobelHorizontal3x3(const SLImageData_t* pSrc, SLImageD
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SIM_Median3x3(const SLImageData_t* pSrc, SLImageData_t* pDst, const SLArrayIndex_t line_length,
-                                    const SLArrayIndex_t column_length)
+void SIGLIB_FUNC_DECL SIM_Median3x3(const SLImageData_t* pSrc, SLImageData_t* pDst, const SLArrayIndex_t lineLength,
+                                    const SLArrayIndex_t columnLength)
 {
 #if (SIGLIB_ARRAYS_ALIGNED)
 #  ifdef __TMS320C6X__             // Defined by TI compiler
@@ -567,17 +616,17 @@ void SIGLIB_FUNC_DECL SIM_Median3x3(const SLImageData_t* pSrc, SLImageData_t* pD
 #endif
 
   const SLImageData_t* line1p = pSrc;
-  const SLImageData_t* line2p = pSrc + (line_length * sizeof(SLImageData_t));
-  const SLImageData_t* line3p = line2p + (line_length * sizeof(SLImageData_t));
+  const SLImageData_t* line2p = pSrc + (lineLength * sizeof(SLImageData_t));
+  const SLImageData_t* line3p = line2p + (lineLength * sizeof(SLImageData_t));
 
-  for (SLArrayIndex_t i = 0; i < line_length; i++) {    // Clear first line
+  for (SLArrayIndex_t i = 0; i < lineLength; i++) {    // Clear first line
     *pDst++ = 0;
   }
 
-  for (SLArrayIndex_t i = 0; i < (column_length - 2); i++) {
+  for (SLArrayIndex_t i = 0; i < (columnLength - 2); i++) {
     *pDst++ = 0;    // Clear first column
 
-    for (SLArrayIndex_t j = 0; j < (line_length - 2); j++) {
+    for (SLArrayIndex_t j = 0; j < (lineLength - 2); j++) {
       SLImageData_t p1 = *line1p++;
       SLImageData_t p2 = *line1p++;
       SLImageData_t p3 = *line1p--;
@@ -607,7 +656,7 @@ void SIGLIB_FUNC_DECL SIM_Median3x3(const SLImageData_t* pSrc, SLImageData_t* pD
     line3p += 2;
   }
 
-  for (SLArrayIndex_t i = 0; i < line_length; i++) {    // Clear last line
+  for (SLArrayIndex_t i = 0; i < lineLength; i++) {    // Clear last line
     *pDst++ = 0;
   }
 }    // End of SIM_Median3x3()

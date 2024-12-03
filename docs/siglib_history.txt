@@ -1,4 +1,3 @@
-SigLib (Tm) Revision Update History File
 ========================================
 
 VERSION: 10.56
@@ -17,7 +16,6 @@ Additional Functionality:
   SDA_SignalGenerateSine and SDA_SignalGenerateCosine
   SDS_SamplesToPeriod and SDS_PeriodToSamples
   SDA_ZeroPad
-  SDA_RootMeanSquareError
   SDS_Sigmoid and SDA_Sigmoid
   Window types added:
     SIGLIB_HANNING_FOURIER
@@ -52,6 +50,7 @@ Additional Functionality:
   SIF_IirZeroPhaseOrderN and SDA_IirZeroPhaseOrderN
   SIF_Stft, SDA_Rstft, SDA_Ristft, SAI_RstftNumberOfFrequencyDomainFrames
   SDA_RstftInsertFrequencyFrame, SDA_RstftExtractFrequencyFrame
+  SDA_Convolve2d and SIM_Convolve2d
 
 Operational Changes:
   Functions who's names have changed are listed in siglib_deprecated.h.
@@ -82,6 +81,7 @@ Operational Changes:
   SMX_Add and SMX_Subtract changed to SMX_Add2 and SMX_Subtract2 to match SDA_ functions
   SMX_Multiply and SMX_MultiplyPiecewise changed to SMX_Multiply2 and SMX_Multiply2Piecewise to match SDA_ functions
   SDA_IirNc is deprecated as this functionality is now includes in SDA_IirZeroPhase.
+  SIM_Conv3x3 changed to SIM_Convolve3x3 and reordered coefficients for consistency
 
 Additional Processor / Compiler Support:
   None.

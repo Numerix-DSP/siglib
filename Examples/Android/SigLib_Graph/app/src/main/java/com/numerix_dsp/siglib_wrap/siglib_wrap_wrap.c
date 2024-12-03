@@ -7969,7 +7969,7 @@ SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_SIM_1Conv3x3(JNIEnv* j
   arg3 = *(SLData_t**)&jarg3;
   arg4 = (SLArrayIndex_t)jarg4;
   arg5 = (SLArrayIndex_t)jarg5;
-  SIM_Conv3x3((unsigned int const*)arg1, arg2, (double const*)arg3, arg4, arg5);
+  SIM_Convolve3x3((unsigned int const*)arg1, arg2, (double const*)arg3, arg4, arg5);
 }
 
 SWIGEXPORT void JNICALL Java_siglib_1wrap_siglib_1wrapJNI_SIM_1Sobel3x3(JNIEnv* jenv, jclass jcls, jlong jarg1, jlong jarg2, jint jarg3, jint jarg4)

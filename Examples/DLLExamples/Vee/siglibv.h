@@ -1948,6 +1948,14 @@ void _stdcall SDA_FftDeconvolutionPre(double* SIGLIB_INOUT_PTR_DECL,    // Point
                                       long,                             // log2 FFT length
                                       double);                          // Inverse FFT length
 
+void _stdcall SDA_Convolve2d(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
+                             double* SIGLIB_INPUT_PTR_DECL,     // Pointer to coefficients array
+                             double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
+                             long,                              // Data array column length
+                             long,                              // Data array line length
+                             long,                              // Filter array column length
+                             long);                             // Data array line length
+
 // Correlation functions - correlate.c
 
 void _stdcall SDA_CorrelateLinear(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to input array #1
@@ -2127,11 +2135,19 @@ void _stdcall SIF_Fft2d(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to FFT coe
                                                            // to bit reverse address table
                         long);                             // FFT length
 
-void _stdcall SIM_Conv3x3(int* SIGLIB_INPUT_PTR_DECL,       // Pointer to source array
-                          int* SIGLIB_OUTPUT_PTR_DECL,      // Pointer to destination array
-                          double* SIGLIB_INPUT_PTR_DECL,    // Pointer to coefficients array
-                          long,                             // Line length
-                          long);                            // Column length
+void _stdcall SIM_Convolve3x3(int* SIGLIB_INPUT_PTR_DECL,       // Pointer to source array
+                              double* SIGLIB_INPUT_PTR_DECL,    // Pointer to coefficients array
+                              int* SIGLIB_OUTPUT_PTR_DECL,      // Pointer to destination array
+                              long,                             // Line length
+                              long);                            // Column length
+
+void _stdcall SIM_Convolve2d(int* SIGLIB_INPUT_PTR_DECL,       // Pointer to source array
+                             double* SIGLIB_INPUT_PTR_DECL,    // Pointer to coefficients array
+                             int* SIGLIB_OUTPUT_PTR_DECL,      // Pointer to destination array
+                             long,                             // Data array line length
+                             long,                             // Data array column length
+                             long,                             // Filter array line length
+                             long);                            // Data array column length
 
 void _stdcall SIM_Sobel3x3(int* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
                            int* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
@@ -2977,7 +2993,7 @@ long _stdcall SDS_CostasQamDemodulate(double,                            // Sour
                                       long*,                             // Pointer to ELG synchronization delay index
                                       long);                             // ELG output synchronization delay length
 
-#line 3392 "siglib.h"
+#line 3408 "siglib.h"
 // compiler
 long _stdcall SDS_CostasQamDemodulateDebug(double,                            // Source data sample
                                            double*,                           // Pointer to real destination symbol point
@@ -3113,7 +3129,7 @@ long _stdcall SDA_CostasQamDemodulateDebug(double* SIGLIB_INPUT_PTR_DECL,     //
                                            double*,                           // Pointer to debug real filter output
                                            double*,                           // Pointer to debug imaginary filter output
                                            double*);                          // Pointer to debug ELG trigger output
-#line 3528 "siglib.h"
+#line 3544 "siglib.h"
 
 void _stdcall SIF_QpskModulate(double* SIGLIB_OUTPUT_PTR_DECL,    // Carrier table pointer
                                double,                            // Carrier phase increment per sample (radians / 2Ï€)
@@ -6239,4 +6255,4 @@ void _stdcall SMX_ExtractCategoricalColumn(double* SIGLIB_INPUT_PTR_DECL,    // 
 // #include "siglib_deprecated.h"
 
 // End of SigLib DSP function section
-#line 7103 "siglib.h"
+#line 7119 "siglib.h"

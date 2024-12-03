@@ -2375,6 +2375,14 @@ void SIGLIB_FUNC_DECL SDA_FftDeconvolutionPre(SLData_t* SIGLIB_INOUT_PTR_DECL,  
                                               const SLArrayIndex_t,                           // log2 FFT length
                                               const SLData_t);                                // Inverse FFT length
 
+void SIGLIB_FUNC_DECL SDA_Convolve2d(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                                     const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to coefficients array
+                                     SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
+                                     const SLArrayIndex_t,                     // Data array column length
+                                     const SLArrayIndex_t,                     // Data array line length
+                                     const SLArrayIndex_t,                     // Filter array column length
+                                     const SLArrayIndex_t);                    // Data array line length
+
 // Correlation functions - correlate.c
 
 void SIGLIB_FUNC_DECL SDA_CorrelateLinear(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to input array #1
@@ -2554,11 +2562,19 @@ void SIGLIB_FUNC_DECL SIF_Fft2d(SLData_t* SIGLIB_OUTPUT_PTR_DECL,          // Po
                                                                            // to bit reverse address table
                                 const SLArrayIndex_t);                     // FFT length
 
-void SIGLIB_FUNC_DECL SIM_Conv3x3(const SLImageData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
-                                  SLImageData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
-                                  const SLData_t* SIGLIB_INPUT_PTR_DECL,         // Pointer to coefficients array
-                                  const SLArrayIndex_t,                          // Line length
-                                  const SLArrayIndex_t);                         // Column length
+void SIGLIB_FUNC_DECL SIM_Convolve3x3(const SLImageData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                                      const SLData_t* SIGLIB_INPUT_PTR_DECL,         // Pointer to coefficients array
+                                      SLImageData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
+                                      const SLArrayIndex_t,                          // Line length
+                                      const SLArrayIndex_t);                         // Column length
+
+void SIGLIB_FUNC_DECL SIM_Convolve2d(const SLImageData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                                     const SLData_t* SIGLIB_INPUT_PTR_DECL,         // Pointer to coefficients array
+                                     SLImageData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
+                                     const SLArrayIndex_t,                          // Data array line length
+                                     const SLArrayIndex_t,                          // Data array column length
+                                     const SLArrayIndex_t,                          // Filter array line length
+                                     const SLArrayIndex_t);                         // Data array column length
 
 void SIGLIB_FUNC_DECL SIM_Sobel3x3(const SLImageData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                    SLImageData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array

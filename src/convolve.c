@@ -599,7 +599,7 @@ void SIGLIB_FUNC_DECL SDA_FftDeconvolution(SLData_t* SIGLIB_PTR_DECL pSrcReal, S
  *  const SLData_t * SIGLIB_PTR_DECL pFFTCoeffs,
  *  const SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
  *  const SLArrayIndex_t FFTLength,
- *  const SLArrayIndex_t Log2FFTlength)
+ *  const SLArrayIndex_t Log2FFTlength
  *
  * Return value:
  *  void
@@ -650,7 +650,8 @@ void SIGLIB_FUNC_DECL SIF_FftDeconvolutionPre(const SLData_t* SIGLIB_PTR_DECL pI
  *  const SLArrayIndex_t * SIGLIB_PTR_DECL pBitReverseAddressTable,
  *  const SLArrayIndex_t FFTLength,
  *  const SLArrayIndex_t Log2FFTlength,
- *  const SLData_t InvFFTLength)*
+ *  const SLData_t InvFFTLength
+ *
  * Return value:
  *  void
  *
@@ -688,3 +689,51 @@ void SIGLIB_FUNC_DECL SDA_FftDeconvolutionPre(SLData_t* SIGLIB_PTR_DECL pSrcReal
   // Divide result magnitudes by FFT length to restore correct gain
   SDA_ComplexScalarMultiply(pSrcReal, pSrcImag, InvFFTLength, pSrcReal, pSrcImag, FFTLength);
 }    // End of SDA_FftDeconvolutionPre()
+
+/********************************************************
+ * Function: SDA_Convolve2d()
+ *
+ * Parameters:
+ *  const SLData_t* dpSrc,
+ *  const SLData_t* pCoeffs,
+ *  SLData_t* pDst,
+ *  const SLArrayIndex_t dataColumnLength,
+ *  const SLArrayIndex_t dataLineLength,
+ *  const SLArrayIndex_t filterColumnLength
+ *  const SLArrayIndex_t filterLineLength,
+ *
+ * Return value:
+ *  void
+ *
+ * Description: Perform a NxM convolution on an image array.
+ *
+ ********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_Convolve2d(const SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t* SIGLIB_PTR_DECL pCoeffs, SLData_t* SIGLIB_PTR_DECL pDst,
+                                     const SLArrayIndex_t dataColumnLength, const SLArrayIndex_t dataLineLength,
+                                     const SLArrayIndex_t filterColumnLength, const SLArrayIndex_t filterLineLength)
+{
+  SLArrayIndex_t padSizeX = filterColumnLength / 2;
+  SLArrayIndex_t padSizeY = filterLineLength / 2;
+
+  // Iterate over each element of the output array
+  for (SLArrayIndex_t i = 0; i < dataColumnLength; i++) {
+    for (SLArrayIndex_t j = 0; j < dataLineLength; j++) {
+      SLData_t sum = 0.0;
+
+      for (SLArrayIndex_t m = filterColumnLength - 1; m >= 0; m--) {    // Apply the time reversed filter kernel
+        for (SLArrayIndex_t n = filterLineLength - 1; n >= 0; n--) {
+          // Calculate input array indices
+          SLArrayIndex_t xIndex = i + (filterColumnLength - m - 1) - padSizeX;
+          SLArrayIndex_t yIndex = j + (filterLineLength - n - 1) - padSizeY;
+
+          // Check bounds for the input array, with zero padding
+          if (xIndex >= 0 && xIndex < dataColumnLength && yIndex >= 0 && yIndex < dataLineLength) {
+            sum += pSrc[xIndex * dataLineLength + yIndex] * pCoeffs[m * filterLineLength + n];
+          }
+        }
+      }
+      pDst[i * dataLineLength + j] = sum;    // Store the result in the output array
+    }
+  }
+}    // End of SDA_Convolve2d()
