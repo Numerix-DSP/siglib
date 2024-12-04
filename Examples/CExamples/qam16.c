@@ -57,8 +57,8 @@
 #endif
 
 #define GAUSSIAN_NOISE_VARIANCE SIGLIB_ZERO    // Injected noise parameters
-//#define   GAUSSIAN_NOISE_VARIANCE             0.1               // Injected
-// noise parameters
+// #define   GAUSSIAN_NOISE_VARIANCE             0.1               // Injected
+//  noise parameters
 #define GAUSSIAN_NOISE_OFFSET SIGLIB_ZERO
 
 // Derived application definitions

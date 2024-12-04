@@ -639,7 +639,7 @@ void SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryWithBiasesNetworkFit(
 
         *(pLayer1Weights + (layer1Node * numberOfInputNodes) + inputLayerNode) += learningRate * layer1Gradient;
       }
-      //##
+      // ##
       SLData_t layer1Gradient;
       switch (layer1ActivationType) {    // Choose required activation derivative
                                          // function
@@ -661,7 +661,7 @@ void SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryWithBiasesNetworkFit(
       *(pLayer1Biases + layer1Node) += learningRate * layer1Gradient;
       *(pLayer2Weights + layer1Node) += learningRate * layer2Gradient;
     }
-    //##
+    // ##
     SLData_t layer2Gradient;
     switch (layer2ActivationType) {    // Choose required activation derivative
                                        // function

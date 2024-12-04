@@ -69,7 +69,7 @@ enum    // IIR bilinear transform filter design type
 #define HALF_PI (PI / 2.0)                                        /* Pi / 2.0 */
 
 /* useful macros */
-#define odd(n) ((n)&1) /* returns 1 if n odd, 0 otherwise */
+#define odd(n) ((n) & 1) /* returns 1 if n odd, 0 otherwise */
 #define asinh(x) (log((x) + sqrt((x) * (x) + 1.0)))
 #define dB2abs(a) (sqrt(pow(10.0, 0.1 * (a)) - 1.0))
 

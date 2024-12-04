@@ -1284,19 +1284,17 @@ void SIGLIB_FUNC_DECL SDA_Rstft(SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t* 
 
   if (centrePaddingFlag == SIGLIB_TRUE) {
     SDA_ZeroPad(pSrc, pSrc, (fftLength >> 1), (fftLength >> 1), localSrcLength);
-    if (localSrcLength % fftLength != 0) {                                                    // Pad the signal if divisible by n_fft
-      localSrcLength = SAI_NextMultipleOfFftLength(localSrcLength, fftLength) - fftLength;    // Adjust length
+    if (localSrcLength % fftLength != 0) {    // Pad the signal if divisible by n_fft
+      // localSrcLength = SAI_NextMultipleOfFftLength(localSrcLength, fftLength) - fftLength;    // Adjust length
+      localSrcLength = SAI_NextMultipleOfFftLength(localSrcLength, fftLength);    // Adjust length
     }
   } else {
     SLArrayIndex_t nextMultipleOfFftLength = SAI_NextMultipleOfFftLength(localSrcLength, fftLength);
     SDA_ZeroPad(pSrc, pSrc, 0, nextMultipleOfFftLength - localSrcLength, localSrcLength);
-    localSrcLength = localSrcLength + (nextMultipleOfFftLength - localSrcLength);    // Adjust length
+    localSrcLength = nextMultipleOfFftLength;    // Adjust length
   }
 
-  SLArrayIndex_t numOutputFrames = (SLArrayIndex_t)(srcLength / localHopLength);
-  if ((numOutputFrames % localHopLength) > 0) {    // Increment for partially filled frames
-    numOutputFrames++;
-  }
+  SLArrayIndex_t numOutputFrames = SAI_RstftNumberOfFrequencyDomainFrames(srcLength, localWindowLength, localHopLength, centrePaddingFlag);
 
   for (SLArrayIndex_t i = 0; i < numOutputFrames; i++) {    // Process each frame
     SLArrayIndex_t start = i * localHopLength;
@@ -1319,8 +1317,6 @@ void SIGLIB_FUNC_DECL SDA_Rstft(SLData_t* SIGLIB_PTR_DECL pSrc, const SLData_t* 
     // Store the result
     SLArrayIndex_t fourierFrameLength = (fftLength >> 1) + 1;
     for (SLArrayIndex_t j = 0; j < fourierFrameLength; j++) {
-      // *(pResultsReal+(j*numOutputFrames)+i) = pTempReal[j];
-      // *(pResultsImag+(j*numOutputFrames)+i) = pTempImag[j];
       *(pResultsReal + ((fourierFrameLength - 1 - j) * numOutputFrames) + i) = pTempReal[j];
       *(pResultsImag + ((fourierFrameLength - 1 - j) * numOutputFrames) + i) = pTempImag[j];
     }
@@ -1382,8 +1378,6 @@ void SIGLIB_FUNC_DECL SDA_Ristft(SLData_t* SIGLIB_PTR_DECL pSrcReal, SLData_t* S
   for (SLArrayIndex_t i = 0; i < numFrames; i++) {
     // Extract FFT data from source
     for (SLArrayIndex_t j = 0; j < fourierFrameLength; j++) {
-      // pTempReal[j] = pSrcReal[(j*numFrames)+i];
-      // pTempImag[j] = pSrcImag[(j*numFrames)+i];
       pTempReal[j] = pSrcReal[((fourierFrameLength - 1 - j) * numFrames) + i];
       pTempImag[j] = pSrcImag[((fourierFrameLength - 1 - j) * numFrames) + i];
     }
@@ -1410,13 +1404,6 @@ void SIGLIB_FUNC_DECL SDA_Ristft(SLData_t* SIGLIB_PTR_DECL pSrcReal, SLData_t* S
     }
   }
 
-  // Normalize the output signal and scale by 1/fftLength
-  for (SLArrayIndex_t i = 0; i < outputLength + fftLength; i++) {
-    if (pNormalization[i] > SIGLIB_EPSILON) {
-      pResultsReal[i] /= (pNormalization[i] * fftLength);
-    }
-  }
-
   // Handle center padding
   if (centrePaddingFlag == SIGLIB_TRUE) {
     SLArrayIndex_t pad_amount = fftLength >> 1;
@@ -1424,6 +1411,15 @@ void SIGLIB_FUNC_DECL SDA_Ristft(SLData_t* SIGLIB_PTR_DECL pSrcReal, SLData_t* S
       pResultsReal[i] = pResultsReal[i + pad_amount];
     }
   }
+
+  // Normalize the output signal and scale by 1/fftLength
+  // for (SLArrayIndex_t i = 0; i < outputLength + fftLength; i++) {
+  for (SLArrayIndex_t i = 0; i < outputLength; i++) {
+    if (pNormalization[i] > SIGLIB_EPSILON) {
+      pResultsReal[i] /= (pNormalization[i] * fftLength);
+    }
+  }
+
 }    // End of SDA_Ristft()
 
 /********************************************************
@@ -1449,13 +1445,13 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SAI_RstftNumberOfFrequencyDomainFrames(const SLA
 {
   SLArrayIndex_t localHopLength = hopLength;
   if (localHopLength <= 0) {
-    localHopLength = windowLength / 2;
+    localHopLength = windowLength >> 2;
   }
 
   if (centrePaddingFlag == SIGLIB_TRUE) {
-    return ((SLArrayIndex_t)(((srcLength - windowLength) / localHopLength) + 2));
+    return ((SLArrayIndex_t)(((srcLength - windowLength) / localHopLength) + 3));
   }
-  return ((SLArrayIndex_t)(((srcLength - windowLength) / localHopLength) + 1));
+  return ((SLArrayIndex_t)(((srcLength - windowLength) / localHopLength) + 2));
 }    // End of SAI_RstftNumberOfFrequencyDomainFrames()
 
 /********************************************************

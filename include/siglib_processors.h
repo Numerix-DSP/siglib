@@ -231,21 +231,21 @@ typedef double SLFloat64_t;     // 64 bit floating point values
                  // requires the time functions to be implemented
 #        endif
 #      else                     // 32 bit compiler
-//#ifdef _WINDOWS_
+// #ifdef _WINDOWS_
 #        include <windows.h>    // Required for Windows applications
-//#endif
+// #endif
 
 #        ifdef SIGLIB_STATIC_LIB    // SigLib will be used as a statically linked library
 #          define SIGLIB_FUNC_DECL
 #        else                                                        // SigLib will be used as a dynamically linked  library
 #          ifdef SIGLIB_DLL_SOURCE                                   // Defined on command line, if rebuilding DLL
 #            define SIGLIB_FUNC_DECL __declspec(dllexport) WINAPI    // DLL export function - used in DLL source
-//#define SIGLIB_FUNC_DECL            __declspec(dllexport) __stdcall // DLL
-// export function - used in DLL source
+// #define SIGLIB_FUNC_DECL            __declspec(dllexport) __stdcall // DLL
+//  export function - used in DLL source
 #          else
 #            define SIGLIB_FUNC_DECL __declspec(dllimport) WINAPI    // DLL import function - used in Application
-//#define SIGLIB_FUNC_DECL            __declspec(dllimport) __stdcall // DLL
-// import function - used in Application
+// #define SIGLIB_FUNC_DECL            __declspec(dllimport) __stdcall // DLL
+//  import function - used in Application
 #          endif
 #        endif
 
@@ -1505,10 +1505,10 @@ typedef SLUInt16_t SLUFixData_t;                           // Unsigned fixed-poi
 #      define SIGLIB_UFIX_MAX ((SLFixData_t)65535)         // Maximum unsigned fixed-point value
 #      define SIGLIB_UFIX_WORD_LENGTH ((SLFixData_t)16)    // Length of unsigned fixed-point data word
 #    else
-typedef SLInt32_t SLFixData_t;       // Fixed point data values
+typedef SLInt32_t SLFixData_t;      // Fixed point data values
 #      define SIGLIB_FIX_MAX ((SLFixData_t)2147483647)     // Maximum fixed-point value
 #      define SIGLIB_FIX_WORD_LENGTH ((SLFixData_t)32)     // Length of fixed-point data word
-typedef SLUInt32_t SLUFixData_t;     // Unsigned fixed-point data values
+typedef SLUInt32_t SLUFixData_t;    // Unsigned fixed-point data values
 #      define SIGLIB_UFIX_MAX ((SLFixData_t)4294967295)    // Maximum unsigned fixed-point value
 #      define SIGLIB_UFIX_WORD_LENGTH ((SLFixData_t)32)    // Length of unsigned fixed-point data word
 #    endif
@@ -1520,19 +1520,19 @@ typedef SLInt16_t SLAccData_t;                         // SigLib accumulator dat
         ((SLData_t)SIGLIB_ONE)                                                 // Sample value close to zero but above numerical error
                                                                                // floor
 #      define SIGLIB_MIN ((SLData_t)SIGLIB_ONE)                                // Minimum positive value
-#      define SIGLIB_DB_MIN ((SLData_t)-98.0)                                  // 20 * log10 of minimum positive value
+#      define SIGLIB_DB_MIN ((SLData_t) - 98.0)                                // 20 * log10 of minimum positive value
 #      define SIGLIB_MAX ((SLData_t)32767.0)                                   // Maximum realistic sample value
 #      define SIGLIB_INV_MAX ((SLFloat32_t)(SIGLIB_ONE / SIGLIB_FLOAT_MAX))    // 1.0 / Maximum floating-point value
 #      define SIGLIB_DATA_WORD_LENGTH ((SLFixData_t)16)                        // Length of SigLib data word
 #    elif (SIGLIB_DATA_LONG == 1)
-typedef SLInt32_t SLData_t;          // SigLib data values
-typedef SLInt32_t SLAccData_t;       // SigLib accumulator data values
+typedef SLInt32_t SLData_t;       // SigLib data values
+typedef SLInt32_t SLAccData_t;    // SigLib accumulator data values
 #      define SIGLIB_EPSILON ((SLData_t)SIGLIB_ONE)    // Smallest value such that (1.0 + SIGLIB_EPSILON) != 1.0
 #      define SIGLIB_MIN_THRESHOLD \
         ((SLData_t)SIGLIB_ONE)                                                 // Sample value close to zero but above numerical error
                                                                                // floor
 #      define SIGLIB_MIN ((SLData_t)SIGLIB_ONE)                                // Minimum positive value
-#      define SIGLIB_DB_MIN ((SLData_t)-150.0)                                 // 20 * log10 of minimum positive value
+#      define SIGLIB_DB_MIN ((SLData_t) - 150.0)                               // 20 * log10 of minimum positive value
 #      define SIGLIB_MAX ((SLData_t)2147483648.0)                              // Maximum realistic sample value
 #      define SIGLIB_INV_MAX ((SLFloat32_t)(SIGLIB_ONE / SIGLIB_FLOAT_MAX))    // 1.0 / Maximum floating-point value
 #      define SIGLIB_DATA_WORD_LENGTH ((SLFixData_t)32)                        // Length of SigLib data word
@@ -1544,7 +1544,7 @@ typedef SLFloat32_t SLAccData_t;    // SigLib accumulator data values
         ((SLData_t)1.0e-6)                                                  // Sample value close to zero but above numerical error
                                                                             // floor
 #      define SIGLIB_MIN ((SLData_t)1.0e-15)                                // Minimum positive value
-#      define SIGLIB_DB_MIN ((SLData_t)-150.0)                              // 20 * log10 of minimum positive value
+#      define SIGLIB_DB_MIN ((SLData_t) - 150.0)                            // 20 * log10 of minimum positive value
 #      define SIGLIB_MAX ((SLData_t)1.0e30)                                 // Maximum realistic sample value
 #      define SIGLIB_INV_MAX ((SLData_t)(SIGLIB_ONE / SIGLIB_FLOAT_MAX))    // 1.0 / Maximum floating-point value
 #      define SIGLIB_DATA_WORD_LENGTH ((SLFixData_t)32)                     // Length of SigLib data word
@@ -1558,7 +1558,7 @@ typedef SLFloat64_t SLAccData_t;    // SigLib accumulator data values
 #      define SIGLIB_MIN ((SLData_t)1.0e-30)                          // Minimum positive value
                                     // #define SIGLIB_DB_MIN               ((SLData_t)-300.0)          // 20 * log10
                                     // of minimum positive value
-#      define SIGLIB_DB_MIN ((SLData_t)-150.0)                        // 20 * log10 of minimum positive value
+#      define SIGLIB_DB_MIN ((SLData_t) - 150.0)                      // 20 * log10 of minimum positive value
 #      define SIGLIB_MAX ((SLData_t)1.0e30)                           // Maximum realistic sample value
 #      define SIGLIB_INV_MAX ((SLData_t)(SIGLIB_ONE / SIGLIB_MAX))    // 1.0 / Maximum floating-point value
 #      define SIGLIB_DATA_WORD_LENGTH ((SLFixData_t)64)               // Length of SigLib data word

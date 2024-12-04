@@ -22,7 +22,7 @@
 
 // Declare global variables and arrays
 #if ENABLE_FIR
-//#define   NUMERATOR_LENGTH      5
+// #define   NUMERATOR_LENGTH      5
 #  define NUMERATOR_LENGTH 10
 #  define DENOMINATOR_LENGTH 0
 // SLComplexRect_s   Numerator [] = {{1.0, 0.0}, {1.0, 0.0}, {1.0, 0.0}, {1.0,

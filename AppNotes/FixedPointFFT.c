@@ -52,8 +52,8 @@ magnitude 4096 then the result will have two peaks of magnitude:
 
 #define FFT_SIZE ((SLArrayIndex_t)1024)
 #define LOG_FFT_SIZE ((SLArrayIndex_t)10)
-//#define FFT_SIZE          ((SLArrayIndex_t)32)
-//#define LOG_FFT_SIZE      ((SLArrayIndex_t)5)
+// #define FFT_SIZE          ((SLArrayIndex_t)32)
+// #define LOG_FFT_SIZE      ((SLArrayIndex_t)5)
 
 #define SIGNAL_MAGNITUDE SIGLIB_SHORT_WORD_MAX    // Set the maximum value in a short word
 
@@ -117,11 +117,11 @@ SLInt16_t pFFTCoeffs[FFT_SIZE];    // FFT coefficient array
 SLInt16_t pWindowCoeffs[FFT_SIZE];    // Window coefficients array
 #  endif
 #else
-SLInt32_t pRealData[FFT_SIZE];                      // Real source data array
-SLInt32_t pImagData[FFT_SIZE];                      // Imaginary data array
-SLInt32_t pFFTCoeffs[FFT_SIZE];                     // FFT coefficient array
+SLInt32_t pRealData[FFT_SIZE];     // Real source data array
+SLInt32_t pImagData[FFT_SIZE];     // Imaginary data array
+SLInt32_t pFFTCoeffs[FFT_SIZE];    // FFT coefficient array
 #  if ENABLE_WINDOWING
-SLInt32_t pWindowCoeffs[FFT_SIZE];                  // Window coefficients array
+SLInt32_t pWindowCoeffs[FFT_SIZE];    // Window coefficients array
 #  endif
 #endif
 

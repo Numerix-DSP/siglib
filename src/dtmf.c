@@ -397,7 +397,7 @@ SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetect(SLData_t* SIGLIB_PTR_DECL pSrc, const
 
     KeyCode += KeyCodeAdd;    // Add the keycode for the high and low frequencies
 
-  }        // End of local definition of TestLargestMagn variable
+  }    // End of local definition of TestLargestMagn variable
 
 #endif
 

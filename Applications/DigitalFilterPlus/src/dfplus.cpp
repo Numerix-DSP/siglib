@@ -1111,23 +1111,23 @@ void mainFrame::OnOpenUsersGuide(wxCommandEvent& WXUNUSED(event))
   wxExecute(cmd.c_str());
   // }
 
-  //#elif defined (__linux__)           // NOT REQUIRED - the standard method
-  // works in v3.x
-  //  wxString ExeString;
-  //  wxString cmd;
-  //  if (AppIniFile->ReadIniStringFromFile (wxT("LINUX_PDF_PATH"), &ExeString) == TRUE) {
-  //    cmd = ExeString + wxT(" ") + fname;
-  //    if ( wxExecute (cmd.c_str()) != 0 ) {
-  //      wxMessageBox ("Unable to open User's Guide\nPlease ensure you have a
-  //      PDF file reader correctly installed", "DFPlus Warning", wxOK |
-  //      wxICON_EXCLAMATION, NULL);
-  //    }
-  //  }
-  //  else {
-  //    wxMessageBox ("Unable to open User's Guide\nPlease ensure you have a PDF
-  //    file reader correctly installed", "DFPlus Warning", wxOK |
-  //    wxICON_EXCLAMATION, NULL);
-  //  }
+  // #elif defined (__linux__)           // NOT REQUIRED - the standard method
+  //  works in v3.x
+  //   wxString ExeString;
+  //   wxString cmd;
+  //   if (AppIniFile->ReadIniStringFromFile (wxT("LINUX_PDF_PATH"), &ExeString) == TRUE) {
+  //     cmd = ExeString + wxT(" ") + fname;
+  //     if ( wxExecute (cmd.c_str()) != 0 ) {
+  //       wxMessageBox ("Unable to open User's Guide\nPlease ensure you have a
+  //       PDF file reader correctly installed", "DFPlus Warning", wxOK |
+  //       wxICON_EXCLAMATION, NULL);
+  //     }
+  //   }
+  //   else {
+  //     wxMessageBox ("Unable to open User's Guide\nPlease ensure you have a PDF
+  //     file reader correctly installed", "DFPlus Warning", wxOK |
+  //     wxICON_EXCLAMATION, NULL);
+  //   }
 
 #else
   wxMimeTypesManager g_mimeManager;

@@ -51,7 +51,7 @@ int main(int argc, char** argv)
 #if IMPULSE_RESPONSE_ENABLED
       gpc_init_2d("One-pole Filter Impulse Response",    // Plot title
 #else
-      gpc_init_2d("One-pole Filter Step Response",              // Plot title
+      gpc_init_2d("One-pole Filter Step Response",    // Plot title
 #endif
                   "Time",             // X-Axis label
                   "Magnitude",        // Y-Axis label
@@ -73,8 +73,8 @@ int main(int argc, char** argv)
   SDA_Impulse(pSrc,              // Pointer to destination array
               SAMPLE_LENGTH);    // Output dataset length
 #else
-  SDA_Impulse(pSrc,                                             // Pointer to destination array
-              SAMPLE_LENGTH);                                   // Output dataset length
+  SDA_Impulse(pSrc,              // Pointer to destination array
+              SAMPLE_LENGTH);    // Output dataset length
 #endif
 
   SIF_OnePole(&OnePoleFilterState);    // Filter state

@@ -15,7 +15,7 @@
 
 // Define constants
 // Select one or other of the following filter types
-//#define FILTER_TYPE             SIGLIB_BUTTERWORTH_IIR_NORM_COEFFS
+// #define FILTER_TYPE             SIGLIB_BUTTERWORTH_IIR_NORM_COEFFS
 #define FILTER_TYPE SIGLIB_BESSEL_IIR_NORM_COEFFS
 
 #define PLOT_RESULTS 1     // Set to 1 to plot pResults as well as print them

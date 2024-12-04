@@ -82,6 +82,8 @@ Operational Changes:
   SMX_Multiply and SMX_MultiplyPiecewise changed to SMX_Multiply2 and SMX_Multiply2Piecewise to match SDA_ functions
   SDA_IirNc is deprecated as this functionality is now includes in SDA_IirZeroPhase.
   SIM_Conv3x3 changed to SIM_Convolve3x3 and reordered coefficients for consistency
+  SIGLIB_SINGLE_SIDED_THOLD changed to SIGLIB_SINGLE_SIDED_THRESHOLD
+  SIGLIB_DOUBLE_SIDED_THOLD changed to SIGLIB_DOUBLE_SIDED_THRESHOLD
 
 Additional Processor / Compiler Support:
   None.

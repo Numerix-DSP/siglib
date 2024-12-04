@@ -106,5 +106,8 @@ Update history:
 
 #  define SIM_Conv3x3(a, b, c, d, e) SIM_Convolve3x3(a, c, b, d, e)
 
+#  define SIGLIB_SINGLE_SIDED_THOLD SIGLIB_SINGLE_SIDED_THRESHOLD
+#  define SIGLIB_DOUBLE_SIDED_THOLD SIGLIB_DOUBLE_SIDED_THRESHOLD
+
 // End of deprecation list
 #endif    // End of #ifndef SIGLIB_DEPRECATED

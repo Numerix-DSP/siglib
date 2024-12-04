@@ -225,8 +225,8 @@ enum SLClipMode_t {    // Data clipping modes
 };
 
 enum SLThresholdMode_t {    // Data threshold and clamping modes
-  SIGLIB_SINGLE_SIDED_THOLD,
-  SIGLIB_DOUBLE_SIDED_THOLD
+  SIGLIB_SINGLE_SIDED_THRESHOLD,
+  SIGLIB_DOUBLE_SIDED_THRESHOLD
 };
 
 enum SLLevelCrossingMode_t {    // Zero crossing detection modes

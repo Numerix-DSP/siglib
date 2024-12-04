@@ -101,8 +101,8 @@ void SIGLIB_FUNC_DECL SDA_Pwm(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SI
   SDA_Subtract2(pSrc, pRamp, pDst, sampleLength);
 
   // Threshold difference
-  SDA_Threshold(pDst, pDst, SIGLIB_ZERO, SIGLIB_SINGLE_SIDED_THOLD, sampleLength);
+  SDA_Threshold(pDst, pDst, SIGLIB_ZERO, SIGLIB_SINGLE_SIDED_THRESHOLD, sampleLength);
 
   // Clamp threshold - if signal > 0 then set to 1
-  SDA_Clamp(pDst, pDst, SIGLIB_ZERO, SIGLIB_ONE, SIGLIB_SINGLE_SIDED_THOLD, sampleLength);
+  SDA_Clamp(pDst, pDst, SIGLIB_ZERO, SIGLIB_ONE, SIGLIB_SINGLE_SIDED_THRESHOLD, sampleLength);
 }    // End of SDA_Pwm()

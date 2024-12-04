@@ -164,15 +164,15 @@ int main(void)
       TxStringPtr++;    // Increment string pointer
 
 #else
-      SDA_FskModulateByte(*TxStringPtr++,                                   // Source data byte
-                          pData + i,                                        // Destination data pointer
-                          pCarrierTable,                                    // Carrier sinusoid table
-                          &txLevelOneCarrierPhase,                          // Level '1' carrier phase
-                          &txLevelZeroCarrierPhase,                         // Level '0' carrier phase
-                          CARRIER_FREQ_ONE / CARRIER_TABLE_FREQ,            // Level '1' carrier phase increment
-                          CARRIER_FREQ_ZERO / CARRIER_TABLE_FREQ,           // Level '0' carrier phase increment
-                          SYMBOL_LENGTH,                                    // Samples per symbol
-                          CARRIER_SINE_TABLE_SIZE);                         // Sine table size
+      SDA_FskModulateByte(*TxStringPtr++,                            // Source data byte
+                          pData + i,                                 // Destination data pointer
+                          pCarrierTable,                             // Carrier sinusoid table
+                          &txLevelOneCarrierPhase,                   // Level '1' carrier phase
+                          &txLevelZeroCarrierPhase,                  // Level '0' carrier phase
+                          CARRIER_FREQ_ONE / CARRIER_TABLE_FREQ,     // Level '1' carrier phase increment
+                          CARRIER_FREQ_ZERO / CARRIER_TABLE_FREQ,    // Level '0' carrier phase increment
+                          SYMBOL_LENGTH,                             // Samples per symbol
+                          CARRIER_SINE_TABLE_SIZE);                  // Sine table size
 #endif
     }
 
@@ -250,14 +250,14 @@ int main(void)
       TxStringPtr++;    // Increment string pointer
 
 #else
-      SDA_CpfskModulateByte(*TxStringPtr++,                                 // Source data byte
-                            pData + i,                                      // Destination data pointer
-                            pCarrierTable,                                  // Carrier sinusoid table
-                            &TxPhaseOffset,                                 // Carrier phase
-                            CARRIER_FREQ_ONE / CARRIER_TABLE_FREQ,          // Level '1' carrier phase increment
-                            CARRIER_FREQ_ZERO / CARRIER_TABLE_FREQ,         // Level '0' carrier phase increment
-                            SYMBOL_LENGTH,                                  // Samples per symbol
-                            CARRIER_SINE_TABLE_SIZE);                       // Sine table size
+      SDA_CpfskModulateByte(*TxStringPtr++,                            // Source data byte
+                            pData + i,                                 // Destination data pointer
+                            pCarrierTable,                             // Carrier sinusoid table
+                            &TxPhaseOffset,                            // Carrier phase
+                            CARRIER_FREQ_ONE / CARRIER_TABLE_FREQ,     // Level '1' carrier phase increment
+                            CARRIER_FREQ_ZERO / CARRIER_TABLE_FREQ,    // Level '0' carrier phase increment
+                            SYMBOL_LENGTH,                             // Samples per symbol
+                            CARRIER_SINE_TABLE_SIZE);                  // Sine table size
 
 #endif
     }

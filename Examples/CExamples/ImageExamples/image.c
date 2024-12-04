@@ -117,7 +117,7 @@ int main(int argc, char* argv[])
     }
     pLineBuffer = pLineBufferStart;    // Reset array pointers
 
-    SDA_Threshold(pLineBufferStart, pLineBufferStart, (THRESHOLD_LEVEL * 16), SIGLIB_SINGLE_SIDED_THOLD, IMAGE_DIMENSION);
+    SDA_Threshold(pLineBufferStart, pLineBufferStart, (THRESHOLD_LEVEL * 16), SIGLIB_SINGLE_SIDED_THRESHOLD, IMAGE_DIMENSION);
 
     for (SLArrayIndex_t j = 0; j < IMAGE_DIMENSION; j++) {
       *pImage1++ = (SLImageData_t)(*pLineBuffer++);

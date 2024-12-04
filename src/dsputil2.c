@@ -908,14 +908,14 @@ void SIGLIB_FUNC_DECL SDA_AgcMeanAbs(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDat
     MeanSum -= pState[*pStateIndex];    // Subtract old sample
     pState[*pStateIndex] = Tmp;         // Store new sample in state array
 #else
-    SLData_t Tmp = *pSrc++ * Gain;        // Get in new sample
-    *pDst++ = Tmp;                        // Store output value
-    if (Tmp < SIGLIB_ZERO) {              // Ensure positive
+    SLData_t Tmp = *pSrc++ * Gain;    // Get in new sample
+    *pDst++ = Tmp;                    // Store output value
+    if (Tmp < SIGLIB_ZERO) {          // Ensure positive
       Tmp = -Tmp;
     }
-    MeanSum += Tmp;                            // Add in new sample
-    MeanSum -= pState[*pStateIndex];           // Subtract old sample
-    pState[*pStateIndex] = Tmp;                // Store new sample in state array
+    MeanSum += Tmp;                     // Add in new sample
+    MeanSum -= pState[*pStateIndex];    // Subtract old sample
+    pState[*pStateIndex] = Tmp;         // Store new sample in state array
 #endif
 
     (*pStateIndex)++;                    // Increment state index pointer

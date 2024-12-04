@@ -318,7 +318,7 @@ SLChar_t SIGLIB_FUNC_DECL SDS_ViterbiDecoderK3(SLData_t* pSrc, SLFixData_t* pOut
         *DecodedByte = 0;                                  // Clear decoded word
       }
     }    // End of do trace back section
-  }      // End of InputBitCount loop
+  }    // End of InputBitCount loop
   return (OutputByte);
 }    // End of SDS_ViterbiDecoderK3()
 

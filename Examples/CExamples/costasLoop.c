@@ -16,9 +16,9 @@
 #define CARRIER_FREQUENCY 300.    // Carrier frequency
 
 #define FEEDBACK_MODE SIGLIB_COSTAS_LOOP_MULTIPLY_LOOP    // Feedback mode
-//#define FEEDBACK_MODE SIGLIB_COSTAS_LOOP_POLARITY_LOOP
-//#define FEEDBACK_MODE SIGLIB_COSTAS_LOOP_HARD_LIMITED_LOOP    // Very
-// sensitive so may need to reduce modulation index
+// #define FEEDBACK_MODE SIGLIB_COSTAS_LOOP_POLARITY_LOOP
+// #define FEEDBACK_MODE SIGLIB_COSTAS_LOOP_HARD_LIMITED_LOOP    // Very
+//  sensitive so may need to reduce modulation index
 
 // Note: Costas loop LPFs - lengths are chosen so that there
 //  are at least two full cycles and an odd number - for an integer group delay

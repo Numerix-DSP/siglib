@@ -37,11 +37,11 @@
 #define START_DELAY 15    // Arbitrary delay to test synchronizer
 
 #define SAMPLE_RATE_HZ 8000.    // Characteristics of PRBS
-//#define SYMBOL_RATE             1000.                                // 8
-// samples per symbol
+// #define SYMBOL_RATE             1000.                                // 8
+//  samples per symbol
 #define SYMBOL_RATE 400.    // 20 samples per symbol
-//#define SYMBOL_RATE             200.                                 // 40
-// samples per symbol
+// #define SYMBOL_RATE             200.                                 // 40
+//  samples per symbol
 
 #define SYMBOL_LENGTH ((SLFixData_t)(SAMPLE_RATE_HZ / SYMBOL_RATE))
 
@@ -224,43 +224,43 @@ int main(void)
                      SAMPLE_LENGTH - START_DELAY);    // Output dataset length
 #  else
 #    if BINARY_PRBS_INPUT
-  SDA_SignalGenerate(pSrc + START_DELAY,                          // Pointer to destination array
-                     SIGLIB_PN_SEQUENCE,                          // Signal type - Pseudo random number sequence
-                     SIGLIB_TWO,                                  // Signal magnitude range
-                     SIGLIB_FILL,                                 // Fill (overwrite) or add to existing array contents
-                     SYMBOL_RATE / SAMPLE_RATE_HZ,                // Signal frequency
-                     SIGLIB_MINUS_ONE,                            // Signal minimum level
-                     SIGLIB_TWO,                                  // Number of discrete levels in PN sequence
-                     SIGLIB_ZERO,                                 // Signal end value - Unused
-                     &PnsPhase,                                   // PRN phase - used for next iteration
-                     &PnsCurrentValue,                            // PRN current value - used for next iteration
-                     SAMPLE_LENGTH - START_DELAY);                // Output dataset length
+  SDA_SignalGenerate(pSrc + START_DELAY,              // Pointer to destination array
+                     SIGLIB_PN_SEQUENCE,              // Signal type - Pseudo random number sequence
+                     SIGLIB_TWO,                      // Signal magnitude range
+                     SIGLIB_FILL,                     // Fill (overwrite) or add to existing array contents
+                     SYMBOL_RATE / SAMPLE_RATE_HZ,    // Signal frequency
+                     SIGLIB_MINUS_ONE,                // Signal minimum level
+                     SIGLIB_TWO,                      // Number of discrete levels in PN sequence
+                     SIGLIB_ZERO,                     // Signal end value - Unused
+                     &PnsPhase,                       // PRN phase - used for next iteration
+                     &PnsCurrentValue,                // PRN current value - used for next iteration
+                     SAMPLE_LENGTH - START_DELAY);    // Output dataset length
 #    else
-  SDA_SignalGenerate(pSrc + START_DELAY,               // Pointer to destination array
-                     SIGLIB_PN_SEQUENCE,               // Signal type - Pseudo random number sequence
-                     SIGLIB_TWO,                       // Signal magnitude range
-                     SIGLIB_FILL,                      // Fill (overwrite) or add to existing array contents
-                     SYMBOL_RATE / SAMPLE_RATE_HZ,     // Signal frequency
-                     SIGLIB_MINUS_ONE,                 // Signal minimum level
-                     SIGLIB_FOUR,                      // Number of discrete levels in PN sequence
-                     SIGLIB_ZERO,                      // Signal end value - Unused
-                     &PnsPhase,                        // PRN phase - used for next iteration
-                     &PnsCurrentValue,                 // PRN current value - used for next iteration
-                     SAMPLE_LENGTH - START_DELAY);     // Output dataset length
+  SDA_SignalGenerate(pSrc + START_DELAY,              // Pointer to destination array
+                     SIGLIB_PN_SEQUENCE,              // Signal type - Pseudo random number sequence
+                     SIGLIB_TWO,                      // Signal magnitude range
+                     SIGLIB_FILL,                     // Fill (overwrite) or add to existing array contents
+                     SYMBOL_RATE / SAMPLE_RATE_HZ,    // Signal frequency
+                     SIGLIB_MINUS_ONE,                // Signal minimum level
+                     SIGLIB_FOUR,                     // Number of discrete levels in PN sequence
+                     SIGLIB_ZERO,                     // Signal end value - Unused
+                     &PnsPhase,                       // PRN phase - used for next iteration
+                     &PnsCurrentValue,                // PRN current value - used for next iteration
+                     SAMPLE_LENGTH - START_DELAY);    // Output dataset length
 #    endif
 #  endif
 #else
-  SDA_SignalGenerate(pSrc + START_DELAY,                                      // Pointer to destination array
-                     SIGLIB_SQUARE_WAVE,                                      // Signal type - Square wave
-                     SIGLIB_ONE,                                              // Signal peak level
-                     SIGLIB_FILL,                                             // Fill (overwrite) or add to existing array contents
-                     (SYMBOL_RATE / SAMPLE_RATE_HZ) / SIGLIB_TWO,             // Signal frequency
-                     SIGLIB_ZERO,                                             // D.C. Offset
-                     SIGLIB_HALF,                                             // Duty cycle
-                     SIGLIB_ZERO,                                             // Signal end value - Unused
-                     &PnsPhase,                                               // Signal phase - maintained across array boundaries
-                     &PnsCurrentValue,                                        // Unused
-                     SAMPLE_LENGTH - START_DELAY);                            // Output dataset length
+  SDA_SignalGenerate(pSrc + START_DELAY,                             // Pointer to destination array
+                     SIGLIB_SQUARE_WAVE,                             // Signal type - Square wave
+                     SIGLIB_ONE,                                     // Signal peak level
+                     SIGLIB_FILL,                                    // Fill (overwrite) or add to existing array contents
+                     (SYMBOL_RATE / SAMPLE_RATE_HZ) / SIGLIB_TWO,    // Signal frequency
+                     SIGLIB_ZERO,                                    // D.C. Offset
+                     SIGLIB_HALF,                                    // Duty cycle
+                     SIGLIB_ZERO,                                    // Signal end value - Unused
+                     &PnsPhase,                                      // Signal phase - maintained across array boundaries
+                     &PnsCurrentValue,                               // Unused
+                     SAMPLE_LENGTH - START_DELAY);                   // Output dataset length
 #endif
 
 #if ADD_NOISE

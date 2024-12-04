@@ -24,7 +24,7 @@
 // This defines the lowest frequency, at which we start to track the fundamental
 // Starting the track at a very low frequency is difficult because the signal is
 // overwhelmed by noise
-//#define START_INDEX             60                        // Used for
+// #define START_INDEX             60                        // Used for
 // machine.wav
 
 static char WavFilename[80];
@@ -35,7 +35,7 @@ static SLWavFileInfo_s wavInfo;
 #define NUMBER_OF_SINC_SIDELOBES 2    // Number of sinc sidelobes
 // #define SINC_LUT_LENGTH           1001
 #define SINC_LUT_LENGTH 1000
-//#define MAX_SINC_INPUT_MAGNITUDE  ((11. * SIGLIB_PI) / 4.)
+// #define MAX_SINC_INPUT_MAGNITUDE  ((11. * SIGLIB_PI) / 4.)
 static SLData_t LookUpTablePhaseGain;
 static SLData_t SincLUT[SINC_LUT_LENGTH];
 

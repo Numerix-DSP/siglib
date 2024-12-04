@@ -58,11 +58,11 @@ Update history:
 #    define SIGLIB_NULL_ARRAY_INDEX_PTR ((SLArrayIndex_t*)0)        // Null pointer to SLArrayIndex_t
 
 // Array index constants
-#    define SIGLIB_INVALID_ARRAY_INDEX ((SLArrayIndex_t)-1)            // Invalid SLArrayIndex_t
-#    define SIGLIB_SIGNAL_NOT_PRESENT ((SLArrayIndex_t)-1)             // Signal not present in array
-#    define SIGLIB_SEQUENCE_NOT_DETECTED ((SLArrayIndex_t)-1)          // Sequence not detected
-#    define SIGLIB_LEVEL_CROSSING_NOT_DETECTED ((SLArrayIndex_t)-1)    // Zero crossing not detected
-#    define SIGLIB_NO_PARITY_ERROR ((SLArrayIndex_t)-1)                // No parity error detected
+#    define SIGLIB_INVALID_ARRAY_INDEX ((SLArrayIndex_t) - 1)            // Invalid SLArrayIndex_t
+#    define SIGLIB_SIGNAL_NOT_PRESENT ((SLArrayIndex_t) - 1)             // Signal not present in array
+#    define SIGLIB_SEQUENCE_NOT_DETECTED ((SLArrayIndex_t) - 1)          // Sequence not detected
+#    define SIGLIB_LEVEL_CROSSING_NOT_DETECTED ((SLArrayIndex_t) - 1)    // Zero crossing not detected
+#    define SIGLIB_NO_PARITY_ERROR ((SLArrayIndex_t) - 1)                // No parity error detected
 
 // Fixed point constants returned from SigLib functions
 // Bit 15 is set to '1' and this is sign extended if
@@ -122,15 +122,15 @@ Update history:
                                                 // words
 
 // General constants - native word length
-#    define SIGLIB_ON ((SLFixData_t)1)           // Switch is ON
-#    define SIGLIB_OFF ((SLFixData_t)0)          // Switch is OFF
-#    define SIGLIB_ENABLE ((SLFixData_t)1)       // Function is enabled
-#    define SIGLIB_DISABLE ((SLFixData_t)0)      // Function is disabled
-#    define SIGLIB_TRUE ((SLFixData_t)1)         // True
-#    define SIGLIB_FALSE ((SLFixData_t)0)        // False
-#    define SIGLIB_NULL ((SLFixData_t)0)         // Null
-#    define SIGLIB_POSITIVE ((SLFixData_t)1)     // Positive
-#    define SIGLIB_NEGATIVE ((SLFixData_t)-1)    // Negative
+#    define SIGLIB_ON ((SLFixData_t)1)             // Switch is ON
+#    define SIGLIB_OFF ((SLFixData_t)0)            // Switch is OFF
+#    define SIGLIB_ENABLE ((SLFixData_t)1)         // Function is enabled
+#    define SIGLIB_DISABLE ((SLFixData_t)0)        // Function is disabled
+#    define SIGLIB_TRUE ((SLFixData_t)1)           // True
+#    define SIGLIB_FALSE ((SLFixData_t)0)          // False
+#    define SIGLIB_NULL ((SLFixData_t)0)           // Null
+#    define SIGLIB_POSITIVE ((SLFixData_t)1)       // Positive
+#    define SIGLIB_NEGATIVE ((SLFixData_t) - 1)    // Negative
 
 // General constants - 16 bit
 #    define SIGLIB_ON_16 ((SLInt16_t)1)                // Switch is ON
@@ -198,20 +198,20 @@ Update history:
 #    define ADPCM_DEFAULT_STEP_SIZE SIGLIB_ONE
 
 // Declare floating point constants
-#    define SIGLIB_MINUS_ONE_HUNDRED ((SLData_t)-100.0)
-#    define SIGLIB_MINUS_TEN ((SLData_t)-10.0)
-#    define SIGLIB_MINUS_NINE ((SLData_t)-9.0)
-#    define SIGLIB_MINUS_EIGHT ((SLData_t)-8.0)
-#    define SIGLIB_MINUS_SEVEN ((SLData_t)-7.0)
-#    define SIGLIB_MINUS_SIX ((SLData_t)-6.0)
-#    define SIGLIB_MINUS_FIVE ((SLData_t)-5.0)
-#    define SIGLIB_MINUS_FOUR ((SLData_t)-4.0)
-#    define SIGLIB_MINUS_THREE ((SLData_t)-3.0)
-#    define SIGLIB_MINUS_TWO ((SLData_t)-2.0)
-#    define SIGLIB_MINUS_ONE ((SLData_t)-1.0)
-#    define SIGLIB_MINUS_HALF ((SLData_t)-0.5)
-#    define SIGLIB_MINUS_THIRD ((SLData_t)-0.333333333333333333333333333333333333333333333333333333333333333)
-#    define SIGLIB_MINUS_QUARTER ((SLData_t)-0.25)
+#    define SIGLIB_MINUS_ONE_HUNDRED ((SLData_t) - 100.0)
+#    define SIGLIB_MINUS_TEN ((SLData_t) - 10.0)
+#    define SIGLIB_MINUS_NINE ((SLData_t) - 9.0)
+#    define SIGLIB_MINUS_EIGHT ((SLData_t) - 8.0)
+#    define SIGLIB_MINUS_SEVEN ((SLData_t) - 7.0)
+#    define SIGLIB_MINUS_SIX ((SLData_t) - 6.0)
+#    define SIGLIB_MINUS_FIVE ((SLData_t) - 5.0)
+#    define SIGLIB_MINUS_FOUR ((SLData_t) - 4.0)
+#    define SIGLIB_MINUS_THREE ((SLData_t) - 3.0)
+#    define SIGLIB_MINUS_TWO ((SLData_t) - 2.0)
+#    define SIGLIB_MINUS_ONE ((SLData_t) - 1.0)
+#    define SIGLIB_MINUS_HALF ((SLData_t) - 0.5)
+#    define SIGLIB_MINUS_THIRD ((SLData_t) - 0.333333333333333333333333333333333333333333333333333333333333333)
+#    define SIGLIB_MINUS_QUARTER ((SLData_t) - 0.25)
 #    define SIGLIB_ZERO ((SLData_t)0.0)
 #    define SIGLIB_QUARTER ((SLData_t)0.25)
 #    define SIGLIB_THIRD ((SLData_t)0.333333333333333333333333333333333333333333333333333333333333333)
@@ -276,9 +276,9 @@ Update history:
                                                        // Temperament ratio
 
 // 16 bit fixed point constants
-#    define SIGLIB_MINUS_TWO_16 ((SLInt16_t)-2)
-#    define SIGLIB_MINUS_ONE_16 ((SLInt16_t)-1)
-#    define SIGLIB_MINUS_HALF_16 ((SLInt16_t)-16384)
+#    define SIGLIB_MINUS_TWO_16 ((SLInt16_t) - 2)
+#    define SIGLIB_MINUS_ONE_16 ((SLInt16_t) - 1)
+#    define SIGLIB_MINUS_HALF_16 ((SLInt16_t) - 16384)
 #    define SIGLIB_ZERO_16 ((SLInt16_t)0)
 #    define SIGLIB_QUARTER_16 ((SLInt16_t)8192)
 #    define SIGLIB_THIRD_16 ((SLInt16_t)10923)
@@ -302,9 +302,9 @@ Update history:
 #    define SIGLIB_THREE_SIXTY_16 ((SLInt16_t)360)
 
 // 32 bit fixed point constants
-#    define SIGLIB_MINUS_TWO_32 ((SLInt32_t)-2)
-#    define SIGLIB_MINUS_ONE_32 ((SLInt32_t)-1)
-#    define SIGLIB_MINUS_HALF_32 ((SLInt32_t)-16384)
+#    define SIGLIB_MINUS_TWO_32 ((SLInt32_t) - 2)
+#    define SIGLIB_MINUS_ONE_32 ((SLInt32_t) - 1)
+#    define SIGLIB_MINUS_HALF_32 ((SLInt32_t) - 16384)
 #    define SIGLIB_ZERO_32 ((SLInt32_t)0)
 #    define SIGLIB_QUARTER_32 ((SLInt32_t)8192)
 #    define SIGLIB_THIRD_32 ((SLInt32_t)10923)
@@ -328,8 +328,8 @@ Update history:
 #    define SIGLIB_THREE_SIXTY_32 ((SLInt32_t)360)
 
 // SLArrayIndex_t fixed point constants
-#    define SIGLIB_AI_MINUS_TWO ((SLArrayIndex_t)-2)
-#    define SIGLIB_AI_MINUS_ONE ((SLArrayIndex_t)-1)
+#    define SIGLIB_AI_MINUS_TWO ((SLArrayIndex_t) - 2)
+#    define SIGLIB_AI_MINUS_ONE ((SLArrayIndex_t) - 1)
 #    define SIGLIB_AI_ZERO ((SLArrayIndex_t)0)
 #    define SIGLIB_AI_ONE ((SLArrayIndex_t)1)
 #    define SIGLIB_AI_TWO ((SLArrayIndex_t)2)
@@ -343,8 +343,8 @@ Update history:
 #    define SIGLIB_AI_TEN ((SLArrayIndex_t)10)
 
 // SLFixData_t fixed point constants
-#    define SIGLIB_FIX_MINUS_TWO ((SLFixData_t)-2)
-#    define SIGLIB_FIX_MINUS_ONE ((SLFixData_t)-1)
+#    define SIGLIB_FIX_MINUS_TWO ((SLFixData_t) - 2)
+#    define SIGLIB_FIX_MINUS_ONE ((SLFixData_t) - 1)
 #    define SIGLIB_FIX_ZERO ((SLFixData_t)0)
 #    define SIGLIB_FIX_ONE ((SLFixData_t)1)
 #    define SIGLIB_FIX_TWO ((SLFixData_t)2)

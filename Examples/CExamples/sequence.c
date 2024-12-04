@@ -16,7 +16,7 @@ static SLFixData_t NumSynchState;           // State array for bit synch. detect
 static SLFixData_t SynchSequenceBitMask;    // Bit mask for synch. detector
 
 // Select different options to test the detector with different synch options
-//#define NUMERICAL_SYNCH_SEQ_LEN   32                // Number of bits in synch
+// #define NUMERICAL_SYNCH_SEQ_LEN   32                // Number of bits in synch
 // sequence length static SLFixData_t NumSynchSequence = 0x0ffffd554;  // 3, 3,
 // 3, 3||3, 3, 3, 3||3, 1, 1, 1||1, 1, 1, 0
 

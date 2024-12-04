@@ -419,16 +419,16 @@ int main(int argc, char* argv[])
                     networkInputLayerNodes);    // Array length
 #  endif
 #else    // !REAL_ONLY_FFT_OUTPUT
-        SDA_Rfft(pRealData,                      // Pointer to real array
-                 pImagData,                      // Pointer to imaginary array
-                 pFFTCoeffs,                     // Pointer to FFT coefficients
-                 SIGLIB_BIT_REV_STANDARD,        // Bit reverse mode flag / Pointer to
-                                                 // bit reverse address table
-                 FFT_LENGTH,                     // FFT length
-                 LOG2_FFT_LENGTH);               // log2 FFT length
+        SDA_Rfft(pRealData,                  // Pointer to real array
+                 pImagData,                  // Pointer to imaginary array
+                 pFFTCoeffs,                 // Pointer to FFT coefficients
+                 SIGLIB_BIT_REV_STANDARD,    // Bit reverse mode flag / Pointer to
+                                             // bit reverse address table
+                 FFT_LENGTH,                 // FFT length
+                 LOG2_FFT_LENGTH);           // log2 FFT length
 
 #  if (LINEAR_FFT_MAGNITUDE)
-                                                 // Normalize FFT output magnitude
+                                      // Normalize FFT output magnitude
         SDA_Multiply(pRealDataShortened,         // Source array pointer
                      SIGLIB_ONE / FFT_LENGTH,    // Scalar multiply
                      pRealDataShortened,         // Destination array pointer
@@ -506,7 +506,7 @@ int main(int argc, char* argv[])
           SDA_Threshold(pRealDataShortened,                             // Pointer to source array
                         pRealDataShortened,                             // Pointer to destination array
                         pLargest[numLargestFrequencyMagnitudes - 1],    // Threshold level
-                        SIGLIB_SINGLE_SIDED_THOLD,                      // Threshold type
+                        SIGLIB_SINGLE_SIDED_THRESHOLD,                  // Threshold type
                         networkInputLayerNodes);                        // Source array length
         }
 

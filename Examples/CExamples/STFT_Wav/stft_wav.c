@@ -67,15 +67,15 @@ int main(int argc, char* argv[])
   printf("numFrequencies: %d\n", numFrequencies);
 
   // Allocate memory for arrays
-  SLData_t* pSrc = SUF_VectorArrayAllocate(wavFileLength + FFT_LENGTH);    // Length allows for padding in STFT
+  SLData_t* pSrc = SUF_VectorArrayAllocate(wavFileLength + (FFT_LENGTH * 2));    // Length allows for padding in STFT
   SLData_t* pTempReal = SUF_VectorArrayAllocate(FFT_LENGTH);
   SLData_t* pTempImag = SUF_VectorArrayAllocate(FFT_LENGTH);
   SLData_t* pWindowCoeffs = SUF_VectorArrayAllocate(FFT_LENGTH);
   SLData_t* pFFTCoeffs = SUF_FftCoefficientAllocate(FFT_LENGTH);
   SLData_t* pFrequencyDomainReal = SUF_VectorArrayAllocate(numFrames * numFrequencies);
   SLData_t* pFrequencyDomainImag = SUF_VectorArrayAllocate(numFrames * numFrequencies);
-  SLData_t* pIstftNormalization = SUF_VectorArrayAllocate(wavFileLength + FFT_LENGTH);    // Length allows for padding in STFT
-  SLData_t* pTimeDomainResults = SUF_VectorArrayAllocate(wavFileLength + FFT_LENGTH);     // Length allows for padding in STFT
+  SLData_t* pIstftNormalization = SUF_VectorArrayAllocate(wavFileLength + (FFT_LENGTH * 2));    // Length allows for padding in STFT
+  SLData_t* pTimeDomainResults = SUF_VectorArrayAllocate(wavFileLength + (FFT_LENGTH * 2));     // Length allows for padding in STFT
 
   if ((NULL == pSrc) || (NULL == pTempReal) || (NULL == pTempImag) || (NULL == pWindowCoeffs) || (NULL == pFFTCoeffs) ||
       (NULL == pFrequencyDomainReal) || (NULL == pFrequencyDomainImag) || (NULL == pIstftNormalization) || (NULL == pTimeDomainResults)) {
@@ -175,16 +175,16 @@ int main(int argc, char* argv[])
              pTempReal, pTempImag, pTimeDomainResults, pIstftNormalization, numFrames, HOP_LENGTH, WINDOW_LENGTH, FFT_LENGTH,
              SAI_FftLengthLog2(FFT_LENGTH), CENTRE_PADDING_FLAG);
 
-  wavFileLength -= FFT_LENGTH;    // Ignore the final frame
-
   SDA_Multiply(pTimeDomainResults, 32768., pTimeDomainResults,
                wavFileLength);    // Scale and copy source data to processing array to allow overwriting with room for centre padding
 
+#define COMPARISON_THRESHOLD_LEVEL SIGLIB_ONE
+
   // Compare source and processed arrays
-  SLFixData_t comparison = SDA_Compare(pInputData,            // Source array pointer #1
-                                       pTimeDomainResults,    // Source array pointer #2
-                                       1.,                    // Threshold
-                                       wavFileLength);        // Dataset length
+  SLFixData_t comparison = SDA_Compare(pInputData,                    // Source array pointer #1
+                                       pTimeDomainResults,            // Source array pointer #2
+                                       COMPARISON_THRESHOLD_LEVEL,    // Threshold
+                                       wavFileLength);                // Dataset length
   if (comparison == SIGLIB_TRUE) {
     printf("\nSTFT and ISTFT Passed :-)\n\n");
   } else {
@@ -194,16 +194,19 @@ int main(int argc, char* argv[])
                   pTimeDomainResults,    // Source array pointer #2
                   pTimeDomainResults,    // Source array pointer #2
                   wavFileLength);        // Dataset length
-    printf("Max Difference:       %lf\n", SDA_AbsMax(pTimeDomainResults, wavFileLength));
-    printf("Max Index:            %d\n", SDA_AbsMaxIndex(pTimeDomainResults, wavFileLength));
-    printf("First Non Zero Index: %d\n", SDA_FindFirstNonZeroIndex(pTimeDomainResults, wavFileLength));
-    printf("Num Non Zero Values:  %d\n", SDA_FindNumberOfNonZeroValues(pTimeDomainResults, wavFileLength));
+    SDA_Abs(pTimeDomainResults, pTimeDomainResults, wavFileLength);
+    SDA_Threshold(pTimeDomainResults, pTimeDomainResults, COMPARISON_THRESHOLD_LEVEL, SIGLIB_SINGLE_SIDED_THRESHOLD, wavFileLength);
+
+    printf("First Difference Value: %lf\n", pTimeDomainResults[SDA_FindFirstNonZeroIndex(pTimeDomainResults, wavFileLength)]);
+    printf("First Difference Index: %d\n", SDA_FindFirstNonZeroIndex(pTimeDomainResults, wavFileLength));
+    printf("Max Difference:         %lf\n", SDA_AbsMax(pTimeDomainResults, wavFileLength));
+    printf("Max Index:              %d\n", SDA_AbsMaxIndex(pTimeDomainResults, wavFileLength));
 
     SLData_t rmsError = SDA_RootMeanSquareError(pInputData,                              // Source array pointer #1
                                                 pTimeDomainResults,                      // Source array pointer #2
                                                 SIGLIB_ONE / (SLData_t)wavFileLength,    // Inverse of the array length
                                                 wavFileLength);                          // Dataset length
-    printf("RMS Error:               %lf\n", rmsError);
+    printf("RMS Error:              %lf\n", rmsError);
   }
 
   SUF_MemoryFree(pSrc);    // Free allocated memory

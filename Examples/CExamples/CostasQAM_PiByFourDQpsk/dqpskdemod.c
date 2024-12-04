@@ -496,13 +496,13 @@ int main(int argc, char** argv)
     }
 #else
     // Pre-filter the data
-    SDA_Fir(pInput,                                                                         // Input array to be filtered
-            pData,                                                                          // Filtered output array
-            RxPreFilterState,                                                               // Pointer to filter state array
-            RxPreFilterCoeffs,                                                              // Pointer to filter coefficients
-            &RxPreFilterIndex,                                                              // Pointer to filter index register
-            RX_PRE_FILTER_LENGTH,                                                           // Filter length
-            ProcessSampleLength);                                                           // Dataset length
+    SDA_Fir(pInput,                  // Input array to be filtered
+            pData,                   // Filtered output array
+            RxPreFilterState,        // Pointer to filter state array
+            RxPreFilterCoeffs,       // Pointer to filter coefficients
+            &RxPreFilterIndex,       // Pointer to filter index register
+            RX_PRE_FILTER_LENGTH,    // Filter length
+            ProcessSampleLength);    // Dataset length
 #endif
 
     SDA_AgcPeak(pData,                     // Pointer to source array

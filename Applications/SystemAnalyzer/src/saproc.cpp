@@ -96,7 +96,7 @@ typedef struct    // PA I/O data structure
 } paIOData;
 
 // Define constants
-//#define INITIAL_CAL_THRESHOLD       200                   // Initial chirp
+// #define INITIAL_CAL_THRESHOLD       200                   // Initial chirp
 // calibration threshold value
 #define INITIAL_CAL_THRESHOLD 770    // Initial chirp calibration threshold value
 #define SAMPLE_RATE 44100.0          // Sample rate

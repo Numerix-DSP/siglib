@@ -200,14 +200,14 @@ int main(void)
         TxStringPtr++;    // Increment string pointer
 
 #else
-        SDA_DpskModulateByte(*TxStringPtr++,                                      // Modulating byte
-                             pData + i,                                           // Destination array
-                             pCarrierTable,                                       // Carrier table pointer
-                             &txCarrierPhase,                                     // Carrier phase pointer
-                             SYMBOL_LENGTH,                                       // Samples per symbol
-                             CARRIER_FREQ / CARRIER_TABLE_FREQ,                   // Carrier table increment
-                             CARRIER_SINE_TABLE_SIZE,                             // Carrier sine table size
-                             &ModulationPhase);                                   // Pointer to modulation phase value
+        SDA_DpskModulateByte(*TxStringPtr++,                       // Modulating byte
+                             pData + i,                            // Destination array
+                             pCarrierTable,                        // Carrier table pointer
+                             &txCarrierPhase,                      // Carrier phase pointer
+                             SYMBOL_LENGTH,                        // Samples per symbol
+                             CARRIER_FREQ / CARRIER_TABLE_FREQ,    // Carrier table increment
+                             CARRIER_SINE_TABLE_SIZE,              // Carrier sine table size
+                             &ModulationPhase);                    // Pointer to modulation phase value
 #endif
       }
     }

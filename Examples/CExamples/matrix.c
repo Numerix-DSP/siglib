@@ -223,11 +223,11 @@ int main(void)
                 MATRIXD_INV_COLS);    // Number of columns matrix 2
 
   // Threshold results to zero out values close to zero
-  SDA_Threshold(pMatrixi,                     // Pointer to source matrix
-                pMatrixi,                     // Pointer to destination matrix
-                SIGLIB_MIN_THRESHOLD,         // Threshold level
-                SIGLIB_DOUBLE_SIDED_THOLD,    // Threshold type
-                MATRIXD_SIZE);                // Matrix size - Number of rows x number of columns
+  SDA_Threshold(pMatrixi,                         // Pointer to source matrix
+                pMatrixi,                         // Pointer to destination matrix
+                SIGLIB_MIN_THRESHOLD,             // Threshold level
+                SIGLIB_DOUBLE_SIDED_THRESHOLD,    // Threshold type
+                MATRIXD_SIZE);                    // Matrix size - Number of rows x number of columns
   printf("\nD * D^-1 matrix:\n");
   SUF_PrintMatrix(pMatrixi, MATRIXD_ROWS, MATRIXD_COLS);
 

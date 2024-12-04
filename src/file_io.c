@@ -2017,13 +2017,13 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_XmtReadData(SLData_t* SIGLIB_PTR_DECL BPtr, 
         sscanf(p_char + 7, "%ld\"/>\n", (long*)&fpsample);
 #  endif
         sample = (SLData_t)fpsample;
-        //#if (SIGLIB_DATA_FLOAT == 1)                                // If
-        // SLData_t == float
-        //              printf("sample = %f\n", sample);
-        //#else                                                       //
-        // Default: SLData_t == double
-        //              printf("sample = %lf\n", sample);
-        //#endif
+        // #if (SIGLIB_DATA_FLOAT == 1)                                // If
+        //  SLData_t == float
+        //               printf("sample = %f\n", sample);
+        // #else                                                       //
+        //  Default: SLData_t == double
+        //               printf("sample = %lf\n", sample);
+        // #endif
         *BPtr++ = sample;
         sampleCount++;
       }

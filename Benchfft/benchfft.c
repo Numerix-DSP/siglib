@@ -59,7 +59,7 @@ benchmark.
 
 // Uncomment this line to use with Microsoft Embedded Visual C++ -
 // unfortunately, #ifdef causes a conflict
-//#include "stdafx.h"
+// #include "stdafx.h"
 
 #define FFT_SIZE 1024
 #define LOG_FFT_SIZE 10

@@ -213,15 +213,15 @@ int main(int argc, char* argv[])
                              DRC_MAKEUP_GAIN);             // Makeup gain
     }
 #else
-    SDA_Drc(inputData,                                      // Source array
-            inputData,                                      // Destination array
-            &drcEnvelopeDetectorState,                      // Envelope level
-            drcEnvelopeDetectorCoeff,                       // Envelope follower coefficient
-            DRC_ENVELOPE_THRESHOLD,                         // Envelope threshold for enabling DRC function
-            drcLevelGainTable,                              // Level/Gain table
-            drcNumberOfKnees,                               // Number of thresholds
-            DRC_MAKEUP_GAIN,                                // Makeup gain
-            sampleCount);                                   // Sample length
+    SDA_Drc(inputData,                    // Source array
+            inputData,                    // Destination array
+            &drcEnvelopeDetectorState,    // Envelope level
+            drcEnvelopeDetectorCoeff,     // Envelope follower coefficient
+            DRC_ENVELOPE_THRESHOLD,       // Envelope threshold for enabling DRC function
+            drcLevelGainTable,            // Level/Gain table
+            drcNumberOfKnees,             // Number of thresholds
+            DRC_MAKEUP_GAIN,              // Makeup gain
+            sampleCount);                 // Sample length
 #endif
 
 #if PLOT_DATA

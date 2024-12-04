@@ -1546,8 +1546,8 @@ void SIGLIB_FUNC_DECL SDA_Clip(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* S
 
 SLData_t SIGLIB_FUNC_DECL SDS_Threshold(const SLData_t src, const SLData_t Threshold, const enum SLThresholdMode_t TType)
 {
-  if (TType == SIGLIB_SINGLE_SIDED_THOLD) {    // Threshold on single value
-    if (src >= Threshold) {                    // If i/p >= threshold then o/p = i/p
+  if (TType == SIGLIB_SINGLE_SIDED_THRESHOLD) {    // Threshold on single value
+    if (src >= Threshold) {                        // If i/p >= threshold then o/p = i/p
       return (src);
     }
 
@@ -1597,7 +1597,7 @@ void SIGLIB_FUNC_DECL SDA_Threshold(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData
 #  endif
 #endif
 
-  if (TType == SIGLIB_SINGLE_SIDED_THOLD) {    // Threshold on single value
+  if (TType == SIGLIB_SINGLE_SIDED_THRESHOLD) {    // Threshold on single value
     for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
       SLData_t Tmp = *pSrc++;
       if (Tmp >= Threshold) {    // If i/p >= threshold then o/p = i/p
@@ -1724,8 +1724,8 @@ void SIGLIB_FUNC_DECL SDA_SoftThreshold(const SLData_t* SIGLIB_PTR_DECL pSrc, SL
 SLData_t SIGLIB_FUNC_DECL SDS_ThresholdAndClamp(const SLData_t src, const SLData_t Threshold, const SLData_t Clamp,
                                                 const enum SLThresholdMode_t TType)
 {
-  if (TType == SIGLIB_SINGLE_SIDED_THOLD) {    // Threshold on single value
-    if (src >= Threshold) {                    // If i/p >= threshold then o/p = i/p
+  if (TType == SIGLIB_SINGLE_SIDED_THRESHOLD) {    // Threshold on single value
+    if (src >= Threshold) {                        // If i/p >= threshold then o/p = i/p
       return (Clamp);
     } else {
       return (SIGLIB_ZERO);    // If i/p < threshold then set o/p to 0.0
@@ -1772,7 +1772,7 @@ void SIGLIB_FUNC_DECL SDA_ThresholdAndClamp(const SLData_t* SIGLIB_PTR_DECL pSrc
 #  endif
 #endif
 
-  if (TType == SIGLIB_SINGLE_SIDED_THOLD) {    // Threshold on single value
+  if (TType == SIGLIB_SINGLE_SIDED_THRESHOLD) {    // Threshold on single value
     for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
       SLData_t Tmp = *pSrc++;
       if (Tmp >= Threshold) {    // If i/p >= threshold then o/p = i/p
@@ -1817,7 +1817,7 @@ void SIGLIB_FUNC_DECL SDA_ThresholdAndClamp(const SLData_t* SIGLIB_PTR_DECL pSrc
 
 SLData_t SIGLIB_FUNC_DECL SDS_Clamp(const SLData_t src, const SLData_t Threshold, const SLData_t Clamp, const enum SLThresholdMode_t TType)
 {
-  if (TType == SIGLIB_SINGLE_SIDED_THOLD) {
+  if (TType == SIGLIB_SINGLE_SIDED_THRESHOLD) {
     if (src >= Threshold) {    // If i/p > threshold then clamp o/p to threshold
       return (Clamp);
     } else {
@@ -1865,7 +1865,7 @@ void SIGLIB_FUNC_DECL SDA_Clamp(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* 
 #  endif
 #endif
 
-  if (TType == SIGLIB_SINGLE_SIDED_THOLD) {
+  if (TType == SIGLIB_SINGLE_SIDED_THRESHOLD) {
     for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
       SLData_t Tmp = *pSrc++;
       if (Tmp >= Threshold) {    // If i/p > threshold then clamp o/p to threshold
