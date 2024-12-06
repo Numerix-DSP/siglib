@@ -60,10 +60,6 @@ int main(void)
     exit(-1);
   }
 
-  SIF_FarrowFilter(pFilterState,             // Pointer to filter state array
-                   &filterIndex,             // Pointer to filter index register
-                   FARROW_FILTER_LENGTH);    // Filter length
-
   SLArrayIndex_t farrowTestDatasetLength = SDS_PeriodToSamples(SINE_PERIOD, SAMPLE_RATE);
   printf("farrowTestDatasetLength: %d\n", farrowTestDatasetLength);
 
@@ -105,6 +101,10 @@ int main(void)
   SLData_t delay = 0.1;
   char title[80];
   for (SLArrayIndex_t i = 0; i < 10; i++) {
+                                                            // Initialize farrow filters
+    SIF_FarrowFilter(pFilterState,                          // Pointer to filter state array
+                     &filterIndex,                          // Pointer to filter index register
+                     FARROW_FILTER_LENGTH);                 // Filter length
 
 #if PER_SAMPLE
     for (SLArrayIndex_t i = 0; i < farrowTestDatasetLength; i++) {
