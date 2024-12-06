@@ -88,9 +88,9 @@ void processAudio(void)
                    pResults,            // Pointer to log magnitude destination array
                    HALF_FFT_LENGTH);    // Dataset length
 
-  SDA_Max2(pResults,       // Source array pointer #1
-           pPeakDetect,    // Source array pointer #2
-           pPeakDetect,    // Destination array pointer
+  SDA_Max2(pResults,       // Pointer to source array #1
+           pPeakDetect,    // Pointer to source array #2
+           pPeakDetect,    // Pointer to destination array
            FFT_LENGTH);    // Array lengths
 
   peakDetectCount++;

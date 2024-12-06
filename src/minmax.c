@@ -2344,8 +2344,8 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAveragePowerRatioDB(const SLData_t* SIGLIB_P
  * Function: SDA_PeakToAverageRatioComplex
  *
  * Parameters:
- *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,  - Real source array pointer
- *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,  - Imag source array pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,  - Real Pointer to source array
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,  - Imag Pointer to source array
  *  const SLArrayIndex_t arrayLength        - Array length
  *
  * Return value:
@@ -2388,8 +2388,8 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAverageRatioComplex(const SLData_t* SIGLIB_P
  * Function: SDA_PeakToAveragePowerRatioComplex
  *
  * Parameters:
- *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,  - Real source array pointer
- *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,  - Imag source array pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,  - Real Pointer to source array
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,  - Imag Pointer to source array
  *  const SLArrayIndex_t arrayLength        - Array length
  *
  * Return value:
@@ -2432,8 +2432,8 @@ SLData_t SIGLIB_FUNC_DECL SDA_PeakToAveragePowerRatioComplex(const SLData_t* SIG
  * Function: SDA_PeakToAveragePowerRatioComplexDB
  *
  * Parameters:
- *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,  - Real source array pointer
- *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,  - Imag source array pointer
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcReal,  - Real Pointer to source array
+ *  const SLData_t * SIGLIB_PTR_DECL pSrcImag,  - Imag Pointer to source array
  *  const SLArrayIndex_t arrayLength        - Array length
  *
  * Return value:

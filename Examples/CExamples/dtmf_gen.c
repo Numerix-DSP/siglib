@@ -75,7 +75,7 @@ int main(void)
       SDA_Zeros(pData,                                         // Pointer to destination array
                 (SLArrayIndex_t)(Period * SAMPLES_PER_MS));    // Array length
     } else {
-      SDA_DtmfGenerate(pData,                                         // Destination array pointer
+      SDA_DtmfGenerate(pData,                                         // Pointer to destination array
                        SUF_AsciiToKeyCode(Tone),                      // Key code
                        LinearDTMFMagnitude,                           // Signal magnitude
                        pDTMFGenCoeffs,                                // Generator coefficient look up table pointer
@@ -125,7 +125,7 @@ int main(void)
     if (NewMax > Max)
       Max = NewMax;
 
-    KeyCode = SDA_DtmfDetectAndValidate(pData,                  // Source array pointer
+    KeyCode = SDA_DtmfDetectAndValidate(pData,                  // Pointer to source array
                                         DETECTION_THRESHOLD,    // Threshold for signal energy
                                         &PreviousKeyCode,       // Pointer to previous key code
                                         &KeyCodeLength,         // Pointer to key code run length
@@ -136,7 +136,7 @@ int main(void)
     printf("Keycode = %d, %x\n", KeyCode, KeyCode);
     SUF_Debugfprintf("Keycode = %d, %x\n", KeyCode, KeyCode);
 
-    KeyCode = SDA_DtmfDetect(pData,                  // Source array pointer
+    KeyCode = SDA_DtmfDetect(pData,                  // Pointer to source array
                              DTMF_SAMPLE_LENGTH);    // Array length
 #endif
 

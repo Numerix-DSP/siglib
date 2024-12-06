@@ -1238,7 +1238,7 @@ SLError_t SIGLIB_FUNC_DECL SIF_TableTopWindow(SLData_t* SIGLIB_OUTPUT_PTR_DECL, 
                                               const SLArrayIndex_t,                // Flat-top length
                                               const SLArrayIndex_t);               // Window length
 
-void SIGLIB_FUNC_DECL SDA_Window(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Source array pointer
+void SIGLIB_FUNC_DECL SDA_Window(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                  SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
                                  const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to window array pointer
                                  const SLArrayIndex_t);                    // Window size
@@ -1251,13 +1251,13 @@ void SIGLIB_FUNC_DECL SDA_ComplexWindow(const SLData_t* SIGLIB_INPUT_PTR_DECL,  
                                         const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to imaginary window array
                                         const SLArrayIndex_t);                    // Window size
 
-SLData_t SIGLIB_FUNC_DECL SDA_WindowInverseCoherentGain(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Source array pointer
+SLData_t SIGLIB_FUNC_DECL SDA_WindowInverseCoherentGain(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                                         const SLArrayIndex_t);                    // Window size
 
-SLData_t SIGLIB_FUNC_DECL SDA_WindowEquivalentNoiseBandwidth(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Source array pointer
+SLData_t SIGLIB_FUNC_DECL SDA_WindowEquivalentNoiseBandwidth(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                                              const SLArrayIndex_t);                    // Window size
 
-SLData_t SIGLIB_FUNC_DECL SDA_WindowProcessingGain(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Source array pointer
+SLData_t SIGLIB_FUNC_DECL SDA_WindowProcessingGain(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                                    const SLArrayIndex_t);                    // Window size
 
 SLData_t SIGLIB_FUNC_DECL SDS_I0Bessel(const SLData_t);    // x
@@ -2168,6 +2168,28 @@ void SIGLIB_FUNC_DECL SDS_KalmanFilter2D(const SLData_t,         // Measured pos
                                          SLData_t*,              // Estimated position
                                          SLData_t*);             // Estimated velocity
 
+void SIGLIB_FUNC_DECL SIF_FarrowFilter(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to filter state array
+                                       SLArrayIndex_t*,                     // Pointer to filter index
+                                       const SLArrayIndex_t);               // Filter lengths
+
+SLData_t SIGLIB_FUNC_DECL SDS_FarrowFilter(SLData_t,                                 // Source sample
+                                           SLData_t* SIGLIB_INOUT_PTR_DECL,          // Pointer to filter state array
+                                           const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to filter coefficients
+                                           SLArrayIndex_t* SIGLIB_INOUT_PTR_DECL,    // Pointer to filter index offset
+                                           const SLData_t,                           // Desired fractional delay
+                                           const SLArrayIndex_t,                     // Number of filters
+                                           const SLArrayIndex_t);                    // Filter lengths
+
+void SIGLIB_FUNC_DECL SDA_FarrowFilter(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                                       SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
+                                       SLData_t* SIGLIB_INOUT_PTR_DECL,          // Pointer to filter state array
+                                       const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to filter coefficients
+                                       SLArrayIndex_t* SIGLIB_INOUT_PTR_DECL,    // Pointer to filter index offset
+                                       const SLData_t,                           // Desired fractional delay
+                                       const SLArrayIndex_t,                     // Number of filters
+                                       const SLArrayIndex_t,                     // Filter lengths
+                                       const SLArrayIndex_t);                    // Input sample length
+
 // Acoustic processing functions - acoustic.c
 
 void SIGLIB_FUNC_DECL SDA_LinearMicrophoneArrayBeamPattern(const SLFixData_t,                   // Number of microphones
@@ -2473,7 +2495,7 @@ void SIGLIB_FUNC_DECL SDA_FixedDelayComplex(const SLData_t* SIGLIB_INPUT_PTR_DEC
 void SIGLIB_FUNC_DECL SDA_ShortFixedDelay(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                           SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
                                           SLData_t* SIGLIB_INOUT_PTR_DECL,          // Pointer to temporary delayed array
-                                          SLData_t* SIGLIB_INOUT_PTR_DECL,          // Temporary destination array pointer
+                                          SLData_t* SIGLIB_INOUT_PTR_DECL,          // Temporary Pointer to destination array
                                           const SLArrayIndex_t,                     // Sample delay count
                                           const SLArrayIndex_t);                    // Array length
 
@@ -2682,14 +2704,14 @@ void SIGLIB_FUNC_DECL SDA_Resonator1Add(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // 
                                         const SLData_t,                      // Sine coefficient
                                         const SLArrayIndex_t);               // Array length
 
-void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarWhiteNoise(SLComplexRect_s* SIGLIB_OUTPUT_PTR_DECL,    // Destination array pointer
+void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarWhiteNoise(SLComplexRect_s* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
                                                         const SLData_t,                             // Peak level
                                                         const enum SLSignalFillMode_t,              // Array fill mode, fill up or add to
                                                         const SLArrayIndex_t);                      // Array length
 
 SLComplexRect_s SIGLIB_FUNC_DECL SDS_SignalGeneratePolarWhiteNoise(const SLData_t);    // Peak level
 
-void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarGaussianNoise(SLComplexRect_s* SIGLIB_OUTPUT_PTR_DECL,    // Destination array pointer
+void SIGLIB_FUNC_DECL SDA_SignalGeneratePolarGaussianNoise(SLComplexRect_s* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
                                                            const SLData_t,                             // Noise variance
                                                            SLData_t*,                                  // Noise phase offset
                                                            SLData_t*,                                  // Noise current value
@@ -2700,8 +2722,8 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_SignalGeneratePolarGaussianNoise(const SLDa
                                                                       SLData_t*,         // Noise phase offset
                                                                       SLData_t*);        // Noise current value
 
-void SIGLIB_FUNC_DECL SDA_SignalAddPolarJitterAndGaussianNoise(const SLComplexRect_s* SIGLIB_INPUT_PTR_DECL,    // Source array pointer
-                                                               SLComplexRect_s* SIGLIB_OUTPUT_PTR_DECL,         // Destination array pointer
+void SIGLIB_FUNC_DECL SDA_SignalAddPolarJitterAndGaussianNoise(const SLComplexRect_s* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                                                               SLComplexRect_s* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
                                                                const SLData_t,                                  // Jitter sine wave frequency
                                                                const SLData_t,                                  // Jitter sine wave magnitude
                                                                SLData_t*,                                       // Jitter sine wave phase offset
@@ -2718,7 +2740,7 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDS_SignalAddPolarJitterAndGaussianNoise(const 
                                                                           SLData_t*,                // Phase offset
                                                                           SLData_t*);               // Noise current value
 
-void SIGLIB_FUNC_DECL SDA_Ramp(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Destination array pointer
+void SIGLIB_FUNC_DECL SDA_Ramp(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
                                const SLData_t,                      // Start value
                                const SLData_t,                      // Increment value
                                const SLArrayIndex_t);               // Array length
@@ -2728,7 +2750,7 @@ void SIGLIB_FUNC_DECL SIF_RandomNumber(void);    // void
 SLData_t SIGLIB_FUNC_DECL SDS_RandomNumber(const SLData_t,     // Lower bound
                                            const SLData_t);    // Upper bound
 
-void SIGLIB_FUNC_DECL SDA_RandomNumber(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Destination array pointer
+void SIGLIB_FUNC_DECL SDA_RandomNumber(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
                                        const SLData_t,                      // Lower bound
                                        const SLData_t,                      // Upper bound
                                        const SLArrayIndex_t);               // Array length
@@ -4542,7 +4564,7 @@ void SDA_LagrangeInterpolate(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Ideal 
 void SIGLIB_FUNC_DECL SIF_DtmfGenerate(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Generator coefficient look up table pointer
                                        const SLData_t);                     // Sample rate (Hz)
 
-SLError_t SIGLIB_FUNC_DECL SDA_DtmfGenerate(SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Destination array pointer
+SLError_t SIGLIB_FUNC_DECL SDA_DtmfGenerate(SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
                                             const SLFixData_t,                        // Key code
                                             const SLData_t,                           // Signal magnitude
                                             const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Generator coefficient look up table pointer
@@ -4551,10 +4573,10 @@ SLError_t SIGLIB_FUNC_DECL SDA_DtmfGenerate(SLData_t* SIGLIB_OUTPUT_PTR_DECL,   
 void SIGLIB_FUNC_DECL SIF_DtmfDetect(const SLData_t,           // Sample rate (Hz)
                                      const SLArrayIndex_t);    // Array length
 
-SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetect(SLData_t* SIGLIB_INPUT_PTR_DECL,    // Source array pointer
+SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetect(SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                            const SLArrayIndex_t);              // Array length
 
-SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetectAndValidate(SLData_t* SIGLIB_INPUT_PTR_DECL,    // Source array pointer
+SLStatus_t SIGLIB_FUNC_DECL SDA_DtmfDetectAndValidate(SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                                       const SLData_t,                     // Threshold for signal energy
                                                       SLFixData_t*,                       // Pointer to previous key code
                                                       SLFixData_t*,                       // Pointer to key code run length
@@ -6417,8 +6439,8 @@ void SIGLIB_FUNC_DECL SIF_QuickSinCos(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Po
 
 void SIGLIB_FUNC_DECL SDA_QuickSinCos(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                       const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Sine table pointer
-                                      SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Sine destination array pointer
-                                      SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Cosine destination array pointer
+                                      SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Sine Pointer to destination array
+                                      SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Cosine Pointer to destination array
                                       const SLData_t,                           // Phase gain
                                       const SLArrayIndex_t,                     // Sine wave look up table period
                                       const SLArrayIndex_t);                    // Array length

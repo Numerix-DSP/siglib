@@ -92,7 +92,7 @@ int main(void)
   pRealOutput = SDS_VariableDelay(pRealInput, pRealDelayArray, &InputIndex, &OutputIndex, MAX_DELAY);
   printf("Input = %1.1lf, Output = %1.1lf\n", pRealInput, pRealOutput);
 
-  pSrcReal = RealSrcArray;    // Reset source array pointer
+  pSrcReal = RealSrcArray;    // Reset Pointer to source array
 
   // Initialise the FIFO delay
   if (SIF_VariableDelay(pRealDelayArray,      // Pointer to the delay state array
@@ -242,7 +242,7 @@ int main(void)
   pRealOutput = SDS_VariableDelay(pRealInput, pRealDelayArray, &InputIndex, &OutputIndex, MAX_DELAY);
   printf("pRealInput = %1.1lf, pRealOutput = %1.1lf\n", pRealInput, pRealOutput);
 
-  pSrcReal = RealSrcArray;    // Reset source array pointer
+  pSrcReal = RealSrcArray;    // Reset Pointer to source array
 
   // Initialise the FIFO delay
   if (SIF_VariableDelayComplex(pRealDelayArray,      // Pointer to the real delay state array
@@ -357,7 +357,7 @@ int main(void)
          "(Imag) = %1.1lf\n",
          pRealInput, pImagInput, pRealOutput, pImagOutput);
 
-  pSrcReal = RealSrcArray;    // Reset source array pointer
+  pSrcReal = RealSrcArray;    // Reset Pointer to source array
 
   // Initialise the FIFO delay
   if (SIF_VariableDelayComplex(pRealDelayArray,      // Pointer to the real delay state array

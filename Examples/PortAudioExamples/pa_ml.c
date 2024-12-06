@@ -102,7 +102,7 @@ void processAudio(void)
   Input_Data_Valid_Flag = 0;    // Input Data has been copied for processing
 
   // If signal below minimum level do not perform classification
-  SLData_t absMax = SDA_AbsMax(pRealData,      // Source array pointer
+  SLData_t absMax = SDA_AbsMax(pRealData,      // Pointer to source array
                                FFT_LENGTH);    // Array length
   if (absMax < MIN_LEVEL_LINEAR) {
 #if RASPBERRY_PI
@@ -114,13 +114,13 @@ void processAudio(void)
   }
 
   // Remove any D.C. offset
-  SDA_SubtractMean(pRealData,                  // Source array pointer
-                   pRealData,                  // Destination array pointer
+  SDA_SubtractMean(pRealData,                  // Pointer to source array
+                   pRealData,                  // Pointer to destination array
                    SIGLIB_ONE / FFT_LENGTH,    // Inverse of array length
                    FFT_LENGTH);                // Array length
 
-  SDA_Scale(pRealData,            // Source array pointer
-            pRealData,            // Destination array pointer
+  SDA_Scale(pRealData,            // Pointer to source array
+            pRealData,            // Pointer to destination array
             PEAK_LEVEL_LINEAR,    // Normalization level
             FFT_LENGTH);          // Array length
 
@@ -267,11 +267,11 @@ int main(void)
            COMB_FILTER_LENGTH);      // Filter length
 
   // Copy weights
-  SDA_Copy(mlpWeightsLayer1,            // Source array pointer
+  SDA_Copy(mlpWeightsLayer1,            // Pointer to source array
            (SLData_t*)layer1Weights,    // Layer 1 weights array
            LAYER_1_WEIGHTS_LENGTH);     // Array length
 
-  SDA_Copy(mlpWeightsLayer2,           // Source array pointer
+  SDA_Copy(mlpWeightsLayer2,           // Pointer to source array
            layer2Weights,              // Layer 2 weights array
            LAYER_2_WEIGHTS_LENGTH);    // Array length
 

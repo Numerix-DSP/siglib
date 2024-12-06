@@ -86,15 +86,15 @@ SLError_t plot_frequency_domain(SLData_t* pSrc, const enum SLWindow_t WindowType
   }
 
   // Apply window to real data
-  SDA_Window(pFDPSrcReal,      // Source array pointer
-             pFDPSrcReal,      // Destination array pointer
+  SDA_Window(pFDPSrcReal,      // Pointer to source array
+             pFDPSrcReal,      // Pointer to destination array
              pWindowCoeffs,    // Window array pointer
              DFTLength);       // Window size
 
   // Perform DFT
-  SDA_Rdft(pFDPSrcReal,     // Real source array pointer
-           pFDPRealData,    // Real destination array pointer
-           pFDPImagData,    // Imaginary destination array pointer
+  SDA_Rdft(pFDPSrcReal,     // Real Pointer to source array
+           pFDPRealData,    // Real Pointer to destination array
+           pFDPImagData,    // Imaginary Pointer to destination array
            DFTLength);      // DFT length
 
   // Calc real power fm complex
@@ -233,19 +233,19 @@ SLError_t plot_complex_frequency_domain(SLData_t* pSrcReal, SLData_t* pSrcImag, 
   }
 
   // Apply window to real data
-  SDA_ComplexWindow(pFDPSrcReal,      // Source array pointer
+  SDA_ComplexWindow(pFDPSrcReal,      // Pointer to source array
                     pFDPSrcImag,      // Pointer to imaginary array
-                    pFDPSrcReal,      // Destination array pointer
+                    pFDPSrcReal,      // Pointer to destination array
                     pFDPSrcImag,      // Pointer to imaginary array
                     pWindowCoeffs,    // Window array pointer
                     pWindowCoeffs,    // Window array pointer
                     DFTLength);       // Window size
 
   // Perform DFT
-  SDA_Cdft(pFDPSrcReal,     // Real source array pointer
-           pFDPSrcImag,     // Imaginary source array pointer
-           pFDPRealData,    // Real destination array pointer
-           pFDPImagData,    // Imaginary destination array pointer
+  SDA_Cdft(pFDPSrcReal,     // Real Pointer to source array
+           pFDPSrcImag,     // Imaginary Pointer to source array
+           pFDPRealData,    // Real Pointer to destination array
+           pFDPImagData,    // Imaginary Pointer to destination array
            DFTLength);      // DFT length
 
   // Calc real power fm complex

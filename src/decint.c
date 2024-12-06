@@ -153,7 +153,7 @@ void SIGLIB_FUNC_DECL SDA_Interpolate(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
   for (SLArrayIndex_t i = 0; i < DstArrayLength; i++) {    // Clear destination array
     *pDst++ = SIGLIB_ZERO;
   }
-  pDst -= DstArrayLength;    // Reset destination array pointer
+  pDst -= DstArrayLength;    // Reset Pointer to destination array
 
   do {
     *(pDst + LocalDstArrayIndex) = *pSrc++;
@@ -318,7 +318,7 @@ void SIGLIB_FUNC_DECL SDA_InterpolateAndFilter(const SLData_t* SIGLIB_PTR_DECL p
   for (SLArrayIndex_t i = 0; i < DstArrayLength; i++) {    // Clear destination array
     *pDst++ = SIGLIB_ZERO;
   }
-  pDst -= DstArrayLength;    // Reset destination array pointer
+  pDst -= DstArrayLength;    // Reset Pointer to destination array
 
   // Interpolate the input signal
   do {

@@ -91,13 +91,13 @@ int main(void)
     if ((KeyCode = SUF_AsciiToKeyCode(Key)) != SIGLIB_NO_DTMF_KEY) {
       //          printf ("\nKeyCode = %d\n", (int)KeyCode);
 
-      SDA_DtmfGenerate(pRealData,           // Destination array pointer
+      SDA_DtmfGenerate(pRealData,           // Pointer to destination array
                        KeyCode,             // Key code
                        SIGNAL_MAGNITUDE,    // Signal magnitude
                        pDTMFGenCoeffs,      // Generator coefficient look up table pointer
                        SAMPLE_LENGTH);      // Dataset length
 
-      KeyCode = SDA_DtmfDetect(pRealData,              // Source array pointer
+      KeyCode = SDA_DtmfDetect(pRealData,              // Pointer to source array
                                DTMF_DETECT_LENGTH);    // Dataset length
 
       Key = SUF_KeyCodeToAscii(KeyCode);

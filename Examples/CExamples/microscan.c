@@ -145,7 +145,7 @@ int main(void)
   SDA_ShortFixedDelay(pChirpData,                // Pointer to source array
                       pDisplayArray,             // Pointer to destination array
                       pDelay,                    // Pointer to temporary delayed array
-                      pTempDelay,                // Temporary destination array pointer
+                      pTempDelay,                // Temporary Pointer to destination array
                       FIR_FILTER_GROUP_DELAY,    // Sample delay count
                       SAMPLE_LENGTH);            // Dataset length
   SDA_Polynomial(pDisplayArray,                  // Pointer to source array
@@ -187,7 +187,7 @@ int main(void)
   SDA_ShortFixedDelay(pPNSequence,               // Pointer to source array
                       pDisplayArray,             // Pointer to destination array
                       pDelay,                    // Pointer to temporary delayed array
-                      pTempDelay,                // Temporary destination array pointer
+                      pTempDelay,                // Temporary Pointer to destination array
                       FIR_FILTER_GROUP_DELAY,    // Sample delay count
                       SAMPLE_LENGTH);            // Dataset length
   gpc_plot_2d(h2DPlot,                           // Graph handle
@@ -220,7 +220,7 @@ int main(void)
   SDA_ShortFixedDelay(pPNSequence,               // Pointer to source array
                       pDisplayArray,             // Pointer to destination array
                       pDelay,                    // Pointer to temporary delayed array
-                      pTempDelay,                // Temporary destination array pointer
+                      pTempDelay,                // Temporary Pointer to destination array
                       FIR_FILTER_GROUP_DELAY,    // Sample delay count
                       SAMPLE_LENGTH);            // Dataset length
   gpc_plot_2d(h2DPlot,                           // Graph handle
@@ -250,7 +250,7 @@ int main(void)
   SDA_ShortFixedDelay(pPNSequence,               // Pointer to source array
                       pDisplayArray,             // Pointer to destination array
                       pDelay,                    // Pointer to temporary delayed array
-                      pTempDelay,                // Temporary destination array pointer
+                      pTempDelay,                // Temporary Pointer to destination array
                       FIR_FILTER_GROUP_DELAY,    // Sample delay count
                       SAMPLE_LENGTH);            // Dataset length
   SDA_Polynomial(pDisplayArray,                  // Pointer to source array

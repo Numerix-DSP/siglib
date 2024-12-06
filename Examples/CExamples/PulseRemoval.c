@@ -106,9 +106,9 @@ int main(void)
               &pulseOnePoleFilterState,                  // Filter state
               PULSE_LENGTH - PULSE_RISE_LENGTH - 11);    // Dataset length
 
-  SDA_Multiply(pPulse,                  // Source array pointer
+  SDA_Multiply(pPulse,                  // Pointer to source array
                PULSE_PEAK_MAGNITUDE,    // Multiplier
-               pPulse,                  // Destination array pointer
+               pPulse,                  // Pointer to destination array
                PULSE_LENGTH);           // Dataset length
 
 #if PLOT_PULSE_ENABLE
@@ -156,15 +156,15 @@ int main(void)
                      SAMPLE_LENGTH);             // Output dataset length
 
   // Add D.C. offset to source dataset
-  SDA_Add(pSrc,              // Source array pointer
+  SDA_Add(pSrc,              // Pointer to source array
           DC_LEVEL,          // Offset value
-          pSrc,              // Destination array pointer
+          pSrc,              // Pointer to destination array
           SAMPLE_LENGTH);    // Dataset lengths
 
   // Add step function to source dataset
-  SDA_Add(pSrc + STEP_START_POSITION,              // Source array pointer
+  SDA_Add(pSrc + STEP_START_POSITION,              // Pointer to source array
           STEP_MAGNITUDE,                          // Offset value
-          pSrc + STEP_START_POSITION,              // Destination array pointer
+          pSrc + STEP_START_POSITION,              // Pointer to destination array
           SAMPLE_LENGTH - STEP_START_POSITION);    // Dataset lengths
 
   // Add pulse into noisy signal
@@ -174,8 +174,8 @@ int main(void)
            PULSE_LENGTH);                  // Array length
 
   // Generate correlator reference
-  SDA_Reverse(pPulse,            // Source array pointer
-              pCorrelatorRef,    // Destination array pointer
+  SDA_Reverse(pPulse,            // Pointer to source array
+              pCorrelatorRef,    // Pointer to destination array
               PULSE_LENGTH);     // Dataset length
 
   // Apply fir filter as correlator
@@ -188,10 +188,10 @@ int main(void)
   }
 
   // Detect peak location
-  SLArrayIndex_t correlationPeakLocation = SDA_AbsMaxIndex(pDst,              // Source array pointer
+  SLArrayIndex_t correlationPeakLocation = SDA_AbsMaxIndex(pDst,              // Pointer to source array
                                                            SAMPLE_LENGTH);    // Dataset length
 
-  SLData_t correlationPeakLevel = SDA_AbsMax(pDst,              // Source array pointer
+  SLData_t correlationPeakLevel = SDA_AbsMax(pDst,              // Pointer to source array
                                              SAMPLE_LENGTH);    // Dataset length
 
   printf("Peak Location: %d, Value: %lf\n", correlationPeakLocation, correlationPeakLevel);
@@ -203,21 +203,21 @@ int main(void)
   }
 
   // Remove pulse at peak location
-  SDA_Copy(pSrc,              // Source array pointer
-           pDst,              // Destination array pointer
+  SDA_Copy(pSrc,              // Pointer to source array
+           pDst,              // Pointer to destination array
            SAMPLE_LENGTH);    // Dataset length
 
   // Note: If received pulses can be of different heights then the scaled pulse
   // height can be modified in this function using the correlationPeakLevel as
   // part of the scaling factor
-  SDA_Multiply(pPulse,           // Source array pointer
+  SDA_Multiply(pPulse,           // Pointer to source array
                SIGLIB_ONE,       // Scaling factor
-               pScaledPulse,     // Destination array pointer
+               pScaledPulse,     // Pointer to destination array
                PULSE_LENGTH);    // Dataset length
 
-  SDA_Subtract2(pDst + (correlationPeakLocation - PULSE_LENGTH + 1),    // Source array pointer 1
-                pScaledPulse,                                           // Source array pointer 2
-                pDst + (correlationPeakLocation - PULSE_LENGTH + 1),    // Destination array pointer
+  SDA_Subtract2(pDst + (correlationPeakLocation - PULSE_LENGTH + 1),    // Pointer to source array 1
+                pScaledPulse,                                           // Pointer to source array 2
+                pDst + (correlationPeakLocation - PULSE_LENGTH + 1),    // Pointer to destination array
                 PULSE_LENGTH);                                          // Dataset length
 
   // Apply one-pole normalized gain low-pass filter to smooth result

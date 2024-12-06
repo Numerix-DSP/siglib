@@ -120,8 +120,8 @@ SLData_t SIGLIB_FUNC_DECL SDS_Fir(const SLData_t Src, SLData_t pState[], const S
  * Function: SDA_Fir
  *
  * Parameters:
- *  const SLData_t pSrc[],              Source array pointer
- *  SLData_t pDst[],                    Destination array pointer
+ *  const SLData_t pSrc[],              Pointer to source array
+ *  SLData_t pDst[],                    Pointer to destination array
  *  SLData_t pState[],                  Pointer to filter state array
  *  const SLData_t pCoeffs[],           Pointer to filter coefficients
  *  SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
@@ -207,7 +207,7 @@ void SIGLIB_FUNC_DECL SDS_FirAddSample(const SLData_t Src, SLData_t pState[], SL
  * Function: SDA_FirAddSamples
  *
  * Parameters:
- *  const SLData_t *pSrc,                   Source array pointer
+ *  const SLData_t *pSrc,                   Pointer to source array
  *  SLData_t pState[],                      Pointer to filter state array
  *  SLArrayIndex_t * pFilterIndex,          Pointer to filter index offset
  *  const SLArrayIndex_t filterLength,      Filter length
@@ -323,8 +323,8 @@ SLData_t SIGLIB_FUNC_DECL SDS_Comb(const SLData_t Src, SLData_t* SIGLIB_PTR_DECL
  * Function: SDA_Comb
  *
  * Parameters:
- *  const SLData_t * pSrc,              Source array pointer
- *  SLData_t * pDst[],                  Destination array pointer
+ *  const SLData_t * pSrc,              Pointer to source array
+ *  SLData_t * pDst[],                  Pointer to destination array
  *  SLData_t pState[],                  Pointer to filter state array
  *  SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
  *  const SLData_t pCoeffs[],           Pointer to filter coefficients
@@ -576,8 +576,8 @@ SLData_t SIGLIB_FUNC_DECL SDS_FirWithStore(const SLData_t Src, SLData_t pState[]
  * Function: SDA_FirWithStore
  *
  * Parameters:
- *  const SLData_t pSrc[],              Source array pointer
- *  SLData_t pDst[],                    Destination array pointer
+ *  const SLData_t pSrc[],              Pointer to source array
+ *  SLData_t pDst[],                    Pointer to destination array
  *  SLData_t pState[],                  Pointer to filter state array
  *  const SLData_t pCoeffs[],           Pointer to filter coefficients
  *  const SLArrayIndex_t filterLength,  Filter length
@@ -779,7 +779,7 @@ void SIGLIB_FUNC_DECL SDS_FirWithStoreAddSample(const SLData_t Src, SLData_t pSt
  * Function: SDA_FirWithStoreAddSamples
  *
  * Parameters:
- *  const SLData_t *pSrc,                   Source array pointer
+ *  const SLData_t *pSrc,                   Pointer to source array
  *  SLData_t pState[],                      Pointer to filter state array
  *  const SLArrayIndex_t filterLength,      Filter length
  *  const SLArrayIndex_t InputArrayLength,  Input array length
@@ -903,8 +903,8 @@ SLData_t SIGLIB_FUNC_DECL SDS_FirExtendedArray(const SLData_t Src, SLData_t* pSt
  * Function: SDA_FirExtendedArray
  *
  * Parameters:
- *  const SLData_t pSrc[],              Source array pointer
- *  SLData_t pDst[],                    Destination array pointer
+ *  const SLData_t pSrc[],              Pointer to source array
+ *  SLData_t pDst[],                    Pointer to destination array
  *  SLData_t pState[],                  Pointer to filter state array
  *  const SLData_t pCoeffs[],           Pointer to filter coefficients
  *  SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
@@ -1180,7 +1180,7 @@ void SIGLIB_FUNC_DECL SDS_FirExtendedArrayAddSample(const SLData_t Src, SLData_t
  * Function: SDA_FirExtendedArrayAddSamples
  *
  * Parameters:
- *  const SLData_t pSrc[],              Source array pointer
+ *  const SLData_t pSrc[],              Pointer to source array
  *  SLData_t pState[],                  Pointer to filter state array
  *  SLArrayIndex_t * pFilterIndex,      Pointer to filter index offset
  *  const SLArrayIndex_t filterLength,  Filter length

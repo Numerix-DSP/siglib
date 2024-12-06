@@ -75,7 +75,7 @@ int main(int argc, char* argv[])
              FFT_LENGTH);                       // Window length
 
   // Calculate window inverse coherent gain
-  WindowInverseCoherentGain = SDA_WindowInverseCoherentGain(pWindowCoeffs,    // Source array pointer
+  WindowInverseCoherentGain = SDA_WindowInverseCoherentGain(pWindowCoeffs,    // Pointer to source array
                                                             FFT_LENGTH);      // Window size
 
   // Initialise FFT
@@ -137,8 +137,8 @@ int main(int argc, char* argv[])
                                SAMPLE_LENGTH) <          // Destination array length
            SAMPLE_LENGTH) {
       // Apply window to real data
-      SDA_Window(pFDPRealData,             // Source array pointer
-                 pFDPRealData,             // Destination array pointer
+      SDA_Window(pFDPRealData,             // Pointer to source array
+                 pFDPRealData,             // Pointer to destination array
                  pWindowCoeffs,            // Window array pointer
                  FFT_LENGTH);              // Window size
                                            // Perform FFT

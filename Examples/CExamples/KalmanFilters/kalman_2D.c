@@ -172,15 +172,15 @@ int main(int argc, char** argv)
                      SAMPLE_LENGTH);             // Output dataset length
 
   // Apply comb filter and store filtered data
-  SDA_Comb(pPositionNoisy,                         // Source array pointer
-           pPositionCombFilterEstimate,            // Destination array pointer
+  SDA_Comb(pPositionNoisy,                         // Pointer to source array
+           pPositionCombFilterEstimate,            // Pointer to destination array
            pCombFilterStateArray,                  // Pointer to filter state array
            &combFilterIndex,                       // Pointer to filter index register
            &combFilterSum,                         // Pointer to filter sum register
            COMB_FILTER_LENGTH,                     // Filter length
            SAMPLE_LENGTH);                         // Sample length
-  SDA_Multiply(pPositionCombFilterEstimate,        // Source array pointer
-               SIGLIB_ONE / COMB_FILTER_LENGTH,    // Destination array pointer
+  SDA_Multiply(pPositionCombFilterEstimate,        // Pointer to source array
+               SIGLIB_ONE / COMB_FILTER_LENGTH,    // Pointer to destination array
                pPositionCombFilterEstimate,        // Pointer to filter state array
                SAMPLE_LENGTH);                     // Sample length
 

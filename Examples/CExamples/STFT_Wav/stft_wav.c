@@ -181,8 +181,8 @@ int main(int argc, char* argv[])
 #define COMPARISON_THRESHOLD_LEVEL SIGLIB_ONE
 
   // Compare source and processed arrays
-  SLFixData_t comparison = SDA_Compare(pInputData,                    // Source array pointer #1
-                                       pTimeDomainResults,            // Source array pointer #2
+  SLFixData_t comparison = SDA_Compare(pInputData,                    // Pointer to source array #1
+                                       pTimeDomainResults,            // Pointer to source array #2
                                        COMPARISON_THRESHOLD_LEVEL,    // Threshold
                                        wavFileLength);                // Dataset length
   if (comparison == SIGLIB_TRUE) {
@@ -190,9 +190,9 @@ int main(int argc, char* argv[])
   } else {
     printf("\nSTFT or ISTFT Failed :-( !!!\n\n");
 
-    SDA_Subtract2(pInputData,            // Source array pointer #1
-                  pTimeDomainResults,    // Source array pointer #2
-                  pTimeDomainResults,    // Source array pointer #2
+    SDA_Subtract2(pInputData,            // Pointer to source array #1
+                  pTimeDomainResults,    // Pointer to source array #2
+                  pTimeDomainResults,    // Pointer to source array #2
                   wavFileLength);        // Dataset length
     SDA_Abs(pTimeDomainResults, pTimeDomainResults, wavFileLength);
     SDA_Threshold(pTimeDomainResults, pTimeDomainResults, COMPARISON_THRESHOLD_LEVEL, SIGLIB_SINGLE_SIDED_THRESHOLD, wavFileLength);
@@ -202,8 +202,8 @@ int main(int argc, char* argv[])
     printf("Max Difference:         %lf\n", SDA_AbsMax(pTimeDomainResults, wavFileLength));
     printf("Max Index:              %d\n", SDA_AbsMaxIndex(pTimeDomainResults, wavFileLength));
 
-    SLData_t rmsError = SDA_RootMeanSquareError(pInputData,                              // Source array pointer #1
-                                                pTimeDomainResults,                      // Source array pointer #2
+    SLData_t rmsError = SDA_RootMeanSquareError(pInputData,                              // Pointer to source array #1
+                                                pTimeDomainResults,                      // Pointer to source array #2
                                                 SIGLIB_ONE / (SLData_t)wavFileLength,    // Inverse of the array length
                                                 wavFileLength);                          // Dataset length
     printf("RMS Error:              %lf\n", rmsError);

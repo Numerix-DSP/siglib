@@ -939,7 +939,7 @@ long _stdcall SIF_TableTopWindow(double* SIGLIB_OUTPUT_PTR_DECL,    // Window co
                                  long,                              // Flat-top length
                                  long);                             // Window length
 
-void _stdcall SDA_Window(double* SIGLIB_INPUT_PTR_DECL,     // Source array pointer
+void _stdcall SDA_Window(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
                          double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
                          double* SIGLIB_INPUT_PTR_DECL,     // Pointer to window array pointer
                          long);                             // Window size
@@ -952,13 +952,13 @@ void _stdcall SDA_ComplexWindow(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to
                                 double* SIGLIB_INPUT_PTR_DECL,     // Pointer to imaginary window array
                                 long);                             // Window size
 
-double _stdcall SDA_WindowInverseCoherentGain(double* SIGLIB_INPUT_PTR_DECL,    // Source array pointer
+double _stdcall SDA_WindowInverseCoherentGain(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                               long);                            // Window size
 
-double _stdcall SDA_WindowEquivalentNoiseBandwidth(double* SIGLIB_INPUT_PTR_DECL,    // Source array pointer
+double _stdcall SDA_WindowEquivalentNoiseBandwidth(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                                    long);                            // Window size
 
-double _stdcall SDA_WindowProcessingGain(double* SIGLIB_INPUT_PTR_DECL,    // Source array pointer
+double _stdcall SDA_WindowProcessingGain(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                          long);                            // Window size
 
 double _stdcall SDS_I0Bessel(double);    // x
@@ -1769,6 +1769,28 @@ void _stdcall SDS_KalmanFilter2D(double,                 // Measured position
                                  double*,                // Estimated position
                                  double*);               // Estimated velocity
 
+void _stdcall SIF_FarrowFilter(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to filter state array
+                               long*,                             // Pointer to filter index
+                               long);                             // Filter lengths
+
+double _stdcall SDS_FarrowFilter(double,                           // Source sample
+                                 double* SIGLIB_INOUT_PTR_DECL,    // Pointer to filter state array
+                                 double* SIGLIB_INPUT_PTR_DECL,    // Pointer to filter coefficients
+                                 long* SIGLIB_INOUT_PTR_DECL,      // Pointer to filter index offset
+                                 double,                           // Desired fractional delay
+                                 long,                             // Number of filters
+                                 long);                            // Filter lengths
+
+void _stdcall SDA_FarrowFilter(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
+                               double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
+                               double* SIGLIB_INOUT_PTR_DECL,     // Pointer to filter state array
+                               double* SIGLIB_INPUT_PTR_DECL,     // Pointer to filter coefficients
+                               long* SIGLIB_INOUT_PTR_DECL,       // Pointer to filter index offset
+                               double,                            // Desired fractional delay
+                               long,                              // Number of filters
+                               long,                              // Filter lengths
+                               long);                             // Input sample length
+
 // Acoustic processing functions - acoustic.c
 
 void _stdcall SDA_LinearMicrophoneArrayBeamPattern(long,                              // Number of microphones
@@ -2046,7 +2068,7 @@ void _stdcall SDA_FixedDelayComplex(double* SIGLIB_INPUT_PTR_DECL,     // Pointe
 void _stdcall SDA_ShortFixedDelay(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
                                   double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
                                   double* SIGLIB_INOUT_PTR_DECL,     // Pointer to temporary delayed array
-                                  double* SIGLIB_INOUT_PTR_DECL,     // Temporary destination array pointer
+                                  double* SIGLIB_INOUT_PTR_DECL,     // Temporary Pointer to destination array
                                   long,                              // Sample delay count
                                   long);                             // Array length
 
@@ -2255,14 +2277,14 @@ void _stdcall SDA_Resonator1Add(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to
                                 double,                            // Sine coefficient
                                 long);                             // Array length
 
-void _stdcall SDA_SignalGeneratePolarWhiteNoise(double* SIGLIB_OUTPUT_PTR_DECL,    // Destination array pointer
+void _stdcall SDA_SignalGeneratePolarWhiteNoise(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
                                                 double,                            // Peak level
                                                 int SLSignalFillMode_t,            // Array fill mode, fill up or add to
                                                 long);                             // Array length
 
 double _stdcall SDS_SignalGeneratePolarWhiteNoise(double);    // Peak level
 
-void _stdcall SDA_SignalGeneratePolarGaussianNoise(double* SIGLIB_OUTPUT_PTR_DECL,    // Destination array pointer
+void _stdcall SDA_SignalGeneratePolarGaussianNoise(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
                                                    double,                            // Noise variance
                                                    double*,                           // Noise phase offset
                                                    double*,                           // Noise current value
@@ -2273,8 +2295,8 @@ double _stdcall SDS_SignalGeneratePolarGaussianNoise(double,      // Noise varia
                                                      double*,     // Noise phase offset
                                                      double*);    // Noise current value
 
-void _stdcall SDA_SignalAddPolarJitterAndGaussianNoise(double* SIGLIB_INPUT_PTR_DECL,     // Source array pointer
-                                                       double* SIGLIB_OUTPUT_PTR_DECL,    // Destination array pointer
+void _stdcall SDA_SignalAddPolarJitterAndGaussianNoise(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
+                                                       double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
                                                        double,                            // Jitter sine wave frequency
                                                        double,                            // Jitter sine wave magnitude
                                                        double*,                           // Jitter sine wave phase offset
@@ -2291,7 +2313,7 @@ double _stdcall SDS_SignalAddPolarJitterAndGaussianNoise(double,      // Input s
                                                          double*,     // Phase offset
                                                          double*);    // Noise current value
 
-void _stdcall SDA_Ramp(double* SIGLIB_OUTPUT_PTR_DECL,    // Destination array pointer
+void _stdcall SDA_Ramp(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
                        double,                            // Start value
                        double,                            // Increment value
                        long);                             // Array length
@@ -2301,7 +2323,7 @@ void _stdcall SIF_RandomNumber(void);    // void
 double _stdcall SDS_RandomNumber(double,     // Lower bound
                                  double);    // Upper bound
 
-void _stdcall SDA_RandomNumber(double* SIGLIB_OUTPUT_PTR_DECL,    // Destination array pointer
+void _stdcall SDA_RandomNumber(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
                                double,                            // Lower bound
                                double,                            // Upper bound
                                long);                             // Array length
@@ -2993,7 +3015,7 @@ long _stdcall SDS_CostasQamDemodulate(double,                            // Sour
                                       long*,                             // Pointer to ELG synchronization delay index
                                       long);                             // ELG output synchronization delay length
 
-#line 3408 "siglib.h"
+#line 3431 "siglib.h"
 // compiler
 long _stdcall SDS_CostasQamDemodulateDebug(double,                            // Source data sample
                                            double*,                           // Pointer to real destination symbol point
@@ -3129,7 +3151,7 @@ long _stdcall SDA_CostasQamDemodulateDebug(double* SIGLIB_INPUT_PTR_DECL,     //
                                            double*,                           // Pointer to debug real filter output
                                            double*,                           // Pointer to debug imaginary filter output
                                            double*);                          // Pointer to debug ELG trigger output
-#line 3544 "siglib.h"
+#line 3567 "siglib.h"
 
 void _stdcall SIF_QpskModulate(double* SIGLIB_OUTPUT_PTR_DECL,    // Carrier table pointer
                                double,                            // Carrier phase increment per sample (radians / 2Ï€)
@@ -4114,7 +4136,7 @@ void SDA_LagrangeInterpolate(double* SIGLIB_INPUT_PTR_DECL,     // Ideal points
 void _stdcall SIF_DtmfGenerate(double* SIGLIB_OUTPUT_PTR_DECL,    // Generator coefficient look up table pointer
                                double);                           // Sample rate (Hz)
 
-long _stdcall SDA_DtmfGenerate(double* SIGLIB_OUTPUT_PTR_DECL,    // Destination array pointer
+long _stdcall SDA_DtmfGenerate(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
                                long,                              // Key code
                                double,                            // Signal magnitude
                                double* SIGLIB_INPUT_PTR_DECL,     // Generator coefficient look up table pointer
@@ -4123,10 +4145,10 @@ long _stdcall SDA_DtmfGenerate(double* SIGLIB_OUTPUT_PTR_DECL,    // Destination
 void _stdcall SIF_DtmfDetect(double,    // Sample rate (Hz)
                              long);     // Array length
 
-long _stdcall SDA_DtmfDetect(double* SIGLIB_INPUT_PTR_DECL,    // Source array pointer
+long _stdcall SDA_DtmfDetect(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                              long);                            // Array length
 
-long _stdcall SDA_DtmfDetectAndValidate(double* SIGLIB_INPUT_PTR_DECL,    // Source array pointer
+long _stdcall SDA_DtmfDetectAndValidate(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                         double,                           // Threshold for signal energy
                                         long*,                            // Pointer to previous key code
                                         long*,                            // Pointer to key code run length
@@ -5975,8 +5997,8 @@ void _stdcall SIF_QuickSinCos(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to L
 
 void _stdcall SDA_QuickSinCos(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
                               double* SIGLIB_INPUT_PTR_DECL,     // Sine table pointer
-                              double* SIGLIB_OUTPUT_PTR_DECL,    // Sine destination array pointer
-                              double* SIGLIB_OUTPUT_PTR_DECL,    // Cosine destination array pointer
+                              double* SIGLIB_OUTPUT_PTR_DECL,    // Sine Pointer to destination array
+                              double* SIGLIB_OUTPUT_PTR_DECL,    // Cosine Pointer to destination array
                               double,                            // Phase gain
                               long,                              // Sine wave look up table period
                               long);                             // Array length
@@ -6255,4 +6277,4 @@ void _stdcall SMX_ExtractCategoricalColumn(double* SIGLIB_INPUT_PTR_DECL,    // 
 // #include "siglib_deprecated.h"
 
 // End of SigLib DSP function section
-#line 7119 "siglib.h"
+#line 7142 "siglib.h"

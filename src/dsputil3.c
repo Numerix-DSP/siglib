@@ -370,7 +370,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindFirstDuplicates(const SLData_t* SIGLIB_P
       }
     }
   }
-  pDst -= NumDuplicates;    // Reset destination array pointer
+  pDst -= NumDuplicates;    // Reset Pointer to destination array
 
   // Remove duplicates
   for (SLArrayIndex_t i = 0; i < NumDuplicates; i++) {
@@ -429,7 +429,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindSortAllDuplicates(const SLData_t* SIGLIB
       }
     }
   }
-  pDst -= NumDuplicates;    // Reset destination array pointer
+  pDst -= NumDuplicates;    // Reset Pointer to destination array
 
   SDA_SortMinToMax(pDst, pDst, NumDuplicates);    // Sort the results
 
@@ -473,7 +473,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_FindSortFirstDuplicates(const SLData_t* SIGL
       }
     }
   }
-  pDst -= NumDuplicates;    // Reset destination array pointer
+  pDst -= NumDuplicates;    // Reset Pointer to destination array
 
   // Remove duplicates
   for (SLArrayIndex_t i = 0; i < NumDuplicates; i++) {

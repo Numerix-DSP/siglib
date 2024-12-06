@@ -149,8 +149,8 @@ int main(void)
 
   // Perform real to real cepstrum
   SDA_RealRealCepstrum(pRealData,                  // Real input array pointer
-                       pMagnitude,                 // Real destination array pointer
-                       pPhase,                     // Imaginary destination array pointer
+                       pMagnitude,                 // Real Pointer to destination array
+                       pPhase,                     // Imaginary Pointer to destination array
                        pFFTCoeffs,                 // Pointer to FFT coefficients
                        SIGLIB_BIT_REV_STANDARD,    // Bit reverse mode flag / Pointer to bit reverse
                                                    // address table
@@ -180,8 +180,8 @@ int main(void)
 
   // Perform real to complex cepstrum
   SDA_RealComplexCepstrum(pRealData,                  // Real input array pointer
-                          pMagnitude,                 // Real destination array pointer
-                          pPhase,                     // Imaginary destination array pointer
+                          pMagnitude,                 // Real Pointer to destination array
+                          pPhase,                     // Imaginary Pointer to destination array
                           pFFTCoeffs,                 // Pointer to FFT coefficients
                           SIGLIB_BIT_REV_STANDARD,    // Bit reverse mode flag / Pointer to bit reverse
                                                       // address table

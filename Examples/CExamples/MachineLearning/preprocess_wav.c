@@ -344,9 +344,9 @@ int main(int argc, char* argv[])
         }
       }
 
-      SDA_Multiply(pRealData,      // Source array pointer
+      SDA_Multiply(pRealData,      // Pointer to source array
                    INPUT_GAIN,     // Scalar multiply
-                   pRealData,      // Destination array pointer
+                   pRealData,      // Pointer to destination array
                    FFT_LENGTH);    // Array length
 
       if (dataAugmentationRandomGainEnable == 1) {    // Data augmentation by applying random gain to input data
@@ -354,9 +354,9 @@ int main(int argc, char* argv[])
         randomGain = SDS_dBmToVoltage(randomGain,     // dBm input value
                                       SIGLIB_ONE);    // Zero dBm level
         // printf("Random gain: %lf\n", randomGain);
-        SDA_Multiply(pRealData,      // Source array pointer
+        SDA_Multiply(pRealData,      // Pointer to source array
                      randomGain,     // Scalar multiply
-                     pRealData,      // Destination array pointer
+                     pRealData,      // Pointer to destination array
                      FFT_LENGTH);    // Array length
       }
 
@@ -375,8 +375,8 @@ int main(int argc, char* argv[])
 
 #if (REMOVE_DC_IN_TIME_DOMAIN)
         // Remove any D.C. offset
-        SDA_SubtractMean(pRealData,                  // Source array pointer
-                         pRealData,                  // Destination array pointer
+        SDA_SubtractMean(pRealData,                  // Pointer to source array
+                         pRealData,                  // Pointer to destination array
                          SIGLIB_ONE / FFT_LENGTH,    // Inverse of array length
                          FFT_LENGTH);                // Array length
 #endif
@@ -405,9 +405,9 @@ int main(int argc, char* argv[])
 
 #  if (LINEAR_FFT_MAGNITUDE)
         // Normalize FFT output magnitude
-        SDA_Multiply(pRealDataShortened,         // Source array pointer
+        SDA_Multiply(pRealDataShortened,         // Pointer to source array
                      SIGLIB_ONE / FFT_LENGTH,    // Scalar multiply
-                     pRealDataShortened,         // Destination array pointer
+                     pRealDataShortened,         // Pointer to destination array
                      networkInputLayerNodes);    // Array length
 
         SDA_Abs(pRealDataShortened,         // Pointer to source array
@@ -429,14 +429,14 @@ int main(int argc, char* argv[])
 
 #  if (LINEAR_FFT_MAGNITUDE)
                                       // Normalize FFT output magnitude
-        SDA_Multiply(pRealDataShortened,         // Source array pointer
+        SDA_Multiply(pRealDataShortened,         // Pointer to source array
                      SIGLIB_ONE / FFT_LENGTH,    // Scalar multiply
-                     pRealDataShortened,         // Destination array pointer
+                     pRealDataShortened,         // Pointer to destination array
                      networkInputLayerNodes);    // Array length
                                                  // Normalize FFT output magnitude
-        SDA_Multiply(pImagDataShortened,         // Source array pointer
+        SDA_Multiply(pImagDataShortened,         // Pointer to source array
                      SIGLIB_ONE / FFT_LENGTH,    // Scalar multiply
-                     pImagDataShortened,         // Destination array pointer
+                     pImagDataShortened,         // Pointer to destination array
                      networkInputLayerNodes);    // Array length
 
         SDA_Abs(pRealDataShortened,          // Pointer to source array
@@ -480,9 +480,9 @@ int main(int argc, char* argv[])
           }
         }
 
-        SDA_Multiply(pRealDataShortened,         // Source array pointer
+        SDA_Multiply(pRealDataShortened,         // Pointer to source array
                      OUTPUT_GAIN,                // Scalar multiply
-                     pRealDataShortened,         // Destination array pointer
+                     pRealDataShortened,         // Pointer to destination array
                      networkInputLayerNodes);    // Array length
 
 #if (QUANTIZE_FREQUENCY_DOMAIN_NUM_BITS)

@@ -100,14 +100,14 @@ int main(void)
          SDA_MaxIndex(pZTransform, ZT_SIZE), SDA_Max(pZTransform, ZT_SIZE));
 
   // Ensure signal is positive for display
-  SDA_Add(pZTransform,                       // Source array pointer
+  SDA_Add(pZTransform,                       // Pointer to source array
           -SDA_Min(pZTransform, ZT_SIZE),    // Offset value
-          pZTransform,                       // Destination array pointer
+          pZTransform,                       // Pointer to destination array
           ZT_SIZE);                          // Dataset length
 
   // Scale signal for display
-  SDA_Scale(pZTransform,    // Source array pointer
-            pZTransform,    // Destination array pointer
+  SDA_Scale(pZTransform,    // Pointer to source array
+            pZTransform,    // Pointer to destination array
             255.0,          // Peak value
             ZT_SIZE);       // Dataset length
 

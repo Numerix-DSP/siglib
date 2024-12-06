@@ -242,12 +242,12 @@ int main(void)
                        pRealDataCopy,                               // Pointer to real destination array
                        pImagDataCopy,                               // Pointer to imaginary destination array
                        FFT_LENGTH);                                 // Dataset length
-  SLFixData_t comparisonReal = SDA_Compare(pRealData,               // Source array pointer #1
-                                           pRealDataCopy,           // Source array pointer #2
+  SLFixData_t comparisonReal = SDA_Compare(pRealData,               // Pointer to source array #1
+                                           pRealDataCopy,           // Pointer to source array #2
                                            SIGLIB_MIN_THRESHOLD,    // Threshold
                                            FFT_LENGTH);             // Dataset length
-  SLFixData_t comparisonImag = SDA_Compare(pImagData,               // Source array pointer #1
-                                           pImagDataCopy,           // Source array pointer #2
+  SLFixData_t comparisonImag = SDA_Compare(pImagData,               // Pointer to source array #1
+                                           pImagDataCopy,           // Pointer to source array #2
                                            SIGLIB_MIN_THRESHOLD,    // Threshold
                                            FFT_LENGTH);             // Dataset length
   if (comparisonReal != SIGLIB_TRUE) {

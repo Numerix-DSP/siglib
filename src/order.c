@@ -249,7 +249,7 @@ void SIGLIB_FUNC_DECL SIF_OrderAnalysis(SLData_t* SIGLIB_PTR_DECL pSincLUT, SLDa
              FFTLength);           // Window length
 
   // Calculate window inverse coherent gain
-  *pWindowInverseCoherentGain = SDA_WindowInverseCoherentGain(pWindowCoeffs,    // Source array pointer
+  *pWindowInverseCoherentGain = SDA_WindowInverseCoherentGain(pWindowCoeffs,    // Pointer to source array
                                                               FFTLength);       // Window size
 
   // Initialise FFT
@@ -364,8 +364,8 @@ SLData_t SIGLIB_FUNC_DECL SDA_OrderAnalysis(
 #endif
 
   // Apply window to real data
-  SDA_Window(pLocalProcArray,    // Source array pointer
-             pLocalProcArray,    // Destination array pointer
+  SDA_Window(pLocalProcArray,    // Pointer to source array
+             pLocalProcArray,    // Pointer to destination array
              pWindowCoeffs,      // Window array pointer
              FFTLength);         // Window size
                                  // Perform FFT

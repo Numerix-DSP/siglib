@@ -42,8 +42,8 @@ int main(void)
            COMB_FILTER_LENGTH);     // Filter length
 
   // Apply comb filter and store filtered data
-  SDA_Comb(SourceArray,             // Source array pointer
-           DstArray,                // Destination array pointer
+  SDA_Comb(SourceArray,             // Pointer to source array
+           DstArray,                // Pointer to destination array
            combFilterStateArray,    // Pointer to filter state array
            &combFilterIndex,        // Pointer to filter index register
            &combFilterSum,          // Pointer to filter sum register
@@ -53,8 +53,8 @@ int main(void)
   printf("SDA_Comb results [1-5]:\n");
   SUF_PrintArray(DstArray, SAMPLE_LENGTH >> 1);
 
-  SDA_Comb(SourceArray + 5,         // Source array pointer
-           DstArray,                // Destination array pointer
+  SDA_Comb(SourceArray + 5,         // Pointer to source array
+           DstArray,                // Pointer to destination array
            combFilterStateArray,    // Pointer to filter state array
            &combFilterIndex,        // Pointer to filter index register
            &combFilterSum,          // Pointer to filter sum register

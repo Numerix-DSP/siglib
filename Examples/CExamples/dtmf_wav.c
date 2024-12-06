@@ -44,7 +44,7 @@ int main(void)
 
   while ((sampleCount = (SLFixData_t)SUF_WavReadData(pData, fpInputFile, wavFileInfo, DTMF_SAMPLE_LENGTH)) == DTMF_SAMPLE_LENGTH) {
 
-    KeyCode = SDA_DtmfDetectAndValidate(pData,                  // Source array pointer
+    KeyCode = SDA_DtmfDetectAndValidate(pData,                  // Pointer to source array
                                         1000.,                  // Threshold for signal energy
                                         &PreviousKeyCode,       // Pointer to previous key code
                                         &KeyCodeLength,         // Pointer to key code run length

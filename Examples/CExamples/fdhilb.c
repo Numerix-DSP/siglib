@@ -147,7 +147,7 @@ int main(void)
   SDA_ShortFixedDelay(pData,                 // Pointer to source array
                       pData,                 // Pointer to destination array
                       pDelay,                // Pointer to delay state array
-                      pTempDelay,            // Temporary destination array pointer
+                      pTempDelay,            // Temporary Pointer to destination array
                       FILTER_GROUP_DELAY,    // Delay length
                       SAMPLE_LENGTH);        // Source dataset length
 

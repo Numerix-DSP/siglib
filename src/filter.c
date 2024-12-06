@@ -1195,3 +1195,130 @@ void SIGLIB_FUNC_DECL SDS_KalmanFilter2D(const SLData_t positionNoisy, const SLD
   *pPositionEstimate = kf->X[0];
   *pVelocityEstimate = kf->X[1];
 }    // End of SDS_KalmanFilter2D
+
+/********************************************************
+ * Function: SIF_FarrowFilter
+ *
+ * Parameters:
+ *   SLData_t *pState,                   Pointer to filter state array
+ *   SLArrayIndex_t * pFilterIndex,      Pointer to filter index
+ *   const SLArrayIndex_t filterLength   Filter lengths
+ *
+ * Return value:
+ *   void
+ *
+ * Description: Initialise the FIR filter operation
+ *
+ ********************************************************/
+
+void SIGLIB_FUNC_DECL SIF_FarrowFilter(SLData_t* SIGLIB_PTR_DECL pState, SLArrayIndex_t* pFilterIndex, const SLArrayIndex_t filterLength)
+{
+#if (SIGLIB_ARRAYS_ALIGNED)
+#  ifdef __TMS320C6X__               // Defined by TI compiler
+  _nassert((int)pState % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+#  endif
+#endif
+
+  // Initialise the filter state array to 0
+  for (SLArrayIndex_t i = 0; i < filterLength; i++) {
+    *pState++ = SIGLIB_ZERO;
+  }
+
+  *pFilterIndex = SIGLIB_AI_ZERO;    // Initilaise filter index
+}    // End of SIF_FarrowFilter()
+
+/********************************************************
+ * Function: SDS_FarrowFilter
+ *
+ * Parameters:
+ *   const SLData_t src,                  Source sample
+ *   SLData_t* pState,                    Pointer to filter state array
+ *   const SLData_t* pCoeffs,             Pointer to filter coefficients
+ *   SLArrayIndex_t* pFilterIndex,        Pointer to filter index offset
+ *   const SLData_t delay,                Desired fractional delay
+ *   const SLArrayIndex_t numFilters,     Number of filters
+ *   const SLArrayIndex_t filterLength,   Filter lengths
+ *
+ * Return value:
+ *   Filtered sample
+ *
+ * Description: Apply the Farrow filter to the data sample
+ *
+ ********************************************************/
+
+SLData_t SIGLIB_FUNC_DECL SDS_FarrowFilter(SLData_t src, SLData_t* SIGLIB_PTR_DECL pState, const SLData_t* SIGLIB_PTR_DECL pCoeffs,
+                                           SLArrayIndex_t* pFilterIndex, const SLData_t delay, const SLArrayIndex_t numFilters,
+                                           const SLArrayIndex_t filterLength)
+{
+
+  SLArrayIndex_t j = *pFilterIndex;    // Initialise local filter index
+
+  pState[j] = src;
+  j--;    // De-rotate filter index
+
+  SLData_t sum = SIGLIB_ZERO;    // Pre-initialise sum
+
+  for (SLArrayIndex_t i = 0; i < filterLength; i++) {
+    if (++j == filterLength) {    // Test for end of array
+      j = 0;                      // Circular array
+    }
+    SLData_t d_shifted = SIGLIB_ONE;
+    for (SLArrayIndex_t n = 0; n < numFilters; n++) {                      // Compute all filter banks in parallel
+      sum += d_shifted * (pCoeffs[(filterLength * n) + i] * pState[j]);    // Convolve data
+      d_shifted *= delay;
+    }
+  }
+  *pFilterIndex = j;    // Store index for next iteration
+  return sum;
+
+}    // End of SDS_FarrowFilter()
+
+/********************************************************
+ * Function: SDA_FarrowFilter
+ *
+ * Parameters:
+ *   const SLData_t* pSrc,                Pointer to source array
+ *   SLData_t* pDst,                      Pointer to destination array
+ *   SLData_t* pState,                    Pointer to filter state array
+ *   const SLData_t* pCoeffs,             Pointer to filter coefficients
+ *   SLArrayIndex_t * pFilterIndex,       Pointer to filter index offset
+ *   const SLData_t delay,                Desired fractional delay
+ *   const SLArrayIndex_t numFilters,     Number of filters
+ *   const SLArrayIndex_t filterLength,   Filter lengths
+ *   const SLArrayIndex_t sampleLength    Input sample length
+ *
+ * Return value:
+ *   void
+ *
+ * Description: Apply the Farrow filter to the data array
+ *
+ ********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_FarrowFilter(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, SLData_t* SIGLIB_PTR_DECL pState,
+                                       const SLData_t* SIGLIB_PTR_DECL pCoeffs, SLArrayIndex_t* pFilterIndex, const SLData_t delay,
+                                       const SLArrayIndex_t numFilters, const SLArrayIndex_t filterLength, const SLArrayIndex_t sampleLength)
+{
+
+  SLArrayIndex_t j = *pFilterIndex;    // Initialise local filter index
+
+  for (SLArrayIndex_t k = 0; k < sampleLength; k++) {
+    pState[j] = *pSrc++;
+    j--;    // De-rotate filter index
+
+    SLData_t sum = SIGLIB_ZERO;    // Pre-initialise sum
+
+    for (SLArrayIndex_t i = 0; i < filterLength; i++) {
+      if (++j == filterLength) {    // Test for end of array
+        j = 0;                      // Circular array
+      }
+      SLData_t d_shifted = SIGLIB_ONE;
+      for (SLArrayIndex_t n = 0; n < numFilters; n++) {                      // Compute all filter banks in parallel
+        sum += d_shifted * (pCoeffs[(filterLength * n) + i] * pState[j]);    // Convolve data
+        d_shifted *= delay;
+      }
+    }
+    *(pDst + k) = sum;
+  }
+  *pFilterIndex = j;    // Store index for next iteration
+
+}    // End of SDA_FarrowFilter()

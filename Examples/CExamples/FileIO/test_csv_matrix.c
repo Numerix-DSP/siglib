@@ -25,14 +25,14 @@ int main(void)
 
   printf("Writing to test.csv file\n");
 
-  inputSampleCount = SUF_CsvWriteMatrix((SLData_t*)outputData,    // Source array pointer
+  inputSampleCount = SUF_CsvWriteMatrix((SLData_t*)outputData,    // Pointer to source array
                                         "test.csv",               // Output filename
                                         N_ROWS,                   // Number of rows
                                         N_COLS);                  // Number of columns
   printf("Number of words written to test.csv file: %d\n", inputSampleCount);
 
   printf("Reading from test.csv file\n");
-  inputSampleCount = SUF_CsvReadMatrix(&pInputData,              // Destination array pointer
+  inputSampleCount = SUF_CsvReadMatrix(&pInputData,              // Pointer to destination array
                                        "test.csv",               // Input filename
                                        SIGLIB_FIRST_ROW_KEEP,    // First row keep/ignore flag
                                        &nRows,                   // Pointer to number of rows read

@@ -143,8 +143,8 @@ int main(void)
     SDA_Copy(pSrc, pRealData, SAMPLE_LENGTH);
 
     // Apply window to real data
-    SDA_Window(pRealData,                // Source array pointer
-               pRealData,                // Destination array pointer
+    SDA_Window(pRealData,                // Pointer to source array
+               pRealData,                // Pointer to destination array
                pWindowCoeffs,            // Window array pointer
                FFT_LENGTH);              // Window size
                                          // Perform real FFT
