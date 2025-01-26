@@ -1,0 +1,66 @@
+{
+  "version": 2,
+  "configurePresets": [
+    {
+      "name": "linux-dbg",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "linux-rel",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "windows-dbg",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "windows-rel",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    }
+  ],
+  "buildPresets":[
+    {
+      "name": "windows-rel",
+      "configurePreset": "windows-rel",
+      "configuration": "Release"
+    },
+    {
+      "name": "windows-dbg",
+      "configurePreset": "windows-dbg",
+      "configuration": "Debug"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "windows-dbg",
+      "configurePreset": "windows-dbg",
+      "configuration": "Debug",
+      "output": {"outputOnFailure": true},
+      "execution": {"noTestsAction": "error", "stopOnFailure": true}
+    },
+    {
+      "name": "linux-dbg",
+      "configurePreset": "linux-dbg",
+      "output": {"outputOnFailure": true},
+      "execution": {"noTestsAction": "error", "stopOnFailure": true}
+    }
+  ]
+}
