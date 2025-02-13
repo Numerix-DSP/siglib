@@ -17,4 +17,4 @@ add_compile_options( -DSIGLIB_DATA_FLOAT=1 )
 #string(REPLACE "/Ob1" "/Ob0" CMAKE_CXX_FLAGS_RELWITHDEBINFO ${CMAKE_CXX_FLAGS_RELWITHDEBINFO})
 
 add_library( siglib STATIC ${SIGLIB_SRCS} )
-target_include_directories(siglib PRIVATE ${SIGLIB_BASE_DIR}/include)
+target_include_directories(siglib PUBLIC ${SIGLIB_BASE_DIR}/include)
