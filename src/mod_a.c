@@ -489,7 +489,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_FrequencyModulate(const SLData_t Src, const SLData
 {
   *PhaseOffset += CarrierPhaseIncrement + (ModIndex * Src);    // Increment phase
   if (*PhaseOffset >= SIGLIB_ONE) {                            // Check phase in limits
-    *PhaseOffset = fmodf(*PhaseOffset, SIGLIB_ONE);
+    *PhaseOffset -= SIGLIB_ONE;
   }
   
   return (pLookUpTable[(SLArrayIndex_t)(*PhaseOffset * ((SLData_t)LookUpTableSize))]);
