@@ -82,99 +82,83 @@ rm -rf *
 cd $SIGLIB_PATH/src/x64
 rm -rf *
 
-popd
-
-
 # Clean-up SWIG
-pushd $SIGLIB_PATH/SWIG
+cd $SIGLIB_PATH/SWIG
 ./cleanup.sh
-popd
 
-# Delete all executables
+# Delete all executables and other unwanted files
 # Do not delete .exe files globally because we want to preserve them in DigitalFilterPlus/releases
-pushd $SIGLIB_PATH/gnuplot_c/examples
+cd $SIGLIB_PATH/build
+ls -1 | grep -v "README.txt" | xargs rm -f
+cd $SIGLIB_PATH/gnuplot_c/examples
 $SIGLIB_PATH/utils/clean_executables.sh
 rm -f -r *.exe
-popd
-pushd $SIGLIB_PATH/Examples/CExamples
+cd $SIGLIB_PATH/Examples/CExamples
 $SIGLIB_PATH/utils/clean_executables.sh
 rm -f -r *.exe
-popd
-pushd $SIGLIB_PATH/Examples/CExamples/AGC/
+cd $SIGLIB_PATH/Examples/CExamples/AGC/
 rm -f Kipling_If_48kHz_Attenuated_processed.wav
 rm -f Kipling_If_48kHz_Attenuated_stereo.wav
 $SIGLIB_PATH/utils/clean_executables.sh
-popd
-pushd $SIGLIB_PATH/Examples/CExamples/Align/
+cd $SIGLIB_PATH/Examples/CExamples/Align/
 rm -f aligned_1.wav
 rm -f aligned_2.wav
 $SIGLIB_PATH/utils/clean_executables.sh
-popd
-pushd $SIGLIB_PATH/Examples/CExamples/Beamforming/
+cd $SIGLIB_PATH/Examples/CExamples/Beamforming/
 $SIGLIB_PATH/utils/clean_executables.sh
-popd
-pushd $SIGLIB_PATH/Examples/CExamples/CostasQAM_PiByFourDQpsk/
+cd $SIGLIB_PATH/Examples/CExamples/CostasQAM_PiByFourDQpsk/
 $SIGLIB_PATH/utils/clean_executables.sh
 rm -f base.wav
 rm -f DemodOutput.txt
 rm -f *.dot
 rm -f *.out
 rm -f *.png
-popd
-pushd $SIGLIB_PATH/Examples/CExamples/FileIO/
+cd $SIGLIB_PATH/Examples/CExamples/FileIO/
 $SIGLIB_PATH/utils/clean_executables.sh
-popd
-pushd $SIGLIB_PATH/Examples/CExamples/GraphicEqualizerFilterDesign/
+cd $SIGLIB_PATH/Examples/CExamples/GraphicEqualizerFilterDesign/
 $SIGLIB_PATH/utils/clean_executables.sh
-popd
-pushd $SIGLIB_PATH/Examples/CExamples/ImageExamples/
+cd $SIGLIB_PATH/Examples/CExamples/ImageExamples/
 $SIGLIB_PATH/utils/clean_executables.sh
-popd
-pushd $SIGLIB_PATH/Examples/CExamples/KalmanFilters/
+cd $SIGLIB_PATH/Examples/CExamples/KalmanFilters/
 $SIGLIB_PATH/utils/clean_executables.sh
-popd
-pushd $SIGLIB_PATH/Examples/CExamples/MachineLearning/
+cd $SIGLIB_PATH/Examples/CExamples/MachineLearning/
 rm -f *.csv
-rm -f weightCoefficientsFiles/*
 $SIGLIB_PATH/utils/clean_executables.sh
-popd
-pushd $SIGLIB_PATH/Examples/CExamples/MachineLearning_PortAudio/
+cd weightCoefficientsFiles/
+ls -1 | grep -v "README.txt" | xargs rm -f
+cd $SIGLIB_PATH/Examples/CExamples/MachineLearning_PortAudio/
 $SIGLIB_PATH/utils/clean_executables.sh
-popd
-pushd $SIGLIB_PATH/Examples/CExamples/MachineLearning_WithBiases/
+cd $SIGLIB_PATH/Examples/CExamples/MachineLearning_WithBiases/
 rm -f *.csv
-rm -f weightCoefficientsFiles/*
 $SIGLIB_PATH/utils/clean_executables.sh
-popd
-pushd $SIGLIB_PATH/Examples/CExamples/OrderAnalysis/
+cd weightCoefficientsFiles/
+ls -1 | grep -v "README.txt" | xargs rm -f
+cd cd $SIGLIB_PATH/Examples/CExamples/OrderAnalysis/
 $SIGLIB_PATH/utils/clean_executables.sh
-popd
-pushd $SIGLIB_PATH/Examples/CExamples/STFT_Wav/
+cd $SIGLIB_PATH/Examples/CExamples/STFT_Wav/
 $SIGLIB_PATH/utils/clean_executables.sh
-popd
-pushd $SIGLIB_PATH/Examples/CExamples/SynchronousSampleRateConversion/
+cd $SIGLIB_PATH/Examples/CExamples/SynchronousSampleRateConversion/
 rm -f 1kHz_16kHz_minus6_dbfs_10ms_48kHz.wav
 rm -f 1kHz_16kHz_minus6_dbfs_10ms_48kHz_16kHz.wav
 rm -f chirp_80_7800_16kHz_minus6_dbfs_1s_48kHz.wav
 $SIGLIB_PATH/utils/clean_executables.sh
-popd
-pushd $SIGLIB_PATH/Examples/CExamples/ToneLevels/
+cd $SIGLIB_PATH/Examples/CExamples/ToneLevels/
 $SIGLIB_PATH/utils/clean_executables.sh
-popd
-pushd $SIGLIB_PATH/Examples/CExamples/VibrationAnalysis/
+cd $SIGLIB_PATH/Examples/CExamples/VibrationAnalysis/
 $SIGLIB_PATH/utils/clean_executables.sh
-popd
 
-pushd $SIGLIB_PATH/Applications/DigitalFilterPlus/src/
+cd $SIGLIB_PATH/Applications/DigitalFilterPlus/src/
 rm -f *.o
 rm -f *.obj
 rm -f dfplus.exe
 rm -f dfplus
-popd
-pushd $SIGLIB_PATH/Applications/SystemAnalyzer/src/
+cd $SIGLIB_PATH/Applications/DigitalFilterPlus/
+find . -name "Project.*" -type f -delete
+cd $SIGLIB_PATH/Applications/SystemAnalyzer/src/
 rm -f *.o
 rm -f *.obj
 rm -f sa.exe
 rm -f sa
+
 popd
 

@@ -12,10 +12,10 @@ REM call ..\utils\DelphiGen.bat
 
 call ..\utils\VeeGen.bat
 
-cd ..\utils\DLLGen
+cd %SIGLIB_PATH%\utils\DLLGen
 call DefGenerate.bat
 
-cd ..\TIMemSectionsGen
+cd %SIGLIB_PATH%\utils\TIMemSectionsGen
 call TIMemSectionsGenerate.bat
 
 popd
