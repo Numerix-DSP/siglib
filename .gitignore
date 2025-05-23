@@ -1,3 +1,5 @@
+# Files to ignore
+
 .DS_Store
 .externalNativeBuild
 .gradle
@@ -27,7 +29,6 @@ Examples/Android/SigLib_Graph/.idea/libraries
 *.elb
 *.elf
 *.eln
-*.exe
 *.exp
 *.gch
 *.gpdt
@@ -74,3 +75,7 @@ Examples/Android/SigLib_Graph/.idea/libraries
 *.tlog
 *.user
 *.x86_64
+
+# VS Code
+.vscode/
+
