@@ -14,7 +14,6 @@ Examples/Android/SigLib_Graph/.idea/libraries
 .DS_Store
 /captures
 *.dSYM/
-*.a
 *.app
 *.bak
 *.browse
@@ -22,7 +21,6 @@ Examples/Android/SigLib_Graph/.idea/libraries
 *.code-workspace
 *.cout
 *.d
-*.dll
 *.dot
 *.doj
 *.dylib
@@ -46,7 +44,6 @@ Examples/Android/SigLib_Graph/.idea/libraries
 *.ko
 *.lastbuildstate
 *.la
-*.lib
 *.lo
 *.log
 *.lst

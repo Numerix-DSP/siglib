@@ -51,6 +51,7 @@ find . -name "*.pbi" -type f -delete
 find . -name "*.pch" -type f -delete
 find . -name "*.pdb" -type f -delete
 find . -name "*.plg" -type f -delete
+find . -name "*.pyd" -type f -delete
 find . -name "*.r79" -type f -delete
 find . -name "*.res" -type f -delete
 find . -name "*.sdf" -type f -delete
