@@ -30,7 +30,24 @@ Support for SigLib is available via Email: support@numerix-dsp.com\r\n\
 This file may be modified, in any way, providing that this header remains\r\n\
 within the file and none of the header contents are removed or modified.\r\n\
 \r\n\
-__SIGLIB_LICENSE__\r\n\
+SigLib is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License V2, as
+published by the Free Software Foundation.
+
+SigLib is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
+
+This sofware is also available with a commercial license, for use in
+proprietary, research, government or commercial applications.
+Please contact Delta Numerix for further details :
+https://www.numerix-dsp.com
+support@.numerix-dsp.com
 \r\n\
 Copyright (c) 2024 Delta Numerix All rights reserved.\r\n\
 ---------------------------------------------------------------------------\r\n\
