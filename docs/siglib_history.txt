@@ -85,9 +85,10 @@ Operational Changes:
   SIM_Conv3x3 changed to SIM_Convolve3x3 and reordered coefficients for consistency
   SIGLIB_SINGLE_SIDED_THOLD changed to SIGLIB_SINGLE_SIDED_THRESHOLD
   SIGLIB_DOUBLE_SIDED_THOLD changed to SIGLIB_DOUBLE_SIDED_THRESHOLD
+  SUF_SigCountSamplesInFile to SUF_SigFileLength
 
 Additional Processor / Compiler Support:
-  None.
+  cmake
 
 Optimisation Changes:
   SAI_FftLengthLog2 and SAI_FftLengthLog4 changed from macros to functions

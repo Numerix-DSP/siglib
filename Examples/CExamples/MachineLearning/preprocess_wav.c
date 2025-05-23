@@ -11,6 +11,10 @@
 #include <gnuplot_c.h>            // Gnuplot/C
 #include <siglib_host_utils.h>    // Optionally includes conio.h and time.h subset functions
 
+#if defined(__GNUC__)
+#  pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+#endif
+
 // Define constants
 #ifndef FFT_LENGTH
 #  define FFT_LENGTH 256    // FFT length
@@ -615,11 +619,10 @@ int main(int argc, char* argv[])
     printf("    Validation maximum output level   : %lf\n", validationMax);
   }
 
-  if (1 == predictionModeSwitch) {    // Close the files
-    fclose(fpInputFile);
+  fclose(fpInputFile);    // Close the files
+  if (1 == predictionModeSwitch) {
     fclose(pPredictionFile);
   } else {
-    fclose(fpInputFile);
     fclose(pTrainingFile);
     fclose(pValidationFile);
   }

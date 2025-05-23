@@ -71,13 +71,13 @@ int main(void)
 
   h_GPC_Plot* h2DPlot;    // Plot object
 
-  h2DPlot =                                                                 // Initialize plot
-      gpc_init_2d("Fractional Delay using Third-Order Farrow Structure",    // Plot title
-                  "Time",                                                   // X-Axis label
-                  "Magnitude",                                              // Y-Axis label
-                  GPC_AUTO_SCALE,                                           // Scaling mode
-                  GPC_SIGNED,                                               // Sign mode
-                  GPC_KEY_ENABLE);                                          // Legend / key mode
+  h2DPlot =                                                             // Initialize plot
+      gpc_init_2d("Fractional Delay - Third-Order Farrow Structure",    // Plot title
+                  "Time",                                               // X-Axis label
+                  "Magnitude",                                          // Y-Axis label
+                  GPC_AUTO_SCALE,                                       // Scaling mode
+                  GPC_SIGNED,                                           // Sign mode
+                  GPC_KEY_ENABLE);                                      // Legend / key mode
   if (NULL == h2DPlot) {
     printf("\nPlot creation failure.\n");
     exit(-1);
@@ -101,10 +101,10 @@ int main(void)
   SLData_t delay = 0.1;
   char title[80];
   for (SLArrayIndex_t i = 0; i < 10; i++) {
-                                                            // Initialize farrow filters
-    SIF_FarrowFilter(pFilterState,                          // Pointer to filter state array
-                     &filterIndex,                          // Pointer to filter index register
-                     FARROW_FILTER_LENGTH);                 // Filter length
+    // Initialize farrow filters
+    SIF_FarrowFilter(pFilterState,             // Pointer to filter state array
+                     &filterIndex,             // Pointer to filter index register
+                     FARROW_FILTER_LENGTH);    // Filter length
 
 #if PER_SAMPLE
     for (SLArrayIndex_t i = 0; i < farrowTestDatasetLength; i++) {
@@ -128,11 +128,11 @@ int main(void)
                      farrowTestDatasetLength);               // Array length
 #endif
 
-    sprintf(title, "Filtered Signal, delay = %lf", delay);
+    sprintf(title, "Delay = %.2lf", delay);
     gpc_plot_2d(h2DPlot,                                           // Plot handle
                 pDst,                                              // Dataset
                 farrowTestDatasetLength,                           // Number of data points
-                "Delayed Signals",                                 // Dataset title
+                title,                                             // Dataset title
                 SIGLIB_ZERO,                                       // Minimum X value
                 ((SLData_t)(farrowTestDatasetLength - 1)),         // Maximum X value
                 "lines lw 2",                                      // Plot type

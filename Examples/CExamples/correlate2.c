@@ -10,6 +10,7 @@
 
 // Define constants
 #define SAMPLE_LENGTH 512
+#define PLOT_LENGTH 200
 
 // Declare global variables and arrays
 
@@ -26,7 +27,7 @@ int main(int argc, char* argv[])
     printf("Usage:   corr2 <Sine level wrt noise> <# iterations>\n");
     printf("Example: corr2 0.2 5\n");
     sineLevel = 0.2;
-    numIters = 5;
+    numIters = 4;
   } else {
     sineLevel = (SLData_t)atof(argv[1]);
     numIters = (SLArrayIndex_t)atoi(argv[2]);
@@ -64,16 +65,13 @@ int main(int argc, char* argv[])
 
   gpc_plot_2d(h2DPlot,                        // Graph handle
               pSrc1,                          // Dataset
-              SAMPLE_LENGTH,                  // Dataset length
+              PLOT_LENGTH,                    // Dataset length
               "Small Amplitude Sine Wave",    // Dataset title
               SIGLIB_ZERO,                    // Minimum X value
-              (double)(SAMPLE_LENGTH - 1),    // Maximum X value
-              "lines",                        // Graph type
-              "blue",                         // Colour
+              (double)(PLOT_LENGTH - 1),      // Maximum X value
+              "lines lw 2",                   // Graph type
+              gpcPlotColours[0],              // Colour
               GPC_NEW);                       // New graph
-  printf("\nSmall Amplitude Sine Wave\nPlease hit <Carriage Return> to "
-         "continue . . .");
-  getchar();
 
   SDA_SignalGenerate(pSrc1,                   // Pointer to destination array
                      SIGLIB_WHITE_NOISE,      // Signal type - random white noise
@@ -87,17 +85,15 @@ int main(int argc, char* argv[])
                      SIGLIB_NULL_DATA_PTR,    // Unused
                      SAMPLE_LENGTH);          // Output dataset length
 
-  gpc_plot_2d(h2DPlot,                        // Graph handle
-              pSrc1,                          // Dataset
-              SAMPLE_LENGTH,                  // Dataset length
-              "Noisy Sine Wave",              // Dataset title
-              SIGLIB_ZERO,                    // Minimum X value
-              (double)(SAMPLE_LENGTH - 1),    // Maximum X value
-              "lines",                        // Graph type
-              "blue",                         // Colour
-              GPC_NEW);                       // New graph
-  printf("\nNoisy Sine Wave\nPlease hit <Carriage Return> to continue . . .");
-  getchar();
+  gpc_plot_2d(h2DPlot,                      // Graph handle
+              pSrc1,                        // Dataset
+              PLOT_LENGTH,                  // Dataset length
+              "Noisy Sine Wave",            // Dataset title
+              SIGLIB_ZERO,                  // Minimum X value
+              (double)(PLOT_LENGTH - 1),    // Maximum X value
+              "lines lw 2",                 // Graph type
+              gpcPlotColours[1],            // Colour
+              GPC_ADD);                     // New graph
 
   for (SLArrayIndex_t i = 0; i < numIters; i++) {
     SDA_CorrelateCircular(pSrc1,             // Pointer to input array 1
@@ -109,30 +105,28 @@ int main(int argc, char* argv[])
                       0,                 // Location to clear
                       SAMPLE_LENGTH);    // Dataset length
 
-    gpc_plot_2d(h2DPlot,                        // Graph handle
-                pSrc2,                          // Dataset
-                SAMPLE_LENGTH,                  // Dataset length
-                "Autocorrelated Signal",        // Dataset title
-                SIGLIB_ZERO,                    // Minimum X value
-                (double)(SAMPLE_LENGTH - 1),    // Maximum X value
-                "lines",                        // Graph type
-                "blue",                         // Colour
-                GPC_NEW);                       // New graph
-    printf("\nIteration = %d\n", (i + 1));
-    printf("Autocorrelated Signal\nPlease hit <Carriage Return> to continue . "
-           ". .");
-    getchar();
-
-    // Scale results so peaks equal 1.0
+    // Scale results so peaks normalized to 1.0
     SDA_Scale(pSrc2,             // Pointer to source array
-              pSrc1,             // Pointer to destination array
+              pSrc2,             // Pointer to destination array
               SIGLIB_ONE,        // Peak level
               SAMPLE_LENGTH);    // Dataset length
-  }
 
-  while (!_kbhit())
-    ;
-  _getch();
+    char str[80];
+    sprintf(str, "Autocorrelation, Iteration = %d", i + 1);
+    gpc_plot_2d(h2DPlot,                      // Graph handle
+                pSrc2,                        // Dataset
+                PLOT_LENGTH,                  // Dataset length
+                str,                          // Dataset title
+                SIGLIB_ZERO,                  // Minimum X value
+                (double)(PLOT_LENGTH - 1),    // Maximum X value
+                "lines lw 2",                 // Graph type
+                gpcPlotColours[i + 2],        // Colour
+                GPC_ADD);                     // New graph
+    // Copy data for next iteration
+    SDA_Copy(pSrc2,             // Pointer to source array
+             pSrc1,             // Pointer to destination array
+             SAMPLE_LENGTH);    // Dataset length
+  }
 
   printf("\nHit <Carriage Return> to continue ....\n");
   getchar();    // Wait for <Carriage Return>

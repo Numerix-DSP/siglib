@@ -32,7 +32,7 @@ int main(int argc, char** argv)
 
   printf("Source file = %s\n", argv[1]);
 
-  SLArrayIndex_t inputSampleCount = SUF_SigCountSamplesInFile(argv[1]);
+  SLArrayIndex_t inputSampleCount = SUF_SigFileLength(argv[1]);
   if (inputSampleCount == -1) {
     printf("Error opening input file to count number of samples: %s\n", argv[1]);
     exit(-1);

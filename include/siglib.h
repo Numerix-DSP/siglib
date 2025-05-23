@@ -11,24 +11,7 @@ Support for SigLib is available via Email: support@numerix-dsp.com
 This file may be modified, in any way, providing that this header remains
 within the file and none of the header contents are removed or modified.
 
-SigLib is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License V2, as
-published by the Free Software Foundation.
-
-SigLib is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1335, USA
-
-This sofware is also available with a commercial license, for use in
-proprietary, research, government or commercial applications.
-Please contact Delta Numerix for further details :
-https://www.numerix-dsp.com
-support@.numerix-dsp.com
+__SIGLIB_LICENSE__
 
 Copyright (c) 2024 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
@@ -208,7 +191,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigReadFile(SLData_t SIGLIB_OUTPUT_PTR_DECL*
 
 SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigWriteFile(const SLData_t SIGLIB_INPUT_PTR_DECL*, const char*, const SLArrayIndex_t);
 
-SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigCountSamplesInFile(const char*);
+SLArrayIndex_t SIGLIB_FUNC_DECL SUF_SigFileLength(const char*);
 
 SLArrayIndex_t SIGLIB_FUNC_DECL SUF_WavReadData(SLData_t SIGLIB_OUTPUT_PTR_DECL*, FILE*, const SLWavFileInfo_s,
                                                 const SLArrayIndex_t);    // Functions for reading and writing .wav files
