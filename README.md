@@ -21,6 +21,13 @@ SigLib is the easiest way to develop portable signal processing applications bec
 developed graphically on a standard desktop or laptop computer (Windows, Linux or Mac OSX) and then
 re-compiled for the target DSP, without the graphical functionality.
 
+## SigLib License
+
+SigLib is free for personal and educational use, all other use cases require a developer's license,
+which is available from: [Delta Numerix](https://numerix-dsp.com).
+
+[SigLib Licensing Details](./license.html).
+
 ## Installation
 
 Ensure you have the required dependencies installed, as per the following section:
@@ -44,7 +51,12 @@ Under Ubuntu Linux, use the following command::
 
 ### SigLib Installation
 
-Extract the .zip archive and set the appropriate compiler environment variables.
+Clone the repository or extract the .zip file and set the compiler environment variables as per the SetEnv
+files in the SigLib root folder.
+
+Note: if you are using an IDE such as Visual Studio or VSCode, please ensure that you have set the
+environment variables globally, in the OS, or in the IDE. Setting the environment variables in a command
+prompt does not make them available globally.
 
 #### Building The Source
 
@@ -62,25 +74,14 @@ overviews
 
 The easiest way to navigate the folders is to use the provided html files, starting with [Welcome.html](./welcome.html).
 
-## API Changes
 
-Some function names have been changed an tidied up.
-Functions who's names have changed are listed in siglib_deprecated.h.
-For compatibility with old API function names, this file can be enabled at the end of siglib.h.
-
-## License
-
-SigLib is free for educational and personal use, all other use cases require a developer's license,
-which is available from: [Delta Numerix](https://numerix-dsp.com).
-
-[SigLib Licensing Details](./license.html).
 
 Delta Numerix are specialists in writing and supporting Signal Processing and Machine Learning
 applications.
 
 To inquire about our services, contact us at numerix@numerix-dsp.com.
 
-Copyright ©; 2024, Delta Numerix All rights reserved.
+Copyright ©; 2025, Delta Numerix All rights reserved.
 SigLib and Digital Filter Plus are trademarks of Delta Numerix All
 other trademarks acknowledged.
 

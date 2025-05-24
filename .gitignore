@@ -63,8 +63,6 @@ Examples/Android/SigLib_Graph/.idea/libraries
 *.r79
 *.res
 *.sdf
-*.so
-*.so.*
 *.stackdump
 *.su
 *.swp
