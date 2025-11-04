@@ -29,6 +29,7 @@ find . -name "*.dot" -type f -delete
 find . -name "*.elf" -type f -delete
 find . -name "*.gpdt" -type f -delete
 find . -name "*.gprof" -type f -delete
+find . -name "*.h5" -type f -delete
 find . -name "*.idb" -type f -delete
 find . -name "*.ilc" -type f -delete
 find . -name "*.ild" -type f -delete
@@ -57,6 +58,7 @@ find . -name "*.res" -type f -delete
 find . -name "*.sdf" -type f -delete
 find . -name "*.stackdump" -type f -delete
 find . -name "*.tds" -type f -delete
+find . -name "*.tflite" -type f -delete
 find . -name "*.tlog" -type f -delete
 find . -name "*.user" -type f -delete
 cd $SIGLIB_PATH/Applications
