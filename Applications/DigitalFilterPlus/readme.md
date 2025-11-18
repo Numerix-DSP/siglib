@@ -14,6 +14,10 @@
 This is the complete package for DFPlus digital filter design
 program.
 
+Due to it's age, this program is now deprecated and completely unsupported.
+If you would like to design filters then you are recommended to use the
+pyFilter applications, which you can find in the SigLib download.
+
 Full documentation is in the docs folder.
 
 Binary releases for Linux, macOS and Windows are in the releases folder.
