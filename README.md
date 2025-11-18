@@ -63,6 +63,13 @@ prompt does not make them available globally.
 All of the source is included in the 'src' folder, which includes batch files, shell scripts and makefiles
 for the different supported architectures.
 
+### Digital Filter Design
+
+SigLib includes the full source code for Digital Filter Plus however this is now over 25 years old so
+is no longer supported.
+
+Newer functionality is provided in the pyFilter Python packages provided with this library.
+
 ## Documentation
 
 Documentation is available in the folder 'docs', in particular:
