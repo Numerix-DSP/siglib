@@ -11,6 +11,8 @@ INTRODUCTION
 
 pyFilter is a collection of filter design programs.
 
+Currently these support low-pass and high-pass filters.
+
 This package currently includes:
   pyFIR.py    - FIR filter design package
   pyIIR.py    - IIR filter design package

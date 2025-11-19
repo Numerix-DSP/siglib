@@ -15,8 +15,8 @@ class FIRFilterDesign(QtWidgets.QMainWindow):
     super().__init__()
 
     self.fsample = fsample
-    self.fpass = 5000.
-    self.fstop = 6000.
+    self.f1 = 5000.
+    self.f2 = 6000.
     self.rpass = 3.
     self.rstop = 50.
     self.wn = 0.                    # Used for Kaiser window filter
@@ -63,7 +63,7 @@ class FIRFilterDesign(QtWidgets.QMainWindow):
 
     # Filter type combo box
     self.filter_type_combo_box = QtWidgets.QComboBox(control_panel)
-    self.filter_type_combo_box.addItems(['Low-Pass', 'High-Pass', 'Band-Pass', 'Notch'])
+    self.filter_type_combo_box.addItems(['Low-Pass', 'High-Pass'])
     self.filter_type_combo_box.currentIndexChanged.connect(self.update_plots)
     control_layout.addWidget(self.filter_type_combo_box)
 
@@ -78,13 +78,13 @@ class FIRFilterDesign(QtWidgets.QMainWindow):
     self.fsamp_text_box.setText(str(self.fsample))
     self.fsamp_text_box.editingFinished.connect(self.set_fsamp)
 
-    self.fpass_text_box = QtWidgets.QLineEdit(control_panel)
-    self.fpass_text_box.setText(str(self.fpass))
-    self.fpass_text_box.editingFinished.connect(self.set_fpass)
+    self.f1_text_box = QtWidgets.QLineEdit(control_panel)
+    self.f1_text_box.setText(str(self.f1))
+    self.f1_text_box.editingFinished.connect(self.set_f1)
 
-    self.fstop_text_box = QtWidgets.QLineEdit(control_panel)
-    self.fstop_text_box.setText(str(self.fstop))
-    self.fstop_text_box.editingFinished.connect(self.set_fstop)
+    self.f2_text_box = QtWidgets.QLineEdit(control_panel)
+    self.f2_text_box.setText(str(self.f2))
+    self.f2_text_box.editingFinished.connect(self.set_f2)
 
     self.rpass_text_box = QtWidgets.QLineEdit(control_panel)
     self.rpass_text_box.setText(str(self.rpass))
@@ -98,10 +98,10 @@ class FIRFilterDesign(QtWidgets.QMainWindow):
     config_grid_layout = QtWidgets.QGridLayout()
     config_grid_layout.addWidget(QtWidgets.QLabel('fsample'),0,0)
     config_grid_layout.addWidget(self.fsamp_text_box,0,1)
-    config_grid_layout.addWidget(QtWidgets.QLabel('Fpass'),1,0)
-    config_grid_layout.addWidget(self.fpass_text_box,1,1)
-    config_grid_layout.addWidget(QtWidgets.QLabel('Fstop'),2,0)
-    config_grid_layout.addWidget(self.fstop_text_box,2,1)
+    config_grid_layout.addWidget(QtWidgets.QLabel('F1'),1,0)
+    config_grid_layout.addWidget(self.f1_text_box,1,1)
+    config_grid_layout.addWidget(QtWidgets.QLabel('F2'),2,0)
+    config_grid_layout.addWidget(self.f2_text_box,2,1)
     config_grid_layout.addWidget(QtWidgets.QLabel('Rpass'),3,0)
     config_grid_layout.addWidget(self.rpass_text_box,3,1)
     config_grid_layout.addWidget(QtWidgets.QLabel('Rstop'),4,0)
@@ -298,32 +298,32 @@ class FIRFilterDesign(QtWidgets.QMainWindow):
       self.fsamp_text_box.setText(str(self.fsample))
       QtWidgets.QMessageBox.warning(self, 'Warning', 'Cutoff frequency must be between 1000 and 48000 Hz.')
 
-  def set_fpass(self):
+  def set_f1(self):
     try:
-      self.fpass = float(self.fpass_text_box.text())
-      if self.fpass > self.fsample / 2:
-        self.fpass = self.fsample / 2
-        self.fpass_text_box.setText(str(self.fpass))
-      elif self.fpass < 10:
-        self.fpass = 10
-        self.fpass_text_box.setText(str(self.fpass))
+      self.f1 = float(self.f1_text_box.text())
+      if self.f1 > self.fsample / 2:
+        self.f1 = self.fsample / 2
+        self.f1_text_box.setText(str(self.f1))
+      elif self.f1 < 10:
+        self.f1 = 10
+        self.f1_text_box.setText(str(self.f1))
       self.update_plots()
     except ValueError:
-      self.fpass_text_box.setText(str(self.fpass))
+      self.f1_text_box.setText(str(self.f1))
       QtWidgets.QMessageBox.warning(self, 'Warning', 'Pass-band cutoff frequency must be between 0 and Fs/2.')
 
-  def set_fstop(self):
+  def set_f2(self):
     try:
-      self.fstop = float(self.fstop_text_box.text())
-      if self.fstop > self.fsample / 2:
-        self.fstop = self.fsample / 2
-        self.fstop_text_box.setText(str(self.fstop))
-      elif self.fstop < 10:
-        self.fstop = 10
-        self.fstop_text_box.setText(str(self.fstop))
+      self.f2 = float(self.f2_text_box.text())
+      if self.f2 > self.fsample / 2:
+        self.f2 = self.fsample / 2
+        self.f2_text_box.setText(str(self.f2))
+      elif self.f2 < 10:
+        self.f2 = 10
+        self.f2_text_box.setText(str(self.f2))
       self.update_plots()
     except ValueError:
-      self.fstop_text_box.setText(str(self.fstop))
+      self.f2_text_box.setText(str(self.f2))
       QtWidgets.QMessageBox.warning(self, 'Warning', 'Stop-band cutoff frequency must be between 0 and Fs/2.')
 
   def set_rpass(self):
@@ -417,8 +417,8 @@ class FIRFilterDesign(QtWidgets.QMainWindow):
 
   def update_filter_coefficients(self):
     Fs = self.fsample                                   # Get the sampling frequency
-    Wp = self.fpass                                     # Get the passband frequency
-    Ws = self.fstop                                     # Get the stopband frequency
+    Wp = self.f1                                     # Get the passband frequency
+    Ws = self.f2                                     # Get the stopband frequency
     Rp = self.rpass                                     # Get the passband ripple
     Rs = self.rstop                                     # Get the stopband attenuation
     filter_type = self.filter_type_combo_box.currentText()     # Get the filter type
@@ -459,18 +459,21 @@ class FIRFilterDesign(QtWidgets.QMainWindow):
       order = self.set_filter_order_value
 
     if (filter_type == 'High-Pass'):
-        btype = 'highpass'
+      btype = 'highpass'
     elif (filter_type == 'Band-Pass'):
-        btype = 'bandpass'
+      btype = 'bandpass'
     elif (filter_type == 'Notch'):
-        btype = 'bandstop'
+      btype = 'bandstop'
     else:
-        btype = 'lowpass'
+      btype = 'lowpass'
 
     if filter_method == 'Remez':                          # https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.remez.html
       wp = 1/(1 - 10**(-Rp/20))                         # Compute the ripple weights - https://www.dsprelated.com/showcode/209.php
       ws = 1/(10**(-Rs/20))
-      self.b = signal.remez(order + 1, [0, self.fpass, self.fstop, 0.5*self.fsample], [1, 0], weight=[wp, ws], fs=self.fsample)
+      if (btype == 'highpass'):
+        self.b = signal.remez(order + 1, [0, self.f1, self.f2, 0.5*self.fsample], [0, 1], weight=[ws, wp], fs=self.fsample)
+      else:
+        self.b = signal.remez(order + 1, [0, self.f1, self.f2, 0.5*self.fsample], [1, 0], weight=[wp, ws], fs=self.fsample)
     elif filter_method == 'FIRLS':                        # https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.firls.html
       if ((order % 2) == 1):                            # Scipy firls requires odd filter length
         order += 1
@@ -480,15 +483,27 @@ class FIRFilterDesign(QtWidgets.QMainWindow):
 
       wp = 1/(1 - 10**(-Rp/20))                         # Compute the ripple weights - https://www.dsprelated.com/showcode/209.php
       ws = 1/(10**(-Rs/20))
-      self.b = signal.firls(order + 1, [0, self.fpass, self.fstop, 0.5*self.fsample], [1, 1, 0, 0], weight=[wp, ws], fs=self.fsample)
-    else:                                               # Windowing filter design     - https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.firwin.html
-      cutoff = (self.fpass + (self.fstop - self.fpass) / 2) * 2 / self.fsample
-      if filter_method == 'Kaiser':
-        self.b = signal.firwin(order + 1, cutoff, window=('kaiser', self.wn))
-      elif filter_method == 'Hanning':
-        self.b = signal.firwin(order + 1, cutoff, window='hann')
+      if (btype == 'highpass'):
+        self.b = signal.firls(order + 1, [0, self.f1, self.f2, 0.5*self.fsample], [0, 0, 1, 1], weight=[ws, wp], fs=self.fsample)
       else:
-        self.b = signal.firwin(order + 1, cutoff, window=filter_method.lower())
+        self.b = signal.firls(order + 1, [0, self.f1, self.f2, 0.5*self.fsample], [1, 1, 0, 0], weight=[wp, ws], fs=self.fsample)
+    else:                                               # Windowing filter design     - https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.firwin.html
+      cutoff = (self.f1 + (self.f2 - self.f1) / 2) * 2 / self.fsample
+      if filter_method == 'Kaiser':
+        if (btype == 'highpass'):
+          self.b = signal.firwin(order + 1, cutoff, window=('kaiser', self.wn), pass_zero=False)
+        else:
+          self.b = signal.firwin(order + 1, cutoff, window=('kaiser', self.wn))
+      elif filter_method == 'Hanning':
+        if (btype == 'highpass'):
+          self.b = signal.firwin(order + 1, cutoff, window='hann', pass_zero=False)
+        else:
+          self.b = signal.firwin(order + 1, cutoff, window='hann')
+      else:
+        if (btype == 'highpass'):
+          self.b = signal.firwin(order + 1, cutoff, window=filter_method.lower(), pass_zero=False)
+        else:
+          self.b = signal.firwin(order + 1, cutoff, window=filter_method.lower())
     self.a = 1
 
     print(f'Order {order} FIR Filter designed with {filter_method} algorithm')
@@ -529,12 +544,12 @@ class FIRFilterDesign(QtWidgets.QMainWindow):
     # Truncate datasets for pass and stop band views
     if (self.band_view_combo_box.currentText() == 'Pass-Band'):
       l=len(self.HofW)
-      lp=(int)(np.ceil(l*self.fpass*1.01/(self.fsample/2)))
+      lp=(int)(np.ceil(l*self.f1*1.01/(self.fsample/2)))
       self.W=self.W[:lp]
       self.HofW=self.HofW[:lp]
     elif (self.band_view_combo_box.currentText() == 'Stop-Band'):
       l=len(self.HofW)
-      ls=(int)(np.ceil(l*((self.fsample/2)-self.fstop)*1.01/(self.fsample/2)))
+      ls=(int)(np.ceil(l*((self.fsample/2)-self.f2)*1.01/(self.fsample/2)))
       self.W=self.W[-ls:]
       self.HofW=self.HofW[-ls:]
 
@@ -674,11 +689,11 @@ class FIRFilterDesign(QtWidgets.QMainWindow):
       'Design Method: Choose a filter design method from the available options '
       '(Remez, FIRLS, Kaiser, etc.).\n'
       'Sampling Frequency (Fsamp): Set the sampling frequency of the signal.\n'
-      'Passband Edge Frequency (Fpass): Define the frequency range where the filter '
-      'should allow signals to pass without significant attenuation.\n'
-      'Stopband Edge Frequency (Fstop): Define the frequency range where the filter '
-      'should attenuate signals.\n'
-      'Passband Ripple (Rpass): Specify the maximum allowed deviation from the '
+      'Lower Frequency Band Edge (F1): Fpass for Low-pass filter, Fstop for a High-pass filter\n'
+      'Upper Frequency Band Edge (F2): Fstop for Low-pass filter, Fpass for a High-pass filter\n'
+      '    Fpass defines the frequency range where the filter should\ allow signals to pass without significant attenuation.\n'
+      '    Fstop defines the frequency range where the filter should attenuate signals.\n'
+       'Passband Ripple (Rpass): Specify the maximum allowed deviation from the '
       'desired gain in the passband (typically in dB).\n'
       'Stopband Attenuation (Rs): Specify the minimum desired attenuation in the '
       'stopband (typically in dB).\n\n'
