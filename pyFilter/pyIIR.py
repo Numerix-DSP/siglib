@@ -26,7 +26,8 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     self.b = 1                      # Coefficient storage
     self.a = 1
 
-    self.q_m = 8                    # Q format
+    self.q_WordLength = 32          # Q format
+    self.q_m = 8
     self.q_n = 24
 
     self.td_response_length = 500   # Length of the impulse and step response plots
@@ -125,7 +126,7 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     # self.set_order_text_box.editingFinished.connect(self.set_filter_order)
     self.set_order_text_box.editingFinished.connect(self.update_plots)
 
-    self.orderGroupBox = QtWidgets.QGroupBox('Order')
+    self.orderGroupBox = QtWidgets.QGroupBox('Filter Order')
     order_grid_layout = QtWidgets.QGridLayout()
     order_grid_layout.addWidget(self.radio_button_auto,0,0)
     order_grid_layout.addWidget(QtWidgets.QLabel('Auto'),0,1)
@@ -136,12 +137,43 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     self.orderGroupBox.setLayout(order_grid_layout)
     control_layout.addWidget(self.orderGroupBox)
 
+    # Spin boxes
+    self.spin_m = QtWidgets.QSpinBox()
+    self.spin_n = QtWidgets.QSpinBox()
+
+    # Configure ranges and defaults
+    self.spin_m.setRange(1, 31)
+    self.spin_n.setRange(1, 31)
+    self.spin_m.setValue(8)
+    self.spin_n.setValue(24)
+
+    # Connect signals
+    self.spin_m.valueChanged.connect(self.update_n)
+    self.spin_n.valueChanged.connect(self.update_m)
+
+    self.qformatGroupBox = QtWidgets.QGroupBox('Q Format')
+    qformat_grid_layout = QtWidgets.QGridLayout()
+
+    # Horizontal layout for spinboxes
+    h_layout = QtWidgets.QHBoxLayout()
+    h_layout.addWidget(QtWidgets.QLabel('(m):'))
+    h_layout.addWidget(self.spin_m)
+    h_layout.addSpacing(5)
+    h_layout.addWidget(QtWidgets.QLabel('(n):'))
+    h_layout.addWidget(self.spin_n)
+
+    qformat_grid_layout.addLayout(h_layout, 0, 1)
+    self.qformatGroupBox.setLayout(qformat_grid_layout)
+    control_layout.addWidget(self.qformatGroupBox)
+
+    self.graphViewGroupBox = QtWidgets.QGroupBox('Graph View')
+    graphView_grid_layout = QtWidgets.QGridLayout()
     # Combo box to choose which graph to view
     self.graph_type_combo_box = QtWidgets.QComboBox()
     self.graph_type_combo_box.addItems(['Magnitude Response (dB)', 'Phase Response',
                                         'Impulse Response', 'Step Response', 'Pole-Zero'])
     self.graph_type_combo_box.setToolTip('Choose which graph to display')
-    control_layout.addWidget(self.graph_type_combo_box)
+    graphView_grid_layout.addWidget(self.graph_type_combo_box)
 
     # Wire up combo box to stacked layout index
     self.graph_type_combo_box.currentIndexChanged.connect(self.graph_container_layout.setCurrentIndex)
@@ -151,7 +183,10 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     self.band_view_combo_box = QtWidgets.QComboBox(control_panel)
     self.band_view_combo_box.addItems(['Full View', 'Pass-Band', 'Stop-Band'])
     self.band_view_combo_box.currentIndexChanged.connect(self.update_plots)
-    control_layout.addWidget(self.band_view_combo_box)
+    graphView_grid_layout.addWidget(self.band_view_combo_box)
+
+    self.graphViewGroupBox.setLayout(graphView_grid_layout)
+    control_layout.addWidget(self.graphViewGroupBox)
 
     # Info button
     info_button = QtWidgets.QPushButton('Info', control_panel)
@@ -165,6 +200,26 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
 
     control_panel.setLayout(control_layout)
     return control_panel
+
+  def update_n(self, new_m):
+    """Ensure m + n == 32 when m changes."""
+    new_n = self.q_WordLength - new_m
+    self.spin_n.blockSignals(True)
+    self.spin_n.setValue(new_n)
+    self.spin_n.blockSignals(False)
+    self.q_m = new_m
+    self.q_n = new_n
+    self.update_plots()
+
+  def update_m(self, new_n):
+    """Ensure m + n == 32 when n changes."""
+    new_m = self.q_WordLength - new_n
+    self.spin_m.blockSignals(True)
+    self.spin_m.setValue(new_m)
+    self.spin_m.blockSignals(False)
+    self.q_m = new_m
+    self.q_n = new_n
+    self.update_plots()
 
   def create_graph_panel(self):
     # Graph panel
