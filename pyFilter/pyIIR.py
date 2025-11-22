@@ -415,8 +415,8 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
   def set_rstop(self):
     try:
       self.rstop = float(self.rstop_text_box.text())
-      if self.rstop > 10:
-        self.rstop = 10
+      if self.rstop > 150:
+        self.rstop = 150
         self.rstop_text_box.setText(str(self.rstop))
       elif self.rstop < .1:
         self.rstop = .1
