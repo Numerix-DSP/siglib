@@ -4,38 +4,64 @@
 # Copyright (c) John Edwards 2024
 # Released under the terms of the GPLv3 license
 
+from configparser import ConfigParser
+import numpy as np
 from PyQt5 import QtWidgets, QtCore, QtGui
 import pyqtgraph as pg
-import numpy as np
-import sys
 from scipy import signal
+import os
+import sys
+
+print_coefficients = True        # Set to True to print filter coefficients to console
 
 class IIRFilterDesign(QtWidgets.QMainWindow):
-  def __init__(self, fsample=48000.):
+  def __init__(self, config_file_path=None):
     super().__init__()
 
-    self.fsample = fsample
+    self.config_file_path=config_file_path
+
+    self.fsample = 48000.
     self.f1 = 5000.
     self.f2 = 6000.
+    self.f3 = 7000.
+    self.f4 = 8000.
     self.rpass = 3.
     self.rstop = 50.
-    self.wn = 0.                    # Used for Kaiser window filter
     self.auto_filter_order_value = 0
-    self.set_filter_order_value = 22
-
-    self.b = 1                      # Coefficient storage
-    self.a = 1
+    self.set_filter_order_value = 10
 
     self.q_WordLength = 32          # Q format
     self.q_m = 8
     self.q_n = 24
 
+    self.b = 1                      # Coefficient storage
+    self.a = 1
+
     self.td_response_length = 500   # Length of the impulse and step response plots
+
+    self.IIR_config_file_ID_string = "IIRConfig"
+    self.IIR_Values = {     # Configuration values dictionary. Is initialized later but declared here for clarity
+        "type": "Low-Pass",
+        "method": "Butterworth",
+        "fsamp": str(self.fsample),
+        "f1": str(self.f1),
+        "f2": str(self.f2),
+        "f3": str(self.f3),
+        "f4": str(self.f4),
+        "Rpass": str(self.rpass),
+        "Rstop": str(self.rstop),
+        "auto": "true",
+        "set": "false",
+        "m": str(self.q_m),
+        "n": str(self.q_n),
+        "graph_type": "Magnitude Response (dB)",
+        "band_view": "Full View",
+    }
 
     self.init_ui()
 
   def init_ui(self):
-    self.setWindowTitle('IIR Filter Design')
+    self.setWindowTitle("IIR Filter Design")
 
     # Main widget
     self.central_widget = QtWidgets.QWidget(self)
@@ -63,13 +89,13 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
 
     # Filter type combo box
     self.filter_type_combo_box = QtWidgets.QComboBox(control_panel)
-    self.filter_type_combo_box.addItems(['Low-Pass', 'High-Pass'])
-    self.filter_type_combo_box.currentIndexChanged.connect(self.update_plots)
+    self.filter_type_combo_box.addItems(["Low-Pass", "High-Pass", "Band-Pass", "Notch"])
+    self.filter_type_combo_box.currentIndexChanged.connect(self.filter_type_changed)
     control_layout.addWidget(self.filter_type_combo_box)
 
     # Filter design method combo box
     self.filter_method_combo_box = QtWidgets.QComboBox(control_panel)
-    self.filter_method_combo_box.addItems(['Butterworth', 'Chebyshev T1', 'Chebyshev T2', 'Elliptic'])
+    self.filter_method_combo_box.addItems(["Butterworth", "Chebyshev T1", "Chebyshev T2", "Elliptic"])
     self.filter_method_combo_box.currentIndexChanged.connect(self.update_plots)
     control_layout.addWidget(self.filter_method_combo_box)
 
@@ -86,6 +112,16 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     self.f2_text_box.setText(str(self.f2))
     self.f2_text_box.editingFinished.connect(self.set_f2)
 
+    self.f3_text_box = QtWidgets.QLineEdit(control_panel)
+    self.f3_text_box.setText(str(self.f3))
+    self.f3_text_box.setEnabled(False)
+    self.f3_text_box.editingFinished.connect(self.set_f3)
+
+    self.f4_text_box = QtWidgets.QLineEdit(control_panel)
+    self.f4_text_box.setText(str(self.f4))
+    self.f4_text_box.setEnabled(False)
+    self.f4_text_box.editingFinished.connect(self.set_f4)
+
     self.rpass_text_box = QtWidgets.QLineEdit(control_panel)
     self.rpass_text_box.setText(str(self.rpass))
     self.rpass_text_box.editingFinished.connect(self.set_rpass)
@@ -94,31 +130,35 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     self.rstop_text_box.setText(str(self.rstop))
     self.rstop_text_box.editingFinished.connect(self.set_rstop)
 
-    self.configGroupBox = QtWidgets.QGroupBox('Filter Parameters')
+    self.configGroupBox = QtWidgets.QGroupBox("Filter Parameters")
     config_grid_layout = QtWidgets.QGridLayout()
-    config_grid_layout.addWidget(QtWidgets.QLabel('fsample'),0,0)
+    config_grid_layout.addWidget(QtWidgets.QLabel("fsample"),0,0)
     config_grid_layout.addWidget(self.fsamp_text_box,0,1)
-    config_grid_layout.addWidget(QtWidgets.QLabel('F1'),1,0)
+    config_grid_layout.addWidget(QtWidgets.QLabel("F1"),1,0)
     config_grid_layout.addWidget(self.f1_text_box,1,1)
-    config_grid_layout.addWidget(QtWidgets.QLabel('F2'),2,0)
+    config_grid_layout.addWidget(QtWidgets.QLabel("F2"),2,0)
     config_grid_layout.addWidget(self.f2_text_box,2,1)
-    config_grid_layout.addWidget(QtWidgets.QLabel('Rpass'),3,0)
-    config_grid_layout.addWidget(self.rpass_text_box,3,1)
-    config_grid_layout.addWidget(QtWidgets.QLabel('Rstop'),4,0)
-    config_grid_layout.addWidget(self.rstop_text_box,4,1)
+    config_grid_layout.addWidget(QtWidgets.QLabel("F3"),3,0)
+    config_grid_layout.addWidget(self.f3_text_box,3,1)
+    config_grid_layout.addWidget(QtWidgets.QLabel("F4"),4,0)
+    config_grid_layout.addWidget(self.f4_text_box,4,1)
+    config_grid_layout.addWidget(QtWidgets.QLabel("Rpass"),5,0)
+    config_grid_layout.addWidget(self.rpass_text_box,5,1)
+    config_grid_layout.addWidget(QtWidgets.QLabel("Rstop"),6,0)
+    config_grid_layout.addWidget(self.rstop_text_box,6,1)
     self.configGroupBox.setLayout(config_grid_layout)
     control_layout.addWidget(self.configGroupBox)
 
     # Filter order
     self.radio_button_auto = QtWidgets.QRadioButton(self)
     self.radio_button_set = QtWidgets.QRadioButton(self)
-    self.radio_button_set.setChecked(False)
     self.radio_button_auto.setChecked(True)
+    self.radio_button_set.setChecked(False)
     self.radio_button_auto.clicked.connect(self.update_plots)
     self.radio_button_set.clicked.connect(self.update_plots)
 
     self.auto_order_text_box = QtWidgets.QLineEdit(control_panel)
-    self.auto_order_text_box.setText('')
+    self.auto_order_text_box.setText("")
     self.auto_order_text_box.setEnabled(False)    # Disable editing
 
     self.set_order_text_box = QtWidgets.QLineEdit(control_panel)
@@ -126,13 +166,13 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     # self.set_order_text_box.editingFinished.connect(self.set_filter_order)
     self.set_order_text_box.editingFinished.connect(self.update_plots)
 
-    self.orderGroupBox = QtWidgets.QGroupBox('Filter Order')
+    self.orderGroupBox = QtWidgets.QGroupBox("Filter Order")
     order_grid_layout = QtWidgets.QGridLayout()
     order_grid_layout.addWidget(self.radio_button_auto,0,0)
-    order_grid_layout.addWidget(QtWidgets.QLabel('Auto'),0,1)
+    order_grid_layout.addWidget(QtWidgets.QLabel("Auto"),0,1)
     order_grid_layout.addWidget(self.auto_order_text_box,0,2)
     order_grid_layout.addWidget(self.radio_button_set,1,0)
-    order_grid_layout.addWidget(QtWidgets.QLabel('Set'),1,1)
+    order_grid_layout.addWidget(QtWidgets.QLabel("Set"),1,1)
     order_grid_layout.addWidget(self.set_order_text_box,1,2)
     self.orderGroupBox.setLayout(order_grid_layout)
     control_layout.addWidget(self.orderGroupBox)
@@ -142,37 +182,37 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     self.spin_n = QtWidgets.QSpinBox()
 
     # Configure ranges and defaults
-    self.spin_m.setRange(1, 31)
-    self.spin_n.setRange(1, 31)
-    self.spin_m.setValue(8)
-    self.spin_n.setValue(24)
+    self.spin_m.setRange(1, int(self.q_WordLength-1))     # Word length - 1 because coefficients are signed numbers
+    self.spin_n.setRange(1, int(self.q_WordLength-1))
+    self.spin_m.setValue(self.q_m)
+    self.spin_n.setValue(self.q_n)
 
     # Connect signals
     self.spin_m.valueChanged.connect(self.update_n)
     self.spin_n.valueChanged.connect(self.update_m)
 
-    self.qformatGroupBox = QtWidgets.QGroupBox('Q Format')
+    self.qformatGroupBox = QtWidgets.QGroupBox("Q Format")
     qformat_grid_layout = QtWidgets.QGridLayout()
 
     # Horizontal layout for spinboxes
     h_layout = QtWidgets.QHBoxLayout()
-    h_layout.addWidget(QtWidgets.QLabel('(m):'))
+    h_layout.addWidget(QtWidgets.QLabel("(m):"))
     h_layout.addWidget(self.spin_m)
     h_layout.addSpacing(5)
-    h_layout.addWidget(QtWidgets.QLabel('(n):'))
+    h_layout.addWidget(QtWidgets.QLabel("(n):"))
     h_layout.addWidget(self.spin_n)
 
     qformat_grid_layout.addLayout(h_layout, 0, 1)
     self.qformatGroupBox.setLayout(qformat_grid_layout)
     control_layout.addWidget(self.qformatGroupBox)
 
-    self.graphViewGroupBox = QtWidgets.QGroupBox('Graph View')
+    self.graphViewGroupBox = QtWidgets.QGroupBox("Graph View")
     graphView_grid_layout = QtWidgets.QGridLayout()
     # Combo box to choose which graph to view
     self.graph_type_combo_box = QtWidgets.QComboBox()
-    self.graph_type_combo_box.addItems(['Magnitude Response (dB)', 'Phase Response',
-                                        'Impulse Response', 'Step Response', 'Pole-Zero'])
-    self.graph_type_combo_box.setToolTip('Choose which graph to display')
+    self.graph_type_combo_box.addItems(["Magnitude Response (dB)", "Phase Response",
+                                        "Impulse Response", "Step Response", "Pole-Zero"])
+    self.graph_type_combo_box.setToolTip("Choose which graph to display")
     graphView_grid_layout.addWidget(self.graph_type_combo_box)
 
     # Wire up combo box to stacked layout index
@@ -181,7 +221,7 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
 
     # View type combo box
     self.band_view_combo_box = QtWidgets.QComboBox(control_panel)
-    self.band_view_combo_box.addItems(['Full View', 'Pass-Band', 'Stop-Band'])
+    self.band_view_combo_box.addItems(["Full View", "Pass-Band", "Stop-Band"])
     self.band_view_combo_box.currentIndexChanged.connect(self.update_plots)
     graphView_grid_layout.addWidget(self.band_view_combo_box)
 
@@ -189,37 +229,32 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     control_layout.addWidget(self.graphViewGroupBox)
 
     # Info button
-    info_button = QtWidgets.QPushButton('Info', control_panel)
+    info_button = QtWidgets.QPushButton("Info", control_panel)
     info_button.clicked.connect(self.show_info)
     control_layout.addWidget(info_button)
 
     # Close button
-    close_button = QtWidgets.QPushButton('Close', control_panel)
+    close_button = QtWidgets.QPushButton("Close", control_panel)
     close_button.clicked.connect(self.close)
     control_layout.addWidget(close_button)
 
     control_panel.setLayout(control_layout)
+
+    # Control widgets declared, now initialize from config file, if available
+    if (self.config_file_path is not None) and os.path.isfile(self.config_file_path):
+      try:
+        values = self.load_config(self.config_file_path)
+        self.set_values(values)
+        print(f"Loaded {self.config_file_path}")
+      except Exception as e:
+        print(f"Failed to load {self.config_file_path}: {e}")
+    elif (self.config_file_path is not None):
+      print(f"Using specified config file: {self.config_file_path}")
+    else:         # If no config file specified, use default
+      self.config_file_path="IIR_Config.ini"
+      print(f"No config file specified, using default: {self.config_file_path}")
+
     return control_panel
-
-  def update_n(self, new_m):
-    """Ensure m + n == 32 when m changes."""
-    new_n = self.q_WordLength - new_m
-    self.spin_n.blockSignals(True)
-    self.spin_n.setValue(new_n)
-    self.spin_n.blockSignals(False)
-    self.q_m = new_m
-    self.q_n = new_n
-    self.update_plots()
-
-  def update_m(self, new_n):
-    """Ensure m + n == 32 when n changes."""
-    new_m = self.q_WordLength - new_n
-    self.spin_m.blockSignals(True)
-    self.spin_m.setValue(new_m)
-    self.spin_m.blockSignals(False)
-    self.q_m = new_m
-    self.q_n = new_n
-    self.update_plots()
 
   def create_graph_panel(self):
     # Graph panel
@@ -228,8 +263,8 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     graph_layout.setAlignment(QtCore.Qt.AlignTop)
 
     # Plots
-    pg.setConfigOption('background', 'w')
-    pg.setConfigOption('foreground', 'k')
+    pg.setConfigOption("background", "w")
+    pg.setConfigOption("foreground", "k")
 
     # Container with a QStackedLayout where the two panels overlap (stacked)
     self.container = QtWidgets.QFrame()
@@ -241,37 +276,37 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     # Impulse response plot
     self.impulse_plot = pg.PlotWidget()
     self.impulse_plot.showGrid(True, True)
-    self.impulse_plot.setTitle('Impulse Response')
-    self.impulse_plot.setLabel('left', 'Magnitude')
-    self.impulse_plot.setLabel('bottom', 'Samples')
+    self.impulse_plot.setTitle("Impulse Response")
+    self.impulse_plot.setLabel("left", "Magnitude")
+    self.impulse_plot.setLabel("bottom", "Samples")
 
     # Step response plot
     self.step_plot = pg.PlotWidget()
     self.step_plot.showGrid(True, True)
-    self.step_plot.setTitle('Step Response')
-    self.step_plot.setLabel('left', 'Magnitude')
-    self.step_plot.setLabel('bottom', 'Samples')
+    self.step_plot.setTitle("Step Response")
+    self.step_plot.setLabel("left", "Magnitude")
+    self.step_plot.setLabel("bottom", "Samples")
 
     # Frequency magnitude response plot
     self.magnitude_plot = pg.PlotWidget()
     self.magnitude_plot.showGrid(True, True)
-    self.magnitude_plot.setTitle('Magnitude')
-    self.magnitude_plot.setLabel('left', 'Magnitude (dB)')
-    self.magnitude_plot.setLabel('bottom', 'Frequency (Hz)')
+    self.magnitude_plot.setTitle("Magnitude")
+    self.magnitude_plot.setLabel("left", "Magnitude (dB)")
+    self.magnitude_plot.setLabel("bottom", "Frequency (Hz)")
 
     # Phase response plot
     self.phase_plot = pg.PlotWidget()
     self.phase_plot.showGrid(True, True)
-    self.phase_plot.setTitle('Phase')
-    self.phase_plot.setLabel('left', 'Phase (radians)')
-    self.phase_plot.setLabel('bottom', 'Frequency (Hz)')
+    self.phase_plot.setTitle("Phase")
+    self.phase_plot.setLabel("left", "Phase (radians)")
+    self.phase_plot.setLabel("bottom", "Frequency (Hz)")
 
     # Pole-zero diagram
     self.pole_zero_plot = pg.PlotWidget()
     self.pole_zero_plot.showGrid(True, True)
-    self.pole_zero_plot.setTitle('Pole-Zero Diagram')
-    self.pole_zero_plot.setLabel('left', 'Imaginary')
-    self.pole_zero_plot.setLabel('bottom', 'Real')
+    self.pole_zero_plot.setTitle("Pole-Zero Diagram")
+    self.pole_zero_plot.setLabel("left", "Imaginary")
+    self.pole_zero_plot.setLabel("bottom", "Real")
 
     self.graph_container_layout.addWidget(self.magnitude_plot)  # Index 0
     self.graph_container_layout.addWidget(self.phase_plot)      # Index 1
@@ -283,6 +318,16 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
 
     graph_panel.setLayout(graph_layout)
     return graph_panel
+
+  def filter_type_changed(self):
+    filter_type = self.filter_type_combo_box.currentText()
+    if filter_type == "Band-Pass" or filter_type == "Notch":
+      self.f3_text_box.setEnabled(True)
+      self.f4_text_box.setEnabled(True)
+    else:
+      self.f3_text_box.setEnabled(False)
+      self.f4_text_box.setEnabled(False)
+    self.update_plots()
 
   def set_fsamp(self):
     try:
@@ -296,7 +341,7 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
       self.update_plots()
     except ValueError:
       self.fsamp_text_box.setText(str(self.fsample))
-      QtWidgets.QMessageBox.warning(self, 'Warning', 'Cutoff frequency must be between 1000 and 48000 Hz.')
+      QtWidgets.QMessageBox.warning(self, "Warning", "Cutoff frequency must be between 1000 and 48000 Hz.")
 
   def set_f1(self):
     try:
@@ -310,7 +355,7 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
       self.update_plots()
     except ValueError:
       self.f1_text_box.setText(str(self.f1))
-      QtWidgets.QMessageBox.warning(self, 'Warning', 'Pass-band cutoff frequency must be between 0 and Fs/2.')
+      QtWidgets.QMessageBox.warning(self, "Warning", "Cut-off frequency (F1) must be between 0 and Fs/2.")
 
   def set_f2(self):
     try:
@@ -324,7 +369,35 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
       self.update_plots()
     except ValueError:
       self.f2_text_box.setText(str(self.f2))
-      QtWidgets.QMessageBox.warning(self, 'Warning', 'Stop-band cutoff frequency must be between 0 and Fs/2.')
+      QtWidgets.QMessageBox.warning(self, "Warning", "Cut-off frequency (F2) must be between 0 and Fs/2.")
+
+  def set_f3(self):
+    try:
+      self.f3 = float(self.f3_text_box.text())
+      if self.f3 > self.fsample / 2:
+        self.f3 = self.fsample / 2
+        self.f3_text_box.setText(str(self.f3))
+      elif self.f3 < 10:
+        self.f3 = 10
+        self.f3_text_box.setText(str(self.f3))
+      self.update_plots()
+    except ValueError:
+      self.f3_text_box.setText(str(self.f3))
+      QtWidgets.QMessageBox.warning(self, "Warning", "Cut-off frequency (F3) must be between 0 and Fs/2.")
+
+  def set_f4(self):
+    try:
+      self.f4 = float(self.f4_text_box.text())
+      if self.f4 > self.fsample / 2:
+        self.f4 = self.fsample / 2
+        self.f4_text_box.setText(str(self.f4))
+      elif self.f4 < 10:
+        self.f4 = 10
+        self.f4_text_box.setText(str(self.f4))
+      self.update_plots()
+    except ValueError:
+      self.f4_text_box.setText(str(self.f4))
+      QtWidgets.QMessageBox.warning(self, "Warning", "Cut-off frequency (F4) must be between 0 and Fs/2.")
 
   def set_rpass(self):
     try:
@@ -352,6 +425,26 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     except ValueError:
       self.rstop_text_box.setText(str(self.rstop))
 
+  def update_n(self, new_m):
+    """Ensure m + n == 32 when m changes."""
+    new_n = self.q_WordLength - new_m
+    self.spin_n.blockSignals(True)
+    self.spin_n.setValue(new_n)
+    self.spin_n.blockSignals(False)
+    self.q_m = new_m
+    self.q_n = new_n
+    self.update_plots()
+
+  def update_m(self, new_n):
+    """Ensure m + n == 32 when n changes."""
+    new_m = self.q_WordLength - new_n
+    self.spin_m.blockSignals(True)
+    self.spin_m.setValue(new_m)
+    self.spin_m.blockSignals(False)
+    self.q_m = new_m
+    self.q_n = new_n
+    self.update_plots()
+
   def update_plots(self):
     self.update_filter_coefficients()
     self.calculate_impulse_response()
@@ -363,40 +456,71 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     self.plot_step_response()
     self.plot_pole_zero_diagram()
 
+    values = self.get_values()
+    try:
+      self.save_config(self.config_file_path, values)
+    except Exception as e:
+      print(f"Error saving config file: {e}", file=sys.stderr)
   def update_filter_coefficients(self):
-    Fs = self.fsample                                   # Get the sampling frequency
-    Wp = self.f1                                     # Get the passband frequency
-    Ws = self.f2                                     # Get the stopband frequency
-    Rp = self.rpass                                     # Get the passband ripple
-    Rs = self.rstop                                     # Get the stopband attenuation
     filter_type = self.filter_type_combo_box.currentText()     # Get the filter type
     filter_method = self.filter_method_combo_box.currentText() # Get the filter design method
 
-    # print (f'Fs:{Fs}')
-    # print (f'Wp:{Wp}')
-    # print (f'Ws:{Ws}')
-    # print (f'Rp:{Rp}')
-    # print (f'Rs:{Rs}')
+    if (filter_type == "High-Pass"):
+      btype = "highpass"
+    elif (filter_type == "Band-Pass"):
+      btype = "bandpass"
+    elif (filter_type == "Notch"):
+      btype = "bandstop"
+    else:
+      btype = "lowpass"
 
     # Get user-defined parameters
     # Compute filter_order
     if (self.radio_button_auto.isChecked() == True):          # Get the filter order
-      if filter_method == 'Butterworth':
-        order, wn_tmp = signal.buttord(Wp, Ws, Rp, Rs, fs=Fs)
+      if filter_method == "Butterworth":
+        if (btype == "highpass"):
+          order, wn_tmp = signal.buttord(self.f2, self.f1, self.rpass, self.rstop, fs=self.fsample)
+        elif (btype == "bandpass"):
+          order, wn_tmp = signal.buttord([self.f2, self.f3], [self.f1, self.f4], self.rpass, self.rstop, fs=self.fsample)
+        elif (btype == "bandstop"):
+          order, wn_tmp = signal.buttord([self.f1, self.f4], [self.f2, self.f3], self.rpass, self.rstop, fs=self.fsample)
+        else:
+          order, wn_tmp = signal.buttord(self.f1, self.f2, self.rpass, self.rstop, fs=self.fsample)
         self.auto_filter_order_value = order
-        self.auto_order_text_box.setText(f'{order}')
-      elif filter_method == 'Chebyshev T1':
-        order, wn_tmp = signal.cheb1ord(Wp, Ws, Rp, Rs, fs=Fs)
+        self.auto_order_text_box.setText(f"{order}")
+      elif filter_method == "Chebyshev T1":
+        if (btype == "highpass"):
+          order, wn_tmp = signal.cheb1ord(self.f2, self.f1, self.rpass, self.rstop, fs=self.fsample)
+        elif (btype == "bandpass"):
+          order, wn_tmp = signal.cheb1ord([self.f2, self.f3], [self.f1, self.f4], self.rpass, self.rstop, fs=self.fsample)
+        elif (btype == "bandstop"):
+          order, wn_tmp = signal.cheb1ord([self.f1, self.f4], [self.f2, self.f3], self.rpass, self.rstop, fs=self.fsample)
+        else:
+          order, wn_tmp = signal.cheb1ord(self.f1, self.f2, self.rpass, self.rstop, fs=self.fsample)
         self.auto_filter_order_value = order
-        self.auto_order_text_box.setText(f'{order}')
-      elif filter_method == 'Chebyshev T2':
-        order, wn_tmp = signal.cheb2ord(Wp, Ws, Rp, Rs, fs=Fs)
+        self.auto_order_text_box.setText(f"{order}")
+      elif filter_method == "Chebyshev T2":
+        if (btype == "highpass"):
+          order, wn_tmp = signal.cheb2ord(self.f2, self.f1, self.rpass, self.rstop, fs=self.fsample)
+        elif (btype == "bandpass"):
+          order, wn_tmp = signal.cheb2ord([self.f2, self.f3], [self.f1, self.f4], self.rpass, self.rstop, fs=self.fsample)
+        elif (btype == "bandstop"):
+          order, wn_tmp = signal.cheb2ord([self.f1, self.f4], [self.f2, self.f3], self.rpass, self.rstop, fs=self.fsample)
+        else:
+          order, wn_tmp = signal.cheb2ord(self.f1, self.f2, self.rpass, self.rstop, fs=self.fsample)
         self.auto_filter_order_value = order
-        self.auto_order_text_box.setText(f'{order}')
-      elif filter_method == 'Elliptic':
-        order, wn_tmp = signal.ellipord(Wp, Ws, Rp, Rs, fs=Fs)
+        self.auto_order_text_box.setText(f"{order}")
+      elif filter_method == "Elliptic":
+        if (btype == "highpass"):
+          order, wn_tmp = signal.ellipord(self.f2, self.f1, self.rpass, self.rstop, fs=self.fsample)
+        elif (btype == "bandpass"):
+          order, wn_tmp = signal.ellipord([self.f2, self.f3], [self.f1, self.f4], self.rpass, self.rstop, fs=self.fsample)
+        elif (btype == "bandstop"):
+          order, wn_tmp = signal.ellipord([self.f1, self.f4], [self.f2, self.f3], self.rpass, self.rstop, fs=self.fsample)
+        else:
+          order, wn_tmp = signal.ellipord(self.f1, self.f2, self.rpass, self.rstop, fs=self.fsample)
         self.auto_filter_order_value = order
-        self.auto_order_text_box.setText(f'{order}')
+        self.auto_order_text_box.setText(f"{order}")
 
     if (self.radio_button_set.isChecked() == True):            # Get the manual filter order
       try:
@@ -411,62 +535,83 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
         self.set_order_text_box.setText(str(self.set_filter_order_value))
       order = self.set_filter_order_value
 
-    if (filter_type == 'High-Pass'):
-        btype = 'highpass'
-    elif (filter_type == 'Band-Pass'):
-        btype = 'bandpass'
-    elif (filter_type == 'Notch'):
-        btype = 'bandstop'
-    else:
-        btype = 'lowpass'
 
-    if filter_method == 'Butterworth':
-      self.b, self.a = signal.butter(order, self.f1, btype, fs=self.fsample)
-    elif filter_method == 'Chebyshev T1':
-      self.b, self.a = signal.cheby1(order, self.rpass, self.f1, btype, fs=self.fsample)
-    elif filter_method == 'Chebyshev T2':
-      self.b, self.a = signal.cheby2(order, self.rstop, self.f1, btype, fs=self.fsample)
-    elif filter_method == 'Elliptic':
-      self.b, self.a = signal.ellip(order, self.rpass, self.rstop, self.f1, btype, fs=self.fsample)
+    if filter_method == "Butterworth":
+      if (btype == "highpass"):
+        self.b, self.a = signal.butter(order, self.f2, btype, fs=self.fsample)
+      elif (btype == "bandpass"):
+        self.b, self.a = signal.butter(order, [self.f2, self.f3], btype, fs=self.fsample)
+      elif (btype == "bandstop"):
+        self.b, self.a = signal.butter(order, [self.f1, self.f4], btype, fs=self.fsample)
+      else:
+        self.b, self.a = signal.butter(order, self.f1, btype, fs=self.fsample)
+    elif filter_method == "Chebyshev T1":
+      if (btype == "highpass"):
+        self.b, self.a = signal.cheby1(order, self.rpass, self.f2, btype, fs=self.fsample)
+      elif (btype == "bandpass"):
+        self.b, self.a = signal.cheby1(order, self.rpass, [self.f2, self.f3], btype, fs=self.fsample)
+      elif (btype == "bandstop"):
+        self.b, self.a = signal.cheby1(order, self.rpass, [self.f1, self.f4], btype, fs=self.fsample)
+      else:
+        self.b, self.a = signal.cheby1(order, self.rpass, self.f1, btype, fs=self.fsample)
+    elif filter_method == "Chebyshev T2":
+      if (btype == "highpass"):
+        self.b, self.a = signal.cheby2(order, self.rstop, self.f2, btype, fs=self.fsample)
+      elif (btype == "bandpass"):
+        self.b, self.a = signal.cheby2(order, self.rstop, [self.f2, self.f3], btype, fs=self.fsample)
+      elif (btype == "bandstop"):
+        self.b, self.a = signal.cheby2(order, self.rstop, [self.f1, self.f4], btype, fs=self.fsample)
+      else:
+        self.b, self.a = signal.cheby2(order, self.rstop, self.f1, btype, fs=self.fsample)
+    elif filter_method == "Elliptic":
+      if (btype == "highpass"):
+        self.b, self.a = signal.ellip(order, self.rpass, self.rstop, self.f2, btype, fs=self.fsample)
+      elif (btype == "bandpass"):
+        self.b, self.a = signal.ellip(order, self.rpass, self.rstop, [self.f2, self.f3], btype, fs=self.fsample)
+      elif (btype == "bandstop"):
+        self.b, self.a = signal.ellip(order, self.rpass, self.rstop, [self.f1, self.f4], btype, fs=self.fsample)
+      else:
+        self.b, self.a = signal.ellip(order, self.rpass, self.rstop, self.f1, btype, fs=self.fsample)
 
-    # Print the coefficients
-    print('')
-    print('****************************************')
-    print('*  Direct Form I                       *')
-    print('****************************************')
-    print('   (b)     (a)')
-    np.set_printoptions(precision=4, suppress=True)
-    print(np.vstack([self.b, self.a]).T)          # Print coefficients transposed
-    print('')
+    if print_coefficients == True:
+      # Print the coefficients
+      print("")
+      print("****************************************")
+      print("*  Direct Form I                       *")
+      print("****************************************")
+      print("   (b)     (a)")
+      np.set_printoptions(precision=4, suppress=True)
+      print(np.vstack([self.b, self.a]).T)          # Print coefficients transposed
+      print("")
 
-    # Print the coefficients
-    print('')
-    print('****************************************')
-    print(f'*  Direct Form I: Q{self.q_m}.{self.q_n}                *')
-    print('****************************************')
-    print('   (b)     (a)')
-    np.set_printoptions(precision=4, suppress=True)
-    print(np.vstack([self.float_to_q32(self.b, self.q_m, self.q_n), self.float_to_q32(self.a, self.q_m, self.q_n)]).T)          # Print coefficients transposed
-    print('')
+      # Print the coefficients
+      print("")
+      print("****************************************")
+      print(f"*  Direct Form I: Q{self.q_m}.{self.q_n}                *")
+      print("****************************************")
+      print("   (b)     (a)")
+      np.set_printoptions(precision=4, suppress=True)
+      print(np.vstack([self.float_to_q32(self.b, self.q_m, self.q_n), self.float_to_q32(self.a, self.q_m, self.q_n)]).T)          # Print coefficients transposed
+      print("")
 
-    print('****************************************')
-    print('*  Cascade Second Order Sections       *')
-    print('****************************************')
-    print('  (bk0)    (bk1)   (bk2)   (ak1)    (ak2)')
-    sos = signal.tf2sos(self.b, self.a)
-    sos = sos[:,[0,1,2,4, 5]]
-    print(sos)          # Convert to second-order sections
-    print('')
+      print("****************************************")
+      print("*  Cascade Second Order Sections       *")
+      print("****************************************")
+      print("  (bk0)    (bk1)   (bk2)   (ak1)    (ak2)")
+      sos = signal.tf2sos(self.b, self.a)
+      sos = sos[:,[0,1,2,4, 5]]
+      print(sos)          # Convert to second-order sections
+      print("")
 
-    print('****************************************')
-    print(f'*  Cascade Second Order Sections Q{self.q_m}.{self.q_n} *')
-    print('****************************************')
-    print('     (bk0)     (bk1)     (bk2)     (ak1)     (ak2)')
-    np.set_printoptions(precision=4, suppress=True)
-    sos = signal.tf2sos(self.b, self.a)
-    sos = sos[:,[0,1,2,4, 5]]
-    print(self.float_to_q32(sos, self.q_m, self.q_n))          # Convert to second-order sections
-    print('')
+      print("****************************************")
+      print(f"*  Cascade Second Order Sections Q{self.q_m}.{self.q_n} *")
+      print("****************************************")
+      print("     (bk0)     (bk1)     (bk2)     (ak1)     (ak2)")
+      np.set_printoptions(precision=4, suppress=True)
+      sos = signal.tf2sos(self.b, self.a)
+      sos = sos[:,[0,1,2,4, 5]]
+      print(self.float_to_q32(sos, self.q_m, self.q_n))          # Convert to second-order sections
+      print("")
 
   def calculate_impulse_response(self):
     td_source = np.zeros(self.td_response_length)
@@ -482,12 +627,12 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     self.W, self.HofW = signal.freqz(self.b, self.a, fs=self.fsample)
 
     # Truncate datasets for pass and stop band views
-    if (self.band_view_combo_box.currentText() == 'Pass-Band'):
+    if (self.band_view_combo_box.currentText() == "Pass-Band"):
       l=len(self.HofW)
       lp=(int)(np.ceil(l*self.f1*1.01/(self.fsample/2)))
       self.W=self.W[:lp]
       self.HofW=self.HofW[:lp]
-    elif (self.band_view_combo_box.currentText() == 'Stop-Band'):
+    elif (self.band_view_combo_box.currentText() == "Stop-Band"):
       l=len(self.HofW)
       ls=(int)(np.ceil(l*((self.fsample/2)-self.f2)*1.01/(self.fsample/2)))
       self.W=self.W[-ls:]
@@ -496,25 +641,25 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
   def plot_impulse_response(self):
     # Clear previous plot and display calculated phase response
     self.impulse_plot.clear()
-    self.impulse_plot.plot(self.impulse_response, pen=pg.mkPen('b', width=2))
+    self.impulse_plot.plot(self.impulse_response, pen=pg.mkPen("b", width=2))
     self.impulse_plot.setXRange(0, len(self.impulse_response), padding=0)
 
   def plot_step_response(self):
     # Clear previous plot and display calculated phase response
     self.step_plot.clear()
-    self.step_plot.plot(self.step_response, pen=pg.mkPen('b', width=2))
+    self.step_plot.plot(self.step_response, pen=pg.mkPen("b", width=2))
     self.step_plot.setXRange(0, len(self.step_response), padding=0)
 
   def plot_magnitude_response(self):
     # Clear previous plot and display calculated magnitude response
     self.magnitude_plot.clear()
-    self.magnitude_plot.plot(self.W, 20*np.log10(np.abs(self.HofW)), pen=pg.mkPen('b', width=2))
+    self.magnitude_plot.plot(self.W, 20*np.log10(np.abs(self.HofW)), pen=pg.mkPen("b", width=2))
     self.magnitude_plot.setXRange(self.W.min(), self.W.max(), padding=0)
 
   def plot_phase_response(self):
     # Clear previous plot and display calculated phase response
     self.phase_plot.clear()
-    self.phase_plot.plot(self.W, np.angle(self.HofW), pen=pg.mkPen('b', width=2))
+    self.phase_plot.plot(self.W, np.angle(self.HofW), pen=pg.mkPen("b", width=2))
     self.phase_plot.setXRange(self.W.min(), self.W.max(), padding=0)
 
   def plot_pole_zero_diagram(self):
@@ -528,28 +673,28 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     theta = np.linspace(0, 2 * np.pi, 100)
     x = np.cos(theta)
     y = np.sin(theta)
-    self.pole_zero_plot.plot(x, y, pen=pg.mkPen('k', width=1))
+    self.pole_zero_plot.plot(x, y, pen=pg.mkPen("k", width=1))
 
     # Draw a vertical and horizontal axis
-    self.pole_zero_plot.addLine(x=0, pen=pg.mkPen('b', width=2))
-    self.pole_zero_plot.addLine(y=0, pen=pg.mkPen('b', width=2))
+    self.pole_zero_plot.addLine(x=0, pen=pg.mkPen("b", width=2))
+    self.pole_zero_plot.addLine(y=0, pen=pg.mkPen("b", width=2))
 
     # Label axes
-    self.pole_zero_plot.getAxis('bottom').setLabel('Real')
-    self.pole_zero_plot.getAxis('left').setLabel('Imaginary')
+    self.pole_zero_plot.getAxis("bottom").setLabel("Real")
+    self.pole_zero_plot.getAxis("left").setLabel("Imaginary")
 
     zeros, poles, k = signal.tf2zpk(self.b, self.a)
 
     # Plot poles
     for p in poles:
-      self.pole_zero_plot.plot([p.real], [p.imag], pen=None, symbol='x', symbolSize=10, symbolBrush='r')
+      self.pole_zero_plot.plot([p.real], [p.imag], pen=None, symbol="x", symbolSize=10, symbolBrush="r")
 
     # Plot zeros with a hollow circle
     for z in zeros:
-      self.pole_zero_plot.plot([z.real], [z.imag], pen=pg.mkPen('k', width=2), symbol='o', symbolSize=10, symbolBrush='k')
-      self.pole_zero_plot.plot([z.real], [z.imag], pen=pg.mkPen('k', width=2), symbol='o', symbolSize=6, symbolBrush='w')
+      self.pole_zero_plot.plot([z.real], [z.imag], pen=pg.mkPen("k", width=2), symbol="o", symbolSize=10, symbolBrush="k")
+      self.pole_zero_plot.plot([z.real], [z.imag], pen=pg.mkPen("k", width=2), symbol="o", symbolSize=6, symbolBrush="w")
 
-  def float_to_q32(self, arr, m, n, rounding='nearest', return_float=False):
+  def float_to_q32(self, arr, m, n, rounding="nearest", return_float=False):
     """
     Convert a numpy array of real numbers to signed 32-bit fixed-point Qm.n format.
 
@@ -570,7 +715,7 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
         Number of integer bits (including sign bit).
     n : int
         Number of fractional bits.
-    rounding : Rounding method applied after scaling. {'nearest', 'floor', 'ceil', 'trunc'}
+    rounding : Rounding method applied after scaling. {"nearest", "floor", "ceil", "trunc"}
     return_float : bool
         If True, return a tuple (int32_array, float_array_dequantized).
 
@@ -591,16 +736,16 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
 
     scale = 2 ** n
     # Apply rounding
-    if rounding == 'nearest':
+    if rounding == "nearest":
       scaled = np.rint(arr * scale)
-    elif rounding == 'floor':
+    elif rounding == "floor":
       scaled = np.floor(arr * scale)
-    elif rounding == 'ceil':
+    elif rounding == "ceil":
       scaled = np.ceil(arr * scale)
-    elif rounding == 'trunc':
+    elif rounding == "trunc":
       scaled = np.trunc(arr * scale)
     else:
-        raise ValueError("Unsupported rounding mode. Choose from 'nearest', 'floor', 'ceil', 'trunc'.")
+      raise ValueError("Unsupported rounding mode. Choose from \"nearest\", \"floor\", \"ceil\", \"trunc\".")
 
     # Compute saturation bounds in scaled integer domain
     # max_scaled = 2**(m-1) * scale - 1  -> equals 2**(m-1+n)-1
@@ -618,6 +763,115 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
       return q_int32, dequant
     return q_int32
 
+  def save_config(self, path, values):
+    """
+    Save the values dict to an INI file
+    """
+    cfg = ConfigParser()
+    cfg[self.IIR_config_file_ID_string] = {}
+    for k in ("type","method","fsamp","f1","f2","f3","f4","Rpass","Rstop","auto","set","m","n","graph_type","band_view"):
+      cfg[self.IIR_config_file_ID_string][k] = str(values.get(k, ""))
+    with open(path, "w", encoding="utf-8") as f:
+      cfg.write(f)
+
+  def load_config(self, path):
+    """
+    Load values from INI file and return a dict with keys "type","method",... (strings).
+    Raises FileNotFoundError if file doesn"t exist.
+    """
+    if not os.path.isfile(path):
+      raise FileNotFoundError(path)
+    cfg = ConfigParser()
+    cfg.read(path, encoding="utf-8")
+    section = cfg[self.IIR_config_file_ID_string] if self.IIR_config_file_ID_string in cfg else {}
+    values = {}
+    for k in ("type","method","fsamp","f1","f2","f3","f4","Rpass","Rstop","auto","set","m","n","graph_type","band_view"):
+      values[k] = section.get(k, self.IIR_Values[k])
+    return values
+
+  def get_values(self):
+    return {
+      "type":       self.filter_type_combo_box.currentText(),
+      "method":     self.filter_method_combo_box.currentText(),
+      "fsamp":      self.fsamp_text_box.text(),
+      "f1":         self.f1_text_box.text(),
+      "f2":         self.f2_text_box.text(),
+      "f3":         self.f3_text_box.text(),
+      "f4":         self.f4_text_box.text(),
+      "Rpass":      self.rpass_text_box.text(),
+      "Rstop":      self.rstop_text_box.text(),
+      "auto":       "true" if self.radio_button_auto.isChecked() else "false",
+      "set":        "true" if self.radio_button_set.isChecked() else "false",
+      "m":          str(self.spin_m.value()),
+      "n":          str(self.spin_n.value()),
+      "graph_type": self.graph_type_combo_box.currentText(),
+      "band_view":  self.band_view_combo_box.currentText(),
+    }
+
+  def set_values(self, values):
+    # type
+    v = values.get("type", self.IIR_Values["type"])
+    idx = self.filter_type_combo_box.findText(v)
+    if idx >= 0:
+      self.filter_type_combo_box.setCurrentIndex(idx)
+    else:
+      print(f"Unknown filter type in config file: {v}")
+    # method
+    v = values.get("method", self.IIR_Values["method"])
+    idx = self.filter_method_combo_box.findText(v)
+    if idx >= 0:
+      self.filter_method_combo_box.setCurrentIndex(idx)
+    else:
+      print(f"Unknown filter method in config file: {v}")
+
+    # fsamp
+    self.fsamp_text_box.setText(values.get("fsamp", self.IIR_Values["fsamp"]))
+    # f1
+    self.f1_text_box.setText(values.get("f1", self.IIR_Values["f1"]))
+    # f2
+    self.f2_text_box.setText(values.get("f2", self.IIR_Values["f2"]))
+    # f3
+    self.f3_text_box.setText(values.get("f3", self.IIR_Values["f3"]))
+    # f4
+    self.f4_text_box.setText(values.get("f4", self.IIR_Values["f4"]))
+    # Rpass
+    self.rpass_text_box.setText(values.get("Rpass", self.IIR_Values["Rpass"]))
+    # Rstop
+    self.rstop_text_box.setText(values.get("Rstop", self.IIR_Values["Rstop"]))
+    # auto
+    r = values.get("auto", self.IIR_Values["auto"]).lower()
+    self.radio_button_auto.setChecked(r in ("1","true","yes","on"))
+    # set
+    r = values.get("set", self.IIR_Values["set"]).lower()
+    self.radio_button_set.setChecked(r in ("1","true","yes","on"))
+
+    # m
+    try:
+      self.spin_m.setValue(int(values.get("m", self.IIR_Values["m"])))
+    except Exception:
+      self.spin_m.setValue(0)
+    # n
+    try:
+      self.spin_n.setValue(int(values.get("n", self.IIR_Values["n"])))
+    except Exception:
+      self.spin_n.setValue(0)
+
+    # graph_type
+    v = values.get("graph_type", self.IIR_Values["graph_type"])
+    idx = self.graph_type_combo_box.findText(v)
+    if idx >= 0:
+      self.graph_type_combo_box.setCurrentIndex(idx)
+    else:
+      print(f"Unknown graph type in config file: {v}")
+
+    # band_view
+    v = values.get("band_view", self.IIR_Values["band_view"])
+    idx = self.band_view_combo_box.findText(v)
+    if idx >= 0:
+      self.band_view_combo_box.setCurrentIndex(idx)
+    else:
+      print(f"Unknown band view in config file: {v}")
+
   def show_info(self):
     # Display informative message about the application
     message = (
@@ -628,40 +882,43 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
       'The controls on the right side of the figure let you adjust various filter properties:\n'
       'Design Method: Select a filter design method (Butterworth, Chebyshev Type 1, etc.) '
       'based on your desired filter characteristics.\n'
-      'Sampling Frequency (Fsamp): Set the sampling frequency of your signal.\n'
-      'Lower Frequency Band Edge (F1): Fpass for Low-pass filter, Fstop for a High-pass filter\n'
-      'Upper Frequency Band Edge (F2): Fstop for Low-pass filter, Fpass for a High-pass filter\n'
-      '    Fpass defines the frequency range where the filter should\ allow signals to pass without significant attenuation.\n'
-      '    Fstop defines the frequency range where the filter should attenuate signals.\n'
+      'Sampling Frequency (Fsamp): Set the sampling frequency of the signal.\n'
+      'Band Edges (F1, F2, F3, F4)\n'
+      '    Low-pass filter: F1: Fpass, F2: Fstop\n'
+      '    High-pass filter: F1: Fstop, F2: Fpass\n'
+      '    Band-pass filter: F1: Fstop1, F2: Fpass1, F3: Fpass2, F4: Fstop2\n'
+      '    Notch filter: F1: Fpass1, F2: Fstop1, F3: Fstop2, F4: Fpass2\n'
       'Passband Ripple (Rpass): Specify the maximum allowed deviation from the desired '
       'gain in the passband (typically in dB).\n'
-      'Stopband Attenuation (Rs): Specify the minimum desired attenuation in the stopband '
-      '(in dB).\n\n'
+      'Stopband Attenuation (Rstop): Specify the minimum desired attenuation in the stopband (in dB).\n\n'
       'Filter Order\n'
       'Auto: Lets the tool automatically calculate the filter order (not available for all methods).\n'
       'Set: Enter a specific filter order in the text box for manual control.\n\n'
       'IIR filters: ranges from 0 to -Rp dB (attenuation in the passband).\n\n'
       'Viewing The Frequency Response\n'
-      'The popup menu above the "info" button lets you select the displayed region: passband, '
-      'stopband, or both (full view).\n'
-      'You can also directly adjust the filter response by dragging the Fpass and Fstop '
-      'indicators on the plot. This allows you to visually modify Rpass, Rs, Fpass, or Fstop.\n\n'
+      'The "view" option lets you select the displayed region: passband, '
+      'stopband, or both (full view).\n\n'
+      'Configuration\n'
+      'The filter configuration is saved to a file named "IIR_config.ini" in the '
+      'current directory but can be changed by providing a different filename '
+      'as a command line argument. When the configuration file is found, the app loads the '
+      'previously saved settings on startup.'
     )
-    QtWidgets.QMessageBox.about(self, 'IIR Filter Design', message)
+    QtWidgets.QMessageBox.about(self, "IIR Filter Design", message)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
   app = QtWidgets.QApplication(sys.argv)
 
   # If we have a command line argument then use it as the sample rate otherwise use default
   if len(sys.argv) == 2:
-    # If argument provided == '-h' or '--help' then show help message and exit
-    if sys.argv[1] == '-h' or sys.argv[1] == '--help':
-      print('Usage: pyIIR.py [sample_rate]')
-      print('  sample_rate: Optional sample rate in Hz (default is 48000 Hz)')
+    # If argument provided == "-h" or "--help" then show help message and exit
+    if sys.argv[1] == "-h" or sys.argv[1] == "--help":
+      print("Usage: pyIIR.py [configuration file]")
+      print("  configuration file: Optional path to a configuration file")
       sys.exit(0)
 
     # Convert the argument to a float for the sample rate
-    window = IIRFilterDesign(float(sys.argv[1]))
+    window = IIRFilterDesign(sys.argv[1])
   else:
     window = IIRFilterDesign()
   sys.exit(app.exec_())

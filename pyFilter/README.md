@@ -11,7 +11,8 @@ INTRODUCTION
 
 pyFilter is a collection of filter design programs.
 
-Currently these support low-pass and high-pass filters.
+These support both FIR and IIR filters and low-pass, high-pass,
+band-pass and notch filters.
 
 This package currently includes:
   pyFIR.py    - FIR filter design package
