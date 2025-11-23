@@ -12,7 +12,8 @@ from scipy import signal
 import os
 import sys
 
-print_coefficients = True         # Set to True to print filter coefficients to console
+default_config_file_path = "FIR_Config.ini"
+default_coefficient_file_path = "FIR_Coefficients.txt"
 
 class FIRFilterDesign(QtWidgets.QMainWindow):
   def __init__(self, config_file_path=None):
@@ -252,7 +253,7 @@ class FIRFilterDesign(QtWidgets.QMainWindow):
     elif (self.config_file_path is not None):
       print(f"Using specified config file: {self.config_file_path}")
     else:         # If no config file specified, use default
-      self.config_file_path="FIR_Config.ini"
+      self.config_file_path = default_config_file_path
       print(f"No config file specified, using default: {self.config_file_path}")
 
     return control_panel
@@ -627,27 +628,30 @@ class FIRFilterDesign(QtWidgets.QMainWindow):
           self.b = signal.firwin2(numtaps, [0, self.f1, self.f2, 0.5*self.fsample], gain=[1.0, 1.0, 0.0, 0.0], window=filter_method.lower(), fs=self.fsample)
     self.a = 1
 
-    print(f"Order {order} FIR Filter designed with {filter_method} algorithm")
+    # Print the coefficients to a file
+    f = open(default_coefficient_file_path, "w")
 
-    if print_coefficients == True:
-      print("")
-      print("****************************************")
-      print("*  FIR                                 *")
-      print("****************************************")
-      print("\t\t(h)")
-      for i in range(0, len(self.b)):
-        print(f"\t{self.b[i]}")
-      print("")
+    print("", file=f)
+    print("****************************************", file=f)
+    print(f"*  FIR: Length {order+1} FIR Filter designed with {filter_method} algorithm", file=f)
+    print("****************************************", file=f)
+    print("\t\t(h)", file=f)
+    for i in range(0, len(self.b)):
+      print(f"\t{self.b[i]}", file=f)
+    print("", file=f)
 
-      # Print the coefficients
-      print("")
-      print("****************************************")
-      print(f"*  FIR: Q{self.q_m}.{self.q_n}                          *")
-      print("****************************************")
-      print("\t  (h)")
-      for i in range(0, len(self.b)):
-        print(f"\t{self.float_to_q32(self.b[i], self.q_m, self.q_n)}")
-      print("")
+    # Print the coefficients
+    print("", file=f)
+    print("****************************************", file=f)
+    print(f"*  FIR: Length {order+1} FIR Filter designed with {filter_method} algorithm", file=f)
+    print(f"*       Q{self.q_m}.{self.q_n}", file=f)
+    print("****************************************", file=f)
+    print("\t  (h)", file=f)
+    for i in range(0, len(self.b)):
+      print(f"\t{self.float_to_q32(self.b[i], self.q_m, self.q_n)}", file=f)
+    print("", file=f)
+
+    f.close()
 
   def calculate_impulse_response(self):
     td_source = np.zeros(self.td_response_length)

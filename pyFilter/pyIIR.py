@@ -12,7 +12,9 @@ from scipy import signal
 import os
 import sys
 
-print_coefficients = True        # Set to True to print filter coefficients to console
+default_config_file_path = "IIR_Config.ini"
+default_coefficient_file_path = "IIR_Coefficients.txt"
+
 
 class IIRFilterDesign(QtWidgets.QMainWindow):
   def __init__(self, config_file_path=None):
@@ -251,7 +253,7 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     elif (self.config_file_path is not None):
       print(f"Using specified config file: {self.config_file_path}")
     else:         # If no config file specified, use default
-      self.config_file_path="IIR_Config.ini"
+      self.config_file_path = default_config_file_path
       print(f"No config file specified, using default: {self.config_file_path}")
 
     return control_panel
@@ -573,45 +575,49 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
       else:
         self.b, self.a = signal.ellip(order, self.rpass, self.rstop, self.f1, btype, fs=self.fsample)
 
-    if print_coefficients == True:
-      # Print the coefficients
-      print("")
-      print("****************************************")
-      print("*  Direct Form I                       *")
-      print("****************************************")
-      print("   (b)     (a)")
-      np.set_printoptions(precision=4, suppress=True)
-      print(np.vstack([self.b, self.a]).T)          # Print coefficients transposed
-      print("")
+    # Print the coefficients to a file
+    f = open(default_coefficient_file_path, "w")
+    print("", file=f)
+    print("****************************************", file=f)
+    print(f"*  IIR: Order {order} IIR Filter designed with {filter_method} algorithm", file=f)
+    print("*  Direct Form I", file=f)
+    print("****************************************", file=f)
+    print("       (b)          (a)", file=f)
+    np.set_printoptions(precision=4, suppress=True)
+    print(np.vstack([self.b, self.a]).T, file=f)          # Print coefficients transposed
+    print("", file=f)
 
-      # Print the coefficients
-      print("")
-      print("****************************************")
-      print(f"*  Direct Form I: Q{self.q_m}.{self.q_n}                *")
-      print("****************************************")
-      print("   (b)     (a)")
-      np.set_printoptions(precision=4, suppress=True)
-      print(np.vstack([self.float_to_q32(self.b, self.q_m, self.q_n), self.float_to_q32(self.a, self.q_m, self.q_n)]).T)          # Print coefficients transposed
-      print("")
+    print("", file=f)
+    print("****************************************", file=f)
+    print(f"*  IIR: Order {order} IIR Filter designed with {filter_method} algorithm", file=f)
+    print(f"*  Direct Form I: Q{self.q_m}.{self.q_n}", file=f)
+    print("****************************************", file=f)
+    print("           (b)      (a)", file=f)
+    np.set_printoptions(precision=4, suppress=True)
+    print(np.vstack([self.float_to_q32(self.b, self.q_m, self.q_n), self.float_to_q32(self.a, self.q_m, self.q_n)]).T, file=f)          # Print coefficients transposed
+    print("", file=f)
 
-      print("****************************************")
-      print("*  Cascade Second Order Sections       *")
-      print("****************************************")
-      print("  (bk0)    (bk1)   (bk2)   (ak1)    (ak2)")
-      sos = signal.tf2sos(self.b, self.a)
-      sos = sos[:,[0,1,2,4, 5]]
-      print(sos)          # Convert to second-order sections
-      print("")
+    print("****************************************", file=f)
+    print(f"*  IIR: Order {order} IIR Filter designed with {filter_method} algorithm", file=f)
+    print("*  Cascade Second Order Sections", file=f)
+    print("****************************************", file=f)
+    print("  (bk0)    (bk1)   (bk2)   (ak1)    (ak2)", file=f)
+    sos = signal.tf2sos(self.b, self.a)
+    sos = sos[:,[0,1,2,4, 5]]
+    print(sos, file=f)          # Convert to second-order sections
+    print("", file=f)
+    print("****************************************", file=f)
+    print(f"*  IIR: Order {order} IIR Filter designed with {filter_method} algorithm", file=f)
+    print(f"*  Cascade Second Order Sections Q{self.q_m}.{self.q_n}", file=f)
+    print("****************************************", file=f)
+    print("     (bk0)     (bk1)     (bk2)     (ak1)     (ak2)", file=f)
+    np.set_printoptions(precision=4, suppress=True)
+    sos = signal.tf2sos(self.b, self.a)
+    sos = sos[:,[0,1,2,4, 5]]
+    print(self.float_to_q32(sos, self.q_m, self.q_n), file=f)          # Convert to second-order sections
+    print("", file=f)
 
-      print("****************************************")
-      print(f"*  Cascade Second Order Sections Q{self.q_m}.{self.q_n} *")
-      print("****************************************")
-      print("     (bk0)     (bk1)     (bk2)     (ak1)     (ak2)")
-      np.set_printoptions(precision=4, suppress=True)
-      sos = signal.tf2sos(self.b, self.a)
-      sos = sos[:,[0,1,2,4, 5]]
-      print(self.float_to_q32(sos, self.q_m, self.q_n))          # Convert to second-order sections
-      print("")
+    f.close()
 
   def calculate_impulse_response(self):
     td_source = np.zeros(self.td_response_length)
