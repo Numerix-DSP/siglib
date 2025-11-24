@@ -44,7 +44,7 @@ int main(void)
 
   // Generate the notch filter coefficients
   SIF_IirNotchFilter2(pIIRCoeffs,                          // Pointer to filter coefficients
-                      NOTCH_FREQUENCY / SAMPLE_RATE_HZ,    // Notch frequency
+                      NOTCH_FREQUENCY / SAMPLE_RATE_HZ,    // Centre frequency
                       POLE_MAGNITUDE,                      // Pole magnitude
                       FILTER_ORDER);                       // Filter order
 

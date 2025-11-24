@@ -52,6 +52,7 @@ Additional Functionality:
   SDA_RstftInsertFrequencyFrame, SDA_RstftExtractFrequencyFrame
   SDA_Convolve2d and SIM_Convolve2d
   SIF_FarrowFilter, SDS_FarrowFilter and SDA_FarrowFilter
+  SIF_IirNotchFilterBandwidthToRadius
 
 Operational Changes:
   Functions who's names have changed are listed in siglib_deprecated.h.

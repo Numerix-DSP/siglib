@@ -1438,8 +1438,15 @@ void _stdcall SIF_IirBandPassFilter0dBPeakGain(double* SIGLIB_OUTPUT_PTR_DECL,  
                                                double);                           // Filter cut-off frequency (high)
 
 void _stdcall SIF_IirNotchFilter(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to output IIR filter coefficients
-                                 double,                            // Filter cut-off frequency
+                                 double,                            // Filter centre frequency
                                  double);                           // Filter Q factor
+
+long _stdcall SIF_IirNotchFilter2(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to filter coefficients
+                                  double,                            // Centre frequency
+                                  double,                            // Pole magnitude
+                                  long);                             // Filter order
+
+double _stdcall SIF_IirNotchFilterBandwidthToRadius(double);    // Notch bandwidth normalized to 1 Hz
 
 void _stdcall SIF_IirPeakingFilter(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to output IIR filter coefficients
                                    double,                            // Filter cut-off frequency
@@ -1565,11 +1572,6 @@ void _stdcall SDA_ZDomainCoefficientReorg(double* SIGLIB_INPUT_PTR_DECL,     // 
                                           double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to z-domain poles array
                                           double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to z-domain zeros array
                                           long);                             // Filter order
-
-long _stdcall SIF_IirNotchFilter2(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to filter coefficients
-                                  double,                            // Notch frequency
-                                  double,                            // Pole magnitude
-                                  long);                             // Filter order
 
 long _stdcall SIF_IirNormalizedCoefficients(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to filter coefficients
                                             int SLIIRNormalizedCoeffs_t,       // Filter coefficient type
@@ -3015,7 +3017,7 @@ long _stdcall SDS_CostasQamDemodulate(double,                            // Sour
                                       long*,                             // Pointer to ELG synchronization delay index
                                       long);                             // ELG output synchronization delay length
 
-#line 3430 "siglib.h"
+#line 3432 "siglib.h"
 // compiler
 long _stdcall SDS_CostasQamDemodulateDebug(double,                            // Source data sample
                                            double*,                           // Pointer to real destination symbol point
@@ -3151,7 +3153,7 @@ long _stdcall SDA_CostasQamDemodulateDebug(double* SIGLIB_INPUT_PTR_DECL,     //
                                            double*,                           // Pointer to debug real filter output
                                            double*,                           // Pointer to debug imaginary filter output
                                            double*);                          // Pointer to debug ELG trigger output
-#line 3566 "siglib.h"
+#line 3568 "siglib.h"
 
 void _stdcall SIF_QpskModulate(double* SIGLIB_OUTPUT_PTR_DECL,    // Carrier table pointer
                                double,                            // Carrier phase increment per sample (radians / 2Ï€)
@@ -6277,4 +6279,4 @@ void _stdcall SMX_ExtractCategoricalColumn(double* SIGLIB_INPUT_PTR_DECL,    // 
 // #include "siglib_deprecated.h"
 
 // End of SigLib DSP function section
-#line 7141 "siglib.h"
+#line 7143 "siglib.h"

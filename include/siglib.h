@@ -1825,8 +1825,15 @@ void SIGLIB_FUNC_DECL SIF_IirBandPassFilter0dBPeakGain(SLData_t* SIGLIB_OUTPUT_P
                                                        const SLData_t);                     // Filter cut-off frequency (high)
 
 void SIGLIB_FUNC_DECL SIF_IirNotchFilter(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to output IIR filter coefficients
-                                         const SLData_t,                      // Filter cut-off frequency
+                                         const SLData_t,                      // Filter centre frequency
                                          const SLData_t);                     // Filter Q factor
+
+SLError_t SIGLIB_FUNC_DECL SIF_IirNotchFilter2(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to filter coefficients
+                                               const SLData_t,                      // Centre frequency
+                                               const SLData_t,                      // Pole magnitude
+                                               const SLArrayIndex_t);               // Filter order
+
+SLData_t SIGLIB_FUNC_DECL SIF_IirNotchFilterBandwidthToRadius(const SLData_t);    // Notch bandwidth normalized to 1 Hz
 
 void SIGLIB_FUNC_DECL SIF_IirPeakingFilter(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to output IIR filter coefficients
                                            const SLData_t,                      // Filter cut-off frequency
@@ -1952,11 +1959,6 @@ void SIGLIB_FUNC_DECL SDA_ZDomainCoefficientReorg(const SLData_t* SIGLIB_INPUT_P
                                                   SLComplexRect_s* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to z-domain poles array
                                                   SLComplexRect_s* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to z-domain zeros array
                                                   const SLArrayIndex_t);                      // Filter order
-
-SLError_t SIGLIB_FUNC_DECL SIF_IirNotchFilter2(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to filter coefficients
-                                               const SLData_t,                      // Notch frequency
-                                               const SLData_t,                      // Pole magnitude
-                                               const SLArrayIndex_t);               // Filter order
 
 SLError_t SIGLIB_FUNC_DECL SIF_IirNormalizedCoefficients(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to filter coefficients
                                                          enum SLIIRNormalizedCoeffs_t,        // Filter coefficient type

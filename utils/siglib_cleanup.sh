@@ -29,7 +29,6 @@ find . -name "*.dot" -type f -delete
 find . -name "*.elf" -type f -delete
 find . -name "*.gpdt" -type f -delete
 find . -name "*.gprof" -type f -delete
-find . -name "*.h5" -type f -delete
 find . -name "*.idb" -type f -delete
 find . -name "*.ilc" -type f -delete
 find . -name "*.ild" -type f -delete
@@ -52,13 +51,11 @@ find . -name "*.pbi" -type f -delete
 find . -name "*.pch" -type f -delete
 find . -name "*.pdb" -type f -delete
 find . -name "*.plg" -type f -delete
-find . -name "*.pyd" -type f -delete
 find . -name "*.r79" -type f -delete
 find . -name "*.res" -type f -delete
 find . -name "*.sdf" -type f -delete
 find . -name "*.stackdump" -type f -delete
 find . -name "*.tds" -type f -delete
-find . -name "*.tflite" -type f -delete
 find . -name "*.tlog" -type f -delete
 find . -name "*.user" -type f -delete
 cd $SIGLIB_PATH/Applications
@@ -136,7 +133,10 @@ rm -f *.csv
 $SIGLIB_PATH/utils/clean_executables.sh
 cd weightCoefficientsFiles/
 ls -1 | grep -v "README.txt" | xargs rm -f
-cd cd $SIGLIB_PATH/Examples/CExamples/OrderAnalysis/
+cd $SIGLIB_PATH/Examples/CExamples/Notch_Wav/
+rm -f filtered.wav
+$SIGLIB_PATH/utils/clean_executables.sh
+cd $SIGLIB_PATH/Examples/CExamples/OrderAnalysis/
 $SIGLIB_PATH/utils/clean_executables.sh
 cd $SIGLIB_PATH/Examples/CExamples/STFT_Wav/
 $SIGLIB_PATH/utils/clean_executables.sh
@@ -162,6 +162,9 @@ rm -f *.o
 rm -f *.obj
 rm -f sa.exe
 rm -f sa
+cd $SIGLIB_PATH/pyFilter
+rm -f *.ini
+rm -f *.txt
 
 popd
 

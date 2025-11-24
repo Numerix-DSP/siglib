@@ -1427,8 +1427,8 @@ void SIGLIB_FUNC_DECL SIF_IirBandPassFilter0dBPeakGain(SLData_t* SIGLIB_PTR_DECL
  *
  * Parameters:
  *  SLData_t * pCoeffs,                 - Filter coefficient array
- *  const SLData_t CutoffFrequency,     - Filter cut-off frequency
- *  const SLData_t)                     - Filter Q factor
+ *  const SLData_t centreFrequency,     - Filter centre frequency
+ *  const SLData_t FilterQ)             - Filter Q factor
  *
  * Return value:
  *  void
@@ -1439,9 +1439,9 @@ void SIGLIB_FUNC_DECL SIF_IirBandPassFilter0dBPeakGain(SLData_t* SIGLIB_PTR_DECL
  *
  ********************************************************/
 
-void SIGLIB_FUNC_DECL SIF_IirNotchFilter(SLData_t* SIGLIB_PTR_DECL pCoeffs, const SLData_t CutoffFrequency, const SLData_t FilterQ)
+void SIGLIB_FUNC_DECL SIF_IirNotchFilter(SLData_t* SIGLIB_PTR_DECL pCoeffs, const SLData_t centreFrequency, const SLData_t FilterQ)
 {
-  SLData_t w0 = SIGLIB_TWO * SIGLIB_PI * CutoffFrequency;    // Pre-compute the common factors
+  SLData_t w0 = SIGLIB_TWO * SIGLIB_PI * centreFrequency;    // Pre-compute the common factors
   SLData_t alpha = SDS_Sin(w0) / (SIGLIB_TWO * FilterQ);
   SLData_t cosw0 = SDS_Cos(w0);
 
@@ -1453,6 +1453,67 @@ void SIGLIB_FUNC_DECL SIF_IirNotchFilter(SLData_t* SIGLIB_PTR_DECL pCoeffs, cons
   *(pCoeffs + 3) = (SIGLIB_MINUS_TWO * cosw0) / a0;
   *(pCoeffs + 4) = (SIGLIB_ONE - alpha) / a0;
 }    // End of SIF_IirNotchFilter()
+
+/********************************************************
+ * Function: SIF_IirNotchFilter2
+ *
+ * Parameters:
+ *  SLData_t * pIIRCoeffs,
+ *  const SLData_t centreFrequency,
+ *  const SLData_t PoleMagnitude,
+ *  const SLArrayIndex_t filterOrder)
+ *
+ * Return value:
+ *  SigLib error code
+ *
+ * Description:
+ *  Generates the coefficients for an IIR notch filter
+ *
+ ********************************************************/
+
+SLError_t SIGLIB_FUNC_DECL SIF_IirNotchFilter2(SLData_t* SIGLIB_PTR_DECL pIIRCoeffs, const SLData_t centreFrequency, const SLData_t PoleMagnitude,
+                                               const SLArrayIndex_t filterOrder)
+{
+  SLArrayIndex_t NumberOfIIRBiquads = (SLArrayIndex_t)((SLUFixData_t)filterOrder >> 1U);
+
+  // Declare these as static so that they are located on the heap
+  // this will avoid the potential for stack overflow
+  static SLComplexPolar_s ZPlaneZeros[SIGLIB_IIR_MAX_NOTCH_BIQUADS];
+  static SLComplexPolar_s ZPlanePoles[SIGLIB_IIR_MAX_NOTCH_BIQUADS];
+
+  if (NumberOfIIRBiquads > SIGLIB_IIR_MAX_NOTCH_BIQUADS) {
+    return (SIGLIB_PARAMETER_ERROR);
+  }
+
+  for (SLArrayIndex_t i = 0; i < NumberOfIIRBiquads; i++) {
+    ZPlaneZeros[i].angle = centreFrequency * SIGLIB_TWO_PI;
+    ZPlaneZeros[i].magn = SIGLIB_ONE;
+    ZPlanePoles[i].angle = centreFrequency * SIGLIB_TWO_PI;
+    ZPlanePoles[i].magn = PoleMagnitude;
+  }
+  SDA_IirZplanePolarToCoeffs(ZPlaneZeros, ZPlanePoles, pIIRCoeffs, NumberOfIIRBiquads, NumberOfIIRBiquads);
+  return (SIGLIB_NO_ERROR);
+}    // End of SIF_IirNotchFilter2
+
+/********************************************************
+ * Function: SIF_IirNotchFilterBandwidthToRadius
+ *
+ * Parameters:
+ *  const SLData_t notchBandwidth)   - Notch bandwidth normalized to 1 Hz
+ *
+ * Return value:
+ *  Radius value
+ *
+ * Description:
+ *  Compute the pole radius for an IIR notch filter of
+ *  the specified bandwidth.
+ *
+ ********************************************************/
+
+SLData_t SIF_IirNotchFilterBandwidthToRadius(const SLData_t notchBandwidth)    // Notch bandwidth normalized to 1 Hz
+{
+  return (SDS_Exp(-SIGLIB_PI * notchBandwidth));
+}    // End of SIF_IirNotchFilterBandwidthToRadius
 
 /********************************************************
  * Function: SIF_IirPeakingFilter
@@ -2267,47 +2328,6 @@ void SIGLIB_FUNC_DECL SDA_ZDomainCoefficientReorg(const SLData_t* SIGLIB_PTR_DEC
     j += 4;
   }
 }    // End of SDA_ZDomainCoefficientReorg()
-
-/********************************************************
- * Function: SIF_IirNotchFilter2
- *
- * Parameters:
- *  SLData_t * pIIRCoeffs,
- *  const SLData_t NotchFrequency,
- *  const SLData_t PoleMagnitude,
- *  const SLArrayIndex_t filterOrder)
- *
- * Return value:
- *  SigLib error code
- *
- * Description:
- *  Generates the coefficients for an IIR notch filter
- *
- ********************************************************/
-
-SLError_t SIGLIB_FUNC_DECL SIF_IirNotchFilter2(SLData_t* SIGLIB_PTR_DECL pIIRCoeffs, const SLData_t NotchFrequency, const SLData_t PoleMagnitude,
-                                               const SLArrayIndex_t filterOrder)
-{
-  SLArrayIndex_t NumberOfIIRBiquads = (SLArrayIndex_t)((SLUFixData_t)filterOrder >> 1U);
-
-  // Declare these as static so that they are located on the heap
-  // this will avoid the potential for stack overflow
-  static SLComplexPolar_s ZPlaneZeros[SIGLIB_IIR_MAX_NOTCH_BIQUADS];
-  static SLComplexPolar_s ZPlanePoles[SIGLIB_IIR_MAX_NOTCH_BIQUADS];
-
-  if (NumberOfIIRBiquads > SIGLIB_IIR_MAX_NOTCH_BIQUADS) {
-    return (SIGLIB_PARAMETER_ERROR);
-  }
-
-  for (SLArrayIndex_t i = 0; i < NumberOfIIRBiquads; i++) {
-    ZPlaneZeros[i].angle = NotchFrequency * SIGLIB_TWO_PI;
-    ZPlaneZeros[i].magn = SIGLIB_ONE;
-    ZPlanePoles[i].angle = NotchFrequency * SIGLIB_TWO_PI;
-    ZPlanePoles[i].magn = PoleMagnitude;
-  }
-  SDA_IirZplanePolarToCoeffs(ZPlaneZeros, ZPlanePoles, pIIRCoeffs, NumberOfIIRBiquads, NumberOfIIRBiquads);
-  return (SIGLIB_NO_ERROR);
-}    // End of SIF_IirNotchFilter2
 
 #include <siglib_iir_constants.h>    // Include SigLib IIR filter normalized coefficient header file
 
