@@ -1,7 +1,30 @@
 ========================================
 
+VERSION: 10.60
+RELEASE DATE:xx/xx/xxxx
+_________________________
+
+Additional Functionality:
+  None.
+
+Operational Changes:
+  Visual Studio support and testing updated to Visual Studio Community 2026
+
+Additional Processor / Compiler Support:
+  None.
+
+Optimisation Changes:
+  SDS_OnePoleNormalized, SDA_OnePoleNormalized, SDS_OnePoleEWMA, SDA_OnePoleEWMA optimized to use single multiply
+
+Bug Fixes:
+ None.
+
+Notes:
+  None.
+
+
 VERSION: 10.56
-RELEASE DATE: xx/xx/xxx
+RELEASE DATE: 01/11/2025
 _________________________
 
 Additional Functionality:

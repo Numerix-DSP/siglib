@@ -1787,7 +1787,7 @@ void SIGLIB_FUNC_DECL SDA_OnePole(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t
 
 SLData_t SIGLIB_FUNC_DECL SDS_OnePoleNormalized(const SLData_t Src, const SLData_t onePoleCoefficient, SLData_t* pState)
 {
-  (*pState) = ((SIGLIB_ONE - onePoleCoefficient) * Src) + ((*pState) * onePoleCoefficient);
+  *pState = ((SIGLIB_ONE - onePoleCoefficient) * (Src - *pState)) + *pState;
   return (*pState);
 }    // End of SDS_OnePoleNormalized()
 
@@ -1821,10 +1821,10 @@ void SIGLIB_FUNC_DECL SDA_OnePoleNormalized(const SLData_t* SIGLIB_PTR_DECL pSrc
   for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
-    *pState = ((SIGLIB_ONE - onePoleCoefficient) * pSrc[i]) - ((*pState) * onePoleCoefficient);
+    *pState = ((SIGLIB_ONE - onePoleCoefficient) * (pSrc[i] - *pState)) + *pState;
     pDst[i] = *pState;
 #else
-    *pState = ((SIGLIB_ONE - onePoleCoefficient) * (*pSrc++)) + ((*pState) * onePoleCoefficient);
+    *pState = ((SIGLIB_ONE - onePoleCoefficient) * (*pSrc++ - *pState)) + *pState;
     *pDst++ = *pState;
 #endif
   }
@@ -1847,7 +1847,7 @@ void SIGLIB_FUNC_DECL SDA_OnePoleNormalized(const SLData_t* SIGLIB_PTR_DECL pSrc
 
 SLData_t SIGLIB_FUNC_DECL SDS_OnePoleEWMA(const SLData_t Src, const SLData_t onePoleCoefficient, SLData_t* pState)
 {
-  (*pState) = (onePoleCoefficient * Src) + ((*pState) * (SIGLIB_ONE - onePoleCoefficient));
+  *pState = (onePoleCoefficient * (Src - *pState)) + *pState;
   return (*pState);
 }    // End of SDS_OnePoleEWMA()
 
@@ -1881,10 +1881,10 @@ void SIGLIB_FUNC_DECL SDA_OnePoleEWMA(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDa
   for (SLArrayIndex_t i = 0; i < sampleLength; i++) {
 #if (SIGLIB_ARRAY_OR_PTR == SIGLIB_ARRAY_ACCESS)    // Select between array index
                                                     // or pointer access modes
-    *pState = (onePoleCoefficient * pSrc[i]) - ((*pState) * (SIGLIB_ONE - onePoleCoefficient));
+    *pState = (onePoleCoefficient * (pSrc[i] - *pState)) + *pState;
     pDst[i] = *pState;
 #else
-    *pState = (onePoleCoefficient * (*pSrc++)) + ((*pState) * (SIGLIB_ONE - onePoleCoefficient));
+    *pState = (onePoleCoefficient * (*pSrc++ - *pState)) + *pState;
     *pDst++ = *pState;
 #endif
   }

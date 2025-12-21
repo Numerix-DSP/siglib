@@ -69,7 +69,7 @@ int main(void)
          "Copyright (C) Delta Numerix 2017. All rights reserved.\r\n");
 
   if ((IFPtr = fopen("functionList.txt", "rb")) == NULL) {
-    printf("Can not open input data file %s\r\n", "siglib.dg");
+    printf("Can not open input data file %s\r\n", "functionList.txt");
     exit(-1);
   }
 

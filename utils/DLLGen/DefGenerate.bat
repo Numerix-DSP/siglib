@@ -7,14 +7,28 @@ rem        This script uses cygwin
 REM functionList.txt is now generated in the linux build scripts
 REM nm ../../src/libsiglib.a | grep " T " | cut -d " " -f 3 >> functionList.txt
 
+if exist siglib.def (
+ del siglib.def
+)
+
+if not exist functionList.txt (
+  echo ERROR - functionList.txt DOES NOT exist - compile SigLib under Linux using remakelinux.sh in the src folder
+)
+
 cl DefGen.c
 
 if exist DefGen.exe (
   DefGen
-  copy siglib.def ..\..\src /Y
   del DefGen.exe
   del DefGen.obj
-  echo .def file generated
+) ELSE (
+  echo ERROR - DefGen.exe not generated
 )
 
-del functionList.txt
+if exist siglib.def (
+  copy siglib.def ..\..\src /Y
+  echo siglib.def file generated
+) ELSE (
+  echo ERROR - siglib.def file NOT generated
+)
+
