@@ -1,9 +1,8 @@
 // Circular buffer for integers
-// Cygwin : gcc circular_buffer_integer_test.c -lpthread -o
-// circular_buffer_integer_test.exe Linux  : gcc circular_buffer_integer_test.c
-// -lpthread -o circular_buffer_integer_test This software is supplied under the
-// terms of the MIT license: https://opensource.org/license/mit/ (C) 2024 Delta
-// Numerix
+// Linux  : gcc circular_buffer_integer_test.c // -lpthread -o circular_buffer_integer_test
+// This software is supplied under the terms of the MIT license:
+// https://opensource.org/license/mit/.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 #include "circular_buffer.h"
 #include <stdio.h>

@@ -1,5 +1,5 @@
 // SigLib - FIR Filter Design By The Window Method
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 //   +------+        +-------+        +--------+        +---------+
 //   | Freq |_______\| 128Pt |_______\| Array  |_______\| Hamming |

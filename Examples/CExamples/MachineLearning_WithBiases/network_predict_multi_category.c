@@ -1,5 +1,5 @@
 // SigLib Neural Network Classification Prediction Program
-// Copyright (c) 2024 Delta Numerix
+// Copyright (c) 2026 Delta Numerix
 
 // Include files
 #include <ctype.h>

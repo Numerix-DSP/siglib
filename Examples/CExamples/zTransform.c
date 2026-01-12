@@ -1,5 +1,5 @@
 // SigLib z-transform Example - plots the z-transform of an FIR or IIR filter
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

@@ -9,7 +9,7 @@
 //      4 Mic Circular (Diamond) + centre, 0.043 mic radius
 //      4 Mic Linear, 0.10 separation
 //      4 Mic Linear, 0.033 separation
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 #include <gnuplot_c.h>
 #include <math.h>

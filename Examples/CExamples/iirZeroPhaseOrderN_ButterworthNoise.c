@@ -3,7 +3,7 @@
 // technique uses time reversal of the data stream to give zero phase
 // delay. The results are compared with the causal filter. This is
 // equivalent to the filtfilt function in Python/Scipy
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

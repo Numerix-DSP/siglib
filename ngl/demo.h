@@ -1,5 +1,5 @@
 // DSPGraph demo program include file
-// Copyright (c) 2024, Delta Numerix, All rights reserved.
+// Copyright (c) 2026, Delta Numerix, All rights reserved.
 
 #ifndef _DEMO_H
 #define _DEMO_H

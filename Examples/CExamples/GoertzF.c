@@ -1,7 +1,7 @@
 // SigLib - Goertzel Filter Example
 // The impulse response of the filter is used to display the phase and
 // amplitude response.
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

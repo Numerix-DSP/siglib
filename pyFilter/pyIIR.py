@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
-# Copyright (c) John Edwards 2024
+# Copyright © 2026 Delta Numerix All rights reserved.
 # Released under the terms of the GPLv3 license
 
 from configparser import ConfigParser

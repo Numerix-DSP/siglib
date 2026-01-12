@@ -1,11 +1,11 @@
 // Circular buffer for strings protected by Dekker’s two process mutual
 // exclusion algorithm The producer() writes data to a circular buffer at 4x the
 // speed that the consumer() reads it. In this implementation, messages are
-// discarded once the fifo overflows Cygwin : gcc fifo_mutex_Dekker_test.c
-// -lpthread -o fifo_mutex_Dekker_test.exe Linux  : gcc fifo_mutex_Dekker_test.c
-// -lpthread -o fifo_mutex_Dekker_test This software is supplied under the terms
-// of the MIT license: https://opensource.org/license/mit/ (C) 2024 Delta
-// Numerix
+// discarded once the fifo overflows
+// Linux  : gcc fifo_mutex_Dekker_test.c -lpthread -o fifo_mutex_Dekker_test
+// This software is supplied under the terms of the MIT license:
+// https://opensource.org/license/mit/.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 #include "circular_buffer.h"
 #include "mutex.h"

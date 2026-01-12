@@ -2,7 +2,7 @@
 // This example performs a non-causal IIR filter on the data. This
 // technique uses time reversal of the data stream to give zero phase
 // distortion. The results are compared with the causal filter. This is
-// equivalent to the filtfilt function in Matlab and Python Copyright (c) 2024
+// equivalent to the filtfilt function in Matlab and Python Copyright (c) 2026
 // Delta Numerix All rights reserved.
 
 // Include files

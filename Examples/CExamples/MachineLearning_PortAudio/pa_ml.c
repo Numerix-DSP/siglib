@@ -1,5 +1,5 @@
 // SigLib PortAudio Example Program
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 #include <math.h>
 #include <stdio.h>

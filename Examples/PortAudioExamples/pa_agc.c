@@ -1,5 +1,5 @@
 // Single channel SigLib AGC example that works with PortAudio
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 // Include files
 #include "portaudio.h"

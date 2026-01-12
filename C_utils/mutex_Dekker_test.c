@@ -1,8 +1,8 @@
 // Dekker’s two process mutual exclusion example
+// Linux  : gcc mutex_Dekker_test.c -lpthread -o mutex_Dekker_test
 // This software is supplied under the terms of the MIT license:
-// https://opensource.org/license/mit/ (C) 2024 Delta Numerix Cygwin : gcc
-// mutex_Dekker_test.c -lpthread -o mutex_Dekker_test.exe Linux  : gcc
-// mutex_Dekker_test.c -lpthread -o mutex_Dekker_test
+// https://opensource.org/license/mit/.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 // This mutex does not support resource request while a current request is
 // pending If this scenario is a possibility then use

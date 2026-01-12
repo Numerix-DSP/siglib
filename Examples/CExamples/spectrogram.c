@@ -1,7 +1,7 @@
 // SigLib - Example to read a .sig data file and display as a spectrogram.
 // The time domain arrays are overlapped by the amount specified in the
 // overlap parameter.
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

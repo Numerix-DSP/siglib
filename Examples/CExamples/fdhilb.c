@@ -1,5 +1,5 @@
 // SigLib  Frequency Domain Hilbert Transformer Instantaneous Frequency
-// Calculation Example Copyright (c) 2024 Delta Numerix All rights reserved.
+// Calculation Example Copyright (c) 2026 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

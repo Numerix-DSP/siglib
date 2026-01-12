@@ -14,7 +14,7 @@
 // to be specified but the SDA_IirModifyFilterGain function uses a
 // normalised sample rate of 1.0 Hz.
 // The example modifies the Fc from 1.0 radian to 2.0 radians.
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

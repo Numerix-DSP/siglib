@@ -1,5 +1,5 @@
 // Example: Spectrum Of A Sine Wave and the same wave, with a single sample
-// missing, near the centre Copyright (c) 2024 Delta Numerix All rights
+// missing, near the centre Copyright (c) 2026 Delta Numerix All rights
 // reserved.
 
 // Include files

@@ -2,7 +2,7 @@
 // functionality This program required the Numerix Host Library, which is
 // available from: https://www.numerix-dsp.com/files This project was generated
 // automatically in Visual Studio it is a command line applicaiton Copyright (c)
-// 2023 Delta Numerix All rights reserved.
+// (C) 2026 Delta Numerix All rights reserved.
 
 // Include files
 #include "stdafx.h"

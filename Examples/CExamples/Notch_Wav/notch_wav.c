@@ -1,7 +1,7 @@
 // IIR Notch Filter Example
 // Generates the notch filter with the specified magnitude for the pole
 // Applies this notch to the .wav file and saves the results in filtered.wav
-// Copyright (c) 2025 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 // Transfer function of second-order notch filter
 // H(z) = (1 - r^2) / (1 - 2r*cos(ω_0)*z^(-1) + r^2*z^(-2))

@@ -1,5 +1,5 @@
 // SigLib Cepstrum Analysis Example
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 // The real cepstrum is calculated as follows:
 // FFT (log_magnitude (FFT (data)))

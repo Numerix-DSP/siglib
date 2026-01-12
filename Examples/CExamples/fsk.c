@@ -1,6 +1,6 @@
 // SigLib Frequency Shift Keying Example
 // Based on V.23 Mode 2: (up to 1200 baud) - symbol 1, mark = 1300 Hz, symbol 0,
-// space = 2100 Hz Sample rate = 9600 Hz. Copyright (c) 2024 Delta Numerix All
+// space = 2100 Hz Sample rate = 9600 Hz. Copyright (c) 2026 Delta Numerix All
 // rights reserved.
 
 // Include files

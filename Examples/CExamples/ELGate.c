@@ -1,5 +1,5 @@
 // SigLib - Early-Late Gate Timing Detector Example
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 // The early late gate synchronizer outputs a continuous stream of zeros except
 // where it detects a pulse, when it generates a single one pulse.

@@ -2,7 +2,7 @@
 // Notes:
 //    This program normalizes the peak input magnitude to 1.0 to support any
 //    desired input word length The output data is scaled accordingly
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 #include <math.h>
 #include <stdio.h>

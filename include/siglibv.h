@@ -5,7 +5,7 @@ File Name               : siglib.h      | Author        : JOHN EDWARDS
 Siglib Library Version  : 10.55         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 13/09/1992
-Options   :                             | Latest Update : 06/06/2023
+Options   :                             | Latest Update : 06/06/2026
 ---------------------------------------------------------------------------
 Support for SigLib is available via Email: support@numerix-dsp.com
 
@@ -31,7 +31,7 @@ Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2024 Delta Numerix All rights reserved.
+Copyright (c) 2026 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Header file for SigLib DSP library
 

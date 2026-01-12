@@ -1,5 +1,5 @@
 // SigLib Mixed Radix FFT Example
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 // This example supports a standard radix-2 FFT, followed by a mixed radix
 // output The Final stage can be implemented in one of two ways (through the

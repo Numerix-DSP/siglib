@@ -1,5 +1,5 @@
 // SigLib BPSK Example
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 // Simulating:
 // 600 bps

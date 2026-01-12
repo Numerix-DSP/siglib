@@ -1,5 +1,5 @@
 // .DEF file generator. Takes functionList.txt and creates siglib.def
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 // Include files
 
@@ -23,7 +23,7 @@ char header[] = (";*************************************************************
 ;Siglib Library version : 10.50         | Modifications :\r\n\
 ;-------------------------------------- +----------------------------------\r\n\
 ;Compiler : Microsoft Visual C++        | Start Date    : 16/11/1995\r\n\
-;                                       | Latest Update : 17/06/2023\r\n\
+;                                       | Latest Update : 17/06/2024\r\n\
 ;--------------------------------------------------------------------------\r\n\
 ;Support for SigLib is available via Email: support@numerix-dsp.com\r\n\
 ;\r\n\
@@ -49,7 +49,7 @@ Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 ;\r\n\
-;Copyright (c) 2024 Delta Numerix All rights reserved.\r\n\
+;Copyright (c) 2026 Delta Numerix All rights reserved.\r\n\
 ;---------------------------------------------------------------------------\r\n\
 ;Description: DLL function definition file for SigLib DSP library\r\n\
 ;\r\n\

@@ -2,7 +2,7 @@
 // Generates impulse and step responses for standard one-pole filter,
 // normalized one-pole filter, and one-pole EWMA filter, and compares
 // their frequency responses.
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

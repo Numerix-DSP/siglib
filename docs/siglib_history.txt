@@ -1,3 +1,7 @@
+SigLib History
+
+DFPlus, Digital Filter Plus, SigLib are trademarks of Delta Numerix
+Copyright (c) 2026 Delta Numerix
 ========================================
 
 VERSION: 10.60
@@ -9,6 +13,7 @@ Additional Functionality:
 
 Operational Changes:
   Visual Studio support and testing updated to Visual Studio Community 2026
+  Cygwin support deprecated
 
 Additional Processor / Compiler Support:
   None.
@@ -2355,5 +2360,3 @@ Operational Changes:
 01-09-92
 	Started to integrate functions into library
 
-DFPlus, Digital Filter Plus, SigLib are trademarks of Delta Numerix
-Copyright (c) 2024 Delta Numerix

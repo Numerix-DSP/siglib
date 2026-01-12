@@ -34,7 +34,7 @@
 #
 # For GNU General Public License details, see <http://www.gnu.org/licenses/>.
 #
-# Copyright (c) 2025, Delta Numerix, All rights reserved.
+# Copyright (c) 2026, Delta Numerix, All rights reserved.
 #
 
 import numpy as np

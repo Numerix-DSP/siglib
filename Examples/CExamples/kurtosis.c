@@ -1,5 +1,5 @@
 // SigLib - Kurtosis Signal Analysis Example
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 // Kurtosis is a technique for analysing the statistical impulsiveness
 // of a signal. The process takes an array of data and returns a single

@@ -4,7 +4,7 @@
 // samples per symbol.
 //     Uses the bit oriented FSK functions, which allow the independent tracking
 //     of the bits in the data stream.
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

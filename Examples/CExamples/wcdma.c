@@ -1,5 +1,5 @@
 // SigLib WCDMA based Spreading & Scrambling modulation test program
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

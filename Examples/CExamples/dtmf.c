@@ -1,5 +1,5 @@
 // SigLib - DTMF Generation And Detection Example
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 // Freq. (Hz) 1209 1336 1477 1633
 //     697     1     2    3    A

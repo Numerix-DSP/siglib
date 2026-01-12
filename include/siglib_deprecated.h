@@ -29,7 +29,7 @@ Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2024 Delta Numerix All rights reserved.
+Copyright (c) 2026 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: Header file for SigLib DSP library deprecated functions
 

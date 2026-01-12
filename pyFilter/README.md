@@ -48,4 +48,4 @@ Delta Numerix,
 Email : support@numerix-dsp.com
 WWW : http://www.numerix-dsp.com
 
-Copyright (C) 2004 to 2025 Delta Numerix.
+Copyright (C) 2026 Delta Numerix.

@@ -1,8 +1,8 @@
 // Peterson’s two process mutual exclusion example
-// Cygwin : gcc mutex_Peterson_test.c -lpthread -o mutex_Peterson_test.exe
 // Linux  : gcc mutex_Peterson_test.c -lpthread -o mutex_Peterson_test
 // This software is supplied under the terms of the MIT license:
-// https://opensource.org/license/mit/ (C) 2024 Delta Numerix
+// https://opensource.org/license/mit/.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 // This mutex does not support resource request while a current request is
 // pending If this scenario is a possibility then use

@@ -1,5 +1,5 @@
 // SigLib Fast Fourier Transform Example
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 // define ENABLE_BENCHMARK=1 on command line to compile with XMOS cycle accurate
 // benchmarking enabled
 

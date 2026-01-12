@@ -3,19 +3,23 @@
 rem Batch file for building and executing Gnuplot/C example programs
 rem This also rebuilds the library
 
-del %1.exe
-del %1.obj
+set mb_base_filename=%~n1
+set mb_exe_filename=%mb_base_filename%.exe
+set mb_command=%mb_exe_filename% %2 %3 %4 %5 %6 %7 %8 %9
+echo %mb_base_filename%
 
-REM set SRCDIR=%CD%
-REM cd ..
-REM del gnuplot_c.obj
-REM del gnuplot_c.lib
-REM cl -c -W4 -D "GPC_DEBUG=1" -D "_CRT_SECURE_NO_WARNINGS=1" gnuplot_c.c
-REM lib /NOLOGO /OUT:gnuplot_c.lib gnuplot_c.obj
-REM chdir /d %SRCDIR%
+if exist %mb_exe_filename% (
+    del %mb_exe_filename%
+)
 
-cl %1.c -W4 -D "SIGLIB_STATIC_LIB=1" -D "_CRT_SECURE_NO_WARNINGS=1" -I ..\src ..\src\gnuplot_c.lib
-
+cl %mb_base_filename%.c -W4 -D "SIGLIB_STATIC_LIB=1" -D "_CRT_SECURE_NO_WARNINGS=1" -I ..\src ..\src\gnuplot_c.lib
 del *.obj
-if exist %1.exe %1
+
+if exist %mb_exe_filename% (
+    %mb_command%
+)
+
+set "mb_base_filename="
+set "mb_command="
+set "mb_exe_filename="
 

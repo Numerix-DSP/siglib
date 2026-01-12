@@ -1,5 +1,5 @@
 // SigLib Radix-4 FFT Examples
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 // Include files
 #include <stdio.h>

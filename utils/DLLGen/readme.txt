@@ -33,4 +33,4 @@ Delta Numerix
 Email: support@numerix-dsp.com
 WWW:   https:\\www.numerix-dsp.com
 
-Copyright (c) 2025 Delta Numerix. All rights reserved.
+Copyright (c) 2026 Delta Numerix. All rights reserved.

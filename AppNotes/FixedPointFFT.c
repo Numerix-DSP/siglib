@@ -2,14 +2,14 @@
 /**************************************************************************
 File Name  : FixedPointFFT.C            | Author  : JOHN EDWARDS
 ----------------------------------------+----------------------------------
-Compiler :   Various                    | Start Date    : 01/11/05
-Copyright (c) 2024 Delta Numerix        | Latest Update : 05/11/05
+Compiler :   Various                    | Start Date    : 01/11/2005
+                                        | Latest Update : 05/11/2005
 ---------------------------------------------------------------------------
 Description: SigLib fixed point FFT test program.
 
 DELETION OF ANY INFORMATION IN THIS HEADER IS IN VIOLATION OF YOUR LICENSE.
 
-Copyright (c) 2024 Delta Numerix All rights reserved.
+Copyright (c) 2026 Delta Numerix All rights reserved.
 
 Notes:
 This program includes two fixed point implementations of the SigLib FFT

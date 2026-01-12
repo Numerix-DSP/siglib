@@ -1,7 +1,7 @@
 // Dialog class to get the application options from the user
 // This software is provided under the terms of the GNU General Public License
-// V2, as published by the Free Software Foundation. Copyright (c) 1999-2024
-// Delta Numerix, All rights reserved.
+// V2, as published by the Free Software Foundation.
+// Copyright (c) 1999-2026 Delta Numerix, All rights reserved.
 
 // Include files
 // For compilers that support precompilation, includes "wx/wx.h".

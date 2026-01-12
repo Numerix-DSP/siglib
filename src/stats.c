@@ -1,10 +1,10 @@
 
 /**************************************************************************
 File Name               : STATS.C       | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.50         |
+Siglib Library Version  : 10.60         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 02/10/1993
-Options   :                             | Latest Update : 05/12/2023
+Options   :                             | Latest Update : 05/12/2026
 ---------------------------------------------------------------------------
 Support for SigLib is available via Email: support@numerix-dsp.com
 
@@ -30,7 +30,7 @@ Please contact Delta Numerix for further details :
 https://www.numerix-dsp.com
 support@.numerix-dsp.com
 
-Copyright (c) 2024 Delta Numerix All rights reserved.
+Copyright (c) 2026 Delta Numerix All rights reserved.
 ---------------------------------------------------------------------------
 Description: SigLib DSP library statistics routines.
 

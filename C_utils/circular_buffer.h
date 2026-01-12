@@ -1,6 +1,7 @@
 // Circular buffer functions
 // This software is supplied under the terms of the MIT license:
-// https://opensource.org/license/mit/ (C) 2024 Delta Numerix
+// https://opensource.org/license/mit/.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 // Circular buffer functions for integers
 

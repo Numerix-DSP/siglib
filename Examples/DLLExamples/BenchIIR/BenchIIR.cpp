@@ -1,5 +1,5 @@
 // BenchIIR.cpp : Defines the entry point for the console application.
-// Copyright (c) 2024 Delta Numerix All rights reserved.
+// Copyright (c) 2026 Delta Numerix All rights reserved.
 
 #include "stdafx.h"
 

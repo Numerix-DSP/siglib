@@ -2,7 +2,8 @@
 // This functionality supports transparent objects, where the transparent colour
 // is : Red : 251, Green : 0, Blue : 251 This software is provided under the
 // terms of the GNU General Public License V2, as published by the Free Software
-// Foundation. Copyright (c) 1999-2024 Delta Numerix, All rights reserved.
+// Foundation.
+// Copyright (c) 1999-2026 Delta Numerix, All rights reserved.
 
 #ifndef _LED_H
 #define _LED_H
