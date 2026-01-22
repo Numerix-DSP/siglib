@@ -2,9 +2,9 @@
 
             Numerix pyFilter Filter Design Apps
 
-                      Version 1.00
+                      Version 1.10
 
-                       18/11/2025
+                       22/01/2026
 
 
 ** INTRODUCTION
@@ -21,12 +21,14 @@ This package currently includes:
 ** HISTORY NOTES
 
     18/11/2025    V1.00     Initial release
+    22/01/2026    V1.10     Updated to support PyQt6
 
 ** DEPENDENCIES
 These Python scripts require the following packages to be installed:
   - configparser
+  - control
   - Numpy
-  - PyQt5
+  - PyQt6
   - PyQtGraph
   - SciPy
 

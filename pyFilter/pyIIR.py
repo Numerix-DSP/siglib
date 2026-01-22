@@ -6,7 +6,7 @@
 
 from configparser import ConfigParser
 import numpy as np
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PyQt6 import QtWidgets, QtCore, QtGui
 import pyqtgraph as pg
 from scipy import signal
 import os
@@ -87,7 +87,7 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     # Control panel
     control_panel = QtWidgets.QWidget()
     control_layout = QtWidgets.QVBoxLayout(control_panel)
-    control_layout.setAlignment(QtCore.Qt.AlignTop)
+    control_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
 
     # Filter type combo box
     self.filter_type_combo_box = QtWidgets.QComboBox(control_panel)
@@ -262,7 +262,7 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     # Graph panel
     graph_panel = QtWidgets.QWidget()
     graph_layout = QtWidgets.QVBoxLayout(graph_panel)
-    graph_layout.setAlignment(QtCore.Qt.AlignTop)
+    graph_layout.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
 
     # Plots
     pg.setConfigOption("background", "w")
@@ -270,7 +270,7 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
 
     # Container with a QStackedLayout where the two panels overlap (stacked)
     self.container = QtWidgets.QFrame()
-    self.container.setFrameShape(QtWidgets.QFrame.StyledPanel)
+    self.container.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
     self.container.setMinimumHeight(180)
     self.graph_container_layout = QtWidgets.QStackedLayout(self.container)
     self.graph_container_layout.setContentsMargins(0, 0, 0, 0)
@@ -927,4 +927,4 @@ if __name__ == "__main__":
     window = IIRFilterDesign(sys.argv[1])
   else:
     window = IIRFilterDesign()
-  sys.exit(app.exec_())
+  sys.exit(app.exec())
