@@ -151,7 +151,7 @@ mainFrame::~mainFrame()
 /**/
 
 /********************************************************
- * Function : mainFrame::FindExecutablePath ()
+ * Function : mainFrame::FindExecutablePath
  *
  * Parameters :
  *

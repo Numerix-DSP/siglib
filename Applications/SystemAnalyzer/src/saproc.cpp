@@ -405,7 +405,7 @@ void SAProcWindow::OnDataSetSizeSpinControlChange(wxSpinEvent& WXUNUSED(event))
   //  if (RunningFlag == SIGLIB_TRUE)
   //  {
   //      GlobalGraphDisplayWindow->SetDataSetSize
-  //      ((int)DataSetSizeSpinCtrl->GetValue ());
+  //      ((int)DataSetSizeSpinCtrl->GetValue());
   //  }
 }
 
@@ -865,7 +865,7 @@ void SAProcWindow::OnProcessData(wxCommandEvent& WXUNUSED(event))
   wxCommandEvent* DummyCommand = new wxCommandEvent();    // Post event to say that data has been updated
   GlobalGraphDisplayWindow->OnGraphTypeChanged(*DummyCommand);
   delete (DummyCommand);
-}    // End of SAProcWindow::OnProcessData ()
+}    // End of SAProcWindow::OnProcessData()
 
 /*
 Name : SAProcWindow::OnCalibrateIO
@@ -897,7 +897,7 @@ void SAProcWindow::OnCalibrateIO(wxCommandEvent& WXUNUSED(event))
                "details, please see http://www.numerix-dsp.com",
                "System Analyzer", wxOK | wxICON_EXCLAMATION, NULL);
 #endif
-}    // End of SAProcWindow::OnCalibrate I/O ()
+}    // End of SAProcWindow::OnCalibrate I/O
 
 void SAProcWindow::SetSampleRate(double sampleRate)
 {

@@ -443,7 +443,7 @@ void FIRRemezFilterDesignWindow::OnGetFilterSpec(wxCommandEvent& WXUNUSED(event)
 
     short RemezReturn = remez(NumberOfFilterCoeffs, BANDPASS, NumberOfFilterBands, pBands, pFIRGain, pFIRRippleW, pTmpCoeffs, deviat, extrm);
 
-    //  SUF_Debugfprintf ("Returned from Remez ()\n");
+    //  SUF_Debugfprintf ("Returned from Remez()\n");
 
     SDA_Copy(pTmpCoeffs, pFIRCoeffs,
              NumberOfFilterCoeffs);    // Copy data to output array
@@ -702,47 +702,47 @@ void FIRRemezFilterDesignWindow::OnGetFilterSpec(wxCommandEvent& WXUNUSED(event)
                    "all processing\n\n");
 #endif
 
-} /* End of FIRRemezFilterDesignWindow::OnGetFilterSpec () */
+}    // End of FIRRemezFilterDesignWindow::OnGetFilterSpec
 
 void FIRRemezFilterDesignWindow::SetProjectNameString(wxString String)
 {
   ProjectNameString = String;
-}
+}    // End of FIRRemezFilterDesignWindow::SetProjectNameString
 
 void FIRRemezFilterDesignWindow::SetSampleRate(double sampleRate)
 {
   SampleRate = sampleRate;
-}
+}    // End of FIRRemezFilterDesignWindow::SetSampleRate
 
 void FIRRemezFilterDesignWindow::SetGainArray(SLData_t* gain)
 {
   pGain = gain;
-}
+}    // End of FIRRemezFilterDesignWindow::SetGainArray
 
 void FIRRemezFilterDesignWindow::SetPhaseArray(SLData_t* phase)
 {
   pPhase = phase;
-}
+}    // End of FIRRemezFilterDesignWindow::SetPhaseArray
 
 void FIRRemezFilterDesignWindow::SetGroupDelayArray(SLData_t* groupDelay)
 {
   pGroupDelay = groupDelay;
-}
+}    // End of FIRRemezFilterDesignWindow::SetGroupDelayArray
 
 void FIRRemezFilterDesignWindow::SetImpulseResponseArray(SLData_t* impulseResponse)
 {
   pImpulseResponse = impulseResponse;
-}
+}    // End of FIRRemezFilterDesignWindow::SetImpulseResponseArray
 
 void FIRRemezFilterDesignWindow::SetStepResponseArray(SLData_t* stepResponse)
 {
   pStepResponse = stepResponse;
-}
+}    // End of FIRRemezFilterDesignWindow::SetStepResponseArray
 
 void FIRRemezFilterDesignWindow::SetFilterInfoStruct(filter_info_t* filterInfo)
 {
   pFilterInfo = filterInfo;
-}
+}    // End of FIRRemezFilterDesignWindow::SetFilterInfoStruct
 
 BEGIN_EVENT_TABLE(FIRRemezFilterDesignWindow, wxPanel)
 //  EVT_COMBOBOX  (FIRREMEZ_FILTER_BAND_COMBO_BOX,

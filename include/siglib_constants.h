@@ -254,9 +254,22 @@ Update history:
 #    define SIGLIB_LN2 ((SLData_t)0.693147180559945309417232121458177)                         // ln(2)
 #    define SIGLIB_THREE_SIXTY_OVER_TWO_PI ((SLData_t)57.2957795130823208767981548141052)      // 360 / (2 * Pi)
 #    define SIGLIB_TWO_PI_OVER_THREE_SIXTY ((SLData_t)0.0174532925199432957692369076848861)    // (2 * Pi) / 360
-#    define SIGLIB_LOG10_OF_2 ((SLData_t)0.30102999566398119521373889472449)                   // log10(2.0)
-#    define SIGLIB_INV_LOG10_OF_2 ((SLData_t)3.32192809488736234787031942948939)               // 1 / log10(2.0)
-#    define SIGLIB_INV_LOG10_OF_4 ((SLData_t)1.6609640474436811739351597147447)                // 1 / log10(4.0)
+#    define SIGLIB_LOG10_OF_2 ((SLData_t)0.30102999566398119801746702250966)                   // log10(2.0)
+#    define SIGLIB_INV_LOG10_OF_2 ((SLData_t)3.32192809488736218170856773213018)               // 1 / log10(2.0)
+#    define SIGLIB_LOG10_OF_3 ((SLData_t)0.47712125471966243539512220195320)                   // log10(3.0)
+#    define SIGLIB_INV_LOG10_OF_3 ((SLData_t)2.09590327428938483222964350716211)               // 1 / log10(3.0)
+#    define SIGLIB_LOG10_OF_4 ((SLData_t)0.60205999132796239603493404501933)                   // log10(4.0)
+#    define SIGLIB_INV_LOG10_OF_4 ((SLData_t)1.66096404744368109085428386606509)               // 1 / log10(4.0)
+#    define SIGLIB_LOG10_OF_5 ((SLData_t)0.69897000433601885749368420874816)                   // log10(5.0)
+#    define SIGLIB_INV_LOG10_OF_5 ((SLData_t)1.43067655807339288998036863631569)               // 1 / log10(5.0)
+#    define SIGLIB_LOG10_OF_6 ((SLData_t)0.77815125038364363341258922446286)                   // log10(6.0)
+#    define SIGLIB_INV_LOG10_OF_6 ((SLData_t)1.28509720893846868250420811818913)               // 1 / log10(6.0)
+#    define SIGLIB_LOG10_OF_7 ((SLData_t)0.84509804001425681274639600815135)                   // log10(7.0)
+#    define SIGLIB_INV_LOG10_OF_7 ((SLData_t)1.18329466245493830633961351850303)               // 1 / log10(7.0)
+#    define SIGLIB_LOG10_OF_8 ((SLData_t)0.90308998699194353854124983627116)                   // log10(8.0)
+#    define SIGLIB_INV_LOG10_OF_8 ((SLData_t)1.10730936496245413458439088572050)               // 1 / log10(8.0)
+#    define SIGLIB_LOG10_OF_9 ((SLData_t)0.95424250943932487079024440390640)                   // log10(9.0)
+#    define SIGLIB_INV_LOG10_OF_9 ((SLData_t)1.04795163714469241611482175358105)               // 1 / log10(9.0)
 #    define SIGLIB_DEGREES_TO_RADIANS ((SLData_t)0.017453292519943295769236907684886)          // 2.pi / 360
 #    define SIGLIB_RADIANS_TO_DEGREES ((SLData_t)57.295779513082320876798154814105)            // 360 / 2.pi
 #    define SIGLIB_EXP_MINUS_ONE ((SLData_t)0.3678794411714423340242774429498240351677)        // e^-1
@@ -454,6 +467,11 @@ Update history:
 
 // Histogram constants
 #    define SIGLIB_HISTOGRAM_AUTOSCALE ((SLData_t)0.0)    // Auto scale the histogram or cumulative histogram
+
+// Linear volume to log volume constants
+#    define SIGLIB_LOG_VOLUME_MIN ((SLData_t)0.001)
+#    define SIGLIB_LOG_VOLUME_MAX SIGLIB_ONE
+#    define SIGLIB_LOG_VOLUME_BETA 6.9077553749    // log(maxVolume / minVolume)
 
 #  else    // SWIG is defined
 

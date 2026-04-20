@@ -220,7 +220,7 @@ void elliptic_filter_roots(filter_t* FilterSpecification)
   long ff;
 
 #if DEBUG_LOG_FILE
-  SUF_Debugfprintf("elliptic_filter_roots ()\n");
+  SUF_Debugfprintf("elliptic_filter_roots()\n");
 
   SUF_Debugfprintf("FilterSpecification->Order = %d\n", FilterSpecification->Order);
   SUF_Debugfprintf("FilterSpecification->BandSpec = %d\n", FilterSpecification->BandSpec);
@@ -292,7 +292,7 @@ void non_elliptic_filter_roots(filter_t* FilterSpecification)
   long ff;
 
 #if DEBUG_LOG_FILE
-  SUF_Debugfprintf("elliptic_filter_roots ()\n");
+  SUF_Debugfprintf("elliptic_filter_roots()\n");
   SUF_Debugfprintf("FilterSpecification->Order = %d\n", FilterSpecification->Order);
   SUF_Debugfprintf("FilterSpecification->BandSpec = %d\n", FilterSpecification->BandSpec);
   SUF_Debugfprintf("FilterSpecification->DesignAlgo = %d\n", FilterSpecification->DesignAlgo);

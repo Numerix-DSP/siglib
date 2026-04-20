@@ -1810,7 +1810,7 @@ void SIGLIB_FUNC_DECL SDA_ThresholdAndClamp(const SLData_t* SIGLIB_PTR_DECL pSrc
  * Return value:
  *  clamped value
  *
- * Description: If the data is >= the threshold set
+ * Description: If the sample is >= the threshold set
  *  it to the Clamping value.
  *
  ********************************************************/
@@ -1850,7 +1850,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_Clamp(const SLData_t src, const SLData_t Threshold
  * Return value:
  *  void
  *
- * Description: If the data is >= the threshold set
+ * Description: If the sample is >= the threshold set
  *  it to the Clamping value.
  *
  ********************************************************/
@@ -1889,6 +1889,76 @@ void SIGLIB_FUNC_DECL SDA_Clamp(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* 
     }
   }
 }    // End of SDA_Clamp()
+
+/********************************************************
+ * Function: SDS_Limit
+ *
+ * Parameters:
+ *  const SLData_t src                  - Input sample
+ *  SLData_t minValue
+ *  SLData_t maxValue
+ *
+ * Return value:
+ *  Limited value
+ *
+ * Description: If the sample is < the min value then set to
+ * the min value. If sample is > the max value then set to
+ * the max value.
+ *
+ ********************************************************/
+
+SLData_t SIGLIB_FUNC_DECL SDS_Limit(const SLData_t src, const SLData_t minValue, const SLData_t maxValue)
+{
+  if (src < minValue) {
+    return (minValue);
+  }
+
+  else if (src > maxValue) {
+    return (maxValue);
+  }
+
+  return (src);
+}    // End of SDS_Limit()
+
+/********************************************************
+ * Function: SDA_Limit
+ *
+ * Parameters:
+ *  const SLData_t * SIGLIB_PTR_DECL pSrc   - Input Data array pointer
+ *  SLData_t * SIGLIB_PTR_DECL pDst     - Output Data array pointer
+ *  SLData_t minValue
+ *  SLData_t maxValue
+ *threshold SLArrayIndex_t arrayLength          - Array length
+ *
+ * Return value:
+ *  void
+ *
+ * Description: If the sample is < the min value then set to
+ * the min value. If sample is > the max value then set to
+ * the max value.
+ *
+ ********************************************************/
+
+void SIGLIB_FUNC_DECL SDA_Limit(const SLData_t* SIGLIB_PTR_DECL pSrc, SLData_t* SIGLIB_PTR_DECL pDst, const SLData_t minValue,
+                                const SLData_t maxValue, const SLArrayIndex_t arrayLength)
+{
+#if (SIGLIB_ARRAYS_ALIGNED)
+#  ifdef __TMS320C6X__             // Defined by TI compiler
+  _nassert((int)pSrc % 8 == 0);    // Align arrays on 64 bit double word boundary for LDDW
+  _nassert((int)pDst % 8 == 0);
+#  endif
+#endif
+
+  for (SLArrayIndex_t i = 0; i < arrayLength; i++) {
+    SLData_t Tmp = *pSrc++;
+    if (Tmp < minValue) {
+      *pDst++ = minValue;
+    } else if (Tmp > maxValue) {
+      *pDst++ = maxValue;    // If i/p <= threshold then o/p = i/p
+    }
+    *pDst++ = Tmp;
+  }
+}    // End of SDA_Limit()
 
 /********************************************************
  * Function: SDA_TestOverThreshold

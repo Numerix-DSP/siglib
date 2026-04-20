@@ -511,47 +511,47 @@ void FIRAlgsFilterDesignWindow::OnGetFilterSpec(wxCommandEvent& WXUNUSED(event))
   GlobalGraphDisplayWindow->OnGraphTypeChanged(*DummyCommand);
   delete (DummyCommand);
 
-} /* End of FIRAlgsFilterDesignWindow::OnGetFilterSpec () */
+}    // End of FIRAlgsFilterDesignWindow::OnGetFilterSpec
 
 void FIRAlgsFilterDesignWindow::SetProjectNameString(wxString String)
 {
   ProjectNameString = String;
-}
+}    // End of FIRAlgsFilterDesignWindow::SetProjectNameString
 
 void FIRAlgsFilterDesignWindow::SetSampleRate(double sampleRate)
 {
   SampleRate = sampleRate;
-}
+}    // End of FIRAlgsFilterDesignWindow::SetSampleRate
 
 void FIRAlgsFilterDesignWindow::SetGainArray(SLData_t* gain)
 {
   pGain = gain;
-}
+}    // End of FIRAlgsFilterDesignWindow::SetGainArray
 
 void FIRAlgsFilterDesignWindow::SetPhaseArray(SLData_t* phase)
 {
   pPhase = phase;
-}
+}    // End of FIRAlgsFilterDesignWindow::SetPhaseArray
 
 void FIRAlgsFilterDesignWindow::SetGroupDelayArray(SLData_t* groupDelay)
 {
   pGroupDelay = groupDelay;
-}
+}    // End of FIRAlgsFilterDesignWindow::SetGroupDelayArray
 
 void FIRAlgsFilterDesignWindow::SetImpulseResponseArray(SLData_t* impulseResponse)
 {
   pImpulseResponse = impulseResponse;
-}
+}    // End of FIRAlgsFilterDesignWindow::SetImpulseResponseArray
 
 void FIRAlgsFilterDesignWindow::SetStepResponseArray(SLData_t* stepResponse)
 {
   pStepResponse = stepResponse;
-}
+}    // End of FIRAlgsFilterDesignWindow::SetStepResponseArray
 
 void FIRAlgsFilterDesignWindow::SetFilterInfoStruct(filter_info_t* filterInfo)
 {
   pFilterInfo = filterInfo;
-}
+}    // End of FIRAlgsFilterDesignWindow::SetFilterInfoStruct
 
 BEGIN_EVENT_TABLE(FIRAlgsFilterDesignWindow, wxPanel)
 EVT_COMBOBOX(FIRALGS_FILTER_TYPE_CHANGED, FIRAlgsFilterDesignWindow::OnFilterTypeComboBoxChanged)

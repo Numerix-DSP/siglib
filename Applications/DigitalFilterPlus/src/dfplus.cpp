@@ -52,7 +52,7 @@ int global_NegateIIRAlphaSign;    // Global NegateIIRAlphaSign for biquads
 // #endif
 
 /********************************************************
- * Function : df_group_delay ()
+ * Function : df_group_delay
  *
  * Parameters  :
  *   SLData_t FreqStep
@@ -113,10 +113,10 @@ SLData_t df_group_delay(SLData_t FreqStep, SLArrayIndex_t FirstCalc, SLData_t Th
   }
 
   return (GPDel);
-} /* End of df_group_delay ()*/
+}    // End of df_group_delay
 
 /********************************************************
- * Function : FloatToQFormatInteger ()
+ * Function : FloatToQFormatInteger
  *
  * Parameters  :
  *   double x,
@@ -512,7 +512,7 @@ mainFrame::mainFrame(wxString Title, wxPoint Position, wxSize Size)
 
   // Open up project dialog on first opening
   // Can not just show the dialog because we
-  // need to run OnGetFilterSpec ()
+  // need to run OnGetFilterSpec()
   // Option one - does not have main window in background
   // If you do this and just hit return straight after dialog, app crashes :-(
   //  wxCommandEvent DummyEvent (wxEVT_COMMAND_MENU_SELECTED,
@@ -559,7 +559,7 @@ mainFrame::~mainFrame()
 }
 
 /********************************************************
- * Function : mainFrame::FindExecutablePath ()
+ * Function : mainFrame::FindExecutablePath
  *
  * Parameters :
  *

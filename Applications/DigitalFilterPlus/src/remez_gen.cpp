@@ -356,7 +356,7 @@ long remez(long FilterLength, long jtype, long nbands, const double* edge, const
 
   return ret_val;
 
-} /* End of remez () */
+}    // End of remez()
 
 /* ----------------------------------------------------------------------- */
 /* FUNCTION: RemezMagnitudeResponse */
@@ -378,7 +378,7 @@ static double RemezMagnitudeResponse(double freq, double fx, double wtx, long jt
     return fx;
   else
     return fx * freq;
-} /* End of RemezMagnitudeResponse () */
+}    // End of RemezMagnitudeResponse()
 
 /* ----------------------------------------------------------------------- */
 /* FUNCTION: RemezWeightFunction */
@@ -399,7 +399,7 @@ static double RemezWeightFunction(double freq, double fx, double wtx, long jtype
     return wtx / freq;
   else
     return wtx;
-} /* End of RemezWeightFunction () */
+}    // End of RemezWeightFunction()
 
 /* ----------------------------------------------------------------------- */
 /* SUBROUTINE: RemezImplementation */
@@ -796,7 +796,7 @@ L400:
 #endif
 
   return ret_val;
-} /* End of RemezImplementation () */
+}    // End of RemezImplementation()
 
 /* ----------------------------------------------------------------------- */
 /* FUNCTION: RemezLagrangeInterpolation */
@@ -835,7 +835,7 @@ static double RemezLagrangeInterpolation(long k, long n, long m, double* x)
 
   return 1.0 / cf;
 
-} /* End of RemezLagrangeInterpolation () */
+}    // End of RemezLagrangeInterpolation()
 
 /* ----------------------------------------------------------------------- */
 /* FUNCTION: RemezFreqResponse */
@@ -873,4 +873,4 @@ static double RemezFreqResponse(long k, long n, double* ad, double* x, double* y
 #endif
 
   return p / d;
-} /* End of RemezFreqResponse () */
+}    // End of RemezFreqResponse()

@@ -72,8 +72,8 @@ GraphDisplay::GraphDisplay(wxWindow* parent, wxWindowID id)
   //  wxWindow * GraphWindow = new wxWindow (this, -1, wxDefaultPosition,
   //  wxDefaultSize); HSizer1->Add (GraphWindow, 0, wxALIGN_CENTER | wxALL, 0);
 
-  //  wxSize Size = MagnitudeGraph->GetSize (); //Get the graph Size and set the
-  //  window size + 20 Size.SetWidth (Size.GetWidth () + 20);
+  //  wxSize Size = MagnitudeGraph->GetSize(); //Get the graph Size and set the
+  //  window size + 20 Size.SetWidth (Size.GetWidth() + 20);
   //  GraphWindow->SetSize (Size);
 
   wxPanel* GraphPanel1 = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(0, GRAPH_HEIGHT + 80));

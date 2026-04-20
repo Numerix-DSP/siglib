@@ -443,130 +443,132 @@ void IIRAlgsFilterDesignWindow::OnGetFilterSpec(wxCommandEvent& WXUNUSED(event))
     free(pFDPFFTCoeffs);
     free(pIIRStateArray);
 
-  } /* End of calculate filter performance */
+    calculate filter performance* /
 
-  for (i = 0; i < NumberOfBiquads; i++) {    // Generate array for pole zero plot
-    pPolesAndZeros[(4 * i) + 0] = SCV_PolarToRectangular(SCV_Polar(PoleMagnitude, SIGLIB_TWO_PI * (CentreFrequency / SampleRate)));
-    pPolesAndZeros[(4 * i) + 1] = SCV_PolarToRectangular(SCV_Polar(SIGLIB_ONE, SIGLIB_TWO_PI * (CentreFrequency / SampleRate)));
-    pPolesAndZeros[(4 * i) + 2] = SCV_Conjugate(SCV_PolarToRectangular(SCV_Polar(PoleMagnitude, SIGLIB_TWO_PI * (CentreFrequency / SampleRate))));
-    pPolesAndZeros[(4 * i) + 3] = SCV_Conjugate(SCV_PolarToRectangular(SCV_Polar(SIGLIB_ONE, SIGLIB_TWO_PI * (CentreFrequency / SampleRate))));
-  }
+        for (i = 0; i < NumberOfBiquads; i++)
+    {    // Generate array for pole zero plot
+      pPolesAndZeros[(4 * i) + 0] = SCV_PolarToRectangular(SCV_Polar(PoleMagnitude, SIGLIB_TWO_PI * (CentreFrequency / SampleRate)));
+      pPolesAndZeros[(4 * i) + 1] = SCV_PolarToRectangular(SCV_Polar(SIGLIB_ONE, SIGLIB_TWO_PI * (CentreFrequency / SampleRate)));
+      pPolesAndZeros[(4 * i) + 2] = SCV_Conjugate(SCV_PolarToRectangular(SCV_Polar(PoleMagnitude, SIGLIB_TWO_PI * (CentreFrequency / SampleRate))));
+      pPolesAndZeros[(4 * i) + 3] = SCV_Conjugate(SCV_PolarToRectangular(SCV_Polar(SIGLIB_ONE, SIGLIB_TWO_PI * (CentreFrequency / SampleRate))));
+    }
 
-  strcpy(FileNameString, ProjectNameString);
-  strcat(FileNameString, ".dfz");
+    strcpy(FileNameString, ProjectNameString);
+    strcat(FileNameString, ".dfz");
 
-  if ((pFile = fopen(FileNameString, "w")) == NULL) { /* Open o/p file */
-    wxMessageBox("Could not open file to write filter coefficients", "OnGetFilterSpec", wxOK | wxICON_EXCLAMATION, NULL);
-    return;
-  }
+    if ((pFile = fopen(FileNameString, "w")) == NULL) { /* Open o/p file */
+      wxMessageBox("Could not open file to write filter coefficients", "OnGetFilterSpec", wxOK | wxICON_EXCLAMATION, NULL);
+      return;
+    }
 
-  fprintf(pFile, DFPLUS_COPYRIGHT_NOTICE);
-  fprintf(pFile, "File : %s\n\n", FileNameString);
-  fprintf(pFile, "IIR filter z-plane coefficients designed with the pole-zero "
-                 "placement Method\n\n");
+    fprintf(pFile, DFPLUS_COPYRIGHT_NOTICE);
+    fprintf(pFile, "File : %s\n\n", FileNameString);
+    fprintf(pFile, "IIR filter z-plane coefficients designed with the pole-zero "
+                   "placement Method\n\n");
 
-  fprintf(pFile, "Polar coordinates of Poles and Zeros for IIR filter with %d biquads\n\n", (short)NumberOfBiquads);
-  fprintf(pFile, "Coefficient order for each pole / zero :\n\tPole Magnitude, Pole "
-                 "Angle (degrees)\n\tZero Magnitude, Zero Angle (degrees).\n\n");
+    fprintf(pFile, "Polar coordinates of Poles and Zeros for IIR filter with %d biquads\n\n", (short)NumberOfBiquads);
+    fprintf(pFile, "Coefficient order for each pole / zero :\n\tPole Magnitude, Pole "
+                   "Angle (degrees)\n\tZero Magnitude, Zero Angle (degrees).\n\n");
 
-  fprintf(pFile, "const SLData_t zDomainCoefficientArray [] =\n{\n");
+    fprintf(pFile, "const SLData_t zDomainCoefficientArray [] =\n{\n");
 
-  /* Write IIR poles and zeros to file */
-  for (i = 0; i < (short)NumberOfBiquads; i++) {
-    fprintf(pFile, "\t%1.20le, %1.20le,\n", PoleMagnitude, 360.0 * (CentreFrequency / SampleRate));
-    fprintf(pFile, "\t%1.20le, %1.20le,\n\n", SIGLIB_ONE, 360.0 * (CentreFrequency / SampleRate));
-    fprintf(pFile, "\t%1.20le, %1.20le,\n", PoleMagnitude, (360.0 - (360.0 * (CentreFrequency / SampleRate))));
-    fprintf(pFile, "\t%1.20le, %1.20le", SIGLIB_ONE, (360.0 - (360.0 * (CentreFrequency / SampleRate))));
-    if (i < ((short)NumberOfBiquads - 1))
-      fprintf(pFile, ",\n\n");
-  }
-  fprintf(pFile, "\n};\n\n");
+    /* Write IIR poles and zeros to file */
+    for (i = 0; i < (short)NumberOfBiquads; i++) {
+      fprintf(pFile, "\t%1.20le, %1.20le,\n", PoleMagnitude, 360.0 * (CentreFrequency / SampleRate));
+      fprintf(pFile, "\t%1.20le, %1.20le,\n\n", SIGLIB_ONE, 360.0 * (CentreFrequency / SampleRate));
+      fprintf(pFile, "\t%1.20le, %1.20le,\n", PoleMagnitude, (360.0 - (360.0 * (CentreFrequency / SampleRate))));
+      fprintf(pFile, "\t%1.20le, %1.20le", SIGLIB_ONE, (360.0 - (360.0 * (CentreFrequency / SampleRate))));
+      if (i < ((short)NumberOfBiquads - 1))
+        fprintf(pFile, ",\n\n");
+    }
+    fprintf(pFile, "\n};\n\n");
 
-  fprintf(pFile,
-          "Rectangular coordinates of Poles and Zeros for IIR filter with %d "
-          "biquads\n\n",
-          (short)NumberOfBiquads);
-  fprintf(pFile, "Coefficient order for each pole / zero :\n\tPole Real, Pole "
-                 "Imaginary\n\tZero Real, Zero Imaginary.\n\n");
+    fprintf(pFile,
+            "Rectangular coordinates of Poles and Zeros for IIR filter with %d "
+            "biquads\n\n",
+            (short)NumberOfBiquads);
+    fprintf(pFile, "Coefficient order for each pole / zero :\n\tPole Real, Pole "
+                   "Imaginary\n\tZero Real, Zero Imaginary.\n\n");
 
-  fprintf(pFile, "const SLData_t zDomainRectangularCoefficientArray [] =\n{\n");
+    fprintf(pFile, "const SLData_t zDomainRectangularCoefficientArray [] =\n{\n");
 
-  /* Write IIR poles and zeros to file */
-  for (i = 0; i < (short)NumberOfBiquads; i++) {
-    TmpRectangular = SCV_PolarToRectangular(SCV_Polar(PoleMagnitude, SIGLIB_TWO_PI * (CentreFrequency / SampleRate)));
-    fprintf(pFile, "\t%1.20le, %1.20le,\n", TmpRectangular.real, TmpRectangular.imag);
-    TmpRectangular = SCV_PolarToRectangular(SCV_Polar(SIGLIB_ONE, SIGLIB_TWO_PI * (CentreFrequency / SampleRate)));
-    fprintf(pFile, "\t%1.20le, %1.20le,\n\n", TmpRectangular.real, TmpRectangular.imag);
+    /* Write IIR poles and zeros to file */
+    for (i = 0; i < (short)NumberOfBiquads; i++) {
+      TmpRectangular = SCV_PolarToRectangular(SCV_Polar(PoleMagnitude, SIGLIB_TWO_PI * (CentreFrequency / SampleRate)));
+      fprintf(pFile, "\t%1.20le, %1.20le,\n", TmpRectangular.real, TmpRectangular.imag);
+      TmpRectangular = SCV_PolarToRectangular(SCV_Polar(SIGLIB_ONE, SIGLIB_TWO_PI * (CentreFrequency / SampleRate)));
+      fprintf(pFile, "\t%1.20le, %1.20le,\n\n", TmpRectangular.real, TmpRectangular.imag);
 
-    TmpRectangular = SCV_Conjugate(SCV_PolarToRectangular(SCV_Polar(PoleMagnitude, SIGLIB_TWO_PI * (CentreFrequency / SampleRate))));
-    fprintf(pFile, "\t%1.20le, %1.20le,\n", TmpRectangular.real, TmpRectangular.imag);
-    TmpRectangular = SCV_Conjugate(SCV_PolarToRectangular(SCV_Polar(SIGLIB_ONE, SIGLIB_TWO_PI * (CentreFrequency / SampleRate))));
-    fprintf(pFile, "\t%1.20le, %1.20le", TmpRectangular.real, TmpRectangular.imag);
+      TmpRectangular = SCV_Conjugate(SCV_PolarToRectangular(SCV_Polar(PoleMagnitude, SIGLIB_TWO_PI * (CentreFrequency / SampleRate))));
+      fprintf(pFile, "\t%1.20le, %1.20le,\n", TmpRectangular.real, TmpRectangular.imag);
+      TmpRectangular = SCV_Conjugate(SCV_PolarToRectangular(SCV_Polar(SIGLIB_ONE, SIGLIB_TWO_PI * (CentreFrequency / SampleRate))));
+      fprintf(pFile, "\t%1.20le, %1.20le", TmpRectangular.real, TmpRectangular.imag);
 
-    if (i < ((short)NumberOfBiquads - 1))
-      fprintf(pFile, ",\n\n");
-  }
-  fprintf(pFile, "\n};\n\n");
+      if (i < ((short)NumberOfBiquads - 1))
+        fprintf(pFile, ",\n\n");
+    }
+    fprintf(pFile, "\n};\n\n");
 
-  (void)fclose(pFile);
+    (void)fclose(pFile);
 
-  pFilterInfo->IIRFilterOrder = (2 * NumberOfBiquads);
+    pFilterInfo->IIRFilterOrder = (2 * NumberOfBiquads);
 
-  SLData_t IntegralSum = SIGLIB_ZERO;
-  SDA_Integrate(pImpulseResponse, pStepResponse, SIGLIB_MAX, SIGLIB_ONE, &IntegralSum, GRAPH_WIDTH);    // Calculate step response
+    SLData_t IntegralSum = SIGLIB_ZERO;
+    SDA_Integrate(pImpulseResponse, pStepResponse, SIGLIB_MAX, SIGLIB_ONE, &IntegralSum, GRAPH_WIDTH);    // Calculate step response
 
-  wxCommandEvent* DummyCommand = new wxCommandEvent();    // Post event to say that coeffs have been updated
-  GlobalGraphDisplayWindow->OnGraphTypeChanged(*DummyCommand);
-  delete (DummyCommand);
+    wxCommandEvent* DummyCommand = new wxCommandEvent();    // Post event to say that coeffs have been updated
+    GlobalGraphDisplayWindow->OnGraphTypeChanged(*DummyCommand);
+    delete (DummyCommand);
 
-} /* End of IIRAlgsFilterDesignWindow::OnGetFilterSpec () */
+    IIRAlgsFilterDesignWindow::OnGetFilterSpec()
 
-void IIRAlgsFilterDesignWindow::SetProjectNameString(wxString String)
-{
-  ProjectNameString = String;
-}
+        void
+        IIRAlgsFilterDesignWindow::SetProjectNameString(wxString String)
+    {
+      ProjectNameString = String;
+    }
 
-void IIRAlgsFilterDesignWindow::SetSampleRate(double sampleRate)
-{
-  SampleRate = sampleRate;
-}
+    void IIRAlgsFilterDesignWindow::SetSampleRate(double sampleRate)
+    {
+      SampleRate = sampleRate;
+    }
 
-void IIRAlgsFilterDesignWindow::SetGainArray(SLData_t* gain)
-{
-  pGain = gain;
-}
+    void IIRAlgsFilterDesignWindow::SetGainArray(SLData_t * gain)
+    {
+      pGain = gain;
+    }
 
-void IIRAlgsFilterDesignWindow::SetPhaseArray(SLData_t* phase)
-{
-  pPhase = phase;
-}
+    void IIRAlgsFilterDesignWindow::SetPhaseArray(SLData_t * phase)
+    {
+      pPhase = phase;
+    }
 
-void IIRAlgsFilterDesignWindow::SetGroupDelayArray(SLData_t* groupDelay)
-{
-  pGroupDelay = groupDelay;
-}
+    void IIRAlgsFilterDesignWindow::SetGroupDelayArray(SLData_t * groupDelay)
+    {
+      pGroupDelay = groupDelay;
+    }
 
-void IIRAlgsFilterDesignWindow::SetImpulseResponseArray(SLData_t* impulseResponse)
-{
-  pImpulseResponse = impulseResponse;
-}
+    void IIRAlgsFilterDesignWindow::SetImpulseResponseArray(SLData_t * impulseResponse)
+    {
+      pImpulseResponse = impulseResponse;
+    }
 
-void IIRAlgsFilterDesignWindow::SetStepResponseArray(SLData_t* stepResponse)
-{
-  pStepResponse = stepResponse;
-}
+    void IIRAlgsFilterDesignWindow::SetStepResponseArray(SLData_t * stepResponse)
+    {
+      pStepResponse = stepResponse;
+    }
 
-void IIRAlgsFilterDesignWindow::SetPoleZeroPlotArray(SLComplexRect_s* PoleZeroArray)
-{
-  pPolesAndZeros = PoleZeroArray;
-}
+    void IIRAlgsFilterDesignWindow::SetPoleZeroPlotArray(SLComplexRect_s * PoleZeroArray)
+    {
+      pPolesAndZeros = PoleZeroArray;
+    }
 
-void IIRAlgsFilterDesignWindow::SetFilterInfoStruct(filter_info_t* filterInfo)
-{
-  pFilterInfo = filterInfo;
-}
+    void IIRAlgsFilterDesignWindow::SetFilterInfoStruct(filter_info_t * filterInfo)
+    {
+      pFilterInfo = filterInfo;
+    }
 
-BEGIN_EVENT_TABLE(IIRAlgsFilterDesignWindow, wxPanel)
-EVT_COMBOBOX(IIRALGS_FILTER_TYPE_CHANGED, IIRAlgsFilterDesignWindow::OnFilterTypeComboBoxChanged)
-EVT_BUTTON(IIRALGS_GET_FILTER_SPEC, IIRAlgsFilterDesignWindow::OnGetFilterSpec)
-END_EVENT_TABLE()
+    BEGIN_EVENT_TABLE(IIRAlgsFilterDesignWindow, wxPanel)
+    EVT_COMBOBOX(IIRALGS_FILTER_TYPE_CHANGED, IIRAlgsFilterDesignWindow::OnFilterTypeComboBoxChanged)
+    EVT_BUTTON(IIRALGS_GET_FILTER_SPEC, IIRAlgsFilterDesignWindow::OnGetFilterSpec)
+    END_EVENT_TABLE()

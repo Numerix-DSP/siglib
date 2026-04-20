@@ -1,4 +1,3 @@
-
 /**************************************************************************
 File Name               : FILTER.C      | Author        : JOHN EDWARDS
 Siglib Library Version  : 10.50         |

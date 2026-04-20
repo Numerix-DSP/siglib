@@ -1244,7 +1244,7 @@ void IIRTraditionalFilterDesignWindow::OnGetFilterSpec(wxCommandEvent& WXUNUSED(
     free(pZPlanePoles);
     free(pZPlaneZeros);
 
-  } /* End of calculate filter performance */
+  }    // End of calculate filter performance()
 
 #if DEBUG_LOG_FILE
   SUF_Debugfprintf("OnFilterSpecChanged : Analysis complete\n");
@@ -1366,7 +1366,7 @@ void IIRTraditionalFilterDesignWindow::OnGetFilterSpec(wxCommandEvent& WXUNUSED(
                    "Completed all processing\n\n");
 #endif
 
-} /* End of IIRTraditionalFilterDesignWindow::OnGetFilterSpec () */
+}    // End of IIRTraditionalFilterDesignWindow::OnGetFilterSpec()
 
 void IIRTraditionalFilterDesignWindow::SetProjectNameString(wxString String)
 {

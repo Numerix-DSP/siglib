@@ -307,11 +307,11 @@ afx_msg void CSLTestWindow::OnFFTSignal()
   }
 
   SDA_Copy(SignalBufferPtr, FreqRBufferPtr, (int)Signal.GetSize());
-  SDA_Rfft (FreqRBufferPtr, FreqIBufferPtr, CoeffBufferPtr, SIGLIB_NULL_ARRAY_INDEX_PTR, (int) Signal.GetSize (), ((SLArrayIndex_t) (SDS_Log2 (FFT_LENGTH) + SIGLIB_MIN_THRESHOLD)) // Log2 FFT length, and avoid quantization issues);            /* Perform FFT */
-            SDA_Magnitude (FreqRBufferPtr, FreqIBufferPtr, SignalBufferPtr, Signal.GetSize ()); /* Calc real power fm complex */
+  SDA_Rfft (FreqRBufferPtr, FreqIBufferPtr, CoeffBufferPtr, SIGLIB_NULL_ARRAY_INDEX_PTR, (int) Signal.GetSize(), ((SLArrayIndex_t) (SDS_Log2 (FFT_LENGTH) + SIGLIB_MIN_THRESHOLD)) // Log2 FFT length, and avoid quantization issues);            /* Perform FFT */
+            SDA_Magnitude (FreqRBufferPtr, FreqIBufferPtr, SignalBufferPtr, Signal.GetSize()); /* Calc real power fm complex */
             ::LocalUnlock (HSignalBuffer);                          // Unlock the sample arrays
             ::LocalUnlock (HFreqRBuffer);::LocalUnlock (HFreqIBuffer);::LocalUnlock (HCoeffBuffer); WinGraph.SendMessage (WM_PAINT);  // Only update graph, not surround
-            sprintf (StatusMessage, "Buffer Size : %d samples, Max : %lf", Signal.GetSize (), Signal.GetMax ());
+            sprintf (StatusMessage, "Buffer Size : %d samples, Max : %lf", Signal.GetSize(), Signal.GetMax());
             WinStatus.SetMessage (StatusMessage);
 }
 

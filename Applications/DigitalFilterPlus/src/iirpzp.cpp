@@ -507,7 +507,7 @@ void IIRPZPFilterDesignWindow::OnGetFilterSpec(wxCommandEvent& WXUNUSED(event))
     free(pFDPFFTCoeffs);
     free(pIIRStateArray);
 
-  } /* End of calculate filter performance */
+  }    // End of calculate filter performance
 
   for (i = 0; i < NumberOfBiquads; i++)    // Generate array for pole zero plot
   {
@@ -585,7 +585,7 @@ void IIRPZPFilterDesignWindow::OnGetFilterSpec(wxCommandEvent& WXUNUSED(event))
   GlobalGraphDisplayWindow->OnGraphTypeChanged(*DummyCommand);
   delete (DummyCommand);
 
-} /* End of IIRPZPFilterDesignWindow::OnGetFilterSpec () */
+}    // End of IIRPZPFilterDesignWindow::OnGetFilterSpec()
 
 void IIRPZPFilterDesignWindow::SetProjectNameString(wxString String)
 {

@@ -32,7 +32,7 @@
 #include <wx/textfile.h>
 
 /********************************************************
- * Function : IniFile::IniFile ()
+ * Function : IniFile::IniFile
  *
  * Parameters :
  *
@@ -53,7 +53,7 @@ IniFile::IniFile(wxString FileNameString)
 }
 
 /********************************************************
- * Function : IniFile::~IniFile ()
+ * Function : IniFile::~IniFile
  *
  * Parameters :
  *
@@ -67,7 +67,7 @@ IniFile::IniFile(wxString FileNameString)
 IniFile::~IniFile() {}
 
 /********************************************************
- * Function : IniFile::ReadIniStringFromFile ()
+ * Function : IniFile::ReadIniStringFromFile
  *
  * Parameters :
  *
@@ -150,7 +150,7 @@ bool IniFile::ReadIniStringFromFile(wxString Key, wxString* String)
 }
 
 /********************************************************
- * Function : IniFile::WriteIniStringToFile ()
+ * Function : IniFile::WriteIniStringToFile
  *
  * Parameters :
  *

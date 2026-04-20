@@ -19,7 +19,7 @@
 #include "evenspin.h"
 
 /********************************************************
- * Function : EvenSpinCtrl::EvenSpinCtrl ()
+ * Function : EvenSpinCtrl::EvenSpinCtrl
  *
  * Parameters :
  *
@@ -42,7 +42,7 @@ EvenSpinCtrl::EvenSpinCtrl(wxWindow* parent, wxWindowID id, const wxString& valu
 }
 
 /********************************************************
- * Function : EvenSpinCtrl::OnSpinClicked ()
+ * Function : EvenSpinCtrl::OnSpinClicked
  *
  * Parameters :
  *
@@ -76,7 +76,7 @@ void EvenSpinCtrl::OnSpinClicked(wxSpinEvent& WXUNUSED(event))
 
 #if COMMENTsdfgdfsgd
 /********************************************************
- * Function : EvenSpinCtrl::OnValueChanged ()
+ * Function : EvenSpinCtrl::OnValueChanged
  *
  * Parameters :
  *

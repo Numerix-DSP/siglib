@@ -9,7 +9,9 @@ RELEASE DATE:xx/xx/xxxx
 _________________________
 
 Additional Functionality:
-  None.
+  SDS_Limit and SDA_Limit
+  SDS_VolumeLinToLog, SDS_VolumeLinToLogSqApprox, SDS_VolumeLinToLogCuApprox, SDS_VolumeLinToLogQuApprox, SDS_VolumeLinToLogPowApprox
+  SDS_VolumeLogToLin, SDS_VolumeLogToLinSqApprox, SDS_VolumeLogToLinCuApprox, SDS_VolumeLogToLinQuApprox, SDS_VolumeLogToLinPowApprox
 
 Operational Changes:
   Visual Studio support and testing updated to Visual Studio Community 2026
@@ -591,6 +593,7 @@ Additional Processor / Compiler Support:
 Additional Functionality:
   SDA_Shuffle, SMX_ShuffleColumns, SMX_ShuffleRows
   SDA_LinearMicrophoneArrayBeamPatternLinear, SDA_MicrophoneArrayBeamPatternLinear
+  SDS_TemperatureToSpeedOfSoundInAir
   SDA_Multiplex, SDA_Demultiplex
   SDA_Mux6, SDA_Demux6, SDA_Mux7, SDA_Demux7, SDA_Mux8, SDA_Demux8
   SDA_FirstMinVertex, SDA_FirstMinVertexPos, SDA_FirstMaxVertex, SDA_FirstMaxVertexPos

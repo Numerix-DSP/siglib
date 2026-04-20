@@ -91,7 +91,7 @@ int main(void)
   SLData_t        covMatrixSrc[COVARIANCE_NUMBER_OF_SOURCE_DATASETS][COVARIANCE_MATRIX_SOURCE_DATASET_LENGTHS];
   for (SLArrayIndex_t i = 0; i < COVARIANCE_NUMBER_OF_SOURCE_DATASETS; i++) {
     for (SLArrayIndex_t j = 0; j < COVARIANCE_MATRIX_SOURCE_DATASET_LENGTHS; j++) {
-      covMatrixSrc[i][j] = 1 + 0.1 * rand () / (RAND_MAX + 1.0);
+      covMatrixSrc[i][j] = 1 + 0.1 * rand / (RAND_MAX + 1.0);
     }
   }
 #endif

@@ -2,7 +2,7 @@
 
 /**************************************************************************
 File Name               : siglib.h      | Author        : JOHN EDWARDS
-Siglib Library Version  : 10.55         |
+Siglib Library Version  : 10.60         |
 ----------------------------------------+----------------------------------
 Compiler  : Independent                 | Start Date    : 13/09/1992
 Options   :                             | Latest Update : 06/06/2026
@@ -1815,6 +1815,48 @@ void _stdcall SDA_LinearMicrophoneArrayBeamPatternLinear(long,                  
 
 double _stdcall SDS_TemperatureToSpeedOfSoundInAir(double);    // Temperature
 
+double _stdcall SDS_VolumeLinToLog(double,     // Source value
+                                   double,     // The inverse of the peak value of the source input
+                                   double);    // The peak value of the output value
+
+double _stdcall SDS_VolumeLinToLogSqApprox(double,     // Source value
+                                           double,     // The inverse of the peak value of the source input
+                                           double);    // The peak value of the output value
+
+double _stdcall SDS_VolumeLinToLogCuApprox(double,     // Source value
+                                           double,     // The inverse of the peak value of the source input
+                                           double);    // The peak value of the output value
+
+double _stdcall SDS_VolumeLinToLogQuApprox(double,     // Source value
+                                           double,     // The inverse of the peak value of the source input
+                                           double);    // The peak value of the output value
+
+double _stdcall SDS_VolumeLinToLogPowApprox(double,     // Source value
+                                            double,     // The inverse of the peak value of the source input
+                                            double,     // The peak value of the output value
+                                            double);    // Power to raise the input value by
+
+double _stdcall SDS_VolumeLogToLin(double,     // Source value
+                                   double,     // The inverse of the peak value of the source input
+                                   double);    // The peak value of the output value
+
+double _stdcall SDS_VolumeLogToLinSqApprox(double,     // Source value
+                                           double,     // The inverse of the peak value of the source input
+                                           double);    // The peak value of the output value
+
+double _stdcall SDS_VolumeLogToLinCuApprox(double,     // Source value
+                                           double,     // The inverse of the peak value of the source input
+                                           double);    // The peak value of the output value
+
+double _stdcall SDS_VolumeLogToLinQuApprox(double,     // Source value
+                                           double,     // The inverse of the peak value of the source input
+                                           double);    // The peak value of the output value
+
+double _stdcall SDS_VolumeLogToLinPowApprox(double,     // Source value
+                                            double,     // The inverse of the peak value of the source input
+                                            double,     // The peak value of the output value
+                                            double);    // Power to raise the input value by
+
 // Adaptive filtering functions - adaptive.c
 
 void _stdcall SIF_Lms(double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to LMS filter state array
@@ -3017,7 +3059,7 @@ long _stdcall SDS_CostasQamDemodulate(double,                            // Sour
                                       long*,                             // Pointer to ELG synchronization delay index
                                       long);                             // ELG output synchronization delay length
 
-#line 3432 "siglib.h"
+#line 3474 "siglib.h"
 // compiler
 long _stdcall SDS_CostasQamDemodulateDebug(double,                            // Source data sample
                                            double*,                           // Pointer to real destination symbol point
@@ -3153,7 +3195,7 @@ long _stdcall SDA_CostasQamDemodulateDebug(double* SIGLIB_INPUT_PTR_DECL,     //
                                            double*,                           // Pointer to debug real filter output
                                            double*,                           // Pointer to debug imaginary filter output
                                            double*);                          // Pointer to debug ELG trigger output
-#line 3568 "siglib.h"
+#line 3610 "siglib.h"
 
 void _stdcall SIF_QpskModulate(double* SIGLIB_OUTPUT_PTR_DECL,    // Carrier table pointer
                                double,                            // Carrier phase increment per sample (radians / 2Ï€)
@@ -4365,6 +4407,16 @@ void _stdcall SDA_Clamp(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source 
                         double,                            // Threshold
                         double,                            // Clamp value
                         int SLThresholdMode_t,             // Threshold type
+                        long);                             // Array length
+
+double _stdcall SDS_Limit(double,     // Source value
+                          double,     // Minimum value
+                          double);    // Maximum value
+
+void _stdcall SDA_Limit(double* SIGLIB_INPUT_PTR_DECL,     // Pointer to source array
+                        double* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to destination array
+                        double,                            // Minimum value
+                        double,                            // Maximum value
                         long);                             // Array length
 
 long _stdcall SDA_TestOverThreshold(double* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
@@ -6279,4 +6331,4 @@ void _stdcall SMX_ExtractCategoricalColumn(double* SIGLIB_INPUT_PTR_DECL,    // 
 // #include "siglib_deprecated.h"
 
 // End of SigLib DSP function section
-#line 7143 "siglib.h"
+#line 7195 "siglib.h"

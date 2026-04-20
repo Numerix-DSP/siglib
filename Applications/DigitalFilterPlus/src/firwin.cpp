@@ -653,7 +653,7 @@ void FIRWinFilterDesignWindow::OnGetFilterSpec(wxCommandEvent& WXUNUSED(event))
   SUF_Debugfprintf("FIRWinFilterDesignWindow::OnGetFilterSpec : Completed all "
                    "processing\n\n");
 #endif
-} /* End of FIRWinFilterDesignWindow::OnGetFilterSpec () */
+}    // End of FIRWinFilterDesignWindow::OnGetFilterSpec()
 
 void FIRWinFilterDesignWindow::SetProjectNameString(wxString String)
 {

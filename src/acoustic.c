@@ -93,7 +93,7 @@ void SIGLIB_FUNC_DECL SDA_LinearMicrophoneArrayBeamPattern(const SLFixData_t num
 
     angle += ((endAngle - startAngle) / (SLData_t)(numAngles - 1));
   } while (angle <= endAngle);
-} /* End of SDA_LinearMicrophoneArrayBeamPattern() */
+}    // End of SDA_LinearMicrophoneArrayBeamPattern()
 
 /********************************************************
  * Function: SDA_LinearMicrophoneArrayBeamPatternLinear
@@ -146,7 +146,7 @@ void SIGLIB_FUNC_DECL SDA_LinearMicrophoneArrayBeamPatternLinear(const SLFixData
 
     angle += ((endAngle - startAngle) / (SLData_t)(numAngles - 1));
   } while (angle <= endAngle);
-} /* End of SDA_LinearMicrophoneArrayBeamPatternLinear() */
+}    // End of SDA_LinearMicrophoneArrayBeamPatternLinear()
 
 /********************************************************
  * Function: SDA_MicrophoneArrayCalculateDelays
@@ -195,7 +195,7 @@ void SIGLIB_FUNC_DECL SDA_MicrophoneArrayCalculateDelays(const SLFixData_t numMi
     // printf ("Adjusted microphones[%d].delay = %f\n", micNum,
     // microphones[micNum].delay);
   }
-} /* End of SDA_MicrophoneArrayCalculateDelays() */
+}    // End of SDA_MicrophoneArrayCalculateDelays()
 
 /********************************************************
  * Function: SDA_MicrophoneArrayBeamPattern
@@ -266,7 +266,7 @@ void SIGLIB_FUNC_DECL SDA_MicrophoneArrayBeamPattern(const SLFixData_t numMics, 
 
     calcAngle += ((endAngle - startAngle) / (SLData_t)(numAngles - 1));
   } while (calcAngle <= endAngle);
-} /* End of SDA_MicrophoneArrayBeamPattern() */
+}    // End of SDA_MicrophoneArrayBeamPattern()
 
 /********************************************************
  * Function: SDA_MicrophoneArrayBeamPatternLinear
@@ -335,7 +335,7 @@ void SIGLIB_FUNC_DECL SDA_MicrophoneArrayBeamPatternLinear(const SLFixData_t num
 
     calcAngle += ((endAngle - startAngle) / (SLData_t)(numAngles - 1));
   } while (calcAngle <= endAngle);
-} /* End of SDA_MicrophoneArrayBeamPatternLinear() */
+}    // End of SDA_MicrophoneArrayBeamPatternLinear()
 
 /********************************************************
  * Function: SDA_MicrophoneArrayBeamPatternLinear
@@ -354,4 +354,253 @@ void SIGLIB_FUNC_DECL SDA_MicrophoneArrayBeamPatternLinear(const SLFixData_t num
 SLData_t SIGLIB_FUNC_DECL SDS_TemperatureToSpeedOfSoundInAir(const SLData_t temp)
 {
   return (SIGLIB_SPEED_OF_SOUND_IN_AIR_0DC_MS * SDS_Sqrt(SIGLIB_ONE + (temp / SIGLIB_ZERO_DEGREES_CENTIGRADE_IN_KELVIN)));
-} /* End of SDS_TemperatureToSpeedOfSoundInAir() */
+}    // End of SDS_TemperatureToSpeedOfSoundInAir()
+
+/********************************************************
+ * Function: SDS_VolumeLinToLog
+ *
+ * Parameters:
+ *  const SLData_t srcValue,
+ *  const SLData_t invSrcPeak,
+ *  const SLData_t dstPeak,
+ *
+ * Return value:
+ *  Log volume level
+ *
+ * Description:
+ *  Convert a logarithmic slider value to an exponential player volume.
+ *
+ ********************************************************/
+
+SLData_t SDS_VolumeLinToLog(const SLData_t srcValue, const SLData_t invSrcPeak, const SLData_t dstPeak)
+{
+  SLData_t tmp = srcValue * invSrcPeak;
+  if (tmp <= SIGLIB_LOG_VOLUME_MIN) {
+    return SIGLIB_ZERO;
+  }
+  tmp = SIGLIB_LOG_VOLUME_MIN * SDS_Exp(SIGLIB_LOG_VOLUME_BETA * tmp);
+  tmp = SDS_Limit(tmp, SIGLIB_ZERO, SIGLIB_ONE);
+  return tmp * dstPeak;
+}    // End of SDS_VolumeLinToLog()
+
+/********************************************************
+ * Function: SDS_VolumeLinToLogSqApprox
+ *
+ * Parameters:
+ *  const SLData_t srcValue,
+ *  const SLData_t invSrcPeak,
+ *  const SLData_t dstPeak,
+ *
+ * Return value:
+ *  Log volume level
+ *
+ * Description:
+ *  Convert a logarithmic slider value to an exponential player volume,
+ *  using a square approximation.
+ *
+ ********************************************************/
+
+SLData_t SDS_VolumeLinToLogSqApprox(const SLData_t srcValue, const SLData_t invSrcPeak, const SLData_t dstPeak)
+{
+  SLData_t tmp = srcValue * invSrcPeak;
+  tmp = SDS_Limit(tmp, SIGLIB_ZERO, SIGLIB_ONE);
+  return tmp * tmp * dstPeak;
+}    // End of SDS_VolumeLinToLogSqApprox()
+
+/********************************************************
+ * Function: SDS_VolumeLinToLogCuApprox
+ *
+ * Parameters:
+ *  const SLData_t srcValue,
+ *  const SLData_t invSrcPeak,
+ *  const SLData_t dstPeak,
+ *
+ * Return value:
+ *  Log volume level
+ *
+ * Description:
+ *  Convert a logarithmic slider value to an exponential player volume,
+ *  using a cube approximation.
+ *
+ ********************************************************/
+
+SLData_t SDS_VolumeLinToLogCuApprox(const SLData_t srcValue, const SLData_t invSrcPeak, const SLData_t dstPeak)
+{
+  SLData_t tmp = srcValue * invSrcPeak;
+  tmp = SDS_Limit(tmp, SIGLIB_ZERO, SIGLIB_ONE);
+  return tmp * tmp * tmp * dstPeak;
+}    // End of SDS_VolumeLinToLogCuApprox()
+
+/********************************************************
+ * Function: SDS_VolumeLinToLogQuApprox
+ *
+ * Parameters:
+ *  const SLData_t srcValue,
+ *  const SLData_t invSrcPeak,
+ *  const SLData_t dstPeak,
+ *
+ * Return value:
+ *  Log volume level
+ *
+ * Description:
+ *  Convert a logarithmic slider value to an exponential player volume,
+ *  using a quad approximation.
+ *
+ ********************************************************/
+
+SLData_t SDS_VolumeLinToLogQuApprox(const SLData_t srcValue, const SLData_t invSrcPeak, const SLData_t dstPeak)
+{
+  SLData_t tmp = srcValue * invSrcPeak;
+  tmp = SDS_Limit(tmp, SIGLIB_ZERO, SIGLIB_ONE);
+  return tmp * tmp * tmp * tmp * dstPeak;
+}    // End of SDS_VolumeLinToLogQuApprox()
+
+/********************************************************
+ * Function: SDS_VolumeLinToLogPowApprox
+ *
+ * Parameters:
+ *  const SLData_t srcValue,
+ *  const SLData_t invSrcPeak,
+ *  const SLData_t dstPeak,
+ *  const SLData_t power
+ *
+ * Return value:
+ *  Log volume level
+ *
+ * Description:
+ *  Convert a logarithmic slider value to an exponential player volume,
+ *  using an arbitrary power approximation.
+ *
+ ********************************************************/
+
+SLData_t SDS_VolumeLinToLogPowApprox(const SLData_t srcValue, const SLData_t invSrcPeak, const SLData_t dstPeak, const SLData_t power)
+{
+  SLData_t tmp = srcValue * invSrcPeak;
+  tmp = SDS_Limit(tmp, SIGLIB_ZERO, SIGLIB_ONE);
+  return SDS_Pow(tmp, power) * dstPeak;
+}    // End of SDS_VolumeLinToLogPowApprox()
+
+/********************************************************
+ * Function: SDS_VolumeLogToLin
+ *
+ * Parameters:
+ *  const SLData_t srcValue,
+ *  const SLData_t invSrcPeak,
+ *  const SLData_t dstPeak,
+ *
+ * Return value:
+ *  Linear volume level
+ *
+ * Description:
+ *  Convert an exponential player volume to a logarithmic slider value.
+ *
+ ********************************************************/
+
+SLData_t SDS_VolumeLogToLin(const SLData_t srcValue, const SLData_t invSrcPeak, const SLData_t dstPeak)
+{
+  SLData_t tmp = srcValue * invSrcPeak;
+  tmp = SDS_Log(tmp / SIGLIB_LOG_VOLUME_MIN) / SIGLIB_LOG_VOLUME_BETA;
+  tmp = SDS_Limit(tmp, SIGLIB_ZERO, SIGLIB_ONE);
+  return tmp * dstPeak;
+}    // End of SDS_VolumeLogToLin()
+
+/********************************************************
+ * Function: SDS_VolumeLogToLinSqApprox
+ *
+ * Parameters:
+ *  const SLData_t srcValue,
+ *  const SLData_t invSrcPeak,
+ *  const SLData_t dstPeak,
+ *
+ * Return value:
+ *  Linear volume level
+ *
+ * Description:
+ *  Convert an exponential player volume to a logarithmic slider value,
+ *  using a square approximation.
+ *
+ ********************************************************/
+
+SLData_t SDS_VolumeLogToLinSqApprox(const SLData_t srcValue, const SLData_t invSrcPeak, const SLData_t dstPeak)
+{
+  SLData_t tmp = srcValue * invSrcPeak;
+  tmp = SDS_Sqrt(tmp);
+  tmp = SDS_Limit(tmp, SIGLIB_ZERO, SIGLIB_ONE);
+  return tmp * dstPeak;
+}    // End of SDS_VolumeLogToLinSqApprox()
+
+/********************************************************
+ * Function: SDS_VolumeLogToLinCuApprox
+ *
+ * Parameters:
+ *  const SLData_t srcValue,
+ *  const SLData_t invSrcPeak,
+ *  const SLData_t dstPeak,
+ *
+ * Return value:
+ *  Linear volume level
+ *
+ * Description:
+ *  Convert an exponential player volume to a logarithmic slider value,
+ *  using a cube approximation.
+ *
+ ********************************************************/
+
+SLData_t SDS_VolumeLogToLinCuApprox(const SLData_t srcValue, const SLData_t invSrcPeak, const SLData_t dstPeak)
+{
+  SLData_t tmp = srcValue * invSrcPeak;
+  tmp = SDS_Pow(tmp, SIGLIB_ONE / SIGLIB_THREE);
+  tmp = SDS_Limit(tmp, SIGLIB_ZERO, SIGLIB_ONE);
+  return tmp * dstPeak;
+}    // End of SDS_VolumeLogToLinCuApprox()
+
+/********************************************************
+ * Function: SDS_VolumeLogToLinQuApprox
+ *
+ * Parameters:
+ *  const SLData_t srcValue,
+ *  const SLData_t invSrcPeak,
+ *  const SLData_t dstPeak,
+ *
+ * Return value:
+ *  Linear volume level
+ *
+ * Description:
+ *  Convert an exponential player volume to a logarithmic slider value,
+ *  using a quad approximation.
+ *
+ ********************************************************/
+
+SLData_t SDS_VolumeLogToLinQuApprox(const SLData_t srcValue, const SLData_t invSrcPeak, const SLData_t dstPeak)
+{
+  SLData_t tmp = srcValue * invSrcPeak;
+  tmp = SDS_Pow(tmp, SIGLIB_ONE / SIGLIB_FOUR);
+  tmp = SDS_Limit(tmp, SIGLIB_ZERO, SIGLIB_ONE);
+  return tmp * dstPeak;
+}    // End of SDS_VolumeLogToLinQuApprox()
+
+/********************************************************
+ * Function: SDS_VolumeLogToLin
+ *
+ * Parameters:
+ *  const SLData_t srcValue,
+ *  const SLData_t invSrcPeak,
+ *  const SLData_t dstPeak,
+ *  const SLData_t power
+ *
+ * Return value:
+ *  Linear volume level
+ *
+ * Description:
+ *  Convert an exponential player volume to a logarithmic slider value,
+ *  using an arbitrary power approximation.
+ *
+ ********************************************************/
+
+SLData_t SDS_VolumeLogToLinPowApprox(const SLData_t srcValue, const SLData_t invSrcPeak, const SLData_t dstPeak, const SLData_t power)
+{
+  SLData_t tmp = srcValue * invSrcPeak;
+  tmp = SDS_Pow(tmp, SIGLIB_ONE / power);
+  tmp = SDS_Limit(tmp, SIGLIB_ZERO, SIGLIB_ONE);
+  return tmp * dstPeak;
+}    // End of SDS_VolumeLogToLinPowApprox()

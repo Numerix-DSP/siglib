@@ -2242,6 +2242,48 @@ void SIGLIB_FUNC_DECL SDA_MicrophoneArrayBeamPatternLinear(const SLFixData_t,   
 
 SLData_t SIGLIB_FUNC_DECL SDS_TemperatureToSpeedOfSoundInAir(const SLData_t);    // Temperature
 
+SLData_t SIGLIB_FUNC_DECL SDS_VolumeLinToLog(const SLData_t,     // Source value
+                                             const SLData_t,     // The inverse of the peak value of the source input
+                                             const SLData_t);    // The peak value of the output value
+
+SLData_t SIGLIB_FUNC_DECL SDS_VolumeLinToLogSqApprox(const SLData_t,     // Source value
+                                                     const SLData_t,     // The inverse of the peak value of the source input
+                                                     const SLData_t);    // The peak value of the output value
+
+SLData_t SIGLIB_FUNC_DECL SDS_VolumeLinToLogCuApprox(const SLData_t,     // Source value
+                                                     const SLData_t,     // The inverse of the peak value of the source input
+                                                     const SLData_t);    // The peak value of the output value
+
+SLData_t SIGLIB_FUNC_DECL SDS_VolumeLinToLogQuApprox(const SLData_t,     // Source value
+                                                     const SLData_t,     // The inverse of the peak value of the source input
+                                                     const SLData_t);    // The peak value of the output value
+
+SLData_t SIGLIB_FUNC_DECL SDS_VolumeLinToLogPowApprox(const SLData_t,     // Source value
+                                                      const SLData_t,     // The inverse of the peak value of the source input
+                                                      const SLData_t,     // The peak value of the output value
+                                                      const SLData_t);    // Power to raise the input value by
+
+SLData_t SIGLIB_FUNC_DECL SDS_VolumeLogToLin(const SLData_t,     // Source value
+                                             const SLData_t,     // The inverse of the peak value of the source input
+                                             const SLData_t);    // The peak value of the output value
+
+SLData_t SIGLIB_FUNC_DECL SDS_VolumeLogToLinSqApprox(const SLData_t,     // Source value
+                                                     const SLData_t,     // The inverse of the peak value of the source input
+                                                     const SLData_t);    // The peak value of the output value
+
+SLData_t SIGLIB_FUNC_DECL SDS_VolumeLogToLinCuApprox(const SLData_t,     // Source value
+                                                     const SLData_t,     // The inverse of the peak value of the source input
+                                                     const SLData_t);    // The peak value of the output value
+
+SLData_t SIGLIB_FUNC_DECL SDS_VolumeLogToLinQuApprox(const SLData_t,     // Source value
+                                                     const SLData_t,     // The inverse of the peak value of the source input
+                                                     const SLData_t);    // The peak value of the output value
+
+SLData_t SIGLIB_FUNC_DECL SDS_VolumeLogToLinPowApprox(const SLData_t,     // Source value
+                                                      const SLData_t,     // The inverse of the peak value of the source input
+                                                      const SLData_t,     // The peak value of the output value
+                                                      const SLData_t);    // Power to raise the input value by
+
 // Adaptive filtering functions - adaptive.c
 
 void SIGLIB_FUNC_DECL SIF_Lms(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to LMS filter state array
@@ -4793,6 +4835,16 @@ void SIGLIB_FUNC_DECL SDA_Clamp(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Poi
                                 const SLData_t,                           // Threshold
                                 const SLData_t,                           // Clamp value
                                 const enum SLThresholdMode_t,             // Threshold type
+                                const SLArrayIndex_t);                    // Array length
+
+SLData_t SIGLIB_FUNC_DECL SDS_Limit(const SLData_t,     // Source value
+                                    const SLData_t,     // Minimum value
+                                    const SLData_t);    // Maximum value
+
+void SIGLIB_FUNC_DECL SDA_Limit(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
+                                SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
+                                const SLData_t,                           // Minimum value
+                                const SLData_t,                           // Maximum value
                                 const SLArrayIndex_t);                    // Array length
 
 SLArrayIndex_t SIGLIB_FUNC_DECL SDA_TestOverThreshold(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array

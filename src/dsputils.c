@@ -2354,7 +2354,7 @@ void SIGLIB_FUNC_DECL SDA_Quantize_N(const SLData_t* SIGLIB_PTR_DECL pSrc, SLDat
 SLData_t SIGLIB_FUNC_DECL SDS_Quantise_N(const SLData_t src, const SLData_t N)
 {
   return SDS_Floor(src * N) / N;
-} /* End of SDS_Quantise_N() */
+}    // End of SDS_Quantise_N()
 
 /********************************************************
  * Function: SDA_Abs

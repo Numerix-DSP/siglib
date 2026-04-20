@@ -719,7 +719,7 @@ void FIRSimpleRemezFilterDesignWindow::OnGetFilterSpec(wxCommandEvent& WXUNUSED(
                    "Completed all processing\n");
 #endif
 
-} /* End of FIRSimpleRemezFilterDesignWindow::OnGetFilterSpec () */
+}    // End of FIRSimpleRemezFilterDesignWindow::OnGetFilterSpec()
 
 /*
   Name : FIRSimpleRemezFilterDesignWindow::OnEstimateOrder
