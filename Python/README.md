@@ -33,3 +33,14 @@ This folder contains a number of useful Python scripts.
  | wav2csv.py                              | Convert a single or multi channel .wav file to .csv                                                                    |
  | --------------------------------------- | -----------------------------------------------------------------------------------------------------------------------|
 
+Sub Folders.
+
+ | --------------------------------------- | -----------------------------------------------------------------------------------------------------------------------|
+ | Folder                                  | Description                                                                                                            |
+ | --------------------------------------- | -----------------------------------------------------------------------------------------------------------------------|
+ | HeartBeatEnvelopeDetector               | Detect the start and end of a heart beat pulse                                                                         |
+ | --------------------------------------- | -----------------------------------------------------------------------------------------------------------------------|
+ | MachineLearning                         | CNN based vibration recognition. Perform some DSP on some .wav files and use these for training, validating and testing a CNN for vibration recognition - this ia a simplified implimentation of the C library examples |
+ | --------------------------------------- | -----------------------------------------------------------------------------------------------------------------------|
+ | SpectrumAnalyzerSimulation              | Simulation of a spectrum analyzer - Window → FFT → |X[k]|^2 → Mel filters → Log etc.                                   |
+ | --------------------------------------- | -----------------------------------------------------------------------------------------------------------------------|

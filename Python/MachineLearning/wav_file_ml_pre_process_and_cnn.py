@@ -45,8 +45,9 @@ from scipy.io import wavfile
 from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn.metrics import confusion_matrix
 
-
 # Top level configuration
+
+plotGraphsEnable = True
 
 # .wav file sampling rate = 16 kHz
 # Frame size = 256 samples
@@ -78,13 +79,13 @@ for i in range(0, numClasses):
 
 
 # Plot data to verify it
-
-plt.figure()
-for i in range(0, numClasses):
-  plt.plot(wavData[i], label=f'Machine {i}')
-plt.legend(loc="best")
-plt.show()
-plt.close()
+if (plotGraphsEnable):
+  plt.figure()
+  for i in range(0, numClasses):
+    plt.plot(wavData[i], label=f'Machine {i}')
+  plt.legend(loc="best")
+  plt.show()
+  plt.close()
 
 
 # Create a list of Numpy 2D arrays from waveforms
@@ -178,13 +179,14 @@ print(f'y_test shape: {y_test.shape}')
 # Plot an arbitrary frame (100) of each class
 # Don't plot first frame because there may be some zero padding in the source file
 
-plt.figure()
-for c in range(numClasses):
-  c_X_train = X_train[y_train == c]
-  plt.plot(c_X_train[100], label="Class " + str(c))
-plt.legend(loc="best")
-plt.show()
-plt.close()
+if (plotGraphsEnable):
+  plt.figure()
+  for c in range(numClasses):
+    c_X_train = X_train[y_train == c]
+    plt.plot(c_X_train[100], label="Class " + str(c))
+  plt.legend(loc="best")
+  plt.show()
+  plt.close()
 
 
 # Reshape for Keras
@@ -198,8 +200,18 @@ print(f'X_test shape: {X_test.shape}')
 
 # Time Series Classification Model
 input_layer = tf.keras.layers.Input(shape=(networkInputLayerNodes,1))
-conv1 = tf.keras.layers.Conv1D(filters=32, kernel_size=networkInputLayerNodes, activation='relu', use_bias=True)(input_layer)
-output_layer = tf.keras.layers.Dense(numClasses, activation="sigmoid", use_bias=True)(conv1)
+conv1 = tf.keras.layers.Conv1D(
+    filters=32,
+    kernel_size=networkInputLayerNodes,
+    activation='relu',
+    use_bias=True
+)(input_layer)
+flatten = tf.keras.layers.Flatten()(conv1)
+output_layer = tf.keras.layers.Dense(
+    numClasses,
+    activation="softmax",
+    use_bias=True
+)(flatten)
 
 model_tsc = tf.keras.models.Model(inputs=input_layer, outputs=output_layer)
 
@@ -231,31 +243,33 @@ history = model_tsc.fit(
 
 model_tsc = tf.keras.models.load_model("best_model.h5")
 test_loss, test_acc = model_tsc.evaluate(X_test, y_test)
-print(f'Test accuracy: {test_acc}')
-print(f'Test loss:     {test_loss}')
+print(f'Test accuracy: {test_acc:.2f}')
+print(f'Test loss:     {test_loss:.2f}')
 
 
 # Plot the accuracy as the CNN trains
 
 metric = "sparse_categorical_accuracy"
-plt.figure()
-plt.plot(history.history[metric])
-plt.plot(history.history["val_" + metric])
-plt.title("model " + metric)
-plt.ylabel(metric, fontsize="large")
-plt.xlabel("epoch", fontsize="large")
-plt.legend(["train", "val"], loc="best")
-plt.rcParams["figure.figsize"] = 12,5
-plt.show()
-plt.close()
+if (plotGraphsEnable):
+  plt.figure()
+  plt.plot(history.history[metric])
+  plt.plot(history.history["val_" + metric])
+  plt.title("model " + metric)
+  plt.ylabel(metric, fontsize="large")
+  plt.xlabel("epoch", fontsize="large")
+  plt.legend(["train", "val"], loc="best")
+  plt.rcParams["figure.figsize"] = 12,5
+  plt.show()
+  plt.close()
 
 
 # Generate a confusion matrix to see which classes perform well or poorly
 y_pred = model_tsc.predict(X_test)          # Returns probabilities
 y_pred = np.argmax(y_pred, axis=-1)         # Return the index of the prediction with highest probability
 
-cm = confusion_matrix(y_test, y_pred)
-disp = ConfusionMatrixDisplay(confusion_matrix=cm)
-disp.plot(cmap=plt.cm.Blues)
-plt.rcParams["figure.figsize"] = 12,5
-plt.show()
+if (plotGraphsEnable):
+  cm = confusion_matrix(y_test, y_pred)
+  disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+  disp.plot(cmap=plt.cm.Blues)
+  plt.rcParams["figure.figsize"] = 12,5
+  plt.show()

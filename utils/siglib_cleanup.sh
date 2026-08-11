@@ -165,6 +165,9 @@ rm -f sa
 cd $SIGLIB_PATH/pyFilter
 rm -f *.ini
 rm -f *.txt
+cd $SIGLIB_PATH/Python/MachineLearning
+rm -f *.tflite
+rm -f *.h5
 
 popd
 
