@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 # Plots a time domain graph of the .wav file data
 
 import numpy as np

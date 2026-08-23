@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 """
 Envelope detection and centred heartbeat framing for a WAV recording.
 

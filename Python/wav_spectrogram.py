@@ -1,9 +1,12 @@
-#coding: utf-8
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
-# Taken from here: https://stackoverflow.com/questions/44787437/how-to-convert-a-wav-file-to-a-spectrogram-in-python3
-# Original code here: https://www.frank-zalkow.de/en/create-audio-spectrograms-with-python.html
-# """ This work is licensed under a Creative Commons Attribution 3.0 Unported License.
-  # Frank Zalkow, 2012-2013 """
+"""
+  Taken from here: https://stackoverflow.com/questions/44787437/how-to-convert-a-wav-file-to-a-spectrogram-in-python3
+  Original code here: https://www.frank-zalkow.de/en/create-audio-spectrograms-with-python.html
+    Frank Zalkow, 2012-2013
+  This work is licensed under a Creative Commons Attribution 3.0 Unported License.
+"""
 
 import numpy as np
 from matplotlib import pyplot as plt

@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 # SigLib Python Example Program
 # Copyright (c) 2026 Delta Numerix
 

@@ -1,4 +1,7 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
+# Convert .wav audio file to .csv
 
 import sys, os, os.path
 from scipy.io import wavfile

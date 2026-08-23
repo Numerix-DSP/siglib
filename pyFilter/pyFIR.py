@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
-# coding: utf-8
+# -*- coding: utf-8 -*-
 
-# Copyright © 2026 Delta Numerix All rights reserved.
-# Released under the terms of the GPLv3 license
+"""
+FIR Filter Design Program
+
+Released under the terms of the GPLv3 license
+Copyright © 2026 Delta Numerix All rights reserved.
+"""
 
 from configparser import ConfigParser
 import numpy as np

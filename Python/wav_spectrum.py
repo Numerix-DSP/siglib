@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 """
 Plot an averaged 1024-point FFT spectrum of a WAV file using a Hann window.
 

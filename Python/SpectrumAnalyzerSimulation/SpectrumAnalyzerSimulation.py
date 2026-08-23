@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
-# coding: utf-8
-# FFT Based Spectrum Analyzer And ADC Quantization Simulation
-# Copyright (c) John Edwards 2026
-# Released under the terms of the GPLv3 license
+# -*- coding: utf-8 -*-
+
+"""
+  FFT Based Spectrum Analyzer And ADC Quantization Simulation
+  Copyright (c) John Edwards 2026
+  Released under the terms of the GPLv3 license
+"""
 
 import sys
 from PyQt6 import QtWidgets, QtCore, QtGui

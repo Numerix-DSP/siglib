@@ -1,39 +1,40 @@
-#!/usr/bin/env python
-# coding: utf-8
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
-# # Python Script to demonstrate Vibration Mode Recognition Using A Combination Of DSP And Machine Learning
-#
-# ## This example supports an arbitrary number of categories and features
-#
-# This program loads an arbitrary number of .wav file recordings of rotating machines, it
-# then uses a subset of data from each file to train a Convolutional Neural Network (CNN)
-# to recognize the different vibration modes then tests the model using a further subset of the data.
-#
-# Prior to the CNN, the time domain vibration data is converted to log-Mel filterbank features using:
-# frame -> window -> FFT -> |X[k]|^2 -> Mel filters -> log.
-# This reduces each time-domain frame to a compact perceptually spaced spectral feature vector.
-#
-# The CNN input width is the number of Mel filters. The default configuration below uses 40 Mel bands
-# for each 256-sample (16 ms at 16 kHz) input frame.
-# There is a single hidden layer and the output layer has an output node for each classification category.
-#
-# Sigma Numerix Ltd. Machine Learning capabilities are summarized here: https://numerix-dsp.com/ai/
-#
-# **License**
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, version 3.
-#
-# This program is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-# General Public License for more details.
-#
-# For GNU General Public License details, see <http://www.gnu.org/licenses/>.
-#
-# Copyright (c) 2026, Delta Numerix, All rights reserved.
-#
+"""
+  # Python Script to demonstrate Vibration Mode Recognition Using A Combination Of DSP And Machine Learning
+ 
+  ## This example supports an arbitrary number of categories and features
+ 
+  This program loads an arbitrary number of .wav file recordings of rotating machines, it
+  then uses a subset of data from each file to train a Convolutional Neural Network (CNN)
+  to recognize the different vibration modes then tests the model using a further subset of the data.
+ 
+  Prior to the CNN, the time domain vibration data is converted to log-Mel filterbank features using:
+  frame -> window -> FFT -> |X[k]|^2 -> Mel filters -> log.
+  This reduces each time-domain frame to a compact perceptually spaced spectral feature vector.
+ 
+  The CNN input width is the number of Mel filters. The default configuration below uses 40 Mel bands
+  for each 256-sample (16 ms at 16 kHz) input frame.
+  There is a single hidden layer and the output layer has an output node for each classification category.
+ 
+  Sigma Numerix Ltd. Machine Learning capabilities are summarized here: https://numerix-dsp.com/ai/
+ 
+  **License**
+ 
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, version 3.
+ 
+  This program is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  General Public License for more details.
+ 
+  For GNU General Public License details, see <http://www.gnu.org/licenses/>.
+ 
+  Copyright (c) 2026, Delta Numerix, All rights reserved.
+"""
 
 import numpy as np
 import tensorflow as tf

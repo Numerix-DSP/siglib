@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 # Script to plot the data in the extracted columns of the log file
 
 import numpy as np

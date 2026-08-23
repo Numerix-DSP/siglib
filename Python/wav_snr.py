@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# Compute the SNR of a signal stored in a .wav file
 
 import argparse
 import json

@@ -1,8 +1,13 @@
-# dsp_functions.py
-# Functions for DSP functionality, including:
-# - ADC simulation
-# - SNR/SINAD estimation from spectra
-# - Estimating the quantisation noise floor of an ideal ADC
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+  dsp_functions.py
+  Functions for DSP functionality, including:
+  - ADC simulation
+  - SNR/SINAD estimation from spectra
+  - Estimating the quantisation noise floor of an ideal ADC
+"""
 
 import numpy as np
 from scipy import signal

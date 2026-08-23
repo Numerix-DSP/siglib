@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 """
 Plot a WAV file in the time domain with a time-aligned spectrogram below it.
 
