@@ -20,7 +20,7 @@ find . -type f -name "*.py"   -print0 | xargs -0 -n 1 -P 4 dos2unix -k
 find . -type f -name "*.sh"   -print0 | xargs -0 -n 1 -P 4 dos2unix -k
 find . -type f -name "*.txt"  -print0 | xargs -0 -n 1 -P 4 dos2unix -k
 
-#Cleanup unwanted files
+# Cleanup unwanted files
 find . -name "*.bak" -type f -delete
 find . -name "*.browse" -type f -delete
 find . -name "*.cache" -type f -delete
@@ -82,6 +82,9 @@ cd $SIGLIB_PATH/src/static_library_64/x64
 rm -rf *
 cd $SIGLIB_PATH/src/x64
 rm -rf *
+
+# Cleanup unwanted folders
+find . -name '__pycache__' -type d -exec rm -r {} +
 
 # Clean-up SWIG
 cd $SIGLIB_PATH/SWIG

@@ -41,71 +41,71 @@ Update history:
 
 #ifndef SIGLIB    // If SIGLIB not defined then declare library
 
-#ifndef _HP_VEE    // The following functionality is not supported by VEE
+#  ifndef _HP_VEE    // The following functionality is not supported by VEE
 
-#  define SIGLIB 1                // Indicates SigLib is being used
-#  define SIGLIB_VERSION 10.60    // Indicates SigLib version being used
-#  ifndef SIGLIB_ENABLE_DEBUG_LOGGING
-#    define SIGLIB_ENABLE_DEBUG_LOGGING 0    // Set to 1 to enable SUF_Debugfprintf functions in some SigLib functions
-#  endif
-#  define SIGLIB_LOG_FILE "siglib_debug.log"    // Filename for SigLib logging functions
+#    define SIGLIB 1                // Indicates SigLib is being used
+#    define SIGLIB_VERSION 10.60    // Indicates SigLib version being used
+#    ifndef SIGLIB_ENABLE_DEBUG_LOGGING
+#      define SIGLIB_ENABLE_DEBUG_LOGGING 0    // Set to 1 to enable SUF_Debugfprintf functions in some SigLib functions
+#    endif
+#    define SIGLIB_LOG_FILE "siglib_debug.log"    // Filename for SigLib logging functions
 
-#  ifndef SWIG
-#    include <ctype.h>     // Include standard ctype.h file
-#    include <float.h>     // Include standard float.h file
-#    include <limits.h>    // Include standard limits.h file
-#    include <math.h>      // Include standard math.h file
-#    include <stdarg.h>    // Include standard stdarg.h file
-#    include <stddef.h>    // Include standard stddef.h file
-#    include <stdio.h>     // Include standard stdio.h file
-#    include <stdlib.h>    // Include standard stdlib.h file
-#    include <string.h>    // Include standard string.h file
-#    include <time.h>      // Include standard time.h file
-#  endif
+#    ifndef SWIG
+#      include <ctype.h>     // Include standard ctype.h file
+#      include <float.h>     // Include standard float.h file
+#      include <limits.h>    // Include standard limits.h file
+#      include <math.h>      // Include standard math.h file
+#      include <stdarg.h>    // Include standard stdarg.h file
+#      include <stddef.h>    // Include standard stddef.h file
+#      include <stdio.h>     // Include standard stdio.h file
+#      include <stdlib.h>    // Include standard stdlib.h file
+#      include <string.h>    // Include standard string.h file
+#      include <time.h>      // Include standard time.h file
+#    endif
 
-#  include <siglib_constants.h>     // Constant values
-#  include <siglib_macros.h>        // Macro definitions
-#  include <siglib_processors.h>    // Processor specific configuration information
-#  include <siglib_types.h>         // Structure and enumerated types definitions
+#    include <siglib_constants.h>     // Constant values
+#    include <siglib_macros.h>        // Macro definitions
+#    include <siglib_processors.h>    // Processor specific configuration information
+#    include <siglib_types.h>         // Structure and enumerated types definitions
 
-#else    // _HP_VEE is defined
+#  else    // _HP_VEE is defined
 
-#  define SLData_t double
-#  define SLFixData_t long
-#  define SLImageData_t unsigned int
-#  define SLArrayIndex_t long
-#  define SLError_t long
-#  define SLStatus_t long
-#  define SLBool_t long
-#  define const
-#  define unsigned
-#  define enum int
-#  define SLArbitraryFFT_t
-#  define SLComplexRect_s double
-#  define SLComplexPolar_s double
-#  define SLUInt8_t unsigned char
-#  define SLUInt16_t unsigned short
-#  define SLUInt32_t unsigned int
-#  define SLUInt64_t unsigned long long
-#  define SLInt8_t int
-#  define SLInt16_t short
-#  define SLInt32_t int
-#  define SLInt64_t long long
-#  define SLChar_t int
-#  define SIGLIB_FUNC_DECL _stdcall
+#    define SLData_t double
+#    define SLFixData_t long
+#    define SLImageData_t unsigned int
+#    define SLArrayIndex_t long
+#    define SLError_t long
+#    define SLStatus_t long
+#    define SLBool_t long
+#    define const
+#    define unsigned
+#    define enum int
+#    define SLArbitraryFFT_t
+#    define SLComplexRect_s double
+#    define SLComplexPolar_s double
+#    define SLUInt8_t unsigned char
+#    define SLUInt16_t unsigned short
+#    define SLUInt32_t unsigned int
+#    define SLUInt64_t unsigned long long
+#    define SLInt8_t int
+#    define SLInt16_t short
+#    define SLInt32_t int
+#    define SLInt64_t long long
+#    define SLChar_t int
+#    define SIGLIB_FUNC_DECL _stdcall
 
-#endif    // End of #ifndef _HP_VEE
+#  endif    // End of #ifndef _HP_VEE
 
 // Function declarations
 
-#ifdef __cplusplus    // Declaration for C++ program calls
+#  ifdef __cplusplus    // Declaration for C++ program calls
 extern "C" {
-#endif
+#  endif
 
 // SigLib utility functions
 // siglib.c
 SLData_t SIGLIB_FUNC_DECL SUF_SiglibVersion(void);
-#ifndef _HP_VEE    // The following functionality is not supported by VEE
+#  ifndef _HP_VEE    // The following functionality is not supported by VEE
 void SIGLIB_FUNC_DECL SUF_PrintArray(const SLData_t*, const SLArrayIndex_t);
 void SIGLIB_FUNC_DECL SUF_PrintFixedPointArray(const SLArrayIndex_t*, const SLArrayIndex_t);
 void SIGLIB_FUNC_DECL SUF_PrintComplexMatrix(const SLData_t*, const SLData_t*, const SLArrayIndex_t, const SLArrayIndex_t);
@@ -134,14 +134,14 @@ SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintIIRCoefficients(const SLData_t*, SLArra
 SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintCount(const char* String);
 SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintHigher(const SLData_t, const SLData_t, const char*);
 SLError_t SIGLIB_FUNC_DECL SUF_DebugPrintLower(const SLData_t, const SLData_t, const char*);
-#  define SUF_DebugPrintInfo() SUF_Debugfprintf("SigLib Version: %2.2lf\n", SIGLIB_VERSION);
-#  define SUF_DebugPrintLine() SUF_Debugfprintf("SigLib Debug - File: %s, Line #: %d\n", __FILE__, __LINE__);
-#  define SUF_DebugPrintTime()                                                    \
-    {                                                                             \
-      time_t aclock;                                                              \
-      time(&aclock);                                                              \
-      SUF_Debugfprintf("SigLib Debug - Time: %s\n", asctime(localtime(&aclock))); \
-    }
+#    define SUF_DebugPrintInfo() SUF_Debugfprintf("SigLib Version: %2.2lf\n", SIGLIB_VERSION);
+#    define SUF_DebugPrintLine() SUF_Debugfprintf("SigLib Debug - File: %s, Line #: %d\n", __FILE__, __LINE__);
+#    define SUF_DebugPrintTime()                                                    \
+      {                                                                             \
+        time_t aclock;                                                              \
+        time(&aclock);                                                              \
+        SUF_Debugfprintf("SigLib Debug - Time: %s\n", asctime(localtime(&aclock))); \
+      }
 const char* SUF_StrError(const SLError_t ErrNo);
 
 // file_io.c
@@ -312,11 +312,11 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SUF_ReadWeightsWithBiasesBinaryFile(const char*,
                                                                     SLData_t SIGLIB_OUTPUT_PTR_DECL*,     // Layer 1 biases
                                                                     SLData_t SIGLIB_OUTPUT_PTR_DECL*,     // Layer 2 weights
                                                                     SLData_t SIGLIB_OUTPUT_PTR_DECL*);    // Layer 2 biases
-#endif
+#  endif
 
-#ifdef CLOCKS_PER_SEC
+#  ifdef CLOCKS_PER_SEC
 void SIGLIB_FUNC_DECL SUF_MSDelay(const SLFixData_t Delay);
-#endif
+#  endif
 
 // Parameter description
 
@@ -1196,7 +1196,7 @@ void SIGLIB_FUNC_DECL SIF_Czt(SLData_t* SIGLIB_OUTPUT_PTR_DECL,          // Poin
                               const SLArrayIndex_t,                      // FFT length
                               const SLArrayIndex_t);                     // log2 FFT length
 
-#ifndef _HP_VEE    // The following functionality is not supported by VEE
+#  ifndef _HP_VEE    // The following functionality is not supported by VEE
 
 // Chirp z-transform functions - chirpz.c
 // Generate complex window coeffs
@@ -1223,7 +1223,7 @@ void SIGLIB_FUNC_DECL SIF_Wm(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Real coeffi
                              const SLComplexRect_s,               // W^(1/2)
                              const SLArrayIndex_t);               // Array length
 
-#endif    // End of #ifndef _HP_VEE
+#  endif    // End of #ifndef _HP_VEE
 
 // Windowing functions - window.c
 
@@ -1598,14 +1598,14 @@ void SIGLIB_FUNC_DECL SDA_TappedDelayLineIQ(const SLData_t* SIGLIB_INPUT_PTR_DEC
                                             const SLArrayIndex_t,                           // State array length
                                             const SLArrayIndex_t);                          // Array length
 
-#ifndef _HP_VEE                                                                           // The following functionality is not supported by VEE
+#  ifndef _HP_VEE                                                                         // The following functionality is not supported by VEE
 void SIGLIB_FUNC_DECL SIF_FirPolyPhaseGenerate(const SLData_t* SIGLIB_INPUT_PTR_DECL,     // Input FIR coefficient pointer
                                                SLData_t* SIGLIB_OUTPUT_PTR_DECL,          // Output poly-phase coefficient pointer
                                                SLData_t** SIGLIB_OUTPUT_PTR_DECL,         // Output filter coefficient pointers
                                                SLArrayIndex_t* SIGLIB_OUTPUT_PTR_DECL,    // Output filter lengths
                                                const SLArrayIndex_t,                      // Number of output filter phases
                                                const SLArrayIndex_t);                     // Input filter length
-#endif                                                                                    // End of #ifndef _HP_VEE
+#  endif                                                                                  // End of #ifndef _HP_VEE
 
 void SIGLIB_FUNC_DECL SIF_FirZeroNotchFilter(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Coefficients array
                                              const SLData_t);                     // Notch centre frequency normalized to Fs = 1 Hz
@@ -1719,7 +1719,7 @@ void SIGLIB_FUNC_DECL SDA_IirZeroPhaseOrderN(const SLData_t* SIGLIB_INPUT_PTR_DE
                                              const SLArrayIndex_t,                     // Source array extension length
                                              const SLArrayIndex_t);                    // Source array length
 
-#ifndef _HP_VEE    // The following functionality is not supported by VEE
+#  ifndef _HP_VEE    // The following functionality is not supported by VEE
 
 void SIGLIB_FUNC_DECL SDA_BilinearTransform(const SLComplexRect_s* SIGLIB_INPUT_PTR_DECL,    // S-plane zeros
                                             const SLComplexRect_s* SIGLIB_INPUT_PTR_DECL,    // S-plane poles
@@ -1796,7 +1796,7 @@ void SIGLIB_FUNC_DECL SDA_IirZplaneLpfToBsf(const SLComplexRect_s* SIGLIB_INPUT_
                                             const SLArrayIndex_t,                            // Number of zeros in input and output
                                             const SLArrayIndex_t);                           // Number of poles in input and output
 
-#endif    // End of #ifndef _HP_VEE
+#  endif    // End of #ifndef _HP_VEE
 
 SLData_t SIGLIB_FUNC_DECL SDA_IirModifyFilterGain(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source IIR filter coefficients
                                                   SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to modified IIR filter coefficients
@@ -2096,7 +2096,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_GoertzelDetect(const SLData_t* SIGLIB_INPUT_PTR_DE
                                              const SLData_t,                           // Filter coefficient
                                              const SLArrayIndex_t);                    // Array length
 
-#ifndef _HP_VEE    // The following functionality is not supported by VEE
+#  ifndef _HP_VEE    // The following functionality is not supported by VEE
 
 SLComplexRect_s SIGLIB_FUNC_DECL SIF_GoertzelDetectComplex(const SLData_t,           // Filter frequency
                                                            const SLArrayIndex_t);    // Filter length
@@ -2105,7 +2105,7 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDA_GoertzelDetectComplex(const SLData_t* SIGLI
                                                            const SLComplexRect_s,                    // Complex filter coefficients
                                                            const SLArrayIndex_t);                    // Array length
 
-#endif    // End of #ifndef _HP_VEE
+#  endif    // End of #ifndef _HP_VEE
 
 void SIGLIB_FUNC_DECL SIF_GaussianFirFilter(SLData_t* SIGLIB_OUTPUT_PTR_DECL,    // Pointer to filter coefficients
                                             const SLData_t,                      // Standard deviation of the distribution
@@ -2212,7 +2212,7 @@ void SIGLIB_FUNC_DECL SDA_LinearMicrophoneArrayBeamPatternLinear(const SLFixData
                                                                  const SLData_t,                      // Calculation end angle (Degrees)
                                                                  const SLFixData_t);                  // Number of angles to calculate
 
-#ifndef _HP_VEE                                                                // The following functionality is not supported by VEE
+#  ifndef _HP_VEE                                                              // The following functionality is not supported by VEE
 void SIGLIB_FUNC_DECL SDA_MicrophoneArrayCalculateDelays(const SLFixData_t,    // Number of microphones
                                                          SLMicrophone_s* SIGLIB_INOUT_PTR_DECL,    // Microphone configuration
                                                          const SLData_t);                          // Angle to steer beam
@@ -2238,7 +2238,7 @@ void SIGLIB_FUNC_DECL SDA_MicrophoneArrayBeamPatternLinear(const SLFixData_t,   
                                                            const SLData_t,                      // Calculation end angle (Degrees)
                                                            const SLFixData_t,                   // Number of angles to calculate
                                                            const SLData_t);                     // Sample rate (Hz)
-#endif                                                                                          // End of #ifndef _HP_VEE
+#  endif                                                                                        // End of #ifndef _HP_VEE
 
 SLData_t SIGLIB_FUNC_DECL SDS_TemperatureToSpeedOfSoundInAir(const SLData_t);    // Temperature
 
@@ -3486,9 +3486,9 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDS_CostasQamDemodulate(const SLData_t,         
                                                         SLArrayIndex_t*,                          // Pointer to ELG synchronization delay index
                                                         const SLArrayIndex_t);                    // ELG output synchronization delay length
 
-#if defined(_TMS320C30) || defined(_TMS320C40)    // Defined by TI compiler
-#else                                             // The following functions have too many parameters for the TI C3x/C4x
-                                                  // compiler
+#  if defined(_TMS320C30) || defined(_TMS320C40)    // Defined by TI compiler
+#  else                                             // The following functions have too many parameters for the TI C3x/C4x
+                                                    // compiler
 SLArrayIndex_t SIGLIB_FUNC_DECL SDS_CostasQamDemodulateDebug(const SLData_t,                     // Source data sample
                                                              SLData_t*,                          // Pointer to real destination symbol point
                                                              SLData_t*,                          // Pointer to imaginary destination symbol point
@@ -3623,7 +3623,7 @@ SLArrayIndex_t SIGLIB_FUNC_DECL SDA_CostasQamDemodulateDebug(const SLData_t* SIG
                                                              SLData_t*,                                // Pointer to debug real filter output
                                                              SLData_t*,                                // Pointer to debug imaginary filter output
                                                              SLData_t*);                               // Pointer to debug ELG trigger output
-#endif                                            // End of !((_TMS320C30) || (_TMS320C40))
+#  endif                                            // End of !((_TMS320C30) || (_TMS320C40))
 
 void SIGLIB_FUNC_DECL SIF_QpskModulate(SLData_t* SIGLIB_OUTPUT_PTR_DECL,           // Carrier table pointer
                                        const SLData_t,                             // Carrier phase increment per sample (radians / 2π)
@@ -5125,7 +5125,7 @@ SLData_t SIGLIB_FUNC_DECL SDA_RealDotProduct(const SLData_t* SIGLIB_INPUT_PTR_DE
                                              const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source vector 2
                                              const SLArrayIndex_t);                    // Vector length
 
-#ifndef _HP_VEE    // The following functionality is not supported by VEE
+#  ifndef _HP_VEE    // The following functionality is not supported by VEE
 
 SLComplexRect_s SIGLIB_FUNC_DECL SDA_ComplexDotProduct(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to real source vector 1
                                                        const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to imaginary source vector 1
@@ -5133,7 +5133,7 @@ SLComplexRect_s SIGLIB_FUNC_DECL SDA_ComplexDotProduct(const SLData_t* SIGLIB_IN
                                                        const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to imaginary source vector 2
                                                        const SLArrayIndex_t);                    // Vector length
 
-#endif    // End of #ifndef _HP_VEE
+#  endif    // End of #ifndef _HP_VEE
 
 void SIGLIB_FUNC_DECL SDA_SumAndDifference(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array 1
                                            const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array 2
@@ -6543,7 +6543,7 @@ SLData_t SIGLIB_FUNC_DECL SDS_QuickSinc(const SLData_t,                         
 
 // Complex vector functions - complex.c
 
-#ifndef _HP_VEE    // The following functionality is not supported by VEE
+#  ifndef _HP_VEE    // The following functionality is not supported by VEE
 
 SLComplexPolar_s SIGLIB_FUNC_DECL SCV_Polar(const SLData_t,     // Polar magnitude value
                                             const SLData_t);    // Polar angle value
@@ -6765,7 +6765,7 @@ void SIGLIB_FUNC_DECL SDA_ComplexPolarLinearInterpolate(const SLComplexPolar_s, 
                                                         const SLComplexPolar_s,                      // Interpolation end point
                                                         SLComplexPolar_s* SIGLIB_OUTPUT_PTR_DECL,    // Destination array
                                                         const SLArrayIndex_t);                       // Number of interpolated points
-#endif                                                                                               // End of #ifndef _HP_VEE
+#  endif                                                                                             // End of #ifndef _HP_VEE
 
 // 2D Matrix manipulation functions and macros - matrix.c
 
@@ -6989,35 +6989,36 @@ void SIGLIB_FUNC_DECL SMX_ExtractCategoricalColumn(const SLData_t* SIGLIB_INPUT_
                                                    const SLArrayIndex_t,                      // Number of rows in matrix
                                                    const SLArrayIndex_t);                     // Number of columns in matrix
 
-#ifndef _HP_VEE    // The following functionality is not supported by VEE
+#  ifndef _HP_VEE    // The following functionality is not supported by VEE
 
-#  define SMX_Copy(IPtr, OPtr, nRows, nCols) SDA_Copy(IPtr, OPtr, (SLArrayIndex_t)(nRows * nCols))
+#    define SMX_Copy(IPtr, OPtr, nRows, nCols) SDA_Copy(IPtr, OPtr, (SLArrayIndex_t)(nRows * nCols))
 
-#  define SMX_Fill(OPtr, fillVal, nRows, nCols) SDA_Fill(OPtr, fillVal, (SLArrayIndex_t)(nRows * nCols))
+#    define SMX_Fill(OPtr, fillVal, nRows, nCols) SDA_Fill(OPtr, fillVal, (SLArrayIndex_t)(nRows * nCols))
 
-#  define SMX_Ones(OPtr, nRows, nCols) SDA_Ones(OPtr, (SLArrayIndex_t)(nRows * nCols))
+#    define SMX_Ones(OPtr, nRows, nCols) SDA_Ones(OPtr, (SLArrayIndex_t)(nRows * nCols))
 
-#  define SMX_Zeros(OPtr, nRows, nCols) SDA_Zeros(OPtr, (SLArrayIndex_t)(nRows * nCols))
+#    define SMX_Zeros(OPtr, nRows, nCols) SDA_Zeros(OPtr, (SLArrayIndex_t)(nRows * nCols))
 
-#  define SMX_Add(IPtr1, addVal, OPtr, nRows, nCols) SDA_Add((SLData_t*)IPtr1, addVal, (SLData_t*)OPtr, (SLArrayIndex_t)(nRows * nCols))
+#    define SMX_Add(IPtr1, addVal, OPtr, nRows, nCols) SDA_Add((SLData_t*)IPtr1, addVal, (SLData_t*)OPtr, (SLArrayIndex_t)(nRows * nCols))
 
-#  define SMX_Subtract(IPtr1, IPtr2, OPtr, nRows, nCols) SDA_Subtract((SLData_t*)IPtr1, addVal, (SLData_t*)OPtr, (SLArrayIndex_t)(nRows * nCols))
+#    define SMX_Subtract(IPtr1, IPtr2, OPtr, nRows, nCols) SDA_Subtract((SLData_t*)IPtr1, addVal, (SLData_t*)OPtr, (SLArrayIndex_t)(nRows * nCols))
 
-#  define SMX_Add2(IPtr1, IPtr2, OPtr, nRows, nCols) SDA_Add2((SLData_t*)IPtr1, (SLData_t*)IPtr2, (SLData_t*)OPtr, (SLArrayIndex_t)(nRows * nCols))
+#    define SMX_Add2(IPtr1, IPtr2, OPtr, nRows, nCols) \
+      SDA_Add2((SLData_t*)IPtr1, (SLData_t*)IPtr2, (SLData_t*)OPtr, (SLArrayIndex_t)(nRows * nCols))
 
-#  define SMX_Subtract2(IPtr1, IPtr2, OPtr, nRows, nCols) \
-    SDA_Subtract2((SLData_t*)IPtr1, (SLData_t*)IPtr2, (SLData_t*)OPtr, (SLArrayIndex_t)(nRows * nCols))
+#    define SMX_Subtract2(IPtr1, IPtr2, OPtr, nRows, nCols) \
+      SDA_Subtract2((SLData_t*)IPtr1, (SLData_t*)IPtr2, (SLData_t*)OPtr, (SLArrayIndex_t)(nRows * nCols))
 
-#  define SMX_Multiply2Piecewise(IPtr1, IPtr2, OPtr, nRows, nCols) \
-    SDA_Multiply2((SLData_t*)IPtr1, (SLData_t*)IPtr2, (SLData_t*)OPtr, (SLArrayIndex_t)(nRows * nCols))
+#    define SMX_Multiply2Piecewise(IPtr1, IPtr2, OPtr, nRows, nCols) \
+      SDA_Multiply2((SLData_t*)IPtr1, (SLData_t*)IPtr2, (SLData_t*)OPtr, (SLArrayIndex_t)(nRows * nCols))
 
-#  define SMX_ScalarMultiply(IPtr, Multiplier, OPtr, nRows, nCols) \
-    SDA_Multiply((SLData_t*)IPtr, (SLData_t)Multiplier, (SLData_t*)OPtr, (SLArrayIndex_t)(nRows * nCols))
-#endif    // End of #ifndef _HP_VEE
+#    define SMX_ScalarMultiply(IPtr, Multiplier, OPtr, nRows, nCols) \
+      SDA_Multiply((SLData_t*)IPtr, (SLData_t)Multiplier, (SLData_t*)OPtr, (SLArrayIndex_t)(nRows * nCols))
+#  endif    // End of #ifndef _HP_VEE
 
 // Machine Learning functions - machinelearning.c
 
-#ifndef _HP_VEE    // The following functionality is not supported by VEE
+#  ifndef _HP_VEE    // The following functionality is not supported by VEE
 void SIGLIB_FUNC_DECL SDA_TwoLayer2CategoryNetworkFit(const SLData_t* SIGLIB_INPUT_PTR_DECL,          // Pointer to training data
                                                       const SLArrayIndex_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to categorical data
                                                       SLData_t* SIGLIB_OUTPUT_PTR_DECL,               // Pointer to layer 1 weights
@@ -7197,15 +7198,15 @@ SLData_t SIGLIB_FUNC_DECL SDS_ActivationTanHDerivative(const SLData_t);    // So
 void SIGLIB_FUNC_DECL SDA_ActivationTanHDerivative(const SLData_t* SIGLIB_INPUT_PTR_DECL,    // Pointer to source array
                                                    SLData_t* SIGLIB_OUTPUT_PTR_DECL,         // Pointer to destination array
                                                    const SLArrayIndex_t);                    // Array length
-#endif                                                                                       // End of #ifndef _HP_VEE
+#  endif                                                                                     // End of #ifndef _HP_VEE
 
 // Functions who's names have changed are listed in the following header file
 // Un-comment this line to use the original function names as #defines
 
 // #include "siglib_deprecated.h"
 
-#ifdef __cplusplus    // End of decl. for C++ program calls
+#  ifdef __cplusplus    // End of decl. for C++ program calls
 }
-#endif
+#  endif
 // End of SigLib DSP function section
 #endif    // End of #ifndef SIGLIB

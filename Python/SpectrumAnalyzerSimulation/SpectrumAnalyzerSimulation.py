@@ -33,19 +33,19 @@ class main(QtWidgets.QMainWindow):
     self.sin_amp_min = 0.
     self.sin_amp_max = 1.1
 
-    # ADC specification - input range: 1 V peak maps to full-scale deflection
-    self.adc_vref_pos = self.sin_amp
-    self.adc_vref_neg = -self.sin_amp
+    # ADC specification
+    self.adc_vref_pos = 1.              # Input voltage range: 1 V peak maps to full-scale deflection
+    self.adc_vref_neg = -1.
 
-    self.adc_word_length = 8                # Default quantization number of bits
+    self.adc_word_length = 8            # Default quantization number of bits
     self.adc_levels = 2**self.adc_word_length
     self.adc_fsd_pos = ((2**self.adc_word_length) / 2) - 1
     self.adc_fsd_neg = -(2**self.adc_word_length) / 2
 
-    self.thd_db = -50.0
+    self.thd_db = -50.0                 # THD of ADC
     self.harmonic_order = 3
 
-    self.adc_word_length_min = 2
+    self.adc_word_length_min = 2        # Word length
     self.adc_word_length_max = 20
 
     # Window specification
@@ -67,7 +67,7 @@ class main(QtWidgets.QMainWindow):
     self.init_ui()
 
   def init_ui(self):
-    self.setWindowTitle('Spectrum Analyzer Simulation')
+    self.setWindowTitle('Spectrum Analyzer: Simulation Of A Sinusoid Quantized By An ADC')
 
     # Main widget
     self.central_widget = QtWidgets.QWidget(self)
@@ -229,10 +229,6 @@ class main(QtWidgets.QMainWindow):
     # Update sinusoid frequency and amplitude
     self.sin_freq = float(self.sin_freq_spin_box.value())
     self.sin_amp = float(self.sin_amp_spin_box.value())
-
-    # Update ADC voltage reference levels based on sinusoid amplitude
-    self.adc_vref_pos = self.sin_amp
-    self.adc_vref_neg = -self.sin_amp
 
     # Update ADC word length and related parameters
     self.adc_word_length = float(self.adc_word_length_spin_box.value())
