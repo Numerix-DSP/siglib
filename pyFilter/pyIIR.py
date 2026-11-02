@@ -10,7 +10,7 @@ Copyright © 2026 Delta Numerix All rights reserved.
 
 from configparser import ConfigParser
 import numpy as np
-from PyQt6 import QtWidgets, QtCore, QtGui
+from PyQt6 import QtWidgets, QtCore
 import pyqtgraph as pg
 from scipy import signal
 import os
@@ -551,6 +551,8 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
         self.b, self.a = signal.butter(order, [self.f1, self.f4], btype, fs=self.fsample)
       else:
         self.b, self.a = signal.butter(order, self.f1, btype, fs=self.fsample)
+        # print(f'self.b: {self.b}')
+        # print(f'self.a: {self.a}')
     elif filter_method == "Chebyshev T1":
       if (btype == "highpass"):
         self.b, self.a = signal.cheby1(order, self.rpass, self.f2, btype, fs=self.fsample)
@@ -601,25 +603,25 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     print(np.vstack([self.float_to_q32(self.b, self.q_m, self.q_n), self.float_to_q32(self.a, self.q_m, self.q_n)]).T, file=f)          # Print coefficients transposed
     print("", file=f)
 
-    print("****************************************", file=f)
-    print(f"*  IIR: Order {order} IIR Filter designed with {filter_method} algorithm", file=f)
-    print("*  Cascade Second Order Sections", file=f)
-    print("****************************************", file=f)
-    print("  (bk0)    (bk1)   (bk2)   (ak1)    (ak2)", file=f)
-    sos = signal.tf2sos(self.b, self.a)
-    sos = sos[:,[0,1,2,4, 5]]
-    print(sos, file=f)          # Convert to second-order sections
-    print("", file=f)
-    print("****************************************", file=f)
-    print(f"*  IIR: Order {order} IIR Filter designed with {filter_method} algorithm", file=f)
-    print(f"*  Cascade Second Order Sections Q{self.q_m}.{self.q_n}", file=f)
-    print("****************************************", file=f)
-    print("     (bk0)     (bk1)     (bk2)     (ak1)     (ak2)", file=f)
-    np.set_printoptions(precision=4, suppress=True)
-    sos = signal.tf2sos(self.b, self.a)
-    sos = sos[:,[0,1,2,4, 5]]
-    print(self.float_to_q32(sos, self.q_m, self.q_n), file=f)          # Convert to second-order sections
-    print("", file=f)
+    # print("****************************************", file=f)
+    # print(f"*  IIR: Order {order} IIR Filter designed with {filter_method} algorithm", file=f)
+    # print("*  Cascade Second Order Sections", file=f)
+    # print("****************************************", file=f)
+    # print("  (bk0)    (bk1)   (bk2)   (ak1)    (ak2)", file=f)
+    # sos = signal.tf2sos(self.b, self.a)
+    # sos = sos[:,[0,1,2,4, 5]]
+    # print(sos, file=f)          # Convert to second-order sections
+    # print("", file=f)
+    # print("****************************************", file=f)
+    # print(f"*  IIR: Order {order} IIR Filter designed with {filter_method} algorithm", file=f)
+    # print(f"*  Cascade Second Order Sections Q{self.q_m}.{self.q_n}", file=f)
+    # print("****************************************", file=f)
+    # print("     (bk0)     (bk1)     (bk2)     (ak1)     (ak2)", file=f)
+    # np.set_printoptions(precision=4, suppress=True)
+    # sos = signal.tf2sos(self.b, self.a)
+    # sos = sos[:,[0,1,2,4, 5]]
+    # print(self.float_to_q32(sos, self.q_m, self.q_n), file=f)          # Convert to second-order sections
+    # print("", file=f)
 
     f.close()
 

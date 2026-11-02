@@ -10,7 +10,7 @@ Copyright © 2026 Delta Numerix All rights reserved.
 
 from configparser import ConfigParser
 import numpy as np
-from PyQt6 import QtWidgets, QtCore, QtGui
+from PyQt6 import QtWidgets, QtCore
 import pyqtgraph as pg
 from scipy import signal
 import os
