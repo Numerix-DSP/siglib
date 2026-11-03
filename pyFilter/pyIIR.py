@@ -40,8 +40,9 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     self.q_m = 8
     self.q_n = 24
 
-    self.b = 1                      # Coefficient storage
-    self.a = 1
+    self.b = np.array([1.0])       # Optional transfer-function export only
+    self.a = np.array([1.0])
+    self.sos = np.array([[1., 0., 0., 1., 0., 0.]])
 
     self.td_response_length = 500   # Length of the impulse and step response plots
 
@@ -452,203 +453,145 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     self.update_plots()
 
   def update_plots(self):
-    self.update_filter_coefficients()
-    self.calculate_impulse_response()
-    self.calculate_step_response()
-    self.calculate_frequency_response()
-    self.plot_magnitude_response()
-    self.plot_phase_response()
-    self.plot_impulse_response()
-    self.plot_step_response()
-    self.plot_pole_zero_diagram()
-
-    values = self.get_values()
     try:
-      self.save_config(self.config_file_path, values)
-    except Exception as e:
-      print(f"Error saving config file: {e}", file=sys.stderr)
+      self.update_filter_coefficients()
+      self.calculate_impulse_response()
+      self.calculate_step_response()
+      self.calculate_frequency_response()
+      self.plot_magnitude_response()
+      self.plot_phase_response()
+      self.plot_impulse_response()
+      self.plot_step_response()
+      self.plot_pole_zero_diagram()
+      if self.config_file_path:
+        self.save_config(self.config_file_path, self.get_values())
+    except (ValueError, OverflowError, FloatingPointError) as exc:
+      # Keep the GUI responsive when a user enters invalid filter edges.
+      self.statusBar().showMessage(f"Invalid filter specification: {exc}")
+      print(f"Invalid filter specification: {exc}", file=sys.stderr)
+
   def update_filter_coefficients(self):
-    filter_type = self.filter_type_combo_box.currentText()     # Get the filter type
-    filter_method = self.filter_method_combo_box.currentText() # Get the filter design method
+    filter_type = self.filter_type_combo_box.currentText()
+    filter_method = self.filter_method_combo_box.currentText()
+    btype = {"Low-Pass": "lowpass", "High-Pass": "highpass",
+             "Band-Pass": "bandpass", "Notch": "bandstop"}[filter_type]
+    fs = self.fsample
+    edges = [self.f1, self.f2, self.f3, self.f4]
+    if not np.isfinite(fs) or fs <= 0:
+      raise ValueError("Sampling frequency must be positive and finite")
+    used = edges[:4 if btype in ("bandpass", "bandstop") else 2]
+    if not all(np.isfinite(x) and 0 < x < fs / 2 for x in used):
+      raise ValueError("All active edges must lie strictly between 0 and Fs/2")
+    if any(x >= y for x, y in zip(used, used[1:])):
+      raise ValueError("Frequency edges must be strictly increasing")
+    if not (np.isfinite(self.rpass) and np.isfinite(self.rstop)
+            and 0 < self.rpass < self.rstop):
+      raise ValueError("Require 0 < Rpass < Rstop")
 
-    if (filter_type == "High-Pass"):
-      btype = "highpass"
-    elif (filter_type == "Band-Pass"):
-      btype = "bandpass"
-    elif (filter_type == "Notch"):
-      btype = "bandstop"
+    if btype == "lowpass":
+      wp, ws = self.f1, self.f2
+    elif btype == "highpass":
+      wp, ws = self.f2, self.f1
+    elif btype == "bandpass":
+      wp, ws = [self.f2, self.f3], [self.f1, self.f4]
     else:
-      btype = "lowpass"
+      wp, ws = [self.f1, self.f4], [self.f2, self.f3]
 
-    # Get user-defined parameters
-    # Compute filter_order
-    if (self.radio_button_auto.isChecked() == True):          # Get the filter order
-      if filter_method == "Butterworth":
-        if (btype == "highpass"):
-          order, wn_tmp = signal.buttord(self.f2, self.f1, self.rpass, self.rstop, fs=self.fsample)
-        elif (btype == "bandpass"):
-          order, wn_tmp = signal.buttord([self.f2, self.f3], [self.f1, self.f4], self.rpass, self.rstop, fs=self.fsample)
-        elif (btype == "bandstop"):
-          order, wn_tmp = signal.buttord([self.f1, self.f4], [self.f2, self.f3], self.rpass, self.rstop, fs=self.fsample)
-        else:
-          order, wn_tmp = signal.buttord(self.f1, self.f2, self.rpass, self.rstop, fs=self.fsample)
-        self.auto_filter_order_value = order
-        self.auto_order_text_box.setText(f"{order}")
-      elif filter_method == "Chebyshev T1":
-        if (btype == "highpass"):
-          order, wn_tmp = signal.cheb1ord(self.f2, self.f1, self.rpass, self.rstop, fs=self.fsample)
-        elif (btype == "bandpass"):
-          order, wn_tmp = signal.cheb1ord([self.f2, self.f3], [self.f1, self.f4], self.rpass, self.rstop, fs=self.fsample)
-        elif (btype == "bandstop"):
-          order, wn_tmp = signal.cheb1ord([self.f1, self.f4], [self.f2, self.f3], self.rpass, self.rstop, fs=self.fsample)
-        else:
-          order, wn_tmp = signal.cheb1ord(self.f1, self.f2, self.rpass, self.rstop, fs=self.fsample)
-        self.auto_filter_order_value = order
-        self.auto_order_text_box.setText(f"{order}")
-      elif filter_method == "Chebyshev T2":
-        if (btype == "highpass"):
-          order, wn_tmp = signal.cheb2ord(self.f2, self.f1, self.rpass, self.rstop, fs=self.fsample)
-        elif (btype == "bandpass"):
-          order, wn_tmp = signal.cheb2ord([self.f2, self.f3], [self.f1, self.f4], self.rpass, self.rstop, fs=self.fsample)
-        elif (btype == "bandstop"):
-          order, wn_tmp = signal.cheb2ord([self.f1, self.f4], [self.f2, self.f3], self.rpass, self.rstop, fs=self.fsample)
-        else:
-          order, wn_tmp = signal.cheb2ord(self.f1, self.f2, self.rpass, self.rstop, fs=self.fsample)
-        self.auto_filter_order_value = order
-        self.auto_order_text_box.setText(f"{order}")
-      elif filter_method == "Elliptic":
-        if (btype == "highpass"):
-          order, wn_tmp = signal.ellipord(self.f2, self.f1, self.rpass, self.rstop, fs=self.fsample)
-        elif (btype == "bandpass"):
-          order, wn_tmp = signal.ellipord([self.f2, self.f3], [self.f1, self.f4], self.rpass, self.rstop, fs=self.fsample)
-        elif (btype == "bandstop"):
-          order, wn_tmp = signal.ellipord([self.f1, self.f4], [self.f2, self.f3], self.rpass, self.rstop, fs=self.fsample)
-        else:
-          order, wn_tmp = signal.ellipord(self.f1, self.f2, self.rpass, self.rstop, fs=self.fsample)
-        self.auto_filter_order_value = order
-        self.auto_order_text_box.setText(f"{order}")
-
-    if (self.radio_button_set.isChecked() == True):            # Get the manual filter order
+    order_functions = {"Butterworth": signal.buttord,
+                       "Chebyshev T1": signal.cheb1ord,
+                       "Chebyshev T2": signal.cheb2ord,
+                       "Elliptic": signal.ellipord}
+    if self.radio_button_auto.isChecked():
+      order, wn = order_functions[filter_method](wp, ws, self.rpass,
+                                                  self.rstop, fs=fs)
+      self.auto_filter_order_value = int(order)
+      self.auto_order_text_box.setText(str(order))
+    else:
       try:
-        self.set_filter_order_value = int(self.set_order_text_box.text())
-        if self.set_filter_order_value > 20:
-          self.set_filter_order_value = 20
-          self.set_order_text_box.setText(str(self.set_filter_order_value))
-        elif self.set_filter_order_value < 1:
-          self.set_filter_order_value = 1
-          self.set_order_text_box.setText(str(self.set_filter_order_value))
+        order = max(1, min(20, int(self.set_order_text_box.text())))
       except ValueError:
-        self.set_order_text_box.setText(str(self.set_filter_order_value))
-      order = self.set_filter_order_value
+        order = self.set_filter_order_value
+      self.set_filter_order_value = order
+      self.set_order_text_box.setText(str(order))
+      # In manual mode, use the appropriate passband/stopband edge.
+      wn = ws if filter_method == "Chebyshev T2" else wp
 
+    design_functions = {"Butterworth": signal.butter,
+                        "Chebyshev T1": signal.cheby1,
+                        "Chebyshev T2": signal.cheby2,
+                        "Elliptic": signal.ellip}
+    args = [order]
+    if filter_method in ("Chebyshev T1", "Elliptic"):
+      args.append(self.rpass)
+    if filter_method in ("Chebyshev T2", "Elliptic"):
+      args.append(self.rstop)
+    args.append(wn)
+    self.sos = design_functions[filter_method](*args, btype=btype,
+                                               fs=fs, output="sos")
+    # Never convert high-order polynomials back into SOS: the SOS is authoritative.
+    # Transfer-function coefficients are supplied only for modest orders.
+    polynomial_degree = self.sos.shape[0] * 2
+    if polynomial_degree <= 8:
+      self.b, self.a = signal.sos2tf(self.sos)
+    else:
+      self.b, self.a = None, None
+    self.export_coefficients(order, filter_method)
+    self.statusBar().clearMessage()
 
-    if filter_method == "Butterworth":
-      if (btype == "highpass"):
-        self.b, self.a = signal.butter(order, self.f2, btype, fs=self.fsample)
-      elif (btype == "bandpass"):
-        self.b, self.a = signal.butter(order, [self.f2, self.f3], btype, fs=self.fsample)
-      elif (btype == "bandstop"):
-        self.b, self.a = signal.butter(order, [self.f1, self.f4], btype, fs=self.fsample)
+  def export_coefficients(self, order, filter_method):
+    with open(default_coefficient_file_path, "w", encoding="utf-8") as f:
+      print(f"IIR: order {order}, {filter_method}", file=f)
+      print("Second-order sections (b0 b1 b2 a0 a1 a2):", file=f)
+      print(np.array2string(self.sos, precision=16), file=f)
+      print(f"\nSOS Q{self.q_m}.{self.q_n} (signed int32):", file=f)
+      print(self.float_to_q32(self.sos, self.q_m, self.q_n), file=f)
+      if self.b is not None:
+        print("\nDirect-form coefficients (for reference only):", file=f)
+        print("b:", np.array2string(self.b, precision=16), file=f)
+        print("a:", np.array2string(self.a, precision=16), file=f)
       else:
-        self.b, self.a = signal.butter(order, self.f1, btype, fs=self.fsample)
-        # print(f'self.b: {self.b}')
-        # print(f'self.a: {self.a}')
-    elif filter_method == "Chebyshev T1":
-      if (btype == "highpass"):
-        self.b, self.a = signal.cheby1(order, self.rpass, self.f2, btype, fs=self.fsample)
-      elif (btype == "bandpass"):
-        self.b, self.a = signal.cheby1(order, self.rpass, [self.f2, self.f3], btype, fs=self.fsample)
-      elif (btype == "bandstop"):
-        self.b, self.a = signal.cheby1(order, self.rpass, [self.f1, self.f4], btype, fs=self.fsample)
-      else:
-        self.b, self.a = signal.cheby1(order, self.rpass, self.f1, btype, fs=self.fsample)
-    elif filter_method == "Chebyshev T2":
-      if (btype == "highpass"):
-        self.b, self.a = signal.cheby2(order, self.rstop, self.f2, btype, fs=self.fsample)
-      elif (btype == "bandpass"):
-        self.b, self.a = signal.cheby2(order, self.rstop, [self.f2, self.f3], btype, fs=self.fsample)
-      elif (btype == "bandstop"):
-        self.b, self.a = signal.cheby2(order, self.rstop, [self.f1, self.f4], btype, fs=self.fsample)
-      else:
-        self.b, self.a = signal.cheby2(order, self.rstop, self.f1, btype, fs=self.fsample)
-    elif filter_method == "Elliptic":
-      if (btype == "highpass"):
-        self.b, self.a = signal.ellip(order, self.rpass, self.rstop, self.f2, btype, fs=self.fsample)
-      elif (btype == "bandpass"):
-        self.b, self.a = signal.ellip(order, self.rpass, self.rstop, [self.f2, self.f3], btype, fs=self.fsample)
-      elif (btype == "bandstop"):
-        self.b, self.a = signal.ellip(order, self.rpass, self.rstop, [self.f1, self.f4], btype, fs=self.fsample)
-      else:
-        self.b, self.a = signal.ellip(order, self.rpass, self.rstop, self.f1, btype, fs=self.fsample)
-
-    # Print the coefficients to a file
-    f = open(default_coefficient_file_path, "w")
-    print("", file=f)
-    print("****************************************", file=f)
-    print(f"*  IIR: Order {order} IIR Filter designed with {filter_method} algorithm", file=f)
-    print("*  Direct Form I", file=f)
-    print("****************************************", file=f)
-    print("       (b)          (a)", file=f)
-    np.set_printoptions(precision=4, suppress=True)
-    print(np.vstack([self.b, self.a]).T, file=f)          # Print coefficients transposed
-    print("", file=f)
-
-    print("", file=f)
-    print("****************************************", file=f)
-    print(f"*  IIR: Order {order} IIR Filter designed with {filter_method} algorithm", file=f)
-    print(f"*  Direct Form I: Q{self.q_m}.{self.q_n}", file=f)
-    print("****************************************", file=f)
-    print("           (b)      (a)", file=f)
-    np.set_printoptions(precision=4, suppress=True)
-    print(np.vstack([self.float_to_q32(self.b, self.q_m, self.q_n), self.float_to_q32(self.a, self.q_m, self.q_n)]).T, file=f)          # Print coefficients transposed
-    print("", file=f)
-
-    # print("****************************************", file=f)
-    # print(f"*  IIR: Order {order} IIR Filter designed with {filter_method} algorithm", file=f)
-    # print("*  Cascade Second Order Sections", file=f)
-    # print("****************************************", file=f)
-    # print("  (bk0)    (bk1)   (bk2)   (ak1)    (ak2)", file=f)
-    # sos = signal.tf2sos(self.b, self.a)
-    # sos = sos[:,[0,1,2,4, 5]]
-    # print(sos, file=f)          # Convert to second-order sections
-    # print("", file=f)
-    # print("****************************************", file=f)
-    # print(f"*  IIR: Order {order} IIR Filter designed with {filter_method} algorithm", file=f)
-    # print(f"*  Cascade Second Order Sections Q{self.q_m}.{self.q_n}", file=f)
-    # print("****************************************", file=f)
-    # print("     (bk0)     (bk1)     (bk2)     (ak1)     (ak2)", file=f)
-    # np.set_printoptions(precision=4, suppress=True)
-    # sos = signal.tf2sos(self.b, self.a)
-    # sos = sos[:,[0,1,2,4, 5]]
-    # print(self.float_to_q32(sos, self.q_m, self.q_n), file=f)          # Convert to second-order sections
-    # print("", file=f)
-
-    f.close()
+        print("\nDirect-form export omitted: high-order polynomial "
+              "coefficients are numerically ill-conditioned.", file=f)
+      q_limit = 2 ** (self.q_m - 1) - 2 ** (-self.q_n)
+      if np.any(self.sos > q_limit) or np.any(self.sos < -2 ** (self.q_m - 1)):
+        print("WARNING: SOS coefficients exceed selected Q format; "
+              "saturation changes the filter.", file=f)
 
   def calculate_impulse_response(self):
-    td_source = np.zeros(self.td_response_length)
-    td_source[0] = 1
-    self.impulse_response = signal.lfilter(self.b, self.a, td_source)
+    x = np.zeros(self.td_response_length)
+    x[0] = 1.0
+    self.impulse_response = signal.sosfilt(self.sos, x)
 
   def calculate_step_response(self):
-    td_source = np.ones(self.td_response_length)
-    self.step_response = signal.lfilter(self.b, self.a, td_source)
+    self.step_response = signal.sosfilt(self.sos,
+                                       np.ones(self.td_response_length))
 
   def calculate_frequency_response(self):
-    # Calculate frequency response using filter coefficients (e.g., scipy.signal.freqz)
-    self.W, self.HofW = signal.freqz(self.b, self.a, fs=self.fsample)
-
-    # Truncate datasets for pass and stop band views
-    if (self.band_view_combo_box.currentText() == "Pass-Band"):
-      l=len(self.HofW)
-      lp=(int)(np.ceil(l*self.f1*1.01/(self.fsample/2)))
-      self.W=self.W[:lp]
-      self.HofW=self.HofW[:lp]
-    elif (self.band_view_combo_box.currentText() == "Stop-Band"):
-      l=len(self.HofW)
-      ls=(int)(np.ceil(l*((self.fsample/2)-self.f2)*1.01/(self.fsample/2)))
-      self.W=self.W[-ls:]
-      self.HofW=self.HofW[-ls:]
+    self.W, self.HofW = signal.sosfreqz(self.sos, worN=4096,
+                                       fs=self.fsample)
+    view = self.band_view_combo_box.currentText()
+    if view == "Pass-Band":
+      if self.filter_type_combo_box.currentText() == "Low-Pass":
+        mask = self.W <= self.f1 * 1.01
+      elif self.filter_type_combo_box.currentText() == "High-Pass":
+        mask = self.W >= self.f2 * .99
+      elif self.filter_type_combo_box.currentText() == "Band-Pass":
+        mask = (self.W >= self.f2 * .99) & (self.W <= self.f3 * 1.01)
+      else:
+        mask = (self.W <= self.f1 * 1.01) | (self.W >= self.f4 * .99)
+    elif view == "Stop-Band":
+      if self.filter_type_combo_box.currentText() == "Low-Pass":
+        mask = self.W >= self.f2 * .99
+      elif self.filter_type_combo_box.currentText() == "High-Pass":
+        mask = self.W <= self.f1 * 1.01
+      elif self.filter_type_combo_box.currentText() == "Band-Pass":
+        mask = (self.W <= self.f1 * 1.01) | (self.W >= self.f4 * .99)
+      else:
+        mask = (self.W >= self.f2 * .99) & (self.W <= self.f3 * 1.01)
+    else:
+      mask = np.ones_like(self.W, dtype=bool)
+    if np.count_nonzero(mask) >= 2:
+      self.W, self.HofW = self.W[mask], self.HofW[mask]
 
   def plot_impulse_response(self):
     # Clear previous plot and display calculated phase response
@@ -665,8 +608,12 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
   def plot_magnitude_response(self):
     # Clear previous plot and display calculated magnitude response
     self.magnitude_plot.clear()
-    self.magnitude_plot.plot(self.W, 20*np.log10(np.abs(self.HofW)), pen=pg.mkPen("b", width=2))
+    magnitude_db = 20*np.log10(np.maximum(np.abs(self.HofW), np.finfo(float).tiny))
+    self.magnitude_plot.plot(self.W, magnitude_db, pen=pg.mkPen("b", width=2))
+    graph_min = max(-320., np.min(magnitude_db))
     self.magnitude_plot.setXRange(self.W.min(), self.W.max(), padding=0)
+    self.magnitude_plot.setYRange(graph_min, 5.0, padding=0)
+    self.magnitude_plot.enableAutoRange(axis="y", enable=False)
 
   def plot_phase_response(self):
     # Clear previous plot and display calculated phase response
@@ -695,7 +642,20 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     self.pole_zero_plot.getAxis("bottom").setLabel("Real")
     self.pole_zero_plot.getAxis("left").setLabel("Imaginary")
 
-    zeros, poles, k = signal.tf2zpk(self.b, self.a)
+    # Extract roots section-by-section without scipy.signal.sos2zpk().
+    # sos2zpk() calls tf2zpk(), whose normalize() treats the tiny
+    # gain in the first Butterworth low-pass section as a zero numerator.
+    # Scaling each numerator by its own maximum preserves its roots.
+    zeros, poles = [], []
+    for section in self.sos:
+      numerator = np.asarray(section[:3], dtype=float)
+      denominator = np.asarray(section[3:], dtype=float)
+      bscale = np.max(np.abs(numerator))
+      ascale = np.max(np.abs(denominator))
+      if bscale > 0:
+        zeros.extend(np.roots(numerator / bscale))
+      if ascale > 0:
+        poles.extend(np.roots(denominator / ascale))
 
     # Plot poles
     for p in poles:
@@ -766,7 +726,7 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
     min_scaled = - (2 ** (m - 1 + n))
 
     # Clamp to representable range (use int64 during clamp to avoid overflow)
-    scaled_clamped = np.clip(scaled.astype(np.int64), min_scaled, max_scaled)
+    scaled_clamped = np.clip(scaled, min_scaled, max_scaled).astype(np.int64)
 
     q_int32 = scaled_clamped.astype(np.int32)
 
@@ -867,6 +827,17 @@ class IIRFilterDesign(QtWidgets.QMainWindow):
       self.spin_n.setValue(int(values.get("n", self.IIR_Values["n"])))
     except Exception:
       self.spin_n.setValue(0)
+
+    for attr, widget in (("fsample", self.fsamp_text_box),
+                         ("f1", self.f1_text_box), ("f2", self.f2_text_box),
+                         ("f3", self.f3_text_box), ("f4", self.f4_text_box),
+                         ("rpass", self.rpass_text_box),
+                         ("rstop", self.rstop_text_box)):
+      try:
+        setattr(self, attr, float(widget.text()))
+      except ValueError:
+        widget.setText(str(getattr(self, attr)))
+    self.q_m, self.q_n = self.spin_m.value(), self.spin_n.value()
 
     # graph_type
     v = values.get("graph_type", self.IIR_Values["graph_type"])

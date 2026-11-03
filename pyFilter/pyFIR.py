@@ -660,15 +660,15 @@ class FIRFilterDesign(QtWidgets.QMainWindow):
   def calculate_impulse_response(self):
     td_source = np.zeros(self.td_response_length)
     td_source[0] = 1
-    self.impulse_response = signal.lfilter(self.b, self.a, td_source)
+    self.impulse_response = np.convolve(td_source, self.b, mode="full")[:len(td_source)]
 
   def calculate_step_response(self):
     td_source = np.ones(self.td_response_length)
-    self.step_response = signal.lfilter(self.b, self.a, td_source)
+    self.step_response = np.convolve(td_source, self.b, mode="full")[:len(td_source)]
 
   def calculate_frequency_response(self):
     # Calculate frequency response using filter coefficients (e.g., scipy.signal.freqz)
-    self.W, self.HofW = signal.freqz(self.b, self.a, fs=self.fsample)
+    self.W, self.HofW = signal.freqz(self.b, worN=2048, fs=self.fsample)
 
     # Truncate datasets for pass and stop band views
     if (self.band_view_combo_box.currentText() == "Pass-Band"):
@@ -697,8 +697,12 @@ class FIRFilterDesign(QtWidgets.QMainWindow):
   def plot_magnitude_response(self):
     # Clear previous plot and display calculated magnitude response
     self.magnitude_plot.clear()
-    self.magnitude_plot.plot(self.W, 20*np.log10(np.abs(self.HofW)), pen=pg.mkPen("b", width=2))
+    magnitude_db = 20*np.log10(np.maximum(np.abs(self.HofW), np.finfo(float).tiny))
+    self.magnitude_plot.plot(self.W, magnitude_db, pen=pg.mkPen("b", width=2))
+    graph_min = max(-150., np.min(magnitude_db))
     self.magnitude_plot.setXRange(self.W.min(), self.W.max(), padding=0)
+    self.magnitude_plot.setYRange(graph_min, 5.0, padding=0)
+    self.magnitude_plot.enableAutoRange(axis="y", enable=False)
 
   def plot_phase_response(self):
     # Clear previous plot and display calculated phase response
@@ -727,16 +731,34 @@ class FIRFilterDesign(QtWidgets.QMainWindow):
     self.pole_zero_plot.getAxis("bottom").setLabel("Real")
     self.pole_zero_plot.getAxis("left").setLabel("Imaginary")
 
-    zeros, poles, k = signal.tf2zpk(self.b, self.a)
-
-    # Plot poles
-    for p in poles:
-      self.pole_zero_plot.plot([p.real], [p.imag], pen=None, symbol="x", symbolSize=10, symbolBrush="r")
-
-    # Plot zeros with a hollow circle
+    # An FIR filter has denominator a(z) = 1.  Calling tf2zpk on a
+    # long FIR polynomial is poorly conditioned and invokes scipy.normalize.
+    # Computing polynomial roots is itself sensitive for large FIR orders.
+    # Only display roots for short filters; never use roots for filtering.
+    coefficients = np.asarray(self.b, dtype=np.float64)
+    if coefficients.size > 65:
+      self.pole_zero_plot.setTitle(
+          "Pole-Zero Diagram (omitted: FIR length > 65; roots ill-conditioned)")
+      return
+    self.pole_zero_plot.setTitle("Pole-Zero Diagram")
+    # np.roots expects descending powers of z.  For an FIR transfer function
+    # B(z) = sum b[k] z^-k, multiply by z^(N-1) to obtain this polynomial.
+    # Do not trim small leading taps: that would silently change the filter.
+    if not np.all(np.isfinite(coefficients)) or not np.any(coefficients):
+      return
+    zeros = np.roots(coefficients)
+    if not np.all(np.isfinite(zeros)):
+      return
+    # FIR poles at z=0 arise from the delay representation; plotting every
+    # repeated origin pole obscures the zero diagram, so show one marker.
+    if coefficients.size > 1:
+      self.pole_zero_plot.plot([0.0], [0.0], pen=None,
+                               symbol="x", symbolSize=10, symbolBrush="r")
     for z in zeros:
-      self.pole_zero_plot.plot([z.real], [z.imag], pen=pg.mkPen("k", width=2), symbol="o", symbolSize=10, symbolBrush="k")
-      self.pole_zero_plot.plot([z.real], [z.imag], pen=pg.mkPen("k", width=2), symbol="o", symbolSize=6, symbolBrush="w")
+      self.pole_zero_plot.plot([z.real], [z.imag], pen=None,
+                               symbol="o", symbolSize=10,
+                               symbolPen=pg.mkPen("k", width=2),
+                               symbolBrush="w")
 
   def float_to_q32(self, arr, m, n, rounding="nearest", return_float=False):
     """
