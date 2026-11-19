@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Convert .wav audio file to .csv
+# Copyright © 2026 Delta Numerix All rights reserved.
 
 import sys, os, os.path
 from scipy.io import wavfile

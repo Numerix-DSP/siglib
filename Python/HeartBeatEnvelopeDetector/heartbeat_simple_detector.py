@@ -8,6 +8,8 @@ Uses:
 - absolute value for rectification
 - moving average for level detection
 - scipy.signal.find_peaks for heartbeat detection
+
+Copyright © 2026 Delta Numerix All rights reserved.
 """
 
 from pathlib import Path

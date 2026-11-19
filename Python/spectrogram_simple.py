@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Simple program to plot spectrogram from FFT slices
+# Copyright © 2026 Delta Numerix All rights reserved.
 
 import matplotlib.pyplot as plt
 import numpy as np

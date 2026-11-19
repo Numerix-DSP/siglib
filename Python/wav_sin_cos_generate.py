@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Copyright © 2026 Delta Numerix All rights reserved.
 
 """
 sin_cos_generate.py

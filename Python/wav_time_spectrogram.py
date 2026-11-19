@@ -8,6 +8,7 @@ Usage:
     python time_spectrogram.py input.wav
     python time_spectrogram.py input.wav --output plot.png
     python time_spectrogram.py input.wav --nperseg 2048 --overlap 0.75
+    Copyright © 2026 Delta Numerix All rights reserved.
 """
 
 from __future__ import annotations

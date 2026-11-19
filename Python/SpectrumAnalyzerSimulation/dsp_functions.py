@@ -7,6 +7,8 @@
   - ADC simulation
   - SNR/SINAD estimation from spectra
   - Estimating the quantisation noise floor of an ideal ADC
+
+  Copyright © 2026 Delta Numerix All rights reserved.
 """
 
 import numpy as np

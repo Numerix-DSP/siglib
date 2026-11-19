@@ -9,6 +9,7 @@ The plotted level is in dBFS:
   - The Hann coherent gain is corrected.
   - A full-scale sine wave that lands exactly on an FFT bin plots at about 0 dBFS.
   - Spectra are averaged as power spectra over all frames.
+  Copyright © 2026 Delta Numerix All rights reserved.
 """
 
 import argparse

@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Plots a time domain graph of the .wav file data
+# Copyright © 2026 Delta Numerix All rights reserved.
 
 import numpy as np
 import matplotlib.pyplot as plt

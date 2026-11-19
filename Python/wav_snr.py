@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Compute the SNR of a signal stored in a .wav file
+# Copyright © 2026 Delta Numerix All rights reserved.
 
 import argparse
 import json

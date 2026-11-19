@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Copyright © 2026 Delta Numerix All rights reserved.
 
 # Script to plot the data in the extracted columns of the log file
 

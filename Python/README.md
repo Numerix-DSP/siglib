@@ -11,13 +11,6 @@ This folder contains a number of useful Python scripts.
  | --------------------------------------- | -----------------------------------------------------------------------------------------------------------------------|
  | DSP_Examples.ipynb                      | Several DSP example functions                                                                                          |
  | --------------------------------------- | -----------------------------------------------------------------------------------------------------------------------|
- | FIR_Filters.ipynb                       | FIR filter examples                                                                                                    |
- |                                         | 1) Low-pass design with window, firls and Parks–McClellan (remez)                                                      |
- |                                         | 2) Linear Phase Filter Frequency Shifting                                                                              |
- |                                         |   Mirroring around the -6 dB point                                                                                     |
- |                                         |   Frequency reversal by negating alternate samples                                                                     |
- |                                         | 3) Compute minimum phase filter from linear phase filter                                                               |
- | --------------------------------------- | -----------------------------------------------------------------------------------------------------------------------|
  | spectrogram_simple.py                   | Simple program to plot spectrogram from FFT slices                                                                     |
  | --------------------------------------- | -----------------------------------------------------------------------------------------------------------------------|
  | s-plane_poles_and_zeros.ipynb           | Plot the poles and zeros of a filter in the S-plan                                                                     |
@@ -38,9 +31,13 @@ Sub Folders.
  | --------------------------------------- | -----------------------------------------------------------------------------------------------------------------------|
  | Folder                                  | Description                                                                                                            |
  | --------------------------------------- | -----------------------------------------------------------------------------------------------------------------------|
+ | Filtering                               | FIR and IIR digital filtering                                                                                          |
+ | --------------------------------------- | -----------------------------------------------------------------------------------------------------------------------|
  | HeartBeatEnvelopeDetector               | Detect the start and end of a heart beat pulse                                                                         |
  | --------------------------------------- | -----------------------------------------------------------------------------------------------------------------------|
  | MachineLearning                         | CNN based vibration recognition. Perform some DSP on some .wav files and use these for training, validating and testing a CNN for vibration recognition - this ia a simplified implimentation of the C library examples |
+ | --------------------------------------- | -----------------------------------------------------------------------------------------------------------------------|
+ | PyFDA                                   | Scripts for processing the output from PyFDA and generating Second-Order-Section coefficients                          |
  | --------------------------------------- | -----------------------------------------------------------------------------------------------------------------------|
  | SpectrumAnalyzerSimulation              | Simulation of a spectrum analyzer - Window → FFT → |X[k]|^2 → Mel filters → Log etc.                                   |
  | --------------------------------------- | -----------------------------------------------------------------------------------------------------------------------|

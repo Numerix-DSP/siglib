@@ -13,6 +13,8 @@ Processing:
 6. Detect one dominant peak per heartbeat.
 7. Centre each heartbeat peak in a common power-of-two frame.
 8. Save the frames and create a 3-D waterfall diagram.
+
+Copyright © 2026 Delta Numerix All rights reserved.
 """
 
 from __future__ import annotations

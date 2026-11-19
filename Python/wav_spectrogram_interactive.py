@@ -5,6 +5,7 @@
   Plots the FFT Spectrum of a single channel .wav file
   The cursor snaps to the local peak in the specturm
   Based on the most excellent SnapToCursor from here: https://stackoverflow.com/questions/14338051/matplotlib-cursor-snap-to-plotted-data-with-datetime-axis
+  Copyright © 2026 Delta Numerix All rights reserved.
 """
 
 import matplotlib.pyplot as plt

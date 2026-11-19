@@ -6,6 +6,7 @@
   Original code here: https://www.frank-zalkow.de/en/create-audio-spectrograms-with-python.html
     Frank Zalkow, 2012-2013
   This work is licensed under a Creative Commons Attribution 3.0 Unported License.
+  Copyright © 2026 Delta Numerix All rights reserved.
 """
 
 import numpy as np
